@@ -20,7 +20,7 @@ Testimonials/quotes are **inline** in the quote section block — no document ty
 
 ## Migration language
 
-- **Extract → Translate → Review** — the pipeline stage that turns WordPress content into new-model documents. **Type-generic** by design (parameterized by source query, target schema, translation rules). Guarantees: output is always **unpublished drafts**; each draft carries its extracted source for side-by-side review; translation only restructures what the source contains — missing facts **stay empty**, proposed creative copy is flagged for rewrite-or-approve; re-runs are deterministic and never touch editor-modified drafts.
+- **Extract → Translate → Review** — the pipeline stage that turns WordPress content into new-model documents. **Type-generic** by design (parameterized by source query, target schema, translation rules). Extraction and draft-loading are deterministic plumbing; **translation is performed by Claude Code** under the stage's guarantees. Guarantees: output is always **unpublished drafts**; each draft carries its extracted source for side-by-side review; translation only restructures what the source contains — missing facts **stay empty**, proposed creative copy is flagged for rewrite-or-approve; re-runs are deterministic and never touch editor-modified drafts.
 - **Migrate fully**: perspectives, authors, categories, ~3–5 utility pages, referenced media only. **Translate + review**: the 20 case studies. **Greenfield**: homepage, about, solutions, campaigns, the consolidated services story, ventures.
 
 ## Design language
