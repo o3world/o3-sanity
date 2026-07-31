@@ -1,5 +1,5 @@
 import { DisplayHeading, Eyebrow, SectionShell } from '@o3/ui'
-import { stegaClean } from 'next-sanity'
+import { stegaClean } from '@sanity/client/stega'
 
 import { CtaLink } from '@/content/CtaLink'
 import { SanityImage } from '@/content/SanityImage'

@@ -6,7 +6,13 @@
         "src/app/**/{page,layout,route,not-found,error,loading}.tsx",
         "src/app/**/route.ts",
         "next.config.ts",
-        "src/proxy.ts"
+        "src/proxy.ts",
+        "src/**/*.stories.tsx",
+        "src/**/*.test.ts",
+        "src/**/*.render.test.tsx",
+        "src/test/index.ts",
+        "src/test/setup.ts",
+        "src/test/stubs/*.{ts,tsx}"
       ]
     },
     "apps/storybook": {
@@ -16,7 +22,7 @@
       "entry": ["src/index.ts", "src/**/*.stories.tsx", "sanity.cli.ts"]
     },
     "tools/migration": {
-      "entry": ["src/{extract,convert,load}.ts", "sanity.cli.ts"]
+      "entry": ["src/{extract,convert,load}.ts", "sanity.cli.ts", "src/**/*.test.ts"]
     }
   }
 }

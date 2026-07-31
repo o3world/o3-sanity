@@ -22,6 +22,12 @@ const draftBoundaryPaths = [
     message:
       'Fetch through sanityFetch from @/sanity/live — a bare client serves stale published content in Presentation (issue #15).',
   },
+  {
+    name: 'next-sanity',
+    importNames: ['stegaClean'],
+    message:
+      "Import stegaClean from '@sanity/client/stega'. The next-sanity barrel drags in @portabletext/react, whose react/compiler-runtime import cannot resolve under Storybook's Next preset — which breaks every story for the block that imports it (ADR 0004).",
+  },
 ]
 const draftBoundaryPatterns = [
   {

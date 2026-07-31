@@ -15,16 +15,38 @@ export function normalizeUploadUrl(url: string): string {
 export type ConversionIssue = { element: string; detail: string }
 
 /**
+ * A per-document `_key` sequence: `k0000`, `k0001`, …
+ *
+ * block-tools defaults to random keys, which made convert non-reproducible —
+ * every run rewrote every block `_key` in the committed JSON, so "wipe and
+ * rebuild reproduces the dataset" (ADR 0003) could not actually hold and no
+ * golden-file test of a mapper was possible. Keys only have to be unique
+ * within their document, so a counter is sufficient and stable.
+ *
+ * Create ONE generator per document and share it across that document's
+ * `convertHtml` calls, so two modules in the same body cannot collide.
+ */
+export function createKeyGenerator(): () => string {
+  let n = 0
+  return () => `k${(n++).toString().padStart(4, '0')}`
+}
+
+/**
  * Deterministic HTML → bodyText Portable Text (ADR 0002). Images become
  * `figure` blocks carrying a `_wpSrc` marker the loader resolves to an asset
  * ref at upload time; iframes become `embed`. Unknown embeds/shortcodes are
  * reported as issues so nothing is silently dropped.
  */
-export function convertHtml(html: string, issues: ConversionIssue[]) {
+export function convertHtml(
+  html: string,
+  issues: ConversionIssue[],
+  keyGenerator: () => string = createKeyGenerator(),
+) {
   if (/\[[a-z_]+ [^\]]*\]/.test(html)) {
     issues.push({ element: 'shortcode', detail: html.match(/\[[a-z_]+ [^\]]*\]/)![0] })
   }
   return htmlToBlocks(html, bodyTextType, {
+    keyGenerator,
     parseHtml: (h) => new JSDOM(h).window.document,
     rules: [
       {
