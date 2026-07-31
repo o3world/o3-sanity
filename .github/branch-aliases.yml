@@ -1,0 +1,3 @@
+# Stable Vercel alias slugs per branch: <project>-<slug>.vercel.app
+# Branches not listed get a derived slug (see .github/actions/vercel-alias-branch).
+main: staging

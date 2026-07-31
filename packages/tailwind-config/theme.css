@@ -1,0 +1,31 @@
+/*
+ * The O3 design tokens — the single source of truth for every app and package
+ * in the monorepo, all of which import THIS file:
+ *
+ *     @import '@o3/tailwind-config/theme.css';
+ *
+ * This file is an index and nothing else. Each concern lives in its own file
+ * under tokens/, in the order below:
+ *
+ *   base.css        document-level behaviour (smooth scroll, selection)
+ *   color.css       the O3 palette as semantic roles
+ *   typography.css  Figtree + the fluid display scale + eyebrow
+ *   layout.css      section rhythm + container widths
+ *   radius.css      the two corner radii
+ *   motion.css      easing curves + durations
+ *
+ * Every value is extracted from the O3 redesign prototype
+ * (prototype/O3 Homepage v2.dc.html, cross-checked against O3 Work.dc.html and
+ * O3 Case Study.dc.html). Each token's comment names the prototype section it
+ * came from — if a value looks wrong, check it against the prototype, not
+ * against taste.
+ *
+ * Adding a token: put it in the file that owns its concern, never here.
+ */
+
+@import './tokens/base.css';
+@import './tokens/color.css';
+@import './tokens/typography.css';
+@import './tokens/layout.css';
+@import './tokens/radius.css';
+@import './tokens/motion.css';

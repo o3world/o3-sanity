@@ -1,0 +1,69 @@
+/*
+ * Color — the O3 palette as semantic roles.
+ *
+ * Declared in a plain `@theme` block (not `inline`), so Tailwind both
+ * generates the utilities (bg-bone, text-brand, border-line, …) AND emits
+ * each token as a `var(--color-*)` custom property readable at runtime.
+ *
+ * The site runs on three surfaces:
+ *
+ *   white  #FFFFFF  — platforms ("The platforms we go deep on"), "How we work"
+ *   bone   #EFEEEC  — partners, quote, insights sections
+ *   ink    #030303  — "Our Work", CTA, footer (hero uses ink-soft #0A0A0B)
+ *
+ * Text roles are per-surface: fg/fg-muted/fg-subtle on the light surfaces,
+ * white/fg-inverse-muted on the dark ones. Brand red flips to brand-tint on
+ * dark surfaces to keep contrast.
+ */
+
+@theme {
+  /* ── Brand ─────────────────────────────────────────────────────────────── */
+  /* #EB1000 — the O3 red: intro overlay bg, nav "Let's talk" button, section
+   * eyebrows, platform-rail tick marks, ::selection (homepage throughout). */
+  --color-brand: #eb1000;
+  /* #FF6A5A — the red used ON DARK surfaces where #EB1000 would sink into the
+   * ink: "Our Work" case-card eyebrows ("Healthcare · Pediatric Systems") and
+   * their "Read the case" links. */
+  --color-brand-tint: #ff6a5a;
+
+  /* ── Surfaces ──────────────────────────────────────────────────────────── */
+  /* #030303 — the primary dark surface: "Our Work" section, CTA band
+   * ("The best partnerships don't have an end date."), footer. Also the
+   * default link/ink color on light surfaces (prototype `a{color:#030303}`). */
+  --color-ink: #030303;
+  /* #0A0A0B — the slightly-lifted dark surface: hero section bg and the
+   * work-case card bg sitting on the #030303 section. */
+  --color-ink-soft: #0a0a0b;
+  /* #EFEEEC — the warm light surface: partners, quote, and insights
+   * sections. */
+  --color-bone: #efeeec;
+  /* #FFFFFF — the plain light surface (platforms, "How we work") and card bg
+   * on bone (insight cards). Matches Tailwind's built-in white; re-declared so
+   * the surface trio is complete in one place. */
+  --color-white: #ffffff;
+
+  /* ── Text on light surfaces (white / bone) ─────────────────────────────── */
+  /* #232323 — body + heading ink on light surfaces (prototype `body` color,
+   * every light-surface h2/h3/h4). */
+  --color-fg: #232323;
+  /* #6E6E6E — supporting copy: platform descriptions, engagement-model
+   * paragraphs, insight-card body text. */
+  --color-fg-muted: #6e6e6e;
+  /* #9A9A98 — tertiary copy: "Best when…" support lines under the engagement
+   * models, insight-card meta rows ("Brady Halligan · Jun 2026"). */
+  --color-fg-subtle: #9a9a98;
+
+  /* ── Text on dark surfaces (ink / ink-soft) ────────────────────────────── */
+  /* Headlines and primary copy on dark surfaces are plain white. */
+  /* #A4A4A4 — muted copy on ink: work-case metric captions ("fewer missed
+   * appointments"), CTA-band subhead. */
+  --color-fg-inverse-muted: #a4a4a4;
+
+  /* ── Borders / placeholders ────────────────────────────────────────────── */
+  /* #DDDDDB — the standard rule + placeholder tone on light surfaces:
+   * "How we work" diagram strokes, insight-card image placeholder bg. */
+  --color-line: #dddddb;
+  /* #ECECEA — the softer hairline INSIDE white cards: insight-card meta-row
+   * `border-top:1px solid #ECECEA`. */
+  --color-line-soft: #ececea;
+}

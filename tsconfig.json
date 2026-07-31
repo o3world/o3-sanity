@@ -1,0 +1,8 @@
+{
+  "extends": "@o3/typescript-config/base.json",
+  "compilerOptions": {
+    "strict": true,
+    "strictNullChecks": true
+  },
+  "exclude": ["node_modules"]
+}

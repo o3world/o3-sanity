@@ -1,0 +1,114 @@
+name: GitHub Deployment
+description: |
+  Create or finalize a GitHub Deployment record via gh api directly.
+  Drop-in replacement for bobheadxi/deployments@v1 with one key difference: the
+  finish step does NOT iterate prior deployments to mark them inactive — it just
+  writes a status row to the current deployment. Old records are pruned by the
+  scheduled cleanup-gh-deployments workflow instead, which avoids the secondary
+  rate-limit failures bobheadxi v1 hits on every push.
+
+inputs:
+  step:
+    required: true
+    description: 'start | finish'
+  token:
+    required: true
+    description: GITHUB_TOKEN (or PAT with deployments:write).
+  env:
+    required: true
+    description: Environment name (e.g. preview-docs, production-web).
+  ref:
+    description: Git ref (SHA or branch) to create the deployment for. Required for start.
+  desc:
+    description: Description text shown in the GitHub Deployments UI.
+    default: ''
+  transient:
+    description: 'true|false — mark as transient (preview).'
+    default: 'true'
+  production_environment:
+    description: 'true|false — mark as production.'
+    default: 'false'
+  deployment_id:
+    description: ID returned by start. Required for finish.
+    default: ''
+  status:
+    description: 'success | failure | cancelled — typically job.status.'
+    default: 'success'
+  env_url:
+    description: URL surfaced in the GitHub Deployments sidebar.
+    default: ''
+
+outputs:
+  deployment_id:
+    description: ID of the newly created deployment (start only).
+    value: ${{ steps.exec.outputs.deployment_id }}
+  env:
+    description: Echo of input env, for downstream steps.
+    value: ${{ inputs.env }}
+
+runs:
+  using: composite
+  steps:
+    - id: exec
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.token }}
+        STEP: ${{ inputs.step }}
+        ENV: ${{ inputs.env }}
+        REF: ${{ inputs.ref }}
+        DESC: ${{ inputs.desc }}
+        TRANSIENT: ${{ inputs.transient }}
+        PROD: ${{ inputs.production_environment }}
+        DEPLOYMENT_ID: ${{ inputs.deployment_id }}
+        STATUS: ${{ inputs.status }}
+        ENV_URL: ${{ inputs.env_url }}
+        REPO: ${{ github.repository }}
+        RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+      run: |
+        set -euo pipefail
+
+        case "$STEP" in
+          start)
+            if [ -z "$REF" ]; then
+              echo "::error::start requires 'ref'"
+              exit 1
+            fi
+            payload=$(jq -n \
+              --arg ref "$REF" \
+              --arg env "$ENV" \
+              --argjson trans "$TRANSIENT" \
+              --argjson prod "$PROD" \
+              --arg desc "$DESC" \
+              '{ref:$ref, environment:$env, auto_merge:false, transient_environment:$trans, production_environment:$prod, description:$desc, required_contexts:[]}')
+            id=$(gh api -X POST "repos/$REPO/deployments" --input - <<<"$payload" | jq -r '.id')
+            echo "deployment_id=$id" >> "$GITHUB_OUTPUT"
+            echo "Created deployment $id for $ENV @ $REF"
+            ;;
+
+          finish)
+            if [ -z "$DEPLOYMENT_ID" ]; then
+              echo "::warning::no deployment_id provided to finish; skipping (start step likely never ran)"
+              exit 0
+            fi
+            case "$STATUS" in
+              success) state=success ;;
+              cancelled) state=error ;;
+              failure) state=failure ;;
+              *) state=error ;;
+            esac
+            payload=$(jq -n \
+              --arg state "$state" \
+              --arg env "$ENV" \
+              --arg url "$ENV_URL" \
+              --arg log "$RUN_URL" \
+              --arg desc "$STATUS" \
+              '{state:$state, environment:$env, environment_url:$url, log_url:$log, description:$desc}')
+            gh api -X POST "repos/$REPO/deployments/$DEPLOYMENT_ID/statuses" --input - <<<"$payload" >/dev/null
+            echo "Finalized deployment $DEPLOYMENT_ID for $ENV → $state"
+            ;;
+
+          *)
+            echo "::error::unknown step: $STEP (expected start|finish)"
+            exit 1
+            ;;
+        esac

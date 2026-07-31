@@ -1,0 +1,35 @@
+/*
+ * Motion — easing curves + durations.
+ *
+ * The prototype has exactly two load-bearing curves: a soft ease-out used for
+ * nearly every hover and scroll-reveal, and a sharper "mask" curve for the
+ * hero line-mask reveal. Durations cluster at ~.22s (hovers) and .7-.85s
+ * (reveals).
+ */
+
+@theme {
+  /* out — cubic-bezier(0.2,0.7,0.2,1): the house curve. Every data-reveal
+   * transition, the o3fadeup hero sub/CTA, the eng-card hover wipe, the
+   * plat-btn hover. INTENTIONALLY overrides Tailwind's built-in --ease-out
+   * (0,0,0.2,1) — the prototype itself reads `var(--ease-out, …)` with this
+   * value as the fallback. Class-accessible via ease-out. */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  /* mask — cubic-bezier(0.16,0.9,0.2,1): the hero headline line-mask reveal
+   * (`.o3-line` / @keyframes o3mask). Class-accessible via ease-mask. */
+  --ease-mask: cubic-bezier(0.16, 0.9, 0.2, 1);
+}
+
+/*
+ * Durations. Tailwind v4 has no --duration-* theme namespace, so these are
+ * plain custom properties: use `duration-(--duration-hover)` in class lists
+ * or `var(--duration-reveal)` in CSS.
+ */
+:root {
+  /* .22s — hover transitions (plat-btn background/color). */
+  --duration-hover: 220ms;
+  /* .7s — the standard data-reveal opacity/transform transition. */
+  --duration-reveal: 700ms;
+  /* .85s — the slower reveals: hero sub/CTA fade-up, the intro overlay's
+   * slide-away, work-copy reveal (.8s sits between these two steps). */
+  --duration-reveal-slow: 850ms;
+}

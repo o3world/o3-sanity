@@ -1,0 +1,99 @@
+name: Cleanup Vercel branch aliases
+
+# Removes the `<project>-<slug>.vercel.app` aliases when a branch
+# is deleted (typically after PR merge), so dead branches don't leave
+# stale URLs pointing at frozen-in-time deployments.
+#
+# Slug resolution mirrors `.github/actions/vercel-alias-branch/action.yml`:
+#   1. Look up `<branch>` in `.github/branch-aliases.yml`.
+#   2. If branch starts with `release/`, derive slug from branch name.
+#   3. Otherwise, no alias was ever created → nothing to clean.
+#
+# `develop` is skipped at the workflow-level `if:` as belt-and-braces
+# defense — even if someone removes it from the alias map, a stray
+# `delete` event must never wipe the canonical URL. Same for `main`
+# (production canonical) and `release/*` (release aliases stick around
+# even after the branch is gone, by design — that's the whole point of
+# a release branch being a snapshot).
+
+on:
+  delete:
+
+concurrency:
+  group: cleanup-aliases-${{ github.event.ref }}
+  cancel-in-progress: false
+
+jobs:
+  prune:
+    name: Remove branch aliases on Vercel
+    if: >-
+      github.event.ref_type == 'branch'
+      && github.event.ref != 'main'
+      && github.event.ref != 'develop'
+      && !startsWith(github.event.ref, 'release/')
+    runs-on: ubuntu-latest
+    permissions:
+      # We don't touch the GitHub API; the alias removal goes through
+      # Vercel's API via VERCEL_TOKEN. Declaring minimal permissions
+      # makes the workflow auditable and resilient against repo-level
+      # default-permission changes.
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+
+      - name: Remove aliases for all three apps
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          # Required: the token's default scope is the user's personal
+          # account; without VERCEL_ORG_ID the alias-rm calls would fail
+          # with "Trying to access resource under scope <user>". Same
+          # need as the create-side action.
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          BRANCH: ${{ github.event.ref }}
+          ALIASES_FILE: .github/branch-aliases.yml
+        run: |
+          set -euo pipefail
+
+          # Slug resolution — keep in lockstep with
+          # .github/actions/vercel-alias-branch/action.yml. Both consult
+          # the same YAML map so a branch's create-time alias matches
+          # its delete-time alias.
+          SLUG=""
+          if [ -f "$ALIASES_FILE" ]; then
+            SLUG=$(yq -r "(.\"$BRANCH\" // \"\")" "$ALIASES_FILE" 2>/dev/null || echo "")
+          fi
+          if [ -z "$SLUG" ] && [[ "$BRANCH" == release/* ]]; then
+            # (Unreachable here because of the if-gate above, but kept
+            # symmetric with the create-side action so accidental gate
+            # changes don't silently start orphaning release aliases.)
+            SLUG=$(printf '%s' "$BRANCH" \
+              | tr '[:upper:]' '[:lower:]' \
+              | sed -e 's|[/_.]|-|g' -e 's|[^a-z0-9-]||g' -e 's|--*|-|g' -e 's|^-||' -e 's|-$||' \
+              | cut -c -50)
+          fi
+
+          if [ -z "$SLUG" ]; then
+            echo "Branch '$BRANCH' had no alias mapping; nothing to clean."
+            exit 0
+          fi
+
+          for PROJECT in o3-storybook o3-web; do
+            TARGET="${PROJECT}-${SLUG}.vercel.app"
+            echo "::group::$TARGET"
+            # `--scope` mirrors the create-side action — `vercel alias`
+            # has no project context to infer team from, so without it
+            # the CLI falls back to the token-owner's personal scope
+            # and the rm calls fail with "Trying to access resource
+            # under scope <user>". `|| ...` because the alias may
+            # legitimately not exist: the branch may have been deleted
+            # before its workflow ever ran (no deploy happened), or
+            # this app's deploy was path-filtered out of that branch's
+            # pushes. We don't want a missing alias to fail the
+            # cleanup of the others.
+            vercel alias rm "$TARGET" --yes --scope="$VERCEL_ORG_ID" --token="$VERCEL_TOKEN" || \
+              echo "::notice title=alias not present::$TARGET — nothing to remove"
+            echo "::endgroup::"
+          done

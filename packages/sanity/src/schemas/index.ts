@@ -1,0 +1,60 @@
+import { seo } from './objects/seo'
+import { cta } from './objects/cta'
+import { figure } from './objects/figure'
+import { stat } from './objects/stat'
+import { embed } from './objects/embed'
+import { pullQuote } from './objects/pullQuote'
+import { bodyText } from './objects/bodyText'
+import { chapter } from './objects/chapter'
+import { richText, statGroup } from './blocks/base'
+import {
+  heroBlock,
+  logoWallBlock,
+  caseShowcaseBlock,
+  railPanelsBlock,
+  quoteBlock,
+  perspectivesCarouselBlock,
+  ctaBlock,
+  layoutSection,
+  mediaSection,
+  listingSection,
+} from './blocks/section'
+import { perspective } from './documents/perspective'
+import { caseStudy } from './documents/caseStudy'
+import { page } from './documents/page'
+import { person, client, category, industry, siteSettings } from './documents/supporting'
+
+export const schemaTypes = [
+  // objects
+  seo,
+  cta,
+  figure,
+  stat,
+  embed,
+  pullQuote,
+  bodyText,
+  chapter,
+  // base blocks
+  richText,
+  statGroup,
+  // section blocks
+  heroBlock,
+  logoWallBlock,
+  caseShowcaseBlock,
+  railPanelsBlock,
+  quoteBlock,
+  perspectivesCarouselBlock,
+  ctaBlock,
+  layoutSection,
+  mediaSection,
+  listingSection,
+  // documents
+  perspective,
+  caseStudy,
+  page,
+  person,
+  client,
+  category,
+  industry,
+  siteSettings,
+]

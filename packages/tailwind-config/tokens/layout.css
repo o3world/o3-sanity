@@ -1,0 +1,26 @@
+/*
+ * Layout — section rhythm + container widths.
+ *
+ * The prototype's page is a stack of full-bleed surface bands, each padded
+ * with the same fluid section rhythm and wrapping its content in one of two
+ * centered containers.
+ */
+
+@theme {
+  /* ── Section rhythm ────────────────────────────────────────────────────── */
+  /* Every section band on every page pads vertically with this exact clamp:
+   * partners, work, platforms, quote, how-we-work, insights, CTA
+   * (`padding:clamp(120px,14vw,200px) 24px`). Class-accessible via
+   * py-section-y / pt-section-y / mt-section-y / etc. */
+  --spacing-section-y: clamp(120px, 14vw, 200px);
+
+  /* ── Containers ────────────────────────────────────────────────────────── */
+  /* content — 1100px: the narrower measure for centered statements — hero
+   * copy, the partners statement, the quote blockquote. Class-accessible via
+   * max-w-content. */
+  --container-content: 68.75rem; /* 1100px */
+  /* section — 1240px: the standard section shell — work, platforms,
+   * how-we-work, insights, CTA, footer wrappers. Class-accessible via
+   * max-w-section. */
+  --container-section: 77.5rem; /* 1240px */
+}

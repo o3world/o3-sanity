@@ -1,0 +1,28 @@
+/*
+ * Base — document-level behaviour every app inherits with the tokens.
+ *
+ * Not tokens themselves: the two document-wide declarations the prototype
+ * applies globally (`html{scroll-behavior:smooth}` and the branded
+ * `::selection`, homepage <style> block).
+ */
+
+/* ── Anchored-section smooth scroll ──────────────────────────────────────── */
+/*
+ * The prototype's nav deep-links to in-page anchors (#work, #platforms,
+ * #insights, #footer). Smooth for users who allow motion; instant otherwise.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ── Branded text selection ──────────────────────────────────────────────── */
+/*
+ * Homepage <style> block: `::selection{background:#EB1000;color:#fff;}`.
+ * Written against the tokens so a palette change follows through.
+ */
+::selection {
+  background: var(--color-brand);
+  color: var(--color-white);
+}

@@ -1,0 +1,150 @@
+name: Vercel alias branch deploy
+description: |
+  Alias a freshly-deployed Vercel deployment URL to
+  `<project>-<slug>.vercel.app` so configured branches get a memorable,
+  auto-updating URL. The Vercel project's default
+  `<project>-git-<branch>-<team-slug>.vercel.app` is ugly and team-slug
+  dependent; this action gives configured branches a clean short name
+  parallel to how `main` aliases to `<project>.vercel.app`.
+
+  Slug resolution (in order; first non-empty wins):
+
+    1. Look up `<branch>` in `.github/branch-aliases.yml`. That file is
+       the source of truth for which branches get a friendly alias and
+       what slug they use. Today it lists `develop: develop` plus any
+       temporary feature-branch entries for branches under heavy review.
+
+    2. If the branch starts with `release/`, derive the slug from the
+       branch name (lowercase, `/_.` → `-`, non-alphanumeric stripped,
+       capped at 50 chars). Release branches don't need explicit map
+       entries — pushing a new `release/1.2.3` automatically gets
+       `vtxinc-<project>-release-1-2-3.vercel.app`.
+
+    3. Otherwise, skip — the deploy is left at its team-slug URL.
+
+  Convention:
+    push to develop                  → vtxinc-web-develop.vercel.app
+    push to release/1.2.3            → vtxinc-web-release-1-2-3.vercel.app
+    feature branch listed in YAML    → vtxinc-web-<configured-slug>.vercel.app
+    everything else                  → no alias (team-slug URL only)
+
+  The `vtxinc-` prefix is intentional. `*.vercel.app` is a global
+  first-claim namespace across all Vercel teams; `vtx-web-develop` was
+  too plausibly already taken by an unrelated team. `vtxinc-` makes
+  collisions extremely unlikely while staying short.
+
+  Pair this with `.github/workflows/cleanup-vercel-aliases.yml`, which
+  uses the same resolution logic to find aliases when their owning
+  branch is deleted (typically after PR merge).
+
+  Caller's responsibility: pass the right branch — for push events
+  that's `github.ref_name`, for PR events that's `github.head_ref`.
+  The standard pattern is `github.head_ref || github.ref_name`, which
+  handles both.
+
+inputs:
+  deployment_url:
+    required: true
+    description: 'Full https://...vercel.app URL emitted by `vercel deploy`'
+  project:
+    required: true
+    description: 'Alias prefix — the short app name (e.g. vtxinc-web, vtxinc-docs, vtxinc-storybook)'
+  branch:
+    required: true
+    description: 'Branch name (e.g. `develop`, `feature/foo`). Caller-side pattern: `github.head_ref || github.ref_name`.'
+  vercel_token:
+    required: true
+    description: 'Vercel API token (`secrets.VERCEL_TOKEN`)'
+  vercel_org_id:
+    required: true
+    description: |
+      Vercel team / org ID (`secrets.VERCEL_ORG_ID`). Required because the
+      token may be owned by an individual whose default scope is their
+      personal account — without this, `vercel alias set` errors with
+      "Trying to access resource under scope <user>". The deploy steps
+      already set this for `vercel deploy`; the alias step needs it too.
+  aliases_file:
+    required: false
+    default: .github/branch-aliases.yml
+    description: 'Path to the branch→slug YAML map. Override for tests; in normal use, leave default.'
+
+outputs:
+  alias_url:
+    description: 'Resulting `https://<project>-<slug>.vercel.app` URL, or empty if skipped.'
+    value: ${{ steps.alias.outputs.alias_url }}
+
+runs:
+  using: composite
+  steps:
+    - id: alias
+      shell: bash
+      env:
+        VERCEL_TOKEN: ${{ inputs.vercel_token }}
+        VERCEL_ORG_ID: ${{ inputs.vercel_org_id }}
+        DEPLOY_URL: ${{ inputs.deployment_url }}
+        PROJECT: ${{ inputs.project }}
+        BRANCH: ${{ inputs.branch }}
+        ALIASES_FILE: ${{ inputs.aliases_file }}
+      run: |
+        set -euo pipefail
+
+        if [ -z "$BRANCH" ]; then
+          echo "Empty branch input — skipping alias."
+          echo "alias_url=" >> "$GITHUB_OUTPUT"
+          exit 0
+        fi
+
+        # 1. YAML map lookup (yq is pre-installed on ubuntu-latest).
+        # `// ""` defaults missing keys to empty string so we get a clean
+        # "skip" signal rather than a literal "null". The branch name is
+        # interpolated as a quoted JSON key so paths with `/` work.
+        SLUG=""
+        if [ -f "$ALIASES_FILE" ]; then
+          SLUG=$(yq -r "(.\"$BRANCH\" // \"\")" "$ALIASES_FILE" 2>/dev/null || echo "")
+        fi
+
+        # 2. release/** auto-slug fallback. Same rules as the cleanup
+        # workflow's slug computation — if you change one, change both.
+        if [ -z "$SLUG" ] && [[ "$BRANCH" == release/* ]]; then
+          SLUG=$(printf '%s' "$BRANCH" \
+            | tr '[:upper:]' '[:lower:]' \
+            | sed -e 's|[/_.]|-|g' -e 's|[^a-z0-9-]||g' -e 's|--*|-|g' -e 's|^-||' -e 's|-$||' \
+            | cut -c -50)
+        fi
+
+        # 3. No mapping found — skip cleanly. Empty alias_url so the
+        # caller's `||` coalesce falls through to the team-slug URL.
+        if [ -z "$SLUG" ]; then
+          echo "Branch '$BRANCH' has no alias mapping in $ALIASES_FILE and isn't a release/** branch; skipping."
+          echo "alias_url=" >> "$GITHUB_OUTPUT"
+          exit 0
+        fi
+
+        TARGET="${PROJECT}-${SLUG}.vercel.app"
+        echo "Aliasing $DEPLOY_URL → https://$TARGET"
+
+        # `vercel alias set` is idempotent on an alias we already own —
+        # repointing to a new deployment is a metadata update. It WILL
+        # fail loudly if the alias was claimed by another Vercel team
+        # (first-claim wins on the global *.vercel.app namespace) or on
+        # API blips. Callers should use `continue-on-error: true` and
+        # fall back to the team-slug deploy URL — alias_url stays
+        # empty when this step fails, so downstream `||` coalesces
+        # cleanly.
+        #
+        # `--scope` is required even though VERCEL_ORG_ID is exported.
+        # `vercel deploy` / `vercel pull` infer scope from the linked
+        # project file (`.vercel/project.json` written by `vercel pull`),
+        # but `vercel alias` operates at the team level with no project
+        # context and falls back to the token-owner's personal scope
+        # unless told otherwise. The CLI accepts either the team slug
+        # or the team ID for `--scope`, so reusing VERCEL_ORG_ID keeps
+        # the action callsite free of an extra secret.
+        if vercel alias set "$DEPLOY_URL" "$TARGET" --scope="$VERCEL_ORG_ID" --token="$VERCEL_TOKEN"; then
+          echo "alias_url=https://$TARGET" >> "$GITHUB_OUTPUT"
+          echo "::notice title=Branch alias::https://$TARGET → $DEPLOY_URL"
+        else
+          echo "alias_url=" >> "$GITHUB_OUTPUT"
+          echo "::warning title=Alias failed::Could not alias $TARGET — most likely the name is owned by another Vercel team (global *.vercel.app namespace), or there was a Vercel API blip. Deploy is live at $DEPLOY_URL."
+          exit 1
+        fi

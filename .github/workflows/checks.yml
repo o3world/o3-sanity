@@ -1,0 +1,70 @@
+name: Checks
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: ${{ matrix.task }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - task: lint
+          - task: typecheck
+          - task: build
+            filter: --filter=@o3/web
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+      NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+      NEXT_PUBLIC_SANITY_DATASET: ${{ vars.NEXT_PUBLIC_SANITY_DATASET || 'production' }}
+      SANITY_API_READ_TOKEN: ${{ secrets.SANITY_API_READ_TOKEN }}
+      # PRs check only what changed relative to the base; pushes to main run full.
+      TURBO_SCM_BASE: ${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || '' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+      - name: Validate affected base
+        if: env.TURBO_SCM_BASE != ''
+        run: |
+          if ! git merge-base "$TURBO_SCM_BASE" HEAD >/dev/null 2>&1; then
+            echo "Base $TURBO_SCM_BASE unresolvable — falling back to a full run."
+            echo "TURBO_SCM_BASE=" >> "$GITHUB_ENV"
+          fi
+      - name: Run ${{ matrix.task }}
+        run: |
+          if [ -n "$TURBO_SCM_BASE" ]; then
+            pnpm turbo run ${{ matrix.task }} ${{ matrix.filter }} --affected
+          else
+            pnpm turbo run ${{ matrix.task }} ${{ matrix.filter }}
+          fi
+
+  sanity-typegen:
+    name: typegen drift
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: Regenerate Sanity types
+        run: pnpm typegen
+      - name: Fail on drift
+        run: |
+          if ! git diff --exit-code packages/sanity/src/types/generated.ts; then
+            echo "::error::packages/sanity/src/types/generated.ts is stale — run 'pnpm typegen' and commit."
+            exit 1
+          fi

@@ -1,0 +1,79 @@
+name: Cleanup GitHub Deployments
+
+# Prunes old preview-* GitHub Deployment records so they don't accumulate
+# indefinitely (and so the deploy workflows themselves don't have to
+# iterate-and-inactivate every prior record on each push — which is what
+# bobheadxi/deployments@v1 used to do, hitting GitHub's secondary rate limit).
+#
+# Production environments (production-*) are never touched.
+
+on:
+  schedule:
+    - cron: '0 5 * * *' # 05:00 UTC daily — well outside business hours
+  workflow_dispatch:
+    inputs:
+      keep:
+        description: 'Number of most-recent records to retain per preview-* env'
+        required: false
+        default: '10'
+
+permissions:
+  contents: read
+  deployments: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      REPO: ${{ github.repository }}
+      KEEP: ${{ github.event.inputs.keep || '10' }}
+    steps:
+      - name: Prune old preview-* deployment records
+        run: |
+          set -euo pipefail
+
+          envs=(preview-web preview-storybook)
+          total_deleted=0
+
+          for env in "${envs[@]}"; do
+            # Drop `|| true` so an auth/permission failure surfaces as a
+            # workflow warning instead of being silently swallowed (which
+            # would let "nothing to prune" mask a broken GITHUB_TOKEN).
+            if ! mapfile -t ids < <(
+              gh api --paginate "repos/$REPO/deployments?environment=$env&per_page=100" \
+                --jq '.[].id'
+            ); then
+              echo "::warning::failed to list $env deployments — check GITHUB_TOKEN permissions"
+              continue
+            fi
+            count=${#ids[@]}
+            echo "::group::$env ($count records)"
+
+            if (( count <= KEEP )); then
+              echo "nothing to prune (keep=$KEEP)"
+              echo "::endgroup::"
+              continue
+            fi
+
+            # GitHub returns newest first — skip first $KEEP, delete the rest.
+            stale_count=$((count - KEEP))
+            echo "pruning $stale_count stale record(s); keeping newest $KEEP"
+
+            for id in "${ids[@]:$KEEP}"; do
+              # DELETE requires the deployment to be inactive (or never had
+              # an active status). Best-effort inactivate; ignore failures.
+              gh api -X POST "repos/$REPO/deployments/$id/statuses" \
+                -f state=inactive >/dev/null 2>&1 || true
+
+              if gh api -X DELETE "repos/$REPO/deployments/$id" 2>err.log; then
+                total_deleted=$((total_deleted + 1))
+              else
+                echo "::warning::failed to delete $env/$id: $(cat err.log)"
+              fi
+            done
+
+            echo "::endgroup::"
+          done
+
+          echo "deleted $total_deleted record(s) total"

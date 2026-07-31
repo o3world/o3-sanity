@@ -1,0 +1,102 @@
+name: Deploy web
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+concurrency:
+  group: deploy-web-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  affected:
+    name: Gate on affected
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      deploy: ${{ steps.gate.outputs.deploy }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+        if: github.event_name == 'pull_request'
+      - name: Decide
+        id: gate
+        env:
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          COUNT=$(TURBO_SCM_BASE="origin/${{ github.base_ref }}" pnpm turbo run build --filter=@o3/web... --affected --dry=json | jq '.tasks | length')
+          echo "Affected tasks: $COUNT"
+          if [ "$COUNT" -gt 0 ]; then echo "deploy=true" >> "$GITHUB_OUTPUT"; else echo "deploy=false" >> "$GITHUB_OUTPUT"; fi
+
+  deploy:
+    name: Vercel deploy
+    needs: affected
+    if: needs.affected.outputs.deploy == 'true' && github.actor != 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: read
+      deployments: write
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+      NEXT_PUBLIC_SANITY_DATASET: production
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: Install Vercel CLI
+        run: pnpm add -g vercel@latest
+      - name: Deploy Sanity schema
+        if: github.event_name == 'push'
+        env:
+          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_DEPLOY_TOKEN }}
+        run: pnpm schema:deploy
+      - name: Pull Vercel environment
+        run: vercel pull --yes --environment=preview --token="$VERCEL_TOKEN"
+      - name: Build
+        run: vercel build --token="$VERCEL_TOKEN"
+      - name: Start GitHub deployment
+        id: gh-deploy-start
+        uses: ./.github/actions/gh-deployment
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: ${{ github.event_name == 'push' && 'staging-web' || 'preview-web' }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Deploy
+        id: deploy
+        run: |
+          URL=$(vercel deploy --prebuilt --archive=tgz --token="$VERCEL_TOKEN")
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+      - name: Alias branch
+        id: alias
+        uses: ./.github/actions/vercel-alias-branch
+        with:
+          deployment_url: ${{ steps.deploy.outputs.url }}
+          project: o3-web
+          branch: ${{ github.head_ref || github.ref_name }}
+          vercel_token: ${{ secrets.VERCEL_TOKEN }}
+          vercel_org_id: ${{ secrets.VERCEL_ORG_ID }}
+      - name: Finish GitHub deployment
+        if: always()
+        uses: ./.github/actions/gh-deployment
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: ${{ github.event_name == 'push' && 'staging-web' || 'preview-web' }}
+          deployment_id: ${{ steps.gh-deploy-start.outputs.deployment_id }}
+          status: ${{ job.status }}
+          env_url: ${{ steps.alias.outputs.alias_url || steps.deploy.outputs.url }}

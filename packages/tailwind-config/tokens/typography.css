@@ -1,0 +1,80 @@
+/*
+ * Typography — Figtree + the fluid display scale + the eyebrow style.
+ *
+ * FONT LOADING IS THE APP'S JOB, not this package's. The prototype loads
+ * Figtree from Google Fonts (homepage <helmet>):
+ *
+ *   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+ *
+ * A Next.js app should instead use next/font/google and expose the family on
+ * `--font-figtree`; the stacks below read that variable first and fall back to
+ * the plain `Figtree` family name (covers the <link> approach), then to the
+ * prototype's system fallbacks.
+ *
+ * Figtree is BOTH the display and the body face — the voice difference comes
+ * entirely from weight (300 for display, 400-700 for UI/body), size, and
+ * tracking. Every display step below bundles weight 300 as a sub-value, so
+ * `text-display-xl` alone reproduces the prototype heading.
+ */
+
+@theme {
+  /* ── Families ──────────────────────────────────────────────────────────── */
+  /* Prototype body stack: 'Figtree','Helvetica Neue',Arial,sans-serif. */
+  --font-sans: var(--font-figtree, Figtree), 'Helvetica Neue', Arial, sans-serif;
+  /* Display face is the same family (see header note); a separate token so a
+   * future display face can diverge without touching call sites. */
+  --font-display: var(--font-figtree, Figtree), 'Helvetica Neue', Arial, sans-serif;
+
+  /* ── Fluid display scale ───────────────────────────────────────────────── */
+  /* display-xl — the section headline: "Our Work", "The platforms we go deep
+   * on", "How we work", the partners statement, the CTA band h2. */
+  --text-display-xl: clamp(38px, 5vw, 72px);
+  --text-display-xl--line-height: 1.05;
+  --text-display-xl--letter-spacing: -0.02em;
+  --text-display-xl--font-weight: 300;
+
+  /* display-lg — the engagement-model h3s ("Embedded Team Member",
+   * "Product Squad", "Full Ownership"). */
+  --text-display-lg: clamp(30px, 3.4vw, 48px);
+  --text-display-lg--line-height: 1.1;
+  --text-display-lg--letter-spacing: -0.015em;
+  --text-display-lg--font-weight: 300;
+
+  /* display-md — the work-case narrative h3s ("Families were navigating
+   * twelve portals…"). */
+  --text-display-md: clamp(24px, 2.6vw, 36px);
+  --text-display-md--line-height: 1.3;
+  --text-display-md--letter-spacing: -0.01em;
+  --text-display-md--font-weight: 300;
+
+  /* hero — the homepage h1 ("You see the problem in front of you."). Larger
+   * floor than display-xl (2.6rem = 41.6px) and a hair more line-height. */
+  --text-hero: clamp(2.6rem, 4.6vw, 4.8rem);
+  --text-hero--line-height: 1.12;
+  --text-hero--letter-spacing: -0.02em;
+  --text-hero--font-weight: 300;
+
+  /* eyebrow — the uppercase kicker: "OUR PARTNERS", work-case category lines,
+   * insight-card categories, footer column headers. 12px on sections (cards
+   * drop to 11px in the prototype; 12px is the canonical step). The uppercase
+   * transform can't live in a @theme token — pair with the `eyebrow` utility
+   * below, which bundles the whole style. */
+  --text-eyebrow: 12px;
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.14em;
+  --text-eyebrow--font-weight: 700;
+}
+
+/* ── Eyebrow utility ───────────────────────────────────────────────────────── */
+/*
+ * The full eyebrow style in one class, because text-transform has no @theme
+ * namespace. Color is the call site's job: text-brand on light surfaces,
+ * text-brand-tint on dark ones (see color.css).
+ */
+@utility eyebrow {
+  font-size: var(--text-eyebrow);
+  line-height: var(--text-eyebrow--line-height);
+  letter-spacing: var(--text-eyebrow--letter-spacing);
+  font-weight: var(--text-eyebrow--font-weight);
+  text-transform: uppercase;
+}

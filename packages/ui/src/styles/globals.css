@@ -1,0 +1,7 @@
+/*
+ * shadcn CLI entry point only (components.json → tailwind.css). Apps do NOT
+ * import this file — each app's own globals.css imports tailwindcss + the
+ * shared theme directly (see apps/storybook/globals.css).
+ */
+@import 'tailwindcss';
+@import '@o3/tailwind-config/theme.css';

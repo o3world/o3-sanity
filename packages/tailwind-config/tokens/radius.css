@@ -1,0 +1,15 @@
+/*
+ * Radius — the two corners the prototype actually uses.
+ *
+ * (The pill nav uses border-radius:999px — that's `rounded-full`, already a
+ * Tailwind built-in, so no token.)
+ */
+
+@theme {
+  /* btn — 6px: every CTA button ("Let's talk", "View our work") and the O3
+   * logo mark's corner. Class-accessible via rounded-btn. */
+  --radius-btn: 6px;
+  /* card — 16px: work-case cards and insight cards. Class-accessible via
+   * rounded-card. */
+  --radius-card: 16px;
+}

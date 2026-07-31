@@ -1,0 +1,21 @@
+pre-commit:
+  parallel: true
+  commands:
+    lint:
+      glob: '*.{js,jsx,ts,tsx,mjs}'
+      run: pnpm eslint {staged_files} --max-warnings 0 --no-warn-ignored
+    format:
+      glob: '*.{js,jsx,ts,tsx,mjs,json,css,md}'
+      run: pnpm prettier --write {staged_files}
+      stage_fixed: true
+    sanity-typegen:
+      glob: 'packages/sanity/src/schemas/**/*.ts'
+      run: CI=1 pnpm typegen && git add packages/sanity/src/types/generated.ts
+    typecheck:
+      glob: '*.{ts,tsx,mts,cts}'
+      run: pnpm turbo run typecheck --affected --output-logs=errors-only
+
+pre-push:
+  commands:
+    verify:
+      run: TURBO_SCM_BASE=origin/main TURBO_CONCURRENCY=6 pnpm verify

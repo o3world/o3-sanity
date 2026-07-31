@@ -1,0 +1,14 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "workspaces": {
+    "apps/web": {
+      "entry": ["src/app/**/{page,layout,route,not-found,error,loading}.tsx", "src/app/**/route.ts", "next.config.ts", "src/proxy.ts"]
+    },
+    "apps/storybook": {
+      "entry": [".storybook/{main,preview}.ts"]
+    },
+    "packages/*": {
+      "entry": ["src/index.ts", "src/**/*.stories.tsx", "sanity.cli.ts"]
+    }
+  }
+}

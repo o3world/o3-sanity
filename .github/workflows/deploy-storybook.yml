@@ -1,0 +1,96 @@
+name: Deploy Storybook
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'apps/storybook/**'
+      - 'packages/ui/**'
+      - 'packages/story-kit/**'
+      - 'packages/tailwind-config/**'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/deploy-storybook.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'apps/storybook/**'
+      - 'packages/ui/**'
+      - 'packages/story-kit/**'
+      - 'packages/tailwind-config/**'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/deploy-storybook.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-storybook-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    if: github.actor != 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      deployments: write
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_STORYBOOK_PROJECT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: Install Vercel CLI
+        run: pnpm add -g vercel@latest
+      # --cwd is load-bearing: without it .vercel/ lands at the repo root and
+      # `vercel build` falls back to the root build script (whole monorepo).
+      - name: Pull Vercel environment
+        run: vercel pull --yes --cwd apps/storybook --environment=${{ github.event_name == 'push' && 'production' || 'preview' }} --token="$VERCEL_TOKEN"
+      - name: Build
+        run: vercel build --cwd apps/storybook ${{ github.event_name == 'push' && '--prod' || '' }} --token="$VERCEL_TOKEN"
+      - name: Start GitHub deployment
+        id: gh-deploy-start
+        uses: ./.github/actions/gh-deployment
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: ${{ github.event_name == 'push' && 'production-storybook' || 'preview-storybook' }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          production_environment: ${{ github.event_name == 'push' && 'true' || 'false' }}
+      - name: Deploy
+        id: deploy
+        run: |
+          URL=$(vercel deploy --prebuilt --cwd apps/storybook ${{ github.event_name == 'push' && '--prod' || '' }} --archive=tgz --token="$VERCEL_TOKEN")
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+      - name: Alias branch
+        id: alias
+        uses: ./.github/actions/vercel-alias-branch
+        with:
+          deployment_url: ${{ steps.deploy.outputs.url }}
+          project: o3-storybook
+          branch: ${{ github.head_ref || github.ref_name }}
+          vercel_token: ${{ secrets.VERCEL_TOKEN }}
+          vercel_org_id: ${{ secrets.VERCEL_ORG_ID }}
+      # The one "test" in a no-test repo: the deployed page must answer 200.
+      - name: Smoke check
+        run: |
+          URL="${{ steps.alias.outputs.alias_url || steps.deploy.outputs.url }}"
+          ARGS=(-sS -o /dev/null -w '%{http_code}' --retry 5 --retry-delay 5)
+          if [ -n "${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}" ]; then
+            ARGS+=(-H "x-vercel-protection-bypass: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}")
+          fi
+          if [ -n "${{ secrets.SITE_AUTH_USER }}" ]; then
+            ARGS+=(-u "${{ secrets.SITE_AUTH_USER }}:${{ secrets.SITE_AUTH_PASS }}")
+          fi
+          CODE=$(curl "${ARGS[@]}" "$URL") || { echo "::error::smoke check failed to connect"; exit 1; }
+          [ "$CODE" = "200" ] || { echo "::error::smoke check got HTTP $CODE from $URL"; exit 1; }
+      - name: Finish GitHub deployment
+        if: always()
+        uses: ./.github/actions/gh-deployment
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: ${{ github.event_name == 'push' && 'production-storybook' || 'preview-storybook' }}
+          deployment_id: ${{ steps.gh-deploy-start.outputs.deployment_id }}
+          status: ${{ job.status }}
+          env_url: ${{ steps.alias.outputs.alias_url || steps.deploy.outputs.url }}

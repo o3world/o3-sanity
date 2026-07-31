@@ -1,0 +1,39 @@
+{
+  "name": "@o3/ui",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./lib/utils": "./src/lib/utils.ts",
+    "./components/*": "./src/components/*"
+  },
+  "scripts": {
+    "lint": "eslint src/",
+    "lint:fix": "eslint --fix src/",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.0.0",
+    "radix-ui": "^1.4.3",
+    "tailwind-merge": "^2.0.0"
+  },
+  "devDependencies": {
+    "@o3/story-kit": "workspace:*",
+    "@o3/tailwind-config": "workspace:*",
+    "@o3/typescript-config": "workspace:*",
+    "@storybook/nextjs-vite": "^10.4.1",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "storybook": "^10.4.1",
+    "tailwindcss": "^4.2.4",
+    "typescript": "^5.7.0"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  }
+}

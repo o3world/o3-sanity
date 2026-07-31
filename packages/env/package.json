@@ -1,0 +1,24 @@
+{
+  "name": "@o3/env",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "format": "prettier --write .",
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@t3-oss/env-nextjs": "^0.11.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@o3/typescript-config": "workspace:*",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  },
+  "exports": {
+    "./client": "./src/client.ts",
+    "./server": "./src/server.ts"
+  }
+}

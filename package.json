@@ -1,0 +1,51 @@
+{
+  "name": "o3-sanity",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.14.0",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "check": "turbo run lint typecheck --affected",
+    "deps:check": "syncpack lint",
+    "deps:fix": "syncpack fix-mismatches",
+    "dev": "turbo run dev",
+    "dev:web": "turbo run dev --filter @o3/web",
+    "format": "turbo run format",
+    "knip": "knip --no-config-hints",
+    "lint": "turbo run lint",
+    "prepare": "lefthook install",
+    "schema:deploy": "pnpm --filter @o3/sanity schema:deploy",
+    "storybook": "turbo run storybook",
+    "typecheck": "turbo run typecheck",
+    "typegen": "pnpm --filter @o3/sanity typegen",
+    "verify": "turbo run lint typecheck build --affected"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "@next/eslint-plugin-next": "^16.2.4",
+    "@o3/eslint-config": "workspace:*",
+    "@o3/typescript-config": "workspace:*",
+    "eslint": "^9.0.0",
+    "eslint-config-prettier": "^10.0.0",
+    "eslint-plugin-jsx-a11y": "^6.10.0",
+    "eslint-plugin-react": "^7.37.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "knip": "^6.16.1",
+    "lefthook": "^1.7.0",
+    "prettier": "^3.8.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "syncpack": "^15.3.1",
+    "turbo": "^2.9.6",
+    "typescript": "^5.7.0",
+    "typescript-eslint": "^8.59.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
+  }
+}

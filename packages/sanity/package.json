@@ -1,0 +1,38 @@
+{
+  "name": "@o3/sanity",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "format": "prettier --write .",
+    "lint": "eslint src/",
+    "schema:deploy": "sanity schema deploy",
+    "typecheck": "tsc --noEmit",
+    "typegen": "sanity schema extract --path=schema.json && sanity typegen generate"
+  },
+  "dependencies": {
+    "@sanity/client": "^7.23.0",
+    "@sanity/icons": "^3.7.0",
+    "@sanity/image-url": "^2.1.1",
+    "groq": "^4.10.1",
+    "sanity": "^6.4.0"
+  },
+  "devDependencies": {
+    "@o3/typescript-config": "workspace:*",
+    "@types/react": "^19.0.0",
+    "typescript": "^5.7.0"
+  },
+  "peerDependencies": {
+    "react": "^19"
+  },
+  "exports": {
+    "./client": "./src/client.ts",
+    "./constants": "./src/constants.ts",
+    "./image": "./src/image.ts",
+    "./queries": "./src/queries.ts",
+    "./schemas": "./src/schemas/index.ts",
+    "./schemas/registry": "./src/schemas/blocks/registry.ts",
+    "./types": "./src/types.ts",
+    "./types/generated": "./src/types/generated.ts"
+  }
+}
