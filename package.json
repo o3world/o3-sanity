@@ -21,7 +21,6 @@
     "schema:deploy": "pnpm --filter @o3/sanity schema:deploy",
     "storybook": "turbo run storybook",
     "test": "vitest run",
-    "test:changed": "vitest run --changed origin/main",
     "test:fast": "vitest run --project unit --project render",
     "test:watch": "vitest",
     "typecheck": "turbo run typecheck",

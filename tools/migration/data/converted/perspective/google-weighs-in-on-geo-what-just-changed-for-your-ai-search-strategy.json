@@ -58,7 +58,9 @@
         },
         {
           "_type": "span",
-          "marks": ["k0000"],
+          "marks": [
+            "k0000"
+          ],
           "text": " first official guide to optimizing for generative AI features,",
           "_key": "k0007"
         },
@@ -126,7 +128,9 @@
       "children": [
         {
           "_type": "span",
-          "marks": ["strong"],
+          "marks": [
+            "strong"
+          ],
           "text": "Retrieval (also called RAG)",
           "_key": "k0016"
         },
@@ -146,7 +150,9 @@
       "children": [
         {
           "_type": "span",
-          "marks": ["strong"],
+          "marks": [
+            "strong"
+          ],
           "text": "Query fan-out.",
           "_key": "k0019"
         },
@@ -330,7 +336,9 @@
       "children": [
         {
           "_type": "span",
-          "marks": ["strong"],
+          "marks": [
+            "strong"
+          ],
           "text": "Unique content with a point of view.",
           "_key": "k0044"
         },
@@ -350,7 +358,9 @@
       "children": [
         {
           "_type": "span",
-          "marks": ["strong"],
+          "marks": [
+            "strong"
+          ],
           "text": "Clean technical foundations.",
           "_key": "k0047"
         },
@@ -370,7 +380,9 @@
       "children": [
         {
           "_type": "span",
-          "marks": ["strong"],
+          "marks": [
+            "strong"
+          ],
           "text": "Merchant Center and Google Business Profiles",
           "_key": "k0050"
         },
@@ -410,7 +422,9 @@
         },
         {
           "_type": "span",
-          "marks": ["k0001"],
+          "marks": [
+            "k0001"
+          ],
           "text": "agent-friendly website best practices",
           "_key": "k0056"
         },
@@ -478,7 +492,9 @@
       "children": [
         {
           "_type": "span",
-          "marks": ["strong"],
+          "marks": [
+            "strong"
+          ],
           "text": "The acronym debate is mostly over, but the work isn’t.",
           "_key": "k0065"
         },
@@ -498,7 +514,9 @@
       "children": [
         {
           "_type": "span",
-          "marks": ["strong"],
+          "marks": [
+            "strong"
+          ],
           "text": "Be skeptical of vendors selling AI-only tactics.",
           "_key": "k0068"
         },
@@ -518,7 +536,9 @@
       "children": [
         {
           "_type": "span",
-          "marks": ["strong"],
+          "marks": [
+            "strong"
+          ],
           "text": "Invest in content quality first.",
           "_key": "k0071"
         },
@@ -538,7 +558,9 @@
       "children": [
         {
           "_type": "span",
-          "marks": ["strong"],
+          "marks": [
+            "strong"
+          ],
           "text": "Watch the agent space",
           "_key": "k0074"
         },
@@ -606,7 +628,9 @@
         },
         {
           "_type": "span",
-          "marks": ["k0002"],
+          "marks": [
+            "k0002"
+          ],
           "text": "— we’d love to talk.",
           "_key": "k0084"
         }

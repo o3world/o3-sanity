@@ -193,7 +193,9 @@
         },
         {
           "_type": "span",
-          "marks": ["k0000"],
+          "marks": [
+            "k0000"
+          ],
           "text": "Storyblok",
           "_key": "k0027"
         }
@@ -247,7 +249,9 @@
         },
         {
           "_type": "span",
-          "marks": ["k0001"],
+          "marks": [
+            "k0001"
+          ],
           "text": "Marketreportsworld",
           "_key": "k0034"
         }
@@ -497,7 +501,9 @@
         },
         {
           "_type": "span",
-          "marks": ["k0002"],
+          "marks": [
+            "k0002"
+          ],
           "text": " let’s talk.",
           "_key": "k0069"
         }

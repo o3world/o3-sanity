@@ -19,7 +19,7 @@ Single-context layout — `CONTEXT.md` and `docs/adr/` at the repo root. See `do
 Three layers — `unit` (`*.test.ts`), `render` (`*.render.test.tsx`), `stories` (`*.stories.tsx`).
 Read `docs/testing.md` before writing one; decisions are in `docs/adr/0004-layered-test-approach.md`.
 
-**Run tests as a checkpoint, not a loop.** `pnpm test:changed` before opening a PR, and after a
+**Run tests as a checkpoint, not a loop.** `pnpm test` before opening a PR, and after a
 migration batch or a new block — not after every edit, and never in watch mode during agent work.
 There is no git hook; `pnpm verify` does not run tests. CI runs the suite as its own job.
 

@@ -72,7 +72,9 @@
         },
         {
           "_type": "span",
-          "marks": ["k0000"],
+          "marks": [
+            "k0000"
+          ],
           "text": "Technical.ly by Bonnie Ravina",
           "_key": "k0008"
         },
@@ -160,7 +162,9 @@
         },
         {
           "_type": "span",
-          "marks": ["k0001"],
+          "marks": [
+            "k0001"
+          ],
           "text": "1682conference.com",
           "_key": "k0020"
         },
