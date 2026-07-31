@@ -6,6 +6,18 @@
 
 Issues are tracked in GitHub Issues (`o3world/o3-sanity`) via the `gh` CLI. See `docs/agents/issue-tracker.md`.
 
+Work is organised under parent issues with **native GitHub dependencies** between children — the
+migration super story is #25. Start a session by asking what's available, and claim before you work:
+
+```bash
+pnpm frontier        # READY / BLOCKED(n) / CLAIMED@who, per child of #25
+pnpm wt new <n>      # claim it, branch it, worktree it, install, carry env across
+```
+
+One ticket, one worktree, one session. `pnpm wt new` refuses a blocked or already-claimed ticket, so
+you cannot start work two sessions are duplicating. See `docs/agents/worktrees.md` — read it before
+running more than one session at a time.
+
 ### Content naming
 
 Naming and wiring rules for schemas, fields, blocks, and renderers. Vocabulary lives in `CONTEXT.md` → Naming; the procedure is the `content-naming` skill (`.claude/skills/content-naming/`). Read both before touching `packages/sanity/src/schemas/` or `apps/web/src/content/`.

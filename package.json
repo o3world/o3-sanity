@@ -15,6 +15,7 @@
     "dev:web": "turbo run dev --filter @o3/web",
     "env:pull": "vercel link --project o3-sanity-web --scope o3-world --yes && vercel env pull apps/web/.env.local --environment=development",
     "format": "turbo run format",
+    "frontier": "./scripts/frontier.sh",
     "knip": "knip --no-config-hints",
     "lint": "turbo run lint",
     "prepare": "lefthook install",
@@ -25,7 +26,8 @@
     "test:watch": "vitest",
     "typecheck": "turbo run typecheck",
     "typegen": "pnpm --filter @o3/sanity typegen",
-    "verify": "turbo run lint typecheck build --affected"
+    "verify": "turbo run lint typecheck build --affected",
+    "wt": "./scripts/worktree.sh"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",

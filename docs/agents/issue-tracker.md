@@ -33,13 +33,23 @@ Create a GitHub issue.
 
 Run `gh issue view <number> --comments`.
 
+## Parent issues, dependencies, and the frontier
+
+This applies to **any** issue with children — the wayfinder map (#1), the migration super story (#25), or anything later. Wayfinder adds vocabulary on top of it; the mechanics below are general.
+
+- **Children** are GitHub **sub-issues** of the parent (`gh api repos/<owner>/<repo>/issues/<parent>/sub_issues`).
+- **Blocking** is GitHub's **native issue dependencies** — the canonical, UI-visible representation, not a line of prose in the body. Add an edge with `gh api --method POST repos/<owner>/<repo>/issues/<child>/dependencies/blocked_by -F issue_id=<blocker-db-id>`, where `<blocker-db-id>` is the blocker's numeric **database id** (`gh api repos/<owner>/<repo>/issues/<n> --jq .id`, _not_ the `#number` or `node_id`). GitHub then reports `issue_dependencies_summary.blocked_by` — open blockers only, which makes it a live gate.
+- **Frontier query**: `pnpm frontier [parent]` (defaults to #25). A child is **READY** when it is open, has zero open blockers, and has no assignee. Among READY tickets, take the highest `unblocks:` count first.
+- **Claim before you work**: `gh issue edit <n> --add-assignee @me` — the session's first write, and the only thing preventing two parallel sessions from taking the same ticket. `pnpm wt new <n>` does this for you and refuses a blocked or already-claimed ticket.
+- **Resolve**: `gh issue comment <n> --body "<what changed, and any decision made>"`, then `gh issue close <n>`. If the parent carries a Decisions-so-far or checklist section, update it in the same pass.
+
+Running several tickets at once — worktree setup, shared-file discipline, merge rules — is in [`worktrees.md`](./worktrees.md).
+
 ## Wayfinding operations
 
-Used by `/wayfinder`. The **map** is a single issue with **child** issues as tickets.
+Used by `/wayfinder`, on top of the general mechanics above. The **map** is a single issue with **child** issues as tickets.
 
 - **Map**: a single issue labelled `wayfinder:map`, holding the Notes / Decisions-so-far / Fog body. `gh issue create --label wayfinder:map`.
 - **Child ticket**: an issue linked to the map as a GitHub sub-issue (`gh api` on the sub-issues endpoint). Where sub-issues aren't enabled, add the child to a task list in the map body and put `Part of #<map>` at the top of the child body. Labels: `wayfinder:<type>` (`research`/`prototype`/`grilling`/`task`). Once claimed, the ticket is assigned to the driving dev.
-- **Blocking**: GitHub's **native issue dependencies** — the canonical, UI-visible representation. Add an edge with `gh api --method POST repos/<owner>/<repo>/issues/<child>/dependencies/blocked_by -F issue_id=<blocker-db-id>`, where `<blocker-db-id>` is the blocker's numeric **database id** (`gh api repos/<owner>/<repo>/issues/<n> --jq .id`, _not_ the `#number` or `node_id`). GitHub reports `issue_dependencies_summary.blocked_by` (open blockers only — the live gate). Where dependencies aren't available, fall back to a `Blocked by: #<n>, #<n>` line at the top of the child body. A ticket is unblocked when every blocker is closed.
-- **Frontier query**: list the map's open children (`gh issue list --state open`, scoped to the map's sub-issues / task list), drop any with an open blocker (`issue_dependencies_summary.blocked_by > 0`, or an open issue in the `Blocked by` line) or an assignee; first in map order wins.
-- **Claim**: `gh issue edit <n> --add-assignee @me` — the session's first write.
-- **Resolve**: `gh issue comment <n> --body "<answer>"`, then `gh issue close <n>`, then append a context pointer (gist + link) to the map's Decisions-so-far.
+- **Blocking, frontier, claim**: as above. Wayfinder adds one tiebreaker — where the general rule takes the highest `unblocks:` count, a map takes **first in map order**, because a map is a route and its order carries intent.
+- **Resolve**: the general resolve step, plus append a context pointer (gist + link) to the map's Decisions-so-far.
