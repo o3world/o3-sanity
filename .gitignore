@@ -23,8 +23,9 @@ packages/sanity/schema.json
 # os/editor
 .DS_Store
 
-# claude worktrees
+# claude session state (.claude/skills/ IS committed)
 .claude/worktrees/
+.claude/scheduled_tasks.lock
 .vercel
 .env*
 
