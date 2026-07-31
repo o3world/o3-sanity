@@ -86,10 +86,22 @@ jobs:
         uses: ./.github/actions/vercel-alias-branch
         with:
           deployment_url: ${{ steps.deploy.outputs.url }}
-          project: o3-web
+          project: o3-sanity-web
           branch: ${{ github.head_ref || github.ref_name }}
           vercel_token: ${{ secrets.VERCEL_TOKEN }}
           vercel_org_id: ${{ secrets.VERCEL_ORG_ID }}
+      # Smoke: the deployed site and its embedded studio must answer 200.
+      # `vercel curl` rides the CI token through deployment protection — no
+      # bypass secret to provision or rotate.
+      - name: Smoke check
+        run: |
+          BASE="${{ steps.alias.outputs.alias_url || steps.deploy.outputs.url }}"
+          for PATHNAME in / /studio; do
+            CODE=$(vercel curl "$PATHNAME" --deployment "$BASE" --token="$VERCEL_TOKEN" -- \
+              -sS -o /dev/null -w '%{http_code}' --retry 5 --retry-delay 5)
+            echo "$BASE$PATHNAME → $CODE"
+            [ "$CODE" = "200" ] || exit 1
+          done
       - name: Finish GitHub deployment
         if: always()
         uses: ./.github/actions/gh-deployment

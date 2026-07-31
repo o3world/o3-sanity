@@ -67,7 +67,7 @@ jobs:
         uses: ./.github/actions/vercel-alias-branch
         with:
           deployment_url: ${{ steps.deploy.outputs.url }}
-          project: o3-storybook
+          project: o3-sanity-storybook
           branch: ${{ github.head_ref || github.ref_name }}
           vercel_token: ${{ secrets.VERCEL_TOKEN }}
           vercel_org_id: ${{ secrets.VERCEL_ORG_ID }}
@@ -75,14 +75,13 @@ jobs:
       - name: Smoke check
         run: |
           URL="${{ steps.alias.outputs.alias_url || steps.deploy.outputs.url }}"
+          # `vercel curl` rides the CI token through deployment protection — no
+          # bypass secret to provision or rotate.
           ARGS=(-sS -o /dev/null -w '%{http_code}' --retry 5 --retry-delay 5)
-          if [ -n "${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}" ]; then
-            ARGS+=(-H "x-vercel-protection-bypass: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}")
-          fi
           if [ -n "${{ secrets.SITE_AUTH_USER }}" ]; then
             ARGS+=(-u "${{ secrets.SITE_AUTH_USER }}:${{ secrets.SITE_AUTH_PASS }}")
           fi
-          CODE=$(curl "${ARGS[@]}" "$URL") || { echo "::error::smoke check failed to connect"; exit 1; }
+          CODE=$(vercel curl / --deployment "$URL" --token="$VERCEL_TOKEN" -- "${ARGS[@]}") || { echo "::error::smoke check failed to connect"; exit 1; }
           [ "$CODE" = "200" ] || { echo "::error::smoke check got HTTP $CODE from $URL"; exit 1; }
       - name: Finish GitHub deployment
         if: always()
