@@ -80,7 +80,7 @@ jobs:
             exit 0
           fi
 
-          for PROJECT in o3-storybook o3-web; do
+          for PROJECT in o3-sanity-storybook o3-sanity-web; do
             TARGET="${PROJECT}-${SLUG}.vercel.app"
             echo "::group::$TARGET"
             # `--scope` mirrors the create-side action — `vercel alias`

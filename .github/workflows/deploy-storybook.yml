@@ -60,14 +60,14 @@ jobs:
       - name: Deploy
         id: deploy
         run: |
-          URL=$(vercel deploy --prebuilt --cwd apps/storybook ${{ github.event_name == 'push' && '--prod' || '' }} --archive=tgz --token="$VERCEL_TOKEN")
+          URL=$(vercel deploy --prebuilt --cwd apps/storybook ${{ github.event_name == 'push' && '--prod' || '--target=preview' }} --archive=tgz --token="$VERCEL_TOKEN")
           echo "url=$URL" >> "$GITHUB_OUTPUT"
       - name: Alias branch
         id: alias
         uses: ./.github/actions/vercel-alias-branch
         with:
           deployment_url: ${{ steps.deploy.outputs.url }}
-          project: o3-storybook
+          project: o3-sanity-storybook
           branch: ${{ github.head_ref || github.ref_name }}
           vercel_token: ${{ secrets.VERCEL_TOKEN }}
           vercel_org_id: ${{ secrets.VERCEL_ORG_ID }}
@@ -75,14 +75,14 @@ jobs:
       - name: Smoke check
         run: |
           URL="${{ steps.alias.outputs.alias_url || steps.deploy.outputs.url }}"
+          # `vercel curl` rides the CI token through deployment protection — no
+          # bypass secret to provision or rotate. Global flags (--scope) must come
+          # BEFORE the path arg; anything after it is forwarded to real curl.
           ARGS=(-sS -o /dev/null -w '%{http_code}' --retry 5 --retry-delay 5)
-          if [ -n "${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}" ]; then
-            ARGS+=(-H "x-vercel-protection-bypass: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}")
-          fi
           if [ -n "${{ secrets.SITE_AUTH_USER }}" ]; then
             ARGS+=(-u "${{ secrets.SITE_AUTH_USER }}:${{ secrets.SITE_AUTH_PASS }}")
           fi
-          CODE=$(curl "${ARGS[@]}" "$URL") || { echo "::error::smoke check failed to connect"; exit 1; }
+          CODE=$(vercel curl --scope o3-world / --deployment "$URL" --yes -- "${ARGS[@]}") || { echo "::error::smoke check failed to connect"; exit 1; }
           [ "$CODE" = "200" ] || { echo "::error::smoke check got HTTP $CODE from $URL"; exit 1; }
       - name: Finish GitHub deployment
         if: always()

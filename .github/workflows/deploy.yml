@@ -79,17 +79,32 @@ jobs:
       - name: Deploy
         id: deploy
         run: |
-          URL=$(vercel deploy --prebuilt --archive=tgz --token="$VERCEL_TOKEN")
+          # --target=preview is explicit: vercel@58 in GitHub Actions has been
+          # observed to default a root-cwd prebuilt deploy to production.
+          URL=$(vercel deploy --prebuilt --archive=tgz --target=preview --token="$VERCEL_TOKEN")
           echo "url=$URL" >> "$GITHUB_OUTPUT"
       - name: Alias branch
         id: alias
         uses: ./.github/actions/vercel-alias-branch
         with:
           deployment_url: ${{ steps.deploy.outputs.url }}
-          project: o3-web
+          project: o3-sanity-web
           branch: ${{ github.head_ref || github.ref_name }}
           vercel_token: ${{ secrets.VERCEL_TOKEN }}
           vercel_org_id: ${{ secrets.VERCEL_ORG_ID }}
+      # Smoke: the deployed site and its embedded studio must answer 200.
+      # `vercel curl` rides the CI token through deployment protection — no
+      # bypass secret to provision or rotate. Global flags (--scope) must come
+      # BEFORE the path arg; anything after it is forwarded to real curl.
+      - name: Smoke check
+        run: |
+          BASE="${{ steps.alias.outputs.alias_url || steps.deploy.outputs.url }}"
+          for PATHNAME in / /studio; do
+            CODE=$(vercel curl --scope o3-world "$PATHNAME" --deployment "$BASE" --yes -- \
+              -sS -o /dev/null -w '%{http_code}' --retry 5 --retry-delay 5)
+            echo "$BASE$PATHNAME → $CODE"
+            [ "$CODE" = "200" ] || exit 1
+          done
       - name: Finish GitHub deployment
         if: always()
         uses: ./.github/actions/gh-deployment
