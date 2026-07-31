@@ -27,3 +27,6 @@ packages/sanity/schema.json
 .claude/worktrees/
 .vercel
 .env*
+
+# design prototype (local-only design source of truth)
+prototype/
