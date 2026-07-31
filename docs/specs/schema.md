@@ -1,0 +1,60 @@
+# Schema spec — o3-sanity v1
+
+Resolves wayfinder ticket #6. Inputs: the content model (ticket #5, `CONTEXT.md`), the routing contract (ADR 0001), the WP inventory (#3), and the vtx-web port inventory (#2). This is the implementation target for the schema package created by the scaffold.
+
+## Conventions (ported from vtx-web)
+
+- `defineBlock` / `defineSectionBlock` factories with the two-tier registry (base tier inside section tier).
+- GROQ queries colocated in the schema package; `sanity typegen` runs in the studio app — the generated types are the compile-time contract: entry registries and `BLOCK_REGISTRY` are `satisfies`-checked against them (ADR 0001).
+- Schema-symmetric folders: schema name === folder name in `apps/web/src/content/{documents,blocks/{base,section}}`. Enforced by convention (optionally a small lint script later — never a test suite).
+- Every routable type has a required `slug`; `page` slugs may be multi-segment and carry their URL prefix (`services/ux-audit`).
+
+## Document types (8)
+
+### Routable
+
+- **`perspective`** — title, `slug` (req), excerpt, `author` → person (req), `categories` → category[], publishedAt, featuredImage (figure), `body` (Portable Text — see set below), seo. Read time computed at render, not stored.
+- **`caseStudy`** — title, `slug` (req), `client` → client (req), `industries` → industry[], `industryDetail` (string — eyebrow's second half), `narrativeHeadline` (text, req — the card sentence), `stats[]` (stat; first = headline stat), `heroMedia` (figure), `chapters[]` ({kicker, title, body: Portable Text}; numbering derived from order), `deliverables[]` (string — "What we shipped"), `extraSections[]` (section blocks, optional), seo.
+- **`page`** — title, `slug` (req, multi-segment), `pageType` (`standard | service`, closed enum, initial `standard`), `card` fieldset conditional on `pageType == 'service'` ({shortTitle, excerpt, icon/image}) — projected by `listingSection`, `sections[]` (section blocks), seo.
+
+### Supporting
+
+- **`person`** — name, title, headshot.
+- **`client`** — name, logo.
+- **`category`** — title, slug.
+- **`industry`** — title, slug. (Deliberately minimal.)
+- **`siteSettings`** (singleton) — nav items (cta[]), footer content, social links, default seo, display labels (e.g. Perspectives collection shown as "Insights").
+
+## Shared objects
+
+- **`seo`** — title, description, ogImage, noIndex. (Yoast fields map here in migration.)
+- **`cta`** — label, target (internal reference **or** external URL), variant (`brand | inverse | ghost`).
+- **`figure`** — image, alt (req), caption (optional).
+- **`stat`** — value (string — supports "89% → 114%"), label.
+- **`chapter`** — kicker, title, body (Portable Text).
+- **`embed`** — URL (video/oEmbed).
+- **`pullQuote`** — text, attribution (optional).
+
+## Portable Text (perspective bodies, chapter bodies)
+
+Standard marks + closed inline-object set: **`figure`, `embed`, `pullQuote`**. A `codeBlock` is added only if extraction reports code in the 272 WP bodies — do not pre-add.
+
+## Blocks
+
+### Section tier — bespoke (from the `prototype/` design)
+
+`heroBlock`, `logoWallBlock` (statement + client refs or manual logos; layout `grid | marquee`), `caseShowcaseBlock` (caseStudy refs; projects narrativeHeadline + first stat), `railPanelsBlock` (items {media, heading, body, note, cta} — serves both "platforms" and "how we work"), `quoteBlock` (inline quote + attribution — no testimonial type), `perspectivesCarouselBlock` (curated refs or latest-N by category), `ctaBlock`.
+
+### Section tier — generic
+
+- **`layoutSection`** — the one true two-tier block: 1–3 columns of base blocks.
+- **`mediaSection`** — full-width figure/video moment.
+- **`listingSection`** — lists pages by `pageType` via their `card` fieldset (powers `/services`; reusable for future pageTypes).
+
+No FAQ/accordion/tabs until a designed page needs them. No `formBlock` — forms strategy is map fog (what replaces Gravity Forms, where submissions go).
+
+### Base tier
+
+`richText`, `figure`, `video`, `cta`, `statGroup`.
+
+All section blocks render inside `SectionShell` with `surface: white | bone | ink` (the design's three-surface system) — surface is a section-block field, not per-page.
