@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
-import type { Metadata } from 'next'
 import type { SanityQueries } from '@sanity/client'
+
+import type { DocumentSeo } from '@/lib/seo'
 
 /**
  * `SanityQueries` is the interface TypeGen augments via
@@ -22,7 +23,7 @@ import type { SanityQueries } from '@sanity/client'
  *   type error on use.
  * - `Q` widened to plain `string` → `never`. This is what makes entry
  *   collections work: `BaseEntry<Q>` uses `Q` covariantly (`query`) and
- *   contravariantly (`renderer`, `metadata`), so it is invariant in `Q` —
+ *   contravariantly (`renderer`, `seo`), so it is invariant in `Q` —
  *   an entry with a literal query is only assignable to the erased
  *   `Any*Entry` shapes below because `RendererProps<string>` = `never` sits
  *   at the bottom of the contravariant slots.
@@ -63,11 +64,17 @@ interface BaseEntry<Q extends string> {
    */
   readonly renderer: (props: RendererProps<Q>) => ReactNode
   /**
-   * Optional per-entry Metadata extractor. Receives the fetched doc and
-   * returns Next.js Metadata. If omitted, the build helper falls back to a
-   * generic `title: doc.title` extractor.
+   * What this type contributes to its own SEO: the title/description/image
+   * fallbacks and the route path the canonical is built from. NOT the
+   * finished `Metadata` — the route builder folds this into the shared
+   * resolution chain (`@/lib/seo`) together with the document's `seo`
+   * overrides and Site Settings' defaults, so every routable type emits the
+   * same complete tag set (#26).
+   *
+   * Omit it and the builder derives what it can from the document's own
+   * `title`, `excerpt`, and `slug`.
    */
-  readonly metadata?: (doc: NonNullable<QueryResult<Q>>) => Metadata
+  readonly seo?: (doc: NonNullable<QueryResult<Q>>) => DocumentSeo
 }
 
 /** Catch-all entries serve `[...segments]/page.tsx` (slug from joined segments). */
@@ -108,7 +115,7 @@ export type ListingRendererProps<Q extends string> = NonNullable<QueryResult<Q>>
  * A paginated listing route (`?page=N`) over a collection. Unlike vtx-web,
  * o3 listings have no backing singleton document — the entry's `query` is a
  * combined `{ "items": ...[$offset...$end], "total": count(...) }` projection
- * and `metadata` is static.
+ * and its SEO is static.
  */
 export interface ListingEntry<Q extends string = string> {
   readonly kind: 'listing'
@@ -118,7 +125,12 @@ export interface ListingEntry<Q extends string = string> {
   /** Items per page. Default 12. */
   readonly pageSize?: number
   readonly renderer: (props: ListingRendererProps<Q>) => ReactNode
-  readonly metadata?: Metadata
+  /**
+   * Static — there is no document to derive from — but it goes through the
+   * same chain as every other route so a listing gets its canonical, robots,
+   * and social tags rather than a bare title (#26).
+   */
+  readonly seo?: DocumentSeo
 }
 
 /**
@@ -128,13 +140,13 @@ export interface ListingEntry<Q extends string = string> {
  * assignable to `CatchAllEntry<string>` even though every member is
  * compatible. These aliases spell out the same shape structurally (no shared
  * generic), so the assignability check succeeds member-by-member: `query`
- * widens to `string`, and `renderer`/`metadata` accept the `never`-props
+ * widens to `string`, and `renderer`/`seo` accept the `never`-props
  * bottom — meaning you must narrow (or cast, as `renderEntry` does) before
  * calling through an erased entry.
  */
-type Erased<E extends BaseEntry<string>> = Omit<E, 'renderer' | 'metadata'> & {
+type Erased<E extends BaseEntry<string>> = Omit<E, 'renderer' | 'seo'> & {
   readonly renderer: (props: never) => ReactNode
-  readonly metadata?: (doc: never) => Metadata
+  readonly seo?: (doc: never) => DocumentSeo
 }
 export type AnyCatchAllEntry = Erased<CatchAllEntry>
 export type AnyDetailEntry = Erased<DetailEntry>
@@ -144,4 +156,4 @@ export type AnySingletonEntry = Erased<SingletonEntry>
  * The structural subset `buildCatchAllRoute` actually consumes. Detail
  * entries qualify as-is (their `kind`/`urlPrefix` are simply unused).
  */
-export type RoutableEntry = Pick<AnyCatchAllEntry, 'type' | 'renderer' | 'metadata'>
+export type RoutableEntry = Pick<AnyCatchAllEntry, 'type' | 'renderer' | 'seo'>

@@ -4,7 +4,10 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { sanityFetch } from '@/sanity/live'
+import { getSiteSettings } from '@/sanity/siteSettings'
 import { clampPage, pageRange, parsePage } from '@/lib/pagination'
+import { buildDocumentMetadata, type DocumentSeo, type SeoOverrides } from '@/lib/seo'
+import { hrefForDoc } from '@/content/documents/urls'
 
 import { docTag, typeTag } from './cacheTags'
 import { encodePathParam } from './encodePathParam'
@@ -55,35 +58,53 @@ export interface ListingRouteShim {
 }
 
 interface BaseEntryLike<Q extends string> {
-  readonly metadata?: (doc: NonNullable<QueryResult<Q>>) => Metadata
+  readonly seo?: (doc: NonNullable<QueryResult<Q>>) => DocumentSeo
 }
 
 /**
- * Build Metadata for a matched entry/doc pair. Delegates to the entry's own
- * `metadata` extractor when provided; falls back to a generic `title:
- * doc.title` shape. Always folds in `robots.noindex` when the doc's seo
- * object requests it.
+ * Build the complete tag set for a matched entry/doc pair (#26).
+ *
+ * The entry contributes only what is document-shaped — title, description and
+ * image fallbacks, and the route path. Everything else (the override chain,
+ * Site Settings defaults, canonical, robots, OpenGraph, Twitter) is resolved
+ * once in `@/lib/seo`, so adding a routable type cannot accidentally ship
+ * with half the tags.
  */
-function extractMetadata<Q extends string>(entry: BaseEntryLike<Q>, doc: unknown): Metadata {
-  const base: Metadata = entry.metadata
-    ? // The entry's extractor accepts NonNullable<QueryResult<Q>>; the build
-      // helper has only `unknown` (Q widens to string at this site). Cast to
-      // satisfy the call signature — the entry's own implementation re-casts
-      // back to its concrete result type.
-      entry.metadata(doc as NonNullable<QueryResult<Q>>)
-    : defaultMetadata(doc)
+async function extractMetadata<Q extends string>(
+  entry: BaseEntryLike<Q>,
+  doc: unknown,
+): Promise<Metadata> {
+  // The entry's extractor accepts NonNullable<QueryResult<Q>>; the build
+  // helper has only `unknown` (Q widens to string at this site). Cast to
+  // satisfy the call signature — the entry's own implementation re-casts
+  // back to its concrete result type.
+  const documentSeo = entry.seo
+    ? entry.seo(doc as NonNullable<QueryResult<Q>>)
+    : defaultDocumentSeo(doc)
 
-  const seo = (doc as { seo?: { noIndex?: boolean | null } | null })?.seo
-  if (seo?.noIndex) {
-    base.robots = { index: false, follow: false }
-  }
-  return base
+  const settings = await getSiteSettings()
+  const seo = (doc as { seo?: SeoOverrides | null } | null)?.seo
+
+  return buildDocumentMetadata({ seo, doc: documentSeo, settings })
 }
 
-function defaultMetadata(doc: unknown): Metadata {
-  const anyDoc = doc as Record<string, unknown>
-  if (typeof anyDoc?.title === 'string') return { title: anyDoc.title }
-  return {}
+/**
+ * The derivation for an entry that declares no `seo`. It leans on the field
+ * lexicon being closed (CONTEXT.md → Naming): `title` is the document's own
+ * name, `excerpt` is the short summary, `heroMedia` is the lead figure, and
+ * `hrefForDoc` already owns URL construction for every routable type.
+ */
+function defaultDocumentSeo(doc: unknown): DocumentSeo {
+  const d = (doc ?? {}) as Record<string, unknown>
+  return {
+    title: typeof d.title === 'string' ? d.title : null,
+    description: typeof d.excerpt === 'string' ? d.excerpt : null,
+    image: (d.heroMedia ?? d.featuredImage ?? null) as DocumentSeo['image'],
+    path: hrefForDoc({
+      _type: typeof d._type === 'string' ? d._type : '',
+      slug: typeof d.slug === 'string' ? d.slug : null,
+    }),
+  }
 }
 
 /**
@@ -127,7 +148,7 @@ export function buildDetailRoute<Q extends string>(entry: DetailEntry<Q>): Detai
     // <title> / OG / description.
     const doc = await fetchDoc(slug, /* stega */ false)
     if (!doc) return {}
-    return extractMetadata(entry, doc)
+    return await extractMetadata(entry, doc)
   }
 
   const Page: DetailRouteShim['Page'] = async ({ params }) => {
@@ -192,7 +213,7 @@ export function buildCatchAllRoute(
     const doc = await fetchDoc(slug, /* stega */ false)
     if (!doc) return {}
     const entry = findEntryForDoc(doc)
-    return entry ? extractMetadata(entry, doc) : {}
+    return entry ? await extractMetadata(entry, doc) : {}
   }
 
   const Page: CatchAllRouteShim['Page'] = async ({ params }) => {
@@ -239,7 +260,7 @@ export function buildSingletonRoute<Q extends string>(
   const generateMetadata: SingletonRouteShim['generateMetadata'] = async () => {
     const doc = await fetchDoc(/* stega */ false)
     if (!doc) return {}
-    return extractMetadata(entry, doc)
+    return await extractMetadata(entry, doc)
   }
 
   const Page: SingletonRouteShim['Page'] = async () => {
@@ -272,7 +293,10 @@ export function buildListingRoute<Q extends string>(entry: ListingEntry<Q>): Lis
     return data
   }
 
-  const generateMetadata: ListingRouteShim['generateMetadata'] = async () => entry.metadata ?? {}
+  const generateMetadata: ListingRouteShim['generateMetadata'] = async () => {
+    if (!entry.seo) return {}
+    return buildDocumentMetadata({ doc: entry.seo, settings: await getSiteSettings() })
+  }
 
   const Page: ListingRouteShim['Page'] = async ({ searchParams }) => {
     const { page: pageParam } = await searchParams

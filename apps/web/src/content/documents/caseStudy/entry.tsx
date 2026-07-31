@@ -1,11 +1,10 @@
-import type { Metadata } from 'next'
-
 import { CASE_STUDY_QUERY } from '@o3/sanity/queries'
 import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
 import type { CASE_STUDY_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { defineDetailType } from '@/lib/content-routes/define'
 import type { RendererProps } from '@/lib/content-routes/types'
+import type { DocumentSeo } from '@/lib/seo'
 import { getView } from '@/content/documents/registry'
 
 type CaseStudyRendererProps = RendererProps<typeof CASE_STUDY_QUERY>
@@ -21,11 +20,13 @@ export const caseStudy = defineDetailType({
   urlPrefix: COLLECTION_PREFIXES.caseStudy,
   query: CASE_STUDY_QUERY,
   renderer: CaseStudyRenderer,
-  metadata: (doc): Metadata => {
+  seo: (doc): DocumentSeo => {
     const cs = doc as NonNullable<CASE_STUDY_QUERY_RESULT>
     return {
-      title: cs.seo?.title ?? cs.title,
-      description: cs.seo?.description ?? cs.narrativeHeadline ?? undefined,
+      title: cs.title,
+      description: cs.narrativeHeadline,
+      image: cs.heroMedia,
+      path: `${COLLECTION_PREFIXES.caseStudy}/${cs.slug}`,
     }
   },
 })

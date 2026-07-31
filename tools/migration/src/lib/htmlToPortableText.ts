@@ -7,9 +7,17 @@ import { schemaTypes } from '@o3/sanity/schemas'
 const compiled = Schema.compile({ name: 'o3', types: schemaTypes })
 const bodyTextType = compiled.get('bodyText')
 
-/** `photo-768x432.jpg` → `photo.jpg` — never migrate a thumbnail as an asset. */
+/**
+ * `photo-768x432.jpg` → `photo.jpg` — never migrate a thumbnail as an asset.
+ *
+ * Also upgrades `http:` to `https:`. WordPress hands out both schemes for the
+ * same binary depending on which API produced the URL (`wp_get_attachment_url`
+ * says http, Yoast says https), and `_wpSrc` is the identity `data/assets.json`
+ * deduplicates uploads by — so leaving the scheme alone uploads the same file
+ * twice and gives two documents two different assets for one image.
+ */
 export function normalizeUploadUrl(url: string): string {
-  return url.replace(/-\d+x\d+(?=\.\w+$)/, '')
+  return url.replace(/^http:\/\//, 'https://').replace(/-\d+x\d+(?=\.\w+$)/, '')
 }
 
 export type ConversionIssue = { element: string; detail: string }

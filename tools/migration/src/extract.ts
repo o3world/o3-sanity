@@ -4,13 +4,15 @@
  * Runs ACF's own get_fields() on the live site via `terminus wp eval`
  * (ADR 0002) so flexible-content reconstruction is ACF's job, not ours.
  *
- *   pnpm --filter @o3/migration extract -- --posts 5   # N most recent posts
- *   pnpm --filter @o3/migration extract -- --posts all # every published post
+ *   pnpm --filter @o3/migration extract -- --posts 5          # N most recent posts
+ *   pnpm --filter @o3/migration extract -- --posts all        # every published post
+ *   pnpm --filter @o3/migration extract -- --slugs a-post,b   # exactly these, by slug
  */
 import { join } from 'node:path'
 
 import { EXTRACT_DIR, writeJson } from './lib/paths'
 import { SOURCE, wpEval } from './lib/wp'
+import { YOAST_SITE_PHP, yoastPhp, type WpSeo, type WpSiteSeo } from './lib/yoast'
 
 type WpPost = {
   wpId: number
@@ -22,7 +24,7 @@ type WpPost = {
   categoryIds: number[]
   excerpt: string
   featuredImage: { url: string; alt: string } | null
-  yoast: { title: string; description: string }
+  seo: WpSeo
   fields: Record<string, unknown>
 }
 
@@ -31,16 +33,37 @@ type WpCategory = { wpId: number; slug: string; name: string; count: number }
 
 const args = process.argv.slice(2)
 const postsArg = args.includes('--posts') ? args[args.indexOf('--posts') + 1] : '5'
+const slugsArg = (args.includes('--slugs') ? args[args.indexOf('--slugs') + 1] : '') ?? ''
 const BATCH = 20
 
+/**
+ * `--slugs` names posts explicitly instead of taking the N most recent. The
+ * sample set is otherwise "whatever WordPress published last", which is a
+ * poor proof for anything rare — the six posts carrying a per-document OG
+ * image override (#26) are all years old. It is also how you re-extract one
+ * document after fixing its source without touching the other 271.
+ */
+const slugs = slugsArg
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean)
+
+function slugFilterPhp(): string {
+  if (slugs.length === 0) return ''
+  if (slugs.some((s) => !/^[a-z0-9_-]+$/i.test(s))) {
+    throw new Error(`--slugs takes plain WordPress slugs; got ${JSON.stringify(slugsArg)}`)
+  }
+  return `, "post_name__in" => [${slugs.map((s) => `"${s}"`).join(', ')}]`
+}
+
 function extractPosts() {
-  const wanted = postsArg === 'all' ? Infinity : Number(postsArg)
+  const wanted = slugs.length > 0 ? slugs.length : postsArg === 'all' ? Infinity : Number(postsArg)
   let offset = 0
   let total = 0
   while (total < wanted) {
     const n = Math.min(BATCH, wanted - total)
     const batch = wpEval<WpPost[]>(
-      `$posts = get_posts(["post_type" => "post", "post_status" => "publish", "numberposts" => ${n}, "offset" => ${offset}, "orderby" => "date", "order" => "DESC"]);
+      `$posts = get_posts(["post_type" => "post", "post_status" => "publish", "numberposts" => ${n}, "offset" => ${offset}, "orderby" => "date", "order" => "DESC"${slugFilterPhp()}]);
 $out = [];
 foreach ($posts as $p) {
   $thumb = get_post_thumbnail_id($p->ID);
@@ -54,7 +77,7 @@ foreach ($posts as $p) {
     "categoryIds" => array_map("intval", wp_get_post_categories($p->ID)),
     "excerpt" => $p->post_excerpt,
     "featuredImage" => $thumb ? ["url" => wp_get_attachment_url($thumb), "alt" => (string) get_post_meta($thumb, "_wp_attachment_image_alt", true)] : null,
-    "yoast" => ["title" => (string) get_post_meta($p->ID, "_yoast_wpseo_title", true), "description" => (string) get_post_meta($p->ID, "_yoast_wpseo_metadesc", true)],
+    "seo" => ${yoastPhp('$p->ID')},
     "fields" => get_fields($p->ID),
   ];
 }
@@ -109,7 +132,25 @@ echo json_encode($out);`,
   return cats.length
 }
 
+/**
+ * The site-wide Yoast defaults, extracted once. Two consumers: `map/seo.ts`
+ * needs the separator + site name to strip the suffix Yoast's title template
+ * appends, and Site Settings' `defaultSeo` (#19) is populated from the same
+ * record rather than re-reading WordPress.
+ */
+function extractSiteSeo() {
+  const site = wpEval<WpSiteSeo>(`echo json_encode(${YOAST_SITE_PHP});`)
+  writeJson(join(EXTRACT_DIR, 'site', 'seo.json'), {
+    _meta: { type: 'siteSeo', source: SOURCE, extractedAt: new Date().toISOString() },
+    ...site,
+  })
+  return site
+}
+
+const site = extractSiteSeo()
 const nPosts = extractPosts()
 const nUsers = extractUsers()
 const nCats = extractCategories()
-console.log(`done: ${nPosts} posts, ${nUsers} users, ${nCats} categories → ${EXTRACT_DIR}`)
+console.log(
+  `done: ${nPosts} posts, ${nUsers} users, ${nCats} categories, site seo (${site.siteName}) → ${EXTRACT_DIR}`,
+)

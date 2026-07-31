@@ -3,8 +3,10 @@ import { join } from 'node:path'
 
 import { describe, expect, it } from 'vitest'
 
-import { CONVERTED_DIR } from './lib/paths'
+import { CONVERTED_DIR, EXTRACT_DIR } from './lib/paths'
+import type { WpSeo } from './lib/yoast'
 import { categoryDoc } from './map/category'
+import { checkPathParity } from './map/paths'
 import { personDoc } from './map/person'
 import { perspectiveDoc } from './map/perspective'
 
@@ -117,6 +119,30 @@ describe('committed conversion output', () => {
       const migration = doc.migration as { sourceId?: string; extractedAt?: string }
       expect(migration.sourceId, file).toMatch(/^wp:(post|term|user):\d+$/)
       expect(migration.extractedAt, file).toMatch(/^\d{4}-\d{2}-\d{2}T/)
+    }
+  })
+
+  // Path parity (#26). The mapper gates this per document at convert time;
+  // this re-checks the committed corpus, so a hand-edited slug in
+  // data/converted/ is caught too.
+  it('serves every perspective at the exact path WordPress serves it at', () => {
+    for (const { file, doc } of perspectives) {
+      const extract = join(EXTRACT_DIR, 'perspective', file)
+      if (!existsSync(extract)) continue
+      const { seo } = JSON.parse(readFileSync(extract, 'utf8')) as { seo?: WpSeo }
+      const slug = (doc.slug as { current: string }).current
+      const issue = checkPathParity(seo?.canonicalRendered ?? '', `/perspectives/${slug}`)
+      expect(issue?.detail, file).toBeUndefined()
+    }
+  })
+
+  // A canonical pointing back at www.o3world.com tells Google the new page is
+  // a duplicate of the old one — the single most expensive thing this
+  // migration could get wrong.
+  it('never carries a canonical pointing at the WordPress host', () => {
+    for (const { file, doc } of all) {
+      const canonical = (doc.seo as { canonical?: string } | undefined)?.canonical
+      expect(canonical ?? '', file).not.toContain('o3world.com')
     }
   })
 

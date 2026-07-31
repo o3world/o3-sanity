@@ -1,11 +1,16 @@
 import { z } from 'zod'
 
+import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
+
 import {
   convertHtml,
   createKeyGenerator,
   normalizeUploadUrl,
   type ConversionIssue,
 } from '../lib/htmlToPortableText'
+import type { WpSeo, WpSiteSeo } from '../lib/yoast'
+import { checkPathParity } from './paths'
+import { mapSeo, seoObject } from './seo'
 import { failed, ok, toIso, type ExtractMeta, type Mapped } from './types'
 
 export interface WpPerspective {
@@ -19,7 +24,7 @@ export interface WpPerspective {
   categoryIds: number[]
   excerpt?: string
   featuredImage?: { url: string; alt?: string } | null
-  yoast: { title?: string; description?: string }
+  seo: WpSeo
   fields?: {
     header?: { description?: string }
     flexible_post_content?: Record<string, unknown>[]
@@ -39,7 +44,7 @@ export const perspectiveDoc = z.object({
   publishedAt: z.string().datetime(),
   featuredImage: z.unknown().optional(),
   body: z.array(z.record(z.string(), z.unknown())).min(1),
-  seo: z.record(z.string(), z.unknown()).optional(),
+  seo: seoObject.optional(),
   migration: z.object({ locked: z.boolean(), sourceId: z.string(), extractedAt: z.string() }),
 })
 
@@ -53,8 +58,11 @@ export type PerspectiveDoc = z.infer<typeof perspectiveDoc>
  *
  * Adding a module type means adding an arm to the switch below and a case to
  * perspective.test.ts — those are the only two places that need to change.
+ *
+ * `site` carries the Yoast site-wide defaults the seo mapping needs (#26);
+ * it comes from `data/extract/site/seo.json`.
  */
-export function mapPerspective(post: WpPerspective): Mapped<PerspectiveDoc> {
+export function mapPerspective(post: WpPerspective, site: WpSiteSeo): Mapped<PerspectiveDoc> {
   const issues: ConversionIssue[] = []
   const modules = post.fields?.flexible_post_content ?? []
   const body: Record<string, unknown>[] = []
@@ -80,7 +88,18 @@ export function mapPerspective(post: WpPerspective): Mapped<PerspectiveDoc> {
   if (!excerpt) issues.push({ element: 'excerpt', detail: 'no header.description or post_excerpt' })
   if (body.length === 0) issues.push({ element: 'body', detail: 'no convertible modules' })
 
+  // Path parity is a conversion gate, not a review note (#26): a perspective
+  // that would move off the URL WordPress serves it at stops the run.
+  const parity = checkPathParity(
+    post.seo?.canonicalRendered ?? '',
+    `${COLLECTION_PREFIXES.perspective}/${post.slug}`,
+  )
+  if (parity) issues.push(parity)
+
   if (issues.length > 0) return failed(issues)
+
+  const notes: ConversionIssue[] = []
+  const seo = mapSeo(post.seo, site, post.title, notes)
 
   const doc = {
     _id: `perspective-wp-${post.wpId}`,
@@ -105,14 +124,7 @@ export function mapPerspective(post: WpPerspective): Mapped<PerspectiveDoc> {
         }
       : {}),
     body,
-    ...(post.yoast.title || post.yoast.description
-      ? {
-          seo: {
-            ...(post.yoast.title ? { title: post.yoast.title } : {}),
-            ...(post.yoast.description ? { description: post.yoast.description } : {}),
-          },
-        }
-      : {}),
+    ...(seo ? { seo } : {}),
     migration: {
       locked: false,
       sourceId: `wp:post:${post.wpId}`,
@@ -129,5 +141,5 @@ export function mapPerspective(post: WpPerspective): Mapped<PerspectiveDoc> {
   // Return the constructed literal, not zod's parsed output: `body` and
   // `featuredImage` are typed loosely in the schema and parsing would widen
   // the written JSON's key order.
-  return ok(doc)
+  return ok(doc, notes)
 }

@@ -1,10 +1,13 @@
+import { createHash } from 'node:crypto'
 import { readFileSync, readdirSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
+import { SITE_SETTINGS_QUERY } from '@o3/sanity/queries'
 import type {
   PERSPECTIVE_QUERY_RESULT,
   PERSPECTIVES_PAGE_QUERY_RESULT,
+  SITE_SETTINGS_QUERY_RESULT,
 } from '@o3/sanity/types/generated'
 
 /**
@@ -61,9 +64,71 @@ export function aPerspectivesPage(
 }
 
 /**
+ * Site Settings as `SITE_SETTINGS_QUERY` returns them — the defaults tier of
+ * the SEO chain (#26) and the source of the nav/footer chrome.
+ */
+export function siteSettings(
+  overrides: Partial<NonNullable<SITE_SETTINGS_QUERY_RESULT>> = {},
+): SITE_SETTINGS_QUERY_RESULT {
+  return {
+    title: 'O3',
+    perspectivesLabel: 'Insights',
+    navItems: [],
+    primaryCta: null,
+    footerTagline: null,
+    footerLinks: [],
+    socialLinks: [],
+    defaultSeo: null,
+    ...overrides,
+  } as SITE_SETTINGS_QUERY_RESULT
+}
+
+/**
+ * A dataset resolver for a route that fetches both a document and Site
+ * Settings — which, since #26, is every route with `generateMetadata`.
+ *
+ *   renderRoute(route, { data: withSettings(aPerspective()), params: { slug } })
+ */
+export function withSettings(
+  doc: unknown,
+  settings: SITE_SETTINGS_QUERY_RESULT = siteSettings(),
+): (call: { query: string }) => unknown {
+  return (call) => (call.query === SITE_SETTINGS_QUERY ? settings : doc)
+}
+
+/**
+ * Stand in for the asset upload `tools/migration/src/load.ts` performs, so a
+ * converted document can be rendered without a dataset.
+ *
+ * Converted JSON carries `_wpSrc` URL markers where an asset reference will
+ * go; `load` uploads the binary and swaps in the ref. A renderer given the
+ * raw marker throws inside `@sanity/image-url`, which would make the
+ * migration→render bridge unusable for any document with an image in its
+ * body — i.e. most of the 272 coming in #17. The ref is a sha1 of the source
+ * URL, which is both deterministic and the shape `@sanity/image-url` parses
+ * (`image-<40 hex>-<width>x<height>-<ext>`); anything looser is rejected.
+ */
+function resolveWpSrcMarkers(node: unknown): unknown {
+  if (Array.isArray(node)) return node.map(resolveWpSrcMarkers)
+  if (node && typeof node === 'object') {
+    const obj = node as Record<string, unknown>
+    if (typeof obj._wpSrc === 'string') {
+      const { _wpSrc, ...rest } = obj
+      const id = createHash('sha1').update(_wpSrc).digest('hex')
+      const ext = /\.(\w+)$/.exec(_wpSrc)?.[1]?.toLowerCase() ?? 'jpg'
+      return { ...rest, asset: { _type: 'reference', _ref: `image-${id}-1200x630-${ext}` } }
+    }
+    return Object.fromEntries(
+      Object.entries(obj).map(([key, value]) => [key, resolveWpSrcMarkers(value)]),
+    )
+  }
+  return node
+}
+
+/**
  * A real converted document from `tools/migration/data/converted/`, shaped
  * into what the detail query returns (references dereferenced, `slug.current`
- * flattened).
+ * flattened, `_wpSrc` markers resolved as `load` would).
  *
  * This is the bridge between the migration layer and the render layer: it
  * renders content that actually came out of WordPress, so a mapper change that
@@ -78,14 +143,15 @@ export function aMigratedPerspective(slug?: string): Perspective {
   const file = slug ? `${slug}.json` : readdirSync(dir).filter((f) => f.endsWith('.json'))[0]
   if (!file) throw new Error(`No converted perspective found in ${dir}`)
 
-  const doc = JSON.parse(readFileSync(join(dir, file), 'utf8')) as {
+  const doc = resolveWpSrcMarkers(JSON.parse(readFileSync(join(dir, file), 'utf8'))) as {
     _id: string
     title: string
     slug: { current: string }
     excerpt: string
     publishedAt: string
     body: unknown
-    seo?: { title?: string; description?: string }
+    featuredImage?: unknown
+    seo?: unknown
   }
 
   return aPerspective({
@@ -95,6 +161,7 @@ export function aMigratedPerspective(slug?: string): Perspective {
     excerpt: doc.excerpt,
     publishedAt: doc.publishedAt,
     body: doc.body as Perspective['body'],
+    featuredImage: (doc.featuredImage ?? null) as Perspective['featuredImage'],
     seo: (doc.seo ?? null) as Perspective['seo'],
   })
 }

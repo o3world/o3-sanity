@@ -1,11 +1,11 @@
-import type { Metadata } from 'next'
-
 import { PAGE_QUERY } from '@o3/sanity/queries'
 import type { PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { defineCatchAllType, defineSingletonType } from '@/lib/content-routes/define'
 import type { RendererProps } from '@/lib/content-routes/types'
+import type { DocumentSeo } from '@/lib/seo'
 import { getView } from '@/content/documents/registry'
+import { hrefForDoc } from '@/content/documents/urls'
 
 type PageRendererProps = RendererProps<typeof PAGE_QUERY>
 
@@ -15,12 +15,15 @@ function PageRenderer({ slug: _slug, ...rest }: PageRendererProps) {
   return <View {...doc} />
 }
 
-const pageMetadata = (doc: unknown): Metadata => {
+/**
+ * A page has no excerpt to fall back on, so its description comes from
+ * `seo.description` or Site Settings — the shared chain handles both. Multi-
+ * segment slugs already carry their own prefix; `hrefForDoc` owns the one
+ * exception (`index` → `/`).
+ */
+const pageSeo = (doc: unknown): DocumentSeo => {
   const p = doc as NonNullable<PAGE_QUERY_RESULT>
-  return {
-    title: p.seo?.title ?? p.title,
-    description: p.seo?.description ?? undefined,
-  }
+  return { title: p.title, path: hrefForDoc({ _type: 'page', slug: p.slug }) }
 }
 
 /** Catch-all entry: every `page` URL is its multi-segment slug (ADR 0001). */
@@ -28,7 +31,7 @@ export const page = defineCatchAllType({
   type: 'page',
   query: PAGE_QUERY,
   renderer: PageRenderer,
-  metadata: pageMetadata,
+  seo: pageSeo,
 })
 
 /**
@@ -40,5 +43,5 @@ export const home = defineSingletonType({
   query: PAGE_QUERY,
   params: { slug: 'index' },
   renderer: PageRenderer,
-  metadata: pageMetadata,
+  seo: pageSeo,
 })

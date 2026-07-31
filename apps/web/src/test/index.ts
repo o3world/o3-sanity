@@ -17,4 +17,6 @@ export {
   aPerspectivesPage,
   migratedPerspectiveSlugs,
   paragraph,
+  siteSettings,
+  withSettings,
 } from './fixtures'

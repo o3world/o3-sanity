@@ -79,7 +79,9 @@ export type Seo = {
     crop?: SanityImageCrop
     _type: 'image'
   }
+  canonical?: string
   noIndex?: boolean
+  noFollow?: boolean
 }
 
 export type PerspectiveReference = {
@@ -1730,7 +1732,7 @@ export type PAGES_BY_TYPE_QUERY_RESULT = Array<{
 
 // Source: src/queries.ts
 // Variable: SITEMAP_QUERY
-// Query: {  "perspectives": *[_type == "perspective" && defined(slug.current)]{"slug": slug.current, _updatedAt},  "caseStudies": *[_type == "caseStudy" && defined(slug.current)]{"slug": slug.current, _updatedAt},  "pages": *[_type == "page" && defined(slug.current) && (seo.noIndex != true)]{"slug": slug.current, _updatedAt}}
+// Query: {  "perspectives": *[_type == "perspective" && defined(slug.current) && (seo.noIndex != true)]{"slug": slug.current, _updatedAt},  "caseStudies": *[_type == "caseStudy" && defined(slug.current) && (seo.noIndex != true)]{"slug": slug.current, _updatedAt},  "pages": *[_type == "page" && defined(slug.current) && (seo.noIndex != true)]{"slug": slug.current, _updatedAt}}
 export type SITEMAP_QUERY_RESULT = {
   perspectives: Array<{
     slug: string | null
@@ -1762,6 +1764,6 @@ declare module '@sanity/client' {
     '*[_type == "page" && slug.current == $slug][0]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  pageType,\n  "sections": sections[]{\n  ...,\n  _type == "heroSection" => {\n    cta{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "logoWallSection" => {\n    "clients": clients[]->{_id, name, logo},\n    cta{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "caseShowcaseSection" => {\n    "caseStudies": caseStudies[]->{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  narrativeHeadline,\n  "headlineStat": stats[0],\n  heroMedia,\n  "client": client->{name, logo},\n  "industries": industries[]->{title},\n  industryDetail\n},\n    cta{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "railPanelsSection" => {\n    panels[]{..., cta{..., "target": target->{_type, title, "slug": slug.current}}}\n  },\n  _type == "perspectivesCarouselSection" => {\n    "curated": perspectives[]->{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  "author": author->{name, title},\n  "categories": categories[]->{title, "slug": slug.current}\n},\n    "latest": *[_type == "perspective" && (!defined(^.category) || ^.category._ref in categories[]._ref)] | order(publishedAt desc)[0...8]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  "author": author->{name, title},\n  "categories": categories[]->{title, "slug": slug.current}\n}\n  },\n  _type == "ctaSection" => {\n    cta{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "layoutSection" => {\n    items[]{..., _type == "cta" => {"target": target->{_type, title, "slug": slug.current}}}\n  },\n  _type == "listingSection" => {\n    "pages": *[_type == "page" && pageType == ^.pageType && slug.current != "index"] | order(title asc){_id, _type, title, "slug": slug.current, card}\n  }\n},\n  seo\n}': PAGE_QUERY_RESULT
     '*[_type == "page" && defined(slug.current)].slug.current': PAGE_SLUGS_QUERY_RESULT
     '*[_type == "page" && pageType == $pageType] | order(title asc){\n    _id,\n    title,\n    "slug": slug.current,\n    card\n  }': PAGES_BY_TYPE_QUERY_RESULT
-    '{\n  "perspectives": *[_type == "perspective" && defined(slug.current)]{"slug": slug.current, _updatedAt},\n  "caseStudies": *[_type == "caseStudy" && defined(slug.current)]{"slug": slug.current, _updatedAt},\n  "pages": *[_type == "page" && defined(slug.current) && (seo.noIndex != true)]{"slug": slug.current, _updatedAt}\n}': SITEMAP_QUERY_RESULT
+    '{\n  "perspectives": *[_type == "perspective" && defined(slug.current) && (seo.noIndex != true)]{"slug": slug.current, _updatedAt},\n  "caseStudies": *[_type == "caseStudy" && defined(slug.current) && (seo.noIndex != true)]{"slug": slug.current, _updatedAt},\n  "pages": *[_type == "page" && defined(slug.current) && (seo.noIndex != true)]{"slug": slug.current, _updatedAt}\n}': SITEMAP_QUERY_RESULT
   }
 }

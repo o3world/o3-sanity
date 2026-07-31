@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest'
 
+import { PERSPECTIVES_PAGE_QUERY } from '@o3/sanity/queries'
+
 import { buildListingRoute } from '@/lib/content-routes/build'
 import { aPerspective, aPerspectivesPage, renderRoute } from '@/test'
+import type { FetchCall } from '@/test/stubs/sanity-live'
 
 import { perspectiveListing } from './listing'
 
@@ -11,6 +14,14 @@ import { perspectiveListing } from './listing'
  * an empty grid, and the clamp costs a second fetch, so both are pinned here.
  */
 const route = buildListingRoute(perspectiveListing)
+
+/**
+ * Just the feed fetches. Every route also fetches Site Settings for the SEO
+ * defaults tier (#26), and pagination assertions are about the feed.
+ */
+function feedCalls(calls: readonly FetchCall[]): readonly FetchCall[] {
+  return calls.filter((call) => call.query === PERSPECTIVES_PAGE_QUERY)
+}
 
 function manyPerspectives(count: number) {
   return Array.from({ length: count }, (_, i) =>
@@ -34,7 +45,7 @@ describe('perspectives listing route', () => {
 
   it('defaults to page 1 when no page param is given', async () => {
     const { calls } = await renderRoute(route, { data: aPerspectivesPage(manyPerspectives(3), 3) })
-    expect(calls[0]?.params).toMatchObject({ offset: 0, end: 12 })
+    expect(feedCalls(calls)[0]?.params).toMatchObject({ offset: 0, end: 12 })
   })
 
   it('slices the feed by the requested page', async () => {
@@ -42,7 +53,7 @@ describe('perspectives listing route', () => {
       data: aPerspectivesPage(manyPerspectives(12), 40),
       searchParams: { page: '2' },
     })
-    expect(calls[0]?.params).toMatchObject({ offset: 12, end: 24 })
+    expect(feedCalls(calls)[0]?.params).toMatchObject({ offset: 12, end: 24 })
   })
 
   it('clamps a page past the end back to the last real page', async () => {
@@ -52,8 +63,8 @@ describe('perspectives listing route', () => {
     })
 
     // 20 items at 12/page = 2 pages; the clamp refetches page 2.
-    expect(calls).toHaveLength(2)
-    expect(calls[1]?.params).toMatchObject({ offset: 12, end: 24 })
+    expect(feedCalls(calls)).toHaveLength(2)
+    expect(feedCalls(calls)[1]?.params).toMatchObject({ offset: 12, end: 24 })
   })
 
   it('treats junk page params as page 1 without a second fetch', async () => {
@@ -62,8 +73,8 @@ describe('perspectives listing route', () => {
       searchParams: { page: 'not-a-number' },
     })
 
-    expect(calls).toHaveLength(1)
-    expect(calls[0]?.params).toMatchObject({ offset: 0, end: 12 })
+    expect(feedCalls(calls)).toHaveLength(1)
+    expect(feedCalls(calls)[0]?.params).toMatchObject({ offset: 0, end: 12 })
   })
 
   it('uses the entry’s static metadata', async () => {

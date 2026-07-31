@@ -18,5 +18,37 @@
   "http://www.o3world.com/wp-content/uploads/2026/04/c9c10708-3a97-11f1-b648-ded8ac27d679.avif": {
     "sha256": "171034438586100536952b4515ee24824c544f14",
     "assetId": "image-171034438586100536952b4515ee24824c544f14-600x600-avif"
+  },
+  "https://www.o3world.com/wp-content/uploads/2026/05/bbefda06-561b-11f1-a227-22a6634659e7.avif": {
+    "sha256": "b4b9f04695ea9675ef23bc0183b4a45fa9fe1996",
+    "assetId": "image-b4b9f04695ea9675ef23bc0183b4a45fa9fe1996-1080x1080-avif"
+  },
+  "https://www.o3world.com/wp-content/uploads/2026/04/33651784-3f49-11f1-8460-a2027a72b9d1.avif": {
+    "sha256": "054cce324407194edd543af8a432175737c0413e",
+    "assetId": "image-054cce324407194edd543af8a432175737c0413e-600x600-avif"
+  },
+  "https://www.o3world.com/wp-content/uploads/2026/05/bee227a4-5388-11f1-84e2-0242ac120003.avif": {
+    "sha256": "34dae4281f4e8b108b1883dced371da7104b2e7b",
+    "assetId": "image-34dae4281f4e8b108b1883dced371da7104b2e7b-1080x1080-avif"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/WinterSOTO.png": {
+    "sha256": "759462f5af88b53a23254b286ff0c702b9122e6b",
+    "assetId": "image-759462f5af88b53a23254b286ff0c702b9122e6b-2500x2500-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2022/09/O3_WORLD_SOTO.jpg": {
+    "sha256": "c10211fac339abd026ba6bfdcaffe0fce0004047",
+    "assetId": "image-c10211fac339abd026ba6bfdcaffe0fce0004047-2500x1667-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2022/07/03_WORLD_6_16_22-432-1.jpg": {
+    "sha256": "a37874a4b85fa2065272cae689d359d66e8d84bb",
+    "assetId": "image-a37874a4b85fa2065272cae689d359d66e8d84bb-2500x1667-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2026/07/Dialed_Lovable_Website_Image.png": {
+    "sha256": "e8188e4a49b4b8e4bdd89688382117696d2da60d",
+    "assetId": "image-e8188e4a49b4b8e4bdd89688382117696d2da60d-2160x2160-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2026/04/c9c10708-3a97-11f1-b648-ded8ac27d679.avif": {
+    "sha256": "171034438586100536952b4515ee24824c544f14",
+    "assetId": "image-171034438586100536952b4515ee24824c544f14-600x600-avif"
   }
 }

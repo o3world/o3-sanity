@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
+import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
+
 import { buildDetailRoute } from '@/lib/content-routes/build'
 import {
   aMigratedPerspective,
@@ -8,9 +10,21 @@ import {
   migratedPerspectiveSlugs,
   paragraph,
   renderRoute,
+  siteSettings,
+  withSettings,
 } from '@/test'
 
 import { perspective } from './entry'
+
+/**
+ * Valid Sanity asset ids — `@sanity/image-url` rejects anything else. The
+ * CDN URL it builds contains the bare id, not the `image-…-WxH-ext` ref, so
+ * assertions match on `*_ID`.
+ */
+const OG_ID = '1111111111111111111111111111111111111111'
+const FALLBACK_ID = '2222222222222222222222222222222222222222'
+const OG_IMAGE = `image-${OG_ID}-1200x630-png`
+const FALLBACK_IMAGE = `image-${FALLBACK_ID}-1600x900-jpg`
 
 /**
  * The perspective detail route, end to end minus the network: the route shim
@@ -64,9 +78,21 @@ describe('perspective detail route', () => {
     await expectNotFound(route, { data: null, params: { slug: 'does-not-exist' } })
   })
 
+  /**
+   * The SEO discipline every content ticket inherits (#26). These assertions
+   * are about the shared chain in `@/lib/seo`, pinned through a real route:
+   * a routable type that emits half the tag set fails here.
+   */
   describe('metadata', () => {
+    function renderWithSettings(doc: unknown, settings?: SITE_SETTINGS_QUERY_RESULT) {
+      return renderRoute(route, {
+        data: withSettings(doc, settings ?? siteSettings()),
+        params: { slug: 'a-perspective' },
+      })
+    }
+
     it('falls back to the document title and excerpt', async () => {
-      const { metadata } = await render(
+      const { metadata } = await renderWithSettings(
         aPerspective({ title: 'Fallback Title', excerpt: 'Fallback description.' }),
       )
       expect(metadata.title).toBe('Fallback Title')
@@ -74,7 +100,7 @@ describe('perspective detail route', () => {
     })
 
     it('prefers the migrated Yoast values when present', async () => {
-      const { metadata } = await render(
+      const { metadata } = await renderWithSettings(
         aPerspective({
           title: 'Document Title',
           excerpt: 'Document excerpt.',
@@ -83,6 +109,97 @@ describe('perspective detail route', () => {
       )
       expect(metadata.title).toBe('Yoast Title')
       expect(metadata.description).toBe('Yoast description.')
+    })
+
+    it('falls back to the Site Settings description when neither the doc nor its seo has one', async () => {
+      const { metadata } = await renderWithSettings(
+        aPerspective({ excerpt: null as never, seo: null }),
+        siteSettings({
+          defaultSeo: { _type: 'seo', description: 'The house description.' } as never,
+        }),
+      )
+      expect(metadata.description).toBe('The house description.')
+    })
+
+    it('emits a self-referential canonical at the document’s own path', async () => {
+      const { metadata } = await renderWithSettings(aPerspective({ slug: 'a-perspective' }))
+      expect(metadata.alternates?.canonical).toBe(
+        'http://localhost:3000/perspectives/a-perspective',
+      )
+    })
+
+    it('lets a document point its canonical somewhere else', async () => {
+      const { metadata } = await renderWithSettings(
+        aPerspective({ seo: { _type: 'seo', canonical: 'https://example.com/original' } }),
+      )
+      expect(metadata.alternates?.canonical).toBe('https://example.com/original')
+    })
+
+    it('is indexable and followable by default', async () => {
+      const { metadata } = await renderWithSettings(aPerspective())
+      expect(metadata.robots).toMatchObject({ index: true, follow: true })
+    })
+
+    it('honours the migrated noIndex and noFollow flags', async () => {
+      const { metadata } = await renderWithSettings(
+        aPerspective({ seo: { _type: 'seo', noIndex: true, noFollow: true } }),
+      )
+      expect(metadata.robots).toMatchObject({ index: false, follow: false })
+    })
+
+    it('emits OpenGraph and Twitter tags, site name included in the social title', async () => {
+      const { metadata } = await renderWithSettings(
+        aPerspective({ title: 'Social Title', excerpt: 'Social description.' }),
+      )
+      // The root layout's `%s | O3` template never reaches a scraper, so
+      // og:title has to carry the site name itself.
+      expect(metadata.openGraph?.title).toBe('Social Title | O3')
+      expect(metadata.openGraph?.description).toBe('Social description.')
+      expect(metadata.openGraph).toMatchObject({
+        url: 'http://localhost:3000/perspectives/a-perspective',
+        siteName: 'O3',
+      })
+      expect(metadata.twitter).toMatchObject({ card: 'summary_large_image' })
+    })
+
+    it('shares as an article, with its publication date', async () => {
+      const { metadata } = await renderWithSettings(
+        aPerspective({ publishedAt: '2026-05-04T13:20:00Z' }),
+      )
+      expect(metadata.openGraph).toMatchObject({
+        type: 'article',
+        publishedTime: '2026-05-04T13:20:00Z',
+      })
+    })
+
+    it('prefers the seo ogImage over the featured image for the social card', async () => {
+      const asset = (ref: string) => ({
+        _type: 'image' as const,
+        asset: { _type: 'reference' as const, _ref: ref },
+      })
+      const { metadata } = await renderWithSettings(
+        aPerspective({
+          featuredImage: { _type: 'figure', image: asset(FALLBACK_IMAGE), alt: 'x' } as never,
+          seo: { _type: 'seo', ogImage: asset(OG_IMAGE) } as never,
+        }),
+      )
+      const images = JSON.stringify(metadata.openGraph?.images)
+      expect(images).toContain(OG_ID)
+      expect(images).not.toContain(FALLBACK_ID)
+    })
+
+    it('falls back to the document’s featured image when seo has no ogImage', async () => {
+      const { metadata } = await renderWithSettings(
+        aPerspective({
+          featuredImage: {
+            _type: 'figure',
+            image: { _type: 'image', asset: { _type: 'reference', _ref: FALLBACK_IMAGE } },
+            alt: 'x',
+          } as never,
+          seo: null,
+        }),
+      )
+      expect(JSON.stringify(metadata.openGraph?.images)).toContain(FALLBACK_ID)
     })
 
     // stega characters are invisible in the browser but corrupt <title> and

@@ -1,4 +1,5 @@
 import { PERSPECTIVES_PAGE_QUERY } from '@o3/sanity/queries'
+import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
 import type { PERSPECTIVES_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { PerspectivesListingView } from './PerspectivesListingView'
@@ -24,8 +25,11 @@ export const perspectiveListing = defineListingType({
   query: PERSPECTIVES_PAGE_QUERY,
   pageSize: 12,
   renderer: PerspectivesListingRenderer,
-  metadata: {
+  seo: {
     title: 'Perspectives',
     description: 'Essays and field notes — the thinking behind the work.',
+    // Paginated pages canonicalize to the unpaginated index: `?page=2` is
+    // the same collection, not a second document.
+    path: COLLECTION_PREFIXES.perspective,
   },
 })

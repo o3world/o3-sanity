@@ -2,7 +2,7 @@
   "_meta": {
     "type": "perspective",
     "source": "o3-world.live",
-    "extractedAt": "2026-07-31T20:07:23.034Z"
+    "extractedAt": "2026-07-31T23:27:31.836Z"
   },
   "wpId": 10590,
   "slug": "guru-is-the-presenting-sponsor-of-the-1682-conference",
@@ -10,15 +10,26 @@
   "dateGmt": "2026-04-24 13:52:41",
   "modifiedGmt": "2026-04-24 13:52:41",
   "authorId": 20,
-  "categoryIds": [86, 75],
+  "categoryIds": [
+    86,
+    75
+  ],
   "excerpt": "",
   "featuredImage": {
     "url": "http://www.o3world.com/wp-content/uploads/2026/04/33651784-3f49-11f1-8460-a2027a72b9d1.avif",
     "alt": ""
   },
-  "yoast": {
-    "title": "",
-    "description": ""
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Guru is the presenting sponsor of the 1682 conference | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/guru-is-the-presenting-sponsor-of-the-1682-conference/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
   },
   "fields": {
     "header": {
@@ -51,7 +62,9 @@
         "text_editor": "<p>Our relationship with founder Rick Nucci and Guru goes back over a decade. It started in 2014, when we launched the Forge Conference, a UX/UI conference held at the Penn Museum that ran for three years. Rick was there every year, as a sponsor, a speaker, and an attendee. When we launched 1682 in 2019, he showed up again in the same spirit. When we formed our first external advisory committee this year, Rick was the first to accept. And when the opportunity to step into the presenting sponsor role came up, he and his team delivered without hesitation.</p>\n<p>That kind of consistency is rare. Since the pandemic, I&#8217;ve watched a lot of professional relationships become more transactional and less personal. Rick is a genuine exception. His support, his loyalty, his participation, and his commitment have been unwavering from the moment we met. He doesn&#8217;t just talk about giving back to Philadelphia. He does it, year after year, in ways that are visible and meaningful.</p>\n<p>A recent piece in <a href=\"https://technical.ly/civics/rick-nucci-on-boomi-guru-and-why-he-keeps-choosing-philly-over-silicon-valley/\">Technical.ly by Bonnie Ravina</a> captures this well. The article profiles why Rick has chosen Philadelphia over Silicon Valley, not once but twice, first with Boomi and now with Guru. As Rick told Technical.ly: &#8220;We were constantly punching way above our weight. I started seeing us consistently win deals against competitors based in the Bay Area with 10x the funding and team size. That was my lightbulb moment to the inherent advantage of building in Philly.&#8221;</p>\n<p>The 1682 Conference takes its name from the year William Penn founded Philadelphia. That founding ethos runs through everything we do: a curated, intimate gathering of 150 senior executives having honest, practitioner-level conversations about what it actually takes to move AI from pilot to production. No panels of pundits. No product pitches. Just real stories from people doing the work.</p>\n<p>Guru and 1682 share the same sensibility. As Rick puts it:</p>\n<p>&#8220;I&#8217;ve been building enterprise software in Philadelphia for over 25 years &#8212; first Boomi, now Guru &#8212; and both times, the city has been a genuine competitive advantage. Philadelphia has always been a place where real work gets done without the noise. That&#8217;s exactly what 1682 is about: practitioners sharing honest stories about what it actually takes to move AI from pilot to production. As Philly celebrates its 250th anniversary, it feels fitting that a conference named after the year the city was founded is where some of the most candid conversations about AI&#8217;s impact on business are happening.&#8221;</p>\n<p>We couldn&#8217;t agree more.</p>\n<p>If you&#8217;re interested in joining Rick and Guru as a speaker, sponsor, or attendee, visit <a href=\"http://www.1682conference.com\">1682conference.com</a>. We&#8217;d love for you to be a part of the community.</p>\n"
       }
     ],
-    "related_articles": [10473],
+    "related_articles": [
+      10473
+    ],
     "author": ""
   }
 }

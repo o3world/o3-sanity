@@ -1,6 +1,34 @@
 import { describe, expect, it } from 'vitest'
 
+import type { WpSeo, WpSiteSeo } from '../lib/yoast'
 import { mapPerspective, type WpPerspective } from './perspective'
+
+const SITE: WpSiteSeo = {
+  siteName: 'O3',
+  siteUrl: 'https://www.o3world.com',
+  separator: '|',
+  description: '',
+  ogDefaultImage: 'https://www.o3world.com/up/O3.png',
+  twitterSite: 'o3world',
+  twitterCardType: 'summary_large_image',
+}
+
+/** Yoast facts for a post that overrode nothing — the common case (#26). */
+function wpSeo(overrides: Partial<WpSeo> = {}): WpSeo {
+  return {
+    titleOverride: '',
+    titleRendered: 'A Post | O3',
+    descriptionOverride: '',
+    descriptionRendered: 'Short summary.',
+    canonicalOverride: '',
+    canonicalRendered: 'https://www.o3world.com/perspectives/a-post/',
+    noIndex: false,
+    noFollow: false,
+    ogImage: null,
+    twitterImageOverride: '',
+    ...overrides,
+  }
+}
 
 /**
  * A minimal, valid WP post. Every test starts here and overrides only the
@@ -20,13 +48,15 @@ function wpPost(overrides: Partial<WpPerspective> = {}): WpPerspective {
     authorId: 16,
     categoryIds: [86],
     excerpt: 'Short summary.',
-    yoast: {},
+    seo: wpSeo(),
     fields: {
       flexible_post_content: [{ acf_fc_layout: 'text', text_editor: '<p>Hello world.</p>' }],
     },
     ...overrides,
   }
 }
+
+const map = (post: WpPerspective) => mapPerspective(post, SITE)
 
 /** Narrow to the success arm, failing with the reported issues if it isn't. */
 function expectOk(result: ReturnType<typeof mapPerspective>) {
@@ -38,7 +68,7 @@ function expectOk(result: ReturnType<typeof mapPerspective>) {
 
 describe('mapPerspective', () => {
   it('maps a WP post onto the perspective document shape', () => {
-    const doc = expectOk(mapPerspective(wpPost()))
+    const doc = expectOk(map(wpPost()))
 
     expect(doc._id).toBe('perspective-wp-101')
     expect(doc._type).toBe('perspective')
@@ -55,13 +85,13 @@ describe('mapPerspective', () => {
   })
 
   it('converts the WP GMT date to an ISO instant', () => {
-    const doc = expectOk(mapPerspective(wpPost({ dateGmt: '2026-05-04 13:20:00' })))
+    const doc = expectOk(map(wpPost({ dateGmt: '2026-05-04 13:20:00' })))
     expect(doc.publishedAt).toBe('2026-05-04T13:20:00Z')
   })
 
   it('prefers the ACF header description over the WP excerpt', () => {
     const doc = expectOk(
-      mapPerspective(
+      map(
         wpPost({
           excerpt: 'the wp excerpt',
           fields: {
@@ -76,7 +106,7 @@ describe('mapPerspective', () => {
 
   it('strips the WP thumbnail suffix from the featured image so the full asset migrates', () => {
     const doc = expectOk(
-      mapPerspective(
+      map(
         wpPost({ featuredImage: { url: 'https://o3.com/up/photo-768x432.jpg', alt: 'A photo' } }),
       ),
     )
@@ -89,35 +119,94 @@ describe('mapPerspective', () => {
 
   it('falls back to the post title when the featured image has no alt text', () => {
     const doc = expectOk(
-      mapPerspective(wpPost({ featuredImage: { url: 'https://o3.com/up/p.jpg', alt: '' } })),
+      map(wpPost({ featuredImage: { url: 'https://o3.com/up/p.jpg', alt: '' } })),
     )
     expect((doc.featuredImage as { alt: string }).alt).toBe('A Post')
   })
 
-  it('omits seo entirely when Yoast had nothing (rather than writing an empty object)', () => {
-    const doc = expectOk(mapPerspective(wpPost({ yoast: {} })))
-    expect('seo' in doc).toBe(false)
-  })
+  describe('seo — overrides migrate, resolved defaults do not (#26)', () => {
+    it('omits seo entirely when the post overrode nothing', () => {
+      const doc = expectOk(map(wpPost({ seo: wpSeo() })))
+      expect('seo' in doc).toBe(false)
+    })
 
-  it('carries the Yoast title and description onto seo', () => {
-    const doc = expectOk(
-      mapPerspective(wpPost({ yoast: { title: 'SEO title', description: 'SEO description' } })),
-    )
-    expect(doc.seo).toEqual({ title: 'SEO title', description: 'SEO description' })
+    it('ignores the resolved title and description a post never overrode', () => {
+      // Yoast resolves these from site-wide templates for every post; copying
+      // them in would freeze today's defaults into 272 documents.
+      const doc = expectOk(
+        map(
+          wpPost({
+            seo: wpSeo({
+              titleRendered: 'A Post | O3',
+              descriptionRendered: 'Auto-generated from the excerpt.',
+            }),
+          }),
+        ),
+      )
+      expect('seo' in doc).toBe(false)
+    })
+
+    it('carries an overridden title, stripped of the site-name suffix Yoast appends', () => {
+      const doc = expectOk(
+        map(
+          wpPost({
+            seo: wpSeo({
+              titleOverride: '%%title%% the long way',
+              titleRendered: 'A Post the long way | O3',
+            }),
+          }),
+        ),
+      )
+      // The app's own `%s | O3` template re-appends it — keeping Yoast's
+      // would ship "… | O3 | O3".
+      expect(doc.seo).toEqual({ title: 'A Post the long way' })
+    })
+
+    it('carries an overridden meta description', () => {
+      const doc = expectOk(
+        map(wpPost({ seo: wpSeo({ descriptionOverride: '  SEO description  ' }) })),
+      )
+      expect(doc.seo).toEqual({ description: 'SEO description' })
+    })
+
+    it('migrates a per-post OG image as an asset marker, thumbnail suffix stripped', () => {
+      const doc = expectOk(
+        map(
+          wpPost({
+            seo: wpSeo({ ogImage: { url: 'https://o3.com/up/share-1200x630.png', alt: '' } }),
+          }),
+        ),
+      )
+      expect(doc.seo).toEqual({
+        ogImage: { _type: 'image', _wpSrc: 'https://o3.com/up/share.png' },
+      })
+    })
+
+    it('never migrates the self-referential canonical WordPress renders', () => {
+      // It points at www.o3world.com — migrating it would declare every new
+      // page a duplicate of the old site.
+      const doc = expectOk(map(wpPost({ seo: wpSeo() })))
+      expect(doc.seo).toBeUndefined()
+    })
+
+    it('carries robots overrides', () => {
+      const doc = expectOk(map(wpPost({ seo: wpSeo({ noIndex: true, noFollow: true }) })))
+      expect(doc.seo).toEqual({ noIndex: true, noFollow: true })
+    })
   })
 
   // Determinism is what makes "wipe and rebuild reproduces the dataset"
   // (ADR 0003) true, and it is why re-running convert does not churn every
   // _key in the committed JSON. See docs/adr/0004.
   it('is deterministic — the same post converts to byte-identical JSON every run', () => {
-    const first = expectOk(mapPerspective(wpPost()))
-    const second = expectOk(mapPerspective(wpPost()))
+    const first = expectOk(map(wpPost()))
+    const second = expectOk(map(wpPost()))
     expect(JSON.stringify(first)).toBe(JSON.stringify(second))
   })
 
   it('gives every body block a key, unique within the document', () => {
     const doc = expectOk(
-      mapPerspective(
+      map(
         wpPost({
           fields: {
             flexible_post_content: [
@@ -135,7 +224,7 @@ describe('mapPerspective', () => {
 
   describe('fails loud rather than dropping content (ADR 0002)', () => {
     it('reports an ACF module layout it has no mapper for', () => {
-      const result = mapPerspective(
+      const result = map(
         wpPost({
           fields: {
             flexible_post_content: [
@@ -155,7 +244,7 @@ describe('mapPerspective', () => {
     })
 
     it('reports a post with no excerpt anywhere', () => {
-      const result = mapPerspective(
+      const result = map(
         wpPost({
           excerpt: '',
           fields: {
@@ -170,7 +259,7 @@ describe('mapPerspective', () => {
     })
 
     it('reports a post whose modules produced no body', () => {
-      const result = mapPerspective(wpPost({ fields: { flexible_post_content: [] } }))
+      const result = map(wpPost({ fields: { flexible_post_content: [] } }))
 
       expect(result.ok).toBe(false)
       if (result.ok) return
@@ -178,7 +267,7 @@ describe('mapPerspective', () => {
     })
 
     it('reports an unexpanded shortcode instead of migrating the raw text', () => {
-      const result = mapPerspective(
+      const result = map(
         wpPost({
           fields: {
             flexible_post_content: [
@@ -193,8 +282,30 @@ describe('mapPerspective', () => {
       expect(result.issues.map((i) => i.element)).toContain('shortcode')
     })
 
+    it('reports a slug that would move the post off its WordPress URL (#26)', () => {
+      const result = map(
+        wpPost({
+          slug: 'a-renamed-post',
+          seo: wpSeo({ canonicalRendered: 'https://www.o3world.com/perspectives/a-post/' }),
+        }),
+      )
+
+      expect(result.ok).toBe(false)
+      if (result.ok) return
+      expect(result.issues.map((i) => i.element)).toContain('path parity')
+    })
+
+    it('accepts the WordPress URL with its trailing slash as parity', () => {
+      const result = map(
+        wpPost({
+          seo: wpSeo({ canonicalRendered: 'https://www.o3world.com/perspectives/a-post/' }),
+        }),
+      )
+      expect(result.ok).toBe(true)
+    })
+
     it('writes nothing at all for a failed post — no partial document', () => {
-      const result = mapPerspective(
+      const result = map(
         wpPost({ fields: { flexible_post_content: [{ acf_fc_layout: 'unknown_thing' }] } }),
       )
       expect(result.ok).toBe(false)

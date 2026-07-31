@@ -156,8 +156,13 @@ export const PAGES_BY_TYPE_QUERY = defineQuery(
   }`,
 )
 
+/**
+ * Every routable type filters `seo.noIndex` identically: listing a page in
+ * the sitemap while its own `<meta robots>` says noindex is the kind of
+ * contradiction that costs crawl budget and trust (#26, verified by #24).
+ */
 export const SITEMAP_QUERY = defineQuery(`{
-  "perspectives": *[_type == "perspective" && defined(slug.current)]{"slug": slug.current, _updatedAt},
-  "caseStudies": *[_type == "caseStudy" && defined(slug.current)]{"slug": slug.current, _updatedAt},
+  "perspectives": *[_type == "perspective" && defined(slug.current) && (seo.noIndex != true)]{"slug": slug.current, _updatedAt},
+  "caseStudies": *[_type == "caseStudy" && defined(slug.current) && (seo.noIndex != true)]{"slug": slug.current, _updatedAt},
   "pages": *[_type == "page" && defined(slug.current) && (seo.noIndex != true)]{"slug": slug.current, _updatedAt}
 }`)

@@ -6,10 +6,19 @@ const SITE_ENV = 'o3-world.live'
  * Run a PHP snippet on the live WordPress via `terminus wp eval` and parse
  * its JSON stdout. The snippet must `echo json_encode(...)` exactly once and
  * must not contain single quotes (terminus passes it through a remote shell).
+ *
+ * The snippet is flattened to one line before it is sent, which is why `//`
+ * comments are rejected outright: a line comment survives the flattening and
+ * silently comments out the entire rest of the program, and WordPress reports
+ * that as `Parse error: Unclosed {` from inside a phar. Explain the PHP in the
+ * TypeScript doc comment above it instead.
  */
 export function wpEval<T>(php: string): T {
   if (php.includes("'")) {
     throw new Error('PHP snippet must not contain single quotes (remote shell quoting)')
+  }
+  if (/(^|[^:])\/\//.test(php)) {
+    throw new Error('PHP snippet must not contain // comments (it is flattened to one line)')
   }
   const oneLine = php.replace(/\s*\n\s*/g, ' ')
   const out = execFileSync('terminus', ['wp', SITE_ENV, '--', 'eval', oneLine], {

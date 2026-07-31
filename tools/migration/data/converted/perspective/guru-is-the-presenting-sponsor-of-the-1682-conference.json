@@ -28,7 +28,7 @@
     "_type": "figure",
     "image": {
       "_type": "image",
-      "_wpSrc": "http://www.o3world.com/wp-content/uploads/2026/04/33651784-3f49-11f1-8460-a2027a72b9d1.avif"
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2026/04/33651784-3f49-11f1-8460-a2027a72b9d1.avif"
     },
     "alt": "Guru is the presenting sponsor of the 1682 conference"
   },
@@ -189,6 +189,6 @@
   "migration": {
     "locked": false,
     "sourceId": "wp:post:10590",
-    "extractedAt": "2026-07-31T20:07:23.034Z"
+    "extractedAt": "2026-07-31T23:27:31.836Z"
   }
 }

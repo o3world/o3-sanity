@@ -9,11 +9,12 @@
  *
  *   pnpm --filter @o3/migration convert
  */
-import { readFileSync, readdirSync } from 'node:fs'
+import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
 
 import type { ConversionIssue } from './lib/htmlToPortableText'
 import { CONVERTED_DIR, EXTRACT_DIR, writeJson } from './lib/paths'
+import type { WpSiteSeo } from './lib/yoast'
 import { mapCategory, type WpCategory } from './map/category'
 import { mapPerson, type WpPerson } from './map/person'
 import { mapPerspective, type WpPerspective } from './map/perspective'
@@ -25,12 +26,35 @@ function readDir<T>(type: string): T[] {
     .map((f) => JSON.parse(readFileSync(join(dir, f), 'utf8')) as T)
 }
 
+/**
+ * The Yoast site-wide defaults every seo mapping needs (#26). Missing means
+ * the extract predates `extractSiteSeo` — fail loud rather than convert 272
+ * documents with the site name doubled into every title.
+ */
+function readSiteSeo(): WpSiteSeo {
+  const path = join(EXTRACT_DIR, 'site', 'seo.json')
+  if (!existsSync(path)) {
+    throw new Error(
+      `missing ${path} — re-run extract; seo mapping needs the site separator and name`,
+    )
+  }
+  return JSON.parse(readFileSync(path, 'utf8')) as WpSiteSeo
+}
+
+const site = readSiteSeo()
+
 const failures: { slug: string; issues: readonly ConversionIssue[] }[] = []
+const notes: { slug: string; notes: readonly ConversionIssue[] }[] = []
 let written = 0
 
 function emit(type: string, slug: string, doc: unknown) {
   writeJson(join(CONVERTED_DIR, type, `${slug}.json`), doc)
   written++
+}
+
+/** Record anything a successful mapping normalized, for the run's report. */
+function note(slug: string, mapped: { notes?: readonly ConversionIssue[] }) {
+  if (mapped.notes?.length) notes.push({ slug, notes: mapped.notes })
 }
 
 // --- categories (all) ---
@@ -43,12 +67,13 @@ for (const cat of readDir<WpCategory>('category')) {
 // --- perspectives + the persons they reference ---
 const referencedAuthors = new Set<number>()
 for (const post of readDir<WpPerspective>('perspective')) {
-  const result = mapPerspective(post)
+  const result = mapPerspective(post, site)
   if (!result.ok) {
     failures.push({ slug: post.slug, issues: result.issues })
     continue
   }
   emit('perspective', post.slug, result.doc)
+  note(post.slug, result)
   referencedAuthors.add(post.authorId)
 }
 
@@ -60,6 +85,13 @@ for (const person of readDir<WpPerson>('person')) {
 }
 
 console.log(`converted ${written} documents → ${CONVERTED_DIR}`)
+if (notes.length > 0) {
+  console.warn(`\nNOTES (${notes.length}) — converted, but the source needed cleaning up:`)
+  for (const n of notes) {
+    console.warn(`  ${n.slug}`)
+    for (const i of n.notes) console.warn(`    - [${i.element}] ${i.detail}`)
+  }
+}
 if (failures.length > 0) {
   console.error(`\nFAILED (${failures.length}) — nothing written for these:`)
   for (const f of failures) {

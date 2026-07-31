@@ -28,7 +28,7 @@
     "_type": "figure",
     "image": {
       "_type": "image",
-      "_wpSrc": "http://www.o3world.com/wp-content/uploads/2026/07/Dialed_Lovable_Website_Image.png"
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2026/07/Dialed_Lovable_Website_Image.png"
     },
     "alt": "We replaced a $35,000 SaaS tool in 527 prompts"
   },
@@ -522,6 +522,6 @@
   "migration": {
     "locked": false,
     "sourceId": "wp:post:10635",
-    "extractedAt": "2026-07-31T20:07:23.033Z"
+    "extractedAt": "2026-07-31T23:27:31.834Z"
   }
 }
