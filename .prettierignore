@@ -1,0 +1,11 @@
+# Machine-generated migration data. `convert` writes these with
+# JSON.stringify(…, null, 2); prettier formats short arrays differently, so
+# letting it reformat them on commit means every subsequent `pnpm convert`
+# re-dirties the tree and the committed JSON stops being byte-reproducible.
+# The pipeline owns this directory (ADR 0003) — prettier does not.
+tools/migration/data/
+
+# Build output
+**/.next/
+**/storybook-static/
+**/dist/

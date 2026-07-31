@@ -422,7 +422,9 @@
         },
         {
           "_type": "span",
-          "marks": ["k0000"],
+          "marks": [
+            "k0000"
+          ],
           "text": "1682 Conference",
           "_key": "k0058"
         },
@@ -496,7 +498,9 @@
         },
         {
           "_type": "span",
-          "marks": ["k0001"],
+          "marks": [
+            "k0001"
+          ],
           "text": "let’s talk.",
           "_key": "k0068"
         }

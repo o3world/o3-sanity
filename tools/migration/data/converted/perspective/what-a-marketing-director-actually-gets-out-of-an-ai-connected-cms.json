@@ -53,7 +53,9 @@
         },
         {
           "_type": "span",
-          "marks": ["k0000"],
+          "marks": [
+            "k0000"
+          ],
           "text": "CoSchedule’s 2025 State of AI in Marketing Report",
           "_key": "k0015"
         },
@@ -197,7 +199,9 @@
         },
         {
           "_type": "span",
-          "marks": ["k0001"],
+          "marks": [
+            "k0001"
+          ],
           "text": "typically charge $0.15 to $0.30 per word for standard marketing content",
           "_key": "k0035"
         },
@@ -209,7 +213,9 @@
         },
         {
           "_type": "span",
-          "marks": ["k0002"],
+          "marks": [
+            "k0002"
+          ],
           "text": "cuts those costs by 60 to 80%, according to Bluente’s 2025 Enterprise Content and AI Translation Benchmark Report",
           "_key": "k0037"
         },
@@ -260,7 +266,9 @@
         },
         {
           "_type": "span",
-          "marks": ["k0003"],
+          "marks": [
+            "k0003"
+          ],
           "text": "Ahrefs data shows roughly 25% of pages lack a meta description entirely",
           "_key": "k0043"
         },
@@ -334,7 +342,9 @@
         },
         {
           "_type": "span",
-          "marks": ["k0004"],
+          "marks": [
+            "k0004"
+          ],
           "text": "Sanity,",
           "_key": "k0053"
         },
@@ -346,7 +356,9 @@
         },
         {
           "_type": "span",
-          "marks": ["k0005"],
+          "marks": [
+            "k0005"
+          ],
           "text": "AI Assist",
           "_key": "k0055"
         },
@@ -383,7 +395,9 @@
         },
         {
           "_type": "span",
-          "marks": ["k0006"],
+          "marks": [
+            "k0006"
+          ],
           "text": " Lokalise",
           "_key": "k0059"
         },
@@ -395,7 +409,9 @@
         },
         {
           "_type": "span",
-          "marks": ["k0007"],
+          "marks": [
+            "k0007"
+          ],
           "text": " DeepL",
           "_key": "k0061"
         },
@@ -432,7 +448,9 @@
         },
         {
           "_type": "span",
-          "marks": ["k0008"],
+          "marks": [
+            "k0008"
+          ],
           "text": " Jasper",
           "_key": "k0065"
         },
@@ -444,7 +462,9 @@
         },
         {
           "_type": "span",
-          "marks": ["k0009"],
+          "marks": [
+            "k0009"
+          ],
           "text": "Writer",
           "_key": "k0067"
         },
@@ -509,7 +529,9 @@
         },
         {
           "_type": "span",
-          "marks": ["k0010"],
+          "marks": [
+            "k0010"
+          ],
           "text": "Contact the O3 team to get started.",
           "_key": "k0075"
         }
