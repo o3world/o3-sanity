@@ -60,7 +60,7 @@ jobs:
       - name: Deploy
         id: deploy
         run: |
-          URL=$(vercel deploy --prebuilt --cwd apps/storybook ${{ github.event_name == 'push' && '--prod' || '' }} --archive=tgz --token="$VERCEL_TOKEN")
+          URL=$(vercel deploy --prebuilt --cwd apps/storybook ${{ github.event_name == 'push' && '--prod' || '--target=preview' }} --archive=tgz --token="$VERCEL_TOKEN")
           echo "url=$URL" >> "$GITHUB_OUTPUT"
       - name: Alias branch
         id: alias
@@ -76,12 +76,13 @@ jobs:
         run: |
           URL="${{ steps.alias.outputs.alias_url || steps.deploy.outputs.url }}"
           # `vercel curl` rides the CI token through deployment protection — no
-          # bypass secret to provision or rotate.
+          # bypass secret to provision or rotate. Global flags (--scope) must come
+          # BEFORE the path arg; anything after it is forwarded to real curl.
           ARGS=(-sS -o /dev/null -w '%{http_code}' --retry 5 --retry-delay 5)
           if [ -n "${{ secrets.SITE_AUTH_USER }}" ]; then
             ARGS+=(-u "${{ secrets.SITE_AUTH_USER }}:${{ secrets.SITE_AUTH_PASS }}")
           fi
-          CODE=$(vercel curl / --deployment "$URL" --cwd apps/storybook --yes -- "${ARGS[@]}") || { echo "::error::smoke check failed to connect"; exit 1; }
+          CODE=$(vercel curl --scope o3-world / --deployment "$URL" --yes -- "${ARGS[@]}") || { echo "::error::smoke check failed to connect"; exit 1; }
           [ "$CODE" = "200" ] || { echo "::error::smoke check got HTTP $CODE from $URL"; exit 1; }
       - name: Finish GitHub deployment
         if: always()
