@@ -5,13 +5,13 @@
  * from these schemas — so schema and renderers cannot drift apart.
  */
 export const SECTION_BLOCKS = [
-  'heroBlock',
-  'logoWallBlock',
-  'caseShowcaseBlock',
-  'railPanelsBlock',
-  'quoteBlock',
-  'perspectivesCarouselBlock',
-  'ctaBlock',
+  'heroSection',
+  'logoWallSection',
+  'caseShowcaseSection',
+  'railPanelsSection',
+  'quoteSection',
+  'perspectivesCarouselSection',
+  'ctaSection',
   'layoutSection',
   'mediaSection',
   'listingSection',

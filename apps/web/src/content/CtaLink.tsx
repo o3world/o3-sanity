@@ -8,7 +8,7 @@ import { hrefForDoc } from '@/content/documents/urls'
 /**
  * Structural cta shape — every query projects ctas as
  * `{..., "target": target->{_type, title, "slug": slug.current}}`, so the
- * generated shapes (heroBlock.cta, navItems[], layoutSection cta items, …)
+ * generated shapes (heroSection.cta, navItems[], layoutSection cta items, …)
  * are all assignable here without per-site casts.
  */
 export interface CtaLinkData {

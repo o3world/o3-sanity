@@ -45,32 +45,32 @@ const CTA_TARGET = /* groq */ `"target": target->{_type, title, "slug": slug.cur
  *   column items);
  * - logo wall / case showcase / perspectives carousel expand their references
  *   into card projections;
- * - perspectivesCarouselBlock also fetches a `latest` fallback feed so an
+ * - perspectivesCarouselSection also fetches a `latest` fallback feed so an
  *   empty curated list auto-fills (renderer picks `curated` when non-empty);
  * - listingSection resolves its page list at query time so the renderer stays
  *   a pure component.
  */
 const SECTION_FIELDS = /* groq */ `
   ...,
-  _type == "heroBlock" => {
+  _type == "heroSection" => {
     cta{..., ${CTA_TARGET}}
   },
-  _type == "logoWallBlock" => {
+  _type == "logoWallSection" => {
     "clients": clients[]->{_id, name, logo},
     cta{..., ${CTA_TARGET}}
   },
-  _type == "caseShowcaseBlock" => {
+  _type == "caseShowcaseSection" => {
     "caseStudies": caseStudies[]->{${CASE_STUDY_CARD}},
     cta{..., ${CTA_TARGET}}
   },
-  _type == "railPanelsBlock" => {
+  _type == "railPanelsSection" => {
     panels[]{..., cta{..., ${CTA_TARGET}}}
   },
-  _type == "perspectivesCarouselBlock" => {
+  _type == "perspectivesCarouselSection" => {
     "curated": perspectives[]->{${PERSPECTIVE_CARD}},
     "latest": *[_type == "perspective" && (!defined(^.category) || ^.category._ref in categories[]._ref)] | order(publishedAt desc)[0...8]{${PERSPECTIVE_CARD}}
   },
-  _type == "ctaBlock" => {
+  _type == "ctaSection" => {
     cta{..., ${CTA_TARGET}}
   },
   _type == "layoutSection" => {

@@ -5,7 +5,7 @@ import { SanityImage } from '@/content/SanityImage'
 import { resolveSurface } from '@/content/blocks/surface'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
 
-type RailPanelsBlockProps = SectionProps<'railPanelsBlock'>
+type RailPanelsSectionProps = SectionProps<'railPanelsSection'>
 
 /**
  * Section block: rail + panels — serves both the "platforms we go deep on"
@@ -13,7 +13,7 @@ type RailPanelsBlockProps = SectionProps<'railPanelsBlock'>
  * label list and the panels as a stacked sequence; the scroll-synced rail
  * highlight is post-scaffold motion work.
  */
-export function RailPanelsBlock({ heading, intro, panels, surface }: RailPanelsBlockProps) {
+export function RailPanelsSection({ heading, intro, panels, surface }: RailPanelsSectionProps) {
   return (
     <SectionShell surface={resolveSurface(surface, 'white')}>
       <div className="grid gap-16 py-24 lg:grid-cols-[1fr_2fr]">

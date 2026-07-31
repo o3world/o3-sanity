@@ -4,14 +4,14 @@ import { CtaLink } from '@/content/CtaLink'
 import { resolveSurface } from '@/content/blocks/surface'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
 
-type HeroBlockProps = SectionProps<'heroBlock'>
+type HeroSectionProps = SectionProps<'heroSection'>
 
 /**
  * Section block: the page hero. Each headline line renders on its own row;
  * the last line is muted per the prototype's homepage h1 treatment. The
  * `decoration` field (orbs) is a post-scaffold motion concern.
  */
-export function HeroBlock({ headlineLines, subheading, cta, surface }: HeroBlockProps) {
+export function HeroSection({ headlineLines, subheading, cta, surface }: HeroSectionProps) {
   const lines = headlineLines ?? []
   return (
     <SectionShell surface={resolveSurface(surface, 'ink')}>

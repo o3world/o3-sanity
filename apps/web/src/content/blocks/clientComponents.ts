@@ -15,16 +15,16 @@ import {
   defineBlockRender,
   type ClientBlockRenderBinding,
 } from './defineBlockRender'
-import { CaseShowcaseBlock } from './section/caseShowcaseBlock/CaseShowcaseBlock'
-import { CtaBlock } from './section/ctaBlock/CtaBlock'
-import { HeroBlock } from './section/heroBlock/HeroBlock'
+import { CaseShowcaseSection } from './section/caseShowcaseSection/CaseShowcaseSection'
+import { CtaSection } from './section/ctaSection/CtaSection'
+import { HeroSection } from './section/heroSection/HeroSection'
 import { LayoutSection } from './section/layoutSection/LayoutSection'
 import { ListingSection } from './section/listingSection/ListingSection'
-import { LogoWallBlock } from './section/logoWallBlock/LogoWallBlock'
+import { LogoWallSection } from './section/logoWallSection/LogoWallSection'
 import { MediaSection } from './section/mediaSection/MediaSection'
-import { PerspectivesCarouselBlock } from './section/perspectivesCarouselBlock/PerspectivesCarouselBlock'
-import { QuoteBlock } from './section/quoteBlock/QuoteBlock'
-import { RailPanelsBlock } from './section/railPanelsBlock/RailPanelsBlock'
+import { PerspectivesCarouselSection } from './section/perspectivesCarouselSection/PerspectivesCarouselSection'
+import { QuoteSection } from './section/quoteSection/QuoteSection'
+import { RailPanelsSection } from './section/railPanelsSection/RailPanelsSection'
 
 /**
  * Render bindings for every client-safe SECTION block — the single authoring
@@ -38,13 +38,13 @@ import { RailPanelsBlock } from './section/railPanelsBlock/RailPanelsBlock'
  * still catch a missing binding via its own `satisfies` clause.
  */
 export const CLIENT_SECTION_BINDINGS = [
-  defineBlockRender('heroBlock', { component: HeroBlock }),
-  defineBlockRender('logoWallBlock', { component: LogoWallBlock }),
-  defineBlockRender('caseShowcaseBlock', { component: CaseShowcaseBlock }),
-  defineBlockRender('railPanelsBlock', { component: RailPanelsBlock }),
-  defineBlockRender('quoteBlock', { component: QuoteBlock }),
-  defineBlockRender('perspectivesCarouselBlock', { component: PerspectivesCarouselBlock }),
-  defineBlockRender('ctaBlock', { component: CtaBlock }),
+  defineBlockRender('heroSection', { component: HeroSection }),
+  defineBlockRender('logoWallSection', { component: LogoWallSection }),
+  defineBlockRender('caseShowcaseSection', { component: CaseShowcaseSection }),
+  defineBlockRender('railPanelsSection', { component: RailPanelsSection }),
+  defineBlockRender('quoteSection', { component: QuoteSection }),
+  defineBlockRender('perspectivesCarouselSection', { component: PerspectivesCarouselSection }),
+  defineBlockRender('ctaSection', { component: CtaSection }),
   defineBlockRender('layoutSection', { component: LayoutSection }),
   defineBlockRender('mediaSection', { component: MediaSection }),
   defineBlockRender('listingSection', { component: ListingSection }),

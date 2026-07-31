@@ -43,7 +43,7 @@ Standard marks + closed inline-object set: **`figure`, `embed`, `pullQuote`**. A
 
 ### Section tier — bespoke (from the `prototype/` design)
 
-`heroBlock`, `logoWallBlock` (statement + client refs or manual logos; layout `grid | marquee`), `caseShowcaseBlock` (caseStudy refs; projects narrativeHeadline + first stat), `railPanelsBlock` (items {media, heading, body, note, cta} — serves both "platforms" and "how we work"), `quoteBlock` (inline quote + attribution — no testimonial type), `perspectivesCarouselBlock` (curated refs or latest-N by category), `ctaBlock`.
+`heroSection`, `logoWallSection` (statement + client refs or manual logos; layout `grid | marquee`), `caseShowcaseSection` (caseStudy refs; projects narrativeHeadline + first stat), `railPanelsSection` (items {media, heading, body, note, cta} — serves both "platforms" and "how we work"), `quoteSection` (inline quote + attribution — no testimonial type), `perspectivesCarouselSection` (curated refs or latest-N by category), `ctaSection`.
 
 ### Section tier — generic
 

@@ -4,10 +4,10 @@ import { CtaLink } from '@/content/CtaLink'
 import { resolveSurface } from '@/content/blocks/surface'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
 
-type CtaBlockProps = SectionProps<'ctaBlock'>
+type CtaSectionProps = SectionProps<'ctaSection'>
 
 /** Section block: the closing CTA band ("The best partnerships…"). */
-export function CtaBlock({ heading, body, cta, surface }: CtaBlockProps) {
+export function CtaSection({ heading, body, cta, surface }: CtaSectionProps) {
   return (
     <SectionShell surface={resolveSurface(surface, 'ink')}>
       <div className="mx-auto flex max-w-3xl flex-col items-center gap-8 py-32 text-center">

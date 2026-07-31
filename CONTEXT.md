@@ -67,9 +67,8 @@ Two conventions, split by whether the file is bound to a schema type:
 
 ### Known drift
 
-Fix on sight; don't imitate. As of 2026-07-31 the rules above are the target, and these four are the gap:
+Fix on sight; don't imitate. As of 2026-07-31 the rules above are the target, and these three are the gap:
 
-- The seven bespoke section blocks still carry the old `Block` suffix (`heroBlock`, `ctaBlock`, …) — rename to `*Section` pending.
 - Enforcement is not wired yet: the factories don't check name shape, and `tools/check-schema-symmetry` doesn't exist. Until both land, the suffix and folder rules are convention only — follow them anyway.
 - `perspective.featuredImage` should be `heroMedia` (`caseStudy` already uses it). Requires touching the five converted JSON docs in `tools/migration/data/converted/perspective/` and the translate step.
 - `heroSection.headlineLines` is an array because each line animates separately — a genuine exception to `heading`, not a synonym.
