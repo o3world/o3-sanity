@@ -1,17 +1,16 @@
 import type { PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 
-import { BlockRenderer } from '@/content/blocks/BlockRenderer'
-import { ClientBlockRenderer } from '@/content/blocks/ClientBlockRenderer'
+import { Blocks } from '@/content/blocks/Blocks'
 
 type PageDoc = NonNullable<PAGE_QUERY_RESULT>
-export type PageViewProps = PageDoc & { readonly isDraft?: boolean }
+export type PageViewProps = PageDoc
 
 /**
  * View for `page` documents: the sections array through the block machinery.
- * Draft mode (Presentation preview) routes through ClientBlockRenderer for
- * optimistic drag-reorder; the published path stays a server render.
+ * `Blocks` resolves draft mode itself and picks the server or Presentation
+ * renderer accordingly.
  */
-export function PageView({ _id, title, sections, isDraft }: PageViewProps) {
+export function PageView({ _id, title, sections }: PageViewProps) {
   if (!sections?.length) {
     return (
       <article className="mx-auto max-w-5xl px-6 pb-24 pt-40">
@@ -20,10 +19,9 @@ export function PageView({ _id, title, sections, isDraft }: PageViewProps) {
     )
   }
 
-  const Renderer = isDraft ? ClientBlockRenderer : BlockRenderer
   return (
     <article>
-      <Renderer blocks={sections} documentId={_id} documentType="page" fieldPath="sections" />
+      <Blocks blocks={sections} documentId={_id} documentType="page" fieldPath="sections" />
     </article>
   )
 }

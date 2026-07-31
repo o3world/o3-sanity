@@ -1,4 +1,4 @@
-import { BlockRenderer } from '@/content/blocks/BlockRenderer'
+import { Blocks } from '@/content/blocks/Blocks'
 import type { SanityBlock } from '@o3/sanity/types'
 
 /**
@@ -21,9 +21,7 @@ export function DefaultView({ _id, _type, title, sections }: DefaultViewProps) {
           <h1 className="text-display-xl font-display">{title}</h1>
         </header>
       ) : null}
-      {sections?.length ? (
-        <BlockRenderer blocks={sections} documentId={_id} documentType={_type} />
-      ) : null}
+      {sections?.length ? <Blocks blocks={sections} documentId={_id} documentType={_type} /> : null}
     </article>
   )
 }

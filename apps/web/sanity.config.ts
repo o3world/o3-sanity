@@ -1,8 +1,13 @@
 import { defineConfig } from 'sanity'
-import { presentationTool } from 'sanity/presentation'
+import {
+  defineDocuments,
+  defineLocations,
+  presentationTool,
+  type PresentationPluginOptions,
+} from 'sanity/presentation'
 import { structureTool, type StructureResolver } from 'sanity/structure'
 
-import { PROJECT_ID } from '@o3/sanity/constants'
+import { COLLECTION_PREFIXES, PROJECT_ID } from '@o3/sanity/constants'
 import { schemaTypes } from '@o3/sanity/schemas'
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? PROJECT_ID
@@ -34,6 +39,81 @@ const structure: StructureResolver = (S) =>
     ])
 
 /**
+ * Presentation route <-> document wiring. `mainDocuments` lets the tool
+ * resolve the edited document from any preview URL (and offer to create one
+ * when none exists yet — the new-page flow); `locations` gives every
+ * routable document its "Used on" links so a freshly created draft can be
+ * opened in preview immediately. URL shapes mirror
+ * `src/content/documents/urls.ts` (hrefForDoc) — keep the two in sync.
+ */
+const pageHref = (slug: string | undefined | null) => (!slug || slug === 'index' ? '/' : `/${slug}`)
+
+const resolve: PresentationPluginOptions['resolve'] = {
+  mainDocuments: defineDocuments([
+    {
+      route: '/',
+      filter: `_type == "page" && slug.current == "index"`,
+    },
+    {
+      route: `${COLLECTION_PREFIXES.caseStudy}/:slug`,
+      filter: `_type == "caseStudy" && slug.current == $slug`,
+    },
+    {
+      route: `${COLLECTION_PREFIXES.perspective}/:slug`,
+      filter: `_type == "perspective" && slug.current == $slug`,
+    },
+    {
+      // Catch-all pages store their full multi-segment path in
+      // `slug.current` (`services/ux-audit`); path-to-regexp hands the
+      // segments of a `:slug*` route back as an array.
+      route: '/:slug*',
+      resolve: (ctx) => {
+        const raw = ctx.params.slug as string | string[] | undefined
+        const slug = Array.isArray(raw) ? raw.join('/') : raw
+        return slug
+          ? { filter: `_type == "page" && slug.current == $slug`, params: { slug } }
+          : undefined
+      },
+    },
+  ]),
+  locations: {
+    page: defineLocations({
+      select: { title: 'title', slug: 'slug.current' },
+      resolve: (doc) => ({
+        locations: [{ title: doc?.title || 'Untitled', href: pageHref(doc?.slug) }],
+      }),
+    }),
+    caseStudy: defineLocations({
+      select: { title: 'title', slug: 'slug.current' },
+      resolve: (doc) => ({
+        locations: [
+          {
+            title: doc?.title || 'Untitled',
+            href: `${COLLECTION_PREFIXES.caseStudy}/${doc?.slug ?? ''}`,
+          },
+        ],
+      }),
+    }),
+    perspective: defineLocations({
+      select: { title: 'title', slug: 'slug.current' },
+      resolve: (doc) => ({
+        locations: [
+          {
+            title: doc?.title || 'Untitled',
+            href: `${COLLECTION_PREFIXES.perspective}/${doc?.slug ?? ''}`,
+          },
+          { title: 'All perspectives', href: COLLECTION_PREFIXES.perspective },
+        ],
+      }),
+    }),
+    siteSettings: defineLocations({
+      message: 'Site settings are used on every page',
+      tone: 'caution',
+    }),
+  },
+}
+
+/**
  * The embedded Studio (mounted at /studio by `app/studio/[[...tool]]`).
  * Same-origin with the site on every deploy, which is what makes
  * Presentation live editing work on unpredictable preview URLs
@@ -49,6 +129,7 @@ export default defineConfig({
   plugins: [
     structureTool({ structure }),
     presentationTool({
+      resolve,
       previewUrl: {
         preview: '/',
         previewMode: { enable: '/api/draft-mode/enable' },
