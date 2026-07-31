@@ -57,6 +57,15 @@ export type SiteSettings = {
     _key: string
   }>
   defaultSeo?: Seo
+  migration?: Migration
+}
+
+export type Migration = {
+  _type: 'migration'
+  locked?: boolean
+  sourceId?: string
+  extractedAt?: string
+  source?: string
 }
 
 export type Seo = {
@@ -110,6 +119,7 @@ export type Industry = {
   _rev: string
   title?: string
   slug?: Slug
+  migration?: Migration
 }
 
 export type Slug = {
@@ -192,6 +202,7 @@ export type Category = {
   _rev: string
   title?: string
   slug?: Slug
+  migration?: Migration
 }
 
 export type QuoteBlock = {
@@ -397,6 +408,7 @@ export type Page = {
       } & ListingSection)
   >
   seo?: Seo
+  migration?: Migration
 }
 
 export type SanityImageCrop = {
@@ -483,6 +495,7 @@ export type CaseStudy = {
       } & ListingSection)
   >
   seo?: Seo
+  migration?: Migration
 }
 
 export type Client = {
@@ -499,6 +512,7 @@ export type Client = {
     crop?: SanityImageCrop
     _type: 'image'
   }
+  migration?: Migration
 }
 
 export type PersonReference = {
@@ -527,6 +541,7 @@ export type Perspective = {
   featuredImage?: Figure
   body?: BodyText
   seo?: Seo
+  migration?: Migration
 }
 
 export type Person = {
@@ -544,6 +559,7 @@ export type Person = {
     crop?: SanityImageCrop
     _type: 'image'
   }
+  migration?: Migration
 }
 
 export type SanityImagePaletteSwatch = {
@@ -647,6 +663,7 @@ export type AllSanitySchemaTypes =
   | SanityImageAssetReference
   | Logo
   | SiteSettings
+  | Migration
   | Seo
   | PerspectiveReference
   | CaseStudyReference

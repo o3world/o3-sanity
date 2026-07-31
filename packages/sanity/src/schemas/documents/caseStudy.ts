@@ -73,6 +73,7 @@ export const caseStudy = defineType({
       description: 'Optional per-case flourishes appended after the chapters.',
     }),
     defineField({ name: 'seo', type: 'seo' }),
+    defineField({ name: 'migration', type: 'migration' }),
   ],
   preview: {
     select: { title: 'title', subtitle: 'narrativeHeadline', media: 'heroMedia.image' },

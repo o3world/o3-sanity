@@ -1,4 +1,5 @@
 import { seo } from './objects/seo'
+import { migration } from './objects/migration'
 import { cta } from './objects/cta'
 import { figure } from './objects/figure'
 import { stat } from './objects/stat'
@@ -27,6 +28,7 @@ import { person, client, category, industry, siteSettings } from './documents/su
 export const schemaTypes = [
   // objects
   seo,
+  migration,
   cta,
   figure,
   stat,

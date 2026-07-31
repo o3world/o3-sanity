@@ -40,6 +40,7 @@ export const page = defineType({
       of: sectionBlockMembers.map((member) => defineArrayMember(member)),
     }),
     defineField({ name: 'seo', type: 'seo' }),
+    defineField({ name: 'migration', type: 'migration' }),
   ],
   preview: {
     select: { title: 'title', subtitle: 'slug.current' },

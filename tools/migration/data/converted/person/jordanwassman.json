@@ -1,0 +1,10 @@
+{
+  "_id": "person-wp-22",
+  "_type": "person",
+  "name": "Jordan Wassman",
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:user:22",
+    "extractedAt": "2026-07-31T20:07:29.767Z"
+  }
+}

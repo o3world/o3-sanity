@@ -8,6 +8,7 @@ export const person = defineType({
     defineField({ name: 'name', type: 'string', validation: (rule) => rule.required() }),
     defineField({ name: 'title', title: 'Role', type: 'string' }),
     defineField({ name: 'headshot', type: 'image', options: { hotspot: true } }),
+    defineField({ name: 'migration', type: 'migration' }),
   ],
   preview: { select: { title: 'name', subtitle: 'title', media: 'headshot' } },
 })
@@ -19,6 +20,7 @@ export const client = defineType({
   fields: [
     defineField({ name: 'name', type: 'string', validation: (rule) => rule.required() }),
     defineField({ name: 'logo', type: 'image', validation: (rule) => rule.required() }),
+    defineField({ name: 'migration', type: 'migration' }),
   ],
   preview: { select: { title: 'name', media: 'logo' } },
 })
@@ -35,6 +37,7 @@ export const category = defineType({
       options: { source: 'title' },
       validation: (rule) => rule.required(),
     }),
+    defineField({ name: 'migration', type: 'migration' }),
   ],
   preview: { select: { title: 'title' } },
 })
@@ -51,6 +54,7 @@ export const industry = defineType({
       options: { source: 'title' },
       validation: (rule) => rule.required(),
     }),
+    defineField({ name: 'migration', type: 'migration' }),
   ],
   preview: { select: { title: 'title' } },
 })
@@ -86,6 +90,7 @@ export const siteSettings = defineType({
       ],
     }),
     defineField({ name: 'defaultSeo', type: 'seo' }),
+    defineField({ name: 'migration', type: 'migration' }),
   ],
   preview: {
     select: { title: 'title' },

@@ -1,0 +1,14 @@
+{
+  "_id": "category-wp-11",
+  "_type": "category",
+  "title": "Technology",
+  "slug": {
+    "_type": "slug",
+    "current": "technology"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:term:11",
+    "extractedAt": "2026-07-31T20:07:34.551Z"
+  }
+}

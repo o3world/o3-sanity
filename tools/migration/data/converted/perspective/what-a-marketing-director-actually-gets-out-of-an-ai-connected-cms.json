@@ -1,0 +1,564 @@
+{
+  "_id": "perspective-wp-10579",
+  "_type": "perspective",
+  "title": "What a marketing director actually gets out of an AI-connected CMS",
+  "slug": {
+    "_type": "slug",
+    "current": "what-a-marketing-director-actually-gets-out-of-an-ai-connected-cms"
+  },
+  "excerpt": "Your content team is stretched, and the backlog proves it. Blog posts sitting in draft because no one wrote the meta description. Product pages missing alt text. Campaign pages stuck in a tagging queue before they can go live. Meanwhile, someone is manually reformatting finished content for LinkedIn, email, and social every time, for every piece.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-20"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-75",
+      "_key": "cat-75"
+    }
+  ],
+  "publishedAt": "2026-04-23T16:34:04Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "http://www.o3world.com/wp-content/uploads/2026/04/c9c10708-3a97-11f1-b648-ded8ac27d679.avif"
+    },
+    "alt": "Individuals sitting at a conference table discussing the benefits of an AI-connected CMS"
+  },
+  "body": [
+    {
+      "_key": "e641b9e6e9aa",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Your team gets time back",
+          "_key": "5f7381cde5eb"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "4990bf4f19be",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The fastest win from connecting your CMS to an AI layer is recovered capacity. According to ",
+          "_key": "18da6ed844d7"
+        },
+        {
+          "_type": "span",
+          "marks": ["a9f29b8975ce"],
+          "text": "CoSchedule’s 2025 State of AI in Marketing Report",
+          "_key": "a0ae93884600"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", based on surveys of over 1,000 marketing professionals, teams using AI tools report 44% higher productivity and save an average of five or more hours per week by automating tasks like metadata generation, content tagging, and media alt text development. Those tasks run at publish time, automatically. Your writers write. The rest happens in the background.",
+          "_key": "bf3ca6505535"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "a9f29b8975ce",
+          "_type": "link",
+          "href": "https://coschedule.com/ai-marketing-statistics"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "67238c969e9b",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "For a team of three, that’s a meaningful output increase without a headcount request.",
+          "_key": "a1aa90b4ea3f"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "bfe2eaf622e8",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "One piece of content, every channel",
+          "_key": "785869f8f7b4"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "f2370ae5e3bc",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Take a finished blog post. Someone on your team turns it into a LinkedIn summary, a newsletter blurb, and a few social captions. That’s four or five production tasks per piece. At 20 posts a month across four channels, you’re looking at 80 discrete tasks, most of which require a skilled person to do something repetitive.",
+          "_key": "92653cc00280"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "a7c7dd0c3a4f",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Wire an AI pipeline into your CMS and that chain runs automatically after publish. Channel-specific variants generate from the same canonical source: short-form social, email excerpt, pull quote. Your team reviews instead of produces. That’s a real difference in what actually ships versus what sits in the backlog.",
+          "_key": "958081489bea"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "2fe157408830",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "There’s a consistency benefit here, too. When every variant traces back to one source in your CMS, your product names, pricing, and key claims stay aligned across channels. That’s hard to maintain when someone is adapting content manually under deadline.",
+          "_key": "beb4f3e449c3"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "494d7a9bdbce",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Brand voice holds even when your contributors don’t",
+          "_key": "e1cf5c627e35"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "55a5ee642f76",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Agencies, contractors, and freelancers all write a little differently. Over time, voice drifts. Terminology gets inconsistent. An AI layer trained on your style guide and plugged into the editorial workflow catches those issues before content publishes, not during a brand audit six months later.",
+          "_key": "30c150db9144"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "30a8217218e1",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Translation timelines shrink",
+          "_key": "1d9d9cc41807"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "d3a1131fc8c7",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Professional US translators and agencies ",
+          "_key": "bee4fa1e4a72"
+        },
+        {
+          "_type": "span",
+          "marks": ["2631fc9c36e5"],
+          "text": "typically charge $0.15 to $0.30 per word for standard marketing content",
+          "_key": "17f2508d20b1"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", with turnaround times that can stretch to a week or more per language per batch. AI-assisted translation, where a model generates a first draft and a native-speaking reviewer cleans it up, ",
+          "_key": "d783deb6a312"
+        },
+        {
+          "_type": "span",
+          "marks": ["941719d23084"],
+          "text": "cuts those costs by 60 to 80%, according to Bluente’s 2025 Enterprise Content and AI Translation Benchmark Report",
+          "_key": "6614302b8ba1"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". A product description update that used to require a multi-day agency cycle ships the day the English version goes live.",
+          "_key": "63795adddfee"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "2631fc9c36e5",
+          "_type": "link",
+          "href": "https://www.tomedes.com/translator-hub/translation-rates"
+        },
+        {
+          "_key": "941719d23084",
+          "_type": "link",
+          "href": "https://www.bluente.com/blog/2025-ai-translation-trends"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "c4aef098f1f5",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "SEO stops being a bottleneck",
+          "_key": "9c3378da3489"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "c7f4e4e5fa1d",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In most CMS setups, metadata is either an editorial afterthought or a dependency on a developer ticket. ",
+          "_key": "37bbf1796a09"
+        },
+        {
+          "_type": "span",
+          "marks": ["d2f11966f70c"],
+          "text": "Ahrefs data shows roughly 25% of pages lack a meta description entirely",
+          "_key": "b4f83fbb6dea"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", even among high-ranking results. In large content libraries where editorial attention is spread thin, that gap tends to be wider. An AI pipeline that generates title tags, meta descriptions, and structured data at publish time removes the problem at the source, without adding a QA step or a ticket.",
+          "_key": "47c4822762a4"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "d2f11966f70c",
+          "_type": "link",
+          "href": "https://seosherpa.com/seo-statistics/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "56fadc5114e5",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "You stop commissioning content that already exists",
+          "_key": "3ff50bf1e7df"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "59961849b83b",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Before briefing a new article or campaign page, your team should know what’s already in the CMS and whether it’s pulling its weight. AI can scan your content library against a new brief, surface what overlaps, flag what can be refreshed instead of replaced, and identify what’s genuinely missing. Fewer redundant commissions, better use of your existing library, and a content strategy that builds on itself rather than repeating.",
+          "_key": "93e6f41f9a01"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "9cc21d111cf6",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Tools worth knowing",
+          "_key": "542602fe9405"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "262230935dc3",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If you’re running ",
+          "_key": "ac92191d8417"
+        },
+        {
+          "_type": "span",
+          "marks": ["c366586458a8"],
+          "text": "Sanity,",
+          "_key": "3809535aa96d"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " ",
+          "_key": "d7e8ff89bd9a"
+        },
+        {
+          "_type": "span",
+          "marks": ["70bef32886fe"],
+          "text": "AI Assist",
+          "_key": "2c04a24d92ce"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " is the obvious starting point. It’s the official plugin from the Sanity team and lets you attach reusable AI instructions directly to fields and document types in Studio. Use it to automate metadata generation, alt text, translations, and field-level content suggestions without leaving the editorial interface.",
+          "_key": "fdcfbd5bff75"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "c366586458a8",
+          "_type": "link",
+          "href": "https://www.o3world.com/perspectives/o3-and-sanity-partner-to-bring-ai-enabled-content-solutions-to-you/"
+        },
+        {
+          "_key": "70bef32886fe",
+          "_type": "link",
+          "href": "https://www.sanity.io/plugins/ai-assist"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "6462512b21ae",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "For translation management at scale,",
+          "_key": "d180af40c16e"
+        },
+        {
+          "_type": "span",
+          "marks": ["4ebc1816d69c"],
+          "text": " Lokalise",
+          "_key": "ed1c4602cf26"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " integrates with most headless CMS platforms and handles the full workflow from AI draft to human review and back.",
+          "_key": "e3b99d56acf8"
+        },
+        {
+          "_type": "span",
+          "marks": ["bcab80abc710"],
+          "text": " DeepL",
+          "_key": "f9510febbc9a"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " remains the benchmark for translation quality if you’re building a custom pipeline rather than using a managed platform.",
+          "_key": "846a609d9679"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "4ebc1816d69c",
+          "_type": "link",
+          "href": "https://lokalise.com/"
+        },
+        {
+          "_key": "bcab80abc710",
+          "_type": "link",
+          "href": "https://www.deepl.com/en"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "2bbf23e6285b",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "For brand voice consistency across contributors,",
+          "_key": "3ccf99b1c2e7"
+        },
+        {
+          "_type": "span",
+          "marks": ["dbba4808b2ff"],
+          "text": " Jasper",
+          "_key": "9e0928e713f6"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " handles both content creation and brand governance in one platform. You train it on your style guide and existing content, and it generates on-brand copy while flagging tone and terminology issues before anything is published. Teams that need governance without the content creation layer can look at ",
+          "_key": "e881e370e920"
+        },
+        {
+          "_type": "span",
+          "marks": ["dc89ba4d3fb7"],
+          "text": "Writer",
+          "_key": "e04fbaff7971"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", which enforces rules on top of whatever your contributors are already writing.",
+          "_key": "dba1dd9adbb8"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "dbba4808b2ff",
+          "_type": "link",
+          "href": "https://www.jasper.ai/"
+        },
+        {
+          "_key": "dc89ba4d3fb7",
+          "_type": "link",
+          "href": "https://writer.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "1fb47e527531",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "These tools aren’t replacements for a clear content strategy or a well-structured schema. They’re accelerants for teams that already have those foundations in place.",
+          "_key": "b427c5067ae5"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "102b0fd4cadb",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Where to start\nThe organizations seeing real returns aren’t the ones that tried to automate everything at once. They picked one painful, repetitive task, built a tight pipeline around it, validated the output, and expanded from there.",
+          "_key": "d7d28702a34d"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "34d986e92fbd",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If you’re not sure which workflow to start with, that’s exactly the kind of assessment we help with. ",
+          "_key": "8d3a53a23355"
+        },
+        {
+          "_type": "span",
+          "marks": ["4359c9a77b2f"],
+          "text": "Contact the O3 team to get started.",
+          "_key": "53fc2523b5bf"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "4359c9a77b2f",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "f61407a55f00",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "27f39cd73090",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "540500e1b237",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "2630c82b3c4e",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "An AI-connected CMS can save your team significant time by automatically creating social media posts and email paragraphs."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:10579",
+    "extractedAt": "2026-07-31T20:07:23.035Z"
+  }
+}

@@ -28,6 +28,7 @@ export const perspective = defineType({
     defineField({ name: 'featuredImage', type: 'figure' }),
     defineField({ name: 'body', type: 'bodyText' }),
     defineField({ name: 'seo', type: 'seo' }),
+    defineField({ name: 'migration', type: 'migration' }),
   ],
   orderings: [
     {

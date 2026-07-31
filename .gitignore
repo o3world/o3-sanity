@@ -25,3 +25,5 @@ packages/sanity/schema.json
 
 # claude worktrees
 .claude/worktrees/
+.vercel
+.env*

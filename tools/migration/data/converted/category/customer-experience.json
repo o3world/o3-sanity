@@ -1,0 +1,14 @@
+{
+  "_id": "category-wp-15",
+  "_type": "category",
+  "title": "Customer Experience",
+  "slug": {
+    "_type": "slug",
+    "current": "customer-experience"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:term:15",
+    "extractedAt": "2026-07-31T20:07:34.551Z"
+  }
+}

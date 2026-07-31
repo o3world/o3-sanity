@@ -1,0 +1,14 @@
+{
+  "_id": "category-wp-75",
+  "_type": "category",
+  "title": "AI",
+  "slug": {
+    "_type": "slug",
+    "current": "artificial-intelligence-ai"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:term:75",
+    "extractedAt": "2026-07-31T20:07:34.551Z"
+  }
+}

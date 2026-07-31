@@ -1,0 +1,28 @@
+{
+  "name": "@o3/migration",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "WordPress→Sanity migration pipeline (temporary — deleted post-migration). See docs/adr/0002, 0003.",
+  "scripts": {
+    "extract": "tsx src/extract.ts",
+    "convert": "tsx src/convert.ts",
+    "load": "sanity exec src/load.ts --with-user-token --",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@o3/sanity": "workspace:*",
+    "@portabletext/block-tools": "^5.1.12",
+    "@sanity/schema": "^6.8.0",
+    "jsdom": "^26.0.0",
+    "sanity": "6.4.0",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@o3/typescript-config": "workspace:*",
+    "@types/jsdom": "^27.0.0",
+    "@types/node": "^24.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}

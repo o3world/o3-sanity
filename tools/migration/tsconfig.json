@@ -1,0 +1,11 @@
+{
+  "extends": "@o3/typescript-config/base.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "types": ["node"],
+    "noEmit": true
+  },
+  "include": ["src", "sanity.cli.ts"],
+  "exclude": ["node_modules"]
+}

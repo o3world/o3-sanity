@@ -1,0 +1,14 @@
+{
+  "_id": "category-wp-1",
+  "_type": "category",
+  "title": "Uncategorized",
+  "slug": {
+    "_type": "slug",
+    "current": "uncategorized"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:term:1",
+    "extractedAt": "2026-07-31T20:07:34.551Z"
+  }
+}

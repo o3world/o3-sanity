@@ -1,0 +1,14 @@
+{
+  "_id": "category-wp-7",
+  "_type": "category",
+  "title": "Events",
+  "slug": {
+    "_type": "slug",
+    "current": "conferences-events"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:term:7",
+    "extractedAt": "2026-07-31T20:07:34.551Z"
+  }
+}

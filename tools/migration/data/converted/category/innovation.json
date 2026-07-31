@@ -1,0 +1,14 @@
+{
+  "_id": "category-wp-8",
+  "_type": "category",
+  "title": "Innovation",
+  "slug": {
+    "_type": "slug",
+    "current": "innovation"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:term:8",
+    "extractedAt": "2026-07-31T20:07:34.551Z"
+  }
+}

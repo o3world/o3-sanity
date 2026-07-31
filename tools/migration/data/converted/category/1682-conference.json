@@ -1,0 +1,14 @@
+{
+  "_id": "category-wp-86",
+  "_type": "category",
+  "title": "1682 Conference",
+  "slug": {
+    "_type": "slug",
+    "current": "1682-conference"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:term:86",
+    "extractedAt": "2026-07-31T20:07:34.550Z"
+  }
+}

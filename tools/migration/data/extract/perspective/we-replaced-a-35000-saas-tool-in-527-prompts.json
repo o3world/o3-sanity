@@ -1,0 +1,57 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-07-31T20:07:23.033Z"
+  },
+  "wpId": 10635,
+  "slug": "we-replaced-a-35000-saas-tool-in-527-prompts",
+  "title": "We replaced a $35,000 SaaS tool in 527 prompts",
+  "dateGmt": "2026-07-15 16:31:11",
+  "modifiedGmt": "2026-07-15 16:31:11",
+  "authorId": 22,
+  "categoryIds": [75, 8],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2026/07/Dialed_Lovable_Website_Image.png",
+    "alt": ""
+  },
+  "yoast": {
+    "title": "",
+    "description": "$127 in AI credits. Under 40 hours. Here's how we got an AI-built app from working prototype to something the whole company runs on."
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "We replaced a $35,000 SaaS tool in 527 prompts",
+      "heading_level": "h1",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "How O3 built “Dialed”, a custom resource planning and finance app, for $127 in AI credits, and what it proves about taking vibe-coded software to production."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h2>The gap that matters more than the savings</h2>\n<p>We were paying $35,000 a year for a resource planning and finance tool that solved a fraction of our needs, but never all of them. We replaced it with an app we built ourselves. Total build cost: 527 prompts, $127 in AI credits, and less than 40 hours of effort.</p>\n<p>The savings are real. But the money is not the most interesting part of this story. The interesting part is what it took to get an AI-built app from a working prototype to something an entire company runs on. That gap is where most vibe-coding stories fall apart. Ours did not, and I want to explain why.</p>\n<h2>Nothing should be sacred anymore. Nothing is &#8220;too big to cut.&#8221;</h2>\n<p>Like a lot of companies, we went line by line through our software spend this year. A pattern showed up fast. We were paying premium prices for tools that fit us at maybe 70 percent. The other 30 percent was workarounds, spreadsheets on the side, and features we paid for but never touched.</p>\n<p>Resource planning was our largest line-item and the tool we were most reliant on. The tool was expensive, and it still could not match how O3 and O3XO actually operate. Two lines of business, shared staff, project-based resource planning, and financial reporting that leadership needed cut a specific way. No off-the-shelf product was built for that. They never are. That is the whole problem with off-the-shelf.</p>\n<p>A year ago, the answer would have been &#8220;live with it.&#8221; Custom software was too expensive to justify an internal tool. That math has changed.</p>\n<h2>What we built instead</h2>\n<p>We call it Dialed, a name coined by O3’s own James Clair. It comes from golf: the feeling of getting dialed in on the range before a round. It’s where your game is on display for everyone to see. The feeling of an under-resourced pipeline project with alerts all over it is the same feeling as snap hooking one into the clubhouse. Not good.</p>\n<p>That is what we needed this tool to do. The things that need to be addressed are front and center with clear tweaks to get the ball back into the fairway.</p>\n<p>Dialed is our resource planning and financial operations app, built in Lovable and shaped around exactly how we work. It includes Slack integration for team allocations, financial planning reports for utilization and forecasting, and direct integrations with Harvest, HubSpot, and Bamboo so time, pipeline, and people data flow without manual exports.</p>\n<h2>Why it fits differently</h2>\n<p>None of these are groundbreaking features. Arguably, they are industry standard, at best.</p>\n<p>Every platform in this category has some version of resource planning, reporting, forecasting, and integrations. Dialed is different because it has the things we actually use, built the way we actually use them, and literally nothing we do not.</p>\n<p>No extra modules. No bloated workflows. No forcing our process through someone else’s product logic. The product bends to us, not the other way around.</p>\n<p>And when something needs to change, we can change it. As our team uses Dialed and gives feedback, we can quickly deploy fixes and enhancements in just a few prompts, from an MCP server to dark mode.</p>\n<p>For years, “enterprise” meant scale, security, and sophistication. Now, too often, it also means compromise: paying for features you do not use, adapting to workflows you did not design, and waiting on someone else’s roadmap.</p>\n<p>Building your own tool is not automatically the answer. Without the right internal knowledge, technical judgment, and operational discipline, it can create a different kind of mess. But when those pieces are in place, the result is not just cheaper software. It is better-fitting software.</p>\n<h2>The part everyone gets wrong about vibe coding</h2>\n<p>Here is where I need to be honest, because this is where the hype and the reality split.</p>\n<p>Getting a working prototype out of Lovable is genuinely fast. Anyone can do it. That is what the internet means when it talks about vibe coding, and it is also why the term has a credibility problem. A prototype that works in a demo is not a product your company can run its finances on.</p>\n<p>The gap between those two things is real. Security review. Access controls. Data handling. Deployment pipelines. Monitoring. The unglamorous engineering work that turns &#8220;this works&#8221; into &#8220;this is trusted.&#8221;</p>\n<p>So we built a process for it. O3 now has an enterprise-ready security and deployment framework specifically for taking Lovable apps from vibe-coded prototype to production-ready product. Dialed went through it. It is not a one-off. It is repeatable.</p>\n<p>I will also say the quiet part: we are in a unique position to do this. O3 has spent 21 years building digital products with a real engineering team. We know what production-grade means because we have shipped it for enterprise clients across construction, finance, life sciences, and more. The AI tools compress the build. The engineering discipline is what makes the result trustworthy. You need both.</p>\n<p>That is the honest answer to the vibe-coding skeptics. They are right that a prompt alone does not produce enterprise software, and the code may be viewed as “slop” by some. They are wrong that the gap cannot be closed. It can, and the way things are progressing with AI, they can faster than we all realize. It just takes a process and people who have done it before.</p>\n<h2>Where this goes next</h2>\n<p>First, Dialed itself. We built it for O3, but the problems it solves are not unique to us. Every service-based company fights the same resource planning and forecasting battles. We can see a world where we roll Dialed out to other companies, and we are exploring what that looks like.</p>\n<p>Second, and bigger: O3 is partnering with Lovable to bring this approach to our clients. In addition, they’ll be speaking at our <a href=\"https://www.o3world.com/1682-conference-ai-innovation/\">1682 Conference</a> in October, and featuring Dialed in an upcoming case study.  The same path we just walked, auditing SaaS spend, identifying the tools that do not fit, building custom replacements, and hardening them for production, is now something we can run for other organizations. We are excited about this one. It pairs Lovable&#8217;s build speed with the engineering and security rigor that enterprise teams require.</p>\n<h2>The question to ask about your own stack</h2>\n<p>Pull up your SaaS renewals for the next 12 months. Find the tools you pay the most for and love the least. The ones where your team has built workarounds, where the fit was never quite right, where you renew out of inertia.</p>\n<p>A year ago, replacing those tools was not worth the cost. Today, one of them cost us $127 and a few weeks of part-time attention to replace, and we ended up with software that fits us better than the thing it replaced. That trade is available to more companies than realize it.</p>\n<p>If you&#8217;re trying to figure out which tool in your stack is worth replacing, <a href=\"https://www.o3world.com/contact/\">let&#8217;s talk.</a></p>\n"
+      }
+    ],
+    "related_articles": [10380, 10367, 10427],
+    "author": [936]
+  }
+}

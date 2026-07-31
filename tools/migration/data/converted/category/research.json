@@ -1,0 +1,14 @@
+{
+  "_id": "category-wp-62",
+  "_type": "category",
+  "title": "Research",
+  "slug": {
+    "_type": "slug",
+    "current": "research"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:term:62",
+    "extractedAt": "2026-07-31T20:07:34.551Z"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-07-31T20:07:23.034Z"
+  },
+  "wpId": 10623,
+  "slug": "google-weighs-in-on-geo-what-just-changed-for-your-ai-search-strategy",
+  "title": "Google weighs in on GEO: What just changed for your AI search strategy",
+  "dateGmt": "2026-05-25 20:50:26",
+  "modifiedGmt": "2026-05-25 21:05:54",
+  "authorId": 20,
+  "categoryIds": [75, 62],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2026/05/bbefda06-561b-11f1-a227-22a6634659e7.avif",
+    "alt": "Two men looking at a report: Google Weighs in on GEO"
+  },
+  "yoast": {
+    "title": "",
+    "description": "Wondering about Google and GEO? Google has weighed in with its first official guide to optimizing for generative AI features."
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Google weighs in on GEO: What just changed for your AI search strategy",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Earlier this year, we wrote about the acronym storm swirling around AI search. AEO. GEO. GSO. LLMO. Everyone in the industry had a label and a theory, and most of us were openly building the plane while flying it."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h4>This past week, Google handed us a flight plan.</h4>\n<p>Google Search Central published its<a href=\"https://developers.google.com/search/docs/fundamentals/ai-optimization-guide\"> first official guide to optimizing for generative AI features,</a> covering AI Overviews and AI Mode. It&#8217;s worth reading in full. But if you&#8217;ve been making decisions about your AI search strategy based on what consultants and LinkedIn posts have been saying, including ours, there are a few things that just came into focus.</p>\n<p>Here&#8217;s what changed, and what didn&#8217;t.</p>\n<h2>How Google&#8217;s AI search actually works</h2>\n<p>Before getting to strategy, here&#8217;s how the system actually works. Google&#8217;s AI features run on two mechanics, and both sit on top of the regular search index.</p>\n<p><strong>Retrieval (also called RAG)</strong>. When you ask Google a question, the AI doesn&#8217;t invent an answer from training data. It pulls real pages from Google&#8217;s index, uses those pages to generate a response, and cites them with clickable links. The pages that get cited are the ones that already rank well in regular search.</p>\n<p><strong>Query fan-out.</strong> For each user question, Google quietly runs several related searches in the background — say, &#8220;best herbicides for lawns&#8221; and &#8220;remove weeds without chemicals&#8221; if you asked about lawn care — and combines the results before answering. One question becomes a small cluster of searches.</p>\n<p>The implication is straightforward: AI visibility depends almost entirely on regular search visibility. If your content already ranks and gets cited, the AI features will pull from it. If it doesn&#8217;t, no amount of AI-specific tactics will change that.</p>\n<h2>What Google says you can stop doing</h2>\n<p>This is the part that will surprise anyone who&#8217;s been told GEO is a brand-new discipline. Google explicitly lists tactics you do not need to do for AI search:</p>\n<ul>\n<li>Create llms.txt files or any other AI-specific markup</li>\n<li>Chunk your content into smaller pieces for &#8220;easier&#8221; AI consumption</li>\n<li>Rewrite your pages in special phrasings designed for AI systems</li>\n<li>Chase inauthentic mentions across the web</li>\n<li>Add structured data only for AI features. It&#8217;s still useful for rich results, just not required for AI.</li>\n</ul>\n<p>We&#8217;ve seen all five of these in pitches and proposals over the past year. Some are well-meaning. Some are not. Either way, Google has now publicly said they don&#8217;t move the needle for AI search.</p>\n<h2>What Google says actually works</h2>\n<p>The good news is that the things that work for AI search are the same things that build a durable brand on the open web.</p>\n<p><strong>Unique content with a point of view.</strong> Google&#8217;s number one lever, in their own words, is non-commodity content. &#8220;7 Tips for First-Time Homebuyers&#8221; doesn&#8217;t get cited. &#8220;Why we waived the inspection and saved money: a look inside the sewer line&#8221; does. First-hand experience and expert perspective win.</p>\n<p><strong>Clean technical foundations.</strong> Your pages have to be indexable and able to show with a snippet to even qualify for AI features. That means standard SEO discipline: clean crawling, semantic HTML, JavaScript handled correctly, good Core Web Vitals, and low duplication. Google Search Console is the diagnostic tool of choice.</p>\n<p><strong>Merchant Center and Google Business Profiles</strong>. Product listings and local business information feed directly into AI responses through these channels. If you run a transactional site or have a physical location, these are not optional.</p>\n<h2>The conversation is moving to agents</h2>\n<p>There&#8217;s one section of Google&#8217;s guide that points to genuinely new territory: AI agents. Google notes that browser-based agents are increasingly visiting sites to complete tasks like booking reservations, comparing product specifications, and completing checkouts. They point to web.dev&#8217;s <a href=\"https://web.dev/articles/ai-agent-site-ux\">agent-friendly website best practices</a> and call out emerging protocols like the Universal Commerce Protocol (UCP) as developments worth tracking.</p>\n<p>For brands with transactional or product-discovery flows, this is the most important frontier in the guide. The conversation is shifting from &#8220;how do I show up in AI Overviews&#8221; to &#8220;how do I make sure an AI agent can complete a purchase on my product page without breaking.&#8221;</p>\n<h2>What this means for your team</h2>\n<p>A few practical takeaways.</p>\n<p><strong>The acronym debate is mostly over, but the work isn&#8217;t.</strong> Call it GEO, AEO, or just SEO. What matters is whether your content is strong enough to be cited and your site is technical enough to be parsed by humans, search engines, and now agents.</p>\n<p><strong>Be skeptical of vendors selling AI-only tactics.</strong> If someone is pitching llms.txt files, content chunking, or &#8220;AI keyword&#8221; rewrites as a 2026 strategy, they&#8217;re selling something Google has explicitly said does not work.</p>\n<p><strong>Invest in content quality first.</strong> This is the single biggest lever Google identified. For most organizations, it&#8217;s also the hardest one. Which is why so many shortcuts exist for the other items on the list.</p>\n<p><strong>Watch the agent space</strong>. It&#8217;s still early, but if your business depends on transactions, the next twelve months of agent development matter more than the next twelve months of AI Overview tactics.</p>\n<h2>The bottom line</h2>\n<p>A few months ago, we wrote that everyone in this space was building the plane while flying it. That&#8217;s still mostly true. But Google just handed us a map of where the runways are.</p>\n<p>The takeaway isn&#8217;t that AI search strategy is simple. It&#8217;s that the work is the work: real expertise, real content, clean technology, and a willingness to invest in the parts of the web that don&#8217;t have shortcuts. That&#8217;s the kind of work O3 has been doing for twenty years. And it&#8217;s the kind of work we&#8217;re now doing with AI search visibility built in from the start.</p>\n<p>If you&#8217;re trying to figure out where to invest — and which parts of the GEO conversation to quietly retire <a href=\"https://www.o3world.com/contact/\">— we&#8217;d love to talk.</a></p>\n"
+      }
+    ],
+    "related_articles": [7757, 10304, 10427],
+    "author": [125]
+  }
+}

@@ -14,6 +14,9 @@
     },
     "packages/*": {
       "entry": ["src/index.ts", "src/**/*.stories.tsx", "sanity.cli.ts"]
+    },
+    "tools/migration": {
+      "entry": ["src/{extract,convert,load}.ts", "sanity.cli.ts"]
     }
   }
 }

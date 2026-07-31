@@ -12,6 +12,7 @@ export default tseslint.config(
       '**/dist/**',
       '**/.turbo/**',
       '**/.sanity/**',
+      '**/.vercel/**',
       '**/node_modules/**',
       '**/storybook-static/**',
       '**/.storybook/**',

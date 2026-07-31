@@ -1,0 +1,14 @@
+{
+  "_id": "category-wp-10",
+  "_type": "category",
+  "title": "Life at O3",
+  "slug": {
+    "_type": "slug",
+    "current": "life-at-o3"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:term:10",
+    "extractedAt": "2026-07-31T20:07:34.551Z"
+  }
+}

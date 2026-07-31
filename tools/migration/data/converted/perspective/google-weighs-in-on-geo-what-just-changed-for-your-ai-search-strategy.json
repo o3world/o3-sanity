@@ -1,0 +1,633 @@
+{
+  "_id": "perspective-wp-10623",
+  "_type": "perspective",
+  "title": "Google weighs in on GEO: What just changed for your AI search strategy",
+  "slug": {
+    "_type": "slug",
+    "current": "google-weighs-in-on-geo-what-just-changed-for-your-ai-search-strategy"
+  },
+  "excerpt": "Earlier this year, we wrote about the acronym storm swirling around AI search. AEO. GEO. GSO. LLMO. Everyone in the industry had a label and a theory, and most of us were openly building the plane while flying it.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-20"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-75",
+      "_key": "cat-75"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-62",
+      "_key": "cat-62"
+    }
+  ],
+  "publishedAt": "2026-05-25T20:50:26Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "http://www.o3world.com/wp-content/uploads/2026/05/bbefda06-561b-11f1-a227-22a6634659e7.avif"
+    },
+    "alt": "Two men looking at a report: Google Weighs in on GEO"
+  },
+  "body": [
+    {
+      "_key": "01d384a60353",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This past week, Google handed us a flight plan.",
+          "_key": "138ae1300248"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "08c38d6adab0",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Google Search Central published its",
+          "_key": "883bf8cd3f79"
+        },
+        {
+          "_type": "span",
+          "marks": ["03545b3462e0"],
+          "text": " first official guide to optimizing for generative AI features,",
+          "_key": "6dfb6c43bb29"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " covering AI Overviews and AI Mode. It’s worth reading in full. But if you’ve been making decisions about your AI search strategy based on what consultants and LinkedIn posts have been saying, including ours, there are a few things that just came into focus.",
+          "_key": "ce45f1ec6416"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "03545b3462e0",
+          "_type": "link",
+          "href": "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "c02e9d14764a",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Here’s what changed, and what didn’t.",
+          "_key": "64ea731c22e4"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "30babf6654aa",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "How Google’s AI search actually works",
+          "_key": "a6425ab63238"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "2c4ad8f5d8b1",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Before getting to strategy, here’s how the system actually works. Google’s AI features run on two mechanics, and both sit on top of the regular search index.",
+          "_key": "213a9f14006c"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "fee6a28a9bc9",
+      "children": [
+        {
+          "_type": "span",
+          "marks": ["strong"],
+          "text": "Retrieval (also called RAG)",
+          "_key": "cb5b2398bd51"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". When you ask Google a question, the AI doesn’t invent an answer from training data. It pulls real pages from Google’s index, uses those pages to generate a response, and cites them with clickable links. The pages that get cited are the ones that already rank well in regular search.",
+          "_key": "044b8a1ade92"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "9661c3a03b2f",
+      "children": [
+        {
+          "_type": "span",
+          "marks": ["strong"],
+          "text": "Query fan-out.",
+          "_key": "be6e62e8ed5a"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " For each user question, Google quietly runs several related searches in the background — say, “best herbicides for lawns” and “remove weeds without chemicals” if you asked about lawn care — and combines the results before answering. One question becomes a small cluster of searches.",
+          "_key": "507c722bf58f"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "cae26e87d570",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The implication is straightforward: AI visibility depends almost entirely on regular search visibility. If your content already ranks and gets cited, the AI features will pull from it. If it doesn’t, no amount of AI-specific tactics will change that.",
+          "_key": "24f700fa37b2"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "e4fdf3018a0e",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What Google says you can stop doing",
+          "_key": "03641bfee310"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "37dedc306b02",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This is the part that will surprise anyone who’s been told GEO is a brand-new discipline. Google explicitly lists tactics you do not need to do for AI search:",
+          "_key": "4c5c515fc5fa"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "b0cf2cf66ada",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Create llms.txt files or any other AI-specific markup",
+          "_key": "de8fe513bd99"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "831e26aba14c",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Chunk your content into smaller pieces for “easier” AI consumption",
+          "_key": "5592d77d1e9d"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "293ec7974923",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Rewrite your pages in special phrasings designed for AI systems",
+          "_key": "3fc4a9482325"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "1e6de7dae422",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Chase inauthentic mentions across the web",
+          "_key": "879eb2f5320c"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "f287dc38048a",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Add structured data only for AI features. It’s still useful for rich results, just not required for AI.",
+          "_key": "906e9086b47e"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "a60a896aad08",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We’ve seen all five of these in pitches and proposals over the past year. Some are well-meaning. Some are not. Either way, Google has now publicly said they don’t move the needle for AI search.",
+          "_key": "e8f23b7aa3b6"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "2e3c52c2f2fe",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What Google says actually works",
+          "_key": "034d7ff4b7ae"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "e125e2ff9718",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The good news is that the things that work for AI search are the same things that build a durable brand on the open web.",
+          "_key": "4b58869e1c80"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "8611a030e70b",
+      "children": [
+        {
+          "_type": "span",
+          "marks": ["strong"],
+          "text": "Unique content with a point of view.",
+          "_key": "1250c3997c33"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " Google’s number one lever, in their own words, is non-commodity content. “7 Tips for First-Time Homebuyers” doesn’t get cited. “Why we waived the inspection and saved money: a look inside the sewer line” does. First-hand experience and expert perspective win.",
+          "_key": "1c8d1fc3077a"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "55efe3dc1b59",
+      "children": [
+        {
+          "_type": "span",
+          "marks": ["strong"],
+          "text": "Clean technical foundations.",
+          "_key": "65aea567be28"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " Your pages have to be indexable and able to show with a snippet to even qualify for AI features. That means standard SEO discipline: clean crawling, semantic HTML, JavaScript handled correctly, good Core Web Vitals, and low duplication. Google Search Console is the diagnostic tool of choice.",
+          "_key": "f24c191c41d7"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "f3030cdbdc92",
+      "children": [
+        {
+          "_type": "span",
+          "marks": ["strong"],
+          "text": "Merchant Center and Google Business Profiles",
+          "_key": "eeb2c3be2d43"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". Product listings and local business information feed directly into AI responses through these channels. If you run a transactional site or have a physical location, these are not optional.",
+          "_key": "b870419fcfbc"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "abe8fffe1566",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The conversation is moving to agents",
+          "_key": "0219290001e5"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "70338091f506",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "There’s one section of Google’s guide that points to genuinely new territory: AI agents. Google notes that browser-based agents are increasingly visiting sites to complete tasks like booking reservations, comparing product specifications, and completing checkouts. They point to web.dev’s ",
+          "_key": "a6a45f164caa"
+        },
+        {
+          "_type": "span",
+          "marks": ["d9786be14643"],
+          "text": "agent-friendly website best practices",
+          "_key": "75997c55bdf2"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and call out emerging protocols like the Universal Commerce Protocol (UCP) as developments worth tracking.",
+          "_key": "d12de3eefb57"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "d9786be14643",
+          "_type": "link",
+          "href": "https://web.dev/articles/ai-agent-site-ux"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "02e48812e571",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "For brands with transactional or product-discovery flows, this is the most important frontier in the guide. The conversation is shifting from “how do I show up in AI Overviews” to “how do I make sure an AI agent can complete a purchase on my product page without breaking.”",
+          "_key": "c66881056ff6"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "c058fb151506",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What this means for your team",
+          "_key": "db9b35ed8d85"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "6aaedbe1cb05",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A few practical takeaways.",
+          "_key": "bc9825e84cff"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "a75fb120ca65",
+      "children": [
+        {
+          "_type": "span",
+          "marks": ["strong"],
+          "text": "The acronym debate is mostly over, but the work isn’t.",
+          "_key": "a4996c5adc20"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " Call it GEO, AEO, or just SEO. What matters is whether your content is strong enough to be cited and your site is technical enough to be parsed by humans, search engines, and now agents.",
+          "_key": "e1f25a2b9983"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "5acec8c10e06",
+      "children": [
+        {
+          "_type": "span",
+          "marks": ["strong"],
+          "text": "Be skeptical of vendors selling AI-only tactics.",
+          "_key": "b316f9cbe4be"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " If someone is pitching llms.txt files, content chunking, or “AI keyword” rewrites as a 2026 strategy, they’re selling something Google has explicitly said does not work.",
+          "_key": "76f6e5e60f7a"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "89b5f2abcc4b",
+      "children": [
+        {
+          "_type": "span",
+          "marks": ["strong"],
+          "text": "Invest in content quality first.",
+          "_key": "e270550609c1"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " This is the single biggest lever Google identified. For most organizations, it’s also the hardest one. Which is why so many shortcuts exist for the other items on the list.",
+          "_key": "d008009402df"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "3fac9275534e",
+      "children": [
+        {
+          "_type": "span",
+          "marks": ["strong"],
+          "text": "Watch the agent space",
+          "_key": "165861f332c9"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". It’s still early, but if your business depends on transactions, the next twelve months of agent development matter more than the next twelve months of AI Overview tactics.",
+          "_key": "e2e770a7dd7a"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "886699f9d6de",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The bottom line",
+          "_key": "5a1625676de2"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "9b99a462795e",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A few months ago, we wrote that everyone in this space was building the plane while flying it. That’s still mostly true. But Google just handed us a map of where the runways are.",
+          "_key": "c27e1b900c60"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "176db60fe002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The takeaway isn’t that AI search strategy is simple. It’s that the work is the work: real expertise, real content, clean technology, and a willingness to invest in the parts of the web that don’t have shortcuts. That’s the kind of work O3 has been doing for twenty years. And it’s the kind of work we’re now doing with AI search visibility built in from the start.",
+          "_key": "b830aa374459"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "31ae5affcdb2",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If you’re trying to figure out where to invest — and which parts of the GEO conversation to quietly retire ",
+          "_key": "f98be9420e6d"
+        },
+        {
+          "_type": "span",
+          "marks": ["f960edd2c5b3"],
+          "text": "— we’d love to talk.",
+          "_key": "4e2bd196abc5"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "f960edd2c5b3",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "Wondering about Google and GEO? Google has weighed in with its first official guide to optimizing for generative AI features."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:10623",
+    "extractedAt": "2026-07-31T20:07:23.034Z"
+  }
+}

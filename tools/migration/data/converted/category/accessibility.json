@@ -1,0 +1,14 @@
+{
+  "_id": "category-wp-63",
+  "_type": "category",
+  "title": "Accessibility",
+  "slug": {
+    "_type": "slug",
+    "current": "accessibility"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:term:63",
+    "extractedAt": "2026-07-31T20:07:34.550Z"
+  }
+}
