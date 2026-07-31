@@ -14,10 +14,13 @@ import { join } from 'node:path'
 
 import type { ConversionIssue } from './lib/htmlToPortableText'
 import { CONVERTED_DIR, EXTRACT_DIR, writeJson } from './lib/paths'
+import type { WpChrome } from './lib/chrome'
 import type { WpSiteSeo } from './lib/yoast'
 import { mapCategory, type WpCategory } from './map/category'
 import { mapPerson, type WpPerson } from './map/person'
 import { mapPerspective, type WpPerspective } from './map/perspective'
+import { mapSiteSettings } from './map/siteSettings'
+import type { ExtractMeta } from './map/types'
 
 function readDir<T>(type: string): T[] {
   const dir = join(EXTRACT_DIR, type)
@@ -43,6 +46,13 @@ function readSiteSeo(): WpSiteSeo {
 
 const site = readSiteSeo()
 
+/** The site chrome extract (#19). Absent means the extract predates it. */
+function readChrome(): (WpChrome & { _meta: ExtractMeta }) | null {
+  const path = join(EXTRACT_DIR, 'site', 'chrome.json')
+  if (!existsSync(path)) return null
+  return JSON.parse(readFileSync(path, 'utf8')) as WpChrome & { _meta: ExtractMeta }
+}
+
 const failures: { slug: string; issues: readonly ConversionIssue[] }[] = []
 const notes: { slug: string; notes: readonly ConversionIssue[] }[] = []
 let written = 0
@@ -55,6 +65,16 @@ function emit(type: string, slug: string, doc: unknown) {
 /** Record anything a successful mapping normalized, for the run's report. */
 function note(slug: string, mapped: { notes?: readonly ConversionIssue[] }) {
   if (mapped.notes?.length) notes.push({ slug, notes: mapped.notes })
+}
+
+// --- the siteSettings singleton: nav, footer, socials, default SEO ---
+const chrome = readChrome()
+if (chrome) {
+  const result = mapSiteSettings(chrome, site)
+  if (result.ok) emit('siteSettings', 'settings', result.doc)
+  else failures.push({ slug: 'siteSettings', issues: result.issues })
+} else {
+  console.warn('no data/extract/site/chrome.json — skipping siteSettings; re-run extract')
 }
 
 // --- categories (all) ---

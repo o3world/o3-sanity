@@ -50,5 +50,9 @@
   "https://www.o3world.com/wp-content/uploads/2026/04/c9c10708-3a97-11f1-b648-ded8ac27d679.avif": {
     "sha256": "171034438586100536952b4515ee24824c544f14",
     "assetId": "image-171034438586100536952b4515ee24824c544f14-600x600-avif"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/O3.png": {
+    "sha256": "cda7d3e701f939494dee7ef2bfccb58f137624d6",
+    "assetId": "image-cda7d3e701f939494dee7ef2bfccb58f137624d6-1200x630-png"
   }
 }

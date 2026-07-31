@@ -8,6 +8,7 @@ import type { WpSeo } from './lib/yoast'
 import { categoryDoc } from './map/category'
 import { checkPathParity } from './map/paths'
 import { personDoc } from './map/person'
+import { siteSettingsDoc } from './map/siteSettings'
 import { perspectiveDoc } from './map/perspective'
 
 /**
@@ -34,7 +35,8 @@ function readType<T>(type: string): { file: string; doc: T }[] {
 const perspectives = readType<Record<string, unknown>>('perspective')
 const categories = readType<Record<string, unknown>>('category')
 const persons = readType<Record<string, unknown>>('person')
-const all = [...perspectives, ...categories, ...persons]
+const siteSettings = readType<Record<string, unknown>>('siteSettings')
+const all = [...perspectives, ...categories, ...persons, ...siteSettings]
 
 /**
  * The closed set of block types the `bodyText` schema allows. A converter that
@@ -51,6 +53,13 @@ describe('committed conversion output', () => {
   it('validates every perspective against the schema gate', () => {
     for (const { file, doc } of perspectives) {
       const parsed = perspectiveDoc.safeParse(doc)
+      expect(parsed.success, `${file}: ${JSON.stringify(parsed.error?.issues)}`).toBe(true)
+    }
+  })
+
+  it('validates the siteSettings singleton against its schema gate', () => {
+    for (const { file, doc } of siteSettings) {
+      const parsed = siteSettingsDoc.safeParse(doc)
       expect(parsed.success, `${file}: ${JSON.stringify(parsed.error?.issues)}`).toBe(true)
     }
   })
@@ -117,7 +126,9 @@ describe('committed conversion output', () => {
   it('records provenance on every document so a doc traces back to WordPress', () => {
     for (const { file, doc } of all) {
       const migration = doc.migration as { sourceId?: string; extractedAt?: string }
-      expect(migration.sourceId, file).toMatch(/^wp:(post|term|user):\d+$/)
+      // Documents are keyed by WordPress id; the siteSettings singleton has
+      // no id of its own — it is assembled from menus and the options page.
+      expect(migration.sourceId, file).toMatch(/^wp:(post|term|user):\d+$|^wp:site:chrome$/)
       expect(migration.extractedAt, file).toMatch(/^\d{4}-\d{2}-\d{2}T/)
     }
   })

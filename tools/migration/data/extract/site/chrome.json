@@ -1,0 +1,126 @@
+{
+  "_meta": {
+    "type": "siteChrome",
+    "source": "o3-world.live",
+    "extractedAt": "2026-07-31T23:51:24.267Z"
+  },
+  "menus": {
+    "footer-navigation": {
+      "name": "Footer Navigation",
+      "items": [
+        {
+          "title": "Careers",
+          "url": "http://www.o3world.com/careers/",
+          "type": "post_type",
+          "object": "page",
+          "parent": 0
+        },
+        {
+          "title": "Privacy policy",
+          "url": "http://www.o3world.com/privacy-policy/",
+          "type": "post_type",
+          "object": "page",
+          "parent": 0
+        },
+        {
+          "title": "Accessibility statement",
+          "url": "http://www.o3world.com/accessibility-statement/",
+          "type": "post_type",
+          "object": "page",
+          "parent": 0
+        }
+      ]
+    },
+    "primary-navigation": {
+      "name": "Primary Navigation",
+      "items": [
+        {
+          "title": "Solutions",
+          "url": "http://www.o3world.com/solutions/",
+          "type": "post_type",
+          "object": "page",
+          "parent": 0
+        },
+        {
+          "title": "Work",
+          "url": "http://www.o3world.com/work/",
+          "type": "post_type",
+          "object": "page",
+          "parent": 0
+        },
+        {
+          "title": "About",
+          "url": "http://www.o3world.com/about/",
+          "type": "post_type",
+          "object": "page",
+          "parent": 0
+        },
+        {
+          "title": "Perspectives",
+          "url": "http://www.o3world.com/perspectives/",
+          "type": "post_type",
+          "object": "page",
+          "parent": 0
+        },
+        {
+          "title": "Contact",
+          "url": "http://www.o3world.com/contact/",
+          "type": "post_type",
+          "object": "page",
+          "parent": 0
+        }
+      ]
+    },
+    "secondary-navigation": {
+      "name": "Secondary Navigation",
+      "items": [
+        {
+          "title": "Digital experience consulting",
+          "url": "http://www.o3world.com/solutions/digital-experience-consulting-services/",
+          "type": "post_type",
+          "object": "page",
+          "parent": 0
+        },
+        {
+          "title": "AI solutions",
+          "url": "https://www.o3xo.ai/",
+          "type": "custom",
+          "object": "custom",
+          "parent": 0
+        },
+        {
+          "title": "Data, design + development",
+          "url": "http://www.o3world.com/solutions/conversion-rate-optimization-consultant/",
+          "type": "post_type",
+          "object": "page",
+          "parent": 0
+        },
+        {
+          "title": "1682 conference",
+          "url": "http://www.o3world.com/1682-conference-ai-innovation/",
+          "type": "post_type",
+          "object": "page",
+          "parent": 0
+        }
+      ]
+    }
+  },
+  "options": {
+    "about": "<p>O3 helps organizations unlock growth and streamline operations through smart strategy, human-centered design, and integrated technology. We&#8217;re also the force behind the <a href=\"https://www.o3world.com/1682-conference/\">1682 Conference</a>, where leaders explore how <a href=\"https://www.o3world.com/solutions/ai-solutions/\">AI</a> shapes profit and process. Learn more about <a href=\"https://www.o3world.com/work/\">our work</a> and innovation.</p>\n",
+    "address": "1339 Frankford Ave, Suite 3<br />\r\nPhiladelphia, PA 19125",
+    "email": "hello@o3world.com",
+    "phone": "+12155924739",
+    "social": [
+      {
+        "label": "LinkedIn",
+        "key": "linkedin",
+        "url": "https://www.linkedin.com/company/o3-world/"
+      },
+      {
+        "label": "Instagram",
+        "key": "instagram",
+        "url": "https://www.instagram.com/o3world/"
+      }
+    ]
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "_id": "siteSettings",
+  "_type": "siteSettings",
+  "title": "O3",
+  "perspectivesLabel": "Insights",
+  "navItems": [
+    {
+      "_type": "cta",
+      "_key": "nav-0",
+      "label": "Services",
+      "href": "/solutions"
+    },
+    {
+      "_type": "cta",
+      "_key": "nav-1",
+      "label": "Work",
+      "href": "/work"
+    },
+    {
+      "_type": "cta",
+      "_key": "nav-2",
+      "label": "About",
+      "href": "/about"
+    },
+    {
+      "_type": "cta",
+      "_key": "nav-3",
+      "label": "Insights",
+      "href": "/perspectives"
+    }
+  ],
+  "primaryCta": {
+    "_type": "cta",
+    "label": "Let’s talk",
+    "href": "/contact",
+    "variant": "brand"
+  },
+  "footerTagline": "Strategy, design, engineering, and AI under one roof.",
+  "footerGroups": [
+    {
+      "_type": "footerGroup",
+      "_key": "group-0",
+      "label": "Company",
+      "links": [
+        {
+          "_type": "cta",
+          "_key": "g0-0",
+          "label": "Work",
+          "href": "/work",
+          "variant": "inverse"
+        },
+        {
+          "_type": "cta",
+          "_key": "g0-1",
+          "label": "About",
+          "href": "/about",
+          "variant": "inverse"
+        },
+        {
+          "_type": "cta",
+          "_key": "g0-2",
+          "label": "Services",
+          "href": "/solutions",
+          "variant": "inverse"
+        },
+        {
+          "_type": "cta",
+          "_key": "g0-3",
+          "label": "Insights",
+          "href": "/perspectives",
+          "variant": "inverse"
+        },
+        {
+          "_type": "cta",
+          "_key": "g0-4",
+          "label": "Careers",
+          "href": "/careers",
+          "variant": "inverse"
+        }
+      ]
+    },
+    {
+      "_type": "footerGroup",
+      "_key": "group-1",
+      "label": "Everything else",
+      "links": [
+        {
+          "_type": "cta",
+          "_key": "g1-0",
+          "label": "1682 conference",
+          "href": "/1682-conference-ai-innovation",
+          "variant": "inverse"
+        },
+        {
+          "_type": "cta",
+          "_key": "g1-1",
+          "label": "O3XO",
+          "href": "https://www.o3xo.ai/",
+          "variant": "inverse"
+        }
+      ]
+    }
+  ],
+  "socialsLabel": "Socials",
+  "socialLinks": [
+    {
+      "_type": "socialLink",
+      "_key": "social-0",
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/company/o3-world/"
+    },
+    {
+      "_type": "socialLink",
+      "_key": "social-1",
+      "label": "Instagram",
+      "url": "https://www.instagram.com/o3world/"
+    }
+  ],
+  "legalLinks": [
+    {
+      "_type": "cta",
+      "_key": "legal-0",
+      "label": "Privacy policy",
+      "href": "/privacy-policy",
+      "variant": "inverse"
+    },
+    {
+      "_type": "cta",
+      "_key": "legal-1",
+      "label": "Accessibility statement",
+      "href": "/accessibility-statement",
+      "variant": "inverse"
+    }
+  ],
+  "legalName": "O3 World, LLC",
+  "copyrightNote": "Go birds.",
+  "defaultSeo": {
+    "description": "Digital experience consultants",
+    "ogImage": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/O3.png"
+    }
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:site:chrome",
+    "extractedAt": "2026-07-31T23:51:24.267Z"
+  }
+}

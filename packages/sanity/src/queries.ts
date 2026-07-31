@@ -87,8 +87,12 @@ export const SITE_SETTINGS_QUERY = defineQuery(`*[_type == "siteSettings"][0]{
   navItems[]{..., ${CTA_TARGET}},
   primaryCta{..., ${CTA_TARGET}},
   footerTagline,
-  footerLinks[]{..., ${CTA_TARGET}},
+  footerGroups[]{..., links[]{..., ${CTA_TARGET}}},
+  socialsLabel,
   socialLinks,
+  legalLinks[]{..., ${CTA_TARGET}},
+  legalName,
+  copyrightNote,
   defaultSeo
 }`)
 

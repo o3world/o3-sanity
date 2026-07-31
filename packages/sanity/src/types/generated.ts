@@ -45,17 +45,30 @@ export type SiteSettings = {
   >
   primaryCta?: Cta
   footerTagline?: string
-  footerLinks?: Array<
-    {
-      _key: string
-    } & Cta
-  >
+  footerGroups?: Array<{
+    label?: string
+    links?: Array<
+      {
+        _key: string
+      } & Cta
+    >
+    _type: 'footerGroup'
+    _key: string
+  }>
+  socialsLabel?: string
   socialLinks?: Array<{
     label?: string
     url?: string
     _type: 'socialLink'
     _key: string
   }>
+  legalLinks?: Array<
+    {
+      _key: string
+    } & Cta
+  >
+  legalName?: string
+  copyrightNote?: string
   defaultSeo?: Seo
   migration?: Migration
 }
@@ -714,7 +727,7 @@ export type AllSanitySchemaTypes =
 
 // Source: src/queries.ts
 // Variable: SITE_SETTINGS_QUERY
-// Query: *[_type == "siteSettings"][0]{  title,  perspectivesLabel,  navItems[]{..., "target": target->{_type, title, "slug": slug.current}},  primaryCta{..., "target": target->{_type, title, "slug": slug.current}},  footerTagline,  footerLinks[]{..., "target": target->{_type, title, "slug": slug.current}},  socialLinks,  defaultSeo}
+// Query: *[_type == "siteSettings"][0]{  title,  perspectivesLabel,  navItems[]{..., "target": target->{_type, title, "slug": slug.current}},  primaryCta{..., "target": target->{_type, title, "slug": slug.current}},  footerTagline,  footerGroups[]{..., links[]{..., "target": target->{_type, title, "slug": slug.current}}},  socialsLabel,  socialLinks,  legalLinks[]{..., "target": target->{_type, title, "slug": slug.current}},  legalName,  copyrightNote,  defaultSeo}
 export type SITE_SETTINGS_QUERY_RESULT = {
   title: string | null
   perspectivesLabel: string | null
@@ -766,7 +779,43 @@ export type SITE_SETTINGS_QUERY_RESULT = {
     variant?: 'brand' | 'ghost' | 'inverse'
   } | null
   footerTagline: string | null
-  footerLinks: Array<{
+  footerGroups: Array<{
+    label?: string
+    links: Array<{
+      _key: string
+      _type: 'cta'
+      label?: string
+      target:
+        | {
+            _type: 'caseStudy'
+            title: string | null
+            slug: string | null
+          }
+        | {
+            _type: 'page'
+            title: string | null
+            slug: string | null
+          }
+        | {
+            _type: 'perspective'
+            title: string | null
+            slug: string | null
+          }
+        | null
+      href?: string
+      variant?: 'brand' | 'ghost' | 'inverse'
+    }> | null
+    _type: 'footerGroup'
+    _key: string
+  }> | null
+  socialsLabel: string | null
+  socialLinks: Array<{
+    label?: string
+    url?: string
+    _type: 'socialLink'
+    _key: string
+  }> | null
+  legalLinks: Array<{
     _key: string
     _type: 'cta'
     label?: string
@@ -790,12 +839,8 @@ export type SITE_SETTINGS_QUERY_RESULT = {
     href?: string
     variant?: 'brand' | 'ghost' | 'inverse'
   }> | null
-  socialLinks: Array<{
-    label?: string
-    url?: string
-    _type: 'socialLink'
-    _key: string
-  }> | null
+  legalName: string | null
+  copyrightNote: string | null
   defaultSeo: Seo | null
 } | null
 
@@ -1752,7 +1797,7 @@ export type SITEMAP_QUERY_RESULT = {
 import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
-    '*[_type == "siteSettings"][0]{\n  title,\n  perspectivesLabel,\n  navItems[]{..., "target": target->{_type, title, "slug": slug.current}},\n  primaryCta{..., "target": target->{_type, title, "slug": slug.current}},\n  footerTagline,\n  footerLinks[]{..., "target": target->{_type, title, "slug": slug.current}},\n  socialLinks,\n  defaultSeo\n}': SITE_SETTINGS_QUERY_RESULT
+    '*[_type == "siteSettings"][0]{\n  title,\n  perspectivesLabel,\n  navItems[]{..., "target": target->{_type, title, "slug": slug.current}},\n  primaryCta{..., "target": target->{_type, title, "slug": slug.current}},\n  footerTagline,\n  footerGroups[]{..., links[]{..., "target": target->{_type, title, "slug": slug.current}}},\n  socialsLabel,\n  socialLinks,\n  legalLinks[]{..., "target": target->{_type, title, "slug": slug.current}},\n  legalName,\n  copyrightNote,\n  defaultSeo\n}': SITE_SETTINGS_QUERY_RESULT
     '*[_type == "perspective" && slug.current == $slug][0]{\n  \n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  "author": author->{name, title},\n  "categories": categories[]->{title, "slug": slug.current}\n,\n  body,\n  seo\n}': PERSPECTIVE_QUERY_RESULT
     '*[_type == "perspective" && defined(slug.current)].slug.current': PERSPECTIVE_SLUGS_QUERY_RESULT
     '{\n  "items": *[_type == "perspective"] | order(publishedAt desc) [$offset...$end]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  "author": author->{name, title},\n  "categories": categories[]->{title, "slug": slug.current}\n},\n  "total": count(*[_type == "perspective"])\n}': PERSPECTIVES_PAGE_QUERY_RESULT

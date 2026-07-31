@@ -74,7 +74,33 @@ export const siteSettings = defineType({
     defineField({ name: 'navItems', type: 'array', of: [defineArrayMember({ type: 'cta' })] }),
     defineField({ name: 'primaryCta', type: 'cta', description: 'The nav’s "Let’s talk" button.' }),
     defineField({ name: 'footerTagline', type: 'text', rows: 2 }),
-    defineField({ name: 'footerLinks', type: 'array', of: [defineArrayMember({ type: 'cta' })] }),
+    /**
+     * The footer's labelled link columns, in order. The prototype's footer is
+     * grouped ("Company", "Everything else"), not a flat list — a single
+     * `footerLinks` array could not express it.
+     */
+    defineField({
+      name: 'footerGroups',
+      title: 'Footer link columns',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'footerGroup',
+          fields: [
+            defineField({ name: 'label', type: 'string', validation: (rule) => rule.required() }),
+            defineField({ name: 'links', type: 'array', of: [defineArrayMember({ type: 'cta' })] }),
+          ],
+          preview: { select: { title: 'label' } },
+        }),
+      ],
+    }),
+    defineField({
+      name: 'socialsLabel',
+      type: 'string',
+      initialValue: 'Socials',
+      description: 'Heading over the social links column.',
+    }),
     defineField({
       name: 'socialLinks',
       type: 'array',
@@ -88,6 +114,22 @@ export const siteSettings = defineType({
           ],
         }),
       ],
+    }),
+    defineField({
+      name: 'legalLinks',
+      type: 'array',
+      of: [defineArrayMember({ type: 'cta' })],
+      description: 'Privacy, accessibility — the small print row beside the copyright.',
+    }),
+    defineField({
+      name: 'legalName',
+      type: 'string',
+      description: 'The registered entity in the copyright line. The year is added automatically.',
+    }),
+    defineField({
+      name: 'copyrightNote',
+      type: 'string',
+      description: 'Anything after "All rights reserved." — the prototype signs off "Go birds."',
     }),
     defineField({ name: 'defaultSeo', type: 'seo' }),
     defineField({ name: 'migration', type: 'migration' }),

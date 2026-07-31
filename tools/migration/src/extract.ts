@@ -12,6 +12,7 @@ import { join } from 'node:path'
 
 import { EXTRACT_DIR, writeJson } from './lib/paths'
 import { SOURCE, wpEval } from './lib/wp'
+import { MENUS_PHP, SITE_OPTIONS_PHP, type WpChrome } from './lib/chrome'
 import { YOAST_SITE_PHP, yoastPhp, type WpSeo, type WpSiteSeo } from './lib/yoast'
 
 type WpPost = {
@@ -147,10 +148,26 @@ function extractSiteSeo() {
   return site
 }
 
+/**
+ * The site chrome (#19): nav menus and the ACF options page. Everything that
+ * wraps the content and belongs to the `siteSettings` singleton.
+ */
+function extractChrome() {
+  const chrome = wpEval<WpChrome>(
+    `echo json_encode(["menus" => ${MENUS_PHP}, "options" => ${SITE_OPTIONS_PHP}]);`,
+  )
+  writeJson(join(EXTRACT_DIR, 'site', 'chrome.json'), {
+    _meta: { type: 'siteChrome', source: SOURCE, extractedAt: new Date().toISOString() },
+    ...chrome,
+  })
+  return Object.keys(chrome.menus).length
+}
+
 const site = extractSiteSeo()
+const nMenus = extractChrome()
 const nPosts = extractPosts()
 const nUsers = extractUsers()
 const nCats = extractCategories()
 console.log(
-  `done: ${nPosts} posts, ${nUsers} users, ${nCats} categories, site seo (${site.siteName}) → ${EXTRACT_DIR}`,
+  `done: ${nPosts} posts, ${nUsers} users, ${nCats} categories, ${nMenus} menus, site seo (${site.siteName}) → ${EXTRACT_DIR}`,
 )
