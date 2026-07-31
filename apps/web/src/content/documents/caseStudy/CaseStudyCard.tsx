@@ -8,10 +8,10 @@ import type { SectionProps } from '@/content/blocks/sectionTypes'
 
 /**
  * The case-study card shape — the `CASE_STUDY_CARD` projection, pinned to
- * the caseShowcaseBlock's dereferenced references.
+ * the caseShowcaseSection's dereferenced references.
  */
 export type CaseStudyCardData = NonNullable<
-  SectionProps<'caseShowcaseBlock'>['caseStudies']
+  SectionProps<'caseShowcaseSection'>['caseStudies']
 >[number]
 
 /** Eyebrow first half: industry titles; second half: the industryDetail string. */

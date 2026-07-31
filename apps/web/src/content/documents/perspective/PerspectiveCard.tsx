@@ -11,7 +11,7 @@ import type { SectionProps } from '@/content/blocks/sectionTypes'
  * fragment so they're structurally assignable.
  */
 export type PerspectiveCardData = NonNullable<
-  SectionProps<'perspectivesCarouselBlock'>['latest']
+  SectionProps<'perspectivesCarouselSection'>['latest']
 >[number]
 
 export function PerspectiveCard({

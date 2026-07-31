@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
-import { HeroBlock } from './HeroBlock'
+import { HeroSection } from './HeroSection'
 
 /**
  * The first section-block story, and the pattern the wireframe build-out
@@ -8,15 +8,15 @@ import { HeroBlock } from './HeroBlock'
  *
  * Every story here is also a test — the `stories` layer mounts each one in
  * real Chromium and axe-scans it (ADR 0004), so a block with stories needs no
- * separate test file. Props are typed through `SectionProps<'heroBlock'>` via
+ * separate test file. Props are typed through `SectionProps<'heroSection'>` via
  * the component, so a schema change that alters the block's shape breaks this
  * file at compile time.
  */
 const meta = {
-  title: 'Content/Blocks/Section/HeroBlock',
-  component: HeroBlock,
+  title: 'Content/Blocks/Section/HeroSection',
+  component: HeroSection,
   parameters: { layout: 'fullscreen' },
-} satisfies Meta<typeof HeroBlock>
+} satisfies Meta<typeof HeroSection>
 
 export default meta
 type Story = StoryObj<typeof meta>

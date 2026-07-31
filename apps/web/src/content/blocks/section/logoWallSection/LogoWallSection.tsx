@@ -6,21 +6,21 @@ import { SanityImage } from '@/content/SanityImage'
 import { resolveSurface } from '@/content/blocks/surface'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
 
-type LogoWallBlockProps = SectionProps<'logoWallBlock'>
+type LogoWallSectionProps = SectionProps<'logoWallSection'>
 
 /**
  * Section block: statement + client logo wall. `layout` picks a grid or a
  * single marquee row (static in the scaffold — the marquee animation is
  * post-scaffold motion work).
  */
-export function LogoWallBlock({
+export function LogoWallSection({
   eyebrow,
   statement,
   clients,
   layout,
   cta,
   surface,
-}: LogoWallBlockProps) {
+}: LogoWallSectionProps) {
   const isMarquee = stegaClean(layout) === 'marquee'
   return (
     <SectionShell surface={resolveSurface(surface, 'bone')}>

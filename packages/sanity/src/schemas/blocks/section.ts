@@ -2,8 +2,8 @@ import { defineArrayMember, defineField } from 'sanity'
 import { defineSectionBlock } from './defineBlocks'
 import { PAGE_TYPES } from '../../constants'
 
-export const heroBlock = defineSectionBlock({
-  name: 'heroBlock',
+export const heroSection = defineSectionBlock({
+  name: 'heroSection',
   title: 'Hero',
   defaultSurface: 'ink',
   fields: [
@@ -27,8 +27,8 @@ export const heroBlock = defineSectionBlock({
   preview: { select: { title: 'headlineLines.0' } },
 })
 
-export const logoWallBlock = defineSectionBlock({
-  name: 'logoWallBlock',
+export const logoWallSection = defineSectionBlock({
+  name: 'logoWallSection',
   title: 'Logo wall',
   defaultSurface: 'bone',
   fields: [
@@ -56,8 +56,8 @@ export const logoWallBlock = defineSectionBlock({
   preview: { select: { title: 'statement' } },
 })
 
-export const caseShowcaseBlock = defineSectionBlock({
-  name: 'caseShowcaseBlock',
+export const caseShowcaseSection = defineSectionBlock({
+  name: 'caseShowcaseSection',
   title: 'Case study showcase',
   defaultSurface: 'ink',
   fields: [
@@ -75,8 +75,8 @@ export const caseShowcaseBlock = defineSectionBlock({
   preview: { select: { title: 'heading' } },
 })
 
-export const railPanelsBlock = defineSectionBlock({
-  name: 'railPanelsBlock',
+export const railPanelsSection = defineSectionBlock({
+  name: 'railPanelsSection',
   title: 'Rail + panels',
   fields: [
     defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
@@ -118,8 +118,8 @@ export const railPanelsBlock = defineSectionBlock({
   preview: { select: { title: 'heading' } },
 })
 
-export const quoteBlock = defineSectionBlock({
-  name: 'quoteBlock',
+export const quoteSection = defineSectionBlock({
+  name: 'quoteSection',
   title: 'Quote',
   defaultSurface: 'bone',
   fields: [
@@ -139,8 +139,8 @@ export const quoteBlock = defineSectionBlock({
   preview: { select: { title: 'quote' } },
 })
 
-export const perspectivesCarouselBlock = defineSectionBlock({
-  name: 'perspectivesCarouselBlock',
+export const perspectivesCarouselSection = defineSectionBlock({
+  name: 'perspectivesCarouselSection',
   title: 'Perspectives carousel',
   defaultSurface: 'bone',
   fields: [
@@ -162,8 +162,8 @@ export const perspectivesCarouselBlock = defineSectionBlock({
   preview: { select: { title: 'heading' } },
 })
 
-export const ctaBlock = defineSectionBlock({
-  name: 'ctaBlock',
+export const ctaSection = defineSectionBlock({
+  name: 'ctaSection',
   title: 'CTA',
   defaultSurface: 'ink',
   fields: [
@@ -243,13 +243,13 @@ export const listingSection = defineSectionBlock({
 })
 
 export const sectionBlockMembers = [
-  'heroBlock',
-  'logoWallBlock',
-  'caseShowcaseBlock',
-  'railPanelsBlock',
-  'quoteBlock',
-  'perspectivesCarouselBlock',
-  'ctaBlock',
+  'heroSection',
+  'logoWallSection',
+  'caseShowcaseSection',
+  'railPanelsSection',
+  'quoteSection',
+  'perspectivesCarouselSection',
+  'ctaSection',
   'layoutSection',
   'mediaSection',
   'listingSection',

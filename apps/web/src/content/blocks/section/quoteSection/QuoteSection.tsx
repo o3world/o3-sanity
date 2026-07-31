@@ -3,10 +3,10 @@ import { Eyebrow, SectionShell } from '@o3/ui'
 import { resolveSurface } from '@/content/blocks/surface'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
 
-type QuoteBlockProps = SectionProps<'quoteBlock'>
+type QuoteSectionProps = SectionProps<'quoteSection'>
 
 /** Section block: an inline pull-quote moment with optional attribution. */
-export function QuoteBlock({ quote, attribution, surface }: QuoteBlockProps) {
+export function QuoteSection({ quote, attribution, surface }: QuoteSectionProps) {
   if (!quote) return null
   return (
     <SectionShell surface={resolveSurface(surface, 'bone')}>

@@ -4,7 +4,7 @@ import { getCard } from '@/content/documents/card-registry'
 import { resolveSurface } from '@/content/blocks/surface'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
 
-type PerspectivesCarouselBlockProps = SectionProps<'perspectivesCarouselBlock'>
+type PerspectivesCarouselSectionProps = SectionProps<'perspectivesCarouselSection'>
 
 /**
  * Section block: curated-or-latest perspectives. The query projects both a
@@ -12,12 +12,12 @@ type PerspectivesCarouselBlockProps = SectionProps<'perspectivesCarouselBlock'>
  * category-filtered); curated wins when the editor picked any. Rendered as a
  * horizontally scrollable row — carousel controls are post-scaffold work.
  */
-export function PerspectivesCarouselBlock({
+export function PerspectivesCarouselSection({
   heading,
   curated,
   latest,
   surface,
-}: PerspectivesCarouselBlockProps) {
+}: PerspectivesCarouselSectionProps) {
   const items = curated?.length ? curated : (latest ?? [])
   const Card = getCard('perspective')
   return (

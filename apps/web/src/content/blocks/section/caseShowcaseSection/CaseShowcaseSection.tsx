@@ -5,7 +5,7 @@ import { getCard } from '@/content/documents/card-registry'
 import { resolveSurface } from '@/content/blocks/surface'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
 
-type CaseShowcaseBlockProps = SectionProps<'caseShowcaseBlock'>
+type CaseShowcaseSectionProps = SectionProps<'caseShowcaseSection'>
 
 /**
  * Section block: the "Our Work" showcase. Each referenced case study renders
@@ -13,7 +13,12 @@ type CaseShowcaseBlockProps = SectionProps<'caseShowcaseBlock'>
  * vertically — the prototype's sticky-stack scroll effect is post-scaffold
  * motion work.
  */
-export function CaseShowcaseBlock({ heading, cta, caseStudies, surface }: CaseShowcaseBlockProps) {
+export function CaseShowcaseSection({
+  heading,
+  cta,
+  caseStudies,
+  surface,
+}: CaseShowcaseSectionProps) {
   const Card = getCard('caseStudy')
   return (
     <SectionShell surface={resolveSurface(surface, 'ink')}>

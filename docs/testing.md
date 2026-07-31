@@ -92,7 +92,7 @@ Every story under `packages/ui/src` and `apps/web/src` is mounted in headless Ch
 and scanned by axe. **Writing the story is writing the test** — there is no second file, which is
 why the wireframe build-out gets its safety net for free.
 
-`HeroBlock.stories.tsx` is the pattern for section blocks: a story per state the prototype shows.
+`HeroSection.stories.tsx` is the pattern for section blocks: a story per state the prototype shows.
 
 Structural a11y (roles, labels, alt text, heading order) fails the run. `color-contrast` is held
 back — the 12 current violations are all muted-foreground tokens, which is a palette decision, not a

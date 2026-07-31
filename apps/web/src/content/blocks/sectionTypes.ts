@@ -29,4 +29,4 @@ export type SectionProps<K extends PageSection['_type']> = Omit<
 export type BaseProps<K extends LayoutItem['_type']> = Omit<BaseBlockData<K>, '_key' | '_type'>
 
 /** The dereferenced cta shape every block-level CTA field shares. */
-export type CtaData = NonNullable<SectionProps<'heroBlock'>['cta']>
+export type CtaData = NonNullable<SectionProps<'heroSection'>['cta']>
