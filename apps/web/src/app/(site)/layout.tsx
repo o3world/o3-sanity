@@ -1,11 +1,11 @@
 import type React from 'react'
 import { draftMode } from 'next/headers'
-import { VisualEditing } from 'next-sanity/visual-editing'
 
 import { SITE_SETTINGS_QUERY } from '@o3/sanity/queries'
 
 import { typeTag } from '@/lib/content-routes/cacheTags'
 import { sanityFetch, SanityLive } from '@/sanity/live'
+import { VisualEditing } from '@/sanity/VisualEditing'
 import { SiteFooter } from '@/ui/SiteFooter'
 import { SiteNav } from '@/ui/SiteNav'
 

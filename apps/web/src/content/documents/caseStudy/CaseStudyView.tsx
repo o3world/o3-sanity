@@ -3,14 +3,13 @@ import Link from 'next/link'
 import { ArrowLink, Stat } from '@o3/ui'
 import type { CASE_STUDY_QUERY_RESULT } from '@o3/sanity/types/generated'
 
-import { BlockRenderer } from '@/content/blocks/BlockRenderer'
-import { ClientBlockRenderer } from '@/content/blocks/ClientBlockRenderer'
+import { Blocks } from '@/content/blocks/Blocks'
 import { SanityImage } from '@/content/SanityImage'
 import { PortableTextBody } from '@/content/portable-text/PortableTextBody'
 import { hrefForDoc } from '@/content/documents/urls'
 
 type CaseStudyDoc = NonNullable<CASE_STUDY_QUERY_RESULT>
-export type CaseStudyViewProps = CaseStudyDoc & { readonly isDraft?: boolean }
+export type CaseStudyViewProps = CaseStudyDoc
 
 function caseEyebrow(doc: Pick<CaseStudyDoc, 'industries' | 'industryDetail'>): string {
   const industries = (doc.industries ?? []).map((industry) => industry.title).filter(Boolean)
@@ -34,10 +33,8 @@ export function CaseStudyView(props: CaseStudyViewProps) {
     deliverables,
     extraSections,
     next,
-    isDraft,
   } = props
   const eyebrow = caseEyebrow(props)
-  const SectionsRenderer = isDraft ? ClientBlockRenderer : BlockRenderer
 
   return (
     <article>
@@ -111,7 +108,7 @@ export function CaseStudyView(props: CaseStudyViewProps) {
 
       {/* Optional per-case flourishes */}
       {extraSections?.length ? (
-        <SectionsRenderer
+        <Blocks
           blocks={extraSections}
           documentId={_id}
           documentType="caseStudy"
