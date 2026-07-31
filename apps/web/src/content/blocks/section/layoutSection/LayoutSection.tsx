@@ -1,7 +1,7 @@
 import type { ComponentType } from 'react'
 
 import { DisplayHeading, SectionShell } from '@o3/ui'
-import { stegaClean } from 'next-sanity'
+import { stegaClean } from '@sanity/client/stega'
 
 import { BASE_BLOCK_COMPONENTS } from '../../base/baseComponents'
 import { resolveSurface } from '@/content/blocks/surface'

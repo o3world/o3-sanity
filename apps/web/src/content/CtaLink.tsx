@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { stegaClean } from 'next-sanity'
+import { stegaClean } from '@sanity/client/stega'
 
 import { Button } from '@o3/ui'
 

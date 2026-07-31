@@ -34,13 +34,13 @@
   },
   "body": [
     {
-      "_key": "c5650c42e721",
+      "_key": "k0002",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "Our relationship with founder Rick Nucci and Guru goes back over a decade. It started in 2014, when we launched the Forge Conference, a UX/UI conference held at the Penn Museum that ran for three years. Rick was there every year, as a sponsor, a speaker, and an attendee. When we launched 1682 in 2019, he showed up again in the same spirit. When we formed our first external advisory committee this year, Rick was the first to accept. And when the opportunity to step into the presenting sponsor role came up, he and his team delivered without hesitation.",
-          "_key": "7fc52e3ebebe"
+          "_key": "k0003"
         }
       ],
       "markDefs": [],
@@ -48,13 +48,13 @@
       "style": "normal"
     },
     {
-      "_key": "4957a4bd172c",
+      "_key": "k0004",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "That kind of consistency is rare. Since the pandemic, I’ve watched a lot of professional relationships become more transactional and less personal. Rick is a genuine exception. His support, his loyalty, his participation, and his commitment have been unwavering from the moment we met. He doesn’t just talk about giving back to Philadelphia. He does it, year after year, in ways that are visible and meaningful.",
-          "_key": "e2b61ae96b19"
+          "_key": "k0005"
         }
       ],
       "markDefs": [],
@@ -62,30 +62,30 @@
       "style": "normal"
     },
     {
-      "_key": "c029545ee897",
+      "_key": "k0006",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "A recent piece in ",
-          "_key": "3e71456ec775"
+          "_key": "k0007"
         },
         {
           "_type": "span",
-          "marks": ["789b145f02fc"],
+          "marks": ["k0000"],
           "text": "Technical.ly by Bonnie Ravina",
-          "_key": "960917a425d3"
+          "_key": "k0008"
         },
         {
           "_type": "span",
           "marks": [],
           "text": " captures this well. The article profiles why Rick has chosen Philadelphia over Silicon Valley, not once but twice, first with Boomi and now with Guru. As Rick told Technical.ly: “We were constantly punching way above our weight. I started seeing us consistently win deals against competitors based in the Bay Area with 10x the funding and team size. That was my lightbulb moment to the inherent advantage of building in Philly.”",
-          "_key": "f39338679a24"
+          "_key": "k0009"
         }
       ],
       "markDefs": [
         {
-          "_key": "789b145f02fc",
+          "_key": "k0000",
           "_type": "link",
           "href": "https://technical.ly/civics/rick-nucci-on-boomi-guru-and-why-he-keeps-choosing-philly-over-silicon-valley/"
         }
@@ -94,13 +94,13 @@
       "style": "normal"
     },
     {
-      "_key": "2b4f9f53492d",
+      "_key": "k0010",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "The 1682 Conference takes its name from the year William Penn founded Philadelphia. That founding ethos runs through everything we do: a curated, intimate gathering of 150 senior executives having honest, practitioner-level conversations about what it actually takes to move AI from pilot to production. No panels of pundits. No product pitches. Just real stories from people doing the work.",
-          "_key": "7767f58157ad"
+          "_key": "k0011"
         }
       ],
       "markDefs": [],
@@ -108,13 +108,13 @@
       "style": "normal"
     },
     {
-      "_key": "3d298097d191",
+      "_key": "k0012",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "Guru and 1682 share the same sensibility. As Rick puts it:",
-          "_key": "25f1d03b1bd7"
+          "_key": "k0013"
         }
       ],
       "markDefs": [],
@@ -122,13 +122,13 @@
       "style": "normal"
     },
     {
-      "_key": "5a7e1f4cbb3d",
+      "_key": "k0014",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "“I’ve been building enterprise software in Philadelphia for over 25 years — first Boomi, now Guru — and both times, the city has been a genuine competitive advantage. Philadelphia has always been a place where real work gets done without the noise. That’s exactly what 1682 is about: practitioners sharing honest stories about what it actually takes to move AI from pilot to production. As Philly celebrates its 250th anniversary, it feels fitting that a conference named after the year the city was founded is where some of the most candid conversations about AI’s impact on business are happening.”",
-          "_key": "95779f38e637"
+          "_key": "k0015"
         }
       ],
       "markDefs": [],
@@ -136,13 +136,13 @@
       "style": "normal"
     },
     {
-      "_key": "3c58ba6748c0",
+      "_key": "k0016",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "We couldn’t agree more.",
-          "_key": "4dbc64fb8495"
+          "_key": "k0017"
         }
       ],
       "markDefs": [],
@@ -150,30 +150,30 @@
       "style": "normal"
     },
     {
-      "_key": "e6f0b0e06e43",
+      "_key": "k0018",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "If you’re interested in joining Rick and Guru as a speaker, sponsor, or attendee, visit ",
-          "_key": "2435aefe2877"
+          "_key": "k0019"
         },
         {
           "_type": "span",
-          "marks": ["72a11850e9e8"],
+          "marks": ["k0001"],
           "text": "1682conference.com",
-          "_key": "8bd66eaf3857"
+          "_key": "k0020"
         },
         {
           "_type": "span",
           "marks": [],
           "text": ". We’d love for you to be a part of the community.",
-          "_key": "93331b0314dc"
+          "_key": "k0021"
         }
       ],
       "markDefs": [
         {
-          "_key": "72a11850e9e8",
+          "_key": "k0001",
           "_type": "link",
           "href": "http://www.1682conference.com"
         }

@@ -53,6 +53,50 @@ jobs:
             pnpm turbo run ${{ matrix.task }} ${{ matrix.filter }}
           fi
 
+  # The three test layers (ADR 0004). Deliberately its own job rather than a
+  # `turbo run` task: tests are a checkpoint, not something every command
+  # drags along, and this keeps the browser layer's Chromium download off the
+  # lint/typecheck/build path.
+  #
+  # On a PR only the tests related to the changed files run (`--changed`); a
+  # push to main runs everything. Chromium is cached between runs.
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    env:
+      # The suite never reaches Sanity — the render layer stubs the fetch seam
+      # and the other two layers are offline by construction. These exist only
+      # so module-level config validation has something to read, which is why
+      # they are literals rather than secrets.
+      NEXT_PUBLIC_SANITY_PROJECT_ID: test
+      NEXT_PUBLIC_SANITY_DATASET: test
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+      - name: Resolve Playwright version
+        id: playwright
+        run: echo "version=$(pnpm ls playwright --depth 0 --json | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>console.log(JSON.parse(s)[0].devDependencies.playwright.version))')" >> "$GITHUB_OUTPUT"
+      - name: Cache Chromium
+        id: browser-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.playwright.outputs.version }}
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Run tests
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            pnpm vitest run --changed "origin/${{ github.base_ref }}"
+          else
+            pnpm vitest run
+          fi
+
   sanity-typegen:
     name: typegen drift
     runs-on: ubuntu-latest

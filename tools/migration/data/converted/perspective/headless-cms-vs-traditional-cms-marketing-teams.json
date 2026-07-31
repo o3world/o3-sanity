@@ -29,13 +29,13 @@
   },
   "body": [
     {
-      "_key": "e593ce7be6a3",
+      "_key": "k0003",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "Most marketing leaders didn’t choose their current CMS. They either inherited it or it came with the agency, the platform deal, or the dev team’s preferences years ago. Today, content is backed up in a queue, publishing requires a developer ticket, and launching a new channel means another painful integration project.",
-          "_key": "4f6f666ac04f"
+          "_key": "k0004"
         }
       ],
       "markDefs": [],
@@ -43,13 +43,13 @@
       "style": "normal"
     },
     {
-      "_key": "ecebc9df5f24",
+      "_key": "k0005",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "The conversation about headless CMS has gotten louder because the problem is getting worse. This post is a breakdown of the real tradeoffs, who headless is right for, where traditional still works, and what to look for if you decide to make the move.",
-          "_key": "cc6cfa63a8c2"
+          "_key": "k0006"
         }
       ],
       "markDefs": [],
@@ -57,13 +57,13 @@
       "style": "normal"
     },
     {
-      "_key": "189537fe9b91",
+      "_key": "k0007",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "What we actually mean by “headless”",
-          "_key": "bbb680d507c1"
+          "_key": "k0008"
         }
       ],
       "markDefs": [],
@@ -71,13 +71,13 @@
       "style": "h2"
     },
     {
-      "_key": "6719e025edf7",
+      "_key": "k0009",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "A traditional CMS, think WordPress or Drupal, manages your content and decides how it displays. The content layer and the presentation layer are bundled together. That’s fine when you have one website and one audience. It becomes a bottleneck the moment you need that content to live anywhere else.",
-          "_key": "24c141b91740"
+          "_key": "k0010"
         }
       ],
       "markDefs": [],
@@ -85,13 +85,13 @@
       "style": "normal"
     },
     {
-      "_key": "26909e001168",
+      "_key": "k0011",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "A headless CMS decouples those two things. Content lives in one place, structured and stored via API. The front-end, whether that’s a website, a mobile app, a digital screen, or an AI interface, pulls from that API and renders the content however it needs to. The “head” (the display layer) is separated from the “body” (the content layer).",
-          "_key": "d3a86665e8fa"
+          "_key": "k0012"
         }
       ],
       "markDefs": [],
@@ -99,13 +99,13 @@
       "style": "normal"
     },
     {
-      "_key": "a93e8aecc519",
+      "_key": "k0013",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "For marketing teams, that shift has one immediate practical effect: content exists once, and it’s delivered to various touchpoints.",
-          "_key": "55470e85b8a6"
+          "_key": "k0014"
         }
       ],
       "markDefs": [],
@@ -113,13 +113,13 @@
       "style": "normal"
     },
     {
-      "_key": "079a84fa62b8",
+      "_key": "k0015",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "Where traditional CMS still earns its keep",
-          "_key": "4426806e1513"
+          "_key": "k0016"
         }
       ],
       "markDefs": [],
@@ -127,13 +127,13 @@
       "style": "h2"
     },
     {
-      "_key": "9c3216fba597",
+      "_key": "k0017",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "Traditional CMS platforms are not broken. They’re optimized for a specific scenario: a single website, a stable content structure, and a team that doesn’t have heavy developer resources or omnichannel ambitions.",
-          "_key": "84302f0c6992"
+          "_key": "k0018"
         }
       ],
       "markDefs": [],
@@ -141,13 +141,13 @@
       "style": "normal"
     },
     {
-      "_key": "b6660a691234",
+      "_key": "k0019",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "If your organization runs a single brand site, publishes at a moderate volume, and doesn’t need to push content across multiple digital surfaces, a traditional CMS is probably still the right call. The setup is familiar, the editor experience is mature, and the plugin ecosystem covers most common needs without custom development.",
-          "_key": "b40643736abc"
+          "_key": "k0020"
         }
       ],
       "markDefs": [],
@@ -155,13 +155,13 @@
       "style": "normal"
     },
     {
-      "_key": "2da76b80f1a5",
+      "_key": "k0021",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "The honest tradeoff is that you’re trading flexibility for simplicity. That’s a reasonable trade until your content demands outgrow the platform’s architecture.",
-          "_key": "0defae925c7f"
+          "_key": "k0022"
         }
       ],
       "markDefs": [],
@@ -169,13 +169,13 @@
       "style": "normal"
     },
     {
-      "_key": "dd822658aaf9",
+      "_key": "k0023",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "Where headless architecture wins",
-          "_key": "0eeaebe20241"
+          "_key": "k0024"
         }
       ],
       "markDefs": [],
@@ -183,24 +183,24 @@
       "style": "h2"
     },
     {
-      "_key": "0a4f9f8d44aa",
+      "_key": "k0025",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "In a 2025 survey of headless CMS adopters, 86% of users reported increased ROI, and 70% of companies experienced performance and scaling improvements after migration. Those aren’t abstract metrics. They’re coming from organizations that hit the ceiling on what a traditional CMS could do and rebuilt around a more flexible architecture. ",
-          "_key": "f578aac09479"
+          "_key": "k0026"
         },
         {
           "_type": "span",
-          "marks": ["d16690762dc9"],
+          "marks": ["k0000"],
           "text": "Storyblok",
-          "_key": "1f263090ae96"
+          "_key": "k0027"
         }
       ],
       "markDefs": [
         {
-          "_key": "d16690762dc9",
+          "_key": "k0000",
           "_type": "link",
           "href": "https://www.storyblok.com/mp/cms-statistics"
         }
@@ -209,13 +209,13 @@
       "style": "normal"
     },
     {
-      "_key": "563d2fd869c6",
+      "_key": "k0028",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "Here’s where headless creates real marketing advantage:",
-          "_key": "58fb2042ea8b"
+          "_key": "k0029"
         }
       ],
       "markDefs": [],
@@ -223,13 +223,13 @@
       "style": "normal"
     },
     {
-      "_key": "ddeafa8bf5bd",
+      "_key": "k0030",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "Speed to publish. In a traditional CMS, content often moves through a single editorial pathway tied to one output. In a headless system, your team writes once. That content flows to wherever it needs to go without reformatting, without re-entering data, without waiting on a developer to build a new template.",
-          "_key": "fdd91863086d"
+          "_key": "k0031"
         }
       ],
       "markDefs": [],
@@ -237,24 +237,24 @@
       "style": "normal"
     },
     {
-      "_key": "977dcbe6285d",
+      "_key": "k0032",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "Omnichannel delivery without the overhead. Over 74% of digital teams are now using more than six delivery endpoints, including mobile, web, AR, VR, IoT, and connected screens. A traditional CMS wasn’t built for that world. A headless CMS is designed for it from the ground up. ",
-          "_key": "2fa40286de85"
+          "_key": "k0033"
         },
         {
           "_type": "span",
-          "marks": ["0184d916b587"],
+          "marks": ["k0001"],
           "text": "Marketreportsworld",
-          "_key": "4484b24f9935"
+          "_key": "k0034"
         }
       ],
       "markDefs": [
         {
-          "_key": "0184d916b587",
+          "_key": "k0001",
           "_type": "link",
           "href": "https://www.marketreportsworld.com/market-reports/headless-cms-software-market-14722615"
         }
@@ -263,13 +263,13 @@
       "style": "normal"
     },
     {
-      "_key": "5e3c2169ac43",
+      "_key": "k0035",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "AI readiness. Structured content is the foundation that AI personalization, search, and retrieval are built on. If your content is locked inside a monolithic CMS in mixed HTML, your AI layer has no clean data to work with. Headless gives AI tools something to actually use.",
-          "_key": "82ba3027217b"
+          "_key": "k0036"
         }
       ],
       "markDefs": [],
@@ -277,13 +277,13 @@
       "style": "normal"
     },
     {
-      "_key": "44994127109a",
+      "_key": "k0037",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "Developer independence for the front end. Your engineering team can build and iterate on the user experience without touching the content model. That separation reduces risk, speeds up delivery, and gives marketing the content control it actually needs.",
-          "_key": "dd920120d3bb"
+          "_key": "k0038"
         }
       ],
       "markDefs": [],
@@ -291,13 +291,13 @@
       "style": "normal"
     },
     {
-      "_key": "974a3abb7bd1",
+      "_key": "k0039",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "The real challenge with headless and how teams get past it",
-          "_key": "cd7836e23528"
+          "_key": "k0040"
         }
       ],
       "markDefs": [],
@@ -305,13 +305,13 @@
       "style": "h2"
     },
     {
-      "_key": "9afbff7c5371",
+      "_key": "k0041",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "Here’s where the honest part matters: headless CMS requires more upfront investment than swapping in a new WordPress theme.",
-          "_key": "87daac21bbe3"
+          "_key": "k0042"
         }
       ],
       "markDefs": [],
@@ -319,13 +319,13 @@
       "style": "normal"
     },
     {
-      "_key": "44137d892e2a",
+      "_key": "k0043",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "Content modeling takes real thought. When you move to headless, you’re deciding how content is structured, reused, and related. That work requires a partner who understands both the content strategy side and the technical implementation side. When those two are disconnected, migrations stall.",
-          "_key": "134cee05d43f"
+          "_key": "k0044"
         }
       ],
       "markDefs": [],
@@ -333,13 +333,13 @@
       "style": "normal"
     },
     {
-      "_key": "fefc3a13c8ea",
+      "_key": "k0045",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "The editor experience also varies significantly by platform. Some headless CMSs are built for developers and deliver a frustrating experience for content teams. Others get the balance right. That gap is worth investigating before you commit.",
-          "_key": "9d4d805b838a"
+          "_key": "k0046"
         }
       ],
       "markDefs": [],
@@ -347,13 +347,13 @@
       "style": "normal"
     },
     {
-      "_key": "6dcf4a62f142",
+      "_key": "k0047",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "Why we recommend Sanity",
-          "_key": "0fc29d50a679"
+          "_key": "k0048"
         }
       ],
       "markDefs": [],
@@ -361,13 +361,13 @@
       "style": "h2"
     },
     {
-      "_key": "823a60475ca0",
+      "_key": "k0049",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "O3 has evaluated and built on a number of headless platforms. We’ve landed on Sanity as our preferred recommendation for mid-market and enterprise teams for a few concrete reasons.",
-          "_key": "ff88355db730"
+          "_key": "k0050"
         }
       ],
       "markDefs": [],
@@ -375,13 +375,13 @@
       "style": "normal"
     },
     {
-      "_key": "717109158466",
+      "_key": "k0051",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "The content modeling is genuinely flexible. Sanity’s schema system lets you define content structures that match how your organization actually thinks about content, not how the platform was originally configured. That matters when your content structure is complex or when it needs to evolve over time.",
-          "_key": "cd82cbea3383"
+          "_key": "k0052"
         }
       ],
       "markDefs": [],
@@ -389,13 +389,13 @@
       "style": "normal"
     },
     {
-      "_key": "b74b10459601",
+      "_key": "k0053",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "The real-time collaborative editing experience is stronger than most headless platforms. Content teams don’t feel like they’re using a developer tool. That’s a harder problem to solve than most people realize.",
-          "_key": "67c4378f9f05"
+          "_key": "k0054"
         }
       ],
       "markDefs": [],
@@ -403,13 +403,13 @@
       "style": "normal"
     },
     {
-      "_key": "297c0ef87850",
+      "_key": "k0055",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "The AI integration story is the clearest in the market. Sanity’s structured content model is purpose-built for AI retrieval and personalization. When O3 builds AI-connected experiences for clients, Sanity gives us a reliable foundation rather than something we have to retrofit.",
-          "_key": "1ebd502c50af"
+          "_key": "k0056"
         }
       ],
       "markDefs": [],
@@ -417,13 +417,13 @@
       "style": "normal"
     },
     {
-      "_key": "b72db4a9afb5",
+      "_key": "k0057",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "And as an official Sanity partner, O3 brings implementation experience that reduces the risk on a migration. The content model work, the editorial experience configuration, the front-end integration — that’s work we’ve done, not work we’re learning on your timeline.",
-          "_key": "0edb164e5f47"
+          "_key": "k0058"
         }
       ],
       "markDefs": [],
@@ -431,13 +431,13 @@
       "style": "normal"
     },
     {
-      "_key": "bd3d4f17fc9d",
+      "_key": "k0059",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "The question to ask before you decide",
-          "_key": "db4a8f19b0f4"
+          "_key": "k0060"
         }
       ],
       "markDefs": [],
@@ -445,13 +445,13 @@
       "style": "h2"
     },
     {
-      "_key": "f3110f8e46e2",
+      "_key": "k0061",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "The CMS conversation is really a content strategy conversation. Before evaluating platforms, the better question is: where does your content need to live in the next three years, and how fast do you need to get it there?",
-          "_key": "524ba4deb467"
+          "_key": "k0062"
         }
       ],
       "markDefs": [],
@@ -459,13 +459,13 @@
       "style": "normal"
     },
     {
-      "_key": "5dd71c2f1b13",
+      "_key": "k0063",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "If the answer involves multiple channels, AI-driven personalization, or a content team that’s currently losing time to manual reformatting and developer dependencies, headless is probably the right direction. If the answer is a single stable website with a predictable publishing cadence, you may not need to make the move yet.",
-          "_key": "cd75bca9c8d0"
+          "_key": "k0064"
         }
       ],
       "markDefs": [],
@@ -473,13 +473,13 @@
       "style": "normal"
     },
     {
-      "_key": "3dab990d0fbd",
+      "_key": "k0065",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "Either way, the architecture decision should follow the strategy. Get that conversation right first, and the platform choice becomes significantly easier.",
-          "_key": "c63153bad69b"
+          "_key": "k0066"
         }
       ],
       "markDefs": [],
@@ -487,24 +487,24 @@
       "style": "normal"
     },
     {
-      "_key": "9875d4477884",
+      "_key": "k0067",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "O3 works with marketing and product leaders navigating exactly this decision. If you’re evaluating your content stack and want a clear read on what makes sense for your organization,",
-          "_key": "c8de1c0fdce6"
+          "_key": "k0068"
         },
         {
           "_type": "span",
-          "marks": ["2045408eaa5e"],
+          "marks": ["k0002"],
           "text": " let’s talk.",
-          "_key": "0c8510d4a0e0"
+          "_key": "k0069"
         }
       ],
       "markDefs": [
         {
-          "_key": "2045408eaa5e",
+          "_key": "k0002",
           "_type": "link",
           "href": "https://www.o3world.com/contact/"
         }

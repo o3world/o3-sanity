@@ -20,6 +20,10 @@
     "prepare": "lefthook install",
     "schema:deploy": "pnpm --filter @o3/sanity schema:deploy",
     "storybook": "turbo run storybook",
+    "test": "vitest run",
+    "test:changed": "vitest run --changed origin/main",
+    "test:fast": "vitest run --project unit --project render",
+    "test:watch": "vitest",
     "typecheck": "turbo run typecheck",
     "typegen": "pnpm --filter @o3/sanity typegen",
     "verify": "turbo run lint typecheck build --affected"
@@ -36,12 +40,14 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "knip": "^6.16.1",
     "lefthook": "^1.7.0",
+    "playwright": "^1.62.1",
     "prettier": "^3.8.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "syncpack": "^15.3.1",
     "turbo": "^2.9.6",
     "typescript": "^5.7.0",
-    "typescript-eslint": "^8.59.0"
+    "typescript-eslint": "^8.59.0",
+    "vitest": "^4.1.10"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

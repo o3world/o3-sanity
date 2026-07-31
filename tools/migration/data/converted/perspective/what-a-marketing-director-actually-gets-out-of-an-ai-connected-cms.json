@@ -29,13 +29,13 @@
   },
   "body": [
     {
-      "_key": "e641b9e6e9aa",
+      "_key": "k0011",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "Your team gets time back",
-          "_key": "5f7381cde5eb"
+          "_key": "k0012"
         }
       ],
       "markDefs": [],
@@ -43,30 +43,30 @@
       "style": "h2"
     },
     {
-      "_key": "4990bf4f19be",
+      "_key": "k0013",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "The fastest win from connecting your CMS to an AI layer is recovered capacity. According to ",
-          "_key": "18da6ed844d7"
+          "_key": "k0014"
         },
         {
           "_type": "span",
-          "marks": ["a9f29b8975ce"],
+          "marks": ["k0000"],
           "text": "CoSchedule’s 2025 State of AI in Marketing Report",
-          "_key": "a0ae93884600"
+          "_key": "k0015"
         },
         {
           "_type": "span",
           "marks": [],
           "text": ", based on surveys of over 1,000 marketing professionals, teams using AI tools report 44% higher productivity and save an average of five or more hours per week by automating tasks like metadata generation, content tagging, and media alt text development. Those tasks run at publish time, automatically. Your writers write. The rest happens in the background.",
-          "_key": "bf3ca6505535"
+          "_key": "k0016"
         }
       ],
       "markDefs": [
         {
-          "_key": "a9f29b8975ce",
+          "_key": "k0000",
           "_type": "link",
           "href": "https://coschedule.com/ai-marketing-statistics"
         }
@@ -75,13 +75,13 @@
       "style": "normal"
     },
     {
-      "_key": "67238c969e9b",
+      "_key": "k0017",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "For a team of three, that’s a meaningful output increase without a headcount request.",
-          "_key": "a1aa90b4ea3f"
+          "_key": "k0018"
         }
       ],
       "markDefs": [],
@@ -89,13 +89,13 @@
       "style": "normal"
     },
     {
-      "_key": "bfe2eaf622e8",
+      "_key": "k0019",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "One piece of content, every channel",
-          "_key": "785869f8f7b4"
+          "_key": "k0020"
         }
       ],
       "markDefs": [],
@@ -103,13 +103,13 @@
       "style": "h2"
     },
     {
-      "_key": "f2370ae5e3bc",
+      "_key": "k0021",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "Take a finished blog post. Someone on your team turns it into a LinkedIn summary, a newsletter blurb, and a few social captions. That’s four or five production tasks per piece. At 20 posts a month across four channels, you’re looking at 80 discrete tasks, most of which require a skilled person to do something repetitive.",
-          "_key": "92653cc00280"
+          "_key": "k0022"
         }
       ],
       "markDefs": [],
@@ -117,13 +117,13 @@
       "style": "normal"
     },
     {
-      "_key": "a7c7dd0c3a4f",
+      "_key": "k0023",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "Wire an AI pipeline into your CMS and that chain runs automatically after publish. Channel-specific variants generate from the same canonical source: short-form social, email excerpt, pull quote. Your team reviews instead of produces. That’s a real difference in what actually ships versus what sits in the backlog.",
-          "_key": "958081489bea"
+          "_key": "k0024"
         }
       ],
       "markDefs": [],
@@ -131,13 +131,13 @@
       "style": "normal"
     },
     {
-      "_key": "2fe157408830",
+      "_key": "k0025",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "There’s a consistency benefit here, too. When every variant traces back to one source in your CMS, your product names, pricing, and key claims stay aligned across channels. That’s hard to maintain when someone is adapting content manually under deadline.",
-          "_key": "beb4f3e449c3"
+          "_key": "k0026"
         }
       ],
       "markDefs": [],
@@ -145,13 +145,13 @@
       "style": "normal"
     },
     {
-      "_key": "494d7a9bdbce",
+      "_key": "k0027",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "Brand voice holds even when your contributors don’t",
-          "_key": "e1cf5c627e35"
+          "_key": "k0028"
         }
       ],
       "markDefs": [],
@@ -159,13 +159,13 @@
       "style": "h2"
     },
     {
-      "_key": "55a5ee642f76",
+      "_key": "k0029",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "Agencies, contractors, and freelancers all write a little differently. Over time, voice drifts. Terminology gets inconsistent. An AI layer trained on your style guide and plugged into the editorial workflow catches those issues before content publishes, not during a brand audit six months later.",
-          "_key": "30c150db9144"
+          "_key": "k0030"
         }
       ],
       "markDefs": [],
@@ -173,13 +173,13 @@
       "style": "normal"
     },
     {
-      "_key": "30a8217218e1",
+      "_key": "k0031",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "Translation timelines shrink",
-          "_key": "1d9d9cc41807"
+          "_key": "k0032"
         }
       ],
       "markDefs": [],
@@ -187,47 +187,47 @@
       "style": "h2"
     },
     {
-      "_key": "d3a1131fc8c7",
+      "_key": "k0033",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "Professional US translators and agencies ",
-          "_key": "bee4fa1e4a72"
+          "_key": "k0034"
         },
         {
           "_type": "span",
-          "marks": ["2631fc9c36e5"],
+          "marks": ["k0001"],
           "text": "typically charge $0.15 to $0.30 per word for standard marketing content",
-          "_key": "17f2508d20b1"
+          "_key": "k0035"
         },
         {
           "_type": "span",
           "marks": [],
           "text": ", with turnaround times that can stretch to a week or more per language per batch. AI-assisted translation, where a model generates a first draft and a native-speaking reviewer cleans it up, ",
-          "_key": "d783deb6a312"
+          "_key": "k0036"
         },
         {
           "_type": "span",
-          "marks": ["941719d23084"],
+          "marks": ["k0002"],
           "text": "cuts those costs by 60 to 80%, according to Bluente’s 2025 Enterprise Content and AI Translation Benchmark Report",
-          "_key": "6614302b8ba1"
+          "_key": "k0037"
         },
         {
           "_type": "span",
           "marks": [],
           "text": ". A product description update that used to require a multi-day agency cycle ships the day the English version goes live.",
-          "_key": "63795adddfee"
+          "_key": "k0038"
         }
       ],
       "markDefs": [
         {
-          "_key": "2631fc9c36e5",
+          "_key": "k0001",
           "_type": "link",
           "href": "https://www.tomedes.com/translator-hub/translation-rates"
         },
         {
-          "_key": "941719d23084",
+          "_key": "k0002",
           "_type": "link",
           "href": "https://www.bluente.com/blog/2025-ai-translation-trends"
         }
@@ -236,13 +236,13 @@
       "style": "normal"
     },
     {
-      "_key": "c4aef098f1f5",
+      "_key": "k0039",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "SEO stops being a bottleneck",
-          "_key": "9c3378da3489"
+          "_key": "k0040"
         }
       ],
       "markDefs": [],
@@ -250,30 +250,30 @@
       "style": "h2"
     },
     {
-      "_key": "c7f4e4e5fa1d",
+      "_key": "k0041",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "In most CMS setups, metadata is either an editorial afterthought or a dependency on a developer ticket. ",
-          "_key": "37bbf1796a09"
+          "_key": "k0042"
         },
         {
           "_type": "span",
-          "marks": ["d2f11966f70c"],
+          "marks": ["k0003"],
           "text": "Ahrefs data shows roughly 25% of pages lack a meta description entirely",
-          "_key": "b4f83fbb6dea"
+          "_key": "k0043"
         },
         {
           "_type": "span",
           "marks": [],
           "text": ", even among high-ranking results. In large content libraries where editorial attention is spread thin, that gap tends to be wider. An AI pipeline that generates title tags, meta descriptions, and structured data at publish time removes the problem at the source, without adding a QA step or a ticket.",
-          "_key": "47c4822762a4"
+          "_key": "k0044"
         }
       ],
       "markDefs": [
         {
-          "_key": "d2f11966f70c",
+          "_key": "k0003",
           "_type": "link",
           "href": "https://seosherpa.com/seo-statistics/"
         }
@@ -282,13 +282,13 @@
       "style": "normal"
     },
     {
-      "_key": "56fadc5114e5",
+      "_key": "k0045",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "You stop commissioning content that already exists",
-          "_key": "3ff50bf1e7df"
+          "_key": "k0046"
         }
       ],
       "markDefs": [],
@@ -296,13 +296,13 @@
       "style": "h2"
     },
     {
-      "_key": "59961849b83b",
+      "_key": "k0047",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "Before briefing a new article or campaign page, your team should know what’s already in the CMS and whether it’s pulling its weight. AI can scan your content library against a new brief, surface what overlaps, flag what can be refreshed instead of replaced, and identify what’s genuinely missing. Fewer redundant commissions, better use of your existing library, and a content strategy that builds on itself rather than repeating.",
-          "_key": "93e6f41f9a01"
+          "_key": "k0048"
         }
       ],
       "markDefs": [],
@@ -310,13 +310,13 @@
       "style": "normal"
     },
     {
-      "_key": "9cc21d111cf6",
+      "_key": "k0049",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "Tools worth knowing",
-          "_key": "542602fe9405"
+          "_key": "k0050"
         }
       ],
       "markDefs": [],
@@ -324,47 +324,47 @@
       "style": "h2"
     },
     {
-      "_key": "262230935dc3",
+      "_key": "k0051",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "If you’re running ",
-          "_key": "ac92191d8417"
+          "_key": "k0052"
         },
         {
           "_type": "span",
-          "marks": ["c366586458a8"],
+          "marks": ["k0004"],
           "text": "Sanity,",
-          "_key": "3809535aa96d"
+          "_key": "k0053"
         },
         {
           "_type": "span",
           "marks": [],
           "text": " ",
-          "_key": "d7e8ff89bd9a"
+          "_key": "k0054"
         },
         {
           "_type": "span",
-          "marks": ["70bef32886fe"],
+          "marks": ["k0005"],
           "text": "AI Assist",
-          "_key": "2c04a24d92ce"
+          "_key": "k0055"
         },
         {
           "_type": "span",
           "marks": [],
           "text": " is the obvious starting point. It’s the official plugin from the Sanity team and lets you attach reusable AI instructions directly to fields and document types in Studio. Use it to automate metadata generation, alt text, translations, and field-level content suggestions without leaving the editorial interface.",
-          "_key": "fdcfbd5bff75"
+          "_key": "k0056"
         }
       ],
       "markDefs": [
         {
-          "_key": "c366586458a8",
+          "_key": "k0004",
           "_type": "link",
           "href": "https://www.o3world.com/perspectives/o3-and-sanity-partner-to-bring-ai-enabled-content-solutions-to-you/"
         },
         {
-          "_key": "70bef32886fe",
+          "_key": "k0005",
           "_type": "link",
           "href": "https://www.sanity.io/plugins/ai-assist"
         }
@@ -373,47 +373,47 @@
       "style": "normal"
     },
     {
-      "_key": "6462512b21ae",
+      "_key": "k0057",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "For translation management at scale,",
-          "_key": "d180af40c16e"
+          "_key": "k0058"
         },
         {
           "_type": "span",
-          "marks": ["4ebc1816d69c"],
+          "marks": ["k0006"],
           "text": " Lokalise",
-          "_key": "ed1c4602cf26"
+          "_key": "k0059"
         },
         {
           "_type": "span",
           "marks": [],
           "text": " integrates with most headless CMS platforms and handles the full workflow from AI draft to human review and back.",
-          "_key": "e3b99d56acf8"
+          "_key": "k0060"
         },
         {
           "_type": "span",
-          "marks": ["bcab80abc710"],
+          "marks": ["k0007"],
           "text": " DeepL",
-          "_key": "f9510febbc9a"
+          "_key": "k0061"
         },
         {
           "_type": "span",
           "marks": [],
           "text": " remains the benchmark for translation quality if you’re building a custom pipeline rather than using a managed platform.",
-          "_key": "846a609d9679"
+          "_key": "k0062"
         }
       ],
       "markDefs": [
         {
-          "_key": "4ebc1816d69c",
+          "_key": "k0006",
           "_type": "link",
           "href": "https://lokalise.com/"
         },
         {
-          "_key": "bcab80abc710",
+          "_key": "k0007",
           "_type": "link",
           "href": "https://www.deepl.com/en"
         }
@@ -422,47 +422,47 @@
       "style": "normal"
     },
     {
-      "_key": "2bbf23e6285b",
+      "_key": "k0063",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "For brand voice consistency across contributors,",
-          "_key": "3ccf99b1c2e7"
+          "_key": "k0064"
         },
         {
           "_type": "span",
-          "marks": ["dbba4808b2ff"],
+          "marks": ["k0008"],
           "text": " Jasper",
-          "_key": "9e0928e713f6"
+          "_key": "k0065"
         },
         {
           "_type": "span",
           "marks": [],
           "text": " handles both content creation and brand governance in one platform. You train it on your style guide and existing content, and it generates on-brand copy while flagging tone and terminology issues before anything is published. Teams that need governance without the content creation layer can look at ",
-          "_key": "e881e370e920"
+          "_key": "k0066"
         },
         {
           "_type": "span",
-          "marks": ["dc89ba4d3fb7"],
+          "marks": ["k0009"],
           "text": "Writer",
-          "_key": "e04fbaff7971"
+          "_key": "k0067"
         },
         {
           "_type": "span",
           "marks": [],
           "text": ", which enforces rules on top of whatever your contributors are already writing.",
-          "_key": "dba1dd9adbb8"
+          "_key": "k0068"
         }
       ],
       "markDefs": [
         {
-          "_key": "dbba4808b2ff",
+          "_key": "k0008",
           "_type": "link",
           "href": "https://www.jasper.ai/"
         },
         {
-          "_key": "dc89ba4d3fb7",
+          "_key": "k0009",
           "_type": "link",
           "href": "https://writer.com/"
         }
@@ -471,13 +471,13 @@
       "style": "normal"
     },
     {
-      "_key": "1fb47e527531",
+      "_key": "k0069",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "These tools aren’t replacements for a clear content strategy or a well-structured schema. They’re accelerants for teams that already have those foundations in place.",
-          "_key": "b427c5067ae5"
+          "_key": "k0070"
         }
       ],
       "markDefs": [],
@@ -485,13 +485,13 @@
       "style": "normal"
     },
     {
-      "_key": "102b0fd4cadb",
+      "_key": "k0071",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "Where to start\nThe organizations seeing real returns aren’t the ones that tried to automate everything at once. They picked one painful, repetitive task, built a tight pipeline around it, validated the output, and expanded from there.",
-          "_key": "d7d28702a34d"
+          "_key": "k0072"
         }
       ],
       "markDefs": [],
@@ -499,24 +499,24 @@
       "style": "normal"
     },
     {
-      "_key": "34d986e92fbd",
+      "_key": "k0073",
       "children": [
         {
           "_type": "span",
           "marks": [],
           "text": "If you’re not sure which workflow to start with, that’s exactly the kind of assessment we help with. ",
-          "_key": "8d3a53a23355"
+          "_key": "k0074"
         },
         {
           "_type": "span",
-          "marks": ["4359c9a77b2f"],
+          "marks": ["k0010"],
           "text": "Contact the O3 team to get started.",
-          "_key": "53fc2523b5bf"
+          "_key": "k0075"
         }
       ],
       "markDefs": [
         {
-          "_key": "4359c9a77b2f",
+          "_key": "k0010",
           "_type": "link",
           "href": "https://www.o3world.com/contact/"
         }
@@ -525,11 +525,11 @@
       "style": "normal"
     },
     {
-      "_key": "f61407a55f00",
+      "_key": "k0076",
       "children": [
         {
           "_type": "span",
-          "_key": "27f39cd73090",
+          "_key": "k0077",
           "text": "",
           "marks": []
         }
@@ -539,11 +539,11 @@
       "style": "normal"
     },
     {
-      "_key": "540500e1b237",
+      "_key": "k0078",
       "children": [
         {
           "_type": "span",
-          "_key": "2630c82b3c4e",
+          "_key": "k0079",
           "text": "",
           "marks": []
         }
