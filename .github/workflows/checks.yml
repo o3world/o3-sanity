@@ -58,8 +58,11 @@ jobs:
   # drags along, and this keeps the browser layer's Chromium download off the
   # lint/typecheck/build path.
   #
-  # On a PR only the tests related to the changed files run (`--changed`); a
-  # push to main runs everything. Chromium is cached between runs.
+  # Always runs the whole suite. An earlier version ran `--changed` against the
+  # base on PRs to save time; it resolved to "No test files found, exiting with
+  # code 0" and the job passed without running a single test. A check that
+  # cannot fail is worse than no check. The full suite is ~5s of test time and
+  # Chromium is cached, so there was nothing worth optimising here.
   test:
     name: test
     runs-on: ubuntu-latest
@@ -90,12 +93,7 @@ jobs:
       - name: Install Chromium
         run: pnpm exec playwright install --with-deps chromium
       - name: Run tests
-        run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            pnpm vitest run --changed "origin/${{ github.base_ref }}"
-          else
-            pnpm vitest run
-          fi
+        run: pnpm test
 
   sanity-typegen:
     name: typegen drift

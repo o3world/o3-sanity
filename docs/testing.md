@@ -7,11 +7,14 @@ migration batch, after wiring a new block. There is no pre-commit or pre-push ho
 is unchanged. Don't leave a watcher running or re-run the suite after every edit.
 
 ```bash
-pnpm test           # all three layers  (~15s)
-pnpm test:changed   # only what your branch touched — the usual checkpoint
-pnpm test:fast      # unit + render, skips the browser  (~3s)
+pnpm test           # all three layers — the checkpoint  (~5s)
+pnpm test:fast      # unit + render, skips the browser   (~1.6s)
 pnpm test --project unit      # one layer
 ```
+
+There is deliberately no "test only what changed" script. `vitest --changed` resolved to
+"No test files found, exiting with code 0" here — it passes without running anything, which is
+the worst possible failure mode for a check. The full suite is ~5s; just run it.
 
 ## Which layer?
 
