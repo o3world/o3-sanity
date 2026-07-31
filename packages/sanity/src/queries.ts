@@ -143,7 +143,9 @@ export const PAGE_QUERY = defineQuery(`*[_type == "page" && slug.current == $slu
   seo
 }`)
 
-export const PAGE_SLUGS_QUERY = defineQuery(`*[_type == "page" && defined(slug.current)].slug.current`)
+export const PAGE_SLUGS_QUERY = defineQuery(
+  `*[_type == "page" && defined(slug.current)].slug.current`,
+)
 
 export const PAGES_BY_TYPE_QUERY = defineQuery(
   `*[_type == "page" && pageType == $pageType] | order(title asc){

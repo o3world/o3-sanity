@@ -31,7 +31,8 @@ export const caseStudy = defineType({
     defineField({
       name: 'industryDetail',
       type: 'string',
-      description: 'The eyebrow’s second half, e.g. "Pediatric Systems" in "Healthcare · Pediatric Systems".',
+      description:
+        'The eyebrow’s second half, e.g. "Pediatric Systems" in "Healthcare · Pediatric Systems".',
     }),
     defineField({
       name: 'narrativeHeadline',

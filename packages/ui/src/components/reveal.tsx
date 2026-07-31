@@ -52,7 +52,7 @@ export function Reveal({ delay = 0, className, style, children, ...rest }: Revea
     <div
       ref={ref}
       className={cn(
-        'ease-out transition-[opacity,transform] duration-(--duration-reveal)',
+        'duration-(--duration-reveal) transition-[opacity,transform] ease-out',
         'motion-reduce:transition-none',
         shown ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0',
         className,

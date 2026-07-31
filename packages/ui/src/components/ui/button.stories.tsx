@@ -15,7 +15,7 @@ const kit = defineVariantStories({
   matrix: ['variant', 'size'],
 })
 
-const meta = { ...kit.meta, component: Button } satisfies Meta<typeof Button>
+const meta: Meta<typeof Button> = { ...kit.meta, component: Button }
 export default meta
 type Story = StoryObj<typeof meta>
 

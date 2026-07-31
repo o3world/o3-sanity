@@ -29,7 +29,12 @@ export const category = defineType({
   type: 'document',
   fields: [
     defineField({ name: 'title', type: 'string', validation: (rule) => rule.required() }),
-    defineField({ name: 'slug', type: 'slug', options: { source: 'title' }, validation: (rule) => rule.required() }),
+    defineField({
+      name: 'slug',
+      type: 'slug',
+      options: { source: 'title' },
+      validation: (rule) => rule.required(),
+    }),
   ],
   preview: { select: { title: 'title' } },
 })
@@ -40,7 +45,12 @@ export const industry = defineType({
   type: 'document',
   fields: [
     defineField({ name: 'title', type: 'string', validation: (rule) => rule.required() }),
-    defineField({ name: 'slug', type: 'slug', options: { source: 'title' }, validation: (rule) => rule.required() }),
+    defineField({
+      name: 'slug',
+      type: 'slug',
+      options: { source: 'title' },
+      validation: (rule) => rule.required(),
+    }),
   ],
   preview: { select: { title: 'title' } },
 })
@@ -77,5 +87,8 @@ export const siteSettings = defineType({
     }),
     defineField({ name: 'defaultSeo', type: 'seo' }),
   ],
-  preview: { select: { title: 'title' }, prepare: (sel) => ({ title: sel.title ?? 'Site Settings' }) },
+  preview: {
+    select: { title: 'title' },
+    prepare: (sel) => ({ title: sel.title ?? 'Site Settings' }),
+  },
 })

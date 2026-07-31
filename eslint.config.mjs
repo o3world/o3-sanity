@@ -43,13 +43,15 @@ export default [
           paths: [
             {
               name: 'next/image',
-              message: 'Use SanityImage inside src/content/ — it wires hotspot/crop and CDN params.',
+              message:
+                'Use SanityImage inside src/content/ — it wires hotspot/crop and CDN params.',
             },
           ],
           patterns: [
             {
               group: ['@o3/sanity/image'],
-              message: 'Use SanityImage inside src/content/ instead of the low-level image helpers.',
+              message:
+                'Use SanityImage inside src/content/ instead of the low-level image helpers.',
             },
           ],
         },

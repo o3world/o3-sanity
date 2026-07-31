@@ -36,13 +36,15 @@ function CardHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElement
   return <div className={cn('flex flex-col gap-3 p-6 pb-0', className)} {...props} />
 }
 
-function CardTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
+function CardTitle({ className, children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
   // Insight-card h4: Figtree 300, 22/1.25, -0.01em.
   return (
     <h4
-      className={cn('text-[22px] leading-[1.25] font-light tracking-[-0.01em]', className)}
+      className={cn('text-[22px] font-light leading-[1.25] tracking-[-0.01em]', className)}
       {...props}
-    />
+    >
+      {children}
+    </h4>
   )
 }
 
@@ -59,7 +61,7 @@ function CardFooter({ className, ...props }: React.HTMLAttributes<HTMLDivElement
   return (
     <div
       className={cn(
-        'border-line-soft text-fg-subtle mt-auto flex items-center border-t px-6 pt-4 pb-6 text-[13px]',
+        'border-line-soft text-fg-subtle mt-auto flex items-center border-t px-6 pb-6 pt-4 text-[13px]',
         className,
       )}
       {...props}
@@ -67,4 +69,13 @@ function CardFooter({ className, ...props }: React.HTMLAttributes<HTMLDivElement
   )
 }
 
-export { Card, CardMedia, CardHeader, CardFooter, CardTitle, CardDescription, CardContent, cardVariants }
+export {
+  Card,
+  CardMedia,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  cardVariants,
+}

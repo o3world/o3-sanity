@@ -1,0 +1,292 @@
+import { cache } from 'react'
+import type { ComponentType, JSX, ReactNode } from 'react'
+import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+
+import { sanityFetch } from '@/sanity/live'
+import { clampPage, pageRange, parsePage } from '@/lib/pagination'
+
+import { docTag, typeTag } from './cacheTags'
+import { encodePathParam } from './encodePathParam'
+
+import type {
+  DetailEntry,
+  ListingEntry,
+  QueryResult,
+  RoutableEntry,
+  RouteContext,
+  SingletonEntry,
+} from './types'
+
+/**
+ * The four route builders (ADR 0001): each turns an entry (or entry list)
+ * into a `{ generateMetadata, Page }` shim that a `page.tsx` re-exports.
+ * They hide the React.cache-shared fetch (one sanityFetch per request across
+ * generateMetadata + Page), the cache-tag wiring `/api/revalidate` relies on,
+ * `_type` dispatch, and metadata extraction.
+ *
+ * The vtx-web original's i18n (locale param, fallbackOrNotFound,
+ * buildAlternates), legacy path rewrites, and materialized-path matching are
+ * deliberately not ported — o3 is single-locale and matches on `slug.current`.
+ */
+
+export interface DetailRouteShim {
+  readonly generateMetadata: (props: { params: Promise<{ slug: string }> }) => Promise<Metadata>
+  readonly Page: (props: { params: Promise<{ slug: string }> }) => Promise<JSX.Element>
+}
+
+export interface CatchAllRouteShim {
+  readonly generateMetadata: (props: {
+    params: Promise<{ segments?: string[] }>
+  }) => Promise<Metadata>
+  readonly Page: (props: { params: Promise<{ segments?: string[] }> }) => Promise<JSX.Element>
+}
+
+export interface SingletonRouteShim {
+  readonly generateMetadata: () => Promise<Metadata>
+  readonly Page: () => Promise<JSX.Element>
+}
+
+export interface ListingRouteShim {
+  readonly generateMetadata: () => Promise<Metadata>
+  readonly Page: (props: {
+    searchParams: Promise<{ page?: string | string[] }>
+  }) => Promise<JSX.Element>
+}
+
+interface BaseEntryLike<Q extends string> {
+  readonly metadata?: (doc: NonNullable<QueryResult<Q>>) => Metadata
+}
+
+/**
+ * Build Metadata for a matched entry/doc pair. Delegates to the entry's own
+ * `metadata` extractor when provided; falls back to a generic `title:
+ * doc.title` shape. Always folds in `robots.noindex` when the doc's seo
+ * object requests it.
+ */
+function extractMetadata<Q extends string>(entry: BaseEntryLike<Q>, doc: unknown): Metadata {
+  const base: Metadata = entry.metadata
+    ? // The entry's extractor accepts NonNullable<QueryResult<Q>>; the build
+      // helper has only `unknown` (Q widens to string at this site). Cast to
+      // satisfy the call signature — the entry's own implementation re-casts
+      // back to its concrete result type.
+      entry.metadata(doc as NonNullable<QueryResult<Q>>)
+    : defaultMetadata(doc)
+
+  const seo = (doc as { seo?: { noIndex?: boolean | null } | null })?.seo
+  if (seo?.noIndex) {
+    base.robots = { index: false, follow: false }
+  }
+  return base
+}
+
+function defaultMetadata(doc: unknown): Metadata {
+  const anyDoc = doc as Record<string, unknown>
+  if (typeof anyDoc?.title === 'string') return { title: anyDoc.title }
+  return {}
+}
+
+/**
+ * Spread the fetched doc + route context as renderer props. The renderer's
+ * prop type is `RendererProps<Q>` (doc fields + RouteContext); the helper has
+ * only `unknown` at the call site (Q widens to string here). The single
+ * `as any` lives in this one place so every dispatcher stays cast-free.
+ */
+function renderEntry(
+  entry: { renderer: (props: never) => ReactNode },
+  doc: unknown,
+  ctx: RouteContext & Record<string, unknown>,
+): JSX.Element {
+  // Every entry renderer (concrete or erased) is assignable to the
+  // `(props: never)` bottom; widen to a spreadable component here.
+  const Renderer = entry.renderer as ComponentType<Record<string, unknown>>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const props = { ...(doc as any), ...ctx }
+  return <Renderer {...props} />
+}
+
+/** Build a detail-route shim for `<prefix>/[slug]/page.tsx`. */
+export function buildDetailRoute<Q extends string>(entry: DetailEntry<Q>): DetailRouteShim {
+  // React.cache wraps the fetcher so generateMetadata + Page share one
+  // underlying sanityFetch per request. Tags follow the per-document scheme
+  // so /api/revalidate can invalidate one doc without nuking the type.
+  const fetchDoc = cache(async (slug: string, stega = true) => {
+    const { data } = await sanityFetch({
+      query: entry.query,
+      params: { slug },
+      tags: [docTag(entry.type, slug), typeTag(entry.type)],
+      stega,
+    })
+    return data
+  })
+
+  const generateMetadata: DetailRouteShim['generateMetadata'] = async ({ params }) => {
+    const { slug: rawSlug } = await params
+    const slug = encodePathParam(rawSlug)
+    // stega: false on metadata — stega characters must never leak into
+    // <title> / OG / description.
+    const doc = await fetchDoc(slug, /* stega */ false)
+    if (!doc) return {}
+    return extractMetadata(entry, doc)
+  }
+
+  const Page: DetailRouteShim['Page'] = async ({ params }) => {
+    const { slug: rawSlug } = await params
+    const slug = encodePathParam(rawSlug)
+    const doc = await fetchDoc(slug)
+    if (!doc) notFound()
+    return renderEntry(entry, doc, { slug })
+  }
+
+  return { generateMetadata, Page }
+}
+
+/**
+ * Build a catch-all-route shim for `[...segments]/page.tsx` where one or more
+ * content types share the slug-from-segments dispatch. One merged GROQ query
+ * matches `slug.current == segments.join('/')`; the fetched doc carries
+ * `_type`, and the helper narrows on it and dispatches to the matching
+ * entry's renderer. (Today `page` is the only catch-all type — the multi-type
+ * dispatch shape is kept because it costs nothing and is the vtx-proven seam
+ * for adding another type later.)
+ */
+export function buildCatchAllRoute(
+  entries: readonly RoutableEntry[],
+  sharedQuery: string,
+): CatchAllRouteShim {
+  const typeTags = entries.map((e) => typeTag(e.type))
+  const entryByType = new Map<string, RoutableEntry>(entries.map((e) => [e.type, e]))
+
+  const fetchDoc = cache(async (slug: string, stega = true) => {
+    const { data } = await sanityFetch({
+      query: sharedQuery,
+      params: { slug },
+      tags: [...typeTags, ...entries.map((e) => docTag(e.type, slug))],
+      stega,
+    })
+    return data
+  })
+
+  function findEntryForDoc(doc: unknown): RoutableEntry | undefined {
+    if (!doc || typeof doc !== 'object') return undefined
+    const type = (doc as { _type?: unknown })._type
+    if (typeof type !== 'string') return undefined
+    return entryByType.get(type)
+  }
+
+  /**
+   * Multi-segment slugs join with `/` and carry no leading slash — the same
+   * shape `page.slug.current` stores (`services/ux-audit`). `encodePathParam`
+   * reconciles Next's raw-vs-decoded param asymmetry between Page and
+   * generateMetadata.
+   */
+  function resolveSlug(segments: string[] | undefined): string {
+    if (!segments || segments.length === 0) return ''
+    return segments.map(encodePathParam).join('/')
+  }
+
+  const generateMetadata: CatchAllRouteShim['generateMetadata'] = async ({ params }) => {
+    const { segments } = await params
+    const slug = resolveSlug(segments)
+    if (!slug) return {}
+    const doc = await fetchDoc(slug, /* stega */ false)
+    if (!doc) return {}
+    const entry = findEntryForDoc(doc)
+    return entry ? extractMetadata(entry, doc) : {}
+  }
+
+  const Page: CatchAllRouteShim['Page'] = async ({ params }) => {
+    const { segments } = await params
+    const slug = resolveSlug(segments)
+    if (!slug) notFound()
+    const doc = await fetchDoc(slug)
+    if (!doc) notFound()
+    const entry = findEntryForDoc(doc)
+    if (!entry) {
+      console.error(
+        `buildCatchAllRoute: unrecognized _type returned by sharedQuery; ` +
+          `slug="${slug}" got=${JSON.stringify((doc as { _type?: unknown })._type)}`,
+      )
+      notFound()
+    }
+    return renderEntry(entry, doc, { slug })
+  }
+
+  return { generateMetadata, Page }
+}
+
+/**
+ * Build a singleton-route shim for a fixed URL served by one document —
+ * e.g. the homepage renders the `page` document whose slug is `"index"`
+ * through the same entry machinery as the catch-all.
+ */
+export function buildSingletonRoute<Q extends string>(
+  entry: SingletonEntry<Q>,
+): SingletonRouteShim {
+  const params = entry.params ?? {}
+  const slug = params.slug ?? ''
+
+  const fetchDoc = cache(async (stega = true) => {
+    const { data } = await sanityFetch({
+      query: entry.query,
+      params,
+      tags: slug ? [docTag(entry.type, slug), typeTag(entry.type)] : [typeTag(entry.type)],
+      stega,
+    })
+    return data
+  })
+
+  const generateMetadata: SingletonRouteShim['generateMetadata'] = async () => {
+    const doc = await fetchDoc(/* stega */ false)
+    if (!doc) return {}
+    return extractMetadata(entry, doc)
+  }
+
+  const Page: SingletonRouteShim['Page'] = async () => {
+    const doc = await fetchDoc()
+    if (!doc) notFound()
+    return renderEntry(entry, doc, { slug })
+  }
+
+  return { generateMetadata, Page }
+}
+
+/**
+ * Build a route shim for a paginated listing (`?page=N`). The entry's query
+ * returns `{ items, total }` in one round-trip (`$offset`/`$end` slice the
+ * feed). The requested page is clamped against `total`; the rare
+ * out-of-range request costs one refetch. Fetches are tagged per
+ * `itemTypes` so an item edit invalidates the listing that indexes it.
+ */
+export function buildListingRoute<Q extends string>(entry: ListingEntry<Q>): ListingRouteShim {
+  const pageSize = entry.pageSize ?? 12
+  const tags = entry.itemTypes.map(typeTag)
+
+  const fetchPage = async (page: number) => {
+    const { offset, end } = pageRange(page, pageSize)
+    const { data } = await sanityFetch({
+      query: entry.query,
+      params: { offset, end },
+      tags,
+    })
+    return data
+  }
+
+  const generateMetadata: ListingRouteShim['generateMetadata'] = async () => entry.metadata ?? {}
+
+  const Page: ListingRouteShim['Page'] = async ({ searchParams }) => {
+    const { page: pageParam } = await searchParams
+    const requested = parsePage(pageParam)
+
+    let data = await fetchPage(requested)
+    const total = (data as { total?: unknown } | null)?.total
+    const totalPages = Math.max(1, Math.ceil((typeof total === 'number' ? total : 0) / pageSize))
+    const page = clampPage(requested, totalPages)
+    if (page !== requested) data = await fetchPage(page)
+    if (!data) notFound()
+
+    return renderEntry(entry, data, { slug: '', pagination: { page, totalPages } })
+  }
+
+  return { generateMetadata, Page }
+}

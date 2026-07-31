@@ -21,14 +21,14 @@ type Story = StoryObj<typeof meta>
 export const ScrollDemo: Story = {
   render: () => (
     <div className="bg-bone px-6 py-16">
-      <div className="mx-auto flex max-w-content flex-col gap-[70vh]">
+      <div className="max-w-content mx-auto flex flex-col gap-[70vh]">
         <div>
           <DisplayHeading level="lg" as="p">
             Scroll to reveal ↓
           </DisplayHeading>
           <p className="text-fg-muted mt-4">
-            Each block below animates in as it crosses the viewport edge (with a 40px early
-            margin, like the prototype&apos;s data-reveal).
+            Each block below animates in as it crosses the viewport edge (with a 40px early margin,
+            like the prototype&apos;s data-reveal).
           </p>
         </div>
         {[1, 2, 3].map((n) => (
@@ -52,10 +52,10 @@ export const ScrollDemo: Story = {
 export const Staggered: Story = {
   render: () => (
     <div className="bg-bone px-6 py-16">
-      <div className="grid max-w-content mx-auto grid-cols-3 gap-6">
+      <div className="max-w-content mx-auto grid grid-cols-3 gap-6">
         {[0, 1, 2, 3, 4, 5].map((i) => (
           <Reveal key={i} delay={i * 80}>
-            <div className="border-line flex h-[110px] items-center justify-center rounded-card border bg-white">
+            <div className="border-line rounded-card flex h-[110px] items-center justify-center border bg-white">
               Tile {i + 1}
             </div>
           </Reveal>

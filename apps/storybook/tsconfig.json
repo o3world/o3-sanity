@@ -1,0 +1,20 @@
+{
+  "extends": "@o3/typescript-config/storybook.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@o3/story-kit": ["../../packages/story-kit/src/index.ts"],
+      "@o3/story-kit/story-roots": ["../../packages/story-kit/src/storyRoots.ts"],
+      "@o3/story-kit/*": ["../../packages/story-kit/src/*"],
+      "@o3/ui": ["../../packages/ui/src/index.ts"],
+      "@o3/ui/*": ["../../packages/ui/src/*"]
+    }
+  },
+  "include": [
+    ".storybook/**/*.ts",
+    ".storybook/**/*.tsx",
+    "../../packages/ui/src/**/*.stories.ts",
+    "../../packages/ui/src/**/*.stories.tsx"
+  ],
+  "exclude": ["node_modules", "storybook-static"]
+}

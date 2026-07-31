@@ -17,6 +17,9 @@ storybook-static/
 # vercel
 .vercel/
 
+# sanity typegen intermediate (generated.ts IS committed)
+packages/sanity/schema.json
+
 # os/editor
 .DS_Store
 

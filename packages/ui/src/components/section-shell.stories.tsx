@@ -29,7 +29,9 @@ function PlaceholderContent({ surface }: { surface: Surface }) {
       <DisplayHeading level="xl">
         We work with B2B and enterprise teams to reimagine experiences.
       </DisplayHeading>
-      <p className={`max-w-[520px] text-lg leading-[1.55] ${onInk ? 'text-fg-inverse-muted' : 'text-fg-muted'}`}>
+      <p
+        className={`max-w-[520px] text-lg leading-[1.55] ${onInk ? 'text-fg-inverse-muted' : 'text-fg-muted'}`}
+      >
         Strategy, design, engineering and AI under one roof. The same senior team that finds the
         move is the team that builds it.
       </p>

@@ -33,7 +33,12 @@ export const logoWallBlock = defineSectionBlock({
   defaultSurface: 'bone',
   fields: [
     defineField({ name: 'eyebrow', type: 'string' }),
-    defineField({ name: 'statement', type: 'text', rows: 2, description: 'The large display statement above the logos.' }),
+    defineField({
+      name: 'statement',
+      type: 'text',
+      rows: 2,
+      description: 'The large display statement above the logos.',
+    }),
     defineField({
       name: 'clients',
       type: 'array',
@@ -62,7 +67,8 @@ export const caseShowcaseBlock = defineSectionBlock({
       name: 'caseStudies',
       type: 'array',
       of: [defineArrayMember({ type: 'reference', to: [{ type: 'caseStudy' }] })],
-      description: 'Sticky-stacking cards; each pulls its narrative headline and headline stat from the case study.',
+      description:
+        'Sticky-stacking cards; each pulls its narrative headline and headline stat from the case study.',
       validation: (rule) => rule.required().min(1),
     }),
   ],
@@ -84,11 +90,23 @@ export const railPanelsBlock = defineSectionBlock({
           type: 'object',
           name: 'panel',
           fields: [
-            defineField({ name: 'railLabel', type: 'string', validation: (rule) => rule.required() }),
+            defineField({
+              name: 'railLabel',
+              type: 'string',
+              validation: (rule) => rule.required(),
+            }),
             defineField({ name: 'heading', type: 'string' }),
-            defineField({ name: 'logo', type: 'image', description: 'Optional logo shown instead of the heading (platform panels).' }),
+            defineField({
+              name: 'logo',
+              type: 'image',
+              description: 'Optional logo shown instead of the heading (platform panels).',
+            }),
             defineField({ name: 'body', type: 'text', rows: 3 }),
-            defineField({ name: 'note', type: 'string', description: 'The quieter "Best when…" line.' }),
+            defineField({
+              name: 'note',
+              type: 'string',
+              description: 'The quieter "Best when…" line.',
+            }),
             defineField({ name: 'cta', type: 'cta' }),
             defineField({ name: 'media', type: 'figure' }),
           ],
@@ -106,7 +124,11 @@ export const quoteBlock = defineSectionBlock({
   defaultSurface: 'bone',
   fields: [
     defineField({ name: 'quote', type: 'text', rows: 4, validation: (rule) => rule.required() }),
-    defineField({ name: 'attribution', type: 'string', description: 'e.g. "Business Leader, Global Health Brand".' }),
+    defineField({
+      name: 'attribution',
+      type: 'string',
+      description: 'e.g. "Business Leader, Global Health Brand".',
+    }),
     defineField({
       name: 'decoration',
       type: 'string',
@@ -182,7 +204,10 @@ export const layoutSection = defineSectionBlock({
       validation: (rule) => rule.required().min(1),
     }),
   ],
-  preview: { select: { title: 'heading' }, prepare: (sel) => ({ title: sel.title ?? 'Layout section' }) },
+  preview: {
+    select: { title: 'heading' },
+    prepare: (sel) => ({ title: sel.title ?? 'Layout section' }),
+  },
 })
 
 export const mediaSection = defineSectionBlock({

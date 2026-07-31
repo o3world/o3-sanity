@@ -1,6 +1,7 @@
 import createImageUrlBuilder from '@sanity/image-url'
-import type { SanityImageSource } from '@sanity/image-url/lib/types/types'
 import { clientConfig } from './client'
+
+export type SanityImageSource = Parameters<ReturnType<typeof createImageUrlBuilder>['image']>[0]
 
 const builder = createImageUrlBuilder({
   projectId: clientConfig.projectId,

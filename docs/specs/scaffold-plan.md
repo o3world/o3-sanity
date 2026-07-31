@@ -54,18 +54,18 @@ packages/
 
 ## Env vars
 
-| Var | Where |
-| --- | --- |
-| `NEXT_PUBLIC_SANITY_PROJECT_ID` = `naorcr6k` | all |
-| `NEXT_PUBLIC_SANITY_DATASET` | `production` default; `development` for dry-runs |
-| `SANITY_API_READ_TOKEN` | web (server), local dev |
-| `SANITY_API_WRITE_TOKEN` | pipeline only |
-| `SANITY_DEPLOY_TOKEN` | CI (`schema:deploy`) |
-| `SANITY_REVALIDATE_SECRET` | web ↔ revalidate webhook |
-| `NEXT_PUBLIC_BASE_URL` | web |
-| `VERCEL_TOKEN` / `VERCEL_ORG_ID` / `VERCEL_PROJECT_ID` / `VERCEL_STORYBOOK_PROJECT_ID` | CI |
-| `TURBO_TOKEN` (secret) + `TURBO_TEAM` (var) | CI remote cache |
-| `SITE_AUTH_USER` / `SITE_AUTH_PASS` | storybook gating |
+| Var                                                                                    | Where                                            |
+| -------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| `NEXT_PUBLIC_SANITY_PROJECT_ID` = `naorcr6k`                                           | all                                              |
+| `NEXT_PUBLIC_SANITY_DATASET`                                                           | `production` default; `development` for dry-runs |
+| `SANITY_API_READ_TOKEN`                                                                | web (server), local dev                          |
+| `SANITY_API_WRITE_TOKEN`                                                               | pipeline only                                    |
+| `SANITY_DEPLOY_TOKEN`                                                                  | CI (`schema:deploy`)                             |
+| `SANITY_REVALIDATE_SECRET`                                                             | web ↔ revalidate webhook                         |
+| `NEXT_PUBLIC_BASE_URL`                                                                 | web                                              |
+| `VERCEL_TOKEN` / `VERCEL_ORG_ID` / `VERCEL_PROJECT_ID` / `VERCEL_STORYBOOK_PROJECT_ID` | CI                                               |
+| `TURBO_TOKEN` (secret) + `TURBO_TEAM` (var)                                            | CI remote cache                                  |
+| `SITE_AUTH_USER` / `SITE_AUTH_PASS`                                                    | storybook gating                                 |
 
 ## Scaffold sequence (ticket #10)
 

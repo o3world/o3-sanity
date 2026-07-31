@@ -8,14 +8,14 @@
     "lint": "eslint src/",
     "schema:deploy": "sanity schema deploy",
     "typecheck": "tsc --noEmit",
-    "typegen": "sanity schema extract --path=schema.json && sanity typegen generate"
+    "typegen": "sanity schema extract --force --path=schema.json && sanity typegen generate"
   },
   "dependencies": {
     "@sanity/client": "^7.23.0",
     "@sanity/icons": "^3.7.0",
     "@sanity/image-url": "^2.1.1",
     "groq": "^4.10.1",
-    "sanity": "^6.4.0"
+    "sanity": "6.4.0"
   },
   "devDependencies": {
     "@o3/typescript-config": "workspace:*",

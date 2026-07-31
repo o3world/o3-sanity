@@ -17,7 +17,9 @@ export function LogoTile({ src, alt = '', className, children, ...rest }: LogoTi
   return (
     <div className={cn('flex h-[110px] items-center justify-center', className)} {...rest}>
       {children ??
-        (src ? <img src={src} alt={alt} className="max-h-[76px] max-w-[78%] object-contain" /> : null)}
+        (src ? (
+          <img src={src} alt={alt} className="max-h-[76px] max-w-[78%] object-contain" />
+        ) : null)}
     </div>
   )
 }

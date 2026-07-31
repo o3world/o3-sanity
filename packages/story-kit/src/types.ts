@@ -76,8 +76,7 @@ export function toProps<T extends object>(data: T): Omit<T, '_type' | '_key' | '
 // ---------------------------------------------------------------------------
 
 export type PresetPatchLike =
-  | { op: 'set'; path: string[]; value: unknown }
-  | { op: 'unset'; path: string[] }
+  { op: 'set'; path: string[]; value: unknown } | { op: 'unset'; path: string[] }
 
 export interface CatalogPresetLike {
   name: string
