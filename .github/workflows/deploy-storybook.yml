@@ -81,7 +81,7 @@ jobs:
           if [ -n "${{ secrets.SITE_AUTH_USER }}" ]; then
             ARGS+=(-u "${{ secrets.SITE_AUTH_USER }}:${{ secrets.SITE_AUTH_PASS }}")
           fi
-          CODE=$(vercel curl / --deployment "$URL" --token="$VERCEL_TOKEN" -- "${ARGS[@]}") || { echo "::error::smoke check failed to connect"; exit 1; }
+          CODE=$(vercel curl / --deployment "$URL" --cwd apps/storybook --yes -- "${ARGS[@]}") || { echo "::error::smoke check failed to connect"; exit 1; }
           [ "$CODE" = "200" ] || { echo "::error::smoke check got HTTP $CODE from $URL"; exit 1; }
       - name: Finish GitHub deployment
         if: always()

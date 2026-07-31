@@ -97,7 +97,7 @@ jobs:
         run: |
           BASE="${{ steps.alias.outputs.alias_url || steps.deploy.outputs.url }}"
           for PATHNAME in / /studio; do
-            CODE=$(vercel curl "$PATHNAME" --deployment "$BASE" --token="$VERCEL_TOKEN" -- \
+            CODE=$(vercel curl "$PATHNAME" --deployment "$BASE" --yes -- \
               -sS -o /dev/null -w '%{http_code}' --retry 5 --retry-delay 5)
             echo "$BASE$PATHNAME → $CODE"
             [ "$CODE" = "200" ] || exit 1
