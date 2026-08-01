@@ -20,6 +20,9 @@ storybook-static/
 # sanity typegen intermediate (generated.ts IS committed)
 packages/sanity/schema.json
 
+# local secret scratch (tokens pasted for `gh secret set`; never committed)
+private.txt
+
 # os/editor
 .DS_Store
 
