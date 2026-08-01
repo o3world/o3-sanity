@@ -17,6 +17,7 @@ import { getCliClient } from 'sanity/cli'
 
 import { ROUTABLE_TYPES } from '@o3/sanity/constants'
 
+import { isImageBuffer } from './lib/media'
 import {
   ASSET_MAP,
   CONVERTED_DIR,
@@ -49,8 +50,9 @@ const assetMap: Record<string, { sha256?: string; assetId: string }> = existsSyn
   : {}
 
 async function upload(key: string, filename: string, buf: Buffer): Promise<string> {
-  const isImage = /\.(jpe?g|png|gif|webp|avif|svg)$/i.test(filename)
-  const asset = await client.assets.upload(isImage ? 'image' : 'file', buf, { filename })
+  const asset = await client.assets.upload(isImageBuffer(buf, filename) ? 'image' : 'file', buf, {
+    filename,
+  })
   assetMap[key] = { sha256: asset.sha1hash, assetId: asset._id }
   writeFileSync(ASSET_MAP, JSON.stringify(assetMap, null, 2) + '\n')
   console.log(`  ↑ asset ${filename} → ${asset._id}`)
