@@ -58,6 +58,9 @@ const preview: Preview = {
           'Motion',
           'Content',
           ['Blocks', ['Base', 'Section'], 'Cards', 'Documents'],
+          // Last, deliberately: captured artifacts are history, not the
+          // system. See apps/storybook/prototypes/README.md.
+          'Prototypes',
         ],
       },
     },

@@ -16,7 +16,8 @@
       ]
     },
     "apps/storybook": {
-      "entry": [".storybook/{main,preview}.ts"]
+      "entry": [".storybook/{main,preview}.ts", "prototypes/**/*.stories.tsx"],
+      "ignore": ["prototypes/*/**"]
     },
     "packages/*": {
       "entry": ["src/index.ts", "src/**/*.stories.tsx", "sanity.cli.ts"]

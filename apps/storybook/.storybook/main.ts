@@ -39,8 +39,26 @@ const stories = storyGlobs(STORYBOOK_CONFIG_PREFIX).filter((glob) =>
   fs.existsSync(path.resolve(__dirname, glob.slice(0, glob.length - STORY_GLOB_SUFFIX.length - 1))),
 )
 
+// Captured prototypes (apps/storybook/prototypes/README.md). A set is a
+// directory with an `index.html` entry page; everything beside it — sibling
+// pages, assets, the artifact's own runtime JS — ships with it, so the
+// cross-links inside a set keep working. Deriving the mounts from disk means
+// adding a prototype is "drop the folder, write a story", with no config edit
+// to forget.
+const prototypesDir = path.resolve(__dirname, '../prototypes')
+const staticDirs = fs.existsSync(prototypesDir)
+  ? fs
+      .readdirSync(prototypesDir, { withFileTypes: true })
+      .filter(
+        (entry) =>
+          entry.isDirectory() && fs.existsSync(path.join(prototypesDir, entry.name, 'index.html')),
+      )
+      .map((entry) => ({ from: `../prototypes/${entry.name}`, to: `/prototypes/${entry.name}` }))
+  : []
+
 const config: StorybookConfig = {
   stories,
+  staticDirs,
   addons: [
     '@storybook/addon-docs',
     '@storybook/addon-a11y',

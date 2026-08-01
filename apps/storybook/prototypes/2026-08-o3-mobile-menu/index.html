@@ -1,0 +1,806 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>O3 mobile menu — open-state proposal</title>
+    <!--
+      Captured from claude.ai artifact 303cb5d7-544d-4b12-bce5-1fe532f83d2b on
+      2026-08-01. Verbatim except for two things: the claude.ai frame-runtime
+      preamble is stripped (it only talks to the artifact host and does nothing
+      here), and <title> is moved into <head> where it belongs. The base reset
+      below is the artifact host's, kept because the page was authored against
+      it. Do not edit further — see ../README.md.
+    -->
+    <style>
+      :root {
+        color-scheme: light;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        font: 14px -apple-system, BlinkMacSystemFont, sans-serif;
+        background: #faf9f5;
+        color: #141413;
+      }
+      img {
+        max-width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <style>
+      :root {
+        /* Page chrome — a warm neutral biased toward the O3 red, so it sits beside
+       the artwork without competing with it. */
+        --page: #f7f5f4;
+        --page-raised: #ffffff;
+        --rule: #e4dedb;
+        --text: #221e1d;
+        --text-muted: #6d6462;
+        --text-faint: #9b918e;
+        --mark: #eb1000;
+
+        /* ── O3 design tokens, verbatim from packages/tailwind-config ─────────
+       Nothing in the device frames is picked by eye. */
+        --o3-ink: #0a0a0a;
+        --o3-ink-deep: #030303;
+        --o3-brand: #eb1000;
+        --o3-white: #ffffff;
+        --o3-on-ink: rgba(255, 255, 255, 0.92);
+        --o3-on-ink-muted: rgba(255, 255, 255, 0.65);
+        --o3-on-ink-subtle: rgba(255, 255, 255, 0.6);
+        --o3-on-ink-line: rgba(255, 255, 255, 0.2);
+        --o3-scrim: rgba(3, 3, 3, 0.2);
+        --o3-glow: radial-gradient(
+            circle at 115% 24%,
+            rgba(235, 16, 0, 0.5) 0%,
+            rgba(3, 3, 3, 0) 100%
+          ),
+          radial-gradient(circle at 0% 0%, rgba(114, 8, 0, 1) 0%, rgba(3, 3, 3, 1) 65%);
+
+        /* The theme's own declared fallback stack — see the note on type below. */
+        --o3-sans: 'Helvetica Neue', Arial, sans-serif;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --page: #171514;
+          --page-raised: #201d1c;
+          --rule: #322d2b;
+          --text: #f2eeec;
+          --text-muted: #a89f9c;
+          --text-faint: #7d7370;
+          --mark: #ff6a5a;
+        }
+      }
+      :root[data-theme='dark'] {
+        --page: #171514;
+        --page-raised: #201d1c;
+        --rule: #322d2b;
+        --text: #f2eeec;
+        --text-muted: #a89f9c;
+        --text-faint: #7d7370;
+        --mark: #ff6a5a;
+      }
+      :root[data-theme='light'] {
+        --page: #f7f5f4;
+        --page-raised: #ffffff;
+        --rule: #e4dedb;
+        --text: #221e1d;
+        --text-muted: #6d6462;
+        --text-faint: #9b918e;
+        --mark: #eb1000;
+      }
+
+      body {
+        background: var(--page);
+        color: var(--text);
+        font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .wrap {
+        max-width: 68rem;
+        margin: 0 auto;
+        padding: clamp(2rem, 5vw, 4.5rem) clamp(1.25rem, 4vw, 2.5rem) 5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 3.5rem;
+      }
+
+      .eyebrow {
+        font-size: 0.75rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--mark);
+        margin: 0 0 0.9rem;
+      }
+
+      h1 {
+        font-size: clamp(1.9rem, 4.2vw, 2.9rem);
+        line-height: 1.12;
+        letter-spacing: -0.02em;
+        font-weight: 600;
+        margin: 0 0 1rem;
+        text-wrap: balance;
+      }
+
+      .lede {
+        font-size: 1.05rem;
+        color: var(--text-muted);
+        max-width: 62ch;
+        margin: 0;
+      }
+      .lede + .lede {
+        margin-top: 0.85rem;
+      }
+
+      h2 {
+        font-size: 1.15rem;
+        font-weight: 650;
+        letter-spacing: -0.01em;
+        margin: 0 0 0.35rem;
+      }
+
+      .section-note {
+        color: var(--text-muted);
+        max-width: 66ch;
+        margin: 0 0 1.6rem;
+        font-size: 0.95rem;
+      }
+
+      code {
+        font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+        font-size: 0.85em;
+        background: color-mix(in srgb, var(--mark) 9%, transparent);
+        padding: 0.1em 0.38em;
+        border-radius: 2px;
+      }
+
+      /* ── Device frames ──────────────────────────────────────────────────── */
+      .stage {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2.5rem 3rem;
+        align-items: flex-start;
+      }
+
+      .device-col {
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+      }
+
+      .device-label {
+        display: flex;
+        align-items: baseline;
+        gap: 0.6rem;
+        font-size: 0.8rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--text-faint);
+      }
+      .device-label span {
+        font-weight: 400;
+        letter-spacing: 0;
+        text-transform: none;
+      }
+
+      .device {
+        width: 402px;
+        max-width: 100%;
+        height: 874px;
+        position: relative;
+        overflow: hidden;
+        background: var(--o3-ink);
+        font-family: var(--o3-sans);
+        box-shadow:
+          0 1px 2px rgba(0, 0, 0, 0.16),
+          0 18px 44px -18px rgba(0, 0, 0, 0.4);
+      }
+
+      /* The photographic hero behind the closed bar, standing in for image 7.
+     Its only job is to prove the bar's 20% scrim reads over live content. */
+      .hero-stand-in {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(120% 80% at 70% 18%, #4a4340 0%, #1b1817 55%, #0a0a0a 100%),
+          var(--o3-ink);
+      }
+      .hero-stand-in::after {
+        content: 'photographic hero';
+        position: absolute;
+        left: 20px;
+        bottom: 20px;
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.28);
+      }
+
+      /* ── The NavBar bar, rebuilt from 1814:1630 ─────────────────────────── */
+      .navbar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 3;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 20px; /* frame value */
+        background: var(--o3-scrim); /* rgba(3,3,3,.2) — must stay an alpha */
+        -webkit-backdrop-filter: blur(6px);
+        backdrop-filter: blur(6px);
+      }
+
+      .logo {
+        width: 64px;
+        height: 64px;
+        display: grid;
+        place-items: center;
+        color: var(--o3-white);
+        font-size: 19px;
+        font-weight: 700;
+        letter-spacing: -0.04em;
+      }
+
+      .menu-btn {
+        width: 42px;
+        height: 42px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 5px; /* frame value: 1814:1636 */
+        background: none;
+        border: 0;
+        padding: 0;
+        cursor: pointer;
+      }
+      .menu-btn i {
+        display: block;
+        height: 2px;
+        background: var(--o3-white);
+        transition:
+          transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1),
+          opacity 160ms linear;
+      }
+      .menu-btn i:nth-child(1) {
+        width: 42px;
+      }
+      .menu-btn i:nth-child(2) {
+        width: 42px;
+      }
+      .menu-btn i:nth-child(3) {
+        width: 26px;
+      }
+      .menu-btn:focus-visible {
+        outline: 2px solid var(--o3-white);
+        outline-offset: 4px;
+      }
+
+      .device.is-open .menu-btn i:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .device.is-open .menu-btn i:nth-child(2) {
+        opacity: 0;
+      }
+      .device.is-open .menu-btn i:nth-child(3) {
+        width: 42px;
+        transform: translateY(-7px) rotate(-45deg);
+      }
+
+      /* ── The proposed panel ─────────────────────────────────────────────── */
+      .panel {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        background-color: var(--o3-ink-deep);
+        background-image: var(--o3-glow); /* Figma variable Gradient/Red/1 */
+        display: flex;
+        flex-direction: column;
+        padding: 78px 20px 24px; /* clears the bar; 20px is the 402 gutter */
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-8px);
+        transition:
+          opacity 260ms cubic-bezier(0.2, 0.7, 0.2, 1),
+          transform 260ms cubic-bezier(0.2, 0.7, 0.2, 1),
+          visibility 0s linear 260ms;
+      }
+      .device.is-open .panel {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        transition-delay: 0s, 0s, 0s;
+      }
+
+      .nav-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+
+      .nav-list li + li {
+        border-top: 1px solid var(--o3-on-ink-line);
+      }
+
+      .nav-list a {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 18px 0;
+        text-decoration: none;
+        color: var(--o3-on-ink);
+        font-size: 40px; /* --text-display-xl at 402 */
+        line-height: 1.2;
+        font-weight: 400;
+        letter-spacing: 0;
+        transform: translateY(10px);
+        opacity: 0;
+      }
+      .device.is-open .nav-list a {
+        animation: rise 420ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+      }
+      .device.is-open .nav-list li:nth-child(1) a {
+        animation-delay: 40ms;
+      }
+      .device.is-open .nav-list li:nth-child(2) a {
+        animation-delay: 80ms;
+      }
+      .device.is-open .nav-list li:nth-child(3) a {
+        animation-delay: 120ms;
+      }
+      .device.is-open .nav-list li:nth-child(4) a {
+        animation-delay: 160ms;
+      }
+      .device.is-open .nav-list li:nth-child(5) a {
+        animation-delay: 200ms;
+      }
+
+      @keyframes rise {
+        to {
+          transform: none;
+          opacity: 1;
+        }
+      }
+
+      .nav-list a .route {
+        font-size: 13px; /* --text-meta */
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--o3-on-ink-subtle);
+        flex: none;
+      }
+
+      .nav-list a:focus-visible {
+        outline: 2px solid var(--o3-white);
+        outline-offset: 3px;
+      }
+
+      .panel-foot {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        padding-top: 24px;
+      }
+
+      /* Button / Solid, Size=Base, light fill — the on-ink treatment */
+      .cta {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 8px 20px;
+        background: var(--o3-white);
+        color: var(--o3-ink);
+        font-size: 18px; /* --text-button */
+        line-height: 24px;
+        font-weight: 500;
+        text-decoration: none;
+        border-radius: 0; /* the design is square */
+      }
+      .cta svg {
+        width: 20px;
+        height: 20px;
+        flex: none;
+      }
+
+      .legal {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        font-size: 12px; /* --text-legal */
+        color: var(--o3-on-ink-subtle);
+      }
+      .legal a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .panel,
+        .menu-btn i {
+          transition-duration: 1ms;
+        }
+        .device.is-open .nav-list a {
+          animation: none;
+          transform: none;
+          opacity: 1;
+        }
+      }
+
+      /* ── Supporting prose ───────────────────────────────────────────────── */
+      .cols {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+        gap: 1.75rem;
+      }
+
+      .card {
+        background: var(--page-raised);
+        border: 1px solid var(--rule);
+        padding: 1.4rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+      .card h3 {
+        margin: 0;
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+      .card p {
+        margin: 0;
+        font-size: 0.92rem;
+        color: var(--text-muted);
+      }
+      .card ul {
+        margin: 0;
+        padding-left: 1.1rem;
+        font-size: 0.92rem;
+        color: var(--text-muted);
+      }
+      .card li + li {
+        margin-top: 0.4rem;
+      }
+
+      .table-scroll {
+        overflow-x: auto;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 0.9rem;
+        min-width: 34rem;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 0.6rem 0.9rem 0.6rem 0;
+        border-bottom: 1px solid var(--rule);
+        vertical-align: top;
+      }
+      th {
+        font-size: 0.72rem;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        color: var(--text-faint);
+        font-weight: 700;
+      }
+      td:first-child {
+        white-space: nowrap;
+      }
+
+      .flag {
+        border-left: 3px solid var(--mark);
+        padding: 0.9rem 0 0.9rem 1.1rem;
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        max-width: 66ch;
+      }
+      .flag strong {
+        color: var(--text);
+      }
+
+      footer.meta {
+        border-top: 1px solid var(--rule);
+        padding-top: 1.5rem;
+        font-size: 0.85rem;
+        color: var(--text-faint);
+        max-width: 66ch;
+      }
+    </style>
+
+    <div class="wrap">
+      <header>
+        <p class="eyebrow">Issue #51 · prototype</p>
+        <h1>The mobile menu has no frame. This is a proposal for one.</h1>
+        <p class="lede">
+          Every canonical page layer has a 1440 and a 402 frame. The 402 NavBar collapses to a logo
+          and a 42&times;42 <code>Open menu</code> control (<code>1814:1636</code>) — and nothing in
+          the Figma file shows the panel it opens. Not on the Home mobile frame, not on the Local
+          Components canvas.
+        </p>
+        <p class="lede">
+          Both frames below are built from <strong>O3 tokens only</strong>, no value picked by eye.
+          The closed bar is a rebuild of <code>1814:1630</code>; the open state is the proposal. Open
+          it.
+        </p>
+      </header>
+
+      <section>
+        <div class="stage">
+          <div class="device-col">
+            <p class="device-label">Closed <span>— rebuilt from the frame</span></p>
+            <div class="device" id="device-closed">
+              <div class="hero-stand-in"></div>
+              <div class="navbar">
+                <div class="logo">O3</div>
+                <button class="menu-btn" type="button" aria-label="Open menu" disabled>
+                  <i></i><i></i><i></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="device-col">
+            <p class="device-label">Open <span>— the proposal</span></p>
+            <div class="device" id="device-open">
+              <div class="hero-stand-in"></div>
+              <nav class="panel" id="panel" aria-label="Site" hidden>
+                <ul class="nav-list">
+                  <li><a href="#">Work <span class="route">/work</span></a></li>
+                  <li><a href="#">Live <span class="route">tbd</span></a></li>
+                  <li><a href="#">Insights <span class="route">/perspectives</span></a></li>
+                  <li><a href="#">Solutions <span class="route">/solutions</span></a></li>
+                  <li><a href="#">About <span class="route">/about</span></a></li>
+                </ul>
+                <div class="panel-foot">
+                  <a class="cta" href="#">
+                    Let&rsquo;s talk
+                    <svg viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true">
+                      <path d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z" />
+                    </svg>
+                  </a>
+                  <p class="legal">
+                    <a href="#">Privacy</a><a href="#">Accessibility</a><span>&copy; 2026 O3</span>
+                  </p>
+                </div>
+              </nav>
+              <div class="navbar">
+                <div class="logo">O3</div>
+                <button
+                  class="menu-btn"
+                  type="button"
+                  id="toggle"
+                  aria-label="Open menu"
+                  aria-expanded="false"
+                  aria-controls="panel"
+                >
+                  <i></i><i></i><i></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>What this takes from Facebook, and what it refuses</h2>
+        <p class="section-note">
+          The brief was to model a modern mobile menu on Facebook&rsquo;s. Facebook solves a
+          different problem — dozens of destinations, returning users, utility density — so the
+          patterns transfer and the density does not.
+        </p>
+        <div class="cols">
+          <div class="card">
+            <h3>Taken</h3>
+            <ul>
+              <li>
+                <strong>Full-screen overlay</strong>, not a narrow drawer. At 402px a drawer wastes
+                the width it just took.
+              </li>
+              <li>
+                <strong>The trigger becomes the close.</strong> The control never moves; the bars
+                rotate into an X in place.
+              </li>
+              <li>
+                <strong>Primary action pinned to the bottom</strong>, in the thumb arc — where
+                Facebook keeps account actions.
+              </li>
+              <li><strong>Utility links demoted</strong> to a quiet 12px row beneath it.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Refused</h3>
+            <ul>
+              <li>
+                <strong>Row density.</strong> Facebook sets ~17px rows because it has forty
+                destinations. O3 has five, so they get the 40px headline step and read as editorial,
+                not as a settings list.
+              </li>
+              <li>
+                <strong>An icon per row.</strong> Icons here are decorative (ADR&nbsp;0009); a glyph
+                beside &ldquo;About&rdquo; would carry nothing.
+              </li>
+              <li>
+                <strong>Search, avatars, badges.</strong> No search exists on this site. Importing
+                the affordance would promise one.
+              </li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Taken from O3, not Facebook</h3>
+            <ul>
+              <li>
+                The panel sits on <code>Gradient/Red/1</code> — the design&rsquo;s signature ember,
+                and how the red appears without a flat fill.
+              </li>
+              <li>Square corners, Figtree 400, and the 20px gutter, straight from the 402 frames.</li>
+              <li>
+                Rules at <code>on-ink-line</code>, the same 20% white as the footer&rsquo;s orbital
+                arc.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Every value, and where it comes from</h2>
+        <p class="section-note">
+          So a reviewer can check the prototype against the token package rather than trusting it.
+        </p>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Element</th>
+                <th>Value</th>
+                <th>Token / frame</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Bar fill</td>
+                <td><code>rgba(3,3,3,.2)</code></td>
+                <td><code>--color-scrim</code> — stays an alpha, it sits over the hero</td>
+              </tr>
+              <tr>
+                <td>Bar padding</td>
+                <td><code>8px 20px</code></td>
+                <td>frame <code>1814:1630</code></td>
+              </tr>
+              <tr>
+                <td>Menu control</td>
+                <td><code>42&times;42</code>, gap <code>5px</code></td>
+                <td>frame <code>1814:1636</code></td>
+              </tr>
+              <tr>
+                <td>Panel ground</td>
+                <td><code>#030303</code> + <code>Gradient/Red/1</code></td>
+                <td><code>--color-ink-deep</code>, <code>--gradient-brand-glow</code></td>
+              </tr>
+              <tr>
+                <td>Nav item</td>
+                <td><code>40px</code> / 1.2 / 400</td>
+                <td><code>--text-display-xl</code> at 402 (ADR 0006)</td>
+              </tr>
+              <tr>
+                <td>Route hint</td>
+                <td><code>13px</code> / .1em / 700</td>
+                <td><code>--text-meta</code></td>
+              </tr>
+              <tr>
+                <td>Dividers</td>
+                <td><code>rgba(255,255,255,.2)</code></td>
+                <td><code>--color-on-ink-line</code></td>
+              </tr>
+              <tr>
+                <td>&ldquo;Let&rsquo;s talk&rdquo;</td>
+                <td><code>8px 20px</code>, 18/24 w500, radius 0</td>
+                <td><code>Button / Solid</code> Size=Base, light fill</td>
+              </tr>
+              <tr>
+                <td>Legal row</td>
+                <td><code>12px</code>, 60% white</td>
+                <td><code>--text-legal</code>, <code>--color-on-ink-subtle</code></td>
+              </tr>
+              <tr>
+                <td>Gutter</td>
+                <td><code>20px</code></td>
+                <td><code>--spacing-gutter</code> at 402</td>
+              </tr>
+              <tr>
+                <td>Easing</td>
+                <td><code>cubic-bezier(.2,.7,.2,1)</code></td>
+                <td><code>--ease-out</code>, the house curve</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>Three things this proposal decides that the frames never did</h2>
+        <div class="flag">
+          <p>
+            <strong>The nav carries all five items plus &ldquo;Let&rsquo;s talk&rdquo;.</strong>
+            Taken from the NavBar component (<code>1710:2271</code>), which is the source of record
+            for nav copy — note the display label is <em>Insights</em> while the route is
+            <code>/perspectives</code>, per #33&rsquo;s correction. <code>Live</code>&rsquo;s URL is
+            still undecided on #33, so it is shown unresolved rather than invented.
+          </p>
+          <p>
+            <strong>The staggered rise is new motion.</strong> Figma frames are static and
+            #33&rsquo;s motion question is open, so this is a proposal, not a reading. It uses the
+            house easing and collapses entirely under <code>prefers-reduced-motion</code>.
+          </p>
+          <p>
+            <strong>The control needs an accessible name.</strong> Every other icon in the design
+            sits beside a label and is decorative; this one is icon-only, so it carries
+            <code>aria-label</code>, <code>aria-expanded</code> and <code>aria-controls</code> —
+            flagged in ADR 0009 and implemented here.
+          </p>
+        </div>
+      </section>
+
+      <footer class="meta">
+        <p>
+          Type is set in the theme&rsquo;s own declared fallback
+          (<code>'Helvetica Neue', Arial</code>) rather than Figtree — the artifact sandbox blocks
+          font CDNs, and a silent substitution is worse than a stated one. Sizes, weights and spacing
+          are the real values, so proportion is accurate and letterforms are not.
+        </p>
+      </footer>
+    </div>
+
+    <script>
+      ;(function () {
+        var device = document.getElementById('device-open')
+        var toggle = document.getElementById('toggle')
+        var panel = document.getElementById('panel')
+
+        function setOpen(open) {
+          device.classList.toggle('is-open', open)
+          toggle.setAttribute('aria-expanded', String(open))
+          toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu')
+          if (open) {
+            panel.hidden = false
+          } else {
+            window.setTimeout(function () {
+              if (!device.classList.contains('is-open')) panel.hidden = true
+            }, 260)
+          }
+        }
+
+        toggle.addEventListener('click', function () {
+          setOpen(toggle.getAttribute('aria-expanded') !== 'true')
+        })
+
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+            setOpen(false)
+            toggle.focus()
+          }
+        })
+
+        // Opens on load so the proposal is what you see first.
+        setOpen(true)
+      })()
+    </script>
+  </body>
+</html>
