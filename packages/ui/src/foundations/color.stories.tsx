@@ -28,9 +28,9 @@ function Swatch({ spec }: { spec: ColorSpec }) {
 }
 
 /**
- * The four neutrals, the one red, and where each is actually used. Read the
- * "nearest token" column as a mapping, not an equivalence — two of these
- * differ from what `@o3/tailwind-config` ships.
+ * The five neutrals, the one red, and where each is actually used. The "token"
+ * column is now an equivalence, not a mapping — `@o3/tailwind-config` carries
+ * these values since #37.
  */
 export const Palette: Story = {
   render: () => (
@@ -38,10 +38,10 @@ export const Palette: Story = {
       title="Color"
       intro={
         <>
-          Every fill on the Home frame, read off Figma. The exploration runs on{' '}
-          <strong>four</strong> neutrals rather than the prototype&rsquo;s three:{' '}
-          <Mono>#0A0A0A</Mono> carries almost all the ink weight, while <Mono>#030303</Mono>{' '}
-          survives mainly inside gradient stops.
+          Every fill on the Home frame, read off Figma. The design runs on <strong>five</strong>{' '}
+          neutrals rather than the prototype&rsquo;s three: <Mono>#0A0A0A</Mono> carries almost all
+          the ink weight, <Mono>#030303</Mono> survives mainly inside gradient stops and the footer,
+          and <Mono>#0F100B</Mono> is the warm-black hero band on Work and Live.
         </>
       }
     >
@@ -58,9 +58,9 @@ export const Palette: Story = {
 
       <Section
         title="Roles"
-        note="Where each fill appears on the page, and the closest thing the token package already ships."
+        note="Where each fill appears on the page, and the token that now carries it."
       >
-        <SpecTable columns={['Name', 'Value', 'Role', 'Nearest token']}>
+        <SpecTable columns={['Name', 'Value', 'Role', 'Token']}>
           {colors.map((spec) => (
             <Row key={spec.name}>
               <td className="whitespace-nowrap align-top font-medium">{spec.name}</td>
@@ -81,9 +81,10 @@ export const Palette: Story = {
         note="On ink bands the design tints white rather than reaching for a solid grey — so the copy composites over whatever photography sits behind it."
       >
         <Callout>
-          This is a real behavioural difference, not a shade preference. The token package&rsquo;s{' '}
-          <Mono>fg-inverse-muted</Mono> is solid <Mono>#A4A4A4</Mono>, which stays flat over an
-          image; <Mono>rgba(255,255,255,0.65)</Mono> does not.
+          This is a real behavioural difference, not a shade preference — a solid grey stays flat
+          over an image where an alpha does not. <Mono>fg-inverse-muted</Mono> was{' '}
+          <Mono>#A4A4A4</Mono> and is now an alias for <Mono>on-ink-muted</Mono>, so its existing
+          call sites composite correctly without being touched.
         </Callout>
         <div className="grid grid-cols-2 gap-5 bg-[#0A0A0A] p-6 md:grid-cols-3">
           {alphaOnInk.map((spec) => (

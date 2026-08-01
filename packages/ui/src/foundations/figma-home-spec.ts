@@ -6,23 +6,29 @@
  * the Figma MCP servers — none of it is inferred, rounded to taste, or
  * carried over from prototype/*.dc.html.
  *
- * WHY THIS IS DATA AND NOT TOKENS
+ * THIS EXTRACTION HAS BEEN ADOPTED (#37).
  *
- * `@o3/tailwind-config` is extracted from the HTML prototype. This Figma file
- * is a LATER, DIFFERENT generation of the same design, and most of what it
- * specifies contradicts the prototype rather than extending it: a fixed px
- * type ramp instead of fluid clamps, display weight 400 instead of 300,
- * square corners instead of 6/16px radii, a 96px page gutter instead of 24px,
- * and gradient fills the prototype has none of.
+ * When this file was first written, `@o3/tailwind-config` was extracted from
+ * the HTML prototype, and this data sat beside it as a reference — a later,
+ * different generation of the same design, most of which contradicted the
+ * shipped tokens rather than extending them.
  *
- * Merging that in silently would have retuned every shipped section block, so
- * the extraction lives here as data and renders in Storybook under
- * `Foundations/` — high enough fidelity to review and adopt from, with zero
- * effect on what the site currently renders. `drift` (bottom of this file)
- * lists every place the two generations disagree; that list IS the adoption
- * decision. The one piece already promoted to real tokens is the gradient
- * set, in `packages/tailwind-config/tokens/gradient.css`, because it collides
- * with nothing.
+ * Map #33 settled the polarity: Figma is the source of record and outranks
+ * `prototype/`, which is retired (#48). So the token package now carries
+ * these values, and this file's job changed with it. It is no longer a
+ * proposal — it is the READING RECORD: the node-level evidence behind each
+ * token, at more resolution than a CSS comment can hold. `drift` at the
+ * bottom is the before/after of that adoption, not a pending decision.
+ *
+ * What did NOT become a token is as much the point as what did. The rule is
+ * in theme.css: a value earns a token when it is bound to a Figma variable or
+ * recurs across the frames; a value appearing exactly once is composition and
+ * stays a literal at its call site.
+ *
+ * SCOPE: the values below are read from the canonical Home frame, plus the
+ * Work hero (1634:1181) where Home has no live example — Home's hero is
+ * photographic (1810:1616) and carries no text at all, which is why there is
+ * no hero type step in the ramp.
  *
  * Figma variable names are quoted verbatim (`text/tertiary`, `Layout/Layout
  * 128`) so a value can be traced back to the file.
@@ -56,9 +62,11 @@ export interface ColorSpec {
 }
 
 /**
- * Solid fills. The exploration runs on FOUR neutrals, not the prototype's
- * three: #0A0A0A carries almost all the ink weight (headings, dark buttons,
- * card bases) while #030303 survives only inside gradient stops.
+ * Solid fills. The design runs on FIVE neutrals, not the prototype's three:
+ * #0A0A0A carries almost all the ink weight (headings, dark buttons, card
+ * bases), #030303 survives mainly inside gradient stops and the footer, and
+ * #0F100B is a warm black used for exactly one thing — the hero band on Work
+ * and Live.
  */
 export const colors: readonly ColorSpec[] = [
   {
@@ -66,19 +74,25 @@ export const colors: readonly ColorSpec[] = [
     value: '#0A0A0A',
     variable: 'color/grey/4',
     role: 'The dominant dark: every section headline on a light band, the solid dark button, the quote attribution base. Effectively the design’s black.',
-    token: 'ink-soft (#0A0A0B)',
+    token: 'ink (#0A0A0A)',
   },
   {
     name: 'ink-deep',
     value: '#030303',
     role: 'Reserved for gradient stops and the footer band — the scrims, the statement text fade, the brand glow base. Rarely a flat fill.',
-    token: 'ink (#030303)',
+    token: 'ink-deep (#030303)',
+  },
+  {
+    name: 'ink-warm',
+    value: '#0F100B',
+    role: 'The warm-black hero band on Work (1634:1181) and Live — the only place this value appears. A surface, never a text color. Not on the Home frame, which opens photographically instead.',
+    token: 'ink-warm (#0F100B)',
   },
   {
     name: 'surface',
     value: '#F0F0F0',
     role: 'The warm-neutral light band: partners/intro, the pull quote, the perspectives row. The design’s equivalent of "bone".',
-    token: 'bone (#EFEEEC)',
+    token: 'bone (#F0F0F0)',
   },
   {
     name: 'white',
@@ -99,19 +113,20 @@ export const colors: readonly ColorSpec[] = [
     value: '#636363',
     variable: 'text/tertiary',
     role: 'The neutral eyebrow ("OUR PARTNERS") and perspectives-card meta ("3 MINS · 7/27/26").',
-    token: 'fg-muted (#6E6E6E)',
+    token: 'fg-muted (#636363)',
   },
   {
     name: 'text-faint',
     value: '#A3A3A3',
     role: 'Footer legal row — privacy, accessibility, copyright.',
-    token: 'fg-inverse-muted (#A4A4A4)',
+    token: 'fg-subtle (#A3A3A3)',
   },
   {
     name: 'surface-muted',
     value: '#D3D3D3',
     variable: 'bg/button/secondary',
     role: 'The circular carousel controls beside the perspectives heading (Icon / Surface).',
+    token: 'surface-muted (#D3D3D3)',
   },
   {
     name: 'brand',
@@ -583,24 +598,34 @@ export const button = {
 
 export interface DriftSpec {
   concern: string
-  /** What @o3/tailwind-config ships today (from the HTML prototype). */
+  /** What @o3/tailwind-config shipped BEFORE #37 — the prototype value. */
   current: string
-  /** What the Figma exploration specifies. */
+  /** What the canonical Figma frames specify. */
   figma: string
-  /** What adopting the Figma value would cost. */
+  /** What actually happened, and where the remainder went. */
   impact: string
+  /**
+   * Whether the token package now carries the Figma value.
+   *
+   * `partial` means the VALUES landed but a component still encodes the old
+   * decision — a default variant, or a composition the tokens can express and
+   * the component cannot yet consume.
+   */
+  outcome: 'adopted' | 'partial'
 }
 
 /**
- * Every place the two generations disagree. This is the adoption decision —
- * nothing here has been applied to the token package.
+ * Every place the two generations disagreed, and what became of it in #37.
+ * This is the before/after of the adoption, not a pending decision — the
+ * `current` column is history.
  */
 export const drift: readonly DriftSpec[] = [
   {
     concern: 'Display weight',
     current: '300 (Light), baked into every text-display-* / text-hero token',
     figma: '400 (Regular) at every display size',
-    impact: 'Retunes every heading on the site. One-line change per type token.',
+    impact: 'Adopted. There is no Figtree Light anywhere in the canonical frames.',
+    outcome: 'adopted',
   },
   {
     concern: 'Type scale',
@@ -608,70 +633,95 @@ export const drift: readonly DriftSpec[] = [
       'Fluid clamps — text-hero clamp(2.6rem, 4.6vw, 4.8rem), display-xl clamp(38px, 5vw, 72px)',
     figma: 'Fixed px ramp at 1440: 64 / 60 / 48 / 36 / 28 / 24 / 18 / 16 / 14 / 13 / 12',
     impact:
-      'Figma specifies desktop only, so the responsive story has to be re-derived rather than read off. Keeping the clamps and re-anchoring their max values is the cheaper path.',
+      'Adopted as maxima — the clamps stay, each anchored to its Figma step. Figma specifies the 1440 endpoint only, so the floors and vw slopes remain a code decision and are flagged interim; #39 owns them.',
+    outcome: 'partial',
+  },
+  {
+    concern: 'Hero step',
+    current: 'text-hero at clamp(2.6rem, 4.6vw, 4.8rem) — a step above display-xl',
+    figma:
+      'No hero step exists. Home opens photographically with no live text (1810:1616); the Work hero headline is 48px — the same step as every section headline.',
+    impact:
+      'text-hero re-pointed at the 64px statement, the largest live text in the design. The 48px step (display-xl) became the true workhorse.',
+    outcome: 'adopted',
   },
   {
     concern: 'Display line-height',
     current: '1.05 (display-xl) → 1.3 (display-md)',
     figma: '1.2em nearly everywhere',
-    impact: 'Loosens the largest headings, tightens the smallest.',
+    impact: 'Adopted. Loosens the largest headings, tightens the smallest.',
+    outcome: 'adopted',
   },
   {
     concern: 'Corner radius',
     current: '--radius-btn 6px, --radius-card 16px',
     figma: '0 on buttons, cards, and media',
-    impact: 'Cosmetic but pervasive — 25 call sites across rounded-btn / rounded-card.',
+    impact:
+      'Adopted. The token names stay so a future reversal is one edit rather than a sweep of 25 call sites.',
+    outcome: 'adopted',
   },
   {
     concern: 'Eyebrow',
     current: '12px / 0.14em / 700, brand red (tone="brand" is the default)',
-    figma: '16–18px / 0.1em / 700, neutral #636363; brand red appears only in the footer',
+    figma:
+      '16px on cards and 18px on sections / 0.1em / 700, neutral #636363; brand red appears only in the footer',
     impact:
-      'Changes the loudest recurring accent on the page. 52 eyebrow call sites, and the Eyebrow component’s default tone would flip from brand to muted.',
+      'Both sizes adopted (text-eyebrow, text-eyebrow-lg, and an eyebrow-lg utility). The Eyebrow COMPONENT still defaults to tone="brand" across 52 call sites — flipping that default to neutral is #38.',
+    outcome: 'partial',
   },
   {
     concern: 'Light surface',
     current: 'bone #EFEEEC, flat',
     figma: '#F0F0F0, and often a wash to white rather than flat',
     impact:
-      'The hex shift is imperceptible; the wash is not. Needs SectionShell to accept a gradient surface.',
+      'The hex is adopted. The wash cannot be: it needs SectionShell to accept a gradient surface, which is #41. The gradient tokens are already there waiting.',
+    outcome: 'partial',
   },
   {
     concern: 'Dark surface',
     current: 'ink #030303 for bands, ink-soft #0A0A0B lifted',
-    figma: '#0A0A0A carries the ink weight; #030303 survives mainly in gradient stops',
-    impact: 'Effectively swaps which of the two darks is the default.',
+    figma:
+      '#0A0A0A carries the ink weight, #030303 survives in gradient stops and the footer, and #0F100B is the Work/Live hero band',
+    impact:
+      'Adopted as three tokens — ink / ink-deep / ink-warm. Which of the two darks is the default effectively swapped. ink-soft survives as a deprecated alias for ink.',
+    outcome: 'adopted',
   },
   {
     concern: 'Copy on dark',
     current: 'Solid greys — fg-inverse-muted #A4A4A4',
-    figma: 'White at alpha — 0.92 / 0.65 / 0.6',
-    impact: 'Alpha composites over the photography behind it; solid grey does not.',
+    figma: 'White at alpha — 0.92 / 0.65 / 0.6, plus 0.2 for the orbital stroke',
+    impact:
+      'Adopted as the on-ink-* set. fg-inverse-muted was REDEFINED to the 65% alpha rather than deleted, so its 15 call sites composite correctly over photography without being touched.',
+    outcome: 'adopted',
   },
   {
     concern: 'Section rhythm',
     current: 'One token — clamp(120px, 14vw, 200px) vertical, 24px gutter',
     figma: 'Hand-tuned asymmetric padding per band (96/128/192 top-bottom), 96px gutter',
     impact:
-      'The single-token model cannot express it. Either SectionShell grows a rhythm variant or the design accepts one value.',
+      'The gutter and the three steps are tokens now. The per-band asymmetry is composition a single token cannot express — SectionShell has to grow a rhythm variant, which is #41.',
+    outcome: 'partial',
   },
   {
     concern: 'Container',
     current: '1240px (section) / 1100px (content)',
-    figma: '1248px — the 1440 design width less two 96px gutters',
-    impact: '8px. Adopt or ignore.',
+    figma: '1248px — the 1440 design width less two 96px gutters — and a 1034px statement measure',
+    impact: 'Both adopted.',
+    outcome: 'adopted',
   },
   {
     concern: 'Button',
     current: '15px / 600 label, 6px radius, brand-red default fill',
     figma: '18px / 500 label, square, solid #0A0A0A or #FFFFFF — no red button on the page',
     impact:
-      'The brand variant is the Button component’s default; the exploration never uses a red button.',
+      'The label style landed as --text-button and the radius went square. The COMPONENT still defaults to a brand-red variant the design never uses; the cva variant set is #38.',
+    outcome: 'partial',
   },
   {
     concern: 'Gradients',
     current: 'None — the prototype has no gradient fills',
     figma: 'Seven, including background-clipped statement text and the brand glow',
-    impact: 'ADOPTED — the one purely additive part. See tokens/gradient.css.',
+    impact: 'Adopted ahead of the rest, in 32d3044 — the one purely additive part.',
+    outcome: 'adopted',
   },
 ]

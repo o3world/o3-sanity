@@ -126,7 +126,7 @@ export const ButtonSpec: Story = {
 
       <Section
         title="Against the shipped Button"
-        note="Left: rebuilt from the Figma spec. Right: the Button component as it ships today."
+        note="Left: rebuilt from the Figma spec. Right: the Button component as it ships today — now square, but still red by default."
       >
         <div className="border-line bg-line grid gap-px border md:grid-cols-2">
           <div className="flex flex-col items-start gap-4 bg-white p-10">
@@ -141,11 +141,13 @@ export const ButtonSpec: Story = {
           </div>
         </div>
         <Callout>
-          Four differences, all deliberate in the exploration: the label grows{' '}
-          <Mono>15px/600 → 18px/500</Mono>, the corners go square, the fill drops from brand red to{' '}
-          <Mono>#0A0A0A</Mono>, and the glyph becomes <Mono>arrow_forward</Mono>, a Material Symbols
-          face rather than the house arrow. Adopting this also changes which variant is the
-          component&rsquo;s default, since that is currently <Mono>brand</Mono>.
+          The corners went square with the radius tokens, and the label style landed as{' '}
+          <Mono>--text-button</Mono> (<Mono>15px/600 → 18px/500</Mono>). What is left is the{' '}
+          <strong>component contract</strong>, not a value: the fill should drop from brand red to{' '}
+          <Mono>#0A0A0A</Mono>, the glyph should become <Mono>arrow_forward</Mono> from Material
+          Symbols rather than the house arrow, and the default variant should stop being{' '}
+          <Mono>brand</Mono> — the design has no red button anywhere. That is the cva variant set,
+          which is #38.
         </Callout>
       </Section>
     </Page>

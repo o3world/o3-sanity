@@ -1,12 +1,15 @@
 /*
  * Gradient — the O3DX visual exploration's signature fills.
  *
- * SOURCE: Figma "O3DX- Visual exploration", Home frame (node 1680:2134).
- * Unlike every other file here, these are NOT from prototype/*.dc.html — the
- * prototype has no gradients at all. They are the one part of the Figma
- * exploration that is purely additive (it collides with no existing token),
- * so it lands here while the rest of the extraction sits in the Storybook
- * Foundations section awaiting an adoption decision.
+ * SOURCE: the canonical Home frame (1680:2134). These landed ahead of the
+ * rest of the token set because they collided with nothing — the prototype
+ * had no gradient fills at all.
+ *
+ * GRADIENTS ARE LOAD-BEARING IN THIS DESIGN, not decoration. The red is a
+ * gradient nearly everywhere it appears, light bands wash rather than sit
+ * flat, and the 64px statements are filled with a fade rather than a solid.
+ * Reaching for a flat color where the frame uses one of these is the most
+ * common way to get a section subtly wrong.
  *
  * Tailwind v4 has no `--gradient-*` theme namespace, so these are plain
  * custom properties (same treatment as the durations in motion.css). Use

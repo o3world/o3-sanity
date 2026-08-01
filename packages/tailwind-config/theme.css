@@ -8,25 +8,50 @@
  * under tokens/, in the order below:
  *
  *   base.css        document-level behaviour (smooth scroll, selection)
- *   color.css       the O3 palette as semantic roles
- *   typography.css  Figtree + the fluid display scale + eyebrow
- *   layout.css      section rhythm + container widths
- *   radius.css      the two corner radii
+ *   color.css       the five neutrals, brand, and the on-ink alphas
+ *   typography.css  Figtree at the canonical px ramp
+ *   layout.css      page gutter, containers, band rhythm
+ *   radius.css      the square-corner story
  *   motion.css      easing curves + durations
- *   gradient.css    the O3DX exploration's gradient fills
+ *   gradient.css    the load-bearing gradient fills
  *
- * Every value is extracted from the O3 redesign prototype
- * (prototype/O3 Homepage v2.dc.html, cross-checked against O3 Work.dc.html and
- * O3 Case Study.dc.html). Each token's comment names the prototype section it
- * came from — if a value looks wrong, check it against the prototype, not
- * against taste.
+ * ── PROVENANCE ─────────────────────────────────────────────────────────────
  *
- * ONE EXCEPTION: gradient.css comes from the Figma "O3DX- Visual exploration"
- * Home frame, not the prototype — the prototype has no gradients to extract.
- * The rest of that Figma extraction (a fixed type ramp, square corners, a
- * 96px gutter) CONFLICTS with the prototype values above rather than adding
- * to them, so it is documented in Storybook under Foundations/ instead of
- * being merged in here. See packages/ui/src/foundations/figma-home-spec.ts.
+ * EVERY VALUE HERE IS READ OFF THE CANONICAL FIGMA FRAMES — the "Design
+ * Concept" section (1632:1510) of "O3DX: Visual exploration"
+ * (RvraLJaZ0zWm8UaD5AJf43), at the authoritative 1440 desktop width. Each
+ * token's comment names the node it came from. If a value looks wrong, check
+ * it against the frame, not against taste.
+ *
+ * These tokens were previously extracted from `prototype/*.dc.html`. Figma is
+ * the source of record (map #33) and outranks the prototype, which is retired
+ * (#48) — so where the two disagreed, the Figma value won. `drift` in
+ * packages/ui/src/foundations/figma-home-spec.ts records every one of those
+ * disagreements and what it cost.
+ *
+ * Read the file before adding to it: docs/agents/figma.md. Two traps in
+ * particular — use the `figma_rest` MCP server (the official one hard-fails
+ * on a View seat), and confirm you are on the frame rather than a child node.
+ *
+ * ── WHAT EARNS A TOKEN ─────────────────────────────────────────────────────
+ *
+ * A Figma value becomes a token when EITHER:
+ *
+ *   (a) it is bound to a named Figma variable (`text/tertiary`,
+ *       `Layout/Layout 128`, `Gradient/Red/1`), or
+ *   (b) it recurs — the same value doing the same job in two or more places
+ *       across the canonical frames.
+ *
+ * Everything else stays a LITERAL at the call site, with its node ID in a
+ * comment. A value that appears exactly once is composition, not vocabulary:
+ * the pull-quote attribution's 1.5em line-height, the 5.8px carousel chip,
+ * the 87px CTA bleed strip, the 1026px partners measure. Promoting those
+ * would grow the token surface without giving any second call site a name to
+ * reach for.
+ *
+ * Two tokens deliberately break the rule and are marked NO CANONICAL ANCHOR
+ * in color.css (`brand-tint`, `line`/`line-soft`): they are prototype-era
+ * values kept alive by existing call sites, pending #38.
  *
  * Adding a token: put it in the file that owns its concern, never here.
  */

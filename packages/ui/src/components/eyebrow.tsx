@@ -16,11 +16,16 @@ const eyebrowVariants = cva(
         // tint — the lifted red for kickers ON dark surfaces (work-case
         // "Healthcare · Pediatric Systems").
         tint: 'text-brand-tint',
-        // muted — the neutral kicker ("OUR PARTNERS", #838383 in the
-        // prototype; fg-subtle is the closest token).
-        muted: 'text-fg-subtle',
+        // muted — the neutral kicker ("OUR PARTNERS", #636363 / Figma
+        // `text/tertiary`, node 1864:2392). This is the CANONICAL treatment:
+        // the frames set section eyebrows in grey, and use the red exactly
+        // once on the whole Home page (the footer link headers).
+        muted: 'text-fg-muted',
       },
     },
+    // ⚠️ Still `brand`, which the canonical frames contradict — flipping the
+    // default is a component-contract change across 52 call sites, so it
+    // belongs to #38 rather than the token pass that corrected the colors.
     defaultVariants: { tone: 'brand' },
   },
 )
