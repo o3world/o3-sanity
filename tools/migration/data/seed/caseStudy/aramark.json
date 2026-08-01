@@ -38,6 +38,8 @@
   "migration": {
     "locked": false,
     "sourceId": "seed:homepage-wireframe",
-    "extractedAt": "2026-07-31T00:00:00Z"
+    "extractedAt": "2026-07-31T00:00:00Z",
+    "provisional": true,
+    "provisionalNote": "No WordPress case study exists for Aramark — the client is real, the engagement write-up is invented. Replace or retire; do not publish."
   }
 }

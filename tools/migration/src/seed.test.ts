@@ -5,7 +5,9 @@ import { describe, expect, it } from 'vitest'
 
 import { SECTION_BLOCKS } from '@o3/sanity/schemas/registry'
 
-import { CONVERTED_DIR, REPO_ROOT, SEED_DIR } from './lib/paths'
+import type { Migration } from '@o3/sanity/types/generated'
+
+import { CONVERTED_DIR, REPO_ROOT, SEED_DIR, TRANSLATED_DIR } from './lib/paths'
 
 /**
  * Invariants over the committed seed corpus (#20).
@@ -45,16 +47,24 @@ function readSeeds(): { file: string; doc: SeedDoc }[] {
 const seeds = readSeeds()
 const ids = new Set(seeds.map(({ doc }) => doc._id))
 
-/** Everything the loader will write: converted documents plus seeds. */
+/**
+ * Everything the loader will write — all three trees. `load.ts` publishes
+ * CONVERTED + SEED and loads TRANSLATED as drafts, so leaving translated out
+ * silently narrows every check below: case studies live almost entirely in
+ * that tree, and without it the provenance rules would be asserting over the
+ * three hand-authored seeds and nothing else.
+ */
+const TREES = { converted: CONVERTED_DIR, seed: SEED_DIR, translated: TRANSLATED_DIR }
+
 function readAllPipelineDocs(): { file: string; doc: SeedDoc }[] {
   const out: { file: string; doc: SeedDoc }[] = []
-  for (const root of [CONVERTED_DIR, SEED_DIR]) {
+  for (const [label, root] of Object.entries(TREES)) {
     if (!existsSync(root)) continue
     for (const type of readdirSync(root)) {
       const dir = join(root, type)
       for (const name of readdirSync(dir).filter((f) => f.endsWith('.json'))) {
         out.push({
-          file: `${root === SEED_DIR ? 'seed' : 'converted'}/${type}/${name}`,
+          file: `${label}/${type}/${name}`,
           doc: JSON.parse(readFileSync(join(dir, name), 'utf8')) as SeedDoc,
         })
       }
@@ -62,6 +72,9 @@ function readAllPipelineDocs(): { file: string; doc: SeedDoc }[] {
   }
   return out
 }
+
+/** Read once — this walks the whole corpus, currently ~315 files. */
+const allPipelineDocs = readAllPipelineDocs()
 
 /** Every `{_ref}` anywhere in a document, however deeply nested. */
 function refsIn(node: unknown, found: string[] = []): string[] {
@@ -142,7 +155,7 @@ describe('committed seed content', () => {
    */
   it('never lets two documents of one type claim the same slug', () => {
     const seen = new Map<string, string>()
-    for (const { file, doc } of readAllPipelineDocs()) {
+    for (const { file, doc } of allPipelineDocs) {
       const slug = (doc.slug as { current?: string } | undefined)?.current
       if (!slug) continue
       const key = `${doc._type}:${slug}`
@@ -150,6 +163,107 @@ describe('committed seed content', () => {
       expect(previous, `${file} and ${previous} both claim ${key}`).toBeUndefined()
       seen.set(key, file)
     }
+  })
+
+  /**
+   * Content sourcing (#40, ADR 0007).
+   *
+   * A case study makes claims about a real client engagement — a stat, a
+   * narrative headline, an outcome. The homepage showcase needed three of them
+   * before any had been translated, so three were hand-authored to fill it,
+   * and at least one (`aramark`) describes work that has no WordPress source
+   * at all.
+   *
+   * That is fine as scaffolding and indefensible as published content, so the
+   * rule is mechanical: if a case study did not come from WordPress, it is
+   * PROVISIONAL and says so in its own provenance. `rebuild` and the Studio
+   * can then both see it, and #22 clears them by replacing each with the
+   * translated original.
+   */
+  describe('content sourcing provenance', () => {
+    const caseStudies = allPipelineDocs.filter(({ doc }) => doc._type === 'caseStudy')
+
+    // The generated type, not a hand-copied subset: `as` casts don't error
+    // when a field is renamed on the schema side, so a local shape would go
+    // stale silently and these tests would keep passing against nothing.
+    const provenance = (doc: SeedDoc) => (doc.migration ?? {}) as Partial<Migration>
+
+    // Every mapper stamps this prefix; it is what "came from WordPress" means.
+    const WORDPRESS = 'wp:'
+
+    /**
+     * Both guards exist because these rules are trivially satisfiable by an
+     * empty set. `readAllPipelineDocs()` originally skipped TRANSLATED_DIR,
+     * where every WordPress-sourced case study lives — so the rules below ran
+     * against the three hand-authored seeds and nothing else, and the
+     * "never provisional" rule had no document to disagree with at all. Both
+     * were green and neither meant anything.
+     */
+    it('has case studies from every tree to check', () => {
+      expect(caseStudies.length).toBeGreaterThan(0)
+      const trees = new Set(caseStudies.map(({ file }) => file.split('/')[0]))
+      expect([...trees].sort(), 'case studies are missing a whole tree').toEqual([
+        'seed',
+        'translated',
+      ])
+    })
+
+    it('has at least one WordPress-sourced case study, or the rules below are vacuous', () => {
+      const sourced = caseStudies.filter(({ doc }) =>
+        provenance(doc).sourceId?.startsWith(WORDPRESS),
+      )
+      expect(sourced.length).toBeGreaterThan(0)
+    })
+
+    it('marks every case study not sourced from WordPress as provisional', () => {
+      for (const { file, doc } of caseStudies) {
+        const { sourceId, provisional } = provenance(doc)
+        if (sourceId?.startsWith(WORDPRESS)) continue
+        expect(
+          provisional,
+          `${file} has sourceId "${sourceId}" — not from WordPress, so it invents client outcomes and must set migration.provisional`,
+        ).toBe(true)
+      }
+    })
+
+    it('never marks a WordPress-sourced document provisional', () => {
+      for (const { file, doc } of allPipelineDocs) {
+        const { sourceId, provisional } = provenance(doc)
+        if (!sourceId?.startsWith(WORDPRESS)) continue
+        expect(provisional, `${file} came from WordPress and cannot be provisional`).not.toBe(true)
+      }
+    })
+
+    // A string "false" or 0 would read as provisional to a truthiness check in
+    // a renderer and as not-provisional to `=== true` here.
+    it('uses a real boolean for provisional, never a truthy stand-in', () => {
+      for (const { file, doc } of allPipelineDocs) {
+        const { provisional } = provenance(doc)
+        if (provisional === undefined) continue
+        expect(typeof provisional, `${file} sets a non-boolean provisional`).toBe('boolean')
+      }
+    })
+
+    // These outlive the session that created them, and "no WordPress source
+    // exists" and "waiting on #22" call for opposite actions.
+    it('makes every provisional document say what would replace it', () => {
+      for (const { file, doc } of allPipelineDocs) {
+        const { provisional, provisionalNote } = provenance(doc)
+        if (provisional !== true) continue
+        expect(provisionalNote?.trim(), `${file} is provisional without saying why`).toBeTruthy()
+      }
+    })
+
+    // Figma-transcribed copy records the frame it came from, so a reviewer can
+    // open the node rather than hunt for it. Share URLs use `-`; the tools and
+    // this field use `:` (docs/agents/figma.md).
+    it('records any Figma-sourced copy against a well-formed node id', () => {
+      for (const { file, doc } of allPipelineDocs) {
+        const { figmaNode } = provenance(doc)
+        if (figmaNode === undefined) continue
+        expect(figmaNode, `${file} has a malformed figmaNode`).toMatch(/^\d+:\d+$/)
+      }
+    })
   })
 
   describe('the homepage', () => {

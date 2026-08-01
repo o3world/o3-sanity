@@ -38,6 +38,8 @@
   "migration": {
     "locked": false,
     "sourceId": "seed:homepage-wireframe",
-    "extractedAt": "2026-07-31T00:00:00Z"
+    "extractedAt": "2026-07-31T00:00:00Z",
+    "provisional": true,
+    "provisionalNote": "A real case study exists (extract/caseStudy/case-studies-ironman-digital-experience-drupal-acquia.json) but has not been translated yet — #22 replaces this with it."
   }
 }

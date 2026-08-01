@@ -79,6 +79,9 @@ export type Migration = {
   sourceId?: string
   extractedAt?: string
   source?: string
+  figmaNode?: string
+  provisional?: boolean
+  provisionalNote?: string
 }
 
 export type Seo = {
