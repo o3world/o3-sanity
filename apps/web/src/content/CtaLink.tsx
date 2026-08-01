@@ -34,12 +34,25 @@ function resolveVariant(value: string | null | undefined): CtaVariant {
 /**
  * The one cta renderer: resolves internal-reference-or-external-URL into an
  * href and renders the `@o3/ui` Button in the editor-chosen variant.
+ *
+ * `arrow` is a render-side prop, not a schema field, for the reason #38 gives:
+ * Figma's `Show right icon` toggles the presence of a child rather than the
+ * button's appearance, so it is a prop everywhere — including here. The chrome
+ * CTA sets it because `1710:2250` carries `arrow_forward`.
  */
-export function CtaLink({ cta }: { cta: CtaLinkData | null | undefined }) {
+export function CtaLink({
+  cta,
+  arrow = false,
+}: {
+  cta: CtaLinkData | null | undefined
+  arrow?: boolean
+}) {
   if (!cta?.label) return null
   return (
     <Link href={resolveCtaHref(cta)}>
-      <Button variant={resolveVariant(cta.variant)}>{cta.label}</Button>
+      <Button variant={resolveVariant(cta.variant)} arrow={arrow}>
+        {cta.label}
+      </Button>
     </Link>
   )
 }

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import { BrandLogo } from '@o3/ui'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { resolveCtaHref } from '@/content/CtaLink'
@@ -9,13 +10,15 @@ interface SiteFooterProps {
 }
 
 /**
- * The prototype's ink footer: tagline, then labelled link columns —
- * "Company", the socials, "Everything else" — over a rule carrying the legal
- * links and the copyright line.
+ * The site footer, built to the canonical Home frame's `Footer`
+ * (`1680:2096`, mobile `1814:1784`) — #41.
  *
- * Every string here comes from Site Settings (#19), including the column
- * headings and the "Go birds." sign-off. The only thing the component decides
- * is the year.
+ * **Not** built to the `Footer` component on the Local Components canvas
+ * (`1280:1885`): #38 found it stale — `#141414` with `64px 96px 16px` padding,
+ * against the frame's `#030303` and `96px 96px 16px`. The frame wins.
+ *
+ * Every string still comes from Site Settings (#19); the component decides only
+ * the year and the arrangement.
  */
 export function SiteFooter({ settings }: SiteFooterProps) {
   const year = new Date().getFullYear()
@@ -24,47 +27,93 @@ export function SiteFooter({ settings }: SiteFooterProps) {
   const legalLinks = settings?.legalLinks ?? []
   const legalName = settings?.legalName ?? settings?.title ?? 'O3'
 
+  // Figma draws three peer columns — Company, Socials, Everything else
+  // (`1680:2103` / `2110` / `2114`). Socials is a separate schema field rather
+  // than a `footerGroup`, because its links are external URLs off the ACF
+  // options page and need `rel="noreferrer"` — so it is spliced into the
+  // frame's position instead of being appended after the authored groups.
+  const [leadGroup, ...restGroups] = groups
+
   return (
-    <footer id="footer" className="bg-ink text-white">
-      <div className="mx-auto flex max-w-7xl flex-col gap-14 px-6 py-24">
-        {settings?.footerTagline ? (
-          <p className="text-display-lg font-display max-w-3xl text-balance">
-            {settings.footerTagline}
-          </p>
-        ) : null}
+    <footer
+      id="footer"
+      className="bg-ink-deep px-gutter pt-band-sm relative overflow-hidden pb-4 text-white"
+    >
+      {/*
+       * The orbital arc (`1680:2097`): a 1275×1277 two-ring vector stroked at
+       * 2px in `rgba(255,255,255,0.2)`, bleeding off the left edge. Decorative
+       * and drawn exactly once, so it is inline SVG at the call site rather
+       * than a component.
+       */}
+      <svg
+        viewBox="0 0 1276 1277"
+        fill="none"
+        aria-hidden="true"
+        focusable="false"
+        className="stroke-on-ink-line pointer-events-none absolute -left-[570px] top-[228px] h-[1277px] w-[1276px] lg:top-[148px]"
+      >
+        <path
+          d="M637.572 1C988.607 1 1274.14 286.893 1274.14 638.463C1274.14 990.033 988.534 1276 637.572 1276C286.611 1276 1 989.959 1 638.463C1.0002 286.967 286.537 1 637.572 1ZM637.572 255.993C427.023 255.993 255.679 427.525 255.679 638.463C255.679 849.401 426.949 1021.01 637.572 1021.01C848.196 1021.01 1019.47 849.327 1019.47 638.463C1019.47 427.525 848.122 255.993 637.572 255.993Z"
+          strokeWidth="2"
+        />
+      </svg>
 
-        <nav aria-label="Footer" className="flex flex-wrap gap-x-16 gap-y-10">
-          {groups.map((group) => (
-            <FooterColumn key={group._key} label={group.label}>
-              {(group.links ?? []).map((link) => (
-                <li key={link._key}>
-                  <FooterLink href={resolveCtaHref(link)}>{link.label}</FooterLink>
-                </li>
+      <div className="max-w-section relative mx-auto flex w-full flex-col gap-12 lg:gap-32">
+        {/* "Left" — logo beside the tagline block at 1440, stacked at 402. */}
+        <div className="flex flex-col gap-9 lg:flex-row lg:justify-between">
+          <BrandLogo color="red" size={176} />
+
+          <div className="flex flex-col gap-24 lg:w-[600px] lg:gap-9">
+            {settings?.footerTagline ? (
+              <p className="text-display-xl max-w-[600px] text-balance">{settings.footerTagline}</p>
+            ) : null}
+
+            {/* "Upper" — three columns side by side at both widths. */}
+            <nav aria-label="Footer" className="flex justify-between gap-6 pb-16">
+              {leadGroup ? (
+                <FooterColumn label={leadGroup.label}>
+                  {(leadGroup.links ?? []).map((link) => (
+                    <li key={link._key}>
+                      <FooterLink href={resolveCtaHref(link)}>{link.label}</FooterLink>
+                    </li>
+                  ))}
+                </FooterColumn>
+              ) : null}
+
+              {socialLinks.length > 0 ? (
+                <FooterColumn label={settings?.socialsLabel ?? 'Socials'}>
+                  {socialLinks.map((social) => (
+                    <li key={social._key}>
+                      {/* External profiles, so a plain anchor, not next/link. */}
+                      <a
+                        href={social.url ?? '#'}
+                        className="text-nav duration-(--duration-hover) text-white transition-opacity ease-out hover:opacity-70"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        {social.label}
+                      </a>
+                    </li>
+                  ))}
+                </FooterColumn>
+              ) : null}
+
+              {restGroups.map((group) => (
+                <FooterColumn key={group._key} label={group.label}>
+                  {(group.links ?? []).map((link) => (
+                    <li key={link._key}>
+                      <FooterLink href={resolveCtaHref(link)}>{link.label}</FooterLink>
+                    </li>
+                  ))}
+                </FooterColumn>
               ))}
-            </FooterColumn>
-          ))}
+            </nav>
+          </div>
+        </div>
 
-          {socialLinks.length > 0 ? (
-            <FooterColumn label={settings?.socialsLabel ?? 'Socials'}>
-              {socialLinks.map((social) => (
-                <li key={social._key}>
-                  {/* External profiles, so a plain anchor rather than next/link. */}
-                  <a
-                    href={social.url ?? '#'}
-                    className="text-sm text-white hover:text-white/70"
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    {social.label}
-                  </a>
-                </li>
-              ))}
-            </FooterColumn>
-          ) : null}
-        </nav>
-
-        <div className="text-fg-inverse-muted flex flex-col justify-between gap-4 border-t border-white/15 pt-6 text-xs md:flex-row">
-          <ul className="flex flex-wrap gap-x-7 gap-y-2">
+        {/* "Lower" — legal row; stacked at 402 (`1814:1807`), split at 1440. */}
+        <div className="text-legal text-fg-subtle flex flex-col gap-3 lg:flex-row lg:justify-between">
+          <ul className="flex flex-wrap gap-6">
             {legalLinks.map((link) => (
               <li key={link._key}>
                 <Link href={resolveCtaHref(link)} className="hover:text-white">
@@ -73,28 +122,45 @@ export function SiteFooter({ settings }: SiteFooterProps) {
               </li>
             ))}
           </ul>
-          <p>
-            © {year} {legalName}. All rights reserved.
-            {settings?.copyrightNote ? ` ${settings.copyrightNote}` : null}
-          </p>
+          <div className="flex gap-6 lg:w-[277px] lg:justify-between">
+            <p>
+              © {year} {legalName}. All rights reserved.
+            </p>
+            {settings?.copyrightNote ? <p>{settings.copyrightNote}</p> : null}
+          </div>
         </div>
       </div>
     </footer>
   )
 }
 
+/**
+ * A footer link column (`1680:2103`): a brand-red uppercase heading over the
+ * links, 12px apart, 188px wide at 1440.
+ *
+ * The heading is the one place on the canonical Home frame where brand red is
+ * a **flat fill** rather than the gradient — see the note on `--color-brand`.
+ */
 function FooterColumn({ label, children }: { label?: string | null; children: React.ReactNode }) {
   return (
-    <div>
-      <p className="text-brand mb-4 text-[11px] font-bold uppercase tracking-[0.14em]">{label}</p>
-      <ul className="flex flex-col gap-2.5">{children}</ul>
+    <div className="lg:w-[188px]">
+      {/* 14px / 600 / 0.07em uppercase. A footer-only step doing its job in
+          exactly one place, so it stays a literal rather than earning a token
+          (packages/tailwind-config README — "what earns a token"). */}
+      <p className="text-brand mb-3 text-[14px] font-semibold uppercase tracking-[0.07em]">
+        {label}
+      </p>
+      <ul className="flex flex-col gap-3">{children}</ul>
     </div>
   )
 }
 
 function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
-    <Link href={href} className="text-sm text-white hover:text-white/70">
+    <Link
+      href={href}
+      className="text-nav duration-(--duration-hover) text-white transition-opacity ease-out hover:opacity-70"
+    >
       {children}
     </Link>
   )
