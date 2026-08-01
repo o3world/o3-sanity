@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto'
-import { readFileSync, readdirSync } from 'node:fs'
+import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -171,6 +171,32 @@ export function aMigratedPerspective(slug?: string): Perspective {
     featuredImage: (doc.featuredImage ?? null) as Perspective['featuredImage'],
     seo: (doc.seo ?? null) as Perspective['seo'],
   })
+}
+
+const CONVERTED_DIR = join(
+  dirname(fileURLToPath(import.meta.url)),
+  '../../../../tools/migration/data/converted',
+)
+
+/**
+ * A migrated `page` (#18), shaped into what `PAGE_QUERY` returns — `slug`
+ * flattened, `_wpSrc` markers resolved. The migrated utility pages compose
+ * only self-contained sections, so nothing needs dereferencing.
+ */
+export function aMigratedPage(slug: string): Record<string, unknown> {
+  const doc = resolveWpSrcMarkers(
+    JSON.parse(readFileSync(join(CONVERTED_DIR, 'page', `${slug}.json`), 'utf8')),
+  ) as Record<string, unknown>
+  return { ...doc, slug: (doc.slug as { current?: string } | undefined)?.current ?? null }
+}
+
+/** Every migrated page slug on disk — for `it.each` sweeps. */
+export function migratedPageSlugs(): string[] {
+  const dir = join(CONVERTED_DIR, 'page')
+  if (!existsSync(dir)) return []
+  return readdirSync(dir)
+    .filter((f) => f.endsWith('.json'))
+    .map((f) => f.replace(/\.json$/, ''))
 }
 
 const SEED_DIR = join(

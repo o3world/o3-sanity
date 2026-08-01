@@ -1,0 +1,266 @@
+{
+  "_meta": {
+    "type": "page",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T02:45:52.020Z"
+  },
+  "wpId": 9447,
+  "slug": "solutions",
+  "path": "/solutions/",
+  "title": "Solutions",
+  "parentSlug": null,
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Solutions | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/solutions/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "page_header": [
+      {
+        "acf_fc_layout": "basic_header",
+        "page_title_content": [
+          {
+            "acf_fc_layout": "title",
+            "kicker": "Solutions",
+            "kicker_tag": "div",
+            "title": "Driving results through innovative digital experiences",
+            "heading_level": "h2",
+            "heading_tag": "div",
+            "add_description": true,
+            "description": "Our solutions are designed to transform businesses at every level. From uncovering opportunities through consulting, to implementing AI strategies, to creating data-driven digital experiences, we help you drive growth, streamline operations, and engage customers and employees."
+          }
+        ],
+        "header_icon": {
+          "value": "None",
+          "image": "None"
+        },
+        "header_image": {
+          "ID": 9695,
+          "id": 9695,
+          "title": "gadsbysolutions",
+          "filename": "gadsbysolutions.png",
+          "filesize": 556125,
+          "url": "http://www.o3world.com/wp-content/uploads/2025/02/gadsbysolutions.png",
+          "link": "http://www.o3world.com/solutions/gadsbysolutions/",
+          "alt": "Mike Gadsby at a podium speaking at the 1682 conference",
+          "author": "16",
+          "description": "",
+          "caption": "",
+          "name": "gadsbysolutions",
+          "status": "inherit",
+          "uploaded_to": 9447,
+          "date": "2025-02-19 20:31:38",
+          "modified": "2025-02-19 20:33:20",
+          "menu_order": 0,
+          "mime_type": "image/png",
+          "type": "image",
+          "subtype": "png",
+          "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+          "width": 901,
+          "height": 901,
+          "sizes": {
+            "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/02/gadsbysolutions-150x150.png",
+            "thumbnail-width": 150,
+            "thumbnail-height": 150,
+            "medium": "http://www.o3world.com/wp-content/uploads/2025/02/gadsbysolutions-640x640.png",
+            "medium-width": 640,
+            "medium-height": 640,
+            "medium_large": "http://www.o3world.com/wp-content/uploads/2025/02/gadsbysolutions-768x768.png",
+            "medium_large-width": 768,
+            "medium_large-height": 768,
+            "large": "http://www.o3world.com/wp-content/uploads/2025/02/gadsbysolutions.png",
+            "large-width": 901,
+            "large-height": 901,
+            "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/02/gadsbysolutions.png",
+            "1536x1536-width": 901,
+            "1536x1536-height": 901,
+            "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/02/gadsbysolutions.png",
+            "2048x2048-width": 901,
+            "2048x2048-height": 901,
+            "icon": "http://www.o3world.com/wp-content/uploads/2025/02/gadsbysolutions-48x48.png",
+            "icon-width": 48,
+            "icon-height": 48,
+            "xlarge": "http://www.o3world.com/wp-content/uploads/2025/02/gadsbysolutions.png",
+            "xlarge-width": 901,
+            "xlarge-height": 901,
+            "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/02/gadsbysolutions.png",
+            "gform-image-choice-sm-width": 300,
+            "gform-image-choice-sm-height": 300,
+            "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/02/gadsbysolutions.png",
+            "gform-image-choice-md-width": 400,
+            "gform-image-choice-md-height": 400,
+            "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/02/gadsbysolutions.png",
+            "gform-image-choice-lg-width": 600,
+            "gform-image-choice-lg-height": 600
+          }
+        },
+        "header_background_icon": {
+          "value": "5749",
+          "image": "5749"
+        }
+      }
+    ],
+    "flexible_content": [
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "What we do - Cards",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "What we do",
+          "kicker_tag": "div",
+          "title": "Transforming your business from strategy to success",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": "",
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<div class=\"relative w-full group\">\n<div class=\"w-full bg-gray-100 mb-[30px] aspect-1\"><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-9582\" style=\"color: rgb(3 3 3/var(--tw-text-opacity)); font-family: Poppins, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 15px; font-weight: 600; text-transform: uppercase; background-color: rgb(255 255 255/var(--tw-bg-opacity));\" role=\"img\" src=\"https://live-o3-world.pantheonsite.io/wp-content/uploads/2025/02/O3elements-consulting-b.svg\" alt=\"blue square with two black half circles touching to illustrate partnerships\" width=\"826\" height=\"833\" /></div>\n<h3 class=\"mb-3 text-black type-kicker\">ASSESS + INNOVATE</h3>\n<h4 style=\"margin-top: 12px;\">Digital experience consulting</h4>\n<p><span class=\"text-black hover:text-black focus:text-black\">Organizations struggle to align customer and employee experiences while innovating effectively. Through experience assessments, innovation consulting, and strategy activation, we uncover opportunities to improve business performance and foster growth.</span></p>\n</div>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<div class=\"relative w-full group\">\n<div class=\"w-full bg-gray-100 mb-[30px] aspect-1\"><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-9580\" role=\"img\" src=\"https://live-o3-world.pantheonsite.io/wp-content/uploads/2025/02/O3elements-datadesigndev-b.svg\" alt=\"red square with two black stacked semi circles to represent building\" width=\"826\" height=\"823\" /></div>\n<h3 class=\"mb-3 text-black type-kicker\">CONVERT + ENGAGE</h3>\n<h4 style=\"margin-top: 12px;\">Data, design + development</h4>\n<p><span class=\"text-black hover:text-black focus:text-black\">Delivering impactful digital solutions requires technical expertise, a deep understanding of user needs, and a long-term vision for scalability and support. We combine data insights, platform expertise, and industry-leading UX/UI design to create scalable digital solutions.</span></p>\n</div>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<div class=\"relative w-full group\">\n<div class=\"w-full bg-gray-100 mb-[30px] aspect-1\"><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-10359 size-medium\" role=\"img\" src=\"https://www.o3world.com/wp-content/uploads/2025/10/O3XO-Solutions-2-1-640x640.jpg\" alt=\"O3XO AI Solutions Featured Image\" width=\"640\" height=\"640\" srcset=\"http://www.o3world.com/wp-content/uploads/2025/10/O3XO-Solutions-2-1-640x640.jpg 640w, http://www.o3world.com/wp-content/uploads/2025/10/O3XO-Solutions-2-1-1024x1024.jpg 1024w, http://www.o3world.com/wp-content/uploads/2025/10/O3XO-Solutions-2-1-150x150.jpg 150w, http://www.o3world.com/wp-content/uploads/2025/10/O3XO-Solutions-2-1-768x768.jpg 768w, http://www.o3world.com/wp-content/uploads/2025/10/O3XO-Solutions-2-1-1536x1536.jpg 1536w, http://www.o3world.com/wp-content/uploads/2025/10/O3XO-Solutions-2-1-2048x2048.jpg 2048w, http://www.o3world.com/wp-content/uploads/2025/10/O3XO-Solutions-2-1-48x48.jpg 48w, http://www.o3world.com/wp-content/uploads/2025/10/O3XO-Solutions-2-1-1280x1279.jpg 1280w\" sizes=\"auto, (max-width: 640px) 100vw, 640px\" /></div>\n<h3 class=\"mb-3 text-black type-kicker\">TRANSFORM + TRANSCEND</h3>\n<h4 style=\"margin-top: 12px;\">O3XO: AI strategy + activation</h4>\n<p>Moving from AI strategy to measurable impact demands executive alignment, practical implementation roadmaps, and sustainable change management. O3XO brings two decades of transformation experience to help leadership teams cut through complexity, deliver quick wins that build momentum, and create lasting competitive advantage—converting organizational uncertainty into market differentiation within a focused 90-day sprint.</p>\n</div>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "page_callout",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Page Callout",
+        "image": {
+          "ID": 9618,
+          "id": 9618,
+          "title": "1682inaction",
+          "filename": "1682inaction.png",
+          "filesize": 747434,
+          "url": "http://www.o3world.com/wp-content/uploads/2025/02/1682inaction.png",
+          "link": "http://www.o3world.com/solutions/1682inaction/",
+          "alt": "photo of april walker leading a panel from 1682",
+          "author": "16",
+          "description": "",
+          "caption": "",
+          "name": "1682inaction",
+          "status": "inherit",
+          "uploaded_to": 9447,
+          "date": "2025-02-12 23:34:28",
+          "modified": "2025-02-12 23:34:51",
+          "menu_order": 0,
+          "mime_type": "image/png",
+          "type": "image",
+          "subtype": "png",
+          "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+          "width": 901,
+          "height": 901,
+          "sizes": {
+            "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/02/1682inaction-150x150.png",
+            "thumbnail-width": 150,
+            "thumbnail-height": 150,
+            "medium": "http://www.o3world.com/wp-content/uploads/2025/02/1682inaction-640x640.png",
+            "medium-width": 640,
+            "medium-height": 640,
+            "medium_large": "http://www.o3world.com/wp-content/uploads/2025/02/1682inaction-768x768.png",
+            "medium_large-width": 768,
+            "medium_large-height": 768,
+            "large": "http://www.o3world.com/wp-content/uploads/2025/02/1682inaction.png",
+            "large-width": 901,
+            "large-height": 901,
+            "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/02/1682inaction.png",
+            "1536x1536-width": 901,
+            "1536x1536-height": 901,
+            "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/02/1682inaction.png",
+            "2048x2048-width": 901,
+            "2048x2048-height": 901,
+            "icon": "http://www.o3world.com/wp-content/uploads/2025/02/1682inaction-48x48.png",
+            "icon-width": 48,
+            "icon-height": 48,
+            "xlarge": "http://www.o3world.com/wp-content/uploads/2025/02/1682inaction.png",
+            "xlarge-width": 901,
+            "xlarge-height": 901,
+            "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/02/1682inaction.png",
+            "gform-image-choice-sm-width": 300,
+            "gform-image-choice-sm-height": 300,
+            "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/02/1682inaction.png",
+            "gform-image-choice-md-width": 400,
+            "gform-image-choice-md-height": 400,
+            "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/02/1682inaction.png",
+            "gform-image-choice-lg-width": 600,
+            "gform-image-choice-lg-height": 600
+          }
+        },
+        "content": [
+          {
+            "acf_fc_layout": "title",
+            "kicker": "THOUGHT LEADERS IN DIGITAL INNOVATION",
+            "kicker_tag": "div",
+            "title": "1682: the business of innovation conference",
+            "heading_level": "h2",
+            "heading_tag": "div",
+            "add_description": true,
+            "description": "The 1682 Conference brings together leaders, innovators, and visionaries to explore the power of AI in shaping profit and process."
+          },
+          {
+            "acf_fc_layout": "button",
+            "button": {
+              "title": "Read more about 1682",
+              "url": "https://live-o3-world.pantheonsite.io/1682-conference/",
+              "target": ""
+            },
+            "button_label": "Read more about 1682",
+            "button_style": "blue"
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "insights_feed",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Insights Feed",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "PERSPECTIVES",
+          "kicker_tag": "div",
+          "title": "Expert insights driving impactful solutions",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": "Client Name | Title, Company"
+        },
+        "introduction_link": {
+          "title": "More Perspectives",
+          "url": "https://live-o3-world.pantheonsite.io/perspectives/",
+          "target": ""
+        },
+        "list_type": "all",
+        "select_insights": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,708 @@
+{
+  "_meta": {
+    "type": "page",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T02:45:52.019Z"
+  },
+  "wpId": 9510,
+  "slug": "solutions-ai-for-b2b-growth",
+  "path": "/solutions/solutions-ai-for-b2b-growth/",
+  "title": "AI solutions",
+  "parentSlug": "solutions",
+  "seo": {
+    "titleOverride": "Solutions AI for B2B growth: Unlocking potential %%page%% %%sep%% %%sitename%%",
+    "titleRendered": "Solutions AI for B2B growth: Unlocking potential | O3",
+    "descriptionOverride": "Unlock business potential with AI solutions for B2B growth. Discover proven strategies that drive measurable results today.",
+    "descriptionRendered": "Unlock business potential with AI solutions for B2B growth. Discover proven strategies that drive measurable results today.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/solutions/solutions-ai-for-b2b-growth/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "page_header": [
+      {
+        "acf_fc_layout": "basic_header",
+        "page_title_content": [
+          {
+            "acf_fc_layout": "title",
+            "kicker": "TRANSFORM + TRANSCEND",
+            "kicker_tag": "div",
+            "title": "AI solutions that deliver measurable results",
+            "heading_level": "h2",
+            "heading_tag": "div",
+            "add_description": true,
+            "description": "We help organizations unlock AI’s potential with proven strategies and activation. From data access and tech alignment to organizational readiness, we’ve been there. Our solutions deliver efficiency, personalized experiences, and measurable results."
+          },
+          {
+            "acf_fc_layout": "button",
+            "button": {
+              "title": "Let’s talk about your AI future",
+              "url": "https://live-o3-world.pantheonsite.io/contact/",
+              "target": ""
+            },
+            "button_label": "Let’s talk about your AI future",
+            "button_style": "blue"
+          }
+        ],
+        "header_icon": {
+          "value": "None",
+          "image": "None"
+        },
+        "header_image": {
+          "ID": 9585,
+          "id": 9585,
+          "title": "O3elements-AI-a",
+          "filename": "O3elements-AI-a.svg",
+          "filesize": 772,
+          "url": "http://www.o3world.com/wp-content/uploads/2025/02/O3elements-AI-a.svg",
+          "link": "http://www.o3world.com/solutions/solutions-ai-for-b2b-growth/o3elements-ai-a/",
+          "alt": "Solutions AI for B2B growth",
+          "author": "11",
+          "description": "",
+          "caption": "",
+          "name": "o3elements-ai-a",
+          "status": "inherit",
+          "uploaded_to": 9510,
+          "date": "2025-02-12 19:27:18",
+          "modified": "2025-03-10 15:21:23",
+          "menu_order": 0,
+          "mime_type": "image/svg+xml",
+          "type": "image",
+          "subtype": "svg+xml",
+          "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+          "width": 300,
+          "height": 300,
+          "sizes": {
+            "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/02/O3elements-AI-a.svg",
+            "thumbnail-width": 300,
+            "thumbnail-height": 300,
+            "medium": "http://www.o3world.com/wp-content/uploads/2025/02/O3elements-AI-a.svg",
+            "medium-width": 300,
+            "medium-height": 300,
+            "medium_large": "http://www.o3world.com/wp-content/uploads/2025/02/O3elements-AI-a.svg",
+            "medium_large-width": 300,
+            "medium_large-height": 300,
+            "large": "http://www.o3world.com/wp-content/uploads/2025/02/O3elements-AI-a.svg",
+            "large-width": 300,
+            "large-height": 300,
+            "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/02/O3elements-AI-a.svg",
+            "1536x1536-width": 300,
+            "1536x1536-height": 300,
+            "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/02/O3elements-AI-a.svg",
+            "2048x2048-width": 300,
+            "2048x2048-height": 300,
+            "icon": "http://www.o3world.com/wp-content/uploads/2025/02/O3elements-AI-a.svg",
+            "icon-width": 300,
+            "icon-height": 300,
+            "xlarge": "http://www.o3world.com/wp-content/uploads/2025/02/O3elements-AI-a.svg",
+            "xlarge-width": 300,
+            "xlarge-height": 300,
+            "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/02/O3elements-AI-a.svg",
+            "gform-image-choice-sm-width": 300,
+            "gform-image-choice-sm-height": 300,
+            "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/02/O3elements-AI-a.svg",
+            "gform-image-choice-md-width": 300,
+            "gform-image-choice-md-height": 300,
+            "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/02/O3elements-AI-a.svg",
+            "gform-image-choice-lg-width": 300,
+            "gform-image-choice-lg-height": 300
+          }
+        },
+        "header_background_icon": {
+          "value": "5755",
+          "image": "5755"
+        }
+      }
+    ],
+    "flexible_content": [
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Solutions",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "Services",
+          "kicker_tag": "div",
+          "title": "AI planning + activation that delivers real value",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": "",
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-9633\" src=\"https://live-o3-world.pantheonsite.io/wp-content/uploads/2025/02/AIstrategy@3x.png\" alt=\"yellow circle with black icon representing AI strategy\" width=\"80\" height=\"80\" /></h4>\n<h4>Strategy + education</h4>\n<p class=\"small\">Many organizations struggle to identify AI use cases that align with business goals, leading to wasted resources and low ROI. We help identify high-value use cases, develop action plans and train staff through comprehensive assessments of goals, journeys, data, and technology.</p>\n<h5>Perspective</h5>\n<p><a class=\"underlined-link\" href=\"https://www.o3world.com/perspectives/ai-project-strategy-essential-considerations/\">Learn how to align AI initiatives with your business goals for maximum impact</a></p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-9633\" src=\"https://live-o3-world.pantheonsite.io/wp-content/uploads/2025/02/AIactivate@3x.png\" alt=\"yellow circle with black icon representing AI activation\" width=\"80\" height=\"80\" /></h4>\n<h4>Project activation</h4>\n<p class=\"small\">Developing AI solutions can result in significant spend with unclear results, leaving organizations hesitant to move forward. Our proof-of-concept (POC) process rapidly validates key use cases and action plans through clearly defined KPIs and scaling objectives.</p>\n<h5>Perspective</h5>\n<p><a class=\"underlined-link\" href=\"https://www.o3world.com/perspectives/navigating-ai-landscape-o3-innovative-approach/\">Discover how O3’s innovative approach helps businesses navigate the evolving AI landscape</a></p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-9633\" src=\"https://live-o3-world.pantheonsite.io/wp-content/uploads/2025/02/AIcompliance@3x.png\" alt=\"yellow circle with black icon representing AI compliance\" width=\"80\" height=\"80\" /></h4>\n<h4>Compliance support</h4>\n<p class=\"small\">Organizations face complex privacy, security, and compliance challenges as AI technologies evolve. We guide you through policy development, privacy and security regulations, and governance best practices to ensure compliance with emerging AI standards and frameworks.</p>\n<h5>Perspective</h5>\n<p><a class=\"underlined-link\" href=\"https://www.o3world.com/perspectives/ai-and-the-future-of-humanity-work-and-education/&quot;\">Explore the imperative of responsible AI and its impact on humanity, work, and education</a></p>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "page_callout",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Why O3: Assessment",
+        "image": {
+          "ID": 9623,
+          "id": 9623,
+          "title": "whyO3",
+          "filename": "whyO3.png",
+          "filesize": 583566,
+          "url": "http://www.o3world.com/wp-content/uploads/2025/02/whyO3.png",
+          "link": "http://www.o3world.com/solutions/solutions-ai-for-b2b-growth/whyo3/",
+          "alt": "photo of doorway with o3 logo",
+          "author": "16",
+          "description": "conversion rate optimization consultant",
+          "caption": "",
+          "name": "whyo3",
+          "status": "inherit",
+          "uploaded_to": 9510,
+          "date": "2025-02-13 00:04:33",
+          "modified": "2025-03-10 16:15:10",
+          "menu_order": 0,
+          "mime_type": "image/png",
+          "type": "image",
+          "subtype": "png",
+          "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+          "width": 901,
+          "height": 901,
+          "sizes": {
+            "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/02/whyO3-150x150.png",
+            "thumbnail-width": 150,
+            "thumbnail-height": 150,
+            "medium": "http://www.o3world.com/wp-content/uploads/2025/02/whyO3-640x640.png",
+            "medium-width": 640,
+            "medium-height": 640,
+            "medium_large": "http://www.o3world.com/wp-content/uploads/2025/02/whyO3-768x768.png",
+            "medium_large-width": 768,
+            "medium_large-height": 768,
+            "large": "http://www.o3world.com/wp-content/uploads/2025/02/whyO3.png",
+            "large-width": 901,
+            "large-height": 901,
+            "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/02/whyO3.png",
+            "1536x1536-width": 901,
+            "1536x1536-height": 901,
+            "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/02/whyO3.png",
+            "2048x2048-width": 901,
+            "2048x2048-height": 901,
+            "icon": "http://www.o3world.com/wp-content/uploads/2025/02/whyO3-48x48.png",
+            "icon-width": 48,
+            "icon-height": 48,
+            "xlarge": "http://www.o3world.com/wp-content/uploads/2025/02/whyO3.png",
+            "xlarge-width": 901,
+            "xlarge-height": 901,
+            "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/02/whyO3.png",
+            "gform-image-choice-sm-width": 300,
+            "gform-image-choice-sm-height": 300,
+            "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/02/whyO3.png",
+            "gform-image-choice-md-width": 400,
+            "gform-image-choice-md-height": 400,
+            "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/02/whyO3.png",
+            "gform-image-choice-lg-width": 600,
+            "gform-image-choice-lg-height": 600
+          }
+        },
+        "content": [
+          {
+            "acf_fc_layout": "title",
+            "kicker": "Why O3",
+            "kicker_tag": "div",
+            "title": "Proven AI use cases, established processes + real-world results",
+            "heading_level": "h2",
+            "heading_tag": "div",
+            "add_description": true,
+            "description": "With years of AI experience, we’ve delivered proven use cases that drive measurable outcomes. Our POC process allows us to mitigate risk and deliver ROI."
+          },
+          {
+            "acf_fc_layout": "button",
+            "button": {
+              "title": "Start building your AI plan today",
+              "url": "https://live-o3-world.pantheonsite.io/contact/",
+              "target": ""
+            },
+            "button_label": "",
+            "button_style": "blue"
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Why O3: Callouts",
+        "add_introduction": false,
+        "introduction": {
+          "": null,
+          "kicker": "",
+          "kicker_tag": false,
+          "title": "",
+          "heading_level": "h2",
+          "heading_tag": false,
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": null,
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4>Personalized engagement</h4>\n<p class=\"small\">Create hyper-personalized digital experiences that feel unique to every user. From transforming customer data into personalized communication to tailoring onboarding content for app interactions, we help you build deeper connections that drive meaningful engagement.</p>\n<h5>CASE STUDY</h5>\n<p><a class=\"underlined-link\" href=\"https://www.o3world.com/work/ai-powered-personalization/\">See how O3’s AI-powered personalization tailors student journeys, boosting CTA clicks by 170%</a></p>\n"
+              },
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4 style=\"margin-top: 60px;\">Next best action</h4>\n<p class=\"small\">Actively deliver information or key functionality that users need at the moment they need it with a combination of smart UX patterns and AI. By shortening the path to interaction and enabling AI to take action, we simplify experiences and enhance outcomes.</p>\n<h5>Perspective</h5>\n<p><a class=\"underlined-link\" href=\"https://www.o3world.com/perspectives/ai-agents-charting-a-path-from-automation-to-intelligence/\">Examine our latest thinking on how AI agents will empower businesses to autonomous digital interaction</a></p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4>Conversational experiences</h4>\n<p class=\"small\">Turn unstructured content into an actionable knowledge-base with AI-driven virtual assistants. Our conversational solutions empower both customers and employees to access years of information instantly, removing reliance on large repositories or individual SMEs.</p>\n<h5>CASE STUDY</h5>\n<p><a class=\"underlined-link\" href=\"https://www.o3world.com/work/scarlet-ai-hyper-personalizing-creative-gig-economy/\">Discover how Scarlet AI transformed the creative gig economy with personalized virtual assistance</a></p>\n"
+              },
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4 style=\"margin-top: 60px;\">Workflow automation</h4>\n<p class=\"small\">Streamline complex tasks and create measurable efficiencies that empower people to do their best work. For customers, this means less friction, and for employees, it’s about replacing repetitive tasks with meaningful contributions.</p>\n<h5>CASE STUDY</h5>\n<p><a class=\"underlined-link\" href=\"https://www.o3world.com/work/delivering-generative-ai-solution-legal-documents/\">See how O3&#8217;s LegalDocBot automated legal document analysis, processing 10-page documents in under a minute</a></p>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "client_list",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Testimonial + client list",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "TRUSTED BY LEADING ORGANIZATIONS",
+          "kicker_tag": "div",
+          "title": "\"I am over here doing a happy dance in my tears of joy at how amazing this AI program is. Don't mind me, just living my best life!\"",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": true,
+          "description": "Business Process Owner, National Safety Training Company"
+        },
+        "introduction_link": {
+          "title": "See our work",
+          "url": "https://live-o3-world.pantheonsite.io/work/",
+          "target": ""
+        },
+        "clients": [
+          {
+            "name": "American Family Insurance",
+            "logo": {
+              "ID": 7228,
+              "id": 7228,
+              "title": "",
+              "filename": "AmFam-logo.jpg",
+              "filesize": 22384,
+              "url": "http://www.o3world.com/wp-content/uploads/2023/02/AmFam-logo.jpg",
+              "link": "http://www.o3world.com/work/amfam-logo-2/",
+              "alt": "American Family Insurance logo.",
+              "author": "16",
+              "description": "",
+              "caption": "",
+              "name": "amfam-logo-2",
+              "status": "inherit",
+              "uploaded_to": 161,
+              "date": "2023-02-03 23:44:00",
+              "modified": "2025-02-24 13:56:15",
+              "menu_order": 0,
+              "mime_type": "image/jpeg",
+              "type": "image",
+              "subtype": "jpeg",
+              "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+              "width": 921,
+              "height": 570,
+              "sizes": {
+                "thumbnail": "http://www.o3world.com/wp-content/uploads/2023/02/AmFam-logo-150x150.jpg",
+                "thumbnail-width": 150,
+                "thumbnail-height": 150,
+                "medium": "http://www.o3world.com/wp-content/uploads/2023/02/AmFam-logo-640x396.jpg",
+                "medium-width": 640,
+                "medium-height": 396,
+                "medium_large": "http://www.o3world.com/wp-content/uploads/2023/02/AmFam-logo-768x475.jpg",
+                "medium_large-width": 768,
+                "medium_large-height": 475,
+                "large": "http://www.o3world.com/wp-content/uploads/2023/02/AmFam-logo.jpg",
+                "large-width": 921,
+                "large-height": 570,
+                "1536x1536": "http://www.o3world.com/wp-content/uploads/2023/02/AmFam-logo.jpg",
+                "1536x1536-width": 921,
+                "1536x1536-height": 570,
+                "2048x2048": "http://www.o3world.com/wp-content/uploads/2023/02/AmFam-logo.jpg",
+                "2048x2048-width": 921,
+                "2048x2048-height": 570,
+                "icon": "http://www.o3world.com/wp-content/uploads/2023/02/AmFam-logo-48x30.jpg",
+                "icon-width": 48,
+                "icon-height": 30,
+                "xlarge": "http://www.o3world.com/wp-content/uploads/2023/02/AmFam-logo.jpg",
+                "xlarge-width": 921,
+                "xlarge-height": 570,
+                "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2023/02/AmFam-logo.jpg",
+                "gform-image-choice-sm-width": 300,
+                "gform-image-choice-sm-height": 186,
+                "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2023/02/AmFam-logo.jpg",
+                "gform-image-choice-md-width": 400,
+                "gform-image-choice-md-height": 248,
+                "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2023/02/AmFam-logo.jpg",
+                "gform-image-choice-lg-width": 600,
+                "gform-image-choice-lg-height": 371
+              }
+            },
+            "cast_study": false
+          },
+          {
+            "name": "Best Egg",
+            "logo": {
+              "ID": 7227,
+              "id": 7227,
+              "title": "",
+              "filename": "BestEgg-logo.jpg",
+              "filesize": 19250,
+              "url": "http://www.o3world.com/wp-content/uploads/2023/02/BestEgg-logo.jpg",
+              "link": "http://www.o3world.com/work/bestegg-logo-2/",
+              "alt": "Best Egg logo.",
+              "author": "16",
+              "description": "",
+              "caption": "",
+              "name": "bestegg-logo-2",
+              "status": "inherit",
+              "uploaded_to": 161,
+              "date": "2023-02-03 23:43:59",
+              "modified": "2023-02-06 13:56:17",
+              "menu_order": 0,
+              "mime_type": "image/jpeg",
+              "type": "image",
+              "subtype": "jpeg",
+              "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+              "width": 921,
+              "height": 570,
+              "sizes": {
+                "thumbnail": "http://www.o3world.com/wp-content/uploads/2023/02/BestEgg-logo-150x150.jpg",
+                "thumbnail-width": 150,
+                "thumbnail-height": 150,
+                "medium": "http://www.o3world.com/wp-content/uploads/2023/02/BestEgg-logo-640x396.jpg",
+                "medium-width": 640,
+                "medium-height": 396,
+                "medium_large": "http://www.o3world.com/wp-content/uploads/2023/02/BestEgg-logo-768x475.jpg",
+                "medium_large-width": 768,
+                "medium_large-height": 475,
+                "large": "http://www.o3world.com/wp-content/uploads/2023/02/BestEgg-logo.jpg",
+                "large-width": 921,
+                "large-height": 570,
+                "1536x1536": "http://www.o3world.com/wp-content/uploads/2023/02/BestEgg-logo.jpg",
+                "1536x1536-width": 921,
+                "1536x1536-height": 570,
+                "2048x2048": "http://www.o3world.com/wp-content/uploads/2023/02/BestEgg-logo.jpg",
+                "2048x2048-width": 921,
+                "2048x2048-height": 570,
+                "icon": "http://www.o3world.com/wp-content/uploads/2023/02/BestEgg-logo-48x30.jpg",
+                "icon-width": 48,
+                "icon-height": 30,
+                "xlarge": "http://www.o3world.com/wp-content/uploads/2023/02/BestEgg-logo.jpg",
+                "xlarge-width": 921,
+                "xlarge-height": 570,
+                "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2023/02/BestEgg-logo.jpg",
+                "gform-image-choice-sm-width": 300,
+                "gform-image-choice-sm-height": 186,
+                "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2023/02/BestEgg-logo.jpg",
+                "gform-image-choice-md-width": 400,
+                "gform-image-choice-md-height": 248,
+                "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2023/02/BestEgg-logo.jpg",
+                "gform-image-choice-lg-width": 600,
+                "gform-image-choice-lg-height": 371
+              }
+            },
+            "cast_study": false
+          },
+          {
+            "name": "Children's Hospital of Philadelphia",
+            "logo": {
+              "ID": 7225,
+              "id": 7225,
+              "title": "",
+              "filename": "CHOP-logo.jpg",
+              "filesize": 21014,
+              "url": "http://www.o3world.com/wp-content/uploads/2023/02/CHOP-logo.jpg",
+              "link": "http://www.o3world.com/work/chop-logo-2/",
+              "alt": "Children's Hospital logo.",
+              "author": "16",
+              "description": "",
+              "caption": "",
+              "name": "chop-logo-2",
+              "status": "inherit",
+              "uploaded_to": 161,
+              "date": "2023-02-03 23:43:56",
+              "modified": "2025-02-24 14:01:49",
+              "menu_order": 0,
+              "mime_type": "image/jpeg",
+              "type": "image",
+              "subtype": "jpeg",
+              "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+              "width": 921,
+              "height": 570,
+              "sizes": {
+                "thumbnail": "http://www.o3world.com/wp-content/uploads/2023/02/CHOP-logo-150x150.jpg",
+                "thumbnail-width": 150,
+                "thumbnail-height": 150,
+                "medium": "http://www.o3world.com/wp-content/uploads/2023/02/CHOP-logo-640x396.jpg",
+                "medium-width": 640,
+                "medium-height": 396,
+                "medium_large": "http://www.o3world.com/wp-content/uploads/2023/02/CHOP-logo-768x475.jpg",
+                "medium_large-width": 768,
+                "medium_large-height": 475,
+                "large": "http://www.o3world.com/wp-content/uploads/2023/02/CHOP-logo.jpg",
+                "large-width": 921,
+                "large-height": 570,
+                "1536x1536": "http://www.o3world.com/wp-content/uploads/2023/02/CHOP-logo.jpg",
+                "1536x1536-width": 921,
+                "1536x1536-height": 570,
+                "2048x2048": "http://www.o3world.com/wp-content/uploads/2023/02/CHOP-logo.jpg",
+                "2048x2048-width": 921,
+                "2048x2048-height": 570,
+                "icon": "http://www.o3world.com/wp-content/uploads/2023/02/CHOP-logo-48x30.jpg",
+                "icon-width": 48,
+                "icon-height": 30,
+                "xlarge": "http://www.o3world.com/wp-content/uploads/2023/02/CHOP-logo.jpg",
+                "xlarge-width": 921,
+                "xlarge-height": 570,
+                "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2023/02/CHOP-logo.jpg",
+                "gform-image-choice-sm-width": 300,
+                "gform-image-choice-sm-height": 186,
+                "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2023/02/CHOP-logo.jpg",
+                "gform-image-choice-md-width": 400,
+                "gform-image-choice-md-height": 248,
+                "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2023/02/CHOP-logo.jpg",
+                "gform-image-choice-lg-width": 600,
+                "gform-image-choice-lg-height": 371
+              }
+            },
+            "cast_study": false
+          },
+          {
+            "name": "Tyndale USA",
+            "logo": {
+              "ID": 9699,
+              "id": 9699,
+              "title": "Tyndale",
+              "filename": "Tyndale.jpg",
+              "filesize": 19395,
+              "url": "http://www.o3world.com/wp-content/uploads/2025/02/Tyndale.jpg",
+              "link": "http://www.o3world.com/solutions/solutions-ai-for-b2b-growth/tyndale/",
+              "alt": "Tyndale logo",
+              "author": "16",
+              "description": "",
+              "caption": "",
+              "name": "tyndale",
+              "status": "inherit",
+              "uploaded_to": 9510,
+              "date": "2025-02-19 20:53:42",
+              "modified": "2025-02-19 20:54:05",
+              "menu_order": 0,
+              "mime_type": "image/jpeg",
+              "type": "image",
+              "subtype": "jpeg",
+              "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+              "width": 921,
+              "height": 570,
+              "sizes": {
+                "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/02/Tyndale-150x150.jpg",
+                "thumbnail-width": 150,
+                "thumbnail-height": 150,
+                "medium": "http://www.o3world.com/wp-content/uploads/2025/02/Tyndale-640x396.jpg",
+                "medium-width": 640,
+                "medium-height": 396,
+                "medium_large": "http://www.o3world.com/wp-content/uploads/2025/02/Tyndale-768x475.jpg",
+                "medium_large-width": 768,
+                "medium_large-height": 475,
+                "large": "http://www.o3world.com/wp-content/uploads/2025/02/Tyndale.jpg",
+                "large-width": 921,
+                "large-height": 570,
+                "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/02/Tyndale.jpg",
+                "1536x1536-width": 921,
+                "1536x1536-height": 570,
+                "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/02/Tyndale.jpg",
+                "2048x2048-width": 921,
+                "2048x2048-height": 570,
+                "icon": "http://www.o3world.com/wp-content/uploads/2025/02/Tyndale-48x30.jpg",
+                "icon-width": 48,
+                "icon-height": 30,
+                "xlarge": "http://www.o3world.com/wp-content/uploads/2025/02/Tyndale.jpg",
+                "xlarge-width": 921,
+                "xlarge-height": 570,
+                "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/02/Tyndale.jpg",
+                "gform-image-choice-sm-width": 300,
+                "gform-image-choice-sm-height": 186,
+                "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/02/Tyndale.jpg",
+                "gform-image-choice-md-width": 400,
+                "gform-image-choice-md-height": 248,
+                "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/02/Tyndale.jpg",
+                "gform-image-choice-lg-width": 600,
+                "gform-image-choice-lg-height": 371
+              }
+            },
+            "cast_study": false
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "project_feed",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Case studies",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "Case studies",
+          "kicker_tag": "div",
+          "title": "AI in action: real-world success stories",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": "Client Name | Title, Company"
+        },
+        "introduction_link": "",
+        "list_type": "select",
+        "select_projects": [
+          10282,
+          10023,
+          9319
+        ]
+      },
+      {
+        "acf_fc_layout": "insights_feed",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Perspectives",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "Perspectives",
+          "kicker_tag": "div",
+          "title": "Inspiring the next wave of AI innovation",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": "Client Name | Title, Company"
+        },
+        "introduction_link": "",
+        "list_type": "select",
+        "select_insights": [
+          10128,
+          10133,
+          8953
+        ]
+      },
+      {
+        "acf_fc_layout": "page_callout",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Contact us",
+        "image": {
+          "ID": 5472,
+          "id": 5472,
+          "title": "",
+          "filename": "Open-Circle-Corner.png",
+          "filesize": 14518,
+          "url": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner.png",
+          "link": "http://www.o3world.com/?attachment_id=5472",
+          "alt": "red box with white semi circle",
+          "author": "16",
+          "description": "",
+          "caption": "",
+          "name": "open-circle-corner-2",
+          "status": "inherit",
+          "uploaded_to": 2,
+          "date": "2022-10-09 19:43:53",
+          "modified": "2025-02-24 17:41:54",
+          "menu_order": 0,
+          "mime_type": "image/png",
+          "type": "image",
+          "subtype": "png",
+          "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+          "width": 960,
+          "height": 960,
+          "sizes": {
+            "thumbnail": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner-150x150.png",
+            "thumbnail-width": 150,
+            "thumbnail-height": 150,
+            "medium": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner-640x640.png",
+            "medium-width": 640,
+            "medium-height": 640,
+            "medium_large": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner-768x768.png",
+            "medium_large-width": 768,
+            "medium_large-height": 768,
+            "large": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner.png",
+            "large-width": 960,
+            "large-height": 960,
+            "1536x1536": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner.png",
+            "1536x1536-width": 960,
+            "1536x1536-height": 960,
+            "2048x2048": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner.png",
+            "2048x2048-width": 960,
+            "2048x2048-height": 960,
+            "icon": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner-48x48.png",
+            "icon-width": 48,
+            "icon-height": 48,
+            "xlarge": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner.png",
+            "xlarge-width": 960,
+            "xlarge-height": 960,
+            "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner.png",
+            "gform-image-choice-sm-width": 300,
+            "gform-image-choice-sm-height": 300,
+            "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner.png",
+            "gform-image-choice-md-width": 400,
+            "gform-image-choice-md-height": 400,
+            "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner.png",
+            "gform-image-choice-lg-width": 600,
+            "gform-image-choice-lg-height": 600
+          }
+        },
+        "content": [
+          {
+            "acf_fc_layout": "title",
+            "kicker": "CONTACT US",
+            "kicker_tag": "div",
+            "title": "Let’s put AI to work for you",
+            "heading_level": "h2",
+            "heading_tag": "div",
+            "add_description": true,
+            "description": "From smarter workflows to personalized experiences, we’ll help you tackle your biggest challenges with AI-driven solutions. Ready to turn ideas into impact?"
+          },
+          {
+            "acf_fc_layout": "button",
+            "button": {
+              "title": "Let's talk AI",
+              "url": "https://live-o3-world.pantheonsite.io/contact/",
+              "target": ""
+            },
+            "button_label": "Let's talk AI",
+            "button_style": "blue"
+          }
+        ]
+      }
+    ]
+  }
+}

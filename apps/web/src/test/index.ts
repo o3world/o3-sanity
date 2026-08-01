@@ -12,10 +12,12 @@
 export { expectNotFound, renderRoute } from './renderRoute'
 
 export {
+  aMigratedPage,
   aMigratedPerspective,
   aPerspective,
   aPerspectivesPage,
   aSeededPage,
+  migratedPageSlugs,
   migratedPerspectiveSlugs,
   paragraph,
   siteSettings,

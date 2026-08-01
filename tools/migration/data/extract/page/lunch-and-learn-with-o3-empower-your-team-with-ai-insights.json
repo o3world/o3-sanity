@@ -1,0 +1,266 @@
+{
+  "_meta": {
+    "type": "page",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T02:45:52.023Z"
+  },
+  "wpId": 8614,
+  "slug": "lunch-and-learn-with-o3-empower-your-team-with-ai-insights",
+  "path": "/lunch-and-learn-with-o3-empower-your-team-with-ai-insights/",
+  "title": "Lunch and learn with O3: Empower your team with AI Insights",
+  "parentSlug": null,
+  "seo": {
+    "titleOverride": "O3's Lunch and Learn sessions on generative AI and LLMs",
+    "titleRendered": "O3's Lunch and Learn sessions on generative AI and LLMs",
+    "descriptionOverride": "Join O3's lunch and learn sessions for a deep dive into the transformative power of generative AI and Large Language Models. Our expert-led sessions.",
+    "descriptionRendered": "Join O3's lunch and learn sessions for a deep dive into the transformative power of generative AI and Large Language Models. Our expert-led sessions.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/lunch-and-learn-with-o3-empower-your-team-with-ai-insights/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "page_header": [
+      {
+        "acf_fc_layout": "basic_header",
+        "page_title_content": [
+          {
+            "acf_fc_layout": "title",
+            "kicker": "",
+            "kicker_tag": "div",
+            "title": "Lunch and learn with O3: Empower your team with AI insights",
+            "heading_level": "h2",
+            "heading_tag": "h1",
+            "add_description": true,
+            "description": "Leverage our AI experts to host an impactful session as we dive into your strategic business opportunities."
+          }
+        ],
+        "header_icon": {
+          "value": "5778",
+          "image": "5778"
+        },
+        "header_image": {
+          "ID": 8749,
+          "id": 8749,
+          "title": "lunch+learn",
+          "filename": "lunchlearn.png",
+          "filesize": 3935124,
+          "url": "http://www.o3world.com/wp-content/uploads/2024/01/lunchlearn.png",
+          "link": "http://www.o3world.com/lunch-and-learn-with-o3-empower-your-team-with-ai-insights/lunchlearn/",
+          "alt": "Image of O3 offices with 2 people in a conversation and others listening",
+          "author": "16",
+          "description": "",
+          "caption": "",
+          "name": "lunchlearn",
+          "status": "inherit",
+          "uploaded_to": 8614,
+          "date": "2024-01-30 18:39:46",
+          "modified": "2024-01-30 18:40:34",
+          "menu_order": 0,
+          "mime_type": "image/png",
+          "type": "image",
+          "subtype": "png",
+          "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+          "width": 2500,
+          "height": 2500,
+          "sizes": {
+            "thumbnail": "http://www.o3world.com/wp-content/uploads/2024/01/lunchlearn-150x150.png",
+            "thumbnail-width": 150,
+            "thumbnail-height": 150,
+            "medium": "http://www.o3world.com/wp-content/uploads/2024/01/lunchlearn-640x640.png",
+            "medium-width": 640,
+            "medium-height": 640,
+            "medium_large": "http://www.o3world.com/wp-content/uploads/2024/01/lunchlearn-768x768.png",
+            "medium_large-width": 768,
+            "medium_large-height": 768,
+            "large": "http://www.o3world.com/wp-content/uploads/2024/01/lunchlearn-1024x1024.png",
+            "large-width": 1024,
+            "large-height": 1024,
+            "1536x1536": "http://www.o3world.com/wp-content/uploads/2024/01/lunchlearn-1536x1536.png",
+            "1536x1536-width": 1536,
+            "1536x1536-height": 1536,
+            "2048x2048": "http://www.o3world.com/wp-content/uploads/2024/01/lunchlearn-2048x2048.png",
+            "2048x2048-width": 2048,
+            "2048x2048-height": 2048,
+            "icon": "http://www.o3world.com/wp-content/uploads/2024/01/lunchlearn-48x48.png",
+            "icon-width": 48,
+            "icon-height": 48,
+            "xlarge": "http://www.o3world.com/wp-content/uploads/2024/01/lunchlearn-1280x1280.png",
+            "xlarge-width": 1280,
+            "xlarge-height": 1280,
+            "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2024/01/lunchlearn.png",
+            "gform-image-choice-sm-width": 300,
+            "gform-image-choice-sm-height": 300,
+            "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2024/01/lunchlearn.png",
+            "gform-image-choice-md-width": 400,
+            "gform-image-choice-md-height": 400,
+            "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2024/01/lunchlearn.png",
+            "gform-image-choice-lg-width": 600,
+            "gform-image-choice-lg-height": 600
+          }
+        },
+        "header_background_icon": {
+          "value": "5756",
+          "image": "5756"
+        }
+      }
+    ],
+    "flexible_content": [
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Multiple Columns",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "Lunch and learn with O3",
+          "kicker_tag": "div",
+          "title": "About ",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": true,
+          "description": "With a particular focus on enhancing the customer experience (CX), O3 lunch and learn sessions are meticulously crafted to empower your team with the latest insights and expertise. Our experts are not only pioneers but also thought leaders, guiding companies through the ever-evolving opportunities within generative AI and Large Language Models (LLMs). It's become evident that tools like ChatGPT will play a pivotal role in shaping your business landscape in 2024. Get ahead and provide your team with a personalized deep dive into the intricacies of how this technology will transform the customer experience."
+        },
+        "introduction_link": "",
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4>Key areas of focus</h4>\n<ul>\n<li>History of AI, the rise of generative AI and LLMs</li>\n<li>How AI impacts your customer or employee experience</li>\n<li>Key use cases, products, and processes for leveraging AI</li>\n<li>A strategic framework for aligning business objectives with effective AI solutions</li>\n<li>Real-life case studies of AI in action including pitfalls and future opportunities</li>\n</ul>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4>Details</h4>\n<p>With a duration of 1 hour and accommodating 8–12 participants, our lunch and learn format is flexible—available in-person or virtually. All we need from you is a high-level understanding of your business and pain points.</p>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "page_callout",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Page Callout",
+        "image": {
+          "ID": 8744,
+          "id": 8744,
+          "title": "Trish Wethman",
+          "filename": "Screenshot-2024-01-30-at-10.21.31 AM.png",
+          "filesize": 226486,
+          "url": "http://www.o3world.com/wp-content/uploads/2024/01/Screenshot-2024-01-30-at-10.21.31 AM.png",
+          "link": "http://www.o3world.com/lunch-and-learn-with-o3-empower-your-team-with-ai-insights/screenshot-2024-01-30-at-10-21-31-am/",
+          "alt": "Photo of Trish Wethman from Best Egg",
+          "author": "16",
+          "description": "",
+          "caption": "",
+          "name": "screenshot-2024-01-30-at-10-21-31-am",
+          "status": "inherit",
+          "uploaded_to": 8614,
+          "date": "2024-01-30 18:21:48",
+          "modified": "2024-01-30 18:22:34",
+          "menu_order": 0,
+          "mime_type": "image/png",
+          "type": "image",
+          "subtype": "png",
+          "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+          "width": 577,
+          "height": 577,
+          "sizes": {
+            "thumbnail": "http://www.o3world.com/wp-content/uploads/2024/01/Screenshot-2024-01-30-at-10.21.31 AM-150x150.png",
+            "thumbnail-width": 150,
+            "thumbnail-height": 150,
+            "medium": "http://www.o3world.com/wp-content/uploads/2024/01/Screenshot-2024-01-30-at-10.21.31 AM.png",
+            "medium-width": 577,
+            "medium-height": 577,
+            "medium_large": "http://www.o3world.com/wp-content/uploads/2024/01/Screenshot-2024-01-30-at-10.21.31 AM.png",
+            "medium_large-width": 577,
+            "medium_large-height": 577,
+            "large": "http://www.o3world.com/wp-content/uploads/2024/01/Screenshot-2024-01-30-at-10.21.31 AM.png",
+            "large-width": 577,
+            "large-height": 577,
+            "1536x1536": "http://www.o3world.com/wp-content/uploads/2024/01/Screenshot-2024-01-30-at-10.21.31 AM.png",
+            "1536x1536-width": 577,
+            "1536x1536-height": 577,
+            "2048x2048": "http://www.o3world.com/wp-content/uploads/2024/01/Screenshot-2024-01-30-at-10.21.31 AM.png",
+            "2048x2048-width": 577,
+            "2048x2048-height": 577,
+            "icon": "http://www.o3world.com/wp-content/uploads/2024/01/Screenshot-2024-01-30-at-10.21.31 AM-48x48.png",
+            "icon-width": 48,
+            "icon-height": 48,
+            "xlarge": "http://www.o3world.com/wp-content/uploads/2024/01/Screenshot-2024-01-30-at-10.21.31 AM.png",
+            "xlarge-width": 577,
+            "xlarge-height": 577,
+            "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2024/01/Screenshot-2024-01-30-at-10.21.31 AM.png",
+            "gform-image-choice-sm-width": 300,
+            "gform-image-choice-sm-height": 300,
+            "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2024/01/Screenshot-2024-01-30-at-10.21.31 AM.png",
+            "gform-image-choice-md-width": 400,
+            "gform-image-choice-md-height": 400,
+            "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2024/01/Screenshot-2024-01-30-at-10.21.31 AM.png",
+            "gform-image-choice-lg-width": 577,
+            "gform-image-choice-lg-height": 577
+          }
+        },
+        "content": [
+          {
+            "acf_fc_layout": "title",
+            "kicker": "",
+            "kicker_tag": "div",
+            "title": "“Thanks to Mike Gadsby  for a really informative  and helpful learning  session. O3 is driving  some outstanding thought leadership on this topic, and  I can’t wait to learn more.”",
+            "heading_level": "h2",
+            "heading_tag": "div",
+            "add_description": true,
+            "description": "Trish Wethman, Chief Customer Officer, Best Egg"
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "team",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Team",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "",
+          "kicker_tag": "div",
+          "title": "Meet the team",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": true,
+          "description": "Juggling the challenges of a dynamic environment, this team is delivering complex AI projects at scale. Their expertise goes beyond the boardroom, addressing national and global audiences on the power of AI. O3’s proven Proof of Concept (POC) methodology is a testament to our strategic approach, aligning business objectives seamlessly with AI opportunities. As a strategic partner with Microsoft and OpenAI, O3 has early access to new AI developments, ensuring that our clients stay at the forefront of innovation in the ever-evolving landscape of artificial intelligence."
+        },
+        "introduction_link": "",
+        "list_type": "select",
+        "team_members": [
+          672,
+          8708,
+          8710
+        ]
+      },
+      {
+        "acf_fc_layout": "form",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Form",
+        "content": [
+          {
+            "acf_fc_layout": "title",
+            "kicker": "Schedule your session ",
+            "kicker_tag": "div",
+            "title": "Lunch and learn with O3 ",
+            "heading_level": "h2",
+            "heading_tag": "div",
+            "add_description": false,
+            "description": ""
+          }
+        ],
+        "form_id": "8"
+      }
+    ]
+  }
+}

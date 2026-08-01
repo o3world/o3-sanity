@@ -3,10 +3,13 @@ import { join } from 'node:path'
 
 import { describe, expect, it } from 'vitest'
 
+import { SECTION_BLOCKS } from '@o3/sanity/schemas/registry'
+
 import { CONVERTED_DIR, EXTRACT_DIR } from './lib/paths'
 import type { WpSeo } from './lib/yoast'
 import { categoryDoc } from './map/category'
 import { checkPathParity } from './map/paths'
+import { pageDoc } from './map/page'
 import { personDoc } from './map/person'
 import { siteSettingsDoc } from './map/siteSettings'
 import { perspectiveDoc } from './map/perspective'
@@ -36,7 +39,8 @@ const perspectives = readType<Record<string, unknown>>('perspective')
 const categories = readType<Record<string, unknown>>('category')
 const persons = readType<Record<string, unknown>>('person')
 const siteSettings = readType<Record<string, unknown>>('siteSettings')
-const all = [...perspectives, ...categories, ...persons, ...siteSettings]
+const pages = readType<Record<string, unknown>>('page')
+const all = [...perspectives, ...categories, ...persons, ...siteSettings, ...pages]
 
 /**
  * The closed set of block types the `bodyText` schema allows. A converter that
@@ -54,6 +58,23 @@ describe('committed conversion output', () => {
     for (const { file, doc } of perspectives) {
       const parsed = perspectiveDoc.safeParse(doc)
       expect(parsed.success, `${file}: ${JSON.stringify(parsed.error?.issues)}`).toBe(true)
+    }
+  })
+
+  it('validates every migrated page against its schema gate', () => {
+    for (const { file, doc } of pages) {
+      const parsed = pageDoc.safeParse(doc)
+      expect(parsed.success, `${file}: ${JSON.stringify(parsed.error?.issues)}`).toBe(true)
+    }
+  })
+
+  it('composes migrated pages from registered section blocks only', () => {
+    for (const { file, doc } of pages) {
+      for (const section of doc.sections as { _type: string }[]) {
+        expect(SECTION_BLOCKS as readonly string[], `${file} has "${section._type}"`).toContain(
+          section._type,
+        )
+      }
     }
   })
 
@@ -129,7 +150,9 @@ describe('committed conversion output', () => {
       // Documents are keyed by WordPress id. `wp:team:` is a person who
       // never had a WP account (#17); the siteSettings singleton has no id of
       // its own — it is assembled from menus and the options page.
-      expect(migration.sourceId, file).toMatch(/^wp:(post|term|user|team):\d+$|^wp:site:chrome$/)
+      expect(migration.sourceId, file).toMatch(
+        /^wp:(post|page|term|user|team):\d+$|^wp:site:chrome$/,
+      )
       expect(migration.extractedAt, file).toMatch(/^\d{4}-\d{2}-\d{2}T/)
     }
   })

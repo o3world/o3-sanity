@@ -1,0 +1,292 @@
+{
+  "_meta": {
+    "type": "page",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T02:45:52.026Z"
+  },
+  "wpId": 155,
+  "slug": "ventures",
+  "path": "/ventures/",
+  "title": "Ventures",
+  "parentSlug": null,
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Ventures | O3",
+    "descriptionOverride": "The O3 ventures program is dedicated to creating better digital customer experiences for organizations that share our values.",
+    "descriptionRendered": "The O3 ventures program is dedicated to creating better digital customer experiences for organizations that share our values.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/ventures/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_content": [
+      {
+        "acf_fc_layout": "text_and_accordion",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text and Accordion",
+        "content": [
+          {
+            "acf_fc_layout": "title",
+            "kicker": "Criteria",
+            "kicker_tag": "h2",
+            "title": "Paving the road ahead with good people",
+            "heading_level": "h2",
+            "heading_tag": "p",
+            "add_description": true,
+            "description": "What we look for in partners when exploring new opportunities."
+          }
+        ],
+        "accordion": [
+          {
+            "panel_title": "Leadership",
+            "panel_text": "<p>We look for strong leaders who have deep expertise in their market and believe in the core tenets of innovation.</p>\n"
+          },
+          {
+            "panel_title": "Values",
+            "panel_text": "<p>We partner with those who align with our own values and are also seeking a mutually beneficial partnership.</p>\n"
+          },
+          {
+            "panel_title": "Expertise",
+            "panel_text": "<p>We lean on our partners&#8217; depth of experience and knowledge in their respective markets to put a plan into action on where to best drive product development.</p>\n"
+          },
+          {
+            "panel_title": "Opportunity",
+            "panel_text": "<p>We&#8217;re excited by unique concepts where we can accelerate growth and improve outcomes.</p>\n"
+          },
+          {
+            "panel_title": "Outlook",
+            "panel_text": "<p>We&#8217;re passionate about a strong strategy and look for others who share a good game plan and outlook.</p>\n"
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Multiple Columns",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "Investing time + expertise",
+          "kicker_tag": "h2",
+          "title": "Shaping the world with new ideas",
+          "heading_level": "h2",
+          "heading_tag": "p",
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": "",
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<div class=\"relative w-full group\">\n<a href=\"https://live-o3-world.pantheonsite.io/work/scarlet-ai-hyper-personalizing-creative-gig-economy/\" class=\"hover:text-brand-red focus:text-brand-red\"></p>\n<div class=\"w-full bg-gray-100 mb-[30px] aspect-1\">\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-8770 size-full\" src=\"https://live-o3-world.pantheonsite.io/wp-content/uploads/2024/02/o3-rec-featured-cs-image.jpg\" alt=\"Scarlet AI\" width=\"546\" height=\"546\" srcset=\"http://www.o3world.com/wp-content/uploads/2024/02/o3-rec-featured-cs-image.jpg 546w, http://www.o3world.com/wp-content/uploads/2024/02/o3-rec-featured-cs-image-150x150.jpg 150w, http://www.o3world.com/wp-content/uploads/2024/02/o3-rec-featured-cs-image-48x48.jpg 48w\" sizes=\"auto, (max-width: 546px) 100vw, 546px\" /></p>\n</div>\n<h3 class=\"mb-3 text-black type-kicker\">REC PHILLY</h3>\n<h4 style=\"margin-top: 12px;\">Empowering creative entrepreneurs</h4>\n<p><span class=\"text-black hover:text-black focus:text-black\">A “WeWork for artists”, REC Philly empowers creative entrepreneurs by providing space, equipment, community and expertise to support their growth. In order to expand from its humble, North Philly space into a 10,000 square foot creative complex, REC Philly required both a financial investor as well as a strategic development partner.</span><br />\n</a>\n</div>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<div class=\"relative w-full group\">\n<a href=\"https://www.o3world.com/perspectives/sahay-ai-triumphs-1682-venture-awards\"  class=\"hover:text-brand-red focus:text-brand-red\"></p>\n<div class=\"w-full bg-gray-100 mb-[30px] aspect-1\">\n<img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-9302 size-medium\" src=\"https://live-o3-world.pantheonsite.io/wp-content/uploads/2024/10/1682-website-social-imagery-6-640x640.png\" alt=\"Venture Awards at 1682 - Sahay AI\" width=\"640\" height=\"640\" srcset=\"http://www.o3world.com/wp-content/uploads/2024/10/1682-website-social-imagery-6-640x640.png 640w, http://www.o3world.com/wp-content/uploads/2024/10/1682-website-social-imagery-6-150x150.png 150w, http://www.o3world.com/wp-content/uploads/2024/10/1682-website-social-imagery-6-768x768.png 768w, http://www.o3world.com/wp-content/uploads/2024/10/1682-website-social-imagery-6-1024x1024.png 1024w, http://www.o3world.com/wp-content/uploads/2024/10/1682-website-social-imagery-6-1536x1536.png 1536w, http://www.o3world.com/wp-content/uploads/2024/10/1682-website-social-imagery-6-2048x2048.png 2048w, http://www.o3world.com/wp-content/uploads/2024/10/1682-website-social-imagery-6-48x48.png 48w, http://www.o3world.com/wp-content/uploads/2024/10/1682-website-social-imagery-6-1280x1280.png 1280w\" sizes=\"auto, (max-width: 640px) 100vw, 640px\" /></p>\n</div>\n<h3 class=\"mb-3 text-black type-kicker\">Sahay AI</h3>\n<h4 style=\"margin-top: 12px;\">Keeping AI on Track</h4>\n<p><span class=\"text-black hover:text-black focus:text-black\">At O3, we don’t just celebrate AI-driven startups—we help them build momentum. As the winner of the 1682 Venture Awards, Sahay AI is revolutionizing railway safety with machine learning and automation. Now, through our venture consulting practice, we’re working alongside their team to refine strategy, enhance product-market fit, and accelerate their journey.</span><br />\n</a>\n</div>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<div class=\"relative w-full group\">\n<a href=\"https://www.o3world.com/perspectives/the-o3-venture-awards-at-1682-a-chance-to-pitch-win-and-promote-your-ai-startup\" class=\"hover:text-brand-red focus:text-brand-red\"></p>\n<div class=\"w-full bg-gray-100 mb-[30px] aspect-1\">\n<img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-9785 size-medium\" src=\"https://live-o3-world.pantheonsite.io/wp-content/uploads/2019/08/O3-website-imagery_-Perspectives-60-640x640.webp\" alt=\"The O3 Venture Awards\" width=\"640\" height=\"640\" srcset=\"http://www.o3world.com/wp-content/uploads/2019/08/O3-website-imagery_-Perspectives-60-640x640.webp 640w, http://www.o3world.com/wp-content/uploads/2019/08/O3-website-imagery_-Perspectives-60-150x150.webp 150w, http://www.o3world.com/wp-content/uploads/2019/08/O3-website-imagery_-Perspectives-60-768x768.webp 768w, http://www.o3world.com/wp-content/uploads/2019/08/O3-website-imagery_-Perspectives-60-1024x1024.webp 1024w, http://www.o3world.com/wp-content/uploads/2019/08/O3-website-imagery_-Perspectives-60-1536x1536.webp 1536w, http://www.o3world.com/wp-content/uploads/2019/08/O3-website-imagery_-Perspectives-60-2048x2048.webp 2048w, http://www.o3world.com/wp-content/uploads/2019/08/O3-website-imagery_-Perspectives-60-48x48.webp 48w, http://www.o3world.com/wp-content/uploads/2019/08/O3-website-imagery_-Perspectives-60-1280x1280.webp 1280w\" sizes=\"auto, (max-width: 640px) 100vw, 640px\" />\n</div>\n<h3 class=\"mb-3 text-black type-kicker\">1682</h3>\n<h4 style=\"margin-top: 12px;\">Fueling the future: venture awards</h4>\n<p><span class=\"text-black hover:text-black focus:text-black\">Great ideas deserve a platform. The O3 Venture Awards at 1682 give AI-driven startups the chance to pitch their innovations, gain exposure, and connect with industry leaders. More than just a competition, it&#8217;s an opportunity to accelerate growth, refine strategy, and take bold ideas to the next level. Keep an eye out for this year&#8217;s 1682 conference.</span><br />\n</a>\n</div>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "page_callout",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Page Callout",
+        "image": {
+          "ID": 9818,
+          "id": 9818,
+          "title": "1682logo+o3",
+          "filename": "1682logoo3.png",
+          "filesize": 23144,
+          "url": "http://www.o3world.com/wp-content/uploads/2025/02/1682logoo3.png",
+          "link": "http://www.o3world.com/1682-conference-ai-innovation/1682logoo3/",
+          "alt": "",
+          "author": "16",
+          "description": "",
+          "caption": "",
+          "name": "1682logoo3",
+          "status": "inherit",
+          "uploaded_to": 9545,
+          "date": "2025-02-24 18:53:55",
+          "modified": "2025-02-24 18:54:35",
+          "menu_order": 0,
+          "mime_type": "image/png",
+          "type": "image",
+          "subtype": "png",
+          "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+          "width": 901,
+          "height": 901,
+          "sizes": {
+            "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/02/1682logoo3-150x150.png",
+            "thumbnail-width": 150,
+            "thumbnail-height": 150,
+            "medium": "http://www.o3world.com/wp-content/uploads/2025/02/1682logoo3-640x640.png",
+            "medium-width": 640,
+            "medium-height": 640,
+            "medium_large": "http://www.o3world.com/wp-content/uploads/2025/02/1682logoo3-768x768.png",
+            "medium_large-width": 768,
+            "medium_large-height": 768,
+            "large": "http://www.o3world.com/wp-content/uploads/2025/02/1682logoo3.png",
+            "large-width": 901,
+            "large-height": 901,
+            "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/02/1682logoo3.png",
+            "1536x1536-width": 901,
+            "1536x1536-height": 901,
+            "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/02/1682logoo3.png",
+            "2048x2048-width": 901,
+            "2048x2048-height": 901,
+            "icon": "http://www.o3world.com/wp-content/uploads/2025/02/1682logoo3-48x48.png",
+            "icon-width": 48,
+            "icon-height": 48,
+            "xlarge": "http://www.o3world.com/wp-content/uploads/2025/02/1682logoo3.png",
+            "xlarge-width": 901,
+            "xlarge-height": 901,
+            "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/02/1682logoo3.png",
+            "gform-image-choice-sm-width": 300,
+            "gform-image-choice-sm-height": 300,
+            "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/02/1682logoo3.png",
+            "gform-image-choice-md-width": 400,
+            "gform-image-choice-md-height": 400,
+            "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/02/1682logoo3.png",
+            "gform-image-choice-lg-width": 600,
+            "gform-image-choice-lg-height": 600
+          }
+        },
+        "content": [
+          {
+            "acf_fc_layout": "title",
+            "kicker": "Stay ahead of what’s next",
+            "kicker_tag": "h2",
+            "title": "Where ventures, thought leadership + AI innovation converge",
+            "heading_level": "h2",
+            "heading_tag": "p",
+            "add_description": true,
+            "description": "O3 Ventures, our thought leadership initiatives, and the 1682 Conference are all part of our commitment to shaping the future of innovation and AI. We don’t just talk about innovation - we help build it, connecting visionary startups with the insights, resources, and networks they need to scale. Explore how 1682 brings it all together."
+          },
+          {
+            "acf_fc_layout": "button",
+            "button": {
+              "title": "Discover 1682",
+              "url": "https://live-o3-world.pantheonsite.io/perspectives/1682-conference-recap-unveiling-ais-realities-and-innovation-insights/",
+              "target": ""
+            },
+            "button_label": "Discovery 1682",
+            "button_style": "blue"
+          }
+        ]
+      }
+    ],
+    "page_header": [
+      {
+        "acf_fc_layout": "basic_header",
+        "page_title_content": [
+          {
+            "acf_fc_layout": "title",
+            "kicker": "Ventures",
+            "kicker_tag": "h1",
+            "title": "Investing in exceptional people, products + experiences",
+            "heading_level": "h2",
+            "heading_tag": "p",
+            "add_description": true,
+            "description": "For over 20 years, we have invested time, expertise, and resources into organizations that share our values and understand the opportunities to create better experiences. Along the way, we’ve met brilliant people with incredible ideas that range from successful startups to Fortune 500 companies. These innovators help redefine how we live and work — and we’re excited to be a part of that and help foster their visions."
+          },
+          {
+            "acf_fc_layout": "button",
+            "button": {
+              "title": "Let’s build the future together",
+              "url": "https://live-o3-world.pantheonsite.io/contact/",
+              "target": ""
+            },
+            "button_label": "Let’s build the future together",
+            "button_style": "blue"
+          }
+        ],
+        "header_icon": {
+          "value": "None",
+          "image": "None"
+        },
+        "header_image": {
+          "ID": 9616,
+          "id": 9616,
+          "title": "Ventureshead",
+          "filename": "Ventureshead.png",
+          "filesize": 656369,
+          "url": "http://www.o3world.com/wp-content/uploads/2025/02/Ventureshead.png",
+          "link": "http://www.o3world.com/about/ventureshead/",
+          "alt": "photo of ventures awards",
+          "author": "16",
+          "description": "",
+          "caption": "",
+          "name": "ventureshead",
+          "status": "inherit",
+          "uploaded_to": 160,
+          "date": "2025-02-12 23:26:57",
+          "modified": "2025-02-12 23:27:13",
+          "menu_order": 0,
+          "mime_type": "image/png",
+          "type": "image",
+          "subtype": "png",
+          "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+          "width": 901,
+          "height": 901,
+          "sizes": {
+            "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/02/Ventureshead-150x150.png",
+            "thumbnail-width": 150,
+            "thumbnail-height": 150,
+            "medium": "http://www.o3world.com/wp-content/uploads/2025/02/Ventureshead-640x640.png",
+            "medium-width": 640,
+            "medium-height": 640,
+            "medium_large": "http://www.o3world.com/wp-content/uploads/2025/02/Ventureshead-768x768.png",
+            "medium_large-width": 768,
+            "medium_large-height": 768,
+            "large": "http://www.o3world.com/wp-content/uploads/2025/02/Ventureshead.png",
+            "large-width": 901,
+            "large-height": 901,
+            "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/02/Ventureshead.png",
+            "1536x1536-width": 901,
+            "1536x1536-height": 901,
+            "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/02/Ventureshead.png",
+            "2048x2048-width": 901,
+            "2048x2048-height": 901,
+            "icon": "http://www.o3world.com/wp-content/uploads/2025/02/Ventureshead-48x48.png",
+            "icon-width": 48,
+            "icon-height": 48,
+            "xlarge": "http://www.o3world.com/wp-content/uploads/2025/02/Ventureshead.png",
+            "xlarge-width": 901,
+            "xlarge-height": 901,
+            "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/02/Ventureshead.png",
+            "gform-image-choice-sm-width": 300,
+            "gform-image-choice-sm-height": 300,
+            "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/02/Ventureshead.png",
+            "gform-image-choice-md-width": 400,
+            "gform-image-choice-md-height": 400,
+            "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/02/Ventureshead.png",
+            "gform-image-choice-lg-width": 600,
+            "gform-image-choice-lg-height": 600
+          }
+        },
+        "header_background_icon": {
+          "value": "5749",
+          "image": "5749"
+        }
+      }
+    ]
+  }
+}

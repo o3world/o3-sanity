@@ -1,0 +1,237 @@
+{
+  "_id": "page-wp-6820",
+  "_type": "page",
+  "title": "Accessibility statement",
+  "slug": {
+    "_type": "slug",
+    "current": "accessibility-statement"
+  },
+  "pageType": "standard",
+  "sections": [
+    {
+      "_type": "heroSection",
+      "_key": "k0000",
+      "surface": "ink",
+      "headlineLines": [
+        "Accessibility statement"
+      ],
+      "decoration": "none"
+    },
+    {
+      "_type": "layoutSection",
+      "_key": "k0028",
+      "surface": "white",
+      "columns": 1,
+      "items": [
+        {
+          "_type": "richText",
+          "_key": "k0029",
+          "body": [
+            {
+              "_key": "k0002",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "O3 is committed to providing an equal and quality experience for everyone. We’re constantly working towards improving the accessibility of our website to ensure we provide equal access to individuals with disabilities including those with visual, hearing, cognitive, and motor impairments.",
+                  "_key": "k0003"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0004",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Wherever possible, we strive to conform to level AA of the World Wide Web Consortium (W3C) Web Content Accessibility Guidelines (WCAG) 2.1. These guidelines provide a foundation for how to make web content more accessible for people with various disabilities. We believe not only in conformance with these guidelines but that optimization around them will help make the web more user-friendly for everyone.",
+                  "_key": "k0005"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0006",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Known exceptions",
+                  "_key": "k0007"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "h2"
+            },
+            {
+              "_key": "k0008",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "While we put our best effort into meeting the success criteria outlined in the WCAG 2.1 AA guidelines, we recognize that at this time, there are sections of our site that are not accessible or may be difficult to navigate, particularly for screen reader users.",
+                  "_key": "k0009"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0010",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Some of these sections are powered by third-party plugins that we recognize may not be not at the level of accessibility for which we strive. These sections include:",
+                  "_key": "k0011"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0012",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Contact forms",
+                  "_key": "k0013"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal",
+              "level": 1,
+              "listItem": "bullet"
+            },
+            {
+              "_key": "k0014",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Cookie notice banner",
+                  "_key": "k0015"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal",
+              "level": 1,
+              "listItem": "bullet"
+            },
+            {
+              "_key": "k0016",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Embedded media from 3rd party sites such as YouTube, Twitter, and Instagram",
+                  "_key": "k0017"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal",
+              "level": 1,
+              "listItem": "bullet"
+            },
+            {
+              "_key": "k0018",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "We are actively working on improving the experience in these and other impacted areas, either by working directly with vendors or seeking out more accessible alternatives. Please be aware that our efforts to remediate any issues with these sections are ongoing.",
+                  "_key": "k0019"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0020",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Have feedback or need help?",
+                  "_key": "k0021"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "h2"
+            },
+            {
+              "_key": "k0022",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "We continue to strive not only to meet a high level of accessibility support but also to provide a polished experience for all visitors. In the meantime, we welcome your questions and comments on how to improve our website’s accessibility, or, if you need assistance using specific features, please contact us:",
+                  "_key": "k0023"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0024",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Email: ",
+                  "_key": "k0025"
+                },
+                {
+                  "_type": "span",
+                  "marks": [
+                    "k0001"
+                  ],
+                  "text": "hello@o3world.com",
+                  "_key": "k0026"
+                },
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "\nPhone: (215) 592-4739\nMailing Address:\n1339 Frankford Ave, Suite 3\nPhiladelphia, PA 19125",
+                  "_key": "k0027"
+                }
+              ],
+              "markDefs": [
+                {
+                  "_key": "k0001",
+                  "_type": "link",
+                  "href": "mailto:hello@o3world.com"
+                }
+              ],
+              "_type": "block",
+              "style": "normal"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "seo": {
+    "description": "O3 is a leader in digital accessibility. This statement discusses the level of compliance our website adheres to and any know exceptions."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:page:6820",
+    "extractedAt": "2026-08-01T02:45:52.024Z"
+  }
+}

@@ -29,6 +29,16 @@ type WpPost = {
   fields: Record<string, unknown>
 }
 
+type WpPage = {
+  wpId: number
+  slug: string
+  path: string
+  title: string
+  parentSlug: string | null
+  seo: WpSeo
+  fields: Record<string, unknown>
+}
+
 type WpUser = { wpId: number; slug: string; name: string; email: string; bio: string }
 type WpTeamMember = {
   wpId: number
@@ -107,6 +117,43 @@ echo json_encode($out, JSON_PARTIAL_OUTPUT_ON_ERROR);`,
     if (batch.length < n) break
   }
   return total
+}
+
+/**
+ * The `page` CPT (#18). **Every** published page is extracted, not just the
+ * keepers: the decision about which pages migrate rather than going
+ * greenfield is made from this evidence, so it has to be in the repo to be
+ * reviewable — and #23 needs the rest as source material for its seeds.
+ * `map/page.ts` holds the keeper list.
+ *
+ * `path` is the URL WordPress serves, which is what the new slug must match
+ * (#26). Service pages are children of `solutions`, so their path is
+ * multi-segment and their slug carries the prefix (ADR 0001).
+ */
+function extractPages() {
+  const pages = wpEval<WpPage[]>(
+    `$out = [];
+foreach (get_posts(["post_type" => "page", "post_status" => "publish", "numberposts" => -1]) as $p) {
+  $parent = $p->post_parent ? get_post($p->post_parent) : null;
+  $out[] = [
+    "wpId" => $p->ID,
+    "slug" => $p->post_name,
+    "path" => str_replace(home_url(), "", get_permalink($p->ID)),
+    "title" => $p->post_title,
+    "parentSlug" => $parent ? $parent->post_name : null,
+    "seo" => ${yoastPhp('$p->ID')},
+    "fields" => get_fields($p->ID),
+  ];
+}
+echo json_encode($out, JSON_PARTIAL_OUTPUT_ON_ERROR);`,
+  )
+  for (const page of pages) {
+    writeJson(join(EXTRACT_DIR, 'page', `${page.slug}.json`), {
+      _meta: { type: 'page', source: SOURCE, extractedAt: new Date().toISOString() },
+      ...page,
+    })
+  }
+  return pages.length
 }
 
 function extractUsers() {
@@ -219,9 +266,11 @@ function extractChrome() {
 const site = extractSiteSeo()
 const nMenus = extractChrome()
 const nPosts = extractPosts()
+const nPages = extractPages()
 const nUsers = extractUsers()
 const nTeam = extractTeam()
 const nCats = extractCategories()
 console.log(
-  `done: ${nPosts} posts, ${nUsers} users, ${nTeam} team, ${nCats} categories, ${nMenus} menus, site seo (${site.siteName}) → ${EXTRACT_DIR}`,
+  `done: ${nPosts} posts, ${nPages} pages, ${nUsers} users, ${nTeam} team, ` +
+    `${nCats} categories, ${nMenus} menus, site seo (${site.siteName}) → ${EXTRACT_DIR}`,
 )

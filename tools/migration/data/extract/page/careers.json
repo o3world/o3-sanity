@@ -1,0 +1,421 @@
+{
+  "_meta": {
+    "type": "page",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T02:45:52.026Z"
+  },
+  "wpId": 156,
+  "slug": "careers",
+  "path": "/careers/",
+  "title": "Careers",
+  "parentSlug": null,
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Careers | O3",
+    "descriptionOverride": "Are you interested in a career in tech, strategy or design? If you're looking to join a team of talented and passionate experts, O3 is it.",
+    "descriptionRendered": "Are you interested in a career in tech, strategy or design? If you're looking to join a team of talented and passionate experts, O3 is it.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/careers/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_content": [
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Multiple Columns",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "WHAT WE OFFER",
+          "kicker_tag": "h2",
+          "title": "Bring your best while living your best life",
+          "heading_level": "h2",
+          "heading_tag": "p",
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": "",
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4>Professional development</h4>\n<p class=\"lead\">Attend conferences, enjoy educational opportunities, emphasize your own growth + development, and get guidance on what&#8217;s next for your career at O3.</p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4>Work perks</h4>\n<p class=\"lead\">Enjoy the benefits of premium health insurance (medical, dental, and vision), a 401k match, flexible schedule, hybrid workplace, paid family leave, volunteer time off, and charitable donation matches.</p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4>Mentorship</h4>\n<p class=\"lead\">Take advantage of opportunities to teach other teammates new skills and accelerate our collective growth.</p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4>Community involvement</h4>\n<p class=\"lead\">Create meaningful impact with us. We hold ourselves accountable for changing the lives of those we serve for the better.</p>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "image_slider",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Image Slider",
+        "slides": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "title",
+                "kicker": "LIFE AT O3",
+                "kicker_tag": "h2",
+                "title": "We've got style.",
+                "heading_level": "h2",
+                "heading_tag": "p",
+                "add_description": true,
+                "description": "There's no better way to show off our O3 pride and design chops than with branded merch."
+              }
+            ],
+            "image": 6849
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "title",
+                "kicker": "LIFE AT O3",
+                "kicker_tag": "h2",
+                "title": "We're furry friendly.",
+                "heading_level": "h2",
+                "heading_tag": "p",
+                "add_description": true,
+                "description": "Our Fishtown office welcomes cats and dogs for a more pawsitive and engaging work environment."
+              }
+            ],
+            "image": 6848
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "title",
+                "kicker": "LIFE AT O3",
+                "kicker_tag": "h2",
+                "title": "We award the good stuff.",
+                "heading_level": "h2",
+                "heading_tag": "p",
+                "add_description": true,
+                "description": "We know how to spot talent and foster it to its full potential."
+              }
+            ],
+            "image": 6837
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "title",
+                "kicker": "LIFE AT O3",
+                "kicker_tag": "h2",
+                "title": "We're in good company.",
+                "heading_level": "h2",
+                "heading_tag": "p",
+                "add_description": true,
+                "description": "Our Philly headquarters is in the heart of Fishtown on Frankford Ave, with the incredible coffee roaster La Colombe next door to keep us energized."
+              }
+            ],
+            "image": 6845
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "title",
+                "kicker": "LIFE AT O3",
+                "kicker_tag": "h2",
+                "title": "We're fiercely competitive.",
+                "heading_level": "h2",
+                "heading_tag": "p",
+                "add_description": true,
+                "description": "From poker to darts, from quizzo to client work — we like to challenge ourselves and each other."
+              }
+            ],
+            "image": 6846
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "title",
+                "kicker": "LIFE AT O3",
+                "kicker_tag": "h2",
+                "title": "We work hard, no matter where we are.",
+                "heading_level": "h2",
+                "heading_tag": "p",
+                "add_description": true,
+                "description": "Whether it's working in the office, from home, or a mix of both, our team adapts and gets the job done."
+              }
+            ],
+            "image": 6854
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "image_accordion",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Image Accordion",
+        "title": "Our values",
+        "accordion": [
+          {
+            "panel_image": 6180,
+            "panel_title": "Apply optimism",
+            "icon": {
+              "value": "None",
+              "image": "None"
+            },
+            "text_editor": "<p>Be the change you seek in the world by sharing your enthusiasm, positivity, and good nature — one person at a time.</p>\n"
+          },
+          {
+            "panel_image": 6184,
+            "panel_title": "Trust in people",
+            "icon": {
+              "value": "None",
+              "image": "None"
+            },
+            "text_editor": "<p>Assume positive intent by always treating others the way you would want to be treated — which includes the openness to have respectful, constructive dialogue.</p>\n"
+          },
+          {
+            "panel_image": 6181,
+            "panel_title": "Commit to community",
+            "icon": {
+              "value": "None",
+              "image": "None"
+            },
+            "text_editor": "<p>Focus on values and culture alignment that promote diversity, equity, and inclusion inside the company and within our communities.</p>\n"
+          },
+          {
+            "panel_image": 6182,
+            "panel_title": "Embrace iteration",
+            "icon": {
+              "value": "None",
+              "image": "None"
+            },
+            "text_editor": "<p>Believe in a world where opportunity for continuous improvement requires a strong sense of flexibility and willingness to grow from yourself and those around you.</p>\n"
+          },
+          {
+            "panel_image": 6183,
+            "panel_title": "Focus on the future",
+            "icon": {
+              "value": "None",
+              "image": "None"
+            },
+            "text_editor": "<p>Rally ourselves and our clients to focus on what&#8217;s next by pushing boundaries and staying on the cutting edge.</p>\n"
+          }
+        ],
+        "background_color": "black"
+      },
+      {
+        "acf_fc_layout": "careers_feed",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Careers Feed",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "Join our team",
+          "kicker_tag": "h2",
+          "title": "Find your place at O3",
+          "heading_level": "h2",
+          "heading_tag": "p",
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": "",
+        "list_type": "all",
+        "select_careers": null
+      },
+      {
+        "acf_fc_layout": "page_callout",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Page Callout",
+        "image": {
+          "ID": 5772,
+          "id": 5772,
+          "title": "",
+          "filename": "Group-24.svg",
+          "filesize": 386,
+          "url": "http://www.o3world.com/wp-content/uploads/2022/10/Group-24.svg",
+          "link": "http://www.o3world.com/careers/group-24/",
+          "alt": "",
+          "author": "16",
+          "description": "",
+          "caption": "",
+          "name": "group-24",
+          "status": "inherit",
+          "uploaded_to": 156,
+          "date": "2022-10-26 12:36:40",
+          "modified": "2023-01-30 14:43:34",
+          "menu_order": 0,
+          "mime_type": "image/svg+xml",
+          "type": "image",
+          "subtype": "svg+xml",
+          "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+          "width": 1913,
+          "height": 1881,
+          "sizes": {
+            "thumbnail": "http://www.o3world.com/wp-content/uploads/2022/10/Group-24.svg",
+            "thumbnail-width": 1913,
+            "thumbnail-height": 1881,
+            "medium": "http://www.o3world.com/wp-content/uploads/2022/10/Group-24.svg",
+            "medium-width": 1913,
+            "medium-height": 1881,
+            "medium_large": "http://www.o3world.com/wp-content/uploads/2022/10/Group-24.svg",
+            "medium_large-width": 1913,
+            "medium_large-height": 1881,
+            "large": "http://www.o3world.com/wp-content/uploads/2022/10/Group-24.svg",
+            "large-width": 1913,
+            "large-height": 1881,
+            "1536x1536": "http://www.o3world.com/wp-content/uploads/2022/10/Group-24.svg",
+            "1536x1536-width": 1913,
+            "1536x1536-height": 1881,
+            "2048x2048": "http://www.o3world.com/wp-content/uploads/2022/10/Group-24.svg",
+            "2048x2048-width": 1913,
+            "2048x2048-height": 1881,
+            "icon": "http://www.o3world.com/wp-content/uploads/2022/10/Group-24.svg",
+            "icon-width": 1913,
+            "icon-height": 1881,
+            "xlarge": "http://www.o3world.com/wp-content/uploads/2022/10/Group-24.svg",
+            "xlarge-width": 1913,
+            "xlarge-height": 1881,
+            "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2022/10/Group-24.svg",
+            "gform-image-choice-sm-width": 1913,
+            "gform-image-choice-sm-height": 1881,
+            "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2022/10/Group-24.svg",
+            "gform-image-choice-md-width": 1913,
+            "gform-image-choice-md-height": 1881,
+            "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2022/10/Group-24.svg",
+            "gform-image-choice-lg-width": 1913,
+            "gform-image-choice-lg-height": 1881
+          }
+        },
+        "content": [
+          {
+            "acf_fc_layout": "title",
+            "kicker": "",
+            "kicker_tag": "div",
+            "title": "Don’t see what you’re looking for?",
+            "heading_level": "h2",
+            "heading_tag": "h2",
+            "add_description": true,
+            "description": "Find a new way to fit in at O3. Want to work with us, but you don't see your dream job listed here? Tell us why you want to be a part of the team and which role(s) you're interested in. If an opportunity comes up that matches your skills and qualifications, we'll reach out!"
+          },
+          {
+            "acf_fc_layout": "button",
+            "button": {
+              "title": "Say hi",
+              "url": "https://www.o3world.com/contact/",
+              "target": ""
+            },
+            "button_label": "",
+            "button_style": "blue"
+          }
+        ]
+      }
+    ],
+    "page_header": [
+      {
+        "acf_fc_layout": "basic_header",
+        "page_title_content": [
+          {
+            "acf_fc_layout": "title",
+            "kicker": "Careers",
+            "kicker_tag": "h1",
+            "title": "Make your mark with the most positive, hardworking, + innovative team around",
+            "heading_level": "h2",
+            "heading_tag": "p",
+            "add_description": false,
+            "description": ""
+          }
+        ],
+        "header_icon": {
+          "value": "None",
+          "image": "None"
+        },
+        "header_image": {
+          "ID": 6642,
+          "id": 6642,
+          "title": "",
+          "filename": "Careers-hero.jpg",
+          "filesize": 579038,
+          "url": "http://www.o3world.com/wp-content/uploads/2023/01/Careers-hero.jpg",
+          "link": "http://www.o3world.com/careers/careers-hero/",
+          "alt": "Two O3 employees in the office working face to face and smiling.",
+          "author": "16",
+          "description": "",
+          "caption": "",
+          "name": "careers-hero",
+          "status": "inherit",
+          "uploaded_to": 156,
+          "date": "2023-01-29 21:39:22",
+          "modified": "2023-02-01 17:02:54",
+          "menu_order": 0,
+          "mime_type": "image/jpeg",
+          "type": "image",
+          "subtype": "jpeg",
+          "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+          "width": 2500,
+          "height": 2500,
+          "sizes": {
+            "thumbnail": "http://www.o3world.com/wp-content/uploads/2023/01/Careers-hero-150x150.jpg",
+            "thumbnail-width": 150,
+            "thumbnail-height": 150,
+            "medium": "http://www.o3world.com/wp-content/uploads/2023/01/Careers-hero-640x640.jpg",
+            "medium-width": 640,
+            "medium-height": 640,
+            "medium_large": "http://www.o3world.com/wp-content/uploads/2023/01/Careers-hero-768x768.jpg",
+            "medium_large-width": 768,
+            "medium_large-height": 768,
+            "large": "http://www.o3world.com/wp-content/uploads/2023/01/Careers-hero-1024x1024.jpg",
+            "large-width": 1024,
+            "large-height": 1024,
+            "1536x1536": "http://www.o3world.com/wp-content/uploads/2023/01/Careers-hero-1536x1536.jpg",
+            "1536x1536-width": 1536,
+            "1536x1536-height": 1536,
+            "2048x2048": "http://www.o3world.com/wp-content/uploads/2023/01/Careers-hero-2048x2048.jpg",
+            "2048x2048-width": 2048,
+            "2048x2048-height": 2048,
+            "icon": "http://www.o3world.com/wp-content/uploads/2023/01/Careers-hero-48x48.jpg",
+            "icon-width": 48,
+            "icon-height": 48,
+            "xlarge": "http://www.o3world.com/wp-content/uploads/2023/01/Careers-hero-1280x1280.jpg",
+            "xlarge-width": 1280,
+            "xlarge-height": 1280,
+            "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2023/01/Careers-hero.jpg",
+            "gform-image-choice-sm-width": 300,
+            "gform-image-choice-sm-height": 300,
+            "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2023/01/Careers-hero.jpg",
+            "gform-image-choice-md-width": 400,
+            "gform-image-choice-md-height": 400,
+            "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2023/01/Careers-hero.jpg",
+            "gform-image-choice-lg-width": 600,
+            "gform-image-choice-lg-height": 600
+          }
+        },
+        "header_background_icon": {
+          "value": "5749",
+          "image": "5749"
+        }
+      }
+    ]
+  }
+}

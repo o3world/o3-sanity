@@ -1,0 +1,724 @@
+{
+  "_meta": {
+    "type": "page",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T02:45:52.019Z"
+  },
+  "wpId": 9475,
+  "slug": "digital-experience-consulting-services",
+  "path": "/solutions/digital-experience-consulting-services/",
+  "title": "Digital experience consulting",
+  "parentSlug": "solutions",
+  "seo": {
+    "titleOverride": "Digital experience consulting services for growth %%page%% %%sep%% %%sitename%%",
+    "titleRendered": "Digital experience consulting services for growth | O3",
+    "descriptionOverride": "Unlock growth with digital experience consulting services that transform insights into actionable strategies for your business.",
+    "descriptionRendered": "Unlock growth with digital experience consulting services that transform insights into actionable strategies for your business.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/solutions/digital-experience-consulting-services/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "page_header": [
+      {
+        "acf_fc_layout": "basic_header",
+        "page_title_content": [
+          {
+            "acf_fc_layout": "title",
+            "kicker": "ASSESS + INNOVATE",
+            "kicker_tag": "div",
+            "title": "Digital experience consulting that turns insight into action",
+            "heading_level": "h2",
+            "heading_tag": "div",
+            "add_description": true,
+            "description": "Every interaction matters. At O3, we partner with business, marketing and technology leaders to drive growth, streamline operations, and accelerate innovation. By transforming customer and employee journeys, we deliver measurable impact."
+          },
+          {
+            "acf_fc_layout": "button",
+            "button": {
+              "title": "Let's activate your strategy",
+              "url": "https://live-o3-world.pantheonsite.io/contact/",
+              "target": ""
+            },
+            "button_label": "Let's activate your strategy",
+            "button_style": "blue"
+          }
+        ],
+        "header_icon": {
+          "value": "None",
+          "image": "None"
+        },
+        "header_image": {
+          "ID": 9583,
+          "id": 9583,
+          "title": "O3elements-consulting-a",
+          "filename": "O3elements-consulting-a.svg",
+          "filesize": 566,
+          "url": "http://www.o3world.com/wp-content/uploads/2025/02/O3elements-consulting-a.svg",
+          "link": "http://www.o3world.com/solutions/digital-experience-consulting-services/o3elements-consulting-a/",
+          "alt": "",
+          "author": "11",
+          "description": "",
+          "caption": "",
+          "name": "o3elements-consulting-a",
+          "status": "inherit",
+          "uploaded_to": 9475,
+          "date": "2025-02-12 19:27:17",
+          "modified": "2025-02-12 23:40:14",
+          "menu_order": 0,
+          "mime_type": "image/svg+xml",
+          "type": "image",
+          "subtype": "svg+xml",
+          "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+          "width": 300,
+          "height": 300,
+          "sizes": {
+            "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/02/O3elements-consulting-a.svg",
+            "thumbnail-width": 300,
+            "thumbnail-height": 300,
+            "medium": "http://www.o3world.com/wp-content/uploads/2025/02/O3elements-consulting-a.svg",
+            "medium-width": 300,
+            "medium-height": 300,
+            "medium_large": "http://www.o3world.com/wp-content/uploads/2025/02/O3elements-consulting-a.svg",
+            "medium_large-width": 300,
+            "medium_large-height": 300,
+            "large": "http://www.o3world.com/wp-content/uploads/2025/02/O3elements-consulting-a.svg",
+            "large-width": 300,
+            "large-height": 300,
+            "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/02/O3elements-consulting-a.svg",
+            "1536x1536-width": 300,
+            "1536x1536-height": 300,
+            "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/02/O3elements-consulting-a.svg",
+            "2048x2048-width": 300,
+            "2048x2048-height": 300,
+            "icon": "http://www.o3world.com/wp-content/uploads/2025/02/O3elements-consulting-a.svg",
+            "icon-width": 300,
+            "icon-height": 300,
+            "xlarge": "http://www.o3world.com/wp-content/uploads/2025/02/O3elements-consulting-a.svg",
+            "xlarge-width": 300,
+            "xlarge-height": 300,
+            "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/02/O3elements-consulting-a.svg",
+            "gform-image-choice-sm-width": 300,
+            "gform-image-choice-sm-height": 300,
+            "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/02/O3elements-consulting-a.svg",
+            "gform-image-choice-md-width": 300,
+            "gform-image-choice-md-height": 300,
+            "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/02/O3elements-consulting-a.svg",
+            "gform-image-choice-lg-width": 300,
+            "gform-image-choice-lg-height": 300
+          }
+        },
+        "header_background_icon": {
+          "value": "5749",
+          "image": "5749"
+        }
+      }
+    ],
+    "flexible_content": [
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Solutions",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "Services",
+          "kicker_tag": "div",
+          "title": "Consulting services that enlighten, inform + activate",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": "",
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-9633\" src=\"https://live-o3-world.pantheonsite.io/wp-content/uploads/2025/02/Assessicon-blue.png\" alt=\"blue circle with black assessment icon\" width=\"80\" height=\"80\" /></h4>\n<h4>Experience assessments</h4>\n<p class=\"small\">Misaligned journeys and siloed ways of working lead to inefficiencies and missed revenue opportunities. Through our AI-powered quantitative and qualitative experience assessment, we uncover gaps and opportunities, driving both efficiencies and business outcomes.</p>\n<h5>CASE STUDY</h5>\n<p><a class=\"underlined-link\" href=\"https://www.o3world.com/work/amerigas/\">Learn how we uncovered key customer experience insight that drives AmeriGas strategy to this day</a></p>\n"
+              },
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4 style=\"margin-top: 100px;\"><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-9633\" src=\"https://live-o3-world.pantheonsite.io/wp-content/uploads/2025/02/Processicon-blue.png\" alt=\"blue circle with black process icon\" width=\"80\" height=\"80\" /></h4>\n<h4>UX + design process</h4>\n<p class=\"small\">Poorly designed digital experiences generally generally occur when UX teams struggle with efficient research and design processes. We deliver UX and UI audits that improve experiences, streamline processes, and empower teams with AI-driven insights and best practices.</p>\n<h5>perspective</h5>\n<p><a class=\"underlined-link\" href=\"https://www.o3world.com/perspectives/ai-you-bffs-in-delivering-exceptional-experiences/\">Discover how AI can elevate UX and design processes, driving efficiency and creating exceptional experiences</a></p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-9633\" src=\"https://live-o3-world.pantheonsite.io/wp-content/uploads/2025/02/Consultingicon-blue.png\" alt=\"blue circle with black consulting icon\" width=\"80\" height=\"80\" /></h4>\n<h4>Innovation consulting</h4>\n<p class=\"small\">Innovation efforts often lack alignment with business goals, resulting in stalled progress and wasted resources. We work closely with organizational leaders to quickly assess, visualize, and validate concepts, ensuring that ideas are scalable, actionable, and impactful.</p>\n<h5>perspective</h5>\n<p><a class=\"underlined-link\" href=\"https://www.o3world.com/perspectives/innovation-workshops-o3\">Explore 6 tips for running a successful innovation workshop</a></p>\n"
+              },
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4 style=\"margin-top: 100px;\"><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-9633\" src=\"https://live-o3-world.pantheonsite.io/wp-content/uploads/2025/02/Evalicon-blue.png\" alt=\"blue circle with black evaluation icon\" width=\"80\" height=\"80\" /></h4>\n<h4>Data + technology evaluation</h4>\n<p class=\"small\">Disconnected data and technology along with inefficient processes create fragmented digital experiences, hindering engagement and efficiency. We evaluate people, processes and technology to uncover gaps and streamline operations to deliver better digital solutions.</p>\n<h5>perspective</h5>\n<p><a class=\"underlined-link\" href=\"https://www.o3world.com/perspectives/navigating-generative-ai-black-box-transparency-control/\">Explore the need for clear understanding and control when implementing AI</a></p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-9633\" src=\"https://live-o3-world.pantheonsite.io/wp-content/uploads/2025/02/Activationicon-blue.png\" alt=\"blue circle with black activation icon\" width=\"80\" height=\"80\" /></h4>\n<h4>Rapid activation</h4>\n<p class=\"small\">Insight without action leads to lost momentum and missed opportunities. We transform insights into actionable roadmaps and bring ideas to life through our POC and MVP process, rapidly developing concepts that deliver measurable outcomes.</p>\n<h5>CASE STUDY</h5>\n<p><a class=\"underlined-link\" href=\"https://www.o3world.com/work/rfp-automation/\">See how we saved this global technology firm 40% of time by automating RFP responses</a></p>\n"
+              },
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4 style=\"margin-top: 100px;\"><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-9633\" src=\"https://live-o3-world.pantheonsite.io/wp-content/uploads/2025/02/Changeicon-blue-1.png\" alt=\"blue icon with black swirl symbol representing change\" width=\"80\" height=\"80\" /></h4>\n<h4>Change management</h4>\n<p class=\"small\">Without a plan to manage mindset and behavioral change, even the most well-designed projects fail to achieve lasting impact. We ensure successful project activation by fostering alignment, engagement, and sustainable adoption across teams.</p>\n<h5>perspective</h5>\n<p><a class=\"underlined-link\" href=\"https://www.o3world.com/perspectives/embracing-disruptive-thinking-enterprise-teams/\">Learn how disruptive thinking can empower enterprise teams to adapt and thrive in dynamic environments.</a></p>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "page_callout",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Why O3: Assessment",
+        "image": {
+          "ID": 9623,
+          "id": 9623,
+          "title": "whyO3",
+          "filename": "whyO3.png",
+          "filesize": 583566,
+          "url": "http://www.o3world.com/wp-content/uploads/2025/02/whyO3.png",
+          "link": "http://www.o3world.com/solutions/solutions-ai-for-b2b-growth/whyo3/",
+          "alt": "photo of doorway with o3 logo",
+          "author": "16",
+          "description": "conversion rate optimization consultant",
+          "caption": "",
+          "name": "whyo3",
+          "status": "inherit",
+          "uploaded_to": 9510,
+          "date": "2025-02-13 00:04:33",
+          "modified": "2025-03-10 16:15:10",
+          "menu_order": 0,
+          "mime_type": "image/png",
+          "type": "image",
+          "subtype": "png",
+          "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+          "width": 901,
+          "height": 901,
+          "sizes": {
+            "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/02/whyO3-150x150.png",
+            "thumbnail-width": 150,
+            "thumbnail-height": 150,
+            "medium": "http://www.o3world.com/wp-content/uploads/2025/02/whyO3-640x640.png",
+            "medium-width": 640,
+            "medium-height": 640,
+            "medium_large": "http://www.o3world.com/wp-content/uploads/2025/02/whyO3-768x768.png",
+            "medium_large-width": 768,
+            "medium_large-height": 768,
+            "large": "http://www.o3world.com/wp-content/uploads/2025/02/whyO3.png",
+            "large-width": 901,
+            "large-height": 901,
+            "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/02/whyO3.png",
+            "1536x1536-width": 901,
+            "1536x1536-height": 901,
+            "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/02/whyO3.png",
+            "2048x2048-width": 901,
+            "2048x2048-height": 901,
+            "icon": "http://www.o3world.com/wp-content/uploads/2025/02/whyO3-48x48.png",
+            "icon-width": 48,
+            "icon-height": 48,
+            "xlarge": "http://www.o3world.com/wp-content/uploads/2025/02/whyO3.png",
+            "xlarge-width": 901,
+            "xlarge-height": 901,
+            "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/02/whyO3.png",
+            "gform-image-choice-sm-width": 300,
+            "gform-image-choice-sm-height": 300,
+            "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/02/whyO3.png",
+            "gform-image-choice-md-width": 400,
+            "gform-image-choice-md-height": 400,
+            "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/02/whyO3.png",
+            "gform-image-choice-lg-width": 600,
+            "gform-image-choice-lg-height": 600
+          }
+        },
+        "content": [
+          {
+            "acf_fc_layout": "title",
+            "kicker": "Why O3",
+            "kicker_tag": "div",
+            "title": "More than a pretty presentation",
+            "heading_level": "h2",
+            "heading_tag": "div",
+            "add_description": true,
+            "description": "O3 bridges strategy and execution, delivering tailored solutions that transform experiences and drive measurable growth."
+          },
+          {
+            "acf_fc_layout": "button",
+            "button": {
+              "title": "Talk to an expert",
+              "url": "https://live-o3-world.pantheonsite.io/contact/",
+              "target": ""
+            },
+            "button_label": "",
+            "button_style": "blue"
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Why O3: Callouts",
+        "add_introduction": false,
+        "introduction": {
+          "": null,
+          "kicker": "",
+          "kicker_tag": false,
+          "title": "",
+          "heading_level": "h2",
+          "heading_tag": false,
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": null,
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4>Action-oriented</h4>\n<p>We’re solution-first, delivering more than just ideas. From strategy to execution, our focus is on achieving measurable results &#8211; not just impressive presentations.</p>\n"
+              },
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4>Insight, AI + technology</h4>\n<p>Innovation is in our DNA. From our <a href=\"https://www.o3world.com/1682-conference/\">1682 initiative</a> to expertise in <a href=\"https://www.o3world.com/solutions/ai-solutions/\">technology and AI</a>, we map out bold solutions and ensure they’re successfully brought to life.</p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4>Proven + tested</h4>\n<p>Our human-centered methodology, refined over a decade, turns journey insights into actionable and impactful strategies that drive results.</p>\n"
+              },
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4>Industry-tailored strategies</h4>\n<p>We deliver solutions tailored for unique industry challenges, including health, insurance, finance, industrial services, and technology.</p>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "client_list",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Testimonial + client list",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "TRUSTED BY LEADING ORGANIZATIONS",
+          "kicker_tag": "div",
+          "title": "\"We were very happy with the outcome and so was top management. I believe we positioned our company as the leader and shaper we want to be seen as. Thank you for all your help, on a tight deadline and always with a smile.\"",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": true,
+          "description": "Business Leader, Global Health Brand"
+        },
+        "introduction_link": {
+          "title": "See our work",
+          "url": "https://live-o3-world.pantheonsite.io/work/",
+          "target": ""
+        },
+        "clients": [
+          {
+            "name": "AmeriGas",
+            "logo": {
+              "ID": 9758,
+              "id": 9758,
+              "title": "AmeriGas-640x396-022425",
+              "filename": "AmeriGas-640x396-022425.jpg",
+              "filesize": 12183,
+              "url": "http://www.o3world.com/wp-content/uploads/2025/02/AmeriGas-640x396-022425.jpg",
+              "link": "http://www.o3world.com/solutions/digital-experience-consulting-services/amerigas-640x396-022425/",
+              "alt": "AmeriGas",
+              "author": "18",
+              "description": "",
+              "caption": "",
+              "name": "amerigas-640x396-022425",
+              "status": "inherit",
+              "uploaded_to": 9475,
+              "date": "2025-02-24 15:10:44",
+              "modified": "2025-02-24 15:10:59",
+              "menu_order": 0,
+              "mime_type": "image/jpeg",
+              "type": "image",
+              "subtype": "jpeg",
+              "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+              "width": 640,
+              "height": 396,
+              "sizes": {
+                "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/02/AmeriGas-640x396-022425-150x150.jpg",
+                "thumbnail-width": 150,
+                "thumbnail-height": 150,
+                "medium": "http://www.o3world.com/wp-content/uploads/2025/02/AmeriGas-640x396-022425.jpg",
+                "medium-width": 640,
+                "medium-height": 396,
+                "medium_large": "http://www.o3world.com/wp-content/uploads/2025/02/AmeriGas-640x396-022425.jpg",
+                "medium_large-width": 640,
+                "medium_large-height": 396,
+                "large": "http://www.o3world.com/wp-content/uploads/2025/02/AmeriGas-640x396-022425.jpg",
+                "large-width": 640,
+                "large-height": 396,
+                "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/02/AmeriGas-640x396-022425.jpg",
+                "1536x1536-width": 640,
+                "1536x1536-height": 396,
+                "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/02/AmeriGas-640x396-022425.jpg",
+                "2048x2048-width": 640,
+                "2048x2048-height": 396,
+                "icon": "http://www.o3world.com/wp-content/uploads/2025/02/AmeriGas-640x396-022425-48x30.jpg",
+                "icon-width": 48,
+                "icon-height": 30,
+                "xlarge": "http://www.o3world.com/wp-content/uploads/2025/02/AmeriGas-640x396-022425.jpg",
+                "xlarge-width": 640,
+                "xlarge-height": 396,
+                "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/02/AmeriGas-640x396-022425.jpg",
+                "gform-image-choice-sm-width": 300,
+                "gform-image-choice-sm-height": 186,
+                "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/02/AmeriGas-640x396-022425.jpg",
+                "gform-image-choice-md-width": 400,
+                "gform-image-choice-md-height": 248,
+                "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/02/AmeriGas-640x396-022425.jpg",
+                "gform-image-choice-lg-width": 600,
+                "gform-image-choice-lg-height": 371
+              }
+            },
+            "cast_study": false
+          },
+          {
+            "name": "American Family Insurance",
+            "logo": {
+              "ID": 7228,
+              "id": 7228,
+              "title": "",
+              "filename": "AmFam-logo.jpg",
+              "filesize": 22384,
+              "url": "http://www.o3world.com/wp-content/uploads/2023/02/AmFam-logo.jpg",
+              "link": "http://www.o3world.com/work/amfam-logo-2/",
+              "alt": "American Family Insurance logo.",
+              "author": "16",
+              "description": "",
+              "caption": "",
+              "name": "amfam-logo-2",
+              "status": "inherit",
+              "uploaded_to": 161,
+              "date": "2023-02-03 23:44:00",
+              "modified": "2025-02-24 13:56:15",
+              "menu_order": 0,
+              "mime_type": "image/jpeg",
+              "type": "image",
+              "subtype": "jpeg",
+              "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+              "width": 921,
+              "height": 570,
+              "sizes": {
+                "thumbnail": "http://www.o3world.com/wp-content/uploads/2023/02/AmFam-logo-150x150.jpg",
+                "thumbnail-width": 150,
+                "thumbnail-height": 150,
+                "medium": "http://www.o3world.com/wp-content/uploads/2023/02/AmFam-logo-640x396.jpg",
+                "medium-width": 640,
+                "medium-height": 396,
+                "medium_large": "http://www.o3world.com/wp-content/uploads/2023/02/AmFam-logo-768x475.jpg",
+                "medium_large-width": 768,
+                "medium_large-height": 475,
+                "large": "http://www.o3world.com/wp-content/uploads/2023/02/AmFam-logo.jpg",
+                "large-width": 921,
+                "large-height": 570,
+                "1536x1536": "http://www.o3world.com/wp-content/uploads/2023/02/AmFam-logo.jpg",
+                "1536x1536-width": 921,
+                "1536x1536-height": 570,
+                "2048x2048": "http://www.o3world.com/wp-content/uploads/2023/02/AmFam-logo.jpg",
+                "2048x2048-width": 921,
+                "2048x2048-height": 570,
+                "icon": "http://www.o3world.com/wp-content/uploads/2023/02/AmFam-logo-48x30.jpg",
+                "icon-width": 48,
+                "icon-height": 30,
+                "xlarge": "http://www.o3world.com/wp-content/uploads/2023/02/AmFam-logo.jpg",
+                "xlarge-width": 921,
+                "xlarge-height": 570,
+                "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2023/02/AmFam-logo.jpg",
+                "gform-image-choice-sm-width": 300,
+                "gform-image-choice-sm-height": 186,
+                "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2023/02/AmFam-logo.jpg",
+                "gform-image-choice-md-width": 400,
+                "gform-image-choice-md-height": 248,
+                "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2023/02/AmFam-logo.jpg",
+                "gform-image-choice-lg-width": 600,
+                "gform-image-choice-lg-height": 371
+              }
+            },
+            "cast_study": false
+          },
+          {
+            "name": "Best Egg",
+            "logo": {
+              "ID": 7227,
+              "id": 7227,
+              "title": "",
+              "filename": "BestEgg-logo.jpg",
+              "filesize": 19250,
+              "url": "http://www.o3world.com/wp-content/uploads/2023/02/BestEgg-logo.jpg",
+              "link": "http://www.o3world.com/work/bestegg-logo-2/",
+              "alt": "Best Egg logo.",
+              "author": "16",
+              "description": "",
+              "caption": "",
+              "name": "bestegg-logo-2",
+              "status": "inherit",
+              "uploaded_to": 161,
+              "date": "2023-02-03 23:43:59",
+              "modified": "2023-02-06 13:56:17",
+              "menu_order": 0,
+              "mime_type": "image/jpeg",
+              "type": "image",
+              "subtype": "jpeg",
+              "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+              "width": 921,
+              "height": 570,
+              "sizes": {
+                "thumbnail": "http://www.o3world.com/wp-content/uploads/2023/02/BestEgg-logo-150x150.jpg",
+                "thumbnail-width": 150,
+                "thumbnail-height": 150,
+                "medium": "http://www.o3world.com/wp-content/uploads/2023/02/BestEgg-logo-640x396.jpg",
+                "medium-width": 640,
+                "medium-height": 396,
+                "medium_large": "http://www.o3world.com/wp-content/uploads/2023/02/BestEgg-logo-768x475.jpg",
+                "medium_large-width": 768,
+                "medium_large-height": 475,
+                "large": "http://www.o3world.com/wp-content/uploads/2023/02/BestEgg-logo.jpg",
+                "large-width": 921,
+                "large-height": 570,
+                "1536x1536": "http://www.o3world.com/wp-content/uploads/2023/02/BestEgg-logo.jpg",
+                "1536x1536-width": 921,
+                "1536x1536-height": 570,
+                "2048x2048": "http://www.o3world.com/wp-content/uploads/2023/02/BestEgg-logo.jpg",
+                "2048x2048-width": 921,
+                "2048x2048-height": 570,
+                "icon": "http://www.o3world.com/wp-content/uploads/2023/02/BestEgg-logo-48x30.jpg",
+                "icon-width": 48,
+                "icon-height": 30,
+                "xlarge": "http://www.o3world.com/wp-content/uploads/2023/02/BestEgg-logo.jpg",
+                "xlarge-width": 921,
+                "xlarge-height": 570,
+                "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2023/02/BestEgg-logo.jpg",
+                "gform-image-choice-sm-width": 300,
+                "gform-image-choice-sm-height": 186,
+                "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2023/02/BestEgg-logo.jpg",
+                "gform-image-choice-md-width": 400,
+                "gform-image-choice-md-height": 248,
+                "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2023/02/BestEgg-logo.jpg",
+                "gform-image-choice-lg-width": 600,
+                "gform-image-choice-lg-height": 371
+              }
+            },
+            "cast_study": false
+          },
+          {
+            "name": "Children's Hospital of Philadelphia",
+            "logo": {
+              "ID": 7225,
+              "id": 7225,
+              "title": "",
+              "filename": "CHOP-logo.jpg",
+              "filesize": 21014,
+              "url": "http://www.o3world.com/wp-content/uploads/2023/02/CHOP-logo.jpg",
+              "link": "http://www.o3world.com/work/chop-logo-2/",
+              "alt": "Children's Hospital logo.",
+              "author": "16",
+              "description": "",
+              "caption": "",
+              "name": "chop-logo-2",
+              "status": "inherit",
+              "uploaded_to": 161,
+              "date": "2023-02-03 23:43:56",
+              "modified": "2025-02-24 14:01:49",
+              "menu_order": 0,
+              "mime_type": "image/jpeg",
+              "type": "image",
+              "subtype": "jpeg",
+              "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+              "width": 921,
+              "height": 570,
+              "sizes": {
+                "thumbnail": "http://www.o3world.com/wp-content/uploads/2023/02/CHOP-logo-150x150.jpg",
+                "thumbnail-width": 150,
+                "thumbnail-height": 150,
+                "medium": "http://www.o3world.com/wp-content/uploads/2023/02/CHOP-logo-640x396.jpg",
+                "medium-width": 640,
+                "medium-height": 396,
+                "medium_large": "http://www.o3world.com/wp-content/uploads/2023/02/CHOP-logo-768x475.jpg",
+                "medium_large-width": 768,
+                "medium_large-height": 475,
+                "large": "http://www.o3world.com/wp-content/uploads/2023/02/CHOP-logo.jpg",
+                "large-width": 921,
+                "large-height": 570,
+                "1536x1536": "http://www.o3world.com/wp-content/uploads/2023/02/CHOP-logo.jpg",
+                "1536x1536-width": 921,
+                "1536x1536-height": 570,
+                "2048x2048": "http://www.o3world.com/wp-content/uploads/2023/02/CHOP-logo.jpg",
+                "2048x2048-width": 921,
+                "2048x2048-height": 570,
+                "icon": "http://www.o3world.com/wp-content/uploads/2023/02/CHOP-logo-48x30.jpg",
+                "icon-width": 48,
+                "icon-height": 30,
+                "xlarge": "http://www.o3world.com/wp-content/uploads/2023/02/CHOP-logo.jpg",
+                "xlarge-width": 921,
+                "xlarge-height": 570,
+                "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2023/02/CHOP-logo.jpg",
+                "gform-image-choice-sm-width": 300,
+                "gform-image-choice-sm-height": 186,
+                "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2023/02/CHOP-logo.jpg",
+                "gform-image-choice-md-width": 400,
+                "gform-image-choice-md-height": 248,
+                "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2023/02/CHOP-logo.jpg",
+                "gform-image-choice-lg-width": 600,
+                "gform-image-choice-lg-height": 371
+              }
+            },
+            "cast_study": false
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "project_feed",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Case studies",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "Case studies",
+          "kicker_tag": "div",
+          "title": "Turning insights into transformative outcomes",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": "Client Name | Title, Company"
+        },
+        "introduction_link": {
+          "title": "More work",
+          "url": "https://live-o3-world.pantheonsite.io/work/",
+          "target": ""
+        },
+        "list_type": "select",
+        "select_projects": [
+          5807,
+          8627,
+          5803
+        ]
+      },
+      {
+        "acf_fc_layout": "insights_feed",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Perspectives",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "Perspectives",
+          "kicker_tag": "div",
+          "title": "Strategic insights to guide your next move",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": "Client Name | Title, Company"
+        },
+        "introduction_link": {
+          "title": "More perspectives",
+          "url": "https://live-o3-world.pantheonsite.io/perspectives/",
+          "target": ""
+        },
+        "list_type": "all",
+        "select_insights": null
+      },
+      {
+        "acf_fc_layout": "page_callout",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Contact us",
+        "image": {
+          "ID": 5472,
+          "id": 5472,
+          "title": "",
+          "filename": "Open-Circle-Corner.png",
+          "filesize": 14518,
+          "url": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner.png",
+          "link": "http://www.o3world.com/?attachment_id=5472",
+          "alt": "red box with white semi circle",
+          "author": "16",
+          "description": "",
+          "caption": "",
+          "name": "open-circle-corner-2",
+          "status": "inherit",
+          "uploaded_to": 2,
+          "date": "2022-10-09 19:43:53",
+          "modified": "2025-02-24 17:41:54",
+          "menu_order": 0,
+          "mime_type": "image/png",
+          "type": "image",
+          "subtype": "png",
+          "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+          "width": 960,
+          "height": 960,
+          "sizes": {
+            "thumbnail": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner-150x150.png",
+            "thumbnail-width": 150,
+            "thumbnail-height": 150,
+            "medium": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner-640x640.png",
+            "medium-width": 640,
+            "medium-height": 640,
+            "medium_large": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner-768x768.png",
+            "medium_large-width": 768,
+            "medium_large-height": 768,
+            "large": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner.png",
+            "large-width": 960,
+            "large-height": 960,
+            "1536x1536": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner.png",
+            "1536x1536-width": 960,
+            "1536x1536-height": 960,
+            "2048x2048": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner.png",
+            "2048x2048-width": 960,
+            "2048x2048-height": 960,
+            "icon": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner-48x48.png",
+            "icon-width": 48,
+            "icon-height": 48,
+            "xlarge": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner.png",
+            "xlarge-width": 960,
+            "xlarge-height": 960,
+            "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner.png",
+            "gform-image-choice-sm-width": 300,
+            "gform-image-choice-sm-height": 300,
+            "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner.png",
+            "gform-image-choice-md-width": 400,
+            "gform-image-choice-md-height": 400,
+            "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner.png",
+            "gform-image-choice-lg-width": 600,
+            "gform-image-choice-lg-height": 600
+          }
+        },
+        "content": [
+          {
+            "acf_fc_layout": "title",
+            "kicker": "CONTACT US",
+            "kicker_tag": "div",
+            "title": "Drive growth + elevate your digital experience",
+            "heading_level": "h2",
+            "heading_tag": "div",
+            "add_description": true,
+            "description": "Let’s uncover opportunities to drive growth, streamline operations, and create meaningful impact for your organization."
+          },
+          {
+            "acf_fc_layout": "button",
+            "button": {
+              "title": "Let's connect",
+              "url": "https://live-o3-world.pantheonsite.io/contact/",
+              "target": ""
+            },
+            "button_label": "Let's connect",
+            "button_style": "blue"
+          }
+        ]
+      }
+    ]
+  }
+}

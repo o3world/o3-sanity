@@ -1,0 +1,336 @@
+{
+  "_meta": {
+    "type": "page",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T02:45:52.017Z"
+  },
+  "wpId": 9790,
+  "slug": "mike-gadsby-chief-innovation-officer",
+  "path": "/mike-gadsby-chief-innovation-officer/",
+  "title": "Mike Gadsby speaking overview",
+  "parentSlug": null,
+  "seo": {
+    "titleOverride": "Mike Gadsby | Chief Innovation Officer at O3 | AI & CX expert",
+    "titleRendered": "Mike Gadsby | Chief Innovation Officer at O3 | AI & CX expert",
+    "descriptionOverride": "Explore AI thought leadership with Mike Gadsby, a pioneer in artificial intelligence and customer experience innovation.",
+    "descriptionRendered": "Explore AI thought leadership with Mike Gadsby, a pioneer in artificial intelligence and customer experience innovation.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/mike-gadsby-chief-innovation-officer/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "page_header": [
+      {
+        "acf_fc_layout": "basic_header",
+        "page_title_content": [
+          {
+            "acf_fc_layout": "title",
+            "kicker": "SPEAKER PROFILE",
+            "kicker_tag": "div",
+            "title": "Mike Gadsby, Chief Innovation Officer",
+            "heading_level": "h2",
+            "heading_tag": "div",
+            "add_description": true,
+            "description": "As the co-founder of O3, Mike is a leading expert in artificial intelligence, customer experience, and user experience strategy. With nearly 20 years of innovation at O3, Mike has helped businesses across sectors grow by applying design thinking and technology solutions that drive meaningful impact. He also leads O3's Labs program, where hands-on workshops and rapid experimentation fuel product innovation and business transformation. Speaking topics include the latest in AI and innovation, and the intersection of AI and CX for an executive level audience."
+          },
+          {
+            "acf_fc_layout": "button",
+            "button": {
+              "title": "Contact Mike to speak",
+              "url": "mailto:gadsby@o3world.com",
+              "target": ""
+            },
+            "button_label": "",
+            "button_style": "blue"
+          }
+        ],
+        "header_icon": {
+          "value": "None",
+          "image": "None"
+        },
+        "header_image": false,
+        "header_background_icon": {
+          "value": "None",
+          "image": "None"
+        }
+      }
+    ],
+    "flexible_content": [
+      {
+        "acf_fc_layout": "text_and_accordion",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text and Accordion",
+        "content": [
+          {
+            "acf_fc_layout": "title",
+            "kicker": "SPEAKING CAPABILITIES",
+            "kicker_tag": "div",
+            "title": "Recent events",
+            "heading_level": "h2",
+            "heading_tag": "div",
+            "add_description": true,
+            "description": "Mike delivers lunch + learns, panels, keynotes, podcasts, and workshops for diverse industries and audiences. Here are some recent highlights:"
+          }
+        ],
+        "accordion": [
+          {
+            "panel_title": "“AI for the C-Suite” podcast",
+            "panel_text": "<p>Mike recently joined the <a href=\"https://www.youtube.com/watch?v=rHw5fp_19C0\">&#8220;AI for the C-Suite™&#8221;</a> podcast to discuss how AI is reshaping digital strategy, user experience, and client relationships across industries.</p>\n"
+          },
+          {
+            "panel_title": "Lunch and learn with 6abc WPVI-TV Philadelphia",
+            "panel_text": "<p>Mike presented valuable perspectives on AI tailored to the 6abc WPVI-TV Philadelphia’s team. The lunch and learn session aimed to demystify the complex world of AI and CX, exploring the evolving roles in shaping marketing and content development in news and journalism.</p>\n"
+          },
+          {
+            "panel_title": "Keynote speaker at the 1682 conference",
+            "panel_text": "<p>Mike delivered a keynote titled <a href=\"https://www.o3world.com/perspectives/1682-conference-recap-unveiling-ais-realities-and-innovation-insights/\">“AI unveiled: Five hard truths”</a> offering unfiltered insights based on years of experimentation and strategic work with clients across sectors.</p>\n"
+          },
+          {
+            "panel_title": "AI in education: Beyond School Hours Conference",
+            "panel_text": "<p>As the event’s official AI sponsor, <a href=\"https://www.edweek.org/events/webinar/ai-and-educational-leadership-driving-innovation-and-equity\">Mike shared AI thought leadership</a>, exploring how technology is reshaping the future of learning.</p>\n"
+          },
+          {
+            "panel_title": "AI’s impact on creativity: Panel hosted by Philly Ad Club",
+            "panel_text": "<p>The panel <a href=\"https://www.phillyadclub.com/event-calendar/#!event/2024/4/12/impact-and-innovation-ai-creativity\">explored how AI is transforming the creative process</a> and empowering creators as collaborators rather than replacements.</p>\n"
+          },
+          {
+            "panel_title": "Podcast: Is AI a superhero or a villain?",
+            "panel_text": "<p><a href=\"https://www.o3world.com/perspectives/is-ai-a-superhero-or-a-villain-mike-gadsby-explores-on-the-penji-podcast/\">In a podcast hosted by Penji</a>, Mike explored various aspects of AI, examining its future, applications in customer experiences, and the challenges it poses to businesses.</p>\n"
+          },
+          {
+            "panel_title": "ADPList’s AI Summit",
+            "panel_text": "<p>Mike represented O3 at <a href=\"https://www.o3world.com/perspectives/ai-inside-out-enhancing-products-process-at-adplists-ai-summit/\">ADPList’s inaugural AI Summit</a>, sharing insights on integrating AI into products alongside industry leaders from Microsoft and J.P. Morgan.</p>\n"
+          },
+          {
+            "panel_title": "WIPA conference keynote “AI at Your Service” ",
+            "panel_text": "<p>Mike hosted a <a href=\"https://www.linkedin.com/feed/update/urn:li:activity:7265025007330770945\">keynote session at WIPA’s “AI at Your Service”</a> event. He shared how AI enhances customer experiences, streamlines event operations, and empowers teams to focus on human connections.</p>\n"
+          },
+          {
+            "panel_title": "Defining innovation panel ",
+            "panel_text": "<p><a href=\"https://www.o3world.com/perspectives/defining-innovation-with-cliff-kuang-3-important-takeaways/\">On a discussion with Kuang</a>, Mike explored how technology can lead to better outcomes for businesses, but it requires effective leadership to advocate for innovation and put processes in place to ensure utilization correctly.</p>\n"
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "image_carousel",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Image Carousel",
+        "add_introduction": false,
+        "introduction": {
+          "": null,
+          "kicker": "",
+          "kicker_tag": false,
+          "title": "",
+          "heading_level": "h2",
+          "heading_tag": false,
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": null,
+        "images": [
+          {
+            "ID": 9800,
+            "id": 9800,
+            "title": "Mike Gadsby 2",
+            "filename": "Mike-Gadsby-2.png",
+            "filesize": 6126472,
+            "url": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-2.png",
+            "link": "http://www.o3world.com/mike-gadsby-chief-innovation-officer/mike-gadsby-2/",
+            "alt": "Mike Gadsby O3 thought leader at 1682",
+            "author": "16",
+            "description": "",
+            "caption": "",
+            "name": "mike-gadsby-2",
+            "status": "inherit",
+            "uploaded_to": 9790,
+            "date": "2025-02-24 18:11:12",
+            "modified": "2025-02-24 18:11:51",
+            "menu_order": 0,
+            "mime_type": "image/png",
+            "type": "image",
+            "subtype": "png",
+            "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+            "width": 2304,
+            "height": 1728,
+            "sizes": {
+              "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-2-150x150.png",
+              "thumbnail-width": 150,
+              "thumbnail-height": 150,
+              "medium": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-2-640x480.png",
+              "medium-width": 640,
+              "medium-height": 480,
+              "medium_large": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-2-768x576.png",
+              "medium_large-width": 768,
+              "medium_large-height": 576,
+              "large": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-2-1024x768.png",
+              "large-width": 1024,
+              "large-height": 768,
+              "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-2-1536x1152.png",
+              "1536x1536-width": 1536,
+              "1536x1536-height": 1152,
+              "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-2-2048x1536.png",
+              "2048x2048-width": 2048,
+              "2048x2048-height": 1536,
+              "icon": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-2-48x36.png",
+              "icon-width": 48,
+              "icon-height": 36,
+              "xlarge": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-2-1280x960.png",
+              "xlarge-width": 1280,
+              "xlarge-height": 960,
+              "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-2.png",
+              "gform-image-choice-sm-width": 300,
+              "gform-image-choice-sm-height": 225,
+              "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-2.png",
+              "gform-image-choice-md-width": 400,
+              "gform-image-choice-md-height": 300,
+              "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-2.png",
+              "gform-image-choice-lg-width": 600,
+              "gform-image-choice-lg-height": 450
+            }
+          },
+          {
+            "ID": 9799,
+            "id": 9799,
+            "title": "Mike Gadsby 3",
+            "filename": "Mike-Gadsby-3.png",
+            "filesize": 4056535,
+            "url": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-3.png",
+            "link": "http://www.o3world.com/mike-gadsby-chief-innovation-officer/mike-gadsby-3/",
+            "alt": "Mike Gadsby O3 thought leader at WIPPA",
+            "author": "16",
+            "description": "",
+            "caption": "",
+            "name": "mike-gadsby-3",
+            "status": "inherit",
+            "uploaded_to": 9790,
+            "date": "2025-02-24 18:10:32",
+            "modified": "2025-02-24 18:11:37",
+            "menu_order": 0,
+            "mime_type": "image/png",
+            "type": "image",
+            "subtype": "png",
+            "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+            "width": 2304,
+            "height": 1728,
+            "sizes": {
+              "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-3-150x150.png",
+              "thumbnail-width": 150,
+              "thumbnail-height": 150,
+              "medium": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-3-640x480.png",
+              "medium-width": 640,
+              "medium-height": 480,
+              "medium_large": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-3-768x576.png",
+              "medium_large-width": 768,
+              "medium_large-height": 576,
+              "large": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-3-1024x768.png",
+              "large-width": 1024,
+              "large-height": 768,
+              "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-3-1536x1152.png",
+              "1536x1536-width": 1536,
+              "1536x1536-height": 1152,
+              "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-3-2048x1536.png",
+              "2048x2048-width": 2048,
+              "2048x2048-height": 1536,
+              "icon": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-3-48x36.png",
+              "icon-width": 48,
+              "icon-height": 36,
+              "xlarge": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-3-1280x960.png",
+              "xlarge-width": 1280,
+              "xlarge-height": 960,
+              "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-3.png",
+              "gform-image-choice-sm-width": 300,
+              "gform-image-choice-sm-height": 225,
+              "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-3.png",
+              "gform-image-choice-md-width": 400,
+              "gform-image-choice-md-height": 300,
+              "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-3.png",
+              "gform-image-choice-lg-width": 600,
+              "gform-image-choice-lg-height": 450
+            }
+          },
+          {
+            "ID": 9801,
+            "id": 9801,
+            "title": "Mike Gadsby 1",
+            "filename": "Mike-Gadsby-1.png",
+            "filesize": 4378828,
+            "url": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-1.png",
+            "link": "http://www.o3world.com/mike-gadsby-chief-innovation-officer/mike-gadsby-1/",
+            "alt": "Mike Gadsby O3 thought leader at 1682",
+            "author": "16",
+            "description": "",
+            "caption": "",
+            "name": "mike-gadsby-1",
+            "status": "inherit",
+            "uploaded_to": 9790,
+            "date": "2025-02-24 18:11:41",
+            "modified": "2025-02-24 18:12:36",
+            "menu_order": 0,
+            "mime_type": "image/png",
+            "type": "image",
+            "subtype": "png",
+            "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+            "width": 2304,
+            "height": 1728,
+            "sizes": {
+              "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-1-150x150.png",
+              "thumbnail-width": 150,
+              "thumbnail-height": 150,
+              "medium": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-1-640x480.png",
+              "medium-width": 640,
+              "medium-height": 480,
+              "medium_large": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-1-768x576.png",
+              "medium_large-width": 768,
+              "medium_large-height": 576,
+              "large": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-1-1024x768.png",
+              "large-width": 1024,
+              "large-height": 768,
+              "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-1-1536x1152.png",
+              "1536x1536-width": 1536,
+              "1536x1536-height": 1152,
+              "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-1-2048x1536.png",
+              "2048x2048-width": 2048,
+              "2048x2048-height": 1536,
+              "icon": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-1-48x36.png",
+              "icon-width": 48,
+              "icon-height": 36,
+              "xlarge": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-1-1280x960.png",
+              "xlarge-width": 1280,
+              "xlarge-height": 960,
+              "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-1.png",
+              "gform-image-choice-sm-width": 300,
+              "gform-image-choice-sm-height": 225,
+              "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-1.png",
+              "gform-image-choice-md-width": 400,
+              "gform-image-choice-md-height": 300,
+              "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/02/Mike-Gadsby-1.png",
+              "gform-image-choice-lg-width": 600,
+              "gform-image-choice-lg-height": 450
+            }
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "text_and_title",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text and Title",
+        "content": [
+          {
+            "acf_fc_layout": "title",
+            "kicker": "TESTIMONIALS",
+            "kicker_tag": "div",
+            "title": "What people are saying",
+            "heading_level": "h2",
+            "heading_tag": "div",
+            "add_description": true,
+            "description": "Here's what others say about Mike's speaking engagements:"
+          }
+        ],
+        "text_editor": "<h4>I really enjoyed your keynote on AI and its potential for product innovation. It was super insightful and got me thinking!</h4>\n<p>—Product Designer, Accenture</p>\n<h4>I highly enjoyed your team&#8217;s presentation — very hands-on and applicable. Thank you for sharing your knowledge and experience with us.</h4>\n<p>—Founder, Design Studio</p>\n<h4>“Discussions were focused on diving deep into the transformative power of AI and innovation. It’s inspiring to see how businesses are leveraging these technologies to drive growth and solve problems.”</h4>\n<p>—Lindsay Hamlin, Senior Director of Transformation, Best Egg</p>\n"
+      }
+    ]
+  }
+}

@@ -1,0 +1,1734 @@
+{
+  "_id": "page-wp-3",
+  "_type": "page",
+  "title": "Privacy Policy",
+  "slug": {
+    "_type": "slug",
+    "current": "privacy-policy"
+  },
+  "pageType": "standard",
+  "sections": [
+    {
+      "_type": "heroSection",
+      "_key": "k0000",
+      "surface": "ink",
+      "headlineLines": [
+        "Privacy Policy"
+      ],
+      "decoration": "none"
+    },
+    {
+      "_type": "layoutSection",
+      "_key": "k0238",
+      "surface": "white",
+      "columns": 1,
+      "items": [
+        {
+          "_type": "richText",
+          "_key": "k0239",
+          "body": [
+            {
+              "_key": "k0010",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "At O3 World, LLC, we’re committed to protecting and respecting your privacy.",
+                  "_key": "k0011"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0012",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "This Privacy Notice and Terms of Use (“Notice”) explain when and why we collect personal information about people who visit our website. It describes how we use the data we collect, the conditions under which we may disclose it to others and how we keep it secure.",
+                  "_key": "k0013"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0014",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "We may change this Notice from time to time, so please check this page occasionally to ensure that you’re happy with any changes. By using our website, you’re agreeing to be bound by this Notice.",
+                  "_key": "k0015"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0016",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Any questions regarding this Notice and our privacy practices should be sent by email to ",
+                  "_key": "k0017"
+                },
+                {
+                  "_type": "span",
+                  "marks": [
+                    "k0001"
+                  ],
+                  "text": "info@o3world.com",
+                  "_key": "k0018"
+                },
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": ", or by writing to:",
+                  "_key": "k0019"
+                }
+              ],
+              "markDefs": [
+                {
+                  "_key": "k0001",
+                  "_type": "link",
+                  "href": "mailto:info@o3world.com"
+                }
+              ],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0020",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "1339 Frankford Ave, Suite 3\nPhiladelphia, PA 19125",
+                  "_key": "k0021"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0022",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Definitions",
+                  "_key": "k0023"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "h2"
+            },
+            {
+              "_key": "k0024",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "O3 World, LLC (“us”, “we”, or “our”) operates the website ",
+                  "_key": "k0025"
+                },
+                {
+                  "_type": "span",
+                  "marks": [
+                    "k0002"
+                  ],
+                  "text": "https://www.o3world.com",
+                  "_key": "k0026"
+                },
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": " (the “Site”).",
+                  "_key": "k0027"
+                }
+              ],
+              "markDefs": [
+                {
+                  "_key": "k0002",
+                  "_type": "link",
+                  "href": "https://www.o3world.com"
+                }
+              ],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0028",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [
+                    "strong"
+                  ],
+                  "text": "Personal Data",
+                  "_key": "k0029"
+                },
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": " Personal Data means data about a living individual who can be identified from that data (or from those and other information either in our possession or likely to come into our possession). ",
+                  "_key": "k0030"
+                },
+                {
+                  "_type": "span",
+                  "marks": [
+                    "strong"
+                  ],
+                  "text": "Usage Data",
+                  "_key": "k0031"
+                },
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": " Usage Data is data collected automatically either generated by the use of the Site or from the Site infrastructure itself (for example, the duration of a page visit). ",
+                  "_key": "k0032"
+                },
+                {
+                  "_type": "span",
+                  "marks": [
+                    "strong"
+                  ],
+                  "text": "Cookies",
+                  "_key": "k0033"
+                },
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": " Cookies are small pieces of data stored on a user’s device. ",
+                  "_key": "k0034"
+                },
+                {
+                  "_type": "span",
+                  "marks": [
+                    "strong"
+                  ],
+                  "text": "Data Controller",
+                  "_key": "k0035"
+                },
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": " Data Controller means a person who (either alone or jointly or in common with other persons) determines the purposes for which and how any personal data are, or are to be, processed. For the purpose of this Notice and Site, we are a Data Controller of your data. ",
+                  "_key": "k0036"
+                },
+                {
+                  "_type": "span",
+                  "marks": [
+                    "strong"
+                  ],
+                  "text": "Data Processor (or Service Providers)",
+                  "_key": "k0037"
+                },
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": " Data Processor (or Service Provider) means any person (other than an employee of the Data Controller) who processes the data on behalf of the Data Controller. We may use the services of various Service Providers to process your data more effectively. ",
+                  "_key": "k0038"
+                },
+                {
+                  "_type": "span",
+                  "marks": [
+                    "strong"
+                  ],
+                  "text": "Data Subject",
+                  "_key": "k0039"
+                },
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": " Data Subject is any living individual who is the subject of Personal Data. ",
+                  "_key": "k0040"
+                },
+                {
+                  "_type": "span",
+                  "marks": [
+                    "strong"
+                  ],
+                  "text": "User",
+                  "_key": "k0041"
+                },
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": " The User is the individual using our Site. The User corresponds to the Data Subject, who is the subject of Personal Data. ",
+                  "_key": "k0042"
+                },
+                {
+                  "_type": "span",
+                  "marks": [
+                    "strong"
+                  ],
+                  "text": "Information Collection And Use",
+                  "_key": "k0043"
+                },
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": " We collect several different types of information for various purposes to provide and improve our Site for you.",
+                  "_key": "k0044"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0045",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "What type of information do we collect?",
+                  "_key": "k0046"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "h2"
+            },
+            {
+              "_key": "k0047",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Personal Data",
+                  "_key": "k0048"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "h3"
+            },
+            {
+              "_key": "k0049",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "While using our Site, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you (“Personal Data”). Personally identifiable information may include:",
+                  "_key": "k0050"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0051",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "IP Address",
+                  "_key": "k0052"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal",
+              "level": 1,
+              "listItem": "bullet"
+            },
+            {
+              "_key": "k0053",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Usage Data",
+                  "_key": "k0054"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal",
+              "level": 1,
+              "listItem": "bullet"
+            },
+            {
+              "_key": "k0055",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Email address",
+                  "_key": "k0056"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal",
+              "level": 1,
+              "listItem": "bullet"
+            },
+            {
+              "_key": "k0057",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Phone number",
+                  "_key": "k0058"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal",
+              "level": 1,
+              "listItem": "bullet"
+            },
+            {
+              "_key": "k0059",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "First name and last name",
+                  "_key": "k0060"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal",
+              "level": 1,
+              "listItem": "bullet"
+            },
+            {
+              "_key": "k0061",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Location information",
+                  "_key": "k0062"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal",
+              "level": 1,
+              "listItem": "bullet"
+            },
+            {
+              "_key": "k0063",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Details related to the nature/reason of your inquiry",
+                  "_key": "k0064"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal",
+              "level": 1,
+              "listItem": "bullet"
+            },
+            {
+              "_key": "k0065",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Your current company and job title",
+                  "_key": "k0066"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal",
+              "level": 1,
+              "listItem": "bullet"
+            },
+            {
+              "_key": "k0067",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "You may use our Site without providing any Personal Data, or agreeing to the terms of this Notice. By doing so, some of the content and functionality of the Site will be unavailable.",
+                  "_key": "k0068"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0069",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "We may use your Personal Data to contact you with content, upcoming events, new services, and other information that may be of interest to you. Where required by law, you must first opt-in to receive such communications from us. You may opt out of these communications from us at any time by following the unsubscribe link or instructions provided in any email we send or by contacting us directly.",
+                  "_key": "k0070"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0071",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Usage Data",
+                  "_key": "k0072"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "h3"
+            },
+            {
+              "_key": "k0073",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "We may also collect information about how the Site is accessed and used (“Usage Data”). This Usage Data may include information such as your computer’s Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Site that you visit, the time and date of your visit, the time spent on those pages, and other diagnostic data.",
+                  "_key": "k0074"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0075",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Cookie Usage Notice",
+                  "_key": "k0076"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "h2"
+            },
+            {
+              "_key": "k0077",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "We use cookies and similar tracking technologies such as beacons, tags, and scripts to enable certain functions of our site and to analyze the performance of our website. We do not track users when they cross to third-party websites and do not provide targeted advertising, however, certain embedded third-party tools on our site may do so. Cookies are not used for any purpose other than those described here.",
+                  "_key": "k0078"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0079",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Cookies are small text files that can be used by websites to make a user’s experience more efficient.",
+                  "_key": "k0080"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0081",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "The law states that we can store cookies on your device if they are strictly necessary for the operation of this site. For all other types of cookies, we need your permission.",
+                  "_key": "k0082"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0083",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "What do we do with the data we collect?",
+                  "_key": "k0084"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "h2"
+            },
+            {
+              "_key": "k0085",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "O3 World, LLC uses the collected data for various purposes:",
+                  "_key": "k0086"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0087",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "We collect user data via cookies and other means to provide and maintain the Site, enhancing your use of the site, and monitoring the usage of our Site to detect, prevent and address technical issues",
+                  "_key": "k0088"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal",
+              "level": 1,
+              "listItem": "bullet"
+            },
+            {
+              "_key": "k0089",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "We collect user data via cookies and other means for analysis so we can improve our Site and our marketing efforts",
+                  "_key": "k0090"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal",
+              "level": 1,
+              "listItem": "bullet"
+            },
+            {
+              "_key": "k0091",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "We collect your personal contact information, such as name, email, and phone number, via form submissions to respond to specific inquiries and communicate with you, only in the ways you have requested",
+                  "_key": "k0092"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal",
+              "level": 1,
+              "listItem": "bullet"
+            },
+            {
+              "_key": "k0093",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "We collect information about your company and its needs via form submissions to determine whether your company could benefit from our services and analyze our marketing efforts",
+                  "_key": "k0094"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal",
+              "level": 1,
+              "listItem": "bullet"
+            },
+            {
+              "_key": "k0095",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "If you provide us with your Personal Data and agree to this Notice, we may correlate the Personal Data you provide with previously obtained, anonymous site usage data. We may also correlate, store and analyze other publicly available data related to the email address you provided us, such as the name, industry, or size of the Company associated with it, to better understand our site visitors and the effectiveness of our marketing efforts.\n",
+                  "_key": "k0096"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0097",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "What happens if you don’t give us your data",
+                  "_key": "k0098"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "h3"
+            },
+            {
+              "_key": "k0099",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "You can visit our website without giving us your personal data. Much of the information on our website is available even to those to whom we do not provide services.\n",
+                  "_key": "k0100"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0101",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Retention of Data",
+                  "_key": "k0102"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "h2"
+            },
+            {
+              "_key": "k0103",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "O3 World, LLC will retain your Personal Data only for as long as is necessary for the purposes set out in this Notice. We will retain and use your Personal Data to the extent necessary to comply with our legal obligations (for example, if we are required to retain your data to comply with applicable laws), resolve disputes, and enforce our legal agreements and policies.",
+                  "_key": "k0104"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0105",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "O3 World, LLC will also retain Usage Data for internal analysis purposes, as outlined in the ",
+                  "_key": "k0106"
+                },
+                {
+                  "_type": "span",
+                  "marks": [
+                    "k0003"
+                  ],
+                  "text": "Usage Data",
+                  "_key": "k0107"
+                },
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": ".",
+                  "_key": "k0108"
+                }
+              ],
+              "markDefs": [
+                {
+                  "_key": "k0003",
+                  "_type": "link",
+                  "href": "/privacy-policy/#usage-data"
+                }
+              ],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0109",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Transfer Of Data",
+                  "_key": "k0110"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "h2"
+            },
+            {
+              "_key": "k0111",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Your information, including Personal Data, may be transferred to — and maintained on — computers located outside of your state, province, country, or other governmental jurisdiction where the data protection laws may differ from those from your jurisdiction.",
+                  "_key": "k0112"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0113",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "If you are located outside the United States and choose to provide information to us, please note that we transfer the data, including Personal Data, to the United States and process it there.",
+                  "_key": "k0114"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0115",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "O3 World, LLC will take all steps reasonably necessary to ensure that your data is treated securely and in accordance with this Notice and no transfer of your Personal Data will take place to an organization or a country unless there are adequate controls in place including the security of your data and other personal information. Please note that the United States has not sought nor received a finding of “adequacy” from the European Union under Article 45 of the General Data Protection Regulation (GDPR). Therefore, we rely on derogations for specific situations as set forth in Article 49 of the GDPR. We endeavor to apply suitable safeguards to protect the privacy and security of your personal data and to use it only consistent with your relationship with us and the practices described in this Privacy Notice. We also minimize the risk to your rights and freedoms by not collecting or storing sensitive information about you.",
+                  "_key": "k0116"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0117",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Security Of Data",
+                  "_key": "k0118"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "h2"
+            },
+            {
+              "_key": "k0119",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Neither we nor our Service Providers will ever ask you for sensitive data, such as Credit Card information.",
+                  "_key": "k0120"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0121",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Non-sensitive details (your email address, etc.) are transmitted normally over the Internet, and this can never be guaranteed to be 100% secure. As a result, while we strive to protect your personal information, we cannot guarantee the security of any information you transmit to us, and you do so at your own risk. Once we receive your information, we make our best effort to ensure its security on our systems. To help protect the privacy of data and personally identifiable information you transmit through the use of this Site, we maintain physical, technical, and administrative safeguards. We update and test our security technology on an ongoing basis. We restrict access to your personal data to those employees who need to know that information to provide benefits or services to you. In addition, we train our employees about the importance of confidentiality and maintaining the privacy and security of your information. We commit to taking appropriate disciplinary measures to enforce our employees’ privacy responsibilities.",
+                  "_key": "k0122"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0123",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "How you can access, update, transport, or delete your information?",
+                  "_key": "k0124"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "h2"
+            },
+            {
+              "_key": "k0125",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "O3 World, LLC aims to take reasonable steps to allow you to correct, amend, delete, or limit the use of your Personal Data. Please note that we may ask you to verify your identity before responding to your requests to correct, amend, delete, or limit the use of your Personal Data.",
+                  "_key": "k0126"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0127",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "If access cannot be provided within a reasonable time frame, we will provide you with a date when the information will be provided. If for some reason access is denied, we will provide an explanation as to why access has been denied.",
+                  "_key": "k0128"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0129",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "If you wish to be informed what Personal Data we hold about you and if you want it to be removed from our systems, please contact us by email at ",
+                  "_key": "k0130"
+                },
+                {
+                  "_type": "span",
+                  "marks": [
+                    "k0004"
+                  ],
+                  "text": "info@o3world.com",
+                  "_key": "k0131"
+                },
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": ", or by writing to:",
+                  "_key": "k0132"
+                }
+              ],
+              "markDefs": [
+                {
+                  "_key": "k0004",
+                  "_type": "link",
+                  "href": "mailto:info@o3world.com"
+                }
+              ],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0133",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "1339 Frankford Ave, Suite 3\nPhiladelphia, PA 19125",
+                  "_key": "k0134"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0135",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "In certain circumstances, you have the right, at no cost to you:",
+                  "_key": "k0136"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0137",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "To access and receive a copy of the Personal Data we hold about you",
+                  "_key": "k0138"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal",
+              "level": 1,
+              "listItem": "bullet"
+            },
+            {
+              "_key": "k0139",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "To rectify any Personal Data held about you that is inaccurate",
+                  "_key": "k0140"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal",
+              "level": 1,
+              "listItem": "bullet"
+            },
+            {
+              "_key": "k0141",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "To request the deletion of Personal Data held about you",
+                  "_key": "k0142"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal",
+              "level": 1,
+              "listItem": "bullet"
+            },
+            {
+              "_key": "k0143",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "You have the right to data portability for the information you provide to O3 World, LLC. You can request to obtain a copy of your Personal Data in a commonly used electronic format so that you can manage and move it.",
+                  "_key": "k0144"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0145",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "You may also request information about: the purpose of the processing; the categories of personal data concerned; who else outside of O3 World, LLC might have received the data from O3 World, LLC; what the source of the information was (if you didn’t provide it directly to O3 World, LLC); and how long it will be stored.",
+                  "_key": "k0146"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0147",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Additionally, you have a right to lodge a complaint with the appropriate data protection authority or supervisory authority if you have concerns about how we process your personal data.",
+                  "_key": "k0148"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0149",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Who has access to your information?",
+                  "_key": "k0150"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "h2"
+            },
+            {
+              "_key": "k0151",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "We will never sell or rent your information to third parties.",
+                  "_key": "k0152"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0153",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "As the Data Controller for the Site, we may collect, store, process, and evaluate your Personal Data, in the manner and within the limitations and restrictions defined above.",
+                  "_key": "k0154"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0155",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "We do not otherwise reveal your personal data to third parties for their independent use unless:",
+                  "_key": "k0156"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0157",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "You request or authorize it;",
+                  "_key": "k0158"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal",
+              "level": 1,
+              "listItem": "number"
+            },
+            {
+              "_key": "k0159",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "The information is provided to comply with the law (for example, to comply with a search warrant, subpoena or court order), enforce an agreement we have with you, or to protect our rights, property or safety, or the rights, property or safety of our employees or others;",
+                  "_key": "k0160"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal",
+              "level": 1,
+              "listItem": "number"
+            },
+            {
+              "_key": "k0161",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "The information is provided to our agents, vendors or service providers who perform functions on our behalf;",
+                  "_key": "k0162"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal",
+              "level": 1,
+              "listItem": "number"
+            },
+            {
+              "_key": "k0163",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "To address emergencies or acts of God;",
+                  "_key": "k0164"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal",
+              "level": 1,
+              "listItem": "number"
+            },
+            {
+              "_key": "k0165",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "To address disputes, claims, or to persons demonstrating legal authority to act on your behalf.",
+                  "_key": "k0166"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal",
+              "level": 1,
+              "listItem": "number"
+            },
+            {
+              "_key": "k0167",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "We may also gather aggregated data about our users and disclose the results of such aggregated (but not personally identifiable) information to our partners, service providers, advertisers, and/or other third parties for marketing or promotional purposes.",
+                  "_key": "k0168"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0169",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Service Providers",
+                  "_key": "k0170"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "h2"
+            },
+            {
+              "_key": "k0171",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "We may employ third-party companies and individuals to facilitate our Site (“Service Providers”), to provide the Site on our behalf, perform Site-related services or assist us in analyzing how our Site is used.",
+                  "_key": "k0172"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0173",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "These third parties have access to your Personal Data only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.",
+                  "_key": "k0174"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0175",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Analytics",
+                  "_key": "k0176"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "h3"
+            },
+            {
+              "_key": "k0177",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "We may use third-party Service Providers to monitor and analyze the use of our Site.",
+                  "_key": "k0178"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0179",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Google Analytics",
+                  "_key": "k0180"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "h3"
+            },
+            {
+              "_key": "k0181",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Google Analytics is a web analytics service offered by Google that tracks and reports website traffic. Google uses the data collected to track and monitor the use of our Site. This data is shared with other Google services. Google may use the collected data to contextualize and personalize the ads of its own advertising network. You can opt out of having made your activity on the Site available to Google Analytics by instructing your browser to refuse all cookies, or by installing the Google Analytics opt-out browser add-on. The add-on prevents the Google Analytics JavaScript (ga.js, analytics.js, and dc.js) from sharing information with Google Analytics about visits activity. Google analytics may collect your IP address in addition to your usage of the Site, but no other personal data is shared with them. Google does not make your IP address accessible to O3 World, LLC. For more information on the privacy practices of Google, please visit the Google Privacy Terms web page: ",
+                  "_key": "k0182"
+                },
+                {
+                  "_type": "span",
+                  "marks": [
+                    "k0005"
+                  ],
+                  "text": "http://www.google.com/intl/en/policies/privacy/",
+                  "_key": "k0183"
+                },
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": ". Google complies with the EU-U.S. Privacy Shield Framework.",
+                  "_key": "k0184"
+                }
+              ],
+              "markDefs": [
+                {
+                  "_key": "k0005",
+                  "_type": "link",
+                  "href": "http://www.google.com/intl/en/policies/privacy/"
+                }
+              ],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0185",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Marketing Automation",
+                  "_key": "k0186"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "h3"
+            },
+            {
+              "_key": "k0187",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "We may use third-party Service Providers to automate marketing actions in an attempt to nurture visitors with personalized and useful content based on visitor interactions with our website and past emails. You may request that we cease using your information for marketing purposes by emailing us at ",
+                  "_key": "k0188"
+                },
+                {
+                  "_type": "span",
+                  "marks": [
+                    "k0006"
+                  ],
+                  "text": "info@o3world.com",
+                  "_key": "k0189"
+                },
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": ", or by writing to:\n1339 Frankford Ave, Suite 3\nPhiladelphia, PA 19125.",
+                  "_key": "k0190"
+                }
+              ],
+              "markDefs": [
+                {
+                  "_key": "k0006",
+                  "_type": "link",
+                  "href": "mailto:info@o3world.com"
+                }
+              ],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0191",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Act-On Software",
+                  "_key": "k0192"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "h3"
+            },
+            {
+              "_key": "k0193",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "O3 World, LLC uses Act-On Software to manage our form submission and subscriber lists, send our marketing emails, and automate marketing actions in an attempt to nurture visitors with personalized and useful content based on interactions with our website and past emails. The Site uses an Act-On tracking pixel and cookie to track anonymous and known visitor activity on the Site. We use visitor data to analyze our site traffic patterns and the effectiveness of our Site and marketing efforts. The Act-On tracking cookie collects IP addresses of site visitors for the purpose of generating location- and company-based website visitor reports. O3 World, LLC is unable to view IP addresses collected via the Act-On tracking cookie. You can opt out of having your activity on the Site made available to Act-On by instructing your browser to refuse all cookies, and by not providing us with any personal information via the Site. ",
+                  "_key": "k0194"
+                },
+                {
+                  "_type": "span",
+                  "marks": [
+                    "k0007"
+                  ],
+                  "text": "Please see the Cookie Usage Notice for additional details",
+                  "_key": "k0195"
+                },
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": ". If you have consented to receive emails from O3 World, LLC, such emails will be sent via Act-On. Recipients’ email open and click-through behavior are tracked and stored within Act-On, which we use to analyze the effectiveness of our marketing efforts, as well as to aid in ongoing list maintenance and data integrity efforts. Since we never collect it, no Sensitive Personal Data is ever shared with Act-On. For more information on the privacy practices of Act-On, please visit the Act-On Privacy Terms web page: ",
+                  "_key": "k0196"
+                },
+                {
+                  "_type": "span",
+                  "marks": [
+                    "k0008"
+                  ],
+                  "text": "https://www.act-on.com/privacy-policy/",
+                  "_key": "k0197"
+                },
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": " Act-On Software (and its UK subsidiary company Actonsoftware Limited) complies with the EU-U.S. Privacy Shield Framework.",
+                  "_key": "k0198"
+                }
+              ],
+              "markDefs": [
+                {
+                  "_key": "k0007",
+                  "_type": "link",
+                  "href": "/privacy-policy/#usage-data"
+                },
+                {
+                  "_key": "k0008",
+                  "_type": "link",
+                  "href": "https://www.act-on.com/privacy-policy/"
+                }
+              ],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0199",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Webinars",
+                  "_key": "k0200"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "h3"
+            },
+            {
+              "_key": "k0201",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "We may use third-party Service Providers to share audio, documents, and applications with registered webinar attendees.",
+                  "_key": "k0202"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0203",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "CRM",
+                  "_key": "k0204"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "h3"
+            },
+            {
+              "_key": "k0205",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "We may use third-party Service Providers to manage our business development efforts.",
+                  "_key": "k0206"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0207",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Website Functionality",
+                  "_key": "k0208"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "h3"
+            },
+            {
+              "_key": "k0209",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "We may use third-party Service Providers to customize your experience on the site and to provide additional insight into who is using our site.",
+                  "_key": "k0210"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0211",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Additional Information",
+                  "_key": "k0212"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "h2"
+            },
+            {
+              "_key": "k0213",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Links To Other Sites",
+                  "_key": "k0214"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "h3"
+            },
+            {
+              "_key": "k0215",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Our Site may contain links to other sites that are not operated by us. If you click on a third-party link, you will be directed to that third-party’s site. We strongly advise you to review the Privacy Notice, Privacy Policy, and/or Terms of Use of every site you visit. We have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services.",
+                  "_key": "k0216"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0217",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Children’s Privacy",
+                  "_key": "k0218"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "h3"
+            },
+            {
+              "_key": "k0219",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "We do not knowingly collect personally identifiable information from anyone under the age of 13. If you are a parent or guardian and you are aware that your child has provided us with Personal Data, please contact us. If we become aware that we have collected Personal Data from children without verification of parental consent, we take steps to remove that information from our servers and third-party systems.",
+                  "_key": "k0220"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0221",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Changes To This Privacy Notice",
+                  "_key": "k0222"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "h2"
+            },
+            {
+              "_key": "k0223",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "You are advised to review this Notice periodically for any changes. Changes to this Notice are effective when they are posted on this page.",
+                  "_key": "k0224"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0225",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Anything else?",
+                  "_key": "k0226"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "h2"
+            },
+            {
+              "_key": "k0227",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "If you have any questions about this Notice, please contact us:",
+                  "_key": "k0228"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0229",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "By email: ",
+                  "_key": "k0230"
+                },
+                {
+                  "_type": "span",
+                  "marks": [
+                    "k0009"
+                  ],
+                  "text": "info@o3world.com",
+                  "_key": "k0231"
+                },
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "\nBy mail:",
+                  "_key": "k0232"
+                }
+              ],
+              "markDefs": [
+                {
+                  "_key": "k0009",
+                  "_type": "link",
+                  "href": "mailto:info@o3world.com"
+                }
+              ],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0233",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "1339 Frankford Ave, Suite 3\nPhiladelphia, PA 19125",
+                  "_key": "k0234"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0235",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [
+                    "strong"
+                  ],
+                  "text": "Last updated:",
+                  "_key": "k0236"
+                },
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": " Monday, February 6, 2023",
+                  "_key": "k0237"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "seo": {
+    "description": "This is the privacy policy of the O3 world website. At O3 we’re committed to protecting and respecting your privacy."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:page:3",
+    "extractedAt": "2026-08-01T02:45:52.026Z"
+  }
+}

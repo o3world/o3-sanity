@@ -1,0 +1,556 @@
+{
+  "_meta": {
+    "type": "page",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T02:45:52.018Z"
+  },
+  "wpId": 9545,
+  "slug": "1682-conference-ai-innovation",
+  "path": "/1682-conference-ai-innovation/",
+  "title": "1682: the business of innovation conference",
+  "parentSlug": null,
+  "seo": {
+    "titleOverride": "1682 Conference AI innovation: Transforming business %%page%% %%sep%% %%sitename%%",
+    "titleRendered": "1682 Conference AI innovation: Transforming business | O3",
+    "descriptionOverride": "Experience the 1682 Conference of AI innovation, featuring industry experts sharing strategies for harnessing AI's power.",
+    "descriptionRendered": "Experience the 1682 Conference of AI innovation, featuring industry experts sharing strategies for harnessing AI's power.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/1682-conference-ai-innovation/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "page_header": [
+      {
+        "acf_fc_layout": "basic_header",
+        "page_title_content": [
+          {
+            "acf_fc_layout": "title",
+            "kicker": "1682",
+            "kicker_tag": "div",
+            "title": "The business of innovation conference",
+            "heading_level": "h2",
+            "heading_tag": "div",
+            "add_description": true,
+            "description": "The 1682 Conference brings together leaders, innovators, and visionaries to explore the power of AI in shaping profit and process. Industry leaders provide insights and inspire conversations, making the event a milestone in innovation."
+          },
+          {
+            "acf_fc_layout": "button",
+            "button": {
+              "title": "Attend 1682",
+              "url": "https://www.1682conference.com/",
+              "target": ""
+            },
+            "button_label": "Attend the 1682 conference on October 8 ",
+            "button_style": "blue"
+          }
+        ],
+        "header_icon": {
+          "value": "None",
+          "image": "None"
+        },
+        "header_image": {
+          "ID": 9885,
+          "id": 9885,
+          "title": "1682@4x",
+          "filename": "1682@4x.png",
+          "filesize": 30761,
+          "url": "http://www.o3world.com/wp-content/uploads/2025/02/1682@4x.png",
+          "link": "http://www.o3world.com/1682-conference-ai-innovation/16824x/",
+          "alt": "1682 Conference AI Innovation",
+          "author": "16",
+          "description": "",
+          "caption": "",
+          "name": "16824x",
+          "status": "inherit",
+          "uploaded_to": 9545,
+          "date": "2025-02-25 00:46:35",
+          "modified": "2025-03-14 17:10:47",
+          "menu_order": 0,
+          "mime_type": "image/png",
+          "type": "image",
+          "subtype": "png",
+          "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+          "width": 1201,
+          "height": 1201,
+          "sizes": {
+            "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/02/1682@4x-150x150.png",
+            "thumbnail-width": 150,
+            "thumbnail-height": 150,
+            "medium": "http://www.o3world.com/wp-content/uploads/2025/02/1682@4x-640x640.png",
+            "medium-width": 640,
+            "medium-height": 640,
+            "medium_large": "http://www.o3world.com/wp-content/uploads/2025/02/1682@4x-768x768.png",
+            "medium_large-width": 768,
+            "medium_large-height": 768,
+            "large": "http://www.o3world.com/wp-content/uploads/2025/02/1682@4x-1024x1024.png",
+            "large-width": 1024,
+            "large-height": 1024,
+            "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/02/1682@4x.png",
+            "1536x1536-width": 1201,
+            "1536x1536-height": 1201,
+            "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/02/1682@4x.png",
+            "2048x2048-width": 1201,
+            "2048x2048-height": 1201,
+            "icon": "http://www.o3world.com/wp-content/uploads/2025/02/1682@4x-48x48.png",
+            "icon-width": 48,
+            "icon-height": 48,
+            "xlarge": "http://www.o3world.com/wp-content/uploads/2025/02/1682@4x.png",
+            "xlarge-width": 1201,
+            "xlarge-height": 1201,
+            "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/02/1682@4x.png",
+            "gform-image-choice-sm-width": 300,
+            "gform-image-choice-sm-height": 300,
+            "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/02/1682@4x.png",
+            "gform-image-choice-md-width": 400,
+            "gform-image-choice-md-height": 400,
+            "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/02/1682@4x.png",
+            "gform-image-choice-lg-width": 600,
+            "gform-image-choice-lg-height": 600
+          }
+        },
+        "header_background_icon": {
+          "value": "5756",
+          "image": "5756"
+        }
+      }
+    ],
+    "flexible_content": [
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Upcoming events",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "",
+          "kicker_tag": "div",
+          "title": "Events",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": "Potential description"
+        },
+        "introduction_link": "",
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-9633\" src=\"https://www.o3world.com/wp-content/uploads/2025/04/conference.png\" alt=\"red circle with black icon UX UI\" width=\"80\" height=\"80\" /></h4>\n<h4>1682 conference:<br />\nOctober 7, 2026</h4>\n<p class=\"small\">Held at the Barnes Foundation. <a href=\"https://www.tickettailor.com/events/o31/2030171\">Join O3 for a day</a> built around one question: what&#8217;s actually shipping with AI. Expect venture pitches, fireside chats on budgets and adoption, and a closing look at the agentic workflow, capped with a cocktail reception on the Annenberg terrace.</p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-9633\" src=\"https://www.o3world.com/wp-content/uploads/2025/04/1682summersesh.png&quot;\" alt=\"red circle with black icon CRO\" width=\"80\" height=\"80\" /></h4>\n<h4>1682 summer session:<br />\nJune 5, 2025</h4>\n<p class=\"small\"><a href=\"https://www.tickettailor.com/events/o31/1642744\">Held at the Comcast Center</a> for an energizing half-day of conversations on how companies design, scale, and evaluate innovation programs. We dug into strategy, structure, and success metrics that matter.</p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-9633\" src=\"https://www.o3world.com/wp-content/uploads/2025/04/leaders-mixer.png\" alt=\"red circle with black icon marketing automation\" width=\"80\" height=\"80\" /></h4>\n<h4>Innovation leaders mixer:<br />\nSeptember 25, 2025</h4>\n<p class=\"small\">Held at our HQ in Fishtown, O3 hosted an invite-only evening for 30 executives, founders, and changemakers. The night brought powerful connections and thought-provoking dialogue in an intimate setting.</p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-9633\" src=\"https://www.o3world.com/wp-content/uploads/2025/04/conference.png\" alt=\"red circle with black icon UX UI\" width=\"80\" height=\"80\" /></h4>\n<h4>1682 conference:<br />\nOctober 8, 2025</h4>\n<p class=\"small\">Held at the Barnes Foundation, <a href=\"https://www.tickettailor.com/events/o31/1640631\">O3&#8217;s day-long flagship</a> brought senior leaders together to explore the real-world application of AI. The day featured curated programming, private museum access, and an elevated evening reception on the outdoor terrace.</p>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Multiple Columns",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "ABOUT 1682",
+          "kicker_tag": "div",
+          "title": "Shaping the future of AI + innovation",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": "",
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "image",
+                "image": {
+                  "ID": 9618,
+                  "id": 9618,
+                  "title": "1682inaction",
+                  "filename": "1682inaction.png",
+                  "filesize": 747434,
+                  "url": "http://www.o3world.com/wp-content/uploads/2025/02/1682inaction.png",
+                  "link": "http://www.o3world.com/solutions/1682inaction/",
+                  "alt": "photo of april walker leading a panel from 1682",
+                  "author": "16",
+                  "description": "",
+                  "caption": "",
+                  "name": "1682inaction",
+                  "status": "inherit",
+                  "uploaded_to": 9447,
+                  "date": "2025-02-12 23:34:28",
+                  "modified": "2025-02-12 23:34:51",
+                  "menu_order": 0,
+                  "mime_type": "image/png",
+                  "type": "image",
+                  "subtype": "png",
+                  "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+                  "width": 901,
+                  "height": 901,
+                  "sizes": {
+                    "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/02/1682inaction-150x150.png",
+                    "thumbnail-width": 150,
+                    "thumbnail-height": 150,
+                    "medium": "http://www.o3world.com/wp-content/uploads/2025/02/1682inaction-640x640.png",
+                    "medium-width": 640,
+                    "medium-height": 640,
+                    "medium_large": "http://www.o3world.com/wp-content/uploads/2025/02/1682inaction-768x768.png",
+                    "medium_large-width": 768,
+                    "medium_large-height": 768,
+                    "large": "http://www.o3world.com/wp-content/uploads/2025/02/1682inaction.png",
+                    "large-width": 901,
+                    "large-height": 901,
+                    "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/02/1682inaction.png",
+                    "1536x1536-width": 901,
+                    "1536x1536-height": 901,
+                    "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/02/1682inaction.png",
+                    "2048x2048-width": 901,
+                    "2048x2048-height": 901,
+                    "icon": "http://www.o3world.com/wp-content/uploads/2025/02/1682inaction-48x48.png",
+                    "icon-width": 48,
+                    "icon-height": 48,
+                    "xlarge": "http://www.o3world.com/wp-content/uploads/2025/02/1682inaction.png",
+                    "xlarge-width": 901,
+                    "xlarge-height": 901,
+                    "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/02/1682inaction.png",
+                    "gform-image-choice-sm-width": 300,
+                    "gform-image-choice-sm-height": 300,
+                    "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/02/1682inaction.png",
+                    "gform-image-choice-md-width": 400,
+                    "gform-image-choice-md-height": 400,
+                    "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/02/1682inaction.png",
+                    "gform-image-choice-lg-width": 600,
+                    "gform-image-choice-lg-height": 600
+                  }
+                },
+                "image_size": "square"
+              },
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h5>HEAR FROM EXPERTS</h5>\n<h4 style=\"margin-top: 16px;\">Industry-leading thought leadership</h4>\n<p>Learn from global pioneers and industry experts as they break down complex challenges and uncover actionable strategies in AI and innovation.</p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "image",
+                "image": {
+                  "ID": 9793,
+                  "id": 9793,
+                  "title": "connection of innovators",
+                  "filename": "connection-of-innovators.png",
+                  "filesize": 745522,
+                  "url": "http://www.o3world.com/wp-content/uploads/2025/02/connection-of-innovators.png",
+                  "link": "http://www.o3world.com/1682-conference-ai-innovation/connection-of-innovators/",
+                  "alt": "photo from 1682 conference with yellow and white semi circles",
+                  "author": "16",
+                  "description": "",
+                  "caption": "",
+                  "name": "connection-of-innovators",
+                  "status": "inherit",
+                  "uploaded_to": 9545,
+                  "date": "2025-02-24 17:59:56",
+                  "modified": "2025-02-24 18:01:08",
+                  "menu_order": 0,
+                  "mime_type": "image/png",
+                  "type": "image",
+                  "subtype": "png",
+                  "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+                  "width": 901,
+                  "height": 901,
+                  "sizes": {
+                    "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/02/connection-of-innovators-150x150.png",
+                    "thumbnail-width": 150,
+                    "thumbnail-height": 150,
+                    "medium": "http://www.o3world.com/wp-content/uploads/2025/02/connection-of-innovators-640x640.png",
+                    "medium-width": 640,
+                    "medium-height": 640,
+                    "medium_large": "http://www.o3world.com/wp-content/uploads/2025/02/connection-of-innovators-768x768.png",
+                    "medium_large-width": 768,
+                    "medium_large-height": 768,
+                    "large": "http://www.o3world.com/wp-content/uploads/2025/02/connection-of-innovators.png",
+                    "large-width": 901,
+                    "large-height": 901,
+                    "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/02/connection-of-innovators.png",
+                    "1536x1536-width": 901,
+                    "1536x1536-height": 901,
+                    "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/02/connection-of-innovators.png",
+                    "2048x2048-width": 901,
+                    "2048x2048-height": 901,
+                    "icon": "http://www.o3world.com/wp-content/uploads/2025/02/connection-of-innovators-48x48.png",
+                    "icon-width": 48,
+                    "icon-height": 48,
+                    "xlarge": "http://www.o3world.com/wp-content/uploads/2025/02/connection-of-innovators.png",
+                    "xlarge-width": 901,
+                    "xlarge-height": 901,
+                    "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/02/connection-of-innovators.png",
+                    "gform-image-choice-sm-width": 300,
+                    "gform-image-choice-sm-height": 300,
+                    "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/02/connection-of-innovators.png",
+                    "gform-image-choice-md-width": 400,
+                    "gform-image-choice-md-height": 400,
+                    "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/02/connection-of-innovators.png",
+                    "gform-image-choice-lg-width": 600,
+                    "gform-image-choice-lg-height": 600
+                  }
+                },
+                "image_size": "square"
+              },
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h5>NETWORK WITH LEADERS</h5>\n<h4 style=\"margin-top: 16px;\">A global connection of innovators</h4>\n<p>Network with leaders from Fortune 500 companies, startups, and top organizations driving the future of business and technology.</p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "image",
+                "image": {
+                  "ID": 9792,
+                  "id": 9792,
+                  "title": "ongoing innovation",
+                  "filename": "ongoing-innovation.png",
+                  "filesize": 24103,
+                  "url": "http://www.o3world.com/wp-content/uploads/2025/02/ongoing-innovation.png",
+                  "link": "http://www.o3world.com/1682-conference-ai-innovation/ongoing-innovation/",
+                  "alt": "black graphic with white and blue semi circles and red dot representing ongoing innovation",
+                  "author": "16",
+                  "description": "",
+                  "caption": "",
+                  "name": "ongoing-innovation",
+                  "status": "inherit",
+                  "uploaded_to": 9545,
+                  "date": "2025-02-24 17:59:54",
+                  "modified": "2025-02-24 18:00:43",
+                  "menu_order": 0,
+                  "mime_type": "image/png",
+                  "type": "image",
+                  "subtype": "png",
+                  "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+                  "width": 901,
+                  "height": 901,
+                  "sizes": {
+                    "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/02/ongoing-innovation-150x150.png",
+                    "thumbnail-width": 150,
+                    "thumbnail-height": 150,
+                    "medium": "http://www.o3world.com/wp-content/uploads/2025/02/ongoing-innovation-640x640.png",
+                    "medium-width": 640,
+                    "medium-height": 640,
+                    "medium_large": "http://www.o3world.com/wp-content/uploads/2025/02/ongoing-innovation-768x768.png",
+                    "medium_large-width": 768,
+                    "medium_large-height": 768,
+                    "large": "http://www.o3world.com/wp-content/uploads/2025/02/ongoing-innovation.png",
+                    "large-width": 901,
+                    "large-height": 901,
+                    "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/02/ongoing-innovation.png",
+                    "1536x1536-width": 901,
+                    "1536x1536-height": 901,
+                    "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/02/ongoing-innovation.png",
+                    "2048x2048-width": 901,
+                    "2048x2048-height": 901,
+                    "icon": "http://www.o3world.com/wp-content/uploads/2025/02/ongoing-innovation-48x48.png",
+                    "icon-width": 48,
+                    "icon-height": 48,
+                    "xlarge": "http://www.o3world.com/wp-content/uploads/2025/02/ongoing-innovation.png",
+                    "xlarge-width": 901,
+                    "xlarge-height": 901,
+                    "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/02/ongoing-innovation.png",
+                    "gform-image-choice-sm-width": 300,
+                    "gform-image-choice-sm-height": 300,
+                    "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/02/ongoing-innovation.png",
+                    "gform-image-choice-md-width": 400,
+                    "gform-image-choice-md-height": 400,
+                    "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/02/ongoing-innovation.png",
+                    "gform-image-choice-lg-width": 600,
+                    "gform-image-choice-lg-height": 600
+                  }
+                },
+                "image_size": "square"
+              },
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h5>CONTINUAL INNOVATION</h5>\n<h4 style=\"margin-top: 16px;\">Ongoing innovation journey</h4>\n<p>Our year-round thought leadership series keeps the momentum of 1682 alive with fresh insights and practical tools for transformative change.</p>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "video",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Video",
+        "video_type": "file",
+        "video_style": "standard",
+        "video_file": {
+          "ID": 9293,
+          "id": 9293,
+          "title": "1682 recap video",
+          "filename": "o3_recap_v2-720p.mp4",
+          "filesize": 26315042,
+          "url": "http://www.o3world.com/wp-content/uploads/2024/10/o3_recap_v2-720p.mp4",
+          "link": "http://www.o3world.com/perspectives/1682-conference-recap-unveiling-ais-realities-and-innovation-insights/o3_recap_v2-720p/",
+          "alt": "",
+          "author": "16",
+          "description": "",
+          "caption": "",
+          "name": "o3_recap_v2-720p",
+          "status": "inherit",
+          "uploaded_to": 9224,
+          "date": "2024-10-23 13:47:44",
+          "modified": "2025-02-24 22:38:31",
+          "menu_order": 0,
+          "mime_type": "video/mp4",
+          "type": "video",
+          "subtype": "mp4",
+          "icon": "https://www.o3world.com/wp-includes/images/media/video.png",
+          "width": 1280,
+          "height": 720
+        },
+        "external_url": null
+      },
+      {
+        "acf_fc_layout": "insights_feed",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Insights Feed",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "PERSPECTIVES",
+          "kicker_tag": "div",
+          "title": "Expert insights driving impactful solutions",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": "Client Name | Title, Company"
+        },
+        "introduction_link": {
+          "title": "More Perspectives",
+          "url": "https://live-o3-world.pantheonsite.io/perspectives/",
+          "target": ""
+        },
+        "list_type": "select",
+        "select_insights": [
+          9224,
+          9343,
+          9299
+        ]
+      },
+      {
+        "acf_fc_layout": "page_callout",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Page Callout",
+        "image": {
+          "ID": 5472,
+          "id": 5472,
+          "title": "",
+          "filename": "Open-Circle-Corner.png",
+          "filesize": 14518,
+          "url": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner.png",
+          "link": "http://www.o3world.com/?attachment_id=5472",
+          "alt": "red box with white semi circle",
+          "author": "16",
+          "description": "",
+          "caption": "",
+          "name": "open-circle-corner-2",
+          "status": "inherit",
+          "uploaded_to": 2,
+          "date": "2022-10-09 19:43:53",
+          "modified": "2025-02-24 17:41:54",
+          "menu_order": 0,
+          "mime_type": "image/png",
+          "type": "image",
+          "subtype": "png",
+          "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+          "width": 960,
+          "height": 960,
+          "sizes": {
+            "thumbnail": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner-150x150.png",
+            "thumbnail-width": 150,
+            "thumbnail-height": 150,
+            "medium": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner-640x640.png",
+            "medium-width": 640,
+            "medium-height": 640,
+            "medium_large": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner-768x768.png",
+            "medium_large-width": 768,
+            "medium_large-height": 768,
+            "large": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner.png",
+            "large-width": 960,
+            "large-height": 960,
+            "1536x1536": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner.png",
+            "1536x1536-width": 960,
+            "1536x1536-height": 960,
+            "2048x2048": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner.png",
+            "2048x2048-width": 960,
+            "2048x2048-height": 960,
+            "icon": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner-48x48.png",
+            "icon-width": 48,
+            "icon-height": 48,
+            "xlarge": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner.png",
+            "xlarge-width": 960,
+            "xlarge-height": 960,
+            "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner.png",
+            "gform-image-choice-sm-width": 300,
+            "gform-image-choice-sm-height": 300,
+            "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner.png",
+            "gform-image-choice-md-width": 400,
+            "gform-image-choice-md-height": 400,
+            "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2022/10/Open-Circle-Corner.png",
+            "gform-image-choice-lg-width": 600,
+            "gform-image-choice-lg-height": 600
+          }
+        },
+        "content": [
+          {
+            "acf_fc_layout": "title",
+            "kicker": "Contact us",
+            "kicker_tag": "div",
+            "title": "Let’s explore your future in AI and innovation",
+            "heading_level": "h2",
+            "heading_tag": "div",
+            "add_description": true,
+            "description": "Discover how the insights and connections from 1682 can transform your business. Reach out to learn more."
+          },
+          {
+            "acf_fc_layout": "button",
+            "button": {
+              "title": "Get in touch",
+              "url": "https://www.o3world.com/contact/",
+              "target": ""
+            },
+            "button_label": "",
+            "button_style": "blue"
+          }
+        ]
+      }
+    ]
+  }
+}

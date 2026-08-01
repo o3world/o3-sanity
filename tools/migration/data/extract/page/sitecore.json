@@ -1,0 +1,354 @@
+{
+  "_meta": {
+    "type": "page",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T02:45:52.024Z"
+  },
+  "wpId": 6370,
+  "slug": "sitecore",
+  "path": "/sitecore/",
+  "title": "O3 + Sitecore",
+  "parentSlug": null,
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "O3 + Sitecore | O3",
+    "descriptionOverride": "O3 is a trusted and certified Sitecore associate tier partner ready to help you create the best digital experiences.",
+    "descriptionRendered": "O3 is a trusted and certified Sitecore associate tier partner ready to help you create the best digital experiences.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/sitecore/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "page_header": [
+      {
+        "acf_fc_layout": "basic_header",
+        "page_title_content": [
+          {
+            "acf_fc_layout": "title",
+            "kicker": "Strategic Partners",
+            "kicker_tag": "div",
+            "title": "Create memorable digital experiences with O3 and sitecore",
+            "heading_level": "h1",
+            "heading_tag": "h1",
+            "add_description": false,
+            "description": ""
+          }
+        ],
+        "header_icon": {
+          "value": "None",
+          "image": "None"
+        },
+        "header_image": {
+          "ID": 6578,
+          "id": 6578,
+          "title": "",
+          "filename": "O3-website-imagery_-O3sitecore.png",
+          "filesize": 167456,
+          "url": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-O3sitecore.png",
+          "link": "http://www.o3world.com/sitecore/o3-website-imagery_-o3sitecore/",
+          "alt": "O3 and Sitecore logos.",
+          "author": "11",
+          "description": "",
+          "caption": "",
+          "name": "o3-website-imagery_-o3sitecore",
+          "status": "inherit",
+          "uploaded_to": 6370,
+          "date": "2023-01-27 20:07:59",
+          "modified": "2023-02-01 17:20:05",
+          "menu_order": 0,
+          "mime_type": "image/png",
+          "type": "image",
+          "subtype": "png",
+          "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+          "width": 2500,
+          "height": 2500,
+          "sizes": {
+            "thumbnail": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-O3sitecore-150x150.png",
+            "thumbnail-width": 150,
+            "thumbnail-height": 150,
+            "medium": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-O3sitecore-640x640.png",
+            "medium-width": 640,
+            "medium-height": 640,
+            "medium_large": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-O3sitecore-768x768.png",
+            "medium_large-width": 768,
+            "medium_large-height": 768,
+            "large": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-O3sitecore-1024x1024.png",
+            "large-width": 1024,
+            "large-height": 1024,
+            "1536x1536": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-O3sitecore-1536x1536.png",
+            "1536x1536-width": 1536,
+            "1536x1536-height": 1536,
+            "2048x2048": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-O3sitecore-2048x2048.png",
+            "2048x2048-width": 2048,
+            "2048x2048-height": 2048,
+            "icon": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-O3sitecore-48x48.png",
+            "icon-width": 48,
+            "icon-height": 48,
+            "xlarge": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-O3sitecore-1280x1280.png",
+            "xlarge-width": 1280,
+            "xlarge-height": 1280,
+            "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-O3sitecore.png",
+            "gform-image-choice-sm-width": 300,
+            "gform-image-choice-sm-height": 300,
+            "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-O3sitecore.png",
+            "gform-image-choice-md-width": 400,
+            "gform-image-choice-md-height": 400,
+            "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-O3sitecore.png",
+            "gform-image-choice-lg-width": 600,
+            "gform-image-choice-lg-height": 600
+          }
+        },
+        "header_background_icon": {
+          "value": "None",
+          "image": "None"
+        }
+      }
+    ],
+    "flexible_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>While O3 tirelessly works with you to strategize, design and create seamless customer interactions, Sitecore’s digital experience platform (DXP) provides the backbone to drive those experiences. Combining its best-in-class content management system with personalization and commerce engines, Sitecore can provide end-users with a flawless end-to-end journey.</p>\n<p>O3 is a trusted and certified Sitecore associate tier partner ready to help you create the best digital experiences.</p>\n<h3>Who is Sitecore?</h3>\n<p>Sitecore is a leading technology platform built for unifying content, experience, and commerce. The Sitecore composable DXP is a suite of products that empowers brands to deliver the experiences customers crave.</p>\n<h3>Why Sitecore and O3 make sense</h3>\n<p>Our expertise in CX combined with Sitecore&#8217;s DXP offering allows us to leverage their suite of products to deliver best-in-class customer experiences. With O3&#8217;s Sitecore MVP experience and team in place, we are ready to build digital experiences on the Sitecore platform. Some of Sitecore&#8217;s key features include the following:</p>\n"
+      },
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Multiple Columns",
+        "add_introduction": false,
+        "introduction": {
+          "": null,
+          "kicker": "",
+          "kicker_tag": false,
+          "title": "",
+          "heading_level": "h2",
+          "heading_tag": false,
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": null,
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "image",
+                "image": {
+                  "ID": 6372,
+                  "id": 6372,
+                  "title": "",
+                  "filename": "040721-CX-Journey-1-569x320-1.jpg",
+                  "filesize": 127839,
+                  "url": "http://www.o3world.com/wp-content/uploads/2023/01/040721-CX-Journey-1-569x320-1.jpg",
+                  "link": "http://www.o3world.com/sitecore/040721-cx-journey-1-569x320/",
+                  "alt": "User managing customer data on a digital platform.",
+                  "author": "4",
+                  "description": "",
+                  "caption": "",
+                  "name": "040721-cx-journey-1-569x320",
+                  "status": "inherit",
+                  "uploaded_to": 6370,
+                  "date": "2023-01-18 15:29:30",
+                  "modified": "2023-01-27 18:57:07",
+                  "menu_order": 0,
+                  "mime_type": "image/jpeg",
+                  "type": "image",
+                  "subtype": "jpeg",
+                  "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+                  "width": 569,
+                  "height": 320,
+                  "sizes": {
+                    "thumbnail": "http://www.o3world.com/wp-content/uploads/2023/01/040721-CX-Journey-1-569x320-1-150x150.jpg",
+                    "thumbnail-width": 150,
+                    "thumbnail-height": 150,
+                    "medium": "http://www.o3world.com/wp-content/uploads/2023/01/040721-CX-Journey-1-569x320-1.jpg",
+                    "medium-width": 569,
+                    "medium-height": 320,
+                    "medium_large": "http://www.o3world.com/wp-content/uploads/2023/01/040721-CX-Journey-1-569x320-1.jpg",
+                    "medium_large-width": 569,
+                    "medium_large-height": 320,
+                    "large": "http://www.o3world.com/wp-content/uploads/2023/01/040721-CX-Journey-1-569x320-1.jpg",
+                    "large-width": 569,
+                    "large-height": 320,
+                    "1536x1536": "http://www.o3world.com/wp-content/uploads/2023/01/040721-CX-Journey-1-569x320-1.jpg",
+                    "1536x1536-width": 569,
+                    "1536x1536-height": 320,
+                    "2048x2048": "http://www.o3world.com/wp-content/uploads/2023/01/040721-CX-Journey-1-569x320-1.jpg",
+                    "2048x2048-width": 569,
+                    "2048x2048-height": 320,
+                    "icon": "http://www.o3world.com/wp-content/uploads/2023/01/040721-CX-Journey-1-569x320-1-48x27.jpg",
+                    "icon-width": 48,
+                    "icon-height": 27,
+                    "xlarge": "http://www.o3world.com/wp-content/uploads/2023/01/040721-CX-Journey-1-569x320-1.jpg",
+                    "xlarge-width": 569,
+                    "xlarge-height": 320,
+                    "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2023/01/040721-CX-Journey-1-569x320-1.jpg",
+                    "gform-image-choice-sm-width": 300,
+                    "gform-image-choice-sm-height": 169,
+                    "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2023/01/040721-CX-Journey-1-569x320-1.jpg",
+                    "gform-image-choice-md-width": 400,
+                    "gform-image-choice-md-height": 225,
+                    "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2023/01/040721-CX-Journey-1-569x320-1.jpg",
+                    "gform-image-choice-lg-width": 569,
+                    "gform-image-choice-lg-height": 320
+                  }
+                },
+                "image_size": "inherit"
+              },
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4>Customer data platform</h4>\n<p>Solve the challenge of capturing, unifying, optimizing, and activating omnichannel customer data.</p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "image",
+                "image": {
+                  "ID": 6373,
+                  "id": 6373,
+                  "title": "",
+                  "filename": "Uphold-569x320-1.jpg",
+                  "filesize": 129758,
+                  "url": "http://www.o3world.com/wp-content/uploads/2023/01/Uphold-569x320-1.jpg",
+                  "link": "http://www.o3world.com/sitecore/uphold-569x320/",
+                  "alt": "",
+                  "author": "4",
+                  "description": "",
+                  "caption": "",
+                  "name": "uphold-569x320",
+                  "status": "inherit",
+                  "uploaded_to": 6370,
+                  "date": "2023-01-18 15:29:31",
+                  "modified": "2023-02-01 17:58:14",
+                  "menu_order": 0,
+                  "mime_type": "image/jpeg",
+                  "type": "image",
+                  "subtype": "jpeg",
+                  "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+                  "width": 569,
+                  "height": 320,
+                  "sizes": {
+                    "thumbnail": "http://www.o3world.com/wp-content/uploads/2023/01/Uphold-569x320-1-150x150.jpg",
+                    "thumbnail-width": 150,
+                    "thumbnail-height": 150,
+                    "medium": "http://www.o3world.com/wp-content/uploads/2023/01/Uphold-569x320-1.jpg",
+                    "medium-width": 569,
+                    "medium-height": 320,
+                    "medium_large": "http://www.o3world.com/wp-content/uploads/2023/01/Uphold-569x320-1.jpg",
+                    "medium_large-width": 569,
+                    "medium_large-height": 320,
+                    "large": "http://www.o3world.com/wp-content/uploads/2023/01/Uphold-569x320-1.jpg",
+                    "large-width": 569,
+                    "large-height": 320,
+                    "1536x1536": "http://www.o3world.com/wp-content/uploads/2023/01/Uphold-569x320-1.jpg",
+                    "1536x1536-width": 569,
+                    "1536x1536-height": 320,
+                    "2048x2048": "http://www.o3world.com/wp-content/uploads/2023/01/Uphold-569x320-1.jpg",
+                    "2048x2048-width": 569,
+                    "2048x2048-height": 320,
+                    "icon": "http://www.o3world.com/wp-content/uploads/2023/01/Uphold-569x320-1-48x27.jpg",
+                    "icon-width": 48,
+                    "icon-height": 27,
+                    "xlarge": "http://www.o3world.com/wp-content/uploads/2023/01/Uphold-569x320-1.jpg",
+                    "xlarge-width": 569,
+                    "xlarge-height": 320,
+                    "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2023/01/Uphold-569x320-1.jpg",
+                    "gform-image-choice-sm-width": 300,
+                    "gform-image-choice-sm-height": 169,
+                    "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2023/01/Uphold-569x320-1.jpg",
+                    "gform-image-choice-md-width": 400,
+                    "gform-image-choice-md-height": 225,
+                    "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2023/01/Uphold-569x320-1.jpg",
+                    "gform-image-choice-lg-width": 569,
+                    "gform-image-choice-lg-height": 320
+                  }
+                },
+                "image_size": "inherit"
+              },
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4>Content personalization</h4>\n<p>Increase engagement, improve satisfaction, and drive business goals with hyper-relevant, personalized content.</p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "image",
+                "image": {
+                  "ID": 6374,
+                  "id": 6374,
+                  "title": "",
+                  "filename": "O3World-News-Post-Coversational-Experience-UX-Booth-2400x1350-1-569x320-1.jpg",
+                  "filesize": 132193,
+                  "url": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Coversational-Experience-UX-Booth-2400x1350-1-569x320-1.jpg",
+                  "link": "http://www.o3world.com/sitecore/o3world-news-post-coversational-experience-ux-booth-2400x1350-1-569x320/",
+                  "alt": "A customer service chatbot interaction.",
+                  "author": "4",
+                  "description": "",
+                  "caption": "",
+                  "name": "o3world-news-post-coversational-experience-ux-booth-2400x1350-1-569x320",
+                  "status": "inherit",
+                  "uploaded_to": 6370,
+                  "date": "2023-01-18 15:29:31",
+                  "modified": "2023-01-27 18:50:33",
+                  "menu_order": 0,
+                  "mime_type": "image/jpeg",
+                  "type": "image",
+                  "subtype": "jpeg",
+                  "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+                  "width": 569,
+                  "height": 320,
+                  "sizes": {
+                    "thumbnail": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Coversational-Experience-UX-Booth-2400x1350-1-569x320-1-150x150.jpg",
+                    "thumbnail-width": 150,
+                    "thumbnail-height": 150,
+                    "medium": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Coversational-Experience-UX-Booth-2400x1350-1-569x320-1.jpg",
+                    "medium-width": 569,
+                    "medium-height": 320,
+                    "medium_large": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Coversational-Experience-UX-Booth-2400x1350-1-569x320-1.jpg",
+                    "medium_large-width": 569,
+                    "medium_large-height": 320,
+                    "large": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Coversational-Experience-UX-Booth-2400x1350-1-569x320-1.jpg",
+                    "large-width": 569,
+                    "large-height": 320,
+                    "1536x1536": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Coversational-Experience-UX-Booth-2400x1350-1-569x320-1.jpg",
+                    "1536x1536-width": 569,
+                    "1536x1536-height": 320,
+                    "2048x2048": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Coversational-Experience-UX-Booth-2400x1350-1-569x320-1.jpg",
+                    "2048x2048-width": 569,
+                    "2048x2048-height": 320,
+                    "icon": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Coversational-Experience-UX-Booth-2400x1350-1-569x320-1-48x27.jpg",
+                    "icon-width": 48,
+                    "icon-height": 27,
+                    "xlarge": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Coversational-Experience-UX-Booth-2400x1350-1-569x320-1.jpg",
+                    "xlarge-width": 569,
+                    "xlarge-height": 320,
+                    "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Coversational-Experience-UX-Booth-2400x1350-1-569x320-1.jpg",
+                    "gform-image-choice-sm-width": 300,
+                    "gform-image-choice-sm-height": 169,
+                    "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Coversational-Experience-UX-Booth-2400x1350-1-569x320-1.jpg",
+                    "gform-image-choice-md-width": 400,
+                    "gform-image-choice-md-height": 225,
+                    "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Coversational-Experience-UX-Booth-2400x1350-1-569x320-1.jpg",
+                    "gform-image-choice-lg-width": 569,
+                    "gform-image-choice-lg-height": 320
+                  }
+                },
+                "image_size": "inherit"
+              },
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4>Experience platform</h4>\n<p>With customer data, analytics, AI, marketing automation, and more, Sitecore XP is your digital marketing hub.</p>\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

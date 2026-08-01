@@ -1,0 +1,471 @@
+{
+  "_meta": {
+    "type": "page",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T02:45:52.025Z"
+  },
+  "wpId": 6383,
+  "slug": "acquia-o3",
+  "path": "/acquia-o3/",
+  "title": "Acquia + O3",
+  "parentSlug": null,
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Acquia + O3 | O3",
+    "descriptionOverride": "Learn how our Drupal Agency combines expert strategy and design with Acquia's technology for unmatched results.",
+    "descriptionRendered": "Learn how our Drupal Agency combines expert strategy and design with Acquia's technology for unmatched results.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/acquia-o3/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "page_header": [
+      {
+        "acf_fc_layout": "basic_header",
+        "page_title_content": [
+          {
+            "acf_fc_layout": "title",
+            "kicker": "Better together",
+            "kicker_tag": "div",
+            "title": "O3 is a proud partner of Acquia",
+            "heading_level": "h1",
+            "heading_tag": "h2",
+            "add_description": false,
+            "description": ""
+          }
+        ],
+        "header_icon": {
+          "value": "None",
+          "image": "None"
+        },
+        "header_image": {
+          "ID": 6589,
+          "id": 6589,
+          "title": "",
+          "filename": "O3-website-imagery_-Insights-2.png",
+          "filesize": 158043,
+          "url": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights-2.png",
+          "link": "http://www.o3world.com/acquia-o3/o3-website-imagery_-insights-22/",
+          "alt": "O3 and Acquia logos.",
+          "author": "11",
+          "description": "",
+          "caption": "",
+          "name": "o3-website-imagery_-insights-22",
+          "status": "inherit",
+          "uploaded_to": 6383,
+          "date": "2023-01-27 21:31:20",
+          "modified": "2023-02-01 17:19:57",
+          "menu_order": 0,
+          "mime_type": "image/png",
+          "type": "image",
+          "subtype": "png",
+          "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+          "width": 2500,
+          "height": 2500,
+          "sizes": {
+            "thumbnail": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights-2-150x150.png",
+            "thumbnail-width": 150,
+            "thumbnail-height": 150,
+            "medium": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights-2-640x640.png",
+            "medium-width": 640,
+            "medium-height": 640,
+            "medium_large": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights-2-768x768.png",
+            "medium_large-width": 768,
+            "medium_large-height": 768,
+            "large": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights-2-1024x1024.png",
+            "large-width": 1024,
+            "large-height": 1024,
+            "1536x1536": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights-2-1536x1536.png",
+            "1536x1536-width": 1536,
+            "1536x1536-height": 1536,
+            "2048x2048": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights-2-2048x2048.png",
+            "2048x2048-width": 2048,
+            "2048x2048-height": 2048,
+            "icon": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights-2-48x48.png",
+            "icon-width": 48,
+            "icon-height": 48,
+            "xlarge": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights-2-1280x1280.png",
+            "xlarge-width": 1280,
+            "xlarge-height": 1280,
+            "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights-2.png",
+            "gform-image-choice-sm-width": 300,
+            "gform-image-choice-sm-height": 300,
+            "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights-2.png",
+            "gform-image-choice-md-width": 400,
+            "gform-image-choice-md-height": 400,
+            "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights-2.png",
+            "gform-image-choice-lg-width": 600,
+            "gform-image-choice-lg-height": 600
+          }
+        },
+        "header_background_icon": {
+          "value": "None",
+          "image": "None"
+        }
+      }
+    ],
+    "flexible_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Better together</h3>\n<p>Some things are just better together; chocolate and peanut butter, Jordan and Pippen, pizza and a second pizza…but now we have the best combination ever, O3 and Acquia. Combining O3’s deep history of customer and employee experience strategy, design and Drupal development with Acquia’s powerful technology platform we’ve created an incredible opportunity for our partners. Acquia provides us the tools and technology to create mind-blowing solutions for our partners with some of the most powerful and secure products in today’s market.</p>\n<p>While O3 tirelessly works with you to strategize, design and create those seamless customer interactions, Acquia’s Drupal Cloud is cutting-edge technologies designed to automatically scale and accommodate the most demanding events, like new product launches, massive email campaigns, viral social media mentions and much more. This assurance reduces the pressure on your IT department to be the central point of delivery.</p>\n<p>The Acquia CDP product allows customer data to flow into one central location. This rich data is a goldmine for O3’s strategic team, enabling us to explore many things including content personalization, onsite behavior, customer cohorts and more. For highly-regulated industries like financial technology, insurance technology and medical technology, Acquia’s community focus and O3’s experience means that compliance, accessibility, and security needs are accounted for throughout the system from day 1.</p>\n<p>Whether you’re using the robust suite of Acquia Marketing Cloud products or integrating select tools, Acquia makes it easy to facilitate O3’s customer experience programs across all of your touchpoints. Together, Acquia and O3 are committed to continually finding ways to ideate, craft, build and launch the most compelling customer experiences for your brand.</p>\n<p>O3 is a trusted and certified Acquia Bronze partner ready to help you create the best digital experiences.</p>\n<h3>Who is Acquia?</h3>\n<p>Consistently among the leaders in the Gartner Magic Quadrant and Forrester Wave reports, Acquia eliminates data silos to accelerate digital transformation and deliver complete experiences that engage, convert, and drive results in every channel. As Acquia continues its growth pattern, including the acquisition of products such as Widen, they constantly show that they are an innovative leader in the space. O3 is happy to align ourselves with a powerful and innovative platform company like Acquia.</p>\n<h3>Why Acquia and O3 make sense</h3>\n<p>Our expertise in customer experience and Drupal’s CMS technology allows us to leverage the cloud, the community-built open-source modules and custom development to rapidly create easy-to-maintain, scalable websites and portals that drive business value. Acquia guarantees performance, security, and governance no matter the scale of the digital experience. Together, we can get you up and running in very little time, or make major changes or updates with little to no impact on your current site and business. Their product suite includes the following.</p>\n"
+      },
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Multiple Columns",
+        "add_introduction": false,
+        "introduction": {
+          "": null,
+          "kicker": "",
+          "kicker_tag": false,
+          "title": "",
+          "heading_level": "h2",
+          "heading_tag": false,
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": null,
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "image",
+                "image": {
+                  "ID": 6372,
+                  "id": 6372,
+                  "title": "",
+                  "filename": "040721-CX-Journey-1-569x320-1.jpg",
+                  "filesize": 127839,
+                  "url": "http://www.o3world.com/wp-content/uploads/2023/01/040721-CX-Journey-1-569x320-1.jpg",
+                  "link": "http://www.o3world.com/sitecore/040721-cx-journey-1-569x320/",
+                  "alt": "User managing customer data on a digital platform.",
+                  "author": "4",
+                  "description": "",
+                  "caption": "",
+                  "name": "040721-cx-journey-1-569x320",
+                  "status": "inherit",
+                  "uploaded_to": 6370,
+                  "date": "2023-01-18 15:29:30",
+                  "modified": "2023-01-27 18:57:07",
+                  "menu_order": 0,
+                  "mime_type": "image/jpeg",
+                  "type": "image",
+                  "subtype": "jpeg",
+                  "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+                  "width": 569,
+                  "height": 320,
+                  "sizes": {
+                    "thumbnail": "http://www.o3world.com/wp-content/uploads/2023/01/040721-CX-Journey-1-569x320-1-150x150.jpg",
+                    "thumbnail-width": 150,
+                    "thumbnail-height": 150,
+                    "medium": "http://www.o3world.com/wp-content/uploads/2023/01/040721-CX-Journey-1-569x320-1.jpg",
+                    "medium-width": 569,
+                    "medium-height": 320,
+                    "medium_large": "http://www.o3world.com/wp-content/uploads/2023/01/040721-CX-Journey-1-569x320-1.jpg",
+                    "medium_large-width": 569,
+                    "medium_large-height": 320,
+                    "large": "http://www.o3world.com/wp-content/uploads/2023/01/040721-CX-Journey-1-569x320-1.jpg",
+                    "large-width": 569,
+                    "large-height": 320,
+                    "1536x1536": "http://www.o3world.com/wp-content/uploads/2023/01/040721-CX-Journey-1-569x320-1.jpg",
+                    "1536x1536-width": 569,
+                    "1536x1536-height": 320,
+                    "2048x2048": "http://www.o3world.com/wp-content/uploads/2023/01/040721-CX-Journey-1-569x320-1.jpg",
+                    "2048x2048-width": 569,
+                    "2048x2048-height": 320,
+                    "icon": "http://www.o3world.com/wp-content/uploads/2023/01/040721-CX-Journey-1-569x320-1-48x27.jpg",
+                    "icon-width": 48,
+                    "icon-height": 27,
+                    "xlarge": "http://www.o3world.com/wp-content/uploads/2023/01/040721-CX-Journey-1-569x320-1.jpg",
+                    "xlarge-width": 569,
+                    "xlarge-height": 320,
+                    "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2023/01/040721-CX-Journey-1-569x320-1.jpg",
+                    "gform-image-choice-sm-width": 300,
+                    "gform-image-choice-sm-height": 169,
+                    "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2023/01/040721-CX-Journey-1-569x320-1.jpg",
+                    "gform-image-choice-md-width": 400,
+                    "gform-image-choice-md-height": 225,
+                    "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2023/01/040721-CX-Journey-1-569x320-1.jpg",
+                    "gform-image-choice-lg-width": 569,
+                    "gform-image-choice-lg-height": 320
+                  }
+                },
+                "image_size": "inherit"
+              },
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4><a href=\"https://www.acquia.com/products/drupal-cloud/cloud-platform?utm_source=o3world&amp;utm_medium=Website&amp;utm_campaign=NA_o3_microsite_2022&amp;utm_content=7016g0000020tRxAAI&amp;utm_term=o3_microsite\">Acquia cloud platform</a></h4>\n<p>Manage your site on a Drupal-tuned cloud, supported by a team of Drupal experts. Easy setup, secure hosting environment and scalable systems that power enterprise businesses and seamless customer experiences.</p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "image",
+                "image": {
+                  "ID": 6373,
+                  "id": 6373,
+                  "title": "",
+                  "filename": "Uphold-569x320-1.jpg",
+                  "filesize": 129758,
+                  "url": "http://www.o3world.com/wp-content/uploads/2023/01/Uphold-569x320-1.jpg",
+                  "link": "http://www.o3world.com/sitecore/uphold-569x320/",
+                  "alt": "",
+                  "author": "4",
+                  "description": "",
+                  "caption": "",
+                  "name": "uphold-569x320",
+                  "status": "inherit",
+                  "uploaded_to": 6370,
+                  "date": "2023-01-18 15:29:31",
+                  "modified": "2023-02-01 17:58:14",
+                  "menu_order": 0,
+                  "mime_type": "image/jpeg",
+                  "type": "image",
+                  "subtype": "jpeg",
+                  "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+                  "width": 569,
+                  "height": 320,
+                  "sizes": {
+                    "thumbnail": "http://www.o3world.com/wp-content/uploads/2023/01/Uphold-569x320-1-150x150.jpg",
+                    "thumbnail-width": 150,
+                    "thumbnail-height": 150,
+                    "medium": "http://www.o3world.com/wp-content/uploads/2023/01/Uphold-569x320-1.jpg",
+                    "medium-width": 569,
+                    "medium-height": 320,
+                    "medium_large": "http://www.o3world.com/wp-content/uploads/2023/01/Uphold-569x320-1.jpg",
+                    "medium_large-width": 569,
+                    "medium_large-height": 320,
+                    "large": "http://www.o3world.com/wp-content/uploads/2023/01/Uphold-569x320-1.jpg",
+                    "large-width": 569,
+                    "large-height": 320,
+                    "1536x1536": "http://www.o3world.com/wp-content/uploads/2023/01/Uphold-569x320-1.jpg",
+                    "1536x1536-width": 569,
+                    "1536x1536-height": 320,
+                    "2048x2048": "http://www.o3world.com/wp-content/uploads/2023/01/Uphold-569x320-1.jpg",
+                    "2048x2048-width": 569,
+                    "2048x2048-height": 320,
+                    "icon": "http://www.o3world.com/wp-content/uploads/2023/01/Uphold-569x320-1-48x27.jpg",
+                    "icon-width": 48,
+                    "icon-height": 27,
+                    "xlarge": "http://www.o3world.com/wp-content/uploads/2023/01/Uphold-569x320-1.jpg",
+                    "xlarge-width": 569,
+                    "xlarge-height": 320,
+                    "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2023/01/Uphold-569x320-1.jpg",
+                    "gform-image-choice-sm-width": 300,
+                    "gform-image-choice-sm-height": 169,
+                    "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2023/01/Uphold-569x320-1.jpg",
+                    "gform-image-choice-md-width": 400,
+                    "gform-image-choice-md-height": 225,
+                    "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2023/01/Uphold-569x320-1.jpg",
+                    "gform-image-choice-lg-width": 569,
+                    "gform-image-choice-lg-height": 320
+                  }
+                },
+                "image_size": "inherit"
+              },
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4><a href=\"https://www.acquia.com/why-acquia/content-management-powered-by-drupal?utm_source=o3world&amp;utm_medium=Website&amp;utm_campaign=NA_o3_microsite_2022&amp;utm_content=7016g0000020tRxAAI&amp;utm_term=o3_microsite\">Drupal CMS</a></h4>\n<p>Enhance Drupal and empower your agile marketing team to move faster, without coders.</p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "image",
+                "image": {
+                  "ID": 6374,
+                  "id": 6374,
+                  "title": "",
+                  "filename": "O3World-News-Post-Coversational-Experience-UX-Booth-2400x1350-1-569x320-1.jpg",
+                  "filesize": 132193,
+                  "url": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Coversational-Experience-UX-Booth-2400x1350-1-569x320-1.jpg",
+                  "link": "http://www.o3world.com/sitecore/o3world-news-post-coversational-experience-ux-booth-2400x1350-1-569x320/",
+                  "alt": "A customer service chatbot interaction.",
+                  "author": "4",
+                  "description": "",
+                  "caption": "",
+                  "name": "o3world-news-post-coversational-experience-ux-booth-2400x1350-1-569x320",
+                  "status": "inherit",
+                  "uploaded_to": 6370,
+                  "date": "2023-01-18 15:29:31",
+                  "modified": "2023-01-27 18:50:33",
+                  "menu_order": 0,
+                  "mime_type": "image/jpeg",
+                  "type": "image",
+                  "subtype": "jpeg",
+                  "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+                  "width": 569,
+                  "height": 320,
+                  "sizes": {
+                    "thumbnail": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Coversational-Experience-UX-Booth-2400x1350-1-569x320-1-150x150.jpg",
+                    "thumbnail-width": 150,
+                    "thumbnail-height": 150,
+                    "medium": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Coversational-Experience-UX-Booth-2400x1350-1-569x320-1.jpg",
+                    "medium-width": 569,
+                    "medium-height": 320,
+                    "medium_large": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Coversational-Experience-UX-Booth-2400x1350-1-569x320-1.jpg",
+                    "medium_large-width": 569,
+                    "medium_large-height": 320,
+                    "large": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Coversational-Experience-UX-Booth-2400x1350-1-569x320-1.jpg",
+                    "large-width": 569,
+                    "large-height": 320,
+                    "1536x1536": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Coversational-Experience-UX-Booth-2400x1350-1-569x320-1.jpg",
+                    "1536x1536-width": 569,
+                    "1536x1536-height": 320,
+                    "2048x2048": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Coversational-Experience-UX-Booth-2400x1350-1-569x320-1.jpg",
+                    "2048x2048-width": 569,
+                    "2048x2048-height": 320,
+                    "icon": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Coversational-Experience-UX-Booth-2400x1350-1-569x320-1-48x27.jpg",
+                    "icon-width": 48,
+                    "icon-height": 27,
+                    "xlarge": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Coversational-Experience-UX-Booth-2400x1350-1-569x320-1.jpg",
+                    "xlarge-width": 569,
+                    "xlarge-height": 320,
+                    "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Coversational-Experience-UX-Booth-2400x1350-1-569x320-1.jpg",
+                    "gform-image-choice-sm-width": 300,
+                    "gform-image-choice-sm-height": 169,
+                    "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Coversational-Experience-UX-Booth-2400x1350-1-569x320-1.jpg",
+                    "gform-image-choice-md-width": 400,
+                    "gform-image-choice-md-height": 225,
+                    "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Coversational-Experience-UX-Booth-2400x1350-1-569x320-1.jpg",
+                    "gform-image-choice-lg-width": 569,
+                    "gform-image-choice-lg-height": 320
+                  }
+                },
+                "image_size": "inherit"
+              },
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4><a href=\"https://www.acquia.com/products/drupal-cloud/site-factory?utm_source=o3world&amp;utm_medium=Website&amp;utm_campaign=NA_o3_microsite_2022&amp;utm_content=7016g0000020tRxAAI&amp;utm_term=o3_microsite\">Acquia site factory</a></h4>\n<p>Deliver dozens or even hundreds of sites on a single platform, with cohesive governance and ongoing maintenance. It’s the best multi-site management solution to build, govern, run and enhance a portfolio of digital experiences.</p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "image",
+                "image": {
+                  "ID": 6385,
+                  "id": 6385,
+                  "title": "",
+                  "filename": "O3World-News-Post-Open-and-Operating-2400x1350-1-569x320-1.jpg",
+                  "filesize": 179706,
+                  "url": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Open-and-Operating-2400x1350-1-569x320-1.jpg",
+                  "link": "http://www.o3world.com/acquia-o3/o3world-news-post-open-and-operating-2400x1350-1-569x320-1/",
+                  "alt": "Hand interacting with an automated customer service on smartphone.",
+                  "author": "4",
+                  "description": "",
+                  "caption": "",
+                  "name": "o3world-news-post-open-and-operating-2400x1350-1-569x320-1",
+                  "status": "inherit",
+                  "uploaded_to": 6383,
+                  "date": "2023-01-18 21:55:37",
+                  "modified": "2023-01-27 18:45:41",
+                  "menu_order": 0,
+                  "mime_type": "image/jpeg",
+                  "type": "image",
+                  "subtype": "jpeg",
+                  "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+                  "width": 569,
+                  "height": 320,
+                  "sizes": {
+                    "thumbnail": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Open-and-Operating-2400x1350-1-569x320-1-150x150.jpg",
+                    "thumbnail-width": 150,
+                    "thumbnail-height": 150,
+                    "medium": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Open-and-Operating-2400x1350-1-569x320-1.jpg",
+                    "medium-width": 569,
+                    "medium-height": 320,
+                    "medium_large": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Open-and-Operating-2400x1350-1-569x320-1.jpg",
+                    "medium_large-width": 569,
+                    "medium_large-height": 320,
+                    "large": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Open-and-Operating-2400x1350-1-569x320-1.jpg",
+                    "large-width": 569,
+                    "large-height": 320,
+                    "1536x1536": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Open-and-Operating-2400x1350-1-569x320-1.jpg",
+                    "1536x1536-width": 569,
+                    "1536x1536-height": 320,
+                    "2048x2048": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Open-and-Operating-2400x1350-1-569x320-1.jpg",
+                    "2048x2048-width": 569,
+                    "2048x2048-height": 320,
+                    "icon": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Open-and-Operating-2400x1350-1-569x320-1-48x27.jpg",
+                    "icon-width": 48,
+                    "icon-height": 27,
+                    "xlarge": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Open-and-Operating-2400x1350-1-569x320-1.jpg",
+                    "xlarge-width": 569,
+                    "xlarge-height": 320,
+                    "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Open-and-Operating-2400x1350-1-569x320-1.jpg",
+                    "gform-image-choice-sm-width": 300,
+                    "gform-image-choice-sm-height": 169,
+                    "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Open-and-Operating-2400x1350-1-569x320-1.jpg",
+                    "gform-image-choice-md-width": 400,
+                    "gform-image-choice-md-height": 225,
+                    "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2023/01/O3World-News-Post-Open-and-Operating-2400x1350-1-569x320-1.jpg",
+                    "gform-image-choice-lg-width": 569,
+                    "gform-image-choice-lg-height": 320
+                  }
+                },
+                "image_size": "inherit"
+              },
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4><a href=\"https://www.acquia.com/products/drupal-cloud/content-hub?utm_source=o3world&amp;utm_medium=Website&amp;utm_campaign=NA_o3_microsite_2022&amp;utm_content=7016g0000020tRxAAI&amp;utm_term=o3_microsite\">Acquia content hub</a></h4>\n<p>Discover and syndicate content through a centralized tool. Make one of your most valuable assets, your content, accessible to your whole organization. Enable internal marketing teams to be the owners of their content.</p>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Multiple Columns",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "IN PRACTICE",
+          "kicker_tag": "div",
+          "title": "ACQUIA + O3 PARTNERS",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": true,
+          "description": "Acquia and O3 are partnering with clients to bring the best in digital cloud hosting, Drupal, CDP and customer experiences together. Meet a couple of our partners."
+        },
+        "introduction_link": "",
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "image",
+                "image": false,
+                "image_size": "inherit"
+              },
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<p>3BL Media leverages Acquia for their Drupal cloud CMS and hosting</p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "image",
+                "image": false,
+                "image_size": "inherit"
+              },
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<p>SEI leverages Acquia for their Drupal cloud CMS and hosting</p>\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,232 @@
+{
+  "_meta": {
+    "type": "page",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T02:45:52.025Z"
+  },
+  "wpId": 160,
+  "slug": "about",
+  "path": "/about/",
+  "title": "About",
+  "parentSlug": null,
+  "seo": {
+    "titleOverride": "About Our Digital Product Consultancy Services %%page%% %%sep%% %%sitename%%",
+    "titleRendered": "About Our Digital Product Consultancy Services | O3",
+    "descriptionOverride": "Learn about O3, a digital product consultancy focused on delivering measurable ROI through strategic partnerships.",
+    "descriptionRendered": "Learn about O3, a digital product consultancy focused on delivering measurable ROI through strategic partnerships.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/about/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_content": [
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Why O3",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "WHY O3",
+          "kicker_tag": "div",
+          "title": "O3 is a founder-led consultancy that has spent 20+ years prioritizing quality over scale",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": true,
+          "description": "We're intentional about maintaining a senior-level team and choosing partners whose success we're genuinely invested in. That focus has allowed us to expand beyond client services into shaping the broader ecosystem: O3XO (our AI strategy and implementation practice), the 1682 Conference (our annual AI and innovation leadership series), and O3 Ventures (our investment arm backing early-stage AI and digital product companies). This multi-dimensional approach keeps us ahead of the curve and ensures our clients benefit from our vantage point."
+        },
+        "introduction_link": "",
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4>Strategy + execution</h4>\n<p>We think strategically about your entire customer journey, working across departments and your digital ecosystem, then we execute alongside you as a long-term partner.</p>\n"
+              },
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4>Balance</h4>\n<p>Experience design and software engineering. Strategy and execution. Not one or the other.</p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4>ROI-focused outcomes</h4>\n<p>Every digital property needs to earn its keep. We measure success by revenue impact, operational efficiency, engagement quality, and competitive positioning, not just deliverables.</p>\n"
+              },
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h4>Flexible delivery models</h4>\n<p>From agile product builds to enterprise replatforming to fractional team support—we meet you where you are and scale with your needs.</p>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "team",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Team",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "Leadership",
+          "kicker_tag": "h2",
+          "title": "Meet the team",
+          "heading_level": "h2",
+          "heading_tag": "p",
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": {
+          "title": "Meet the team",
+          "url": "https://www.o3world.com/team/",
+          "target": ""
+        },
+        "list_type": "select",
+        "team_members": [
+          672,
+          921,
+          6197,
+          125,
+          9147,
+          936,
+          9687,
+          6195,
+          10559
+        ]
+      },
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Beyond O3",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "Beyond O3",
+          "kicker_tag": "h2",
+          "title": "Investing in better experiences",
+          "heading_level": "h2",
+          "heading_tag": "p",
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": "",
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<div class=\"relative w-full group\">\n<div class=\"w-full bg-gray-100 mb-[30px] aspect-1\">\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone size-medium wp-image-9614\" src=\"https://live-o3-world.pantheonsite.io/wp-content/uploads/2025/02/1682head-640x640.png\" alt=\"photo of a pile of badges from the 1682 conference\" width=\"640\" height=\"640\" srcset=\"http://www.o3world.com/wp-content/uploads/2025/02/1682head-640x640.png 640w, http://www.o3world.com/wp-content/uploads/2025/02/1682head-150x150.png 150w, http://www.o3world.com/wp-content/uploads/2025/02/1682head-768x768.png 768w, http://www.o3world.com/wp-content/uploads/2025/02/1682head-48x48.png 48w, http://www.o3world.com/wp-content/uploads/2025/02/1682head.png 901w\" sizes=\"auto, (max-width: 640px) 100vw, 640px\" /></p>\n</div>\n<h3 class=\"mb-3 text-black type-kicker\">1682</h3>\n<h4 style=\"margin-top: 12px;\">The business of innovation conference + event series</h4>\n<p><span class=\"text-black hover:text-black focus:text-black\">Our annual conference, 1682 explores the ever-changing landscape of innovation programs, with a particular focus on how people, profits, process, and technology.</span></p>\n<p><a href=\"https://www.o3world.com/1682-conference-ai-innovation/\">Learn more about 1682</a></p>\n</div>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<div class=\"relative w-full group\">\n<div class=\"w-full bg-gray-100 mb-[30px] aspect-1\"><img loading=\"lazy\" decoding=\"async\" class=\"alignnone size-medium wp-image-9616\" src=\"https://live-o3-world.pantheonsite.io/wp-content/uploads/2025/02/Ventureshead-640x640.png\" alt=\"photo of ventures awards\" width=\"640\" height=\"640\" srcset=\"http://www.o3world.com/wp-content/uploads/2025/02/Ventureshead-640x640.png 640w, http://www.o3world.com/wp-content/uploads/2025/02/Ventureshead-150x150.png 150w, http://www.o3world.com/wp-content/uploads/2025/02/Ventureshead-768x768.png 768w, http://www.o3world.com/wp-content/uploads/2025/02/Ventureshead-48x48.png 48w, http://www.o3world.com/wp-content/uploads/2025/02/Ventureshead.png 901w\" sizes=\"auto, (max-width: 640px) 100vw, 640px\" /></div>\n<h3 class=\"mb-3 text-black type-kicker\">Ventures</h3>\n<h4 style=\"margin-top: 12px;\">Investing in exceptional people, products + experiences</h4>\n<p><span class=\"text-black hover:text-black focus:text-black\">We have invest time, expertise, and resources into organizations that share our values and understand the opportunities to create better experiences.</span></p>\n</div>\n<p><a href=\"https://www.o3world.com/ventures/\">Learn about Ventures</a></p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<div class=\"relative w-full group\">\n<div class=\"w-full bg-gray-100 mb-[30px] aspect-1\">\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone size-medium wp-image-9612\" src=\"https://live-o3-world.pantheonsite.io/wp-content/uploads/2025/02/communityhead-1-640x640.png\" alt=\"team photo of O3 employees with a red semi circle\" width=\"640\" height=\"640\" srcset=\"http://www.o3world.com/wp-content/uploads/2025/02/communityhead-1-640x640.png 640w, http://www.o3world.com/wp-content/uploads/2025/02/communityhead-1-150x150.png 150w, http://www.o3world.com/wp-content/uploads/2025/02/communityhead-1-768x768.png 768w, http://www.o3world.com/wp-content/uploads/2025/02/communityhead-1-48x48.png 48w, http://www.o3world.com/wp-content/uploads/2025/02/communityhead-1.png 901w\" sizes=\"auto, (max-width: 640px) 100vw, 640px\" /></p>\n</div>\n<h3 class=\"mb-3 text-black type-kicker\">Community</h3>\n<h4 style=\"margin-top: 12px;\">Our commitment to making the world a better place</h4>\n<p><span class=\"text-black hover:text-black focus:text-black\">We focus on values and culture alignment to create better experiences for people within the organizations we support and in the wider world around us.</span></p>\n<p><a href=\"https://www.o3world.com/community-engagement/\">Commit to community</a></p>\n</div>\n"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "page_header": [
+      {
+        "acf_fc_layout": "basic_header",
+        "page_title_content": [
+          {
+            "acf_fc_layout": "title",
+            "kicker": "About",
+            "kicker_tag": "h1",
+            "title": "Digital product consultancy that delivers measurable ROI.",
+            "heading_level": "h2",
+            "heading_tag": "h2",
+            "add_description": true,
+            "description": "O3 partners with marketing and product leaders at mid-market and enterprise organizations to design, build, and optimize digital experiences that drive measurable business impact. We bring together strategic consulting, experience design, and software engineering to close the gap between strategy and execution. We build long-term partnerships across departments, ensuring every touchpoint is connected and every experience drives value."
+          }
+        ],
+        "header_icon": {
+          "value": "None",
+          "image": "None"
+        },
+        "header_image": {
+          "ID": 9608,
+          "id": 9608,
+          "title": "Abouthead",
+          "filename": "Abouthead.png",
+          "filesize": 208591,
+          "url": "http://www.o3world.com/wp-content/uploads/2025/02/Abouthead.png",
+          "link": "http://www.o3world.com/about/abouthead/",
+          "alt": "Photo of Keith Scandone at a podium speaking",
+          "author": "16",
+          "description": "",
+          "caption": "",
+          "name": "abouthead",
+          "status": "inherit",
+          "uploaded_to": 160,
+          "date": "2025-02-12 23:00:02",
+          "modified": "2025-02-12 23:00:10",
+          "menu_order": 0,
+          "mime_type": "image/png",
+          "type": "image",
+          "subtype": "png",
+          "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+          "width": 601,
+          "height": 601,
+          "sizes": {
+            "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/02/Abouthead-150x150.png",
+            "thumbnail-width": 150,
+            "thumbnail-height": 150,
+            "medium": "http://www.o3world.com/wp-content/uploads/2025/02/Abouthead.png",
+            "medium-width": 601,
+            "medium-height": 601,
+            "medium_large": "http://www.o3world.com/wp-content/uploads/2025/02/Abouthead.png",
+            "medium_large-width": 601,
+            "medium_large-height": 601,
+            "large": "http://www.o3world.com/wp-content/uploads/2025/02/Abouthead.png",
+            "large-width": 601,
+            "large-height": 601,
+            "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/02/Abouthead.png",
+            "1536x1536-width": 601,
+            "1536x1536-height": 601,
+            "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/02/Abouthead.png",
+            "2048x2048-width": 601,
+            "2048x2048-height": 601,
+            "icon": "http://www.o3world.com/wp-content/uploads/2025/02/Abouthead-48x48.png",
+            "icon-width": 48,
+            "icon-height": 48,
+            "xlarge": "http://www.o3world.com/wp-content/uploads/2025/02/Abouthead.png",
+            "xlarge-width": 601,
+            "xlarge-height": 601,
+            "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/02/Abouthead.png",
+            "gform-image-choice-sm-width": 300,
+            "gform-image-choice-sm-height": 300,
+            "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/02/Abouthead.png",
+            "gform-image-choice-md-width": 400,
+            "gform-image-choice-md-height": 400,
+            "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/02/Abouthead.png",
+            "gform-image-choice-lg-width": 600,
+            "gform-image-choice-lg-height": 600
+          }
+        },
+        "header_background_icon": {
+          "value": "5739",
+          "image": "5739"
+        }
+      }
+    ]
+  }
+}

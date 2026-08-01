@@ -1,0 +1,112 @@
+{
+  "_meta": {
+    "type": "page",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T02:45:52.026Z"
+  },
+  "wpId": 159,
+  "slug": "perspectives",
+  "path": "/perspectives/",
+  "title": "Perspectives",
+  "parentSlug": null,
+  "seo": {
+    "titleOverride": "Perspectives from O3 on Digital Experiences %%page%% %%sep%% %%sitename%%",
+    "titleRendered": "Perspectives from O3 on Digital Experiences | O3",
+    "descriptionOverride": "Discover the latest perspectives on digital experiences and culture at O3, influencing today's industry landscape.",
+    "descriptionRendered": "Discover the latest perspectives on digital experiences and culture at O3, influencing today's industry landscape.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_content": false,
+    "page_header": [
+      {
+        "acf_fc_layout": "basic_header",
+        "page_title_content": [
+          {
+            "acf_fc_layout": "title",
+            "kicker": "Perspectives",
+            "kicker_tag": "h1",
+            "title": "Learn what drives our experiences",
+            "heading_level": "h2",
+            "heading_tag": "p",
+            "add_description": true,
+            "description": "Looking for some firsthand knowledge from our world? We’re passionate about our work and want to share it with you! Check out our in-depth thoughts about the industry today, our culture at O3, the future of AI and digital experiences, and other relevant topics. "
+          }
+        ],
+        "header_icon": {
+          "value": "None",
+          "image": "None"
+        },
+        "header_image": {
+          "ID": 9720,
+          "id": 9720,
+          "title": "Perspectives",
+          "filename": "Perspectives.png",
+          "filesize": 600647,
+          "url": "http://www.o3world.com/wp-content/uploads/2025/02/Perspectives.png",
+          "link": "http://www.o3world.com/perspectives/perspectives-2/",
+          "alt": "Perspective shot of O3 hallway with blue graphic pattern",
+          "author": "16",
+          "description": "",
+          "caption": "",
+          "name": "perspectives-2",
+          "status": "inherit",
+          "uploaded_to": 159,
+          "date": "2025-02-20 19:35:32",
+          "modified": "2025-02-20 19:35:54",
+          "menu_order": 0,
+          "mime_type": "image/png",
+          "type": "image",
+          "subtype": "png",
+          "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+          "width": 901,
+          "height": 901,
+          "sizes": {
+            "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/02/Perspectives-150x150.png",
+            "thumbnail-width": 150,
+            "thumbnail-height": 150,
+            "medium": "http://www.o3world.com/wp-content/uploads/2025/02/Perspectives-640x640.png",
+            "medium-width": 640,
+            "medium-height": 640,
+            "medium_large": "http://www.o3world.com/wp-content/uploads/2025/02/Perspectives-768x768.png",
+            "medium_large-width": 768,
+            "medium_large-height": 768,
+            "large": "http://www.o3world.com/wp-content/uploads/2025/02/Perspectives.png",
+            "large-width": 901,
+            "large-height": 901,
+            "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/02/Perspectives.png",
+            "1536x1536-width": 901,
+            "1536x1536-height": 901,
+            "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/02/Perspectives.png",
+            "2048x2048-width": 901,
+            "2048x2048-height": 901,
+            "icon": "http://www.o3world.com/wp-content/uploads/2025/02/Perspectives-48x48.png",
+            "icon-width": 48,
+            "icon-height": 48,
+            "xlarge": "http://www.o3world.com/wp-content/uploads/2025/02/Perspectives.png",
+            "xlarge-width": 901,
+            "xlarge-height": 901,
+            "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/02/Perspectives.png",
+            "gform-image-choice-sm-width": 300,
+            "gform-image-choice-sm-height": 300,
+            "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/02/Perspectives.png",
+            "gform-image-choice-md-width": 400,
+            "gform-image-choice-md-height": 400,
+            "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/02/Perspectives.png",
+            "gform-image-choice-lg-width": 600,
+            "gform-image-choice-lg-height": 600
+          }
+        },
+        "header_background_icon": {
+          "value": "5756",
+          "image": "5756"
+        }
+      }
+    ]
+  }
+}

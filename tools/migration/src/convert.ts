@@ -19,6 +19,7 @@ import type { WpSiteSeo } from './lib/yoast'
 import { mapCategory, type WpCategory } from './map/category'
 import { buildPersonDirectory, type WpPerson, type WpTeamMember } from './map/person'
 import { mapPerspective, type WpPerspective } from './map/perspective'
+import { KEEPER_SLUGS, mapPage, type WpPage } from './map/page'
 import { mapSiteSettings } from './map/siteSettings'
 import type { ExtractMeta } from './map/types'
 
@@ -82,6 +83,28 @@ for (const cat of readDir<WpCategory>('category')) {
   const result = mapCategory(cat)
   if (result.ok) emit('category', cat.slug, result.doc)
   else failures.push({ slug: cat.slug, issues: result.issues })
+}
+
+// --- the utility pages worth keeping (#18) ---
+// Every published page is extracted; only the keepers convert. See
+// KEEPER_SLUGS in map/page.ts for which, and why the rest do not.
+const pagesBySlug = new Map(readDir<WpPage>('page').map((p) => [p.slug, p]))
+for (const slug of KEEPER_SLUGS) {
+  const page = pagesBySlug.get(slug)
+  if (!page) {
+    failures.push({
+      slug,
+      issues: [{ element: 'page', detail: 'listed in KEEPER_SLUGS but not extracted' }],
+    })
+    continue
+  }
+  const result = mapPage(page, site)
+  if (result.ok) {
+    emit('page', slug, result.doc)
+    note(slug, result)
+  } else {
+    failures.push({ slug, issues: result.issues })
+  }
 }
 
 // --- perspectives + the persons they reference ---
