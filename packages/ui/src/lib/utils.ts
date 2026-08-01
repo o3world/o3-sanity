@@ -13,18 +13,31 @@ import { extendTailwindMerge } from 'tailwind-merge'
  * `font-size` restores the intended semantics: a size and a color are
  * ORTHOGONAL and must coexist, while two sizes still collapse to the last one.
  *
- * Keep this list in sync with `packages/tailwind-config/tokens/typography.css`.
+ * This list is hand-maintained because `cn` runs in the browser and cannot
+ * read the CSS — so `utils.test.ts` derives the truth from typography.css and
+ * fails on drift. It has to: the comment here used to say "keep in sync", #37
+ * added seven steps, and the list kept the original five until the test
+ * caught it.
  */
+export const FONT_SIZE_UTILITIES = [
+  'text-hero',
+  'text-cta',
+  'text-display-xl',
+  'text-display-lg',
+  'text-display-md',
+  'text-lead',
+  'text-button',
+  'text-eyebrow',
+  'text-eyebrow-lg',
+  'text-meta',
+  'text-nav',
+  'text-legal',
+] as const
+
 const twMerge = extendTailwindMerge({
   extend: {
     classGroups: {
-      'font-size': [
-        'text-display-xl',
-        'text-display-lg',
-        'text-display-md',
-        'text-hero',
-        'text-eyebrow',
-      ],
+      'font-size': [...FONT_SIZE_UTILITIES],
     },
   },
 })
