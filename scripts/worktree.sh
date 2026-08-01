@@ -23,6 +23,13 @@ WT_HOME="$(dirname "$MAIN_ROOT")/o3-sanity-worktrees"
 # Gitignored, so `git worktree add` cannot bring them along.
 CARRY_FILES=(.env.local apps/web/.env.local .vercel/project.json)
 
+# Also gitignored, and also load-bearing: `prototype/` holds the seed docs'
+# image assets, and tools/migration's seed test asserts every asset marker
+# resolves on disk. Without it that suite fails in every worktree for reasons
+# that have nothing to do with the ticket being worked. Symlinked rather than
+# copied — it is 22 MB of read-only reference material that #48 retires.
+CARRY_DIRS=(prototype)
+
 die() {
   echo "error: $*" >&2
   exit 1
@@ -75,6 +82,12 @@ cmd_new() {
       cp "$MAIN_ROOT/$f" "$path/$f"
     else
       echo "  note: $MAIN_ROOT/$f not found — run \`pnpm env:pull\` in the worktree" >&2
+    fi
+  done
+
+  for d in "${CARRY_DIRS[@]}"; do
+    if [[ -d $MAIN_ROOT/$d && ! -e $path/$d ]]; then
+      ln -s "$MAIN_ROOT/$d" "$path/$d"
     fi
   done
 
