@@ -10,6 +10,27 @@
 export const IMAGE_EXTENSION = /\.(jpe?g|png|gif|webp|avif|svg)$/i
 
 /**
+ * The only asset id shape `@sanity/image-url` will parse:
+ * `image-<id>-<width>x<height>-<ext>`. It throws `Malformed asset _ref` on
+ * anything else — a `file-…` upload included.
+ *
+ * The id segment is mixed-case alphanumeric, not hex: Sanity mints ids like
+ * `Tb9Ew8CXIwaY6R1kjMvI0uRR`, and only this pipeline's own uploads happen to
+ * be sha1 hex.
+ *
+ * `verify` uses this to catch the shape that loads cleanly, resolves as a
+ * reference, and only fails much later during prerender. The web renderer
+ * enforces the same rule at its own boundary (`isRenderableImage` in
+ * `@o3/sanity/image`); keep the two in step.
+ */
+const IMAGE_ASSET_ID = /^image-[A-Za-z0-9_]+-\d+x\d+-[A-Za-z0-9]+$/
+
+/** Whether `ref` is an asset id an image field can legally hold. */
+export function isImageAssetId(ref: string): boolean {
+  return IMAGE_ASSET_ID.test(ref)
+}
+
+/**
  * Image or file, decided from the **bytes** rather than the filename.
  *
  * The filename is not trustworthy. WordPress serves uploads whose URL carries

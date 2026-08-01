@@ -20,6 +20,7 @@ import { ROUTABLE_TYPES } from '@o3/sanity/constants'
 import { schemaTypes } from '@o3/sanity/schemas'
 import type { Migration } from '@o3/sanity/types/generated'
 
+import { isImageAssetId } from './lib/media'
 import { CONVERTED_DIR, SEED_DIR } from './lib/paths'
 import { categoryDoc } from './map/category'
 import { personDoc } from './map/person'
@@ -78,6 +79,30 @@ function refsIn(node: unknown, found: string[] = []): string[] {
   return found
 }
 
+/**
+ * Every asset ref held by an image field, with the path that reached it — so a
+ * finding names the field to fix rather than just the document.
+ */
+function imageAssetRefs(
+  node: unknown,
+  path = '',
+  found: { path: string; ref: string }[] = [],
+): { path: string; ref: string }[] {
+  if (Array.isArray(node)) {
+    node.forEach((item, i) => imageAssetRefs(item, `${path}[${i}]`, found))
+  } else if (node && typeof node === 'object') {
+    const obj = node as Record<string, unknown>
+    if (obj._type === 'image') {
+      const ref = (obj.asset as { _ref?: unknown } | undefined)?._ref
+      if (typeof ref === 'string') found.push({ path: path || '(root)', ref })
+    }
+    for (const [key, value] of Object.entries(obj)) {
+      imageAssetRefs(value, path ? `${path}.${key}` : key, found)
+    }
+  }
+  return found
+}
+
 async function main() {
   const committed = readCommitted()
   const expectedIds = new Set(committed.map((d) => d._id))
@@ -121,6 +146,9 @@ async function main() {
   const dangling: string[] = []
   for (const doc of live) {
     for (const ref of new Set(refsIn(doc))) {
+      // Asset refs point at uploads rather than documents, so they are never in
+      // `live` and cannot be checked here. That they are the *right kind* of
+      // asset for the field holding them is check 3.
       if (!liveById.has(ref) && !ref.startsWith('image-') && !ref.startsWith('file-')) {
         dangling.push(`${doc._id} → ${ref}`)
       }
@@ -128,14 +156,27 @@ async function main() {
   }
   report('every reference resolves', dangling)
 
-  // 3. No image marker survived the load. A `_wpSrc` or `_localSrc` left in
+  // 3. Every image field holds an image asset. A non-image upload in an image
+  //    field is the one shape that loads cleanly, passes check 2, and then
+  //    throws `Malformed asset _ref` during prerender — failing the entire
+  //    production build rather than dropping one image (#32). The renderer now
+  //    degrades instead, which makes this the only thing that reports it.
+  const wrongAssetKind: string[] = []
+  for (const doc of live) {
+    for (const { path, ref } of imageAssetRefs(doc)) {
+      if (!isImageAssetId(ref)) wrongAssetKind.push(`${doc._id} → ${path} = ${ref}`)
+    }
+  }
+  report('every image field holds an image asset', wrongAssetKind)
+
+  // 4. No image marker survived the load. A `_wpSrc` or `_localSrc` left in
   //    the dataset means the upload was skipped and the image is invisible.
   const unresolvedMedia = live
     .filter((doc) => /"_(wpSrc|localSrc)":/.test(JSON.stringify(doc)))
     .map((doc) => `${doc._id} still carries an unresolved image marker`)
   report('every image resolved to an asset', unresolvedMedia)
 
-  // 4. Every document validates against its mapper's gate — the same gate
+  // 5. Every document validates against its mapper's gate — the same gate
   //    convert applied, re-run against what actually landed.
   const invalid: string[] = []
   for (const doc of live) {
@@ -144,14 +185,14 @@ async function main() {
   }
   report('every document validates against its schema gate', invalid)
 
-  // 5. Nothing in the dataset has a type the Studio schema does not define —
+  // 6. Nothing in the dataset has a type the Studio schema does not define —
   //    that document is invisible in Studio and unrenderable.
   const unknownTypes = live
     .filter((doc) => !SCHEMA_TYPE_NAMES.has(doc._type))
     .map((doc) => `${doc._id} has unknown _type "${doc._type}"`)
   report('every document type is in the schema', unknownTypes)
 
-  // 6. One slug, one document. Routes resolve `…[0]`, so a collision serves
+  // 7. One slug, one document. Routes resolve `…[0]`, so a collision serves
   //    a coin flip — and the offender is usually a document the pipeline
   //    does not own, which no check over committed JSON can see.
   const bySlug = new Map<string, string[]>()
@@ -169,7 +210,7 @@ async function main() {
       .map(([key, ids]) => `${key} → ${ids.join(', ')}`),
   )
 
-  // 7. Anything the pipeline did not put there. Not a failure on its own — an
+  // 8. Anything the pipeline did not put there. Not a failure on its own — an
   //    editor may have created it — but during build-out it is usually
   //    leftover scaffolding, and a routable one shadows a seed.
   const orphans = live
@@ -180,7 +221,7 @@ async function main() {
     )
   report('every document is committed under data/', orphans)
 
-  // 8. Provisional content (#40, ADR 0007). NOT a finding — placeholders are
+  // 9. Provisional content (#40, ADR 0007). NOT a finding — placeholders are
   //    how a route resolves before its real content exists, and failing on
   //    them would make `verify` red for the whole build-out. But they are the
   //    one class of document that must not survive to launch, so they get

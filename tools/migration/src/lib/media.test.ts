@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { isImageBuffer } from './media'
+import { isImageAssetId, isImageBuffer } from './media'
 
 /** A buffer starting with `bytes`, padded so subarray reads are in range. */
 function withHeader(bytes: number[] | string, padTo = 64): Buffer {
@@ -58,5 +58,22 @@ describe('isImageBuffer', () => {
   it('does not read past the end of a very short buffer', () => {
     expect(() => isImageBuffer(Buffer.from([0xff]), 'tiny')).not.toThrow()
     expect(isImageBuffer(Buffer.alloc(0), 'empty.jpg')).toBe(true)
+  })
+})
+
+describe('isImageAssetId', () => {
+  it('accepts the shape the URL builder parses', () => {
+    expect(isImageAssetId('image-Tb9Ew8CXIwaY6R1kjMvI0uRR-2000x3000-jpg')).toBe(true)
+  })
+
+  /** The exact ref that took the production build down (#32). */
+  it('rejects the file- ref that reached an image field', () => {
+    expect(isImageAssetId('file-9c8ea5c5347c47f89d4e15d972812776e571ef26-webp')).toBe(false)
+  })
+
+  // An `image-` prefix is not enough: the builder splits on `-` and needs the
+  // dimensions segment, so a prefix-only check would still let a throw through.
+  it('rejects an image- ref with no dimensions', () => {
+    expect(isImageAssetId('image-9c8ea5c5347c47f89d4e15d972812776e571ef26-webp')).toBe(false)
   })
 })

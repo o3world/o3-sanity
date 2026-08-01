@@ -111,4 +111,41 @@ describe('SanityImage', () => {
     expect(renderToStaticMarkup(<SanityImage source={undefined} alt="" />)).toBe('')
     expect(renderToStaticMarkup(<SanityImage source={{ asset: undefined }} alt="" />)).toBe('')
   })
+
+  /**
+   * The regression that took the production build down (#32). A WordPress
+   * upload with no extension became a `file-…` asset while staying in an image
+   * field; `@sanity/image-url` throws on that ref rather than degrading, and a
+   * throw during prerender fails the whole build instead of dropping one image.
+   *
+   * Rendering nothing is the contract — never throwing is the point.
+   */
+  describe('an image field holding a non-image asset', () => {
+    const withRef = (ref: string) => ({
+      _type: 'image' as const,
+      asset: { _type: 'reference' as const, _ref: ref },
+    })
+
+    it('renders nothing instead of throwing, at every ratio', () => {
+      const bad = withRef('file-9c8ea5c5347c47f89d4e15d972812776e571ef26-webp')
+      for (const ratio of ['original', '16/9', 'fill'] as const) {
+        expect(() =>
+          renderToStaticMarkup(<SanityImage source={bad} alt="" ratio={ratio} />),
+        ).not.toThrow()
+        expect(renderToStaticMarkup(<SanityImage source={bad} alt="" ratio={ratio} />)).toBe('')
+      }
+    })
+
+    // The prefix alone is not the rule: the builder splits on `-` and needs the
+    // dimensions segment, so an `image-` ref without one throws just the same.
+    it('renders nothing for an image- ref that carries no dimensions', () => {
+      const bad = withRef('image-9c8ea5c5347c47f89d4e15d972812776e571ef26-webp')
+      expect(() => renderToStaticMarkup(<SanityImage source={bad} alt="" />)).not.toThrow()
+      expect(renderToStaticMarkup(<SanityImage source={bad} alt="" />)).toBe('')
+    })
+
+    it('still renders a valid image, so the guard is not simply refusing everything', () => {
+      expect(renderToStaticMarkup(<SanityImage source={anImage()} alt="" />)).toContain('<img')
+    })
+  })
 })
