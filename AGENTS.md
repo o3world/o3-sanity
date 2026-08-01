@@ -22,6 +22,16 @@ running more than one session at a time.
 
 Naming and wiring rules for schemas, fields, blocks, and renderers. Vocabulary lives in `CONTEXT.md` → Naming; the procedure is the `content-naming` skill (`.claude/skills/content-naming/`). Read both before touching `packages/sanity/src/schemas/` or `apps/web/src/content/`.
 
+### Design source of record
+
+**Figma is the design source of record** (map #33) — it outranks `prototype/`, which is retired.
+Read `docs/agents/figma.md` before reading the file: which of the two registered MCP servers to use
+(the official one is rate-limited and will fail), how to avoid reading a child node instead of the
+frame, and the two-generations distinction that tells canonical frames from imported captures.
+
+Frame → route map: [`docs/figma-frames.md`](https://github.com/o3world/o3-sanity/blob/research/figma-frame-inventory/docs/figma-frames.md)
+(on branch `research/figma-frame-inventory`). Never build a page layer without checking it first.
+
 ### Domain docs
 
 Single-context layout — `CONTEXT.md` and `docs/adr/` at the repo root. See `docs/agents/domain.md`.
