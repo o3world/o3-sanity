@@ -29,8 +29,10 @@ packages/sanity/schema.json
 .vercel
 .env*
 
-# design prototype (local-only design source of truth)
-prototype/
+# design prototype (local-only; retired as a source of record by #33, kept for
+# the seed docs' image assets until #48). No trailing slash: worktrees get it
+# as a SYMLINK from scripts/worktree.sh, and `prototype/` would not match that.
+prototype
 
 # figma mcp image downloads
 .figma/
