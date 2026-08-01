@@ -179,6 +179,24 @@ async function main() {
     )
   report('every document is committed under data/', orphans)
 
+  // 8. Provisional content (#40, ADR 0007). NOT a finding — placeholders are
+  //    how a route resolves before its real content exists, and failing on
+  //    them would make `verify` red for the whole build-out. But they are the
+  //    one class of document that must not survive to launch, so they get
+  //    counted out loud every run rather than discovered at the end.
+  const provisional = live
+    .filter((doc) => (doc.migration as { provisional?: boolean } | undefined)?.provisional === true)
+    .map((doc) => {
+      const note = (doc.migration as { provisionalNote?: string }).provisionalNote
+      return `${doc._id}${note ? ` — ${note}` : ''}`
+    })
+  if (provisional.length > 0) {
+    console.log(
+      `\n⚠ provisional content (${provisional.length}) — not authoritative, clear before launch`,
+    )
+    for (const line of provisional) console.log(`    ${line}`)
+  }
+
   if (findings.length > 0) {
     console.error(`\n${findings.length} check(s) failed:\n  ${findings.join('\n  ')}`)
     process.exitCode = 1
