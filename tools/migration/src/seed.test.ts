@@ -199,13 +199,13 @@ describe('committed seed content', () => {
      * "never provisional" rule had no document to disagree with at all. Both
      * were green and neither meant anything.
      */
-    it('has case studies from every tree to check', () => {
+    it('sees the translated tree, where real case studies live', () => {
       expect(caseStudies.length).toBeGreaterThan(0)
       const trees = new Set(caseStudies.map(({ file }) => file.split('/')[0]))
-      expect([...trees].sort(), 'case studies are missing a whole tree').toEqual([
-        'seed',
-        'translated',
-      ])
+      // Asserted as "contains", not "equals": the seeds here are placeholders
+      // that #22 is meant to delete, so pinning the exact set would make this
+      // fail at the moment the mechanism finally succeeds.
+      expect([...trees], 'the translated tree is out of scope again').toContain('translated')
     })
 
     it('has at least one WordPress-sourced case study, or the rules below are vacuous', () => {

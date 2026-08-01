@@ -10,7 +10,7 @@ Terms resolved so far. Use these exact words in schema names, code, issues, and 
 
 ## Supporting types
 
-- **Person** — name, title, headshot. Authors of perspectives; 8 migrate from WordPress.
+- **Person** — name, title, headshot. Authors of perspectives; **14** migrate from WordPress (one per distinct byline in the 272-post archive; the early estimate of 8 predated the extract).
 - **Client** — name + logo. Single source for the homepage logo wall and `caseStudy.client`.
 - **Category** — editorial taxonomy for perspectives (11 migrate; cleanup is post-migration editorial work). WordPress tags do **not** migrate.
 - **Industry** — minimal taxonomy (name + slug) referenced by case studies for the "Healthcare · Pediatric Systems" eyebrow; the second half is the case study's `industryDetail` string. Deliberately not invested in beyond that.
@@ -55,6 +55,8 @@ Closed vocabulary. If the field you want isn't here and isn't obviously domain-s
 | `cta`        | A single call to action (type `cta`)                      | `link`, `button`, `action`                           |
 | `name`       | A person's or organization's real-world name              | Anything that isn't a proper noun                    |
 | `surface`    | `white \| bone \| ink` — injected by `defineSectionBlock` | Never hand-author it                                 |
+
+The lexicon governs **editorial** fields — the ones an author fills in. The hidden `migration` provenance object is outside it (`sourceId`, `extractedAt`, `locked`, `figmaNode`, `provisional`, `provisionalNote`): those name pipeline state, not content, and are `readOnly` in Studio.
 
 Shape conventions: reference fields are singular for one (`client`, `author`), plural for arrays (`categories`, `caseStudies`); arrays of objects take a plural noun (`stats`, `chapters`, `panels`); closed enums are a bare noun with an `options.list` (`variant`, `layout`, `width`, `pageType`, `decoration`) and always carry an `initialValue`.
 

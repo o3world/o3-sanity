@@ -52,8 +52,9 @@ verify` lists every one on each run.
 | `caseStudy-seed-chop`    | **No WordPress case study exists.** Real client, invented engagement write-up. | A real case study, or replacing the card |
 
 The homepage showcase is a canonical frame with three cards, which is why these
-are carried rather than deleted — see ADR 0007. Nine of the 20 extracted case
-studies could back a card today if one of the two invented ones is swapped out.
+are carried rather than deleted — see ADR 0007. Which real case studies replace
+the two invented ones is #22's call: 19 of the 20 extracted are still
+untranslated.
 
 ## The conflict rule, in one line
 

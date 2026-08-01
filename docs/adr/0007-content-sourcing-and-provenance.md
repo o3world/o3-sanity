@@ -93,7 +93,8 @@ All three are marked provisional and **carried forward**, not deleted — the
 homepage showcase is a canonical frame and needs three cards. `ironman` clears
 when #22 translates its real source; `aramark` and `chop` have no source to
 translate and need either a real case study or replacement by a client that has
-one. Nine of the 20 extracted case studies could back that third card today.
+one — 19 of the 20 extracted case studies are still untranslated, so which one takes the card is
+#22's call, not a number this ADR can pin.
 
 ## Alternatives considered
 

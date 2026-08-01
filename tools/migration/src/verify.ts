@@ -18,6 +18,7 @@ import { getCliClient } from 'sanity/cli'
 
 import { ROUTABLE_TYPES } from '@o3/sanity/constants'
 import { schemaTypes } from '@o3/sanity/schemas'
+import type { Migration } from '@o3/sanity/types/generated'
 
 import { CONVERTED_DIR, SEED_DIR } from './lib/paths'
 import { categoryDoc } from './map/category'
@@ -185,11 +186,12 @@ async function main() {
   //    one class of document that must not survive to launch, so they get
   //    counted out loud every run rather than discovered at the end.
   const provisional = live
-    .filter((doc) => (doc.migration as { provisional?: boolean } | undefined)?.provisional === true)
-    .map((doc) => {
-      const note = (doc.migration as { provisionalNote?: string }).provisionalNote
-      return `${doc._id}${note ? ` — ${note}` : ''}`
-    })
+    .map((doc) => ({ doc, migration: (doc.migration ?? {}) as Partial<Migration> }))
+    .filter(({ migration }) => migration.provisional === true)
+    .map(
+      ({ doc, migration }) =>
+        `${doc._id}${migration.provisionalNote ? ` — ${migration.provisionalNote}` : ''}`,
+    )
   if (provisional.length > 0) {
     console.log(
       `\n⚠ provisional content (${provisional.length}) — not authoritative, clear before launch`,
