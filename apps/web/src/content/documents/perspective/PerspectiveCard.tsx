@@ -31,16 +31,14 @@ export function PerspectiveCard({
       href={hrefForDoc({ _type, slug })}
       className="rounded-card flex h-full flex-col overflow-hidden bg-white"
     >
-      <div className="bg-line aspect-[3/2]">
-        <SanityImage
-          source={featuredImage?.image}
-          alt={featuredImage?.alt ?? ''}
-          width={800}
-          height={533}
-          className="h-full w-full object-cover"
-          sizes="(min-width: 768px) 20rem, 80vw"
-        />
-      </div>
+      <SanityImage
+        source={featuredImage?.image}
+        alt={featuredImage?.alt ?? ''}
+        ratio="3/2"
+        width={800}
+        className="bg-line"
+        sizes="(min-width: 768px) 20rem, 80vw"
+      />
       <div className="flex flex-1 flex-col gap-3 p-6">
         {category ? <p className="eyebrow text-brand">{category}</p> : null}
         <h3 className="text-fg text-lg font-medium">{title}</h3>

@@ -17,13 +17,7 @@ export function PageCard({ _type, title, slug, card }: PageCardData) {
       className="rounded-card border-line flex h-full flex-col gap-4 border bg-white p-8"
     >
       {card?.icon ? (
-        <SanityImage
-          source={card.icon}
-          alt=""
-          width={96}
-          height={96}
-          className="h-10 w-10 object-contain"
-        />
+        <SanityImage source={card.icon} alt="" width={96} className="h-10 w-10 object-contain" />
       ) : null}
       <h3 className="text-fg text-lg font-medium">{card?.shortTitle ?? title}</h3>
       {card?.excerpt ? <p className="text-fg-muted text-sm">{card.excerpt}</p> : null}

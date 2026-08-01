@@ -4,7 +4,13 @@
  * root eslint config). */
 import Image from 'next/image'
 
-import { urlForImage, type SanityImageSource } from '@o3/sanity/image'
+import { cn } from '@o3/ui/lib/utils'
+import {
+  imageDimensions,
+  imageHotspot,
+  urlForImage,
+  type SanityImageSource,
+} from '@o3/sanity/image'
 
 /**
  * Generated image fields are looser than `SanityImageSource` (asset is
@@ -12,47 +18,103 @@ import { urlForImage, type SanityImageSource } from '@o3/sanity/image'
  */
 type LooseImageSource = SanityImageSource | { asset?: unknown }
 
+/**
+ * The ratio boxes an image can be asked to fill. Values are written out as
+ * static Tailwind classes because the scanner cannot see a class built from
+ * a variable — never interpolate the key into `aspect-[…]`.
+ */
+const RATIO_CLASS = {
+  '1/1': 'aspect-square',
+  '4/3': 'aspect-4/3',
+  '3/2': 'aspect-3/2',
+  '16/9': 'aspect-video',
+  '21/9': 'aspect-21/9',
+  '3/4': 'aspect-3/4',
+  '4/5': 'aspect-4/5',
+  '9/16': 'aspect-9/16',
+} as const
+
+export type ImageRatio = keyof typeof RATIO_CLASS
+
+/**
+ * How the image is shaped:
+ *
+ * - `'original'` — the image's own shape, nothing cropped away (the default).
+ * - a ratio — a box of exactly that shape.
+ * - `'fill'` — the parent element is the box; use it when the surrounding
+ *   layout (a stretched grid cell, a fixed-height rail) decides the shape.
+ */
+export type ImageBox = 'original' | ImageRatio | 'fill'
+
 export interface SanityImageProps {
   source: LooseImageSource | null | undefined
   alt?: string | null
-  /** Requested CDN width (also the intrinsic width unless `fill`). */
+  /** Box shape. Defaults to `'original'` — the whole image, uncropped. */
+  ratio?: ImageBox
+  /**
+   * How the image sits inside a box: `'crop'` (default) fills it and trims
+   * the overflow around the hotspot; `'contain'` fits the whole image inside
+   * it, letterboxed. Ignored when `ratio` is `'original'` — an original is by
+   * definition never trimmed.
+   */
+  fit?: 'crop' | 'contain'
+  /** Requested CDN width. Also the intrinsic width when `ratio` is `'original'`. */
   width?: number
-  height?: number
-  fill?: boolean
   sizes?: string
   priority?: boolean
+  /**
+   * Styles the outermost element this renders: the `<img>` for an original,
+   * the ratio box for every other `ratio`.
+   */
   className?: string
 }
 
+/** Shape for an image whose asset id doesn't carry dimensions (never, in practice). */
+const FALLBACK_ASPECT = 3 / 2
+
+function ratioValue(ratio: ImageRatio): number {
+  const [width, height] = ratio.split('/')
+  return Number(width) / Number(height)
+}
+
 /**
- * The single next/image wrapper for Sanity-hosted images: routes the source
- * through `urlForImage` (hotspot/crop-aware CDN URLs, auto format) and
- * degrades to `null` for empty/unset image fields so callers don't need
- * their own guards.
+ * The single next/image wrapper for Sanity-hosted images. It owns three
+ * things content components should never re-decide:
+ *
+ * - **Shape.** `ratio` picks between the image's own proportions and a box;
+ *   `fit` picks between cropping into that box and fitting inside it.
+ * - **Cropping.** A ratio box is cut on the CDN, so the crop respects the
+ *   editor's crop rectangle and hotspot instead of trimming blindly from the
+ *   edges. `'fill'` can't (the ratio isn't known until layout), so it steers
+ *   `object-position` by the hotspot instead.
+ * - **Absence.** An empty or unset image field renders `null`, so callers
+ *   don't need their own guards.
  */
 export function SanityImage({
   source,
   alt,
+  ratio = 'original',
+  fit = 'crop',
   width = 1600,
-  height,
-  fill = false,
   sizes,
   priority,
   className,
 }: SanityImageProps) {
   if (!source) return null
   if (typeof source === 'object' && 'asset' in source && !source.asset) return null
+  const image = source as SanityImageSource
 
-  let builder = urlForImage(source as SanityImageSource).width(width)
-  if (height) builder = builder.height(height)
-  const src = builder.url()
-
-  if (fill) {
+  // Original: intrinsic layout at the image's real shape. The dimensions come
+  // from the asset id, so a portrait image lays out as a portrait — a guessed
+  // height here is what makes an image look cropped when nothing cropped it.
+  if (ratio === 'original') {
+    const aspectRatio = imageDimensions(image)?.aspectRatio ?? FALLBACK_ASPECT
     return (
       <Image
-        src={src}
+        src={urlForImage(image).width(width).url()}
         alt={alt ?? ''}
-        fill
+        width={width}
+        height={Math.round(width / aspectRatio)}
         sizes={sizes}
         priority={priority}
         className={className}
@@ -60,15 +122,32 @@ export function SanityImage({
     )
   }
 
+  const cropped = fit === 'crop'
+  let url = urlForImage(image).width(width)
+  // Both dimensions + fit=crop is what makes @sanity/image-url compute a
+  // hotspot-aware rect; passing an explicit `crop()` mode would switch that
+  // off, so don't.
+  if (cropped && ratio !== 'fill')
+    url = url.height(Math.round(width / ratioValue(ratio))).fit('crop')
+  const hotspot = cropped && ratio === 'fill' ? imageHotspot(image) : null
+
   return (
-    <Image
-      src={src}
-      alt={alt ?? ''}
-      width={width}
-      height={height ?? Math.round((width * 2) / 3)}
-      sizes={sizes}
-      priority={priority}
-      className={className}
-    />
+    <div
+      className={cn(
+        'relative overflow-hidden',
+        ratio === 'fill' ? 'h-full w-full' : RATIO_CLASS[ratio],
+        className,
+      )}
+    >
+      <Image
+        src={url.url()}
+        alt={alt ?? ''}
+        fill
+        sizes={sizes ?? '100vw'}
+        priority={priority}
+        className={cropped ? 'object-cover' : 'object-contain'}
+        style={hotspot ? { objectPosition: `${hotspot.x * 100}% ${hotspot.y * 100}%` } : undefined}
+      />
+    </div>
   )
 }

@@ -37,13 +37,14 @@ export function CaseStudyCard(card: CaseStudyCardData) {
         {/* A styled span, not a nested link — the whole card is the anchor. */}
         <span className="text-brand-tint mt-auto text-sm font-medium">Read the case →</span>
       </div>
-      <div className="rounded-card bg-ink overflow-hidden">
+      {/* Stacked, the panel takes its shape from the image; side by side it
+          stretches to the text column, so the image fills whatever it gets. */}
+      <div className="rounded-card bg-ink aspect-3/2 overflow-hidden md:aspect-auto">
         <SanityImage
           source={heroMedia?.image}
           alt={heroMedia?.alt ?? ''}
+          ratio="fill"
           width={1200}
-          height={800}
-          className="h-full w-full object-cover"
           sizes="(min-width: 768px) 40vw, 100vw"
         />
       </div>

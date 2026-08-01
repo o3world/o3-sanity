@@ -40,7 +40,6 @@ export function LogoWallSection({
                 source={client.logo}
                 alt={client.name ?? ''}
                 width={240}
-                height={96}
                 className="h-8 w-auto object-contain"
               />
             </li>

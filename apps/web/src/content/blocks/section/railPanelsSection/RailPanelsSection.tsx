@@ -37,7 +37,6 @@ export function RailPanelsSection({ heading, intro, panels, surface }: RailPanel
                   source={panel.logo}
                   alt={panel.heading ?? panel.railLabel ?? ''}
                   width={320}
-                  height={120}
                   className="h-10 w-auto object-contain"
                 />
               ) : panel.heading ? (
