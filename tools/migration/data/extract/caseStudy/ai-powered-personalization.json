@@ -1,0 +1,352 @@
+{
+  "_meta": {
+    "type": "caseStudy",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T02:52:58.497Z"
+  },
+  "wpId": 10023,
+  "slug": "ai-powered-personalization",
+  "path": "/work/ai-powered-personalization/",
+  "title": "AI-Powered Personalization",
+  "headline": "From prospect to program: AI that personalizes the path to engagement",
+  "dateGmt": "2025-04-01 15:49:41",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-cover-1.jpg",
+    "alt": "AI-powered personalization case study photo"
+  },
+  "seo": {
+    "titleOverride": "Improving engagement with AI-powered personalization %%sep%% %%sitename%%",
+    "titleRendered": "Improving engagement with AI-powered personalization | O3",
+    "descriptionOverride": "O3 built an AI-powered solution for student admissions that scales across industries needing personalized service exploration.",
+    "descriptionRendered": "O3 built an AI-powered solution for student admissions that scales across industries needing personalized service exploration.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/work/ai-powered-personalization/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "headline": "From prospect to program: AI that personalizes the path to engagement",
+    "flexible_content": [
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Multiple Columns",
+        "add_introduction": false,
+        "introduction": {
+          "": null,
+          "kicker": "",
+          "kicker_tag": false,
+          "title": "",
+          "heading_level": "h2",
+          "heading_tag": false,
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": null,
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h5>OPPORTUNITY</h5>\n<p>Higher ed faces a significant challenge in effectively engaging and converting prospective students in an increasingly competitive and digital recruitment landscape. Universities often struggle to personalize outreach and communicate their unique value, leading to lower conversion rates. Recent data shows that only 36% of high school students feel universities effectively convey their value proposition, while 68% of prospective students seek more personalized interaction during the application process. Traditional methods—like generic brochures and standardized campus tours—fail to resonate with a generation expecting tailored, technology-driven experiences.</p>\n<p>This challenge isn’t unique to higher ed; any organization marketing a complex set of programs or services, especially in B2B, faces similar hurdles in capturing and converting the right audience. Universities that embrace personalized, AI-driven solutions will gain a competitive edge, just as forward-thinking businesses do in their own industries.</p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h5>SOLUTION</h5>\n<p>Developed in collaboration between <a href=\"https://www.alliedpixel.com/\">Allied Pixel</a> and O3, our new AI experience adds a personalized touch with engaging videos and tailored information using conversational AI. Prospective students or families are presented with a series of conversational prompts that capture key information and allow prospects to explore questions about the institution as they see fit. Once submitted, data collected during the conversation is transformed into personalized video, directly addressing prospects&#8217; interest. It not only enriches student experiences but also provides valuable data and insights without extra work for administrators.</p>\n<p>While developed to address the admission conversion problem in higher ed, this solution translates well to any industry where we need to align customer interest with a personalized service or program offering. By dynamically responding to prospect interests and goals, and then allowing for further exploration, organizations can create a more engaging, responsive experience that precisely targets key information to increase the likelihood of conversion (as outlined below by a study conducted by Allied Pixel). For more information, <a href=\"https://www.alliedpixel.com/higher-education/\">sign up for a demo</a>.</p>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Multiple Columns",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "NUMBERS",
+          "kicker_tag": "div",
+          "title": "",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": "",
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "title",
+                "kicker": "",
+                "kicker_tag": "div",
+                "title": "170%",
+                "heading_level": "h1",
+                "heading_tag": "div",
+                "add_description": true,
+                "description": "Students who view real-time personalized videos click calls-to-action more often"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "title",
+                "kicker": "",
+                "kicker_tag": "div",
+                "title": "5X",
+                "heading_level": "h1",
+                "heading_tag": "div",
+                "add_description": true,
+                "description": "Students receiving personalized enrollment videos are more likely to enroll"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "title",
+                "kicker": "",
+                "kicker_tag": "div",
+                "title": "81%",
+                "heading_level": "h1",
+                "heading_tag": "div",
+                "add_description": true,
+                "description": "Most students say personalized videos increase their likelihood to apply"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "image_carousel",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Image Carousel",
+        "add_introduction": false,
+        "introduction": {
+          "": null,
+          "kicker": "",
+          "kicker_tag": false,
+          "title": "",
+          "heading_level": "h2",
+          "heading_tag": false,
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": null,
+        "images": [
+          {
+            "ID": 10174,
+            "id": 10174,
+            "title": "Allied 1",
+            "filename": "Allied-1-3.jpg",
+            "filesize": 1230369,
+            "url": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-1-3.jpg",
+            "link": "http://www.o3world.com/work/allied-1-4/",
+            "alt": "AI-powered personalization case study photo",
+            "author": "16",
+            "description": "",
+            "caption": "",
+            "name": "allied-1-4",
+            "status": "inherit",
+            "uploaded_to": 161,
+            "date": "2025-04-30 18:10:52",
+            "modified": "2025-04-30 18:11:54",
+            "menu_order": 0,
+            "mime_type": "image/jpeg",
+            "type": "image",
+            "subtype": "jpeg",
+            "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+            "width": 2500,
+            "height": 1408,
+            "sizes": {
+              "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-1-3-150x150.jpg",
+              "thumbnail-width": 150,
+              "thumbnail-height": 150,
+              "medium": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-1-3-640x360.jpg",
+              "medium-width": 640,
+              "medium-height": 360,
+              "medium_large": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-1-3-768x433.jpg",
+              "medium_large-width": 768,
+              "medium_large-height": 433,
+              "large": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-1-3-1024x577.jpg",
+              "large-width": 1024,
+              "large-height": 577,
+              "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-1-3-1536x865.jpg",
+              "1536x1536-width": 1536,
+              "1536x1536-height": 865,
+              "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-1-3-2048x1153.jpg",
+              "2048x2048-width": 2048,
+              "2048x2048-height": 1153,
+              "icon": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-1-3-48x27.jpg",
+              "icon-width": 48,
+              "icon-height": 27,
+              "xlarge": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-1-3-1280x721.jpg",
+              "xlarge-width": 1280,
+              "xlarge-height": 721,
+              "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-1-3.jpg",
+              "gform-image-choice-sm-width": 300,
+              "gform-image-choice-sm-height": 169,
+              "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-1-3.jpg",
+              "gform-image-choice-md-width": 400,
+              "gform-image-choice-md-height": 225,
+              "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-1-3.jpg",
+              "gform-image-choice-lg-width": 600,
+              "gform-image-choice-lg-height": 338
+            }
+          },
+          {
+            "ID": 10157,
+            "id": 10157,
+            "title": "Allied 2",
+            "filename": "Allied-2-2.jpg",
+            "filesize": 1385897,
+            "url": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-2-2.jpg",
+            "link": "http://www.o3world.com/work/ai-powered-personalization/allied-2-3/",
+            "alt": "Personalized video case study",
+            "author": "16",
+            "description": "",
+            "caption": "",
+            "name": "allied-2-3",
+            "status": "inherit",
+            "uploaded_to": 10023,
+            "date": "2025-04-29 13:21:24",
+            "modified": "2025-04-29 13:21:48",
+            "menu_order": 0,
+            "mime_type": "image/jpeg",
+            "type": "image",
+            "subtype": "jpeg",
+            "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+            "width": 2500,
+            "height": 1408,
+            "sizes": {
+              "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-2-2-150x150.jpg",
+              "thumbnail-width": 150,
+              "thumbnail-height": 150,
+              "medium": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-2-2-640x360.jpg",
+              "medium-width": 640,
+              "medium-height": 360,
+              "medium_large": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-2-2-768x433.jpg",
+              "medium_large-width": 768,
+              "medium_large-height": 433,
+              "large": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-2-2-1024x577.jpg",
+              "large-width": 1024,
+              "large-height": 577,
+              "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-2-2-1536x865.jpg",
+              "1536x1536-width": 1536,
+              "1536x1536-height": 865,
+              "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-2-2-2048x1153.jpg",
+              "2048x2048-width": 2048,
+              "2048x2048-height": 1153,
+              "icon": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-2-2-48x27.jpg",
+              "icon-width": 48,
+              "icon-height": 27,
+              "xlarge": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-2-2-1280x721.jpg",
+              "xlarge-width": 1280,
+              "xlarge-height": 721,
+              "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-2-2.jpg",
+              "gform-image-choice-sm-width": 300,
+              "gform-image-choice-sm-height": 169,
+              "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-2-2.jpg",
+              "gform-image-choice-md-width": 400,
+              "gform-image-choice-md-height": 225,
+              "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-2-2.jpg",
+              "gform-image-choice-lg-width": 600,
+              "gform-image-choice-lg-height": 338
+            }
+          },
+          {
+            "ID": 10168,
+            "id": 10168,
+            "title": "Allied 3",
+            "filename": "Allied-3-3.jpg",
+            "filesize": 1346702,
+            "url": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-3-3.jpg",
+            "link": "http://www.o3world.com/work/allied-3-4/",
+            "alt": "",
+            "author": "16",
+            "description": "",
+            "caption": "",
+            "name": "allied-3-4",
+            "status": "inherit",
+            "uploaded_to": 161,
+            "date": "2025-04-30 17:51:51",
+            "modified": "2025-04-30 18:13:40",
+            "menu_order": 0,
+            "mime_type": "image/jpeg",
+            "type": "image",
+            "subtype": "jpeg",
+            "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+            "width": 2500,
+            "height": 1408,
+            "sizes": {
+              "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-3-3-150x150.jpg",
+              "thumbnail-width": 150,
+              "thumbnail-height": 150,
+              "medium": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-3-3-640x360.jpg",
+              "medium-width": 640,
+              "medium-height": 360,
+              "medium_large": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-3-3-768x433.jpg",
+              "medium_large-width": 768,
+              "medium_large-height": 433,
+              "large": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-3-3-1024x577.jpg",
+              "large-width": 1024,
+              "large-height": 577,
+              "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-3-3-1536x865.jpg",
+              "1536x1536-width": 1536,
+              "1536x1536-height": 865,
+              "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-3-3-2048x1153.jpg",
+              "2048x2048-width": 2048,
+              "2048x2048-height": 1153,
+              "icon": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-3-3-48x27.jpg",
+              "icon-width": 48,
+              "icon-height": 27,
+              "xlarge": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-3-3-1280x721.jpg",
+              "xlarge-width": 1280,
+              "xlarge-height": 721,
+              "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-3-3.jpg",
+              "gform-image-choice-sm-width": 300,
+              "gform-image-choice-sm-height": 169,
+              "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-3-3.jpg",
+              "gform-image-choice-md-width": 400,
+              "gform-image-choice-md-height": 225,
+              "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/04/Allied-3-3.jpg",
+              "gform-image-choice-lg-width": 600,
+              "gform-image-choice-lg-height": 338
+            }
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "project_feed",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Project Feed",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "More Work",
+          "kicker_tag": "div",
+          "title": "Related projects",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": "",
+        "list_type": "select",
+        "select_projects": [
+          9319,
+          8629,
+          8628
+        ]
+      }
+    ]
+  }
+}

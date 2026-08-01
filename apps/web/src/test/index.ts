@@ -17,6 +17,7 @@ export {
   aPerspective,
   aPerspectivesPage,
   aSeededPage,
+  aTranslatedCaseStudy,
   migratedPageSlugs,
   migratedPerspectiveSlugs,
   paragraph,

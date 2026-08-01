@@ -199,6 +199,47 @@ export function migratedPageSlugs(): string[] {
     .map((f) => f.replace(/\.json$/, ''))
 }
 
+/**
+ * The committed agent translation (#21), shaped into what `CASE_STUDY_QUERY`
+ * returns — slug flattened, `client`/`industries` dereferenced from the
+ * committed seeds, `_meta` dropped the way `load` drops it.
+ *
+ * Translated documents load draft-only, so the render check is the only place
+ * outside Studio that proves one actually displays.
+ */
+export function aTranslatedCaseStudy(slug: string): Record<string, unknown> {
+  const raw = resolveWpSrcMarkers(
+    JSON.parse(
+      readFileSync(
+        join(
+          dirname(fileURLToPath(import.meta.url)),
+          '../../../../tools/migration/data/translated/caseStudy',
+          `${slug}.json`,
+        ),
+        'utf8',
+      ),
+    ),
+  ) as Record<string, unknown>
+  // `load` strips `_meta` before writing; the fixture mirrors that.
+  const doc = Object.fromEntries(Object.entries(raw).filter(([k]) => k !== '_meta'))
+
+  const byId = new Map(
+    ['client', 'industry'].flatMap((type) =>
+      seedsOfType(type).map((seed) => [seed._id as string, seed] as const),
+    ),
+  )
+  const deref = (ref: unknown) => byId.get((ref as { _ref?: string })?._ref ?? '') ?? null
+
+  return {
+    ...doc,
+    slug: (doc.slug as { current?: string } | undefined)?.current ?? null,
+    client: deref(doc.client),
+    industries: ((doc.industries ?? []) as unknown[]).map(deref).filter(Boolean),
+    headlineStat: (doc.stats as unknown[] | undefined)?.[0] ?? null,
+    next: null,
+  }
+}
+
 const SEED_DIR = join(
   dirname(fileURLToPath(import.meta.url)),
   '../../../../tools/migration/data/seed',

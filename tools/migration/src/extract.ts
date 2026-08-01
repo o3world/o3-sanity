@@ -39,6 +39,18 @@ type WpPage = {
   fields: Record<string, unknown>
 }
 
+type WpCaseStudy = {
+  wpId: number
+  slug: string
+  path: string
+  title: string
+  headline: string
+  dateGmt: string
+  featuredImage: { url: string; alt: string } | null
+  seo: WpSeo
+  fields: Record<string, unknown>
+}
+
 type WpUser = { wpId: number; slug: string; name: string; email: string; bio: string }
 type WpTeamMember = {
   wpId: number
@@ -156,6 +168,51 @@ echo json_encode($out, JSON_PARTIAL_OUTPUT_ON_ERROR);`,
   return pages.length
 }
 
+/**
+ * The `work` CPT — the 20 case studies (#21).
+ *
+ * Extraction is **verbatim and unmapped**, unlike every other type here. A
+ * case study's ACF is four levels of nested flexible content
+ * (`flexible_content[].column[].content[]`) laid out for a page that no
+ * longer exists, and the new `caseStudy` is a structured document — client,
+ * narrative headline, stats, chapters, deliverables. There is no mechanical
+ * transform between those two shapes, which is the whole reason the pipeline
+ * has a translate track (ADR 0002's addendum): the restructuring is Claude
+ * Code's job, working from this JSON and `rules/caseStudy.md`.
+ *
+ * So this writes what `get_fields()` returns and nothing else. Anything that
+ * looks like a mapping decision belongs in the rules file, where a human
+ * reviews it.
+ */
+function extractCaseStudies() {
+  const studies = wpEval<WpCaseStudy[]>(
+    `$out = [];
+foreach (get_posts(["post_type" => "work", "post_status" => "publish", "numberposts" => -1, "orderby" => "date", "order" => "DESC"]) as $p) {
+  $thumb = get_post_thumbnail_id($p->ID);
+  $f = get_fields($p->ID);
+  $out[] = [
+    "wpId" => $p->ID,
+    "slug" => $p->post_name,
+    "path" => str_replace(home_url(), "", get_permalink($p->ID)),
+    "title" => $p->post_title,
+    "headline" => is_array($f) && isset($f["headline"]) ? (string) $f["headline"] : "",
+    "dateGmt" => $p->post_date_gmt,
+    "featuredImage" => $thumb ? ["url" => wp_get_attachment_url($thumb), "alt" => (string) get_post_meta($thumb, "_wp_attachment_image_alt", true)] : null,
+    "seo" => ${yoastPhp('$p->ID')},
+    "fields" => $f,
+  ];
+}
+echo json_encode($out, JSON_PARTIAL_OUTPUT_ON_ERROR);`,
+  )
+  for (const study of studies) {
+    writeJson(join(EXTRACT_DIR, 'caseStudy', `${study.slug}.json`), {
+      _meta: { type: 'caseStudy', source: SOURCE, extractedAt: new Date().toISOString() },
+      ...study,
+    })
+  }
+  return studies.length
+}
+
 function extractUsers() {
   const users = wpEval<WpUser[]>(
     `$out = [];
@@ -267,10 +324,11 @@ const site = extractSiteSeo()
 const nMenus = extractChrome()
 const nPosts = extractPosts()
 const nPages = extractPages()
+const nCases = extractCaseStudies()
 const nUsers = extractUsers()
 const nTeam = extractTeam()
 const nCats = extractCategories()
 console.log(
-  `done: ${nPosts} posts, ${nPages} pages, ${nUsers} users, ${nTeam} team, ` +
+  `done: ${nPosts} posts, ${nPages} pages, ${nCases} case studies, ${nUsers} users, ${nTeam} team, ` +
     `${nCats} categories, ${nMenus} menus, site seo (${site.siteName}) → ${EXTRACT_DIR}`,
 )

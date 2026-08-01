@@ -1,0 +1,352 @@
+{
+  "_meta": {
+    "type": "caseStudy",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T02:52:58.500Z"
+  },
+  "wpId": 5806,
+  "slug": "gettacar",
+  "path": "/work/gettacar/",
+  "title": "gettacar",
+  "headline": "Smoothing bumps in the road of user journeys",
+  "dateGmt": "2022-11-07 14:11:17",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2022/11/gettacar-cover.jpg",
+    "alt": "Gettacar case study"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "gettacar | O3",
+    "descriptionOverride": "Read about how O3 collaborated with gettacar to improve their customer experience in this case study overview of gettacar projects.",
+    "descriptionRendered": "Read about how O3 collaborated with gettacar to improve their customer experience in this case study overview of gettacar projects.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/work/gettacar/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "headline": "Smoothing bumps in the road of user journeys",
+    "flexible_content": [
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Multiple Columns",
+        "add_introduction": false,
+        "introduction": {
+          "": null,
+          "kicker": "",
+          "kicker_tag": false,
+          "title": "",
+          "heading_level": "h2",
+          "heading_tag": false,
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": null,
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<div class=\"type-kicker\">Opportunity</div>\n<p>gettacar was an online auto dealer with a focus on making the car buying and financing experience quick and painless. As an ambitious startup, their co-founders were hyper-focused on making smart, MVP decisions with a long term focus on scalability and customer success. In addition to embracing their waggish brand experience, they required end-to-end consideration from their shopping and application approval UX to their technical architecture and back-office processing needs.</p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<div class=\"type-kicker\">Solution</div>\n<p>As a startup with big aspirations, it was necessary that we balanced valuable CX considerations with speed to market. While we wanted to deliver on a flawless experience where the buyer could quickly shop and apply to purchase, the brand and value proposition needed to come to life as well. We collaborated closely with gettacar stakeholders to make smart decisions on nice-to-haves vs. need-to-haves. Quick data assessment and user testing processes allowed us all to make informed, critical feature decisions on the fly. As with all of the work we do, a full consideration of the complete buyer experience required examination of the administrative experience as well. From processing applications to delivering the customer’s new ride, we help to design, measure and optimize the gettacar service. The result is a user experience that drives sales and technical architecture fit for regular product enhancements.</p>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Multiple Columns",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "RESULTS",
+          "kicker_tag": "div",
+          "title": "",
+          "heading_level": "display",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": "",
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "title",
+                "kicker": "",
+                "kicker_tag": "div",
+                "title": "7K+",
+                "heading_level": "display",
+                "heading_tag": "div",
+                "add_description": true,
+                "description": "Number of applications for cars in the first 90 days"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "title",
+                "kicker": "",
+                "kicker_tag": "div",
+                "title": "20%+",
+                "heading_level": "display",
+                "heading_tag": "div",
+                "add_description": true,
+                "description": "Average increase in completed applications MoM since launch"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "title",
+                "kicker": "",
+                "kicker_tag": "div",
+                "title": "76%",
+                "heading_level": "display",
+                "heading_tag": "div",
+                "add_description": true,
+                "description": "Improvement in application progress to user studies and UX optimizations"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "image_carousel",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Image Carousel",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "Highlights",
+          "kicker_tag": "div",
+          "title": "",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": "",
+        "images": [
+          {
+            "ID": 6475,
+            "id": 6475,
+            "title": "",
+            "filename": "gettacar-casestudy1.png",
+            "filesize": 1097861,
+            "url": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy1.png",
+            "link": "http://www.o3world.com/gettacar-casestudy1/",
+            "alt": "Gettacar logo on green backdrop with Gettacar branded car.",
+            "author": "16",
+            "description": "",
+            "caption": "",
+            "name": "gettacar-casestudy1",
+            "status": "inherit",
+            "uploaded_to": 0,
+            "date": "2023-01-23 23:26:32",
+            "modified": "2023-01-27 17:28:44",
+            "menu_order": 0,
+            "mime_type": "image/png",
+            "type": "image",
+            "subtype": "png",
+            "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+            "width": 2500,
+            "height": 1448,
+            "sizes": {
+              "thumbnail": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy1-150x150.png",
+              "thumbnail-width": 150,
+              "thumbnail-height": 150,
+              "medium": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy1-640x371.png",
+              "medium-width": 640,
+              "medium-height": 371,
+              "medium_large": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy1-768x445.png",
+              "medium_large-width": 768,
+              "medium_large-height": 445,
+              "large": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy1-1024x593.png",
+              "large-width": 1024,
+              "large-height": 593,
+              "1536x1536": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy1-1536x890.png",
+              "1536x1536-width": 1536,
+              "1536x1536-height": 890,
+              "2048x2048": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy1-2048x1186.png",
+              "2048x2048-width": 2048,
+              "2048x2048-height": 1186,
+              "icon": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy1-48x28.png",
+              "icon-width": 48,
+              "icon-height": 28,
+              "xlarge": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy1-1280x741.png",
+              "xlarge-width": 1280,
+              "xlarge-height": 741,
+              "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy1.png",
+              "gform-image-choice-sm-width": 300,
+              "gform-image-choice-sm-height": 174,
+              "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy1.png",
+              "gform-image-choice-md-width": 400,
+              "gform-image-choice-md-height": 232,
+              "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy1.png",
+              "gform-image-choice-lg-width": 600,
+              "gform-image-choice-lg-height": 348
+            }
+          },
+          {
+            "ID": 6476,
+            "id": 6476,
+            "title": "",
+            "filename": "gettacar-casestudy2.png",
+            "filesize": 1239851,
+            "url": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy2.png",
+            "link": "http://www.o3world.com/gettacar-casestudy2/",
+            "alt": "Screenshot. Gettacar landing page with headline, Choose a car. Get it delivered. 5 day returns. 100% online.",
+            "author": "16",
+            "description": "",
+            "caption": "",
+            "name": "gettacar-casestudy2",
+            "status": "inherit",
+            "uploaded_to": 0,
+            "date": "2023-01-23 23:26:39",
+            "modified": "2023-02-01 17:57:11",
+            "menu_order": 0,
+            "mime_type": "image/png",
+            "type": "image",
+            "subtype": "png",
+            "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+            "width": 2500,
+            "height": 1448,
+            "sizes": {
+              "thumbnail": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy2-150x150.png",
+              "thumbnail-width": 150,
+              "thumbnail-height": 150,
+              "medium": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy2-640x371.png",
+              "medium-width": 640,
+              "medium-height": 371,
+              "medium_large": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy2-768x445.png",
+              "medium_large-width": 768,
+              "medium_large-height": 445,
+              "large": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy2-1024x593.png",
+              "large-width": 1024,
+              "large-height": 593,
+              "1536x1536": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy2-1536x890.png",
+              "1536x1536-width": 1536,
+              "1536x1536-height": 890,
+              "2048x2048": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy2-2048x1186.png",
+              "2048x2048-width": 2048,
+              "2048x2048-height": 1186,
+              "icon": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy2-48x28.png",
+              "icon-width": 48,
+              "icon-height": 28,
+              "xlarge": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy2-1280x741.png",
+              "xlarge-width": 1280,
+              "xlarge-height": 741,
+              "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy2.png",
+              "gform-image-choice-sm-width": 300,
+              "gform-image-choice-sm-height": 174,
+              "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy2.png",
+              "gform-image-choice-md-width": 400,
+              "gform-image-choice-md-height": 232,
+              "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy2.png",
+              "gform-image-choice-lg-width": 600,
+              "gform-image-choice-lg-height": 348
+            }
+          },
+          {
+            "ID": 6477,
+            "id": 6477,
+            "title": "",
+            "filename": "gettacar-casestudy3.png",
+            "filesize": 3274704,
+            "url": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy3.png",
+            "link": "http://www.o3world.com/gettacar-casestudy3/",
+            "alt": "Collection of screenshots. Gettacar mobile app.",
+            "author": "16",
+            "description": "",
+            "caption": "",
+            "name": "gettacar-casestudy3",
+            "status": "inherit",
+            "uploaded_to": 0,
+            "date": "2023-01-23 23:26:46",
+            "modified": "2023-01-27 17:27:05",
+            "menu_order": 0,
+            "mime_type": "image/png",
+            "type": "image",
+            "subtype": "png",
+            "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+            "width": 2500,
+            "height": 1448,
+            "sizes": {
+              "thumbnail": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy3-150x150.png",
+              "thumbnail-width": 150,
+              "thumbnail-height": 150,
+              "medium": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy3-640x371.png",
+              "medium-width": 640,
+              "medium-height": 371,
+              "medium_large": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy3-768x445.png",
+              "medium_large-width": 768,
+              "medium_large-height": 445,
+              "large": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy3-1024x593.png",
+              "large-width": 1024,
+              "large-height": 593,
+              "1536x1536": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy3-1536x890.png",
+              "1536x1536-width": 1536,
+              "1536x1536-height": 890,
+              "2048x2048": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy3-2048x1186.png",
+              "2048x2048-width": 2048,
+              "2048x2048-height": 1186,
+              "icon": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy3-48x28.png",
+              "icon-width": 48,
+              "icon-height": 28,
+              "xlarge": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy3-1280x741.png",
+              "xlarge-width": 1280,
+              "xlarge-height": 741,
+              "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy3.png",
+              "gform-image-choice-sm-width": 300,
+              "gform-image-choice-sm-height": 174,
+              "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy3.png",
+              "gform-image-choice-md-width": 400,
+              "gform-image-choice-md-height": 232,
+              "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy3.png",
+              "gform-image-choice-lg-width": 600,
+              "gform-image-choice-lg-height": 348
+            }
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "project_feed",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Project Feed",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "Work",
+          "kicker_tag": "div",
+          "title": "Related projects",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": "",
+        "list_type": "select",
+        "select_projects": [
+          5803,
+          5808,
+          5804
+        ]
+      }
+    ]
+  }
+}

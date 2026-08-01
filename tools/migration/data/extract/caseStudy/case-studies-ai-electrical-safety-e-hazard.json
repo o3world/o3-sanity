@@ -1,0 +1,412 @@
+{
+  "_meta": {
+    "type": "caseStudy",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T02:52:58.495Z"
+  },
+  "wpId": 10282,
+  "slug": "case-studies-ai-electrical-safety-e-hazard",
+  "path": "/work/case-studies-ai-electrical-safety-e-hazard/",
+  "title": "e-Hazard",
+  "headline": "Manual to magical: How AI energized e‑Hazard’s operations ",
+  "dateGmt": "2025-07-18 17:51:07",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-cover-scaled.jpg",
+    "alt": "e-Hazard AI operations transformation"
+  },
+  "seo": {
+    "titleOverride": "How AI transformed certificate management for e-Hazard",
+    "titleRendered": "How AI transformed certificate management for e-Hazard",
+    "descriptionOverride": "Learn how AI operations transformation revamps e-Hazard’s workflows, driving efficiency and improving core service offerings.",
+    "descriptionRendered": "Learn how AI operations transformation revamps e-Hazard’s workflows, driving efficiency and improving core service offerings.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/work/case-studies-ai-electrical-safety-e-hazard/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "headline": "Manual to magical: How AI energized e‑Hazard’s operations ",
+    "flexible_content": [
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Multiple Columns",
+        "add_introduction": false,
+        "introduction": {
+          "": null,
+          "kicker": "",
+          "kicker_tag": false,
+          "title": "",
+          "heading_level": "h2",
+          "heading_tag": false,
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": null,
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h5>Opportunity</h5>\n<p>As a leading national provider of electrical safety training, arc flash studies, and consulting services, e-Hazard delivers critical instruction and guidance based on NFPA 70E, NEC, and OSHA standards to help organizations improve workplace safety and maintain compliance. Like many forward-thinking organizations, e-Hazard was eager to explore how AI could drive operational efficiency and create meaningful impact. Their goal was to identify AI use cases that would not only streamline internal workflows but also enhance the value of their core service offerings—including training programs, risk assessments, and safety consulting. The challenge lay in finding the right applications where AI could deliver measurable ROI and sustainable improvements across the business. It also required that we keep an eye on existing technology investments without tacking on substantial, additional expenses.</p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h5>SOLUTION</h5>\n<p>To unlock the value of AI within e-Hazard’s operations, O3 led a collaborative engagement using our proven AI workshop and prioritization methodology. Together with e-Hazard’s leadership, we assessed a range of opportunities and identified a clear area for impact: modernizing their manual, paper-based certificate management process. We mapped the workflow end-to-end and evaluated AI solutions capable of ingesting student lists, reading scanned data, and generating CSV files for seamless integration into their certificate management system. Working closely with the e-Hazard team, we developed a solution that prioritized accuracy in document ingestion and data formatting. The approach was validated through stakeholder feedback and iterative refinement—ultimately resulting in a faster, more reliable, and cost-effective way to manage student certificates. And most importantly, it left us with one extremely happy customer.</p>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Multiple Columns",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "RESULTS",
+          "kicker_tag": "div",
+          "title": "",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": "",
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "title",
+                "kicker": "",
+                "kicker_tag": "div",
+                "title": "70%",
+                "heading_level": "h2",
+                "heading_tag": "div",
+                "add_description": true,
+                "description": "Reduction in hours spent per week"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "title",
+                "kicker": "",
+                "kicker_tag": "div",
+                "title": "< 18 months",
+                "heading_level": "h2",
+                "heading_tag": "div",
+                "add_description": true,
+                "description": "Recoup investment cost in time savings"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "title",
+                "kicker": "",
+                "kicker_tag": "div",
+                "title": "Only $3 / mo",
+                "heading_level": "h2",
+                "heading_tag": "div",
+                "add_description": true,
+                "description": "Additional infrastructure fees"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "image_carousel",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Image Carousel",
+        "add_introduction": false,
+        "introduction": {
+          "": null,
+          "kicker": "",
+          "kicker_tag": false,
+          "title": "",
+          "heading_level": "h2",
+          "heading_tag": false,
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": null,
+        "images": [
+          {
+            "ID": 10278,
+            "id": 10278,
+            "title": "e-Hazard 1",
+            "filename": "e-Hazard-1-scaled.jpg",
+            "filesize": 175965,
+            "url": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-1-scaled.jpg",
+            "link": "http://www.o3world.com/e-hazard-1/",
+            "alt": "e-Hazard case study carousel cover image",
+            "author": "16",
+            "description": "",
+            "caption": "",
+            "name": "e-hazard-1",
+            "status": "inherit",
+            "uploaded_to": 0,
+            "date": "2025-06-12 20:51:54",
+            "modified": "2025-06-12 20:53:33",
+            "menu_order": 0,
+            "mime_type": "image/jpeg",
+            "type": "image",
+            "subtype": "jpeg",
+            "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+            "width": 2560,
+            "height": 1442,
+            "sizes": {
+              "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-1-150x150.jpg",
+              "thumbnail-width": 150,
+              "thumbnail-height": 150,
+              "medium": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-1-640x360.jpg",
+              "medium-width": 640,
+              "medium-height": 360,
+              "medium_large": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-1-768x433.jpg",
+              "medium_large-width": 768,
+              "medium_large-height": 433,
+              "large": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-1-1024x577.jpg",
+              "large-width": 1024,
+              "large-height": 577,
+              "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-1-1536x865.jpg",
+              "1536x1536-width": 1536,
+              "1536x1536-height": 865,
+              "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-1-2048x1153.jpg",
+              "2048x2048-width": 2048,
+              "2048x2048-height": 1153,
+              "icon": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-1-48x27.jpg",
+              "icon-width": 48,
+              "icon-height": 27,
+              "xlarge": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-1-1280x721.jpg",
+              "xlarge-width": 1280,
+              "xlarge-height": 721,
+              "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-1-scaled.jpg",
+              "gform-image-choice-sm-width": 300,
+              "gform-image-choice-sm-height": 169,
+              "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-1-scaled.jpg",
+              "gform-image-choice-md-width": 400,
+              "gform-image-choice-md-height": 225,
+              "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-1-scaled.jpg",
+              "gform-image-choice-lg-width": 600,
+              "gform-image-choice-lg-height": 338
+            }
+          },
+          {
+            "ID": 10280,
+            "id": 10280,
+            "title": "e-Hazard 2",
+            "filename": "e-Hazard-2-scaled.jpg",
+            "filesize": 480839,
+            "url": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-2-scaled.jpg",
+            "link": "http://www.o3world.com/e-hazard-2/",
+            "alt": "e-Hazard case study detail",
+            "author": "16",
+            "description": "",
+            "caption": "",
+            "name": "e-hazard-2",
+            "status": "inherit",
+            "uploaded_to": 0,
+            "date": "2025-06-12 20:52:12",
+            "modified": "2025-06-12 20:53:54",
+            "menu_order": 0,
+            "mime_type": "image/jpeg",
+            "type": "image",
+            "subtype": "jpeg",
+            "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+            "width": 2560,
+            "height": 1442,
+            "sizes": {
+              "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-2-150x150.jpg",
+              "thumbnail-width": 150,
+              "thumbnail-height": 150,
+              "medium": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-2-640x360.jpg",
+              "medium-width": 640,
+              "medium-height": 360,
+              "medium_large": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-2-768x433.jpg",
+              "medium_large-width": 768,
+              "medium_large-height": 433,
+              "large": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-2-1024x577.jpg",
+              "large-width": 1024,
+              "large-height": 577,
+              "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-2-1536x865.jpg",
+              "1536x1536-width": 1536,
+              "1536x1536-height": 865,
+              "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-2-2048x1153.jpg",
+              "2048x2048-width": 2048,
+              "2048x2048-height": 1153,
+              "icon": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-2-48x27.jpg",
+              "icon-width": 48,
+              "icon-height": 27,
+              "xlarge": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-2-1280x721.jpg",
+              "xlarge-width": 1280,
+              "xlarge-height": 721,
+              "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-2-scaled.jpg",
+              "gform-image-choice-sm-width": 300,
+              "gform-image-choice-sm-height": 169,
+              "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-2-scaled.jpg",
+              "gform-image-choice-md-width": 400,
+              "gform-image-choice-md-height": 225,
+              "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-2-scaled.jpg",
+              "gform-image-choice-lg-width": 600,
+              "gform-image-choice-lg-height": 338
+            }
+          },
+          {
+            "ID": 10281,
+            "id": 10281,
+            "title": "e-Hazard 3",
+            "filename": "e-Hazard-3-scaled.jpg",
+            "filesize": 414561,
+            "url": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-3-scaled.jpg",
+            "link": "http://www.o3world.com/e-hazard-3/",
+            "alt": "e-Hazard case study detail",
+            "author": "16",
+            "description": "",
+            "caption": "",
+            "name": "e-hazard-3",
+            "status": "inherit",
+            "uploaded_to": 0,
+            "date": "2025-06-12 20:52:20",
+            "modified": "2025-06-13 16:36:32",
+            "menu_order": 0,
+            "mime_type": "image/jpeg",
+            "type": "image",
+            "subtype": "jpeg",
+            "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+            "width": 2560,
+            "height": 1442,
+            "sizes": {
+              "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-3-150x150.jpg",
+              "thumbnail-width": 150,
+              "thumbnail-height": 150,
+              "medium": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-3-640x360.jpg",
+              "medium-width": 640,
+              "medium-height": 360,
+              "medium_large": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-3-768x433.jpg",
+              "medium_large-width": 768,
+              "medium_large-height": 433,
+              "large": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-3-1024x577.jpg",
+              "large-width": 1024,
+              "large-height": 577,
+              "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-3-1536x865.jpg",
+              "1536x1536-width": 1536,
+              "1536x1536-height": 865,
+              "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-3-2048x1153.jpg",
+              "2048x2048-width": 2048,
+              "2048x2048-height": 1153,
+              "icon": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-3-48x27.jpg",
+              "icon-width": 48,
+              "icon-height": 27,
+              "xlarge": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-3-1280x721.jpg",
+              "xlarge-width": 1280,
+              "xlarge-height": 721,
+              "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-3-scaled.jpg",
+              "gform-image-choice-sm-width": 300,
+              "gform-image-choice-sm-height": 169,
+              "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-3-scaled.jpg",
+              "gform-image-choice-md-width": 400,
+              "gform-image-choice-md-height": 225,
+              "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-3-scaled.jpg",
+              "gform-image-choice-lg-width": 600,
+              "gform-image-choice-lg-height": 338
+            }
+          },
+          {
+            "ID": 10279,
+            "id": 10279,
+            "title": "e-Hazard 4",
+            "filename": "e-Hazard-4-scaled.jpg",
+            "filesize": 405271,
+            "url": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-4-scaled.jpg",
+            "link": "http://www.o3world.com/e-hazard-4/",
+            "alt": "e-Hazard case study detail",
+            "author": "16",
+            "description": "",
+            "caption": "",
+            "name": "e-hazard-4",
+            "status": "inherit",
+            "uploaded_to": 0,
+            "date": "2025-06-12 20:52:02",
+            "modified": "2025-06-12 20:53:42",
+            "menu_order": 0,
+            "mime_type": "image/jpeg",
+            "type": "image",
+            "subtype": "jpeg",
+            "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+            "width": 2560,
+            "height": 1442,
+            "sizes": {
+              "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-4-150x150.jpg",
+              "thumbnail-width": 150,
+              "thumbnail-height": 150,
+              "medium": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-4-640x360.jpg",
+              "medium-width": 640,
+              "medium-height": 360,
+              "medium_large": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-4-768x433.jpg",
+              "medium_large-width": 768,
+              "medium_large-height": 433,
+              "large": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-4-1024x577.jpg",
+              "large-width": 1024,
+              "large-height": 577,
+              "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-4-1536x865.jpg",
+              "1536x1536-width": 1536,
+              "1536x1536-height": 865,
+              "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-4-2048x1153.jpg",
+              "2048x2048-width": 2048,
+              "2048x2048-height": 1153,
+              "icon": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-4-48x27.jpg",
+              "icon-width": 48,
+              "icon-height": 27,
+              "xlarge": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-4-1280x721.jpg",
+              "xlarge-width": 1280,
+              "xlarge-height": 721,
+              "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-4-scaled.jpg",
+              "gform-image-choice-sm-width": 300,
+              "gform-image-choice-sm-height": 169,
+              "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-4-scaled.jpg",
+              "gform-image-choice-md-width": 400,
+              "gform-image-choice-md-height": 225,
+              "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-4-scaled.jpg",
+              "gform-image-choice-lg-width": 600,
+              "gform-image-choice-lg-height": 338
+            }
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "project_feed",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Project Feed",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "More Work",
+          "kicker_tag": "div",
+          "title": "Related projects",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": "",
+        "list_type": "select",
+        "select_projects": [
+          8628,
+          9319,
+          10023
+        ]
+      }
+    ]
+  }
+}

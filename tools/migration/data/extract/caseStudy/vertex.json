@@ -1,0 +1,352 @@
+{
+  "_meta": {
+    "type": "caseStudy",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T02:52:58.500Z"
+  },
+  "wpId": 5804,
+  "slug": "vertex",
+  "path": "/work/vertex/",
+  "title": "Vertex",
+  "headline": "Establishing a global leader in tax technology",
+  "dateGmt": "2022-11-07 14:10:19",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2022/11/Vertex-cover.jpg",
+    "alt": "Vertex case study"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Vertex | O3",
+    "descriptionOverride": "Learn more about how O3 has helped Vertex create cutting-edge digital experiences in this project case study.",
+    "descriptionRendered": "Learn more about how O3 has helped Vertex create cutting-edge digital experiences in this project case study.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/work/vertex/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "headline": "Establishing a global leader in tax technology",
+    "flexible_content": [
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Multiple Columns",
+        "add_introduction": false,
+        "introduction": {
+          "": null,
+          "kicker": "",
+          "kicker_tag": false,
+          "title": "",
+          "heading_level": "h2",
+          "heading_tag": false,
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": null,
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h5 class=\"type-kicker\">Opportunity</h5>\n<p>A leading global provider of corporate tax software and services for some of the world’s largest retailers, Vertex aims to take the complexity out of sales and use tax, global taxation, and tax data for its customers. Vertex needed a partner to help them quickly and cohesively develop an evolving global customer experience. Their partner network was rapidly expanding, their products were maturing and their marketing needs were growing. They needed a team of nimble strategists, designers and technology experts that could manage and innovate across a complex digital marketing journey.</p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<div class=\"type-kicker\">Solution</div>\n<p>Starting with an assessment of Vertex’s market, data and customer journey, we created a personalized, multi-visit B2B experience designed to scale and nurture prospects across an organization. The globalized site allows for regional-centric content and solution offerings and considers various points of entry including a partner channel and automated chat. Ongoing, through rigorous, data-driven processes, we are able to quickly adapt and create a connected global customer experience for Vertex.</p>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Multiple Columns",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "RESULTS",
+          "kicker_tag": "div",
+          "title": "",
+          "heading_level": "display",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": "",
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "title",
+                "kicker": "",
+                "kicker_tag": "div",
+                "title": "3X",
+                "heading_level": "display",
+                "heading_tag": "div",
+                "add_description": true,
+                "description": "improvement across key conversion points"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "title",
+                "kicker": "",
+                "kicker_tag": "div",
+                "title": "200+",
+                "heading_level": "display",
+                "heading_tag": "div",
+                "add_description": true,
+                "description": "Customers and internal stakeholders we've interviewed"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "title",
+                "kicker": "",
+                "kicker_tag": "div",
+                "title": "10+",
+                "heading_level": "display",
+                "heading_tag": "div",
+                "add_description": true,
+                "description": "Years working together as partners"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "image_carousel",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Image Carousel",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "Highlights",
+          "kicker_tag": "div",
+          "title": "",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": "",
+        "images": [
+          {
+            "ID": 6493,
+            "id": 6493,
+            "title": "",
+            "filename": "Vertex-casestudy1.png",
+            "filesize": 68800,
+            "url": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy1.png",
+            "link": "http://www.o3world.com/vertex-casestudy1/",
+            "alt": "Vertex logo over graphical arrow patterns.",
+            "author": "16",
+            "description": "",
+            "caption": "",
+            "name": "vertex-casestudy1",
+            "status": "inherit",
+            "uploaded_to": 0,
+            "date": "2023-01-23 23:28:28",
+            "modified": "2023-01-27 15:48:18",
+            "menu_order": 0,
+            "mime_type": "image/png",
+            "type": "image",
+            "subtype": "png",
+            "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+            "width": 2500,
+            "height": 1448,
+            "sizes": {
+              "thumbnail": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy1-150x150.png",
+              "thumbnail-width": 150,
+              "thumbnail-height": 150,
+              "medium": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy1-640x371.png",
+              "medium-width": 640,
+              "medium-height": 371,
+              "medium_large": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy1-768x445.png",
+              "medium_large-width": 768,
+              "medium_large-height": 445,
+              "large": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy1-1024x593.png",
+              "large-width": 1024,
+              "large-height": 593,
+              "1536x1536": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy1-1536x890.png",
+              "1536x1536-width": 1536,
+              "1536x1536-height": 890,
+              "2048x2048": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy1-2048x1186.png",
+              "2048x2048-width": 2048,
+              "2048x2048-height": 1186,
+              "icon": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy1-48x28.png",
+              "icon-width": 48,
+              "icon-height": 28,
+              "xlarge": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy1-1280x741.png",
+              "xlarge-width": 1280,
+              "xlarge-height": 741,
+              "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy1.png",
+              "gform-image-choice-sm-width": 300,
+              "gform-image-choice-sm-height": 174,
+              "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy1.png",
+              "gform-image-choice-md-width": 400,
+              "gform-image-choice-md-height": 232,
+              "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy1.png",
+              "gform-image-choice-lg-width": 600,
+              "gform-image-choice-lg-height": 348
+            }
+          },
+          {
+            "ID": 6494,
+            "id": 6494,
+            "title": "",
+            "filename": "Vertex-casestudy2.png",
+            "filesize": 2038074,
+            "url": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy2.png",
+            "link": "http://www.o3world.com/vertex-casestudy2/",
+            "alt": "Collection of pages from the Vertex website on a mobile device.",
+            "author": "16",
+            "description": "",
+            "caption": "",
+            "name": "vertex-casestudy2",
+            "status": "inherit",
+            "uploaded_to": 0,
+            "date": "2023-01-23 23:28:32",
+            "modified": "2023-01-27 15:47:36",
+            "menu_order": 0,
+            "mime_type": "image/png",
+            "type": "image",
+            "subtype": "png",
+            "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+            "width": 2500,
+            "height": 1448,
+            "sizes": {
+              "thumbnail": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy2-150x150.png",
+              "thumbnail-width": 150,
+              "thumbnail-height": 150,
+              "medium": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy2-640x371.png",
+              "medium-width": 640,
+              "medium-height": 371,
+              "medium_large": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy2-768x445.png",
+              "medium_large-width": 768,
+              "medium_large-height": 445,
+              "large": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy2-1024x593.png",
+              "large-width": 1024,
+              "large-height": 593,
+              "1536x1536": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy2-1536x890.png",
+              "1536x1536-width": 1536,
+              "1536x1536-height": 890,
+              "2048x2048": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy2-2048x1186.png",
+              "2048x2048-width": 2048,
+              "2048x2048-height": 1186,
+              "icon": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy2-48x28.png",
+              "icon-width": 48,
+              "icon-height": 28,
+              "xlarge": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy2-1280x741.png",
+              "xlarge-width": 1280,
+              "xlarge-height": 741,
+              "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy2.png",
+              "gform-image-choice-sm-width": 300,
+              "gform-image-choice-sm-height": 174,
+              "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy2.png",
+              "gform-image-choice-md-width": 400,
+              "gform-image-choice-md-height": 232,
+              "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy2.png",
+              "gform-image-choice-lg-width": 600,
+              "gform-image-choice-lg-height": 348
+            }
+          },
+          {
+            "ID": 6561,
+            "id": 6561,
+            "title": "",
+            "filename": "Vertex-casestudy3.jpg",
+            "filesize": 703184,
+            "url": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy3.jpg",
+            "link": "http://www.o3world.com/vertex-casestudy3-2/",
+            "alt": "Vertex landing page with headline, Tax compliance solutions empowering companies of all sizes to do business anywhere, anytime - without friction.",
+            "author": "11",
+            "description": "",
+            "caption": "",
+            "name": "vertex-casestudy3-2",
+            "status": "inherit",
+            "uploaded_to": 0,
+            "date": "2023-01-27 18:15:27",
+            "modified": "2023-02-01 17:24:28",
+            "menu_order": 0,
+            "mime_type": "image/jpeg",
+            "type": "image",
+            "subtype": "jpeg",
+            "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+            "width": 2500,
+            "height": 1448,
+            "sizes": {
+              "thumbnail": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy3-150x150.jpg",
+              "thumbnail-width": 150,
+              "thumbnail-height": 150,
+              "medium": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy3-640x371.jpg",
+              "medium-width": 640,
+              "medium-height": 371,
+              "medium_large": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy3-768x445.jpg",
+              "medium_large-width": 768,
+              "medium_large-height": 445,
+              "large": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy3-1024x593.jpg",
+              "large-width": 1024,
+              "large-height": 593,
+              "1536x1536": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy3-1536x890.jpg",
+              "1536x1536-width": 1536,
+              "1536x1536-height": 890,
+              "2048x2048": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy3-2048x1186.jpg",
+              "2048x2048-width": 2048,
+              "2048x2048-height": 1186,
+              "icon": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy3-48x28.jpg",
+              "icon-width": 48,
+              "icon-height": 28,
+              "xlarge": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy3-1280x741.jpg",
+              "xlarge-width": 1280,
+              "xlarge-height": 741,
+              "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy3.jpg",
+              "gform-image-choice-sm-width": 300,
+              "gform-image-choice-sm-height": 174,
+              "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy3.jpg",
+              "gform-image-choice-md-width": 400,
+              "gform-image-choice-md-height": 232,
+              "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy3.jpg",
+              "gform-image-choice-lg-width": 600,
+              "gform-image-choice-lg-height": 348
+            }
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "project_feed",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Project Feed",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "Work",
+          "kicker_tag": "div",
+          "title": "Related projects",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": "",
+        "list_type": "select",
+        "select_projects": [
+          5807,
+          5803,
+          5808
+        ]
+      }
+    ]
+  }
+}

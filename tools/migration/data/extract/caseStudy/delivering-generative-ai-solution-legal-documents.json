@@ -1,0 +1,338 @@
+{
+  "_meta": {
+    "type": "caseStudy",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T02:52:58.497Z"
+  },
+  "wpId": 8628,
+  "slug": "delivering-generative-ai-solution-legal-documents",
+  "path": "/work/delivering-generative-ai-solution-legal-documents/",
+  "title": "Legal AI",
+  "headline": "An AI-powered solution for legal document analysis",
+  "dateGmt": "2024-03-07 15:12:50",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDoc-cover.jpg",
+    "alt": "Legal doc bot case study"
+  },
+  "seo": {
+    "titleOverride": "Generative AI solution for legal document review",
+    "titleRendered": "Generative AI solution for legal document review",
+    "descriptionOverride": "Generative AI solution for rapid legal document review. Partnering with an innovation leader, we address the challenges non-legal experts face in reviewing standard legal documents.",
+    "descriptionRendered": "Generative AI solution for rapid legal document review. Partnering with an innovation leader, we address the challenges non-legal experts face in reviewing standard legal documents.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/work/delivering-generative-ai-solution-legal-documents/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "headline": "An AI-powered solution for legal document analysis",
+    "flexible_content": [
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Multiple Columns",
+        "add_introduction": false,
+        "introduction": {
+          "": null,
+          "kicker": "",
+          "kicker_tag": false,
+          "title": "",
+          "heading_level": "h2",
+          "heading_tag": false,
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": null,
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h5>Opportunity</h5>\n<p>Managing legal documents can be a daunting task, especially for those of us who are not lawyers and have hundreds of other responsibilities to worry about. As we consider the various contracts and other legal documents we have in place, the challenge is finding a reliable and affordable way to ensure the details align with current federal, state and municipal guidelines. We often find ourselves in the dark, uncertain about the currency and accuracy of legal documents. Enter a groundbreaking solution addressing real-time challenges in legal document management.</p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h5>SOLUTION</h5>\n<p>Through our partnership with a prominent innovation studio, we provide strategic guidance, testing, and execution support for AI solutions. Often, standard contracts are out of date or missing key content, and examining each passage can be very tedious and prone to error &#8211; a perfect opportunity for generative AI. Our solution quickly breaks down legal documents and compares them to a &#8220;gold standard&#8221; in order to provide guidance on passages to address. This saves hours of tedious work and mitigates risk.</p>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Multiple Columns",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "RESULTS",
+          "kicker_tag": "div",
+          "title": "",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": "",
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "title",
+                "kicker": "",
+                "kicker_tag": "div",
+                "title": "<60",
+                "heading_level": "display",
+                "heading_tag": "div",
+                "add_description": true,
+                "description": "Days to build and validate production ready prototype"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "title",
+                "kicker": "",
+                "kicker_tag": "div",
+                "title": "30-60 sec",
+                "heading_level": "display",
+                "heading_tag": "div",
+                "add_description": true,
+                "description": "Time to process 10+ page legal document"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "image_carousel",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Image Carousel",
+        "add_introduction": false,
+        "introduction": {
+          "": null,
+          "kicker": "THE RESULTS",
+          "kicker_tag": "div",
+          "title": "",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": null,
+        "images": [
+          {
+            "ID": 8814,
+            "id": 8814,
+            "title": "LegalDocBot (1)",
+            "filename": "LegalDocBot-1.jpg",
+            "filesize": 121798,
+            "url": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot-1.jpg",
+            "link": "http://www.o3world.com/work/delivering-generative-ai-solution-legal-documents/legaldocbot-1/",
+            "alt": "",
+            "author": "16",
+            "description": "",
+            "caption": "",
+            "name": "legaldocbot-1",
+            "status": "inherit",
+            "uploaded_to": 8628,
+            "date": "2024-03-07 20:05:20",
+            "modified": "2024-03-07 20:05:20",
+            "menu_order": 0,
+            "mime_type": "image/jpeg",
+            "type": "image",
+            "subtype": "jpeg",
+            "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+            "width": 1200,
+            "height": 676,
+            "sizes": {
+              "thumbnail": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot-1-150x150.jpg",
+              "thumbnail-width": 150,
+              "thumbnail-height": 150,
+              "medium": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot-1-640x361.jpg",
+              "medium-width": 640,
+              "medium-height": 361,
+              "medium_large": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot-1-768x433.jpg",
+              "medium_large-width": 768,
+              "medium_large-height": 433,
+              "large": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot-1-1024x577.jpg",
+              "large-width": 1024,
+              "large-height": 577,
+              "1536x1536": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot-1.jpg",
+              "1536x1536-width": 1200,
+              "1536x1536-height": 676,
+              "2048x2048": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot-1.jpg",
+              "2048x2048-width": 1200,
+              "2048x2048-height": 676,
+              "icon": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot-1-48x27.jpg",
+              "icon-width": 48,
+              "icon-height": 27,
+              "xlarge": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot-1.jpg",
+              "xlarge-width": 1200,
+              "xlarge-height": 676,
+              "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot-1.jpg",
+              "gform-image-choice-sm-width": 300,
+              "gform-image-choice-sm-height": 169,
+              "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot-1.jpg",
+              "gform-image-choice-md-width": 400,
+              "gform-image-choice-md-height": 225,
+              "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot-1.jpg",
+              "gform-image-choice-lg-width": 600,
+              "gform-image-choice-lg-height": 338
+            }
+          },
+          {
+            "ID": 8812,
+            "id": 8812,
+            "title": "LegalDocBot3 (1)",
+            "filename": "LegalDocBot3-1.jpg",
+            "filesize": 568030,
+            "url": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot3-1.jpg",
+            "link": "http://www.o3world.com/work/delivering-generative-ai-solution-legal-documents/legaldocbot3-1/",
+            "alt": "",
+            "author": "16",
+            "description": "",
+            "caption": "",
+            "name": "legaldocbot3-1",
+            "status": "inherit",
+            "uploaded_to": 8628,
+            "date": "2024-03-07 20:05:17",
+            "modified": "2024-03-07 20:05:17",
+            "menu_order": 0,
+            "mime_type": "image/jpeg",
+            "type": "image",
+            "subtype": "jpeg",
+            "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+            "width": 1200,
+            "height": 676,
+            "sizes": {
+              "thumbnail": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot3-1-150x150.jpg",
+              "thumbnail-width": 150,
+              "thumbnail-height": 150,
+              "medium": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot3-1-640x361.jpg",
+              "medium-width": 640,
+              "medium-height": 361,
+              "medium_large": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot3-1-768x433.jpg",
+              "medium_large-width": 768,
+              "medium_large-height": 433,
+              "large": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot3-1-1024x577.jpg",
+              "large-width": 1024,
+              "large-height": 577,
+              "1536x1536": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot3-1.jpg",
+              "1536x1536-width": 1200,
+              "1536x1536-height": 676,
+              "2048x2048": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot3-1.jpg",
+              "2048x2048-width": 1200,
+              "2048x2048-height": 676,
+              "icon": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot3-1-48x27.jpg",
+              "icon-width": 48,
+              "icon-height": 27,
+              "xlarge": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot3-1.jpg",
+              "xlarge-width": 1200,
+              "xlarge-height": 676,
+              "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot3-1.jpg",
+              "gform-image-choice-sm-width": 300,
+              "gform-image-choice-sm-height": 169,
+              "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot3-1.jpg",
+              "gform-image-choice-md-width": 400,
+              "gform-image-choice-md-height": 225,
+              "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot3-1.jpg",
+              "gform-image-choice-lg-width": 600,
+              "gform-image-choice-lg-height": 338
+            }
+          },
+          {
+            "ID": 8813,
+            "id": 8813,
+            "title": "LegalDocBot2 (1)",
+            "filename": "LegalDocBot2-1.jpg",
+            "filesize": 462639,
+            "url": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot2-1.jpg",
+            "link": "http://www.o3world.com/work/delivering-generative-ai-solution-legal-documents/legaldocbot2-1/",
+            "alt": "",
+            "author": "16",
+            "description": "",
+            "caption": "",
+            "name": "legaldocbot2-1",
+            "status": "inherit",
+            "uploaded_to": 8628,
+            "date": "2024-03-07 20:05:19",
+            "modified": "2024-03-07 20:05:19",
+            "menu_order": 0,
+            "mime_type": "image/jpeg",
+            "type": "image",
+            "subtype": "jpeg",
+            "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+            "width": 1200,
+            "height": 676,
+            "sizes": {
+              "thumbnail": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot2-1-150x150.jpg",
+              "thumbnail-width": 150,
+              "thumbnail-height": 150,
+              "medium": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot2-1-640x361.jpg",
+              "medium-width": 640,
+              "medium-height": 361,
+              "medium_large": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot2-1-768x433.jpg",
+              "medium_large-width": 768,
+              "medium_large-height": 433,
+              "large": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot2-1-1024x577.jpg",
+              "large-width": 1024,
+              "large-height": 577,
+              "1536x1536": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot2-1.jpg",
+              "1536x1536-width": 1200,
+              "1536x1536-height": 676,
+              "2048x2048": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot2-1.jpg",
+              "2048x2048-width": 1200,
+              "2048x2048-height": 676,
+              "icon": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot2-1-48x27.jpg",
+              "icon-width": 48,
+              "icon-height": 27,
+              "xlarge": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot2-1.jpg",
+              "xlarge-width": 1200,
+              "xlarge-height": 676,
+              "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot2-1.jpg",
+              "gform-image-choice-sm-width": 300,
+              "gform-image-choice-sm-height": 169,
+              "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot2-1.jpg",
+              "gform-image-choice-md-width": 400,
+              "gform-image-choice-md-height": 225,
+              "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot2-1.jpg",
+              "gform-image-choice-lg-width": 600,
+              "gform-image-choice-lg-height": 338
+            }
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "project_feed",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Project Feed",
+        "add_introduction": false,
+        "introduction": {
+          "": null,
+          "kicker": "",
+          "kicker_tag": false,
+          "title": "",
+          "heading_level": "h2",
+          "heading_tag": false,
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": null,
+        "list_type": "select",
+        "select_projects": [
+          8629,
+          5803,
+          5806
+        ]
+      }
+    ]
+  }
+}

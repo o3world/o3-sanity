@@ -13,12 +13,13 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
 
 import type { ConversionIssue } from './lib/htmlToPortableText'
-import { CONVERTED_DIR, EXTRACT_DIR, writeJson } from './lib/paths'
+import { CONVERTED_DIR, EXTRACT_DIR, TRANSLATED_DIR, writeJson } from './lib/paths'
 import type { WpChrome } from './lib/chrome'
 import type { WpSiteSeo } from './lib/yoast'
 import { mapCategory, type WpCategory } from './map/category'
 import { buildPersonDirectory, type WpPerson, type WpTeamMember } from './map/person'
 import { mapPerspective, type WpPerspective } from './map/perspective'
+import { checkTranslation, translatedCaseStudy } from './map/caseStudy'
 import { KEEPER_SLUGS, mapPage, type WpPage } from './map/page'
 import { mapSiteSettings } from './map/siteSettings'
 import type { ExtractMeta } from './map/types'
@@ -55,6 +56,7 @@ function readChrome(): (WpChrome & { _meta: ExtractMeta }) | null {
 }
 
 const failures: { slug: string; issues: readonly ConversionIssue[] }[] = []
+let checkedTranslations = 0
 const notes: { slug: string; notes: readonly ConversionIssue[] }[] = []
 let written = 0
 
@@ -133,7 +135,37 @@ for (const person of people.docs) {
   if (referencedPeople.has(person._id)) emit('person', person._id, person)
 }
 
-console.log(`converted ${written} documents → ${CONVERTED_DIR}`)
+// --- agent-translated case studies (#21) ---
+// Not converted here — they are written by Claude Code under rules/caseStudy.md.
+// convert re-checks them, because the gate is the only mechanical safeguard on
+// a document a person wrote: schema conformance, honest provenance hashes, and
+// a flag on every required-but-unsourced field.
+const translatedDir = join(TRANSLATED_DIR, 'caseStudy')
+if (existsSync(translatedDir)) {
+  for (const file of readdirSync(translatedDir).filter((f) => f.endsWith('.json'))) {
+    const slug = file.replace(/\.json$/, '')
+    const raw = JSON.parse(readFileSync(join(translatedDir, file), 'utf8'))
+    const parsed = translatedCaseStudy.safeParse(raw)
+    if (!parsed.success) {
+      failures.push({
+        slug,
+        issues: parsed.error.issues.map((i) => ({
+          element: i.path.join('.'),
+          detail: i.message,
+        })),
+      })
+      continue
+    }
+    const issues = checkTranslation(parsed.data)
+    if (issues.length > 0) failures.push({ slug, issues })
+    else checkedTranslations++
+  }
+}
+
+console.log(
+  `converted ${written} documents → ${CONVERTED_DIR}` +
+    (checkedTranslations > 0 ? ` · ${checkedTranslations} translated documents checked` : ''),
+)
 if (notes.length > 0) {
   console.warn(`\nNOTES (${notes.length}) — converted, but the source needed cleaning up:`)
   for (const n of notes) {

@@ -1,0 +1,345 @@
+{
+  "_meta": {
+    "type": "caseStudy",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T02:52:58.498Z"
+  },
+  "wpId": 6338,
+  "slug": "sei-ampere",
+  "path": "/work/sei-ampere/",
+  "title": "SEI - Ampere",
+  "headline": "Creating a new product with a long-term partner",
+  "dateGmt": "2023-01-16 16:28:40",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/01/SEI-cover.jpg",
+    "alt": "SEI case study"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "SEI - Ampere | O3",
+    "descriptionOverride": "O3 helped conceptualize, design, and create an animated video for SEI's new brand Ampere. Read more in this project case study.",
+    "descriptionRendered": "O3 helped conceptualize, design, and create an animated video for SEI's new brand Ampere. Read more in this project case study.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/work/sei-ampere/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "headline": "Creating a new product with a long-term partner",
+    "flexible_content": [
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Multiple Columns",
+        "add_introduction": false,
+        "introduction": {
+          "": null,
+          "kicker": "",
+          "kicker_tag": false,
+          "title": "",
+          "heading_level": "h2",
+          "heading_tag": false,
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": null,
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h5 class=\"type-kicker\">Opportunity</h5>\n<p>SEI delivers investment solutions that connect the financial services industry. SEI consistently creates new lines of business by offering a suite of products and solutions to asset managers, investment banks, and advisors. After recently creating a new corporate brand identity, SEI needed a partner to help extend to new touchpoints. One of those was a new product for investment advisors. SEI was looking for guidance in naming this product while creating the visual brand, visualizing the future user experience, and creating their animated marketing videos.</p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<div class=\"type-kicker\">Solution</div>\n<p>Partners for over 10 years, SEI turned to O3 for our vast experience with brand, marketing, and content strategy. We took SEI’s advisor unit through our multi-part naming process, including two collaborative workshops, which resulted in the brand name “Ampere.” After validating the name, we extended SEI’s corporate identity to Ampere. Working closely with the brand team, we helped conceptualize, design, and create an animated video. This included content strategy, storyboarding, design, and voiceover. The final video included an unveiling to SEI at large and a long-form version for customers explaining the new product benefits.</p>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Multiple Columns",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "RESULTS",
+          "kicker_tag": "div",
+          "title": "",
+          "heading_level": "display",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": "",
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "title",
+                "kicker": "",
+                "kicker_tag": "div",
+                "title": "6 weeks",
+                "heading_level": "display",
+                "heading_tag": "div",
+                "add_description": true,
+                "description": "Turnaround time"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "title",
+                "kicker": "",
+                "kicker_tag": "div",
+                "title": "2 videos",
+                "heading_level": "display",
+                "heading_tag": "div",
+                "add_description": true,
+                "description": "Successfully produced"
+              }
+            ]
+          },
+          {
+            "content": false
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "image_carousel",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Image Carousel",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "Highlights",
+          "kicker_tag": "div",
+          "title": "",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": {
+          "title": "",
+          "url": "http://youtube.com",
+          "target": ""
+        },
+        "images": [
+          {
+            "ID": 6487,
+            "id": 6487,
+            "title": "",
+            "filename": "SEIAmpere-casestudy1.png",
+            "filesize": 414342,
+            "url": "http://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy1.png",
+            "link": "http://www.o3world.com/seiampere-casestudy1/",
+            "alt": "SEI Ampere logo showcasing connectivity SEI has with their customers.",
+            "author": "16",
+            "description": "",
+            "caption": "",
+            "name": "seiampere-casestudy1",
+            "status": "inherit",
+            "uploaded_to": 0,
+            "date": "2023-01-23 23:27:48",
+            "modified": "2023-01-27 20:26:05",
+            "menu_order": 0,
+            "mime_type": "image/png",
+            "type": "image",
+            "subtype": "png",
+            "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+            "width": 2500,
+            "height": 1448,
+            "sizes": {
+              "thumbnail": "http://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy1-150x150.png",
+              "thumbnail-width": 150,
+              "thumbnail-height": 150,
+              "medium": "http://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy1-640x371.png",
+              "medium-width": 640,
+              "medium-height": 371,
+              "medium_large": "http://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy1-768x445.png",
+              "medium_large-width": 768,
+              "medium_large-height": 445,
+              "large": "http://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy1-1024x593.png",
+              "large-width": 1024,
+              "large-height": 593,
+              "1536x1536": "http://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy1-1536x890.png",
+              "1536x1536-width": 1536,
+              "1536x1536-height": 890,
+              "2048x2048": "http://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy1-2048x1186.png",
+              "2048x2048-width": 2048,
+              "2048x2048-height": 1186,
+              "icon": "http://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy1-48x28.png",
+              "icon-width": 48,
+              "icon-height": 28,
+              "xlarge": "http://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy1-1280x741.png",
+              "xlarge-width": 1280,
+              "xlarge-height": 741,
+              "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy1.png",
+              "gform-image-choice-sm-width": 300,
+              "gform-image-choice-sm-height": 174,
+              "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy1.png",
+              "gform-image-choice-md-width": 400,
+              "gform-image-choice-md-height": 232,
+              "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy1.png",
+              "gform-image-choice-lg-width": 600,
+              "gform-image-choice-lg-height": 348
+            }
+          },
+          {
+            "ID": 6559,
+            "id": 6559,
+            "title": "",
+            "filename": "SEI-ampere-casestudy2.jpg",
+            "filesize": 792500,
+            "url": "http://www.o3world.com/wp-content/uploads/2023/01/SEI-ampere-casestudy2.jpg",
+            "link": "http://www.o3world.com/sei-ampere-casestudy2/",
+            "alt": "Goal details page of SEI Ampere platform.",
+            "author": "11",
+            "description": "",
+            "caption": "",
+            "name": "sei-ampere-casestudy2",
+            "status": "inherit",
+            "uploaded_to": 0,
+            "date": "2023-01-27 18:11:04",
+            "modified": "2023-02-01 17:31:36",
+            "menu_order": 0,
+            "mime_type": "image/jpeg",
+            "type": "image",
+            "subtype": "jpeg",
+            "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+            "width": 2500,
+            "height": 1448,
+            "sizes": {
+              "thumbnail": "http://www.o3world.com/wp-content/uploads/2023/01/SEI-ampere-casestudy2-150x150.jpg",
+              "thumbnail-width": 150,
+              "thumbnail-height": 150,
+              "medium": "http://www.o3world.com/wp-content/uploads/2023/01/SEI-ampere-casestudy2-640x371.jpg",
+              "medium-width": 640,
+              "medium-height": 371,
+              "medium_large": "http://www.o3world.com/wp-content/uploads/2023/01/SEI-ampere-casestudy2-768x445.jpg",
+              "medium_large-width": 768,
+              "medium_large-height": 445,
+              "large": "http://www.o3world.com/wp-content/uploads/2023/01/SEI-ampere-casestudy2-1024x593.jpg",
+              "large-width": 1024,
+              "large-height": 593,
+              "1536x1536": "http://www.o3world.com/wp-content/uploads/2023/01/SEI-ampere-casestudy2-1536x890.jpg",
+              "1536x1536-width": 1536,
+              "1536x1536-height": 890,
+              "2048x2048": "http://www.o3world.com/wp-content/uploads/2023/01/SEI-ampere-casestudy2-2048x1186.jpg",
+              "2048x2048-width": 2048,
+              "2048x2048-height": 1186,
+              "icon": "http://www.o3world.com/wp-content/uploads/2023/01/SEI-ampere-casestudy2-48x28.jpg",
+              "icon-width": 48,
+              "icon-height": 28,
+              "xlarge": "http://www.o3world.com/wp-content/uploads/2023/01/SEI-ampere-casestudy2-1280x741.jpg",
+              "xlarge-width": 1280,
+              "xlarge-height": 741,
+              "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2023/01/SEI-ampere-casestudy2.jpg",
+              "gform-image-choice-sm-width": 300,
+              "gform-image-choice-sm-height": 174,
+              "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2023/01/SEI-ampere-casestudy2.jpg",
+              "gform-image-choice-md-width": 400,
+              "gform-image-choice-md-height": 232,
+              "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2023/01/SEI-ampere-casestudy2.jpg",
+              "gform-image-choice-lg-width": 600,
+              "gform-image-choice-lg-height": 348
+            }
+          },
+          {
+            "ID": 6489,
+            "id": 6489,
+            "title": "",
+            "filename": "SEIAmpere-casestudy3.png",
+            "filesize": 2309455,
+            "url": "http://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy3.png",
+            "link": "http://www.o3world.com/seiampere-casestudy3/",
+            "alt": "Screenshots of the newly redesigned SEI Ampere platform.",
+            "author": "16",
+            "description": "",
+            "caption": "",
+            "name": "seiampere-casestudy3",
+            "status": "inherit",
+            "uploaded_to": 0,
+            "date": "2023-01-23 23:27:58",
+            "modified": "2023-01-27 20:24:53",
+            "menu_order": 0,
+            "mime_type": "image/png",
+            "type": "image",
+            "subtype": "png",
+            "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+            "width": 2500,
+            "height": 1448,
+            "sizes": {
+              "thumbnail": "http://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy3-150x150.png",
+              "thumbnail-width": 150,
+              "thumbnail-height": 150,
+              "medium": "http://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy3-640x371.png",
+              "medium-width": 640,
+              "medium-height": 371,
+              "medium_large": "http://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy3-768x445.png",
+              "medium_large-width": 768,
+              "medium_large-height": 445,
+              "large": "http://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy3-1024x593.png",
+              "large-width": 1024,
+              "large-height": 593,
+              "1536x1536": "http://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy3-1536x890.png",
+              "1536x1536-width": 1536,
+              "1536x1536-height": 890,
+              "2048x2048": "http://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy3-2048x1186.png",
+              "2048x2048-width": 2048,
+              "2048x2048-height": 1186,
+              "icon": "http://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy3-48x28.png",
+              "icon-width": 48,
+              "icon-height": 28,
+              "xlarge": "http://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy3-1280x741.png",
+              "xlarge-width": 1280,
+              "xlarge-height": 741,
+              "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy3.png",
+              "gform-image-choice-sm-width": 300,
+              "gform-image-choice-sm-height": 174,
+              "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy3.png",
+              "gform-image-choice-md-width": 400,
+              "gform-image-choice-md-height": 232,
+              "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy3.png",
+              "gform-image-choice-lg-width": 600,
+              "gform-image-choice-lg-height": 348
+            }
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "project_feed",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Project Feed",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "Work",
+          "kicker_tag": "div",
+          "title": "Related projects",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": "",
+        "list_type": "select",
+        "select_projects": [
+          5808,
+          5804,
+          5809
+        ]
+      }
+    ]
+  }
+}

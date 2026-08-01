@@ -21,6 +21,7 @@ import {
   ASSET_MAP,
   CONVERTED_DIR,
   MEDIA_CACHE,
+  EXTRACT_DIR,
   MISSING_MEDIA,
   REPO_ROOT,
   SEED_DIR,
@@ -189,6 +190,43 @@ async function resolveAssets(node: unknown): Promise<unknown> {
 /** Sentinel for a node whose media no longer exists. */
 const DROPPED = Symbol('dropped')
 
+/**
+ * A translated document carries a `_meta` provenance header that is not part
+ * of the schema (#21). Strip it, and put the **extracted source** on
+ * `migration.source` instead — that is what makes the draft reviewable
+ * side-by-side in Studio without leaving the document.
+ *
+ * The flags travel with it: a reviewer opening the draft sees which fields an
+ * agent proposed and why, in the same panel as the source it worked from.
+ */
+function withTranslationProvenance(doc: AnyDoc): AnyDoc {
+  const meta = doc._meta as
+    { sourceFile?: string; flags?: unknown[]; model?: string; translatedAt?: string } | undefined
+  if (!meta?.sourceFile) return doc
+
+  const rest = Object.fromEntries(Object.entries(doc).filter(([k]) => k !== '_meta')) as AnyDoc
+  const sourcePath = join(EXTRACT_DIR, meta.sourceFile)
+  const source = existsSync(sourcePath)
+    ? JSON.stringify(
+        {
+          translation: {
+            model: meta.model,
+            translatedAt: meta.translatedAt,
+            flags: meta.flags ?? [],
+          },
+          source: JSON.parse(readFileSync(sourcePath, 'utf8')),
+        },
+        null,
+        2,
+      )
+    : undefined
+
+  return {
+    ...rest,
+    migration: { ...(rest.migration as Record<string, unknown>), ...(source ? { source } : {}) },
+  } as AnyDoc
+}
+
 async function main() {
   const published = [...readTree(CONVERTED_DIR), ...readTree(SEED_DIR)]
   const drafts = readTree(TRANSLATED_DIR)
@@ -232,7 +270,7 @@ async function main() {
       continue
     }
     const isDraftTrack = drafts.includes(doc)
-    const resolved = (await resolveAssets(doc)) as AnyDoc
+    const resolved = (await resolveAssets(withTranslationProvenance(doc))) as AnyDoc
     tx.createOrReplace(isDraftTrack ? { ...resolved, _id: `drafts.${doc._id}` } : resolved)
     console.log(`✓ ${isDraftTrack ? 'draft ' : ''}${doc._id}`)
     loaded++

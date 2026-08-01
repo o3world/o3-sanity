@@ -1,0 +1,14 @@
+{
+  "_id": "industry-seed-consumer-goods",
+  "_type": "industry",
+  "title": "Consumer Goods",
+  "slug": {
+    "_type": "slug",
+    "current": "consumer-goods"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:case-study-industries",
+    "extractedAt": "2026-08-01T00:00:00Z"
+  }
+}

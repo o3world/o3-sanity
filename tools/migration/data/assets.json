@@ -1234,5 +1234,21 @@
   "https://www.o3world.com/wp-content/uploads/2023/11/ysl-logo-300.png": {
     "sha256": "ee01fbe699eaa28ec1f4fba3d9ca6fdd00720df8",
     "assetId": "image-ee01fbe699eaa28ec1f4fba3d9ca6fdd00720df8-300x233-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2022/11/La-Colombe-cover.jpg": {
+    "sha256": "677d1b603cc249ff407db26de259613ed6822944",
+    "assetId": "image-677d1b603cc249ff407db26de259613ed6822944-1706x1706-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/LaColombe-casestudy1.png": {
+    "sha256": "c7356fe3c2fad2e379631ef4d6ff484f7b82193c",
+    "assetId": "image-c7356fe3c2fad2e379631ef4d6ff484f7b82193c-2500x1448-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/LaColombe-casestudy2.jpg": {
+    "sha256": "51eb283befae66565cdc65093267288c67c39d86",
+    "assetId": "image-51eb283befae66565cdc65093267288c67c39d86-2500x1448-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/LaColombe-casestudy3.png": {
+    "sha256": "a2a13349eff745e95c0f96f4ce22e72e691fecc8",
+    "assetId": "image-a2a13349eff745e95c0f96f4ce22e72e691fecc8-2500x1448-png"
   }
 }

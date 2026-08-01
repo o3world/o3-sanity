@@ -1,0 +1,329 @@
+{
+  "_meta": {
+    "type": "caseStudy",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T02:52:58.497Z"
+  },
+  "wpId": 9319,
+  "slug": "rfp-automation-o3",
+  "path": "/work/rfp-automation-o3/",
+  "title": "RFP automation",
+  "headline": "Using AI to reduce time and costs for a global tech firm",
+  "dateGmt": "2025-02-24 16:46:01",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-cover-2.jpg",
+    "alt": "RFP automation case study man at a desk with papers and logo with AI symbol and words RFP automation"
+  },
+  "seo": {
+    "titleOverride": "AI-powered RFP automation to reduce costs",
+    "titleRendered": "AI-powered RFP automation to reduce costs",
+    "descriptionOverride": "Explore how AI RFP automation can reduce costs and streamline proposal responses for global tech firms.",
+    "descriptionRendered": "Explore how AI RFP automation can reduce costs and streamline proposal responses for global tech firms.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/work/rfp-automation-o3/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "headline": "Using AI to reduce time and costs for a global tech firm",
+    "flexible_content": [
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Multiple Columns",
+        "add_introduction": false,
+        "introduction": {
+          "": null,
+          "kicker": "",
+          "kicker_tag": false,
+          "title": "",
+          "heading_level": "h2",
+          "heading_tag": false,
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": null,
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h5>Opportunity</h5>\n<p>A global technology firm faced a significant challenge due to the high volume of Requests for Proposals (RFPs) they needed to respond to—hundreds per year. These RFPs take a lot of manual work to put together. From referencing previous proposals to pulling together past content by copying and pasting content from a large database of information, the process involved managing large datasets and required considerable time and effort to complete. O3 initiated the project by conducting a workshop to map out the firm&#8217;s RFP response journey and identify opportunities where AI could streamline the process.</p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<h5>SOLUTION</h5>\n<p>To address the challenge, a Generative AI solution was implemented to augment the work of RFP specialists. The solution focused on using AI to simplify and accelerate the process by reducing repetitive tasks. By ingesting past RFP responses, normalizing the content and creating a user experience where speed, accuracy and control of the response were prioritized, this allowed the firm to respond more quickly and effectively to RFPs, with AI handling time-consuming elements of the process. We also developed a feedback loop to continuously update the master data-set so future responses could adjust to new features and functionality within the technology or new subject matter over time.</p>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Multiple Columns",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "RESULTS",
+          "kicker_tag": "div",
+          "title": "",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": "",
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "title",
+                "kicker": "",
+                "kicker_tag": "div",
+                "title": "11 > 6 hrs",
+                "heading_level": "h2",
+                "heading_tag": "div",
+                "add_description": true,
+                "description": "Reduction in time for typical 100-question RFP response"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "title",
+                "kicker": "",
+                "kicker_tag": "div",
+                "title": "~40%",
+                "heading_level": "h2",
+                "heading_tag": "h3",
+                "add_description": true,
+                "description": "Time savings gained with AI solution"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "title",
+                "kicker": "",
+                "kicker_tag": "div",
+                "title": "100%",
+                "heading_level": "h2",
+                "heading_tag": "div",
+                "add_description": true,
+                "description": "Licensing costs saved on existing RFP technology"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "image_carousel",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Image Carousel",
+        "add_introduction": false,
+        "introduction": {
+          "": null,
+          "kicker": "",
+          "kicker_tag": false,
+          "title": "",
+          "heading_level": "h2",
+          "heading_tag": false,
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": null,
+        "images": [
+          {
+            "ID": 10041,
+            "id": 10041,
+            "title": "RFP 1",
+            "filename": "RFP-1-1.jpg",
+            "filesize": 924046,
+            "url": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-1-1.jpg",
+            "link": "http://www.o3world.com/work/rfp-automation-o3/rfp-1-2/",
+            "alt": "RFP Automation case study",
+            "author": "16",
+            "description": "",
+            "caption": "",
+            "name": "rfp-1-2",
+            "status": "inherit",
+            "uploaded_to": 9319,
+            "date": "2025-04-02 13:43:59",
+            "modified": "2025-04-02 13:44:17",
+            "menu_order": 0,
+            "mime_type": "image/jpeg",
+            "type": "image",
+            "subtype": "jpeg",
+            "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+            "width": 2500,
+            "height": 1408,
+            "sizes": {
+              "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-1-1-150x150.jpg",
+              "thumbnail-width": 150,
+              "thumbnail-height": 150,
+              "medium": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-1-1-640x360.jpg",
+              "medium-width": 640,
+              "medium-height": 360,
+              "medium_large": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-1-1-768x433.jpg",
+              "medium_large-width": 768,
+              "medium_large-height": 433,
+              "large": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-1-1-1024x577.jpg",
+              "large-width": 1024,
+              "large-height": 577,
+              "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-1-1-1536x865.jpg",
+              "1536x1536-width": 1536,
+              "1536x1536-height": 865,
+              "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-1-1-2048x1153.jpg",
+              "2048x2048-width": 2048,
+              "2048x2048-height": 1153,
+              "icon": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-1-1-48x27.jpg",
+              "icon-width": 48,
+              "icon-height": 27,
+              "xlarge": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-1-1-1280x721.jpg",
+              "xlarge-width": 1280,
+              "xlarge-height": 721,
+              "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-1-1.jpg",
+              "gform-image-choice-sm-width": 300,
+              "gform-image-choice-sm-height": 169,
+              "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-1-1.jpg",
+              "gform-image-choice-md-width": 400,
+              "gform-image-choice-md-height": 225,
+              "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-1-1.jpg",
+              "gform-image-choice-lg-width": 600,
+              "gform-image-choice-lg-height": 338
+            }
+          },
+          {
+            "ID": 10040,
+            "id": 10040,
+            "title": "RFP 2",
+            "filename": "RFP-2-1.jpg",
+            "filesize": 364818,
+            "url": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-2-1.jpg",
+            "link": "http://www.o3world.com/work/rfp-automation-o3/rfp-2-2/",
+            "alt": "RFP Automation case study",
+            "author": "16",
+            "description": "",
+            "caption": "",
+            "name": "rfp-2-2",
+            "status": "inherit",
+            "uploaded_to": 9319,
+            "date": "2025-04-02 13:43:55",
+            "modified": "2025-04-02 13:44:12",
+            "menu_order": 0,
+            "mime_type": "image/jpeg",
+            "type": "image",
+            "subtype": "jpeg",
+            "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+            "width": 2500,
+            "height": 1408,
+            "sizes": {
+              "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-2-1-150x150.jpg",
+              "thumbnail-width": 150,
+              "thumbnail-height": 150,
+              "medium": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-2-1-640x360.jpg",
+              "medium-width": 640,
+              "medium-height": 360,
+              "medium_large": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-2-1-768x433.jpg",
+              "medium_large-width": 768,
+              "medium_large-height": 433,
+              "large": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-2-1-1024x577.jpg",
+              "large-width": 1024,
+              "large-height": 577,
+              "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-2-1-1536x865.jpg",
+              "1536x1536-width": 1536,
+              "1536x1536-height": 865,
+              "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-2-1-2048x1153.jpg",
+              "2048x2048-width": 2048,
+              "2048x2048-height": 1153,
+              "icon": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-2-1-48x27.jpg",
+              "icon-width": 48,
+              "icon-height": 27,
+              "xlarge": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-2-1-1280x721.jpg",
+              "xlarge-width": 1280,
+              "xlarge-height": 721,
+              "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-2-1.jpg",
+              "gform-image-choice-sm-width": 300,
+              "gform-image-choice-sm-height": 169,
+              "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-2-1.jpg",
+              "gform-image-choice-md-width": 400,
+              "gform-image-choice-md-height": 225,
+              "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-2-1.jpg",
+              "gform-image-choice-lg-width": 600,
+              "gform-image-choice-lg-height": 338
+            }
+          },
+          {
+            "ID": 10039,
+            "id": 10039,
+            "title": "RFP 3",
+            "filename": "RFP-3-1.jpg",
+            "filesize": 645327,
+            "url": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-3-1.jpg",
+            "link": "http://www.o3world.com/work/rfp-automation-o3/rfp-3-2/",
+            "alt": "RFP Automation case study",
+            "author": "16",
+            "description": "",
+            "caption": "",
+            "name": "rfp-3-2",
+            "status": "inherit",
+            "uploaded_to": 9319,
+            "date": "2025-04-02 13:43:52",
+            "modified": "2025-04-02 13:44:08",
+            "menu_order": 0,
+            "mime_type": "image/jpeg",
+            "type": "image",
+            "subtype": "jpeg",
+            "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+            "width": 2500,
+            "height": 1408,
+            "sizes": {
+              "thumbnail": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-3-1-150x150.jpg",
+              "thumbnail-width": 150,
+              "thumbnail-height": 150,
+              "medium": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-3-1-640x360.jpg",
+              "medium-width": 640,
+              "medium-height": 360,
+              "medium_large": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-3-1-768x433.jpg",
+              "medium_large-width": 768,
+              "medium_large-height": 433,
+              "large": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-3-1-1024x577.jpg",
+              "large-width": 1024,
+              "large-height": 577,
+              "1536x1536": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-3-1-1536x865.jpg",
+              "1536x1536-width": 1536,
+              "1536x1536-height": 865,
+              "2048x2048": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-3-1-2048x1153.jpg",
+              "2048x2048-width": 2048,
+              "2048x2048-height": 1153,
+              "icon": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-3-1-48x27.jpg",
+              "icon-width": 48,
+              "icon-height": 27,
+              "xlarge": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-3-1-1280x721.jpg",
+              "xlarge-width": 1280,
+              "xlarge-height": 721,
+              "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-3-1.jpg",
+              "gform-image-choice-sm-width": 300,
+              "gform-image-choice-sm-height": 169,
+              "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-3-1.jpg",
+              "gform-image-choice-md-width": 400,
+              "gform-image-choice-md-height": 225,
+              "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2025/02/RFP-3-1.jpg",
+              "gform-image-choice-lg-width": 600,
+              "gform-image-choice-lg-height": 338
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
