@@ -1,0 +1,248 @@
+{
+  "_id": "page-seed-index",
+  "_type": "page",
+  "title": "O3 World",
+  "slug": {
+    "_type": "slug",
+    "current": "index"
+  },
+  "pageType": "standard",
+  "sections": [
+    {
+      "_type": "heroSection",
+      "_key": "hero",
+      "surface": "ink",
+      "headlineLines": [
+        "You see the problem in front of you.",
+        "We’re working on the one behind it."
+      ],
+      "subheading": "Strategy, design, engineering and AI under one roof. The same senior team that finds the move is the team that builds it.",
+      "cta": {
+        "_type": "cta",
+        "label": "View our work",
+        "href": "/work",
+        "variant": "brand"
+      },
+      "decoration": "orbs"
+    },
+    {
+      "_type": "logoWallSection",
+      "_key": "partners",
+      "surface": "bone",
+      "eyebrow": "Our Partners",
+      "statement": "We work with B2B and enterprise teams to reimagine experiences.",
+      "layout": "grid",
+      "clients": [
+        {
+          "_type": "reference",
+          "_ref": "client-seed-chop",
+          "_key": "client-0"
+        },
+        {
+          "_type": "reference",
+          "_ref": "client-seed-ironman",
+          "_key": "client-1"
+        },
+        {
+          "_type": "reference",
+          "_ref": "client-seed-aramark",
+          "_key": "client-2"
+        },
+        {
+          "_type": "reference",
+          "_ref": "client-seed-amerigas",
+          "_key": "client-3"
+        },
+        {
+          "_type": "reference",
+          "_ref": "client-seed-caron",
+          "_key": "client-4"
+        },
+        {
+          "_type": "reference",
+          "_ref": "client-seed-la-colombe",
+          "_key": "client-5"
+        }
+      ],
+      "cta": {
+        "_type": "cta",
+        "label": "See all partners",
+        "href": "/work",
+        "variant": "ghost"
+      }
+    },
+    {
+      "_type": "caseShowcaseSection",
+      "_key": "work",
+      "surface": "ink",
+      "heading": "Our Work",
+      "cta": {
+        "_type": "cta",
+        "label": "View our work",
+        "href": "/work",
+        "variant": "inverse"
+      },
+      "caseStudies": [
+        {
+          "_type": "reference",
+          "_ref": "caseStudy-seed-chop",
+          "_key": "case-0"
+        },
+        {
+          "_type": "reference",
+          "_ref": "caseStudy-seed-ironman",
+          "_key": "case-1"
+        },
+        {
+          "_type": "reference",
+          "_ref": "caseStudy-seed-aramark",
+          "_key": "case-2"
+        }
+      ]
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "platforms",
+      "surface": "white",
+      "heading": "The platforms we go deep on",
+      "intro": "We build real, certified depth in modern platforms that are scaling the internet.",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "plat-sanity",
+          "railLabel": "Sanity",
+          "logo": {
+            "_type": "image",
+            "_localSrc": "prototype/assets/plat-sanity-logo.png"
+          },
+          "body": "Structured content and real-time editing, wired into the systems your team already runs — not bolted on beside them.",
+          "cta": {
+            "_type": "cta",
+            "label": "View our Sanity work",
+            "href": "/work",
+            "variant": "ghost"
+          }
+        },
+        {
+          "_type": "panel",
+          "_key": "plat-vercel",
+          "railLabel": "Vercel",
+          "logo": {
+            "_type": "image",
+            "_localSrc": "prototype/assets/plat-vercel-logo.png"
+          },
+          "body": "Modern web infrastructure — fast, reliable frontends deployed globally, with the developer velocity to match.",
+          "cta": {
+            "_type": "cta",
+            "label": "View our Vercel work",
+            "href": "/work",
+            "variant": "ghost"
+          }
+        },
+        {
+          "_type": "panel",
+          "_key": "plat-lovable",
+          "railLabel": "Lovable",
+          "logo": {
+            "_type": "image",
+            "_localSrc": "prototype/assets/plat-lovable-logo.png"
+          },
+          "body": "AI-native product building — from prompt to production, shipping working software at the speed of the idea.",
+          "cta": {
+            "_type": "cta",
+            "label": "View our Lovable work",
+            "href": "/work",
+            "variant": "ghost"
+          }
+        }
+      ]
+    },
+    {
+      "_type": "quoteSection",
+      "_key": "quote",
+      "surface": "bone",
+      "quote": "We were very happy with the outcome and so was top management. I believe we positioned our company as the leader and shaper we want to be seen as. Thank you for all your help, on a tight deadline and always with a smile.",
+      "attribution": "Business Leader, Global Health Brand",
+      "decoration": "orbs"
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "engagements",
+      "surface": "white",
+      "heading": "How we work",
+      "intro": "From senior hands inside your team to owning the whole outcome — the right engagement depends on how much of the problem is yours to keep.",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "eng-embedded",
+          "railLabel": "Embedded",
+          "heading": "Embedded Team Member",
+          "body": "Senior designers and engineers who join your team, your standup, and your codebase. No handoffs, no translation layer — just more horsepower pointed at the problem.",
+          "note": "Best when you trust the direction and need the horsepower.",
+          "cta": {
+            "_type": "cta",
+            "label": "Talk about embedding",
+            "href": "/contact",
+            "variant": "ghost"
+          }
+        },
+        {
+          "_type": "panel",
+          "_key": "eng-squad",
+          "railLabel": "Product Squad",
+          "heading": "Product Squad",
+          "body": "A cross-functional pod — strategy, design, engineering — that takes a problem and runs. We own delivery; you own the decisions that matter.",
+          "note": "Best when you need momentum and a team that owns delivery.",
+          "cta": {
+            "_type": "cta",
+            "label": "Scope a squad",
+            "href": "/contact",
+            "variant": "ghost"
+          }
+        },
+        {
+          "_type": "panel",
+          "_key": "eng-ownership",
+          "railLabel": "Full Ownership",
+          "heading": "Full Ownership",
+          "body": "Hand us the outcome, not the tasks. We take it from ambiguous brief to shipped product — strategy, build, launch, and the accountability in between.",
+          "note": "Best when the goal is clear and you want a single point of accountability.",
+          "cta": {
+            "_type": "cta",
+            "label": "Hand us the outcome",
+            "href": "/contact",
+            "variant": "ghost"
+          }
+        }
+      ]
+    },
+    {
+      "_type": "perspectivesCarouselSection",
+      "_key": "insights",
+      "surface": "bone",
+      "heading": "The thinking behind the work."
+    },
+    {
+      "_type": "ctaSection",
+      "_key": "cta",
+      "surface": "ink",
+      "heading": "The best partnerships don’t have an end date.",
+      "body": "Most firms hand you the strategy and leave. We stay and build it. That’s the whole offer.",
+      "cta": {
+        "_type": "cta",
+        "label": "View our work",
+        "href": "/work",
+        "variant": "brand"
+      },
+      "decoration": "orbs"
+    }
+  ],
+  "seo": {
+    "description": "Strategy, design, engineering and AI under one roof. The same senior team that finds the move is the team that builds it."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:homepage-wireframe",
+    "extractedAt": "2026-07-31T00:00:00Z"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "_id": "client-seed-aramark",
+  "_type": "client",
+  "name": "Aramark",
+  "logo": {
+    "_type": "image",
+    "_localSrc": "prototype/assets/partner-aramark.png"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:homepage-wireframe",
+    "extractedAt": "2026-07-31T00:00:00Z"
+  }
+}

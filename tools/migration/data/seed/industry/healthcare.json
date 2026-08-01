@@ -1,0 +1,14 @@
+{
+  "_id": "industry-seed-healthcare",
+  "_type": "industry",
+  "title": "Healthcare",
+  "slug": {
+    "_type": "slug",
+    "current": "healthcare"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:homepage-wireframe",
+    "extractedAt": "2026-07-31T00:00:00Z"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "_id": "caseStudy-seed-aramark",
+  "_type": "caseStudy",
+  "title": "Aramark",
+  "slug": {
+    "_type": "slug",
+    "current": "aramark"
+  },
+  "client": {
+    "_type": "reference",
+    "_ref": "client-seed-aramark"
+  },
+  "industries": [
+    {
+      "_type": "reference",
+      "_ref": "industry-seed-enterprise",
+      "_key": "ind-0"
+    }
+  ],
+  "industryDetail": "Consumer Services",
+  "narrativeHeadline": "A workforce of 260,000 and no shared way to talk to customers. We built the platform that gave every location one voice.",
+  "stats": [
+    {
+      "_type": "stat",
+      "_key": "stat-0",
+      "value": "2.3×",
+      "label": "digital order volume"
+    }
+  ],
+  "heroMedia": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_localSrc": "prototype/assets/work-city.png"
+    },
+    "alt": "A city skyline at dusk."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:homepage-wireframe",
+    "extractedAt": "2026-07-31T00:00:00Z"
+  }
+}

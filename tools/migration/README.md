@@ -20,6 +20,42 @@ Rules of the road:
 
 ---
 
+## Seeds: greenfield content, same pipeline (#20)
+
+Greenfield pages are committed JSON under `data/seed/<type>/<slug>.json`,
+loaded by the same `load` as everything else — so no content is ever entered
+by hand twice. `data/seed/page/index.json` (the homepage) is the worked
+example; #23 seeds the rest against this format.
+
+The rules, all enforced by `src/seed.test.ts`:
+
+- **`<type>-seed-<slug>` ids**, matching the folder. Deterministic ids are
+  what make "wipe and rebuild reproduces the dataset" true.
+- **`migration.sourceId` starts `seed:`**, and `locked` is `false`. A seed is
+  re-derivable from git like any pipeline document, so it is never born locked.
+- **Every reference resolves** to another committed document. A dangling
+  reference loads without complaint and renders as a hole.
+- **Only registered section blocks.** Composing existing blocks is the whole
+  point; a page that needs a new block type is a schema conversation
+  (`/grilling` + an ADR), not an inline improvisation.
+- **`surface` is explicit on every section.** `defineSectionBlock` supplies it
+  as a Studio `initialValue`, which the loader never runs — a seed that omits
+  it renders every section on the default surface.
+- **Images use `_localSrc`**, a repo-relative path (`prototype/assets/…`),
+  resolved at load time exactly as `_wpSrc` is. Seed imagery comes from
+  `prototype/` — the design source of truth — not from WordPress.
+
+Two things the loader guarantees that seeds depend on:
+
+- **One transaction per load.** Sanity validates a strong reference against
+  the state _after_ the transaction, so seeds may reference each other in any
+  order. Writing documents one at a time made directory order load-bearing.
+- **Slug collisions are reported.** Routes resolve `…[0]`, so two documents
+  claiming one slug serve a coin flip. `load` lists any collision in the
+  dataset and exits non-zero.
+
+---
+
 ## SEO: one discipline, inherited by every type (#26)
 
 Every content ticket — #17, #18, #21, #22 — gets complete, correct SEO by

@@ -15,6 +15,7 @@ export {
   aMigratedPerspective,
   aPerspective,
   aPerspectivesPage,
+  aSeededPage,
   migratedPerspectiveSlugs,
   paragraph,
   siteSettings,

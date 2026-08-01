@@ -76,8 +76,12 @@ export function siteSettings(
     navItems: [],
     primaryCta: null,
     footerTagline: null,
-    footerLinks: [],
+    footerGroups: [],
+    socialsLabel: 'Socials',
     socialLinks: [],
+    legalLinks: [],
+    legalName: 'O3 World, LLC',
+    copyrightNote: null,
     defaultSeo: null,
     ...overrides,
   } as SITE_SETTINGS_QUERY_RESULT
@@ -104,7 +108,8 @@ export function withSettings(
  * go; `load` uploads the binary and swaps in the ref. A renderer given the
  * raw marker throws inside `@sanity/image-url`, which would make the
  * migration→render bridge unusable for any document with an image in its
- * body — i.e. most of the 272 coming in #17. The ref is a sha1 of the source
+ * body — i.e. most of the 272 coming in #17. Seeds use `_localSrc` (a repo
+ * path) instead of a URL and are resolved the same way. The ref is a sha1 of the source
  * URL, which is both deterministic and the shape `@sanity/image-url` parses
  * (`image-<40 hex>-<width>x<height>-<ext>`); anything looser is rejected.
  */
@@ -112,10 +117,12 @@ function resolveWpSrcMarkers(node: unknown): unknown {
   if (Array.isArray(node)) return node.map(resolveWpSrcMarkers)
   if (node && typeof node === 'object') {
     const obj = node as Record<string, unknown>
-    if (typeof obj._wpSrc === 'string') {
-      const { _wpSrc, ...rest } = obj
-      const id = createHash('sha1').update(_wpSrc).digest('hex')
-      const ext = /\.(\w+)$/.exec(_wpSrc)?.[1]?.toLowerCase() ?? 'jpg'
+    const marker = typeof obj._wpSrc === 'string' ? '_wpSrc' : '_localSrc'
+    if (typeof obj[marker] === 'string') {
+      const source = obj[marker] as string
+      const rest = Object.fromEntries(Object.entries(obj).filter(([k]) => k !== marker))
+      const id = createHash('sha1').update(source).digest('hex')
+      const ext = /\.(\w+)$/.exec(source)?.[1]?.toLowerCase() ?? 'jpg'
       return { ...rest, asset: { _type: 'reference', _ref: `image-${id}-1200x630-${ext}` } }
     }
     return Object.fromEntries(
@@ -164,6 +171,89 @@ export function aMigratedPerspective(slug?: string): Perspective {
     featuredImage: (doc.featuredImage ?? null) as Perspective['featuredImage'],
     seo: (doc.seo ?? null) as Perspective['seo'],
   })
+}
+
+const SEED_DIR = join(
+  dirname(fileURLToPath(import.meta.url)),
+  '../../../../tools/migration/data/seed',
+)
+
+function readSeed(type: string, name: string): Record<string, unknown> {
+  return resolveWpSrcMarkers(
+    JSON.parse(readFileSync(join(SEED_DIR, type, `${name}.json`), 'utf8')),
+  ) as Record<string, unknown>
+}
+
+function seedsOfType(type: string): Record<string, unknown>[] {
+  return readdirSync(join(SEED_DIR, type))
+    .filter((f) => f.endsWith('.json'))
+    .map((f) => readSeed(type, f.replace(/\.json$/, '')))
+}
+
+/**
+ * A committed seed page (#20), shaped into what `PAGE_QUERY` returns.
+ *
+ * The route builders receive documents that GROQ has already flattened and
+ * dereferenced; the committed JSON is the un-projected form. This applies the
+ * same projections the query does — `slug.current` flattened, `clients[]->`
+ * and `caseStudies[]->` expanded from the other committed seeds — so a seed
+ * can be rendered through the real route with no dataset.
+ *
+ * That makes it the durable proof that a seed renders: the dataset is
+ * disposable (ADR 0003), so "it looked right in the browser once" is not a
+ * check that survives a rebuild.
+ */
+export function aSeededPage(name: string): Record<string, unknown> {
+  const byId = new Map(
+    ['client', 'industry', 'caseStudy'].flatMap((type) =>
+      seedsOfType(type).map((doc) => [doc._id as string, doc] as const),
+    ),
+  )
+
+  const deref = (ref: unknown): Record<string, unknown> | null => {
+    const id = (ref as { _ref?: string } | null)?._ref
+    return id ? (byId.get(id) ?? null) : null
+  }
+
+  /** Flatten `slug` the way every card projection does. */
+  const card = (doc: Record<string, unknown> | null) => {
+    if (!doc) return null
+    const { slug, client, industries, ...rest } = doc
+    return {
+      ...rest,
+      slug: (slug as { current?: string } | undefined)?.current ?? null,
+      headlineStat: (doc.stats as unknown[] | undefined)?.[0] ?? null,
+      ...(client !== undefined ? { client: deref(client) } : {}),
+      ...(industries !== undefined
+        ? { industries: (industries as unknown[]).map(deref).filter(Boolean) }
+        : {}),
+    }
+  }
+
+  const page = readSeed('page', name)
+  const sections = ((page.sections ?? []) as Record<string, unknown>[]).map((section) => {
+    switch (section._type) {
+      case 'logoWallSection':
+        return { ...section, clients: ((section.clients ?? []) as unknown[]).map(deref) }
+      case 'caseShowcaseSection':
+        return {
+          ...section,
+          caseStudies: ((section.caseStudies ?? []) as unknown[]).map((r) => card(deref(r))),
+        }
+      case 'perspectivesCarouselSection':
+        // An empty curated list is the seeded state; the renderer falls back
+        // to the `latest` feed the query fetches alongside it.
+        return { ...section, curated: [], latest: [aPerspective()] }
+      default:
+        return section
+    }
+  })
+
+  return {
+    ...page,
+    slug: (page.slug as { current?: string } | undefined)?.current ?? null,
+    sections,
+  }
 }
 
 /** Every converted perspective slug on disk — for `it.each` sweeps. */

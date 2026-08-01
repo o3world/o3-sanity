@@ -1,0 +1,14 @@
+{
+  "_id": "client-seed-chop",
+  "_type": "client",
+  "name": "Children’s Hospital of Philadelphia",
+  "logo": {
+    "_type": "image",
+    "_localSrc": "prototype/assets/partner-chop.png"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:homepage-wireframe",
+    "extractedAt": "2026-07-31T00:00:00Z"
+  }
+}

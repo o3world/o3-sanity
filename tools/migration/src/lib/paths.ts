@@ -4,6 +4,8 @@ import { fileURLToPath } from 'node:url'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..')
 const DATA = join(ROOT, 'data')
+/** The monorepo root — `_localSrc` seed asset paths resolve against it. */
+export const REPO_ROOT = join(ROOT, '..', '..')
 export const EXTRACT_DIR = join(DATA, 'extract')
 export const CONVERTED_DIR = join(DATA, 'converted')
 export const TRANSLATED_DIR = join(DATA, 'translated')

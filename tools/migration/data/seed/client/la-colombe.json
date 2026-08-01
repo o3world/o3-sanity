@@ -1,0 +1,14 @@
+{
+  "_id": "client-seed-la-colombe",
+  "_type": "client",
+  "name": "La Colombe Coffee Roasters",
+  "logo": {
+    "_type": "image",
+    "_localSrc": "prototype/assets/partner-lacolombe.png"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:homepage-wireframe",
+    "extractedAt": "2026-07-31T00:00:00Z"
+  }
+}
