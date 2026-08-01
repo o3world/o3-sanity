@@ -12,14 +12,25 @@
  *   2. LINE HEIGHT IS 1.2 nearly everywhere, replacing the prototype's
  *      1.05 → 1.3 spread.
  *
- * THE RAMP IS FIXED PX IN FIGMA: 64 / 60 / 48 / 36 / 28 / 24 / 18 / 16 / 14 /
- * 13 / 12, specified at the 1440 design width only. The clamps below keep the
- * fluid model and re-anchor each MAXIMUM to its Figma step, because Figma
- * designs the endpoints and the middle is a code decision.
+ * THE RAMP IS FIXED PX IN FIGMA — 64 / 60 / 48 / 36 / 28 / 24 / 18 / 16 / 14 /
+ * 13 / 12 at 1440, and a second set at 402. Each clamp below is SOLVED so it
+ * hits the mobile frame's value at 402 and the desktop frame's at 1440; both
+ * ends are read values, not taste (ADR 0006).
  *
- * ⚠️ THE CLAMP FLOORS AND VW SLOPES ARE INTERIM. They are NOT read off the
- * 402 mobile frames — reconciling desktop and mobile is #39 (responsive
- * contract), which owns them. Only the max values trace to Figma today.
+ *   token           402    1440
+ *   hero            30  →  64
+ *   cta             40  →  60
+ *   display-xl      40  →  48
+ *   display-lg      18  →  36
+ *   lead            18  →  24
+ *
+ * SMALL UI TEXT DOES NOT SCALE. button, eyebrow, eyebrow-lg, meta, nav and
+ * legal are identical at both widths — read, not assumed (`1814:1656` against
+ * `1868:3262`). Only display type and rhythm interpolate.
+ *
+ * Nothing here steps at a breakpoint. Composition switches at `lg`; size
+ * interpolates. See ADR 0006 for why the frames are endpoints, not
+ * breakpoints.
  *
  * There is NO distinct hero step. The Home hero is photographic with no live
  * text (1810:1616), and the Work hero headline is 48px — the same step as
@@ -38,14 +49,14 @@
   /* hero — 64px. The full-width statements: the partners intro (1864:2393)
    * and the pull quote (1683:2143). Both are filled with
    * --gradient-statement rather than a solid ink; pair with `text-gradient`. */
-  --text-hero: clamp(36px, 4.6vw, 64px);
+  --text-hero: clamp(30px, calc(3.28vw + 16.8px), 64px);
   --text-hero--line-height: 1.2;
   --text-hero--letter-spacing: 0;
   --text-hero--font-weight: 400;
 
   /* cta — 60px. The CTA band headline, centered on ink at 92% white
    * (1680:2088). Its own step because it is the only 60 on the page. */
-  --text-cta: clamp(34px, 4.3vw, 60px);
+  --text-cta: clamp(40px, calc(1.93vw + 32.3px), 60px);
   --text-cta--line-height: 1.08; /* 64.8px / 60px */
   --text-cta--letter-spacing: -0.0233em;
   --text-cta--font-weight: 400;
@@ -53,7 +64,7 @@
   /* display-xl — 48px. THE WORKHORSE: every section headline on every frame
    * ("The platforms we go deep on", 1683:2659), the Work hero headline
    * (1634:1184), and the case-study stat figure. */
-  --text-display-xl: clamp(30px, 3.5vw, 48px);
+  --text-display-xl: clamp(40px, calc(0.77vw + 36.9px), 48px);
   --text-display-xl--line-height: 1.2;
   --text-display-xl--letter-spacing: 0;
   --text-display-xl--font-weight: 400;
@@ -61,14 +72,16 @@
   /* display-lg — 36px. The pull-quote attribution (1683:2144) and the
    * 01/02/03 rail numerals. (The attribution's 1.5em line-height is a call-
    * site literal — it occurs once, so it does not earn a token.) */
-  --text-display-lg: clamp(26px, 2.6vw, 36px);
+  --text-display-lg: clamp(18px, calc(1.73vw + 11px), 36px);
   --text-display-lg--line-height: 1.2;
   --text-display-lg--letter-spacing: 0;
   --text-display-lg--font-weight: 400;
 
   /* display-md — 28px. The case-study problem statement inside the card,
-   * white over the scrim (1883:3562). */
-  --text-display-md: clamp(22px, 2.1vw, 28px);
+   * white over the scrim (1883:3562).
+   * ⚠️ The 402 frames carry no example of this step, so unlike its neighbours
+   * the floor here is INTERPOLATED from the ramp rather than read. */
+  --text-display-md: clamp(22px, calc(0.58vw + 19.7px), 28px);
   --text-display-md--line-height: 1.2;
   --text-display-md--letter-spacing: -0.0286em;
   --text-display-md--font-weight: 400;
@@ -76,7 +89,7 @@
   /* ── Body ──────────────────────────────────────────────────────────────── */
   /* lead — 24px. The standfirst beside a section headline (1762:2123), the
    * Work hero standfirst (1634:1185), and the CTA subhead. */
-  --text-lead: clamp(20px, 1.8vw, 24px);
+  --text-lead: clamp(18px, calc(0.58vw + 15.7px), 24px);
   --text-lead--line-height: 1.2;
   --text-lead--letter-spacing: -0.0333em;
   --text-lead--font-weight: 400;
