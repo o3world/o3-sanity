@@ -31,7 +31,7 @@
     "_type": "figure",
     "image": {
       "_type": "image",
-      "_localSrc": "prototype/assets/work-cyclist.png"
+      "_localSrc": "tools/migration/data/seed/assets/work-cyclist.png"
     },
     "alt": "A cyclist on an open road during a race."
   },

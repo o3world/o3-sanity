@@ -4,7 +4,7 @@
   "name": "Caron",
   "logo": {
     "_type": "image",
-    "_localSrc": "prototype/assets/partner-caron.png"
+    "_localSrc": "tools/migration/data/seed/assets/partner-caron.png"
   },
   "migration": {
     "locked": false,

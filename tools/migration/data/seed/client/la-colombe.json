@@ -4,7 +4,7 @@
   "name": "La Colombe Coffee Roasters",
   "logo": {
     "_type": "image",
-    "_localSrc": "prototype/assets/partner-lacolombe.png"
+    "_localSrc": "tools/migration/data/seed/assets/partner-lacolombe.png"
   },
   "migration": {
     "locked": false,

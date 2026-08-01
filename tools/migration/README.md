@@ -117,9 +117,13 @@ The rules, all enforced by `src/seed.test.ts`:
 - **`surface` is explicit on every section.** `defineSectionBlock` supplies it
   as a Studio `initialValue`, which the loader never runs — a seed that omits
   it renders every section on the default surface.
-- **Images use `_localSrc`**, a repo-relative path (`prototype/assets/…`),
-  resolved at load time exactly as `_wpSrc` is. Seed imagery comes from
-  `prototype/` — the design source of truth — not from WordPress.
+- **Images use `_localSrc`**, a repo-relative path
+  (`tools/migration/data/seed/assets/…`), resolved at load time exactly as
+  `_wpSrc` is. Seed imagery is design-sourced rather than migrated from
+  WordPress, so it is **committed next to the seeds that reference it** — a
+  marker pointing outside the repo (as these did at `prototype/assets/…`, which
+  is gitignored) makes `rebuild` impossible from a fresh clone and fails
+  `seed.test.ts` in CI while passing on the machine that authored it.
 
 Two things the loader guarantees that seeds depend on:
 

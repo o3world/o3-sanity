@@ -55,51 +55,51 @@
     "sha256": "cda7d3e701f939494dee7ef2bfccb58f137624d6",
     "assetId": "image-cda7d3e701f939494dee7ef2bfccb58f137624d6-1200x630-png"
   },
-  "file:prototype/assets/work-city.png": {
+  "file:tools/migration/data/seed/assets/work-city.png": {
     "sha256": "b709d29658aad7bc60470ac55fae9ab22e2918e8",
     "assetId": "image-b709d29658aad7bc60470ac55fae9ab22e2918e8-1240x600-png"
   },
-  "file:prototype/assets/work-hospital.png": {
+  "file:tools/migration/data/seed/assets/work-hospital.png": {
     "sha256": "b4af6347324db5bf2efecb92feada3ec38409610",
     "assetId": "image-b4af6347324db5bf2efecb92feada3ec38409610-1240x600-png"
   },
-  "file:prototype/assets/work-cyclist.png": {
+  "file:tools/migration/data/seed/assets/work-cyclist.png": {
     "sha256": "1b6c5f9a4b1cd18a51a59382bc427b0a95b1c0a4",
     "assetId": "image-1b6c5f9a4b1cd18a51a59382bc427b0a95b1c0a4-1240x600-png"
   },
-  "file:prototype/assets/partner-amerigas.png": {
+  "file:tools/migration/data/seed/assets/partner-amerigas.png": {
     "sha256": "92078a3fb89efe2db1349d6c402810dce21ba7b1",
     "assetId": "image-92078a3fb89efe2db1349d6c402810dce21ba7b1-600x240-png"
   },
-  "file:prototype/assets/partner-aramark.png": {
+  "file:tools/migration/data/seed/assets/partner-aramark.png": {
     "sha256": "ad14f8a2d51a3d50e9a0dabfe1b0b07a0c4447e5",
     "assetId": "image-ad14f8a2d51a3d50e9a0dabfe1b0b07a0c4447e5-600x240-png"
   },
-  "file:prototype/assets/partner-caron.png": {
+  "file:tools/migration/data/seed/assets/partner-caron.png": {
     "sha256": "bd76cd7f7e62a621891d9386604af7675b64057a",
     "assetId": "image-bd76cd7f7e62a621891d9386604af7675b64057a-600x240-png"
   },
-  "file:prototype/assets/partner-chop.png": {
+  "file:tools/migration/data/seed/assets/partner-chop.png": {
     "sha256": "5d4e152a842fae2aec840410c2431759b6cfb576",
     "assetId": "image-5d4e152a842fae2aec840410c2431759b6cfb576-600x240-png"
   },
-  "file:prototype/assets/partner-ironman.png": {
+  "file:tools/migration/data/seed/assets/partner-ironman.png": {
     "sha256": "a44035bf9bbfb743725655aac9871ea7f98faabc",
     "assetId": "image-a44035bf9bbfb743725655aac9871ea7f98faabc-600x240-png"
   },
-  "file:prototype/assets/partner-lacolombe.png": {
+  "file:tools/migration/data/seed/assets/partner-lacolombe.png": {
     "sha256": "6540bfed169ee453769828082c1829cadd40178c",
     "assetId": "image-6540bfed169ee453769828082c1829cadd40178c-600x240-png"
   },
-  "file:prototype/assets/plat-vercel-logo.png": {
+  "file:tools/migration/data/seed/assets/plat-vercel-logo.png": {
     "sha256": "c4b9d63cff23032118f82cd5f103dbd1b9fa9e85",
     "assetId": "image-c4b9d63cff23032118f82cd5f103dbd1b9fa9e85-800x220-png"
   },
-  "file:prototype/assets/plat-lovable-logo.png": {
+  "file:tools/migration/data/seed/assets/plat-lovable-logo.png": {
     "sha256": "06ae1c4c9ce9124e203696a53eb4a2d5b536df7d",
     "assetId": "image-06ae1c4c9ce9124e203696a53eb4a2d5b536df7d-800x220-png"
   },
-  "file:prototype/assets/plat-sanity-logo.png": {
+  "file:tools/migration/data/seed/assets/plat-sanity-logo.png": {
     "sha256": "64b1b99c9e348ad9a6869c7506d42882cd4afc32",
     "assetId": "image-64b1b99c9e348ad9a6869c7506d42882cd4afc32-800x220-png"
   },

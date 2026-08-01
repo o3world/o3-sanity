@@ -4,7 +4,7 @@
   "name": "Children’s Hospital of Philadelphia",
   "logo": {
     "_type": "image",
-    "_localSrc": "prototype/assets/partner-chop.png"
+    "_localSrc": "tools/migration/data/seed/assets/partner-chop.png"
   },
   "migration": {
     "locked": false,

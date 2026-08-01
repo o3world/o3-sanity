@@ -113,7 +113,7 @@
           "railLabel": "Sanity",
           "logo": {
             "_type": "image",
-            "_localSrc": "prototype/assets/plat-sanity-logo.png"
+            "_localSrc": "tools/migration/data/seed/assets/plat-sanity-logo.png"
           },
           "body": "Structured content and real-time editing, wired into the systems your team already runs — not bolted on beside them.",
           "cta": {
@@ -129,7 +129,7 @@
           "railLabel": "Vercel",
           "logo": {
             "_type": "image",
-            "_localSrc": "prototype/assets/plat-vercel-logo.png"
+            "_localSrc": "tools/migration/data/seed/assets/plat-vercel-logo.png"
           },
           "body": "Modern web infrastructure — fast, reliable frontends deployed globally, with the developer velocity to match.",
           "cta": {
@@ -145,7 +145,7 @@
           "railLabel": "Lovable",
           "logo": {
             "_type": "image",
-            "_localSrc": "prototype/assets/plat-lovable-logo.png"
+            "_localSrc": "tools/migration/data/seed/assets/plat-lovable-logo.png"
           },
           "body": "AI-native product building — from prompt to production, shipping working software at the speed of the idea.",
           "cta": {

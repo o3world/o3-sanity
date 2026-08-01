@@ -31,7 +31,7 @@
     "_type": "figure",
     "image": {
       "_type": "image",
-      "_localSrc": "prototype/assets/work-hospital.png"
+      "_localSrc": "tools/migration/data/seed/assets/work-hospital.png"
     },
     "alt": "A clinician and a family at a hospital reception desk."
   },

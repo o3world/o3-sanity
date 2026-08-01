@@ -4,7 +4,7 @@
   "name": "Aramark",
   "logo": {
     "_type": "image",
-    "_localSrc": "prototype/assets/partner-aramark.png"
+    "_localSrc": "tools/migration/data/seed/assets/partner-aramark.png"
   },
   "migration": {
     "locked": false,

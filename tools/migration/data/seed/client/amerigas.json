@@ -4,7 +4,7 @@
   "name": "AmeriGas",
   "logo": {
     "_type": "image",
-    "_localSrc": "prototype/assets/partner-amerigas.png"
+    "_localSrc": "tools/migration/data/seed/assets/partner-amerigas.png"
   },
   "migration": {
     "locked": false,
