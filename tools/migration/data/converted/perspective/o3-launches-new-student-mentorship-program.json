@@ -1,0 +1,238 @@
+{
+  "_id": "perspective-wp-4359",
+  "_type": "perspective",
+  "title": "O3 launches new student mentorship program",
+  "slug": {
+    "_type": "slug",
+    "current": "o3-launches-new-student-mentorship-program"
+  },
+  "excerpt": "O3ers led a mentorship program to expose students to concepts ranging from information organization and user experience design to basic web development.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-1",
+      "_key": "cat-1"
+    }
+  ],
+  "publishedAt": "2021-06-11T21:30:24Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/06/O3-website-imagery_-Insights-9.jpg"
+    },
+    "alt": "Alan Cho, Senior UX Designer, and Grace Ge, UX Research, learning from each other."
+  },
+  "body": [
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In an effort to excite young minds about careers in tech and attract the next generation of leaders, a team of O3ers led a mentorship program to expose students to concepts ranging from information organization and user experience design to basic web development. Our goal was to create a model to quickly engage and train young students, regardless of their experience level and make the learning process extremely accessible.",
+          "_key": "k0003"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 partnered with long time friend and ",
+          "_key": "k0005"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Roxborough High School",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " Web Design teacher, ",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Debi Bender",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " on this initiative. Over the course of three months we led various workshops to reinforce the skills students were already learning in the classroom by building an actual website using HTML and CSS.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://roxboroughhs.philasd.org/"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/debi-bender-023155a2/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Information Organization",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our Chief Innovation Officer, Mike Gadsby and Director of Experience Design, Christine Sheller kicked off the first workshop by helping the students to better understand how to start their very own website project. We walked the students through our approach to creating an experience for a small business. Then each student was asked to ideate around a pseudo-company, they crafted company mission statements, identified website goals and compiled inspiration from competitive and comparative businesses. They also laid out sitemaps for their desired digital experience.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "User Experience Design",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 Senior Experience Strategist Josh Soldiers led the second workshop that focused on how to take your information architecture and design your experience using a design tool called Figma. Students were tasked with creating 1-2 wireframes for key pages of their sites.",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "WordPress Development",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The last session led by O3’s Senior Engineer, Greg Aiello advanced the learnings from the first two workshops to help students pull their site structure and design together to build a WordPress site. He shared how to go about the initial setup in WordPress and demonstrated how to manipulate a theme. Students were then off to build their own experiences using WordPress for the first time.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The Final Output",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "There were a lot of great business ideas put on the table by the students and we were excited to see what they came up with at a student show and share event held in late May. Students created visually appealing and functional websites for the following businesses; a dance studio, bike shop, bait & tackle shop and an e-games store.",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We’re proud of all of the students for their hard work and intelligent questions throughout this program. We look forward to learning from this experience and continuing our student mentorship program in the fall.",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "O3 exposes young minds to careers in tech, trains students regardless of their experience level and makes the learning process accessible."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:4359",
+    "extractedAt": "2026-08-01T00:10:06.747Z"
+  }
+}

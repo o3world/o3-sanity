@@ -1,0 +1,321 @@
+{
+  "_id": "perspective-wp-799",
+  "_type": "perspective",
+  "title": "Looking ahead: Our plans for 2018",
+  "slug": {
+    "_type": "slug",
+    "current": "our-plans-for-2018"
+  },
+  "excerpt": "O3 is looking forward to a big year ahead.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    }
+  ],
+  "publishedAt": "2018-02-02T17:30:47Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-18.jpg"
+    },
+    "alt": "O3 pattern"
+  },
+  "body": [
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This past week we held the annual State of the Ozone where we recapped the health and success of the agency, and looked ahead to the coming year. Most of our discussion highlighted the work we’ve done with clients, the processes we’ve implemented to improve and the continued growth and expansion of our team.",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "With that, we’re excited to share some of the plans we have for the upcoming year. We’re diving in head first into growth and expansion in ourselves and in the community. This year we plan on giving close to $20,000 in community contributions and partnering with organizations who are like-minded in our mission to foster innovation and be a part of the Philly community.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We’re proud to partner with these organizations in various capacities:",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Women in Tech Summit",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " – through a combination of monetary donations and mentorship hours, we’re able to inspire, educate and connect with women in technology. Sweet bonus: our very own dev, Jocelyn Harper, will be a speaker at the summit in Philadelphia.",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://womenintechsummit.net/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Awesome Foundation",
+          "_key": "k0016"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " – we’re proud to support the Philly chapter and fund awesome projects throughout the city with $1,000 micro-grants",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "http://www.awesomefoundation.org/en/chapters/philadelphia"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "PhillyCHI",
+          "_key": "k0019"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " – every year, we sponsor the chapter to put on free, monthly programming and hold its annual design slam competition.",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://phillychi.acm.org/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Beat the Streets",
+          "_key": "k0022"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " – through our sponsorship, we’re committed to helping establish youth wrestling programs and foster skills that are needed to thrive off the wrestling mat.",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://btsphilly.org/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "BarCamp",
+          "_key": "k0025"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " – every year, we sponsor the user-generated “unconference” for those interested in giving a talk or learning more about the collaborators around the Philadelphia-area.",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://2017.barcampphilly.org/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Greensgrow Farms – we support Greensgrow through monetary donations and volunteer hours to rethink how our community can be more sustainable.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We’re also heavily investing in the growth of our team. Check out our open positions on our ",
+          "_key": "k0030"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "career page",
+          "_key": "k0031"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " for more information.",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "/careers"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We’ve also got some big plans for events in the coming months and even bigger things for our own brand and the O3 Labs program. We can’t quite fully share yet, but stay tuned for what we’ve got in store.",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "So, here’s to more strategizing, creating, doing in the coming year!",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Want to learn more about who we are, what we do and what makes us tick? Drop us a line below. And as always, make sure to stay up-to-date on our Insights page and check us out on social.",
+          "_key": "k0038"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:799",
+    "extractedAt": "2026-08-01T00:10:25.430Z"
+  }
+}

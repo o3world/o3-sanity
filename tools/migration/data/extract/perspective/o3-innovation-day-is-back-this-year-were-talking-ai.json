@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:57.655Z"
+  },
+  "wpId": 7703,
+  "slug": "o3-innovation-day-is-back-this-year-were-talking-ai",
+  "title": "O3 Innovation Day is back. This year we're talking AI.",
+  "dateGmt": "2023-04-26 17:54:48",
+  "modifiedGmt": "2023-05-03 14:05:10",
+  "authorId": 16,
+  "categoryIds": [
+    7
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/05/Screen-Shot-2023-05-02-at-1.27.52-PM.png",
+    "alt": "Innovation Day"
+  },
+  "seo": {
+    "titleOverride": "Innovation Day: Demonstrating the real-world applications of AI",
+    "titleRendered": "Innovation Day: Demonstrating the real-world applications of AI",
+    "descriptionOverride": "Join us for an immersive and interactive experience exploring the power of ChatGPT, the cutting-edge AI language technology.",
+    "descriptionRendered": "Join us for an immersive and interactive experience exploring the power of ChatGPT, the cutting-edge AI language technology.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/o3-innovation-day-is-back-this-year-were-talking-ai/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Innovation Day: Demonstrating real-world applications of AI",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "May 8, 9:30 am to 11:30 am ET at our headquarters in Fishtown "
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p><span style=\"background-color: rgb(255 255 255/var(--tw-bg-opacity)); color: rgb(3 3 3/var(--tw-text-opacity));\">We are thrilled to announce that O3’s <a href=\"https://www.o3world.com/conversing-with-the-future-an-interactive-chatgpt-experience/\">2023 Innovation Day</a> is back and better than ever, now aligned with <a href=\"https://2023.phillytechweek.com/event/innovation-day-demonstrating-real-world-applications-of-ai/\">Philly Tech Week</a>. This event offers a unique opportunity to learn and grow in the innovation space.</span></p>\n<p>This year&#8217;s focus is on generative AI and its impact on various industries. We are honored to have O3 experts Mike Gadsby and Josh Friedman sit down with distinguished guest, ChatGPT. Mike and Josh will showcase the capabilities of generative AI and its potential integration across industries.</p>\n<p>Don&#8217;t miss out on this immersive and interactive experience that delves into cutting-edge AI language technology. Through hands-on activities, you&#8217;ll gain a deeper understanding of how AI language technology is revolutionizing the way we communicate and interact with machines.</p>\n<h3>Agenda</h3>\n<p>9:30 AM ET<br />\nAI Tools for Product Design and Development: presented by <a href=\"https://www.linkedin.com/company/delvedeeper/\">Delve</a><br />\nIndustrial Design: Chris Murray or Tom Murray<br />\nMechanical Engineering: Aaron Pavkov<br />\nElectrical Engineering: Dan Marcq or Dan Brotman</p>\n<p>10:10 AM ET<br />\nFuture of Writing Healthcare Content with AI: presented by <a href=\"https://www.grafi.ai/home\">Grafi AI</a><br />\nSean Sodha</p>\n<p>10:40 AM ET<br />\nKeynote O3 presentation: Conversing with the Future: An interactive ChatGPT Experience<br />\nJosh Friedman and Mike Gadsby</p>\n<h3><a href=\"https://www.o3world.com/conversing-with-the-future-an-interactive-chatgpt-experience/\">Register</a></h3>\n<h4>Where?</h4>\n<p>O3 headquarters (1339 Frankford Ave, Suite 3, Philadelphia, PA 19125)</p>\n<h4>When?</h4>\n<p>May 8, 9:30 &#8211; 11:30 AM ET</p>\n<h4>Parking</h4>\n<p>Street parking in Fishtown can be limited. A public parking lot is located just two blocks from O3 headquarters at 1334 N Front St, Philadelphia, PA 19122.</p>\n<p>&nbsp;</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-7720 size-medium\" src=\"https://www.o3world.com/wp-content/uploads/2023/04/My-project-1-42-640x335.jpg\" alt=\"Innovation Day Graphic \" width=\"640\" height=\"335\" srcset=\"http://www.o3world.com/wp-content/uploads/2023/04/My-project-1-42-640x335.jpg 640w, http://www.o3world.com/wp-content/uploads/2023/04/My-project-1-42-1024x536.jpg 1024w, http://www.o3world.com/wp-content/uploads/2023/04/My-project-1-42-768x402.jpg 768w, http://www.o3world.com/wp-content/uploads/2023/04/My-project-1-42-48x25.jpg 48w, http://www.o3world.com/wp-content/uploads/2023/04/My-project-1-42.jpg 1200w\" sizes=\"auto, (max-width: 640px) 100vw, 640px\" /></p>\n<p>&nbsp;</p>\n<p>We look forward to welcoming you to O3 on Innovation Day, as we explore the power and potential of generative AI with industry experts.</p>\n"
+      }
+    ],
+    "related_articles": [
+      7571,
+      2462,
+      6193
+    ],
+    "author": ""
+  }
+}

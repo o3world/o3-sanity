@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:47.908Z"
+  },
+  "wpId": 8505,
+  "slug": "mastering-design-narratives-a-webinar-with-christine-sheller-on-crafting-compelling-design-portfolio-case-studies",
+  "title": "Mastering design narratives: A webinar with Christine Sheller on crafting compelling  design portfolio case studies",
+  "dateGmt": "2023-11-17 14:34:28",
+  "modifiedGmt": "2023-11-17 14:34:28",
+  "authorId": 16,
+  "categoryIds": [
+    7
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/11/Christine-Marketing-Websinar-e1700230771770.png",
+    "alt": "Mastering design narratives: A webinar with Christine Sheller on crafting compelling design portfolio case studies"
+  },
+  "seo": {
+    "titleOverride": "Unlock the power of UI/UX: Crafting compelling design portfolios with Christine Sheller",
+    "titleRendered": "Unlock the power of UI/UX: Crafting compelling design portfolios with Christine Sheller",
+    "descriptionOverride": "Join Christine Sheller in a webinar on November 20 to discover the art of crafting compelling UI/UX design portfolio case studies, essential for today's job market—register now for valuable insights and elevate your personal portfolio.",
+    "descriptionRendered": "Join Christine Sheller in a webinar on November 20 to discover the art of crafting compelling UI/UX design portfolio case studies, essential for today's job market—register now for valuable insights and elevate your personal portfolio.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/mastering-design-narratives-a-webinar-with-christine-sheller-on-crafting-compelling-design-portfolio-case-studies/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Mastering design narratives: A webinar with Christine Sheller on crafting compelling  design portfolio case studies",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Listen in as Christine guides designers in enhancing their portfolios through the synergy of UI/UX design and sharing insights on captivating audiences through user-centered design."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p><a href=\"https://www.linkedin.com/in/christine-sheller/\">Christine Sheller</a>, Senior Vice President of Experience Research and Design at O3, is leading a discussion titled &#8220;Leverage UI/UX for crafting compelling design portfolio case studies.&#8221; This Great Learning-sponsored webinar offers designers the opportunity to learn more about enhancing their personal portfolios. The event is also promoting the <a href=\"https://www.mygreatlearning.com//pg-program-online-uiux-design-course\">University of Texas McCombs School of Business post-grad program</a>, UI/UX for Data-Driven Business Applications, where Christine serves as a mentor to students.</p>\n<h2>\nWebinar overview:</h2>\n<p>Scheduled for Monday, November 20, at 12:00 PM ET, Christine will discuss the art of crafting compelling case studies. She’ll share valuable insights about captivating a brand&#8217;s audience with visually engaging projects while communicating the impact of design work.</p>\n<p>The webinar will cover why it’s essential to have a portfolio, available platforms to choose from, the process for getting started, how to best structure and write a case study, and more. Participants will have the opportunity to ask questions at the end of the session.</p>\n<p>And, according to Christine, a compelling portfolio is no longer nice to have, it’s a necessity in today’s job market. &#8220;A well-architected UX portfolio is a demonstration of your ability to comprehend user requirements and to translate them into effective design solutions. It&#8217;s an opportunity to  demonstrate expertise, creativity, and problem-solving skills essential for crafting impactful user experiences.&#8221;</p>\n<p>With over twenty years of industry experience, Christine has built and managed design and user experience teams. Her extensive background spans various design, product, strategy, and management roles, making her a seasoned practitioner in the art of creating meaningful user-centered experiences.</p>\n<p>Under Christine&#8217;s leadership, our O3 Research + Design team is committed to crafting seamless and accessible user interfaces. Our approach is thoughtful, ensuring that every design element contributes to engaging and delighting your customers, setting your brand apart in the competitive market.</p>\n<h4>\n<a href=\"https://www.mygreatlearning.com/webinar/leverage-ui-ux-for-crafting-compelling-design-portfolio-case-studies\">Register for the webinar</a></h4>\n"
+      }
+    ],
+    "related_articles": [
+      7811,
+      5025,
+      7894
+    ],
+    "author": ""
+  }
+}

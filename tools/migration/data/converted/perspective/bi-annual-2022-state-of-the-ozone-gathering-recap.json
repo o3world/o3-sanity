@@ -1,0 +1,222 @@
+{
+  "_id": "perspective-wp-6193",
+  "_type": "perspective",
+  "title": "Bi-annual 2022 State of the Ozone gathering recap",
+  "slug": {
+    "_type": "slug",
+    "current": "bi-annual-2022-state-of-the-ozone-gathering-recap"
+  },
+  "excerpt": "As the team arrived from all over the country, relationships strengthened through a tangible environment of collaboration. Check out our SOTO recap!",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-1",
+      "_key": "cat-1"
+    }
+  ],
+  "publishedAt": "2023-01-10T21:56:34Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-17.jpg"
+    },
+    "alt": "Bi-annual 2022 State of the Ozone gathering recap"
+  },
+  "body": [
+    {
+      "_key": "k0000",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "It’s that time of the year again — a time to reconnect, meet face to face, and re-energize as we approach an exciting new year! Team O3 met in person in Philadelphia last week for our State of the Ozone gathering (SOTO, as we like to call it).",
+          "_key": "k0001"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Day 1:",
+          "_key": "k0003"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our modern rustic office in the heart of Fishtown fosters its own unique energy. We started the day with a welcome breakfast, followed by an all-team session showcasing the solutions O3 has delivered since the last SOTO in July. The team was transparent about each project as an opportunity to demonstrate wins and capitalize on opportunities. O3’s senior leadership team also presented on the current state of the company, presenting on metrics and goals heading into a new quarter. We rounded out the day at HQ with our annual gift exchange and a friendly dart competition at Buffalo Billiards.",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "_key": "k0006",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/IMG_2819-2-scaled.jpg"
+      },
+      "alt": "Two team members laughing during gift exchange."
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Day 2:",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "It’s no secret that being in person cultivates a different energy than working remotely and collaborating via Zoom. Day two of SOTO allowed the team to do just this! What would typically be conversations in a remote environment were now face-to-face opportunities to engage with colleagues.",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The day ended with our annual O3 Holiday Party, a night we’d all been waiting for. The team was encouraged to bring their partners or plus-ones for a night of music, food, and fun. We announced the winners of the 2022 Golden O awards (listed below) to celebrate our amazing team..",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We’re looking forward to celebrating more O3 wins at our next SOTO gathering!",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Peer recognition:",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 core values: Carly Karas\nBest GIF user: Nick Lewis\nLOL award: Alan Cho\nIcebreaker award: Rob Cotter\nZoom background award: Alicia Jhoo",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Senior leadership awards:",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Apply optimism: Josh Friedman\nTrust in people: Emma Bartholomew\nCommitment to community: Brian Crumley\nEmbrace iteration: Erica Minton\nFocus on the future: Mark Angelow\nMVP: Simone Dehel",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "_key": "k0023",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/IMG_2159-1-scaled.jpg"
+      },
+      "alt": "UX Design and UX Research teams celebrating winners of the Golden O awards."
+    }
+  ],
+  "seo": {
+    "description": "The 2022 state of the ozone event in Philadelphia was a successful meeting of the minds. Learn more about our bi-annual team meeting."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:6193",
+    "extractedAt": "2026-08-01T00:10:02.400Z"
+  }
+}

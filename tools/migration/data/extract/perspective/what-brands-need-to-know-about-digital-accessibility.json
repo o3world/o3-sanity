@@ -1,0 +1,74 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:06.747Z"
+  },
+  "wpId": 4118,
+  "slug": "what-brands-need-to-know-about-digital-accessibility",
+  "title": "What brands need to know about digital accessibility",
+  "dateGmt": "2021-07-11 03:20:33",
+  "modifiedGmt": "2023-02-02 18:18:55",
+  "authorId": 16,
+  "categoryIds": [
+    63,
+    8,
+    11
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/07/O3-website-imagery_-Insights-7.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "What brands need to know about digital accessibility | O3",
+    "descriptionOverride": "O3 created this e-book to help brands understand important accessibility guidelines, laws and best practices.",
+    "descriptionRendered": "O3 created this e-book to help brands understand important accessibility guidelines, laws and best practices.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/what-brands-need-to-know-about-digital-accessibility/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Accessibility ebook</h3>\n<p class=\"lead\">According to the World Wide Web Consortium (W3C) Web Accessibility Initiative (WAI), web accessibility means:</p>\n<blockquote>\n<p class=\"lead\">“That websites, tools, and technologies are designed and developed so that people with disabilities can use them. More specifically, people can perceive, understand, navigate and interact with the Web, as well as contribute to the Web.” (Source: <a href=\"https://www.w3.org/WAI/standards-guidelines/wcag/#intro\" target=\"_blank\" rel=\"noopener noreferrer\">W3C WAI</a>)</p>\n</blockquote>\n<p>There is a ton of web accessibility information online. It can take months to absorb and even longer to figure out a succinct way to leverage in order to create an equitable experience online. It leaves us at O<span style=\"font-size: 13.3333px;\">3</span> wondering, did humans write this? We’d go as far to say that staying on top of accessibility standards and the current status of the law can be downright mind-boggling.</p>\n<p>That’s why we created an e-book to help brands get a handle on important guidelines and laws.</p>\n<h4>What you’ll learn from this e-book:</h4>\n<ul>\n<li>The overlap between best practices and accessibility</li>\n<li>An understanding of disability and impairment challenges</li>\n<li>A human interpretation of the Web Content Accessibility Guidelines</li>\n<li>How to prevent a web accessibility lawsuit</li>\n</ul>\n<h3>Get Started With Web Accessibility Today</h3>\n<p><a href=\"https://www.o3world.com/contact/\">Contact us</a></p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "What brands need to know about digital accessibility",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "O3 created an e-book to help brands get a handle on important guidelines and laws."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      5173,
+      3485,
+      4658,
+      4049
+    ],
+    "author": ""
+  }
+}

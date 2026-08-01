@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:32.179Z"
+  },
+  "wpId": 9980,
+  "slug": "mike-gadsby-on-pacts-digital-phorum-podcast",
+  "title": "Mike Gadsby on PACT’s Digital Phorum podcast",
+  "dateGmt": "2025-03-17 14:52:25",
+  "modifiedGmt": "2025-03-17 14:52:25",
+  "authorId": 16,
+  "categoryIds": [
+    7,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2025/03/Digital-phorum-podcast.jpg",
+    "alt": "Mike Gadsby on PACT’s Digital Phorum podcast- AI in business strategy"
+  },
+  "seo": {
+    "titleOverride": "Mike Gadsby on Digital Phorum: AI reshaping business strategy",
+    "titleRendered": "Mike Gadsby on Digital Phorum: AI reshaping business strategy",
+    "descriptionOverride": "Discover the role of AI in business strategy and how it transforms decision-making and efficiency in today's digital age.",
+    "descriptionRendered": "Discover the role of AI in business strategy and how it transforms decision-making and efficiency in today's digital age.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/mike-gadsby-on-pacts-digital-phorum-podcast/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Mike Gadsby on PACT’s Digital Phorum podcast",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Discover how AI’s impact on business strategy is revolutionizing decision-making, enhancing efficiency, and driving innovation to create competitive advantages in the digital age."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>O3’s Chief Innovation Officer, <a href=\"https://www.linkedin.com/in/michaelgadsby/\">Mike Gadsby</a>, recently joined the <a href=\"https://shows.podcastle.ai/the-digital-phorum-UDo8iVBa/navigating-the-ai-revolution-a-user-centric-approach-to-innovation-L9DQYzen\">Digital Phorum podcast</a>, hosted by <a href=\"https://www.linkedin.com/in/michaelbachmanphilly/\">Michael Bachman</a> (Boomi) and <a href=\"https://www.linkedin.com/in/petercoffee/\">Peter Coffee</a> (Salesforce), to discuss the role of AI in shaping user experiences. This conversation touched on how design is more crucial than ever in ensuring AI delivers meaningful, human-centered solutions.</p>\n<p>One key theme of the discussion was how AI is fundamentally shifting human behavior, particularly in the way people interact with information. Gadsby emphasized that AI isn’t just about automating tasks—it’s about creating richer, more intuitive user experiences. Whether through personalization, conversational AI, predictive analytics, or workflow automation, AI is revolutionizing how businesses engage with customers and employees alike.</p>\n<p>The discussion also explored the broader implications of AI on the workforce. Gadsby pointed out that while AI-driven efficiency is a significant advantage, companies must also consider the human element—rethinking job structures, retraining employees, and ensuring AI enhances, rather than replaces, human capabilities.</p>\n<h3>The 1682 conference</h3>\n<p>O3 is expanding the <a href=\"https://www.1682conference.com/\">1682 brand</a> following the success of the 2024 event. The flagship conference returns on October 8, 2025, at the Barnes Museum in Philadelphia, with a smaller summer event on June 5 at Comcast Center’s Lift Labs. Additionally, 1682 will be featured at PACT’s <a href=\"https://philadelphiapact.com/phorum/\">Phorum Enterprise Technology Conference</a> on April 22, where a panel will showcase piloted AI innovations before they’re publicly revealed. The same panel will return at the 1682 flagship event in October, allowing audiences to track the progress—or setbacks—of these AI initiatives over six months.</p>\n<p><iframe loading=\"lazy\" title=\"Digital Phorum - Episode 3: Navigating the AI Revolution: A User-Centric Approach to Innovation\" width=\"500\" height=\"281\" src=\"https://www.youtube.com/embed/iSQynoT1GiI?feature=oembed\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p>\n<h3>The importance of design in AI</h3>\n<p>One of Gadsby’s standout points was the necessity of thoughtful design in AI applications. He argued that AI is only as good as the user experience it creates. Instead of blindly implementing AI, businesses must focus on structuring data, understanding user intent, and optimizing workflows to make AI more effective and user-friendly.</p>\n<p>A particularly compelling part of the conversation revolved around metadata—the hidden layer of information that makes AI more reliable. Without properly designed metadata structures, AI can struggle to deliver the right answers, potentially leading to confusion rather than clarity. Gadsby illustrated this with a common scenario: a company feeding AI a repository of thousands of documents without considering versions, context, or user intent. The result? AI may return outdated or irrelevant information, highlighting why designing AI interactions is just as important as the technology itself.</p>\n<h3>Looking ahead</h3>\n<p>With AI’s rapid advancement, the conversation reinforced that companies must think <a href=\"https://www.o3world.com/solutions/solutions-ai-for-b2b-growth/\">critically about how they implement these tools</a>. While AI offers incredible potential, organizations must remain mindful of its limitations and ethical considerations. Gadsby’s insights served as a reminder that successful AI adoption hinges on well-designed, human-centered approaches that enhance—not replace—our everyday experiences.</p>\n<p>Be sure to catch O3’s 1682 conference at Phorum on April 22, where industry leaders will discuss how businesses are harnessing AI to drive innovation and impact ROI. And mark your calendars for the <a href=\"https://www.1682conference.com/\">1682 flagship event on October 8, 2025</a>, at the Barnes Museum in Philadelphia—a must-attend gathering for those shaping the future of AI and business.</p>\n"
+      }
+    ],
+    "related_articles": [
+      9224,
+      9595,
+      9674
+    ],
+    "author": ""
+  }
+}

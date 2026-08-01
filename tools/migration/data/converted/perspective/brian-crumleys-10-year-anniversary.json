@@ -1,0 +1,93 @@
+{
+  "_id": "perspective-wp-5020",
+  "_type": "perspective",
+  "title": "Brian Crumley's 10-year anniversary",
+  "slug": {
+    "_type": "slug",
+    "current": "brian-crumleys-10-year-anniversary"
+  },
+  "excerpt": "We want to take a moment to recognize and thank Brian Crumley for his 10-year anniversary at O3! Brian has been a major contributor to our core clients, including Vertex, The Institutes, SEI and many more over the years.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    }
+  ],
+  "publishedAt": "2022-06-01T16:36:41Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/06/Brian_Crumley_Photo.png"
+    },
+    "alt": "Brian Crumley, smiling on O3 staircase."
+  },
+  "body": [
+    {
+      "_key": "k0000",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Thank you, Brian!",
+          "_key": "k0001"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "He’s been our resident accessibility advocate and continuously pushes our engineering team to up the standards of the code we create. Over his time here, he’s been a fixture in the Philadelphia UX and engineering community, having led PhillyChi for many years and participating in running countless events, including our own Forge and 1682 conferences. Thank you, Brian, for everything you’ve done and continue to do.",
+          "_key": "k0003"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Founder and CEO, Keith Scandone, had this to say about Brian:",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Extraordinarily grateful for this guy. 10 years is unbelievably special in any context but especially these days. I’m most proud of who Brian Crumley, CPACC is as a human. He’s done so much incredible work in the community from Bar Camp and PhillyChi, to Forge and 1682, to his recent commitment to accessibility. He leads by example. Thanks for everything Brian. Very fortunate to have you as a friend and colleague.",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "blockquote"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:5020",
+    "extractedAt": "2026-08-01T00:10:02.401Z"
+  }
+}

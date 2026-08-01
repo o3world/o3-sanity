@@ -1,0 +1,350 @@
+{
+  "_id": "perspective-wp-2018",
+  "_type": "perspective",
+  "title": "Introducing 1682",
+  "slug": {
+    "_type": "slug",
+    "current": "innovation-conference"
+  },
+  "excerpt": "O3 World brought the Philadelphia UX/UI community Forge, and we’re exploring a new kind of conference for 2019. We’re proud to formally announce our latest conference: 1682. We’re creating an event for innovative companies and professionals to come together and talk about the successes and failures of innovation.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    }
+  ],
+  "publishedAt": "2019-04-29T15:09:17Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2019/04/Untitled-design-43.png"
+    },
+    "alt": "1682 conference 2019"
+  },
+  "body": [
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Why We Loved Forge",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Forge",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " was a one-day Digital Product UX and Design Conference that had a successful 3-year run. We were fortunate to have some incredible speakers from organizations like Amazon, Facebook, Huge, Slack, Lyft, Uber, Riot Games, Big Spaceship, NASA, and many others.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "http://www.forgeconf.com"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We had an audience of roughly 300 people each year, and it was truly an incredible experience. It was an energizing conference for the city’s tech community, and it was shaped by people with an intimate knowledge of what it takes to make innovative digital products.",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Forge could come back some day, but the makers of Forge are setting their sights on something new: ",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "1682",
+          "_key": "k0014"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://1682conf.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A Need for Innovation",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "1682 is a one day conference focused on the business of innovation. We’ve worked with countless R&D groups and innovation incubators over the years and have our own",
+          "_key": "k0019"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": " internal labs program",
+          "_key": "k0020"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". It’s clear that innovation is important, and we wanted to explore how the innovation-based market is affecting businesses.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.o3world.com/labs/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The demand for innovation in all facets of business only continues to grow.",
+          "_key": "k0023"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": " A study ",
+          "_key": "k0024"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "done by the consulting group McKinsey and Company found that 80% of executives think their current business models are at risk to be disrupted in the near future. In addition to that, 84% of executives say that innovation is important to their growth strategy.",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.mckinsey.com/business-functions/strategy-and-corporate-finance/how-we-help-clients/growth-and-innovation"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The age of innovation programs may have boomed over the last decade, but as with anything new, there have been challenges, pitfalls, and in some cases, failures. Despite the importance of innovation, the same McKinsey and Company study found that only 6% of executives are satisfied with their innovation performance.",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Demystifying Innovation",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Innovation labs and accelerators are rarely the sleek, well-defined programs the companies behind them portray them to be. The reality is that there’s a lot of messiness and risk tied to innovation programs. And, often times, people have more questions about innovation than answers.",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "How much money and time can truly be devoted to innovation? What’s the ROI and definition of success for new ventures? What has worked, and more importantly, what hasn’t for innovation programs? What does innovation look like for small firms, and what does it look like for huge product organizations? How can a company make space for innovation in its day to day operations?",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "These are the questions we hope to explore with 1682. We’re going to demystify the practice of innovation with behind the scenes transparency from people with experience in the innovation space. They’re people who have built and grown their own successful ventures or may have seen their programs close because of unfortunate planning or execution.",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A City of Innovators",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "And why 1682? Philadelphia was founded in 1682 by William Penn. And Philadelphia is a city of firsts for America. The first bank, the first hospital, the first church; the list goes on! It only seemed appropriate to give the conference a name that’s associated with embarking on something new and innovative.",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "1682 will be held on ",
+          "_key": "k0041"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "October 1s",
+          "_key": "k0042"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "t at the Barnes Museum. It’ll be a curated application only event, so space is limited. If you’re interested in attending or speaking, please reach out to us. We’re excited to bring another conference to the Philadelphia area. And, just like with Forge, it’ll be an unforgettable experience.",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://1682conf.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "O3's inaugural 1682 conference",
+    "description": "Join us for the Innovation conference in 2019, where industry leaders share insights on digital product success and failures."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:2018",
+    "extractedAt": "2026-08-01T00:10:25.428Z"
+  }
+}

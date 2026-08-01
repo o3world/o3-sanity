@@ -1,0 +1,302 @@
+{
+  "_id": "perspective-wp-8378",
+  "_type": "perspective",
+  "title": "Navigating the future of CX: Mike Gadsby at TECH360 - Exploring AI's impact on customer experience",
+  "slug": {
+    "_type": "slug",
+    "current": "navigating-the-future-of-cx-mike-gadsby-at-tech360-exploring-ais-impact-on-customer-experience"
+  },
+  "excerpt": "O3's Chief Innovation Officer leads the conversation at TECH360 on how AI is revolutionizing customer experiences, reaffirming O3's commitment to driving innovation and thought leadership in the industry.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2023-09-28T18:04:37Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/09/O3-website-imagery_-Perspectives-tech360-gadsby.jpg"
+    },
+    "alt": "Gadsby-Tech 360 event"
+  },
+  "body": [
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "AI is undeniably one of the most transformative tech forces in the world today. It has the potential to reshape industries, redefine customer experiences and fuel innovation. O3 is excited to share that our Co-Founder and Chief Innovation Officer, ",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Mike Gadsby",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", will be taking the stage at the upcoming TECH360 event on ",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "October 17, 2023",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " to discuss his perspective on the future of CX.",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://tech360pa.com/speakers/mike-gadsby/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "TECH360",
+          "_key": "k0014"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " event overview",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://tech360pa.com/#About"
+        }
+      ],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The event, hosted at ",
+          "_key": "k0017"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "West Chester University",
+          "_key": "k0018"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", will dive into the current AI trends, applications, risks, benefits, and ethical considerations surrounding this cutting-edge technology. Attendees will have the chance to attend engaging ",
+          "_key": "k0019"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "breakout sessions",
+          "_key": "k0020"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", hear from industry experts, and connect with like-minded peers who are equally passionate about the role of AI in shaping the future.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.wcupa.edu/"
+        },
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://tech360pa.com/#Schedule"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "AI and the customer experience (CX) revolution",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In an age where exceptional customer experiences are required for your brand to stand out, AI emerges as a revolutonarry force, and that’s precisely what Mike will explore in his session, ‘Personalized, Predictive, and Proactive: AI’s Role in the Customer Experience.’ He’ll delve into the intricate ways AI, in particular, generative AI, is reshaping the CX landscape, illuminating how it elevates customer expectations across businesses of all sizes. From predicting customer needs to fostering proactive engagement, Mike will spotlight how AI can not only meet but exceed these rising expectations while emphasizing the importance of careful handling to avoid potential pitfalls in CX and AI strategy.",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "Mike Gadsby",
+          "_key": "k0027"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ": Driving innovation and leading the conversation",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=true&heroEntityKey=urn%3Ali%3Afsd_profile%3AACoAAADslVMBtfmYDgBa8cO1mOFrGWz5I4FexTk&keywords=mike%20gadsby&origin=RICH_QUERY_TYPEAHEAD_HISTORY&position=0&searchId=e3969dd5-9711-4e6a-b2e1-5b94105b1ea0&sid=X.f"
+        }
+      ],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As O3’s Co-Founder and Chief Innovation Officer, Mike brings over two decades of diverse client advisory experience, including industry leaders like Comcast, Vanguard, American Family Insurance, and more. His passion for innovation and knowledge-sharing, fostered at the University of Pennsylvania, drives our",
+          "_key": "k0030"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": " innovation practice.",
+          "_key": "k0031"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " Beyond academia, Mike’s reputation as a sought-after speaker and respected industry voice further underscores O3’s commitment to innovation and thought leadership.",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.o3world.com/innovate/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Join us at TECH360",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0006"
+          ],
+          "text": "Join O3 at TECH360",
+          "_key": "k0036"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " to explore AI’s role in the future of CX, gain insights, and connect with industry peers alongside Mike Gadsby, a respected voice in the field. O3 is committed to innovation and staying at the forefront of industry trends. Follow us for event updates as we shape the future with innovation and excellence.",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0006",
+          "_type": "link",
+          "href": "https://tech360pa.com/#Tickets"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Exploring the Future of CX with AI: Insights from TECH360 event",
+    "description": "O3's Co-Founder and Chief Innovation Officer, Mike Gadsby, shares his perspective at the TECH360 event on October 17, 2023. Explore current AI trends, applications, and ethical considerations while gaining insights from industry experts."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:8378",
+    "extractedAt": "2026-08-01T00:09:47.914Z"
+  }
+}

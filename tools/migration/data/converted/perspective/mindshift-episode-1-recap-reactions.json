@@ -1,0 +1,167 @@
+{
+  "_id": "perspective-wp-3943",
+  "_type": "perspective",
+  "title": "MindShift episode 1 recap & reactions",
+  "slug": {
+    "_type": "slug",
+    "current": "mindshift-episode-1-recap-reactions"
+  },
+  "excerpt": "How to Maximize the Power of AI.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-11",
+      "_key": "cat-11"
+    }
+  ],
+  "publishedAt": "2020-10-01T17:09:19Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-4.jpg"
+    },
+    "alt": "MindShift episode 1 recap & reactions"
+  },
+  "body": [
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Thank you to everyone who joined us for the first MindShift webinar, “How to Maximize the Power of AI.”",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We were thrilled by the evident enthusiasm and engagement as we discussed a diverse range of topics: from using AI to enhance customer experience to proving your tech is set up in an ethical way. We explored the role of AI in improving sales and marketing, the importance of spending time to collect and clean data before building a model, and we talked about how to look for red flags such as: selecting one model that fits your data and ignoring the rest of the data gathered, or focusing only on the one approach your team specializes in.",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Another interesting topic ",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Dave Lauer",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", CEO of ",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Urvin AI",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " spoke to was the idea of taking AI out of the lab and into production. That is certainly becoming more important as we strive to deliver demonstrable business value from our data through unique AI solutions.",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/davelauer1/"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.urvin.ai/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We hope that we provided some useful tips about maximizing the power of AI across your organization and some inspiration to help us all imagine how brands must evolve in the future.",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "MindShift episode webinar recording",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.youtube.com/watch?v=d1rXoZ4U4nE&t=62s"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "We discussed a diverse range of topics: from using AI to enhance customer experience to proving your tech is set up in an ethical way."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:3943",
+    "extractedAt": "2026-08-01T00:10:10.995Z"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:10.994Z"
+  },
+  "wpId": 4070,
+  "slug": "philly-tech-week-accessibility-design-slam",
+  "title": "Philly tech week accessibility design slam",
+  "dateGmt": "2020-10-15 20:24:59",
+  "modifiedGmt": "2023-09-21 22:15:36",
+  "authorId": 16,
+  "categoryIds": [
+    63,
+    61,
+    7
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/07/O3-website-imagery_-Insights-8.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Philly tech week accessibility design slam | O3",
+    "descriptionOverride": "O3 hosts an Accessibility Design Slam as part of Philly Tech Week to come up with concepts for a more accessible airport experience.",
+    "descriptionRendered": "O3 hosts an Accessibility Design Slam as part of Philly Tech Week to come up with concepts for a more accessible airport experience.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/philly-tech-week-accessibility-design-slam/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>O3 World hosted an Accessibility (A11y) Design Slam as part of this year&#8217;s Philly Tech Week (September 21 &#8211; 25, 2020). The participants came together to address the question, “How might we make the airport experience more accessible to everyone, including individuals with a variety of disabilities?”</p>\n<p>Earlier this year, O3 World held an internal Accessibility Design Slam focused on <a href=\"https://www.o3world.com/news/design-slam-2020-the-accessibility-edition/\">reimagining the grocery store shopping experience</a>. We leveraged learnings from our internal event and used it as a launch pad to collaborate with the Philly Tech Week community. Individuals were randomly selected from various disciplines to work together to create and present a concept to a team of judges.</p>\n<h3>The Prompt</h3>\n<p>The airport is a source of frustration for individuals without a disability, so we can imagine how challenging it must be for individuals with a disability that are traveling. Identify key problems about the current experience, ideate on a single solution that your team deems the most critical, and formulate a solution that helps solve this challenge with accessibility in mind.</p>\n<p>For the purpose of this exercise, we challenged teams to come up with a single solution that positively impacts everybody. We also asked the teams to focus on any experience within the building of an airport. In addition, teams were informed that the airport would be fully accessible from the exterior; i.e. with curb cuts, elevators, and large door entrances.</p>\n<p>While the groups were free to explore the prompt in whatever way made sense to them, we provided a framework to help guide them through a series of design thinking exercises.</p>\n<h3><strong>Rose, Thorn, Bud</strong></h3>\n<p>The goal of the Rose, Thorn, Bud exercise is to identify things as positive, negative, or having potential. This allows teams to ideate on pain points and opportunities to improve the experience of people traveling through an airport.</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-4076 size-full\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/O3World-News-PTW20-A11y-Design-Slam-Work-Screenshot1-2400x1350-1.jpg\" alt=\"\" width=\"2400\" height=\"1350\" /></p>\n<h3><strong>Affinity Clustering / Voting</strong></h3>\n<p>Building upon the output from the Rose, Thorn, Bud exercise, we asked participants to group their thoughts into affinity clusters, or ideas that are thematically similar. This helped each team group related ideas and the vote on a focus area for further refinement.</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-4078 size-full\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/O3World-News-PTW20-A11y-Design-Slam-Work-Screenshot2-2400x1350-1.jpg\" alt=\"\" width=\"2400\" height=\"1350\" /></p>\n<h3><strong>Concept Sketching</strong></h3>\n<p>After each team pinpointed the problem they were looking to solve, they moved on to thumbnail sketching. This technique enabled them to craft a series of small drawings to quickly illustrate concepts and create alignment in their groups for the final solution to bring forward into judging.</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-4079 size-full\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/O3World-News-PTW20-A11y-Design-Slam-Work-Screenshot3-2400x1350-1.jpg\" alt=\"\" width=\"2400\" height=\"1350\" /></p>\n<h3><strong>Concept Poster</strong></h3>\n<p>The final exercise asked each team to articulate the purpose and features of their concept along with key considerations like cost, time, and implementation tactics. This format helped ensure that each team considered the real world scenarios of bringing a product into reality so that judges could evaluate their solutions accordingly.</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-4080 size-full\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/O3World-News-PTW20-A11y-Design-Slam-Work-Screenshot4-2400x1350-1.jpg\" alt=\"\" width=\"2400\" height=\"1350\" /></p>\n<h3>Our Panel of Judges</h3>\n<p>We were fortunate to enlist the help of three outside judges from the A11y community:</p>\n<ul>\n<li><a href=\"https://www.networksfortraining.org/person/suzanne-erb/\">Suzanne Erb</a> (Accessibility Advisor for Networks for Training and Development)</li>\n<li><a href=\"https://www.linkedin.com/in/ryandudek/\">Ryan Dudek</a> (UX Tech Lead at EY Design Studio PHL)</li>\n<li>Alex Umstead (Product Manager, Accessibility at Comcast)</li>\n</ul>\n<p>Each brought their unique experiences and accessibility knowledge to review the presentations and to select a winning team. Once each team presented, we had our judges individually evaluate them based on the following criteria:</p>\n<ul>\n<li>Creativity: Is the solution inventive, innovative or creative?</li>\n<li>Feasibility: Is the solution feasible and practical?</li>\n<li>Accessibility: Is the solution accessible to a range of disabilities?</li>\n<li>Inclusivity: Is the solution taking a universal design approach?</li>\n</ul>\n<h3>The Solutions</h3>\n<p>The first team created a concept that weaved together visual, auditory, and tactile prompts and signage. Their concept allowed both new and existing travelers to navigate through different areas of the airport experience. Their concept involved visual and audio cues to indicate steps in the traveler&#8217;s journey, making it a more uniform experience for new travelers and those with visual, auditory, and tactile impairments to adapt to changing standards on arrival. Imagine a universal way of speaking about signage, such as the roads we drive on today. This solution aimed to universally adopt principles that all airports could adopt and implement for a universal way of navigating.</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone size-full wp-image-4085\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/O3World-News-PTW20-A11y-Design-Slam-Team1-2400x1350-1.jpg\" alt=\"\" width=\"2400\" height=\"1350\" /></p>\n<p>The second team created <em>Star Board</em>, a digital wayfinding application that’s inclusive for all, regardless of disability. Their big idea was that this was a personal flight concierge that would help users navigate the airport like a pilot. Imagine an app that could show you where you are, where your departure gate is, and find restrooms and restaurants with ease. Key features include the app working across airports, individualized experiences based on their device settings, and airport maps available for download prior to their arrival. The biggest selling point was that if a smartphone wasn’t available, the application could be accessible via tablets that the airport would provide ahead of time.</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-4082 size-full\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/O3World-News-PTW20-A11y-Design-Slam-Team2-2400x1350-1.jpg\" alt=\"\" width=\"2400\" height=\"1350\" /></p>\n<p>The third team created a similar idea to team two, entitled <em>You Are Here</em>. Their concept was based on a similar model of wayfinding as if a user needed to look up directions to their favorite department store at a mall. They would implement a solution similar to a kiosk system that allows users to digitally find their way around an airport. This kiosk system scans boarding passes, shows patrons where they are in the airport, and directs to the next destination of choice. Leveraging existing technology and infrastructure, this idea allows people to find their way, regardless of where they were in their airport journey. The kiosks would enable users to text personalized step-by-step walking directions and maps to an individual’s phone.</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-4083 size-full\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/O3World-News-PTW20-A11y-Design-Slam-Team3-2400x1350-1.jpg\" alt=\"\" width=\"2400\" height=\"1350\" /></p>\n<p>The final team presented <em>Good Vibrations</em>, which main focus was to help passengers get to their departure gate. This product is similar to the wristbands guests receive at Disney Parks. The bands provide haptic responses to help users navigate through an airport. When a person enters an airport and receives a boarding pass, they would also get a wristband that is synced with their departure gate. The product was designed to vibrate when a user faces the right way and does not vibrate when the user faces the wrong direction of a desired destination by triangulating their location using WiFi hotspots. When travelers board their flight, they would simply recycle it, like putting a pair of 3D glasses in the container after a movie for reuse.</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-4084 size-full\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/O3World-News-PTW20-A11y-Design-Slam-Team4-2400x1350-1.jpg\" alt=\"\" width=\"2400\" height=\"1350\" /></p>\n<h3>The Winning Team</h3>\n<p>While there were various innovative ideas presented, there could only be one winner. It came down to Team Two and Team Three, however the judges felt that Team Two’s application <em>Star Board</em> was the winner. The judges had a healthy debate, but ultimately judge Suzanne Erb said it best:</p>\n<p>“Team Two’s idea was the most accessible and provides a service to users that have their own devices.”</p>\n<p>While most teams took vastly different approaches, the prompt was designed to explore all aspects of the airport experience and to help the teams think about the challenges when designing a product. Team Two’s solution was best aligned with the prompt to create a universally designed solution that allowed users – regardless of ability – to use the product to better enhance their airport experience.</p>\n<h3>What Comes Next?</h3>\n<p>Collectively, all attendees learned something new and gained insight into the world of digital accessibility. O3 World believes this Design Slam was just a start. Exercises like this are invaluable to starting the conversation about the challenges faced by individuals with disabilities and the important role that proactively thinking about accessibility and inclusivity has in the work we all do.</p>\n<p>At O3 World we look forward to hosting more A11y Design Slams in the future! If you or folks you know are interested in participating, sign up for our Newsletter below for the next O3 event.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Philly tech week accessibility design slam",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "A fun challenge that allows participants to flex their design, strategy and presentation muscles."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      3485,
+      4118,
+      5173,
+      6194
+    ],
+    "author": ""
+  }
+}

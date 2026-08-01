@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:53.145Z"
+  },
+  "wpId": 7927,
+  "slug": "microsofts-powerful-ai-platform-empowering-data-analysis-and-custom-ai-development",
+  "title": "Microsoft's powerful AI platform: Empowering data analysis and custom AI development",
+  "dateGmt": "2023-06-01 21:38:36",
+  "modifiedGmt": "2023-06-02 10:30:55",
+  "authorId": 16,
+  "categoryIds": [
+    11
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/06/O3-website-imagery_-Perspectives.jpg",
+    "alt": "Microsoft's powerful AI platform"
+  },
+  "seo": {
+    "titleOverride": "Microsoft's powerful AI platform",
+    "titleRendered": "Microsoft's powerful AI platform",
+    "descriptionOverride": "In this post, we’ll explore the capabilities of each service and discuss their implications for AI and user experiences at large.",
+    "descriptionRendered": "In this post, we’ll explore the capabilities of each service and discuss their implications for AI and user experiences at large.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/microsofts-powerful-ai-platform-empowering-data-analysis-and-custom-ai-development/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": " Microsoft's powerful AI platform: Empowering data analysis and custom AI development",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "In this post, we’ll explore the capabilities of each service and discuss their implications for AI and user experiences at large."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>The AI landscape continues to evolve, and the recent announcement by Microsoft introduces a comprehensive platform designed to revolutionize AI development, deployment, and governance. This platform comprises three groundbreaking services: Microsoft Fabric, Prompt Flow, and Semantic Kernel. Read on to explore the capabilities of each service and discuss their implications for AI and user experiences at large.</p>\n<h3>Microsoft Fabric</h3>\n<p>At the core of AI lies data analysis. <a href=\"https://www.microsoft.com/en-us/microsoft-fabric\">Microsoft Fabric</a> goes beyond traditional data analysis by offering a comprehensive suite of features, including data ingestion, pipeline management, and data governance. What sets Microsoft Fabric apart is its intuitive natural language interface. This groundbreaking interface allows users to effortlessly interact with their data, posing questions and creating visualizations with ease. By leveraging Microsoft Fabric, AI developers and data scientists can unlock the full potential of their data, fueling their AI solutions with unparalleled effectiveness.</p>\n<h3>Prompt Flow</h3>\n<p>As we move into the future, we expect a paradigm shift in application development, with less dependence on code and a greater emphasis on prompt engineering. While this innovative approach brings powerful benefits, it also introduces unique challenges concerning security, safety, testing, and deployment. <a href=\"http://Prompt Flow\">Prompt Flow</a>, although not yet available to the public, is among the first tools we&#8217;ve encountered that addresses these challenges by providing an end-to-end process for managing these types of applications &#8211; from their development stage to deployment. It offers an extensive toolkit for integrating applications, custom machine learning models, ChatGPT, and traditional data sources, ensuring these components operate together in a secure, safe, and reliable manner.</p>\n<h3>Semantic Kernel</h3>\n<p><a href=\"https://learn.microsoft.com/en-us/semantic-kernel/overview/\">Semantic Kernel</a> is an open-source framework designed for building sophisticated applications utilizing large-language models such as ChatGPT. Despite only recently becoming publicly available, this platform has been in development for over a year, long before models like GPT-4 were known to the public. Today, it forms the foundational architecture for many of Microsoft&#8217;s AI products. It enables developers with the capability to marry AI models with native functions and memory, as well as access external data sources and APIs. The potential applications for this technology are vast, ranging from constructing custom large-language-model powered pipelines for analysis of large amounts of text to creating the next generation of chatbots.</p>\n<p>For the more technical, we highly recommend watching <a href=\"https://www.youtube.com/watch?v=EB90z-ugdl8\">this recent presentation on it at Microsoft Build</a> which discusses the tectonic shift this new type of “semantic” development heralds.</p>\n<h3>Azure OpenAI</h3>\n<p>To deliver these powerful AI services, Microsoft&#8217;s Azure OpenAI service follows a meticulous data processing and governance approach.</p>\n<p>Here are the key aspects of data processing within Azure OpenAI. To learn more about privacy and security measures check out this <a href=\"https://learn.microsoft.com/en-us/legal/cognitive-services/openai/data-privacy?context=%2Fazure%2Fcognitive-services%2Fopenai%2Fcontext%2Fcontext\">article</a>.</p>\n<h4>Types of processed data:</h4>\n<p>Azure OpenAI processes three primary types of data: prompts and completions submitted by users, training data provided by customers for fine-tuning models, and results data from the training process.</p>\n<h4>Data processing functions:</h4>\n<p>The data undergoes three main types of processing within Azure OpenAI: creating fine-tuned models using customer training data, generating completions and embeddings from user prompts, and analyzing prompts and completions to detect abuse or harmful content.</p>\n<h4>Encryption and storage:</h4>\n<p>Fine-tuned models are stored encrypted for the customer, ensuring data security. Prompts and completions may be stored encrypted for up to 30 days, with access limited to authorized employees for debugging or abuse detection. Customers have the option to opt out of abuse monitoring and logging, ensuring their data privacy.</p>\n<h4>Content filtering and logging:</h4>\n<p>Content filtering functions differently and does not log or store data. Customers can request modifications to content filtering as needed. Customer managed keys encrypt data at rest, except for the data logged for 30 days.</p>\n<h4>Employee access and customer lockbox:</h4>\n<p>Strict access controls are in place to safeguard customer data. Rare employee access to data requires Customer Lockbox and follows a stringent access request process. However, it&#8217;s important to note that abuse monitoring data may still be accessed by authorized personnel for security purposes.</p>\n<h3>Conclusion:</h3>\n<p>Microsoft&#8217;s comprehensive AI platform, comprising Microsoft Fabric, Prompt Flow, and Semantic Kernel, marks a significant advancement in the AI space. With these services, Microsoft aims to empower data analysis, streamline complex AI workflows, and enhance custom AI development. Coupled with the robust data processing and governance measures implemented in AzureO3 is at the forefront of the AI revolution, and we’re excited to leverage the power of Microsoft’s comprehensive AI platform to create exceptional experiences. <a href=\"https://www.o3world.com/contact/\">By partnering with O3</a>, your brand can harness the capabilities of Microsoft Fabric,  Prompt Flow, and Semantic Kernel to unlock the full potential of AI in your business.</p>\n"
+      }
+    ],
+    "related_articles": [
+      7284,
+      3906,
+      7703
+    ],
+    "author": ""
+  }
+}

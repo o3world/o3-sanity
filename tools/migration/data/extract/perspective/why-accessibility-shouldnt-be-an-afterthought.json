@@ -1,0 +1,78 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:02.400Z"
+  },
+  "wpId": 5173,
+  "slug": "why-accessibility-shouldnt-be-an-afterthought",
+  "title": "Why Accessibility shouldn't be an afterthought",
+  "dateGmt": "2022-08-15 22:05:35",
+  "modifiedGmt": "2023-02-02 18:06:01",
+  "authorId": 16,
+  "categoryIds": [
+    63,
+    15,
+    7
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2022/08/accessibility-power-hour.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Why Accessibility shouldn't be an afterthought | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/why-accessibility-shouldnt-be-an-afterthought/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": {
+      "url": "https://www.o3world.com/wp-content/uploads/2022/08/RGB-O3_-Hero-images-1.svg",
+      "alt": ""
+    },
+    "twitterImageOverride": "https://www.o3world.com/wp-content/uploads/2022/08/RGB-O3_-Hero-images-1.svg"
+  },
+  "fields": {
+    "flexible_content": false,
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3><b>What is digital accessibility? </b></h3>\n<p><span style=\"font-weight: 400;\">Digital accessibility ensures that tools, websites, and technologies are designed and implemented so those with disabilities can use them effectively. It focuses on making the web and digital products easier to use for everyone, regardless of their ability.</span></p>\n<h4><span style=\"font-weight: 400;\">Some of the common types of disabilities that people may experience include:</span></h4>\n<ul>\n<li class=\"small\"><span style=\"font-weight: 400;\">Vision</span></li>\n<li class=\"small\"><span style=\"font-weight: 400;\">Speech</span></li>\n<li class=\"small\"><span style=\"font-weight: 400;\">Hearing</span></li>\n<li class=\"small\"><span style=\"font-weight: 400;\">Cognitive</span></li>\n<li class=\"small\"><span style=\"font-weight: 400;\">Motor control</span></li>\n</ul>\n<h3><b>How could an investment in digital accessibility positively impact a brand? </b></h3>\n<h4><b>Improved overall customer experience (CX)</b></h4>\n<p><span style=\"font-weight: 400;\">Taking accessibility into account from the start of a project results in an experience that not only provides equal accommodation for individuals with disabilities but also produces a better experience for everyone.</span></p>\n<h4><b>Overlap in web best practices </b></h4>\n<p><span style=\"font-weight: 400;\">Accessibility overlaps with a multitude of best practices such as mobile-optimized design, performance, usability, and SEO. Generally, websites that take accessibility into account also have reduced maintenance costs.</span></p>\n<h4><b>Enhanced brand reputation</b></h4>\n<p><span style=\"font-weight: 400;\">Adopting a comprehensive accessibility practice can serve to enhance brand image and reputation, as well as increase sales and customer loyalty. In addition, hiring and employee retention can be improved through internal diversity and inclusion efforts.</span></p>\n<h4>Extended market reach and increased return on investment (ROI)</h4>\n<p><span style=\"font-weight: 400;\">Equal digital access is no longer a novelty but a critical tool of modern life. From a business perspective, the spending power of individuals with disabilities in the U.S. alone is more than $300 billion.</span></p>\n<h4><b>Reduced legal risk</b></h4>\n<p><span style=\"font-weight: 400;\">There are unnecessary legal risks involved when you don’t support accessibility. The cost and risk of inaction can be huge as well as damaging to your brand reputation.</span></p>\n<h3><b>How can O3 help? </b></h3>\n<p class=\"small\"><span style=\"font-weight: 400;\">O3’s expert accessibility team has created a </span><a href=\"https://www.o3world.com/news/what-brands-need-to-know-about-digital-accessibility/\"><span style=\"font-weight: 400;\">downloadable e-book, “What Brands Need to Know About Digital Accessibility”</span></a><span style=\"font-weight: 400;\">, to help brands get a handle on important guidelines and laws. We are committed to creating great experiences for everyone – ensuring that all websites and products that we build consider everyone.</span></p>\n<h3><b>Join O3 for an Accessibility power hour: </b></h3>\n<p><span style=\"font-weight: 400;\">Accessibility Power Hour: Why Accessibility shouldn&#8217;t be an afterthought<br />\n</span><span style=\"font-weight: 400;\">September 22, 2022<br />\n</span><span style=\"font-weight: 400;\">12–1 PM ET </span></p>\n<h4><a href=\"https://www.youtube.com/watch?v=BvJ_Zdv-dNQ&amp;t=5s\">Watch webinar recording here</a></h4>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Why Accessibility shouldn't be an afterthought",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "1 in 4 adults in the United States —has some form of a disability, making it difficult or impossible to use digital products."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      5173,
+      4118,
+      3485,
+      4179
+    ],
+    "author": ""
+  }
+}

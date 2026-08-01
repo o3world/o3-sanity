@@ -1,0 +1,225 @@
+{
+  "_id": "perspective-wp-7291",
+  "_type": "perspective",
+  "title": "Bridging the Customer Experience - martech gap",
+  "slug": {
+    "_type": "slug",
+    "current": "bridging-the-customer-experience-martech-gap"
+  },
+  "excerpt": "Businesses face a difficult task in evaluating, selecting and implementing the right marketing technology solutions.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-15",
+      "_key": "cat-15"
+    }
+  ],
+  "publishedAt": "2023-02-20T18:03:26Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-16.jpg"
+    },
+    "alt": "Red pattern"
+  },
+  "body": [
+    {
+      "_key": "k0001",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As the decision maker in the branding process you are tasked with choosing the right team and technologies required to bring your brand vision to life. And while Customer Experience is dependent on the knowledge, skills and capabilities of your partners, the expertise needed to navigate the ever growing Martech landscape is dependent on your partners ability to bridge the Customer Experience – Martech gap.",
+          "_key": "k0002"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What is the Martech gap?",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The “Martech gap” refers to a challenge that many businesses face It refers to the gap between the potential of marketing technology and the actual results that businesses are able to achieve.",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Martech gap and your CX strategy",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Customer Experience broadly defined is the branding, design, and execution of your omnichannel product experiences — such as mobile, desktop, packaging, point of purchase, and advertising. The customer experience can be subjective, decision makers look to industry professionals — like designers and marketers for insight and intuition into a brand’s customer base. But these marketing and design professionals need to have a robust set of data and resources to inform their decisions and brand direction.",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Tools and technologies",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Martech and the martech stack are tools and technologies to create, communicate, evaluate and track your brand message. Whether you are using the tools to develop an exceptional Customer Experience or to track metrics, marketers are increasingly dependent on Martech technologies. The number of companies and services in the martech space have been growing at around 15% a year. It has become increasingly difficult for marketing professionals to navigate the Martech landscape.",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Bridging the Customer Experience",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Martech gap requires navigating the brand execution continuum, from subjective branding decisions to data focused decisions based on analytics. Great marketing in the age of technology requires marketing and design to be actively engaged with development and analytics professionals to share knowledge. Experienced project managers, architects and engineers guiding your team integration is essential to bridging the gap.",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "How O3 can help",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As a consultancy, O3 brings continuity to your marketing and brand execution strategies by creating modern practices for marketing systems development. We bridge the Customer Experience – Martech gaps by focusing on interdisciplinary communication between our practice teams. Our leadership and project management teams are working to facilitate this conversation and demonstrate how your marketing can bridge the gap.",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Check out O3 case studies to see how we have helped to transform brands or ",
+          "_key": "k0024"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "contact O3 directly",
+          "_key": "k0025"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " to learn more.",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:7291",
+    "extractedAt": "2026-08-01T00:09:57.658Z"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:20.526Z"
+  },
+  "wpId": 3073,
+  "slug": "ozone-ventures-update-see-philadelphias-newest-place-for-creators",
+  "title": "Ozone ventures update: See Philadelphia's newest place for creators",
+  "dateGmt": "2019-12-17 02:38:40",
+  "modifiedGmt": "2023-02-02 19:12:12",
+  "authorId": 16,
+  "categoryIds": [
+    8,
+    10,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-4.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Ozone ventures update: See Philadelphia's newest place for creators | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/ozone-ventures-update-see-philadelphias-newest-place-for-creators/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>REC Philly has created something truly unique for the city’s creative class.</h3>\n<p>It was a big weekend for one of O3 World’s inaugural <a href=\"https://www.o3world.com/ventures/\">Ozone Ventures</a> partners. <a href=\"https://www.o3world.com/ventures/rec-philly/\">REC Philly</a> has created something truly unique for the city’s creative class. Their new space in the Fashion District has <a href=\"https://www.thehour.com/business/article/These-Philly-Entrepreneurs-Know-the-Value-of-14906857.php\" target=\"_blank\" rel=\"noopener noreferrer\">a lot</a> of <a href=\"https://billypenn.com/2019/12/08/rec-philly-at-the-fashion-district-is-an-unexpected-slam-dunk/\" target=\"_blank\" rel=\"noopener noreferrer\">people</a> talking and they just had an unforgettable opening weekend celebration.</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone size-medium wp-image-7013\" src=\"https://www.o3world.com/wp-content/uploads/2019/12/ribbon-cutting-640x360.jpeg\" alt=\"Ozone Ventures Update: See Philadelphia’s Newest Place For Creators\" width=\"640\" height=\"360\" srcset=\"http://www.o3world.com/wp-content/uploads/2019/12/ribbon-cutting-640x360.jpeg 640w, http://www.o3world.com/wp-content/uploads/2019/12/ribbon-cutting-1024x576.jpeg 1024w, http://www.o3world.com/wp-content/uploads/2019/12/ribbon-cutting-768x432.jpeg 768w, http://www.o3world.com/wp-content/uploads/2019/12/ribbon-cutting-1536x864.jpeg 1536w, http://www.o3world.com/wp-content/uploads/2019/12/ribbon-cutting-2048x1152.jpeg 2048w, http://www.o3world.com/wp-content/uploads/2019/12/ribbon-cutting-48x27.jpeg 48w, http://www.o3world.com/wp-content/uploads/2019/12/ribbon-cutting-1280x720.jpeg 1280w\" sizes=\"auto, (max-width: 640px) 100vw, 640px\" /></p>\n<p>They kicked off the festivities with a grand opening party that was a who&#8217;s who of Philadelphia creatives. Their Creator Day was filled with workshops, panel discussions, brunch, and yoga.</p>\n<p>Being able to experience the excitement around the space is something we won’t forget for quite some time, and it’s thrilling to know that we played a role in helping REC bring such an important and innovative space to the city.</p>\n<p style=\"text-align: left;\"><em>NOTE: All images by <a href=\"https://www.instagram.com/contentkev/\" target=\"_blank\" rel=\"noopener noreferrer\">Kevin Kilkenny©</a></em></p>\n<p>As part of our Ventures partnership, O3 built an MVP business administration tool that allows the staff to manage their space, memberships, and transactions. We worked closely with REC to understand their ideal member experience, and the administrative capabilities their internal team would need.</p>\n<p>We took an iterative approach to the MVP&#8217;s design and build that will easily allow for changes in the future. As REC continues to grow, we’ll be able to grow the tool alongside them.</p>\n<p>If you want to see our work in action or check out Philly’s hottest new space for creators, take some time to <a href=\"https://www.recphilly.com/tour\" target=\"_blank\" rel=\"noopener noreferrer\">book a tour</a>.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Ozone ventures update: See Philadelphia's newest place for creators",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "REC Philly has created something truly unique for the city’s creative class. Their new space in the Fashion District has a lot of people talking and they just had an unforgettable opening weekend celebration."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      2950,
+      2892,
+      4658,
+      3380
+    ],
+    "author": ""
+  }
+}

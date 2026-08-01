@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:10.993Z"
+  },
+  "wpId": 4296,
+  "slug": "designing-for-accessibility-improving-ux-for-everyone",
+  "title": "Designing for accessibility: Improving UX for everyone",
+  "dateGmt": "2021-02-20 17:54:26",
+  "modifiedGmt": "2023-05-12 16:43:37",
+  "authorId": 16,
+  "categoryIds": [
+    63
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/02/O3-website-imagery_-Perspectives-6.jpg",
+    "alt": "O3 accessibility graphic"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Designing for accessibility: Improving UX for everyone | O3",
+    "descriptionOverride": "Learn more about how accessibility considerations can enhance SEO with these tips, tools and recommendations.",
+    "descriptionRendered": "Learn more about how accessibility considerations can enhance SEO with these tips, tools and recommendations.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/designing-for-accessibility-improving-ux-for-everyone/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Accessibility ebook</h3>\n<p>Accessibility support often overlaps with many other best practices brands should consider when creating digital products, including improved semantic content, usability, mobile optimization and SEO (Search Engine Optimization).</p>\n<p>That’s why we’ve partnered with Seer Interactive for the 10th Anniversary of <a href=\"https://globalaccessibilityawarenessday.org/\" target=\"_blank\" rel=\"noopener\">Global Accessibility Awareness Day</a> on May 20th, 2021 to produce an e-book to help businesses better understand the positive impact accessibility considerations have when websites and digital experiences are designed to be accessible to ALL users.</p>\n<h4>What you’ll learn from this e-book:</h4>\n<ul>\n<li>13 tips on how to make your site more accessible while having a positive impact on SEO</li>\n<li>4 useful UX and technical audit tools</li>\n<li>3 ways to prioritize known accessibility issues</li>\n<li>2 recommendations for remediating issues and validating improvements</li>\n</ul>\n<h4><a class=\"u-margin-top-small btn btn--primary\" title=\"Learn how accessibility can enhance SEO\" href=\"https://www.o3world.com/wp-content/uploads/2021/05/Designing-for-accessibility-Improving-UX-for-everyone.pdf\" target=\"_blank\" rel=\"noopener noreferrer\"><span class=\"btn__text\">Learn how accessibility can enhance SEO</span></a></h4>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Designing for accessibility: Improving UX for everyone",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Check out our Ebook."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      4658,
+      6194,
+      3822,
+      4118
+    ],
+    "author": ""
+  }
+}

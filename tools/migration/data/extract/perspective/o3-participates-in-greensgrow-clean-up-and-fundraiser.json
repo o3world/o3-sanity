@@ -1,0 +1,74 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:25.428Z"
+  },
+  "wpId": 1406,
+  "slug": "o3-participates-in-greensgrow-clean-up-and-fundraiser",
+  "title": "O3 participates in Greensgrow clean up and fundraiser",
+  "dateGmt": "2018-07-03 01:10:07",
+  "modifiedGmt": "2023-02-02 16:02:51",
+  "authorId": 16,
+  "categoryIds": [
+    7,
+    10,
+    1
+  ],
+  "excerpt": "O<sub>3</sub> is proud to support Greensgrow Farms. See what we've been up to recently with them. ",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-4.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "O3 participates in Greensgrow clean up and fundraiser | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/o3-participates-in-greensgrow-clean-up-and-fundraiser/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone size-medium wp-image-7059\" src=\"https://www.o3world.com/wp-content/uploads/2018/07/070218-Greensgrow-640x360.jpeg\" alt=\"Greensgrow and O3 team \" width=\"640\" height=\"360\" srcset=\"http://www.o3world.com/wp-content/uploads/2018/07/070218-Greensgrow-640x360.jpeg 640w, http://www.o3world.com/wp-content/uploads/2018/07/070218-Greensgrow-1024x576.jpeg 1024w, http://www.o3world.com/wp-content/uploads/2018/07/070218-Greensgrow-768x432.jpeg 768w, http://www.o3world.com/wp-content/uploads/2018/07/070218-Greensgrow-1536x864.jpeg 1536w, http://www.o3world.com/wp-content/uploads/2018/07/070218-Greensgrow-2048x1152.jpeg 2048w, http://www.o3world.com/wp-content/uploads/2018/07/070218-Greensgrow-48x27.jpeg 48w, http://www.o3world.com/wp-content/uploads/2018/07/070218-Greensgrow-1280x720.jpeg 1280w\" sizes=\"auto, (max-width: 640px) 100vw, 640px\" /></p>\n<p>One of our big goals this year was for growth and expansion in ourselves and the community. We&#8217;re proud to partner again with <strong>Greensgrow Farms</strong>, an urban farm and community center, to rethink how our community can be more sustainable. Here&#8217;s what we&#8217;ve been working on with them:</p>\n<p>Last week, a few of us rolled up our sleeves and headed across the street to revitalize a local garden bed. The group cleared out the overgrowth and then planted vegetables, melons and other shrubbery. More pictures from that can be found over on our <a href=\"https://twitter.com/o3world/status/1005182286231408641\" target=\"_blank\" rel=\"noopener noreferrer\">Twitter</a> page.</p>\n<p>In addition, we also attended A Taste of Kensington, a benefit for the Greensgrow community kitchen. We caught up with old friends, sipped on some of our favorite brews from around Philly and enjoyed food from some of the best chefs in Kensington (we&#8217;re even included in the photo above!).</p>\n<p>We&#8217;re looking forward to our continued partnership with Greensgrow, stay tuned for more updates!</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "O3 participates in Greensgrow clean up and fundraiser",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Last week, a few of us rolled up our sleeves and headed across the street to revitalize a local garden bed. The group cleared out the overgrowth and then planted vegetables, melons and other shrubbery."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      6193,
+      4354,
+      799,
+      3994
+    ],
+    "author": ""
+  }
+}

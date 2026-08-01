@@ -1,0 +1,466 @@
+{
+  "_id": "perspective-wp-4206",
+  "_type": "perspective",
+  "title": "Understand customers at every touchpoint",
+  "slug": {
+    "_type": "slug",
+    "current": "understand-customers-at-every-touchpoint"
+  },
+  "excerpt": "Each part of the customer journey includes a complex series of decisions and a web of user experiences to consider.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-15",
+      "_key": "cat-15"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-62",
+      "_key": "cat-62"
+    }
+  ],
+  "publishedAt": "2021-04-07T20:30:13Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/04/O3-website-imagery_-Insights-13.jpg"
+    },
+    "alt": "Erica Minton, UX Designer."
+  },
+  "body": [
+    {
+      "_key": "k0001",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We define customer experience as the entire ecosystem of touchpoints that an end-user encounters as they engage with a brand. If you think about something like a new cloud or SaaS product (perhaps an online accounting platform, or something similar), CX would include everything from the first time customers become aware of the product to researching and comparing pricing or options to purchasing, onboarding and using the new technology everyday. Each part of that journey includes a complex series of decisions and a web of user experiences to consider.",
+          "_key": "k0002"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Start with the Customer",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "First, while we’re often looking at a “customer” experience, it’s important to point out that we could just as easily be examining a “patient” or “internal operations” or “administrative” experience. So, as with all human centered design solutions, our first step is to define who we’re designing for. Often, this process will start with a data assessment or end-user interviews to provide an unbiased, “outside-in” view to stakeholders who may be participating in the workshop. We look for key challenges or needs across each segment.",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Using our accounting platform as an example, our customer or audience may include bookkeepers and accountants, though it may also include IT professionals looking to make a vendor selection for a large scale organization. Each experience, pain point and need may vary and needs to be considered.",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "While we can glean similar insight from sales, support or other “front-line” stakeholders who regularly engage with the target audience(s), we find that these internal observations can skew towards individuals as opposed to wider segments. However, as long as we have a solid understanding of who the customer or end-user is and what opportunities look like, we can have a very effective workshop.",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Breaking Down the Journey into Phases",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Once we have a solid understanding of who the customers are and what key challenges or needs may be, we then define each phase of the journey. Most CX journeys will have some combination of the following phases:",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Awareness:",
+          "_key": "k0016"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " how the customer becomes aware of the product or service",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Research:",
+          "_key": "k0019"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " how the customer then compares or contrasts similar products or services",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Purchase:",
+          "_key": "k0022"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " the process the customer must go through to purchase the product or service",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Fulfillment or Onboarding:",
+          "_key": "k0025"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " how the customer receives the product or is onboarded to the recently purchased service",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Use:",
+          "_key": "k0028"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " what the customer experience is as they use the product or their experience with the service",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Support:",
+          "_key": "k0031"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " if the customer has a question or issue, how they get help",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Retention:",
+          "_key": "k0034"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " ongoing, how the customer is engaged with the brand and discovers new products or services",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Again, these phases may be different depending what experience we’re examining. In healthcare for instance, a patient experience may have additional, specific phases around treatment or post-treatment phases.",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Touchpoints, Pain Points & Opportunities",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Once our phases are defined, we then discuss each one and define typical touchpoints a user should expect. Then, we map our pain points for each user segment. This is where our outside insight may provide interesting opportunities to consider. For instance, we often find onboarding is a typical challenge as a customer is handed off from marketing to a product team or client services.",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0042",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Next, we create a shared understanding of the key pain points, we then finish the workshop with an ideation session where we diverge on several concepts that seek to solve any one of the primary pain points across the journey.",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0044",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "For our accounting platform (or, really any online SaaS solution), key focus areas are typically the purchase phase through onboarding, general use and retention. These are the areas where ongoing experience evaluation and new ideas are critical.",
+          "_key": "k0045"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/040721-CX-Journey-Example.jpg"
+      },
+      "alt": "example CX journey",
+      "_key": "k0046"
+    },
+    {
+      "_key": "k0047",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Prioritization & Road Map",
+          "_key": "k0048"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0049",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Following a carefully moderated ideation session, we then work with clients to prioritize those concepts across an importance / difficulty matrix. While we want to think big, we also want to make sure we’re focusing on the most pressing pain points and consider cost and operational challenges associated with each idea. We generally converge on 2-3 ideas where we then work with clients to scope the work and develop a roadmap to delivery.",
+          "_key": "k0050"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0051",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As an example of comparing tradeoffs when prioritizing, for our accounting platform where onboarding and retention are our focus, we may compare the value of something like a predictive service using AI that may provide a lot of impact to something more straightforward such as product updates and offers on the dashboard. Both ideas offer impact, but developing an AI model and implementing it may take months or even years and a lot of dollars to develop. That’s not to say that the AI concept is not worth pursuing, it’s simply a tradeoff that needs to be considered.",
+          "_key": "k0052"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0053",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "While all this may seem intense, it’s remarkably simple and quick. The process and workshop provide our clients with a greater sense of the challenges and opportunities that exist across their entire journey and helps to connect their perception of their customer journey across departments and disciplines. If you’re interested in learning more about our CX workshops, ",
+          "_key": "k0054"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "contact us",
+          "_key": "k0055"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " today.",
+          "_key": "k0056"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "Take a look at our process for identifying the challenges and opportunities that exist across our clients' entire customer journey."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:4206",
+    "extractedAt": "2026-08-01T00:10:06.748Z"
+  }
+}

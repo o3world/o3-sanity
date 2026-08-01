@@ -1,0 +1,74 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:15.487Z"
+  },
+  "wpId": 3457,
+  "slug": "want-to-donate-to-a-local-person-or-org-in-need-now-you-can-pay-it-phorward",
+  "title": "Want to donate to a local person or org in need? Now you can ‘Pay It Phorward’",
+  "dateGmt": "2020-05-08 21:53:12",
+  "modifiedGmt": "2023-02-02 18:59:26",
+  "authorId": 16,
+  "categoryIds": [
+    10,
+    11,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights-3.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Want to donate to a local person or org in need? Now you can ‘Pay It Phorward’ | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/want-to-donate-to-a-local-person-or-org-in-need-now-you-can-pay-it-phorward/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Pay It Phorward</h3>\n<p>O<sub>3</sub> World’s CEO, <a href=\"https://www.o3world.com/about/team/keith-scandone/\">Keith Scandone</a>, along with David M. Davis, managing director for Accenture’s Public Sector, have launched <a href=\"https://payitphorward.org\">Pay It Phorward</a>, a peer-to-peer grant program that aims to help individuals and businesses in Philadelphia impacted by COVID-19.</p>\n<p>Keith chatted recently with <a href=\"https://technical.ly/philly/2020/05/08/o3-world-keith-scandone-donation-app-pay-it-phorward/\">Technical.ly’s</a> Paige Gross about the Pay It Phorward program, as well as other ways our team is aiming to support the Philadelphia community during these uncertain times.</p>\n<h4><a href=\"https://technical.ly/diversity-equity-inclusion/o3-world-keith-scandone-donation-app-pay-it-phorward/\"><span class=\"btn__text\">Read on</span></a></h4>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Want to donate to a local person or org in need? Now you can ‘Pay It Phorward’",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "A peer-to-peer grant program that aims to help individuals and businesses in Philadelphia."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      2950,
+      2892,
+      6187,
+      4609
+    ],
+    "author": ""
+  }
+}

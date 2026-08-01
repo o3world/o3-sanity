@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:37.820Z"
+  },
+  "wpId": 9052,
+  "slug": "women-in-design-deep-dive-2024-christine-shellers-session-on-experience-research-and-design",
+  "title": "Women in Design Deep Dive 2024: Christine Sheller's session on experience research and design",
+  "dateGmt": "2024-06-26 20:56:56",
+  "modifiedGmt": "2024-06-26 21:11:11",
+  "authorId": 16,
+  "categoryIds": [
+    7
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2024/06/O3-website-imagery_-Perspectives-45.jpg",
+    "alt": "Christine Sheller's session on experience research and design"
+  },
+  "seo": {
+    "titleOverride": "Christine Sheller speaks at Women in Design Deep Dive 2024 on research-driven design",
+    "titleRendered": "Christine Sheller speaks at Women in Design Deep Dive 2024 on research-driven design",
+    "descriptionOverride": "Christine Sheller, O3's SVP of Experience Research + Design, at the Women in Design Deep Dive 2024 in Philadelphia.",
+    "descriptionRendered": "Christine Sheller, O3's SVP of Experience Research + Design, at the Women in Design Deep Dive 2024 in Philadelphia.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/women-in-design-deep-dive-2024-christine-shellers-session-on-experience-research-and-design/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Women in Design Deep Dive 2024: O3's Christine Sheller's session on experience research and design",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Explore the critical role of research in informing design across various disciplines."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>The <a href=\"https://www.idsa.org/conference-details/women-in-design-deep-dive-2024/women-in-design-deep-dive-2024-schedule/\">Women in Design Deep Dive 2024 event</a>, held by <a href=\"https://www.idsa.org/\">ISDA</a> is happening this week, June 26–27, in Philadelphia, PA. Among the standout sessions is one hosted by our very own <a href=\"https://www.linkedin.com/in/christine-sheller/\">Christine Sheller</a>, O3’s SVP of Experience Research + Design.</p>\n<h3>About the session</h3>\n<p>Christine Sheller, a seasoned design professional and teacher, is leading an engaging discussion focused on the critical role of research in informing design across various disciplines. Held Thursday, June 26, from 10:45-11:45 am, this session is designed to provide attendees with a thorough understanding of practical discovery methods, empowering designers to create impactful, user-centric solutions. The content covers the entire spectrum, from initial discovery through ideation.</p>\n<p>Participants will gain insights into popular research methodologies used in design. The session not only outlines these methodologies but also explores their practical applications.</p>\n<h4>The Audience Will Learn:</h4>\n<ul>\n<li>A comprehensive understanding of popular research methodologies used in design.</li>\n<li>Insights into the practical application of key methodologies.</li>\n<li>An informative demonstration of gathering and synthesizing insights using AI technology.</li>\n</ul>\n<p>By leveraging cutting-edge methodologies and technologies, Christine leads <a href=\"https://www.o3world.com/about/\">O3 to deliver comprehensive insights</a> that inform every stage of the design process, from discovery to implementation. O3 uncovers deep user needs and translates them into impactful, innovative designs.</p>\n<p>This dedication to research-driven design not only enhances user experiences but also sets new standards in the industry.</p>\n"
+      }
+    ],
+    "related_articles": [
+      8961,
+      4884,
+      7811
+    ],
+    "author": ""
+  }
+}

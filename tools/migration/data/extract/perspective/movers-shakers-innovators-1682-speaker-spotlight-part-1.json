@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:20.528Z"
+  },
+  "wpId": 2614,
+  "slug": "movers-shakers-innovators-1682-speaker-spotlight-part-1",
+  "title": "Movers, shakers & innovators - 1682 speaker spotlight (Part 1)",
+  "dateGmt": "2019-09-17 01:36:16",
+  "modifiedGmt": "2023-02-02 19:51:36",
+  "authorId": 16,
+  "categoryIds": [
+    7,
+    8
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/07/O3-website-imagery_-Insights-8.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Movers, shakers & innovators - 1682 speaker spotlight (Part 1) | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/movers-shakers-innovators-1682-speaker-spotlight-part-1/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>When we first started to plan 1682, we envisioned creating a conference where leaders in business, design, and technology can come together and discuss the behind the scenes realities of innovation. We&#8217;re so proud of what our business of innovation conference has evolved into, and we truly have a phenomenal line-up of speakers and moderators planned for the day. We want to take the next few weeks to highlight who we have featured for the day. Here&#8217;s part one of our speaker line-up, be sure to check back for part 2!</h3>\n<h3><img decoding=\"async\" class=\"alignnone size-large wp-image-2622\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/Blog-eliza-1-1024x576.jpg\" alt=\"1682 Speaker Eliza Pollack\" width=\"100%\" /></h3>\n<h3>Eliza Pollack</h3>\n<p><strong>Company:</strong> <a href=\"https://www.phila.gov/departments/office-of-innovation-and-technology/\">The City of Philadelphia</a><br />\n<strong>Title:</strong> Assistant Director of Innovation Strategy</p>\n<p>Eliza Pollack is the Assistant Director of Innovation Strategy for the City of Philadelphia, where she oversees initiatives that increase municipal government’s capacity for innovation and creative problem-solving. Eliza primarily manages a portfolio which includes the Innovation Academy, Lab, Fund and Consulting, a new initiative that leverages human-centered design to help municipal departments and external stakeholders solve challenges and think about their work in new ways.</p>\n<p>In recognition of her work around growing and supporting Philadelphia’s innovation ecosystem, Eliza was named 2019 Innovator of the Year by Rad Girls, an organization that honors inspirational women leaders in the fields of technology, media, culture science, and business.</p>\n<p>Prior to joining the City, Eliza worked at Project HOME; she studied history and religious studies at the University of Virginia, and subsequently received her Master&#8217;s degree in Public Policy from the University of Michigan.</p>\n<p><img decoding=\"async\" class=\"alignnone size-large wp-image-2625\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/Blog-will-1-1024x576.jpg\" alt=\"1682 speaker Will Toms\" width=\"100%\" /></p>\n<h3>Will Toms</h3>\n<p><strong>Company:</strong> <a href=\"https://www.recphilly.com/\">REC Philly</a><br />\n<strong>Title:</strong> Co-Founder &amp; Chief Creative Officer</p>\n<p>Will Toms is the Co-Founder &amp; Chief Creative Officer of REC, serving as the visionary behind the company’s endeavors. Will’s experience guiding successful marketing efforts for artists such as Eminem, Ice Cube, and Pearl Jam has solidified his position as a true futurist. Powered by his innate innovative aptitude, Will’s dream is to scale REC’s model to span across international communities, establishing a network of independent creators that all have access to the resources, strategies and opportunities necessary to own their future.</p>\n<p><img decoding=\"async\" class=\"alignnone size-large wp-image-2714\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/1682-Speakers-Paul-1024x576.jpg\" alt=\"1682 Speaker Paul Dehel\" width=\"100%\" /></p>\n<h3>Paul Dehel</h3>\n<p><strong>Company</strong>: <a href=\"https://www.chop.edu/centers-programs/office-entrepreneurship-and-innovation\">Children&#8217;s Hospital of Philadelphia</a><br />\n<strong>Title</strong>: Venture &amp; Innovation Manager</p>\n<p>Kelsey Oh is part of the Children’s Hospital of Philadelphia’s Office of Entrepreneurship &amp; Innovation (OEI), which encourages an entrepreneurial spirit throughout the organization by identifying and promoting innovative solutions for pediatric healthcare broadly. She helps CHOP employees develop their ideas, challenge key assumptions, and build proof-of-concept products to test product viability, resulting in spinout companies, licensable assets, or alternative revenue streams for the institution.</p>\n<p>Before joining the OEI team in 2016, Kelsey managed an FDA-funded medical device consortium at CHOP, where she facilitated connections with medical device developers, hospital leadership, and the FDA to generate medical devices for pediatric patients. Prior to joining CHOP, she earned her degree in Biomedical Engineering, and worked in the medical device industry in Project Management and Clinical Research.</p>\n<p><img decoding=\"async\" class=\"alignnone size-large wp-image-2623\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/Blog-greg-1-1024x576.jpg\" alt=\"1682 speaker Greg Willrich\" width=\"100%\" /></p>\n<h3>Greg Willrich</h3>\n<p><strong>Company</strong>: <a href=\"https://www.vertexinc.com/\">Vertex</a><br />\n<strong>Title</strong>: Director of Enterprise Incubation</p>\n<p>Greg Willrich is Vertex’s Director of Enterprise Incubation. He leads a business unit focused on disruption in the world of digital commerce, regulation and taxation.  Still in its nascency, his team collaborates with an ever-growing network of customers, partners, and universities to run disciplined experiments with new business models and technologies.  Greg has been with Vertex for fifteen years and served in a variety of strategic and operational roles.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Movers, shakers & innovators - 1682 speaker spotlight (Part 1)",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Take some time to get to know our speakers."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      2819,
+      2675,
+      576,
+      673
+    ],
+    "author": ""
+  }
+}

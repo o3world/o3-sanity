@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:20.525Z"
+  },
+  "wpId": 3181,
+  "slug": "in-the-news-listen-to-keith-scandone-on-the-innovative-agency-podcast",
+  "title": "Listen to Keith Scandone on The Innovative Agency podcast",
+  "dateGmt": "2020-01-10 20:45:45",
+  "modifiedGmt": "2023-02-02 19:09:38",
+  "authorId": 16,
+  "categoryIds": [
+    7,
+    8
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/06/O3-website-imagery_-Insights-10.jpg",
+    "alt": "Keith Scandone giving an impassioned speech at the office."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Listen to Keith Scandone on The Innovative Agency podcast | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/in-the-news-listen-to-keith-scandone-on-the-innovative-agency-podcast/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>In order for digital product agencies to stay innovative and competitive, change is a necessary part of an agency&#8217;s lifecycle.</h3>\n<p>O<sub>3</sub> World has been around for nearly 15 years. In that time we&#8217;ve added and dropped services, changed team structures, and looked for ways to create the best products for our clients. Our Co-Founder and CEO Keith Scandone was recently featured on the <a href=\"https://b2bgrowthshow.com/episode/agency-15-lessons-in-innovation-from-a-late-blooming-entrepreneur-w-keith-scandone/\">Innovative Agency Podcast</a> to talk about how O<sub>3</sub> has managed to innovate in the face of technological change.</p>\n<h4><a href=\"https://podcasts.apple.com/us/podcast/57-lessons-in-innovation-from-a-late-blooming-entrepreneur/id1419747902?i=1000460737101\"><span class=\"btn__text\">Listen here</span></a></h4>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Listen to Keith Scandone on The Innovative Agency podcast",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Our Co-Founder and CEO Keith Scandone was recently featured on the Innovative Agency Podcast to talk about how O3 has managed to innovate in the face of technological change."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      3879,
+      4896,
+      3994,
+      2018
+    ],
+    "author": ""
+  }
+}

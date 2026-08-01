@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:02.399Z"
+  },
+  "wpId": 6526,
+  "slug": "o3-welcomes-michael-soileau-as-chief-executive-officer",
+  "title": "O3 welcomes Michael D. Soileau as Chief Executive Officer",
+  "dateGmt": "2023-01-27 13:39:58",
+  "modifiedGmt": "2023-02-05 23:32:13",
+  "authorId": 11,
+  "categoryIds": [
+    10
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights-1-1.jpg",
+    "alt": "Headshot, Michael D. Soileau, new CEO."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "O3 welcomes Michael D. Soileau as Chief Executive Officer | O3",
+    "descriptionOverride": "O3 is excited to announce the addition of Michael Soileau as our new CEO to lead the company through its next growth phase.",
+    "descriptionRendered": "O3 is excited to announce the addition of Michael Soileau as our new CEO to lead the company through its next growth phase.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/o3-welcomes-michael-soileau-as-chief-executive-officer/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "O3 welcomes Michael D. Soileau as Chief Executive Officer",
+      "heading_level": "h2",
+      "heading_tag": "h1",
+      "add_description": true,
+      "description": "Formerly with Comcast for more than 20 years, Michael brings over 25 years of leadership experience to O3."
+    },
+    "header_background": {
+      "icon": {
+        "value": "5739",
+        "image": "5739"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>O3 is excited to announce the addition of Michael D. Soileau as our new CEO to lead the company through its next growth phase.</h3>\n<p class=\"small\">Formerly with Comcast for more than 20 years, Michael brings over 25 years of leadership experience, serving in roles that managed service innovation, sales and marketing, roadmap development, operations, and strategic planning. His vast experience will enable O3 to further its reach in helping companies transform their customer journeys to drive deeper retention, engagement, and loyalty.</p>\n<p class=\"small\">Founding Partner and former CEO, Keith Scandone, will now spearhead business strategy development, O3’s investment arm, Ozone Ventures, and future vision and growth expansion opportunities.</p>\n<p class=\"small lead\">&#8220;From strategy to implementation, O3 provides a future-forward approach that gives clients smart and innovative solutions that let them build deep and meaningful customer experiences. O3 creates long-term client partnerships and has the right mix of CX, data, and technology expertise that companies need today and in the future. I am excited to join the company and look forward to moving our clients and business forward.”</p>\n<p class=\"lead\">—Michael Soileau</p>\n<p><a class=\"button\" href=\"https://www.prweb.com/releases/fortune_50_strategic_innovator_michael_d_soileau_joins_customer_experience_firm_o3_as_chief_executive_officer/prweb19135715.htm\" target=\"_blank\" rel=\"noopener\">Check out the full press release here.</a></p>\n<p>We’re looking forward to continued growth and opportunity as we embark on this new journey, with Michael at the nucleus of O3.</p>\n"
+      }
+    ],
+    "related_articles": [
+      4871,
+      6185,
+      5120
+    ],
+    "author": ""
+  }
+}

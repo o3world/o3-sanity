@@ -1,0 +1,327 @@
+{
+  "_id": "perspective-wp-8592",
+  "_type": "perspective",
+  "title": "O3 CEO Michael Soileau explores the future of healthcare at the World Logic Day panel",
+  "slug": {
+    "_type": "slug",
+    "current": "o3-ceo-michael-soileau-explores-the-future-of-healthcare-at-the-world-logic-day-panel"
+  },
+  "excerpt": "Dive into the future of healthcare innovation in 2024.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2024-01-17T16:41:08Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/01/O3-website-imagery_-Perspectives-world-logic-day.jpg"
+    },
+    "alt": "Michael Soileau"
+  },
+  "body": [
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "On Sunday, January 21, 2024, O3’s CEO, ",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Michael Soileau",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", is participating in a fireside chat titled “",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "The Future of Healthcare",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "” as part of the ",
+          "_key": "k0014"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "World Logic Day",
+          "_key": "k0015"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " celebration. The panel conversation will delve into discussions on advocating for and creating improved healthcare solutions through innovation. The esteemed panel includes ",
+          "_key": "k0016"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Rachel Mallernee",
+          "_key": "k0017"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " from Texas Children’s Hospital, ",
+          "_key": "k0018"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "Neil Devani",
+          "_key": "k0019"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " of Necessary VC, and ",
+          "_key": "k0020"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "Alex Trevino",
+          "_key": "k0021"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", Head of Growth for Logictry, and Automation Architect for R1.",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/michael-d-soileau/"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://worldlogicday.com/events/2024/austin"
+        },
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://worldlogicday.com/"
+        },
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/rachelmallernee/"
+        },
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/neildevani/"
+        },
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/alex-trevino/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "World Logic Day significance:",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "World Logic Day, ",
+          "_key": "k0026"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0006"
+          ],
+          "text": "proclaimed by UNESCO",
+          "_key": "k0027"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", seeks to highlight the intellectual history, conceptual significance, and practical implications of logic. The day celebrates logic as a vital discipline for societies and economies, particularly in the context of computer science and digital technology. This global celebration fosters international cooperation, promotes logic in research and teaching, and enhances public understanding of its implications for science, technology, and innovation. If you would like to join us at the Long Center in Austin, ",
+          "_key": "k0028"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0007"
+          ],
+          "text": "register for the event here",
+          "_key": "k0029"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0006",
+          "_type": "link",
+          "href": "https://worldlogicday.com/about"
+        },
+        {
+          "_key": "k0007",
+          "_type": "link",
+          "href": "https://worldlogicday.com/events/2024/austin"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Healthcare Revolution and O3’s role:",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In a world where technology is reshaping patient care, there is a crucial distinction between utilizing AI as a solution and deploying it merely for its own sake. Gen AI, at the forefront of the healthcare revolution, emphasizes the need to stay ahead of the curve. The healthcare landscape presents a myriad of challenges, from trust-building to streamlining medical workflows, optimizing chronic and acute care, and enhancing healthcare accessibility.",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3’s innovation in healthcare:",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 recognizes the complexity of the healthcare industry and is dedicated to addressing challenges by leveraging advanced technologies. Our team of experts is actively involved in revolutionizing patient care by incorporating logical and algorithmic reasoning into its solutions. In our recent event titled “",
+          "_key": "k0038"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0008"
+          ],
+          "text": "Empowering Patients and Caregivers: AI and Innovation in Healthcare",
+          "_key": "k0039"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ",” Robert Pugliese, Director of Innovation Design at Thomas Jefferson University and Jefferson Health, joined an interactive live demo on the exciting potential of innovation in healthcare.",
+          "_key": "k0040"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0008",
+          "_type": "link",
+          "href": "https://www.o3world.com/perspectives/revolutionizing-healthcare-a-deep-dive-into-o3s-ai-webinar/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0041",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The Fireside Chat at the World Logic Day event is set to explore the intersection of logic, technology, and healthcare. O3’s commitment to pioneering the digital frontier in patient care aligns with the evolving needs of the healthcare landscape, emphasizing the importance of staying logical and strategic in the deployment of AI for the benefit of patients and the industry as a whole.",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Exploring the future of healthcare: O3 CEO at World Logic Day panel 2024",
+    "description": "Explore the future of healthcare innovation in 2024 with O3 CEO Michael Soileau at the World Logic Day panel. Join the fireside chat as experts discuss improved healthcare solutions through innovation."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:8592",
+    "extractedAt": "2026-08-01T00:09:42.655Z"
+  }
+}

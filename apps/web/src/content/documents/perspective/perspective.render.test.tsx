@@ -221,6 +221,28 @@ describe('perspective detail route', () => {
 })
 
 /**
+ * The text a reader actually sees: tags dropped, entities decoded, whitespace
+ * collapsed. Comparing against raw HTML is too brittle for real content — a
+ * link or a `<br />` splits a sentence across tags, and `&` arrives as
+ * `&amp;` — and none of that is a rendering failure.
+ */
+function visibleText(html: string): string {
+  return html
+    .replace(/<(script|style)\b[\s\S]*?<\/\1>/gi, '')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#x27;|&#39;/g, "'")
+    .replace(/&nbsp;/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+const collapse = (text: string) => text.replace(/\s+/g, ' ').trim()
+
+/**
  * The migration → render bridge. Real converted WordPress documents, rendered
  * through the real route. A mapper that starts emitting something the renderer
  * cannot display fails here, not in Studio.
@@ -232,11 +254,55 @@ describe('migrated content renders', () => {
     expect(slugs.length).toBeGreaterThan(0)
   })
 
+  /**
+   * The five oldest and five newest posts, checked in more detail than the
+   * sweep below (#17). The ends of the archive are where conversion breaks:
+   * the 2015 posts came through three WordPress editors and two themes, the
+   * 2026 ones use the current ACF module set. Anything that survives both
+   * probably survives the middle.
+   */
+  describe('the ends of the archive render in full', () => {
+    const byDate = slugs
+      .map((slug) => aMigratedPerspective(slug))
+      .sort((a, b) => String(a.publishedAt).localeCompare(String(b.publishedAt)))
+    const ends = [...byDate.slice(0, 5), ...byDate.slice(-5)]
+
+    it.each(ends.map((doc) => [doc.slug as string, doc] as const))(
+      '%s keeps its text, headings, links and images',
+      async (slug, doc) => {
+        const { html } = await renderRoute(route, { data: doc, params: { slug } })
+
+        // Every span's words reach the page — a body that converted to blocks
+        // the renderer ignores would leave a header and nothing under it.
+        // Asserted per span, not per block: marks (links, bold) split a
+        // block's text across tags, so only a span is contiguous in the HTML.
+        const paragraphs = (doc.body ?? []).filter((b) => b._type === 'block')
+        expect(paragraphs.length).toBeGreaterThan(0)
+        const spans = paragraphs
+          .flatMap((block) => block.children ?? [])
+          .map((child) => ('text' in child ? (child.text ?? '').trim() : ''))
+          .filter((text) => text.length > 40)
+        expect(spans.length, 'no substantial text to check').toBeGreaterThan(0)
+        const rendered = visibleText(html)
+        for (const text of spans) expect(rendered).toContain(collapse(text).slice(0, 40))
+
+        // Structure the source had must still be there.
+        const styles = new Set(paragraphs.map((b) => b.style))
+        if (styles.has('h2')) expect(html).toMatch(/<h2[\s>]/)
+        if (styles.has('h3')) expect(html).toMatch(/<h3[\s>]/)
+        const hasLink = paragraphs.some((b) => (b.markDefs ?? []).length > 0)
+        if (hasLink) expect(html).toMatch(/<a [^>]*href=/)
+        const images = (doc.body ?? []).filter((b) => b._type === 'figure')
+        if (images.length > 0) expect(html.match(/<img\b/g) ?? []).toHaveLength(images.length + 1)
+      },
+    )
+  })
+
   it.each(slugs)('renders the migrated perspective %s', async (slug) => {
     const doc = aMigratedPerspective(slug)
     const { html } = await renderRoute(route, { data: doc, params: { slug } })
 
-    expect(html).toContain(doc.title as string)
+    expect(visibleText(html)).toContain(collapse(doc.title as string))
     // A body that converted to blocks the renderer ignores would leave an
     // article with a header and nothing under it.
     expect(html).toMatch(/<p[\s>]/)

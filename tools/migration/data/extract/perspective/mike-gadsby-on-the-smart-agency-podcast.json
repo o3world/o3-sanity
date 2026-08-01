@@ -1,0 +1,74 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:15.488Z"
+  },
+  "wpId": 3348,
+  "slug": "mike-gadsby-on-the-smart-agency-podcast",
+  "title": "Mike Gadsby on the Smart Agency podcast",
+  "dateGmt": "2020-04-13 17:08:05",
+  "modifiedGmt": "2023-02-01 21:12:36",
+  "authorId": 16,
+  "categoryIds": [
+    15,
+    7,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-19.jpg",
+    "alt": "Mike Gadsby, co-founder and Chief Innovation Officer."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Mike Gadsby on the Smart Agency podcast | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/mike-gadsby-on-the-smart-agency-podcast/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>With more than 20 years of experience, <a href=\"https://www.o3world.com/about/team/mike-gadsby/\">Mike Gadsby</a>, Chief Innovation Officer and co-founder of O<sub>3</sub> World, has been through several changes in the economy. Recently, he spoke with Jason Swenk, agency consultant and host of The Smart Agency podcast, to discuss how agency leaders can survive a turbulent economy, and perhaps even thrive.</p>\n<h4><a href=\"https://jasonswenk.com/survive-changing-economy/\"><span class=\"btn__text\">Listen here</span></a></h4>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Mike Gadsby on the Smart Agency podcast",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "How agency leaders can survive a turbulent economy, and perhaps even thrive."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      4377,
+      3994,
+      3348,
+      3212
+    ],
+    "author": ""
+  }
+}

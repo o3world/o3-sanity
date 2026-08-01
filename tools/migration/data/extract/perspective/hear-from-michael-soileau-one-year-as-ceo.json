@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:42.655Z"
+  },
+  "wpId": 8604,
+  "slug": "hear-from-michael-soileau-one-year-as-ceo",
+  "title": "Hear from Michael Soileau: One year as CEO",
+  "dateGmt": "2024-01-25 17:45:54",
+  "modifiedGmt": "2024-01-27 22:29:33",
+  "authorId": 16,
+  "categoryIds": [
+    7
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2024/01/O3-website-imagery_-Perspectives-32.png",
+    "alt": "Michael Soileau 1 year at O3"
+  },
+  "seo": {
+    "titleOverride": "Sit down with the O3 CEO: The business landscape in 2024",
+    "titleRendered": "Sit down with the O3 CEO: The business landscape in 2024",
+    "descriptionOverride": "Michael Soileau's first year as O3's CEO. Discover how O3's expertise in generative AI and adaptive strategies positions the company for a bright future in customer experience (CX) innovation.",
+    "descriptionRendered": "Michael Soileau's first year as O3's CEO. Discover how O3's expertise in generative AI and adaptive strategies positions the company for a bright future in customer experience (CX) innovation.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/hear-from-michael-soileau-one-year-as-ceo/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Hear from Michael Soileau: One year as CEO at O3 ",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "We’re sitting down with the O3 CEO to hear what he sees internally and in the landscape of digital transformation in 2024. "
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>This week, O3 celebrated <a href=\"https://www.linkedin.com/in/michael-d-soileau/\" target=\"_blank\" rel=\"noopener\">Michael Soileau</a>’s first anniversary as CEO. It’s no secret that this past year has been unprecedented in the customer experience (CX) landscape, both for O3 and the industry at large. Dynamic and innovative technology has redefined the way we approach processes. Michael joined O3 on the cusp of an exciting shift in momentum. We sat down with him to talk about 2023 and how we’re strategically positioned for success moving into 2024.</p>\n<h3>How has the last year been for you, and what excites you most about 2024?</h3>\n<p>Firstly, what an amazing adventure year 2023 has been. Getting to know the team and digging into our work and services has been nothing short of fantastic.</p>\n<p>However, it was also a tough year economically for our clients and us. But the upside is that it gave us some room to consider how we can be best organized to support our clients, organize to support new business verticals, and how we can create a readiness plan for this year. It was all about controlling the controllable.</p>\n<p>The fast-paced change in technology has certainly given us some opportunities. The <a href=\"https://www.o3world.com/transcend/\">work we are doing today in AI</a> and ChatGPT is incredible and we have subject matter experts that have hit the ground running. The other piece is <a href=\"https://www.o3world.com/include/\">accessibility</a>. Not only are businesses understanding the value of reaching all of their customers, but so is higher education, non-profits, and governments. So our work continues there, and that’s incredibly rewarding to me.</p>\n<p>Lastly, I’ll say that the work we are doing from a marketing and brand perspective is proving incredibly successful. Our social media spots are garnering more attention than ever and driving more questions directly to us from existing and prospective customers, which means our brand is resonating in the marketplace!</p>\n<h3>What is your favorite part about O3 now that you have a year under your belt?</h3>\n<p>If I am being honest, besides the incredible team we have, it’s my growing level of comfort with our work — and knowing I still have more to learn about our ecosystem. I love lifelong learning.</p>\n<h3>How do you see the landscape changing this year and beyond?</h3>\n<p>Certainly technology, and AI, in particular, have taken over that conversation. So we are fortunate to have a team of technologists who are capable of staying ahead of the curve. I love watching our customer base shift &#8211; we are doing more work in verticals like sports and healthcare, which is not only fun for our teams but also very rewarding.</p>\n<h3>What do you see for the vision of the company, and how do you see O3 evolving in the next few years?</h3>\n<p>I am confident we have the right team and the right tools in place to succeed in an ever-changing marketplace. We have leaned into our ability to be nimble and flexible and have embraced the new opportunities in front of us in ways that, yes, can be hard but are so incredibly exciting. I think that being a premier consultancy in CX that is rooted in innovation and strategy has differentiated us in ways that have allowed us to partner for growth and to grow with emerging partners! The future is bright for O3!</p>\n<h3>In conclusion</h3>\n<p>The swift tech evolution in 2023 opened doors to unprecedented opportunities. Our strides in generative AI  spearheaded by subject matter experts, stand as a testament to the incredible work underway. As we celebrate Michael&#8217;s one-year milestone, O3 finds itself on the verge of an unprecedented year. Our broadening influence across diverse industries showcases our adaptability, paving the way for a future of innovation and strategic digital experiences.</p>\n"
+      }
+    ],
+    "related_articles": [
+      8592,
+      8522,
+      8322
+    ],
+    "author": ""
+  }
+}

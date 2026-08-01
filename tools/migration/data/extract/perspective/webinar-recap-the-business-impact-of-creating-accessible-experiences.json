@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:10.993Z"
+  },
+  "wpId": 4179,
+  "slug": "webinar-recap-the-business-impact-of-creating-accessible-experiences",
+  "title": "Webinar recap: The business impact of creating accessible experiences",
+  "dateGmt": "2021-03-06 01:52:35",
+  "modifiedGmt": "2023-09-21 22:17:02",
+  "authorId": 16,
+  "categoryIds": [
+    63,
+    7
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/07/O3-website-imagery_-Insights-7.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Webinar recap: The business impact of creating accessible experiences | O3",
+    "descriptionOverride": "A UX designer and engineer share advice on how to introduce, evangelize and gain buy-in for accessibility within an organization.",
+    "descriptionRendered": "A UX designer and engineer share advice on how to introduce, evangelize and gain buy-in for accessibility within an organization.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/webinar-recap-the-business-impact-of-creating-accessible-experiences/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>Ashley Schroeder, a senior user experience designer at Southwest Airlines and Brian Crumley, a senior engineer at O3, recently shared advice with MindShift webinar attendees on how to introduce, evangelize and gain buy-in for accessibility within an organization. Whitney Quesenbery, co-founder of the Center for Civic Design moderated the discussion. Here are a few takeaways from the speakers.</p>\n<h3>Brian Crumley on how to empower teams to think about accessibility</h3>\n<p>When O3’s accessibility program first started it was a grassroots approach. Any change that Brian could go through and put in place, if it was a simple alt tag or button text that was a win.</p>\n<p>Nowadays he finds opportunities to empower people in different roles to go through and take ownership of various aspects of accessibility. Part of what he’s tried to do is produce materials, create internal educational events and seek formal training for folks who are interested.</p>\n<h3>Ashley Schroeder on showing value beyond ethics and inclusion</h3>\n<p>Southwest Airlines is a federally regulated company. They’re regulated as an industry to be accessible. They have to be ADA compliant or else they face fines. That being said, Ashley shows the value of accessibility to the company as a whole by ensuring that the fines stay down.</p>\n<p>Other metrics include time to task completion and optimizing the digital self service portal to cut down on call volume.</p>\n<h4><a href=\"https://www.youtube.com/watch?v=iHUTPUe0Jno&amp;t=145s\">Watch the MindShift webinar live recording for more insights.</a></h4>\n<h3>Resources referenced</h3>\n<ul>\n<li>The personas from <a href=\"https://rosenfeldmedia.com/books/a-web-for-everyone/\">A Web for Everyone</a></li>\n<li><a href=\"https://www.o3world.com/news/3-considerations-for-running-an-empathy-lab/\">3 Considerations for running an empathy lab</a></li>\n</ul>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Webinar recap: The business impact of creating accessible experiences",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "How to introduce, evangelize and gain buy-in for accessibility within an organization."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      4658,
+      4118,
+      5173,
+      4117
+    ],
+    "author": ""
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:32.179Z"
+  },
+  "wpId": 9747,
+  "slug": "product-leadership-strategies-growth-impact",
+  "title": "Rescheduled event: Explore strategies to scale impact and drive growth",
+  "dateGmt": "2025-03-24 16:15:38",
+  "modifiedGmt": "2025-03-24 16:35:51",
+  "authorId": 16,
+  "categoryIds": [
+    7
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2025/02/Journey-into-product-leadership.webp",
+    "alt": "Explore strategies to scale impact and drive growth"
+  },
+  "seo": {
+    "titleOverride": "Product leadership event: Strategies to drive growth",
+    "titleRendered": "Product leadership event: Strategies to drive growth",
+    "descriptionOverride": "Join our Product leadership event to discover strategies for impact and growth in your product management career.",
+    "descriptionRendered": "Join our Product leadership event to discover strategies for impact and growth in your product management career.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/product-leadership-strategies-growth-impact/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Rescheduled event: Explore strategies to scale impact and drive growth",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Join us on Wednesday, March 26 at O3's headquarters in Fishtown."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>The path to product leadership is about evolving your mindset, sharpening your strategic vision, and mastering the art of influence.</p>\n<p><a href=\"https://www.meetup.com/producttank-philadelphia/\">In collaboration with the Product Tank</a>, O3 is thrilled to host <a href=\"https://www.meetup.com/producttank-philadelphia/events/306592569/?eventOrigin=group_featured_event\">Journey into Product Leadership: Strategies to Scale Impact and Drive Growth</a>—an exclusive event designed for product professionals who want to level up their leadership game.</p>\n<p>Join us at O3’s HQ in Fishtown for a dynamic conversation between Joshua Aversa, a seasoned product growth leader, and Brady Halligan, senior strategist at O3. Together, they’ll unpack the key strategies that transform product managers into impactful leaders—navigating cross-functional challenges, leveraging AI and analytics, and fostering innovation.</p>\n<h3>This event is for</h3>\n<ul>\n<li>Aspiring product leaders ready to make the leap into strategy</li>\n<li>Experienced PMs looking to refine their influence and decision-making skills</li>\n<li>Innovators eager to harness AI and data-driven insights for growth</li>\n</ul>\n<h3>What you’ll learn</h3>\n<ul>\n<li>Shifting from execution to strategy – How to build a strong leadership foundation</li>\n<li>Leveraging AI &amp; analytics – Using data to drive smarter product decisions</li>\n<li>Driving innovation – Creating a customer-centric, learning-driven culture</li>\n<li>Influencing without authority – Aligning teams and executives through storytelling and metrics</li>\n</ul>\n<h3>Meet the speakers</h3>\n<h4><a href=\"https://www.linkedin.com/in/javersa/\">Speaker: Joshua Aversa</a></h4>\n<p>(Product Growth Leader &amp; Innovation Strategist)</p>\n<p>With over 15 years of experience scaling organizations, launching market-defining products, and aligning cross-functional teams, Joshua knows what it takes to drive real impact. He has led major strategic initiatives across HR Tech, Ed Tech, and platform product management, using analytics, market foresight, and compelling storytelling to fuel product growth.</p>\n<p>As the founder of Aversatility, Joshua provides advisory services in product leadership, innovation research, and strategic execution. He’s passionate about harnessing AI and data-driven insights to accelerate decision-making and drive market success.</p>\n<p>Beyond his professional expertise, Joshua is an avid explorer of national parks, a long-distance runner, and a mentor to up-and-coming product leaders.</p>\n<h4><a href=\"https://www.linkedin.com/in/bradyhalligan/\">Host: Brady Halligan </a></h4>\n<p>(Senior Strategist at O3 &amp; Innovation Expert)</p>\n<p>Brady brings a wealth of experience in strategy, innovation, and business consulting, helping organizations—from startups to Fortune 10 companies—navigate complex challenges and unlock growth. At O3, he specializes in digital transformation, customer experience, and strategic design, ensuring that businesses stay ahead of the curve.</p>\n<p>Brady has also instructed at institutions like the University of Pennsylvania and Reykjavik University and has spoken on innovation, sustainability, and social impact at organizations like the United Nations.</p>\n<h3>Event details</h3>\n<h4>Location</h4>\n<p>O3 headquarters (1339 Frankford Ave, Suite 3 · Philadelphia, PA)</p>\n<h4>Date</h4>\n<p>Wednesday, March 26, 2025</p>\n<h4>Time</h4>\n<p>5:30 PM to 8:30 PM EST<br />\n5:30 PM – Arrival &amp; Networking<br />\n6:00 PM – Interview: Brady Halligan interviews Joshua Aversa on the Journey into Product Leadership<br />\n7:00 PM – Live Q&amp;A<br />\n7:30 PM – 8:30 PM – Networking &amp; Discussion</p>\n<h3>Why you should attend</h3>\n<p>This is an opportunity to gain actionable insights, connect with industry peers, and expand your network in the product leadership space. Whether you’re looking to refine your strategic thinking, leverage AI for smarter decision-making, or enhance your influence within your organization, this event will leave you inspired and equipped to take your career to the next level.</p>\n<h4><a href=\"https://www.meetup.com/producttank-philadelphia/events/306592569/?eventOrigin=group_featured_event\">Secure your spot today</a></h4>\n"
+      }
+    ],
+    "related_articles": [
+      9674,
+      9595,
+      9676
+    ],
+    "author": ""
+  }
+}

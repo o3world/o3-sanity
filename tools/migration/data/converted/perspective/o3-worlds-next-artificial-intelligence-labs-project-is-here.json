@@ -1,0 +1,182 @@
+{
+  "_id": "perspective-wp-633",
+  "_type": "perspective",
+  "title": "O3's next artificial intelligence labs project is here",
+  "slug": {
+    "_type": "slug",
+    "current": "o3-worlds-next-artificial-intelligence-labs-project-is-here"
+  },
+  "excerpt": "The O3 Labs program gives us the chance to work with new and emerging technologies and experiment with ideas developed from our internal team.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-62",
+      "_key": "cat-62"
+    }
+  ],
+  "publishedAt": "2017-01-11T12:14:34Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-5.jpg"
+    },
+    "alt": "O3 accessibility and pattern"
+  },
+  "body": [
+    {
+      "_key": "k0001",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 Moods is an application that transforms the atmosphere of a room by altering the lighting to match the personality of whoever is in the room. It does this by harnessing the power of Twitter and IBM’s Watson API, specifically its Personality Insights feature.",
+          "_key": "k0002"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 Moods takes tweets from a given account, analyzes the personality of that user, translates that user’s personality to a color, and then changes the colors of the lights in the room to that color.",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The technologies behind this are:",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "IBM’s Watson API",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Philips Hue Lights",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "AngularJS (frontend)",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Node.js (backend)",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The ",
+          "_key": "k0016"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "O3 Labs",
+          "_key": "k0017"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " program gives us the chance to work with new and emerging technologies and experiment with ideas developed from our internal team. We look forward to what’s next in our O3 Labs projects!",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "/innovate"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:633",
+    "extractedAt": "2026-08-01T00:10:30.198Z"
+  }
+}

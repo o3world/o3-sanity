@@ -1,0 +1,67 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:20.525Z"
+  },
+  "wpId": 3103,
+  "slug": "2019-a-year-in-review",
+  "title": "2019: A year in review",
+  "dateGmt": "2019-12-30 18:18:00",
+  "modifiedGmt": "2023-02-02 19:11:05",
+  "authorId": 16,
+  "categoryIds": [
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/05/O3-website-imagery_-Insights-12.jpg",
+    "alt": "Ascending up the stairs at the O3 office."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "2019: A year in review | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/2019-a-year-in-review/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>2019 was a fantastic year for O3 World. Between unprecedented growth, new projects, and exciting events, we truly closed out the decade in style. Here’s a quick recap on what made 2019 a stand-out year for O3.</h3>\n<h4>New Faces</h4>\n<p>2019 was a year of growth for our entire staff. We’ve seen plenty of promotions, team additions, and new roles open up at O3 World.</p>\n<p>We saw growth in all of our departments, and also added several high-level roles to help ensure that we continue to grow and deliver high-quality digital experiences for all of our clients. After nearly doubling our size in just a year, we can’t wait to continue to grow into 2020 and beyond.</p>\n<h4>O3HG</h4>\n<p>Our staff grew a lot in 2019, and our space had to grow along with them. We still have our home office on Frankford Avenue, but we’ve expanded into another well-known Fishtown location.</p>\n<p>The Honeygrow test kitchen and corporate office is much more than a place to experiment with new food. It’s also the location of our new satellite office.</p>\n<p>Getting to know the people behind one of Philadelphia’s fastest-growing food franchises has been a real treat. Our new office mates have been very friendly and accommodating, and their chefs always impress us during our weekly staff lunches.</p>\n<p><span style=\"font-weight: 400;\">[single_image title=&#8221;2019 Recap-Events&#8221;]</span></p>\n<h4>Talks, Presentations, and Community Growth</h4>\n<p>We’d need a whole new post to name every single group and organization we worked with in 2019. O3’s presence in the tech community can’t be ignored.</p>\n<p>Whether we’re speaking at an event or are hosting one, we love being a part of this city’s vibrant technology and design community. We plan on doing a lot more events in 2020, and we already have our <a href=\"https://www.meetup.com/DesignBrew/events/266462878/\" target=\"_blank\" rel=\"noopener noreferrer\">first event of 2020</a> scheduled.</p>\n<h4>1682</h4>\n<p>After taking a break from <a href=\"http://www.forgeconf.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Forge</a>, we knew we wanted to do something different for our next conference. We spent a good portion of 2019 planning <a href=\"https://1682conf.com/\" target=\"_blank\" rel=\"noopener noreferrer\">1682</a>, and our hard work paid off.</p>\n<p>You know you’ve made an impactful conference when attendees are still raving about it months later. If you want to learn a bit more about how the day went and see feedback from attendees, <a href=\"https://www.o3world.com/news/1682-the-business-of-conference-innovation/\">check out</a> our recap post.</p>\n<h4>Ozone Ventures</h4>\n<p>We may have publicly debuted our <a href=\"https://www.o3world.com/ventures/\">Ozone Ventures</a> program in October, but we worked with our inaugural Venture partners, <a href=\"https://www.o3world.com/ventures/rec-philly/\">REC Philly</a> and <a href=\"https://www.o3world.com/ventures/urvin/\">Urvin.AI</a>, throughout the entire year.</p>\n<p><a href=\"https://www.o3world.com/news/ozone-ventures-update-see-philadelphias-newest-place-for-creators/\">REC Philly recently</a> celebrated a successful launch of its new space in the city’s Fashion District. We worked with the REC team to build a customized administration tool that can handle scheduling and other important duties for their members.</p>\n<p>We’ve been working closely with the Urvin team to give them the strategic guidance they need to grow their business and improve their offerings. You can expect to hear more from Urvin and REC in the future, along with other new Venture projects.</p>\n<h4>#AlwaysGrowing</h4>\n<p>Innovation isn’t just a service we offer at O3 World, it’s woven into everything we do. We want everyone at O3 to make innovation a part of their everyday lives. That’s why we spent more time than ever on labs and internal initiatives in 2019.</p>\n<p>Our labs work on <a href=\"https://www.o3world.com/labs/taskbot/\">Taskbot</a> allowed us to experiment with Dialogflow and find new ways to simplify internal processes. O3’s <a href=\"https://www.o3world.com/news/a11y-updates-certifications-devices-and-labs/\">A11y committee</a> took our accessibility efforts to the next level and is currently finding ways to share our work with the tech community.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "2019: A year in review",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Here’s a quick recap on what made 2019 a stand out year for O3."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": "",
+    "author": ""
+  }
+}

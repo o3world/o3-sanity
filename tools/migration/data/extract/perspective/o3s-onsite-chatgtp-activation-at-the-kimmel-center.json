@@ -1,0 +1,110 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:53.143Z"
+  },
+  "wpId": 8047,
+  "slug": "o3s-onsite-chatgtp-activation-at-the-kimmel-center",
+  "title": "O3's onsite ChatGPT activation at The Kimmel Center",
+  "dateGmt": "2023-08-01 15:16:31",
+  "modifiedGmt": "2023-08-09 12:28:35",
+  "authorId": 16,
+  "categoryIds": [
+    7
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/08/O3-website-imagery_-Perspectives.jpg",
+    "alt": "Woman sitting at a table and testing an O3 prototype at the BCA event in the Kimmel Center"
+  },
+  "seo": {
+    "titleOverride": "O3's Onsite Activation with ChatGPT",
+    "titleRendered": "O3's Onsite Activation with ChatGPT",
+    "descriptionOverride": "O3's onsite activation, powered by ChatGPT, where business leaders delve into the future of AI-driven solutions, empowering them with valuable insights and strategies to elevate their businesses.",
+    "descriptionRendered": "O3's onsite activation, powered by ChatGPT, where business leaders delve into the future of AI-driven solutions, empowering them with valuable insights and strategies to elevate their businesses.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/o3s-onsite-chatgtp-activation-at-the-kimmel-center/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "O3's onsite ChatGTP activation at The Kimmel Center ",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Showcasing the transformative potential of AI and empowering business leaders to explore the future of AI-driven solutions."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>O3’s <a href=\"https://www.linkedin.com/in/michaelgadsby/\">Mike Gadsby</a> and <a href=\"https://www.linkedin.com/in/nicklewisatx/\">Nick Lewis</a> presented an onsite activation, &#8220;Exploring the future of business,&#8221; which took place at the <a href=\"https://bcaproud.com/about-bca/\">BCA</a> Hospitality Breakfast at <a href=\"https://www.kimmelculturalcampus.org/\">Kimmel Cultural Campus</a> on July 28th. Bringing together 250 Philadelphia business leaders, the event showcased the immense potential of AI across all sectors, powered by OpenAI&#8217;s cutting-edge language model, <a href=\"https://chat.openai.com/\">ChatGPT</a>.</p>\n<p>This activation was designed exclusively for <a href=\"https://bcaproud.com/\">BCA</a> members, offering an immersive and interactive chat experience that allowed participants to experience the potential of generative AI technology, and how it can simplify day-to-day processes. Held during a networking session, attendees had the opportunity to interact directly with ChatGPT, gaining valuable insights and personalized guidance on essential topics.</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone size-medium wp-image-8050\" src=\"https://www.o3world.com/wp-content/uploads/2023/07/Image-from-iOS-640x480.jpg\" alt=\"BCA chat screen \" width=\"640\" height=\"480\" srcset=\"http://www.o3world.com/wp-content/uploads/2023/07/Image-from-iOS-640x480.jpg 640w, http://www.o3world.com/wp-content/uploads/2023/07/Image-from-iOS-1024x768.jpg 1024w, http://www.o3world.com/wp-content/uploads/2023/07/Image-from-iOS-768x576.jpg 768w, http://www.o3world.com/wp-content/uploads/2023/07/Image-from-iOS-1536x1152.jpg 1536w, http://www.o3world.com/wp-content/uploads/2023/07/Image-from-iOS-2048x1536.jpg 2048w, http://www.o3world.com/wp-content/uploads/2023/07/Image-from-iOS-48x36.jpg 48w, http://www.o3world.com/wp-content/uploads/2023/07/Image-from-iOS-1280x960.jpg 1280w\" sizes=\"auto, (max-width: 640px) 100vw, 640px\" /></p>\n<h4>Business strategy</h4>\n<p>Through dynamic conversations, ChatGPT unveiled hidden gems of business strategy, including market analysis, competitive intelligence, and growth opportunities, tailored to each attendee&#8217;s specific interests.</p>\n<h4>Sales and marketing solutions</h4>\n<p>Participants discovered effective sales and marketing strategies, receiving practical recommendations and addressing specific queries to optimize sales performance and enhance digital marketing tactics.</p>\n<h4>HR and employee management</h4>\n<p>ChatGPT provided valuable perspectives on HR challenges and effective employee management techniques, covering talent acquisition, performance evaluation, training programs, and fostering a positive work culture.</p>\n<h4>AI and the future of business</h4>\n<p>With a significant focus on AI, attendees explored the untapped potential of this game-changing technology across various industries. ChatGPT engaged in discussions about AI adoption, automation opportunities, and its potential implications on different sectors.</p>\n"
+      },
+      {
+        "acf_fc_layout": "video",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Video",
+        "video_type": "file",
+        "video_style": "standard",
+        "video_file": {
+          "ID": 8054,
+          "id": 8054,
+          "title": "PXL_20230728_113636252.TS",
+          "filename": "PXL_20230728_113636252.TS_.mp4",
+          "filesize": 26237680,
+          "url": "http://www.o3world.com/wp-content/uploads/2023/07/PXL_20230728_113636252.TS_.mp4",
+          "link": "http://www.o3world.com/perspectives/o3s-onsite-chatgtp-activation-at-the-kimmel-center/pxl_20230728_113636252-ts/",
+          "alt": "",
+          "author": "16",
+          "description": "",
+          "caption": "Example of a user using ChatGPT at BCA event. ",
+          "name": "pxl_20230728_113636252-ts",
+          "status": "inherit",
+          "uploaded_to": 8047,
+          "date": "2023-07-31 15:11:31",
+          "modified": "2023-07-31 15:12:37",
+          "menu_order": 0,
+          "mime_type": "video/mp4",
+          "type": "video",
+          "subtype": "mp4",
+          "icon": "https://www.o3world.com/wp-includes/images/media/video.png",
+          "width": 1280,
+          "height": 720
+        },
+        "external_url": null
+      },
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>The activation garnered a flood of positive feedback, with participants thrilled by ChatGPT&#8217;s ability to deliver relevant and valuable information. The use cases presented were versatile, making the activation relevant and beneficial to all attendees, irrespective of their industry or role.</p>\n<p>At O3, we firmly believe in the power of AI to reshape the future of business across all sectors. This activation not only showcased the capabilities of ChatGPT but also served as a testament to the impact AI can have on businesses&#8217; growth and success. If you’d like to chat about how we can support your brand, <a href=\"https://www.o3world.com/contact/\">get in touch</a>.</p>\n"
+      }
+    ],
+    "related_articles": [
+      7963,
+      7840,
+      7257
+    ],
+    "author": ""
+  }
+}

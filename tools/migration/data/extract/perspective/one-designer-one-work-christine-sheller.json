@@ -1,0 +1,74 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:02.401Z"
+  },
+  "wpId": 5025,
+  "slug": "one-designer-one-work-christine-sheller",
+  "title": "One Designer, One Work: Christine Sheller",
+  "dateGmt": "2022-06-06 17:31:43",
+  "modifiedGmt": "2023-02-02 18:07:42",
+  "authorId": 16,
+  "categoryIds": [
+    61,
+    7,
+    10
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2022/06/One-Designer-One-Work-Christine-Sheller.png",
+    "alt": "Christine Sheller, Director of UX Design, mid-sentence."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "One Designer, One Work: Christine Sheller | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/one-designer-one-work-christine-sheller/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Christine Sheller, O3&#8217;s Director of Experience Design, will be speaking on AIGA&#8217;s national series, &#8220;One Designer, One Work&#8221; on Thursday, June 23 at 3 PM EST (12 PM PST).</h3>\n<p>After the event, AIGA, will post the full recap. <a href=\"https://my.aiga.org/event-details?id=19a22464-e5d5-ec11-a81b-000d3a7bdee8&amp;mc_cid=21c0f8cd9f&amp;mc_eid=3bf0e65581\">Click here to register</a>!</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "One Designer, One Work: Christine Sheller",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "The AIGA series features one designer showcasing a work that is personally meaningful. Christine will speak about Keith Haring, and about how his work in reproducing and commercializing his art helped her understand what a career in design could be."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      3708,
+      5014,
+      5038,
+      3537
+    ],
+    "author": ""
+  }
+}

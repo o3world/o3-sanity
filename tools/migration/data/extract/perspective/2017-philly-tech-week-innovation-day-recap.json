@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:30.198Z"
+  },
+  "wpId": 673,
+  "slug": "2017-philly-tech-week-innovation-day-recap",
+  "title": "2017 Philly Tech Week \"Innovation Day\" recap",
+  "dateGmt": "2017-05-12 18:44:06",
+  "modifiedGmt": "2023-09-22 14:15:38",
+  "authorId": 16,
+  "categoryIds": [
+    7,
+    8
+  ],
+  "excerpt": "On May 5th, O<sub>3</sub> World hosted Innovation Day as a part of Philly Tech Week 2017. The sold-out event was a great day filled with engaged attendees and interesting presentations on how to push innovation to new limits.",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/08/O3-website-imagery_-Insights-6.jpg",
+    "alt": "O3 blue pattern"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "2017 Philly Tech Week \"Innovation Day\" recap | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/2017-philly-tech-week-innovation-day-recap/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>On May 5th, O<sub>3</sub> World hosted Innovation Day as a part of Philly Tech Week 2017. The sold-out event was a great day filled with engaged attendees and interesting presentations on how to push innovation to new limits.</p>\n<p>The event consisted of a 3 hour string of labs lightning talks, live demos, and interaction that showcased the power behind products utilizing new and emerging technologies from some of Philadelphia’s top agencies and innovation labs. Check out the recap:</p>\n<h3 class=\"h5\">&#8220;O<sub>3</sub> Barista&#8221; presented by Howie Ross</h3>\n<p>Howie Ross, Our Development Director, kicked off the event by presenting an overview on our Labs innovation program. O<sub>3</sub> Labs is our innovation program where we experiment with new and emerging technology to better serve our clients. The program is a great way to develop expertise in tomorrow&#8217;s technologies (such as Artificial Intelligence, Beacons, Internet of Things, and Augmented Reality) and build unique, engaging experiences that venture far beyond the screen. Here are some of our most successful projects discussed in the event: Roombot, Theme Music, Moods and Barista.</p>\n<p>While we have a diverse roster of digital products within the O<sub>3</sub> Labs division, we selected two specifically to showcase during Innovation Day. Attendees were then given the opportunity to try out two of our projects: Barista and Moods.</p>\n<p>Barista, is a web app that analyzes your digital social footprint to predict your morning coffee preference. Utilizing IBM Watson’s Personality Insights API, the Barista algorithm predicts coffee roasts and provides personalized coffee recommendations based on your digital social footprint.</p>\n<h4>How did we build Barista?</h4>\n<p>Using Artificial Intelligence, this IBM Watson Personality Insight API maps data from Twitter to the “Big Five” personality traits, also known as OCEAN (Openness, Conscientiousness, Extraversion, Agreeableness, and Neuroticism). Experimenting with this technology stems from our insight into the business application use for utilization of these technologies. Personality analysis and a learning algorithm through AI, can be used to prioritize and personalize customer experiences through a multitude of digital products.</p>\n<p>We also had a pop-up showroom to demonstrate Moods, which combines IBM Watson’s Personality Insights API, Artificial Intelligence, and the Phillips Hue Smart Bulbs to change the lighting color of the room based on your digital personality.</p>\n<p><a href=\"/contact/\">Contact us to learn more about our Labs program</a>.</p>\n<h3 class=\"h5\">&#8220;IoT&#8221; presented by Don Coleman of Chariot Solutions</h3>\n<p>Don Coleman, Director of Consulting at Chariot Solutions, talked about a few IoT related projects that they have been working on, including an ongoing project with existing partner, Canary Compliance, a local company who is revolutionizing compliance within the service station industry.</p>\n<p>Chariot Solutions, a leading enterprise application and mobile development consulting firm, discussed how they worked with Canary Compliance, a cloud-based IoT project that utilized state of the art hardware to drive business value. The product will provide real-time tank visibility to gas station owners, reducing risk, cost, and administrative burdens.</p>\n<p>This hands on-workshop provided a thorough overview on how to build and program an IoT (Internet of Things) device using the Particle Photon. Reviewing how sensor data is sent to and received from the Particle Cloud. Don also discussed Canary Compliance, on how to build a cloud-based Nodejs program to interact with your device through the Particle Cloud. From his talk, attendees learned about specifics of the IoT hardware and how organizations are applying it in order to drive significant value.</p>\n<h3 class=\"h5\">&#8220;Split Flap Displays&#8221; presented by Mark D. Kuhn of Oat Foundry</h3>\n<p>Oat Foundry is an agency of Mechanical Engineers that design and build cool stuff for brands and companies. Mark D. Kuhn, CEO of Oat Foundry shared their adventures on building one of their latest projects, a Split Flap Display. Their customer wanted to change the customer buying experience so that rather than listening for someone to yell out an order number when your order’s up, instead you could listen for the nostalgic flapping of a split flap display. The idea was unique, an old-timey solari board aka split flap display traditionally used to show departures and arrivals in train stations and airports repurposed for the fast casual atmosphere of your local Honeygrow.</p>\n<p>He shared the adventures of executing this product, which involved months of sheet metal design, circuit board prototyping, motor rails, screen printing tests, 3D modeling, coding, and constant testing. With their hard work, they successfully rolled out their final Split Flap Display.</p>\n<h3 class=\"h5\">&#8220;Using Design Thinking to Accelerate Medical Device Development&#8221; presented by Bon Ku of Thomas Jefferson University</h3>\n<p>Dr. Bon Ku, founder and director of JeffDESIGN, a program in a medical school that teaches future physicians to use design thinking to healthcare challenges. The College within the College Design Track (JeffDESIGN) teaches students to use design thinking to solve healthcare challenges. The design program equips students to redesign healthcare systems, services, spaces and medical devices. The program format involves interactive workshops co-facilitated by designers, architects and device makers. Previous workshops have invited facilitators from Little Devices Lab at MIT, University of the Arts and Philadelphia University.</p>\n<p>One of their most recent innovative projects which was presented during Innovation Day was “Circalux”, a user-responsive, portable night light that was designed to help sleep-deprived patients in hospitals. Dr. Bon Ku emphasized on the point that it is their desire to build empathy with patients that inspire innovation in healthcare, NOT technology.</p>\n<p>The JeffDESIGN Director is Bon Ku, MD, MPP, and the Co-Directors are Julie Guinn, M.Des. and Robert S. Pugliese, PharmD, BCPS.</p>\n<h3 class=\"h5\">&#8220;machineQ&#8221; presented by Michael Putterman</h3>\n<p>Michael Putterman from Comcast, presented their newest venture, MachineQ (machine quotient), a new Comcast service that leverages the latest in sensor, network, and software technologies to gather, transmit, and create actionable intelligence from the physical world. Leveraging a variety of wireless and wireline technologies, machineQ accommodates deep indoor and outdoor use cases, enabling cost-effective solutions suitable for a wide range of enterprise applications.</p>\n<p>This network is designed for the implementation of smart city technologies, among other innovative uses. Michael discussed how the IoT revolution will transform our day-to-day, how MachineQ may help transform the way we think about solving challenges and innovating in our cities.</p>\n<h2 class=\"h5\">Event Approach</h2>\n<p>When planning Innovation Day, we set out to create an event with a primary goal of generating awareness around innovation and emerging technologies. Not only did we achieve that goal, but the result far exceeded any expectations that we had going into the event. We can’t say thank you enough to all the attendees and speakers, the O<sub>3</sub> staff and to our sponsor <a href=\"https://www.lacolombe.com/\" target=\"_blank\" rel=\"noopener noreferrer\">La Colombe</a> for making this event a success!</p>\n<p>Please subscribe to our newsletter to receive updates about any upcoming events and projects.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "2017 Philly Tech Week \"Innovation Day\" recap",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "O3 World hosted Innovation Day as a part of Philly Tech Week 2017."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      2462,
+      4117,
+      4896,
+      3252
+    ],
+    "author": ""
+  }
+}

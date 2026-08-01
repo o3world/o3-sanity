@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:32.179Z"
+  },
+  "wpId": 9963,
+  "slug": "digital-transformation-in-manufacturing",
+  "title": "Manufacturing websites don’t have to be boring: why Drupal + Acquia makes sense",
+  "dateGmt": "2025-03-12 19:00:07",
+  "modifiedGmt": "2025-03-12 19:00:07",
+  "authorId": 16,
+  "categoryIds": [
+    8,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2025/03/Drupal-in-manfacturing-1.jpg",
+    "alt": "Digital transformation in manufacturing"
+  },
+  "seo": {
+    "titleOverride": "Digital Transformation in manufacturing for success %%page%% %%sep%% %%sitename%%",
+    "titleRendered": "Digital Transformation in manufacturing for success | O3",
+    "descriptionOverride": "Understand how digital transformation in manufacturing is revolutionizing processes and driving growth in production.",
+    "descriptionRendered": "Understand how digital transformation in manufacturing is revolutionizing processes and driving growth in production.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/digital-transformation-in-manufacturing/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Manufacturing websites don’t have to be boring: why Drupal + Acquia makes sense",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "In industrial manufacturing, digital transformation drives growth. Drupal and Acquia turn complex data into a seamless, scalable customer experience."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Navigating the challenges of industrial manufacturing websites</h3>\n<p>Let’s face it—whether you&#8217;re selling electrical parts, shipping safety supplies or trying to connect with a range of distributors, running marketing for industrial manufacturing company isn&#8217;t easy. Between managing complex product data, keeping sensitive information secure, and ensuring your website actually connects with customers, you’ve got your hands full. That’s where <a href=\"https://www.acquia.com/drupal\">Drupal and Acquia come in</a>.</p>\n<h3>Finally, a website platform that gets industrial manufacturing</h3>\n<p>Your website needs to do a lot of heavy lifting—hosting detailed technical specs, managing complex product catalogs, and supporting dealer and distributor networks. Most website platforms don’t understand the unique needs of industrial businesses. Either they’re too rigid for your marketing team or not secure and scalable enough for IT. But Drupal isn’t your average CMS. It’s designed to handle structured content, advanced integrations, and complex workflows, all while giving your team the flexibility to update content without relying on IT every step of the way.</p>\n<h4>Handling complex product data with ease</h4>\n<p>Industrial manufacturing websites aren’t just digital brochures—they’re critical sales and support tools. From CAD files and compliance documentation to spare parts databases and product configurators, your website needs to present complex technical data in a user-friendly way. Drupal’s structured content capabilities make it easy to organize and surface this information, ensuring engineers, procurement teams, and end users find exactly what they need. Need to sell your products online? Drupal Acquia has a solution for that as well.</p>\n<h4>Dealer and distributor networks made simple</h4>\n<p>If your business relies on distributors and dealers, your website needs to accommodate RFQ workflows, regional pricing, and localized content. With Drupal’s multi-site and multilingual capabilities, you can create custom experiences for different regions while maintaining brand consistency. And with Acquia’s cloud infrastructure, performance and security stay rock solid across all of your global sites.</p>\n<h3>Want to personalize the experience? Acquia makes it happen</h3>\n<p>Acquia takes Drupal to the next level by enabling smart, data-driven personalization.</p>\n<h4>Enhance user experience with smart personalization</h4>\n<p>A visitor from an automotive manufacturing firm? Show them relevant case studies and product applications. A returning engineer from Europe? Serve up localized compliance information and product specs. And all of this happens seamlessly without sacrificing site performance.</p>\n<p>Acquia also ensures smooth integrations with your ERP, CRM, and PIM systems, so your website becomes a seamless extension of your business. Plus, with enterprise-grade security (including FedRAMP and HIPAA compliance), IT teams can rest easy knowing their data and infrastructure are protected.</p>\n<h3>The power of open-source with enterprise support</h3>\n<p>Thanks to Drupal’s open-source community, industrial manufacturers benefit from constant innovation and adaptability. Meanwhile, Acquia provides the support and infrastructure to ensure enterprise-level scalability. Drupal’s open-source community also allow you to extend your website with the use of 3rd party modules. From CRM integrations, to content workflows, you can find a module to fit almost any use case.</p>\n<h4>Scalability and future-proofing your digital presence</h4>\n<p>Whether you’re launching regional sites, spinning up campaign pages, or enhancing customer self-service portals, this platform gives you the freedom to scale and innovate.</p>\n<h3>The big wins?</h3>\n<ul>\n<li>Powerful content management for complex product catalogs</li>\n<li>Seamless integrations with ERP, CRM, and PIM systems</li>\n<li>Advanced personalization to engage high-value buyers</li>\n<li>Support for dealer and distributor networks</li>\n<li>Enterprise security and compliance</li>\n<li>Scalability for global brands</li>\n</ul>\n<p>This isn’t just another tech stack—it’s a digital foundation built to move your business forward. Because in industrial manufacturing, digital transformation isn’t optional. It’s how you lead.</p>\n<h3>How O3 can help</h3>\n<h4>Industry expertise</h4>\n<p>We know the industrial sector and its digital challenges.</p>\n<h4>Technology-driven solutions</h4>\n<p>We integrate the best tools to support growth and efficiency.</p>\n<h4>Customer-centric approach</h4>\n<p>We design digital experiences that engage and convert.</p>\n<h4>End-to-end support</h4>\n<p>From strategy to execution, we’re with you at every step.</p>\n<p>Your website should be more than just a digital presence—it should be a powerful tool for growth. <a href=\"https://www.o3world.com/contact/\">Let’s build something</a> that drives results together.</p>\n"
+      }
+    ],
+    "related_articles": [
+      9674,
+      9328,
+      9595
+    ],
+    "author": ""
+  }
+}

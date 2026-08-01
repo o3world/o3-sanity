@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:53.145Z"
+  },
+  "wpId": 7864,
+  "slug": "making-your-user-interface-ui-accessible-for-all-users",
+  "title": "Making your user interface (UI) accessible for all users",
+  "dateGmt": "2023-05-16 16:46:16",
+  "modifiedGmt": "2023-09-21 22:04:45",
+  "authorId": 16,
+  "categoryIds": [
+    63
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/05/O3-website-imagery_-Perspectives-12.jpg",
+    "alt": "Simone: Accessibility in UI design."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Making your user interface (UI) accessible for all users | O3",
+    "descriptionOverride": "Learn about the four web accessibility principles and best practices to incorporate during the design process. Improve your brand's reputation, reach a wider audience, and reduce legal risk by prioritizing accessibility in UI design.",
+    "descriptionRendered": "Learn about the four web accessibility principles and best practices to incorporate during the design process. Improve your brand's reputation, reach a wider audience, and reduce legal risk by prioritizing accessibility in UI design.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/making-your-user-interface-ui-accessible-for-all-users/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Making your user interface (UI) accessible for all users",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "As we approach Global Accessibility Awareness Day (GAAD) 2023, it's important to highlight the significance of accessible user interface (UI) design in enabling people with disabilities to access and use digital products and services. By following the four web accessibility principles—perceivable, operable, understandable, and robust—designers can start to make design decisions early and often in their work while seamlessly adhering to accessibility standards. "
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>by: Simone Dehel</p>\n<h3>Why accessibility in UI design matters</h3>\n<p>Ensuring that everyone, regardless of their abilities, can interact with your website or application is critical to creating a more inclusive user experience. When you make your UI accessible, you not only attract a larger audience and follow best practices for design, development, and accessibility, but you also reduce legal risk and improve your brand’s reputation.</p>\n<p>As UI designers, we should be considering how all our users will interact with our designs. In this article, you’ll learn more about the four web accessibility principles and best practices to use during the design process that will help inform your design decisions.</p>\n<h3>Principles to live (design) by</h3>\n<p>While designing websites, applications, or any other browser-based design, it&#8217;s important to adhere to the <a href=\"https://www.deque.com/wcag/\">four web accessibility principles that are outlined in the Web Content Accessibility Guidelines (WCAG)</a>. The WCAG web accessibility principles, also known as POUR, are perceivable, operable, understandable, and robust.</p>\n<ul>\n<li><strong>Perceivable</strong> means that users must be able to perceive information and the UI in some way, using one or more of their senses.</li>\n<li><strong>Operable</strong> means that users must be able to control UI elements using some type of input device, such as a mouse, keyboard, or voice command.</li>\n<li><strong>Understandable</strong> means that the content must be readable and appear in consistent, predictable patterns for its users.</li>\n<li><strong>Robust</strong> means that the content must be developed using web standards that work with current and future browsers and devices.</li>\n</ul>\n<p>By keeping the POUR principles top of mind, designers can start to make design decisions early and often in their work while seamlessly adhering to accessibility standards.</p>\n<h3>How to make POUR decisions</h3>\n<p>The POUR principles are the perfect introduction to how we can consider accessibility more thoughtfully in the interfaces we design. <a href=\"https://www.o3world.com/perspectives/5-digital-accessibility-myths-debunked/\">There are common misconceptions about web accessibility</a>, like that the end result will be an ugly user experience, or that you can ignore them until the end of a project. Unsurprisingly, neither of these are true.</p>\n<p>Once you familiarize yourself with the POUR principles, it’s easier to make POUR decisions rather than POOR decisions. The list below outlines simple considerations to make during the design process to ensure your designs follow web accessibility standards. You might even find that you’re already following some of these practices without even realizing it.</p>\n<h4>Perceivable</h4>\n<p>Perceivable is all about the senses; users must be able to perceive information and your designs in some way by using one or more of their senses. To make sure your website or application is perceivable for all users, consider the following practices:</p>\n<ul>\n<li>Color contrast: Ensure that there is enough contrast between foreground and background colors to make content visible for users with visual impairments. This means that the text should be clearly distinguishable from the background color. Using a Figma plugin like <a href=\"https://www.getstark.co/figma/\">Stark makes testing color contrast really easy</a>.</li>\n<li>Color usage: Don’t rely solely on color. This means that color should not be the only way to convey meaning or distinguish between different elements on the page. By incorporating additional visual cues, such as icons or text labels, you can make your interface more inclusive and easier to use.</li>\n<li><span style=\"background-color: rgb(255 255 255/var(--tw-bg-opacity)); color: rgb(3 3 3/var(--tw-text-opacity));\">Readable fonts: Use legible typefaces, font sizes, and appropriate line spacing to make content easier to read. This means avoiding typefaces that are difficult to read and making sure that there is enough space between lines and paragraphs.</span></li>\n<li>Alt text, transcripts, + captions: Provide alternative text, transcripts, or captions for non-text content like images, audio, or videos. By providing a description or text equivalent for these elements, you not only make it possible for people who cannot see or hear to understand the content, but you also improve your site’s Search Engine Optimization (SEO).</li>\n<li>Descriptive links: Use descriptive links that convey the content of the link so users can understand where the link leads without having to click on it. So instead of using a generic phrase like &#8220;Click here,” use a descriptive phrase like &#8220;Download our latest report on web accessibility.”</li>\n<li>Touch target size: Design interactive elements to have a minimum touch target size of 44 x 44 pixels. This will help ensure that your interactive UI components will be large enough for users with motor impairments to select without accidentally selecting surrounding elements.</li>\n</ul>\n<h4>Operable</h4>\n<p>Operable means that users must be able to control UI elements using some type of input device, such as a mouse, keyboard, or voice command. To make sure your website or application is operable for all users, consider the following practices:</p>\n<ul>\n<li>Keyboard accessibility: Ensure your users are able to navigate your website using only a keyboard. This includes being able to use the tab key to move between links, forms, and other elements, as well as being able to activate buttons and other controls using the keyboard. By annotating the tabbing order in their UI mockups, designers provide developers direction on how certain elements will function for keyboard users.</li>\n<li>Enough time: Provide enough time for users to read and process content. This can include options for users to adjust the speed of these elements, or to pause or stop them altogether.</li>\n<li>Focus indicators: Make sure that users can easily see where they are on the page by providing focus indicators for all interactive elements. This can include outlines, borders, or other visual cues that highlight the currently focused element. UI designers are encouraged to design focus states for interactive elements like buttons.</li>\n<li>Additional input methods: Consider different input modalities beyond the keyboard, such as touch activation, voice recognition (speech input), and gestures, which make interfaces easier to use for many people.</li>\n</ul>\n<h4>Understandable</h4>\n<p>The understandable web accessibility principle is all about making sure that the content on your website or application is readable and appears in consistent, predictable patterns for its users. This means that users should be able to understand and interact with the content without confusion or frustration.</p>\n<ul>\n<li>Readable and understandable: Use clear, concise language and break up content into digestible chunks throughout the interface. This means avoiding overly technical or complex jargon and using headings, subheadings, and bullet points to organize content.</li>\n<li>Consistent patterns: Use consistent navigation throughout your website or application, so users can easily find what they are looking for. This can include using the same menu structure on all pages as well as consistent labels and icons for buttons and other controls.</li>\n<li>Clear error messages: Provide clear and concise error messages when users make mistakes or encounter problems on your website. This can include providing suggestions for how to correct the error as well as a way for users to contact support if they need additional help.</li>\n</ul>\n<h4>Robust</h4>\n<p>The robust web accessibility principle refers to the idea that web content should be developed using web standards that work with current and future browsers and devices. This means that designers should focus on creating content that is compatible with a wide range of technologies, including assistive technologies like screen readers, and will continue to be accessible as new technologies emerge. Some best practices for creating and maintaining robust designs include:</p>\n<ul>\n<li>Responsive design: Create mockups for complex interactions, layouts, and flows to ensure your designs are optimized for various screen sizes.</li>\n<li>Design annotations: Outline annotations before passing your UI designs to developers. Informing developers about your designs’ functionalities will help them in the overall development process. Ultimately, by collaborating with developers, you will help ensure your designs are built using valid Hyper Text Markup Language (HTML) and Cascading Style Sheets (CSS) to ensure a semantic and well-structured site.</li>\n<li>Browser testing: Check your designs across a range of browsers and devices. By doing so, you can identify any potential issues that may arise when your website is accessed from different types of devices or browsers. Using tools like <a href=\"https://www.browserstack.com/\">Browserstack makes testing your designs on different devices really easy</a> and helps you optimize your designs for different devices’ unique characteristics.</li>\n</ul>\n<h3>POUR decisions &gt; poor decisions</h3>\n<p>Designing with accessibility in mind is a win-win for both users and organizations. By creating a more inclusive user experience, you can improve customer satisfaction, reach a broader audience, enhance your brand&#8217;s reputation, and reduce legal risk. On 2023’s Global Accessibility Awareness Day (GAAD), we’re here to remind you about the importance of making POUR decisions, not poor decisions.</p>\n"
+      }
+    ],
+    "related_articles": [
+      7840,
+      3485,
+      7287
+    ],
+    "author": ""
+  }
+}

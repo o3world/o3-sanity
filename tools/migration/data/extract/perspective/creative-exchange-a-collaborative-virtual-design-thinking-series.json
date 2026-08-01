@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:15.487Z"
+  },
+  "wpId": 3380,
+  "slug": "creative-exchange-a-collaborative-virtual-design-thinking-series",
+  "title": "Creative Exchange - A collaborative, virtual design thinking series",
+  "dateGmt": "2020-05-05 20:14:43",
+  "modifiedGmt": "2023-01-30 16:23:23",
+  "authorId": 16,
+  "categoryIds": [
+    61,
+    7
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/08/O3-website-imagery_-Insights-6.jpg",
+    "alt": "O3 blue pattern"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Creative Exchange - A collaborative, virtual design thinking series | O3",
+    "descriptionOverride": "O3 facilitates two workshops for community leaders to learn design thinking skills to drive positive change within their organizations.",
+    "descriptionRendered": "O3 facilitates two workshops for community leaders to learn design thinking skills to drive positive change within their organizations.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/creative-exchange-a-collaborative-virtual-design-thinking-series/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>A five part program put on by the Arts + Business Council of Greater Philadelphia, <a href=\"https://artsbusinessphl.org/creativeexchange/\" target=\"_blank\" rel=\"noopener noreferrer\">Creative Exchange</a> offers an opportunity for local business and community leaders to learn design thinking skills to drive positive change within their organizations. O3 was asked to facilitate two of the five workshops, the first of which was completed this past Friday in which we introduced design thinking as a framework and conducted collaborative sessions around problem framing and validation exercises.</p>\n<h2>Taking Design Thinking Virtual</h2>\n<p>Now, more than ever, reframing our daily routines to adjust to the current pandemic requires an open mindset to improve our situations on the fly. Creative Exchange is no different. While we would have preferred to conduct our workshops in person at our offices in Fishtown, COVID-19 forced us to rethink the program to deliver the content and experience virtually. Through a thoughtful combination of Zoom breakout rooms and a collaboration tool called Mural, we conducted engaging, full-featured design thinking exercises. While the process certainly had its challenges (more on this below), overall, the move to digital allowed for a new dynamic to explore problem solving in an effective way.</p>\n<h2>Design Thinking 101 &#8211; The Double Diamond</h2>\n<p>Design thinking is a “human centered” methodology for problem solving that provides a quick, iterative framework to define problems, prototype solutions, learn and evolve. While various institutions and organizations have developed their own versions of this framework, we reviewed the double diamond as a quick, digestible way to introduce design thinking. The left diamond is all about empathizing with the human experience, diverging as we collect insight then working to converge on a core problem or problem set to focus on. The right diamond then has us diverge on possible ideas to solve the problem, then converge on a solution which we test and iterate upon.</p>\n<p>[single_image title=&#8221;2020 Double Diamond Large&#8221;]</p>\n<h2>Problem Framing &#8211; Abstraction Laddering</h2>\n<p>Too often organizations invest a lot of time and money into solving the wrong problem. The first part of our workshop focused on a method for problem framing called abstraction laddering. The abstraction ladder is a good way to explore problems so that we can first understand a solution’s possible impact (asking “why” as we move up the ladder) and then break the problem down into its components (asking “how” as we move down the ladder). By expanding on the problem and then taking a deeper dive into its parts as a group, we’re able to challenge our preconceptions and create shared understanding and alignment among the group. At this point, we can decide whether the initial problem statement is worth exploring or if a wider or more narrow problem would be better.</p>\n<p>[single_image title=&#8221;2020 Abstraction Ladder&#8221;]</p>\n<h2>Validate the Problem &#8211; Interviewing</h2>\n<p>Once we’ve determined what the problem is, then it is often worth validating the problem with humans. Our “inside” view of a problem may not align with the “outside” view of those actually struggling with it. There are several ethnographic methods for exploring human behavior. However, while we’re confined to our homes, we don’t necessarily have the luxury of contextual inquiry, and we find that interviewing is quick, easy, and approachable. So, as a follow up to framing the problem, we walked the group through the various phases of interviewing from recruiting the right people to speak to, to script creation, to the various parts of the interview itself.</p>\n<p>Practically speaking, interviewing, whether early in the process while we’re validating a concept or later when we’re conducting tactical user testing on a functional prototype, is a core part of our process. Integrating end-user insight into your product or service delivery process is crucial for innovation.</p>\n<p>[single_image title=&#8221;2020 Interview Template&#8221;]</p>\n<h2>Lessons Learned from the Virtual Workshop</h2>\n<p>While we felt a lot went right in our quick pivot to virtual learning and workshop facilitation, we wouldn’t be true to our human-centered approach if we didn’t pause to review the pros and cons of our first session. Once users get up to speed with the technology (this varies from user to user), the ability to collaborate quickly and digitally offers a lot of positive upgrades over our typical in-person experience. Beyond simply having people login from anywhere to participate &#8211; a future advantage that we will certainly take advantage of to improve access and frequency of collaborative conversations, the ability to memorialize our boards and quickly transfer the insight from one exercise to another expedites the process and ensures the thinking does not get lost. A few other lessons learned are:</p>\n<ul>\n<li>Prep everyone in advance &#8211; this is hugely important to make sure you’re ready to go on time;</li>\n<li><span style=\"font-weight: 400;\">Provide resources and different ways of engaging with the materials to help people learn;</span></li>\n<li><span style=\"font-weight: 400;\">Give people a space to play before the workshop or meeting so they can feel comfortable with the tools; and</span></li>\n<li><span style=\"font-weight: 400;\">Plan for more time than you expect &#8211; there will be technical issues, big and small, so plan enough time and staff resources to address them without sacrificing the workshop itself.</span></li>\n</ul>\n<p>Overall, there was a lot of positive sentiment from across the group:</p>\n<blockquote><p>&#8220;These are quick and easy tools to use at any time&#8230;this keeps the conversation going, it&#8217;s iterative and engaging.&#8221;</p></blockquote>\n<h2>Next Steps &#8211; Bringing Ideas Into Action</h2>\n<p>As the program continues over the next four weeks, we’re excited to evolve with it and collaborate with the other facilitators. This Friday, our very good friend, <a href=\"https://www.figure8thinking.com/about/\" target=\"_blank\" rel=\"noopener noreferrer\">Natalie Nixon</a> will dive into persona development and stakeholder mapping. Then, we’re back at it in week 3 where we’ll guide the cohort as they turn insight into ideas through affinity mapping, creative matrix and importance / difficulty exercises.</p>\n<p>If you’d like to learn more about design thinking and human centered problem solving methodologies, you can <a href=\"https://www.o3world.com/contact/\">contact us here</a>. We regularly conduct <a href=\"https://www.o3world.com/labs/innovation-workshops/\">innovation workshops</a> and <a href=\"https://www.o3world.com/labs/partnering-to-experiment/\">experiment with clients</a> to prototype and test new ideas.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Creative Exchange - A Collaborative, Virtual Design Thinking Series",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Opportunity for local business and community leaders to learn design thinking skills to drive positive change within their organizations."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      4884,
+      4296,
+      5025,
+      4070
+    ],
+    "author": ""
+  }
+}

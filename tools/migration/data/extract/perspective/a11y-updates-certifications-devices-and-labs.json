@@ -1,0 +1,74 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:20.526Z"
+  },
+  "wpId": 2987,
+  "slug": "a11y-updates-certifications-devices-and-labs",
+  "title": "A11Y updates: certifications, devices and labs",
+  "dateGmt": "2019-11-22 02:54:51",
+  "modifiedGmt": "2023-02-02 19:18:51",
+  "authorId": 16,
+  "categoryIds": [
+    63,
+    15,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/07/O3-website-imagery_-Insights-7.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "A11Y updates: certifications, devices and labs | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/a11y-updates-certifications-devices-and-labs/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Certifications</h3>\n<p>A group of O3 World employees (including a mix of designers, developers, and project managers) are working on earning two key certifications: Certified Professional in Accessibility Core Competencies (<a href=\"https://www.accessibilityassociation.org/cpacccertification\" target=\"_blank\" rel=\"noopener noreferrer\">CPACC</a>) and Web Accessibility Specialist (<a href=\"https://www.accessibilityassociation.org/wascertification\" target=\"_blank\" rel=\"noopener noreferrer\">WAS</a>).</p>\n<p>Earning both certifications isn&#8217;t an easy task. The tests for each are challenging and focus on many facets of accessibility, including a particular focus on broad, cross-disciplinary conceptual knowledge, as well as a deep understanding of current Web Content Accessibility Guidelines (<a href=\"https://www.w3.org/WAI/standards-guidelines/wcag/\" target=\"_blank\" rel=\"noopener noreferrer\">WCAG</a>). Learning how to implement best practices for accessibility is essential, but earning certifications can help take that knowledge to the next level.</p>\n<h3>Empathy Lab Improvements</h3>\n<p>After running a few internal empathy labs, we’ve gained insight into how to iterate and improve them for different audiences. One big takeaway was the impact of sighted users working with screen readers.</p>\n<p>Screen readers play an important role in the digital experiences of so many users. Aside from seeing how screen readers respond to different sites, they also saw how nuanced changes in design and development could make the difference between a pleasant experience and a frustrating one.</p>\n<p>Giving everyone more time to reflect on the experiences they’ve had will be also important, so our facilitators devoted more time to open-ended discussions at the end of the lab.</p>\n<p>People will have a chance to digest everything they’ve learned, and the opportunity to discuss and brainstorm ideas with others who just completed the lab. We’ve already had some great thoughts come out of these conversations, and can’t wait to start putting them into practice!</p>\n<h3>New Devices</h3>\n<p>Proper equipment is important for an effective empathy lab. After we received feedback from participants, we decided to expand the assistive devices featured in the lab. We’ve set up more screen readers and screen magnifiers, and have also added a mouth stick, head wand, switch control, and other devices.</p>\n<p>The expanded lab options will allow our teams to interact with a greater variety of assistive devices. We’ll gain a deeper understanding of how people interact with the digital space around them and learn how to create better products.</p>\n<h3>New Internal Libraries</h3>\n<p>We’re always trying out new accessibility features and adding devices to our library. The best way to keep track of our work is to create an internal accessible component library that everyone in the company can access.</p>\n<p>The library will compile all our existing knowledge on accessibility and make it easy for everyone to understand best practices. Additionally, the library will inform people of the best ways to utilize FE semantics and SEO.</p>\n<h3>Future External Labs</h3>\n<p>Our empathy labs can do much more than educate O3 World employees on the best accessibility practices for design and development. Ultimately, we want to share our knowledge with our clients and the tech community as a whole.</p>\n<p>We recently ran an empathy lab with <a href=\"https://www.o3world.com/news/project-spotlight-caron-treatment-centers-digital-transformation-in-addiction-treatment/\">our client Caron</a> and got a lot of positive feedback from the experience. Eventually, we hope to host our own empathy lab in the office that will be open to the public.</p>\n<p>Do you want to learn more about our approach to digital accessibility? Would you like to have a workshop at your own office or meetup group? <a href=\"https://www.o3world.com/contact/\">Drop us a line</a>, and we’ll get in touch.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "A11Y updates: certifications, devices and labs",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Since officially launching a program focused on accessibility education and building empathy, we’ve made a lot of changes to the way we approach designing and building products that work for all users. Here’s what we’ve been working on."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      4179,
+      4118,
+      5173,
+      4260
+    ],
+    "author": ""
+  }
+}

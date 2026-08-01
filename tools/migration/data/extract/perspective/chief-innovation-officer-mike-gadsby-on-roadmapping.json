@@ -1,0 +1,74 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:10.996Z"
+  },
+  "wpId": 3893,
+  "slug": "chief-innovation-officer-mike-gadsby-on-roadmapping",
+  "title": "Chief Innovation Officer Mike Gadsby on roadmapping",
+  "dateGmt": "2020-08-13 04:58:13",
+  "modifiedGmt": "2023-02-02 18:46:48",
+  "authorId": 16,
+  "categoryIds": [
+    8,
+    62,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-19.jpg",
+    "alt": "Mike Gadsby, co-founder and Chief Innovation Officer."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Chief Innovation Officer Mike Gadsby on roadmapping | O3",
+    "descriptionOverride": "Mike Gadsby talks about roadmaps representing insights from strategy, marketing, UX/CX and technology to drive product success.",
+    "descriptionRendered": "Mike Gadsby talks about roadmaps representing insights from strategy, marketing, UX/CX and technology to drive product success.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/chief-innovation-officer-mike-gadsby-on-roadmapping/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p><a href=\"https://www.o3world.com/about/team/mike-gadsby/\">Mike Gadsby</a>, O3&#8217;s Chief Innovation Officer, joined the voices of many industry leaders in this Mind the Product piece about effective roadmapping practices. Mike summed it up precisely: “The roadmap needs to equally represent insight from strategy (what do people need), marketing (what do people want), UX/CX (what do people experience) and technology (can it be built efficiently and effectively) to drive product success.”</p>\n<h4><a href=\"https://www.mindtheproduct.com/what-makes-a-good-product-roadmap/\">Use this resource-rich article to brush up on your roadmapping skills</a>.</h4>\n<p>&nbsp;</p>\n<blockquote>\n<p class=\"lead\">“A roadmap should be a strategic, visual document for high-level communication and discussion of the product vision and intended steps to arrive at this vision.”<br />\n&#8211; Mike Gadsby, Chief Innovation Officer</p>\n</blockquote>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Chief Innovation Officer Mike Gadsby on roadmapping",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "O3's Chief Innovation Officer, joined the voices of many industry leaders in this Mind the Product piece about effective roadmapping practices."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      3451,
+      4730,
+      4940,
+      3444
+    ],
+    "author": ""
+  }
+}

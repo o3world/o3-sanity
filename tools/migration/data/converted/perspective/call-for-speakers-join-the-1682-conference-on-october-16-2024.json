@@ -1,0 +1,718 @@
+{
+  "_id": "perspective-wp-9015",
+  "_type": "perspective",
+  "title": "Call for speakers: Join the 1682 conference on October 16, 2024",
+  "slug": {
+    "_type": "slug",
+    "current": "call-for-speakers-join-the-1682-conference-on-october-16-2024"
+  },
+  "excerpt": "Share your insights on AI and innovation with industry leaders in Philadelphia—apply to speak today!",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2024-06-12T15:55:00Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/06/1682_CallForSpeakers.jpg"
+    },
+    "alt": "Call for speakers: Join the 1682 conference on October 16, 2024"
+  },
+  "body": [
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Seeking AI and innovation thought leaders",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If you haven’t already heard, O3 is thrilled to announce the return of the ",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "1682 Conference",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", a premier event dedicated to exploring the dynamics of innovation programs and the impact of artificial intelligence (AI). Named after the year Philadelphia was founded, 1682 symbolizes the city’s enduring spirit of innovation and discovery. As we approach our ",
+          "_key": "k0014"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "250th anniversary",
+          "_key": "k0015"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " in 2026, there’s no better place than Philadelphia to celebrate forward-thinking advancements. This year, we are excited to partner with ",
+          "_key": "k0016"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Five Below,",
+          "_key": "k0017"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " who will host the event at their ",
+          "_key": "k0018"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "corporate headquarters",
+          "_key": "k0019"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " in Philadelphia on October 16, 2024.",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.1682conference.com/"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.philadelphia250.us/"
+        },
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.philadelphia250.us/"
+        },
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://figueras.com/project/five-below/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As a leading industry voice, O3 is inviting thought leaders to share expertise and insights on AI’s evolving role in innovation. This ",
+          "_key": "k0022"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "one-day conference",
+          "_key": "k0023"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " offers a unique platform to discuss real-world use cases, the measurement of innovation ROI, and the investment strategies driving success in today’s economy.",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.o3world.com/wp-content/uploads/2024/06/1682conf-press-release-20240501.pdf"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Event highlights",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Real-world insights",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Gain and share behind-the-scenes perspectives on successful innovation programs. Discuss funding strategies and ROI measurement with fellow industry leaders.",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "AI in action",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Explore how AI has either enhanced or hindered innovation through practical use cases presented by top executives.",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Community building",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Engage with a curated community of forward-thinking professionals. Exchange ideas and experiences related to AI, technology, and innovation in the enterprise sector.",
+          "_key": "k0038"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0039",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Why speak at 1682?",
+          "_key": "k0040"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0041",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The rapid advancement of AI is revolutionizing industries, making cross-sector collaboration essential to stay ahead. That’s why we’re bringing back the 1682 Conference—to perspectives and explore the impact of AI on organizational innovation.",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0043",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A platform for thought leadership",
+          "_key": "k0044"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0045",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Speaking at 1682 places you at the forefront of innovation discussions. You’ll have the opportunity to influence and inspire a diverse audience of executives, managers, and thought leaders.",
+          "_key": "k0046"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0047",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Networking opportunities",
+          "_key": "k0048"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0049",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Connect with other high-level professionals and industry pioneers. Share your experiences, forge new relationships, and collaborate on future innovations.",
+          "_key": "k0050"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0051",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Showcase achievements",
+          "_key": "k0052"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0053",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Present your organization’s successes and challenges in implementing AI-driven innovations. Provide attendees with actionable insights and inspire them with your journey.",
+          "_key": "k0054"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0055",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Seeking innovators",
+          "_key": "k0056"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0057",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We are seeking enterprise thought leaders who are helping to influence innovation within their organization and/or industry. Roles will vary between senior-level representatives impacting the growth and distribution of an organization’s innovation model. Previous speaking experience is appreciated but not required.",
+          "_key": "k0058"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0059",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Speaker topics and logistics",
+          "_key": "k0060"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0061",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We are curating a dialogue around topics that define real-world use cases of AI within small and large businesses alike. The general throughline is about the investment and measurement of innovation programs. How has the economy at large or inside your organization changed the investment model, and how has AI impacted these programs?",
+          "_key": "k0062"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0063",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Recap of the 2019 conference",
+          "_key": "k0064"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0065",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "Our previous 1682 Conference",
+          "_key": "k0066"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", held at the ",
+          "_key": "k0067"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0006"
+          ],
+          "text": "Barnes Foundation",
+          "_key": "k0068"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " in Philadelphia, was a resounding success.",
+          "_key": "k0069"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.o3world.com/perspectives/1682-the-business-of-conference-innovation/?preview_id=2819&preview_nonce=0980ff70dd&_thumbnail_id=6246&preview=true"
+        },
+        {
+          "_key": "k0006",
+          "_type": "link",
+          "href": "https://www.barnesfoundation.org/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0070",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Attendees praised the event for its thoughtful content and the quality of conversations it facilitated. The intimate setting, diverse panel formats, and high-caliber attendees made it a standout experience. To learn more, ",
+          "_key": "k0071"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0007"
+          ],
+          "text": "check out our 2019 speaker lineup here.",
+          "_key": "k0072"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0007",
+          "_type": "link",
+          "href": "https://1682conf.com/#speakers"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/06/Will-and-Eliza-Updated-1280x720-2.jpeg"
+      },
+      "alt": "Call for speakers: Join the 1682 conference on October 16, 2024",
+      "_key": "k0073"
+    },
+    {
+      "_key": "k0074",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Highlights from 2019",
+          "_key": "k0075"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0076",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Diverse presentation formats",
+          "_key": "k0077"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0078",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "From 10-minute talks to moderated Q&A sessions and lightning pitches, the variety kept attendees engaged.\nUnique venue: The inspiring environment of the Barnes Foundation enriched the overall experience.",
+          "_key": "k0079"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0080",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "High engagement",
+          "_key": "k0081"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0082",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Tools like Poll Everywhere encouraged active participation, making the discussions dynamic and interactive.",
+          "_key": "k0083"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0084",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Quotes from 2019 attendees",
+          "_key": "k0085"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0086",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“Just wanted to reach out and say that I was really impressed with 1682. Great content, format, people, and venue. Thanks for putting it on.”",
+          "_key": "k0087"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0088",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“The venue was AMAZING. I must sadly admit that it was my first trip to the Barnes, but it won’t be my last.”",
+          "_key": "k0089"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0090",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“I have to say I’ve never been to an event quite like 1682. Lots of very candid and open conversations. Really interesting.”",
+          "_key": "k0091"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0092",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Join us at 1682",
+          "_key": "k0093"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0094",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If you’re responsible for starting, building, or influencing innovation programs within your organization, we want to hear from you. Share your story and help us explore the future of AI and innovation. To inquire about speaking opportunities visit ",
+          "_key": "k0095"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0008"
+          ],
+          "text": "1682conference.com",
+          "_key": "k0096"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0097"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0008",
+          "_type": "link",
+          "href": "http://1682conference.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Call for speakers: Join the 1682 conference on October 16, 2024 | O3 Call for speakers: Join the 1682 conference on October 16, 2024, in Philadelphia",
+    "description": "The 1682 Conference is back on October 16, 2024! Join us at Five Below’s Corporate Headquarters in Philadelphia to share insights on AI and innovation. Apply to speak today!"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:9015",
+    "extractedAt": "2026-08-01T00:09:37.821Z"
+  }
+}

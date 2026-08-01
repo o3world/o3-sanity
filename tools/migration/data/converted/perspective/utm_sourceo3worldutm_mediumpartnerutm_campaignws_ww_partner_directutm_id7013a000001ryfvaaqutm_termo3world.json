@@ -1,0 +1,214 @@
+{
+  "_id": "perspective-wp-5120",
+  "_type": "perspective",
+  "title": "Best in class technology solutions: the foundation for a superior CX",
+  "slug": {
+    "_type": "slug",
+    "current": "utm_sourceo3worldutm_mediumpartnerutm_campaignws_ww_partner_directutm_id7013a000001ryfvaaqutm_termo3world"
+  },
+  "excerpt": "As a CX consultancy, we believe that the proper technology solutions are the foundation for a proper customer experience (CX). O3 is a trusted and certified Acquia Bronze partner ready to help you create the best digital experiences.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-15",
+      "_key": "cat-15"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-11",
+      "_key": "cat-11"
+    }
+  ],
+  "publishedAt": "2022-07-21T18:12:10Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/07/Acquia-bronze.png"
+    },
+    "alt": "Acquia logo."
+  },
+  "body": [
+    {
+      "_key": "k0001",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Who is Aquia?",
+          "_key": "k0002"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Acquia provides tools to create solutions for our clients with some of the most powerful and secure products on the market. Acquia removes data silos to accelerate digital transformation. Resulting in complete experiences that capture, convert, and drive results across all channels.",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Why did O3 partner with Acquia?",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3’s expertise in the Drupal Content Management System (CMS), paired with the Acquia platform, allows us to ",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "leverage the cloud, the community-built open source modules, and custom development to rapidly create easy-to-maintain, scalable websites and portals that drive business value",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". We recognize the benefits of a comprehensive platform offering advanced personalization, like Acquia. Their simplicity and scalability enables superior enterprise-ready content management.",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 is a trusted and certified Acquia Bronze partner, ready to help you integrate a single view of your customer and create impactful digital experiences.",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“Acquia’s product offerings can deliver intelligent, engaging experiences without the technical and design challenges that usually come with other legacy vendors.”\n-Mahesh Gaitonde, O3 Chief Digital Officer",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "blockquote"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Explore resources:",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "To learn more, check out how Acquia’s ",
+          "_key": "k0018"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "e-book",
+          "_key": "k0019"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " breaks down why a powerful content management platform (equipped with low-code tools) is a win-win for both our employees at O3 and our customers.",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.acquia.com/resources/e-book/component-based-design-acquia-site-studio"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/Partner_Certifications_Partner-Program_Q4-2020-Refresh-Slash_v1-1_Bronze-Level-Partner-Badge.png"
+      },
+      "alt": "",
+      "_key": "k0021"
+    }
+  ],
+  "seo": {
+    "ogImage": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/07/O3-Acquia_LP-image_1-1-1200x675-1.jpeg"
+    }
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:5120",
+    "extractedAt": "2026-08-01T00:10:02.401Z"
+  }
+}

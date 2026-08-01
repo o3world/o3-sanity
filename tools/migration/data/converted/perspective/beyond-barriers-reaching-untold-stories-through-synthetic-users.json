@@ -1,0 +1,409 @@
+{
+  "_id": "perspective-wp-9671",
+  "_type": "perspective",
+  "title": "Beyond barriers: reaching untold stories through Synthetic Users",
+  "slug": {
+    "_type": "slug",
+    "current": "beyond-barriers-reaching-untold-stories-through-synthetic-users"
+  },
+  "excerpt": "Learn about how Synthetic Users offers a powerful AI-driven solution for both industry and academic research.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-3984"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-75",
+      "_key": "cat-75"
+    }
+  ],
+  "publishedAt": "2025-01-08T16:39:43Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/01/syntheticusers-1024x1024@2x.webp"
+    },
+    "alt": "Beyond barriers: reaching untold stories through Synthetic Users"
+  },
+  "body": [
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "While direct engagement with users is always the gold standard for research, there are times when speaking with real people isn’t possible. In these situations, ",
+          "_key": "k0003"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Synthetic Users",
+          "_key": "k0004"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " offers a powerful AI-driven solution for both industry and academic research.",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.syntheticusers.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What is Synthetic Users?",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Synthetic Users is an advanced research platform that uses AI and natural language processing to generate synthetic user types that mimic real human behavior. Each synthetic user is underpinned by its own Five Factor Model (FFM) personality model, enabling realistic interactions through four distinct types of interviews.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "How it works in practice",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In business environments, Synthetic Users can transform how teams approach user research and product development. Product teams can leverage the platform to understand accessibility needs early in development, while designers can test usability assumptions. And emerging researchers can practice sensitive interview approaches, helping teams develop genuine empathy before engaging with real users.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In academic settings, students can also use Synthetic Users to practice interview techniques without risking harm to vulnerable participants, helping develop inclusive approaches while building skills for handling sensitive topics.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Real-world applications",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Over the past year, I’ve had the opportunity to introduce Synthetic Users into research methods in my teaching. The platform has enabled my students to explore sensitive research topics while developing their interviewing skills in a safe environment. Here are three examples that demonstrate how my students have used Synthetic Users to tackle complex research challenges:",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "1. Understanding users with disabilities",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Many of my students using Synthetic Users gained meaningful insights into both offline and online challenges faced by users with disabilities. Conversations revealed perspectives about adaptive devices, interface preferences, and creative workarounds, going beyond standard accessibility guidelines.",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "2. Caregivers supporting children with cancer",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "One student conducting parallel research streams—real-life interviews with caregivers and Synthetic Users interviews—found that the product’s insights aligned remarkably closely with themes from real-world interviews. This demonstrated how the platform can provide reliable insights when direct access is limited.",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "3. Youth in underserved communities",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Another student explored experiences of youth in underserved communities, focusing on after-school activities and home life. Through the platform, she gathered valuable perspectives about daily routines and family dynamics while maintaining appropriate research boundaries.",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Balancing learning + reality",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "When conducting research with sensitive populations, we must balance our need to gather insights with ethical considerations and access limitations. Synthetic Users offers a middle ground where researchers can gain understanding while protecting vulnerable populations.",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Guidelines for success",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Use Synthetic Users to complement other primary and secondary research",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Leverage the platform for training and preliminary understanding of the interview process",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0042",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Update profiles regularly to maintain relevance and accuracy\nCreate comprehensive interview guides to ensure effective synthetic interviews",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0044",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Looking forward",
+          "_key": "k0045"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0046",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As products and services need to serve increasingly diverse users, synthetic users offer a valuable tool for understanding perspectives we might otherwise miss. They help bridge the gap between assumption and understanding, whether in education or practice.",
+          "_key": "k0047"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0048",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Would you like to explore how Synthetic Users might work in your organization? I’d be interested in ",
+          "_key": "k0049"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "hearing about your challenges",
+          "_key": "k0050"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " in understanding hard-to-reach users.",
+          "_key": "k0051"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Unlock better user insights with Synthetic Users – An AI-powered research tool",
+    "description": "Discover how Synthetic Users, an AI-driven research platform, helps businesses and educators gain valuable user insights ethically and effectively when direct engagement isn't possible."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:9671",
+    "extractedAt": "2026-08-01T00:09:32.181Z"
+  }
+}

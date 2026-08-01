@@ -1,0 +1,107 @@
+{
+  "_id": "perspective-wp-3451",
+  "_type": "perspective",
+  "title": "3 customer experience trends brands need to pay attention to now",
+  "slug": {
+    "_type": "slug",
+    "current": "3-customer-experience-trends-brands-need-to-pay-attention-to-now"
+  },
+  "excerpt": "Our Chief Innovation Officer, Mike Gadsby, recently expanded on the three customer experience trends that marketers should now embrace in Target Marketing.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-15",
+      "_key": "cat-15"
+    }
+  ],
+  "publishedAt": "2020-04-28T21:36:40Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2020/07/O3-website-imagery_-Insights-20.jpg"
+    },
+    "alt": "Greyscale, interior of O3 office."
+  },
+  "body": [
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "COVID-19 has changed the customer experience and made digital interactions with consumers more important than ever. However, in today’s environment where clients want thoughtful customization and quick turnarounds, how can brands keep up?",
+          "_key": "k0003"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our Chief Innovation Officer, ",
+          "_key": "k0005"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Mike Gadsby",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", recently expanded on the three customer experience trends that marketers should now embrace in Target Marketing.",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.o3world.com/about/team/mike-gadsby/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Read on",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.targetmarketingmag.com/article/3-customer-experience-trends-brands-pay-attention/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:3451",
+    "extractedAt": "2026-08-01T00:10:15.488Z"
+  }
+}

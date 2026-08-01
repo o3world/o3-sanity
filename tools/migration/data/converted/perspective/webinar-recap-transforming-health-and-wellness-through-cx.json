@@ -1,0 +1,246 @@
+{
+  "_id": "perspective-wp-7571",
+  "_type": "perspective",
+  "title": "Webinar recap: \"Transforming health and wellness through CX”",
+  "slug": {
+    "_type": "slug",
+    "current": "webinar-recap-transforming-health-and-wellness-through-cx"
+  },
+  "excerpt": "O3 sat down with industry experts to discuss transforming health and wellness through CX",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2023-04-03T20:23:19Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/03/My-project-1-35.jpg"
+    },
+    "alt": "Webinar recap: \"Transforming health and wellness through CX”"
+  },
+  "body": [
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Last Wednesday, O3 hosted a webinar titled “Transforming health and wellness through CX” The conversation was both informative and engaging. Our CIO, Mike Gadsby, along with distinguished panelists Dr. Bon Ku and Dr. Bonnie Offit, shared their expertise and experience on the latest trends, pain points, and techniques for enhancing the patient experience in the healthcare industry. Check out our ",
+          "_key": "k0004"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "speaker profiles",
+          "_key": "k0005"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.o3world.com/perspectives/meet-the-our-expert-px-patient-experience-panel/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This session was perfect for healthcare professionals, policymakers, and anyone who is interested in improving the patient experience in healthcare. The session provides a deeper understanding of the challenges facing the healthcare industry and learn strategies to overcome them. Feel free to share this webinar recording with any colleagues you may see fit.",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Here are some of the topics we covered:",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What makes for a great patient experience",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Reach + service quality; speed and access",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Data challenges and access",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Siloed experience",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The future of patient experience",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 understands that effective communication and personalized interactions are crucial in the healthcare industry. If you are interested in learning more about O3’s capabilities ",
+          "_key": "k0022"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "contact us",
+          "_key": "k0023"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Follow us on LinkedIn",
+          "_key": "k0026"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " to stay tuned for thought leadership, webinars, and events.",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.linkedin.com/company/249880/admin/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "embed",
+      "_key": "k0028",
+      "url": "https://www.youtube.com/embed/To54FwbrFjQ?start=686&feature=oembed"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:7571",
+    "extractedAt": "2026-08-01T00:09:57.656Z"
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "_id": "perspective-wp-3247",
+  "_type": "perspective",
+  "title": "Design predictions that will guide the industry in 2020",
+  "slug": {
+    "_type": "slug",
+    "current": "design-predictions-that-will-guide-the-industry-in-2020"
+  },
+  "excerpt": "Mike Gadsby, recently weighed in with other industry experts on a Proto.io blog by Angelica Valentine, expanding on how design methodology will evolve over the next year.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-61",
+      "_key": "cat-61"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    }
+  ],
+  "publishedAt": "2020-03-04T21:11:22Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights-3.jpg"
+    },
+    "alt": "Design predictions that will guide the industry in 2020"
+  },
+  "body": [
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "With 2020 well underway, it’s clear the design industry is evolving.",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our Chief Innovation Officer, ",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Mike Gadsby",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", recently weighed in with other industry experts on a ",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Proto.io",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " blog by Angelica Valentine, expanding on how design methodology will evolve over the next year.",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.o3world.com/about/team/mike-gadsby/"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://proto.io/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Need to get up to speed on the design trends that are sure to drive the industry?",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Read insights",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://blog.proto.io/design-predictions-that-will-guide-the-industry-in-2020/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:3247",
+    "extractedAt": "2026-08-01T00:10:15.489Z"
+  }
+}

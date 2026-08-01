@@ -1,0 +1,15 @@
+{
+  "_id": "person-wp-8146",
+  "_type": "person",
+  "name": "Alan Cho, CPACC",
+  "title": "Senior UX Designer",
+  "headshot": {
+    "_type": "image",
+    "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/08/Headshots-2.jpg"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:team:8146",
+    "extractedAt": "2026-08-01T00:18:29.123Z"
+  }
+}

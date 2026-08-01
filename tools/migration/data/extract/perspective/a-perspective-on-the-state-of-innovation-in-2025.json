@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:32.179Z"
+  },
+  "wpId": 10128,
+  "slug": "a-perspective-on-the-state-of-innovation-in-2025",
+  "title": "A perspective on the state of innovation in 2025",
+  "dateGmt": "2025-04-18 14:01:37",
+  "modifiedGmt": "2025-04-18 14:01:37",
+  "authorId": 16,
+  "categoryIds": [
+    8
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2025/04/Innovation-mishaps-1.jpg",
+    "alt": "A perspective on the state of innovation in 2025"
+  },
+  "seo": {
+    "titleOverride": "The state of Innovation in 2025: Missteps and models",
+    "titleRendered": "The state of Innovation in 2025: Missteps and models",
+    "descriptionOverride": "Explore why innovation is failing in 2025 and how leaders can adopt better models to drive resilience, adaptability, and long-term growth.",
+    "descriptionRendered": "Explore why innovation is failing in 2025 and how leaders can adopt better models to drive resilience, adaptability, and long-term growth.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/a-perspective-on-the-state-of-innovation-in-2025/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "A perspective on the state of innovation in 2025",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Innovation mishaps, missteps, and models"
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>In today’s volatile environment—defined by AI disruption, supply chain fragility, rising capital costs, and policy shifts—innovation is not a luxury. It is a strategic imperative.</p>\n<p>Yet paradoxically, many companies are cutting back on innovation teams, redirecting innovation budgets to AI-centric roles, or dissolving functions entirely. In 2024 alone, more than 500 tech companies—including Amazon, Meta, and Tesla—laid off roles related to product innovation, strategy, and design (source: <a href=\"https://layoffs.fyi/\">Layoffs.fyi</a>).</p>\n<p>This isn’t simply belt-tightening. It reflects a troubling pattern of organizations confusing short-term efficiency plays with long-term strategic clarity.</p>\n<h3>Innovation isn’t a product—It’s a business philosophy</h3>\n<p>Many still define innovation as a novel product, breakthrough feature, or emerging technology. But that view is narrow. True innovation lives in customer experience. A product or service only becomes “an innovation” when customers feel it is better, simpler, or more meaningful. That means innovation is not owned by a lab or a team—it must be embedded in how a company operates, listens, and evolves.</p>\n<p>A recent BCG report underscores this disconnect. While 83% of global executives rank innovation as a top-three strategic priority, only 3% say their organizations are fully prepared to deliver on it—a dramatic drop from 20% just two years ago.</p>\n<p>The tension is clear: companies are talking about innovation, but not building the systems to support it.</p>\n<h3>The shift: Flavor-of-the-day tactics over strategic models</h3>\n<p>In sectors like insurance, healthcare, and finance, we&#8217;re seeing a reactive shift:</p>\n<ul>\n<li>Innovation officers are rebranded as &#8220;AI transformation leads.&#8221;</li>\n<li>Innovation labs are dismantled or absorbed into tech functions.</li>\n<li>Organizations prioritize cost-cutting to fund speculative AI initiatives (Business Insider).</li>\n</ul>\n<p>This short-termism is risky. AI is a tool, not a strategy. It’s not inherently innovative—its impact depends on how it’s applied to meaningful problems. Without a clear operating model and feedback infrastructure, AI initiatives can just as easily create complexity as deliver value. In fact, 74% of companies now say they struggle to achieve and scale value from their AI investments (<a href=\"https://www.bcg.com/press/24october2024-ai-adoption-in-2024-74-of-companies-struggle-to-achieve-and-scale-value\">BCG AI Adoption Report, 2024</a>).</p>\n<h3>Innovation as an operating model</h3>\n<p>Companies that win in complexity don’t “do innovation.” They operate innovatively.</p>\n<p>They balance short-term value creation with long-term bets. They embed customer feedback into product roadmaps, policy design, service delivery, and culture. They treat innovation as a competency, not a campaign.</p>\n<p>Here are five practical principles for executive teams looking to systematize innovation:</p>\n<h4>1. Make innovation a capability, not a function</h4>\n<p>Don’t isolate innovation in a lab or center of excellence. Build the tools, skills, and incentives that allow all teams—from operations to finance—to test, learn, and improve.<br />\n→ Only 3% of companies say they’ve scaled these innovation capabilities across the org. ([BCG 2024])</p>\n<h4>2. Hardwire feedback into your operating cadence</h4>\n<p>Turn customer insight into a strategic asset. Create systems that gather both quantitative signals (usage data, churn, CSAT) and qualitative feedback (interviews, frontline input), and integrate them into planning.<br />\n→ According to MIT Sloan, organizations that systematically link insight to action outperform their peers in new market responsiveness. (<a href=\"https://sloanreview.mit.edu/article/big-data-analytics-and-the-path-from-insights-to-value/#:~:text=Top%20Performers%20Say%20Analytics%20Is,growth%2C%20efficiency%20or%20competitive%20differentiation.\">Sloan Review</a>)</p>\n<h4>3. Balance today’s wins with tomorrow’s bets</h4>\n<p>Use models like McKinsey’s Three Horizons or the Innovation Ambition Matrix to allocate resources across:</p>\n<p>Core improvements<br />\nAdjacent innovations<br />\nNew growth bets<br />\n→ Top-performing firms diversify innovation investments to mitigate risk and foster resilience. (McKinsey, 2024)</p>\n<h4>4. Create incentives for calculated risk</h4>\n<p>Innovation requires experimentation. Build cultural and financial incentives that reward risk-informed learning—even when outcomes fall short. Normalize &#8220;intelligent failure.&#8221;<br />\n→ Companies that reward experimentation see 30% higher long-term revenue growth, per Deloitte research. (Deloitte WSJ CIO Insights)</p>\n<h4>5. Invest in infrastructure that accelerates action</h4>\n<p>This means tools, workflows, governance models, and data systems that enable teams to move quickly and responsibly. Equip leaders with innovation frameworks like design thinking, lean experimentation, and rapid prototyping.<br />\n→ Shopify now requires new hires to prove their roles cannot be performed by AI—underscoring the shift from labor scale to innovation leverage. (Business Insider)</p>\n<h3>The takeaway for leadership</h3>\n<p>Innovation isn’t something you outsource, rebrand, or sideline. In 2025 and beyond, it is the backbone of resilience.</p>\n<p>The companies that will shape the next decade are not those who simply adopted AI or launched the flashiest features. They are those who built innovation into their organizational muscle—from how they hire and listen, to how they invest and evolve.</p>\n<p>Strategic clarity, operational adaptability, and customer obsession are no longer optional. They are the new cost of survival.</p>\n<h5>RESEARCH</h5>\n<ul>\n<li>Corporate Innovation Trends &amp; Readiness- BCG (2024) – “Companies Rank Innovation as a Top-Three Priority—But Only 3% Are Ready” <a href=\"https://www.bcg.com/press/4june2024-companies-rank-innovation-as-a-top-three-priority\">McKinsey &amp; Company (2024)</a></li>\n<li><a href=\"https://www.mckinsey.com/capabilities/strategy-and-corporate-finance/our-insights/how-top-performers-use-innovation-to-grow-within-and-beyond-the-core\">MIT Sloan Management Review</a> – “The Hard Truth About Business Model Innovation”</li>\n<li><a href=\"https://sloanreview.mit.edu/article/the-hard-truth-about-business-model-innovation/\">AI Impact on Innovation &amp; Corporate Structure</a></li>\n<li><a href=\"https://www.forbes.com/sites/deandebiase/2025/03/17/ai-wars-how-enterprise-and-government-leaders-can-win-the-agi-arms-race/\">BCG AI Adoption Report</a> (2024) – “74% of Companies Struggle to Scale Value from AI”</li>\n<li><a href=\"https://www.businessinsider.com/big-tech-amazon-meta-cost-cutting-spree-fund-big-ai-2025-2\">Business Insider (2025)</a> – “Big Tech’s Cost-Cutting to Fund AI Expansion” (Amazon, Meta)</li>\n<li>Business Insider (2025) – “Shopify’s CEO: Employees Must Prove Their Jobs Can’t Be Done by AI”</li>\n<li><a href=\"https://www.ft.com/content/b39ed853-dcf0-4a66-9b32-f993cebcd094\">Financial Times</a> (2024) – “IBM Shifts R&amp;D from China Amid Geopolitical Realignment” https://www.ft.com/content/b39ed853-dcf0-4a66-9b32-f993cebcd094</li>\n<li><a href=\"https://layoffs.fyi/\">Layoffs.fyi (2024)</a> – Tech Layoff Tracker</li>\n<li><a href=\"https://deloitte.wsj.com/cio/tech-execs-expect-growth-in-2024-133d523d\">Deloitte WSJ CIO Survey</a> (2024) – “62% of Leaders Optimistic About AI’s Business Impact in 2024”</li>\n<li><a href=\"https://hbr.org/2024/10/research-the-long-term-costs-of-layoffs\">Harvard Business Review (2024)</a> – “The Long-Term Costs of Layoffs”</li>\n<li><a href=\"https://hbr.org/2024/10/research-the-long-term-costs-of-layoffs\">https://hbr.org/2024/07/the-middle-path-to-innovation</a></li>\n<li><a href=\"https://sloanreview.mit.edu/article/the-hard-truth-about-business-model-innovation/\">https://sloanreview.mit.edu/article/the-hard-truth-about-business-model-innovation/</a></li>\n<li><a href=\"https://www.linkedin.com/pulse/5-most-dangerous-innovation-mistakes-your-2wejc/\">The 5 Most Dangerous Innovation Mistakes Your Business Could Be Making Right Now</a></li>\n<li><a href=\"https://hbr.org/2015/06/the-6-most-common-innovation-mistakes-companies-make\">The 6 Most Common Innovation Mistakes Companies Make</a></li>\n</ul>\n"
+      }
+    ],
+    "related_articles": [
+      8961,
+      9595,
+      9673
+    ],
+    "author": [
+      9147
+    ]
+  }
+}

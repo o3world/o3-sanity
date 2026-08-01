@@ -1,0 +1,75 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:15.487Z"
+  },
+  "wpId": 3417,
+  "slug": "automating-workflows-and-rpa-how-to-streamline-work",
+  "title": "Automating workflows and RPA: How to streamline work",
+  "dateGmt": "2020-05-08 00:49:35",
+  "modifiedGmt": "2023-11-14 16:50:31",
+  "authorId": 16,
+  "categoryIds": [
+    15,
+    8,
+    62,
+    11
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-17.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Automating workflows and RPA: How to streamline work | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/automating-workflows-and-rpa-how-to-streamline-work/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>How to streamline work</h3>\n<p>“I really need more software tools,” said no marketer ever.</p>\n<p>Actually, marketers say things like: &#8220;Where are my customers coming from?&#8221; or &#8220;What channels need to be better optimized?&#8221; But to get the answers to practical questions, modern marketers must determine which tools hold the desired data, open and maneuver through those tools, and then figure out how to combine and interpret the data.</p>\n<p>And it goes much further than the marketing department. Today’s customer experience must be all encompassing of the entire company &#8211; customers, employees and even your supply chain. After all, we are asked to cultivate and maintain relationships with clients, teammates, partners, vendors and others using digital channels.</p>\n<p>That’s why we have focused on streamlining workflows for our team and clients. We integrate existing platforms, software and tools with a layer of artificial intelligence (AI), use robotic process automation (RPA) and leverage the Internet of Things (IoT) to create conversational experiences for getting work done and locating useful data.</p>\n<p>Although the idea is clear  &#8211; a conversational interface that manages your daily software tools &#8211; the implementation can vary, depending on an organization’s work style and available platforms and tools.<br />\nFollowing is a look into how O<sub>3</sub> World does it and ways you can, too.</p>\n<h2>O<sub>3</sub> Taskbot: Using AI and RPA</h2>\n<p>At O<sub>3</sub> World, we built <a href=\"https://www.o3world.com/labs/taskbot/\">Taskbot</a> internally to help alleviate the potential threat of tool fatigue and automate some of the mundane processes we repeat daily via one interface. Instead of opening and using separate tools to answer questions, an O<sub>3</sub> team member can simply use Taskbot to access calendars, schedule meetings and review project assignments. It saves a lot of time and unnecessary back and forth with the team on administrative tasks.</p>\n<p>Taskbot lets our team handle a variety of supported tools through one text-based, natural language interface. Built on top of Slack, Taskbot employs Google’s AI-powered voice app and chatbot tool Dialogflow to help process the conversational interface, and integrates with Harvest, Google Calendar and Gmail, GitHub, Kin HR and Targetprocess. Soon, it will also include Jira, HubSpot, Confluence and BrowserStack.</p>\n<p>Taskbot uses both RPA and AI. The two approaches basically represent the two ends of the <a href=\"https://medium.com/@cfb_bots/the-difference-between-robotic-process-automation-and-artificial-intelligence-4a71b4834788\">Intelligent Automation</a> spectrum. RPA is a rules-based automation of repeated steps to complete a task, like a self-learning macro that is independent of the application. AI, however, is a more flexible intelligence that can be applied, for instance, to interpreting intent, context and meaning in a conversational interface. Both approaches learn over time.</p>\n<p>Our AI layer interprets your text-based conversation, and returns the info or conveys the command to that integrated tool. It’s a way to lessen the cognitive load on our team, making it easier and faster for them to undertake their daily tasks. And, at some point, the text interface can become voice-based for future iterations.</p>\n<h2>Popular RPA enterprise use cases</h2>\n<p>Our Taskbot implementation is only one way to implement a streamlined workflow. Other solutions, for instance, might be built around another platform, instead of Slack. For example, we’re currently working with a client to similarly create an automated workflow around their IT ticketing vendor to support their IT management efforts. Some areas that are ripe for automation include:</p>\n<ul>\n<li><strong>Customer service</strong> &#8211;<a href=\"https://www.zdnet.com/article/use-rpa-to-make-customer-service-agents-more-effective/\">Forrester Research</a> highlights that RPA for customer service and contact call centers are ripe for use cases, and are well underway in terms of implementations. Ticketing, claims processing, invoicing and more are just some of the ways RPA is helping in this area.</li>\n<li><strong>HR and teams</strong> &#8211; Eliminating the time-consuming tasks that make up HR and team functions within large companies can be an easy win. Time-off requests, payroll, and onboarding processes are being integrated into collaboration tools like Slack to make managing teams at scale much more efficient.</li>\n<li><strong>Finance and accounting</strong> &#8211; Claims processing, bank reconciliations, reporting, and tax planning are just some of the areas that can benefit from RPA, according to E&amp;Y. Creating rule-based processes for large and complex data calculations can eliminate human and manual errors.</li>\n</ul>\n<h2>RPA and your company</h2>\n<p>In order to decide the approach that’s best for you, first analyze how you&#8217;re currently working and determine any bottlenecks to efficiency improvements, followed by a diagramming of the most desirable workflow. Then a technical solution can be developed that is based around your existing platforms.</p>\n<p>Or we can design the solution around the most appropriate central software, even if it means introducing a new platform. Finally, organizational procedures are adapted to reflect the new process.</p>\n<p>Software tools are meant to make life easier for marketers and other business users, not to complicate things. It’s never tech for tech’s sake &#8211; we’re focused on improving the human experience. Since tech created this zoo of tools and menagerie of data, each with different ways of working and different purposes, our view is that tech should solve the problem.</p>\n<p>Curious how O<sub>3</sub> World would design a streamlined workflow for you? <a href=\"https://www.o3world.com/contact/\">Let’s talk</a> about how we can help.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Automating workflows and RPA: How to streamline work",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "We integrate existing platforms, software and tools with a layer of artificial intelligence (AI), use robotic process automation (RPA) and leverage the Internet of Things (IoT) to create conversational experiences for getting work done and locating useful data."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      3444,
+      4118,
+      5262,
+      2950
+    ],
+    "author": ""
+  }
+}

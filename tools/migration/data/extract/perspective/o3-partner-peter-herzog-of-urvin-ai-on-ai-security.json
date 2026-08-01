@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:10.996Z"
+  },
+  "wpId": 3906,
+  "slug": "o3-partner-peter-herzog-of-urvin-ai-on-ai-security",
+  "title": "O3 partner Peter Herzog of Urvin AI on AI security",
+  "dateGmt": "2020-08-10 05:10:53",
+  "modifiedGmt": "2023-02-02 18:52:52",
+  "authorId": 16,
+  "categoryIds": [
+    8,
+    11
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-16.jpg",
+    "alt": "Red pattern"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "O3 partner Peter Herzog of Urvin AI on AI security | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/o3-partner-peter-herzog-of-urvin-ai-on-ai-security/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>CSO Online featured <a href=\"https://www.linkedin.com/in/peteherzog/?locale=ru_RU\">Peter Herzog</a>, Head of Security at O3&#8217;s partner, <a href=\"https://www.o3world.com/ventures/urvin/\">Urvin AI</a>, in their recent article about minimizing risk in AI and ML development. As an emerging technology, AI and ML do not have an industry-wide set of best security practices and enterprises rely on a hodgepodge of both open source and proprietary code. In the rush to extract data, companies must remember to put security, privacy and ethics first.</p>\n<h4><a href=\"https://www.csoonline.com/article/3434610/how-secure-are-your-ai-and-machine-learning-projects.html\">Compare your AI security protocol against the checklist included in this article</a>.</h4>\n<p>&nbsp;</p>\n<blockquote>\n<p class=\"lead\">“There&#8217;s no such thing as an AI model that is free of security problems because people decide how to train them, people decide what data to include, people decide what they want to predict and forecast, and people decide how much of that information to expose.”<br />\n&#8211; Peter Herzog, Head of Security of Urvin AI</p>\n</blockquote>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "O3 partner Peter Herzog of Urvin AI on AI security",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "In the rush to extract data, companies must remember to put security, privacy and ethics first."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      3313,
+      6194,
+      2950,
+      5262
+    ],
+    "author": ""
+  }
+}

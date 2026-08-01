@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:02.402Z"
+  },
+  "wpId": 4896,
+  "slug": "keith-scandone-on-marketing-for-your-future",
+  "title": "Keith Scandone on marketing for your future",
+  "dateGmt": "2022-02-22 23:28:57",
+  "modifiedGmt": "2023-11-14 16:52:54",
+  "authorId": 16,
+  "categoryIds": [
+    7,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2022/07/SOTO_Recap.png",
+    "alt": "Keith Scandone presenting to the staff."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Keith Scandone on marketing for your future | O3",
+    "descriptionOverride": "Keith Scandone speaks with Cindy Ashton on Daily Ad Brief recently about why CX is important and how brands can stand out in today's climate.",
+    "descriptionRendered": "Keith Scandone speaks with Cindy Ashton on Daily Ad Brief recently about why CX is important and how brands can stand out in today's climate.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/keith-scandone-on-marketing-for-your-future/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h2>Keith Scandone featured on Daily Ad Brief</h2>\n<p>O3&#8217;s CEO and Co-Founder Keith Scandone spoke with Cindy Ashton on Daily Ad Brief recently. They dug into why CX is important and how brands can stand out in today&#8217;s climate.</p>\n<h4><a href=\"https://vimeo.com/675524493\">Watch the interview for more tips on delivering positive customer experiences.</a></h4>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Keith Scandone on marketing for your future",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "CEO, Keith Scandone, recently dug into why CX is important and how brands can stand out in today's climate."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      3357,
+      6193,
+      2525
+    ],
+    "author": ""
+  }
+}

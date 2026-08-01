@@ -9,7 +9,7 @@
   "excerpt": "Your content team is stretched, and the backlog proves it. Blog posts sitting in draft because no one wrote the meta description. Product pages missing alt text. Campaign pages stuck in a tagging queue before they can go live. Meanwhile, someone is manually reformatting finished content for LinkedIn, email, and social every time, for every piece.",
   "author": {
     "_type": "reference",
-    "_ref": "person-wp-20"
+    "_ref": "person-wp-11"
   },
   "categories": [
     {
@@ -581,6 +581,6 @@
   "migration": {
     "locked": false,
     "sourceId": "wp:post:10579",
-    "extractedAt": "2026-07-31T23:27:31.836Z"
+    "extractedAt": "2026-08-01T00:09:26.485Z"
   }
 }

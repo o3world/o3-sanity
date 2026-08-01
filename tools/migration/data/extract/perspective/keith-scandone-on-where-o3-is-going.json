@@ -1,0 +1,74 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:06.747Z"
+  },
+  "wpId": 4354,
+  "slug": "keith-scandone-on-where-o3-is-going",
+  "title": "Keith Scandone on where O3 is going",
+  "dateGmt": "2021-06-11 20:52:33",
+  "modifiedGmt": "2023-02-02 18:19:34",
+  "authorId": 16,
+  "categoryIds": [
+    7,
+    10,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/06/O3-website-imagery_-Insights-10.jpg",
+    "alt": "Keith Scandone giving an impassioned speech at the office."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Keith Scandone on where O3 is going | O3",
+    "descriptionOverride": "Keith Scandone joined Marcia O'Connor on The Top 3 podcast to discuss O3’s keys to success over the years and lessons learned along the way.",
+    "descriptionRendered": "Keith Scandone joined Marcia O'Connor on The Top 3 podcast to discuss O3’s keys to success over the years and lessons learned along the way.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/keith-scandone-on-where-o3-is-going/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>O3 Co-Founder and CEO, Keith Scandone joined Marcia O&#8217;Connor on The Top 3 podcast recently to share a few lessons he&#8217;s learned. Keith points out that perseverance, patience and perspective have been the keys to O3’s success over the past 16 years.</p>\n<h4><a href=\"https://open.spotify.com/show/5ozLK0G2QPcoopwurtXMYW\" target=\"_blank\" rel=\"noopener\">Listen to Keith’s insights on how O3 has made an effort to pivot and make an impact on a grander scale each year.</a></h4>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Keith Scandone on where O3 is going",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Keith Scandone joined Marcia O'Connor on The Top 3 podcast."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      6193,
+      3537,
+      3252,
+      4354
+    ],
+    "author": ""
+  }
+}

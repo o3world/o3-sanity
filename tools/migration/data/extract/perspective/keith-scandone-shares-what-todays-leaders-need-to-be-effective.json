@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:06.746Z"
+  },
+  "wpId": 4865,
+  "slug": "keith-scandone-shares-what-todays-leaders-need-to-be-effective",
+  "title": "Keith Scandone shares what today's leaders need to be effective",
+  "dateGmt": "2022-02-02 01:20:20",
+  "modifiedGmt": "2023-02-02 18:11:26",
+  "authorId": 16,
+  "categoryIds": [
+    7,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2022/02/O3-website-imagery_-Insights-1.png",
+    "alt": "Co-founder Keith standing in the hallway of the O3 office."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Keith Scandone shares what today's leaders need to be effective | O3",
+    "descriptionOverride": "Authority Magazine spoke with O3 CEO, Keith Scandone, to get his perspective on what effective leadership looks like during a pandemic.",
+    "descriptionRendered": "Authority Magazine spoke with O3 CEO, Keith Scandone, to get his perspective on what effective leadership looks like during a pandemic.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/keith-scandone-shares-what-todays-leaders-need-to-be-effective/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p><span style=\"font-weight: 300;\">Authority Magazine spoke with O3’s Co-Founder and CEO, Keith Scandone, to get his perspective on what effective leadership looks like during a pandemic. Keith reflects on his journey as a CEO and shares lessons learned. He calls out several mistakes leaders often make and how to avoid them as well as five things leaders in any industry should do to have a positive impact.</span></p>\n<h4><a href=\"https://medium.com/authority-magazine/keith-scandone-of-o3-world-five-things-you-need-to-be-a-highly-effective-leader-during-turbulent-ece0505868e5\">Check out Keith&#8217;s full interview here.</a></h4>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Keith Scandone shares what today's leaders need to be effective",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Check O3 CEO's perspective on what effective leadership looks like during a pandemic."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      3451,
+      3212,
+      4896,
+      6193
+    ],
+    "author": ""
+  }
+}

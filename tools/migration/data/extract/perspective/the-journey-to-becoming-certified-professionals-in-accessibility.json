@@ -1,0 +1,74 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:10.996Z"
+  },
+  "wpId": 3822,
+  "slug": "the-journey-to-becoming-certified-professionals-in-accessibility",
+  "title": "The journey to becoming certified professionals in accessibility",
+  "dateGmt": "2020-08-05 03:23:00",
+  "modifiedGmt": "2023-02-03 22:21:23",
+  "authorId": 16,
+  "categoryIds": [
+    63,
+    62,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-5.jpg",
+    "alt": "O3 accessibility and pattern"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "The journey to becoming certified professionals in accessibility | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/the-journey-to-becoming-certified-professionals-in-accessibility/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>O3 is proud to announce that Experience Designer, Alan Cho and Senior Engineer, Brian Crumley passed the IAAP &#8211; Certified Professional in Accessibility Core Competency (CPACC) examination! Their hard work, study and perseverance helped them achieve a significant goal – recognition of their skills and knowledge as accessibility professionals.</p>\n<p><strong>This foundational certification represents a broad, cross-disciplinary conceptual knowledge about&#8230;</strong></p>\n<ol>\n<li>Disabilities</li>\n<li>Accessibility and universal design</li>\n<li>Accessibility-related standards</li>\n<li>Laws and management strategies.</li>\n</ol>\n<h3>The Driving Force</h3>\n<p>Prior to taking the exam this team served as O3 World’s de-facto subject matter experts on all things related to digital accessibility. They each had the hands on know-how, the theoretical knowledge and now they have the certification to reinforce their prowess. These individuals are dedicated to helping shape how people think about accessibility.</p>\n<p>Their end goal is to educate, empower and advance the implementation of accessibility in practice. They’ve made it a priority to get certified because they are passionate about helping our clients create equitable experiences for all users.</p>\n<h3>Preparing for the CPACC Exam</h3>\n<p>On a weekly basis the O3 a11y group met up to review study guides and quiz each other.</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-3823 size-full\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/a11y-jeopardy.jpg\" alt=\"A laptop with shared screen showing an Accessibility-themed Jeopardy game.\" width=\"2048\" height=\"1536\" /></p>\n<blockquote><p>&nbsp;</p>\n<p class=\"lead\">“There&#8217;s a lot to know about designing accessible platforms and the amount of work our team put into grasping not only things for the web, but also how to help people with disabilities and how to make people with disabilities lives easier through our work really shows how devoted we all are to building accessible experiences.”<br />\n-Alan Cho</p>\n</blockquote>\n<h3>What’s Next</h3>\n<p>Building and promoting accessibility within an organization, empowering and training others to take part in this practice and the practical and legal considerations of accessibility can be a lot to take on, but you don’t have to do it alone. Our CPACC team is creating a series of e-books to help others understand accessibility best practices.</p>\n<p>They’re also setting their sights on the IAAP’s second credential exam. The Web Accessibility Specialist (WAS) is a technical level credential ideal for those who personally design, develop, implement, evaluate, or manage the technical details of accessible web solutions.</p>\n<p>Congratulations again on this achievement! Our certified O3’ers are now part of a select group of over 1,400 IAAP CPACCs around the world. We’re available to help craft accessibility strategies or talk through the ongoing efforts required to remain compliant with the latest WCAG standards. Whether you’re starting a project from scratch or looking to improve upon an existing online experience, O<sub>3</sub> World can guide you through the process.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "The journey to becoming certified professionals in accessibility",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "This foundational certification represents a broad, cross-disciplinary conceptual knowledge about 1) disabilities, 2) accessibility and universal design and 3) accessibility-related standards, laws and management strategies."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      4049,
+      6194,
+      4070,
+      4179
+    ],
+    "author": ""
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "_id": "perspective-wp-2942",
+  "_type": "perspective",
+  "title": "3 Essential tips for product innovation",
+  "slug": {
+    "_type": "slug",
+    "current": "in-the-news-3-essential-tips-for-product-innovation"
+  },
+  "excerpt": "Our User Experience Director Lauren Slattery recently wrote a piece about the three most important strategies people can follow for successful product innovation. Take some time to learn about how we sustain true innovation in all of the work we produce.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-15",
+      "_key": "cat-15"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    }
+  ],
+  "publishedAt": "2019-10-30T23:53:35Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights-3.jpg"
+    },
+    "alt": "3 Essential tips for product innovation"
+  },
+  "body": [
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Saying that you create innovative products is simple, but fostering and sustaining true innovation isn’t an easy task. You need to ensure that every project has well-defined end goals and that you’re constantly thinking of the needs of your end-users.",
+          "_key": "k0003"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our User Experience Director ",
+          "_key": "k0005"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Lauren Slattery",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " recently wrote a piece about the three most important strategies people can follow for successful product innovation. Take some time to learn about how we sustain true innovation in all of the work we produce.",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.o3world.com/about/team/lauren-slattery/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Read On CustomerThink",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "http://customerthink.com/3-essential-tips-for-product-innovation/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:2942",
+    "extractedAt": "2026-08-01T00:10:20.527Z"
+  }
+}

@@ -1,0 +1,368 @@
+{
+  "_id": "perspective-wp-7310",
+  "_type": "perspective",
+  "title": "Time's up: Making the move from Universal Analytics to Google Analytics 4",
+  "slug": {
+    "_type": "slug",
+    "current": "times-up-making-the-move-from-universal-analytics-to-google-analytics-4"
+  },
+  "excerpt": "Are You Ready for the GA4 Transition? Important Considerations and Benefits for Your Website Analytics.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-15",
+      "_key": "cat-15"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-11",
+      "_key": "cat-11"
+    }
+  ],
+  "publishedAt": "2023-03-03T18:45:13Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/03/O3-website-imagery_-Insights-34.jpg"
+    },
+    "alt": "Time's up: Making the move from Universal Analytics to Google Analytics 4"
+  },
+  "body": [
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If you’re currently leveraging Universal Analytics from Google on your website, you are running out of time. In March of 2022, Google introduced GA4 (Google Analytics 4), Universal Analytics’ replacement. Google will permanently retire the current iteration, on July 1, 2023. Sure, July of 2023 seems a long way off right now, but there are important factors to consider as you plan for the transition.",
+          "_key": "k0003"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "So, what’s all the fuss about GA4?",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Google Analytics 4 offers a more comprehensive cross-channel view of the customer, combining the insights from Universal Analytics with the data model of ",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Firebase",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". This results in more seamless insights and empowers your team with the ability to make data-informed decisions for your brand. While the current event model is session-based, GA4 has adopted the Firebase data model in the form of ",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "events",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". An event allows you to measure a distinct user interaction on a website or app providing more specificity and accuracy. With the rollout of GA4, users are no longer looking for the built-in Event Category/Action/Label taxonomy. This new model is more agnostic and flexible, allowing parameters to serve more meaningful roles.",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://firebase.google.com/docs/analytics"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://developers.google.com/analytics/devguides/collection/ga4/events?client_type=gtag"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "_key": "k0012",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/03/My-project-1-34.jpg"
+      },
+      "alt": "UA to GA graphic"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Making the move",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The transition to GA4 is not easy. There is no magic button to press. It requires planning, time and resources. If year-over-year (YoY) metrics are part of your tracked KPIs, proactive steps should be taken now to ensure you are not scrambling as July 2023 approaches. With proper planning and time, the transition can occur with no loss of data tracking or functionality required to run your business. For example, if a brand was to set up its GA4 account after June 30, 2022, come July 1, 2023, there won’t be a full year’s worth of data in GA4 before UA stops collecting data.",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "GA4 has introduced huge benefits that rely on machine learning, such as audience creation and attribution modeling. However, in order for machine learning to be implemented, the algorithm needs time to learn. This means, the sooner your brand sets up GA4, the longer your tracking models can train and learn before you need to rely on their outputs.",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Another factor to consider is change management. You obviously want to make sure your analytics team, and probably your whole organization, has time to dig in and learn the ins and outs of GA4 before the transition. In order for a team to be successful with GA4, including accurately utilizing and understanding these enhanced features, a company must strategically plan and deliver education for all their team members that will be using the tool, or even just absorbing the output.",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "While Google is dropping support and tracking for Universal Analytics, ",
+          "_key": "k0024"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0013"
+          ],
+          "text": "according to Google",
+          "_key": "k0025"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", Universal Analytics will be accessible for “at least six months” following that July date. “In the coming months, we’ll provide a future date for when existing Universal Analytics properties will no longer be available. After this future date, you’ll no longer be able to see your Universal Analytics reports in the Analytics interface or access your Universal Analytics data via the API.”",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0013",
+          "_type": "link",
+          "href": "https://support.google.com/analytics/answer/11583528?hl=en"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Here’s how O3 can help:",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 will collaborate with you and your team to define, plan, and execute a full transition project. Our team will work side-by-side with your team to ensure a complete and transparent understanding of the current state, future goals, and required data migration. From your side, in order to maintain a seamless transition to GA4, you will need to review and make decisions on the following:",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Determine your long-term data needs and transition appropriate historical data",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Audit of all your UA customizations",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Reconsider customizations objectives",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Ensure effective data tracking",
+          "_key": "k0038"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0039",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Align education for all users",
+          "_key": "k0040"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0041",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 is here to ensure that the process is both seamless and a strategic success for your brand. ",
+          "_key": "k0042"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0014"
+          ],
+          "text": "Contact us",
+          "_key": "k0043"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " to learn more.",
+          "_key": "k0044"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0014",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Is your company ready for the GA4 Transition? See how O3 can help.",
+    "description": "GA4 offers a more comprehensive view of customer insights and a more flexible data model. However, transitioning to GA4 requires planning, time, and resources."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:7310",
+    "extractedAt": "2026-08-01T00:09:57.657Z"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:57.658Z"
+  },
+  "wpId": 7296,
+  "slug": "o3s-expanding-accessibility-capabilities",
+  "title": "O3’s expanding accessibility capabilities",
+  "dateGmt": "2023-02-15 18:14:21",
+  "modifiedGmt": "2023-03-01 18:24:05",
+  "authorId": 16,
+  "categoryIds": [
+    63
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/03/O3-website-imagery_-Insights-4.png",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "O3 is expanding accessibility capabilities",
+    "titleRendered": "O3 is expanding accessibility capabilities",
+    "descriptionOverride": "O3 is proud to share our growing accessibility team and our expertise in the IAAP Certified Professional in Accessibility Core Competencies (CPACC) credential. Learn from our experts on the benefits of accessible design, what it means to be a certified CPACC professional, and why accessible experiences matter to your brand.",
+    "descriptionRendered": "O3 is proud to share our growing accessibility team and our expertise in the IAAP Certified Professional in Accessibility Core Competencies (CPACC) credential. Learn from our experts on the benefits of accessible design, what it means to be a certified CPACC professional, and why accessible experiences matter to your brand.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/o3s-expanding-accessibility-capabilities/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "O3’s expanding accessibility capabilities",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Congratulations to Erica Minton, Simone Dehel, and Emma Bartholomew on their CPACC certifications"
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>O3 is proud to announce our growing accessibility team.</h3>\n<p>The IAAP Certified Professional in Accessibility Core Competencies (CPACC) credential is IAAP’s foundational certification, representing broad, cross-disciplinary conceptual knowledge about</p>\n<ul>\n<li>Disabilities</li>\n<li>Accessibility and universal design</li>\n<li><span style=\"background-color: rgb(255 255 255/var(--tw-bg-opacity)); color: rgb(3 3 3/var(--tw-text-opacity));\">Accessibility-related standards, laws, and management strategies</span></li>\n</ul>\n<h3>Let’s hear from the experts themselves on this achievement and their process to get there.</h3>\n<h4>What was something you learned about throughout this process? (Emma)</h4>\n<p>Going through the CPACC certification process really expanded my understanding of who exactly benefits from accessible design. (Spoiler alert: it’s not just disabled folks.) Creating accessible experiences (both online and in the real world) is good for everyone, and leads to more intentional and elegant design in general.</p>\n<h4>What does it mean to be a certified CPACC professional? (Simone)</h4>\n<p>Being a certified CPACC professional not only means that you possess a broad understanding of disabilities, accessible + universal design and accessibility laws, standards + regulations; but that you also know how to incorporate this understanding in your work + your day-to-day life. Studying for + earning the CPACC has not only made me a better designer but has also made me a more empathetic person in general.</p>\n<h4>Why should accessible experiences matter to your brand? (Erica)</h4>\n<p>Designing without accessibility in mind means excluding a large amount of the population. One in four adults in the United States have a disability and, if it is the kind of disability that limits their access to your products, you could be losing out on them as a customer. Accessible experiences don’t just mean your website is able to be used by those with disabilities. Following universal design principles means your website is a great experience for all visitors and also happens to help SEO, boosting your audience further.</p>\n<p>Today, it’s estimated that companies without accessible sites are losing $6.9 billion a year to competitors whose sites are accessible. However, despite the growing number of accessibility lawsuits, many businesses have been slow to adopt an accessibility strategy. O3 is a leading consultancy in the accessibility space and has a team of certified experts who create and improve experiences to consider and account for all users. We’ve already transformed and improved accessibility capabilities for countless brands. <a href=\"https://www.o3world.com/contact/\">Contact us today</a> to learn more.</p>\n"
+      }
+    ],
+    "related_articles": [
+      5173,
+      7287,
+      3485,
+      6194
+    ],
+    "author": ""
+  }
+}

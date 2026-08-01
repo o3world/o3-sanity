@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:25.429Z"
+  },
+  "wpId": 838,
+  "slug": "three-trends-shaping-successful-digital-product-experiences",
+  "title": "Three trends shaping successful digital product experiences",
+  "dateGmt": "2018-04-24 19:49:29",
+  "modifiedGmt": "2023-02-02 20:38:35",
+  "authorId": 16,
+  "categoryIds": [
+    7,
+    8
+  ],
+  "excerpt": "SXSW Interactive, one of the biggest, most dynamic conferences of the year, left us inspired and motivated for the tech that is to come. As we’ve now closed out the first business quarter of the year, find out what trends came out of SXSW and are slated to be hot over the next few months.",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-16.jpg",
+    "alt": "Red pattern"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Three trends shaping successful digital product experiences | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/three-trends-shaping-successful-digital-product-experiences/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3 class=\"h5\">1) Product Thinking</h3>\n<p>What’s now being considered as the the core of the new economy, “product thinking” is a holistic view of how we approach product development. It encompasses UX, but also considers the business drivers, market and marketing opportunities as well as technical realities the product team needs to consider.</p>\n<p>Successful products exist at the intersection of strategy (viability), UX (desirability), engineering (feasibility) and marketing (marketability). Continually managing the complexity of these four quadrants is necessary in order to create a truly successful product, make it more impactful, and efficiently prioritize resources and dollars.</p>\n<p>Combined, this should imply that we’re thinking bigger than a single website or app or experience. The connected fabric of the complete customer experience across an entire digital ecosystem requires a business-centric view of problem solving in order to address the complex, ever-evolving experience.</p>\n<h3 class=\"h5\">2) Conversational Design</h3>\n<p>Voice is an interaction tool that is becoming more and more common. Five years ago, one in 10 search queries were voice activated, today it’s more like one in five. As this trends persists, there will be a large focus and need to design the right conversation.</p>\n<p>Voice can not only solve the complex, but it can deliver a much quicker answer. What gets tricky is how we, as designers, craft a response that mirrors the natural interactions we’d have with one another. Being concise and delivering the best response is key to every successful interaction.</p>\n<p><em>When designing for voice, it’s important to consider:</em></p>\n<ul>\n<li>The Tools AvailableIn addition to the speaker, we can and should consider supporting tools on the device. So, if it’s a phone, we have the ability to tap, type and view visuals as well. Other baked in functionalities like geolocation are also important. Keep in mind the rhythm and pace of speech matters as well.</li>\n<li>The Ecosystem MattersVoice is now moving from Alexa and Google Home into all device types. When designing experiences we need to consider a progressive experience as a user moves from less feature rich environments to more robust ones where voice and visuals are paired.</li>\n</ul>\n<h3 class=\"h5\">3) Responsible AI</h3>\n<p class=\"lead\">“Mark my words &#8211; AI is far more dangerous than nukes.” &#8211; Elon Musk</p>\n<p>Although we wouldn’t go that far, this quote speaks to the issue when developing these technologies: the need for regulation and responsible development. AI is more than just automating tasks, it’s about developing business solutions that work for your ecosystem, but they need to be done in a thoughtful way.</p>\n<p>When designing for AI, we need to make sure all customers are accounted for and considered. Real issues of technical bias exist. It’s our responsibility and in the best interest of clients to make sure these issues are considered and addressed. We also need to train these systems as we would teach a child what’s right and wrong. Developing a “value system” for AI is just as imperative as defining voice, tone, etc.</p>\n<p>As AI develops, it’s important to consider both the role and values of the AI we create. Thoughtful integration into our human systems is imperative to make sure we’re eliminating bias and being responsible. It needs to work with humanity, not against it.</p>\n<h3 class=\"h5\">Conclusion</h3>\n<p>As products and technologies continue to be at the core of our daily lives, the expectation and execution of building a successful experience, regardless of platform, is becoming harder to create. Wider considerations need to be established for designing and developing in the new product economy.</p>\n<p>It’s time everyone looks at the entire digital ecosystem and experience like we do: <em>across all products and services</em>. Thinking about taking the next step? Let’s chat about how we can work together, start by contacting us below.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Three trends shaping successful digital product experiences",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "SXSW Interactive, one of the biggest, most dynamic conferences of the year, left us inspired and motivated for the tech that is to come. As we’ve now closed out the first business quarter of the year, find out what trends came out of SXSW and are slated to be hot over the next few months."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      6192,
+      3444,
+      6185
+    ],
+    "author": ""
+  }
+}

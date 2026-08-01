@@ -1,0 +1,346 @@
+{
+  "_id": "perspective-wp-2950",
+  "_type": "perspective",
+  "title": "Project spotlight: Caron Treatment Centers - digital transformation in addiction treatment",
+  "slug": {
+    "_type": "slug",
+    "current": "project-spotlight-caron-treatment-centers-digital-transformation-in-addiction-treatment"
+  },
+  "excerpt": "Between product launches, iterative updates and new project kick-offs, agency life can get pretty busy. We do a lot of interesting and innovative work at O3 World, and we want to keep you up to date on what we’re doing for our clients. Here’s a glimpse into one of our latest projects.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-15",
+      "_key": "cat-15"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-11",
+      "_key": "cat-11"
+    }
+  ],
+  "publishedAt": "2019-11-05T18:38:23Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-4.jpg"
+    },
+    "alt": "Project spotlight: Caron Treatment Centers - digital transformation in addiction treatment"
+  },
+  "body": [
+    {
+      "_key": "k0001",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Who: Caron Treatment Centers",
+          "_key": "k0002"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Caron Treatment Centers",
+          "_key": "k0004"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " is a non-profit organization that specializes in addiction treatment. The organization was founded in 1957 when Richard J. Caron, a recovering alcoholic, and his wife, Catherine, opened their home to people in need of guidance and support in addiction recovery. The organization founded by the couple quickly became one of the first internationally recognized chemical dependency treatment centers in the United States.",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.caron.org/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Caron takes a fully comprehensive and unique approach to treating addiction and substance use disorders. Their holistic treatment methods focus on more than addiction. There’s also special attention paid to nutrition, exercise, mental health needs, neuro-science, and healing on a personal and spiritual level.",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Latest Update: Discovery Wrap-Up",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 World has a unique history with Caron —they were a client of ours over a decade ago. When Caron needed a partner to help re-imagine their existing digital strategy, they reached out to us again.",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We’re entering the beginning stages of our latest engagement with Caron, and we wrapped up one of the most important project phases: discovery. So much goes into a typical discovery process with our clients, and our engagement with Caron was no different.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our discovery process with Caron took a comprehensive look at Caron’s digital ecosystem and its impact on patients and their families, alumni, and staff.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "End Goals: Digital Transformation",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We go well beyond thinking about the website. When we work with our clients, we take their entire digital ecosystem into account and think about the best ways to improve their assets.",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Ultimately, we need to enrich the patient and family experiences and make them as frictionless as possible. We do this by not only adding new features and functionality to the site but also by finding ways to support the internal Caron team so they can better understand their patients.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "With Caron, we’re going to help take the patient experience beyond brochures and websites. We want to create something that adds value to prospective and existing patients, and also do something truly innovative in the addiction and healthcare space.",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The Process: Exploring Metrics and Patient Insights",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our goals were to better understand how individuals experience the website and Caron’s various digital properties, including any pain points and areas of opportunity, and to create a roadmap for the future aligned with Caron’s long-term strategic objectives.",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We took a look at some of Caron’s contemporaries but focused our in-depth efforts on exploring like-minded entities such as cancer treatment centers, hospitals, and wellness applications, so we could better understand trends in parallel industries. Exploring site analytics gave our team insights into important data like audience behavior and acquisition, user demographics, usage, and user flows.",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Another important part of the discovery process was getting feedback from former Caron alumni and their families. At Caron, the patient is the family and the family is the patient. We wanted to hear both kinds of stories in order to gain a comprehensive understanding of the patient journey.",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Conducting one-on-one interviews gave us more valuable insight into the patient experience. Reviewing and synthesizing all of the data we collected also allowed us to better understand anticipated behavior and project requirements.",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The Future",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Laying down a solid foundation through discovery is important, and this is simply the first step in a roadmap full of new features and optimizations. There are so many different ways we can use tech to improve the patient experience and help Caron provide outstanding services to patients and their families.",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A long term focus of ours will be on personalization, and how our planned digital transformation can be used to help gather more user data. Ultimately we want to create a seamless and unified experience across all digital experiences, whether that’s for patients currently in treatment or those in recovery seeking access to the tools that Caron uses to support their journeys.",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We’ll be sure to keep you up to date as new innovations and updates launch. Be sure to check out our blog for more news on our client projects.",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:2950",
+    "extractedAt": "2026-08-01T00:10:20.527Z"
+  }
+}

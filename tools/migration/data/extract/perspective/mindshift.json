@@ -1,0 +1,74 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:10.995Z"
+  },
+  "wpId": 3832,
+  "slug": "mindshift",
+  "title": "New webinar series reveals how to maximize the power of AI",
+  "dateGmt": "2020-09-08 18:17:11",
+  "modifiedGmt": "2023-02-02 18:45:01",
+  "authorId": 16,
+  "categoryIds": [
+    7,
+    8,
+    11
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/07/O3-website-imagery_-Insights-8.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "New webinar series reveals how to maximize the power of AI | O3",
+    "descriptionOverride": "Introducing a new webinar series to help marketers, product owners and digital strategists learn how to stay relevant in a fast changing world.",
+    "descriptionRendered": "Introducing a new webinar series to help marketers, product owners and digital strategists learn how to stay relevant in a fast changing world.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/mindshift/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>MindShift webinar series</h3>\n<p>We are facing an exciting shift: Intelligent technologies are advancing and disrupting the status quo in all areas of life. The way we work and do business is fundamentally changing. As marketers, product owners and digital strategists we must learn how to stay relevant in a fast changing world.</p>\n<p>The MindShift webinar series, hosted by O3, connects business leaders with experts and visionaries in the AI space. Tune in to gain the new skills needed to adapt and evolve by attending the first session, Maximize the Power of AI.</p>\n<h4>During this webinar, you&#8217;ll learn how to:</h4>\n<ul>\n<li>Take initiative and experiment with AI to make your customers’ lives better.</li>\n<li>Transform your organization’s data into your competitive advantage.</li>\n<li>Prove and show that your tech is set up in an ethical way.</li>\n<li>Deliver demonstrable business value from your data through unique AI solutions.</li>\n</ul>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "New webinar series reveals how to maximize the power of AI",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "The MindShift webinar series, hosted by O3, connects business leaders with experts and visionaries in the AI space."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      4658,
+      988,
+      4896,
+      4639
+    ],
+    "author": ""
+  }
+}

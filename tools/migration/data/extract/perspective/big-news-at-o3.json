@@ -1,0 +1,67 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:26.486Z"
+  },
+  "wpId": 10390,
+  "slug": "big-news-at-o3",
+  "title": "Big news at O3",
+  "dateGmt": "2025-12-17 21:16:25",
+  "modifiedGmt": "2025-12-18 19:49:54",
+  "authorId": 20,
+  "categoryIds": [
+    10
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2025/12/Handler-Sheller.jpg",
+    "alt": "Justin Handler and Christine Sheller"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Big news at O3 | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/big-news-at-o3/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "h2",
+      "title": "Big news at O3",
+      "heading_level": "h1",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "We’re excited to share two well-deserved promotions that position O3 for continued growth. Christine Sheller has been promoted to Chief Experience Officer, and Justin Handler has been promoted to Managing Director."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>Christine (5 years) and Justin (15 years) have each played an enormous role in O3’s growth and evolution over the years. Their commitment and leadership have had a lasting impact on the work we deliver, the relationships we build, and the culture that defines who we are.</p>\n<p>“This is almost a formality at this point, as their leadership internally and externally has been so impactful over the years,” says Co-Founder and CEO Keith Scandone. “They care deeply for the brand, culture, clients, and company—and it comes across in every touchpoint they have. Mike and I couldn’t be prouder of their growth and promotions, and we’re excited to see how these elevated roles help drive O3’s next chapter.”</p>\n<h3><strong>Christine Sheller: Chief Experience Officer</strong></h3>\n<p>Over the past five years, Christine has transformed O3’s approach to UX research and design. Not only in the work we deliver to clients but also in our own thought leadership and presence within the industry and community. Her influence has elevated both our craft and our perspective on experience design across the organization.</p>\n<p>In her new role as <strong>Chief Experience Officer</strong>, Christine will expand her impact beyond the design team and into client services, ensuring every interaction with O3 reflects the same thoughtfulness and quality we bring to our work.</p>\n<h3><strong>Justin Handler: Managing Director</strong></h3>\n<p>Justin has been a cornerstone of O3 for more than 15 years, playing an integral role in nearly every phase of our growth. He’s been instrumental in landing and managing key client relationships, while also helping to strengthen our internal operations from the ground up. His deep understanding of the business and steadfast commitment to the team have made him a trusted leader across the organization.</p>\n<p>As <strong>Managing Director</strong>, Justin will take on expanded operational responsibilities, ensuring O3 continues to scale thoughtfully while maintaining the quality and culture that define us.</p>\n<h3><strong>Driving O3’s next chapter together</strong></h3>\n<p>Together, Christine and Justin will work closely to shape O3’s next phase of growth, combining strategic leadership, operational excellence, and a shared commitment to creating meaningful experiences for both clients and employees. Their collaboration will be central to how O3 evolves over time.</p>\n<p>In addition to O3, the company will continue to expand its footprint through <strong>O3XO</strong>, our AI consultancy brand, and <strong>1682</strong>, our thought leadership and conference series, furthering our mission to drive innovation and connection across industries.</p>\n"
+      }
+    ],
+    "related_articles": "",
+    "author": ""
+  }
+}

@@ -21,6 +21,7 @@ import {
   ASSET_MAP,
   CONVERTED_DIR,
   MEDIA_CACHE,
+  MISSING_MEDIA,
   REPO_ROOT,
   SEED_DIR,
   TRANSLATED_DIR,
@@ -90,27 +91,103 @@ async function uploadLocalAsset(relativePath: string): Promise<string> {
 }
 
 /**
+ * Media that no longer exists on the WordPress server. Six years of posts
+ * outlive their uploads: an image referenced in a 2019 body can 404 today.
+ *
+ * Committed, like `assets.json`, and for the same reason — a run has to be
+ * reproducible. The first run that meets a dead URL records it and fails, so
+ * the loss is reviewed in a diff; from then on it is a known, silent skip and
+ * the load is green. That way "this image is gone" is a decision in git rather
+ * than a network condition the pipeline rediscovers every time.
+ */
+const missingMedia = new Set<string>(
+  existsSync(MISSING_MEDIA) ? (JSON.parse(readFileSync(MISSING_MEDIA, 'utf8')) as string[]) : [],
+)
+const newlyMissing = new Set<string>()
+
+/** Every `_wpSrc` URL in a document tree. */
+function mediaUrlsIn(node: unknown, found: Set<string> = new Set()): Set<string> {
+  if (Array.isArray(node)) {
+    for (const item of node) mediaUrlsIn(item, found)
+  } else if (node && typeof node === 'object') {
+    const obj = node as Record<string, unknown>
+    if (typeof obj._wpSrc === 'string') found.add(obj._wpSrc)
+    for (const value of Object.values(obj)) mediaUrlsIn(value, found)
+  }
+  return found
+}
+
+/**
+ * HEAD every not-yet-uploaded URL before writing anything, so one run reports
+ * every dead image instead of aborting on the first and making you discover
+ * them one restart at a time.
+ */
+async function preflightMedia(docs: readonly AnyDoc[]) {
+  const urls = [...mediaUrlsIn(docs)].filter((url) => !assetMap[url] && !missingMedia.has(url))
+  if (urls.length === 0) return
+
+  console.log(`checking ${urls.length} media URLs…`)
+  const CONCURRENCY = 12
+  let cursor = 0
+  await Promise.all(
+    Array.from({ length: Math.min(CONCURRENCY, urls.length) }, async () => {
+      while (cursor < urls.length) {
+        const url = urls[cursor++]!
+        try {
+          const res = await fetch(url, { method: 'HEAD' })
+          if (!res.ok) newlyMissing.add(url)
+        } catch {
+          newlyMissing.add(url)
+        }
+      }
+    }),
+  )
+
+  for (const url of newlyMissing) missingMedia.add(url)
+  if (newlyMissing.size > 0) {
+    writeFileSync(MISSING_MEDIA, JSON.stringify([...missingMedia].sort(), null, 2) + '\n')
+  }
+}
+
+/**
  * Recursively resolve image markers to real asset references: `_wpSrc` for a
- * WordPress URL, `_localSrc` for a repo-relative file.
+ * WordPress URL, `_localSrc` for a repo-relative file. A node whose media is
+ * gone from WordPress is dropped — an image block with no asset renders as a
+ * hole, which is worse than not rendering at all.
  */
 async function resolveAssets(node: unknown): Promise<unknown> {
-  if (Array.isArray(node)) return Promise.all(node.map(resolveAssets))
+  if (Array.isArray(node)) {
+    const items = await Promise.all(node.map(resolveAssets))
+    return items.filter((item) => item !== DROPPED)
+  }
   if (node && typeof node === 'object') {
     const obj = node as Record<string, unknown>
     const marker = typeof obj._wpSrc === 'string' ? '_wpSrc' : '_localSrc'
     if (typeof obj[marker] === 'string') {
       const source = obj[marker] as string
+      if (marker === '_wpSrc' && missingMedia.has(source)) return DROPPED
       const assetId =
         marker === '_wpSrc' ? await uploadAsset(source) : await uploadLocalAsset(source)
       const rest = Object.fromEntries(Object.entries(obj).filter(([k]) => k !== marker))
       return { ...rest, asset: { _type: 'reference', _ref: assetId } }
     }
     const out: Record<string, unknown> = {}
-    for (const [k, v] of Object.entries(obj)) out[k] = await resolveAssets(v)
+    for (const [k, v] of Object.entries(obj)) {
+      const resolved = await resolveAssets(v)
+      // A dropped image inside a `figure` takes the figure with it.
+      if (resolved === DROPPED) {
+        if (k === 'image') return DROPPED
+        continue
+      }
+      out[k] = resolved
+    }
     return out
   }
   return node
 }
+
+/** Sentinel for a node whose media no longer exists. */
+const DROPPED = Symbol('dropped')
 
 async function main() {
   const published = [...readTree(CONVERTED_DIR), ...readTree(SEED_DIR)]
@@ -144,6 +221,8 @@ async function main() {
   //
   // Assets upload outside the transaction — they are content-addressed and
   // re-uploading is a no-op, so a failed commit costs nothing but time.
+  await preflightMedia(all)
+
   const tx = client.transaction()
   let loaded = 0
   const skipped: string[] = []
@@ -166,6 +245,19 @@ async function main() {
   )
   if (skipped.length > 0) {
     console.log(`skipped ${skipped.length} locked: ${skipped.join(', ')}`)
+  }
+
+  if (newlyMissing.size > 0) {
+    console.error(
+      `\nMISSING MEDIA (${newlyMissing.size}) — gone from WordPress, dropped from the loaded documents:`,
+    )
+    for (const url of [...newlyMissing].sort()) console.error(`  ${url}`)
+    console.error(
+      `Recorded in ${MISSING_MEDIA}; review the diff, then re-run — they are a known skip from now on.`,
+    )
+    process.exitCode = 1
+  } else if (missingMedia.size > 0) {
+    console.log(`skipped ${missingMedia.size} known-missing media (data/missing-media.json)`)
   }
 
   await reportSlugCollisions()

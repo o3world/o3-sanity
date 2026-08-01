@@ -1,0 +1,470 @@
+{
+  "_id": "perspective-wp-2614",
+  "_type": "perspective",
+  "title": "Movers, shakers & innovators - 1682 speaker spotlight (Part 1)",
+  "slug": {
+    "_type": "slug",
+    "current": "movers-shakers-innovators-1682-speaker-spotlight-part-1"
+  },
+  "excerpt": "Take some time to get to know our speakers.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    }
+  ],
+  "publishedAt": "2019-09-17T01:36:16Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/07/O3-website-imagery_-Insights-8.jpg"
+    },
+    "alt": "Movers, shakers & innovators - 1682 speaker spotlight (Part 1)"
+  },
+  "body": [
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "When we first started to plan 1682, we envisioned creating a conference where leaders in business, design, and technology can come together and discuss the behind the scenes realities of innovation. We’re so proud of what our business of innovation conference has evolved into, and we truly have a phenomenal line-up of speakers and moderators planned for the day. We want to take the next few weeks to highlight who we have featured for the day. Here’s part one of our speaker line-up, be sure to check back for part 2!",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/Blog-eliza-1.jpg"
+      },
+      "alt": "1682 Speaker Eliza Pollack",
+      "_key": "k0006"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Eliza Pollack",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Company:",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " ",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "The City of Philadelphia",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\n",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Title:",
+          "_key": "k0014"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " Assistant Director of Innovation Strategy",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.phila.gov/departments/office-of-innovation-and-technology/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Eliza Pollack is the Assistant Director of Innovation Strategy for the City of Philadelphia, where she oversees initiatives that increase municipal government’s capacity for innovation and creative problem-solving. Eliza primarily manages a portfolio which includes the Innovation Academy, Lab, Fund and Consulting, a new initiative that leverages human-centered design to help municipal departments and external stakeholders solve challenges and think about their work in new ways.",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In recognition of her work around growing and supporting Philadelphia’s innovation ecosystem, Eliza was named 2019 Innovator of the Year by Rad Girls, an organization that honors inspirational women leaders in the fields of technology, media, culture science, and business.",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Prior to joining the City, Eliza worked at Project HOME; she studied history and religious studies at the University of Virginia, and subsequently received her Master’s degree in Public Policy from the University of Michigan.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/Blog-will-1.jpg"
+      },
+      "alt": "1682 speaker Will Toms",
+      "_key": "k0022"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Will Toms",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Company:",
+          "_key": "k0026"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " ",
+          "_key": "k0027"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "REC Philly",
+          "_key": "k0028"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\n",
+          "_key": "k0029"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Title:",
+          "_key": "k0030"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " Co-Founder & Chief Creative Officer",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.recphilly.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Will Toms is the Co-Founder & Chief Creative Officer of REC, serving as the visionary behind the company’s endeavors. Will’s experience guiding successful marketing efforts for artists such as Eminem, Ice Cube, and Pearl Jam has solidified his position as a true futurist. Powered by his innate innovative aptitude, Will’s dream is to scale REC’s model to span across international communities, establishing a network of independent creators that all have access to the resources, strategies and opportunities necessary to own their future.",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/1682-Speakers-Paul.jpg"
+      },
+      "alt": "1682 Speaker Paul Dehel",
+      "_key": "k0034"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Paul Dehel",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Company",
+          "_key": "k0038"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ": ",
+          "_key": "k0039"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Children’s Hospital of Philadelphia",
+          "_key": "k0040"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\n",
+          "_key": "k0041"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Title",
+          "_key": "k0042"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ": Venture & Innovation Manager",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.chop.edu/centers-programs/office-entrepreneurship-and-innovation"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0044",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Kelsey Oh is part of the Children’s Hospital of Philadelphia’s Office of Entrepreneurship & Innovation (OEI), which encourages an entrepreneurial spirit throughout the organization by identifying and promoting innovative solutions for pediatric healthcare broadly. She helps CHOP employees develop their ideas, challenge key assumptions, and build proof-of-concept products to test product viability, resulting in spinout companies, licensable assets, or alternative revenue streams for the institution.",
+          "_key": "k0045"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0046",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Before joining the OEI team in 2016, Kelsey managed an FDA-funded medical device consortium at CHOP, where she facilitated connections with medical device developers, hospital leadership, and the FDA to generate medical devices for pediatric patients. Prior to joining CHOP, she earned her degree in Biomedical Engineering, and worked in the medical device industry in Project Management and Clinical Research.",
+          "_key": "k0047"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/Blog-greg-1.jpg"
+      },
+      "alt": "1682 speaker Greg Willrich",
+      "_key": "k0048"
+    },
+    {
+      "_key": "k0049",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Greg Willrich",
+          "_key": "k0050"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0051",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Company",
+          "_key": "k0052"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ": ",
+          "_key": "k0053"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Vertex",
+          "_key": "k0054"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\n",
+          "_key": "k0055"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Title",
+          "_key": "k0056"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ": Director of Enterprise Incubation",
+          "_key": "k0057"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.vertexinc.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0058",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Greg Willrich is Vertex’s Director of Enterprise Incubation. He leads a business unit focused on disruption in the world of digital commerce, regulation and taxation. Still in its nascency, his team collaborates with an ever-growing network of customers, partners, and universities to run disciplined experiments with new business models and technologies. Greg has been with Vertex for fifteen years and served in a variety of strategic and operational roles.",
+          "_key": "k0059"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:2614",
+    "extractedAt": "2026-08-01T00:10:20.528Z"
+  }
+}

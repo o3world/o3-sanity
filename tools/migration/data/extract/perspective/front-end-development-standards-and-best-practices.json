@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:25.430Z"
+  },
+  "wpId": 796,
+  "slug": "front-end-development-standards-and-best-practices",
+  "title": "Front-end development standards and best practices",
+  "dateGmt": "2018-01-25 17:27:29",
+  "modifiedGmt": "2023-02-02 20:33:00",
+  "authorId": 16,
+  "categoryIds": [
+    8,
+    11
+  ],
+  "excerpt": "Front-end standards documentation has long been a goal of ours as an established team of development professionals. Today, we’re proud to introduce and share with everybody, O<sub>3</sub> World’s “Front-End (HTML & CSS) Coding Standards.”",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2020/07/O3-website-imagery_-Insights-20.jpg",
+    "alt": "Greyscale, interior of O3 office."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Front-end development standards and best practices | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/front-end-development-standards-and-best-practices/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>Front-End standards documentation has long been a goal of ours as an established team of development professionals. The pace of team member additions and new projects made this a priority at the tail end of 2017. Today, we’re proud to introduce and share with everybody, O3&#8217;s “Front-end (HTML &amp; CSS) coding standards.”</p>\n<h3 class=\"h5\">Why Documentation?</h3>\n<p>By documenting an agreed upon set of standards and best practices for our development team, we’re able to provide a consistent bar for development quality, making sure our code is formatted consistently (like one developer wrote it regardless of team size), and easily onboard team members.</p>\n<p>In addition, these standards and the maintenance of them is meant to spur discussion about process and the evolution of web standards &#8211; ultimately helping us be better developers and better code shepherds for each other and our clients.</p>\n<h3 class=\"h5\">Our Use</h3>\n<p>The efficiencies in having standards documentation are huge. Whether it be onboarding a developer to our team, adding a developer to a new project, or aiding in maintaining a high level of quality and consistency of code on a long term project with a large team, our development process has already benefited greatly by following these best practices.</p>\n<h3 class=\"h5\">The Benefits</h3>\n<p>We hope that you and your team learn from our standards and find ways to implement and evolve them to suit your development team’s needs. As we continue to refine our processes and our front-end best practices evolve, we’ll continue to update these standards.</p>\n<h4><a href=\"https://github.com/o3world/o3w-frontend-guidelines\" target=\"_blank\" rel=\"noopener noreferrer\">Check out the front-end guidelines repo</a>!</h4>\n<p>Were these best practices helpful? Are they something you could see your team using or do you have thoughts on how we can update them? Let us know how you’re using these standards to succeed by contacting us below!</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Front-end development standards and best practices",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Check out O3's front end our resources. "
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      4206,
+      3631,
+      3196,
+      5173
+    ],
+    "author": ""
+  }
+}

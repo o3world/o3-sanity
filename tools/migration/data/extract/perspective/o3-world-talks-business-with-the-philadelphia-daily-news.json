@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:30.200Z"
+  },
+  "wpId": 464,
+  "slug": "o3-world-talks-business-with-the-philadelphia-daily-news",
+  "title": "After 10 years in business, Keith Scandone discusses what’s next for O3 in the Philadelphia Daily News",
+  "dateGmt": "2015-11-17 12:42:47",
+  "modifiedGmt": "2023-01-30 18:38:14",
+  "authorId": 16,
+  "categoryIds": [
+    10
+  ],
+  "excerpt": "O<sub>3</sub> World CEO Keith Scandone sat down with the Philadelphia Daily News to discuss our past, present, and future.",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-16.jpg",
+    "alt": "Red pattern"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "After 10 years in business, Keith Scandone discusses what’s next for O3 in the Philadelphia Daily News | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/o3-world-talks-business-with-the-philadelphia-daily-news/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>Since launching as a brand communications firm in 2005, a lot has changed, but O<sub>3</sub> World’s leadership team has made evolution part of our business model. Now, as a digital product design and development agency, we’re celebrating our 10-year anniversary and forging ahead into the future.</p>\n<p>This fall, CEO <a href=\"/about/team/keith-scandone/\">Keith Scandone</a> sat down with the <em>Philadelphia Daily News</em> to discuss how far we’ve come after a decade in the business, what makes us successful, and what’s coming next. <a href=\"http://www.philly.com/philly/business/20151116_At_O3_World_in_Fishtown__the_game_plan_centers_on_innovation.html\" target=\"_blank\" rel=\"noopener noreferrer\">Check out the article online</a> or in the November 16 issue of the paper.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "After 10 years in business, Keith Scandone discusses what’s next for O3 in the Philadelphia Daily News",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Keith Scandone sat down with the Philadelphia Daily News to discuss how far we’ve come after a decade in the business, what makes us successful, and what’s coming next. Check out the article online or in the November 16 issue of the paper."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      4639,
+      4896,
+      3212,
+      3994
+    ],
+    "author": ""
+  }
+}

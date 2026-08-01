@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:32.181Z"
+  },
+  "wpId": 9671,
+  "slug": "beyond-barriers-reaching-untold-stories-through-synthetic-users",
+  "title": "Beyond barriers: reaching untold stories through Synthetic Users",
+  "dateGmt": "2025-01-08 16:39:43",
+  "modifiedGmt": "2025-02-20 20:29:06",
+  "authorId": 16,
+  "categoryIds": [
+    75
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2025/01/syntheticusers-1024x1024@2x.webp",
+    "alt": "Beyond barriers: reaching untold stories through Synthetic Users"
+  },
+  "seo": {
+    "titleOverride": "Unlock better user insights with Synthetic Users – An AI-powered research tool",
+    "titleRendered": "Unlock better user insights with Synthetic Users – An AI-powered research tool",
+    "descriptionOverride": "Discover how Synthetic Users, an AI-driven research platform, helps businesses and educators gain valuable user insights ethically and effectively when direct engagement isn't possible.",
+    "descriptionRendered": "Discover how Synthetic Users, an AI-driven research platform, helps businesses and educators gain valuable user insights ethically and effectively when direct engagement isn't possible.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/beyond-barriers-reaching-untold-stories-through-synthetic-users/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Beyond barriers: reaching untold stories through Synthetic Users",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Learn about how Synthetic Users offers a powerful AI-driven solution for both industry and academic research."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>While direct engagement with users is always the gold standard for research, there are times when speaking with real people isn&#8217;t possible. In these situations, <a href=\"https://www.syntheticusers.com/\">Synthetic Users</a> offers a powerful AI-driven solution for both industry and academic research.</p>\n<h2>What is Synthetic Users?</h2>\n<p>Synthetic Users is an advanced research platform that uses AI and natural language processing to generate synthetic user types that mimic real human behavior. Each synthetic user is underpinned by its own Five Factor Model (FFM) personality model, enabling realistic interactions through four distinct types of interviews.</p>\n<h2>How it works in practice</h2>\n<p>In business environments, Synthetic Users can transform how teams approach user research and product development. Product teams can leverage the platform to understand accessibility needs early in development, while designers can test usability assumptions. And emerging researchers can practice sensitive interview approaches, helping teams develop genuine empathy before engaging with real users.</p>\n<p>In academic settings, students can also use Synthetic Users to practice interview techniques without risking harm to vulnerable participants, helping develop inclusive approaches while building skills for handling sensitive topics.</p>\n<h2>Real-world applications</h2>\n<p>Over the past year, I&#8217;ve had the opportunity to introduce Synthetic Users into research methods in my teaching. The platform has enabled my students to explore sensitive research topics while developing their interviewing skills in a safe environment. Here are three examples that demonstrate how my students have used Synthetic Users to tackle complex research challenges:</p>\n<h4>1. Understanding users with disabilities</h4>\n<p>Many of my students using Synthetic Users gained meaningful insights into both offline and online challenges faced by users with disabilities. Conversations revealed perspectives about adaptive devices, interface preferences, and creative workarounds, going beyond standard accessibility guidelines.</p>\n<h4>2. Caregivers supporting children with cancer</h4>\n<p>One student conducting parallel research streams—real-life interviews with caregivers and Synthetic Users interviews—found that the product’s insights aligned remarkably closely with themes from real-world interviews. This demonstrated how the platform can provide reliable insights when direct access is limited.</p>\n<h4>3. Youth in underserved communities</h4>\n<p>Another student explored experiences of youth in underserved communities, focusing on after-school activities and home life. Through the platform, she gathered valuable perspectives about daily routines and family dynamics while maintaining appropriate research boundaries.</p>\n<h2>Balancing learning + reality</h2>\n<p>When conducting research with sensitive populations, we must balance our need to gather insights with ethical considerations and access limitations. Synthetic Users offers a middle ground where researchers can gain understanding while protecting vulnerable populations.</p>\n<h3>Guidelines for success</h3>\n<ul>\n<li>Use Synthetic Users to complement other primary and secondary research</li>\n<li>Leverage the platform for training and preliminary understanding of the interview process</li>\n<li>Update profiles regularly to maintain relevance and accuracy<br />\nCreate comprehensive interview guides to ensure effective synthetic interviews</li>\n</ul>\n<h2>Looking forward</h2>\n<p>As products and services need to serve increasingly diverse users, synthetic users offer a valuable tool for understanding perspectives we might otherwise miss. They help bridge the gap between assumption and understanding, whether in education or practice.</p>\n<p>Would you like to explore how Synthetic Users might work in your organization? I&#8217;d be interested in <a href=\"https://www.o3world.com/contact/\">hearing about your challenges</a> in understanding hard-to-reach users.</p>\n"
+      }
+    ],
+    "related_articles": [
+      9328,
+      8991,
+      8953
+    ],
+    "author": [
+      3984
+    ]
+  }
+}

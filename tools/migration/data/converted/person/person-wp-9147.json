@@ -1,0 +1,15 @@
+{
+  "_id": "person-wp-9147",
+  "_type": "person",
+  "name": "Brady Halligan",
+  "title": "Senior Strategist",
+  "headshot": {
+    "_type": "image",
+    "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/02/BradyHalligan.jpg"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:team:9147",
+    "extractedAt": "2026-08-01T00:20:48.161Z"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:06.746Z"
+  },
+  "wpId": 4609,
+  "slug": "philadelphia-urban-cowboys-x-o3",
+  "title": "Philadelphia urban cowboys x O3",
+  "dateGmt": "2021-09-07 20:16:13",
+  "modifiedGmt": "2023-02-02 18:13:14",
+  "authorId": 16,
+  "categoryIds": [
+    8,
+    10,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-4.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Philadelphia urban cowboys x O3 | O3",
+    "descriptionOverride": "PURA and O3 collaborate on empowering Black cowboys campaign to turn the PURA website into a more effective vehicle for fundraising.",
+    "descriptionRendered": "PURA and O3 collaborate on empowering Black cowboys campaign to turn the PURA website into a more effective vehicle for fundraising.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/philadelphia-urban-cowboys-x-o3/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>When most folks think of Philadelphia, they probably think of Rocky sprinting up the art museum steps, the cheesesteaks at Pat’s (or Geno’s) or a sea of Eagles fans rioting in the streets after winning the Superbowl. They probably don’t think of cowboys.</p>\n<p>Ricky Staub, founder of <a href=\"https://www.neighborhoodfilmco.com/\" target=\"_blank\" rel=\"noopener\">Neighborhood Film Co.</a>, wants to change that with his feature film, <a href=\"https://www.inquirer.com/entertainment/idris-elba-concrete-cowboy-philly-netflix-20210331.html\" target=\"_blank\" rel=\"noopener\"><em>Concrete Cowboy</em></a>. The movie stars Idris Elba as Harp, a modern-day cowboy whose estranged son, Cole, comes to live with him in Philadelphia. The film follows the development of their relationship against the backdrop of horses and riders in the heart of North Philadelphia. While Cole and Harp are both fictional characters, the history behind their story is real.</p>\n<h3>The battle against gentrification</h3>\n<p>Since the early 1900s, Black cowboys and cowgirls have kept and ridden their horses in the city of brotherly love. The stables and riding clubs that grew out of this tradition are a critical part of Black Philadelphia culture, providing community, connection and support for historically underserved neighborhoods. However, as the waves of gentrification overtake the city, the number of riding clubs grows smaller and smaller and it becomes harder for cowboys to keep their horses.</p>\n<p>The Fletcher Street Stable is one of the last remaining riding clubs in Philly, and until recently, it looked like the end was near. After receiving news that their original property was going to be developed, Fletcher Street leadership knew they needed to take steps to ensure that the stables stayed open for years to come.</p>\n<h3>Origin of PURA</h3>\n<p>Ricky and the riders of Fletcher Street came together in 2019 to establish the <a href=\"http://www.thepura.org/\" target=\"_blank\" rel=\"noopener\">Philadelphia Urban Riding Academy</a> (“PURA,” for short), a nonprofit organization dedicated to protecting the legacy of urban horsemanship in Philadelphia. By procuring that nonprofit status, PURA was able to get a land grant from the City of Philadelphia, a new home for Fletcher Street’s horses and riders.</p>\n<p>Now that they’ve got the land, PURA and Fletcher Street are in need of the financial support required to outfit and sustain the new facility: that’s where Concrete Cowboy comes in.</p>\n<h3>PURA and O3 collaborate on empowering Black cowboys campaign</h3>\n<p>Ricky and the board of PURA want to use Concrete Cowboy to raise awareness and drive financial support for Fletcher Street’s new stables. O3 got involved shortly after the release of the film, offering to use our expertise in brand strategy and customer experience consulting to turn the PURA website into a more effective vehicle for fundraising.</p>\n<p>As a first step toward strengthening its brand identity, PURA was interested in updating their design system, starting with their logo. They wanted something modern that would still convey the unique spirit of an urban riding organization; with that in mind, our designers created a fresh, simplified logo that includes a horseshoe and outline of the city skyline, an image that will grow with the organization for years to come.</p>\n<p>Our next step in helping PURA meet its $2M fundraising goal is building a microsite to drive traffic and encourage donations. This site will be an interactive timeline of PURA, Concrete Cowboy and the history of black urban cowboys in Philadelphia.</p>\n<p>Before embarking on development, we spent time with Ricky and Erin Brown, the executive director of PURA and original Concrete Cowgirl, to pull together the content for the timeline, weaving a cohesive narrative that includes a mixture of the Philadelphia history and personal biographies behind PURA.</p>\n<p>With our draft of the timeline in hand, we’re ready to proceed with design and development. Our hope is that, in a few months, PURA will have a totally unique, interactive digital experience that will support its mission and contribute to the preservation of this important Philadelphia legacy.</p>\n<p>Stay tuned for more; you won’t want to miss it.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Philadelphia urban cowboys x O3",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "The origin of Netflix's Concrete Cowboys film, PURA, empowering Black cowboys and cowgirls in Philadelphia. "
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      4658,
+      4118,
+      5120,
+      796
+    ],
+    "author": ""
+  }
+}

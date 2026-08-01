@@ -1,0 +1,467 @@
+{
+  "_id": "perspective-wp-7894",
+  "_type": "perspective",
+  "title": "O3's successful week of GAAD celebrations",
+  "slug": {
+    "_type": "slug",
+    "current": "o3s-successful-week-of-gaad-celebrations"
+  },
+  "excerpt": "O3 hosted a week-long of initiatives and events. We are striving to elevate accessibility standards and inspire a more inclusive world.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-63",
+      "_key": "cat-63"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2023-05-24T17:38:38Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/02/O3-website-imagery_-Perspectives-7.jpg"
+    },
+    "alt": "Accessibility"
+  },
+  "body": [
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 recently concluded its weeklong celebration of Global Accessibility Awareness Day (GAAD), emphasizing our ongoing dedication to accessibility and inclusivity in the digital world. As a company, we recognize the importance of ensuring equal access for all users, regardless of their abilities. Let’s take a look at the highlights of our GAAD celebrations and the exciting plans we had in store.",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "GAAD, established in 2011, has evolved into a crucial annual event in the tech industry, aimed at promoting accessibility and inclusivity in digital design and development. It serves as a platform to raise awareness about the importance of considering individuals with various disabilities, such as visual, auditory, motor, cognitive, and physical disabilities, when creating digital products and services.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our growing team of CPACC experts",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Accessibility is not just a part of our work at O3; it is a shared commitment among our team members to create inclusive digital experiences. We are proud to celebrate ",
+          "_key": "k0017"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "a growing team",
+          "_key": "k0018"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " of Certified Professionals in Accessibility Core Competencies (CPACC) experts who are passionate about making digital products accessible to all users. In conjunction with GAAD, both ",
+          "_key": "k0019"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Alan Cho",
+          "_key": "k0020"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and ",
+          "_key": "k0021"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Brian Crumley",
+          "_key": "k0022"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " have successfully completed 45 continuing education credits required for our International Association of Accessibility Professionals (IAAP) CPACC certifications. This achievement signifies their continued commitment to enhancing our expertise in accessibility, and we are thrilled to recognize Alan and Brian as a11y experts for the next three years. By continuously expanding our knowledge and staying up to date with the latest accessibility practices, we are better equipped to create inclusive solutions and foster an inclusive work environment.",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.o3world.com/perspectives/o3s-expanding-accessibility-capabilities/"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/aecho1231/"
+        },
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/briancrumley/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The weeklong GAAD celebration at O3",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "During GAAD, O3 had an array of exciting initiatives lined up to empower brands, our internal team, and individuals in creating inclusive digital experiences:",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Launch of an exciting new offering",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We were thrilled to announce the launch of a revolutionary ",
+          "_key": "k0031"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "accessibility solution",
+          "_key": "k0032"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " for our clients. This expansive offering will empower brands to create inclusive experiences and break down barriers. Stay tuned for further communication as we unveil this transformative solution.",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.o3world.com/services/accessibility-consulting-optimization/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Thought leadership on UI accessibility",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3’s CPACC expert, Simone Dehel, shared invaluable insights in her thought leadership piece titled “",
+          "_key": "k0037"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "Making your UI accessible for all users",
+          "_key": "k0038"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".” This comprehensive resource sheds light on practical strategies and best practices for designing inclusive user interfaces. Organizations seeking to enhance their accessibility efforts found this content to be a valuable asset.",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.o3world.com/perspectives/making-your-user-interface-ui-accessible-for-all-users/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Engaging O3 mini audio series",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0042",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "To provide expert insights and guidance, we prepared an engaging audio series featuring our CPACC accessibility experts. They addressed key questions related to digital accessibility, providing listeners with actionable advice and solutions.",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0044",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "What does GAAD mean to O3?",
+          "_key": "k0045"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\n",
+          "_key": "k0046"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0006"
+          ],
+          "text": "What is O3 doing to create a more accessible planet? ",
+          "_key": "k0047"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\n",
+          "_key": "k0048"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0007"
+          ],
+          "text": "Why should all companies value accessible experiences?",
+          "_key": "k0049"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.linkedin.com/feed/update/urn:li:activity:7066410170003722240"
+        },
+        {
+          "_key": "k0006",
+          "_type": "link",
+          "href": "https://www.linkedin.com/feed/update/urn:li:activity:7066767189688651778"
+        },
+        {
+          "_key": "k0007",
+          "_type": "link",
+          "href": "https://www.linkedin.com/feed/update/urn:li:activity:7065042795958333441"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0050",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Accessibility Roundtable discussion",
+          "_key": "k0051"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0052",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "On GAAD, Team O3 hosted an interactive internal Accessibility Roundtable discussion, bringing together experts and thought leaders in the accessibility field. We delved into the challenges, solutions, and opportunities that lie ahead. Check out the comprehensive ",
+          "_key": "k0053"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0008"
+          ],
+          "text": "summary of this enlightening conversation",
+          "_key": "k0054"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0055"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0008",
+          "_type": "link",
+          "href": "https://www.o3world.com/perspectives/o3s-accessibility-gaad-round-table-discussion/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0056",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0057",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0058",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In conclusion, O3’s weeklong GAAD celebrations showcased our commitment to accessibility and inclusivity. However, this impact and excitement must be top of mind throughout the rest of the year to drive change. By emphasizing the importance of creating digital experiences that cater to all users, we aim to foster a more equitable and inclusive digital landscape. ",
+          "_key": "k0059"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0009"
+          ],
+          "text": "Get connected with O3",
+          "_key": "k0060"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " as we continue to champion accessibility and introduce innovative solutions to empower brands and individuals in their pursuit of inclusivity.",
+          "_key": "k0061"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0009",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "Recap of our successful week, elevating accessibility standards and inspiring an inclusive world."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:7894",
+    "extractedAt": "2026-08-01T00:09:53.145Z"
+  }
+}

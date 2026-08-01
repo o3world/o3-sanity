@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:06.746Z"
+  },
+  "wpId": 4859,
+  "slug": "meet-the-team-madeline-jensen",
+  "title": "Meet the team: Madeline Jensen",
+  "dateGmt": "2022-01-25 19:27:55",
+  "modifiedGmt": "2023-02-01 01:32:43",
+  "authorId": 16,
+  "categoryIds": [
+    10
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2022/01/New-RGB-O3-website-imagery-4.jpg",
+    "alt": "Headshot, Madeline Jensen, Engineering Manager."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Meet the team: Madeline Jensen | O3",
+    "descriptionOverride": "We continue our Meet the Team blog series this week by chatting with one of the members of O3's talented engineering team, Madeline Jensen.",
+    "descriptionRendered": "We continue our Meet the Team blog series this week by chatting with one of the members of O3's talented engineering team, Madeline Jensen.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/meet-the-team-madeline-jensen/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>We are continuing our Meet the Team blog series this week with Madeline Jensen, O3’s newest engineering manager. Madeline came to O3 with a degree in information technology and a background as a developer. Her desire to inspire and support others has made her a valuable asset to the team.</p>\n<h3><b>What’s your role at O3?</b></h3>\n<p><span style=\"font-weight: 400;\">I am an Engineering Manager working to ensure the team and company processes grow. </span></p>\n<h3><b>What does your day-to-day look like?</b></h3>\n<p><span style=\"font-weight: 400;\">I am still relatively new to O3 so my routine is still in development but most days I participate in meetings with internal project teams and clients. I work closely with project owners, managers and clients to define the written requirements of projects. Additionally, I work with the development team, growing partnership opportunities and helping team members with certifications. For example, some of my colleagues are currently working on their Acquia certifications.</span></p>\n<h3><b>What’s your favorite part of the job?</b></h3>\n<p><span style=\"font-weight: 400;\">My favorite part of the job is supporting the team, supporting people. If I know that something I did during the day has made someone’s day, job or task easier, I am thrilled. It’s extremely rewarding to make a team member feel supported. </span></p>\n<h3><b>How did you get to where you are today?</b></h3>\n<p><span style=\"font-weight: 400;\">My career in the tech industry began in 2014 while I was working on my Bachelor&#8217;s of Science in Information Technology. Since then, I&#8217;ve had a variety of roles and have taken every opportunity made available to me. Having worked at other agencies at the start of my career, I gained experience across a variety of industry verticals including education, finance, commerce and government. All of this has led me to this exciting opportunity with O3!</span></p>\n<h3><b>Can you share some challenges and breakthroughs in launching your career?</b></h3>\n<p><span style=\"font-weight: 400;\">I started my career pretty young and being a young woman in the technology industry was not always easy. Having a company like O3 see my potential and give me an opportunity has been a huge step in my career. </span></p>\n<h3><b>What one piece of advice do you have for other engineers?</b></h3>\n<p><span style=\"font-weight: 400;\">Treat your non-technical skills, such as communication and organization, just like your technical skills. An engineer may spend hours investing in Javascript training and forget it&#8217;s equally important to invest in communication skills. As a hiring manager, these are skills that set you apart from the crowd.</span></p>\n<h3><b>What is the best piece of advice you ever received?</b></h3>\n<p><span style=\"font-weight: 400;\">The best piece of advice I ever received was to absorb time with managers and mentors. If you have an opportunity to meet with someone one-on-one, don&#8217;t be shy about asking questions.</span></p>\n<h3><b>We know you’re participating in the American Heart Association’s STEM Goes Red event in February, can you share more about that?</b></h3>\n<p><span style=\"font-weight: 400;\">Yes, I’m so excited to be participating in this! The American Heart Association is working to engage more women in STEM through STEM Goes Red, which will bring careers in science, technology, engineering and mathematics to life for young women. Students will gain access to leading employers and experts and have the chance to get an insider look at what they do. I’ll be able to provide a look behind the curtain to what it means to be an engineering manager and shed some light on what it’s like to be a woman in the tech industry. </span></p>\n<h3><b>When you’re not working, how do you like to spend your time?</b></h3>\n<p><span style=\"font-weight: 400;\">When I’m not working on awesome projects at O3, I love to read and paint &#8211; either digitally or with gouache paints. Every minute outside of work is with my family — my husband, my son and our giant three dogs &amp; kitty. </span></p>\n<h3><b>Do you have any book recommendations?</b></h3>\n<p><span style=\"font-weight: 400;\">My favorite book series is Tales of the Otori, a series of historical fantasy novels set in a fictional feudal Japan. I’ve re-read the entire series 3 times over the last decade. However, everyone has different taste in books. I recommend you push the books that truly intrigue you to the top of your list, rather than being bogged down by a list of ‘need to reads’.</span></p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Meet the team: Madeline Jensen",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "For the latest edition of our Meet the Team blog series, we asked Madeleine Jenson to take a break from her role as O3 Engineering Manager to ask about her career and the journey she took to become the amazing team member she is today."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      4625,
+      4948,
+      4859,
+      5038
+    ],
+    "author": ""
+  }
+}

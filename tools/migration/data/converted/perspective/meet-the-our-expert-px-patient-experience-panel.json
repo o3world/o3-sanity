@@ -1,0 +1,413 @@
+{
+  "_id": "perspective-wp-7487",
+  "_type": "perspective",
+  "title": "Meet O3's expert PX (patient experience) panel",
+  "slug": {
+    "_type": "slug",
+    "current": "meet-the-our-expert-px-patient-experience-panel"
+  },
+  "excerpt": "Have you registered for O3's webinar on March 29? You won't want to miss it. Read on to learn more about our esteemed panel.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2023-03-20T19:18:27Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/03/My-project-1-35.jpg"
+    },
+    "alt": "Meet O3's expert PX (patient experience) panel"
+  },
+  "body": [
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 is looking forward to a robust panel conversation on March 29 titled “Transforming health and wellness through CX: Best practices and strategies”. In anticipation of the event, let’s learn a little bit about our esteemed panel. ",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Register for the event",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.linkedin.com/events/transforminghealthandwellnessth7037152240570179584/comments/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Dr. Bon Ku is a true pioneer in healthcare design, having recognized the need for a more patient-centered approach to medicine, transforming the way medical professionals approach patient care. Joining him on the panel is Dr. Bonnie Offit, an expert in digital and telehealth initiatives. With a wealth of experience in pediatrics and digital health, Dr. Offit is focused on harnessing technology to improve healthcare delivery and empower patients to take charge of their health.",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Together, these two experts will offer valuable insights into the intersection of healthcare and design and the ways in which technology can be leveraged to improve patient outcomes.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Let’s meet the panel…",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/03/1650711880401.jpeg"
+      },
+      "alt": "Bon Ku",
+      "_key": "k0016"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\n",
+          "_key": "k0018"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Dr. Bon Ku ",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/drbonku/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Jefferson University",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.jefferson.edu/academics/colleges-schools-institutes/skmc/departments/emergency-medicine/faculty-staff/faculty/ku.html"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Assistant Dean, Health & Design, Director, IDeA Program, Director, Health Design Lab",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“As healthcare transitions from analog to digital, the need for designing human-centered experiences is critical for both patients, caregivers and clinicians.”",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Dr. Bon Ku is an emergency physician and healthcare design pioneer who is changing the way medical professionals think about patient care. Dr. Ku’s passion for design thinking in medicine began when he realized that traditional medical education did not adequately prepare him for the complexity of patient care. He recognized the need for a more human-centered approach to healthcare, one that placed the patient’s needs and experience at the forefront of medical decision-making.",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "To bridge this gap, Dr. Ku created the first design thinking program for medical students at Sidney Kimmel Medical College, where he is the Marta and Robert Adelson Professor of Medicine and Design, the associate dean for Health and Design, and a practicing emergency physician. Through this program, medical students are taught to think like designers, approaching patient care with empathy and creativity. Dr. Ku also directs Thomas Jefferson University’s Health Design Lab, a research group that explores the intersection of healthcare and design. The lab focuses on medical applications of 3D printing and the design of healthier communities, working to create innovative solutions for healthcare challenges.",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Dr. Ku’s groundbreaking work has not gone unnoticed. He has been featured in numerous media outlets, including the New York Times, CNBC, Architectural Digest, and Fast Company. He is an international speaker, sharing his insights and experiences at conferences and universities around the world, including SXSW, TEDx, and Yale School of Management. In addition to his work in healthcare design, Dr. Ku is a co-author of the book “Health Design Thinking: Creating Products and Services for Better Health” (2019), host of the “Design Lab” podcast, and a regular panelist on the primetime medical TV show “Chasing the Cure” with Ann Curry.",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Dr. Ku’s passion and expertise in healthcare design are transforming the way medical professionals approach patient care. His innovative approach to medicine is paving the way for a more patient-centered and creative healthcare system.",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/03/1561223351696.jpeg"
+      },
+      "alt": "Bonnie Offit",
+      "_key": "k0034"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Dr. Bonnie Offit",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/bonnieoffitmd/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "Self Care Decisions",
+          "_key": "k0038"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.selfcare.info/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0039",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Chief Innovation Officer",
+          "_key": "k0040"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0041",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“We all know that the patient journey has plenty of room for improvement, it always has. It starts from the moment we have a new symptom, a bad result on a test, then frantic online searching, finding a doctor or the appropriate level of care, making an appointment, getting to the appointment, or logging in, discussing treatment options, following up, all the way to making sure the bills are paid. Nearly every consumer of healthcare will be closing in on a tech-savvy age within the next 2 decades. Technology is the key driver in this journey; thus we must keep innovating despite the barriers. Baby steps compared to other industries but forward progress, nonetheless.”",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0043",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Dr. Bonnie Offit, a digital and telehealth advocate, is passionate about using technology to improve healthcare delivery and empowering patients to take charge of their health. Dr. Offit brings a wealth of experience to the conversation. She was recently a physician lead in the Office of Digital Health at Children’s Hospital of Philadelphia (CHOP) five years, where she played a pivotal role in scaling telehealth across all departments in response to the COVID-19 pandemic. During her time at CHOP, Dr. Offit also implemented a free school telehealth pilot program in an underserved school district.",
+          "_key": "k0044"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0045",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Dr. Offit has extensive experience in pediatrics and digital health initiatives, and she has brought her expertise to Self Care Decisions as the Chief Innovation Officer, where she is focused on harnessing technology to innovate and grow the company. As a telehealth provider, Dr. Offit understands and values the opportunity in digital health solutions. Among her highlights are extending the company’s triage symptom checker to provide diagnoses, enhancing its offerings for Epic’s App Orchard and other patient portals, supporting chatbot content delivery and configurations, and integrating symptom check encounters with telemedicine, call centers, and EMRs.",
+          "_key": "k0046"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0047",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In addition to her work in human healthcare, Dr. Offit has been involved with a novel solution for digital pet therapy. Dr. Offit is involved in multiple small businesses, which have been supplying retail markets and restaurants with seafood for four generations. She has also founded frozen yogurt shops, a food truck, a cafe, and more.",
+          "_key": "k0048"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0049",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We hope to see you at the webinar at 12 PM ET on March 29. If you have any questions regarding the event, please reach out to ",
+          "_key": "k0050"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "Maddie Boucher",
+          "_key": "k0051"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0052"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "mailto:maddieboucher@o3world.com"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:7487",
+    "extractedAt": "2026-08-01T00:09:57.656Z"
+  }
+}

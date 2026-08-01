@@ -1,0 +1,238 @@
+{
+  "_id": "perspective-wp-554",
+  "_type": "perspective",
+  "title": "As you’re making your plans for Philly Tech Week, keep an eye out for O3 World!",
+  "slug": {
+    "_type": "slug",
+    "current": "check-out-o3-world-at-philly-tech-week"
+  },
+  "excerpt": "You can find our team at a wide variety of events, both as speakers and as attendees. Here’s where we’re planning to be.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    }
+  ],
+  "publishedAt": "2016-04-25T20:43:44Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/08/O3-website-imagery_-Insights-6.jpg"
+    },
+    "alt": "O3 blue pattern"
+  },
+  "body": [
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "On Monday, May 2, O3 World Developer Courtney Wilburn will join a panel of Philadelphia’s tech and entrepreneurship community leaders to speak with Mayor Jim Kenney about his priorities and theirs when it comes to tech issues, including an open data policy, small business support, workforce development, and more.",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Register",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " to join the discussion!",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "http://tp.ticketleap.com/ptw16-mayoral-tech-town-hall/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If you’re looking to build a meaningful company culture, check out ",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "“Creating Culture with Purpose (The Marshmallow Challenge)”",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " – a conversation about how great company cultures are imagined, built, and maintained with purposeful planning. O3 World Partner and CEO Keith Scandone will join this Philly Tech Week panel at Leadnomics/Margo offices on Tuesday, May 3. Learn more about the panel, then register!",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "http://2016.phillytechweek.com/events/creating_culture_with_purpose-the_marshmallow_challenge"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Philly Tech Week hosts an afternoon of ",
+          "_key": "k0016"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "high-level dev talks",
+          "_key": "k0017"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " focused on problem-solving and innovative solutions on Wednesday, May 4. ",
+          "_key": "k0018"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Register",
+          "_key": "k0019"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " to hear from O3 World Developer Courtney Wilburn at the International House of Philadelphia.",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "http://2016.phillytechweek.com/events/dev_talks"
+        },
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://tp.ticketleap.com/ptw16dev/dates/May-04-2016_at_0830AM"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "To wrap up our #PTW16 participation, O3 World Developer Courtney Wilburn will join a Philly Tech Week panel discussion, ",
+          "_key": "k0022"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "#techInColor presents “Success Hacks: Paving Your Own Way in Tech.”",
+          "_key": "k0023"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " This popular free event, now in its third year, is tailored to underrepresented groups in the tech industry. ",
+          "_key": "k0024"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "Register",
+          "_key": "k0025"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " to join the discussion!",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "http://2016.phillytechweek.com/events/techincolor_presents_success_hacks--paving_your_own_way_in_tech"
+        },
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "http://www.meetup.com/TechInColor/events/229067303/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If you see us at these events or any others during Philly Tech Week, say hi!",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:554",
+    "extractedAt": "2026-08-01T00:10:30.199Z"
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "_id": "perspective-wp-567",
+  "_type": "perspective",
+  "title": "O3 wins “Best Places To Work” for 3rd year in a row!",
+  "slug": {
+    "_type": "slug",
+    "current": "o3-world-wins-best-places-to-work-for-3rd-year-in-a-row"
+  },
+  "excerpt": "See O3 World’s profile in the 2016 Best Places to Work list.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-1",
+      "_key": "cat-1"
+    }
+  ],
+  "publishedAt": "2016-08-31T21:18:10Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-4.jpg"
+    },
+    "alt": "O3 wins “Best Places To Work” for 3rd year in a row!"
+  },
+  "body": [
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 World has been named one of Philadelphia’s “",
+          "_key": "k0003"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Best Places to Work",
+          "_key": "k0004"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "” for the third year in a row by the Philadelphia Business Journal. The award honors the agency’s culture and innovation, as well as its growth and development in recent years.",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "http://www.bizjournals.com/philadelphia/news/2016/08/08/here-are-the-2016-best-places-to-work-in.html#g46"
+        }
+      ],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The list of small, medium, large and extra large companies honored by the Philadelphia Business Journal was determined by the results of employee surveys conducted by Quantum Workplace. O3 World is proud to have one of the highest employee survey scores among Philadelphia’s small business in 2016.",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "See ",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "O3 World’s profile",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " in the 2016 Best Places to Work list.",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "http://www.bizjournals.com/philadelphia/news/2016/08/08/here-are-the-2016-best-places-to-work-in.html#g46"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:567",
+    "extractedAt": "2026-08-01T00:10:30.199Z"
+  }
+}

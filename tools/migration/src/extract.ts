@@ -29,7 +29,17 @@ type WpPost = {
   fields: Record<string, unknown>
 }
 
-type WpUser = { wpId: number; slug: string; name: string; bio: string }
+type WpUser = { wpId: number; slug: string; name: string; email: string; bio: string }
+type WpTeamMember = {
+  wpId: number
+  slug: string
+  name: string
+  jobTitle: string
+  bio: string
+  photo: string
+  email: string
+  linkedin: string
+}
 type WpCategory = { wpId: number; slug: string; name: string; count: number }
 
 const args = process.argv.slice(2)
@@ -103,7 +113,7 @@ function extractUsers() {
   const users = wpEval<WpUser[]>(
     `$out = [];
 foreach (get_users() as $u) {
-  $out[] = ["wpId" => $u->ID, "slug" => $u->user_nicename, "name" => $u->display_name, "bio" => (string) get_user_meta($u->ID, "description", true)];
+  $out[] = ["wpId" => $u->ID, "slug" => $u->user_nicename, "name" => $u->display_name, "email" => $u->user_email, "bio" => (string) get_user_meta($u->ID, "description", true)];
 }
 echo json_encode($out);`,
   )
@@ -114,6 +124,49 @@ echo json_encode($out);`,
     })
   }
   return users.length
+}
+
+/**
+ * The `team` CPT (#17). Two jobs, not one:
+ *
+ * - It is the only place WordPress keeps a person's role and headshot. A WP
+ *   *user* carries a display name and an empty bio; everything else is here.
+ * - It is the **real byline**. Posts carry an ACF `author` field pointing at a
+ *   team post, and on 39 of the 40 posts that have one it names someone other
+ *   than `post_author` — the WP account is just whoever published.
+ *
+ * `post_status => any` because six of the referenced team posts are no longer
+ * published; a former employee is still the author of what they wrote.
+ */
+function extractTeam() {
+  const team = wpEval<WpTeamMember[]>(
+    `$out = [];
+foreach (get_posts(["post_type" => "team", "post_status" => "any", "numberposts" => -1]) as $p) {
+  $f = get_fields($p->ID);
+  $headshot = is_array($f) && isset($f["headshot"]) && is_array($f["headshot"]) && isset($f["headshot"]["url"]) ? $f["headshot"]["url"] : "";
+  $thumb = get_post_thumbnail_id($p->ID);
+  $out[] = [
+    "wpId" => $p->ID,
+    "slug" => $p->post_name,
+    "name" => $p->post_title,
+    "jobTitle" => is_array($f) && isset($f["job_title"]) ? (string) $f["job_title"] : "",
+    "bio" => is_array($f) && isset($f["short_bio"]) ? (string) $f["short_bio"] : "",
+    "photo" => $headshot !== "" ? $headshot : ($thumb ? (string) wp_get_attachment_url($thumb) : ""),
+    "email" => is_array($f) && isset($f["email"]) ? (string) $f["email"] : "",
+    "linkedin" => is_array($f) && isset($f["linkedin"]) ? (string) $f["linkedin"] : "",
+  ];
+}
+echo json_encode($out);`,
+  )
+  for (const member of team) {
+    // Unpublished team posts can have an empty `post_name`; the id keeps the
+    // filename unique so a draft cannot overwrite a colleague.
+    writeJson(join(EXTRACT_DIR, 'team', `${member.slug || `id-${member.wpId}`}.json`), {
+      _meta: { type: 'team', source: SOURCE, extractedAt: new Date().toISOString() },
+      ...member,
+    })
+  }
+  return team.length
 }
 
 function extractCategories() {
@@ -167,7 +220,8 @@ const site = extractSiteSeo()
 const nMenus = extractChrome()
 const nPosts = extractPosts()
 const nUsers = extractUsers()
+const nTeam = extractTeam()
 const nCats = extractCategories()
 console.log(
-  `done: ${nPosts} posts, ${nUsers} users, ${nCats} categories, ${nMenus} menus, site seo (${site.siteName}) → ${EXTRACT_DIR}`,
+  `done: ${nPosts} posts, ${nUsers} users, ${nTeam} team, ${nCats} categories, ${nMenus} menus, site seo (${site.siteName}) → ${EXTRACT_DIR}`,
 )

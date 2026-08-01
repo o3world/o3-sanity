@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:26.486Z"
+  },
+  "wpId": 10427,
+  "slug": "building-the-plane-while-flying-it-the-race-to-name-ai-search-optimization",
+  "title": "Building the plane while flying it: The race to name AI search optimization",
+  "dateGmt": "2026-02-05 20:51:20",
+  "modifiedGmt": "2026-02-05 21:37:50",
+  "authorId": 20,
+  "categoryIds": [
+    75
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2026/02/Flying-the-plane.jpg",
+    "alt": "Young boy running through a field with a model airplane in his right hand."
+  },
+  "seo": {
+    "titleOverride": "AI Search Strategies for Digital Marketing Success %%page%% %%sep%% %%sitename%%",
+    "titleRendered": "AI Search Strategies for Digital Marketing Success | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/building-the-plane-while-flying-it-the-race-to-name-ai-search-optimization/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Building the plane while flying it: The race to name AI search optimization",
+      "heading_level": "h1",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "If you've been paying attention to the digital marketing world lately, you've probably noticed something strange. Experts are all talking about the same thing, but they can't seem to agree on what to call it."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>Welcome to the great acronym debate of the year, where even the professionals are still figuring this out as they go.</p>\n<p>AEO. GEO. GSO. LLMO. GAIO.</p>\n<h2>The acronym alphabet soup</h2>\n<p>According to recent industry analysis from <a href=\"https://digiday.com/media/wtf-are-geo-and-aeo-and-how-they-differ-from-seo/\">Digiday</a>, agencies, publishers, and marketers have adopted multiple different acronyms to describe the exact same trend:</p>\n<p><b>AEO (Answer Engine Optimization)</b> focuses on structuring content to appear as direct answers in Google&#8217;s AI Overviews, featured snippets, and voice search results.</p>\n<p><strong>GEO (Generative Engine Optimization)</strong> optimizes content for large language models like ChatGPT, Claude, and Perplexity to cite as trusted sources. Research from <a href=\"https://www.moccu.com/en/insights/generative-engine-optimization-geo/\">Moccu</a> suggests this is becoming the industry standard.</p>\n<p><strong>GSO (Generative Search Optimization)</strong> emphasizes understanding how brands are represented within AI-generated results and whether information is cited correctly.</p>\n<p>Industry professionals have also floated LLMO (Large Language Model Optimization), GAIO (Generative AI Optimization), and AI SEO. The field is so new that there&#8217;s currently no common taxonomy.</p>\n<h2>Everyone&#8217;s building the plane while flying it</h2>\n<p>Here&#8217;s the uncomfortable truth that many consultants won&#8217;t tell you: we&#8217;re all still figuring this out.</p>\n<p>When AI Overviews first started appearing in Google searches, SEO experts didn&#8217;t have a playbook. When ChatGPT began citing sources, content strategists didn&#8217;t have established best practices. Research from<a href=\"https://almcorp.com/blog/aeo-geo-benchmarks-2025-conductor-analysis-complete-guide/\"> Conductor, analyzing over 13,770 domains</a> found that the industry is just now establishing its first definitive benchmarks for this new landscape.</p>\n<p>The numbers tell the story. <a href=\"https://research.aimultiple.com/answer-engine-optimization/\">Over 60% of Google searches in 2024 resulted in zero clicks. Click-through rates for top-ranking content dropped by 34.5% in just one year. Gartner predicts traditional search engine volume will drop 25% by 2026.</a> The AI crawlers themselves are still &#8220;pretty crude&#8221; compared to traditional search engines, <a href=\"https://digiday.com/media/wtf-are-geo-and-aeo-and-how-they-differ-from-seo/\">according to industry experts.</a></p>\n<h2>Why working with a consultant matters more than ever</h2>\n<p>Everyone in AI is still figuring this out mid-flight, but working with consultants means you&#8217;re in the cockpit with experienced pilots rather than trying to read the manual alone at 30,000 feet.</p>\n<p>At O3XO, we&#8217;re not claiming to have all the answers. What we have is experience navigating these changes with dozens of clients, testing what works and what doesn&#8217;t, and staying current as platforms continuously evolve.</p>\n<p>Here&#8217;s what working with O3XO actually means:</p>\n<p><strong>Real-time learning applied to your business.</strong> While you&#8217;re running your company, we&#8217;re monitoring how AI systems evolve, testing strategies across multiple clients, and applying what works to your specific situation.</p>\n<p><strong>Avoiding expensive mistakes.</strong> We&#8217;ve already made many of the mistakes so you don&#8217;t have to. We know which &#8220;best practices&#8221; actually work and which are just recycled SEO advice that doesn&#8217;t translate to AI search.</p>\n<p><strong>Strategic flexibility.</strong> We&#8217;re not attached to any single acronym or approach. Whether the industry settles on AEO, GEO, or something entirely different, we can pivot your strategy accordingly.</p>\n<p><strong>Measurement that matters.</strong> We track AI share of voice, citation rates, brand mentions in generated content, and sentiment in AI responses—the KPIs that matter when users never click through but still engage with your brand.</p>\n<h2>What we know (and what we&#8217;re still learning)</h2>\n<p>Despite the uncertainty, some principles have emerged as consistently effective:</p>\n<p><strong>Question-based structure works.</strong> FAQ sections, descriptive subheadings phrased as questions, and concise direct answers perform well across all AI systems.</p>\n<p><strong>Authority and credibility matter more than ever.</strong> AI systems prioritize content with clear expertise, reputable citations, author credentials, and structured data.</p>\n<p><strong>Machine-readable context is essential.</strong> JSON-LD schema markup, clear entity definitions, and consistent brand representation help AI systems understand and trust your content enough to cite it.</p>\n<p><strong>Multi-platform presence pays off.</strong> <a href=\"https://almcorp.com/blog/aeo-geo-benchmarks-2025-conductor-analysis-complete-guide/\">Research shows</a> what works for ChatGPT generally improves performance on Perplexity, Claude, and other AI platforms because they share underlying principles.</p>\n<p>But we&#8217;re also learning new things every week. The field is genuinely dynamic in ways traditional SEO never was.</p>\n<h2>The bottom line</h2>\n<p>Yes, the industry is still debating what to call AI search optimization. Yes, the best practices are evolving rapidly. Yes, even the experts are building the plane while flying it.</p>\n<p>But that&#8217;s exactly why working with O3XO matters.</p>\n<p>You wouldn&#8217;t pioneer across the Rocky Mountains without a guide just because the guide doesn&#8217;t know every boulder and stream. You&#8217;d want someone who&#8217;s made the journey before, knows how to read the terrain, and can help you avoid the mistakes that cost other pioneers their wagons.</p>\n<p>The digital landscape is being redrawn right now. AI search represents one of the greatest opportunities of our generation for brand visibility. But only if you&#8217;re positioned to capitalize on it.</p>\n<p>At O3XO, we&#8217;re actively working in this space every day, learning what works through real client implementations, and building the plane while we fly it alongside our partners.</p>\n<p>The question isn&#8217;t whether you should optimize for AI search—the data makes it clear that&#8217;s no longer optional. The question is whether you want to figure it out alone or with an experienced guide by your side.</p>\n<p>Ready to start your journey into AI search optimization? Let&#8217;s build something together.</p>\n<p>Contact O3XO today to discuss how we can help position your brand for success in the age of AI-powered search, regardless of what acronym wins out in the end.</p>\n"
+      }
+    ],
+    "related_articles": [
+      10304,
+      9224,
+      8522
+    ],
+    "author": [
+      7533
+    ]
+  }
+}

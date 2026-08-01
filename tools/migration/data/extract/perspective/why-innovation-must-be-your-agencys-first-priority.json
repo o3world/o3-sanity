@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:15.486Z"
+  },
+  "wpId": 3564,
+  "slug": "why-innovation-must-be-your-agencys-first-priority",
+  "title": "Why innovation must be your agency's first priority",
+  "dateGmt": "2020-06-25 20:53:41",
+  "modifiedGmt": "2023-02-02 18:57:20",
+  "authorId": 16,
+  "categoryIds": [
+    15,
+    8
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/05/O3-website-imagery_-Insights-12.jpg",
+    "alt": "Ascending up the stairs at the O3 office."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Why innovation must be your agency's first priority | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/why-innovation-must-be-your-agencys-first-priority/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Keith Scandone, O<sub>3</sub> World’s CEO and co-founder, wrote for MarketingProfs about how rapid adaptation and innovation will be indispensable for thriving agencies in the 21st century.</h3>\n<p>Even if your agency has been around for years and works with staid clients, it must learn how to stay hungry. <span style=\"background-color: rgb(255 255 255/var(--tw-bg-opacity)); color: rgb(3 3 3/var(--tw-text-opacity));\">Staying hungry like a startup keeps organizations nimble, and fostering a culture of collaboration allows new ideas to flow from all directions.</span></p>\n<p>At O<sub>3</sub> World, we implemented a <a href=\"https://www.o3world.com/labs/\">Labs program</a> to encourage innovative teamwork and experimentation. Building a culture of inquiry in a collaborative environment attracts the kind of creative team players an agency needs.</p>\n<p>&nbsp;</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Why innovation must be your agency's first priority",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Check out how O3 is leading in innovation. "
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      2942,
+      796,
+      3485,
+      3915
+    ],
+    "author": ""
+  }
+}

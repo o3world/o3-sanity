@@ -1,0 +1,300 @@
+{
+  "_id": "perspective-wp-10339",
+  "_type": "perspective",
+  "title": "Introducing O3XO: O3’s new AI consulting brand",
+  "slug": {
+    "_type": "slug",
+    "current": "o3xo-ai-consulting"
+  },
+  "excerpt": "AI doesn’t have to be overwhelming. Start smart, prove ROI and scale confidently with O3’s new service, O3XO.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-18"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-75",
+      "_key": "cat-75"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-1",
+      "_key": "cat-1"
+    }
+  ],
+  "publishedAt": "2025-10-08T15:59:34Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/10/O3XO-Logo-1-e1759869357738.jpg"
+    },
+    "alt": "O3XO Logo"
+  },
+  "body": [
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "I’m excited to share something we’ve been working on behind the scenes for quite some time: O3’s AI services are evolving under a new name… introducing ",
+          "_key": "k0003"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "O3XO",
+          "_key": "k0004"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.o3xo.ai"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What O3XO is",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3XO combines hands-on AI expertise with strategic guidance to deliver real results. Inspired by the exosphere (the outermost layer of Earth’s atmosphere) O3XO helps you rise above the crowded AI landscape and navigate toward clearer, high-impact opportunities.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What O3XO means for you",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Simply put: It’s the same trusted service from O3 under a new name. This transition allows us to now sharpen our focus internally, so we can keep delivering AI solutions that build your team’s skills, drive measurable results and scale responsibly.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "If you’re a current O3 customer using AI",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Nothing changes. Your projects, contracts, pricing, and support remain the same. What’s new is a refined approach from us to keep strengthening your team’s skills, demonstrate ROI, and help you scale with confidence.",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "If you’re not currently using our AI solutions",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This is your opportunity. With more than 20 years of digital transformation experience, we’ll help you move beyond pressure to “adopt AI” and turn it into a true competitive advantage. Our human-looped solutions are built to deliver quick wins, deepen your internal capabilities, and grow sustainably.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Who to contact",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If you’re a current client of ours, please reach out to your existing project manager or account contact who is ready to help.",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If you’re not yet working with us and would like to explore how we can support your business innovation goals, please ",
+          "_key": "k0027"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "get in touch",
+          "_key": "k0028"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.o3xo.ai/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We’re excited for this next chapter. With O3XO, we’re doubling down on what matters most – helping you unlock AI’s potential in ways that drive real, measurable performance.",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Looking forward to moving into AI’s next frontier…together.",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Mike Gadsby\nCo-Founder / Chief Innovation Officer, O3",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Introducing new ROI-driven AI consulting service O3XO",
+    "description": "O3XO by O3 offers expert AI consulting to help organizations strengthen teams, drive ROI, and scale digital transformation with confidence."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:10339",
+    "extractedAt": "2026-08-01T00:09:26.487Z"
+  }
+}

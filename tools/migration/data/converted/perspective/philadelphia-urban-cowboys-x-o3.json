@@ -1,0 +1,320 @@
+{
+  "_id": "perspective-wp-4609",
+  "_type": "perspective",
+  "title": "Philadelphia urban cowboys x O3",
+  "slug": {
+    "_type": "slug",
+    "current": "philadelphia-urban-cowboys-x-o3"
+  },
+  "excerpt": "The origin of Netflix's Concrete Cowboys film, PURA, empowering Black cowboys and cowgirls in Philadelphia.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-1",
+      "_key": "cat-1"
+    }
+  ],
+  "publishedAt": "2021-09-07T20:16:13Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-4.jpg"
+    },
+    "alt": "Philadelphia urban cowboys x O3"
+  },
+  "body": [
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "When most folks think of Philadelphia, they probably think of Rocky sprinting up the art museum steps, the cheesesteaks at Pat’s (or Geno’s) or a sea of Eagles fans rioting in the streets after winning the Superbowl. They probably don’t think of cowboys.",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Ricky Staub, founder of ",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Neighborhood Film Co.",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", wants to change that with his feature film, ",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001",
+            "em"
+          ],
+          "text": "Concrete Cowboy",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". The movie stars Idris Elba as Harp, a modern-day cowboy whose estranged son, Cole, comes to live with him in Philadelphia. The film follows the development of their relationship against the backdrop of horses and riders in the heart of North Philadelphia. While Cole and Harp are both fictional characters, the history behind their story is real.",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.neighborhoodfilmco.com/"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.inquirer.com/entertainment/idris-elba-concrete-cowboy-philly-netflix-20210331.html"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The battle against gentrification",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Since the early 1900s, Black cowboys and cowgirls have kept and ridden their horses in the city of brotherly love. The stables and riding clubs that grew out of this tradition are a critical part of Black Philadelphia culture, providing community, connection and support for historically underserved neighborhoods. However, as the waves of gentrification overtake the city, the number of riding clubs grows smaller and smaller and it becomes harder for cowboys to keep their horses.",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The Fletcher Street Stable is one of the last remaining riding clubs in Philly, and until recently, it looked like the end was near. After receiving news that their original property was going to be developed, Fletcher Street leadership knew they needed to take steps to ensure that the stables stayed open for years to come.",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Origin of PURA",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Ricky and the riders of Fletcher Street came together in 2019 to establish the ",
+          "_key": "k0020"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Philadelphia Urban Riding Academy",
+          "_key": "k0021"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " (“PURA,” for short), a nonprofit organization dedicated to protecting the legacy of urban horsemanship in Philadelphia. By procuring that nonprofit status, PURA was able to get a land grant from the City of Philadelphia, a new home for Fletcher Street’s horses and riders.",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "http://www.thepura.org/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Now that they’ve got the land, PURA and Fletcher Street are in need of the financial support required to outfit and sustain the new facility: that’s where Concrete Cowboy comes in.",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "PURA and O3 collaborate on empowering Black cowboys campaign",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Ricky and the board of PURA want to use Concrete Cowboy to raise awareness and drive financial support for Fletcher Street’s new stables. O3 got involved shortly after the release of the film, offering to use our expertise in brand strategy and customer experience consulting to turn the PURA website into a more effective vehicle for fundraising.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As a first step toward strengthening its brand identity, PURA was interested in updating their design system, starting with their logo. They wanted something modern that would still convey the unique spirit of an urban riding organization; with that in mind, our designers created a fresh, simplified logo that includes a horseshoe and outline of the city skyline, an image that will grow with the organization for years to come.",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our next step in helping PURA meet its $2M fundraising goal is building a microsite to drive traffic and encourage donations. This site will be an interactive timeline of PURA, Concrete Cowboy and the history of black urban cowboys in Philadelphia.",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Before embarking on development, we spent time with Ricky and Erin Brown, the executive director of PURA and original Concrete Cowgirl, to pull together the content for the timeline, weaving a cohesive narrative that includes a mixture of the Philadelphia history and personal biographies behind PURA.",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "With our draft of the timeline in hand, we’re ready to proceed with design and development. Our hope is that, in a few months, PURA will have a totally unique, interactive digital experience that will support its mission and contribute to the preservation of this important Philadelphia legacy.",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Stay tuned for more; you won’t want to miss it.",
+          "_key": "k0038"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "PURA and O3 collaborate on empowering Black cowboys campaign to turn the PURA website into a more effective vehicle for fundraising."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:4609",
+    "extractedAt": "2026-08-01T00:10:06.746Z"
+  }
+}

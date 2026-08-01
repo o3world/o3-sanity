@@ -126,9 +126,10 @@ describe('committed conversion output', () => {
   it('records provenance on every document so a doc traces back to WordPress', () => {
     for (const { file, doc } of all) {
       const migration = doc.migration as { sourceId?: string; extractedAt?: string }
-      // Documents are keyed by WordPress id; the siteSettings singleton has
-      // no id of its own — it is assembled from menus and the options page.
-      expect(migration.sourceId, file).toMatch(/^wp:(post|term|user):\d+$|^wp:site:chrome$/)
+      // Documents are keyed by WordPress id. `wp:team:` is a person who
+      // never had a WP account (#17); the siteSettings singleton has no id of
+      // its own — it is assembled from menus and the options page.
+      expect(migration.sourceId, file).toMatch(/^wp:(post|term|user|team):\d+$|^wp:site:chrome$/)
       expect(migration.extractedAt, file).toMatch(/^\d{4}-\d{2}-\d{2}T/)
     }
   })

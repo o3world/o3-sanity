@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:32.178Z"
+  },
+  "wpId": 10133,
+  "slug": "ax-101-designing-ai-agent-experiences",
+  "title": "AX 101: Designing for the age of AI agents",
+  "dateGmt": "2025-04-23 18:11:19",
+  "modifiedGmt": "2025-04-23 18:11:19",
+  "authorId": 16,
+  "categoryIds": [
+    75
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2025/04/AX.jpg",
+    "alt": "AX 101: Designing for the age of AI agents"
+  },
+  "seo": {
+    "titleOverride": "AI Agent design for enhanced user experiences",
+    "titleRendered": "AI Agent design for enhanced user experiences",
+    "descriptionOverride": "Explore AI agent design and learn how to create experiences that empower users through contextual interactions and proactive assistance.",
+    "descriptionRendered": "Explore AI agent design and learn how to create experiences that empower users through contextual interactions and proactive assistance.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/ax-101-designing-ai-agent-experiences/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "AX 101: Designing for the age of AI agents",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "You've designed for humans. You've optimized for conversions. But now you're designing for... an AI sidekick? Yes! Welcome to the world of AX."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>Last week, as I was getting ready for my weekly commute to teach in Pasadena, my phone alerted me about unusual traffic and suggested leaving 15 minutes earlier. It wasn&#8217;t just a standard notification—it understood my routine and offered timely, personalized advice. That small moment of contextual awareness is what good AX looks like in everyday life.</p>\n<h3>What is AX?</h3>\n<p>AX, or agent experience, is the next evolution in experience design. It focuses on how users interact with agents—and how those agents act on behalf of users. These agents can be proactive, make decisions, and collaborate with people in ways traditional interfaces simply can’t. And as AI agents become more present in our lives, the quality of their experience—how intuitive, trustworthy, and helpful they are—will become increasingly more important too.</p>\n<h4>From UX to AX: a comparison</h4>\n<p>To understand what makes AX unique, let&#8217;s look at how it differs from traditional UX design and how we need to adapt our thinking when designing for AI-mediated interactions:</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone size-medium wp-image-10148\" role=\"img\" src=\"https://www.o3world.com/wp-content/uploads/2025/04/UXvsAX-2.svg\" alt=\"table highlighting differences between UX and AI\" width=\"640\" height=\"640\" /></p>\n<h3>What makes a great AX?</h3>\n<p>Designing a great AX means thinking beyond usability—it&#8217;s about crafting a relationship between the user and the agent. Here are some things to consider when designing for AX:</p>\n<h4>1. Clarity and communication</h4>\n<p>Agents need to communicate what they&#8217;re doing, why they&#8217;re doing it, and what&#8217;s coming next. That means surfacing reasoning, allowing for interruptions, and reducing surprise.</p>\n<p><em>Example: When a calendar agent proposes rescheduling a meeting: “I suggest moving this to Thursday because you typically block Wednesday afternoons for focused work.” This can help build trust by showing the reasoning behind the suggestion.</em></p>\n<h4>2. Personalization without the creep</h4>\n<p>Agents should remember preferences and adapt behavior over time, but with consideration for boundaries. Let users know what&#8217;s being remembered—and let them opt out.</p>\n<p><em>Example: A good recipe agent might notice you consistently substitute ingredients and ask, “I&#8217;ve noticed you often use olive oil instead of butter—would you like me to automatically suggest olive oil alternatives in future recipes?”</em></p>\n<h4>3. Co-piloting, not auto-piloting</h4>\n<p>Users should always feel in control. Agents should offer suggestions, confirmations, and easy ways to override decisions. This is especially important when dealing with sensitive tasks or high-stakes scenarios.</p>\n<p><em>Example: When drafting important emails, I do appreciate how Quillbot suggests improvements but always waits for my buy-in before implementing changes. It’s a “here&#8217;s what I think, but you decide” approach.</em></p>\n<h4>4. Multi-agent harmony</h4>\n<p>Most people are going to be interacting with multiple agents across different platforms. Agents shouldn&#8217;t compete or confuse; they should communicate across systems to avoid overload.</p>\n<p><em>Example: Imagine your fitness tracker agent communicating with your meal planning agent: &#8220;You burned 500 calories in your workout, so I&#8217;ve asked your meal planner to suggest a protein-rich recovery dinner.&#8221; This coordination can create a seamless experience across systems.</em></p>\n<h4>5. Consistent personality and tone</h4>\n<p>Agents aren&#8217;t just tools—they&#8217;re characters in the user&#8217;s journey. Their tone, behavior, and responses should feel natural and aligned with your brand, while avoiding over-personification that distracts or annoys.</p>\n<p><em>Example: I use two financial apps with very different agent personalities—one is extremely enthusiastic about savings and increases to my credit score (sometimes confetti is involved!), while the other is more reserved and professional. The enthusiastic one can sometimes feel inauthentic for something as serious as financial planning.</em></p>\n<h3>Why UX pros should care</h3>\n<p>UX designers + researchers are uniquely equipped to shape how agents integrate into our lives. We know how to advocate for people, simplify what’s complex, and create trust. As AI agents grow in power and presence, it&#8217;s our job to ensure they do so responsibly—and while maintaining those moments of delight.</p>\n<p>Just like how we once learned to design for mobile, now we&#8217;re learning to design for agents. It&#8217;s not about giving up control to the agent, it&#8217;s about creating new kinds of relationships—where humans are at the center empowered by the agents designed to serve them.</p>\n<p>How might the interfaces you&#8217;re designing today evolve when AI agents become the primary way users interact with your product? What human needs will stay constant even as technology changes?</p>\n<p>The age of AX is here. <a href=\"https://www.o3world.com/contact/\">Let&#8217;s make it a good one—together</a>!</p>\n"
+      }
+    ],
+    "related_articles": [
+      10044,
+      9671,
+      9595
+    ],
+    "author": [
+      3984
+    ]
+  }
+}

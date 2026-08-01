@@ -1,0 +1,15 @@
+{
+  "_id": "person-wp-7875",
+  "_type": "person",
+  "name": "Simone Dehel",
+  "title": "Senior Experience Designer",
+  "headshot": {
+    "_type": "image",
+    "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/05/Headshots-8.jpg"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:team:7875",
+    "extractedAt": "2026-08-01T00:20:48.162Z"
+  }
+}

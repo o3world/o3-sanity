@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:20.528Z"
+  },
+  "wpId": 2697,
+  "slug": "movers-shakers-innovators-1682-speaker-spotlight-part-2",
+  "title": "Movers, shakers & innovators - 1682 speaker spotlight (Part 2)",
+  "dateGmt": "2019-09-30 23:23:16",
+  "modifiedGmt": "2023-02-02 19:29:00",
+  "authorId": 16,
+  "categoryIds": [
+    7,
+    8
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/07/O3-website-imagery_-Insights-8.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Movers, shakers & innovators - 1682 speaker spotlight (Part 2) | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/movers-shakers-innovators-1682-speaker-spotlight-part-2/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>When we first started to plan 1682, we envisioned creating a conference where leaders in business, design, and technology can come together and discuss the behind-the-scenes realities of innovation. We&#8217;re so proud of what our business of innovation conference has evolved into, and we truly have a phenomenal line-up of speakers and moderators planned for the day. Here&#8217;s the second part of our series of posts on speakers and moderators.</p>\n<p><img decoding=\"async\" class=\"alignnone size-large wp-image-2702\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/1682-Speakers-Adam-1024x576.jpg\" alt=\"1682 speaker Adam Furtado\" width=\"100%\" /></p>\n<h3>Adam Furtado</h3>\n<p><strong>Company:</strong> <a href=\"https://kesselrun.af.mil/\">Kessel Run</a>, U.S. Air Force<br />\n<strong>Title:</strong> Lab Director</p>\n<p>Adam Furtado is the Lab Director &amp; Branch Chief for Kessel Run, a U.S. Air Force digital transformation initiative revolutionizing how the Air Force builds and delivers software. He leads a team of 200+ government disruptors who are changing the way the Department of Defense does business. Kessel Run has introduced agile and lean principles to the Air Force and navigated the complexities that come with rapid growth and is driving significant change within the world&#8217;s largest bureaucracy.</p>\n<p><img decoding=\"async\" class=\"alignnone size-large wp-image-2704\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/1682-Speakers-Edy-1024x576.jpg\" alt=\"1682 speaker Edy Liongosari\" width=\"100%\" /></p>\n<h3>Edy Liongosari</h3>\n<p><strong>Company:</strong> Accenture<br />\n<strong>Title:</strong> Chief Research Scientist and Managing Director</p>\n<p>Edy Liongosari is Accenture’s, Chief Research Scientist and Managing Director. In this capacity, he is responsible for the agenda and outcomes of Accenture Labs’ applied technology research across all seven global locations. The research defines the future for large enterprises, shapes the technology market, and creates strong business results for Accenture&#8217;s clients.</p>\n<p>Edy has been with Accenture for over 30 years. Prior to his current role, he lead the Systems and Platforms Research Group, which covers key technology areas such as the industrial internet of things, high-performance computing, model-driven DevOps, data engineering, services, and analytics.</p>\n<p>He also was the head of Accenture R&amp;D Labs in Bangalore, India for a number of years, where he led a global team of R&amp;D personnel to industrialize Accenture’s system development process. Edy and his team have received numerous patents and awards for innovation. A copy of his research work has also been placed in the Smithsonian’s permanent research collection. Edy has a Master’s in computer science from Indiana University.</p>\n<p><img decoding=\"async\" class=\"alignnone size-large wp-image-2705\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/1682-Speakers-Melissa-1024x576.jpg\" alt=\"1682 speaker Melissa Doran Rayer\" width=\"100%\" /></p>\n<h3>Melissa Doran Rayer</h3>\n<p><strong>Company:</strong> <a href=\"https://seic.com/\">SEI</a><br />\n<strong>Title:</strong> Director of Digital Consumer Strategy</p>\n<p>Melissa Doran Rayer is the Director of Digital Consumer Strategy at SEI. Leveraging over 30 years of experience in wealth management, financial planning, and product development at SEI, Melissa leads SEI’s effort to expand its direct-to-consumer business. She oversees the development and distribution of digital solutions based on investors’ diverse and unique needs. Melissa received her MBA in finance from Villanova University and her B.A. in economics and political science from Yale University.</p>\n<p><img decoding=\"async\" class=\"alignnone size-large wp-image-2703\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/1682-Speaker-Andy-1024x576.jpg\" alt=\"1682 speaker Andy Verone\" width=\"100%\" /></p>\n<h3>Andy Verone</h3>\n<p><strong>Company:</strong> <a href=\"https://www.oracle.com/index.html\">Oracle</a><br />\n<strong>Title:</strong> Global Vice President, Industry and Innovation Strategy</p>\n<p>Andy Verone is the Global Vice President for Oracle’s Construction and Engineering Global Business Unit responsible for Innovation and Industry Strategy globally. Andy is also the co-founder of Oracle’s Construction and Engineering innovation lab located in Chicago.</p>\n<p>Andy has over 30 years of executive and international business experience across the globe in the engineering and construction industry, including previously serving as Executive Vice President and Chief Information Officer at both Michael Baker International and Transfield Services (Broadspectrum).</p>\n<p>His background includes the implementation of global project-based information and delivery systems and knowledge management programs, as well as Board of Directors-level experience developing IT Strategic Plans and Governance programs. He also has managed large capital projects and government contracts.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Movers, shakers & innovators - 1682 speaker spotlight (Part 2)",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Here's the second part of our series of posts on speakers and moderators for the 1682 conference. "
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      3537,
+      4354,
+      5038,
+      4609
+    ],
+    "author": ""
+  }
+}

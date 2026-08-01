@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:37.820Z"
+  },
+  "wpId": 9124,
+  "slug": "o3-contribution-figma-slides-config-2024",
+  "title": "Shaping the future of presentation design with Figma",
+  "dateGmt": "2024-07-23 15:09:41",
+  "modifiedGmt": "2024-07-23 15:09:41",
+  "authorId": 16,
+  "categoryIds": [
+    61
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2024/07/Figma-1-1.jpg",
+    "alt": "Shaping the future of presentation design with Figma"
+  },
+  "seo": {
+    "titleOverride": "O3 is shaping the future of presentation design with Figma",
+    "titleRendered": "O3 is shaping the future of presentation design with Figma",
+    "descriptionOverride": "Learn about O3's key contributions to the development of Figma Slides, a tool introduced at Config 2024, through expert feedback and validation by Christine Sheller's design team.",
+    "descriptionRendered": "Learn about O3's key contributions to the development of Figma Slides, a tool introduced at Config 2024, through expert feedback and validation by Christine Sheller's design team.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/o3-contribution-figma-slides-config-2024/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Shaping the future of presentation design with Figma",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "O3's design expertise helped shape Figma Slides, a revolutionary presentation tool unveiled at Config 2024, redefining collaboration and creativity in design."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>Figma&#8217;s annual design conference, <a href=\"https://config.figma.com/?lang=en\">Config 2024</a>, is a highly anticipated event in the design community, unveiling a suite of features and updates. Among these innovations shared at this year’s conference is Figma Slides, a new toolset to revolutionize the way teams create narratives and present their work. O3 is proud to have played an important role in providing feedback about this tool, with our SVP, Experience Research + Design, <a href=\"https://www.linkedin.com/in/christine-sheller/\">Christine Sheller</a>, leading our team in alpha testing Figma Slides.</p>\n<h3>What is Figma?</h3>\n<p>Figma is a collaborative design tool that enables teams to streamline the creation and iteration of user interfaces and experiences. Its cloud-based platform facilitates real-time collaboration, making it easier for teams to align on design decisions, gather feedback, and deliver user-centric digital solutions efficiently.</p>\n<h3>Overview of Figma Slides</h3>\n<p><a href=\"https://www.figma.com/slides/\">Figma Slides</a> is a new presentation tool designed to integrate seamlessly with Figma’s design platform. It aims to transform traditional slide decks into interactive, visually stunning presentations.</p>\n<h4>Key features include:</h4>\n<ul>\n<li>Templates: offering a variety of templates to kickstart the design process</li>\n<li>Real-time collaboration: enabling multiple users to work on slides simultaneously</li>\n<li>Design mode: Allowing for extensive customization of slides</li>\n<li>AI-powered elements: features like auto-rewriting text and diverse styling options</li>\n<li>User engagement tools: interactive elements such as stamps and polls to enhance audience participation</li>\n</ul>\n<h3>O3’s role in alpha testing</h3>\n<p>O3 was honored to be selected as a trusted partner to alpha test Figma Slides, with Christine and her team providing critical feedback and insights into their experience using the product. Christine even visited Figma headquarters a few weeks before Config 2024 to film a testimonial, sharing what she loved about the new tool.</p>\n<h3>Excitement and trust</h3>\n<p>Being trusted to contribute to such an innovative and impactful tool was exciting for the O3 design team. This opportunity aligns with our values and mission to drive innovation in design and technology.</p>\n<p><em>&#8220;We are big fans of the Figma product suite and were thrilled to be invited to provide feedback on the new Slides product. It’s a fabulous tool that helps mitigate some of the pain points we’ve had in effectively presenting our designs. It was exciting to see the feedback we shared be incorporated into iterations of the product. This is why we love the Figma team most: they clearly value user feedback and build products that keep their users at the core of everything they do.&#8221;</em></p>\n<p><em>-SVP, Experience Research + Design, Christine Sheller</em></p>\n<p>&nbsp;</p>\n<p><iframe loading=\"lazy\" title=\"Why Designers love Figma Slides | Figma\" width=\"500\" height=\"281\" src=\"https://www.youtube.com/embed/w00XRYprOuw?list=PLXDU_eVOJTx7qh8vf8VjjXET0gZ50IHKx\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p>\n<h3>Reflections on Config 2024</h3>\n<p>Config 2024 was not only about Figma Slides; it also <a href=\"https://www.figma.com/blog/config-2024-recap/\">introduced other notable features like Figma AI and a redesigned interface (UI3)</a>. All of these updates show how dedicated Figma is to improving collaboration and expanding the limits of what’s possible with design. The conference highlighted the importance of community feedback and collaboration in driving innovation.</p>\n<h3>Looking ahead</h3>\n<p>Config 2024 demonstrated Figma&#8217;s commitment to pushing the boundaries of design through collaboration and innovation. O3 is proud to have contributed to these advancements and looks forward to seeing how these new tools will empower designers worldwide.</p>\n"
+      }
+    ],
+    "related_articles": [
+      8961,
+      9037,
+      9114
+    ],
+    "author": ""
+  }
+}

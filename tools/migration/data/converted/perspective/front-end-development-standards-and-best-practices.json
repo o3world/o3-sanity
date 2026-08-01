@@ -1,0 +1,196 @@
+{
+  "_id": "perspective-wp-796",
+  "_type": "perspective",
+  "title": "Front-end development standards and best practices",
+  "slug": {
+    "_type": "slug",
+    "current": "front-end-development-standards-and-best-practices"
+  },
+  "excerpt": "Check out O3's front end our resources.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-11",
+      "_key": "cat-11"
+    }
+  ],
+  "publishedAt": "2018-01-25T17:27:29Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2020/07/O3-website-imagery_-Insights-20.jpg"
+    },
+    "alt": "Greyscale, interior of O3 office."
+  },
+  "body": [
+    {
+      "_key": "k0001",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Front-End standards documentation has long been a goal of ours as an established team of development professionals. The pace of team member additions and new projects made this a priority at the tail end of 2017. Today, we’re proud to introduce and share with everybody, O3’s “Front-end (HTML & CSS) coding standards.”",
+          "_key": "k0002"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Why Documentation?",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "By documenting an agreed upon set of standards and best practices for our development team, we’re able to provide a consistent bar for development quality, making sure our code is formatted consistently (like one developer wrote it regardless of team size), and easily onboard team members.",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In addition, these standards and the maintenance of them is meant to spur discussion about process and the evolution of web standards – ultimately helping us be better developers and better code shepherds for each other and our clients.",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our Use",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The efficiencies in having standards documentation are huge. Whether it be onboarding a developer to our team, adding a developer to a new project, or aiding in maintaining a high level of quality and consistency of code on a long term project with a large team, our development process has already benefited greatly by following these best practices.",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The Benefits",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We hope that you and your team learn from our standards and find ways to implement and evolve them to suit your development team’s needs. As we continue to refine our processes and our front-end best practices evolve, we’ll continue to update these standards.",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Check out the front-end guidelines repo",
+          "_key": "k0018"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "!",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://github.com/o3world/o3w-frontend-guidelines"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Were these best practices helpful? Are they something you could see your team using or do you have thoughts on how we can update them? Let us know how you’re using these standards to succeed by contacting us below!",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:796",
+    "extractedAt": "2026-08-01T00:10:25.430Z"
+  }
+}

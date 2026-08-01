@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:57.658Z"
+  },
+  "wpId": 7287,
+  "slug": "digital-accessibility-resources",
+  "title": "O3's accessibility resources",
+  "dateGmt": "2023-02-22 17:52:08",
+  "modifiedGmt": "2023-05-12 16:42:34",
+  "authorId": 16,
+  "categoryIds": [
+    63
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/02/O3-website-imagery_-Perspectives-7.jpg",
+    "alt": "Accessibility"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "O3's accessibility resources | O3",
+    "descriptionOverride": "Looking to improve your website's digital accessibility? Check out O3's informative accessibility ebooks on making sense of digital accessibility, accessibility considerations for project management teams, and improving SEO through accessibility.",
+    "descriptionRendered": "Looking to improve your website's digital accessibility? Check out O3's informative accessibility ebooks on making sense of digital accessibility, accessibility considerations for project management teams, and improving SEO through accessibility.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/digital-accessibility-resources/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "O3's accessibility resources",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "As businesses continue to shift towards a more digital and technology-based approach, it is becoming increasingly important to ensure that all users can access and engage with your experience. By focusing on user-centered design and inclusive practices, O3 is helping to create a more equitable and accessible digital landscape for all individuals. Our team of CPACC certified experts has developed a set of useful guidelines to help get you started."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Ebook: Making sense of digital accessibility</h3>\n<p>Check out O3’s informative accessibility ebook. By both doing the right thing and broadening your audience, implementing an accessibility strategy is an asset to your business’ culture and sales. O3’s CPACC-certified accessibility experts have created this comprehensive ebook as your go-to resource.</p>\n<p><a href=\"https://www.o3world.com/wp-content/uploads/2023/01/Making-Sense-of-Accessibility-eBook-1.pdf\">Download ebook</a></p>\n<h3>Ebook: Accessibility considerations for project management teams</h3>\n<p>To help you get started, our CPACC-certified accessibility experts have crafted an accessibility essentials guide for project management teams to use as a reference.</p>\n<p><a href=\"https://www.o3world.com/perspectives/ebook-accessibility-for-pm-teams/\">Download ebook</a></p>\n<h3>Ebook: Improve SEO through accessibility</h3>\n<p>In this resource, we’ll explore the relationship between accessibility and SEO (Search Engine Optimization) to help companies better understand the positive impact accessibility considerations have when websites and digital experiences are designed to be accessible to all users.</p>\n<p><a href=\"https://www.o3world.com/perspectives/designing-for-accessibility-improving-ux-for-everyone/\">Download ebook</a></p>\n"
+      }
+    ],
+    "related_articles": [
+      3485,
+      6194,
+      4118,
+      5173
+    ],
+    "author": ""
+  }
+}

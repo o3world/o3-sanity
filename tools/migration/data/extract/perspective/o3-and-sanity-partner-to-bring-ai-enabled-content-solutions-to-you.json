@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:26.485Z"
+  },
+  "wpId": 10569,
+  "slug": "o3-and-sanity-partner-to-bring-ai-enabled-content-solutions-to-you",
+  "title": "O3 and Sanity partner to bring AI-enabled content solutions to you",
+  "dateGmt": "2026-04-21 19:14:53",
+  "modifiedGmt": "2026-05-07 16:06:48",
+  "authorId": 20,
+  "categoryIds": [
+    75
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2026/04/image.png",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "O3 and Sanity partner to bring AI-enabled content solutions to you | O3",
+    "descriptionOverride": "O3 has established an official relationship with Sanity to bring AI-enabled solutions for content management systems.",
+    "descriptionRendered": "O3 has established an official relationship with Sanity to bring AI-enabled solutions for content management systems.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/o3-and-sanity-partner-to-bring-ai-enabled-content-solutions-to-you/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "O3 and Sanity partner to bring AI-enabled content solutions to you",
+      "heading_level": "h1",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "We've been building on Sanity for over a year. This partnership makes it official — and we want to share why we think it matters right now."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>We&#8217;ve been building on <a href=\"https://www.o3world.com/perspectives/how-ai-can-enhance-your-content-management-system-cms/\">Sanity for over a year.</a> This partnership makes it official — and we want to share why we think it matters right now.</p>\n<p><strong>We&#8217;re excited to announce that O3 is now an official Sanity partner.</strong></p>\n<p>We’ve been looking for an AI-enabled content management system (CMS) that we can leverage to build digital products and solutions for our clients. Sanity isn&#8217;t a CMS in the traditional sense. It&#8217;s a Content Operating System built to perform.</p>\n<h2>Most enterprise marketing teams aren’t set up for AI yet</h2>\n<p>When talking to marketing leaders at mid-to-large organizations, I constantly hear the same thing. The team is capable and their strategies are solid, but getting content out the door is slow, painful, and dependent on a development queue that never clears.</p>\n<p>The CMS platforms that most enterprises are running today were built for a different era. One website, one team with the keys, and &#8220;go live&#8221; as the finish line. They often lack the capabilities and flexibility that enable content workflows and governance needed for marketing teams to move fast. Today&#8217;s marketing orgs need to publish across a dozen channels, personalize experiences across segments, support product teams, and move fast enough to stay relevant.</p>\n<p>Most legacy platforms can&#8217;t keep up, and it&#8217;s not a people problem, it&#8217;s a content infrastructure problem.</p>\n<h2>Sanity is built for how AI wants to work with content</h2>\n<p>Sanity&#8217;s approach is different in a meaningful way. It&#8217;s not a CMS in the traditional sense. Sanity calls it a Content Operating System, and the shorthand matters: content is treated as data rather than as pages, modeled once and delivered to any touchpoint: your website, your app, your commerce experience, your partner integrations, wherever the business needs it.</p>\n<p>For marketing and product leaders, that translates to real operational change. Your team gets editorial tools designed for speed and autonomy, with content workflows to match. Your content is no longer tied to a specific presentation layer. And your whole organization gets a single content source of truth that marketing, product, and commerce can all draw from. In my opinion, this content operating system is what will enable the future of content driven digital products.</p>\n<h2>AI strategy and content infrastructure are the same conversation</h2>\n<p>Every AI-powered experience we build depends on content that is structured and accessible. This enables features such as personalization at scale, intelligent content workflows, AI-assisted creation, connected cross-channel experiences. If your content is buried in a monolithic CMS with rigid templates and siloed data, your AI strategy has a ceiling before it even gets started. It’ll also limit your ability to move fast with A/B testing and content personalization that’s tied to customer data platforms (CDP).</p>\n<p>Sanity gives AI a structured, yet flexible content system to work within. The organizations that get their content infrastructure right now are going to move a lot faster on their AI roadmap. The ones that don&#8217;t are going to end up doing a painful and expensive retrofit later.</p>\n<p>We&#8217;ve seen older CMS with “bolt on” AI features that fail to deliver meaningful speed. With Sanity, their platform was built with AI in mind, so you’re set up right from the start including features such as Content Agents, MCP, agent actions etc.</p>\n<p><em>&#8220;There&#8217;s no shortage of headless CMS options in 2026. What sold us on Sanity is that the content itself is structured, queryable data. That&#8217;s what AI agents need to work reliably. Most platforms are bolting AI onto content models that weren&#8217;t built for it. Sanity built the content model for it.&#8221;</em></p>\n<p><em>— Jay Forbes, Director of Engineering, O3</em></p>\n<h2>What this partnership means for our clients</h2>\n<p>&nbsp;</p>\n<p>For O3 clients, the partnership means we carry through the AI strategy of O3XO, O3’s AI consulting division, into our digital product solutions that O3 has been known for since 2005. It doesn’t mean that we no longer support the open-source CMSs we’ve come to love (and wrestle with). Aligning with AI-enabled solutions that actually transforms how marketing and product teams work will allow us to deliver faster, with more value-packed for each engagement.</p>\n<p>We help with the full process: content strategy and modeling, architecture and service design, migration from legacy platforms, integration with the broader tech stack, and the AI-layer work that turns Sanity into a competitive advantage. The goal is building a content foundation that serves the business for a long time.</p>\n<p>We&#8217;re especially focused on enterprise organizations that are ready to align their content strategy with their AI roadmap. If you&#8217;re thinking about where to invest in your digital foundation over the next 12 to 18 months, that alignment is worth building now.</p>\n<h2>How we see it</h2>\n<p>Content infrastructure isn&#8217;t the flashiest topic in marketing and product conversations. But it&#8217;s increasingly the thing that determines whether an organization can actually execute on its digital roadmap, and especially its AI ambitions.</p>\n<p>If you&#8217;re navigating a CMS evaluation, thinking through a migration, or trying to figure out how your content strategy needs to evolve alongside your AI roadmap, we&#8217;d love to talk through what we&#8217;re seeing.</p>\n<p>Ready to talk content infrastructure? <a href=\"https://www.o3world.com/contact/\">Reach out to the O3 team →</a></p>\n"
+      }
+    ],
+    "related_articles": [
+      8522,
+      10485,
+      10367
+    ],
+    "author": ""
+  }
+}

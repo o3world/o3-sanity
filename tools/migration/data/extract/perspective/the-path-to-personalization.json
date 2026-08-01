@@ -1,0 +1,74 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:10.996Z"
+  },
+  "wpId": 3631,
+  "slug": "the-path-to-personalization",
+  "title": "The path to personalization",
+  "dateGmt": "2020-07-20 19:55:00",
+  "modifiedGmt": "2023-02-01 02:29:48",
+  "authorId": 16,
+  "categoryIds": [
+    15,
+    8,
+    62
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-16.jpg",
+    "alt": "Red pattern"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "The path to personalization | O3",
+    "descriptionOverride": "O3 dives into the personalization market to better understand the strategies and technologies necessary to deliver a personalized experience.",
+    "descriptionRendered": "O3 dives into the personalization market to better understand the strategies and technologies necessary to deliver a personalized experience.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/the-path-to-personalization/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>As the shift to a “digital first” world becomes cemented by the COVID-19 crisis, it’s vital to deliver experiences that are timely and personalized. The rules for how consumers engage with businesses changes weekly or even daily, and the focus on digital has become central to the experience. Customer expectations are higher than ever for a personalized offering that aligns with their specific needs. However, delivering the right message at the right time to the right customer requires proper goals, strategy and investment in technology.</p>\n<h3>Practicing what we preach-personalizing the O3 site</h3>\n<p>An <a href=\"https://www.evergage.com/resources/ebooks/trends-in-personalization-survey-report/\" target=\"_blank\" rel=\"noopener noreferrer\">Evergage report</a> surveying 326 marketing professionals across industries and countries, recently found that, “the majority of marketers (94%) surveyed are using personalization in their marketing strategies.” Additionally, “…92% state that their customers and prospects expect a personalized experience (up from 85% last year).” As a core part of our <a href=\"https://www.o3world.com/labs/\">Labs program</a>, we spent the past few months diving into the personalization market to better understand strategies and technologies necessary to deliver a personalized experience.</p>\n<p>We applied our new knowledge to the O3 site where visitors can opt into a specific customer segment or be placed into a segment via contextual campaigns. There are landing pages and several dynamic content blocks we leverage across the site where content is curated based on segmentation. Also, since our visitors’ privacy is important to us, at any point if a user wishes to opt out of a segment, he or she can do so.</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-3636 size-full\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/Personalization_Article_Image.png\" alt=\"content-blocks\" width=\"2400\" height=\"1350\" /></p>\n<h3>The personalization landscape</h3>\n<p>Personalization as a strategy or technology only makes sense within the context of business goals. For us, it was important that our approach accommodate more than our needs, but also our user&#8217;s objectives so we could deliver better, personalized experiences across the entire customer journey. Once we clearly defined our goals and needs, we started to set our personalization strategy with a deep dive into tools and technologies guided by <a href=\"https://www.gartner.com/en/documents/3945648/magic-quadrant-for-personalization-engines\">Gartner’s 2019 Magic Quadrant for Personalization Engines</a>. While the personalization landscape is vast, there are certainly leaders and “best fits” depending on one&#8217;s goals and needs.</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-3683 size-full\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/Platform_Comparison_Table@1x.png\" alt=\"personalization-platform-comparison-table\" width=\"2400\" height=\"1350\" /></p>\n<p>Since many of our clients are in the B2B space, we looked for technology that addressed content personalization and marketing needs more than retail. While many of the engines we looked at specialize in e-commerce, we chose Acquia Lift due to its focus on content and its ties to the Drupal ecosystem.  They provide excellent technical support and offer an intuitive platform with easy-to-use personalization features that do not require deep technical knowledge or capabilities.</p>\n<h3>Getting started with personalization</h3>\n<p>While we strongly believe that personalization is key to delivering better experiences, the fact remains that implementing a personalization strategy requires finesse. There is no one-size-fits-all solution. And frankly, depending on your resources and access to data, a large investment into one of the technologies above, simply may not make sense. As we do in product development, we advocate for a crawl, walk, run approach where data and feedback loops are leveraged to optimize the experience.</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-3677 size-full\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/Crawl_Walk_Run.png\" alt=\"crawl walk run approach\" width=\"2400\" height=\"1350\" /></p>\n<p>&nbsp;</p>\n<h3><strong>Crawl &#8211; Goals &amp; Simple Segmentation</strong></h3>\n<p>To kick things off we asked, &#8220;Is our goal to improve customer experience or is this about increasing conversion rates within our paid campaigns?&#8221; Once we aligned on goals and KPIs we shifted our focus to simple segmentation needs. We identified content to personalize and who to personalize it for. Marketing teams are likely doing this in some capacity through <strong>industry vertical, topic or need</strong> already. While simply segmenting is not the same as personalization, it is the first step. We created our segments by analyzing CRM and project data combined with historical Google Analytics engagement metrics.</p>\n<p>Then, we experimented. Basic split tests on campaign landing page messaging is an easy way to start. What’s key is that this does not necessarily require a large investment in tools or technologies. The goal is to measure success and refine the strategy. It’s important to consider the whole experience from channel to first touch to outreach through email or text.</p>\n<h3><strong>Walk &#8211; Refine, Extend &amp; Automate</strong></h3>\n<p>As data rolls in, teams should now have a sense of what’s working and what’s not. Which segments are engaged and which strategies are performing well. Depending on goals and success, graduating to an automation platform may be in order. This will allow marketers to move from simple tests to a more end-to-end, personalization journey where user behavior triggers an array of content depending on which actions they may take.</p>\n<p>Certain platforms like Sitecore use a point system for this, while others require manual prioritization of these actions. Either way, this sort of automation allows marketers to turn a few segments into hundreds or thousands of potential persona types. Automation also allows teams to consider second, third or fourth visits where messaging may alter based on the stage of the buying or engagement process.</p>\n<h3><strong>Run &#8211; AI Driven Personalization</strong></h3>\n<p>Up to this point, most of the personalization has been done manually. Even with automation, the experience still relies on a human to look at data then create the rules necessary to personalize around each segment. The future of personalization lies in looking at trends among large data sets that combine profile and behavioral data to automate or suggest segmentation. A few of the large scale platforms provide this functionality, but the goal is to hyper-personalize each journey down to the account or even individual level, these systems rely on large volumes of data and aggregation among CRM, web data and even 3rd party sources.</p>\n<p>While large scale retailers may have millions of users daily to drive this, many B2B entities lack the data density to automate segmentation accurately. A way around this is to create an opt-in experience where users trade data for a more personalized experience. It also creates transparency in the relationship.</p>\n<h3>Big picture- personalizing across the customer journey</h3>\n<p>As an organization, our interest in personalization goes well beyond the marketing and sales process. We see an opportunity to personalize at every touch point throughout the customer journey. While the path to personalization may start simply as a means to better engage users or improve conversions, we see the impact on the overall customer experience as the ultimate goal regardless of industry.</p>\n<p>We envision a world where physical retail locations are dynamically reinvented to safely welcome individuals by name as they enter or perhaps a digital product that greets you in the morning with a run-down of all the work it accomplished the night before. All of this starts with empathy and data. Small steps towards personalization now and developing data models that can grow and evolve will set B2B organizations up for a future of success. If you’d like to discuss opportunities to personalize your customer experience, <a href=\"https://www.o3world.com/contact/\">contact us to chat</a>.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "The path to personalization",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Delivering the right message at the right time to the right customer requires proper goals, strategy and investment in technology."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      5120,
+      3485,
+      6194,
+      2950
+    ],
+    "author": ""
+  }
+}

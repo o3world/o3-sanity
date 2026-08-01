@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:25.428Z"
+  },
+  "wpId": 2004,
+  "slug": "happy-6-year-o3-anniversary-jay-forbes",
+  "title": "Happy 6 year O3 anniversary Jay Forbes!",
+  "dateGmt": "2019-03-26 19:11:34",
+  "modifiedGmt": "2023-02-02 20:19:37",
+  "authorId": 16,
+  "categoryIds": [
+    10
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2020/10/Jay.svg",
+    "alt": "Jay Forbes, Director of Engineering."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Happy 6 year O3 anniversary Jay Forbes! | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/happy-6-year-o3-anniversary-jay-forbes/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Our Engineering Manager <a href=\"https://www.o3world.com/about/team/jay-forbes/\">Jay Forbes</a> recently celebrated 6 years with O3 , and we wanted to take some time to shine the spotlight on one of our most indispensable employees.</h3>\n<p>Jay has been described as the glue that holds O3’s engineering department together. Aside from the regular development and strategy work he does for clients like <a href=\"https://www.o3world.com/work/la-colombe/\">La Colombe</a> and the White House Historical Association (WHHA), he also plays an essential role in overseeing the career growth of individuals on the engineering team. He improved our process for workflow and task management at the company and excels at keeping his team on task.</p>\n<p>When we asked our staff about their thoughts on Jay, we got some truly kind answers:</p>\n<p>&nbsp;</p>\n<blockquote>\n<p class=\"lead\">&#8220;I’ve viewed Jay as a mentor since my start at O3 over three years ago. He’s a patient teacher and has helped me to grow immeasurable amounts.&#8221;<br />\n-Ashley Cecere</p>\n<p>&nbsp;</p></blockquote>\n<blockquote>\n<p class=\"lead\">&#8220;Anytime I&#8217;ve ever struggled with a project or got thrown a crazy deadline, Jay has always stepped in to help if I needed it.&#8221;<br />\n-Jessica Warhus</p>\n</blockquote>\n<p>Almost everyone at O3 has a great relationship with Jay. Our CTO Tim Breslin shared a particularly memorable story that drives home Jay’s dedication to his work, the engineering team, and the company as a whole.</p>\n<p>&nbsp;</p>\n<blockquote>\n<p class=\"lead\">&#8220;During one of the many transitions of WHHA&#8217;s sites and servers, there was a situation where we needed support over the holiday break &#8211; typically WHHA&#8217;s busiest time of year. You may not know this, but the Christmas ornaments in their online store are very popular. They’ve been making sets of custom ornaments since 1981 and people love to collect them.</p>\n<p class=\"lead\">Jay made sure that the WHHA website was ready for the holiday rush. Even though his team took the correct precautions and conducted adequate load testing, it wasn&#8217;t quite up to Jay&#8217;s standards. He then turned into a one-man show for site maintenance and managed reporting and resolving issues over the holiday.</p>\n<p class=\"lead\">Jay worked his own Christmas magic by ensuring that everyone received their presidential ornaments on time.&#8221;</p>\n<p class=\"lead\">-Tim Breslin</p>\n</blockquote>\n<p>It’s pretty hard to top a story where you &#8220;save Christmas&#8221;, but we’re certain that we’re going to have even better stories about Jay as the years go on. Help us give a warm congratulations to our #1 Engineering Manager Jay Forbes!</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Happy 6 year O3 anniversary Jay Forbes!",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Work anniversaries are always celebration worthy, and we have a very special one that deserves some recognition."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      2525,
+      464,
+      6193,
+      992
+    ],
+    "author": ""
+  }
+}

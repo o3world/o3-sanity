@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:30.199Z"
+  },
+  "wpId": 576,
+  "slug": "2016-forge-recap",
+  "title": "2016 Forge Conference recap",
+  "dateGmt": "2016-10-03 21:26:40",
+  "modifiedGmt": "2023-02-02 16:18:12",
+  "authorId": 16,
+  "categoryIds": [
+    7,
+    10
+  ],
+  "excerpt": "On September 26th, 2016, hundreds of people came together at the Penn Museum in Philadelphia for the third annual Forge Conference, a one-day event created and organized by O<sub>3</sub> World.",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/08/O3-website-imagery_-Insights-6.jpg",
+    "alt": "O3 blue pattern"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "2016 Forge Conference recap | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/2016-forge-recap/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>On September 26th, 2016, hundreds of people came together at the Penn Museum in Philadelphia for the third annual Forge Conference, a one-day event created and organized by O<sub>3</sub> World. This year was filled with a diverse group of speakers who all had something valuable to share. The attendees picked up tons of tips on a variety of topics from the curated speakers from companies like Mad*Pow, Odopod, Lyft, Comcast, Slack, and NASA. Furthermore, there was a special Q&amp;A session with Philadelphia’s mayor, Jim Kenney.</p>\n<h3>Here are some great things some people have said about the event:</h3>\n<blockquote><p>Had a fantastic time at #forgeconf -big thank you to the @o3world team. You created a delightful &amp; memorable conference/speaker experience. &#8211; <a href=\"https://twitter.com/alissadesigns\" target=\"_blank\" rel=\"noopener noreferrer\">@alissadesigns</a></p>\n<p>Many thanks to O<sub>3</sub> and all of the Forge Conference organizers! Such great content shared with great people. #forgeconf &#8211; <a href=\"https://twitter.com/lijahogan\" target=\"_blank\" rel=\"noopener noreferrer\">@lijahogan</a></p>\n<p>Thx to @keitho3world @gadsbyo3world and the whole @o3world crew for hosting this fantastic #ForgeConf. Honored to be a part. &#8211; <a href=\"https://twitter.com/albertpoon\" target=\"_blank\" rel=\"noopener noreferrer\">@albertpoon</a></p>\n<p>Serious props to the whole @ForgeConf @o3world team for putting on such an excellent #forgeconf! Speakers &amp; attendees were ?. Thank you!? &#8211; <a href=\"https://twitter.com/yopensiero\" target=\"_blank\" rel=\"noopener noreferrer\">@yopensiero</a></p>\n<p>Big thank you to @keitho3world + the whole @ForgeConf team for an incredible day! So many inspiring people &amp; presentations! #forgeconf &#8211; <a href=\"https://twitter.com/shannon_patrick\" target=\"_blank\" rel=\"noopener noreferrer\">@shannon_patrick</a></p></blockquote>\n<p>If you weren’t able to make it to this year’s sold-out event, don’t worry, we got you covered. This year, we’ve worked with our sponsor Hightail to create a space where a few of the speakers generously shared their presentation slides. This provided access to comment and review each Forge Conference speaker’s story. You can access their presentations at the <a href=\"https://spaces.hightail.com/space/xJIX5\" target=\"_blank\" rel=\"noopener noreferrer\">2016 Forge Conference Hightail</a> page.</p>\n<p>Did you know that #ForgeConf was the #3 trending topic of the day? Don’t forget to check out the <a href=\"https://twitter.com/search?q=%23forgeconf&amp;src=typd\" target=\"_blank\" rel=\"noopener noreferrer\">#forgeconf</a> twitter stream to relive all the action! Thank you to everyone in the community for making Forge Conference so successful and for all the tweets that helped fuel this recap!</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "2016 Forge Conference recap",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Check out the Forge Conference, a one-day event created and organized by O3 World."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      4730,
+      2632,
+      2614,
+      4658
+    ],
+    "author": ""
+  }
+}

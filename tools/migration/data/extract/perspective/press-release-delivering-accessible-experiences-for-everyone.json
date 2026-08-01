@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:53.146Z"
+  },
+  "wpId": 7848,
+  "slug": "press-release-delivering-accessible-experiences-for-everyone",
+  "title": "Press release: Delivering accessible experiences for everyone",
+  "dateGmt": "2023-05-15 18:13:44",
+  "modifiedGmt": "2023-05-15 20:01:28",
+  "authorId": 16,
+  "categoryIds": [
+    63
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/04/O3-website-imagery_-Perspectives.png",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Press release: Delivering accessible experiences for everyone | O3",
+    "descriptionOverride": "Reach a wider audience, drive revenue growth, and join the movement towards a more inclusive digital world. Read our press release for more on our latest accessibility initiatives and industry impact.",
+    "descriptionRendered": "Reach a wider audience, drive revenue growth, and join the movement towards a more inclusive digital world. Read our press release for more on our latest accessibility initiatives and industry impact.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/press-release-delivering-accessible-experiences-for-everyone/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Press release: Delivering accessible experiences for everyone",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Introducing O3's Accessibility Consulting + Optimization service, designed to empower businesses in creating inclusive digital experiences by providing comprehensive assessments, tailored strategies, and compliance with accessibility guidelines, allowing them to reach a wider audience and drive revenue growth."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>Today marks the beginning of an exciting week as we celebrate <a href=\"https://www.o3world.com/perspectives/celebrating-gaad-o3s-commitment-to-accessibility-and-the-exciting-plans-ahead/\">Global Accessibility Awareness Day (GAAD)</a>. At O3, we are thrilled to unveil our groundbreaking <a href=\"https://www.o3world.com/services/accessibility-consulting-optimization/\">Accessibility Consulting + Optimization service</a>, designed to empower businesses in creating inclusive digital experiences.</p>\n<p>As an experience consultancy, we deeply understand the significance of accessibility in today&#8217;s digital landscape. Our comprehensive offering is tailored to help businesses develop accessible websites and digital products that not only comply with industry standards like <a href=\"https://www.w3.org/WAI/standards-guidelines/wcag/\">Web Content Accessibility Guidelines</a>, or WCAG but also prioritize user-centered design and exceed expectations.</p>\n<p>With our Accessibility Consulting + Optimization service, we provide in-depth assessments to identify areas for improvement, develop tailored strategies, and ensure compliance with accessibility guidelines. We go beyond mere compliance to unlock the true power of accessibility, allowing businesses to reach a wider audience and drive revenue growth.</p>\n<p>Don&#8217;t miss out on the opportunity to enhance your digital presence and make a lasting impact. Join us in putting the power of accessibility front and center and together, let&#8217;s create a more inclusive digital world.</p>\n<p>Read our <a href=\"https://www.o3world.com/wp-content/uploads/2023/05/Accessibility-consulting-press-release.pdf\">press release</a> to stay up-to-date with our latest accessibility initiatives and how we&#8217;re driving change in the industry.</p>\n<h4>Learn more about O3&#8217;s<a href=\"https://www.o3world.com/services/accessibility-consulting-optimization/\"> Accessibility Consulting + Optimization service </a></h4>\n"
+      }
+    ],
+    "related_articles": [
+      7840,
+      3485,
+      7287
+    ],
+    "author": ""
+  }
+}

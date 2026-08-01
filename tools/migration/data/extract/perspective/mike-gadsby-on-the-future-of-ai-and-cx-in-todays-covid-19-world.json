@@ -1,0 +1,75 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:10.996Z"
+  },
+  "wpId": 3915,
+  "slug": "mike-gadsby-on-the-future-of-ai-and-cx-in-todays-covid-19-world",
+  "title": "Mike Gadsby on the future of AI and CX in today’s COVID-19 world",
+  "dateGmt": "2020-07-31 05:23:29",
+  "modifiedGmt": "2023-02-01 20:31:51",
+  "authorId": 16,
+  "categoryIds": [
+    15,
+    7,
+    8,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-19.jpg",
+    "alt": "Mike Gadsby, co-founder and Chief Innovation Officer."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Mike Gadsby on the future of AI and CX in today’s COVID-19 world | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/mike-gadsby-on-the-future-of-ai-and-cx-in-todays-covid-19-world/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>O3 World’s Chief Innovation Officer, <a href=\"https://www.o3world.com/about/team/mike-gadsby/\">Mike Gadsby</a> reviewed the evolving landscape of customer experience and its interplay with artificial intelligence in a recent AiThority feature. As brick and mortar stores pivot to capture the business of quarantined customers, they must prioritize emotional intelligence, a rich digital ecosystem and of course privacy and security.</p>\n<h4><a href=\"https://aithority.com/technology/martech/across-the-new-normal-universe-the-future-of-ai-and-cx-in-todays-covid-19-world/\">Read more about the need for emotional intelligence in CX</a>.</h4>\n<blockquote>\n<p class=\"lead\"><span style=\"font-weight: 400;\">“Hyper-personalization is the CX term for it, but the root value is actually empathy. Human beings want to feel known — it’s about trust and comfort (especially at a time like this).” </span><span style=\"font-weight: 400;\">&#8211; Mike Gadsby, Chief Innovation Officer </span></p>\n</blockquote>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Mike Gadsby on the future of AI and CX in today’s COVID-19 world",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Mike Gadsby reviewed the evolving landscape of customer experience and its interplay with artificial intelligence in a recent AiThority feature."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      3020,
+      3444,
+      2987,
+      5120
+    ],
+    "author": ""
+  }
+}

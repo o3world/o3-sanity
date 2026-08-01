@@ -1,0 +1,298 @@
+{
+  "_id": "perspective-wp-8095",
+  "_type": "perspective",
+  "title": "Qlik and O3 join forces to enhance data and analytics solutions",
+  "slug": {
+    "_type": "slug",
+    "current": "transformative-partnership-o3-collaborates-with-qlik-for-data-driven-cx-innovation"
+  },
+  "excerpt": "O3 is excited to announce a partnership with Qlik, uniting deep CX innovation with Qlik's data analytics expertise to deliver personalized, impactful experiences.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-11",
+      "_key": "cat-11"
+    }
+  ],
+  "publishedAt": "2023-08-18T14:23:07Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/08/O3-website-imagery_-Perspectives-11.jpg"
+    },
+    "alt": "O3 ans Qlik"
+  },
+  "body": [
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 is thrilled to announce an exciting new partnership with ",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Qlik",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", a pioneer in data analytics. This strategic alliance will allow us to empower our customers with advanced analytics to drive innovative experience solutions.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.qlik.com/us/lp/ppc/qlik-sense-business/brand-qlik?utm_team=DIG&utm_subtype=cpc_brand&ppc_id=6nes3hFZ&kw=qlik&utm_content=6nes3hFZ_pcrid_605285416482_pmt_e_pkw_qlik_pdv_c_mslid__pgrid_13958057825_ptaid_kwd-898105292&utm_source=google&utm_medium=cpc&utm_campaign=Qlik_USA_Google_Brand_DA_Brand_EN&utm_term=qlik&https://www.qlik.com/us/lp/ppc/qlik-sense-business/brand-qlik&_bt=605285416482&_bk=qlik&_bm=e&_bn=g&_bg=13958057825&gad=1&gclid=Cj0KCQjwrfymBhCTARIsADXTabl_AjJaHJAF2gsSQgQVVznblbJGhokVVsiXy_WJAdmUozTy2mUWPwgaAr08EALw_wcB"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "“We are immensely proud to join forces with Qlik, a leader in data analytics, to bring unprecedented value to our customers. This collaboration signifies a union of O3’s deep commitment to innovation in CX and Qlik’s unparalleled expertise in data analytics. Together, we aim to unearth deeper insights into customer behavior, fostering a more personalized and impactful connection with our clients’ audiences. The synergy between O3 and Qlik will pave the way for transformative CX strategies that will empower our customers to thrive in today’s competitive, data-driven landscape.”",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em",
+            "k0001"
+          ],
+          "text": "Mahesh Gaitonde",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": ", O3 Chief Digital Officer",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/maheshgaitonde/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A powerful synergy of CX expertise and data analytics",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "At O3, our mission has always been to elevate CX to new heights, placing customer satisfaction and growth at the forefront of our strategies. With Qlik’s robust data analytics capabilities, we now have a powerful tool to harness the full potential of ",
+          "_key": "k0018"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "customer insights",
+          "_key": "k0019"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". The fusion of CX expertise and data-driven intelligence promises a transformative journey for our clients, as we empower them to make informed decisions and create exceptional experiences.",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.o3world.com/services/data-analytics-ai-consulting/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Driving data-backed CX innovations",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "With Qlik’s cutting-edge analytics platform, O3 can now dive deeper into customer data, uncovering patterns and trends that drive meaningful interactions. This partnership opens new avenues for our clients to optimize their ",
+          "_key": "k0024"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "customer journeys",
+          "_key": "k0025"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", address pain points, and deliver ",
+          "_key": "k0026"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "hyper-personalized experiences",
+          "_key": "k0027"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". By combining our human-centric approach with Qlik’s data prowess, we can help businesses craft more impactful strategies that resonate with their target audience.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.o3world.com/services/customer-journey-mapping/"
+        },
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.o3world.com/perspectives/the-path-to-personalization/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Empowering businesses to thrive in a data-driven world",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As industries evolve and customer expectations continue to rise, data-driven insights have become invaluable for making agile and informed business decisions. ",
+          "_key": "k0032"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "Qlik’s data analytics solutions",
+          "_key": "k0033"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " provide real-time visibility into critical customer data, enabling businesses to adapt swiftly and stay ahead of the competition. Together, O3 and Qlik can empower organizations to thrive in a data-driven world, unleashing the full potential of their CX initiatives.",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.qlik.com/us/products"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Stay tuned for more updates and insights as we embark on this partnership.",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "Explore the powerful partnership between O3 and Qlik, where cutting-edge data analytics and CX expertise converge to create personalized, impactful experiences in today's data-driven business landscape."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:8095",
+    "extractedAt": "2026-08-01T00:09:53.142Z"
+  }
+}

@@ -3,8 +3,9 @@ import { defineArrayMember, defineType } from 'sanity'
 /**
  * The shared Portable Text shape for perspective bodies and case-study
  * chapters. Closed inline-object set per the schema spec: figure, embed,
- * pullQuote. A codeBlock is added only if extraction finds code in the
- * migrated WordPress bodies.
+ * pullQuote — and deliberately no codeBlock: extracting all 272 WordPress
+ * bodies found zero `<pre>`, `<code>`, or highlighted blocks (ADR 0005).
+ * The inline `code` decorator below covers naming a flag mid-sentence.
  */
 export const bodyText = defineType({
   name: 'bodyText',

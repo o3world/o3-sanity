@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:02.401Z"
+  },
+  "wpId": 5014,
+  "slug": "o3-celebrates-17-years",
+  "title": "O3 celebrates 17 years!",
+  "dateGmt": "2022-05-25 17:08:39",
+  "modifiedGmt": "2023-02-02 18:08:12",
+  "authorId": 16,
+  "categoryIds": [
+    10
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-18.jpg",
+    "alt": "O3 pattern"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "O3 celebrates 17 years! | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/o3-celebrates-17-years/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Reflecting on the past 17 years</h3>\n<p>Co-founder Mike Gadsby reflects on the ups and downs of the past 17 years and shares what he and CEO Keith Scandone envision for the future of O3:</p>\n<p class=\"lead\">&#8220;It has been incredible watching O3 evolve over 17 years from the early days of the Web to the immersive world it is today. We are so grateful for all the people — clients, colleagues, friends and family — who have joined us on that journey. We’re thrilled to take our next giant step, and play a critical role in shaping the future of the digital experience.&#8221;</p>\n<p>Check out our recap video of our growth and success over on <a href=\"https://www.instagram.com/reel/CdLZvD9g5GF/\">our Instagram account</a>.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "O3 celebrates 17 years!",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "This month, O3 celebrated 17 years of creating remarkable customer experiences through innovative design, emerging technology, and seamless collaboration with our clients. We’ve been through a relocation, a recession, and a global pandemic. We've expanded to close to 50 people and have team members in 13 states."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      5014,
+      5038,
+      4658,
+      3879
+    ],
+    "author": ""
+  }
+}

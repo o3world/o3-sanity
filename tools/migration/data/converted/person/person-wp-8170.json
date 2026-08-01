@@ -1,0 +1,15 @@
+{
+  "_id": "person-wp-8170",
+  "_type": "person",
+  "name": "Mark Angelow",
+  "title": "Senior UX Designer",
+  "headshot": {
+    "_type": "image",
+    "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/09/Headshots-3.jpg"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:team:8170",
+    "extractedAt": "2026-08-01T00:20:48.162Z"
+  }
+}

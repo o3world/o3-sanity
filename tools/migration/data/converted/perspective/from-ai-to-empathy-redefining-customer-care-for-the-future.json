@@ -1,0 +1,670 @@
+{
+  "_id": "perspective-wp-9185",
+  "_type": "perspective",
+  "title": "From AI to empathy: redefining customer care for the future",
+  "slug": {
+    "_type": "slug",
+    "current": "from-ai-to-empathy-redefining-customer-care-for-the-future"
+  },
+  "excerpt": "Customer operations are undergoing a shift as AI technologies, such as generative AI, streamline internal processes, enhance productivity, and set a new standard for customer engagement.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-9147"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    }
+  ],
+  "publishedAt": "2024-08-13T17:18:11Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/08/O3-website-imagery_-Perspectives-61.jpg"
+    },
+    "alt": "From AI to empathy: redefining customer care for the future"
+  },
+  "body": [
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Customer operations are undergoing a significant transformation driven by advancements in generative AI. These technologies are not only reshaping how businesses interact with their customers but also streamlining internal processes to enhance productivity and personalization. Gartner predicts that by 2025, 80% of customer service organizations will be applying generative AI in some form to improve both agent productivity and customer experience (",
+          "_key": "k0014"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Gartner Press Release",
+          "_key": "k0015"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "). This shift is setting a new standard for customer engagement and operational efficiency.",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.gartner.com/en/newsroom/press-releases/2023-08-30-gartner-reveals-three-technologies-that-will-transform-customer-service-and-support-by-2028"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Reprioritizing core operations",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Modern customer care now requires a dynamic balance between enhancing customer experience and driving revenue, necessitating a shift from traditional operations to more integrated, AI-driven environments. A recent customer care and experience survey highlights that customer care leaders are increasingly prioritizing technological transformations alongside revenue goals (",
+          "_key": "k0020"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "CX Today",
+          "_key": "k0021"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "). This evolution aligns with industry trends where companies like Microsoft are integrating AI to optimize agent and customer interactions across various platforms. Notably, AI-powered technologies can automate 50% of customer service tasks, allowing agents to focus on more complex issues and improve response times (McKinsey).",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.cxtoday.com/contact-centre/the-top-ten-contact-center-technologies-capabilities-of-2024-so-far/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Creating a future-ready AI ecosystem",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Building a resilient, AI-enhanced customer ecosystem is imperative for future success. Microsoft’s 2024 release wave of Dynamics 365 underscores this by extending AI capabilities across customer service channels, enhancing agent experiences, and streamlining administration processes (",
+          "_key": "k0026"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Microsoft",
+          "_key": "k0027"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "). Gartner further predicts that by 2028, customer service organizations will be leveraging three transformative technologies: generative AI, augmented reality, and conversational AI (",
+          "_key": "k0028"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Gartner",
+          "_key": "k0029"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "). These technologies are expected to dramatically shift how customer interactions are managed, ensuring a seamless experience that aligns with modern consumer expectations.",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.microsoft.com/en-us/dynamics-365/blog/business-leader/2024/04/16/ai-powered-innovations-enhance-customer-service-with-2024-release-wave-1/"
+        },
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.gartner.com/en/newsroom/press-releases/2023-08-30-gartner-reveals-three-technologies-that-will-transform-customer-service-and-support-by-2028"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Designed for human + AI interaction",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The ideal customer care model leverages AI to augment human interactions rather than replace them. Microsoft’s generative AI tools exemplify this approach by assisting agents in real-time with drafting contextual responses, thus enhancing the management of customer relationships (",
+          "_key": "k0034"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "Reuters",
+          "_key": "k0035"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "). This collaboration between human agents and AI enables more effective and empathetic customer service while AI handles routine tasks like data entry, call routing, or initial problem-solving.",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.reuters.com/technology/microsoft-takes-its-ai-push-customer-service-call-centers-2024-06-04/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In fact, a study by Gartner predicts that by ",
+          "_key": "k0038"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "2025, 80% of customer service interactions will involve some form of AI-driven automation",
+          "_key": "k0039"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " (",
+          "_key": "k0040"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "Gartner",
+          "_key": "k0041"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "), emphasizing the growing reliance on AI to improve both efficiency and customer satisfaction. The key lies in balancing AI’s capabilities with the human touch—ensuring that while AI manages repetitive or data-heavy tasks, human agents are free to address complex, emotional, or nuanced issues that require empathy and personalized attention.",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.gartner.com/en/newsroom/press-releases/2023-08-30-gartner-reveals-three-technologies-that-will-transform-customer-service-and-support-by-2028"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0043",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "AI’s role in customer care is not just about efficiency; it also provides real-time insights and data analytics that can empower agents to make informed decisions quickly. This integration allows businesses to offer more proactive and tailored customer service, anticipating needs before they arise and creating a seamless, unified customer experience across channels (",
+          "_key": "k0044"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0006"
+          ],
+          "text": "CX Today",
+          "_key": "k0045"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "). Moreover, companies that have integrated AI with human oversight have reported significant improvements in key performance metrics, including a ",
+          "_key": "k0046"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "30% reduction in call center costs and a 25% increase in customer satisfaction scores",
+          "_key": "k0047"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " (",
+          "_key": "k0048"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0007"
+          ],
+          "text": "Mosaicx",
+          "_key": "k0049"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "). We recently completed work focused on this exact thing, but oriented towards why the organization was not realizing these improvements, and it came down to a typical culprit with new technology, lack of adoption across the workforce. The leadership needed to spend more time training and supporting new processes and ways of working for the AI to be leveraged appropriately to then realize benefits. This was a hard realization for the work that is needed, but it’s imperative to the success.",
+          "_key": "k0050"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0006",
+          "_type": "link",
+          "href": "https://www.cxtoday.com/contact-centre/the-top-ten-contact-center-technologies-capabilities-of-2024-so-far/"
+        },
+        {
+          "_key": "k0007",
+          "_type": "link",
+          "href": "https://www.mosaicx.com/blog/contact-center-ai-trends"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0051",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As AI continues to evolve, its ability to enhance human interactions will only grow stronger, enabling customer service teams to not only meet but exceed customer expectations. The future of customer care will be defined by this symbiotic relationship, where AI and human agents work together to deliver exceptional, personalized service that drives long-term customer loyalty (",
+          "_key": "k0052"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0008"
+          ],
+          "text": "Gartner",
+          "_key": "k0053"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ").",
+          "_key": "k0054"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0008",
+          "_type": "link",
+          "href": "https://www.gartner.com/en/newsroom/press-releases/2023-08-30-gartner-reveals-three-technologies-that-will-transform-customer-service-and-support-by-2028"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0055",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Data-driven insights guiding the way",
+          "_key": "k0056"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0057",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "AI’s ability to analyze vast amounts of data enables organizations to predict customer behavior and service needs, allowing for proactive adjustments to resources and strategies (",
+          "_key": "k0058"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0009"
+          ],
+          "text": "CMSWire",
+          "_key": "k0059"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "). This insight-driven approach is crucial for maintaining high customer satisfaction and operational efficiency. AI-powered analytics are predicted to increase customer retention rates by 10% and reduce customer churn by 15%, emphasizing the importance of data in driving customer care strategies (",
+          "_key": "k0060"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0010"
+          ],
+          "text": "CX Today",
+          "_key": "k0061"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ").",
+          "_key": "k0062"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0009",
+          "_type": "link",
+          "href": "https://www.cmswire.com/contact-center/16-important-call-center-statistics-to-know-about/"
+        },
+        {
+          "_key": "k0010",
+          "_type": "link",
+          "href": "https://www.cxtoday.com/contact-centre/the-top-ten-contact-center-technologies-capabilities-of-2024-so-far/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0063",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Taking action: Practical steps for customer operations leaders",
+          "_key": "k0064"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0065",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "To effectively integrate AI into customer operations, leaders must take decisive, practical steps that align with their strategic goals:",
+          "_key": "k0066"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0067",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Assess current capabilities: Begin by conducting a thorough assessment of your current customer care operations. Identify areas where AI can make the most impact, such as reducing response times, personalizing customer interactions, or automating routine tasks.",
+          "_key": "k0068"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0069",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Define clear objectives: Set specific, measurable objectives for AI integration, such as improving customer satisfaction scores, reducing operational costs, or increasing agent productivity.",
+          "_key": "k0070"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0071",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Select the right tools: Choose AI technologies that best meet your needs, such as AI-powered chatbots for immediate customer response or advanced analytics tools for deeper customer insights. Look to leverage existing technology investments (especially Microsoft, Google, etc) for ways to enhance AI capabilities without major risk.",
+          "_key": "k0072"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0073",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Upskill your team: Equip your team with the skills to work alongside AI, focusing on continuous education as AI technologies evolve.",
+          "_key": "k0074"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0075",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Implement in phases: Roll out AI tools gradually, starting with pilot projects that allow you to test and learn from each implementation.",
+          "_key": "k0076"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0077",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Monitor and optimize: Continuously monitor AI performance using predefined metrics and optimize processes to ensure peak efficiency and effectiveness. Pro tip: you can use AI to monitor the AI.",
+          "_key": "k0078"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0079",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Foster a culture of innovation: Encourage a culture that embraces change, positioning AI as a tool to enhance, not replace, human capabilities. (",
+          "_key": "k0080"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0011"
+          ],
+          "text": "O3 blog on culture of innovation",
+          "_key": "k0081"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ")",
+          "_key": "k0082"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0011",
+          "_type": "link",
+          "href": "https://www.o3world.com/perspectives/embracing-disruptive-thinking-enterprise-teams/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0083",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "By following these steps, customer operations leaders can harness AI’s potential to revolutionize their customer care practices, ensuring they are not only prepared for the future but actively shaping it.",
+          "_key": "k0084"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0085",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0012"
+          ],
+          "text": "Brady Halligan",
+          "_key": "k0086"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", O3 Senior Strategist",
+          "_key": "k0087"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0012",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/bradyhalligan/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0088",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Brady Halligan is a Senior Strategist at O3, driving innovation and growth through human-centric solutions. With experience from startups to Fortune 10 companies, he excels in addressing client pain points and delivering exceptional results. Brady’s expertise spans diverse sectors, including Life Sciences, Higher Ed, Financial Services, and more. At O3, he focuses on creating strategic, impactful changes for clients. Brady holds an M.B.A. in Strategic Design from Thomas Jefferson University and resides in Philadelphia with his wife, Jennifer, and their dog, Lloyd.",
+          "_key": "k0089"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Transforming customer operations: The impact of AI on customer service and engagement",
+    "description": "Discover how advancements in AI are revolutionizing customer operations, streamlining processes, and enhancing engagement."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:9185",
+    "extractedAt": "2026-08-01T00:09:37.819Z"
+  }
+}

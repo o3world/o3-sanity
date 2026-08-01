@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:30.200Z"
+  },
+  "wpId": 467,
+  "slug": "o3-takes-dc",
+  "title": "#O3TakesDC: Heading to our Nation’s Capital to celebrate 10 Years",
+  "dateGmt": "2015-11-23 12:47:53",
+  "modifiedGmt": "2023-09-22 13:28:58",
+  "authorId": 16,
+  "categoryIds": [
+    10
+  ],
+  "excerpt": "To celebrate our 10-year anniversary, O<sub>3</sub> World set off for Washington, DC – where we’ve recently expanded – for a full day of fun.",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-17.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "#O3TakesDC: Heading to our Nation’s Capital to celebrate 10 Years | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/o3-takes-dc/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>This year, O<sub>3</sub> World celebrates its 10-year anniversary.</h3>\n<p>In the decade since O<sub>3</sub> World launched, the agency has taken inspiration from the constantly changing business world and transformed itself into what it is now – a digital product design and development agency.</p>\n<p>To celebrate our successes so far, O<sub>3</sub> World employees set off for Washington, DC – where we’ve recently expanded – for a full day of fun. For a recap, check out the #O3TakesDC hashtag on <a href=\"https://twitter.com/search?q=%23o3takesdc&amp;src=typd\" target=\"_blank\" rel=\"noopener noreferrer\">Twitter</a> and <a href=\"https://www.instagram.com/explore/tags/o3takesdc\" target=\"_blank\" rel=\"noopener noreferrer\">Instagram</a>. Here’s to 10 more great years!</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "#O3TakesDC: Heading to our Nation’s Capital to celebrate 10 Years",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "To celebrate our successes so far, O3 World employees set off for Washington, DC – where we’ve recently expanded – for a full day of fun."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      4359,
+      5014,
+      6191,
+      755
+    ],
+    "author": ""
+  }
+}

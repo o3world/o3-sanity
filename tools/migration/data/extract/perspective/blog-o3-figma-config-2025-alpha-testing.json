@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:32.177Z"
+  },
+  "wpId": 10227,
+  "slug": "blog-o3-figma-config-2025-alpha-testing",
+  "title": "O3 + Figma's Config 2025",
+  "dateGmt": "2025-05-14 18:28:20",
+  "modifiedGmt": "2025-05-14 18:28:20",
+  "authorId": 16,
+  "categoryIds": [
+    7
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2025/05/O3-website-imagery_-Perspectives-88.jpg",
+    "alt": "O3 + Figma's Config 2025"
+  },
+  "seo": {
+    "titleOverride": "O3 + Figma: Alpha testing AI tools at Config%%page%% %%sep%% %%sitename%%",
+    "titleRendered": "O3 + Figma: Alpha testing AI tools at Config | O3",
+    "descriptionOverride": "Learn how O3 + Figma tested AI tools at Config 2025, offering real insights to enhance future design solutions.",
+    "descriptionRendered": "Learn how O3 + Figma tested AI tools at Config 2025, offering real insights to enhance future design solutions.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/blog-o3-figma-config-2025-alpha-testing/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "O3 + Figma's Config 2025",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "We flipped the script—instead of running user testing, we became the testers ourselves, bringing our experience consulting lens to Figma's latest tools and offering real-world insights that help shape the future of design."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>O3 is proud to have played a hands-on role in helping to shape the future of design tooling for a second consecutive year, through alpha testing of Figma&#8217;s newest AI-powered products, and by bringing both practical insight and creative flair to Config 2025.</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-10245\" src=\"https://www.o3world.com/wp-content/uploads/2025/05/O3-at-COnfig-2025-1024x732.png\" alt=\"O3 + Figma: Alpha testing AI tools at Config 2025\" width=\"656\" height=\"469\" srcset=\"http://www.o3world.com/wp-content/uploads/2025/05/O3-at-COnfig-2025-1024x732.png 1024w, http://www.o3world.com/wp-content/uploads/2025/05/O3-at-COnfig-2025-640x457.png 640w, http://www.o3world.com/wp-content/uploads/2025/05/O3-at-COnfig-2025-768x549.png 768w, http://www.o3world.com/wp-content/uploads/2025/05/O3-at-COnfig-2025-1536x1097.png 1536w, http://www.o3world.com/wp-content/uploads/2025/05/O3-at-COnfig-2025-48x34.png 48w, http://www.o3world.com/wp-content/uploads/2025/05/O3-at-COnfig-2025-1280x915.png 1280w, http://www.o3world.com/wp-content/uploads/2025/05/O3-at-COnfig-2025.png 2000w\" sizes=\"auto, (max-width: 656px) 100vw, 656px\" /></p>\n<h3>What is Config?</h3>\n<p><a href=\"https://www.figma.com/blog/config-2025-recap/\">Config</a> is the design industry’s go-to global event, bringing together product teams, developers, and creatives to explore the future of digital collaboration. The 2025 edition, held May 6–8 in San Francisco, was the most ambitious yet—full of keynote energy, product unveilings, and bold ideas for the next generation of design tools. Among the standout announcements were Buzz, Draw, Make, and Sites—a powerful new AI suite designed to help teams move from concept to creation faster than ever. O3 SVP of Research and Design, <a href=\"https://www.linkedin.com/in/christine-sheller/\">Christine Sheller</a>, was front row representing our team.</p>\n<h3>O3 + Figma: Alpha testers on the frontlines</h3>\n<p><iframe loading=\"lazy\" title=\"Why Designers love Figma Slides | Figma\" width=\"500\" height=\"281\" src=\"https://www.youtube.com/embed/w00XRYprOuw?list=PLXDU_eVOJTx7qh8vf8VjjXET0gZ50IHKx\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p>\n<p>Ahead of the public release, O3 had the unique opportunity to alpha test three of the four major products announced at Config 2025: Buzz, Draw, and Make. This was our second consecutive year partnering with Figma to test unreleased tools—last year, <a href=\"https://www.o3world.com/perspectives/o3-contribution-figma-slides-config-2024/\">we were early adopters of their Slides product.</a></p>\n<p>Testing these tools wasn’t just about giving feedback. It was about participating in customer user testing in a way that mirrored our core focus: experience consulting. We got to sit on the other side of the equation—as the testers, not the test designers—gaining first-hand insight into how breakthrough tools are shaped and refined by real-world use.</p>\n<h3>Behind the scenes: putting Buzz to the test</h3>\n<p>Of all Figma&#8217;s new offerings, our design and marketing teams did the deepest dive on Buzz—their tool for creating branded marketing assets through templates with locked elements. Over several months, we worked directly with Figma&#8217;s research and product teams to alpha test its capabilities, identifying practical applications like creating materials for our own AI conference, 1682. We were especially excited to see Buzz launch at Config, having witnessed its evolution from early testing to a powerful tool that streamlines marketing workflows. And our own Simone Dehel, Senior UX Designer at O3, was <a href=\"https://www.figma.com/blog/introducing-figma-buzz/\">featured on Figma’s blog</a>:</p>\n<p>“Figma Buzz has already proven to be a game-changer for asset generation.”</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-10243\" src=\"https://www.o3world.com/wp-content/uploads/2025/05/Simone-quote-at-Config-1024x732.png\" alt=\"Simone quote at Config 2025\" width=\"657\" height=\"470\" srcset=\"http://www.o3world.com/wp-content/uploads/2025/05/Simone-quote-at-Config-1024x732.png 1024w, http://www.o3world.com/wp-content/uploads/2025/05/Simone-quote-at-Config-640x457.png 640w, http://www.o3world.com/wp-content/uploads/2025/05/Simone-quote-at-Config-768x549.png 768w, http://www.o3world.com/wp-content/uploads/2025/05/Simone-quote-at-Config-1536x1097.png 1536w, http://www.o3world.com/wp-content/uploads/2025/05/Simone-quote-at-Config-48x34.png 48w, http://www.o3world.com/wp-content/uploads/2025/05/Simone-quote-at-Config-1280x915.png 1280w, http://www.o3world.com/wp-content/uploads/2025/05/Simone-quote-at-Config.png 2000w\" sizes=\"auto, (max-width: 657px) 100vw, 657px\" /></p>\n<h3>On the streets: sneakers, craft, and community</h3>\n<p>While in San Francisco, Christine brought energy, inspiration, and a bit of streetwear flair to the event with her <a href=\"https://www.linkedin.com/posts/christine-sheller_config-config2025-figma-activity-7322656329393676288-nDfY?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAEUAnYBJNRPkWN7NMPgq27IqdVL8zeQmoE\">custom-designed sneakers</a> featuring her own hand-drawn sketches inside Figma&#8217;s logo. The design sparked conversations and compliments throughout the week. Her presence at the event embodied our shared belief that design is more than appearance—it&#8217;s about meaningful connections with users, teams, and communities.</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-10241\" src=\"https://www.o3world.com/wp-content/uploads/2025/05/Figma-sneakers-1024x732.png\" alt=\"sneakers at Config 2025 \" width=\"655\" height=\"468\" srcset=\"http://www.o3world.com/wp-content/uploads/2025/05/Figma-sneakers-1024x732.png 1024w, http://www.o3world.com/wp-content/uploads/2025/05/Figma-sneakers-640x457.png 640w, http://www.o3world.com/wp-content/uploads/2025/05/Figma-sneakers-768x549.png 768w, http://www.o3world.com/wp-content/uploads/2025/05/Figma-sneakers-1536x1097.png 1536w, http://www.o3world.com/wp-content/uploads/2025/05/Figma-sneakers-48x34.png 48w, http://www.o3world.com/wp-content/uploads/2025/05/Figma-sneakers-1280x915.png 1280w, http://www.o3world.com/wp-content/uploads/2025/05/Figma-sneakers.png 2000w\" sizes=\"auto, (max-width: 655px) 100vw, 655px\" /></p>\n<h3>In the spotlight: conversations with Anthropic</h3>\n<p>Beyond the conference, Christine also spent time at Figma&#8217;s headquarters collaborating with the Anthropic team. In the days leading up to Config, she got hands-on with Figma Make, powered by Anthropic&#8217;s Claude, and sat down for an interview to share her perspectives on the product, AI overall, and the real opportunities for designers today, lending her voice and experience as a design leader. O3 will be sharing these videos as they&#8217;re released.</p>\n<p>&#8220;Quality, craft, and taste were all over Config this year,&#8221; Christine said. &#8220;And it got me thinking about something I&#8217;ve been marinating on quite a bit lately—how do we help designers stay focused on making work that&#8217;s polished and thoughtful and that pushes beyond a prompt? This came up in practically every conversation I had there.&#8221;</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-10251\" src=\"https://www.o3world.com/wp-content/uploads/2025/05/O3-filming-with-anthropic-at-Config-732x1024.png\" alt=\"Anthropic video shoot \" width=\"450\" height=\"630\" srcset=\"http://www.o3world.com/wp-content/uploads/2025/05/O3-filming-with-anthropic-at-Config-732x1024.png 732w, http://www.o3world.com/wp-content/uploads/2025/05/O3-filming-with-anthropic-at-Config-457x640.png 457w, http://www.o3world.com/wp-content/uploads/2025/05/O3-filming-with-anthropic-at-Config-768x1075.png 768w, http://www.o3world.com/wp-content/uploads/2025/05/O3-filming-with-anthropic-at-Config-1097x1536.png 1097w, http://www.o3world.com/wp-content/uploads/2025/05/O3-filming-with-anthropic-at-Config-34x48.png 34w, http://www.o3world.com/wp-content/uploads/2025/05/O3-filming-with-anthropic-at-Config-1280x1791.png 1280w, http://www.o3world.com/wp-content/uploads/2025/05/O3-filming-with-anthropic-at-Config.png 1429w\" sizes=\"auto, (max-width: 450px) 100vw, 450px\" /></p>\n<h3>Design as a dialogue</h3>\n<p>Our relationship with Figma is built on more than tool adoption—it&#8217;s grounded in a shared vision for what design can be. Whether helping teams define the next user flow or testing tools that generate them automatically, we&#8217;re invested in both the experience of design and the design of experience.</p>\n<p>As creativity and AI continue to merge in new ways, we&#8217;re proud to help shape what comes next, with sneakers on the ground and our hands in the product.</p>\n"
+      }
+    ],
+    "related_articles": [
+      8961,
+      9674,
+      10133
+    ],
+    "author": ""
+  }
+}

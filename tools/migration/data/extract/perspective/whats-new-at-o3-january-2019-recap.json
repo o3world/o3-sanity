@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:25.428Z"
+  },
+  "wpId": 1987,
+  "slug": "whats-new-at-o3-january-2019-recap",
+  "title": "What's new at O3 January 2019: Innovation with the city, Capital One and Career Dev with Philly CHI",
+  "dateGmt": "2019-01-31 23:40:35",
+  "modifiedGmt": "2023-02-02 16:01:13",
+  "authorId": 16,
+  "categoryIds": [
+    7
+  ],
+  "excerpt": "There’s nothing like getting a new year off to a fantastic start. To say that we started 2019 off with a bang would be an understatement. Between signing new clients and bringing on new employees, we’ve also been attending and hosting quite a few events. ",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/07/O3-website-imagery_-Insights-8.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "What's new at O3 January 2019: Innovation with the city, Capital One and Career Dev with Philly CHI | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/whats-new-at-o3-january-2019-recap/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>Listing everywhere we’ve been would take another entire post, so we’re going to take a little time to focus on some event highlights from January.</p>\n<h3>Innovation with the City of Philadelphia</h3>\n<p>There’s a lot to love about working in Philadelphia. Culture, food, and entertainment aside, we most admire the city’s commitment to using innovation and technology to solve some of Philly’s most pressing issues.</p>\n<p>Since the city began its innovation labs program in 2014, dozens of employees from across a variety of city sectors have been able to learn about the best ways to combine innovation and problem-solving.</p>\n<p>We had the opportunity to meet some graduates of the city’s program on January 9th when we hosted a lunch and learn with the city’s Office of Innovation. We had a powerful panel discussion that we didn’t want to end (we really didn’t, it ran overtime), and broke out into smaller groups to brainstorm solutions to problems.</p>\n<p>Seeing people from all backgrounds come together to talk about the true meaning of innovation and the best ways to utilize it was an inspiring way to spend an afternoon.</p>\n<h3>UX and AI with Capital One</h3>\n<p>What goes into creating a human-centered experience with bots and AI? We’ve worked on a lot of different projects and concepts about forming a truly human-centric user experience, and we had the opportunity to learn how other professionals in the field handle.</p>\n<p>Members of Capital One’s AI design team joined us for lunch. Our team learned about the creation of their chatbot Eno, and got helpful pointers on UX writing.</p>\n<p><img decoding=\"async\" class=\"alignnone wp-image-2257 size-large\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/013119-Capital-One-1024x576.jpg\" alt=\"Capital One Presenting at O3\" /></p>\n<h3>Career Development with Philly CHI</h3>\n<p>We love supporting local tech organizations, and Philly CHI is one that’s near and dear to our hearts. Our Head of UX Strategy, Lauren Slattery, joined a panel of other UX professionals for Philly CHI’s first event of 2019.</p>\n<p>So, You Want A Job In UX was designed to help newcomers break into the industry. Everything from portfolio management, needed skills, and interview tips were covered during the night. A lucky few were even able to win portfolio reviews from panelists.</p>\n<p>Wish you could have attended? Don’t worry, we’re here to give you a little taste of what you missed. Check out Lauren giving advice on the best ways to demonstrate your passion for UX if you&#8217;re new to the field:</p>\n<p><iframe title=\"Lauren Slattery Speaks At So, You Want A Job In UX Event\" src=\"https://www.youtube.com/embed/Z5nXtgC_5sw\" height=\"700\" allowfullscreen=\"allowfullscreen\"><span data-mce-type=\"bookmark\" style=\"display: inline-block; width: 0px; overflow: hidden; line-height: 0;\" class=\"mce_SELRES_start\">﻿</span></iframe></p>\n<p>Want to stay up to date on the latest happenings at O3? Keep checking our blog and follow us on social!</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "What's new at O3 January 2019: Innovation with the city, Capital One and Career Dev with Philly CHI",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "There’s nothing like getting a new year off to a fantastic start. To say that we started 2019 off with a bang would be an understatement. Between signing new clients and bringing on new employees, we’ve also been attending and hosting quite a few events."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      3247,
+      3485,
+      3832,
+      2582
+    ],
+    "author": ""
+  }
+}

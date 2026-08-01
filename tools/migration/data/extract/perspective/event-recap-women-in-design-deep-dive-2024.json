@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:37.820Z"
+  },
+  "wpId": 9114,
+  "slug": "event-recap-women-in-design-deep-dive-2024",
+  "title": "Event recap: Women in Design deep dive 2024",
+  "dateGmt": "2024-07-10 16:26:25",
+  "modifiedGmt": "2024-07-10 16:36:23",
+  "authorId": 16,
+  "categoryIds": [
+    7
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2024/07/O3-website-imagery_-Perspectives-49.jpg",
+    "alt": "Event recap: Women in Design deep dive 2024"
+  },
+  "seo": {
+    "titleOverride": "Event recap: Women in Design Deep Dive 2024 - Research-driven design Insights",
+    "titleRendered": "Event recap: Women in Design Deep Dive 2024 - Research-driven design Insights",
+    "descriptionOverride": "Recap of the Women in Design Deep Dive 2024 by ISDA. Highlights include Christine Sheller's session on research-driven design using AI.",
+    "descriptionRendered": "Recap of the Women in Design Deep Dive 2024 by ISDA. Highlights include Christine Sheller's session on research-driven design using AI.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/event-recap-women-in-design-deep-dive-2024/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Event recap: Women in Design deep dive 2024",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": ""
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>The <a href=\"https://www.idsa.org/conference-details/women-in-design-deep-dive-2024/women-in-design-deep-dive-2024-schedule/\">Women in Design Deep Dive</a> 2024 event, held by <a href=\"https://www.idsa.org/\">IDSA</a>, took place on June 26–27 in Philadelphia, PA. It was a gathering of some of the brightest minds in the design industry, and among the standout sessions was one hosted by our very own <a href=\"https://www.linkedin.com/in/christine-sheller/\">Christine Sheller</a>, SVP of Experience Research + Design at O3.</p>\n<h3>About the session</h3>\n<p>Christine, an esteemed design leader and educator, led a discussion centered on the critical role of research in informing design across various disciplines. Her session aimed to equip attendees with a thorough understanding of practical discovery methods, empowering designers to create impactful, user-centric solutions.</p>\n<h4>Comprehensive research methodologies</h4>\n<p>Using the double-diamond framework, Christine shared several widely-used research methodologies that can inform design, and how to best apply them effectively. She provided concrete examples and case studies to illustrate their practical applications, ensuring that attendees gained actionable insights they could immediately implement in their projects.</p>\n<h4>Practical demonstrations</h4>\n<p>Christine showcased the process of gathering and synthesizing insights using AI technology. She introduced several innovative tools that designers can use to obtain deeper insights and make more informed design decisions. During the session, Christine discussed how AI can be integrated into design workflows, especially for user research and managing a high volume of products and tasks. She also shared a comprehensive toolkit, including demonstrations on using Miro AI to summarize data and cluster information by theme or sentiment.</p>\n<p>These practical examples highlighted the potential of AI to streamline research processes and enhance the quality of insights gathered.</p>\n<h4>Key takeaways</h4>\n<p>Christine closed the conversation with three key takeaways:</p>\n<ol>\n<li>Understand your problem space; use research methodologies to ensure you&#8217;re designing the right thing</li>\n<li>Stay curious and embrace an iterative mindset. Leverage AI to help streamline your findings and your process, and, lastly,</li>\n<li>Remember that the best design solutions are informed design solutions!</li>\n</ol>\n<h3>O3&#8217;s commitment to research-driven design</h3>\n<p>By leveraging cutting-edge methodologies and technologies, Christine helps lead O3 to deliver comprehensive insights that inform every stage of the design process, from discovery to implementation. O3&#8217;s dedication to <a href=\"https://www.o3world.com/about/\">research-driven design</a> not only enhances user experiences but also sets new standards in the industry.</p>\n"
+      }
+    ],
+    "related_articles": [
+      8961,
+      4884,
+      8036
+    ],
+    "author": ""
+  }
+}

@@ -1,0 +1,296 @@
+{
+  "_id": "perspective-wp-8604",
+  "_type": "perspective",
+  "title": "Hear from Michael Soileau: One year as CEO",
+  "slug": {
+    "_type": "slug",
+    "current": "hear-from-michael-soileau-one-year-as-ceo"
+  },
+  "excerpt": "We’re sitting down with the O3 CEO to hear what he sees internally and in the landscape of digital transformation in 2024.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2024-01-25T17:45:54Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/01/O3-website-imagery_-Perspectives-32.png"
+    },
+    "alt": "Michael Soileau 1 year at O3"
+  },
+  "body": [
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This week, O3 celebrated ",
+          "_key": "k0004"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Michael Soileau",
+          "_key": "k0005"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "’s first anniversary as CEO. It’s no secret that this past year has been unprecedented in the customer experience (CX) landscape, both for O3 and the industry at large. Dynamic and innovative technology has redefined the way we approach processes. Michael joined O3 on the cusp of an exciting shift in momentum. We sat down with him to talk about 2023 and how we’re strategically positioned for success moving into 2024.",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/michael-d-soileau/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "How has the last year been for you, and what excites you most about 2024?",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Firstly, what an amazing adventure year 2023 has been. Getting to know the team and digging into our work and services has been nothing short of fantastic.",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "However, it was also a tough year economically for our clients and us. But the upside is that it gave us some room to consider how we can be best organized to support our clients, organize to support new business verticals, and how we can create a readiness plan for this year. It was all about controlling the controllable.",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The fast-paced change in technology has certainly given us some opportunities. The ",
+          "_key": "k0014"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "work we are doing today in AI",
+          "_key": "k0015"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and ChatGPT is incredible and we have subject matter experts that have hit the ground running. The other piece is ",
+          "_key": "k0016"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "accessibility",
+          "_key": "k0017"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". Not only are businesses understanding the value of reaching all of their customers, but so is higher education, non-profits, and governments. So our work continues there, and that’s incredibly rewarding to me.",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.o3world.com/transcend/"
+        },
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.o3world.com/include/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Lastly, I’ll say that the work we are doing from a marketing and brand perspective is proving incredibly successful. Our social media spots are garnering more attention than ever and driving more questions directly to us from existing and prospective customers, which means our brand is resonating in the marketplace!",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What is your favorite part about O3 now that you have a year under your belt?",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If I am being honest, besides the incredible team we have, it’s my growing level of comfort with our work — and knowing I still have more to learn about our ecosystem. I love lifelong learning.",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "How do you see the landscape changing this year and beyond?",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Certainly technology, and AI, in particular, have taken over that conversation. So we are fortunate to have a team of technologists who are capable of staying ahead of the curve. I love watching our customer base shift – we are doing more work in verticals like sports and healthcare, which is not only fun for our teams but also very rewarding.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What do you see for the vision of the company, and how do you see O3 evolving in the next few years?",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "I am confident we have the right team and the right tools in place to succeed in an ever-changing marketplace. We have leaned into our ability to be nimble and flexible and have embraced the new opportunities in front of us in ways that, yes, can be hard but are so incredibly exciting. I think that being a premier consultancy in CX that is rooted in innovation and strategy has differentiated us in ways that have allowed us to partner for growth and to grow with emerging partners! The future is bright for O3!",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In conclusion",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The swift tech evolution in 2023 opened doors to unprecedented opportunities. Our strides in generative AI spearheaded by subject matter experts, stand as a testament to the incredible work underway. As we celebrate Michael’s one-year milestone, O3 finds itself on the verge of an unprecedented year. Our broadening influence across diverse industries showcases our adaptability, paving the way for a future of innovation and strategic digital experiences.",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Sit down with the O3 CEO: The business landscape in 2024",
+    "description": "Michael Soileau's first year as O3's CEO. Discover how O3's expertise in generative AI and adaptive strategies positions the company for a bright future in customer experience (CX) innovation."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:8604",
+    "extractedAt": "2026-08-01T00:09:42.655Z"
+  }
+}

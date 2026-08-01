@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:15.487Z"
+  },
+  "wpId": 3520,
+  "slug": "there-is-no-change-where-there-is-no-action",
+  "title": "There is no change where there is no action.",
+  "dateGmt": "2020-06-02 21:40:11",
+  "modifiedGmt": "2023-02-02 18:58:24",
+  "authorId": 16,
+  "categoryIds": [
+    10,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/05/O3-website-imagery_-Insights-12.jpg",
+    "alt": "Ascending up the stairs at the O3 office."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "There is no change where there is no action. | O3",
+    "descriptionOverride": "Stand alongside visionary activists to learn how you can fight against systemic racism and raise awareness for social injustices.",
+    "descriptionRendered": "Stand alongside visionary activists to learn how you can fight against systemic racism and raise awareness for social injustices.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/there-is-no-change-where-there-is-no-action/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Fight against systemic racism and raise awareness for social injustices</h3>\n<p>We feel the emotional charge rocking through our community. We have a heavy heart for the suffering in our world right now: the sad, the angry, the fed up, and the people who just want to be heard.</p>\n<p>We are channeling our energies to fight against systemic racism and raise awareness for social injustices. We will continue to support our local community and people of color by educating ourselves on how we can identify and confront biases.</p>\n<p>In addition to matching all employee donations made to fund racial justice, we are donating to Philadelphia-based organizations.</p>\n<p>We are connecting with leaders in our city to rise up, speak, and amplify the voices of those facing injustices. We are also talking with companies in our industry to see how we can band together to come up with real resolutions.</p>\n<p>We urge you to stand alongside visionary activists to learn, grow, and enact change with us. You can start by absorbing what these educators are saying.</p>\n<ul>\n<li><a href=\"https://checkyourprivilege.co/\" target=\"_blank\" rel=\"noopener noreferrer\">Check Your Privilege</a></li>\n<li><a href=\"https://www.sincerelylettie.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Sincerely, Lettie</a></li>\n<li><a href=\"http://laylafsaad.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Layla Saad</a></li>\n<li><a href=\"https://nowhitesaviors.org/\" target=\"_blank\" rel=\"noopener noreferrer\">No White Saviors</a></li>\n<li><a href=\"https://www.instagram.com/accordingtoweeze/\" target=\"_blank\" rel=\"noopener noreferrer\">According to Weeze</a></li>\n<li><a href=\"https://www.thegreatunlearn.com/\" target=\"_blank\" rel=\"noopener noreferrer\">The Great Unlearn</a></li>\n<li><a href=\"https://www.wherechangestarted.com/\">Where Change Started</a></li>\n</ul>\n<p>For those looking to step up and be part of the solution, human rights activists Sarah Sophie Flicker and Alyssa Klein compiled a<a href=\"https://docs.google.com/document/d/1BRlF2_zhNe86SGgHa6-VlBO-QgirITwCTugSfKie5Fs/preview?pru=AAABcosz3Q0*Cc94bnyM3IrA9rRMakqCbw\" target=\"_blank\" rel=\"noopener noreferrer\" data-saferedirecturl=\"https://www.google.com/url?q=https://docs.google.com/document/d/1BRlF2_zhNe86SGgHa6-VlBO-QgirITwCTugSfKie5Fs/preview?pru%3DAAABcosz3Q0*Cc94bnyM3IrA9rRMakqCbw&amp;source=gmail&amp;ust=1591220611119000&amp;usg=AFQjCNFm-HgGpU4Z280grE8YtfVe5ZGa6Q\"> full list of anti-racism resources here</a>.</p>\n<p>With Love &amp; Respect,<br />\nKeith Scandone, Mike Gadsby and the entire O<sub>3</sub> World team</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "There is No Change Where There is No Action.",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Team O3 is channeling our energies to fight against systemic racism and raise awareness for social injustices."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      4309,
+      4658,
+      6193,
+      3537
+    ],
+    "author": ""
+  }
+}

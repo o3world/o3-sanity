@@ -1,0 +1,201 @@
+{
+  "_id": "perspective-wp-8450",
+  "_type": "perspective",
+  "title": "Seamless digital journeys: Navigating challenges in CX with Keith Scandone",
+  "slug": {
+    "_type": "slug",
+    "current": "seamless-digital-journeys-navigating-challenges-in-cx-with-keith-scandone"
+  },
+  "excerpt": "In a recent episode of the Chief Outsiders podcast, Keith Scandone, co-founder of O3, shares expert insights on how businesses can thrive by embracing collaborative partnerships and creative strategies to enhance the customer experience in today's evolving economic landscape.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2023-10-24T18:24:23Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/10/O3-website-imagery_-Perspectives-7.png"
+    },
+    "alt": "Keith Scandone"
+  },
+  "body": [
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Keith Scandone on Chief Outsiders podcast",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In a recent episode of the ",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Chief Outsiders podcast",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", ",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Keith Scandone",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", O3 co-founder, shared insights on how businesses can adapt and thrive in today’s dynamic and uncertain economic landscape. The conversation with host ",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Deborah Fell",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " provided a deep dive into the power of collaborative partnerships and the creative strategies that are essential for enhancing the customer experience (CX).",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.chiefoutsiders.com/podcast/successbeneaththesurface.podbean.com/18ca6b34-afab-3067-a739-8d7f3fc10d81"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/keith-scandone/"
+        },
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/deborahfell/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3’s journey in the CX space commenced nearly two decades ago, and since then, we have been on a constant quest to adapt and evolve. Keith highlighted the importance of embracing digital evolution, recognizing early on that the future of CX lay in harnessing the capabilities of emerging digital solutions. He discussed O3’s approach, explaining how the process meticulously examines CX journeys within large enterprise companies, identifying gaps, and crafting solutions to bridge them. Instead of focusing on specific touchpoints, Keith explains how we intensely evaluate the entire customer journey, including all non-digital touchpoints, in order to get a full sense of their end to end experience and where the friction or opportunities lie.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "One of the standout challenges we have encountered in our journey is internal buy-in within client organizations. It’s a common struggle in the consulting field, and it often arises from siloed communication within businesses. We frequently find ourselves in the role of diplomats and connectors, navigating the intricate landscape of corporate politics to facilitate buy-in from all stakeholders. Scandone stressed that for their work to be most effective, it is crucial to secure buy-in from top-level decision-makers, allowing for a comprehensive and impactful approach to enhancing CX.",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "At O3, we do not adhere to a one-size-fits-all methodology but instead, adapt our strategies to meet the unique needs and challenges of each client. This flexibility and versatility ensure that the solutions we’re providing are tailored to the specific circumstances and goals of clients.",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Keith’s extensive experience and insights underscore the importance of adaptability, creativity, and collaboration to enhance the customer experience and drive business growth. The podcast episode provides wisdom for leaders seeking to navigate the ever-changing landscape of CX and strengthen their organizations for sustained growth.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Check out the episode",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.chiefoutsiders.com/podcast/successbeneaththesurface.podbean.com/18ca6b34-afab-3067-a739-8d7f3fc10d81"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:8450",
+    "extractedAt": "2026-08-01T00:09:47.912Z"
+  }
+}

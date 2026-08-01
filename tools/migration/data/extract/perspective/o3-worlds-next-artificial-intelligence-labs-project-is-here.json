@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:30.198Z"
+  },
+  "wpId": 633,
+  "slug": "o3-worlds-next-artificial-intelligence-labs-project-is-here",
+  "title": "O3's next artificial intelligence labs project is here",
+  "dateGmt": "2017-01-11 12:14:34",
+  "modifiedGmt": "2023-09-22 13:29:44",
+  "authorId": 16,
+  "categoryIds": [
+    8,
+    62
+  ],
+  "excerpt": "O<sub>3</sub> Moods is an application that transforms the atmosphere of a room by altering the lighting to match the personality of whoever is in the room. ",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-5.jpg",
+    "alt": "O3 accessibility and pattern"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "O3's next artificial intelligence labs project is here | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/o3-worlds-next-artificial-intelligence-labs-project-is-here/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>O<sub>3</sub> Moods is an application that transforms the atmosphere of a room by altering the lighting to match the personality of whoever is in the room. It does this by harnessing the power of Twitter and IBM&#8217;s Watson API, specifically its Personality Insights feature.</h3>\n<p>O<sub>3</sub> Moods takes tweets from a given account, analyzes the personality of that user, translates that user&#8217;s personality to a color, and then changes the colors of the lights in the room to that color.</p>\n<h4>The technologies behind this are:</h4>\n<ul>\n<li>IBM&#8217;s Watson API</li>\n<li>Philips Hue Lights</li>\n<li>AngularJS (frontend)</li>\n<li>Node.js (backend)</li>\n</ul>\n<p>The <a href=\"/innovate\">O<sub>3</sub> Labs</a> program gives us the chance to work with new and emerging technologies and experiment with ideas developed from our internal team. We look forward to what&#8217;s next in our O<sub>3</sub> Labs projects!</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "O3's next artificial intelligence labs project is here",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "The O3 Labs program gives us the chance to work with new and emerging technologies and experiment with ideas developed from our internal team."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      4265,
+      4884,
+      3893,
+      3417
+    ],
+    "author": ""
+  }
+}

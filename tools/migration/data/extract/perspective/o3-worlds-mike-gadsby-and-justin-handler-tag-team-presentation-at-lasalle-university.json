@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:30.199Z"
+  },
+  "wpId": 543,
+  "slug": "o3-worlds-mike-gadsby-and-justin-handler-tag-team-presentation-at-lasalle-university",
+  "title": "O3's Mike Gadsby and Justin Handler tag-team presentation at LaSalle University",
+  "dateGmt": "2016-04-08 20:28:16",
+  "modifiedGmt": "2023-02-02 16:20:31",
+  "authorId": 16,
+  "categoryIds": [
+    7,
+    10
+  ],
+  "excerpt": "On April 8, 2016, O<sub>3</sub> World CXO Mike Gadsby and Account Strategist Justin Handler head to LaSalle University to speak to students in the marketing and digital arts departments.",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights-3.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "O3's Mike Gadsby and Justin Handler tag-team presentation at LaSalle University | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/o3-worlds-mike-gadsby-and-justin-handler-tag-team-presentation-at-lasalle-university/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Tonight, O<sub>3</sub> World CXO <a href=\"/about/team/mike-gadsby\">Mike Gadsby</a> and Account Strategist <a href=\"/about/team/justin-handler\">Justin Handler</a> head to <a href=\"http://lasalle.edu\">LaSalle University</a> to speak to students in the marketing and digital arts departments. Both Mike and Justin bring unique perspectives on working in digital agencies.</h3>\n<p>After graduating from the University of Pennsylvania and getting his feet wet in the branding world, Mike Gadsby elected to take their reins himself and become self-employed at 24. In 2005, he took an even bigger leap, when he co-founded O<sub>3</sub> World. Now, after more than 10 years in business, Mike is a business owner, an employer, a mentor, and an innovator. He’ll talk about that and offer insights into what he looks for in employees.</p>\n<p>Justin Handler, on the other hand, has a different experience. After beginning his career in project management at an agency just outside New York City, this LaSalle grad joined O<sub>3</sub> World in 2010 and is now the company’s longest-tenured employee. Over the next five years, he rose through the ranks to become lead project manager. Now,  as account strategist, he’ll take the project management skills he’s honed, the client relationships he’s built, and his thoughtful, strategic mindset to a new level. He’ll share his experience in finding a job after college, building a successful career, and more with the Explorers today.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "O3's Mike Gadsby and Justin Handler tag-team presentation at LaSalle University",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Team O3 gave a presentation at LaSalle University. "
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      5038,
+      6194,
+      5025,
+      3073
+    ],
+    "author": ""
+  }
+}

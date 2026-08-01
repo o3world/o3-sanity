@@ -1,0 +1,351 @@
+{
+  "_id": "perspective-wp-988",
+  "_type": "perspective",
+  "title": "Innovation Day 2018 recap",
+  "slug": {
+    "_type": "slug",
+    "current": "innovation-day-2018-recap"
+  },
+  "excerpt": "O3 took part in Philly Tech Week's 2nd annual Innovation Day. Check it out.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    }
+  ],
+  "publishedAt": "2018-05-08T18:09:21Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-16.jpg"
+    },
+    "alt": "Red pattern"
+  },
+  "body": [
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Last week we hosted the 2nd annual Innovation Day as part of Philly Tech Week presented by Comcast.",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The sold-out event highlighted work being done by different agencies around the city who are infusing emerging technology into their work to push the limits of what can be done. Couldn’t make it? Read on to find out more about what each of the speakers covered!",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Lisha Davis",
+          "_key": "k0015"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", Head of Innovation Studio, Vanguard: Lisha discussed corporate intrapreneurship to highlight elements of Vanguard’s operating model and the observations/lessons they’ve learned to date.",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/lishadavis/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Todd Zielinski",
+          "_key": "k0018"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", Sr. Director of Electrical Engineering, Bresslergroup: Todd covered what Bresslergroup is doing with IoT and how they launched Sencity, a smart-city platform. In addition, he discussed the things his team learned and how it relates to both consumers and clients. More can be found in his ",
+          "_key": "k0019"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "presentation",
+          "_key": "k0020"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/tzielinski/"
+        },
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://bresslergroup.egnyte.com/dl/yjjKonosqq"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Mike Gadsby, CXO and Co-founder, Lauren Slattery, Head of UX Strategy, and Dan Laufer, Developer of O3 World: The three of them talked about how O3 infuses innovation into everyday projects through the ",
+          "_key": "k0023"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "O3 Labs",
+          "_key": "k0024"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " program and how we validate and make this work for clients.",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.o3world.com/labs/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "Anatoly Polinsky",
+          "_key": "k0027"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", Director of Zeros and Ones, Chariot Solutions: He discussed how the world of blocks and chains works and what it really means for Chariot’s clients. More in his ",
+          "_key": "k0028"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "slides",
+          "_key": "k0029"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/anatoly-polinsky-4416272/"
+        },
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://drive.google.com/file/d/1bWdfb8a3d9ib0ul5yIsOeUbtDqKq8Des/view?usp=sharing"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0006"
+          ],
+          "text": "Brett Bagenstose",
+          "_key": "k0032"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", The Baron of Pixels, Neo-Pangea: To round out our day, Brett discussed how his team uses WebVR to bring the technology to more people in a simpler way.",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0006",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/bagenstose/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Thanks to all our speakers who made Innovation Day a huge success. Also, special shoutout to ",
+          "_key": "k0035"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0007"
+          ],
+          "text": "La Colombe",
+          "_key": "k0036"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " who sponsored our event and provided coffee the morning of the talks! We’re already looking forward to next year’s tech week!",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0007",
+          "_type": "link",
+          "href": "https://www.lacolombe.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Want to learn more about any of the talks or what the ",
+          "_key": "k0039"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0008"
+          ],
+          "text": "O3 Labs",
+          "_key": "k0040"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " program is? ",
+          "_key": "k0041"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0009"
+          ],
+          "text": "Drop us a line",
+          "_key": "k0042"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "!",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0008",
+          "_type": "link",
+          "href": "https://www.o3world.com/labs/"
+        },
+        {
+          "_key": "k0009",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:988",
+    "extractedAt": "2026-08-01T00:10:25.429Z"
+  }
+}

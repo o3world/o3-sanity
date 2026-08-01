@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:15.489Z"
+  },
+  "wpId": 3247,
+  "slug": "design-predictions-that-will-guide-the-industry-in-2020",
+  "title": "Design predictions that will guide the industry in 2020",
+  "dateGmt": "2020-03-04 21:11:22",
+  "modifiedGmt": "2023-02-02 19:08:29",
+  "authorId": 16,
+  "categoryIds": [
+    61,
+    8
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights-3.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Design predictions that will guide the industry in 2020 | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/design-predictions-that-will-guide-the-industry-in-2020/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>With 2020 well underway, it&#8217;s clear the design industry is evolving.</h3>\n<p>Our Chief Innovation Officer, <a href=\"https://www.o3world.com/about/team/mike-gadsby/\">Mike Gadsby</a>, recently weighed in with other industry experts on a <a href=\"https://proto.io/\">Proto.io</a> blog by Angelica Valentine, expanding on how design methodology will evolve over the next year.</p>\n<p>Need to get up to speed on the design trends that are sure to drive the industry?</p>\n<h4><a href=\"https://blog.proto.io/design-predictions-that-will-guide-the-industry-in-2020/\"><span class=\"btn__text\">Read insights </span></a></h4>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Design predictions that will guide the industry in 2020",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Mike Gadsby, recently weighed in with other industry experts on a Proto.io blog by Angelica Valentine, expanding on how design methodology will evolve over the next year."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      3380,
+      4296,
+      3537,
+      4884
+    ],
+    "author": ""
+  }
+}

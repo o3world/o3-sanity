@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:20.528Z"
+  },
+  "wpId": 3205,
+  "slug": "in-the-news-matter-of-trust-maintaining-customer-experience-during-ma",
+  "title": "Matter of trust: Maintaining customer experience during M&A",
+  "dateGmt": "2019-09-24 09:53:06",
+  "modifiedGmt": "2023-02-02 15:50:21",
+  "authorId": 16,
+  "categoryIds": [
+    15,
+    7
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-17.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Matter of trust: Maintaining customer experience during M&A | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/in-the-news-matter-of-trust-maintaining-customer-experience-during-ma/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>While 80% of consumers believe companies should focus on customer experience during a transition, only 24% of companies have emphasized CX in past deals. Transitions are too often a lost opportunity to increase or improve the client base’s trust in a company.</p>\n<p>It’s not easy, but it’s a worthwhile endeavor with long-term returns. In his MediaPost article, Tim Breslin, CTO, talks about 3 ways to keep customers engaged during a mergers and acquisitions (M&amp;A) situation.</p>\n<h4><a href=\"https://www.mediapost.com/publications/article/341137/matter-of-trust-maintaining-customer-experience-d.html\">Read on MediaPost</a>.</h4>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Matter of trust: Maintaining customer experience during M&A",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Tim Breslin, CTO, talks about 3 ways to keep customers engaged during a mergers and acquisitions (M&A) situation."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      6185,
+      5120,
+      6191,
+      5262
+    ],
+    "author": ""
+  }
+}

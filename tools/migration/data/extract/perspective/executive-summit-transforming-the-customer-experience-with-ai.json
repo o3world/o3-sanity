@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:57.655Z"
+  },
+  "wpId": 7653,
+  "slug": "executive-summit-transforming-the-customer-experience-with-ai",
+  "title": "Executive Summit: Transforming the Customer Experience with AI",
+  "dateGmt": "2023-04-11 15:56:41",
+  "modifiedGmt": "2023-04-11 15:56:41",
+  "authorId": 16,
+  "categoryIds": [
+    7
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/04/My-project-1-39.jpg",
+    "alt": "Mike Gadsby ECN"
+  },
+  "seo": {
+    "titleOverride": "Webinar event: Transforming the Customer Experience with AI",
+    "titleRendered": "Webinar event: Transforming the Customer Experience with AI",
+    "descriptionOverride": "O3 and ECN are sitting down with experts to discuss how generative AI can will impact CX in 2023.",
+    "descriptionRendered": "O3 and ECN are sitting down with experts to discuss how generative AI can will impact CX in 2023.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/executive-summit-transforming-the-customer-experience-with-ai/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Executive Summit: Transforming the Customer Experience with AI",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Webinar event: Let's examine how AI is transforming customer experience (CX) in 2023"
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>Groundbreaking technology has taken the world by storm and redefined the way businesses operate. From artificial intelligence to machine learning, companies are constantly exploring innovative ways to enhance their processes and capabilities. One of the most talked-about technologies is generative AI, and the buzz around it is only growing louder. But what does this mean for your customers?</p>\n<p>To explore this question and many others, Executive Council Network (ECN) has partnered with O3 for a combined event titled “<a href=\"https://www.linkedin.com/events/executivesummit-transforingcust7041442551429562368/comments/\">Transforming the Customer Experience with AI</a>”. The goal of the event is to shape the future by challenging thought leaders and executives to drive innovation through community and connections.</p>\n<p>The event will feature a panel of experts who will examine how AI is transforming customer experience (CX) in 2023. These experts bring a unique perspective to the table, as they have experience in aligning and transforming brands in an ever-changing landscape of technology. By attending this event, you will have the opportunity to gain insights into how you can leverage AI to enhance your customers&#8217; experience.</p>\n<h4>Meet the panelists:</h4>\n<p><a href=\"https://www.linkedin.com/in/michaelgadsby/\">Mike Gadsby</a>, O3</p>\n<p><a href=\"https://www.linkedin.com/in/katherinemaraschin/\">Katherine Maraschin</a>, Service Now</p>\n<p><a href=\"https://www.linkedin.com/in/quintinmcgrath/\">Dr Quinton McGrath</a>, Deloitte</p>\n<p>&nbsp;</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone size-medium wp-image-7654\" src=\"https://www.o3world.com/wp-content/uploads/2023/04/1681216469591-640x360.png\" alt=\"ECN event\" width=\"640\" height=\"360\" srcset=\"http://www.o3world.com/wp-content/uploads/2023/04/1681216469591-640x360.png 640w, http://www.o3world.com/wp-content/uploads/2023/04/1681216469591-1024x576.png 1024w, http://www.o3world.com/wp-content/uploads/2023/04/1681216469591-768x432.png 768w, http://www.o3world.com/wp-content/uploads/2023/04/1681216469591-48x27.png 48w, http://www.o3world.com/wp-content/uploads/2023/04/1681216469591.png 1280w\" sizes=\"auto, (max-width: 640px) 100vw, 640px\" /></p>\n<p>&nbsp;</p>\n<p>At O3, we understand that staying ahead of the curve is critical in today&#8217;s fast-paced business environment. That&#8217;s why we are excited to partner with ECN. Join us as we explore the future of AI and how it will impact customer experience in the years to come.</p>\n<h4><a href=\"https://www.linkedin.com/company/249880/admin/\">Register here</a></h4>\n"
+      }
+    ],
+    "related_articles": [
+      6193,
+      7369,
+      7571
+    ],
+    "author": ""
+  }
+}

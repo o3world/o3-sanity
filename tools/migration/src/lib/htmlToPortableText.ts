@@ -23,6 +23,75 @@ export function normalizeUploadUrl(url: string): string {
 export type ConversionIssue = { element: string; detail: string }
 
 /**
+ * A WordPress shortcode: a bare tag (`[gallery]`) or one with attributes
+ * (`[contact_form id="4"]`).
+ *
+ * Deliberately NOT `\[[a-z_]+ [^\]]*\]` — that also matched editorial prose in
+ * square brackets ("…named one of the best entrepreneurial companies [in the
+ * E360 Index]"), which failed a post for a shortcode that was never there.
+ */
+const SHORTCODE = /\[[a-z][a-z0-9_]*(?:\s+[a-z_]+=[^\]]*|\s*)\]/
+
+/**
+ * Shortcodes that are dead on the live site and are stripped rather than
+ * reported. `single_image` is the only one: it is **not registered** in
+ * WordPress (visitors see the literal `[single_image title="…"]` text today)
+ * and none of the image titles it references still exist in the media
+ * library. Removing it is a fix, not a loss — but it is recorded as a note so
+ * the removal is visible in the run report rather than silent.
+ */
+const DEAD_SHORTCODES = ['single_image']
+
+function stripDeadShortcodes(html: string, notes: ConversionIssue[]): string {
+  let out = html
+  for (const tag of DEAD_SHORTCODES) {
+    const pattern = new RegExp(`\\[${tag}(?:\\s+[^\\]]*)?\\]`, 'g')
+    for (const match of html.match(pattern) ?? []) {
+      notes.push({ element: 'shortcode', detail: `stripped dead shortcode ${match}` })
+    }
+    out = out.replace(pattern, '')
+  }
+  return out
+}
+
+/**
+ * Embedded lead-capture forms — HubSpot and Gravity Forms — do not migrate.
+ * There is no form block in the schema and adding one is a schema
+ * conversation, not something a content pass decides on the way past
+ * (#25 agreement 1).
+ *
+ * They are stripped and **reported as notes**, naming the post and the
+ * provider, so an editor can re-add a CTA. That is the recorded drop decision
+ * rather than a silent loss — and it was already a silent loss: block-tools
+ * discards `<script>` and `<form>` without a word, so two of the three posts
+ * had been converting "cleanly" while dropping their form.
+ *
+ * Stripping scripts first also un-breaks the shortcode scan: minified JS
+ * (`gform.hooks[o][r]`) reads as a shortcode to any bracket-matching regex.
+ */
+function stripEmbeddedForms(html: string, notes: ConversionIssue[]): string {
+  const provider = /hsforms|hbspt/i.test(html)
+    ? 'HubSpot'
+    : /gform|gravity/i.test(html)
+      ? 'Gravity Forms'
+      : null
+
+  const before = html
+  const out = html
+    .replace(/<script\b[\s\S]*?<\/script>/gi, '')
+    .replace(/<form\b[\s\S]*?<\/form>/gi, '')
+    .replace(/<div[^>]*\bclass=["'][^"']*gform_wrapper[^"']*["'][\s\S]*?<\/div>/gi, '')
+
+  if (out !== before) {
+    notes.push({
+      element: 'embedded form',
+      detail: `${provider ?? 'an inline script/form'} embed dropped — no form block in the schema; re-add a CTA`,
+    })
+  }
+  return out
+}
+
+/**
  * A per-document `_key` sequence: `k0000`, `k0001`, …
  *
  * block-tools defaults to random keys, which made convert non-reproducible —
@@ -49,11 +118,12 @@ export function convertHtml(
   html: string,
   issues: ConversionIssue[],
   keyGenerator: () => string = createKeyGenerator(),
+  notes: ConversionIssue[] = [],
 ) {
-  if (/\[[a-z_]+ [^\]]*\]/.test(html)) {
-    issues.push({ element: 'shortcode', detail: html.match(/\[[a-z_]+ [^\]]*\]/)![0] })
-  }
-  return htmlToBlocks(html, bodyTextType, {
+  const source = stripDeadShortcodes(stripEmbeddedForms(html, notes), notes)
+  const shortcode = source.match(SHORTCODE)
+  if (shortcode) issues.push({ element: 'shortcode', detail: shortcode[0] })
+  return htmlToBlocks(source, bodyTextType, {
     keyGenerator,
     parseHtml: (h) => new JSDOM(h).window.document,
     rules: [
@@ -74,7 +144,17 @@ export function convertHtml(
             if (!src) return undefined
             return block({ _type: 'embed', url: src })
           }
-          if (node.tagName === 'VIDEO' || node.tagName === 'OBJECT' || node.tagName === 'SCRIPT') {
+          // A self-hosted `<video>` from WordPress's [video] shortcode. The
+          // file is an ordinary upload, so it migrates as an asset like any
+          // image and the embed block renders it.
+          if (node.tagName === 'VIDEO') {
+            const src =
+              node.getAttribute('src') ?? node.querySelector('source')?.getAttribute('src') ?? null
+            if (src) return block({ _type: 'embed', url: src })
+            issues.push({ element: 'VIDEO', detail: node.outerHTML.slice(0, 200) })
+            return undefined
+          }
+          if (node.tagName === 'OBJECT' || node.tagName === 'SCRIPT') {
             issues.push({ element: node.tagName, detail: node.outerHTML.slice(0, 200) })
           }
           return undefined

@@ -7,7 +7,18 @@ pnpm --filter @o3/migration extract -- --posts all       # live WP → data/extr
 pnpm --filter @o3/migration extract -- --slugs a,b       # …or exactly these posts, by slug
 pnpm --filter @o3/migration convert                      # data/extract/ → data/converted/ (deterministic, fail-loud)
 pnpm --filter @o3/migration load                         # data/{converted,translated,seed}/ → Sanity (sanity exec --with-user-token)
+pnpm --filter @o3/migration verify                       # is the dataset what data/ says it is?
 ```
+
+`verify` runs after every load (#17; #24 reuses it for parity checks). The
+tests check the committed corpus; `verify` checks the thing the corpus was
+supposed to produce, which fails differently — a document can be perfect on
+disk and missing, half-loaded, or shadowed in the dataset. It reports per-type
+counts, then: every committed document present, every reference resolving, no
+`_wpSrc`/`_localSrc` marker left unresolved, every document passing its zod
+gate, no `_type` the schema does not define, no two documents claiming one
+slug, and nothing routable in the dataset that is not committed under `data/`.
+Non-zero exit on any finding.
 
 Rules of the road:
 
@@ -17,6 +28,71 @@ Rules of the road:
 - Image nodes carry a `_wpSrc` URL marker until `load` uploads the binary and swaps in an asset ref; `data/assets.json` is the URL→asset audit map. Binaries cache in `data/media-cache/` (gitignored).
 - Agent translation (case studies): input = `data/extract/` + `rules/<type>.md` + typegen types; output = `data/translated/` with `_meta` provenance; reviewed as a PR before loading.
 - **A PHP snippet passed to `wpEval` may contain no single quotes and no `//` comments.** It is flattened to one line before it is sent, so a line comment silently comments out the rest of the program; `wpEval` rejects both up front. Explain the PHP in the TypeScript doc comment above it.
+
+---
+
+## The full archive: what the long tail turned out to be (#17)
+
+All 272 perspectives convert with an **empty fail-loud report**. Getting there
+meant two new mapper arms, four recorded drop decisions, and one correction to
+how authorship was being read.
+
+### ACF module types, in full
+
+`flexible_post_content` uses exactly three layouts across the whole archive —
+`text` (277 instances), `video` (7), `image` (3). All three have mappers; a
+fourth would still fail the run.
+
+- **`video`** stores its source two ways. `external` keeps the **iframe HTML**
+  WordPress cached from oEmbed (not a URL), so the mapper pulls the `src` out
+  of it; `file` keeps an uploaded mp4, which migrates as an ordinary asset.
+  Both become an `embed`.
+- **`image`** is an ACF image array → a `figure`, alt falling back to the
+  attachment title.
+
+### Recorded drop decisions
+
+Four things do not migrate. None of them is silent — each is reported as a
+**note** on every run (converted, but the source needed cleaning up):
+
+1. **`[single_image title="…"]`** (5 uses, 3 posts). Stripped. The shortcode is
+   **not registered** in WordPress, so visitors see the literal
+   `[single_image …]` text on the live site today, and none of the image titles
+   it names still exist in the media library. Removing it is a fix.
+2. **Embedded forms** (3 posts — HubSpot ×2, Gravity Forms ×1). Stripped, with
+   the provider named so an editor can re-add a CTA. There is no form block in
+   the schema and adding one is a schema conversation (#25 agreement 1). This
+   was already a silent loss: block-tools discards `<script>` and `<form>`
+   without a word.
+3. **Broken Yoast title templates** (1 post). See the SEO section below.
+4. **Code blocks** — nothing to drop. Zero `<pre>`, `<code>`, `wp-block-code`
+   or highlighter classes in 272 bodies, which settles the open question from
+   the schema spec: **ADR 0005**, no `codeBlock`.
+
+Two false positives are worth knowing about, because both cost a debugging
+round: the old shortcode regex matched editorial prose in square brackets
+("…best entrepreneurial companies **[in the E360 Index]**"), and minified
+Gravity Forms JavaScript (`gform.hooks[o][r]`) reads as a shortcode to any
+bracket-matching pattern. Scripts are stripped before the scan now.
+
+### The byline is not `post_author`
+
+Posts carry an ACF `author` field pointing at a **`team` post**, and on **39 of
+the 40** posts that set one it names someone other than `post_author` — the WP
+account is just whoever hit publish. `PersonDirectory` (`map/person.ts`) owns
+this:
+
+- ACF `author` wins; `post_author` is the fallback.
+- A WP _user_ and a _team_ post are the same person when they share an email or
+  a name. **Email first** — three accounts never had a display name set, so
+  their "name" is a login (`handler`, `kelly`) that joins to nothing.
+- The team record supplies name, role and headshot; the user record is an
+  account. Merged people keep `person-wp-<userId>` so existing references hold;
+  team-only people (former staff who still wrote things) get
+  `person-wp-<teamPostId>`, and the directory refuses to build if those two id
+  spaces ever overlap.
+- Team posts are extracted with `post_status => any`. Six referenced members
+  are unpublished, and a former employee is still the author of what they wrote.
 
 ---
 

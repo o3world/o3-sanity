@@ -1,0 +1,75 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:57.658Z"
+  },
+  "wpId": 7284,
+  "slug": "reinventing-search-through-generative-ai",
+  "title": "Reinventing search through generative AI",
+  "dateGmt": "2023-02-10 17:41:06",
+  "modifiedGmt": "2023-03-01 17:51:45",
+  "authorId": 16,
+  "categoryIds": [
+    15,
+    11
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-18.jpg",
+    "alt": "O3 pattern"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Reinventing search through generative AI | O3",
+    "descriptionOverride": "Connect with us to learn more about how this technology may impact your search or customer experience strategy. Discover how Google and Microsoft are shaping the \"Generative AI War\" through their latest developments in Bard and Bing.",
+    "descriptionRendered": "Connect with us to learn more about how this technology may impact your search or customer experience strategy. Discover how Google and Microsoft are shaping the \"Generative AI War\" through their latest developments in Bard and Bing.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/reinventing-search-through-generative-ai/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Reinventing search through generative AI",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "The “Generative AI War” between Google and Microsoft will fundamentally change the way we search for information."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>This week, both Google and Microsoft took big swings in the developing “Generative AI War”.</h3>\n<p>While Google stumbled through its announcement of Bard, its ChatGPT competitor, Microsoft unveiled a new AI-powered Bing search and Edge browser that impressed. Both ChatGPT and Bard are intended to be integrated into a variety of language-based applications — such as chatbots, virtual assistants, and search engines — to improve the user experience by providing more complete, accurate, and relevant responses to user questions. As this unprecedented technology takes over the market, day-to-day digital tasks are being transformed to replicate human-like experiences.</p>\n<h3>A new age of searching:</h3>\n<p>While generative AI and especially chat solutions will have a profound <a href=\"https://www.o3world.com/perspectives/chatgpt-improving-cx/\">impact on customer experience</a>, it will absolutely change our expectations in one of the most basic experience conventions: search. What has been a web and mobile user experience standard for so long (user submits a search query &gt; gets a list of results &gt; sifts through them for the desired response), is now being reconsidered from top to bottom. <a href=\"https://blogs.microsoft.com/blog/2023/02/07/reinventing-search-with-a-new-ai-powered-microsoft-bing-and-edge-your-copilot-for-the-web/\">As the new Bing and Edge announcement</a> underscored, “There are 10 billion search queries a day, but we estimate half of them go unanswered.” People clearly need a better search experience. Now the tools are available to do so.</p>\n<p>To further understand this technology, let’s look into four capabilities that can reinvent the search experience, as well as a few limitations that we must be aware of in order to move forward.</p>\n<h4>Natural language processing:</h4>\n<p>Generative AI models can better understand the intent behind natural language queries and provide more relevant search results. This can reduce the need for users to repeat their search with different keywords. You simply ask a question as you would to a human.</p>\n<p>&nbsp;</p>\n<h4>Answer generation:</h4>\n<p>Generative AI models can generate direct answers to questions, making it easier for users to find the information they need. This could save users so much time and effort, and improve their overall experience with the search engine. You no longer have to sift through irrelevant links to get to the information you’re looking for. You ask a question, you get an answer. That said, the answers generated are dependent upon the information the tool is pulling from. So in some cases, responses can be inaccurate depending on the original source.</p>\n<h4>Personalized results:</h4>\n<p>Generative AI models can personalize search results based on a user’s individual preferences and needs, providing them with a more tailored search experience. How great would it be for a search engine to understand the “context of you”? Personalization however requires a give and take of data (and thus, privacy concerns) and can be an extensive process to implement.</p>\n<h4>Improved relevance:</h4>\n<p>Generative AI models can better understand the context and meaning of search queries and provide more relevant search results. This can reduce the number of false positive results and improve the overall quality of search results. However, due to contextual confusion and double meanings, inefficiencies in relevant content have been identified.</p>\n<h3>In conclusion:</h3>\n<p>As we consider the place of “search” within the customer journey, our strategies will have to be reassessed. Will users click a link to go to a page to get an answer? Or, will they simply expect a complete, accurate answer to their question within whatever search tool they may be using? SEO, paid search, and even the search tools embedded within the sites we visit will all have to be reconsidered. Like all experiences, we expect that with new technology comes an easier and more humanized process.</p>\n<p>For more information on how this change may impact your search or customer experience strategy, connect with us.</p>\n"
+      }
+    ],
+    "related_articles": [
+      5262,
+      4118,
+      3444,
+      5120
+    ],
+    "author": [
+      672
+    ]
+  }
+}

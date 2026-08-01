@@ -1,0 +1,190 @@
+{
+  "_id": "perspective-wp-7287",
+  "_type": "perspective",
+  "title": "O3's accessibility resources",
+  "slug": {
+    "_type": "slug",
+    "current": "digital-accessibility-resources"
+  },
+  "excerpt": "As businesses continue to shift towards a more digital and technology-based approach, it is becoming increasingly important to ensure that all users can access and engage with your experience. By focusing on user-centered design and inclusive practices, O3 is helping to create a more equitable and accessible digital landscape for all individuals. Our team of CPACC certified experts has developed a set of useful guidelines to help get you started.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-63",
+      "_key": "cat-63"
+    }
+  ],
+  "publishedAt": "2023-02-22T17:52:08Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/02/O3-website-imagery_-Perspectives-7.jpg"
+    },
+    "alt": "Accessibility"
+  },
+  "body": [
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Ebook: Making sense of digital accessibility",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Check out O3’s informative accessibility ebook. By both doing the right thing and broadening your audience, implementing an accessibility strategy is an asset to your business’ culture and sales. O3’s CPACC-certified accessibility experts have created this comprehensive ebook as your go-to resource.",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Download ebook",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.o3world.com/wp-content/uploads/2023/01/Making-Sense-of-Accessibility-eBook-1.pdf"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Ebook: Accessibility considerations for project management teams",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "To help you get started, our CPACC-certified accessibility experts have crafted an accessibility essentials guide for project management teams to use as a reference.",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Download ebook",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.o3world.com/perspectives/ebook-accessibility-for-pm-teams/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Ebook: Improve SEO through accessibility",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In this resource, we’ll explore the relationship between accessibility and SEO (Search Engine Optimization) to help companies better understand the positive impact accessibility considerations have when websites and digital experiences are designed to be accessible to all users.",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Download ebook",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.o3world.com/perspectives/designing-for-accessibility-improving-ux-for-everyone/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "Looking to improve your website's digital accessibility? Check out O3's informative accessibility ebooks on making sense of digital accessibility, accessibility considerations for project management teams, and improving SEO through accessibility."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:7287",
+    "extractedAt": "2026-08-01T00:09:57.658Z"
+  }
+}

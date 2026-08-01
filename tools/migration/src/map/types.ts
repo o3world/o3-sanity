@@ -1,4 +1,24 @@
+import { z } from 'zod'
+
 import type { ConversionIssue } from '../lib/htmlToPortableText'
+
+/**
+ * An image in a pipeline-owned document, in either of its two valid states:
+ * carrying a `_wpSrc` URL marker before `load` uploads the binary, or an
+ * `asset` reference after. Gates are applied to the committed JSON at convert
+ * time AND to the dataset by `verify`, so they have to accept both — a gate
+ * that only knows the pre-load shape reports every loaded document as broken.
+ */
+export const migratableImage = z
+  .object({
+    _type: z.literal('image'),
+    _wpSrc: z.string().url().optional(),
+    asset: z.object({ _ref: z.string() }).loose().optional(),
+  })
+  .loose()
+  .refine((image) => Boolean(image._wpSrc ?? image.asset), {
+    message: 'image has neither a _wpSrc marker nor an uploaded asset',
+  })
 
 /**
  * Every mapper returns one of these instead of throwing or half-writing:

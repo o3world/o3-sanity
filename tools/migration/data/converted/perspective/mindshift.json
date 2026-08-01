@@ -1,0 +1,170 @@
+{
+  "_id": "perspective-wp-3832",
+  "_type": "perspective",
+  "title": "New webinar series reveals how to maximize the power of AI",
+  "slug": {
+    "_type": "slug",
+    "current": "mindshift"
+  },
+  "excerpt": "The MindShift webinar series, hosted by O3, connects business leaders with experts and visionaries in the AI space.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-11",
+      "_key": "cat-11"
+    }
+  ],
+  "publishedAt": "2020-09-08T18:17:11Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/07/O3-website-imagery_-Insights-8.jpg"
+    },
+    "alt": "New webinar series reveals how to maximize the power of AI"
+  },
+  "body": [
+    {
+      "_key": "k0000",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "MindShift webinar series",
+          "_key": "k0001"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We are facing an exciting shift: Intelligent technologies are advancing and disrupting the status quo in all areas of life. The way we work and do business is fundamentally changing. As marketers, product owners and digital strategists we must learn how to stay relevant in a fast changing world.",
+          "_key": "k0003"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The MindShift webinar series, hosted by O3, connects business leaders with experts and visionaries in the AI space. Tune in to gain the new skills needed to adapt and evolve by attending the first session, Maximize the Power of AI.",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "During this webinar, you’ll learn how to:",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Take initiative and experiment with AI to make your customers’ lives better.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Transform your organization’s data into your competitive advantage.",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Prove and show that your tech is set up in an ethical way.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Deliver demonstrable business value from your data through unique AI solutions.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    }
+  ],
+  "seo": {
+    "description": "Introducing a new webinar series to help marketers, product owners and digital strategists learn how to stay relevant in a fast changing world."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:3832",
+    "extractedAt": "2026-08-01T00:10:10.995Z"
+  }
+}

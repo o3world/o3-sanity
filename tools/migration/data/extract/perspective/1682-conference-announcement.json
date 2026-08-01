@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:32.179Z"
+  },
+  "wpId": 10044,
+  "slug": "1682-conference-announcement",
+  "title": "Announcing: The 1682 Conference is back!",
+  "dateGmt": "2025-04-08 18:38:56",
+  "modifiedGmt": "2025-04-08 18:48:31",
+  "authorId": 16,
+  "categoryIds": [
+    7,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2025/02/1682@4x.png",
+    "alt": "1682 Conference AI Innovation"
+  },
+  "seo": {
+    "titleOverride": "Join 1682 conference in Philadelphia hosted by O3 %%page%% %%sep%% %%sitename%%",
+    "titleRendered": "Join 1682 conference in Philadelphia hosted by O3 | O3",
+    "descriptionOverride": "Discover the latest in AI innovation at the upcoming 1682 AI conference in October, 2025. Build connections and gain valuable insights.",
+    "descriptionRendered": "Discover the latest in AI innovation at the upcoming 1682 AI conference in October, 2025. Build connections and gain valuable insights.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/1682-conference-announcement/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Announcing: The 1682 Conference is back!",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Join the 1682 Conference at the Barnes Foundation on October 8, 2025, for exclusive insights on AI-driven business innovation."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>O3 is proud to announce the return of the <a href=\"https://www.1682conference.com/\">1682 Conference</a>, a premier gathering at the intersection of innovation, artificial intelligence (AI), and business transformation. Taking place on Wednesday, October 8, 2025, at the <a href=\"https://www.barnesfoundation.org/\">Barnes Foundation in Philadelphia</a>, this year’s flagship event will feature an expanded lineup—including intimate pre-conference experiences designed to build deeper connections and catalyze new insights across the innovation community. In addition to the main event in October, the series will also include a half-day innovation event on June 5, 2025, at the Comcast Center in Philadelphia, offering an additional opportunity to engage with leaders and innovators in the field of AI and business transformation.</p>\n<p>What sets 1682 apart is its exclusive and intimate experience—an environment designed to foster meaningful connections and deep, strategic conversations. The Barnes Foundation, with its renowned collection of art and its commitment to education, provides an intimate, unique atmosphere where thought leaders, technologists, and innovators can engage away from the typical conference noise. With the museum closed for the day, attendees will have the opportunity to explore its exclusive collection in a setting reserved only for 1682 participants, providing a rare fusion of art, culture, and business.</p>\n<p>Since its<a href=\"https://www.1682conference.com/pastevents\"> inception in 2019</a>, 1682 has brought together C-suite leaders, technologists, and change-makers to share unfiltered stories of AI implementation—celebrating not just success but the entire journey, from obstacles to breakthroughs. This year, the conference will expand to a multi-touchpoint series, providing opportunities to engage with peers and thought leaders throughout the year.</p>\n<h3>This year’s <a href=\"https://www.1682conference.com/upcomingevents\">1682 innovation series</a> includes</h3>\n<h4>1682 summer session: inside corporate innovation</h4>\n<p><em>June 5 at Comcast Technology Solutions Center, Philadelphia</em><br />\nThis half-day event dives into how organizations are building and scaling innovation programs, measuring success, and creating lasting business impact. Featuring practical case studies and panel discussions, it will equip attendees with tools to foster innovation in complex environments.</p>\n<p><a href=\"https://www.tickettailor.com/events/o31/1642744\">Register</a></p>\n<h4>1682 Conference</h4>\n<p><em>October 8 at The Barnes Foundation, Philadelphia</em><br />\nThe flagship event will offer a full day of programming, including speaker panels, tactical sessions, and behind-the-scenes AI project insights. Attendees will explore how to take AI from pilot to production, navigate the complexities of organizational transformation, and unlock new revenue and product opportunities. The day concludes with an elevated cocktail reception on the Walter and Leonore Annenberg Terrace and exclusive access to the Barnes art collection.</p>\n<p><a href=\"https://www.tickettailor.com/events/o31/1640631\">Register</a></p>\n<h4>1682 innovation leaders mixer</h4>\n<p><em>September 25 at O3 Headquarters, Philadelphia</em><br />\nA private, invite-only evening event bringing together 30 influential executives, founders, and innovators for curated conversations and strategic networking in an intimate setting.</p>\n<p>(contact <a href=\"http://Milos@o3world.com\">Milos Milosevic</a> for details)</p>\n<h3>Why attend</h3>\n<p>1682 is unlike any other AI event. It centers on the business side of innovation, lifting the curtain on the challenges, decisions, and breakthroughs that define successful AI implementations. Additionally, it is an exclusive gathering of only 130 curated guests amidst one of the city’s most inspiring museums, the Barnes.</p>\n<h4>Event highlights include</h4>\n<ul>\n<li>Real-world insights from leaders who’ve scaled AI and innovation programs—from ideation to implementation.</li>\n<li>Candid stories of roadblocks, failures, pivots, and wins—offering rare visibility into what innovation really looks like behind the scenes.</li>\n<li>Exclusive networking designed to foster meaningful connections across industries and disciplines.</li>\n<li>This year’s speaker lineup and sponsors will continue to reflect the caliber of previous participants, which include voices from Independence Blue Cross, Cigna, Five Below, Wawa, CHOP,  and notable Philadelphia innovation leaders like Rick Nucci, April Walker, and Michael Bachman.</li>\n</ul>\n<h3>Call for speakers and sponsors</h3>\n<p>The 1682 Conference is currently accepting applications for speakers, sponsors, and attendees.</p>\n<p>Are you a technologist, strategist, marketer, or executive who has taken an AI program from pilot to production? Have a story of transformation, failure, or success that can inspire and educate others?</p>\n<p>We’re looking for real, unfiltered narratives that showcase the good, the bad, and the lessons learned along the way. From revenue-driving products to reimagined team structures—1682 is the place to share your journey.</p>\n<p><a href=\"https://www.1682conference.com/callforspeakers\">Apply to speak, sponsor and learn more about 1682</a></p>\n<p>&nbsp;</p>\n<p><iframe loading=\"lazy\" title=\"1682: the business of innovation conference\" width=\"500\" height=\"281\" src=\"https://www.youtube.com/embed/1yo78f73Stk?feature=oembed\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p>\n"
+      }
+    ],
+    "related_articles": [
+      9224,
+      9595,
+      9037
+    ],
+    "author": ""
+  }
+}

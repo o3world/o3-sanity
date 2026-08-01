@@ -1,0 +1,794 @@
+{
+  "_id": "perspective-wp-10367",
+  "_type": "perspective",
+  "title": "From pilot to proof: Five AI lessons from the 1682 Conference that deliver real business value",
+  "slug": {
+    "_type": "slug",
+    "current": "1682-conference-recap-2025"
+  },
+  "excerpt": "AI’s impact is real. The organizations winning are those solving specific problems, learning quickly, and scaling with purpose",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-3"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-75",
+      "_key": "cat-75"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2025-10-09T19:48:37Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/10/818-scaled.jpg"
+    },
+    "alt": "From pilot to proof: Five AI lessons from the 1682 Conference that deliver real business value"
+  },
+  "body": [
+    {
+      "_key": "k0000",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "At this week’s 1682 Conference, enterprise leaders shared how they’re using AI to automate workflows, drive efficiency, and reimagine customer experiences.",
+          "_key": "k0001"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The key takeaway? AI’s promise is no longer theoretical… it’s operational. The organizations seeing real results aren’t chasing large-scale initiatives; they’re aligning AI with real business problems and scaling what works. At O3, we’re seeing the same shift firsthand as organizations move from experimentation to execution.",
+          "_key": "k0003"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "embed",
+      "_key": "k0004",
+      "url": "https://www.youtube.com/embed/MUBwCzugBN0?feature=oembed"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Missed the event or want a quick recap? Here are our five biggest takeaways shaping the next era of AI-powered business.",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "1. Start small: Solve real problems, not abstract ones",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Bottom Line Upfront (BLUF)",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ": The most successful AI implementations don’t start with massive digital transformation projects; they start with small, high-value use cases that deliver measurable results.",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The pattern is consistent across industries – organizations that anchor pilots to specific business pain points build credibility, momentum and long-term ROI.",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Proof in action:",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Glean helped an enterprise client cut support tickets by 50% and increase profit margins by a full percentage point through targeted AI deployment.",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Best Egg completed an eight-week pilot with just 3.5 team members by focusing on a single finance dataset.",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "What this means for you:",
+          "_key": "k0022"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\nDon’t build the whole house… tackle one room at a time. Start with one process that’s slow, manual or expensive, and where success can be clearly measured. Early wins build confidence, stakeholder buy-in and operational insight that fuel sustainable AI adoption across your organization.",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "2. Infrastructure reality trumps AI capability",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "BLUF",
+          "_key": "k0027"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ": Even the smartest model fails without the right foundation. Legacy systems (not algorithms) are the true barriers to successful AI.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Many organizations underestimate how much existing infrastructure impacts performance. Training data, hardware and workflows all influence outcomes, sometimes more than the model itself.",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Proof in action:",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "SEPTA’s weapon detection pilot delivered 0% accuracy because algorithms trained in clean, well-lit environments couldn’t handle poor lighting and analog cameras.",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Meanwhile, Google’s Notebook LM succeeded at a national insurance carrier where a big, expensive AI tool failed by adapting to their existing reports quickly with the need for extensive reformatting process",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "What this means for you:",
+          "_key": "k0038"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\nBefore choosing an AI solution, assess your infrastructure. Build AI that meets your current systems where they are. Conduct pilot testing in real operational environments, not idealized lab conditions. And don’t overcommit… agility beats rigidity in a rapidly evolving ecosystem.",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "3. Innovate around your product, not within it",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0042",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "BLUF",
+          "_key": "k0043"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ": The most iconic brands are proving that AI innovation doesn’t require reinventing the product; it requires reimagining the experience.",
+          "_key": "k0044"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0045",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Companies like Coca-Cola and Hershey are using AI to elevate brand engagement, customer personalization and operational efficiency, while keeping their core products unchanged.",
+          "_key": "k0046"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0047",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Proof in action:",
+          "_key": "k0048"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0049",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Coca-Cola’s Y3000 AI flavor co-creation generated 5 billion impressions and reinforced its “experience-making” brand positioning.",
+          "_key": "k0050"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0051",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Hershey’s AR merchandising tool helped over 1k sales leads optimize store displays, solving real retail challenges rather than showcasing tech for its own sake.",
+          "_key": "k0052"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0053",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "What this means for you:",
+          "_key": "k0054"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\nFocus on where AI can enhance customer experience, sales enablement or operations, not the product itself. Leading with business value instead of novelty ensures technology strengthens your brand instead of distracting from it.",
+          "_key": "k0055"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/10/819.jpg"
+      },
+      "alt": "",
+      "_key": "k0056"
+    },
+    {
+      "_key": "k0057",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "4. Permission to fail accelerates success",
+          "_key": "k0058"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0059",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "BLUF",
+          "_key": "k0060"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ": Innovation demands experimentation… and experimentation means accepting most pilots won’t work the first time.",
+          "_key": "k0061"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0062",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The organizations advancing fastest treat “failed” pilots as learning accelerators, not sunk costs. The key is to fail responsibly: with guardrails, documentation and cross-functional visibility.",
+          "_key": "k0063"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0064",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Proof in action:",
+          "_key": "k0065"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0066",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Comcast empowers internal teams to experiment with AI agents under strict safety, bias and brand guidelines, maintaining internal agility without compromising customer trust.",
+          "_key": "k0067"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0068",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Structured governance, security assessments and evaluation tools (like OpenLayer) enable continuous improvement across development and deployment.",
+          "_key": "k0069"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0070",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "What this means for you:",
+          "_key": "k0071"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\nCreate a culture where teams are safe to explore within defined boundaries. Establish review protocols, track lessons learned and pivot quickly based on outcomes. Every “failure” is a step forward, and every experiment moves your organization closer to scalable success.",
+          "_key": "k0072"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0073",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "5. Orchestrated AI experiences are replacing static tools",
+          "_key": "k0074"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0075",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "BLUF",
+          "_key": "k0076"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ": The next wave of productivity won’t come from smarter chatbots; it’ll come from AI experiences that do the work for you.",
+          "_key": "k0077"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0078",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Autonomous AI agents are emerging as orchestrators across systems, automating repetitive workflows that currently eat hours of human time. Instead of toggling between CRMs, documents, and emails, agents can now execute those tasks end-to-end from a single natural-language prompt.",
+          "_key": "k0079"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0080",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Proof in action:",
+          "_key": "k0081"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0082",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Google’s marketing team cut 18,000 hours from campaign execution using AI agents, freeing up resources to focus on strategic initiatives.",
+          "_key": "k0083"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0084",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Its sales team achieved a 14% lift in lead conversion opportunities, ultimately driving revenue at a faster pace.",
+          "_key": "k0085"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0086",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Half of Google’s code is now generated by AI agents and then approved by engineers, accelerating development cycles and boosting innovation.",
+          "_key": "k0087"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0088",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "What this means for you:",
+          "_key": "k0089"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\nStart identifying high-friction, multi-system workflows where your team acts as “human middleware.” Those are your first automation wins. As Jon Flynn, Head of AI GTM at Google, predicts, “the largest programming language will be native language” giving every employee the power to design their own AI-driven processes without writing code.",
+          "_key": "k0090"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0091",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Putting these learnings into action",
+          "_key": "k0092"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0093",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Across industries, one truth stands out: AI success isn’t about adopting new technology – it’s about transforming how your organization works.",
+          "_key": "k0094"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0095",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Companies that start small, build on solid infrastructure, lead with business value, and embrace experimentation are already seeing meaningful impact.",
+          "_key": "k0096"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0097",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "At ",
+          "_key": "k0098"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "O3XO",
+          "_key": "k0099"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", we help organizations turn AI potential into performance: designing and deploying intelligent systems that automate workflows, unlock efficiency and scale results responsibly. Learn more about how O3XO can help you move from AI exploration to execution.",
+          "_key": "k0100"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.o3xo.ai"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Five lessons from 1682 Conference",
+    "description": "Discover five actionable AI lessons from the 1682 Conference, helping enterprises turn AI potential into measurable business value."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:10367",
+    "extractedAt": "2026-08-01T00:09:26.487Z"
+  }
+}

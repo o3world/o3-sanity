@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:53.140Z"
+  },
+  "wpId": 8158,
+  "slug": "improve-teamwork-and-productivity-by-reorganizing-your-figma-projects",
+  "title": "Design leaders: Improve team productivity by reorganizing your Figma projects",
+  "dateGmt": "2023-09-05 16:28:15",
+  "modifiedGmt": "2023-09-06 12:09:21",
+  "authorId": 16,
+  "categoryIds": [
+    61
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/09/O3-website-imagery_-Perspectives-14.jpg",
+    "alt": "Blog image: Improve teamwork and productivity by reorganizing your Figma projects"
+  },
+  "seo": {
+    "titleOverride": "Improve teamwork and productivity: Reorganizing Figma projects | O3",
+    "titleRendered": "Improve teamwork and productivity: Reorganizing Figma projects | O3",
+    "descriptionOverride": "Discover O3's innovative approach to reorganizing Figma projects for improved teamwork and productivity. Learn how our process can streamline your design workflows.",
+    "descriptionRendered": "Discover O3's innovative approach to reorganizing Figma projects for improved teamwork and productivity. Learn how our process can streamline your design workflows.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/improve-teamwork-and-productivity-by-reorganizing-your-figma-projects/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Design leaders: Improve team productivity by reorganizing your Figma projects",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Unlock enhanced teamwork and productivity within your Figma projects by reorganizing them with O3's innovative approach, ensuring smoother collaboration and streamlined design processes."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Seeing a problem</h3>\n<h4>Working smarter</h4>\n<p>At O3 we understand the landscape of digital tools changes quickly. We’re always looking to see where we can improve how we’re working. The real-time collaboration made possible through Figma&#8217;s shared cloud access was a game changer that we couldn&#8217;t ignore — so we jumped right in. However, in our eagerness to switch tools we didn’t spend the time codifying how to work within Figma. Projects migrated in between development cycles, as new clients and new team members onboarded.</p>\n<p>This lack of standardization led to a significant handoff problem between designers and developers. With each designer working slightly differently, the same developer had to learn how each designer worked. Additionally, transitioning projects between designers became difficult. We often found ourselves asking, &#8220;Where are the screens we were just discussing?&#8221; and “What’s still in progress?”</p>\n<p>After hearing this feedback crop up repeatedly, we decided it was time to iterate once more and outline how we wanted to work in Figma.</p>\n<h3>How we did it</h3>\n<h4>Trust the process</h4>\n<p>Process-improvement is a common goal for companies. “We need to get better organized!” Many of these attempts seem to function the same way: a small working group would outline a new process, tell people what it was, and then everything would be solved! Except… not so much. They tend to fall victim to the same pitfall — that their assumptions about the problems were correct. Nobody validates the new processes, and the beneficiaries of it are rarely consulted. Essentially, they fall for the<a href=\"https://www.nngroup.com/articles/false-consensus/\"> false-consensus effect</a>. Remember rule #1 of UX: you are not your user.</p>\n<h4>Interviews</h4>\n<p>Knowing to tackle this differently than before, we approached it the same as our client projects. Like how any good project begins, we started with interviews. We talked with our users — the developers, project managers, and reviewers who access our Figma projects. We also talked among the design team to understand how each of us were approaching our projects. Our aim was twofold:</p>\n<ol>\n<li>Understand the pain points for non-designer users who interact with Figma, but don’t create work in it.</li>\n<li>Document what we’re already doing well, so we can keep those best practices in place instead of overwriting them. (If it ain’t broke don’t fix it.)</li>\n</ol>\n<p>We consolidated the feedback from our engineering team and prominent reviewers into a few key problem statements:</p>\n<ol>\n<li>O3 needs a way for projects to be easily navigable for existing and unfamiliar users.</li>\n<li>O3 needs a way to save a version history of presented designs.</li>\n</ol>\n<p>Developers need a way to quickly find approved and annotated designs.<br />\nNumber 3 was huge — it was an issue that wasn’t fully articulated until we started talking directly to our developers. Hearing the same bit of feedback from every developer was telling — whatever we did needed to address this.</p>\n<h4>Research</h4>\n<p>Many in-house teams have publicly shared their processes — <a href=\"https://spotify.design/article/how-spotify-organises-work-in-figma-to-improve-collaboration\">Spotify has a great write-up</a> of their own organization. Unfortunately, there was no information available on how agencies with multiple clients tackled this issue (you’re welcome, future readers). Any of the methods shared out there (like Spotify or ours) offer a great starting point. Any structure should be customized to fit your company’s unique needs. There’s no one-size-fits-all solution. If you do your research and validate the approaches that should set you up for success. Trust the process ;).</p>\n<h4>Wireframes</h4>\n<p>We used the insights gained from interviews, our current best practices, and the research to develop “wireframes” of simple folder structures and processes — illustrating them in Figma. These “wireframes” were shared with our original stakeholders and interviewees for feedback.</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone size-medium wp-image-8162\" src=\"https://www.o3world.com/wp-content/uploads/2023/09/Where-do-we-keep-Dev-specs-1-640x431.png\" alt=\"Where do we keep Dev specs\" width=\"640\" height=\"431\" srcset=\"http://www.o3world.com/wp-content/uploads/2023/09/Where-do-we-keep-Dev-specs-1-640x431.png 640w, http://www.o3world.com/wp-content/uploads/2023/09/Where-do-we-keep-Dev-specs-1-1024x690.png 1024w, http://www.o3world.com/wp-content/uploads/2023/09/Where-do-we-keep-Dev-specs-1-768x518.png 768w, http://www.o3world.com/wp-content/uploads/2023/09/Where-do-we-keep-Dev-specs-1-1536x1035.png 1536w, http://www.o3world.com/wp-content/uploads/2023/09/Where-do-we-keep-Dev-specs-1-2048x1380.png 2048w, http://www.o3world.com/wp-content/uploads/2023/09/Where-do-we-keep-Dev-specs-1-48x32.png 48w, http://www.o3world.com/wp-content/uploads/2023/09/Where-do-we-keep-Dev-specs-1-1280x863.png 1280w\" sizes=\"auto, (max-width: 640px) 100vw, 640px\" /></p>\n<p>Their responses were incorporated to define our current approach.</p>\n<h3>What we’re doing now</h3>\n<h4>A new standard (version 1)</h4>\n<p><a href=\"https://www.figma.com/proto/9OKaZDe6RsRNZWtzO6FVOI/O3-Project-organization?page-id=116%3A812&amp;node-id=116-813&amp;viewport=689%2C177%2C0.06&amp;scaling=min-zoom&amp;starting-point-node-id=116%3A813\">Public figma prototype slideshow link</a></p>\n<p>To recap: we needed a standardized O3 approach for organizing our work within Figma that preserves design iterations, makes it easy to navigate, and clearly identifies approved designs. Our new working approach is outlined within Figma and linked publicly so all team members can reference it. The slide show has accompanying notes with more specifics on what our people should be doing, but here are the broad strokes of our initial approach:</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone size-medium wp-image-8165\" src=\"https://www.o3world.com/wp-content/uploads/2023/09/Cover-640x384.png\" alt=\"Image: O3's new working approach is outlined within Figma and linked publicly\" width=\"640\" height=\"384\" srcset=\"http://www.o3world.com/wp-content/uploads/2023/09/Cover-640x384.png 640w, http://www.o3world.com/wp-content/uploads/2023/09/Cover-1024x614.png 1024w, http://www.o3world.com/wp-content/uploads/2023/09/Cover-768x461.png 768w, http://www.o3world.com/wp-content/uploads/2023/09/Cover-1536x922.png 1536w, http://www.o3world.com/wp-content/uploads/2023/09/Cover-48x29.png 48w, http://www.o3world.com/wp-content/uploads/2023/09/Cover-1280x768.png 1280w, http://www.o3world.com/wp-content/uploads/2023/09/Cover.png 1600w\" sizes=\"auto, (max-width: 640px) 100vw, 640px\" /></p>\n<p>&nbsp;</p>\n<h5>Teams</h5>\n<p><strong>Teams</strong> are the highest level of organizing work within Figma. We set up each of our clients as a team to keep their work together.</p>\n<h5>Projects</h5>\n<p>Projects are how we organize the work within a client’s Team. Every client should have a Libraries Project for global assets (think UI kits). Create a new Project for each body of work with that client – even if it will only have one file.<img loading=\"lazy\" decoding=\"async\" class=\"alignnone size-medium wp-image-8166\" src=\"https://www.o3world.com/wp-content/uploads/2023/09/Slide-06-640x360.png\" alt=\"Projects are how we organize the work within a client’s Team. \" width=\"640\" height=\"360\" srcset=\"http://www.o3world.com/wp-content/uploads/2023/09/Slide-06-640x360.png 640w, http://www.o3world.com/wp-content/uploads/2023/09/Slide-06-1024x576.png 1024w, http://www.o3world.com/wp-content/uploads/2023/09/Slide-06-768x432.png 768w, http://www.o3world.com/wp-content/uploads/2023/09/Slide-06-1536x864.png 1536w, http://www.o3world.com/wp-content/uploads/2023/09/Slide-06-48x27.png 48w, http://www.o3world.com/wp-content/uploads/2023/09/Slide-06-1280x720.png 1280w, http://www.o3world.com/wp-content/uploads/2023/09/Slide-06.png 1920w\" sizes=\"auto, (max-width: 640px) 100vw, 640px\" /></p>\n<h5>Files</h5>\n<p>Files are where we work, and should mirror our process. Files are split depending on what is being created, such as wireframes, UI designs, and annotated developer specs.</p>\n<ol>\n<li style=\"list-style-type: none;\">\n<ol>\n<li><span style=\"background-color: rgb(255 255 255/var(--tw-bg-opacity)); color: rgb(3 3 3/var(--tw-text-opacity));\">Library files: Library files are used to organize common brand styles and project assets. Importantly, these are a tool to aid Figma designs and are not a deliverable to developers. A Dev specs file should be created to articulate components to developers.</span></li>\n<li>Wireframes, research, and designs: Wireframes iterate through concepts quickly. Design files fill a variety of uses: style tiles, brand imagery, and UI screens. No matter the use, we need to preserve our progress. The files should also be organized so colleagues and stakeholders can open them up and find what they need.</li>\n<li>Developer specs: Organize and annotate designs to help developers understand our intent, functionality, and motion. Never do screen design work here; paste screens and assets from design files.</li>\n<li>Sections and frames: The way we organize the content of a page can have a significant impact on stakeholders and other collaborators. While not concretely defined, there are some good practices to follow. Focus on making your files easy to navigate.</li>\n</ol>\n</li>\n</ol>\n<h3>Looking towards the future</h3>\n<h4>Perfect doesn’t exist</h4>\n<p>We’re aware that this isn’t an all-encompassing solution. The focus is ultimately pretty narrow. There’s plenty more to be done to utilize Figma’s versioning history and branches, y’know — we’ve got ideas.</p>\n<p>As for the file organization specifically, there’s now a follow-up scheduled regularly with a few developers to see how it’s working. We know it won’t be perfect on the first pass, so we’re intending to ship and iterate as we use this new standard.</p>\n<p>There’s been an added benefit of more open communication with the aforementioned check-in between developers and designers, plus other regular design team check-ins. Everyone’s on the same page now about our need to be intentional with organizing our work. The biggest takeaway, though, is that our job as designers isn’t done once a client approves our designs. We have to finish everything to set up our colleagues for success.</p>\n<p>&nbsp;</p>\n<p>O3 invites you to join our journey of continuous improvement as we explore innovative solutions to enhance collaboration and productivity in the ever-evolving digital landscape. <a href=\"https://www.o3world.com/contact/\">Connect with us today,</a> and let&#8217;s embark on a path toward a more efficient and effective design process together.</p>\n"
+      }
+    ],
+    "related_articles": [
+      7811,
+      4296,
+      8138
+    ],
+    "author": [
+      8170
+    ]
+  }
+}

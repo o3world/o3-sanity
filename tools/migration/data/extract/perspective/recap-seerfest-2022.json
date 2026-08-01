@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:02.402Z"
+  },
+  "wpId": 4958,
+  "slug": "recap-seerfest-2022",
+  "title": "Recap: Seerfest 2022",
+  "dateGmt": "2022-04-06 19:20:09",
+  "modifiedGmt": "2023-02-01 01:29:39",
+  "authorId": 16,
+  "categoryIds": [
+    63,
+    7
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2022/04/Seerfest-recap.png",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Recap: Seerfest 2022 | O3",
+    "descriptionOverride": "A recap of \"UX For Everyone: How Accessibility & SEO Go Hand-in-Hand,\" presented by Brian Crumley at Seerfest 2022.",
+    "descriptionRendered": "A recap of \"UX For Everyone: How Accessibility & SEO Go Hand-in-Hand,\" presented by Brian Crumley at Seerfest 2022.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/recap-seerfest-2022/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Long-term partners providing industry thought leadership</h3>\n<p><a href=\"https://www.seerinteractive.com/\">S<span style=\"font-weight: 400;\">eer Interactive</span></a><span style=\"font-weight: 400;\"> and O3 have been collaborating since not long after the two companies were founded in the early 2000’s. Both organizations were established with a shared interest of improving the communities around us through philanthropy and innovative technology. Providing digital services that complement one another has enabled our teams to work together on several engagements including client projects, producing digital resources and, most recently, events.</span></p>\n<p><span style=\"font-weight: 400;\"><a href=\"https://info.seerinteractive.com/seerfest\">Seerfest</a> is Seer’s annual 2-day digital marketing conference in which thought leaders from various industries are invited to deliver presentations, lead workshops and answer questions from the community. The virtual sessions covered a myriad of topics from content creation to leveraging AI and featured presenters from well-known organizations like Adobe and Google. Best of all, 100% of ticket sales were donated to Seer’s non-profit partners. Also presenting at Seerfest 2022 was O3’s very own Staff Engineer and in-house digital accessibility guru, <a href=\"https://www.linkedin.com/in/briancrumley?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAAAgjc0BHPo6b8s90aryF4QfB-X4ydF0we4&amp;lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BpDCK%2FxtaSd%2B6gUYjwc0NhA%3D%3D\">Brian Crumley, CPACC</a>.</span></p>\n<p><span style=\"font-weight: 400;\">Following a review of various disabilities and how they can impact a user’s experience, Brian covered three key areas for organizations to focus on when making their digital presence more accessible:</span></p>\n<ul>\n<li style=\"font-weight: 400;\" aria-level=\"1\"><b>Design and User Experience (UX)</b><span style=\"font-weight: 400;\">: This focus area pertains to the design elements of your website such as clear and consistent navigation that allows your users to find what they’re looking for quickly and easily. </span></li>\n<li style=\"font-weight: 400;\" aria-level=\"1\"><b>Technical</b><span style=\"font-weight: 400;\">: There are several high-level technical considerations for an accessible site which include applying descriptive transcripts and captions to all of your audio and video content. </span></li>\n<li style=\"font-weight: 400;\" aria-level=\"1\"><b>Content</b><span style=\"font-weight: 400;\">: The way in which the content has been written on your website also impacts its accessibility and SEO, so make sure your links have descriptive text and your content is written at a reading level that will accommodate as much of your target audience as possible.</span></li>\n</ul>\n<p><span style=\"font-weight: 400;\">For even more actionable insights and digital considerations from our accessibility committee, the PDF we co-produced with Seer Interactive is a must-read. Check out “</span><a href=\"https://www.o3world.com/news/designing-for-accessibility-improving-ux-for-everyone/\"><span style=\"font-weight: 400;\">Designing for accessibility: Improving UX for everyone</span></a><span style=\"font-weight: 400;\">” today and head over the Seer Interactive’s website to read their </span><a href=\"https://www.seerinteractive.com/blog/seerfest-2022-recap/?_gl=1*1hrtu49*_ga*ODQ4NzEwNTc0LjE2NDY4NTI0OTY.*_ga_BWE864G7ME*MTY0OTI1NDY5MC4xMi4xLjE2NDkyNTQ3NTcuMA..&amp;_ga=2.190746155.1482406729.1649254692-848710574.1646852496\"><span style=\"font-weight: 400;\">recap of all the presentations from Seerfest 2022</span></a><span style=\"font-weight: 400;\">.</span></p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Recap: Seerfest 2022",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Brian’s session, entitled “UX For Everyone: How Accessibility & SEO Go Hand-in-Hand,” was a deep dive into what it takes to create a digitally accessible experience and the favorable implications it can have on a company’s SEO."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      4049,
+      5173,
+      4296,
+      4118
+    ],
+    "author": ""
+  }
+}

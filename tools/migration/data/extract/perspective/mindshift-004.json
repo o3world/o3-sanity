@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:06.747Z"
+  },
+  "wpId": 4287,
+  "slug": "mindshift-004",
+  "title": "Episode 4: Making innovation work inside your organization",
+  "dateGmt": "2021-05-11 18:05:21",
+  "modifiedGmt": "2023-02-02 18:23:57",
+  "authorId": 16,
+  "categoryIds": [
+    8
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/07/O3-website-imagery_-Insights-8.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Episode 4: Making innovation work inside your organization | O3",
+    "descriptionOverride": "Register for the next MindShift webinar to gain practical insights on how to adapt and grow your business in an age of uncertainty.",
+    "descriptionRendered": "Register for the next MindShift webinar to gain practical insights on how to adapt and grow your business in an age of uncertainty.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/mindshift-004/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Mind Shift: Episode 4</h3>\n<p>Tune in on Wednesday, May 26, 2021 at 4 pm ET to hear <a href=\"https://www.linkedin.com/in/alberto-machado-482b545/\" target=\"_blank\" rel=\"noopener\">Alberto Machado</a>, chief executive officer at Valudor Products and <a href=\"https://www.linkedin.com/in/elizapollack/\" target=\"_blank\" rel=\"noopener\">Eliza Pollack</a>, director of innovation at The City of Philadelphia discuss how to tackle today’s business problems with innovation. They’ll share interesting perspectives for how their teams leverage trusted techniques to workshop ideas, scope possible solutions, build prototypes and test concepts. <a href=\"https://www.linkedin.com/in/natalienixonphd/\" target=\"_blank\" rel=\"noopener\">Natalie Nixon</a>, creative strategist and president at Figure 8 Thinking will moderate the discussion.</p>\n<p>We&#8217;re excited to partner with <a href=\"https://www.whatsnkst.com/\" target=\"_blank\" rel=\"noopener\">NKST, a growth acceleration agency</a>, to bring these dynamic speakers together to offer practical insights and inspiration on what it takes to innovate in 2021.</p>\n<h4><a href=\"https://www.youtube.com/watch?v=FfediR74Zi8&amp;t=8s\">Watch the recording</a></h4>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Episode 4: Making innovation work inside your organization",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Tune in on Wednesday, May 26, 2021 at 4 pm ET"
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      5120,
+      3444,
+      3485,
+      796
+    ],
+    "author": ""
+  }
+}

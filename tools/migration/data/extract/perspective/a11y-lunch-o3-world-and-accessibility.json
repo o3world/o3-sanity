@@ -1,0 +1,75 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:25.426Z"
+  },
+  "wpId": 2525,
+  "slug": "a11y-lunch-o3-world-and-accessibility",
+  "title": "A11Y lunch: O3 and accessibility workshops",
+  "dateGmt": "2019-07-22 17:26:40",
+  "modifiedGmt": "2023-02-02 19:52:35",
+  "authorId": 16,
+  "categoryIds": [
+    63,
+    7,
+    10,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-5.jpg",
+    "alt": "O3 accessibility and pattern"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "A11Y lunch: O3 and accessibility workshops | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/a11y-lunch-o3-world-and-accessibility/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>The Current State of Accessibility</h3>\n<p>A disability is not an internal failure &#8211; it’s a mismatch with your environment. The World Bank estimates that approximately <a href=\"https://www.worldbank.org/en/topic/disability\">1 billion people</a>, around 15% of the total world population, experience some form of disability.</p>\n<p>When physical and digital products are designed without consideration for users with disabilities, they’re excluding that entire user base from engaging with them. That&#8217;s almost 1/7th of the world’s population!</p>\n<p>The advent of new assistive technology (like screen readers, manual switch controllers, and dictation) has helped make certain websites and digital products more accessible, but there is still a long way to go.</p>\n<p>As it stands, many websites and digital platforms aren’t designed for people with visual, auditory, physical, speech, cognitive, or neurological disabilities. The lack of focus on accessibility can make these platforms and websites difficult or impossible for people with disabilities to use, and everyone deserves fair and equal access to the web and web-based services.</p>\n<h3>Where to Start</h3>\n<p>Creating accessible web experiences is not only important from a moral standpoint, it’s also good for business. When something is designed for users of all needs, the product is ultimately better overall.</p>\n<p>Weaving accessibility considerations into your planning and designs might seem costly or challenging, but even small changes can start you down the right path.  Considerations for disabled users throughout your processes can help expand your customer base, increase revenue and create a more inclusive experience overall.</p>\n<h3>What we’re Doing</h3>\n<p>At O3 World we take pride in creating truly extraordinary digital experiences. A key factor in making something extraordinary is making it accessible to as many people as possible.</p>\n<p>To get accessibility at the forefront of our team’s minds, we created an internal Accessibility Committee here at O3. The committee’s goals are to provide tools to support our teams in their approach to accessible design, create opportunities for sharing knowledge, and make the conversation part of our daily work.</p>\n<p>Our first initiative was intended to help build the foundation for accessible design and development: Empathy!  With an empathetic mindset, it is easier to consider users who will interact with our products in a different way than we normally would.</p>\n<h3>Our First a11y Session</h3>\n<p>We recently had a company-wide lunch to talk about current issues in the world of accessibility. Afterward, employees were able to go through a variety of activities to help put them in the shoes of disabled users.</p>\n<p>We heard from one of our Senior Engineers, Brian Crumley, on the accessibility front. He gave us background into the basic concepts of accessibility (like the “<a href=\"https://ssir.org/articles/entry/the_curb_cut_effect\">curb cut effect</a>”) and the current industry landscape of the practice.</p>\n<p>One of our Lead-Developers, Jessica Warhus, gave a few quick tips on things we can start doing today to make our products more accessible.  Finally, we heard from one of our Experience Designers, Alan Cho. He talked us through some of the simple things he’s already doing to make accessible design a consideration in his work.</p>\n<p>After our talks, we revealed our very own “Empathy Lab”.  Our committee worked to come up with ten interactive stations meant to create a sense of what it’s like to navigate the web with a disability.  The intention wasn’t to simulate a personal experience but to give people the opportunity to work with assistive technology and experience first-hand the frustrations that can arise when accessibility is not part of the design and code.</p>\n<h3>The Future</h3>\n<p>Our first a11y lunch was a rousing success with employees, and now we’re already planning our next steps. Soon each internal O3 project team will have its own checklist for accessibility standards to follow. We’ll also continue to hold empathy labs so we can build upon what we learned.</p>\n<p>Accessibility is already a cornerstone of our work, and we’ll be working on different ways to show the value of accessibility to our clients. We’re excited to see how our focus on accessibility will continue to shape our employees and projects. Be sure to check back for more news on our a11y work!</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "A11Y lunch: O3 and accessibility workshops",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "What does accessibility mean in the digital space? Most of us are familiar with braille signs, handicap parking spots, and ramps, but bringing accessibility to digital experiences is a relatively new topic."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      5173,
+      2525,
+      2987,
+      4049
+    ],
+    "author": ""
+  }
+}

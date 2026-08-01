@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:42.655Z"
+  },
+  "wpId": 8592,
+  "slug": "o3-ceo-michael-soileau-explores-the-future-of-healthcare-at-the-world-logic-day-panel",
+  "title": "O3 CEO Michael Soileau explores the future of healthcare at the World Logic Day panel",
+  "dateGmt": "2024-01-17 16:41:08",
+  "modifiedGmt": "2024-01-17 16:41:08",
+  "authorId": 16,
+  "categoryIds": [
+    7
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2024/01/O3-website-imagery_-Perspectives-world-logic-day.jpg",
+    "alt": "Michael Soileau"
+  },
+  "seo": {
+    "titleOverride": "Exploring the future of healthcare: O3 CEO at World Logic Day panel 2024",
+    "titleRendered": "Exploring the future of healthcare: O3 CEO at World Logic Day panel 2024",
+    "descriptionOverride": "Explore the future of healthcare innovation in 2024 with O3 CEO Michael Soileau at the World Logic Day panel. Join the fireside chat as experts discuss improved healthcare solutions through innovation.",
+    "descriptionRendered": "Explore the future of healthcare innovation in 2024 with O3 CEO Michael Soileau at the World Logic Day panel. Join the fireside chat as experts discuss improved healthcare solutions through innovation.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/o3-ceo-michael-soileau-explores-the-future-of-healthcare-at-the-world-logic-day-panel/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": " O3 CEO Michael Soileau explores the future of healthcare at the World Logic Day panel",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Dive into the future of healthcare innovation in 2024. "
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>On Sunday, January 21, 2024, O3&#8217;s CEO, <a href=\"https://www.linkedin.com/in/michael-d-soileau/\">Michael Soileau</a>, is participating in a fireside chat titled &#8220;<a href=\"https://worldlogicday.com/events/2024/austin\">The Future of Healthcare</a>&#8221; as part of the <a href=\"https://worldlogicday.com/\">World Logic Day</a> celebration. The panel conversation will delve into discussions on advocating for and creating improved healthcare solutions through innovation. The esteemed panel includes <a href=\"https://www.linkedin.com/in/rachelmallernee/\">Rachel Mallernee</a> from Texas Children&#8217;s Hospital, <a href=\"https://www.linkedin.com/in/neildevani/\">Neil Devani</a> of Necessary VC, and <a href=\"https://www.linkedin.com/in/alex-trevino/\">Alex Trevino</a>, Head of Growth for Logictry, and Automation Architect for R1.</p>\n<h3>\nWorld Logic Day significance:</h3>\n<p>World Logic Day, <a href=\"https://worldlogicday.com/about\">proclaimed by UNESCO</a>, seeks to highlight the intellectual history, conceptual significance, and practical implications of logic. The day celebrates logic as a vital discipline for societies and economies, particularly in the context of computer science and digital technology. This global celebration fosters international cooperation, promotes logic in research and teaching, and enhances public understanding of its implications for science, technology, and innovation. If you would like to join us at the Long Center in Austin, <a href=\"https://worldlogicday.com/events/2024/austin\">register for the event here</a>.</p>\n<h3>\nHealthcare Revolution and O3&#8217;s role:</h3>\n<p>In a world where technology is reshaping patient care, there is a crucial distinction between utilizing AI as a solution and deploying it merely for its own sake. Gen AI, at the forefront of the healthcare revolution, emphasizes the need to stay ahead of the curve. The healthcare landscape presents a myriad of challenges, from trust-building to streamlining medical workflows, optimizing chronic and acute care, and enhancing healthcare accessibility.</p>\n<h3>\nO3&#8217;s innovation in healthcare:</h3>\n<p>O3 recognizes the complexity of the healthcare industry and is dedicated to addressing challenges by leveraging advanced technologies. Our team of experts is actively involved in revolutionizing patient care by incorporating logical and algorithmic reasoning into its solutions. In our recent event titled “<a href=\"https://www.o3world.com/perspectives/revolutionizing-healthcare-a-deep-dive-into-o3s-ai-webinar/\">Empowering Patients and Caregivers: AI and Innovation in Healthcare</a>,&#8221; Robert Pugliese, Director of Innovation Design at Thomas Jefferson University and Jefferson Health, joined an interactive live demo on the exciting potential of innovation in healthcare.</p>\n<p>The Fireside Chat at the World Logic Day event is set to explore the intersection of logic, technology, and healthcare. O3&#8217;s commitment to pioneering the digital frontier in patient care aligns with the evolving needs of the healthcare landscape, emphasizing the importance of staying logical and strategic in the deployment of AI for the benefit of patients and the industry as a whole.</p>\n"
+      }
+    ],
+    "related_articles": [
+      6526,
+      8437,
+      8187
+    ],
+    "author": ""
+  }
+}

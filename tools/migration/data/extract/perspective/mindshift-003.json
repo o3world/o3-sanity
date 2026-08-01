@@ -1,0 +1,74 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:10.994Z"
+  },
+  "wpId": 4117,
+  "slug": "mindshift-003",
+  "title": "Episode 3: The business impact of creating accessible experiences",
+  "dateGmt": "2021-02-01 20:23:13",
+  "modifiedGmt": "2023-02-02 18:35:31",
+  "authorId": 16,
+  "categoryIds": [
+    63,
+    7,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-5.jpg",
+    "alt": "O3 accessibility and pattern"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Episode 3: The business impact of creating accessible experiences | O3",
+    "descriptionOverride": "On February 23, 2021 at 4 p.m. ET we’ll uncover how to introduce, evangelize, and gain buy in for accessibility within enterprise organizations.",
+    "descriptionRendered": "On February 23, 2021 at 4 p.m. ET we’ll uncover how to introduce, evangelize, and gain buy in for accessibility within enterprise organizations.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/mindshift-003/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Mind Shift: Episode 3</h3>\n<p>Join <a href=\"https://www.linkedin.com/in/ashleyschroeder/\" target=\"_blank\" rel=\"noopener noreferrer\">Ashley Schroeder</a>, Senior UX Designer at Southwest Airlines, Brian Crumley, Senior Engineer at O3 World, and <a href=\"https://www.linkedin.com/in/whitneyq/\" target=\"_blank\" rel=\"noopener noreferrer\">Whitney Quesenbery</a>, Co-Founder at the Center for Civic Design for the next session of the MindShift webinar series hosted by O3 World.</p>\n<p>On February 23, 2021 at 4 p.m. ET we’ll uncover how to introduce, evangelize and gain buy-in for accessibility within enterprise organizations.</p>\n<h4><a href=\"https://www.youtube.com/watch?v=iHUTPUe0Jno&amp;t=145s\">Watch the webinar recording</a></h4>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Episode 3: The business impact of creating accessible experiences",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "How to introduce, evangelize and gain buy-in for accessibility within an organization."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      4049,
+      2987,
+      4179,
+      5173
+    ],
+    "author": ""
+  }
+}

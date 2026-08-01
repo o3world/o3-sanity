@@ -1,0 +1,688 @@
+{
+  "_id": "perspective-wp-4049",
+  "_type": "perspective",
+  "title": "5 Digital accessibility myths debunked",
+  "slug": {
+    "_type": "slug",
+    "current": "5-digital-accessibility-myths-debunked"
+  },
+  "excerpt": "Although there was a dramatic shift regarding accessibility during the pandemic, many digital experiences have not been designed with the needs of individuals with a variety of disabilities in mind.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-63",
+      "_key": "cat-63"
+    }
+  ],
+  "publishedAt": "2020-11-19T02:48:44Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2020/11/O3-website-imagery_-Perspectives-9.jpg"
+    },
+    "alt": "Accessibility"
+  },
+  "body": [
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Digital accessibility is a topic of heightened discussion these days, and it should be. The pandemic has accelerated digital transformation, forcing many businesses and personal activities to move online. With that dramatic shift, many digital experiences have not been designed with the needs of individuals with a variety of disabilities in mind.",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "How important is equal access within digital properties? In a 2019 Forbes article, ",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "71% of website users with disabilities reported abandoning a website",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " where they had intended to make a purchase because it was difficult to use or the content was inaccessible. Does your product or service fall into this category?",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.forbes.com/sites/ryanrobinson/2019/09/25/website-accessibility-online-business/#6e8349f39c19"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "When first approaching the ",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Web Content Accessibility Guidelines",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and addressing any related shortcomings, the conversation can seem daunting because it often includes unhelpful myths that may deter meaningful action.",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.w3.org/WAI/standards-guidelines/wcag/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Here are the facts:",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Myth One: Accessibility Considerations Only Benefit a Small Minority",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "About ",
+          "_key": "k0020"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "15% of the world’s population",
+          "_key": "k0021"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " — more than 1 billion people — have some type of disability which may make it difficult or even impossible to use digital products. There is also a large percentage of individuals who may not identify as having a disability but would benefit from more accessible websites or applications. This may include:",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.who.int/disabilities/world_report/2011/report/en/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Users who are aging and may be losing their vision, hearing, mobility, or cognitive ability.",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Users with temporary disabilities who are affected by disabling conditions for a short period of time, such as a concussion or a broken arm.",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Users with situational disabilities who are limited in their ability to hear, see, use their hands, or concentrate, such as a distracted driver or a new parent holding their baby.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Accessibility and inclusion go hand-in-hand with overall usability. Better design benefits everyone. ",
+          "_key": "k0030"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "The Microsoft Inclusive Design Team",
+          "_key": "k0031"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " has great resources about inclusive design principles as it relates to permanent, temporary, and situational disabilities.",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.microsoft.com/design/inclusive/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Myth Two: Accessibility Can be Addressed at the End of a Project",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Rather than saving it for the end, accessibility should be taken into account throughout the life cycle of the project — including business requirements, strategy, visual design, development, and QA. There are a few issues you may encounter if you wait to address accessibility issues until the end of the project:",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Layering on last-minute solutions could result in a bad design.",
+          "_key": "k0038"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " While it may be possible to add-on a technically compliant solution, you’ll create a better user experience if accessibility considerations are discussed throughout the project.",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "There could be costly refactoring or delays to the launch timeline.",
+          "_key": "k0041"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " Having to address accessibility issues after the fact is often more challenging and may require refactoring of a component or a page which could, in turn, delay a launch. Accounting for accessibility early allows for time to remediate more proactively.",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0043",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Accessibility may never get addressed at all.",
+          "_key": "k0044"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " If accessibility is saved for the last minute, or isn’t included in the project plan at all, you may decide to skip the effort to save time or budget.",
+          "_key": "k0045"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0046",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Factoring accessibility into your workflow from the outset of a project may require extra planning, but it could save you a lot of time and effort in the long run.",
+          "_key": "k0047"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0048",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Myth Three: Accessibility is a Short-Term Project",
+          "_key": "k0049"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0050",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As we touched on above, to be most effective, accessibility must be ingrained as a part of your project from start to finish. The work doesn’t end when the website or application is released. Ongoing training for current and future employees should be prioritized so that a standard of accessibility is maintained. In addition, as updates continue to be rolled out and content or marketing teams make changes, accessibility audits should be conducted to ensure there are no regressions.",
+          "_key": "k0051"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0052",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "It’s important to remember that creating and maintaining accessible digital products is an ongoing and iterative process.",
+          "_key": "k0053"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0054",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Myth Four: Accessibility is Expensive",
+          "_key": "k0055"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0056",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Creating and maintaining an accessible digital product does cost money. This expense could be even greater in the case of an existing site that isn’t accessible. However, failing to address accessibility could result in larger expenses in the future when you consider the cost of a lawsuit or the risk to your brand’s reputation.",
+          "_key": "k0057"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0058",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If you are working on an existing site, making incremental accessibility improvements is better than nothing at all. In general, if you incorporate accessibility into every step of your process, and take the time to plan for it, you can create a cost-effective system that becomes second nature and has improved efficiency over time.",
+          "_key": "k0059"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0060",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Myth Five: Accessibility is Ugly",
+          "_key": "k0061"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0062",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A common misconception is that designing to accessibility standards will result in an ugly user experience. The truth is, most accessibility features are invisible. A few examples of invisible features include:",
+          "_key": "k0063"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0064",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Alternative text for images",
+          "_key": "k0065"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " that can provide additional details about the image to screen readers and other assistive technologies.",
+          "_key": "k0066"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0067",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Semantic heading tags",
+          "_key": "k0068"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " to create a meaningful page outline.",
+          "_key": "k0069"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0070",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Labels for form elements",
+          "_key": "k0071"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " to provide context when filling out the fields of a form.",
+          "_key": "k0072"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0073",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Keyboard accessibility",
+          "_key": "k0074"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " to ensure users are able to control user interface (UI) elements without using a mouse.",
+          "_key": "k0075"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0076",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "ARIA (Accessible Rich Internet Applications)",
+          "_key": "k0077"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " attributes to make interactive components accessible to assistive technologies.",
+          "_key": "k0078"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0079",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "While a lot of the accessibility guidelines can be covered with invisible changes, the visual appearance of your digital product may need to evolve to support users with a variety of disabilities. If accessibility is considered at the beginning of your process, you can avoid drastic visual changes and create a product that fits the needs of a wide range of people.",
+          "_key": "k0080"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0081",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Busted!",
+          "_key": "k0082"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0083",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "These are just a few of the more common myths you may encounter when approaching the topic of accessibility within your organization or with stakeholders on a project. Hopefully, this context empowers you to spark conversations within your organization about digital accessibility. It’s important to note that even slow but steady progress towards the goal of providing equal access will lead to an improved experience for all your users.",
+          "_key": "k0084"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0085",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Need advice? Consult O3 World. We believe in the importance of digital accessibility, and we’re passionate about helping our clients create equitable experiences for all users. Our ",
+          "_key": "k0086"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "CPACC experts",
+          "_key": "k0087"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " can partner with you to create intuitive, accessible experiences that align with your business objectives and delight your customers.",
+          "_key": "k0088"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.o3world.com/news/the-journey-to-becoming-certified-professionals-in-accessibility/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "O3 debunks common accessibility myths to help spark conversations within organizations about digital accessibility."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:4049",
+    "extractedAt": "2026-08-01T00:10:10.994Z"
+  }
+}

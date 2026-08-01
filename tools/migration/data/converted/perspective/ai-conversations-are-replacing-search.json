@@ -1,0 +1,556 @@
+{
+  "_id": "perspective-wp-10304",
+  "_type": "perspective",
+  "title": "From SEO to GEO: How AI is changing search strategy",
+  "slug": {
+    "_type": "slug",
+    "current": "ai-conversations-are-replacing-search"
+  },
+  "excerpt": "As AI-powered search experiences become the norm, traditional Search Engine Optimization (SEO) strategies are giving way to something entirely new: Generative Experience Optimization (GEO).",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-3"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-75",
+      "_key": "cat-75"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-15",
+      "_key": "cat-15"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-62",
+      "_key": "cat-62"
+    }
+  ],
+  "publishedAt": "2025-07-18T16:46:19Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/07/GEO-perspective.jpg"
+    },
+    "alt": "GEO perspective featured image"
+  },
+  "body": [
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We sat down with ",
+          "_key": "k0004"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Dale Bertrand",
+          "_key": "k0005"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", founder of ",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Fire&Spark",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and upcoming speaker at our ",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "1682 Conference",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " this fall, to explore how brands can navigate this fundamental shift in search. From rethinking content strategy around semantic richness to measuring success through incremental lift rather than traffic metrics, Dale shares insights on why GEO represents both a greater challenge and opportunity than traditional SEO—and what companies need to do today to stay visible in an AI-driven search landscape.",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/dalebertrand"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.fireandspark.com/"
+        },
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "http://1682conference.com"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Question #1",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "You’ve been advising on the shift from traditional SEO to what many are calling GEO, or Generative Experience Optimization. What does that shift actually look like for brands, and why is it becoming so critical right now?",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Answer",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The shift from SEO to GEO represents a fundamental change in how brands approach search optimization. GEO is harder and less reliable than traditional SEO because it targets complex, stochastic, and rapidly evolving AI search platforms. So results are less predictable than traditional keyword-based ranking signals. However, GEO will be critical because GEO traffic converts better than traditional SEO traffic. Visitors arriving from AI-generated answers have higher intent since the AI has already the synthesized information for them. So they are further along in the decision-making process when they land on your website.",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Question #2",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What makes content perform well in AI-generated results, and how should brands rethink the way they create, structure, and maintain content to stay visible in this new landscape?",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Answer",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "GEO is fundamentally a content strategy discipline, not a technical discipline. Success comes from creating the most semantically rich, comprehensive, and authentically helpful content on a topic. Marketers need to get used to thinking in “semantic space,” not keyword space. In other words, the goal is to create content that comprehensively covers a topic/concept and its adjacent topics to active more adjacent topics (to show up in more AI conversations) in the AI model’s abstract “latent space.”",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Question #3",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What technical strategies like schema, structured data, or internal linking matter most when it comes to making sure content is accessible and favored by AI systems?",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Answer",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "While traditional technical SEO elements remain important, GEO success is fundamentally about content strategy rather than technical optimization. The focus should shift away from technical optimizations toward ensuring content is semantically rich and comprehensive rather than relying heavily on schema or structured data alone. With that said, there is some evidence that AI benefits from schema markup even though it doesn’t parse it directly. AI simply sees the schema markup as semantically significant structure in the document.",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Question #4",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "How can marketers measure the success of GEO efforts, and what tools or methods are most effective for tracking whether content is showing up in AI outputs?",
+          "_key": "k0038"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0039",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Answer",
+          "_key": "k0040"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0041",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "There’s a crucial measurement shift needed: move from traffic metrics to measuring incremental lift. Instead of focusing on top-of-funnel metrics, measure downstream business outcomes and demonstrate incrementally (i.e. show what happened WITH your GEO campaign versus what would have happened WITHOUT it). One tactic: Since direct attribution remains unresolved, combine quantitative and qualitative tracking by adding open-ended “How did you hear about us?” questions to lead gen forms to gain invaluable customer journey insights.",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0043",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Question #5",
+          "_key": "k0044"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0045",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As GEO becomes more central to digital strategy, how should internal teams evolve, and what new skills, roles, or workflows are essential?",
+          "_key": "k0046"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0047",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Answer",
+          "_key": "k0048"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0049",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Since GEO is a content strategy discipline, teams need to strengthen content creation capabilities focused on semantic richness and comprehensive topic coverage and insights from first-hand experience. Teams should also develop skills in using Large language models (LLMs) as market research tools to understand how AI perceives their brand, competitors, customer language, and authoritative sources.",
+          "_key": "k0050"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0051",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Question #6",
+          "_key": "k0052"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0053",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "How can brands increase their authority signals in a way that boosts their presence in AI-generated content, and which external platforms or mentions matter most?",
+          "_key": "k0054"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0055",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Answer",
+          "_key": "k0056"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0057",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Use LLMs as intelligence gathering tools to understand how AI perceives your brand and the sources it deems authoritative. Focus on creating authentically helpful, comprehensive content that AI systems recognize as authoritative sources on topics. The key is semantic richness and genuine expertise and mentions in sources cited by AI, rather than traditional authority signals.",
+          "_key": "k0058"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0059",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Question #7",
+          "_key": "k0060"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0061",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What should companies be doing today to future-proof their content strategies across multiple AI platforms like Google, Bing, and ChatGPT?",
+          "_key": "k0062"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0063",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Answer",
+          "_key": "k0064"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0065",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Focus efforts on optimizing for ChatGPT for now and Google’s AI Mode for the near future. ChatGPT is the primary consumer AI platform currently generating referral traffic, while Google’s AI Mode is expected to become the most significant source of AI-driven traffic given Google’s dominance. We expect Google to switch over to AI mode as their default sometime in the next 12-18 months. However, proven, reliable strategies for generating revenue from GEO are still emerging. Current GEO tactics aren’t as reliable as established SEO playbooks are for traditional search engines.",
+          "_key": "k0066"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0067",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Where to go from here",
+          "_key": "k0068"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0069",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As the search landscape continues its evolution toward AI-driven experiences, the brands that thrive will be those that embrace GEO’s content-first philosophy today. While the strategies may be less predictable than traditional SEO, the opportunity is significant: higher-intent visitors who convert better because AI has already done the heavy lifting of information synthesis. The key is starting now—building semantically rich, comprehensive content while the playbook is still being written. Contact us us below to discuss how your digital experiences can evolve with search.",
+          "_key": "k0070"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0071",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\n",
+          "_key": "k0072"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "Discover how Generative Experience Optimization is transforming search strategies and what companies must know to adapt."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:10304",
+    "extractedAt": "2026-08-01T00:09:26.487Z"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:20.527Z"
+  },
+  "wpId": 2950,
+  "slug": "project-spotlight-caron-treatment-centers-digital-transformation-in-addiction-treatment",
+  "title": "Project spotlight: Caron Treatment Centers - digital transformation in addiction treatment",
+  "dateGmt": "2019-11-05 18:38:23",
+  "modifiedGmt": "2023-02-02 19:20:27",
+  "authorId": 16,
+  "categoryIds": [
+    15,
+    8,
+    10,
+    11
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-4.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Project spotlight: Caron Treatment Centers - digital transformation in addiction treatment | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/project-spotlight-caron-treatment-centers-digital-transformation-in-addiction-treatment/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Who: Caron Treatment Centers</h3>\n<p><a href=\"https://www.caron.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Caron Treatment Centers</a> is a non-profit organization that specializes in addiction treatment. The organization was founded in 1957 when Richard J. Caron, a recovering alcoholic, and his wife, Catherine, opened their home to people in need of guidance and support in addiction recovery. The organization founded by the couple quickly became one of the first internationally recognized chemical dependency treatment centers in the United States.</p>\n<p>Caron takes a fully comprehensive and unique approach to treating addiction and substance use disorders. Their holistic treatment methods focus on more than addiction. There’s also special attention paid to nutrition, exercise, mental health needs, neuro-science, and healing on a personal and spiritual level.</p>\n<h3>Latest Update: Discovery Wrap-Up</h3>\n<p>O3 World has a unique history with Caron —they were a client of ours over a decade ago. When Caron needed a partner to help re-imagine their existing digital strategy, they reached out to us again.</p>\n<p>We’re entering the beginning stages of our latest engagement with Caron, and we wrapped up one of the most important project phases: discovery. So much goes into a typical discovery process with our clients, and our engagement with Caron was no different.</p>\n<p>Our discovery process with Caron took a comprehensive look at Caron’s digital ecosystem and its impact on patients and their families, alumni, and staff.</p>\n<h3>End Goals: Digital Transformation</h3>\n<p>We go well beyond thinking about the website. When we work with our clients, we take their entire digital ecosystem into account and think about the best ways to improve their assets.</p>\n<p>Ultimately, we need to enrich the patient and family experiences and make them as frictionless as possible. We do this by not only adding new features and functionality to the site but also by finding ways to support the internal Caron team so they can better understand their patients.</p>\n<p>With Caron, we’re going to help take the patient experience beyond brochures and websites. We want to create something that adds value to prospective and existing patients, and also do something truly innovative in the addiction and healthcare space.</p>\n<h3>The Process: Exploring Metrics and Patient Insights</h3>\n<p>Our goals were to better understand how individuals experience the website and Caron&#8217;s various digital properties, including any pain points and areas of opportunity, and to create a roadmap for the future aligned with Caron&#8217;s long-term strategic objectives.</p>\n<p>We took a look at some of Caron’s contemporaries but focused our in-depth efforts on exploring like-minded entities such as cancer treatment centers, hospitals, and wellness applications, so we could better understand trends in parallel industries. Exploring site analytics gave our team insights into important data like audience behavior and acquisition, user demographics, usage, and user flows.</p>\n<p>Another important part of the discovery process was getting feedback from former Caron alumni and their families. At Caron, the patient is the family and the family is the patient. We wanted to hear both kinds of stories in order to gain a comprehensive understanding of the patient journey.</p>\n<p>Conducting one-on-one interviews gave us more valuable insight into the patient experience. Reviewing and synthesizing all of the data we collected also allowed us to better understand anticipated behavior and project requirements.</p>\n<h3>The Future</h3>\n<p>Laying down a solid foundation through discovery is important, and this is simply the first step in a roadmap full of new features and optimizations. There are so many different ways we can use tech to improve the patient experience and help Caron provide outstanding services to patients and their families.</p>\n<p>A long term focus of ours will be on personalization, and how our planned digital transformation can be used to help gather more user data. Ultimately we want to create a seamless and unified experience across all digital experiences, whether that’s for patients currently in treatment or those in recovery seeking access to the tools that Caron uses to support their journeys.</p>\n<p>We’ll be sure to keep you up to date as new innovations and updates launch. Be sure to check out our blog for more news on our client projects.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Project spotlight: Caron Treatment Centers - digital transformation in addiction treatment",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Between product launches, iterative updates and new project kick-offs, agency life can get pretty busy. We do a lot of interesting and innovative work at O3 World, and we want to keep you up to date on what we’re doing for our clients. Here’s a glimpse into one of our latest projects."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      796,
+      4609,
+      3073,
+      3906
+    ],
+    "author": ""
+  }
+}

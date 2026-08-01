@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:53.145Z"
+  },
+  "wpId": 7894,
+  "slug": "o3s-successful-week-of-gaad-celebrations",
+  "title": "O3's successful week of GAAD celebrations",
+  "dateGmt": "2023-05-24 17:38:38",
+  "modifiedGmt": "2023-05-24 17:38:38",
+  "authorId": 16,
+  "categoryIds": [
+    63,
+    7
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/02/O3-website-imagery_-Perspectives-7.jpg",
+    "alt": "Accessibility"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "O3's successful week of GAAD celebrations | O3",
+    "descriptionOverride": "Recap of our successful week, elevating accessibility standards and inspiring an inclusive world.",
+    "descriptionRendered": "Recap of our successful week, elevating accessibility standards and inspiring an inclusive world.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/o3s-successful-week-of-gaad-celebrations/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "O3's successful week of GAAD celebrations",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "O3 hosted a week-long of initiatives and events. We are striving to elevate accessibility standards and inspire a more inclusive world."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>O3 recently concluded its weeklong celebration of Global Accessibility Awareness Day (GAAD), emphasizing our ongoing dedication to accessibility and inclusivity in the digital world. As a company, we recognize the importance of ensuring equal access for all users, regardless of their abilities. Let&#8217;s take a look at the highlights of our GAAD celebrations and the exciting plans we had in store.</p>\n<p>GAAD, established in 2011, has evolved into a crucial annual event in the tech industry, aimed at promoting accessibility and inclusivity in digital design and development. It serves as a platform to raise awareness about the importance of considering individuals with various disabilities, such as visual, auditory, motor, cognitive, and physical disabilities, when creating digital products and services.</p>\n<h3>\nOur growing team of CPACC experts</h3>\n<p>Accessibility is not just a part of our work at O3; it is a shared commitment among our team members to create inclusive digital experiences. We are proud to celebrate <a href=\"https://www.o3world.com/perspectives/o3s-expanding-accessibility-capabilities/\">a growing team</a> of Certified Professionals in Accessibility Core Competencies (CPACC) experts who are passionate about making digital products accessible to all users. In conjunction with GAAD, both <a href=\"https://www.linkedin.com/in/aecho1231/\">Alan Cho</a> and <a href=\"https://www.linkedin.com/in/briancrumley/\">Brian Crumley</a> have successfully completed 45 continuing education credits required for our International Association of Accessibility Professionals (IAAP) CPACC certifications. This achievement signifies their continued commitment to enhancing our expertise in accessibility, and we are thrilled to recognize Alan and Brian as a11y experts for the next three years. By continuously expanding our knowledge and staying up to date with the latest accessibility practices, we are better equipped to create inclusive solutions and foster an inclusive work environment.</p>\n<h3>\nThe weeklong GAAD celebration at O3</h3>\n<p>During GAAD, O3 had an array of exciting initiatives lined up to empower brands, our internal team, and individuals in creating inclusive digital experiences:</p>\n<h4>\nLaunch of an exciting new offering</h4>\n<p>We were thrilled to announce the launch of a revolutionary <a href=\"https://www.o3world.com/services/accessibility-consulting-optimization/\">accessibility solution</a> for our clients. This expansive offering will empower brands to create inclusive experiences and break down barriers. Stay tuned for further communication as we unveil this transformative solution.</p>\n<h4>\nThought leadership on UI accessibility</h4>\n<p>O3&#8217;s CPACC expert, Simone Dehel, shared invaluable insights in her thought leadership piece titled &#8220;<a href=\"https://www.o3world.com/perspectives/making-your-user-interface-ui-accessible-for-all-users/\">Making your UI accessible for all users</a>.&#8221; This comprehensive resource sheds light on practical strategies and best practices for designing inclusive user interfaces. Organizations seeking to enhance their accessibility efforts found this content to be a valuable asset.</p>\n<h4>\nEngaging O3 mini audio series</h4>\n<p>To provide expert insights and guidance, we prepared an engaging audio series featuring our CPACC accessibility experts. They addressed key questions related to digital accessibility, providing listeners with actionable advice and solutions.</p>\n<p><a href=\"https://www.linkedin.com/feed/update/urn:li:activity:7066410170003722240\">What does GAAD mean to O3? </a><br />\n<a href=\"https://www.linkedin.com/feed/update/urn:li:activity:7066767189688651778\">What is O3 doing to create a more accessible planet? </a><br />\n<a href=\"https://www.linkedin.com/feed/update/urn:li:activity:7065042795958333441\">Why should all companies value accessible experiences?</a></p>\n<h4>Accessibility Roundtable discussion</h4>\n<p>On GAAD, Team O3 hosted an interactive internal Accessibility Roundtable discussion, bringing together experts and thought leaders in the accessibility field. We delved into the challenges, solutions, and opportunities that lie ahead. Check out the comprehensive <a href=\"https://www.o3world.com/perspectives/o3s-accessibility-gaad-round-table-discussion/\">summary of this enlightening conversation</a>.</p>\n<p>&nbsp;</p>\n<p>In conclusion, O3&#8217;s weeklong GAAD celebrations showcased our commitment to accessibility and inclusivity. However, this impact and excitement must be top of mind throughout the rest of the year to drive change. By emphasizing the importance of creating digital experiences that cater to all users, we aim to foster a more equitable and inclusive digital landscape. <a href=\"https://www.o3world.com/contact/\">Get connected with O3</a> as we continue to champion accessibility and introduce innovative solutions to empower brands and individuals in their pursuit of inclusivity.</p>\n"
+      }
+    ],
+    "related_articles": [
+      7287,
+      7848,
+      7840
+    ],
+    "author": ""
+  }
+}

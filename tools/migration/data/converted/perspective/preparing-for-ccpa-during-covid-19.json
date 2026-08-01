@@ -1,0 +1,742 @@
+{
+  "_id": "perspective-wp-3313",
+  "_type": "perspective",
+  "title": "Preparing for CCPA during COVID-19",
+  "slug": {
+    "_type": "slug",
+    "current": "preparing-for-ccpa-during-covid-19"
+  },
+  "excerpt": "In normal times, helping businesses address these complex new privacy rules would be a heavy lift by itself. But these obviously aren’t normal times, so here are our views on CCPA enforcement and preparation during this pandemic crisis.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-63",
+      "_key": "cat-63"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-62",
+      "_key": "cat-62"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-11",
+      "_key": "cat-11"
+    }
+  ],
+  "publishedAt": "2020-04-14T00:02:45Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-5.jpg"
+    },
+    "alt": "O3 accessibility and pattern"
+  },
+  "body": [
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The California Consumer Privacy Act (CCPA) affects hundreds of thousands of businesses, which is why we offer technical consulting and implementation services for accommodating CCPA needs.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In normal times, helping businesses address these complex new privacy rules would be a heavy lift by itself. But these obviously aren’t normal times, so here are our views on CCPA enforcement and preparation during this pandemic crisis.",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Requests for CCPA Enforcement Delay",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Enacted in 2018, CCPA technically went into effect on January 1 of this year. But the final rules for how the law should work have not yet been issued by the Attorney General’s office, a major complication since the law is vague in many areas.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Draft regulations",
+          "_key": "k0017"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " were issued on October 11, 2019, as well as on February 7, February 10, and March 12 of this year. The most recent commenting period ended March 27.",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.huntonprivacyblog.com/wp-content/uploads/sites/28/2020/02/ccpa-text-of-mod-redline-020720.pdf"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Once the draft is completed, there is a 30-day period for the regulations to be reviewed by the state’s Office of Administrative Law. The Attorney General (AG) has said it will begin enforcement six months after the final rules are issued, but – in any case – no later than July 1, 2020.",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Even if the final rules were issued tomorrow, the 30-day period for Administrative Law means they wouldn’t be completely final until about May. And that leaves two months or less until July 1.",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Not much time for implementation by businesses, which is why five major advertising trade organizations ",
+          "_key": "k0024"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "sent a joint letter",
+          "_key": "k0025"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " in February to the California Attorney General’s office, asking for a six-month transitional period after final CCPA rules are issued and before enforcement begins.",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.clickz.com/ad-industry-asks-for-more-time-to-ramp-up-after-ccpas-final-rules/260016/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Enter COVID-19",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "That request was made before the pandemic’s impact was widely known. On March 20, nearly three dozen trade associations, companies and organizations – including the California Chamber of Commerce, the Association of National Advertisers and the California Retailers Association – sent ",
+          "_key": "k0030"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "a letter to the AG asking for a delay in enforcement",
+          "_key": "k0031"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " until January 2, 2021 because of the pandemic.",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.insightsassociation.org/sites/default/files/misc_files/joint_industry_letter_requesting_a_delay_in_ccpa_enforcement_-_updated_3.20.2020.pdf"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "It read in part:",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“The public health crisis brought on by COVID-19 juxtaposed with the quickly approaching enforcement date for the CCPA places business leaders in a difficult position. They are forced to consider tradeoffs between decisions that are best for their employees and the world-at-large and decisions that may help the organizations they lead avoid costly and resource intensive enforcement activities.”",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "blockquote"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "But not all observers think a delay is warranted. In particular, the non-profit Consumer Reports magazine, testing lab and consumer advocacy organization has argued against a delay in enforcement.",
+          "_key": "k0038"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0039",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“This latest effort to avoid complying with the CCPA comes as more and more consumers increasingly rely on online communications to work, stay in communication with healthcare professionals, and obtain access to necessary supplies,” the organization said in a ",
+          "_key": "k0040"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "statement in March",
+          "_key": "k0041"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://advocacy.consumerreports.org/press_release/consumer-reports-calls-on-california-attorney-general-to-uphold-ccpa-enforcement-despite-industry-efforts-to-push-back-during-the-covid-19-crisis/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0043",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The state of California agrees, as its most recent guidance was that the July 2020 deadline ",
+          "_key": "k0044"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "will stand for now",
+          "_key": "k0045"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0046"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.natlawreview.com/article/covid-19-will-apparently-not-delay-ccpa-enforcement"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0047",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The Pandemic’s Impact on CCPA",
+          "_key": "k0048"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0049",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In some ways, we think Consumer Reports has actually understated the case for the impact of the pandemic on consumer privacy.",
+          "_key": "k0050"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0051",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "When the history of consumer data is written, this pandemic will probably be marked as a game-changing turning point, when consumer privacy protections became as essential to public safety as traffic laws became once it was obvious cars were going to be everywhere.",
+          "_key": "k0052"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0053",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "For example, there are ",
+          "_key": "k0054"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "reports",
+          "_key": "k0055"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " that the federal government is now mapping the pandemic in part by tracking users anonymously with mobile ad location data. While this might be an essential disease tracking technique, “anonymous” can become a relatively meaningless term once sophisticated ways to utilize probabilistic data-matching are applied.",
+          "_key": "k0056"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.theverge.com/2020/3/29/21198158/us-government-mobile-ad-location-data-coronavirus"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0057",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Additionally, the practice of remote working, socializing, exercising and other activities, previously seen as a growing alternative route, has now become the sole highway for millions of Americans. And that highway is leaving unprecedented data trails.",
+          "_key": "k0058"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0059",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "So, it is essential that consumers and brands make consumer privacy an even higher priority than it was back in the normal days of only a few weeks ago.",
+          "_key": "k0060"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0061",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our view: Delay CCPA Enforcement, Not Action",
+          "_key": "k0062"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0063",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "At the same time, millions of businesses are now facing an existential crisis, as they try to conserve resources to make it through a time when many consumers are forced to stay home.",
+          "_key": "k0064"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0065",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Whether or not there was previously a need for a six-month delay in enforcement, there is an obvious need now.",
+          "_key": "k0066"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0067",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "It’s the same reason why the deadline for federal and many state tax returns have been delayed by several months. Companies and individuals are facing dried-up cash flows, team shifts and must refocus their efforts and priorities. Digital teams are being asked to “swab the deck,” until they can make headway on major projects once again.",
+          "_key": "k0068"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0069",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "For those businesses, we urge them to use this downtime to get their consumer privacy practices in shape. However long this shutdown takes, consumer privacy will become an even greater need for brands, even without knowing the contours of the final CCPA rules.",
+          "_key": "k0070"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0071",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "So, here are our recommendations on steps businesses can take now, in conjunction with legal and other expert help, while we wait for CCPA to take hold and the pandemic to lift.",
+          "_key": "k0072"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0073",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Audit the Tools and Customer Data You Collect",
+          "_key": "k0074"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0075",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Take stock of the data you are collecting from customers, including your third-party tools, website, and any physical outlets. Build a map of how and what you collect, where it is stored, who has access, and – most importantly – if any of that data is sold or traded with others. This process will help you understand your data repository and respond to customer requests.",
+          "_key": "k0076"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0077",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Review Data Security Practices",
+          "_key": "k0078"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0079",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This is a great opportunity to review – and include in your audit – who has access to your storage of personal information. Prune services, purge users, and update permissions so they conform to your security standards.",
+          "_key": "k0080"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0081",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Review and Update Your Privacy Policy",
+          "_key": "k0082"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0083",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "CCPA requires transparency. Your privacy policy should be updated to clearly describe what kind of information you collect, why you collect it, and what you do with it.",
+          "_key": "k0084"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0085",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Plan for Handling Customer Requests for Personal Data",
+          "_key": "k0086"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0087",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Your IT team can also start planning how to quickly handle customer requests to view, change, or delete their personal information, a process that must be clearly referenced within your Privacy Policy.",
+          "_key": "k0088"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0089",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Educate Employees on Consumer Privacy",
+          "_key": "k0090"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0091",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Most importantly, take steps to fundamentally change your company’s attitude toward consumer privacy. Educate employees about the importance of consumer privacy, what your company is doing, and the role they as employees play. This is particularly important for employees who may be in a customer-facing role where they would be fielding personal information requests.",
+          "_key": "k0092"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0093",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Interested in learning more about our ",
+          "_key": "k0094"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0006"
+          ],
+          "text": "GDPR",
+          "_key": "k0095"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and CCPA privacy work? ",
+          "_key": "k0096"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0007"
+          ],
+          "text": "Contact us",
+          "_key": "k0097"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and let’s set up a video call.",
+          "_key": "k0098"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0006",
+          "_type": "link",
+          "href": "https://www.o3world.com/news/gdpr-regulation-might-impact-your-website/"
+        },
+        {
+          "_key": "k0007",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:3313",
+    "extractedAt": "2026-08-01T00:10:15.488Z"
+  }
+}

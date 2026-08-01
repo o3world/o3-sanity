@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:53.144Z"
+  },
+  "wpId": 7963,
+  "slug": "data-and-ai-o3s-transformative-webinar",
+  "title": "Unleashing the power of data and AI: O3's transformative webinar",
+  "dateGmt": "2023-06-07 15:22:54",
+  "modifiedGmt": "2023-06-07 16:16:25",
+  "authorId": 16,
+  "categoryIds": [
+    7
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/06/Screen-Shot-2023-06-07-at-10.57.39-AM.png",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "Webinar: Unleashing the power of data and AI",
+    "titleRendered": "Webinar: Unleashing the power of data and AI",
+    "descriptionOverride": "O3 will showcase the transformative power of analytics, data, and AI, and how the three will drive the future of customer experiences (CX).",
+    "descriptionRendered": "O3 will showcase the transformative power of analytics, data, and AI, and how the three will drive the future of customer experiences (CX).",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/data-and-ai-o3s-transformative-webinar/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Unleashing the power of data and AI: O3's transformative webinar",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": false,
+      "description": "<h3><a href=\"https://o3world.zoom.us/webinar/register/WN_RCrdIA0BRzSzKl4CwkGS6Q#/registration\">Register today</a></h3for> for O3’s webinar as we explore the seamless integration of user data with artificial intelligence, showcasing how it can create personalized experiences, boost brand loyalty, and shape the future of customer experiences."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>Businesses worldwide are increasingly recognizing the value of data and AI in shaping exceptional customer experiences. With advancements in technology and the evolving expectations of consumers, its crucial for organizations to stay ahead of the curve. By attending this webinar, you will gain valuable insights, practical knowledge, and actionable strategies that can fuel your growth in the digital era. Our experts will address your inquiries during the webinar, ensuring a personalized and engaging experience for all participants.</p>\n<p>This <a href=\"https://o3world.zoom.us/webinar/register/WN_RCrdIA0BRzSzKl4CwkGS6Q#/registration\">dynamic three-part presentation</a> will take you on a journey through the transformative power of analytics, data, and AI. We have carefully curated an engaging agenda that will leave you with valuable knowledge to navigate the evolving digital landscape.</p>\n<h4>Date &amp; time: Jun 21, 2023 10:00 AM ET</h4>\n<h4>10-10:30AM ET: Data revolution &#8211; Insights into the analytics world</h4>\n<p>Join our esteemed industry experts, <a href=\"https://www.linkedin.com/in/maheshgaitonde/\">Mahesh Gaitonde</a> (O3 Chief Digital Officer) and <a href=\"https://www.linkedin.com/in/carriebolton/\">Carrie Bolton</a> (O3 Data &amp; Analytics Consultant), as they delve into the cutting-edge realm of analytics and data. In this session, you will gain insights into the latest trends and advancements that are reshaping the analytics landscape. Uncover new perspectives and discover how data-driven strategies can propel your business forward.</p>\n<h4>10:30-11:00AM ET: CDP unleashed &#8211; Empowering AI solutions</h4>\n<p>O3 will then  showcase the extraordinary synergy between Customer Data Platforms (CDP) and Artificial Intelligence (AI) solutions. Through a transformative demo featuring <a href=\"https://www.linkedin.com/in/william-toms-08938141/\">Will Toms</a> (Co-Founder &amp; Chief Creative Officer at REC Philly) and <a href=\"https://www.linkedin.com/in/josh-friedman/\">Josh Friedman</a> (O3 Senior Engineer), you will witness firsthand how AI leverages the power of customer data to unlock innovative possibilities. Discover how AI-driven solutions can elevate your business, deliver personalized experiences, and propel your brand to new heights.</p>\n<h4>11:00-11:30 AM ET: Navigating the Data Galaxy &#8211; Privacy, Security, and other legal considerations</h4>\n<p>In an ever-evolving digital landscape, privacy, security, and legal considerations are paramount. Join our dialogue with <a href=\"https://www.linkedin.com/in/andrewmbaer/\">Andrew Baer</a> (Privacy and Data Security lawyer at Cozen O&#8217;Connor) as we explore the vital aspects of protecting customer data, ensuring compliance, and navigating the complexities of the data galaxy. Gain valuable insights into best practices and strategies that will help you safeguard your customers&#8217; trust while harnessing the power of data.</p>\n<p>We believe that this event is exceptionally timely as businesses worldwide are increasingly recognizing the value of data and AI in shaping exceptional customer experiences. With advancements in technology and the evolving expectations of consumers, it has become crucial for organizations to stay ahead of the curve. By attending this webinar, you will gain valuable insights, practical knowledge, and actionable strategies that can fuel your growth in the digital era. Our experts will address your inquiries during the webinar, ensuring a personalized and engaging experience for all participants.</p>\n<p>We’re looking forward to this event and hope to see you there. Mark your calendars and join us as we unlock the power of data, analytics, and AI to shape the future of customer experiences. If you would like to discuss how O3 can transform your companies data and analytics, <a href=\"https://www.o3world.com/contact/\">contact us today</a>.</p>\n<h3><a href=\"https://o3world.zoom.us/webinar/register/WN_RCrdIA0BRzSzKl4CwkGS6Q#/registration\">Register today</a></h3>\n"
+      }
+    ],
+    "related_articles": [
+      7257,
+      7703,
+      7840
+    ],
+    "author": ""
+  }
+}

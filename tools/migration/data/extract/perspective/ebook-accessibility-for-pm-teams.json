@@ -1,0 +1,74 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:06.747Z"
+  },
+  "wpId": 3485,
+  "slug": "ebook-accessibility-for-pm-teams",
+  "title": "E-book: Accessibility considerations for project management teams",
+  "dateGmt": "2021-08-02 16:00:33",
+  "modifiedGmt": "2023-09-21 22:12:44",
+  "authorId": 16,
+  "categoryIds": [
+    63,
+    15,
+    8
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-5.jpg",
+    "alt": "O3 accessibility and pattern"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "E-book: Accessibility considerations for project management teams | O3",
+    "descriptionOverride": "This accessibility guide was created to help project managers coordinate with teams to set clear expectations and implement best practices.",
+    "descriptionRendered": "This accessibility guide was created to help project managers coordinate with teams to set clear expectations and implement best practices.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/ebook-accessibility-for-pm-teams/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Creating an accessible digital experience can seem like an overwhelming task. To help you get started, our <a href=\"https://www.o3world.com/news/the-journey-to-becoming-certified-professionals-in-accessibility/\">CPACC certified accessibility experts</a> have crafted an accessibility essentials guide for project management teams to use as a reference.</h3>\n<h4>With this accessibility guide, you’ll be able to:</h4>\n<ul>\n<li>Communicate 5 reasons to build an accessible experience</li>\n<li>Coordinate with multi-functional teams to set clear expectations</li>\n<li>Implement 8 accessibility best practices</li>\n</ul>\n<h4><span style=\"text-decoration: underline;\"><a class=\"u-margin-top-small btn btn--primary\" title=\"Download the ebook.\" href=\"https://www.o3world.com/resources/accessibility-considerations-for-project-management-teams/\" target=\"_blank\" rel=\"noopener noreferrer\"><span class=\"btn__text\">Download the e-book</span></a></span></h4>\n<p>For our marketers, digital creators and innovators out there, we’re opening up the conversation to support you while navigating specific accessibility challenges. We are available to talk through the ongoing efforts required to remain compliant with WCAG 2.1 AA. This includes maintaining content, media and design accessibility.</p>\n<p>Check out the <a href=\"https://www.o3world.com/perspectives?_sft_category=accessibility\">accessibility section on our blog</a> for the latest accessibility tips and tricks. That’s where we’ll be releasing more guides to help strategy, design and development teams better understand accessibility in the coming months. We’re energized by the opportunity to help teams break down common accessibility misconceptions and gain a deeper understanding of how to respond to accessibility concerns.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "E-book: Accessibility considerations for project management teams",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "CPACC certified accessibility experts have crafted an accessibility essentials guide for project management teams to use. "
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      5173,
+      4118,
+      3485,
+      3822
+    ],
+    "author": ""
+  }
+}

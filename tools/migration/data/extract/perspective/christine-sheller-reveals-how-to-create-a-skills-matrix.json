@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:06.746Z"
+  },
+  "wpId": 4884,
+  "slug": "christine-sheller-reveals-how-to-create-a-skills-matrix",
+  "title": "Christine Sheller reveals how to create a skills matrix",
+  "dateGmt": "2022-02-11 22:24:00",
+  "modifiedGmt": "2023-02-02 18:10:24",
+  "authorId": 16,
+  "categoryIds": [
+    61,
+    62
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2022/02/New-RGB-O3-website-imagery.jpg",
+    "alt": "Christine Sheller, Director of UX Design, looking at the wide range of skills her team has."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Christine Sheller reveals how to create a skills matrix | O3",
+    "descriptionOverride": "Christine Sheller shares a how to guide leaders can use to define responsibilities on their team, for each role and level.",
+    "descriptionRendered": "Christine Sheller shares a how to guide leaders can use to define responsibilities on their team, for each role and level.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/christine-sheller-reveals-how-to-create-a-skills-matrix/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>Our Director of Experience Design, Christine Sheller teamed up with <a href=\"https://source.how/\">Source.How</a> to create a guide leaders can use to create clarity around what it takes to grow on their team by defining responsibilities and accountabilities for each role and level, from junior to senior.</p>\n<h4><a href=\"https://source.how/guides/j8v1d6-guide-013-how-to-create-a-skills\">Check out the skills matrix guide</a>.</h4>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Christine Sheller reveals how to create a skills matrix",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Christine Sheller teamed up with Source.How to create a skills matrix guide for leaders. "
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      5038,
+      6191,
+      3380,
+      4296
+    ],
+    "author": ""
+  }
+}

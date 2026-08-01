@@ -1,0 +1,487 @@
+{
+  "_id": "perspective-wp-3380",
+  "_type": "perspective",
+  "title": "Creative Exchange - A collaborative, virtual design thinking series",
+  "slug": {
+    "_type": "slug",
+    "current": "creative-exchange-a-collaborative-virtual-design-thinking-series"
+  },
+  "excerpt": "Opportunity for local business and community leaders to learn design thinking skills to drive positive change within their organizations.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-61",
+      "_key": "cat-61"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2020-05-05T20:14:43Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/08/O3-website-imagery_-Insights-6.jpg"
+    },
+    "alt": "O3 blue pattern"
+  },
+  "body": [
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A five part program put on by the Arts + Business Council of Greater Philadelphia, ",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Creative Exchange",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " offers an opportunity for local business and community leaders to learn design thinking skills to drive positive change within their organizations. O3 was asked to facilitate two of the five workshops, the first of which was completed this past Friday in which we introduced design thinking as a framework and conducted collaborative sessions around problem framing and validation exercises.",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://artsbusinessphl.org/creativeexchange/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Taking Design Thinking Virtual",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Now, more than ever, reframing our daily routines to adjust to the current pandemic requires an open mindset to improve our situations on the fly. Creative Exchange is no different. While we would have preferred to conduct our workshops in person at our offices in Fishtown, COVID-19 forced us to rethink the program to deliver the content and experience virtually. Through a thoughtful combination of Zoom breakout rooms and a collaboration tool called Mural, we conducted engaging, full-featured design thinking exercises. While the process certainly had its challenges (more on this below), overall, the move to digital allowed for a new dynamic to explore problem solving in an effective way.",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Design Thinking 101 – The Double Diamond",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Design thinking is a “human centered” methodology for problem solving that provides a quick, iterative framework to define problems, prototype solutions, learn and evolve. While various institutions and organizations have developed their own versions of this framework, we reviewed the double diamond as a quick, digestible way to introduce design thinking. The left diamond is all about empathizing with the human experience, diverging as we collect insight then working to converge on a core problem or problem set to focus on. The right diamond then has us diverge on possible ideas to solve the problem, then converge on a solution which we test and iterate upon.",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0018",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Problem Framing – Abstraction Laddering",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Too often organizations invest a lot of time and money into solving the wrong problem. The first part of our workshop focused on a method for problem framing called abstraction laddering. The abstraction ladder is a good way to explore problems so that we can first understand a solution’s possible impact (asking “why” as we move up the ladder) and then break the problem down into its components (asking “how” as we move down the ladder). By expanding on the problem and then taking a deeper dive into its parts as a group, we’re able to challenge our preconceptions and create shared understanding and alignment among the group. At this point, we can decide whether the initial problem statement is worth exploring or if a wider or more narrow problem would be better.",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0024",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Validate the Problem – Interviewing",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Once we’ve determined what the problem is, then it is often worth validating the problem with humans. Our “inside” view of a problem may not align with the “outside” view of those actually struggling with it. There are several ethnographic methods for exploring human behavior. However, while we’re confined to our homes, we don’t necessarily have the luxury of contextual inquiry, and we find that interviewing is quick, easy, and approachable. So, as a follow up to framing the problem, we walked the group through the various phases of interviewing from recruiting the right people to speak to, to script creation, to the various parts of the interview itself.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Practically speaking, interviewing, whether early in the process while we’re validating a concept or later when we’re conducting tactical user testing on a functional prototype, is a core part of our process. Integrating end-user insight into your product or service delivery process is crucial for innovation.",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0032",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Lessons Learned from the Virtual Workshop",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "While we felt a lot went right in our quick pivot to virtual learning and workshop facilitation, we wouldn’t be true to our human-centered approach if we didn’t pause to review the pros and cons of our first session. Once users get up to speed with the technology (this varies from user to user), the ability to collaborate quickly and digitally offers a lot of positive upgrades over our typical in-person experience. Beyond simply having people login from anywhere to participate – a future advantage that we will certainly take advantage of to improve access and frequency of collaborative conversations, the ability to memorialize our boards and quickly transfer the insight from one exercise to another expedites the process and ensures the thinking does not get lost. A few other lessons learned are:",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Prep everyone in advance – this is hugely important to make sure you’re ready to go on time;",
+          "_key": "k0038"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0039",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Provide resources and different ways of engaging with the materials to help people learn;",
+          "_key": "k0040"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0041",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Give people a space to play before the workshop or meeting so they can feel comfortable with the tools; and",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0043",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Plan for more time than you expect – there will be technical issues, big and small, so plan enough time and staff resources to address them without sacrificing the workshop itself.",
+          "_key": "k0044"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0045",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Overall, there was a lot of positive sentiment from across the group:",
+          "_key": "k0046"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0047",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“These are quick and easy tools to use at any time…this keeps the conversation going, it’s iterative and engaging.”",
+          "_key": "k0048"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "blockquote"
+    },
+    {
+      "_key": "k0049",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Next Steps – Bringing Ideas Into Action",
+          "_key": "k0050"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0051",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As the program continues over the next four weeks, we’re excited to evolve with it and collaborate with the other facilitators. This Friday, our very good friend, ",
+          "_key": "k0052"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Natalie Nixon",
+          "_key": "k0053"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " will dive into persona development and stakeholder mapping. Then, we’re back at it in week 3 where we’ll guide the cohort as they turn insight into ideas through affinity mapping, creative matrix and importance / difficulty exercises.",
+          "_key": "k0054"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.figure8thinking.com/about/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0055",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If you’d like to learn more about design thinking and human centered problem solving methodologies, you can ",
+          "_key": "k0056"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "contact us here",
+          "_key": "k0057"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". We regularly conduct ",
+          "_key": "k0058"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "innovation workshops",
+          "_key": "k0059"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and ",
+          "_key": "k0060"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "experiment with clients",
+          "_key": "k0061"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " to prototype and test new ideas.",
+          "_key": "k0062"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        },
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.o3world.com/labs/innovation-workshops/"
+        },
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.o3world.com/labs/partnering-to-experiment/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "O3 facilitates two workshops for community leaders to learn design thinking skills to drive positive change within their organizations."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:3380",
+    "extractedAt": "2026-08-01T00:10:15.487Z"
+  }
+}

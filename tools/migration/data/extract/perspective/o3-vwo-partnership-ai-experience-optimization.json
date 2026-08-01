@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:32.181Z"
+  },
+  "wpId": 9376,
+  "slug": "o3-vwo-partnership-ai-experience-optimization",
+  "title": "Unlocking the future of experience optimization with VWO and O3",
+  "dateGmt": "2024-11-20 19:22:12",
+  "modifiedGmt": "2025-03-26 13:59:33",
+  "authorId": 16,
+  "categoryIds": [
+    8
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2024/11/O3-website-imagery_-Perspectives-63.jpg",
+    "alt": "VWO + O3 partnership"
+  },
+  "seo": {
+    "titleOverride": "Unlock experience optimization: O3 + VWO partnership",
+    "titleRendered": "Unlock experience optimization: O3 + VWO partnership",
+    "descriptionOverride": "Unlock digital experience optimization with the O3 VWO partnership. Combine AI insights for improved client engagement and outcomes.",
+    "descriptionRendered": "Unlock digital experience optimization with the O3 VWO partnership. Combine AI insights for improved client engagement and outcomes.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/o3-vwo-partnership-ai-experience-optimization/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Unlocking the future of experience optimization with VWO and O3",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Transform digital strategies with the O3 + VWO partnership, combining AI-driven insights and seamless optimization for impactful results."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>O3 is always looking for ways to redefine the digital experience landscape. Today, we’re excited to announce our strategic <a href=\"https://vwo.com/enterprise/\">partnership with VWO</a>, a leader in experience optimization, to bring even more intelligent, data-driven solutions to our clients. This collaboration merges the robust capabilities of the VWO platform with O3’s expertise in delivering exceptional digital experiences.</p>\n<h3>A partnership fueled by AI and data</h3>\n<p>Through VWO’s cutting-edge tools, including the AI-driven <a href=\"https://vwo.com/copilot/\">VWO Copilot</a>, we’re unlocking new levels of efficiency and insight for our clients. This partnership enables:</p>\n<h4>Actionable insights</h4>\n<p>VWO Copilot digs deep into user behavior, uncovering hidden patterns and untapped opportunities. Its AI engine provides actionable recommendations to enhance customer engagement and improve conversion rates.</p>\n<h4>Experimentation and personalization</h4>\n<p>The platform empowers teams to transform insights into experiments and personalized experiences swiftly and seamlessly, ensuring businesses stay agile in a fast-evolving digital world.</p>\n<h4>Comprehensive optimization</h4>\n<p>Beyond surface-level analytics, VWO&#8217;s suite of tools, including robust analytics and A/B testing, offers clients a holistic approach to improving their digital strategies.</p>\n<h3>Strengthening the Drupal and Acquia ecosystem</h3>\n<p>Our partnership also extends to O3’s work within the <a href=\"https://help.vwo.com/hc/en-us/articles/360020538734-Integrating-VWO-With-Drupal\">Drupal</a> and <a href=\"https://www.acquia.com/integrations/vwo-drupal-cms\">Acquia</a> ecosystems. VWO is tightly integrated into the Acquia platform, offering content personalization and conversion rate optimization opportunities. Whether you&#8217;re looking to drive lead generation or deliver tailored experiences, this collaboration helps businesses leverage Acquia’s suite of analytics and experimentation tools for meaningful results.</p>\n<p>Explore how VWO and Acquia combine to transform Drupal-powered experiences here: Acquia + VWO Integration.</p>\n<h3>Driving real impact</h3>\n<p>Our Chief Digital Officer, <a href=\"https://www.linkedin.com/in/maheshgaitonde/\">Mahesh Gaitonde</a>, underscores the importance of this partnership:</p>\n<p>“At O3, we’re committed to helping our clients create exceptional digital experiences that drive real impact. By integrating VWO’s powerful optimization tools, including VWO Copilot, we empower clients with deeper insights into user behavior and the agility to optimize strategies effectively. Together, we’re enabling businesses to make data-backed decisions and achieve faster results in today’s evolving landscape.”</p>\n<p><a href=\"https://www.linkedin.com/in/sparshgupta/\">Sparsh Gupta</a>, CEO of VWO, shares a similar vision:</p>\n<p>“Our partnership with O3 marks a significant step forward in VWO&#8217;s mission to deliver precise, data-driven optimization solutions. Together, we’re empowering businesses to unlock growth through tailored digital experiences powered by our connected and powerful platform.”</p>\n<h3>What this means for you</h3>\n<p>Whether you’re a marketer looking to increase conversions or a product leader aiming to improve customer engagement, the O3+VWO partnership brings the tools, insights, and expertise you need to succeed. From identifying untapped user segments to driving impactful experimentation, we’re here to transform your digital strategy.</p>\n<p>Ready to unlock the potential of AI-driven experience optimization? <a href=\"https://www.o3world.com/contact/\">Contact us today</a> to learn how O3 and VWO can elevate your digital experience strategy.</p>\n"
+      }
+    ],
+    "related_articles": [
+      8522,
+      9224,
+      8390
+    ],
+    "author": ""
+  }
+}

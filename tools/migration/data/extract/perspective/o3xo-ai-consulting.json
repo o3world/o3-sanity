@@ -1,0 +1,74 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:26.487Z"
+  },
+  "wpId": 10339,
+  "slug": "o3xo-ai-consulting",
+  "title": "Introducing O3XO: O3’s new AI consulting brand",
+  "dateGmt": "2025-10-08 15:59:34",
+  "modifiedGmt": "2025-10-08 15:59:34",
+  "authorId": 3,
+  "categoryIds": [
+    75,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2025/10/O3XO-Logo-1-e1759869357738.jpg",
+    "alt": "O3XO Logo"
+  },
+  "seo": {
+    "titleOverride": "Introducing new ROI-driven AI consulting service O3XO | O3",
+    "titleRendered": "Introducing new ROI-driven AI consulting service O3XO | O3",
+    "descriptionOverride": "O3XO by O3 offers expert AI consulting to help organizations strengthen teams, drive ROI, and scale digital transformation with confidence.",
+    "descriptionRendered": "O3XO by O3 offers expert AI consulting to help organizations strengthen teams, drive ROI, and scale digital transformation with confidence.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/o3xo-ai-consulting/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Introducing O3XO: O3’s new AI consulting brand",
+      "heading_level": "h1",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "AI doesn’t have to be overwhelming. Start smart, prove ROI and scale confidently with O3’s new service, O3XO."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>I’m excited to share something we’ve been working on behind the scenes for quite some time: O3’s AI services are evolving under a new name… introducing <a href=\"https://www.o3xo.ai\" target=\"_blank\" rel=\"noopener\">O3XO</a>.</p>\n<h4>What O3XO is</h4>\n<p>O3XO combines hands-on AI expertise with strategic guidance to deliver real results. Inspired by the exosphere (the outermost layer of Earth’s atmosphere) O3XO helps you rise above the crowded AI landscape and navigate toward clearer, high-impact opportunities.</p>\n<h4>What O3XO means for you</h4>\n<p>Simply put: It’s the same trusted service from O3 under a new name. This transition allows us to now sharpen our focus internally, so we can keep delivering AI solutions that build your team’s skills, drive measurable results and scale responsibly.</p>\n<p><em>If you’re a current O3 customer using AI </em></p>\n<p>Nothing changes. Your projects, contracts, pricing, and support remain the same. What’s new is a refined approach from us to keep strengthening your team’s skills, demonstrate ROI, and help you scale with confidence.</p>\n<p><em>If you’re not currently using our AI solutions</em></p>\n<p>This is your opportunity. With more than 20 years of digital transformation experience, we’ll help you move beyond pressure to “adopt AI” and turn it into a true competitive advantage. Our human-looped solutions are built to deliver quick wins, deepen your internal capabilities, and grow sustainably.</p>\n<h4>Who to contact</h4>\n<p>If you’re a current client of ours, please reach out to your existing project manager or account contact who is ready to help.</p>\n<p>If you’re not yet working with us and would like to explore how we can support your business innovation goals, please <a href=\"https://www.o3xo.ai/contact/\" target=\"_blank\" rel=\"noopener\">get in touch</a>.</p>\n<p>We’re excited for this next chapter. With O3XO, we’re doubling down on what matters most – helping you unlock AI’s potential in ways that drive real, measurable performance.</p>\n<p>Looking forward to moving into AI&#8217;s next frontier…together.</p>\n<p>Mike Gadsby<br />\nCo-Founder / Chief Innovation Officer, O3</p>\n"
+      }
+    ],
+    "related_articles": [
+      2819,
+      8522,
+      8322
+    ],
+    "author": [
+      672
+    ]
+  }
+}

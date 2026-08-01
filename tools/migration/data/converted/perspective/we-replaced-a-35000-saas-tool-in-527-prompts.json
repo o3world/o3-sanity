@@ -9,7 +9,7 @@
   "excerpt": "How O3 built “Dialed”, a custom resource planning and finance app, for $127 in AI credits, and what it proves about taking vibe-coded software to production.",
   "author": {
     "_type": "reference",
-    "_ref": "person-wp-22"
+    "_ref": "person-wp-3"
   },
   "categories": [
     {
@@ -522,6 +522,6 @@
   "migration": {
     "locked": false,
     "sourceId": "wp:post:10635",
-    "extractedAt": "2026-07-31T23:27:31.834Z"
+    "extractedAt": "2026-08-01T00:09:26.484Z"
   }
 }

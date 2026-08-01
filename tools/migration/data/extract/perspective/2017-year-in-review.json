@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:25.430Z"
+  },
+  "wpId": 781,
+  "slug": "2017-year-in-review",
+  "title": "2017 year in review",
+  "dateGmt": "2017-12-29 13:08:47",
+  "modifiedGmt": "2023-09-22 13:43:36",
+  "authorId": 16,
+  "categoryIds": [
+    10
+  ],
+  "excerpt": "What a year! We’ve done a lot, created a lot and continued to push the needle of innovation. We’re excited to highlight what we’ve been up to, reflect on what we've done and look toward an even more eventful and prosperous 2018 (this list isn't comprehensive, just some of our favorites)!",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/05/O3-website-imagery_-Insights-11.jpg",
+    "alt": "Greyscale, exterior shot of O3 office with logo on brick."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "2017 year in review | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/2017-year-in-review/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>What a year! We’ve done a lot, created a lot and continued to push the needle of innovation. We <a href=\"/perspectives/o3-world-expands-c-suite-leadership-team-invests-in-agency-growth/\">expanded our C-suite</a>, were <a href=\"/perspectives/o3-world-recognized-as-best-places-to-work-in-philadelphia-4-years-in-a-row/\">recognized as one of the best places to work</a> in Philadelphia (four years in a row!) and continued to work with some of the most talented partners and people. With that, we’re excited to highlight what we’ve been up to, reflect on what we&#8217;ve done and look toward an even more eventful and prosperous 2018 (this list isn&#8217;t comprehensive, just some of our favorites)!</p>\n<h3 class=\"h5\">Things We Created</h3>\n<ul>\n<li>We combined IBM Watson’s Personality Insights API with IoT to create <a href=\"/labs/o3-moods/\">O<sub>3</sub> Moods</a> and transform the atmosphere of a room based on the user’s personality traits.</li>\n<li>Again, utilizing IBM Watson’s API, and an algorithm that analyzes different types of coffee roasts, <a href=\"/labs/o3-barista/\">O<sub>3</sub> Barista</a> predicts coffee selections and provides personalized recommendations based on the user’s Twitter personality.</li>\n<li>In order to eliminate the indecisions about deciding what&#8217;s for lunch, we created <a href=\"/labs/o3-lunchbot/\">O<sub>3</sub> Lunchbot</a>, an Alexa skill that simulates conversation with human users, to sort through menu items at local lunch spots.</li>\n</ul>\n<h3 class=\"h5\">Places We’ve Gone</h3>\n<ul>\n<li>One of our favorite conferences of the year, <a href=\"https://www.sxsw.com/festivals/interactive/\" target=\"_blank\" rel=\"noopener noreferrer\">SXSW Interactive</a> provided us with emerging technology insights and motivation to continue our work. We’re already looking forward to 2018!</li>\n<li>We showed some client love to Vertex at this year’s <a href=\"https://twitter.com/hashtag/VertexExchange?src=hash\" target=\"_blank\" rel=\"noopener noreferrer\">#VertexExchange</a>. The conference took place in sunny San Diego — <a href=\"https://twitter.com/o3world/status/922464071311609856\">check out this view</a> and <a href=\"https://twitter.com/o3world/status/923194304142733312\" target=\"_blank\" rel=\"noopener noreferrer\">venue</a>!</li>\n<li>Two of our talented DPMs, Ashley C. and Ashley M., headed west to Las Vegas for a packed two days filled with presentations and lightning talks to discuss the craft of DPM. <a href=\"/perspectives/lessons-learned-three-takeaways-from-the-2017-dpm-summit/\">Read the full recap of &#8220;Craft of DPM&#8221;</a>.</li>\n<li>We also went to many conferences in the local area including, <a href=\"https://twitter.com/o3world/status/931248194318753793\" target=\"_blank\" rel=\"noopener noreferrer\">Liberty JS</a>, <a href=\"https://twitter.com/o3world/status/924286107176656896\" target=\"_blank\" rel=\"noopener noreferrer\">Ela Conference</a>, <a href=\"/perspectives/join-us-at-innovation-day-on-may-5th/\">Philly Tech Week</a>, <a href=\"https://twitter.com/o3world/status/920276061325205506\" target=\"_blank\" rel=\"noopener noreferrer\">Software as Craft</a>, and <a href=\"https://philadelphiapact.com/pactcapitalconference/\" target=\"_blank\" rel=\"noopener noreferrer\">PACT Capital Conference</a>.</li>\n</ul>\n<h3 class=\"h5\">Talks We’ve Given</h3>\n<ul>\n<li>Mike Gadsby, our CXO, spoke at <a href=\"https://twitter.com/o3world/status/918873481781051392\" target=\"_blank\" rel=\"noopener noreferrer\">Google SF</a> (the debate for west coast best coast is still out) with <a href=\"http://www.seerinteractive.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Seer Interactive</a> about UX and AI.</li>\n<li>Keith Scandone, our CEO, presented at Digital Agency Summit about ways to drive agency growth. <a href=\"/perspectives/adapt-connect-collaborate-3-keys-to-agency-growth/\">Watch the full presentation</a>.</li>\n<li>Sam Roth, a DPM, presented on mnemonics at <a href=\"/perspectives/project-management-protip-mnemonics/\">BarCamp</a>. He shared how he powers through his to-do list.</li>\n<li>Justin Handler, Head of Accounts, spoke to the Digital Project Manager about how to be an invisible project manager. <a href=\"http://www.thedigitalprojectmanager.com/dpm-podcast-invisible-project-manager/\" target=\"_blank\" rel=\"noopener noreferrer\">Listen to the podcast.</a></li>\n<li>Dan Singer, UX strategist, focused in on the &#8220;default and other in edge cases&#8221; at World Usability Day 2017. <a href=\"https://speakerdeck.com/dansinger/it-goes-without-saying-default-and-other-in-edge-cases-world-usability-day-philly-2017\">Check out the slides</a>.</li>\n</ul>\n<h3 class=\"h5\">Things We&#8217;ve Done (as a team)</h3>\n<ul>\n<li><a href=\"/perspectives/recapping-2017-agency-field-day/\">Agency Field Day</a> is always a big highlight of our year. This year five agencies in the Philadelphia-area came together for a <em>little</em> friendly competition.</li>\n<li>We’re proud to partner with Greensgrow Farms to make our community more sustainable. This year they saw a lot of us, particularly at the <a href=\"/perspectives/o3-world-volunteers-at-greensgrow-farms-fall-festival/\">Greensgrow Fall Festival</a> where 12 members of our staff helped out.</li>\n<li>We hosted <a href=\"/perspectives/2017-philly-tech-week-innovation-day-recap/\">Innovation Day</a> as a part of Philly Tech week 2017. The event consisted of different talks that generated awareness around innovation and emerging technologies. And our favorite sponsor/coffee roaster/neighbor, La Colombe coffee.</li>\n<li>Earlier this year, our development team volunteered at <a href=\"http://www.codedbykids.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Code by: Kids</a> and our design team hosted a <a href=\"https://twitter.com/o3world/status/941788423815352321\" target=\"_blank\" rel=\"noopener noreferrer\">design thinking workshop</a> with Roxborough High School. We also hosted a 24-hour hackathon with <a href=\"/perspectives/codeday-philly-at-o3-world/\">CodeDay Philly</a>. Mentorship, y&#8217;all — it&#8217;s important.</li>\n<li>What happens outside our four walls is just as important as what&#8217;s in it. That&#8217;s why we run the Travis Manion <a href=\"https://twitter.com/o3world/status/906524243885780992\" target=\"_blank\" rel=\"noopener noreferrer\">9/11 heroes</a> run every year.</li>\n<li>To round out the year, Greg Aiello and Dan Laufer, two of our devs, contributed to the open-source Drupal community.</li>\n</ul>\n<h3 class=\"h5\">Things We&#8217;re Doing (individually)</h3>\n<ul>\n<li>A familiar face in the community, Brian Crumley continues to lead <a href=\"https://phillychi.acm.org/\" target=\"_blank\" rel=\"noopener noreferrer\">PhillyCHI</a> for the third year in a row and also helps co-organize BarCamp.</li>\n<li>One of our DPMs, Ashley Cecere, takes a weekly ceramics class.</li>\n<li>Jessica Warhus, one of our devs, is training for a half and full marathon in 2018. Catch her running over the Ben Franklin bridge, her favorite route.</li>\n<li>JM, our COO, sits on the board of <a href=\"https://www.gritphl.com/\" target=\"_blank\" rel=\"noopener noreferrer\">GRIT</a>, an organization that empowers girls to pursue STEM subjects.</li>\n<li>Everyone knows big cities have trash problems, Tim Breslin, CTO, is building an app to incentivize people to pick up trash.</li>\n</ul>\n<h3 class=\"h5\">People We&#8217;ve Welcomed</h3>\n<ul>\n<li>The design team welcomed:\n<ul>\n<li>Christina Lewis, senior UI/UX designer</li>\n<li>Calvin Gohd, UI/UX designer</li>\n<li>Josh Soldiers, UX strategist</li>\n<li>Joshua Buckwalter, senior UI/UX designer</li>\n</ul>\n</li>\n<li>The accounts team added:\n<ul>\n<li>Tara Threewits, associate project manager</li>\n<li>Sam Roth, project manager</li>\n<li>Justin Mathews (JM), COO</li>\n<li>Aleesha Halbach, brand manager</li>\n</ul>\n</li>\n<li>The development team also grew with:\n<ul>\n<li>Dan Laufer, developer</li>\n<li>Tim Breslin, CTO</li>\n<li>Zuhib Daud, developer</li>\n<li>Jocelyn Harper, developer</li>\n</ul>\n</li>\n</ul>\n<p>We can&#8217;t wait to see what 2018 brings and we&#8217;ll be sure to share updates with you along the way. Want to learn even more about who we are, what we do and what makes us tick? Drop us a line below. Until then, we&#8217;ll see you in the new year!</p>\n<p><iframe loading=\"lazy\" title=\"Philly Tech Week\" src=\"https://albumizr.com/a/L-N-\" width=\"700\" height=\"400\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"allowfullscreen\"></iframe></p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "2017 year in review",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Check out what we’ve been up to, reflect on what we've done and look toward an even more eventful and prosperous 2018!"
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      4354,
+      799,
+      3879,
+      4359
+    ],
+    "author": ""
+  }
+}

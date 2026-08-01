@@ -1,0 +1,752 @@
+{
+  "_id": "perspective-wp-7864",
+  "_type": "perspective",
+  "title": "Making your user interface (UI) accessible for all users",
+  "slug": {
+    "_type": "slug",
+    "current": "making-your-user-interface-ui-accessible-for-all-users"
+  },
+  "excerpt": "As we approach Global Accessibility Awareness Day (GAAD) 2023, it's important to highlight the significance of accessible user interface (UI) design in enabling people with disabilities to access and use digital products and services. By following the four web accessibility principles—perceivable, operable, understandable, and robust—designers can start to make design decisions early and often in their work while seamlessly adhering to accessibility standards.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-63",
+      "_key": "cat-63"
+    }
+  ],
+  "publishedAt": "2023-05-16T16:46:16Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/05/O3-website-imagery_-Perspectives-12.jpg"
+    },
+    "alt": "Simone: Accessibility in UI design."
+  },
+  "body": [
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "by: Simone Dehel",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Why accessibility in UI design matters",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Ensuring that everyone, regardless of their abilities, can interact with your website or application is critical to creating a more inclusive user experience. When you make your UI accessible, you not only attract a larger audience and follow best practices for design, development, and accessibility, but you also reduce legal risk and improve your brand’s reputation.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As UI designers, we should be considering how all our users will interact with our designs. In this article, you’ll learn more about the four web accessibility principles and best practices to use during the design process that will help inform your design decisions.",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Principles to live (design) by",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "While designing websites, applications, or any other browser-based design, it’s important to adhere to the ",
+          "_key": "k0015"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "four web accessibility principles that are outlined in the Web Content Accessibility Guidelines (WCAG)",
+          "_key": "k0016"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". The WCAG web accessibility principles, also known as POUR, are perceivable, operable, understandable, and robust.",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.deque.com/wcag/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Perceivable",
+          "_key": "k0019"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " means that users must be able to perceive information and the UI in some way, using one or more of their senses.",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Operable",
+          "_key": "k0022"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " means that users must be able to control UI elements using some type of input device, such as a mouse, keyboard, or voice command.",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Understandable",
+          "_key": "k0025"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " means that the content must be readable and appear in consistent, predictable patterns for its users.",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Robust",
+          "_key": "k0028"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " means that the content must be developed using web standards that work with current and future browsers and devices.",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "By keeping the POUR principles top of mind, designers can start to make design decisions early and often in their work while seamlessly adhering to accessibility standards.",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "How to make POUR decisions",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The POUR principles are the perfect introduction to how we can consider accessibility more thoughtfully in the interfaces we design. ",
+          "_key": "k0035"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "There are common misconceptions about web accessibility",
+          "_key": "k0036"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", like that the end result will be an ugly user experience, or that you can ignore them until the end of a project. Unsurprisingly, neither of these are true.",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.o3world.com/perspectives/5-digital-accessibility-myths-debunked/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Once you familiarize yourself with the POUR principles, it’s easier to make POUR decisions rather than POOR decisions. The list below outlines simple considerations to make during the design process to ensure your designs follow web accessibility standards. You might even find that you’re already following some of these practices without even realizing it.",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Perceivable",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0042",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Perceivable is all about the senses; users must be able to perceive information and your designs in some way by using one or more of their senses. To make sure your website or application is perceivable for all users, consider the following practices:",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0044",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Color contrast: Ensure that there is enough contrast between foreground and background colors to make content visible for users with visual impairments. This means that the text should be clearly distinguishable from the background color. Using a Figma plugin like ",
+          "_key": "k0045"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Stark makes testing color contrast really easy",
+          "_key": "k0046"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0047"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.getstark.co/figma/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0048",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Color usage: Don’t rely solely on color. This means that color should not be the only way to convey meaning or distinguish between different elements on the page. By incorporating additional visual cues, such as icons or text labels, you can make your interface more inclusive and easier to use.",
+          "_key": "k0049"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0050",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Readable fonts: Use legible typefaces, font sizes, and appropriate line spacing to make content easier to read. This means avoiding typefaces that are difficult to read and making sure that there is enough space between lines and paragraphs.",
+          "_key": "k0051"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0052",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Alt text, transcripts, + captions: Provide alternative text, transcripts, or captions for non-text content like images, audio, or videos. By providing a description or text equivalent for these elements, you not only make it possible for people who cannot see or hear to understand the content, but you also improve your site’s Search Engine Optimization (SEO).",
+          "_key": "k0053"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0054",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Descriptive links: Use descriptive links that convey the content of the link so users can understand where the link leads without having to click on it. So instead of using a generic phrase like “Click here,” use a descriptive phrase like “Download our latest report on web accessibility.”",
+          "_key": "k0055"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0056",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Touch target size: Design interactive elements to have a minimum touch target size of 44 x 44 pixels. This will help ensure that your interactive UI components will be large enough for users with motor impairments to select without accidentally selecting surrounding elements.",
+          "_key": "k0057"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0058",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Operable",
+          "_key": "k0059"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0060",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Operable means that users must be able to control UI elements using some type of input device, such as a mouse, keyboard, or voice command. To make sure your website or application is operable for all users, consider the following practices:",
+          "_key": "k0061"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0062",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Keyboard accessibility: Ensure your users are able to navigate your website using only a keyboard. This includes being able to use the tab key to move between links, forms, and other elements, as well as being able to activate buttons and other controls using the keyboard. By annotating the tabbing order in their UI mockups, designers provide developers direction on how certain elements will function for keyboard users.",
+          "_key": "k0063"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0064",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Enough time: Provide enough time for users to read and process content. This can include options for users to adjust the speed of these elements, or to pause or stop them altogether.",
+          "_key": "k0065"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0066",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Focus indicators: Make sure that users can easily see where they are on the page by providing focus indicators for all interactive elements. This can include outlines, borders, or other visual cues that highlight the currently focused element. UI designers are encouraged to design focus states for interactive elements like buttons.",
+          "_key": "k0067"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0068",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Additional input methods: Consider different input modalities beyond the keyboard, such as touch activation, voice recognition (speech input), and gestures, which make interfaces easier to use for many people.",
+          "_key": "k0069"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0070",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Understandable",
+          "_key": "k0071"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0072",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The understandable web accessibility principle is all about making sure that the content on your website or application is readable and appears in consistent, predictable patterns for its users. This means that users should be able to understand and interact with the content without confusion or frustration.",
+          "_key": "k0073"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0074",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Readable and understandable: Use clear, concise language and break up content into digestible chunks throughout the interface. This means avoiding overly technical or complex jargon and using headings, subheadings, and bullet points to organize content.",
+          "_key": "k0075"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0076",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Consistent patterns: Use consistent navigation throughout your website or application, so users can easily find what they are looking for. This can include using the same menu structure on all pages as well as consistent labels and icons for buttons and other controls.",
+          "_key": "k0077"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0078",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Clear error messages: Provide clear and concise error messages when users make mistakes or encounter problems on your website. This can include providing suggestions for how to correct the error as well as a way for users to contact support if they need additional help.",
+          "_key": "k0079"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0080",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Robust",
+          "_key": "k0081"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0082",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The robust web accessibility principle refers to the idea that web content should be developed using web standards that work with current and future browsers and devices. This means that designers should focus on creating content that is compatible with a wide range of technologies, including assistive technologies like screen readers, and will continue to be accessible as new technologies emerge. Some best practices for creating and maintaining robust designs include:",
+          "_key": "k0083"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0084",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Responsive design: Create mockups for complex interactions, layouts, and flows to ensure your designs are optimized for various screen sizes.",
+          "_key": "k0085"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0086",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Design annotations: Outline annotations before passing your UI designs to developers. Informing developers about your designs’ functionalities will help them in the overall development process. Ultimately, by collaborating with developers, you will help ensure your designs are built using valid Hyper Text Markup Language (HTML) and Cascading Style Sheets (CSS) to ensure a semantic and well-structured site.",
+          "_key": "k0087"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0088",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Browser testing: Check your designs across a range of browsers and devices. By doing so, you can identify any potential issues that may arise when your website is accessed from different types of devices or browsers. Using tools like ",
+          "_key": "k0089"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Browserstack makes testing your designs on different devices really easy",
+          "_key": "k0090"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and helps you optimize your designs for different devices’ unique characteristics.",
+          "_key": "k0091"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.browserstack.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0092",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "POUR decisions > poor decisions",
+          "_key": "k0093"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0094",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Designing with accessibility in mind is a win-win for both users and organizations. By creating a more inclusive user experience, you can improve customer satisfaction, reach a broader audience, enhance your brand’s reputation, and reduce legal risk. On 2023’s Global Accessibility Awareness Day (GAAD), we’re here to remind you about the importance of making POUR decisions, not poor decisions.",
+          "_key": "k0095"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "Learn about the four web accessibility principles and best practices to incorporate during the design process. Improve your brand's reputation, reach a wider audience, and reduce legal risk by prioritizing accessibility in UI design."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:7864",
+    "extractedAt": "2026-08-01T00:09:53.145Z"
+  }
+}

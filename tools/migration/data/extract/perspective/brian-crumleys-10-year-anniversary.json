@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:02.401Z"
+  },
+  "wpId": 5020,
+  "slug": "brian-crumleys-10-year-anniversary",
+  "title": "Brian Crumley's 10-year anniversary",
+  "dateGmt": "2022-06-01 16:36:41",
+  "modifiedGmt": "2023-02-01 01:26:49",
+  "authorId": 16,
+  "categoryIds": [
+    10
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2022/06/Brian_Crumley_Photo.png",
+    "alt": "Brian Crumley, smiling on O3 staircase."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Brian Crumley's 10-year anniversary | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/brian-crumleys-10-year-anniversary/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Thank you, Brian!</h3>\n<p>He’s been our resident accessibility advocate and continuously pushes our engineering team to up the standards of the code we create. Over his time here, he’s been a fixture in the Philadelphia UX and engineering community, having led PhillyChi for many years and participating in running countless events, including our own Forge and 1682 conferences. Thank you, Brian, for everything you’ve done and continue to do.</p>\n<h3>Founder and CEO, Keith Scandone, had this to say about Brian:</h3>\n<blockquote><p>Extraordinarily grateful for this guy. 10 years is unbelievably special in any context but especially these days. I’m most proud of who Brian Crumley, CPACC is as a human. He’s done so much incredible work in the community from Bar Camp and PhillyChi, to Forge and 1682, to his recent commitment to accessibility. He leads by example. Thanks for everything Brian. Very fortunate to have you as a friend and colleague.</p></blockquote>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Brian Crumley's 10‑year anniversary",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "We want to take a moment to recognize and thank Brian Crumley for his 10-year anniversary at O3! Brian has been a major contributor to our core clients, including Vertex, The Institutes, SEI and many more over the years."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      6194,
+      5025,
+      3994,
+      3537
+    ],
+    "author": ""
+  }
+}

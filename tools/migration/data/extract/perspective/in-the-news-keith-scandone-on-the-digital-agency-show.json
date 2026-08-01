@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:15.489Z"
+  },
+  "wpId": 3255,
+  "slug": "in-the-news-keith-scandone-on-the-digital-agency-show",
+  "title": "Keith Scandone on The Digital Agency Show",
+  "dateGmt": "2020-03-11 20:46:50",
+  "modifiedGmt": "2023-02-01 21:17:52",
+  "authorId": 16,
+  "categoryIds": [
+    7,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-14.jpg",
+    "alt": "Keith Scandone, Co-founder of O3."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Keith Scandone on The Digital Agency Show | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/in-the-news-keith-scandone-on-the-digital-agency-show/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>One of the biggest learning curves CEOs, founders and owners face when it comes to growing a business is learning when to let go and delegate specific (and sometimes enjoyable) job functions.</p>\n<p>O<sub>3</sub> World Co-founder and CEO <a href=\"https://www.o3world.com/about/team/keith-scandone/\">Keith Scandone</a> recently spoke with Brent Weaver, host of The Digital Agency Show, on how leaders can enhance growth, foster a culture of innovation and much more.</p>\n<h4><a href=\"https://www.ugurus.com/podcast/episode142/\"><span class=\"btn__text\">Listen here</span></a></h4>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Keith Scandone on The Digital Agency Show",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "How leaders can enhance growth, foster a culture of innovation and much more."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      3181,
+      4865,
+      4730,
+      2632
+    ],
+    "author": ""
+  }
+}

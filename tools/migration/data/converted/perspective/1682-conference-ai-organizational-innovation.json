@@ -1,0 +1,448 @@
+{
+  "_id": "perspective-wp-8961",
+  "_type": "perspective",
+  "title": "Announcing the 1682 conference: A deep dive into AI and organizational innovation",
+  "slug": {
+    "_type": "slug",
+    "current": "1682-conference-ai-organizational-innovation"
+  },
+  "excerpt": "Discover how AI advancements are revolutionizing organizational strategies at the 1682 conference.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2024-05-20T17:42:56Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/05/1682-Social.jpg"
+    },
+    "alt": "1682"
+  },
+  "body": [
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Introduction",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The return of the ",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "1682 conference",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " is a one-day conference dedicated to exploring the dynamics of innovation within organizations and the impact artificial intelligence (AI) has had. Hosted by O3 and named after the historic year Philadelphia was founded, this conference embodies the spirit of innovation and discovery that has defined the city since 1682.",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.1682conference.com"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "View the 1682 official press release",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.o3world.com/wp-content/uploads/2024/06/1682conf-press-release-20240501.pdf"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What is the 1682 conference?",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The 1682 Conference is a one-day event dedicated to exploring the impact of AI on employee and customer experiences. This year, the conference will be held at ",
+          "_key": "k0017"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Five Below’s corporate office",
+          "_key": "k0018"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " in Philadelphia on October 16th. Attendees can expect a day packed with illuminating talks, engaging workshops, and invaluable networking opportunities.",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://figueras.com/project/five-below/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Key highlights",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Real-world insights",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The 1682 Conference stands out for its commitment to providing attendees with behind-the-scenes insights from industry leaders. These experts will share their experiences with AI-driven initiatives, offering practical advice on how to successfully integrate cutting-edge technologies into business strategies. Attendees will also learn about the challenges associated with these implementations and how to overcome them.",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Community building",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "One of the core missions of the 1682 Conference is to foster a community of forward-thinking professionals. This event aims to create a space where executives, managers, and thought leaders can exchange ideas, strategies, and experiences related to AI, technology, and innovation within the enterprise sector. This collaborative environment is designed to inspire and drive meaningful conversations that can lead to transformative business results.",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Who should attend?",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The 1682 Conference is tailored for a diverse audience, including:",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "C-level executives: Gain strategic insights on organizational innovation and AI integration.",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Managers: Learn how to implement AI-driven initiatives within your teams.",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Thought leaders: Engage with like-minded professionals and share your expertise.",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If you’re involved in innovation, technology, or strategy within your organization, this conference is designed for you.",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0042",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "How to participate",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0044",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "To learn more about the 1682 Conference and to register for the event, please visit ",
+          "_key": "k0045"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "1682conference.com",
+          "_key": "k0046"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " or contact us directly via email at ",
+          "_key": "k0047"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "milos@o3world.com",
+          "_key": "k0048"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0049"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "http://1682conference.com"
+        },
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "mailto:milos@o3world.com"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0050",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Conclusion",
+          "_key": "k0051"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0052",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The 1682 conference is a unique opportunity to explore the future of AI and organizational innovation. Whether you’re a tech enthusiast eager to explore the latest advancements or a C-suite decision-maker looking to transform your organization’s approach to technology, this conference offers something for everyone. Don’t miss out on the chance to be part of a community that is shaping the future of business through innovation and AI.",
+          "_key": "k0053"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0054",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Join us on October 16th at Five Below’s corporate office in Philadelphia and be part of the conversation that will drive the future of enterprise innovation. Secure your spot today by visiting ",
+          "_key": "k0055"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "1682conference.com",
+          "_key": "k0056"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0057"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.1682conference.com"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Unveiling the 1682 conference: A deep dive into AI and organizational innovation",
+    "description": "Discover how the 1682 Conference is revolutionizing organizational strategies with groundbreaking AI advancements. Join us on October 16th in Philadelphia for a day of insightful discussions, engaging workshops, and invaluable networking opportunities."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:8961",
+    "extractedAt": "2026-08-01T00:09:42.651Z"
+  }
+}

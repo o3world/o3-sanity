@@ -1,0 +1,295 @@
+{
+  "_id": "perspective-wp-3479",
+  "_type": "perspective",
+  "title": "3 considerations for running an empathy lab",
+  "slug": {
+    "_type": "slug",
+    "current": "3-considerations-for-running-an-empathy-lab"
+  },
+  "excerpt": "Global Accessibility Awareness Day (GAAD) is a global event dedicated to the advancement and awareness of digital access and inclusion for people with disabilities--a community of more than one billion people worldwide.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-62",
+      "_key": "cat-62"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-1",
+      "_key": "cat-1"
+    }
+  ],
+  "publishedAt": "2020-05-22T00:39:27Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/07/O3-website-imagery_-Insights-8.jpg"
+    },
+    "alt": "3 considerations for running an empathy lab"
+  },
+  "body": [
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Today is ",
+          "_key": "k0003"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Global Accessibility Awareness Day",
+          "_key": "k0004"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " (GAAD), a global event dedicated to the advancement and awareness of digital access and inclusion for people with disabilities–a community of more than one billion people worldwide.",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://globalaccessibilityawarenessday.org/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "At O3, our team is passionate about this work and supporting the community of experts, digital leaders and product creators committed to ensuring that everyone has an equitable experience. We are often asked how to create and run an empathy labs program or workshop to enhance our clients’ understanding of accessible digital experiences.",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "To understand what an empathy lab is, it’s helpful to first note what it is not:",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "An empathy lab is not a substitution for having a particular disability – it cannot enable your team to fully understand the experiences of one who lives in a world that doesn’t accommodate their accessibility needs.",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The goal of an empathy lab is to help participants think more deeply about accessibility and disability. It should invite consideration of various accessibility situations by demonstrating what it is like to rely on accessing the web through assistive devices, or by contemplating a list of real-life accessibility issues or Susan Weinschenk and Dean Barker’s “Heuristics for Usability”.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Most designers and developers might not have had the chance to experience the ‘access’ part of accessibility. An empathy lab can give them an opportunity to try accessing their work through screen readers, color contrast analyzers, keyboard-only navigation techniques, voice recognition tools, etc.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As participants experience the different tools, they will have the ability to realize how to design and build digital products in the future with accessibility in mind.",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Here are three essential considerations for creating and running an empathy lab workshop.",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "1) Respect and self-awareness.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The biggest risk of an empathy lab is accidentally turning people living with disabilities into a circus sideshow. Our culture has strong internalized prejudices and assumptions about disabilities and those living with disabilities; there cannot be empathy without first addressing implicit bias.",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "2) Demonstrate tools, not disabilities.",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "To avoid falling into the trap of disability mimicry and unintentionally reinforcing existing biases build empathy lab experiences around the assistive tools used by people living with visual, auditory, and other disabilities. For example, ask users to familiarize themselves with the VoiceOver controls for navigating websites for a visual exercise. The ",
+          "_key": "k0027"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "WAI’s page on Tools and Techniques",
+          "_key": "k0028"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " covers a variety of assistive technology to consider.",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.w3.org/WAI/people-use-web/tools-techniques/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "3) Prepare your participants.",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Participation in the empathy lab should never be mandatory, nor should it be sprung on participants without warning. People may choose to opt out for many reasons, including fear of exposing their own invisible disabilities. An empathy lab needs to be a safe, nonjudgmental, inclusive environment that works deliberately to interrupt prejudice and implicit bias.",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Want to talk in more detail about how to create your own empathy lab or discuss our industry certifications? Let’s connect and share ideas.",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "Learn how to create and run an empathy labs program or workshop to enhance your team's understanding of accessible digital experiences."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:3479",
+    "extractedAt": "2026-08-01T00:10:15.487Z"
+  }
+}

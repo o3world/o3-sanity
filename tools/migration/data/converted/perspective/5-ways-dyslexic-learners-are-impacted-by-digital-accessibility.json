@@ -1,0 +1,337 @@
+{
+  "_id": "perspective-wp-8406",
+  "_type": "perspective",
+  "title": "5 ways dyslexic learners are impacted by digital accessibility",
+  "slug": {
+    "_type": "slug",
+    "current": "5-ways-dyslexic-learners-are-impacted-by-digital-accessibility"
+  },
+  "excerpt": "Explore five key ways digital accessibility can profoundly impact dyslexic learners in our latest blog, creating an inclusive online environment for all.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-63",
+      "_key": "cat-63"
+    }
+  ],
+  "publishedAt": "2023-10-12T17:45:30Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/10/O3-website-imagery_-Perspectives-dyslexic-learners.jpg"
+    },
+    "alt": "5 ways dyslexic learners are impacted by digital accessibility"
+  },
+  "body": [
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In recognition of Dyslexia Awareness Month, O3 is shedding light on the ",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "challenges that dyslexic learners face",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " when it comes to accessibility. Here are five key ways dyslexic learners can be impacted by digital accessibility issues.",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://abilitynet.org.uk/factsheets/dyslexia-and-technology#:~:text=Many%20dyslexic%20people%20are%20sensitive,can%20make%20reading%20more%20comfortable."
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What is dyslexia?",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Dyslexia",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " is a neurodevelopmental condition that affects an individual’s ability to read, write, and spell and there is a critical need for accessibility in digital content for these learning styles. Dyslexic learners often encounter significant challenges due to digital accessibility issues, which can impact their educational and professional experiences.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://dyslexiaida.org/dyslexia-basics/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "1. Typography and fonts matter",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Dyslexic learners can struggle to read content with intricate fonts",
+          "_key": "k0017"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "; for instance, imagine a student attempting to decipher a cursive font on an educational website versus the ease of reading clear, sans-serif text. The difference is like trying to solve a puzzle with missing pieces versus having a complete picture – accessible fonts provide a smoother path to comprehension.",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://learningally.org/Blog/dyslexia-does-font-really-matter"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "2. Color and contrast",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Inadequate color contrast can hinder individuals from accessing information, like a poorly designed website with light gray text on a white background, making it almost illegible for them. It’s akin to trying to read words written in disappearing ink – frustrating and nearly impossible.",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "3. Audio support",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Imagine a professional trying to comprehend a dense financial report; providing an audio version would enable them to absorb the information more effectively. This is akin to offering a GPS for navigating complex terrain—it guides you through smoothly, ensuring you reach your destination with confidence.",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "4. Content structure and organization",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Picture a high school student navigating a research paper without clear headings or bullet points; a well-structured paper with proper formatting would significantly improve their ability to grasp the content. It’s like having a well-marked trail in a dense forest – it simplifies the journey, making it easier to navigate.",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "5. Interactive elements and readability",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Think about a job applicant struggling to fill out a complex online job application; a user-friendly, dyslexia-friendly design would make the process smoother, allowing them to showcase their skills and qualifications more effectively. It’s like having an experienced mentor by your side, guiding you through the application process with clarity and support.",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In conclusion",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Digital accessibility is not just about compliance; it’s about creating a more inclusive and equitable online experience for everyone. Dyslexic learners, like many others, benefit immensely from well-designed digital content and interfaces. To learn more about digital accessibility and how it impacts individuals with dyslexia, check out our comprehensive accessibility article. Together, let’s make the digital world a place where everyone can thrive, regardless of their abilities or challenges. ",
+          "_key": "k0038"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Contact O3",
+          "_key": "k0039"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " to learn more about our ",
+          "_key": "k0040"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "accessibility offerings",
+          "_key": "k0041"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        },
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.o3world.com/include/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "Discover how digital accessibility profoundly affects dyslexic learners. Explore 5 key impacts in our blog, promoting inclusive online environments for all."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:8406",
+    "extractedAt": "2026-08-01T00:09:47.913Z"
+  }
+}

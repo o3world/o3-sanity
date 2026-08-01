@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:53.142Z"
+  },
+  "wpId": 8083,
+  "slug": "embracing-accessibility-inclusion-the-ai-we-should-talk-about-at-sxsw24",
+  "title": "Embracing accessibility & inclusion: The AI we should talk about at SXSW24",
+  "dateGmt": "2023-08-10 13:22:50",
+  "modifiedGmt": "2023-08-10 13:22:50",
+  "authorId": 16,
+  "categoryIds": [
+    63
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/08/O3-website-imagery_-Perspectives-9.jpg",
+    "alt": "SXSW graphic"
+  },
+  "seo": {
+    "titleOverride": "SXSW Panel: The AI we should talk about is Accessibility and Inclusion",
+    "titleRendered": "SXSW Panel: The AI we should talk about is Accessibility and Inclusion",
+    "descriptionOverride": "SXSW24 is just around the corner, and we've got an inspiring panel proposal that needs your support!",
+    "descriptionRendered": "SXSW24 is just around the corner, and we've got an inspiring panel proposal that needs your support!",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/embracing-accessibility-inclusion-the-ai-we-should-talk-about-at-sxsw24/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Embracing accessibility & inclusion: The AI we should talk about at SXSW24",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Vote for an insightful panel session at SXSW24 and join the conversation about digital accessibility for all."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p><a href=\"https://www.sxsw.com/\">SXSW24</a> is just around the corner, and we&#8217;ve got an inspiring panel proposal that <a href=\"https://id.sxsw.com/\">needs your support</a>! O3 is excited to share our perspective with the audience and spread the word about creating experiences that make a difference.</p>\n<p>&nbsp;</p>\n<p><iframe loading=\"lazy\" title=\"Tamman &amp; O3 World SXSW Digital Accessibility Panel\" width=\"500\" height=\"281\" src=\"https://www.youtube.com/embed/cn91j8kTxCI?feature=oembed\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe></p>\n<h3>\nEmbracing accessibility &amp; inclusion</h3>\n<p>In a world where the web, apps, and online services shape our daily lives, ensuring equal access to information has never been more crucial. Our proposed panel, &#8220;The AI we should talk about is Accessibility &amp; Inclusion,&#8221; shines a light on the transformation from &#8216;mobile first&#8217; to &#8216;digital accessibility first.&#8217; This shift emphasizes not just designing for everyone, but creating technology that empowers and includes everyone.</p>\n<h3>\nThe panel</h3>\n<p>The panel will journey from the &#8216;mobile first&#8217; mindset of the past to the imperative of a &#8216;digital accessibility first&#8217; approach. In an era where our reliance on technology is undeniable, ensuring equal access to information for all is key. This session uncovers the transformative power of digital accessibility, exploring its role in elevating brands, expanding customer bases, and ultimately enhancing user experiences. Discover how to navigate the accessibility landscape and gain an understanding of its basics, all while learning simple and meaningful steps to assess the accessibility health of your digital assets. As we embrace the challenges of digital accessibility, we unlock a world of creative ideas, drive innovation, and foster a culture that thrives on adaptability and problem-solving.</p>\n<h3>\nWhy this matters</h3>\n<h4>Elevating brands</h4>\n<p>Our panel explores how embracing a &#8216;digital accessibility first&#8217; approach can elevate brands, broaden customer bases, and enhance user experiences. This is not just about ticking boxes; it&#8217;s about creating a welcoming digital space for all.</p>\n<h4>\nThe human-centered approach</h4>\n<p>By putting accessibility at the forefront, we foster a culture of empathy, innovation, and creative problem solving. This benefits not only the individuals using our technology but also our business growth.</p>\n<h4>\nImpact beyond technology</h4>\n<p>We&#8217;re not just discussing codes and interfaces. We&#8217;re discussing social justice, disability rights, human-centered design, and the pivotal role technology plays in these realms.</p>\n<h3>\nHow you can make a difference</h3>\n<p><a href=\"https://id.sxsw.com/\">Voting for our panel</a> is your way of championing inclusivity and accessibility in the tech world. Your vote helps us spread awareness, inspire change, and make a tangible impact. It&#8217;s more than a vote; it&#8217;s a statement of our commitment to creating a digital future that&#8217;s accessible to all.</p>\n<h4>\nSpread the word</h4>\n<p>Share this initiative with your network, friends, and colleagues who believe in the power of accessibility. Let&#8217;s amplify our voices together.</p>\n<h4>\nStay connected</h4>\n<p>Follow us on social media for updates and insights related to accessibility, technology, and the upcoming SXSW24. Use the hashtags #AIForAccessibility and #SXSW24 to join the conversation.</p>\n<p>At O3, we&#8217;ve always believed that technology should bridge gaps, not create them. <a href=\"https://www.o3world.com/contact/\">Join us</a> in this exciting journey toward creating an inclusive digital world. Your vote can shape the future of accessibility and inspire change in the tech industry. Let&#8217;s make our presence felt at SXSW24 and pave the way for a more accessible and inclusive tomorrow.</p>\n"
+      }
+    ],
+    "related_articles": [
+      7840,
+      3485,
+      7287
+    ],
+    "author": ""
+  }
+}

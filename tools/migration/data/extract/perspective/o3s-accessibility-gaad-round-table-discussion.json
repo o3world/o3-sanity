@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:53.145Z"
+  },
+  "wpId": 7888,
+  "slug": "o3s-accessibility-gaad-round-table-discussion",
+  "title": "O3's commitment to accessibility: Insights from O3’s GAAD Round Table discussion",
+  "dateGmt": "2023-05-23 16:45:55",
+  "modifiedGmt": "2023-05-23 16:47:57",
+  "authorId": 16,
+  "categoryIds": [
+    63,
+    7
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2020/11/O3-website-imagery_-Perspectives-9.jpg",
+    "alt": "Accessibility"
+  },
+  "seo": {
+    "titleOverride": "O3's GAAD accessibility round table",
+    "titleRendered": "O3's GAAD accessibility round table",
+    "descriptionOverride": "A high-level summary of our internal roundtable, highlighting key takeaways and O3's ongoing commitment to accessibility.",
+    "descriptionRendered": "A high-level summary of our internal roundtable, highlighting key takeaways and O3's ongoing commitment to accessibility.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/o3s-accessibility-gaad-round-table-discussion/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "O3's commitment to accessibility: Insights from O3’s GAAD Round Table discussion",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "This blog post provides a high-level summary of our internal roundtable, highlighting key takeaways and O3's ongoing commitment to accessibility. "
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>To commemorate <a href=\"https://www.o3world.com/perspectives/celebrating-gaad-o3s-commitment-to-accessibility-and-the-exciting-plans-ahead/\">Global Accessibility Awareness Day</a> (GAAD), O3 hosted an internal round table discussion, demonstrating our unwavering dedication to accessibility. This event brought together team members, fostering an open dialogue centered around O3&#8217;s commitment to creating an inclusive world for all. With the aim of raising awareness, advocating for change, and addressing the challenges faced by individuals with disabilities, the discussion proved enlightening. O3 unveiled our <a href=\"https://www.o3world.com/services/accessibility-consulting-optimization/\">new accessibility service offering</a>, which empowers enterprises to enhance their user experiences and create seamless access to their products and services. Inclusivity remains steadfast at the core of our mission, and the following summary highlights key insights from the discussion, showcasing O3&#8217;s ongoing commitment to accessibility.</p>\n<h3>Creating a Space for Conversation:</h3>\n<p>We kicked off by acknowledging the global trend of companies joining forces to evaluate their accessibility practices. O3 has been organizing such sessions regularly, providing a platform for our employees to share their experiences, perspectives, and concerns. The A11y  committee is made up of a team of accessibility experts. They are responsible for ensuring that the event was accessible and inclusive, allowing everyone to actively participate.</p>\n<h3>Sharing Experiences and Knowledge:</h3>\n<p>O3 team members were encouraged to share recent news, interesting talks, or personal encounters related to accessibility. The floor was open for informal conversations, fostering a meaningful exchange among the participants. One participant excitedly shared insights from a webinar they attended, which emphasized the importance of sound in designing inclusive interfaces. They discussed the experiences of a panelist from Nickelodeon who highlighted sound-based learning for children, emphasizing its significance for individuals who rely on sound as their primary sense.</p>\n<h3>Exploring Sound in Accessibility:</h3>\n<p>The conversation delved into the role of sound in various products and experiences. While sound is often seen as a distraction to be minimized, participants recognized its potential for enhancing accessibility. They discussed examples like audio cues in screen readers and tactile feedback for providing action indications. This sparked interest in integrating sound-related cues and feedback into app development to improve accessibility. Mention was made of an app called TAPI, which offers sound and haptic feedback, showcasing the possibilities of integrating sensory experiences in digital environments.</p>\n<h3>Expanding the Scope of Accessibility:</h3>\n<p>We acknowledged the need to broaden the discussion beyond sound and explore other aspects of accessibility. They emphasized the importance of considering haptic feedback, voice-based cues, and tactile interactions. While designing for sound and sensory experiences is not yet common, the conversation encouraged further exploration and consideration of these elements in various applications and platforms.</p>\n<h3>O3&#8217;s Pledge to Accessibility:</h3>\n<p>The GAAD round table discussion exemplified O3&#8217;s unwavering commitment to accessibility. By fostering open dialogue and raising awareness among employees, the company aims to infuse accessibility into its design and development processes. O3 understands that accessibility is an ongoing effort, extending beyond a single day. The company intends to leverage its diverse expertise and collaborative environment to innovate and create inclusive experiences for all users.</p>\n<p>This open forum to communicate provided a valuable opportunity for team members to exchange experiences, insights, and ideas related to accessibility. The conversation highlighted the significance of sound, tactile feedback, and sensory experiences in fostering inclusivity. By embracing these discussions and actively working towards accessibility, O3 is dedicated to driving positive change and constructing a more inclusive world that prioritizes accessibility for every individual, regardless of their abilities. <a href=\"https://www.o3world.com/contact/\">Get in touch with us</a> to learn more.</p>\n"
+      }
+    ],
+    "related_articles": [
+      7287,
+      5173,
+      7840
+    ],
+    "author": ""
+  }
+}

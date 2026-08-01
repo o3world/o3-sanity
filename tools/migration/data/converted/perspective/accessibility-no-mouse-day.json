@@ -1,0 +1,224 @@
+{
+  "_id": "perspective-wp-4658",
+  "_type": "perspective",
+  "title": "Accessibility workshop: No Mouse Day",
+  "slug": {
+    "_type": "slug",
+    "current": "accessibility-no-mouse-day"
+  },
+  "excerpt": "Team O3 held a unique and engaging workshop coordinated by the web accessibility experts at O3.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-63",
+      "_key": "cat-63"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    }
+  ],
+  "publishedAt": "2021-09-01T17:49:39Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-5.jpg"
+    },
+    "alt": "O3 accessibility and pattern"
+  },
+  "body": [
+    {
+      "_key": "k0000",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Join us on Wednesday, ",
+          "_key": "k0001"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "October 13th at 5:00 pm ET",
+          "_key": "k0002"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " for No Mouse Day to take part in a unique and engaging workshop coordinated by the web accessibility experts at O3.",
+          "_key": "k0003"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Why no mouse?",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Easy, intuitive website navigation is a fundamental component of good digital design and successful customer experience. But most online desktop experiences are optimized for mouse-based navigation, ignoring the needs of disabled individuals who use a keyboard to get around the internet.",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What better way to understand the challenges and inaccessibility of mouse-first design than to experience it firsthand?",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Join us for an interactive workshop in which our accessibility experts will:",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Discuss the common pitfalls of inaccessible web navigation",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Offer a framework for building inclusive digital experiences",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Facilitate a collaborative no-mouse exercise for participants",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Who should attend?",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This event isn’t just for designers and developers–anyone who wishes to gain a deeper understanding of accessible web design is welcome to join.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Event registration has closed",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "Hosted by O3, No Mouse Day is an interactive workshop for anyone who wishes to gain a deeper understanding of accessible web design."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:4658",
+    "extractedAt": "2026-08-01T00:10:06.746Z"
+  }
+}

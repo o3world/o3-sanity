@@ -1,0 +1,118 @@
+{
+  "_id": "perspective-wp-6191",
+  "_type": "perspective",
+  "title": "O3 recognized by Clutch as top UX consultancy",
+  "slug": {
+    "_type": "slug",
+    "current": "o3-recognized-by-clutch-as-top-ux-consultancy"
+  },
+  "excerpt": "Our expert experience design team is delivering exceptional solutions to our clients.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-15",
+      "_key": "cat-15"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    }
+  ],
+  "publishedAt": "2023-01-10T21:52:08Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights.png"
+    },
+    "alt": "Clutch logo, Top UX Agencies in PA 2022, overlaying the O3 office."
+  },
+  "body": [
+    {
+      "_key": "k0001",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 is proud to be named one of the top 2022 UX designers in Pennsylvania.",
+          "_key": "k0002"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Although our CX services extend beyond that of just UX design, our expert experience design team is delivering exceptional solutions to our clients. Their level of expertise and creativity drives superior experiences.",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Clutch is an online B2B review and rating platform. In order to be considered a ",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "leader on Clutch",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", a business needs to earn as many high-quality reviews from their clients as possible. This is a system that heavily favors customer relationships and building long-lasting bonds with clients. Something that we’ve put a premium on over the years.",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://clutch.co/agencies/ui-ux/pennsylvania?utm_source=directory&utm_medium=blog&utm_campaign=Clutch+Awards"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 wants to take this opportunity to properly thank all our clients for helping make this award a reality. It’s only through their effort and trust in O3 that we are building upon wins like this.",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:6191",
+    "extractedAt": "2026-08-01T00:10:02.400Z"
+  }
+}

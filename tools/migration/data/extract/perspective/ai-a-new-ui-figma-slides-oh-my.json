@@ -1,0 +1,69 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:37.820Z"
+  },
+  "wpId": 9062,
+  "slug": "ai-a-new-ui-figma-slides-oh-my",
+  "title": "AI, a new UI, Figma Slides – oh my!",
+  "dateGmt": "2024-07-01 15:03:01",
+  "modifiedGmt": "2024-07-01 16:21:07",
+  "authorId": 16,
+  "categoryIds": [
+    8
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2024/07/O3-website-imagery_-Perspectives-47.jpg",
+    "alt": "Recapping all the exciting news + upgrades announced at Config 2024"
+  },
+  "seo": {
+    "titleOverride": "Config 2024: Exciting Figma AI updates, new features, and Figma slides",
+    "titleRendered": "Config 2024: Exciting Figma AI updates, new features, and Figma slides",
+    "descriptionOverride": "Explore the latest updates from Figma's Config 2024, including Figma AI, a redesigned interface, enhanced developer tools, and the new Figma Slides.",
+    "descriptionRendered": "Explore the latest updates from Figma's Config 2024, including Figma AI, a redesigned interface, enhanced developer tools, and the new Figma Slides.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/ai-a-new-ui-figma-slides-oh-my/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "AI, a new UI, Figma Slides – oh my!",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Recapping all the exciting news + upgrades announced at Config 2024"
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>As <a href=\"https://www.linkedin.com/in/dylanfield\">Dylan Field</a>, Figma’s Co-Founder + CEO, stepped onto Config’s stage on Wednesday wearing a “Now with AI” t-shirt, I knew we were in for a treat – and this year’s announcements did not disappoint. Here’s a list of updates, features + products announced at Config 2024 that I’m most excited about:</p>\n<h4>Work smarter, not harder</h4>\n<p>From finding designs with visual search to generating UI designs with prompts to renaming layers with a click of a button, <a href=\"https://www.figma.com/ai/\">Figma AI</a> is going to streamline our daily workflow + help us be more efficient.</p>\n<h4>A redesigned interface</h4>\n<p>UI3, <a href=\"https://www.figma.com/blog/behind-our-redesign-ui3/\">Figma&#8217;s third redesign</a>, focuses on streamlining our work, creating consistency and prioritizing the future.</p>\n<h4>Ready for Dev enhancements</h4>\n<p>Statuses, notes + focus views will make <a href=\"https://www.figma.com/blog/config-2024-recap/#updates-to-dev-mode-from-design-ready-to-dev\">collaborating with devs</a> so much more efficient.</p>\n<h4>Auto Layout improvements</h4>\n<p>With the new “<a href=\"https://help.figma.com/hc/en-us/articles/5731482952599-Add-auto-layout-to-a-design#suggest\">Suggest auto layout</a>” feature, you can now build responsive components with a click of a button – say goodbye to the tedious task of adding auto layout frame-by-frame.</p>\n<h4>Getting started support</h4>\n<p>Access <a href=\"https://www.figma.com/community/file/1385659531316001292/ios-18-and-ipados-18\">Apple iOS</a>, <a href=\"https://www.figma.com/community/file/1035203688168086460\">Google Material Design 3</a>, and <a href=\"https://www.figma.com/community/file/1380235722331273046\">Figma’s Simple Design System</a> UI kits to help you get started on your next project.</p>\n<h4>Prototype upgrades</h4>\n<p>Preview your designs across different screen sizes with the new responsive prototype viewing option.</p>\n<p><em>and last but not least…</em></p>\n<h4>A new way to present</h4>\n<p><a href=\"https://www.figma.com/slides/\">Figma Slides</a>, Figma’s newest product, is a presentation tool built with designers, their colleagues + their clients in mind and enables a new approach to crafting stories + engaging with audiences.</p>\n<p>I’m so eager to implement all of these improvements into my workflow. Each update has the potential to improve the way we work on a day to day basis, which is why it makes it so hard to pick a favorite update. But if I had to pick… I’d choose Figma Slides! In full transparency, my excitement may be a *little* biased due to my team’s involvement with the project (more on that later), but biases aside, <a href=\"https://www.youtube.com/watch?v=w00XRYprOuw&amp;list=PLXDU_eVOJTx7qh8vf8VjjXET0gZ50IHKx&amp;index=3\">Slides</a> is truly going to reimagine the way we engage with our clients + showcase our work.</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-9068 size-medium\" src=\"https://www.o3world.com/wp-content/uploads/2024/07/FigmaSlides-e1719845043186-640x343.png\" alt=\"Figma slides \" width=\"640\" height=\"343\" srcset=\"http://www.o3world.com/wp-content/uploads/2024/07/FigmaSlides-e1719845043186-640x343.png 640w, http://www.o3world.com/wp-content/uploads/2024/07/FigmaSlides-e1719845043186-1024x548.png 1024w, http://www.o3world.com/wp-content/uploads/2024/07/FigmaSlides-e1719845043186-768x411.png 768w, http://www.o3world.com/wp-content/uploads/2024/07/FigmaSlides-e1719845043186-1536x822.png 1536w, http://www.o3world.com/wp-content/uploads/2024/07/FigmaSlides-e1719845043186-2048x1096.png 2048w, http://www.o3world.com/wp-content/uploads/2024/07/FigmaSlides-e1719845043186-48x26.png 48w, http://www.o3world.com/wp-content/uploads/2024/07/FigmaSlides-e1719845043186-1280x685.png 1280w\" sizes=\"auto, (max-width: 640px) 100vw, 640px\" /></p>\n<h3>Meet O3’s expert</h3>\n<p>Meet <a href=\"https://www.linkedin.com/in/simone-dehel-cpacc-0b596a10a/\">Simone Dehel</a>, a certified expert in CPACC (Certified Professional in Accessibility Core) at O3. Simone is a Senior UX Designer who&#8217;s passionate about bridging the gap between accessible experiences and design. She embodies inclusivity, making sure accessibility is not just an add-on but a core part of creating experiences. Simone is one of our leading accessibility champions at O3, is the founder of our culture club, and serves as a <a href=\"https://adplist.org/mentors/simone-dehel?utm_source=linkedin&amp;utm_medium=social&amp;utm_campaign=user_profileshare&amp;utm_content=simonedehel\">design mentor at ADP List</a>.</p>\n<p>Our team is dedicated to delivering innovative design solutions that not only meet but exceed expectations for your brand. By continually <a href=\"https://www.o3world.com/perspectives/\">expanding our knowledge</a> and embracing the latest advancements, we ensure that your projects are executed with precision and creativity. <a href=\"https://www.o3world.com/contact/\">Contact us today</a> to discover how our expertise and forward-thinking approach can transform your vision into a reality, fostering success and growth for your brand.</p>\n"
+      }
+    ],
+    "related_articles": "",
+    "author": [
+      7875
+    ]
+  }
+}

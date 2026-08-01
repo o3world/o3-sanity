@@ -1,0 +1,67 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:57.658Z"
+  },
+  "wpId": 7291,
+  "slug": "bridging-the-customer-experience-martech-gap",
+  "title": "Bridging the Customer Experience - martech gap",
+  "dateGmt": "2023-02-20 18:03:26",
+  "modifiedGmt": "2023-03-01 18:13:23",
+  "authorId": 16,
+  "categoryIds": [
+    15
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-16.jpg",
+    "alt": "Red pattern"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Bridging the Customer Experience - martech gap | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/bridging-the-customer-experience-martech-gap/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Bridging the Customer Experience - martech gap",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Businesses face a difficult task in evaluating, selecting and implementing the right marketing technology solutions."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>As the decision maker in the branding process you are tasked with choosing the right team and technologies required to bring your brand vision to life. And while Customer Experience is dependent on the knowledge, skills and capabilities of your partners, the expertise needed to navigate the ever growing Martech landscape is dependent on your partners ability to bridge the Customer Experience – Martech gap.</p>\n<h3>What is the Martech gap?</h3>\n<p>The “Martech gap” refers to a challenge that many businesses face It refers to the gap between the potential of marketing technology and the actual results that businesses are able to achieve.</p>\n<h3>Martech gap and your CX strategy</h3>\n<p>Customer Experience broadly defined is the branding, design, and execution of your omnichannel product experiences — such as mobile, desktop, packaging, point of purchase, and advertising. The customer experience can be subjective, decision makers look to industry professionals — like designers and marketers for insight and intuition into a brand’s customer base. But these marketing and design professionals need to have a robust set of data and resources to inform their decisions and brand direction.</p>\n<h3>Tools and technologies</h3>\n<p>Martech and the martech stack are tools and technologies to create, communicate, evaluate and track your brand message. Whether you are using the tools to develop an exceptional Customer Experience or to track metrics, marketers are increasingly dependent on Martech technologies. The number of companies and services in the martech space have been growing at around 15% a year. It has become increasingly difficult for marketing professionals to navigate the Martech landscape.</p>\n<h3>Bridging the Customer Experience</h3>\n<p>Martech gap requires navigating the brand execution continuum, from subjective branding decisions to data focused decisions based on analytics. Great marketing in the age of technology requires marketing and design to be actively engaged with development and analytics professionals to share knowledge. Experienced project managers, architects and engineers guiding your team integration is essential to bridging the gap.</p>\n<h3>How O3 can help</h3>\n<p>As a consultancy, O3 brings continuity to your marketing and brand execution strategies by creating modern practices for marketing systems development. We bridge the Customer Experience – Martech gaps by focusing on interdisciplinary communication between our practice teams. Our leadership and project management teams are working to facilitate this conversation and demonstrate how your marketing can bridge the gap.</p>\n<p>Check out O3 case studies to see how we have helped to transform brands or <a href=\"https://www.o3world.com/contact/\">contact O3 directly</a> to learn more.</p>\n"
+      }
+    ],
+    "related_articles": "",
+    "author": ""
+  }
+}

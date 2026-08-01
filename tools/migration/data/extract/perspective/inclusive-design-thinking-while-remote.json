@@ -1,0 +1,74 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:15.486Z"
+  },
+  "wpId": 3537,
+  "slug": "inclusive-design-thinking-while-remote",
+  "title": "Inclusive design thinking while remote",
+  "dateGmt": "2020-06-04 20:40:26",
+  "modifiedGmt": "2023-02-01 21:00:16",
+  "authorId": 16,
+  "categoryIds": [
+    61,
+    10,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/08/O3-website-imagery_-Insights-6.jpg",
+    "alt": "O3 blue pattern"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Inclusive design thinking while remote | O3",
+    "descriptionOverride": "After facilitating a series of design thinking workshops, O3 pulled together a few valuable lessons on what it takes to go virtual.",
+    "descriptionRendered": "After facilitating a series of design thinking workshops, O3 pulled together a few valuable lessons on what it takes to go virtual.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/inclusive-design-thinking-while-remote/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>Finding effective ways to collaborate remotely is now a standard part of daily life for many organizations. Many of our clients are located across the country and in many different timezones, and we often work with distributed teams at O3. It is part of our natural process to be able to be collaborative while virtual.</p>\n<p>Recently, as part of the <a href=\"https://artsbusinessphl.org/creativeexchange/\">Creative Exchange</a> program, a five-part program organized by the Arts + Business Council of Greater Philadelphia, O3 facilitated a series of design thinking workshops remotely with over 30 professionals from various local organizations (<a href=\"https://www.o3world.com/news/creative-exchange-a-collaborative-virtual-design-thinking-series/\">read about what we covered in the first session</a>). While many attendees were new to design thinking, it was also one of the first times they had engaged in a fully remote workshop using new tools and technologies.</p>\n<p>After facilitating these workshops, we learned some valuable lessons on what it takes to facilitate large-scale, collaborative design thinking virtually.</p>\n<h2>Empower participants to use the tools</h2>\n<p>When facilitating in-person design thinking workshops, the tools are familiar: sticky notes and sharpies. When conducting these types of workshops online, digital collaborative tools have a learning curve to become as comfortable as pen and paper.</p>\n<p>Just like preparing for an in-person workshop, ready your arsenal of tools and materials in advance and give your participants time to become familiar with them. Regardless of what tool you use — <a href=\"https://miro.com/\">Miro</a> and <a href=\"https://www.mural.co/\">Mural</a> are favorites for our team at O<sub>3</sub> — remember to send out materials or conduct training in advance of your workshop so that your attendees are prepared.</p>\n<h2>Set up your facilitators for success</h2>\n<p>When you’re facilitating an in-person workshop, you have the ability to bounce between groups easily. If you find a group going off-track, you can see it from across the room or hear it in the conversations happening around you. When you&#8217;re working virtually — especially if you’re leveraging Zoom’s Breakout Room feature for smaller group activities — proactive facilitation becomes challenging.</p>\n<p>When possible, include one facilitator for each breakout group in your workshop so there is a dedicated resource available to guide the group. Work with your facilitators on the agenda, the amount of time you’ll need to successfully complete each activity, and prepare materials in advance. If your instructors are new to a particular activity, give them a chance to see the activity in practice first, then let them do a dry-run for feedback.</p>\n<p>During the Creative Exchange workshops, we had detailed Facilitator Guides that included the agenda for the workshop, as well as useful resources on each activity, such as answers to common questions and tips if a group is struggling. Each facilitator was able to teach and guide their breakout sessions based on the same foundation and provide consistent feedback to group members.</p>\n<h2>Consider the accessibility of remote presentations and workshops</h2>\n<p>Accessibility is an important aspect of our work at O3 World. Creating inclusive presentations and workshops is a part of building a great experience.</p>\n<p>With the rise of new technologies for remote collaboration comes new challenges for individuals with disabilities. Conduct a thorough audit of the tools you&#8217;re using for your workshop and plan for ways to accommodate all participants. In advance of your workshop, survey your attendees about any accommodations you may need to consider so that you can plan in advance and, when possible, work with them directly to find solutions. Additionally, send over your workshop materials in advance in a native format to give individuals a chance to review and digest the material (e.g. send the PowerPoint file in addition to a PDF export from PowerPoint).</p>\n<p>For example, Mural and Miro have great voting tools, but they’re largely inaccessible to individuals with low vision or who are blind. Instead, conduct unbiased voting exercises audibly by asking individuals to use Zoom’s Raise Hand feature (which is available in both the app interface and on the phone).</p>\n<p>Making a virtual workshop as seamless and inclusive as possible starts with thoughtful planning and preparation, and while it can make running a design thinking session a bit more challenging, the outcome is worth the investment.</p>\n<p>If you’d like to learn more about design thinking and human-centered problem solving methodologies, you can <a href=\"https://www.o3world.com/contact/\">contact us here</a>. We regularly conduct <a href=\"https://www.o3world.com/labs/innovation-workshops/\">innovation workshops</a> and <a href=\"https://www.o3world.com/labs/partnering-to-experiment/\">experiment with clients</a> to prototype and test new ideas.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Inclusive design thinking while remote",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "After facilitating workshops, O3 learned some valuable lessons on what it takes to facilitate large-scale, collaborative design thinking virtually."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      4884,
+      3247,
+      4296,
+      5025
+    ],
+    "author": ""
+  }
+}

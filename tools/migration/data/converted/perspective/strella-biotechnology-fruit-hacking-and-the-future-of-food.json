@@ -1,0 +1,767 @@
+{
+  "_id": "perspective-wp-2892",
+  "_type": "perspective",
+  "title": "Strella Biotechnology: Fruit-hacking and the future of food",
+  "slug": {
+    "_type": "slug",
+    "current": "strella-biotechnology-fruit-hacking-and-the-future-of-food"
+  },
+  "excerpt": "Keith Scandone, partner and CEO of O3 World, sat down with Sizov after her win at 1682 to talk about Strella Biotech, the environment, and how to win as a young entrepreneur.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    }
+  ],
+  "publishedAt": "2019-10-22T22:05:36Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/05/O3-website-imagery_-Insights-11.jpg"
+    },
+    "alt": "Greyscale, exterior shot of O3 office with logo on brick."
+  },
+  "body": [
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Katherine Sizov’s",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " biotech startup has been sweeping the student innovation competition circuits, and her latest win was the Venture Award at 1682, O3 World’s ",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "business of innovation conference",
+          "_key": "k0014"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/katherine-sizov-2b822b126/"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.o3world.com/news/1682-the-business-of-conference-innovation/"
+        }
+      ],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2019/10/102219-Strella-Biotechnology.jpeg"
+      },
+      "alt": "Strella biotechnology apples",
+      "_key": "k0016"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Sizov, founder and CEO of ",
+          "_key": "k0018"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Strella Biotechnology",
+          "_key": "k0019"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", saw a big problem in the fruit-packing industry: An estimated 40% of produce is wasted due to spoilage before it even reaches consumers’ grocery bags. It seemed to Sizov that the industry did not recognize the issue as an acceptable margin of loss, but she was certain there was a way to improve both the financial and environmental impacts.",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.strellabiotech.com/#problem"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“So,” she laughed, “we figured out how to hack a fruit!”",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Keith Scandone, partner and CEO of O3 World, sat down with Sizov after her win at 1682 to talk about Strella Biotech, the environment, and how to win as a young entrepreneur.",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2019/10/102219-Strella-Katherine-918x516-1.jpeg"
+      },
+      "alt": "Sizov, founder and CEO of Strella Biotechnology",
+      "_key": "k0025"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Tell us about the origins of your company. How did you become interested in food waste and solving that problem?",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Somewhere between my sophomore and junior years of college, I realized my passion was in application-based technologies—things I could see people using in my lifetime. I wasn’t ready to pursue an academic career so I thought about how to apply my skills to solve problems around me.",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "All of my research had been based in neuroscience, so I started reading more broadly about other industries and fields. I read this crazy statistic that 40% of fresh produce is wasted before it’s consumed. I thought, “Clearly this was a huge problem that still had no solution.” So I decided I would give it a try.",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "I started with apples, which can sit in cold storage for over a year before you buy them at the store, but two out of five of them end up spoiling during storage or shipping. We invented an ethylene-detection device that sits in the cold storage room of the packing house. It alerts us of an increase in ethylene production, which is the chemical that starts the ripening process, essentially giving the packing house a countdown to get the fruit onto grocery store shelves before it spoils.",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In October 2018, we got the first sensors into a packing house in Washington state that was willing to test our product, and on January 5th, the sensors detected an ethylene spike in one of the storage rooms. We told the client to pull the fruit immediately. They weren’t planning on distributing those apples to stores until July, but because our sensors told them the fruit was ready to ship, the client saved over $400k worth of apples in a single storage room.",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Why does Strella focus on ethylene data?",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Ethylene is essentially the first signal a fruit emits when it is about to start ripening. It’s saying, “Hey! I’m ready to ripen!” This happens before any other physical changes are apparent.",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We target the most popularly consumed fruits that produce ethylene for ripening—apples, pears, bananas, kiwi, avocado, tomatoes, and onions. We focus on fruit that ripens the fruit next to it—like when you put an unripe banana next to a ripe one, it ripens faster because it is emitting ethylene.",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0042",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Since we can read the ethylene signal, we know the fruit is going to ripen before it starts turning mushy or getting too sweet or discolored. That way, we can get the fruit to its final destination before it spoils.",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0044",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "How do you leverage the Internet of Things (IoT)?",
+          "_key": "k0045"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0046",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our sensors live in oxygenless, extremely cold storage rooms. If you were to walk in you would die. This basically makes it impossible or very costly for a human to gather any sort of data. So, IoT is extremely critical on our initial market front because we have all these devices that need to communicate wirelessly and send data to us. In the future, we’ll rely on IoT even more, because we want our sensors to move along the supply chain. IoT will become absolutely necessary for us to receive information while the fruit is on the road.",
+          "_key": "k0047"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0048",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Can you explain the social impact of Strella and how the company addresses some of the UN’s sustainability development goals?",
+          "_key": "k0049"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0050",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This is a big focus for us and we’re particularly proud that there are two wins to using our technology to reduce food waste. First, our clients generate more margins on their products because their distribution is more targeted and efficient. But most importantly to us, we are taking an active part in helping the environment.",
+          "_key": "k0051"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0052",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In the U.S., energy that goes into the production, harvesting, transporting, and packaging of food that just ends up in the trash generates more than 3.3 billion metric tons of carbon dioxide. Then, the food waste in landfills is responsible for 23% of all methane emissions and 4.5% of all U.S. greenhouse gas emissions. We think about cars being bad for the environment because of their carbon emissions, but food waste is producing much, much more than transportation. We also waste a huge amount of water and land in order to create food that ultimately just ends up in the trash.",
+          "_key": "k0053"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0054",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "With Strella, we are addressing the UN’s sustainability development goal ",
+          "_key": "k0055"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "(UN SDG) #12",
+          "_key": "k0056"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", which is the goal for sustainable consumption and production. We target reducing food waste within the supply chain, which also means the need for overproduction can be dramatically reduced.",
+          "_key": "k0057"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.un.org/sustainabledevelopment/sustainable-consumption-production/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0058",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We’re also addressing ",
+          "_key": "k0059"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "UN SDG #2",
+          "_key": "k0060"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and ",
+          "_key": "k0061"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "#3",
+          "_key": "k0062"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", for zero hunger and good health and well being. So many different parts of global communities still don’t have reliable access to fresh produce. By mitigating losses and increasing the amount of available produce in the supply chain, we can work toward building healthy, well-fed communities.",
+          "_key": "k0063"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.un.org/sustainabledevelopment/hunger/"
+        },
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.un.org/sustainabledevelopment/health/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0064",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Plus, over 7% of global water consumption is wasted on growing produce that never makes it into our bodies. By reducing overproduction, we can work on ameliorating the huge amounts of water we waste, which is in keeping with ",
+          "_key": "k0065"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0006"
+          ],
+          "text": "UN SDG #6",
+          "_key": "k0066"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0067"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0006",
+          "_type": "link",
+          "href": "https://www.un.org/sustainabledevelopment/water-and-sanitation/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0068",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Now that you have won the Ventures Award, what’s next for your company?",
+          "_key": "k0069"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0070",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We just finished deploying in storage rooms (controlled atmosphere packaging facilities) throughout the U.S. Our current customers represent about 20% of the entire U.S. market for apples and pears.",
+          "_key": "k0071"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0072",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Next, we’ll be working on a pallet-level sensor, which makes sure that when you go to a grocery store all the fruits on display are perfectly ready for you to consume. We want your avocado to be ripe just in time for your party when you need to start making the guacamole! We want to deliver the highest-quality fruit to people in order to reduce food waste on the consumer end as well.",
+          "_key": "k0073"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0074",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "You’ve been very successful at several innovation competitions. What advice do you have for entrepreneurs?",
+          "_key": "k0075"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0076",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Realize it’s not that big of a risk. People make starting a business seem like this huge crazy thing, but most people already have access to some capital and networks of people who can help. Plus, there are conferences like ",
+          "_key": "k0077"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0007"
+          ],
+          "text": "1682",
+          "_key": "k0078"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " that give you an opportunity to pitch your business.",
+          "_key": "k0079"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0007",
+          "_type": "link",
+          "href": "https://1682conf.com"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0080",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "There are so many resources out there. Look at the opportunities around you and leverage what’s available: grants from the government, pitch competitions, speaking opportunities, companies you can partner with to work on your own idea.",
+          "_key": "k0081"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0082",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Think creatively about how to advance any innovation or idea you may have. If you take your time and do your research, you can build a company that won’t ruin your life with the traditional bootstrapping story.",
+          "_key": "k0083"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0084",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "What was your favorite session at 1682?",
+          "_key": "k0085"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0086",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "I liked the talk given by ",
+          "_key": "k0087"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0008"
+          ],
+          "text": "Edy Liongosari",
+          "_key": "k0088"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", the Chief Research Scientist at Accenture. People often think of the future as something that is static and inevitable, but Edy did a good job of illustrating the point that it is up to us to make the future. We are influenced by what we’re reading and listening to, and the ideas we have because of those influences. What truly shapes the future is what we think it will be; what we think we can be.",
+          "_key": "k0089"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0008",
+          "_type": "link",
+          "href": "https://www.o3world.com/news/movers-shakers-innovators-1682-speaker-spotlight-part-2/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0090",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "What future are you creating with Strella?",
+          "_key": "k0091"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0092",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We aim to provide all the answers about fruit quality throughout every segment of the supply chain, from the time a fruit is picked to the time you eat it! With our technology, we want to help companies increase their margins, reduce overproduction, and to make the fresh produce industry more sustainable for a healthier planet.",
+          "_key": "k0093"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0094",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Also, we are starting to do an official funding round, so if anyone is interested, they can contact me here: ",
+          "_key": "k0095"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0009"
+          ],
+          "text": "katya@strellabiotech.com",
+          "_key": "k0096"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0097"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0009",
+          "_type": "link",
+          "href": "mailto:katya@strellabiotech.com"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0098",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Hearing from founders like Katherine makes us even more excited about our partnership program, ",
+          "_key": "k0099"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0010"
+          ],
+          "text": "Ozone Ventures.",
+          "_key": "k0100"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " Take some time to read about how we’re investing our own expertise and money into people, products, and services we believe in.",
+          "_key": "k0101"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0010",
+          "_type": "link",
+          "href": "https://www.o3world.com/ventures/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "Katherine Sizov’s biotech startup has been sweeping the student innovation competition circuits, and her latest win was the Venture Award at 1682."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:2892",
+    "extractedAt": "2026-08-01T00:10:20.527Z"
+  }
+}

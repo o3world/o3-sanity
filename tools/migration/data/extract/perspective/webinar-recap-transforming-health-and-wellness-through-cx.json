@@ -1,0 +1,80 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:57.656Z"
+  },
+  "wpId": 7571,
+  "slug": "webinar-recap-transforming-health-and-wellness-through-cx",
+  "title": "Webinar recap: \"Transforming health and wellness through CX”",
+  "dateGmt": "2023-04-03 20:23:19",
+  "modifiedGmt": "2023-04-03 20:23:19",
+  "authorId": 16,
+  "categoryIds": [
+    7
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/03/My-project-1-35.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Webinar recap: \"Transforming health and wellness through CX” | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/webinar-recap-transforming-health-and-wellness-through-cx/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Webinar recap: \"Transforming health and wellness through CX”",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "O3 sat down with industry experts to discuss transforming health and wellness through CX "
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>Last Wednesday, O3 hosted a  webinar titled “Transforming health and wellness through CX” The conversation was both informative and engaging. Our CIO, Mike Gadsby, along with distinguished panelists Dr. Bon Ku and Dr. Bonnie Offit, shared their expertise and experience on the latest trends, pain points, and techniques for enhancing the patient experience in the healthcare industry. Check out our <a href=\"https://www.o3world.com/perspectives/meet-the-our-expert-px-patient-experience-panel/\">speaker profiles</a>.</p>\n<p>This session was perfect for healthcare professionals, policymakers, and anyone who is interested in improving the patient experience in healthcare. The session provides a deeper understanding of the challenges facing the healthcare industry and learn strategies to overcome them. Feel free to share this webinar recording with any colleagues you may see fit.</p>\n<p>Here are some of the topics we covered:</p>\n<ul>\n<li>What makes for a great patient experience</li>\n<li>Reach + service quality; speed and access</li>\n<li>Data challenges and access</li>\n<li>Siloed experience</li>\n<li>The future of patient experience</li>\n</ul>\n<p>O3 understands that effective communication and personalized interactions are crucial in the healthcare industry. If you are interested in learning more about O3’s capabilities <a href=\"https://www.o3world.com/contact/\">contact us</a>.</p>\n<p><a href=\"https://www.linkedin.com/company/249880/admin/\">Follow us on LinkedIn</a> to stay tuned for thought leadership,  webinars, and events.</p>\n"
+      },
+      {
+        "acf_fc_layout": "video",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Video",
+        "video_type": "external",
+        "video_style": "standard",
+        "video_file": false,
+        "external_url": "<iframe title=\"Transforming health and wellness through CX: Best practices and strategies in 2023\" width=\"640\" height=\"360\" src=\"https://www.youtube.com/embed/To54FwbrFjQ?start=686&amp;feature=oembed\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+      }
+    ],
+    "related_articles": [
+      7487,
+      3623,
+      5038
+    ],
+    "author": ""
+  }
+}

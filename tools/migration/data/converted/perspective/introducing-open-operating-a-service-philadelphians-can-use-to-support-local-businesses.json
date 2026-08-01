@@ -1,0 +1,216 @@
+{
+  "_id": "perspective-wp-3651",
+  "_type": "perspective",
+  "title": "Introducing Open & Operating: A service Philadelphians can use to support local businesses",
+  "slug": {
+    "_type": "slug",
+    "current": "introducing-open-operating-a-service-philadelphians-can-use-to-support-local-businesses"
+  },
+  "excerpt": "By leveraging design thinking we were able to hone in on a concept that was high in value, technically feasible, and relatively simple to get to market.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    }
+  ],
+  "publishedAt": "2020-07-13T19:54:25Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/07/O3-website-imagery_-Insights-8.jpg"
+    },
+    "alt": "Introducing Open & Operating: A service Philadelphians can use to support local businesses"
+  },
+  "body": [
+    {
+      "_key": "k0001",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Economic uncertainty is real and the challenges many businesses are facing seem to have no end in sight. Organizations are grappling with when and how to reopen their doors safely. In an effort to alleviate some of those pressures our team of digital strategists, designers, and engineers gathered to discuss ways to help people during the pandemic using digital technology.",
+          "_key": "k0002"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We held a brainstorming session to get all our ideas out on the table. Judgement was deferred. Wild ideas were encouraged. And we focused on generating lots of suggestions to solve the core issues.",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/O3World-News-Post-Agency-Innovation-2400x1350-1.jpg"
+      },
+      "alt": "Miro Collaboration Board featured in Zoom call with O3 employees",
+      "_key": "k0005"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "By leveraging design thinking we were able to hone in on a concept that was high in value, technically feasible, and relatively simple to get to market. We dreamt up a way for communities to easily support local businesses by accessing crucial information via text messages.",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Building new ideas, prototyping & tinkering with new tech",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The ",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "O3 Labs",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " team created a messaging service that allows users to find out what’s open for business. Lead Experience Designer, Josh Soldiers, constructed chat flows for each service type; free food distribution, local bars and alcohol, restaurants, and listing a business. He then designed the experience around SMS messaging, prioritized user inputs, and identified fallbacks. Josh also worked alongside Lead Engineer, Zuhib Daud, to create the optimal experience.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.o3world.com/labs/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Daud mapped out a path forward for the Labs team to use a combination of Twilio Studio, NodeJS, and Google’s geolocation API to build the service. Through conversational interface design and development of a creative tech solution we were able to create a beta version for people in Philadelphia to test out.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Meet O&O",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Open & Operating is the latest product we’ve built in-house. It’s a messaging service that gives users instant access to support small businesses in their area. Simply text “Hello” to 267-459-2887 to discover the closest businesses providing pickup and delivery options for your needs.",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0021",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "embed",
+      "url": "https://www.o3world.com/wp-content/uploads/2020/07/OO_Chat2.mp4?_=1",
+      "_key": "k0022"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Learn more at openandoperating.com or try out the service for free today by texting “Hello” to 267-459-2887.",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:3651",
+    "extractedAt": "2026-08-01T00:10:10.997Z"
+  }
+}

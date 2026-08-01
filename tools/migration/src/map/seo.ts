@@ -2,6 +2,7 @@ import { z } from 'zod'
 
 import { normalizeUploadUrl, type ConversionIssue } from '../lib/htmlToPortableText'
 import type { WpSeo, WpSiteSeo } from '../lib/yoast'
+import { migratableImage } from './types'
 
 /**
  * WordPress Yoast → the `seo` object, for every type (#26).
@@ -31,7 +32,7 @@ import type { WpSeo, WpSiteSeo } from '../lib/yoast'
 export const seoObject = z.object({
   title: z.string().min(1).optional(),
   description: z.string().min(1).optional(),
-  ogImage: z.object({ _type: z.literal('image'), _wpSrc: z.string().url() }).optional(),
+  ogImage: migratableImage.optional(),
   canonical: z.string().url().optional(),
   noIndex: z.literal(true).optional(),
   noFollow: z.literal(true).optional(),

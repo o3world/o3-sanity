@@ -1,0 +1,393 @@
+{
+  "_id": "perspective-wp-8083",
+  "_type": "perspective",
+  "title": "Embracing accessibility & inclusion: The AI we should talk about at SXSW24",
+  "slug": {
+    "_type": "slug",
+    "current": "embracing-accessibility-inclusion-the-ai-we-should-talk-about-at-sxsw24"
+  },
+  "excerpt": "Vote for an insightful panel session at SXSW24 and join the conversation about digital accessibility for all.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-63",
+      "_key": "cat-63"
+    }
+  ],
+  "publishedAt": "2023-08-10T13:22:50Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/08/O3-website-imagery_-Perspectives-9.jpg"
+    },
+    "alt": "SXSW graphic"
+  },
+  "body": [
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "SXSW24",
+          "_key": "k0005"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " is just around the corner, and we’ve got an inspiring panel proposal that ",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "needs your support",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "! O3 is excited to share our perspective with the audience and spread the word about creating experiences that make a difference.",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.sxsw.com/"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://id.sxsw.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0010",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "embed",
+      "url": "https://www.youtube.com/embed/cn91j8kTxCI?feature=oembed",
+      "_key": "k0011"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Embracing accessibility & inclusion",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In a world where the web, apps, and online services shape our daily lives, ensuring equal access to information has never been more crucial. Our proposed panel, “The AI we should talk about is Accessibility & Inclusion,” shines a light on the transformation from ‘mobile first’ to ‘digital accessibility first.’ This shift emphasizes not just designing for everyone, but creating technology that empowers and includes everyone.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The panel",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The panel will journey from the ‘mobile first’ mindset of the past to the imperative of a ‘digital accessibility first’ approach. In an era where our reliance on technology is undeniable, ensuring equal access to information for all is key. This session uncovers the transformative power of digital accessibility, exploring its role in elevating brands, expanding customer bases, and ultimately enhancing user experiences. Discover how to navigate the accessibility landscape and gain an understanding of its basics, all while learning simple and meaningful steps to assess the accessibility health of your digital assets. As we embrace the challenges of digital accessibility, we unlock a world of creative ideas, drive innovation, and foster a culture that thrives on adaptability and problem-solving.",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Why this matters",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Elevating brands",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our panel explores how embracing a ‘digital accessibility first’ approach can elevate brands, broaden customer bases, and enhance user experiences. This is not just about ticking boxes; it’s about creating a welcoming digital space for all.",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The human-centered approach",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "By putting accessibility at the forefront, we foster a culture of empathy, innovation, and creative problem solving. This benefits not only the individuals using our technology but also our business growth.",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Impact beyond technology",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We’re not just discussing codes and interfaces. We’re discussing social justice, disability rights, human-centered design, and the pivotal role technology plays in these realms.",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "How you can make a difference",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Voting for our panel",
+          "_key": "k0037"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " is your way of championing inclusivity and accessibility in the tech world. Your vote helps us spread awareness, inspire change, and make a tangible impact. It’s more than a vote; it’s a statement of our commitment to creating a digital future that’s accessible to all.",
+          "_key": "k0038"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://id.sxsw.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0039",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Spread the word",
+          "_key": "k0040"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0041",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Share this initiative with your network, friends, and colleagues who believe in the power of accessibility. Let’s amplify our voices together.",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0043",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Stay connected",
+          "_key": "k0044"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0045",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Follow us on social media for updates and insights related to accessibility, technology, and the upcoming SXSW24. Use the hashtags #AIForAccessibility and #SXSW24 to join the conversation.",
+          "_key": "k0046"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0047",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "At O3, we’ve always believed that technology should bridge gaps, not create them. ",
+          "_key": "k0048"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Join us",
+          "_key": "k0049"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " in this exciting journey toward creating an inclusive digital world. Your vote can shape the future of accessibility and inspire change in the tech industry. Let’s make our presence felt at SXSW24 and pave the way for a more accessible and inclusive tomorrow.",
+          "_key": "k0050"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "SXSW Panel: The AI we should talk about is Accessibility and Inclusion",
+    "description": "SXSW24 is just around the corner, and we've got an inspiring panel proposal that needs your support!"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:8083",
+    "extractedAt": "2026-08-01T00:09:53.142Z"
+  }
+}

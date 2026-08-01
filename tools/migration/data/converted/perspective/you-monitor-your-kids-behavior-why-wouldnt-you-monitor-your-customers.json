@@ -1,0 +1,351 @@
+{
+  "_id": "perspective-wp-5078",
+  "_type": "perspective",
+  "title": "You monitor your kids’ behavior, why wouldn’t you monitor your customers’?",
+  "slug": {
+    "_type": "slug",
+    "current": "you-monitor-your-kids-behavior-why-wouldnt-you-monitor-your-customers"
+  },
+  "excerpt": "Customer journey analytics is one of the keys to unlocking insights based on your customers’ actions. O3 partners with our clients to drive better customer experiences and increase ROI.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-15",
+      "_key": "cat-15"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-62",
+      "_key": "cat-62"
+    }
+  ],
+  "publishedAt": "2022-07-20T00:12:24Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/07/You-monitor-your-kids-behavior-why-wouldnt-you-monitor-your-customers.png"
+    },
+    "alt": "Mike Tarquinio and Justin Handler engaging with a graph about customer habits."
+  },
+  "body": [
+    {
+      "_key": "k0001",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We firmly believe that tracking your consumers’ activity (how they navigate your site, how much time they spend on a page, things they click on, and where they decide to leave from) throughout their online interactions, (across touchpoints and multiple visits) with your brand can help you better serve them in many ways.",
+          "_key": "k0002"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Real-time behavioral data collection and response allows for specific, timely and relevant messaging, positively impacting their decision-making while also helping you predict future behavior and driving sales. Three key influential elements of this approach are:",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Cognitive:",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Knowing, understanding and then delivering on your consumers’ expectations and beliefs drives relatability.",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Personal",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The specific details of who they are and what they believe helps drive buying decisions.",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Social",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Shared experiences develop emotional connections and bonds, which guide loyalty and lifetime value.",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Ways O3 can help you leverage digital journey data",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "1) Up-front CX assessment:",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We traditionally start our engagements with an up-front CX assessment. This is a collaborative deep dive into the customer journey to define customer segments, map out journeys and identify gaps and opportunities. Data analytics helps fill in the gaps for customer segments and paths through your digital experience.",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "2) Cohorts:",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "With key segments defined, it’s critical to understand the relationship between those groups, the marketing channels and their behavior on the site. Cohorts are a combination of organic traffic patterns and response to targeting via awareness strategies.",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "3) Campaign pages + nurture strategies:",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Knowing which combination of customer segments and content is the most successful allows you to push traffic to a specific set of pages tailored to drive conversions. And then, ideally, which nurture strategies drive them to return. Developing predictability is a powerful marketing tool to drive your cohorts to where they will perform best and how to get them to return for more.",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "4) Personalization",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "It’s great to know what key pages and components throughout the site are best to personalize and how it impacts their journey. For each segment, we’d like to understand and show how each page/component performs as we personalize them. Essentially making a single page more valuable.",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/img_6328a6474b86e."
+      },
+      "alt": "",
+      "_key": "k0035"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 has developed a strong partnership with ",
+          "_key": "k0037"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Heap.io",
+          "_key": "k0038"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", a digital journey analytics tool. Leveraging our strategic experience and Heap’s incredibly powerful platform, we can deliver an insights program to help you drive a more relevant, personal, and valuable relationship with your customers, leading to higher lifetime value and loyalty.",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://heap.io/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Heap is the future of digital insights. Heap’s low-code, easy-to-use digital analytics software illuminates key digital behaviors and pinpoints valuable quantitative and qualitative insights so teams can quickly act with confidence and create the best possible digital experiences. Over 8,000 businesses trust Heap to increase revenue, improve conversion, accelerate decision-making, and drive business impact at scale.",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "ogImage": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/07/03_3.jpg"
+    }
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:5078",
+    "extractedAt": "2026-08-01T00:10:02.401Z"
+  }
+}

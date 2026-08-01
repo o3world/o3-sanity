@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:10.994Z"
+  },
+  "wpId": 4049,
+  "slug": "5-digital-accessibility-myths-debunked",
+  "title": "5 Digital accessibility myths debunked",
+  "dateGmt": "2020-11-19 02:48:44",
+  "modifiedGmt": "2023-05-12 16:47:55",
+  "authorId": 16,
+  "categoryIds": [
+    63
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2020/11/O3-website-imagery_-Perspectives-9.jpg",
+    "alt": "Accessibility"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "5 Digital accessibility myths debunked | O3",
+    "descriptionOverride": "O3 debunks common accessibility myths to help spark conversations within organizations about digital accessibility.",
+    "descriptionRendered": "O3 debunks common accessibility myths to help spark conversations within organizations about digital accessibility.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/5-digital-accessibility-myths-debunked/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Digital accessibility is a topic of heightened discussion these days, and it should be. The pandemic has accelerated digital transformation, forcing many businesses and personal activities to move online. With that dramatic shift, many digital experiences have not been designed with the needs of individuals with a variety of disabilities in mind.</h3>\n<p>How important is equal access within digital properties? In a 2019 Forbes article, <a href=\"https://www.forbes.com/sites/ryanrobinson/2019/09/25/website-accessibility-online-business/#6e8349f39c19\">71% of website users with disabilities reported abandoning a website</a> where they had intended to make a purchase because it was difficult to use or the content was inaccessible. Does your product or service fall into this category?</p>\n<p>When first approaching the <a href=\"https://www.w3.org/WAI/standards-guidelines/wcag/\">Web Content Accessibility Guidelines</a> and addressing any related shortcomings, the conversation can seem daunting because it often includes unhelpful myths that may deter meaningful action.</p>\n<p>Here are the facts:</p>\n<h3>Myth One: Accessibility Considerations Only Benefit a Small Minority</h3>\n<p>About <a href=\"https://www.who.int/disabilities/world_report/2011/report/en/\">15% of the world’s population</a> — more than 1 billion people — have some type of disability which may make it difficult or even impossible to use digital products. There is also a large percentage of individuals who may not identify as having a disability but would benefit from more accessible websites or applications. This may include:</p>\n<ul>\n<li>Users who are aging and may be losing their vision, hearing, mobility, or cognitive ability.</li>\n<li>Users with temporary disabilities who are affected by disabling conditions for a short period of time, such as a concussion or a broken arm.</li>\n<li>Users with situational disabilities who are limited in their ability to hear, see, use their hands, or concentrate, such as a distracted driver or a new parent holding their baby.</li>\n</ul>\n<p>Accessibility and inclusion go hand-in-hand with overall usability. Better design benefits everyone. <a href=\"https://www.microsoft.com/design/inclusive/\">The Microsoft Inclusive Design Team</a> has great resources about inclusive design principles as it relates to permanent, temporary, and situational disabilities.</p>\n<h3>Myth Two: Accessibility Can be Addressed at the End of a Project</h3>\n<p>Rather than saving it for the end, accessibility should be taken into account throughout the life cycle of the project — including business requirements, strategy, visual design, development, and QA. There are a few issues you may encounter if you wait to address accessibility issues until the end of the project:</p>\n<ul>\n<li><strong>Layering on last-minute solutions could result in a bad design.</strong> While it may be possible to add-on a technically compliant solution, you’ll create a better user experience if accessibility considerations are discussed throughout the project.</li>\n<li><strong>There could be costly refactoring or delays to the launch timeline.</strong> Having to address accessibility issues after the fact is often more challenging and may require refactoring of a component or a page which could, in turn, delay a launch. Accounting for accessibility early allows for time to remediate more proactively.</li>\n<li><strong>Accessibility may never get addressed at all.</strong> If accessibility is saved for the last minute, or isn’t included in the project plan at all, you may decide to skip the effort to save time or budget.</li>\n</ul>\n<p>Factoring accessibility into your workflow from the outset of a project may require extra planning, but it could save you a lot of time and effort in the long run.</p>\n<h3>Myth Three: Accessibility is a Short-Term Project</h3>\n<p>As we touched on above, to be most effective, accessibility must be ingrained as a part of your project from start to finish. The work doesn’t end when the website or application is released. Ongoing training for current and future employees should be prioritized so that a standard of accessibility is maintained. In addition, as updates continue to be rolled out and content or marketing teams make changes, accessibility audits should be conducted to ensure there are no regressions.</p>\n<p>It’s important to remember that creating and maintaining accessible digital products is an ongoing and iterative process.</p>\n<h3>Myth Four: Accessibility is Expensive</h3>\n<p>Creating and maintaining an accessible digital product does cost money. This expense could be even greater in the case of an existing site that isn’t accessible. However, failing to address accessibility could result in larger expenses in the future when you consider the cost of a lawsuit or the risk to your brand’s reputation.</p>\n<p>If you are working on an existing site, making incremental accessibility improvements is better than nothing at all. In general, if you incorporate accessibility into every step of your process, and take the time to plan for it, you can create a cost-effective system that becomes second nature and has improved efficiency over time.</p>\n<h3>Myth Five: Accessibility is Ugly</h3>\n<p>A common misconception is that designing to accessibility standards will result in an ugly user experience. The truth is, most accessibility features are invisible. A few examples of invisible features include:</p>\n<ul>\n<li><strong>Alternative text for images</strong> that can provide additional details about the image to screen readers and other assistive technologies.</li>\n<li><strong>Semantic heading tags</strong> to create a meaningful page outline.</li>\n<li><strong>Labels for form elements</strong> to provide context when filling out the fields of a form.</li>\n<li><strong>Keyboard accessibility</strong> to ensure users are able to control user interface (UI) elements without using a mouse.</li>\n<li><strong>ARIA (Accessible Rich Internet Applications)</strong> attributes to make interactive components accessible to assistive technologies.</li>\n</ul>\n<p>While a lot of the accessibility guidelines can be covered with invisible changes, the visual appearance of your digital product may need to evolve to support users with a variety of disabilities. If accessibility is considered at the beginning of your process, you can avoid drastic visual changes and create a product that fits the needs of a wide range of people.</p>\n<h3>Busted!</h3>\n<p>These are just a few of the more common myths you may encounter when approaching the topic of accessibility within your organization or with stakeholders on a project. Hopefully, this context empowers you to spark conversations within your organization about digital accessibility. It’s important to note that even slow but steady progress towards the goal of providing equal access will lead to an improved experience for all your users.</p>\n<p>Need advice? Consult O3 World. We believe in the importance of digital accessibility, and we’re passionate about helping our clients create equitable experiences for all users. Our <a href=\"https://www.o3world.com/news/the-journey-to-becoming-certified-professionals-in-accessibility/\">CPACC experts</a> can partner with you to create intuitive, accessible experiences that align with your business objectives and delight your customers.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "5 Digital accessibility myths debunked",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Although there was a dramatic shift regarding accessibility during the pandemic, many digital experiences have not been designed with the needs of individuals with a variety of disabilities in mind."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      2525,
+      4118,
+      5173,
+      6194
+    ],
+    "author": ""
+  }
+}

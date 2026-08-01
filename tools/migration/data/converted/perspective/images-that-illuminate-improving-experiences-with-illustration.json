@@ -1,0 +1,1150 @@
+{
+  "_id": "perspective-wp-8020",
+  "_type": "perspective",
+  "title": "Images that illuminate: Improving experiences with illustration",
+  "slug": {
+    "_type": "slug",
+    "current": "images-that-illuminate-improving-experiences-with-illustration"
+  },
+  "excerpt": "The hows and whys of adding imagery to your user experience",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-61",
+      "_key": "cat-61"
+    }
+  ],
+  "publishedAt": "2023-07-07T14:10:39Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/07/O3-website-imagery_-Perspectives-4.png"
+    },
+    "alt": "Erica article \"Images that illuminate: Improving experiences with illustration\""
+  },
+  "body": [
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Illustrations can be a powerful tool to create positive experiences for your users. They can be a missing piece to the puzzle if your users are struggling in their journey using your digital product.",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Illustration in UX isn’t the same kind of editorial illustration you’d find accompanying an article in a magazine. While those designs could easily be replaced with a photograph, UX illustration has a big job to assist users along their journey.",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": " The purpose of illustration in UX design is to convey a message or idea, clarify the complex, and create visual interest.",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " Simple icons may not be enough to aid users if the ideas are too complicated and photographs can be easily misinterpreted or glossed over.",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0012",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/07/Blog01.png"
+      },
+      "alt": "Learn the process behind illustrator and muralist Alice Lee’s beautiful work for Slack!",
+      "_key": "k0013"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "Learn the process behind illustrator and muralist ",
+          "_key": "k0015"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em",
+            "k0000"
+          ],
+          "text": "Alice Lee’s",
+          "_key": "k0016"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": " beautiful work for Slack!",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.byalicelee.com/slack#process"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The most important questions to ask yourself when making decisions about illustration are:",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What is the purpose of your product?",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What job is the illustration doing?",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Is it communicating information?",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Is your illustration in the right place?",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Does it use the same visual identity and voice as your brand?",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Is it accessible?",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Is it visually or emotionally appealing?",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Illustration’s purpose",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The amount of imagery used should be determined by its purpose. For example, a portfolio website for an artist or an e-commerce site selling makeup may require more imagery than a news website or a blog. In both of the examples shared, photographs would be the way to sell their products. You’d want to see a direct representation of what you’re spending money on before committing to purchase it. However, an illustration might come in handy for an action the user needs to take next in their journey.",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "While illustrations can help to guide a user in their journey, stock photos can create barriers. Users know when a stock photo isn’t relevant to your brand or your message, and it can put distance between you and your audience. A generic photo of a woman on a cell phone is barely helping a user understand your product — and chances are that exact photo has been used elsewhere before. Users tend to ignore images that are purely decorative and aren’t information-carrying (",
+          "_key": "k0039"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Nielsen Norman Group, 2010",
+          "_key": "k0040"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "). Creating imagery that is unique to your brand can do wonders for engaging visitors — and earning their loyalty.",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.nngroup.com/articles/photos-as-web-content/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0042",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0043",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/07/Blog02.png"
+      },
+      "alt": "Figma is our design tool of choice at O3.",
+      "_key": "k0044"
+    },
+    {
+      "_key": "k0045",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em",
+            "k0002"
+          ],
+          "text": "Figma",
+          "_key": "k0046"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": " is our design tool of choice at O3. Figma does a wonderful job utilizing imagery across the various pages of their website. The illustrations are simple, informative, and utilize visuals in use within the program itself so once a user starts using Figma, it will feel familiar.",
+          "_key": "k0047"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.figma.com/ui-design-tool/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0048",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "It’s important to consider illustration early in the design process. Adding illustrations on top of content like confetti to fill space is not the way to include imagery on your product. It’s better to be purposeful and clutter-free with imagery than to bombard visitors with too much fluff. Consider testing to get feedback on how helpful the illustrations are for your users.",
+          "_key": "k0049"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0050",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "To recap:",
+          "_key": "k0051"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0052",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Ideate illustrations during the overall design process.",
+          "_key": "k0053"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0054",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Ensure there is a clear idea or series of ideas you are representing.",
+          "_key": "k0055"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0056",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Don’t use illustrations to fill or decorate space — use them with intent.",
+          "_key": "k0057"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0058",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Test with users to validate.",
+          "_key": "k0059"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0060",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Content hierarchy",
+          "_key": "k0061"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0062",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Ensuring your users know exactly where to look to find the information they need is vital. Users tend to skim pages and look at subheaders, keywords, lists, and images to guide them. Breaking up copy into simpler, easier-to-skim bites is the best way to keep users engaged.",
+          "_key": "k0063"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0064",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "By adding helpful illustrations, this information becomes much more memorable. The most important content should have priority and be emphasized with imagery, while less important content can have fewer images or no images at all.",
+          "_key": "k0065"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0066",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Be careful about overdoing it, though. If more than the essentials are emphasized, it can be overwhelming for users and make it difficult for them to focus on the most important content. By showing restraint with imagery and tightening your users’ focus, you can guide users’ attention to the most important information and calls to action.",
+          "_key": "k0067"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0068",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Decide on the most important pieces of your page.",
+          "_key": "k0069"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0070",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Emphasize these areas with meaningful subheaders and illustrations.",
+          "_key": "k0071"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0072",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Practice restraint to not confuse visitors.",
+          "_key": "k0073"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0074",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Validate with user testing.",
+          "_key": "k0075"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0076",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Uniting your brand",
+          "_key": "k0077"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0078",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Illustration is a great way to add color to your brand and convey your unique voice. It can be used to reinforce your brand’s visual identity and personality. Consistent use of illustrations that reflect the brand’s values and messaging can create a cohesive and memorable user experience.",
+          "_key": "k0079"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0080",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0081",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/07/Blog03.png"
+      },
+      "alt": "",
+      "_key": "k0082"
+    },
+    {
+      "_key": "k0083",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "One of O3’s favorite tools is Notion, and they use illustration and color beautifully throughout their website to tell their story and engage visitors.",
+          "_key": "k0084"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0085",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Having unique illustrations can help users remember your brand especially if they’re also looking at your competitors. It can help differentiate between similar products or services and help users choose the one that resonates with them the most — which is hopefully yours! Having a cohesive brand experience goes a long way for credibility, so anything you can do to earn the trust of users is a win.",
+          "_key": "k0086"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0087",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Improve brand recognition.",
+          "_key": "k0088"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0089",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Flex your brand’s point of view.",
+          "_key": "k0090"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0091",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Create a positive first impression for new users.",
+          "_key": "k0092"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0093",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Encourage visitors to explore the site further.",
+          "_key": "k0094"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0095",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Gain the trust of your users.",
+          "_key": "k0096"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0097",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Accessible design",
+          "_key": "k0098"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0099",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Accessibility should be on your radar already — you can read all about O3’s principles for accessible design here. Meaningful illustrations are a great way to enhance the design of your product while practicing inclusivity. Committing to accessible experiences widens your audience to include those with disabilities or language barriers.",
+          "_key": "k0100"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0101",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Illustrations work as a simplified visual aid for complex ideas and can assist users with various needs — not just disabilities! As an example, descriptive alt text can be added to illustrations to provide context and ensure that all users, sighted or not, can understand the content of the product. Similarly, someone who might not speak the language in use could find the right product they need based on the imagery used to advertise it rather than the copy.",
+          "_key": "k0102"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0103",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Being mindful of those with cognitive disabilities is a great way to think about how much is too much. Too many images that are trying to convey a lot of ideas can be overstimulating, confusing, or downright stressful. Striking the right balance between text and images can help create a more engaging and effective user experience for everyone, not just those with disabilities.",
+          "_key": "k0104"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0105",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "It’s also important to consider not everyone has access to high-speed internet 24/7. Visitors expect a website to load quickly, and slow loading times can increase bounce rates. It’s crucial to optimize images and consider their file size to ensure the fastest loading times available to users, regardless of access to the internet. (Did you know alt text is useful for slow loading times?)",
+          "_key": "k0106"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0107",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Keep these pain points in mind while designing:",
+          "_key": "k0108"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0109",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Cognitive disabilities can prevent users from engaging with content that is too complex.",
+          "_key": "k0110"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0111",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Always add alt text and provide relevant copy for those with vision impairment.",
+          "_key": "k0112"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0113",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Reading disabilities or reading level can affect how users understand your product.",
+          "_key": "k0114"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0115",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Imagery should be understood regardless of language barriers.",
+          "_key": "k0116"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0117",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Internet speed/availability varies, so ensure your content is legible even if images won’t load.",
+          "_key": "k0118"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0119",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Connecting with your users",
+          "_key": "k0120"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0121",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The right illustrations are delightful. Well-designed illustrations can enhance the visual appeal of a product, making it more attractive and engaging for visitors. Illustrations can evoke emotions and create a sense of connection with the product and its content.",
+          "_key": "k0122"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0123",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "For example, using whimsical or playful illustrations can make an experience more lighthearted and fun, while more serious or realistic illustrations can create a sense of professionalism or authority. Keep your brand tone in mind when designing how your illustrations look and feel — consistency is key.",
+          "_key": "k0124"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0125",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Think about every 404 error page you’ve ever landed on. Have any of them ever made you smile? Illustration can be a soothing balm for the pain points a user might experience using your product. As a user, knowing that my bad experience has already been thought about and considered makes me feel like I’m in good hands.",
+          "_key": "k0126"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/07/Blog04.png"
+      },
+      "alt": "Another O3 must-have is Slack, and their 404 page is an interactive playground! ",
+      "_key": "k0127"
+    },
+    {
+      "_key": "k0128",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "Another O3 must-have is ",
+          "_key": "k0129"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em",
+            "k0003"
+          ],
+          "text": "Slack",
+          "_key": "k0130"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": ", and their 404 page is an interactive playground!",
+          "_key": "k0131"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://slack.com/404"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0132",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Keep in mind how a user feels when designing:",
+          "_key": "k0133"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0134",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Emotionally connect to and engage users with branded illustrations.",
+          "_key": "k0135"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0136",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Consider the pain points users might encounter on their journey.",
+          "_key": "k0137"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0138",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Keep the brand tone in mind.",
+          "_key": "k0139"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0140",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Use illustration consistently across all channels.",
+          "_key": "k0141"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0142",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Illustration in UX design isn’t as easy as buying a stock image and placing it in the middle of your homepage. It takes a lot of thought and creativity to make effective illustrations and even more thinking to use them correctly. It’s worth the extra time and effort when it means securing an engaged, loyal audience.",
+          "_key": "k0143"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0144",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If your brand wants to harness the power of illustrations to create positive experiences for your users, ",
+          "_key": "k0145"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "let’s connect",
+          "_key": "k0146"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0147"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Improving experiences with illustrations",
+    "description": "Unlock the power of illustrations in UX design with O3. Elevate user experiences, establish brand identity, and enhance accessibility."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:8020",
+    "extractedAt": "2026-08-01T00:09:53.143Z"
+  }
+}

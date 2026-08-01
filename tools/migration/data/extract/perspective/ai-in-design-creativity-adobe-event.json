@@ -1,0 +1,67 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:32.180Z"
+  },
+  "wpId": 9676,
+  "slug": "ai-in-design-creativity-adobe-event",
+  "title": "Impact & Innovation: How Adobe is shaping the future of creativity with AI",
+  "dateGmt": "2025-02-07 17:10:46",
+  "modifiedGmt": "2025-02-20 20:41:27",
+  "authorId": 16,
+  "categoryIds": [
+    75
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2025/02/1738597794713.webp",
+    "alt": "How Adobe is shaping the future of creativity with AI"
+  },
+  "seo": {
+    "titleOverride": "How Adobe & AI are shaping the future of creativity | O3",
+    "titleRendered": "How Adobe & AI are shaping the future of creativity | O3",
+    "descriptionOverride": "Discover how AI is transforming creativity with Adobe & O3. Join us on Feb 20 for a fireside chat & demo on AI-powered design tools. Register now!",
+    "descriptionRendered": "Discover how AI is transforming creativity with Adobe & O3. Join us on Feb 20 for a fireside chat & demo on AI-powered design tools. Register now!",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/ai-in-design-creativity-adobe-event/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Impact & Innovation: How Adobe is shaping the future of creativity with AI",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Join O3 and Adobe on February 20th for Philly Ad Club's Impact & Innovation event exploring how AI is revolutionizing creativity, featuring a fireside chat and live demo."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>Philly Ad Club’s Impact &amp; Innovation Series is back for 2025, and they’re kicking things off with an exciting <a href=\"https://www.phillyadclub.com/event-calendar/club-events/#!event/2025/2/20/impact-innovation-ai-adobe-and-design\">conversation on how AI is transforming creativity</a>.</p>\n<p>Join O3’s Christine Sheller and <a href=\"https://blog.adobe.com/authors/jason-druss\">Adobe’s Jason Druss</a> on Thursday, February 20th, at the Audacy Performance Studio (2400 Market St, 4th Floor) for a thought-provoking discussion.</p>\n<h3>What to expect</h3>\n<p>In this fireside chat, Jason and Christine will dive into the evolving role of AI in design and creativity. They’ll discuss how AI is reshaping workflows, what this means for designers and content creators, and how businesses can adapt to new creative possibilities.</p>\n<p>Jason will also provide a demo of Adobe’s latest AI-powered tools in Premiere Pro and After Effects, showcasing how AI can enhance and streamline the creative process.</p>\n<h4>Speakers:</h4>\n<p><a href=\"https://www.linkedin.com/in/jasondruss/\">Jason Druss</a>, Sr. Product Marketing Manager at Adobe</p>\n<p><a href=\"https://www.linkedin.com/in/christine-sheller/\">Christine Sheller</a>, SVP of Experience Research + Design at O3</p>\n<h4>Event details</h4>\n<h5>Date</h5>\n<p>Thursday, February 20th</p>\n<h5>Location</h5>\n<p>Audacy Performance Studio, 2400 Market St &#8211; 4th Floor</p>\n<h5>Schedule</h5>\n<p>10:00 AM – Registration &amp; Networking<br />\n10:30 AM – Opening Remarks<br />\n10:35 AM – Fireside Chat &amp; AI Demo<br />\n12:00 PM – Event Concludes</p>\n<p>Don’t miss this opportunity to explore the future of AI in design with Adobe and O3. Spots are limited—<a href=\"https://www.phillyadclub.com/event-calendar/club-events/#!event/2025/2/20/impact-innovation-ai-adobe-and-design\">register now</a>!</p>\n"
+      }
+    ],
+    "related_articles": "",
+    "author": ""
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:42.653Z"
+  },
+  "wpId": 8902,
+  "slug": "ai-and-creativity-rec-philly",
+  "title": "Advances in AI and creativity: Philly Ad Club invites experts to discuss and share insights",
+  "dateGmt": "2024-04-09 16:04:36",
+  "modifiedGmt": "2024-04-09 16:05:42",
+  "authorId": 16,
+  "categoryIds": [
+    7,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2024/04/O3-website-imagery_-Perspectives-44.png",
+    "alt": "Philly ad club event"
+  },
+  "seo": {
+    "titleOverride": "Unlocking creativity: the intersection of AI and art at REC Philly",
+    "titleRendered": "Unlocking creativity: the intersection of AI and art at REC Philly",
+    "descriptionOverride": "Explore the dynamic relationship between AI and creativity at REC Philly, where experts dissect the influence of artificial intelligence on art, music, and beyond. Join us for a groundbreaking panel discussion that reshapes the creative landscape.",
+    "descriptionRendered": "Explore the dynamic relationship between AI and creativity at REC Philly, where experts dissect the influence of artificial intelligence on art, music, and beyond. Join us for a groundbreaking panel discussion that reshapes the creative landscape.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/ai-and-creativity-rec-philly/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "Advances in AI and creativity: Philly Ad Club invites experts to discuss and share insights  ",
+      "kicker_tag": "div",
+      "title": "Advances in AI and creativity: Philly Ad Club invites experts to discuss and share insights  ",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Join us at Rec Philly as we dive into the challenges of AI in the creative space, guided by a panel of AI experts."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>The worlds of art and technology have been doing a delicate dance for some time now, and the rhythm is only intensifying. Enter AI, that partner in the creative journey, which is often spoken of in tones that are a blend of respect, awe, and a dash of trepidation. For Philadelphia’s creator community, the use of AI is both a challenge and an opportunity. The upcoming  discussion at <a href=\"https://www.phillyadclub.com/\">Philly Ad Club&#8217;</a>s <a href=\"https://www.phillyadclub.com/event-calendar/club-events/#!event/2024/4/12/impact-and-innovation-ai-creativity\">Impact &amp; Innovation Series,</a> is set to illuminate just that – AI’s impact on the creative process, with a spotlight on the essential tools and mindsets needed to flourish in this new era.</p>\n<p><a href=\"https://www.linkedin.com/in/michaelgadsby/\">Mike Gadsby</a>, <a href=\"https://www.linkedin.com/in/theoretically-media-26b424294/\">Tim Simmons</a> and <a href=\"https://www.linkedin.com/in/shanebsantiago/\">Shane Santiago</a> will discuss AI’s impact on the creative community.</p>\n<h4>Event details</h4>\n<p>Date: Friday, April 12th</p>\n<p>Time: 12:00 to 1:30 pm</p>\n<p>Location: REC Philly, 9th Street, Philadelphia, PA</p>\n<h4><a href=\"https://www.phillyadclub.com/event-calendar/club-events/#!event/2024/4/12/impact-and-innovation-ai-creativity\">Register today</a></h4>\n<h3>AI as a creator’s assistant, not a replacement</h3>\n<p>It’s critical to remember that AI doesn’t diminish the role of the creator – it canaugment it. The Invisible Assistant Theory posits that AI should act as a silent collaborator, empowering creators by handling mundane and repetitive tasks so that they can focus on what matters – the creative output. The AI that suggests the next move in a chess game now advises on financial strategies and marketing ploys. How does this affect creators? When AI is understood not as a threat but as a partner, fertile ground is laid for  ideas that blend the organic and the synthetic.</p>\n<h3>Spotlight on success: Scarlet AI and Its Impact</h3>\n<p>O3 and REC Philly previously teamed up <a href=\"https://www.o3world.com/work/scarlet-ai-hyper-personalizing-creative-gig-economy/\">in an effort to use artificial intelligence to boost the creative gig economy</a>. Together we created Scarlet AI, a virtual assistant designed to make REC&#8217;s digital platform more user-friendly and personalized. This move made managing bookings and sharing information easier and improved the overall user experience.</p>\n<h3>Conclusion</h3>\n<p>AI and creativity can be mutually beneficial relationships that propel both disciplines to new heights. The event at REC Philly is a testament to this potential, and we invite you to participate in this dialogue that is shaping the present and future of creativity.</p>\n"
+      }
+    ],
+    "related_articles": [
+      8776,
+      8378,
+      5025
+    ],
+    "author": ""
+  }
+}

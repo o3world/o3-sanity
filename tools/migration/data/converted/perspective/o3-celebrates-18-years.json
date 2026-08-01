@@ -1,0 +1,328 @@
+{
+  "_id": "perspective-wp-7777",
+  "_type": "perspective",
+  "title": "O3 celebrates 18 years!",
+  "slug": {
+    "_type": "slug",
+    "current": "o3-celebrates-18-years"
+  },
+  "excerpt": "With a commitment to staying ahead of the curve and delivering exceptional value to its clients, O3 is poised for even more growth and success in the years to come.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    }
+  ],
+  "publishedAt": "2023-05-05T17:12:41Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/05/O3-website-imagery_-Perspectives-4.jpg"
+    },
+    "alt": "O3 birthday"
+  },
+  "body": [
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "For the past 18 years, O3 has been a pioneer in revolutionizing customer experiences with its innovative digital solutions. We have thrived in an industry that is constantly evolving, by consistently providing exceptional experiences to our clients and staying ahead of the curve. In 2023, Michael Soileau was appointed as the new CEO of O3, allowing founding partner and former CEO Keith Scandone to focus on spearheading business strategy development. The growth trajectory of O3 is both remarkable and unparalleled. We take immense pride in reaching this milestone and attribute it to the incredible team at O3.",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "“O3 is so fortunate to have unique product and service offerings that are always evolving. These offerings are powered by the best people in the industry who insist on always exceeding our client’s expectations. This powerful combination creates multiple paths to incremental and incredible growth as we begin the rollout of our 2026 strategic plan. We are here today because of the hard work and the vision of leadership and the teams of the last 18 years.”",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Michael Soileau",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", O3 CEO",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/michael-d-soileau/"
+        }
+      ],
+      "_type": "block",
+      "style": "blockquote"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3’s approach to customer experience",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "At O3, collaboration is key. We work closely with our clients to identify new opportunities and personalize experience strategies, ensuring that each interaction with customers is meaningful and impactful. O3 understands the importance of a fresh perspective and extensive expertise in creating cohesive and meaningful impacts for customers. As a result, O3 is ahead of the curve with generative AI and has grown its accessibility efforts and certifications to make digital experiences accessible for all users. The foundation of strategy, design, and technology that O3 uses to transform interactions into seamless experiences has made it a trusted partner for businesses across a variety of industries.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“Experiences are core to who we are. The rise of CX has become a primary focal point for businesses. As businesses shift their focus towards better customer experiences, we continue to see the likes of Google, Amazon, and Apple emerge as global leaders in CX. The work O3 is doing is now necessary for organizations to thrive. This is really about- how you make meaningful relationships with customers, patients, administrators, employees, ect. We are witnessing the world’s largest organizations adhere to that to differentiate themselves. We are strategically positioning ourselves as the impactful partner for our clients to drive success.”",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Mike Gadsby",
+          "_key": "k0017"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", O3 Co-founder and CIO",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/michaelgadsby/"
+        }
+      ],
+      "_type": "block",
+      "style": "blockquote"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3’s impact on customer journeys",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3’s dedication to enhancing every opportunity for interaction along the customer journey has led to years-long partnerships with clients. O3 has grown with many technology partnerships, strategically leveraging internal and external skills to maximize results. From marketing automation to website development, O3 has helped its clients achieve their goals by delivering exceptional customer experiences.",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Adapting to changing customer expectations",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As customer expectations continue to evolve, O3 helps its clients navigate these changes and deliver extraordinary experiences. O3’s role as a consultancy partner in identifying new opportunities is key to its success, and the company is a thought leader in the experience space. With extensive learning resources and SME-led events to drive education and engagement, O3 is committed to staying ahead of the curve and delivering exceptional value to its clients.",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“I think the biggest change is just the growth in competition. And with the industry now being so broad in terms of service offerings, that growth has made it harder and harder to differentiate. So I would say adapting to the industry, in general, I think is what’s been O3’s greatest strength. The reason innovation teams choose to work with us, as an example. is because of O3’s constant state of curiosity and exploration. We explore and learn as much as we can about each technology introduced in the market and if and how we can leverage them for the right opportunity. That approach allows us to be nimble and selective in the strategies we’re recommending and implementing. So I’d say we’re in a constant state of adapting, much like the industry itself.”",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Keith Scandone",
+          "_key": "k0030"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", O3 Co-founder",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/keith-scandone/"
+        }
+      ],
+      "_type": "block",
+      "style": "blockquote"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Looking ahead",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As O3 celebrates its 18th anniversary, the company is grateful for the trust and partnership of its clients. O3’s commitment to transforming customer experiences remains as strong as ever, and the company is excited about our future. With a powerful combination of unique product and service offerings, the best people in the industry, and a constant state of curiosity and exploration, O3 is poised for incremental and incredible growth in the years to come.",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Congratulations and happy birthday, O3!",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0039",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "embed",
+      "url": "https://www.o3world.com/wp-content/uploads/2023/05/o3-anniversary-video-final-5.5.mp4?_=1",
+      "_key": "k0040"
+    }
+  ],
+  "seo": {
+    "title": "O3 celebrates it's 18th anniversary!",
+    "description": "With a commitment to staying ahead of the curve and delivering exceptional value to its clients, O3 is poised for even more growth and success in the years to come."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:7777",
+    "extractedAt": "2026-08-01T00:09:57.655Z"
+  }
+}

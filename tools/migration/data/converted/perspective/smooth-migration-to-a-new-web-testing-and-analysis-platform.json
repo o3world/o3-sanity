@@ -1,0 +1,291 @@
+{
+  "_id": "perspective-wp-7417",
+  "_type": "perspective",
+  "title": "Preparing for the sunset of Google Optimize: A guide to smooth migration to a new web testing and analysis platform",
+  "slug": {
+    "_type": "slug",
+    "current": "smooth-migration-to-a-new-web-testing-and-analysis-platform"
+  },
+  "excerpt": "This article provides guidance on how to prepare for the sunset of Google Optimize and outlines steps that organizations can take to ensure a smooth transition to a new web testing and analysis platform.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-4706"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-11",
+      "_key": "cat-11"
+    }
+  ],
+  "publishedAt": "2023-03-10T18:19:18Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/03/O3-website-imagery_-Insights-37.jpg"
+    },
+    "alt": "Sunset of Google Optimize"
+  },
+  "body": [
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The anticipated sunsetting of ",
+          "_key": "k0003"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Google Optimize",
+          "_key": "k0004"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", a web testing and analysis platform developed by Google, is approaching in September 2023. It’s a big deal because organizations that have been using the platform will need to migrate their experiments and data to another platform. But don’t worry, if you’re one of them, O3 has some exciting tips and tricks to help you ensure a smooth transition to a new and improved platform.",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://optimize.google.com/optimize/home/#/accounts"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Audit Your Existing Experiments",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The first step in the migration process is to audit your existing experiments in Google Optimize. This will help you identify which experiments are worth migrating and which can be discarded. Evaluating the expected improvement in your key metrics can help you prioritize the experiments with the highest potential to drive meaningful results. Additionally, this is also an opportune time to evaluate the performance of your experiments and identify any areas for improvement.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Identify Your Goals and Objectives",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Before migrating to a new platform, it’s important to identify your goals and objectives for web testing and personalization. This will help you choose the right platform and set up experiments that align with your business objectives. Consider pairing up with a strategic partner that can help you assess your current experimentation strategy and identify opportunities for improvement to help you achieve your web testing and analysis goals.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Choose a New Platform",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "With your goals and objectives in mind, you can start evaluating different web testing and personalization platforms to find the one that best meets your needs. Evaluate factors such as features, ease of use, pricing, and integrations with other tools and platforms. By establishing these metrics, you can ensure that you will select a platform based on its ability to achieve measurable outcomes aligned with your goals and objectives.",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Set up Your New Platform",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Once you’ve chosen a new platform, you’ll need to set it up for your organization. This involves creating new experiments in the new platform and configuring the necessary settings and targeting options. You may also need to integrate the new platform with other tools or platforms that your organization is using.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Migrate Your Experiments",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "With your new platform set up, you can begin migrating your experiments from Google Optimize to the new platform. This involves recreating the experiments and transferring any relevant data or settings. It’s important to thoroughly test each experiment after migration to ensure that it’s functioning as intended.",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Train Your Team",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Finally, you’ll need to train your team on how to use the new platform and manage your experiments. This can include providing documentation, tutorials, and ongoing support.",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Migrating from Google Optimize to an alternative can be a time-consuming process, but it’s an opportunity to improve your web testing and personalization capabilities and align them with your business objectives. By following these steps, you can ensure a smooth transition to a new platform and continue to optimize your website for improved user experience and conversion rates.",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3’s expert team is here to support and advise this process. ",
+          "_key": "k0033"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Get in touch",
+          "_key": "k0034"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " with us to find out how we can help.",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Smooth Migration to Google Optimize",
+    "description": "The Google Optimize web testing platform is sunsetting in September 2023, requiring organizations to migrate their experiments and data to another platform. O3 provides tips for a smooth transition."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:7417",
+    "extractedAt": "2026-08-01T00:09:57.656Z"
+  }
+}

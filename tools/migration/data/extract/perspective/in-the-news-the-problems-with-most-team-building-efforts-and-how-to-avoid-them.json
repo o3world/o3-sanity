@@ -1,0 +1,74 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:20.527Z"
+  },
+  "wpId": 2945,
+  "slug": "in-the-news-the-problems-with-most-team-building-efforts-and-how-to-avoid-them",
+  "title": "The problems with (most) team-building efforts and how to avoid them",
+  "dateGmt": "2019-11-14 00:01:19",
+  "modifiedGmt": "2023-02-02 19:19:42",
+  "authorId": 16,
+  "categoryIds": [
+    15,
+    8,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/06/O3-website-imagery_-Insights-9.jpg",
+    "alt": "Alan Cho, Senior UX Designer, and Grace Ge, UX Research, learning from each other."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "The problems with (most) team-building efforts and how to avoid them | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/in-the-news-the-problems-with-most-team-building-efforts-and-how-to-avoid-them/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Team building exercises can play an important role in creating a close company culture and improving employee relations, but they’re only helpful if they’re done right.</h3>\n<p>Our People Growth Manager Beth Perkins knows what it takes to build a successful and cooperative team. She recently gave some insight into what can make team-building exercises truly valuable for the Society for Human Resource Management (SHRM).</p>\n<h4><a href=\"https://www.shrm.org/resourcesandtools/hr-topics/organizational-and-employee-development/pages/the-problems-with-most-team-building-efforts-and-how-to-avoid-them.aspx\" target=\"_blank\" rel=\"noopener noreferrer\">Read On SHRM</a></h4>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "The problems with (most) team-building efforts and how to avoid them",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Our People Growth Manager Beth Perkins knows what it takes to build a successful and cooperative team. She recently gave some insight into what can make team-building exercises truly valuable for the Society for Human Resource Management (SHRM)."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      3537,
+      4354,
+      3708,
+      6191
+    ],
+    "author": ""
+  }
+}

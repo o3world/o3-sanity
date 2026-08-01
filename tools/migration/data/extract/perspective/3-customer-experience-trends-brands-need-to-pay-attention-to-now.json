@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:15.488Z"
+  },
+  "wpId": 3451,
+  "slug": "3-customer-experience-trends-brands-need-to-pay-attention-to-now",
+  "title": "3 customer experience trends brands need to pay attention to now",
+  "dateGmt": "2020-04-28 21:36:40",
+  "modifiedGmt": "2023-02-02 19:03:32",
+  "authorId": 16,
+  "categoryIds": [
+    15
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2020/07/O3-website-imagery_-Insights-20.jpg",
+    "alt": "Greyscale, interior of O3 office."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "3 customer experience trends brands need to pay attention to now | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/3-customer-experience-trends-brands-need-to-pay-attention-to-now/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>COVID-19 has changed the customer experience and made digital interactions with consumers more important than ever. However, in today&#8217;s environment where clients want thoughtful customization and quick turnarounds, how can brands keep up?</h3>\n<p>Our Chief Innovation Officer, <a href=\"https://www.o3world.com/about/team/mike-gadsby/\">Mike Gadsby</a>, recently expanded on the three customer experience trends that marketers should now embrace in Target Marketing.</p>\n<h4><a href=\"https://www.targetmarketingmag.com/article/3-customer-experience-trends-brands-pay-attention/\"><span class=\"btn__text\">Read on</span></a></h4>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "3 Customer Experience Trends Brands Need to Pay Attention to Now",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Our Chief Innovation Officer, Mike Gadsby, recently expanded on the three customer experience trends that marketers should now embrace in Target Marketing."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      6193,
+      3348,
+      2525,
+      4658
+    ],
+    "author": ""
+  }
+}

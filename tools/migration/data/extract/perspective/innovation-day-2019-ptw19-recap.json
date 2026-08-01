@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:25.427Z"
+  },
+  "wpId": 2462,
+  "slug": "innovation-day-2019-ptw19-recap",
+  "title": "Innovation Day 2019 & PTW19 recap",
+  "dateGmt": "2019-05-13 16:15:25",
+  "modifiedGmt": "2023-02-02 20:18:40",
+  "authorId": 16,
+  "categoryIds": [
+    7,
+    8
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/07/O3-website-imagery_-Insights-8.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Innovation Day 2019 & PTW19 recap | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/innovation-day-2019-ptw19-recap/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Out and About at PTW19</h3>\n<p>Our own People Growth Manager Beth Perkins was on the panel for<strong> Could Company Benefits Outweigh Pay? Key Strategies to Attract and Retain Talent</strong> at Introduced. She made excellent points on the importance of flexibility and other benefits in the workplace.</p>\n<p>Amanda Vuocolo, an Engineer at O3 World, gave a lightning talk at <strong>ChickTech Philly’s Building Diverse Tech Teams: An Evening of Lightning Talks</strong>. She talked about the importance of gender diversity in the hiring process and even gave some tips on how to learn about company diversity in the interview process.</p>\n<p><img decoding=\"async\" class=\"alignnone size-large wp-image-2478\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/051319-PTW19-Amanda-Vuocolo-1024x576.jpg\" alt=\"Amanda Vuocolo\" /></p>\n<h3>Innovation Day</h3>\n<p>Of course, any talk about Philly Tech Week isn’t complete without a mention of Innovation Day. We hosted Innovation Day for the 3rd year in a row, and it may have been our best one yet.</p>\n<p><img decoding=\"async\" class=\"alignnone size-large wp-image-2479\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/051319-Innovation-Day-NeuroFlow-1024x576.jpg\" alt=\"Innovation Day 2019 - NeuroFlow\" /></p>\n<h3>Search &amp; Big Data</h3>\n<p>Wil Reynolds (Founder &amp; Director of Digital Strategy at <a href=\"https://www.seerinteractive.com/\" target=\"_blank\" rel=\"noopener noreferrer\">SEER Interactive</a>) started off the day strong. Along with talking about some of the common difficulties people face with innovation, he also focused on how SEER plans on using big data and other emerging technology to improve and disrupt the digital marketing industry.</p>\n<h3>Machine Learning &amp; AI</h3>\n<p>Next, we had David Lauer (CEO of <a href=\"https://urvin.ai/\">Urvin</a>). We gained valuable insight into the AI lifecycle and the important role data plays in AI and machine learning. His company has a lot of ideas on how to use AI and machine learning to improve businesses and industries.</p>\n<p><img decoding=\"async\" class=\"alignnone wp-image-2490 size-large\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/051319-Innovation-Day-Urvin-02-1024x576.jpg\" alt=\"Innovation Day 2019 - Urvin\" /></p>\n<h2>Big Data &amp; Health Care</h2>\n<p>Julie Caster (Director of Product) and Bill Lynch (Lead Data Scientist) from <a href=\"https://www.neuroflowsolution.com/\" target=\"_blank\" rel=\"noopener noreferrer\">NeuroFlow</a> have an exciting new app that could revolutionize the way we treat mental health. <a href=\"https://www.neuroflowsolution.com/integratehealth/\">Their tools</a> use data collected from patients to make improved treatment plans for patients and incentivize them to live healthier lifestyles.</p>\n<h2>Growth &amp; Innovation</h2>\n<p>Brian Williams (Co-Founder &amp; CEO of <a href=\"https://www.viget.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Viget</a>) shared his company’s 20-year-long journey and gave us an inside look at Viget&#8217;s internal labs program <a href=\"http://pointlesscorp.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Pointless Corp.</a> They’ve been focused on innovation since 1999, and since their beginning, they’ve worked on a lot of outstanding and interesting projects.</p>\n<h2>RPA, Labs &amp; Bots</h2>\n<p>Our own Tim Breslin (CTO) and Zuhib Daud (Lead Engineer) closed out Innovation Day with their work on RPA (Robotic Process Automation) and Taskbot. They’ve both been hard at work on O3 World’s latest labs project, and we’re happy to share the end results with the world. If you want to learn more about Taskbot, check out our write-up on the project.</p>\n<p>There’s nothing we love more than innovation at O3 World, and Philly Tech Week is a great example of how we live in a city made for innovators. If you want a little more innovation from us, <a href=\"https://www.o3world.com/news/why-1682-and-why-not-forge/\">check out our post</a> on the latest way we’re bringing innovation to Philadelphia.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Innovation Day 2019 & PTW19 recap",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Another year, another Philly Tech Week. We love being a part of the city’s vibrant tech community, and a lot of O3 employees attended events last week. We were at Drupaldelphia, the Dev Conference, and Philly CHI’s Design Slam to name a few. Plenty of people were busy attending events, and a few were featured at different talks and panels."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      3181,
+      4940,
+      2018,
+      3915
+    ],
+    "author": ""
+  }
+}

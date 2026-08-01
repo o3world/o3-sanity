@@ -1,0 +1,121 @@
+{
+  "_id": "perspective-wp-3717",
+  "_type": "perspective",
+  "title": "Drupal Migrations - Are they unsustainable?",
+  "slug": {
+    "_type": "slug",
+    "current": "drupal-migrations-are-they-unsustainable"
+  },
+  "excerpt": "Users should not put off migration, as Drupal will eliminate security updates and support for versions 7 and 8 at the end of 2021.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-15",
+      "_key": "cat-15"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-11",
+      "_key": "cat-11"
+    }
+  ],
+  "publishedAt": "2020-07-17T04:52:05Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-18.jpg"
+    },
+    "alt": "O3 pattern"
+  },
+  "body": [
+    {
+      "_key": "k0001",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In light of current events, Drupal has extended the end of life date for Drupal 7 by an extra year.",
+          "_key": "k0002"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "CMSWire canvassed several Drupal experts, including O3’s Senior Engineer, Greg Aiello, about why so many users haven’t yet migrated to Drupal 8, and what to expect from Drupal 9. Simply put, the upgrade path from Drupal 7 to 8 was painful, as they shifted to an entirely new architecture and coding methodology. Drupal 9 marks a new trajectory for the framework and its integration with Symfony promises much easier upgrades for the future.",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "While it may be expensive and agonizing, ",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "users should not put off migration",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", as Drupal will eliminate security updates and support for versions 7 and 8 at the end of 2021.",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.o3world.com/news/drupal-owners-time-to-move-version-7-to-8/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0010",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "CMSWire tapped several Drupal experts, on why so many users haven’t yet migrated to Drupal 8, and what to expect from Drupal 9."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:3717",
+    "extractedAt": "2026-08-01T00:10:10.997Z"
+  }
+}

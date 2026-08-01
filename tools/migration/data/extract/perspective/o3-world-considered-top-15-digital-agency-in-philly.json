@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:15.486Z"
+  },
+  "wpId": 3708,
+  "slug": "o3-world-considered-top-15-digital-agency-in-philly",
+  "title": "O3 considered top 15 digital agency in Philly",
+  "dateGmt": "2020-06-25 04:57:21",
+  "modifiedGmt": "2023-02-01 20:59:09",
+  "authorId": 16,
+  "categoryIds": [
+    10,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/05/O3-website-imagery_-Insights-11.jpg",
+    "alt": "Greyscale, exterior shot of O3 office with logo on brick."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "O3 considered top 15 digital agency in Philly | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/o3-world-considered-top-15-digital-agency-in-philly/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>O<sub>3</sub> World was listed in Built In’s feature of cutting edge web design &amp; development companies in Philadelphia. We’re proud to be included with business peers we admire in the city we love.</p>\n<h4><a href=\"https://builtin.com/philadelphia/philadelphia-web-design-development-company\">Read on</a></h4>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "O3 World Considered Top 15 Digital Agency in Philly",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "O3 World was listed in Built In’s feature of cutting edge web design & development companies in Philadelphia."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      6191,
+      5038,
+      3537,
+      454
+    ],
+    "author": ""
+  }
+}

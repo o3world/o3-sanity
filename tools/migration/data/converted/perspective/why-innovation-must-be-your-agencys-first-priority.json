@@ -1,0 +1,118 @@
+{
+  "_id": "perspective-wp-3564",
+  "_type": "perspective",
+  "title": "Why innovation must be your agency's first priority",
+  "slug": {
+    "_type": "slug",
+    "current": "why-innovation-must-be-your-agencys-first-priority"
+  },
+  "excerpt": "Check out how O3 is leading in innovation.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-15",
+      "_key": "cat-15"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    }
+  ],
+  "publishedAt": "2020-06-25T20:53:41Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/05/O3-website-imagery_-Insights-12.jpg"
+    },
+    "alt": "Ascending up the stairs at the O3 office."
+  },
+  "body": [
+    {
+      "_key": "k0001",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Keith Scandone, O3 World’s CEO and co-founder, wrote for MarketingProfs about how rapid adaptation and innovation will be indispensable for thriving agencies in the 21st century.",
+          "_key": "k0002"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Even if your agency has been around for years and works with staid clients, it must learn how to stay hungry. Staying hungry like a startup keeps organizations nimble, and fostering a culture of collaboration allows new ideas to flow from all directions.",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "At O3 World, we implemented a ",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Labs program",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " to encourage innovative teamwork and experimentation. Building a culture of inquiry in a collaborative environment attracts the kind of creative team players an agency needs.",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.o3world.com/labs/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0010",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:3564",
+    "extractedAt": "2026-08-01T00:10:15.486Z"
+  }
+}

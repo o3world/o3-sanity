@@ -1,0 +1,212 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:02.400Z"
+  },
+  "wpId": 6193,
+  "slug": "bi-annual-2022-state-of-the-ozone-gathering-recap",
+  "title": "Bi-annual 2022 State of the Ozone gathering recap",
+  "dateGmt": "2023-01-10 21:56:34",
+  "modifiedGmt": "2023-02-05 23:41:41",
+  "authorId": 16,
+  "categoryIds": [
+    7,
+    10,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-17.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Bi-annual 2022 State of the Ozone gathering recap | O3",
+    "descriptionOverride": "The 2022 state of the ozone event in Philadelphia was a successful meeting of the minds. Learn more about our bi-annual team meeting.",
+    "descriptionRendered": "The 2022 state of the ozone event in Philadelphia was a successful meeting of the minds. Learn more about our bi-annual team meeting.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/bi-annual-2022-state-of-the-ozone-gathering-recap/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Bi-annual 2022 State of the Ozone gathering recap",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "As the team arrived from all over the country, relationships strengthened through a tangible environment of collaboration. Check out our SOTO recap!"
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h4>It’s that time of the year again — a time to reconnect, meet face to face, and re-energize as we approach an exciting new year! Team O3 met in person in Philadelphia last week for our State of the Ozone gathering (SOTO, as we like to call it).</h4>\n<h3>Day 1:</h3>\n<p>Our modern rustic office in the heart of Fishtown fosters its own unique energy. We started the day with a welcome breakfast, followed by an all-team session showcasing the solutions O3 has delivered since the last SOTO in July. The team was transparent about each project as an opportunity to demonstrate wins and capitalize on opportunities. O3’s senior leadership team also presented on the current state of the company, presenting on metrics and goals heading into a new quarter. We rounded out the day at HQ with our annual gift exchange and a friendly dart competition at Buffalo Billiards.</p>\n"
+      },
+      {
+        "acf_fc_layout": "image",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Image",
+        "image": {
+          "ID": 6330,
+          "id": 6330,
+          "title": "",
+          "filename": "IMG_2819-2-scaled.jpg",
+          "filesize": 747550,
+          "url": "http://www.o3world.com/wp-content/uploads/2023/01/IMG_2819-2-scaled.jpg",
+          "link": "http://www.o3world.com/perspectives/bi-annual-2022-state-of-the-ozone-gathering-recap/img_2819-2/",
+          "alt": "Two team members laughing during gift exchange.",
+          "author": "16",
+          "description": "",
+          "caption": "",
+          "name": "img_2819-2",
+          "status": "inherit",
+          "uploaded_to": 6193,
+          "date": "2023-01-13 12:53:43",
+          "modified": "2023-01-27 19:09:48",
+          "menu_order": 0,
+          "mime_type": "image/jpeg",
+          "type": "image",
+          "subtype": "jpeg",
+          "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+          "width": 2167,
+          "height": 2560,
+          "sizes": {
+            "thumbnail": "http://www.o3world.com/wp-content/uploads/2023/01/IMG_2819-2-150x150.jpg",
+            "thumbnail-width": 150,
+            "thumbnail-height": 150,
+            "medium": "http://www.o3world.com/wp-content/uploads/2023/01/IMG_2819-2-542x640.jpg",
+            "medium-width": 542,
+            "medium-height": 640,
+            "medium_large": "http://www.o3world.com/wp-content/uploads/2023/01/IMG_2819-2-768x907.jpg",
+            "medium_large-width": 768,
+            "medium_large-height": 907,
+            "large": "http://www.o3world.com/wp-content/uploads/2023/01/IMG_2819-2-867x1024.jpg",
+            "large-width": 867,
+            "large-height": 1024,
+            "1536x1536": "http://www.o3world.com/wp-content/uploads/2023/01/IMG_2819-2-1300x1536.jpg",
+            "1536x1536-width": 1300,
+            "1536x1536-height": 1536,
+            "2048x2048": "http://www.o3world.com/wp-content/uploads/2023/01/IMG_2819-2-1734x2048.jpg",
+            "2048x2048-width": 1734,
+            "2048x2048-height": 2048,
+            "icon": "http://www.o3world.com/wp-content/uploads/2023/01/IMG_2819-2-41x48.jpg",
+            "icon-width": 41,
+            "icon-height": 48,
+            "xlarge": "http://www.o3world.com/wp-content/uploads/2023/01/IMG_2819-2-1280x1512.jpg",
+            "xlarge-width": 1280,
+            "xlarge-height": 1512,
+            "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2023/01/IMG_2819-2-scaled.jpg",
+            "gform-image-choice-sm-width": 254,
+            "gform-image-choice-sm-height": 300,
+            "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2023/01/IMG_2819-2-scaled.jpg",
+            "gform-image-choice-md-width": 339,
+            "gform-image-choice-md-height": 400,
+            "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2023/01/IMG_2819-2-scaled.jpg",
+            "gform-image-choice-lg-width": 508,
+            "gform-image-choice-lg-height": 600
+          }
+        },
+        "image_size": "inherit"
+      },
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Day 2:</h3>\n<p>It’s no secret that being in person cultivates a different energy than working remotely and collaborating via Zoom. Day two of SOTO allowed the team to do just this! What would typically be conversations in a remote environment were now face-to-face opportunities to engage with colleagues.</p>\n<p>The day ended with our annual O3 Holiday Party, a night we’d all been waiting for. The team was encouraged to bring their partners or plus-ones for a night of music, food, and fun. We announced the winners of the 2022 Golden O awards (listed below) to celebrate our amazing team..</p>\n<p>We’re looking forward to celebrating more O3 wins at our next SOTO gathering!</p>\n<h4>Peer recognition:</h4>\n<p>O3 core values: Carly Karas<br />\nBest GIF user: Nick Lewis<br />\nLOL award: Alan Cho<br />\nIcebreaker award: Rob Cotter<br />\nZoom background award: Alicia Jhoo</p>\n<h4>Senior leadership awards:</h4>\n<p>Apply optimism: Josh Friedman<br />\nTrust in people: Emma Bartholomew<br />\nCommitment to community: Brian Crumley<br />\nEmbrace iteration: Erica Minton<br />\nFocus on the future: Mark Angelow<br />\nMVP: Simone Dehel</p>\n"
+      },
+      {
+        "acf_fc_layout": "image",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Image",
+        "image": {
+          "ID": 6331,
+          "id": 6331,
+          "title": "",
+          "filename": "IMG_2159-1-scaled.jpg",
+          "filesize": 904054,
+          "url": "http://www.o3world.com/wp-content/uploads/2023/01/IMG_2159-1-scaled.jpg",
+          "link": "http://www.o3world.com/perspectives/bi-annual-2022-state-of-the-ozone-gathering-recap/img_2159-1/",
+          "alt": "UX Design and UX Research teams celebrating winners of the Golden O awards.",
+          "author": "16",
+          "description": "",
+          "caption": "",
+          "name": "img_2159-1",
+          "status": "inherit",
+          "uploaded_to": 6193,
+          "date": "2023-01-13 12:56:16",
+          "modified": "2023-01-27 19:09:05",
+          "menu_order": 0,
+          "mime_type": "image/jpeg",
+          "type": "image",
+          "subtype": "jpeg",
+          "icon": "https://www.o3world.com/wp-includes/images/media/default.png",
+          "width": 1920,
+          "height": 2560,
+          "sizes": {
+            "thumbnail": "http://www.o3world.com/wp-content/uploads/2023/01/IMG_2159-1-150x150.jpg",
+            "thumbnail-width": 150,
+            "thumbnail-height": 150,
+            "medium": "http://www.o3world.com/wp-content/uploads/2023/01/IMG_2159-1-480x640.jpg",
+            "medium-width": 480,
+            "medium-height": 640,
+            "medium_large": "http://www.o3world.com/wp-content/uploads/2023/01/IMG_2159-1-768x1024.jpg",
+            "medium_large-width": 768,
+            "medium_large-height": 1024,
+            "large": "http://www.o3world.com/wp-content/uploads/2023/01/IMG_2159-1-768x1024.jpg",
+            "large-width": 768,
+            "large-height": 1024,
+            "1536x1536": "http://www.o3world.com/wp-content/uploads/2023/01/IMG_2159-1-1152x1536.jpg",
+            "1536x1536-width": 1152,
+            "1536x1536-height": 1536,
+            "2048x2048": "http://www.o3world.com/wp-content/uploads/2023/01/IMG_2159-1-1536x2048.jpg",
+            "2048x2048-width": 1536,
+            "2048x2048-height": 2048,
+            "icon": "http://www.o3world.com/wp-content/uploads/2023/01/IMG_2159-1-36x48.jpg",
+            "icon-width": 36,
+            "icon-height": 48,
+            "xlarge": "http://www.o3world.com/wp-content/uploads/2023/01/IMG_2159-1-1280x1707.jpg",
+            "xlarge-width": 1280,
+            "xlarge-height": 1707,
+            "gform-image-choice-sm": "http://www.o3world.com/wp-content/uploads/2023/01/IMG_2159-1-scaled.jpg",
+            "gform-image-choice-sm-width": 225,
+            "gform-image-choice-sm-height": 300,
+            "gform-image-choice-md": "http://www.o3world.com/wp-content/uploads/2023/01/IMG_2159-1-scaled.jpg",
+            "gform-image-choice-md-width": 300,
+            "gform-image-choice-md-height": 400,
+            "gform-image-choice-lg": "http://www.o3world.com/wp-content/uploads/2023/01/IMG_2159-1-scaled.jpg",
+            "gform-image-choice-lg-width": 450,
+            "gform-image-choice-lg-height": 600
+          }
+        },
+        "image_size": "inherit"
+      }
+    ],
+    "related_articles": [
+      6193,
+      5020,
+      5038,
+      6194
+    ],
+    "author": ""
+  }
+}

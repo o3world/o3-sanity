@@ -17,7 +17,7 @@ import { CONVERTED_DIR, EXTRACT_DIR, writeJson } from './lib/paths'
 import type { WpChrome } from './lib/chrome'
 import type { WpSiteSeo } from './lib/yoast'
 import { mapCategory, type WpCategory } from './map/category'
-import { mapPerson, type WpPerson } from './map/person'
+import { buildPersonDirectory, type WpPerson, type WpTeamMember } from './map/person'
 import { mapPerspective, type WpPerspective } from './map/perspective'
 import { mapSiteSettings } from './map/siteSettings'
 import type { ExtractMeta } from './map/types'
@@ -85,23 +85,29 @@ for (const cat of readDir<WpCategory>('category')) {
 }
 
 // --- perspectives + the persons they reference ---
-const referencedAuthors = new Set<number>()
+// The byline directory is built first: a perspective's author reference is
+// resolved through it, so it has to exist before any perspective converts.
+const people = buildPersonDirectory(
+  readDir<WpPerson>('person'),
+  existsSync(join(EXTRACT_DIR, 'team')) ? readDir<WpTeamMember>('team') : [],
+)
+
+const referencedPeople = new Set<string>()
 for (const post of readDir<WpPerspective>('perspective')) {
-  const result = mapPerspective(post, site)
+  const result = mapPerspective(post, site, people)
   if (!result.ok) {
     failures.push({ slug: post.slug, issues: result.issues })
     continue
   }
   emit('perspective', post.slug, result.doc)
   note(post.slug, result)
-  referencedAuthors.add(post.authorId)
+  referencedPeople.add(result.doc.author._ref)
 }
 
-for (const person of readDir<WpPerson>('person')) {
-  if (!referencedAuthors.has(person.wpId)) continue
-  const result = mapPerson(person)
-  if (result.ok) emit('person', person.slug, result.doc)
-  else failures.push({ slug: person.slug, issues: result.issues })
+// Only people something actually attributes. The team CPT lists everyone who
+// ever worked here; a person document nothing points at is noise in Studio.
+for (const person of people.docs) {
+  if (referencedPeople.has(person._id)) emit('person', person._id, person)
 }
 
 console.log(`converted ${written} documents → ${CONVERTED_DIR}`)

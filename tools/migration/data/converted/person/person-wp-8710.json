@@ -1,0 +1,15 @@
+{
+  "_id": "person-wp-8710",
+  "_type": "person",
+  "name": "Nick Lewis",
+  "title": "Staff Engineer",
+  "headshot": {
+    "_type": "image",
+    "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/01/Headshots-2.png"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:team:8710",
+    "extractedAt": "2026-08-01T00:20:48.161Z"
+  }
+}

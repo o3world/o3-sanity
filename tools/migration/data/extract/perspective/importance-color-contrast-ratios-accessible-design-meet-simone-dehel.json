@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:42.654Z"
+  },
+  "wpId": 8862,
+  "slug": "importance-color-contrast-ratios-accessible-design-meet-simone-dehel",
+  "title": "The basics of color contrast ratios",
+  "dateGmt": "2024-03-28 15:55:51",
+  "modifiedGmt": "2024-03-28 15:57:46",
+  "authorId": 16,
+  "categoryIds": [
+    63
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2024/03/O3-website-imagery_-Perspectives-37.jpg",
+    "alt": "Simone Dehel"
+  },
+  "seo": {
+    "titleOverride": "The importance of color contrast ratios in accessible design",
+    "titleRendered": "The importance of color contrast ratios in accessible design",
+    "descriptionOverride": "Discover the significance of color contrast ratios in creating accessible designs with Simone Dghel, UX Designer and CPACC expert.",
+    "descriptionRendered": "Discover the significance of color contrast ratios in creating accessible designs with Simone Dghel, UX Designer and CPACC expert.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/importance-color-contrast-ratios-accessible-design-meet-simone-dehel/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "The basics of color contrast ratios",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Hear from Senior UX Designer and accessibility expert, Simone Dehel, to learn how color contrast ratios can make your designs accessible to everyone."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>The world is a vibrant and colorful place, but for some, it can be challenging to navigate. As designers, it is our responsibility to ensure that our work is not only visually appealing but also accessible to all users. One key aspect of creating accessible designs is the appropriate use of color contrast ratios. This article aims to illuminate the benefits of using color contrast ratios and how to effectively apply them in your designs.</p>\n<h3>Understanding color contrast ratios</h3>\n<p>Color contrast ratios are the difference in light between the foreground color (the color of the text) and the background color. It&#8217;s a numerical value that ranges from 1:1 (no contrast) to 21:1 (maximum contrast). A high contrast ratio makes text more legible and content more distinguishable for users with visual impairments. The Web Content Accessibility Guidelines (WCAG) recommend a minimum contrast ratio of 4.5:1 for normal text and 3:1 for large text.</p>\n<h3>The role of color contrast ratios</h3>\n<p>Color contrast ratios play a crucial role in creating accessible designs. They ensure that the content is readable by everyone, including those with color vision deficiencies or other visual impairments. High-contrast colors help distinguish text from its background, making the content easier to read and understand. Apart from text, contrast is also required in interactive elements like buttons, forms, and icons, where low contrast can make these components difficult to identify.</p>\n<p>While most elements need to meet color contrast requirements, <a href=\"https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum\">WCAG lists a few page elements that do not have a contrast requirement</a>. These include incidental elements, like text or images of text that are pure decoration, and logotypes, text that is part of a logo or brand name.</p>\n<h3>Integrate accessibility into your process</h3>\n<p>Several tools can assist designers in checking color contrast ratios. Websites like <a href=\"https://webaim.org/resources/contrastchecker/\">WebAIM</a> and <a href=\"https://colorable.jxnblk.com/\">Colorable</a> provide free resources to validate if your color combinations adhere to WCAG guidelines.</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone size-medium wp-image-8866\" src=\"https://www.o3world.com/wp-content/uploads/2024/03/WebAIM-640x370.png\" alt=\"WebAIM\" width=\"640\" height=\"370\" srcset=\"http://www.o3world.com/wp-content/uploads/2024/03/WebAIM-640x370.png 640w, http://www.o3world.com/wp-content/uploads/2024/03/WebAIM-1024x592.png 1024w, http://www.o3world.com/wp-content/uploads/2024/03/WebAIM-768x444.png 768w, http://www.o3world.com/wp-content/uploads/2024/03/WebAIM-48x28.png 48w, http://www.o3world.com/wp-content/uploads/2024/03/WebAIM-1280x741.png 1280w, http://www.o3world.com/wp-content/uploads/2024/03/WebAIM.png 1400w\" sizes=\"auto, (max-width: 640px) 100vw, 640px\" /></p>\n<figure id=\"attachment_8867\" aria-describedby=\"caption-attachment-8867\" style=\"width: 640px\" class=\"wp-caption alignnone\"><img loading=\"lazy\" decoding=\"async\" class=\"wp-image-8867 size-medium\" src=\"https://www.o3world.com/wp-content/uploads/2024/03/Colorable-640x270.png\" alt=\"\" width=\"640\" height=\"270\" srcset=\"http://www.o3world.com/wp-content/uploads/2024/03/Colorable-640x270.png 640w, http://www.o3world.com/wp-content/uploads/2024/03/Colorable-1024x433.png 1024w, http://www.o3world.com/wp-content/uploads/2024/03/Colorable-768x325.png 768w, http://www.o3world.com/wp-content/uploads/2024/03/Colorable-1536x649.png 1536w, http://www.o3world.com/wp-content/uploads/2024/03/Colorable-2048x865.png 2048w, http://www.o3world.com/wp-content/uploads/2024/03/Colorable-48x20.png 48w, http://www.o3world.com/wp-content/uploads/2024/03/Colorable-1280x541.png 1280w\" sizes=\"auto, (max-width: 640px) 100vw, 640px\" /><figcaption id=\"caption-attachment-8867\" class=\"wp-caption-text\">Color accessibility with tools like WebAIM and Colorable, ensure your designs meet WCAG guidelines.</figcaption></figure>\n<p>Additionally, Stark’s Accessibility Checker (available as a <a href=\"https://chromewebstore.google.com/detail/stark-accessibility-check/fkfaapnmfippddbeemjjbclenphooipm\">Chrome extension</a> and/or <a href=\"https://www.figma.com/community/plugin/732603254453395948/stark-contrast-accessibility-tools\">Figma plugin</a>) conveniently checks color combinations against WCAG guidelines and provides recommendations for any color combination that does not pass contrast requirements. Stark’s Accessibility Checker also features a vision simulator that designers can use to see how their designs render for people with vision deficiencies such as color blindness + blurred vision.</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone size-medium wp-image-8870\" src=\"https://www.o3world.com/wp-content/uploads/2024/03/Stark_Contrast-640x423.png\" alt=\"Stark contrast example \" width=\"640\" height=\"423\" srcset=\"http://www.o3world.com/wp-content/uploads/2024/03/Stark_Contrast-640x423.png 640w, http://www.o3world.com/wp-content/uploads/2024/03/Stark_Contrast-1024x677.png 1024w, http://www.o3world.com/wp-content/uploads/2024/03/Stark_Contrast-768x508.png 768w, http://www.o3world.com/wp-content/uploads/2024/03/Stark_Contrast-1536x1015.png 1536w, http://www.o3world.com/wp-content/uploads/2024/03/Stark_Contrast-48x32.png 48w, http://www.o3world.com/wp-content/uploads/2024/03/Stark_Contrast-1280x846.png 1280w, http://www.o3world.com/wp-content/uploads/2024/03/Stark_Contrast.png 1982w\" sizes=\"auto, (max-width: 640px) 100vw, 640px\" /></p>\n<figure id=\"attachment_8875\" aria-describedby=\"caption-attachment-8875\" style=\"width: 640px\" class=\"wp-caption alignleft\"><img loading=\"lazy\" decoding=\"async\" class=\"wp-image-8875 size-medium\" src=\"https://www.o3world.com/wp-content/uploads/2024/03/ab8eb27c-7cb5-4b27-8c72-29caa3c830bc-640x310.png\" alt=\"Stark contrast example \" width=\"640\" height=\"310\" srcset=\"http://www.o3world.com/wp-content/uploads/2024/03/ab8eb27c-7cb5-4b27-8c72-29caa3c830bc-640x310.png 640w, http://www.o3world.com/wp-content/uploads/2024/03/ab8eb27c-7cb5-4b27-8c72-29caa3c830bc-1024x495.png 1024w, http://www.o3world.com/wp-content/uploads/2024/03/ab8eb27c-7cb5-4b27-8c72-29caa3c830bc-768x371.png 768w, http://www.o3world.com/wp-content/uploads/2024/03/ab8eb27c-7cb5-4b27-8c72-29caa3c830bc-1536x743.png 1536w, http://www.o3world.com/wp-content/uploads/2024/03/ab8eb27c-7cb5-4b27-8c72-29caa3c830bc-2048x990.png 2048w, http://www.o3world.com/wp-content/uploads/2024/03/ab8eb27c-7cb5-4b27-8c72-29caa3c830bc-48x23.png 48w, http://www.o3world.com/wp-content/uploads/2024/03/ab8eb27c-7cb5-4b27-8c72-29caa3c830bc-1280x619.png 1280w\" sizes=\"auto, (max-width: 640px) 100vw, 640px\" /><figcaption id=\"caption-attachment-8875\" class=\"wp-caption-text\">Seamlessly validate color combinations against WCAG guidelines</figcaption></figure>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>Integrating any of these tools into your work will provide invaluable support in the design process as well as ensure your designs are visually appealing and accessible to all users.</p>\n<h3>Good design is accessible design</h3>\n<p>Color contrast ratios are a fundamental aspect of accessible design. It&#8217;s crucial for designers to understand the requirements of color contrast ratios and apply suitable color contrast ratios in their work. With the right tools and a keen eye for color, designers can create visually stunning designs that are accessible to everyone.</p>\n<h3>Meet O3’s expert</h3>\n<p>Meet <a href=\"https://www.linkedin.com/in/simone-dehel-cpacc-0b596a10a/\">Simone Dehel</a>, a certified expert in CPACC (Certified Professional in Accessibility Core) at O3. Simone is a Senior UX Designer who&#8217;s passionate about bridging the gap between accessible experiences and design. Simone is one of our leading accessibility champions at O3, is the founder of our culture club, and serves as a <a href=\"https://adplist.org/mentors/simone-dehel?utm_source=linkedin&amp;utm_medium=social&amp;utm_campaign=user_profileshare&amp;utm_content=simonedehel\">design mentor at ADP List</a>. Simone embodies inclusivity, making sure accessibility is not just an add-on but a core part of creating experiences.</p>\n<p>Our skilled designers are continuously expanding their knowledge and are here to address your inquiries on <a href=\"https://www.o3world.com/include/\">all things related to accessibility</a>. Explore how our accessibility solution has transformed brands across industries and stay tuned for continued thought leadership.</p>\n"
+      }
+    ],
+    "related_articles": [
+      8368,
+      8757,
+      8574
+    ],
+    "author": [
+      7875
+    ]
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:57.654Z"
+  },
+  "wpId": 7840,
+  "slug": "celebrating-gaad-o3s-commitment-to-accessibility-and-the-exciting-plans-ahead",
+  "title": "Celebrating GAAD: O3's commitment to accessibility and the exciting plans ahead",
+  "dateGmt": "2023-05-12 18:50:33",
+  "modifiedGmt": "2023-05-12 19:15:53",
+  "authorId": 16,
+  "categoryIds": [
+    63,
+    7
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/02/O3-website-imagery_-Perspectives-6.jpg",
+    "alt": "O3 accessibility graphic"
+  },
+  "seo": {
+    "titleOverride": "Celebrating GAAD: O3's commitment to accessibility",
+    "titleRendered": "Celebrating GAAD: O3's commitment to accessibility",
+    "descriptionOverride": "Discover the significance of Global Accessibility Awareness Day (GAAD) and O3's dedication to optimizing digital experiences for inclusivity.",
+    "descriptionRendered": "Discover the significance of Global Accessibility Awareness Day (GAAD) and O3's dedication to optimizing digital experiences for inclusivity.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/celebrating-gaad-o3s-commitment-to-accessibility-and-the-exciting-plans-ahead/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Celebrating GAAD: O3's commitment to accessibility and the exciting plans ahead",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Check out what’s in store for O3 as we celebrate Global Accessibility Awareness Day (GAAD) next week. "
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Introduction</h3>\n<p>In an increasingly digital world, ensuring accessibility for all users is imperative. Global Accessibility Awareness Day (GAAD), celebrated annually on the third Thursday of May, aims to raise awareness about the importance of digital accessibility. With a growing team of <a href=\"https://www.accessibilityassociation.org/s/certified-professional\">CPACC (Certified Professional in Accessibility Core Competencies)</a> experts, O3 is dedicated to optimizing digital experiences to create a more equitable and inclusive environment. Let&#8217;s delve into what GAAD is all about and discover the exciting plans O3 has in store.</p>\n<h3>Understanding GAAD and its significance</h3>\n<p>GAAD was established in 2011 and has since become a vital annual event in the tech industry. It serves as a platform to promote accessibility and inclusivity in digital design and development. GAAD raises awareness about the importance of considering users with various disabilities including visual-auditory- motor-cognitive- physical impairments, during the creation of digital products and services.</p>\n<h3>O3&#8217;s commitment to accessibility</h3>\n<p>At O3, accessibility is at the forefront of everything we do. We firmly believe that the best digital experiences are those that are accessible to all. Embracing accessibility goes beyond mere compliance; it involves optimizing digital products to ensure that they cater to users with diverse abilities. By making websites and applications accessible, O3 enables all users to engage with and remember the brands we work with, fostering inclusivity and loyalty. Check out our current <a href=\"https://www.o3world.com/perspectives/digital-accessibility-resources/\">accessibility resources</a> to learn how you can stay committed to inclusivity too.</p>\n<h3>Our growing team of CPACC experts</h3>\n<p>At O3, accessibility is not just a part of our work; it is ingrained in our individual commitment to creating inclusive digital experiences. We are proud to have a growing team of CPACC experts who share a passion for making digital products accessible to all users. Each member of our certified team possesses valuable knowledge and expertise in the field, ensuring that we stay at the forefront of accessibility trends and deliver the most effective solutions to our clients. By continuously expanding our team and fostering a culture of shared knowledge and education in accessibility, we demonstrate our unwavering dedication to creating inclusive digital experiences and our commitment to providing the best possible outcomes for all users.</p>\n<h3>Exciting plans for GAAD</h3>\n<p>O3 is thrilled to share valuable insights and resources to help us all grow and learn from one another. As GAAD approaches on May 18, our team has exciting plans in store to empower brands and individuals in making their digital experiences as inclusive as possible.</p>\n<h4>Launch of an exciting new offering</h4>\n<p>O3 is thrilled to announce an upcoming and revolutionary accessibility solution for our clients. Stay tuned for further communication as we unveil this offering. This solution will empower brands to create inclusive experiences and break down barriers.</p>\n<h4>Thought leadership on UI accessibility</h4>\n<p>O3&#8217;s CPACC expert, <a href=\"https://www.linkedin.com/in/simone-dehel-cpacc-0b596a10a/\">Simone Dehel</a>, will share insights on &#8220;Making your UI accessible for all users&#8221;. Stay tuned for this informative thought leadership piece where Simone will shed light on practical strategies and best practices for designing inclusive user interfaces. This content will serve as a valuable resource for organizations seeking to enhance their accessibility efforts.</p>\n<h4>Engaging O3 mini audio series</h4>\n<p>To provide expert insights and guidance, O3 has prepared an engaging audio series featuring our accessibility experts. These experts will answer key questions related to digital accessibility.</p>\n<h4>Accessibility Roundtable discussion</h4>\n<p>On GAAD, Team O3 will host an Accessibility Roundtable discussion. This interactive session will bring together experts and thought leaders in the accessibility field. Together, we will delve into the challenges, solutions, and opportunities that lie ahead. Stay tuned for a comprehensive summary of this enlightening conversation on O3&#8217;s website</p>\n<h3>Conclusion</h3>\n<p>As GAAD approaches next week, O3 reaffirms its commitment to accessibility and inclusivity in the digital landscape. We recognize that accessibility is not just a legal obligation but a way to create a more equitable experience so we continue to push the boundaries and empower brands to make their digital products accessible to all users. Through a range of initiatives and events, including the launch of a new offering, thought leadership content, an audio series, and an Accessibility Roundtable discussion, O3 is poised to elevate accessibility standards and inspire a more inclusive world.</p>\n"
+      }
+    ],
+    "related_articles": [
+      7287,
+      7296,
+      5173
+    ],
+    "author": ""
+  }
+}

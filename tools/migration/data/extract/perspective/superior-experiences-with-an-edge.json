@@ -1,0 +1,81 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:02.400Z"
+  },
+  "wpId": 5262,
+  "slug": "superior-experiences-with-an-edge",
+  "title": "Superior experiences with an \"edge\"",
+  "dateGmt": "2022-09-14 00:32:17",
+  "modifiedGmt": "2023-01-30 15:22:24",
+  "authorId": 16,
+  "categoryIds": [
+    15,
+    8,
+    11,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2022/09/O3Acquia.png",
+    "alt": "O3 + Acquia logos."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Superior experiences with an \"edge\" | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/superior-experiences-with-an-edge/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": {
+      "url": "https://www.o3world.com/wp-content/uploads/2022/09/Screen-Shot-2022-09-13-at-4.16.27-PM.png",
+      "alt": ""
+    },
+    "twitterImageOverride": "https://www.o3world.com/wp-content/uploads/2022/09/Screen-Shot-2022-09-13-at-4.16.27-PM.png"
+  },
+  "fields": {
+    "flexible_content": false,
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>We&#8217;ve experienced this ourselves as users, so we know that any significant delay in page speed can lead to missed opportunities and inflict economic losses on a business. We&#8217;ve also heard of a security breach on a website and no longer wish to shop there. We&#8217;ve all likely heard of a CDN or a firewall in passing in our careers, but I want to express the value they can provide together by improving load times and gaining user trust, which ultimately leads to increased visitor engagement.</p>\n<p><span style=\"font-weight: 300;\">Acquia Cloud Edge includes the combined services of &#8220;Edge Security&#8217; and &#8216;Edge CDN.&#8221; With this combined solution offering, it takes the guesswork out of keeping an application secure and performant at the &#8216;edge&#8217; of the distribution network.</span></p>\n<h3><b>The term &#8220;Edge&#8221;</b></h3>\n<p><span style=\"font-weight: 300;\">A network &#8220;edge&#8221; is one or more servers that exist at the strategic edge of a network. Pushing data to the network edge, closer to where data is created and consumed, provides fast delivery of content — but also makes it a vulnerability. It is critical to have a strategy for delivering content at this point on the network.</span></p>\n<h2><b>Edge security</b></h2>\n<p><span style=\"font-weight: 300;\">Downtime from an attack can not only inflict economic losses for a business, but create reputation damage. Acquia Cloud&#8217;s &#8220;Edge Security&#8221; is what protects the network and application layer from attacks and mitigates DDoS attacks. </span></p>\n<ul>\n<li><span style=\"font-weight: 300;\">The web of servers in Edge Security creates a large surface area to absorb highly distributed attacks. Acquia has 59Tbps of capacity, so they are equipped to handle any modern distributed attack.</span></li>\n<li style=\"font-weight: 300;\" aria-level=\"1\"><span style=\"font-weight: 300;\">Over 1 billion IP addresses pass through Acquia&#8217;s Cloudflare network every month to identify IP threats. With the customizable settings &#8211; you can use an IP firewall to block or whitelist specific IPs.</span></li>\n<li style=\"font-weight: 300;\" aria-level=\"1\"><span style=\"font-weight: 300;\">Edge Security includes DNSSEC (The Domain Name System Security Extensions) &#8211; which authenticates responses to domain name lookups. This is an important feature that prevents attackers from manipulating the responses to DNS requests.    </span></li>\n</ul>\n<h2><b>Edge CDN</b></h2>\n<p><span style=\"font-weight: 300;\">Edge CDN ensures application speed and availability. Noting again, how meaningful this is for user engagement. To visualize this in real life, a CDN is a collection of physical servers geographically located to spread and serve content as fast as possible. </span></p>\n<ul>\n<li style=\"font-weight: 300;\" aria-level=\"1\"><span style=\"font-weight: 300;\">When the end-user visits an application, the CDN will request the closest server with the assets. Less travel time simply means faster service.</span></li>\n<li style=\"font-weight: 300;\" aria-level=\"1\"><span style=\"font-weight: 300;\">Edge CDN increases content availability and redundancy: If there is a failure or natural disaster in one region with servers, there are other regions with more servers. Speaking from experience &#8211; hurricane season in Florida, for example, mixed with an on-premise hosted website &#8211; can lead to extended downtime.</span></li>\n<li style=\"font-weight: 300;\" aria-level=\"1\"><span style=\"font-weight: 300;\">By reducing the payload size of images and using tactics such as minification on coding files, the CDN reduces the footprint of the network request, resulting in fast delivery of content and overall providing a better user experience.</span></li>\n</ul>\n<h2><b>O3 + Acquia </b></h2>\n<p><span style=\"font-weight: 300;\">O3 values the impact of a superior technology and how these cutting “edge” features can elevate your brand. To create world class  experiences for our clients, speed and security is crucial. </span></p>\n<p><span style=\"font-weight: 300;\">O3 leverages Acquia Edge through our best-in-class partnership to do just that. We transform customer experiences through innovative digital solutions supported by advanced technologies. </span></p>\n<p><span style=\"font-weight: 300;\">O3 is eager and equipped to enhance your CX journey, driving solutions to elevate your brand and ROI. </span></p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Superior experiences with an edge: Acquia Cloud Edge",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "A challenging question that businesses often face – how to deliver an experience that is performant and secure, especially in the ever-changing landscape of performance expectations and security threats."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      5120,
+      3631,
+      4859,
+      6185
+    ],
+    "author": [
+      5320
+    ]
+  }
+}

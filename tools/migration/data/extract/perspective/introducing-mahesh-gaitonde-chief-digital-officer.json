@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:06.746Z"
+  },
+  "wpId": 4871,
+  "slug": "introducing-mahesh-gaitonde-chief-digital-officer",
+  "title": "Introducing Mahesh Gaitonde, Chief Digital Officer",
+  "dateGmt": "2022-02-09 02:36:41",
+  "modifiedGmt": "2023-02-02 18:10:40",
+  "authorId": 16,
+  "categoryIds": [
+    10,
+    11
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2022/04/Mahesh-Gaitonde-on-how-B2B-brands-can-move-to-a-D2C-model.png",
+    "alt": "Mahesh Gaitonde enlightening the O3 team with a presentation."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Introducing Mahesh Gaitonde, Chief Digital Officer | O3",
+    "descriptionOverride": "O3 names Mahesh Gaitonde new Chief Digital Officer to broaden the range of innovative products, services and capabilities coming from O3.",
+    "descriptionRendered": "O3 names Mahesh Gaitonde new Chief Digital Officer to broaden the range of innovative products, services and capabilities coming from O3.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/introducing-mahesh-gaitonde-chief-digital-officer/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>A new CDO to help shape the future of technology for O3</h3>\n<p>O3 has named Mahesh Gaitonde as our new Chief Digital Officer. Formerly of LiquidHub and Capgemini, Mahesh has 20+ years of experience working with digital products and solutions. For our clients, this announcement means they can expect a broader range of innovative products, services and capabilities from O3.</p>\n<h4><a href=\"https://www.wfmz.com/news/pr_newswire/pr_newswire_pennsylvania/o3-world-appoints-mahesh-gaitonde-chief-digital-officer/article_12882293-7af6-5838-88b5-92b1e8488e2b.html\">Read the full press release including more on Mahesh’s background and expertise.</a></h4>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Introducing Mahesh Gaitonde, Chief Digital Officer",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "O3 has named Mahesh Gaitonde as our new Chief Digital Officer."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      4940,
+      5120,
+      6194,
+      3444
+    ],
+    "author": ""
+  }
+}

@@ -1,0 +1,444 @@
+{
+  "_id": "perspective-wp-4265",
+  "_type": "perspective",
+  "title": "6 Tips for running a successful innovation workshop",
+  "slug": {
+    "_type": "slug",
+    "current": "innovation-workshops-o3"
+  },
+  "excerpt": "At O3 it all starts with an innovation workshop, where we come together to spark new actionable ideas.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-62",
+      "_key": "cat-62"
+    }
+  ],
+  "publishedAt": "2021-05-05T19:38:47Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/05/O3-website-imagery_-Perspectives-87.jpg"
+    },
+    "alt": "6 tips for running an innovation workshop"
+  },
+  "body": [
+    {
+      "_key": "k0001",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“Innovate or die” is a common mantra that innovators like to use. Its origins are a bit spotty, but the point is clear: if you don’t continuously evolve and stay ahead of the curve, your organization will fall behind. However, one cannot simply innovate on command. It takes insight, clear objectives and a framework for delivery to really bring your new ideas to life.",
+          "_key": "k0002"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "At O3 it all starts with an innovation workshop, where we come together to spark new actionable ideas. It’s a place and time for people to examine new ideas to address their most pressing business challenges. We often hear from clients and peers that these types of workshops can lack focus or prioritize the wrong things. The ideas that are developed can feel scattered or unrealistic. As practitioners of human-centered design, we generally adhere to design thinking methodologies. We look to create structure so that workshops have purpose and outcomes are actionable. Regardless of your approach, here are six key considerations for making workshops work.",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "1) Start with a clear problem and desired outcome",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This may seem obvious, but the most critical component to any ideation session is simply starting with the right problem to solve with clear objectives. Too often, attendees are unclear why they’re gathering in the first place and what they hope to achieve. From a macro point of view, this creates misalignment and scattered thinking. More granularly, ideas end up being vague (“we need to sprinkle some AI on that!”) or pointless.",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Examining the problem statement (“how might we create a more seamless onboarding experience”) and working towards a clearly defined outcome (“so that less people abandon the sign up process”) provide the group with a compass and destination.",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "2) Put people first",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In parallel with defining problems and desired outcomes, you need to consider the needs and pain points of the people you’re solving for. While we’ll often recommend real world user research prior to a workshop, sometimes that’s not feasible given time or budget constraints. So, simply having front-line stakeholders (usually sales or support people) available to speak for the humans at the center of your challenge can provide a lot of valuable insight when discussing new ideas.",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "3) Develop a system for collaboration",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Collaboration can be a nuanced subject. Most people will agree that two heads are better than one. But, sometimes that simply turns into BOPSAT (a bunch of people sitting around talking). By creating a system for collaboration where there is a time to think, a time to share, and a time to build off one another’s ideas, we see more meaningful and productive collaboration – as opposed to people simply talking over one another. A few points to consider:",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Boundaries",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Per the point above, having clear direction on what problems you’re trying to solve and for what purpose creates boundaries and direction for thinking.",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Personal time",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "When it’s time to diverge on ideas, we find it’s often better to give everyone a little space and quiet time to think about possible solutions.",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Time constraints",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Believe it or not, most people think more effectively when they’re on the clock. Providing time constraints gives everyone a deadline.",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Take turns",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Often, we see the “loudest voice” phenomenon take hold. For more introverted people, this can be counterproductive. When it’s time to share, much like grade school, everyone should get their turn.",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Building off of ideas",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As ideas are being discussed, leaving time to examine, riff or expand on any one idea is critical.",
+          "_key": "k0038"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0039",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "4) Visualize ideas",
+          "_key": "k0040"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0041",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "While virtual white boarding tools like Miro or Mural give us the ability to workshop across the world, they can take away an important element of successful innovation: visualizing ideas. While not everyone is an artist, everyone can sketch by using simple shapes to express an idea. Too often, when we’re assessing a sea of concepts to determine which ones meet the objective, we miss an important idea because the post-it is hidden on the board. The quick sketch helps to draw the eye and makes sure every idea is considered.",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0043",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "5) Prioritize: Impact and feasibility",
+          "_key": "k0044"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0045",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We do not create ideas for the sake of simply creating ideas. Once ideas are generated, then we need to determine which ones have merit based on the problems we’re exploring and the objectives defined early in the process. It’s important to look at great ideas through the lens of cost and efficiency. Consider impact and feasibility for each concept and focus in on two or three ideas that meet the need. While some ideas may have a huge impact, they may also take years and great time or financial investment to produce. That may ultimately make sense, but that’s also risky. Ideas that have high impact but cost little are ideal.",
+          "_key": "k0046"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0047",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "6) Prototype, measure, rinse and repeat",
+          "_key": "k0048"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0049",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Finally, innovation requires follow-through. Consider quick, easy ways to test and measure your ideas. While there are a number of rapid prototyping tools out there to test with, a paper prototype can do the job. Also, it’s important to think about setting and environment. Perhaps the problem you’re solving for has to occur within a certain space at a certain time with specific people. Make sure you quickly validate your ideas with real humans before making big time or financial investments. Then, as you learn, taking your new insight into subsequent workshops creates a system to continuously develop and refine new ideas.",
+          "_key": "k0050"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0051",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If you are interested in best practices for innovation workshops or would like to have O3 facilitate your next brainstorming session, ",
+          "_key": "k0052"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "connect with us",
+          "_key": "k0053"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " to learn more.",
+          "_key": "k0054"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0055",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0056",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "6 Key considerations for successful innovation workshops",
+    "description": "Learn the six key considerations for successful innovation workshops, from problem definition to prototype iteration."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:4265",
+    "extractedAt": "2026-08-01T00:10:06.747Z"
+  }
+}

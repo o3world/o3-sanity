@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:10.997Z"
+  },
+  "wpId": 3651,
+  "slug": "introducing-open-operating-a-service-philadelphians-can-use-to-support-local-businesses",
+  "title": "Introducing Open & Operating: A service Philadelphians can use to support local businesses",
+  "dateGmt": "2020-07-13 19:54:25",
+  "modifiedGmt": "2023-09-22 15:07:37",
+  "authorId": 16,
+  "categoryIds": [
+    8,
+    10
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/07/O3-website-imagery_-Insights-8.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Introducing Open & Operating: A service Philadelphians can use to support local businesses | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/introducing-open-operating-a-service-philadelphians-can-use-to-support-local-businesses/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>Economic uncertainty is real and the challenges many businesses are facing seem to have no end in sight. Organizations are grappling with when and how to reopen their doors safely. In an effort to alleviate some of those pressures our team of digital strategists, designers, and engineers gathered to discuss ways to help people during the pandemic using digital technology.</p>\n<p>We held a brainstorming session to get all our ideas out on the table. Judgement was deferred. Wild ideas were encouraged. And we focused on generating lots of suggestions to solve the core issues.</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-3571 size-full\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/O3World-News-Post-Agency-Innovation-2400x1350-1.jpg\" alt=\"Miro Collaboration Board featured in Zoom call with O3 employees\" width=\"826\" height=\"465\" /></p>\n<p>By leveraging design thinking we were able to hone in on a concept that was high in value, technically feasible, and relatively simple to get to market. We dreamt up a way for communities to easily support local businesses by accessing crucial information via text messages.</p>\n<h3>Building new ideas, prototyping &amp; tinkering with new tech</h3>\n<p>The <a href=\"https://www.o3world.com/labs/\">O<sub>3</sub> Labs</a> team created a messaging service that allows users to find out what&#8217;s open for business. Lead Experience Designer, Josh Soldiers, constructed chat flows for each service type; free food distribution, local bars and alcohol, restaurants, and listing a business. He then designed the experience around SMS messaging, prioritized user inputs, and identified fallbacks. Josh also worked alongside Lead Engineer, Zuhib Daud, to create the optimal experience.</p>\n<p>Daud mapped out a path forward for the Labs team to use a combination of Twilio Studio, NodeJS, and Google’s geolocation API to build the service. Through conversational interface design and development of a creative tech solution we were able to create a beta version for people in Philadelphia to test out.</p>\n<h3>Meet O&amp;O</h3>\n<p>Open &amp; Operating is the latest product we’ve built in-house. It’s a messaging service that gives users instant access to support small businesses in their area. Simply text “Hello” to 267-459-2887 to discover the closest businesses providing pickup and delivery options for your needs.</p>\n<p>&nbsp;</p>\n<div style=\"width: 727px;\" class=\"wp-video\"><video class=\"wp-video-shortcode\" id=\"video-0-1\" width=\"727\" height=\"409\" poster=\"https://www.o3world.com/wp-content/uploads/2020/07/Screen-Shot-2020-07-21-at-4.26.02-PM.png\" preload=\"metadata\" controls=\"controls\"><source type=\"video/mp4\" src=\"https://www.o3world.com/wp-content/uploads/2020/07/OO_Chat2.mp4?_=1\" /><a href=\"https://www.o3world.com/wp-content/uploads/2020/07/OO_Chat2.mp4\">https://www.o3world.com/wp-content/uploads/2020/07/OO_Chat2.mp4</a></video></div>\n<p>Learn more at openandoperating.com or try out the service for free today by texting “Hello” to 267-459-2887.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Introducing Open & Operating: A Service Philadelphians Can Use to Support Local Businesses",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "By leveraging design thinking we were able to hone in on a concept that was high in value, technically feasible, and relatively simple to get to market."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      3915,
+      6187,
+      4609,
+      3932
+    ],
+    "author": ""
+  }
+}

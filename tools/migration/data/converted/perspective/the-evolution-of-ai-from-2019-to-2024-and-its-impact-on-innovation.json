@@ -1,0 +1,442 @@
+{
+  "_id": "perspective-wp-9165",
+  "_type": "perspective",
+  "title": "The evolution of AI: From 2019 to 2024 and its impact on innovation",
+  "slug": {
+    "_type": "slug",
+    "current": "the-evolution-of-ai-from-2019-to-2024-and-its-impact-on-innovation"
+  },
+  "excerpt": "Join us at 1682 and explore the ever-changing landscape of innovation programs, with a particular focus on the real-world applications of AI.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2024-07-31T14:12:55Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/07/Evolution-of-AI.jpg"
+    },
+    "alt": "Evolution of AI"
+  },
+  "body": [
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The period between 2019 and 2024 has seen remarkable advancements in the technology and innovation. Since ",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "the last 1682 Conference in 2019",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", the world has experienced a technological renaissance. The integration of AI into everyday business operations has transformed how companies interact with their customers and employees. From sophisticated chatbots and virtual assistants to predictive analytics and personalized marketing, AI has enabled organizations to deliver more efficient, tailored, and proactive customer service.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://1682conf.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "When we look at large organizations, many brands are still getting their feet on the ground to implement innovation practices. Although some industries may be slower to adopt than others, this shift has not only improved customer satisfaction but also streamlined internal processes, leading to more agile and innovative business models.",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This year at 1682",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "At the ",
+          "_key": "k0015"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "upcoming 1682 Conference",
+          "_key": "k0016"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", industry leaders will explore how AI is driving opportunities inside their organizations, but also, how they’re determining if it’s impacting a return on its investment.\nIn partnership with Five Below, the 1682 Conference will be hosted at their corporate offices in downtown Philadelphia. Known for their innovative approach to retail and culture, Five Below commemorates Philadelphia’s founding and celebrates its spirit of innovation. Like O3, Five Below is a Philadelphia-born company, making it a fitting partner for this landmark event.",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.1682conference.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "AI: Then vs now",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In 2019, AI was a niche technology with limited applications and accessibility, predominantly used by large corporations for specialized tasks. However, today’s AI landscape today is vastly different, with widespread integration, advanced capabilities, and increased accessibility across businesses of all sizes. This evolution has made AI a fundamental part of organizational strategies, driving innovation and operational efficiency. Microsoft President Brad Smith has even ",
+          "_key": "k0021"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "compared the development of artificial intelligence (AI) to the printing press",
+          "_key": "k0022"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://thehill.com/policy/technology/4024394-microsoft-president-compares-ai-to-invention-of-printing-press/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "AI in 2019",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Limited applications: AI was primarily used in specialized fields like data analysis, automation of routine tasks, and basic customer service through chatbots.\nCost and accessibility: High costs and limited access to advanced technology made AI adoption feasible only for large corporations.\nData dependency: AI systems relied heavily on structured data, making it necessary for organizations to have extensive and well-organized datasets.",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "AI in 2024",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Widespread adoption: AI is now integrated across various business functions, including marketing, sales, customer service, and operations.",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Increased accessibility: Advances in AI technology and reduced costs have made AI tools accessible to small and medium-sized businesses.",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Advanced capabilities: Modern AI can handle unstructured data, such as text, images, and videos, allowing for more sophisticated analysis and applications.",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Autonomy and efficiency: AI systems have become more autonomous, requiring less human intervention and increasing operational efficiency.\nO3 is driving AI projects across sectors",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The rapid expansion and adoption of AI have been pivotal for our team since 2019, generating a wide breadth of projects across various industries. As brands increasingly embrace AI, they are reimagining their projects and processes to enhance efficiency and deliver superior customer experiences.",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "Check out two innovation and AI projects we have been working on…",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0042",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Implementing AI across healthcare institutions",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.o3world.com/work/healthcare-innovation/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0044",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "For the last 6 years, O3 has partnered with a major healthcare institution’s innovation group to improve processes and enhance patient experiences. Through this engagement, we’ve helped transform internal innovation processes, test and validate 10 different digital product concepts. This collaboration not only improved their approach to innovating patient care but also led to a partnership to launch one of those products with a Fortune 100 company.",
+          "_key": "k0045"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0046",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "Revolutionizing the creative gig economy with generative AI",
+          "_key": "k0047"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.o3world.com/work/scarlet-ai-hyper-personalizing-creative-gig-economy/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0048",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 partnered with REC to develop Scarlet AI, a unique virtual assistant that revolutionizes the creative gig economy. The product delivers a deeply personalized and engaging experience, seamlessly managing information and bookings for REC members.",
+          "_key": "k0049"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0050",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Register for 1682",
+          "_key": "k0051"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0052",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "1682 Conference explores the ever-changing landscape of innovation programs, with a particular focus on the real-world applications of AI in enhancing employee and customer experiences. By bringing together industry leaders and showcasing real-world examples, you’ll gain behind-the-scenes insights from industry leaders on achieving success and overcoming challenges when implementing innovative, results-driven strategies.",
+          "_key": "k0053"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0054",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "Learn more about the event",
+          "_key": "k0055"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.1682conference.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "Discover how AI has transformed customer experiences and innovation since 2019 at the 1682 Conference 2024. Learn from industry leaders about AI's evolution and its future impact."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:9165",
+    "extractedAt": "2026-08-01T00:09:37.819Z"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "_id": "person-wp-8708",
+  "_type": "person",
+  "name": "Josh Friedman",
+  "title": "Senior Engineer",
+  "headshot": {
+    "_type": "image",
+    "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/01/Headshots-1.png"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:team:8708",
+    "extractedAt": "2026-08-01T00:20:48.162Z"
+  }
+}

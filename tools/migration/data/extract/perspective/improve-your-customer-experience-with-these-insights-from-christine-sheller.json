@@ -1,0 +1,74 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:57.654Z"
+  },
+  "wpId": 7811,
+  "slug": "improve-your-customer-experience-with-these-insights-from-christine-sheller",
+  "title": "Improve your customer experience with these insights from Christine Sheller",
+  "dateGmt": "2023-05-10 18:12:31",
+  "modifiedGmt": "2023-05-11 13:37:54",
+  "authorId": 16,
+  "categoryIds": [
+    61,
+    7
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/05/My-project-1-43.jpg",
+    "alt": "Christine Sheller headshot"
+  },
+  "seo": {
+    "titleOverride": "Holistic customer journeys deliver exceptional experiences.",
+    "titleRendered": "Holistic customer journeys deliver exceptional experiences.",
+    "descriptionOverride": "SVO of Experience Research + Design at O3 shares valuable tactics and emphasizes the importance of holistic customer journeys in delivering exceptional experiences.",
+    "descriptionRendered": "SVO of Experience Research + Design at O3 shares valuable tactics and emphasizes the importance of holistic customer journeys in delivering exceptional experiences.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/improve-your-customer-experience-with-these-insights-from-christine-sheller/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Improve your customer experience with these insights from Christine Sheller",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Elevate your customer experience with insights from Christine Sheller, Senior VP of Experience Research + Design at O3, as she shares valuable tactics and emphasizes the importance of holistic customer journeys in delivering exceptional experiences."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>Delivering exceptional experiences to customers throughout their entire journey is crucial for business success. In her <a href=\"https://reports.cellainc.com/2023-ihir-creative/services#block-98cd3b5d-3144-44d4-92b4-5e06cb35afa3\" target=\"_blank\" rel=\"noopener\">Cella</a> article titled &#8220;Delivering Delight Across Every Stage of Your Customers&#8217; Journey,&#8221; Christine Sheller, Senior VP of Experience Research + Design at O3, discusses the significance of providing a consistent and delightful customer experience across all channels. Let&#8217;s explore Christine&#8217;s perspective and discover how it aligns with your goal of elevating customer satisfaction.</p>\n<h3>Understanding the holistic customer journey</h3>\n<p>Christine emphasizes that the customer journey extends beyond awareness and acquisition, requiring consistent excellence throughout all interactions. At O3, we support this holistic approach and engage with our partners to ensure CX is a shared responsibility across the organization—from sales and marketing to operations and support.</p>\n<h3>Empowering cross-functional collaboration</h3>\n<p>Creating an impactful CX strategy depends on internal buy-in and collaboration from all stakeholders. At O3, we believe that cross-functional teams build the best CX outcomes. We understand the challenges and can provide guidance on how to gain support for implementing robust CX strategies.</p>\n<h3>Driving customer-centricity through research</h3>\n<p>Christine stresses the importance of understanding your customers&#8217; perspectives. At O3, we embrace this notion and excel in conducting comprehensive research to gather customer insights. By engaging users with diverse backgrounds, preferences, and experiences, we help you uncover their goals, needs, and sentiments. This deep understanding enables you to make informed decisions and deliver personalized experiences that resonate on a profound level.</p>\n<p>Exceptional customer experiences require continuous effort and a commitment to exceeding expectations. <a href=\"https://www.o3world.com/contact/\">Join us</a> on this journey and witness the transformative impact it can have on your brand, customer loyalty, and overall business success.</p>\n<h4>Read Christine Sheller&#8217;s perspective <a href=\"https://reports.cellainc.com/2023-ihir-creative/services#block-98cd3b5d-3144-44d4-92b4-5e06cb35afa3\">here.</a></h4>\n"
+      }
+    ],
+    "related_articles": [
+      7703,
+      5025,
+      2582
+    ],
+    "author": [
+      3984
+    ]
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:02.400Z"
+  },
+  "wpId": 6192,
+  "slug": "3-tips-for-succeeding-in-product-innovation",
+  "title": "3 tips for succeeding in product innovation",
+  "dateGmt": "2023-01-10 21:53:31",
+  "modifiedGmt": "2023-03-01 21:21:26",
+  "authorId": 16,
+  "categoryIds": [
+    15,
+    8
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights-1.jpg",
+    "alt": "Two team members collaborating in the conference room."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "3 tips for succeeding in product innovation | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/3-tips-for-succeeding-in-product-innovation/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "3 tips for succeeding in product innovation",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Check out O3's process for strategic product innovation. "
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>To product designers and developers, innovation is a vital aspect to drive results for your brand. Without strategic innovation, organizations will suffer. Fostering and sustaining true innovation is a challenge in itself. We’re not talking about innovation for innovation’s sake — developing a product around emerging technology, simply because it’s the “hot” new thing. We’re referring to innovation that’s focused on what’s truly important: solving problems for your customers.</p>\n<p>By developing well-defined end goals, innovation creates value for your current and potential customers. Here are three product innovation strategies that O3 lives by to help you get on the right track.</p>\n<h3>1. Collect the right customer data</h3>\n<p>Throughout the innovation process, customers must consistently be top of mind to develop a successful product. A brand must understand customer behavior and the exact data pertaining to their characteristics. This information is what determines the quantitative and qualitative decisions through the development process.</p>\n<p>Stakeholders can be anyone from the C-level team, product creators, development and design teams, customer service, and marketing.</p>\n<p>Some questions can include:</p>\n<ul>\n<li>Who is this for?</li>\n<li>Why do they need it?</li>\n<li>When do they need it?</li>\n</ul>\n<p>For customer feedback, it is less about the volume of responses and more about asking the right questions. This feedback is vital to understand as much of the customer journey as possible.</p>\n<p>Questions to ask customers include:</p>\n<ul>\n<li>How did you find us?</li>\n<li>Who else did you consider?</li>\n<li>What key points did you consider when choosing a product/service provider?</li>\n<li>What was the ultimate deciding factor in choosing us?</li>\n<li>What do you like or dislike about our offering?</li>\n<li>Is our solution solving your top three pain points? If yes, how? If not, what can we do to improve?</li>\n<li>If you could change or add one thing or feature, what would it be?</li>\n</ul>\n<h3>2. Get comfortable with iterating</h3>\n<p>Although it is important to have a grand vision for your product, achieving product success is an iterative process. Project scope creep, extended timelines, and developing features based on outdated assumptions are risks that can be difficult to overcome on the first attempt. To avoid these pitfalls, many organizations gradually add features to their product. However, it is important to remember that adding and subtracting features should be entirely based on their importance to your customers. Reference your prior research to determine features customers mentioned frequently, mentioned without prompting or were most excited about. Based on this feedback, create the leanest possible solutions that deliver value to your customers.</p>\n<h3>3. Constantly validate</h3>\n<p>Data collection is a constant, ongoing process. It should drive your company&#8217;s decisions from idea to execution and ultimately provide consistent insight once the product is in use. Viewing the validation phase as a single project plan milestone will be a disservice to your innovation process. Testing is one of the most valuable tools to reduce risk within innovation testing.</p>\n<p>Using this strategy, your brand doesn’t need every product detail built out to start validating your idea. You can test your ideas even with a basic wireframe for your target audience to validate (or invalidate). For functionalities that are more complex, there are a number of tools — including InVision, Axure, Justinmind, and Figma,</p>\n<p>By implementing a strategic strategy like this, your brand can cut unnecessary features early on and reprioritize other features as you continue to develop the product.</p>\n<h3>In conclusion</h3>\n<p>True innovation is hard. The key is taking steps to make it as smooth and attainable as possible. By following these three strategies, successful and strategic innovation in your product development is within reach.</p>\n"
+      }
+    ],
+    "related_articles": [
+      2942,
+      3444,
+      5120,
+      796
+    ],
+    "author": ""
+  }
+}

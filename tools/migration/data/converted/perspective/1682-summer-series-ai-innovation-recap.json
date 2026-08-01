@@ -1,0 +1,721 @@
+{
+  "_id": "perspective-wp-10266",
+  "_type": "perspective",
+  "title": "Inside the 1682 Summer Series: Where innovation met real-world AI",
+  "slug": {
+    "_type": "slug",
+    "current": "1682-summer-series-ai-innovation-recap"
+  },
+  "excerpt": "From enterprise transformation to startup investing, the 1682 Summer Series brought candid insights on what it really takes to drive innovation with AI—setting the stage for a deeper dive this October.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2025-06-09T20:57:58Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/06/O3-website-imagery_-Perspectives-92.jpg"
+    },
+    "alt": "1682 summer session recap"
+  },
+  "body": [
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/06/7H0A0002-2.jpg"
+      },
+      "alt": "1682 summer series recap ",
+      "_key": "k0019"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The sold-out 1682 Summer Series brought together business leaders, technologists, and founders for a frank and inspiring look at what it really takes to drive innovation—and where AI is creating meaningful impact today. Hosted in partnership with ",
+          "_key": "k0021"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Comcast NBCUniversal at LIFT Labs",
+          "_key": "k0022"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", and supported by sponsors ",
+          "_key": "k0023"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Glean",
+          "_key": "k0024"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", ",
+          "_key": "k0025"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Independence Blue Cross",
+          "_key": "k0026"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", and ",
+          "_key": "k0027"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Turnberry Solutions",
+          "_key": "k0028"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", the event delivered grounded insights and real-world perspectives from across industries.",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://lift.comcast.com/"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.glean.com/get-a-demo?utm_source=google&utm_medium=paid-search&utm_campaign=brand-us&utm_term=glean&gad_source=1&gad_campaignid=18284087412&gbraid=0AAAAAoJ_vzG2t-1eQIGrGQUdpEjRI5o_n&gclid=CjwKCAjwo4rCBhAbEiwAxhJlCQKJO7wqIhKFjIqDacS8s9aj42w4MIbgmaxquAHC-c5zGrAcrNcQbRoC2dAQAvD_BwE"
+        },
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.ibx.com/"
+        },
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.turnberrysolutions.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Across three deeply insightful sessions, a recurring theme emerged: we’re past the “AI hype” moment. Now comes the harder (and more rewarding) work of implementation—of turning vision into value, pilots into platforms, and emerging tech into trusted tools.",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/06/7H0A0233-2.jpg"
+      },
+      "alt": "1682 summer series recap",
+      "_key": "k0032"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Fireside Chat: AI transformation with IBX’s Chief Information Officer",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "Sushma Akunuru",
+          "_key": "k0036"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", Chief Information Officer of Independence Blue Cross, sat down with ",
+          "_key": "k0037"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "Moe Rinkunas",
+          "_key": "k0038"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " of Rock Health for a fireside chat on what it takes to lead AI transformation inside one of the region’s largest healthcare insurers. Sushma—who brings experience from both financial services and healthcare—framed her role not just as a technology leader, but as someone responsible for trust, access, and ultimately, improving member happiness. “Health, wealth, and happiness,” she said, should be the true north for digital transformation.",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/sushma-akunuru/"
+        },
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/mwrinkunas/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Throughout the conversation, Sushma emphasized the importance of balancing speed and security in a highly regulated environment. From proof-of-concept pilots to responsible AI testing, she offered a pragmatic roadmap: start small, build trust, and scale with intention. She described how her team is already applying generative AI to streamline backend operations and enhance customer service—including an internal chatbot that helps agents more easily answer complex benefit questions in plain language. It’s a powerful example of how AI, when applied carefully, can drive real value for both the business and the consumer.",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0042",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Sushma also reflected on what makes this AI moment feel different. Unlike previous waves of automation—like RPA—generative AI’s ability to make inferences from vast, unstructured data marks a fundamental shift. But that power comes with new risks: hallucinations, privacy concerns, and governance challenges. That’s why her team is approaching this transformation with what she calls “cautious optimism.” Whether it’s rethinking claims processing or accelerating product development with low-code tools, she made clear that AI isn’t just about smarter tech—it’s about reimagining how healthcare works, and putting people at the center of that change.",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/06/7H0A0589-2.jpg"
+      },
+      "alt": "1682 summer series recap ",
+      "_key": "k0044"
+    },
+    {
+      "_key": "k0045",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Inside enterprise innovation programs: What works, what doesn’t, and why",
+          "_key": "k0046"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0047",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Leaders from CSL, McKesson, and Comcast NBCUniversal LIFT Labs pulled back the curtain on the realities of building innovation programs inside large organizations. Moderator ",
+          "_key": "k0048"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0006"
+          ],
+          "text": "Len Porcano",
+          "_key": "k0049"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " (Novisi) framed the conversation with a familiar challenge: we’ve all seen corporate innovation initiatives make a splash, only to disappear quietly. So what separates the ones that last from those that fade? According to panelists ",
+          "_key": "k0050"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0007"
+          ],
+          "text": "Jonathan Walsh",
+          "_key": "k0051"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " (CSL), ",
+          "_key": "k0052"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0008"
+          ],
+          "text": "Kirby Forland",
+          "_key": "k0053"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " (McKesson), and ",
+          "_key": "k0054"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0009"
+          ],
+          "text": "Katie Teuber",
+          "_key": "k0055"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " (Comcast NBCUniversal), success comes down to consistent sponsorship, internal alignment, and solving real problems—not just pushing shiny tech.",
+          "_key": "k0056"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0006",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/leonardporcano/"
+        },
+        {
+          "_key": "k0007",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/jwalshprinceton/"
+        },
+        {
+          "_key": "k0008",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/kirby-forlin-mba/"
+        },
+        {
+          "_key": "k0009",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/katie-teuber/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0057",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The group shared hard-won lessons from inside their respective organizations. Jonathan emphasized the importance of having a clear innovation thesis and building buy-in beyond a single leader. “If the one executive who backed you leaves, does the mission survive?” he asked. Forland spoke candidly about the challenges of digital literacy at the executive level and the need to “translate” the complexity of innovation into analogies that resonate with business leaders. Meanwhile, Katie highlighted the importance of engaging cross-functional stakeholders early—from product and legal to security and finance—so innovation isn’t siloed and derailed at the finish line.",
+          "_key": "k0058"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0059",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "One of the most valuable themes was the critical role of external partners. From sourcing startups to building pilots faster, all three panelists described how working with outside innovators helped bring new capabilities into their organizations, often with more speed and flexibility than internal teams alone. But they were also clear-eyed about the risks, especially when startups aren’t given clear timelines or support. “We’re not trying to get the best deal—we’re trying to build the best partnership,” Jonathan said. Whether you’re driving innovation inside an enterprise or building something outside it, this session made one thing clear: sustaining innovation takes more than good ideas. It takes empathy, structure, and relentless clarity about the value you’re delivering.",
+          "_key": "k0060"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0061",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Venture Awards in action: Sahay AI’s next chapter",
+          "_key": "k0062"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0063",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Before the final panel, ",
+          "_key": "k0064"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0010"
+          ],
+          "text": "2024 Venture Awards winner Tejas Agarwal",
+          "_key": "k0065"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", Co-founder of Sahay AI, returned to share an update on the company’s progress. From scaling pilots to entering new enterprise partnerships, Tejas spoke candidly about the real challenges and breakthroughs that have come with growth. His session offered a grounded look at what it takes to build and adapt in the fast-moving world of AI—and underscored how programs like the Venture Awards can help early-stage startups gain traction and visibility at critical moments.",
+          "_key": "k0066"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0010",
+          "_type": "link",
+          "href": "https://www.o3world.com/perspectives/sahay-ai-triumphs-1682-venture-awards/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/06/7H0A0938.jpg"
+      },
+      "alt": "1682 summer series recap ",
+      "_key": "k0067"
+    },
+    {
+      "_key": "k0068",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "How VCs are evaluating AI startups today",
+          "_key": "k0069"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0070",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Investors ",
+          "_key": "k0071"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0011"
+          ],
+          "text": "Jim Hao",
+          "_key": "k0072"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " (Reformation), ",
+          "_key": "k0073"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0012"
+          ],
+          "text": "Jonathon Beschen",
+          "_key": "k0074"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " (Ben Franklin Technology Partners), and moderator ",
+          "_key": "k0075"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0013"
+          ],
+          "text": "Sushma Rajagopalan",
+          "_key": "k0076"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " (Rittenhouse Ventures) explored how AI is reshaping the investment landscape—and how they’re cutting through the noise to find real opportunity. With thousands of AI startups emerging and billions in funding flowing, the panelists stressed the importance of backing companies with deep domain expertise, proprietary data, and a clear problem that AI uniquely solves.",
+          "_key": "k0077"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0011",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/jimhao/"
+        },
+        {
+          "_key": "k0012",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/jonathonbeschen/"
+        },
+        {
+          "_key": "k0013",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/sushma/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0078",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The conversation highlighted the difference between “AI-native” companies and those using AI as a strategic layer to enhance core functionality. Jim shared examples from Reformation’s portfolio, including startups tackling verticals like pest control and government lobbying, where AI is being applied in highly practical ways. Jonathon emphasized that while many startups begin in pilot mode, the ones that stand out graduate to scalable, enterprise-ready solutions with measurable impact. Both investors flagged red flags like startups that are “just a wrapper” for existing LLMs, lacking defensibility or differentiated value. The sentiment that AI services companies (such as O3) are poised for significant growth in the coming years was expressed. This growth is predicted due to their critical role in enabling organizations to effectively integrate AI through structured processes and change management strategies.",
+          "_key": "k0079"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0080",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Ultimately, the panel offered a grounded view of what makes a company fundable in today’s AI boom. Founders who deeply understand their industries, build with purpose, and can show real traction are the ones investors are most excited to back. And as tools like generative AI lower barriers to entry, this moment presents an opportunity for a broader, more diverse wave of innovation—one grounded not in hype, but in solving meaningful problems.",
+          "_key": "k0081"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0082",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What’s next: The 1682 flagship conference",
+          "_key": "k0083"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0084",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "October 8, 2025 / The Barnes Foundation, Philadelphia",
+          "_key": "k0085"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0086",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Building on the momentum of the Summer Series, the 1682 Conference returns this fall—this time with a full-day experience at the iconic Barnes Foundation. The event will go deeper into how AI is transforming operations, customer experience, product development, and more. Expect more demos, more practical insight, and more time to connect with your peers.",
+          "_key": "k0087"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0088",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We’ve already confirmed speakers from ",
+          "_key": "k0089"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0014"
+          ],
+          "text": "Google",
+          "_key": "k0090"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", ",
+          "_key": "k0091"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0015"
+          ],
+          "text": "Best Egg",
+          "_key": "k0092"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", ",
+          "_key": "k0093"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0016"
+          ],
+          "text": "Hershey",
+          "_key": "k0094"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", ",
+          "_key": "k0095"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0017"
+          ],
+          "text": "SEPTA",
+          "_key": "k0096"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", and other industry leaders, with more announcements coming soon. Attendees will enjoy thoughtfully curated programming alongside breakfast, lunch, and coffee breaks. We’ll close the day with a cocktail reception on the Barnes’ outdoor terrace—and yes, your ticket includes private access to the Barnes Foundation’s renowned art collection, closed to the public that day.",
+          "_key": "k0097"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0014",
+          "_type": "link",
+          "href": "https://www.google.com/"
+        },
+        {
+          "_key": "k0015",
+          "_type": "link",
+          "href": "https://www.bestegg.com/hasslefree/?utm_source=google_upl&utm_medium=paidsearch&utm_campaign=PL%7CGOO%7CBD%7CCore%7CMT&cpid=9ec70e&utm_adgroup=Brand%7CBestEgg%7CA1&utm_term=best%20egg&gad_source=1&gad_campaignid=19914564362&gbraid=0AAAAADlHfns4TbKW2043Lxr9FfHcbekwn&gclid=Cj0KCQjwjJrCBhCXARIsAI5x66WiAub8B50uEIHpq5Ck2ynWIemtOhX07dtqmhvUO25QcxHmVTBHNBMaAinVEALw_wcB&gclsrc=aw.ds"
+        },
+        {
+          "_key": "k0016",
+          "_type": "link",
+          "href": "https://www.thehersheycompany.com/en_us/home/newsroom/press-release/2025-05-08-The-Hershey-Company-Introduces-Innovation-and-Consumer-Focused-Packaging-Strategy-At-2025-NCA-Sweets-Snacks-Expo.html"
+        },
+        {
+          "_key": "k0017",
+          "_type": "link",
+          "href": "https://www.septa.org/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0098",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0018"
+          ],
+          "text": "Early bird tickets on sale now",
+          "_key": "k0099"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0018",
+          "_type": "link",
+          "href": "https://www.1682conference.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Inside the 1682 Summer Series: Real-world AI innovation",
+    "description": "Explore key insights from the 1682 Summer Series, where leaders shared how AI is driving enterprise transformation, startup growth, and real impact today."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:10266",
+    "extractedAt": "2026-08-01T00:09:26.488Z"
+  }
+}

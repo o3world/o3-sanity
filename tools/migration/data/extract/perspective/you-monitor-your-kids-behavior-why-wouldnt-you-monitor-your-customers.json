@@ -1,0 +1,76 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:02.401Z"
+  },
+  "wpId": 5078,
+  "slug": "you-monitor-your-kids-behavior-why-wouldnt-you-monitor-your-customers",
+  "title": "You monitor your kids’ behavior, why wouldn’t you monitor your customers’?",
+  "dateGmt": "2022-07-20 00:12:24",
+  "modifiedGmt": "2023-02-02 18:06:31",
+  "authorId": 16,
+  "categoryIds": [
+    15,
+    62
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2022/07/You-monitor-your-kids-behavior-why-wouldnt-you-monitor-your-customers.png",
+    "alt": "Mike Tarquinio and Justin Handler engaging with a graph about customer habits."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "You monitor your kids’ behavior, why wouldn’t you monitor your customers’? | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/you-monitor-your-kids-behavior-why-wouldnt-you-monitor-your-customers/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": {
+      "url": "https://www.o3world.com/wp-content/uploads/2022/07/03_3.jpg",
+      "alt": ""
+    },
+    "twitterImageOverride": "https://www.o3world.com/wp-content/uploads/2022/07/03_3.jpg"
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>We firmly believe that tracking your consumers&#8217; activity (how they navigate your site, how much time they spend on a page, things they click on, and where they decide to leave from) throughout their online interactions, (across touchpoints and multiple visits) with your brand can help you better serve them in many ways.</h3>\n<p><span style=\"font-weight: 400;\">Real-time behavioral data collection and response allows for specific, timely and relevant messaging, positively impacting their decision-making while also helping you predict future behavior and driving sales. Three key influential elements of this approach are:</span></p>\n<h4><span style=\"font-weight: 400;\">Cognitive:</span></h4>\n<p><span style=\"font-weight: 400;\">Knowing, understanding and then delivering on your consumers’ expectations and beliefs drives relatability.</span></p>\n<h4><span style=\"font-weight: 400;\"><strong>Personal</strong></span></h4>\n<p><span style=\"font-weight: 400;\">The specific details of who they are and what they believe helps drive buying decisions.</span></p>\n<h4><span style=\"font-weight: 400;\"><strong>Social</strong></span></h4>\n<p><span style=\"font-weight: 400;\">Shared experiences develop emotional connections and bonds, which guide loyalty and lifetime value.</span></p>\n<h2><b>Ways O3 can help you leverage digital journey data</b></h2>\n<h4>1) Up-front CX assessment:</h4>\n<p><span style=\"font-weight: 400;\">We traditionally start our engagements with an up-front CX assessment. This is a collaborative deep dive into the customer journey to define customer segments, map out journeys and identify gaps and opportunities. Data analytics helps fill in the gaps for customer segments and paths through your digital experience.</span></p>\n<h4>2) Cohorts:</h4>\n<p><span style=\"font-weight: 400;\">With key segments defined, it’s critical to understand the relationship between those groups, the marketing channels and their behavior on the site. Cohorts are a combination of organic traffic patterns and response to targeting via awareness strategies.</span></p>\n<h4>3) Campaign pages + nurture strategies:</h4>\n<p><span style=\"font-weight: 400;\">Knowing which combination of customer segments and content is the most successful allows you to push traffic to a specific set of pages tailored to drive conversions. And then, ideally, which nurture strategies drive them to return.  Developing predictability is a powerful marketing tool to drive your cohorts to where they will perform best and how to get them to return for more.</span></p>\n<h4><b>4) Personalization</b><span style=\"font-weight: 400;\"> </span></h4>\n<p><span style=\"font-weight: 400;\"> It’s great to know what key pages and components throughout the site are best to personalize and how it impacts their journey. For each segment, we’d like to understand and show how each page/component performs as we personalize them. Essentially making a single page more valuable. </span></p>\n<p><span style=\"font-weight: 400;\"><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-5092\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/img_6328a6474b86e.\" alt=\"\" width=\"128\" height=\"61\" /></span></p>\n<p><span style=\"font-weight: 400;\">O3 has developed a strong partnership with <a href=\"https://heap.io/\">Heap.io</a>, a digital journey analytics tool. Leveraging our strategic experience and Heap’s incredibly powerful platform, we can deliver an insights program to help you drive a more relevant, personal, and valuable relationship with your customers, leading to higher lifetime value and loyalty.</span></p>\n<p><span style=\"font-weight: 400;\">Heap is the future of digital insights. Heap’s low-code, easy-to-use digital analytics software illuminates key digital behaviors and pinpoints valuable quantitative and qualitative insights so teams can quickly act with confidence and create the best possible digital experiences. Over 8,000 businesses trust Heap to increase revenue, improve conversion, accelerate decision-making, and drive business impact at scale.</span></p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "You monitor your kids’ behavior, why wouldn’t you monitor your customers’?",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Customer journey analytics is one of the keys to unlocking insights based on your customers’ actions. O3 partners with our clients to drive better customer experiences and increase ROI."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      3451,
+      3444,
+      6185,
+      3485
+    ],
+    "author": ""
+  }
+}

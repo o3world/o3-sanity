@@ -1,0 +1,455 @@
+{
+  "_id": "perspective-wp-6185",
+  "_type": "perspective",
+  "title": "CX vs. UX: Why all brands need a strategic approach",
+  "slug": {
+    "_type": "slug",
+    "current": "cx-vs-ux-why-all-brands-need-a-strategic-approach"
+  },
+  "excerpt": "Customer Experience (CX) and User Experience (UX) are both crucial aspects to a brand's success. However, many don't understand the difference. Read on to learn more about UX vs. CX.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-15",
+      "_key": "cat-15"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-62",
+      "_key": "cat-62"
+    }
+  ],
+  "publishedAt": "2023-01-10T21:44:31Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights-3.jpg"
+    },
+    "alt": "CX vs. UX: Why all brands need a strategic approach"
+  },
+  "body": [
+    {
+      "_key": "k0000",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In a climate of rapid transformation, brands have experienced increased pressure to rethink and improve engagement with customers.",
+          "_key": "k0001"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "To meet this demand, Customer Experience (CX) and User Experience (UX) are both crucial aspects to a brand’s success. It’s paramount for a company to understand the key differences between CX and UX.",
+          "_key": "k0003"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "According to Forrester, customers pay 4.5 times more if a brand’s CX is strong. Additionally, a brand who provides great customer experiences expands 5 times faster than those who have not focused on their CX strategy.",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "User Experience (UX):",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/cxvux-graphic1-1.png"
+      },
+      "alt": "Hand holding up mobile app with a simplified user experience.",
+      "_key": "k0008"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The UX is specific to how an end-user interacts with a company product- a website, software, app, etc. Let’s look at UX through the lens of the image above (graphic 1). This customer is directly interacting with a mobile application to perform a task or service. Information architecture, visual hierarchy, navigation, and learnability are at the forefront of the UX design process.",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "For example, if the customer in graphic 1 experiences difficulty navigating the application or adding an item to their cart, that user would be experiencing a poor UX.",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Customer Experience (CX):",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/cxvux-graphic2.png"
+      },
+      "alt": "Customer using app to make a purchase in store.",
+      "_key": "k0015"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The UX is only one aspect of the larger ecosystem of a CX strategy. The customer experience encapsulates all channels, products and services a consumer interacts with, both digital and physical, and how they feel about the brand overall. A strong CX strategy boosts overall brand perception and increases customer loyalty.",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A strong CX strategy encompasses a customer’s perception of an organization’s:",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Advertising strategy",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Brand reputability",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Customer service",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Pricing",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Marketing website",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Customer portals",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Delivery methods",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Product usability",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "General sales process at large",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The customer experience strategy goes well beyond that initial touchpoint (as seen in graphic 1), also focusing on the consumer’s experience with the organization as a whole. An improved CX results in better ways to communicate and creates seamless experiences. And of course, the easier it is to interact with your brand, the more loyalty your customers will show.",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "How do I get started improving my brand’s CX strategy?",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0042",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Before a brand can rethink and reorganize their CX, a deep understanding of the existing customer journey is required to drive these changes. Uncovering how the brand is currently experienced by customers should be the foundation to establishing a vision for the future. Similarly, a 360-degree view of your organizational mission, values, and processes should be agreed upon and widely understood. Once a brand has successfully collected insight with vision into the future, implementation can start to take place.",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0044",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "How do I know if I need to improve my brand’s CX strategy?",
+          "_key": "k0045"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0046",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Most, if not all, brands have the opportunity to improve their CX. Additionally, many brands have not implemented a strategy at all. A survey by Bloomberg Businessweek found that “delivering a great customer experience” has become a top strategic objective. O3 experts have created the following CX maturity model to accurately assess and grade a brand’s CX strategy, taking into account all touchpoints that contribute to a customer’s experience with a brand.",
+          "_key": "k0047"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/O3-_-CX-Maturity-Workshop-_-CHHJ-092022-3.jpg"
+      },
+      "alt": "",
+      "_key": "k0048"
+    },
+    {
+      "_key": "k0049",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "So, why does my brand need to implement a CX strategy?",
+          "_key": "k0050"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0051",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In short, those who do not invest in a CX strategy are neglecting to analyze how each touchpoint interacts with the customer journey at large. Meaningful experiences foster loyal customers. Loyal customers have a direct impact on your brand’s reputation and ROI.",
+          "_key": "k0052"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0053",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 is a CX consultancy, equipped with an expert team to drive strategy and deliver results. Check out O3 case studies to see how we have helped to transform brands or contact O3 directly to learn more about our CX assessment.",
+          "_key": "k0054"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:6185",
+    "extractedAt": "2026-08-01T00:10:02.400Z"
+  }
+}

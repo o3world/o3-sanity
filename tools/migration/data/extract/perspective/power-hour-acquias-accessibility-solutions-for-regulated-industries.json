@@ -1,0 +1,74 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:02.399Z"
+  },
+  "wpId": 6194,
+  "slug": "power-hour-acquias-accessibility-solutions-for-regulated-industries",
+  "title": "Power hour: Acquia’s accessibility solutions for regulated industries",
+  "dateGmt": "2023-01-10 21:59:13",
+  "modifiedGmt": "2023-04-21 12:44:09",
+  "authorId": 16,
+  "categoryIds": [
+    63,
+    10,
+    11
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/01/A11y-power-hour.png",
+    "alt": "Accessibility graphic featuring double AA compliance."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Power hour: Acquia’s accessibility solutions for regulated industries | O3",
+    "descriptionOverride": "O3 and Acquia hosted an accessibility power hour webinar. Watch the recording to learn more about accessible digital experiences.",
+    "descriptionRendered": "O3 and Acquia hosted an accessibility power hour webinar. Watch the recording to learn more about accessible digital experiences.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/power-hour-acquias-accessibility-solutions-for-regulated-industries/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Power hour: Acquia’s accessibility solutions for regulated industries",
+      "heading_level": "h2",
+      "heading_tag": "h1",
+      "add_description": true,
+      "description": "Join us on 1/18 for an accessibility power hour! "
+    },
+    "header_background": {
+      "icon": {
+        "value": "5755",
+        "image": "5755"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>In industries with strict rules and regulations, navigating accessibility standards and best practices can become even more complex.</h3>\n<p>Join O3 and Acquia for a power hour to discuss the ins and outs of Accessible digital experiences and how they specifically apply in regulated industries. Bring your questions and thoughts, as we’ll open up the floor after a short presentation.</p>\n<h4>Date:</h4>\n<p>1/18</p>\n<h4>Time:</h4>\n<p>12PM ET</p>\n<h4>Presenters:</h4>\n<p>Brian Crumley (UX Engineer), O3</p>\n<p>Alison Voghel (Sr. UX Designer), Acquia</p>\n<h4><a href=\"https://www.youtube.com/watch?v=n_jOhdxWJ3M\">Watch the webinar recording here</a></h4>\n<p>Please reach out to Maddie Boucher with any questions or comments.</p>\n"
+      }
+    ],
+    "related_articles": [
+      3485,
+      6194,
+      5173,
+      4118
+    ],
+    "author": ""
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "_id": "perspective-wp-1415",
+  "_type": "perspective",
+  "title": "We've expanded our space!",
+  "slug": {
+    "_type": "slug",
+    "current": "weve-expanded-our-space"
+  },
+  "excerpt": "We have some exciting news: we've expanded our workspace! As many of you know we're located on Frankford Ave. (right above the La Colombe) and have acquired an additional 1,600 square feet at the back of our office.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    }
+  ],
+  "publishedAt": "2018-07-03T16:55:32Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/05/O3-website-imagery_-Insights-11.jpg"
+    },
+    "alt": "Greyscale, exterior shot of O3 office with logo on brick."
+  },
+  "body": [
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Keith Scandone",
+          "_key": "k0004"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", our CEO, explains the reason for our growth has been a combination of inside existing account relationships and new business partnerships. The biggest differentiator has been our ability to be the consultant and deliverer on strategy, design and development work.",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.o3world.com/about/team/keith-scandone/"
+        }
+      ],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As we’re in the process of growing, we’re looking to hire an additional three positions in various departments (check our ",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "careers page",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ") for more!",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.o3world.com/careers/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "For more on our growth, read the latest in ",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Technical.ly Philly",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://technical.ly/philly/2018/06/21/on-the-market-03-world-glassdoor-power-home-remodeling/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:1415",
+    "extractedAt": "2026-08-01T00:10:25.428Z"
+  }
+}

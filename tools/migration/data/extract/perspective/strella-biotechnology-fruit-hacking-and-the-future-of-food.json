@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:20.527Z"
+  },
+  "wpId": 2892,
+  "slug": "strella-biotechnology-fruit-hacking-and-the-future-of-food",
+  "title": "Strella Biotechnology: Fruit-hacking and the future of food",
+  "dateGmt": "2019-10-22 22:05:36",
+  "modifiedGmt": "2023-02-03 22:26:01",
+  "authorId": 16,
+  "categoryIds": [
+    7,
+    8
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/05/O3-website-imagery_-Insights-11.jpg",
+    "alt": "Greyscale, exterior shot of O3 office with logo on brick."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Strella Biotechnology: Fruit-hacking and the future of food | O3",
+    "descriptionOverride": "Katherine Sizov’s biotech startup has been sweeping the student innovation competition circuits, and her latest win was the Venture Award at 1682.",
+    "descriptionRendered": "Katherine Sizov’s biotech startup has been sweeping the student innovation competition circuits, and her latest win was the Venture Award at 1682.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/strella-biotechnology-fruit-hacking-and-the-future-of-food/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3><a href=\"https://www.linkedin.com/in/katherine-sizov-2b822b126/\" target=\"_blank\" rel=\"noopener noreferrer\">Katherine Sizov’s</a> biotech startup has been sweeping the student innovation competition circuits, and her latest win was the Venture Award at 1682, O3 World’s <a href=\"https://www.o3world.com/news/1682-the-business-of-conference-innovation/\" target=\"_blank\" rel=\"noopener noreferrer\">business of innovation conference</a>.</h3>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone size-medium wp-image-7023\" src=\"https://www.o3world.com/wp-content/uploads/2019/10/102219-Strella-Biotechnology-640x360.jpeg\" alt=\"Strella biotechnology apples\" width=\"640\" height=\"360\" srcset=\"http://www.o3world.com/wp-content/uploads/2019/10/102219-Strella-Biotechnology-640x360.jpeg 640w, http://www.o3world.com/wp-content/uploads/2019/10/102219-Strella-Biotechnology-1024x576.jpeg 1024w, http://www.o3world.com/wp-content/uploads/2019/10/102219-Strella-Biotechnology-768x432.jpeg 768w, http://www.o3world.com/wp-content/uploads/2019/10/102219-Strella-Biotechnology-1536x864.jpeg 1536w, http://www.o3world.com/wp-content/uploads/2019/10/102219-Strella-Biotechnology-2048x1152.jpeg 2048w, http://www.o3world.com/wp-content/uploads/2019/10/102219-Strella-Biotechnology-48x27.jpeg 48w, http://www.o3world.com/wp-content/uploads/2019/10/102219-Strella-Biotechnology-1280x720.jpeg 1280w\" sizes=\"auto, (max-width: 640px) 100vw, 640px\" /></p>\n<p>Sizov, founder and CEO of <a href=\"https://www.strellabiotech.com/#problem\" target=\"_blank\" rel=\"noopener noreferrer\">Strella Biotechnology</a>, saw a big problem in the fruit-packing industry: An estimated 40% of produce is wasted due to spoilage before it even reaches consumers’ grocery bags. It seemed to Sizov that the industry did not recognize the issue as an acceptable margin of loss, but she was certain there was a way to improve both the financial and environmental impacts.</p>\n<p>“So,” she laughed, “we figured out how to hack a fruit!”</p>\n<p>Keith Scandone, partner and CEO of O3 World, sat down with Sizov after her win at 1682 to talk about Strella Biotech, the environment, and how to win as a young entrepreneur.</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone size-medium wp-image-7025\" src=\"https://www.o3world.com/wp-content/uploads/2019/10/102219-Strella-Katherine-918x516-1-640x360.jpeg\" alt=\"Sizov, founder and CEO of Strella Biotechnology\" width=\"640\" height=\"360\" srcset=\"http://www.o3world.com/wp-content/uploads/2019/10/102219-Strella-Katherine-918x516-1-640x360.jpeg 640w, http://www.o3world.com/wp-content/uploads/2019/10/102219-Strella-Katherine-918x516-1-768x432.jpeg 768w, http://www.o3world.com/wp-content/uploads/2019/10/102219-Strella-Katherine-918x516-1-48x27.jpeg 48w, http://www.o3world.com/wp-content/uploads/2019/10/102219-Strella-Katherine-918x516-1.jpeg 918w\" sizes=\"auto, (max-width: 640px) 100vw, 640px\" /></p>\n<h4><strong>Tell us about the origins of your company. How did you become interested in food waste and solving that problem?</strong></h4>\n<p>Somewhere between my sophomore and junior years of college, I realized my passion was in application-based technologies—things I could see people using in my lifetime. I wasn&#8217;t ready to pursue an academic career so I thought about how to apply my skills to solve problems around me.</p>\n<p>All of my research had been based in neuroscience, so I started reading more broadly about other industries and fields. I read this crazy statistic that 40% of fresh produce is wasted before it’s consumed. I thought, “Clearly this was a huge problem that still had no solution.” So I decided I would give it a try.</p>\n<p>I started with apples, which can sit in cold storage for over a year before you buy them at the store, but two out of five of them end up spoiling during storage or shipping. We invented an ethylene-detection device that sits in the cold storage room of the packing house. It alerts us of an increase in ethylene production, which is the chemical that starts the ripening process, essentially giving the packing house a countdown to get the fruit onto grocery store shelves before it spoils.</p>\n<p>In October 2018, we got the first sensors into a packing house in Washington state that was willing to test our product, and on January 5th, the sensors detected an ethylene spike in one of the storage rooms. We told the client to pull the fruit immediately. They weren’t planning on distributing those apples to stores until July, but because our sensors told them the fruit was ready to ship, the client saved over $400k worth of apples in a single storage room.</p>\n<h4><strong>Why does Strella focus on ethylene data?</strong></h4>\n<p>Ethylene is essentially the first signal a fruit emits when it is about to start ripening. It’s saying, “Hey! I’m ready to ripen!” This happens before any other physical changes are apparent.</p>\n<p>We target the most popularly consumed fruits that produce ethylene for ripening—apples, pears, bananas, kiwi, avocado, tomatoes, and onions. We focus on fruit that ripens the fruit next to it—like when you put an unripe banana next to a ripe one, it ripens faster because it is emitting ethylene.</p>\n<p>Since we can read the ethylene signal, we know the fruit is going to ripen before it starts turning mushy or getting too sweet or discolored. That way, we can get the fruit to its final destination before it spoils.</p>\n<h4><strong>How do you leverage the Internet of Things (IoT)?</strong></h4>\n<p>Our sensors live in oxygenless, extremely cold storage rooms. If you were to walk in you would die. This basically makes it impossible or very costly for a human to gather any sort of data. So, IoT is extremely critical on our initial market front because we have all these devices that need to communicate wirelessly and send data to us. In the future, we’ll rely on IoT even more, because we want our sensors to move along the supply chain. IoT will become absolutely necessary for us to receive information while the fruit is on the road.</p>\n<h4><strong>Can you explain the social impact of Strella and how the company addresses some of the UN&#8217;s sustainability development goals?</strong></h4>\n<p>This is a big focus for us and we’re particularly proud that there are two wins to using our technology to reduce food waste. First, our clients generate more margins on their products because their distribution is more targeted and efficient. But most importantly to us, we are taking an active part in helping the environment.</p>\n<p>In the U.S., energy that goes into the production, harvesting, transporting, and packaging of food that just ends up in the trash generates more than 3.3 billion metric tons of carbon dioxide. Then, the food waste in landfills is responsible for 23% of all methane emissions and 4.5% of all U.S. greenhouse gas emissions. We think about cars being bad for the environment because of their carbon emissions, but food waste is producing much, much more than transportation. We also waste a huge amount of water and land in order to create food that ultimately just ends up in the trash.</p>\n<p>With Strella, we are addressing the UN’s sustainability development goal <a href=\"https://www.un.org/sustainabledevelopment/sustainable-consumption-production/\" target=\"_blank\" rel=\"noopener noreferrer\">(UN SDG) #12</a>, which is the goal for sustainable consumption and production. We target reducing food waste within the supply chain, which also means the need for overproduction can be dramatically reduced.</p>\n<p>We’re also addressing <a href=\"https://www.un.org/sustainabledevelopment/hunger/\" target=\"_blank\" rel=\"noopener noreferrer\">UN SDG #2</a> and <a href=\"https://www.un.org/sustainabledevelopment/health/\" target=\"_blank\" rel=\"noopener noreferrer\">#3</a>, for zero hunger and good health and well being. So many different parts of global communities still don&#8217;t have reliable access to fresh produce. By mitigating losses and increasing the amount of available produce in the supply chain, we can work toward building healthy, well-fed communities.</p>\n<p>Plus, over 7% of global water consumption is wasted on growing produce that never makes it into our bodies. By reducing overproduction, we can work on ameliorating the huge amounts of water we waste, which is in keeping with <a href=\"https://www.un.org/sustainabledevelopment/water-and-sanitation/\" target=\"_blank\" rel=\"noopener noreferrer\">UN SDG #6</a>.</p>\n<h4><strong>Now that you have won the Ventures Award, what&#8217;s next for your company?</strong></h4>\n<p>We just finished deploying in storage rooms (controlled atmosphere packaging facilities) throughout the U.S. Our current customers represent about 20% of the entire U.S. market for apples and pears.</p>\n<p>Next, we’ll be working on a pallet-level sensor, which makes sure that when you go to a grocery store all the fruits on display are perfectly ready for you to consume. We want your avocado to be ripe just in time for your party when you need to start making the guacamole! We want to deliver the highest-quality fruit to people in order to reduce food waste on the consumer end as well.</p>\n<h4><strong>You&#8217;ve been very successful at several innovation competitions. What advice do you have for entrepreneurs?</strong></h4>\n<p>Realize it&#8217;s not that big of a risk. People make starting a business seem like this huge crazy thing, but most people already have access to some capital and networks of people who can help. Plus, there are conferences like <a href=\"https://1682conf.com\">1682</a> that give you an opportunity to pitch your business.</p>\n<p>There are so many resources out there. Look at the opportunities around you and leverage what’s available: grants from the government, pitch competitions, speaking opportunities, companies you can partner with to work on your own idea.</p>\n<p>Think creatively about how to advance any innovation or idea you may have. If you take your time and do your research, you can build a company that won&#8217;t ruin your life with the traditional bootstrapping story.</p>\n<h4><strong>What was your favorite session at 1682?</strong></h4>\n<p>I liked the talk given by <a href=\"https://www.o3world.com/news/movers-shakers-innovators-1682-speaker-spotlight-part-2/\">Edy Liongosari</a>, the Chief Research Scientist at Accenture. People often think of the future as something that is static and inevitable, but Edy did a good job of illustrating the point that it is up to us to make the future. We are influenced by what we&#8217;re reading and listening to, and the ideas we have because of those influences. What truly shapes the future is what we think it will be; what we think we can be.</p>\n<h4><strong>What future are you creating with Strella?</strong></h4>\n<p>We aim to provide all the answers about fruit quality throughout every segment of the supply chain, from the time a fruit is picked to the time you eat it! With our technology, we want to help companies increase their margins, reduce overproduction, and to make the fresh produce industry more sustainable for a healthier planet.</p>\n<p>Also, we are starting to do an official funding round, so if anyone is interested, they can contact me here: <a href=\"mailto:katya@strellabiotech.com\">katya@strellabiotech.com</a>.</p>\n<p>Hearing from founders like Katherine makes us even more excited about our partnership program, <a href=\"https://www.o3world.com/ventures/\">Ozone Ventures.</a> Take some time to read about how we&#8217;re investing our own expertise and money into people, products, and services we believe in.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Strella Biotechnology: Fruit-hacking and the future of food",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Keith Scandone, partner and CEO of O3 World, sat down with Sizov after her win at 1682 to talk about Strella Biotech, the environment, and how to win as a young entrepreneur."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      3357,
+      4896,
+      2018
+    ],
+    "author": ""
+  }
+}

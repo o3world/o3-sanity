@@ -1,0 +1,324 @@
+{
+  "_id": "perspective-wp-9136",
+  "_type": "perspective",
+  "title": "Embracing disruptive thinking in enterprise teams",
+  "slug": {
+    "_type": "slug",
+    "current": "embracing-disruptive-thinking-enterprise-teams"
+  },
+  "excerpt": "Senior Strategist shares how to transform your enterprise with disruptive thinking, strategic innovation, and AI integration to turn challenges into opportunities and achieve long-term success.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-9147"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-75",
+      "_key": "cat-75"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-15",
+      "_key": "cat-15"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    }
+  ],
+  "publishedAt": "2024-07-24T16:03:14Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/07/O3-website-imagery_-Perspectives-54.jpg"
+    },
+    "alt": "Brady Halligan"
+  },
+  "body": [
+    {
+      "_key": "k0001",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In today’s rapidly evolving technological landscape, simply applying AI to existing problems does not equate to true innovation. Embedding disruptive thinking within enterprise teams requires a structured approach to iterative problem-solving and a commitment to evolving processes, procedures, and skill sets. This begins with a thorough understanding of the existing challenges faced by the team and identifying opportunities to generate and execute new ideas. Throughout this journey, there will be resistance and legacy ways of thinking and working that can stunt progress. To be successful in this shift, leaders need to integrate change management strategies with human-centered design activities that are tailored to changing mindsets, changing behaviors, and ultimately changing the business.",
+          "_key": "k0002"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Mindset change",
+          "_key": "k0004"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " focuses on aligning leadership to a common vision of success and identifying key themes, issues, and priority areas. By engaging in collaborative activities such as quiet storming, affinity mapping, waterline risk assessment, and visualizing pain points within the operating system, leadership can achieve a unified vision and set the stage for innovation.",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Behavior change",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " then involves engaging stakeholders in empathy-led processes to better understand and address the needs of users and customers. Techniques like empathy mapping, Jobs To Be Done (JTBD) Value Proposition, How Might We…? questions, and brainwriting facilitate the generation of a wide range of innovative solutions. This work shifts the team’s mindset and behavior towards creative and empathetic problem-solving.",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Finally, ",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "business change",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " means that new capabilities must be designed to improve financial and operational outcomes. This involves developing detailed concept designs and action plans, implementing feedback loops for continuous improvement, and promoting ongoing innovation through collaborative tools and iterative development processes. This phase ensures that innovative ideas are translated into actionable plans that drive tangible business results.",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Redefining KPIs for innovation",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As innovation processes begin to take shape, one of the key steps in fostering an innovative culture is developing Key Performance Indicators (KPIs) that go beyond traditional measures of efficiency. Traditional KPIs often prioritize output and speed, which can inhibit creativity and long-term innovation. Instead, KPIs should be designed to encourage the thoughtful development of ideas. For example, an internal IT team might implement KPIs that track the number of innovative automation scripts developed, the diversity of problem-solving approaches proposed, and the success rates of these new solutions. This shift from efficiency to creativity helps cultivate an environment where experimentation is valued.",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Leveraging AI for strategic thinking",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "While we don’t believe in simply throwing AI at a problem, it can serve as a powerful accelerator for strategic thinking by automating mundane tasks, thus freeing up team members to focus on more strategic and creative endeavors. In an enterprise setting, AI can automate routine data analysis, allowing the team to dedicate more time to focus on transforming that analysis into ideas that can drive business strategy. This not only enhances operational efficiency but also promotes a culture of strategic thinking and innovation.",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Mapping internal processes and identifying pain points",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Understanding and mapping internal processes are essential for targeting innovation efforts effectively. By visualizing these processes, functional and cross-functional teams can identify inefficiencies across complex end-end experiences and target areas ripe for innovation. For example, a finance team might map out the entire expense reporting process to identify bottlenecks and pain points. Addressing these issues with innovative solutions, such as AI-driven expense tracking and automated approval workflows, can significantly improve internal operations and employee satisfaction.",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Cultivating a culture of continuous improvement",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Creating a culture of continuous improvement involves equipping teams with the right tools, forums, and processes to regularly assess and address problems. Implementing feedback loops, collaborative tools, and iterative development processes encourages a mindset of continuous innovation. An agile framework, for instance, allows teams to quickly test and refine ideas, ensuring that new solutions are both practical and effective. This approach not only fosters a culture of innovation but also ensures that the organization can adapt and evolve in response to changing needs.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The intersection of culture and tools",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Ultimately, embedding disruptive thinking into an enterprise team is as much about cultural transformation as it is about adopting new tools and processes. It requires changing the mindset and behavior of teams through experiential learning and real-world problem-solving. By involving team members in the identification and resolution of current challenges, and providing them with the necessary tools and support, organizations can cultivate a sustainable culture of innovation that drives long-term success. This holistic approach ensures that innovation is not just a buzzword but a fundamental aspect of the organization’s DNA.",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Brady Halligan, O3 Senior Strategist",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Brady Halligan is a Senior Strategist at O3",
+          "_key": "k0036"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", driving innovation and growth through human-centric solutions. With experience from startups to Fortune 10 companies, he excels in addressing client pain points and delivering exceptional results. Brady’s expertise spans diverse sectors, including Life Sciences, Higher Ed, Financial Services, and more. At O3, he focuses on creating strategic, impactful changes for clients. Brady holds an M.B.A. in Strategic Design from Thomas Jefferson University and resides in Philadelphia with his wife, Jennifer, and their dog, Lloyd.",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/bradyhalligan/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "Discover how to drive innovation in your enterprise by embedding disruptive thinking, leveraging AI, and fostering a culture of continuous improvement. Transform challenges into opportunities and achieve long-term success."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:9136",
+    "extractedAt": "2026-08-01T00:09:37.819Z"
+  }
+}

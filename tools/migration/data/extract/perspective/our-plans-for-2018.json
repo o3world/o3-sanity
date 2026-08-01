@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:25.430Z"
+  },
+  "wpId": 799,
+  "slug": "our-plans-for-2018",
+  "title": "Looking ahead: Our plans for 2018",
+  "dateGmt": "2018-02-02 17:30:47",
+  "modifiedGmt": "2023-02-02 16:06:24",
+  "authorId": 16,
+  "categoryIds": [
+    10
+  ],
+  "excerpt": "This past week we held the annual State of the Ozone where we recapped the health and success of the agency, and looked ahead to the coming year. With that, we’re excited to share some of the plans we have for the upcoming year and who we'll be working alongside.",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-18.jpg",
+    "alt": "O3 pattern"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Looking ahead: Our plans for 2018 | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/our-plans-for-2018/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>This past week we held the annual State of the Ozone where we recapped the health and success of the agency, and looked ahead to the coming year. Most of our discussion highlighted the work we’ve done with clients, the processes we’ve implemented to improve and the continued growth and expansion of our team.</h3>\n<p>With that, we’re excited to share some of the plans we have for the upcoming year. We&#8217;re diving in head first into growth and expansion in ourselves and in the community. This year we plan on giving close to $20,000 in community contributions and partnering with organizations who are like-minded in our mission to foster innovation and be a part of the Philly community.</p>\n<p>We&#8217;re proud to partner with these organizations in various capacities:</p>\n<ul>\n<li><a href=\"https://womenintechsummit.net/\" target=\"_blank\" rel=\"noopener noreferrer\">Women in Tech Summit</a> &#8211; through a combination of monetary donations and mentorship hours, we’re able to inspire, educate and connect with women in technology. Sweet bonus: our very own dev, Jocelyn Harper, will be a speaker at the summit in Philadelphia.</li>\n<li><a href=\"http://www.awesomefoundation.org/en/chapters/philadelphia\" target=\"_blank\" rel=\"noopener noreferrer\">Awesome Foundation</a> &#8211; we’re proud to support the Philly chapter and fund awesome projects throughout the city with $1,000 micro-grants</li>\n<li><a href=\"https://phillychi.acm.org/\" target=\"_blank\" rel=\"noopener noreferrer\">PhillyCHI</a> &#8211; every year, we sponsor the chapter to put on free, monthly programming and hold its annual design slam competition.</li>\n<li><a href=\"https://btsphilly.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Beat the Streets</a> &#8211; through our sponsorship, we’re committed to helping establish youth wrestling programs and foster skills that are needed to thrive off the wrestling mat.</li>\n<li><a href=\"https://2017.barcampphilly.org/\" target=\"_blank\" rel=\"noopener noreferrer\">BarCamp</a> &#8211; every year, we sponsor the user-generated “unconference” for those interested in giving a talk or learning more about the collaborators around the Philadelphia-area.</li>\n<li>Greensgrow Farms &#8211; we support Greensgrow through monetary donations and volunteer hours to rethink how our community can be more sustainable.</li>\n</ul>\n<p>We&#8217;re also heavily investing in the growth of our team. Check out our open positions on our <a href=\"/careers\">career page</a> for more information.</p>\n<p>We’ve also got some big plans for events in the coming months and even bigger things for our own brand and the O<sub>3</sub> Labs program. We can’t quite fully share yet, but stay tuned for what we’ve got in store.</p>\n<p>So, here’s to more strategizing, creating, doing in the coming year!</p>\n<p>Want to learn more about who we are, what we do and what makes us tick? Drop us a line below. And as always, make sure to stay up-to-date on our Insights page and check us out on social.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Looking ahead: Our plans for 2018",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "O3 is looking forward to a big year ahead."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      6193,
+      5014,
+      6191,
+      3708
+    ],
+    "author": ""
+  }
+}

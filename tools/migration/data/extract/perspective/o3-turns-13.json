@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:25.429Z"
+  },
+  "wpId": 841,
+  "slug": "o3-turns-13",
+  "title": "O3 turns 13!",
+  "dateGmt": "2018-05-01 19:59:12",
+  "modifiedGmt": "2023-02-02 16:04:31",
+  "authorId": 16,
+  "categoryIds": [
+    7,
+    10
+  ],
+  "excerpt": "We're celebrating our birthday/anniversary this month and we've finally hit those teenage years with the big 1-3!",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/05/O3-website-imagery_-Insights-11.jpg",
+    "alt": "Greyscale, exterior shot of O3 office with logo on brick."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "O3 turns 13! | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/o3-turns-13/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>We&#8217;re celebrating our birthday/anniversary this month and we&#8217;ve finally hit those teenage years with the big 1-3!</h3>\n<h4>We&#8217;ve come a long way since our founding, here are a few facts you probably didn&#8217;t know about us:</h4>\n<ul>\n<li>Now that you&#8217;ve done the math, O3 was founded in 2005.</li>\n<li>Wondering what our name stands for? Well, O3 represents the three sections of the business: marketing, design, and technology.</li>\n<li>We originally began as a brand communications company with a technology slant.</li>\n<li>We switched up our office location and in 2012, we moved from the Piazza at Northern Liberties to our current home on Frankford Ave.</li>\n<li><a href=\"https://www.o3world.com/about/team/\">The team</a> has grown from under 10 employees in 2005 to just over 30 of us today.</li>\n</ul>\n<p>To celebrate, we wanted to see what some of our staff members looked like at 13. Think you can spot a member of your project team or one of our c-suite executives?</p>\n<p>Have a favorite O3 memory through the years? We&#8217;d love to hear it! Share with us below.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "O3 turns 13!",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "We've finally hit those teenage years with the big 1-3!"
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      781,
+      3651,
+      4859,
+      5014
+    ],
+    "author": ""
+  }
+}

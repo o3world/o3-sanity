@@ -1,0 +1,70 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:32.180Z"
+  },
+  "wpId": 9675,
+  "slug": "eagles-fly-high-with-ai-and-analytics",
+  "title": "Eagles fly high with AI and analytics",
+  "dateGmt": "2025-02-06 14:52:36",
+  "modifiedGmt": "2025-02-20 20:40:28",
+  "authorId": 16,
+  "categoryIds": [
+    75
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2025/02/Flyeaglesfly.webp",
+    "alt": "Eagles fly high with AI and analytics"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Eagles fly high with AI and analytics | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/eagles-fly-high-with-ai-and-analytics/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Eagles fly high with AI and analytics",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "AI is transforming sports by enhancing fan engagement, optimizing team operations, and giving organizations like the Eagles a competitive edge on and off the field."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>Remember when going to a game meant just buying a ticket and showing up? Those days are long gone. The sports world is embracing AI in ways that transform both how fans experience games and how teams run their operations. At O3, we&#8217;re seeing firsthand how AI is reshaping sports, making everything from buying tickets to running social media more intelligent and personal. And given that our Philadelphia Eagles are in the Super Bowl this week, (GO BIRDS), and that we’re headquartered in Philly, we thought it would be the perfect time to highlight how AI is changing the game.</p>\n<h3>How AI is changing the game in sports: A look at fan experience and operations</h3>\n<p>It’s no surprise the Birds are back in the Super Bowl &#8211; for years they’ve been one of the best teams at adding talent through the draft and trades. One of the reasons? The Eagles have <a href=\"https://www.philadelphiaeagles.com/news/eagles-partner-with-kraft-analytics-group-to-build-centralized-data-warehouse\">embraced the cutting edge of sports</a> technology by deeply integrating AI and analytics into their game plan. They&#8217;re not just crunching numbers; they&#8217;re using sophisticated algorithms to predict player performance, optimize game strategies, and even scout new talent. This approach has turned the Eagles into a data-driven powerhouse, where every play and player movement is analyzed to give them that razor-sharp edge on the field. It&#8217;s like they&#8217;ve got a crystal ball, but instead, it&#8217;s powered by a blend of tech wizardry and football savvy.</p>\n<h3>Making every fan feel like a VIP</h3>\n<p>Sports fans are a different breed &#8211; (we’re looking at you, Philly). Supporting your team isn&#8217;t just a hobby—it&#8217;s part of who you are. That&#8217;s why one of the most exciting things about AI in sports is how it can make every fan&#8217;s experience feel special and tailored just for them.</p>\n<p>Think about getting notifications for games that perfectly fit your schedule, or seat recommendations based on your past preferences. During those inevitable rough seasons (we all remember the Sixers&#8217; &#8220;Process&#8221; years), AI can help teams keep fans engaged through personalized content and community-building programs that maintain excitement even when the scoreboard doesn&#8217;t.</p>\n<p>And those frustrating game-day questions about parking or concessions? AI-powered assistants can handle them instantly, making the whole experience smoother for everyone involved.</p>\n<h3>Behind the scenes: Making teams work smarter</h3>\n<p>While fans see what happens on the field, there&#8217;s a whole other game happening behind the scenes. Sports organizations are complex operations, often juggling multiple systems and manual processes that slow things down. AI helps streamline everything from handling fan support tickets to creating social media content, letting staff focus on what they do best.</p>\n<p>For example, instead of manually sorting through thousands of customer inquiries, AI can categorize and route them automatically. Marketing teams can use AI to analyze fan data and create targeted campaigns that actually work. It&#8217;s about working smarter, not harder.</p>\n<h3>Finding your team&#8217;s unique voice</h3>\n<p>Every sports team needs its own personality. Just look at Gritty, the Flyers&#8217; mascot—who knew a googly-eyed orange monster could become such a beloved figure? While AI can&#8217;t create the next Gritty (thank goodness), it can help teams maintain their unique voice across all their communications, from social media to email campaigns.</p>\n<h3>Making game day worth leaving the couch</h3>\n<p>Let&#8217;s be honest—watching games at home has gotten really good. High-def TVs, instant replays, and your own bathroom with no lines? Not to mention, Amazon Prime’s predictive plays and<br />\nNext Gen stats for Thursday Night Football. Pretty tempting. That&#8217;s why teams are using AI to make coming to the stadium special again.</p>\n<p>Imagine getting personalized recommendations for the best pregame restaurants, or real-time updates about which concession stands have the shortest lines. AI can even help predict crowd patterns to improve security and reduce wait times, making the whole experience more enjoyable.</p>\n<h3>What&#8217;s next</h3>\n<p>This is just the beginning of AI&#8217;s impact on sports. As the technology evolves, we&#8217;ll see even more ways it can help teams connect with fans and run more efficiently. At O3, we&#8217;re excited to be part of this transformation, helping sports organizations create better experiences both in and out of the stadium.</p>\n<p>Want to learn how AI can help your sports organization? <a href=\"https://www.o3world.com/contact/\">Let&#8217;s talk</a>.</p>\n"
+      }
+    ],
+    "related_articles": [
+      8522,
+      9328
+    ],
+    "author": ""
+  }
+}

@@ -1,0 +1,233 @@
+{
+  "_id": "perspective-wp-4179",
+  "_type": "perspective",
+  "title": "Webinar recap: The business impact of creating accessible experiences",
+  "slug": {
+    "_type": "slug",
+    "current": "webinar-recap-the-business-impact-of-creating-accessible-experiences"
+  },
+  "excerpt": "How to introduce, evangelize and gain buy-in for accessibility within an organization.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-63",
+      "_key": "cat-63"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2021-03-06T01:52:35Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/07/O3-website-imagery_-Insights-7.jpg"
+    },
+    "alt": "Webinar recap: The business impact of creating accessible experiences"
+  },
+  "body": [
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Ashley Schroeder, a senior user experience designer at Southwest Airlines and Brian Crumley, a senior engineer at O3, recently shared advice with MindShift webinar attendees on how to introduce, evangelize and gain buy-in for accessibility within an organization. Whitney Quesenbery, co-founder of the Center for Civic Design moderated the discussion. Here are a few takeaways from the speakers.",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Brian Crumley on how to empower teams to think about accessibility",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "When O3’s accessibility program first started it was a grassroots approach. Any change that Brian could go through and put in place, if it was a simple alt tag or button text that was a win.",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Nowadays he finds opportunities to empower people in different roles to go through and take ownership of various aspects of accessibility. Part of what he’s tried to do is produce materials, create internal educational events and seek formal training for folks who are interested.",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Ashley Schroeder on showing value beyond ethics and inclusion",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Southwest Airlines is a federally regulated company. They’re regulated as an industry to be accessible. They have to be ADA compliant or else they face fines. That being said, Ashley shows the value of accessibility to the company as a whole by ensuring that the fines stay down.",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Other metrics include time to task completion and optimizing the digital self service portal to cut down on call volume.",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Watch the MindShift webinar live recording for more insights.",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.youtube.com/watch?v=iHUTPUe0Jno&t=145s"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Resources referenced",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The personas from ",
+          "_key": "k0022"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "A Web for Everyone",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://rosenfeldmedia.com/books/a-web-for-everyone/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "3 Considerations for running an empathy lab",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.o3world.com/news/3-considerations-for-running-an-empathy-lab/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    }
+  ],
+  "seo": {
+    "description": "A UX designer and engineer share advice on how to introduce, evangelize and gain buy-in for accessibility within an organization."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:4179",
+    "extractedAt": "2026-08-01T00:10:10.993Z"
+  }
+}

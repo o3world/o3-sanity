@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:26.487Z"
+  },
+  "wpId": 10304,
+  "slug": "ai-conversations-are-replacing-search",
+  "title": "From SEO to GEO: How AI is changing search strategy",
+  "dateGmt": "2025-07-18 16:46:19",
+  "modifiedGmt": "2025-08-14 20:11:43",
+  "authorId": 3,
+  "categoryIds": [
+    75,
+    15,
+    62
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2025/07/GEO-perspective.jpg",
+    "alt": "GEO perspective featured image"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "From SEO to GEO: How AI is changing search strategy | O3",
+    "descriptionOverride": "Discover how Generative Experience Optimization is transforming search strategies and what companies must know to adapt.",
+    "descriptionRendered": "Discover how Generative Experience Optimization is transforming search strategies and what companies must know to adapt.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/ai-conversations-are-replacing-search/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "GEO ",
+      "kicker_tag": "div",
+      "title": "From SEO to GEO: How AI is changing search strategy",
+      "heading_level": "h1",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "As AI-powered search experiences become the norm, traditional Search Engine Optimization (SEO) strategies are giving way to something entirely new: Generative Experience Optimization (GEO). "
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>We sat down with <a href=\"https://www.linkedin.com/in/dalebertrand\">Dale Bertrand</a>, founder of <a href=\"https://www.fireandspark.com/\">Fire&amp;Spark</a> and upcoming speaker at our <a href=\"http://1682conference.com\">1682 Conference</a> this fall, to explore how brands can navigate this fundamental shift in search. From rethinking content strategy around semantic richness to measuring success through incremental lift rather than traffic metrics, Dale shares insights on why GEO represents both a greater challenge and opportunity than traditional SEO—and what companies need to do today to stay visible in an AI-driven search landscape.</p>\n<h4>Question #1</h4>\n<p>You&#8217;ve been advising on the shift from traditional SEO to what many are calling GEO, or Generative Experience Optimization. What does that shift actually look like for brands, and why is it becoming so critical right now?</p>\n<h4>Answer</h4>\n<p>The shift from SEO to GEO represents a fundamental change in how brands approach search optimization. GEO is harder and less reliable than traditional SEO because it targets complex, stochastic, and rapidly evolving AI search platforms. So results are less predictable than traditional keyword-based ranking signals. However, GEO will be critical because GEO traffic converts better than traditional SEO traffic. Visitors arriving from AI-generated answers have higher intent since the AI has already the synthesized information for them. So they are further along in the decision-making process when they land on your website.</p>\n<h4>Question #2</h4>\n<p>What makes content perform well in AI-generated results, and how should brands rethink the way they create, structure, and maintain content to stay visible in this new landscape?</p>\n<h4>Answer</h4>\n<p>GEO is fundamentally a content strategy discipline, not a technical discipline. Success comes from creating the most semantically rich, comprehensive, and authentically helpful content on a topic. Marketers need to get used to thinking in &#8220;semantic space,&#8221; not keyword space. In other words, the goal is to create content that comprehensively covers a topic/concept and its adjacent topics to active more adjacent topics (to show up in more AI conversations) in the AI model&#8217;s abstract &#8220;latent space.&#8221;</p>\n<h4>Question #3</h4>\n<p>What technical strategies like schema, structured data, or internal linking matter most when it comes to making sure content is accessible and favored by AI systems?</p>\n<h4>Answer</h4>\n<p>While traditional technical SEO elements remain important, GEO success is fundamentally about content strategy rather than technical optimization. The focus should shift away from technical optimizations toward ensuring content is semantically rich and comprehensive rather than relying heavily on schema or structured data alone. With that said, there is some evidence that AI benefits from schema markup even though it doesn&#8217;t parse it directly. AI simply sees the schema markup as semantically significant structure in the document.</p>\n<h4>Question #4</h4>\n<p>How can marketers measure the success of GEO efforts, and what tools or methods are most effective for tracking whether content is showing up in AI outputs?</p>\n<h4>Answer</h4>\n<p>There&#8217;s a crucial measurement shift needed: move from traffic metrics to measuring incremental lift. Instead of focusing on top-of-funnel metrics, measure downstream business outcomes and demonstrate incrementally (i.e. show what happened WITH your GEO campaign versus what would have happened WITHOUT it). One tactic: Since direct attribution remains unresolved, combine quantitative and qualitative tracking by adding open-ended &#8220;How did you hear about us?&#8221; questions to lead gen forms to gain invaluable customer journey insights.</p>\n<h4>Question #5</h4>\n<p>As GEO becomes more central to digital strategy, how should internal teams evolve, and what new skills, roles, or workflows are essential?</p>\n<h4>Answer</h4>\n<p>Since GEO is a content strategy discipline, teams need to strengthen content creation capabilities focused on semantic richness and comprehensive topic coverage and insights from first-hand experience. Teams should also develop skills in using Large language models (LLMs) as market research tools to understand how AI perceives their brand, competitors, customer language, and authoritative sources.</p>\n<h4>Question #6</h4>\n<p>How can brands increase their authority signals in a way that boosts their presence in AI-generated content, and which external platforms or mentions matter most?</p>\n<h4>Answer</h4>\n<p>Use LLMs as intelligence gathering tools to understand how AI perceives your brand and the sources it deems authoritative. Focus on creating authentically helpful, comprehensive content that AI systems recognize as authoritative sources on topics. The key is semantic richness and genuine expertise and mentions in sources cited by AI, rather than traditional authority signals.</p>\n<h4>Question #7</h4>\n<p>What should companies be doing today to future-proof their content strategies across multiple AI platforms like Google, Bing, and ChatGPT?</p>\n<h4>Answer</h4>\n<p>Focus efforts on optimizing for ChatGPT for now and Google&#8217;s AI Mode for the near future. ChatGPT is the primary consumer AI platform currently generating referral traffic, while Google&#8217;s AI Mode is expected to become the most significant source of AI-driven traffic given Google&#8217;s dominance. We expect Google to switch over to AI mode as their default sometime in the next 12-18 months. However, proven, reliable strategies for generating revenue from GEO are still emerging. Current GEO tactics aren&#8217;t as reliable as established SEO playbooks are for traditional search engines.</p>\n<h3>Where to go from here</h3>\n<p>As the search landscape continues its evolution toward AI-driven experiences, the brands that thrive will be those that embrace GEO&#8217;s content-first philosophy today. While the strategies may be less predictable than traditional SEO, the opportunity is significant: higher-intent visitors who convert better because AI has already done the heavy lifting of information synthesis. The key is starting now—building semantically rich, comprehensive content while the playbook is still being written. Contact us us below to discuss how your digital experiences can evolve with search.</p>\n<p><script charset=\"utf-8\" type=\"text/javascript\" src=\"//js.hsforms.net/forms/embed/v2.js\"></script><br />\n<script>\n  hbspt.forms.create({\n    portalId: \"5879127\",\n    formId: \"8c59c4e7-c93b-48eb-aaa1-1626d453d946\",\n    region: \"na1\"\n  });\n</script></p>\n"
+      }
+    ],
+    "related_articles": [
+      4530,
+      4296,
+      8522
+    ],
+    "author": ""
+  }
+}

@@ -1,0 +1,296 @@
+{
+  "_id": "perspective-wp-8437",
+  "_type": "perspective",
+  "title": "Revolutionizing healthcare innovation with AI: A webinar with Robert S. Pugliese",
+  "slug": {
+    "_type": "slug",
+    "current": "revolutionizing-healthcare-innovation-with-ai-a-webinar-with-robert-s-pugliese"
+  },
+  "excerpt": "Join us on November 9th at 12 PM ET for a transformative webinar with healthcare innovator Robert S. Pugliese, exploring the power of AI and innovation in healthcare and the crucial role of patient and caregiver voices in shaping the future.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2023-10-23T16:08:45Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/10/O3-website-imagery_-Perspectives-1.jpg"
+    },
+    "alt": "Robert S. Pugliese headshot"
+  },
+  "body": [
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Healthcare has constantly evolved to meet the changing needs of patients and caregivers. With the advent of artificial intelligence and cutting-edge innovations, the healthcare industry is on the cusp of a major transformation. To shed light on this exciting journey of healthcare innovation, O3 is thrilled to present a captivating webinar on November 9, 2023, at 12 PM ET, featuring the insightful ",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Robert S. Pugliese",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", PharmD.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/rspugliese/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Meet our SME",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Robert Pugliese is the Director of Innovation Design at ",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Thomas Jefferson University",
+          "_key": "k0014"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and Jefferson Health, as well as the Co-Founder of the Health Design Lab. His unique blend of a design-studio ethos and a science-oriented discipline has created a space where innovation thrives in healthcare. With a background in Emergency Medicine, Rob’s journey is both fascinating and inspiring. Leveraging his skills during the COVID-19 pandemic, he spearheaded community-based testing and vaccination efforts in Philadelphia.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.jefferson.edu/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "But what truly sets Rob apart is his belief in the significance of patient and caregiver voices in healthcare improvement. As someone with insulin-dependent diabetes, he brings a unique perspective to his work, making it all the more relatable and compassionate. Rob’s contributions have not gone unnoticed, as he has been a distinguished speaker at national venues like SXSW and Stanford MedX and was honored as a Philadelphia Business Journal 40 Under 40 awardee in 2019.",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "However, Rob’s expertise extends beyond the confines of healthcare. In his spare time, he runs ",
+          "_key": "k0019"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "a weekly podcast",
+          "_key": "k0020"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and enjoys precious moments with his wonderful wife and three daughters. He’s not just a professional; he’s a family man with a heart for innovation and a commitment to improving lives.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.ashp.org/professional-development/ashp-podcasts/practice-journeys/the-health-design-lab-bank-vaults-and-rob-pugliese?loginreturnUrl=SSOCheckOnly"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Empowering Patients and Caregivers with AI and Innovation",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The ",
+          "_key": "k0025"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "webinar on November 9",
+          "_key": "k0026"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " promises to be an insightful journey into the world of healthcare innovation. We’ll explore the challenges and opportunities inherent in reshaping the healthcare industry and delve into the future of healthcare innovation, uncovering the limitless potential of AI and cutting-edge solutions. The focal point of this discussion will be the pivotal role of patient and caregiver voices in shaping the healthcare landscape. ",
+          "_key": "k0027"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "Register today!",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://o3world.zoom.us/webinar/register/WN_sOPaBx4MStWPspsgMUS6xw#/registration"
+        },
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://o3world.zoom.us/webinar/register/WN_sOPaBx4MStWPspsgMUS6xw#/registration"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "10-minute real-life application of this technology",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Additionally, the event will feature a 10-minute live demonstration hosted by O3 experts, Mike Gadsby and Josh Friedman. This demonstration will offer a hands-on glimpse into the world of healthcare innovation, showing how AI and other solutions are being harnessed to make a difference in the lives of patients and caregivers.",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The webinar will provide a platform for professionals in the healthcare industry not only to learn but also to engage in a meaningful dialogue about the present and future of AI in healthcare.",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "Register for the event today",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://o3world.zoom.us/webinar/register/WN_sOPaBx4MStWPspsgMUS6xw#/registration"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Webinar: Revolutionizing healthcare innovation with AI",
+    "description": "Discover the future of healthcare innovation with Robert S. Pugliese. Explore the impact of AI and patient voices on healthcare. Join us on November 9th at 12 PM ET."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:8437",
+    "extractedAt": "2026-08-01T00:09:47.912Z"
+  }
+}

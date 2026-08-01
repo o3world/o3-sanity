@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:10.997Z"
+  },
+  "wpId": 3717,
+  "slug": "drupal-migrations-are-they-unsustainable",
+  "title": "Drupal Migrations - Are they unsustainable?",
+  "dateGmt": "2020-07-17 04:52:05",
+  "modifiedGmt": "2023-02-01 02:24:53",
+  "authorId": 16,
+  "categoryIds": [
+    15,
+    11
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-18.jpg",
+    "alt": "O3 pattern"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Drupal Migrations - Are they unsustainable? | O3",
+    "descriptionOverride": "CMSWire tapped several Drupal experts, on why so many users haven’t yet migrated to Drupal 8, and what to expect from Drupal 9.",
+    "descriptionRendered": "CMSWire tapped several Drupal experts, on why so many users haven’t yet migrated to Drupal 8, and what to expect from Drupal 9.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/drupal-migrations-are-they-unsustainable/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>In light of current events, Drupal has extended the end of life date for Drupal 7 by an extra year.</p>\n<p>CMSWire canvassed several Drupal experts, including O3&#8217;s Senior Engineer, Greg Aiello, about why so many users haven’t yet migrated to Drupal 8, and what to expect from Drupal 9. Simply put, the upgrade path from Drupal 7 to 8 was painful, as they shifted to an entirely new architecture and coding methodology. Drupal 9 marks a new trajectory for the framework and its integration with Symfony promises much easier upgrades for the future.</p>\n<p>While it may be expensive and agonizing, <a href=\"https://www.o3world.com/news/drupal-owners-time-to-move-version-7-to-8/\">users should not put off migration</a>, as Drupal will eliminate security updates and support for versions 7 and 8 at the end of 2021.</p>\n<p>&nbsp;</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Drupal Migrations - Are they unsustainable?",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Users should not put off migration, as Drupal will eliminate security updates and support for versions 7 and 8 at the end of 2021."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      3444,
+      6194,
+      2942,
+      3485
+    ],
+    "author": ""
+  }
+}

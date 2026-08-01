@@ -1,0 +1,404 @@
+{
+  "_id": "perspective-wp-2363",
+  "_type": "perspective",
+  "title": "What's new at O3 May 2019: A new website, milestones, and blended processes",
+  "slug": {
+    "_type": "slug",
+    "current": "o3cap-websites-milestones-and-blended-processes"
+  },
+  "excerpt": "There’s a lot of new content, so take a little time to explore!",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    }
+  ],
+  "publishedAt": "2019-05-08T23:18:42Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-16.jpg"
+    },
+    "alt": "Red pattern"
+  },
+  "body": [
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A New Look for O3",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We don’t just create digital experiences for our clients, we also do quite a bit of work for ourselves. We’re always working on something new, whether it’s a ",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "new labs project",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " or ",
+          "_key": "k0014"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "brainstorming fresh ideas",
+          "_key": "k0015"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " for ",
+          "_key": "k0016"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "our clients",
+          "_key": "k0017"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", and we’re happy to show off the latest fruits of our labor: ",
+          "_key": "k0018"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "our NEW website",
+          "_key": "k0019"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". Our site has gone through a major redesign, and we’re ready to share our work with you.",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.o3world.com/labs/taskbot/"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.o3world.com/labs/innovation-workshops/"
+        },
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.o3world.com/work/"
+        },
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.o3world.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/050919-New-Site.jpg"
+      },
+      "alt": "O3 - News Site 2019",
+      "_key": "k0021"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Happy 14th Birthday/Anniversary!",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Did you know that O3 World officially celebrated 14 years in business on May 5th? It’s hard to sum up everything that O3 has become after almost a decade and a half of being in business. We’ve worked on so many interesting projects, partnered with countless ",
+          "_key": "k0025"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "extraordinary clients",
+          "_key": "k0026"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", and worked with a lot of ",
+          "_key": "k0027"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "amazing employees",
+          "_key": "k0028"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". We want to sincerely thank everyone that helped make O3 what it is today. ",
+          "_key": "k0029"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em",
+            "strong"
+          ],
+          "text": "It really is good up high",
+          "_key": "k0030"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.o3world.com/about/#o3-partners"
+        },
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.o3world.com/about/team/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "#AlwaysGrowing",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "How many companies do you know that have almost doubled their amount of employees over the course of the year? We’ve checked the numbers and it turns out that our staff has gone from 28 to 45 since last summer! Over the past year, we’ve hired:",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "1 Design Director\n9 Engineers\n2 Experience Designers\n4 PMs\n1 Brand Manager",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "And the list keeps growing. As we speak, ",
+          "_key": "k0039"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0006"
+          ],
+          "text": "we still have open positions",
+          "_key": "k0040"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " that need to be filled, and we’re always looking for talented individuals to join the O3 team. ",
+          "_key": "k0041"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0007"
+          ],
+          "text": "Visit our careers page",
+          "_key": "k0042"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " to see who/what we’re looking for.",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0006",
+          "_type": "link",
+          "href": "https://www.o3world.com/careers/#open-positions"
+        },
+        {
+          "_key": "k0007",
+          "_type": "link",
+          "href": "https://www.o3world.com/careers/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/050919-New-Team-Members.jpg"
+      },
+      "alt": "New Team Members - May 2019",
+      "_key": "k0044"
+    },
+    {
+      "_key": "k0045",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3’s Special Project Blend",
+          "_key": "k0046"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0047",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We love supporting new and local meetup groups, and our friends over at DPM Philly wanted to try something new. We don’t use a single project process at O3 World. In order to run our projects smoothly, we use a combination of Agile and Waterfall to best suit our clients’ needs. Our Head of Accounts, ",
+          "_key": "k0048"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0008"
+          ],
+          "text": "Justin Handler",
+          "_key": "k0049"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", gave the first-ever Blended Project Process talk in Philly, and we’re already excited for the next one!",
+          "_key": "k0050"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0008",
+          "_type": "link",
+          "href": "https://www.o3world.com/about/team/justin-handler/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/050819-Handler-Cherry-Blend-Process.jpg"
+      },
+      "alt": "Handler Talk - Cherry Blend Process",
+      "_key": "k0051"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:2363",
+    "extractedAt": "2026-08-01T00:10:25.427Z"
+  }
+}

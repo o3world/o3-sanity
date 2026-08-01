@@ -1,0 +1,77 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:57.657Z"
+  },
+  "wpId": 7300,
+  "slug": "creating-success-in-a-business-to-consumer-environment",
+  "title": "Creating success in a business-to-consumer environment",
+  "dateGmt": "2023-03-01 19:37:47",
+  "modifiedGmt": "2023-03-06 17:54:21",
+  "authorId": 16,
+  "categoryIds": [
+    15
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/03/O3-website-imagery_-Insights-5.png",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "Insurance providers pivot to business-to-consumer (B2C) models.",
+    "titleRendered": "Insurance providers pivot to business-to-consumer (B2C) models.",
+    "descriptionOverride": "The pandemic has had a significant impact on the insurance industry, with insurers adopting B2C models to engage directly with consumers, reduce costs, and maintain competitiveness in the face of pandemic-related disruptions.",
+    "descriptionRendered": "The pandemic has had a significant impact on the insurance industry, with insurers adopting B2C models to engage directly with consumers, reduce costs, and maintain competitiveness in the face of pandemic-related disruptions.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/creating-success-in-a-business-to-consumer-environment/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": {
+      "url": "http://www.o3world.com/wp-content/uploads/2021/08/O3-website-imagery_-Insights-6.jpg",
+      "alt": "O3 blue pattern"
+    },
+    "twitterImageOverride": "https://www.o3world.com/wp-content/uploads/2021/08/O3-website-imagery_-Insights-6-640x640.jpg"
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Creating success in a business-to-consumer environment",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Check out insights by Mike Tarquinio, O3’s Director of Client Strategy. Michael sat down with PropertyCasualty360."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Article summary</h3>\n<p>The COVID-19 pandemic catalyzed significant disruptions across various sectors, including the insurance industry. Insurance providers had to rapidly adjust to the changes brought about by the pandemic and accelerate digital transformation efforts. In 2020, 67% of consumers changed their buying habits, including insurance products and services.</p>\n<p>To maintain their competitive edge, insurers are turning to business-to-consumer (B2C) models. This involves directly engaging with consumers through various channels, such as websites, mobile apps, and other tools. By doing so, insurers can reduce costs and provide better service levels to their customers. The adoption of B2C models has become a trend across the economic spectrum, as businesses strive to stay competitive.</p>\n<h4><a href=\"https://www.propertycasualty360.com/2022/09/30/creating-success-in-a-business-to-consumer-environment/\">Check out the article</a></h4>\n<p>O3 is creating seamless experiences for leaders in the insurance space. To learn more about how we can help to transform your brand, <a href=\"https://www.o3world.com/contact/\">contact us</a>.</p>\n"
+      }
+    ],
+    "related_articles": [
+      7291,
+      6185,
+      3451,
+      3444
+    ],
+    "author": [
+      5102
+    ]
+  }
+}

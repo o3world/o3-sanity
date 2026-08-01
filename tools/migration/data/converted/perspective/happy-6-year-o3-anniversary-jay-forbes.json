@@ -1,0 +1,217 @@
+{
+  "_id": "perspective-wp-2004",
+  "_type": "perspective",
+  "title": "Happy 6 year O3 anniversary Jay Forbes!",
+  "slug": {
+    "_type": "slug",
+    "current": "happy-6-year-o3-anniversary-jay-forbes"
+  },
+  "excerpt": "Work anniversaries are always celebration worthy, and we have a very special one that deserves some recognition.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    }
+  ],
+  "publishedAt": "2019-03-26T19:11:34Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2020/10/Jay.svg"
+    },
+    "alt": "Jay Forbes, Director of Engineering."
+  },
+  "body": [
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our Engineering Manager ",
+          "_key": "k0003"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Jay Forbes",
+          "_key": "k0004"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " recently celebrated 6 years with O3 , and we wanted to take some time to shine the spotlight on one of our most indispensable employees.",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.o3world.com/about/team/jay-forbes/"
+        }
+      ],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Jay has been described as the glue that holds O3’s engineering department together. Aside from the regular development and strategy work he does for clients like ",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "La Colombe",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and the White House Historical Association (WHHA), he also plays an essential role in overseeing the career growth of individuals on the engineering team. He improved our process for workflow and task management at the company and excels at keeping his team on task.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.o3world.com/work/la-colombe/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "When we asked our staff about their thoughts on Jay, we got some truly kind answers:",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0013",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“I’ve viewed Jay as a mentor since my start at O3 over three years ago. He’s a patient teacher and has helped me to grow immeasurable amounts.”\n-Ashley Cecere\n ",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "blockquote"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“Anytime I’ve ever struggled with a project or got thrown a crazy deadline, Jay has always stepped in to help if I needed it.”\n-Jessica Warhus",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "blockquote"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Almost everyone at O3 has a great relationship with Jay. Our CTO Tim Breslin shared a particularly memorable story that drives home Jay’s dedication to his work, the engineering team, and the company as a whole.",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0021",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“During one of the many transitions of WHHA’s sites and servers, there was a situation where we needed support over the holiday break – typically WHHA’s busiest time of year. You may not know this, but the Christmas ornaments in their online store are very popular. They’ve been making sets of custom ornaments since 1981 and people love to collect them.\nJay made sure that the WHHA website was ready for the holiday rush. Even though his team took the correct precautions and conducted adequate load testing, it wasn’t quite up to Jay’s standards. He then turned into a one-man show for site maintenance and managed reporting and resolving issues over the holiday.\nJay worked his own Christmas magic by ensuring that everyone received their presidential ornaments on time.”\n-Tim Breslin",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "blockquote"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "It’s pretty hard to top a story where you “save Christmas”, but we’re certain that we’re going to have even better stories about Jay as the years go on. Help us give a warm congratulations to our #1 Engineering Manager Jay Forbes!",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:2004",
+    "extractedAt": "2026-08-01T00:10:25.428Z"
+  }
+}

@@ -1,0 +1,358 @@
+{
+  "_id": "perspective-wp-8757",
+  "_type": "perspective",
+  "title": "O3 webinar: The AI we should talk about is accessibility & inclusion",
+  "slug": {
+    "_type": "slug",
+    "current": "o3-webinar-the-ai-we-should-talk-about-is-accessibility-inclusion"
+  },
+  "excerpt": "Unravel the intricacies of building inclusive experiences with AI in 2024.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-63",
+      "_key": "cat-63"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2024-01-30T20:57:13Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/01/O3-webinar-AI-Web-2500-2500.jpg"
+    },
+    "alt": "This conversation aims to unravel the intricacies of building inclusive experiences."
+  },
+  "body": [
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "The AI We Should Talk About is Accessibility & Inclusion",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://o3world.zoom.us/webinar/register/WN_qwFxidP0TISq0MZLByM-eQ#/registration"
+        }
+      ],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Date + time",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "March 6, 2024. 12:00 PM to 1:00 PM ET",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Format",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The webinar will kick off with a 15-20 minute presentation, paving the way for an open discussion with the remaining time.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Background",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 is hosting an event alongside Tamman to explore the intersection between AI, inclusivity, and the ever-evolving landscape of digital accessibility. The heart of the conversation will unravel how companies are constructing inclusive experiences in the age of AI. Our experts will offer attendees a candid look into the challenges and opportunities that lie ahead. Our host, Kristen Witucki, will lead the conversation while sharing her firsthand insights into navigating accessibility considerations as a visually impaired user. Brian Crumley from O3 and Wally Zielinski from Tamman will join Kristen as accessibility experts. Together, the three will delve into the profound impact of AI on digital accessibility and explore strategies for user testing.",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The timely release of ",
+          "_key": "k0021"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "WCAG 2.2",
+          "_key": "k0022"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " will add another layer to the conversation. The Web Content Accessibility Guidelines (WCAG) play a pivotal role in shaping the digital landscape, ensuring that websites and applications are accessible to people with disabilities. Whether you are a tech professional, a student, or someone who is simply curious about the future of technology, “The AI We Should Talk About is Accessibility & Inclusion” will provide first-hand insights from users and experts in 2024.",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.w3.org/WAI/standards-guidelines/wcag/new-in-22/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Together, let’s explore how AI can become a force for positive change, breaking down barriers and fostering a more inclusive digital world. Save the date, mark your calendars, and join us for a thought-provoking discussion that transcends the boundaries of conventional webinars.",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Register now",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://o3world.zoom.us/webinar/register/WN_qwFxidP0TISq0MZLByM-eQ#/registration"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Meet the speakers",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Brian Crumley",
+          "_key": "k0031"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " (O3)",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/briancrumley/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As O3’s leading accessibility expert, Brian Crumley has an unwavering commitment to advocacy. He fearlessly challenges engineers to elevate the code standards and ensures that every O3 solution adheres to the highest accessibility benchmarks. When he’s not staying ahead of the curve in the ever-evolving accessibility space, out getting his geek on or cheering on his Baltimore Ravens, Brian is usually eating his way around Philly, checking out the latest movies, or pretending to be a snowboarder. He holds a Certified Professional in Accessibility Core Competencies (CPACC) certification from the IAAP.",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "Kristen Witucki",
+          "_key": "k0036"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " (Tamman)",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/kristenwitucki/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Kristen Witucki is an author, a teacher of students who are blind or have low vision, and part of Tamman’s Accessibility team. She has been totally blind since birth, lives in a biracial, multi-ability family in New Jersey, and she’s always looking for ways to bring facets of people’s individual disability experiences to a wider audience.",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "Wally Zielinski",
+          "_key": "k0041"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " (Tamman)",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/wallyzielinski/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0043",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Wally Zielinski is Senior Digital Accessibility Engineer at Tamman. He is passionate about building innovative and inclusive digital experiences, while marching towards new, more accessible horizons on the web. He believes the power of community will drive us to a more progressive and equitable future for all. He holds a Certified Professional in Web Accessibility (CPWA) certification from the International Association of Accessibility Professionals (IAAP). (Use LinkedIn only for socials.)",
+          "_key": "k0044"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:8757",
+    "extractedAt": "2026-08-01T00:09:42.655Z"
+  }
+}

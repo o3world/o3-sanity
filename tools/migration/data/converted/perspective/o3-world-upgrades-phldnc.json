@@ -1,0 +1,200 @@
+{
+  "_id": "perspective-wp-525",
+  "_type": "perspective",
+  "title": "O3 upgrades PHLDNC.com, the Philadelphia 2016 host committee site for the Democratic National Convention",
+  "slug": {
+    "_type": "slug",
+    "current": "o3-world-upgrades-phldnc"
+  },
+  "excerpt": "O3 is proud to be part of the DNC in 2016 and excited to play a small role in its success.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    }
+  ],
+  "publishedAt": "2016-03-17T14:19:50Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-4.jpg"
+    },
+    "alt": "O3 upgrades PHLDNC.com, the Philadelphia 2016 host committee site for the Democratic National Convention"
+  },
+  "body": [
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Last week, the Philadelphia 2016 Host Committee launched a blog and online press room leading up to the Democratic National Convention, which will be hosted in the City of Brotherly Love from July 25-28, 2016.",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "These additional site components provide an enhanced user experience for visitors to ",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "PHLDNC.com",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", enabling them to learn about Philadelphia from individuals who work, live, and study here, as well as acting as a one-stop resource for Host Committee news. The blog and press room were developed by O3 World after the first phase of visual design and user interface upgrades to the Host Committee’s site earlier this year.",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "http://www.PHLDNC.com"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The online press room will house the Host Committee’s downloadable press releases and news clips, links to Visit Philadelphia’s press room photo page, and links to the Host Committee’s primary social media platforms: Facebook, Twitter, Instagram, and YouTube. The blog will serve as a source of information about different sectors of the city, providing readers with a taste of Philadelphia. It will be comprised of posts written by Host Committee staff and more than 20 local knowledgeable contributors who truly understand Philadelphia’s vibrant culture. The posts will depict various aspects of the Philadelphia experience for an audience of delegates, members of the media, residents and visitors.",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "These are the latest upgrades the Host Committee and O3 World have made to the website as the Host Committee prepares to welcome, inform, and make announcements to local residents, businesses, Convention guests, and members of the press leading up to the Democratic National Convention.",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“The Host Committee’s website is a resource of information and fun things to do in Philadelphia for both the 50,000 visitors coming here for the DNC as well as residents who will experience the excitement around town during Convention week,” said Kevin Washo, Executive Director of the Philadelphia 2016 Host Committee. “The additional enhancements to our website will help us better communicate with the public and provide a taste of the Philadelphia experience, and we continue to be grateful to local O3 World for its support and services throughout the redesign process.”",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“At O3 World, we strongly believe in collaborating for the greater good of the community and the city. Lending a hand with PHLDNC.com was a perfect opportunity to do that,” said ",
+          "_key": "k0016"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Keith Scandone",
+          "_key": "k0017"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", Partner and CEO of O3 World. “We’re proud to be part of Philadelphia as the city hosts the DNC in 2016 and excited to play a small role in its success.”",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "/about/team/keith-scandone/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Check out the latest site upgrades at ",
+          "_key": "k0020"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "PHLDNC.com",
+          "_key": "k0021"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "http://phldnc.com"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:525",
+    "extractedAt": "2026-08-01T00:10:30.199Z"
+  }
+}

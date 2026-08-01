@@ -1,0 +1,69 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:15.488Z"
+  },
+  "wpId": 3313,
+  "slug": "preparing-for-ccpa-during-covid-19",
+  "title": "Preparing for CCPA during COVID-19",
+  "dateGmt": "2020-04-14 00:02:45",
+  "modifiedGmt": "2023-02-02 19:05:45",
+  "authorId": 16,
+  "categoryIds": [
+    63,
+    62,
+    11
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-5.jpg",
+    "alt": "O3 accessibility and pattern"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Preparing for CCPA during COVID-19 | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/preparing-for-ccpa-during-covid-19/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>The California Consumer Privacy Act (CCPA) affects hundreds of thousands of businesses, which is why we offer technical consulting and implementation services for accommodating CCPA needs.</p>\n<p>In normal times, helping businesses address these complex new privacy rules would be a heavy lift by itself. But these obviously aren’t normal times, so here are our views on CCPA enforcement and preparation during this pandemic crisis.</p>\n<h3>Requests for CCPA Enforcement Delay</h3>\n<p>Enacted in 2018, CCPA technically went into effect on January 1 of this year. But the final rules for how the law should work have not yet been issued by the Attorney General’s office, a major complication since the law is vague in many areas.</p>\n<p><a href=\"https://www.huntonprivacyblog.com/wp-content/uploads/sites/28/2020/02/ccpa-text-of-mod-redline-020720.pdf\">Draft regulations</a> were issued on October 11, 2019, as well as on February 7, February 10, and March 12 of this year. The most recent commenting period ended March 27.</p>\n<p>Once the draft is completed, there is a 30-day period for the regulations to be reviewed by the state’s Office of Administrative Law. The Attorney General (AG) has said it will begin enforcement six months after the final rules are issued, but – in any case – no later than July 1, 2020.</p>\n<p>Even if the final rules were issued tomorrow, the 30-day period for Administrative Law means they wouldn’t be completely final until about May. And that leaves two months or less until July 1.</p>\n<p>Not much time for implementation by businesses, which is why five major advertising trade organizations <a href=\"https://www.clickz.com/ad-industry-asks-for-more-time-to-ramp-up-after-ccpas-final-rules/260016/\">sent a joint letter</a> in February to the California Attorney General’s office, asking for a six-month transitional period after final CCPA rules are issued and before enforcement begins.</p>\n<h3>Enter COVID-19</h3>\n<p>That request was made before the pandemic’s impact was widely known. On March 20, nearly three dozen trade associations, companies and organizations – including the California Chamber of Commerce, the Association of National Advertisers and the California Retailers Association – sent <a href=\"https://www.insightsassociation.org/sites/default/files/misc_files/joint_industry_letter_requesting_a_delay_in_ccpa_enforcement_-_updated_3.20.2020.pdf\">a letter to the AG asking for a delay in enforcement</a> until January 2, 2021 because of the pandemic.</p>\n<p>It read in part:</p>\n<blockquote><p>“The public health crisis brought on by COVID-19 juxtaposed with the quickly approaching enforcement date for the CCPA places business leaders in a difficult position. They are forced to consider tradeoffs between decisions that are best for their employees and the world-at-large and decisions that may help the organizations they lead avoid costly and resource intensive enforcement activities.”</p></blockquote>\n<p>But not all observers think a delay is warranted. In particular, the non-profit Consumer Reports magazine, testing lab and consumer advocacy organization has argued against a delay in enforcement.</p>\n<p>“This latest effort to avoid complying with the CCPA comes as more and more consumers increasingly rely on online communications to work, stay in communication with healthcare professionals, and obtain access to necessary supplies,&#8221; the organization said in a <a href=\"https://advocacy.consumerreports.org/press_release/consumer-reports-calls-on-california-attorney-general-to-uphold-ccpa-enforcement-despite-industry-efforts-to-push-back-during-the-covid-19-crisis/\">statement in March</a>.</p>\n<p>The state of California agrees, as its most recent guidance was that the July 2020 deadline <a href=\"https://www.natlawreview.com/article/covid-19-will-apparently-not-delay-ccpa-enforcement\">will stand for now</a>.</p>\n<h3>The Pandemic’s Impact on CCPA</h3>\n<p>In some ways, we think Consumer Reports has actually understated the case for the impact of the pandemic on consumer privacy.</p>\n<p>When the history of consumer data is written, this pandemic will probably be marked as a game-changing turning point, when consumer privacy protections became as essential to public safety as traffic laws became once it was obvious cars were going to be everywhere.</p>\n<p>For example, there are <a href=\"https://www.theverge.com/2020/3/29/21198158/us-government-mobile-ad-location-data-coronavirus\">reports</a> that the federal government is now mapping the pandemic in part by tracking users anonymously with mobile ad location data. While this might be an essential disease tracking technique, “anonymous” can become a relatively meaningless term once sophisticated ways to utilize probabilistic data-matching are applied.</p>\n<p>Additionally, the practice of remote working, socializing, exercising and other activities, previously seen as a growing alternative route, has now become the sole highway for millions of Americans. And that highway is leaving unprecedented data trails.</p>\n<p>So, it is essential that consumers and brands make consumer privacy an even higher priority than it was back in the normal days of only a few weeks ago.</p>\n<h3>Our view: Delay CCPA Enforcement, Not Action</h3>\n<p>At the same time, millions of businesses are now facing an existential crisis, as they try to conserve resources to make it through a time when many consumers are forced to stay home.</p>\n<p>Whether or not there was previously a need for a six-month delay in enforcement, there is an obvious need now.</p>\n<p>It’s the same reason why the deadline for federal and many state tax returns have been delayed by several months. Companies and individuals are facing dried-up cash flows, team shifts and must refocus their efforts and priorities. Digital teams are being asked to “swab the deck,” until they can make headway on major projects once again.</p>\n<p>For those businesses, we urge them to use this downtime to get their consumer privacy practices in shape. However long this shutdown takes, consumer privacy will become an even greater need for brands, even without knowing the contours of the final CCPA rules.</p>\n<p>So, here are our recommendations on steps businesses can take now, in conjunction with legal and other expert help, while we wait for CCPA to take hold and the pandemic to lift.</p>\n<h4><strong>Audit the Tools and Customer Data You Collect</strong></h4>\n<p>Take stock of the data you are collecting from customers, including your third-party tools, website, and any physical outlets. Build a map of how and what you collect, where it is stored, who has access, and – most importantly – if any of that data is sold or traded with others. This process will help you understand your data repository and respond to customer requests.</p>\n<h4><strong>Review Data Security Practices</strong></h4>\n<p>This is a great opportunity to review – and include in your audit – who has access to your storage of personal information. Prune services, purge users, and update permissions so they conform to your security standards.</p>\n<h4><strong>Review and Update Your Privacy Policy</strong></h4>\n<p>CCPA requires transparency. Your privacy policy should be updated to clearly describe what kind of information you collect, why you collect it, and what you do with it.</p>\n<h4><strong>Plan for Handling Customer Requests for Personal Data</strong></h4>\n<p>Your IT team can also start planning how to quickly handle customer requests to view, change, or delete their personal information, a process that must be clearly referenced within your Privacy Policy.</p>\n<h4><strong>Educate Employees on Consumer Privacy</strong></h4>\n<p>Most importantly, take steps to fundamentally change your company’s attitude toward consumer privacy. Educate employees about the importance of consumer privacy, what your company is doing, and the role they as employees play. This is particularly important for employees who may be in a customer-facing role where they would be fielding personal information requests.</p>\n<p>Interested in learning more about our <a href=\"https://www.o3world.com/news/gdpr-regulation-might-impact-your-website/\">GDPR</a> and CCPA privacy work? <a href=\"https://www.o3world.com/contact/\">Contact us</a> and let’s set up a video call.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Preparing for CCPA during COVID-19",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "In normal times, helping businesses address these complex new privacy rules would be a heavy lift by itself. But these obviously aren’t normal times, so here are our views on CCPA enforcement and preparation during this pandemic crisis."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": "",
+    "author": ""
+  }
+}

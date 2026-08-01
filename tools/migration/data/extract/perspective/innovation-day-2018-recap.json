@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:25.429Z"
+  },
+  "wpId": 988,
+  "slug": "innovation-day-2018-recap",
+  "title": "Innovation Day 2018 recap",
+  "dateGmt": "2018-05-08 18:09:21",
+  "modifiedGmt": "2023-02-02 16:03:49",
+  "authorId": 16,
+  "categoryIds": [
+    7,
+    8
+  ],
+  "excerpt": "On May 4th, we hosted our 2nd Annual Innovation Day during Philly Tech Week presented by Comcast. The sold-out event was a day filled with lightning talks about the latest tech. ",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-16.jpg",
+    "alt": "Red pattern"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Innovation Day 2018 recap | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/innovation-day-2018-recap/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Last week we hosted the 2nd annual Innovation Day as part of Philly Tech Week presented by Comcast.</h3>\n<p>The sold-out event highlighted work being done by different agencies around the city who are infusing emerging technology into their work to push the limits of what can be done. Couldn&#8217;t make it? Read on to find out more about what each of the speakers covered!</p>\n<ul>\n<li><a href=\"https://www.linkedin.com/in/lishadavis/\" target=\"_blank\" rel=\"noopener noreferrer\">Lisha Davis</a>, Head of Innovation Studio, Vanguard: Lisha discussed corporate intrapreneurship to highlight elements of Vanguard&#8217;s operating model and the observations/lessons they&#8217;ve learned to date.</li>\n<li><a href=\"https://www.linkedin.com/in/tzielinski/\" target=\"_blank\" rel=\"noopener noreferrer\">Todd Zielinski</a>, Sr. Director of Electrical Engineering, Bresslergroup: Todd covered what Bresslergroup is doing with IoT and how they launched Sencity, a smart-city platform. In addition, he discussed the things his team learned and how it relates to both consumers and clients. More can be found in his <a href=\"https://bresslergroup.egnyte.com/dl/yjjKonosqq\" target=\"_blank\" rel=\"noopener noreferrer\">presentation</a>.</li>\n<li>Mike Gadsby, CXO and Co-founder, Lauren Slattery, Head of UX Strategy, and Dan Laufer, Developer of O<sub>3</sub> World: The three of them talked about how O3 infuses innovation into everyday projects through the <a href=\"https://www.o3world.com/labs/\">O<sub>3</sub> Labs</a> program and how we validate and make this work for clients.</li>\n<li><a href=\"https://www.linkedin.com/in/anatoly-polinsky-4416272/\" target=\"_blank\" rel=\"noopener noreferrer\">Anatoly Polinsky</a>, Director of Zeros and Ones, Chariot Solutions: He discussed how the world of blocks and chains works and what it really means for Chariot&#8217;s clients. More in his <a href=\"https://drive.google.com/file/d/1bWdfb8a3d9ib0ul5yIsOeUbtDqKq8Des/view?usp=sharing\" target=\"_blank\" rel=\"noopener noreferrer\">slides</a>.</li>\n<li><a href=\"https://www.linkedin.com/in/bagenstose/\" target=\"_blank\" rel=\"noopener noreferrer\">Brett Bagenstose</a>, The Baron of Pixels, Neo-Pangea: To round out our day, Brett discussed how his team uses WebVR to bring the technology to more people in a simpler way.</li>\n</ul>\n<p>Thanks to all our speakers who made Innovation Day a huge success. Also, special shoutout to <a href=\"https://www.lacolombe.com/\" target=\"_blank\" rel=\"noopener noreferrer\">La Colombe</a> who sponsored our event and provided coffee the morning of the talks! We&#8217;re already looking forward to next year&#8217;s tech week!</p>\n<p>Want to learn more about any of the talks or what the <a href=\"https://www.o3world.com/labs/\">O<sub>3</sub> Labs</a> program is? <a href=\"https://www.o3world.com/contact/\">Drop us a line</a>!</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Innovation Day 2018 recap",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "O3 took part in Philly Tech Week's 2nd annual Innovation Day. Check it out. "
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      3328,
+      633,
+      3073,
+      6187
+    ],
+    "author": ""
+  }
+}

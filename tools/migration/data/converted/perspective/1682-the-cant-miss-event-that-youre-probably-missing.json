@@ -1,0 +1,671 @@
+{
+  "_id": "perspective-wp-2675",
+  "_type": "perspective",
+  "title": "1682: The can’t miss event (that you’re probably missing)",
+  "slug": {
+    "_type": "slug",
+    "current": "1682-the-cant-miss-event-that-youre-probably-missing"
+  },
+  "excerpt": "Check out what we have in store for the conference.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    }
+  ],
+  "publishedAt": "2019-09-26T21:33:14Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights-3.jpg"
+    },
+    "alt": "1682: The can’t miss event (that you’re probably missing)"
+  },
+  "body": [
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "There are so many events, conferences, meetups, and festivals, that it’s hard to keep track of all of them. But we planned one that can’t be missed – ",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "1682",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". From the team that organized and hosted the ",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Forge Conference",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " for three years, and runs ",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Innovation Day",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " during Philly Tech Week, we’re excited to bring you 1682.",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://1682conf.com/"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "http://www.forgeconf.com/"
+        },
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.o3world.com/news/innovation-day-2019-ptw19-recap/"
+        }
+      ],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "1682 is the business of innovation conference. It’s about the realities associated with starting, scaling, succeeding, and often times, struggling with how to make innovation programs financially feasible.",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The format, primarily question and answer with moderators and speakers, is established to encourage transparency, humility, and honesty around innovation programs. This event will not be recorded, minimal content will be shared after the event, and it’s happening one year and one year only. The entire day is curated and designed for an intimate gathering at one of the most recognized and inspiring locations in Philadelphia, the ",
+          "_key": "k0018"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Barnes Foundation",
+          "_key": "k0019"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.barnesfoundation.org/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As you can see from our schedule, we have a fantastic day planned:",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Breakfast and networking",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "8:00am – 8:40am",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Opening remarks: Keith Scandone and Mike Gadsby",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "8:45am – 8:55am\nBootstrapping a labs program within an agency environment",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Andy Verone: Moderated by Natalie Nixon",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "9:00am – 9:40am\nBuilding a simulated worksite that allows for hands-on experimentation with the opportunity of scaling globally",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Melissa Doran Rayer and Greg WIllrich: Moderated by Dave Lauer",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "9:45am – 10:25am\nEnterprise incubation and new market penetration within a financially regulated space",
+          "_key": "k0038"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0039",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Break and networking",
+          "_key": "k0040"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0041",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "10:25am – 10:45am",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0043",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Paul Dehel: moderated by Pamela Raitt",
+          "_key": "k0044"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0045",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "10:45am – 11:25am\nIdentifying and promoting innovative solutions for pediatric healthcare",
+          "_key": "k0046"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0047",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Lunch",
+          "_key": "k0048"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0049",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "11:25am – 12:30pm",
+          "_key": "k0050"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0051",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Adam Furtado: Moderated by Carol Eggert",
+          "_key": "k0052"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0053",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "12:30pm – 1:10pm\nManaging a military digital transformation initiative that revolutionizes how the US Air Force builds and delivers software",
+          "_key": "k0054"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0055",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Special announcement from B PHL",
+          "_key": "k0056"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0057",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "1:10pm – 1:20pm\nB PHL is a citywide innovation festival running from October 15-17",
+          "_key": "k0058"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0059",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Eliza Pollack and William Toms: Moderated by Lauren Cox",
+          "_key": "k0060"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0061",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "1:20pm – 2:00pm\nHow creative services and the local government are exploring innovation in Philadelphia",
+          "_key": "k0062"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0063",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Break and gallery tour",
+          "_key": "k0064"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0065",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "2:00pm – 2:40pm",
+          "_key": "k0066"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0067",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Edy Liongosari: Moderated by Michael Lebowitz",
+          "_key": "k0068"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0069",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "2:40pm – 3:20pm\nAgenda and outcomes of Accenture Labs’ applied technology research across all seven international lab locations",
+          "_key": "k0070"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0071",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Venture awards: Moderated by Jennifer Maher",
+          "_key": "k0072"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0073",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "3:25pm – 4:25pm\nThree Philadelphia startups will present their business ideas to the audience and compete for a chance to win $5,000 in funding",
+          "_key": "k0074"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0075",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Closing remarks: Keith Scandone and Mike Gadsby",
+          "_key": "k0076"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0077",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "4:25pm – 4:30pm",
+          "_key": "k0078"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0079",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Cocktail reception",
+          "_key": "k0080"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0081",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "4:30pm – 6:00pm\nRefreshments in the Maguire Garden Pavilion",
+          "_key": "k0082"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0083",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "The moderators",
+          "_key": "k0084"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " are as accomplished as ",
+          "_key": "k0085"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "the speakers",
+          "_key": "k0086"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". The attendees are as accomplished as the moderators. The vulnerability shared on stage will allow for real connections and conversations amongst one another during the day and between sessions. And since it’s the Barnes, all attendees will have access to the Barnes collection as well.",
+          "_key": "k0087"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.o3world.com/news/movers-shakers-innovators-1682-moderator-spotlight/"
+        },
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.o3world.com/news/movers-shakers-innovators-1682-speaker-spotlight-part-1/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0088",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0006"
+          ],
+          "text": "Tickets",
+          "_key": "k0089"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " are running low so be sure to grab yours. If you’re a student or associated with a non-profit organization, email us for a discounted rate. Hope to see you Tuesday!",
+          "_key": "k0090"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0006",
+          "_type": "link",
+          "href": "https://1682conf.com/#tickets"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:2675",
+    "extractedAt": "2026-08-01T00:10:20.528Z"
+  }
+}

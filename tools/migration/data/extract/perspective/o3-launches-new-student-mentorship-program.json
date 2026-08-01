@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:06.747Z"
+  },
+  "wpId": 4359,
+  "slug": "o3-launches-new-student-mentorship-program",
+  "title": "O3 launches new student mentorship program",
+  "dateGmt": "2021-06-11 21:30:24",
+  "modifiedGmt": "2023-02-01 01:46:36",
+  "authorId": 16,
+  "categoryIds": [
+    10,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/06/O3-website-imagery_-Insights-9.jpg",
+    "alt": "Alan Cho, Senior UX Designer, and Grace Ge, UX Research, learning from each other."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "O3 launches new student mentorship program | O3",
+    "descriptionOverride": "O3 exposes young minds to careers in tech, trains students regardless of their experience level and makes the learning process accessible.",
+    "descriptionRendered": "O3 exposes young minds to careers in tech, trains students regardless of their experience level and makes the learning process accessible.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/o3-launches-new-student-mentorship-program/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>In an effort to excite young minds about careers in tech and attract the next generation of leaders, a team of O3ers led a mentorship program to expose students to concepts ranging from information organization and user experience design to basic web development. Our goal was to create a model to quickly engage and train young students, regardless of their experience level and make the learning process extremely accessible.</p>\n<p>O3 partnered with long time friend and <a href=\"https://roxboroughhs.philasd.org/\" target=\"_blank\" rel=\"noopener\">Roxborough High School</a> Web Design teacher, <a href=\"https://www.linkedin.com/in/debi-bender-023155a2/\" target=\"_blank\" rel=\"noopener\">Debi Bender</a> on this initiative. Over the course of three months we led various workshops to reinforce the skills students were already learning in the classroom by building an actual website using HTML and CSS.</p>\n<h3>Information Organization</h3>\n<p>Our Chief Innovation Officer, Mike Gadsby and Director of Experience Design, Christine Sheller kicked off the first workshop by helping the students to better understand how to start their very own website project. We walked the students through our approach to creating an experience for a small business. Then each student was asked to ideate around a pseudo-company, they crafted company mission statements, identified website goals and compiled inspiration from competitive and comparative businesses. They also laid out sitemaps for their desired digital experience.</p>\n<h3>User Experience Design</h3>\n<p>O3 Senior Experience Strategist Josh Soldiers led the second workshop that focused on how to take your information architecture and design your experience using a design tool called Figma. Students were tasked with creating 1-2 wireframes for key pages of their sites.</p>\n<h3>WordPress Development</h3>\n<p>The last session led by O3’s Senior Engineer, Greg Aiello advanced the learnings from the first two workshops to help students pull their site structure and design together to build a WordPress site. He shared how to go about the initial setup in WordPress and demonstrated how to manipulate a theme. Students were then off to build their own experiences using WordPress for the first time.</p>\n<h3>The Final Output</h3>\n<p>There were a lot of great business ideas put on the table by the students and we were excited to see what they came up with at a student show and share event held in late May. Students created visually appealing and functional websites for the following businesses; a dance studio, bike shop, bait &amp; tackle shop and an e-games store.</p>\n<p>We&#8217;re proud of all of the students for their hard work and intelligent questions throughout this program. We look forward to learning from this experience and continuing our student mentorship program in the fall.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "O3 launches new student mentorship program",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "O3ers led a mentorship program to expose students to concepts ranging from information organization and user experience design to basic web development."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      4658,
+      3879,
+      5038,
+      3994
+    ],
+    "author": ""
+  }
+}

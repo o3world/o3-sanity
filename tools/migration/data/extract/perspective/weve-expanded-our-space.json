@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:25.428Z"
+  },
+  "wpId": 1415,
+  "slug": "weve-expanded-our-space",
+  "title": "We've expanded our space!",
+  "dateGmt": "2018-07-03 16:55:32",
+  "modifiedGmt": "2023-02-02 20:22:49",
+  "authorId": 16,
+  "categoryIds": [
+    10
+  ],
+  "excerpt": "We have some exciting news: we've expanded our workspace!",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/05/O3-website-imagery_-Insights-11.jpg",
+    "alt": "Greyscale, exterior shot of O3 office with logo on brick."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "We've expanded our space! | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/weve-expanded-our-space/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3><a href=\"https://www.o3world.com/about/team/keith-scandone/\">Keith Scandone</a>, our CEO, explains the reason for our growth has been a combination of inside existing account relationships and new business partnerships. The biggest differentiator has been our ability to be the consultant and deliverer on strategy, design and development work.</h3>\n<p>As we&#8217;re in the process of growing, we&#8217;re looking to hire an additional three positions in various departments (check our <a href=\"https://www.o3world.com/careers/\">careers page</a>) for more!</p>\n<h4>For more on our growth, read the latest in <a href=\"https://technical.ly/philly/2018/06/21/on-the-market-03-world-glassdoor-power-home-remodeling/\" target=\"_blank\" rel=\"noopener noreferrer\">Technical.ly Philly</a>.</h4>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "We've expanded our space!",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "We have some exciting news: we've expanded our workspace! As many of you know we're located on Frankford Ave. (right above the La Colombe) and have acquired an additional 1,600 square feet at the back of our office."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      2004,
+      3708,
+      4359,
+      6191
+    ],
+    "author": ""
+  }
+}

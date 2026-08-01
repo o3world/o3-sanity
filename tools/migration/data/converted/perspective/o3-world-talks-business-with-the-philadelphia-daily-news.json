@@ -1,0 +1,118 @@
+{
+  "_id": "perspective-wp-464",
+  "_type": "perspective",
+  "title": "After 10 years in business, Keith Scandone discusses what’s next for O3 in the Philadelphia Daily News",
+  "slug": {
+    "_type": "slug",
+    "current": "o3-world-talks-business-with-the-philadelphia-daily-news"
+  },
+  "excerpt": "Keith Scandone sat down with the Philadelphia Daily News to discuss how far we’ve come after a decade in the business, what makes us successful, and what’s coming next. Check out the article online or in the November 16 issue of the paper.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    }
+  ],
+  "publishedAt": "2015-11-17T12:42:47Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-16.jpg"
+    },
+    "alt": "Red pattern"
+  },
+  "body": [
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Since launching as a brand communications firm in 2005, a lot has changed, but O3 World’s leadership team has made evolution part of our business model. Now, as a digital product design and development agency, we’re celebrating our 10-year anniversary and forging ahead into the future.",
+          "_key": "k0003"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This fall, CEO ",
+          "_key": "k0005"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Keith Scandone",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " sat down with the ",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "Philadelphia Daily News",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " to discuss how far we’ve come after a decade in the business, what makes us successful, and what’s coming next. ",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Check out the article online",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " or in the November 16 issue of the paper.",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "/about/team/keith-scandone/"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "http://www.philly.com/philly/business/20151116_At_O3_World_in_Fishtown__the_game_plan_centers_on_innovation.html"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:464",
+    "extractedAt": "2026-08-01T00:10:30.200Z"
+  }
+}

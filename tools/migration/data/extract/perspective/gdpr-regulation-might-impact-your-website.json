@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:25.429Z"
+  },
+  "wpId": 803,
+  "slug": "gdpr-regulation-might-impact-your-website",
+  "title": "GDPR regulations might impact your website",
+  "dateGmt": "2018-02-22 17:37:49",
+  "modifiedGmt": "2023-11-14 16:57:56",
+  "authorId": 16,
+  "categoryIds": [
+    11
+  ],
+  "excerpt": "The EU General Data Protection Regulation (GDPR) is making a major change to its policies for user data storage on May 25, 2018. At a high-level, the regulation is meant to help protect EU citizens from privacy and data breaches and will affect any website that may collect data from EU citizens.",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-17.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "GDPR regulations might impact your website | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/gdpr-regulation-might-impact-your-website/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>The EU <a href=\"https://www.eugdpr.org/key-changes.html\" target=\"_blank\" rel=\"noopener noreferrer\">General Data Protection Regulation (GDPR)</a> is making a major change to its policies for user data storage on <strong>May 25, 2018</strong>. At a high-level, the regulation is meant to help protect EU citizens from privacy and data breaches and will affect any website that may collect data from EU citizens.</p>\n<h3 class=\"h5\">How do I know if it affects my site?</h3>\n<p>If your website collects any user data information from EU users, whether via a cookie, newsletter sign-up, contact form, checkout and/or customer portal, you will most likely have to make changes to your website and privacy policies. This information could include a name, a photo, an email address, bank details, posts on social networking websites, medical information, or a computer IP address.</p>\n<h3 class=\"h5\">Some changes you may need to consider:</h3>\n<ul>\n<li><strong>Data Permission</strong>: Do you have a newsletter sign-up? You may need to review business processes, applications and forms to be compliant with double opt-in rules and email marketing best practices. You’ll most likely have to improve your opt-in/opt-out experience.</li>\n<li><strong>Data Access</strong>: Users should be able to easily access their data and remove consent at all times. How you implement these controls will vary based on the type of data you collect and you must allow users the ability to opt out of communication channels. This can be done with an unsubscribe link that connects a user to manage their contact preferences.</li>\n<li><strong>Data Focus</strong>: You may not be able to collect ancillary information from users anymore. Make sure your data is focused, as GDPR wants you to only collect what’s pertinent.</li>\n<li><strong>Data Deletion</strong>: Users may request that you erase all of their personal data.</li>\n<li><strong>Privacy Policy</strong>: You may need to make updates to your privacy policies. We recommend discussing with your company legal department.</li>\n</ul>\n<h3 class=\"h5\">There are serious fines for not being compliant.</h3>\n<ul>\n<li><strong>Data Protection Officer</strong>: You may need to hire a DPO. <a href=\"https://digitalguardian.com/blog/what-data-protection-officer-dpo-learn-about-new-role-required-gdpr-compliance\" target=\"_blank\" rel=\"noopener noreferrer\">Learn more about the new</a> role.</li>\n</ul>\n<p>We’re already helping clients get up-to-speed, make sure you are as well. Get in touch by contacting us below!</p>\n<h3 class=\"h5\">Need additional resources or want to learn more?</h3>\n<ul>\n<li>Make sure you’re compliant with this <a href=\"https://www.superoffice.com/blog/gdpr/\" target=\"_blank\" rel=\"noopener noreferrer\">checklist</a></li>\n<li>Get the rundown on how it will impact your <a href=\"https://www.superoffice.com/blog/gdpr-marketing/\" target=\"_blank\" rel=\"noopener noreferrer\">marketing initiatives</a></li>\n</ul>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "GDPR regulations might impact your website",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Here’s more to help you prepare:"
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      5120,
+      2950,
+      5262,
+      3906
+    ],
+    "author": ""
+  }
+}

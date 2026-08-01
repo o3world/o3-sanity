@@ -1,0 +1,649 @@
+{
+  "_id": "perspective-wp-9915",
+  "_type": "perspective",
+  "title": "AI inside + out: Enhancing products + process at ADPList’s AI summit",
+  "slug": {
+    "_type": "slug",
+    "current": "ai-inside-out-enhancing-products-process-at-adplists-ai-summit-2"
+  },
+  "excerpt": "O3’s presentation at ADPList’s AI Summit shared actionable insights on integrating AI into products and processes to enhance user experiences, streamline workflows, and drive innovation.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2024-12-05T14:54:40Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/12/O3-website-imagery_-Perspectives-64-1024x1024@2x-1.webp"
+    },
+    "alt": "Enhancing products + process at ADPList’s AI summit"
+  },
+  "body": [
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "On December 4, O3 had the privilege of being one of six companies invited to present at ",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "ADPList’s inaugural AI Summit",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", joining industry leaders like Microsoft, J.P. Morgan, and Smashing Magazine. ",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Christine Sheller,",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " ",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Mike Gadsby",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", ",
+          "_key": "k0014"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Mark Angelow",
+          "_key": "k0015"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", and ",
+          "_key": "k0016"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "Simone Dehel",
+          "_key": "k0017"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " shared their expertise on integrating AI into products and processes, showcasing O3’s thoughtful and strategic approach to leveraging this technology.",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://aisummit.adplist.org/agenda"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/christine-sheller/"
+        },
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/michaelgadsby/"
+        },
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/mark-angelow/"
+        },
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/simone-dehel/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Setting the stage",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Christine Sheller, SVP of Experience Research + Design, opened the session with an introduction to ",
+          "_key": "k0022"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "O3’s approach to designing for AI and designing with AI",
+          "_key": "k0023"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". She highlighted O3’s commitment to human-centered design and inclusivity, emphasizing that AI is not just about technology but about solving real problems for people.",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.o3world.com/ai-solutions/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "Christine outlined the dual focus of the discussion:",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "AI in products: Enhancing user experiences through personalization, conversational interfaces, and predictive automation.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "AI in processes: Streamlining workflows, eliminating inefficiencies, and creating more space for creativity within teams.",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Integrating AI in product experiences",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Mike Gadsby, O3’s Co-founder and Chief Innovation Officer, shared actionable insights on how AI is transforming the products O3 builds. He emphasized that AI isn’t an end in itself but a tool to enhance experiences by addressing pain points and removing friction.",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Key themes included",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Personalization: AI enables highly tailored experiences by analyzing user profiles, behaviors, and preferences. For example, in one project, O3 used AI to dynamically recommend resources and streamline booking processes, delivering hyper-relevant suggestions to users.",
+          "_key": "k0038"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0039",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Conversational AI: Mike discussed the evolution from basic chatbots to robust virtual assistants powered by large language models. These tools now enable meaningful, contextual conversations that support users throughout their journey.",
+          "_key": "k0040"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0041",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Prediction and automation: AI’s predictive capabilities allow teams to anticipate user needs and automate repetitive tasks, saving time and improving overall efficiency.",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0043",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0006"
+          ],
+          "text": "Mike also introduced the concept of AI agents",
+          "_key": "k0044"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", which go beyond user navigation to autonomously perform tasks, such as booking tickets or managing schedules. While still in its early stages, this innovation represents a significant leap forward in how users interact with digital products.",
+          "_key": "k0045"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0006",
+          "_type": "link",
+          "href": "https://www.o3world.com/perspectives/ai-agents-charting-a-path-from-automation-to-intelligence/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0046",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Key takeaways",
+          "_key": "k0047"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0048",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "AI must remain human-centered, solving real-world problems and supporting user needs.",
+          "_key": "k0049"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0050",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Data is foundational to creating customized, predictive experiences.",
+          "_key": "k0051"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0052",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Embracing new AI-driven patterns can unlock entirely new possibilities for design and engagement",
+          "_key": "k0053"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0054",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Integrating AI in internal processes",
+          "_key": "k0055"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0056",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Mark Angelow and Simone Dehel, Senior UX Designers at O3, explored how AI is reshaping the way teams work. They focused on the practical benefits of integrating AI into the design process, from discovery through prototyping.",
+          "_key": "k0057"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0058",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Mark and Simone described AI tools as “sidekicks” or “interns” that help them work more efficiently by automating routine tasks and accelerating creative workflows. They emphasized the importance of refining and validating AI outputs, ensuring they meet the high standards expected by clients and users.",
+          "_key": "k0059"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0060",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Highlights from their discussion included",
+          "_key": "k0061"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0062",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Research and ideation: Tools like ChatGPT and Claude assist with brainstorming interview questions, synthesizing findings, and organizing insights during the discovery phase.",
+          "_key": "k0063"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0064",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Design and prototyping: AI-powered platforms like Figma AI and Adobe Firefly streamline tasks such as wireframing, image editing, and generating placeholder content.",
+          "_key": "k0065"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0066",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Testing and validation: AI tools enable rapid usability testing, with features like automated meeting summaries and A/B testing capabilities to analyze user feedback effectively.",
+          "_key": "k0067"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0068",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Simone shared her philosophy: “Think of AI as your intern. It’s there to handle the tedious tasks, freeing you to focus on what you do best—creative problem-solving.”",
+          "_key": "k0069"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0070",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Key takeaways",
+          "_key": "k0071"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0072",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "AI helps teams work smarter, not harder, by eliminating inefficiencies.",
+          "_key": "k0073"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0074",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Incorporating AI into workflows creates more time for high-value, creative work.",
+          "_key": "k0075"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0076",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The iterative nature of AI tools encourages teams to experiment and adapt to emerging capabilities.",
+          "_key": "k0077"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0078",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Key takeaways from O3’s AI journey",
+          "_key": "k0079"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0080",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The session demonstrated how O3 is leading the way in leveraging AI to enhance both customer experiences and internal operations. By focusing on human-centered design and thoughtful AI integrations, O3 is unlocking new levels of efficiency, creativity, and innovation.",
+          "_key": "k0081"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0082",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Whether you’re designing with AI or designing for it, O3’s insights provide a clear roadmap for maximizing the potential of this transformative technology. Stay tuned for more updates and insights from O3 as we continue to explore the possibilities of AI in design and beyond!",
+          "_key": "k0083"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Insights from O3’s AI session at ADPList’s AI summit",
+    "description": "Discover how O3 integrates AI into products and workflows to enhance user experiences, streamline processes, and drive innovation, as shared at ADPList’s AI Summit."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:9915",
+    "extractedAt": "2026-08-01T00:09:32.181Z"
+  }
+}

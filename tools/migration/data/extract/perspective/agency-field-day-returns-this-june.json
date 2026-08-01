@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:25.431Z"
+  },
+  "wpId": 709,
+  "slug": "agency-field-day-returns-this-june",
+  "title": "Agency field day returns this June",
+  "dateGmt": "2017-06-05 16:40:29",
+  "modifiedGmt": "2023-02-02 16:10:35",
+  "authorId": 16,
+  "categoryIds": [
+    7
+  ],
+  "excerpt": "Agency Field Day is a day of fun competition for Philadelphia’s digital agencies. Last year, teams from O3 World, BlueCadet, Inverse Paradox, Slice Communications and Tonic Design Co. faced off in events.",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-4.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Agency field day returns this June | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/agency-field-day-returns-this-june/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>We believe in a collaborative community, and Agency Field Day is a day of fun and friendly competition that drives that value. We always have such a blast at Agency Field Day that we decided to bring it back this year on June 16th!</h3>\n<p>Last year, teams from O<sub>3</sub> World, BlueCadet, Inverse Paradox, Slice Communications and Tonic Design Co. faced off in events.</p>\n<p>This year, we are excited to have Blue Cadet and Inverse Paradox to join us again for another day of fun, and to have new team additions: Hanlon Creative and Seer Interactive.</p>\n<p>Be sure to catch up on the action on June 16th by using the hashtag <a href=\"https://twitter.com/search?q=phlagencyfieldday&amp;src=typd\" target=\"_blank\" rel=\"noopener noreferrer\">#PHLAgencyFieldDay</a> via Instagram and Twitter.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Agency field day returns this June",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Agency Field Day is a day of fun and friendly competition that drives that value."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      4309,
+      712,
+      6193,
+      992
+    ],
+    "author": ""
+  }
+}

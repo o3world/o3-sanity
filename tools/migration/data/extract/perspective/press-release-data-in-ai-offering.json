@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:53.144Z"
+  },
+  "wpId": 8002,
+  "slug": "press-release-data-in-ai-offering",
+  "title": "PRESS RELEASE: Delivering personalized experiences backed by data",
+  "dateGmt": "2023-06-21 18:55:26",
+  "modifiedGmt": "2023-06-23 23:35:31",
+  "authorId": 16,
+  "categoryIds": [
+    15,
+    7
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/06/O3-website-imagery_-Perspectives.png",
+    "alt": "Data, Analytics and AI Featured image"
+  },
+  "seo": {
+    "titleOverride": "Press release: Data + AI offering",
+    "titleRendered": "Press release: Data + AI offering",
+    "descriptionOverride": "Unlock the power of data, analytics & AI for exceptional experiences with O3's new service offering",
+    "descriptionRendered": "Unlock the power of data, analytics & AI for exceptional experiences with O3's new service offering",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/press-release-data-in-ai-offering/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "PRESS RELEASE: Delivering personalized experiences backed by data",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Unlock the power of data, analytics & AI for exceptional experiences with O3's newest service offering"
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>FOR IMMEDIATE RELEASE</p>\n<p>[Philadelphia, 3:00 PM ET] – O3, a leading provider of cutting-edge digital consulting solutions, is excited to announce the launch of their service offering, &#8220;<a href=\"https://www.o3world.com/services/data-analytics-ai-consulting/\">Data, Analytics &amp; AI Consulting: Delivering personalized experiences backed by data</a>&#8221; Built on O3’s existing work with Data and Analytics, this comprehensive suite of AI solutions empowers organizations to harness the full potential of their data, uncover powerful insights, drive intelligent decision-making and create exceptional customer experiences.</p>\n<p>In today&#8217;s fast-paced digital landscape, businesses recognize the significance of data and AI in gaining a competitive edge. O3&#8217;s new service offering goes beyond mere technology trends, offering organizations a strategic approach to leveraging AI for enhanced data and analytics capabilities. By partnering with O3, businesses can revolutionize their operations, drive innovation, and stay ahead of the curve.</p>\n<h3>The key benefits of embracing AI through O3&#8217;s service offering include:</h3>\n<p>Better informed business decisions: By leveraging data and analytics, organizations can make informed decisions backed by AI, ensuring that every action is driven by valuable insights and evidence.</p>\n<p>Alignment with CX best practices: Prioritizing data-driven insights enables businesses to continually evaluate and improve user experience, performance, and usability of their digital products, thereby delivering exceptional customer experiences.</p>\n<p>Elevated customer experience (CX): O3&#8217;s AI solutions seamlessly integrate business objectives, the Voice of the Customer (VoC), and data analytics to create personalized experiences that drive engagement, conversions, and customer loyalty. With reduced integration time and enhanced personalization, businesses can exceed customer expectations.</p>\n<p>The launch of &#8220;Data, Analytics &amp; AI Consulting: Delivering personalized experiences backed by data.&#8221; follows O3&#8217;s recent webinar, &#8220;Data in the Age of AI,&#8221; which explored the transformative power of analytics, data, and AI in shaping exceptional customer experiences. The event featured industry experts Mahesh Gaitonde, O3 Chief Digital Officer, and Carrie Bolton, O3 Data &amp; Analytics Consultant, who shared valuable insights, practical knowledge, and actionable strategies.</p>\n<p>For organizations eager to embark on their data, analytics, and AI journey, O3 offers a dedicated team of experts ready to guide them toward AI-driven success. To learn more about O3&#8217;s comprehensive AI solutions and how they can transform your business, <a href=\"https://www.o3world.com/contact/\">contact O3</a>.</p>\n<h4>About O3:</h4>\n<p>As your experience partner, O3 helps you identify new opportunities to drive meaningful impact along your customers’ journeys. We collaborate with you to understand your audiences, meet business objectives, make bold moves, and personalize an experience strategy that works for you.</p>\n<p><em>For media inquiries, please contact:</em></p>\n<p><em>Maddie Boucher</em></p>\n<p><em>Marketing strategist</em></p>\n<p><em>Maddieboucher@o3world.com</em></p>\n"
+      }
+    ],
+    "related_articles": [
+      7840,
+      3906,
+      7257
+    ],
+    "author": ""
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:26.487Z"
+  },
+  "wpId": 10344,
+  "slug": "the-build-vs-buy-dilemma-making-smart-ai-investment-choices",
+  "title": "The build vs. buy dilemma: making smart AI investment choices",
+  "dateGmt": "2025-10-07 23:01:50",
+  "modifiedGmt": "2025-10-08 16:02:50",
+  "authorId": 18,
+  "categoryIds": [
+    75,
+    11,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2025/10/O3-website-imagery_-Perspectives-2.jpg",
+    "alt": "Build vs. buy"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "The build vs. buy dilemma: making smart AI investment choices | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/the-build-vs-buy-dilemma-making-smart-ai-investment-choices/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "Build smart, buy smarter.",
+      "kicker_tag": "div",
+      "title": "The build vs. buy dilemma: making smart AI investment choices",
+      "heading_level": "h1",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "The build versus buy debate isn't new, but AI has completely rewritten the rules. What used to require armies of developers and months of work can now be prototyped in days—and the question isn't just about technology anymore, it's about value."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>The build versus buy question has haunted technology leaders for decades. In the AI era, this isn&#8217;t really about technology at all, it&#8217;s about value creation and organizational impact.</p>\n<p>At its core, the decision comes down to one fundamental question: what investment will create the most value for your organization? Not what&#8217;s trendy, not what your competitors are doing, but what will actually move the needle for your business.</p>\n<h3>Understanding the trade-offs</h3>\n<p>Let&#8217;s examine what each path offers.</p>\n<p><strong>Building</strong> gives you precision. You&#8217;re creating something that solves your specific problem in your specific way. It fits like a glove because it was tailored to your hand. But you&#8217;re also taking on the responsibility of maintaining it, supporting it, and evolving it as needs change.</p>\n<p><strong>Buying</strong> typically offers easier support and maintenance because someone else is on the hook for keeping the lights on. But adoption can be tricky. Off-the-shelf solutions rarely map perfectly to how your team actually works, which means you&#8217;re either changing the tool or changing the way people work. Neither is trivial.</p>\n<h3>The AI twist: Building isn&#8217;t what it used to be</h3>\n<p>Here&#8217;s where things get interesting. Building solutions in the AI age isn&#8217;t like traditional software development anymore. Low-code and no-code tools like Lovable have fundamentally changed the game, making it easier than ever to spin up solutions to workflow issues that would have taken months and six-figure budgets just a few years ago.</p>\n<p>Take our own story. We built an estimation tool that allowed us to ditch a lengthy, cumbersome process that relied on spreadsheets and a whole lot of subject matter expertise. Now we have something that meets our workflow requirements, gives us historical data that&#8217;s driving business insights, and we can continue to refine it over and over.</p>\n<p>But here&#8217;s the best part: it wasn&#8217;t created by an engineer or a strategist. It was built by our own Justin Handler, who runs growth, business development, and our client services team. His understanding of the problem and insight into our needs helped drive a solution that we all use now.</p>\n<p>The power of modern AI-enabled development tools is that they democratize solution-building in ways that were simply impossible before.</p>\n<h3>Building bridges, not empires</h3>\n<p>There&#8217;s another way to think about the build approach that doesn&#8217;t involve creating whole new pieces of software. We like to think of it as &#8220;building bridges&#8221; between critical components of your operational arsenal. A key component of the client work we&#8217;re doing these days starts with breaking down existing workflows, mapping out journeys, and identifying the key roadblocks. Instead of looking to replace the whole journey, we&#8217;re finding spots where AI can solve specific issues. That could be quicker search, workflow automation via an AI agent, or aggregating data to provide quick insights to act upon.</p>\n<p>This approach ensures adoption because we&#8217;re not breaking the workflow, just enhancing it. People don&#8217;t have to learn entirely new systems or abandon tools they&#8217;re comfortable with. The AI layers in seamlessly, making their existing processes better.</p>\n<p>Critically, we always design solutions with humans deliberately in the loop. This creates engagement and trust. AI handles the grunt work, the repetitive tasks, the data synthesis, but humans make the decisions, provide the context, and maintain control.</p>\n<h3>When buying makes more sense</h3>\n<p>Now, let&#8217;s say your problem is less &#8220;bridgeable&#8221; or is, frankly, too big to build something for. A buy scenario may make more sense.</p>\n<p>There are literally thousands of AI tools out there solving very specific issues. The key is making sure the investment makes sense. ROI is the critical lever and the cost to change is worth the investment.</p>\n<p>Additionally, many mission-critical tools you&#8217;re already using like CRM platforms, marketing automation systems, or productivity suites now have solid AI capabilities baked in. These aren&#8217;t bolt-on features anymore; they&#8217;re becoming core to how these platforms work.</p>\n<p>The challenge? You&#8217;ll likely have to train the team and connect the dots across the organization. But this is no different than traditional digital transformation efforts. It requires the same attention to change management, the same focus on adoption, and the same commitment to making it stick.</p>\n<h3>A simple starting point</h3>\n<p>A good, straightforward example of a smart buy scenario is launching an enterprise-wide AI platform like ChatGPT or Claude. These tools can create a single resource for everyone to share and learn from. They can become a common foundation for exploring what AI can do for your organization.</p>\n<p>But, they need to come with proper rollout plans, training, and governance to be well supported. Just turning on access and hoping people figure it out won&#8217;t cut it.</p>\n<h3>Making the right choice</h3>\n<p>So how do you actually decide?</p>\n<p>Start by asking these questions:</p>\n<ul>\n<li><strong>What problem are we really trying to solve?</strong> Be specific. &#8220;We need AI&#8221; isn&#8217;t a problem statement.</li>\n<li><strong>Who will use this, and how will it fit into their workflow</strong>? If the answer requires people to completely change how they work, proceed with caution.</li>\n<li><strong>What&#8217;s the true cost of ownership?</strong> For builds, factor in maintenance and evolution. For buys, consider training, integration, and ongoing subscription costs.</li>\n<li><strong>Can we start small and prove value before going big?</strong> Pilot programs aren&#8217;t just for risk mitigation. They&#8217;re windows into critical insight about what works, what does not and where you should invest.</li>\n<li><strong>Are we creating vendor lock-in or technical debt we can&#8217;t afford?</strong> Both build and buy have ongoing investment implications, if you&#8217;re not careful.</li>\n</ul>\n<p>The reality is that most organizations will need a mix of both. Some problems are perfectly suited to off-the-shelf solutions. Others demand custom builds. Increasingly, the smartest approach is finding ways to enhance what you already have rather than ripping and replacing.</p>\n<p>The AI age hasn&#8217;t eliminated the build versus buy dilemma, it&#8217;s just changed the variables. The fundamentals remain the same: understand your problem, know your constraints, focus on value creation, and always keep the humans in the loop. At the end of the day, the best AI investment isn&#8217;t the one that&#8217;s most technically impressive. It&#8217;s the one that actually makes your organization more effective at doing what it does best.</p>\n"
+      }
+    ],
+    "related_articles": [
+      8522,
+      10205,
+      9328
+    ],
+    "author": [
+      672
+    ]
+  }
+}

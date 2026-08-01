@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:26.488Z"
+  },
+  "wpId": 10259,
+  "slug": "beyond-the-mockup-figma-make-is-positioned-to-reshape-designs-organizational-power",
+  "title": "Beyond the mockup: Figma Make is positioned to reshape design's organizational power",
+  "dateGmt": "2025-06-05 16:42:53",
+  "modifiedGmt": "2025-06-05 16:42:53",
+  "authorId": 16,
+  "categoryIds": [
+    61
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2025/06/Figma-Make.jpg",
+    "alt": "O3 and Figma Make"
+  },
+  "seo": {
+    "titleOverride": "How Figma Make is transforming design leadership",
+    "titleRendered": "How Figma Make is transforming design leadership",
+    "descriptionOverride": "Figma Make isn't just prompt-to-code—it's redefining how design teams operate, align with dev, and drive business impact. Here’s what leaders need to know.",
+    "descriptionRendered": "Figma Make isn't just prompt-to-code—it's redefining how design teams operate, align with dev, and drive business impact. Here’s what leaders need to know.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/beyond-the-mockup-figma-make-is-positioned-to-reshape-designs-organizational-power/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Beyond the mockup: Figma Make is positioned to reshape design's organizational power",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "How prompt-to-code workflows are redefining design influence"
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>Design teams may be looking at <a href=\"https://www.figma.com/make/\">Figma Make</a> as just another cool prompt-to-code. But they may be missing the bigger picture.</p>\n<p>After many years of scaling design organizations and seeing the same friction points over and over again, I&#8217;m convinced that Figma Make is more than just a shiny new object—it&#8217;s a catalyst for fundamentally changing how design teams operate and deliver value. The real opportunity isn&#8217;t in the technology itself; it&#8217;s in how Figma Make can eliminate friction that&#8217;s been holding design teams back for decades.</p>\n<h3>The friction points that slow everything down</h3>\n<p>If you&#8217;re a design leader, you likely know some of these pain points all too well:</p>\n<h4>The presentation trap</h4>\n<p>You spend more time creating presentations about design than actually designing products. I&#8217;ve seen teams lose days preparing stakeholder decks instead of solving business and user problems. Sound familiar?</p>\n<h4>The “is this possible?” loop</h4>\n<p>The endless back-and-forth between design and development about technical feasibility. Ideas sometimes get watered down or abandoned before anyone really explores what&#8217;s possible.</p>\n<h4>The static mockup problem</h4>\n<p>Stakeholders struggle to understand complex interactions from flat screens. Good ideas die because they can&#8217;t be experienced, only explained. Or there is a misalignment in expectations.</p>\n<h4>The client buy-in bottleneck</h4>\n<p>In consultancy work, there is sometimes a gap between showing a concept and getting approval to build it. Teams get stuck in revision cycles because stakeholders can&#8217;t always effectively visualize what the end result will be.</p>\n<p>These aren&#8217;t tool problems—they&#8217;re organizational problems, and now we have a tool that can actually solve them. My new bestie, Figma Make, powered by my other long-time bestie, Claude: a true friendship match made in heaven.</p>\n<h3>Meaningful use cases for design leaders</h3>\n<p>I’ve heard a lot of design leaders talk about how great Figma Make is, but not all are clear on potential use cases for it. Truthfully, I was a bit of a deer in the headlights when alpha testing the product as well. But since Config, I’ve done some thinking and brainstorming (as we designers often do) and chatting with other design leaders, and here I share a few applications that could create meaningful organizational impact:</p>\n<h4>Executive storytelling</h4>\n<p>Build working demos for board presentations and strategic planning sessions. Nothing communicates vision like an experience you can actually see and potentially use. No more abstract explanations about what user flows might look like—show them the flow.</p>\n<h4>Client onboarding acceleration</h4>\n<p>For agencies and consultancies, Figma Make could help replace lengthy proposal processes with interactive proof-of-concept projects (think show, don&#8217;t tell). Imagine walking into a pitch with a working prototype instead of a deck full of what’s been done before.</p>\n<h4>Cross-functional alignment</h4>\n<p>For in-house design teams, try collaboratively using Figma Make to create prototypes that design, product, engineering, and business teams can all contribute to. Break down those department silos through shared understanding. When everyone can click through the same experience together, conversations start to change.</p>\n<h4>Design system evangelism</h4>\n<p>Build interactive examples that show teams exactly how design decisions impact user experience. Make the abstract concrete. Instead of sending style guides that collect digital dust, send working examples teams can immediately understand.</p>\n<h4>Rapid market validation</h4>\n<p>Test concepts with users and stakeholders before committing to full development cycles. Fail fast, learn faster. Get real feedback on real interactions, not theoretical ones.</p>\n<h3>What this means for design leadership</h3>\n<p>The teams that figure this out first will have a significant advantage. Not because they have better tools, but because they&#8217;ll fundamentally change how their organizations think about design&#8217;s role in business success.</p>\n<p>Here are the questions I think you should be asking yourself:</p>\n<ul>\n<li>How much time does your team spend on artifacts versus experiences?</li>\n<li>What decisions get delayed because stakeholders can&#8217;t visualize the outcome?</li>\n<li>Where could rapid prototyping eliminate organizational friction in your company</li>\n<li>How might interactive examples change your design system adoption rates?</li>\n</ul>\n<h3>Getting started strategically</h3>\n<p>Don&#8217;t start with the technology; start with your biggest organizational pain point. Is it stakeholder buy-in? Client approval? Design-development handoffs? Alignment around design systems?</p>\n<p>Pick one friction point, experiment with Figma Make as a solution, and measure the organizational impact. Then scale what works. Become the design team that moves faster, communicates more effectively, and delivers more strategic value than ever before.</p>\n<p>The opportunity window is now. While most teams are still figuring out what Figma Make does, smart design leaders are figuring out how it transforms what design teams can be. That&#8217;s the real transformation hiding in plain sight.</p>\n"
+      }
+    ],
+    "related_articles": [
+      10227,
+      10205,
+      9595
+    ],
+    "author": [
+      3984
+    ]
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:47.912Z"
+  },
+  "wpId": 8480,
+  "slug": "young-smart-local-mike-gadsby-ai-panel-talent",
+  "title": "Young, Smart & Local: Mike Gadsby joins AI panel discussion on talent's future",
+  "dateGmt": "2023-11-13 15:41:32",
+  "modifiedGmt": "2023-11-14 17:19:39",
+  "authorId": 16,
+  "categoryIds": [
+    7
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/11/Join-O3s-webinar-on-Thursday-119-12-1230-PM-ET-2.png",
+    "alt": "Young Smart and Local O3 event"
+  },
+  "seo": {
+    "titleOverride": "Mike Gadsby Moderates AI Panel on Talent at Young, Smart & Local Conference",
+    "titleRendered": "Mike Gadsby Moderates AI Panel on Talent at Young, Smart & Local Conference",
+    "descriptionOverride": "Join moderator Mike Gadsby, O3’s CIO, as he leads a panel discussion on the practical applications and ethical dimensions of AI, featuring industry experts Barbara Pender and Rob Lalka.",
+    "descriptionRendered": "Join moderator Mike Gadsby, O3’s CIO, as he leads a panel discussion on the practical applications and ethical dimensions of AI, featuring industry experts Barbara Pender and Rob Lalka.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/young-smart-local-mike-gadsby-ai-panel-talent/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Young, Smart & Local: Mike Gadsby joins AI panel discussion on talent's future",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Mike Gadsby at Young, Smart & Local Conference in New Orleans as he moderates a thought-provoking panel on 'AI’s Impact on the Future of Talent’. "
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h2>Introduction:</h2>\n<p>Artificial intelligence (AI) has proven itself as a transformative force, reshaping the way we live and work. <a href=\"https://youngsmartandlocal.com/\">The Young, Smart &amp; Local conference</a>, November 13-15th in New Orleans, is set to host a panel discussion on &#8220;AI’s Impact on the Future of Talent,&#8221; featuring O3’s CIO and Co-founder Mike Gadsby as the moderator. This session will dissect crucial aspects of AI&#8217;s practical applications and its unprecedented effects on talent attraction and retention.</p>\n<h2>About the conference:</h2>\n<p>The three-day conference is aimed at informing and engaging leaders across various sectors on best practices for talent attraction, growth, and retention. As cities nationwide recognize the pivotal role talent plays in their growth, strategies range from college access initiatives to attracting remote workers. The conference, previously held in Philadelphia and Greensboro, is making its way to New Orleans next week.</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone size-full wp-image-8487\" src=\"https://www.o3world.com/wp-content/uploads/2023/11/ysl-logo-300.png\" alt=\"Young Smart and Local logo \" width=\"300\" height=\"233\" srcset=\"http://www.o3world.com/wp-content/uploads/2023/11/ysl-logo-300.png 300w, http://www.o3world.com/wp-content/uploads/2023/11/ysl-logo-300-48x37.png 48w\" sizes=\"auto, (max-width: 300px) 100vw, 300px\" /></p>\n<h2>About the session:</h2>\n<p>The spotlight of the event will be the panel discussion titled &#8220;AI’s Impact on the Future of Talent,&#8221; <strong>scheduled from 11:30 am to 1:15 pm at the Camp St. Warehouse. </strong></p>\n<h3>The panel includes:</h3>\n<p><a href=\"https://www.linkedin.com/in/barbarapenderai/\">Barbara Pender</a> is the Global GEN AI Deputy &amp; Delivery Lead at <a href=\"https://www.linkedin.com/company/accenture/\">Accenture</a>. Pender brings a wealth of experience and expertise in navigating the intricate landscape of artificial intelligence. Her insights shed light on practical applications of AI, emphasizing its transformative potential.</p>\n<p><a href=\"https://www.linkedin.com/in/lalka/\">Rob Lalka</a> is an Albert R. Lepage Professor in Business and Executive Director of the Lepage Center for Entrepreneurship at <a href=\"https://www.linkedin.com/school/tulane-university---a.b.-freeman-school-of-business/\">Tulane University</a>. With a focus on ethical and responsible AI deployment, Lalka explores the intersection of entrepreneurship and AI, highlighting the need for conscientious approaches that align with societal values.</p>\n<h2>Key Discussion Points:</h2>\n<ul>\n<li>Practical applications of AI</li>\n<li>Ethical and responsible AI deployment</li>\n<li>AI&#8217;s Role in talent attraction and retention</li>\n</ul>\n<h2>What O3 is doing in the AI space</h2>\n<p>O3 offers <a href=\"https://www.o3world.com/transcend/\">AI solutions</a> that prioritize personalized experiences, prediction capabilities, conversational AI, and automation. Our expert team empowers startups and enterprises alike with AI solutions, ensuring that limited expertise in artificial intelligence doesn&#8217;t hinder the pursuit of meaningful experiences for customers and employees.</p>\n<h2>Conclusion:</h2>\n<p>The &#8220;AI’s Impact on the Future of Talent&#8221; panel at Young, Smart &amp; Local offers valuable insights into the multifaceted world of artificial intelligence. Attendees can expect a deep dive into the ethical considerations, practical applications, and regional implications of AI, making this session a must-attend for anyone intrigued by the transformative potential of AI in talent management.</p>\n"
+      }
+    ],
+    "related_articles": [
+      8459,
+      8378,
+      7703
+    ],
+    "author": ""
+  }
+}

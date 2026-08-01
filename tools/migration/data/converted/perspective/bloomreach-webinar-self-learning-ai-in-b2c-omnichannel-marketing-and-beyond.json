@@ -1,0 +1,248 @@
+{
+  "_id": "perspective-wp-7933",
+  "_type": "perspective",
+  "title": "Bloomreach webinar: Self-learning AI in B2C omnichannel marketing and beyond",
+  "slug": {
+    "_type": "slug",
+    "current": "bloomreach-webinar-self-learning-ai-in-b2c-omnichannel-marketing-and-beyond"
+  },
+  "excerpt": "Join O3’s Chief Digital Officer, Mahesh Gaitonde, as he sits down with technology partner, Bloomreach.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2023-06-02T15:36:12Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/06/O3-website-imagery_-Perspectives-2.jpg"
+    },
+    "alt": "Mahesh Gaitonde Bloomreach power hour"
+  },
+  "body": [
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The world of AI is evolving rapidly, and its impact on B2C marketing is becoming increasingly evident. We are excited to announce an upcoming webinar alongside our partners at ",
+          "_key": "k0005"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Bloomreach",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", “Self-Learning AI in B2C Omnichannel Marketing and Beyond”. ",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Mahesh Gaitonde,",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " O3 Chief Digital Officer, will explore the transformative potential of AI in marketing campaigns and how it will shape the future of your organization and marketing roles.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.bloomreach.com/en"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/maheshgaitonde/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Why AI in B2C marketing matters:",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "There’s no denying that AI, with its latest breakthroughs like ChatGPT, has taken center stage. It has become a hot topic and its relevance for B2C marketers has never been more prominent than it is today. As AI becomes an integral part of our lives, businesses need to adapt and harness its power to stay ahead of the competition. Dive into the transformative potential of AI in marketing campaigns and explore how it will shape the future of your organization and marketing roles. ",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Register for this free webinar",
+          "_key": "k0014"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " to discover how AI can revolutionize your omnichannel marketing campaigns and gain insights from brands that have successfully embraced this transformative technology.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.marketingprofs.com/event/49329/self-learning-ai-in-b2c-omnichannel-marketing-and-beyond?adref=xexpswcs49329o3world&utm_source=sponsor&utm_medium=referral&utm_campaign=webinar"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Hear from our CDO, Mahesh Gaitonde:",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Mahesh brings over 20 years of digital transformation expertise and experience to O3, having led Capgemini’s Content Services Practice for North America. His strong background in global digital consultancy practices makes him the perfect leader to guide our strategy and innovation work.",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As O3’s Chief Digital Officer, Mahesh spearheads our efforts to strengthen and expand our core service offerings, with a focus on strategic solutions that drive end-to-end customer experience (CX) transformation for our clients. His deep understanding of enterprise needs and technology best practices ensures that O3 continues to develop innovative solutions to serve our clients’ requirements.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Bloomreach: Our valued partner:",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We are proud to collaborate with Bloomreach, a leading provider of marketing technology solutions. As Bloomreach expands its offerings, they continue to provide innovative solutions that empower businesses to optimize customer experiences and drive growth through data-driven analytics. Together, we aim to deliver valuable insights and practical knowledge on how to leverage AI in your omnichannel marketing efforts.",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This webinar promises to be an engaging and informative session. Join us on June 15, 2023, at 2:00 PM ET, as Mahesh Gaitonde, along with other industry experts, explores the current and future applications of AI in B2C marketing. Discover how AI is already being utilized by omnichannel marketers, gain insights into the future of AI for D2C/B2C brands, and understand the potential impact on marketing roles within your organization.",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Register",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.marketingprofs.com/event/49329/self-learning-ai-in-b2c-omnichannel-marketing-and-beyond?adref=xexpswcs49329o3world&utm_source=sponsor&utm_medium=referral&utm_campaign=webinar"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Self-learning AI in B2C omnichannel marketing and beyond",
+    "description": "O3 and Bloomreach will delve into the transformative potential of AI in marketing campaigns and explore how it will shape the future of your organization and marketing roles."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:7933",
+    "extractedAt": "2026-08-01T00:09:53.144Z"
+  }
+}

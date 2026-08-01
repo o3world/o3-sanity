@@ -1,0 +1,74 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:25.427Z"
+  },
+  "wpId": 2363,
+  "slug": "o3cap-websites-milestones-and-blended-processes",
+  "title": "What's new at O3 May 2019: A new website, milestones, and blended processes",
+  "dateGmt": "2019-05-08 23:18:42",
+  "modifiedGmt": "2023-02-02 15:58:11",
+  "authorId": 16,
+  "categoryIds": [
+    7,
+    8,
+    10
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-16.jpg",
+    "alt": "Red pattern"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "What's new at O3 May 2019: A new website, milestones, and blended processes | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/o3cap-websites-milestones-and-blended-processes/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>A New Look for O3</h3>\n<p>We don’t just create digital experiences for our clients, we also do quite a bit of work for ourselves. We’re always working on something new, whether it&#8217;s a <a href=\"https://www.o3world.com/labs/taskbot/\">new labs project</a> or <a href=\"https://www.o3world.com/labs/innovation-workshops/\">brainstorming fresh ideas</a> for <a href=\"https://www.o3world.com/work/\">our clients</a>, and we’re happy to show off the latest fruits of our labor: <a href=\"https://www.o3world.com/\">our NEW website</a>. Our site has gone through a major redesign, and we’re ready to share our work with you.</p>\n<p><img decoding=\"async\" class=\"alignnone size-large wp-image-2398\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/050919-New-Site-1024x576.jpg\" alt=\"O3 - News Site 2019\" /></p>\n<p>Happy 14th Birthday/Anniversary!</p>\n<p>Did you know that O3 World officially celebrated 14 years in business on May 5th? It’s hard to sum up everything that O3 has become after almost a decade and a half of being in business. We’ve worked on so many interesting projects, partnered with countless <a href=\"https://www.o3world.com/about/#o3-partners\">extraordinary clients</a>, and worked with a lot of <a href=\"https://www.o3world.com/about/team/\">amazing employees</a>. We want to sincerely thank everyone that helped make O3 what it is today. <em><strong>It really is good up high</strong></em>.</p>\n<h2>#AlwaysGrowing</h2>\n<p>How many companies do you know that have almost doubled their amount of employees over the course of the year? We’ve checked the numbers and it turns out that our staff has gone from 28 to 45 since last summer! Over the past year, we’ve hired:</p>\n<p>1 Design Director<br />\n9 Engineers<br />\n2 Experience Designers<br />\n4 PMs<br />\n1 Brand Manager</p>\n<p>And the list keeps growing. As we speak, <a href=\"https://www.o3world.com/careers/#open-positions\">we still have open positions</a> that need to be filled, and we’re always looking for talented individuals to join the O3 team. <a href=\"https://www.o3world.com/careers/\">Visit our careers page</a> to see who/what we’re looking for.</p>\n<p><img decoding=\"async\" class=\"alignnone size-large wp-image-2403\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/050919-New-Team-Members-1024x576.jpg\" alt=\"New Team Members - May 2019\" /></p>\n<h3>O3’s Special Project Blend</h3>\n<p>We love supporting new and local meetup groups, and our friends over at DPM Philly wanted to try something new. We don’t use a single project process at O3 World. In order to run our projects smoothly, we use a combination of Agile and Waterfall to best suit our clients’ needs. Our Head of Accounts, <a href=\"https://www.o3world.com/about/team/justin-handler/\">Justin Handler</a>, gave the first-ever Blended Project Process talk in Philly, and we’re already excited for the next one!</p>\n<p><img decoding=\"async\" class=\"alignnone size-large wp-image-2404\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/050819-Handler-Cherry-Blend-Process-1024x576.jpg\" alt=\"Handler Talk - Cherry Blend Process\" /></p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "What's new at O3 May 2019: A new website, milestones, and blended processes",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "There’s a lot of new content, so take a little time to explore!"
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      6193,
+      6191,
+      841,
+      4359
+    ],
+    "author": ""
+  }
+}

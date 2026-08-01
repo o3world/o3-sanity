@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:25.427Z"
+  },
+  "wpId": 2523,
+  "slug": "whats-new-with-1682-speaker-and-full-website-announcement",
+  "title": "What's new with 1682: Speaker & full website announcement",
+  "dateGmt": "2019-07-18 17:39:50",
+  "modifiedGmt": "2023-02-02 15:54:35",
+  "authorId": 16,
+  "categoryIds": [
+    7,
+    8
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-4.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "What's new with 1682: Speaker & full website announcement | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/whats-new-with-1682-speaker-and-full-website-announcement/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>You may remember the announcement of <a href=\"https://www.o3world.com/news/why-1682-and-why-not-forge/\">our latest conference</a>, 1682, back in April. We’ve been busy finding speakers, curating our invite list, and doing whatever we can to make 1682 the premiere invite-only innovation conference in the city.</p>\n<p>Now we’re pleased to announce the launch of our <a href=\"https://1682conf.com/\">full website!</a></p>\n<p>If you want to stay up to date on the latest 1682 speaker additions, day-of agenda, and conference updates, you’ll want to check out the site. It has everything you want to know about the conference and full bios of our (growing) speaker list.</p>\n<h3>Curious about who we have slated to speak at 1682? Here are two of our confirmed speakers:</h3>\n<p><img decoding=\"async\" class=\"alignnone size-large wp-image-2704\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/1682-Speakers-Edy-1024x576.jpg\" alt=\"1682 speaker Edy Liongosari\" width=\"100%\" /></p>\n<h4>Name: Edy Liongosari<br />\nCompany: Accenture<br />\nTitle: Chief Research Scientist and Managing Director</h4>\n<p>Edy Liongosari is Accenture’s Chief Research Scientist and Managing Director. He is responsible for the agenda and outcomes of Accenture Labs’ applied technology research across all seven Labs locations globally. The research defines the future for large enterprises, shapes the technology market and creates strong business results for our clients. Edy has been with Accenture for over 30 years. Edy and his team have received numerous patents and awards for innovation. A copy of his research work has also been placed into the Smithsonian’s permanent research collection. Edy has a Master’s degree in Computer Science from Indiana University.</p>\n<p><img decoding=\"async\" class=\"alignnone size-large wp-image-2703\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/1682-Speaker-Andy-1024x576.jpg\" alt=\"1682 speaker Andy Verone\" width=\"100%\" /></p>\n<h4>Name: Andy Verone<br />\nCompany: Oracle<br />\nTitle: Global Vice President, Industry and Innovation Strategy</h4>\n<p>Andy Verone is the Global Vice President for Oracle’s Construction and Engineering Global Business Unit responsible for Innovation and Industry Strategy globally. Andy is also the co-founder of Oracle’s Construction and Engineering innovation lab located in Chicago, IL. Andy has over 30 years of executive and international business experience across the globe in the Engineering and Construction industry. His background includes the implementation of global project-based information and delivery systems and knowledge management programs, as well as Board of Directors-level experience developing IT Strategic Plans and Governance programs. He also has managed large capital projects and government contracts.</p>\n<p>If you’ll want to see the full line-up of our growing speaker list, you’ll have to visit the site!</p>\n<p><a href=\"https://1682conf.com/\">You can check out the full site here.</a> Remember, 1682 is an invite/application only event. If you want to attend, you’ll have to <a href=\"https://1682conf.com/#tickets\">apply</a> on the site. Our first wave of invites are on their way out, so apply today for the chance to attend.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "What's new with 1682: Speaker & full website announcement",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "If you want to stay up to date on the latest 1682 speaker additions, day-of agenda, and conference updates, you’ll want to check out the site. It has everything you want to know about the conference and full bios of our (growing) speaker list."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      2819,
+      2675,
+      2018,
+      2632
+    ],
+    "author": ""
+  }
+}

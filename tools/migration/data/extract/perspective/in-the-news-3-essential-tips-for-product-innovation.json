@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:20.527Z"
+  },
+  "wpId": 2942,
+  "slug": "in-the-news-3-essential-tips-for-product-innovation",
+  "title": "3 Essential tips for product innovation",
+  "dateGmt": "2019-10-30 23:53:35",
+  "modifiedGmt": "2023-02-02 19:20:56",
+  "authorId": 16,
+  "categoryIds": [
+    15,
+    8
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights-3.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "3 Essential tips for product innovation | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/in-the-news-3-essential-tips-for-product-innovation/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Saying that you create innovative products is simple, but fostering and sustaining true innovation isn’t an easy task. You need to ensure that every project has well-defined end goals and that you’re constantly thinking of the needs of your end-users.</h3>\n<p>Our User Experience Director <a href=\"https://www.o3world.com/about/team/lauren-slattery/\">Lauren Slattery</a> recently wrote a piece about the three most important strategies people can follow for successful product innovation. Take some time to learn about how we sustain true innovation in all of the work we produce.</p>\n<h4><a href=\"http://customerthink.com/3-essential-tips-for-product-innovation/\" target=\"_blank\" rel=\"noopener noreferrer\">Read On CustomerThink</a></h4>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "3 Essential tips for product innovation",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Our User Experience Director Lauren Slattery recently wrote a piece about the three most important strategies people can follow for successful product innovation. Take some time to learn about how we sustain true innovation in all of the work we produce."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      6192,
+      3444,
+      5120,
+      3485
+    ],
+    "author": ""
+  }
+}

@@ -9,7 +9,7 @@
   "excerpt": "Earlier this year, we wrote about the acronym storm swirling around AI search. AEO. GEO. GSO. LLMO. Everyone in the industry had a label and a theory, and most of us were openly building the plane while flying it.",
   "author": {
     "_type": "reference",
-    "_ref": "person-wp-20"
+    "_ref": "person-wp-11"
   },
   "categories": [
     {
@@ -652,6 +652,6 @@
   "migration": {
     "locked": false,
     "sourceId": "wp:post:10623",
-    "extractedAt": "2026-07-31T23:27:31.835Z"
+    "extractedAt": "2026-08-01T00:09:26.484Z"
   }
 }

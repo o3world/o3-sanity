@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import type { WpSeo, WpSiteSeo } from '../lib/yoast'
+import { buildPersonDirectory } from './person'
 import { mapPerspective, type WpPerspective } from './perspective'
 
 const SITE: WpSiteSeo = {
@@ -56,7 +57,30 @@ function wpPost(overrides: Partial<WpPerspective> = {}): WpPerspective {
   }
 }
 
-const map = (post: WpPerspective) => mapPerspective(post, SITE)
+/** WP user 16 writes; team post 9147 is the ACF byline where a post sets one. */
+const PEOPLE = buildPersonDirectory(
+  [
+    {
+      _meta: { type: 'person', source: 'o3-world.live', extractedAt: '2026-07-31T20:07:34.550Z' },
+      wpId: 16,
+      slug: 'briano3',
+      name: 'Brian Crumley',
+      email: 'brian@o3world.com',
+    },
+  ],
+  [
+    {
+      wpId: 9147,
+      slug: 'brady-halligan',
+      name: 'Brady Halligan',
+      jobTitle: 'Senior Strategist',
+      email: 'brady@o3world.com',
+      photo: 'https://o3.com/up/brady.jpg',
+    },
+  ],
+)
+
+const map = (post: WpPerspective) => mapPerspective(post, SITE, PEOPLE)
 
 /** Narrow to the success arm, failing with the reported issues if it isn't. */
 function expectOk(result: ReturnType<typeof mapPerspective>) {
@@ -82,6 +106,27 @@ describe('mapPerspective', () => {
       sourceId: 'wp:post:101',
       extractedAt: '2026-07-31T20:07:34.550Z',
     })
+  })
+
+  it('prefers the ACF author over the account that published (#17)', () => {
+    // On 39 of the 40 posts carrying an ACF author, the two disagree — the WP
+    // account is just whoever hit publish.
+    const doc = expectOk(
+      map(
+        wpPost({
+          fields: {
+            author: [9147],
+            flexible_post_content: [{ acf_fc_layout: 'text', text_editor: '<p>Body.</p>' }],
+          },
+        }),
+      ),
+    )
+    expect(doc.author._ref).toBe('person-wp-9147')
+  })
+
+  it('falls back to the publishing account when no ACF author is set', () => {
+    const doc = expectOk(map(wpPost()))
+    expect(doc.author._ref).toBe('person-wp-16')
   })
 
   it('converts the WP GMT date to an ISO instant', () => {

@@ -1,0 +1,585 @@
+{
+  "_id": "perspective-wp-7757",
+  "_type": "perspective",
+  "title": "Finding an alternative to Google Optimize before it's too late",
+  "slug": {
+    "_type": "slug",
+    "current": "finding-an-alternative-to-google-optimize-before-its-too-late"
+  },
+  "excerpt": "O3 is offering a comprehensive Google Optimize migration service to help businesses transition to a suitable alternative platform before the product's discontinuation on September 30, 2023, ensuring that their website continues to drive engagement, leads, and revenue.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-11",
+      "_key": "cat-11"
+    }
+  ],
+  "publishedAt": "2023-05-02T19:06:29Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/05/O3-website-imagery_-Perspectives.png"
+    },
+    "alt": "Google Optimize"
+  },
+  "body": [
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Introduction",
+          "_key": "k0003"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "At O3, we know that the success of your business depends on having a high-performing website that is optimized for digital engagement. As ",
+          "_key": "k0005"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Google Optimize",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " is sunsetting soon, we are offering a comprehensive migration service to help businesses transition to a suitable alternative platform. Our experienced team will work closely with you to identify the best alternative tools for your business needs, and provide a seamless transition to ensure that your website continues to drive engagement, leads, and revenue.",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://optimize.google.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Problem definition",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If your business is currently using Google Optimize, you may be facing the challenge of finding a suitable alternative platform before the product’s discontinuation on September 30, 2023. This impending deadline increases the urgency to migrate to a new solution, as the loss of Google Optimize’s features and capabilities may hinder your ability to conduct AB testing and optimize your website for customer engagement and revenue generation.",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "AB testing is a critical tool for businesses to test ideas and iterate quickly with minimal implementation costs. It allows companies to validate their design decisions before committing resources to full-scale development efforts, minimizing risks and maximizing ROI. With Google Optimize no longer available, it’s crucial to identify a suitable alternative that can provide similar functionality and benefits to support your digital goals.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As the deadline for the discontinuation of Google Optimize approaches, the risks of missed opportunities for customer engagement and lost revenue become more pronounced. Acting quickly to find an alternative platform is essential to ensure that your website performance remains aligned with your business objectives. O3 can help you navigate the next steps and identify the best alternative solution for your business, mitigating the risks associated with the discontinuation of Google Optimize and supporting your AB testing and optimization efforts.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Solution overview",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "At O3, we understand that each business has unique needs and requirements when it comes to digital optimization. That’s why we provide a comprehensive Google Optimize migration service that is tailored to your specific needs.",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Discovery & Planning",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We start by collaborating with your team to understand your unique requirements and help identify the most suitable platform for your business. Our team considers various factors such as your current setup, business goals, and budget to recommend the best options. We will assess your current experimentation program to get answers to these broad questions:",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What is going well?",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What problems are you experiencing?",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What are the strengths and limitations with your current A/B testing tool?",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What kind of resources are currently available to you?",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This could also be an opportunity to mature your experimentation program. Here are some signs that may necessitate an expansion:",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "You’re looking for more advanced features like multivariate testing and an SRM checker.",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "You’d like to explore server-side testing.",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "You’re ready to expand into product and feature experimentation.",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "You’ve seen some success, but you’ve reached your limit with what you can do with a free or low-cost solution",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0042",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "At the end of the Discovery and Planning process, we’ll provide a detailed migration roadmap. We’ll work with you to ensure that the migration process is as smooth and seamless as possible, with minimal disruption to your website’s performance.",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0044",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Implementation / Migration",
+          "_key": "k0045"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0046",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "During the Implementation phase, we will follow these high level steps to migrate all of your experiments:",
+          "_key": "k0047"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0048",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Export all of your existing data",
+          "_key": "k0049"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0050",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Set a suitable migration date, preferably two months out from Google Optimize sunset",
+          "_key": "k0051"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0052",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Evaluate and select a new A/B testing platform",
+          "_key": "k0053"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0054",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Begin the migration process",
+          "_key": "k0055"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0056",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Check for data accuracy",
+          "_key": "k0057"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0058",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 will provide comprehensive support in connecting the new AB testing tool to your existing stack, and equipping your team with the necessary knowledge to run experiments effectively.",
+          "_key": "k0059"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0060",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Why now",
+          "_key": "k0061"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0062",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "With Google Optimize sunsetting on September 30, 2023, businesses using the platform face the risk of reduced customer satisfaction and missed revenue opportunities if they delay migrating to an alternative.",
+          "_key": "k0063"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0064",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Acting now to begin the migration process ensures that you have ample time to make an informed decision on the best platform for your business, and to migrate all your data, tests, and configurations seamlessly.",
+          "_key": "k0065"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0066",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Conclusion",
+          "_key": "k0067"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0068",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "With the deadline for discontinuation fast approaching, the risks of missed opportunities for customer engagement and lost revenue become more pronounced. At O3, we are offering a comprehensive Google Optimize migration service to help businesses transition to a suitable alternative platform. Our experienced team will work closely with you to identify the best alternative platform for your business needs, and provide a seamless transition to ensure that your website continues to drive engagement, leads, and revenue.",
+          "_key": "k0069"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0070",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Don’t let the sunset of Google Optimize hinder your ability to conduct AB testing and optimize your website for customer engagement and revenue generation. ",
+          "_key": "k0071"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Contact O3",
+          "_key": "k0072"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " today to get started on a successful migration!",
+          "_key": "k0073"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Finding an alternative to Google Optimize before it's too late.",
+    "description": "Looking for a suitable alternative to Google Optimize before its discontinuation on September 30, 2023? O3 offers a comprehensive migration service to help businesses transition seamlessly to a new platform and continue driving engagement, leads, and revenue"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:7757",
+    "extractedAt": "2026-08-01T00:09:57.655Z"
+  }
+}

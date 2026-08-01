@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:06.748Z"
+  },
+  "wpId": 4206,
+  "slug": "understand-customers-at-every-touchpoint",
+  "title": "Understand customers at every touchpoint",
+  "dateGmt": "2021-04-07 20:30:13",
+  "modifiedGmt": "2023-02-01 01:56:54",
+  "authorId": 16,
+  "categoryIds": [
+    15,
+    62
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/04/O3-website-imagery_-Insights-13.jpg",
+    "alt": "Erica Minton, UX Designer."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Understand customers at every touchpoint | O3",
+    "descriptionOverride": "Take a look at our process for identifying the challenges and opportunities that exist across our clients' entire customer journey.",
+    "descriptionRendered": "Take a look at our process for identifying the challenges and opportunities that exist across our clients' entire customer journey.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/understand-customers-at-every-touchpoint/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>We define customer experience as the entire ecosystem of touchpoints that an end-user encounters as they engage with a brand. If you think about something like a new cloud or SaaS product (perhaps an online accounting platform, or something similar), CX would include everything from the first time customers become aware of the product to researching and comparing pricing or options to purchasing, onboarding and using the new technology everyday. Each part of that journey includes a complex series of decisions and a web of user experiences to consider.</p>\n<h3>Start with the Customer</h3>\n<p>First, while we&#8217;re often looking at a &#8220;customer&#8221; experience, it&#8217;s important to point out that we could just as easily be examining a &#8220;patient&#8221; or &#8220;internal operations&#8221; or &#8220;administrative&#8221; experience. So, as with all human centered design solutions, our first step is to define who we&#8217;re designing for. Often, this process will start with a data assessment or end-user interviews to provide an unbiased, &#8220;outside-in&#8221; view to stakeholders who may be participating in the workshop. We look for key challenges or needs across each segment.</p>\n<p>Using our accounting platform as an example, our customer or audience may include bookkeepers and accountants, though it may also include IT professionals looking to make a vendor selection for a large scale organization. Each experience, pain point and need may vary and needs to be considered.</p>\n<p>While we can glean similar insight from sales, support or other &#8220;front-line&#8221; stakeholders who regularly engage with the target audience(s), we find that these internal observations can skew towards individuals as opposed to wider segments. However, as long as we have a solid understanding of who the customer or end-user is and what opportunities look like, we can have a very effective workshop.</p>\n<h3>Breaking Down the Journey into Phases</h3>\n<p>Once we have a solid understanding of who the customers are and what key challenges or needs may be, we then define each phase of the journey. Most CX journeys will have some combination of the following phases:</p>\n<ul>\n<li><strong>Awareness:</strong> how the customer becomes aware of the product or service</li>\n<li><strong>Research:</strong> how the customer then compares or contrasts similar products or services</li>\n<li><strong>Purchase:</strong> the process the customer must go through to purchase the product or service</li>\n<li><strong>Fulfillment or Onboarding:</strong> how the customer receives the product or is onboarded to the recently purchased service</li>\n<li><strong>Use:</strong> what the customer experience is as they use the product or their experience with the service</li>\n<li><strong>Support:</strong> if the customer has a question or issue, how they get help</li>\n<li><strong>Retention:</strong> ongoing, how the customer is engaged with the brand and discovers new products or services</li>\n</ul>\n<p>Again, these phases may be different depending what experience we&#8217;re examining. In healthcare for instance, a patient experience may have additional, specific phases around treatment or post-treatment phases.</p>\n<h3>Touchpoints, Pain Points &amp; Opportunities</h3>\n<p>Once our phases are defined, we then discuss each one and define typical touchpoints a user should expect. Then, we map our pain points for each user segment. This is where our outside insight may provide interesting opportunities to consider. For instance, we often find onboarding is a typical challenge as a customer is handed off from marketing to a product team or client services.</p>\n<p>Next, we create a shared understanding of the key pain points, we then finish the workshop with an ideation session where we diverge on several concepts that seek to solve any one of the primary pain points across the journey.</p>\n<p>For our accounting platform (or, really any online SaaS solution), key focus areas are typically the purchase phase through onboarding, general use and retention. These are the areas where ongoing experience evaluation and new ideas are critical.</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"size-full wp-image-4207\" src=\"https://www.o3world.com/wp-content/uploads/2022/09/040721-CX-Journey-Example.jpg\" alt=\"example CX journey\" width=\"2400\" height=\"1719\" /></p>\n<h3>Prioritization &amp; Road Map</h3>\n<p>Following a carefully moderated ideation session, we then work with clients to prioritize those concepts across an importance / difficulty matrix. While we want to think big, we also want to make sure we&#8217;re focusing on the most pressing pain points and consider cost and operational challenges associated with each idea. We generally converge on 2-3 ideas where we then work with clients to scope the work and develop a roadmap to delivery.</p>\n<p>As an example of comparing tradeoffs when prioritizing, for our accounting platform where onboarding and retention are our focus, we may compare the value of something like a predictive service using AI that may provide a lot of impact to something more straightforward such as product updates and offers on the dashboard. Both ideas offer impact, but developing an AI model and implementing it may take months or even years and a lot of dollars to develop. That’s not to say that the AI concept is not worth pursuing, it’s simply a tradeoff that needs to be considered.</p>\n<p>While all this may seem intense, it&#8217;s remarkably simple and quick. The process and workshop provide our clients with a greater sense of the challenges and opportunities that exist across their entire journey and helps to connect their perception of their customer journey across departments and disciplines. If you&#8217;re interested in learning more about our CX workshops, <a href=\"https://www.o3world.com/contact/\">contact us</a> today.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Understand customers at every touchpoint",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Each part of the customer journey includes a complex series of decisions and a web of user experiences to consider."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      3444,
+      5262,
+      4206,
+      4530
+    ],
+    "author": ""
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:25.428Z"
+  },
+  "wpId": 992,
+  "slug": "brian-crumley-o3-developer-greatest-hits-accomplishments-list",
+  "title": "Brian Crumley, O3 Developer, greatest hits (accomplishments) list",
+  "dateGmt": "2018-05-22 22:37:32",
+  "modifiedGmt": "2023-02-02 16:03:20",
+  "authorId": 16,
+  "categoryIds": [
+    10,
+    11
+  ],
+  "excerpt": "In honor of Brian Crumley being with O<sub>3</sub> for six years, we're highlighting some of his biggest accomplishments. ",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-4.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Brian Crumley, O3 Developer, greatest hits (accomplishments) list | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/brian-crumley-o3-developer-greatest-hits-accomplishments-list/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>A celebration is in order as one of our developers, Brian Crumley, is celebrating 6 years at O3. In honor of that great achievement, we&#8217;re putting together his Greatest Hits (or accomplishments) list!</p>\n<h3 class=\"h5\"><strong>His O3 Highlight Reel:</strong></h3>\n<ul>\n<li>He&#8217;s been a major contributor to some of our biggest websites and applications including, Vertex, SEI, various Thompson Reuters properties, Houghton International, The Institutes and various iterations of the O3 website and associated microsites.</li>\n<li>He&#8217;s the primary author of our Front-end guidelines that <a href=\"https://www.o3world.com/news/front-end-development-standards-and-best-practices/\">you can find here</a>.</li>\n<li>Has been one of the largest leaders of our accessibility efforts.</li>\n<li>Led the adoption of style guide-driven development.</li>\n<li>Helped establish initial build processes for SCSS files (Codekit).</li>\n<li>Provided guidance on Google Analytics implementation on Vertex and other sites.</li>\n<li>Established process for creating SVGs and SVG sprites, as well as implementing web fonts across O3 projects.</li>\n<li>Brian, in partnership with Steve Gengler, another O3 developer, is helping to improve O3&#8217;s development practice by defining O3 architectural standards. The goal is to define and align the team on &#8220;how&#8221; we build technology.</li>\n<li>Additionally, Brian is heavily involved in the community holding various positions with <a href=\"https://twitter.com/PhillyCHI?lang=en\" target=\"_blank\" rel=\"noopener noreferrer\">PhillyCHI</a>, running <a href=\"https://2017.barcampphilly.org/\" target=\"_blank\" rel=\"noopener noreferrer\">Barcamp</a>, producing the <a href=\"http://www.forgeconf.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Forge Conference</a> and being a regular speaker during Philly Tech Week.</li>\n</ul>\n<p>We could rattle off SO many more of his accomplishments, but Justin Handler, our head of accounts, said it best:</p>\n<blockquote><p>&#8220;Brian&#8217;s kinda like a silent assassin, he does so much for the organization both internally and externally but is incredibly quiet/poised about it.&#8221;</p></blockquote>\n<p>Help us in giving a warm congratulations to Brian on an impressive six years at O3! We&#8217;re looking forward to celebrating many more years to come.</p>\n<p>Wanting this to be you and interested in joining the O3 team? Check out our <a href=\"https://www.o3world.com/careers/\" target=\"_blank\" rel=\"noopener noreferrer\">careers</a> page for more.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Brian Crumley, O3 Developer, greatest hits (accomplishments) list",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Check out the incredible work of stand out O3 Developer"
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      5120,
+      4871,
+      803,
+      3832
+    ],
+    "author": ""
+  }
+}

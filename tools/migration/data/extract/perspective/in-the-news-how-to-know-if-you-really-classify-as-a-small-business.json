@@ -1,0 +1,74 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:20.526Z"
+  },
+  "wpId": 3201,
+  "slug": "in-the-news-how-to-know-if-you-really-classify-as-a-small-business",
+  "title": "How to know if you really classify as a small business",
+  "dateGmt": "2019-11-24 08:46:20",
+  "modifiedGmt": "2023-02-02 19:18:08",
+  "authorId": 16,
+  "categoryIds": [
+    15,
+    62,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/07/O3-website-imagery_-Insights-8.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "How to know if you really classify as a small business | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/in-the-news-how-to-know-if-you-really-classify-as-a-small-business/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>A Business News Daily explainer exposed details about small business designation that many small business owners probably aren’t aware of.</h3>\n<p>Our co-founder and CEO <a href=\"https://www.o3world.com/about/team/keith-scandone/\">Keith Scandone</a> weighed in on the need for standards that take into consideration the many types of small businesses that aren’t in an industry that typically contracts with the government.</p>\n<h4>Read on <a href=\"https://www.businessnewsdaily.com/295-sba-size-standards-small-business.html\">Business News Daily</a>.</h4>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "How to know if you really classify as a small business",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Our co-founder and CEO Keith Scandone weighed in on the need for standards that take into consideration the many types of small businesses that aren’t in an industry that typically contracts with the government."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      4639,
+      4896,
+      3994,
+      3212
+    ],
+    "author": ""
+  }
+}

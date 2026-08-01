@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:37.821Z"
+  },
+  "wpId": 9000,
+  "slug": "enhancing-website-accessibility-practical-solutions-and-insights",
+  "title": "Enhancing website accessibility: Practical solutions and insights",
+  "dateGmt": "2024-05-29 13:02:49",
+  "modifiedGmt": "2024-05-29 13:02:49",
+  "authorId": 16,
+  "categoryIds": [
+    7
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2024/05/O3-webinar-2500-IG-Enhancing-website-accessibility_-Practical-solutions-and-insights.jpg",
+    "alt": "Enhancing website accessibility: Practical solutions and insights"
+  },
+  "seo": {
+    "titleOverride": "Enhancing website accessibility: Webinar on solutions and insights | June 6",
+    "titleRendered": "Enhancing website accessibility: Webinar on solutions and insights | June 6",
+    "descriptionOverride": "Improve website inclusivity with our practical webinar on accessibility solutions. Learn how to address common accessibility issues and enhance engagement through inclusive design.",
+    "descriptionRendered": "Improve website inclusivity with our practical webinar on accessibility solutions. Learn how to address common accessibility issues and enhance engagement through inclusive design.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/enhancing-website-accessibility-practical-solutions-and-insights/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Enhancing website accessibility: Practical solutions and insights",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Register today and discover simple and effective strategies to make your experience inclusive and accessible for all users."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Learn key techniques for improving website accessibility</h3>\n<p>O3 believes accessibility is not just a feature—it&#8217;s a fundamental right that every company should consider in their digital experience. Our leading accessibility expert, in partnership with <a href=\"https://tammaninc.com/\">Tamman Inc</a>, is hosting a practical webinar to provide solutions and tools. In this session, we will explore the importance of making websites accessible for all users and provide simple yet effective strategies to achieve it.</p>\n<h4>Title</h4>\n<p><a href=\"https://o3world.zoom.us/webinar/register/WN_Lkt8pXT_RGuazTG8hrTPPA#/registration\">Enhancing website accessibility: Practical solutions and insights</a></p>\n<h4>Date</h4>\n<p>June 6, 2024</p>\n<h4>Time</h4>\n<p>12:00 PM &#8211; 1:00 PM ET</p>\n<h4>Purpose</h4>\n<p>Participants will gain essential skills to recognize and tackle accessibility issues within their platforms, ensuring a more inclusive user experience. This workshop offers practical knowledge, strategies, and techniques to enhance your website&#8217;s accessibility.</p>\n<h3>Key Takeaways</h3>\n<ul>\n<li>Identify common accessibility problems: Learn to spot the most frequent accessibility issues that users face.</li>\n<li>Implement practical solutions: Discover ways to make your website easier to navigate for everyone.</li>\n<li>Enhance engagement through inclusive design: Understand how inclusivity can boost engagement and reach a wider audience.</li>\n<li>Leverage tools and resources: Get familiar with the tools and resources that can help you improve your site&#8217;s accessibility.</li>\n</ul>\n<h4><a href=\"https://o3world.zoom.us/webinar/register/WN_Lkt8pXT_RGuazTG8hrTPPA#/registration\">Register for the webinar</a></h4>\n<p>&nbsp;</p>\n<h3>Meet the speakers</h3>\n<h4><a href=\"https://www.linkedin.com/in/briancrumley/\">Brian Crumley</a> (O3)</h4>\n<p>As O3’s leading accessibility expert, Brian Crumley has an unwavering commitment to advocacy. He fearlessly challenges engineers to elevate the code standards and ensures that every O3 solution adheres to the highest accessibility benchmarks. When he’s not staying ahead of the curve in the ever-evolving accessibility space, out getting his geek on or cheering on his Baltimore Ravens, Brian is usually eating his way around Philly, checking out the latest movies, or pretending to be a snowboarder. He holds a Certified Professional in Accessibility Core Competencies (CPACC) certification from the IAAP.</p>\n<h4><a href=\"https://www.linkedin.com/in/kristenwitucki/\">Kristen Witucki</a> (Tamman)</h4>\n<p>Kristen Witucki is an author, a teacher of students who are blind or have low vision, and part of Tamman’s Accessibility team. She has been totally blind since birth, lives in a biracial, multi-ability family in New Jersey, and she’s always looking for ways to bring facets of people’s individual disability experiences to a wider audience.</p>\n<h4><a href=\"https://www.linkedin.com/in/wallyzielinski/\">Wally Zielinski</a> (Tamman)</h4>\n<p>Wally Zielinski is Senior Digital Accessibility Engineer at Tamman. He is passionate about building innovative and inclusive digital experiences, while marching towards new, more accessible horizons on the web. He believes the power of community will drive us to a more progressive and equitable future for all. He holds a Certified Professional in Web Accessibility (CPWA) certification from the International Association of Accessibility Professionals (IAAP). (Use LinkedIn only for socials.)</p>\n<h3>O3 and accessibility</h3>\n<p>O3 is committed to <a href=\"https://www.o3world.com/accessibility-solutions/\">advancing accessibility and inclusive design in all our digital products and services</a>. We integrate accessibility into every stage of our development process, from initial concept and design through to deployment and maintenance. Our team of CPACC-certified accessibility experts work to identify and eliminate barriers, ensuring that our digital solutions are compliant with Web Content Accessibility Guidelines (WCAG) 2.1. Through rigorous audits, ongoing monitoring, and proactive remediation, we help our clients achieve and maintain high accessibility standards, empowering them to reach broader audiences and foster a more inclusive digital world.</p>\n<p>&nbsp;</p>\n"
+      }
+    ],
+    "related_articles": [
+      8961,
+      8574,
+      8406
+    ],
+    "author": ""
+  }
+}

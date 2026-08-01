@@ -1,0 +1,68 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:15.489Z"
+  },
+  "wpId": 3252,
+  "slug": "in-the-news-mike-gadsby-on-open-agency-podcast",
+  "title": "Mike Gadsby on the Open Agency podcast",
+  "dateGmt": "2020-03-12 16:27:24",
+  "modifiedGmt": "2023-11-14 16:49:32",
+  "authorId": 16,
+  "categoryIds": [
+    7,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-19.jpg",
+    "alt": "Mike Gadsby, co-founder and Chief Innovation Officer."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Mike Gadsby on the Open Agency podcast | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/in-the-news-mike-gadsby-on-open-agency-podcast/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Agencies are at an inflection point, and those that don&#8217;t have a sustainable growth strategy will be left behind.</h3>\n<p><a href=\"https://www.o3world.com/about/team/mike-gadsby/\">Mike Gadsby</a>, O<sub>3</sub> World&#8217;s co-founder and Chief Innovation Officer, offers tips for other agency leaders on how to prepare your team and clients for growth, hire the right executives for your agency&#8217;s needs, and much more.</p>\n<p>Listen to (and watch!) Mike on the Open Agency Podcast below.</p>\n<h4><a href=\"https://pod.co/open-agency-podcast/oa-004-partner-networks-leadership-hiring-and-how-to-grow-an-agency-to-50-employees-with-mike-gadsby-chief-innovation-officer-o3-world\"><span class=\"btn__text\">Listen here</span></a></h4>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Mike Gadsby on the Open Agency podcast",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "How to prepare your team and clients for growth, hire the right executives for your agency's needs, and much more."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": "",
+    "author": ""
+  }
+}

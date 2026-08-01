@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:02.401Z"
+  },
+  "wpId": 4940,
+  "slug": "mahesh-gaintinode-on-how-b2b-brands-can-move-to-a-d2c-model",
+  "title": "Mahesh Gaitonde on how B2B brands can move to a D2C model",
+  "dateGmt": "2022-04-07 15:15:04",
+  "modifiedGmt": "2023-02-02 18:09:08",
+  "authorId": 16,
+  "categoryIds": [
+    15,
+    8
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2022/04/Mahesh-Gaitonde-on-how-B2B-brands-can-move-to-a-D2C-model.png",
+    "alt": "Mahesh Gaitonde enlightening the O3 team with a presentation."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Mahesh Gaitonde on how B2B brands can move to a D2C model | O3",
+    "descriptionOverride": "O3's Chief Digital Officer, offers advice to Destination CRM readers who work in B2B on how they can successfully execute a D2C model.",
+    "descriptionRendered": "O3's Chief Digital Officer, offers advice to Destination CRM readers who work in B2B on how they can successfully execute a D2C model.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/mahesh-gaintinode-on-how-b2b-brands-can-move-to-a-d2c-model/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Mahesh advises <a href=\"https://www.destinationcrm.com/Default.aspx\">Destination CRM</a> readers that, t<span style=\"background-color: rgb(255 255 255/var(--tw-bg-opacity)); color: rgb(3 3 3/var(--tw-text-opacity));\">he ability to react in a way that’s fast, agile, and flexible will continue to increase.</span></h3>\n<h4>Read the <a href=\"https://www.destinationcrm.com/Articles/Web-Exclusives/Viewpoints/How-B2B-Businesses-Can-Successfully-Move-to-a-D2C-Model-152261.aspx\">full article for tips on how to adopt composable approaches to outpace your competition</a>.</h4>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Mahesh Gaitonde on how B2B brands can move to a D2C model",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "O3's Chief Digital Officer, Mahesh Gaitonde, lays out how B2B brands can successfully execute a D2C model by focusing on three key areas: customer experience, data, and the digital experience platform technology stack."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      796,
+      4871,
+      2950,
+      2942
+    ],
+    "author": ""
+  }
+}

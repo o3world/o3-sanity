@@ -1,0 +1,274 @@
+{
+  "_id": "perspective-wp-7653",
+  "_type": "perspective",
+  "title": "Executive Summit: Transforming the Customer Experience with AI",
+  "slug": {
+    "_type": "slug",
+    "current": "executive-summit-transforming-the-customer-experience-with-ai"
+  },
+  "excerpt": "Webinar event: Let's examine how AI is transforming customer experience (CX) in 2023",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-16"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2023-04-11T15:56:41Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/04/My-project-1-39.jpg"
+    },
+    "alt": "Mike Gadsby ECN"
+  },
+  "body": [
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Groundbreaking technology has taken the world by storm and redefined the way businesses operate. From artificial intelligence to machine learning, companies are constantly exploring innovative ways to enhance their processes and capabilities. One of the most talked-about technologies is generative AI, and the buzz around it is only growing louder. But what does this mean for your customers?",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "To explore this question and many others, Executive Council Network (ECN) has partnered with O3 for a combined event titled “",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Transforming the Customer Experience with AI",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "”. The goal of the event is to shape the future by challenging thought leaders and executives to drive innovation through community and connections.",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.linkedin.com/events/executivesummit-transforingcust7041442551429562368/comments/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The event will feature a panel of experts who will examine how AI is transforming customer experience (CX) in 2023. These experts bring a unique perspective to the table, as they have experience in aligning and transforming brands in an ever-changing landscape of technology. By attending this event, you will have the opportunity to gain insights into how you can leverage AI to enhance your customers’ experience.",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Meet the panelists:",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Mike Gadsby",
+          "_key": "k0016"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", O3",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/michaelgadsby/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Katherine Maraschin",
+          "_key": "k0019"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", Service Now",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/katherinemaraschin/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Dr Quinton McGrath",
+          "_key": "k0022"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", Deloitte",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/quintinmcgrath/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0025",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/04/1681216469591.png"
+      },
+      "alt": "ECN event",
+      "_key": "k0026"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0028",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "At O3, we understand that staying ahead of the curve is critical in today’s fast-paced business environment. That’s why we are excited to partner with ECN. Join us as we explore the future of AI and how it will impact customer experience in the years to come.",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "Register here",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.linkedin.com/company/249880/admin/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Webinar event: Transforming the Customer Experience with AI",
+    "description": "O3 and ECN are sitting down with experts to discuss how generative AI can will impact CX in 2023."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:7653",
+    "extractedAt": "2026-08-01T00:09:57.655Z"
+  }
+}

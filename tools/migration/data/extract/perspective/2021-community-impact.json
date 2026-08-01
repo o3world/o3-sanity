@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:06.747Z"
+  },
+  "wpId": 4309,
+  "slug": "2021-community-impact",
+  "title": "2021 Community impact",
+  "dateGmt": "2021-05-21 00:07:42",
+  "modifiedGmt": "2023-01-30 16:08:18",
+  "authorId": 16,
+  "categoryIds": [
+    10,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/05/O3-website-imagery_-Insights-11.jpg",
+    "alt": "Greyscale, exterior shot of O3 office with logo on brick."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "2021 Community impact | O3",
+    "descriptionOverride": "Read our latest community impact update here. We're humbled to play our role in committing to our community to build a better tomorrow.",
+    "descriptionRendered": "Read our latest community impact update here. We're humbled to play our role in committing to our community to build a better tomorrow.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/2021-community-impact/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>At O3, we&#8217;re fueled by the opportunity to create meaningful impact. We hold ourselves accountable to changing the lives and perceptions of those we serve &#8211; our team, clients, partners and local community &#8211; for the better. Each year we partner with incredible organizations whose missions align with our O3 values.</p>\n<p>This year we donated over $5,000 across our network to benefit these unique organizations:</p>\n<ul>\n<li>Beat the Streets</li>\n<li>Black Girls Code</li>\n<li>Coded by Kids</li>\n<li>Girls Inc.</li>\n<li>Harriett&#8217;s Bookshop</li>\n<li>Hate is a virus campaign</li>\n<li>REC Philly</li>\n<li>TechGirlz</li>\n<li>The Opt In Network</li>\n<li>The William Way Foundation</li>\n</ul>\n<p>In addition to our dollars we donate our time to support those organizations too. Below are some ways that has taken shape.</p>\n<h2>Agency Education</h2>\n<p>We teamed up with <a href=\"https://theopt-in.com/\" target=\"_blank\" rel=\"noopener\">The Opt In Network</a> to further our knowledge on how to identify and confront biases.</p>\n<h2>Tech Education</h2>\n<p>In an effort to excite young Philadelphians about careers in tech and attract the next generation of leaders we:</p>\n<p>Led a <a href=\"https://www.o3world.com/news/o3-launches-new-student-mentorship-program/\">mentorship program</a> with <a href=\"https://roxboroughhs.philasd.org/\" target=\"_blank\" rel=\"noopener\">Roxborough High School</a> to expose students to concepts ranging from information organization and user experience design to basic web development. This reinforces the skills students learn by building websites using HTML and CSS.</p>\n<p>Hosted a virtual workshop with <a href=\"https://www.techgirlz.org/\" target=\"_blank\" rel=\"noopener\">TechGirlz</a> for middle school aged girls across the country on how to create an equitable digital experience.</p>\n<h2>Innovation Consultation</h2>\n<p>We&#8217;ve led workshops with the <a href=\"https://foundationsinc.org/\" target=\"_blank\" rel=\"noopener\">Foundations</a>, the <a href=\"https://www.phila.gov/\" target=\"_blank\" rel=\"noopener\">City of Philadelphia</a> and <a href=\"https://entrepreneurship.wharton.upenn.edu/\" target=\"_blank\" rel=\"noopener\">Penn Venture Lab</a> to generate actionable ideas to solve real world problems.</p>\n<p>It&#8217;s important to note that we also established new programs to better support our team’s philanthropic efforts:</p>\n<ul>\n<li>Extended our employee match program to $5K in 2020.</li>\n<li>Created an employee Volunteer Time Off policy to encourage our employees to give back to the community through volunteering with organizations that matter to them</li>\n<li>Enabled our team to use Bonusly points for charitable donations any day, all year.</li>\n</ul>\n<p>And when times were tough during the pandemic we supported these local businesses by purchasing over $2,500 worth of gift cards:</p>\n<ul>\n<li>Philly Style Bagels</li>\n<li>Steap and Grind</li>\n<li>The Parlour</li>\n<li>Good Spoon</li>\n<li>Pizza Shackamaxon</li>\n</ul>\n<p>We also created a monthly peer-to-peer program, <a href=\"https://www.payitphorward.org/\" target=\"_blank\" rel=\"noopener\">Pay it Phorward</a>, to provide a small monetary lift to help individuals and businesses during the COVID-19 crisis. The generous contributions we received touched the lives of the Chestnut Hill Cleaning Company and the Napper family.</p>\n<p>In an effort to alleviate additional COVID-19 related pressures businesses were facing, the O3 Labs team created a messaging service that allows users to find out what’s open for business. Senior Experience Strategist, Josh Soldiers, constructed chat flows for each service type; free food distribution, local bars and alcohol, restaurants, and listing a business. He then designed the experience around SMS messaging, prioritized user inputs, and identified fallbacks. Josh also worked alongside Lead Engineer, Zuhib Daud, to create the optimal experience.</p>\n<p>We&#8217;re humbled to play our small role in committing to our community to build a better tomorrow.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "2021 Community impact",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Check out O3's 2021 community impact"
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      4309,
+      3537,
+      3708,
+      454
+    ],
+    "author": ""
+  }
+}

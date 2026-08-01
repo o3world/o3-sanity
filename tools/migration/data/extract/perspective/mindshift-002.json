@@ -1,0 +1,75 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:10.995Z"
+  },
+  "wpId": 3932,
+  "slug": "mindshift-002",
+  "title": "Next up: Transforming CX with data insights",
+  "dateGmt": "2020-10-02 17:09:39",
+  "modifiedGmt": "2023-02-02 18:40:22",
+  "authorId": 16,
+  "categoryIds": [
+    15,
+    8,
+    62,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights-3.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Next up: Transforming CX with data insights | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/mindshift-002/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Mind Shift: Episode 2</h3>\n<p>Join <a href=\"https://www.linkedin.com/in/ashley-masterson-phd-ab56b415/\">Ashley Masterson</a>, PhD, Director of Medical Cost Reporting and Analytics at Independence Blue Cross and <a href=\"https://www.linkedin.com/in/juliakastner/\">Julia Kastner</a>, Vice President of Product Management at NeuroFlow, and <a href=\"https://www.linkedin.com/in/yassimoghaddam/\">Yassi Moghaddam</a>, Executive Director at International Society of Service Innovation Professionals (ISSIP) for the second session of the Mindshift webinar series. <a href=\"https://www.linkedin.com/in/carrollborodynko/\">Carroll Borodynko</a>, Senior Marketing Manager at O<sub>3</sub> World, will moderate the discussion.</p>\n<p>On October 28, 2020 at 12 p.m. ET they’ll dig into how business leaders can modernize their data strategy to unlock actionable insights.</p>\n<h4>During this webinar, they&#8217;ll cover how to:</h4>\n<ul>\n<li>Integrate data from the 360 degree view of the customer.</li>\n<li>Create a more personalized customer experience by using data.</li>\n<li>Overcome core CX challenges related to data collection and data insights.</li>\n</ul>\n<h4><a href=\"https://www.youtube.com/watch?v=ldcGtpRVHAQ&amp;t=5s\">Watch the webinar recording</a></h4>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Next Up: Transforming CX with Data Insights",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Join Ashley Masterson, PhD, Director of Medical Cost Reporting and Analytics at Independence Blue Cross and Julia Kastner, Vice President of Product Management at NeuroFlow, and Yassi Moghaddam, Executive Director at International Society of Service Innovation Professionals (ISSIP) for the second session of the Mindshift webinar series."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      4049,
+      4658,
+      4296,
+      5173
+    ],
+    "author": ""
+  }
+}

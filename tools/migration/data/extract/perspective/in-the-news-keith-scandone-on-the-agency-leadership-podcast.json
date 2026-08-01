@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:20.525Z"
+  },
+  "wpId": 3212,
+  "slug": "in-the-news-keith-scandone-on-the-agency-leadership-podcast",
+  "title": "Keith Scandone on the Agency Leadership podcast",
+  "dateGmt": "2020-01-22 02:18:56",
+  "modifiedGmt": "2023-02-02 19:09:10",
+  "authorId": 16,
+  "categoryIds": [
+    7,
+    1
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-15-1.jpg",
+    "alt": "Co-founder Keith Scandone deep in thought at his laptop during a design challenge."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Keith Scandone on the Agency Leadership podcast | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/in-the-news-keith-scandone-on-the-agency-leadership-podcast/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>A healthy team culture is critical for an agency’s long term success. It takes forethought and follow-through to set core values that inform hiring, client retention, and day-to-day work life.</h3>\n<p>Co-founder and CEO <a href=\"https://www.o3world.com/about/team/keith-scandone/\" target=\"_blank\" rel=\"noopener noreferrer\">Keith Scandone</a> recently joined an episode of the Agency Leadership podcast to talk about how he nurtures a positive, productive team culture by intentionally focusing on innovating employee experience.</p>\n<h4><a href=\"https://www.agencyleadership.com/building-a-positive-team-culture-at-your-agency-featuring-keith-scandone/\" target=\"_blank\" rel=\"noopener noreferrer\">Listen here (transcript available)</a></h4>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Keith Scandone on the Agency Leadership Podcast",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Co-founder and CEO Keith Scandone recently joined an episode of the Agency Leadership podcast to talk about how he nurtures a positive, productive team culture by intentionally focusing on innovating employee experience."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      3252,
+      3879,
+      4639,
+      3994
+    ],
+    "author": ""
+  }
+}

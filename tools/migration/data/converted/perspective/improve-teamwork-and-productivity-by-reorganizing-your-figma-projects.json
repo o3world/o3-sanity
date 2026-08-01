@@ -1,0 +1,762 @@
+{
+  "_id": "perspective-wp-8158",
+  "_type": "perspective",
+  "title": "Design leaders: Improve team productivity by reorganizing your Figma projects",
+  "slug": {
+    "_type": "slug",
+    "current": "improve-teamwork-and-productivity-by-reorganizing-your-figma-projects"
+  },
+  "excerpt": "Unlock enhanced teamwork and productivity within your Figma projects by reorganizing them with O3's innovative approach, ensuring smoother collaboration and streamlined design processes.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-8170"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-61",
+      "_key": "cat-61"
+    }
+  ],
+  "publishedAt": "2023-09-05T16:28:15Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/09/O3-website-imagery_-Perspectives-14.jpg"
+    },
+    "alt": "Blog image: Improve teamwork and productivity by reorganizing your Figma projects"
+  },
+  "body": [
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Seeing a problem",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Working smarter",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "At O3 we understand the landscape of digital tools changes quickly. We’re always looking to see where we can improve how we’re working. The real-time collaboration made possible through Figma’s shared cloud access was a game changer that we couldn’t ignore — so we jumped right in. However, in our eagerness to switch tools we didn’t spend the time codifying how to work within Figma. Projects migrated in between development cycles, as new clients and new team members onboarded.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This lack of standardization led to a significant handoff problem between designers and developers. With each designer working slightly differently, the same developer had to learn how each designer worked. Additionally, transitioning projects between designers became difficult. We often found ourselves asking, “Where are the screens we were just discussing?” and “What’s still in progress?”",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "After hearing this feedback crop up repeatedly, we decided it was time to iterate once more and outline how we wanted to work in Figma.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "How we did it",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Trust the process",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Process-improvement is a common goal for companies. “We need to get better organized!” Many of these attempts seem to function the same way: a small working group would outline a new process, tell people what it was, and then everything would be solved! Except… not so much. They tend to fall victim to the same pitfall — that their assumptions about the problems were correct. Nobody validates the new processes, and the beneficiaries of it are rarely consulted. Essentially, they fall for the",
+          "_key": "k0019"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": " false-consensus effect",
+          "_key": "k0020"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". Remember rule #1 of UX: you are not your user.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.nngroup.com/articles/false-consensus/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Interviews",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Knowing to tackle this differently than before, we approached it the same as our client projects. Like how any good project begins, we started with interviews. We talked with our users — the developers, project managers, and reviewers who access our Figma projects. We also talked among the design team to understand how each of us were approaching our projects. Our aim was twofold:",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Understand the pain points for non-designer users who interact with Figma, but don’t create work in it.",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Document what we’re already doing well, so we can keep those best practices in place instead of overwriting them. (If it ain’t broke don’t fix it.)",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We consolidated the feedback from our engineering team and prominent reviewers into a few key problem statements:",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 needs a way for projects to be easily navigable for existing and unfamiliar users.",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 needs a way to save a version history of presented designs.",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Developers need a way to quickly find approved and annotated designs.\nNumber 3 was huge — it was an issue that wasn’t fully articulated until we started talking directly to our developers. Hearing the same bit of feedback from every developer was telling — whatever we did needed to address this.",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Research",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Many in-house teams have publicly shared their processes — ",
+          "_key": "k0041"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Spotify has a great write-up",
+          "_key": "k0042"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " of their own organization. Unfortunately, there was no information available on how agencies with multiple clients tackled this issue (you’re welcome, future readers). Any of the methods shared out there (like Spotify or ours) offer a great starting point. Any structure should be customized to fit your company’s unique needs. There’s no one-size-fits-all solution. If you do your research and validate the approaches that should set you up for success. Trust the process ;).",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://spotify.design/article/how-spotify-organises-work-in-figma-to-improve-collaboration"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0044",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Wireframes",
+          "_key": "k0045"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0046",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We used the insights gained from interviews, our current best practices, and the research to develop “wireframes” of simple folder structures and processes — illustrating them in Figma. These “wireframes” were shared with our original stakeholders and interviewees for feedback.",
+          "_key": "k0047"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/09/Where-do-we-keep-Dev-specs-1.png"
+      },
+      "alt": "Where do we keep Dev specs",
+      "_key": "k0048"
+    },
+    {
+      "_key": "k0049",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Their responses were incorporated to define our current approach.",
+          "_key": "k0050"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0051",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What we’re doing now",
+          "_key": "k0052"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0053",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A new standard (version 1)",
+          "_key": "k0054"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0055",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Public figma prototype slideshow link",
+          "_key": "k0056"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.figma.com/proto/9OKaZDe6RsRNZWtzO6FVOI/O3-Project-organization?page-id=116%3A812&node-id=116-813&viewport=689%2C177%2C0.06&scaling=min-zoom&starting-point-node-id=116%3A813"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0057",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "To recap: we needed a standardized O3 approach for organizing our work within Figma that preserves design iterations, makes it easy to navigate, and clearly identifies approved designs. Our new working approach is outlined within Figma and linked publicly so all team members can reference it. The slide show has accompanying notes with more specifics on what our people should be doing, but here are the broad strokes of our initial approach:",
+          "_key": "k0058"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/09/Cover.png"
+      },
+      "alt": "Image: O3's new working approach is outlined within Figma and linked publicly",
+      "_key": "k0059"
+    },
+    {
+      "_key": "k0060",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0061",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0062",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Teams",
+          "_key": "k0063"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0064",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Teams",
+          "_key": "k0065"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " are the highest level of organizing work within Figma. We set up each of our clients as a team to keep their work together.",
+          "_key": "k0066"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0067",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Projects",
+          "_key": "k0068"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0069",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Projects are how we organize the work within a client’s Team. Every client should have a Libraries Project for global assets (think UI kits). Create a new Project for each body of work with that client – even if it will only have one file.",
+          "_key": "k0070"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/09/Slide-06.png"
+      },
+      "alt": "Projects are how we organize the work within a client’s Team. ",
+      "_key": "k0071"
+    },
+    {
+      "_key": "k0072",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Files",
+          "_key": "k0073"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0074",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Files are where we work, and should mirror our process. Files are split depending on what is being created, such as wireframes, UI designs, and annotated developer specs.",
+          "_key": "k0075"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0076",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Library files: Library files are used to organize common brand styles and project assets. Importantly, these are a tool to aid Figma designs and are not a deliverable to developers. A Dev specs file should be created to articulate components to developers.",
+          "_key": "k0077"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 2,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0078",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Wireframes, research, and designs: Wireframes iterate through concepts quickly. Design files fill a variety of uses: style tiles, brand imagery, and UI screens. No matter the use, we need to preserve our progress. The files should also be organized so colleagues and stakeholders can open them up and find what they need.",
+          "_key": "k0079"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 2,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0080",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Developer specs: Organize and annotate designs to help developers understand our intent, functionality, and motion. Never do screen design work here; paste screens and assets from design files.",
+          "_key": "k0081"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 2,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0082",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Sections and frames: The way we organize the content of a page can have a significant impact on stakeholders and other collaborators. While not concretely defined, there are some good practices to follow. Focus on making your files easy to navigate.",
+          "_key": "k0083"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 2,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0084",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Looking towards the future",
+          "_key": "k0085"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0086",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Perfect doesn’t exist",
+          "_key": "k0087"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0088",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We’re aware that this isn’t an all-encompassing solution. The focus is ultimately pretty narrow. There’s plenty more to be done to utilize Figma’s versioning history and branches, y’know — we’ve got ideas.",
+          "_key": "k0089"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0090",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As for the file organization specifically, there’s now a follow-up scheduled regularly with a few developers to see how it’s working. We know it won’t be perfect on the first pass, so we’re intending to ship and iterate as we use this new standard.",
+          "_key": "k0091"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0092",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "There’s been an added benefit of more open communication with the aforementioned check-in between developers and designers, plus other regular design team check-ins. Everyone’s on the same page now about our need to be intentional with organizing our work. The biggest takeaway, though, is that our job as designers isn’t done once a client approves our designs. We have to finish everything to set up our colleagues for success.",
+          "_key": "k0093"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0094",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0095",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0096",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 invites you to join our journey of continuous improvement as we explore innovative solutions to enhance collaboration and productivity in the ever-evolving digital landscape. ",
+          "_key": "k0097"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Connect with us today,",
+          "_key": "k0098"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and let’s embark on a path toward a more efficient and effective design process together.",
+          "_key": "k0099"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Improve teamwork and productivity: Reorganizing Figma projects",
+    "description": "Discover O3's innovative approach to reorganizing Figma projects for improved teamwork and productivity. Learn how our process can streamline your design workflows."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:8158",
+    "extractedAt": "2026-08-01T00:09:53.140Z"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:25.430Z"
+  },
+  "wpId": 755,
+  "slug": "o3-world-volunteers-at-greensgrow-farms-fall-festival",
+  "title": "O3 volunteers at Greensgrow Farms' fall festival",
+  "dateGmt": "2017-10-10 17:54:11",
+  "modifiedGmt": "2023-02-02 16:09:59",
+  "authorId": 16,
+  "categoryIds": [
+    7,
+    10
+  ],
+  "excerpt": "This past weekend, a dozen members of the O<sub>3</sub> team rolled up their sleeves and headed north to volunteer at Greensgrow Farms’ fall festival. ",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/05/O3-website-imagery_-Insights-11.jpg",
+    "alt": "Greyscale, exterior shot of O3 office with logo on brick."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "O3 volunteers at Greensgrow Farms' fall festival | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/o3-world-volunteers-at-greensgrow-farms-fall-festival/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>As we’ve written about before, we’re proud to partner with Greensgrow Farms to make our Fishtown, and greater Philadelphia community, more sustainable through social entrepreneurship, urban agriculture and community greening.</p>\n<p>This past weekend, about a dozen members of the O<sub>3</sub> team rolled up their sleeves and headed north for <a href=\"http://www.greensgrow.org/about-us/subarufallfestival/\" target=\"_blank\" rel=\"noopener noreferrer\">Greensgrow Farms’ fall festival</a>. The team helped out at the cider pressing station, judged the apple pie-making contest and chili competition, and chipped in where needed.</p>\n<p>At O<sub>3</sub> World, we emphasize a strong culture that is fostered around teamwork and community giving. We believe that it ultimately helps us push each other and the industry forward by stepping outside the office and giving back in a way that is impactful to not only O<sub>3</sub>, but those around us.</p>\n<p>Check out the fun photos from the event on our <a href=\"https://www.facebook.com/O3World/posts/10159528674360327\" target=\"_blank\" rel=\"noopener noreferrer\">Facebook page</a>!</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone size-medium wp-image-7059\" src=\"https://www.o3world.com/wp-content/uploads/2018/07/070218-Greensgrow-640x360.jpeg\" alt=\"Greensgrow and O3 team\" width=\"640\" height=\"360\" srcset=\"http://www.o3world.com/wp-content/uploads/2018/07/070218-Greensgrow-640x360.jpeg 640w, http://www.o3world.com/wp-content/uploads/2018/07/070218-Greensgrow-1024x576.jpeg 1024w, http://www.o3world.com/wp-content/uploads/2018/07/070218-Greensgrow-768x432.jpeg 768w, http://www.o3world.com/wp-content/uploads/2018/07/070218-Greensgrow-1536x864.jpeg 1536w, http://www.o3world.com/wp-content/uploads/2018/07/070218-Greensgrow-2048x1152.jpeg 2048w, http://www.o3world.com/wp-content/uploads/2018/07/070218-Greensgrow-48x27.jpeg 48w, http://www.o3world.com/wp-content/uploads/2018/07/070218-Greensgrow-1280x720.jpeg 1280w\" sizes=\"auto, (max-width: 640px) 100vw, 640px\" /></p>\n<p>Want to learn more how the O<sub>3</sub> World team gives back? You can learn more about other initiatives that we’ve participated in. And if you’re interested in learning more about how you can join the team at O<sub>3</sub> World and get involved in these activities, check out our <a href=\"/careers\">careers page</a>.</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "O3 volunteers at Greensgrow Farms' fall festival",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "O3 team rolled up their sleeves and headed north for Greensgrow Farms’ fall festival."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      4359,
+      6191,
+      1406,
+      2950
+    ],
+    "author": ""
+  }
+}

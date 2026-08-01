@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:30.199Z"
+  },
+  "wpId": 546,
+  "slug": "agency-field-day-returns-this-summer",
+  "title": "Agency Field Day returns this Summer",
+  "dateGmt": "2016-04-12 20:31:00",
+  "modifiedGmt": "2023-02-02 16:20:13",
+  "authorId": 16,
+  "categoryIds": [
+    7
+  ],
+  "excerpt": "Agency Field Day – an afternoon of fun and healthy competition for Philadelphia’s digital agencies – will return to Fairmount Park for its third year this summer.",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-4.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Agency Field Day returns this Summer | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/agency-field-day-returns-this-summer/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>It’s back! <a href=\"http://www.phlagencyfieldday.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Agency Field Day</a> – an afternoon of fun and healthy competition for Philadelphia’s digital agencies – will return to Fairmount Park for its third year this summer.</h3>\n<p>Last year, teams from O<sub>3</sub> World, Bluecadet, Inverse Paradox, Seer Interactive, and Tonic Design Co. faced off in events, including an obstacle relay, dodgeball, and flip cup. This year, we’re looking to take it up a notch! To learn more about Agency Field Day, check out the #PHLAgencyFieldDay hashtag on <a href=\"https://instagram.com/explore/tags/phlagencyfieldday\" target=\"_blank\" rel=\"noopener noreferrer\">Instagram</a> and <a href=\"https://twitter.com/search?q=%23phlagencyfieldday&amp;src=typd\" target=\"_blank\" rel=\"noopener noreferrer\">Twitter</a>. If you want to get your agency involved, contact us using the button below!</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Agency Field Day returns this Summer",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "Philadelphia’s digital agencies – will return to Fairmount Park for its third year this summer."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      5038,
+      712,
+      992,
+      554
+    ],
+    "author": ""
+  }
+}

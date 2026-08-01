@@ -8,6 +8,7 @@
     "extract": "tsx src/extract.ts",
     "convert": "tsx src/convert.ts",
     "load": "sanity exec src/load.ts --with-user-token --",
+    "verify": "sanity exec src/verify.ts --with-user-token --",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

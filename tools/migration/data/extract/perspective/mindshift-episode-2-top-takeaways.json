@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:10.994Z"
+  },
+  "wpId": 4024,
+  "slug": "mindshift-episode-2-top-takeaways",
+  "title": "Webinar recap: Transforming customer experience with data",
+  "dateGmt": "2020-10-29 22:32:59",
+  "modifiedGmt": "2023-02-02 18:37:26",
+  "authorId": 16,
+  "categoryIds": [
+    15,
+    7
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-5.jpg",
+    "alt": "O3 accessibility and pattern"
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Webinar recap: Transforming customer experience with data | O3",
+    "descriptionOverride": "Speakers from Independence Blue Cross and NeuroFlow share advice on how to transform customer experience with data insights.",
+    "descriptionRendered": "Speakers from Independence Blue Cross and NeuroFlow share advice on how to transform customer experience with data insights.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/mindshift-episode-2-top-takeaways/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>Mind Shift: Webinar recap</h3>\n<p>Marketers from a diverse set of industries joined O3 World for the second episode of the Mindshift webinar series to hear people from <a href=\"https://www.ibx.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Independence Blue Cross</a>, <a href=\"https://www.neuroflow.com/\" target=\"_blank\" rel=\"noopener noreferrer\">NeuroFlow</a> and the <a href=\"http://www.issip.org/\" target=\"_blank\" rel=\"noopener noreferrer\">International Society of Service Innovation Professionals (ISSIP)</a> share advice on how to transform customer experience with data insights. Here are several of the most insightful takeaways from a sampling of the speakers.</p>\n<h3>Ashley Masterson on how to better understand customers</h3>\n<p><a href=\"https://www.linkedin.com/in/ashley-masterson-phd-ab56b415/\" target=\"_blank\" rel=\"noopener noreferrer\">Masterson</a> honed in on the importance of today’s data teams to analyze the 360° perspective of their customers and how they experience their brand. She shared a few questions her team often asks to explore their customers’ perspectives:</p>\n<ul>\n<li>How does a member engage with their health journey? Can we use the data we have to help them with their health journey</li>\n<li>What influence do we have on the provider/member interaction? Can we play a part in setting the member up for success at this touchpoint?</li>\n<li>What does an individual&#8217;s understanding of an ideal patient experience look like?</li>\n</ul>\n<p><strong>Mindshift Webinar Takeaway:</strong> Today’s data teams should leverage first-party and third-party data sources to gain a more holistic view of their customers.</p>\n<h3>Julia Kastner on validating customer journeys with data</h3>\n<p><a href=\"https://www.linkedin.com/in/juliakastner/\" target=\"_blank\" rel=\"noopener noreferrer\">Kastner</a> explained how she works closely with the customer success team at NeuroFlow to pinpoint differences between mapped journeys and real-life customer experiences. This allows them to assess what they can do to improve any gaps in customer experiences.</p>\n<p>Kastner also described how she is trying to optimize their customer journey to facilitate connections with their customer’s customers. To do this, NeuroFlow has introduced a robust data stack to measure customer engagement and test this data. This initiative is helping their team work towards personalizing more experiences across their entire customer ecosystem.</p>\n<p><strong>Mindshift Webinar Takeaway:</strong> Consider your organization’s current business goals when deciding where to focus data optimization efforts. This will help teams prioritize how they’re using data to anticipate customer needs.</p>\n<h3>Yassi Moghaddam on aligning your brand promise with customer expectations</h3>\n<p><a href=\"https://www.linkedin.com/in/yassimoghaddam/\" target=\"_blank\" rel=\"noopener noreferrer\">Moghaddam</a> revealed that at ISSIP they routinely inventory all of their data so that nothing is overlooked. Then they prioritize the high traffic touchpoints and focus 80 percent of their efforts on their top 20 clients. This method allows ISSIP to identify where there are holes, specifically where their brand promise is not aligned with the customer experience.</p>\n<p><strong>Mindshift Webinar Takeaway:</strong> Help your organization shift to a data-minded workforce by encouraging a data analytics culture from the top down. Start with developing data literacy across your organization and foster design thinking as well as agile thinking alongside these initiatives to strengthen your ability to give your data purpose.</p>\n<h4><a href=\"https://www.youtube.com/watch?v=ldcGtpRVHAQ&amp;t=5s\">Watch the recording</a></h4>\n<p>&nbsp;</p>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "Webinar recap: Transforming customer experience with data",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "How to transform customer experience with data insights."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      988,
+      3212,
+      4896,
+      3879
+    ],
+    "author": ""
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:10:10.995Z"
+  },
+  "wpId": 3943,
+  "slug": "mindshift-episode-1-recap-reactions",
+  "title": "MindShift episode 1 recap & reactions",
+  "dateGmt": "2020-10-01 17:09:19",
+  "modifiedGmt": "2023-02-02 18:41:46",
+  "authorId": 16,
+  "categoryIds": [
+    7,
+    8,
+    11
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-4.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "MindShift episode 1 recap & reactions | O3",
+    "descriptionOverride": "We discussed a diverse range of topics: from using AI to enhance customer experience to proving your tech is set up in an ethical way.",
+    "descriptionRendered": "We discussed a diverse range of topics: from using AI to enhance customer experience to proving your tech is set up in an ethical way.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/mindshift-episode-1-recap-reactions/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<p>Thank you to everyone who joined us for the first MindShift webinar, “How to Maximize the Power of AI.”</p>\n<p>We were thrilled by the evident enthusiasm and engagement as we discussed a diverse range of topics: from using AI to enhance customer experience to proving your tech is set up in an ethical way. We explored the role of AI in improving sales and marketing, the importance of spending time to collect and clean data before building a model, and we talked about how to look for red flags such as: selecting one model that fits your data and ignoring the rest of the data gathered, or focusing only on the one approach your team specializes in.</p>\n<p>Another interesting topic <a href=\"https://www.linkedin.com/in/davelauer1/\">Dave Lauer</a>, CEO of <a href=\"https://www.urvin.ai/\">Urvin AI</a> spoke to was the idea of taking AI out of the lab and into production. That is certainly becoming more important as we strive to deliver demonstrable business value from our data through unique AI solutions.</p>\n<p>We hope that we provided some useful tips about maximizing the power of AI across your organization and some inspiration to help us all imagine how brands must evolve in the future.</p>\n<h4><a href=\"https://www.youtube.com/watch?v=d1rXoZ4U4nE&amp;t=62s\">MindShift episode webinar recording</a></h4>\n"
+      }
+    ],
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "MindShift episode 1 recap & reactions",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "How to Maximize the Power of AI."
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "related_articles": [
+      4179,
+      5173,
+      4658,
+      4296
+    ],
+    "author": ""
+  }
+}

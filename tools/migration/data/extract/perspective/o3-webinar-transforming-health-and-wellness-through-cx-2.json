@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "type": "perspective",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-01T00:09:57.657Z"
+  },
+  "wpId": 7369,
+  "slug": "o3-webinar-transforming-health-and-wellness-through-cx-2",
+  "title": "O3 webinar: Transforming health and wellness through CX",
+  "dateGmt": "2023-03-07 18:59:29",
+  "modifiedGmt": "2023-03-07 19:04:18",
+  "authorId": 16,
+  "categoryIds": [
+    7
+  ],
+  "excerpt": "",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2023/03/My-project-1-35.jpg",
+    "alt": ""
+  },
+  "seo": {
+    "titleOverride": "O3 webinar: Transforming health and wellness through CX",
+    "titleRendered": "O3 webinar: Transforming health and wellness through CX",
+    "descriptionOverride": "O3 is hosting a webinar focused on latest trends and techniques for enhancing the patient experience in healthcare, with actionable insights.",
+    "descriptionRendered": "O3 is hosting a webinar focused on latest trends and techniques for enhancing the patient experience in healthcare, with actionable insights.",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/perspectives/o3-webinar-transforming-health-and-wellness-through-cx-2/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "header": {
+      "": null,
+      "kicker": "",
+      "kicker_tag": "div",
+      "title": "O3 webinar: Transforming health and wellness through CX",
+      "heading_level": "h2",
+      "heading_tag": "div",
+      "add_description": true,
+      "description": "<a href=\"https://www.linkedin.com/events/transforminghealthandwellnessth7037152240570179584/comments/\">Register today</a> to learn about best practices and strategies for improving patient satisfaction in 2023"
+    },
+    "header_background": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "header_icon": {
+      "icon": {
+        "value": "None",
+        "image": "None"
+      }
+    },
+    "flexible_post_content": [
+      {
+        "acf_fc_layout": "text",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Text",
+        "text_editor": "<h3>The webinar</h3>\n<p>O3 is excited to announce our upcoming webinar event on March 29 titled &#8220;Transforming health and wellness through CX: Best practices and strategies for improving patient satisfaction in 2023&#8221; where we will dive into the latest trends and techniques for enhancing the patient experience in the healthcare industry. The session will focus on pain points and provide actionable insights on how to improve communication and personalization in healthcare.</p>\n<p>This event is perfect for healthcare professionals, policymakers, and anyone who is interested in improving the patient experience in healthcare. By attending this event, you will gain a deeper understanding of the challenges facing the healthcare industry and learn strategies to overcome them.</p>\n<h4><a href=\"https://www.linkedin.com/events/transforminghealthandwellnessth7037152240570179584/comments/\">REGISTER HERE</a></h4>\n<h3>Meet the panel</h3>\n<p>Our very own, Mike Gadsby, will be moderating the power hour discussion. He will be joined by distinguished panelists who bring a wealth of experience and knowledge in the healthcare industry.</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-7357\" src=\"https://www.o3world.com/wp-content/uploads/2023/03/1633461625854.jpeg\" alt=\"Mike Gadsby webinar moderator\" width=\"182\" height=\"182\" srcset=\"http://www.o3world.com/wp-content/uploads/2023/03/1633461625854.jpeg 400w, http://www.o3world.com/wp-content/uploads/2023/03/1633461625854-150x150.jpeg 150w, http://www.o3world.com/wp-content/uploads/2023/03/1633461625854-48x48.jpeg 48w\" sizes=\"auto, (max-width: 182px) 100vw, 182px\" /></p>\n<p>Moderator: <a href=\"https://www.linkedin.com/in/michaelgadsby/\">Mike Gadsby</a></p>\n<p>Chief Innovation Officer (<a href=\"https://www.o3world.com/\">O3</a>)</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-7341\" src=\"https://www.o3world.com/wp-content/uploads/2023/03/1650711880401-640x640.jpeg\" alt=\"Bon Ku\" width=\"182\" height=\"182\" srcset=\"http://www.o3world.com/wp-content/uploads/2023/03/1650711880401-640x640.jpeg 640w, http://www.o3world.com/wp-content/uploads/2023/03/1650711880401-150x150.jpeg 150w, http://www.o3world.com/wp-content/uploads/2023/03/1650711880401-768x768.jpeg 768w, http://www.o3world.com/wp-content/uploads/2023/03/1650711880401-48x48.jpeg 48w, http://www.o3world.com/wp-content/uploads/2023/03/1650711880401.jpeg 800w\" sizes=\"auto, (max-width: 182px) 100vw, 182px\" /></p>\n<p><a href=\"https://www.linkedin.com/in/michaelgadsby/\">Bon Ku</a>, MD</p>\n<p>Director, Health Design Lab (<a href=\"https://www.o3world.com/\">Thomas Jefferson University</a>)</p>\n<p><img loading=\"lazy\" decoding=\"async\" class=\"alignnone wp-image-7344\" src=\"https://www.o3world.com/wp-content/uploads/2023/03/1561223351696.jpeg\" alt=\"Bonnie Offit\" width=\"182\" height=\"182\" srcset=\"http://www.o3world.com/wp-content/uploads/2023/03/1561223351696.jpeg 200w, http://www.o3world.com/wp-content/uploads/2023/03/1561223351696-150x150.jpeg 150w, http://www.o3world.com/wp-content/uploads/2023/03/1561223351696-48x48.jpeg 48w\" sizes=\"auto, (max-width: 182px) 100vw, 182px\" /></p>\n<p><a href=\"https://www.o3world.com/\">Bonnie Offit</a>, RN</p>\n<p>Chief Innovation Officer (<a href=\"https://www.selfcare.info/\">Self Care Decisions</a>)</p>\n"
+      }
+    ],
+    "related_articles": [
+      6185,
+      3623,
+      2950
+    ],
+    "author": ""
+  }
+}
