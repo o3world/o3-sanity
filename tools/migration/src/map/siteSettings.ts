@@ -24,33 +24,79 @@ import { failed, ok, type ExtractMeta, type Mapped } from './types'
  *    parity (#26) is what makes that safe: `/work` is `/work` before and
  *    after, so these links do not have to be revisited when the documents
  *    land. Swapping an href for a reference later is per-item and optional.
- * 2. **WordPress owns the structure; the redesign owns the words.** Extraction
- *    fills WP truth, and `DISPLAY_LABELS` carries the renames the mockup makes
- *    — one table, reviewable in a diff, rather than labels invented inline.
+ * 2. **Figma owns the chrome; WordPress owns the facts** (ADR 0007, map #33).
+ *    The `NavBar` (`1710:2271`) and `Footer` (`1680:2096`) components decide
+ *    which links exist, in what order, and what they are called — so `FIGMA_NAV`
+ *    and `FIGMA_COMPANY_COLUMN` below are declared lists, not the WordPress
+ *    menus filtered. WordPress keeps everything that asserts something true
+ *    about the business: the social profile URLs, the legal pages and their
+ *    paths, the registered entity, and the Yoast SEO defaults.
+ *
+ * Three consequences of the realignment (#41) worth naming here:
+ *
+ * - **"Live" has no WordPress source.** It is a net-new page layer (#50). The
+ *   nav item ships pointing at `/live`; #48 is what proves it resolves.
+ * - **Careers is a section, not a page.** WordPress serves `/careers` and its
+ *   footer menu links to it, but the canonical About frame draws Careers as a
+ *   section (`1925:6061`, established in #34) — so the footer link is an
+ *   in-page anchor and `/careers` is not migrated.
+ * - **The collection is called two different things.** The nav reads
+ *   "Insights" (`1710:2248`), the footer column reads "Blog" (`1680:2109`).
+ *   Both are read values, so both ship; a single label is an editorial
+ *   decision, not a conversion one.
  */
 
 /**
  * Redesign renames, keyed by the path they point at. "Perspectives" becomes
- * "Insights" in the chrome (CONTEXT.md: display copy, not a type rename);
- * "Solutions" becomes "Services" to match the prototype's nav.
+ * "Insights" in the chrome (CONTEXT.md: display copy, not a type rename).
+ *
+ * `/solutions` used to be renamed to "Services" for the prototype's nav. Figma
+ * reads "Solutions" (`1928:6562`) — which is WordPress's own menu title — so
+ * the override is gone rather than inverted.
  */
 const DISPLAY_LABELS: Readonly<Record<string, string>> = {
   '/perspectives': 'Insights',
-  '/solutions': 'Services',
   'https://www.o3xo.ai/': 'O3XO',
 }
 
+interface ChromeLink {
+  readonly href: string
+  readonly label: string
+}
+
 /**
- * The prototype's footer columns, as destination lists over the extracted
- * menus. Selected explicitly rather than derived, because WordPress has no
- * concept of these groupings: its one "Footer Navigation" menu mixes company
- * links with legal ones, and its "Secondary Navigation" mixes the two
- * campaign destinations the prototype's "Everything else" column shows with
- * two service pages the prototype puts under the nav's Services instead.
+ * The nav, as the `NavBar` component reads: five ghost links in this order,
+ * then the solid "Let's talk" button (`1710:2246`–`1710:2250`).
+ */
+const FIGMA_NAV: readonly ChromeLink[] = [
+  { href: '/work', label: 'Work' },
+  { href: '/live', label: 'Live' },
+  { href: '/perspectives', label: 'Insights' },
+  { href: '/solutions', label: 'Solutions' },
+  { href: '/about', label: 'About' },
+]
+
+/**
+ * The footer's "Company" column (`1680:2103`). Differs from the nav twice over:
+ * Careers is an anchor into About, and the perspectives link reads "Blog".
+ */
+const FIGMA_COMPANY_COLUMN: readonly ChromeLink[] = [
+  { href: '/work', label: 'Work' },
+  { href: '/about', label: 'About' },
+  { href: '/solutions', label: 'Solutions' },
+  { href: '/about#careers', label: 'Careers' },
+  { href: '/perspectives', label: 'Blog' },
+]
+
+/**
+ * The two columns still derived from WordPress. "Everything else"
+ * (`1680:2114`) is the campaign destinations out of the secondary menu — the
+ * two service pages that menu also holds are nav content in the redesign. The
+ * legal row (`1680:2121`) is two real migrated pages, so their paths are WP
+ * facts and their titles already match the frame.
  *
  * Order here is the rendered order.
  */
-const COMPANY_PATHS = ['/work', '/about', '/solutions', '/perspectives', '/careers']
 const EXTRAS_PATHS = ['/1682-conference-ai-innovation', 'https://www.o3xo.ai/']
 const LEGAL_PATHS = ['/privacy-policy', '/accessibility-statement']
 
@@ -200,13 +246,11 @@ export function mapSiteSettings(
     issues.push({ element: 'primaryCta', detail: 'no /contact item in primary-navigation' })
   }
 
-  // The nav drops Contact — the primary CTA button is that destination.
-  const navItems = primary.filter((item) => item.href !== '/contact')
-
-  const companyLinks = pickByPath([...primary, ...footer], COMPANY_PATHS)
-  if (companyLinks.length === 0) {
-    issues.push({ element: 'footerGroups', detail: 'no company links resolved from the menus' })
-  }
+  // Figma's five, in Figma's order. The primary menu is still read above —
+  // it is what proves the extract ran and where Contact comes from — but it no
+  // longer decides the nav's membership or its wording.
+  const navItems = FIGMA_NAV
+  const companyLinks = FIGMA_COMPANY_COLUMN
 
   const extraLinks = pickByPath(secondary, EXTRAS_PATHS)
   if (extraLinks.length === 0) {
@@ -243,7 +287,11 @@ export function mapSiteSettings(
       _type: 'cta' as const,
       label: copy.primaryCtaLabel,
       href: contact?.href ?? '/contact',
-      variant: 'brand' as const,
+      // `Button / Solid` on the pill is WHITE with an ink label (`1710:2250`),
+      // not brand red — no red button appears on any canonical frame. That is
+      // the existing `inverse` variant; realigning the variant vocabulary
+      // itself to Figma's Size/fill axes is #42's job, not this ticket's.
+      variant: 'inverse' as const,
     },
     footerTagline: copy.footerTagline,
     footerGroups: groups.map((group, g) => ({

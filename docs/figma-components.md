@@ -39,12 +39,16 @@ Verified by direct reads of the canonical frames, or recorded in
 | ------------------------------- | ----------- | ---------------------------------------------- | -------------------------------- | -------------------------------- |
 | `Button / Solid`                | `136:754`   | Size = Base \| Large; State = Default \| Hover | `Button` (`ui/button.tsx`)       | ⚠️ **Divergent** — see below     |
 | `Button / Ghost`                | `264:260`   | Size = Base; State = Default                   | `Button variant="ghost"`         | Exists; needs Figma's fill/label |
-| `Brand / Logo`                  | `264:50`    | Color = Black \| Red \| White                  | `BrandLogo` — **to build**       | No current component             |
+| `Brand / Logo`                  | `264:50`    | Color = Black \| Red \| White                  | `BrandLogo` (`brand-logo.tsx`)   | ✅ #41 — `White` deferred, below |
 | `Icon / Surface`                | `778:1862`  | Size = Base; State = Hover                     | `CarouselControl` — **to build** | The perspectives prev/next (#42) |
 | `Icon / Soft`                   | `1203:1227` | Size = Base; State = Default                   | Inner chip of `Icon / Surface`   | Not standalone — a part          |
-| `.building block Icon_text`     | `136:14`    | prop: `Icon name` (Material Symbols)           | **No component** — ADR 0009      | Glyph prop → `<ArrowIcon />`     |
-| `NavBar` (component, not a set) | `1710:2271` | —                                              | `SiteHeader` — **to build**      | #41                              |
-| `Footer` (component, not a set) | `1280:1885` | —                                              | `SiteFooter` — **to build**      | ⚠️ **stale**, see below          |
+| `.building block Icon_text`     | `136:14`    | prop: `Icon name` (Material Symbols)           | **No component** — ADR 0009      | `<ArrowIcon />`, `<CloseIcon />` |
+| `NavBar` (component, not a set) | `1710:2271` | —                                              | `SiteNav` (`web/src/ui`)         | ✅ #41                           |
+| `Footer` (component, not a set) | `1280:1885` | —                                              | `SiteFooter` (`web/src/ui`)      | ✅ #41 — **from the frame**      |
+
+`BrandLogo` ships `Color=Black` and `Color=Red` only. No canonical Design
+Concept frame instances `Color=White`, so its knockout colour would be a guess;
+it is added when a frame calls for it rather than invented now.
 
 ### `Button` is divergent
 
@@ -77,7 +81,27 @@ here rather than done.
 `1280:1885` on Local Components is `#141414` with `64px 96px 16px` padding. The
 footer the **canonical Home frame actually renders** (`1680:2096`) is a `#030303`
 gradient with `96px 96px 16px`. Build `SiteFooter` from the frame, not the
-component. Flagged for #41.
+component. **Resolved in #41** — `SiteFooter` is built from `1680:2096` (mobile
+`1814:1784`), and the component is left alone.
+
+### The 402 nav's two extra parts
+
+Neither is in a component set; both are drawn directly on the mobile frame, and
+both became inline SVG under ADR 0009 in #41:
+
+| Frame node  | What it is                                                                                     | Code        |
+| ----------- | ---------------------------------------------------------------------------------------------- | ----------- |
+| `1814:1636` | "Open menu" — **two** 24×1.5 bars, 5px apart, right-aligned in 42×42, `rgba(255,255,255,0.85)` | `MenuIcon`  |
+| `400:2219`  | `close` — the second confirmed Material Symbols glyph                                          | `CloseIcon` |
+
+⚠️ ADR 0009 describes the hamburger as three bars in passing. The frame draws
+**two** (`1814:1637`, `1814:1638`), and the component follows the frame.
+
+**The panel the hamburger opens has no frame at all** — ADR 0006 records that as
+a genuine coverage gap. #41 built it on shadcn's `sheet` (the component ADR 0008
+§6 earmarked for exactly this) and invented no new visual language: the panel
+reuses the bar's `ink-deep` surface and the pill's `text-button` link
+treatment. A frame can overrule it at any time.
 
 ## Non-canonical — no code target
 
@@ -93,7 +117,7 @@ person does not have to re-derive that.
 | `Icon / Solid`              | `242:310`                         | Superseded by `Icon / Surface`                                                                                            |
 | `Icon`                      | `270:819`                         | Duplicate of the `Icon / *` family                                                                                        |
 | `Badge`                     | `270:748`                         | No canonical use                                                                                                          |
-| `Social links`              | `172:54`                          | Footer social links are drawn directly; revisit in #41                                                                    |
+| `Social links`              | `172:54`                          | **Revisited in #41 and still no.** The frame's footer draws Socials as a plain `Link Group` (`1680:2110`) — no instance   |
 | `Shapes`                    | `734:1073`                        | Decorative quarter-circles — a background treatment, not a component                                                      |
 | `close`                     | `400:2219`                        | Glyph, not a component (ADR 0009)                                                                                         |
 | `Cover status`              | `134:343`                         | Figma file furniture                                                                                                      |
@@ -105,19 +129,23 @@ person does not have to re-derive that.
 
 Every component in the package, against the Figma library.
 
-| Component        | Classification                                    | Notes                                                                                                        |
-| ---------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `Button`         | **Has counterpart** — `Button / Solid`            | Divergent; realign (above)                                                                                   |
-| `Card`           | **Code-only**                                     | Canonical case-study cards are frames, not a component set                                                   |
-| `SectionShell`   | **Code-only**                                     | The three-surface organism; ADR 0008 — shadcn cannot model it                                                |
-| `ArrowIcon`      | **Has counterpart** — `.building block Icon_text` | Glyph becomes a component, not a string prop (ADR 0009)                                                      |
-| `ArrowLink`      | **Code-only**                                     | No Figma equivalent; the frames use `Button / Ghost` for this job — **candidate for retirement in #42**      |
-| `Eyebrow`        | **Code-only**                                     | A type style, not a component. ⚠️ still defaults to `tone="brand"`; canonical eyebrows are neutral `#636363` |
-| `DisplayHeading` | **Code-only**                                     | A type style                                                                                                 |
-| `MaskedLines`    | **Code-only**                                     | Motion, which the static frames cannot express (#33)                                                         |
-| `Reveal`         | **Code-only**                                     | ”                                                                                                            |
-| `LogoTile`       | **Code-only**                                     | The partner logo wall is drawn as frames                                                                     |
-| `Stat`           | **Code-only**                                     | Case-study stats are drawn inline (`1883:3564`)                                                              |
+| Component        | Classification                                       | Notes                                                                                                        |
+| ---------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `Button`         | **Has counterpart** — `Button / Solid`               | Divergent; realign (above)                                                                                   |
+| `BrandLogo`      | **Has counterpart** — `Brand / Logo`                 | Added #41. `Color` is the one axis; `White` deferred                                                         |
+| `MenuIcon`       | **Has counterpart** — `1814:1636` (drawn, not a set) | Added #41. Two bars, per the frame                                                                           |
+| `CloseIcon`      | **Has counterpart** — `close` glyph                  | Added #41 (ADR 0009)                                                                                         |
+| `Sheet`          | **Code-only** — shadcn                               | Added #41 for the 402 nav; the panel has no frame (ADR 0006)                                                 |
+| `Card`           | **Code-only**                                        | Canonical case-study cards are frames, not a component set                                                   |
+| `SectionShell`   | **Code-only**                                        | The three-surface organism; ADR 0008 — shadcn cannot model it                                                |
+| `ArrowIcon`      | **Has counterpart** — `.building block Icon_text`    | Glyph becomes a component, not a string prop (ADR 0009)                                                      |
+| `ArrowLink`      | **Code-only**                                        | No Figma equivalent; the frames use `Button / Ghost` for this job — **candidate for retirement in #42**      |
+| `Eyebrow`        | **Code-only**                                        | A type style, not a component. ⚠️ still defaults to `tone="brand"`; canonical eyebrows are neutral `#636363` |
+| `DisplayHeading` | **Code-only**                                        | A type style                                                                                                 |
+| `MaskedLines`    | **Code-only**                                        | Motion, which the static frames cannot express (#33)                                                         |
+| `Reveal`         | **Code-only**                                        | ”                                                                                                            |
+| `LogoTile`       | **Code-only**                                        | The partner logo wall is drawn as frames                                                                     |
+| `Stat`           | **Code-only**                                        | Case-study stats are drawn inline (`1883:3564`)                                                              |
 
 **Nothing is to-be-replaced.** `ArrowLink` is the one open question, and it
 belongs to the Home page layer (#42) rather than here.

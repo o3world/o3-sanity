@@ -43,6 +43,19 @@ describe('site nav', () => {
     expect(navHtml).not.toContain('Perspectives')
   })
 
+  it('reads as the Figma NavBar component does, in its order (#41)', () => {
+    // `1710:2271` — Work · Live · Insights · Solutions · About.
+    expect(settings.navItems?.map((i) => i.label)).toEqual([
+      'Work',
+      'Live',
+      'Insights',
+      'Solutions',
+      'About',
+    ])
+    // The prototype's "Services" rename is reversed; #19's "Insights" stands.
+    expect(navHtml).not.toContain('Services')
+  })
+
   it('links to the paths WordPress serves today, so parity survives the chrome', () => {
     expect(navHtml).toContain('href="/perspectives"')
     expect(navHtml).toContain('href="/work"')
@@ -89,6 +102,52 @@ describe('site footer', () => {
     expect(footerHtml).toContain(settings.legalName as string)
     expect(footerHtml).toContain(settings.copyrightNote as string)
     expect(footerHtml).toContain(String(new Date().getFullYear()))
+  })
+})
+
+describe('every chrome destination is a route the build-out lands (#48)', () => {
+  /**
+   * The chrome is the one thing on every page, so a link here that goes
+   * nowhere is a site-wide dead end. This is the checklist #48 proves: each
+   * internal destination, and what has to ship for it to resolve.
+   *
+   * External URLs are excluded — they are WordPress facts, not our routes.
+   */
+  const INTENDED_ROUTES: Readonly<Record<string, string>> = {
+    '/': 'seeded — data/seed/page/index.json',
+    '/work': 'Work index — #43',
+    '/live': 'Live — #50 (route name still to be confirmed there)',
+    '/perspectives': 'Perspectives index — #49',
+    '/solutions': 'Solutions — #47',
+    '/about': 'About — #46',
+    '/about#careers': 'the Careers section of About (#34) — #46',
+    '/contact': 'no Figma frame; inherits map #1’s open forms question',
+    '/privacy-policy': 'migrated — converted/page/privacy-policy.json',
+    '/accessibility-statement': 'migrated — converted/page/accessibility-statement.json',
+    '/1682-conference-ai-innovation': 'campaign page — not yet migrated (#32)',
+  }
+
+  const chromeHrefs = [
+    ...(settings.navItems ?? []),
+    settings.primaryCta,
+    ...(settings.footerGroups ?? []).flatMap((g) => g.links ?? []),
+    ...(settings.legalLinks ?? []),
+  ]
+    .filter((cta) => cta != null)
+    .map((cta) => cta.href)
+    .filter((href): href is string => typeof href === 'string')
+    .filter((href) => href.startsWith('/'))
+
+  it('points every internal link at a declared route', () => {
+    for (const href of chromeHrefs) {
+      expect(INTENDED_ROUTES, `chrome links to "${href}", which nothing is landing`).toHaveProperty(
+        href,
+      )
+    }
+  })
+
+  it('does not link to /careers, which the redesign folds into About (#34)', () => {
+    expect(chromeHrefs).not.toContain('/careers')
   })
 })
 

@@ -117,13 +117,24 @@ describe('mapSiteSettings', () => {
     expect(doc._type).toBe('siteSettings')
   })
 
-  it('carries the redesign’s display copy over WordPress’s names', () => {
+  it('builds the nav the Figma NavBar component reads, in its order (#41)', () => {
     const doc = expectOk(mapSiteSettings(chrome(), SITE))
-    const labels = doc.navItems.map((i) => i.label)
-    expect(labels).toContain('Insights')
-    expect(labels).toContain('Services')
-    expect(labels).not.toContain('Perspectives')
-    expect(labels).not.toContain('Solutions')
+    expect(doc.navItems.map((i) => i.label)).toEqual([
+      'Work',
+      'Live',
+      'Insights',
+      'Solutions',
+      'About',
+    ])
+    // "Perspectives" is the type name; the chrome shows display copy (#19).
+    expect(doc.navItems.map((i) => i.label)).not.toContain('Perspectives')
+    // The prototype's "Services" rename is reversed — Figma reads "Solutions".
+    expect(doc.navItems.map((i) => i.label)).not.toContain('Services')
+  })
+
+  it('carries Live, which WordPress has no page for at all (#50)', () => {
+    const doc = expectOk(mapSiteSettings(chrome(), SITE))
+    expect(doc.navItems.find((i) => i.label === 'Live')).toMatchObject({ href: '/live' })
   })
 
   it('moves Contact out of the nav and into the primary CTA', () => {
@@ -132,19 +143,25 @@ describe('mapSiteSettings', () => {
     expect(doc.primaryCta).toMatchObject({ label: 'Let’s talk', href: '/contact' })
   })
 
-  it('builds the prototype’s footer columns in order', () => {
+  it('builds the footer columns the Figma frame reads, in order', () => {
     const doc = expectOk(mapSiteSettings(chrome(), SITE))
     expect(doc.footerGroups.map((g) => g.label)).toEqual(['Company', 'Everything else'])
     expect(doc.footerGroups[0]?.links.map((l) => l.label)).toEqual([
       'Work',
       'About',
-      'Services',
-      'Insights',
+      'Solutions',
       'Careers',
+      'Blog',
     ])
     // The two service pages in the secondary menu are nav content in the
     // redesign, not footer content — only the campaign destinations carry over.
     expect(doc.footerGroups[1]?.links.map((l) => l.label)).toEqual(['1682 conference', 'O3XO'])
+  })
+
+  it('points Careers at the About page’s section, not the WordPress page (#34)', () => {
+    const doc = expectOk(mapSiteSettings(chrome(), SITE))
+    const careers = doc.footerGroups[0]?.links.find((l) => l.label === 'Careers')
+    expect(careers).toMatchObject({ href: '/about#careers' })
   })
 
   it('splits legal links out of the footer menu', () => {

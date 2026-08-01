@@ -7,33 +7,39 @@
     {
       "_type": "cta",
       "_key": "nav-0",
-      "label": "Services",
-      "href": "/solutions"
-    },
-    {
-      "_type": "cta",
-      "_key": "nav-1",
       "label": "Work",
       "href": "/work"
     },
     {
       "_type": "cta",
+      "_key": "nav-1",
+      "label": "Live",
+      "href": "/live"
+    },
+    {
+      "_type": "cta",
       "_key": "nav-2",
-      "label": "About",
-      "href": "/about"
+      "label": "Insights",
+      "href": "/perspectives"
     },
     {
       "_type": "cta",
       "_key": "nav-3",
-      "label": "Insights",
-      "href": "/perspectives"
+      "label": "Solutions",
+      "href": "/solutions"
+    },
+    {
+      "_type": "cta",
+      "_key": "nav-4",
+      "label": "About",
+      "href": "/about"
     }
   ],
   "primaryCta": {
     "_type": "cta",
     "label": "Let’s talk",
     "href": "/contact",
-    "variant": "brand"
+    "variant": "inverse"
   },
   "footerTagline": "Strategy, design, engineering, and AI under one roof.",
   "footerGroups": [
@@ -59,22 +65,22 @@
         {
           "_type": "cta",
           "_key": "g0-2",
-          "label": "Services",
+          "label": "Solutions",
           "href": "/solutions",
           "variant": "inverse"
         },
         {
           "_type": "cta",
           "_key": "g0-3",
-          "label": "Insights",
-          "href": "/perspectives",
+          "label": "Careers",
+          "href": "/about#careers",
           "variant": "inverse"
         },
         {
           "_type": "cta",
           "_key": "g0-4",
-          "label": "Careers",
-          "href": "/careers",
+          "label": "Blog",
+          "href": "/perspectives",
           "variant": "inverse"
         }
       ]

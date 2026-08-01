@@ -10,6 +10,16 @@ export type { ArrowIconProps } from './components/arrow-icon'
 export { ArrowLink, arrowLinkVariants } from './components/arrow-link'
 export type { ArrowLinkProps } from './components/arrow-link'
 
+// BrandLogo — Figma's `Brand / Logo` set (264:50)
+export { BrandLogo, brandLogoVariants } from './components/brand-logo'
+export type { BrandLogoProps } from './components/brand-logo'
+
+// CloseIcon / MenuIcon — the chrome glyphs (ADR 0009)
+export { CloseIcon } from './components/close-icon'
+export type { CloseIconProps } from './components/close-icon'
+export { MenuIcon } from './components/menu-icon'
+export type { MenuIconProps } from './components/menu-icon'
+
 // Button
 export { Button, buttonVariants } from './components/ui/button'
 export type { ButtonProps } from './components/ui/button'
@@ -44,6 +54,18 @@ export type { LogoTileProps } from './components/logo-tile'
 // Reveal
 export { Reveal } from './components/reveal'
 export type { RevealProps } from './components/reveal'
+
+// Sheet — the 402 nav's menu panel (ADR 0006)
+export {
+  Sheet,
+  SheetTrigger,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetFooter,
+  SheetTitle,
+  SheetDescription,
+} from './components/ui/sheet'
 
 // SectionShell — the three-surface organism every section block renders inside
 export {
