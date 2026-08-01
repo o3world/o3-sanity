@@ -8,6 +8,7 @@ import { cn } from '@o3/ui/lib/utils'
 import {
   imageDimensions,
   imageHotspot,
+  isRenderableImage,
   urlForImage,
   type SanityImageSource,
 } from '@o3/sanity/image'
@@ -88,7 +89,8 @@ function ratioValue(ratio: ImageRatio): number {
  *   edges. `'fill'` can't (the ratio isn't known until layout), so it steers
  *   `object-position` by the hotspot instead.
  * - **Absence.** An empty or unset image field renders `null`, so callers
- *   don't need their own guards.
+ *   don't need their own guards — as does an image field whose asset is not a
+ *   renderable image, which would otherwise throw and fail the build (#32).
  */
 export function SanityImage({
   source,
@@ -102,6 +104,10 @@ export function SanityImage({
 }: SanityImageProps) {
   if (!source) return null
   if (typeof source === 'object' && 'asset' in source && !source.asset) return null
+  // An image field holding a non-image asset throws inside the URL builder
+  // rather than degrading, which fails the whole prerender. Drop the image
+  // instead; `pnpm --filter @o3/migration verify` is what reports the bad data.
+  if (!isRenderableImage(source)) return null
   const image = source as SanityImageSource
 
   // Original: intrinsic layout at the image's real shape. The dimensions come

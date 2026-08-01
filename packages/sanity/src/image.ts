@@ -41,6 +41,27 @@ function assetId(source: unknown, depth = 0): string | null {
   return assetId(image.asset, depth + 1)
 }
 
+/**
+ * Whether `@sanity/image-url` can build a URL for this source without
+ * throwing.
+ *
+ * It parses an asset id as `image-<id>-<width>x<height>-<ext>` and throws
+ * `Malformed asset _ref` on anything else — notably a `file-…` ref, which is
+ * what a non-image upload produces. That throw is not a missing image: it
+ * happens inside a prerendered page, so it fails the whole production build
+ * instead of dropping the one image (#32).
+ *
+ * A source whose id this module cannot find at all counts as renderable. The
+ * builder accepts shapes not modelled here — an expanded asset carrying its
+ * own `url`, for one — and guessing would drop images that render fine. Only a
+ * positively malformed id is rejected.
+ */
+export function isRenderableImage(source: unknown): boolean {
+  const id = assetId(source)
+  if (id === null) return true
+  return id.startsWith('image-') && ASSET_DIMENSIONS.test(id)
+}
+
 export interface ImageDimensions {
   /** Delivered width in pixels — the asset's, minus any crop the editor set. */
   width: number
