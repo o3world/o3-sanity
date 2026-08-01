@@ -175,3 +175,7 @@ new-york convention.
   axis in code, which is what makes its component map mechanical.
 - `Button` is known-divergent from its Figma component set. That is #38's first
   job, not a defect introduced here.
+  - **Corrected by #38:** the realignment is not component-local. `variant` is
+    also a schema enum (`cta.variant`) stored in committed seed JSON, so the
+    change spans the content model, the seed corpus, the renderer and typegen.
+    It moves to #42 / #41 — see [`docs/figma-components.md`](../figma-components.md).
