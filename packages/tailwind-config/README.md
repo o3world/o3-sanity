@@ -105,6 +105,38 @@ Durations are plain custom properties (Tailwind v4 has no `--duration-*`
 namespace): use `duration-(--duration-hover)` in class lists or
 `var(--duration-reveal)` in CSS.
 
+## Gradients
+
+The one set of tokens **not** from the prototype — the prototype has no
+gradient fills at all. These come from the Figma "O3DX- Visual exploration"
+Home frame (node `1680-2134`). Tailwind v4 has no `--gradient-*` theme
+namespace, so they are plain custom properties; reach for them with the
+arbitrary-property syntax, or the two utilities where one declaration isn't
+enough.
+
+| Token                            | Utility         | Role                                                           |
+| -------------------------------- | --------------- | -------------------------------------------------------------- |
+| `--gradient-statement`           | `text-gradient` | Background-clipped onto the 64px statement headlines           |
+| `--gradient-card-scrim`          | —               | Horizontal scrim over case-study card photography              |
+| `--gradient-card-veil`           | —               | Vertical scrim on the perspectives cards                       |
+| `--gradient-brand-glow`          | `bg-brand-glow` | Figma `Gradient/Red/1` — two stacked radials; the red at scale |
+| `--gradient-surface-wash`        | —               | Light bands washing white → `#F0F0F0` instead of sitting flat  |
+| `--gradient-surface-wash-angled` | —               | The 188° variant behind the case-study card stack              |
+| `--gradient-ink-fade`            | —               | The bleed strip fading the CTA band into the ink footer        |
+
+```jsx
+<div className="bg-(image:--gradient-card-scrim)" />
+<h2 className="text-gradient">The best partnerships…</h2>
+<div className="bg-brand-glow" />
+```
+
+The **rest** of that Figma extraction — a fixed px type ramp, display weight
+400, square corners, a 96px gutter — contradicts the prototype values above
+rather than adding to them, so none of it was merged here. It is documented
+in Storybook under `Foundations/`, with a drift table listing every
+disagreement and what adopting it would cost. Source data:
+`packages/ui/src/foundations/figma-home-spec.ts`.
+
 ## Base behaviour
 
 Importing the theme also applies two document-level rules from the prototype:

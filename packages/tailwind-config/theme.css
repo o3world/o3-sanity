@@ -13,12 +13,20 @@
  *   layout.css      section rhythm + container widths
  *   radius.css      the two corner radii
  *   motion.css      easing curves + durations
+ *   gradient.css    the O3DX exploration's gradient fills
  *
  * Every value is extracted from the O3 redesign prototype
  * (prototype/O3 Homepage v2.dc.html, cross-checked against O3 Work.dc.html and
  * O3 Case Study.dc.html). Each token's comment names the prototype section it
  * came from — if a value looks wrong, check it against the prototype, not
  * against taste.
+ *
+ * ONE EXCEPTION: gradient.css comes from the Figma "O3DX- Visual exploration"
+ * Home frame, not the prototype — the prototype has no gradients to extract.
+ * The rest of that Figma extraction (a fixed type ramp, square corners, a
+ * 96px gutter) CONFLICTS with the prototype values above rather than adding
+ * to them, so it is documented in Storybook under Foundations/ instead of
+ * being merged in here. See packages/ui/src/foundations/figma-home-spec.ts.
  *
  * Adding a token: put it in the file that owns its concern, never here.
  */
@@ -29,3 +37,4 @@
 @import './tokens/layout.css';
 @import './tokens/radius.css';
 @import './tokens/motion.css';
+@import './tokens/gradient.css';

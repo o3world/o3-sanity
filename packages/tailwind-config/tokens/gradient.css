@@ -1,0 +1,96 @@
+/*
+ * Gradient — the O3DX visual exploration's signature fills.
+ *
+ * SOURCE: Figma "O3DX- Visual exploration", Home frame (node 1680:2134).
+ * Unlike every other file here, these are NOT from prototype/*.dc.html — the
+ * prototype has no gradients at all. They are the one part of the Figma
+ * exploration that is purely additive (it collides with no existing token),
+ * so it lands here while the rest of the extraction sits in the Storybook
+ * Foundations section awaiting an adoption decision.
+ *
+ * Tailwind v4 has no `--gradient-*` theme namespace, so these are plain
+ * custom properties (same treatment as the durations in motion.css). Use
+ * them through the arbitrary-property syntax:
+ *
+ *     <div className="bg-(image:--gradient-brand-glow)" />
+ *
+ * The two that need more than one declaration ship as `@utility` classes at
+ * the bottom instead.
+ */
+
+:root {
+  /* ── Display text fill ─────────────────────────────────────────────────── */
+  /*
+   * The exploration's signature move: 64px statement headlines are filled
+   * with a top-to-bottom fade to 40% rather than a solid ink, so the last
+   * line sits back. Used on the partners statement ("We work with B2B and
+   * enterprise teams…", node 1864:2393) and the pull quote (node 1683:2143).
+   * Needs background-clip:text — reach for the `text-gradient` utility below
+   * rather than wiring this by hand.
+   */
+  --gradient-statement: linear-gradient(180deg, #030303 0%, rgba(3, 3, 3, 0.4) 100%);
+
+  /* ── Card scrims ───────────────────────────────────────────────────────── */
+  /*
+   * Horizontal scrim over the case-study card photography, so the left-hand
+   * copy column stays legible while the right side shows the image
+   * (nodes 1883:3555 / 3567 / 3579). Sits ABOVE the image fill.
+   */
+  --gradient-card-scrim: linear-gradient(90deg, rgba(3, 3, 3, 1) 26%, rgba(3, 3, 3, 0) 79%);
+  /*
+   * Vertical scrim on the perspectives ("Blog") cards — transparent at the
+   * top, 75% ink at the bottom where the card's label sits (node 1734:1725).
+   */
+  --gradient-card-veil: linear-gradient(180deg, rgba(3, 3, 3, 0) 0%, rgba(3, 3, 3, 0.75) 90%);
+
+  /* ── Brand glow ────────────────────────────────────────────────────────── */
+  /*
+   * Figma variable `Gradient/Red/1` — two stacked radials that give the red
+   * perspectives card its ember look (node 1734:1737). Declared as ONE
+   * comma-separated background-image, top layer first, exactly as Figma
+   * stacks them: a 50% brand-red bloom off the top-right corner over a deep
+   * maroon-to-ink base anchored at the top-left.
+   */
+  --gradient-brand-glow:
+    radial-gradient(circle at 115% 24%, rgba(235, 16, 0, 0.5) 0%, rgba(3, 3, 3, 0) 100%),
+    radial-gradient(circle at 0% 0%, rgba(114, 8, 0, 1) 0%, rgba(3, 3, 3, 1) 65%);
+
+  /* ── Surface washes ────────────────────────────────────────────────────── */
+  /*
+   * The light bands are not flat in the exploration — they wash between white
+   * and #F0F0F0 so consecutive sections separate without a rule. Vertical
+   * version on the case-studies heading (node 1683:2657)…
+   */
+  --gradient-surface-wash: linear-gradient(0deg, #ffffff 0%, #f0f0f0 100%);
+  /* …and the 188° version under the case-study card stack (node 1683:2661). */
+  --gradient-surface-wash-angled: linear-gradient(188deg, #ffffff 85%, #f0f0f0 100%);
+
+  /* ── Band fade ─────────────────────────────────────────────────────────── */
+  /*
+   * The 87px bleed strip that fades the CTA band into the ink footer
+   * (node 1928:6596) — ink at the bottom, transparent at the top.
+   */
+  --gradient-ink-fade: linear-gradient(0deg, rgba(3, 3, 3, 1) 0%, rgba(3, 3, 3, 0) 100%);
+}
+
+/* ── Gradient text ─────────────────────────────────────────────────────────── */
+/*
+ * The statement fill as one class, because background-clip:text needs three
+ * declarations that can't live in a custom property. Override the fill with
+ * any other gradient token by setting background-image after this class.
+ */
+@utility text-gradient {
+  background-image: var(--gradient-statement);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* ── Brand glow surface ────────────────────────────────────────────────────── */
+/*
+ * `--gradient-brand-glow` is two stacked layers, so a bare
+ * `bg-(image:--gradient-brand-glow)` works but reads poorly at call sites.
+ */
+@utility bg-brand-glow {
+  background-image: var(--gradient-brand-glow);
+}

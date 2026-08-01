@@ -31,3 +31,6 @@ packages/sanity/schema.json
 
 # design prototype (local-only design source of truth)
 prototype/
+
+# figma mcp image downloads
+.figma/

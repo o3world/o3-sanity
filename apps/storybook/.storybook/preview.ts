@@ -42,11 +42,16 @@ const preview: Preview = {
         ink: { name: 'Ink', value: '#030303' },
       },
     },
-    // Sidebar ordering follows the layered architecture: foundations-ish
-    // layout primitives first, then UI atoms, then (future) content blocks.
+    // Sidebar ordering follows the layered architecture: the extracted design
+    // reference first, then layout primitives, then UI atoms, then (future)
+    // content blocks. `Foundations` documents the Figma O3DX exploration —
+    // reference pages, not components; `Overview` leads because it explains
+    // why almost none of it is a token yet.
     options: {
       storySort: {
         order: [
+          'Foundations',
+          ['Overview', 'Color', 'Gradient', 'Typography', 'Layout', 'Button spec'],
           'Layout',
           ['SectionShell'],
           'UI',
