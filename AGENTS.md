@@ -32,6 +32,18 @@ frame, and the two-generations distinction that tells canonical frames from impo
 Frame → route map: [`docs/figma-frames.md`](https://github.com/o3world/o3-sanity/blob/research/figma-frame-inventory/docs/figma-frames.md)
 (on branch `research/figma-frame-inventory`). Never build a page layer without checking it first.
 
+### Components and shadcn
+
+**shadcn's anatomy, O3's tokens** (ADR 0008). shadcn is already adopted in
+`packages/ui`; a component the CLI generates is a **draft** that must be
+translated to O3 tokens before it lands — `bg-background` and friends do not
+exist here and render as nothing. `shadcn-seam.test.ts` fails the build if you
+skip it. Read [`packages/ui/README.md`](./packages/ui/README.md) before adding
+one.
+
+One Figma variant axis → one `cva` variants key. That rule is what makes the
+component map in #38 mechanical rather than ad hoc.
+
 ### Domain docs
 
 Single-context layout — `CONTEXT.md` and `docs/adr/` at the repo root. See `docs/agents/domain.md`.
