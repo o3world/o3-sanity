@@ -31,9 +31,9 @@ die() {
 slugify() {
   echo "$1" |
     tr '[:upper:]' '[:lower:]' |
-    sed -e 's/[^a-z0-9]\+/-/g' -e 's/^-//' -e 's/-$//' |
+    sed -E -e 's/[^a-z0-9]+/-/g' -e 's/^-//' -e 's/-$//' |
     cut -c1-40 |
-    sed -e 's/-$//'
+    sed -E -e 's/-$//'
 }
 
 cmd_new() {
