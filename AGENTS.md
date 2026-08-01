@@ -32,6 +32,10 @@ frame, and the two-generations distinction that tells canonical frames from impo
 Frame → route map: [`docs/figma-frames.md`](https://github.com/o3world/o3-sanity/blob/research/figma-frame-inventory/docs/figma-frames.md)
 (on branch `research/figma-frame-inventory`). Never build a page layer without checking it first.
 
+Component → code map: [`docs/figma-components.md`](./docs/figma-components.md) — every component set,
+its variant axes, and what it maps to (or deliberately doesn't). One Figma variant axis → one `cva`
+variants key; `State=Hover` is never a variant. Icons are inline SVG, not a font (ADR 0009).
+
 ### Components and shadcn
 
 **shadcn's anatomy, O3's tokens** (ADR 0008). shadcn is already adopted in

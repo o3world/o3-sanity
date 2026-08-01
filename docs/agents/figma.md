@@ -6,7 +6,7 @@ amended by #33). This page is how you read the file without wasting a session on
 
 - **File**: `RvraLJaZ0zWm8UaD5AJf43` — "O3DX: Visual exploration"
 - **Frame → route map**: [`docs/figma-frames.md`](https://github.com/o3world/o3-sanity/blob/research/figma-frame-inventory/docs/figma-frames.md) — on branch `research/figma-frame-inventory`, per the repo's research convention. Read it before touching a page layer.
-- **Component → code map**: `docs/figma-components.md` (pending #38)
+- **Component → code map**: [`docs/figma-components.md`](../figma-components.md) — every component set, its variant axes, and what it maps to (or deliberately doesn't)
 
 ## Which MCP server to use
 
