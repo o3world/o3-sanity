@@ -21,25 +21,39 @@
  * So this file ships the STEPS as tokens and keeps `--spacing-section-y` as a
  * sane default for a band that has no frame of its own. Teaching SectionShell
  * to take a per-band rhythm is component work — #41.
+ *
+ * WHAT CHANGES BETWEEN THE TWO FRAME WIDTHS (ADR 0006). Reading the 402 Home
+ * frame against the 1440 one, only two of these move:
+ *
+ *   gutter     20px → 96px
+ *   band-lg   128px → 192px   (the 192 bands compress; 1814:1679)
+ *   band-sm    96px → 96px    unchanged
+ *   band-md   128px → 128px   unchanged
+ *
+ * The two that move are solved to hit each frame's value at its own width,
+ * the same way the type ramp is.
  */
 
 @theme {
   /* ── Page gutter ───────────────────────────────────────────────────────── */
-  /* 96px — Figma `Section/section-margin-left`. The horizontal padding on
-   * every full-bleed band. Class-accessible via px-gutter. */
-  --spacing-gutter: 96px;
+  /* 96px at 1440 (Figma `Section/section-margin-left`), 20px at 402. The
+   * horizontal padding on every full-bleed band, and the reason a 1248px
+   * container yields exactly the 362px content column the mobile frame draws.
+   * Class-accessible via px-gutter. */
+  --spacing-gutter: clamp(20px, calc(7.32vw - 9.4px), 96px);
 
   /* ── Section rhythm ────────────────────────────────────────────────────── */
   /* The three vertical steps the frames actually use. 128 is bound to the
-   * Figma variable `Layout/Layout 128`. */
+   * Figma variable `Layout/Layout 128`. sm and md are the same at both frame
+   * widths; only lg compresses on mobile. */
   --spacing-band-sm: 96px;
   --spacing-band-md: 128px;
-  --spacing-band-lg: 192px;
+  --spacing-band-lg: clamp(128px, calc(6.17vw + 103.2px), 192px);
 
-  /* The default band padding, for a section with no frame to copy. Spans the
-   * same 96 → 192 range the frames use.
-   * ⚠️ The vw slope is a code decision, not a Figma value — #39 owns it. */
-  --spacing-section-y: clamp(96px, 10vw, 192px);
+  /* The default band padding, for a section with no frame to copy: the widest
+   * span the frames use, 96 at 402 through 192 at 1440. A band that HAS a
+   * frame should use the matching band-* step instead. */
+  --spacing-section-y: clamp(96px, calc(9.25vw + 58.8px), 192px);
 
   /* ── Containers ────────────────────────────────────────────────────────── */
   /* section — 1248px: the 1440 design width less two 96px gutters. The
@@ -48,6 +62,8 @@
   /* content — 1034px: the narrower measure for centered statements, taken
    * from the pull-quote column (1756:2085). The partners statement sets its
    * own 1026px width; that 8px is a call-site literal, not a second token.
-   * Class-accessible via max-w-content. */
+   * On mobile the statement column is full-bleed within the gutter, so this
+   * only bites above roughly a 1074px viewport. Class-accessible via
+   * max-w-content. */
   --container-content: 64.625rem; /* 1034px */
 }

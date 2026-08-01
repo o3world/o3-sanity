@@ -42,6 +42,19 @@ Two tokens deliberately break the rule and are marked **NO CANONICAL ANCHOR**:
 `brand-tint` and `line`/`line-soft` are prototype-era values kept alive by
 existing call sites, pending #38.
 
+## Responsive
+
+**Responsive is a renderer concern** — one set of fields at every width, no
+per-breakpoint schema. The frames are **endpoints, not breakpoints**: Tailwind's
+default scale stands, with base = the 402 frame and `lg` (1024) = the 1440
+frame's composition. `md` is licensed for intermediate reflow but **no frame
+backs it**, so anything placed there is a code decision.
+
+Size **interpolates** between the two frame widths; composition **switches** at
+`lg`. Two sections diverge structurally — the NavBar (pill → hamburger) and the
+perspectives carousel (→ vertical stack). Full reasoning and the band-by-band
+comparison: [ADR 0006](../../docs/adr/0006-responsive-contract.md).
+
 ## Surfaces
 
 The design runs on **five neutrals**, not three. The `white | bone | ink`
@@ -85,27 +98,29 @@ existing call sites keep compiling; both go in #38.
 **1.2** nearly everywhere. This package does not load the font; the app does,
 exposing the family as `--font-figtree`.
 
-Figma specifies a **fixed px ramp at 1440**. The clamps below keep the fluid
-model and re-anchor each **maximum** to its Figma step.
+Figma specifies a **fixed px ramp at each frame width**. Every clamp is
+**solved** to hit the 402 frame's value at 402 and the 1440 frame's at 1440 —
+both ends are read values (ADR 0006).
 
-> ⚠️ **The clamp floors and `vw` slopes are interim.** They are not read off
-> the 402 mobile frames — reconciling desktop and mobile is **#39**, which owns
-> them. Only the max values trace to Figma today.
+| Utility           | 402    | 1440   | Tracking  | Role                                               |
+| ----------------- | ------ | ------ | --------- | -------------------------------------------------- |
+| `text-hero`       | `30px` | `64px` | 0         | The full-width statements (always gradient-filled) |
+| `text-cta`        | `40px` | `60px` | -0.0233em | The CTA band headline                              |
+| `text-display-xl` | `40px` | `48px` | 0         | **Every** section headline; the Work hero          |
+| `text-display-lg` | `18px` | `36px` | 0         | Pull-quote attribution, rail numerals              |
+| `text-display-md` | `22px` | `28px` | -0.0286em | Case-study problem statement ⚠️ floor interpolated |
+| `text-lead`       | `18px` | `24px` | -0.0333em | Standfirst beside a headline; CTA subhead          |
+| `text-button`     | `18px` | `18px` | 0, wt 500 | Every button label                                 |
+| `text-eyebrow-lg` | `18px` | `18px` | 0.1em     | Section kicker ("OUR PARTNERS")                    |
+| `text-eyebrow`    | `16px` | `16px` | 0.1em     | Card kicker ("HEALTHCARE"), Work hero kicker       |
+| `text-nav`        | `14px` | `14px` | 0         | Footer navigation links                            |
+| `text-meta`       | `13px` | `13px` | 0.1em     | Perspectives-card meta row                         |
+| `text-legal`      | `12px` | `12px` | 0         | Footer legal row                                   |
 
-| Utility           | Max    | Tracking  | Role                                               |
-| ----------------- | ------ | --------- | -------------------------------------------------- |
-| `text-hero`       | `64px` | 0         | The full-width statements (always gradient-filled) |
-| `text-cta`        | `60px` | -0.0233em | The CTA band headline                              |
-| `text-display-xl` | `48px` | 0         | **Every** section headline; the Work hero          |
-| `text-display-lg` | `36px` | 0         | Pull-quote attribution, rail numerals              |
-| `text-display-md` | `28px` | -0.0286em | Case-study problem statement                       |
-| `text-lead`       | `24px` | -0.0333em | Standfirst beside a headline; CTA subhead          |
-| `text-button`     | `18px` | 0, wt 500 | Every button label                                 |
-| `text-eyebrow-lg` | `18px` | 0.1em     | Section kicker ("OUR PARTNERS")                    |
-| `text-eyebrow`    | `16px` | 0.1em     | Card kicker ("HEALTHCARE"), Work hero kicker       |
-| `text-nav`        | `14px` | 0         | Footer navigation links                            |
-| `text-meta`       | `13px` | 0.1em     | Perspectives-card meta row                         |
-| `text-legal`      | `12px` | 0         | Footer legal row                                   |
+**Small UI text does not scale** — button, eyebrow, meta, nav and legal are
+identical at both widths, read rather than assumed. Only display type and
+rhythm interpolate. `display-md` is the one floor with no 402 example to read,
+so it is interpolated from the ramp and says so in the file.
 
 There is **no distinct hero step**: the Home hero is photographic with no live
 text, and the Work hero headline is 48px — the same step as every section
@@ -123,15 +138,15 @@ three-step scale, and top and bottom often differ (`96px 96px 128px`,
 `128px 96px 192px`). This package ships the steps; teaching `SectionShell` to
 take a per-band rhythm is #41.
 
-| Token                 | Value                      | Utility         | Role                             |
-| --------------------- | -------------------------- | --------------- | -------------------------------- |
-| `--spacing-gutter`    | `96px`                     | `px-gutter`     | Horizontal padding on every band |
-| `--spacing-band-sm`   | `96px`                     | `py-band-sm`    | The rhythm steps the frames use  |
-| `--spacing-band-md`   | `128px`                    | `py-band-md`    | (`Layout/Layout 128`)            |
-| `--spacing-band-lg`   | `192px`                    | `py-band-lg`    |                                  |
-| `--spacing-section-y` | `clamp(96px, 10vw, 192px)` | `py-section-y`  | Default for a band with no frame |
-| `--container-section` | `78rem` (1248px)           | `max-w-section` | 1440 less two 96px gutters       |
-| `--container-content` | `64.625rem` (1034px)       | `max-w-content` | Centered statements              |
+| Token                 | 402     | 1440                 | Utility         | Role                             |
+| --------------------- | ------- | -------------------- | --------------- | -------------------------------- |
+| `--spacing-gutter`    | `20px`  | `96px`               | `px-gutter`     | Horizontal padding on every band |
+| `--spacing-band-sm`   | `96px`  | `96px`               | `py-band-sm`    | The rhythm steps the frames use  |
+| `--spacing-band-md`   | `128px` | `128px`              | `py-band-md`    | (`Layout/Layout 128`)            |
+| `--spacing-band-lg`   | `128px` | `192px`              | `py-band-lg`    | The only step that compresses    |
+| `--spacing-section-y` | `96px`  | `192px`              | `py-section-y`  | Default for a band with no frame |
+| `--container-section` | —       | `78rem` (1248px)     | `max-w-section` | 1440 less two 96px gutters       |
+| `--container-content` | —       | `64.625rem` (1034px) | `max-w-content` | Centered statements              |
 
 ## Radii
 
