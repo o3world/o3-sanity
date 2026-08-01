@@ -16,7 +16,7 @@ type Story = StoryObj<typeof meta>
 
 /**
  * The one part of the Figma extraction already promoted to real tokens — it
- * collides with nothing in the prototype-derived set, because the prototype
+ * landed ahead of the rest of the adoption, because the prototype
  * has no gradients at all.
  *
  * Every specimen below paints from the shipped custom property, not from a
@@ -29,8 +29,8 @@ export const Gradients: Story = {
       intro={
         <>
           Seven fills, all live in <Mono>packages/tailwind-config/tokens/gradient.css</Mono>. The
-          prototype has no gradients, so this part of the exploration was purely additive and landed
-          as tokens rather than waiting on an adoption decision. Reach for them with{' '}
+          prototype had no gradients, so this part was purely additive and landed as tokens ahead of
+          the rest of the adoption. Reach for them with{' '}
           <Mono>bg-(image:--gradient-card-scrim)</Mono>, or the <Mono>text-gradient</Mono> /{' '}
           <Mono>bg-brand-glow</Mono> utilities where more than one declaration is needed.
         </>

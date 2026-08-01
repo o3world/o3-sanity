@@ -8,88 +8,142 @@ the monorepo imports one file:
 ```
 
 `theme.css` is an index; each concern lives in its own file under `tokens/`.
-Every value is extracted from the redesign prototype
-(`prototype/O3 Homepage v2.dc.html`, cross-checked against `O3 Work.dc.html`
-and `O3 Case Study.dc.html`) — each token's comment names the prototype
-section it came from.
 
-## The three-surface system
+## Provenance
 
-The site is a stack of full-bleed bands on three surfaces. Text roles are
-per-surface — never mix a light-surface text token onto a dark band:
+Every value is read off the **canonical Figma frames** — the "Design Concept"
+section (`1632:1510`) of _O3DX: Visual exploration_
+(`RvraLJaZ0zWm8UaD5AJf43`), at the authoritative **1440** desktop width. Each
+token's comment names the node it came from.
 
-| Surface   | Background                                               | Headings     | Body            | Support                 | Brand accent      |
-| --------- | -------------------------------------------------------- | ------------ | --------------- | ----------------------- | ----------------- |
-| **white** | `bg-white` `#FFFFFF`                                     | `text-fg`    | `text-fg-muted` | `text-fg-subtle`        | `text-brand`      |
-| **bone**  | `bg-bone` `#EFEEEC`                                      | `text-fg`    | `text-fg-muted` | `text-fg-subtle`        | `text-brand`      |
-| **ink**   | `bg-ink` `#030303` (hero/cards: `bg-ink-soft` `#0A0A0B`) | `text-white` | `text-white`    | `text-fg-inverse-muted` | `text-brand-tint` |
+Figma is the source of record (map #33) and outranks `prototype/`, which is
+retired (#48). These tokens were previously extracted from the prototype; where
+the two disagreed, the Figma value won. `drift` in
+`packages/ui/src/foundations/figma-home-spec.ts` records every disagreement.
+
+Read [`docs/agents/figma.md`](../../docs/agents/figma.md) before adding to
+this package — the file has traps that have already cost two tickets.
+
+## What earns a token
+
+A Figma value becomes a token when **either**:
+
+- **(a)** it is bound to a named Figma variable (`text/tertiary`,
+  `Layout/Layout 128`, `Gradient/Red/1`), **or**
+- **(b)** it recurs — the same value doing the same job in two or more places
+  across the canonical frames.
+
+Everything else stays a **literal at the call site**, with its node ID in a
+comment. A value that appears exactly once is composition, not vocabulary — the
+pull-quote attribution's `1.5em` line-height, the 5.8px carousel chip, the 87px
+CTA bleed strip, the 1026px partners measure.
+
+Two tokens deliberately break the rule and are marked **NO CANONICAL ANCHOR**:
+`brand-tint` and `line`/`line-soft` are prototype-era values kept alive by
+existing call sites, pending #38.
+
+## Surfaces
+
+The design runs on **five neutrals**, not three. The `white | bone | ink`
+enum on section blocks survives, but the darks split three ways:
+
+| Token      | Value     | Role                                                           |
+| ---------- | --------- | -------------------------------------------------------------- |
+| `white`    | `#FFFFFF` | Plain light band (platforms, ways-to-work); light button fill  |
+| `bone`     | `#F0F0F0` | Partners, pull quote, perspectives — often washed, not flat    |
+| `ink`      | `#0A0A0A` | The dominant dark: headlines on light, dark buttons, card base |
+| `ink-warm` | `#0F100B` | The Work / Live hero band only                                 |
+| `ink-deep` | `#030303` | Gradient stops and the footer band                             |
 
 ## Colors (`--color-*`)
 
-| Token              | Value     | Role                                                               |
-| ------------------ | --------- | ------------------------------------------------------------------ |
-| `brand`            | `#EB1000` | The O3 red: CTAs, eyebrows, rail ticks, selection (light surfaces) |
-| `brand-tint`       | `#FF6A5A` | Brand red on dark surfaces (work-case eyebrows and links)          |
-| `ink`              | `#030303` | Primary dark surface; default link ink on light surfaces           |
-| `ink-soft`         | `#0A0A0B` | Lifted dark surface: hero bg, work-case card bg                    |
-| `bone`             | `#EFEEEC` | Warm light surface: partners, quote, insights                      |
-| `white`            | `#FFFFFF` | Plain light surface; card bg on bone                               |
-| `fg`               | `#232323` | Body + heading ink on light surfaces                               |
-| `fg-muted`         | `#6E6E6E` | Supporting copy on light surfaces                                  |
-| `fg-subtle`        | `#9A9A98` | Tertiary copy / meta rows on light surfaces                        |
-| `fg-inverse-muted` | `#A4A4A4` | Muted copy on dark surfaces                                        |
-| `line`             | `#DDDDDB` | Rules + image placeholders on light surfaces                       |
-| `line-soft`        | `#ECECEA` | Hairlines inside white cards                                       |
+| Token                | Value                   | Role                                                            |
+| -------------------- | ----------------------- | --------------------------------------------------------------- |
+| `brand`              | `#EB1000`               | Flat **once** on Home — the footer link headers. Else the glow. |
+| `brand-tint`         | `#FF6A5A`               | ⚠️ No canonical anchor — prototype-era, pending #38             |
+| `fg`                 | `#232323`               | Body copy and card titles on light bands (`text/default`)       |
+| `fg-muted`           | `#636363`               | The **neutral** eyebrow and card meta (`text/tertiary`)         |
+| `fg-subtle`          | `#A3A3A3`               | Footer legal row                                                |
+| `fg-quiet`           | `rgba(10,10,10,.5)`     | Pull-quote attribution — tinted ink, not a grey                 |
+| `on-ink`             | `rgba(255,255,255,.92)` | CTA band headline (`color/white/ 92%`)                          |
+| `on-ink-muted`       | `rgba(255,255,255,.65)` | Stat labels beside the 48px figure                              |
+| `on-ink-subtle`      | `rgba(255,255,255,.6)`  | CTA band subhead (`color/white/ 60%`)                           |
+| `on-ink-line`        | `rgba(255,255,255,.2)`  | The orbital arc behind the footer; hairlines on dark            |
+| `scrim`              | `rgba(3,3,3,.2)`        | The floating pill NavBar fill                                   |
+| `surface-muted`      | `#D3D3D3`               | Carousel controls (`bg/button/secondary`)                       |
+| `line` / `line-soft` | `#DDDDDB` / `#ECECEA`   | ⚠️ No canonical anchor — the frames separate with washes        |
 
-Utilities: `bg-bone`, `text-brand`, `border-line`, etc.
+**Copy on dark is white at an alpha, never a solid grey** — it has to
+composite over the photography behind it. `fg-inverse-muted` and `ink-soft`
+survive as deprecated aliases (`on-ink-muted` and `ink` respectively) so
+existing call sites keep compiling; both go in #38.
 
 ## Typography
 
-**Figtree** is both the display and the body face; the display voice comes
-from weight 300, size, and negative tracking. This package does **not** load
-the font — the app does. The prototype uses Google Fonts:
+**Figtree** is both the display and the body face. Display weight is **400**
+(Regular) — there is no Light in the canonical frames — and line-height is
+**1.2** nearly everywhere. This package does not load the font; the app does,
+exposing the family as `--font-figtree`.
 
-```html
-<link
-  href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&display=swap"
-  rel="stylesheet"
-/>
-```
+Figma specifies a **fixed px ramp at 1440**. The clamps below keep the fluid
+model and re-anchor each **maximum** to its Figma step.
 
-A Next.js app should use `next/font/google` and expose the family as
-`--font-figtree`; the `--font-sans` / `--font-display` stacks read that
-variable first and fall back to the plain `Figtree` family name.
+> ⚠️ **The clamp floors and `vw` slopes are interim.** They are not read off
+> the 402 mobile frames — reconciling desktop and mobile is **#39**, which owns
+> them. Only the max values trace to Figma today.
 
-Fluid display steps (each bundles line-height, tracking, and weight 300):
+| Utility           | Max    | Tracking  | Role                                               |
+| ----------------- | ------ | --------- | -------------------------------------------------- |
+| `text-hero`       | `64px` | 0         | The full-width statements (always gradient-filled) |
+| `text-cta`        | `60px` | -0.0233em | The CTA band headline                              |
+| `text-display-xl` | `48px` | 0         | **Every** section headline; the Work hero          |
+| `text-display-lg` | `36px` | 0         | Pull-quote attribution, rail numerals              |
+| `text-display-md` | `28px` | -0.0286em | Case-study problem statement                       |
+| `text-lead`       | `24px` | -0.0333em | Standfirst beside a headline; CTA subhead          |
+| `text-button`     | `18px` | 0, wt 500 | Every button label                                 |
+| `text-eyebrow-lg` | `18px` | 0.1em     | Section kicker ("OUR PARTNERS")                    |
+| `text-eyebrow`    | `16px` | 0.1em     | Card kicker ("HEALTHCARE"), Work hero kicker       |
+| `text-nav`        | `14px` | 0         | Footer navigation links                            |
+| `text-meta`       | `13px` | 0.1em     | Perspectives-card meta row                         |
+| `text-legal`      | `12px` | 0         | Footer legal row                                   |
 
-| Utility           | Size                           | Line-height | Tracking           | Prototype source        |
-| ----------------- | ------------------------------ | ----------- | ------------------ | ----------------------- |
-| `text-hero`       | `clamp(2.6rem, 4.6vw, 4.8rem)` | 1.12        | -0.02em            | Homepage h1             |
-| `text-display-xl` | `clamp(38px, 5vw, 72px)`       | 1.05        | -0.02em            | Section headlines       |
-| `text-display-lg` | `clamp(30px, 3.4vw, 48px)`     | 1.1         | -0.015em           | Engagement-model h3s    |
-| `text-display-md` | `clamp(24px, 2.6vw, 36px)`     | 1.3         | -0.01em            | Work-case narrative h3s |
-| `text-eyebrow`    | `12px`                         | 1.2         | 0.14em, weight 700 | Uppercase kickers       |
+There is **no distinct hero step**: the Home hero is photographic with no live
+text, and the Work hero headline is 48px — the same step as every section
+headline.
 
-The `eyebrow` utility class bundles the full eyebrow style **including**
-`text-transform: uppercase` (which has no theme namespace). Pair it with
-`text-brand` on light surfaces or `text-brand-tint` on dark ones.
+The `eyebrow` and `eyebrow-lg` utility classes bundle the full kicker style
+**including** `text-transform: uppercase` (no theme namespace). The canonical
+color is neutral `text-fg-muted`, **not** brand red — the red eyebrow was a
+prototype convention. Flipping the `Eyebrow` component's default tone is #38.
 
 ## Layout
 
-| Token                 | Value                       | Utility         | Role                                   |
-| --------------------- | --------------------------- | --------------- | -------------------------------------- |
-| `--spacing-section-y` | `clamp(120px, 14vw, 200px)` | `py-section-y`  | Vertical padding of every section band |
-| `--container-content` | `68.75rem` (1100px)         | `max-w-content` | Centered statements: hero copy, quote  |
-| `--container-section` | `77.5rem` (1240px)          | `max-w-section` | Standard section shell                 |
+Section rhythm is **not one value** — the frames hand-tune each band from a
+three-step scale, and top and bottom often differ (`96px 96px 128px`,
+`128px 96px 192px`). This package ships the steps; teaching `SectionShell` to
+take a per-band rhythm is #41.
+
+| Token                 | Value                      | Utility         | Role                             |
+| --------------------- | -------------------------- | --------------- | -------------------------------- |
+| `--spacing-gutter`    | `96px`                     | `px-gutter`     | Horizontal padding on every band |
+| `--spacing-band-sm`   | `96px`                     | `py-band-sm`    | The rhythm steps the frames use  |
+| `--spacing-band-md`   | `128px`                    | `py-band-md`    | (`Layout/Layout 128`)            |
+| `--spacing-band-lg`   | `192px`                    | `py-band-lg`    |                                  |
+| `--spacing-section-y` | `clamp(96px, 10vw, 192px)` | `py-section-y`  | Default for a band with no frame |
+| `--container-section` | `78rem` (1248px)           | `max-w-section` | 1440 less two 96px gutters       |
+| `--container-content` | `64.625rem` (1034px)       | `max-w-content` | Centered statements              |
 
 ## Radii
 
-| Token           | Value  | Utility        | Role                      |
-| --------------- | ------ | -------------- | ------------------------- |
-| `--radius-btn`  | `6px`  | `rounded-btn`  | Buttons, logo-mark corner |
-| `--radius-card` | `16px` | `rounded-card` | Work-case + insight cards |
+The canonical design is **square**. The tokens stay so a future decision is one
+edit here rather than a 25-call-site sweep.
 
-(The pill nav is `rounded-full` — no token needed.)
+| Token           | Value | Utility        |
+| --------------- | ----- | -------------- |
+| `--radius-btn`  | `0`   | `rounded-btn`  |
+| `--radius-card` | `0`   | `rounded-card` |
+
+(The pill NavBar is `border-radius: 900px` — that's `rounded-full`, no token.)
 
 ## Motion
 
@@ -105,14 +159,16 @@ Durations are plain custom properties (Tailwind v4 has no `--duration-*`
 namespace): use `duration-(--duration-hover)` in class lists or
 `var(--duration-reveal)` in CSS.
 
+**Motion is the one concern Figma cannot supply** — the frames are static, and
+the orbital vocabulary lives in `prototype/`. What carries it once the
+prototype retires is open on map #33.
+
 ## Gradients
 
-The one set of tokens **not** from the prototype — the prototype has no
-gradient fills at all. These come from the Figma "O3DX- Visual exploration"
-Home frame (node `1680-2134`). Tailwind v4 has no `--gradient-*` theme
-namespace, so they are plain custom properties; reach for them with the
-arbitrary-property syntax, or the two utilities where one declaration isn't
-enough.
+**Load-bearing, not decoration.** The red is a gradient nearly everywhere it
+appears, light bands wash rather than sit flat, and the 64px statements are
+filled with a fade rather than a solid. Tailwind v4 has no `--gradient-*`
+namespace, so these are plain custom properties.
 
 | Token                            | Utility         | Role                                                           |
 | -------------------------------- | --------------- | -------------------------------------------------------------- |
@@ -130,18 +186,10 @@ enough.
 <div className="bg-brand-glow" />
 ```
 
-The **rest** of that Figma extraction — a fixed px type ramp, display weight
-400, square corners, a 96px gutter — contradicts the prototype values above
-rather than adding to them, so none of it was merged here. It is documented
-in Storybook under `Foundations/`, with a drift table listing every
-disagreement and what adopting it would cost. Source data:
-`packages/ui/src/foundations/figma-home-spec.ts`.
-
 ## Base behaviour
 
-Importing the theme also applies two document-level rules from the prototype:
-smooth in-page scrolling (gated on `prefers-reduced-motion`) and brand-red
-`::selection`.
+Importing the theme also applies two document-level rules: smooth in-page
+scrolling (gated on `prefers-reduced-motion`) and brand-red `::selection`.
 
 ## Verifying refactors
 

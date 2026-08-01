@@ -1,80 +1,153 @@
 /*
- * Typography — Figtree + the fluid display scale + the eyebrow style.
+ * Typography — Figtree at the canonical Figma ramp.
  *
- * FONT LOADING IS THE APP'S JOB, not this package's. The prototype loads
- * Figtree from Google Fonts (homepage <helmet>):
+ * FONT LOADING IS THE APP'S JOB, not this package's. A Next.js app uses
+ * next/font/google and exposes the family on `--font-figtree`; the stacks
+ * below read that variable first and fall back to the plain family name.
  *
- *   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+ * TWO THINGS CHANGED WHEN THESE MOVED FROM THE PROTOTYPE TO FIGMA:
  *
- * A Next.js app should instead use next/font/google and expose the family on
- * `--font-figtree`; the stacks below read that variable first and fall back to
- * the plain `Figtree` family name (covers the <link> approach), then to the
- * prototype's system fallbacks.
+ *   1. DISPLAY WEIGHT IS 400, not 300. Figtree Regular carries every display
+ *      size in the canonical frames. There is no Light on the page.
+ *   2. LINE HEIGHT IS 1.2 nearly everywhere, replacing the prototype's
+ *      1.05 → 1.3 spread.
  *
- * Figtree is BOTH the display and the body face — the voice difference comes
- * entirely from weight (300 for display, 400-700 for UI/body), size, and
- * tracking. Every display step below bundles weight 300 as a sub-value, so
- * `text-display-xl` alone reproduces the prototype heading.
+ * THE RAMP IS FIXED PX IN FIGMA: 64 / 60 / 48 / 36 / 28 / 24 / 18 / 16 / 14 /
+ * 13 / 12, specified at the 1440 design width only. The clamps below keep the
+ * fluid model and re-anchor each MAXIMUM to its Figma step, because Figma
+ * designs the endpoints and the middle is a code decision.
+ *
+ * ⚠️ THE CLAMP FLOORS AND VW SLOPES ARE INTERIM. They are NOT read off the
+ * 402 mobile frames — reconciling desktop and mobile is #39 (responsive
+ * contract), which owns them. Only the max values trace to Figma today.
+ *
+ * There is NO distinct hero step. The Home hero is photographic with no live
+ * text (1810:1616), and the Work hero headline is 48px — the same step as
+ * every section headline. `--text-hero` is therefore the 64px statement.
  */
 
 @theme {
   /* ── Families ──────────────────────────────────────────────────────────── */
-  /* Prototype body stack: 'Figtree','Helvetica Neue',Arial,sans-serif. */
   --font-sans: var(--font-figtree, Figtree), 'Helvetica Neue', Arial, sans-serif;
-  /* Display face is the same family (see header note); a separate token so a
-   * future display face can diverge without touching call sites. */
+  /* The display face is the same family — the voice difference is size and
+   * tracking, not weight. Kept separate so a future display face can diverge
+   * without touching call sites. */
   --font-display: var(--font-figtree, Figtree), 'Helvetica Neue', Arial, sans-serif;
 
-  /* ── Fluid display scale ───────────────────────────────────────────────── */
-  /* display-xl — the section headline: "Our Work", "The platforms we go deep
-   * on", "How we work", the partners statement, the CTA band h2. */
-  --text-display-xl: clamp(38px, 5vw, 72px);
-  --text-display-xl--line-height: 1.05;
-  --text-display-xl--letter-spacing: -0.02em;
-  --text-display-xl--font-weight: 300;
+  /* ── Display scale ─────────────────────────────────────────────────────── */
+  /* hero — 64px. The full-width statements: the partners intro (1864:2393)
+   * and the pull quote (1683:2143). Both are filled with
+   * --gradient-statement rather than a solid ink; pair with `text-gradient`. */
+  --text-hero: clamp(36px, 4.6vw, 64px);
+  --text-hero--line-height: 1.2;
+  --text-hero--letter-spacing: 0;
+  --text-hero--font-weight: 400;
 
-  /* display-lg — the engagement-model h3s ("Embedded Team Member",
-   * "Product Squad", "Full Ownership"). */
-  --text-display-lg: clamp(30px, 3.4vw, 48px);
-  --text-display-lg--line-height: 1.1;
-  --text-display-lg--letter-spacing: -0.015em;
-  --text-display-lg--font-weight: 300;
+  /* cta — 60px. The CTA band headline, centered on ink at 92% white
+   * (1680:2088). Its own step because it is the only 60 on the page. */
+  --text-cta: clamp(34px, 4.3vw, 60px);
+  --text-cta--line-height: 1.08; /* 64.8px / 60px */
+  --text-cta--letter-spacing: -0.0233em;
+  --text-cta--font-weight: 400;
 
-  /* display-md — the work-case narrative h3s ("Families were navigating
-   * twelve portals…"). */
-  --text-display-md: clamp(24px, 2.6vw, 36px);
-  --text-display-md--line-height: 1.3;
-  --text-display-md--letter-spacing: -0.01em;
-  --text-display-md--font-weight: 300;
+  /* display-xl — 48px. THE WORKHORSE: every section headline on every frame
+   * ("The platforms we go deep on", 1683:2659), the Work hero headline
+   * (1634:1184), and the case-study stat figure. */
+  --text-display-xl: clamp(30px, 3.5vw, 48px);
+  --text-display-xl--line-height: 1.2;
+  --text-display-xl--letter-spacing: 0;
+  --text-display-xl--font-weight: 400;
 
-  /* hero — the homepage h1 ("You see the problem in front of you."). Larger
-   * floor than display-xl (2.6rem = 41.6px) and a hair more line-height. */
-  --text-hero: clamp(2.6rem, 4.6vw, 4.8rem);
-  --text-hero--line-height: 1.12;
-  --text-hero--letter-spacing: -0.02em;
-  --text-hero--font-weight: 300;
+  /* display-lg — 36px. The pull-quote attribution (1683:2144) and the
+   * 01/02/03 rail numerals. (The attribution's 1.5em line-height is a call-
+   * site literal — it occurs once, so it does not earn a token.) */
+  --text-display-lg: clamp(26px, 2.6vw, 36px);
+  --text-display-lg--line-height: 1.2;
+  --text-display-lg--letter-spacing: 0;
+  --text-display-lg--font-weight: 400;
 
-  /* eyebrow — the uppercase kicker: "OUR PARTNERS", work-case category lines,
-   * insight-card categories, footer column headers. 12px on sections (cards
-   * drop to 11px in the prototype; 12px is the canonical step). The uppercase
-   * transform can't live in a @theme token — pair with the `eyebrow` utility
-   * below, which bundles the whole style. */
-  --text-eyebrow: 12px;
+  /* display-md — 28px. The case-study problem statement inside the card,
+   * white over the scrim (1883:3562). */
+  --text-display-md: clamp(22px, 2.1vw, 28px);
+  --text-display-md--line-height: 1.2;
+  --text-display-md--letter-spacing: -0.0286em;
+  --text-display-md--font-weight: 400;
+
+  /* ── Body ──────────────────────────────────────────────────────────────── */
+  /* lead — 24px. The standfirst beside a section headline (1762:2123), the
+   * Work hero standfirst (1634:1185), and the CTA subhead. */
+  --text-lead: clamp(20px, 1.8vw, 24px);
+  --text-lead--line-height: 1.2;
+  --text-lead--letter-spacing: -0.0333em;
+  --text-lead--font-weight: 400;
+
+  /* button — 18/24 Medium. Every button label, both sizes, both fills
+   * (1868:3262). Figma's `Interactive/Large` variable still names Inter; the
+   * instances all render Figtree, so the variable's family is stale. */
+  --text-button: 18px;
+  --text-button--line-height: 1.333; /* 24px / 18px */
+  --text-button--letter-spacing: 0;
+  --text-button--font-weight: 500;
+
+  /* ── Eyebrows ──────────────────────────────────────────────────────────── */
+  /* eyebrow — 16px. The card-level kicker ("HEALTHCARE", 1883:3561) and the
+   * Work hero kicker ("WORK", 1634:1183). The uppercase transform can't live
+   * in a @theme token — pair with the `eyebrow` utility below. */
+  --text-eyebrow: 16px;
   --text-eyebrow--line-height: 1.2;
-  --text-eyebrow--letter-spacing: 0.14em;
+  --text-eyebrow--letter-spacing: 0.1em;
   --text-eyebrow--font-weight: 700;
+
+  /* eyebrow-lg — 18px. The section-level kicker ("OUR PARTNERS", 1864:2392),
+   * set in NEUTRAL #636363 rather than brand red. */
+  --text-eyebrow-lg: 18px;
+  --text-eyebrow-lg--line-height: 1.2;
+  --text-eyebrow-lg--letter-spacing: 0.1em;
+  --text-eyebrow-lg--font-weight: 700;
+
+  /* ── Small ─────────────────────────────────────────────────────────────── */
+  /* meta — 13px. The perspectives-card meta row ("3 MINS · 7/27/26",
+   * 1683:2490). Uppercase and tracked like an eyebrow. */
+  --text-meta: 13px;
+  --text-meta--line-height: 1.2;
+  --text-meta--letter-spacing: 0.1em;
+  --text-meta--font-weight: 700;
+
+  /* nav — 14px. Footer navigation links (1680:2105); the link-group headers
+   * above them are the same size at 600 with 0.07em, uppercase, in brand red
+   * (1680:2104) — the page's one flat use of the red. */
+  --text-nav: 14px;
+  --text-nav--line-height: 1.2;
+  --text-nav--letter-spacing: 0;
+  --text-nav--font-weight: 400;
+
+  /* legal — 12px. The footer legal row (1680:2121). */
+  --text-legal: 12px;
+  --text-legal--line-height: 1.167; /* 14px / 12px */
+  --text-legal--letter-spacing: 0;
+  --text-legal--font-weight: 400;
 }
 
-/* ── Eyebrow utility ───────────────────────────────────────────────────────── */
+/* ── Eyebrow utilities ─────────────────────────────────────────────────────── */
 /*
  * The full eyebrow style in one class, because text-transform has no @theme
- * namespace. Color is the call site's job: text-brand on light surfaces,
- * text-brand-tint on dark ones (see color.css).
+ * namespace. COLOR IS THE CALL SITE'S JOB, and the canonical default is
+ * neutral `text-fg-muted` (#636363) — not brand red. On dark bands the
+ * frames use plain white.
  */
 @utility eyebrow {
   font-size: var(--text-eyebrow);
   line-height: var(--text-eyebrow--line-height);
   letter-spacing: var(--text-eyebrow--letter-spacing);
   font-weight: var(--text-eyebrow--font-weight);
+  text-transform: uppercase;
+}
+
+/* The section-level kicker — same style one step up. */
+@utility eyebrow-lg {
+  font-size: var(--text-eyebrow-lg);
+  line-height: var(--text-eyebrow-lg--line-height);
+  letter-spacing: var(--text-eyebrow-lg--letter-spacing);
+  font-weight: var(--text-eyebrow-lg--font-weight);
   text-transform: uppercase;
 }

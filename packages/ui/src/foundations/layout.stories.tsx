@@ -65,9 +65,10 @@ export const Layout: Story = {
           </div>
         </div>
         <Callout>
-          The shipped <Mono>--container-section</Mono> is <Mono>1240px</Mono> with a{' '}
-          <Mono>24px</Mono> gutter. The 8px width difference is negligible; the gutter difference is
-          not — 96px is what makes the frame read as editorial.
+          <Mono>--container-section</Mono> was <Mono>1240px</Mono> with a <Mono>24px</Mono> gutter
+          and is now <Mono>1248px</Mono> with <Mono>--spacing-gutter: 96px</Mono>. The 8px width
+          difference was negligible; the gutter was not — 96px is what makes the frame read as
+          editorial.
         </Callout>
       </Section>
 
@@ -93,7 +94,7 @@ export const Layout: Story = {
 
       <Section
         title="Section rhythm"
-        note="Padding is asymmetric per band — there is no single vertical value to tokenise."
+        note="Padding is asymmetric per band, and top rarely equals bottom — so the tokens ship the three steps rather than one value."
       >
         <SpecTable columns={['Band', 'Padding', 'Gap', 'Surface']}>
           {sectionRhythm.map((s) => (
@@ -112,9 +113,10 @@ export const Layout: Story = {
           ))}
         </SpecTable>
         <Callout>
-          <Mono>--spacing-section-y</Mono> is one <Mono>clamp(120px, 14vw, 200px)</Mono> for every
-          band. That model cannot express the table above, so adopting this rhythm means either a
-          variant on <Mono>SectionShell</Mono> or the design accepting a single value.
+          The three steps now ship as <Mono>--spacing-band-sm/md/lg</Mono> (96/128/192), with{' '}
+          <Mono>--spacing-section-y</Mono> kept as a default for a band that has no frame of its
+          own. What tokens cannot express is the per-band asymmetry in the table above — that needs
+          a rhythm variant on <Mono>SectionShell</Mono>, which is #41.
         </Callout>
       </Section>
 
@@ -137,9 +139,10 @@ export const Layout: Story = {
           </div>
         </div>
         <Callout>
-          The shipped tokens are <Mono>--radius-btn 6px</Mono> and <Mono>--radius-card 16px</Mono>,
-          used across 25 call sites. Figma also declares a <Mono>radius-small: 4</Mono> variable
-          that the Home frame never applies.
+          <Mono>--radius-btn</Mono> and <Mono>--radius-card</Mono> were <Mono>6px</Mono> and{' '}
+          <Mono>16px</Mono>; both are <Mono>0</Mono> now. The token names stay so a future reversal
+          is one edit rather than a sweep of 25 call sites. Figma also declares a{' '}
+          <Mono>radius-small: 4</Mono> variable that the Home frame never applies.
         </Callout>
       </Section>
     </Page>

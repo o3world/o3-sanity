@@ -1,15 +1,27 @@
 /*
- * Radius — the two corners the prototype actually uses.
+ * Radius — the canonical design is SQUARE.
  *
- * (The pill nav uses border-radius:999px — that's `rounded-full`, already a
- * Tailwind built-in, so no token.)
+ * Buttons (1868:3262), case-study cards, perspectives cards and media frames
+ * all carry radius 0 in the frames, against the prototype's 6px buttons and
+ * 16px cards. The tokens stay (25 call sites reference `rounded-btn` /
+ * `rounded-card`, and keeping the names means a future decision is one edit
+ * here rather than a sweep) — they just resolve to 0.
+ *
+ * The only curves on the canonical Home frame are shapes rather than a corner
+ * style: the 5.8px inner chip of the 58px carousel control, and a 787.77px
+ * lozenge masking a card pattern. Both are call-site literals.
+ *
+ * The floating pill NavBar is `border-radius: 900px` (1710:2271) — that is
+ * `rounded-full` in practice, already a Tailwind built-in, so no token.
  */
 
 @theme {
-  /* btn — 6px: every CTA button ("Let's talk", "View our work") and the O3
-   * logo mark's corner. Class-accessible via rounded-btn. */
-  --radius-btn: 6px;
-  /* card — 16px: work-case cards and insight cards. Class-accessible via
-   * rounded-card. */
-  --radius-card: 16px;
+  /* Buttons, both sizes and both fills. */
+  --radius-btn: 0px;
+  /* Case-study cards, perspectives cards, media frames. */
+  --radius-card: 0px;
+  /* Figma declares a `radius-small` variable at 4px but the canonical Home
+   * frame never consumes it. Recorded, not exported as a utility, so that
+   * "does the file define a radius?" has an answer that isn't just "no". */
+  --radius-declared-small: 4px;
 }

@@ -1,26 +1,53 @@
 /*
- * Layout — section rhythm + container widths.
+ * Layout — page gutter, containers, and the section rhythm.
  *
- * The prototype's page is a stack of full-bleed surface bands, each padded
- * with the same fluid section rhythm and wrapping its content in one of two
- * centered containers.
+ * The canonical frames are a stack of full-bleed surface bands, each padded
+ * from a 96px page gutter (Figma `Section/section-margin-left`). At the 1440
+ * design width that leaves a 1248px content column.
+ *
+ * SECTION RHYTHM IS NOT ONE VALUE. The prototype used a single
+ * clamp(120px, 14vw, 200px) on every band; the frames hand-tune it per band
+ * from a three-step scale, and the top and bottom of a band often differ:
+ *
+ *   Partners / intro   96px 96px 128px   gap 96    (1864:2390)
+ *   Case studies head  96px 96px 0       gap 64    (1683:2657)
+ *   Case study cards   96px              gap 48    (1683:2661)
+ *   Pull quote         192px 96px        gap 128   (1683:2137)
+ *   Platforms          128px 96px 192px  gap 128   (1762:2149)
+ *   Perspectives       96px 0            gap 48    (1683:2467)
+ *   Work hero          164px 96px 64px   —         (1634:1181)
+ *   Footer             96px 96px 16px    gap 128   (1680:2096)
+ *
+ * So this file ships the STEPS as tokens and keeps `--spacing-section-y` as a
+ * sane default for a band that has no frame of its own. Teaching SectionShell
+ * to take a per-band rhythm is component work — #41.
  */
 
 @theme {
+  /* ── Page gutter ───────────────────────────────────────────────────────── */
+  /* 96px — Figma `Section/section-margin-left`. The horizontal padding on
+   * every full-bleed band. Class-accessible via px-gutter. */
+  --spacing-gutter: 96px;
+
   /* ── Section rhythm ────────────────────────────────────────────────────── */
-  /* Every section band on every page pads vertically with this exact clamp:
-   * partners, work, platforms, quote, how-we-work, insights, CTA
-   * (`padding:clamp(120px,14vw,200px) 24px`). Class-accessible via
-   * py-section-y / pt-section-y / mt-section-y / etc. */
-  --spacing-section-y: clamp(120px, 14vw, 200px);
+  /* The three vertical steps the frames actually use. 128 is bound to the
+   * Figma variable `Layout/Layout 128`. */
+  --spacing-band-sm: 96px;
+  --spacing-band-md: 128px;
+  --spacing-band-lg: 192px;
+
+  /* The default band padding, for a section with no frame to copy. Spans the
+   * same 96 → 192 range the frames use.
+   * ⚠️ The vw slope is a code decision, not a Figma value — #39 owns it. */
+  --spacing-section-y: clamp(96px, 10vw, 192px);
 
   /* ── Containers ────────────────────────────────────────────────────────── */
-  /* content — 1100px: the narrower measure for centered statements — hero
-   * copy, the partners statement, the quote blockquote. Class-accessible via
-   * max-w-content. */
-  --container-content: 68.75rem; /* 1100px */
-  /* section — 1240px: the standard section shell — work, platforms,
-   * how-we-work, insights, CTA, footer wrappers. Class-accessible via
-   * max-w-section. */
-  --container-section: 77.5rem; /* 1240px */
+  /* section — 1248px: the 1440 design width less two 96px gutters. The
+   * standard content column. Class-accessible via max-w-section. */
+  --container-section: 78rem; /* 1248px */
+  /* content — 1034px: the narrower measure for centered statements, taken
+   * from the pull-quote column (1756:2085). The partners statement sets its
+   * own 1026px width; that 8px is a call-site literal, not a second token.
+   * Class-accessible via max-w-content. */
+  --container-content: 64.625rem; /* 1034px */
 }

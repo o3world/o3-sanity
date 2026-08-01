@@ -81,9 +81,10 @@ export const Scale: Story = {
       intro={
         <>
           Eighteen steps, all Figtree, all at a <strong>fixed px ramp</strong> for the 1440px design
-          width. Two things here contradict the shipped tokens outright: display weight is{' '}
+          width. Two things here overturned the prototype outright: display weight is{' '}
           <strong>400</strong>, not 300, and line-height is <Mono>1.2em</Mono> almost everywhere
-          rather than 1.05–1.3.
+          rather than 1.05–1.3. The tokens keep fluid clamps and anchor each{' '}
+          <strong>maximum</strong> to its step here — the floors are interim and belong to #39.
         </>
       }
     >
