@@ -25,7 +25,7 @@ Non-zero exit on any finding.
 
 Rules of the road:
 
-- **Committed JSON is the source of truth; the dataset is disposable.** `load` creates-or-replaces every pipeline-owned document: `converted/` + `seed/` as published, `translated/` as drafts only.
+- **Committed JSON is the source of truth; the dataset is disposable.** `load` creates-or-replaces every pipeline-owned document — `converted/`, `seed/` and `translated/` alike — as **published** ([ADR 0016](../../docs/adr/0016-publish-what-wordpress-publishes.md)), and deletes any draft still shadowing one it writes.
 - **A document with `migration.locked: true` is never touched, in any mode.** Editors lock documents they take over (Studio toggle).
 - Deterministic IDs: `<type>-wp-<id>` (migrated), `<type>-seed-<slug>` (greenfield).
 - Image nodes carry a `_wpSrc` URL marker until `load` uploads the binary and swaps in an asset ref; `data/assets.json` is the URL→asset audit map. Binaries cache in `data/media-cache/` (gitignored).

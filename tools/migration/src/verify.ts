@@ -21,8 +21,7 @@ import { schemaTypes } from '@o3/sanity/schemas'
 import type { Migration } from '@o3/sanity/types/generated'
 
 import { isImageAssetId } from './lib/media'
-import { refsIn } from './lib/corpus'
-import { CONVERTED_DIR, SEED_DIR } from './lib/paths'
+import { CORPUS_DIRS, refsIn } from './lib/corpus'
 import { categoryDoc } from './map/category'
 import { personDoc } from './map/person'
 import { perspectiveDoc } from './map/perspective'
@@ -54,9 +53,18 @@ function report(check: string, lines: string[]) {
   findings.push(`${check}: ${lines.length}`)
 }
 
+/**
+ * The whole committed corpus — all three trees.
+ *
+ * Converted + seed only until ADR 0016: the translate track loaded drafts-only
+ * and this reads PUBLISHED documents, so counting its 20 case studies as
+ * "expected" would have failed check 1 on every run. Now that they publish,
+ * leaving them out inverts the same mistake — every one would be reported as
+ * an orphan by check 8, and the per-type line would read `caseStudy 0 → 20`.
+ */
 function readCommitted(): AnyDoc[] {
   const docs: AnyDoc[] = []
-  for (const root of [CONVERTED_DIR, SEED_DIR]) {
+  for (const root of CORPUS_DIRS) {
     if (!existsSync(root)) continue
     for (const type of readdirSync(root)) {
       const dir = join(root, type)

@@ -32,3 +32,18 @@ We will make committed JSON the source of truth and the Sanity dataset disposabl
 - **Positive:** the dataset can be wiped and rebuilt from git at any time; no content is ever hand-entered twice; protection semantics are visible on the document itself; no ledger file to drift.
 - **Negative:** an editor who customizes a document without locking it loses those edits on the next rebuild — acceptable while the dataset is explicitly disposable; amends #5's guarantee mechanism (edit-inference → explicit lock).
 - **Risks / open questions:** when real editorial review begins, the lock workflow (Studio toggle/document action, possibly auto-lock on publish) must be in place before rebuild is retired; the `migration` provenance object must be added to every pipeline-owned schema type.
+
+## Amendment — 2026-08-02: the translate track loads published
+
+[ADR 0016](./0016-publish-what-wordpress-publishes.md) removes one clause from
+the Decision above: **"translated case studies load as unpublished drafts per
+#5's review guarantee"** is no longer true. All three trees load published.
+
+Nothing else changes — the lock is still the only thing that stops the pipeline
+touching a document, ids are still deterministic, and the dataset is still
+disposable. The reasoning is on 0016: those 20 case studies are published on
+WordPress today, and withholding them while three invented ones stood in their
+place was the opposite of what the drafts-only rule was for. The "drafts-only
+loading for all tracks" alternative above is therefore settled in the other
+direction as well; its con (mass manual publishing after every rebuild) is
+exactly what the translate track had been paying.

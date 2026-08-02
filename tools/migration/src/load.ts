@@ -2,11 +2,11 @@
  * Load → Sanity dataset. Runs under `sanity exec --with-user-token`.
  *
  * Lock rule (ADR 0003): a document whose live copy (draft or published) has
- * migration.locked == true is never touched, in any mode. Unlocked docs are
- * created-or-replaced: converted + seed docs as PUBLISHED, translated docs as
- * DRAFTS only. Image nodes carrying `_wpSrc` (a WordPress URL) or `_localSrc`
- * (a repo-relative file, for seeds) are resolved to uploaded assets via
- * data/assets.json.
+ * migration.locked == true is never touched, in any mode. Every other
+ * committed document is created-or-replaced **published**, in all three trees
+ * (ADR 0016 — the translate track no longer loads drafts-only). Image nodes
+ * carrying `_wpSrc` (a WordPress URL) or `_localSrc` (a repo-relative file,
+ * for seeds) are resolved to uploaded assets via data/assets.json.
  *
  *   pnpm --filter @o3/migration load
  */
@@ -17,17 +17,9 @@ import { getCliClient } from 'sanity/cli'
 
 import { ROUTABLE_TYPES } from '@o3/sanity/constants'
 
+import { CORPUS_DIRS } from './lib/corpus'
 import { isImageBuffer } from './lib/media'
-import {
-  ASSET_MAP,
-  CONVERTED_DIR,
-  MEDIA_CACHE,
-  EXTRACT_DIR,
-  MISSING_MEDIA,
-  REPO_ROOT,
-  SEED_DIR,
-  TRANSLATED_DIR,
-} from './lib/paths'
+import { ASSET_MAP, MEDIA_CACHE, EXTRACT_DIR, MISSING_MEDIA, REPO_ROOT } from './lib/paths'
 
 const client = getCliClient({ apiVersion: '2026-07-01' })
 
@@ -195,11 +187,13 @@ const DROPPED = Symbol('dropped')
 /**
  * A translated document carries a `_meta` provenance header that is not part
  * of the schema (#21). Strip it, and put the **extracted source** on
- * `migration.source` instead — that is what makes the draft reviewable
- * side-by-side in Studio without leaving the document.
+ * `migration.source` instead — that is what makes the document reviewable
+ * side-by-side in Studio without leaving it.
  *
- * The flags travel with it: a reviewer opening the draft sees which fields an
- * agent proposed and why, in the same panel as the source it worked from.
+ * The flags travel with it: a reviewer opening the document sees which fields
+ * an agent proposed and why, in the same panel as the source it worked from.
+ * That review still has to happen — publishing what WordPress publishes
+ * (ADR 0016) changes when it happens, not whether.
  */
 function withTranslationProvenance(doc: AnyDoc): AnyDoc {
   const meta = doc._meta as
@@ -230,24 +224,37 @@ function withTranslationProvenance(doc: AnyDoc): AnyDoc {
 }
 
 async function main() {
-  const published = [...readTree(CONVERTED_DIR), ...readTree(SEED_DIR)]
-  const drafts = readTree(TRANSLATED_DIR)
-  const all = [...published, ...drafts]
+  // All three trees, all published. The distinction the loader used to draw
+  // between them was the draft rule; what remains is provenance, which the
+  // document carries itself.
+  const all = CORPUS_DIRS.flatMap((root) => readTree(root))
   if (all.length === 0) {
     console.log('nothing to load')
     return
   }
 
   const ids = all.flatMap((d) => [d._id, `drafts.${d._id}`])
+  const live = await client.fetch<{ _id: string; locked: boolean | null }[]>(
+    '*[_id in $ids]{_id, "locked": migration.locked}',
+    { ids },
+  )
   const locked = new Set<string>(
-    (
-      await client.fetch<{ _id: string; locked: boolean | null }[]>(
-        '*[_id in $ids]{_id, "locked": migration.locked}',
-        { ids },
-      )
-    )
-      .filter((d) => d.locked === true)
-      .map((d) => d._id.replace(/^drafts\./, '')),
+    live.filter((d) => d.locked === true).map((d) => d._id.replace(/^drafts\./, '')),
+  )
+
+  /**
+   * Drafts left behind by the runs that loaded the translate track drafts-only
+   * (ADR 0016). A draft shadows its published document everywhere draft mode
+   * is on — Studio opens the draft, the preview switcher serves it — so a
+   * stale one would keep showing the previous load's content while the site
+   * served the new one, with nothing to say the two disagreed.
+   *
+   * Deleted in the same transaction that writes the published document, and
+   * only for documents this run actually writes: a locked document is skipped
+   * before it gets here, which is what protects an editor who took one over.
+   */
+  const staleDrafts = new Set<string>(
+    live.filter((d) => d._id.startsWith('drafts.')).map((d) => d._id.slice('drafts.'.length)),
   )
 
   // One transaction for the whole load, for two reasons. Sanity validates a
@@ -265,16 +272,20 @@ async function main() {
 
   const tx = client.transaction()
   let loaded = 0
+  let cleared = 0
   const skipped: string[] = []
   for (const doc of all) {
     if (locked.has(doc._id)) {
       skipped.push(doc._id)
       continue
     }
-    const isDraftTrack = drafts.includes(doc)
     const resolved = (await resolveAssets(withTranslationProvenance(doc))) as AnyDoc
-    tx.createOrReplace(isDraftTrack ? { ...resolved, _id: `drafts.${doc._id}` } : resolved)
-    console.log(`✓ ${isDraftTrack ? 'draft ' : ''}${doc._id}`)
+    tx.createOrReplace(resolved)
+    if (staleDrafts.has(doc._id)) {
+      tx.delete(`drafts.${doc._id}`)
+      cleared++
+    }
+    console.log(`✓ ${doc._id}`)
     loaded++
   }
 
@@ -283,6 +294,9 @@ async function main() {
   console.log(
     `\nloaded ${loaded} documents into ${client.config().projectId}/${client.config().dataset}`,
   )
+  if (cleared > 0) {
+    console.log(`cleared ${cleared} stale drafts shadowing a published document`)
+  }
   if (skipped.length > 0) {
     console.log(`skipped ${skipped.length} locked: ${skipped.join(', ')}`)
   }

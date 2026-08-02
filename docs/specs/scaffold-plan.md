@@ -24,7 +24,7 @@ packages/
 
 ## Sanity
 
-- Project `naorcr6k`. Datasets: **`production`** (live; extract→translate→review writes unpublished drafts here — editors review in the real studio) and **`development`** (pipeline dry-runs, schema experiments). No staging dataset. Switching is by env var only.
+- Project `naorcr6k`. Datasets: **`production`** (live; extract→translate→review loads published documents here — editors review in the real studio, [ADR 0016](../adr/0016-publish-what-wordpress-publishes.md)) and **`development`** (pipeline dry-runs, schema experiments). No staging dataset. Switching is by env var only.
 - Local dev reads `production` with a read token.
 - `sanity typegen` output in `packages/sanity` is the compile-time contract (ADR 0001); a CI drift job fails if generated types are stale.
 

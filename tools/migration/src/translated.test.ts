@@ -15,9 +15,10 @@ import { checkPathParity } from './map/paths'
  *
  * These documents are not produced by a mapper — an agent wrote them from
  * `rules/caseStudy.md`. So there is no transform to unit-test, and this is the
- * whole mechanical safeguard: the schema shape, honest provenance, a flag on
- * every field the schema demanded and WordPress could not supply, and the
- * draft-only rule.
+ * whole mechanical safeguard: the schema shape, honest provenance, and a flag
+ * on every field the schema demanded and WordPress could not supply. It
+ * carries more weight since ADR 0016 — these load published, so a flag nobody
+ * raised is now a claim on the live site rather than one in a draft.
  *
  * The one thing no test can check is whether the prose is *true to the
  * source*. That is what the PR diff and the Studio side-by-side are for, and
@@ -101,9 +102,10 @@ describe('committed translations', () => {
     }
   })
 
-  // The pipeline never publishes a translation, in any mode. `locked: false`
-  // keeps it in the pipeline's reach until a reviewer takes it over.
-  it('is born unlocked and never carries a published marker', () => {
+  // `locked: false` keeps a translation in the pipeline's reach until a
+  // reviewer takes it over — the only protection there is, now that these load
+  // published like every other tree (ADR 0016).
+  it('is born unlocked, and sourced from a WordPress `work` post', () => {
     for (const { file, doc } of translated) {
       const migration = doc.migration as { locked?: boolean; sourceId?: string }
       expect(migration.locked, `${file} is born locked`).toBe(false)

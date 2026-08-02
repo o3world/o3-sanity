@@ -139,3 +139,30 @@ one — 19 of the 20 extracted case studies are still untranslated, so which one
 - **Launch gate:** no document may be `provisional` at launch. That belongs to
   #48 ("every top-level link resolves"), which now has a machine-checkable
   definition of the content half of its job.
+
+## Amendment — 2026-08-02: the three placeholders are deleted
+
+"The three placeholders" above, and the rejected alternative _Delete the
+fabricated seeds_, both rest on one premise: the homepage showcase needs three
+cards and no real case study can fill them. That premise expired when #22
+translated all 20 and [ADR 0016](./0016-publish-what-wordpress-publishes.md)
+published them, so the alternative wins on its own original pro — invented
+client work cannot ship if it does not exist.
+
+`caseStudy-seed-aramark`, `caseStudy-seed-chop` and `caseStudy-seed-ironman`
+are deleted, with `industry-seed-enterprise`, which nothing else referenced.
+The showcase points at `caseStudy-wp-10028` (IRONMAN), `caseStudy-wp-5804`
+(Vertex) and `caseStudy-wp-5805` (Caron) — read off the frame, which carries
+those three clients' logos on its own three cards (`1883:3557`, `1883:3569`,
+`1883:3581`).
+
+The conflict rule is unchanged, and this amendment is an instance of it rather
+than an exception. The frame's three cards repeat **one** authored card three
+times — same eyebrow, same narrative headline, same "89% → 114% NRR" — so the
+frame is authoritative for which clients appear and for nothing the cards say
+about them. `caseStudy-seed-chop` was carrying that demo copy verbatim.
+
+The `client` documents stay: `client-seed-ironman` is what the real IRONMAN
+translation references, and `client-seed-aramark` and `client-seed-chop` are
+two of the six logos on the homepage logo wall, which is real content about
+real clients and asserts nothing about an engagement.
