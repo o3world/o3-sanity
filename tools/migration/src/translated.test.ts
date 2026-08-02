@@ -5,6 +5,7 @@ import { describe, expect, it } from 'vitest'
 
 import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
 
+import { refsIn } from './lib/corpus'
 import { CONVERTED_DIR, EXTRACT_DIR, SEED_DIR, TRANSLATED_DIR } from './lib/paths'
 import { checkTranslation, sha256, translatedCaseStudy } from './map/caseStudy'
 import { checkPathParity } from './map/paths'
@@ -56,17 +57,6 @@ function committedIds(): Set<string> {
     }
   }
   return ids
-}
-
-function refsIn(node: unknown, found: string[] = []): string[] {
-  if (Array.isArray(node)) {
-    for (const item of node) refsIn(item, found)
-  } else if (node && typeof node === 'object') {
-    const obj = node as Record<string, unknown>
-    if (typeof obj._ref === 'string') found.push(obj._ref)
-    for (const value of Object.values(obj)) refsIn(value, found)
-  }
-  return found
 }
 
 const translated = readTranslated()

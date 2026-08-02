@@ -1299,7 +1299,7 @@ export const GENERATED_REDIRECTS: readonly GeneratedRedirect[] = [
   },
   {
     source: '/wp-content/uploads/2023/01/BestEgg-casestudy3-6-1280x741',
-    destination: '/work/best-egg',
+    destination: '/',
   },
 ]
 

@@ -1,3 +1,5 @@
+import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
+
 import type { WpRedirectExport } from '../lib/redirects'
 import { PATH_EXCEPTIONS } from './paths'
 
@@ -115,10 +117,6 @@ export const TERMINAL_OVERRIDES: Readonly<Record<string, { to: string; why: stri
   '/service/content-strategy': {
     to: '/solutions',
     why: 'The singular `/service/` spelling of a service ADR 0013 consolidates. Same answer.',
-  },
-  '/services/customer-journey-mapping': {
-    to: '/solutions',
-    why: 'One of ADR 0013’s 24, reached here through a Yoast chain rather than the sitemap.',
   },
   '/mike-gadsby-chief-innovation-officer': {
     to: '/about',
@@ -260,11 +258,42 @@ function edgesFrom(wp: WpRedirectExport): {
       continue
     }
     const source = normalizePath(row.source)
-    if (!source) continue
+    if (!source) {
+      dropped.push({
+        source: row.source,
+        target: row.target,
+        reason: 'source does not parse as a path',
+      })
+      continue
+    }
+    // Redirection allows two rows with one source; position decides which one
+    // WordPress serves, and the export is in position order — so the earlier
+    // row is live and later duplicates are recorded, not silently swallowed.
+    // (10 exist today: 8 are trailing-slash twins whose targets normalize to
+    // the same path, so the choice is cosmetic for all but two, and both of
+    // those are ADR 0013 sources whose terminal the tables decide anyway.)
+    if (edges.has(source)) {
+      dropped.push({
+        source: row.source,
+        target: row.target,
+        reason: 'duplicate source; an earlier Redirection row already claims it',
+      })
+      continue
+    }
     edges.set(source, normalizePath(row.target))
   }
 
   for (const [rawSource, entry] of Object.entries(wp.yoastPlain)) {
+    // Same guard as the Redirection rows above. No Yoast row carries a query
+    // today; the guard is here so a future re-export cannot regress this.
+    if (rawSource.includes('?')) {
+      dropped.push({
+        source: rawSource,
+        target: entry.type === 410 ? null : entry.url,
+        reason: 'matches on a query string; a pathname redirect would capture the bare path too',
+      })
+      continue
+    }
     const source = normalizePath(rawSource)
     if (!source || edges.has(source)) continue
     edges.set(source, entry.type === 410 ? null : normalizePath(entry.url))
@@ -321,10 +350,10 @@ export function sitePaths(input: {
   readonly perspectiveSlugs: readonly string[]
   readonly caseStudySlugs: readonly string[]
 }): Set<string> {
-  const paths = new Set(['/', '/work', '/perspectives'])
+  const paths = new Set(['/', COLLECTION_PREFIXES.caseStudy, COLLECTION_PREFIXES.perspective])
   for (const slug of input.pageSlugs) paths.add(slug === 'index' ? '/' : `/${slug}`)
-  for (const slug of input.perspectiveSlugs) paths.add(`/perspectives/${slug}`)
-  for (const slug of input.caseStudySlugs) paths.add(`/work/${slug}`)
+  for (const slug of input.perspectiveSlugs) paths.add(`${COLLECTION_PREFIXES.perspective}/${slug}`)
+  for (const slug of input.caseStudySlugs) paths.add(`${COLLECTION_PREFIXES.caseStudy}/${slug}`)
   return paths
 }
 

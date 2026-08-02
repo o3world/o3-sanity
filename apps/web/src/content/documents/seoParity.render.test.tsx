@@ -1,6 +1,3 @@
-import { existsSync, readFileSync, readdirSync } from 'node:fs'
-import { join } from 'node:path'
-
 import { describe, expect, it } from 'vitest'
 
 import { PAGE_QUERY } from '@o3/sanity/queries'
@@ -30,11 +27,9 @@ import { perspective } from './perspective/entry'
  * converted, translated, and a migrated page — and each has its own entry
  * with its own `DocumentSeo`.
  *
- * The last block is the corpus half: robots parity is a claim about all 300
- * documents, not about three.
+ * Robots parity over the whole corpus (all 300 documents, not three) is a
+ * corpus invariant and lives in `tools/migration/src/corpus.test.ts`.
  */
-
-const MIGRATION_DATA = join(process.cwd(), '../../tools/migration/data')
 
 /**
  * Committed with a title override, a description override AND the rare
@@ -154,28 +149,7 @@ describe('robots parity', () => {
     expect(robots.googleBot?.['max-snippet']).toBe(-1)
   })
 
-  /**
-   * The corpus half. `noIndex` and `noFollow` only migrate when Yoast resolved
-   * them `true` (`map/seo.ts`), and on this site exactly one document is
-   * noindexed — `error404`, a WordPress page that does not migrate. So the
-   * honest parity claim is "nothing migrated is noindexed", and it is worth
-   * asserting rather than assuming: a stray `noIndex: true` in a committed
-   * document would silently delist a page and nothing else would notice.
-   */
-  it('carries no noIndex or noFollow anywhere in the migrated corpus', () => {
-    const offenders: string[] = []
-    for (const tree of ['converted', 'translated', 'seed']) {
-      const root = join(MIGRATION_DATA, tree)
-      if (!existsSync(root)) continue
-      for (const type of readdirSync(root)) {
-        for (const file of readdirSync(join(root, type)).filter((f) => f.endsWith('.json'))) {
-          const doc = JSON.parse(readFileSync(join(root, type, file), 'utf8')) as {
-            seo?: { noIndex?: boolean; noFollow?: boolean }
-          }
-          if (doc.seo?.noIndex || doc.seo?.noFollow) offenders.push(`${tree}/${type}/${file}`)
-        }
-      }
-    }
-    expect(offenders).toEqual([])
-  })
+  // The corpus half — that no committed document carries noIndex/noFollow at
+  // all — is a corpus invariant, so it lives in the unit layer with the rest
+  // of them: `tools/migration/src/corpus.test.ts` (ADR 0004).
 })

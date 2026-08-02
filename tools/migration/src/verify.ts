@@ -21,6 +21,7 @@ import { schemaTypes } from '@o3/sanity/schemas'
 import type { Migration } from '@o3/sanity/types/generated'
 
 import { isImageAssetId } from './lib/media'
+import { refsIn } from './lib/corpus'
 import { CONVERTED_DIR, SEED_DIR } from './lib/paths'
 import { categoryDoc } from './map/category'
 import { personDoc } from './map/person'
@@ -65,18 +66,6 @@ function readCommitted(): AnyDoc[] {
     }
   }
   return docs
-}
-
-/** Every `{_ref}` in a document, however deeply nested. */
-function refsIn(node: unknown, found: string[] = []): string[] {
-  if (Array.isArray(node)) {
-    for (const item of node) refsIn(item, found)
-  } else if (node && typeof node === 'object') {
-    const obj = node as Record<string, unknown>
-    if (typeof obj._ref === 'string') found.push(obj._ref)
-    for (const value of Object.values(obj)) refsIn(value, found)
-  }
-  return found
 }
 
 /**

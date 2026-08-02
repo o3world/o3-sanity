@@ -1,10 +1,11 @@
-import { readFileSync, readdirSync, existsSync } from 'node:fs'
+import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 
 import { describe, expect, it } from 'vitest'
 
+import { slugsByType } from '../lib/corpus'
 import type { WpRedirectExport } from '../lib/redirects'
-import { CONVERTED_DIR, EXTRACT_DIR, REPO_ROOT, SEED_DIR, TRANSLATED_DIR } from '../lib/paths'
+import { EXTRACT_DIR, REPO_ROOT } from '../lib/paths'
 import {
   ADR_0013_CHAIN_TERMINALS,
   ADR_0013_SERVICE_TERMINALS,
@@ -224,24 +225,7 @@ describe('the committed redirect map', () => {
     readFileSync(join(EXTRACT_DIR, 'site', 'redirects.json'), 'utf8'),
   ) as WpRedirectExport
 
-  function slugs(): Record<string, string[]> {
-    const out: Record<string, string[]> = {}
-    for (const root of [CONVERTED_DIR, SEED_DIR, TRANSLATED_DIR]) {
-      if (!existsSync(root)) continue
-      for (const type of readdirSync(root)) {
-        for (const file of readdirSync(join(root, type)).filter((f) => f.endsWith('.json'))) {
-          const doc = JSON.parse(readFileSync(join(root, type, file), 'utf8')) as {
-            _type: string
-            slug?: { current?: string }
-          }
-          if (doc.slug?.current) (out[doc._type] ??= []).push(doc.slug.current)
-        }
-      }
-    }
-    return out
-  }
-
-  const bySlug = slugs()
+  const bySlug = slugsByType()
   const paths = sitePaths({
     pageSlugs: bySlug.page ?? [],
     perspectiveSlugs: bySlug.perspective ?? [],

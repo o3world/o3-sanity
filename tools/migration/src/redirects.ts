@@ -13,33 +13,15 @@
  * app. Regenerating is a build-out act with a reviewable diff, not something
  * `next build` does behind a network call.
  */
-import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
+import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 
+import { slugsByType } from './lib/corpus'
 import type { WpRedirectExport } from './lib/redirects'
-import { CONVERTED_DIR, EXTRACT_DIR, REPO_ROOT, SEED_DIR, TRANSLATED_DIR } from './lib/paths'
+import { EXTRACT_DIR, REPO_ROOT } from './lib/paths'
 import { buildRedirectMap, sitePaths, type RedirectMap } from './map/redirects'
 
 const OUTPUT = join(REPO_ROOT, 'apps/web/src/lib/redirects.generated.ts')
-
-function slugsByType(): Record<string, string[]> {
-  const out: Record<string, string[]> = {}
-  for (const root of [CONVERTED_DIR, SEED_DIR, TRANSLATED_DIR]) {
-    if (!existsSync(root)) continue
-    for (const type of readdirSync(root)) {
-      for (const file of readdirSync(join(root, type)).filter((f) => f.endsWith('.json'))) {
-        const doc = JSON.parse(readFileSync(join(root, type, file), 'utf8')) as {
-          _type: string
-          slug?: { current?: string }
-        }
-        const slug = doc.slug?.current
-        if (!slug) continue
-        ;(out[doc._type] ??= []).push(slug)
-      }
-    }
-  }
-  return out
-}
 
 /**
  * A single-quoted TS string literal — the repo's Prettier style, so the

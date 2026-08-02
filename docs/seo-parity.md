@@ -22,12 +22,17 @@ resolves at the same path on the new site or redirects. There are no gaps.
 
 | Yoast sitemap | URLs | Served at the same path | Redirected | Gaps |
 | ------------- | ---: | ----------------------: | ---------: | ---: |
-| `post`        |  272 |                     272 |          0 |    0 |
+| `post`        |  272 |                     243 |         29 |    0 |
 | `page`        |   21 |                      10 |         11 |    0 |
-| `work`        |   20 |                      20 |          0 |    0 |
+| `work`        |   20 |                      17 |          3 |    0 |
 | `services`    |   24 |                       0 |         24 |    0 |
 | `ventures`    |    2 |                       2 |          0 |    0 |
-| **Total**     |  339 |                     304 |         35 |    0 |
+| **Total**     |  339 |                     272 |         67 |    0 |
+
+The `post` and `work` "Redirected" columns are the 32 o3xo.ai-shadowed URLs
+described below — WordPress still lists those documents in its sitemaps while
+301ing their URLs away, and the app mirrors both halves. A row here counts
+what the URL _does_, not whether the document is loaded.
 
 Path parity is not an accident: every mapper calls `checkPathParity` against
 Yoast's own `canonicalRendered`, `PATH_EXCEPTIONS` is still empty, and
@@ -129,16 +134,17 @@ ADR 0013's relevance rule — the source URL tells you what the visitor wanted:
 | `/acquia-o3`                                                    | `/solutions`                     |
 | `/sitecore`                                                     | `/solutions`                     |
 
-### Nine rules deliberately not carried
+### Rules deliberately not carried
 
-| Rule                                       | Why not                                                                                                                                                   |
-| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 3 × `journey-mapping-workshop*`            | Yoast answers **410 Gone**. Next.js redirects cannot return 410; the app 404s, which is the closest true thing it can say.                                |
-| `/?resource_type=ebook`                    | Matches on a **query string**. Redirection strips the query into `match_url`, so reading that column would have put a permanent redirect on the homepage. |
-| `/404-2` → `/error404`                     | A redirect into WordPress's own 404 page.                                                                                                                 |
-| 2 × `/resources/*` → a PDF in `wp-content` | The destination is an upload, not a page, and the uploads do not migrate. A 301 into a dead file is worse than a 404.                                     |
-| `/source URL` → `/target URL`              | A placeholder row somebody saved by accident.                                                                                                             |
-| `/utm_source…` → `/unknown`                | Same — a mangled campaign URL pointing at a page that never existed.                                                                                      |
+| Rule                                       | Why not                                                                                                                                                                                                                                                                                                      |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 3 × `journey-mapping-workshop*`            | Yoast answers **410 Gone**. Next.js redirects cannot return 410; the app 404s, which is the closest true thing it can say.                                                                                                                                                                                   |
+| `/?resource_type=ebook`                    | Matches on a **query string**. Redirection strips the query into `match_url`, so reading that column would have put a permanent redirect on the homepage.                                                                                                                                                    |
+| `/404-2` → `/error404`                     | A redirect into WordPress's own 404 page.                                                                                                                                                                                                                                                                    |
+| 2 × `/resources/*` → a PDF in `wp-content` | The destination is an upload, not a page, and the uploads do not migrate. A 301 into a dead file is worse than a 404.                                                                                                                                                                                        |
+| `/source URL` → `/target URL`              | A placeholder row somebody saved by accident.                                                                                                                                                                                                                                                                |
+| `/utm_source…` → `/unknown`                | Same — a mangled campaign URL pointing at a page that never existed.                                                                                                                                                                                                                                         |
+| 10 duplicate-source rows                   | Redirection lets two rows claim one source; **position decides which one WordPress serves**, so the earlier row is carried and the later recorded here. 8 are trailing-slash twins whose targets normalize identically; the two that differ are decided by ADR 0013 or resolve to the position-first target. |
 
 One row was **corrected** rather than carried: `/perspectives/ai-roi-beyond-efficiency`
 points at `https://www.o3xo.ai.com/…`, a host that does not resolve (checked

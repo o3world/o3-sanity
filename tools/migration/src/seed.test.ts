@@ -8,6 +8,7 @@ import { SECTION_BLOCKS } from '@o3/sanity/schemas/registry'
 
 import type { Migration } from '@o3/sanity/types/generated'
 
+import { refsIn } from './lib/corpus'
 import { CONVERTED_DIR, REPO_ROOT, SEED_DIR, TRANSLATED_DIR } from './lib/paths'
 
 /**
@@ -86,18 +87,6 @@ const allPipelineDocs = readAllPipelineDocs()
  * question is "will this resolve in the loaded dataset", which is all three.
  */
 const pipelineIds = new Set(allPipelineDocs.map(({ doc }) => doc._id))
-
-/** Every `{_ref}` anywhere in a document, however deeply nested. */
-function refsIn(node: unknown, found: string[] = []): string[] {
-  if (Array.isArray(node)) {
-    for (const item of node) refsIn(item, found)
-  } else if (node && typeof node === 'object') {
-    const obj = node as Record<string, unknown>
-    if (typeof obj._ref === 'string') found.push(obj._ref)
-    for (const value of Object.values(obj)) refsIn(value, found)
-  }
-  return found
-}
 
 function markersIn(node: unknown, found: string[] = []): string[] {
   if (Array.isArray(node)) {
