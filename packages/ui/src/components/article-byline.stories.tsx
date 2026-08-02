@@ -21,7 +21,7 @@ export const Frame: Story = {
   },
 }
 
-/** With the author's real headshot, which most of the 14 migrated people have. */
+/** With the author's real headshot, which all 12 migrated people have. */
 export const WithPortrait: Story = {
   args: {
     name: 'Jay Forbes',
@@ -37,12 +37,17 @@ export const WithPortrait: Story = {
   },
 }
 
-/** A migrated post whose author record has no role. */
+/** An author record with no role — a name and the meta line, no second line. */
 export const NameOnly: Story = {
-  args: { name: 'Brian Crumley', meta: 'Feb 2015 · 3 min read' },
+  args: { name: 'Alan Cho, CPACC', meta: 'Feb 2015 · 3 min read' },
 }
 
-/** No author at all — the meta line still carries date and read time. */
+/**
+ * No author at all — the meta line still carries date and read time, and the
+ * disc goes with the name. **This is the archive's majority state**, not an
+ * edge case: 239 of the 272 migrated articles have no byline, because
+ * o3world.com shows none for them either (#32).
+ */
 export const Unattributed: Story = {
   args: { meta: 'Feb 2015 · 3 min read' },
 }

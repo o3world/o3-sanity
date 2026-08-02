@@ -37,8 +37,9 @@ Rules of the road:
 ## The full archive: what the long tail turned out to be (#17)
 
 All 272 perspectives convert with an **empty fail-loud report**. Getting there
-meant two new mapper arms, four recorded drop decisions, and one correction to
-how authorship was being read.
+meant two new mapper arms, five recorded drop decisions, and two corrections to
+how authorship was being read — the second one (#32) deleted the byline from
+239 of them, because the live site never showed one.
 
 ### ACF module types, in full
 
@@ -55,7 +56,7 @@ fourth would still fail the run.
 
 ### Recorded drop decisions
 
-Four things do not migrate. None of them is silent — each is reported as a
+Five things do not migrate. None of them is silent — each is reported as a
 **note** on every run (converted, but the source needed cleaning up):
 
 1. **`[single_image title="…"]`** (5 uses, 3 posts). Stripped. The shortcode is
@@ -75,6 +76,10 @@ Four things do not migrate. None of them is silent — each is reported as a
 4. **Code blocks** — nothing to drop. Zero `<pre>`, `<code>`, `wp-block-code`
    or highlighter classes in 272 bodies, which settles the open question from
    the schema spec: **ADR 0005**, no `codeBlock`.
+5. **A byline naming a deleted team post** (7 posts). The ACF `author` points
+   at a `team` record WordPress no longer has, so there is no name to migrate
+   and the live page shows none either. See "The byline is the ACF `author`,
+   or nobody" below — that is the whole decision, and this is its one note.
 
 Two false positives are worth knowing about, because both cost a debugging
 round: the old shortcode regex matched editorial prose in square brackets
@@ -82,17 +87,44 @@ round: the old shortcode regex matched editorial prose in square brackets
 Gravity Forms JavaScript (`gform.hooks[o][r]`) reads as a shortcode to any
 bracket-matching pattern. Scripts are stripped before the scan now.
 
-### The byline is not `post_author`
+### The byline is the ACF `author`, or nobody (#32)
 
-Posts carry an ACF `author` field pointing at a **`team` post**, and on **39 of
-the 40** posts that set one it names someone other than `post_author` — the WP
-account is just whoever hit publish. `PersonDirectory` (`map/person.ts`) owns
-this:
+Posts carry an ACF `author` field pointing at a **`team` post**. Where one is
+set and resolves, that is the byline. Where it isn't, **the article has no
+author** — `post_author` is not a fallback, because it is not a byline.
 
-- ACF `author` wins; `post_author` is the fallback.
+The test was the live site, and it is unambiguous. A post with an ACF author
+renders a headshot and a name on o3world.com. A post without one renders no
+byline anywhere: `post_author` reaches `<meta name="author">`, `twitter:data1`
+and the JSON-LD `author` node, all three derived by Yoast, none of them
+something a reader sees — and Yoast stamps the same name into the meta of the
+ACF-bylined posts too, so it does not even distinguish them. Using it as a
+fallback put "Brian Crumley" on 223 articles as their visible author and
+`jennifero3` on 6 more, which is a claim the source never made.
+
+The arithmetic across the 272:
+
+| Posts   | ACF `author`           | Result                              |
+| ------- | ---------------------- | ----------------------------------- |
+| **33**  | set, team post exists  | `author` reference — the byline     |
+| **7**   | set, team post deleted | no `author`, **noted** on every run |
+| **232** | not set                | no `author`, silently               |
+
+The middle row is the only one worth a human: team ids `5102`, `5320`, `7533`
+and `8031` are named by seven posts and exist nowhere in WordPress any more.
+The live site renders nothing for them either, so the document is right without
+an author — but someone deleted a record a byline still points at, which is
+source cleanup, not a conversion failure.
+
+`PersonDirectory` (`map/person.ts`) owns the rest:
+
 - A WP _user_ and a _team_ post are the same person when they share an email or
   a name. **Email first** — three accounts never had a display name set, so
-  their "name" is a login (`handler`, `kelly`) that joins to nothing.
+  their "name" is a login (`handler`, `kelly`) that joins to nothing. The join
+  survives the fallback's removal because it is what gives an ACF-bylined
+  person their `person-wp-<userId>` id and their curated name; what went with
+  the fallback is `refForUser`, a lookup that only ever answered "who published
+  this".
 - The team record supplies name, role and headshot; the user record is an
   account. Merged people keep `person-wp-<userId>` so existing references hold;
   team-only people (former staff who still wrote things) get
@@ -100,6 +132,13 @@ this:
   spaces ever overlap.
 - Team posts are extracted with `post_status => any`. Six referenced members
   are unpublished, and a former employee is still the author of what they wrote.
+- **Person documents are reference-driven.** Only people something points at
+  are emitted — the team CPT lists everyone who ever worked here. That "some
+  thing" includes the seed tree, not just perspectives: the About page's team
+  grid names six people, one of whom (Kelly Navari, `person-wp-4`) has never
+  been a byline. 12 person documents survive; `person-wp-16` (Brian Crumley)
+  and `person-wp-20` (jennifero3) left with the fallback and were retired from
+  the dataset by `load`.
 
 ---
 

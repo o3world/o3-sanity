@@ -16,11 +16,13 @@ type PersonGridSectionProps = SectionProps<'personGridSection'>
  *   meta  gap 6                     13px role eyebrow #636363 | 25.9px name
  * ```
  *
- * **This is the block the 14 migrated `person` documents existed for.** They
+ * **This is the block the 12 migrated `person` documents existed for.** They
  * came in with #17 and were rendered nowhere until this band; that is why the
  * people are **referenced**, not inlined. A person is already a document —
  * they author perspectives — so inlining names here would have created a
- * second, drifting copy of the same fact.
+ * second, drifting copy of the same fact. The reference goes both ways now:
+ * since #32 dropped the `post_author` byline, this band is the *only* thing
+ * keeping Kelly Navari (`person-wp-4`) in the corpus.
  *
  * The frame draws six cards, all the same placeholder, so the count is the
  * editor's rather than the design's: whatever is referenced renders, three to

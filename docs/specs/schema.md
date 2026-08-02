@@ -13,7 +13,7 @@ Resolves wayfinder ticket #6. Inputs: the content model (ticket #5, `CONTEXT.md`
 
 ### Routable
 
-- **`perspective`** — title, `slug` (req), excerpt, `author` → person (req), `categories` → category[], publishedAt, featuredImage (figure), `body` (Portable Text — see set below), seo. Read time computed at render, not stored.
+- **`perspective`** — title, `slug` (req), excerpt, `author` → person (optional — the ACF byline where WordPress had one; 239 of 272 have none, #32), `categories` → category[], publishedAt, featuredImage (figure), `body` (Portable Text — see set below), seo. Read time computed at render, not stored.
 - **`caseStudy`** — title, `slug` (req), `client` → client (req), `industries` → industry[], `industryDetail` (string — eyebrow's second half), `narrativeHeadline` (text, req — the card sentence), `stats[]` (stat; first = headline stat), `heroMedia` (figure), `chapters[]` ({kicker, title, body: Portable Text}; numbering derived from order), `deliverables[]` (string — "What we shipped"), `extraSections[]` (section blocks, optional), seo.
 - **`page`** — title, `slug` (req, multi-segment), `pageType` (`standard | service`, closed enum, initial `standard`), `card` fieldset conditional on `pageType == 'service'` ({shortTitle, excerpt, icon/image}) — projected by `listingSection`, `sections[]` (section blocks), seo. ⚠️ No `service` page exists or is planned — see `listingSection` below and [ADR 0013](../adr/0013-services-consolidate-into-solutions.md).
 
@@ -50,7 +50,7 @@ Standard marks + closed inline-object set: **`figure`, `embed`, `pullQuote`**. A
 Surfaced by #46/#47 and built against the About (`1924:5344`) and Solutions (`1925:6138`) frames.
 
 - **`disciplineGridSection`** — `heading`, `layout` (`grid | orbital`), `disciplines[]` ({heading, body}). One block, not two: About draws the four disciplines as a 2×2 grid (`1925:5915`) and Solutions places the same four on a dotted tetrahedron (`1928:6524`). Slot position on the orbital layout derives from array order — apex first, then the base ring — and that layout takes exactly four.
-- **`personGridSection`** — eyebrow, heading, `people[]` → person. The band the 14 migrated `person` documents existed for (`1927:6435`). People are **referenced**, never inlined.
+- **`personGridSection`** — eyebrow, heading, `people[]` → person. The band the 12 migrated `person` documents existed for (`1927:6435`). People are **referenced**, never inlined.
 - **`roleListSection`** — eyebrow, heading, `roles[]` ({heading, eyebrow, cta}). The Careers band (`1925:6061`), which the frame settles as a **section of About rather than its own route**. Roles are **inline objects, not a document type**: a `role` document would buy only a URL to link to, and nothing on the frame links to one — promote it when an /apply route, a cross-reference or an ATS feed needs an id.
 - **`inFlightSection`** — heading, subheading, `layout` (`cards | rows`), `entries[]` ({heading, eyebrow, media, date, cta}). The three middle bands of the Live frame (`1644:1889` — #50): the studio cards (`1751:1994`) and the appearances/ideas rows (`1710:1800`, `1732:1409`) are the same entry in two compositions, the call `disciplineGridSection.layout` already makes. An entry with a `date` draws the red date column; one without draws the halftone disc — derived, not a third enum. Entries are **inline objects**: the cards are deliberately anonymous (no caseStudy refs — ADR 0007), and an `event` document is justified only when an appearance needs its own URL.
 

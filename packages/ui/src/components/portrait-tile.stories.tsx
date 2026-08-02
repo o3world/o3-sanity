@@ -13,8 +13,9 @@ type Story = StoryObj<typeof meta>
 
 /**
  * With no portrait the tile is the treatment on its own — black with the red
- * arc. Two of the 14 migrated `person` documents have no headshot, so this is
- * a state the page actually reaches.
+ * arc. All 12 migrated `person` documents have a headshot today (the two that
+ * didn't were WP accounts standing in as bylines, retired in #32), so this is
+ * the state a hand-added person reaches before anyone uploads their picture.
  */
 export const Empty: Story = {
   args: { className: 'w-[394px]' },

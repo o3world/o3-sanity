@@ -10,7 +10,7 @@ Terms resolved so far. Use these exact words in schema names, code, issues, and 
 
 ## Supporting types
 
-- **Person** — name, title, headshot. Authors of perspectives; **14** migrate from WordPress (one per distinct byline in the 272-post archive; the early estimate of 8 predated the extract).
+- **Person** — name, title, headshot. Authors of perspectives; **12** migrate from WordPress — one per person something actually references, which is 11 bylines plus Kelly Navari, who is on the About team grid without having written anything. A **byline** is the ACF `author` field and nothing else: `post_author` is whoever hit publish, which o3world.com shows a reader nowhere, so 239 of the 272 articles have no author at all (#32). `perspective.author` is optional for that reason.
 - **Client** — name + logo. Single source for the homepage logo wall and `caseStudy.client`.
 - **Category** — editorial taxonomy for perspectives (11 migrate; cleanup is post-migration editorial work). WordPress tags do **not** migrate.
 - **Industry** — minimal taxonomy (name + slug) referenced by case studies for the "Healthcare · Pediatric Systems" eyebrow; the second half is the case study's `industryDetail` string. Deliberately not invested in beyond that.

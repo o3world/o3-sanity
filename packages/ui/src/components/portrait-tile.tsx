@@ -14,14 +14,14 @@ export interface PortraitTileProps extends HTMLAttributes<HTMLDivElement> {
  *
  * **The frame bakes all three layers into one raster.** Its card fill is a
  * single 2500×2500 export: a cut-out portrait already composited over the arc.
- * That asset does not exist for the 14 migrated `person` documents, whose
+ * That asset does not exist for the 12 migrated `person` documents, whose
  * headshots are ordinary rectangular JPEGs off WordPress — so the treatment is
- * rebuilt in layers here instead of waiting for 14 hand-comped exports.
+ * rebuilt in layers here instead of waiting for 12 hand-comped exports.
  *
  * ⚠️ **The arc is drawn but currently occluded.** A rectangular headshot fills
- * the tile and covers it; the arc shows only where the portrait is absent
- * (two of the 14 have no headshot at all). Swapping the headshots for cut-out
- * PNGs is what completes the composition — not a change here.
+ * the tile and covers it, and every migrated person now has one, so the arc
+ * shows nowhere in the dataset today. Swapping the headshots for cut-out PNGs
+ * is what completes the composition — not a change here.
  *
  * Those cut-outs have to be **produced**, not exported (#46). The frame holds
  * exactly one portrait raster — Mike Gadsby's, `652581511bdf…`, duplicated

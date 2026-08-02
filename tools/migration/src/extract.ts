@@ -247,9 +247,11 @@ echo json_encode($out);`,
  *
  * - It is the only place WordPress keeps a person's role and headshot. A WP
  *   *user* carries a display name and an empty bio; everything else is here.
- * - It is the **real byline**. Posts carry an ACF `author` field pointing at a
+ * - It is the **only byline**. Posts carry an ACF `author` field pointing at a
  *   team post, and on 39 of the 40 posts that have one it names someone other
- *   than `post_author` — the WP account is just whoever published.
+ *   than `post_author` — the WP account is just whoever published, and #32
+ *   established that the live site shows it to a reader nowhere. A post with
+ *   no ACF author therefore migrates with no author at all.
  *
  * `post_status => any` because six of the referenced team posts are no longer
  * published; a former employee is still the author of what they wrote.
