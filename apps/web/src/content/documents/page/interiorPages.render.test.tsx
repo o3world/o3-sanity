@@ -20,6 +20,11 @@ import { aSeededPage, renderRoute, siteSettings, withSettings } from '@/test'
  * Live is net-new (#50) and has no counterpart on the current site, so its
  * tests carry a second job: they are the only place that says what the route
  * `/live` resolves to.
+ *
+ * Contact and 1682 (#48) have no canonical frame at all — their copy is
+ * WordPress's, their composition assembled from existing blocks, and both are
+ * provisional. #48's gate is "every top-level link resolves", so like Live,
+ * these tests are the durable proof the two routes resolve to their bands.
  */
 const route = buildCatchAllRoute(CATCH_ALL_TYPES, PAGE_QUERY)
 
@@ -33,6 +38,8 @@ async function render(slug: string) {
 const about = await render('about')
 const solutions = await render('solutions')
 const live = await render('live')
+const contact = await render('contact')
+const conference = await render('1682-conference-ai-innovation')
 
 describe('the seeded About page', () => {
   const html = about.html
@@ -215,6 +222,91 @@ describe('the seeded Live page', () => {
   it('names every row control from its cta label', () => {
     expect(html).toContain('aria-label="Details and registration"')
     expect(html).toContain('aria-label="Read the thinking"')
+  })
+
+  it('gives the page a single h1', () => {
+    expect(html.match(/<h1[\s>]/g) ?? []).toHaveLength(1)
+  })
+})
+
+describe('the seeded Contact page', () => {
+  const html = contact.html
+  const sections = (aSeededPage('contact').sections ?? []) as { _type: string }[]
+
+  it('renders every section in the array — none silently dropped', () => {
+    expect(html.match(/data-sanity=/g) ?? []).toHaveLength(sections.length)
+  })
+
+  // No frame authored this order — it is the seed's own: hero, the ways to
+  // reach the studio, the Handler pull quote.
+  it('resolves to its three bands', () => {
+    expect(sections.map((s) => s._type)).toEqual(['heroSection', 'layoutSection', 'quoteSection'])
+  })
+
+  it.each([
+    ['hero headline', 'Let’s make exceptional experiences together.'],
+    ['reach eyebrow', 'Get in touch'],
+    ['the studio email', 'hello@o3world.com'],
+    ['the studio phone', '(215) 592-4739'],
+    ['the mailing address', 'Philadelphia, PA 19125'],
+    ['the Handler portrait alt', 'Black and white photo of Justin Handler'],
+    ['the Handler quote', 'complex business challenges'],
+  ])('carries WordPress’s %s', (_label, copy) => {
+    expect(html).toContain(copy)
+  })
+
+  // The form stand-in (#48): WordPress serves a Gravity Form here and the
+  // schema has no form block, so a mailto CTA is the page's one conversion
+  // path until a real form exists. If this assertion breaks because a form
+  // block landed, delete it with joy.
+  it('offers the mailto CTA standing in for the form', () => {
+    expect(html).toContain('href="mailto:hello@o3world.com"')
+  })
+
+  it('gives the page a single h1', () => {
+    expect(html.match(/<h1[\s>]/g) ?? []).toHaveLength(1)
+  })
+})
+
+describe('the seeded 1682 conference page', () => {
+  const html = conference.html
+  const sections = (aSeededPage('1682-conference-ai-innovation').sections ?? []) as {
+    _type: string
+  }[]
+
+  it('renders every section in the array — none silently dropped', () => {
+    expect(html.match(/data-sanity=/g) ?? []).toHaveLength(sections.length)
+  })
+
+  // WordPress's module order, carried: header, intro + mark + attend CTA, the
+  // events list, the about-1682 panels, the recap video, the selected
+  // perspectives, the page callout.
+  it('resolves to WordPress’s band sequence', () => {
+    expect(sections.map((s) => s._type)).toEqual([
+      'heroSection',
+      'layoutSection',
+      'layoutSection',
+      'railPanelsSection',
+      'layoutSection',
+      'perspectivesCarouselSection',
+      'ctaSection',
+    ])
+  })
+
+  it.each([
+    ['hero eyebrow', '1682'],
+    ['hero headline', 'The business of innovation conference'],
+    ['the attend CTA', 'Attend the 1682 conference on October 8'],
+    ['the events heading', 'Events'],
+    ['the panels heading', 'Shaping the future of AI + innovation'],
+    ['the perspectives heading', 'Expert insights driving impactful solutions'],
+    ['the callout heading', 'Let’s explore your future in AI and innovation'],
+  ])('carries WordPress’s %s', (_label, copy) => {
+    expect(html).toContain(copy)
+  })
+
+  it('sends the attend CTA to the conference site, unfreshened', () => {
+    expect(html).toContain('https://www.1682conference.com/')
   })
 
   it('gives the page a single h1', () => {

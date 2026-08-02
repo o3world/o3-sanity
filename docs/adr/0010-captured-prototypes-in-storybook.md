@@ -109,3 +109,15 @@ Three reasons, in order of weight:
   decision is about artifacts that never lived there.
 - Prototypes inherit whatever protects the deployed Storybook. Anything that
   must not be publicly linkable does not get captured here.
+
+## Amendment — 2026-08-02: captures may be authored in-repo
+
+The context above assumes every capture arrives from claude.ai and has its
+frame-runtime stripped on the way in. #51's second capture
+(`2026-08-mobile-menu-variants/`) was authored directly in this repo by an
+agent session, and nothing in the decision actually depends on where the HTML
+was written — the load-bearing parts are the recorded question, the provenance
+of every value, read-only-after-capture, and the "not a source of record"
+strip. An in-repo capture must meet all four exactly as an import does; the
+runtime-stripping bullet simply does not apply to it. (`prototypes/README.md`
+said this first; recording it here so the ADR and the README agree.)

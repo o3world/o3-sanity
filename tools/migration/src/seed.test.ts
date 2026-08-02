@@ -327,7 +327,7 @@ describe('committed seed content', () => {
 
     // Routes match `slug.current` against the request path, so a stored
     // leading or trailing slash produces a slug nothing can ever resolve.
-    it('stores a bare slug, with no leading or trailing slash', () => {
+    it('stores a lowercase URL-safe slug, with no slash or hyphen at either end', () => {
       for (const { file, doc } of pages) {
         const slug = (doc.slug as { current?: string } | undefined)?.current
         expect(slug, `${file} has no slug`).toBeTruthy()
