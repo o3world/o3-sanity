@@ -1274,5 +1274,21 @@
   "file:tools/migration/data/seed/assets/perspective-weekend-maps.png": {
     "sha256": "789c29e1472ea6c3a88676bf7fef7b4a767968fe",
     "assetId": "image-789c29e1472ea6c3a88676bf7fef7b4a767968fe-1376x768-png"
+  },
+  "file:tools/migration/data/seed/assets/about-beyond-1682.png": {
+    "sha256": "57e5bc89f795a122eeadd795dcf320dd272162b7",
+    "assetId": "image-57e5bc89f795a122eeadd795dcf320dd272162b7-336x336-png"
+  },
+  "file:tools/migration/data/seed/assets/about-beyond-o3xo.png": {
+    "sha256": "7f7e041e6b7b902f4111fa8111d1dbb16cb484d4",
+    "assetId": "image-7f7e041e6b7b902f4111fa8111d1dbb16cb484d4-2160x2138-png"
+  },
+  "file:tools/migration/data/seed/assets/about-beyond-community.png": {
+    "sha256": "8667c1f1046e8ab72efa7bdfe8b2c32bd82eedc2",
+    "assetId": "image-8667c1f1046e8ab72efa7bdfe8b2c32bd82eedc2-1184x1172-png"
+  },
+  "file:tools/migration/data/seed/assets/about-culture-team.png": {
+    "sha256": "03ee51d7fc696f90827fdae6e76ad76da08290f8",
+    "assetId": "image-03ee51d7fc696f90827fdae6e76ad76da08290f8-2088x1068-png"
   }
 }
