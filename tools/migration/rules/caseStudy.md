@@ -115,17 +115,20 @@ honest: if the source or these rules changed, the document was translated
 under different conditions and needs re-reviewing. `pnpm --filter
 @o3/migration convert` re-checks them and fails loud on a mismatch.
 
+**So this file holds translation rules and nothing else.** It used to end with
+a section describing what the loader does with the result, which meant a change
+of loading policy invalidated the hash on 20 documents whose every field had
+been derived under rules that had not moved. Where a translated document lands
+is [`../README.md`](../README.md)'s business, and the decision behind it is
+[ADR 0016](../../docs/adr/0016-publish-what-wordpress-publishes.md).
+
 ---
 
-## Loading
+## Review
 
-Translated documents load **published**, like every other tree
-([ADR 0016](../../docs/adr/0016-publish-what-wordpress-publishes.md)): what
-this track holds is content WordPress publishes today, and withholding it was
-not protecting anyone.
+Two-sided, and it is the only thing standing between a proposed field and a
+published claim: the PR diff (extract vs translated), and the document's own
+`migration.source` panel in Studio, which carries every flag raised above.
 
-Review is unchanged and matters more, not less. It is two-sided — the PR diff
-(extract vs translated) and the document's own `migration.source` panel in
-Studio, which carries every flag this file told you to raise. **A flag is now
-a claim on the live site.** Raise it anyway; the alternative is not a draft, it
-is an unmarked invention.
+**Raise the flag.** The alternative to a flagged field is never a safe draft —
+it is an unmarked invention.

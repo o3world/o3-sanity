@@ -133,7 +133,7 @@
     "sourceFile": "caseStudy/amerigas.json",
     "sourceHash": "sha256:4a91e0c08e67f909db9dc3d1c3afefb7661e6a5c13858c105f5bc23786726405",
     "rulesFile": "rules/caseStudy.md",
-    "rulesHash": "sha256:c54529e356b564c7ed2e34c9bec39db9379fe731fc0a668a0da2523e541411a4",
+    "rulesHash": "sha256:82c77133745714f60061ad6e91b695f9e9f823dd78133221f4ecd331d7b04d72",
     "model": "claude-opus-5",
     "translatedAt": "2026-08-02",
     "flags": [
