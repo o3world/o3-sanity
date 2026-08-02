@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
-import { BrandLogo } from './brand-logo'
+import { BrandLogo, BrandMark } from './brand-logo'
 
 const meta = {
   title: 'UI/BrandLogo',
   component: BrandLogo,
   parameters: { layout: 'padded' },
   argTypes: {
-    color: { control: 'inline-radio', options: ['black', 'red', 'white'] },
+    color: { control: 'inline-radio', options: ['black', 'red'] },
     size: { control: { type: 'number' } },
   },
 } satisfies Meta<typeof BrandLogo>
@@ -28,13 +28,23 @@ export const Red: Story = {
 }
 
 /**
- * `264:53`, on a dark band — the exact mirror of `Black`, and the nav's
- * resting mark since the bar started reversing with the surface. Shown on ink
- * because that is the only place it is ever correct.
+ * `BrandMark` — the same two paths without the plate, in `currentColor`, which
+ * is why it is shown on both surfaces at once: the ink is the surface's to
+ * decide, and neither state is the "default" one. This is what the nav draws
+ * (Nick's reference, 2026-08-02); no Figma set instances a box-less mark.
  */
-export const White: Story = {
-  args: { color: 'white', size: 64 },
-  globals: { backgrounds: { value: 'ink' } },
+export const Mark: Story = {
+  args: { color: 'black', size: 64 },
+  render: () => (
+    <div className="flex gap-6">
+      <div className="bg-ink flex items-center justify-center p-8 text-white">
+        <BrandMark size={64} />
+      </div>
+      <div className="bg-bone text-fg flex items-center justify-center p-8">
+        <BrandMark size={64} />
+      </div>
+    </div>
+  ),
 }
 
 /**

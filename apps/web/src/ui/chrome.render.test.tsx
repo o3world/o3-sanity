@@ -30,6 +30,17 @@ const settings = JSON.parse(
 const navHtml = renderToStaticMarkup(<SiteNav settings={settings} />)
 const footerHtml = renderToStaticMarkup(<SiteFooter settings={settings} />)
 
+/**
+ * The O3 mark in each piece of chrome, matched on its 64 viewBox — which both
+ * `BrandLogo` and `BrandMark` keep, and nothing else in the chrome uses.
+ * Matching the whole element is what lets a test say "no plate in here"
+ * without the hamburger's `<rect>` bars answering for it.
+ */
+const markIn = (html: string) =>
+  html.match(/<svg[^>]*viewBox="0 0 64 64"[\s\S]*?<\/svg>/)?.[0] ?? ''
+const navMark = markIn(navHtml)
+const footerMark = markIn(footerHtml)
+
 describe('site nav', () => {
   it('renders every nav item from Site Settings', () => {
     for (const item of settings.navItems ?? []) {
@@ -101,34 +112,42 @@ describe('the nav bar’s pinned, dark-ink default', () => {
     expect(navHtml).toContain('duration-(--duration-ink)')
   })
 
-  it('ships the CTA white, and flips it dark rather than leaving it to vanish', () => {
-    // `Button`'s `light` fill on the dark skin; its `dark` fill on the light
-    // one, because `--color-scrim-light` is itself white and #58's one
-    // conversion path would otherwise disappear where the flip fires.
+  it('holds the CTA brand red through the flip — the one thing that stays put', () => {
+    // Nick's reference of both states (2026-08-02) draws it red on the light
+    // pill and the dark one alike, as the prototype's `.o3btn` did. The red is
+    // forced by the chrome, not a `Button` variant an editor could reach.
     // `rounded-btn` is `Button`'s own base class, which is what separates the
     // two CTAs from the hamburger's plain `<button>` trigger.
     const buttons = (navHtml.match(/<button[^>]*>/g) ?? []).filter((b) => b.includes('rounded-btn'))
     expect(buttons.length, 'the nav CTA was not found at all').toBe(2) // 1440 + 402
     for (const button of buttons) {
-      expect(button).toContain('bg-white')
-      expect(button).toContain('group-data-[ink=dark]:bg-ink')
-      expect(button).toContain('group-data-[ink=dark]:text-white')
-      expect(button).toContain('group-data-[ink=dark]:hover:bg-ink/85')
-      // Button hovers at --duration-hover; this one lands with the bar.
-      expect(button).toContain('duration-(--duration-ink)')
+      expect(button).toContain('bg-brand')
+      expect(button).toContain('hover:bg-brand/85')
+      // Nothing on this button may hang off the bar's ink.
+      expect(button).not.toContain('group-data-[ink=dark]')
+      // …and with no flip to land, it keeps Button's own 220ms hover.
+      expect(button).not.toContain('duration-(--duration-ink)')
     }
   })
 
-  it('rests on the white mark and flips it to the ink tile, both inks together', () => {
-    // The mark reverses with the surface (2026-08-02 direction): `Color=White`
-    // at rest over the dark hero, `264:52`'s black tile over a light band.
-    expect(navHtml).toContain('text-white')
-    expect(navHtml).toContain('[--logo-counterform:var(--color-ink-deep)]')
-    expect(navHtml).toContain('group-data-[ink=dark]:text-ink-deep')
-    expect(navHtml).toContain('group-data-[ink=dark]:[--logo-counterform:white]')
-    // The counterforms are one `<g>`, so the square and the ring cannot land
-    // on different sides of the flip.
-    expect(navHtml).toContain('fill="var(--logo-counterform, white)"')
+  it('draws the mark without its plate, so there is nothing to invert', () => {
+    // Nick's direction, 2026-08-02: the O3 changes colour to stay visible,
+    // "without the square box". `BrandLogo`'s filled square IS the plate — the
+    // nav uses `BrandMark` instead, and the tile stays a tile in the footer.
+    //
+    // Scoped to the 64 box: the hamburger draws its two bars as `<rect>` too,
+    // so a document-wide probe for one would pass on the wrong element.
+    expect(navMark, 'the nav mark was not found at all').not.toBe('')
+    expect(navMark).not.toContain('<rect')
+    expect(footerMark).toContain('<rect width="64" height="64" fill="currentColor"')
+  })
+
+  it('lets the mark take the bar’s ink rather than carrying its own', () => {
+    // `currentColor` + no text color on the svg = the mark inherits white now
+    // and `--color-fg` when flipped, riding the bar's own 350ms transition.
+    // A color class here would strand the mark on one side of the flip.
+    expect(navMark).toContain('fill="currentColor"')
+    expect(navMark).not.toMatch(/text-(white|ink-deep|ink|fg|brand)/)
   })
 
   it('leaves the ink to the bar rather than pinning it on each link', () => {
@@ -165,13 +184,13 @@ describe('site footer', () => {
     }
   })
 
-  it('keeps the red mark exactly as it was through the counterform refactor', () => {
-    // `--logo-counterform` exists for the nav. The footer sets nothing, so the
-    // fallback has to be the literal white the frame draws (`1680:2099`) —
-    // this is the assertion that catches a default changed for the nav's sake.
-    expect(footerHtml).toContain('text-brand')
-    expect(footerHtml).toContain('fill="var(--logo-counterform, white)"')
-    expect(footerHtml).not.toContain('--logo-counterform:')
+  it('keeps the red tile, which the nav’s box-less mark never touched', () => {
+    // `1680:2099`. The two components share their geometry, so the assertion
+    // worth having is that the footer still gets the PLATE and the brand fill —
+    // the two parts the nav gave up — with its counterforms knocked out white.
+    expect(footerMark, 'the footer mark was not found at all').not.toBe('')
+    expect(footerMark).toContain('text-brand')
+    expect(footerMark).toContain('fill="white"')
   })
 
   it('opens external social profiles safely', () => {

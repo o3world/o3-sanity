@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { BrandLogo } from '@o3/ui'
+import { BrandMark } from '@o3/ui'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { CtaLink, resolveCtaHref } from '@/content/CtaLink'
@@ -50,43 +50,53 @@ interface SiteNavProps {
  * sampling is the prototype's; the styling is CSS off one attribute rather
  * than the prototype's per-element inline writes.
  *
- * **The mark flips with the bar**, on Nick's direction (2026-08-02): it
- * reverses with the surface — white against dark bands, black against light —
- * while maintaining exact branding. So the resting bar is a WHITE tile with
- * `#030303` counterforms (`Color=White`), and over a light band it becomes
- * `264:52`'s ink tile with white ones. The earlier reading here — that a solid
- * tile "already reverses" because the eye reads the white counterforms on dark
- * and the black square on light — was defensible and is why `Color=White` sat
- * deferred; it is not what was asked for, and the mark now inverts outright.
- * Both of the mark's inks move on the same `--duration-ink` as everything else
- * on the bar (brand-logo.tsx).
+ * Nick's reference of both states (2026-08-02) is the answer sheet, and it is
+ * a COLOUR answer sheet only — geometry, blur, fills, hairlines, spacing and
+ * the link treatment are as built. Dark pill: white mark, white links, red CTA.
+ * Light pill: ink mark, ink links, red CTA.
  *
- * **The CTA does flip**, which is where this parts company with the prototype
- * rather than carrying it: the prototype's CTA was brand red and survived both
- * surfaces untouched, and this design has no red button at all (button.tsx —
- * "there is no red button on the canonical Home frame"). What it has is a white
- * one, and white on `--color-scrim-light` — white at 55% over a bone band — is
- * nothing at all. See `CTA_INK_FLIP`.
+ * **The mark loses its plate rather than inverting.** The bar draws
+ * `BrandMark` — the ring and the superscript, free-standing — not
+ * `BrandLogo`'s square. So there is nothing to invert: the mark simply takes
+ * the bar's ink, white then `--color-fg`, and the tile goes on being a tile
+ * everywhere it was one (the footer). An earlier pass read the direction as
+ * "invert the tile" and shipped a `Color=White` square; that variant is gone
+ * again, and brand-logo.tsx records why.
+ *
+ * **The CTA is brand red on both surfaces** — the one thing on the bar that
+ * does not move. That is the prototype's `.o3btn` and it is now Nick's
+ * reference too, which matters because `Button` has no red fill: "there is no
+ * red button on the canonical Home frame" is still true of every content band,
+ * and the red here is chrome forcing its own fill rather than a variant an
+ * editor could reach. See `CTA_BRAND_RED`.
  */
 /**
- * The nav CTA's half of the ink flip, on the `Button` rather than the `Link`
- * that wraps it (hence `buttonClassName`).
+ * The nav CTA's fill, forced past the editor's choice and past `Button`'s
+ * three variants.
  *
- * `Button` already owns both fills, so this is an override and not a fourth
- * variant: `light` (white on ink) is the dark skin's, `dark` (ink on white,
- * `1864:2405`) is the flipped skin's. Without it the site's one conversion
- * path (#58) disappears the moment the bar crosses a light band — a white
- * button on a 55%-white pill on a bone band is three whites.
+ * **Nav only, and deliberately not a variant.** `cta.variant` is a schema enum
+ * — anything added to the cva is something a Site Settings editor can put on a
+ * content band, and the canonical frames have no red button (button.tsx; the
+ * `brand → dark` legacy mapping in CtaLink.tsx exists to retire exactly that).
+ * The chrome owns its own surface, so it forces its own fill instead — three
+ * classes that `cn` resolves over whichever variant is underneath.
  *
- * The duration override is deliberate and it costs something. `Button`
- * transitions its colours at `--duration-hover` (220ms) and an element gets
- * ONE duration per property, so the fill cannot both hover at 220ms and land
- * with the bar at 350ms. The bar wins, on motion.css's own argument: fill,
- * hairline and copy have to arrive together or the flip reads as a stutter.
- * The price is a 350ms hover on this one button, and nowhere else.
+ * `variant="light"` stays on the call sites even though this replaces all
+ * three of its classes. It pins the BASE the override lands on: without it the
+ * editor's `cta.variant` decides, and `ghost` would leave its own
+ * `hover:opacity-70` in place beside this hover — an editor field quietly
+ * changing the nav.
+ *
+ * Anchored twice: the prototype's `.o3btn` is `#EB1000` on both nav states,
+ * and Nick's 2026-08-02 reference draws it red on the light pill and the dark
+ * one alike. The hover follows the house idiom (`Button`'s own
+ * `dark: bg-ink … hover:bg-ink/85`), not the prototype's `#d5d5d5`, which is a
+ * prototype artefact with no token behind it.
+ *
+ * No `--duration-ink` here: this fill never changes with the bar, so the
+ * button keeps `Button`'s own 220ms hover.
  */
-const CTA_INK_FLIP =
-  'duration-(--duration-ink) group-data-[ink=dark]:bg-ink group-data-[ink=dark]:text-white group-data-[ink=dark]:hover:bg-ink/85'
+const CTA_BRAND_RED = 'bg-brand text-white hover:bg-brand/85'
 
 export function SiteNav({ settings }: SiteNavProps) {
   const navItems = settings?.navItems ?? []
@@ -116,14 +126,12 @@ export function SiteNav({ settings }: SiteNavProps) {
           aria-label={`${settings?.title ?? 'O3'} home`}
           className="focus-visible:ring-brand shrink-0 focus-visible:outline-none focus-visible:ring-2"
         >
-          {/* White at rest, `264:52`'s black tile once the bar is over a light
-              band. `color="white"` already sets `--logo-counterform`; the
-              override below only has to name the other end of each pair. */}
-          <BrandLogo
-            color="white"
-            size={64}
-            className="group-data-[ink=dark]:text-ink-deep group-data-[ink=dark]:[--logo-counterform:white]"
-          />
+          {/* No text color here on purpose: the mark is `currentColor`, so it
+              inherits the bar's ink and rides the bar's own 350ms transition
+              rather than carrying a second pair of classes. That also lands it
+              on `--color-fg` (#232323) when flipped — the same ink as the
+              links, and the exact value the prototype's nav mark flips to. */}
+          <BrandMark size={64} />
         </Link>
 
         {/* 1440: the 589px row (`1710:2245`). `contents` promotes the list
@@ -145,13 +153,13 @@ export function SiteNav({ settings }: SiteNavProps) {
               </li>
             ))}
           </ul>
-          {cta ? <CtaLink cta={cta} arrow variant="light" buttonClassName={CTA_INK_FLIP} /> : null}
+          {cta ? <CtaLink cta={cta} arrow variant="light" buttonClassName={CTA_BRAND_RED} /> : null}
         </div>
 
         {/* 402: CTA + hamburger, 32px apart (`1814:1632`). The 402 bar crosses
             the same bands the pill does, so its CTA flips on the same terms. */}
         <div className="flex items-center gap-8 lg:hidden">
-          {cta ? <CtaLink cta={cta} arrow variant="light" buttonClassName={CTA_INK_FLIP} /> : null}
+          {cta ? <CtaLink cta={cta} arrow variant="light" buttonClassName={CTA_BRAND_RED} /> : null}
           <MobileNavMenu items={navItems} cta={cta} />
         </div>
       </nav>

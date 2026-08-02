@@ -35,31 +35,44 @@ generations, so **a low node id does not mean archived**: `Button / Solid` is
 Verified by direct reads of the canonical frames, or recorded in
 `packages/ui/src/foundations/figma-home-spec.ts`.
 
-| Figma set                       | Node        | Variant axes                                   | Code target                      | Status                            |
-| ------------------------------- | ----------- | ---------------------------------------------- | -------------------------------- | --------------------------------- |
-| `Button / Solid`                | `136:754`   | Size = Base \| Large; State = Default \| Hover | `Button` (`ui/button.tsx`)       | ⚠️ **Divergent** — see below      |
-| `Button / Ghost`                | `264:260`   | Size = Base; State = Default                   | `Button variant="ghost"`         | Exists; needs Figma's fill/label  |
-| `Brand / Logo`                  | `264:50`    | Color = Black \| Red \| White                  | `BrandLogo` (`brand-logo.tsx`)   | ✅ #41 — all three; `White` below |
-| `Icon / Surface`                | `778:1862`  | Size = Base; State = Hover                     | `CarouselControl` — **to build** | The perspectives prev/next (#42)  |
-| `Icon / Soft`                   | `1203:1227` | Size = Base; State = Default                   | Inner chip of `Icon / Surface`   | Not standalone — a part           |
-| `.building block Icon_text`     | `136:14`    | prop: `Icon name` (Material Symbols)           | **No component** — ADR 0009      | `<ArrowIcon />`, `<CloseIcon />`  |
-| `NavBar` (component, not a set) | `1710:2271` | —                                              | `SiteNav` (`web/src/ui`)         | ✅ #41                            |
-| `Footer` (component, not a set) | `1280:1885` | —                                              | `SiteFooter` (`web/src/ui`)      | ✅ #41 — **from the frame**       |
+| Figma set                       | Node        | Variant axes                                   | Code target                      | Status                           |
+| ------------------------------- | ----------- | ---------------------------------------------- | -------------------------------- | -------------------------------- |
+| `Button / Solid`                | `136:754`   | Size = Base \| Large; State = Default \| Hover | `Button` (`ui/button.tsx`)       | ⚠️ **Divergent** — see below     |
+| `Button / Ghost`                | `264:260`   | Size = Base; State = Default                   | `Button variant="ghost"`         | Exists; needs Figma's fill/label |
+| `Brand / Logo`                  | `264:50`    | Color = Black \| Red \| White                  | `BrandLogo` (`brand-logo.tsx`)   | ✅ #41 — `White` unbuilt, below  |
+| `Icon / Surface`                | `778:1862`  | Size = Base; State = Hover                     | `CarouselControl` — **to build** | The perspectives prev/next (#42) |
+| `Icon / Soft`                   | `1203:1227` | Size = Base; State = Default                   | Inner chip of `Icon / Surface`   | Not standalone — a part          |
+| `.building block Icon_text`     | `136:14`    | prop: `Icon name` (Material Symbols)           | **No component** — ADR 0009      | `<ArrowIcon />`, `<CloseIcon />` |
+| `NavBar` (component, not a set) | `1710:2271` | —                                              | `SiteNav` (`web/src/ui`)         | ✅ #41                           |
+| `Footer` (component, not a set) | `1280:1885` | —                                              | `SiteFooter` (`web/src/ui`)      | ✅ #41 — **from the frame**      |
 
-`BrandLogo` ships all three. `Color=White` was deferred for as long as the
-frames were the only authority on it: no canonical Design Concept frame
-instances it, so its counterform colour had nothing to be read off. Nick's
-direction of 2026-08-02 — the mark reverses with the surface, white against
-dark bands and black against light, maintaining exact branding — is what
-supplied the missing half, and it supplied it without inventing a value: the
-variant is `264:52` mirrored, a white square with `--color-ink-deep`
-counterforms. **That is the exception, not the rule.** A variant still needs a
-frame or an equally explicit direction; taste is not a third source.
+`BrandLogo` ships `Color=Black` and `Color=Red` only. No canonical Design
+Concept frame instances `Color=White`, so its knockout colour would be a guess;
+it is added when a frame calls for it rather than invented now.
 
-The counterforms read `var(--logo-counterform, white)` off a single `<g>` so a
-caller can move both inks at once — `SiteNav`'s ink flip does, hanging them off
-the bar's `data-ink` attribute. Every instance that sets nothing renders what
-it always did.
+`Color=White` briefly shipped, on 2026-08-02, and was removed the same day. The
+direction it was built from — the nav's mark should change colour so it stays
+visible on either surface — turned out to mean the mark **without its square
+plate**, not an inverted plate. An inverted plate had no caller left, and an
+orphaned variant is exactly what the rule above is for. Worth keeping as a
+worked example: a variant needs a frame or an equally explicit direction, and a
+direction that has been _interpreted_ is neither until the interpretation is
+confirmed.
+
+### `BrandMark` has no Figma counterpart
+
+`BrandMark` (same file) draws the ring and the superscript on their own, in
+`currentColor`, with no plate. **No component set contains it** — `Brand / Logo`
+is a square in all three variants, and every canonical frame instances the
+square. It is anchored on Nick's direction of 2026-08-02 ("the color of o3
+changes so it's visible, without the square box", plus a reference of the nav in
+both states) and on the prototype's nav, which draws precisely this and flips it
+between `#fff` and `#232323`.
+
+Same 64 viewBox and the same two path `d` strings as the tile — shared in the
+file, not copied — so `BrandLogo` → `BrandMark` at a given `size` removes the
+plate and moves nothing else. It has no `color` axis on purpose: the surface
+decides the ink, which is what lets `SiteNav` flip it by inheritance alone.
 
 ### `Button` is divergent
 
@@ -143,7 +156,8 @@ Every component in the package, against the Figma library.
 | Component        | Classification                                       | Notes                                                                                                          |
 | ---------------- | ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | `Button`         | **Has counterpart** — `Button / Solid`               | Divergent; realign (above)                                                                                     |
-| `BrandLogo`      | **Has counterpart** — `Brand / Logo`                 | Added #41. `Color` is the one axis; `White` landed 2026-08-02 by direction                                     |
+| `BrandLogo`      | **Has counterpart** — `Brand / Logo`                 | Added #41. `Color` is the one axis; `White` unbuilt                                                            |
+| `BrandMark`      | **Code-only** — no set draws a box-less mark         | Added 2026-08-02 by direction; the nav's mark, same geometry as the tile                                       |
 | `MenuIcon`       | **Has counterpart** — `1814:1636` (drawn, not a set) | Added #41. Two bars, per the frame                                                                             |
 | `CloseIcon`      | **Has counterpart** — `close` glyph                  | Added #41 (ADR 0009)                                                                                           |
 | `Sheet`          | **Code-only** — shadcn                               | Added #41 for the 402 nav; the panel has no frame (ADR 0006)                                                   |
