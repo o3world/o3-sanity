@@ -4,7 +4,14 @@ import { PAGE_QUERY } from '@o3/sanity/queries'
 
 import { buildCatchAllRoute } from '@/lib/content-routes/build'
 import { CATCH_ALL_TYPES } from '@/content/documents'
-import { aSeededPage, renderRoute, siteSettings, withSettings } from '@/test'
+import {
+  aSeededPage,
+  renderRoute,
+  siteSettings,
+  unprefixedHorizontalScrollUtilities,
+  variantsOf,
+  withSettings,
+} from '@/test'
 
 /**
  * The About (`1924:5344`), Solutions (`1925:6138`) and Live (`1644:1889`)
@@ -151,9 +158,45 @@ describe('the seeded Solutions page', () => {
 
   it.each([
     ['apex discipline', 'The root of every engagement'],
-    ['engagement rail', 'Three ways in.'],
+    ['engagement band heading', 'Three ways in.'],
+    ['an engagement card', 'Embedded Team Member'],
+    ['an engagement card’s one line', 'Senior hands, inside your team.'],
+    ['an engagement card’s Best-when foot', 'Best when you trust the direction'],
   ])('shows the frame’s %s', (_label, copy) => {
     expect(html).toContain(copy)
+  })
+
+  /**
+   * The band is Home's ways-to-work band (`1762:2168`) in the Solutions
+   * frame's arrangement (`1925:6108`) — three ink cards, no rail, no media
+   * square, no button. `layout` is what says so; the numerals, the 395px
+   * media slot and the panel CTAs are all rail-layout elements, so their
+   * absence is the assertion (#47).
+   */
+  it('draws the engagement band as cards, not the rail', () => {
+    const band = sections.find((s) => s._type === 'railPanelsSection') as
+      { layout?: string; panels?: { cta?: unknown; media?: unknown }[] } | undefined
+
+    expect(band?.layout).toBe('cards')
+    expect(band?.panels).toHaveLength(3)
+    expect(band?.panels?.some((panel) => panel.cta ?? panel.media)).toBe(false)
+    expect(html).not.toContain('rail-panel-eng-embedded')
+  })
+
+  /**
+   * **Solutions has no 402 frame.** The "Solutions section" at `1924:4768` is
+   * a generation-1 capture (1920 / 390, DOM-ish layer names), not the
+   * breakpoint pair the ticket assumed — the Design Concept section holds one
+   * Solutions frame and it is 1440. So every mobile composition on this page
+   * is a renderer decision under ADR 0006, and these are the invariants that
+   * keep it honest: nothing scrolls sideways, and the three-across card row
+   * and the 1120px orbital diagram are both `lg:`.
+   */
+  it('is a stack at 402, with no frame to copy', () => {
+    expect(unprefixedHorizontalScrollUtilities(html)).toEqual([])
+    expect(variantsOf(html, 'grid-cols-3')).toEqual(['lg:grid-cols-3'])
+    expect(html).toContain('data-testid="orbital-diagram"')
+    expect(html).toContain('lg:block')
   })
 })
 

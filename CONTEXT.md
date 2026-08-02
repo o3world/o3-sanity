@@ -6,7 +6,7 @@ Terms resolved so far. Use these exact words in schema names, code, issues, and 
 
 - **Perspective** — a blog article. The canonical term (not "post", not "insight" — the mockup's "Insights" nav label is display copy stored in Site Settings). URL: `/perspectives/{slug}`. Body is **Portable Text** with a small closed set of inline objects — never section blocks. 272 migrate from WordPress.
 - **Case Study** — a client engagement write-up; the collection is called **Work**. URL: `/work/{slug}`. Fully **structured** (not section-built): client reference, industry references + industry detail string, **narrative headline** (the problem-framing sentence shown on cards), **stats** (array; first is the headline stat), hero media, **chapters** (ordered; kicker + title + body; numbers derived from order), **deliverables** ("What we shipped"), optional **extra sections** for per-case flourishes.
-- **Page** — a modular marketing page composed of a two-tier **sections** array (see ADR 0001). Carries `pageType`, a closed developer-managed enum: `standard | service`. Service pages get a conditional **card** fieldset (short title, excerpt, icon) that listing blocks project. Slugs are multi-segment and carry their prefix (`services/ux-audit`, `ventures/rec-philly`). Ventures are ordinary standard pages — deliberately not a type.
+- **Page** — a modular marketing page composed of a two-tier **sections** array (see ADR 0001). Carries `pageType`, a closed developer-managed enum: `standard | service`. Service pages get a conditional **card** fieldset (short title, excerpt, icon) that listing blocks project — but **no service page exists or is planned** (ADR 0013; see Known drift). Slugs are multi-segment and carry their prefix (`ventures/rec-philly`). Ventures are ordinary standard pages — deliberately not a type.
 
 ## Supporting types
 
@@ -23,7 +23,7 @@ Testimonials/quotes are **inline** in the quote section block — no document ty
 Not everything with a URL is a document. Four **route kinds** exist; the glossary term is the kind, not the file it lives in.
 
 - **Detail** — one document at its own URL beneath a prefix (`/perspectives/{slug}`, `/work/{slug}`).
-- **Catch-all** — a Page, resolved by matching its multi-segment slug (`services/ux-audit`).
+- **Catch-all** — a Page, resolved by matching its multi-segment slug (`solutions`, `ventures/rec-philly`).
 - **Singleton** — a fixed route backed by one known document (the homepage).
 - **Collection index** — the paginated landing page for a Collection (`/work`, `/perspectives`). **It has no backing document**: the entry is a query plus static SEO, so there is nothing in Studio to edit and nothing for the migration pipeline to own. This is the one route kind that breaks the document-per-URL assumption, which is why it gets a name.
 
@@ -89,6 +89,7 @@ Fix on sight; don't imitate. As of 2026-08-01 the rules above are the target, an
 
 - Enforcement is not wired yet: the factories don't check name shape, and `tools/check-schema-symmetry` doesn't exist. Until both land, the suffix and folder rules are convention only — follow them anyway.
 - `perspective.featuredImage` should be `heroMedia` (`caseStudy` already uses it). Requires touching the five converted JSON docs in `tools/migration/data/converted/perspective/` and the translate step.
+- `pageType: 'service'`, the conditional `card` fieldset it gates, and `listingSection` have **no consumer**. They were specced for a `/services` listing that [ADR 0013](docs/adr/0013-services-consolidate-into-solutions.md) removed — the 24 WordPress services consolidate into `/solutions`, which draws no listing. Removing all three is a schema conversation raised on #47, not a page layer's call; until it happens, `pageType` reads as a two-value enum with one value in use.
 - `heroSection.headlineLines` is an array because each line animates separately — a genuine exception to `heading`, not a synonym.
 - The `decoration` enum is copy-pasted into three section blocks; it belongs in a shared field factory.
 

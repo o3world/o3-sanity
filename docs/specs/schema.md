@@ -15,7 +15,7 @@ Resolves wayfinder ticket #6. Inputs: the content model (ticket #5, `CONTEXT.md`
 
 - **`perspective`** — title, `slug` (req), excerpt, `author` → person (req), `categories` → category[], publishedAt, featuredImage (figure), `body` (Portable Text — see set below), seo. Read time computed at render, not stored.
 - **`caseStudy`** — title, `slug` (req), `client` → client (req), `industries` → industry[], `industryDetail` (string — eyebrow's second half), `narrativeHeadline` (text, req — the card sentence), `stats[]` (stat; first = headline stat), `heroMedia` (figure), `chapters[]` ({kicker, title, body: Portable Text}; numbering derived from order), `deliverables[]` (string — "What we shipped"), `extraSections[]` (section blocks, optional), seo.
-- **`page`** — title, `slug` (req, multi-segment), `pageType` (`standard | service`, closed enum, initial `standard`), `card` fieldset conditional on `pageType == 'service'` ({shortTitle, excerpt, icon/image}) — projected by `listingSection`, `sections[]` (section blocks), seo.
+- **`page`** — title, `slug` (req, multi-segment), `pageType` (`standard | service`, closed enum, initial `standard`), `card` fieldset conditional on `pageType == 'service'` ({shortTitle, excerpt, icon/image}) — projected by `listingSection`, `sections[]` (section blocks), seo. ⚠️ No `service` page exists or is planned — see `listingSection` below and [ADR 0013](../adr/0013-services-consolidate-into-solutions.md).
 
 ### Supporting
 
@@ -43,7 +43,7 @@ Standard marks + closed inline-object set: **`figure`, `embed`, `pullQuote`**. A
 
 ### Section tier — bespoke (from the `prototype/` design)
 
-`heroSection`, `logoWallSection` (statement + client refs or manual logos; layout `grid | marquee`), `caseShowcaseSection` (caseStudy refs; projects narrativeHeadline + first stat), `railPanelsSection` (items {media, heading, body, note, cta} — serves both "platforms" and "how we work"), `quoteSection` (inline quote + attribution — no testimonial type), `perspectivesCarouselSection` (curated refs or latest-N by category), `ctaSection`.
+`heroSection`, `logoWallSection` (statement + client refs or manual logos; layout `grid | marquee`), `caseShowcaseSection` (caseStudy refs; projects narrativeHeadline + first stat), `railPanelsSection` (heading, intro, `layout` (`rail | cards`), `rail` (`label | number`), panels {railLabel, heading, logo, body, note, cta, media} — serves Home's "platforms" and "how we work" bands as `rail`, and the Solutions frame's engagement cards (`1925:6108`) as `cards`), `quoteSection` (inline quote + attribution — no testimonial type), `perspectivesCarouselSection` (curated refs or latest-N by category), `ctaSection`.
 
 ### Section tier — from the canonical Figma frames (#56)
 
@@ -58,7 +58,7 @@ Surfaced by #46/#47 and built against the About (`1924:5344`) and Solutions (`19
 
 - **`layoutSection`** — the one true two-tier block: 1–3 columns of base blocks.
 - **`mediaSection`** — full-width figure/video moment.
-- **`listingSection`** — lists pages by `pageType` via their `card` fieldset (powers `/services`; reusable for future pageTypes).
+- **`listingSection`** — lists pages by `pageType` via their `card` fieldset. ⚠️ **Orphaned.** It was specced to power `/services`, and [ADR 0013](../adr/0013-services-consolidate-into-solutions.md) removed that route: the Solutions frame draws no listing, no `service` page exists, and nothing else lists by `pageType`. The block, `pageType: 'service'` and `page.card` now have no consumer — a schema conversation raised on #47, not something a page layer deletes on the way past.
 
 No FAQ/accordion/tabs until a designed page needs them. No `formBlock` — forms strategy is map fog (what replaces Gravity Forms, where submissions go).
 

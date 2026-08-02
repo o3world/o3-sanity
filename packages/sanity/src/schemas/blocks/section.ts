@@ -100,10 +100,25 @@ export const railPanelsSection = defineSectionBlock({
     defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
     defineField({ name: 'intro', type: 'text', rows: 3 }),
     defineField({
+      name: 'layout',
+      type: 'string',
+      description:
+        'How the panels are arranged: a numbered/labelled rail beside tall panels (Home), or a row of ink cards (Solutions).',
+      // The Solutions frame (1925:6108) carries the SAME band as Home's
+      // ways-to-work (1762:2168) — same heading, same standfirst, same three
+      // engagements — in a different arrangement: no rail, no media square,
+      // three 394×526 ink cards each holding a halftone disc. Identical
+      // content, different shape, so it is a layout axis rather than a second
+      // block — the test disciplineGridSection's `grid | orbital` and
+      // inFlightSection's `cards | rows` already passed (#47, #56, #50).
+      options: { list: ['rail', 'cards'], layout: 'radio', direction: 'horizontal' },
+      initialValue: 'rail',
+    }),
+    defineField({
       name: 'rail',
       type: 'string',
       description:
-        'What the rail counts off: each panel’s label (the platforms band) or its position (the ways-to-work band, where the frame numbers 01/02/03).',
+        'Rail layout only — what the rail counts off: each panel’s label (the platforms band) or its position (the ways-to-work band, where the frame numbers 01/02/03).',
       // Both canonical bands (1762:2149 and 1762:2168) share one composition
       // and differ only here, so this is a variant of the block rather than a
       // second block — #42. Numbers derive from order, the same rule
@@ -131,14 +146,28 @@ export const railPanelsSection = defineSectionBlock({
               type: 'image',
               description: 'Optional logo shown instead of the heading (platform panels).',
             }),
-            defineField({ name: 'body', type: 'text', rows: 3 }),
+            defineField({
+              name: 'body',
+              type: 'text',
+              rows: 3,
+              description:
+                'The panel’s prose. On a card it is the single line under the heading ("Senior hands, inside your team.") — the card has room for one.',
+            }),
             defineField({
               name: 'note',
               type: 'string',
-              description: 'The quieter "Best when…" line.',
+              description: 'The quieter "Best when…" line — the foot of a card.',
             }),
-            defineField({ name: 'cta', type: 'cta' }),
-            defineField({ name: 'media', type: 'figure' }),
+            defineField({
+              name: 'cta',
+              type: 'cta',
+              description: 'Rail layout only. The frame’s cards carry no button.',
+            }),
+            defineField({
+              name: 'media',
+              type: 'figure',
+              description: 'Rail layout only. A card draws a halftone disc instead.',
+            }),
           ],
           preview: { select: { title: 'railLabel' } },
         }),

@@ -55,7 +55,7 @@
       "_type": "railPanelsSection",
       "_key": "engagements",
       "surface": "white",
-      "rail": "number",
+      "layout": "cards",
       "heading": "Three ways in. You decide how much of the problem to hand us.",
       "intro": "From senior hands inside your team to owning the whole outcome — the right engagement depends on how much of the problem is yours to keep.",
       "panels": [
@@ -64,39 +64,24 @@
           "_key": "eng-embedded",
           "railLabel": "Embedded",
           "heading": "Embedded Team Member",
-          "body": "Senior hands, inside your team. Best when you trust the direction and need the horsepower.",
-          "cta": {
-            "_type": "cta",
-            "label": "View our work",
-            "href": "/work",
-            "variant": "dark"
-          }
+          "body": "Senior hands, inside your team.",
+          "note": "Best when you trust the direction and need the horsepower."
         },
         {
           "_type": "panel",
           "_key": "eng-squad",
           "railLabel": "Product Squad",
           "heading": "Product Squad",
-          "body": "A cross-functional pod that takes a problem and runs. Best when you need momentum and a team that owns delivery.",
-          "cta": {
-            "_type": "cta",
-            "label": "View our work",
-            "href": "/work",
-            "variant": "dark"
-          }
+          "body": "A cross-functional pod that takes a problem and runs.",
+          "note": "Best when you need momentum and a team that owns delivery."
         },
         {
           "_type": "panel",
           "_key": "eng-full",
           "railLabel": "Full Ownership",
           "heading": "Full Ownership",
-          "body": "Hand us the outcome, not the tasks. Best when a single point of accountability is worth more than a seat at every standup.",
-          "cta": {
-            "_type": "cta",
-            "label": "View our work",
-            "href": "/work",
-            "variant": "dark"
-          }
+          "body": "Hand us the outcome, not the tasks.",
+          "note": "Best when a single point of accountability is worth more than a seat at every standup."
         }
       ]
     },

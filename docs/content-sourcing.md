@@ -27,7 +27,7 @@ canonical frames carry finished copy, and the frame it came from is recorded in
 | `/perspectives`                  | **none**                  | provisional ⚠️        | Composition has no frame; borrows the Work hero + Home blog card rather than inventing one. **No document to mark**, so the marker is on the route entry — see below                                                   | #49      |
 | `/perspectives/{slug}`           | `1710:2823` / `1906:1046` | migrate               | 272 perspectives, 14 persons, 11 categories — **loaded**                                                                                                                                                               | #45      |
 | `/about`                         | `1924:5344`               | seed-from-frame       | `page-seed-about` — transcribed; the disciplines grid, team and Careers bands render through their own blocks (#56), and the frame's band imagery is committed under `seed/assets/`. Careers is a section, not a route | #46 ✅   |
-| `/solutions`                     | `1925:6138`               | seed-from-frame       | `page-seed-solutions` — transcribed; the orbital diagram is `disciplineGridSection` `layout: orbital` (#56). The 24-page consolidation is still undecided                                                              | #47      |
+| `/solutions`                     | `1925:6138` — **no 402**  | seed-from-frame       | `page-seed-solutions` — transcribed; the orbital diagram is `disciplineGridSection` `layout: orbital` (#56) and the engagement cards `railPanelsSection` `layout: cards` (#47). The 24 WordPress services consolidate **into this page** — [ADR 0013](./adr/0013-services-consolidate-into-solutions.md) | #47 ✅   |
 | `/live`                          | `1644:1889` / `1906:334`  | seed-from-frame       | `page-seed-live` — net-new layer, transcribed; three bands ride one new `inFlightSection`. Route named in [ADR 0011](./adr/0011-live-route-name.md)                                                                    | #50      |
 | `/contact`                       | **none**                  | migrate → provisional | `page-seed-contact` — copy from the WordPress page (wpId 158) + the studio's email/phone/address; **no form block exists**, so a mailto CTA stands in                                                                  | #48      |
 | `/1682-conference-ai-innovation` | **none**                  | migrate → provisional | `page-seed-1682-conference-ai-innovation` — all copy carried from the WordPress page (wpId 9545), including a CTA advertising a date that has passed                                                                   | #48      |
@@ -37,6 +37,15 @@ canonical frames carry finished copy, and the frame it came from is recorded in
 | Site chrome                      | `1710:2271` (NavBar)      | migrate + frame       | `siteSettings` singleton; nav gains **Live**, and **Solutions** replaces "Services"                                                                                                                                    | #41      |
 
 ✅ = loaded and done.
+
+Two routes have a canonical desktop frame and **no 402 counterpart**: `/about`
+(`1924:5344`) and `/solutions` (`1925:6138`). Neither gap is the file hiding a
+frame — the Design Concept section holds one frame each, at 1440. The "About
+Us" and "Solutions" **sections** elsewhere in the file (`1924:4768` is the
+Solutions one) are generation-1 captures at 1920/390, not the breakpoint pair
+#34 describes; building a mobile layout from them would ship the old site. So
+every mobile composition on these two pages is a renderer decision under
+ADR 0006, and the render tests say so where it matters.
 
 ## Provisional inventory
 

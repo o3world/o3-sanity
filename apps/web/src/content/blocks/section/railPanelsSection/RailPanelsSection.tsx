@@ -7,6 +7,7 @@ import { SanityImage } from '@/content/SanityImage'
 import { resolveSurface } from '@/content/blocks/surface'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
 
+import { PanelCards } from './PanelCards'
 import { PanelRail } from './PanelRail'
 
 type RailPanelsSectionProps = SectionProps<'railPanelsSection'>
@@ -46,30 +47,96 @@ type RailPanelsSectionProps = SectionProps<'railPanelsSection'>
  *
  * The rail numeral moves **into** the row, because a sticky 82px column has
  * nowhere to stand at 402.
+ *
+ * ## `layout: cards` — the Solutions band (`1925:6108`), #47
+ *
+ * The Solutions frame carries **this band**, not a variation on it: the same
+ * heading, the same standfirst, the same three engagements. What changes is
+ * the arrangement — no rail, no media square, three ink cards side by side —
+ * so it is a `layout` axis rather than a second block, the same call
+ * `disciplineGridSection` and `inFlightSection` already make.
+ *
+ * ```
+ * 128px 0, gap 65
+ *   header  0 96px, space-between, align-END   48px heading in 571 | 24/30 standfirst in 607
+ *   row     gap 39                             three cards — see PanelCards
+ * ```
+ *
+ * The header is the same three parts in a different measure, which is why it
+ * is one element with two width sets rather than two headers.
  */
 export function RailPanelsSection({
   heading,
   intro,
+  layout,
   rail,
   panels,
   surface,
 }: RailPanelsSectionProps) {
   const items = panels ?? []
+  const cards = stegaClean(layout) === 'cards'
   const mode = stegaClean(rail) === 'number' ? 'number' : 'label'
   // Panel `_key`s are unique within the document, so they identify a panel
   // across both halves of the band without the section needing its own id
   // (SectionProps strips `_key` from the section itself).
   const panelId = (key: string | undefined, index: number) => `rail-panel-${key ?? index}`
 
+  const header = (
+    <div
+      className={cn(
+        'flex w-full flex-col gap-6',
+        cards
+          ? 'lg:flex-row lg:items-end lg:justify-between lg:gap-8'
+          : 'lg:w-[928px] lg:flex-row lg:items-center lg:gap-8',
+      )}
+    >
+      {heading ? (
+        <h2
+          className={cn(
+            'text-display-xl font-display text-balance',
+            cards ? 'lg:w-[571px]' : 'lg:w-[500px]',
+          )}
+        >
+          {heading}
+        </h2>
+      ) : null}
+      {intro ? (
+        <p
+          className={cn(
+            'text-lead leading-[1.2]',
+            // 30px against the 24px step on the Solutions band — 1.25 rather
+            // than 1.2, and the only value the two headers disagree on.
+            cards ? 'lg:w-[607px] lg:leading-[1.25]' : 'lg:w-[385px]',
+          )}
+        >
+          {intro}
+        </p>
+      ) : null}
+    </div>
+  )
+
+  if (cards) {
+    return (
+      <SectionShell surface={resolveSurface(surface, 'white')} top="md" bottom="md">
+        <div className="flex flex-col gap-10 lg:gap-[65px]">
+          {header}
+          <PanelCards
+            items={items.map((panel, index) => ({
+              key: panel._key ?? String(index),
+              heading: panel.heading ?? panel.railLabel,
+              body: panel.body,
+              note: panel.note,
+            }))}
+          />
+        </div>
+      </SectionShell>
+    )
+  }
+
   return (
     <SectionShell surface={resolveSurface(surface, 'white')} top="md" bottom="lg">
       <div className="flex flex-col items-end gap-16 lg:gap-32">
-        <div className="flex w-full flex-col gap-6 lg:w-[928px] lg:flex-row lg:items-center lg:gap-8">
-          {heading ? (
-            <h2 className="text-display-xl font-display text-balance lg:w-[500px]">{heading}</h2>
-          ) : null}
-          {intro ? <p className="text-lead leading-[1.2] lg:w-[385px]">{intro}</p> : null}
-        </div>
+        {header}
 
         <div className="flex w-full gap-8 lg:gap-[238px]">
           <PanelRail

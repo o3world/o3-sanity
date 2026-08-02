@@ -97,10 +97,21 @@ ambiguity in it:
 | Tell        | Footer reads "© 2026 O3 Studio. All placeholder content."  | —                                               |
 
 Canonical page layers live in the **Design Concept** section (`1632:1510`). The sections named
-"Home alt", "What we're working on", "About Us" and "Solutions" are generation-1 captures — do not
-build from them.
+"Home alt", "What we're working on", "About Us" and **"Solutions" (`1924:4768`)** are generation-1
+captures — do not build from them. The Solutions one is worth naming because #47's ticket cited it
+as the 402 half of a breakpoint pair; it is a `SECTION` holding two frames called "1920w light" and
+"390w light", with `div.sc-host` / `nav` layer names. Confirm the width before you read a node.
 
 **Authoritative breakpoints are 1440 / 402.** There was never a competing 1920/390 set.
+
+### Not every page layer has both
+
+The Design Concept section holds **five** mobile frames — Home `1814:1618`, Work `1906:851`,
+Case Study `1906:928`, Insights (= Perspective detail) `1906:1046`, Live `1906:334`. **About
+(`1924:5344`) and Solutions (`1925:6138`) have no 402 frame at all**, and neither does any
+collection index. That is a coverage gap, not a missing read: ADR 0006 already makes responsive a
+renderer concern, so the mobile composition on those pages is a code decision, and it should say so
+at the call site.
 
 ### Two frames named "Insights"
 

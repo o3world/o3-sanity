@@ -300,6 +300,7 @@ export type RailPanelsSection = {
   _type: 'railPanelsSection'
   heading?: string
   intro?: string
+  layout?: 'rail' | 'cards'
   rail?: 'label' | 'number'
   panels?: Array<{
     railLabel?: string
@@ -1565,6 +1566,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         _type: 'railPanelsSection'
         heading?: string
         intro?: string
+        layout?: 'cards' | 'rail'
         rail?: 'label' | 'number'
         panels: Array<{
           railLabel?: string
@@ -2133,6 +2135,7 @@ export type PAGE_QUERY_RESULT = {
         _type: 'railPanelsSection'
         heading?: string
         intro?: string
+        layout?: 'cards' | 'rail'
         rail?: 'label' | 'number'
         panels: Array<{
           railLabel?: string

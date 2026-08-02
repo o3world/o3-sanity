@@ -112,6 +112,7 @@
       "_type": "railPanelsSection",
       "_key": "platforms",
       "surface": "white",
+      "layout": "rail",
       "heading": "The platforms we go deep on",
       "intro": "We don't dabble across every tool. We build real, certified depth in a few platforms — so the recommendation and the implementation come from the same people.",
       "panels": [
@@ -170,6 +171,7 @@
       "_type": "railPanelsSection",
       "_key": "engagements",
       "surface": "white",
+      "layout": "rail",
       "heading": "Three ways in. You decide how much of the problem to give.",
       "intro": "From senior hands inside your team to owning the whole outcome — the right engagement depends on how much of the problem is yours to keep.",
       "panels": [
