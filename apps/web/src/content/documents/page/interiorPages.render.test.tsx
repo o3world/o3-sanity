@@ -85,6 +85,27 @@ describe('the seeded About page', () => {
     expect(html.match(/>Apply</g) ?? []).toHaveLength(4)
   })
 
+  /**
+   * The band's three 394×390 images (`1924:5388`) and the Culture band's
+   * group portrait (`1927:6432`) — the imagery #56 left behind when it
+   * replaced the other approximations.
+   *
+   * Each beyond-band image rides **inside** its column's `richText` body
+   * rather than as a sibling `figure` item. `layoutSection` puts one item per
+   * grid cell, so three figures plus three passages would read image-image-
+   * image / text-text-text at three columns and fall apart entirely at one.
+   * `bodyText` already admits `figure`, so one item per column keeps each
+   * image with its own caption at every width, with no schema change.
+   */
+  it.each([
+    ['the 1682 mark', 'The 1682 conference wordmark on black'],
+    ['the O3XO mark', 'The O3XO mark on black'],
+    ['the community photo', 'twenty people in branded tees'],
+    ['the Culture band portrait', 'gathered for a group portrait'],
+  ])('draws %s from the frame', (_label, alt) => {
+    expect(html).toContain(alt)
+  })
+
   it('gives the page a single h1', () => {
     expect(html.match(/<h1[\s>]/g) ?? []).toHaveLength(1)
   })
