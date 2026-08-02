@@ -5,14 +5,33 @@ description: Write, rewrite, or review copy in the O3 World voice — headlines,
 
 # O3 World copy
 
-O3's voice sits between Hemingway and Orwell: short sentences, plain words,
-concrete claims. We are the client's partner in all things experiences, and the
-copy's job is to help them see a clear path forward — not to impress them with
+O3's voice is illustrative and biting like Orwell, direct like Hemingway:
+short sentences, plain words, concrete claims, and pointed observations that
+land. We are the client's partner in all things experiences, and the copy's
+job is to help them see a clear path forward — not to impress them with
 vocabulary.
 
 The brand foundation (pillars, delivery principles, values) lives in
 [brand.md](brand.md). It is **source material, not copy**. Never paste a pillar
 into a headline. Write what the belief looks like as a specific claim.
+
+## The register
+
+Calibrated against variant takes (wayfinder #64, 2026-08-02): a really big
+dog that doesn't feel it needs to act like a big dog.
+
+- **Understatement carries the confidence.** State remarkable facts flatly
+  and let them do the work; never wind up for them. "The AI did most of the
+  typing and made almost none of the decisions. That ratio is the whole
+  story." The restrained register won the calibration — swagger lost.
+- **Bite without contempt.** Orwell's job here is the illustrative, pointed
+  observation — aimed at ideas and the status quo, never down at readers,
+  clients, or the people at other firms. Readers should feel jealous, not
+  insulted. ("Your agency is still billing you the old way" is over the line;
+  "the tools are new, the management is old" is on it.)
+- **Even the quiet register says the thing.** Restraint is not vagueness — a
+  restrained sentence still carries a concrete fact. See the headline rule
+  below.
 
 ## Voice rules
 
@@ -60,6 +79,13 @@ These match the section blocks in the Sanity schema; live examples are in
 - **Body prose** (about-page register): admits cost and tradeoffs plainly —
   that's what grounded sounds like. "It's a slower way to grow. It's the only
   way to do work this deep."
+- **Perspective title + long-form prose**: the title carries the fact — a
+  reader who sees only the title knows what actually happened or what we
+  claim. Atmosphere-only titles ("Notes on a weekend rebuild") fail the
+  calibration even in the restrained register; "We rebuilt our site in a
+  weekend. The AI made almost none of the decisions." passes. In the body,
+  find the one sentence that reframes everything and give it room. Admit
+  costs plainly. End on a turned observation, not a sales line.
 
 ## Revision pass (run every time)
 
@@ -72,7 +98,10 @@ Draft, then:
 4. Check every claim for a specific: could a competitor paste this sentence
    into their site? If yes, it isn't done.
 5. Check the banned list (rule 7).
-6. Read it aloud. Anywhere you'd breathe wrong, break or cut.
+6. Check the register: headline says the thing (no atmosphere-only titles);
+   remarkable facts stated flatly, no wind-up; bite aims at ideas, never down
+   at people. (See "The register".)
+7. Read it aloud. Anywhere you'd breathe wrong, break or cut.
 
 ## Worked example
 
