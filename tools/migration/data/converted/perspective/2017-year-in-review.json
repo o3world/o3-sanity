@@ -7,10 +7,6 @@
     "current": "2017-year-in-review"
   },
   "excerpt": "Check out what we’ve been up to, reflect on what we've done and look toward an even more eventful and prosperous 2018!",
-  "author": {
-    "_type": "reference",
-    "_ref": "person-wp-16"
-  },
   "categories": [
     {
       "_type": "reference",

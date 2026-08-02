@@ -7,10 +7,6 @@
     "current": "check-out-o3-world-at-philly-tech-week"
   },
   "excerpt": "You can find our team at a wide variety of events, both as speakers and as attendees. Here’s where we’re planning to be.",
-  "author": {
-    "_type": "reference",
-    "_ref": "person-wp-16"
-  },
   "categories": [
     {
       "_type": "reference",

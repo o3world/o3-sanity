@@ -7,10 +7,6 @@
     "current": "decoding-headless-vs-traditional-cms"
   },
   "excerpt": "A guide to understanding its benefits, challenges, and use cases",
-  "author": {
-    "_type": "reference",
-    "_ref": "person-wp-16"
-  },
   "categories": [
     {
       "_type": "reference",

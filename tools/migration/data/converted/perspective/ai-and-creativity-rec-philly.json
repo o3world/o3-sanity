@@ -7,10 +7,6 @@
     "current": "ai-and-creativity-rec-philly"
   },
   "excerpt": "Join us at Rec Philly as we dive into the challenges of AI in the creative space, guided by a panel of AI experts.",
-  "author": {
-    "_type": "reference",
-    "_ref": "person-wp-16"
-  },
   "categories": [
     {
       "_type": "reference",

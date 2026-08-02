@@ -7,10 +7,6 @@
     "current": "agency-field-day-returns-this-june"
   },
   "excerpt": "Agency Field Day is a day of fun and friendly competition that drives that value.",
-  "author": {
-    "_type": "reference",
-    "_ref": "person-wp-16"
-  },
   "categories": [
     {
       "_type": "reference",

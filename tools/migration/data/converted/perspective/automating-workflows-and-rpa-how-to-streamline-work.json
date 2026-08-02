@@ -7,10 +7,6 @@
     "current": "automating-workflows-and-rpa-how-to-streamline-work"
   },
   "excerpt": "We integrate existing platforms, software and tools with a layer of artificial intelligence (AI), use robotic process automation (RPA) and leverage the Internet of Things (IoT) to create conversational experiences for getting work done and locating useful data.",
-  "author": {
-    "_type": "reference",
-    "_ref": "person-wp-16"
-  },
   "categories": [
     {
       "_type": "reference",

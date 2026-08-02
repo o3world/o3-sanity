@@ -7,10 +7,6 @@
     "current": "2016-forge-recap"
   },
   "excerpt": "Check out the Forge Conference, a one-day event created and organized by O3 World.",
-  "author": {
-    "_type": "reference",
-    "_ref": "person-wp-16"
-  },
   "categories": [
     {
       "_type": "reference",

@@ -7,10 +7,6 @@
     "current": "making-your-user-interface-ui-accessible-for-all-users"
   },
   "excerpt": "As we approach Global Accessibility Awareness Day (GAAD) 2023, it's important to highlight the significance of accessible user interface (UI) design in enabling people with disabilities to access and use digital products and services. By following the four web accessibility principles—perceivable, operable, understandable, and robust—designers can start to make design decisions early and often in their work while seamlessly adhering to accessibility standards.",
-  "author": {
-    "_type": "reference",
-    "_ref": "person-wp-16"
-  },
   "categories": [
     {
       "_type": "reference",

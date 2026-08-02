@@ -7,10 +7,6 @@
     "current": "2019-a-year-in-review"
   },
   "excerpt": "Here’s a quick recap on what made 2019 a stand out year for O3.",
-  "author": {
-    "_type": "reference",
-    "_ref": "person-wp-16"
-  },
   "categories": [
     {
       "_type": "reference",

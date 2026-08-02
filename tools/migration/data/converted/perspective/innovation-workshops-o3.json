@@ -7,10 +7,6 @@
     "current": "innovation-workshops-o3"
   },
   "excerpt": "At O3 it all starts with an innovation workshop, where we come together to spark new actionable ideas.",
-  "author": {
-    "_type": "reference",
-    "_ref": "person-wp-16"
-  },
   "categories": [
     {
       "_type": "reference",

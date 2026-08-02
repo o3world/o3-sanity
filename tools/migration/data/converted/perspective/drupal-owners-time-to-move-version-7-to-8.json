@@ -7,10 +7,6 @@
     "current": "drupal-owners-time-to-move-version-7-to-8"
   },
   "excerpt": "Drupal 8 is not just a tweak with some bells and whistles. It is future-facing, with a completely different codebase that rebuilds the entire CMS from the ground up.",
-  "author": {
-    "_type": "reference",
-    "_ref": "person-wp-16"
-  },
   "categories": [
     {
       "_type": "reference",

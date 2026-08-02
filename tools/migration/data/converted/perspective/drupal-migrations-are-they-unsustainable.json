@@ -7,10 +7,6 @@
     "current": "drupal-migrations-are-they-unsustainable"
   },
   "excerpt": "Users should not put off migration, as Drupal will eliminate security updates and support for versions 7 and 8 at the end of 2021.",
-  "author": {
-    "_type": "reference",
-    "_ref": "person-wp-16"
-  },
   "categories": [
     {
       "_type": "reference",

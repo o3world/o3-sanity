@@ -7,10 +7,6 @@
     "current": "mindshift"
   },
   "excerpt": "The MindShift webinar series, hosted by O3, connects business leaders with experts and visionaries in the AI space.",
-  "author": {
-    "_type": "reference",
-    "_ref": "person-wp-16"
-  },
   "categories": [
     {
       "_type": "reference",
