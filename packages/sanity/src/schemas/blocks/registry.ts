@@ -15,6 +15,7 @@ export const SECTION_BLOCKS = [
   'disciplineGridSection',
   'personGridSection',
   'roleListSection',
+  'inFlightSection',
   'layoutSection',
   'mediaSection',
   'listingSection',

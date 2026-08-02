@@ -325,6 +325,91 @@ export const roleListSection = defineSectionBlock({
   preview: { select: { title: 'heading', subtitle: 'eyebrow' } },
 })
 
+export const inFlightSection = defineSectionBlock({
+  name: 'inFlightSection',
+  title: 'In flight',
+  fields: [
+    defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
+    defineField({
+      name: 'subheading',
+      type: 'text',
+      rows: 2,
+      description: 'The 24px standfirst beside the heading. The Ideas band has none.',
+    }),
+    defineField({
+      name: 'layout',
+      type: 'string',
+      description:
+        'Cards is the studio band — a scrolling row of image cards. Rows is the hairline list: a date or a halftone disc, a kicker, a title, and a link.',
+      // The Live frame draws the same three-field entry three times
+      // (`1751:1994`, `1710:1800`, `1732:1409`) in two compositions, so this
+      // is a layout axis on one block rather than three blocks — the call
+      // `disciplineGridSection.layout` and `railPanelsSection.rail` already
+      // make (#56, #42). Which lead a row draws is NOT a third enum: an entry
+      // with a `date` gets the date column, everything else gets the disc.
+      options: { list: ['cards', 'rows'], layout: 'radio', direction: 'horizontal' },
+      initialValue: 'cards',
+    }),
+    defineField({
+      name: 'entries',
+      type: 'array',
+      validation: (rule) => rule.required().min(1),
+      /**
+       * ENTRIES ARE INLINE OBJECTS, NOT REFERENCES — decided here (#50).
+       *
+       * The obvious reading of the studio band is "reference the case studies
+       * that are in progress". The frame says otherwise, in its own copy: "not
+       * the polished case study, the part where it's still being figured out".
+       * Every card is anonymous (no client, no logo), carries no link, and its
+       * kicker is a bare sector pair — "FINTECH · ONBOARDING" — where a real
+       * case-study card draws `industry · industryDetail` from the document
+       * (`1883:3561`). Pointing these at `caseStudy` documents would publish
+       * client work that has not shipped, which is the exact thing ADR 0007
+       * exists to stop.
+       *
+       * The appearances band has the same shape and no document behind it
+       * either: the content model has no `event` type, and inventing one for
+       * four rows on one page is the trade `roleListSection` already declined.
+       * Promote it the day an appearance needs a URL of its own, or the day a
+       * second surface needs the same list.
+       */
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'entry',
+          fields: [
+            defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
+            defineField({
+              name: 'eyebrow',
+              type: 'string',
+              description: 'The entry’s small label — "FINTECH · ONBOARDING", "WORKSHOP · ONLINE".',
+            }),
+            defineField({
+              name: 'media',
+              type: 'figure',
+              description: 'The card image. Ignored by the rows layout, which draws a disc.',
+            }),
+            defineField({
+              name: 'date',
+              type: 'date',
+              description:
+                'When it happens — the rows layout draws it as the red MON / DD marker. Leave empty and the row leads with the halftone disc instead.',
+            }),
+            defineField({
+              name: 'cta',
+              type: 'cta',
+              description:
+                'Where the row goes. The label is never drawn — it names the arrow control for a screen reader.',
+            }),
+          ],
+          preview: { select: { title: 'heading', subtitle: 'eyebrow', media: 'media.image' } },
+        }),
+      ],
+    }),
+  ],
+  preview: { select: { title: 'heading', subtitle: 'layout' } },
+})
+
 export const layoutSection = defineSectionBlock({
   name: 'layoutSection',
   title: 'Layout section',
@@ -410,6 +495,7 @@ export const sectionBlockMembers = [
   'disciplineGridSection',
   'personGridSection',
   'roleListSection',
+  'inFlightSection',
   'layoutSection',
   'mediaSection',
   'listingSection',

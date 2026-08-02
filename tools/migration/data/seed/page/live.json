@@ -1,0 +1,144 @@
+{
+  "_id": "page-seed-live",
+  "_type": "page",
+  "title": "Live",
+  "slug": {
+    "_type": "slug",
+    "current": "live"
+  },
+  "pageType": "standard",
+  "sections": [
+    {
+      "_type": "heroSection",
+      "_key": "hero",
+      "surface": "ink",
+      "variant": "band",
+      "eyebrow": "Live",
+      "headlineLines": ["What we’re working on."],
+      "subheading": "The problems in front of us right now — the work in the studio, the rooms we'll be in, and the ideas we're chasing before they reach you.",
+      "decoration": "none"
+    },
+    {
+      "_type": "inFlightSection",
+      "_key": "studio",
+      "surface": "white",
+      "layout": "cards",
+      "heading": "What’s being worked on right now.",
+      "subheading": "A look at what's on the benches right now — not the polished case study, the part where it's still being figured out.",
+      "entries": [
+        {
+          "_type": "entry",
+          "_key": "studio-fintech",
+          "eyebrow": "Fintech · Onboarding",
+          "heading": "Untangling a five-step signup nobody finishes",
+          "media": {
+            "_type": "figure",
+            "alt": "Hands filling in a form on a laptop",
+            "image": {
+              "_type": "image",
+              "_localSrc": "tools/migration/data/seed/assets/live-fintech.png"
+            }
+          }
+        },
+        {
+          "_type": "entry",
+          "_key": "studio-healthcare",
+          "eyebrow": "Healthcare · Scheduling",
+          "heading": "Self-serve rescheduling, live across 40 clinics",
+          "media": {
+            "_type": "figure",
+            "alt": "A clinician at a workstation between appointments",
+            "image": {
+              "_type": "image",
+              "_localSrc": "tools/migration/data/seed/assets/live-healthcare.png"
+            }
+          }
+        },
+        {
+          "_type": "entry",
+          "_key": "studio-saas",
+          "eyebrow": "B2B SaaS · AI",
+          "heading": "A triage layer that reads the ticket before a human does",
+          "media": {
+            "_type": "figure",
+            "alt": "A support queue open on a monitor",
+            "image": {
+              "_type": "image",
+              "_localSrc": "tools/migration/data/seed/assets/live-saas.png"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "_type": "inFlightSection",
+      "_key": "appearances",
+      "surface": "white",
+      "layout": "rows",
+      "heading": "Where to find us",
+      "subheading": "Talks, workshops, and the occasional late-night panel. Come argue with us about the problem behind the problem.",
+      "entries": [
+        {
+          "_type": "entry",
+          "_key": "appearance-ai-strategy",
+          "date": "2026-10-15",
+          "eyebrow": "Workshop · Online",
+          "heading": "Strategy in the age of AI: what still can't be automated",
+          "cta": {
+            "_type": "cta",
+            "label": "Details and registration",
+            "href": "/contact",
+            "variant": "dark"
+          }
+        }
+      ]
+    },
+    {
+      "_type": "inFlightSection",
+      "_key": "ideas",
+      "surface": "bone",
+      "layout": "rows",
+      "heading": "Ideas we’re chasing before they reach you",
+      "entries": [
+        {
+          "_type": "entry",
+          "_key": "idea-ai-latency",
+          "eyebrow": "Healthcare",
+          "heading": "Where AI earns its keep — and where it just adds latency",
+          "cta": {
+            "_type": "cta",
+            "label": "Read the thinking",
+            "href": "/perspectives",
+            "variant": "dark"
+          }
+        }
+      ]
+    },
+    {
+      "_type": "ctaSection",
+      "_key": "cta",
+      "surface": "ink",
+      "heading": "Let’s get started on your next big thing.",
+      "body": "We partner with businesses like yours to build experiences that matter. If you’re ready, we’re ready.",
+      "cta": {
+        "_type": "cta",
+        "label": "Get in touch",
+        "href": "/contact",
+        "variant": "light"
+      },
+      "decoration": "orbs"
+    }
+  ],
+  "seo": {
+    "_type": "seo",
+    "description": "What we're working on right now — the work in the studio, the rooms we'll be in, and the ideas we're chasing before they reach you."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:live",
+    "extractedAt": "2026-08-01T00:00:00Z",
+    "figmaNode": "1644:1889",
+    "provisional": true,
+    "provisionalNote": "Transcription only. The frame duplicates one authored appearance and one authored idea to fill its lists (four identical rows in 1710:1800, three in 1732:1409), and the one appearance it authors carries a placeholder date. A \"what we're working on\" page is only credible if it is current — cleared when someone owns the page's cadence and supplies real appearances and threads."
+  }
+}

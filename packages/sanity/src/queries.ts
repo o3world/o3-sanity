@@ -98,6 +98,9 @@ const SECTION_FIELDS = /* groq */ `
   _type == "roleListSection" => {
     roles[]{..., cta{..., ${CTA_TARGET}}}
   },
+  _type == "inFlightSection" => {
+    entries[]{..., cta{..., ${CTA_TARGET}}}
+  },
   _type == "layoutSection" => {
     items[]{..., _type == "cta" => {${CTA_TARGET}}}
   },

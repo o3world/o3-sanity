@@ -1250,5 +1250,17 @@
   "https://www.o3world.com/wp-content/uploads/2022/09/img_6328a6474b86e.": {
     "sha256": "9c8ea5c5347c47f89d4e15d972812776e571ef26",
     "assetId": "image-9c8ea5c5347c47f89d4e15d972812776e571ef26-170x81-webp"
+  },
+  "file:tools/migration/data/seed/assets/live-fintech.png": {
+    "sha256": "224b817a52c556043169800693cc1e6bb2b476e8",
+    "assetId": "image-224b817a52c556043169800693cc1e6bb2b476e8-527x544-png"
+  },
+  "file:tools/migration/data/seed/assets/live-saas.png": {
+    "sha256": "37b751d655457bc064e366c4df29c68c895e41d2",
+    "assetId": "image-37b751d655457bc064e366c4df29c68c895e41d2-527x544-png"
+  },
+  "file:tools/migration/data/seed/assets/live-healthcare.png": {
+    "sha256": "85ba255c87bec966be8ed24f96bdbba6ee661cf5",
+    "assetId": "image-85ba255c87bec966be8ed24f96bdbba6ee661cf5-791x544-png"
   }
 }
