@@ -28,16 +28,16 @@ interface SiteNavProps {
  * the prototype's `backdrop-blur` is dropped rather than kept on a hunch.
  *
  * Figma places the desktop bar at `y: 30` over a hero with 164px of top
- * padding — over the page, not in flow. Whether it then *stays* there while
- * scrolling is a motion question static frames cannot answer, so the
- * prototype's fixed behaviour carries over unchanged.
+ * padding — over the page, not in flow. At `lg` it is `absolute`, so it sits
+ * there and scrolls away with the page; below `lg` it stays `fixed` so the
+ * menu is always reachable.
  */
 export function SiteNav({ settings }: SiteNavProps) {
   const navItems = settings?.navItems ?? []
   const cta = settings?.primaryCta ?? null
 
   return (
-    <header className="lg:px-gutter fixed inset-x-0 top-0 z-50 lg:top-[30px]">
+    <header className="lg:px-gutter fixed inset-x-0 top-0 z-50 lg:absolute lg:top-[30px]">
       <nav
         aria-label="Primary"
         // The 1440 pill carries a hairline at `--color-on-ink-line`; without
