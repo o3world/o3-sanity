@@ -3,7 +3,7 @@ import { join } from 'node:path'
 
 import { describe, expect, it } from 'vitest'
 
-import { CORPUS_DIRS } from './lib/corpus'
+import { CORPUS_DIRS, isPipelineOwned } from './lib/corpus'
 
 /**
  * Invariants over the whole committed corpus — converted, seed and translated
@@ -34,5 +34,19 @@ describe('the committed corpus', () => {
       }
     }
     expect(offenders).toEqual([])
+  })
+
+  /**
+   * The ownership contract `load` retires against. A drift here silently
+   * turns retirement off (nothing deleted) or on for documents the pipeline
+   * does not own — both are dataset damage, so the boundary is pinned.
+   */
+  it('recognizes pipeline-owned ids and nothing else', () => {
+    expect(isPipelineOwned('caseStudy-wp-10028')).toBe(true)
+    expect(isPipelineOwned('page-seed-contact')).toBe(true)
+    expect(isPipelineOwned('drafts.perspective-wp-123')).toBe(true)
+    expect(isPipelineOwned('siteSettings')).toBe(false)
+    expect(isPipelineOwned('64cd37cf-1a2b-4c3d-8e9f-000000000000')).toBe(false)
+    expect(isPipelineOwned('drafts.64cd37cf-1a2b-4c3d-8e9f-000000000000')).toBe(false)
   })
 })

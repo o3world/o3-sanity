@@ -17,7 +17,7 @@ import { getCliClient } from 'sanity/cli'
 
 import { ROUTABLE_TYPES } from '@o3/sanity/constants'
 
-import { CORPUS_DIRS } from './lib/corpus'
+import { CORPUS_DIRS, isPipelineOwned } from './lib/corpus'
 import { isImageBuffer } from './lib/media'
 import { ASSET_MAP, MEDIA_CACHE, EXTRACT_DIR, MISSING_MEDIA, REPO_ROOT } from './lib/paths'
 
@@ -248,6 +248,34 @@ async function main() {
   )
 
   /**
+   * Retirement — the delete half of CONTEXT.md's Rebuild promise ("deletes
+   * and recreates every unlocked pipeline-owned document"). A document the
+   * corpus no longer contains used to need an out-of-band
+   * `sanity documents delete` that nothing recorded (the three invented case
+   * studies went that way); now the same run that stops writing it removes
+   * it. Ownership is the deterministic id contract (`isPipelineOwned`), so a
+   * Studio-created document is never touched, and a locked one is skipped
+   * and left for `verify`'s orphan check to name.
+   */
+  const corpusIds = new Set(all.map((d) => d._id))
+  const types = [...new Set(all.map((d) => d._type as string))]
+  const owned = await client.fetch<{ _id: string; locked: boolean | null }[]>(
+    '*[_type in $types]{_id, "locked": migration.locked}',
+    { types },
+    { perspective: 'raw' },
+  )
+  const retired = new Map<string, { draft: boolean; published: boolean }>()
+  for (const doc of owned) {
+    const bare = doc._id.replace(/^drafts\./, '')
+    if (!isPipelineOwned(bare) || corpusIds.has(bare)) continue
+    if (doc.locked === true) locked.add(bare)
+    const entry = retired.get(bare) ?? { draft: false, published: false }
+    if (doc._id.startsWith('drafts.')) entry.draft = true
+    else entry.published = true
+    retired.set(bare, entry)
+  }
+
+  /**
    * Drafts left behind by the runs that loaded the translate track drafts-only
    * (ADR 0016). A draft shadows its published document everywhere draft mode
    * is on — Studio opens the draft, the preview switcher serves it — so a
@@ -294,13 +322,27 @@ async function main() {
     loaded++
   }
 
-  if (loaded > 0) await tx.commit()
+  const retiredIds: string[] = []
+  for (const [bare, where] of retired) {
+    if (locked.has(bare)) {
+      skipped.push(bare)
+      continue
+    }
+    if (where.published) tx.delete(bare)
+    if (where.draft) tx.delete(`drafts.${bare}`)
+    retiredIds.push(bare)
+  }
+
+  if (loaded > 0 || retiredIds.length > 0) await tx.commit()
 
   console.log(
     `\nloaded ${loaded} documents into ${client.config().projectId}/${client.config().dataset}`,
   )
   if (cleared > 0) {
     console.log(`cleared ${cleared} stale drafts shadowing a published document`)
+  }
+  if (retiredIds.length > 0) {
+    console.log(`retired ${retiredIds.length} no longer in the corpus: ${retiredIds.join(', ')}`)
   }
   if (skipped.length > 0) {
     console.log(`skipped ${skipped.length} locked: ${skipped.join(', ')}`)

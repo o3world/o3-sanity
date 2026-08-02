@@ -40,3 +40,14 @@ export function slugsByType(): Record<string, string[]> {
   }
   return out
 }
+
+/**
+ * Pipeline ownership is the deterministic id contract (CONTEXT.md →
+ * Rebuild): `<type>-wp-<id>` for migrated documents, `<type>-seed-<slug>`
+ * for greenfield ones. Everything else in the dataset — Studio-created
+ * documents, uuid drafts, `siteSettings` — is outside the pipeline's
+ * authority and is never retired by `load`.
+ */
+export function isPipelineOwned(id: string): boolean {
+  return /^[a-zA-Z]+-(wp|seed)-./.test(id.replace(/^drafts\./, ''))
+}
