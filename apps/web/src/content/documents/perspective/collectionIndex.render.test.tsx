@@ -100,6 +100,35 @@ describe('perspectives collection index route', () => {
     const { html } = await renderRoute(route, { data: aPerspectivesPage(manyPerspectives(3), 3) })
     expect(html).toContain('href="/perspectives/perspective-0"')
   })
+
+  /**
+   * The card draws no byline in either state — the frame (`1683:2491`) gives
+   * it a meta line and a title and nothing else. Worth pinning now that a
+   * byline is optional (#32 item 1.1): the card is the one surface where
+   * "authorless" must be indistinguishable from "authored", and the projection
+   * hands it an `author` it deliberately ignores.
+   */
+  it('draws no author on a card, with or without one', async () => {
+    const authored = aPerspective({
+      _id: 'p-authored',
+      slug: 'authored',
+      title: 'Authored',
+      author: { name: 'Christine Sheller', title: 'Chief Experience Officer', headshot: null },
+    })
+    const anonymous = aPerspective({
+      _id: 'p-anonymous',
+      slug: 'anonymous',
+      title: 'Anonymous',
+      author: null,
+    })
+    const { html } = await renderRoute(route, {
+      data: aPerspectivesPage([authored, anonymous], 2),
+    })
+
+    expect(html).toContain('Authored')
+    expect(html).toContain('Anonymous')
+    expect(html).not.toContain('Christine Sheller')
+  })
 })
 
 /**

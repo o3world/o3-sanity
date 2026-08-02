@@ -89,6 +89,27 @@ describe('perspective detail route', () => {
     expect(html).toContain('>J<')
   })
 
+  /**
+   * Most of the archive is authorless (#32 item 1.1): WordPress only ever
+   * showed a byline where an editor set the ACF author, so 239 of the 272
+   * migrated documents have none and `post_author` no longer stands in. The
+   * hero keeps its second line — date and read time — and draws no disc,
+   * which is what o3world.com draws for those posts today.
+   */
+  it('renders date and read time alone when there is no author', async () => {
+    const { html } = await render(
+      aPerspective({
+        author: null,
+        readingMinutes: 4,
+        publishedAt: '2026-06-04T13:20:00Z',
+      }),
+    )
+    expect(html).toContain('Jun 2026 · 4 min read')
+    expect(html).not.toContain('Brian Crumley')
+    // The monogram disc is the author's initial; with no name there is no disc.
+    expect(html).not.toContain('size-[42px]')
+  })
+
   it('links back to the collection under its Site Settings display label', async () => {
     const { html } = await renderRoute(route, {
       data: withSettings(aPerspective(), siteSettings({ perspectivesLabel: 'Insights' })),
@@ -352,6 +373,31 @@ describe('migrated content renders', () => {
         if (images.length > 0) expect(html.match(/<img\b/g) ?? []).toHaveLength(images.length + 1)
       },
     )
+  })
+
+  /**
+   * The two byline states, on real documents (#32 item 1.1). The rule the
+   * owner set is live-site fidelity: o3world.com shows a byline only where an
+   * editor set the ACF author, so the converted corpus does the same — 33 of
+   * the 272 carry one, and `post_author` reaches nothing a reader sees.
+   */
+  it('shows the ACF byline the live site shows', async () => {
+    const slug = '1682-the-making-of-the-brand'
+    const doc = aMigratedPerspective(slug)
+    expect(doc.author?.name).toBe('Simone Dehel')
+    const { html } = await renderRoute(route, { data: doc, params: { slug } })
+    expect(html).toContain('Simone Dehel, Senior Experience Designer')
+  })
+
+  it('shows no byline on a post the live site attributes to nobody', async () => {
+    const slug = 'decoding-headless-vs-traditional-cms'
+    const doc = aMigratedPerspective(slug)
+    expect(doc.author).toBeNull()
+    const { html } = await renderRoute(route, { data: doc, params: { slug } })
+    // Brian Crumley is `post_author` here; on the live page he appears only in
+    // Yoast's machine meta, which this site derives from nothing.
+    expect(html).not.toContain('Brian Crumley')
+    expect(html).not.toContain('size-[42px]')
   })
 
   it.each(slugs)('renders the migrated perspective %s', async (slug) => {

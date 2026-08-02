@@ -201,6 +201,7 @@ export function aMigratedPerspective(slug?: string): Perspective {
     excerpt: string
     publishedAt: string
     body: unknown
+    author?: { _ref: string }
     featuredImage?: unknown
     seo?: unknown
   }
@@ -213,9 +214,30 @@ export function aMigratedPerspective(slug?: string): Perspective {
     publishedAt: doc.publishedAt,
     body: doc.body as Perspective['body'],
     readingMinutes: readingMinutesOf(doc.body),
+    // The byline as it really is: 239 of the 272 migrated documents have none
+    // (#32 item 1.1), so the default fixture author would hide the state most
+    // of the archive is actually in.
+    author: migratedPerson(doc.author?._ref),
     featuredImage: (doc.featuredImage ?? null) as Perspective['featuredImage'],
     seo: (doc.seo ?? null) as Perspective['seo'],
   })
+}
+
+/** The `author->{name, title, headshot}` projection, off the committed person. */
+function migratedPerson(ref: string | undefined): Perspective['author'] {
+  if (!ref) return null
+  const path = join(CONVERTED_DIR, 'person', `${ref}.json`)
+  if (!existsSync(path)) throw new Error(`converted perspective references missing ${ref}`)
+  const person = resolveWpSrcMarkers(JSON.parse(readFileSync(path, 'utf8'))) as {
+    name: string
+    title?: string
+    headshot?: unknown
+  }
+  return {
+    name: person.name,
+    title: person.title ?? null,
+    headshot: (person.headshot ?? null) as NonNullable<Perspective['author']>['headshot'],
+  }
 }
 
 /**
