@@ -1,0 +1,2553 @@
+{
+  "_meta": {
+    "type": "redirects",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-02T14:36:04.211Z"
+  },
+  "home": "http://www.o3world.com",
+  "redirection": [
+    {
+      "source": "/news/1682-presents-the-venture-awards/",
+      "target": "/perspectives/1682-presents-the-venture-awards/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/1682-the-business-of-conference-innovation/",
+      "target": "/perspectives/1682-the-business-of-conference-innovation/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/1682-the-cant-miss-event-that-youre-probably-missing/",
+      "target": "/perspectives/1682-the-cant-miss-event-that-youre-probably-missing/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/2019-a-year-in-review/",
+      "target": "/perspectives/2019-a-year-in-review/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/2021-community-impact/",
+      "target": "/perspectives/2021-community-impact/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/3-considerations-for-running-an-empathy-lab/",
+      "target": "/perspectives/3-considerations-for-running-an-empathy-lab/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/3-customer-experience-trends-brands-need-to-pay-attention-to-now/",
+      "target": "/perspectives/3-customer-experience-trends-brands-need-to-pay-attention-to-now/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/3-essential-tips-for-product-innovation-expanded/",
+      "target": "/perspectives/3-essential-tips-for-product-innovation-expanded/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/3-tips-for-succeeding-in-product-innovation/",
+      "target": "/perspectives/3-tips-for-succeeding-in-product-innovation/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/5-digital-accessibility-myths-debunked/",
+      "target": "/perspectives/5-digital-accessibility-myths-debunked/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/6-tips-for-running-a-successful-innovation-workshop/",
+      "target": "/perspectives/6-tips-for-running-a-successful-innovation-workshop/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/7-ways-to-use-chatbots-effectively-in-your-customer-experience/",
+      "target": "/perspectives/7-ways-to-use-chatbots-effectively-in-your-customer-experience/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/a11y-lunch-o3-world-and-accessibility/",
+      "target": "/perspectives/a11y-lunch-o3-world-and-accessibility/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/a11y-updates-certifications-devices-and-labs/",
+      "target": "/perspectives/a11y-updates-certifications-devices-and-labs/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/accessibility-no-mouse-day/",
+      "target": "/perspectives/accessibility-no-mouse-day/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/automating-workflows-and-rpa-how-to-streamline-work/",
+      "target": "/perspectives/automating-workflows-and-rpa-how-to-streamline-work/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/beth-perkins-on-employee-cycles-podcast/",
+      "target": "/perspectives/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/beth-perkins-speaks-with-indeed-about-exit-interviews/",
+      "target": "/perspectives/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/bi-annual-2022-state-of-the-ozone-gathering-recap/",
+      "target": "/perspectives/bi-annual-2022-state-of-the-ozone-gathering-recap/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/brian-crumley-o3-developer-greatest-hits-accomplishments-list/",
+      "target": "/perspectives/brian-crumley-o3-developer-greatest-hits-accomplishments-list/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/brian-crumleys-10-year-anniversary/",
+      "target": "/perspectives/brian-crumleys-10-year-anniversary/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/chief-innovation-officer-mike-gadsby-on-roadmapping/",
+      "target": "/perspectives/chief-innovation-officer-mike-gadsby-on-roadmapping/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/christine-sheller-reveals-how-to-create-a-skills-matrix/",
+      "target": "/perspectives/christine-sheller-reveals-how-to-create-a-skills-matrix/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/covid-19-ushers-in-new-outlook-on-hiring-remote-workers/",
+      "target": "/perspectives/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/creative-exchange-a-collaborative-virtual-design-thinking-series/",
+      "target": "/perspectives/creative-exchange-a-collaborative-virtual-design-thinking-series/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/cx-vs-ux-why-all-brands-need-a-strategic-approach/",
+      "target": "/perspectives/cx-vs-ux-why-all-brands-need-a-strategic-approach/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/defining-innovation-with-cliff-kuang-3-important-takeaways/",
+      "target": "/perspectives/defining-innovation-with-cliff-kuang-3-important-takeaways/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/design-predictions-that-will-guide-the-industry-in-2020/",
+      "target": "/perspectives/design-predictions-that-will-guide-the-industry-in-2020/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/design-slam-2020-the-accessibility-edition/",
+      "target": "/perspectives/design-slam-2020-the-accessibility-edition/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/designing-for-accessibility-improving-ux-for-everyone/",
+      "target": "/perspectives/designing-for-accessibility-improving-ux-for-everyone/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/drupal-migrations-are-they-unsustainable/",
+      "target": "/perspectives/drupal-migrations-are-they-unsustainable/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/drupal-owners-time-to-move-version-7-to-8/",
+      "target": "/perspectives/drupal-owners-time-to-move-version-7-to-8/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/ebook-accessibility-for-pm-teams/",
+      "target": "/perspectives/ebook-accessibility-for-pm-teams/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/evolution-of-agile/",
+      "target": "/perspectives/evolution-of-agile/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/front-end-development-standards-and-best-practices/",
+      "target": "/perspectives/front-end-development-standards-and-best-practices/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/gdpr-regulation-might-impact-your-website/",
+      "target": "/perspectives/gdpr-regulation-might-impact-your-website/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/happy-6-year-o3-anniversary-jay-forbes/",
+      "target": "/perspectives/happy-6-year-o3-anniversary-jay-forbes/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/how-the-world-of-work-changed-for-hr-and-talent-acquisition/",
+      "target": "/perspectives/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/how-to-bring-ux-designers-and-developers-together/",
+      "target": "/perspectives/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/in-the-news-3-essential-tips-for-product-innovation/",
+      "target": "/perspectives/in-the-news-3-essential-tips-for-product-innovation/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/in-the-news-beth-perkins-on-people-analytics-podcast/",
+      "target": "/perspectives/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/in-the-news-how-to-know-if-you-really-classify-as-a-small-business/",
+      "target": "/perspectives/in-the-news-how-to-know-if-you-really-classify-as-a-small-business/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/in-the-news-keith-scandone-on-the-agency-leadership-podcast/",
+      "target": "/perspectives/in-the-news-keith-scandone-on-the-agency-leadership-podcast/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/in-the-news-keith-scandone-on-the-digital-agency-show/",
+      "target": "/perspectives/in-the-news-keith-scandone-on-the-digital-agency-show/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/in-the-news-listen-to-keith-scandone-on-the-innovative-agency-podcast/",
+      "target": "/perspectives/in-the-news-listen-to-keith-scandone-on-the-innovative-agency-podcast/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/in-the-news-matter-of-trust-maintaining-customer-experience-during-ma/",
+      "target": "/perspectives/in-the-news-matter-of-trust-maintaining-customer-experience-during-ma/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/in-the-news-mike-gadsby-on-open-agency-podcast/",
+      "target": "/perspectives/in-the-news-mike-gadsby-on-open-agency-podcast/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/in-the-news-quartz-at-work-employers-have-a-lot-to-gain-from-letting-you-openly-look-for-a-new-job/",
+      "target": "/perspectives/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/in-the-news-the-problems-with-most-team-building-efforts-and-how-to-avoid-them/",
+      "target": "/perspectives/in-the-news-the-problems-with-most-team-building-efforts-and-how-to-avoid-them/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/inclusive-design-thinking-while-remote/",
+      "target": "/perspectives/inclusive-design-thinking-while-remote/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/innovation-day-2018-recap/",
+      "target": "/perspectives/innovation-day-2018-recap/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/innovation-day-2019-ptw19-recap/",
+      "target": "/perspectives/innovation-day-2019-ptw19-recap/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/innovation-in-a-time-of-crisis-adapting-and-evolving/",
+      "target": "/perspectives/innovation-in-a-time-of-crisis-adapting-and-evolving/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/introducing-mahesh-gaitonde-chief-digital-officer/",
+      "target": "/perspectives/introducing-mahesh-gaitonde-chief-digital-officer/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/introducing-open-operating-a-service-philadelphians-can-use-to-support-local-businesses/",
+      "target": "/perspectives/introducing-open-operating-a-service-philadelphians-can-use-to-support-local-businesses/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/josh-soldiers-breaks-down-conversational-experiences/",
+      "target": "/perspectives/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/josh-soldiers-releases-the-conversational-experience-playbook-part-2-in-ux-booth/",
+      "target": "/perspectives/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/keith-scandone-on-architecting-great-customer-experiences/",
+      "target": "/perspectives/keith-scandone-on-architecting-great-customer-experiences/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/keith-scandone-on-business-planning-in-pandemic-times/",
+      "target": "/perspectives/keith-scandone-on-business-planning-in-pandemic-times/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/keith-scandone-on-marketing-for-your-future/",
+      "target": "/perspectives/keith-scandone-on-marketing-for-your-future/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/keith-scandone-on-the-agency-profit-podcast/",
+      "target": "/perspectives/keith-scandone-on-the-agency-profit-podcast/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/keith-scandone-on-the-future-of-remote-and-in-office-teams/",
+      "target": "/perspectives/keith-scandone-on-the-future-of-remote-and-in-office-teams/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/keith-scandone-on-where-o3-is-going/",
+      "target": "/perspectives/keith-scandone-on-where-o3-is-going/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/keith-scandone-shares-what-todays-leaders-need-to-be-effective/",
+      "target": "/perspectives/keith-scandone-shares-what-todays-leaders-need-to-be-effective/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/mahesh-gaintinode-on-how-b2b-brands-can-move-to-a-d2c-model/",
+      "target": "/perspectives/mahesh-gaintinode-on-how-b2b-brands-can-move-to-a-d2c-model/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/meet-the-team-carroll-borodynko/",
+      "target": "/perspectives/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/meet-the-team-josh-friedman/",
+      "target": "/perspectives/meet-the-team-josh-friedman/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/meet-the-team-kelly-navari/",
+      "target": "/perspectives/meet-the-team-kelly-navari/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/meet-the-team-madeline-jensen/",
+      "target": "/perspectives/meet-the-team-madeline-jensen/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/mike-gadsby-on-how-to-weave-experiences-and-technology-together/",
+      "target": "/perspectives/mike-gadsby-on-how-to-weave-experiences-and-technology-together/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/mike-gadsby-on-the-future-of-ai-and-cx-in-todays-covid-19-world/",
+      "target": "/perspectives/mike-gadsby-on-the-future-of-ai-and-cx-in-todays-covid-19-world/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/mike-gadsby-on-the-smart-agency-podcast/",
+      "target": "/perspectives/mike-gadsby-on-the-smart-agency-podcast/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/mindshift-002/",
+      "target": "/perspectives/mindshift-002/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/mindshift-003/",
+      "target": "/perspectives/mindshift-003/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/mindshift-004/",
+      "target": "/perspectives/mindshift-004/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/mindshift-005/",
+      "target": "/perspectives/mindshift-005/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/mindshift-episode-1-recap-reactions/",
+      "target": "/perspectives/mindshift-episode-1-recap-reactions/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/mindshift-episode-2-top-takeaways/",
+      "target": "/perspectives/mindshift-episode-2-top-takeaways/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/mindshift/",
+      "target": "/perspectives/mindshift/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/movers-shakers-innovators-1682-moderator-spotlight/",
+      "target": "/perspectives/movers-shakers-innovators-1682-moderator-spotlight/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/movers-shakers-innovators-1682-speaker-spotlight-part-1/",
+      "target": "/perspectives/movers-shakers-innovators-1682-speaker-spotlight-part-1/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/movers-shakers-innovators-1682-speaker-spotlight-part-2/",
+      "target": "/perspectives/movers-shakers-innovators-1682-speaker-spotlight-part-2/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/o3-celebrates-17-years/",
+      "target": "/perspectives/o3-celebrates-17-years/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/o3-launches-new-student-mentorship-program/",
+      "target": "/perspectives/o3-launches-new-student-mentorship-program/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/o3-participates-in-greensgrow-clean-up-and-fundraiser/",
+      "target": "/perspectives/o3-participates-in-greensgrow-clean-up-and-fundraiser/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/o3-partner-peter-herzog-of-urvin-ai-on-ai-security/",
+      "target": "/perspectives/o3-partner-peter-herzog-of-urvin-ai-on-ai-security/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/o3-recognized-by-clutch-as-top-ux-consultancy/",
+      "target": "/perspectives/o3-recognized-by-clutch-as-top-ux-consultancy/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/o3-turns-13/",
+      "target": "/perspectives/o3-turns-13/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/o3-world-considered-top-15-digital-agency-in-philly/",
+      "target": "/perspectives/o3-world-considered-top-15-digital-agency-in-philly/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/o3-world-design-super-slam-recap/",
+      "target": "/perspectives/o3-world-design-super-slam-recap/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/o3cap-websites-milestones-and-blended-processes/",
+      "target": "/perspectives/o3cap-websites-milestones-and-blended-processes/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/one-designer-one-work-christine-sheller/",
+      "target": "/perspectives/one-designer-one-work-christine-sheller/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/our-director-of-people-and-culture-on-technical-ly-phillys-twij-show/",
+      "target": "/perspectives/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/ozone-ventures-update-see-philadelphias-newest-place-for-creators/",
+      "target": "/perspectives/ozone-ventures-update-see-philadelphias-newest-place-for-creators/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/personalization-creating-an-individualized-journey-for-your-customers/",
+      "target": "/perspectives/personalization-creating-an-individualized-journey-for-your-customers/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/philadelphia-urban-cowboys-x-o3/",
+      "target": "/perspectives/philadelphia-urban-cowboys-x-o3/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/philly-tech-week-accessibility-design-slam/",
+      "target": "/perspectives/philly-tech-week-accessibility-design-slam/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/preparing-for-ccpa-during-covid-19/",
+      "target": "/perspectives/preparing-for-ccpa-during-covid-19/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/project-spotlight-caron-treatment-centers-digital-transformation-in-addiction-treatment/",
+      "target": "/perspectives/project-spotlight-caron-treatment-centers-digital-transformation-in-addiction-treatment/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/recap-seerfest-2022/",
+      "target": "/perspectives/recap-seerfest-2022/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/second-annual-o3-a11y-design-slam/",
+      "target": "/perspectives/second-annual-o3-a11y-design-slam/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/slack-amazon-better-team-collaboration/",
+      "target": "/perspectives/slack-amazon-better-team-collaboration/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/state-of-the-ozone-recap/",
+      "target": "/perspectives/state-of-the-ozone-recap/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/strella-biotechnology-fruit-hacking-and-the-future-of-food/",
+      "target": "/perspectives/strella-biotechnology-fruit-hacking-and-the-future-of-food/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/superior-experiences-with-an-edge/",
+      "target": "/perspectives/superior-experiences-with-an-edge/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/the-cx-challenge-in-healthcare/",
+      "target": "/perspectives/the-cx-challenge-in-healthcare/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/the-journey-to-becoming-certified-professionals-in-accessibility/",
+      "target": "/perspectives/the-journey-to-becoming-certified-professionals-in-accessibility/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/the-path-to-personalization/",
+      "target": "/perspectives/the-path-to-personalization/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/there-is-no-change-where-there-is-no-action/",
+      "target": "/perspectives/there-is-no-change-where-there-is-no-action/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/three-trends-shaping-successful-digital-product-experiences/",
+      "target": "/perspectives/three-trends-shaping-successful-digital-product-experiences/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/tim-breslin-featured-on-tech-talks-daily-podcast/",
+      "target": "/perspectives/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/tim-breslin-on-how-teams-can-challenge-their-approach-to-digital-transformation/",
+      "target": "/perspectives/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/understand-customers-at-every-touchpoint/",
+      "target": "/perspectives/understand-customers-at-every-touchpoint/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/utm_sourceo3worldutm_mediumpartnerutm_campaignws_ww_partner_directutm_id7013a000001ryfvaaqutm_termo3world/",
+      "target": "/perspectives/utm_sourceo3worldutm_mediumpartnerutm_campaignws_ww_partner_directutm_id7013a000001ryfvaaqutm_termo3world/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/video-interview-tips-for-tech-job-candidates-managers-during-covid-19/",
+      "target": "/perspectives/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/want-to-donate-to-a-local-person-or-org-in-need-now-you-can-pay-it-phorward/",
+      "target": "/perspectives/want-to-donate-to-a-local-person-or-org-in-need-now-you-can-pay-it-phorward/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/watch-out-amazon-walmart-is-back-in-the-game-thanks-to-the-shopify-partnership/",
+      "target": "/perspectives/watch-out-amazon-walmart-is-back-in-the-game-thanks-to-the-shopify-partnership/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/watch-out-cx-industry-omnichannel-personalization-data-and-ai-are-here/",
+      "target": "/perspectives/watch-out-cx-industry-omnichannel-personalization-data-and-ai-are-here/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/webinar-recap-making-innovation-work-inside-your-organization/",
+      "target": "/perspectives/webinar-recap-making-innovation-work-inside-your-organization/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/webinar-recap-the-business-impact-of-creating-accessible-experiences/",
+      "target": "/perspectives/webinar-recap-the-business-impact-of-creating-accessible-experiences/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/webinar-recap-when-seo-meets-personalization/",
+      "target": "/perspectives/webinar-recap-when-seo-meets-personalization/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/weve-expanded-our-space/",
+      "target": "/perspectives/weve-expanded-our-space/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/what-brands-need-to-know-about-digital-accessibility/",
+      "target": "/perspectives/what-brands-need-to-know-about-digital-accessibility/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/whats-new-at-o3-january-2019-recap/",
+      "target": "/perspectives/whats-new-at-o3-january-2019-recap/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/whats-new-with-1682-speaker-and-full-website-announcement/",
+      "target": "/perspectives/whats-new-with-1682-speaker-and-full-website-announcement/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/why-1682-and-why-not-forge/",
+      "target": "/perspectives/why-1682-and-why-not-forge/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/why-accessibility-shouldnt-be-an-afterthought/",
+      "target": "/perspectives/why-accessibility-shouldnt-be-an-afterthought/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/why-innovation-must-be-your-agencys-first-priority/",
+      "target": "/perspectives/why-innovation-must-be-your-agencys-first-priority/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/you-monitor-your-kids-behavior-why-wouldnt-you-monitor-your-customers/",
+      "target": "/perspectives/you-monitor-your-kids-behavior-why-wouldnt-you-monitor-your-customers/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/thank-you-careers/",
+      "target": "/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/labs/",
+      "target": "/innovate/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/thank-you/",
+      "target": "/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/about/culture/",
+      "target": "/about",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/about/team/",
+      "target": "/about",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/utm_sourceo3worldutm_mediumpartnerutm_campaignws_ww_partner_directutm_id7013a000001ryfvaaqutm_termo3world/",
+      "target": "/acquia",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/careers/future-opportunities-with-o3/",
+      "target": "/careers",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/speaking-engagement-opportunities/",
+      "target": "/about",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/work/crane/",
+      "target": "/work",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/labs/vertex/",
+      "target": "/innovate/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/labs/innovation-workshops/",
+      "target": "/innovate/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/labs/taskbot/",
+      "target": "/innovate/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/labs/partnering-to-experiment/",
+      "target": "/innovate/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/labs/poolytics/",
+      "target": "/innovate/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/labs/poops/",
+      "target": "/innovate/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/labs/barista/",
+      "target": "/innovate/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/labs/moods/",
+      "target": "/innovate/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/labs/lunchbot/",
+      "target": "/innovate/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/labs/roombot/",
+      "target": "/innovate/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/labs/theme-music/",
+      "target": "/innovate/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/campaigns/innovation/",
+      "target": "/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/campaigns/technology/",
+      "target": "/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/campaigns/personalization/",
+      "target": "/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/campaigns/the-o3-difference/",
+      "target": "/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/campaigns/uxuidesign/",
+      "target": "/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/campaigns/cx/",
+      "target": "/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/campaigns/cxstrategy/",
+      "target": "/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/campaigns/accessibility/",
+      "target": "/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/campaigns/current-state-analysis-user-experience-audit/",
+      "target": "/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/campaigns/product-insights-visualization-and-validation/",
+      "target": "/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/campaigns/current-state-analysis-customer-service-audit/",
+      "target": "/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/campaigns/current-state-analysis-employee-retention-audit/",
+      "target": "/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/campaigns/customer-insights-journey-analytics/",
+      "target": "/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/campaigns/customer-insights-benchmark-survey/",
+      "target": "/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/campaigns/martech-assessment/",
+      "target": "/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/campaigns/web-accessibility-audit/",
+      "target": "/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/about/team/christine-sheller/",
+      "target": "/about",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/about/team/mike-gadsby/",
+      "target": "/about",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/about/team/mahesh-gaitonde/",
+      "target": "/about",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/about/team/keith-scandone/",
+      "target": "/about",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/about/team/jay-forbes/",
+      "target": "/about",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/about/team/michael-tarquinio/",
+      "target": "/about",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/about/team/paige-hines-cheatham/",
+      "target": "/about",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/about/team/justin-handler/",
+      "target": "/about",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/about/team/christine-sheller-speaker-page/",
+      "target": "/about",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/about/team/mike-gadsby-2/",
+      "target": "/about",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/about/team/keith-scandone-speaker-page/",
+      "target": "/about",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services/digital-products-applications/",
+      "target": "/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services/digital-strategy-innovation/",
+      "target": "/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services/experience-design/",
+      "target": "/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services/websites-ecommerce/",
+      "target": "/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services/partners/",
+      "target": "/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services/technology-development/",
+      "target": "/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/resources/accessibility-considerations-for-project-management-teams/",
+      "target": "/wp-content/uploads/2023/01/Accessibility-for-Project-Management-Teams-O3.pdf",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/resources/making-sense-of-digital-accessibility/",
+      "target": "/wp-content/uploads/2023/01/Making-Sense-of-Accessibility-eBook-1.pdf",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/?resource_type=ebook",
+      "target": "/wp-content/uploads/2023/01/Accessibility-for-Project-Management-Teams-O3.pdf",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/statement-of-accessibility/",
+      "target": "/accessibility-statement/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/utm_sourceo3worldutm_mediumpartnerutm_campaignws_ww_partner_directutm_id7013a000001ryfvaaqutm_termo3world/",
+      "target": "/unknown",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/insights/",
+      "target": "/perspectives/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/join-our-team/",
+      "target": "/careers/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/404-2/",
+      "target": "/error404/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/o3-welcomes-michael-soileau-as-chief-executive-officer/",
+      "target": "/perspectives/o3-welcomes-michael-soileau-as-chief-executive-officer/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/revolutionizing-customer-experience-with-chatgpt-improving-cx/",
+      "target": "/perspectives/chatgpt-improving-cx/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/o3s-accessibility-resources/",
+      "target": "/perspectives/digital-accessibility-resources/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/journey-mapping-workshop/",
+      "target": "/services-journey-mapping-workshop/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services-journey-mapping-workshop/",
+      "target": "/journey-mapping-workshops/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/unleashing-the-power-of-data-and-ai-o3s-transformative-webinar/",
+      "target": "/perspectives/data-and-ai-o3s-transformative-webinar/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services/ux-audit/",
+      "target": "/engage/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services/accessibility-audit/",
+      "target": "/include/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/benchmark-surveys/",
+      "target": "/analyze/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services/user-type-workshop/",
+      "target": "/convert/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services/content-strategy/",
+      "target": "/convert/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services/accessibility-consulting-optimization/",
+      "target": "/include/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services/data-analysis-benchmarking/",
+      "target": "/analyze/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services/brand-audit/",
+      "target": "/engage/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services/advanced-technology-cms-audit/",
+      "target": "/convert/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services/conversion-rate-optimization/",
+      "target": "/convert/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services/personalization-strategy/",
+      "target": "/convert/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services/experience-design/",
+      "target": "/engage/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services/innovation-strategy/",
+      "target": "/innovate/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services/custom-web-mobile-applications/",
+      "target": "/engage/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services/api-creation/",
+      "target": "/engage/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services/marketing-automation/",
+      "target": "/convert/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services/systems-integration/",
+      "target": "/engage/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services/ai-consulting/",
+      "target": "/transcend/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services/software-development/",
+      "target": "/engage/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services/content-management-solutions/",
+      "target": "/convert/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services/video-production/",
+      "target": "/engage/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services/data-analytics-ai-consulting/",
+      "target": "/analyze/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/recapping-2017-agency-field-day/",
+      "target": "/perspectives/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/lessons-learned-three-takeaways-from-the-2017-dpm-summit/",
+      "target": "/perspectives/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/project-management-protip-mnemonics/",
+      "target": "/perspectives/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/o3-world-expands-c-suite-leadership-team-invests-in-agency-growth/",
+      "target": "/perspectives/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/join-us-at-innovation-day-on-may-5th/",
+      "target": "/perspectives/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/o3-world-recognized-as-best-places-to-work-in-philadelphia-4-years-in-a-row/",
+      "target": "/perspectives/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/codeday-philly-at-o3-world/",
+      "target": "/perspectives/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/news/ebook-accessibility-considerations-for-project-management-teams/",
+      "target": "/perspectives/ebook-accessibility-for-pm-teams/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/ventures/fanup",
+      "target": "/ventures",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/innovate",
+      "target": "/innovation-programs",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/innovate/",
+      "target": "/innovation-programs/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/analyze",
+      "target": "/data-analytics",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/analyze/",
+      "target": "/data-analytics/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/transcend/",
+      "target": "/ai-solutions/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/transcend",
+      "target": "/ai-solutions",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/convert",
+      "target": "/digital-marketing-solutions",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/convert/",
+      "target": "/digital-marketing-solutions/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/engage",
+      "target": "/enterprise-digital-products",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/engage/",
+      "target": "/enterprise-digital-products/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/include/",
+      "target": "/accessibility-solutions/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/include",
+      "target": "/accessibility-solutions",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/suno-and-udio-the-latest-ai-for-creating-music/",
+      "target": "/perspectives/revolutionizing-music-creation-suno-udio/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/6-tips-for-running-a-successful-innovation-workshop/",
+      "target": "/perspectives/innovation-workshops-o3/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/services-solutions/",
+      "target": "/solutions-2/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/solutions-2/",
+      "target": "/solutions/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/1682-2/",
+      "target": "/about-1682/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/solutions/consulting/",
+      "target": "/solutions/digital-experience-consulting/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/about-1682/",
+      "target": "/1682-conference/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/innovation-programs",
+      "target": "/solutions/digital-experience-consulting/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/mike-gadsby-chief-innovation-officer-2/",
+      "target": "/mike-gadsby-chief-innovation-officer/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/solutions/ai-solutions/",
+      "target": "/solutions/solutions-ai-for-b2b-growth/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/solutions/web-digital-product/",
+      "target": "/solutions/conversion-rate-optimization-consultant/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/solutions/digital-experience-consulting/",
+      "target": "/solutions/digital-experience-consulting-services/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/1682-conference/",
+      "target": "/1682-conference-ai-innovation/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/why-1682-and-why-not-forge/",
+      "target": "/perspectives/innovation-conference/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/wp-content/uploads/2023/01/BestEgg-casestudy3-6-1280x741",
+      "target": "/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/wp-content/uploads/2023/01/BestEgg-casestudy3-6-1280x741",
+      "target": "/work/best-egg/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/solutions/solutions-ai-for-b2b-growth/",
+      "target": "https://www.o3xo.ai/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/work/rfp-automation-o3/",
+      "target": "https://www.o3xo.ai/case-studies/global-tech-firm/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/work/case-studies-ai-electrical-safety-e-hazard/",
+      "target": "https://www.o3xo.ai/case-studies/e-hazard/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/work/delivering-generative-ai-solution-legal-documents/",
+      "target": "https://www.o3xo.ai/case-studies/fortune-500-insurance-provider/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/source URL",
+      "target": "target URL",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/source URL",
+      "target": "target URL",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/o3xo-ai-consulting/",
+      "target": "https://www.o3xo.ai/insights/o3xo-ai-consulting/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/ai-modern-enterprise-learnings/",
+      "target": "https://www.o3xo.ai/insights/ai-modern-enterprise-learnings/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/the-build-vs-buy-dilemma-making-smart-ai-investment-choices/",
+      "target": "https://www.o3xo.ai/insights/the-build-vs-buy-dilemma-making-smart-ai-investment-choices/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/the-ai-hierarchy-of-needs-a-strategic-framework-for-businesses/",
+      "target": "https://www.o3xo.ai/insights/the-ai-hierarchy-of-needs-a-strategic-framework-for-businesses/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/ai-roi-beyond-efficiency/",
+      "target": "https://www.o3xo.ai.com/insights/ai-roi-beyond-efficiency/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/mike-gadsby-on-pacts-digital-phorum-podcast/",
+      "target": "https://www.o3xo.ai/insights/mike-gadsby-on-pacts-digital-phorum-podcast/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/how-ai-is-changing-the-way-we-build-software/",
+      "target": "https://www.o3xo.ai/insights/how-ai-is-changing-the-way-we-build-software/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/rfp-automation-case-study/",
+      "target": "https://www.o3xo.ai/insights/rfp-automation-case-study/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/not-all-ai-is-safe-for-fintech/",
+      "target": "https://www.o3xo.ai/insights/not-all-ai-is-safe-for-fintech/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/ai-agents-charting-a-path-from-automation-to-intelligence/",
+      "target": "https://www.o3xo.ai/insights/ai-agents-charting-a-path-from-automation-to-intelligence/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/moving-beyond-the-initial-buzz-of-generative-ai-navigating-the-challenges-from-pilot-to-scale/",
+      "target": "https://www.o3xo.ai/insights/moving-beyond-the-initial-buzz-of-generative-ai-navigating-the-challenges-from-pilot-to-scale/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/from-ai-to-empathy-redefining-customer-care-for-the-future/",
+      "target": "https://www.o3xo.ai/insights/from-ai-to-empathy-redefining-customer-care-for-the-future/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/gpt-4o-revolutionizing-ai-and-customer-experience/",
+      "target": "https://www.o3xo.ai/insights/gpt-4o-revolutionizing-ai-and-customer-experience/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/navigating-ai-landscape-o3-innovative-approach/",
+      "target": "https://www.o3xo.ai/insights/navigating-ai-landscape-o3-innovative-approach/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/ai-and-the-future-of-humanity-work-and-education/",
+      "target": "https://www.o3xo.ai/insights/ai-and-the-future-of-humanity-work-and-education/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/supercharging-sales-integrating-ai-into-your-sales-program/",
+      "target": "https://www.o3xo.ai/insights/supercharging-sales-integrating-ai-into-your-sales-program/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/revolutionizing-music-creation-suno-udio/",
+      "target": "https://www.o3xo.ai/insights/revolutionizing-music-creation-suno-udio/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/the-ceos-guide-to-ai-integration-10-common-questions-to-consider/",
+      "target": "https://www.o3xo.ai/insights/the-ceos-guide-to-ai-integration-10-common-questions-to-consider/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/unlocking-future-video-generation-sora-ai/",
+      "target": "https://www.o3xo.ai/insights/unlocking-future-video-generation-sora-ai/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/revolutionizing-recall-how-ais-new-frontier-with-gemini-1-5-transforms-data-retention/",
+      "target": "https://www.o3xo.ai/insights/revolutionizing-recall-how-ais-new-frontier-with-gemini-1-5-transforms-data-retention/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/insights-from-o3s-chief-innovation-officer-on-the-disruption-is-now-podcast/",
+      "target": "https://www.o3xo.ai/insights/insights-from-o3s-chief-innovation-officer-on-the-disruption-is-now-podcast/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/ai-project-strategy-essential-considerations/",
+      "target": "https://www.o3xo.ai/insights/ai-project-strategy-essential-considerations/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/decoding-openai-turmoil-o3-insights-ai-governance-industry-implications/",
+      "target": "https://www.o3xo.ai/insights/decoding-openai-turmoil-o3-insights-ai-governance-industry-implications/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/revolutionizing-healthcare-a-deep-dive-into-o3s-ai-webinar/",
+      "target": "https://www.o3xo.ai/insights/revolutionizing-healthcare-a-deep-dive-into-o3s-ai-webinar/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/young-smart-local-mike-gadsby-ai-panel-talent/",
+      "target": "https://www.o3xo.ai/insights/young-smart-local-mike-gadsby-ai-panel-talent/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/is-ai-a-superhero-or-a-villain-mike-gadsby-explores-on-the-penji-podcast/",
+      "target": "https://www.o3xo.ai/insights/is-ai-a-superhero-or-a-villain-mike-gadsby-explores-on-the-penji-podcast/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/navigating-the-ai-revolution-a-recap-of-pact-tech-series-on-ai-in-fintech/",
+      "target": "https://www.o3xo.ai/insights/navigating-the-ai-revolution-a-recap-of-pact-tech-series-on-ai-in-fintech/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/navigating-generative-ai-black-box-transparency-control/",
+      "target": "https://www.o3xo.ai/insights/navigating-generative-ai-black-box-transparency-control/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    },
+    {
+      "source": "/perspectives/ai-impact-on-finance-industry-disruption-generative-ai-finance-dynamics-human-ingenuity-ai-innovation/",
+      "target": "https://www.o3xo.ai/insights/ai-impact-on-finance-industry-disruption-generative-ai-finance-dynamics-human-ingenuity-ai-innovation/",
+      "code": "301",
+      "regex": "0",
+      "status": "enabled",
+      "group_name": "Redirections"
+    }
+  ],
+  "yoastPlain": {
+    "journey-mapping-workshop": {
+      "url": "services-journey-mapping-workshop",
+      "type": 301
+    },
+    "services-journey-mapping-workshop": {
+      "url": "journey-mapping-workshops",
+      "type": 301
+    },
+    "journey-mapping-workshops": {
+      "url": "",
+      "type": 410
+    },
+    "service/content-strategy-copywriting": {
+      "url": "service/content-strategy",
+      "type": 301
+    },
+    "services/journey-mapping-workshops": {
+      "url": "services/customer-journey-mapping",
+      "type": 301
+    },
+    "services/persona-development-workshops": {
+      "url": "services/user-type-workshops",
+      "type": 301
+    },
+    "services/user-type-workshops": {
+      "url": "services/user-type-workshop",
+      "type": 301
+    },
+    "services/accessibility-as-a-service": {
+      "url": "services/accessibility-consulting-optimization",
+      "type": 301
+    },
+    "perspectives/unleashing-the-power-of-data-and-ai-o3s-transformative-webinar": {
+      "url": "perspectives/data-and-ai-o3s-transformative-webinar",
+      "type": 301
+    },
+    "work/3bl-media": {
+      "url": "work/3bl",
+      "type": 301
+    },
+    "about/team/lauren-slattery": {
+      "url": "about",
+      "type": 301
+    },
+    "about/team/sam-roth": {
+      "url": "about",
+      "type": 301
+    },
+    "about/team/tim-breslin": {
+      "url": "about",
+      "type": 301
+    },
+    "about/team/joshua-buckwalter": {
+      "url": "about",
+      "type": 301
+    },
+    "about/team/christina-lewis": {
+      "url": "about",
+      "type": 301
+    },
+    "about/team/jocelyn-harper": {
+      "url": "about",
+      "type": 301
+    },
+    "about/team/zuhib-daud": {
+      "url": "about",
+      "type": 301
+    },
+    "about/team/calvin-gohd": {
+      "url": "about",
+      "type": 301
+    },
+    "about/team/tara-threewits": {
+      "url": "about",
+      "type": 301
+    },
+    "about/team/justin-mathews": {
+      "url": "about",
+      "type": 301
+    },
+    "about/team/josh-soldiers": {
+      "url": "about",
+      "type": 301
+    },
+    "about/team/aleesha-halbach": {
+      "url": "about",
+      "type": 301
+    },
+    "labs/o3-moods": {
+      "url": "ventures",
+      "type": 301
+    },
+    "labs/o3-lunchbot": {
+      "url": "ventures",
+      "type": 301
+    },
+    "about/team/daniel-laufer": {
+      "url": "about",
+      "type": 301
+    },
+    "labs/o3-barista": {
+      "url": "ventures",
+      "type": 301
+    },
+    "industry/ecommerce": {
+      "url": "industry/retail-and-ecommerce",
+      "type": 301
+    },
+    "innovate": {
+      "url": "innovation-programs",
+      "type": 301
+    },
+    "analyze": {
+      "url": "data-analytics",
+      "type": 301
+    },
+    "transcend": {
+      "url": "ai-solutions",
+      "type": 301
+    },
+    "convert": {
+      "url": "digital-marketing-solutions",
+      "type": 301
+    },
+    "engage": {
+      "url": "enterprise-digital-products",
+      "type": 301
+    },
+    "include": {
+      "url": "accessibility-solutions",
+      "type": 301
+    },
+    "perspectives/suno-and-udio-the-latest-ai-for-creating-music": {
+      "url": "perspectives/revolutionizing-music-creation-suno-udio",
+      "type": 301
+    },
+    "perspectives/6-tips-for-running-a-successful-innovation-workshop": {
+      "url": "perspectives/innovation-workshops-o3",
+      "type": 301
+    },
+    "services-solutions": {
+      "url": "solutions-2",
+      "type": 301
+    },
+    "solutions-2": {
+      "url": "solutions",
+      "type": 301
+    },
+    "1682-2": {
+      "url": "about-1682",
+      "type": 301
+    },
+    "solutions/consulting": {
+      "url": "solutions/digital-experience-consulting",
+      "type": 301
+    },
+    "work/rfp-automation-3": {
+      "url": "work/rfp-automation-o3",
+      "type": 301
+    },
+    "about-1682": {
+      "url": "1682-conference",
+      "type": 301
+    },
+    "ai-solutions": {
+      "url": "solutions/ai-solutions",
+      "type": 301
+    },
+    "data-analytics": {
+      "url": "solutions/web-digital-product",
+      "type": 301
+    },
+    "digital-marketing-solutions": {
+      "url": "solutions/web-digital-product",
+      "type": 301
+    },
+    "enterprise-digital-products": {
+      "url": "solutions/web-digital-product",
+      "type": 301
+    },
+    "accessibility-solutions": {
+      "url": "solutions/web-digital-product",
+      "type": 301
+    },
+    "mike-gadsby-chief-innovation-officer-2": {
+      "url": "mike-gadsby-chief-innovation-officer",
+      "type": 301
+    },
+    "solutions/ai-solutions": {
+      "url": "solutions/solutions-ai-for-b2b-growth",
+      "type": 301
+    },
+    "solutions/web-digital-product": {
+      "url": "solutions/conversion-rate-optimization-consultant",
+      "type": 301
+    },
+    "solutions/digital-experience-consulting": {
+      "url": "solutions/digital-experience-consulting-services",
+      "type": 301
+    },
+    "1682-conference": {
+      "url": "1682-conference-ai-innovation",
+      "type": 301
+    },
+    "perspectives/why-1682-and-why-not-forge": {
+      "url": "perspectives/innovation-conference",
+      "type": 301
+    },
+    "work/allied-pixel": {
+      "url": "work/personalized-video",
+      "type": 301
+    },
+    "work/personalized-video": {
+      "url": "work/ai-powered-personalization",
+      "type": 301
+    },
+    "christine-sheller-speaking-overview": {
+      "url": "/",
+      "type": 301
+    }
+  },
+  "yoastRegex": {}
+}

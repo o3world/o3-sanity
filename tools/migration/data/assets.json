@@ -1634,5 +1634,13 @@
   "https://www.o3world.com/wp-content/uploads/2024/02/o3-rec-featured-cs-image.jpg": {
     "sha256": "07b68937982c8ea63d65c1e08317d1d80dda4cef",
     "assetId": "image-07b68937982c8ea63d65c1e08317d1d80dda4cef-546x546-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2022/11/REC-blue.jpg": {
+    "sha256": "291a771e12d2b7f3e769d7b1817ceb8ded3c7863",
+    "assetId": "image-291a771e12d2b7f3e769d7b1817ceb8ded3c7863-2500x2500-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2022/11/Urvin-blue.jpg": {
+    "sha256": "c4151111ae4415cc3ec7e91dba028ff27316efeb",
+    "assetId": "image-c4151111ae4415cc3ec7e91dba028ff27316efeb-2500x2500-jpg"
   }
 }

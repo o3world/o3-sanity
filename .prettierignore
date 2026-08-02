@@ -11,6 +11,13 @@ tools/migration/data/
 # the story files and frame.tsx beside them are formatted normally.
 apps/storybook/prototypes/*/
 
+# The generated redirect table (#24). `pnpm --filter @o3/migration redirects`
+# writes it from the committed WordPress export, and prettier wraps the long
+# URLs — so letting it reformat means every regeneration re-dirties the tree
+# and the committed file stops matching what the generator produces, which is
+# the one thing `redirects.test.ts` checks.
+apps/web/src/lib/redirects.generated.ts
+
 # Build output
 **/.next/
 **/storybook-static/

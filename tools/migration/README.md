@@ -5,7 +5,10 @@ WordPress→Sanity pipeline. **Temporary** — deleted after the migration ships
 ```sh
 pnpm --filter @o3/migration extract -- --posts all       # live WP → data/extract/ (terminus wp eval + ACF get_fields)
 pnpm --filter @o3/migration extract -- --slugs a,b       # …or exactly these posts, by slug
+pnpm --filter @o3/migration extract -- --redirects       # …or just the redirect map (both plugins)
+pnpm --filter @o3/migration extract -- --ventures        # …or just the `ventures` CPT
 pnpm --filter @o3/migration convert                      # data/extract/ → data/converted/ (deterministic, fail-loud)
+pnpm --filter @o3/migration redirects                    # data/extract/site/redirects.json → apps/web/src/lib/redirects.generated.ts
 pnpm --filter @o3/migration load                         # data/{converted,translated,seed}/ → Sanity (sanity exec --with-user-token)
 pnpm --filter @o3/migration verify                       # is the dataset what data/ says it is?
 ```
@@ -200,6 +203,35 @@ Two things the loader guarantees that seeds depend on:
 - **Slug collisions are reported.** Routes resolve `…[0]`, so two documents
   claiming one slug serve a coin flip. `load` lists any collision in the
   dataset and exits non-zero.
+
+---
+
+## Redirects and sitemap parity (#24)
+
+The generated redirect table lives in the **app**, not here — `tools/migration`
+is deleted when the migration ships (ADR 0002/0003), and the running site
+cannot depend on a package that will not exist. `redirects` reads the committed
+export and rewrites `apps/web/src/lib/redirects.generated.ts`, which
+`next.config.ts` serves and `app/sitemap.ts` reads so the two cannot disagree
+about which URLs this site has.
+
+Three things about the export that cost a debugging round each:
+
+- **There are two redirect plugins, and neither knows about the other.**
+  Redirection holds 290 rows in a table; Yoast Premium holds 55 more in two
+  WordPress _options_. Exporting only Redirection — the plugin the ticket names
+  — misses every `/services/*` chain, which is the half ADR 0013 is about.
+- **Read `redirection_items.url`, never `match_url`.** The plugin strips the
+  query string into `match_url`, so the row `/?resource_type=ebook` is stored
+  with `match_url = "/"`. Reading that column turns one dead ebook link into a
+  permanent redirect on the homepage.
+- **A sitemap diff finds post types nothing else does.** `ventures-sitemap.xml`
+  advertises two URLs that no extraction covered, because `ventures` is a CPT
+  and the extractor pulls `post_type => page` — the same shape of miss ADR 0013
+  records for `services`. That is what the diff is for, and it is why #23 gained
+  two pages after it was written.
+
+Findings, counts and every decision: [`docs/seo-parity.md`](../../docs/seo-parity.md).
 
 ---
 
