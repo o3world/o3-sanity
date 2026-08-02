@@ -1,0 +1,239 @@
+{
+  "_id": "page-seed-solutions",
+  "_type": "page",
+  "title": "Solutions",
+  "slug": {
+    "_type": "slug",
+    "current": "solutions"
+  },
+  "pageType": "standard",
+  "sections": [
+    {
+      "_type": "heroSection",
+      "_key": "hero",
+      "surface": "ink",
+      "variant": "band",
+      "eyebrow": "Solutions",
+      "headlineLines": [
+        "We don't sell services. We sell the move, and the team that makes it real."
+      ],
+      "decoration": "none"
+    },
+    {
+      "_type": "layoutSection",
+      "_key": "disciplines",
+      "surface": "ink",
+      "columns": 2,
+      "heading": "Four disciplines, one engagement.",
+      "items": [
+        {
+          "_type": "richText",
+          "_key": "s-strategy",
+          "body": [
+            {
+              "_type": "block",
+              "_key": "p0",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p0s",
+                  "text": "Strategy",
+                  "marks": []
+                }
+              ]
+            },
+            {
+              "_type": "block",
+              "_key": "p1",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p1s",
+                  "text": "The root of every engagement. We find the real problem and the move worth making — before a line of code is written.",
+                  "marks": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "richText",
+          "_key": "s-design",
+          "body": [
+            {
+              "_type": "block",
+              "_key": "p0",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p0s",
+                  "text": "Design",
+                  "marks": []
+                }
+              ]
+            },
+            {
+              "_type": "block",
+              "_key": "p1",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p1s",
+                  "text": "Product-grade design that gives the move a form people actually want to use.",
+                  "marks": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "richText",
+          "_key": "s-engineering",
+          "body": [
+            {
+              "_type": "block",
+              "_key": "p0",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p0s",
+                  "text": "Engineering",
+                  "marks": []
+                }
+              ]
+            },
+            {
+              "_type": "block",
+              "_key": "p1",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p1s",
+                  "text": "Senior engineers who build it to last and to scale — the fix that ships, not a prototype to hand off.",
+                  "marks": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "richText",
+          "_key": "s-ai",
+          "body": [
+            {
+              "_type": "block",
+              "_key": "p0",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p0s",
+                  "text": "AI",
+                  "marks": []
+                }
+              ]
+            },
+            {
+              "_type": "block",
+              "_key": "p1",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p1s",
+                  "text": "Applied where it compounds the work, not where it decorates it — our O3XO practice, embedded where it earns its keep.",
+                  "marks": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "engagements",
+      "surface": "white",
+      "rail": "number",
+      "heading": "Three ways in. You decide how much of the problem to hand us.",
+      "intro": "From senior hands inside your team to owning the whole outcome — the right engagement depends on how much of the problem is yours to keep.",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "eng-embedded",
+          "railLabel": "Embedded",
+          "heading": "Embedded Team Member",
+          "body": "Senior hands, inside your team. Best when you trust the direction and need the horsepower.",
+          "cta": {
+            "_type": "cta",
+            "label": "View our work",
+            "href": "/work",
+            "variant": "dark"
+          }
+        },
+        {
+          "_type": "panel",
+          "_key": "eng-squad",
+          "railLabel": "Product Squad",
+          "heading": "Product Squad",
+          "body": "A cross-functional pod that takes a problem and runs. Best when you need momentum and a team that owns delivery.",
+          "cta": {
+            "_type": "cta",
+            "label": "View our work",
+            "href": "/work",
+            "variant": "dark"
+          }
+        },
+        {
+          "_type": "panel",
+          "_key": "eng-full",
+          "railLabel": "Full Ownership",
+          "heading": "Full Ownership",
+          "body": "Hand us the outcome, not the tasks. Best when a single point of accountability is worth more than a seat at every standup.",
+          "cta": {
+            "_type": "cta",
+            "label": "View our work",
+            "href": "/work",
+            "variant": "dark"
+          }
+        }
+      ]
+    },
+    {
+      "_type": "ctaSection",
+      "_key": "cta",
+      "surface": "ink",
+      "heading": "Let’s get started on your next big thing.",
+      "body": "We partner with businesses like yours to build experiences that matter. If you’re ready, we’re ready.",
+      "cta": {
+        "_type": "cta",
+        "label": "Get in touch",
+        "href": "/contact",
+        "variant": "light"
+      },
+      "decoration": "orbs"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:solutions",
+    "extractedAt": "2026-08-01T00:00:00Z",
+    "figmaNode": "1925:6138",
+    "provisional": true,
+    "provisionalNote": "Transcribed from the Solutions frame (1925:6138). The frame's centrepiece is a 1120x1172 orbital diagram placing the four disciplines around a circle; there is no block for it, so it is approximated as a two-column layoutSection. The consolidation of the 24 WordPress service pages into this layer is still undecided — see #47."
+  }
+}

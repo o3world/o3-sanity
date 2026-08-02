@@ -1,0 +1,426 @@
+{
+  "_id": "page-seed-about",
+  "_type": "page",
+  "title": "About",
+  "slug": {
+    "_type": "slug",
+    "current": "about"
+  },
+  "pageType": "standard",
+  "sections": [
+    {
+      "_type": "heroSection",
+      "_key": "hero",
+      "surface": "ink",
+      "variant": "band",
+      "eyebrow": "About O3",
+      "headlineLines": [
+        "The model is the story."
+      ],
+      "decoration": "orbs"
+    },
+    {
+      "_type": "layoutSection",
+      "_key": "why",
+      "surface": "bone",
+      "columns": 1,
+      "eyebrow": "Why O3",
+      "subheading": "Built to go end to end — on purpose.",
+      "items": [
+        {
+          "_type": "richText",
+          "_key": "why-body",
+          "body": [
+            {
+              "_type": "block",
+              "_key": "p0",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p0s",
+                  "text": "O3 was founded on a simple frustration: companies were forced to choose. Hire a strategy firm that hands you a deck and leaves, or an execution shop that builds exactly what's on the brief without ever asking if the brief is right. The gap between them is where good work goes to die — and where most of the cost hides.",
+                  "marks": []
+                }
+              ]
+            },
+            {
+              "_type": "block",
+              "_key": "p1",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p1s",
+                  "text": "We built O3 to close that gap. Strategy and execution under one roof, so the people who find the move are the people who build it. Twenty-one years later, that's still the whole idea — we've just gotten very good at it.",
+                  "marks": []
+                }
+              ]
+            },
+            {
+              "_type": "block",
+              "_key": "p2",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p2s",
+                  "text": "We're founder-led, and we've chosen quality over scale every year we've been in business: a deliberately senior team and a deliberately short client list, partners whose outcomes we're genuinely invested in. It's a slower way to grow. It's the only way to do work this deep.",
+                  "marks": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "layoutSection",
+      "_key": "disciplines",
+      "surface": "white",
+      "columns": 2,
+      "heading": "4 disciplines. One team.",
+      "items": [
+        {
+          "_type": "richText",
+          "_key": "d-strategy",
+          "body": [
+            {
+              "_type": "block",
+              "_key": "p0",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p0s",
+                  "text": "Strategy",
+                  "marks": []
+                }
+              ]
+            },
+            {
+              "_type": "block",
+              "_key": "p1",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p1s",
+                  "text": "Finds the real problem and the move worth making, before a line of code is written.",
+                  "marks": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "richText",
+          "_key": "d-design",
+          "body": [
+            {
+              "_type": "block",
+              "_key": "p0",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p0s",
+                  "text": "Design",
+                  "marks": []
+                }
+              ]
+            },
+            {
+              "_type": "block",
+              "_key": "p1",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p1s",
+                  "text": "Product-grade design that gives the move a form people actually want to use.",
+                  "marks": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "richText",
+          "_key": "d-engineering",
+          "body": [
+            {
+              "_type": "block",
+              "_key": "p0",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p0s",
+                  "text": "Engineering",
+                  "marks": []
+                }
+              ]
+            },
+            {
+              "_type": "block",
+              "_key": "p1",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p1s",
+                  "text": "Senior engineers who build it to last and to scale — the fix that ships, not a prototype to hand off.",
+                  "marks": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "richText",
+          "_key": "d-ai",
+          "body": [
+            {
+              "_type": "block",
+              "_key": "p0",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p0s",
+                  "text": "AI",
+                  "marks": []
+                }
+              ]
+            },
+            {
+              "_type": "block",
+              "_key": "p1",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p1s",
+                  "text": "Applied where it compounds the work, not where it decorates it — our O3XO practice, embedded where it earns its keep.",
+                  "marks": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "layoutSection",
+      "_key": "culture",
+      "surface": "white",
+      "columns": 2,
+      "eyebrow": "Culture",
+      "heading": "Buttoned up, with a little edge.",
+      "items": [
+        {
+          "_type": "richText",
+          "_key": "culture-body",
+          "body": [
+            {
+              "_type": "block",
+              "_key": "p0",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p0s",
+                  "text": "Rigorous where it counts, sharp where it matters. We take the work seriously and ourselves a little less so. The same people who define the strategy are the ones who build it — start to finish — which means everyone here owns outcomes, not tasks.",
+                  "marks": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "layoutSection",
+      "_key": "beyond",
+      "surface": "bone",
+      "columns": 3,
+      "heading": "The work doesn't stop at client services.",
+      "items": [
+        {
+          "_type": "richText",
+          "_key": "b-1682",
+          "body": [
+            {
+              "_type": "block",
+              "_key": "p0",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p0s",
+                  "text": "1682",
+                  "marks": []
+                }
+              ]
+            },
+            {
+              "_type": "block",
+              "_key": "p1",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p1s",
+                  "text": "Our conference on AI and innovation — the room where the people doing this work compare notes.",
+                  "marks": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "richText",
+          "_key": "b-ventures",
+          "body": [
+            {
+              "_type": "block",
+              "_key": "p0",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p0s",
+                  "text": "O3 Ventures",
+                  "marks": []
+                }
+              ]
+            },
+            {
+              "_type": "block",
+              "_key": "p1",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p1s",
+                  "text": "Our investment arm, backing early-stage AI and digital product companies whose values and ambitions match ours.",
+                  "marks": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "richText",
+          "_key": "b-community",
+          "body": [
+            {
+              "_type": "block",
+              "_key": "p0",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p0s",
+                  "text": "Community",
+                  "marks": []
+                }
+              ]
+            },
+            {
+              "_type": "block",
+              "_key": "p1",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p1s",
+                  "text": "Philadelphia is home. We show up for the design and engineering community that made us.",
+                  "marks": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "layoutSection",
+      "_key": "careers",
+      "surface": "white",
+      "columns": 1,
+      "eyebrow": "Careers",
+      "heading": "Work with us.",
+      "items": [
+        {
+          "_type": "richText",
+          "_key": "careers-body",
+          "body": [
+            {
+              "_type": "block",
+              "_key": "p0",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p0s",
+                  "text": "We hire senior and we hire slowly. Open roles are posted as they come up — and if none of them is you, tell us what is.",
+                  "marks": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "cta",
+          "_key": "careers-cta",
+          "label": "See open roles",
+          "href": "mailto:careers@o3world.com",
+          "variant": "dark"
+        }
+      ]
+    },
+    {
+      "_type": "ctaSection",
+      "_key": "cta",
+      "surface": "ink",
+      "heading": "Let’s get started on your next big thing.",
+      "body": "We partner with businesses like yours to build experiences that matter. If you’re ready, we’re ready.",
+      "cta": {
+        "_type": "cta",
+        "label": "Get in touch",
+        "href": "/contact",
+        "variant": "light"
+      },
+      "decoration": "orbs"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:about",
+    "extractedAt": "2026-08-01T00:00:00Z",
+    "figmaNode": "1924:5344",
+    "provisional": true,
+    "provisionalNote": "Transcribed from the About frame (1924:5344). Three of its bands have no matching section block yet and are approximated with layoutSection: the 4-disciplines icon grid, the Our Team person grid (8 person documents are migrated and unused here), and the Careers role rows. Clearing this needs those blocks — see #46."
+  }
+}
