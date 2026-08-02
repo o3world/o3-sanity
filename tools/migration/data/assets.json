@@ -1274,5 +1274,17 @@
   "file:tools/migration/data/seed/assets/perspective-weekend-maps.png": {
     "sha256": "789c29e1472ea6c3a88676bf7fef7b4a767968fe",
     "assetId": "image-789c29e1472ea6c3a88676bf7fef7b4a767968fe-1376x768-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/02/ongoing-innovation.png": {
+    "sha256": "044b8b05fa7b59909f91dbf86d34db14e8da2ef8",
+    "assetId": "image-044b8b05fa7b59909f91dbf86d34db14e8da2ef8-901x901-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/02/1682inaction.png": {
+    "sha256": "e6e7b3124de42191058a3210e2c3f1a2c6f371cf",
+    "assetId": "image-e6e7b3124de42191058a3210e2c3f1a2c6f371cf-901x901-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/02/connection-of-innovators.png": {
+    "sha256": "97ef9c2618e21256cc0accbf01683dd9ee096765",
+    "assetId": "image-97ef9c2618e21256cc0accbf01683dd9ee096765-901x901-png"
   }
 }
