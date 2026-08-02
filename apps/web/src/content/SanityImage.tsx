@@ -3,6 +3,7 @@
  * component renders Sanity images through it (see the boundary rule in the
  * root eslint config). */
 import Image from 'next/image'
+import { stegaClean } from '@sanity/client/stega'
 
 import { cn } from '@o3/ui/lib/utils'
 import {
@@ -109,6 +110,10 @@ export function SanityImage({
   // instead; `pnpm --filter @o3/migration verify` is what reports the bad data.
   if (!isRenderableImage(source)) return null
   const image = source as SanityImageSource
+  // `alt` is an attribute, not rendered text — stega's zero-width payload is
+  // announced verbatim by a screen reader there, so strip it (same reasoning
+  // as the `aria-label` in InFlightSection's rows).
+  const cleanAlt = stegaClean(alt) ?? ''
 
   // Original: intrinsic layout at the image's real shape. The dimensions come
   // from the asset id, so a portrait image lays out as a portrait — a guessed
@@ -118,7 +123,7 @@ export function SanityImage({
     return (
       <Image
         src={urlForImage(image).width(width).url()}
-        alt={alt ?? ''}
+        alt={cleanAlt}
         width={width}
         height={Math.round(width / aspectRatio)}
         sizes={sizes}
@@ -147,7 +152,7 @@ export function SanityImage({
     >
       <Image
         src={url.url()}
-        alt={alt ?? ''}
+        alt={cleanAlt}
         fill
         sizes={sizes ?? '100vw'}
         priority={priority}
