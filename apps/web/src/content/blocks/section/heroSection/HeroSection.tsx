@@ -75,11 +75,17 @@ export function HeroSection({
         /*
          * Only the sphere's cap is ever visible. Solving the frame's limb
          * (see OrbitalSphere) gives r ≈ 581 centred 339px below the band's
-         * foot — 80.7% of the frame width, apex 242px up from the foot. Both
-         * numbers are held in `vw` so the ratio survives any viewport, and
-         * the sphere is anchored to the foot so the copy can grow above it.
+         * foot — 80.7% of the frame width, apex 242px up from the foot. Held
+         * in `vw` so the ratio survives any viewport, and anchored to the
+         * foot so the copy can grow above it.
+         *
+         * The ratio does NOT carry to 402: the band is barely a third the
+         * width but only a quarter shorter, so 80.7vw leaves a 67px sliver of
+         * sphere under a 660px band. The proportion the eye reads is
+         * apex-height against band-height, so at 402 the sphere doubles and
+         * hangs lower to hold roughly the frame's quarter-of-the-band cap.
          */
-        <OrbitalSphere className="bottom-[-63.9vw] left-1/2 w-[80.7vw] -translate-x-1/2" />
+        <OrbitalSphere className="bottom-[-124vw] left-1/2 w-[165vw] -translate-x-1/2 lg:bottom-[-63.9vw] lg:w-[80.7vw]" />
       ) : null}
 
       {/* 164px of clearance for the floating pill, which sits at y 30. */}

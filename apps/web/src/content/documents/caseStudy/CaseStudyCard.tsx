@@ -52,7 +52,12 @@ export function CaseStudyCard(card: CaseStudyCardData) {
   return (
     <Link
       href={hrefForDoc({ _type, slug })}
-      className="rounded-card group relative isolate flex min-h-[420px] flex-col justify-between overflow-hidden p-8 pb-11 text-white lg:min-h-[556px] lg:p-[72px] lg:pb-[88px]"
+      // 362 square at 402 with 32px padding (`1925:5734`); 1248 × 556 with
+      // `72px 72px 88px` at 1440 (`1883:3555`). Both are FLOORS, not fixed
+      // heights: the frame's demo narrative is two lines and a real one runs
+      // to five, and a hard 362 clips the client logo off the top rather than
+      // letting the card grow.
+      className="rounded-card group relative isolate flex min-h-[362px] flex-col justify-between overflow-hidden p-8 text-white lg:min-h-[556px] lg:p-[72px] lg:pb-[88px]"
     >
       <div className="absolute inset-0 -z-20">
         <SanityImage
@@ -64,7 +69,19 @@ export function CaseStudyCard(card: CaseStudyCardData) {
           className="duration-(--duration-reveal) h-full w-full transition-transform ease-out group-hover:scale-[1.03]"
         />
       </div>
-      <div className="bg-(image:--gradient-card-scrim) absolute inset-0 -z-10" />
+      {/*
+       * Two different treatments, both read rather than derived. At 1440 the
+       * card is 1248 × 556 and the copy occupies a left column, so the frame
+       * holds it legible with the 90° `--gradient-card-scrim` (`1883:3555`).
+       * At 402 the card is a **362 square** and the copy spans it, so a
+       * horizontal scrim would leave the end of every line on open
+       * photograph — and the frame doesn't use one: `1925:5734` fills with a
+       * flat `rgba(3,3,3,0.6)` wash over the image.
+       *
+       * This is the responsive contract working as ADR 0006 describes it: the
+       * frames are endpoints, and here they differ in kind, not in degree.
+       */}
+      <div className="lg:bg-(image:--gradient-card-scrim) absolute inset-0 -z-10 bg-[rgba(3,3,3,0.6)]" />
 
       {client?.logo ? (
         <LogoKnockout source={client.logo} alt={client.name} width={185} height={40} />

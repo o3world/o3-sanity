@@ -76,11 +76,18 @@ export function LogoWallSection({
             key={client._id}
             className={`flex h-[132px] items-center justify-center px-8 ${isMarquee ? 'w-[310px] shrink-0' : ''}`}
           >
+            {/*
+             * Desaturated. Every logo on the frame's row is mono — IRONMAN
+             * and Vertex black, caron grey — while the assets themselves are
+             * the clients' full-colour marks. Filtering keeps the row reading
+             * as one band instead of six brand palettes, without needing a
+             * second mono upload per client.
+             */}
             <SanityImage
               source={client.logo}
               alt={client.name ?? ''}
               width={492}
-              className="max-h-[68px] w-auto max-w-full object-contain"
+              className="max-h-[68px] w-auto max-w-full object-contain contrast-125 grayscale"
             />
           </li>
         ))}
