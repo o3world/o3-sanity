@@ -22,6 +22,14 @@ export interface PortraitTileProps extends HTMLAttributes<HTMLDivElement> {
  * the tile and covers it; the arc shows only where the portrait is absent
  * (two of the 14 have no headshot at all). Swapping the headshots for cut-out
  * PNGs is what completes the composition — not a change here.
+ *
+ * Those cut-outs have to be **produced**, not exported (#46). The frame holds
+ * exactly one portrait raster — Mike Gadsby's, `652581511bdf…`, duplicated
+ * across all six cards with his name and role repeated under each — and it is
+ * RGB with no alpha channel, so even that one is a flattened comp rather than
+ * a cut-out this component could layer. It is committed unwired at
+ * `tools/migration/data/seed/assets/about-portrait-gadsby.png` as the
+ * reference for what the finished treatment looks like.
  */
 export function PortraitTile({ className, children, ...rest }: PortraitTileProps) {
   return (

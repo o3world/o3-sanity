@@ -176,6 +176,15 @@
               ]
             }
           ]
+        },
+        {
+          "_type": "figure",
+          "_key": "culture-photo",
+          "image": {
+            "_type": "image",
+            "_localSrc": "tools/migration/data/seed/assets/about-culture-team.png"
+          },
+          "alt": "The O3 team in black and white, gathered for a group portrait on the benches of a stone-walled hall at the 1682 conference."
         }
       ]
     },
@@ -190,6 +199,15 @@
           "_type": "richText",
           "_key": "b-1682",
           "body": [
+            {
+              "_type": "figure",
+              "_key": "b-1682-image",
+              "image": {
+                "_type": "image",
+                "_localSrc": "tools/migration/data/seed/assets/about-beyond-1682.png"
+              },
+              "alt": "The 1682 conference wordmark on black: four digits built from Bauhaus quarter-circles and squares in red, blue, amber and white, with the O3 mark set into a red tile at the end."
+            },
             {
               "_type": "block",
               "_key": "p0",
@@ -225,6 +243,15 @@
           "_key": "b-ventures",
           "body": [
             {
+              "_type": "figure",
+              "_key": "b-ventures-image",
+              "image": {
+                "_type": "image",
+                "_localSrc": "tools/migration/data/seed/assets/about-beyond-o3xo.png"
+              },
+              "alt": "The O3XO mark on black: O3 set in white above XO in amber, the X drawn as a four-pointed star."
+            },
+            {
               "_type": "block",
               "_key": "p0",
               "style": "normal",
@@ -258,6 +285,15 @@
           "_type": "richText",
           "_key": "b-community",
           "body": [
+            {
+              "_type": "figure",
+              "_key": "b-community-image",
+              "image": {
+                "_type": "image",
+                "_localSrc": "tools/migration/data/seed/assets/about-beyond-community.png"
+              },
+              "alt": "The O3 team in black and white, twenty people in branded tees gathered on a bench in a stone-walled hall."
+            },
             {
               "_type": "block",
               "_key": "p0",
