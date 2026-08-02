@@ -363,14 +363,22 @@ describe('the seeded Contact page', () => {
     /**
      * **The stub, asserted.** #58 built the fields only; the mechanism and
      * the destination are still open. The one thing this page must never do
-     * is look like it sends, so the button is disabled and the reason sits on
-     * the page, wired to the button as its description.
+     * is look like it sends, so the button is `aria-disabled` (not native
+     * `disabled` — it stays in the tab order so its description is announced)
+     * and the reason sits on the page, wired to the button as its description.
+     * The no-op itself is client-side (`onSubmit` preventDefault), which
+     * server HTML can't show; what it can show is that no success state
+     * exists to be reached.
      *
      * When #58's other halves land, this is the test that should fail.
      */
     it('disables submit and says why, rather than pretending to send', () => {
       expect(html).toContain('This form isn’t connected yet')
-      expect(html).toMatch(/<button[^>]*\sdisabled/)
+      // `disabled=""` / `aria-disabled="true"` — the rendered attribute forms;
+      // a bare `\sdisabled` would also match the class string's `disabled:`
+      // Tailwind variants.
+      expect(html).toMatch(/<button[^>]*\saria-disabled="true"/)
+      expect(html).not.toMatch(/<button[^>]*\sdisabled=""/)
       expect(html).toMatch(/<button[^>]*aria-describedby="form-not-connected"/)
       expect(html).toContain('id="form-not-connected"')
     })

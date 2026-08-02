@@ -498,8 +498,10 @@ export const formSection = defineSectionBlock({
       name: 'submitLabel',
       type: 'string',
       description: 'The submit button’s words. Disabled until #58 has a handler behind it.',
+      // Optional, not required(): the renderer absorbs absence with the same
+      // 'Send message' fallback, so a missing value costs nothing (skill rule:
+      // fields the renderer can absorb stay optional).
       initialValue: 'Send message',
-      validation: (rule) => rule.required(),
     }),
   ],
   preview: { select: { title: 'heading', subtitle: 'eyebrow' } },

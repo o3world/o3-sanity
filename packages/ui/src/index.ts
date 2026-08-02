@@ -67,13 +67,13 @@ export type { MaskedLinesProps } from './components/masked-lines'
 export { Eyebrow, eyebrowVariants } from './components/eyebrow'
 export type { EyebrowProps } from './components/eyebrow'
 
-// HalftoneDisc — the dotted disc beside a discipline (1925:5922) or a role (1925:6068)
-export { HalftoneDisc } from './components/halftone-disc'
-export type { HalftoneDiscProps } from './components/halftone-disc'
-
 // FormField — the labelled-control primitive the inquiry form is built from (#58)
 export { FormField, FIELD_CONTROL_CLASS } from './components/form-field'
 export type { FormFieldControl, FormFieldProps } from './components/form-field'
+
+// HalftoneDisc — the dotted disc beside a discipline (1925:5922) or a role (1925:6068)
+export { HalftoneDisc } from './components/halftone-disc'
+export type { HalftoneDiscProps } from './components/halftone-disc'
 
 // LogoTile
 export { LogoTile } from './components/logo-tile'

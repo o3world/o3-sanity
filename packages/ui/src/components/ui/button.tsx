@@ -26,7 +26,7 @@ import { ArrowIcon } from '../arrow-icon'
 const buttonVariants = cva(
   // `1868:3262`: inline-flex, 8px gap to the arrow, radius 0 (rounded-btn
   // resolves to 0), label 18/24 Figtree Medium (`--text-button`).
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-btn text-button transition-colors duration-(--duration-hover) ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-btn text-button transition-colors duration-(--duration-hover) ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0',
   {
     variants: {
       variant: {

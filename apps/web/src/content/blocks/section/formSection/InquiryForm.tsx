@@ -79,9 +79,10 @@ export interface InquiryFormProps {
  * destination (inbox, CRM, storage) are both still open, and neither is
  * something a renderer gets to decide on the way past. So:
  *
- * - the submit button is `disabled`, and a visible notice above it says why;
- * - `onSubmit` calls `preventDefault()` anyway, because Enter in a text input
- *   submits a form whose button is disabled;
+ * - `onSubmit` calls `preventDefault()` unconditionally — that is the no-op,
+ *   and it covers Enter in a text input as well as the button;
+ * - the button is `aria-disabled` (focusable, so its notice is announced) and
+ *   a visible notice above it says why;
  * - there is no success state, no optimistic message, and nothing that could
  *   be mistaken for "sent".
  *
@@ -229,9 +230,12 @@ export function InquiryForm({ reasons, consentLabel, submitLabel, surface }: Inq
       ) : null}
 
       {/*
-        The honest half of #58. Visible to everyone, wired to the button as
-        its description so it is the first thing announced when focus lands
-        on a control nobody can press. Delete both when the handler lands.
+        The honest half of #58. Visible to everyone, and wired to the button as
+        its description — `aria-disabled` rather than `disabled` so the button
+        stays in the tab order and the description is actually announced when
+        focus lands on it (a natively-disabled control is skipped, so its
+        describedby is rarely read). The no-op is `onSubmit`'s unconditional
+        `preventDefault`, not the attribute. Delete both when the handler lands.
       */}
       <div className="border-current/25 flex flex-col gap-4 border-t pt-6">
         <p id="form-not-connected" className="text-legal text-current/70">
@@ -243,7 +247,7 @@ export function InquiryForm({ reasons, consentLabel, submitLabel, surface }: Inq
             type="submit"
             size="large"
             variant={surface === 'ink' ? 'light' : 'dark'}
-            disabled
+            aria-disabled
             aria-describedby="form-not-connected"
           >
             {submitLabel}
