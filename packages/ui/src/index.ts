@@ -10,6 +10,10 @@ export type { ArrowIconProps } from './components/arrow-icon'
 export { ArrowLink, arrowLinkVariants } from './components/arrow-link'
 export type { ArrowLinkProps } from './components/arrow-link'
 
+// ArticleByline — the perspective hero's author line (1710:2946)
+export { ArticleByline } from './components/article-byline'
+export type { ArticleBylineProps } from './components/article-byline'
+
 // BrandLogo — Figma's `Brand / Logo` set (264:50)
 export { BrandLogo, brandLogoVariants } from './components/brand-logo'
 export type { BrandLogoProps } from './components/brand-logo'
@@ -62,6 +66,10 @@ export type { LogoTileProps } from './components/logo-tile'
 // OrbitalSphere — the wireframe globe behind the hero and the CTA band
 export { OrbitalSphere } from './components/orbital-sphere'
 export type { OrbitalSphereProps } from './components/orbital-sphere'
+
+// ReadingProgress — the article scroll bar (precursor 1379:2367)
+export { ReadingProgress } from './components/reading-progress'
+export type { ReadingProgressProps } from './components/reading-progress'
 
 // Reveal
 export { Reveal } from './components/reveal'

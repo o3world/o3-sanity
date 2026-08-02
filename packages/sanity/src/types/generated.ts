@@ -854,7 +854,7 @@ export type SITE_SETTINGS_QUERY_RESULT = {
 
 // Source: src/queries.ts
 // Variable: PERSPECTIVE_QUERY
-// Query: *[_type == "perspective" && slug.current == $slug][0]{    _id,  _type,  title,  "slug": slug.current,  excerpt,  publishedAt,  featuredImage,  "author": author->{name, title},  "categories": categories[]->{title, "slug": slug.current},    "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)]),  body,  seo}
+// Query: *[_type == "perspective" && slug.current == $slug][0]{    _id,  _type,  title,  "slug": slug.current,  excerpt,  publishedAt,  featuredImage,    "author": author->{name, title, headshot},  "categories": categories[]->{title, "slug": slug.current},    "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)]),  body,  seo,  "related": *[_type == "perspective" && _id != ^._id && count((categories[]._ref)[@ in ^.^.categories[]._ref]) > 0] | order(publishedAt desc)[0...8]{  _id,  _type,  title,  "slug": slug.current,  excerpt,  publishedAt,  featuredImage,    "author": author->{name, title, headshot},  "categories": categories[]->{title, "slug": slug.current},    "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])},  "latest": *[_type == "perspective" && _id != ^._id] | order(publishedAt desc)[0...8]{  _id,  _type,  title,  "slug": slug.current,  excerpt,  publishedAt,  featuredImage,    "author": author->{name, title, headshot},  "categories": categories[]->{title, "slug": slug.current},    "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])}}
 export type PERSPECTIVE_QUERY_RESULT = {
   _id: string
   _type: 'perspective'
@@ -866,6 +866,13 @@ export type PERSPECTIVE_QUERY_RESULT = {
   author: {
     name: string | null
     title: string | null
+    headshot: {
+      asset?: SanityImageAssetReference
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    } | null
   } | null
   categories: Array<{
     title: string | null
@@ -874,6 +881,56 @@ export type PERSPECTIVE_QUERY_RESULT = {
   readingMinutes: number | 1
   body: BodyText | null
   seo: Seo | null
+  related: Array<{
+    _id: string
+    _type: 'perspective'
+    title: string | null
+    slug: string | null
+    excerpt: string | null
+    publishedAt: string | null
+    featuredImage: Figure | null
+    author: {
+      name: string | null
+      title: string | null
+      headshot: {
+        asset?: SanityImageAssetReference
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+      } | null
+    } | null
+    categories: Array<{
+      title: string | null
+      slug: string | null
+    }> | null
+    readingMinutes: number | 1
+  }>
+  latest: Array<{
+    _id: string
+    _type: 'perspective'
+    title: string | null
+    slug: string | null
+    excerpt: string | null
+    publishedAt: string | null
+    featuredImage: Figure | null
+    author: {
+      name: string | null
+      title: string | null
+      headshot: {
+        asset?: SanityImageAssetReference
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+      } | null
+    } | null
+    categories: Array<{
+      title: string | null
+      slug: string | null
+    }> | null
+    readingMinutes: number | 1
+  }>
 } | null
 
 // Source: src/queries.ts
@@ -883,7 +940,7 @@ export type PERSPECTIVE_SLUGS_QUERY_RESULT = Array<string | null>
 
 // Source: src/queries.ts
 // Variable: PERSPECTIVES_PAGE_QUERY
-// Query: {  "items": *[_type == "perspective"] | order(publishedAt desc) [$offset...$end]{  _id,  _type,  title,  "slug": slug.current,  excerpt,  publishedAt,  featuredImage,  "author": author->{name, title},  "categories": categories[]->{title, "slug": slug.current},    "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])},  "total": count(*[_type == "perspective"])}
+// Query: {  "items": *[_type == "perspective"] | order(publishedAt desc) [$offset...$end]{  _id,  _type,  title,  "slug": slug.current,  excerpt,  publishedAt,  featuredImage,    "author": author->{name, title, headshot},  "categories": categories[]->{title, "slug": slug.current},    "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])},  "total": count(*[_type == "perspective"])}
 export type PERSPECTIVES_PAGE_QUERY_RESULT = {
   items: Array<{
     _id: string
@@ -896,6 +953,13 @@ export type PERSPECTIVES_PAGE_QUERY_RESULT = {
     author: {
       name: string | null
       title: string | null
+      headshot: {
+        asset?: SanityImageAssetReference
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+      } | null
     } | null
     categories: Array<{
       title: string | null
@@ -942,7 +1006,7 @@ export type CASE_STUDIES_PAGE_QUERY_RESULT = {
 
 // Source: src/queries.ts
 // Variable: LATEST_PERSPECTIVES_QUERY
-// Query: *[_type == "perspective" && ($categoryId == null || $categoryId in categories[]._ref)] | order(publishedAt desc) [0...$limit]{  _id,  _type,  title,  "slug": slug.current,  excerpt,  publishedAt,  featuredImage,  "author": author->{name, title},  "categories": categories[]->{title, "slug": slug.current},    "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])}
+// Query: *[_type == "perspective" && ($categoryId == null || $categoryId in categories[]._ref)] | order(publishedAt desc) [0...$limit]{  _id,  _type,  title,  "slug": slug.current,  excerpt,  publishedAt,  featuredImage,    "author": author->{name, title, headshot},  "categories": categories[]->{title, "slug": slug.current},    "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])}
 export type LATEST_PERSPECTIVES_QUERY_RESULT = Array<{
   _id: string
   _type: 'perspective'
@@ -954,6 +1018,13 @@ export type LATEST_PERSPECTIVES_QUERY_RESULT = Array<{
   author: {
     name: string | null
     title: string | null
+    headshot: {
+      asset?: SanityImageAssetReference
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    } | null
   } | null
   categories: Array<{
     title: string | null
@@ -964,7 +1035,7 @@ export type LATEST_PERSPECTIVES_QUERY_RESULT = Array<{
 
 // Source: src/queries.ts
 // Variable: CASE_STUDY_QUERY
-// Query: *[_type == "caseStudy" && slug.current == $slug][0]{    _id,  _type,  title,  "slug": slug.current,  narrativeHeadline,  "headlineStat": stats[0],  heroMedia,  "client": client->{name, logo},  "industries": industries[]->{title},  industryDetail,  stats,  chapters,  deliverables,  "extraSections": extraSections[]{  ...,  _type == "heroSection" => {    cta{..., "target": target->{_type, title, "slug": slug.current}}  },  _type == "logoWallSection" => {    "clients": clients[]->{_id, name, logo},    cta{..., "target": target->{_type, title, "slug": slug.current}}  },  _type == "caseShowcaseSection" => {    "caseStudies": caseStudies[]->{  _id,  _type,  title,  "slug": slug.current,  narrativeHeadline,  "headlineStat": stats[0],  heroMedia,  "client": client->{name, logo},  "industries": industries[]->{title},  industryDetail},    cta{..., "target": target->{_type, title, "slug": slug.current}}  },  _type == "railPanelsSection" => {    panels[]{..., cta{..., "target": target->{_type, title, "slug": slug.current}}}  },  _type == "perspectivesCarouselSection" => {    "curated": perspectives[]->{  _id,  _type,  title,  "slug": slug.current,  excerpt,  publishedAt,  featuredImage,  "author": author->{name, title},  "categories": categories[]->{title, "slug": slug.current},    "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])},    "latest": *[_type == "perspective" && (!defined(^.category) || ^.category._ref in categories[]._ref)] | order(publishedAt desc)[0...8]{  _id,  _type,  title,  "slug": slug.current,  excerpt,  publishedAt,  featuredImage,  "author": author->{name, title},  "categories": categories[]->{title, "slug": slug.current},    "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])}  },  _type == "ctaSection" => {    cta{..., "target": target->{_type, title, "slug": slug.current}}  },  _type == "layoutSection" => {    items[]{..., _type == "cta" => {"target": target->{_type, title, "slug": slug.current}}}  },  _type == "listingSection" => {    "pages": *[_type == "page" && pageType == ^.pageType && slug.current != "index"] | order(title asc){_id, _type, title, "slug": slug.current, card}  }},  seo,  "next": *[_type == "caseStudy" && _id != ^._id] | order(_createdAt desc) [0]{title, "slug": slug.current, heroMedia}}
+// Query: *[_type == "caseStudy" && slug.current == $slug][0]{    _id,  _type,  title,  "slug": slug.current,  narrativeHeadline,  "headlineStat": stats[0],  heroMedia,  "client": client->{name, logo},  "industries": industries[]->{title},  industryDetail,  stats,  chapters,  deliverables,  "extraSections": extraSections[]{  ...,  _type == "heroSection" => {    cta{..., "target": target->{_type, title, "slug": slug.current}}  },  _type == "logoWallSection" => {    "clients": clients[]->{_id, name, logo},    cta{..., "target": target->{_type, title, "slug": slug.current}}  },  _type == "caseShowcaseSection" => {    "caseStudies": caseStudies[]->{  _id,  _type,  title,  "slug": slug.current,  narrativeHeadline,  "headlineStat": stats[0],  heroMedia,  "client": client->{name, logo},  "industries": industries[]->{title},  industryDetail},    cta{..., "target": target->{_type, title, "slug": slug.current}}  },  _type == "railPanelsSection" => {    panels[]{..., cta{..., "target": target->{_type, title, "slug": slug.current}}}  },  _type == "perspectivesCarouselSection" => {    "curated": perspectives[]->{  _id,  _type,  title,  "slug": slug.current,  excerpt,  publishedAt,  featuredImage,    "author": author->{name, title, headshot},  "categories": categories[]->{title, "slug": slug.current},    "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])},    "latest": *[_type == "perspective" && (!defined(^.category) || ^.category._ref in categories[]._ref)] | order(publishedAt desc)[0...8]{  _id,  _type,  title,  "slug": slug.current,  excerpt,  publishedAt,  featuredImage,    "author": author->{name, title, headshot},  "categories": categories[]->{title, "slug": slug.current},    "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])}  },  _type == "ctaSection" => {    cta{..., "target": target->{_type, title, "slug": slug.current}}  },  _type == "layoutSection" => {    items[]{..., _type == "cta" => {"target": target->{_type, title, "slug": slug.current}}}  },  _type == "listingSection" => {    "pages": *[_type == "page" && pageType == ^.pageType && slug.current != "index"] | order(title asc){_id, _type, title, "slug": slug.current, card}  }},  seo,  "next": *[_type == "caseStudy" && _id != ^._id] | order(_createdAt desc) [0]{title, "slug": slug.current, heroMedia}}
 export type CASE_STUDY_QUERY_RESULT = {
   _id: string
   _type: 'caseStudy'
@@ -1286,6 +1357,13 @@ export type CASE_STUDY_QUERY_RESULT = {
           author: {
             name: string | null
             title: string | null
+            headshot: {
+              asset?: SanityImageAssetReference
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              _type: 'image'
+            } | null
           } | null
           categories: Array<{
             title: string | null
@@ -1304,6 +1382,13 @@ export type CASE_STUDY_QUERY_RESULT = {
           author: {
             name: string | null
             title: string | null
+            headshot: {
+              asset?: SanityImageAssetReference
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              _type: 'image'
+            } | null
           } | null
           categories: Array<{
             title: string | null
@@ -1439,7 +1524,7 @@ export type CASE_STUDIES_BY_REF_QUERY_RESULT = Array<{
 
 // Source: src/queries.ts
 // Variable: PAGE_QUERY
-// Query: *[_type == "page" && slug.current == $slug][0]{  _id,  _type,  title,  "slug": slug.current,  pageType,  "sections": sections[]{  ...,  _type == "heroSection" => {    cta{..., "target": target->{_type, title, "slug": slug.current}}  },  _type == "logoWallSection" => {    "clients": clients[]->{_id, name, logo},    cta{..., "target": target->{_type, title, "slug": slug.current}}  },  _type == "caseShowcaseSection" => {    "caseStudies": caseStudies[]->{  _id,  _type,  title,  "slug": slug.current,  narrativeHeadline,  "headlineStat": stats[0],  heroMedia,  "client": client->{name, logo},  "industries": industries[]->{title},  industryDetail},    cta{..., "target": target->{_type, title, "slug": slug.current}}  },  _type == "railPanelsSection" => {    panels[]{..., cta{..., "target": target->{_type, title, "slug": slug.current}}}  },  _type == "perspectivesCarouselSection" => {    "curated": perspectives[]->{  _id,  _type,  title,  "slug": slug.current,  excerpt,  publishedAt,  featuredImage,  "author": author->{name, title},  "categories": categories[]->{title, "slug": slug.current},    "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])},    "latest": *[_type == "perspective" && (!defined(^.category) || ^.category._ref in categories[]._ref)] | order(publishedAt desc)[0...8]{  _id,  _type,  title,  "slug": slug.current,  excerpt,  publishedAt,  featuredImage,  "author": author->{name, title},  "categories": categories[]->{title, "slug": slug.current},    "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])}  },  _type == "ctaSection" => {    cta{..., "target": target->{_type, title, "slug": slug.current}}  },  _type == "layoutSection" => {    items[]{..., _type == "cta" => {"target": target->{_type, title, "slug": slug.current}}}  },  _type == "listingSection" => {    "pages": *[_type == "page" && pageType == ^.pageType && slug.current != "index"] | order(title asc){_id, _type, title, "slug": slug.current, card}  }},  seo}
+// Query: *[_type == "page" && slug.current == $slug][0]{  _id,  _type,  title,  "slug": slug.current,  pageType,  "sections": sections[]{  ...,  _type == "heroSection" => {    cta{..., "target": target->{_type, title, "slug": slug.current}}  },  _type == "logoWallSection" => {    "clients": clients[]->{_id, name, logo},    cta{..., "target": target->{_type, title, "slug": slug.current}}  },  _type == "caseShowcaseSection" => {    "caseStudies": caseStudies[]->{  _id,  _type,  title,  "slug": slug.current,  narrativeHeadline,  "headlineStat": stats[0],  heroMedia,  "client": client->{name, logo},  "industries": industries[]->{title},  industryDetail},    cta{..., "target": target->{_type, title, "slug": slug.current}}  },  _type == "railPanelsSection" => {    panels[]{..., cta{..., "target": target->{_type, title, "slug": slug.current}}}  },  _type == "perspectivesCarouselSection" => {    "curated": perspectives[]->{  _id,  _type,  title,  "slug": slug.current,  excerpt,  publishedAt,  featuredImage,    "author": author->{name, title, headshot},  "categories": categories[]->{title, "slug": slug.current},    "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])},    "latest": *[_type == "perspective" && (!defined(^.category) || ^.category._ref in categories[]._ref)] | order(publishedAt desc)[0...8]{  _id,  _type,  title,  "slug": slug.current,  excerpt,  publishedAt,  featuredImage,    "author": author->{name, title, headshot},  "categories": categories[]->{title, "slug": slug.current},    "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])}  },  _type == "ctaSection" => {    cta{..., "target": target->{_type, title, "slug": slug.current}}  },  _type == "layoutSection" => {    items[]{..., _type == "cta" => {"target": target->{_type, title, "slug": slug.current}}}  },  _type == "listingSection" => {    "pages": *[_type == "page" && pageType == ^.pageType && slug.current != "index"] | order(title asc){_id, _type, title, "slug": slug.current, card}  }},  seo}
 export type PAGE_QUERY_RESULT = {
   _id: string
   _type: 'page'
@@ -1730,6 +1815,13 @@ export type PAGE_QUERY_RESULT = {
           author: {
             name: string | null
             title: string | null
+            headshot: {
+              asset?: SanityImageAssetReference
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              _type: 'image'
+            } | null
           } | null
           categories: Array<{
             title: string | null
@@ -1748,6 +1840,13 @@ export type PAGE_QUERY_RESULT = {
           author: {
             name: string | null
             title: string | null
+            headshot: {
+              asset?: SanityImageAssetReference
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              _type: 'image'
+            } | null
           } | null
           categories: Array<{
             title: string | null
@@ -1857,16 +1956,16 @@ import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
     '*[_type == "siteSettings"][0]{\n  title,\n  perspectivesLabel,\n  navItems[]{..., "target": target->{_type, title, "slug": slug.current}},\n  primaryCta{..., "target": target->{_type, title, "slug": slug.current}},\n  footerTagline,\n  footerGroups[]{..., links[]{..., "target": target->{_type, title, "slug": slug.current}}},\n  socialsLabel,\n  socialLinks,\n  legalLinks[]{..., "target": target->{_type, title, "slug": slug.current}},\n  legalName,\n  copyrightNote,\n  defaultSeo\n}': SITE_SETTINGS_QUERY_RESULT
-    '*[_type == "perspective" && slug.current == $slug][0]{\n  \n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  "author": author->{name, title},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n,\n  body,\n  seo\n}': PERSPECTIVE_QUERY_RESULT
+    '*[_type == "perspective" && slug.current == $slug][0]{\n  \n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  \n  "author": author->{name, title, headshot},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n,\n  body,\n  seo,\n  "related": *[_type == "perspective" && _id != ^._id && count((categories[]._ref)[@ in ^.^.categories[]._ref]) > 0] | order(publishedAt desc)[0...8]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  \n  "author": author->{name, title, headshot},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n},\n  "latest": *[_type == "perspective" && _id != ^._id] | order(publishedAt desc)[0...8]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  \n  "author": author->{name, title, headshot},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n}\n}': PERSPECTIVE_QUERY_RESULT
     '*[_type == "perspective" && defined(slug.current)].slug.current': PERSPECTIVE_SLUGS_QUERY_RESULT
-    '{\n  "items": *[_type == "perspective"] | order(publishedAt desc) [$offset...$end]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  "author": author->{name, title},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n},\n  "total": count(*[_type == "perspective"])\n}': PERSPECTIVES_PAGE_QUERY_RESULT
+    '{\n  "items": *[_type == "perspective"] | order(publishedAt desc) [$offset...$end]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  \n  "author": author->{name, title, headshot},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n},\n  "total": count(*[_type == "perspective"])\n}': PERSPECTIVES_PAGE_QUERY_RESULT
     '{\n  "items": *[_type == "caseStudy"] | order(coalesce(publishedAt, _createdAt) desc) [$offset...$end]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  narrativeHeadline,\n  "headlineStat": stats[0],\n  heroMedia,\n  "client": client->{name, logo},\n  "industries": industries[]->{title},\n  industryDetail\n},\n  "total": count(*[_type == "caseStudy"])\n}': CASE_STUDIES_PAGE_QUERY_RESULT
-    '*[_type == "perspective" && ($categoryId == null || $categoryId in categories[]._ref)] | order(publishedAt desc) [0...$limit]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  "author": author->{name, title},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n}': LATEST_PERSPECTIVES_QUERY_RESULT
-    '*[_type == "caseStudy" && slug.current == $slug][0]{\n  \n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  narrativeHeadline,\n  "headlineStat": stats[0],\n  heroMedia,\n  "client": client->{name, logo},\n  "industries": industries[]->{title},\n  industryDetail\n,\n  stats,\n  chapters,\n  deliverables,\n  "extraSections": extraSections[]{\n  ...,\n  _type == "heroSection" => {\n    cta{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "logoWallSection" => {\n    "clients": clients[]->{_id, name, logo},\n    cta{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "caseShowcaseSection" => {\n    "caseStudies": caseStudies[]->{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  narrativeHeadline,\n  "headlineStat": stats[0],\n  heroMedia,\n  "client": client->{name, logo},\n  "industries": industries[]->{title},\n  industryDetail\n},\n    cta{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "railPanelsSection" => {\n    panels[]{..., cta{..., "target": target->{_type, title, "slug": slug.current}}}\n  },\n  _type == "perspectivesCarouselSection" => {\n    "curated": perspectives[]->{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  "author": author->{name, title},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n},\n    "latest": *[_type == "perspective" && (!defined(^.category) || ^.category._ref in categories[]._ref)] | order(publishedAt desc)[0...8]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  "author": author->{name, title},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n}\n  },\n  _type == "ctaSection" => {\n    cta{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "layoutSection" => {\n    items[]{..., _type == "cta" => {"target": target->{_type, title, "slug": slug.current}}}\n  },\n  _type == "listingSection" => {\n    "pages": *[_type == "page" && pageType == ^.pageType && slug.current != "index"] | order(title asc){_id, _type, title, "slug": slug.current, card}\n  }\n},\n  seo,\n  "next": *[_type == "caseStudy" && _id != ^._id] | order(_createdAt desc) [0]{title, "slug": slug.current, heroMedia}\n}': CASE_STUDY_QUERY_RESULT
+    '*[_type == "perspective" && ($categoryId == null || $categoryId in categories[]._ref)] | order(publishedAt desc) [0...$limit]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  \n  "author": author->{name, title, headshot},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n}': LATEST_PERSPECTIVES_QUERY_RESULT
+    '*[_type == "caseStudy" && slug.current == $slug][0]{\n  \n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  narrativeHeadline,\n  "headlineStat": stats[0],\n  heroMedia,\n  "client": client->{name, logo},\n  "industries": industries[]->{title},\n  industryDetail\n,\n  stats,\n  chapters,\n  deliverables,\n  "extraSections": extraSections[]{\n  ...,\n  _type == "heroSection" => {\n    cta{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "logoWallSection" => {\n    "clients": clients[]->{_id, name, logo},\n    cta{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "caseShowcaseSection" => {\n    "caseStudies": caseStudies[]->{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  narrativeHeadline,\n  "headlineStat": stats[0],\n  heroMedia,\n  "client": client->{name, logo},\n  "industries": industries[]->{title},\n  industryDetail\n},\n    cta{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "railPanelsSection" => {\n    panels[]{..., cta{..., "target": target->{_type, title, "slug": slug.current}}}\n  },\n  _type == "perspectivesCarouselSection" => {\n    "curated": perspectives[]->{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  \n  "author": author->{name, title, headshot},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n},\n    "latest": *[_type == "perspective" && (!defined(^.category) || ^.category._ref in categories[]._ref)] | order(publishedAt desc)[0...8]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  \n  "author": author->{name, title, headshot},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n}\n  },\n  _type == "ctaSection" => {\n    cta{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "layoutSection" => {\n    items[]{..., _type == "cta" => {"target": target->{_type, title, "slug": slug.current}}}\n  },\n  _type == "listingSection" => {\n    "pages": *[_type == "page" && pageType == ^.pageType && slug.current != "index"] | order(title asc){_id, _type, title, "slug": slug.current, card}\n  }\n},\n  seo,\n  "next": *[_type == "caseStudy" && _id != ^._id] | order(_createdAt desc) [0]{title, "slug": slug.current, heroMedia}\n}': CASE_STUDY_QUERY_RESULT
     '*[_type == "caseStudy" && defined(slug.current)].slug.current': CASE_STUDY_SLUGS_QUERY_RESULT
     '*[_type == "caseStudy"] | order(_createdAt desc){\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  narrativeHeadline,\n  "headlineStat": stats[0],\n  heroMedia,\n  "client": client->{name, logo},\n  "industries": industries[]->{title},\n  industryDetail\n}': CASE_STUDIES_QUERY_RESULT
     '*[_type == "caseStudy" && _id in $ids]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  narrativeHeadline,\n  "headlineStat": stats[0],\n  heroMedia,\n  "client": client->{name, logo},\n  "industries": industries[]->{title},\n  industryDetail\n}': CASE_STUDIES_BY_REF_QUERY_RESULT
-    '*[_type == "page" && slug.current == $slug][0]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  pageType,\n  "sections": sections[]{\n  ...,\n  _type == "heroSection" => {\n    cta{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "logoWallSection" => {\n    "clients": clients[]->{_id, name, logo},\n    cta{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "caseShowcaseSection" => {\n    "caseStudies": caseStudies[]->{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  narrativeHeadline,\n  "headlineStat": stats[0],\n  heroMedia,\n  "client": client->{name, logo},\n  "industries": industries[]->{title},\n  industryDetail\n},\n    cta{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "railPanelsSection" => {\n    panels[]{..., cta{..., "target": target->{_type, title, "slug": slug.current}}}\n  },\n  _type == "perspectivesCarouselSection" => {\n    "curated": perspectives[]->{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  "author": author->{name, title},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n},\n    "latest": *[_type == "perspective" && (!defined(^.category) || ^.category._ref in categories[]._ref)] | order(publishedAt desc)[0...8]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  "author": author->{name, title},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n}\n  },\n  _type == "ctaSection" => {\n    cta{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "layoutSection" => {\n    items[]{..., _type == "cta" => {"target": target->{_type, title, "slug": slug.current}}}\n  },\n  _type == "listingSection" => {\n    "pages": *[_type == "page" && pageType == ^.pageType && slug.current != "index"] | order(title asc){_id, _type, title, "slug": slug.current, card}\n  }\n},\n  seo\n}': PAGE_QUERY_RESULT
+    '*[_type == "page" && slug.current == $slug][0]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  pageType,\n  "sections": sections[]{\n  ...,\n  _type == "heroSection" => {\n    cta{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "logoWallSection" => {\n    "clients": clients[]->{_id, name, logo},\n    cta{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "caseShowcaseSection" => {\n    "caseStudies": caseStudies[]->{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  narrativeHeadline,\n  "headlineStat": stats[0],\n  heroMedia,\n  "client": client->{name, logo},\n  "industries": industries[]->{title},\n  industryDetail\n},\n    cta{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "railPanelsSection" => {\n    panels[]{..., cta{..., "target": target->{_type, title, "slug": slug.current}}}\n  },\n  _type == "perspectivesCarouselSection" => {\n    "curated": perspectives[]->{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  \n  "author": author->{name, title, headshot},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n},\n    "latest": *[_type == "perspective" && (!defined(^.category) || ^.category._ref in categories[]._ref)] | order(publishedAt desc)[0...8]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  \n  "author": author->{name, title, headshot},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n}\n  },\n  _type == "ctaSection" => {\n    cta{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "layoutSection" => {\n    items[]{..., _type == "cta" => {"target": target->{_type, title, "slug": slug.current}}}\n  },\n  _type == "listingSection" => {\n    "pages": *[_type == "page" && pageType == ^.pageType && slug.current != "index"] | order(title asc){_id, _type, title, "slug": slug.current, card}\n  }\n},\n  seo\n}': PAGE_QUERY_RESULT
     '*[_type == "page" && defined(slug.current)].slug.current': PAGE_SLUGS_QUERY_RESULT
     '*[_type == "page" && pageType == $pageType] | order(title asc){\n    _id,\n    title,\n    "slug": slug.current,\n    card\n  }': PAGES_BY_TYPE_QUERY_RESULT
     '{\n  "perspectives": *[_type == "perspective" && defined(slug.current) && (seo.noIndex != true)]{"slug": slug.current, _updatedAt},\n  "caseStudies": *[_type == "caseStudy" && defined(slug.current) && (seo.noIndex != true)]{"slug": slug.current, _updatedAt},\n  "pages": *[_type == "page" && defined(slug.current) && (seo.noIndex != true)]{"slug": slug.current, _updatedAt}\n}': SITEMAP_QUERY_RESULT

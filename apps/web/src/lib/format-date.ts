@@ -22,11 +22,3 @@ export function formatNumericDate(iso: string | null | undefined): string | null
     timeZone: 'UTC',
   })
 }
-
-/** "June 12, 2026" — article headers. */
-export function formatLongDate(iso: string | null | undefined): string | null {
-  if (!iso) return null
-  const date = new Date(iso)
-  if (Number.isNaN(date.getTime())) return null
-  return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
-}
