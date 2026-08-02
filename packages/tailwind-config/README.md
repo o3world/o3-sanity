@@ -102,25 +102,33 @@ Figma specifies a **fixed px ramp at each frame width**. Every clamp is
 **solved** to hit the 402 frame's value at 402 and the 1440 frame's at 1440 —
 both ends are read values (ADR 0006).
 
-| Utility           | 402    | 1440   | Tracking  | Role                                               |
-| ----------------- | ------ | ------ | --------- | -------------------------------------------------- |
-| `text-hero`       | `30px` | `64px` | 0         | The full-width statements (always gradient-filled) |
-| `text-cta`        | `40px` | `60px` | -0.0233em | The CTA band headline                              |
-| `text-display-xl` | `40px` | `48px` | 0         | **Every** section headline; the Work hero          |
-| `text-display-lg` | `18px` | `36px` | 0         | Pull-quote attribution, rail numerals              |
-| `text-display-md` | `22px` | `28px` | -0.0286em | Case-study problem statement ⚠️ floor interpolated |
-| `text-lead`       | `18px` | `24px` | -0.0333em | Standfirst beside a headline; CTA subhead          |
-| `text-button`     | `18px` | `18px` | 0, wt 500 | Every button label                                 |
-| `text-eyebrow-lg` | `18px` | `18px` | 0.1em     | Section kicker ("OUR PARTNERS")                    |
-| `text-eyebrow`    | `16px` | `16px` | 0.1em     | Card kicker ("HEALTHCARE"), Work hero kicker       |
-| `text-nav`        | `14px` | `14px` | 0         | Footer navigation links                            |
-| `text-meta`       | `13px` | `13px` | 0.1em     | Perspectives-card meta row                         |
-| `text-legal`      | `12px` | `12px` | 0         | Footer legal row                                   |
+| Utility             | 402    | 1440   | Tracking  | Role                                               |
+| ------------------- | ------ | ------ | --------- | -------------------------------------------------- |
+| `text-hero`         | `30px` | `64px` | 0         | The full-width statements (always gradient-filled) |
+| `text-cta`          | `40px` | `60px` | -0.0233em | The CTA band headline                              |
+| `text-display-xl`   | `40px` | `48px` | 0         | **Every** section headline; the Work hero          |
+| `text-display-lg`   | `18px` | `36px` | 0         | Pull-quote attribution, rail numerals              |
+| `text-display-md`   | `22px` | `28px` | -0.0286em | Case-study problem statement ⚠️ floor interpolated |
+| `text-lead`         | `18px` | `24px` | -0.0333em | Standfirst beside a headline; CTA subhead          |
+| `text-body`         | `16px` | `20px` | 0, lh 1.6 | Long-form prose — every `bodyText` field           |
+| `text-body-heading` | `40px` | `36px` | 0         | An h2 inside a body ⚠️ descends — both ends read   |
+| `text-button`       | `18px` | `18px` | 0, wt 500 | Every button label                                 |
+| `text-eyebrow-lg`   | `18px` | `18px` | 0.1em     | Section kicker ("OUR PARTNERS")                    |
+| `text-eyebrow`      | `16px` | `16px` | 0.1em     | Card kicker ("HEALTHCARE"), Work hero kicker       |
+| `text-nav`          | `14px` | `14px` | 0         | Footer navigation links                            |
+| `text-meta`         | `13px` | `13px` | 0.1em     | Perspectives-card meta row                         |
+| `text-legal`        | `12px` | `12px` | 0         | Footer legal row                                   |
 
 **Small UI text does not scale** — button, eyebrow, meta, nav and legal are
 identical at both widths, read rather than assumed. Only display type and
 rhythm interpolate. `display-md` is the one floor with no 402 example to read,
 so it is interpolated from the ramp and says so in the file.
+
+`body-heading` is the one step whose clamp **descends**: the Insights frames
+read 40px at 402 and 36px at 1440, and solving the clamp to both ends the way
+ADR 0006 requires means shrinking 4px across the range. The alternatives
+(`display-lg`'s 18px floor; a step at `lg`) both looked worse than a ramp
+nobody can see — the full reasoning is on the token.
 
 There is **no distinct hero step**: the Home hero is photographic with no live
 text, and the Work hero headline is 48px — the same step as every section

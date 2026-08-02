@@ -42,7 +42,7 @@ describe('perspective detail route', () => {
       aPerspective({
         title: 'Headless CMS vs traditional CMS',
         excerpt: 'What marketing teams actually gain.',
-        author: { name: 'Brian Crumley', title: 'Partner' },
+        author: { name: 'Brian Crumley', title: 'Partner', headshot: null },
         categories: [{ title: 'Strategy', slug: 'strategy' }],
         body: [paragraph('The opening paragraph of the article.')],
       }),
@@ -60,13 +60,69 @@ describe('perspective detail route', () => {
     expect(html.match(/<h1[\s>]/g) ?? []).toHaveLength(1)
   })
 
-  it('shows the computed read time rather than a stored field', async () => {
-    const longBody = Array.from({ length: 20 }, (_, i) =>
-      paragraph(`${'word '.repeat(50)}`, `k${i.toString().padStart(4, '0')}`),
+  /**
+   * Reading time is computed in the GROQ projection, never stored and never
+   * recomputed here (#45) — so the byline has to show the number the query
+   * handed it. A view that fell back to its own word count would ignore this
+   * one and print something else.
+   */
+  it('shows the read time the projection computed', async () => {
+    const { html } = await render(
+      aPerspective({
+        readingMinutes: 6,
+        publishedAt: '2026-06-04T13:20:00Z',
+        body: [paragraph('Three words here.')],
+      }),
     )
-    const { html } = await render(aPerspective({ body: longBody }))
-    // 20 blocks x 50 words = 1000 words, at the 200wpm the helper uses.
-    expect(html).toContain('5 min read')
+    expect(html).toContain('6 min read')
+    expect(html).toContain('Jun 2026')
+  })
+
+  /** The byline's monogram disc — what an author with no headshot gets. */
+  it('falls back to the author’s initial when there is no headshot', async () => {
+    const { html } = await render(
+      aPerspective({
+        author: { name: 'Jay Forbes', title: 'Director of Engineering', headshot: null },
+      }),
+    )
+    expect(html).toContain('Jay Forbes, Director of Engineering')
+    expect(html).toContain('>J<')
+  })
+
+  it('links back to the collection under its Site Settings display label', async () => {
+    const { html } = await renderRoute(route, {
+      data: withSettings(aPerspective(), siteSettings({ perspectivesLabel: 'Insights' })),
+      params: { slug: 'a-perspective' },
+    })
+    expect(html).toContain('href="/perspectives"')
+    expect(html).toContain('All Insights')
+  })
+
+  it('closes on the "Keep reading." band, category-matched first', async () => {
+    const { html } = await render(
+      aPerspective({
+        related: [{ ...aPerspective({ _id: 'p-1', title: 'The related one' }) } as never],
+        latest: [{ ...aPerspective({ _id: 'p-2', title: 'The fallback one' }) } as never],
+      }),
+    )
+    expect(html).toContain('Keep reading.')
+    expect(html).toContain('The related one')
+    expect(html).not.toContain('The fallback one')
+  })
+
+  it('falls back to the latest feed when nothing shares a category', async () => {
+    const { html } = await render(
+      aPerspective({
+        related: [],
+        latest: [{ ...aPerspective({ _id: 'p-2', title: 'The fallback one' }) } as never],
+      }),
+    )
+    expect(html).toContain('The fallback one')
+  })
+
+  it('drops the "Keep reading." band entirely when there is nothing to read next', async () => {
+    const { html } = await render(aPerspective({ related: [], latest: [] }))
+    expect(html).not.toContain('Keep reading.')
   })
 
   it('omits the figure entirely when there is no featured image', async () => {

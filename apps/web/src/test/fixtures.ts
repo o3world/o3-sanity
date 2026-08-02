@@ -45,12 +45,28 @@ export function aPerspective(overrides: Partial<Perspective> = {}): Perspective 
     excerpt: 'Why this matters.',
     publishedAt: '2026-05-04T13:20:00Z',
     featuredImage: null,
-    author: { name: 'Brian Crumley', title: 'Partner' },
+    author: { name: 'Brian Crumley', title: 'Partner', headshot: null },
     categories: [{ title: 'Strategy', slug: 'strategy' }],
+    readingMinutes: 1,
     body: [paragraph('The body of the article.')],
     seo: null,
+    // The "Keep reading." band's two feeds (#45). Empty by default so a test
+    // about the article itself doesn't render eight cards it never asked for.
+    related: [],
+    latest: [],
     ...overrides,
   } as Perspective
+}
+
+/** The card half of a perspective — what every listing and feed projects. */
+function toCard({
+  body: _body,
+  seo: _seo,
+  related: _related,
+  latest: _latest,
+  ...card
+}: Perspective) {
+  return card
 }
 
 export function aPerspectivesPage(
@@ -58,7 +74,7 @@ export function aPerspectivesPage(
   total = items.length,
 ): PERSPECTIVES_PAGE_QUERY_RESULT {
   return {
-    items: items.map(({ body: _body, seo: _seo, ...card }) => card),
+    items: items.map(toCard),
     total,
   } as PERSPECTIVES_PAGE_QUERY_RESULT
 }
@@ -168,9 +184,32 @@ export function aMigratedPerspective(slug?: string): Perspective {
     excerpt: doc.excerpt,
     publishedAt: doc.publishedAt,
     body: doc.body as Perspective['body'],
+    readingMinutes: readingMinutesOf(doc.body),
     featuredImage: (doc.featuredImage ?? null) as Perspective['featuredImage'],
     seo: (doc.seo ?? null) as Perspective['seo'],
   })
+}
+
+/**
+ * The reading time the GROQ projection would return for this body, ported —
+ * `math::max([1, round(length(pt::text(body)) / 5 / 200)])`. Reading time is
+ * computed, never stored (#45), so a fixture standing in for the query has to
+ * compute it too; a hardcoded number here would let the renderer pass a test
+ * the real projection would fail.
+ */
+function readingMinutesOf(body: unknown): number {
+  const text = Array.isArray(body)
+    ? body
+        .map((block) =>
+          ((block as { children?: unknown[] })?.children ?? [])
+            .map((child) => (child as { text?: unknown })?.text)
+            .filter((span): span is string => typeof span === 'string')
+            .join(''),
+        )
+        // `pt::text` separates blocks with a blank line.
+        .join('\n\n')
+    : ''
+  return Math.max(1, Math.round(text.length / 5 / 200))
 }
 
 const CONVERTED_DIR = join(

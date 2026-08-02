@@ -17,13 +17,24 @@ export const PERSPECTIVE_CARD = /* groq */ `
   excerpt,
   publishedAt,
   featuredImage,
-  "author": author->{name, title},
+  ${
+    /* `headshot` is here for the DETAIL byline (`1710:2946`), not the card —
+      the card draws no author at all. It rides on the shared fragment because
+      splitting the author projection in two would leave two places to keep in
+      step for one image reference. */ ''
+  }
+  "author": author->{name, title, headshot},
   "categories": categories[]->{title, "slug": slug.current},
   ${
-    /* The card meta reads "3 MINS · 7/27/26" (1683:2490). Reading time is
-      derived, not stored: 5 characters to a word, 200 words a minute, at
-      least 1. Computing it here keeps the whole body out of the card
-      projection — the point of doing it in GROQ rather than in the renderer. */ ''
+    /* READING TIME IS COMPUTED AT RENDER, NOT STORED (#45). Derived here in
+      GROQ rather than in the renderer: 5 characters to a word, 200 words a
+      minute, at least 1. Doing it in the projection keeps the whole body out
+      of every card and related-article payload — the point of computing it
+      here — and means the value can never drift from the body the way a
+      stored field silently would after an edit.
+
+      The card meta reads "3 MINS · 7/27/26" (1683:2490); the detail byline
+      reads "Jun 2026 · 6 min read" (1710:2951). Same number, one source. */ ''
   }
   "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])
 ` as const
@@ -110,10 +121,28 @@ export const SITE_SETTINGS_QUERY = defineQuery(`*[_type == "siteSettings"][0]{
   defaultSeo
 }`)
 
+/**
+ * The perspective detail route (#45).
+ *
+ * `related` / `latest` feed the frame's closing "Keep reading." band
+ * (`1751:1947`), which is the Home Blog row's carousel drawn onto the article
+ * page. Two lists rather than one, the same shape `perspectivesCarouselSection`
+ * uses: `related` shares a category with the article, `latest` is the fallback
+ * for a perspective whose category is a dead end. Both exclude the article
+ * itself — the one thing a reader is guaranteed not to want next.
+ *
+ * ⚠️ **`^.^` in the category match is not a typo.** `^` inside the `*[]`
+ * filter is this document (which is why `_id != ^._id` works), but the array
+ * filter inside `count()` opens a further scope, so one caret there resolves
+ * to the *candidate* document — comparing every perspective's categories to
+ * its own and matching all 272. Two carets reach back out to the article.
+ */
 export const PERSPECTIVE_QUERY = defineQuery(`*[_type == "perspective" && slug.current == $slug][0]{
   ${PERSPECTIVE_CARD},
   body,
-  seo
+  seo,
+  "related": *[_type == "perspective" && _id != ^._id && count((categories[]._ref)[@ in ^.^.categories[]._ref]) > 0] | order(publishedAt desc)[0...8]{${PERSPECTIVE_CARD}},
+  "latest": *[_type == "perspective" && _id != ^._id] | order(publishedAt desc)[0...8]{${PERSPECTIVE_CARD}}
 }`)
 
 export const PERSPECTIVE_SLUGS_QUERY = defineQuery(

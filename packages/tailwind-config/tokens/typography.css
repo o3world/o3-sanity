@@ -23,6 +23,8 @@
  *   display-xl      40  →  48
  *   display-lg      18  →  36
  *   lead            18  →  24
+ *   body            16  →  20
+ *   body-heading    40  →  36   ← descends; see the token
  *
  * SMALL UI TEXT DOES NOT SCALE. button, eyebrow, eyebrow-lg, meta, nav and
  * legal are identical at both widths — read, not assumed (`1814:1656` against
@@ -93,6 +95,34 @@
   --text-lead--line-height: 1.2;
   --text-lead--letter-spacing: -0.0333em;
   --text-lead--font-weight: 400;
+
+  /* body — 20px/1.6. LONG-FORM PROSE: the perspective article body
+   * (`1894:3914` at 1440, `1906:1057` at 402) and every other `bodyText`
+   * field that renders through the same Portable Text renderer. The one step
+   * on the ramp with a line-height of 1.6 rather than 1.2 — it is the only
+   * type on the site set to be read in paragraphs rather than scanned.
+   * Recurs six times across the two Insights frames, so it is vocabulary
+   * rather than composition. */
+  --text-body: clamp(16px, calc(0.385vw + 14.45px), 20px);
+  --text-body--line-height: 1.6;
+  --text-body--letter-spacing: 0;
+  --text-body--font-weight: 400;
+
+  /* body-heading — the h2 INSIDE a body. `1894:3912` reads 36px at 1440;
+   * `1906:1056` reads 40px at 402.
+   *
+   * ⚠️ THIS CLAMP DESCENDS, and that is deliberate. Both ends are read
+   * values, and ADR 0006's rule is to solve each clamp to hit the mobile
+   * frame at 402 and the desktop frame at 1440 — which here means shrinking
+   * 4px across 1038px of viewport, a ramp nobody can see. The alternatives
+   * were worse: `display-lg` hits the 36 but floors at 18px, which is smaller
+   * than the body copy under it, and stepping at `lg` would jump 45px → 29px
+   * mid-resize. The mobile frame also colours it `#0A0A0A` against the
+   * desktop's `#000000`; the renderer takes ink at both widths. */
+  --text-body-heading: clamp(36px, calc(-0.385vw + 41.55px), 40px);
+  --text-body-heading--line-height: 1.2;
+  --text-body-heading--letter-spacing: 0;
+  --text-body-heading--font-weight: 400;
 
   /* button — 18/24 Medium. Every button label, both sizes, both fills
    * (1868:3262). Figma's `Interactive/Large` variable still names Inter; the
