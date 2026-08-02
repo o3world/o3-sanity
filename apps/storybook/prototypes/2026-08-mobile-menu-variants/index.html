@@ -1,0 +1,1376 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>O3 mobile menu — three open states (#51)</title>
+    <!--
+      PROVENANCE. Unlike ../2026-08-o3-mobile-menu/, this page was NOT captured
+      from a claude.ai artifact — it was authored in-repo for #51 against
+      packages/tailwind-config and the Figma node `1814:1630`, then committed
+      under ADR 0010. There is therefore no host runtime to strip.
+
+      Figtree is self-hosted beside this file (`figtree-latin-wght-normal.woff2`,
+      the same @fontsource-variable/figtree file apps/storybook loads, OFL —
+      see FIGTREE-LICENSE.txt). The earlier capture had to substitute the
+      theme's fallback stack; this one does not, so the letterforms are real.
+
+      Do not edit. A capture is a record; if the proposal changes, capture the
+      new version beside this one. See ../README.md.
+    -->
+    <style>
+      @font-face {
+        font-family: 'Figtree Variable';
+        font-style: normal;
+        font-display: swap;
+        font-weight: 300 900;
+        src: url('./figtree-latin-wght-normal.woff2') format('woff2-variations');
+      }
+
+      /* ══════════════════════════════════════════════════════════════════════
+         O3 TOKENS — verbatim from packages/tailwind-config/tokens/*.css.
+         Nothing inside a device frame is picked by eye. Copied at capture time
+         and therefore FROZEN: check these against the token package, never the
+         other way round (ADR 0010 → Consequences).
+         ══════════════════════════════════════════════════════════════════════ */
+      :root {
+        /* color.css */
+        --o3-brand: #eb1000;
+        --o3-ink: #0a0a0a;
+        --o3-ink-warm: #0f100b;
+        --o3-ink-deep: #030303;
+        --o3-bone: #f0f0f0;
+        --o3-white: #ffffff;
+        --o3-fg: #232323;
+        --o3-fg-muted: #636363;
+        --o3-on-ink: rgba(255, 255, 255, 0.92);
+        --o3-on-ink-muted: rgba(255, 255, 255, 0.65);
+        --o3-on-ink-subtle: rgba(255, 255, 255, 0.6);
+        --o3-on-ink-line: rgba(255, 255, 255, 0.2);
+        --o3-scrim: rgba(3, 3, 3, 0.2);
+
+        /* gradient.css — `Gradient/Red/1`, top layer first, as Figma stacks it */
+        --o3-glow:
+          radial-gradient(circle at 115% 24%, rgba(235, 16, 0, 0.5) 0%, rgba(3, 3, 3, 0) 100%),
+          radial-gradient(circle at 0% 0%, rgba(114, 8, 0, 1) 0%, rgba(3, 3, 3, 1) 65%);
+        --o3-ink-fade: linear-gradient(0deg, rgba(3, 3, 3, 1) 0%, rgba(3, 3, 3, 0) 100%);
+        --o3-surface-wash: linear-gradient(0deg, #ffffff 0%, #f0f0f0 100%);
+
+        /* motion.css */
+        --o3-ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+        --o3-ease-mask: cubic-bezier(0.16, 0.9, 0.2, 1);
+        --o3-duration-hover: 220ms;
+
+        /* radius.css — the canonical design is SQUARE */
+        --o3-radius-btn: 0px;
+        --o3-radius-card: 0px;
+
+        /* layout.css, RESOLVED AT THE 402 ENDPOINT.
+           The shipped tokens are clamps against the viewport; a 402 frame sitting
+           inside a 1200px page would resolve them at the wrong width, so each is
+           pinned to the value ADR 0006 reads off the mobile frame. */
+        --o3-gutter: 20px; /* clamp(20px, 7.32vw - 9.4px, 96px) @402 */
+        --o3-band-sm: 96px;
+
+        /* typography.css, RESOLVED AT 402 — same reason. Small UI text (button,
+           eyebrow, meta, nav, legal) is identical at both widths and is read,
+           not interpolated. */
+        --o3-sans: 'Figtree Variable', Figtree, 'Helvetica Neue', Arial, sans-serif;
+        --o3-text-display-xl: 40px; /* clamp(40px, .77vw + 36.9px, 48px) @402 */
+        --o3-text-hero: 30px; /* clamp(30px, 3.28vw + 16.8px, 64px) @402 */
+        --o3-text-lead: 18px; /* clamp(18px, .58vw + 15.7px, 24px) @402 */
+        --o3-text-button: 18px;
+        --o3-text-eyebrow: 16px;
+        --o3-text-nav: 14px;
+        --o3-text-meta: 13px;
+        --o3-text-legal: 12px;
+      }
+
+      /* ══════════════════════════════════════════════════════════════════════
+         PAGE CHROME — everything outside a device frame. Deliberately NOT O3:
+         this is the review harness, and it must not be mistaken for the design.
+         ══════════════════════════════════════════════════════════════════════ */
+      :root {
+        color-scheme: light dark;
+        --page: #f7f6f4;
+        --page-raised: #ffffff;
+        --rule: #e3dedb;
+        --text: #221e1d;
+        --text-muted: #6c6462;
+        --text-faint: #9a918e;
+        --mark: #eb1000;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --page: #161514;
+          --page-raised: #1f1d1c;
+          --rule: #322e2c;
+          --text: #f2eeec;
+          --text-muted: #a79f9c;
+          --text-faint: #7c7370;
+          --mark: #ff6a5a;
+        }
+      }
+      :root[data-theme='light'] {
+        --page: #f7f6f4;
+        --page-raised: #ffffff;
+        --rule: #e3dedb;
+        --text: #221e1d;
+        --text-muted: #6c6462;
+        --text-faint: #9a918e;
+        --mark: #eb1000;
+      }
+      :root[data-theme='dark'] {
+        --page: #161514;
+        --page-raised: #1f1d1c;
+        --rule: #322e2c;
+        --text: #f2eeec;
+        --text-muted: #a79f9c;
+        --text-faint: #7c7370;
+        --mark: #ff6a5a;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--page);
+        color: var(--text);
+        font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+      .wrap {
+        max-width: 74rem;
+        margin: 0 auto;
+        padding: clamp(1.75rem, 4vw, 3.5rem) clamp(1.1rem, 3vw, 2.25rem) 8rem;
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+      }
+      .kicker {
+        margin: 0 0 0.65rem;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--mark);
+      }
+      h1 {
+        margin: 0 0 0.9rem;
+        font-size: clamp(1.6rem, 3vw, 2.3rem);
+        line-height: 1.15;
+        font-weight: 600;
+        letter-spacing: -0.015em;
+      }
+      h2 {
+        margin: 0 0 0.6rem;
+        font-size: 1.05rem;
+        font-weight: 650;
+        letter-spacing: -0.005em;
+      }
+      h3 {
+        margin: 0 0 0.35rem;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        color: var(--text-faint);
+      }
+      p {
+        margin: 0 0 0.8rem;
+        max-width: 62ch;
+        color: var(--text-muted);
+      }
+      p:last-child {
+        margin-bottom: 0;
+      }
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.86em;
+        background: color-mix(in srgb, var(--text) 8%, transparent);
+        padding: 0.1em 0.35em;
+      }
+      strong {
+        color: var(--text);
+        font-weight: 650;
+      }
+      .panel {
+        background: var(--page-raised);
+        border: 1px solid var(--rule);
+        padding: clamp(1.1rem, 2.5vw, 1.75rem);
+      }
+      .cols {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+      }
+      .cols .panel p {
+        font-size: 0.9rem;
+      }
+
+      /* ── The stage: two 402 frames side by side ─────────────────────────── */
+      .stage {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2.5rem;
+        align-items: flex-start;
+      }
+      .slot {
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+      }
+      .slot figcaption {
+        font-size: 0.78rem;
+        color: var(--text-faint);
+        max-width: 402px;
+      }
+      .slot figcaption b {
+        color: var(--text);
+        font-weight: 650;
+      }
+
+      /* ══════════════════════════════════════════════════════════════════════
+         DEVICE FRAME — 402 × 874. Everything from `.dev` down is the proposal.
+         ══════════════════════════════════════════════════════════════════════ */
+      .dev {
+        position: relative;
+        width: 402px;
+        height: 874px;
+        overflow: hidden;
+        font-family: var(--o3-sans);
+        font-weight: 400;
+        line-height: 1.2;
+        background: var(--o3-ink-warm);
+        outline: 1px solid var(--rule);
+        outline-offset: 0;
+        flex: none;
+      }
+      @media (max-width: 900px) {
+        .dev {
+          transform-origin: top left;
+        }
+      }
+
+      /* The fake page behind the chrome. Scrollable so the scroll-lock claim in
+         A and C is demonstrable rather than asserted. */
+      .page {
+        position: absolute;
+        inset: 0;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+      }
+      .dev[data-scrolllock='on'] .page {
+        overflow: hidden;
+      }
+
+      /* Hero STAND-IN. Not a proposal: the canonical Home hero is photographic
+         (`1810:1616`) and no client photography is committed here. This is the
+         `ink-warm` band plus two `on-ink-line` arcs standing for the orbital
+         sphere, so the `rgba(3,3,3,.2)` bar has something to composite over. */
+      .hero {
+        position: relative;
+        height: 560px;
+        background: var(--o3-ink-warm);
+        overflow: hidden;
+      }
+      .hero svg {
+        position: absolute;
+        left: 50%;
+        top: 190px;
+        transform: translateX(-50%);
+      }
+      .hero::after {
+        content: '';
+        position: absolute;
+        inset: auto 0 0;
+        height: 87px;
+        background: var(--o3-ink-fade);
+      }
+      .standin {
+        position: absolute;
+        left: var(--o3-gutter);
+        bottom: 24px;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--o3-on-ink-subtle);
+      }
+      /* A light band below the hero, so there is somewhere to scroll to. */
+      .band {
+        background: var(--o3-surface-wash);
+        padding: var(--o3-band-sm) var(--o3-gutter);
+        color: var(--o3-fg);
+      }
+      .band h4 {
+        margin: 0 0 20px;
+        font-size: var(--o3-text-display-xl);
+        font-weight: 400;
+        line-height: 1.2;
+        color: var(--o3-ink);
+      }
+      .band p {
+        margin: 0;
+        font-size: var(--o3-text-lead);
+        letter-spacing: -0.0333em;
+        line-height: 1.2;
+        color: var(--o3-fg-muted);
+        max-width: none;
+      }
+
+      /* ── The bar (`1814:1630`) ──────────────────────────────────────────────
+         Read off Figma: 402 wide, padding 8px 20px, space-between, fill
+         rgba(3,3,3,.2), 64px logo, 32px between the CTA and the control. */
+      .bar {
+        position: absolute;
+        inset: 0 0 auto;
+        z-index: 3;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px var(--o3-gutter);
+        background: var(--o3-scrim);
+      }
+      .bar-right {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+      }
+      .logo {
+        width: 64px;
+        height: 64px;
+        flex: none;
+        display: block;
+      }
+
+      /* `Button / Solid` Size=Base, light fill (`1814:1635`): #FFF fill,
+         #0A0A0A label at 18/500/24px, padding 8px 20px, gap 8, radius 0,
+         `arrow_forward` at 20px. */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 8px 20px;
+        border: 0;
+        border-radius: var(--o3-radius-btn);
+        background: var(--o3-white);
+        color: var(--o3-ink);
+        font-family: inherit;
+        font-size: var(--o3-text-button);
+        font-weight: 500;
+        line-height: 24px;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      .btn svg {
+        display: block;
+        flex: none;
+      }
+
+      /* The one icon-only control in the design (ADR 0009). 42×42, bars
+         right-aligned, rgba(255,255,255,.85). */
+      .ctl {
+        position: relative;
+        width: 42px;
+        height: 42px;
+        flex: none;
+        padding: 0;
+        border: 0;
+        background: none;
+        color: rgba(255, 255, 255, 0.85);
+        cursor: pointer;
+        transition: opacity var(--o3-duration-hover) var(--o3-ease-out);
+      }
+      .ctl:hover {
+        opacity: 0.7;
+      }
+      .ctl:focus-visible {
+        outline: 2px solid var(--o3-brand);
+        outline-offset: 2px;
+      }
+      .ctl svg {
+        position: absolute;
+        inset: 0;
+        transition:
+          opacity var(--o3-duration-hover) var(--o3-ease-out),
+          transform var(--o3-duration-hover) var(--o3-ease-out);
+      }
+      .ctl .g-close {
+        opacity: 0;
+        transform: rotate(-45deg);
+      }
+      .dev.is-open .ctl .g-menu {
+        opacity: 0;
+        transform: rotate(45deg);
+      }
+      .dev.is-open .ctl .g-close {
+        opacity: 1;
+        transform: rotate(0deg);
+      }
+
+      /* ── Panel shell, shared by all three variants ──────────────────────── */
+      /* The switcher hides the losing panels with `hidden`, and `.panel-b`
+         declares `display: grid` — an author rule beats the UA's
+         `[hidden]{display:none}` at equal specificity, so it needs saying
+         explicitly or B's rows bleed through A. */
+      .panel-a[hidden],
+      .panel-b[hidden],
+      .panel-c[hidden] {
+        display: none !important;
+      }
+      .panel-a,
+      .panel-c {
+        position: absolute;
+        inset: 80px 0 0; /* 8 + 64 + 8 — the bar's own height */
+        z-index: 2;
+        clip-path: inset(0 0 100% 0);
+        visibility: hidden;
+        transition:
+          clip-path var(--o3-duration-hover) var(--o3-ease-out),
+          visibility 0s linear var(--o3-duration-hover);
+      }
+      .dev.is-open .panel-a,
+      .dev.is-open .panel-c {
+        clip-path: inset(0 0 0 0);
+        visibility: visible;
+        transition:
+          clip-path var(--o3-duration-hover) var(--o3-ease-out),
+          visibility 0s;
+      }
+      .panel-b {
+        position: absolute;
+        inset: 80px 0 auto;
+        z-index: 2;
+        display: grid;
+        grid-template-rows: 0fr;
+        visibility: hidden;
+        transition:
+          grid-template-rows var(--o3-duration-hover) var(--o3-ease-out),
+          visibility 0s linear var(--o3-duration-hover);
+      }
+      .dev.is-open .panel-b {
+        grid-template-rows: 1fr;
+        visibility: visible;
+        transition:
+          grid-template-rows var(--o3-duration-hover) var(--o3-ease-out),
+          visibility 0s;
+      }
+      .panel-b > .inner {
+        overflow: hidden;
+        background: var(--o3-ink-deep);
+      }
+
+      /* Staggered entrance. The 40ms step is the one motion value with no
+         token behind it — flagged, not hidden. Everything else is
+         `--duration-hover` on `--ease-out`. */
+      .rise {
+        opacity: 0;
+        transform: translateY(12px);
+        transition:
+          opacity var(--o3-duration-hover) var(--o3-ease-out),
+          transform var(--o3-duration-hover) var(--o3-ease-out);
+      }
+      .dev.is-open .rise {
+        opacity: 1;
+        transform: none;
+      }
+      .dev.is-open .rise:nth-child(1) {
+        transition-delay: 40ms;
+      }
+      .dev.is-open .rise:nth-child(2) {
+        transition-delay: 80ms;
+      }
+      .dev.is-open .rise:nth-child(3) {
+        transition-delay: 120ms;
+      }
+      .dev.is-open .rise:nth-child(4) {
+        transition-delay: 160ms;
+      }
+      .dev.is-open .rise:nth-child(5) {
+        transition-delay: 200ms;
+      }
+
+      /* The whole entrance collapses; the open state is identical either way. */
+      @media (prefers-reduced-motion: reduce) {
+        .dev *,
+        .dev *::before,
+        .dev *::after {
+          transition-duration: 0ms !important;
+          transition-delay: 0ms !important;
+          animation-duration: 0ms !important;
+        }
+        .rise {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      /* ── A · Takeover ───────────────────────────────────────────────────── */
+      .panel-a {
+        background: var(--o3-ink-deep);
+      }
+      .panel-a nav {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        padding: 48px var(--o3-gutter) 0;
+      }
+      .panel-a a {
+        font-size: var(--o3-text-display-xl);
+        font-weight: 400;
+        line-height: 1.2;
+        letter-spacing: 0;
+        color: var(--o3-white);
+        text-decoration: none;
+      }
+      .panel-a a:focus-visible {
+        outline: 2px solid var(--o3-brand);
+        outline-offset: 4px;
+      }
+
+      /* ── B · Drop panel ─────────────────────────────────────────────────── */
+      .panel-b nav {
+        display: flex;
+        flex-direction: column;
+      }
+      .panel-b a {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 16px var(--o3-gutter);
+        min-height: 56px;
+        border-top: 1px solid var(--o3-on-ink-line);
+        font-size: var(--o3-text-button);
+        font-weight: 500;
+        line-height: 24px;
+        color: var(--o3-on-ink);
+        text-decoration: none;
+      }
+      .panel-b a:first-child {
+        border-top: 0;
+      }
+      .panel-b a:last-child {
+        border-bottom: 1px solid var(--o3-on-ink-line);
+      }
+      .panel-b a[aria-current] {
+        color: var(--o3-white);
+      }
+      .panel-b a[aria-current]::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: -1px;
+        bottom: 0;
+        width: 1.5px;
+        background: var(--o3-brand);
+      }
+      .panel-b a svg {
+        flex: none;
+        color: var(--o3-on-ink-muted);
+      }
+      .panel-b a:focus-visible {
+        outline: 2px solid var(--o3-brand);
+        outline-offset: -2px;
+      }
+
+      /* ── C · Ledger ─────────────────────────────────────────────────────── */
+      .panel-c {
+        background-image: var(--o3-glow);
+      }
+      .panel-c nav {
+        display: flex;
+        flex-direction: column;
+        padding: 40px var(--o3-gutter) 0;
+      }
+      .panel-c a {
+        display: grid;
+        grid-template-columns: 32px 1fr auto;
+        align-items: baseline;
+        gap: 16px;
+        padding: 28px 0;
+        border-top: 1px solid var(--o3-on-ink-line);
+        text-decoration: none;
+      }
+      .panel-c a:last-child {
+        border-bottom: 1px solid var(--o3-on-ink-line);
+      }
+      .panel-c .num {
+        font-size: var(--o3-text-meta);
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        line-height: 1.2;
+        text-transform: uppercase;
+        color: var(--o3-on-ink-subtle);
+      }
+      .panel-c a[aria-current] .num {
+        color: var(--o3-brand);
+      }
+      .panel-c .lbl {
+        font-size: var(--o3-text-hero);
+        font-weight: 400;
+        line-height: 1.2;
+        color: var(--o3-white);
+      }
+      .panel-c .hint {
+        font-size: var(--o3-text-nav);
+        font-weight: 400;
+        line-height: 1.2;
+        color: var(--o3-on-ink-muted);
+      }
+      .panel-c a:focus-visible {
+        outline: 2px solid var(--o3-brand);
+        outline-offset: 2px;
+      }
+
+      /* ── Provenance table ───────────────────────────────────────────────── */
+      .tablewrap {
+        overflow-x: auto;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        min-width: 44rem;
+        font-size: 0.84rem;
+      }
+      th,
+      td {
+        text-align: left;
+        vertical-align: top;
+        padding: 0.5rem 0.9rem 0.5rem 0;
+        border-bottom: 1px solid var(--rule);
+      }
+      th {
+        font-size: 0.72rem;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        color: var(--text-faint);
+        font-weight: 700;
+      }
+      td {
+        color: var(--text-muted);
+      }
+      td:first-child {
+        color: var(--text);
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      /* ── The switcher ───────────────────────────────────────────────────── */
+      .switch {
+        position: fixed;
+        left: 50%;
+        bottom: 1.25rem;
+        transform: translateX(-50%);
+        z-index: 50;
+        display: flex;
+        align-items: stretch;
+        gap: 1px;
+        background: #111;
+        color: #fff;
+        border: 1px solid #111;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.28);
+        font-size: 0.82rem;
+      }
+      .switch button {
+        appearance: none;
+        border: 0;
+        background: #111;
+        color: #fff;
+        font: inherit;
+        padding: 0.55rem 0.9rem;
+        cursor: pointer;
+      }
+      .switch button:hover {
+        background: #2b2b2b;
+      }
+      .switch button:focus-visible {
+        outline: 2px solid #ff6a5a;
+        outline-offset: -2px;
+      }
+      .switch .cur {
+        padding: 0.55rem 1.1rem;
+        background: #1c1a19;
+        min-width: 15rem;
+        text-align: center;
+        white-space: nowrap;
+      }
+      .switch .cur b {
+        font-weight: 700;
+      }
+      .switch kbd {
+        font: inherit;
+        font-size: 0.75rem;
+        opacity: 0.55;
+      }
+      .hidden {
+        display: none !important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <header>
+        <p class="kicker">Prototype · #51 · wayfinder</p>
+        <h1>What does the 402 nav open into?</h1>
+        <p>
+          Every canonical page layer has a 1440 and a 402 frame. At 402 the NavBar collapses to a
+          logo, &ldquo;Let&rsquo;s talk&rdquo;, and a 42&times;42 <em>Open menu</em> control
+          (<code>1814:1636</code>) &mdash; and <strong>no frame in the file draws the panel behind
+          it</strong>. Not on Home mobile, not on Local Components. This is a proposal filling that
+          gap, not a reading of something Figma already says.
+        </p>
+        <p>
+          Three variants, switchable at the bottom of the page or with
+          <kbd>&larr;</kbd>&nbsp;<kbd>&rarr;</kbd>. They disagree about three things:
+          <strong>how much screen the panel takes</strong>, <strong>how loud its surface is</strong>,
+          and <strong>how big the nav copy gets</strong>. The closed bar is rebuilt from
+          <code>1814:1630</code> and shown beside each one, because two of the three arguments turn
+          on what the bar does while the panel is open.
+        </p>
+      </header>
+
+      <section>
+        <div class="stage">
+          <figure class="slot" style="margin: 0">
+            <div class="dev" id="dev-closed">
+              <div class="page">
+                <div class="hero">
+                  <svg width="520" height="520" viewBox="0 0 520 520" aria-hidden="true">
+                    <circle
+                      cx="260"
+                      cy="260"
+                      r="180"
+                      fill="none"
+                      stroke="rgba(255,255,255,0.2)"
+                      stroke-width="1"
+                    />
+                    <ellipse
+                      cx="260"
+                      cy="260"
+                      rx="180"
+                      ry="62"
+                      fill="none"
+                      stroke="rgba(255,255,255,0.2)"
+                      stroke-width="1"
+                    />
+                    <ellipse
+                      cx="260"
+                      cy="260"
+                      rx="72"
+                      ry="180"
+                      fill="none"
+                      stroke="rgba(255,255,255,0.2)"
+                      stroke-width="1"
+                    />
+                  </svg>
+                  <span class="standin">Hero &mdash; stand-in, not a proposal</span>
+                </div>
+                <div class="band">
+                  <h4>Strategy, design, engineering, and AI under one roof.</h4>
+                  <p>Scrollable, so the scroll-lock claim can be checked rather than believed.</p>
+                </div>
+              </div>
+              <div class="bar">
+                <a href="/" aria-label="O3 home" style="display: block; flex: none">
+                  <!-- `Brand / Logo` Color=Black (`264:52`) — the real mark, paths
+                       copied from packages/ui/src/components/brand-logo.tsx. -->
+                  <svg class="logo" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                    <rect width="64" height="64" fill="#030303" />
+                    <path
+                      d="M51.8837 53.5317C51.0819 53.5317 50.3868 53.0748 50.3566 52.0668H48.3086C48.3388 54.4135 50.0561 55.3753 51.8819 55.3753C53.8019 55.3753 55.441 54.2713 55.441 52.0366C55.441 50.6819 54.7957 49.9104 53.9921 49.4855C54.7317 49.0908 55.2828 48.3993 55.2828 47.1868C55.2828 45.297 53.8499 43.9744 51.8659 43.9744C49.8819 43.9744 48.481 45.1708 48.433 47.1708H50.4793C50.5273 46.3193 51.0944 45.8179 51.8659 45.8179C52.6375 45.8179 53.2366 46.305 53.2366 47.2508C53.2366 48.0384 52.8117 48.6517 51.8179 48.6517H51.5193V50.433H51.8179C52.8277 50.433 53.393 51.0464 53.393 51.9761C53.393 52.9824 52.7637 53.5353 51.8819 53.5353L51.8837 53.5317Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M16.6016 31.9867C16.6016 40.4738 23.5082 47.3805 31.9953 47.3805C40.4825 47.3805 47.3891 40.4756 47.3891 31.9867C47.3891 23.4978 40.4842 16.5947 31.9953 16.5947C23.5065 16.5947 16.6016 23.4996 16.6016 31.9867ZM41.1918 31.9867C41.1918 37.057 37.0673 41.1849 31.9953 41.1849C26.9233 41.1849 22.7989 37.0587 22.7989 31.9867C22.7989 26.9147 26.9251 22.7903 31.9953 22.7903C37.0656 22.7903 41.1918 26.9147 41.1918 31.9867Z"
+                      fill="white"
+                    />
+                  </svg>
+                </a>
+                <div class="bar-right">
+                  <a class="btn" href="#">
+                    Let&rsquo;s talk
+                    <svg width="20" height="20" viewBox="0 -960 960 960" aria-hidden="true">
+                      <path
+                        fill="currentColor"
+                        d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"
+                      />
+                    </svg>
+                  </a>
+                  <button class="ctl" type="button" aria-label="Open menu" aria-expanded="false">
+                    <svg class="g-menu" width="42" height="42" viewBox="0 0 42 42" aria-hidden="true">
+                      <rect x="18" y="18.75" width="24" height="1.5" fill="currentColor" />
+                      <rect x="18" y="25.25" width="24" height="1.5" fill="currentColor" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <figcaption>
+              <b>Closed &mdash; <code>1814:1630</code>, verbatim.</b> Full-width square bar, padding
+              8&times;20, fill <code>rgba(3,3,3,.2)</code>, 64px logo, 32px between the CTA and the
+              control. The hero behind it is a stand-in.
+            </figcaption>
+          </figure>
+
+          <figure class="slot" style="margin: 0">
+            <div class="dev is-open" id="dev-open" data-scrolllock="on">
+              <div class="page">
+                <div class="hero">
+                  <svg width="520" height="520" viewBox="0 0 520 520" aria-hidden="true">
+                    <circle
+                      cx="260"
+                      cy="260"
+                      r="180"
+                      fill="none"
+                      stroke="rgba(255,255,255,0.2)"
+                      stroke-width="1"
+                    />
+                    <ellipse
+                      cx="260"
+                      cy="260"
+                      rx="180"
+                      ry="62"
+                      fill="none"
+                      stroke="rgba(255,255,255,0.2)"
+                      stroke-width="1"
+                    />
+                    <ellipse
+                      cx="260"
+                      cy="260"
+                      rx="72"
+                      ry="180"
+                      fill="none"
+                      stroke="rgba(255,255,255,0.2)"
+                      stroke-width="1"
+                    />
+                  </svg>
+                  <span class="standin">Hero &mdash; stand-in, not a proposal</span>
+                </div>
+                <div class="band">
+                  <h4>Strategy, design, engineering, and AI under one roof.</h4>
+                  <p>Scrollable, so the scroll-lock claim can be checked rather than believed.</p>
+                </div>
+              </div>
+
+              <!-- A · Takeover -->
+              <div class="panel-a" id="menu-panel" hidden>
+                <nav aria-label="Menu">
+                  <a class="rise" href="/work">Work</a>
+                  <a class="rise" href="/live">Live</a>
+                  <a class="rise" href="/perspectives">Insights</a>
+                  <a class="rise" href="/solutions">Solutions</a>
+                  <a class="rise" href="/about">About</a>
+                </nav>
+              </div>
+
+              <!-- B · Drop panel -->
+              <div class="panel-b" id="menu-panel-b" hidden>
+                <div class="inner">
+                  <nav aria-label="Menu">
+                    <a class="rise" href="/work" aria-current="page"
+                      >Work
+                      <svg width="20" height="20" viewBox="0 -960 960 960" aria-hidden="true">
+                        <path
+                          fill="currentColor"
+                          d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"
+                        /></svg
+                    ></a>
+                    <a class="rise" href="/live"
+                      >Live
+                      <svg width="20" height="20" viewBox="0 -960 960 960" aria-hidden="true">
+                        <path
+                          fill="currentColor"
+                          d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"
+                        /></svg
+                    ></a>
+                    <a class="rise" href="/perspectives"
+                      >Insights
+                      <svg width="20" height="20" viewBox="0 -960 960 960" aria-hidden="true">
+                        <path
+                          fill="currentColor"
+                          d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"
+                        /></svg
+                    ></a>
+                    <a class="rise" href="/solutions"
+                      >Solutions
+                      <svg width="20" height="20" viewBox="0 -960 960 960" aria-hidden="true">
+                        <path
+                          fill="currentColor"
+                          d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"
+                        /></svg
+                    ></a>
+                    <a class="rise" href="/about"
+                      >About
+                      <svg width="20" height="20" viewBox="0 -960 960 960" aria-hidden="true">
+                        <path
+                          fill="currentColor"
+                          d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"
+                        /></svg
+                    ></a>
+                  </nav>
+                </div>
+              </div>
+
+              <!-- C · Ledger -->
+              <div class="panel-c" id="menu-panel-c" hidden>
+                <nav aria-label="Menu">
+                  <a class="rise" href="/work" aria-current="page">
+                    <span class="num">01</span><span class="lbl">Work</span
+                    ><span class="hint">/work</span>
+                  </a>
+                  <a class="rise" href="/live">
+                    <span class="num">02</span><span class="lbl">Live</span
+                    ><span class="hint">/live</span>
+                  </a>
+                  <a class="rise" href="/perspectives">
+                    <span class="num">03</span><span class="lbl">Insights</span
+                    ><span class="hint">/perspectives</span>
+                  </a>
+                  <a class="rise" href="/solutions">
+                    <span class="num">04</span><span class="lbl">Solutions</span
+                    ><span class="hint">/solutions</span>
+                  </a>
+                  <a class="rise" href="/about">
+                    <span class="num">05</span><span class="lbl">About</span
+                    ><span class="hint">/about</span>
+                  </a>
+                </nav>
+              </div>
+
+              <div class="bar">
+                <a href="/" aria-label="O3 home" style="display: block; flex: none">
+                  <!-- `Brand / Logo` Color=Black (`264:52`) — the real mark, paths
+                       copied from packages/ui/src/components/brand-logo.tsx. -->
+                  <svg class="logo" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                    <rect width="64" height="64" fill="#030303" />
+                    <path
+                      d="M51.8837 53.5317C51.0819 53.5317 50.3868 53.0748 50.3566 52.0668H48.3086C48.3388 54.4135 50.0561 55.3753 51.8819 55.3753C53.8019 55.3753 55.441 54.2713 55.441 52.0366C55.441 50.6819 54.7957 49.9104 53.9921 49.4855C54.7317 49.0908 55.2828 48.3993 55.2828 47.1868C55.2828 45.297 53.8499 43.9744 51.8659 43.9744C49.8819 43.9744 48.481 45.1708 48.433 47.1708H50.4793C50.5273 46.3193 51.0944 45.8179 51.8659 45.8179C52.6375 45.8179 53.2366 46.305 53.2366 47.2508C53.2366 48.0384 52.8117 48.6517 51.8179 48.6517H51.5193V50.433H51.8179C52.8277 50.433 53.393 51.0464 53.393 51.9761C53.393 52.9824 52.7637 53.5353 51.8819 53.5353L51.8837 53.5317Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M16.6016 31.9867C16.6016 40.4738 23.5082 47.3805 31.9953 47.3805C40.4825 47.3805 47.3891 40.4756 47.3891 31.9867C47.3891 23.4978 40.4842 16.5947 31.9953 16.5947C23.5065 16.5947 16.6016 23.4996 16.6016 31.9867ZM41.1918 31.9867C41.1918 37.057 37.0673 41.1849 31.9953 41.1849C26.9233 41.1849 22.7989 37.0587 22.7989 31.9867C22.7989 26.9147 26.9251 22.7903 31.9953 22.7903C37.0656 22.7903 41.1918 26.9147 41.1918 31.9867Z"
+                      fill="white"
+                    />
+                  </svg>
+                </a>
+                <div class="bar-right">
+                  <a class="btn" href="#">
+                    Let&rsquo;s talk
+                    <svg width="20" height="20" viewBox="0 -960 960 960" aria-hidden="true">
+                      <path
+                        fill="currentColor"
+                        d="M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z"
+                      />
+                    </svg>
+                  </a>
+                  <button
+                    class="ctl"
+                    type="button"
+                    id="ctl-open"
+                    aria-label="Close menu"
+                    aria-expanded="true"
+                    aria-controls="menu-panel"
+                  >
+                    <svg class="g-menu" width="42" height="42" viewBox="0 0 42 42" aria-hidden="true">
+                      <rect x="18" y="18.75" width="24" height="1.5" fill="currentColor" />
+                      <rect x="18" y="25.25" width="24" height="1.5" fill="currentColor" />
+                    </svg>
+                    <svg
+                      class="g-close"
+                      width="42"
+                      height="42"
+                      viewBox="0 0 42 42"
+                      aria-hidden="true"
+                    >
+                      <g transform="translate(18 9) scale(0.025)">
+                        <path
+                          fill="currentColor"
+                          d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"
+                          transform="translate(0 960)"
+                        />
+                      </g>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <figcaption id="open-caption">
+              <b>Open &mdash; proposed.</b> Tap the control to toggle, or press
+              <kbd>Esc</kbd>. Opens on load so the proposal is what you see first.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="panel" id="argument">
+        <h2 id="arg-title">A &middot; Takeover</h2>
+        <div class="cols" style="margin-top: 1rem">
+          <div>
+            <h3>Proposes</h3>
+            <p id="arg-proposes"></p>
+          </div>
+          <div>
+            <h3>Refuses</h3>
+            <p id="arg-refuses"></p>
+          </div>
+          <div>
+            <h3>Costs</h3>
+            <p id="arg-costs"></p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>What all three agree on</h2>
+        <div class="cols">
+          <div class="panel">
+            <h3>The bar never moves</h3>
+            <p>
+              The logo, &ldquo;Let&rsquo;s talk&rdquo; and the control stay exactly where
+              <code>1814:1630</code> puts them; the panel fills the 794px below. So the primary CTA
+              is <strong>never duplicated and never relocated</strong> &mdash; the frame already
+              placed it, and a second copy at the bottom of the screen would be the panel inventing
+              a button the design has.
+            </p>
+            <p>
+              A pleasing consequence of the alpha: <code>rgba(3,3,3,.2)</code> over an
+              <code>ink-deep</code> panel resolves to <code>#030303</code>. The bar dissolves into
+              the panel on open and reappears against the hero on close, with no state of its own.
+            </p>
+          </div>
+          <div class="panel">
+            <h3>The control becomes the close</h3>
+            <p>
+              It stays in place and cross-fades to Material <code>close</code> (ADR 0009, already in
+              <code>packages/ui</code> as <code>CloseIcon</code>), drawn 24px wide and right-aligned
+              in the same 42&times;42 box so it inherits the hamburger&rsquo;s optical size. It
+              carries <code>aria-label</code> (&ldquo;Open menu&rdquo; &harr; &ldquo;Close
+              menu&rdquo;), <code>aria-expanded</code> and <code>aria-controls</code> &mdash; the
+              exception ADR 0009 flags, because this is the design&rsquo;s only icon-only control.
+            </p>
+          </div>
+          <div class="panel">
+            <h3>Motion, and the absence of it</h3>
+            <p>
+              The surface wipes down from under the bar over
+              <code>--duration-hover</code> (220ms) on <code>--ease-out</code>, and the items rise
+              12px as they fade. <strong>One value here has no token</strong>: the 40ms stagger
+              step. Under <code>prefers-reduced-motion</code> the entrance collapses entirely and
+              the open state is byte-identical &mdash; no fade, no rise, no delay.
+            </p>
+          </div>
+          <div class="panel">
+            <h3>Everything comes from Site Settings</h3>
+            <p>
+              Five items and the CTA, read from the same <code>navItems</code> /
+              <code>primaryCta</code> the 1440 pill uses &mdash; <code>Work</code>,
+              <code>Live</code>, <code>Insights</code> (route <code>/perspectives</code>),
+              <code>Solutions</code>, <code>About</code>, and &ldquo;Let&rsquo;s talk&rdquo; &rarr;
+              <code>/contact</code>. <code>/live</code> is settled by ADR 0011. No item is added,
+              dropped, or reordered for mobile.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Provenance &mdash; every value, and where it came from</h2>
+        <p>
+          Copied at capture time and therefore frozen. Check these against
+          <code>packages/tailwind-config/tokens/</code> and Figma, never the other way round.
+          Clamped tokens are pinned to their <strong>402 endpoint</strong>, because a 402 frame
+          inside a wide page would otherwise resolve the clamp at the wrong width.
+        </p>
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Used for</th>
+                <th>Value</th>
+                <th>Source</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Bar fill</td>
+                <td><code>rgba(3,3,3,.2)</code></td>
+                <td><code>--color-scrim</code> &middot; frame <code>1814:1630</code></td>
+              </tr>
+              <tr>
+                <td>Bar padding / gutter</td>
+                <td><code>8px 20px</code> &middot; gap <code>32px</code></td>
+                <td>
+                  frame <code>1814:1630</code> &middot; <code>--spacing-gutter</code> @402 = 20px
+                </td>
+              </tr>
+              <tr>
+                <td>Panel surface (A, B)</td>
+                <td><code>#030303</code></td>
+                <td><code>--color-ink-deep</code></td>
+              </tr>
+              <tr>
+                <td>Panel surface (C)</td>
+                <td>two stacked radials</td>
+                <td><code>--gradient-brand-glow</code> &middot; Figma <code>Gradient/Red/1</code></td>
+              </tr>
+              <tr>
+                <td>Nav items (A)</td>
+                <td><code>40px</code> / 1.2 / 400</td>
+                <td><code>--text-display-xl</code> @402 &middot; ADR 0006</td>
+              </tr>
+              <tr>
+                <td>Nav items (B)</td>
+                <td><code>18px</code> / 24px / 500</td>
+                <td><code>--text-button</code> &mdash; identical at 402 and 1440</td>
+              </tr>
+              <tr>
+                <td>Nav items (C)</td>
+                <td><code>30px</code> / 1.2 / 400</td>
+                <td><code>--text-hero</code> @402</td>
+              </tr>
+              <tr>
+                <td>Ledger numerals (C)</td>
+                <td><code>13px</code> / 700 / .1em / upper</td>
+                <td><code>--text-meta</code></td>
+              </tr>
+              <tr>
+                <td>Route hints (C)</td>
+                <td><code>14px</code> / 400</td>
+                <td><code>--text-nav</code></td>
+              </tr>
+              <tr>
+                <td>Dividers</td>
+                <td><code>1px rgba(255,255,255,.2)</code></td>
+                <td><code>--color-on-ink-line</code></td>
+              </tr>
+              <tr>
+                <td>Item colour</td>
+                <td><code>#fff</code> / <code>rgba(255,255,255,.92)</code></td>
+                <td><code>--color-white</code> / <code>--color-on-ink</code></td>
+              </tr>
+              <tr>
+                <td>Current-route mark (B, C)</td>
+                <td><code>#eb1000</code>, flat</td>
+                <td>
+                  <code>--color-brand</code>. The token warns that flat red is almost always wrong;
+                  the precedent for flat red on a small tracked element is the footer link-group
+                  headers, <code>1680:2104</code>.
+                </td>
+              </tr>
+              <tr>
+                <td>&ldquo;Let&rsquo;s talk&rdquo;</td>
+                <td>#FFF fill, #0A0A0A label, 18/500, pad 8&times;20, radius 0</td>
+                <td><code>Button / Solid</code> Size=Base (<code>1814:1635</code>)</td>
+              </tr>
+              <tr>
+                <td>Menu control</td>
+                <td>42&times;42, two 24&times;1.5 bars, gap 5, <code>rgba(255,255,255,.85)</code></td>
+                <td>frame <code>1814:1636</code> &mdash; <em>two</em> bars, not three</td>
+              </tr>
+              <tr>
+                <td>Close glyph</td>
+                <td>Material Symbols <code>close</code></td>
+                <td><code>CloseIcon</code>, ADR 0009 &middot; Figma <code>400:2219</code></td>
+              </tr>
+              <tr>
+                <td>Arrow glyph</td>
+                <td>Material Symbols <code>arrow_forward</code>, 20px</td>
+                <td><code>ArrowIcon</code>, ADR 0009 &middot; <code>136:14</code></td>
+              </tr>
+              <tr>
+                <td>Corners</td>
+                <td><code>0</code></td>
+                <td><code>--radius-btn</code> / <code>--radius-card</code></td>
+              </tr>
+              <tr>
+                <td>Easing / duration</td>
+                <td><code>cubic-bezier(.2,.7,.2,1)</code> &middot; <code>220ms</code></td>
+                <td><code>--ease-out</code> &middot; <code>--duration-hover</code></td>
+              </tr>
+              <tr>
+                <td>Stagger step</td>
+                <td><code>40ms</code></td>
+                <td><strong>No token.</strong> The one invented value on this page.</td>
+              </tr>
+              <tr>
+                <td>Type</td>
+                <td>Figtree Variable, weight 400 (500 on buttons)</td>
+                <td>self-hosted beside this file &mdash; the real face, not a fallback</td>
+              </tr>
+              <tr>
+                <td>Hero behind the bar</td>
+                <td><code>#0F100B</code> + <code>on-ink-line</code> arcs</td>
+                <td>
+                  <strong>Stand-in.</strong> <code>--color-ink-warm</code> is a real hero band value
+                  (<code>1634:1181</code>), but the Home hero is photographic
+                  (<code>1810:1616</code>) and no client photography is committed here.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>What this does not decide</h2>
+        <p>
+          <strong>Whether the CTA belongs in the thumb arc.</strong> All three variants leave
+          &ldquo;Let&rsquo;s talk&rdquo; in the bar, at the top of an 874px screen, which is the
+          hardest place on a phone to reach. The sibling capture
+          <code>2026-08-o3-mobile-menu</code> takes the other side and pins a second copy at the
+          bottom. The two captures now bracket the question deliberately &mdash; it is a call for
+          the design owner, not for a prototype.
+        </p>
+        <p>
+          <strong>Whether this becomes a Figma frame</strong>, or code becomes the source of record
+          for this one component with the deviation written into
+          <code>docs/figma-components.md</code>. That is #51&rsquo;s fourth acceptance criterion and
+          the one thing a prototype structurally cannot answer.
+        </p>
+        <p>
+          <strong>Current-route treatment.</strong> The 1440 pill has none &mdash; no frame draws an
+          active nav item at either width. A declines to invent one; B and C each propose one, so
+          the difference is visible rather than argued.
+        </p>
+      </section>
+    </div>
+
+    <div class="switch" role="group" aria-label="Prototype variant switcher">
+      <button type="button" id="prev" aria-label="Previous variant">&larr;</button>
+      <div class="cur" id="cur" aria-live="polite"></div>
+      <button type="button" id="next" aria-label="Next variant">&rarr;</button>
+    </div>
+
+    <script>
+      // ── Variants ────────────────────────────────────────────────────────────
+      const VARIANTS = [
+        {
+          key: 'a',
+          name: 'Takeover',
+          panel: 'menu-panel',
+          scrollLock: true,
+          caption:
+            '<b>Open &mdash; A &middot; Takeover.</b> Full-bleed <code>ink-deep</code> below the bar; five words at <code>display-xl</code> (40px at 402) and nothing else. Toggle the control or press <kbd>Esc</kbd>.',
+          proposes:
+            'The panel is the page. <code>ink-deep</code> edge to edge below the bar, five items at <code>--text-display-xl</code> (40px at 402 &mdash; a read value, not a guess), Figtree 400, on the 20px gutter, 32px apart. The nav is treated as editorial copy, at the same step as a section headline, because at 402 there are five words on an otherwise empty screen and the design&rsquo;s voice is display type on a dark field.',
+          refuses:
+            'Rules, numerals, icons, a route hint, a current-page marker, and any second CTA. No frame draws an active nav item at either width, so A declines to invent one rather than inventing one quietly. Also refused: a red field &mdash; <code>--gradient-brand-glow</code>&rsquo;s only canonical use is a single card (<code>1734:1737</code>), and stretching it to a full screen is an extrapolation, not a reading.',
+          costs:
+            'It hides the page completely, so the scroll position and the hero go away and have to come back. It gives the site&rsquo;s five destinations more visual weight than any single section headline gets. And with no current-page mark, an open menu cannot tell you where you already are.',
+        },
+        {
+          key: 'b',
+          name: 'Drop panel',
+          panel: 'menu-panel-b',
+          scrollLock: false,
+          caption:
+            '<b>Open &mdash; B &middot; Drop panel.</b> Hugs its content under the bar; the hero stays visible. Items at <code>--text-button</code> (18px), identical to the 1440 pill. Toggle the control or press <kbd>Esc</kbd>.',
+          proposes:
+            'The smallest possible panel. It hugs five 56px rows under the bar and stops; the hero stays on screen, so the menu reads as chrome attached to the bar rather than a place you travelled to. Rows are <code>--text-button</code> 18/500 &mdash; <strong>exactly what the 1440 pill sets</strong>, and a step ADR 0006 confirms is identical at both widths &mdash; separated by <code>--color-on-ink-line</code> hairlines, each ending in <code>arrow_forward</code>. The current route carries a 1.5px brand rule on the row&rsquo;s leading edge.',
+          refuses:
+            'A new type step for the nav. B introduces <em>zero</em> values the desktop nav does not already use: the same size, weight, colour and copy, re-laid-out vertically. That is ADR 0006&rsquo;s stance stated as a layout &mdash; same content, different composition &mdash; and it is the only variant that could be reviewed with no design decision at all.',
+          costs:
+            'It is quiet to the point of self-effacement. The mobile menu <em>is</em> the whole navigation of the site, and this treats it like a settings drawer; 18px rows at the top of an 874px screen sit outside the thumb arc and read as an afterthought. It also needs a close-on-scroll rule instead of a scroll lock, because a panel that hugs cannot cover what moves underneath it &mdash; one more behaviour to specify.',
+        },
+        {
+          key: 'c',
+          name: 'Ledger',
+          panel: 'menu-panel-c',
+          scrollLock: true,
+          caption:
+            '<b>Open &mdash; C &middot; Ledger.</b> Full-bleed on <code>Gradient/Red/1</code>; numbered, ruled rows at <code>--text-hero</code> (30px at 402) with the route shown. Toggle the control or press <kbd>Esc</kbd>.',
+          proposes:
+            'The menu as an index. Full-bleed on <code>--gradient-brand-glow</code> &mdash; the design&rsquo;s only sanctioned way for red to arrive as a field &mdash; with five ruled rows in <code>--color-on-ink-line</code>. Each row carries a <code>--text-meta</code> numeral (<code>01</code>&ndash;<code>05</code>, the vocabulary of the case-study chapter rail), the label at <code>--text-hero</code> (30px at 402), and the route itself at <code>--text-nav</code>. The current route turns its numeral brand red &mdash; the same treatment the footer link-group headers get at <code>1680:2104</code>, the one place the design uses red flat.',
+          refuses:
+            'Bareness. C argues that five unlabelled words on black is under-specified for a site whose nav copy does not match its URLs &mdash; &ldquo;Insights&rdquo; goes to <code>/perspectives</code>, and CONTEXT.md spends a paragraph on why. Showing the route is the design telling the truth about itself. It still refuses icons per row, search, and anything that promises a feature this site does not have.',
+          costs:
+            'It is the loudest option by a distance, and the red field is an extrapolation: <code>Gradient/Red/1</code> has exactly one canonical use, a single perspectives card. At 402&times;794 the bloom lands off the top-right corner and the maroon base carries most of the panel, which is not a composition any frame has approved. Route hints are also arguably developer furniture &mdash; a visitor does not read URLs.',
+        },
+      ];
+
+      const $ = (id) => document.getElementById(id);
+      const dev = $('dev-open');
+      const ctl = $('ctl-open');
+
+      let index = 0;
+      let open = true;
+
+      function keyFromUrl() {
+        const q = new URLSearchParams(location.search).get('variant');
+        const i = VARIANTS.findIndex((v) => v.key === (q || '').toLowerCase());
+        return i === -1 ? 0 : i;
+      }
+
+      function render() {
+        const v = VARIANTS[index];
+
+        // Only the active variant's panel exists in the tree — the losing
+        // panels are `hidden`, not styled away, so nothing about them can be
+        // measured or focused.
+        VARIANTS.forEach((other) => {
+          $(other.panel).hidden = other.key !== v.key;
+        });
+
+        dev.dataset.scrolllock = v.scrollLock && open ? 'on' : 'off';
+        ctl.setAttribute('aria-controls', v.panel);
+
+        $('open-caption').innerHTML = v.caption;
+        $('arg-title').textContent = `${v.key.toUpperCase()} · ${v.name}`;
+        $('arg-proposes').innerHTML = v.proposes;
+        $('arg-refuses').innerHTML = v.refuses;
+        $('arg-costs').innerHTML = v.costs;
+
+        $('cur').innerHTML = `<b>${v.key.toUpperCase()}</b> — ${v.name}`;
+
+        const url = new URL(location.href);
+        url.searchParams.set('variant', v.key);
+        history.replaceState(null, '', url);
+      }
+
+      function setOpen(next) {
+        open = next;
+        dev.classList.toggle('is-open', open);
+        ctl.setAttribute('aria-expanded', String(open));
+        ctl.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        dev.dataset.scrolllock = VARIANTS[index].scrollLock && open ? 'on' : 'off';
+      }
+
+      function go(delta) {
+        index = (index + delta + VARIANTS.length) % VARIANTS.length;
+        render();
+      }
+
+      ctl.addEventListener('click', () => setOpen(!open));
+      $('prev').addEventListener('click', () => go(-1));
+      $('next').addEventListener('click', () => go(1));
+
+      document.addEventListener('keydown', (e) => {
+        const t = e.target;
+        const typing =
+          t &&
+          (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable === true);
+        if (typing) return;
+        if (e.key === 'Escape' && open) setOpen(false);
+        if (e.key === 'ArrowLeft') go(-1);
+        if (e.key === 'ArrowRight') go(1);
+      });
+
+      // B closes on scroll rather than locking — a panel that hugs its content
+      // cannot cover what moves underneath it.
+      dev.querySelector('.page').addEventListener('scroll', () => {
+        if (open && !VARIANTS[index].scrollLock) setOpen(false);
+      });
+
+      index = keyFromUrl();
+      render();
+      setOpen(true);
+    </script>
+  </body>
+</html>

@@ -16,6 +16,15 @@ whose reasoning is not recoverable from the component library. Typically a
 Claude artifact: one self-contained HTML page, its own CSS and JS, no build
 step.
 
+A set does not have to _come from_ claude.ai — `2026-08-mobile-menu-variants`
+was authored in-repo, against `packages/tailwind-config` and the frames, and
+committed directly. The shape is identical (self-contained page, no build step,
+frozen once committed); it just skips step 1–2 below, has no runtime to strip,
+and says so in its own header comment instead. Two things get easier when a set
+is written here rather than imported: it can **self-host Figtree** beside its
+`index.html`, so the letterforms are the real ones rather than a fallback, and
+its values can be read straight out of the token files instead of retyped.
+
 A prototype does **not** have to be settled to belong here. A proposal is
 exactly when a link is worth the most, and the mobile-menu capture is one:
 #51 is open, and the page is how the argument gets reviewed. What makes it
