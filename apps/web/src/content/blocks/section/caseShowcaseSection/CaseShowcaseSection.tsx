@@ -40,7 +40,12 @@ export function CaseShowcaseSection({ heading, cta, caseStudies }: CaseShowcaseS
       </div>
 
       <div className="bg-(image:--gradient-surface-wash-angled) px-gutter py-band-sm">
-        <div className="max-w-section mx-auto flex flex-col gap-12">
+        {/*
+         * Gap 24 at 402 (`1889:3620`), 48 at 1440 (`1683:2661`). ADR 0006
+         * lists this band precisely because it is *not* a composition
+         * divergence — both frames stack the cards, and only the gap moves.
+         */}
+        <div className="max-w-section mx-auto flex flex-col gap-6 lg:gap-12">
           {items.map((caseStudy) => (
             <Card key={caseStudy._id} {...caseStudy} />
           ))}

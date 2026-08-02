@@ -58,7 +58,8 @@ export function CaseStudyIndexView({ items, pagination }: CaseStudyIndexViewProp
       />
 
       <div className="px-gutter py-band-sm bg-white">
-        <ul className="max-w-section mx-auto flex flex-col gap-16">
+        {/* Gap 24 at 402 (`1925:5733`), 64 at 1440 (`1634:1186`). */}
+        <ul className="max-w-section mx-auto flex flex-col gap-6 lg:gap-16">
           {(items ?? []).map((item) => (
             <li key={item._id}>
               <CaseStudyCard {...item} />

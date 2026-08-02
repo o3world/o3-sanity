@@ -1,7 +1,14 @@
 import { describe, expect, it } from 'vitest'
 
 import { buildSingletonRoute } from '@/lib/content-routes/build'
-import { aSeededPage, renderRoute, siteSettings, withSettings } from '@/test'
+import {
+  aSeededPage,
+  renderRoute,
+  siteSettings,
+  unprefixedHorizontalScrollUtilities,
+  variantsOf,
+  withSettings,
+} from '@/test'
 
 import { home } from './entry'
 
@@ -80,5 +87,59 @@ describe('the seeded homepage', () => {
   it('derives its metadata from the seed like any other page', async () => {
     expect(rendered.metadata.title).toBe('O3 World')
     expect(rendered.metadata.alternates?.canonical).toBe('http://localhost:3000/')
+  })
+})
+
+/**
+ * The mobile frame, `1814:1618`. Desktop was verified when #42 was built and
+ * 402 was not, which is how the perspectives carousel shipped scrolling
+ * sideways on a phone for a whole batch. These are the invariants that would
+ * have caught it — read off the rendered classes, so they hold for whatever
+ * the blocks actually emit rather than for what a component file says.
+ */
+describe('the homepage at 402 (ADR 0006)', () => {
+  it('has no horizontally-scrolling band', () => {
+    // `lg:overflow-x-auto` — the desktop carousel — is fine and expected.
+    // Anything unprefixed is live on a 402 phone.
+    expect(unprefixedHorizontalScrollUtilities(html)).toEqual([])
+  })
+
+  it('keeps the perspectives carousel a stack until lg', () => {
+    // `1814:1867`: cards stacked, gap 24, no prev/next. The track, its snap
+    // points and the 394px card are all `lg:`.
+    expect(html).toContain('lg:overflow-x-auto')
+    expect(html).toContain('lg:w-[394px]')
+    expect(variantsOf(html, 'snap-x')).toEqual(['lg:snap-x'])
+  })
+
+  it('stacks the partner logos rather than bleeding a marquee off a phone', () => {
+    // `1814:1898` — one tile per row inside the gutter; `1864:2395`'s
+    // over-wide row is the 1440 treatment.
+    expect(html).toContain('lg:w-max')
+    expect(html).toContain('lg:flex-row')
+  })
+
+  it('sets the hero flush to the gutter, centring it only at lg', () => {
+    // `1814:1622` is a 362px column at x=20; `1810:1616` centres on the
+    // sphere. Matched on the hero's own class attribute — `items-start` alone
+    // is on half the cards on the page and would pass without the hero.
+    const heroClasses = html.match(/class="([^"]*min-h-\[420px\][^"]*)"/)?.[1] ?? ''
+    expect(heroClasses, 'the hero band was not found at all').not.toBe('')
+    expect(heroClasses).toContain('items-start')
+    expect(heroClasses).toContain('text-left')
+    expect(heroClasses).toContain('lg:items-center')
+    expect(heroClasses).toContain('lg:text-center')
+  })
+
+  it('holds the case-card gap at 24 until lg', () => {
+    // 24 at 402 (`1889:3620`), 48 at 1440 (`1683:2661`).
+    expect(variantsOf(html, 'gap-12')).toEqual(['lg:gap-12'])
+  })
+
+  it('carries the ways-to-work numbering into the row when the rail cannot', () => {
+    // `PanelRail` is `hidden … lg:flex`, so at 402 the numeral has to come
+    // from the row itself (`1814:1930`) or the panels lose their order.
+    const numerals = html.match(/>01</g) ?? []
+    expect(numerals.length).toBeGreaterThanOrEqual(2)
   })
 })
