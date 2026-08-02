@@ -31,6 +31,12 @@ A **Collection** is a document type with a URL prefix and a collection index. Tw
 
 **"Listing" is the section block; "index" is the route.** `listingSection` projects page cards by `pageType` from inside a Page. A collection index is an entire route with pagination and no document. They share nothing but a word, so they no longer share one: the route kind is `index` (`caseStudyIndex`, `perspectiveIndex`, `CaseStudyIndexView`).
 
+## Preview
+
+- **Draft mode** — Next.js's own switch (`draftMode()`), and the only thing that decides whether a page shows drafts. `defineLive` keys off it entirely, so nothing else in the app needs a notion of "published vs draft".
+- **Preview switcher** — the fixed corner chip that flips a page between Published and Drafts for someone holding a Sanity Studio session (#60). **Never call it a perspective switcher**: `perspective` is this repo's blog document type, and Sanity's own API parameter, so a third meaning would make the word useless. The feature is `preview switcher`; the state is `draft`.
+- **Studio session** — there is no site auth. "Logged in" means holding a Sanity Studio token for this project, which the same-origin Studio at `/studio` leaves in `localStorage`. That token is a **hint** the browser may act on and a **claim** the server must verify against Sanity before enabling draft mode (`src/sanity/draftModeRoutes.ts`); it is never a decision on its own.
+
 ## Naming
 
 One word per concept, everywhere. These rules bind schema names, field names, GROQ projections, component/file names, **and the props those components take** — the codebase is the thing agents imitate, so drift here costs more than it looks like it should.
