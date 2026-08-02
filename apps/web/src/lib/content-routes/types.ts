@@ -124,22 +124,30 @@ export type IndexRendererProps<Q extends string> = NonNullable<QueryResult<Q>> &
  * same rule: **the note is required whenever the flag is set**, because "no
  * frame was ever drawn" and "waiting on #22" call for opposite actions.
  *
- * Full reasoning: ADR 0012.
+ * Full reasoning — including why enforcement lives in
+ * `provisionalRoutes.render.test.tsx` rather than `verify`, and the
+ * human-facing inventory in `docs/content-sourcing.md` — is ADR 0012.
  *
- * Enforcement is `provisionalRoutes.render.test.tsx` rather than `verify`: `verify`
- * runs inside `@o3/migration`, which does not depend on `@o3/web` and reads
- * the dataset and the committed JSON — neither of which a route composition
- * appears in. The human-facing inventory both halves feed is
- * `docs/content-sourcing.md`.
+ * A union rather than three optionals: a marker is either the flag with its
+ * required note, or a frame reference — `figmaNode` says the composition was
+ * transcribed from a canonical frame, `provisional` says no frame exists, and
+ * a route claiming both is describing two different pages. The test still
+ * asserts the same invariants at the value level.
  */
-export interface RouteProvenance {
-  /** True when this route's composition is a placeholder, not authoritative. */
-  readonly provisional?: boolean
-  /** What is missing, and what would clear it. Required with `provisional`. */
-  readonly provisionalNote?: string
-  /** The canonical frame the composition was transcribed from, e.g. `1634:1167`. */
-  readonly figmaNode?: string
-}
+export type RouteProvenance =
+  | {
+      /** This route's composition is a placeholder, not authoritative. */
+      readonly provisional: true
+      /** What is missing, and what would clear it. */
+      readonly provisionalNote: string
+      readonly figmaNode?: never
+    }
+  | {
+      readonly provisional?: never
+      readonly provisionalNote?: never
+      /** The canonical frame the composition was transcribed from, e.g. `1634:1167`. */
+      readonly figmaNode: string
+    }
 
 /**
  * A paginated collection index (`?page=N`). Unlike vtx-web,

@@ -3,8 +3,14 @@ import { describe, expect, it } from 'vitest'
 import { PERSPECTIVES_PAGE_QUERY } from '@o3/sanity/queries'
 
 import { buildIndexRoute } from '@/lib/content-routes/build'
-import { aPerspective, aPerspectivesPage, renderRoute } from '@/test'
-import { classTokens, unprefixedHorizontalScrollUtilities, variantsOf } from '@/test/responsive'
+import {
+  aPerspective,
+  aPerspectivesPage,
+  classTokens,
+  renderRoute,
+  unprefixedHorizontalScrollUtilities,
+  variantsOf,
+} from '@/test'
 import type { FetchCall } from '@/test/stubs/sanity-live'
 
 import { perspectiveIndex } from './collectionIndex'
@@ -107,27 +113,27 @@ const page = await renderRoute(route, {
 })
 
 describe('perspectives index composition', () => {
-  it('opens on the Work index’s hero band, with the Blog row’s headline', async () => {
+  it('opens on the Work index’s hero band, with the Blog row’s headline', () => {
     // `1683:2469` — the Home Blog row's own line, not new copy.
     expect(page.html).toContain('The thinking behind the work.')
     // `1634:1183` treatment: the collection's name as the band's eyebrow.
     expect(page.html).toContain('Perspectives')
   })
 
-  it('carries the one line of copy no frame writes', async () => {
+  it('carries the one line of copy no frame writes', () => {
     // Flagged provisional on the entry. Asserted so that removing the marker
     // while leaving the copy — or the reverse — is visible.
     expect(page.html).toContain('What we tried, what broke')
   })
 
-  it('lays the cards on the Blog band’s bone surface at its 96px rhythm', async () => {
+  it('lays the cards on the Blog band’s bone surface at its 96px rhythm', () => {
     // `1683:2467` and `1924:5388`: fill #F0F0F0, padding 96px 0.
     const tokens = classTokens(page.html)
     expect(tokens).toContain('bg-bone')
     expect(tokens).toContain('py-band-sm')
   })
 
-  it('fills the 1248 column with three of the frame’s own cards', async () => {
+  it('fills the 1248 column with three of the frame’s own cards', () => {
     // 3 × 394.67 + 2 × 32 = 1248 = --container-section. gap-x-8 is the 32.
     const tokens = classTokens(page.html)
     expect(tokens).toContain('max-w-section')
@@ -135,7 +141,7 @@ describe('perspectives index composition', () => {
     expect(tokens).toContain('lg:grid-cols-3')
   })
 
-  it('stacks to one column below lg — the two frames, nothing between', async () => {
+  it('stacks to one column below lg — the two frames, nothing between', () => {
     // ADR 0006: composition switches at `lg`. A `md:grid-cols-2` would be a
     // third composition no frame draws.
     const tokens = classTokens(page.html)
@@ -143,13 +149,13 @@ describe('perspectives index composition', () => {
     expect(tokens.filter((t) => t.startsWith('md:grid-cols'))).toEqual([])
   })
 
-  it('keeps the stacked cards 48px apart, the value read at 402', async () => {
+  it('keeps the stacked cards 48px apart, the value read at 402', () => {
     // `1814:1738` sets 48 between stacked cards. Unprefixed: no frame stacks
     // this card at 1440, so the desktop row gap is that value carried up.
     expect(variantsOf(page.html, 'gap-y-12')).toEqual(['gap-y-12'])
   })
 
-  it('gives a phone no hidden scroll region', async () => {
+  it('gives a phone no hidden scroll region', () => {
     // The Home and About Blog rows bleed past the right edge; this one does
     // not, because there is nothing to scroll to.
     expect(unprefixedHorizontalScrollUtilities(page.html)).toEqual([])
@@ -157,15 +163,11 @@ describe('perspectives index composition', () => {
 })
 
 describe('perspectives index pager', () => {
-  it('offers both directions in the middle of the collection', async () => {
-    const { html } = await renderRoute(route, {
-      data: aPerspectivesPage(manyPerspectives(12), 40),
-      searchParams: { page: '2' },
-    })
-
-    expect(html).toContain('href="/perspectives"')
-    expect(html).toContain('href="/perspectives?page=3"')
-    expect(html).toContain('Page 2 of 4')
+  it('offers both directions in the middle of the collection', () => {
+    // `page` above is this exact state: page 2 of 4.
+    expect(page.html).toContain('href="/perspectives"')
+    expect(page.html).toContain('href="/perspectives?page=3"')
+    expect(page.html).toContain('Page 2 of 4')
   })
 
   it('drops Previous on the first page and Next on the last', async () => {
@@ -186,12 +188,8 @@ describe('perspectives index pager', () => {
     expect(html).not.toContain('aria-label="Pagination"')
   })
 
-  it('marks the two links up as prev/next for a crawler', async () => {
-    const { html } = await renderRoute(route, {
-      data: aPerspectivesPage(manyPerspectives(12), 40),
-      searchParams: { page: '2' },
-    })
-    expect(html).toContain('rel="prev"')
-    expect(html).toContain('rel="next"')
+  it('marks the two links up as prev/next for a crawler', () => {
+    expect(page.html).toContain('rel="prev"')
+    expect(page.html).toContain('rel="next"')
   })
 })

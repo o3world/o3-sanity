@@ -125,6 +125,7 @@ export const railPanelsSection = defineSectionBlock({
       // caseStudy.chapters already follows (CONTEXT.md).
       options: { list: ['label', 'number'], layout: 'radio', direction: 'horizontal' },
       initialValue: 'label',
+      hidden: ({ parent }) => parent?.layout === 'cards',
     }),
     defineField({
       name: 'panels',
@@ -158,6 +159,10 @@ export const railPanelsSection = defineSectionBlock({
               type: 'string',
               description: 'The quieter "Best when…" line — the foot of a card.',
             }),
+            // `cta` and `media` are rail-layout elements like `rail` above,
+            // but a panel field's `hidden` callback sees only the panel it
+            // sits in, not the section's `layout` — so these two carry the
+            // gate as prose where `rail` gets the mechanical one.
             defineField({
               name: 'cta',
               type: 'cta',

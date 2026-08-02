@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { PAGE_QUERY } from '@o3/sanity/queries'
+import type { RailPanelsSection } from '@o3/sanity/types/generated'
 
 import { buildCatchAllRoute } from '@/lib/content-routes/build'
 import { CATCH_ALL_TYPES } from '@/content/documents'
@@ -175,7 +176,7 @@ describe('the seeded Solutions page', () => {
    */
   it('draws the engagement band as cards, not the rail', () => {
     const band = sections.find((s) => s._type === 'railPanelsSection') as
-      { layout?: string; panels?: { cta?: unknown; media?: unknown }[] } | undefined
+      RailPanelsSection | undefined
 
     expect(band?.layout).toBe('cards')
     expect(band?.panels).toHaveLength(3)

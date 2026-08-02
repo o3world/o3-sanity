@@ -74,7 +74,7 @@ export function RailPanelsSection({
   surface,
 }: RailPanelsSectionProps) {
   const items = panels ?? []
-  const cards = stegaClean(layout) === 'cards'
+  const isCards = stegaClean(layout) === 'cards'
   const mode = stegaClean(rail) === 'number' ? 'number' : 'label'
   // Panel `_key`s are unique within the document, so they identify a panel
   // across both halves of the band without the section needing its own id
@@ -85,7 +85,7 @@ export function RailPanelsSection({
     <div
       className={cn(
         'flex w-full flex-col gap-6',
-        cards
+        isCards
           ? 'lg:flex-row lg:items-end lg:justify-between lg:gap-8'
           : 'lg:w-[928px] lg:flex-row lg:items-center lg:gap-8',
       )}
@@ -94,7 +94,7 @@ export function RailPanelsSection({
         <h2
           className={cn(
             'text-display-xl font-display text-balance',
-            cards ? 'lg:w-[571px]' : 'lg:w-[500px]',
+            isCards ? 'lg:w-[571px]' : 'lg:w-[500px]',
           )}
         >
           {heading}
@@ -106,7 +106,7 @@ export function RailPanelsSection({
             'text-lead leading-[1.2]',
             // 30px against the 24px step on the Solutions band — 1.25 rather
             // than 1.2, and the only value the two headers disagree on.
-            cards ? 'lg:w-[607px] lg:leading-[1.25]' : 'lg:w-[385px]',
+            isCards ? 'lg:w-[607px] lg:leading-[1.25]' : 'lg:w-[385px]',
           )}
         >
           {intro}
@@ -115,7 +115,7 @@ export function RailPanelsSection({
     </div>
   )
 
-  if (cards) {
+  if (isCards) {
     return (
       <SectionShell surface={resolveSurface(surface, 'white')} top="md" bottom="md">
         <div className="flex flex-col gap-10 lg:gap-[65px]">

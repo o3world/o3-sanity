@@ -14,11 +14,8 @@ import type { RouteProvenance } from '@/lib/content-routes/types'
  *
  * **Why the render layer for a data assertion.** Only the render project
  * resolves the `@/` alias and the four module stubs, and a route entry's
- * module graph reaches a React renderer. That is also why this is not in
- * `verify`: `verify` runs inside `@o3/migration`, which does not depend on
- * `@o3/web` and reads the dataset and the committed JSON — neither of which a
- * route composition appears in. `docs/content-sourcing.md` is the human-facing
- * inventory both halves feed.
+ * module graph reaches a React renderer. Why this lives here and not in
+ * `verify` is ADR 0012.
  */
 /**
  * Only the provenance, not the whole entry: `IndexEntry<Q>` is invariant in
