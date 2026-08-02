@@ -156,7 +156,17 @@ function EntryRow({ entry }: { entry: Entry }) {
 
   return (
     <li className="relative flex items-center justify-between gap-8 border-b border-[rgba(0,0,0,0.55)] py-6 lg:py-12 lg:first:pt-0">
-      <div className="flex flex-1 items-center gap-8">
+      {/* The frame fixes the lead+copy group's measure, and the two bands
+          disagree: 1015px on the appearances rows (`1710:1806`), 684px on the
+          ideas rows (`1732:1416`, disc + copy). The cap is what wraps the
+          ideas title at two lines; without it the 36px heading runs the row.
+          At 402 the row is one stacked column at 8px (`1906:586`): the date
+          sits above the kicker, not beside the copy. */}
+      <div
+        className={`flex flex-1 flex-col items-start gap-2 lg:flex-row lg:items-center lg:gap-8 ${
+          entry.date ? 'lg:max-w-[1015px]' : 'lg:max-w-[684px]'
+        }`}
+      >
         {entry.date ? (
           <>
             <DateMarker date={entry.date} />
