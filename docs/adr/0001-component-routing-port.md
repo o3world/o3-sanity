@@ -2,6 +2,11 @@
 
 Status: accepted (2026-07-31)
 
+> **Naming note (2026-08-01).** `buildListingRoute` / `defineListingType` / the
+> `listing` route kind were renamed to `buildIndexRoute` / `defineIndexType` /
+> `index`, freeing "listing" for `listingSection` alone. The decision below is
+> unchanged; only the names are. See CONTEXT.md → Routing.
+
 ## Context
 
 The highest-value port from vtx-web is its component routing system — two stacked deep modules in `apps/web`:

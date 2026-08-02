@@ -7,7 +7,7 @@ import type { SectionProps } from '@/content/blocks/sectionTypes'
 
 /**
  * The perspective card shape — the `PERSPECTIVE_CARD` projection. Pinned to
- * the carousel feed's element type; the listing page's items share the same
+ * the carousel feed's element type; the collection index's items share the same
  * fragment so they're structurally assignable.
  */
 export type PerspectiveCardData = NonNullable<

@@ -39,7 +39,7 @@ export type QueryResult<Q extends string> = string extends Q
  * Route-level context every renderer receives alongside the fetched document.
  * o3 is single-locale (ADR 0001), so this is just the resolved slug: the
  * path-tail for detail types, the full joined path for the catch-all, and
- * empty for singletons/listings.
+ * empty for singletons and collection indexes.
  */
 export interface RouteContext {
   readonly slug: string
@@ -107,27 +107,27 @@ export interface Pagination {
   readonly totalPages: number
 }
 
-export type ListingRendererProps<Q extends string> = NonNullable<QueryResult<Q>> & {
+export type IndexRendererProps<Q extends string> = NonNullable<QueryResult<Q>> & {
   readonly pagination: Pagination
 }
 
 /**
- * A paginated listing route (`?page=N`) over a collection. Unlike vtx-web,
- * o3 listings have no backing singleton document — the entry's `query` is a
+ * A paginated collection index (`?page=N`). Unlike vtx-web,
+ * o3 collection indexes have no backing document — the entry's `query` is a
  * combined `{ "items": ...[$offset...$end], "total": count(...) }` projection
  * and its SEO is static.
  */
-export interface ListingEntry<Q extends string = string> {
-  readonly kind: 'listing'
+export interface IndexEntry<Q extends string = string> {
+  readonly kind: 'index'
   /** The `_type`s the feed lists — they drive the fetch's cache tags. */
   readonly itemTypes: readonly string[]
   readonly query: Q
   /** Items per page. Default 12. */
   readonly pageSize?: number
-  readonly renderer: (props: ListingRendererProps<Q>) => ReactNode
+  readonly renderer: (props: IndexRendererProps<Q>) => ReactNode
   /**
    * Static — there is no document to derive from — but it goes through the
-   * same chain as every other route so a listing gets its canonical, robots,
+   * same chain as every other route so an index gets its canonical, robots,
    * and social tags rather than a bare title (#26).
    */
   readonly seo?: DocumentSeo

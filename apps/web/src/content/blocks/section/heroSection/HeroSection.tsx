@@ -56,12 +56,12 @@ export function HeroSection({
       <CollectionHero
         eyebrow={eyebrow}
         heading={lines.join(' ')}
-        deck={subheading}
+        subheading={subheading}
         align={centred ? 'center' : 'start'}
         decoration={
           showOrbs ? (
             // About hangs the sphere off the right edge of the band
-            // (`1924:5344`), where the deck would otherwise sit.
+            // (`1924:5344`), where the standfirst would otherwise sit.
             <OrbitalSphere className="-z-10 hidden lg:bottom-[-30%] lg:right-[-14%] lg:block lg:w-[720px]" />
           ) : null
         }

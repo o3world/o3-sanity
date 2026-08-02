@@ -2,18 +2,18 @@ import { describe, expect, it } from 'vitest'
 
 import { PERSPECTIVES_PAGE_QUERY } from '@o3/sanity/queries'
 
-import { buildListingRoute } from '@/lib/content-routes/build'
+import { buildIndexRoute } from '@/lib/content-routes/build'
 import { aPerspective, aPerspectivesPage, renderRoute } from '@/test'
 import type { FetchCall } from '@/test/stubs/sanity-live'
 
-import { perspectiveListing } from './listing'
+import { perspectiveIndex } from './collectionIndex'
 
 /**
  * The paginated /perspectives index. Pagination is the only real logic on
  * this route — an out-of-range `?page=` must clamp rather than 404 or render
  * an empty grid, and the clamp costs a second fetch, so both are pinned here.
  */
-const route = buildListingRoute(perspectiveListing)
+const route = buildIndexRoute(perspectiveIndex)
 
 /**
  * Just the feed fetches. Every route also fetches Site Settings for the SEO
@@ -33,7 +33,7 @@ function manyPerspectives(count: number) {
   )
 }
 
-describe('perspectives listing route', () => {
+describe('perspectives collection index route', () => {
   it('renders the items on the first page', async () => {
     const { html } = await renderRoute(route, {
       data: aPerspectivesPage(manyPerspectives(3), 3),

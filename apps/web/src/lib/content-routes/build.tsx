@@ -14,7 +14,7 @@ import { encodePathParam } from './encodePathParam'
 
 import type {
   DetailEntry,
-  ListingEntry,
+  IndexEntry,
   QueryResult,
   RoutableEntry,
   RouteContext,
@@ -50,7 +50,7 @@ export interface SingletonRouteShim {
   readonly Page: () => Promise<JSX.Element>
 }
 
-export interface ListingRouteShim {
+export interface IndexRouteShim {
   readonly generateMetadata: () => Promise<Metadata>
   readonly Page: (props: {
     searchParams: Promise<{ page?: string | string[] }>
@@ -273,13 +273,13 @@ export function buildSingletonRoute<Q extends string>(
 }
 
 /**
- * Build a route shim for a paginated listing (`?page=N`). The entry's query
+ * Build a route shim for a paginated collection index (`?page=N`). The entry's query
  * returns `{ items, total }` in one round-trip (`$offset`/`$end` slice the
  * feed). The requested page is clamped against `total`; the rare
  * out-of-range request costs one refetch. Fetches are tagged per
- * `itemTypes` so an item edit invalidates the listing that indexes it.
+ * `itemTypes` so an item edit invalidates the index that lists it.
  */
-export function buildListingRoute<Q extends string>(entry: ListingEntry<Q>): ListingRouteShim {
+export function buildIndexRoute<Q extends string>(entry: IndexEntry<Q>): IndexRouteShim {
   const pageSize = entry.pageSize ?? 12
   const tags = entry.itemTypes.map(typeTag)
 
@@ -293,12 +293,12 @@ export function buildListingRoute<Q extends string>(entry: ListingEntry<Q>): Lis
     return data
   }
 
-  const generateMetadata: ListingRouteShim['generateMetadata'] = async () => {
+  const generateMetadata: IndexRouteShim['generateMetadata'] = async () => {
     if (!entry.seo) return {}
     return buildDocumentMetadata({ doc: entry.seo, settings: await getSiteSettings() })
   }
 
-  const Page: ListingRouteShim['Page'] = async ({ searchParams }) => {
+  const Page: IndexRouteShim['Page'] = async ({ searchParams }) => {
     const { page: pageParam } = await searchParams
     const requested = parsePage(pageParam)
 

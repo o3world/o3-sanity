@@ -9,12 +9,12 @@ export interface CollectionHeroProps {
   /** The headline. 48px flush left, 60px when centred — see `align`. */
   heading: ReactNode
   /** The 24px standfirst pinned right, in a 395px measure. Left-aligned only. */
-  deck?: ReactNode
+  subheading?: ReactNode
   /**
    * `start` is the Work and About shape — headline left in a 588px measure,
-   * deck pinned right (`1634:1181`, `1924:5344`). `center` is the Solutions
-   * shape: eyebrow and headline stacked on the centre line at **60px** in a
-   * 650px measure, no deck (`1925:6141`).
+   * subheading pinned right (`1634:1181`, `1924:5344`). `center` is the
+   * Solutions shape: eyebrow and headline stacked on the centre line at
+   * **60px** in a 650px measure, no subheading (`1925:6141`).
    *
    * The size follows the alignment rather than being its own prop, because
    * that is exactly what the two frames do — there is no centred 48px hero and
@@ -50,7 +50,7 @@ export interface CollectionHeroProps {
 export function CollectionHero({
   eyebrow,
   heading,
-  deck,
+  subheading,
   align = 'start',
   decoration,
   className,
@@ -84,7 +84,9 @@ export function CollectionHero({
             {heading}
           </h1>
         </div>
-        {deck && !centred ? <p className="text-lead leading-[1.2] lg:w-[395px]">{deck}</p> : null}
+        {subheading && !centred ? (
+          <p className="text-lead leading-[1.2] lg:w-[395px]">{subheading}</p>
+        ) : null}
       </div>
     </section>
   )

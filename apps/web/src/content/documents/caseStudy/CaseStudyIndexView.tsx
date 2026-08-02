@@ -6,7 +6,7 @@ import type { CASE_STUDIES_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 import { CaseStudyCard } from './CaseStudyCard'
 import type { Pagination } from '@/lib/content-routes/types'
 
-interface CaseStudyListingViewProps {
+interface CaseStudyIndexViewProps {
   readonly items: NonNullable<CASE_STUDIES_PAGE_QUERY_RESULT>['items']
   readonly pagination: Pagination
 }
@@ -19,7 +19,7 @@ function pageHref(page: number): string {
  * The /work index, built to the Work frame (`1634:1167`) — #43.
  *
  * ```
- * hero    1634:1181   ink-warm band, eyebrow + 48px headline + 24px deck
+ * hero    1634:1181   ink-warm band, eyebrow + 48px headline + 24px standfirst
  * grid    1634:1186   white, 96px vertical, 64px gap, 1248 × 556 cards
  * ```
  *
@@ -46,7 +46,7 @@ function pageHref(page: number): string {
  * curate this index, it wants a document. Until then the frame supplies the
  * copy and the collection supplies the cards.
  */
-export function CaseStudyListingView({ items, pagination }: CaseStudyListingViewProps) {
+export function CaseStudyIndexView({ items, pagination }: CaseStudyIndexViewProps) {
   const { page, totalPages } = pagination
 
   return (
@@ -54,7 +54,7 @@ export function CaseStudyListingView({ items, pagination }: CaseStudyListingView
       <CollectionHero
         eyebrow="Work"
         heading="The work, framed around the second problem."
-        deck="We lead with the deeper problem we found — not the deliverable. Here's what that looks like across the work."
+        subheading="We lead with the deeper problem we found — not the deliverable. Here's what that looks like across the work."
       />
 
       <div className="px-gutter py-band-sm bg-white">

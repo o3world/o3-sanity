@@ -1,9 +1,9 @@
 /**
- * Pagination helpers shared by `buildListingRoute` and listing views.
+ * Pagination helpers shared by `buildIndexRoute` and collection index views.
  *
  * `searchParams.page` arrives as `string | string[] | undefined` from
  * Next.js. These helpers normalize that into the 1-indexed page number +
- * the GROQ slice indices (`[$offset...$end]`, exclusive end) the listing
+ * the GROQ slice indices (`[$offset...$end]`, exclusive end) the collection index
  * queries consume.
  */
 

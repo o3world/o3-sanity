@@ -18,9 +18,22 @@ Terms resolved so far. Use these exact words in schema names, code, issues, and 
 
 Testimonials/quotes are **inline** in the quote section block — no document type until a quote is actually reused.
 
+## Routing
+
+Not everything with a URL is a document. Four **route kinds** exist; the glossary term is the kind, not the file it lives in.
+
+- **Detail** — one document at its own URL beneath a prefix (`/perspectives/{slug}`, `/work/{slug}`).
+- **Catch-all** — a Page, resolved by matching its multi-segment slug (`services/ux-audit`).
+- **Singleton** — a fixed route backed by one known document (the homepage).
+- **Collection index** — the paginated landing page for a Collection (`/work`, `/perspectives`). **It has no backing document**: the entry is a query plus static SEO, so there is nothing in Studio to edit and nothing for the migration pipeline to own. This is the one route kind that breaks the document-per-URL assumption, which is why it gets a name.
+
+A **Collection** is a document type with a URL prefix and a collection index. Two exist — Perspective (`/perspectives`) and Case Study (`/work`, whose display name is **Work**). `COLLECTION_PREFIXES` is the single source of the prefix.
+
+**"Listing" is the section block; "index" is the route.** `listingSection` projects page cards by `pageType` from inside a Page. A collection index is an entire route with pagination and no document. They share nothing but a word, so they no longer share one: the route kind is `index` (`caseStudyIndex`, `perspectiveIndex`, `CaseStudyIndexView`).
+
 ## Naming
 
-One word per concept, everywhere. These rules bind schema names, field names, GROQ projections, and component/file names alike — the codebase is the thing agents imitate, so drift here costs more than it looks like it should.
+One word per concept, everywhere. These rules bind schema names, field names, GROQ projections, component/file names, **and the props those components take** — the codebase is the thing agents imitate, so drift here costs more than it looks like it should.
 
 ### Type names
 
@@ -33,7 +46,7 @@ One word per concept, everywhere. These rules bind schema names, field names, GR
 
 The `Section` suffix is the tier marker: if a name ends in `Section` it is a full-width page section rendered inside `SectionShell` and belongs in `SECTION_BLOCKS`; anything else that renders is a base block or a shared object, and lives inside a `layoutSection` column. A block name must never end in `Block` — the suffix carries no information (every block is a block) and the tier is what an agent actually needs to know. `figure`, `embed`, and `cta` are shared objects that double as base blocks; that dual use is why the base tier takes no suffix.
 
-Both factories enforce this: `defineSectionBlock` rejects a name that doesn't end `Section`, `defineBaseBlock` rejects one that does, and both reject names missing from `registry.ts`.
+The enforcement point is `registry.ts`, not the suffix: both factories reject a name missing from `SECTION_BLOCKS` / `BASE_BLOCKS`, and the web app's `BLOCK_REGISTRY` is compile-checked against the types generated from those lists. The suffix rule itself is upheld by whoever curates the registry — neither factory inspects name shape (see Known drift).
 
 ### Field lexicon
 
@@ -58,6 +71,8 @@ Closed vocabulary. If the field you want isn't here and isn't obviously domain-s
 
 The lexicon governs **editorial** fields — the ones an author fills in. The hidden `migration` provenance object is outside it (`sourceId`, `extractedAt`, `locked`, `figmaNode`, `provisional`, `provisionalNote`): those name pipeline state, not content, and are `readOnly` in Studio.
 
+It also governs the **props** a presentational component exposes, even in `packages/ui` where nothing is schema-bound. A prop is where a field's value lands, so a renderer that writes `deck={subheading}` forces every reader to learn the same concept twice and quietly reintroduces the synonym the lexicon exists to kill. Design vocabulary belongs in the prop's _doc comment_ ("the 24px standfirst pinned right"), never in its name.
+
 Shape conventions: reference fields are singular for one (`client`, `author`), plural for arrays (`categories`, `caseStudies`); arrays of objects take a plural noun (`stats`, `chapters`, `panels`); closed enums are a bare noun with an `options.list` (`variant`, `layout`, `width`, `pageType`, `decoration`) and always carry an `initialValue`.
 
 ### Component and file names
@@ -69,7 +84,7 @@ Two conventions, split by whether the file is bound to a schema type:
 
 ### Known drift
 
-Fix on sight; don't imitate. As of 2026-07-31 the rules above are the target, and these three are the gap:
+Fix on sight; don't imitate. As of 2026-08-01 the rules above are the target, and these are the gap:
 
 - Enforcement is not wired yet: the factories don't check name shape, and `tools/check-schema-symmetry` doesn't exist. Until both land, the suffix and folder rules are convention only — follow them anyway.
 - `perspective.featuredImage` should be `heroMedia` (`caseStudy` already uses it). Requires touching the five converted JSON docs in `tools/migration/data/converted/perspective/` and the translate step.
@@ -91,4 +106,6 @@ Fix on sight; don't imitate. As of 2026-07-31 the rules above are the target, an
 - **Figma is the design source of record** (map #33) — the "Design Concept" section of _O3DX: Visual exploration_, at **1440 / 402**. It outranks `prototype/`, which is retired (#48). Read [`docs/agents/figma.md`](docs/agents/figma.md) before opening the file.
 - Five neutrals (white / bone / ink / ink-warm / ink-deep), brand red almost always arriving as a **gradient** rather than a flat fill, Figtree at weight **400**, square corners. Tokens and their node references: `packages/tailwind-config`.
 - **Responsive is a renderer concern** — the frames are endpoints, not breakpoints (ADR 0006). No per-breakpoint schema field.
-- **Motion is the one thing Figma cannot supply.** The orbital vocabulary still lives in `prototype/`; what carries it once the prototype retires is open on #33.
+- **Motion is the one thing Figma cannot supply**, so `packages/ui` carries it: `OrbitalSphere` (the wireframe globe), `Reveal`, and `MaskedLines`. The orbital vocabulary has left `prototype/`.
+- **Orbital / band** — the two compositions the sphere appears in, and the `heroSection.variant` enum that names them. `orbital` is the Home opener (full sphere band under a bone dome); `band` is the interior-page hero (a shallow ink-warm strip with an eyebrow), shared with every collection index as `CollectionHero`.
+- **Captured prototype** — an answered visual proposal, committed to `apps/storybook/prototypes/` as a dated read-only snapshot (ADR 0010). **Not a source of record**: take intent and sequence from one, never values. Distinct from the retired root `prototype/`.

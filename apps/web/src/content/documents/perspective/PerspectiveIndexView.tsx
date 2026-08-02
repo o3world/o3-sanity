@@ -6,7 +6,7 @@ import type { PERSPECTIVES_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 import { PerspectiveCard } from './PerspectiveCard'
 import type { Pagination } from '@/lib/content-routes/types'
 
-interface PerspectivesListingViewProps {
+interface PerspectiveIndexViewProps {
   readonly items: NonNullable<PERSPECTIVES_PAGE_QUERY_RESULT>['items']
   readonly pagination: Pagination
 }
@@ -27,7 +27,7 @@ function pageHref(page: number): string {
  * That keeps the page inside the design language rather than beside it, and
  * makes it cheap to replace: a real frame changes this file only.
  */
-export function PerspectivesListingView({ items, pagination }: PerspectivesListingViewProps) {
+export function PerspectiveIndexView({ items, pagination }: PerspectiveIndexViewProps) {
   const { page, totalPages } = pagination
 
   return (
@@ -35,7 +35,7 @@ export function PerspectivesListingView({ items, pagination }: PerspectivesListi
       <CollectionHero
         eyebrow="Perspectives"
         heading="The thinking behind the work."
-        deck="Essays and field notes from the team — what we are seeing, and what we think it means."
+        subheading="Essays and field notes from the team — what we are seeing, and what we think it means."
       />
 
       <div className="px-gutter py-band-sm bg-bone">

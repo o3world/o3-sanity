@@ -1,4 +1,4 @@
-import type { CatchAllEntry, DetailEntry, ListingEntry, SingletonEntry } from './types'
+import type { CatchAllEntry, DetailEntry, IndexEntry, SingletonEntry } from './types'
 
 export function defineCatchAllType<Q extends string>(
   opts: Omit<CatchAllEntry<Q>, 'kind'>,
@@ -18,8 +18,8 @@ export function defineSingletonType<Q extends string>(
   return { kind: 'singleton', ...opts }
 }
 
-export function defineListingType<Q extends string>(
-  opts: Omit<ListingEntry<Q>, 'kind'>,
-): ListingEntry<Q> {
-  return { kind: 'listing', ...opts }
+export function defineIndexType<Q extends string>(
+  opts: Omit<IndexEntry<Q>, 'kind'>,
+): IndexEntry<Q> {
+  return { kind: 'index', ...opts }
 }
