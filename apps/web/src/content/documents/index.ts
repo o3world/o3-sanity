@@ -1,6 +1,7 @@
 import type { AnyCatchAllEntry } from '@/lib/content-routes/types'
 
 import { caseStudy } from './caseStudy/entry'
+import { caseStudyListing } from './caseStudy/listing'
 import { home, page } from './page/entry'
 import { perspective } from './perspective/entry'
 import { perspectiveListing } from './perspective/listing'
@@ -19,4 +20,4 @@ import { perspectiveListing } from './perspective/listing'
 export const CATCH_ALL_TYPES: readonly AnyCatchAllEntry[] = [page]
 
 // Re-export named entries so route files can import a single entry by name.
-export { caseStudy, home, page, perspective, perspectiveListing }
+export { caseStudy, caseStudyListing, home, page, perspective, perspectiveListing }
