@@ -15,6 +15,11 @@ type QuoteSectionProps = SectionProps<'quoteSection'>
  *
  * - **Quote** — 64px filled with `--gradient-statement`, so it starts at ink
  *   and finishes at 40%. On an eight-line quote that fade is the whole effect.
+ *   Its step is `--text-quote`, not `--text-hero`: at 402 the frame sets this
+ *   node 30px (`1814:1684`) against the hero headline's and the partners
+ *   statement's 36, and the three only converge again at 64 (ADR 0006
+ *   amendment 2026-08-02). This node is where the old shared floor was
+ *   measured from, so it is the one call site the change does not move.
  * - **Attribution** — 36px at `rgba(10,10,10,0.5)` (`--color-fg-quiet`) on a
  *   1.5em line, in an 822px measure. **Not an eyebrow**: the scaffold set it
  *   as a red uppercase kicker, which is neither the size, the case, nor the
@@ -54,7 +59,7 @@ export function QuoteSection({ quote, attribution, decoration, surface }: QuoteS
       ) : null}
 
       <blockquote className="max-w-content relative mx-auto flex flex-col gap-6">
-        <p className="text-hero font-display text-gradient text-balance">&ldquo;{quote}&rdquo;</p>
+        <p className="text-quote font-display text-gradient text-balance">&ldquo;{quote}&rdquo;</p>
         {attribution ? (
           <footer className="text-display-lg text-fg-quiet max-w-article leading-[1.5em]">
             {attribution}

@@ -18,7 +18,8 @@
  * ends are read values, not taste (ADR 0006).
  *
  *   token           402    1440
- *   hero            30  →  64
+ *   hero            36  →  64
+ *   quote           30  →  64
  *   cta             40  →  60
  *   display-xl      40  →  48
  *   display-lg      18  →  36
@@ -34,9 +35,14 @@
  * interpolates. See ADR 0006 for why the frames are endpoints, not
  * breakpoints.
  *
- * There is NO distinct hero step. The Home hero is photographic with no live
- * text (1810:1616), and the Work hero headline is 48px — the same step as
- * every section headline. `--text-hero` is therefore the 64px statement.
+ * There is NO distinct hero step. The 1440 Home hero bakes its headline into
+ * a raster (1810:1616), and the Work hero headline is 48px — the same step as
+ * every section headline. `--text-hero` is therefore the 64px statement, and
+ * the Home headline rides it.
+ *
+ * `hero` and `quote` are the same size at 1440 and split only at 402 (36 vs
+ * 30). That is the frames talking, not two names for one step — see the
+ * tokens, and ADR 0006's 2026-08-02 amendment.
  */
 
 @theme {
@@ -48,13 +54,42 @@
   --font-display: var(--font-figtree, Figtree), 'Helvetica Neue', Arial, sans-serif;
 
   /* ── Display scale ─────────────────────────────────────────────────────── */
-  /* hero — 64px. The full-width statements: the partners intro (1864:2393)
-   * and the pull quote (1683:2143). Both are filled with
-   * --gradient-statement rather than a solid ink; pair with `text-gradient`. */
-  --text-hero: clamp(30px, calc(3.28vw + 16.8px), 64px);
+  /* hero — 64px. The biggest thing in its band: the Home hero headline
+   * (`1814:1624` at 402; baked into the 1440 raster) and the partners intro
+   * (`1864:2393` / `1814:1894`). The intro is filled with
+   * --gradient-statement rather than a solid ink; pair with `text-gradient`.
+   *
+   * FLOOR IS 36, NOT 30 — both 402 nodes read 36 (ADR 0006 amendment
+   * 2026-08-02). The 30 this token shipped with was read off `1814:1684`,
+   * which is the pull quote; that value now lives on `--text-quote`.
+   *
+   * Line-height stays 1.2 — the read value at 1440. The 402 frame sets the
+   * headline 40/36 (1.111) and the intro 1.25, i.e. the two consumers
+   * disagree by ≤5px of leading in opposite directions. One token cannot hold
+   * both, and neither is worth a call-site literal; see the amendment. */
+  --text-hero: clamp(36px, calc(2.7vw + 25.15px), 64px);
   --text-hero--line-height: 1.2;
   --text-hero--letter-spacing: 0;
   --text-hero--font-weight: 400;
+
+  /* quote — 64px. The pull quote, and only the pull quote (`1683:2143` at
+   * 1440, `1814:1684` at 402). Gradient-filled like the intro it used to
+   * share a token with; pair with `text-gradient`.
+   *
+   * IT EARNS ITS OWN STEP BECAUSE THE FRAMES SPLIT IT FROM `hero` at 402 and
+   * nowhere else: 30 against the statements' 36, converging on 64 by 1440. A
+   * one-call-site token is not this file's habit (the attribution's 1.5em
+   * line-height is a call-site literal for exactly that reason) — but a
+   * solved two-endpoint clamp is not expressible as a literal without
+   * inlining `clamp(30px, calc(3.28vw + 16.8px), 64px)` at the call site,
+   * where nothing would ever check it against the frame again.
+   *
+   * This clamp is unchanged: it is the one `--text-hero` shipped with, back
+   * on the node it was actually measured from. */
+  --text-quote: clamp(30px, calc(3.28vw + 16.8px), 64px);
+  --text-quote--line-height: 1.2;
+  --text-quote--letter-spacing: 0;
+  --text-quote--font-weight: 400;
 
   /* cta — 60px. The CTA band headline, centered on ink at 92% white
    * (1680:2088). Its own step because it is the only 60 on the page. */

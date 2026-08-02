@@ -104,7 +104,8 @@ both ends are read values (ADR 0006).
 
 | Utility             | 402    | 1440   | Tracking  | Role                                               |
 | ------------------- | ------ | ------ | --------- | -------------------------------------------------- |
-| `text-hero`         | `30px` | `64px` | 0         | The full-width statements (always gradient-filled) |
+| `text-hero`         | `36px` | `64px` | 0         | Home hero headline; the partners statement         |
+| `text-quote`        | `30px` | `64px` | 0         | The pull quote — 6px below `hero` at 402 only      |
 | `text-cta`          | `40px` | `60px` | -0.0233em | The CTA band headline                              |
 | `text-display-xl`   | `40px` | `48px` | 0         | **Every** section headline; the Work hero          |
 | `text-display-lg`   | `18px` | `36px` | 0         | Pull-quote attribution, rail numerals              |
@@ -123,6 +124,11 @@ both ends are read values (ADR 0006).
 identical at both widths, read rather than assumed. Only display type and
 rhythm interpolate. `display-md` is the one floor with no 402 example to read,
 so it is interpolated from the ramp and says so in the file.
+
+`hero` and `quote` are one step at 1440 and two at 402. That is not
+duplication: the 402 frame sets the hero headline and the partners statement
+36 and the pull quote 30, so a single clamp has to be wrong for two of the
+three. See ADR 0006's 2026-08-02 amendment.
 
 `body-heading` is the one step whose clamp **descends**: the Insights frames
 read 40px at 402 and 36px at 1440, and solving the clamp to both ends the way

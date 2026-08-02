@@ -72,6 +72,7 @@ const THEME_DERIVED = [
   'font-sans',
   'font-display',
   'text-hero',
+  'text-quote',
   'text-cta',
   'text-display-xl',
   'text-display-lg',

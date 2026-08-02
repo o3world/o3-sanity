@@ -21,6 +21,7 @@ import { extendTailwindMerge } from 'tailwind-merge'
  */
 export const FONT_SIZE_UTILITIES = [
   'text-hero',
+  'text-quote',
   'text-cta',
   'text-display-xl',
   'text-display-lg',

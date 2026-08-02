@@ -131,6 +131,36 @@ describe('the homepage at 402 (ADR 0006)', () => {
     expect(heroClasses).toContain('lg:text-center')
   })
 
+  it('sizes the three statements from the step its own frame reads', () => {
+    /*
+     * ADR 0006's amendment (2026-08-02). The 30px floor was read off
+     * `1814:1684` — the PULL QUOTE — and applied to `--text-hero`, which three
+     * bands share. The other two read 36 at 402: the hero headline
+     * `1814:1624` (36/40) and the partners statement `1814:1894` (36/1.25).
+     * All three are 64 at 1440, so the quote needs a second clamp; it cannot
+     * be a second class on the same one.
+     *
+     * Asserted on each band's own class attribute, because `text-hero`
+     * appearing anywhere in the document would pass while the quote still
+     * dragged the floor down.
+     */
+    const heroHeadline = html.match(/<h1 class="([^"]*)"/)?.[1] ?? ''
+    const statement = html.match(/class="([^"]*max-w-\[1026px\][^"]*)"/)?.[1] ?? ''
+    const pullQuote = html.match(/<blockquote[^>]*>.*?<p class="([^"]*)"/s)?.[1] ?? ''
+
+    expect(heroHeadline, 'the hero h1 was not found at all').not.toBe('')
+    expect(statement, 'the partners statement was not found at all').not.toBe('')
+    expect(pullQuote, 'the pull quote was not found at all').not.toBe('')
+
+    // 36 at 402 → 64 at 1440.
+    expect(heroHeadline).toContain('text-hero')
+    expect(statement).toContain('text-hero')
+
+    // 30 at 402 → 64 at 1440 — its own step, or the other two follow it down.
+    expect(pullQuote).toContain('text-quote')
+    expect(pullQuote).not.toContain('text-hero')
+  })
+
   it('holds the case-card gap at 24 until lg', () => {
     // 24 at 402 (`1889:3620`), 48 at 1440 (`1683:2661`).
     expect(variantsOf(html, 'gap-12')).toEqual(['lg:gap-12'])
