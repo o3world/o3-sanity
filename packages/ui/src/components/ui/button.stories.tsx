@@ -8,8 +8,8 @@ const kit = defineVariantStories({
   component: Button,
   title: 'UI/Button',
   knobs: {
-    variant: ['brand', 'inverse', 'ghost'],
-    size: ['sm', 'default', 'lg'],
+    variant: ['dark', 'light', 'ghost'],
+    size: ['base', 'large'],
   },
   defaultArgs: { children: 'View our work', arrow: true },
   matrix: ['variant', 'size'],
@@ -22,17 +22,18 @@ type Story = StoryObj<typeof meta>
 export const Playground = kit.Playground as Story
 export const Matrix = kit.Matrix as Story
 
-/** The nav "Let's talk" CTA: brand red fill, default size, trailing arrow. */
-export const Brand: Story = {
-  args: { children: "Let's talk", arrow: true },
+/** `Button / Solid`, Size=Large, on a light band — the partners CTA (1864:2405). */
+export const Dark: Story = {
+  args: { size: 'large', children: 'See all partners', arrow: true },
 }
 
-/** The hero CTA shape — white fill on a dark band. */
-export const Inverse: Story = {
-  args: { variant: 'inverse', size: 'lg', children: 'View our work', arrow: true },
+/** `Button / Solid`, Size=Base, on ink — the hero CTA (1868:3262). */
+export const Light: Story = {
+  args: { variant: 'light', children: 'View our work', arrow: true },
   globals: { backgrounds: { value: 'ink' } },
 }
 
+/** `Button / Ghost` (264:260). */
 export const Ghost: Story = {
   args: { variant: 'ghost', children: 'Ghost' },
 }

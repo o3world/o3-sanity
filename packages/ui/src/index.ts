@@ -24,6 +24,14 @@ export type { MenuIconProps } from './components/menu-icon'
 export { Button, buttonVariants } from './components/ui/button'
 export type { ButtonProps } from './components/ui/button'
 
+// CollectionHero — the Work frame's index hero (1634:1181)
+export { CollectionHero } from './components/collection-hero'
+export type { CollectionHeroProps } from './components/collection-hero'
+
+// CarouselControl — Figma's `Icon / Surface` (778:1862)
+export { CarouselControl } from './components/carousel-control'
+export type { CarouselControlProps } from './components/carousel-control'
+
 // Card
 export {
   Card,
@@ -51,6 +59,10 @@ export type { EyebrowProps } from './components/eyebrow'
 export { LogoTile } from './components/logo-tile'
 export type { LogoTileProps } from './components/logo-tile'
 
+// OrbitalSphere — the wireframe globe behind the hero and the CTA band
+export { OrbitalSphere } from './components/orbital-sphere'
+export type { OrbitalSphereProps } from './components/orbital-sphere'
+
 // Reveal
 export { Reveal } from './components/reveal'
 export type { RevealProps } from './components/reveal'
@@ -72,9 +84,10 @@ export {
   SectionShell,
   sectionShellVariants,
   SECTION_WIDTH_CLASS,
+  SURFACE_CLASS,
   SURFACES,
 } from './components/section-shell'
-export type { SectionShellProps, SectionWidth, Surface } from './components/section-shell'
+export type { BandStep, SectionShellProps, SectionWidth, Surface } from './components/section-shell'
 
 // Stat
 export { Stat, statLabelVariants } from './components/stat'
