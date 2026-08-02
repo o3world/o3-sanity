@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { Eyebrow } from '@o3/ui'
+import { ArrowIcon, Eyebrow } from '@o3/ui'
 import type { CASE_STUDY_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { SanityImage } from '@/content/SanityImage'
@@ -59,20 +59,9 @@ export function NextCaseBand({ next }: { next: NextCase }) {
             className="bg-surface-muted duration-(--duration-hover) hidden size-[58px] shrink-0 items-center justify-center rounded-full transition-opacity ease-out group-hover:opacity-80 lg:flex"
           >
             <span className="bg-surface-muted border-surface-muted text-ink flex size-[34.8px] items-center justify-center rounded-[5.8px] border-[1.45px]">
-              <svg
-                viewBox="0 0 24 24"
-                width={20}
-                height={20}
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <line x1="4" y1="12" x2="20" y2="12" />
-                <polyline points="13 5 20 12 13 19" />
-              </svg>
+              {/* The chip strokes the glyph at 2, not ArrowIcon's 2.2 — read
+                  off `1710:2615`. */}
+              <ArrowIcon size={20} strokeWidth={2} />
             </span>
           </span>
         </div>

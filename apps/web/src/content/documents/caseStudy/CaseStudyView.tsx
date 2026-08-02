@@ -84,7 +84,7 @@ export function CaseStudyView(props: CaseStudyViewProps) {
        */}
       {stats?.length ? (
         <section className="px-gutter pt-band-sm bg-white">
-          <ul className="mx-auto flex w-full max-w-[822px] flex-col gap-6">
+          <ul className="max-w-article mx-auto flex w-full flex-col gap-6">
             {stats.map((stat) => (
               <li key={stat._key} className="border-line border-t pt-6 first:border-t-0 first:pt-0">
                 <Stat value={stat.value ?? ''} label={stat.label ?? ''} />
@@ -108,8 +108,8 @@ export function CaseStudyView(props: CaseStudyViewProps) {
 
       {/* No frame region — the schema's own "What we shipped" label. */}
       {deliverables?.length ? (
-        <section className="px-gutter bg-white pb-[clamp(96px,calc(6.55vw+69.7px),164px)]">
-          <div className="mx-auto flex w-full max-w-[822px] flex-col gap-6">
+        <section className="px-gutter pb-band-article bg-white">
+          <div className="max-w-article mx-auto flex w-full flex-col gap-6">
             <Eyebrow size="lg">What we shipped</Eyebrow>
             <ul className="grid gap-3 sm:grid-cols-2">
               {deliverables.map((deliverable) => (

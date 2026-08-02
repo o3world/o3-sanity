@@ -19,7 +19,7 @@ export const Scrolling: Story = {
   render: () => (
     <>
       <ReadingProgress />
-      <div className="mx-auto max-w-[822px] px-6 py-16">
+      <div className="max-w-article mx-auto px-6 py-16">
         {Array.from({ length: 24 }, (_, i) => (
           <p key={i} className="text-body text-fg mt-4 first:mt-0">
             Paragraph {i + 1}. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

@@ -93,7 +93,7 @@ export function OrbitalDiagram({ items, className }: OrbitalDiagramProps) {
             <path key={edge.d} d={edge.d} />
           ))}
         </g>
-        <g fill="#eb1000">
+        <g className="fill-brand">
           {SLOTS.map((slot) => (
             <circle key={`${slot.x}-${slot.y}`} cx={slot.x} cy={slot.y} r={5.5} />
           ))}

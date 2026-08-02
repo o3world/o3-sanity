@@ -36,15 +36,13 @@ export interface CaseChapterProps {
  * frame reserves the wider column for centred statements like the pull quote
  * and drops to 822 for anything meant to be read as prose.
  *
- * One value is a call-site literal because it occurs only on this frame:
- * the **164px band**, solved to reach 96px at 402 the way every other
- * rhythm token is (it sits between `band-md` and `band-lg`, matching
- * neither).
- *
- * Title and body sit on `text-body-heading` / `text-body` — the tokens #45
- * minted from the same frame family (`1894:3912` is a chapter heading).
- * `body-heading` is the design's one descending step: 40px at 402, 36px at
- * 1440, where the chapter title sits deliberately below the 48px page title.
+ * Everything here sits on tokens: the band on `band-article` (164px at 1440,
+ * 96px at 402 — between `band-md` and `band-lg`), the measure on
+ * `--container-article`, and the type on `text-body-heading` / `text-body` —
+ * the steps #45 minted from the same frame family (`1894:3912` is a chapter
+ * heading). `body-heading` is the design's one descending step: 40px at 402,
+ * 36px at 1440, where the chapter title sits deliberately below the 48px
+ * page title.
  *
  * The kicker holds at the 18px section step at both widths, following ADR
  * 0006's rule that small UI text does not scale — the mobile frame's 16px is
@@ -54,10 +52,8 @@ export function CaseChapter({ number, kicker, title, children, className }: Case
   const label = [number, kicker].filter(Boolean).join(' — ')
 
   return (
-    <section
-      className={cn('px-gutter bg-white py-[clamp(96px,calc(6.55vw+69.7px),164px)]', className)}
-    >
-      <div className="mx-auto flex w-full max-w-[822px] flex-col gap-8 lg:gap-6">
+    <section className={cn('px-gutter py-band-article bg-white', className)}>
+      <div className="max-w-article mx-auto flex w-full flex-col gap-8 lg:gap-6">
         <div className="flex flex-col gap-2 lg:gap-3">
           {label ? <Eyebrow size="lg">{label}</Eyebrow> : null}
           <h2 className="font-display text-ink text-body-heading text-balance">{title}</h2>

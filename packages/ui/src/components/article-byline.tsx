@@ -13,7 +13,7 @@ export interface ArticleBylineProps {
    * The 42px portrait. Omit it and the disc falls back to the author's
    * initial, which is what the frame itself draws.
    */
-  avatar?: ReactNode
+  headshot?: ReactNode
   className?: string
 }
 
@@ -36,7 +36,7 @@ function initial(name: string | null | undefined): string {
  * **The disc is a fallback the frame happens to be showing.** Its "J" belongs
  * to Jay Forbes, who is a real migrated `person` carrying a real headshot — so
  * the monogram is what an author without one gets, not the design. Pass the
- * portrait as `avatar` and it takes the disc's place at the same size.
+ * portrait as `headshot` and it takes the disc's place at the same size.
  *
  * Ink-band only, so the two text tones are baked in rather than exposed as a
  * variant: both Insights frames draw this on `#0F100B` and nowhere else. The
@@ -44,15 +44,15 @@ function initial(name: string | null | undefined): string {
  * — it appears once, which per `@o3/tailwind-config` is composition, not
  * vocabulary.
  */
-export function ArticleByline({ name, role, meta, avatar, className }: ArticleBylineProps) {
+export function ArticleByline({ name, role, meta, headshot, className }: ArticleBylineProps) {
   const monogram = initial(name)
   const line = [name, role].filter(Boolean).join(', ')
   if (!line && !meta) return null
 
   return (
     <div className={cn('flex items-center gap-[13px] pt-3', className)}>
-      {avatar ? (
-        <div className="size-[42px] shrink-0 overflow-hidden rounded-full">{avatar}</div>
+      {headshot ? (
+        <div className="size-[42px] shrink-0 overflow-hidden rounded-full">{headshot}</div>
       ) : monogram ? (
         <div
           aria-hidden="true"

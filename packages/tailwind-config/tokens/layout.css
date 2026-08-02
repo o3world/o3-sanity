@@ -50,6 +50,13 @@
   --spacing-band-md: 128px;
   --spacing-band-lg: clamp(128px, calc(6.17vw + 103.2px), 192px);
 
+  /* article — the case-study chapter/media band (1647:1714, #44): 164px at
+   * 1440, 96px at 402, sitting between md and lg at the design width and
+   * solved across the two frame endpoints the way gutter and band-lg are.
+   * Earned token status by recurring across CaseChapter, MediaSection and
+   * the deliverables band. */
+  --spacing-band-article: clamp(96px, calc(6.55vw + 69.7px), 164px);
+
   /* The default band padding, for a section with no frame to copy: the widest
    * span the frames use, 96 at 402 through 192 at 1440. A band that HAS a
    * frame should use the matching band-* step instead. */
@@ -66,4 +73,12 @@
    * only bites above roughly a 1074px viewport. Class-accessible via
    * max-w-content. */
   --container-content: 64.625rem; /* 1034px */
+  /* article — 822px: the prose measure. The frames reserve `content` (1034)
+   * for centred statements and drop to 822 for anything meant to be READ —
+   * case-study chapters (1710:2631), the perspective body (1894:3908), the
+   * contained media figure (1899:4186) and the quote attribution. The
+   * SiteNav pill is also 822px wide; that is a coincidence of the nav frame,
+   * not this measure, and stays a call-site literal. Class-accessible via
+   * max-w-article. */
+  --container-article: 51.375rem; /* 822px */
 }

@@ -58,8 +58,8 @@ export function MediaSection({ media, width, surface }: MediaSectionProps) {
   }
 
   return (
-    <section className={`${surfaceClass} px-gutter pb-[clamp(96px,calc(6.55vw+69.7px),164px)]`}>
-      <figure className="mx-auto w-full max-w-[822px]">
+    <section className={`${surfaceClass} px-gutter pb-band-article`}>
+      <figure className="max-w-article mx-auto w-full">
         <SanityImage
           source={media.image}
           alt={media.alt}

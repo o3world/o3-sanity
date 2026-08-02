@@ -27,7 +27,7 @@ export const WithPortrait: Story = {
     name: 'Jay Forbes',
     role: 'Director of Engineering',
     meta: 'Jun 2026 · 6 min read',
-    avatar: (
+    headshot: (
       <img
         src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='42' height='42'%3E%3Crect width='42' height='42' fill='%23545b48'/%3E%3Ccircle cx='21' cy='16' r='7' fill='%23bfc4b4'/%3E%3Ccircle cx='21' cy='38' r='13' fill='%23bfc4b4'/%3E%3C/svg%3E"
         alt=""

@@ -56,7 +56,7 @@ export function QuoteSection({ quote, attribution, decoration, surface }: QuoteS
       <blockquote className="max-w-content relative mx-auto flex flex-col gap-6">
         <p className="text-hero font-display text-gradient text-balance">&ldquo;{quote}&rdquo;</p>
         {attribution ? (
-          <footer className="text-display-lg text-fg-quiet max-w-[822px] leading-[1.5em]">
+          <footer className="text-display-lg text-fg-quiet max-w-article leading-[1.5em]">
             {attribution}
           </footer>
         ) : null}

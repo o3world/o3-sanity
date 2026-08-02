@@ -96,9 +96,9 @@ export function PerspectiveView({
             name={author?.name}
             role={author?.title}
             meta={meta || null}
-            // Passed only when there is one: an absent `avatar` is what tells
+            // Passed only when there is one: an absent `headshot` is what tells
             // the byline to draw the frame's monogram disc instead.
-            avatar={
+            headshot={
               author?.headshot ? (
                 <SanityImage source={author.headshot} alt="" ratio="fill" width={84} sizes="42px" />
               ) : undefined
@@ -113,7 +113,7 @@ export function PerspectiveView({
             (see the note above), so putting it anywhere wider would be
             inventing a composition rather than reading one, and the archive's
             lead images are square as often as they are landscape. */}
-        <div className="mx-auto max-w-[822px]">
+        <div className="max-w-article mx-auto">
           {featuredImage?.image ? (
             <figure className="mb-16">
               <SanityImage
