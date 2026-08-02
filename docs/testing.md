@@ -81,6 +81,11 @@ the same guardrail the block registry uses. Pass only the field your assertion i
 returns. That is the migration → render bridge: a mapper change producing something the renderer
 can't display fails here rather than in Studio. `migratedPerspectiveSlugs()` sweeps all of them.
 
+**The 402 half of ADR 0006 is assertable** via `@/test`'s responsive helpers (`responsive.ts`):
+`unprefixedHorizontalScrollUtilities(html)` must come back empty — a bare `overflow-x-auto`/`snap-x`
+is a phone getting a scroll region where the frame draws a stack — and `variantsOf(html, 'gap-12')`
+pins a utility to the widths that emitted it when the two frames disagree on a value.
+
 Four modules are stubbed (see `vitest.config.mts` for why each): `@/sanity/live` is the network
 seam, `next/image` renders a plain `<img>`, `next/headers` lets a test pick the draft or published
 path, and `next/dynamic` becomes `React.lazy` — without that last one every registered View renders

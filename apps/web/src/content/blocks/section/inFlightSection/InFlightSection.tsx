@@ -200,9 +200,10 @@ function EntryRow({ entry }: { entry: Entry }) {
         <Link
           href={href}
           aria-label={label}
-          // Stretched over the whole row: the frame's only affordance is the
-          // circle, but a 58px target for a 36px headline is not one.
-          className="bg-surface-muted duration-(--duration-hover) focus-visible:ring-brand relative flex size-11 shrink-0 items-center justify-center rounded-full transition-opacity ease-out after:absolute after:inset-0 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 lg:size-[58px] lg:after:-inset-x-8 lg:after:-inset-y-12"
+          // Stretched over the whole row (the `relative` is on the <li>): the
+          // frame's only affordance is the circle, but a 58px target for a
+          // 36px headline is not one.
+          className="bg-surface-muted duration-(--duration-hover) focus-visible:ring-brand flex size-11 shrink-0 items-center justify-center rounded-full transition-opacity ease-out after:absolute after:inset-0 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 lg:size-[58px]"
         >
           <span className="bg-surface-muted border-surface-muted text-ink flex size-[26px] items-center justify-center rounded-[4.3px] border-[1.45px] lg:size-[34.8px] lg:rounded-[5.8px]">
             <ArrowIcon size={20} />

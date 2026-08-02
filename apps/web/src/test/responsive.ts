@@ -49,13 +49,17 @@ export function unprefixedHorizontalScrollUtilities(html: string): string[] {
 }
 
 /**
- * The responsive variants a given utility was emitted with, across the whole
- * document — `gapVariants(html, 'gap')` → `['gap-6', 'lg:gap-12', …]`.
+ * The variants a given utility was emitted with, across the whole document —
+ * `variantsOf(html, 'gap-12')` → `['lg:gap-12']` proves the 48 gap is
+ * desktop-only.
  *
  * Used to pin a gap that the two frames set differently, which is the other
  * shape ADR 0006 divergences take (case cards: 24 at 402, 48/64 at 1440).
  */
 export function variantsOf(html: string, utility: string): string[] {
-  const pattern = new RegExp(`^(?:[a-z-]+:)*${utility}$`)
+  // Escape the utility: `w-[394px]` is full of regex metacharacters, and
+  // unescaped it silently matches nothing — a vacuous green.
+  const escaped = utility.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const pattern = new RegExp(`^(?:[a-z-]+:)*${escaped}$`)
   return [...new Set(classTokens(html).filter((token) => pattern.test(token)))].sort()
 }
