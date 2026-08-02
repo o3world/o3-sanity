@@ -34,7 +34,11 @@ export function MobileNavMenu({ items, cta }: MobileNavMenuProps) {
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger
         aria-label="Open menu"
-        className="focus-visible:ring-brand duration-(--duration-hover) -mr-2 text-white/85 transition-opacity ease-out hover:opacity-70 focus-visible:outline-none focus-visible:ring-2"
+        // The frame draws the bars at `rgba(255,255,255,0.85)`. Expressed as
+        // opacity on an inherited `currentColor` rather than as a white at an
+        // alpha, so the 402 bar's ink flip (SiteNav) reaches the hamburger the
+        // same way it reaches the links — 85% of whichever ink is live.
+        className="focus-visible:ring-brand duration-(--duration-hover) -mr-2 opacity-85 transition-opacity ease-out hover:opacity-70 focus-visible:outline-none focus-visible:ring-2"
       >
         <MenuIcon />
       </SheetTrigger>

@@ -124,9 +124,15 @@ describe('the homepage at 402 (ADR 0006)', () => {
 
   it('stacks the partner logos rather than bleeding a marquee off a phone', () => {
     // `1814:1898` — one tile per row inside the gutter; `1864:2395`'s
-    // over-wide row is the 1440 treatment.
+    // over-wide row is the 1440 treatment, and so is its crawl.
     expect(html).toContain('lg:w-max')
     expect(html).toContain('lg:flex-row')
+    expect(variantsOf(html, 'animate-marquee')).toEqual(['lg:animate-marquee'])
+    // The lap's second pass would otherwise stack six more rows under the
+    // first six on a phone. It is `hidden` until it has a track to run on.
+    const clones = html.match(/<li[^>]*aria-hidden="true"[^>]*>/g) ?? []
+    expect(clones.length, 'the marquee’s second pass was not found').toBeGreaterThan(0)
+    for (const clone of clones) expect(clone).toContain('hidden')
   })
 
   it('sets the hero flush to the gutter, centring it only at lg', () => {

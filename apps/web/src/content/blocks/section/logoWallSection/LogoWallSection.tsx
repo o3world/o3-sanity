@@ -33,6 +33,24 @@ type LogoWallSectionProps = SectionProps<'logoWallSection'>
  *
  * This band builds its own `<section>` rather than using `SectionShell`
  * because the logo row has to escape the gutter.
+ *
+ * ── THE ROW MOVES ──────────────────────────────────────────────────────────
+ *
+ * A frame can only draw the still, and a still clipped at both edges is a
+ * marquee's middle frame. The sequence comes from the prototype's
+ * `.o3-clients-track` and nowhere else: the tiles run **twice**, the track
+ * crawls exactly one copy to the left over `--duration-marquee`, linear and
+ * infinite, and a pointer anywhere on it pauses the lap.
+ *
+ * Each tile carries its own trailing gap (`lg:mr-12`) instead of the row
+ * carrying a flex `gap` — that is what makes "one copy" exactly the 50% the
+ * `o3marquee` keyframes translate by. With a flex gap the wrap lands one gap
+ * short and the row visibly jumps once a lap.
+ *
+ * The clone is `aria-hidden`: six is what the page claims, twelve is what the
+ * lap needs. It is also `hidden` below `lg`, where the frame stacks the tiles
+ * and a second copy would just be six more rows, and under
+ * `prefers-reduced-motion`, which leaves precisely the clipped still above.
  */
 export function LogoWallSection({
   eyebrow,
@@ -44,6 +62,9 @@ export function LogoWallSection({
 }: LogoWallSectionProps) {
   const isMarquee = stegaClean(layout) !== 'grid'
   const tiles = clients ?? []
+  // One pass for the reader, one for the lap. `grid` never laps, so it gets
+  // the reader's copy only.
+  const passes = isMarquee ? [false, true] : [false]
 
   return (
     <section
@@ -65,38 +86,43 @@ export function LogoWallSection({
       <ul
         className={
           isMarquee
-            ? // The bleed is a **desktop** treatment. At 1440 this is a
-              // centred row allowed to run wider than the page, clipped by
-              // the band's own overflow-hidden. At 402 the frame
+            ? // The bleed — and the crawl — are a **desktop** treatment. At
+              // 1440 this is a row allowed to run wider than the page, clipped
+              // by the band's own overflow-hidden. At 402 the frame
               // (`1814:1898`) stacks the tiles one per row, 24px apart,
               // inside a 362px column — a row that bleeds off both edges of a
-              // phone shows one and a half logos and reads as broken.
-              'px-gutter lg:mt-band-sm mt-12 flex flex-col items-center gap-6 lg:w-max lg:min-w-full lg:flex-row lg:justify-center lg:gap-12 lg:px-0'
+              // phone shows one and a half logos and reads as broken, and a
+              // row that crawls off them reads as broken and busy.
+              'px-gutter lg:mt-band-sm lg:animate-marquee mt-12 flex flex-col items-center gap-6 lg:w-max lg:min-w-full lg:flex-row lg:justify-center lg:gap-0 lg:px-0 lg:hover:[animation-play-state:paused] lg:motion-reduce:animate-none'
             : 'px-gutter lg:mt-band-sm mt-12 grid grid-cols-2 items-center gap-x-12 gap-y-10 sm:grid-cols-3 lg:grid-cols-6'
         }
       >
-        {tiles.map((client) => (
-          // 310 × 132 with 32px of side padding (`1864:2395`), so the logo gets
-          // 246px and sits centred in the row's height.
-          <li
-            key={client._id}
-            className={`flex h-[132px] items-center justify-center px-8 ${isMarquee ? 'w-[310px] lg:shrink-0' : ''}`}
-          >
-            {/*
-             * Desaturated. Every logo on the frame's row is mono — IRONMAN
-             * and Vertex black, caron grey — while the assets themselves are
-             * the clients' full-colour marks. Filtering keeps the row reading
-             * as one band instead of six brand palettes, without needing a
-             * second mono upload per client.
-             */}
-            <SanityImage
-              source={client.logo}
-              alt={client.name ?? ''}
-              width={492}
-              className="max-h-[68px] w-auto max-w-full object-contain contrast-125 grayscale"
-            />
-          </li>
-        ))}
+        {passes.flatMap((isClone) =>
+          tiles.map((client) => (
+            // 310 × 132 with 32px of side padding (`1864:2395`), so the logo gets
+            // 246px and sits centred in the row's height. The 48px to the next
+            // tile is this tile's margin, not the row's gap — see the header.
+            <li
+              key={isClone ? `lap-${client._id}` : client._id}
+              aria-hidden={isClone || undefined}
+              className={`h-[132px] items-center justify-center px-8 ${isMarquee ? 'w-[310px] lg:mr-12 lg:shrink-0' : ''} ${isClone ? 'hidden lg:flex lg:motion-reduce:hidden' : 'flex'}`}
+            >
+              {/*
+               * Desaturated. Every logo on the frame's row is mono — IRONMAN
+               * and Vertex black, caron grey — while the assets themselves are
+               * the clients' full-colour marks. Filtering keeps the row reading
+               * as one band instead of six brand palettes, without needing a
+               * second mono upload per client.
+               */}
+              <SanityImage
+                source={client.logo}
+                alt={client.name ?? ''}
+                width={492}
+                className="max-h-[68px] w-auto max-w-full object-contain contrast-125 grayscale"
+              />
+            </li>
+          )),
+        )}
       </ul>
 
       {cta ? (

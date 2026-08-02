@@ -1,10 +1,15 @@
 /*
- * Motion — easing curves + durations.
+ * Motion — easing curves, durations, and the one keyframed loop.
  *
  * The prototype has exactly two load-bearing curves: a soft ease-out used for
  * nearly every hover and scroll-reveal, and a sharper "mask" curve for the
  * hero line-mask reveal. Durations cluster at ~.22s (hovers) and .7-.85s
- * (reveals).
+ * (reveals), with two outliers the chrome and the logo wall own: the nav's
+ * .35s ink flip and the client row's 26s lap.
+ *
+ * Figma outranks the prototype for values, but it draws stills — sequence and
+ * intent come from the prototype and nowhere else. Everything below that has
+ * no Figma anchor says so.
  */
 
 @theme {
@@ -27,9 +32,46 @@
 :root {
   /* .22s — hover transitions (plat-btn background/color). */
   --duration-hover: 220ms;
+  /* .35s — the nav's ink flip. The prototype's floating bar transitions
+   * `background 0.35s ease, border-color 0.35s ease`, and gives every link and
+   * both halves of its mark `0.35s ease` on colour. One duration for all of
+   * them is the point: fill, hairline and copy have to land together as the
+   * bar crosses the seam between two bands, or the flip reads as a stutter. */
+  --duration-ink: 350ms;
   /* .7s — the standard data-reveal opacity/transform transition. */
   --duration-reveal: 700ms;
   /* .85s — the slower reveals: hero sub/CTA fade-up, the intro overlay's
    * slide-away, work-copy reveal (.8s sits between these two steps). */
   --duration-reveal-slow: 850ms;
+  /* 26s — one full lap of the client logo row (`.o3-clients-track`). A period,
+   * not a transition: it is here rather than inline so the lap and the
+   * keyframes below cannot drift apart. Long enough that the row reads as
+   * drift rather than as a slider advancing. */
+  --duration-marquee: 26s;
+}
+
+/*
+ * The one keyframed loop.
+ *
+ * Declared as plain CSS rather than inside `@theme` so it is emitted whatever
+ * Tailwind makes of the conditional class string that uses it. `-50%` is
+ * exactly one copy of the track because the track renders its tiles twice and
+ * each tile carries its own trailing gap — a flex `gap` on the row would leave
+ * the wrap half a gap short and the lap would visibly jump.
+ */
+@keyframes o3marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@theme {
+  /* The client logo row's endless leftward crawl. Linear and never-easing —
+   * any easing puts a hesitation at the wrap, which is the one moment the
+   * whole effect depends on nobody noticing. Class-accessible via
+   * animate-marquee. */
+  --animate-marquee: o3marquee var(--duration-marquee) linear infinite;
 }

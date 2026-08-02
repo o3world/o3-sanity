@@ -66,6 +66,80 @@ describe('site nav', () => {
   })
 })
 
+/**
+ * The pinned bar and its two skins. Scroll sampling is `NavInk`'s and is not
+ * testable here — jsdom has no layout, so every rect is zero and every answer
+ * would be an artefact. What IS testable, and what actually breaks, is the
+ * state the server ships and whether the flipped state is reachable at all.
+ */
+describe('the nav bar’s pinned, dark-ink default', () => {
+  it('pins at every width, because a bar that leaves cannot cross a band', () => {
+    // c1ee258's `lg:absolute` is what the ink flip needs gone.
+    expect(navHtml).toContain('fixed')
+    expect(navHtml).not.toContain('lg:absolute')
+  })
+
+  it('blurs whatever it is floating over', () => {
+    // The prototype's `backdrop-filter: blur(14px)`, carried deliberately.
+    expect(navHtml).toContain('backdrop-blur-[14px]')
+  })
+
+  it('server-renders the dark skin, with no ink attribute at all', () => {
+    // No JS and no scroll position: the bar starts over the hero, which is
+    // dark on every route. This is also what jsdom and a no-JS reader get.
+    expect(navHtml).not.toContain('data-ink')
+    expect(navHtml).toContain('bg-scrim')
+    expect(navHtml).toContain('text-white')
+  })
+
+  it('keeps the flipped skin one attribute away, not a second component', () => {
+    // Fill, hairline and copy all hang off `data-ink="dark"` on the header,
+    // which is the whole contract between NavInk and this file.
+    expect(navHtml).toContain('group-data-[ink=dark]:bg-scrim-light')
+    expect(navHtml).toContain('group-data-[ink=dark]:border-on-light-line')
+    expect(navHtml).toContain('group-data-[ink=dark]:text-fg')
+    expect(navHtml).toContain('duration-(--duration-ink)')
+  })
+
+  it('ships the CTA white, and flips it dark rather than leaving it to vanish', () => {
+    // `Button`'s `light` fill on the dark skin; its `dark` fill on the light
+    // one, because `--color-scrim-light` is itself white and #58's one
+    // conversion path would otherwise disappear where the flip fires.
+    // `rounded-btn` is `Button`'s own base class, which is what separates the
+    // two CTAs from the hamburger's plain `<button>` trigger.
+    const buttons = (navHtml.match(/<button[^>]*>/g) ?? []).filter((b) => b.includes('rounded-btn'))
+    expect(buttons.length, 'the nav CTA was not found at all').toBe(2) // 1440 + 402
+    for (const button of buttons) {
+      expect(button).toContain('bg-white')
+      expect(button).toContain('group-data-[ink=dark]:bg-ink')
+      expect(button).toContain('group-data-[ink=dark]:text-white')
+      expect(button).toContain('group-data-[ink=dark]:hover:bg-ink/85')
+      // Button hovers at --duration-hover; this one lands with the bar.
+      expect(button).toContain('duration-(--duration-ink)')
+    }
+  })
+
+  it('rests on the white mark and flips it to the ink tile, both inks together', () => {
+    // The mark reverses with the surface (2026-08-02 direction): `Color=White`
+    // at rest over the dark hero, `264:52`'s black tile over a light band.
+    expect(navHtml).toContain('text-white')
+    expect(navHtml).toContain('[--logo-counterform:var(--color-ink-deep)]')
+    expect(navHtml).toContain('group-data-[ink=dark]:text-ink-deep')
+    expect(navHtml).toContain('group-data-[ink=dark]:[--logo-counterform:white]')
+    // The counterforms are one `<g>`, so the square and the ring cannot land
+    // on different sides of the flip.
+    expect(navHtml).toContain('fill="var(--logo-counterform, white)"')
+  })
+
+  it('leaves the ink to the bar rather than pinning it on each link', () => {
+    // A `text-white` on a link would survive the flip and strand one word in
+    // white on a light band.
+    const links = navHtml.match(/<a [^>]*class="[^"]*text-button[^"]*"/g) ?? []
+    expect(links.length, 'the nav links were not found at all').toBeGreaterThan(0)
+    for (const link of links) expect(link).not.toContain('text-white')
+  })
+})
+
 describe('site footer', () => {
   it('renders the tagline', () => {
     expect(footerHtml).toContain(settings.footerTagline as string)
@@ -89,6 +163,15 @@ describe('site footer', () => {
     for (const social of settings.socialLinks ?? []) {
       expect(footerHtml).toContain(social.url as string)
     }
+  })
+
+  it('keeps the red mark exactly as it was through the counterform refactor', () => {
+    // `--logo-counterform` exists for the nav. The footer sets nothing, so the
+    // fallback has to be the literal white the frame draws (`1680:2099`) —
+    // this is the assertion that catches a default changed for the nav's sake.
+    expect(footerHtml).toContain('text-brand')
+    expect(footerHtml).toContain('fill="var(--logo-counterform, white)"')
+    expect(footerHtml).not.toContain('--logo-counterform:')
   })
 
   it('opens external social profiles safely', () => {

@@ -7,7 +7,7 @@ const meta = {
   component: BrandLogo,
   parameters: { layout: 'padded' },
   argTypes: {
-    color: { control: 'inline-radio', options: ['black', 'red'] },
+    color: { control: 'inline-radio', options: ['black', 'red', 'white'] },
     size: { control: { type: 'number' } },
   },
 } satisfies Meta<typeof BrandLogo>
@@ -24,6 +24,16 @@ export const Black: Story = {
 /** The footer mark — 176px, brand red (`1680:2099`). */
 export const Red: Story = {
   args: { color: 'red', size: 176 },
+  globals: { backgrounds: { value: 'ink' } },
+}
+
+/**
+ * `264:53`, on a dark band — the exact mirror of `Black`, and the nav's
+ * resting mark since the bar started reversing with the surface. Shown on ink
+ * because that is the only place it is ever correct.
+ */
+export const White: Story = {
+  args: { color: 'white', size: 64 },
   globals: { backgrounds: { value: 'ink' } },
 }
 

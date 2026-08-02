@@ -56,6 +56,7 @@ export function CtaLink({
   size,
   variant,
   className,
+  buttonClassName,
 }: {
   cta: CtaLinkData | null | undefined
   arrow?: boolean
@@ -68,12 +69,28 @@ export function CtaLink({
    * Settings editor picks. Content bands leave this alone.
    */
   variant?: CtaVariant
+  /** Styles the `<Link>`. Positioning and spacing — never the fill. */
   className?: string
+  /**
+   * Styles the `<Button>` itself, merged into its variant classes.
+   *
+   * The wrapping `Link` is what `className` reaches, so a caller that needs to
+   * reach the FILL has nowhere to put it — and the nav does: its CTA has to
+   * invert with the bar's ink flip, and `Button` already owns both fills. This
+   * is the seam for a caller whose surface changes underneath a button, not a
+   * general escape hatch; a fill a *document* chooses is `variant`.
+   */
+  buttonClassName?: string
 }) {
   if (!cta?.label) return null
   return (
     <Link href={resolveCtaHref(cta)} className={className}>
-      <Button variant={variant ?? resolveVariant(cta.variant)} size={size} arrow={arrow}>
+      <Button
+        variant={variant ?? resolveVariant(cta.variant)}
+        size={size}
+        arrow={arrow}
+        className={buttonClassName}
+      >
         {cta.label}
       </Button>
     </Link>
