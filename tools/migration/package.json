@@ -16,7 +16,7 @@
     "@portabletext/block-tools": "^5.1.12",
     "@sanity/schema": "^6.8.0",
     "jsdom": "^26.0.0",
-    "sanity": "6.4.0",
+    "sanity": "6.8.0",
     "zod": "^4.0.0"
   },
   "devDependencies": {
