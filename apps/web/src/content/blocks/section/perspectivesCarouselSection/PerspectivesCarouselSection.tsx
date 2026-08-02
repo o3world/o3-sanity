@@ -1,4 +1,4 @@
-import { SURFACE_CLASS } from '@o3/ui'
+import { SectionShell } from '@o3/ui'
 
 import { getCard } from '@/content/documents/card-registry'
 import { resolveSurface } from '@/content/blocks/surface'
@@ -18,12 +18,12 @@ type PerspectivesCarouselSectionProps = SectionProps<'perspectivesCarouselSectio
  *   row     height 526, starts on the 96px gutter, gap 32, runs off the edge
  * ```
  *
- * The band has **no side padding of its own**: the header is inset by the
- * gutter and the card row starts on the same line. The frame then runs the
- * row past the right edge, but that bleed is *not* kept — cards outside the
- * margin read as a layout mistake, so the track clips at the gutter lines
- * and the partially-visible next card carries the "this scrolls" affordance
- * instead (see `CarouselTrack`).
+ * The frame draws the band with no side padding and the row bleeding past
+ * the right edge. That bleed is *not* kept — cards outside the margin read
+ * as a layout mistake, and on wide screens a gutter-only band grows far past
+ * the design's content column. So the band is an ordinary `SectionShell`:
+ * the row lives in the standard 1248px column, which at the design width is
+ * exactly the frame's three visible cards (see `CarouselTrack`).
  *
  * The query projects both a `curated` list and a `latest` fallback feed
  * (optionally category-filtered); curated wins when the editor picked any.
@@ -38,15 +38,13 @@ export function PerspectivesCarouselSection({
   const Card = getCard('perspective')
 
   return (
-    <section
-      className={`${SURFACE_CLASS[resolveSurface(surface, 'bone')]} py-band-sm overflow-hidden`}
-    >
+    <SectionShell surface={resolveSurface(surface, 'bone')} top="sm" bottom="sm">
       <CarouselTrack
         heading={heading}
         cards={items.map((item) => (
           <Card key={item._id} {...item} />
         ))}
       />
-    </section>
+    </SectionShell>
   )
 }

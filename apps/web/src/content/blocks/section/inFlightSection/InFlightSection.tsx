@@ -1,14 +1,7 @@
 import Link from 'next/link'
 import { stegaClean } from '@sanity/client/stega'
 
-import {
-  ArrowIcon,
-  DisplayHeading,
-  Eyebrow,
-  HalftoneDisc,
-  SectionShell,
-  SURFACE_CLASS,
-} from '@o3/ui'
+import { ArrowIcon, DisplayHeading, Eyebrow, HalftoneDisc, SectionShell } from '@o3/ui'
 
 import { SanityImage } from '@/content/SanityImage'
 import { resolveCtaHref } from '@/content/CtaLink'
@@ -86,28 +79,25 @@ export function InFlightSection({
   }
 
   return (
-    // No side padding of its own: the header is inset by the gutter and the
-    // card row starts on the same line, then runs off the right edge — the
-    // overhang is what says the row scrolls (the same call the Home Blog band
-    // makes). At 402 the frame stacks the cards instead (`1906:347`), so the
-    // row only overflows from `lg`.
-    <section className={`${SURFACE_CLASS[resolveSurface(surface, 'white')]} py-band-sm`}>
+    // The frame runs the card row off the right edge (the same bleed the Home
+    // Blog band draws), but the bleed is not kept — see the carousel's note:
+    // on wide screens a gutter-only band outgrows the content column. The row
+    // scrolls *inside* the standard 1248px shell, clipping at its edges, and
+    // at the design width rests at exactly three cards. At 402 the frame
+    // stacks the cards instead (`1906:347`), so the row only overflows
+    // from `lg`.
+    <SectionShell surface={resolveSurface(surface, 'white')} top="sm" bottom="sm">
       <div className="flex flex-col gap-8 lg:gap-12">
-        <div className="px-gutter">
-          <Header heading={heading} subheading={subheading} />
-        </div>
-        <ul className="px-gutter flex flex-col gap-8 lg:snap-x lg:snap-mandatory lg:flex-row lg:overflow-x-auto lg:pb-2 lg:pr-0 lg:[scrollbar-width:none] lg:[&::-webkit-scrollbar]:hidden">
+        <Header heading={heading} subheading={subheading} />
+        <ul className="flex flex-col gap-8 lg:snap-x lg:snap-mandatory lg:flex-row lg:overflow-x-auto lg:pb-2 lg:[scrollbar-width:none] lg:[&::-webkit-scrollbar]:hidden">
           {items.map((entry) => (
-            <li
-              key={entry._key}
-              className="lg:w-[394px] lg:shrink-0 lg:snap-start lg:last:mr-[var(--spacing-gutter)]"
-            >
+            <li key={entry._key} className="lg:w-[394px] lg:shrink-0 lg:snap-start">
               <EntryCard entry={entry} />
             </li>
           ))}
         </ul>
       </div>
-    </section>
+    </SectionShell>
   )
 }
 

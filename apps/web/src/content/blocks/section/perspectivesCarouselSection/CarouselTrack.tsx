@@ -23,9 +23,9 @@ export interface CarouselTrackProps {
  * 280px card and a hidden overflow affordance on a 402 phone — the divergence
  * this pass closes.
  *
- * So: base is a plain `flex-col` list inside the gutter; the scroll
- * container, the snap points and the 394px card all switch on at `lg`. The
- * track itself stays inside the margins — see the note on the `<ul>`.
+ * So: base is a plain `flex-col` list; the scroll container, the snap points
+ * and the 394px card all switch on at `lg`. The whole thing renders inside
+ * the SectionShell's standard 1248px column — see the note on the `<ul>`.
  *
  * At `lg` the row is a native scroll container with snap points rather than a
  * transform-driven track: it keeps keyboard and trackpad scrolling working,
@@ -73,7 +73,7 @@ export function CarouselTrack({ heading, cards }: CarouselTrackProps) {
 
   return (
     <>
-      <div className="px-gutter mb-12 flex items-center justify-between gap-8">
+      <div className="mb-12 flex items-center justify-between gap-8">
         {heading ? (
           <h2 className="text-display-xl font-display text-balance">{heading}</h2>
         ) : (
@@ -88,17 +88,17 @@ export function CarouselTrack({ heading, cards }: CarouselTrackProps) {
       </div>
 
       {/*
-       * At `lg` the gutter moves from padding to margin: the container's own
-       * edges sit on the gutter lines, so scrolled cards clip at the margin
-       * instead of sliding under it to the viewport edge. The 1440 frame
-       * draws the row bleeding past the right edge, but the margins win —
-       * the next card peeking at the right gutter line is affordance enough.
-       * Below `lg` nothing overflows, so plain padding does the job.
+       * The scroll container is the SectionShell column itself, so scrolled
+       * cards clip at the 1248px content edges — never past the margins. At
+       * that measure the resting row is exactly three cards (394 × 3 + two
+       * 32px gaps = 1246); the 1440 frame's bleed past the right edge is
+       * deliberately not kept, and the prev/next controls carry the "this
+       * scrolls" affordance. Below `lg` nothing overflows.
        */}
       <ul
         ref={trackRef}
         onScroll={sync}
-        className="px-gutter lg:mx-gutter flex flex-col gap-12 lg:snap-x lg:snap-mandatory lg:flex-row lg:gap-8 lg:overflow-x-auto lg:px-0 lg:pb-2 lg:[scrollbar-width:none] lg:[&::-webkit-scrollbar]:hidden"
+        className="flex flex-col gap-12 lg:snap-x lg:snap-mandatory lg:flex-row lg:gap-8 lg:overflow-x-auto lg:pb-2 lg:[scrollbar-width:none] lg:[&::-webkit-scrollbar]:hidden"
       >
         {cards.map((card, index) => (
           <li key={index} className="w-full lg:w-[394px] lg:shrink-0 lg:snap-start">
