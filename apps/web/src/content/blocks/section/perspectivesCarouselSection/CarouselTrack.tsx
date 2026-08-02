@@ -24,8 +24,8 @@ export interface CarouselTrackProps {
  * this pass closes.
  *
  * So: base is a plain `flex-col` list inside the gutter; the scroll
- * container, the snap points, the 394px card and the bleed past the right
- * edge all switch on at `lg`.
+ * container, the snap points and the 394px card all switch on at `lg`. The
+ * track itself stays inside the margins — see the note on the `<ul>`.
  *
  * At `lg` the row is a native scroll container with snap points rather than a
  * transform-driven track: it keeps keyboard and trackpad scrolling working,
@@ -88,22 +88,20 @@ export function CarouselTrack({ heading, cards }: CarouselTrackProps) {
       </div>
 
       {/*
-       * At `lg`, `pl-gutter` and no right padding: the row starts on the
-       * gutter line with the heading and runs off the right edge, exactly as
-       * the frame draws it, and the last item's margin restores a resting
-       * gap once the row is scrolled to its end. Below `lg` the band has a
-       * gutter on both sides and nothing overflows, so neither applies.
+       * At `lg` the gutter moves from padding to margin: the container's own
+       * edges sit on the gutter lines, so scrolled cards clip at the margin
+       * instead of sliding under it to the viewport edge. The 1440 frame
+       * draws the row bleeding past the right edge, but the margins win —
+       * the next card peeking at the right gutter line is affordance enough.
+       * Below `lg` nothing overflows, so plain padding does the job.
        */}
       <ul
         ref={trackRef}
         onScroll={sync}
-        className="px-gutter flex flex-col gap-12 lg:snap-x lg:snap-mandatory lg:flex-row lg:gap-8 lg:overflow-x-auto lg:pb-2 lg:pr-0 lg:[scrollbar-width:none] lg:[&::-webkit-scrollbar]:hidden"
+        className="px-gutter lg:mx-gutter flex flex-col gap-12 lg:snap-x lg:snap-mandatory lg:flex-row lg:gap-8 lg:overflow-x-auto lg:px-0 lg:pb-2 lg:[scrollbar-width:none] lg:[&::-webkit-scrollbar]:hidden"
       >
         {cards.map((card, index) => (
-          <li
-            key={index}
-            className="w-full lg:w-[394px] lg:shrink-0 lg:snap-start lg:last:mr-[var(--spacing-gutter)]"
-          >
+          <li key={index} className="w-full lg:w-[394px] lg:shrink-0 lg:snap-start">
             {card}
           </li>
         ))}

@@ -19,9 +19,11 @@ type PerspectivesCarouselSectionProps = SectionProps<'perspectivesCarouselSectio
  * ```
  *
  * The band has **no side padding of its own**: the header is inset by the
- * gutter and the card row starts on the same line, then continues past the
- * right edge. That overhang is the affordance — it is what says the row
- * scrolls, and it is why this is not a centred container.
+ * gutter and the card row starts on the same line. The frame then runs the
+ * row past the right edge, but that bleed is *not* kept — cards outside the
+ * margin read as a layout mistake, so the track clips at the gutter lines
+ * and the partially-visible next card carries the "this scrolls" affordance
+ * instead (see `CarouselTrack`).
  *
  * The query projects both a `curated` list and a `latest` fallback feed
  * (optionally category-filtered); curated wins when the editor picked any.
