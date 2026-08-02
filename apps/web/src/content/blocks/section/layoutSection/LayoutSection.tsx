@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react'
 
-import { DisplayHeading, SectionShell } from '@o3/ui'
+import { DisplayHeading, Eyebrow, SectionShell } from '@o3/ui'
 import { stegaClean } from '@sanity/client/stega'
 
 import { BASE_BLOCK_COMPONENTS } from '../../base/baseComponents'
@@ -25,12 +25,37 @@ function resolveColumns(value: number | null | undefined): number {
  * Items dispatch through the typed base registry directly — the base tier
  * never contains sections, so the full registry isn't needed here.
  */
-export function LayoutSection({ heading, columns, items, surface }: LayoutSectionProps) {
+export function LayoutSection({
+  eyebrow,
+  heading,
+  subheading,
+  columns,
+  items,
+  surface,
+}: LayoutSectionProps) {
   const columnClass = COLUMN_CLASSES[resolveColumns(columns)]
   return (
-    <SectionShell surface={resolveSurface(surface, 'white')}>
-      <div className="flex flex-col gap-12 py-24">
-        {heading ? <DisplayHeading>{heading}</DisplayHeading> : null}
+    <SectionShell surface={resolveSurface(surface, 'white')} top="md" bottom="md">
+      <div className="flex flex-col gap-12">
+        {/*
+         * The three-part band header the interior frames use everywhere
+         * (`1924:5344`): a neutral eyebrow, the 48px heading, and a set-back
+         * second line at the same size. The subheading is `text-fg-muted`
+         * rather than a smaller step — the frame keeps it at 36px and drops
+         * the value, which is what makes it read as a continuation of the
+         * heading rather than a standfirst.
+         */}
+        {eyebrow || heading || subheading ? (
+          <header className="flex flex-col gap-4">
+            {eyebrow ? <Eyebrow size="lg">{eyebrow}</Eyebrow> : null}
+            {heading ? <DisplayHeading>{heading}</DisplayHeading> : null}
+            {subheading ? (
+              <p className="text-display-lg font-display text-fg-muted text-balance">
+                {subheading}
+              </p>
+            ) : null}
+          </header>
+        ) : null}
         <div className={`grid items-start gap-10 ${columnClass}`}>
           {(items ?? []).map((item) => {
             const Component = Object.prototype.hasOwnProperty.call(

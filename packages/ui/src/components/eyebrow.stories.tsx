@@ -7,26 +7,33 @@ const meta = {
   component: Eyebrow,
   parameters: { layout: 'padded' },
   argTypes: {
-    tone: { control: 'select', options: ['brand', 'tint', 'muted'] },
+    size: { control: 'inline-radio', options: ['base', 'lg'] },
+    tone: { control: 'select', options: ['muted', 'inverse', 'brand', 'tint'] },
   },
 } satisfies Meta<typeof Eyebrow>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-/** The red kicker on light surfaces (insight-card categories). */
-export const Brand: Story = {
+/** The section kicker at 18px — "OUR PARTNERS" above the logo wall (1864:2392). */
+export const Section: Story = {
+  args: { size: 'lg', children: 'Our Partners' },
+  globals: { backgrounds: { value: 'bone' } },
+}
+
+/** The card kicker at 16px, on a light band. */
+export const Card: Story = {
   args: { children: 'Teams' },
 }
 
-/** The lifted red used on dark surfaces (work-case category lines). */
-export const Tint: Story = {
-  args: { tone: 'tint', children: 'Healthcare · Pediatric Systems' },
+/** White, over a card scrim or on an ink band (1883:3561). */
+export const Inverse: Story = {
+  args: { tone: 'inverse', children: 'Healthcare · Pediatric Systems' },
   globals: { backgrounds: { value: 'ink' } },
 }
 
-/** The neutral kicker ("OUR PARTNERS" above the logo wall). */
-export const Muted: Story = {
-  args: { tone: 'muted', children: 'Our Partners' },
-  globals: { backgrounds: { value: 'bone' } },
+/** Brand red — the exception. The frames use it for the footer link headers. */
+export const Brand: Story = {
+  args: { tone: 'brand', children: 'Company' },
+  globals: { backgrounds: { value: 'ink' } },
 }

@@ -21,7 +21,7 @@
         "_type": "cta",
         "label": "View our work",
         "href": "/work",
-        "variant": "brand"
+        "variant": "light"
       },
       "decoration": "orbs"
     },
@@ -30,8 +30,8 @@
       "_key": "partners",
       "surface": "bone",
       "eyebrow": "Our Partners",
-      "statement": "We work with B2B and enterprise teams to reimagine experiences.",
-      "layout": "grid",
+      "statement": "We work with B2B and enterprise teams where the stakes — and the org charts — are real.",
+      "layout": "marquee",
       "clients": [
         {
           "_type": "reference",
@@ -68,19 +68,19 @@
         "_type": "cta",
         "label": "See all partners",
         "href": "/work",
-        "variant": "ghost"
+        "variant": "dark"
       }
     },
     {
       "_type": "caseShowcaseSection",
       "_key": "work",
       "surface": "ink",
-      "heading": "Our Work",
+      "heading": "Most firms ship what you asked for. We solve what was actually in the way.",
       "cta": {
         "_type": "cta",
         "label": "View our work",
         "href": "/work",
-        "variant": "inverse"
+        "variant": "dark"
       },
       "caseStudies": [
         {
@@ -101,11 +101,19 @@
       ]
     },
     {
+      "_type": "quoteSection",
+      "_key": "quote",
+      "surface": "bone",
+      "quote": "We were very happy with the outcome and so was top management. I believe we positioned our company as the leader and shaper we want to be seen as. Thank you for all your help, on a tight deadline and always with a smile.",
+      "attribution": "Business Leader, Global Health Brand",
+      "decoration": "orbs"
+    },
+    {
       "_type": "railPanelsSection",
       "_key": "platforms",
       "surface": "white",
       "heading": "The platforms we go deep on",
-      "intro": "We build real, certified depth in modern platforms that are scaling the internet.",
+      "intro": "We don't dabble across every tool. We build real, certified depth in a few platforms — so the recommendation and the implementation come from the same people.",
       "panels": [
         {
           "_type": "panel",
@@ -120,7 +128,7 @@
             "_type": "cta",
             "label": "View our Sanity work",
             "href": "/work",
-            "variant": "ghost"
+            "variant": "dark"
           }
         },
         {
@@ -136,7 +144,7 @@
             "_type": "cta",
             "label": "View our Vercel work",
             "href": "/work",
-            "variant": "ghost"
+            "variant": "dark"
           }
         },
         {
@@ -152,24 +160,17 @@
             "_type": "cta",
             "label": "View our Lovable work",
             "href": "/work",
-            "variant": "ghost"
+            "variant": "dark"
           }
         }
-      ]
-    },
-    {
-      "_type": "quoteSection",
-      "_key": "quote",
-      "surface": "bone",
-      "quote": "We were very happy with the outcome and so was top management. I believe we positioned our company as the leader and shaper we want to be seen as. Thank you for all your help, on a tight deadline and always with a smile.",
-      "attribution": "Business Leader, Global Health Brand",
-      "decoration": "orbs"
+      ],
+      "rail": "label"
     },
     {
       "_type": "railPanelsSection",
       "_key": "engagements",
       "surface": "white",
-      "heading": "How we work",
+      "heading": "Three ways in. You decide how much of the problem to give.",
       "intro": "From senior hands inside your team to owning the whole outcome — the right engagement depends on how much of the problem is yours to keep.",
       "panels": [
         {
@@ -177,13 +178,12 @@
           "_key": "eng-embedded",
           "railLabel": "Embedded",
           "heading": "Embedded Team Member",
-          "body": "Senior designers and engineers who join your team, your standup, and your codebase. No handoffs, no translation layer — just more horsepower pointed at the problem.",
-          "note": "Best when you trust the direction and need the horsepower.",
+          "body": "Senior hands, inside your team. Best when you trust the direction and need the horsepower.",
           "cta": {
             "_type": "cta",
-            "label": "Talk about embedding",
-            "href": "/contact",
-            "variant": "ghost"
+            "label": "View our work",
+            "href": "/work",
+            "variant": "dark"
           }
         },
         {
@@ -195,9 +195,9 @@
           "note": "Best when you need momentum and a team that owns delivery.",
           "cta": {
             "_type": "cta",
-            "label": "Scope a squad",
-            "href": "/contact",
-            "variant": "ghost"
+            "label": "View our work",
+            "href": "/work",
+            "variant": "dark"
           }
         },
         {
@@ -209,12 +209,13 @@
           "note": "Best when the goal is clear and you want a single point of accountability.",
           "cta": {
             "_type": "cta",
-            "label": "Hand us the outcome",
-            "href": "/contact",
-            "variant": "ghost"
+            "label": "View our work",
+            "href": "/work",
+            "variant": "dark"
           }
         }
-      ]
+      ],
+      "rail": "number"
     },
     {
       "_type": "perspectivesCarouselSection",
@@ -227,12 +228,12 @@
       "_key": "cta",
       "surface": "ink",
       "heading": "The best partnerships don’t have an end date.",
-      "body": "Most firms hand you the strategy and leave. We stay and build it. That’s the whole offer.",
+      "body": "Most firms hand you the strategy and leave. We stay and build it. That's the whole offer.",
       "cta": {
         "_type": "cta",
         "label": "View our work",
         "href": "/work",
-        "variant": "brand"
+        "variant": "light"
       },
       "decoration": "orbs"
     }
@@ -243,6 +244,7 @@
   "migration": {
     "locked": false,
     "sourceId": "seed:homepage-wireframe",
-    "extractedAt": "2026-07-31T00:00:00Z"
+    "extractedAt": "2026-07-31T00:00:00Z",
+    "figmaNode": "1680:2134"
   }
 }

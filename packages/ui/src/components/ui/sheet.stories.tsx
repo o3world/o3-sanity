@@ -42,7 +42,7 @@ export const MobileNavMenu: Story = {
               {label}
             </a>
           ))}
-          <Button variant="inverse" arrow className="mt-4 self-start">
+          <Button variant="light" arrow className="mt-4 self-start">
             Let’s talk
           </Button>
         </nav>

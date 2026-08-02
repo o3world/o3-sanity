@@ -12,8 +12,13 @@ import { home } from './entry'
  * This is the check that survives a rebuild. The dataset is disposable
  * (ADR 0003), so "it looked right in the browser once" proves nothing about
  * the next wipe-and-load; what has to hold is that the committed JSON — the
- * source of truth — renders the prototype's homepage through code nobody
+ * source of truth — renders the canonical Home frame through code nobody
  * wrote specially for it.
+ *
+ * The copy below was the **prototype's** until #42. Figma is the source of
+ * record and outranks it (map #33), so these strings are now transcribed from
+ * `1680:2134` — which is why several of them changed rather than the seed
+ * being bent back to fit the test.
  */
 const route = buildSingletonRoute(home)
 
@@ -34,17 +39,27 @@ describe('the seeded homepage', () => {
   it.each([
     ['hero', 'You see the problem in front of you.'],
     ['hero subheading', 'The same senior team that finds the move is the team that builds it.'],
-    ['logo wall', 'We work with B2B and enterprise teams to reimagine experiences.'],
-    ['case showcase', 'Our Work'],
+    ['partners statement', 'where the stakes — and the org charts — are real'],
+    ['case showcase heading', 'Most firms ship what you asked for'],
     ['a case study’s narrative headline', 'Families were navigating twelve portals'],
-    ['platform rail', 'The platforms we go deep on'],
     ['quote', 'positioned our company as the leader and shaper'],
-    ['engagement rail', 'Embedded Team Member'],
-    ['engagement note', 'Best when you trust the direction and need the horsepower.'],
+    ['platform rail', 'The platforms we go deep on'],
+    ['platform standfirst', 'We don&#x27;t dabble across every tool'],
+    ['engagement heading', 'Three ways in. You decide how much of the problem to give.'],
+    ['engagement panel', 'Embedded Team Member'],
+    ['engagement body', 'Best when you trust the direction and need the horsepower.'],
     ['perspectives carousel', 'The thinking behind the work.'],
     ['closing CTA', 'The best partnerships don’t have an end date.'],
-  ])('shows the prototype’s %s', (_label, copy) => {
+    ['closing CTA body', 'We stay and build it. That&#x27;s the whole offer.'],
+  ])('shows the frame’s %s', (_label, copy) => {
     expect(html).toContain(copy)
+  })
+
+  it('numbers the ways-to-work rail from array order, not authored strings', () => {
+    // `rail: 'number'` on the second railPanelsSection (1762:2168) — the one
+    // field that distinguishes it from the platforms band.
+    expect(html).toContain('>01<')
+    expect(html).toContain('>03<')
   })
 
   it('renders the client logos the logo wall references', () => {

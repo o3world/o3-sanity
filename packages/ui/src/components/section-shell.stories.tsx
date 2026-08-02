@@ -37,7 +37,7 @@ function PlaceholderContent({ surface }: { surface: Surface }) {
       </p>
       <Stat value="89% → 114%" label="NRR" tone={onInk ? 'inverse' : 'default'} />
       <div className="flex items-center gap-6">
-        <Button variant={onInk ? 'inverse' : 'brand'} arrow>
+        <Button variant={onInk ? 'light' : 'dark'} arrow>
           View our work
         </Button>
         <ArrowLink href="#partners" tone={onInk ? 'tint' : 'default'}>

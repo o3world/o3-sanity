@@ -18,7 +18,14 @@ export const PERSPECTIVE_CARD = /* groq */ `
   publishedAt,
   featuredImage,
   "author": author->{name, title},
-  "categories": categories[]->{title, "slug": slug.current}
+  "categories": categories[]->{title, "slug": slug.current},
+  ${
+    /* The card meta reads "3 MINS · 7/27/26" (1683:2490). Reading time is
+      derived, not stored: 5 characters to a word, 200 words a minute, at
+      least 1. Computing it here keeps the whole body out of the card
+      projection — the point of doing it in GROQ rather than in the renderer. */ ''
+  }
+  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])
 ` as const
 
 export const CASE_STUDY_CARD = /* groq */ `
@@ -109,6 +116,16 @@ export const PERSPECTIVE_SLUGS_QUERY = defineQuery(
 export const PERSPECTIVES_PAGE_QUERY = defineQuery(`{
   "items": *[_type == "perspective"] | order(publishedAt desc) [$offset...$end]{${PERSPECTIVE_CARD}},
   "total": count(*[_type == "perspective"])
+}`)
+
+/**
+ * The /work index (#43). Ordered newest first on `publishedAt`, falling back
+ * to `_createdAt` so the seeded case studies — which carry no publish date —
+ * still take a stable position instead of sorting as nulls.
+ */
+export const CASE_STUDIES_PAGE_QUERY = defineQuery(`{
+  "items": *[_type == "caseStudy"] | order(coalesce(publishedAt, _createdAt) desc) [$offset...$end]{${CASE_STUDY_CARD}},
+  "total": count(*[_type == "caseStudy"])
 }`)
 
 export const LATEST_PERSPECTIVES_QUERY = defineQuery(

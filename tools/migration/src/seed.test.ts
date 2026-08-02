@@ -299,13 +299,16 @@ describe('committed seed content', () => {
       }
     })
 
-    it('follows the prototype’s section sequence', () => {
+    // Was the prototype's sequence until #42. The frame puts the pull quote
+    // straight after the case studies and both rail bands after it; Figma is
+    // the source of record (map #33), so the seed moved and this moved with it.
+    it('follows the canonical Home frame’s section sequence', () => {
       expect(((home?.sections ?? []) as { _type: string }[]).map((s) => s._type)).toEqual([
         'heroSection',
         'logoWallSection',
         'caseShowcaseSection',
-        'railPanelsSection',
         'quoteSection',
+        'railPanelsSection',
         'railPanelsSection',
         'perspectivesCarouselSection',
         'ctaSection',
