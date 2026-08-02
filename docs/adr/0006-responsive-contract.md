@@ -71,16 +71,20 @@ value for the same token and a linear ramp between them is the honest reading
 of two endpoints. Each clamp is solved so it hits the mobile value at 402 and
 the desktop value at 1440 — which is what finally closes #37's interim floors:
 
-| Token             | 402   | 1440  |
-| ----------------- | ----- | ----- |
-| `text-hero`       | 30px  | 64px  |
-| `text-cta`        | 40px  | 60px  |
-| `text-display-xl` | 40px  | 48px  |
-| `text-display-lg` | 18px  | 36px  |
-| `text-lead`       | 18px  | 24px  |
-| `text-button`     | 18px  | 18px  |
-| gutter            | 20px  | 96px  |
-| `band-lg`         | 128px | 192px |
+| Token             | 402     | 1440  |
+| ----------------- | ------- | ----- |
+| `text-hero`       | 30px ⚠️ | 64px  |
+| `text-cta`        | 40px    | 60px  |
+| `text-display-xl` | 40px    | 48px  |
+| `text-display-lg` | 18px    | 36px  |
+| `text-lead`       | 18px    | 24px  |
+| `text-button`     | 18px    | 18px  |
+| gutter            | 20px    | 96px  |
+| `band-lg`         | 128px   | 192px |
+
+⚠️ `text-hero`'s 30px floor is **superseded** — it was read off the wrong node.
+The floor is 36 and the pull quote moved to `text-quote`; see the
+[amendment](#amendment-2026-08-02) below. The rest of this table stands.
 
 `text-button` is **identical at both widths** — read, not assumed
 (`1814:1656` vs `1868:3262`) — and so are the eyebrow, meta, nav and legal
@@ -156,3 +160,80 @@ will waste your time if you read them as signal:
 - The footer's inner container is **1248px wide inside a 402px frame**
   (`1814:1806`) — a desktop value left behind, which is why the footer's mobile
   layout has to come from its own padding rather than that container.
+
+---
+
+## Amendment 2026-08-02
+
+**`--text-hero`'s 402 floor was read off the pull quote.** Everything above
+stands; this corrects one row of the type table.
+
+### What was wrong
+
+The floor was cited to `1814:1684`. That node is the **pull quote** — the same
+node this ADR's own consequences section names when it flags the mobile
+gradient drift. `--text-hero` has three call sites, and the quote is the only
+one that reads 30. Re-measured (all three via `figma_rest`, this file):
+
+| Call site          | Node        | 402                       | Node        | 1440        |
+| ------------------ | ----------- | ------------------------- | ----------- | ----------- |
+| Home hero headline | `1814:1624` | **36** / 40px / −0.0389em | `1810:1616` | 64 (raster) |
+| Partners statement | `1814:1894` | **36** / 1.25em           | `1864:2393` | 64 / 1.2em  |
+| Pull quote         | `1814:1684` | **30** / 1.2em            | `1683:2143` | 64 / 1.2em  |
+
+So two of three bands rendered 30px where the frame draws 36 — a 17% error on
+the largest text on a phone, and on the hero it is load-bearing: the 402 hero
+is a 362px column (`1814:1622`) and "You see the problem" only clears it with
+the frame's negative tracking.
+
+The 1440 end was never wrong. All three are 64 there, which is why one token
+covered them for as long as it did.
+
+### The new arrangement
+
+The clamp is not adjusted — it is **re-pointed**. The old
+`clamp(30px, calc(3.28vw + 16.8px), 64px)` was solved correctly for the node
+it was measured from, so it keeps serving that node under a new name, and
+`--text-hero` is re-solved for the two that read 36:
+
+| Token          | 402  | 1440 | Clamp                                      | Call sites                        |
+| -------------- | ---- | ---- | ------------------------------------------ | --------------------------------- |
+| `--text-hero`  | 36px | 64px | `clamp(36px, calc(2.7vw + 25.15px), 64px)` | Hero headline, partners statement |
+| `--text-quote` | 30px | 64px | `clamp(30px, calc(3.28vw + 16.8px), 64px)` | Pull quote                        |
+
+Both are solved the same way this ADR already requires: hit the 402 frame at
+402 and the 1440 frame at 1440. Nothing at 1440 moves — both ceilings are 64,
+and both clamps reach it at or before 1440.
+
+**Why a second token rather than a `lg:` step or a call-site literal.** A step
+would contradict this ADR's own "size interpolates, composition switches at
+`lg`". A call-site literal — the file's habit for one-off values, as with the
+attribution's 1.5em line-height — would mean inlining a solved two-endpoint
+clamp into a `className`, where no one would ever check it against the frame
+again. Two of the three bands genuinely share a step; the third genuinely does
+not. Two tokens is the honest count.
+
+### Measured but not adopted
+
+The 402 frame also disagrees with the tokens on two sub-values, and this
+amendment deliberately leaves both alone rather than widening its own scope:
+
+- **Line-height.** The two `--text-hero` consumers diverge at 402 in opposite
+  directions — the headline 40/36 (1.111), the statement 1.25 — against a
+  shared 1.2 read at 1440. One token cannot hold both, and the gap is ≤5px of
+  leading per line at 36px. The token stays 1.2.
+- **Tracking.** The hero headline reads **−0.0389em** at 402. The partners
+  statement reads 0 at _both_ widths, so this cannot live on the shared token;
+  and the 1440 headline is baked into a raster, so there is no second endpoint
+  to solve against. Applying it unprefixed would move 1440 — which this
+  amendment is explicitly not doing. It wants either a licence to read the
+  raster or a live 1440 text node.
+
+### Knock-on
+
+`OrbitalDiagram`'s lead label (`packages/ui/src/components/orbital-diagram.tsx`)
+is a fourth `text-hero` consumer with no 402 frame of its own, so it inherits
+the new floor: 30 → 36 at 402. Its sibling non-lead labels are
+`clamp(30px, 2.78vw, 40px)`, so the lead now reads larger than them at 402
+where it used to tie. No frame contradicts that, and it is the better of the
+two readings, so it is left to inherit rather than pinned.
