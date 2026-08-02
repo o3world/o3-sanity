@@ -1,5 +1,7 @@
 import { PortableText, type PortableTextComponents } from 'next-sanity'
 
+import { cn } from '@o3/ui'
+
 import { SanityImage } from '@/content/SanityImage'
 import { toEmbedSrc } from './embedSrc'
 
@@ -89,10 +91,17 @@ const components: PortableTextComponents = {
   },
 }
 
-export function PortableTextBody({ value }: { value: unknown }) {
+/**
+ * `className` overrides the default measure. A perspective body sets its own
+ * ~65ch column, but a case-study chapter is already inside the frame's 822px
+ * article measure (`1710:2631`) and would otherwise be narrowed twice — pass
+ * `max-w-none` there. Paragraph size is inherited, so the band around this
+ * sets the type step.
+ */
+export function PortableTextBody({ value, className }: { value: unknown; className?: string }) {
   if (!value || !Array.isArray(value) || value.length === 0) return null
   return (
-    <div className="max-w-prose">
+    <div className={cn('max-w-prose', className)}>
       <PortableText
         value={value as Parameters<typeof PortableText>[0]['value']}
         components={components}

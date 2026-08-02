@@ -43,9 +43,18 @@ describe('the translated La Colombe case study', () => {
     expect(html).toContain('conversation rate')
   })
 
-  it('renders the client and industry eyebrow', () => {
-    expect(html).toContain('Consumer Goods')
-    expect(html).toContain('Direct-to-Consumer Coffee')
+  it('numbers the chapters from array order, not from the content', () => {
+    // The frame draws a bare kicker ("SECTION HEADER", `1890:3861`); the
+    // numeral is the renderer's, derived from position (CONTEXT.md).
+    expect(html).toContain('01 — Opportunity')
+    expect(html).toContain('02 — Solution')
+  })
+
+  it('opens on the client’s name, which is what the hero eyebrow holds', () => {
+    // `1710:2304` reads "IRONMAN" — the client. The industry eyebrow
+    // ("Consumer Goods · Direct-to-Consumer Coffee") is the CARD's, drawn by
+    // CaseStudyCard on /work and Home; the detail frame has no region for it.
+    expect(html).toContain('La Colombe Coffee Roasters')
   })
 
   it('renders the hero media and the carousel images as sections', () => {
@@ -61,5 +70,39 @@ describe('the translated La Colombe case study', () => {
 
   it('carries the migrated SEO description', () => {
     expect(rendered.metadata.description).toContain('digital customer experiences O3 designed')
+  })
+})
+
+/**
+ * The band that closes the frame (`1710:2609`). `aTranslatedCaseStudy` leaves
+ * `next` null — nothing else is loaded beside it — so the neighbour is
+ * supplied here, which is also what pins the `client->{name}` the projection
+ * had to grow for the "NEXT PROJECT - IRONMAN" kicker.
+ */
+describe('the next-project band', () => {
+  it('links the neighbouring case study and names its client', async () => {
+    const { html } = await renderRoute(route, {
+      data: withSettings(
+        {
+          ...doc,
+          next: {
+            title: 'Built for the long run.',
+            slug: 'ironman',
+            heroMedia: (doc as { heroMedia?: unknown }).heroMedia,
+            client: { name: 'IRONMAN' },
+          },
+        },
+        siteSettings(),
+      ),
+      params: { slug: 'la-colombe' },
+    })
+
+    expect(html).toContain('Next project — IRONMAN')
+    expect(html).toContain('Built for the long run.')
+    expect(html).toContain('href="/work/ironman"')
+  })
+
+  it('renders nothing when there is no neighbour', () => {
+    expect(html).not.toContain('Next project')
   })
 })
