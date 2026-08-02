@@ -1,5 +1,6 @@
 import { defineArrayMember, defineField } from 'sanity'
 import { defineSectionBlock } from './defineBlocks'
+import { SECTION_BLOCKS } from './registry'
 import { PAGE_TYPES } from '../../constants'
 
 export const heroSection = defineSectionBlock({
@@ -444,6 +445,66 @@ export const inFlightSection = defineSectionBlock({
   preview: { select: { title: 'heading', subtitle: 'layout' } },
 })
 
+/**
+ * The inquiry form band — the block `/contact` was missing (#58).
+ *
+ * **The field set is code, the words around it are content.** The inputs
+ * this block draws (first name, last name, email, reason, message, the
+ * newsletter opt-in) are fixed in `FormSection.tsx`, transcribed from the
+ * Gravity Form 1 that WordPress serves on `/contact` today. They are not
+ * editor-authorable, and that is the decision rather than an omission: a
+ * field set is a contract with whatever receives a submission, and an editor
+ * who could delete `email` could break the form for everyone. Making them
+ * content would mean building a form builder — a much larger thing, for a
+ * destination nobody has chosen yet (ADR 0014).
+ *
+ * `reasons` is the exception, and shows where the line falls: the dropdown's
+ * options are studio taxonomy that changes when the business changes
+ * ("Ventures request", "Labs request"), and every value is just a string to
+ * any handler. So they are content; the input that carries them is not.
+ *
+ * ⚠️ **There is no submission handler and no destination.** #58's other two
+ * halves are open, so the renderer disables its submit and says so on the
+ * page. This block is honest scaffolding, not a working form.
+ */
+export const formSection = defineSectionBlock({
+  name: 'formSection',
+  title: 'Form',
+  defaultSurface: 'bone',
+  fields: [
+    defineField({ name: 'eyebrow', type: 'string' }),
+    defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
+    defineField({
+      name: 'note',
+      type: 'text',
+      rows: 2,
+      description: 'The quieter line under the heading, above the first field.',
+    }),
+    defineField({
+      name: 'reasons',
+      type: 'array',
+      of: [defineArrayMember({ type: 'string' })],
+      description:
+        'The options in the “Reason” dropdown, in the order they are shown. Carried from Gravity Form 1.',
+      validation: (rule) => rule.required().min(1),
+    }),
+    defineField({
+      name: 'consentLabel',
+      type: 'string',
+      description:
+        'The opt-in checkbox beside the submit. Leave empty and no checkbox is drawn — an opt-in nobody asked for is worse than none.',
+    }),
+    defineField({
+      name: 'submitLabel',
+      type: 'string',
+      description: 'The submit button’s words. Disabled until #58 has a handler behind it.',
+      initialValue: 'Send message',
+      validation: (rule) => rule.required(),
+    }),
+  ],
+  preview: { select: { title: 'heading', subtitle: 'eyebrow' } },
+})
+
 export const layoutSection = defineSectionBlock({
   name: 'layoutSection',
   title: 'Layout section',
@@ -518,19 +579,19 @@ export const listingSection = defineSectionBlock({
   preview: { select: { title: 'heading', subtitle: 'pageType' } },
 })
 
-export const sectionBlockMembers = [
-  'heroSection',
-  'logoWallSection',
-  'caseShowcaseSection',
-  'railPanelsSection',
-  'quoteSection',
-  'perspectivesCarouselSection',
-  'ctaSection',
-  'disciplineGridSection',
-  'personGridSection',
-  'roleListSection',
-  'inFlightSection',
-  'layoutSection',
-  'mediaSection',
-  'listingSection',
-].map((type) => ({ type }))
+/**
+ * What `page.sections` and `caseStudy.extraSections` will accept — **derived
+ * from the registry**, not restated.
+ *
+ * This was a second hand-maintained copy of `SECTION_BLOCKS` in the same
+ * order, and #58 found out why that costs: `formSection` was registered,
+ * defined, rendered and bound, and still could not appear in a page, because
+ * this list had not heard of it. The failure surfaced as a typecheck error in
+ * the *renderer* (`SectionProps<'formSection'>` not satisfying the generated
+ * union) — three files away from the omission, and only because typegen
+ * derives the query result from the array's members.
+ *
+ * A registered block an editor cannot author is not a state worth being able
+ * to express, so it is no longer expressible.
+ */
+export const sectionBlockMembers = SECTION_BLOCKS.map((type) => ({ type }))

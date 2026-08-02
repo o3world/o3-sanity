@@ -60,7 +60,9 @@ Surfaced by #46/#47 and built against the About (`1924:5344`) and Solutions (`19
 - **`mediaSection`** — full-width figure/video moment.
 - **`listingSection`** — lists pages by `pageType` via their `card` fieldset. ⚠️ **Orphaned.** It was specced to power `/services`, and [ADR 0013](../adr/0013-services-consolidate-into-solutions.md) removed that route: the Solutions frame draws no listing, no `service` page exists, and nothing else lists by `pageType`. The block, `pageType: 'service'` and `page.card` now have no consumer — a schema conversation raised on #47, not something a page layer deletes on the way past.
 
-No FAQ/accordion/tabs until a designed page needs them. No `formBlock` — forms strategy is map fog (what replaces Gravity Forms, where submissions go).
+- **`formSection`** — eyebrow, `heading` (req), `note`, `reasons[]` (req), `consentLabel`, `submitLabel` (req). The inquiry band on `/contact` (#58). **Its input set is code, not schema** — the six fields are transcribed from the Gravity Form 1 the live site serves, and `reasons` is the only part an editor owns ([ADR 0014](../adr/0014-form-fields-are-code-form-copy-is-content.md)). ⚠️ **No submission handler and no destination exist**, so the renderer disables its submit and says so on the page; #58 stays open for both.
+
+No FAQ/accordion/tabs until a designed page needs them.
 
 ### Base tier
 

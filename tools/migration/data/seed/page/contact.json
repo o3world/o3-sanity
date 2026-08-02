@@ -19,6 +19,25 @@
       "decoration": "orbs"
     },
     {
+      "_type": "formSection",
+      "_key": "inquiry",
+      "surface": "bone",
+      "eyebrow": "Start here",
+      "heading": "Tell us what’s in the way.",
+      "note": "The more specific you are about the problem, the more useful our first reply will be.",
+      "reasons": [
+        "New business inquiry",
+        "1682 inquiries",
+        "Ventures request",
+        "Labs request",
+        "Hiring question",
+        "Tech consultation",
+        "Other"
+      ],
+      "consentLabel": "Sign up for our newsletter",
+      "submitLabel": "Send message"
+    },
+    {
       "_type": "layoutSection",
       "_key": "reach",
       "surface": "white",
@@ -133,6 +152,6 @@
     "sourceId": "seed:contact",
     "extractedAt": "2026-08-01T02:52:53.395Z",
     "provisional": true,
-    "provisionalNote": "No canonical Figma frame exists for /contact, so the composition is assembled from existing blocks rather than transcribed. The copy is carried from the WordPress page (wpId 158) plus the studio's published email, phone and address from the site chrome extract. THE PAGE HAS NO FORM: WordPress serves Gravity Form 1 here, the schema has no form block, and adding one is a schema conversation rather than an inline improvisation (#25 agreement 3) — a mailto CTA stands in. Cleared by a canonical contact frame and a real form (block plus submission handling)."
+    "provisionalNote": "Two halves, both still open. (1) FORM: the page now draws a real form (#58) — formSection, carrying Gravity Form 1's actual field set — but IT CANNOT SEND. #58 built the fields only; no submission mechanism and no destination have been decided, so the submit button is disabled and the form says so on the page. The mailto CTA in the reach band is still the only working conversion path. Cleared by #58's remaining halves: a handler (with a spam story) and somewhere for a submission to land. (2) COMPOSITION: no canonical Figma frame exists for /contact, so the section order and the form band's layout are assembled from existing parts rather than transcribed, and carry no figmaNode. The copy is the WordPress page's (wpId 158) plus the studio's published email, phone and address from the site chrome extract. Cleared by a commissioned contact frame."
   }
 }
