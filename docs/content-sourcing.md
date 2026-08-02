@@ -28,7 +28,7 @@ canonical frames carry finished copy, and the frame it came from is recorded in
 | `/perspectives/{slug}`     | `1710:2823` / `1906:1046` | migrate         | 272 perspectives, 14 persons, 11 categories — **loaded**                                                                                                   | #45      |
 | `/about`                   | `1924:5344`               | seed-from-frame | `page-seed-about` — transcribed; the disciplines grid, team and Careers bands now render through their own blocks (#56). Careers is a section, not a route | #46 ✅   |
 | `/solutions`               | `1925:6138`               | seed-from-frame | `page-seed-solutions` — transcribed; the orbital diagram is `disciplineGridSection` `layout: orbital` (#56). The 24-page consolidation is still undecided  | #47      |
-| `/live` _(name TBD)_       | `1644:1889` / `1906:334`  | seed-from-frame | Net-new page layer; the URL is still undecided on #33                                                                                                      | #50      |
+| `/live`                    | `1644:1889` / `1906:334`  | seed-from-frame | `page-seed-live` — net-new layer, transcribed; three bands ride one new `inFlightSection`. Route named in [ADR 0011](./adr/0011-live-route-name.md)        | #50      |
 | `/accessibility-statement` | none                      | migrate ✅      | `page` — converted and loaded                                                                                                                              | #18      |
 | `/privacy-policy`          | none                      | migrate ✅      | `page` — converted and loaded                                                                                                                              | #18      |
 | Ventures (`/ventures/*`)   | **none**                  | provisional     | Ordinary standard pages per CONTEXT.md — deliberately not a type                                                                                           | —        |
@@ -45,14 +45,24 @@ verify` lists every one on each run.
 
 **No document may still be provisional at launch** — that is #48's gate.
 
-| Document                 | Why                                                                            | Cleared by                               |
-| ------------------------ | ------------------------------------------------------------------------------ | ---------------------------------------- |
-| `caseStudy-seed-ironman` | Real case study exists but is not translated yet                               | #22 translating it                       |
-| `caseStudy-seed-aramark` | **No WordPress case study exists.** Real client, invented engagement write-up. | A real case study, or replacing the card |
-| `caseStudy-seed-chop`    | **No WordPress case study exists.** Real client, invented engagement write-up. | A real case study, or replacing the card |
+| Document                 | Why                                                                                             | Cleared by                                                       |
+| ------------------------ | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `caseStudy-seed-ironman` | Real case study exists but is not translated yet                                                | #22 translating it                                               |
+| `caseStudy-seed-aramark` | **No WordPress case study exists.** Real client, invented engagement write-up.                  | A real case study, or replacing the card                         |
+| `caseStudy-seed-chop`    | **No WordPress case study exists.** Real client, invented engagement write-up.                  | A real case study, or replacing the card                         |
+| `page-seed-live`         | The appearances band asserts a **date**, and the frame's is a placeholder duplicated four times | Someone owning the page's cadence and supplying real appearances |
 
 The homepage showcase is a canonical frame with three cards, which is why these
-are carried rather than deleted — see ADR 0007. Which real case studies replace
+are carried rather than deleted — see ADR 0007.
+
+Live is provisional for a different reason from the three case studies. Its copy
+is a faithful transcription of a canonical frame, which is normally enough (About
+and Solutions are not provisional). What makes it not-authoritative is that the
+frame fills its two lists by **duplicating one authored row** — four identical
+appearances in `1710:1800`, three identical ideas in `1732:1409` — and the one
+appearance it authors is dated. Transcribing is a transcription job, so the seed
+carries the authored row once and nothing invented; a page promising "what we're
+working on" with a workshop nobody scheduled is exactly what #48's gate is for. Which real case studies replace
 the two invented ones is #22's call: 19 of the 20 extracted are still
 untranslated.
 

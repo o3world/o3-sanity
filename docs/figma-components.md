@@ -158,9 +158,16 @@ belongs to the Home page layer (#42) rather than here.
 Honest limits on the above:
 
 - **Component _usage_ was verified for Home (desktop + mobile) and the Work
-  hero.** Case Study, Insights, Solutions and Live were not opened for this
+  hero.** Case Study, Insights and Solutions were not opened for this
   inventory. A set marked non-canonical could in principle appear there — the
   registry is complete, the usage column is not.
+  - **Live is now opened** (#50, `1644:1889` / `1906:334`) and adds nothing to
+    the registry. It instances `NavBar`, `Brand / Logo`, `Button / Solid` and
+    `Icon / Surface`, and draws the same `HalftoneDisc` halftone the About
+    careers band uses at a 113px diameter. One usage note: its `Icon / Surface`
+    instances are **links**, not carousel controls, so `InFlightSection` inlines
+    the circle rather than reaching for `CarouselControl` (a `<button>` with
+    prev/next semantics). If a third use appears, lift the circle out of both.
 - **The glyph list is incomplete** — `arrow_forward` and `close` are confirmed.
   ADR 0009 makes that safe: glyphs are added per ticket, so nothing is blocked
   on a full list.

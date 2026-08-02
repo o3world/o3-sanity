@@ -19,6 +19,7 @@ import { CaseShowcaseSection } from './section/caseShowcaseSection/CaseShowcaseS
 import { CtaSection } from './section/ctaSection/CtaSection'
 import { DisciplineGridSection } from './section/disciplineGridSection/DisciplineGridSection'
 import { HeroSection } from './section/heroSection/HeroSection'
+import { InFlightSection } from './section/inFlightSection/InFlightSection'
 import { LayoutSection } from './section/layoutSection/LayoutSection'
 import { ListingSection } from './section/listingSection/ListingSection'
 import { LogoWallSection } from './section/logoWallSection/LogoWallSection'
@@ -51,6 +52,7 @@ export const CLIENT_SECTION_BINDINGS = [
   defineBlockRender('disciplineGridSection', { component: DisciplineGridSection }),
   defineBlockRender('personGridSection', { component: PersonGridSection }),
   defineBlockRender('roleListSection', { component: RoleListSection }),
+  defineBlockRender('inFlightSection', { component: InFlightSection }),
   defineBlockRender('layoutSection', { component: LayoutSection }),
   defineBlockRender('mediaSection', { component: MediaSection }),
   defineBlockRender('listingSection', { component: ListingSection }),
