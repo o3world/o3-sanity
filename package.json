@@ -18,6 +18,8 @@
     "env:pull": "vercel link --project o3-sanity-web --scope o3-world --yes && vercel env pull apps/web/.env.local --environment=development",
     "format": "turbo run format",
     "frontier": "./scripts/frontier.sh",
+    "guidance:check": "pnpm --filter @o3/guidance check",
+    "guidance:sync": "pnpm --filter @o3/guidance sync",
     "knip": "knip --no-config-hints",
     "lint": "turbo run lint",
     "prepare": "[ -n \"$VERCEL\" ] || [ -n \"$CI\" ] || lefthook install",

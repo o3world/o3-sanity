@@ -30,6 +30,18 @@ export type Logo = {
   _type: 'image'
 }
 
+export type Guidance = {
+  _id: string
+  _type: 'guidance'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  key?: string
+  title?: string
+  body?: string
+  sourcePath?: string
+}
+
 export type SiteSettings = {
   _id: string
   _type: 'siteSettings'
@@ -783,6 +795,7 @@ export type Geopoint = {
 export type AllSanitySchemaTypes =
   | SanityImageAssetReference
   | Logo
+  | Guidance
   | SiteSettings
   | Migration
   | Seo

@@ -210,7 +210,11 @@ async function main() {
   // 8. Anything the pipeline did not put there. Not a failure on its own — an
   //    editor may have created it — but during build-out it is usually
   //    leftover scaffolding, and a routable one shadows a seed.
+  //    `guidance` documents are owned by a different tool on purpose (#72:
+  //    `pnpm guidance:sync`, checked by `pnpm guidance:check`), so they are
+  //    not orphans — this pipeline is deleted post-migration and they are not.
   const orphans = live
+    .filter((doc) => doc._type !== 'guidance')
     .filter((doc) => !expectedIds.has(doc._id))
     .map(
       (doc) =>

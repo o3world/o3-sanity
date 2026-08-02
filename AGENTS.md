@@ -82,6 +82,23 @@ browser.** Skipping it once (#42's build-out) left a whole homepage
 reconciliation invisible: the seeds were correct, the dataset was stale, and
 every screenshot taken to check the work was of the old content.
 
+### Agent guidance in the dataset
+
+The Claude Desktop authoring skill carries no knowledge — it fetches it (#68).
+The voice guide and brand foundation live in the repo as markdown and are
+pushed into the dataset as `guidance` documents by a separate tool, which
+outlives the migration pipeline:
+
+```bash
+pnpm guidance:sync    # .claude/skills/o3world-copy/*.md → guidance documents
+pnpm guidance:check   # fails if the dataset has drifted from the repo
+```
+
+**Edit the markdown, then sync.** A stale guidance document does not error —
+it just makes everything an agent writes that session quietly wrong. Sources
+are declared in `tools/guidance/src/sources.ts`; consumers read
+`*[_type == "guidance"]{key, title, body}`.
+
 ### Testing
 
 Three layers — `unit` (`*.test.ts`), `render` (`*.render.test.tsx`), `stories` (`*.stories.tsx`).

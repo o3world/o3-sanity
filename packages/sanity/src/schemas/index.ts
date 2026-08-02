@@ -29,6 +29,7 @@ import { perspective } from './documents/perspective'
 import { caseStudy } from './documents/caseStudy'
 import { page } from './documents/page'
 import { person, client, category, industry, siteSettings } from './documents/supporting'
+import { guidance } from './documents/guidance'
 
 export const schemaTypes = [
   // objects
@@ -69,4 +70,5 @@ export const schemaTypes = [
   category,
   industry,
   siteSettings,
+  guidance,
 ]

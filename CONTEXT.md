@@ -15,6 +15,7 @@ Terms resolved so far. Use these exact words in schema names, code, issues, and 
 - **Category** — editorial taxonomy for perspectives (11 migrate; cleanup is post-migration editorial work). WordPress tags do **not** migrate.
 - **Industry** — minimal taxonomy (name + slug) referenced by case studies for the "Healthcare · Pediatric Systems" eyebrow; the second half is the case study's `industryDetail` string. Deliberately not invested in beyond that.
 - **Site Settings** — singleton: nav, footer, social, default SEO, display labels.
+- **Guidance** — a document that tells an _agent_ how to write, not a reader what to read: the voice guide and the brand foundation behind it, stored so an MCP consumer (the Claude Desktop authoring skill, #68) can fetch them at session start. **The repo is source of truth** — each one is synced from markdown under `.claude/skills/` by `pnpm guidance:sync`, every field is `readOnly` in Studio, and `pnpm guidance:check` fails on drift. Deliberately outside the editorial model: not routable, no `slug`, no `seo`, no `migration` object, and ids (`guidance-o3-voice`) that miss the pipeline's ownership contract so `load` never retires them. Body is **raw markdown in a text field**, not Portable Text — agents consume it verbatim.
 
 Testimonials/quotes are **inline** in the quote section block — no document type until a quote is actually reused.
 
@@ -79,7 +80,7 @@ Closed vocabulary. If the field you want isn't here and isn't obviously domain-s
 | `consentLabel` | The opt-in checkbox's words; empty = no checkbox (`formSection`) | `consent`, `optIn`                                   |
 | `submitLabel`  | The submit button's words (`formSection`)                        | `buttonText`, `cta` — there's no link here           |
 
-The lexicon governs **editorial** fields — the ones an author fills in. The hidden `migration` provenance object is outside it (`sourceId`, `extractedAt`, `locked`, `figmaNode`, `provisional`, `provisionalNote`): those name pipeline state, not content, and are `readOnly` in Studio.
+The lexicon governs **editorial** fields — the ones an author fills in. Machine-written fields are outside it, and are `readOnly` in Studio: the hidden `migration` provenance object (`sourceId`, `extractedAt`, `locked`, `figmaNode`, `provisional`, `provisionalNote`) names pipeline state, and `guidance.key` / `guidance.sourcePath` name where a synced document came from and what queries it. Both are provenance, not content.
 
 It also governs the **props** a presentational component exposes, even in `packages/ui` where nothing is schema-bound. A prop is where a field's value lands, so a renderer that writes `deck={subheading}` forces every reader to learn the same concept twice and quietly reintroduces the synonym the lexicon exists to kill. Design vocabulary belongs in the prop's _doc comment_ ("the 24px standfirst pinned right"), never in its name.
 

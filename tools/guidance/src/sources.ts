@@ -1,0 +1,62 @@
+import { readFileSync } from 'node:fs'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+import type { Guidance } from '@o3/sanity/types/generated'
+
+/** The monorepo root — sources are declared repo-relative so they read the same in Studio. */
+const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..')
+
+/**
+ * The guidance corpus: repo markdown → dataset document, one row per document.
+ *
+ * The repo is source of truth (map #63 — voice is never packaged in the skill
+ * ZIP, and never authored in Studio). Adding a guidance document is adding a
+ * row here; the composition guide joins when #66 produces it.
+ */
+const GUIDANCE_SOURCES = [
+  {
+    key: 'o3-voice',
+    title: 'O3 voice guide',
+    sourcePath: '.claude/skills/o3world-copy/SKILL.md',
+  },
+  {
+    /* The voice guide delegates the pillars, principles and values to
+     * `brand.md` — a filesystem link a Desktop agent cannot follow, so the
+     * store carries the foundation too or the delegation dead-ends. */
+    key: 'o3-brand',
+    title: 'O3 brand foundation',
+    sourcePath: '.claude/skills/o3world-copy/brand.md',
+  },
+] as const
+
+/** Deterministic and outside the load pipeline's `<type>-(wp|seed)-` ownership contract. */
+export const idFor = (key: string) => `guidance-${key}`
+
+export type GuidanceDoc = Required<Pick<Guidance, '_id' | '_type' | 'key' | 'title' | 'body'>> &
+  Pick<Guidance, 'sourcePath'>
+
+/**
+ * Skill frontmatter is packaging metadata for Claude's skill loader, not
+ * guidance — it names and describes the file for a system the dataset's
+ * readers are not part of, so it is stripped rather than synced.
+ */
+function stripFrontmatter(markdown: string): string {
+  return markdown.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n+/, '')
+}
+
+/** The guidance documents as the repo currently defines them. */
+export function readGuidance(): GuidanceDoc[] {
+  return GUIDANCE_SOURCES.map((source) => {
+    const body = stripFrontmatter(readFileSync(join(REPO_ROOT, source.sourcePath), 'utf8')).trim()
+    if (!body) throw new Error(`${source.sourcePath} is empty after stripping frontmatter`)
+    return {
+      _id: idFor(source.key),
+      _type: 'guidance',
+      key: source.key,
+      title: source.title,
+      body,
+      sourcePath: source.sourcePath,
+    }
+  })
+}

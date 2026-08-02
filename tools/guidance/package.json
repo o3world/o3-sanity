@@ -1,0 +1,22 @@
+{
+  "name": "@o3/guidance",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Sync agent-facing guidance markdown from the repo into the Sanity dataset (#72).",
+  "scripts": {
+    "check": "sanity exec src/check.ts --with-user-token --",
+    "lint": "eslint src/",
+    "sync": "sanity exec src/sync.ts --with-user-token --",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@o3/sanity": "workspace:*",
+    "sanity": "6.8.0"
+  },
+  "devDependencies": {
+    "@o3/typescript-config": "workspace:*",
+    "@types/node": "^24.0.0",
+    "typescript": "^5.7.0"
+  }
+}
