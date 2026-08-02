@@ -36,16 +36,15 @@ export interface CaseChapterProps {
  * frame reserves the wider column for centred statements like the pull quote
  * and drops to 822 for anything meant to be read as prose.
  *
- * Two values are call-site literals because they occur only on this frame:
+ * One value is a call-site literal because it occurs only on this frame:
+ * the **164px band**, solved to reach 96px at 402 the way every other
+ * rhythm token is (it sits between `band-md` and `band-lg`, matching
+ * neither).
  *
- * - the **164px band**, solved to reach 96px at 402 the way every other
- *   rhythm token is (it sits between `band-md` and `band-lg`, matching
- *   neither); and
- * - the **title step, which gets _smaller_ on desktop** — 40px at 402,
- *   36px at 1440. It is the one descending step in the design: at 1440 the
- *   chapter title sits deliberately below the 48px page title, and the 402
- *   frame lets the two meet. Solved across the two endpoints so the ramp
- *   stays continuous rather than stepping at `lg`.
+ * Title and body sit on `text-body-heading` / `text-body` — the tokens #45
+ * minted from the same frame family (`1894:3912` is a chapter heading).
+ * `body-heading` is the design's one descending step: 40px at 402, 36px at
+ * 1440, where the chapter title sits deliberately below the 48px page title.
  *
  * The kicker holds at the 18px section step at both widths, following ADR
  * 0006's rule that small UI text does not scale — the mobile frame's 16px is
@@ -61,13 +60,9 @@ export function CaseChapter({ number, kicker, title, children, className }: Case
       <div className="mx-auto flex w-full max-w-[822px] flex-col gap-8 lg:gap-6">
         <div className="flex flex-col gap-2 lg:gap-3">
           {label ? <Eyebrow size="lg">{label}</Eyebrow> : null}
-          <h2 className="font-display text-ink text-balance text-[clamp(36px,calc(41.55px-0.386vw),40px)] leading-[1.2]">
-            {title}
-          </h2>
+          <h2 className="font-display text-ink text-body-heading text-balance">{title}</h2>
         </div>
-        {children ? (
-          <div className="text-fg text-[clamp(16px,calc(0.386vw+14.45px),20px)]">{children}</div>
-        ) : null}
+        {children ? <div className="text-fg text-body">{children}</div> : null}
       </div>
     </section>
   )
