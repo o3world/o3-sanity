@@ -186,6 +186,17 @@ export type LayoutSection = {
   surface?: 'white' | 'bone' | 'ink'
 }
 
+export type FormSection = {
+  _type: 'formSection'
+  eyebrow?: string
+  heading?: string
+  note?: string
+  reasons?: Array<string>
+  consentLabel?: string
+  submitLabel?: string
+  surface?: 'white' | 'bone' | 'ink'
+}
+
 export type InFlightSection = {
   _type: 'inFlightSection'
   heading?: string
@@ -498,6 +509,9 @@ export type Page = {
       } & InFlightSection)
     | ({
         _key: string
+      } & FormSection)
+    | ({
+        _key: string
       } & LayoutSection)
     | ({
         _key: string
@@ -595,6 +609,9 @@ export type CaseStudy = {
     | ({
         _key: string
       } & InFlightSection)
+    | ({
+        _key: string
+      } & FormSection)
     | ({
         _key: string
       } & LayoutSection)
@@ -778,6 +795,7 @@ export type AllSanitySchemaTypes =
   | ListingSection
   | MediaSection
   | LayoutSection
+  | FormSection
   | InFlightSection
   | RoleListSection
   | PersonReference
@@ -1257,6 +1275,17 @@ export type CASE_STUDY_QUERY_RESULT = {
           _type: 'discipline'
           _key: string
         }>
+        surface?: 'bone' | 'ink' | 'white'
+      }
+    | {
+        _key: string
+        _type: 'formSection'
+        eyebrow?: string
+        heading?: string
+        note?: string
+        reasons?: Array<string>
+        consentLabel?: string
+        submitLabel?: string
         surface?: 'bone' | 'ink' | 'white'
       }
     | {
@@ -1826,6 +1855,17 @@ export type PAGE_QUERY_RESULT = {
           _type: 'discipline'
           _key: string
         }>
+        surface?: 'bone' | 'ink' | 'white'
+      }
+    | {
+        _key: string
+        _type: 'formSection'
+        eyebrow?: string
+        heading?: string
+        note?: string
+        reasons?: Array<string>
+        consentLabel?: string
+        submitLabel?: string
         surface?: 'bone' | 'ink' | 'white'
       }
     | {

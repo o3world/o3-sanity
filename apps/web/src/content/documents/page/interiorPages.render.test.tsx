@@ -281,10 +281,15 @@ describe('the seeded Contact page', () => {
     expect(html.match(/data-sanity=/g) ?? []).toHaveLength(sections.length)
   })
 
-  // No frame authored this order — it is the seed's own: hero, the ways to
-  // reach the studio, the Handler pull quote.
-  it('resolves to its three bands', () => {
-    expect(sections.map((s) => s._type)).toEqual(['heroSection', 'layoutSection', 'quoteSection'])
+  // No frame authored this order — it is the seed's own: hero, the inquiry
+  // form (#58), the ways to reach the studio, the Handler pull quote.
+  it('resolves to its four bands', () => {
+    expect(sections.map((s) => s._type)).toEqual([
+      'heroSection',
+      'formSection',
+      'layoutSection',
+      'quoteSection',
+    ])
   })
 
   it.each([
@@ -299,16 +304,96 @@ describe('the seeded Contact page', () => {
     expect(html).toContain(copy)
   })
 
-  // The form stand-in (#48): WordPress serves a Gravity Form here and the
-  // schema has no form block, so a mailto CTA is the page's one conversion
-  // path until a real form exists. If this assertion breaks because a form
-  // block landed, delete it with joy.
-  it('offers the mailto CTA standing in for the form', () => {
+  // The mailto CTA stood in for the form in #48 and still does — #58 built
+  // the fields without a handler, so this remains the page's only WORKING
+  // conversion path rather than a leftover.
+  it('keeps the mailto CTA as the one path that actually reaches someone', () => {
     expect(html).toContain('href="mailto:hello@o3world.com"')
   })
 
   it('gives the page a single h1', () => {
     expect(html.match(/<h1[\s>]/g) ?? []).toHaveLength(1)
+  })
+
+  /**
+   * The form band (#58).
+   *
+   * WordPress serves **Gravity Form 1** here. Its field set was recovered
+   * from the live markup — the WP extract only ever captured
+   * `{ acf_fc_layout: "form", form_id: "1" }`, never the fields — and this is
+   * what it draws: two names at half width, email, a Reason dropdown, a
+   * message, and a newsletter opt-in. A form that carried four of the six
+   * would be a quieter regression than no form at all, so the set is
+   * asserted whole.
+   */
+  describe('the inquiry form', () => {
+    it.each([
+      ['first name', 'field-firstName'],
+      ['last name', 'field-lastName'],
+      ['email', 'field-email'],
+      ['reason', 'field-reason'],
+      ['message', 'field-message'],
+      ['the newsletter opt-in', 'field-consent'],
+    ])('draws Gravity Form 1’s %s field', (_label, id) => {
+      expect(html).toContain(`id="${id}"`)
+    })
+
+    it('gives every field a label pointing at its own control', () => {
+      for (const field of ['firstName', 'lastName', 'email', 'reason', 'message', 'consent']) {
+        expect(html, `no label for ${field}`).toContain(`for="field-${field}"`)
+      }
+    })
+
+    // All five are `gfield_contains_required` on the live form. The asterisk
+    // is the sighted half and `aria-required` the other; a marker drawn
+    // without its pair is decoration.
+    it('marks all five required fields, in both halves', () => {
+      expect(html.match(/aria-required="true"/g) ?? []).toHaveLength(5)
+      expect(html.match(/\(required\)/g) ?? []).toHaveLength(5)
+    })
+
+    // The options are the editor's (`reasons`), not the renderer's — which is
+    // where ADR 0014 draws the line between the field set and the words.
+    it('carries the seed’s Reason options rather than a hard-coded list', () => {
+      for (const reason of ['New business inquiry', 'Ventures request', 'Tech consultation']) {
+        expect(html).toContain(reason)
+      }
+    })
+
+    /**
+     * **The stub, asserted.** #58 built the fields only; the mechanism and
+     * the destination are still open. The one thing this page must never do
+     * is look like it sends, so the button is disabled and the reason sits on
+     * the page, wired to the button as its description.
+     *
+     * When #58's other halves land, this is the test that should fail.
+     */
+    it('disables submit and says why, rather than pretending to send', () => {
+      expect(html).toContain('This form isn’t connected yet')
+      expect(html).toMatch(/<button[^>]*\sdisabled/)
+      expect(html).toMatch(/<button[^>]*aria-describedby="form-not-connected"/)
+      expect(html).toContain('id="form-not-connected"')
+    })
+
+    it('still shows the submit’s words, so the intent stays legible', () => {
+      expect(html).toContain('Send message')
+    })
+
+    /**
+     * ADR 0006 — no 402 frame exists for this page either, so the stack is a
+     * renderer decision and the rule is only that nothing escapes sideways.
+     *
+     * `variantsOf` is page-wide, and the reach band below already emits
+     * `md:grid-cols-2`, so this asserts the form's own variant is present and
+     * that **no bare `grid-cols-2`** exists anywhere — an unprefixed one
+     * would put two inputs side by side on a 402 phone.
+     */
+    it('is a stack at 402, the two names pairing only from sm', () => {
+      expect(unprefixedHorizontalScrollUtilities(html)).toEqual([])
+      const variants = variantsOf(html, 'grid-cols-2')
+      expect(variants).toContain('sm:grid-cols-2')
+      expect(variants).not.toContain('grid-cols-2')
+    })
   })
 })
 

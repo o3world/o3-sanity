@@ -16,6 +16,7 @@ export const SECTION_BLOCKS = [
   'personGridSection',
   'roleListSection',
   'inFlightSection',
+  'formSection',
   'layoutSection',
   'mediaSection',
   'listingSection',

@@ -338,6 +338,89 @@ describe('committed seed content', () => {
     })
   })
 
+  /**
+   * The inquiry form (#58).
+   *
+   * Schema validation runs in Studio, and a seed never goes through Studio —
+   * `load` writes the JSON straight to the dataset. So a `required()` rule on
+   * `reasons` or `submitLabel` is enforced for an editor and enforced by
+   * nothing at all for the corpus, which is where every form on the site
+   * currently comes from. These are that enforcement.
+   */
+  describe('every seeded form band', () => {
+    const forms = seeds
+      .filter(({ doc }) => doc._type === 'page')
+      .flatMap(({ file, doc }) =>
+        ((doc.sections ?? []) as Record<string, unknown>[])
+          .filter((s) => s._type === 'formSection')
+          .map((section) => ({ file, section })),
+      )
+
+    it('has a form to check', () => {
+      expect(forms.length).toBeGreaterThan(0)
+    })
+
+    // The dropdown is the one part of the field set the editor owns
+    // (ADR 0014). An empty array renders a select with nothing but the
+    // placeholder in it — a required field nobody can satisfy.
+    it('gives every form at least one Reason option', () => {
+      for (const { file, section } of forms) {
+        const reasons = section.reasons as unknown[] | undefined
+        expect(Array.isArray(reasons), `${file}: formSection has no reasons array`).toBe(true)
+        expect(reasons?.length, `${file}: formSection has an empty reasons list`).toBeGreaterThan(0)
+      }
+    })
+
+    it('gives every form a submit label', () => {
+      for (const { file, section } of forms) {
+        expect(
+          typeof section.submitLabel === 'string' && section.submitLabel.trim().length > 0,
+          `${file}: formSection has no submitLabel`,
+        ).toBe(true)
+      }
+    })
+
+    it('gives every form a heading', () => {
+      for (const { file, section } of forms) {
+        expect(
+          typeof section.heading === 'string' && section.heading.trim().length > 0,
+          `${file}: formSection has no heading`,
+        ).toBe(true)
+      }
+    })
+  })
+
+  /**
+   * `/contact` is the site's one conversion path (#58, #48). Losing the form
+   * band to a careless edit would be a silent functional regression against
+   * the live site — exactly the one this ticket exists to close — and every
+   * other check here would stay green through it.
+   */
+  describe('the contact page', () => {
+    const contact = seeds.find(({ doc }) => doc._id === 'page-seed-contact')?.doc
+
+    it('exists', () => {
+      expect(contact).toBeDefined()
+    })
+
+    it('carries a form band', () => {
+      const types = ((contact?.sections ?? []) as { _type: string }[]).map((s) => s._type)
+      expect(types).toContain('formSection')
+    })
+
+    /**
+     * The form has no handler and no destination yet, so the page stays
+     * provisional — and the note has to say which halves are still open, not
+     * just that something is. When #58's mechanism and destination land,
+     * this fails and the note gets rewritten with it.
+     */
+    it('still declares itself provisional, naming what is open', () => {
+      const migration = (contact?.migration ?? {}) as Partial<Migration>
+      expect(migration.provisional).toBe(true)
+      expect(migration.provisionalNote).toMatch(/#58/)
+    })
+  })
+
   describe('the homepage', () => {
     const home = seeds.find(({ doc }) => doc._id === 'page-seed-index')?.doc
 
