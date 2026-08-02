@@ -19,7 +19,7 @@
     "frontier": "./scripts/frontier.sh",
     "knip": "knip --no-config-hints",
     "lint": "turbo run lint",
-    "prepare": "lefthook install",
+    "prepare": "[ -n \"$VERCEL\" ] || [ -n \"$CI\" ] || lefthook install",
     "schema:deploy": "pnpm --filter @o3/sanity schema:deploy",
     "storybook": "turbo run storybook",
     "test": "vitest run",
