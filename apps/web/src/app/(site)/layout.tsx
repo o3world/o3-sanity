@@ -2,6 +2,7 @@ import type React from 'react'
 import { draftMode } from 'next/headers'
 
 import { SanityLive } from '@/sanity/live'
+import { PreviewSwitcher } from '@/sanity/PreviewSwitcher'
 import { getSiteSettings } from '@/sanity/siteSettings'
 import { VisualEditing } from '@/sanity/VisualEditing'
 import { SiteFooter } from '@/ui/SiteFooter'
@@ -19,6 +20,10 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       <SiteFooter settings={settings} />
       <SanityLive />
       {isDraft ? <VisualEditing /> : null}
+      {/* Renders nothing unless the visitor holds a Studio session (#60).
+          `<VisualEditing />` above is what lets it tell Presentation's frame
+          from an ordinary tab — see shouldShowPreviewSwitcher. */}
+      <PreviewSwitcher isDraft={isDraft} />
     </>
   )
 }
