@@ -1,0 +1,17 @@
+{
+  "_id": "perspective-wp-10569",
+  "_meta": {
+    "direction": "Replace the WordPress stock featured image with a design-sourced hero in the art direction of the seeded weekend-redesign post: a quiet textured paper field, thin precise line-work, one conceptual metaphor taken from the article's own argument, and a single warm amber accent.",
+    "decidedBy": "Nick Lewis",
+    "decidedAt": "2026-08-02",
+    "note": "Metaphor: a join that was cut to fit. The line the post turns on is Jay Forbes's — most platforms bolt AI onto a content model that was not built for it, and Sanity built the content model for it — so the two forms are cut into complementary steps and interlock exactly, with the seam itself as the one amber line. Charcoal field."
+  },
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_localSrc": "tools/migration/data/seed/assets/perspective-sanity-partner-hero.png"
+    },
+    "alt": "Two thin bone-white outlines on a near-black field, cut into complementary steps so they interlock exactly; the seam where they meet is drawn as a single amber line."
+  }
+}

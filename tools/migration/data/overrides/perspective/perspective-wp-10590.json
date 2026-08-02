@@ -1,0 +1,17 @@
+{
+  "_id": "perspective-wp-10590",
+  "_meta": {
+    "direction": "Replace the WordPress stock featured image with a design-sourced hero in the art direction of the seeded weekend-redesign post: a quiet textured paper field, thin precise line-work, one conceptual metaphor taken from the article's own argument, and a single warm amber accent.",
+    "decidedBy": "Nick Lewis",
+    "decidedAt": "2026-08-02",
+    "note": "Metaphor: showing up again, and larger each time. The post is not really a sponsorship announcement — it is about a decade of returns, from Forge in 2014 through 1682 in 2019 to the advisory committee and now the presenting sponsorship — so the figure is a sequence of arcs standing on one baseline, each taller than the last, the final one amber. Charcoal field."
+  },
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_localSrc": "tools/migration/data/seed/assets/perspective-1682-guru-hero.png"
+    },
+    "alt": "A thin bone-white rule across a near-black field with five arcs standing on it, each one taller and wider than the last; the final and largest arc is drawn in amber."
+  }
+}

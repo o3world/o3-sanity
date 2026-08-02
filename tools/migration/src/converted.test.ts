@@ -6,7 +6,8 @@ import { describe, expect, it } from 'vitest'
 import { SECTION_BLOCKS } from '@o3/sanity/schemas/registry'
 
 import { CORPUS_DIRS, refsIn } from './lib/corpus'
-import { CONVERTED_DIR, EXTRACT_DIR } from './lib/paths'
+import { overrideIssues, readOverrides } from './lib/overrides'
+import { CONVERTED_DIR, EXTRACT_DIR, REPO_ROOT } from './lib/paths'
 import type { WpSeo } from './lib/yoast'
 import { categoryDoc } from './map/category'
 import { checkPathParity } from './map/paths'
@@ -225,5 +226,79 @@ describe('committed conversion output', () => {
         expect(marker, `${file} migrates a thumbnail`).not.toMatch(/-\d+x\d+\.\w+"$/)
       }
     }
+  })
+
+  /**
+   * The override layer (`lib/overrides.ts`).
+   *
+   * `convert` already fails on every one of these, which is the point at which
+   * they are cheapest to find. CI has to re-check them anyway, for the reason
+   * every other rule here is re-checked over the committed corpus: `convert` is
+   * run by a person, and the tree is what ships. An override edited without a
+   * re-run, or a binary that never got committed, leaves a green working copy
+   * and a broken load from a fresh clone.
+   */
+  describe('committed overrides', () => {
+    const overrides = readOverrides()
+    const converted = new Map(all.map(({ doc }) => [doc._id as string, doc]))
+
+    it('has overrides to check (an empty tree would pass everything below)', () => {
+      expect(overrides.length).toBeGreaterThan(0)
+    })
+
+    it('names a converted document that still exists', () => {
+      for (const override of overrides) {
+        expect([...converted.keys()], `${override.source} overrides nothing`).toContain(override.id)
+      }
+    })
+
+    // Overrides replace, they never invent: a field the mapper stopped
+    // producing is a decision that has quietly expired.
+    it('replaces only fields the converted document still has', () => {
+      for (const override of overrides) {
+        const doc = converted.get(override.id)
+        if (!doc) continue
+        expect(overrideIssues(override, doc).map((i) => i.detail)).toEqual([])
+      }
+    })
+
+    // The seed rule, applied to the tree overrides write into: a marker
+    // pointing at a file that is not committed passes on the machine that
+    // authored it and fails `load` from a fresh clone.
+    it('points every _localSrc in the converted tree at a file in the repo', () => {
+      const markers = new Set<string>()
+      for (const { doc } of all) {
+        for (const m of JSON.stringify(doc).matchAll(/"_localSrc":"([^"]+)"/g)) markers.add(m[1]!)
+      }
+      expect(markers.size, 'no _localSrc in the converted tree to check').toBeGreaterThan(0)
+      for (const path of markers) {
+        expect(existsSync(join(REPO_ROOT, path)), `missing binary ${path}`).toBe(true)
+      }
+    })
+
+    // Editing an override without re-running `convert` is the one way this
+    // layer can be wrong and silent — the decision is committed, the document
+    // it was supposed to change is not.
+    it('has been applied — every override is present in the committed output', () => {
+      for (const override of overrides) {
+        const doc = converted.get(override.id)
+        if (!doc) continue
+        for (const [key, value] of Object.entries(override.fields)) {
+          expect(doc[key], `${override.source}: run convert, ${key} is stale on disk`).toEqual(
+            value,
+          )
+        }
+      }
+    })
+
+    // `_meta` is provenance for a reviewer reading the diff. `load` writes
+    // committed JSON straight to the dataset, so a `_meta` that reached the
+    // converted tree would reach the document — the translate track routes its
+    // own through `withTranslationProvenance` for exactly this reason.
+    it('leaves no _meta on the documents it changed', () => {
+      for (const { file, doc } of all) {
+        expect(doc._meta, `${file} carries _meta into the dataset`).toBeUndefined()
+      }
+    })
   })
 })

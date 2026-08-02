@@ -1,0 +1,17 @@
+{
+  "_id": "perspective-wp-10579",
+  "_meta": {
+    "direction": "Replace the WordPress stock featured image with a design-sourced hero in the art direction of the seeded weekend-redesign post: a quiet textured paper field, thin precise line-work, one conceptual metaphor taken from the article's own argument, and a single warm amber accent.",
+    "decidedBy": "Nick Lewis",
+    "decidedAt": "2026-08-02",
+    "note": "Metaphor: the queue that stops costing anything. The post counts the work an AI layer takes off a marketing team — 80 discrete tasks a month, five hours a week — and its own summary is that the team reviews instead of produces. So the figure is a list: the few rows a person still fills in, one of them amber, above a dozen rows left as empty outlines. Bone field."
+  },
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_localSrc": "tools/migration/data/seed/assets/perspective-ai-cms-hero.png"
+    },
+    "alt": "A centred column of stacked bars on a bone-coloured field: the top few filled solid, one of them amber, and the dozen below them left as empty hairline outlines."
+  }
+}

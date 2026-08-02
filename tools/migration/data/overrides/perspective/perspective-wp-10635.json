@@ -1,0 +1,17 @@
+{
+  "_id": "perspective-wp-10635",
+  "_meta": {
+    "direction": "Replace the WordPress stock featured image with a design-sourced hero in the art direction of the seeded weekend-redesign post: a quiet textured paper field, thin precise line-work, one conceptual metaphor taken from the article's own argument, and a single warm amber accent.",
+    "decidedBy": "Nick Lewis",
+    "decidedAt": "2026-08-02",
+    "note": "Metaphor: accumulation. The post's claim is that 527 cheap prompts and $127 added up to the thing a whole company runs its finances on — so the figure is a row of thin strokes, sparse and irregular at the left, tightening rightwards until they close into one solid amber bar. Bone field."
+  },
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_localSrc": "tools/migration/data/seed/assets/perspective-527-prompts-hero.png"
+    },
+    "alt": "A bone-coloured field carrying a long row of thin vertical strokes: sparse and irregularly spaced at the left, tightening rightwards until they close into a single solid amber bar."
+  }
+}

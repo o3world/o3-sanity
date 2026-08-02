@@ -14,6 +14,7 @@ import { join } from 'node:path'
 
 import type { ConversionIssue } from './lib/htmlToPortableText'
 import { refsIn } from './lib/corpus'
+import { OverrideLayer, type Override } from './lib/overrides'
 import { CONVERTED_DIR, EXTRACT_DIR, SEED_DIR, TRANSLATED_DIR, writeJson } from './lib/paths'
 import type { WpChrome } from './lib/chrome'
 import type { WpSiteSeo } from './lib/yoast'
@@ -61,8 +62,22 @@ let checkedTranslations = 0
 const notes: { slug: string; notes: readonly ConversionIssue[] }[] = []
 let written = 0
 
+/**
+ * Committed replacements, merged onto the converted document as the last thing
+ * that happens to it (`lib/overrides.ts`). Nothing is silent here: an applied
+ * override is reported on every run, and one that no longer applies fails it.
+ */
+const overrides = new OverrideLayer()
+const applied: Override[] = []
+
 function emit(type: string, slug: string, doc: unknown) {
-  writeJson(join(CONVERTED_DIR, type, `${slug}.json`), doc)
+  const result = overrides.apply(doc as Record<string, unknown>)
+  if (result.issues.length > 0) {
+    failures.push({ slug, issues: result.issues })
+    return
+  }
+  if (result.override) applied.push(result.override)
+  writeJson(join(CONVERTED_DIR, type, `${slug}.json`), result.doc)
   written++
 }
 
@@ -188,10 +203,36 @@ if (existsSync(translatedDir)) {
   }
 }
 
+// An override whose document no longer converts is a stale decision, and a
+// stale decision that skipped silently would revert a field to whatever
+// WordPress says with nothing to say it had.
+for (const override of overrides.unapplied()) {
+  failures.push({
+    slug: override.source,
+    issues: [
+      {
+        element: 'override',
+        detail: `overrides ${override.id}, which convert no longer emits — the decision is stale`,
+      },
+    ],
+  })
+}
+
 console.log(
   `converted ${written} documents → ${CONVERTED_DIR}` +
     (checkedTranslations > 0 ? ` · ${checkedTranslations} translated documents checked` : ''),
 )
+if (applied.length > 0) {
+  console.log(`\nOVERRIDES (${applied.length}) — converted, then replaced from data/overrides/:`)
+  // One line each: the direction itself is committed next to the document it
+  // changed, which is the point of the layer. What a run has to say is that a
+  // field the reader is looking at is not what the mapper produced.
+  for (const o of applied) {
+    console.log(
+      `  ${o.id} · ${Object.keys(o.fields).join(', ')} — ${o.meta.decidedBy}, ${o.meta.decidedAt}`,
+    )
+  }
+}
 if (notes.length > 0) {
   console.warn(`\nNOTES (${notes.length}) — converted, but the source needed cleaning up:`)
   for (const n of notes) {

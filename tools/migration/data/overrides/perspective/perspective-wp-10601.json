@@ -1,0 +1,17 @@
+{
+  "_id": "perspective-wp-10601",
+  "_meta": {
+    "direction": "Replace the WordPress stock featured image with a design-sourced hero in the art direction of the seeded weekend-redesign post: a quiet textured paper field, thin precise line-work, one conceptual metaphor taken from the article's own argument, and a single warm amber accent.",
+    "decidedBy": "Nick Lewis",
+    "decidedAt": "2026-08-02",
+    "note": "Metaphor: the same object, coupled and decoupled. The post's own definition is that a traditional CMS bundles the content layer to the presentation layer and a headless one separates them — so the figure is one rectangle shown twice, its halves touching on the left and pulled apart on the right, with the content half filled amber. Bone field."
+  },
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_localSrc": "tools/migration/data/seed/assets/perspective-headless-hero.png"
+    },
+    "alt": "Two states of one shape on a bone-coloured field: at the left a rectangle divided into halves that touch, at the right the same rectangle with its halves pulled apart, the lower one filled solid amber."
+  }
+}

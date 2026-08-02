@@ -1,0 +1,17 @@
+{
+  "_id": "perspective-wp-10502",
+  "_meta": {
+    "direction": "Replace the WordPress stock featured image with a design-sourced hero in the art direction of the seeded weekend-redesign post: a quiet textured paper field, thin precise line-work, one conceptual metaphor taken from the article's own argument, and a single warm amber accent.",
+    "decidedBy": "Nick Lewis",
+    "decidedAt": "2026-08-02",
+    "note": "Metaphor: the cycle compressing. Overruled the brief's starting point — the post does not argue the CRO loop is broken, it argues the loop is right and slow, and that the job is to take hypothesis-test-learn-optimise from quarters to days. So the figure is concentric rings, wide and faint at the outside, tightening sharply inward onto one small amber disc. Bone field."
+  },
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_localSrc": "tools/migration/data/seed/assets/perspective-conversion-hero.png"
+    },
+    "alt": "Concentric graphite rings on a bone-coloured field, widely spaced at the outside and tightening sharply inward, closing on a small solid amber disc at the centre."
+  }
+}
