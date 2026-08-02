@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "turbo run build",
+    "build:skill": "node tools/authoring-skill/build.mjs",
     "check": "turbo run lint typecheck --affected",
     "deps:check": "syncpack lint",
     "deps:fix": "syncpack fix-mismatches",
