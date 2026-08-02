@@ -234,9 +234,14 @@ async function main() {
   }
 
   const ids = all.flatMap((d) => [d._id, `drafts.${d._id}`])
+  // `perspective: 'raw'` or this query cannot see a draft at all: the client
+  // defaults to the published perspective, which silently made the lock rule
+  // half a rule — a locked DRAFT read as unlocked and got overwritten — and
+  // would leave every stale draft below undetected.
   const live = await client.fetch<{ _id: string; locked: boolean | null }[]>(
     '*[_id in $ids]{_id, "locked": migration.locked}',
     { ids },
+    { perspective: 'raw' },
   )
   const locked = new Set<string>(
     live.filter((d) => d.locked === true).map((d) => d._id.replace(/^drafts\./, '')),
