@@ -163,7 +163,13 @@ describe('the homepage at 402 (ADR 0006)', () => {
 
   it('holds the case-card gap at 24 until lg', () => {
     // 24 at 402 (`1889:3620`), 48 at 1440 (`1683:2661`).
-    expect(variantsOf(html, 'gap-12')).toEqual(['lg:gap-12'])
+    //
+    // Asserted as the band's own pair rather than "no unprefixed gap-12
+    // anywhere": a492f7e re-read `1814:1738` and gave the Blog stack a 48px
+    // ROW gap at 402, so `gap-12` is now legitimately unprefixed elsewhere on
+    // this page and the document-wide probe stopped measuring this band.
+    expect(html).toContain('gap-6 lg:gap-12')
+    expect(variantsOf(html, 'gap-12')).toContain('lg:gap-12')
   })
 
   it('carries the ways-to-work numbering into the row when the rail cannot', () => {
