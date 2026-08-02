@@ -8,11 +8,11 @@ import { caseStudy } from './entry'
 /**
  * The agent-translated case study (#21) through the real `/work/[slug]` route.
  *
- * Translated documents load **draft-only**, so nothing about them is visible
- * on the published site — this and the Studio side-by-side are the two places
- * a reviewer can actually see the result. The assertions are about the
- * restructuring surviving: chapters keep their kickers, the stats keep their
- * exact figures, the hero renders.
+ * Translated documents load **published** (ADR 0016), so this is no longer a
+ * reviewer's only window onto them — it is the check that the restructuring
+ * survives a rebuild: chapters keep their kickers, the stats keep their exact
+ * figures, the hero renders. It reads the committed JSON, which is the source
+ * of truth; the dataset is disposable.
  */
 const route = buildDetailRoute(caseStudy)
 const doc = aTranslatedCaseStudy('la-colombe')

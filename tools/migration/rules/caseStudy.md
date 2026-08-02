@@ -119,7 +119,13 @@ under different conditions and needs re-reviewing. `pnpm --filter
 
 ## Loading
 
-Translated documents load as **unpublished drafts, always** — never published
-by the pipeline, in any mode. Review is two-sided: the PR diff (extract vs
-translated) and Studio's draft preview at `/work/{slug}`. Publishing is a
-human act.
+Translated documents load **published**, like every other tree
+([ADR 0016](../../docs/adr/0016-publish-what-wordpress-publishes.md)): what
+this track holds is content WordPress publishes today, and withholding it was
+not protecting anyone.
+
+Review is unchanged and matters more, not less. It is two-sided — the PR diff
+(extract vs translated) and the document's own `migration.source` panel in
+Studio, which carries every flag this file told you to raise. **A flag is now
+a claim on the live site.** Raise it anyway; the alternative is not a draft, it
+is an unmarked invention.
