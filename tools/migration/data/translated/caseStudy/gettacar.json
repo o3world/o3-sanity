@@ -1,0 +1,201 @@
+{
+  "_id": "caseStudy-wp-5806",
+  "_type": "caseStudy",
+  "title": "gettacar",
+  "slug": {
+    "_type": "slug",
+    "current": "gettacar"
+  },
+  "client": {
+    "_type": "reference",
+    "_ref": "client-seed-gettacar"
+  },
+  "industries": [
+    {
+      "_type": "reference",
+      "_ref": "industry-seed-consumer-services",
+      "_key": "ind-0"
+    }
+  ],
+  "industryDetail": "Online Auto Retail",
+  "narrativeHeadline": "gettacar set out to make buying and financing a car quick and painless. As a startup it had to pick which things to build first and still leave room to scale.",
+  "stats": [
+    {
+      "_type": "stat",
+      "_key": "stat-0",
+      "value": "7K+",
+      "label": "Number of applications for cars in the first 90 days"
+    },
+    {
+      "_type": "stat",
+      "_key": "stat-1",
+      "value": "20%+",
+      "label": "Average increase in completed applications MoM since launch"
+    },
+    {
+      "_type": "stat",
+      "_key": "stat-2",
+      "value": "76%",
+      "label": "Improvement in application progress to user studies and UX optimizations"
+    }
+  ],
+  "heroMedia": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/11/gettacar-cover.jpg"
+    },
+    "alt": "Gettacar case study"
+  },
+  "chapters": [
+    {
+      "_type": "chapter",
+      "_key": "chapter-0",
+      "kicker": "Opportunity",
+      "title": "A startup buying decisions, not features",
+      "body": [
+        {
+          "_type": "block",
+          "_key": "k0000",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0000s",
+              "text": "gettacar was an online auto dealer with a focus on making the car buying and financing experience quick and painless. As an ambitious startup, their co-founders were hyper-focused on making smart, MVP decisions with a long term focus on scalability and customer success. In addition to embracing their waggish brand experience, they required end-to-end consideration from their shopping and application approval UX to their technical architecture and back-office processing needs.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "chapter",
+      "_key": "chapter-1",
+      "kicker": "Solution",
+      "title": "Shopping, approval and the back office as one system",
+      "body": [
+        {
+          "_type": "block",
+          "_key": "k0001",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0001s",
+              "text": "As a startup with big aspirations, it was necessary that we balanced valuable CX considerations with speed to market. While we wanted to deliver on a flawless experience where the buyer could quickly shop and apply to purchase, the brand and value proposition needed to come to life as well. We collaborated closely with gettacar stakeholders to make smart decisions on nice-to-haves vs. need-to-haves. Quick data assessment and user testing processes allowed us all to make informed, critical feature decisions on the fly. As with all of the work we do, a full consideration of the complete buyer experience required examination of the administrative experience as well. From processing applications to delivering the customer’s new ride, we help to design, measure and optimize the gettacar service. The result is a user experience that drives sales and technical architecture fit for regular product enhancements.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "extraSections": [
+    {
+      "_type": "mediaSection",
+      "_key": "media-0",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-0",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy1.png"
+        },
+        "alt": "Gettacar logo on green backdrop with Gettacar branded car."
+      }
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-1",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-1",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy2.png"
+        },
+        "alt": "Screenshot. Gettacar landing page with headline, Choose a car. Get it delivered. 5 day returns. 100% online."
+      }
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-2",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-2",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy3.png"
+        },
+        "alt": "Collection of screenshots. Gettacar mobile app."
+      }
+    }
+  ],
+  "seo": {
+    "description": "Read about how O3 collaborated with gettacar to improve their customer experience in this case study overview of gettacar projects."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:work:5806",
+    "extractedAt": "2026-08-01T02:52:58.500Z"
+  },
+  "_meta": {
+    "sourceFile": "caseStudy/gettacar.json",
+    "sourceHash": "sha256:d71a84a9ee131052a80e7b163988c47730eaff548c69a43fca9f2f37809ed81e",
+    "rulesFile": "rules/caseStudy.md",
+    "rulesHash": "sha256:c54529e356b564c7ed2e34c9bec39db9379fe731fc0a668a0da2523e541411a4",
+    "model": "claude-opus-5",
+    "translatedAt": "2026-08-02",
+    "flags": [
+      {
+        "field": "narrativeHeadline",
+        "kind": "derived",
+        "note": "Compressed from the Opportunity — “making the car buying and financing experience quick and painless”, “hyper-focused on making smart, MVP decisions with a long term focus on scalability”. No new facts."
+      },
+      {
+        "field": "chapters[0].title",
+        "kind": "proposed",
+        "note": "chapter.title is required; the source heading is only the kicker. Drawn from “smart, MVP decisions” and the Solution’s “nice-to-haves vs. need-to-haves”."
+      },
+      {
+        "field": "chapters[1].title",
+        "kind": "proposed",
+        "note": "Same: required, unsourced. Drawn from “shopping and application approval UX to their technical architecture and back-office processing needs”."
+      },
+      {
+        "field": "industries",
+        "kind": "proposed",
+        "note": "WordPress has no industry taxonomy on `work` posts. Proposed industry-seed-consumer-services so the card eyebrow renders; delete it and the eyebrow degrades rather than breaking."
+      },
+      {
+        "field": "industryDetail",
+        "kind": "proposed",
+        "note": "No source. Proposed “Online Auto Retail” to complete the eyebrow’s second half."
+      },
+      {
+        "field": "deliverables",
+        "kind": "dropped",
+        "note": "Left empty. The source never lists what was shipped, and “What we shipped” invented from prose would be fabrication."
+      },
+      {
+        "field": "headline",
+        "kind": "dropped",
+        "note": "The WordPress hero tagline (“Smoothing bumps in the road of user journeys”) has no field in the new model: `title` is the document name and `narrativeHeadline` is the problem-framing sentence drawn from the Opportunity prose. Recovering it would mean adding a field, which is a schema conversation."
+      },
+      {
+        "field": "flexible_content[3]",
+        "kind": "dropped",
+        "note": "The project_feed “Related projects” widget. The new site derives related work rather than curating it per case study."
+      }
+    ]
+  }
+}

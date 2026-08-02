@@ -1,0 +1,14 @@
+{
+  "_id": "industry-seed-consumer-services",
+  "_type": "industry",
+  "title": "Consumer Services",
+  "slug": {
+    "_type": "slug",
+    "current": "consumer-services"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:case-study-industries",
+    "extractedAt": "2026-08-02T00:00:00Z"
+  }
+}

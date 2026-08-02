@@ -1,0 +1,202 @@
+{
+  "_id": "caseStudy-wp-5805",
+  "_type": "caseStudy",
+  "title": "Caron",
+  "slug": {
+    "_type": "slug",
+    "current": "caron"
+  },
+  "client": {
+    "_type": "reference",
+    "_ref": "client-seed-caron"
+  },
+  "industries": [
+    {
+      "_type": "reference",
+      "_ref": "industry-seed-healthcare",
+      "_key": "ind-0"
+    }
+  ],
+  "industryDetail": "Behavioral Health",
+  "narrativeHeadline": "Caron’s programs had grown faster than the site explaining them. Patients, families and referring professionals were all hunting for the same critical information.",
+  "stats": [
+    {
+      "_type": "stat",
+      "_key": "stat-0",
+      "value": "56%",
+      "label": "Increase in engagement across all key patient touchpoints QoQ"
+    },
+    {
+      "_type": "stat",
+      "_key": "stat-1",
+      "value": "22%",
+      "label": "Increase in engagement on critical program pages compared to previous quarter"
+    },
+    {
+      "_type": "stat",
+      "_key": "stat-2",
+      "value": "41%",
+      "label": "Increase in chat engagement in quarterly comparison, a key focus for the future of treatment"
+    }
+  ],
+  "heroMedia": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/11/Caron-cover.jpg"
+    },
+    "alt": "Caron case study"
+  },
+  "chapters": [
+    {
+      "_type": "chapter",
+      "_key": "chapter-0",
+      "kicker": "Opportunity",
+      "title": "A growing program set, and a hard path to the answer",
+      "body": [
+        {
+          "_type": "block",
+          "_key": "k0000",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0000s",
+              "text": "Caron aims to transform lives impacted by addiction and substance use through proven, comprehensive and personalized behavioral healthcare solutions. The Caron team needed to improve the patient journey and adapt to the changes of Caron’s offerings by simplifying and streamlining access to critical information on their website and making the experience more engaging. They needed an implementation partner who could weave together a design and technology solution designed to scale quickly across all touchpoints.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "chapter",
+      "_key": "chapter-1",
+      "kicker": "Solution",
+      "title": "Simpler navigation, clearer ways to make contact",
+      "body": [
+        {
+          "_type": "block",
+          "_key": "k0001",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0001s",
+              "text": "Starting with a deep assessment of Caron experience through patient, family and referring professional interviews, we simplified navigation system to create easy access to Caron’s robust program and service architecture. We created easier and direct access to critical information through a conversion-centric design focused on making contact opportunities clear across all channels. The technical solution ties together content and marketing needs that helps to communicate the right message at the right time. Through ongoing data and insight assessments, we have defined key areas of opportunity and are able to deliver continued success for Caron.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "extraSections": [
+    {
+      "_type": "mediaSection",
+      "_key": "media-0",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-0",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/Caron-casestudy1.png"
+        },
+        "alt": "Caron logo."
+      }
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-1",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-1",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/Caron-casestudy2-1.jpg"
+        },
+        "alt": "Caron homepage that communicates recovery is not just possible - it's probable. Background features a happy mother and child hugging."
+      }
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-2",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-2",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/Caron-casestudy3.png"
+        },
+        "alt": "Screenshots of Caron website on mobile."
+      }
+    }
+  ],
+  "seo": {
+    "title": "Transforming behavioral health experiences with Caron",
+    "description": "Learn more about O3's ongoing digital customer experience projects for Caron treatment centers in this case study."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:work:5805",
+    "extractedAt": "2026-08-01T02:52:58.500Z"
+  },
+  "_meta": {
+    "sourceFile": "caseStudy/caron.json",
+    "sourceHash": "sha256:e53bac49a9b97e12ce1ffff9dab523fb8ac588873c305aadc5dfa0e521df57f6",
+    "rulesFile": "rules/caseStudy.md",
+    "rulesHash": "sha256:c54529e356b564c7ed2e34c9bec39db9379fe731fc0a668a0da2523e541411a4",
+    "model": "claude-opus-5",
+    "translatedAt": "2026-08-02",
+    "flags": [
+      {
+        "field": "narrativeHeadline",
+        "kind": "derived",
+        "note": "Compressed from the Opportunity — “adapt to the changes of Caron’s offerings by simplifying and streamlining access to critical information on their website” — with the three audiences named by the Solution’s “patient, family and referring professional interviews”. Both halves are in the source; the join is the rewrite."
+      },
+      {
+        "field": "chapters[0].title",
+        "kind": "proposed",
+        "note": "chapter.title is required; the source heading is only the kicker. Drawn from the changing program and service architecture and the hard access to critical information."
+      },
+      {
+        "field": "chapters[1].title",
+        "kind": "proposed",
+        "note": "Same: required, unsourced. Drawn from “simplified navigation system” and “making contact opportunities clear across all channels”."
+      },
+      {
+        "field": "industries",
+        "kind": "proposed",
+        "note": "WordPress has no industry taxonomy on `work` posts. Proposed industry-seed-healthcare so the card eyebrow renders; delete it and the eyebrow degrades rather than breaking."
+      },
+      {
+        "field": "industryDetail",
+        "kind": "proposed",
+        "note": "No source. Proposed “Behavioral Health” to complete the eyebrow’s second half."
+      },
+      {
+        "field": "deliverables",
+        "kind": "dropped",
+        "note": "Left empty. The source never lists what was shipped, and “What we shipped” invented from prose would be fabrication."
+      },
+      {
+        "field": "headline",
+        "kind": "dropped",
+        "note": "The WordPress hero tagline (“Improving behavioral health experiences”) has no field in the new model: `title` is the document name and `narrativeHeadline` is the problem-framing sentence drawn from the Opportunity prose. Recovering it would mean adding a field, which is a schema conversation."
+      },
+      {
+        "field": "flexible_content[3]",
+        "kind": "dropped",
+        "note": "The project_feed “Related projects” widget. The new site derives related work rather than curating it per case study."
+      }
+    ]
+  }
+}

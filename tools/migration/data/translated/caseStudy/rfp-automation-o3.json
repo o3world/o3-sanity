@@ -1,0 +1,207 @@
+{
+  "_id": "caseStudy-wp-9319",
+  "_type": "caseStudy",
+  "title": "RFP automation",
+  "slug": {
+    "_type": "slug",
+    "current": "rfp-automation-o3"
+  },
+  "client": {
+    "_type": "reference",
+    "_ref": "client-seed-rfp-automation"
+  },
+  "industries": [
+    {
+      "_type": "reference",
+      "_ref": "industry-seed-technology",
+      "_key": "ind-0"
+    }
+  ],
+  "industryDetail": "Proposal Operations",
+  "narrativeHeadline": "A global technology firm answered hundreds of RFPs a year, mostly by copying and pasting from past proposals. Every response cost days of manual work.",
+  "stats": [
+    {
+      "_type": "stat",
+      "_key": "stat-0",
+      "value": "11 > 6 hrs",
+      "label": "Reduction in time for typical 100-question RFP response"
+    },
+    {
+      "_type": "stat",
+      "_key": "stat-1",
+      "value": "~40%",
+      "label": "Time savings gained with AI solution"
+    },
+    {
+      "_type": "stat",
+      "_key": "stat-2",
+      "value": "100%",
+      "label": "Licensing costs saved on existing RFP technology"
+    }
+  ],
+  "heroMedia": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/02/RFP-cover-2.jpg"
+    },
+    "alt": "RFP automation case study man at a desk with papers and logo with AI symbol and words RFP automation"
+  },
+  "chapters": [
+    {
+      "_type": "chapter",
+      "_key": "chapter-0",
+      "kicker": "Opportunity",
+      "title": "Hundreds of RFPs, all assembled by hand",
+      "body": [
+        {
+          "_type": "block",
+          "_key": "k0000",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0000s",
+              "text": "A global technology firm faced a significant challenge due to the high volume of Requests for Proposals (RFPs) they needed to respond to—hundreds per year. These RFPs take a lot of manual work to put together. From referencing previous proposals to pulling together past content by copying and pasting content from a large database of information, the process involved managing large datasets and required considerable time and effort to complete. O3 initiated the project by conducting a workshop to map out the firm’s RFP response journey and identify opportunities where AI could streamline the process.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "chapter",
+      "_key": "chapter-1",
+      "kicker": "Solution",
+      "title": "AI drafts, specialists decide",
+      "body": [
+        {
+          "_type": "block",
+          "_key": "k0001",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0001s",
+              "text": "To address the challenge, a Generative AI solution was implemented to augment the work of RFP specialists. The solution focused on using AI to simplify and accelerate the process by reducing repetitive tasks. By ingesting past RFP responses, normalizing the content and creating a user experience where speed, accuracy and control of the response were prioritized, this allowed the firm to respond more quickly and effectively to RFPs, with AI handling time-consuming elements of the process. We also developed a feedback loop to continuously update the master data-set so future responses could adjust to new features and functionality within the technology or new subject matter over time.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "extraSections": [
+    {
+      "_type": "mediaSection",
+      "_key": "media-0",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-0",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/02/RFP-1-1.jpg"
+        },
+        "alt": "RFP Automation case study"
+      }
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-1",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-1",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/02/RFP-2-1.jpg"
+        },
+        "alt": "RFP Automation case study"
+      }
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-2",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-2",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/02/RFP-3-1.jpg"
+        },
+        "alt": "RFP Automation case study"
+      }
+    }
+  ],
+  "seo": {
+    "title": "AI-powered RFP automation to reduce costs",
+    "description": "Explore how AI RFP automation can reduce costs and streamline proposal responses for global tech firms."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:work:9319",
+    "extractedAt": "2026-08-01T02:52:58.497Z"
+  },
+  "_meta": {
+    "sourceFile": "caseStudy/rfp-automation-o3.json",
+    "sourceHash": "sha256:b59a73c5f2f8807c7c8eb39425582d706334eb516a361c0731bd226f0f3e2da5",
+    "rulesFile": "rules/caseStudy.md",
+    "rulesHash": "sha256:c54529e356b564c7ed2e34c9bec39db9379fe731fc0a668a0da2523e541411a4",
+    "model": "claude-opus-5",
+    "translatedAt": "2026-08-02",
+    "flags": [
+      {
+        "field": "narrativeHeadline",
+        "kind": "derived",
+        "note": "Compressed from the Opportunity — “hundreds per year”, “copying and pasting content from a large database of information”, and “required considerable time and effort to complete”. No new facts."
+      },
+      {
+        "field": "chapters[0].title",
+        "kind": "proposed",
+        "note": "chapter.title is required; the source heading is only the kicker. Drawn from the volume of RFPs and the manual assembly the Opportunity describes."
+      },
+      {
+        "field": "chapters[1].title",
+        "kind": "proposed",
+        "note": "Same: required, unsourced. Drawn from “a Generative AI solution was implemented to augment the work of RFP specialists” and “speed, accuracy and control of the response”."
+      },
+      {
+        "field": "chapters[].kicker",
+        "kind": "derived",
+        "note": "Source heading(s) arrive in capitals (“SOLUTION”) — the old template shouted them through its `type-kicker` class. Normalized to sentence case; the new renderer owns the casing."
+      },
+      {
+        "field": "industries",
+        "kind": "proposed",
+        "note": "WordPress has no industry taxonomy on `work` posts. Proposed industry-seed-technology so the card eyebrow renders; delete it and the eyebrow degrades rather than breaking."
+      },
+      {
+        "field": "industryDetail",
+        "kind": "proposed",
+        "note": "No source. Proposed “Proposal Operations” to complete the eyebrow’s second half."
+      },
+      {
+        "field": "client",
+        "kind": "proposed",
+        "note": "WordPress never names the client — the Opportunity says only “a global technology firm”. The post title stands in so the required reference resolves; a reviewer should name the firm or confirm the engagement stays anonymous."
+      },
+      {
+        "field": "deliverables",
+        "kind": "dropped",
+        "note": "Left empty. The source never lists what was shipped, and “What we shipped” invented from prose would be fabrication."
+      },
+      {
+        "field": "headline",
+        "kind": "dropped",
+        "note": "The WordPress hero tagline (“Using AI to reduce time and costs for a global tech firm”) has no field in the new model: `title` is the document name and `narrativeHeadline` is the problem-framing sentence drawn from the Opportunity prose. Recovering it would mean adding a field, which is a schema conversation."
+      }
+    ]
+  }
+}

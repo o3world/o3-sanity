@@ -1,0 +1,10 @@
+{
+  "_id": "client-seed-gettacar",
+  "_type": "client",
+  "name": "gettacar",
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:case-study-clients",
+    "extractedAt": "2026-08-02T00:00:00Z"
+  }
+}

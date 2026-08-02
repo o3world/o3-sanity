@@ -1,0 +1,10 @@
+{
+  "_id": "client-seed-e-hazard",
+  "_type": "client",
+  "name": "e-Hazard",
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:case-study-clients",
+    "extractedAt": "2026-08-02T00:00:00Z"
+  }
+}

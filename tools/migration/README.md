@@ -100,6 +100,69 @@ this:
 
 ---
 
+## The 20 case studies: what the translate track dropped (#22)
+
+All 20 `work` posts are translated under `rules/caseStudy.md` and committed to
+`data/translated/caseStudy/`. The archive turned out to be uniform: every post
+is two `text` rows ("Opportunity" and "Solution"), zero to four `title` rows
+that become `stats`, one `image_carousel`, and — on 19 of 20 — a
+`project_feed`. No fifth ACF layout appears anywhere in the set.
+
+Per-document decisions live in that document's `_meta.flags`, which is the
+review queue and travels onto the draft as `migration.source`. Four decisions
+are **systematic** — they recur across the archive rather than belonging to one
+case study — so they are recorded once, here:
+
+1. **`headline`** (20 of 20). Every `work` post carries a hero tagline
+   ("Roadmap for America's propane company", "Cloud hosting made easy"). It has
+   no field in the new model: `title` is the document's name and
+   `narrativeHeadline` is the problem-framing sentence the rules draw from the
+   Opportunity prose. Dropped, and flagged per document so the words are
+   recoverable from the diff. Giving it a field is a schema conversation, not
+   something a content pass decides on the way past.
+2. **`project_feed`** (19 of 20). The "Related projects" widget, which curated
+   three sibling posts by id. The new site derives related work, so the
+   curation does not migrate.
+3. **`introduction`** on every flexible-content row. The rules already ignore
+   it as old-template presentation, and across the archive it holds nothing but
+   section eyebrows ("RESULTS", "Highlights", "NUMBERS"). **One exception:**
+   `healthcare-innovation` uses `introduction.description` for real standfirst
+   prose, which is used as the source for its `narrativeHeadline` and flagged
+   there rather than dropped.
+4. **Alt text falling back to the attachment title** (5 images across 3 posts).
+   Five carousel images have no alt in WordPress. The perspective mapper's
+   fallback applies — the attachment title stands in — but the titles describe
+   the file (`LegalDocBot (1)`), not the picture, so each carries a `proposed`
+   flag. These are the only translated fields that must be rewritten before a
+   draft is fit to publish.
+
+Two things the batch could not do, and did not fake:
+
+- **`client` on four anonymized engagements.** `ai-powered-personalization`,
+  `delivering-generative-ai-solution-legal-documents`, `healthcare-innovation`
+  and `rfp-automation-o3` never name their client — the source says "a
+  prominent innovation studio", "a major medical institution", "a global
+  technology firm". `caseStudy.client` is required, so the post title stands in
+  as the client name and each carries a `proposed` flag. A reviewer names the
+  client or retires the record.
+- **Logos on the 15 new `client` documents.** `client.logo` is required in
+  Studio, and nothing in the extract supplies one — the only client imagery in
+  a `work` post is a carousel slide compositing the logo over a photograph.
+  The documents load (the loader writes JSON straight to the dataset, so Studio
+  validation never runs) and read as invalid in Studio until someone supplies
+  the mark, which is the correct signal. Only the six clients on the homepage
+  logo wall have logos today.
+
+The three hand-authored case-study seeds (`aramark`, `chop`, `ironman`) stay
+put. `caseStudy-seed-ironman` now has a real translation, but the homepage
+showcase references it with a **strong** reference and translated documents
+load as drafts only — swapping the reference to `caseStudy-wp-10028` would
+point a published document at an id that does not exist published, and Sanity
+rejects the transaction. The swap is a post-publication edit, not a pipeline
+one.
+
+---
+
 ## Seeds: greenfield content, same pipeline (#20)
 
 Greenfield pages are committed JSON under `data/seed/<type>/<slug>.json`,

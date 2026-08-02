@@ -1,0 +1,285 @@
+{
+  "_id": "caseStudy-wp-10023",
+  "_type": "caseStudy",
+  "title": "AI-Powered Personalization",
+  "slug": {
+    "_type": "slug",
+    "current": "ai-powered-personalization"
+  },
+  "client": {
+    "_type": "reference",
+    "_ref": "client-seed-ai-powered-personalization"
+  },
+  "industries": [
+    {
+      "_type": "reference",
+      "_ref": "industry-seed-education",
+      "_key": "ind-0"
+    }
+  ],
+  "industryDetail": "Higher Education Admissions",
+  "narrativeHeadline": "Only 36% of high school students think universities get their value across, and 68% want a more personal conversation before they apply. Brochures and standard campus tours do not reach a generation raised on tailored experiences.",
+  "stats": [
+    {
+      "_type": "stat",
+      "_key": "stat-0",
+      "value": "170%",
+      "label": "Students who view real-time personalized videos click calls-to-action more often"
+    },
+    {
+      "_type": "stat",
+      "_key": "stat-1",
+      "value": "5X",
+      "label": "Students receiving personalized enrollment videos are more likely to enroll"
+    },
+    {
+      "_type": "stat",
+      "_key": "stat-2",
+      "value": "81%",
+      "label": "Most students say personalized videos increase their likelihood to apply"
+    }
+  ],
+  "heroMedia": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/04/Allied-cover-1.jpg"
+    },
+    "alt": "AI-powered personalization case study photo"
+  },
+  "chapters": [
+    {
+      "_type": "chapter",
+      "_key": "chapter-0",
+      "kicker": "Opportunity",
+      "title": "Recruitment got competitive. Outreach stayed generic.",
+      "body": [
+        {
+          "_type": "block",
+          "_key": "k0000",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0000s",
+              "text": "Higher ed faces a significant challenge in effectively engaging and converting prospective students in an increasingly competitive and digital recruitment landscape. Universities often struggle to personalize outreach and communicate their unique value, leading to lower conversion rates. Recent data shows that only 36% of high school students feel universities effectively convey their value proposition, while 68% of prospective students seek more personalized interaction during the application process. Traditional methods—like generic brochures and standardized campus tours—fail to resonate with a generation expecting tailored, technology-driven experiences.",
+              "marks": []
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "k0001",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0001s",
+              "text": "This challenge isn’t unique to higher ed; any organization marketing a complex set of programs or services, especially in B2B, faces similar hurdles in capturing and converting the right audience. Universities that embrace personalized, AI-driven solutions will gain a competitive edge, just as forward-thinking businesses do in their own industries.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "chapter",
+      "_key": "chapter-1",
+      "kicker": "Solution",
+      "title": "A conversation that becomes a video",
+      "body": [
+        {
+          "_type": "block",
+          "_key": "k0002",
+          "style": "normal",
+          "markDefs": [
+            {
+              "_key": "k0002m0",
+              "_type": "link",
+              "href": "https://www.alliedpixel.com/"
+            }
+          ],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0002s0",
+              "text": "Developed in collaboration between ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k0002s1",
+              "text": "Allied Pixel",
+              "marks": [
+                "k0002m0"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k0002s2",
+              "text": " and O3, our new AI experience adds a personalized touch with engaging videos and tailored information using conversational AI. Prospective students or families are presented with a series of conversational prompts that capture key information and allow prospects to explore questions about the institution as they see fit. Once submitted, data collected during the conversation is transformed into personalized video, directly addressing prospects’ interest. It not only enriches student experiences but also provides valuable data and insights without extra work for administrators.",
+              "marks": []
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "k0003",
+          "style": "normal",
+          "markDefs": [
+            {
+              "_key": "k0003m0",
+              "_type": "link",
+              "href": "https://www.alliedpixel.com/higher-education/"
+            }
+          ],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0003s0",
+              "text": "While developed to address the admission conversion problem in higher ed, this solution translates well to any industry where we need to align customer interest with a personalized service or program offering. By dynamically responding to prospect interests and goals, and then allowing for further exploration, organizations can create a more engaging, responsive experience that precisely targets key information to increase the likelihood of conversion (as outlined below by a study conducted by Allied Pixel). For more information, ",
+              "marks": []
+            },
+            {
+              "_type": "span",
+              "_key": "k0003s1",
+              "text": "sign up for a demo",
+              "marks": [
+                "k0003m0"
+              ]
+            },
+            {
+              "_type": "span",
+              "_key": "k0003s2",
+              "text": ".",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "extraSections": [
+    {
+      "_type": "mediaSection",
+      "_key": "media-0",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-0",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/04/Allied-1-3.jpg"
+        },
+        "alt": "AI-powered personalization case study photo"
+      }
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-1",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-1",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/04/Allied-2-2.jpg"
+        },
+        "alt": "Personalized video case study"
+      }
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-2",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-2",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/04/Allied-3-3.jpg"
+        },
+        "alt": "Allied 3"
+      }
+    }
+  ],
+  "seo": {
+    "title": "Improving engagement with AI-powered personalization",
+    "description": "O3 built an AI-powered solution for student admissions that scales across industries needing personalized service exploration."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:work:10023",
+    "extractedAt": "2026-08-01T02:52:58.497Z"
+  },
+  "_meta": {
+    "sourceFile": "caseStudy/ai-powered-personalization.json",
+    "sourceHash": "sha256:05dfc747ce95e77e900bfe61489bed1102e2f7e5962c8610ecc9698b080dba47",
+    "rulesFile": "rules/caseStudy.md",
+    "rulesHash": "sha256:c54529e356b564c7ed2e34c9bec39db9379fe731fc0a668a0da2523e541411a4",
+    "model": "claude-opus-5",
+    "translatedAt": "2026-08-02",
+    "flags": [
+      {
+        "field": "narrativeHeadline",
+        "kind": "derived",
+        "note": "Compressed from the Opportunity’s first paragraph — the 36% and 68% figures and the “generic brochures and standardized campus tours” line, in that order. No new facts."
+      },
+      {
+        "field": "chapters[0].title",
+        "kind": "proposed",
+        "note": "chapter.title is required; the source heading is only the kicker. Drawn from the first paragraph’s framing of a competitive, digital recruitment landscape against generic outreach."
+      },
+      {
+        "field": "chapters[1].title",
+        "kind": "proposed",
+        "note": "Same: required, unsourced. Drawn from “conversational prompts… transformed into personalized video”."
+      },
+      {
+        "field": "chapters[].kicker",
+        "kind": "derived",
+        "note": "Source heading(s) arrive in capitals (“OPPORTUNITY”, “SOLUTION”) — the old template shouted them through its `type-kicker` class. Normalized to sentence case; the new renderer owns the casing."
+      },
+      {
+        "field": "industries",
+        "kind": "proposed",
+        "note": "WordPress has no industry taxonomy on `work` posts. Proposed industry-seed-education so the card eyebrow renders; delete it and the eyebrow degrades rather than breaking."
+      },
+      {
+        "field": "industryDetail",
+        "kind": "proposed",
+        "note": "No source. Proposed “Higher Education Admissions” to complete the eyebrow’s second half."
+      },
+      {
+        "field": "client",
+        "kind": "proposed",
+        "note": "WordPress never names the institution — the Opportunity describes higher ed in general and the Solution names Allied Pixel as O3’s co-developer, not the client. The post title stands in so the required reference resolves; a reviewer should either name the real client or retire the record."
+      },
+      {
+        "field": "extraSections[2].media.alt",
+        "kind": "proposed",
+        "note": "Source image carries no alt text; the WordPress attachment title “Allied 3” stands in, the same fallback the perspective mapper uses. It describes the file, not the picture — needs real alt text before this publishes."
+      },
+      {
+        "field": "deliverables",
+        "kind": "dropped",
+        "note": "Left empty. The source never lists what was shipped, and “What we shipped” invented from prose would be fabrication."
+      },
+      {
+        "field": "headline",
+        "kind": "dropped",
+        "note": "The WordPress hero tagline (“From prospect to program: AI that personalizes the path to engagement”) has no field in the new model: `title` is the document name and `narrativeHeadline` is the problem-framing sentence drawn from the Opportunity prose. Recovering it would mean adding a field, which is a schema conversation."
+      },
+      {
+        "field": "flexible_content[3]",
+        "kind": "dropped",
+        "note": "The project_feed “Related projects” widget. The new site derives related work rather than curating it per case study."
+      }
+    ]
+  }
+}

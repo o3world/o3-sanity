@@ -1,0 +1,14 @@
+{
+  "_id": "industry-seed-technology",
+  "_type": "industry",
+  "title": "Technology",
+  "slug": {
+    "_type": "slug",
+    "current": "technology"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:case-study-industries",
+    "extractedAt": "2026-08-02T00:00:00Z"
+  }
+}

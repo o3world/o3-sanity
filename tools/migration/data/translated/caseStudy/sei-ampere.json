@@ -1,0 +1,195 @@
+{
+  "_id": "caseStudy-wp-6338",
+  "_type": "caseStudy",
+  "title": "SEI - Ampere",
+  "slug": {
+    "_type": "slug",
+    "current": "sei-ampere"
+  },
+  "client": {
+    "_type": "reference",
+    "_ref": "client-seed-sei"
+  },
+  "industries": [
+    {
+      "_type": "reference",
+      "_ref": "industry-seed-financial-services",
+      "_key": "ind-0"
+    }
+  ],
+  "industryDetail": "Investment Solutions",
+  "narrativeHeadline": "SEI had a new corporate identity and a new product for investment advisors. The product had no name, no visual brand and no way to show what it did.",
+  "stats": [
+    {
+      "_type": "stat",
+      "_key": "stat-0",
+      "value": "6 weeks",
+      "label": "Turnaround time"
+    },
+    {
+      "_type": "stat",
+      "_key": "stat-1",
+      "value": "2 videos",
+      "label": "Successfully produced"
+    }
+  ],
+  "heroMedia": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/SEI-cover.jpg"
+    },
+    "alt": "SEI case study"
+  },
+  "chapters": [
+    {
+      "_type": "chapter",
+      "_key": "chapter-0",
+      "kicker": "Opportunity",
+      "title": "A new product with no name",
+      "body": [
+        {
+          "_type": "block",
+          "_key": "k0000",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0000s",
+              "text": "SEI delivers investment solutions that connect the financial services industry. SEI consistently creates new lines of business by offering a suite of products and solutions to asset managers, investment banks, and advisors. After recently creating a new corporate brand identity, SEI needed a partner to help extend to new touchpoints. One of those was a new product for investment advisors. SEI was looking for guidance in naming this product while creating the visual brand, visualizing the future user experience, and creating their animated marketing videos.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "chapter",
+      "_key": "chapter-1",
+      "kicker": "Solution",
+      "title": "Naming Ampere, then showing it",
+      "body": [
+        {
+          "_type": "block",
+          "_key": "k0001",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0001s",
+              "text": "Partners for over 10 years, SEI turned to O3 for our vast experience with brand, marketing, and content strategy. We took SEI’s advisor unit through our multi-part naming process, including two collaborative workshops, which resulted in the brand name “Ampere.” After validating the name, we extended SEI’s corporate identity to Ampere. Working closely with the brand team, we helped conceptualize, design, and create an animated video. This included content strategy, storyboarding, design, and voiceover. The final video included an unveiling to SEI at large and a long-form version for customers explaining the new product benefits.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "extraSections": [
+    {
+      "_type": "mediaSection",
+      "_key": "media-0",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-0",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy1.png"
+        },
+        "alt": "SEI Ampere logo showcasing connectivity SEI has with their customers."
+      }
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-1",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-1",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/SEI-ampere-casestudy2.jpg"
+        },
+        "alt": "Goal details page of SEI Ampere platform."
+      }
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-2",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-2",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy3.png"
+        },
+        "alt": "Screenshots of the newly redesigned SEI Ampere platform."
+      }
+    }
+  ],
+  "seo": {
+    "description": "O3 helped conceptualize, design, and create an animated video for SEI's new brand Ampere. Read more in this project case study."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:work:6338",
+    "extractedAt": "2026-08-01T02:52:58.498Z"
+  },
+  "_meta": {
+    "sourceFile": "caseStudy/sei-ampere.json",
+    "sourceHash": "sha256:d1cd7dd7c133cee7b71e7613c0d86c1971f6a279b5114bdddc402a94ce2c33e7",
+    "rulesFile": "rules/caseStudy.md",
+    "rulesHash": "sha256:c54529e356b564c7ed2e34c9bec39db9379fe731fc0a668a0da2523e541411a4",
+    "model": "claude-opus-5",
+    "translatedAt": "2026-08-02",
+    "flags": [
+      {
+        "field": "narrativeHeadline",
+        "kind": "derived",
+        "note": "Compressed from the Opportunity — “after recently creating a new corporate brand identity, SEI needed a partner to help extend to new touchpoints”, “one of those was a new product for investment advisors”, and the ask for naming, visual brand and marketing videos. No new facts."
+      },
+      {
+        "field": "chapters[0].title",
+        "kind": "proposed",
+        "note": "chapter.title is required; the source heading is only the kicker. Drawn from “looking for guidance in naming this product”."
+      },
+      {
+        "field": "chapters[1].title",
+        "kind": "proposed",
+        "note": "Same: required, unsourced. Drawn from “resulted in the brand name “Ampere”” and the animated video that followed."
+      },
+      {
+        "field": "industries",
+        "kind": "proposed",
+        "note": "WordPress has no industry taxonomy on `work` posts. Proposed industry-seed-financial-services so the card eyebrow renders; delete it and the eyebrow degrades rather than breaking."
+      },
+      {
+        "field": "industryDetail",
+        "kind": "proposed",
+        "note": "No source. Proposed “Investment Solutions” to complete the eyebrow’s second half."
+      },
+      {
+        "field": "deliverables",
+        "kind": "dropped",
+        "note": "Left empty. The source never lists what was shipped, and “What we shipped” invented from prose would be fabrication."
+      },
+      {
+        "field": "headline",
+        "kind": "dropped",
+        "note": "The WordPress hero tagline (“Creating a new product with a long-term partner”) has no field in the new model: `title` is the document name and `narrativeHeadline` is the problem-framing sentence drawn from the Opportunity prose. Recovering it would mean adding a field, which is a schema conversation."
+      },
+      {
+        "field": "flexible_content[3]",
+        "kind": "dropped",
+        "note": "The project_feed “Related projects” widget. The new site derives related work rather than curating it per case study."
+      }
+    ]
+  }
+}

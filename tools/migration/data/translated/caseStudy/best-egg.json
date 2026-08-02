@@ -1,0 +1,181 @@
+{
+  "_id": "caseStudy-wp-5803",
+  "_type": "caseStudy",
+  "title": "Best Egg",
+  "slug": {
+    "_type": "slug",
+    "current": "best-egg"
+  },
+  "client": {
+    "_type": "reference",
+    "_ref": "client-seed-best-egg"
+  },
+  "industries": [
+    {
+      "_type": "reference",
+      "_ref": "industry-seed-financial-services",
+      "_key": "ind-0"
+    }
+  ],
+  "industryDetail": "Consumer Lending",
+  "narrativeHeadline": "Best Egg’s own research said customers wanted help improving their credit, not another product page. The team needed to see that journey before they built it.",
+  "heroMedia": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/11/BestEgg-cover.jpg"
+    },
+    "alt": "Best Egg case study"
+  },
+  "chapters": [
+    {
+      "_type": "chapter",
+      "_key": "chapter-0",
+      "kicker": "Opportunity",
+      "title": "Consumer insights pointed past the product",
+      "body": [
+        {
+          "_type": "block",
+          "_key": "k0000",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0000s",
+              "text": "Leading online credit and financial wellness platform, Best Egg, offers financial products and resources to help inspire confidence in consumers as they manage their everyday finances. Whether consumers are looking for a personal loan to help with home improvements or debt consolidation, a resource to help them better understand their financial health, or a credit card designed for those who are looking to build or rebuild their credit, Best Egg can help support them as they work to meet their financial goals. The team learned through consumer insights that there was a need for a platform to provide guidance to those who are looking to improve their financial health, specifically within their credit score. Best Egg responded to these learnings through dedicating resources to expand their digital offerings. Taking a customer first approach, they sought out a partner to help assess the customer journey and develop a solution with a roadmap that ensured customers’ needs were being met.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "chapter",
+      "_key": "chapter-1",
+      "kicker": "Solution",
+      "title": "From prototype to prioritized roadmap",
+      "body": [
+        {
+          "_type": "block",
+          "_key": "k0001",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0001s",
+              "text": "In order to meet the needs of the target audience and help inform the new platform experience, we began by examining the customer journey within personal loans to help identify opportunities within their existing product. We conducted a series of workshops focused on developing an ideal customer experience and narrative. Informed by historical data and customer assessments, we worked with the Best Egg team to conceptualize the overall experience and created a prototype that helped visualize an end-to-end journey and highlighted key features and data points to consider as the Best Egg team built out the new platform. By going beyond requirements and creating a detailed vision for the future, we were able to inform product development and create a seamless transition from prototype to prioritized roadmap to production. Ongoing we’re working with Best Egg to explore and optimize core features of the experience and create whole new paths to capture and engage new customers.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "extraSections": [
+    {
+      "_type": "mediaSection",
+      "_key": "media-0",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-0",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/BestEgg-casestudy1.png"
+        },
+        "alt": "Best Egg logo."
+      }
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-1",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-1",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/BestEgg-casestudy2.jpg"
+        },
+        "alt": "Best Egg landing page featuring a retargeting campaign to apply for a credit card with no annual fee."
+      }
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-2",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-2",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/BestEgg-casestudy3-6.jpg"
+        },
+        "alt": "Retargeting screens that showcase how a user can apply for one of Best Egg's offers."
+      }
+    }
+  ],
+  "seo": {
+    "description": "Learn more about the work that O3 completed for Best Egg, a digital finance platform, in this case study overview."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:work:5803",
+    "extractedAt": "2026-08-01T02:52:58.500Z"
+  },
+  "_meta": {
+    "sourceFile": "caseStudy/best-egg.json",
+    "sourceHash": "sha256:96639db3d37fb30ec42531f407714ceb4a4bf5de31c211976f2fb12b9f8ce11f",
+    "rulesFile": "rules/caseStudy.md",
+    "rulesHash": "sha256:c54529e356b564c7ed2e34c9bec39db9379fe731fc0a668a0da2523e541411a4",
+    "model": "claude-opus-5",
+    "translatedAt": "2026-08-02",
+    "flags": [
+      {
+        "field": "narrativeHeadline",
+        "kind": "derived",
+        "note": "Compressed from the Opportunity — “learned through consumer insights that there was a need for a platform to provide guidance to those who are looking to improve their financial health, specifically within their credit score” and the search for a partner to assess the customer journey. No new facts."
+      },
+      {
+        "field": "chapters[0].title",
+        "kind": "proposed",
+        "note": "chapter.title is required; the source heading is only the kicker. Drawn from the consumer insights that prompted the platform."
+      },
+      {
+        "field": "chapters[1].title",
+        "kind": "proposed",
+        "note": "Same: required, unsourced. Drawn from “a seamless transition from prototype to prioritized roadmap to production”."
+      },
+      {
+        "field": "industries",
+        "kind": "proposed",
+        "note": "WordPress has no industry taxonomy on `work` posts. Proposed industry-seed-financial-services so the card eyebrow renders; delete it and the eyebrow degrades rather than breaking."
+      },
+      {
+        "field": "industryDetail",
+        "kind": "proposed",
+        "note": "No source. Proposed “Consumer Lending” to complete the eyebrow’s second half."
+      },
+      {
+        "field": "deliverables",
+        "kind": "dropped",
+        "note": "Left empty. The source never lists what was shipped, and “What we shipped” invented from prose would be fabrication."
+      },
+      {
+        "field": "headline",
+        "kind": "dropped",
+        "note": "The WordPress hero tagline (“Making finances friendlier”) has no field in the new model: `title` is the document name and `narrativeHeadline` is the problem-framing sentence drawn from the Opportunity prose. Recovering it would mean adding a field, which is a schema conversation."
+      },
+      {
+        "field": "flexible_content[2]",
+        "kind": "dropped",
+        "note": "The project_feed “Related projects” widget. The new site derives related work rather than curating it per case study."
+      }
+    ]
+  }
+}

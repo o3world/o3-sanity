@@ -1,0 +1,10 @@
+{
+  "_id": "client-seed-rfp-automation",
+  "_type": "client",
+  "name": "RFP automation",
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:case-study-clients",
+    "extractedAt": "2026-08-02T00:00:00Z"
+  }
+}

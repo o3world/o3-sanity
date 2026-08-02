@@ -1,0 +1,14 @@
+{
+  "_id": "industry-seed-financial-services",
+  "_type": "industry",
+  "title": "Financial Services",
+  "slug": {
+    "_type": "slug",
+    "current": "financial-services"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:case-study-industries",
+    "extractedAt": "2026-08-02T00:00:00Z"
+  }
+}

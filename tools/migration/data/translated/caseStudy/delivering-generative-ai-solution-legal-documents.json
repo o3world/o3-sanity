@@ -1,0 +1,221 @@
+{
+  "_id": "caseStudy-wp-8628",
+  "_type": "caseStudy",
+  "title": "Legal AI",
+  "slug": {
+    "_type": "slug",
+    "current": "delivering-generative-ai-solution-legal-documents"
+  },
+  "client": {
+    "_type": "reference",
+    "_ref": "client-seed-legal-ai"
+  },
+  "industries": [
+    {
+      "_type": "reference",
+      "_ref": "industry-seed-technology",
+      "_key": "ind-0"
+    }
+  ],
+  "industryDetail": "Legal Document Review",
+  "narrativeHeadline": "Most people responsible for a contract are not lawyers. Checking every passage against current federal, state and municipal guidelines is tedious, and easy to get wrong.",
+  "stats": [
+    {
+      "_type": "stat",
+      "_key": "stat-0",
+      "value": "<60",
+      "label": "Days to build and validate production ready prototype"
+    },
+    {
+      "_type": "stat",
+      "_key": "stat-1",
+      "value": "30-60 sec",
+      "label": "Time to process 10+ page legal document"
+    }
+  ],
+  "heroMedia": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/03/LegalDoc-cover.jpg"
+    },
+    "alt": "Legal doc bot case study"
+  },
+  "chapters": [
+    {
+      "_type": "chapter",
+      "_key": "chapter-0",
+      "kicker": "Opportunity",
+      "title": "Nobody reads the whole contract",
+      "body": [
+        {
+          "_type": "block",
+          "_key": "k0000",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0000s",
+              "text": "Managing legal documents can be a daunting task, especially for those of us who are not lawyers and have hundreds of other responsibilities to worry about. As we consider the various contracts and other legal documents we have in place, the challenge is finding a reliable and affordable way to ensure the details align with current federal, state and municipal guidelines. We often find ourselves in the dark, uncertain about the currency and accuracy of legal documents. Enter a groundbreaking solution addressing real-time challenges in legal document management.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "chapter",
+      "_key": "chapter-1",
+      "kicker": "Solution",
+      "title": "Compare every passage to a gold standard",
+      "body": [
+        {
+          "_type": "block",
+          "_key": "k0001",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0001s",
+              "text": "Through our partnership with a prominent innovation studio, we provide strategic guidance, testing, and execution support for AI solutions. Often, standard contracts are out of date or missing key content, and examining each passage can be very tedious and prone to error – a perfect opportunity for generative AI. Our solution quickly breaks down legal documents and compares them to a “gold standard” in order to provide guidance on passages to address. This saves hours of tedious work and mitigates risk.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "extraSections": [
+    {
+      "_type": "mediaSection",
+      "_key": "media-0",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-0",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot-1.jpg"
+        },
+        "alt": "LegalDocBot (1)"
+      }
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-1",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-1",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot3-1.jpg"
+        },
+        "alt": "LegalDocBot3 (1)"
+      }
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-2",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-2",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot2-1.jpg"
+        },
+        "alt": "LegalDocBot2 (1)"
+      }
+    }
+  ],
+  "seo": {
+    "title": "Generative AI solution for legal document review",
+    "description": "Generative AI solution for rapid legal document review. Partnering with an innovation leader, we address the challenges non-legal experts face in reviewing standard legal documents."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:work:8628",
+    "extractedAt": "2026-08-01T02:52:58.497Z"
+  },
+  "_meta": {
+    "sourceFile": "caseStudy/delivering-generative-ai-solution-legal-documents.json",
+    "sourceHash": "sha256:af691be84c19bb56460991fb27f00823715fd88b5f85412fab4dce88c91d9d10",
+    "rulesFile": "rules/caseStudy.md",
+    "rulesHash": "sha256:c54529e356b564c7ed2e34c9bec39db9379fe731fc0a668a0da2523e541411a4",
+    "model": "claude-opus-5",
+    "translatedAt": "2026-08-02",
+    "flags": [
+      {
+        "field": "narrativeHeadline",
+        "kind": "derived",
+        "note": "Compressed from the Opportunity — “especially for those of us who are not lawyers”, and the challenge of ensuring “the details align with current federal, state and municipal guidelines”. The Solution’s “tedious and prone to error” supplies the second half."
+      },
+      {
+        "field": "chapters[0].title",
+        "kind": "proposed",
+        "note": "chapter.title is required; the source heading is only the kicker. Drawn from “we often find ourselves in the dark, uncertain about the currency and accuracy of legal documents”."
+      },
+      {
+        "field": "chapters[1].title",
+        "kind": "proposed",
+        "note": "Same: required, unsourced. Drawn from “compares them to a “gold standard” in order to provide guidance on passages to address”."
+      },
+      {
+        "field": "chapters[].kicker",
+        "kind": "derived",
+        "note": "Source heading(s) arrive in capitals (“SOLUTION”) — the old template shouted them through its `type-kicker` class. Normalized to sentence case; the new renderer owns the casing."
+      },
+      {
+        "field": "industries",
+        "kind": "proposed",
+        "note": "WordPress has no industry taxonomy on `work` posts. Proposed industry-seed-technology so the card eyebrow renders; delete it and the eyebrow degrades rather than breaking."
+      },
+      {
+        "field": "industryDetail",
+        "kind": "proposed",
+        "note": "No source. Proposed “Legal Document Review” to complete the eyebrow’s second half."
+      },
+      {
+        "field": "client",
+        "kind": "proposed",
+        "note": "WordPress never names the client — the Solution says only “a prominent innovation studio”. The post title stands in so the required reference resolves; a reviewer should name the studio or confirm the engagement stays anonymous."
+      },
+      {
+        "field": "extraSections[0].media.alt",
+        "kind": "proposed",
+        "note": "Source image carries no alt text; the WordPress attachment title “LegalDocBot (1)” stands in, the same fallback the perspective mapper uses. It describes the file, not the picture — needs real alt text before this publishes."
+      },
+      {
+        "field": "extraSections[1].media.alt",
+        "kind": "proposed",
+        "note": "Source image carries no alt text; the WordPress attachment title “LegalDocBot3 (1)” stands in, the same fallback the perspective mapper uses. It describes the file, not the picture — needs real alt text before this publishes."
+      },
+      {
+        "field": "extraSections[2].media.alt",
+        "kind": "proposed",
+        "note": "Source image carries no alt text; the WordPress attachment title “LegalDocBot2 (1)” stands in, the same fallback the perspective mapper uses. It describes the file, not the picture — needs real alt text before this publishes."
+      },
+      {
+        "field": "deliverables",
+        "kind": "dropped",
+        "note": "Left empty. The source never lists what was shipped, and “What we shipped” invented from prose would be fabrication."
+      },
+      {
+        "field": "headline",
+        "kind": "dropped",
+        "note": "The WordPress hero tagline (“An AI-powered solution for legal document analysis”) has no field in the new model: `title` is the document name and `narrativeHeadline` is the problem-framing sentence drawn from the Opportunity prose. Recovering it would mean adding a field, which is a schema conversation."
+      },
+      {
+        "field": "flexible_content[3]",
+        "kind": "dropped",
+        "note": "The project_feed “Related projects” widget. The new site derives related work rather than curating it per case study."
+      }
+    ]
+  }
+}

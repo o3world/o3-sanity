@@ -1,0 +1,10 @@
+{
+  "_id": "client-seed-college-hunks",
+  "_type": "client",
+  "name": "College HUNKS Hauling Junk",
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:case-study-clients",
+    "extractedAt": "2026-08-02T00:00:00Z"
+  }
+}

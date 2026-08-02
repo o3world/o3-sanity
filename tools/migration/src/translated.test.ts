@@ -3,8 +3,11 @@ import { join } from 'node:path'
 
 import { describe, expect, it } from 'vitest'
 
+import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
+
 import { CONVERTED_DIR, EXTRACT_DIR, SEED_DIR, TRANSLATED_DIR } from './lib/paths'
 import { checkTranslation, sha256, translatedCaseStudy } from './map/caseStudy'
+import { checkPathParity } from './map/paths'
 
 /**
  * Invariants over the committed **translated** corpus (#21).
@@ -139,6 +142,117 @@ describe('committed translations', () => {
           `chapters[${i}].title`,
         )
       })
+    }
+  })
+})
+
+/**
+ * Invariants that only become checkable once the whole archive is translated
+ * (#22). The rules above ask "is this one document honest?"; these ask "is
+ * the corpus complete, and did the batch stay inside the source?" — the two
+ * failures a per-document gate cannot see.
+ */
+describe('the translated case-study archive', () => {
+  interface Extracted {
+    readonly title: string
+    readonly path: string
+    readonly seo: { canonicalRendered: string }
+    readonly fields: { flexible_content?: unknown[] }
+  }
+
+  const extracted = readdirSync(join(EXTRACT_DIR, 'caseStudy'))
+    .filter((f) => f.endsWith('.json'))
+    .map((file) => ({
+      file: `caseStudy/${file}`,
+      doc: JSON.parse(
+        readFileSync(join(EXTRACT_DIR, 'caseStudy', file), 'utf8'),
+      ) as unknown as Extracted,
+    }))
+
+  const sourceOf = (doc: Translated) => extracted.find((e) => e.file === doc._meta.sourceFile)?.doc
+
+  // The ticket's headline count. A translation batch that quietly skipped one
+  // case study passes every other check in this file.
+  it('translates every extracted case study, once', () => {
+    const sources = translated.map(({ doc }) => doc._meta.sourceFile).sort()
+    expect(sources).toEqual(extracted.map((e) => e.file).sort())
+  })
+
+  /**
+   * Path parity (#26, `map/paths.ts`). Every *mapper* calls
+   * `checkPathParity` on the way out; the translate track has no mapper to
+   * call it, so a slug an agent shortened or tidied would have changed the
+   * URL with nothing to stop it — and the #24 redirect map is generated from
+   * `PATH_EXCEPTIONS`, which only knows about changes recorded there.
+   */
+  it('serves every case study at the path WordPress serves it at today', () => {
+    for (const { file, doc } of translated) {
+      const source = sourceOf(doc)
+      expect(source, `${file} has no matching extract`).toBeDefined()
+      const slug = (doc.slug as { current: string }).current
+      const newPath = `${COLLECTION_PREFIXES.caseStudy}/${slug}`
+      expect(checkPathParity(source!.seo.canonicalRendered, newPath), file).toBeNull()
+    }
+  })
+
+  /**
+   * Stats are the one field the rules call verbatim, and the one a reader
+   * will quote back at the client. A `value` an agent rounded, unit-converted
+   * or invented outright is exactly the failure `migration.source` exists to
+   * make visible — this makes it visible without opening Studio.
+   *
+   * Only `value` is checked: `label` is legitimately edited (IRONMAN's two
+   * RESULTS groups are flattened into one array, so the group heading has to
+   * be folded into the label), and every such edit carries a `derived` flag.
+   */
+  it('never invents a stat value', () => {
+    const titlesIn = (node: unknown, found: string[] = []): string[] => {
+      if (Array.isArray(node)) {
+        for (const item of node) titlesIn(item, found)
+      } else if (node && typeof node === 'object') {
+        const obj = node as Record<string, unknown>
+        if (obj.acf_fc_layout === 'title' && typeof obj.title === 'string') found.push(obj.title)
+        for (const value of Object.values(obj)) titlesIn(value, found)
+      }
+      return found
+    }
+
+    for (const { file, doc } of translated) {
+      const stats = (doc.stats ?? []) as { value: string }[]
+      if (stats.length === 0) continue
+      const sourceValues = new Set(
+        titlesIn(sourceOf(doc)?.fields.flexible_content).map((t) => t.trim()),
+      )
+      for (const stat of stats) {
+        expect(
+          sourceValues,
+          `${file}: stat value "${stat.value}" is in no source title row`,
+        ).toContain(stat.value)
+      }
+    }
+  })
+
+  /**
+   * `seo` holds overrides, never resolved values (#26, `map/seo.ts`). The
+   * translate track hand-applies what `mapSeo` does for every other type, so
+   * the two ways that goes wrong are checked here: the ` | O3` tail Yoast's
+   * template appends (which the Next.js root layout appends again), and an
+   * unexpanded `%%…%%` template an editor left behind.
+   */
+  it('migrates SEO overrides without Yoast’s resolved decoration', () => {
+    for (const { file, doc } of translated) {
+      const seo = doc.seo as { title?: string; description?: string } | undefined
+      if (!seo) continue
+      for (const [field, value] of Object.entries(seo)) {
+        if (typeof value !== 'string') continue
+        expect(value, `${file}: seo.${field} carries the site-name suffix`).not.toMatch(/\|\s*O3$/)
+        expect(value, `${file}: seo.${field} carries an unexpanded Yoast template`).not.toContain(
+          '%%',
+        )
+      }
+      expect(seo.title, `${file}: seo.title repeats the document title`).not.toBe(
+        doc.title as string,
+      )
     }
   })
 })

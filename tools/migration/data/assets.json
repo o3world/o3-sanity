@@ -1302,5 +1302,329 @@
   "file:tools/migration/data/seed/assets/about-culture-team.png": {
     "sha256": "03ee51d7fc696f90827fdae6e76ad76da08290f8",
     "assetId": "image-03ee51d7fc696f90827fdae6e76ad76da08290f8-2088x1068-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/04/Allied-cover-1.jpg": {
+    "sha256": "c6e4599f5ebef58cf460719a6152b3f64f5282e8",
+    "assetId": "image-c6e4599f5ebef58cf460719a6152b3f64f5282e8-1667x1667-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/04/Allied-1-3.jpg": {
+    "sha256": "b94c2592afb1fe078c4abadcbc96a28d7de782ff",
+    "assetId": "image-b94c2592afb1fe078c4abadcbc96a28d7de782ff-2500x1408-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/04/Allied-3-3.jpg": {
+    "sha256": "95bdf2f2651a09dcd61d38022823d61417430385",
+    "assetId": "image-95bdf2f2651a09dcd61d38022823d61417430385-2500x1408-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/04/Allied-2-2.jpg": {
+    "sha256": "2a8dd8187a7d8bf861e9517b3053f0490fa69acd",
+    "assetId": "image-2a8dd8187a7d8bf861e9517b3053f0490fa69acd-2500x1408-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2022/11/Amerigas-cover-1.jpg": {
+    "sha256": "9dbe6c8fecf2b0e9186a42ba9f1edd539ef8eafa",
+    "assetId": "image-9dbe6c8fecf2b0e9186a42ba9f1edd539ef8eafa-1706x1706-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2022/11/Amerigas-1-1.jpg": {
+    "sha256": "a787ca57d2e28f7be63206407b832162e35eaa21",
+    "assetId": "image-a787ca57d2e28f7be63206407b832162e35eaa21-2500x1408-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2022/11/Amerigas-3-1.jpg": {
+    "sha256": "129fc15c9d7907278c61f0acf5da9b71af747b57",
+    "assetId": "image-129fc15c9d7907278c61f0acf5da9b71af747b57-2500x1431-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2022/11/Amerigas-2-1.jpg": {
+    "sha256": "d529220cf71bafd28de712efe16c8037ade531cf",
+    "assetId": "image-d529220cf71bafd28de712efe16c8037ade531cf-2500x1408-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2022/11/BestEgg-cover.jpg": {
+    "sha256": "aa7303942e11833b1dd82dc97b9d607aa84e865b",
+    "assetId": "image-aa7303942e11833b1dd82dc97b9d607aa84e865b-1706x1706-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/BestEgg-casestudy1.png": {
+    "sha256": "699336b2400b8fe67b80e44eda6736c533241ad4",
+    "assetId": "image-699336b2400b8fe67b80e44eda6736c533241ad4-2500x1448-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/BestEgg-casestudy3-6.jpg": {
+    "sha256": "b108721fd05be2f4d56bc98afbc0cb28948535a3",
+    "assetId": "image-b108721fd05be2f4d56bc98afbc0cb28948535a3-2500x1448-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/BestEgg-casestudy2.jpg": {
+    "sha256": "7844f1f94211b38f5ec804f2ea71a7a02bd2d8d5",
+    "assetId": "image-7844f1f94211b38f5ec804f2ea71a7a02bd2d8d5-2500x1448-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2022/11/Caron-cover.jpg": {
+    "sha256": "b7ca628e3e0d68d82a9e18de3401327e9a19f43c",
+    "assetId": "image-b7ca628e3e0d68d82a9e18de3401327e9a19f43c-1706x1706-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/Caron-casestudy1.png": {
+    "sha256": "21f7c61524e2ded4b4fe2014c8eb908d8a3c5324",
+    "assetId": "image-21f7c61524e2ded4b4fe2014c8eb908d8a3c5324-2500x1448-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/Caron-casestudy2-1.jpg": {
+    "sha256": "25c0ee082cc2a30dab88e5639b8552df12b1379f",
+    "assetId": "image-25c0ee082cc2a30dab88e5639b8552df12b1379f-2500x1448-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/Caron-casestudy3.png": {
+    "sha256": "a3ab57db85206dc043f8a68cd4170125b9fb8273",
+    "assetId": "image-a3ab57db85206dc043f8a68cd4170125b9fb8273-2500x1448-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-cover-scaled.jpg": {
+    "sha256": "8517556662998295a500e88883da48d41f169592",
+    "assetId": "image-8517556662998295a500e88883da48d41f169592-2560x2560-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-1-scaled.jpg": {
+    "sha256": "657fd85992f20e29749fb5b47a4a25d88b97ad14",
+    "assetId": "image-657fd85992f20e29749fb5b47a4a25d88b97ad14-2560x1442-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-4-scaled.jpg": {
+    "sha256": "41ad66cddc543628047fd80f634245dd04165d01",
+    "assetId": "image-41ad66cddc543628047fd80f634245dd04165d01-2560x1442-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-2-scaled.jpg": {
+    "sha256": "b28843e590092502c89df0be40f0d078954643e0",
+    "assetId": "image-b28843e590092502c89df0be40f0d078954643e0-2560x1442-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/06/e-Hazard-3-scaled.jpg": {
+    "sha256": "882f60b2be2b5b83e4176c45db462dd716d3e41f",
+    "assetId": "image-882f60b2be2b5b83e4176c45db462dd716d3e41f-2560x1442-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/05/IM-cover.jpg": {
+    "sha256": "28b7deec866433c2ee287f47fc219334d38a250c",
+    "assetId": "image-28b7deec866433c2ee287f47fc219334d38a250c-1706x1706-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/05/IM-1-1-scaled.jpg": {
+    "sha256": "c99a042b1b69ed8d530c28df7227fbbc779f610e",
+    "assetId": "image-c99a042b1b69ed8d530c28df7227fbbc779f610e-2560x1442-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/04/IM-5-2.jpg": {
+    "sha256": "fb522893ce98292694051a720d1c7522bfca706d",
+    "assetId": "image-fb522893ce98292694051a720d1c7522bfca706d-2500x1408-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/04/IM-6-2.jpg": {
+    "sha256": "7b660d6f3fb7d9b054cfb57c1e8eebf952133af7",
+    "assetId": "image-7b660d6f3fb7d9b054cfb57c1e8eebf952133af7-2500x1408-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/04/IM-4-2.jpg": {
+    "sha256": "083dc79aeeb1780b442ca88c171a7c7f7da6955d",
+    "assetId": "image-083dc79aeeb1780b442ca88c171a7c7f7da6955d-2500x1408-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/04/IM-2-2.jpg": {
+    "sha256": "2fe893d1c5ed9ec05ac3786cab1b6f8014d018e1",
+    "assetId": "image-2fe893d1c5ed9ec05ac3786cab1b6f8014d018e1-2500x1408-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/04/IM-3-2.jpg": {
+    "sha256": "070d305169b3290932ae8c794ffc5558c8a1e0f5",
+    "assetId": "image-070d305169b3290932ae8c794ffc5558c8a1e0f5-2500x1408-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2022/11/CHHJ-cover.jpg": {
+    "sha256": "57a67dae08f6f30ed8a32a83d330bd429ec67f9a",
+    "assetId": "image-57a67dae08f6f30ed8a32a83d330bd429ec67f9a-1706x1706-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/CHHJ-casestudy1.png": {
+    "sha256": "eae3612a4b8406279f91317d35b76c432268544b",
+    "assetId": "image-eae3612a4b8406279f91317d35b76c432268544b-2500x1448-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/CHHJ-casestudy3.png": {
+    "sha256": "bdfc9f7e4a79be522f489b443ba50fafe6780bfe",
+    "assetId": "image-bdfc9f7e4a79be522f489b443ba50fafe6780bfe-2500x1448-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/CHHJ-casestudy2.jpg": {
+    "sha256": "d50e2c05fe040ca2d88abd7512a063d81ac1d394",
+    "assetId": "image-d50e2c05fe040ca2d88abd7512a063d81ac1d394-2500x1448-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2024/03/LegalDoc-cover.jpg": {
+    "sha256": "d0fe9e0fd89344f2532f0b3ffca0d0ec21ee3991",
+    "assetId": "image-d0fe9e0fd89344f2532f0b3ffca0d0ec21ee3991-1706x1706-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot-1.jpg": {
+    "sha256": "12b88db326999f3dd3cad2516600a89b155746d9",
+    "assetId": "image-12b88db326999f3dd3cad2516600a89b155746d9-1200x676-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot2-1.jpg": {
+    "sha256": "1947eaa105df5fcec3184889c6ec6df9f55f3176",
+    "assetId": "image-1947eaa105df5fcec3184889c6ec6df9f55f3176-1200x676-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2024/03/LegalDocBot3-1.jpg": {
+    "sha256": "f98ce2613762b9dbacb97681b2659757114f549a",
+    "assetId": "image-f98ce2613762b9dbacb97681b2659757114f549a-1200x676-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/eseo-blue.png": {
+    "sha256": "b91d0651ab101864c9cc2fcf9bfb60a1a9444041",
+    "assetId": "image-b91d0651ab101864c9cc2fcf9bfb60a1a9444041-2500x2500-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/ESEO-casestudy2.jpg": {
+    "sha256": "c1fb17b8501d4e6ade501f3e722bfd913d64b2e4",
+    "assetId": "image-c1fb17b8501d4e6ade501f3e722bfd913d64b2e4-2500x1448-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/ESEO-casestudy3.jpg": {
+    "sha256": "8af0dd950df7d457a447356be9860fe693758e15",
+    "assetId": "image-8af0dd950df7d457a447356be9860fe693758e15-2500x1448-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/eseo-casestudy1.png": {
+    "sha256": "8bc4ec817393ceb3b66e91ffe6f6cbf67d3aefe5",
+    "assetId": "image-8bc4ec817393ceb3b66e91ffe6f6cbf67d3aefe5-2500x1448-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/FIMC-cover.jpg": {
+    "sha256": "fc6bc4340744e34f29826af970f067bb16dbcb9f",
+    "assetId": "image-fc6bc4340744e34f29826af970f067bb16dbcb9f-1706x1706-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/FIMC-casestudy1.jpg": {
+    "sha256": "e8adcf320ccc0700a2122c7fbdcae1fa0b73f68d",
+    "assetId": "image-e8adcf320ccc0700a2122c7fbdcae1fa0b73f68d-2500x1448-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/FIMC-casestudy2.jpg": {
+    "sha256": "d9c75096f75a975d37a715a60aa036e352bac25b",
+    "assetId": "image-d9c75096f75a975d37a715a60aa036e352bac25b-2500x1448-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/FIMC-casestudy3.png": {
+    "sha256": "37caa6895fb6be6c7e203c47ac619cb15c7942a4",
+    "assetId": "image-37caa6895fb6be6c7e203c47ac619cb15c7942a4-2500x1448-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2022/11/gettacar-cover.jpg": {
+    "sha256": "544fc013858dbd76d36fbd8d45545f1d92709a80",
+    "assetId": "image-544fc013858dbd76d36fbd8d45545f1d92709a80-1706x1706-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy1.png": {
+    "sha256": "9a805fc289e94afb5b8d7af7951952ab85f99f9c",
+    "assetId": "image-9a805fc289e94afb5b8d7af7951952ab85f99f9c-2500x1448-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy2.png": {
+    "sha256": "09ebc14fffb96d978201af9c139924294bc0d444",
+    "assetId": "image-09ebc14fffb96d978201af9c139924294bc0d444-2500x1448-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/gettacar-casestudy3.png": {
+    "sha256": "3581752b76d95b5e111c2f88adff049d150579a5",
+    "assetId": "image-3581752b76d95b5e111c2f88adff049d150579a5-2500x1448-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2024/03/Healthcare-innovation-cover.jpg": {
+    "sha256": "34da53bf90db96013c1f4d0e3f6b3db6aff44f77",
+    "assetId": "image-34da53bf90db96013c1f4d0e3f6b3db6aff44f77-1706x1706-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2024/03/Healthcare-1.jpg": {
+    "sha256": "23643ed9cd67712976dafc32212e5d68774b558d",
+    "assetId": "image-23643ed9cd67712976dafc32212e5d68774b558d-2500x1408-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2024/03/Healthcare-2.jpg": {
+    "sha256": "946c246d8338679788a61f927476dc81e2c5285f",
+    "assetId": "image-946c246d8338679788a61f927476dc81e2c5285f-2500x1408-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2024/03/Healthcare-3.jpg": {
+    "sha256": "ee8db1db166901ed079dff7f9f27227455d18219",
+    "assetId": "image-ee8db1db166901ed079dff7f9f27227455d18219-2500x1408-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2022/11/Linode-cover.jpg": {
+    "sha256": "1e8d77b665a0febc6622ec4ea198591743ed8493",
+    "assetId": "image-1e8d77b665a0febc6622ec4ea198591743ed8493-1706x1706-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/Linode-casestudy1.png": {
+    "sha256": "3e78abb7ef1c2493c55df1d302c982a956ce3beb",
+    "assetId": "image-3e78abb7ef1c2493c55df1d302c982a956ce3beb-2500x1448-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/Linode-casestudy2.png": {
+    "sha256": "85892a543d5d691e8a5925b0250d766e7dc4cb97",
+    "assetId": "image-85892a543d5d691e8a5925b0250d766e7dc4cb97-2500x1448-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/Linode-casestudy3.png": {
+    "sha256": "52db66512cc80d6fc714bfae44284adf45887dab",
+    "assetId": "image-52db66512cc80d6fc714bfae44284adf45887dab-2500x1448-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/02/RFP-cover-2.jpg": {
+    "sha256": "ac06ad729df0e1588c96f9ab753cf337df0387b7",
+    "assetId": "image-ac06ad729df0e1588c96f9ab753cf337df0387b7-1669x1667-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/02/RFP-2-1.jpg": {
+    "sha256": "9e9abbdbd3dc7191a4659961555e20ada5652990",
+    "assetId": "image-9e9abbdbd3dc7191a4659961555e20ada5652990-2500x1408-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/02/RFP-1-1.jpg": {
+    "sha256": "90ab0d7b733c3ecb2b9543f5b06a3ffa436db17f",
+    "assetId": "image-90ab0d7b733c3ecb2b9543f5b06a3ffa436db17f-2500x1408-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/02/RFP-3-1.jpg": {
+    "sha256": "222ae62acd16aca3c26fad55c65059502e197a9b",
+    "assetId": "image-222ae62acd16aca3c26fad55c65059502e197a9b-2500x1408-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2024/02/REC-cover-1.jpg": {
+    "sha256": "f5c3d1ce7bd191cbb349cd983a0e9f1c3dfee8cb",
+    "assetId": "image-f5c3d1ce7bd191cbb349cd983a0e9f1c3dfee8cb-1706x1706-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/04/REC-3-1.jpg": {
+    "sha256": "6064307c119216020ae259c6d6d3cc416c1a52ab",
+    "assetId": "image-6064307c119216020ae259c6d6d3cc416c1a52ab-2500x1408-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2024/02/REC-2-scaled.jpg": {
+    "sha256": "0f55102cccc3f386d7e25be5fb62a712c31dcdc2",
+    "assetId": "image-0f55102cccc3f386d7e25be5fb62a712c31dcdc2-2560x1442-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/04/REC-1-1.jpg": {
+    "sha256": "90fac404e6ca975b21741ab4f1d7f30fd6adffe9",
+    "assetId": "image-90fac404e6ca975b21741ab4f1d7f30fd6adffe9-2500x1408-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/04/REC-4-1.jpg": {
+    "sha256": "37ff935224893c23e5160a727ea8c1055cd7a2a4",
+    "assetId": "image-37ff935224893c23e5160a727ea8c1055cd7a2a4-2500x1408-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/SEIb-cover.jpg": {
+    "sha256": "86d456523643e87c56a26f1c28b02aed4daabaf2",
+    "assetId": "image-86d456523643e87c56a26f1c28b02aed4daabaf2-1706x1706-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/SEIAdvice-casestudy1.png": {
+    "sha256": "a01738356a208b188c2d7f660d6ff63e9615d6ee",
+    "assetId": "image-a01738356a208b188c2d7f660d6ff63e9615d6ee-2500x1448-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/SEIAdvice-casestudy13png.png": {
+    "sha256": "502836881e114df6af4bcc5bae6676b1e99f8ee6",
+    "assetId": "image-502836881e114df6af4bcc5bae6676b1e99f8ee6-2500x1448-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/SEIAdvice-casestudy2.png": {
+    "sha256": "97263b0b181ae60f286766e04b21d02a212c408e",
+    "assetId": "image-97263b0b181ae60f286766e04b21d02a212c408e-2500x1448-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/SEI-cover.jpg": {
+    "sha256": "e44f7a6a87c6ae6dbf4ff7bb389f565bc74f367e",
+    "assetId": "image-e44f7a6a87c6ae6dbf4ff7bb389f565bc74f367e-1706x1706-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy1.png": {
+    "sha256": "287eb628c6245e8dea979917c4ae46ecb98db035",
+    "assetId": "image-287eb628c6245e8dea979917c4ae46ecb98db035-2500x1448-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/SEI-ampere-casestudy2.jpg": {
+    "sha256": "9a8a8b2c9838df53c5ebe82c09b1c69cb77a6301",
+    "assetId": "image-9a8a8b2c9838df53c5ebe82c09b1c69cb77a6301-2500x1448-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/SEIAmpere-casestudy3.png": {
+    "sha256": "ff9f9700f5884e770ee0f575f80116eab7571c82",
+    "assetId": "image-ff9f9700f5884e770ee0f575f80116eab7571c82-2500x1448-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/Institutes-cover.jpg": {
+    "sha256": "76f48eec19a9c464a9c9be3f1de6496f7500e4c5",
+    "assetId": "image-76f48eec19a9c464a9c9be3f1de6496f7500e4c5-1706x1706-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/Institutes-casestudy2.jpg": {
+    "sha256": "200974ffa3aeda8aec6cc4c98e04e6864fa0f452",
+    "assetId": "image-200974ffa3aeda8aec6cc4c98e04e6864fa0f452-2500x1448-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/TheInstitutes-casestudy3.png": {
+    "sha256": "1af5806525427bcdfd6708ab2b6c8a9298e739cc",
+    "assetId": "image-1af5806525427bcdfd6708ab2b6c8a9298e739cc-2500x1448-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/TheInstitutes-casestudy1.png": {
+    "sha256": "b25ad1cc8a770e5c56abacea644ef915df2d5a3d",
+    "assetId": "image-b25ad1cc8a770e5c56abacea644ef915df2d5a3d-2500x1448-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2022/11/Vertex-cover.jpg": {
+    "sha256": "31009643517fd46f7435fcf7d37684895a6b4fe4",
+    "assetId": "image-31009643517fd46f7435fcf7d37684895a6b4fe4-1706x1706-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy1.png": {
+    "sha256": "f017debdbc99dee5dba0a7de55bce080faa4e5b6",
+    "assetId": "image-f017debdbc99dee5dba0a7de55bce080faa4e5b6-2500x1448-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy2.png": {
+    "sha256": "de27dc2c688a8e6b4801b9d116a9f0d6c4f8f989",
+    "assetId": "image-de27dc2c688a8e6b4801b9d116a9f0d6c4f8f989-2500x1448-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy3.jpg": {
+    "sha256": "d40d4f1580c980e34ae75e279702308cab0d3dcd",
+    "assetId": "image-d40d4f1580c980e34ae75e279702308cab0d3dcd-2500x1448-jpg"
   }
 }

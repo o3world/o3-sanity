@@ -1,0 +1,225 @@
+{
+  "_id": "caseStudy-wp-8627",
+  "_type": "caseStudy",
+  "title": "Healthcare innovation",
+  "slug": {
+    "_type": "slug",
+    "current": "healthcare-innovation"
+  },
+  "client": {
+    "_type": "reference",
+    "_ref": "client-seed-healthcare-innovation"
+  },
+  "industries": [
+    {
+      "_type": "reference",
+      "_ref": "industry-seed-healthcare",
+      "_key": "ind-0"
+    }
+  ],
+  "industryDetail": "Innovation Programs",
+  "narrativeHeadline": "A major medical institution wanted to test new ideas for patients and providers. It had the medical expertise and none of the design, engineering or validation process to prove them out.",
+  "stats": [
+    {
+      "_type": "stat",
+      "_key": "stat-0",
+      "value": "+8",
+      "label": "Projects over a 5-year partnership"
+    },
+    {
+      "_type": "stat",
+      "_key": "stat-1",
+      "value": "1",
+      "label": "Innovative project sold to Fortune 100 company"
+    }
+  ],
+  "heroMedia": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/03/Healthcare-innovation-cover.jpg"
+    },
+    "alt": "healthcare innovation case study"
+  },
+  "chapters": [
+    {
+      "_type": "chapter",
+      "_key": "chapter-0",
+      "kicker": "Opportunity",
+      "title": "Medical expertise, no product process",
+      "body": [
+        {
+          "_type": "block",
+          "_key": "k0000",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0000s",
+              "text": "An innovation group and internal accelerator at a major healthcare institution needed a strategic partner to support its program built around continuously enhancing its patient and healthcare experience. While the organization and its cohort of start-ups are steeped in medical expertise, both lacked strategic methodologies, and design and engineering processes necessary to develop these various digital products. Additionally, they required a process for quickly assessing concepts and validating market adoption before making huge investments into each concept.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "chapter",
+      "_key": "chapter-1",
+      "kicker": "Solution",
+      "title": "Eight products over a five-year partnership",
+      "body": [
+        {
+          "_type": "block",
+          "_key": "k0001",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0001s",
+              "text": "Over the course of a 5-year partnership, O3 has guided this institution in developing its innovation practice and collaborating with its cohort of aspiring companies to design, develop, test and validate new digital experiences within the healthcare space.",
+              "marks": []
+            }
+          ]
+        },
+        {
+          "_type": "block",
+          "_key": "k0002",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0002s",
+              "text": "Helping to implement the innovation process, we design, developed and validated 8 products – including solutions for patients experiencing cognitive issues, voice-activated hands-free instructional care for medical procedures, and a digital feeding guide and educational exploration for families with tube-fed children. The latter even led to a publicly-announced partnership with a Fortune 100 brand.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "extraSections": [
+    {
+      "_type": "mediaSection",
+      "_key": "media-0",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-0",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/03/Healthcare-1.jpg"
+        },
+        "alt": "Healthcare case study"
+      }
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-1",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-1",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/03/Healthcare-2.jpg"
+        },
+        "alt": "Healthcare case study"
+      }
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-2",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-2",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/03/Healthcare-3.jpg"
+        },
+        "alt": "Healthcare case study"
+      }
+    }
+  ],
+  "seo": {
+    "title": "Patient Care Innovation: Enhancing Experience Today",
+    "description": "Explore patient care innovation and how digital experiences can enhance the healthcare journey for both patients and providers."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:work:8627",
+    "extractedAt": "2026-08-01T02:52:58.497Z"
+  },
+  "_meta": {
+    "sourceFile": "caseStudy/healthcare-innovation.json",
+    "sourceHash": "sha256:3fe363347c94933d7d8c5c63bc11bf68e6564f857da3fd6ee425926cf2498295",
+    "rulesFile": "rules/caseStudy.md",
+    "rulesHash": "sha256:c54529e356b564c7ed2e34c9bec39db9379fe731fc0a668a0da2523e541411a4",
+    "model": "claude-opus-5",
+    "translatedAt": "2026-08-02",
+    "flags": [
+      {
+        "field": "narrativeHeadline",
+        "kind": "derived",
+        "note": "Drawn from the block introduction WordPress rendered above the chapters (“A major medical institution sought expertise in digital experience to innovate…”) plus the Opportunity’s “lacked strategic methodologies, and design and engineering processes”. The rules ignore `introduction` as old-template presentation; this one carries real prose, so it is used and flagged rather than dropped."
+      },
+      {
+        "field": "chapters[0].title",
+        "kind": "proposed",
+        "note": "chapter.title is required; the source heading is only the kicker. Drawn from “steeped in medical expertise, both lacked strategic methodologies, and design and engineering processes”."
+      },
+      {
+        "field": "chapters[1].title",
+        "kind": "proposed",
+        "note": "Same: required, unsourced. Drawn from “over the course of a 5-year partnership” and “we design, developed and validated 8 products”."
+      },
+      {
+        "field": "chapters[].kicker",
+        "kind": "derived",
+        "note": "Source heading(s) arrive in capitals (“SOLUTION”) — the old template shouted them through its `type-kicker` class. Normalized to sentence case; the new renderer owns the casing."
+      },
+      {
+        "field": "industries",
+        "kind": "proposed",
+        "note": "WordPress has no industry taxonomy on `work` posts. Proposed industry-seed-healthcare so the card eyebrow renders; delete it and the eyebrow degrades rather than breaking."
+      },
+      {
+        "field": "industryDetail",
+        "kind": "proposed",
+        "note": "No source. Proposed “Innovation Programs” to complete the eyebrow’s second half."
+      },
+      {
+        "field": "client",
+        "kind": "proposed",
+        "note": "WordPress never names the client — the source says only “a major medical institution” and “an innovation group and internal accelerator at a major healthcare institution”. The post title stands in so the required reference resolves; a reviewer should name the institution or confirm the engagement stays anonymous."
+      },
+      {
+        "field": "stats[1].label",
+        "kind": "verbatim",
+        "note": "The stat says a project was “sold to Fortune 100 company”; the Solution prose says the work “led to a publicly-announced partnership with a Fortune 100 brand”. Copied exactly rather than reconciled — sold and partnered are different claims and only the client can say which is true."
+      },
+      {
+        "field": "deliverables",
+        "kind": "dropped",
+        "note": "Left empty. The source never lists what was shipped, and “What we shipped” invented from prose would be fabrication."
+      },
+      {
+        "field": "headline",
+        "kind": "dropped",
+        "note": "The WordPress hero tagline (“Driving innovation to improve the patient experience”) has no field in the new model: `title` is the document name and `narrativeHeadline` is the problem-framing sentence drawn from the Opportunity prose. Recovering it would mean adding a field, which is a schema conversation."
+      },
+      {
+        "field": "flexible_content[3]",
+        "kind": "dropped",
+        "note": "The project_feed “Related projects” widget. The new site derives related work rather than curating it per case study."
+      }
+    ]
+  }
+}

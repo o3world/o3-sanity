@@ -1,0 +1,201 @@
+{
+  "_id": "caseStudy-wp-5804",
+  "_type": "caseStudy",
+  "title": "Vertex",
+  "slug": {
+    "_type": "slug",
+    "current": "vertex"
+  },
+  "client": {
+    "_type": "reference",
+    "_ref": "client-seed-vertex"
+  },
+  "industries": [
+    {
+      "_type": "reference",
+      "_ref": "industry-seed-technology",
+      "_key": "ind-0"
+    }
+  ],
+  "industryDetail": "Corporate Tax Software",
+  "narrativeHeadline": "Vertex takes the complexity out of tax for some of the world’s largest retailers. Its partner network, its products and its marketing were all growing at once.",
+  "stats": [
+    {
+      "_type": "stat",
+      "_key": "stat-0",
+      "value": "3X",
+      "label": "improvement across key conversion points"
+    },
+    {
+      "_type": "stat",
+      "_key": "stat-1",
+      "value": "200+",
+      "label": "Customers and internal stakeholders we've interviewed"
+    },
+    {
+      "_type": "stat",
+      "_key": "stat-2",
+      "value": "10+",
+      "label": "Years working together as partners"
+    }
+  ],
+  "heroMedia": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/11/Vertex-cover.jpg"
+    },
+    "alt": "Vertex case study"
+  },
+  "chapters": [
+    {
+      "_type": "chapter",
+      "_key": "chapter-0",
+      "kicker": "Opportunity",
+      "title": "Growth on three fronts at the same time",
+      "body": [
+        {
+          "_type": "block",
+          "_key": "k0000",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0000s",
+              "text": "A leading global provider of corporate tax software and services for some of the world’s largest retailers, Vertex aims to take the complexity out of sales and use tax, global taxation, and tax data for its customers. Vertex needed a partner to help them quickly and cohesively develop an evolving global customer experience. Their partner network was rapidly expanding, their products were maturing and their marketing needs were growing. They needed a team of nimble strategists, designers and technology experts that could manage and innovate across a complex digital marketing journey.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "chapter",
+      "_key": "chapter-1",
+      "kicker": "Solution",
+      "title": "One global experience, many points of entry",
+      "body": [
+        {
+          "_type": "block",
+          "_key": "k0001",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0001s",
+              "text": "Starting with an assessment of Vertex’s market, data and customer journey, we created a personalized, multi-visit B2B experience designed to scale and nurture prospects across an organization. The globalized site allows for regional-centric content and solution offerings and considers various points of entry including a partner channel and automated chat. Ongoing, through rigorous, data-driven processes, we are able to quickly adapt and create a connected global customer experience for Vertex.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "extraSections": [
+    {
+      "_type": "mediaSection",
+      "_key": "media-0",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-0",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy1.png"
+        },
+        "alt": "Vertex logo over graphical arrow patterns."
+      }
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-1",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-1",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy2.png"
+        },
+        "alt": "Collection of pages from the Vertex website on a mobile device."
+      }
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-2",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-2",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy3.jpg"
+        },
+        "alt": "Vertex landing page with headline, Tax compliance solutions empowering companies of all sizes to do business anywhere, anytime - without friction."
+      }
+    }
+  ],
+  "seo": {
+    "description": "Learn more about how O3 has helped Vertex create cutting-edge digital experiences in this project case study."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:work:5804",
+    "extractedAt": "2026-08-01T02:52:58.500Z"
+  },
+  "_meta": {
+    "sourceFile": "caseStudy/vertex.json",
+    "sourceHash": "sha256:eb57484248cd2e255c4c632331460be94ac56547399a8490d7a4c1d7ac799020",
+    "rulesFile": "rules/caseStudy.md",
+    "rulesHash": "sha256:c54529e356b564c7ed2e34c9bec39db9379fe731fc0a668a0da2523e541411a4",
+    "model": "claude-opus-5",
+    "translatedAt": "2026-08-02",
+    "flags": [
+      {
+        "field": "narrativeHeadline",
+        "kind": "derived",
+        "note": "Compressed from the Opportunity — “take the complexity out of sales and use tax, global taxation, and tax data”, “their partner network was rapidly expanding, their products were maturing and their marketing needs were growing”. No new facts."
+      },
+      {
+        "field": "chapters[0].title",
+        "kind": "proposed",
+        "note": "chapter.title is required; the source heading is only the kicker. Drawn from the three simultaneous pressures the Opportunity lists."
+      },
+      {
+        "field": "chapters[1].title",
+        "kind": "proposed",
+        "note": "Same: required, unsourced. Drawn from “the globalized site allows for regional-centric content” and “various points of entry including a partner channel and automated chat”."
+      },
+      {
+        "field": "industries",
+        "kind": "proposed",
+        "note": "WordPress has no industry taxonomy on `work` posts. Proposed industry-seed-technology so the card eyebrow renders; delete it and the eyebrow degrades rather than breaking."
+      },
+      {
+        "field": "industryDetail",
+        "kind": "proposed",
+        "note": "No source. Proposed “Corporate Tax Software” to complete the eyebrow’s second half."
+      },
+      {
+        "field": "deliverables",
+        "kind": "dropped",
+        "note": "Left empty. The source never lists what was shipped, and “What we shipped” invented from prose would be fabrication."
+      },
+      {
+        "field": "headline",
+        "kind": "dropped",
+        "note": "The WordPress hero tagline (“Establishing a global leader in tax technology”) has no field in the new model: `title` is the document name and `narrativeHeadline` is the problem-framing sentence drawn from the Opportunity prose. Recovering it would mean adding a field, which is a schema conversation."
+      },
+      {
+        "field": "flexible_content[3]",
+        "kind": "dropped",
+        "note": "The project_feed “Related projects” widget. The new site derives related work rather than curating it per case study."
+      }
+    ]
+  }
+}

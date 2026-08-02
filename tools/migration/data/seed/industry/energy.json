@@ -1,0 +1,14 @@
+{
+  "_id": "industry-seed-energy",
+  "_type": "industry",
+  "title": "Energy",
+  "slug": {
+    "_type": "slug",
+    "current": "energy"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:case-study-industries",
+    "extractedAt": "2026-08-02T00:00:00Z"
+  }
+}

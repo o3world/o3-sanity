@@ -1,0 +1,182 @@
+{
+  "_id": "caseStudy-wp-5807",
+  "_type": "caseStudy",
+  "title": "AmeriGas",
+  "slug": {
+    "_type": "slug",
+    "current": "amerigas"
+  },
+  "client": {
+    "_type": "reference",
+    "_ref": "client-seed-amerigas"
+  },
+  "industries": [
+    {
+      "_type": "reference",
+      "_ref": "industry-seed-energy",
+      "_key": "ind-0"
+    }
+  ],
+  "industryDetail": "Propane Distribution",
+  "narrativeHeadline": "AmeriGas serves about two million customers in all 50 states. Its digital roadmap had never been checked against that reach.",
+  "heroMedia": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/11/Amerigas-cover-1.jpg"
+    },
+    "alt": "Amerigas case study"
+  },
+  "chapters": [
+    {
+      "_type": "chapter",
+      "_key": "chapter-0",
+      "kicker": "Opportunity",
+      "title": "America’s largest propane network, and an unchecked roadmap",
+      "body": [
+        {
+          "_type": "block",
+          "_key": "k0000",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0000s",
+              "text": "With approximately two million customers in all 50 states, AmeriGas is America’s largest propane distributor. With that kind of reach, AmeriGas’s digital ecosystem needs to make the customer experience as effective and efficient as possible. As its desire to optimize the digital experience has become more and more of a priority, AmeriGas needed a partner to assess its roadmap to make sure it was, in fact, driving every day.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "chapter",
+      "_key": "chapter-1",
+      "kicker": "Solution",
+      "title": "A read on the customer experience, end to end",
+      "body": [
+        {
+          "_type": "block",
+          "_key": "k0001",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0001s",
+              "text": "AmeriGas tapped O3 to conduct a complete assessment of its digital customer experience (CX) from first touchpoints, through the sales process and on to service, refill and support. We took a deep dive into the propane landscape and service space and provided a comprehensive analysis of AmeriGas’s customer experience from end-to-end and helped to visualize what was possible through a future-forward prototype. As we uncovered experience and technology gaps, we helped AmeriGas prioritize its digital initiatives for years to come.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "extraSections": [
+    {
+      "_type": "mediaSection",
+      "_key": "media-0",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-0",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/11/Amerigas-1-1.jpg"
+        },
+        "alt": "Amerigas case study"
+      }
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-1",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-1",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/11/Amerigas-2-1.jpg"
+        },
+        "alt": "Amerigas case study"
+      }
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-2",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-2",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/11/Amerigas-3-1.jpg"
+        },
+        "alt": "Amerigas case study"
+      }
+    }
+  ],
+  "seo": {
+    "title": "Modernizing the propane experience for AmeriGas customers",
+    "description": "AmeriGas tapped O3 to conduct a complete assessment of its digital customer experience (CX) from first touchpoints, refill and support."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:work:5807",
+    "extractedAt": "2026-08-01T02:52:58.500Z"
+  },
+  "_meta": {
+    "sourceFile": "caseStudy/amerigas.json",
+    "sourceHash": "sha256:4a91e0c08e67f909db9dc3d1c3afefb7661e6a5c13858c105f5bc23786726405",
+    "rulesFile": "rules/caseStudy.md",
+    "rulesHash": "sha256:c54529e356b564c7ed2e34c9bec39db9379fe731fc0a668a0da2523e541411a4",
+    "model": "claude-opus-5",
+    "translatedAt": "2026-08-02",
+    "flags": [
+      {
+        "field": "narrativeHeadline",
+        "kind": "derived",
+        "note": "Compressed from the Opportunity — the two-million-customer, 50-state scale and the need for a partner to assess whether the roadmap was “in fact, driving every day”. No new facts."
+      },
+      {
+        "field": "chapters[0].title",
+        "kind": "proposed",
+        "note": "chapter.title is required; the source heading is only the kicker. Drawn from “America’s largest propane distributor” and the unassessed roadmap."
+      },
+      {
+        "field": "chapters[1].title",
+        "kind": "proposed",
+        "note": "Same: required, unsourced. Drawn from “a complete assessment of its digital customer experience (CX) from first touchpoints, through the sales process and on to service”."
+      },
+      {
+        "field": "industries",
+        "kind": "proposed",
+        "note": "WordPress has no industry taxonomy on `work` posts. Proposed industry-seed-energy so the card eyebrow renders; delete it and the eyebrow degrades rather than breaking."
+      },
+      {
+        "field": "industryDetail",
+        "kind": "proposed",
+        "note": "No source. Proposed “Propane Distribution” to complete the eyebrow’s second half."
+      },
+      {
+        "field": "deliverables",
+        "kind": "dropped",
+        "note": "Left empty. The source never lists what was shipped, and “What we shipped” invented from prose would be fabrication."
+      },
+      {
+        "field": "headline",
+        "kind": "dropped",
+        "note": "The WordPress hero tagline (“Roadmap for America's propane company”) has no field in the new model: `title` is the document name and `narrativeHeadline` is the problem-framing sentence drawn from the Opportunity prose. Recovering it would mean adding a field, which is a schema conversation."
+      },
+      {
+        "field": "flexible_content[2]",
+        "kind": "dropped",
+        "note": "The project_feed “Related projects” widget. The new site derives related work rather than curating it per case study."
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "_id": "industry-seed-education",
+  "_type": "industry",
+  "title": "Education",
+  "slug": {
+    "_type": "slug",
+    "current": "education"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:case-study-industries",
+    "extractedAt": "2026-08-02T00:00:00Z"
+  }
+}

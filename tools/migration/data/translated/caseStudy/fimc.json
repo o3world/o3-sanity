@@ -1,0 +1,201 @@
+{
+  "_id": "caseStudy-wp-6322",
+  "_type": "caseStudy",
+  "title": "FIMC",
+  "slug": {
+    "_type": "slug",
+    "current": "fimc"
+  },
+  "client": {
+    "_type": "reference",
+    "_ref": "client-seed-fimc"
+  },
+  "industries": [
+    {
+      "_type": "reference",
+      "_ref": "industry-seed-financial-services",
+      "_key": "ind-0"
+    }
+  ],
+  "industryDetail": "Insurance and Membership Benefits",
+  "narrativeHeadline": "FIMC sold insurance through a network of benefits providers, never straight to the people using it. Going direct-to-consumer meant an end-to-end journey it had never run.",
+  "stats": [
+    {
+      "_type": "stat",
+      "_key": "stat-0",
+      "value": "8 projects",
+      "label": "Across products + programs"
+    },
+    {
+      "_type": "stat",
+      "_key": "stat-1",
+      "value": "24 emails",
+      "label": "Across 9 campaigns"
+    },
+    {
+      "_type": "stat",
+      "_key": "stat-2",
+      "value": "11 games",
+      "label": "Custom made for FIMC"
+    }
+  ],
+  "heroMedia": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/FIMC-cover.jpg"
+    },
+    "alt": "FIMC case study"
+  },
+  "chapters": [
+    {
+      "_type": "chapter",
+      "_key": "chapter-0",
+      "kicker": "Opportunity",
+      "title": "A B2B company facing a D2C market",
+      "body": [
+        {
+          "_type": "block",
+          "_key": "k0000",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0000s",
+              "text": "FIMC offers its insurance products through a trusted network of industry-leading benefits providers. With a flourishing B2B business, FIMC was looking to expand by bringing a new suite of direct-to-consumer insurance products to market. While they’re experts in their industry, the D2C market is vastly different. FIMC wasn’t sure what their new end-to-end customer journey should look like. With many new brands in this marketing, they needed an innovative partner to lead the UX/UI process while working alongside their internal development team.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "chapter",
+      "_key": "chapter-1",
+      "kicker": "Solution",
+      "title": "The Real Benefits experience, end to end",
+      "body": [
+        {
+          "_type": "block",
+          "_key": "k0001",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0001s",
+              "text": "Through collaborative workshops and CX strategy, we helped define the vision and a full roadmap for FIMC’s new D2C offerings. Our strategy included visualizing the new experience and validating it with potential customers. The result was a complete end-to-end experience design for the Real Benefits marketing site and customer portal. Throughout the process, O3 and FIMC’s internal software development team collaborated closely on requirements and execution. Having launched in Q4 of 2022, the teams are currently analyzing performance, and fine-tuning the experience through conversion rate optimization (CRO) and user testing. As the business evolves, O3 will work with FIMC to iterate, grow, and improve their customer experiences.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "extraSections": [
+    {
+      "_type": "mediaSection",
+      "_key": "media-0",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-0",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/FIMC-casestudy1.jpg"
+        },
+        "alt": "Featured slide showcasing FIMC's logo, along with an illustration of a family under an FIMC umbrella."
+      }
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-1",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-1",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/FIMC-casestudy2.jpg"
+        },
+        "alt": "FIMC homepage featuring an image of a gameboard with various everyday problems. FIMC provides game-changing benefits made for real life."
+      }
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-2",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-2",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/FIMC-casestudy3.png"
+        },
+        "alt": "Collection of mobile screenshots from the FIMC website."
+      }
+    }
+  ],
+  "seo": {
+    "description": "Learn in this case study how O3 helped FIMC launch a new direct-to-consumer channel of business in the insured and membership benefits space."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:work:6322",
+    "extractedAt": "2026-08-01T02:52:58.499Z"
+  },
+  "_meta": {
+    "sourceFile": "caseStudy/fimc.json",
+    "sourceHash": "sha256:389a3965e6c1859f49977a49d0797bbda2c02f78c47920ff973f7e1943e6fe26",
+    "rulesFile": "rules/caseStudy.md",
+    "rulesHash": "sha256:c54529e356b564c7ed2e34c9bec39db9379fe731fc0a668a0da2523e541411a4",
+    "model": "claude-opus-5",
+    "translatedAt": "2026-08-02",
+    "flags": [
+      {
+        "field": "narrativeHeadline",
+        "kind": "derived",
+        "note": "Compressed from the Opportunity — “offers its insurance products through a trusted network of industry-leading benefits providers”, “the D2C market is vastly different”, and “wasn’t sure what their new end-to-end customer journey should look like”. No new facts."
+      },
+      {
+        "field": "chapters[0].title",
+        "kind": "proposed",
+        "note": "chapter.title is required; the source heading is only the kicker. Drawn from the flourishing B2B business meeting an unfamiliar D2C market."
+      },
+      {
+        "field": "chapters[1].title",
+        "kind": "proposed",
+        "note": "Same: required, unsourced. Drawn from “a complete end-to-end experience design for the Real Benefits marketing site and customer portal”."
+      },
+      {
+        "field": "industries",
+        "kind": "proposed",
+        "note": "WordPress has no industry taxonomy on `work` posts. Proposed industry-seed-financial-services so the card eyebrow renders; delete it and the eyebrow degrades rather than breaking."
+      },
+      {
+        "field": "industryDetail",
+        "kind": "proposed",
+        "note": "No source. Proposed “Insurance and Membership Benefits” to complete the eyebrow’s second half."
+      },
+      {
+        "field": "deliverables",
+        "kind": "dropped",
+        "note": "Left empty. The source never lists what was shipped, and “What we shipped” invented from prose would be fabrication."
+      },
+      {
+        "field": "headline",
+        "kind": "dropped",
+        "note": "The WordPress hero tagline (“Expanding into new markets with ease”) has no field in the new model: `title` is the document name and `narrativeHeadline` is the problem-framing sentence drawn from the Opportunity prose. Recovering it would mean adding a field, which is a schema conversation."
+      },
+      {
+        "field": "flexible_content[3]",
+        "kind": "dropped",
+        "note": "The project_feed “Related projects” widget. The new site derives related work rather than curating it per case study."
+      }
+    ]
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "_id": "caseStudy-wp-5809",
+  "_type": "caseStudy",
+  "title": "College HUNKS Hauling Junk",
+  "slug": {
+    "_type": "slug",
+    "current": "college-hunks"
+  },
+  "client": {
+    "_type": "reference",
+    "_ref": "client-seed-college-hunks"
+  },
+  "industries": [
+    {
+      "_type": "reference",
+      "_ref": "industry-seed-consumer-services",
+      "_key": "ind-0"
+    }
+  ],
+  "industryDetail": "Moving and Hauling",
+  "narrativeHeadline": "College HUNKS runs over 150 locations across the US and Canada, each localized on the same site. That left a bloated information architecture between a customer and a price.",
+  "heroMedia": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/11/CHHJ-cover.jpg"
+    },
+    "alt": "CHHJ case study"
+  },
+  "chapters": [
+    {
+      "_type": "chapter",
+      "_key": "chapter-0",
+      "kicker": "Opportunity",
+      "title": "A new brand, and a site that had not caught up",
+      "body": [
+        {
+          "_type": "block",
+          "_key": "k0000",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0000s",
+              "text": "With over 150 locations in the US and Canada, College HUNKS Hauling Junk & Moving® (CHHJ) is a leader in the moving, hauling and junk removal industry. CHHJ needed an improved digital customer experience that extended their newly designed brand and matched their courteous and friendly service for customers and franchisees. They wanted to increase engagement by clearly communicating value and streamlining access to process, pricing and the logistics of service delivery. To enable this, CHHJ required a design and technical solution that offered scalability, speed and growth potential.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "chapter",
+      "_key": "chapter-1",
+      "kicker": "Solution",
+      "title": "Hundreds of pages cut, one path to conversion",
+      "body": [
+        {
+          "_type": "block",
+          "_key": "k0001",
+          "style": "normal",
+          "markDefs": [],
+          "children": [
+            {
+              "_type": "span",
+              "_key": "k0001s",
+              "text": "CHHJ’s digital experience is localized for its markets across the US and Canada. Initially, this resulted in a bloated information architecture and challenging customer experience. We started our work by evaluating the end-to-end journey and reimagined CHHJ’s content hierarchies, interface and navigation. We created a more cohesive experience by reducing design inconsistencies and eliminating hundreds of pages in order to shorten the path to conversion. Aesthetically, we translated their new brand into a digital solution the speaks to the friendly, reliable service that CHHJ’s customers count on. A user interface system, CMS and technical solution were created to empower scalability and performance. As we assess new opportunities and optimize the customer journey, we look to continuously deliver for CHHJ.",
+              "marks": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "extraSections": [
+    {
+      "_type": "mediaSection",
+      "_key": "media-0",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-0",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/CHHJ-casestudy1.png"
+        },
+        "alt": "College Hunks Hauling Junk & Moving logo. Pile of cardboard boxes on orange backdrop."
+      }
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-1",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-1",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/CHHJ-casestudy2.jpg"
+        },
+        "alt": "College Hunks Hauling Junk's homepage featuring how moving & junk removal can be stress-free. Users can interact with a free estimate button to get a quote."
+      }
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-2",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-2",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/CHHJ-casestudy3.png"
+        },
+        "alt": "Screenshots of College Hunks Hauling Junk website on mobile."
+      }
+    }
+  ],
+  "seo": {
+    "title": "Digital Experiences for Moving and Hauling Services",
+    "description": "Learn more about the unique experience that O3 designed and developed for College HUNKS Hauling Junk and Moving."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:work:5809",
+    "extractedAt": "2026-08-01T02:52:58.499Z"
+  },
+  "_meta": {
+    "sourceFile": "caseStudy/college-hunks.json",
+    "sourceHash": "sha256:b3a00e171cd71357939f1c6c3920257087b2f5062437c63f44c7784b6a1d7df9",
+    "rulesFile": "rules/caseStudy.md",
+    "rulesHash": "sha256:c54529e356b564c7ed2e34c9bec39db9379fe731fc0a668a0da2523e541411a4",
+    "model": "claude-opus-5",
+    "translatedAt": "2026-08-02",
+    "flags": [
+      {
+        "field": "narrativeHeadline",
+        "kind": "derived",
+        "note": "Compressed from the Opportunity’s “over 150 locations in the US and Canada” and its ask to streamline “access to process, pricing and the logistics of service delivery”, plus the Solution’s “bloated information architecture”. Both halves are in the source."
+      },
+      {
+        "field": "chapters[0].title",
+        "kind": "proposed",
+        "note": "chapter.title is required; the source heading is only the kicker. Drawn from “extended their newly designed brand” against the existing digital experience."
+      },
+      {
+        "field": "chapters[1].title",
+        "kind": "proposed",
+        "note": "Same: required, unsourced. Drawn from “eliminating hundreds of pages in order to shorten the path to conversion”."
+      },
+      {
+        "field": "industries",
+        "kind": "proposed",
+        "note": "WordPress has no industry taxonomy on `work` posts. Proposed industry-seed-consumer-services so the card eyebrow renders; delete it and the eyebrow degrades rather than breaking."
+      },
+      {
+        "field": "industryDetail",
+        "kind": "proposed",
+        "note": "No source. Proposed “Moving and Hauling” to complete the eyebrow’s second half."
+      },
+      {
+        "field": "deliverables",
+        "kind": "dropped",
+        "note": "Left empty. The source never lists what was shipped, and “What we shipped” invented from prose would be fabrication."
+      },
+      {
+        "field": "headline",
+        "kind": "dropped",
+        "note": "The WordPress hero tagline (“Moving customers to quickly convert”) has no field in the new model: `title` is the document name and `narrativeHeadline` is the problem-framing sentence drawn from the Opportunity prose. Recovering it would mean adding a field, which is a schema conversation."
+      },
+      {
+        "field": "flexible_content[2]",
+        "kind": "dropped",
+        "note": "The project_feed “Related projects” widget. The new site derives related work rather than curating it per case study."
+      }
+    ]
+  }
+}

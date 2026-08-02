@@ -23,7 +23,7 @@ canonical frames carry finished copy, and the frame it came from is recorded in
 | -------------------------------- | ------------------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | `/`                              | `1680:2134` / `1814:1618` | seed-from-frame       | `page-seed-index` — **reconciled against the frame** (#42): composition, section order and copy all now the frame's                                                                                                                                                                                      | #42 ✅   |
 | `/work`                          | `1634:1167` / `1906:851`  | migrate               | **Dedicated route**, not a document — lists `caseStudy`; composition is code                                                                                                                                                                                                                             | #43 ✅   |
-| `/work/{slug}`                   | `1710:2300` / `1906:928`  | migrate               | 20 extracted; **1 translated** (`la-colombe`), 19 outstanding                                                                                                                                                                                                                                            | #44, #22 |
+| `/work/{slug}`                   | `1710:2300` / `1906:928`  | migrate               | **All 20 translated** (#22) and loaded as drafts; publishing is a human act, so the collection renders in draft preview until editorial takes them over                                                                                                                                                  | #44, #22 |
 | `/perspectives`                  | **none**                  | provisional ⚠️        | Composition has no frame; borrows the Work hero + Home blog card rather than inventing one. **No document to mark**, so the marker is on the route entry — see below                                                                                                                                     | #49      |
 | `/perspectives/{slug}`           | `1710:2823` / `1906:1046` | migrate               | 272 perspectives, 14 persons, 11 categories — **loaded**                                                                                                                                                                                                                                                 | #45      |
 | `/about`                         | `1924:5344`               | seed-from-frame       | `page-seed-about` — transcribed; the disciplines grid, team and Careers bands render through their own blocks (#56), and the frame's band imagery is committed under `seed/assets/`. Careers is a section, not a route                                                                                   | #46 ✅   |
@@ -58,7 +58,7 @@ verify` lists every one on each run.
 
 | Document                                  | Why                                                                                                                                 | Cleared by                                                                                                                      |
 | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `caseStudy-seed-ironman`                  | Real case study exists but is not translated yet                                                                                    | #22 translating it                                                                                                              |
+| `caseStudy-seed-ironman`                  | The real case study is translated (`caseStudy-wp-10028`) but loads as a **draft**, and the homepage showcase reference is strong    | A reviewer publishing that draft, then repointing the showcase                                                                  |
 | `caseStudy-seed-aramark`                  | **No WordPress case study exists.** Real client, invented engagement write-up.                                                      | A real case study, or replacing the card                                                                                        |
 | `caseStudy-seed-chop`                     | **No WordPress case study exists.** Real client, invented engagement write-up.                                                      | A real case study, or replacing the card                                                                                        |
 | `page-seed-live`                          | The appearances band asserts a **date**, and the frame's is a placeholder duplicated four times                                     | Someone owning the page's cadence and supplying real appearances                                                                |
@@ -97,9 +97,11 @@ frame fills its two lists by **duplicating one authored row** — four identical
 appearances in `1710:1800`, three identical ideas in `1732:1409` — and the one
 appearance it authors is dated. Transcribing is a transcription job, so the seed
 carries the authored row once and nothing invented; a page promising "what we're
-working on" with a workshop nobody scheduled is exactly what #48's gate is for. Which real case studies replace
-the two invented ones is #22's call: 19 of the 20 extracted are still
-untranslated.
+working on" with a workshop nobody scheduled is exactly what #48's gate is for. All 20
+extracted case studies are now translated (#22), so replacing the two invented
+cards is a question of which drafts editorial publishes — the pipeline cannot
+do the swap itself, because a published page cannot hold a strong reference to
+a draft-only document.
 
 Contact and 1682 are a third kind, and the reason is worth naming because more
 routes will land this way: **the content migrated cleanly and the composition

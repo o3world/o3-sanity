@@ -1,0 +1,10 @@
+{
+  "_id": "client-seed-healthcare-innovation",
+  "_type": "client",
+  "name": "Healthcare innovation",
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:case-study-clients",
+    "extractedAt": "2026-08-02T00:00:00Z"
+  }
+}
