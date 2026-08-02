@@ -55,13 +55,25 @@ export type { MaskedLinesProps } from './components/masked-lines'
 export { Eyebrow, eyebrowVariants } from './components/eyebrow'
 export type { EyebrowProps } from './components/eyebrow'
 
+// HalftoneDisc — the dotted disc beside a discipline (1925:5922) or a role (1925:6068)
+export { HalftoneDisc } from './components/halftone-disc'
+export type { HalftoneDiscProps } from './components/halftone-disc'
+
 // LogoTile
 export { LogoTile } from './components/logo-tile'
 export type { LogoTileProps } from './components/logo-tile'
 
+// OrbitalDiagram — the Solutions disciplines net (1928:6524). NOT the sphere.
+export { OrbitalDiagram } from './components/orbital-diagram'
+export type { OrbitalDiagramItem, OrbitalDiagramProps } from './components/orbital-diagram'
+
 // OrbitalSphere — the wireframe globe behind the hero and the CTA band
 export { OrbitalSphere } from './components/orbital-sphere'
 export type { OrbitalSphereProps } from './components/orbital-sphere'
+
+// PortraitTile — the black-and-red-arc tile a team headshot sits on (1925:5864)
+export { PortraitTile } from './components/portrait-tile'
+export type { PortraitTileProps } from './components/portrait-tile'
 
 // Reveal
 export { Reveal } from './components/reveal'

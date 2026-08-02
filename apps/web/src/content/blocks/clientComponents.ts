@@ -17,14 +17,17 @@ import {
 } from './defineBlockRender'
 import { CaseShowcaseSection } from './section/caseShowcaseSection/CaseShowcaseSection'
 import { CtaSection } from './section/ctaSection/CtaSection'
+import { DisciplineGridSection } from './section/disciplineGridSection/DisciplineGridSection'
 import { HeroSection } from './section/heroSection/HeroSection'
 import { LayoutSection } from './section/layoutSection/LayoutSection'
 import { ListingSection } from './section/listingSection/ListingSection'
 import { LogoWallSection } from './section/logoWallSection/LogoWallSection'
 import { MediaSection } from './section/mediaSection/MediaSection'
+import { PersonGridSection } from './section/personGridSection/PersonGridSection'
 import { PerspectivesCarouselSection } from './section/perspectivesCarouselSection/PerspectivesCarouselSection'
 import { QuoteSection } from './section/quoteSection/QuoteSection'
 import { RailPanelsSection } from './section/railPanelsSection/RailPanelsSection'
+import { RoleListSection } from './section/roleListSection/RoleListSection'
 
 /**
  * Render bindings for every client-safe SECTION block — the single authoring
@@ -45,6 +48,9 @@ export const CLIENT_SECTION_BINDINGS = [
   defineBlockRender('quoteSection', { component: QuoteSection }),
   defineBlockRender('perspectivesCarouselSection', { component: PerspectivesCarouselSection }),
   defineBlockRender('ctaSection', { component: CtaSection }),
+  defineBlockRender('disciplineGridSection', { component: DisciplineGridSection }),
+  defineBlockRender('personGridSection', { component: PersonGridSection }),
+  defineBlockRender('roleListSection', { component: RoleListSection }),
   defineBlockRender('layoutSection', { component: LayoutSection }),
   defineBlockRender('mediaSection', { component: MediaSection }),
   defineBlockRender('listingSection', { component: ListingSection }),

@@ -129,23 +129,26 @@ person does not have to re-derive that.
 
 Every component in the package, against the Figma library.
 
-| Component        | Classification                                       | Notes                                                                                                        |
-| ---------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `Button`         | **Has counterpart** — `Button / Solid`               | Divergent; realign (above)                                                                                   |
-| `BrandLogo`      | **Has counterpart** — `Brand / Logo`                 | Added #41. `Color` is the one axis; `White` deferred                                                         |
-| `MenuIcon`       | **Has counterpart** — `1814:1636` (drawn, not a set) | Added #41. Two bars, per the frame                                                                           |
-| `CloseIcon`      | **Has counterpart** — `close` glyph                  | Added #41 (ADR 0009)                                                                                         |
-| `Sheet`          | **Code-only** — shadcn                               | Added #41 for the 402 nav; the panel has no frame (ADR 0006)                                                 |
-| `Card`           | **Code-only**                                        | Canonical case-study cards are frames, not a component set                                                   |
-| `SectionShell`   | **Code-only**                                        | The three-surface organism; ADR 0008 — shadcn cannot model it                                                |
-| `ArrowIcon`      | **Has counterpart** — `.building block Icon_text`    | Glyph becomes a component, not a string prop (ADR 0009)                                                      |
-| `ArrowLink`      | **Code-only**                                        | No Figma equivalent; the frames use `Button / Ghost` for this job — **candidate for retirement in #42**      |
-| `Eyebrow`        | **Code-only**                                        | A type style, not a component. ⚠️ still defaults to `tone="brand"`; canonical eyebrows are neutral `#636363` |
-| `DisplayHeading` | **Code-only**                                        | A type style                                                                                                 |
-| `MaskedLines`    | **Code-only**                                        | Motion, which the static frames cannot express (#33)                                                         |
-| `Reveal`         | **Code-only**                                        | ”                                                                                                            |
-| `LogoTile`       | **Code-only**                                        | The partner logo wall is drawn as frames                                                                     |
-| `Stat`           | **Code-only**                                        | Case-study stats are drawn inline (`1883:3564`)                                                              |
+| Component        | Classification                                       | Notes                                                                                                          |
+| ---------------- | ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `Button`         | **Has counterpart** — `Button / Solid`               | Divergent; realign (above)                                                                                     |
+| `BrandLogo`      | **Has counterpart** — `Brand / Logo`                 | Added #41. `Color` is the one axis; `White` deferred                                                           |
+| `MenuIcon`       | **Has counterpart** — `1814:1636` (drawn, not a set) | Added #41. Two bars, per the frame                                                                             |
+| `CloseIcon`      | **Has counterpart** — `close` glyph                  | Added #41 (ADR 0009)                                                                                           |
+| `Sheet`          | **Code-only** — shadcn                               | Added #41 for the 402 nav; the panel has no frame (ADR 0006)                                                   |
+| `Card`           | **Code-only**                                        | Canonical case-study cards are frames, not a component set                                                     |
+| `SectionShell`   | **Code-only**                                        | The three-surface organism; ADR 0008 — shadcn cannot model it                                                  |
+| `ArrowIcon`      | **Has counterpart** — `.building block Icon_text`    | Glyph becomes a component, not a string prop (ADR 0009)                                                        |
+| `ArrowLink`      | **Code-only**                                        | No Figma equivalent; the frames use `Button / Ghost` for this job — **candidate for retirement in #42**        |
+| `Eyebrow`        | **Code-only**                                        | A type style, not a component. ⚠️ still defaults to `tone="brand"`; canonical eyebrows are neutral `#636363`   |
+| `DisplayHeading` | **Code-only**                                        | A type style                                                                                                   |
+| `HalftoneDisc`   | **Drawn, not a component set**                       | Added #56 from `1925:5922` / `1925:6068`. Both export as the SAME dot pattern — a halftone, not four icons     |
+| `OrbitalDiagram` | **Drawn, not a component set**                       | Added #56 from `1928:6526`. **Not `OrbitalSphere`** — six straight dashed paths, no arc anywhere in it         |
+| `PortraitTile`   | **Code-only**                                        | Added #56. The frame's team card (`1925:5864`) bakes portrait + arc + black into one raster; rebuilt in layers |
+| `MaskedLines`    | **Code-only**                                        | Motion, which the static frames cannot express (#33)                                                           |
+| `Reveal`         | **Code-only**                                        | ”                                                                                                              |
+| `LogoTile`       | **Code-only**                                        | The partner logo wall is drawn as frames                                                                       |
+| `Stat`           | **Code-only**                                        | Case-study stats are drawn inline (`1883:3564`)                                                                |
 
 **Nothing is to-be-replaced.** `ArrowLink` is the one open question, and it
 belongs to the Home page layer (#42) rather than here.

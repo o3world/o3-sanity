@@ -45,6 +45,14 @@ Standard marks + closed inline-object set: **`figure`, `embed`, `pullQuote`**. A
 
 `heroSection`, `logoWallSection` (statement + client refs or manual logos; layout `grid | marquee`), `caseShowcaseSection` (caseStudy refs; projects narrativeHeadline + first stat), `railPanelsSection` (items {media, heading, body, note, cta} — serves both "platforms" and "how we work"), `quoteSection` (inline quote + attribution — no testimonial type), `perspectivesCarouselSection` (curated refs or latest-N by category), `ctaSection`.
 
+### Section tier — from the canonical Figma frames (#56)
+
+Surfaced by #46/#47 and built against the About (`1924:5344`) and Solutions (`1925:6138`) frames.
+
+- **`disciplineGridSection`** — `heading`, `layout` (`grid | orbital`), `disciplines[]` ({heading, body}). One block, not two: About draws the four disciplines as a 2×2 grid (`1925:5915`) and Solutions places the same four on a dotted tetrahedron (`1928:6524`). Slot position on the orbital layout derives from array order — apex first, then the base ring — and that layout takes exactly four.
+- **`personGridSection`** — eyebrow, heading, `people[]` → person. The band the 14 migrated `person` documents existed for (`1927:6435`). People are **referenced**, never inlined.
+- **`roleListSection`** — eyebrow, heading, `roles[]` ({heading, eyebrow, cta}). The Careers band (`1925:6061`), which the frame settles as a **section of About rather than its own route**. Roles are **inline objects, not a document type**: a `role` document would buy only a URL to link to, and nothing on the frame links to one — promote it when an /apply route, a cross-reference or an ATS feed needs an id.
+
 ### Section tier — generic
 
 - **`layoutSection`** — the one true two-tier block: 1–3 columns of base blocks.

@@ -210,6 +210,121 @@ export const ctaSection = defineSectionBlock({
   preview: { select: { title: 'heading' } },
 })
 
+export const disciplineGridSection = defineSectionBlock({
+  name: 'disciplineGridSection',
+  title: 'Discipline grid',
+  fields: [
+    defineField({ name: 'heading', type: 'string' }),
+    defineField({
+      name: 'layout',
+      type: 'string',
+      description:
+        'Grid is the About band — a 2×2 of halftone-disc rows. Orbital is the Solutions centrepiece: the same four disciplines placed on a dotted tetrahedron.',
+      // The same four disciplines appear twice in the canonical frames — as
+      // rows on About (`1925:5915`) and as the diagram on Solutions
+      // (`1928:6524`). Same content, two compositions, which is a `layout`
+      // axis rather than a second block (#56, surfaced by #46 and #47).
+      options: { list: ['grid', 'orbital'], layout: 'radio', direction: 'horizontal' },
+      initialValue: 'grid',
+    }),
+    defineField({
+      name: 'disciplines',
+      type: 'array',
+      description:
+        'Order is meaningful on the orbital layout: the first is the apex, the rest take the base ring left → right → front. Positions derive from order, never from the author.',
+      validation: (rule) =>
+        rule
+          .required()
+          .min(1)
+          .custom((disciplines, context) => {
+            const layout = (context.parent as { layout?: string } | undefined)?.layout
+            if (layout !== 'orbital') return true
+            // The diagram has exactly four nodes drawn into it (`1928:6526`);
+            // a fifth discipline has nowhere to stand.
+            return (disciplines as unknown[] | undefined)?.length === 4
+              ? true
+              : 'The orbital layout places exactly four disciplines.'
+          }),
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'discipline',
+          fields: [
+            defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
+            defineField({ name: 'body', type: 'text', rows: 3 }),
+          ],
+          preview: { select: { title: 'heading', subtitle: 'body' } },
+        }),
+      ],
+    }),
+  ],
+  preview: { select: { title: 'heading', subtitle: 'layout' } },
+})
+
+export const personGridSection = defineSectionBlock({
+  name: 'personGridSection',
+  title: 'Person grid',
+  fields: [
+    defineField({ name: 'eyebrow', type: 'string' }),
+    defineField({ name: 'heading', type: 'string' }),
+    defineField({
+      name: 'people',
+      type: 'array',
+      of: [defineArrayMember({ type: 'reference', to: [{ type: 'person' }] })],
+      description:
+        'Referenced, not inlined — a person is already a document (they author perspectives), so the About band points at the same record rather than re-typing it.',
+      validation: (rule) => rule.required().min(1),
+    }),
+  ],
+  preview: { select: { title: 'heading', subtitle: 'eyebrow' } },
+})
+
+export const roleListSection = defineSectionBlock({
+  name: 'roleListSection',
+  title: 'Role list',
+  fields: [
+    defineField({ name: 'eyebrow', type: 'string' }),
+    defineField({ name: 'heading', type: 'string' }),
+    defineField({
+      name: 'roles',
+      type: 'array',
+      validation: (rule) => rule.required().min(1),
+      /**
+       * ROLES ARE INLINE OBJECTS, NOT A DOCUMENT TYPE — decided here (#56).
+       *
+       * A `role` document would buy exactly one thing: a URL to link to. The
+       * Careers band (`1925:6061`) links out instead — every row's Apply
+       * button is a `cta`, and the frame draws no role detail page, no
+       * listing of roles anywhere else, and no cross-reference to one. A
+       * document type also costs a routable slug, a card projection and a
+       * Studio section per ADR 0001, for content that turns over every few
+       * months and is authored in one place.
+       *
+       * Promote it the day something needs to link to a role — an /apply
+       * route, a role referenced from a perspective, or an ATS feed with its
+       * own ids. Until then this is the cheaper half of a reversible choice.
+       */
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'role',
+          fields: [
+            defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
+            defineField({
+              name: 'eyebrow',
+              type: 'string',
+              description: 'The row’s small label — the frame reads "REMOTE · PHILADELPHIA".',
+            }),
+            defineField({ name: 'cta', type: 'cta', description: 'The row’s Apply button.' }),
+          ],
+          preview: { select: { title: 'heading', subtitle: 'eyebrow' } },
+        }),
+      ],
+    }),
+  ],
+  preview: { select: { title: 'heading', subtitle: 'eyebrow' } },
+})
+
 export const layoutSection = defineSectionBlock({
   name: 'layoutSection',
   title: 'Layout section',
@@ -292,6 +407,9 @@ export const sectionBlockMembers = [
   'quoteSection',
   'perspectivesCarouselSection',
   'ctaSection',
+  'disciplineGridSection',
+  'personGridSection',
+  'roleListSection',
   'layoutSection',
   'mediaSection',
   'listingSection',

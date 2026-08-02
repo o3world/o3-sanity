@@ -45,7 +45,6 @@ function readSeeds(): { file: string; doc: SeedDoc }[] {
 }
 
 const seeds = readSeeds()
-const ids = new Set(seeds.map(({ doc }) => doc._id))
 
 /**
  * Everything the loader will write — all three trees. `load.ts` publishes
@@ -75,6 +74,17 @@ function readAllPipelineDocs(): { file: string; doc: SeedDoc }[] {
 
 /** Read once — this walks the whole corpus, currently ~315 files. */
 const allPipelineDocs = readAllPipelineDocs()
+
+/**
+ * Every id the loader will write, across all three trees — the set a seed's
+ * references have to land in.
+ *
+ * Widened from seeds-only in #56: the About team band references the migrated
+ * `person` documents, which live in the CONVERTED tree. Checking only the seed
+ * tree would have called a perfectly good reference dangling, and the honest
+ * question is "will this resolve in the loaded dataset", which is all three.
+ */
+const pipelineIds = new Set(allPipelineDocs.map(({ doc }) => doc._id))
 
 /** Every `{_ref}` anywhere in a document, however deeply nested. */
 function refsIn(node: unknown, found: string[] = []): string[] {
@@ -131,7 +141,7 @@ describe('committed seed content', () => {
   it('resolves every reference to another committed document', () => {
     for (const { file, doc } of seeds) {
       for (const ref of refsIn(doc)) {
-        expect(ids, `${file} references ${ref}, which is not seeded`).toContain(ref)
+        expect(pipelineIds, `${file} references ${ref}, which is not committed`).toContain(ref)
       }
     }
   })

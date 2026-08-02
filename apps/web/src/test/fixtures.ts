@@ -257,6 +257,21 @@ function seedsOfType(type: string): Record<string, unknown>[] {
     .map((f) => readSeed(type, f.replace(/\.json$/, '')))
 }
 
+/** Every committed document of a type from the CONVERTED tree, markers resolved. */
+function convertedOfType(type: string): Record<string, unknown>[] {
+  const dir = join(CONVERTED_DIR, type)
+  if (!existsSync(dir)) return []
+  return readdirSync(dir)
+    .filter((f) => f.endsWith('.json'))
+    .map(
+      (f) =>
+        resolveWpSrcMarkers(JSON.parse(readFileSync(join(dir, f), 'utf8'))) as Record<
+          string,
+          unknown
+        >,
+    )
+}
+
 /**
  * A committed seed page (#20), shaped into what `PAGE_QUERY` returns.
  *
@@ -271,11 +286,15 @@ function seedsOfType(type: string): Record<string, unknown>[] {
  * check that survives a rebuild.
  */
 export function aSeededPage(name: string): Record<string, unknown> {
-  const byId = new Map(
-    ['client', 'industry', 'caseStudy'].flatMap((type) =>
+  const byId = new Map([
+    ...['client', 'industry', 'caseStudy'].flatMap((type) =>
       seedsOfType(type).map((doc) => [doc._id as string, doc] as const),
     ),
-  )
+    // The About team band (#56) references MIGRATED people, not seeded ones —
+    // that is the whole point of the block, so the resolver has to reach into
+    // the converted tree the same way the loaded dataset does.
+    ...convertedOfType('person').map((doc) => [doc._id as string, doc] as const),
+  ])
 
   const deref = (ref: unknown): Record<string, unknown> | null => {
     const id = (ref as { _ref?: string } | null)?._ref
@@ -307,6 +326,8 @@ export function aSeededPage(name: string): Record<string, unknown> {
           ...section,
           caseStudies: ((section.caseStudies ?? []) as unknown[]).map((r) => card(deref(r))),
         }
+      case 'personGridSection':
+        return { ...section, people: ((section.people ?? []) as unknown[]).map(deref) }
       case 'perspectivesCarouselSection':
         // An empty curated list is the seeded state; the renderer falls back
         // to the `latest` feed the query fetches alongside it.

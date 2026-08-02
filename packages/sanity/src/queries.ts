@@ -51,7 +51,8 @@ const CTA_TARGET = /* groq */ `"target": target->{_type, title, "slug": slug.cur
  * - cta targets are dereferenced everywhere a cta appears (incl. layoutSection
  *   column items);
  * - logo wall / case showcase / perspectives carousel expand their references
- *   into card projections;
+ *   into card projections, and personGridSection does the same for the
+ *   `person` documents the About team band points at;
  * - perspectivesCarouselSection also fetches a `latest` fallback feed so an
  *   empty curated list auto-fills (renderer picks `curated` when non-empty);
  * - listingSection resolves its page list at query time so the renderer stays
@@ -79,6 +80,12 @@ const SECTION_FIELDS = /* groq */ `
   },
   _type == "ctaSection" => {
     cta{..., ${CTA_TARGET}}
+  },
+  _type == "personGridSection" => {
+    "people": people[]->{_id, name, title, headshot}
+  },
+  _type == "roleListSection" => {
+    roles[]{..., cta{..., ${CTA_TARGET}}}
   },
   _type == "layoutSection" => {
     items[]{..., _type == "cta" => {${CTA_TARGET}}}

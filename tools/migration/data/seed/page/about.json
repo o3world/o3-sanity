@@ -78,147 +78,74 @@
       ]
     },
     {
-      "_type": "layoutSection",
+      "_type": "disciplineGridSection",
       "_key": "disciplines",
       "surface": "white",
-      "columns": 2,
+      "layout": "grid",
       "heading": "4 disciplines. One team.",
-      "items": [
+      "disciplines": [
         {
-          "_type": "richText",
+          "_type": "discipline",
           "_key": "d-strategy",
-          "body": [
-            {
-              "_type": "block",
-              "_key": "p0",
-              "style": "normal",
-              "markDefs": [],
-              "children": [
-                {
-                  "_type": "span",
-                  "_key": "p0s",
-                  "text": "Strategy",
-                  "marks": []
-                }
-              ]
-            },
-            {
-              "_type": "block",
-              "_key": "p1",
-              "style": "normal",
-              "markDefs": [],
-              "children": [
-                {
-                  "_type": "span",
-                  "_key": "p1s",
-                  "text": "Finds the real problem and the move worth making, before a line of code is written.",
-                  "marks": []
-                }
-              ]
-            }
-          ]
+          "heading": "Strategy",
+          "body": "Finds the real problem and the move worth making, before a line of code is written."
         },
         {
-          "_type": "richText",
+          "_type": "discipline",
           "_key": "d-design",
-          "body": [
-            {
-              "_type": "block",
-              "_key": "p0",
-              "style": "normal",
-              "markDefs": [],
-              "children": [
-                {
-                  "_type": "span",
-                  "_key": "p0s",
-                  "text": "Design",
-                  "marks": []
-                }
-              ]
-            },
-            {
-              "_type": "block",
-              "_key": "p1",
-              "style": "normal",
-              "markDefs": [],
-              "children": [
-                {
-                  "_type": "span",
-                  "_key": "p1s",
-                  "text": "Product-grade design that gives the move a form people actually want to use.",
-                  "marks": []
-                }
-              ]
-            }
-          ]
+          "heading": "Design",
+          "body": "Product-grade design that gives the move a form people actually want to use."
         },
         {
-          "_type": "richText",
+          "_type": "discipline",
           "_key": "d-engineering",
-          "body": [
-            {
-              "_type": "block",
-              "_key": "p0",
-              "style": "normal",
-              "markDefs": [],
-              "children": [
-                {
-                  "_type": "span",
-                  "_key": "p0s",
-                  "text": "Engineering",
-                  "marks": []
-                }
-              ]
-            },
-            {
-              "_type": "block",
-              "_key": "p1",
-              "style": "normal",
-              "markDefs": [],
-              "children": [
-                {
-                  "_type": "span",
-                  "_key": "p1s",
-                  "text": "Senior engineers who build it to last and to scale — the fix that ships, not a prototype to hand off.",
-                  "marks": []
-                }
-              ]
-            }
-          ]
+          "heading": "Engineering",
+          "body": "Senior engineers who build it to last and to scale — the fix that ships, not a prototype to hand off."
         },
         {
-          "_type": "richText",
+          "_type": "discipline",
           "_key": "d-ai",
-          "body": [
-            {
-              "_type": "block",
-              "_key": "p0",
-              "style": "normal",
-              "markDefs": [],
-              "children": [
-                {
-                  "_type": "span",
-                  "_key": "p0s",
-                  "text": "AI",
-                  "marks": []
-                }
-              ]
-            },
-            {
-              "_type": "block",
-              "_key": "p1",
-              "style": "normal",
-              "markDefs": [],
-              "children": [
-                {
-                  "_type": "span",
-                  "_key": "p1s",
-                  "text": "Applied where it compounds the work, not where it decorates it — our O3XO practice, embedded where it earns its keep.",
-                  "marks": []
-                }
-              ]
-            }
-          ]
+          "heading": "AI",
+          "body": "Applied where it compounds the work, not where it decorates it — our O3XO practice, embedded where it earns its keep."
+        }
+      ]
+    },
+    {
+      "_type": "personGridSection",
+      "_key": "team",
+      "surface": "white",
+      "eyebrow": "Our team",
+      "heading": "The people who find it and build it.",
+      "people": [
+        {
+          "_type": "reference",
+          "_key": "p-gadsby",
+          "_ref": "person-wp-18"
+        },
+        {
+          "_type": "reference",
+          "_key": "p-handler",
+          "_ref": "person-wp-3"
+        },
+        {
+          "_type": "reference",
+          "_key": "p-sheller",
+          "_ref": "person-wp-3984"
+        },
+        {
+          "_type": "reference",
+          "_key": "p-gaitonde",
+          "_ref": "person-wp-4706"
+        },
+        {
+          "_type": "reference",
+          "_key": "p-forbes",
+          "_ref": "person-wp-11"
+        },
+        {
+          "_type": "reference",
+          "_key": "p-navari",
+          "_ref": "person-wp-4"
         }
       ]
     },
@@ -364,39 +291,59 @@
       ]
     },
     {
-      "_type": "layoutSection",
+      "_type": "roleListSection",
       "_key": "careers",
       "surface": "white",
-      "columns": 1,
       "eyebrow": "Careers",
       "heading": "Work with us.",
-      "items": [
+      "roles": [
         {
-          "_type": "richText",
-          "_key": "careers-body",
-          "body": [
-            {
-              "_type": "block",
-              "_key": "p0",
-              "style": "normal",
-              "markDefs": [],
-              "children": [
-                {
-                  "_type": "span",
-                  "_key": "p0s",
-                  "text": "We hire senior and we hire slowly. Open roles are posted as they come up — and if none of them is you, tell us what is.",
-                  "marks": []
-                }
-              ]
-            }
-          ]
+          "_type": "role",
+          "_key": "role-strategist",
+          "eyebrow": "Remote · Philadelphia",
+          "heading": "Senior Product Strategist",
+          "cta": {
+            "_type": "cta",
+            "label": "Apply",
+            "href": "mailto:careers@o3world.com",
+            "variant": "dark"
+          }
         },
         {
-          "_type": "cta",
-          "_key": "careers-cta",
-          "label": "See open roles",
-          "href": "mailto:careers@o3world.com",
-          "variant": "dark"
+          "_type": "role",
+          "_key": "role-designer",
+          "eyebrow": "Remote · Philadelphia",
+          "heading": "Senior Product Designer",
+          "cta": {
+            "_type": "cta",
+            "label": "Apply",
+            "href": "mailto:careers@o3world.com",
+            "variant": "dark"
+          }
+        },
+        {
+          "_type": "role",
+          "_key": "role-engineer",
+          "eyebrow": "Remote · Philadelphia",
+          "heading": "Senior Full-Stack Engineer",
+          "cta": {
+            "_type": "cta",
+            "label": "Apply",
+            "href": "mailto:careers@o3world.com",
+            "variant": "dark"
+          }
+        },
+        {
+          "_type": "role",
+          "_key": "role-ai",
+          "eyebrow": "Remote · Philadelphia",
+          "heading": "AI Solutions Architect",
+          "cta": {
+            "_type": "cta",
+            "label": "Apply",
+            "href": "mailto:careers@o3world.com",
+            "variant": "dark"
+          }
         }
       ]
     },
@@ -420,7 +367,6 @@
     "sourceId": "seed:about",
     "extractedAt": "2026-08-01T00:00:00Z",
     "figmaNode": "1924:5344",
-    "provisional": true,
-    "provisionalNote": "Transcribed from the About frame (1924:5344). Three of its bands have no matching section block yet and are approximated with layoutSection: the 4-disciplines icon grid, the Our Team person grid (8 person documents are migrated and unused here), and the Careers role rows. Clearing this needs those blocks — see #46."
+    "provisional": false
   }
 }

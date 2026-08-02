@@ -20,147 +20,34 @@
       "decoration": "none"
     },
     {
-      "_type": "layoutSection",
+      "_type": "disciplineGridSection",
       "_key": "disciplines",
       "surface": "ink",
-      "columns": 2,
-      "heading": "Four disciplines, one engagement.",
-      "items": [
+      "layout": "orbital",
+      "disciplines": [
         {
-          "_type": "richText",
+          "_type": "discipline",
           "_key": "s-strategy",
-          "body": [
-            {
-              "_type": "block",
-              "_key": "p0",
-              "style": "normal",
-              "markDefs": [],
-              "children": [
-                {
-                  "_type": "span",
-                  "_key": "p0s",
-                  "text": "Strategy",
-                  "marks": []
-                }
-              ]
-            },
-            {
-              "_type": "block",
-              "_key": "p1",
-              "style": "normal",
-              "markDefs": [],
-              "children": [
-                {
-                  "_type": "span",
-                  "_key": "p1s",
-                  "text": "The root of every engagement. We find the real problem and the move worth making — before a line of code is written.",
-                  "marks": []
-                }
-              ]
-            }
-          ]
+          "heading": "Strategy",
+          "body": "The root of every engagement. We find the real problem and the move worth making — before a line of code is written."
         },
         {
-          "_type": "richText",
-          "_key": "s-design",
-          "body": [
-            {
-              "_type": "block",
-              "_key": "p0",
-              "style": "normal",
-              "markDefs": [],
-              "children": [
-                {
-                  "_type": "span",
-                  "_key": "p0s",
-                  "text": "Design",
-                  "marks": []
-                }
-              ]
-            },
-            {
-              "_type": "block",
-              "_key": "p1",
-              "style": "normal",
-              "markDefs": [],
-              "children": [
-                {
-                  "_type": "span",
-                  "_key": "p1s",
-                  "text": "Product-grade design that gives the move a form people actually want to use.",
-                  "marks": []
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "_type": "richText",
-          "_key": "s-engineering",
-          "body": [
-            {
-              "_type": "block",
-              "_key": "p0",
-              "style": "normal",
-              "markDefs": [],
-              "children": [
-                {
-                  "_type": "span",
-                  "_key": "p0s",
-                  "text": "Engineering",
-                  "marks": []
-                }
-              ]
-            },
-            {
-              "_type": "block",
-              "_key": "p1",
-              "style": "normal",
-              "markDefs": [],
-              "children": [
-                {
-                  "_type": "span",
-                  "_key": "p1s",
-                  "text": "Senior engineers who build it to last and to scale — the fix that ships, not a prototype to hand off.",
-                  "marks": []
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "_type": "richText",
+          "_type": "discipline",
           "_key": "s-ai",
-          "body": [
-            {
-              "_type": "block",
-              "_key": "p0",
-              "style": "normal",
-              "markDefs": [],
-              "children": [
-                {
-                  "_type": "span",
-                  "_key": "p0s",
-                  "text": "AI",
-                  "marks": []
-                }
-              ]
-            },
-            {
-              "_type": "block",
-              "_key": "p1",
-              "style": "normal",
-              "markDefs": [],
-              "children": [
-                {
-                  "_type": "span",
-                  "_key": "p1s",
-                  "text": "Applied where it compounds the work, not where it decorates it — our O3XO practice, embedded where it earns its keep.",
-                  "marks": []
-                }
-              ]
-            }
-          ]
+          "heading": "AI",
+          "body": "Applied where it compounds the work, not where it decorates it — our O3XO practice, embedded where it earns its keep."
+        },
+        {
+          "_type": "discipline",
+          "_key": "s-engineering",
+          "heading": "Engineering",
+          "body": "Senior engineers who build it to last and to scale — the fix that ships, not a prototype to hand off."
+        },
+        {
+          "_type": "discipline",
+          "_key": "s-design",
+          "heading": "Design",
+          "body": "Product-grade design that gives the move a form people actually want to use."
         }
       ]
     },
@@ -233,7 +120,6 @@
     "sourceId": "seed:solutions",
     "extractedAt": "2026-08-01T00:00:00Z",
     "figmaNode": "1925:6138",
-    "provisional": true,
-    "provisionalNote": "Transcribed from the Solutions frame (1925:6138). The frame's centrepiece is a 1120x1172 orbital diagram placing the four disciplines around a circle; there is no block for it, so it is approximated as a two-column layoutSection. The consolidation of the 24 WordPress service pages into this layer is still undecided — see #47."
+    "provisional": false
   }
 }

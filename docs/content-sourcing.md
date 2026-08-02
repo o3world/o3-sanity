@@ -19,20 +19,20 @@ canonical frames carry finished copy, and the frame it came from is recorded in
 
 ## Per route
 
-| Route                      | Frame                     | Source          | Documents                                                                                                                              | Ticket   |
-| -------------------------- | ------------------------- | --------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| `/`                        | `1680:2134` / `1814:1618` | seed-from-frame | `page-seed-index` — **reconciled against the frame** (#42): composition, section order and copy all now the frame's                    | #42 ✅   |
-| `/work`                    | `1634:1167` / `1906:851`  | migrate         | **Dedicated route**, not a document — lists `caseStudy`; composition is code                                                           | #43 ✅   |
-| `/work/{slug}`             | `1710:2300` / `1906:928`  | migrate         | 20 extracted; **1 translated** (`la-colombe`), 19 outstanding                                                                          | #44, #22 |
-| `/perspectives`            | **none**                  | provisional     | Composition has no frame; borrows the Work hero + Home blog card rather than inventing one                                             | #49      |
-| `/perspectives/{slug}`     | `1710:2823` / `1906:1046` | migrate         | 272 perspectives, 14 persons, 11 categories — **loaded**                                                                               | #45      |
-| `/about`                   | `1924:5344`               | seed-from-frame | `page-seed-about` — transcribed, **provisional**: three bands have no block yet (below). Careers is a section, not a route             | #46      |
-| `/solutions`               | `1925:6138`               | seed-from-frame | `page-seed-solutions` — transcribed, **provisional**: the disciplines diagram has no block, and the 24-page consolidation is undecided | #47      |
-| `/live` _(name TBD)_       | `1644:1889` / `1906:334`  | seed-from-frame | Net-new page layer; the URL is still undecided on #33                                                                                  | #50      |
-| `/accessibility-statement` | none                      | migrate ✅      | `page` — converted and loaded                                                                                                          | #18      |
-| `/privacy-policy`          | none                      | migrate ✅      | `page` — converted and loaded                                                                                                          | #18      |
-| Ventures (`/ventures/*`)   | **none**                  | provisional     | Ordinary standard pages per CONTEXT.md — deliberately not a type                                                                       | —        |
-| Site chrome                | `1710:2271` (NavBar)      | migrate + frame | `siteSettings` singleton; nav gains **Live**, and **Solutions** replaces "Services"                                                    | #41      |
+| Route                      | Frame                     | Source          | Documents                                                                                                                                                  | Ticket   |
+| -------------------------- | ------------------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| `/`                        | `1680:2134` / `1814:1618` | seed-from-frame | `page-seed-index` — **reconciled against the frame** (#42): composition, section order and copy all now the frame's                                        | #42 ✅   |
+| `/work`                    | `1634:1167` / `1906:851`  | migrate         | **Dedicated route**, not a document — lists `caseStudy`; composition is code                                                                               | #43 ✅   |
+| `/work/{slug}`             | `1710:2300` / `1906:928`  | migrate         | 20 extracted; **1 translated** (`la-colombe`), 19 outstanding                                                                                              | #44, #22 |
+| `/perspectives`            | **none**                  | provisional     | Composition has no frame; borrows the Work hero + Home blog card rather than inventing one                                                                 | #49      |
+| `/perspectives/{slug}`     | `1710:2823` / `1906:1046` | migrate         | 272 perspectives, 14 persons, 11 categories — **loaded**                                                                                                   | #45      |
+| `/about`                   | `1924:5344`               | seed-from-frame | `page-seed-about` — transcribed; the disciplines grid, team and Careers bands now render through their own blocks (#56). Careers is a section, not a route | #46 ✅   |
+| `/solutions`               | `1925:6138`               | seed-from-frame | `page-seed-solutions` — transcribed; the orbital diagram is `disciplineGridSection` `layout: orbital` (#56). The 24-page consolidation is still undecided  | #47      |
+| `/live` _(name TBD)_       | `1644:1889` / `1906:334`  | seed-from-frame | Net-new page layer; the URL is still undecided on #33                                                                                                      | #50      |
+| `/accessibility-statement` | none                      | migrate ✅      | `page` — converted and loaded                                                                                                                              | #18      |
+| `/privacy-policy`          | none                      | migrate ✅      | `page` — converted and loaded                                                                                                                              | #18      |
+| Ventures (`/ventures/*`)   | **none**                  | provisional     | Ordinary standard pages per CONTEXT.md — deliberately not a type                                                                                           | —        |
+| Site chrome                | `1710:2271` (NavBar)      | migrate + frame | `siteSettings` singleton; nav gains **Live**, and **Solutions** replaces "Services"                                                                        | #41      |
 
 ✅ = loaded and done.
 
@@ -45,13 +45,11 @@ verify` lists every one on each run.
 
 **No document may still be provisional at launch** — that is #48's gate.
 
-| Document                 | Why                                                                                                                                                                                                                                                     | Cleared by                                         |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| `caseStudy-seed-ironman` | Real case study exists but is not translated yet                                                                                                                                                                                                        | #22 translating it                                 |
-| `caseStudy-seed-aramark` | **No WordPress case study exists.** Real client, invented engagement write-up.                                                                                                                                                                          | A real case study, or replacing the card           |
-| `caseStudy-seed-chop`    | **No WordPress case study exists.** Real client, invented engagement write-up.                                                                                                                                                                          | A real case study, or replacing the card           |
-| `page-seed-about`        | Three of the frame's bands have no matching section block and are approximated with `layoutSection`: the 4-disciplines icon grid, the Our Team person grid, and the Careers role rows. The 8 migrated `person` documents are not yet rendered anywhere. | The blocks — #56                                   |
-| `page-seed-solutions`    | The frame's centrepiece is a 1120×1172 orbital diagram placing the four disciplines around a circle; there is no block for it, so it is approximated as a two-column `layoutSection`.                                                                   | The block — #56 — and #47's consolidation decision |
+| Document                 | Why                                                                            | Cleared by                               |
+| ------------------------ | ------------------------------------------------------------------------------ | ---------------------------------------- |
+| `caseStudy-seed-ironman` | Real case study exists but is not translated yet                               | #22 translating it                       |
+| `caseStudy-seed-aramark` | **No WordPress case study exists.** Real client, invented engagement write-up. | A real case study, or replacing the card |
+| `caseStudy-seed-chop`    | **No WordPress case study exists.** Real client, invented engagement write-up. | A real case study, or replacing the card |
 
 The homepage showcase is a canonical frame with three cards, which is why these
 are carried rather than deleted — see ADR 0007. Which real case studies replace
