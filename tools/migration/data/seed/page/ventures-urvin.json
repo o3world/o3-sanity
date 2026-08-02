@@ -1,0 +1,189 @@
+{
+  "_id": "page-seed-ventures-urvin",
+  "_type": "page",
+  "title": "Urvin",
+  "slug": {
+    "_type": "slug",
+    "current": "ventures/urvin"
+  },
+  "pageType": "standard",
+  "sections": [
+    {
+      "_type": "heroSection",
+      "_key": "hero",
+      "surface": "ink",
+      "variant": "band",
+      "eyebrow": "Ventures",
+      "headlineLines": [
+        "Transforming data into opportunity"
+      ],
+      "decoration": "orbs"
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "cover",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "cover-figure",
+        "alt": "Screenshot, Urvin website with logo on top.",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/11/Urvin-blue.jpg"
+        }
+      }
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "story",
+      "surface": "bone",
+      "layout": "rail",
+      "rail": "label",
+      "heading": "Making AI achievable",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "story-why",
+          "railLabel": "Why Urvin.ai?",
+          "body": "While we have regular conversations with clients about “what’s possible” with AI, most implementation strategies are purely experimental and lean on junior data scientists with limited budgets. Urvin’s solution-centric process combined with an existing suite of products and IP bridge the gap between data scientists and executives. By making AI more accessible and focused on business outcomes, they’ve helped us make it more achievable."
+        },
+        {
+          "_type": "panel",
+          "_key": "story-next",
+          "railLabel": "What’s next?",
+          "body": "The first of several Urvin products, Urvin.Discover can understand and extract context, meaning, sentiment and relationships in websites, documents, emails and more. As the product and underlying AI develop, we’re working closely with the Urvin team to create a user experience that drives exploration and discovery."
+        }
+      ]
+    },
+    {
+      "_type": "layoutSection",
+      "_key": "services",
+      "surface": "white",
+      "heading": "Services",
+      "columns": 1,
+      "items": [
+        {
+          "_type": "richText",
+          "_key": "services-body",
+          "body": [
+            {
+              "_type": "block",
+              "_key": "b0",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "b0s",
+                  "text": "Given Urvin’s combination of service and technology, we are able to fit in perfectly to support both. As an experienced agency, we provide strategic guidance to the business development process as well as UX and engineering services to build out their products. Our services include:",
+                  "marks": []
+                }
+              ]
+            },
+            {
+              "_type": "block",
+              "_key": "b1",
+              "style": "normal",
+              "listItem": "bullet",
+              "level": 1,
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "b1s",
+                  "text": "Agency advisement & strategy",
+                  "marks": []
+                }
+              ]
+            },
+            {
+              "_type": "block",
+              "_key": "b2",
+              "style": "normal",
+              "listItem": "bullet",
+              "level": 1,
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "b2s",
+                  "text": "Marketing & business development",
+                  "marks": []
+                }
+              ]
+            },
+            {
+              "_type": "block",
+              "_key": "b3",
+              "style": "normal",
+              "listItem": "bullet",
+              "level": 1,
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "b3s",
+                  "text": "Product management",
+                  "marks": []
+                }
+              ]
+            },
+            {
+              "_type": "block",
+              "_key": "b4",
+              "style": "normal",
+              "listItem": "bullet",
+              "level": 1,
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "b4s",
+                  "text": "UX / UI design",
+                  "marks": []
+                }
+              ]
+            },
+            {
+              "_type": "block",
+              "_key": "b5",
+              "style": "normal",
+              "listItem": "bullet",
+              "level": 1,
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "b5s",
+                  "text": "Software development",
+                  "marks": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "ctaSection",
+      "_key": "cta",
+      "surface": "ink",
+      "heading": "Investing in exceptional people, products + experiences",
+      "cta": {
+        "_type": "cta",
+        "label": "See the ventures program",
+        "href": "/ventures",
+        "variant": "light"
+      },
+      "decoration": "orbs"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:ventures-urvin",
+    "extractedAt": "2026-08-02T00:00:00Z",
+    "provisional": true,
+    "provisionalNote": "No canonical Figma frame exists for a venture detail page, so the composition is assembled from existing blocks rather than transcribed — hence no figmaNode. Every line of copy is carried from the WordPress `ventures` post (wpId 5903): two ACF text blocks become rail panels and the third, which carries a bulleted service list, becomes a richText band because a panel's `body` is a plain string with nowhere to put a list. Kickers are shouted by the old template's `type-kicker` class and normalized to sentence case. The band heading (\"Making AI achievable\") and the closing CTA are the only unsourced words. The copy also predates the current AI story — it is from 2022 and reads as though Urvin.Discover has not shipped — which a reviewer has to settle. Cleared by a commissioned frame and an owner confirming the engagement. Nothing links here yet, on either site: the WordPress /ventures page names the venture but points at a perspective or a case study instead, so this URL has always been reachable only from search."
+  }
+}

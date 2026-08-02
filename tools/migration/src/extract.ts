@@ -14,6 +14,7 @@ import { EXTRACT_DIR, writeJson } from './lib/paths'
 import { SOURCE, wpEval } from './lib/wp'
 import { MENUS_PHP, SITE_OPTIONS_PHP, type WpChrome } from './lib/chrome'
 import { YOAST_SITE_PHP, yoastPhp, type WpSeo, type WpSiteSeo } from './lib/yoast'
+import { REDIRECTS_PHP, type WpRedirectExport } from './lib/redirects'
 
 type WpPost = {
   wpId: number
@@ -46,6 +47,17 @@ type WpCaseStudy = {
   title: string
   headline: string
   dateGmt: string
+  featuredImage: { url: string; alt: string } | null
+  seo: WpSeo
+  fields: Record<string, unknown>
+}
+
+type WpVenture = {
+  wpId: number
+  slug: string
+  path: string
+  title: string
+  headline: string
   featuredImage: { url: string; alt: string } | null
   seo: WpSeo
   fields: Record<string, unknown>
@@ -273,6 +285,47 @@ echo json_encode($out);`,
   return team.length
 }
 
+/**
+ * The `ventures` CPT — REC Philly and Urvin (#23, found by #24).
+ *
+ * A fourth post type nobody had looked at. `ventures-sitemap.xml` lists two
+ * live URLs (`/ventures/rec-philly/`, `/ventures/urvin/`) that no extraction
+ * covered, because the extractor pulls `post_type => page` and these are not
+ * pages — the same shape of miss ADR 0013 records for `services`. They surfaced
+ * in #24's sitemap diff, which is exactly what that diff is for.
+ *
+ * Extracted verbatim like `work`: the ACF is the same nested flexible content,
+ * and what it becomes is a seeding decision made against `data/seed/page/`.
+ * A third venture (`fanup`) is a draft and is not extracted.
+ */
+function extractVentures() {
+  const ventures = wpEval<WpVenture[]>(
+    `$out = [];
+foreach (get_posts(["post_type" => "ventures", "post_status" => "publish", "numberposts" => -1]) as $p) {
+  $thumb = get_post_thumbnail_id($p->ID);
+  $f = get_fields($p->ID);
+  $out[] = [
+    "wpId" => $p->ID,
+    "slug" => $p->post_name,
+    "path" => str_replace(home_url(), "", get_permalink($p->ID)),
+    "title" => $p->post_title,
+    "headline" => is_array($f) && isset($f["headline"]) ? (string) $f["headline"] : "",
+    "featuredImage" => $thumb ? ["url" => wp_get_attachment_url($thumb), "alt" => (string) get_post_meta($thumb, "_wp_attachment_image_alt", true)] : null,
+    "seo" => ${yoastPhp('$p->ID')},
+    "fields" => $f,
+  ];
+}
+echo json_encode($out, JSON_PARTIAL_OUTPUT_ON_ERROR);`,
+  )
+  for (const venture of ventures) {
+    writeJson(join(EXTRACT_DIR, 'venture', `${venture.slug}.json`), {
+      _meta: { type: 'venture', source: SOURCE, extractedAt: new Date().toISOString() },
+      ...venture,
+    })
+  }
+  return ventures.length
+}
+
 function extractCategories() {
   const cats = wpEval<WpCategory[]>(
     `$out = [];
@@ -320,15 +373,45 @@ function extractChrome() {
   return Object.keys(chrome.menus).length
 }
 
-const site = extractSiteSeo()
-const nMenus = extractChrome()
-const nPosts = extractPosts()
-const nPages = extractPages()
-const nCases = extractCaseStudies()
-const nUsers = extractUsers()
-const nTeam = extractTeam()
-const nCats = extractCategories()
-console.log(
-  `done: ${nPosts} posts, ${nPages} pages, ${nCases} case studies, ${nUsers} users, ${nTeam} team, ` +
-    `${nCats} categories, ${nMenus} menus, site seo (${site.siteName}) → ${EXTRACT_DIR}`,
-)
+/**
+ * The redirect map (#24) — both plugins, raw. See `lib/redirects.ts` for why
+ * there are two and why the `url` column is the one that matters.
+ *
+ * Runnable on its own (`extract -- --redirects`) because it is the one
+ * extraction with no content in it: re-reading 290 redirect rows should not
+ * mean re-reading 272 post bodies.
+ */
+function extractRedirects() {
+  const map = wpEval<WpRedirectExport>(REDIRECTS_PHP)
+  writeJson(join(EXTRACT_DIR, 'site', 'redirects.json'), {
+    _meta: { type: 'redirects', source: SOURCE, extractedAt: new Date().toISOString() },
+    ...map,
+  })
+  return map
+}
+
+if (args.includes('--ventures')) {
+  console.log(`done: ${extractVentures()} ventures → ${EXTRACT_DIR}/venture`)
+} else if (args.includes('--redirects')) {
+  const map = extractRedirects()
+  console.log(
+    `done: ${map.redirection.length} Redirection rows + ${Object.keys(map.yoastPlain).length} ` +
+      `Yoast plain + ${Object.keys(map.yoastRegex).length} Yoast regex → ${EXTRACT_DIR}/site/redirects.json`,
+  )
+} else {
+  const site = extractSiteSeo()
+  const nMenus = extractChrome()
+  const nPosts = extractPosts()
+  const nPages = extractPages()
+  const nCases = extractCaseStudies()
+  const nUsers = extractUsers()
+  const nTeam = extractTeam()
+  const nCats = extractCategories()
+  const nVentures = extractVentures()
+  const redirects = extractRedirects()
+  console.log(
+    `done: ${nPosts} posts, ${nPages} pages, ${nCases} case studies, ${nVentures} ventures, ` +
+      `${nUsers} users, ${nTeam} team, ${nCats} categories, ${nMenus} menus, ` +
+      `${redirects.redirection.length} redirects, site seo (${site.siteName}) → ${EXTRACT_DIR}`,
+  )
+}

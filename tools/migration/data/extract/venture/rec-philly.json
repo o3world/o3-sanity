@@ -1,0 +1,98 @@
+{
+  "_meta": {
+    "type": "venture",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-02T14:41:02.619Z"
+  },
+  "wpId": 5902,
+  "slug": "rec-philly",
+  "path": "/ventures/rec-philly/",
+  "title": "REC Philly",
+  "headline": "Empowering creative entrepreneurs",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2022/11/REC-blue.jpg",
+    "alt": "REC space with logo."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "REC Philly | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/ventures/rec-philly/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "headline": "Empowering creative entrepreneurs",
+    "flexible_content": [
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Multiple Columns",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "",
+          "kicker_tag": "div",
+          "title": "Empowering creative entrepreneurs",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": true,
+          "description": "A “WeWork for artists”, REC Philly empowers creative entrepreneurs by providing space, equipment, community and expertise to support their growth. In order to expand from its humble, North Philly space into a 10,000 square foot creative complex, REC Philly required both a financial investor as well as a strategic development partner."
+        },
+        "introduction_link": "",
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<div class=\"type-kicker\">WHY REC?</div>\n<p>We have a soft spot for Philly people and passionate creators. With a successful track record and a clear, vibrant vision for their future, REC Philly’s leadership team is focused and driven. Their ability to articulate their mission combined with our ability to supercharge their business with digital strategy and support have made them a perfect Ventures partner.</p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<div class=\"type-kicker\">The Solution</div>\n<p>With its expanded space and evolution of its business, REC Philly required an overhaul of key procedures and technology. By mapping out their customer journey, we defined key criteria for choosing a technology solution that fit their go-to-market needs and is flexible enough to account for the customizations necessary to support their future vision.</p>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Multiple Columns",
+        "add_introduction": false,
+        "introduction": {
+          "": null,
+          "kicker": "Highlights",
+          "kicker_tag": false,
+          "title": "",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": null,
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<div class=\"type-kicker\">WHAT&#8217;S NEXT?</div>\n<p>While our MVP solution will be a big step forward for REC’s members, we’re hyper-focused on enabling the future of its organization by empowering new features and functionality that make it easier to book time in the space and connect with fellow artists. Our plan is to develop a tight user feedback loop that will account for member insight as each new feature comes online.</p>\n"
+              }
+            ]
+          },
+          {
+            "content": false
+          }
+        ]
+      }
+    ]
+  }
+}

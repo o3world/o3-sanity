@@ -1,0 +1,98 @@
+{
+  "_meta": {
+    "type": "venture",
+    "source": "o3-world.live",
+    "extractedAt": "2026-08-02T14:41:02.620Z"
+  },
+  "wpId": 5903,
+  "slug": "urvin",
+  "path": "/ventures/urvin/",
+  "title": "Urvin",
+  "headline": "Transforming data into opportunity",
+  "featuredImage": {
+    "url": "http://www.o3world.com/wp-content/uploads/2022/11/Urvin-blue.jpg",
+    "alt": "Screenshot, Urvin website with logo on top."
+  },
+  "seo": {
+    "titleOverride": "",
+    "titleRendered": "Urvin | O3",
+    "descriptionOverride": "",
+    "descriptionRendered": "",
+    "canonicalOverride": "",
+    "canonicalRendered": "https://www.o3world.com/ventures/urvin/",
+    "noIndex": false,
+    "noFollow": false,
+    "ogImage": null,
+    "twitterImageOverride": ""
+  },
+  "fields": {
+    "headline": "Transforming data into opportunity",
+    "flexible_content": [
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Multiple Columns",
+        "add_introduction": true,
+        "introduction": {
+          "": null,
+          "kicker": "",
+          "kicker_tag": "div",
+          "title": "Transforming data into opportunity",
+          "heading_level": "h2",
+          "heading_tag": "div",
+          "add_description": true,
+          "description": "Built from a team of experts in data science and artificial intelligence, Urvin combines an agency service model with a stack of mature AI products and IP to create solutions for organizations struggling to understand how AI fits into their businesses."
+        },
+        "introduction_link": "",
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<div class=\"type-kicker\">WHY URVIN.ai?</div>\n<p>While we have regular conversations with clients about “what’s possible” with AI, most implementation strategies are purely experimental and lean on junior data scientists with limited budgets. Urvin’s solution-centric process combined with an existing suite of products and IP bridge the gap between data scientists and executives. By making AI more accessible and focused on business outcomes, they’ve helped us make it more achievable.</p>\n"
+              }
+            ]
+          },
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<div class=\"type-kicker\">SERVICES</div>\n<p>Given Urvin’s combination of service and technology, we are able to fit in perfectly to support both. As an experienced agency, we provide strategic guidance to the business development process as well as UX and engineering services to build out their products. Our services include:</p>\n<ul>\n<li>Agency advisement &amp; strategy</li>\n<li>Marketing &amp; business development</li>\n<li>Product management</li>\n<li>UX / UI design</li>\n<li>Software development</li>\n</ul>\n"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "acf_fc_layout": "multiple_columns",
+        "acfe_flexible_toggle": "",
+        "acfe_flexible_layout_title": "Multiple Columns",
+        "add_introduction": false,
+        "introduction": {
+          "": null,
+          "kicker": "",
+          "kicker_tag": false,
+          "title": "",
+          "heading_level": "h2",
+          "heading_tag": false,
+          "add_description": false,
+          "description": ""
+        },
+        "introduction_link": null,
+        "column": [
+          {
+            "content": [
+              {
+                "acf_fc_layout": "text",
+                "text_editor": "<div class=\"type-kicker\">WHAT&#8217;S NEXT?</div>\n<p>The first of several Urvin products, Urvin.Discover can understand and extract context, meaning, sentiment and relationships in websites, documents, emails and more. As the product and underlying AI develop, we’re working closely with the Urvin team to create a user experience that drives exploration and discovery.</p>\n"
+              }
+            ]
+          },
+          {
+            "content": false
+          }
+        ]
+      }
+    ]
+  }
+}
