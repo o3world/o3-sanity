@@ -276,37 +276,74 @@ describe('committed seed content', () => {
     })
   })
 
-  describe('the homepage', () => {
-    const home = seeds.find(({ doc }) => doc._id === 'page-seed-index')?.doc
+  /**
+   * Composition rules for every seeded page — widened from the homepage in
+   * #48. They were written against `page-seed-index` because it was the only
+   * seeded page there was; the corpus is now eight pages, and a rule that
+   * only checks the first one is a rule the next page silently skips. Nothing
+   * here is homepage-specific, so nothing here should be homepage-only.
+   */
+  describe('every seeded page', () => {
+    const pages = seeds.filter(({ doc }) => doc._type === 'page')
+    const sectionsOf = (doc: SeedDoc) => (doc.sections ?? []) as Record<string, unknown>[]
 
-    it('exists at the slug the singleton route fetches', () => {
-      expect(home).toBeDefined()
-      expect((home?.slug as { current: string })?.current).toBe('index')
+    it('has pages to check', () => {
+      expect(pages.length).toBeGreaterThan(0)
     })
 
     it('composes only registered section blocks — no bespoke types', () => {
-      const sections = (home?.sections ?? []) as { _type: string }[]
-      expect(sections.length).toBeGreaterThan(0)
-      for (const s of sections) {
-        expect(SECTION_BLOCKS as readonly string[], `unregistered section "${s._type}"`).toContain(
-          s._type,
-        )
+      for (const { file, doc } of pages) {
+        const sections = sectionsOf(doc)
+        expect(sections.length, `${file} has no sections`).toBeGreaterThan(0)
+        for (const s of sections) {
+          expect(
+            SECTION_BLOCKS as readonly string[],
+            `${file}: unregistered section "${String(s._type)}"`,
+          ).toContain(s._type)
+        }
       }
     })
 
     it('gives every section a _key unique within the page', () => {
-      const keys = ((home?.sections ?? []) as { _key?: string }[]).map((s) => s._key)
-      expect(keys.every(Boolean)).toBe(true)
-      expect(new Set(keys).size).toBe(keys.length)
+      for (const { file, doc } of pages) {
+        const keys = sectionsOf(doc).map((s) => s._key)
+        expect(keys.every(Boolean), `${file} has a section with no _key`).toBe(true)
+        expect(new Set(keys).size, `${file} repeats a section _key`).toBe(keys.length)
+      }
     })
 
     // `surface` is injected by defineSectionBlock's initialValue, which only
     // runs in Studio — a loaded document has to carry it explicitly or every
     // section renders on the default surface.
     it('sets an explicit surface on every section', () => {
-      for (const s of (home?.sections ?? []) as { _type: string; surface?: string }[]) {
-        expect(['white', 'bone', 'ink'], `${s._type} has no surface`).toContain(s.surface)
+      for (const { file, doc } of pages) {
+        for (const s of sectionsOf(doc)) {
+          expect(['white', 'bone', 'ink'], `${file}: ${String(s._type)} has no surface`).toContain(
+            s.surface,
+          )
+        }
       }
+    })
+
+    // Routes match `slug.current` against the request path, so a stored
+    // leading or trailing slash produces a slug nothing can ever resolve.
+    it('stores a bare slug, with no leading or trailing slash', () => {
+      for (const { file, doc } of pages) {
+        const slug = (doc.slug as { current?: string } | undefined)?.current
+        expect(slug, `${file} has no slug`).toBeTruthy()
+        expect(slug, `${file} slug "${slug}" carries a slash at an end`).toMatch(
+          /^[a-z0-9][a-z0-9/-]*[a-z0-9]$/,
+        )
+      }
+    })
+  })
+
+  describe('the homepage', () => {
+    const home = seeds.find(({ doc }) => doc._id === 'page-seed-index')?.doc
+
+    it('exists at the slug the singleton route fetches', () => {
+      expect(home).toBeDefined()
+      expect((home?.slug as { current: string })?.current).toBe('index')
     })
 
     // Was the prototype's sequence until #42. The frame puts the pull quote
