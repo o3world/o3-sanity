@@ -178,7 +178,7 @@ function resolveMenu(chrome: WpChrome, slug: string, siteUrl: string): ResolvedI
   return out
 }
 
-function cta(item: ResolvedItem, key: string, variant?: 'brand' | 'inverse' | 'ghost') {
+function cta(item: ResolvedItem, key: string, variant?: 'dark' | 'light' | 'ghost') {
   return {
     _type: 'cta' as const,
     _key: key,
@@ -288,17 +288,16 @@ export function mapSiteSettings(
       label: copy.primaryCtaLabel,
       href: contact?.href ?? '/contact',
       // `Button / Solid` on the pill is WHITE with an ink label (`1710:2250`),
-      // not brand red — no red button appears on any canonical frame. That is
-      // the existing `inverse` variant; realigning the variant vocabulary
-      // itself to Figma's Size/fill axes is #42's job, not this ticket's.
-      variant: 'inverse' as const,
+      // not brand red — no red button appears on any canonical frame. #42
+      // renamed the enum to say so: `inverse` became `light`.
+      variant: 'light' as const,
     },
     footerTagline: copy.footerTagline,
     footerGroups: groups.map((group, g) => ({
       _type: 'footerGroup' as const,
       _key: `group-${g}`,
       label: group.label,
-      links: group.links.map((item, i) => cta(item, `g${g}-${i}`, 'inverse')),
+      links: group.links.map((item, i) => cta(item, `g${g}-${i}`, 'light')),
     })),
     socialsLabel: copy.socialsLabel,
     socialLinks: socialLinks.map((s, i) => ({
@@ -307,7 +306,7 @@ export function mapSiteSettings(
       label: s.label,
       url: s.url,
     })),
-    legalLinks: legalLinks.map((item, i) => cta(item, `legal-${i}`, 'inverse')),
+    legalLinks: legalLinks.map((item, i) => cta(item, `legal-${i}`, 'light')),
     legalName: copy.legalName,
     copyrightNote: copy.copyrightNote,
     // Yoast's site-wide defaults, the bottom tier of the render-time SEO
