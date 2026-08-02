@@ -112,6 +112,36 @@ export type IndexRendererProps<Q extends string> = NonNullable<QueryResult<Q>> &
 }
 
 /**
+ * The coverage-gap marker for a route whose **composition** has no canonical
+ * frame — the #40 / ADR 0007 mechanism, moved off the document.
+ *
+ * ADR 0007 put `provisional` + `provisionalNote` on the `migration` object,
+ * and `verify` lists every document carrying it. A **collection index has no
+ * backing document** (CONTEXT.md: "it has no backing document — the entry is a
+ * query plus static SEO"), so `/perspectives` — the largest coverage gap on
+ * map #33 — had nothing to hang the marker on. The route entry is the thing
+ * that exists, so the marker goes here, under the same two field names and the
+ * same rule: **the note is required whenever the flag is set**, because "no
+ * frame was ever drawn" and "waiting on #22" call for opposite actions.
+ *
+ * Full reasoning: ADR 0012.
+ *
+ * Enforcement is `provisionalRoutes.render.test.tsx` rather than `verify`: `verify`
+ * runs inside `@o3/migration`, which does not depend on `@o3/web` and reads
+ * the dataset and the committed JSON — neither of which a route composition
+ * appears in. The human-facing inventory both halves feed is
+ * `docs/content-sourcing.md`.
+ */
+export interface RouteProvenance {
+  /** True when this route's composition is a placeholder, not authoritative. */
+  readonly provisional?: boolean
+  /** What is missing, and what would clear it. Required with `provisional`. */
+  readonly provisionalNote?: string
+  /** The canonical frame the composition was transcribed from, e.g. `1634:1167`. */
+  readonly figmaNode?: string
+}
+
+/**
  * A paginated collection index (`?page=N`). Unlike vtx-web,
  * o3 collection indexes have no backing document — the entry's `query` is a
  * combined `{ "items": ...[$offset...$end], "total": count(...) }` projection
@@ -131,6 +161,12 @@ export interface IndexEntry<Q extends string = string> {
    * and social tags rather than a bare title (#26).
    */
   readonly seo?: DocumentSeo
+  /**
+   * Where this route's composition came from, and whether it is authoritative.
+   * A collection index has no document, so this is the only place the #40
+   * marker can live — see `RouteProvenance`.
+   */
+  readonly migration?: RouteProvenance
 }
 
 /**

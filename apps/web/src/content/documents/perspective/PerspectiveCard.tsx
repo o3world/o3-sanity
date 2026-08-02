@@ -25,6 +25,13 @@ export type PerspectiveCardData = NonNullable<
  *     title 24px regular, #232323
  * ```
  *
+ * **The title is 20px at 402** (`1814:1873` / `1814:1887`) against 24 at 1440
+ * (`1683:2491`) — both read, so the clamp is solved across the two frame
+ * endpoints the way the type tokens are (ADR 0006). It stays a call-site
+ * literal rather than a token: the ramp has no 20→24 step, and this is the one
+ * component that wants one. Found while building `/perspectives` (#49), which
+ * renders this card three-up.
+ *
  * There is **no excerpt and no category kicker** on this card: the frame gives
  * it a meta line and a title, and nothing else. The scaffold's version carried
  * a red category kicker, a three-line excerpt and an author/date footer, which
@@ -66,7 +73,7 @@ export function PerspectiveCard({
 
       <div className="flex flex-col gap-1.5">
         {meta ? <p className="text-meta text-fg-muted uppercase">{meta}</p> : null}
-        <h3 className="text-fg duration-(--duration-hover) text-[24px] leading-[1.2] transition-opacity ease-out group-hover:opacity-70">
+        <h3 className="text-fg duration-(--duration-hover) text-[clamp(20px,calc(0.385vw+18.45px),24px)] leading-[1.2] transition-opacity ease-out group-hover:opacity-70">
           {title}
         </h3>
       </div>
