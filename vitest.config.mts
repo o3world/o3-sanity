@@ -39,6 +39,14 @@ export default defineConfig({
             'apps/web/src/**/*.test.ts',
             'packages/*/src/**/*.test.ts',
           ],
+          // Studio v6.8 added a top-level `import "@sanity-labs/ui-poc/styles.css"`
+          // to the `sanity` barrel. The migration mappers reach that barrel for
+          // `defineField`/`defineType` via `@o3/sanity/schemas`, and an
+          // externalised dep is loaded by Node itself — which has no idea what a
+          // `.css` file is and throws `Unknown file extension ".css"` before a
+          // single test collects. Inlining routes the barrel through Vite, whose
+          // CSS handling is a no-op here (`test.css` defaults to false).
+          server: { deps: { inline: ['sanity'] } },
         },
       },
       {

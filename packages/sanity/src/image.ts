@@ -1,4 +1,6 @@
-import createImageUrlBuilder from '@sanity/image-url'
+// The default export is deprecated in @sanity/image-url 2.x and warns once per
+// worker during `next build`; the named export is the same function.
+import { createImageUrlBuilder } from '@sanity/image-url'
 import { clientConfig } from './client'
 
 export type SanityImageSource = Parameters<ReturnType<typeof createImageUrlBuilder>['image']>[0]
