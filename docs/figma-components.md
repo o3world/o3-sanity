@@ -168,6 +168,14 @@ Honest limits on the above:
     instances are **links**, not carousel controls, so `InFlightSection` inlines
     the circle rather than reaching for `CarouselControl` (a `<button>` with
     prev/next semantics). If a third use appears, lift the circle out of both.
+    The same wait governs the wider **ledger row** (`InFlightSection.EntryRow`
+    and `RoleListSection`'s row share the hairline shell and disc/eyebrow/
+    heading arrangement, but diverge in lead, control, and responsive
+    composition — a shared module's interface would be as wide as the two
+    implementations) and the **snap track** (`InFlightSection`'s cards row
+    repeats `CarouselTrack`'s class recipe; `responsive.ts` already guards the
+    402 failure mode generically). Both are two-site duplications left standing
+    on the rule of three.
 - **The glyph list is incomplete** — `arrow_forward` and `close` are confirmed.
   ADR 0009 makes that safe: glyphs are added per ticket, so nothing is blocked
   on a full list.
