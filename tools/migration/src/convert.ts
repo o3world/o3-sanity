@@ -129,7 +129,12 @@ for (const post of readDir<WpPerspective>('perspective')) {
   note(post.slug, result)
   // Most perspectives carry no byline (see `mapPerspective`), so this set is
   // built from the ones that do — which is what shrinks the person corpus.
-  if (result.doc.author) referencedPeople.add(result.doc.author._ref)
+  // The full `refsIn` sweep, not just `.author`: today a converted document
+  // holds a person only there, but a future mapper that references one from
+  // any other field would otherwise emit a dangling reference.
+  for (const ref of refsIn(result.doc)) {
+    if (ref.startsWith('person-')) referencedPeople.add(ref)
+  }
 }
 
 // Hand-written documents point at people too — the About page's team grid
