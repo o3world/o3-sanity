@@ -35,4 +35,9 @@ export const caseStudyIndex = defineIndexType({
     // Paginated pages canonicalize to the unpaginated index.
     path: COLLECTION_PREFIXES.caseStudy,
   },
+  // The Work frame — hero `1634:1181`, grid `1634:1186`, mobile `1906:851`.
+  // Recorded here so the two collection indexes state their provenance the
+  // same way, and so "/perspectives is provisional" reads as a difference
+  // between them rather than as the norm (#49).
+  migration: { figmaNode: '1634:1167' },
 })

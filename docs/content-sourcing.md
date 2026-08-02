@@ -24,7 +24,7 @@ canonical frames carry finished copy, and the frame it came from is recorded in
 | `/`                              | `1680:2134` / `1814:1618` | seed-from-frame       | `page-seed-index` — **reconciled against the frame** (#42): composition, section order and copy all now the frame's                                                                                                    | #42 ✅   |
 | `/work`                          | `1634:1167` / `1906:851`  | migrate               | **Dedicated route**, not a document — lists `caseStudy`; composition is code                                                                                                                                           | #43 ✅   |
 | `/work/{slug}`                   | `1710:2300` / `1906:928`  | migrate               | 20 extracted; **1 translated** (`la-colombe`), 19 outstanding                                                                                                                                                          | #44, #22 |
-| `/perspectives`                  | **none**                  | provisional           | Composition has no frame; borrows the Work hero + Home blog card rather than inventing one                                                                                                                             | #49      |
+| `/perspectives`                  | **none**                  | provisional ⚠️        | Composition has no frame; borrows the Work hero + Home blog card rather than inventing one. **No document to mark**, so the marker is on the route entry — see below                                                   | #49      |
 | `/perspectives/{slug}`           | `1710:2823` / `1906:1046` | migrate               | 272 perspectives, 14 persons, 11 categories — **loaded**                                                                                                                                                               | #45      |
 | `/about`                         | `1924:5344`               | seed-from-frame       | `page-seed-about` — transcribed; the disciplines grid, team and Careers bands render through their own blocks (#56), and the frame's band imagery is committed under `seed/assets/`. Careers is a section, not a route | #46 ✅   |
 | `/solutions`                     | `1925:6138`               | seed-from-frame       | `page-seed-solutions` — transcribed; the orbital diagram is `disciplineGridSection` `layout: orbital` (#56). The 24-page consolidation is still undecided                                                              | #47      |
@@ -58,6 +58,28 @@ verify` lists every one on each run.
 
 The homepage showcase is a canonical frame with three cards, which is why these
 are carried rather than deleted — see ADR 0007.
+
+### Provisional routes — the half `verify` cannot see
+
+Reasoning: [ADR 0012](./adr/0012-provisional-routes.md).
+
+A **collection index has no backing document** (CONTEXT.md), so `migration.provisional`
+has nothing to sit on and `verify` — which reads the dataset and the committed
+JSON — has nothing to list. The marker therefore lives on the **route entry**,
+under the same two field names, with the same rule that the note is required:
+
+| Route           | Entry                                                            | Why                                                                                                                                                                                                               | Cleared by                                                                                             |
+| --------------- | ---------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `/perspectives` | `apps/web/src/content/documents/perspective/collectionIndex.tsx` | No canonical frame draws the index (#49). Hero, card and bone band are borrowed from `1634:1181`, `1683:2467`, `1924:5388`; the hero standfirst, the stacked-row gap above 402, and the whole pager are unsourced | A commissioned index frame — which would also settle the category filter this build declines to invent |
+
+Enforcement is `apps/web/src/content/documents/provisionalRoutes.render.test.tsx`,
+which applies `seed.test.ts`'s three rules to route entries. `/work` sits in the
+same list carrying `figmaNode: '1634:1167'` and no `provisional`, so the
+difference between the two collection indexes is a value rather than an
+absence.
+
+**#48's gate covers both halves.** No document and no route may still be
+provisional at launch.
 
 Live is provisional for a different reason from the three case studies. Its copy
 is a faithful transcription of a canonical frame, which is normally enough (About
