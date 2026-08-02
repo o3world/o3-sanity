@@ -1262,5 +1262,17 @@
   "file:tools/migration/data/seed/assets/live-healthcare.png": {
     "sha256": "85ba255c87bec966be8ed24f96bdbba6ee661cf5",
     "assetId": "image-85ba255c87bec966be8ed24f96bdbba6ee661cf5-791x544-png"
+  },
+  "file:tools/migration/data/seed/assets/perspective-weekend-hero.png": {
+    "sha256": "ba20cf04e0a44647998ebc1d80fe3cfb30fa494a",
+    "assetId": "image-ba20cf04e0a44647998ebc1d80fe3cfb30fa494a-1584x672-png"
+  },
+  "file:tools/migration/data/seed/assets/perspective-weekend-worktrees.png": {
+    "sha256": "cb5ce404ee2c573b98037e359bd1fec0e8fc9fb3",
+    "assetId": "image-cb5ce404ee2c573b98037e359bd1fec0e8fc9fb3-1584x672-png"
+  },
+  "file:tools/migration/data/seed/assets/perspective-weekend-maps.png": {
+    "sha256": "789c29e1472ea6c3a88676bf7fef7b4a767968fe",
+    "assetId": "image-789c29e1472ea6c3a88676bf7fef7b4a767968fe-1376x768-png"
   }
 }

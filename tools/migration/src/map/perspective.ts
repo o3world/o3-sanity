@@ -35,7 +35,11 @@ export interface WpPerspective {
 }
 
 export const perspectiveDoc = z.object({
-  _id: z.string().regex(/^perspective-wp-\d+$/),
+  /* Both deterministic id forms (README → Rules of the road): `-wp-<id>` for a
+   * migrated post, `-seed-<slug>` for one written here. `verify` re-runs this
+   * gate over the whole dataset, so a seeded perspective has to satisfy the
+   * same shape a converted one does — which is the point, not a loophole. */
+  _id: z.string().regex(/^perspective-(wp-\d+|seed-[a-z0-9-]+)$/),
   _type: z.literal('perspective'),
   title: z.string().min(1),
   slug: z.object({ _type: z.literal('slug'), current: z.string().min(1) }),
