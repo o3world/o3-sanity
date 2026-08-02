@@ -39,7 +39,7 @@
     "_type": "cta",
     "label": "Let’s talk",
     "href": "/contact",
-    "variant": "inverse"
+    "variant": "light"
   },
   "footerTagline": "Strategy, design, engineering, and AI under one roof.",
   "footerGroups": [
@@ -53,35 +53,35 @@
           "_key": "g0-0",
           "label": "Work",
           "href": "/work",
-          "variant": "inverse"
+          "variant": "light"
         },
         {
           "_type": "cta",
           "_key": "g0-1",
           "label": "About",
           "href": "/about",
-          "variant": "inverse"
+          "variant": "light"
         },
         {
           "_type": "cta",
           "_key": "g0-2",
           "label": "Solutions",
           "href": "/solutions",
-          "variant": "inverse"
+          "variant": "light"
         },
         {
           "_type": "cta",
           "_key": "g0-3",
           "label": "Careers",
           "href": "/about#careers",
-          "variant": "inverse"
+          "variant": "light"
         },
         {
           "_type": "cta",
           "_key": "g0-4",
           "label": "Blog",
           "href": "/perspectives",
-          "variant": "inverse"
+          "variant": "light"
         }
       ]
     },
@@ -95,14 +95,14 @@
           "_key": "g1-0",
           "label": "1682 conference",
           "href": "/1682-conference-ai-innovation",
-          "variant": "inverse"
+          "variant": "light"
         },
         {
           "_type": "cta",
           "_key": "g1-1",
           "label": "O3XO",
           "href": "https://www.o3xo.ai/",
-          "variant": "inverse"
+          "variant": "light"
         }
       ]
     }
@@ -128,14 +128,14 @@
       "_key": "legal-0",
       "label": "Privacy policy",
       "href": "/privacy-policy",
-      "variant": "inverse"
+      "variant": "light"
     },
     {
       "_type": "cta",
       "_key": "legal-1",
       "label": "Accessibility statement",
       "href": "/accessibility-statement",
-      "variant": "inverse"
+      "variant": "light"
     }
   ],
   "legalName": "O3 World, LLC",

@@ -40,7 +40,10 @@ export function SiteNav({ settings }: SiteNavProps) {
     <header className="lg:px-gutter fixed inset-x-0 top-0 z-50 lg:top-[30px]">
       <nav
         aria-label="Primary"
-        className="bg-scrim flex items-center justify-between px-5 py-2 lg:mx-auto lg:w-full lg:max-w-[822px] lg:rounded-full lg:px-8"
+        // The 1440 pill carries a hairline at `--color-on-ink-line`; without
+        // it the `bg-scrim` fill is invisible over a dark hero and the pill
+        // stops reading as a pill at all.
+        className="bg-scrim lg:border-on-ink-line flex items-center justify-between px-5 py-2 lg:mx-auto lg:w-full lg:max-w-[822px] lg:rounded-full lg:border lg:px-8"
       >
         <Link
           href="/"
@@ -67,12 +70,12 @@ export function SiteNav({ settings }: SiteNavProps) {
               </li>
             ))}
           </ul>
-          {cta ? <CtaLink cta={cta} arrow /> : null}
+          {cta ? <CtaLink cta={cta} arrow variant="light" /> : null}
         </div>
 
         {/* 402: CTA + hamburger, 32px apart (`1814:1632`). */}
         <div className="flex items-center gap-8 lg:hidden">
-          {cta ? <CtaLink cta={cta} arrow /> : null}
+          {cta ? <CtaLink cta={cta} arrow variant="light" /> : null}
           <MobileNavMenu items={navItems} cta={cta} />
         </div>
       </nav>

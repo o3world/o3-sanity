@@ -18,8 +18,17 @@ export interface CtaLinkData {
   target?: { _type: string; title?: string | null; slug?: string | null } | null
 }
 
-const VARIANTS = ['brand', 'inverse', 'ghost'] as const
+const VARIANTS = ['dark', 'light', 'ghost'] as const
 type CtaVariant = (typeof VARIANTS)[number]
+
+/**
+ * The pre-#42 enum, mapped rather than dropped. `load` replaces every
+ * pipeline-owned document, but a dataset that has not been rebuilt since the
+ * rename still carries the old strings — and a locked document keeps them
+ * forever. `brand` becomes `dark` because the canonical frames have no red
+ * button (docs/figma-components.md); `inverse` was already the white fill.
+ */
+const LEGACY_VARIANTS: Record<string, CtaVariant> = { brand: 'dark', inverse: 'light' }
 
 export function resolveCtaHref(cta: CtaLinkData): string {
   const href = cta.target ? hrefForDoc(cta.target) : (cta.href ?? '/')
@@ -27,8 +36,9 @@ export function resolveCtaHref(cta: CtaLinkData): string {
 }
 
 function resolveVariant(value: string | null | undefined): CtaVariant {
-  const clean = stegaClean(value)
-  return VARIANTS.includes(clean as CtaVariant) ? (clean as CtaVariant) : 'brand'
+  const clean = stegaClean(value) ?? ''
+  if (VARIANTS.includes(clean as CtaVariant)) return clean as CtaVariant
+  return LEGACY_VARIANTS[clean] ?? 'dark'
 }
 
 /**
@@ -43,14 +53,27 @@ function resolveVariant(value: string | null | undefined): CtaVariant {
 export function CtaLink({
   cta,
   arrow = false,
+  size,
+  variant,
+  className,
 }: {
   cta: CtaLinkData | null | undefined
   arrow?: boolean
+  /** Figma's `Size` axis. Base is the frames' default; section headers use Large. */
+  size?: 'base' | 'large'
+  /**
+   * Force the fill, ignoring the editor's choice. For **chrome and section
+   * shells that own their own background**: the nav pill is always a dark
+   * scrim, so a `dark` button on it is unreadable no matter what a Site
+   * Settings editor picks. Content bands leave this alone.
+   */
+  variant?: CtaVariant
+  className?: string
 }) {
   if (!cta?.label) return null
   return (
-    <Link href={resolveCtaHref(cta)}>
-      <Button variant={resolveVariant(cta.variant)} arrow={arrow}>
+    <Link href={resolveCtaHref(cta)} className={className}>
+      <Button variant={variant ?? resolveVariant(cta.variant)} size={size} arrow={arrow}>
         {cta.label}
       </Button>
     </Link>

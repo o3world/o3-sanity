@@ -1,38 +1,51 @@
-import { ArrowLink, DisplayHeading, SectionShell } from '@o3/ui'
-
-import { resolveCtaHref } from '@/content/CtaLink'
+import { CtaLink } from '@/content/CtaLink'
 import { getCard } from '@/content/documents/card-registry'
-import { resolveSurface } from '@/content/blocks/surface'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
 
 type CaseShowcaseSectionProps = SectionProps<'caseShowcaseSection'>
 
 /**
- * Section block: the "Our Work" showcase. Each referenced case study renders
- * through the caseStudy card (narrative headline + headline stat), stacked
- * vertically — the prototype's sticky-stack scroll effect is post-scaffold
- * motion work.
+ * Section block: the case-study showcase, built to the Home frame's "Case
+ * Studies" band (`1683:2656`) — #42.
+ *
+ * Two stacked bands, each with **its own gradient**, which is why this builds
+ * its own `<section>` rather than using `SectionShell`:
+ *
+ * | Band                   | Frame       | Fill                             |
+ * | ---------------------- | ----------- | -------------------------------- |
+ * | Heading, `96px 96px 0` | `1683:2657` | `--gradient-surface-wash`        |
+ * | Cards, `96px`, gap 48  | `1683:2661` | `--gradient-surface-wash-angled` |
+ *
+ * The heading row is `space-between` aligned to **flex-end**, so the 48px
+ * headline in its 571px measure and the Size=Large button share a baseline.
+ *
+ * The block's `surface` field is deliberately unused: the frame paints this
+ * band with the two washes, and a flat fill behind them would show through
+ * both. A dark treatment, if a page ever wants one, is a second `variant` —
+ * not a surface.
  */
-export function CaseShowcaseSection({
-  heading,
-  cta,
-  caseStudies,
-  surface,
-}: CaseShowcaseSectionProps) {
+export function CaseShowcaseSection({ heading, cta, caseStudies }: CaseShowcaseSectionProps) {
   const Card = getCard('caseStudy')
+  const items = caseStudies ?? []
+
   return (
-    <SectionShell surface={resolveSurface(surface, 'ink')}>
-      <div className="flex flex-col gap-12 py-24">
-        <div className="flex items-end justify-between gap-6">
-          {heading ? <DisplayHeading>{heading}</DisplayHeading> : null}
-          {cta?.label ? <ArrowLink href={resolveCtaHref(cta)}>{cta.label}</ArrowLink> : null}
+    <section className="text-fg">
+      <div className="bg-(image:--gradient-surface-wash) px-gutter pt-band-sm">
+        <div className="max-w-section mx-auto flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
+          {heading ? (
+            <h2 className="text-display-xl font-display max-w-[571px] text-balance">{heading}</h2>
+          ) : null}
+          {cta ? <CtaLink cta={cta} arrow size="large" /> : null}
         </div>
-        <div className="flex flex-col gap-10">
-          {(caseStudies ?? []).map((caseStudy) => (
+      </div>
+
+      <div className="bg-(image:--gradient-surface-wash-angled) px-gutter py-band-sm">
+        <div className="max-w-section mx-auto flex flex-col gap-12">
+          {items.map((caseStudy) => (
             <Card key={caseStudy._id} {...caseStudy} />
           ))}
         </div>
       </div>
-    </SectionShell>
+    </section>
   )
 }

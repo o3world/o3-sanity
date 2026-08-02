@@ -6,6 +6,23 @@ export function formatMonthYear(iso: string | null | undefined): string | null {
   return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
 }
 
+/**
+ * "7/27/26" — the perspectives-card meta row (`1683:2490`). Numeric and
+ * two-digit year, exactly as the frame writes it; `en-US` because that is the
+ * order the frame reads in (month first).
+ */
+export function formatNumericDate(iso: string | null | undefined): string | null {
+  if (!iso) return null
+  const date = new Date(iso)
+  if (Number.isNaN(date.getTime())) return null
+  return date.toLocaleDateString('en-US', {
+    month: 'numeric',
+    day: 'numeric',
+    year: '2-digit',
+    timeZone: 'UTC',
+  })
+}
+
 /** "June 12, 2026" — article headers. */
 export function formatLongDate(iso: string | null | undefined): string | null {
   if (!iso) return null

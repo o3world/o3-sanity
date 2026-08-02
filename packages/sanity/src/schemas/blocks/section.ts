@@ -8,11 +8,29 @@ export const heroSection = defineSectionBlock({
   defaultSurface: 'ink',
   fields: [
     defineField({
+      name: 'variant',
+      type: 'string',
+      description:
+        'Orbital is the Home opener — the full sphere band with the bone dome. Band is the interior-page hero: a shallow ink-warm strip with an eyebrow.',
+      // Home (1810:1616) against Work (1634:1181) / About (1924:5344) /
+      // Solutions (1925:6141). Same block, two compositions — added in #42
+      // as a field on the existing block rather than a second block type.
+      options: { list: ['orbital', 'band'], layout: 'radio', direction: 'horizontal' },
+      initialValue: 'orbital',
+    }),
+    defineField({
+      name: 'eyebrow',
+      type: 'string',
+      description: 'Band variant only — the uppercase kicker ("WORK", "ABOUT O3").',
+      hidden: ({ parent }) => parent?.variant !== 'band',
+    }),
+    defineField({
       name: 'headlineLines',
       title: 'Headline lines',
       type: 'array',
       of: [{ type: 'string' }],
-      description: 'Each line animates in separately; the last line renders muted.',
+      description:
+        'Each line animates in separately; on the orbital variant the last line renders set back. The band variant joins them into one headline.',
       validation: (rule) => rule.required().min(1).max(3),
     }),
     defineField({ name: 'subheading', type: 'text', rows: 2 }),
@@ -81,6 +99,18 @@ export const railPanelsSection = defineSectionBlock({
   fields: [
     defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
     defineField({ name: 'intro', type: 'text', rows: 3 }),
+    defineField({
+      name: 'rail',
+      type: 'string',
+      description:
+        'What the rail counts off: each panel’s label (the platforms band) or its position (the ways-to-work band, where the frame numbers 01/02/03).',
+      // Both canonical bands (1762:2149 and 1762:2168) share one composition
+      // and differ only here, so this is a variant of the block rather than a
+      // second block — #42. Numbers derive from order, the same rule
+      // caseStudy.chapters already follows (CONTEXT.md).
+      options: { list: ['label', 'number'], layout: 'radio', direction: 'horizontal' },
+      initialValue: 'label',
+    }),
     defineField({
       name: 'panels',
       type: 'array',
@@ -184,7 +214,19 @@ export const layoutSection = defineSectionBlock({
   name: 'layoutSection',
   title: 'Layout section',
   fields: [
+    // The interior frames head almost every band with the same three-part
+    // stack — eyebrow, heading, and a set-back second line (`1924:5344`'s
+    // "WHY O3 / Built to go end to end — on purpose."). Added in #42 so the
+    // About and Solutions layers can be composed from this block instead of
+    // needing one of their own.
+    defineField({ name: 'eyebrow', type: 'string' }),
     defineField({ name: 'heading', type: 'string' }),
+    defineField({
+      name: 'subheading',
+      type: 'text',
+      rows: 2,
+      description: 'The quieter second line under the heading.',
+    }),
     defineField({
       name: 'columns',
       type: 'number',
