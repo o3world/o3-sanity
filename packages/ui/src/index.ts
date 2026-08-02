@@ -28,6 +28,14 @@ export type { ButtonProps } from './components/ui/button'
 export { CollectionHero } from './components/collection-hero'
 export type { CollectionHeroProps } from './components/collection-hero'
 
+// CaseStudyHero — the Case Study detail opener (1710:2301)
+export { CaseStudyHero } from './components/case-study-hero'
+export type { CaseStudyHeroProps } from './components/case-study-hero'
+
+// CaseChapter — the numbered article band on a case study (1647:1714)
+export { CaseChapter } from './components/case-chapter'
+export type { CaseChapterProps } from './components/case-chapter'
+
 // CarouselControl — Figma's `Icon / Surface` (778:1862)
 export { CarouselControl } from './components/carousel-control'
 export type { CarouselControlProps } from './components/carousel-control'

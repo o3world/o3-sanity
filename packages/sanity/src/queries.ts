@@ -146,7 +146,7 @@ export const CASE_STUDY_QUERY = defineQuery(`*[_type == "caseStudy" && slug.curr
   deliverables,
   "extraSections": extraSections[]{${SECTION_FIELDS}},
   seo,
-  "next": *[_type == "caseStudy" && _id != ^._id] | order(_createdAt desc) [0]{title, "slug": slug.current, heroMedia}
+  "next": *[_type == "caseStudy" && _id != ^._id] | order(_createdAt desc) [0]{title, "slug": slug.current, heroMedia, "client": client->{name}}
 }`)
 
 export const CASE_STUDY_SLUGS_QUERY = defineQuery(

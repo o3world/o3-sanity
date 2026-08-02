@@ -1,25 +1,48 @@
-import Link from 'next/link'
-
-import { ArrowLink, Stat } from '@o3/ui'
+import { CaseChapter, CaseStudyHero, Eyebrow, Stat } from '@o3/ui'
 import type { CASE_STUDY_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { Blocks } from '@/content/blocks/Blocks'
 import { SanityImage } from '@/content/SanityImage'
 import { PortableTextBody } from '@/content/portable-text/PortableTextBody'
-import { hrefForDoc } from '@/content/documents/urls'
+
+import { NextCaseBand } from './NextCaseBand'
 
 type CaseStudyDoc = NonNullable<CASE_STUDY_QUERY_RESULT>
 export type CaseStudyViewProps = CaseStudyDoc
 
-function caseEyebrow(doc: Pick<CaseStudyDoc, 'industries' | 'industryDetail'>): string {
-  const industries = (doc.industries ?? []).map((industry) => industry.title).filter(Boolean)
-  return [...industries, doc.industryDetail].filter(Boolean).join(' · ')
-}
-
 /**
- * Detail view for a case study — fully structured (CONTEXT.md), not
- * section-built: hero, stats, numbered chapters, deliverables, then the
- * optional per-case extra sections through the block machinery.
+ * Detail view for a case study — built to the canonical **Case Study** frame
+ * `1710:2300` (mobile `1906:928`), #44.
+ *
+ * The document is fully structured, not section-built (CONTEXT.md), so each
+ * band reads a fixed field rather than dispatching a block:
+ *
+ * | Band          | Frame (1440 / 402)         | Field                            |
+ * | ------------- | -------------------------- | -------------------------------- |
+ * | Hero          | `1710:2301` / `1906:922`   | `heroMedia`, `client`, `title`, `narrativeHeadline` |
+ * | Stats         | — **no frame region**      | `stats`                          |
+ * | Chapters      | `1647:1714` / `1906:878`   | `chapters` (numbered by order)   |
+ * | What we shipped | — **no frame region**    | `deliverables`                   |
+ * | Media / quote | `1647:1720`, `1899:4186`, `1899:4051` | `extraSections`       |
+ * | Next project  | `1710:2609` / `1906:1039`  | `next`                           |
+ * | Footer        | `1710:2463`                | the site layout's `SiteFooter`   |
+ *
+ * **The eyebrow is the client's name**, not the industry line. `1710:2304`
+ * reads "IRONMAN" — the industry eyebrow ("Consumer Goods · Direct-to-Consumer
+ * Coffee") is the card's, drawn by `CaseStudyCard` on `/work` and Home, and
+ * the detail frame gives it no region.
+ *
+ * **Two bands here have no frame region at all**: `stats` and `deliverables`.
+ * Both hold migrated fact (ADR 0007 — migration wins the facts), so they are
+ * rendered in the frame's own vocabulary rather than dropped, and flagged on
+ * #44 as a design conversation.
+ *
+ * **The frame alternates chapter → media → chapter → media**, which the
+ * structure cannot express: a `chapter` is kicker + title + body, and
+ * `extraSections` is a general section array appended after them. Positional
+ * weaving would be wrong the moment a case appends anything that is not a
+ * figure, so the order the schema documents is what ships, and the pairing is
+ * raised on #44 as a schema conversation (`chapter.media`).
  */
 export function CaseStudyView(props: CaseStudyViewProps) {
   const {
@@ -34,68 +57,61 @@ export function CaseStudyView(props: CaseStudyViewProps) {
     extraSections,
     next,
   } = props
-  const eyebrow = caseEyebrow(props)
 
   return (
     <article>
-      {/* Hero — ink surface */}
-      <header className="bg-ink text-white">
-        <div className="mx-auto flex max-w-5xl flex-col gap-6 px-6 pb-20 pt-44">
-          {eyebrow ? <p className="eyebrow text-brand-tint">{eyebrow}</p> : null}
-          <h1 className="text-display-xl font-display text-balance">{title}</h1>
-          {narrativeHeadline ? (
-            <p className="text-display-md font-display text-fg-inverse-muted max-w-3xl">
-              {narrativeHeadline}
-            </p>
-          ) : null}
-          {client?.name ? <p className="text-fg-inverse-muted text-sm">for {client.name}</p> : null}
-          {stats?.length ? (
-            <dl className="mt-8 grid grid-cols-2 gap-8 border-t border-white/15 pt-8 lg:grid-cols-4">
-              {stats.map((stat) => (
-                <Stat key={stat._key} value={stat.value ?? ''} label={stat.label ?? ''} />
-              ))}
-            </dl>
-          ) : null}
-        </div>
-      </header>
-
-      {heroMedia?.image ? (
-        <figure className="mx-auto max-w-6xl px-6 py-16">
+      <CaseStudyHero
+        eyebrow={client?.name}
+        heading={title}
+        subheading={narrativeHeadline}
+        media={
           <SanityImage
-            source={heroMedia.image}
-            alt={heroMedia.alt ?? ''}
-            width={2000}
-            className="rounded-card w-full"
-            sizes="(min-width: 1280px) 72rem, 100vw"
+            source={heroMedia?.image}
+            alt=""
+            ratio="fill"
+            width={2400}
+            sizes="100vw"
             priority
           />
-        </figure>
+        }
+      />
+
+      {/*
+       * No frame region — see the note above. Set in the card's stat
+       * vocabulary (the 48px figure beside its label, `1883:3565`) and hung on
+       * the article measure so the page keeps one spine; the chapter band
+       * below supplies the space beneath.
+       */}
+      {stats?.length ? (
+        <section className="px-gutter pt-band-sm bg-white">
+          <ul className="mx-auto flex w-full max-w-[822px] flex-col gap-6">
+            {stats.map((stat) => (
+              <li key={stat._key} className="border-line border-t pt-6 first:border-t-0 first:pt-0">
+                <Stat value={stat.value ?? ''} label={stat.label ?? ''} />
+              </li>
+            ))}
+          </ul>
+        </section>
       ) : null}
 
-      {/* Chapters — numbering derived from order */}
-      {chapters?.length ? (
-        <div className="mx-auto flex max-w-3xl flex-col gap-20 px-6 py-16">
-          {chapters.map((chapter, index) => (
-            <section key={chapter._key}>
-              <p className="eyebrow text-brand">
-                {String(index + 1).padStart(2, '0')}
-                {chapter.kicker ? ` — ${chapter.kicker}` : ''}
-              </p>
-              <h2 className="text-display-lg font-display mt-4">{chapter.title}</h2>
-              <div className="mt-6">
-                <PortableTextBody value={chapter.body} />
-              </div>
-            </section>
-          ))}
-        </div>
-      ) : null}
+      {/* Numbering derives from order, never from the content (CONTEXT.md). */}
+      {chapters?.map((chapter, index) => (
+        <CaseChapter
+          key={chapter._key}
+          number={String(index + 1).padStart(2, '0')}
+          kicker={chapter.kicker}
+          title={chapter.title}
+        >
+          <PortableTextBody value={chapter.body} className="max-w-none" />
+        </CaseChapter>
+      ))}
 
-      {/* What we shipped */}
+      {/* No frame region — the schema's own "What we shipped" label. */}
       {deliverables?.length ? (
-        <section className="bg-bone">
-          <div className="mx-auto max-w-3xl px-6 py-20">
-            <p className="eyebrow text-brand">What we shipped</p>
-            <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+        <section className="px-gutter bg-white pb-[clamp(96px,calc(6.55vw+69.7px),164px)]">
+          <div className="mx-auto flex w-full max-w-[822px] flex-col gap-6">
+            <Eyebrow size="lg">What we shipped</Eyebrow>
+            <ul className="grid gap-3 sm:grid-cols-2">
               {deliverables.map((deliverable) => (
                 <li key={deliverable} className="border-line text-fg border-t pt-3">
                   {deliverable}
@@ -106,7 +122,7 @@ export function CaseStudyView(props: CaseStudyViewProps) {
         </section>
       ) : null}
 
-      {/* Optional per-case flourishes */}
+      {/* The frame's media bands and its gradient quote band (`1899:4051`). */}
       {extraSections?.length ? (
         <Blocks
           blocks={extraSections}
@@ -116,20 +132,7 @@ export function CaseStudyView(props: CaseStudyViewProps) {
         />
       ) : null}
 
-      {/* Next case */}
-      {next?.slug ? (
-        <footer className="bg-ink text-white">
-          <div className="mx-auto flex max-w-5xl flex-col gap-4 px-6 py-20">
-            <p className="eyebrow text-brand-tint">Next case</p>
-            <Link href={hrefForDoc({ _type: 'caseStudy', slug: next.slug })}>
-              <span className="text-display-lg font-display">{next.title}</span>
-            </Link>
-            <ArrowLink href={hrefForDoc({ _type: 'caseStudy', slug: next.slug })}>
-              Read the case
-            </ArrowLink>
-          </div>
-        </footer>
-      ) : null}
+      {next ? <NextCaseBand next={next} /> : null}
     </article>
   )
 }
