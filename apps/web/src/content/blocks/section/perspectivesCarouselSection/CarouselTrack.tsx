@@ -15,8 +15,9 @@ export interface CarouselTrackProps {
  * The Blog band's card set — a **carousel only at `lg`**.
  *
  * ADR 0006 lists this as one of three structurally-divergent sections: the
- * 402 frame (`1814:1738` → `1814:1867`) stacks the cards vertically 24px
- * apart with **no prev/next controls at all**, and only the 1440 frame
+ * 402 frame (`1814:1738`) stacks the cards vertically 48px apart (the 24px
+ * inside `1814:1867` is the card's own media→info gap, not the row gap) with
+ * **no prev/next controls at all**, and only the 1440 frame
  * (`1683:2470`) draws the overflowing track plus its two `Icon / Surface`
  * buttons. The track used to scroll horizontally at every width, which put a
  * 280px card and a hidden overflow affordance on a 402 phone — the divergence
@@ -96,7 +97,7 @@ export function CarouselTrack({ heading, cards }: CarouselTrackProps) {
       <ul
         ref={trackRef}
         onScroll={sync}
-        className="px-gutter flex flex-col gap-6 lg:snap-x lg:snap-mandatory lg:flex-row lg:gap-8 lg:overflow-x-auto lg:pb-2 lg:pr-0 lg:[scrollbar-width:none] lg:[&::-webkit-scrollbar]:hidden"
+        className="px-gutter flex flex-col gap-12 lg:snap-x lg:snap-mandatory lg:flex-row lg:gap-8 lg:overflow-x-auto lg:pb-2 lg:pr-0 lg:[scrollbar-width:none] lg:[&::-webkit-scrollbar]:hidden"
       >
         {cards.map((card, index) => (
           <li
