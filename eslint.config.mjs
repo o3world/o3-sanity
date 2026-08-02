@@ -54,6 +54,12 @@ const draftBoundaryPatterns = [
 
 export default [
   ...o3Config,
+  // Captured prototypes are third-party artifacts frozen as a record (ADR
+  // 0010) — their bundled runtime JS is not ours to lint or fix, and editing
+  // one to satisfy a rule ends its usefulness as a record. Only the set
+  // directories are ignored; `frame.tsx` and the story files that wrap them
+  // sit one level up and are linted normally.
+  { ignores: ['apps/storybook/prototypes/*/**'] },
   // eslint-config-next scoped to apps/web only — registering it wider clashes
   // with the shared config's react/jsx-a11y plugin registrations.
   {

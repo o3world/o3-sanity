@@ -9,7 +9,13 @@
  * `apps/web/src` is declared ahead of the web app's scaffold step; the
  * Storybook config filters to roots that exist on disk until it lands.
  */
-export const STORY_ROOTS = ['packages/ui/src', 'apps/web/src'] as const
+export const STORY_ROOTS = [
+  'packages/ui/src',
+  'apps/web/src',
+  // Captured prototypes — stories that frame a static HTML artifact rather
+  // than a component. See apps/storybook/prototypes/README.md.
+  'apps/storybook/prototypes',
+] as const
 
 /** The story-file extension glob (shared with main.ts). */
 export const STORY_GLOB_SUFFIX = '**/*.stories.@(js|jsx|mjs|ts|tsx)'

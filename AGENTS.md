@@ -36,6 +36,14 @@ Component → code map: [`docs/figma-components.md`](./docs/figma-components.md)
 its variant axes, and what it maps to (or deliberately doesn't). One Figma variant axis → one `cva`
 variants key; `State=Hover` is never a variant. Icons are inline SVG, not a font (ADR 0009).
 
+### Captured prototypes
+
+Answered visual prototypes are committed to `apps/storybook/prototypes/` and served by Storybook as
+dated, read-only snapshots (ADR 0010). They are **not** a source of record — take intent and sequence
+from one, never values; tokens and variant axes come from Figma. Read
+[`apps/storybook/prototypes/README.md`](./apps/storybook/prototypes/README.md) before adding one.
+Prototypes that answered a _logic_ question stay on a throwaway branch instead.
+
 ### Components and shadcn
 
 **shadcn's anatomy, O3's tokens** (ADR 0008). shadcn is already adopted in

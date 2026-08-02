@@ -5,6 +5,12 @@
 # The pipeline owns this directory (ADR 0003) — prettier does not.
 tools/migration/data/
 
+# Captured prototypes (ADR 0010). Frozen third-party artifacts — reformatting
+# one makes the committed file stop matching what was actually delivered, and
+# the diff noise buries any real change to the set. Only the set directories;
+# the story files and frame.tsx beside them are formatted normally.
+apps/storybook/prototypes/*/
+
 # Build output
 **/.next/
 **/storybook-static/
