@@ -1626,5 +1626,13 @@
   "https://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy3.jpg": {
     "sha256": "d40d4f1580c980e34ae75e279702308cab0d3dcd",
     "assetId": "image-d40d4f1580c980e34ae75e279702308cab0d3dcd-2500x1448-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/02/Ventureshead.png": {
+    "sha256": "aa946b6def3103ef9906e8712395939eb696edfc",
+    "assetId": "image-aa946b6def3103ef9906e8712395939eb696edfc-901x901-png"
+  },
+  "https://www.o3world.com/wp-content/uploads/2024/02/o3-rec-featured-cs-image.jpg": {
+    "sha256": "07b68937982c8ea63d65c1e08317d1d80dda4cef",
+    "assetId": "image-07b68937982c8ea63d65c1e08317d1d80dda4cef-546x546-jpg"
   }
 }

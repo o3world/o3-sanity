@@ -3,6 +3,7 @@ import { join } from 'node:path'
 
 import { describe, expect, it } from 'vitest'
 
+import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
 import { SECTION_BLOCKS } from '@o3/sanity/schemas/registry'
 
 import type { Migration } from '@o3/sanity/types/generated'
@@ -418,6 +419,93 @@ describe('committed seed content', () => {
       const migration = (contact?.migration ?? {}) as Partial<Migration>
       expect(migration.provisional).toBe(true)
       expect(migration.provisionalNote).toMatch(/#58/)
+    })
+  })
+
+  /**
+   * No dead ends in the wireframe sitemap (#23).
+   *
+   * A `cta.href` is a plain string, not a reference — the loader will not
+   * complain about it, `verify` cannot see it, and the page renders a link
+   * that 404s. That is the one failure this corpus can ship silently, and it
+   * gets easier to ship with every page seeded, so it is checked here rather
+   * than found in a browser.
+   *
+   * Scoped to `cta` objects — the nav, the footer, and every button a seeded
+   * page draws. That is the set this build authors. Portable Text `link`
+   * marks are deliberately out: 272 migrated perspective bodies link into a
+   * 2017 URL space (`/careers`, `/labs/o3-barista/`, `/about/team/…`) that
+   * this redesign does not have, and auditing the archive's editorial links
+   * is its own ticket, not a gate on seeding a page.
+   *
+   * Only app-relative hrefs are checked; an external URL is somebody else's
+   * uptime.
+   */
+  describe('internal links', () => {
+    const CODE_ROUTES = new Set(['/', ...Object.values(COLLECTION_PREFIXES)])
+
+    /** Every `cta.href` in a document, with the path that reached it. */
+    function ctaHrefsIn(
+      node: unknown,
+      path = '',
+      found: { path: string; href: string }[] = [],
+    ): { path: string; href: string }[] {
+      if (Array.isArray(node)) {
+        node.forEach((item, i) => ctaHrefsIn(item, `${path}[${i}]`, found))
+      } else if (node && typeof node === 'object') {
+        const obj = node as Record<string, unknown>
+        if (obj._type === 'cta' && typeof obj.href === 'string') {
+          found.push({ path: path || '(root)', href: obj.href })
+        }
+        for (const [key, value] of Object.entries(obj)) {
+          ctaHrefsIn(value, path ? `${path}.${key}` : key, found)
+        }
+      }
+      return found
+    }
+
+    /** `{type: slug}` for every document the loader will write. */
+    const slugsByType = new Map<string, Set<string>>()
+    for (const { doc } of allPipelineDocs) {
+      const slug = (doc.slug as { current?: string } | undefined)?.current
+      if (!slug) continue
+      slugsByType.set(doc._type, (slugsByType.get(doc._type) ?? new Set()).add(slug))
+    }
+
+    const internalLinks = allPipelineDocs.flatMap(({ file, doc }) =>
+      ctaHrefsIn(doc)
+        .filter(({ href }) => href.startsWith('/'))
+        .map(({ path, href }) => ({ file, path, href })),
+    )
+
+    it('has internal links to check', () => {
+      expect(internalLinks.length).toBeGreaterThan(0)
+    })
+
+    it('points every internal link at something that resolves', () => {
+      for (const { file, path, href } of internalLinks) {
+        // Strip a fragment and any trailing slash — `/about#careers` is the
+        // About page, and routes match without the slash.
+        const target = href.split('#')[0]!.replace(/\/+$/, '') || '/'
+        if (CODE_ROUTES.has(target)) continue
+
+        const where = `${file} → ${path}: "${href}"`
+        const collection = Object.entries(COLLECTION_PREFIXES).find(([, prefix]) =>
+          target.startsWith(`${prefix}/`),
+        )
+        if (collection) {
+          const [type, prefix] = collection
+          expect(
+            slugsByType.get(type) ?? new Set(),
+            `${where} names no committed ${type}`,
+          ).toContain(target.slice(prefix.length + 1))
+          continue
+        }
+
+        expect(slugsByType.get('page') ?? new Set(), `${where} names no committed page`).toContain(
+          target.slice(1),
+        )
+      }
     })
   })
 

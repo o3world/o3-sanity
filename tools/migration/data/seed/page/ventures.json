@@ -1,0 +1,204 @@
+{
+  "_id": "page-seed-ventures",
+  "_type": "page",
+  "title": "Ventures",
+  "slug": {
+    "_type": "slug",
+    "current": "ventures"
+  },
+  "pageType": "standard",
+  "sections": [
+    {
+      "_type": "heroSection",
+      "_key": "hero",
+      "surface": "ink",
+      "variant": "band",
+      "eyebrow": "Ventures",
+      "headlineLines": ["Investing in exceptional people, products + experiences"],
+      "decoration": "orbs"
+    },
+    {
+      "_type": "layoutSection",
+      "_key": "intro",
+      "surface": "bone",
+      "columns": 2,
+      "items": [
+        {
+          "_type": "richText",
+          "_key": "intro-body",
+          "body": [
+            {
+              "_type": "block",
+              "_key": "b-intro",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "b-intro-0",
+                  "text": "For over 20 years, we have invested time, expertise, and resources into organizations that share our values and understand the opportunities to create better experiences. Along the way, we’ve met brilliant people with incredible ideas that range from successful startups to Fortune 500 companies. These innovators help redefine how we live and work — and we’re excited to be a part of that and help foster their visions.",
+                  "marks": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "figure",
+          "_key": "intro-image",
+          "alt": "photo of ventures awards",
+          "image": {
+            "_type": "image",
+            "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/02/Ventureshead.png"
+          }
+        },
+        {
+          "_type": "cta",
+          "_key": "intro-cta",
+          "label": "Let’s build the future together",
+          "href": "/contact",
+          "variant": "dark"
+        }
+      ]
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "criteria",
+      "surface": "white",
+      "layout": "rail",
+      "rail": "label",
+      "heading": "Paving the road ahead with good people",
+      "intro": "What we look for in partners when exploring new opportunities.",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "criteria-leadership",
+          "railLabel": "Leadership",
+          "body": "We look for strong leaders who have deep expertise in their market and believe in the core tenets of innovation."
+        },
+        {
+          "_type": "panel",
+          "_key": "criteria-values",
+          "railLabel": "Values",
+          "body": "We partner with those who align with our own values and are also seeking a mutually beneficial partnership."
+        },
+        {
+          "_type": "panel",
+          "_key": "criteria-expertise",
+          "railLabel": "Expertise",
+          "body": "We lean on our partners’ depth of experience and knowledge in their respective markets to put a plan into action on where to best drive product development."
+        },
+        {
+          "_type": "panel",
+          "_key": "criteria-opportunity",
+          "railLabel": "Opportunity",
+          "body": "We’re excited by unique concepts where we can accelerate growth and improve outcomes."
+        },
+        {
+          "_type": "panel",
+          "_key": "criteria-outlook",
+          "railLabel": "Outlook",
+          "body": "We’re passionate about a strong strategy and look for others who share a good game plan and outlook."
+        }
+      ]
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "portfolio",
+      "surface": "bone",
+      "layout": "rail",
+      "rail": "label",
+      "heading": "Shaping the world with new ideas",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "portfolio-rec-philly",
+          "railLabel": "REC Philly",
+          "heading": "Empowering creative entrepreneurs",
+          "body": "A “WeWork for artists”, REC Philly empowers creative entrepreneurs by providing space, equipment, community and expertise to support their growth. In order to expand from its humble, North Philly space into a 10,000 square foot creative complex, REC Philly required both a financial investor as well as a strategic development partner.",
+          "media": {
+            "_type": "figure",
+            "alt": "Scarlet AI",
+            "image": {
+              "_type": "image",
+              "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/02/o3-rec-featured-cs-image.jpg"
+            }
+          },
+          "cta": {
+            "_type": "cta",
+            "label": "Read the REC case study",
+            "href": "/work/scarlet-ai-hyper-personalizing-creative-gig-economy",
+            "variant": "ghost"
+          }
+        },
+        {
+          "_type": "panel",
+          "_key": "portfolio-sahay-ai",
+          "railLabel": "Sahay AI",
+          "heading": "Keeping AI on track",
+          "body": "At O3, we don’t just celebrate AI-driven startups—we help them build momentum. As the winner of the 1682 Venture Awards, Sahay AI is revolutionizing railway safety with machine learning and automation. Now, through our venture consulting practice, we’re working alongside their team to refine strategy, enhance product-market fit, and accelerate their journey.",
+          "media": {
+            "_type": "figure",
+            "alt": "Venture Awards at 1682 - Sahay AI",
+            "image": {
+              "_type": "image",
+              "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/10/1682-website-social-imagery-6.png"
+            }
+          },
+          "cta": {
+            "_type": "cta",
+            "label": "Read how Sahay AI won",
+            "href": "/perspectives/sahay-ai-triumphs-1682-venture-awards",
+            "variant": "ghost"
+          }
+        },
+        {
+          "_type": "panel",
+          "_key": "portfolio-1682-venture-awards",
+          "railLabel": "1682",
+          "heading": "Fueling the future: venture awards",
+          "body": "Great ideas deserve a platform. The O3 Venture Awards at 1682 give AI-driven startups the chance to pitch their innovations, gain exposure, and connect with industry leaders. More than just a competition, it’s an opportunity to accelerate growth, refine strategy, and take bold ideas to the next level. Keep an eye out for this year’s 1682 conference.",
+          "media": {
+            "_type": "figure",
+            "alt": "The O3 Venture Awards",
+            "image": {
+              "_type": "image",
+              "_wpSrc": "https://www.o3world.com/wp-content/uploads/2019/08/O3-website-imagery_-Perspectives-60.webp"
+            }
+          },
+          "cta": {
+            "_type": "cta",
+            "label": "Pitch at the venture awards",
+            "href": "/perspectives/the-o3-venture-awards-at-1682-a-chance-to-pitch-win-and-promote-your-ai-startup",
+            "variant": "ghost"
+          }
+        }
+      ]
+    },
+    {
+      "_type": "ctaSection",
+      "_key": "cta",
+      "surface": "ink",
+      "heading": "Where ventures, thought leadership + AI innovation converge",
+      "body": "O3 Ventures, our thought leadership initiatives, and the 1682 Conference are all part of our commitment to shaping the future of innovation and AI. We don’t just talk about innovation - we help build it, connecting visionary startups with the insights, resources, and networks they need to scale. Explore how 1682 brings it all together.",
+      "cta": {
+        "_type": "cta",
+        "label": "Discover 1682",
+        "href": "/perspectives/1682-conference-recap-unveiling-ais-realities-and-innovation-insights",
+        "variant": "light"
+      },
+      "decoration": "orbs"
+    }
+  ],
+  "seo": {
+    "_type": "seo",
+    "description": "The O3 ventures program is dedicated to creating better digital customer experiences for organizations that share our values."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:ventures",
+    "extractedAt": "2026-08-01T02:52:53.389Z",
+    "provisional": true,
+    "provisionalNote": "No canonical Figma frame exists for /ventures, so the composition is assembled from existing blocks rather than transcribed — which is why this carries no figmaNode. Every line of copy is carried from the WordPress page (wpId 155): the header, the five partner criteria, the three venture write-ups and the closing callout. Three things a reviewer has to settle. (1) Every link in the source points at the Pantheon staging host (live-o3-world.pantheonsite.io) or at www.o3world.com; all four are rewritten to app-relative paths, and the REC card's link resolves only once caseStudy-wp-8629 is published, because translated case studies load as drafts. (2) The source's closing button is labelled \"Discover 1682\" in one ACF field and \"Discovery 1682\" in the other; the correct spelling is carried. (3) The page names REC Philly, Sahay AI and the 1682 Venture Awards — not the REC Philly / Urvin pair #23 was written against — and there are no per-venture detail pages anywhere in WordPress, so none were invented. And nothing links here yet: neither the migrated site chrome nor any canonical frame carries a Ventures entry, so the route resolves but is unreachable by navigation. Cleared by a commissioned ventures frame, a nav decision, and an owner confirming the portfolio is current."
+  }
+}
