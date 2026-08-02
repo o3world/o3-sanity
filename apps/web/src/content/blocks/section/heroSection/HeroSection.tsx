@@ -88,8 +88,15 @@ export function HeroSection({
         <OrbitalSphere className="bottom-[-124vw] left-1/2 w-[165vw] -translate-x-1/2 lg:bottom-[-63.9vw] lg:w-[80.7vw]" />
       ) : null}
 
-      {/* 164px of clearance for the floating pill, which sits at y 30. */}
-      <div className="max-w-content relative z-10 mx-auto flex min-h-[420px] flex-col items-center justify-center gap-[18px] pb-[220px] pt-[164px] text-center lg:min-h-[520px] lg:pb-[368px]">
+      {/*
+       * 164px of clearance for the floating pill, which sits at y 30.
+       *
+       * **Alignment switches at `lg`.** The 1440 frame centres the whole
+       * block on the sphere; the 402 frame (`1814:1622`) sets it as a 362px
+       * column flush to the 20px gutter, headline and button both left. That
+       * is composition, so it lives here rather than in a token (ADR 0006).
+       */}
+      <div className="max-w-content relative z-10 mx-auto flex min-h-[420px] flex-col items-start justify-center gap-[18px] pb-[220px] pt-[164px] text-left lg:min-h-[520px] lg:items-center lg:pb-[368px] lg:text-center">
         <h1 className="text-hero font-display text-balance">
           <MaskedLines
             lines={lines.map((line, index) => (

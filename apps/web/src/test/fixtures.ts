@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url'
 
 import { SITE_SETTINGS_QUERY } from '@o3/sanity/queries'
 import type {
+  CASE_STUDIES_PAGE_QUERY_RESULT,
   PERSPECTIVE_QUERY_RESULT,
   PERSPECTIVES_PAGE_QUERY_RESULT,
   SITE_SETTINGS_QUERY_RESULT,
@@ -77,6 +78,33 @@ export function aPerspectivesPage(
     items: items.map(toCard),
     total,
   } as PERSPECTIVES_PAGE_QUERY_RESULT
+}
+
+type CaseStudyCard = CASE_STUDIES_PAGE_QUERY_RESULT['items'][number]
+
+/** A case study as every card projection sees it — `/work`, Home, next-case. */
+export function aCaseStudyCard(overrides: Partial<CaseStudyCard> = {}): CaseStudyCard {
+  return {
+    _id: 'caseStudy-seed-a-case',
+    _type: 'caseStudy',
+    title: 'A Case Study',
+    slug: 'a-case-study',
+    narrativeHeadline: 'The deeper problem we found.',
+    headlineStat: null,
+    heroMedia: null,
+    client: null,
+    industries: [{ title: 'Healthcare' }],
+    industryDetail: 'Pediatric Systems',
+    ...overrides,
+  } as CaseStudyCard
+}
+
+/** One page of the `/work` index feed. */
+export function aCaseStudiesPage(
+  items: CaseStudyCard[] = [aCaseStudyCard()],
+  total = items.length,
+): CASE_STUDIES_PAGE_QUERY_RESULT {
+  return { items, total } as CASE_STUDIES_PAGE_QUERY_RESULT
 }
 
 /**

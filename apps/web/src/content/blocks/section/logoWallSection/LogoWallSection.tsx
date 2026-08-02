@@ -23,7 +23,9 @@ type LogoWallSectionProps = SectionProps<'logoWallSection'>
  *    to 2100px against a 1440px frame, so the row is **wider than the page and
  *    clipped at both edges** — the frame shows a cut Vertex at the left and a
  *    cut Hire Heroes at the right. It is a marquee still, not a wrapped grid,
- *    and it bleeds past the gutter rather than sitting inside it.
+ *    and it bleeds past the gutter rather than sitting inside it. **At 402 it
+ *    is neither**: the mobile frame (`1814:1898`) stacks the tiles one per
+ *    row, 24px apart, inside the gutter — the bleed switches on at `lg`.
  * 4. **CTA** — `Button / Solid` Size=**Large**, dark fill (`1864:2405`).
  *
  * `layout: 'grid'` keeps a wrapped arrangement available for a wall with more
@@ -47,7 +49,7 @@ export function LogoWallSection({
     <section
       className={`${SURFACE_CLASS[resolveSurface(surface, 'bone')]} pt-band-sm pb-band-md overflow-hidden`}
     >
-      <div className="px-gutter flex flex-col items-center gap-8">
+      <div className="px-gutter flex flex-col items-center gap-5 lg:gap-8">
         {eyebrow ? (
           <Eyebrow size="lg" className="text-center">
             {eyebrow}
@@ -63,10 +65,14 @@ export function LogoWallSection({
       <ul
         className={
           isMarquee
-            ? // The bleed: a centred row allowed to run wider than the page,
-              // clipped by the band's own overflow-hidden.
-              'mt-band-sm flex w-max min-w-full items-center justify-center gap-12'
-            : 'px-gutter mt-band-sm grid grid-cols-2 items-center gap-x-12 gap-y-10 sm:grid-cols-3 lg:grid-cols-6'
+            ? // The bleed is a **desktop** treatment. At 1440 this is a
+              // centred row allowed to run wider than the page, clipped by
+              // the band's own overflow-hidden. At 402 the frame
+              // (`1814:1898`) stacks the tiles one per row, 24px apart,
+              // inside a 362px column — a row that bleeds off both edges of a
+              // phone shows one and a half logos and reads as broken.
+              'px-gutter lg:mt-band-sm mt-12 flex flex-col items-center gap-6 lg:w-max lg:min-w-full lg:flex-row lg:justify-center lg:gap-12 lg:px-0'
+            : 'px-gutter lg:mt-band-sm mt-12 grid grid-cols-2 items-center gap-x-12 gap-y-10 sm:grid-cols-3 lg:grid-cols-6'
         }
       >
         {tiles.map((client) => (
@@ -74,7 +80,7 @@ export function LogoWallSection({
           // 246px and sits centred in the row's height.
           <li
             key={client._id}
-            className={`flex h-[132px] items-center justify-center px-8 ${isMarquee ? 'w-[310px] shrink-0' : ''}`}
+            className={`flex h-[132px] items-center justify-center px-8 ${isMarquee ? 'w-[310px] lg:shrink-0' : ''}`}
           >
             {/*
              * Desaturated. Every logo on the frame's row is mono — IRONMAN
@@ -94,7 +100,7 @@ export function LogoWallSection({
       </ul>
 
       {cta ? (
-        <div className="px-gutter mt-band-sm flex justify-center">
+        <div className="px-gutter lg:mt-band-sm mt-12 flex justify-center">
           <CtaLink cta={cta} arrow size="large" />
         </div>
       ) : null}

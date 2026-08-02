@@ -11,7 +11,11 @@
  */
 export { expectNotFound, renderRoute } from './renderRoute'
 
+export { classTokens, unprefixedHorizontalScrollUtilities, variantsOf } from './responsive'
+
 export {
+  aCaseStudiesPage,
+  aCaseStudyCard,
   aMigratedPage,
   aMigratedPerspective,
   aPerspective,
