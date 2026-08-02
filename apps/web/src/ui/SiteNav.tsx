@@ -44,7 +44,7 @@ interface SiteNavProps {
  *
  * Pinned, the bar floats over dark and light bands in turn, so it has two
  * skins. Default — and everything SSR, no-JS and jsdom ever sees — is the dark
- * scrim with white copy. When `NavInk` finds a light band under the bar's
+ * scrim with white copy. When `NavInk` finds a light surface under the bar's
  * midpoint it sets `data-ink="dark"` on this header, and the `group-data-`
  * variants below swap fill, hairline and copy over `--duration-ink`. The
  * sampling is the prototype's; the styling is CSS off one attribute rather
