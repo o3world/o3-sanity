@@ -13,7 +13,8 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
 
 import type { ConversionIssue } from './lib/htmlToPortableText'
-import { CONVERTED_DIR, EXTRACT_DIR, TRANSLATED_DIR, writeJson } from './lib/paths'
+import { refsIn } from './lib/corpus'
+import { CONVERTED_DIR, EXTRACT_DIR, SEED_DIR, TRANSLATED_DIR, writeJson } from './lib/paths'
 import type { WpChrome } from './lib/chrome'
 import type { WpSiteSeo } from './lib/yoast'
 import { mapCategory, type WpCategory } from './map/category'
@@ -126,7 +127,27 @@ for (const post of readDir<WpPerspective>('perspective')) {
   }
   emit('perspective', post.slug, result.doc)
   note(post.slug, result)
-  referencedPeople.add(result.doc.author._ref)
+  // Most perspectives carry no byline (see `mapPerspective`), so this set is
+  // built from the ones that do — which is what shrinks the person corpus.
+  if (result.doc.author) referencedPeople.add(result.doc.author._ref)
+}
+
+// Hand-written documents point at people too — the About page's team grid
+// names six, and a seeded perspective has a byline — and those trees are not
+// converted here, so their references have to be read off disk. This became
+// load-bearing when `post_author` stopped standing in for a byline (#32): the
+// archive attributes 11 people now, and Kelly Navari (`person-wp-4`) is on the
+// About page without ever having been an ACF byline.
+for (const root of [SEED_DIR, TRANSLATED_DIR]) {
+  if (!existsSync(root)) continue
+  for (const type of readdirSync(root)) {
+    for (const file of readdirSync(join(root, type)).filter((f) => f.endsWith('.json'))) {
+      const doc = JSON.parse(readFileSync(join(root, type, file), 'utf8'))
+      for (const ref of refsIn(doc)) {
+        if (ref.startsWith('person-')) referencedPeople.add(ref)
+      }
+    }
+  }
 }
 
 // Only people something actually attributes. The team CPT lists everyone who

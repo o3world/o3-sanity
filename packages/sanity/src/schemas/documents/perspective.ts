@@ -17,7 +17,8 @@ export const perspective = defineType({
       name: 'author',
       type: 'reference',
       to: [{ type: 'person' }],
-      validation: (rule) => rule.required(),
+      description:
+        'Optional. 232 of the 272 migrated articles have no byline — WordPress only ever showed one where an editor set the ACF author, and the detail page renders date and read time alone without it.',
     }),
     defineField({
       name: 'categories',

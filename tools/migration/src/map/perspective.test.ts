@@ -99,7 +99,6 @@ describe('mapPerspective', () => {
     expect(doc.title).toBe('A Post')
     expect(doc.slug).toEqual({ _type: 'slug', current: 'a-post' })
     expect(doc.excerpt).toBe('Short summary.')
-    expect(doc.author).toEqual({ _type: 'reference', _ref: 'person-wp-16' })
     expect(doc.categories).toEqual([{ _type: 'reference', _ref: 'category-wp-86', _key: 'cat-86' }])
     expect(doc.migration).toEqual({
       locked: false,
@@ -108,7 +107,7 @@ describe('mapPerspective', () => {
     })
   })
 
-  it('prefers the ACF author over the account that published (#17)', () => {
+  it('takes the byline from the ACF author, never the account that published (#17)', () => {
     // On 39 of the 40 posts carrying an ACF author, the two disagree — the WP
     // account is just whoever hit publish.
     const doc = expectOk(
@@ -121,12 +120,42 @@ describe('mapPerspective', () => {
         }),
       ),
     )
-    expect(doc.author._ref).toBe('person-wp-9147')
+    expect(doc.author).toEqual({ _type: 'reference', _ref: 'person-wp-9147' })
   })
 
-  it('falls back to the publishing account when no ACF author is set', () => {
-    const doc = expectOk(map(wpPost()))
-    expect(doc.author._ref).toBe('person-wp-16')
+  /**
+   * The live-site test (#32 item 1.1): a post with no ACF author shows no
+   * byline anywhere on o3world.com — `post_author` reaches Yoast's machine
+   * meta and nothing a reader sees. 232 of the 272 are like this, so the
+   * document has no author and the run says nothing about it.
+   */
+  it('leaves a post with no ACF author unattributed, silently', () => {
+    const result = map(wpPost())
+    const doc = expectOk(result)
+    expect(doc.author).toBeUndefined()
+    // `ok()` omits `notes` entirely when there are none — the run is silent.
+    expect(result.ok && result.notes).toBeUndefined()
+  })
+
+  it('notes an ACF byline whose team post no longer exists, and attributes nobody', () => {
+    // Seven real posts point at team ids 5102 / 5320 / 7533 / 8031, all
+    // deleted. WordPress renders no byline for them either.
+    const result = map(
+      wpPost({
+        fields: {
+          author: [5320],
+          flexible_post_content: [{ acf_fc_layout: 'text', text_editor: '<p>Body.</p>' }],
+        },
+      }),
+    )
+    const doc = expectOk(result)
+    expect(doc.author).toBeUndefined()
+    expect(result.ok && result.notes).toEqual([
+      {
+        element: 'author',
+        detail: 'ACF byline points at team post 5320, which no longer exists — no author',
+      },
+    ])
   })
 
   it('converts the WP GMT date to an ISO instant', () => {

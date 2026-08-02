@@ -62,8 +62,7 @@ describe('buildPersonDirectory', () => {
       [member({ wpId: 936, name: 'Justin Handler', email: 'handler@o3world.com' })],
     )
     expect(dir.docs[0]?._id).toBe('person-wp-3')
-    expect(dir.refForUser(3)).toBe('person-wp-3')
-    // …and the team id resolves to the same person.
+    // The ACF byline is the only lookup, and it lands on the user's id.
     expect(dir.refForTeam(936)).toBe('person-wp-3')
   })
 
@@ -103,14 +102,13 @@ describe('buildPersonDirectory', () => {
       [user({ wpId: 20, name: 'jennifero3', email: 'jennifer@thegardellagroup.com' })],
       [member({ wpId: 936, name: 'Justin Handler', email: 'handler@o3world.com' })],
     )
-    expect(dir.refForUser(20)).toBe('person-wp-20')
     expect(dir.docs.find((d) => d._id === 'person-wp-20')?.name).toBe('jennifero3')
   })
 
-  it('returns null for an id it has never seen, rather than a broken ref', () => {
-    const dir = buildPersonDirectory([], [])
-    expect(dir.refForUser(99)).toBeNull()
-    expect(dir.refForTeam(99)).toBeNull()
+  it('returns null for a team id it has never seen, rather than a broken ref', () => {
+    // The seven posts whose ACF byline names a deleted team post take this
+    // path: no reference at all, rather than one that resolves to nothing.
+    expect(buildPersonDirectory([], []).refForTeam(99)).toBeNull()
   })
 
   it('is deterministic across runs', () => {

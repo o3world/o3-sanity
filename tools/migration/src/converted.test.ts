@@ -5,6 +5,7 @@ import { describe, expect, it } from 'vitest'
 
 import { SECTION_BLOCKS } from '@o3/sanity/schemas/registry'
 
+import { CORPUS_DIRS, refsIn } from './lib/corpus'
 import { CONVERTED_DIR, EXTRACT_DIR } from './lib/paths'
 import type { WpSeo } from './lib/yoast'
 import { categoryDoc } from './map/category'
@@ -33,6 +34,20 @@ function readType<T>(type: string): { file: string; doc: T }[] {
   return readdirSync(dir)
     .filter((f) => f.endsWith('.json'))
     .map((file) => ({ file, doc: JSON.parse(readFileSync(join(dir, file), 'utf8')) as T }))
+}
+
+/** Every committed document, in all three trees — converted, seed, translated. */
+function corpusDocs(): unknown[] {
+  const docs: unknown[] = []
+  for (const root of CORPUS_DIRS) {
+    if (!existsSync(root)) continue
+    for (const type of readdirSync(root)) {
+      for (const file of readdirSync(join(root, type)).filter((f) => f.endsWith('.json'))) {
+        docs.push(JSON.parse(readFileSync(join(root, type, file), 'utf8')))
+      }
+    }
+  }
+  return docs
 }
 
 const perspectives = readType<Record<string, unknown>>('perspective')
@@ -100,11 +115,31 @@ describe('committed conversion output', () => {
     expect(duplicated).toEqual([])
   })
 
+  /**
+   * A byline is optional (#32 item 1.1) — WordPress shows one only where an
+   * editor set the ACF author, so most perspectives carry none. What must
+   * still hold is the pair of invariants around the ones that do: the
+   * reference resolves, and no person document is committed that nothing
+   * attributes (person emission is reference-driven in `convert.ts`, so a
+   * stray one means a stale file on disk).
+   */
   it('resolves every author reference to a committed person document', () => {
     const personIds = new Set(persons.map(({ doc }) => doc._id as string))
     for (const { file, doc } of perspectives) {
-      const ref = (doc.author as { _ref: string })._ref
+      const ref = (doc.author as { _ref: string } | undefined)?._ref
+      if (!ref) continue
       expect(personIds, `${file} references missing author ${ref}`).toContain(ref)
+    }
+  })
+
+  it('commits no person document that nothing references', () => {
+    const referenced = new Set(
+      corpusDocs()
+        .flatMap((doc) => refsIn(doc))
+        .filter((ref) => ref.startsWith('person-')),
+    )
+    for (const { file, doc } of persons) {
+      expect([...referenced], `${file} is referenced by nothing`).toContain(doc._id as string)
     }
   })
 

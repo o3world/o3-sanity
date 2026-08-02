@@ -44,7 +44,8 @@ export const perspectiveDoc = z.object({
   title: z.string().min(1),
   slug: z.object({ _type: z.literal('slug'), current: z.string().min(1) }),
   excerpt: z.string().min(1),
-  author: z.object({ _type: z.literal('reference'), _ref: z.string() }),
+  /* Optional, because most posts have no byline. See `mapPerspective`. */
+  author: z.object({ _type: z.literal('reference'), _ref: z.string() }).optional(),
   categories: z.array(
     z.object({ _type: z.literal('reference'), _ref: z.string(), _key: z.string() }),
   ),
@@ -182,16 +183,27 @@ export function mapPerspective(
   )
   if (parity) issues.push(parity)
 
-  // The ACF `author` field is the byline where an editor set one; the WP
-  // account that published is the fallback.
+  // The ACF `author` field is the byline, and the only one. `post_author` used
+  // to stand in for it, which put "Brian Crumley" on 223 posts that show no
+  // byline at all on the live site: the theme derives nothing visible from the
+  // publishing account, and Yoast's machine meta — `<meta name="author">`,
+  // `twitter:data1`, the JSON-LD `author` — is the only place it surfaces.
+  // Yoast stamps it into the ACF-bylined posts too, so it is not even a signal
+  // there. A post with no ACF author has no author; the renderer draws date and
+  // read time alone, which is what o3world.com draws today.
+  //
+  // Absence is therefore normal, not a finding — no issue and no note. What IS
+  // reported is the third case: an ACF byline pointing at a team post that no
+  // longer exists (7 posts, team ids 5102 / 5320 / 7533 / 8031). WordPress
+  // renders nothing for those either, so the document is correct without an
+  // author, but an editor named someone and the record is gone — a source
+  // cleanup, which is exactly what `notes` is for.
   const acfAuthorId = Array.isArray(post.fields?.author) ? post.fields.author[0] : undefined
-  const authorRef =
-    (acfAuthorId !== undefined ? people.refForTeam(acfAuthorId) : null) ??
-    people.refForUser(post.authorId)
-  if (!authorRef) {
-    issues.push({
+  const authorRef = acfAuthorId !== undefined ? people.refForTeam(acfAuthorId) : null
+  if (acfAuthorId !== undefined && !authorRef) {
+    notes.push({
       element: 'author',
-      detail: `no person for wp user ${post.authorId}${acfAuthorId ? ` or team post ${acfAuthorId}` : ''}`,
+      detail: `ACF byline points at team post ${acfAuthorId}, which no longer exists — no author`,
     })
   }
 
@@ -205,7 +217,7 @@ export function mapPerspective(
     title: post.title,
     slug: { _type: 'slug' as const, current: post.slug },
     excerpt,
-    author: { _type: 'reference' as const, _ref: authorRef as string },
+    ...(authorRef ? { author: { _type: 'reference' as const, _ref: authorRef } } : {}),
     categories: post.categoryIds.map((id) => ({
       _type: 'reference' as const,
       _ref: `category-wp-${id}`,

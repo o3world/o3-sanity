@@ -53,21 +53,23 @@ export function normalizeName(name: string): string {
  * and joins them with nothing. This directory does the join, and it is also
  * where the byline itself is decided:
  *
- * - A post's ACF `author` field points at a team post, and where one is set
- *   it is **the author**. `post_author` is just whoever hit publish: on 39 of
- *   the 40 posts carrying an ACF author, the two disagree.
+ * - A post's ACF `author` field points at a team post, and that is **the only
+ *   byline**. `post_author` is just whoever hit publish — o3world.com renders
+ *   nothing from it, so there is no `refForUser`: a lookup by WP user id
+ *   exists only to answer "who published this", which is not a question the
+ *   new model asks. Dropping it is why `perspective.author` is optional.
  * - A user and a team member are the same person when they share an email
  *   (case-insensitively) or a name. Email is the stronger key and comes
  *   first: three WP accounts never had a display name set, so their "name" is
- *   a login (`handler`, `kelly`) that matches nothing.
+ *   a login (`handler`, `kelly`) that matches nothing. The join still matters
+ *   with the fallback gone — it is what gives an ACF-bylined person their
+ *   `person-wp-<userId>` id and their curated name.
  * - Where they merge, the **team** record supplies the name. It is the
  *   curated, public-facing spelling; the user record is an account.
  */
 export interface PersonDirectory {
   /** Every person any post attributes, ready to emit. */
   readonly docs: readonly PersonDoc[]
-  /** Document id for a WP user id, or `null` if that user is unknown. */
-  refForUser(wpUserId: number): string | null
   /** Document id for a team post id, or `null` if that member is unknown. */
   refForTeam(wpTeamId: number): string | null
 }
@@ -79,7 +81,6 @@ interface Merged {
   photo?: string
   sourceId: string
   extractedAt: string
-  userIds: number[]
   teamIds: number[]
 }
 
@@ -110,15 +111,13 @@ export function buildPersonDirectory(
   // Users first, so a person who has a WP account keeps `person-wp-<userId>`
   // — the id every already-converted perspective references.
   for (const user of users) {
-    const person = findOrCreate({ email: user.email, name: user.name }, () => ({
+    findOrCreate({ email: user.email, name: user.name }, () => ({
       id: `person-wp-${user.wpId}`,
       name: user.name.trim(),
       sourceId: `wp:user:${user.wpId}`,
       extractedAt: user._meta.extractedAt,
-      userIds: [],
       teamIds: [],
     }))
-    person.userIds.push(user.wpId)
   }
 
   for (const member of team) {
@@ -130,7 +129,6 @@ export function buildPersonDirectory(
       name: member.name.trim(),
       sourceId: `wp:team:${member.wpId}`,
       extractedAt: member._meta?.extractedAt ?? new Date(0).toISOString(),
-      userIds: [],
       teamIds: [],
     }))
     person.teamIds.push(member.wpId)
@@ -154,10 +152,8 @@ export function buildPersonDirectory(
     }
   }
 
-  const userIndex = new Map<number, string>()
   const teamIndex = new Map<number, string>()
   for (const person of merged) {
-    for (const id of person.userIds) userIndex.set(id, person.id)
     for (const id of person.teamIds) teamIndex.set(id, person.id)
   }
 
@@ -176,7 +172,6 @@ export function buildPersonDirectory(
         extractedAt: person.extractedAt,
       },
     })),
-    refForUser: (id) => userIndex.get(id) ?? null,
     refForTeam: (id) => teamIndex.get(id) ?? null,
   }
 }
