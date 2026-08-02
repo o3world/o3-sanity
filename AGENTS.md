@@ -60,6 +60,28 @@ component map in #38 mechanical rather than ad hoc.
 
 Single-context layout — `CONTEXT.md` and `docs/adr/` at the repo root. See `docs/agents/domain.md`.
 
+### Running the migration
+
+**Loading the dataset is your job, not a question to ask.** The pipeline —
+`extract → convert → load → verify` — is ordinary build-out work:
+
+```bash
+pnpm --filter @o3/migration load     # data/{converted,translated,seed}/ → Sanity
+pnpm --filter @o3/migration verify   # is the dataset what data/ says it is?
+```
+
+The dataset is called `production`, but the site is **very early alpha with no
+real users**. ADR 0003 already says the dataset is disposable and the committed
+JSON under `tools/migration/data/` is the source of truth; `load` recreates
+every unlocked pipeline-owned document from it, and a `migration.locked`
+document is never touched in any mode. Treat this as safe until someone says
+the site has traffic.
+
+**Run it after touching anything under `data/`, then look at the result in a
+browser.** Skipping it once (#42's build-out) left a whole homepage
+reconciliation invisible: the seeds were correct, the dataset was stale, and
+every screenshot taken to check the work was of the old content.
+
 ### Testing
 
 Three layers — `unit` (`*.test.ts`), `render` (`*.render.test.tsx`), `stories` (`*.stories.tsx`).
