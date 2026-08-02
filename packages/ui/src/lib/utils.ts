@@ -26,6 +26,7 @@ export const FONT_SIZE_UTILITIES = [
   'text-display-xl',
   'text-display-lg',
   'text-display-md',
+  'text-display-sm',
   'text-lead',
   'text-body',
   'text-body-heading',

@@ -23,6 +23,7 @@
  *   cta             40  →  60
  *   display-xl      40  →  48
  *   display-lg      18  →  36
+ *   display-sm      20  →  24
  *   lead            18  →  24
  *   body            16  →  20
  *   body-heading    40  →  36   ← descends; see the token
@@ -122,6 +123,17 @@
   --text-display-md--line-height: 1.2;
   --text-display-md--letter-spacing: -0.0286em;
   --text-display-md--font-weight: 400;
+
+  /* display-sm — 24px. The perspective-card title: 24 at 1440 (`1683:2491`),
+   * 20 at 402 (`1814:1873` / `1814:1887`) — both read, found while #49 built
+   * `/perspectives` on the Blog row's card. One call site, like `quote` — and
+   * tokenised for the same reason: a solved two-endpoint clamp inlined in a
+   * `className` is where nothing would ever check it against the frame again
+   * (ADR 0006). */
+  --text-display-sm: clamp(20px, calc(0.385vw + 18.45px), 24px);
+  --text-display-sm--line-height: 1.2;
+  --text-display-sm--letter-spacing: 0;
+  --text-display-sm--font-weight: 400;
 
   /* ── Body ──────────────────────────────────────────────────────────────── */
   /* lead — 24px. The standfirst beside a section headline (1762:2123), the
