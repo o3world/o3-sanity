@@ -1,4 +1,4 @@
-# 0012. Enter draft mode via the Studio's localStorage token, verified against the project host
+# 0015. Enter draft mode via the Studio's localStorage token, verified against the project host
 
 - **Status:** Accepted
 - **Date:** 2026-08-02
