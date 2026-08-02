@@ -13,6 +13,7 @@
     "deps:fix": "syncpack fix-mismatches",
     "dev": "turbo run dev",
     "dev:web": "turbo run dev --filter @o3/web",
+    "down": "./scripts/down.sh",
     "env:pull": "vercel link --project o3-sanity-web --scope o3-world --yes && vercel env pull apps/web/.env.local --environment=development",
     "format": "turbo run format",
     "frontier": "./scripts/frontier.sh",
