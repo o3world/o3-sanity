@@ -41,18 +41,22 @@ studies, which have no mapper to do it for them.
 
 ### The other direction — what the new site adds
 
-Five paths this site serves that no live sitemap lists. All greenfield, none a
-slug that moved:
+Two paths this site serves that no live sitemap lists. Both greenfield, neither
+a slug that moved:
 
-| Path                                                              | Why it is new                                                                           |
-| ----------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `/live`                                                           | A net-new layer (ADR 0011)                                                              |
-| `/perspectives/how-we-redesigned-our-website-in-a-single-weekend` | A seeded perspective about this build                                                   |
-| `/work/aramark`, `/work/chop`, `/work/ironman`                    | The three hand-authored showcase placeholders — provisional, and #48's gate covers them |
+| Path                                                              | Why it is new                         |
+| ----------------------------------------------------------------- | ------------------------------------- |
+| `/live`                                                           | A net-new layer (ADR 0011)            |
+| `/perspectives/how-we-redesigned-our-website-in-a-single-weekend` | A seeded perspective about this build |
 
 `/ventures/rec-philly` and `/ventures/urvin` were in this list until #23 seeded
 them. They are the reason this diff exists: `ventures` is a custom post type,
 nothing had extracted it, and only a sitemap comparison would have found it.
+
+`/work/aramark`, `/work/chop` and `/work/ironman` were in it until
+[ADR 0016](./adr/0016-publish-what-wordpress-publishes.md) deleted the three
+invented showcase case studies. They are the other thing this diff is for: a
+`/work/*` path the live site has never advertised is a case study nobody wrote.
 
 ---
 
@@ -107,8 +111,11 @@ the domain it gave it to, and compete with it for the ranking. So:
 - `app/sitemap.ts` reads the same generated list and refuses to advertise any
   path that appears in it, so the sitemap and the redirect table cannot
   disagree;
-- the documents stay in the dataset. **Editorial has to decide whether to
-  unpublish them** — a 301 makes the URL unreachable, not the document.
+- the documents stay in the dataset, **published**, exactly as WordPress
+  publishes them ([ADR 0016](./adr/0016-publish-what-wordpress-publishes.md)).
+  A 301 makes the URL unreachable, not the document. Whether these documents
+  should exist at all is an editorial call for whoever owns the o3xo
+  relationship; the redirect layer does not wait on it.
 
 Three of them are among #22's translated case studies
 (`case-studies-ai-electrical-safety-e-hazard`,
@@ -116,6 +123,11 @@ Three of them are among #22's translated case studies
 o3xo.ai's version of the second one names its client "Fortune 500 insurance
 provider" — which is a lead on the anonymized-client flag #22 raised, from a
 source outside this migration.
+
+Those three are the whole of the difference between "published" and
+"advertised" for `/work`: 20 case studies publish, `sitemap.ts` lists **17**,
+and the three it drops are dropped by `REDIRECTED_PATHS` matching their real
+slugs — not by a list anyone maintains.
 
 ### Eight live URLs with no redirect row
 
@@ -200,13 +212,10 @@ and the staging alias never get indexed, and serves `/robots.txt` +
 
 ## What is still open
 
-- **32 documents are loaded and redirected away.** The redirect is right; what
-  to do with the documents is an editorial call.
-- **Case studies are draft-only** until a reviewer publishes them, so
-  `sitemap.ts` currently lists three `/work/*` URLs (the seeded placeholders)
-  rather than twenty. The redirect map and the diff above are computed from the
-  committed corpus, which is complete; the sitemap catches up the moment the
-  drafts are published.
+- **32 documents are published and redirected away.** The redirect is right and
+  ADR 0016 settles the publish state (WordPress publishes them, so this site
+  does too); what to do with the documents themselves is still an editorial
+  call.
 - **The snapshot is a snapshot.** `data/extract/site/{redirects,yoast-sitemaps}.json`
   are re-fetchable (`extract -- --redirects`; the sitemaps by hand), and the
   parity test runs against whatever is committed. Re-fetch before cutover.

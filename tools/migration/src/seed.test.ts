@@ -171,14 +171,16 @@ describe('committed seed content', () => {
    * A case study makes claims about a real client engagement — a stat, a
    * narrative headline, an outcome. The homepage showcase needed three of them
    * before any had been translated, so three were hand-authored to fill it,
-   * and at least one (`aramark`) describes work that has no WordPress source
-   * at all.
+   * and two of them (`aramark`, `chop`) described work that has no WordPress
+   * source at all.
    *
    * That is fine as scaffolding and indefensible as published content, so the
    * rule is mechanical: if a case study did not come from WordPress, it is
-   * PROVISIONAL and says so in its own provenance. `rebuild` and the Studio
-   * can then both see it, and #22 clears them by replacing each with the
-   * translated original.
+   * PROVISIONAL and says so in its own provenance. ADR 0016 has since deleted
+   * all three and the corpus is 20 WordPress-sourced case studies with no
+   * exceptions — which is what the rule wanted, and exactly the state in which
+   * a rule is easiest to lose. It stays: the next person to fill a gap with
+   * plausible copy meets it, not a reviewer.
    */
   describe('content sourcing provenance', () => {
     const caseStudies = allPipelineDocs.filter(({ doc }) => doc._type === 'caseStudy')
@@ -202,9 +204,11 @@ describe('committed seed content', () => {
     it('sees the translated tree, where real case studies live', () => {
       expect(caseStudies.length).toBeGreaterThan(0)
       const trees = new Set(caseStudies.map(({ file }) => file.split('/')[0]))
-      // Asserted as "contains", not "equals": the seeds here are placeholders
-      // that #22 is meant to delete, so pinning the exact set would make this
-      // fail at the moment the mechanism finally succeeds.
+      // Asserted as "contains", not "equals": every case study lives in the
+      // translated tree today, and a seeded one is legitimate again the moment
+      // a greenfield card needs a document. What must never happen is this
+      // scope narrowing back to the seed tree, where the rules below would
+      // have nothing to check.
       expect([...trees], 'the translated tree is out of scope again').toContain('translated')
     })
 

@@ -271,24 +271,11 @@ export function migratedPageSlugs(): string[] {
  * returns — slug flattened, `client`/`industries` dereferenced from the
  * committed seeds, `_meta` dropped the way `load` drops it.
  *
- * Translated documents load draft-only, so the render check is the only place
- * outside Studio that proves one actually displays.
+ * The dataset is disposable (ADR 0003), so this is the check that survives a
+ * rebuild: the committed JSON renders through the real route.
  */
 export function aTranslatedCaseStudy(slug: string): Record<string, unknown> {
-  const raw = resolveWpSrcMarkers(
-    JSON.parse(
-      readFileSync(
-        join(
-          dirname(fileURLToPath(import.meta.url)),
-          '../../../../tools/migration/data/translated/caseStudy',
-          `${slug}.json`,
-        ),
-        'utf8',
-      ),
-    ),
-  ) as Record<string, unknown>
-  // `load` strips `_meta` before writing; the fixture mirrors that.
-  const doc = Object.fromEntries(Object.entries(raw).filter(([k]) => k !== '_meta'))
+  const doc = readTranslatedCaseStudy(slug)
 
   const byId = new Map(
     ['client', 'industry'].flatMap((type) =>
@@ -312,16 +299,45 @@ const SEED_DIR = join(
   '../../../../tools/migration/data/seed',
 )
 
+const TRANSLATED_CASE_STUDY_DIR = join(
+  dirname(fileURLToPath(import.meta.url)),
+  '../../../../tools/migration/data/translated/caseStudy',
+)
+
 function readSeed(type: string, name: string): Record<string, unknown> {
   return resolveWpSrcMarkers(
     JSON.parse(readFileSync(join(SEED_DIR, type, `${name}.json`), 'utf8')),
   ) as Record<string, unknown>
 }
 
+/**
+ * Every seed of a type. Tolerates a missing directory: `data/seed/caseStudy`
+ * stopped existing when ADR 0016 retired the three invented showcase
+ * placeholders, and a type having no seeds is an ordinary state of the corpus
+ * rather than a broken checkout.
+ */
 function seedsOfType(type: string): Record<string, unknown>[] {
-  return readdirSync(join(SEED_DIR, type))
+  const dir = join(SEED_DIR, type)
+  if (!existsSync(dir)) return []
+  return readdirSync(dir)
     .filter((f) => f.endsWith('.json'))
     .map((f) => readSeed(type, f.replace(/\.json$/, '')))
+}
+
+/** A committed translation, markers resolved and `_meta` dropped as `load` drops it. */
+function readTranslatedCaseStudy(slug: string): Record<string, unknown> {
+  const raw = resolveWpSrcMarkers(
+    JSON.parse(readFileSync(join(TRANSLATED_CASE_STUDY_DIR, `${slug}.json`), 'utf8')),
+  ) as Record<string, unknown>
+  return Object.fromEntries(Object.entries(raw).filter(([k]) => k !== '_meta'))
+}
+
+/** Every committed translation — the tree the homepage showcase now references. */
+function translatedCaseStudies(): Record<string, unknown>[] {
+  if (!existsSync(TRANSLATED_CASE_STUDY_DIR)) return []
+  return readdirSync(TRANSLATED_CASE_STUDY_DIR)
+    .filter((f) => f.endsWith('.json'))
+    .map((f) => readTranslatedCaseStudy(f.replace(/\.json$/, '')))
 }
 
 /** Every committed document of a type from the CONVERTED tree, markers resolved. */
@@ -354,13 +370,18 @@ function convertedOfType(type: string): Record<string, unknown>[] {
  */
 export function aSeededPage(name: string): Record<string, unknown> {
   const byId = new Map([
-    ...['client', 'industry', 'caseStudy'].flatMap((type) =>
+    ...['client', 'industry'].flatMap((type) =>
       seedsOfType(type).map((doc) => [doc._id as string, doc] as const),
     ),
     // The About team band (#56) references MIGRATED people, not seeded ones —
     // that is the whole point of the block, so the resolver has to reach into
     // the converted tree the same way the loaded dataset does.
     ...convertedOfType('person').map((doc) => [doc._id as string, doc] as const),
+    // And the homepage showcase references TRANSLATED case studies since ADR
+    // 0016 retired the three invented seeds it used to hold. Same reason: the
+    // honest question is what resolves in the loaded dataset, which is all
+    // three trees.
+    ...translatedCaseStudies().map((doc) => [doc._id as string, doc] as const),
   ])
 
   const deref = (ref: unknown): Record<string, unknown> | null => {

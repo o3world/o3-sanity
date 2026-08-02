@@ -48,7 +48,7 @@ describe('the seeded homepage', () => {
     ['hero subheading', 'The same senior team that finds the move is the team that builds it.'],
     ['partners statement', 'where the stakes — and the org charts — are real'],
     ['case showcase heading', 'Most firms ship what you asked for'],
-    ['a case study’s narrative headline', 'Families were navigating twelve portals'],
+    ['a case study’s narrative headline', 'CMS was heading for end of life'],
     ['quote', 'positioned our company as the leader and shaper'],
     ['platform rail', 'The platforms we go deep on'],
     ['platform standfirst', 'We don&#x27;t dabble across every tool'],
@@ -75,9 +75,19 @@ describe('the seeded homepage', () => {
     expect(html).toContain('La Colombe Coffee Roasters')
   })
 
+  /**
+   * The three cards are the real translated case studies since ADR 0016 —
+   * IRONMAN, Vertex and Caron, the three clients whose logos the frame's own
+   * cards carry (`1883:3557`, `1883:3569`, `1883:3581`). Their copy is
+   * WordPress's, not the frame's: `1683:2661` repeats one authored card three
+   * times, so it is authoritative for which clients appear and for nothing it
+   * says about them (ADR 0007).
+   */
   it('renders the headline stat each showcase card pulls from its case study', () => {
-    expect(html).toContain('41%')
-    expect(html).toContain('fewer missed appointments')
+    expect(html).toContain('75 days')
+    expect(html).toContain('From start to delivery of the Pro-Series experience')
+    expect(html).toContain('3X')
+    expect(html).toContain('56%')
   })
 
   it('gives the page a single h1', () => {

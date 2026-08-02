@@ -305,6 +305,11 @@ describe('the committed redirect map', () => {
      * is greenfield — fine, and worth naming, because the alternative reading
      * is "a slug changed shape during migration", which `checkPathParity`
      * exists to stop.
+     *
+     * It was five until ADR 0016. `/work/aramark`, `/work/chop` and
+     * `/work/ironman` were the three invented showcase placeholders, and they
+     * are the reason this list is worth keeping tight: a `/work/*` path the
+     * live site has never heard of is a case study nobody wrote.
      */
     it('adds only the greenfield paths that are meant to be new', () => {
       const liveSet = new Set(live)
@@ -312,9 +317,6 @@ describe('the committed redirect map', () => {
       expect(added).toEqual([
         '/live',
         '/perspectives/how-we-redesigned-our-website-in-a-single-weekend',
-        '/work/aramark',
-        '/work/chop',
-        '/work/ironman',
       ])
     })
   })

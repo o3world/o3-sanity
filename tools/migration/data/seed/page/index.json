@@ -85,17 +85,17 @@
       "caseStudies": [
         {
           "_type": "reference",
-          "_ref": "caseStudy-seed-chop",
+          "_ref": "caseStudy-wp-10028",
           "_key": "case-0"
         },
         {
           "_type": "reference",
-          "_ref": "caseStudy-seed-ironman",
+          "_ref": "caseStudy-wp-5804",
           "_key": "case-1"
         },
         {
           "_type": "reference",
-          "_ref": "caseStudy-seed-aramark",
+          "_ref": "caseStudy-wp-5805",
           "_key": "case-2"
         }
       ]

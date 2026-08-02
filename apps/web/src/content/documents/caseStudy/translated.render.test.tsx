@@ -78,6 +78,10 @@ describe('the translated La Colombe case study', () => {
  * `next` null — nothing else is loaded beside it — so the neighbour is
  * supplied here, which is also what pins the `client->{name}` the projection
  * had to grow for the "NEXT PROJECT - IRONMAN" kicker.
+ *
+ * The slug is IRONMAN's real one. `/work/ironman` was a seed placeholder until
+ * ADR 0016 deleted it, and a fixture that keeps using a URL the site no longer
+ * has teaches the shape wrong.
  */
 describe('the next-project band', () => {
   it('links the neighbouring case study and names its client', async () => {
@@ -87,7 +91,7 @@ describe('the next-project band', () => {
           ...doc,
           next: {
             title: 'Built for the long run.',
-            slug: 'ironman',
+            slug: 'case-studies-ironman-digital-experience-drupal-acquia',
             heroMedia: (doc as { heroMedia?: unknown }).heroMedia,
             client: { name: 'IRONMAN' },
           },
@@ -99,7 +103,7 @@ describe('the next-project band', () => {
 
     expect(html).toContain('Next project — IRONMAN')
     expect(html).toContain('Built for the long run.')
-    expect(html).toContain('href="/work/ironman"')
+    expect(html).toContain('href="/work/case-studies-ironman-digital-experience-drupal-acquia"')
   })
 
   it('renders nothing when there is no neighbour', () => {

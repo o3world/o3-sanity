@@ -136,8 +136,9 @@ case study — so they are recorded once, here:
    Five carousel images have no alt in WordPress. The perspective mapper's
    fallback applies — the attachment title stands in — but the titles describe
    the file (`LegalDocBot (1)`), not the picture, so each carries a `proposed`
-   flag. These are the only translated fields that must be rewritten before a
-   draft is fit to publish.
+   flag. Of everything the batch translated, these five are the fields most in
+   need of a rewrite — and since ADR 0016 they are live, so the rewrite is
+   fix-forward rather than a gate.
 
 Two things the batch could not do, and did not fake:
 
@@ -156,13 +157,20 @@ Two things the batch could not do, and did not fake:
   the mark, which is the correct signal. Only the six clients on the homepage
   logo wall have logos today.
 
-The three hand-authored case-study seeds (`aramark`, `chop`, `ironman`) stay
-put. `caseStudy-seed-ironman` now has a real translation, but the homepage
-showcase references it with a **strong** reference and translated documents
-load as drafts only — swapping the reference to `caseStudy-wp-10028` would
-point a published document at an id that does not exist published, and Sanity
-rejects the transaction. The swap is a post-publication edit, not a pipeline
-one.
+The three hand-authored case-study seeds (`aramark`, `chop`, `ironman`) are
+**gone** — deleted with `industry-seed-enterprise`, which nothing else
+referenced ([ADR 0016](../../docs/adr/0016-publish-what-wordpress-publishes.md)).
+Two of them described engagements no WordPress case study exists for, and the
+reason ADR 0007 gave for carrying them expired the moment all 20 published: the
+homepage showcase now references `caseStudy-wp-10028` (IRONMAN),
+`caseStudy-wp-5804` (Vertex) and `caseStudy-wp-5805` (Caron), the three clients
+whose logos the frame's own cards carry. Their `client` documents stay — the
+real IRONMAN translation references one, and two more are logos on the homepage
+logo wall.
+
+**All 20 load published**, so the flags above are live copy rather than draft
+copy. The five fallback `alt` strings and the four anonymized client names are
+now fix-forward work, still flagged on the document and still listed here.
 
 ---
 

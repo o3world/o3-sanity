@@ -21,9 +21,9 @@ canonical frames carry finished copy, and the frame it came from is recorded in
 
 | Route                                     | Frame                     | Source                | Documents                                                                                                                                                                                                                                                                                                | Ticket   |
 | ----------------------------------------- | ------------------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| `/`                                       | `1680:2134` / `1814:1618` | seed-from-frame       | `page-seed-index` — **reconciled against the frame** (#42): composition, section order and copy all now the frame's                                                                                                                                                                                      | #42 ✅   |
+| `/`                                       | `1680:2134` / `1814:1618` | seed-from-frame       | `page-seed-index` — **reconciled against the frame** (#42): composition, section order and copy all now the frame's. The showcase's three cards are the real IRONMAN, Vertex and Caron case studies, the clients the frame's own cards carry (ADR 0016)                                                  | #42 ✅   |
 | `/work`                                   | `1634:1167` / `1906:851`  | migrate               | **Dedicated route**, not a document — lists `caseStudy`; composition is code                                                                                                                                                                                                                             | #43 ✅   |
-| `/work/{slug}`                            | `1710:2300` / `1906:928`  | migrate               | **All 20 translated** (#22) and loaded as drafts; publishing is a human act, so the collection renders in draft preview until editorial takes them over                                                                                                                                                  | #44, #22 |
+| `/work/{slug}`                            | `1710:2300` / `1906:928`  | migrate ✅            | **All 20 translated** (#22) and **published** — WordPress publishes all 20 today ([ADR 0016](./adr/0016-publish-what-wordpress-publishes.md)). 17 serve here; the other 3 are among the o3xo.ai-shadowed set, so their URLs 301 away and the sitemap declines them                                       | #44, #22 |
 | `/perspectives`                           | **none**                  | provisional ⚠️        | Composition has no frame; borrows the Work hero + Home blog card rather than inventing one. **No document to mark**, so the marker is on the route entry — see below                                                                                                                                     | #49      |
 | `/perspectives/{slug}`                    | `1710:2823` / `1906:1046` | migrate               | 272 perspectives, 14 persons, 11 categories — **loaded**                                                                                                                                                                                                                                                 | #45      |
 | `/about`                                  | `1924:5344`               | seed-from-frame       | `page-seed-about` — transcribed; the disciplines grid, team and Careers bands render through their own blocks (#56), and the frame's band imagery is committed under `seed/assets/`. Careers is a section, not a route                                                                                   | #46 ✅   |
@@ -59,9 +59,6 @@ verify` lists every one on each run.
 
 | Document                                  | Why                                                                                                                                 | Cleared by                                                                                                                      |
 | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `caseStudy-seed-ironman`                  | The real case study is translated (`caseStudy-wp-10028`) but loads as a **draft**, and the homepage showcase reference is strong    | A reviewer publishing that draft, then repointing the showcase                                                                  |
-| `caseStudy-seed-aramark`                  | **No WordPress case study exists.** Real client, invented engagement write-up.                                                      | A real case study, or replacing the card                                                                                        |
-| `caseStudy-seed-chop`                     | **No WordPress case study exists.** Real client, invented engagement write-up.                                                      | A real case study, or replacing the card                                                                                        |
 | `page-seed-live`                          | The appearances band asserts a **date**, and the frame's is a placeholder duplicated four times                                     | Someone owning the page's cadence and supplying real appearances                                                                |
 | `page-seed-ventures`                      | No canonical frame; the copy is WordPress's and its links point at a Pantheon staging host. Nothing in the site chrome links here   | A commissioned ventures frame, a nav decision, and an owner confirming the portfolio                                            |
 | `page-seed-contact`                       | Two halves. The form **cannot send** — #58 built the fields, not the mechanism or the destination. And there is no canonical frame  | #58's remaining halves (a handler with a spam story, and somewhere for a submission to land), plus a commissioned contact frame |
@@ -69,8 +66,22 @@ verify` lists every one on each run.
 | `page-seed-ventures-urvin`                | Same: no frame, and 2022 copy that predates the current AI story                                                                    | A commissioned frame and an owner confirming the engagement                                                                     |
 | `page-seed-1682-conference-ai-innovation` | No canonical frame; the copy is faithful to WordPress and WordPress is out of date — the hero CTA advertises a date that has passed | A canonical frame, and an owner keeping the event list and CTA true                                                             |
 
-The homepage showcase is a canonical frame with three cards, which is why these
-are carried rather than deleted — see ADR 0007.
+### Retired: the three invented case studies
+
+`caseStudy-seed-aramark`, `caseStudy-seed-chop` and `caseStudy-seed-ironman`
+were on this list until [ADR 0016](./adr/0016-publish-what-wordpress-publishes.md).
+They are **deleted**, with `industry-seed-enterprise`, which existed only to
+give the Aramark card an eyebrow. ADR 0007 carried them because the homepage
+showcase is a canonical frame with three cards and no real case study could
+fill them; all 20 now publish, so the showcase points at
+`caseStudy-wp-10028` (IRONMAN), `caseStudy-wp-5804` (Vertex) and
+`caseStudy-wp-5805` (Caron) — the three clients whose logos the frame's own
+cards carry.
+
+Their `client` documents stay. `client-seed-ironman` is what the real IRONMAN
+translation references, and `client-seed-aramark` / `client-seed-chop` are two
+of the six logos on the homepage logo wall — a real client list, asserting
+nothing about an engagement.
 
 ### Provisional routes — the half `verify` cannot see
 
@@ -94,18 +105,21 @@ absence.
 **#48's gate covers both halves.** No document and no route may still be
 provisional at launch.
 
-Live is provisional for a different reason from the three case studies. Its copy
-is a faithful transcription of a canonical frame, which is normally enough (About
-and Solutions are not provisional). What makes it not-authoritative is that the
-frame fills its two lists by **duplicating one authored row** — four identical
-appearances in `1710:1800`, three identical ideas in `1732:1409` — and the one
-appearance it authors is dated. Transcribing is a transcription job, so the seed
-carries the authored row once and nothing invented; a page promising "what we're
-working on" with a workshop nobody scheduled is exactly what #48's gate is for. All 20
-extracted case studies are now translated (#22), so replacing the two invented
-cards is a question of which drafts editorial publishes — the pipeline cannot
-do the swap itself, because a published page cannot hold a strong reference to
-a draft-only document.
+Live is provisional for a reason worth keeping after the case studies retired.
+Its copy is a faithful transcription of a canonical frame, which is normally
+enough (About and Solutions are not provisional). What makes it
+not-authoritative is that the frame fills its two lists by **duplicating one
+authored row** — four identical appearances in `1710:1800`, three identical
+ideas in `1732:1409` — and the one appearance it authors is dated. Transcribing
+is a transcription job, so the seed carries the authored row once and nothing
+invented; a page promising "what we're working on" with a workshop nobody
+scheduled is exactly what #48's gate is for.
+
+The homepage showcase had the same shape and a different ending: `1683:2661`
+also repeats one authored card three times, so the frame decided which three
+clients appear (their logos) and nothing about what the cards say. Real case
+studies could fill it, and did. Live has no equivalent — nothing in WordPress
+holds the appearances.
 
 Contact and 1682 are a third kind, and the reason is worth naming because more
 routes will land this way: **the content migrated cleanly and the composition
