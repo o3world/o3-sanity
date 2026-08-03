@@ -5,11 +5,10 @@ description: Write, rewrite, or review copy in the O3 World voice — headlines,
 
 # O3 World copy
 
-O3's voice is illustrative and biting like Orwell, direct like Hemingway:
-short sentences, plain words, concrete claims, and pointed observations that
-land. We are the client's partner in all things experiences, and the copy's
-job is to help them see a clear path forward — not to impress them with
-vocabulary.
+O3's voice is warm and concrete: plain words, real specifics, active
+sentences, and a genuine welcome. We are the client's partner in all things
+experiences, and the copy's job is to help them see a clear path forward —
+not to impress them with vocabulary, and not to posture.
 
 The brand foundation (pillars, delivery principles, values) lives in
 [brand.md](brand.md). It is **source material, not copy**. Never paste a pillar
@@ -17,75 +16,111 @@ into a headline. Write what the belief looks like as a specific claim.
 
 ## The register
 
-Calibrated against variant takes (wayfinder #64, 2026-08-02): a really big
-dog that doesn't feel it needs to act like a big dog.
+Calibrated twice: variant takes on one essay (wayfinder #64, 2026-08-02),
+then a survey of the full decade of published content (2026-08-03). The
+essay calibration picked the restrained register; the corpus survey showed
+that register belongs to _one surface_, not all of them. The house default
+across ten years of real writing is **warm-assured teaching** — a company
+that celebrates people by name, shares what it knows, and invites readers
+in.
 
-- **Understatement carries the confidence.** State remarkable facts flatly
-  and let them do the work; never wind up for them. "The AI did most of the
-  typing and made almost none of the decisions. That ratio is the whole
-  story." The restrained register won the calibration — swagger lost.
-- **Bite without contempt.** Orwell's job here is the illustrative, pointed
-  observation — aimed at ideas and the status quo, never down at readers,
-  clients, or the people at other firms. Readers should feel jealous, not
-  insulted. ("Your agency is still billing you the old way" is over the line;
-  "the tools are new, the management is old" is on it.)
-- **Even the quiet register says the thing.** Restraint is not vagueness — a
-  restrained sentence still carries a concrete fact. See the headline rule
-  below.
+- **A really big dog that doesn't feel it needs to act like a big dog.**
+  Confidence lives in understatement: state remarkable facts flatly and let
+  them do the work. "The AI did most of the typing and made almost none of
+  the decisions." No wind-up, no swagger.
+- **Readers should feel invited and equipped.** The corpus stance is
+  hospitable — "we hope you and your team learn from our standards" is house
+  voice. Jealousy is an acceptable effect only in work-showcase essays;
+  usefulness is the goal everywhere else.
+- **Bite is a spice, not the diet.** A pointed observation at an idea or the
+  status quo ("the tools are new, the management is old") earns its place in
+  a thesis-driven essay — at most once per piece. It is never the default
+  register, and it never aims down at readers, clients, or other firms.
+- **Never use competitors as a foil.** No "most firms…", "other agencies…",
+  "your agency is still…". Ten years of published content never once
+  disparages another shop — we name them as friends and invite them to field
+  day. State what _we_ do concretely and let any contrast be inferred.
+
+## Registers by surface
+
+One voice, several registers. Match the register to the surface before
+writing a word:
+
+| Surface                                      | Register                                                                                                                                     |
+| -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Marketing pages, case-study headlines, stats | **Restrained flat-fact** — the #64 register. Understated, specific, no exclamation. This is where the quiet confidence lives.                |
+| Thought-leadership / thesis essays           | **Assured teaching** — a clear claim, generous explanation, costs admitted plainly. One pointed observation allowed; make it count.          |
+| Explainers, how-tos, frameworks              | **Teacherly and generous** — structured, patient, jargon only where precise. The reader leaves equipped, not impressed.                      |
+| Personal essays                              | **First-person and candid** — admits mess, thinks out loud. The most human writing in the corpus; don't sand it smooth.                      |
+| Community, events, people news, Life at O3   | **Openly warm** — names people, celebrates plainly, and yes: "We're excited to share…" and an exclamation mark are on-brand here. Sparingly. |
 
 ## Voice rules
 
-1. **Short declarative sentences.** One idea per sentence. If a sentence has a
-   comma splice or three clauses, break it.
-2. **Plain words.** Never a long word where a short one works. Technical jargon
-   only when there is no other way to say it — "GROQ" is fine when you mean
-   GROQ; "leverage synergies" is never fine.
-3. **Active voice, real subjects.** Someone does something. "We built the front
-   door," not "a unified experience was delivered."
+1. **Varied rhythm.** Use the short declarative sentence as punctuation, not
+   as the diet — a paragraph of all-short sentences reads as posturing. Let
+   explanatory sentences breathe; break only when a sentence genuinely
+   carries two ideas.
+2. **Plain words.** Never a long word where a short one works. Technical
+   jargon only when there is no other way to say it — "GROQ" is fine when you
+   mean GROQ; "leverage synergies" is never fine.
+3. **Active voice, real subjects.** Someone does something. "We built the
+   front door," not "a unified experience was delivered."
 4. **Specific beats superlative.** A number, a named obstacle, a real
    consequence. "41% fewer missed appointments," not "dramatic results."
-5. **Name the reader's reality, then our move.** The strongest O3 structure is
-   tension → turn: their problem in their terms, then what we do about it.
+5. **Name people.** Credit teammates, clients, and partners by name;
+   gratitude and congratulation are house voice ("Thank you, Brian" is
+   on-brand). Copy about culture should contain people, not only attitude.
 6. **Show the belief, don't label it.** We never settle for the status quo —
-   so the copy makes an unsettling claim; it doesn't say "we're innovative."
-7. **No agency clichés.** Banned unless quoting someone: seamless, world-class,
-   cutting-edge, leverage, empower, delight, transform(ational), elevate,
-   best-in-class, holistic, robust, solutions (as a noun for "work"),
-   passionate. No exclamation marks.
-8. **Person:** "you/your" for the client's world, "we" for O3. Never "users
-   will be able to" — say what people can do.
+   so the copy makes a concrete, forward claim; it doesn't say "we're
+   innovative."
+7. **No agency clichés.** Banned unless quoting someone: seamless,
+   world-class, cutting-edge, leverage, empower, delight, transform(ational),
+   elevate, best-in-class, holistic, robust, solutions (as a noun for
+   "work"), passionate. (The old site leaned on these hard — the ban is the
+   correction, and the strongest recent pieces prove it works.)
+8. **Person:** "you/your" for the client's world, "we" for O3 — and "we" is
+   the team and its community, not a vendor. Never "users will be able to" —
+   say what people can do.
+9. **Exclamation marks and stated excitement** belong only in the openly-warm
+   register (community, events, people news), and sparingly there. Never on
+   marketing pages, case studies, or essays.
 
 ## Structures by surface
 
 These match the section blocks in the Sanity schema; live examples are in
-`tools/migration/data/seed/page/` and `.../caseStudy/`.
+`tools/migration/data/seed/page/` and `tools/migration/data/translated/caseStudy/`.
 
-- **Hero headline** (`headlineLines`, 1–2 lines): tension → turn. Real example
-  (home): "You see the problem in front of you." / "We're working on the one
-  behind it." Sentence case, full stops.
-- **Subheading**: pays off the headline with the concrete offer, 1–2 sentences.
-  "Strategy, design, engineering and AI under one roof. The same senior team
-  that finds the move is the team that builds it."
-- **Section heading**: a claim, not a category label. "Most firms ship what
-  you asked for. We solve what was actually in the way." — not "Our Work."
-  (Eyebrows carry the category label: "Our Partners", "Why O3".)
+- **Hero headline** (`headlineLines`, 1–2 lines): tension → turn works here.
+  Real example (home): "You see the problem in front of you." / "We're
+  working on the one behind it." Sentence case, full stops.
+- **Tension → turn is capped at one per page.** It is the strongest single
+  move we have and it hardens into a tic fast. If two headings on a surface
+  share the "X, not Y" shape, rewrite one as a plain claim, an invitation,
+  or a description. Never reuse an aphorism across pages.
+- **Subheading**: pays off the headline with the concrete offer, 1–2
+  sentences. "Strategy, design, engineering and AI under one roof. The same
+  senior team that finds the move is the team that builds it."
+- **Section heading**: a claim, an invitation, or a plain description — not a
+  category label, and not another antithesis. (Eyebrows carry the category
+  label: "Our Partners", "Why O3".)
 - **CTA labels**: 2–4 words, a verb and an object. "View our work", "See all
   partners". Never "Learn more", "Get started", "Click here".
 - **Case-study `narrativeHeadline`**: two sentences — a human subject living
   the problem, then our move. "Families were navigating twelve portals to
-  manage one child's care. We built the front door that made it feel like one."
+  manage one child's care. We built the front door that made it feel like
+  one."
 - **Stats**: `value` is the number, `label` is a plain consequence. "41% /
   fewer missed appointments." No "increase in engagement metrics."
-- **Body prose** (about-page register): admits cost and tradeoffs plainly —
-  that's what grounded sounds like. "It's a slower way to grow. It's the only
-  way to do work this deep."
+- **Body prose**: admits cost and tradeoffs plainly — that's what grounded
+  sounds like. "It's a slower way to grow. It's the only way to do work this
+  deep."
 - **Perspective title + long-form prose**: the title carries the fact — a
   reader who sees only the title knows what actually happened or what we
-  claim. Atmosphere-only titles ("Notes on a weekend rebuild") fail the
-  calibration even in the restrained register; "We rebuilt our site in a
-  weekend. The AI made almost none of the decisions." passes. In the body,
-  find the one sentence that reframes everything and give it room. Admit
-  costs plainly. End on a turned observation, not a sales line.
+  claim. "We rebuilt our site in a weekend. The AI made almost none of the
+  decisions." passes; "Notes on a weekend rebuild" doesn't. In the body,
+  find the one sentence that reframes everything and give it room. End on a
+  turned observation for an essay, a welcome for community content — never
+  a sales line.
 
 ## Revision pass (run every time)
 
@@ -93,15 +128,18 @@ Draft, then:
 
 1. Cut 20% of the words. There is always 20%.
 2. Read each sentence for a doer and a deed. Passive → active.
-3. Swap every latinate word with a plain one unless precision dies ("utilize"
-   → "use", "facilitate" → "help", "methodology" → "how we work").
+3. Swap every latinate word with a plain one unless precision dies
+   ("utilize" → "use", "facilitate" → "help", "methodology" → "how we work").
 4. Check every claim for a specific: could a competitor paste this sentence
    into their site? If yes, it isn't done.
-5. Check the banned list (rule 7).
-6. Check the register: headline says the thing (no atmosphere-only titles);
-   remarkable facts stated flatly, no wind-up; bite aims at ideas, never down
-   at people. (See "The register".)
-7. Read it aloud. Anywhere you'd breathe wrong, break or cut.
+5. Check the banned list (rule 7) — and check for the competitor-foil
+   ("most firms…") and the repeated "X, not Y". One antithesis per page,
+   zero foils.
+6. Check the register against the surface table. A case study is not a
+   birthday post; a birthday post is not a case study.
+7. Check the warmth: does culture/community copy contain actual people? Does
+   the reader leave invited and equipped, or merely impressed?
+8. Read it aloud. Anywhere you'd breathe wrong, break or cut.
 
 ## Worked example
 
@@ -117,11 +155,23 @@ On-brand rewrite:
 > We design and build products around that fact — and around the business
 > they're supposed to move.
 
+Over-corrected input (guide-era drift — too much bite, aphorism as a tic):
+
+> Most firms ship what you asked for. We solve what was actually in the way.
+> Outcomes, not tasks. If you're ready, we're ready.
+
+On-brand rewrite:
+
+> We start with the problem behind the request — the one that's still there
+> after the launch. Bring us the outcome you need, and the same senior team
+> that finds the move will build it. We'd love to talk.
+
 ## Where the copy lives
 
-- Seed pages and case studies: `tools/migration/data/seed/{page,caseStudy}/*.json`
-  — edits reach the dataset via `pnpm --filter @o3/migration load` (the
-  "production" dataset is disposable early-alpha; just run it).
+- Seed pages: `tools/migration/data/seed/page/*.json`; translated case
+  studies: `tools/migration/data/translated/caseStudy/*.json` — edits reach
+  the dataset via `pnpm --filter @o3/migration load` (the "production"
+  dataset is disposable early-alpha; just run it).
 - Live content: Sanity project `naorcr6k`, editable in the embedded studio at
   `/studio` or via MCP `patch_documents`.
 - Schema/field naming is governed by the `content-naming` skill — this skill
