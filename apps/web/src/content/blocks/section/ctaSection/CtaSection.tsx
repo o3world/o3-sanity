@@ -31,11 +31,39 @@ export function CtaSection({ heading, body, cta, decoration }: CtaSectionProps) 
 
   return (
     <section className="bg-ink-deep px-gutter relative isolate overflow-hidden text-white">
+      {/*
+       * Sized off the BAND, not the viewport — the one place the two spheres
+       * differ, because what this band composes around is how much of the
+       * globe it reveals rather than how wide the globe is.
+       *
+       * **The band shows the globe's lower three quarters.** Its top quarter
+       * sits above the band's edge and its bottom limb lands on the floor, so
+       * the sphere reads as one whose underside you are looking into: at
+       * `h-[133.3%]` the visible 100% of the band IS 75% of the sphere, and
+       * `top-[-33.3%]` is the quarter held back.
+       *
+       * That is Nick's call on intent, and it is worth writing down that the
+       * one export we hold disagrees with it. `.figma/frames/cta-band.png`
+       * (2450 × 1344, the same 1.7014× export as the hero) fits a limb of
+       * r ≈ 1490 centred (1225, 1470): an apex just above the top edge and an
+       * equator below the floor — the TOP hemisphere, confirmed by the
+       * silhouette widening all the way down and standing near-vertical at the
+       * bottom. But that file is the video capture with a mouse cursor in the
+       * middle of it, which orbital-sphere.tsx already refuses to take
+       * geometry from, and it is one frame of a globe that was turning. The
+       * canonical CTA frame is `1799:1470` and is not exported here; pull it
+       * before treating either reading as settled.
+       *
+       * What both readings agree on: the previous `w-[120vw]` centred on the
+       * band was wrong. It put the limb off-screen left and right and left
+       * only the middle arcs showing, and a globe you cannot see the edge of
+       * does not read as a globe at all.
+       */}
       {showOrbs ? (
         <OrbitalSphere
           intensity="soft"
           motion="orbit"
-          className="left-1/2 top-1/2 w-[120vw] -translate-x-1/2 -translate-y-1/2"
+          className="left-1/2 top-[-33.3%] h-[133.3%] w-auto -translate-x-1/2"
         />
       ) : null}
 
