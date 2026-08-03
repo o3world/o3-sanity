@@ -57,7 +57,15 @@ export function CaseStudyCard(card: CaseStudyCardData) {
       // heights: the frame's demo narrative is two lines and a real one runs
       // to five, and a hard 362 clips the client logo off the top rather than
       // letting the card grow.
-      className="rounded-card group relative isolate flex min-h-[362px] flex-col justify-between overflow-hidden p-8 text-white lg:min-h-[556px] lg:p-[72px] lg:pb-[88px]"
+      //
+      // `gap-6` is the floor `justify-between` doesn't give you. Once the copy
+      // fills the card there is no free space left to distribute, and the
+      // client mark ends up sitting directly on the eyebrow — 7 of the 9 cards
+      // on /work measured a 0px separation at 402, and two of them at 1440. A
+      // gap costs nothing on a card that still has slack (space-between hands
+      // out the surplus either way) and holds the two groups apart on one that
+      // doesn't.
+      className="rounded-card group relative isolate flex min-h-[362px] flex-col justify-between gap-6 overflow-hidden p-8 text-white lg:min-h-[556px] lg:p-[72px] lg:pb-[88px]"
     >
       <div className="absolute inset-0 -z-20">
         <SanityImage
