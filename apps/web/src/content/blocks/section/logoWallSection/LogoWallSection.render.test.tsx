@@ -6,83 +6,66 @@ import type { SectionProps } from '@/content/blocks/sectionTypes'
 import { LogoWallSection } from './LogoWallSection'
 
 /**
- * The two arrangements this block can be in, rendered side by side.
- *
- * The homepage seed only ever exercises the marquee (`home.render.test.tsx`
- * covers it there, in the real page), so `grid` — the arrangement for a wall
- * with more logos than the frame draws — has no other reader. It is the branch
- * that must NOT pick up the lap: a wrapped grid that duplicates its tiles is
- * just a wall of twelve.
+ * The wall has one arrangement now — a 3 × 2 grid of six, standing still, at
+ * size, in full colour. What this file guards is what the marquee used to
+ * cost: a second pass of clones, a crawl, and a desaturating filter over every
+ * mark.
  *
  * The logos are `null`: `SanityImage` renders nothing for an absent asset, and
- * what is under test is the row, not the image.
+ * what is under test is the wall, not the image.
  */
-const CLIENTS = ['ironman', 'vertex', 'caron'].map((id) => ({
+const CLIENTS = ['chop', 'ironman', 'aramark', 'amerigas', 'caron', 'lacolombe'].map((id) => ({
   _id: id,
   name: id,
   logo: null,
 }))
 
-function render(layout: 'marquee' | 'grid') {
-  return renderToStaticMarkup(
-    <LogoWallSection
-      {...({
-        clients: CLIENTS,
-        layout,
-        surface: 'bone',
-      } as unknown as SectionProps<'logoWallSection'>)}
-    />,
-  )
-}
+const html = renderToStaticMarkup(
+  <LogoWallSection
+    {...({
+      clients: CLIENTS,
+      surface: 'bone',
+    } as unknown as SectionProps<'logoWallSection'>)}
+  />,
+)
 
-const marquee = render('marquee')
-const grid = render('grid')
+const tiles = html.match(/<li[^>]*>/g) ?? []
 
-const tilesIn = (html: string) => html.match(/<li[^>]*>/g) ?? []
-
-describe('the logo wall as a marquee', () => {
-  it('runs the tiles twice, so one copy is exactly half the track', () => {
-    // `o3marquee` translates by -50%; that only wraps seamlessly if the track
-    // is two identical passes.
-    expect(tilesIn(marquee)).toHaveLength(CLIENTS.length * 2)
+describe('the logo wall', () => {
+  it('renders each client exactly once', () => {
+    // The marquee ran two passes so `-50%` wrapped seamlessly. Nothing laps
+    // now, so a second pass would just be six more logos.
+    expect(tiles).toHaveLength(CLIENTS.length)
+    expect(html).not.toContain('aria-hidden="true"')
   })
 
-  it('hides the second pass from anything that counts clients', () => {
-    const clones = tilesIn(marquee).filter((tile) => tile.includes('aria-hidden="true"'))
-    expect(clones).toHaveLength(CLIENTS.length)
+  it('stands still — no crawl, no pause-on-hover, nothing to bleed', () => {
+    expect(html).not.toContain('animate-marquee')
+    expect(html).not.toContain('animation-play-state')
+    expect(html).not.toContain('overflow-hidden')
+    expect(html).not.toContain('w-max')
   })
 
-  it('keeps the second pass off the phone and out of reduced motion', () => {
-    // 402 stacks the tiles (`1814:1898`) and reduced motion holds the still —
-    // in both, a second pass is six more logos and nothing else.
-    for (const clone of tilesIn(marquee).filter((t) => t.includes('aria-hidden="true"'))) {
-      expect(clone).toContain('hidden')
-      expect(clone).toContain('lg:flex')
-      expect(clone).toContain('lg:motion-reduce:hidden')
+  it('lays the marks out three across, two across on a phone', () => {
+    expect(html).toContain('grid-cols-2')
+    expect(html).toContain('lg:grid-cols-3')
+  })
+
+  it('gives each mark room to be read — a 128px cell at lg', () => {
+    // The size is the point of the wall: the marquee's tile gave a logo 68px
+    // of height, and a wall of six can afford far more. The cap on the image
+    // itself is asserted in `home.render.test` — these fixtures have no
+    // asset, so `SanityImage` renders nothing to carry it.
+    for (const tile of tiles) {
+      expect(tile).toContain('h-24')
+      expect(tile).toContain('lg:h-32')
     }
   })
 
-  it('crawls only at lg, pauses under a pointer, and stops for reduced motion', () => {
-    expect(marquee).toContain('lg:animate-marquee')
-    expect(marquee).toContain('lg:hover:[animation-play-state:paused]')
-    expect(marquee).toContain('lg:motion-reduce:animate-none')
-  })
-
-  it('spaces the row with the tile’s own margin, not the row’s gap', () => {
-    // A flex gap leaves the wrap one gap short of a copy and the lap jumps.
-    expect(marquee).toContain('lg:mr-12')
-    expect(marquee).toContain('lg:gap-0')
-  })
-})
-
-describe('the logo wall as a grid', () => {
-  it('renders each client once — a wrapped wall has nothing to lap', () => {
-    expect(tilesIn(grid)).toHaveLength(CLIENTS.length)
-    expect(grid).not.toContain('aria-hidden="true"')
-  })
-
-  it('carries no animation at all', () => {
-    expect(grid).not.toContain('animate-marquee')
-    expect(grid).not.toContain('animation-play-state')
+  it('leaves the marks their own colour', () => {
+    // They were `grayscale contrast-125` to make six palettes read as one
+    // band; the grid does that job on geometry instead.
+    expect(html).not.toContain('grayscale')
+    expect(html).not.toContain('contrast-125')
   })
 })

@@ -43,35 +43,12 @@
   /* .85s — the slower reveals: hero sub/CTA fade-up, the intro overlay's
    * slide-away, work-copy reveal (.8s sits between these two steps). */
   --duration-reveal-slow: 850ms;
-  /* 26s — one full lap of the client logo row (`.o3-clients-track`). A period,
-   * not a transition: it is here rather than inline so the lap and the
-   * keyframes below cannot drift apart. Long enough that the row reads as
-   * drift rather than as a slider advancing. */
-  --duration-marquee: 26s;
 }
 
 /*
- * The one keyframed loop.
- *
- * Declared as plain CSS rather than inside `@theme` so it is emitted whatever
- * Tailwind makes of the conditional class string that uses it. `-50%` is
- * exactly one copy of the track because the track renders its tiles twice and
- * each tile carries its own trailing gap — a flex `gap` on the row would leave
- * the wrap half a gap short and the lap would visibly jump.
+ * There is no marquee. The client logo row used to crawl one copy left every
+ * 26s (`--duration-marquee`, `@keyframes o3marquee`, `--animate-marquee`); the
+ * wall is a still 4 × 2 grid now, and the tokens went with the lap. Nothing
+ * else in the system keyframes a loop — if something needs one again, it wants
+ * its own period next to the durations above, not this one revived.
  */
-@keyframes o3marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@theme {
-  /* The client logo row's endless leftward crawl. Linear and never-easing —
-   * any easing puts a hesitation at the wrap, which is the one moment the
-   * whole effect depends on nobody noticing. Class-accessible via
-   * animate-marquee. */
-  --animate-marquee: o3marquee var(--duration-marquee) linear infinite;
-}

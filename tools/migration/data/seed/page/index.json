@@ -31,7 +31,6 @@
       "surface": "bone",
       "eyebrow": "Our Partners",
       "statement": "We work with B2B and enterprise teams where the stakes — and the org charts — are real.",
-      "layout": "marquee",
       "clients": [
         {
           "_type": "reference",

@@ -122,17 +122,23 @@ describe('the homepage at 402 (ADR 0006)', () => {
     expect(variantsOf(html, 'snap-x')).toEqual(['lg:snap-x'])
   })
 
-  it('stacks the partner logos rather than bleeding a marquee off a phone', () => {
-    // `1814:1898` — one tile per row inside the gutter; `1864:2395`'s
-    // over-wide row is the 1440 treatment, and so is its crawl.
-    expect(html).toContain('lg:w-max')
-    expect(html).toContain('lg:flex-row')
-    expect(variantsOf(html, 'animate-marquee')).toEqual(['lg:animate-marquee'])
-    // The lap's second pass would otherwise stack six more rows under the
-    // first six on a phone. It is `hidden` until it has a track to run on.
-    const clones = html.match(/<li[^>]*aria-hidden="true"[^>]*>/g) ?? []
-    expect(clones.length, 'the marquee’s second pass was not found').toBeGreaterThan(0)
-    for (const clone of clones) expect(clone).toContain('hidden')
+  it('keeps the partner logos a two-across grid inside the gutter', () => {
+    // The wall used to be a crawling row wider than the page — clipped at
+    // both edges at 1440, and at 402 showing a logo and a half. It is a
+    // 3 × 2 grid now, which is two across on a phone and never leaves the
+    // gutter at any width.
+    expect(html).toContain('lg:grid-cols-3')
+    expect(html).not.toContain('animate-marquee')
+    expect(html).not.toContain('lg:w-max')
+  })
+
+  it('renders the partner marks big and in their own colour', () => {
+    // 96px at lg against the marquee tile's 68px, and no `grayscale` — the
+    // wall's whole argument is that six marks can be looked at.
+    const logo = html.match(/<img[^>]*class="[^"]*max-h-16[^"]*"[^>]*>/)?.[0] ?? ''
+    expect(logo, 'no partner logo image was rendered').not.toBe('')
+    expect(logo).toContain('lg:max-h-24')
+    expect(logo).not.toContain('grayscale')
   })
 
   it('sets the hero flush to the gutter, centring it only at lg', () => {

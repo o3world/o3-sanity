@@ -367,7 +367,6 @@ export type LogoWallSection = {
       _key: string
     } & ClientReference
   >
-  layout?: 'grid' | 'marquee'
   cta?: Cta
   surface?: 'white' | 'bone' | 'ink'
 }
@@ -1481,7 +1480,6 @@ export type CASE_STUDY_QUERY_RESULT = {
             _type: 'image'
           } | null
         }> | null
-        layout?: 'grid' | 'marquee'
         cta: {
           _type: 'cta'
           label?: string
@@ -2061,7 +2059,6 @@ export type PAGE_QUERY_RESULT = {
             _type: 'image'
           } | null
         }> | null
-        layout?: 'grid' | 'marquee'
         cta: {
           _type: 'cta'
           label?: string
