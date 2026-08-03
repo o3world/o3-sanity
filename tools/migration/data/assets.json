@@ -1642,33 +1642,5 @@
   "https://www.o3world.com/wp-content/uploads/2022/11/Urvin-blue.jpg": {
     "sha256": "c4151111ae4415cc3ec7e91dba028ff27316efeb",
     "assetId": "image-c4151111ae4415cc3ec7e91dba028ff27316efeb-2500x2500-jpg"
-  },
-  "file:tools/migration/data/seed/assets/perspective-geo-hero.png": {
-    "sha256": "dc710b03d13e081010a7e6805a7c5decdb949ece",
-    "assetId": "image-dc710b03d13e081010a7e6805a7c5decdb949ece-1584x672-png"
-  },
-  "file:tools/migration/data/seed/assets/perspective-1682-guru-hero.png": {
-    "sha256": "90c4d2c748c3c48e799bce7739b8e45ac72e7b8d",
-    "assetId": "image-90c4d2c748c3c48e799bce7739b8e45ac72e7b8d-1584x672-png"
-  },
-  "file:tools/migration/data/seed/assets/perspective-headless-hero.png": {
-    "sha256": "9f8cea2aeba01804c3fee131e95e47c3ada377d2",
-    "assetId": "image-9f8cea2aeba01804c3fee131e95e47c3ada377d2-1584x672-png"
-  },
-  "file:tools/migration/data/seed/assets/perspective-sanity-partner-hero.png": {
-    "sha256": "c8e428b16dfcd25c3be19deb0b7193b84b99ac58",
-    "assetId": "image-c8e428b16dfcd25c3be19deb0b7193b84b99ac58-1584x672-png"
-  },
-  "file:tools/migration/data/seed/assets/perspective-527-prompts-hero.png": {
-    "sha256": "8160658a118e74c1978c9f52ea5a4e27c4bfe488",
-    "assetId": "image-8160658a118e74c1978c9f52ea5a4e27c4bfe488-1584x672-png"
-  },
-  "file:tools/migration/data/seed/assets/perspective-ai-cms-hero.png": {
-    "sha256": "f3745ff5ce6d8db1c8f373ad5cda7793d3217b91",
-    "assetId": "image-f3745ff5ce6d8db1c8f373ad5cda7793d3217b91-1584x672-png"
-  },
-  "file:tools/migration/data/seed/assets/perspective-conversion-hero.png": {
-    "sha256": "4ab21505ee0ec1cbad4d054a8b4134b9e0f64c70",
-    "assetId": "image-4ab21505ee0ec1cbad4d054a8b4134b9e0f64c70-1584x672-png"
   }
 }

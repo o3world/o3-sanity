@@ -10,8 +10,6 @@ export const EXTRACT_DIR = join(DATA, 'extract')
 export const CONVERTED_DIR = join(DATA, 'converted')
 export const TRANSLATED_DIR = join(DATA, 'translated')
 export const SEED_DIR = join(DATA, 'seed')
-/** Committed replacements merged onto converted documents — see lib/overrides.ts. */
-export const OVERRIDES_DIR = join(DATA, 'overrides')
 export const MEDIA_CACHE = join(DATA, 'media-cache')
 /** Translation rule files — the contract an agent translates under (#21). */
 export const RULES_DIR = join(ROOT, 'rules')

@@ -7,7 +7,7 @@ pnpm --filter @o3/migration extract -- --posts all       # live WP → data/extr
 pnpm --filter @o3/migration extract -- --slugs a,b       # …or exactly these posts, by slug
 pnpm --filter @o3/migration extract -- --redirects       # …or just the redirect map (both plugins)
 pnpm --filter @o3/migration extract -- --ventures        # …or just the `ventures` CPT
-pnpm --filter @o3/migration convert                      # data/{extract,overrides}/ → data/converted/ (deterministic, fail-loud)
+pnpm --filter @o3/migration convert                      # data/extract/ → data/converted/ (deterministic, fail-loud)
 pnpm --filter @o3/migration redirects                    # data/extract/site/redirects.json → apps/web/src/lib/redirects.generated.ts
 pnpm --filter @o3/migration load                         # data/{converted,translated,seed}/ → Sanity (sanity exec --with-user-token)
 pnpm --filter @o3/migration verify                       # is the dataset what data/ says it is?
@@ -30,7 +30,6 @@ Rules of the road:
 - Deterministic IDs: `<type>-wp-<id>` (migrated), `<type>-seed-<slug>` (greenfield).
 - Image nodes carry a `_wpSrc` URL marker until `load` uploads the binary and swaps in an asset ref; `data/assets.json` is the URL→asset audit map. Binaries cache in `data/media-cache/` (gitignored).
 - Agent translation (case studies): input = `data/extract/` + `rules/<type>.md` + typegen types; output = `data/translated/` with `_meta` provenance; reviewed as a PR before loading.
-- **A field a mapper produced is replaced through `data/overrides/`, never by editing `data/converted/`** — the next `convert` overwrites that. See "Overrides" below.
 - **A PHP snippet passed to `wpEval` may contain no single quotes and no `//` comments.** It is flattened to one line before it is sent, so a line comment silently comments out the rest of the program; `wpEval` rejects both up front. Explain the PHP in the TypeScript doc comment above it.
 
 ---
@@ -251,54 +250,6 @@ Two things the loader guarantees that seeds depend on:
 - **Slug collisions are reported.** Routes resolve `…[0]`, so two documents
   claiming one slug serve a coin flip. `load` lists any collision in the
   dataset and exits non-zero.
-
----
-
-## Overrides: replacing a field the mapper produced
-
-A migrated document is rebuilt from `data/extract/` on every run, so a field
-somebody wants to replace cannot be edited in `data/converted/` — the next
-`convert` overwrites it, completely and without saying so. It goes in
-`data/overrides/<type>/<id>.json` instead: committed, carrying its own `_meta`,
-merged onto the converted document as the last thing that happens to it.
-
-This is the `translated/` layer's shape (input + a recorded decision → output
-with `_meta` provenance) applied to one field rather than a whole document, and
-it keeps the same two disciplines:
-
-- **`_meta` never reaches the dataset.** It records who decided, when, and why,
-  for whoever reads the diff; only the overriding fields are merged. The
-  translate track strips its own `_meta` in `load` for the same reason — `load`
-  writes committed JSON straight through, so anything left on a document is a
-  field in Studio.
-- **An override that no longer applies fails the run.** Naming a document
-  `convert` no longer emits, or a field it no longer produces, is a decision
-  that has expired, and skipping it silently would revert that field to
-  whatever WordPress says with nothing to say it had. Every override that _did_
-  apply is listed on every run under `OVERRIDES`, so a reader of the output
-  knows which fields are not the mapper's work.
-
-Overrides replace, they never invent: a field an override sets has to exist on
-the converted document already. Inventing one is a mapper change or a schema
-conversation, and this layer is neither. `_id`, `_type` and `migration` cannot
-be overridden at all — the first two are the deterministic id contract, the
-third is the converter's own provenance record.
-
-The seven newest perspectives are the worked example. Each arrived from
-WordPress with a stock photograph as its featured image — "woman sitting at
-computer", "two men looking at a report" — and each now carries a
-design-sourced hero in the art direction the seeded weekend-redesign post
-established: a quiet paper field, thin line-work, one metaphor taken from that
-article's own argument, one amber accent. The `alt` describes the artwork
-rather than restating the title, because a reader who cannot see it is owed the
-picture, not the headline they already have.
-
-The binaries live in `data/seed/assets/` with the rest of the design-sourced
-imagery — the folder is about where an image came from, not which tree
-references it — and are pointed at by `_localSrc`, which `converted.test.ts`
-now checks the way `seed.test.ts` checks the seed tree. A marker pointing at a
-file that is not committed passes on the machine that authored it and fails
-`load` from a fresh clone.
 
 ---
 

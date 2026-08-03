@@ -19,9 +19,9 @@
     "_type": "figure",
     "image": {
       "_type": "image",
-      "_localSrc": "tools/migration/data/seed/assets/perspective-headless-hero.png"
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2026/05/bee227a4-5388-11f1-84e2-0242ac120003.avif"
     },
-    "alt": "Two states of one shape on a bone-coloured field: at the left a rectangle divided into halves that touch, at the right the same rectangle with its halves pulled apart, the lower one filled solid amber."
+    "alt": "Headless CMS vs. traditional CMS: the real tradeoffs for marketing teams"
   },
   "body": [
     {
