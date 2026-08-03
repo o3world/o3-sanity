@@ -87,7 +87,7 @@ export function HeroSection({
          */
         <OrbitalSphere
           motion="orbit"
-          className="bottom-[-124vw] left-1/2 w-[165vw] -translate-x-1/2 lg:bottom-[-63.9vw] lg:w-[80.7vw]"
+          className="bottom-[-124vw] left-1/2 w-[165vw] -translate-x-1/2 lg:bottom-[-77.1vw] lg:w-[95.5vw]"
         />
       ) : null}
 

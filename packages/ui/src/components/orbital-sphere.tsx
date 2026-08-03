@@ -24,11 +24,20 @@ import { cn } from '../lib/utils'
  * that ramps from the centre — the obvious first draft — floods the hero red
  * and buries the headline.
  *
- * Geometry is read the same way. Solving a circle through the limb's apex on
- * the centre column (`720, 650`) and its crossing at quarter-width
- * (`360, 775`) gives **r ≈ 581 centred at (720, 1231)** on the 892-tall band:
- * a sphere 80.7% of the frame width, hung so only its cap shows. Sized in
- * `vw` here so that ratio holds at any viewport.
+ * Geometry is read the same way — off `.figma/frames/hero-image.png`, which is
+ * the hero at 1440 × 892 exported at 1.7014× (2450 / 1440, and 1518 / 1.7014 =
+ * 892.2). Tracing the topmost lit pixel down three columns of that frame gives
+ * (490, 1342), (1225, 1068) and (1959, 1313); the circle through them is
+ * **r ≈ 1170 centred (1242, 2238)** in frame pixels, which converts to
+ * **r ≈ 688 centred (730, 1315)** on the band — a sphere **95.5% of the frame
+ * width**, hung so only its cap shows, with its centre 423px below the band's
+ * floor. Sized in `vw` at the call site so that ratio holds at any viewport.
+ *
+ * An earlier pass read this as r ≈ 581 / 80.7%, which is the same sphere drawn
+ * about a sixth too small: its arcs pulled up and away from the white curve
+ * below instead of running nearly parallel to it, which is the proportion this
+ * band is actually composed around. Check that relationship, not the numbers,
+ * if it ever looks wrong again.
  *
  * The colour vocabulary is read, not invented: the rim resolves to brand
  * `#EB1000` lightened by the bloom, and the arcs are white at the same `0.2`

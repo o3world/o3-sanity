@@ -95,7 +95,7 @@ function backgroundOf(element: Element) {
  * **A candidate also has to be wide enough to BE the surface.** The hero's
  * white CTA and the bone perspectives cards both sit under the sample point on
  * the way past, and both won the walk on colour alone — a 180px button flipping
- * an 822px bar is a false positive that reads as a flicker while scrolling. So
+ * a 1130px bar is a false positive that reads as a flicker while scrolling. So
  * a candidate must span the header horizontally, which is the same "bands are
  * full-width" assumption that lets one x answer for the row. Anything narrower
  * is furniture ON the band, not the band, and the walk continues to what the
