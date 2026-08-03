@@ -10,6 +10,8 @@ import { structureTool, type StructureResolver } from 'sanity/structure'
 import { COLLECTION_PREFIXES, PROJECT_ID } from '@o3/sanity/constants'
 import { schemaTypes } from '@o3/sanity/schemas'
 
+import { mainDocumentRoutes } from './src/sanity/presentationRoutes'
+
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? PROJECT_ID
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET ?? 'production'
 
@@ -45,37 +47,14 @@ const structure: StructureResolver = (S) =>
  * routable document its "Used on" links so a freshly created draft can be
  * opened in preview immediately. URL shapes mirror
  * `src/content/documents/urls.ts` (hrefForDoc) — keep the two in sync.
+ *
+ * The route patterns themselves live in `src/sanity/presentationRoutes.ts`,
+ * where a test can compile them.
  */
 const pageHref = (slug: string | undefined | null) => (!slug || slug === 'index' ? '/' : `/${slug}`)
 
 const resolve: PresentationPluginOptions['resolve'] = {
-  mainDocuments: defineDocuments([
-    {
-      route: '/',
-      filter: `_type == "page" && slug.current == "index"`,
-    },
-    {
-      route: `${COLLECTION_PREFIXES.caseStudy}/:slug`,
-      filter: `_type == "caseStudy" && slug.current == $slug`,
-    },
-    {
-      route: `${COLLECTION_PREFIXES.perspective}/:slug`,
-      filter: `_type == "perspective" && slug.current == $slug`,
-    },
-    {
-      // Catch-all pages store their full multi-segment path in
-      // `slug.current` (`services/ux-audit`); path-to-regexp hands the
-      // segments of a `:slug*` route back as an array.
-      route: '/:slug*',
-      resolve: (ctx) => {
-        const raw = ctx.params.slug as string | string[] | undefined
-        const slug = Array.isArray(raw) ? raw.join('/') : raw
-        return slug
-          ? { filter: `_type == "page" && slug.current == $slug`, params: { slug } }
-          : undefined
-      },
-    },
-  ]),
+  mainDocuments: defineDocuments(mainDocumentRoutes),
   locations: {
     page: defineLocations({
       select: { title: 'title', slug: 'slug.current' },
