@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="1000" height="520">
+  <!--
+    Diagram 1 of 3 for "A map, a queue, and one worktree per ticket".
+
+    What `pnpm frontier` prints, drawn. Closed tickets on the left; the
+    frontier as the dashed red column; blocked tickets behind it with an edge
+    back to whatever is holding them; the fog on the far right, deliberately
+    unticketed.
+
+    Palette is the token set: ink #0A0A0A, brand #EB1000, fg #232323,
+    fg-muted #636363, line #DDDDDB, bone #F0F0F0.
+
+    Self-contained: no external CSS, no script, no web font. Figtree is asked
+    for and system sans is what most readers will get inside an <img>.
+
+    (No double hyphen in this comment: XML forbids one, and a parse failure
+    renders as a 0x0 broken image.)
+  -->
+  <defs>
+    <linearGradient id="brandGlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF6A5A"/>
+      <stop offset="100%" stop-color="#EB1000"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9" fill="none" stroke="#636363" stroke-width="1.4"/>
+    </marker>
+  </defs>
+
+  <style>
+    text { font-family: Figtree, "system-ui", sans-serif; font-weight: 400 }
+    .lane  { font-size: 12px; letter-spacing: .12em; fill: #636363 }
+    .node  { font-size: 16px; fill: #FFFFFF }
+    .nodeD { font-size: 16px; fill: #232323 }
+    .meta  { font-size: 12px; letter-spacing: .04em }
+
+    .in   { opacity: 0; animation: rise .45s cubic-bezier(.2,.9,.3,1) forwards }
+    .line { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw .7s cubic-bezier(.4,0,.2,1) forwards }
+    .beat { animation: beat 3.6s ease-in-out 1.4s infinite }
+
+    @keyframes rise { to { opacity: 1 } }
+    @keyframes draw { to { stroke-dashoffset: 0 } }
+    @keyframes beat { 0%, 100% { opacity: 1 } 50% { opacity: .62 } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .in { opacity: 1 }
+      .line { stroke-dashoffset: 0 }
+      .in, .line, .beat { animation: none }
+    }
+  </style>
+
+  <rect width="1000" height="520" fill="#F0F0F0"/>
+
+  <!-- lane labels -->
+  <text class="lane in" style="animation-delay:.05s" x="40" y="52">CLOSED</text>
+  <text class="lane in" style="animation-delay:.10s" x="300" y="52" fill="#EB1000">READY</text>
+  <text class="lane in" style="animation-delay:.15s" x="590" y="52">BLOCKED</text>
+  <text class="lane in" style="animation-delay:.20s" x="820" y="52">FOG</text>
+
+  <!-- the frontier: the edge of the known -->
+  <line class="in" style="animation-delay:.55s" x1="278" y1="66" x2="278" y2="376"
+        stroke="#EB1000" stroke-width="2" stroke-dasharray="6 7"/>
+
+  <!-- CLOSED: resolved, and the reason the frontier sits where it does -->
+  <g class="in" style="animation-delay:.25s">
+    <rect x="40" y="86" width="200" height="52" fill="#0A0A0A"/>
+    <text class="node" x="60" y="118">#34 frame inventory</text>
+  </g>
+  <g class="in" style="animation-delay:.30s">
+    <rect x="40" y="158" width="200" height="52" fill="#0A0A0A"/>
+    <text class="node" x="60" y="190">#36 shadcn adoption</text>
+  </g>
+  <g class="in" style="animation-delay:.35s">
+    <rect x="40" y="230" width="200" height="52" fill="#0A0A0A"/>
+    <text class="node" x="60" y="262">#37 design tokens</text>
+  </g>
+  <g class="in" style="animation-delay:.40s">
+    <rect x="40" y="302" width="200" height="52" fill="#0A0A0A"/>
+    <text class="node" x="60" y="334">#39 responsive</text>
+  </g>
+
+  <!-- READY: takeable now. The unblocks count is the whole scheduling rule. -->
+  <g class="in beat" style="animation-delay:.70s">
+    <rect x="300" y="86" width="220" height="66" fill="url(#brandGlow)"/>
+    <text class="node" x="320" y="114">#41 site chrome</text>
+    <text class="meta" x="320" y="136" fill="#FFFFFF" opacity=".82">unblocks: 4</text>
+  </g>
+  <g class="in" style="animation-delay:.78s">
+    <rect x="300" y="172" width="220" height="66" fill="url(#brandGlow)"/>
+    <text class="node" x="320" y="200">#43 Work index</text>
+    <text class="meta" x="320" y="222" fill="#FFFFFF" opacity=".82">unblocks: 1</text>
+  </g>
+  <g class="in" style="animation-delay:.86s">
+    <rect x="300" y="258" width="220" height="66" fill="none" stroke="#EB1000" stroke-width="2"/>
+    <text class="nodeD" x="320" y="286">#44 Case Study</text>
+    <text class="meta" x="320" y="308" fill="#EB1000">claimed</text>
+  </g>
+
+  <!-- BLOCKED: open, but waiting on something open -->
+  <g class="in" style="animation-delay:1.0s">
+    <rect x="590" y="118" width="200" height="52" fill="none" stroke="#DDDDDB" stroke-width="1"/>
+    <text class="nodeD" x="610" y="150" fill="#636363">#48 links resolve</text>
+  </g>
+  <g class="in" style="animation-delay:1.06s">
+    <rect x="590" y="204" width="200" height="52" fill="none" stroke="#DDDDDB" stroke-width="1"/>
+    <text class="nodeD" x="610" y="236" fill="#636363">#47 Solutions</text>
+  </g>
+
+  <!-- blocking edges, drawn from the blocker toward what it holds -->
+  <line class="line" style="animation-delay:1.12s" x1="520" y1="119" x2="590" y2="144"
+        stroke="#636363" stroke-width="1.2" marker-end="url(#arrow)" pathLength="1"/>
+  <line class="line" style="animation-delay:1.18s" x1="520" y1="205" x2="590" y2="228"
+        stroke="#636363" stroke-width="1.2" marker-end="url(#arrow)" pathLength="1"/>
+  <line class="line" style="animation-delay:1.24s" x1="520" y1="291" x2="590" y2="158"
+        stroke="#636363" stroke-width="1.2" marker-end="url(#arrow)" pathLength="1"/>
+
+  <!-- FOG: in scope, not yet sharp enough to phrase as a question -->
+  <g class="in" style="animation-delay:1.32s">
+    <rect x="820" y="118" width="150" height="52" fill="none" stroke="#DDDDDB" stroke-width="1" stroke-dasharray="5 6"/>
+    <text class="meta" x="838" y="149" fill="#636363">motion spec</text>
+  </g>
+  <g class="in" style="animation-delay:1.38s">
+    <rect x="820" y="190" width="150" height="52" fill="none" stroke="#DDDDDB" stroke-width="1" stroke-dasharray="5 6"/>
+    <text class="meta" x="838" y="221" fill="#636363">asset strategy</text>
+  </g>
+  <g class="in" style="animation-delay:1.44s">
+    <rect x="820" y="262" width="150" height="52" fill="none" stroke="#DDDDDB" stroke-width="1" stroke-dasharray="5 6"/>
+    <text class="meta" x="838" y="293" fill="#636363">forms</text>
+  </g>
+
+  <!-- the rule, stated once -->
+  <text class="in" style="animation-delay:1.55s" x="40" y="452" font-size="15" fill="#232323">
+    Among READY, take the highest unblocks count. That is the whole scheduling rule.
+  </text>
+  <text class="in" style="animation-delay:1.62s" x="40" y="478" font-size="15" fill="#636363">
+    Claiming a ticket is assigning yourself to it, before any work.
+  </text>
+</svg>

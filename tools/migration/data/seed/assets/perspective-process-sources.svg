@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 480" width="1000" height="480">
+  <!--
+    Diagram 3 of 3 for "A map, a queue, and one worktree per ticket".
+
+    Two sources of record, one page, and the sentence that settles every
+    argument between them (ADR 0007). Drawn on ink because it is the load
+    bearing rule of the whole rebuild.
+
+    The third state matters as much as the first two: a route with neither a
+    frame nor migrated content still has to resolve, so it resolves from a
+    document that says out loud that it is provisional.
+
+    Palette from tokens/color.css. Self-contained: no external CSS, no script.
+
+    (No double hyphen in this comment: XML forbids one, and a parse failure
+    renders as a 0x0 broken image.)
+  -->
+  <defs>
+    <linearGradient id="glowEdge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF6A5A"/>
+      <stop offset="100%" stop-color="#EB1000"/>
+    </linearGradient>
+    <marker id="tipLight" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+    </marker>
+  </defs>
+
+  <style>
+    text { font-family: Figtree, "system-ui", sans-serif; font-weight: 400 }
+    .cap   { font-size: 13px; letter-spacing: .14em; fill: rgba(255,255,255,.6) }
+    .head  { font-size: 22px; fill: rgba(255,255,255,.92) }
+    .item  { font-size: 15px; fill: rgba(255,255,255,.65) }
+    .wins  { font-size: 13px; letter-spacing: .14em; fill: #FF6A5A }
+    .page  { font-size: 22px; fill: #0A0A0A }
+    .note  { font-size: 14px; fill: rgba(255,255,255,.6) }
+
+    .in   { opacity: 0; animation: rise .5s cubic-bezier(.2,.9,.3,1) forwards }
+    .line { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw .9s cubic-bezier(.4,0,.2,1) forwards }
+
+    @keyframes rise { to { opacity: 1 } }
+    @keyframes draw { to { stroke-dashoffset: 0 } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .in { opacity: 1 }
+      .line { stroke-dashoffset: 0 }
+      .in, .line { animation: none }
+    }
+  </style>
+
+  <rect width="1000" height="480" fill="#0A0A0A"/>
+
+  <!-- source of record: the design -->
+  <g class="in" style="animation-delay:.05s">
+    <rect x="50" y="50" width="300" height="170" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1"/>
+    <text class="cap" x="72" y="82">SOURCE OF RECORD</text>
+    <text class="head" x="72" y="116">Figma</text>
+    <text class="item" x="72" y="148">composition and visual language</text>
+    <text class="item" x="72" y="172">type, color, spacing</text>
+    <text class="item" x="72" y="196">the copy it authors</text>
+  </g>
+
+  <!-- source of record: the archive -->
+  <g class="in" style="animation-delay:.12s">
+    <rect x="650" y="50" width="300" height="170" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1"/>
+    <text class="cap" x="672" y="82">SOURCE OF RECORD</text>
+    <text class="head" x="672" y="116">WordPress</text>
+    <text class="item" x="672" y="148">client names, dates, stats</text>
+    <text class="item" x="672" y="172">outcomes anyone can check</text>
+    <text class="item" x="672" y="196">ten years of published editorial</text>
+  </g>
+
+  <!-- what each one wins -->
+  <line class="line" style="animation-delay:.5s" x1="200" y1="220" x2="392" y2="308"
+        stroke="#FFFFFF" stroke-width="1.4" marker-end="url(#tipLight)" pathLength="1"/>
+  <line class="line" style="animation-delay:.5s" x1="800" y1="220" x2="608" y2="308"
+        stroke="#FFFFFF" stroke-width="1.4" marker-end="url(#tipLight)" pathLength="1"/>
+
+  <text class="wins in" style="animation-delay:.9s" x="118" y="278">WINS THE PAGE</text>
+  <text class="wins in" style="animation-delay:.9s" x="882" y="278" text-anchor="end">WINS THE FACTS</text>
+
+  <!-- the artifact -->
+  <g class="in" style="animation-delay:1.0s">
+    <rect x="360" y="310" width="280" height="86" fill="#FFFFFF"/>
+    <text class="page" x="500" y="348" text-anchor="middle">the page</text>
+    <text x="500" y="374" text-anchor="middle" font-size="14" fill="#636363">built against a named frame</text>
+  </g>
+
+  <!-- the third state -->
+  <rect class="in" style="animation-delay:1.2s" x="360" y="418" width="280" height="2" fill="url(#glowEdge)"/>
+  <text class="note in" style="animation-delay:1.26s" x="500" y="450" text-anchor="middle">
+    Neither one has it? The link still resolves, from a document marked provisional.
+  </text>
+</svg>

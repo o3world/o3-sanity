@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 470" width="1000" height="470">
+  <!--
+    Diagram 2 of 3 for "A map, a queue, and one worktree per ticket".
+
+    The migration pipeline as a loop rather than a line: WordPress goes in,
+    committed JSON is the thing that is kept, the dataset is the thing that is
+    rebuilt, and `verify` closes the circle by reading the dataset back and
+    holding it against git.
+
+    The counts are the real corpus at the time of writing: 363 extracted
+    files, 298 converted, 39 seed, 20 agent translated.
+
+    Palette from tokens/color.css. Self-contained: no external CSS, no script.
+
+    (No double hyphen in this comment: XML forbids one, and a parse failure
+    renders as a 0x0 broken image.)
+  -->
+  <defs>
+    <marker id="tip" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9" fill="none" stroke="#0A0A0A" stroke-width="1.5"/>
+    </marker>
+    <marker id="tipRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9" fill="none" stroke="#EB1000" stroke-width="1.5"/>
+    </marker>
+  </defs>
+
+  <style>
+    text { font-family: Figtree, "system-ui", sans-serif; font-weight: 400 }
+    .verb  { font-size: 13px; letter-spacing: .14em; fill: #636363 }
+    .box   { font-size: 17px; fill: #FFFFFF }
+    .boxD  { font-size: 17px; fill: #232323 }
+    .row   { font-size: 15px; fill: #232323 }
+    .num   { font-size: 15px; fill: #636363 }
+    .note  { font-size: 14px; fill: #636363 }
+
+    .in   { opacity: 0; animation: rise .45s cubic-bezier(.2,.9,.3,1) forwards }
+    .line { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw .8s cubic-bezier(.4,0,.2,1) forwards }
+    .loop { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1.3s cubic-bezier(.4,0,.2,1) 1.5s forwards }
+
+    @keyframes rise { to { opacity: 1 } }
+    @keyframes draw { to { stroke-dashoffset: 0 } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .in { opacity: 1 }
+      .line, .loop { stroke-dashoffset: 0 }
+      .in, .line, .loop { animation: none }
+    }
+  </style>
+
+  <rect width="1000" height="470" fill="#FFFFFF"/>
+
+  <!-- source -->
+  <g class="in" style="animation-delay:.05s">
+    <rect x="20" y="70" width="145" height="76" fill="#0A0A0A"/>
+    <text class="box" x="38" y="107">WordPress</text>
+    <text class="num" x="38" y="130" fill="#FFFFFF" opacity=".62">live database</text>
+  </g>
+
+  <line class="line" style="animation-delay:.35s" x1="167" y1="108" x2="261" y2="108"
+        stroke="#0A0A0A" stroke-width="1.4" marker-end="url(#tip)" pathLength="1"/>
+  <text class="verb in" style="animation-delay:.40s" x="214" y="92" text-anchor="middle">EXTRACT</text>
+
+  <!-- the extract tree -->
+  <g class="in" style="animation-delay:.5s">
+    <rect x="265" y="70" width="170" height="76" fill="none" stroke="#0A0A0A" stroke-width="1.5"/>
+    <text class="boxD" x="283" y="105">data/extract</text>
+    <text class="num" x="283" y="128">363 files</text>
+  </g>
+
+  <line class="line" style="animation-delay:.75s" x1="437" y1="108" x2="531" y2="108"
+        stroke="#0A0A0A" stroke-width="1.4" marker-end="url(#tip)" pathLength="1"/>
+  <text class="verb in" style="animation-delay:.80s" x="484" y="92" text-anchor="middle">CONVERT</text>
+
+  <!-- the loadable corpus -->
+  <g class="in" style="animation-delay:.9s">
+    <rect x="535" y="48" width="240" height="120" fill="none" stroke="#0A0A0A" stroke-width="1.5"/>
+    <text class="row" x="553" y="78">converted/</text><text class="num" x="757" y="78" text-anchor="end">298</text>
+    <text class="row" x="553" y="106">seed/</text><text class="num" x="757" y="106" text-anchor="end">39</text>
+    <text class="row" x="553" y="134">translated/</text><text class="num" x="757" y="134" text-anchor="end">20</text>
+  </g>
+
+  <!-- what is actually kept -->
+  <line class="in" style="animation-delay:1.0s" x1="265" y1="192" x2="775" y2="192" stroke="#EB1000" stroke-width="1.5"/>
+  <text class="in" style="animation-delay:1.05s" x="265" y="216" font-size="15" fill="#EB1000">
+    Committed JSON. This is the source of truth, and it reviews as a diff.
+  </text>
+
+  <!-- load -->
+  <line class="line" style="animation-delay:1.2s" x1="655" y1="240" x2="655" y2="296"
+        stroke="#0A0A0A" stroke-width="1.4" marker-end="url(#tip)" pathLength="1"/>
+  <text class="verb in" style="animation-delay:1.25s" x="670" y="274">LOAD</text>
+
+  <!-- the disposable end -->
+  <g class="in" style="animation-delay:1.35s">
+    <rect x="535" y="298" width="240" height="90" fill="#0A0A0A"/>
+    <text class="box" x="553" y="334">Sanity dataset</text>
+    <text class="num" x="553" y="360" fill="#FF6A5A">disposable</text>
+  </g>
+
+  <!-- verify closes the circle -->
+  <path class="loop" d="M 775 343 L 895 343 L 895 108 L 781 108"
+        fill="none" stroke="#EB1000" stroke-width="1.5" marker-end="url(#tipRed)" pathLength="1"/>
+  <text class="verb in" style="animation-delay:1.9s" x="883" y="232" text-anchor="end" fill="#EB1000">VERIFY</text>
+
+  <!-- the two rules that make it safe to run at any time -->
+  <text class="note in" style="animation-delay:2.0s" x="20" y="424">
+    Unknown module in the source? The converter stops and names it. It never drops it quietly.
+  </text>
+  <text class="note in" style="animation-delay:2.06s" x="20" y="448">
+    A locked document is never touched, in any mode. Everything else is rebuilt from git.
+  </text>
+</svg>
