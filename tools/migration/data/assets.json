@@ -1642,5 +1642,17 @@
   "https://www.o3world.com/wp-content/uploads/2022/11/Urvin-blue.jpg": {
     "sha256": "c4151111ae4415cc3ec7e91dba028ff27316efeb",
     "assetId": "image-c4151111ae4415cc3ec7e91dba028ff27316efeb-2500x2500-jpg"
+  },
+  "file:tools/migration/data/seed/assets/eng-squad.svg": {
+    "sha256": "1a8353a21c514f9f2c82658ef368f0b7fa1529b4",
+    "assetId": "image-1a8353a21c514f9f2c82658ef368f0b7fa1529b4-300x300-svg"
+  },
+  "file:tools/migration/data/seed/assets/eng-embedded.svg": {
+    "sha256": "7da96df7804e45d03242f5a3577513ab7c5c5876",
+    "assetId": "image-7da96df7804e45d03242f5a3577513ab7c5c5876-300x300-svg"
+  },
+  "file:tools/migration/data/seed/assets/eng-ownership.svg": {
+    "sha256": "7d38ddb7902f49b17cc3cf0541ca48b473012fd6",
+    "assetId": "image-7d38ddb7902f49b17cc3cf0541ca48b473012fd6-300x300-svg"
   }
 }

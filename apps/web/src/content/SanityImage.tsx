@@ -10,6 +10,8 @@ import {
   imageDimensions,
   imageHotspot,
   isRenderableImage,
+  isVectorImage,
+  rawImageUrl,
   urlForImage,
   type SanityImageSource,
 } from '@o3/sanity/image'
@@ -114,6 +116,47 @@ export function SanityImage({
   // announced verbatim by a screen reader there, so strip it (same reasoning
   // as the `aria-label` in InFlightSection's rows).
   const cleanAlt = stegaClean(alt) ?? ''
+
+  // A vector never goes through the optimiser. `next/image` rasterises it at a
+  // fixed width, which discards the resolution independence that made it a
+  // vector and — for the engagement diagrams, whose keyframes live inside the
+  // file — freezes the animation on frame one. So this branch hands the browser
+  // the uploaded file and lets CSS size it.
+  //
+  // The CDN cannot crop a vector either, so a ratio box is honoured with
+  // `object-fit` rather than a server-side rect. That loses hotspot-aware
+  // cropping, which is the trade a vector asset makes by being one.
+  if (isVectorImage(image)) {
+    const src = rawImageUrl(image)
+    if (!src) return null
+    const dimensions = imageDimensions(image)
+    const img = (
+      // eslint-disable-next-line @next/next/no-img-element -- bypassing next/image is this branch's whole purpose; see above.
+      <img
+        src={src}
+        alt={cleanAlt}
+        loading={priority ? 'eager' : 'lazy'}
+        decoding="async"
+        {...(ratio === 'original'
+          ? { width: dimensions?.width, height: dimensions?.height, className }
+          : {
+              className: cn('h-full w-full', fit === 'crop' ? 'object-cover' : 'object-contain'),
+            })}
+      />
+    )
+    if (ratio === 'original') return img
+    return (
+      <div
+        className={cn(
+          'relative overflow-hidden',
+          ratio === 'fill' ? 'h-full w-full' : RATIO_CLASS[ratio],
+          className,
+        )}
+      >
+        {img}
+      </div>
+    )
+  }
 
   // Original: intrinsic layout at the image's real shape. The dimensions come
   // from the asset id, so a portrait image lays out as a portrait — a guessed

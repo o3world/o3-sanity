@@ -64,6 +64,39 @@ export function isRenderableImage(source: unknown): boolean {
   return id.startsWith('image-') && ASSET_DIMENSIONS.test(id)
 }
 
+/**
+ * Whether the asset is a vector.
+ *
+ * A vector is not a raster the CDN can resize — `auto=format` rasterises it,
+ * and Next's optimiser rasterises it again, which throws away the one property
+ * that made it a vector and kills any animation inside it. Callers use this to
+ * take the asset as it was uploaded.
+ */
+export function isVectorImage(source: unknown): boolean {
+  const id = assetId(source)
+  return id !== null && /-svg$/i.test(id)
+}
+
+/** `image-<hash>-<width>x<height>-<ext>` — the id's full shape. */
+const ASSET_ID = /^image-([a-f0-9]+)-(\d+x\d+)-([a-z0-9]+)$/i
+
+/**
+ * The asset's own file on the CDN, with no transform parameters at all.
+ *
+ * Deliberately built from the id rather than through `urlForImage`: that
+ * builder always appends `auto=format`, which is exactly the parameter a
+ * vector must not carry. Returns `null` for an id this module cannot parse,
+ * which is the signal to fall back to the ordinary raster path.
+ */
+export function rawImageUrl(source: unknown): string | null {
+  const id = assetId(source)
+  const match = id ? ASSET_ID.exec(id) : null
+  if (!match) return null
+  const [, hash, dimensions, extension] = match
+  const { projectId, dataset } = clientConfig
+  return `https://cdn.sanity.io/images/${projectId}/${dataset}/${hash}-${dimensions}.${extension}`
+}
+
 export interface ImageDimensions {
   /** Delivered width in pixels — the asset's, minus any crop the editor set. */
   width: number
