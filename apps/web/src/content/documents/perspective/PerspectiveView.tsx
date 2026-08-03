@@ -1,4 +1,4 @@
-import { ArticleByline, Eyebrow, OrbitalSphere, ReadingProgress } from '@o3/ui'
+import { ArticleByline, Eyebrow, OrbitalSphere, ReadingProgress, SectionShell } from '@o3/ui'
 import type { PERSPECTIVE_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { CarouselTrack } from '@/content/blocks/section/perspectivesCarouselSection/CarouselTrack'
@@ -30,6 +30,14 @@ type PerspectiveViewProps = NonNullable<PERSPECTIVE_QUERY_RESULT>
  * body          1710:2836    1906:1053    white band, 822px measure, <PortableTextBody>
  * keep reading  1751:1947    1906:1213    bone band, the Home Blog row's carousel
  * ```
+ *
+ * "Keep reading" renders through the same `SectionShell` the Home Blog band
+ * uses, so heading, controls and row all sit in the standard 1248px column and
+ * the track's own `overflow-x-auto` clips scrolled cards at the gutter line.
+ * It used to build a bare `<section>` with no gutter, which put the heading on
+ * the viewport edge and ran the row off both sides — one carousel rendering
+ * two different ways. `CarouselTrack` records why the 1440 frame's bleed past
+ * the right edge is not kept in either place.
  *
  * Nav, footer and the closing CTA band are not this component's: the first two
  * come from `(site)/layout.tsx`, and the CTA band the desktop frame ends on is
@@ -139,7 +147,7 @@ export function PerspectiveView({
       </div>
 
       {keepReading.length ? (
-        <section className="bg-bone py-band-sm overflow-hidden">
+        <SectionShell surface="bone" top="sm" bottom="sm">
           {/* `1751:1949` — the frame's own copy for this band. The mobile
               frame heads it "The thinking behind the work.", which is the
               /perspectives index's line; the desktop detail frame is the
@@ -150,7 +158,7 @@ export function PerspectiveView({
               <Card key={item._id} {...item} />
             ))}
           />
-        </section>
+        </SectionShell>
       ) : null}
     </article>
   )
