@@ -20,7 +20,7 @@ interface SiteNavProps {
  *
  * |       | 402 (`1814:1630`)                 | 1440 (`1710:2271`)                     |
  * | ----- | --------------------------------- | -------------------------------------- |
- * | Shape | full-width square bar, `8px 20px` | 822px pill, radius 900px, `8px 32px`   |
+ * | Shape | full-width square bar, `8px 20px` | 1130px pill, radius 900px, `8px 32px`  |
  * | Links | behind "Open menu"                | five inline, in a 589px space-between  |
  * | CTA   | inline, beside the hamburger      | inline, ending the row                 |
  *
@@ -38,7 +38,16 @@ interface SiteNavProps {
  * let the desktop bar scroll away. It is `fixed` at every width again, because
  * the ink flip below is a **pinned** bar's behaviour: a bar that leaves never
  * crosses a light band and has nothing to flip against. Every Figma-derived
- * offset is untouched — `top-[30px]`, the gutter padding, the 822px cap.
+ * offset is untouched — `top-[30px]`, the gutter padding, the pill cap.
+ *
+ * **The cap is 1130px, measured off `.figma/frames/hero-image.png`.** That
+ * frame is the hero at 1440 × 892, exported at 1.7014× (2450 / 1440 = 1.7014,
+ * and 1518 / 1.7014 = 892.2), so its pixels convert cleanly: the pill's stroke
+ * runs x 267.5 → 2190, which is 1923 frame px and 1130 CSS px, leaving 155
+ * either side. The earlier 822 read this table's `1710:2271` and is what made
+ * the bar narrower than the headline it sits over — in the frame the pill is
+ * comfortably WIDER than the headline, which is the proportion to check
+ * against if this ever drifts again.
  *
  * ── INK FLIP ───────────────────────────────────────────────────────────────
  *
@@ -119,7 +128,7 @@ export function SiteNav({ settings }: SiteNavProps) {
         // this element carries the whole bar — the links, the hamburger's
         // `currentColor` bars and anything else added to the row inherit the
         // value mid-interpolation, and each keeps its own hover timing.
-        className="bg-scrim lg:border-on-ink-line group-data-[ink=dark]:bg-scrim-light lg:group-data-[ink=dark]:border-on-light-line group-data-[ink=dark]:text-fg duration-(--duration-ink) flex items-center justify-between px-5 py-2 text-white backdrop-blur-[14px] transition-[background-color,border-color,color] ease-out lg:mx-auto lg:w-full lg:max-w-[822px] lg:rounded-full lg:border lg:px-8"
+        className="bg-scrim lg:border-on-ink-line group-data-[ink=dark]:bg-scrim-light lg:group-data-[ink=dark]:border-on-light-line group-data-[ink=dark]:text-fg duration-(--duration-ink) flex items-center justify-between px-5 py-2 text-white backdrop-blur-[14px] transition-[background-color,border-color,color] ease-out lg:mx-auto lg:w-full lg:max-w-[1130px] lg:rounded-full lg:border lg:px-8"
       >
         <Link
           href="/"

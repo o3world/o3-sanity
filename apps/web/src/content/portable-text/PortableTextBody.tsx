@@ -48,7 +48,12 @@ const components: PortableTextComponents = {
             alt={figure.alt}
             width={1600}
             className="rounded-card w-full"
-            sizes="(min-width: 768px) 720px, 100vw"
+            // 822px is `--container-article`, the measure both detail
+            // templates wrap this renderer in — the same value
+            // `PerspectiveView` declares for its hero. The old 720 matched no
+            // measure in the system: it made the browser pick the 750 candidate
+            // for an 822 slot and upscale every inline figure by ~10%.
+            sizes="(min-width: 1024px) 822px, 100vw"
           />
           {figure.caption ? (
             <figcaption className="text-fg-subtle mt-3 text-sm">{figure.caption}</figcaption>

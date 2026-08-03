@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <!--
+    Engagement diagram 01 — Embedded Team Member. A three-by-three lattice
+    whose centre node is ours.
+
+    Carried over from `prototype/O3 Homepage v2.dc.html` (the `.eng-gfx` block
+    at its line 1992), which draws these as inline SVG with CSS keyframes —
+    the PNG stills that preceded this file lost the motion the band was
+    designed around.
+
+    Self-contained on purpose: an SVG referenced by <img> cannot see the page's
+    stylesheet, so the keyframes and the brand red live here. #EB1000 is the
+    `color-brand` token (Figma `Jawn/Primary/Phillies`) — the one value in this
+    file that also exists as a token, and the one to change if the token does.
+
+    (Written without a double hyphen on purpose: XML forbids one inside a
+    comment, and an SVG that fails to parse renders as a 0x0 broken image.)
+
+    The prototype gated its entry animations on an IntersectionObserver adding
+    `.on`. Script never runs inside an <img>, so they autoplay on load instead
+    and hold on their last frame; the ambient float loops forever.
+  -->
+  <style>
+    .line { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1.1s cubic-bezier(.4,0,.2,1) forwards }
+    .pop  { opacity: 0; transform: scale(0); animation: pop .55s cubic-bezier(.2,.9,.3,1.3) forwards }
+    .red  { animation: pop .55s cubic-bezier(.2,.9,.3,1.3) forwards, pulse 3.4s ease-in-out 1.2s infinite }
+    .float { animation: float 7s ease-in-out infinite }
+
+    @keyframes draw  { to { stroke-dashoffset: 0 } }
+    @keyframes pop   { to { opacity: 1; transform: scale(1) } }
+    @keyframes pulse { 0%, 100% { opacity: 1 } 50% { opacity: .55 } }
+    @keyframes float { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-8px) } }
+
+    /* The prototype had no reduced-motion answer. Freeze on the final frame —
+       the drawing is the information, the motion is the flourish. */
+    @media (prefers-reduced-motion: reduce) {
+      .line { stroke-dashoffset: 0 }
+      .pop, .red { opacity: 1; transform: none }
+      .line, .pop, .red, .float { animation: none }
+    }
+  </style>
+
+  <g class="float">
+    <line class="line" x1="70" y1="70" x2="230" y2="70" stroke="#DDDDDB" stroke-width="1" pathLength="1"/>
+    <line class="line" x1="70" y1="150" x2="230" y2="150" stroke="#DDDDDB" stroke-width="1" pathLength="1"/>
+    <line class="line" x1="70" y1="230" x2="230" y2="230" stroke="#DDDDDB" stroke-width="1" pathLength="1"/>
+    <line class="line" x1="70" y1="70" x2="70" y2="230" stroke="#DDDDDB" stroke-width="1" pathLength="1"/>
+    <line class="line" x1="150" y1="70" x2="150" y2="230" stroke="#DDDDDB" stroke-width="1" pathLength="1"/>
+    <line class="line" x1="230" y1="70" x2="230" y2="230" stroke="#DDDDDB" stroke-width="1" pathLength="1"/>
+
+    <circle class="pop" style="animation-delay:.25s;transform-origin:70px 70px" cx="70" cy="70" r="8" fill="#8A8A8E"/>
+    <circle class="pop" style="animation-delay:.32s;transform-origin:150px 70px" cx="150" cy="70" r="8" fill="#8A8A8E"/>
+    <circle class="pop" style="animation-delay:.39s;transform-origin:230px 70px" cx="230" cy="70" r="8" fill="#8A8A8E"/>
+    <circle class="pop" style="animation-delay:.46s;transform-origin:70px 150px" cx="70" cy="150" r="8" fill="#8A8A8E"/>
+    <circle class="pop red" style="animation-delay:.53s;transform-origin:150px 150px" cx="150" cy="150" r="11" fill="#EB1000"/>
+    <circle class="pop" style="animation-delay:.6s;transform-origin:230px 150px" cx="230" cy="150" r="8" fill="#8A8A8E"/>
+    <circle class="pop" style="animation-delay:.67s;transform-origin:70px 230px" cx="70" cy="230" r="8" fill="#8A8A8E"/>
+    <circle class="pop" style="animation-delay:.74s;transform-origin:150px 230px" cx="150" cy="230" r="8" fill="#8A8A8E"/>
+    <circle class="pop" style="animation-delay:.81s;transform-origin:230px 230px" cx="230" cy="230" r="8" fill="#8A8A8E"/>
+  </g>
+</svg>
