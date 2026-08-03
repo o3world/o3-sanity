@@ -38,8 +38,56 @@
    * Horizontal scrim over the case-study card photography, so the left-hand
    * copy column stays legible while the right side shows the image
    * (nodes 1883:3555 / 3567 / 3579). Sits ABOVE the image fill.
+   *
+   * The frame draws this at alpha 1 out to 26%, which paints an opaque black
+   * plate over a third of the card and, on the dark hero photography the real
+   * case studies ship, reads as a black-and-white treatment rather than a
+   * scrim. The stops below hold the copy column at 0.74–0.8 instead: white on
+   * that composites to ~9:1 even over a blown-out highlight, which is well
+   * past AA, and it is a WASH rather than a plate — the photograph is visible
+   * through it. The 0.68 shelf at 50% is not a smoothing stop; it is where the
+   * stat's 65%-white label ends, the lowest-contrast text on the card.
+   *
+   * Past 70% the scrim is essentially gone, so the right third of the card is
+   * open photograph — the same read the frame intends, arrived at by fading
+   * sooner rather than by starting from opaque. See `drift` in
+   * packages/ui/src/foundations/figma-home-spec.ts.
    */
-  --gradient-card-scrim: linear-gradient(90deg, rgba(3, 3, 3, 1) 26%, rgba(3, 3, 3, 0) 79%);
+  --gradient-card-scrim: linear-gradient(
+    90deg,
+    rgba(3, 3, 3, 0.8) 0%,
+    rgba(3, 3, 3, 0.74) 34%,
+    rgba(3, 3, 3, 0.68) 50%,
+    rgba(3, 3, 3, 0.22) 70%,
+    rgba(3, 3, 3, 0) 84%
+  );
+  /*
+   * The same job on the stacked card (`1925:5734`), where the copy spans the
+   * full width and a horizontal scrim would leave the end of every line on
+   * open photograph. The frame answers with a flat rgba(3,3,3,0.6) over the
+   * whole square, which is the worst of both: not enough ink under the copy,
+   * and a uniform grey haze over the parts of the image carrying no text.
+   *
+   * This weights it instead — ink under the logo at the top and under the copy
+   * on the floor, released through the middle. Legibility goes UP (0.72–0.88
+   * behind the copy against the frame's 0.6) while the picture opens.
+   *
+   * The stops at either end are in px, not percentages, because this card is a
+   * 362 FLOOR: the copy block's height is roughly fixed and the card grows
+   * under it, so a percentage stop that sits under the eyebrow on a two-line
+   * headline sits well above it on a five-line one. When the card is at its
+   * floor the two calc() stops resolve below the 110px stop and the browser
+   * clamps them up, collapsing this to a plain top-to-bottom ramp — which is
+   * the correct treatment for a card whose copy fills it.
+   */
+  --gradient-card-scrim-stacked: linear-gradient(
+    180deg,
+    rgba(3, 3, 3, 0.7) 0px,
+    rgba(3, 3, 3, 0.3) 110px,
+    rgba(3, 3, 3, 0.3) calc(100% - 340px),
+    rgba(3, 3, 3, 0.72) calc(100% - 150px),
+    rgba(3, 3, 3, 0.88) 100%
+  );
   /*
    * Vertical scrim on the perspectives ("Blog") cards — transparent at the
    * top, 75% ink at the bottom where the card's label sits (node 1734:1725).

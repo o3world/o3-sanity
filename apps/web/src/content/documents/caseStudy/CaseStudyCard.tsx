@@ -29,7 +29,7 @@ function caseEyebrow(card: Pick<CaseStudyCardData, 'industries' | 'industryDetai
  * ```
  * 1248 × 556        padding 72px 72px 88px, content pinned via space-between
  *   background      the hero image, cover
- *   scrim           --gradient-card-scrim — 90deg, ink → 0 between 26% and 79%
+ *   scrim           --gradient-card-scrim — 90deg, 0.8 ink → 0 by 84%
  *   top             the client logo, 185px wide, knocked out WHITE (1883:3556)
  *   bottom  gap 24  eyebrow 16px + narrative 28px in a 472px measure
  *                   stat 48px beside its label at 65% white, 24px apart
@@ -66,7 +66,12 @@ export function CaseStudyCard(card: CaseStudyCardData) {
           ratio="fill"
           width={1600}
           sizes="(min-width: 1024px) 1248px, 100vw"
-          className="duration-(--duration-reveal) h-full w-full transition-transform ease-out group-hover:scale-[1.03]"
+          // Any ink laid over a photograph costs it chroma as well as
+          // luminance, so the scrim reads as desaturation even where it is
+          // only dimming. A tenth of saturation back is the compensation, not
+          // a grade: it is sized to the scrim, and the image under no scrim at
+          // all (`NextCaseBand`) deliberately doesn't carry it.
+          className="duration-(--duration-reveal) saturate-110 h-full w-full transition-transform ease-out group-hover:scale-[1.03]"
         />
       </div>
       {/*
@@ -75,22 +80,50 @@ export function CaseStudyCard(card: CaseStudyCardData) {
        * holds it legible with the 90° `--gradient-card-scrim` (`1883:3555`).
        * At 402 the card is a **362 square** and the copy spans it, so a
        * horizontal scrim would leave the end of every line on open
-       * photograph — and the frame doesn't use one: `1925:5734` fills with a
-       * flat `rgba(3,3,3,0.6)` wash over the image.
+       * photograph — `1925:5734` answers that with a flat wash over the image.
        *
        * This is the responsive contract working as ADR 0006 describes it: the
        * frames are endpoints, and here they differ in kind, not in degree.
+       *
+       * Both tokens are retuned away from the frame's literal values, which
+       * are heavy enough to read as a black-and-white treatment on real hero
+       * photography — the reasoning is at the tokens in gradient.css, and the
+       * departure is recorded in `drift`.
        */}
-      <div className="lg:bg-(image:--gradient-card-scrim) absolute inset-0 -z-10 bg-[rgba(3,3,3,0.6)]" />
+      <div className="bg-(image:--gradient-card-scrim-stacked) lg:bg-(image:--gradient-card-scrim) absolute inset-0 -z-10" />
 
+      {/*
+       * The knockout is a masked fill, so its separation from the photograph
+       * is a drop-shadow rather than a text-shadow — `filter` follows the mask
+       * alpha, and the logo has no glyphs to shadow. Same job as the shadow on
+       * the copy below: it is what lets the scrim stay a wash. Invisible over
+       * the ink the scrim actually lays down, and the whole reason a bright
+       * patch of sky behind a logo doesn't have to be paid for in ink.
+       */}
       {client?.logo ? (
-        <LogoKnockout source={client.logo} alt={client.name} width={185} height={40} />
+        <LogoKnockout
+          source={client.logo}
+          alt={client.name}
+          width={185}
+          height={40}
+          className="drop-shadow-[0_1px_10px_rgba(3,3,3,0.55)]"
+        />
       ) : (
-        <span className="eyebrow font-bold">{client?.name}</span>
+        <span className="eyebrow font-bold [text-shadow:0_1px_12px_rgba(3,3,3,0.5)]">
+          {client?.name}
+        </span>
       )}
 
       <div className="flex flex-col items-start gap-6">
-        <div className="flex flex-col gap-3">
+        {/*
+         * Targeted insurance in place of blanket ink. The scrim is sized for
+         * the photography these cards actually carry; this shadow is what
+         * covers the case it is NOT sized for — a blown-out highlight landing
+         * under a line — without darkening the other 95% of the image to pay
+         * for it. It reads as nothing over the scrim's ink and does not touch
+         * the CTA, whose dark label sits on a white plate.
+         */}
+        <div className="flex flex-col gap-3 [text-shadow:0_1px_12px_rgba(3,3,3,0.5)]">
           {eyebrow ? <Eyebrow tone="inverse">{eyebrow}</Eyebrow> : null}
           <h3 className="text-display-md font-display max-w-[472px] text-balance">
             {narrativeHeadline ?? title}
@@ -98,7 +131,7 @@ export function CaseStudyCard(card: CaseStudyCardData) {
         </div>
 
         {headlineStat?.value ? (
-          <p className="flex items-center gap-6">
+          <p className="flex items-center gap-6 [text-shadow:0_1px_12px_rgba(3,3,3,0.5)]">
             <span className="text-display-xl font-display tracking-[-0.0208em]">
               {headlineStat.value}
             </span>

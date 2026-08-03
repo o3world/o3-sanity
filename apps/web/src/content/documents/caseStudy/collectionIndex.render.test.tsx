@@ -69,11 +69,19 @@ describe('the /work index', () => {
       expect(html).toContain('lg:min-h-[556px]')
     })
 
-    it('scrims the card with a flat wash, keeping the 90° gradient for lg', () => {
-      // `1925:5734` fills flat `rgba(3,3,3,0.6)` over the photograph; the
+    it('scrims the card top-to-bottom, keeping the 90° gradient for lg', () => {
+      // `1925:5734` washes the photograph vertically — the copy spans the
+      // stacked card, so there is no clear side to keep legible. The
       // left-to-right scrim only makes sense on the 1248-wide card.
-      expect(html).toContain('bg-[rgba(3,3,3,0.6)]')
+      expect(html).toContain('bg-(image:--gradient-card-scrim-stacked)')
       expect(html).toContain('lg:bg-(image:--gradient-card-scrim)')
+    })
+
+    it('never lays the scrim down as an opaque plate over the photograph', () => {
+      // The regression this replaced: the frame's literal values (alpha 1 out
+      // to 26% across, a flat 0.6 down) crush real hero photography to
+      // black-and-white. Both tokens are washes now — see `drift`.
+      expect(html).not.toContain('bg-[rgba(3,3,3,0.6)]')
     })
   })
 })

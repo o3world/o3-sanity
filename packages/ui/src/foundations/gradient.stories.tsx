@@ -28,7 +28,7 @@ export const Gradients: Story = {
       title="Gradient"
       intro={
         <>
-          Seven fills, all live in <Mono>packages/tailwind-config/tokens/gradient.css</Mono>. The
+          Eight fills, all live in <Mono>packages/tailwind-config/tokens/gradient.css</Mono>. The
           prototype had no gradients, so this part was purely additive and landed as tokens ahead of
           the rest of the adoption. Reach for them with{' '}
           <Mono>bg-(image:--gradient-card-scrim)</Mono>, or the <Mono>text-gradient</Mono> /{' '}
@@ -54,9 +54,9 @@ export const Gradients: Story = {
 
       <Section
         title="Card scrims"
-        note="Both sit above a photographic fill and exist to hold copy legible — horizontal on case-study cards, vertical on perspectives cards."
+        note="All three sit above a photographic fill and exist to hold copy legible — horizontal on the wide case-study card, weighted to the ends on the stacked one, bottom-heavy on the perspectives cards. None of them is opaque anywhere: the specimen chequer showing through is the point, and a scrim that hides it is holding the copy up with ink that should have come from the composition."
       >
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid gap-5 md:grid-cols-3">
           <div className="border-line relative h-[260px] overflow-hidden border">
             <div className="absolute inset-0 bg-[repeating-linear-gradient(45deg,#8a8a8a_0_14px,#6f6f6f_14px_28px)]" />
             <div className="bg-(image:--gradient-card-scrim) absolute inset-0" />
@@ -68,6 +68,21 @@ export const Gradients: Story = {
                 Families were navigating twelve portals to manage one child&rsquo;s care.
               </p>
               <Mono className="mt-2 text-white/60">--gradient-card-scrim</Mono>
+            </div>
+          </div>
+          <div className="border-line relative h-[260px] overflow-hidden border">
+            <div className="absolute inset-0 bg-[repeating-linear-gradient(45deg,#8a8a8a_0_14px,#6f6f6f_14px_28px)]" />
+            <div className="bg-(image:--gradient-card-scrim-stacked) absolute inset-0" />
+            <div className="relative flex h-full flex-col justify-between gap-2 p-8">
+              <p className="text-[13px] font-bold uppercase tracking-[0.1em] text-white">
+                Healthcare
+              </p>
+              <div className="flex flex-col gap-2">
+                <p className="max-w-[24ch] text-[22px] leading-[1.2] tracking-[-0.0286em] text-white">
+                  Families were navigating twelve portals.
+                </p>
+                <Mono className="text-white/60">--gradient-card-scrim-stacked</Mono>
+              </div>
             </div>
           </div>
           <div className="border-line relative h-[260px] overflow-hidden border">

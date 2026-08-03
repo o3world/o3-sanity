@@ -202,9 +202,18 @@ export const gradients: readonly GradientSpec[] = [
   {
     name: 'card-scrim',
     token: '--gradient-card-scrim',
-    value: 'linear-gradient(90deg, rgba(3, 3, 3, 1) 26%, rgba(3, 3, 3, 0) 79%)',
-    role: 'Horizontal scrim over case-study card photography, holding the left copy column legible.',
+    value:
+      'linear-gradient(90deg, rgba(3, 3, 3, 0.8) 0%, rgba(3, 3, 3, 0.74) 34%, rgba(3, 3, 3, 0.68) 50%, rgba(3, 3, 3, 0.22) 70%, rgba(3, 3, 3, 0) 84%)',
+    role: 'Horizontal scrim over case-study card photography, holding the left copy column legible. Retuned off the frame’s alpha-1 plate — see Drift, “Card scrims”.',
     nodeId: '1883:3555',
+  },
+  {
+    name: 'card-scrim-stacked',
+    token: '--gradient-card-scrim-stacked',
+    value:
+      'linear-gradient(180deg, rgba(3, 3, 3, 0.7) 0px, rgba(3, 3, 3, 0.3) 110px, rgba(3, 3, 3, 0.3) calc(100% - 340px), rgba(3, 3, 3, 0.72) calc(100% - 150px), rgba(3, 3, 3, 0.88) 100%)',
+    role: 'The same scrim on the stacked card, where the copy spans the width. Weighted to the logo and the floor rather than flat, and stopped in px because the card is a 362 floor that grows.',
+    nodeId: '1925:5734',
   },
   {
     name: 'card-veil',
@@ -723,5 +732,14 @@ export const drift: readonly DriftSpec[] = [
     figma: 'Seven, including background-clipped statement text and the brand glow',
     impact: 'Adopted ahead of the rest, in 32d3044 — the one purely additive part.',
     outcome: 'adopted',
+  },
+  {
+    concern: 'Card scrims',
+    current: 'The frame’s literal values, adopted with the rest of the gradients',
+    figma:
+      'alpha 1 out to 26% across the wide card (1883:3555), and a flat rgba(3,3,3,0.6) over the whole stacked one (1925:5734)',
+    impact:
+      'Not adopted. The frame demos both against bright, high-key photography; the real case studies ship dark hero images, and an opaque plate over a third of the card plus a uniform haze over the rest crushes them to black-and-white. Both are washes now — 0.74–0.8 under the copy column, weighted to the logo and the floor when stacked — which composites past AA while leaving the photograph visible. The residual case a lighter scrim can’t cover (a blown highlight under a line) is paid for locally, by a text-shadow on the copy and a drop-shadow on the knockout, rather than globally in ink. The image also carries saturate-110, because ink over a photograph costs chroma as well as luminance.',
+    outcome: 'partial',
   },
 ]
