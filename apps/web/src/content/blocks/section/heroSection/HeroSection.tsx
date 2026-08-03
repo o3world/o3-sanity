@@ -85,7 +85,10 @@ export function HeroSection({
          * apex-height against band-height, so at 402 the sphere doubles and
          * hangs lower to hold roughly the frame's quarter-of-the-band cap.
          */
-        <OrbitalSphere className="bottom-[-124vw] left-1/2 w-[165vw] -translate-x-1/2 lg:bottom-[-63.9vw] lg:w-[80.7vw]" />
+        <OrbitalSphere
+          motion="orbit"
+          className="bottom-[-124vw] left-1/2 w-[165vw] -translate-x-1/2 lg:bottom-[-63.9vw] lg:w-[80.7vw]"
+        />
       ) : null}
 
       {/*

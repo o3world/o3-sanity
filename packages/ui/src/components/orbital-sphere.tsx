@@ -46,16 +46,33 @@ export interface OrbitalSphereProps extends HTMLAttributes<HTMLDivElement> {
    *   drawing on bone: the glow belongs to the dark bands only.
    */
   tone?: 'ink' | 'light'
+  /**
+   * Whether the sphere turns — the motion question this component was drawn
+   * rather than exported to be able to answer (#33).
+   *
+   * - `still` — one instant of it, which is all the frames ever showed.
+   * - `orbit` — the wireframe turns once a minute and the two coloured great
+   *   circles breathe against it, carried from the prototype's `.orb-all` /
+   *   `orbPulse` (periods and stagger are tokens in motion.css).
+   *
+   * Defaults to `still` so a decorative background never moves by accident;
+   * a band that wants the motion asks for it. `motion-reduce` stops all three
+   * loops regardless — a background that turns forever is exactly what that
+   * preference is about.
+   */
+  motion?: 'still' | 'orbit'
 }
 
 export function OrbitalSphere({
   intensity = 'full',
   tone = 'ink',
+  motion = 'still',
   className,
   ...rest
 }: OrbitalSphereProps) {
   const soft = intensity === 'soft'
   const light = tone === 'light'
+  const turning = motion === 'orbit'
 
   return (
     <div
@@ -81,7 +98,21 @@ export function OrbitalSphere({
         />
       )}
 
-      <svg viewBox="0 0 1000 1000" fill="none" className="absolute inset-0 h-full w-full">
+      {/*
+       * The turn is on the `<svg>` itself rather than an inner `<g>`: the
+       * sphere is centred in a square box, so rotating the element about its
+       * own centre is the same picture as rotating the drawing about (500,500)
+       * — and it sidesteps SVG's `transform-box` rules entirely. The bloom sits
+       * outside it and stays put, which costs nothing, being a radial.
+       */}
+      <svg
+        viewBox="0 0 1000 1000"
+        fill="none"
+        className={cn(
+          'absolute inset-0 h-full w-full',
+          turning && 'animate-orbit origin-center motion-reduce:animate-none',
+        )}
+      >
         <g
           className={light ? 'stroke-ink' : 'stroke-on-ink-line'}
           strokeWidth={light ? 1 : 1.4}
@@ -97,16 +128,37 @@ export function OrbitalSphere({
           <ellipse cx="500" cy="500" rx="334" ry="498" transform="rotate(-26 500 500)" />
         </g>
 
-        {/* The two arcs the ink frames pick out in red; on bone they stay grey. */}
-        <g
-          className={light ? 'stroke-ink' : undefined}
-          stroke={light ? undefined : '#eb1000'}
-          strokeWidth={light ? 1 : 1.6}
-          opacity={light ? 0.45 : soft ? 0.28 : 0.4}
-        >
-          <ellipse cx="500" cy="500" rx="445" ry="498" transform="rotate(38 500 500)" />
-          <ellipse cx="500" cy="500" rx="498" ry="255" transform="rotate(-9 500 500)" />
-        </g>
+        {/*
+         * The two arcs the ink frames pick out in red; on bone they stay grey.
+         *
+         * One group per arc, because the prototype breathes them on their own
+         * clocks — 4.2s from the start and 4.9s from 1.1s in. Only the coloured
+         * pair pulses: on `light` these are hairline grey drawing, and the
+         * prototype only ever pulsed what it had painted.
+         */}
+        {[
+          { rx: 445, ry: 498, rotate: 38, animate: 'animate-orbit-pulse' },
+          { rx: 498, ry: 255, rotate: -9, animate: 'animate-orbit-pulse-alt' },
+        ].map((arc) => (
+          <g
+            key={arc.rotate}
+            className={cn(
+              light ? 'stroke-ink' : undefined,
+              turning && !light && `${arc.animate} motion-reduce:animate-none`,
+            )}
+            stroke={light ? undefined : '#eb1000'}
+            strokeWidth={light ? 1 : 1.6}
+            opacity={light ? 0.45 : soft ? 0.28 : 0.4}
+          >
+            <ellipse
+              cx="500"
+              cy="500"
+              rx={arc.rx}
+              ry={arc.ry}
+              transform={`rotate(${arc.rotate} 500 500)`}
+            />
+          </g>
+        ))}
 
         {/* Node dots — the frames scatter a handful along the paths. */}
         <g className={light ? 'fill-ink' : 'fill-white'} opacity={light ? 0.55 : soft ? 0.35 : 0.5}>

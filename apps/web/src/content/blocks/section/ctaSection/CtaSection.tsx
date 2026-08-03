@@ -34,6 +34,7 @@ export function CtaSection({ heading, body, cta, decoration }: CtaSectionProps) 
       {showOrbs ? (
         <OrbitalSphere
           intensity="soft"
+          motion="orbit"
           className="left-1/2 top-1/2 w-[120vw] -translate-x-1/2 -translate-y-1/2"
         />
       ) : null}
