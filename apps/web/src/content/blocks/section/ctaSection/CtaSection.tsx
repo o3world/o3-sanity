@@ -32,38 +32,39 @@ export function CtaSection({ heading, body, cta, decoration }: CtaSectionProps) 
   return (
     <section className="bg-ink-deep px-gutter relative isolate overflow-hidden text-white">
       {/*
-       * Sized off the BAND, not the viewport — the one place the two spheres
-       * differ, because what this band composes around is how much of the
-       * globe it reveals rather than how wide the globe is.
+       * **The globe's bottom, at the hero's scale.** `95.5vw` is the hero's
+       * own width, so the two spheres read as the same object seen twice; the
+       * band then shows the underside of it, with the bottom limb seated a few
+       * percent clear of the floor rather than grazing it.
        *
-       * **The band shows the globe's lower three quarters.** Its top quarter
-       * sits above the band's edge and its bottom limb lands on the floor, so
-       * the sphere reads as one whose underside you are looking into: at
-       * `h-[133.3%]` the visible 100% of the band IS 75% of the sphere, and
-       * `top-[-33.3%]` is the quarter held back.
+       * The size and the fraction visible are in direct tension, and size won.
+       * A sphere this wide is 1375px at 1440 — more than twice the band's 671 —
+       * so the band can only ever reveal about half of it. Asking for three
+       * quarters caps the diameter near 1.29 × the band height, which is the
+       * ~895px version this replaces: correct fraction, far too small beside
+       * the hero. Positioned from `bottom` rather than `top` so the limb keeps
+       * its clearance whatever the band's height does.
        *
-       * That is Nick's call on intent, and it is worth writing down that the
-       * one export we hold disagrees with it. `.figma/frames/cta-band.png`
-       * (2450 × 1344, the same 1.7014× export as the hero) fits a limb of
-       * r ≈ 1490 centred (1225, 1470): an apex just above the top edge and an
-       * equator below the floor — the TOP hemisphere, confirmed by the
-       * silhouette widening all the way down and standing near-vertical at the
-       * bottom. But that file is the video capture with a mouse cursor in the
+       * The one export we hold disagrees about WHICH half.
+       * `.figma/frames/cta-band.png` fits a limb of r ≈ 1490 centred
+       * (1225, 1470) — apex above the top edge, equator below the floor, the
+       * TOP hemisphere, and the silhouette widening all the way down confirms
+       * it. But that file is the video capture with a mouse cursor in the
        * middle of it, which orbital-sphere.tsx already refuses to take
-       * geometry from, and it is one frame of a globe that was turning. The
-       * canonical CTA frame is `1799:1470` and is not exported here; pull it
-       * before treating either reading as settled.
+       * geometry from, and it is one frame of a globe that was turning. Intent
+       * here is Nick's. The canonical CTA frame is `1799:1470` and is not
+       * exported to `.figma/frames/`; pull it before treating this as settled.
        *
-       * What both readings agree on: the previous `w-[120vw]` centred on the
-       * band was wrong. It put the limb off-screen left and right and left
-       * only the middle arcs showing, and a globe you cannot see the edge of
-       * does not read as a globe at all.
+       * What every reading agrees on: the original `w-[120vw]` centred on the
+       * band was wrong. It put the limb off-screen left, right AND bottom and
+       * left only the middle arcs showing, and a globe you cannot see the edge
+       * of does not read as a globe at all.
        */}
       {showOrbs ? (
         <OrbitalSphere
           intensity="soft"
           motion="orbit"
-          className="left-1/2 top-[-33.3%] h-[133.3%] w-auto -translate-x-1/2"
+          className="bottom-[4%] left-1/2 w-[150vw] -translate-x-1/2 lg:w-[90vw]"
         />
       ) : null}
 
