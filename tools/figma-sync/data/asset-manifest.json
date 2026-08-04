@@ -1,0 +1,239 @@
+{
+  "fileKey": "RvraLJaZ0zWm8UaD5AJf43",
+  "assets": [
+    {
+      "path": "tools/migration/data/seed/assets/about-beyond-1682.png",
+      "nodeId": "1928:6501",
+      "figmaName": "image 21",
+      "format": "png",
+      "scale": 1,
+      "export": "imageFill",
+      "locked": false,
+      "note": "About `1924:5344` → Blog `1924:5388` → Frame 2611304. Exact: the committed bytes hash to `57e5bc89f795a122eeadd795dcf320dd272162b7`, which **is** the node's `imageRef` — Figma keys an image fill by the SHA-1 of its bytes, so the file is the fill original, downloaded rather than rendered."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/about-beyond-community.png",
+      "nodeId": "1928:6505",
+      "figmaName": "image 21",
+      "format": "png",
+      "scale": 3,
+      "export": "render",
+      "locked": false,
+      "note": "About `1924:5344` → Blog `1924:5388` → Frame 2611306. Exact: a fresh `/v1/images` render at `scale=3` is 1184×1172 — the node is 394.667×390.647 — and every pixel matches (mean absolute difference 0.0). The fill original behind it is a different, larger raster, so this one was rendered, not downloaded."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/about-beyond-o3xo.png",
+      "nodeId": "1928:6511",
+      "figmaName": "image 21",
+      "format": "png",
+      "scale": 1,
+      "export": "imageFill",
+      "locked": false,
+      "note": "About `1924:5344` → Blog `1924:5388` → Frame 2611307. Exact: committed bytes hash to `7f7e041e6b7b902f4111fa8111d1dbb16cb484d4`, the node's `imageRef`. The O3XO mark under O3 Ventures copy — named for what it depicts, per #46."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/about-culture-team.png",
+      "nodeId": "1927:6432",
+      "figmaName": "Frame 2611349",
+      "format": "png",
+      "scale": 1.5,
+      "export": "render",
+      "locked": false,
+      "note": "About `1924:5344` → the Culture band `1924:5547`. Exact: the frame is 1392×712 and the committed file is 2088×1068 — 1.5× on both axes — and a fresh render at `scale=1.5` matches pixel for pixel (0.0). The frame, not its `O3_1682Conference…` rectangle `1927:6430`: that child renders 1896×1263, a different crop."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/about-portrait-gadsby.png",
+      "nodeId": "2032:577",
+      "figmaName": "image 22",
+      "format": "png",
+      "scale": 1,
+      "export": "imageFill",
+      "locked": true,
+      "note": "About `1924:5344` → Frame 2611346 `1925:5914` → Team Card. High, not exact, and **locked because the source moved**: the committed bytes hash to `652581511bdf545d62b32795182f824bea2f5257`, which is still in the file's image library (`/v1/files/:key/images`) but is referenced by no node any more. The fill this node carries today is the same portrait re-uploaded at 790×796 (mean absolute difference 3.05/255 against the committed 2500×2500 downscaled to match). Re-exporting would replace a 2500px original with a 790px one. Committed unwired — see #46: it is a flattened comp, not the cut-out `PortraitTile` needs. The same two fills sit on all six team cards (`2032:577`, `582`, `590`, `600`, `607`, `614`); this entry names the first."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/eng-embedded.svg",
+      "format": "svg",
+      "locked": true,
+      "unresolved": true,
+      "note": "Hand-authored, never in Figma. Carried over from `prototype/O3 Homepage v2.dc.html` as animated SVG (#727b371), which the retired prototype drew inline: 4 `@keyframes`, 5 `animation:` declarations, a `prefers-reduced-motion` freeze, and `#EB1000` inlined because an SVG in an `<img>` cannot see the page stylesheet. No `imageRef` in the file matches its bytes and no node carries its geometry. Figma exports none of that — regenerating this from any node would destroy it."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/eng-ownership.svg",
+      "format": "svg",
+      "locked": true,
+      "unresolved": true,
+      "note": "Hand-authored, never in Figma. 5 `@keyframes`, 6 `animation:` declarations, `prefers-reduced-motion`, inlined `#EB1000`; three concentric rings breathing out of phase around a brand-red core. Same house pattern and the same lock as the other diagrams."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/eng-squad.svg",
+      "format": "svg",
+      "locked": true,
+      "unresolved": true,
+      "note": "Hand-authored, never in Figma. 4 `@keyframes`, 5 `animation:` declarations, `prefers-reduced-motion`, inlined `#EB1000`. Its commit also corrected the node count the seed's alt text claimed — six on the ring, not seven — which is editorial work no export carries."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/live-fintech.png",
+      "nodeId": "1751:2003",
+      "figmaName": "Case study cards",
+      "format": "png",
+      "scale": 1,
+      "export": "imageFill",
+      "locked": true,
+      "note": "Live `1644:1889` → Case studies → Frame 2611303. Exact **and hand-cropped**: the committed 527×544 is a pixel-identical (0.0) sub-rectangle of the node's 791×544 fill original `8470357ff8cd…` at x=132, y=0 — the exact horizontal centre. Locked: a re-export from this node yields the full 791×544 and would silently undo the crop."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/live-healthcare.png",
+      "nodeId": "1751:2010",
+      "figmaName": "Case study cards",
+      "format": "png",
+      "scale": 1,
+      "export": "imageFill",
+      "locked": false,
+      "note": "Live `1644:1889` → Case studies → Frame 2611304. Exact: committed bytes hash to `85ba255c87bec966be8ed24f96bdbba6ee661cf5`, the node's `imageRef`, at the fill's full 791×544. The one card of the three that was taken whole."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/live-saas.png",
+      "nodeId": "1899:4421",
+      "figmaName": "Case study cards",
+      "format": "png",
+      "scale": 1,
+      "export": "imageFill",
+      "locked": true,
+      "note": "Live `1644:1889` → Case studies → Frame 2611306. Exact **and hand-cropped**: pixel-identical (0.0) sub-rectangle of the node's 791×544 fill original `4e6c2f5434a4…` at x=1, y=0. Locked for the same reason as `live-fintech.png`."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/partner-amerigas.png",
+      "format": "png",
+      "locked": false,
+      "unresolved": true,
+      "note": "Not from Figma. Byte-identical to `prototype/assets/partner-amerigas.png` — the retired prototype (#33), which built its logo bar from `prototype/uploads/AmeriGas_logo.svg.webp` through its `<image-slot>` component onto a uniform 600×240 canvas. #25e4cd1 moved the twelve prototype images next to the seeds that reference them. None of the 163 distinct image fills in the Figma file hashes to these bytes; the four logos the canonical Home logo bar (`1864:2390`) does carry are different rasters, and claiming one would be a guess."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/partner-aramark.png",
+      "format": "png",
+      "locked": false,
+      "unresolved": true,
+      "note": "Not from Figma. Byte-identical to `prototype/assets/partner-aramark.png`, composed from `prototype/uploads/Aramark_logo.png` on the same 600×240 canvas. See `partner-amerigas.png`."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/partner-caron.png",
+      "format": "png",
+      "locked": false,
+      "unresolved": true,
+      "note": "Not from Figma. Byte-identical to `prototype/assets/partner-caron.png`, composed from `prototype/uploads/caron-logo.jpg`. See `partner-amerigas.png`."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/partner-chop.png",
+      "format": "png",
+      "locked": false,
+      "unresolved": true,
+      "note": "Not from Figma. Byte-identical to `prototype/assets/partner-chop.png`, composed from `prototype/uploads/CHOP-Logo.png`. See `partner-amerigas.png`."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/partner-ironman.png",
+      "format": "png",
+      "locked": false,
+      "unresolved": true,
+      "note": "Not from Figma. Byte-identical to `prototype/assets/partner-ironman.png`, composed from `prototype/uploads/ironman-logo-png_seeklogo-306622.png`. See `partner-amerigas.png`."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/partner-lacolombe.png",
+      "format": "png",
+      "locked": false,
+      "unresolved": true,
+      "note": "Not from Figma. Byte-identical to `prototype/assets/partner-lacolombe.png`, composed from `prototype/uploads/La-Colombe-Coffee-Roasters-Logo-Vector.svg-.png`. See `partner-amerigas.png`."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/perspective-process-frontier.svg",
+      "format": "svg",
+      "locked": true,
+      "unresolved": true,
+      "note": "Hand-authored, never in Figma. What `pnpm frontier` prints, drawn: 3 `@keyframes`, 4 `animation:` declarations, `prefers-reduced-motion`, `#EB1000` six times, and 69 lines of explanatory comment inside the file. No node in the file has its 1000×520 geometry and no `imageRef` matches its bytes."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/perspective-process-hero.svg",
+      "format": "svg",
+      "locked": true,
+      "unresolved": true,
+      "note": "Hand-authored, never in Figma. 3 `@keyframes`, 6 `animation:` declarations, `prefers-reduced-motion`, inlined `#EB1000`, 68 comment lines. 1200×630 matches no node in the file."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/perspective-process-pipeline.svg",
+      "format": "svg",
+      "locked": true,
+      "unresolved": true,
+      "note": "Hand-authored, never in Figma. 2 `@keyframes`, 4 `animation:` declarations, `prefers-reduced-motion`, `#EB1000` five times, 49 comment lines. 1000×470 matches no node in the file."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/perspective-process-sources.svg",
+      "format": "svg",
+      "locked": true,
+      "unresolved": true,
+      "note": "Hand-authored, never in Figma. 2 `@keyframes`, 3 `animation:` declarations, `prefers-reduced-motion`, inlined `#EB1000`, 43 comment lines. 1000×480 matches no node in the file."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/perspective-weekend-hero.png",
+      "format": "png",
+      "locked": false,
+      "unresolved": true,
+      "note": "No source node found. Design-sourced for the weekend-redesign post rather than migrated (#8bda1a6) — an abstract 1584×672 field of rectangular outlines resolving into register. Its bytes match none of the file's 163 image fills, and no node in the file carries its 2.357 aspect ratio at any scale. Most likely produced outside Figma; do not guess a node."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/perspective-weekend-maps.png",
+      "format": "png",
+      "locked": false,
+      "unresolved": true,
+      "note": "No source node found. 1376×768, same origin story as `perspective-weekend-hero.png`: no matching `imageRef`, no node with its 1.792 ratio."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/perspective-weekend-worktrees.png",
+      "format": "png",
+      "locked": false,
+      "unresolved": true,
+      "note": "No source node found. 1584×672, same origin story as `perspective-weekend-hero.png`."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/plat-lovable-logo.png",
+      "format": "png",
+      "locked": false,
+      "unresolved": true,
+      "note": "Not from Figma. Byte-identical to `prototype/assets/plat-lovable-logo.png`, composed from `prototype/uploads/lovabale-logo.png` onto the platform bar's uniform 800×220 canvas. See `partner-amerigas.png`."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/plat-sanity-logo.png",
+      "format": "png",
+      "locked": false,
+      "unresolved": true,
+      "note": "Not from Figma. Byte-identical to `prototype/assets/plat-sanity-logo.png`, same 800×220 platform-bar canvas. See `partner-amerigas.png`."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/plat-vercel-logo.png",
+      "format": "png",
+      "locked": false,
+      "unresolved": true,
+      "note": "Not from Figma. Byte-identical to `prototype/assets/plat-vercel-logo.png`, same 800×220 platform-bar canvas. See `partner-amerigas.png`."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/work-city.png",
+      "format": "png",
+      "locked": false,
+      "unresolved": true,
+      "note": "Not from Figma. Byte-identical to `prototype/assets/work-city.png` — a 1240×600 stock-photo slot filled in the prototype, one of three the case-study cards use. The canonical Work index (`1634:1167`) draws its cards from different rasters; none hashes to these bytes. See `partner-amerigas.png`."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/work-cyclist.png",
+      "format": "png",
+      "locked": false,
+      "unresolved": true,
+      "note": "Not from Figma. Byte-identical to `prototype/assets/work-cyclist.png`, same 1240×600 prototype slot. See `work-city.png`."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/work-hospital.png",
+      "format": "png",
+      "locked": false,
+      "unresolved": true,
+      "note": "Not from Figma. Byte-identical to `prototype/assets/work-hospital.png`, same 1240×600 prototype slot. See `work-city.png`."
+    }
+  ]
+}

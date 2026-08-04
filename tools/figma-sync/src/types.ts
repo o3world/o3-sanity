@@ -49,6 +49,45 @@ export interface TrackedManifest {
   readonly ignoredNodeIds?: readonly IgnoredNode[]
 }
 
+export type AssetFormat = 'svg' | 'png'
+/**
+ * How a resolved asset came out of Figma, because #81 has to reproduce it:
+ * `render` is `/v1/images` at `scale`, `imageFill` is the node's fill original
+ * downloaded whole (Figma keys a fill by the SHA-1 of its bytes, so `scale`
+ * means nothing there and is always `1`).
+ */
+export type AssetExport = 'render' | 'imageFill'
+
+/** One committed seed asset and where in Figma it came from (#80). */
+export interface AssetEntry {
+  /** Repo-relative, under `tools/migration/data/seed/assets/`. */
+  readonly path: string
+  /** The node it was exported from, `:`-separated. Absent when `unresolved`. */
+  readonly nodeId?: string
+  /** What Figma calls that layer. Absent when `unresolved`. */
+  readonly figmaName?: string
+  readonly format: AssetFormat
+  /** The `/v1/images` scale a `render` was taken at. `png` + resolved only. */
+  readonly scale?: number
+  readonly export?: AssetExport
+  /**
+   * A re-export must never overwrite this file — it was hand-edited after
+   * export (the animated SVGs, the two cropped Live cards) or its source node
+   * no longer produces it. Every locked entry says which, in `note`.
+   */
+  readonly locked: boolean
+  /** **No source node could be found.** Never a guess — always with a `note`. */
+  readonly unresolved?: true
+  /** The evidence, and how confident it is. Required when locked/unresolved. */
+  readonly note?: string
+}
+
+/** Provenance for every file in the seed assets directory (#80). */
+export interface AssetManifest {
+  readonly fileKey: string
+  readonly assets: readonly AssetEntry[]
+}
+
 export interface Baseline {
   readonly fileKey: string
   /** Figma's file `version` — the short-circuit key. */

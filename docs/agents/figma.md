@@ -8,6 +8,7 @@ amended by #33). This page is how you read the file without wasting a session on
 - **Frame → route map**: [`docs/figma-frames.md`](https://github.com/o3world/o3-sanity/blob/research/figma-frame-inventory/docs/figma-frames.md) — on branch `research/figma-frame-inventory`, per the repo's research convention. Read it before touching a page layer.
 - **Component → code map**: [`docs/figma-components.md`](../figma-components.md) — every component set, its variant axes, and what it maps to (or deliberately doesn't)
 - **Tracked-frame manifest**: [`tools/figma-sync/data/tracked-nodes.json`](../../tools/figma-sync/data/tracked-nodes.json) — the canonical page frames as machine-readable data, node ids verified against the file
+- **Asset provenance**: [`tools/figma-sync/data/asset-manifest.json`](../../tools/figma-sync/data/asset-manifest.json) — every committed seed asset and the node it was exported from, or an explicit "no source found" (#80). Read it before re-exporting anything: ten of the thirty are `locked`, including all seven hand-authored animated SVGs, and the format is documented in [`tools/figma-sync/README.md`](../../tools/figma-sync/README.md)
 
 ## Has the design changed?
 

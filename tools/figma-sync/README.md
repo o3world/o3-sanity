@@ -71,6 +71,72 @@ every page frame that instances it.
 - Two entries are bare `COMPONENT`s, not sets (`NavBar` `1710:2271`, `Footer` `1280:1885`). They
   ride in the same lane: `kind: "componentSet"` means "a library node, not a page".
 
+## `data/asset-manifest.json` — where every seed asset came from
+
+Hand-maintained, same as `tracked-nodes.json`, and for the same reason: it is a set of judgements
+about the file, not a query against it. One entry per file in
+[`tools/migration/data/seed/assets/`](../migration/data/seed/assets), 30 of them, saying which node
+the asset was exported from — or saying **out loud that nobody could find one**.
+
+| Field        | Meaning                                                                        |
+| ------------ | ------------------------------------------------------------------------------ |
+| `path`       | Repo-relative, under `tools/migration/data/seed/assets/`. The join key.        |
+| `nodeId`     | The source node, `1928:6505` form. Absent when `unresolved`.                   |
+| `figmaName`  | What Figma calls that layer — usually `image 21` or `Case study cards`.        |
+| `format`     | `svg` \| `png`, and it must match the file extension.                          |
+| `scale`      | The `/v1/images` scale a `render` was taken at. Always `1` for an `imageFill`. |
+| `export`     | `render` \| `imageFill` — **the two are different images**, see below.         |
+| `locked`     | A re-export must never overwrite this file. Always with a `note` saying why.   |
+| `unresolved` | `true` + a `note`. No source node was found and **none was guessed**.          |
+| `note`       | The evidence, and how confident it is. Required when `locked` or `unresolved`. |
+
+`asset-manifest.test.ts` enforces the invariants — every file has an entry and every entry has a
+file, no path twice, a `:`-separated node id, a locked or unresolved entry that carries its reason,
+and an entry that is neither fully resolved nor honestly unresolved is rejected rather than hedged.
+`asset-manifest.ts` is the loader; it reports **every** problem it finds, because a hand-edited
+manifest usually has more than one.
+
+### `render` vs `imageFill`
+
+The seed assets came out of Figma two different ways, and #81 cannot reproduce either one without
+being told which.
+
+- **`imageFill`** — the node's fill original, downloaded whole. Figma keys an image fill by the
+  **SHA-1 of its bytes** (`imageRef`), so a committed file whose sha1 equals a node's `imageRef` is
+  the same bytes, proved, not resembled. `scale` is meaningless here and is always `1`.
+- **`render`** — `GET /v1/images/:key?ids=…&format=png&scale=…`, the node drawn. This is what a
+  `note` means when it cites a mean absolute difference: the node re-rendered at the recorded scale
+  and compared pixel-for-pixel against the committed file.
+
+Both were verified for every resolved entry. Eight assets resolve; the other twenty-two do not, and
+the manifest says why rather than picking a plausible node:
+
+| Not from Figma                            | Why                                                                   |
+| ----------------------------------------- | --------------------------------------------------------------------- |
+| 12 `partner-*` / `plat-*` / `work-*` PNGs | byte-identical to `prototype/assets/` — the retired prototype (#33)   |
+| 3 `perspective-weekend-*` PNGs            | design-sourced for the post; no matching fill, no node with its ratio |
+| 7 `eng-*` / `perspective-process-*` SVGs  | hand-authored animated SVG — see below                                |
+
+### `locked` — three ways to earn it
+
+`locked` means _a re-export would make this file worse_, and every locked entry states which case
+it is.
+
+- **Hand-authored, never exported.** The seven animated SVGs. Each carries CSS `@keyframes`, a
+  `prefers-reduced-motion` freeze on its final frame, `#EB1000` inlined (an SVG in an `<img>` cannot
+  see the page stylesheet), and paragraphs of comment explaining what it draws. Figma exports none
+  of that. They are `locked` **and** `unresolved`: there is nothing to overwrite them _from_, and
+  the lock is what says so even if somebody later finds a lookalike node.
+- **Hand-edited after export.** `live-fintech.png` and `live-saas.png` are pixel-exact 527×544
+  crops of their nodes' 791×544 fill originals. A re-export returns the full 791×544 and silently
+  undoes the crop.
+- **The source moved.** `about-portrait-gadsby.png` is byte-identical to an image still in the
+  file's image library but referenced by no node any more; the team card that carried it now
+  carries the same portrait at 790×796. Re-exporting would swap a 2500px original for a 790px one.
+
+**The manifest records provenance; it does not act on it.** Re-export and overwrite are #81, and
+until then the report's `assets` section stays the empty stub #78 fixed.
+
 ## Report schema — version 1, fixed
 
 `data/report.json`, overwritten every run. **Later tickets fill sections; they do not reshape them.**
@@ -180,6 +246,10 @@ Everything but the fetch lives behind a pure function, so the tests need no toke
 ```sh
 pnpm vitest run tools/figma-sync/src
 ```
+
+`asset-manifest.test.ts` is the one test that reads a real directory, and deliberately: its claim is
+that the committed manifest describes the committed assets, which no fixture can stand in for. The
+validator itself takes the listing as an argument, so every other case in that file is a literal.
 
 `normalize.test.ts` carries the two fixture pairs that matter: the same frame seen from a different
 place on the canvas (must hash **equal**) and the same frame with one word rewritten (must hash

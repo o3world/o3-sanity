@@ -1,8 +1,10 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import type { Baseline, Report, TrackedManifest } from './types'
+import { ASSET_DIR } from './asset-manifest'
+
+import type { AssetManifest, Baseline, Report, TrackedManifest } from './types'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const DATA = join(ROOT, 'data')
@@ -11,6 +13,8 @@ export const REPO_ROOT = join(ROOT, '..', '..')
 
 /** Hand-maintained: what we watch. */
 export const TRACKED_NODES = join(DATA, 'tracked-nodes.json')
+/** Hand-maintained: where every committed seed asset came from (#80). */
+export const ASSET_MANIFEST = join(DATA, 'asset-manifest.json')
 /** Machine-written: last-seen file version + per-node hashes. */
 export const BASELINE = join(DATA, 'baseline.json')
 export const REPORT_JSON = join(DATA, 'report.json')
@@ -29,6 +33,22 @@ function writeJson(path: string, value: unknown): void {
 
 export function readManifest(): TrackedManifest {
   return readJson<TrackedManifest>(TRACKED_NODES)
+}
+
+export function readAssetManifest(): AssetManifest {
+  return readJson<AssetManifest>(ASSET_MANIFEST)
+}
+
+/**
+ * Every committed seed asset, repo-relative and sorted — the other half of
+ * what `validateAssetManifest` compares. Directory order is filesystem order,
+ * so it is sorted here rather than in every caller.
+ */
+export function listSeedAssets(): string[] {
+  return readdirSync(join(REPO_ROOT, ASSET_DIR))
+    .filter((name) => !name.startsWith('.'))
+    .sort()
+    .map((name) => `${ASSET_DIR}/${name}`)
 }
 
 /** `null` on the first run — no baseline is not an error. */
