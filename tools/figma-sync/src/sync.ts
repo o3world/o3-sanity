@@ -1,24 +1,36 @@
 /**
  * `pnpm figma:sync` — what moved in the design file since the last sync
- * (#78, extended by #79).
+ * (#78, extended by #79 and #81).
  *
  *   1. one call to `/files/:key?depth=1` for the file's version
- *   2. version unchanged and the baseline covers every tracked node? stop there
- *   3. otherwise fetch each tracked subtree — page frames *and* component sets
- *      — normalize it, hash it, diff it
+ *   2. version unchanged and the baseline covers every tracked node *and*
+ *      every asset source node? stop there
+ *   3. otherwise fetch each subtree — page frames, component sets, and the
+ *      nodes the committed assets came from — normalize it, hash it, diff it
  *   4. list the Design Concept section's direct children and name the frames
  *      the manifest has never heard of (`probe.ts`)
- *   5. write the baseline and the report, print the summary
+ *   5. re-export the assets whose source node moved, and refuse to touch the
+ *      locked ones (`assets.ts`)
+ *   6. write the baseline and the report, print the summary
  *
  * The committed baseline is what makes step 2 possible, so a sync is a commit:
  * `data/baseline.json` plus `data/report.{json,md}` describe the run that
- * produced them, and git carries the history.
+ * produced them, any asset it rewrote is right there in the same diff, and git
+ * carries the history.
  */
+import { applyAssetDecisions, assetSourceNodeIds, planAssetSync } from './assets'
 import { diffHashes, isBaselineFresh } from './diff'
 import { readFigmaToken } from './env'
 import { createFigmaClient } from './figma-api'
 import { hashSubtree } from './hash'
-import { readBaseline, readManifest, writeBaseline, writeReport } from './paths'
+import {
+  readAssetManifest,
+  readBaseline,
+  readManifest,
+  writeBaseline,
+  writeReport,
+  writeSeedAsset,
+} from './paths'
 import { findUntrackedFrames } from './probe'
 import { buildReport, renderReportMarkdown } from './report'
 
@@ -32,6 +44,15 @@ const line = (entry: ChangedEntry) =>
 
 async function main() {
   const manifest = readManifest()
+  const assetManifest = readAssetManifest()
+  // One node fetch serves both manifests, which only works if they describe
+  // the same file. They are hand-maintained separately, so say it out loud.
+  if (assetManifest.fileKey !== manifest.fileKey) {
+    throw new Error(
+      `tracked-nodes.json watches ${manifest.fileKey} but asset-manifest.json ` +
+        `claims ${assetManifest.fileKey} — one of them is wrong.`,
+    )
+  }
   const baseline = readBaseline()
   const client = createFigmaClient(readFigmaToken())
   const ranAt = new Date().toISOString()
@@ -40,8 +61,9 @@ async function main() {
   console.log(`${meta.name} — version ${meta.version}, last modified ${meta.lastModified}`)
 
   const trackedIds = manifest.entries.map((entry) => entry.nodeId)
+  const assetIds = assetSourceNodeIds(assetManifest)
 
-  if (isBaselineFresh(baseline, meta, trackedIds)) {
+  if (isBaselineFresh(baseline, meta, trackedIds, assetIds)) {
     console.log(`no changes since ${baseline?.syncedAt}`)
     const report = buildReport({
       ranAt,
@@ -53,7 +75,11 @@ async function main() {
     return
   }
 
-  const documents = await client.getNodeDocuments(manifest.fileKey, trackedIds)
+  // The asset source nodes ride along in the same batched fetch: they are
+  // hashed exactly like a tracked frame, just kept in their own map.
+  const documents = await client.getNodeDocuments(manifest.fileKey, [
+    ...new Set([...trackedIds, ...assetIds]),
+  ])
 
   const errors: string[] = []
 
@@ -81,6 +107,25 @@ async function main() {
     hashes[entry.nodeId] = hashSubtree(document)
   }
 
+  // The asset stage (#81): the same hash, a different question — not "which
+  // page moved?" but "is a committed file now out of date with the node it
+  // was exported from?". A node that did not move costs no export call.
+  const assetHashes: Record<string, string> = {}
+  for (const nodeId of assetIds) {
+    const document = documents.get(nodeId)
+    if (document !== undefined) assetHashes[nodeId] = hashSubtree(document)
+  }
+  const assets = await applyAssetDecisions(
+    planAssetSync(assetManifest, baseline?.assetHashes ?? {}, assetHashes),
+    assetHashes,
+    {
+      fileKey: assetManifest.fileKey,
+      client,
+      documents,
+      writeAsset: writeSeedAsset,
+    },
+  )
+
   const diff = diffHashes(baseline?.hashes ?? {}, hashes)
   const report = buildReport({
     ranAt,
@@ -89,6 +134,7 @@ async function main() {
     manifest,
     diff,
     untrackedFrames,
+    assets,
     errors,
   })
   writeReport(report, renderReportMarkdown(report))
@@ -99,6 +145,9 @@ async function main() {
     lastModified: meta.lastModified,
     syncedAt: ranAt,
     hashes,
+    // Only what this run settled: an asset whose export failed keeps no hash,
+    // so the next run tries again instead of calling it done.
+    assetHashes: assets.hashes,
   }
   writeBaseline(next)
 
@@ -119,6 +168,24 @@ async function main() {
         `  untracked ${frame.name}${frame.width ? ` (${frame.width}w)` : ''}  ${frame.nodeId}`,
       )
     }
+  }
+  if (assets.regenerated.length > 0) {
+    console.log(`\n${assets.regenerated.length} asset(s) re-exported — review the git diff:`)
+    for (const asset of assets.regenerated) {
+      console.log(`  rewrote  ${asset.path}  ← ${asset.nodeId} (${asset.export}, ${asset.reason})`)
+    }
+  }
+  if (assets.lockedConflicts.length > 0) {
+    console.log(
+      `\n${assets.lockedConflicts.length} locked asset(s) whose source moved — nothing was written.` +
+        ' Reconcile by hand:',
+    )
+    for (const conflict of assets.lockedConflicts) {
+      console.log(`  conflict ${conflict.path}  ← ${conflict.nodeId} (${conflict.reason})`)
+    }
+  }
+  for (const failure of assets.failures) {
+    console.error(`  failed   ${failure.path}  ← ${failure.nodeId ?? '?'}: ${failure.error}`)
   }
   for (const error of errors) console.error(`  error    ${error}`)
   console.log('\nbaseline and report written to tools/figma-sync/data/ — commit them.')

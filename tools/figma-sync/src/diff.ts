@@ -31,16 +31,25 @@ export function diffHashes(
  * Only when the file has not moved **and** the baseline already covers exactly
  * the nodes the manifest tracks — adding a frame to the manifest has to make
  * the next run fetch it, even though the Figma file itself is untouched.
+ *
+ * The asset source nodes (#81) are the same rule with one difference: coverage
+ * only, not an exact count. Dropping an asset from the manifest leaves a hash
+ * behind that nothing needs, and re-walking the whole file to forget it would
+ * be work for its own sake. An asset node the baseline is *missing* — a new
+ * entry, or one whose last export failed — does keep the run honest and slow.
  */
 export function isBaselineFresh(
   baseline: Baseline | null,
   meta: { version: string; lastModified: string },
   trackedNodeIds: readonly string[],
+  assetNodeIds: readonly string[] = [],
 ): boolean {
   if (!baseline) return false
   if (baseline.version !== meta.version) return false
   if (baseline.lastModified !== meta.lastModified) return false
   const hashed = new Set(Object.keys(baseline.hashes))
   if (hashed.size !== trackedNodeIds.length) return false
-  return trackedNodeIds.every((nodeId) => hashed.has(nodeId))
+  if (!trackedNodeIds.every((nodeId) => hashed.has(nodeId))) return false
+  const hashedAssets = new Set(Object.keys(baseline.assetHashes ?? {}))
+  return assetNodeIds.every((nodeId) => hashedAssets.has(nodeId))
 }

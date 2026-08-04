@@ -1,23 +1,27 @@
 # @o3/figma-sync
 
-Change detection against the design source of record (#78, #79). One command:
+Change detection against the design source of record (#78, #79, #81). One command:
 
 ```sh
 pnpm figma:sync
 ```
 
 It answers three questions — **which canonical page frames changed since the last sync, which
-component sets changed, and is there design work in the file nobody is watching?** — and it answers
-the first two cheaply when the answer is "none".
+component sets changed, and is there design work in the file nobody is watching?** — answers the
+first two cheaply when the answer is "none", and then does the one mechanical thing those answers
+imply: **re-exports the committed seed assets whose source node moved**.
 
 ```
 1. GET /v1/files/RvraLJaZ0zWm8UaD5AJf43?depth=1     ← one call, file metadata only
 2. version + lastModified match the baseline, and the baseline covers every
-   tracked node?   →  "no changes since <syncedAt>", exit 0. One API call total.
+   tracked node *and* every asset source node?
+                   →  "no changes since <syncedAt>", exit 0. One API call total.
 3. otherwise       →  GET /v1/files/:key/nodes?ids=… in small batches,
                       normalize each subtree, sha256 it, diff against the baseline
 4. …and one GET /v1/files/:key/nodes?ids=<section>&depth=1 — the new-frame probe
-5. write data/baseline.json + data/report.{json,md}, print the summary
+5. …and, for the assets whose source node moved, GET /v1/images or
+   GET /v1/files/:key/images, then overwrite the committed file in place
+6. write data/baseline.json + data/report.{json,md}, print the summary
 ```
 
 Authentication is the standard `FIGMA_API_KEY` from the dev environment — the same sourcing as
@@ -134,8 +138,72 @@ it is.
   file's image library but referenced by no node any more; the team card that carried it now
   carries the same portrait at 790×796. Re-exporting would swap a 2500px original for a 790px one.
 
-**The manifest records provenance; it does not act on it.** Re-export and overwrite are #81, and
-until then the report's `assets` section stays the empty stub #78 fixed.
+## Re-export — what a moved source node does to a committed asset (#81)
+
+Every non-short-circuited run hashes the **asset source nodes** exactly the way it hashes a tracked
+frame — same `normalize.ts`, same sha256, the same batched `/nodes` call — and keeps the result in
+its own `assetHashes` map in the baseline. An asset is _changed_ when its node's hash moves. That is
+the whole trigger, and it is deliberately **not** a byte comparison against a fresh export: Figma
+renders PNGs non-deterministically, so byte-keying would churn every photographic asset on every run
+and the git diff would stop meaning anything.
+
+`assets.ts` splits the work in half — a pure decision, and an executor that is the only thing
+allowed to call Figma or write a file:
+
+| Entry              | Its source node's hash | The run…                                               |
+| ------------------ | ---------------------- | ------------------------------------------------------ |
+| `unresolved`       | —                      | **skips** it. No node to watch; it cannot participate. |
+| resolved           | not in the file        | **fails** it — the manifest names a node that is gone. |
+| resolved           | same as the baseline   | does **nothing**. No export call is made at all.       |
+| resolved, locked   | changed, or new        | reports a **conflict**. The file is never touched.     |
+| resolved, unlocked | changed, or new        | **re-exports** and overwrites in place.                |
+
+- **`render`** → `GET /v1/images/:key?ids=…&format=…&scale=…` at the manifest's recorded format and
+  scale, batched one call per distinct format+scale, then the returned URL is downloaded. Figma
+  answers `null` for an id it will not export rather than failing the call — that `null` is a
+  failure, not a skip.
+- **`imageFill`** → `GET /v1/files/:key/images` once for the whole `imageRef` → URL library, and the
+  entry's `imageRef` is read out of **the node document this run already fetched to hash it**: first
+  image fill found, the node's own `fills` before its children's. No extra call, and no second
+  source of truth about which node the asset came from. A couple of entries name the card frame
+  rather than the rectangle inside it that carries the paint, which is what the descent is for; a
+  node with two image fills would be an entry pointing at the wrong layer, and the failure it
+  produces says so.
+- **A failure never writes.** The download completes before the file is opened, so an API error, a
+  dead node or a null URL leaves the committed asset exactly as it was — and **records no baseline
+  hash**, so the next run tries again instead of calling it done.
+
+### First run, and what "no churn" actually claims
+
+The steady state is the acceptance criterion: an unchanged source node costs **zero** export calls
+and writes nothing. A first baseline is different — every resolved asset is `new-to-baseline` — and
+this package **exports on that first run rather than quietly recording hashes**. It is the only
+thing that proves the export path reproduces what is committed, and #80's provenance claims are
+exactly what it puts to the test. The live first run did that:
+
+> five unlocked assets re-exported — two `render` (scale 3 and scale 1.5) and three `imageFill` —
+> and all five came back **byte-identical** to the committed files. `git status` on
+> `tools/migration/data/seed/assets/` was empty afterwards.
+
+So the churn the ticket worried about did not happen, and the case for recording-without-exporting
+never arose. If a future manifest addition ever _does_ regenerate with meaningless byte churn, the
+answer is the same one this package gives everywhere else: the git diff is the review surface, and
+whoever reads it decides.
+
+### Locked assets, and why the baseline moves anyway
+
+A locked conflict says _the design moved underneath a file somebody hand-edited_, and it carries the
+manifest's own note so the reader knows what to reconcile against. The file is not touched and no
+export call is made for it.
+
+The baseline **does** record the new hash. A sync is a commit, so the conflict is preserved in the
+report of the run that found it; holding the hash back would instead repeat the same conflict in
+every future report and — because the short-circuit needs the baseline to cover every asset node —
+would mean this package never took its cheap path again. A failure is the opposite: no hash, retry
+next run.
+
+The first live run reported all three locked assets (`about-portrait-gadsby.png`,
+`live-fintech.png`, `live-saas.png`) as `new-to-baseline` conflicts, and wrote none of them.
 
 ## Report schema — version 1, fixed
 
@@ -154,9 +222,9 @@ bumps `schemaVersion`.
   "changedComponentSets": [], // same, for kind: "componentSet"
   "untrackedFrames": [], // frames in the section but not the manifest — triage them
   "assets": {
-    "regenerated": [], // exported assets rewritten this run (later ticket)
-    "lockedConflicts": [], // …that a human has locked (later ticket)
-    "failures": [], // …that failed to export (later ticket)
+    "regenerated": [], // assets rewritten from Figma this run (#81)
+    "lockedConflicts": [], // …whose source moved but which a human has locked
+    "failures": [], // …that failed to export. Never a silent skip.
   },
   "errors": [], // human-readable strings; a tracked id the file no longer has
 }
@@ -185,6 +253,30 @@ frames say _where it shows_. `component-sets.test.ts` fixes that with overlappin
 `added` is a node the baseline has never hashed (a first run, or a manifest addition); `removed` is
 one the baseline has and the manifest no longer tracks — reported even when nothing describes it any
 more, in which case `name` falls back to the node id and `route`/`variant` are `null`.
+
+The three `assets` arrays (#81 filled them; #78 fixed the keys). `reason` is `node-changed` or
+`new-to-baseline` in both of the first two, and it is the difference between "the design moved" and
+"nothing had ever hashed this node":
+
+```jsonc
+// assets.regenerated — the file on disk was overwritten
+{ "path": "tools/…/live-healthcare.png", "nodeId": "1751:2010",
+  "export": "imageFill", "reason": "node-changed" }
+
+// assets.lockedConflicts — the file was NOT touched. `note` is the manifest's
+// own words for why it is locked: what to reconcile the change against.
+{ "path": "tools/…/live-fintech.png", "nodeId": "1751:2003",
+  "reason": "node-changed", "note": "Exact and hand-cropped: …" }
+
+// assets.failures — nothing written, no baseline hash recorded, retried next run
+{ "path": "tools/…/about-culture-team.png", "nodeId": "1927:6432",
+  "error": "Figma returned no image URL for 1927:6432" }
+```
+
+`data/baseline.json` gained `assetHashes` — `nodeId` → sha256, the same digest as `hashes` but for
+the nodes assets came from. It is a separate map because those nodes are not tracked nodes: they are
+never diffed into `changedFrames`, and the short-circuit counts the two lists by different rules
+(exact coverage for tracked ids, presence-only for asset ids — see `diff.ts`).
 
 `untrackedFrames` entries:
 
@@ -250,6 +342,12 @@ pnpm vitest run tools/figma-sync/src
 `asset-manifest.test.ts` is the one test that reads a real directory, and deliberately: its claim is
 that the committed manifest describes the committed assets, which no fixture can stand in for. The
 validator itself takes the listing as an argument, so every other case in that file is a literal.
+
+`assets.test.ts` is the one that has to prove a _negative_ — that an unchanged asset costs no export
+call — so its fetch is injected and recorded, and the assertions are on the call list as much as on
+the result. The whole decision matrix above runs against literals; the executor runs the real
+`figma-api.ts` client over that fake fetch, including the failure cases the live file will not
+produce on demand (a 429, a dead download, a `null` image URL, an `imageRef` the library has lost).
 
 `normalize.test.ts` carries the two fixture pairs that matter: the same frame seen from a different
 place on the canvas (must hash **equal**) and the same frame with one word rewritten (must hash

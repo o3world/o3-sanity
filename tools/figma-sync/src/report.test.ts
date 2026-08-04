@@ -129,6 +129,30 @@ describe('buildReport', () => {
     ])
   })
 
+  it('carries the asset stage through into the section that was always there', () => {
+    const report = buildReport({
+      ...base,
+      shortCircuited: false,
+      assets: {
+        regenerated: [
+          {
+            path: 'tools/migration/data/seed/assets/live-healthcare.png',
+            nodeId: '1751:2010',
+            export: 'imageFill',
+            reason: 'node-changed',
+          },
+        ],
+        lockedConflicts: [],
+        failures: [{ path: 'x.png', nodeId: '9:9', error: 'no image URL' }],
+      },
+    })
+    expect(report.assets.regenerated).toHaveLength(1)
+    expect(report.assets.lockedConflicts).toEqual([])
+    expect(report.assets.failures).toHaveLength(1)
+    // The top-level shape is the same one #78 fixed.
+    expect(Object.keys(report.assets)).toEqual(['regenerated', 'lockedConflicts', 'failures'])
+  })
+
   it('carries errors through', () => {
     const report = buildReport({ ...base, shortCircuited: false, errors: ['node 9:9 not found'] })
     expect(report.errors).toEqual(['node 9:9 not found'])
@@ -164,6 +188,50 @@ describe('renderReportMarkdown', () => {
     )
     expect(md).toContain('NavBar')
     expect(md).toContain('apps/web/src/ui/SiteNav.tsx#SiteNav')
+  })
+
+  it('separates what it rewrote from what it refused to touch', () => {
+    const md = renderReportMarkdown(
+      buildReport({
+        ...base,
+        shortCircuited: false,
+        assets: {
+          regenerated: [
+            {
+              path: 'tools/migration/data/seed/assets/live-healthcare.png',
+              nodeId: '1751:2010',
+              export: 'imageFill',
+              reason: 'node-changed',
+            },
+          ],
+          lockedConflicts: [
+            {
+              path: 'tools/migration/data/seed/assets/live-fintech.png',
+              nodeId: '1751:2003',
+              reason: 'node-changed',
+              note: 'Hand-cropped 527×544 out of the 791×544 original.',
+            },
+          ],
+          failures: [
+            {
+              path: 'tools/migration/data/seed/assets/work-city.png',
+              nodeId: '9:9',
+              error: 'gone',
+            },
+          ],
+        },
+      }),
+    )
+    expect(md).toContain('live-healthcare.png')
+    // The lock has to read as a decision to reconcile, not as a failure.
+    expect(md).toContain('reconcile by hand')
+    expect(md).toContain('Hand-cropped')
+    expect(md).toContain('gone')
+  })
+
+  it('says nothing about assets when the stage did nothing', () => {
+    const md = renderReportMarkdown(buildReport({ ...base, shortCircuited: false }))
+    expect(md).not.toContain('## Assets')
   })
 
   it('lists untracked frames with the triage the reader has to do', () => {

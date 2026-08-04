@@ -1,5 +1,14 @@
 import type { HashDiff } from './diff'
-import type { ChangeKind, ChangedEntry, Report, TrackedManifest, UntrackedFrame } from './types'
+import type {
+  AssetFailure,
+  ChangeKind,
+  ChangedEntry,
+  LockedAssetConflict,
+  RegeneratedAsset,
+  Report,
+  TrackedManifest,
+  UntrackedFrame,
+} from './types'
 
 /**
  * Report assembly (#78). The JSON schema is **fixed** here: later tickets fill
@@ -9,8 +18,17 @@ import type { ChangeKind, ChangedEntry, Report, TrackedManifest, UntrackedFrame 
  *
  * #79 filled the first two of those sections without touching a key: a
  * component-set entry is a `changedFrames` entry plus `codeComponent`, which
- * page frames do not carry and consumers of `changedFrames` never saw.
+ * page frames do not carry and consumers of `changedFrames` never saw. #81
+ * filled the three `assets` arrays the same way — the arrays were always
+ * there, and a consumer reading `report.assets.failures` got `[]` before this
+ * ticket and gets entries after it.
  */
+
+export interface ReportAssets {
+  readonly regenerated: readonly RegeneratedAsset[]
+  readonly lockedConflicts: readonly LockedAssetConflict[]
+  readonly failures: readonly AssetFailure[]
+}
 
 export interface ReportInput {
   readonly ranAt: string
@@ -20,6 +38,8 @@ export interface ReportInput {
   readonly diff?: HashDiff
   /** What the probe found in the section, already classified (`probe.ts`). */
   readonly untrackedFrames?: readonly UntrackedFrame[]
+  /** What the asset stage did, already decided and carried out (`assets.ts`). */
+  readonly assets?: ReportAssets
   readonly errors?: readonly string[]
 }
 
@@ -61,7 +81,11 @@ export function buildReport(input: ReportInput): Report {
     changedFrames: changes.filter((entry) => kindOf(entry.nodeId) === 'pageFrame'),
     changedComponentSets: changes.filter((entry) => kindOf(entry.nodeId) === 'componentSet'),
     untrackedFrames: [...(input.untrackedFrames ?? [])],
-    assets: { regenerated: [], lockedConflicts: [], failures: [] },
+    assets: {
+      regenerated: [...(input.assets?.regenerated ?? [])],
+      lockedConflicts: [...(input.assets?.lockedConflicts ?? [])],
+      failures: [...(input.assets?.failures ?? [])],
+    },
     errors: [...(input.errors ?? [])],
   }
 }
@@ -78,6 +102,20 @@ const describe = (entry: ChangedEntry): string => {
         : ' → no code target'
   return `- **${entry.name}**${variant}${where}${code} — ${entry.change} \`${entry.nodeId}\``
 }
+
+const describeRegenerated = (asset: RegeneratedAsset): string =>
+  `- \`${asset.path}\` — re-exported from \`${asset.nodeId}\` (${asset.export}, ${asset.reason})`
+
+const describeConflict = (conflict: LockedAssetConflict): string => {
+  const moved =
+    conflict.reason === 'node-changed'
+      ? 'changed'
+      : 'is new to the baseline (nothing had hashed it before)'
+  return `- \`${conflict.path}\` — \`${conflict.nodeId}\` ${moved}. Locked: ${conflict.note}`
+}
+
+const describeFailure = (failure: AssetFailure): string =>
+  `- \`${failure.path}\`${failure.nodeId ? ` (\`${failure.nodeId}\`)` : ''} — ${failure.error}`
 
 const describeUntracked = (frame: UntrackedFrame): string =>
   `- **${frame.name}**${frame.width === null ? '' : ` (${frame.width}w)`} — \`${frame.nodeId}\``
@@ -115,6 +153,41 @@ export function renderReportMarkdown(report: Report): string {
       ...report.untrackedFrames.map(describeUntracked),
       '',
     )
+  }
+
+  const { regenerated, lockedConflicts, failures } = report.assets
+  if (regenerated.length + lockedConflicts.length + failures.length > 0) {
+    lines.push('## Assets', '')
+    if (regenerated.length > 0) {
+      lines.push(
+        '### Regenerated',
+        '',
+        'Overwritten in place — the git diff is the review surface.',
+        '',
+        ...regenerated.map(describeRegenerated),
+        '',
+      )
+    }
+    if (lockedConflicts.length > 0) {
+      lines.push(
+        '### Locked conflicts',
+        '',
+        'Source changed, asset locked — **reconcile by hand**. Nothing was written.',
+        '',
+        ...lockedConflicts.map(describeConflict),
+        '',
+      )
+    }
+    if (failures.length > 0) {
+      lines.push(
+        '### Failures',
+        '',
+        'Nothing was written and no baseline hash was recorded — the next run retries.',
+        '',
+        ...failures.map(describeFailure),
+        '',
+      )
+    }
   }
 
   if (report.errors.length > 0) {

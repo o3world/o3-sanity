@@ -83,4 +83,28 @@ describe('isBaselineFresh', () => {
   it('is stale when there is no baseline at all', () => {
     expect(isBaselineFresh(null, meta, tracked)).toBe(false)
   })
+
+  describe('asset source nodes (#81)', () => {
+    const withAssets: Baseline = { ...baseline, assetHashes: { '9:1': 'zzz' } }
+
+    it('is fresh when the asset nodes are covered too', () => {
+      expect(isBaselineFresh(withAssets, meta, tracked, ['9:1'])).toBe(true)
+    })
+
+    it('is stale when an asset entry names a node nothing has hashed yet', () => {
+      // A new manifest entry, or one whose last export failed — either way the
+      // run has work to do even though the Figma file is untouched.
+      expect(isBaselineFresh(withAssets, meta, tracked, ['9:1', '9:2'])).toBe(false)
+    })
+
+    it('is stale against a baseline written before assets were hashed at all', () => {
+      expect(isBaselineFresh(baseline, meta, tracked, ['9:1'])).toBe(false)
+    })
+
+    it('stays fresh when an asset was dropped from the manifest', () => {
+      // Coverage, not an exact count: a leftover hash costs nothing, and
+      // re-walking the file to forget it would be work for its own sake.
+      expect(isBaselineFresh(withAssets, meta, tracked, [])).toBe(true)
+    })
+  })
 })

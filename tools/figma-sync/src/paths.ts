@@ -1,5 +1,5 @@
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
-import { dirname, join } from 'node:path'
+import { dirname, join, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { ASSET_DIR } from './asset-manifest'
@@ -49,6 +49,23 @@ export function listSeedAssets(): string[] {
     .filter((name) => !name.startsWith('.'))
     .sort()
     .map((name) => `${ASSET_DIR}/${name}`)
+}
+
+/**
+ * Overwrite a committed seed asset in place (#81) — the git diff is the review
+ * surface, so the re-export writes over the file rather than beside it.
+ *
+ * The path comes from a hand-maintained manifest, so it is checked against the
+ * assets directory here as well as in `validateAssetManifest`: a sync run does
+ * not validate the manifest first, and `../../` in a path would otherwise be a
+ * write anywhere in the repo.
+ */
+export function writeSeedAsset(path: string, bytes: Uint8Array): void {
+  const full = join(REPO_ROOT, path)
+  if (!full.startsWith(join(REPO_ROOT, ASSET_DIR) + sep)) {
+    throw new Error(`refusing to write ${path}: it is not under ${ASSET_DIR}/`)
+  }
+  writeFileSync(full, bytes)
 }
 
 /** `null` on the first run — no baseline is not an error. */

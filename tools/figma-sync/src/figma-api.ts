@@ -9,6 +9,7 @@
  */
 
 import type { SectionChild } from './probe'
+import type { AssetFormat } from './types'
 
 const API_ROOT = 'https://api.figma.com/v1'
 
@@ -32,6 +33,28 @@ export interface FigmaClient {
    * file has no such node.
    */
   getSectionChildren(fileKey: string, sectionNodeId: string): Promise<SectionChild[] | null>
+  /**
+   * `/v1/images` — nodeId → a URL for that node **drawn** at `format`/`scale`
+   * (#81). Figma answers `null` for an id it will not export rather than
+   * failing the call, so the map's value is nullable and the caller decides
+   * what a missing image means.
+   */
+  getRenderUrls(
+    fileKey: string,
+    nodeIds: readonly string[],
+    options: { format: AssetFormat; scale: number },
+  ): Promise<Map<string, string | null>>
+  /**
+   * `/v1/files/:key/images` — the file's image library, `imageRef` → URL of the
+   * **uploaded original**. Figma keys a fill by the SHA-1 of its bytes, so this
+   * is the one way to get an `imageFill` asset's exact source back (#80, #81).
+   */
+  getImageFillUrls(fileKey: string): Promise<Map<string, string>>
+  /**
+   * Any URL the API handed back, as bytes. No token: these are pre-signed
+   * links to Figma's bucket, and they expire.
+   */
+  downloadBinary(url: string): Promise<Uint8Array>
 }
 
 type FetchLike = (url: string, init?: { headers?: Record<string, string> }) => Promise<Response>
@@ -75,6 +98,32 @@ export function createFigmaClient(token: string, fetchImpl: FetchLike = fetch): 
       const document = nodes[sectionNodeId]?.document
       if (!document) return null
       return document.children ?? []
+    },
+
+    async getRenderUrls(fileKey, nodeIds, { format, scale }) {
+      const ids = nodeIds.map(encodeURIComponent).join(',')
+      const { err, images } = await get<{
+        err: string | null
+        images: Record<string, string | null>
+      }>(`/images/${fileKey}?ids=${ids}&format=${format}&scale=${scale}`)
+      // A 200 with `err` set is how this endpoint reports a bad request.
+      if (err) throw new Error(`Figma /images returned an error: ${err}`)
+      return new Map(nodeIds.map((nodeId) => [nodeId, images[nodeId] ?? null]))
+    },
+
+    async getImageFillUrls(fileKey) {
+      const { meta } = await get<{ meta?: { images?: Record<string, string> } }>(
+        `/files/${fileKey}/images`,
+      )
+      return new Map(Object.entries(meta?.images ?? {}))
+    },
+
+    async downloadBinary(url) {
+      const response = await fetchImpl(url)
+      if (!response.ok) {
+        throw new Error(`download failed: ${response.status} ${response.statusText} for ${url}`)
+      }
+      return new Uint8Array(await response.arrayBuffer())
     },
   }
 }

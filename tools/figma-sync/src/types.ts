@@ -96,6 +96,13 @@ export interface Baseline {
   readonly syncedAt: string
   /** nodeId → sha256 of its normalized subtree. */
   readonly hashes: Readonly<Record<string, string>>
+  /**
+   * The same hash, for the nodes committed **assets** were exported from
+   * (#81) — a separate map because these are not tracked nodes: they are
+   * never diffed into `changedFrames`, and the short-circuit counts the two
+   * lists separately. Absent on a baseline written before #81.
+   */
+  readonly assetHashes?: Readonly<Record<string, string>>
 }
 
 export type ChangeKind = 'added' | 'modified' | 'removed'
@@ -118,6 +125,39 @@ export interface UntrackedFrame {
   readonly width: number | null
 }
 
+/**
+ * Why an asset's stage acted (#81). `node-changed` is the case the ticket is
+ * about; `new-to-baseline` is a source node this baseline has never hashed —
+ * a first run, or a manifest entry that just resolved.
+ */
+export type AssetChangeReason = 'node-changed' | 'new-to-baseline'
+
+/** An asset re-exported and overwritten in place this run (#81). */
+export interface RegeneratedAsset {
+  readonly path: string
+  readonly nodeId: string
+  /** How it was reproduced — the manifest's recorded mode, never a guess. */
+  readonly export: AssetExport
+  readonly reason: AssetChangeReason
+}
+
+/** A locked asset whose source node moved: the file was **not** touched (#81). */
+export interface LockedAssetConflict {
+  readonly path: string
+  readonly nodeId: string
+  readonly reason: AssetChangeReason
+  /** The manifest's own words for why the lock exists — what to reconcile against. */
+  readonly note: string
+}
+
+/** An asset the run tried to reproduce and could not. Never a silent skip (#81). */
+export interface AssetFailure {
+  readonly path: string
+  /** `null` only if a resolved entry somehow reached here without a node. */
+  readonly nodeId: string | null
+  readonly error: string
+}
+
 export interface Report {
   readonly schemaVersion: 1
   readonly ranAt: string
@@ -127,9 +167,9 @@ export interface Report {
   readonly changedComponentSets: readonly ChangedEntry[]
   readonly untrackedFrames: readonly UntrackedFrame[]
   readonly assets: {
-    readonly regenerated: readonly unknown[]
-    readonly lockedConflicts: readonly unknown[]
-    readonly failures: readonly unknown[]
+    readonly regenerated: readonly RegeneratedAsset[]
+    readonly lockedConflicts: readonly LockedAssetConflict[]
+    readonly failures: readonly AssetFailure[]
   }
   readonly errors: readonly string[]
 }
