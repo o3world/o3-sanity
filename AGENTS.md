@@ -6,17 +6,42 @@
 
 Issues are tracked in GitHub Issues (`o3world/o3-sanity`) via the `gh` CLI. See `docs/agents/issue-tracker.md`.
 
-Work is organised under parent issues with **native GitHub dependencies** between children — the
-migration super story is #25. Start a session by asking what's available, and claim before you work:
+Work is organised under **wayfinder maps** (`wayfinder:map`), with **native GitHub dependencies**
+between children. Start a session by asking what's available, and claim before you work:
 
 ```bash
-pnpm frontier        # READY / BLOCKED(n) / CLAIMED@who, per child of #25
+pnpm frontier        # READY / BLOCKED(n) / CLAIMED@who across every open map
+pnpm frontier 33     # one map, or any parent
 pnpm wt new <n>      # claim it, branch it, worktree it, install, carry env across
 ```
 
 One ticket, one worktree, one session. `pnpm wt new` refuses a blocked or already-claimed ticket, so
 you cannot start work two sessions are duplicating. See `docs/agents/worktrees.md` — read it before
 running more than one session at a time.
+
+**Every open task hangs off a map.** `frontier` walks maps downward, so a ticket attached to nothing
+is invisible to it — the mechanism that quietly stranded eight tickets, including a one-line fix, in
+early August 2026. The run ends with an `ORPHANED` list for exactly this; it should stay empty. When
+you file a ticket, attach it:
+
+```bash
+gh api -X POST repos/{owner}/{repo}/issues/<parent>/sub_issues \
+  -F sub_issue_id=$(gh api repos/{owner}/{repo}/issues/<child> --jq .id) -F replace_parent=true
+```
+
+A ticket that groups its own sub-issues is a **grouping, not a task** — `frontier` recurses past it
+and lists its children. #83 (the Figma sync epic) is the pattern.
+
+Two labels carry meaning beyond `wayfinder:*`:
+
+- **`awaiting:nick`** — stalled on a decision no agent can make. Do not pick these up; if your work
+  produces one, label it and say on the ticket what you need decided.
+- **`bug`** — a defect in shipped work, as opposed to map-advancing work. Both can be `wayfinder:task`.
+
+The board is [org Project 5](https://github.com/orgs/o3world/projects/5): `Board` is the kanban,
+`Awaiting Nick` and `Ready to pick up` are the two views worth checking first. Its _auto-add
+sub-issues_ workflow means attaching a ticket to a map puts it on the board — one more reason
+attachment is not optional.
 
 ### Content naming
 
