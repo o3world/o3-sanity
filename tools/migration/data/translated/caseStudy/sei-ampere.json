@@ -139,12 +139,11 @@
   },
   "migration": {
     "locked": false,
-    "sourceId": "wp:work:6338",
-    "extractedAt": "2026-08-01T02:52:58.498Z"
+    "sourceId": "wp:work:6338"
   },
   "_meta": {
     "sourceFile": "caseStudy/sei-ampere.json",
-    "sourceHash": "sha256:d1cd7dd7c133cee7b71e7613c0d86c1971f6a279b5114bdddc402a94ce2c33e7",
+    "sourceHash": "sha256:b002cc38467d329df31f0ce7975f174f94f28dfe037f06b6344b46740298b5f7",
     "rulesFile": "rules/caseStudy.md",
     "rulesHash": "sha256:82c77133745714f60061ad6e91b695f9e9f823dd78133221f4ecd331d7b04d72",
     "model": "claude-opus-5",

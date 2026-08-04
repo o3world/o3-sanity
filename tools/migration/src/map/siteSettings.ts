@@ -131,7 +131,7 @@ export const siteSettingsDoc = z.object({
   legalName: z.string().min(1),
   copyrightNote: z.string().optional(),
   defaultSeo: seoObject.optional(),
-  migration: z.object({ locked: z.boolean(), sourceId: z.string(), extractedAt: z.string() }),
+  migration: z.object({ locked: z.boolean(), sourceId: z.string() }),
 })
 
 export type SiteSettingsDoc = z.infer<typeof siteSettingsDoc>
@@ -320,7 +320,6 @@ export function mapSiteSettings(
     migration: {
       locked: false,
       sourceId: 'wp:site:chrome',
-      extractedAt: chrome._meta.extractedAt,
     },
   }
 

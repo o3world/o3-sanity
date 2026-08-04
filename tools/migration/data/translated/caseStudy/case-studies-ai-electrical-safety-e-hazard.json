@@ -161,12 +161,11 @@
   },
   "migration": {
     "locked": false,
-    "sourceId": "wp:work:10282",
-    "extractedAt": "2026-08-01T02:52:58.495Z"
+    "sourceId": "wp:work:10282"
   },
   "_meta": {
     "sourceFile": "caseStudy/case-studies-ai-electrical-safety-e-hazard.json",
-    "sourceHash": "sha256:f25c08160dcf05b6019972b271a6eff67445ef062ec7456b61cb176dafece5e0",
+    "sourceHash": "sha256:3ab2799d030522ceaa000c0ad8b2006a139db8c3c4fec5f4f09009ce45d03acf",
     "rulesFile": "rules/caseStudy.md",
     "rulesHash": "sha256:82c77133745714f60061ad6e91b695f9e9f823dd78133221f4ecd331d7b04d72",
     "model": "claude-opus-5",

@@ -181,14 +181,26 @@ describe('committed conversion output', () => {
 
   it('records provenance on every document so a doc traces back to WordPress', () => {
     for (const { file, doc } of all) {
-      const migration = doc.migration as { sourceId?: string; extractedAt?: string }
+      const migration = doc.migration as { sourceId?: string }
       // Documents are keyed by WordPress id. `wp:team:` is a person who
       // never had a WP account (#17); the siteSettings singleton has no id of
       // its own — it is assembled from menus and the options page.
       expect(migration.sourceId, file).toMatch(
         /^wp:(post|page|term|user|team):\d+$|^wp:site:chrome$/,
       )
-      expect(migration.extractedAt, file).toMatch(/^\d{4}-\d{2}-\d{2}T/)
+    }
+  })
+
+  /**
+   * `extractedAt` is a fact about the extract *run*, so it lives in
+   * `data/extract/_manifest.json` and `load.ts` stamps it onto the document on
+   * its way to Sanity. Storing it here made every `convert` rewrite all 272
+   * files whether or not WordPress had changed anything, which buried real
+   * content changes in timestamp noise. Studio still shows the field.
+   */
+  it('does not store the extract timestamp, so convert output is content-only', () => {
+    for (const { file, doc } of all) {
+      expect(doc.migration, file).not.toHaveProperty('extractedAt')
     }
   })
 

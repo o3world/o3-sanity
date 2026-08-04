@@ -214,12 +214,11 @@
   },
   "migration": {
     "locked": false,
-    "sourceId": "wp:work:10023",
-    "extractedAt": "2026-08-01T02:52:58.497Z"
+    "sourceId": "wp:work:10023"
   },
   "_meta": {
     "sourceFile": "caseStudy/ai-powered-personalization.json",
-    "sourceHash": "sha256:05dfc747ce95e77e900bfe61489bed1102e2f7e5962c8610ecc9698b080dba47",
+    "sourceHash": "sha256:b493095dbcb8b823a05f574d5df9f9797bb0e46d5e00148252dd645b0923fb77",
     "rulesFile": "rules/caseStudy.md",
     "rulesHash": "sha256:82c77133745714f60061ad6e91b695f9e9f823dd78133221f4ecd331d7b04d72",
     "model": "claude-opus-5",

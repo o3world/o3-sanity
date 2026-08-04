@@ -17,6 +17,7 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 
 import { slugsByType } from './lib/corpus'
+import { readManifest } from './lib/manifest'
 import type { WpRedirectExport } from './lib/redirects'
 import { EXTRACT_DIR, REPO_ROOT } from './lib/paths'
 import { buildRedirectMap, sitePaths, type RedirectMap } from './map/redirects'
@@ -80,9 +81,7 @@ if (!existsSync(wpFile)) {
   process.exit(1)
 }
 
-const wp = JSON.parse(readFileSync(wpFile, 'utf8')) as WpRedirectExport & {
-  _meta: { source: string; extractedAt: string }
-}
+const wp = JSON.parse(readFileSync(wpFile, 'utf8')) as WpRedirectExport
 const slugs = slugsByType()
 const map = buildRedirectMap({
   wp,
@@ -93,7 +92,11 @@ const map = buildRedirectMap({
   }),
 })
 
-writeFileSync(OUTPUT, render(map, `${wp._meta.source} (${wp._meta.extractedAt})`))
+// The source, without the extract timestamp: this file is generated and
+// committed, so a run date in its header would rewrite it on every extract
+// even when not one redirect had changed. `data/extract/_manifest.json` is
+// where "when was this pulled" lives.
+writeFileSync(OUTPUT, render(map, readManifest().source))
 
 console.log(`wrote ${map.redirects.length} redirects → ${OUTPUT}`)
 console.log(`  ${map.external.length} leave the site (o3xo.ai and friends)`)

@@ -126,12 +126,11 @@
   },
   "migration": {
     "locked": false,
-    "sourceId": "wp:work:6340",
-    "extractedAt": "2026-08-01T02:52:58.498Z"
+    "sourceId": "wp:work:6340"
   },
   "_meta": {
     "sourceFile": "caseStudy/the-institutes.json",
-    "sourceHash": "sha256:a8fe1460577178e759a91abd778fee86add4bf4bb25e114d7bb9a4ce215dfc32",
+    "sourceHash": "sha256:1321a4b98c042529e112c07de7dba9c182715614bc13d0b003f4e3c0023343ba",
     "rulesFile": "rules/caseStudy.md",
     "rulesHash": "sha256:82c77133745714f60061ad6e91b695f9e9f823dd78133221f4ecd331d7b04d72",
     "model": "claude-opus-5",

@@ -15,7 +15,7 @@ export const categoryDoc = z.object({
   _type: z.literal('category'),
   title: z.string().min(1),
   slug: z.object({ _type: z.literal('slug'), current: z.string().min(1) }),
-  migration: z.object({ locked: z.boolean(), sourceId: z.string(), extractedAt: z.string() }),
+  migration: z.object({ locked: z.boolean(), sourceId: z.string() }),
 })
 
 export type CategoryDoc = z.infer<typeof categoryDoc>
@@ -30,7 +30,6 @@ export function mapCategory(cat: WpCategory): Mapped<CategoryDoc> {
     migration: {
       locked: false,
       sourceId: `wp:term:${cat.wpId}`,
-      extractedAt: cat._meta.extractedAt,
     },
   })
 }

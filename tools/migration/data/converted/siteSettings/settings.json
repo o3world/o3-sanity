@@ -149,7 +149,6 @@
   },
   "migration": {
     "locked": false,
-    "sourceId": "wp:site:chrome",
-    "extractedAt": "2026-08-01T02:52:47.854Z"
+    "sourceId": "wp:site:chrome"
   }
 }

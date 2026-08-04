@@ -44,11 +44,14 @@ export function failed<T>(issues: readonly ConversionIssue[]): Mapped<T> {
   return { ok: false, issues }
 }
 
-/** Every extract record carries this provenance header. */
+/**
+ * Every extract record carries this header. It holds only what varies per
+ * record — `source` and `extractedAt` are facts about the *run* and live in
+ * `data/extract/_manifest.json`, so re-extracting unchanged content produces
+ * an empty diff (see `lib/manifest.ts`).
+ */
 export interface ExtractMeta {
   readonly type: string
-  readonly source: string
-  readonly extractedAt: string
 }
 
 /** `2026-07-31 20:07:34` (WP GMT) → `2026-07-31T20:07:34Z`. */

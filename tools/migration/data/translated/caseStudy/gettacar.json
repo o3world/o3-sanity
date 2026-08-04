@@ -145,12 +145,11 @@
   },
   "migration": {
     "locked": false,
-    "sourceId": "wp:work:5806",
-    "extractedAt": "2026-08-01T02:52:58.500Z"
+    "sourceId": "wp:work:5806"
   },
   "_meta": {
     "sourceFile": "caseStudy/gettacar.json",
-    "sourceHash": "sha256:d71a84a9ee131052a80e7b163988c47730eaff548c69a43fca9f2f37809ed81e",
+    "sourceHash": "sha256:f23254ddf8a59dc85ea86e1321cef1fa25ab831cd5d8f7d2a64fce2390a729f4",
     "rulesFile": "rules/caseStudy.md",
     "rulesHash": "sha256:82c77133745714f60061ad6e91b695f9e9f823dd78133221f4ecd331d7b04d72",
     "model": "claude-opus-5",

@@ -1,8 +1,6 @@
 {
   "_meta": {
-    "type": "perspective",
-    "source": "o3-world.live",
-    "extractedAt": "2026-08-01T00:09:53.145Z"
+    "type": "perspective"
   },
   "wpId": 7864,
   "slug": "making-your-user-interface-ui-accessible-for-all-users",

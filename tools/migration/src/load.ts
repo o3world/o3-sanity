@@ -19,6 +19,7 @@ import { ROUTABLE_TYPES } from '@o3/sanity/constants'
 
 import { CORPUS_DIRS, isPipelineOwned } from './lib/corpus'
 import { isImageBuffer } from './lib/media'
+import { readManifest } from './lib/manifest'
 import { ASSET_MAP, MEDIA_CACHE, EXTRACT_DIR, MISSING_MEDIA, REPO_ROOT } from './lib/paths'
 
 const client = getCliClient({ apiVersion: '2026-07-01' })
@@ -185,6 +186,41 @@ async function resolveAssets(node: unknown): Promise<unknown> {
 const DROPPED = Symbol('dropped')
 
 /**
+ * `migration.sourceId` prefix → the extract that produced the document.
+ *
+ * The committed JSON no longer carries `extractedAt`: it is a fact about the
+ * extract run, and storing it per-document meant every `convert` rewrote all
+ * 272 converted files whether or not WordPress had changed anything. Studio
+ * still shows it, because the loader stamps it here from the manifest — so
+ * the field an editor reads is sourced from the run that actually produced
+ * the content, and the committed tree stays a pure function of that content.
+ */
+const EXTRACT_OF_SOURCE: ReadonlyArray<readonly [prefix: string, extractType: string]> = [
+  ['wp:post:', 'perspective'],
+  ['wp:page:', 'page'],
+  ['wp:work:', 'caseStudy'],
+  ['wp:user:', 'person'],
+  ['wp:team:', 'team'],
+  ['wp:term:', 'category'],
+  ['wp:site:chrome', 'siteChrome'],
+]
+
+/**
+ * Stamp `migration.extractedAt` on documents that came from WordPress.
+ * Seeded documents have no extract behind them and are left alone — an
+ * invented timestamp would be worse than an absent one.
+ */
+function withExtractProvenance(doc: AnyDoc, runs: Readonly<Record<string, string>>): AnyDoc {
+  const migration = doc.migration as { sourceId?: string } | undefined
+  const sourceId = migration?.sourceId
+  if (!sourceId) return doc
+  const match = EXTRACT_OF_SOURCE.find(([prefix]) => sourceId.startsWith(prefix))
+  const at = match && runs[match[1]]
+  if (!at) return doc
+  return { ...doc, migration: { ...migration, extractedAt: at } } as AnyDoc
+}
+
+/**
  * A translated document carries a `_meta` provenance header that is not part
  * of the schema (#21). Strip it, and put the **extracted source** on
  * `migration.source` instead — that is what makes the document reviewable
@@ -232,6 +268,9 @@ async function main() {
     console.log('nothing to load')
     return
   }
+
+  // Read once: `withExtractProvenance` stamps every migrated document from it.
+  const { runs } = readManifest()
 
   const ids = all.flatMap((d) => [d._id, `drafts.${d._id}`])
   // `perspective: 'raw'` or this query cannot see a draft at all: the client
@@ -312,7 +351,9 @@ async function main() {
       skipped.push(doc._id)
       continue
     }
-    const resolved = (await resolveAssets(withTranslationProvenance(doc))) as AnyDoc
+    const resolved = (await resolveAssets(
+      withExtractProvenance(withTranslationProvenance(doc), runs),
+    )) as AnyDoc
     tx.createOrReplace(resolved)
     if (staleDrafts.has(doc._id)) {
       tx.delete(`drafts.${doc._id}`)

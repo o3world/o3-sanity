@@ -31,7 +31,7 @@ export const personDoc = z.object({
   name: z.string().min(1),
   title: z.string().min(1).optional(),
   headshot: migratableImage.optional(),
-  migration: z.object({ locked: z.boolean(), sourceId: z.string(), extractedAt: z.string() }),
+  migration: z.object({ locked: z.boolean(), sourceId: z.string() }),
 })
 
 export type PersonDoc = z.infer<typeof personDoc>
@@ -80,7 +80,6 @@ interface Merged {
   title?: string
   photo?: string
   sourceId: string
-  extractedAt: string
   teamIds: number[]
 }
 
@@ -115,7 +114,6 @@ export function buildPersonDirectory(
       id: `person-wp-${user.wpId}`,
       name: user.name.trim(),
       sourceId: `wp:user:${user.wpId}`,
-      extractedAt: user._meta.extractedAt,
       teamIds: [],
     }))
   }
@@ -128,7 +126,6 @@ export function buildPersonDirectory(
       id: `person-wp-${member.wpId}`,
       name: member.name.trim(),
       sourceId: `wp:team:${member.wpId}`,
-      extractedAt: member._meta?.extractedAt ?? new Date(0).toISOString(),
       teamIds: [],
     }))
     person.teamIds.push(member.wpId)
@@ -169,7 +166,6 @@ export function buildPersonDirectory(
       migration: {
         locked: false,
         sourceId: person.sourceId,
-        extractedAt: person.extractedAt,
       },
     })),
     refForTeam: (id) => teamIndex.get(id) ?? null,

@@ -514,7 +514,6 @@
   },
   "migration": {
     "locked": false,
-    "sourceId": "wp:post:7274",
-    "extractedAt": "2026-08-01T00:09:57.657Z"
+    "sourceId": "wp:post:7274"
   }
 }

@@ -159,12 +159,11 @@
   },
   "migration": {
     "locked": false,
-    "sourceId": "wp:work:5810",
-    "extractedAt": "2026-08-01T02:52:58.499Z"
+    "sourceId": "wp:work:5810"
   },
   "_meta": {
     "sourceFile": "caseStudy/la-colombe.json",
-    "sourceHash": "sha256:2ca70805e8a99a8dc12064e4f7439b7db35a1e286083e5ba4cb01285a4dfb0ed",
+    "sourceHash": "sha256:75373759e1a25b044c96b50238f520b9701e2feab72dfa74ce65c1bc82c94492",
     "rulesFile": "rules/caseStudy.md",
     "rulesHash": "sha256:82c77133745714f60061ad6e91b695f9e9f823dd78133221f4ecd331d7b04d72",
     "model": "claude-opus-5",

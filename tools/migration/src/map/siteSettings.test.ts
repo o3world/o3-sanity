@@ -15,11 +15,7 @@ const SITE: WpSiteSeo = {
   twitterCardType: 'summary_large_image',
 }
 
-const META: ExtractMeta = {
-  type: 'siteChrome',
-  source: 'o3-world.live',
-  extractedAt: '2026-07-31T23:51:24.267Z',
-}
+const META: ExtractMeta = { type: 'siteChrome' }
 
 function item(title: string, url: string, overrides: Partial<WpMenuItem> = {}): WpMenuItem {
   return { title, url, type: 'post_type', object: 'page', parent: 0, ...overrides }
@@ -190,7 +186,6 @@ describe('mapSiteSettings', () => {
     expect(doc.migration).toEqual({
       locked: false,
       sourceId: 'wp:site:chrome',
-      extractedAt: META.extractedAt,
     })
   })
 

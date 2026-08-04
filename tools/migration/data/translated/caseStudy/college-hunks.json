@@ -126,12 +126,11 @@
   },
   "migration": {
     "locked": false,
-    "sourceId": "wp:work:5809",
-    "extractedAt": "2026-08-01T02:52:58.499Z"
+    "sourceId": "wp:work:5809"
   },
   "_meta": {
     "sourceFile": "caseStudy/college-hunks.json",
-    "sourceHash": "sha256:b3a00e171cd71357939f1c6c3920257087b2f5062437c63f44c7784b6a1d7df9",
+    "sourceHash": "sha256:d856343f098e8dd4234866177698115c478a1d61c343b5b940dc123e352558f4",
     "rulesFile": "rules/caseStudy.md",
     "rulesHash": "sha256:82c77133745714f60061ad6e91b695f9e9f823dd78133221f4ecd331d7b04d72",
     "model": "claude-opus-5",

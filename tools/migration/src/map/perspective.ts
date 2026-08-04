@@ -53,7 +53,7 @@ export const perspectiveDoc = z.object({
   featuredImage: z.unknown().optional(),
   body: z.array(z.record(z.string(), z.unknown())).min(1),
   seo: seoObject.optional(),
-  migration: z.object({ locked: z.boolean(), sourceId: z.string(), extractedAt: z.string() }),
+  migration: z.object({ locked: z.boolean(), sourceId: z.string() }),
 })
 
 export type PerspectiveDoc = z.infer<typeof perspectiveDoc>
@@ -238,7 +238,6 @@ export function mapPerspective(
     migration: {
       locked: false,
       sourceId: `wp:post:${post.wpId}`,
-      extractedAt: post._meta.extractedAt,
     },
   }
 

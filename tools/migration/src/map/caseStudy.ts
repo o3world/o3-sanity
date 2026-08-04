@@ -94,7 +94,6 @@ export const caseStudyDoc = z.object({
   migration: z.object({
     locked: z.literal(false),
     sourceId: z.string().regex(/^wp:work:\d+$/),
-    extractedAt: z.string().min(1),
   }),
 })
 

@@ -18,11 +18,7 @@ const SITE: WpSiteSeo = {
   twitterCardType: 'summary_large_image',
 }
 
-const META: ExtractMeta = {
-  type: 'page',
-  source: 'o3-world.live',
-  extractedAt: '2026-07-31T20:07:34.550Z',
-}
+const META: ExtractMeta = { type: 'page' }
 
 function wpPage(overrides: Partial<WpPage> = {}): WpPage {
   return {

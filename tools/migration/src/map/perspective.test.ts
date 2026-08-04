@@ -37,11 +37,7 @@ function wpSeo(overrides: Partial<WpSeo> = {}): WpSeo {
  */
 function wpPost(overrides: Partial<WpPerspective> = {}): WpPerspective {
   return {
-    _meta: {
-      type: 'perspective',
-      source: 'o3-world.live',
-      extractedAt: '2026-07-31T20:07:34.550Z',
-    },
+    _meta: { type: 'perspective' },
     wpId: 101,
     slug: 'a-post',
     title: 'A Post',
@@ -61,7 +57,7 @@ function wpPost(overrides: Partial<WpPerspective> = {}): WpPerspective {
 const PEOPLE = buildPersonDirectory(
   [
     {
-      _meta: { type: 'person', source: 'o3-world.live', extractedAt: '2026-07-31T20:07:34.550Z' },
+      _meta: { type: 'person' },
       wpId: 16,
       slug: 'briano3',
       name: 'Brian Crumley',
@@ -100,10 +96,12 @@ describe('mapPerspective', () => {
     expect(doc.slug).toEqual({ _type: 'slug', current: 'a-post' })
     expect(doc.excerpt).toBe('Short summary.')
     expect(doc.categories).toEqual([{ _type: 'reference', _ref: 'category-wp-86', _key: 'cat-86' }])
+    // No `extractedAt`: it belongs to the extract run, lives in
+    // `data/extract/_manifest.json`, and `load.ts` stamps it on the way to
+    // Sanity — so convert output stays a pure function of extract content.
     expect(doc.migration).toEqual({
       locked: false,
       sourceId: 'wp:post:101',
-      extractedAt: '2026-07-31T20:07:34.550Z',
     })
   })
 

@@ -10,6 +10,8 @@
  */
 import { join } from 'node:path'
 
+import { MANIFEST_PATH, recordRun } from './lib/manifest'
+import { stripRenderNonces } from './lib/nonces'
 import { EXTRACT_DIR, writeJson } from './lib/paths'
 import { SOURCE, wpEval } from './lib/wp'
 import { MENUS_PHP, SITE_OPTIONS_PHP, type WpChrome } from './lib/chrome'
@@ -28,6 +30,24 @@ type WpPost = {
   featuredImage: { url: string; alt: string } | null
   seo: WpSeo
   fields: Record<string, unknown>
+}
+
+/** Extract types this run touched, so the manifest records only those. */
+const touched = new Set<string>()
+const startedAt = new Date().toISOString()
+
+/**
+ * Write one extracted record.
+ *
+ * `_meta` carries the type and nothing else: `source` and `extractedAt` are
+ * facts about the run, and live in `_manifest.json` instead — a timestamp in
+ * every file meant a re-extract rewrote all 361 of them whether or not
+ * WordPress had changed a word. `stripRenderNonces` removes the one remaining
+ * per-render value, so re-extracting unchanged content is a genuine no-op.
+ */
+function writeRecord(type: string, path: string, record: Record<string, unknown>): void {
+  touched.add(type)
+  writeJson(path, stripRenderNonces({ _meta: { type }, ...record }))
 }
 
 type WpPage = {
@@ -130,8 +150,7 @@ echo json_encode($out, JSON_PARTIAL_OUTPUT_ON_ERROR);`,
     )
     if (batch.length === 0) break
     for (const post of batch) {
-      writeJson(join(EXTRACT_DIR, 'perspective', `${post.slug}.json`), {
-        _meta: { type: 'perspective', source: SOURCE, extractedAt: new Date().toISOString() },
+      writeRecord('perspective', join(EXTRACT_DIR, 'perspective', `${post.slug}.json`), {
         ...post,
       })
     }
@@ -172,8 +191,7 @@ foreach (get_posts(["post_type" => "page", "post_status" => "publish", "numberpo
 echo json_encode($out, JSON_PARTIAL_OUTPUT_ON_ERROR);`,
   )
   for (const page of pages) {
-    writeJson(join(EXTRACT_DIR, 'page', `${page.slug}.json`), {
-      _meta: { type: 'page', source: SOURCE, extractedAt: new Date().toISOString() },
+    writeRecord('page', join(EXTRACT_DIR, 'page', `${page.slug}.json`), {
       ...page,
     })
   }
@@ -217,8 +235,7 @@ foreach (get_posts(["post_type" => "work", "post_status" => "publish", "numberpo
 echo json_encode($out, JSON_PARTIAL_OUTPUT_ON_ERROR);`,
   )
   for (const study of studies) {
-    writeJson(join(EXTRACT_DIR, 'caseStudy', `${study.slug}.json`), {
-      _meta: { type: 'caseStudy', source: SOURCE, extractedAt: new Date().toISOString() },
+    writeRecord('caseStudy', join(EXTRACT_DIR, 'caseStudy', `${study.slug}.json`), {
       ...study,
     })
   }
@@ -234,8 +251,7 @@ foreach (get_users() as $u) {
 echo json_encode($out);`,
   )
   for (const u of users) {
-    writeJson(join(EXTRACT_DIR, 'person', `${u.slug}.json`), {
-      _meta: { type: 'person', source: SOURCE, extractedAt: new Date().toISOString() },
+    writeRecord('person', join(EXTRACT_DIR, 'person', `${u.slug}.json`), {
       ...u,
     })
   }
@@ -279,8 +295,7 @@ echo json_encode($out);`,
   for (const member of team) {
     // Unpublished team posts can have an empty `post_name`; the id keeps the
     // filename unique so a draft cannot overwrite a colleague.
-    writeJson(join(EXTRACT_DIR, 'team', `${member.slug || `id-${member.wpId}`}.json`), {
-      _meta: { type: 'team', source: SOURCE, extractedAt: new Date().toISOString() },
+    writeRecord('team', join(EXTRACT_DIR, 'team', `${member.slug || `id-${member.wpId}`}.json`), {
       ...member,
     })
   }
@@ -320,8 +335,7 @@ foreach (get_posts(["post_type" => "ventures", "post_status" => "publish", "numb
 echo json_encode($out, JSON_PARTIAL_OUTPUT_ON_ERROR);`,
   )
   for (const venture of ventures) {
-    writeJson(join(EXTRACT_DIR, 'venture', `${venture.slug}.json`), {
-      _meta: { type: 'venture', source: SOURCE, extractedAt: new Date().toISOString() },
+    writeRecord('venture', join(EXTRACT_DIR, 'venture', `${venture.slug}.json`), {
       ...venture,
     })
   }
@@ -337,8 +351,7 @@ foreach (get_categories(["hide_empty" => false]) as $c) {
 echo json_encode($out);`,
   )
   for (const c of cats) {
-    writeJson(join(EXTRACT_DIR, 'category', `${c.slug}.json`), {
-      _meta: { type: 'category', source: SOURCE, extractedAt: new Date().toISOString() },
+    writeRecord('category', join(EXTRACT_DIR, 'category', `${c.slug}.json`), {
       ...c,
     })
   }
@@ -353,8 +366,7 @@ echo json_encode($out);`,
  */
 function extractSiteSeo() {
   const site = wpEval<WpSiteSeo>(`echo json_encode(${YOAST_SITE_PHP});`)
-  writeJson(join(EXTRACT_DIR, 'site', 'seo.json'), {
-    _meta: { type: 'siteSeo', source: SOURCE, extractedAt: new Date().toISOString() },
+  writeRecord('siteSeo', join(EXTRACT_DIR, 'site', 'seo.json'), {
     ...site,
   })
   return site
@@ -368,8 +380,7 @@ function extractChrome() {
   const chrome = wpEval<WpChrome>(
     `echo json_encode(["menus" => ${MENUS_PHP}, "options" => ${SITE_OPTIONS_PHP}]);`,
   )
-  writeJson(join(EXTRACT_DIR, 'site', 'chrome.json'), {
-    _meta: { type: 'siteChrome', source: SOURCE, extractedAt: new Date().toISOString() },
+  writeRecord('siteChrome', join(EXTRACT_DIR, 'site', 'chrome.json'), {
     ...chrome,
   })
   return Object.keys(chrome.menus).length
@@ -385,8 +396,7 @@ function extractChrome() {
  */
 function extractRedirects() {
   const map = wpEval<WpRedirectExport>(REDIRECTS_PHP)
-  writeJson(join(EXTRACT_DIR, 'site', 'redirects.json'), {
-    _meta: { type: 'redirects', source: SOURCE, extractedAt: new Date().toISOString() },
+  writeRecord('redirects', join(EXTRACT_DIR, 'site', 'redirects.json'), {
     ...map,
   })
   return map
@@ -417,3 +427,9 @@ if (args.includes('--ventures')) {
       `${redirects.redirection.length} redirects, site seo (${site.siteName}) → ${EXTRACT_DIR}`,
   )
 }
+
+// Last, and only for the types this run actually wrote — `--redirects` must
+// not claim it re-read the posts. Everything above is unchanged on disk when
+// WordPress is unchanged, so this is usually the only file in the diff.
+recordRun(SOURCE, [...touched], startedAt)
+console.log(`  run recorded for ${[...touched].sort().join(', ')} → ${MANIFEST_PATH}`)

@@ -58,7 +58,7 @@ export const pageDoc = z.object({
   pageType: z.literal('standard'),
   sections: z.array(z.record(z.string(), z.unknown())).min(1),
   seo: seoObject.optional(),
-  migration: z.object({ locked: z.boolean(), sourceId: z.string(), extractedAt: z.string() }),
+  migration: z.object({ locked: z.boolean(), sourceId: z.string() }),
 })
 
 export type PageDoc = z.infer<typeof pageDoc>
@@ -176,7 +176,6 @@ export function mapPage(page: WpPage, site: WpSiteSeo): Mapped<PageDoc> {
     migration: {
       locked: false,
       sourceId: `wp:page:${page.wpId}`,
-      extractedAt: page._meta.extractedAt,
     },
   }
 

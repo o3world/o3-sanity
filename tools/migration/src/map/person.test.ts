@@ -3,11 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { buildPersonDirectory, normalizeName, type WpPerson, type WpTeamMember } from './person'
 import type { ExtractMeta } from './types'
 
-const META: ExtractMeta = {
-  type: 'person',
-  source: 'o3-world.live',
-  extractedAt: '2026-07-31T20:07:34.550Z',
-}
+const META: ExtractMeta = { type: 'person' }
 
 function user(overrides: Partial<WpPerson> & Pick<WpPerson, 'wpId' | 'name'>): WpPerson {
   return { _meta: META, slug: overrides.name.toLowerCase(), ...overrides }

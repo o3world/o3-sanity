@@ -85,7 +85,6 @@
   ],
   "migration": {
     "locked": false,
-    "sourceId": "wp:post:5025",
-    "extractedAt": "2026-08-01T00:10:02.401Z"
+    "sourceId": "wp:post:5025"
   }
 }

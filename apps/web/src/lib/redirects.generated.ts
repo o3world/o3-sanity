@@ -2,7 +2,7 @@
  * GENERATED — do not edit. `pnpm --filter @o3/migration redirects` rewrites it.
  *
  * Every URL the WordPress site redirects today, resolved to where it ends up
- * (#24). Source: o3-world.live (2026-08-02T14:36:04.211Z) — the Redirection plugin's table plus Yoast
+ * (#24). Source: o3-world.live — the Redirection plugin's table plus Yoast
  * Premium's own redirect store, merged and collapsed so nothing chains.
  *
  * Two consumers, and they have to agree: `next.config.ts` serves these as

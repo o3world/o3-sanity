@@ -146,12 +146,11 @@
   },
   "migration": {
     "locked": false,
-    "sourceId": "wp:work:5805",
-    "extractedAt": "2026-08-01T02:52:58.500Z"
+    "sourceId": "wp:work:5805"
   },
   "_meta": {
     "sourceFile": "caseStudy/caron.json",
-    "sourceHash": "sha256:e53bac49a9b97e12ce1ffff9dab523fb8ac588873c305aadc5dfa0e521df57f6",
+    "sourceHash": "sha256:2d8f99c2474e2b312c92883438b8f40a928ac4608980d1b8ca3517a9223a7b7f",
     "rulesFile": "rules/caseStudy.md",
     "rulesHash": "sha256:82c77133745714f60061ad6e91b695f9e9f823dd78133221f4ecd331d7b04d72",
     "model": "claude-opus-5",
