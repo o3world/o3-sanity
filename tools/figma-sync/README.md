@@ -1,13 +1,14 @@
 # @o3/figma-sync
 
-Change detection against the design source of record (#78). One command:
+Change detection against the design source of record (#78, #79). One command:
 
 ```sh
 pnpm figma:sync
 ```
 
-It answers one question — **which canonical page frames changed in Figma since the last sync?** —
-and it answers it cheaply when the answer is "none".
+It answers three questions — **which canonical page frames changed since the last sync, which
+component sets changed, and is there design work in the file nobody is watching?** — and it answers
+the first two cheaply when the answer is "none".
 
 ```
 1. GET /v1/files/RvraLJaZ0zWm8UaD5AJf43?depth=1     ← one call, file metadata only
@@ -15,7 +16,8 @@ and it answers it cheaply when the answer is "none".
    tracked node?   →  "no changes since <syncedAt>", exit 0. One API call total.
 3. otherwise       →  GET /v1/files/:key/nodes?ids=… in small batches,
                       normalize each subtree, sha256 it, diff against the baseline
-4. write data/baseline.json + data/report.{json,md}, print the summary
+4. …and one GET /v1/files/:key/nodes?ids=<section>&depth=1 — the new-frame probe
+5. write data/baseline.json + data/report.{json,md}, print the summary
 ```
 
 Authentication is the standard `FIGMA_API_KEY` from the dev environment — the same sourcing as
@@ -29,23 +31,45 @@ commit it along with the report; git carries the history, the files only ever de
 
 ## `data/tracked-nodes.json` — what we watch
 
-Hand-maintained, promoted from the frame inventory on `research/figma-frame-inventory`.
+Hand-maintained: the page frames are promoted from the frame inventory on
+`research/figma-frame-inventory`, the component sets from
+[`docs/figma-components.md`](../../docs/figma-components.md) — this file is that document's
+machine-readable half.
 
-| Field           | Meaning                                                                                         |
-| --------------- | ----------------------------------------------------------------------------------------------- |
-| `fileKey`       | `RvraLJaZ0zWm8UaD5AJf43` — _O3DX: Visual exploration_                                           |
-| `sectionNodeId` | `1632:1510`, the Design Concept section. Reserved for the untracked-frame probe (later ticket). |
-| `entries[]`     | `{ nodeId, kind, name, figmaName?, route?, codeComponent?, variant }`                           |
+| Field              | Meaning                                                                       |
+| ------------------ | ----------------------------------------------------------------------------- |
+| `fileKey`          | `RvraLJaZ0zWm8UaD5AJf43` — _O3DX: Visual exploration_                         |
+| `sectionNodeId`    | `1632:1510`, the Design Concept section — what the new-frame probe reads      |
+| `entries[]`        | `{ nodeId, kind, name, figmaName?, route?, variant?, codeComponent?, note? }` |
+| `ignoredNodeIds[]` | `{ nodeId, name?, note }` — section residents the probe must stay quiet about |
 
-- `nodeId` is a **verified frame** id in `1680:2134` form. A share URL's `node-id` is usually a
+- `nodeId` is a **verified** node id in `1680:2134` form. A share URL's `node-id` is usually a
   child, not the frame, and it uses `-` — both mistakes are caught by `manifest.test.ts`.
 - `name` is the page layer in this project's language (CONTEXT.md), not the Figma layer name: two
   different frames are called "Insights" in that file and neither is the Perspectives index.
-  `figmaName` records what Figma calls it.
-- `kind: "pageFrame"` carries a `route`; `kind: "componentSet"` will carry a `codeComponent`
-  (nothing is tracked as a component set yet — that is a later ticket).
+  `figmaName` records what Figma calls it. For a component set the two are the same string — the
+  Figma set name _is_ what this project calls it.
+- `kind: "pageFrame"` carries a `route` and a `variant`; `kind: "componentSet"` carries neither
+  (a set is not a breakpoint) and carries a `codeComponent` instead.
 - `variant` is `desktop` (1440) or `mobile` (402). About and Solutions have no mobile frame; that is
   a real gap in the file, not a missing entry.
+
+### Component sets (#79)
+
+All 24 nodes in the component→code map, canonical and not — a rework of `Button / Solid` should
+report as "that set changed", routed to its one cva component, rather than as unexplained diffs on
+every page frame that instances it.
+
+- `codeComponent` is `path#Symbol` relative to the repo root, and `manifest.test.ts` fails if the
+  file it names does not exist.
+- A set the document says maps to nothing spells **`"codeComponent": null` out loud** and carries a
+  `note` in that document's words. Absent would be indistinguishable from unaudited; `null` plus a
+  reason means somebody looked.
+- The non-canonical sets are tracked too, `null` and all. They cost one hash each and they are the
+  only way a set quietly becoming canonical — someone reworking `Button / Outline` before a frame
+  uses it — shows up at all.
+- Two entries are bare `COMPONENT`s, not sets (`NavBar` `1710:2271`, `Footer` `1280:1885`). They
+  ride in the same lane: `kind: "componentSet"` means "a library node, not a page".
 
 ## Report schema — version 1, fixed
 
@@ -61,8 +85,8 @@ bumps `schemaVersion`.
   "fileVersion": "2467893184", // Figma's file version at the time
   "shortCircuited": true, // true = stopped after the version check
   "changedFrames": [], // tracked pageFrames whose hash moved
-  "changedComponentSets": [], // same, for kind: "componentSet" (later ticket)
-  "untrackedFrames": [], // frames in the section but not the manifest (later ticket)
+  "changedComponentSets": [], // same, for kind: "componentSet"
+  "untrackedFrames": [], // frames in the section but not the manifest — triage them
   "assets": {
     "regenerated": [], // exported assets rewritten this run (later ticket)
     "lockedConflicts": [], // …that a human has locked (later ticket)
@@ -77,18 +101,63 @@ bumps `schemaVersion`.
 ```jsonc
 {
   "nodeId": "1680:2134",
-  "name": "Home", // the page layer
+  "name": "Home", // the page layer, or the Figma set name
   "route": "/", // null for component sets
-  "variant": "desktop", // "desktop" | "mobile"
+  "variant": "desktop", // "desktop" | "mobile"; null for component sets
   "change": "modified", // "added" | "modified" | "removed"
 }
 ```
+
+A `changedComponentSets` entry adds one key, `codeComponent` — the code the change routes to, or
+`null` for a set that maps to nothing. It is the one key page frames never carry, so a consumer of
+`changedFrames` sees exactly what #78 described.
+
+**An edit inside a set reports as the set changing _alongside_ the page frames whose hash also
+moved, never instead of them.** The two are hashed independently: the set says _what_ changed, the
+frames say _where it shows_. `component-sets.test.ts` fixes that with overlapping fixtures.
 
 `added` is a node the baseline has never hashed (a first run, or a manifest addition); `removed` is
 one the baseline has and the manifest no longer tracks — reported even when nothing describes it any
 more, in which case `name` falls back to the node id and `route`/`variant` are `null`.
 
+`untrackedFrames` entries:
+
+```jsonc
+{
+  "nodeId": "2050:891",
+  "name": "Contact", // the Figma layer name — nothing else knows it yet
+  "width": 1440, // 1440/402 says "page frame"; anything else usually says "study"
+}
+```
+
 `data/report.md` is the same run, rendered for a human.
+
+## The new-frame probe — and how to triage what it finds
+
+Hashing answers "did anything we watch change?". It cannot answer "is there design work we are not
+watching at all?", and that gap is how a brand-new page frame sits in the file for a month with
+nobody noticing. So every non-short-circuited run lists the **direct children** of the Design
+Concept section (one `depth=1` call) and reports the `FRAME`s the manifest has never heard of.
+
+**It surfaces; it never promotes.** The file holds two generations of the same site
+(`docs/agents/figma.md`), so "a frame exists in the section" and "a frame is canonical" are
+different claims — the second is a judgement, and nothing in this package makes it. `probe.ts`
+writes nothing to `tracked-nodes.json`.
+
+`untracked` means **decide**, and there are exactly two ways to close it:
+
+| The frame is…                                         | Do this                                                                          |
+| ----------------------------------------------------- | -------------------------------------------------------------------------------- |
+| **canonical** — a real 1440/402 page layer            | add an `entries[]` row with its route and variant; the next run baselines it     |
+| **noise** — a section study, a cover, a stale capture | add an `ignoredNodeIds[]` row **with a `note` saying why**; the probe goes quiet |
+
+Leaving it open is also a position — the report simply keeps asking. That is the intended state for
+work in progress that nobody has ruled on yet.
+
+Two rules keep the list honest: an ignored id may never also be a tracked id, and every ignored id
+carries its reason (`manifest.test.ts` enforces both). Non-`FRAME` children are skipped by type —
+the canonical `NavBar` component sits loose in that section — and so are nested frames: only direct
+children are considered, or every hero in the file would read as new.
 
 ## Normalization — the correctness-critical seam
 
@@ -114,4 +183,7 @@ pnpm vitest run tools/figma-sync/src
 
 `normalize.test.ts` carries the two fixture pairs that matter: the same frame seen from a different
 place on the canvas (must hash **equal**) and the same frame with one word rewritten (must hash
-**differently**).
+**differently**). `component-sets.test.ts` carries the third: a label rewritten in a set _and_ in
+the frame that instances it, which must report as **both**. `probe.test.ts` runs the section
+classification against fixture listings — never the live section, whose contents change with every
+design session.

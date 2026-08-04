@@ -97,6 +97,210 @@
       "figmaName": "Live - Mobile",
       "route": "/live",
       "variant": "mobile"
+    },
+    {
+      "nodeId": "136:754",
+      "kind": "componentSet",
+      "name": "Button / Solid",
+      "figmaName": "Button / Solid",
+      "codeComponent": "packages/ui/src/components/ui/button.tsx#Button",
+      "note": "Divergent — Figma is Size = Base | Large on a dark/light fill, the shipped variant vocabulary is a schema enum. Realignment belongs to the page layer that rebuilds the CTAs (#42), not here."
+    },
+    {
+      "nodeId": "264:260",
+      "kind": "componentSet",
+      "name": "Button / Ghost",
+      "figmaName": "Button / Ghost",
+      "codeComponent": "packages/ui/src/components/ui/button.tsx#Button",
+      "note": "The `variant=\"ghost\"` case; still needs Figma's fill and label treatment."
+    },
+    {
+      "nodeId": "264:50",
+      "kind": "componentSet",
+      "name": "Brand / Logo",
+      "figmaName": "Brand / Logo",
+      "codeComponent": "packages/ui/src/components/brand-logo.tsx#BrandLogo",
+      "note": "`Color` is the one axis. `White` is unbuilt on purpose — no canonical frame instances it."
+    },
+    {
+      "nodeId": "778:1862",
+      "kind": "componentSet",
+      "name": "Icon / Surface",
+      "figmaName": "Icon / Surface",
+      "codeComponent": "packages/ui/src/components/carousel-control.tsx#CarouselControl",
+      "note": "The perspectives prev/next. Live's instances are links, not controls, so `InFlightSection` inlines the circle instead (#50)."
+    },
+    {
+      "nodeId": "1203:1227",
+      "kind": "componentSet",
+      "name": "Icon / Soft",
+      "figmaName": "Icon / Soft",
+      "codeComponent": null,
+      "note": "Not standalone — a part: the inner chip of `Icon / Surface`."
+    },
+    {
+      "nodeId": "136:14",
+      "kind": "componentSet",
+      "name": ".building block Icon_text",
+      "figmaName": ".building block Icon_text",
+      "codeComponent": null,
+      "note": "No component — ADR 0009. Material Symbols glyphs are inline SVG (`ArrowIcon`, `CloseIcon`), never a string prop."
+    },
+    {
+      "nodeId": "1710:2271",
+      "kind": "componentSet",
+      "name": "NavBar",
+      "figmaName": "NavBar",
+      "codeComponent": "apps/web/src/ui/SiteNav.tsx#SiteNav",
+      "note": "A component, not a set, and it sits loose in the Design Concept section. Source of record for the nav's display labels."
+    },
+    {
+      "nodeId": "1280:1885",
+      "kind": "componentSet",
+      "name": "Footer",
+      "figmaName": "Footer",
+      "codeComponent": null,
+      "note": "Stale — `SiteFooter` is built from the frame's footer (`1680:2096`), not from this component (#41). Tracked so a rework of it is visible, not because it maps anywhere."
+    },
+    {
+      "nodeId": "264:573",
+      "kind": "componentSet",
+      "name": "Case study cards",
+      "figmaName": "Case study cards",
+      "codeComponent": null,
+      "note": "Generation-1, one of three competing sets. Canonical Home draws its cards as frames (`1683:2661`), not instances."
+    },
+    {
+      "nodeId": "466:570",
+      "kind": "componentSet",
+      "name": "Case study cards",
+      "figmaName": "Case study cards",
+      "codeComponent": null,
+      "note": "Generation-1, one of three competing sets. No canonical frame instances it."
+    },
+    {
+      "nodeId": "1393:3025",
+      "kind": "componentSet",
+      "name": "Case study cards",
+      "figmaName": "Case study cards",
+      "codeComponent": null,
+      "note": "The one non-canonical set a canonical frame instances — Solutions' three engagement cards (`1925:6113`–`6115`, #47). Nothing case-study about the content, so `PanelCards` composes it locally and the set stays non-canonical."
+    },
+    {
+      "nodeId": "172:140",
+      "kind": "componentSet",
+      "name": "Buttons",
+      "figmaName": "Buttons",
+      "codeComponent": null,
+      "note": "Unnamed axes (`Property 1/2/3`) — an imported set, superseded by `Button / *`."
+    },
+    {
+      "nodeId": "778:1447",
+      "kind": "componentSet",
+      "name": "Button / Outline",
+      "figmaName": "Button / Outline",
+      "codeComponent": null,
+      "note": "No canonical frame uses an outline button."
+    },
+    {
+      "nodeId": "356:639",
+      "kind": "componentSet",
+      "name": "Button / Surface",
+      "figmaName": "Button / Surface",
+      "codeComponent": null,
+      "note": "No canonical frame uses a surface button."
+    },
+    {
+      "nodeId": "242:310",
+      "kind": "componentSet",
+      "name": "Icon / Solid",
+      "figmaName": "Icon / Solid",
+      "codeComponent": null,
+      "note": "Superseded by `Icon / Surface`."
+    },
+    {
+      "nodeId": "270:819",
+      "kind": "componentSet",
+      "name": "Icon",
+      "figmaName": "Icon",
+      "codeComponent": null,
+      "note": "Duplicate of the `Icon / *` family."
+    },
+    {
+      "nodeId": "270:748",
+      "kind": "componentSet",
+      "name": "Badge",
+      "figmaName": "Badge",
+      "codeComponent": null,
+      "note": "No canonical use."
+    },
+    {
+      "nodeId": "172:54",
+      "kind": "componentSet",
+      "name": "Social links",
+      "figmaName": "Social links",
+      "codeComponent": null,
+      "note": "Revisited in #41 and still no: the frame's footer draws Socials as a plain `Link Group` (`1680:2110`), not an instance."
+    },
+    {
+      "nodeId": "734:1073",
+      "kind": "componentSet",
+      "name": "Shapes",
+      "figmaName": "Shapes",
+      "codeComponent": null,
+      "note": "Decorative quarter-circles — a background treatment, not a component."
+    },
+    {
+      "nodeId": "400:2219",
+      "kind": "componentSet",
+      "name": "close",
+      "figmaName": "close",
+      "codeComponent": null,
+      "note": "Glyph, not a component (ADR 0009) — `CloseIcon` draws it inline."
+    },
+    {
+      "nodeId": "134:343",
+      "kind": "componentSet",
+      "name": "Cover status",
+      "figmaName": "Cover status",
+      "codeComponent": null,
+      "note": "Figma file furniture."
+    },
+    {
+      "nodeId": "1261:4877",
+      "kind": "componentSet",
+      "name": "Pro-series",
+      "figmaName": "Pro-series",
+      "codeComponent": null,
+      "note": "AB WIP canvas."
+    },
+    {
+      "nodeId": "1275:1631",
+      "kind": "componentSet",
+      "name": "Go birds.",
+      "figmaName": "Go birds.",
+      "codeComponent": null,
+      "note": "Easter egg. Not a site component."
+    },
+    {
+      "nodeId": "270:814",
+      "kind": "componentSet",
+      "name": ".building block Icon_text",
+      "figmaName": ".building block Icon_text",
+      "codeComponent": null,
+      "note": "Duplicate of `136:14`."
+    }
+  ],
+  "ignoredNodeIds": [
+    {
+      "nodeId": "1799:1607",
+      "name": "Intro section",
+      "note": "A cover study for the section itself — 1440x693, no nav and no footer, two decorative groups. Not a page."
+    },
+    {
+      "nodeId": "1893:478",
+      "name": "Case Studies",
+      "note": "A section study (heading + `Desktop - 33`, 1440x1130), not a page frame. The canonical Work index is `1634:1167`."
     }
   ]
 }

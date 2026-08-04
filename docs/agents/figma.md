@@ -15,11 +15,22 @@ amended by #33). This page is how you read the file without wasting a session on
 pnpm figma:sync    # one API call when nothing moved; otherwise names what did
 ```
 
-`@o3/figma-sync` hashes a normalized subtree per tracked frame and diffs it against the committed
+`@o3/figma-sync` hashes a normalized subtree per tracked node and diffs it against the committed
 baseline, reporting changes by frame name **and route**
 ([`tools/figma-sync/README.md`](../../tools/figma-sync/README.md)). It talks to the REST API
 directly — no MCP, no rate limit. **A sync is a commit**: `data/baseline.json` and
 `data/report.{json,md}` describe the run that produced them.
+
+It watches two things and asks about a third (#79):
+
+- **Canonical page frames** — the manifest's `pageFrame` entries.
+- **Component sets** — all 24 nodes of the component→code map below, so a rework of `Button /
+Solid` reads as "that set changed → `button.tsx#Button`" instead of as unexplained diffs on
+  every frame that instances it. It reports the set **alongside** those frames, not instead.
+- **New work** — each real run lists the Design Concept section's direct children and names any
+  frame the manifest has never heard of. That is a question, not a finding: decide it is canonical
+  and add it to `tracked-nodes.json`, or decide it is noise and add it to `ignoredNodeIds` with a
+  reason. The probe never promotes anything itself — the two-generations rule below is exactly why.
 
 ## Which MCP server to use
 

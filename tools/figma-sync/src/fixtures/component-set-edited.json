@@ -1,0 +1,38 @@
+{
+  "id": "136:754",
+  "name": "Button / Solid",
+  "type": "COMPONENT_SET",
+  "scrollBehavior": "SCROLLS",
+  "absoluteBoundingBox": { "x": -2400, "y": 640, "width": 814, "height": 330 },
+  "componentPropertyDefinitions": {
+    "Size": { "type": "VARIANT", "defaultValue": "Base", "variantOptions": ["Base", "Large"] },
+    "State": {
+      "type": "VARIANT",
+      "defaultValue": "Default",
+      "variantOptions": ["Default", "Hover"]
+    }
+  },
+  "children": [
+    {
+      "id": "136:755",
+      "name": "Size=Base, State=Default",
+      "type": "COMPONENT",
+      "absoluteBoundingBox": { "x": -2400, "y": 640, "width": 187, "height": 56 },
+      "relativeTransform": [
+        [1, 0, 0],
+        [0, 1, 0]
+      ],
+      "fills": [{ "type": "SOLID", "color": { "r": 0.04, "g": 0.04, "b": 0.04, "a": 1 } }],
+      "children": [
+        {
+          "id": "136:756",
+          "name": "Label",
+          "type": "TEXT",
+          "characters": "Start something",
+          "absoluteBoundingBox": { "x": -2376, "y": 656, "width": 139, "height": 24 },
+          "style": { "fontFamily": "Inter", "fontSize": 18, "fontWeight": 500 }
+        }
+      ]
+    }
+  ]
+}

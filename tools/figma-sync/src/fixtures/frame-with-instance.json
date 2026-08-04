@@ -1,0 +1,37 @@
+{
+  "id": "1680:2134",
+  "name": "Home",
+  "type": "FRAME",
+  "absoluteBoundingBox": { "x": 1200, "y": -480, "width": 1440, "height": 3200 },
+  "children": [
+    {
+      "id": "1680:2140",
+      "name": "Hero",
+      "type": "FRAME",
+      "absoluteBoundingBox": { "x": 1200, "y": -480, "width": 1440, "height": 900 },
+      "relativeTransform": [
+        [1, 0, 0],
+        [0, 1, 0]
+      ],
+      "children": [
+        {
+          "id": "1680:2142",
+          "name": "Button / Solid",
+          "type": "INSTANCE",
+          "componentId": "136:755",
+          "absoluteBoundingBox": { "x": 1280, "y": -120, "width": 187, "height": 56 },
+          "children": [
+            {
+              "id": "1680:2143",
+              "name": "Label",
+              "type": "TEXT",
+              "characters": "Start a project",
+              "absoluteBoundingBox": { "x": 1304, "y": -104, "width": 139, "height": 24 },
+              "style": { "fontFamily": "Inter", "fontSize": 18, "fontWeight": 500 }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -6,7 +6,8 @@ import type { Baseline, Report, TrackedManifest } from './types'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const DATA = join(ROOT, 'data')
-const REPO_ROOT = join(ROOT, '..', '..')
+/** The monorepo root — the manifest's `codeComponent` paths are relative to it. */
+export const REPO_ROOT = join(ROOT, '..', '..')
 
 /** Hand-maintained: what we watch. */
 export const TRACKED_NODES = join(DATA, 'tracked-nodes.json')

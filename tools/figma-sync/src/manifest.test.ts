@@ -1,6 +1,9 @@
+import { existsSync } from 'node:fs'
+import { join } from 'node:path'
+
 import { describe, expect, it } from 'vitest'
 
-import { readManifest } from './paths'
+import { readManifest, REPO_ROOT } from './paths'
 
 import type { TrackedNode } from './types'
 
@@ -14,6 +17,8 @@ import type { TrackedNode } from './types'
 
 const manifest = readManifest()
 const entries = manifest.entries as TrackedNode[]
+const pageFrames = entries.filter((entry) => entry.kind === 'pageFrame')
+const componentSets = entries.filter((entry) => entry.kind === 'componentSet')
 
 describe('tracked-nodes.json', () => {
   it('points at the design source of record', () => {
@@ -23,7 +28,7 @@ describe('tracked-nodes.json', () => {
   })
 
   it('tracks at least the seven canonical page layers', () => {
-    const names = new Set(entries.map((entry) => entry.name))
+    const names = new Set(pageFrames.map((entry) => entry.name))
     expect([...names].sort()).toEqual([
       'About',
       'Case Study detail',
@@ -46,16 +51,15 @@ describe('tracked-nodes.json', () => {
     expect(new Set(ids).size).toBe(ids.length)
   })
 
-  it('gives every page frame a route', () => {
-    for (const entry of entries.filter((e) => e.kind === 'pageFrame')) {
+  it('gives every page frame a route and a breakpoint', () => {
+    for (const entry of pageFrames) {
       expect(entry.route, entry.name).toMatch(/^\//)
+      expect(entry.variant, entry.name).toMatch(/^(desktop|mobile)$/)
     }
   })
 
   it('names one frame per route per breakpoint', () => {
-    const keys = entries
-      .filter((entry) => entry.kind === 'pageFrame')
-      .map((entry) => `${entry.route}@${entry.variant}`)
+    const keys = pageFrames.map((entry) => `${entry.route}@${entry.variant}`)
     expect(new Set(keys).size).toBe(keys.length)
   })
 
@@ -73,5 +77,70 @@ describe('tracked-nodes.json', () => {
 
   it('records the Figma layer name for every entry', () => {
     for (const entry of entries) expect(entry.figmaName, entry.nodeId).toBeTruthy()
+  })
+})
+
+/**
+ * Component sets (#79). The manifest is the machine-readable half of
+ * `docs/figma-components.md`, so the invariants here are that document's rules:
+ * every set says what code it maps to, and a set that maps to **nothing** says
+ * so out loud rather than by omission — an absent `codeComponent` would be
+ * indistinguishable from a forgotten one.
+ */
+describe('tracked component sets', () => {
+  it('carries the whole component→code map, canonical and not', () => {
+    // docs/figma-components.md: 8 canonical rows and 14 non-canonical ones —
+    // 24 nodes, because `Case study cards` is three competing sets.
+    expect(componentSets.length).toBe(24)
+  })
+
+  it('states a code target for every set, `null` included', () => {
+    for (const entry of componentSets) {
+      expect(Object.hasOwn(entry, 'codeComponent'), entry.name).toBe(true)
+      expect(typeof entry.codeComponent === 'string' || entry.codeComponent === null).toBe(true)
+    }
+  })
+
+  it('explains every set that deliberately maps to nothing', () => {
+    for (const entry of componentSets.filter((set) => set.codeComponent === null)) {
+      expect(entry.note, entry.name).toBeTruthy()
+    }
+  })
+
+  it('points at a file that exists, when it points at one', () => {
+    for (const entry of componentSets) {
+      if (!entry.codeComponent) continue
+      const path = entry.codeComponent.split('#')[0] ?? ''
+      expect(existsSync(join(REPO_ROOT, path)), entry.codeComponent).toBe(true)
+    }
+  })
+
+  it('gives a component set no route and no breakpoint — it is neither', () => {
+    for (const entry of componentSets) {
+      expect(entry.route, entry.name).toBeUndefined()
+      expect(entry.variant, entry.name).toBeUndefined()
+    }
+  })
+})
+
+/**
+ * The probe's mute button (#79). Every id on it is a standing decision — "we
+ * looked, it is not canonical" — so it has to carry the reason, and it may
+ * never mute something the manifest tracks.
+ */
+describe('ignoredNodeIds', () => {
+  const ignored = manifest.ignoredNodeIds ?? []
+
+  it('gives a reason for every muted node', () => {
+    expect(ignored.length).toBeGreaterThan(0)
+    for (const entry of ignored) {
+      expect(entry.nodeId).toMatch(/^\d+:\d+$/)
+      expect(entry.note, entry.nodeId).toBeTruthy()
+    }
+  })
+
+  it('never mutes a node the manifest tracks', () => {
+    const tracked = new Set(entries.map((entry) => entry.nodeId))
+    for (const entry of ignored) expect(tracked.has(entry.nodeId), entry.nodeId).toBe(false)
   })
 })

@@ -14,10 +14,17 @@ const manifest: TrackedManifest = {
       nodeId: '1710:2271',
       kind: 'componentSet',
       name: 'NavBar',
-      codeComponent: 'packages/ui/src/NavBar',
-      variant: 'desktop',
+      codeComponent: 'apps/web/src/ui/SiteNav.tsx#SiteNav',
+    },
+    {
+      nodeId: '734:1073',
+      kind: 'componentSet',
+      name: 'Shapes',
+      codeComponent: null,
+      note: 'Decorative quarter-circles — a background treatment, not a component.',
     },
   ],
+  ignoredNodeIds: [{ nodeId: '1799:1607', name: 'Intro section', note: 'A study, not a page.' }],
 }
 
 const base = { ranAt: '2026-08-03T12:00:00.000Z', fileVersion: '1234567890', manifest }
@@ -57,9 +64,47 @@ describe('buildReport', () => {
       diff: { added: [], modified: ['1710:2271'], removed: [] },
     })
     expect(report.changedFrames).toEqual([])
+    // The set carries the code it routes to — that is what makes "this set
+    // changed" actionable instead of just localised (#79).
     expect(report.changedComponentSets).toEqual([
-      { nodeId: '1710:2271', name: 'NavBar', route: null, variant: 'desktop', change: 'modified' },
+      {
+        nodeId: '1710:2271',
+        name: 'NavBar',
+        route: null,
+        variant: null,
+        codeComponent: 'apps/web/src/ui/SiteNav.tsx#SiteNav',
+        change: 'modified',
+      },
     ])
+  })
+
+  it('says a set maps to nothing rather than leaving the reader to guess', () => {
+    const report = buildReport({
+      ...base,
+      shortCircuited: false,
+      diff: { added: [], modified: ['734:1073'], removed: [] },
+    })
+    expect(report.changedComponentSets).toEqual([
+      {
+        nodeId: '734:1073',
+        name: 'Shapes',
+        route: null,
+        variant: null,
+        codeComponent: null,
+        change: 'modified',
+      },
+    ])
+  })
+
+  it('carries the probe’s untracked frames through untouched', () => {
+    const report = buildReport({
+      ...base,
+      shortCircuited: false,
+      untrackedFrames: [{ nodeId: '2050:891', name: 'Contact', width: 1440 }],
+    })
+    expect(report.untrackedFrames).toEqual([{ nodeId: '2050:891', name: 'Contact', width: 1440 }])
+    // The probe never promotes: nothing about it touches the tracked sections.
+    expect(report.changedFrames).toEqual([])
   })
 
   it('marks a first-run node as added', () => {
@@ -107,5 +152,34 @@ describe('renderReportMarkdown', () => {
   it('says so plainly when nothing changed', () => {
     const md = renderReportMarkdown(buildReport({ ...base, shortCircuited: true }))
     expect(md).toContain('No changes')
+  })
+
+  it('names the code a changed set routes to', () => {
+    const md = renderReportMarkdown(
+      buildReport({
+        ...base,
+        shortCircuited: false,
+        diff: { added: [], modified: ['1710:2271'], removed: [] },
+      }),
+    )
+    expect(md).toContain('NavBar')
+    expect(md).toContain('apps/web/src/ui/SiteNav.tsx#SiteNav')
+  })
+
+  it('lists untracked frames with the triage the reader has to do', () => {
+    const md = renderReportMarkdown(
+      buildReport({
+        ...base,
+        shortCircuited: false,
+        untrackedFrames: [{ nodeId: '2050:891', name: 'Contact', width: 1440 }],
+      }),
+    )
+    expect(md).toContain('Contact')
+    expect(md).toContain('2050:891')
+    expect(md).toContain('1440')
+    // Two ways out, and the report has to say both — otherwise it reads as a
+    // failure rather than a decision.
+    expect(md).toMatch(/tracked-nodes\.json/)
+    expect(md).toMatch(/ignoredNodeIds/)
   })
 })

@@ -8,6 +8,8 @@
  * account (`docs/agents/figma.md`).
  */
 
+import type { SectionChild } from './probe'
+
 const API_ROOT = 'https://api.figma.com/v1'
 
 /** How many node ids go in one `/nodes` request — full page frames are large. */
@@ -24,6 +26,12 @@ export interface FigmaClient {
   getFileMeta(fileKey: string): Promise<FileMeta>
   /** nodeId → subtree document. A node the file does not have is omitted. */
   getNodeDocuments(fileKey: string, nodeIds: readonly string[]): Promise<Map<string, unknown>>
+  /**
+   * The section's **direct** children, for the new-frame probe (#79) —
+   * `depth=1`, so one small call whatever the section holds. `null` when the
+   * file has no such node.
+   */
+  getSectionChildren(fileKey: string, sectionNodeId: string): Promise<SectionChild[] | null>
 }
 
 type FetchLike = (url: string, init?: { headers?: Record<string, string> }) => Promise<Response>
@@ -58,6 +66,15 @@ export function createFigmaClient(token: string, fetchImpl: FetchLike = fetch): 
         }
       }
       return documents
+    },
+
+    async getSectionChildren(fileKey, sectionNodeId) {
+      const { nodes } = await get<{
+        nodes: Record<string, { document?: { children?: SectionChild[] } } | null>
+      }>(`/files/${fileKey}/nodes?ids=${encodeURIComponent(sectionNodeId)}&depth=1`)
+      const document = nodes[sectionNodeId]?.document
+      if (!document) return null
+      return document.children ?? []
     },
   }
 }

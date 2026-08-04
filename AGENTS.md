@@ -63,7 +63,9 @@ API call when nothing has); see [`tools/figma-sync/README.md`](./tools/figma-syn
 **Commit the baseline it writes** — it is what makes the next run cheap.
 
 Component → code map: [`docs/figma-components.md`](./docs/figma-components.md) — every component set,
-its variant axes, and what it maps to (or deliberately doesn't). One Figma variant axis → one `cva`
+its variant axes, and what it maps to (or deliberately doesn't). Its node ids are in the manifest
+too, so `figma:sync` names the set that changed and the code it routes to; the same run asks about
+any frame in the Design Concept section nobody has triaged yet. One Figma variant axis → one `cva`
 variants key; `State=Hover` is never a variant. Icons are inline SVG, not a font (ADR 0009).
 
 ### Captured prototypes
