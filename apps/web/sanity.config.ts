@@ -7,13 +7,13 @@ import {
 } from 'sanity/presentation'
 import { structureTool, type StructureResolver } from 'sanity/structure'
 
-import { COLLECTION_PREFIXES, PROJECT_ID } from '@o3/sanity/constants'
+import { COLLECTION_PREFIXES, resolveDataset, resolveProjectId } from '@o3/sanity/constants'
 import { schemaTypes } from '@o3/sanity/schemas'
 
 import { mainDocumentRoutes } from './src/sanity/presentationRoutes'
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? PROJECT_ID
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET ?? 'production'
+const projectId = resolveProjectId()
+const dataset = resolveDataset()
 
 /**
  * Desk structure: the siteSettings singleton pinned first, then the three

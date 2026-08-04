@@ -13,6 +13,13 @@ pnpm --filter @o3/migration load                         # data/{converted,trans
 pnpm --filter @o3/migration verify                       # is the dataset what data/ says it is?
 ```
 
+**Which dataset?** Every command above resolves it through `resolveDataset()`
+in `@o3/sanity/constants`, which reads `NEXT_PUBLIC_SANITY_DATASET` and falls
+back to **`development`** — so an unconfigured checkout cannot load into the
+live dataset. `pnpm dataset` prints what each entry point is pointed at,
+`pnpm dataset production` switches them together. Check it before `load`: the
+loader deletes and rewrites every pipeline-owned document it finds.
+
 `verify` runs after every load (#17; #24 reuses it for parity checks). The
 tests check the committed corpus; `verify` checks the thing the corpus was
 supposed to produce, which fails differently — a document can be perfect on

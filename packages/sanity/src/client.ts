@@ -1,9 +1,9 @@
 import { createClient, type ClientConfig } from '@sanity/client'
-import { PROJECT_ID } from './constants'
+import { resolveDataset, resolveProjectId } from './constants'
 
 export const clientConfig = {
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? PROJECT_ID,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? 'production',
+  projectId: resolveProjectId(),
+  dataset: resolveDataset(),
   apiVersion: '2026-07-01',
   useCdn: true,
 } satisfies ClientConfig

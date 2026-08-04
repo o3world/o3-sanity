@@ -10,6 +10,7 @@
     "build": "turbo run build",
     "build:skill": "node tools/authoring-skill/build.mjs",
     "check": "turbo run lint typecheck --affected",
+    "dataset": "./scripts/switch-dataset.sh",
     "deps:check": "syncpack lint",
     "deps:fix": "syncpack fix-mismatches",
     "dev": "turbo run dev",

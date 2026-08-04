@@ -1,5 +1,37 @@
 export const PROJECT_ID = 'naorcr6k'
 export const DATASETS = ['production', 'development'] as const
+export type Dataset = (typeof DATASETS)[number]
+
+/**
+ * Where an unconfigured checkout points: **`development`**, not `production`.
+ *
+ * The fallback used to be `production` in seven separate places, and one of
+ * them was `tools/migration/sanity.cli.ts` reading a `SANITY_DATASET` variable
+ * that nothing ever set — so `pnpm --filter migration load`, which deletes and
+ * rewrites documents, always wrote to the live dataset no matter what
+ * `apps/web/.env.local` said. A missing variable now means the scratch
+ * dataset, and production is something you ask for out loud
+ * (`pnpm dataset production`, or an explicit value in CI).
+ *
+ * Deploys are unaffected: `.github/workflows/deploy.yml` and `promote.yml`
+ * set the dataset explicitly, so they never reach this default.
+ */
+export const DEFAULT_DATASET: Dataset = 'development'
+
+/**
+ * The one place the dataset is resolved. Every Sanity entry point — the web
+ * app's Studio, the CLI configs, the shared client, the migration and
+ * guidance tools — calls this, so they cannot disagree about which dataset
+ * they are talking to.
+ */
+export function resolveDataset(): string {
+  return process.env.NEXT_PUBLIC_SANITY_DATASET || DEFAULT_DATASET
+}
+
+/** Same for the project, which was hardcoded in two configs and imported in two others. */
+export function resolveProjectId(): string {
+  return process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || PROJECT_ID
+}
 
 /** Document types the web app routes (ADR 0001: every one carries a required slug). */
 export const ROUTABLE_TYPES = ['perspective', 'caseStudy', 'page'] as const
