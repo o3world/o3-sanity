@@ -33,6 +33,12 @@ this account (`docs/agents/figma.md`).
 **A sync is a commit.** `data/baseline.json` is what makes the next run's short-circuit possible, so
 commit it along with the report; git carries the history, the files only ever describe the last run.
 
+**The judgment layer lives in [`.claude/skills/figma-sync`](../../.claude/skills/figma-sync/SKILL.md)**
+(#82) — invoked as `/figma-sync`. This package decides nothing: it hashes, diffs, re-exports the
+unlocked assets whose source moved, and writes the report. What counts as noise, which changes group
+into one ticket, what goes to the user as a question instead of a ticket, and everything that touches
+GitHub is written down in that skill. The report schema below is the seam between the two.
+
 ## `data/tracked-nodes.json` — what we watch
 
 Hand-maintained: the page frames are promoted from the frame inventory on

@@ -16,6 +16,11 @@ amended by #33). This page is how you read the file without wasting a session on
 pnpm figma:sync    # one API call when nothing moved; otherwise names what did
 ```
 
+Or invoke **`/figma-sync`** ([`.claude/skills/figma-sync`](../../.claude/skills/figma-sync/SKILL.md))
+— the same command plus the judgment on top of it: reading the report, deciding noise from real work,
+grouping the changes, filing tickets on the board, and asking you about frames nobody has ruled on.
+The script is deterministic and decides nothing; the skill decides everything.
+
 `@o3/figma-sync` hashes a normalized subtree per tracked node and diffs it against the committed
 baseline, reporting changes by frame name **and route**
 ([`tools/figma-sync/README.md`](../../tools/figma-sync/README.md)). It talks to the REST API
