@@ -40,16 +40,23 @@ walk() { # $1 = parent issue number
       continue
     fi
 
-    local title blocked blocking assignee status
-    IFS=$'\t' read -r title blocked blocking assignee < <(
+    # Unit separator, not tab: tab is IFS whitespace, so bash collapses runs of
+    # it and an unassigned ticket would shift `labels` into `assignee`.
+    local title blocked blocking assignee labels status
+    IFS=$'\x1f' read -r title blocked blocking assignee labels < <(
       gh api "repos/{owner}/{repo}/issues/$n" \
         --jq '[.title,
-               (.issue_dependencies_summary.blocked_by // 0),
-               (.issue_dependencies_summary.blocking // 0),
-               ((.assignees // []) | map(.login) | join(","))] | @tsv'
+               (.issue_dependencies_summary.blocked_by // 0 | tostring),
+               (.issue_dependencies_summary.blocking // 0 | tostring),
+               ((.assignees // []) | map(.login) | join(",")),
+               ((.labels // []) | map(.name) | join(","))] | join("\u001f")'
     )
 
-    if [[ -n $assignee ]]; then
+    # A human decision outranks every other state: no agent can move this one,
+    # so it must never read as READY to a session looking for work.
+    if [[ $labels == *"awaiting:nick"* ]]; then
+      status="AWAITING@nick"
+    elif [[ -n $assignee ]]; then
       status="CLAIMED@$assignee"
     elif [[ $blocked -gt 0 ]]; then
       status="BLOCKED($blocked)"
