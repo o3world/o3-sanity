@@ -65,7 +65,7 @@ describe('Presentation main-document routes', () => {
   it.each([
     ['/', '/'],
     ['/work/acme-rebrand', '/work/:slug'],
-    ['/perspectives/hello-world', '/perspectives/:slug'],
+    ['/insights/hello-world', '/insights/:slug'],
     ['/about', '/*slug'],
     ['/services/ux-audit', '/*slug'],
   ])('resolves %s through %s', (url, expected) => {

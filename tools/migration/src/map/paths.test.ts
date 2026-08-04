@@ -4,7 +4,7 @@ import { PATH_EXCEPTIONS, checkPathParity, wpPath } from './paths'
 
 describe('wpPath', () => {
   it('reduces a WordPress canonical to a host-free path', () => {
-    expect(wpPath('https://www.o3world.com/perspectives/a-post/')).toBe('/perspectives/a-post')
+    expect(wpPath('https://www.o3world.com/insights/a-post/')).toBe('/insights/a-post')
   })
 
   it('keeps multi-segment paths intact', () => {

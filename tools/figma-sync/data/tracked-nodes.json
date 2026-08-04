@@ -53,17 +53,17 @@
     {
       "nodeId": "1710:2823",
       "kind": "pageFrame",
-      "name": "Perspective detail",
+      "name": "Insight detail",
       "figmaName": "Insights",
-      "route": "/perspectives/{slug}",
+      "route": "/insights/{slug}",
       "variant": "desktop"
     },
     {
       "nodeId": "1906:1046",
       "kind": "pageFrame",
-      "name": "Perspective detail",
+      "name": "Insight detail",
       "figmaName": "Insights",
-      "route": "/perspectives/{slug}",
+      "route": "/insights/{slug}",
       "variant": "mobile"
     },
     {
@@ -128,7 +128,7 @@
       "name": "Icon / Surface",
       "figmaName": "Icon / Surface",
       "codeComponent": "packages/ui/src/components/carousel-control.tsx#CarouselControl",
-      "note": "The perspectives prev/next. Live's instances are links, not controls, so `InFlightSection` inlines the circle instead (#50)."
+      "note": "The insights prev/next. Live's instances are links, not controls, so `InFlightSection` inlines the circle instead (#50)."
     },
     {
       "nodeId": "1203:1227",

@@ -1,0 +1,277 @@
+{
+  "_id": "insight-wp-3073",
+  "_type": "insight",
+  "title": "Ozone ventures update: See Philadelphia's newest place for creators",
+  "slug": {
+    "_type": "slug",
+    "current": "ozone-ventures-update-see-philadelphias-newest-place-for-creators"
+  },
+  "excerpt": "REC Philly has created something truly unique for the city’s creative class. Their new space in the Fashion District has a lot of people talking and they just had an unforgettable opening weekend celebration.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-1",
+      "_key": "cat-1"
+    }
+  ],
+  "publishedAt": "2019-12-17T02:38:40Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-4.jpg"
+    },
+    "alt": "Ozone ventures update: See Philadelphia's newest place for creators"
+  },
+  "body": [
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "REC Philly has created something truly unique for the city’s creative class.",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "It was a big weekend for one of O3 World’s inaugural ",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Ozone Ventures",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " partners. ",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "REC Philly",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " has created something truly unique for the city’s creative class. Their new space in the Fashion District has ",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "a lot",
+          "_key": "k0014"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " of ",
+          "_key": "k0015"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "people",
+          "_key": "k0016"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " talking and they just had an unforgettable opening weekend celebration.",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.o3world.com/ventures/"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.o3world.com/ventures/rec-philly/"
+        },
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.thehour.com/business/article/These-Philly-Entrepreneurs-Know-the-Value-of-14906857.php"
+        },
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://billypenn.com/2019/12/08/rec-philly-at-the-fashion-district-is-an-unexpected-slam-dunk/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2019/12/ribbon-cutting.jpeg"
+      },
+      "alt": "Ozone Ventures Update: See Philadelphia’s Newest Place For Creators",
+      "_key": "k0018"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "They kicked off the festivities with a grand opening party that was a who’s who of Philadelphia creatives. Their Creator Day was filled with workshops, panel discussions, brunch, and yoga.",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Being able to experience the excitement around the space is something we won’t forget for quite some time, and it’s thrilling to know that we played a role in helping REC bring such an important and innovative space to the city.",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "NOTE: All images by ",
+          "_key": "k0024"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em",
+            "k0004"
+          ],
+          "text": "Kevin Kilkenny©",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.instagram.com/contentkev/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As part of our Ventures partnership, O3 built an MVP business administration tool that allows the staff to manage their space, memberships, and transactions. We worked closely with REC to understand their ideal member experience, and the administrative capabilities their internal team would need.",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We took an iterative approach to the MVP’s design and build that will easily allow for changes in the future. As REC continues to grow, we’ll be able to grow the tool alongside them.",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If you want to see our work in action or check out Philly’s hottest new space for creators, take some time to ",
+          "_key": "k0031"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "book a tour",
+          "_key": "k0032"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.recphilly.com/tour"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:3073"
+  }
+}

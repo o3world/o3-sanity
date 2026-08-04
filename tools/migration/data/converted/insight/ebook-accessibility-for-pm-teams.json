@@ -1,0 +1,211 @@
+{
+  "_id": "insight-wp-3485",
+  "_type": "insight",
+  "title": "E-book: Accessibility considerations for project management teams",
+  "slug": {
+    "_type": "slug",
+    "current": "ebook-accessibility-for-pm-teams"
+  },
+  "excerpt": "CPACC certified accessibility experts have crafted an accessibility essentials guide for project management teams to use.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-63",
+      "_key": "cat-63"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-15",
+      "_key": "cat-15"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    }
+  ],
+  "publishedAt": "2021-08-02T16:00:33Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-5.jpg"
+    },
+    "alt": "O3 accessibility and pattern"
+  },
+  "body": [
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Creating an accessible digital experience can seem like an overwhelming task. To help you get started, our ",
+          "_key": "k0004"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "CPACC certified accessibility experts",
+          "_key": "k0005"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " have crafted an accessibility essentials guide for project management teams to use as a reference.",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.o3world.com/news/the-journey-to-becoming-certified-professionals-in-accessibility/"
+        }
+      ],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "With this accessibility guide, you’ll be able to:",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Communicate 5 reasons to build an accessible experience",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Coordinate with multi-functional teams to set clear expectations",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Implement 8 accessibility best practices",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Download the e-book",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.o3world.com/resources/accessibility-considerations-for-project-management-teams/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "For our marketers, digital creators and innovators out there, we’re opening up the conversation to support you while navigating specific accessibility challenges. We are available to talk through the ongoing efforts required to remain compliant with WCAG 2.1 AA. This includes maintaining content, media and design accessibility.",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Check out the ",
+          "_key": "k0020"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "accessibility section on our blog",
+          "_key": "k0021"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " for the latest accessibility tips and tricks. That’s where we’ll be releasing more guides to help strategy, design and development teams better understand accessibility in the coming months. We’re energized by the opportunity to help teams break down common accessibility misconceptions and gain a deeper understanding of how to respond to accessibility concerns.",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.o3world.com/perspectives?_sft_category=accessibility"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "This accessibility guide was created to help project managers coordinate with teams to set clear expectations and implement best practices."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:3485"
+  }
+}

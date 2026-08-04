@@ -1,0 +1,324 @@
+{
+  "_id": "insight-wp-9675",
+  "_type": "insight",
+  "title": "Eagles fly high with AI and analytics",
+  "slug": {
+    "_type": "slug",
+    "current": "eagles-fly-high-with-ai-and-analytics"
+  },
+  "excerpt": "AI is transforming sports by enhancing fan engagement, optimizing team operations, and giving organizations like the Eagles a competitive edge on and off the field.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-75",
+      "_key": "cat-75"
+    }
+  ],
+  "publishedAt": "2025-02-06T14:52:36Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/02/Flyeaglesfly.webp"
+    },
+    "alt": "Eagles fly high with AI and analytics"
+  },
+  "body": [
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Remember when going to a game meant just buying a ticket and showing up? Those days are long gone. The sports world is embracing AI in ways that transform both how fans experience games and how teams run their operations. At O3, we’re seeing firsthand how AI is reshaping sports, making everything from buying tickets to running social media more intelligent and personal. And given that our Philadelphia Eagles are in the Super Bowl this week, (GO BIRDS), and that we’re headquartered in Philly, we thought it would be the perfect time to highlight how AI is changing the game.",
+          "_key": "k0003"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "How AI is changing the game in sports: A look at fan experience and operations",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "It’s no surprise the Birds are back in the Super Bowl – for years they’ve been one of the best teams at adding talent through the draft and trades. One of the reasons? The Eagles have ",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "embraced the cutting edge of sports",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " technology by deeply integrating AI and analytics into their game plan. They’re not just crunching numbers; they’re using sophisticated algorithms to predict player performance, optimize game strategies, and even scout new talent. This approach has turned the Eagles into a data-driven powerhouse, where every play and player movement is analyzed to give them that razor-sharp edge on the field. It’s like they’ve got a crystal ball, but instead, it’s powered by a blend of tech wizardry and football savvy.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.philadelphiaeagles.com/news/eagles-partner-with-kraft-analytics-group-to-build-centralized-data-warehouse"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Making every fan feel like a VIP",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Sports fans are a different breed – (we’re looking at you, Philly). Supporting your team isn’t just a hobby—it’s part of who you are. That’s why one of the most exciting things about AI in sports is how it can make every fan’s experience feel special and tailored just for them.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Think about getting notifications for games that perfectly fit your schedule, or seat recommendations based on your past preferences. During those inevitable rough seasons (we all remember the Sixers’ “Process” years), AI can help teams keep fans engaged through personalized content and community-building programs that maintain excitement even when the scoreboard doesn’t.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "And those frustrating game-day questions about parking or concessions? AI-powered assistants can handle them instantly, making the whole experience smoother for everyone involved.",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Behind the scenes: Making teams work smarter",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "While fans see what happens on the field, there’s a whole other game happening behind the scenes. Sports organizations are complex operations, often juggling multiple systems and manual processes that slow things down. AI helps streamline everything from handling fan support tickets to creating social media content, letting staff focus on what they do best.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "For example, instead of manually sorting through thousands of customer inquiries, AI can categorize and route them automatically. Marketing teams can use AI to analyze fan data and create targeted campaigns that actually work. It’s about working smarter, not harder.",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Finding your team’s unique voice",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Every sports team needs its own personality. Just look at Gritty, the Flyers’ mascot—who knew a googly-eyed orange monster could become such a beloved figure? While AI can’t create the next Gritty (thank goodness), it can help teams maintain their unique voice across all their communications, from social media to email campaigns.",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Making game day worth leaving the couch",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Let’s be honest—watching games at home has gotten really good. High-def TVs, instant replays, and your own bathroom with no lines? Not to mention, Amazon Prime’s predictive plays and\nNext Gen stats for Thursday Night Football. Pretty tempting. That’s why teams are using AI to make coming to the stadium special again.",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Imagine getting personalized recommendations for the best pregame restaurants, or real-time updates about which concession stands have the shortest lines. AI can even help predict crowd patterns to improve security and reduce wait times, making the whole experience more enjoyable.",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What’s next",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This is just the beginning of AI’s impact on sports. As the technology evolves, we’ll see even more ways it can help teams connect with fans and run more efficiently. At O3, we’re excited to be part of this transformation, helping sports organizations create better experiences both in and out of the stadium.",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Want to learn how AI can help your sports organization? ",
+          "_key": "k0039"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Let’s talk",
+          "_key": "k0040"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:9675"
+  }
+}

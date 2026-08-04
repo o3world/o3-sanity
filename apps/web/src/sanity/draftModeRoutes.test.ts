@@ -160,14 +160,14 @@ describe('GET /api/draft-mode/disable', () => {
   it('disables draft mode and returns to the page you were on', async () => {
     const { handle, draftMode } = draftModeSpy()
     const request = new Request(
-      'https://o3world.com/api/draft-mode/disable?to=%2Fperspectives%3Fpage%3D3',
+      'https://o3world.com/api/draft-mode/disable?to=%2Finsights%3Fpage%3D3',
     )
 
     const response = await disableDraftModeAndReturn(request, { draftMode })
 
     expect(handle.disabled).toBe(true)
     expect(response.status).toBe(307)
-    expect(response.headers.get('location')).toBe('https://o3world.com/perspectives?page=3')
+    expect(response.headers.get('location')).toBe('https://o3world.com/insights?page=3')
   })
 
   it('is not an open redirect', async () => {

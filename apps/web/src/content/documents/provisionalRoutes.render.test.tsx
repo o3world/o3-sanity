@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { caseStudyIndex, perspectiveIndex } from '@/content/documents'
+import { caseStudyIndex, insightIndex } from '@/content/documents'
 import type { RouteProvenance } from '@/lib/content-routes/types'
 
 /**
@@ -23,7 +23,7 @@ import type { RouteProvenance } from '@/lib/content-routes/types'
  * tuple of concrete entries will not widen to `IndexEntry<string>`.
  */
 const INDEX_ROUTES: readonly [name: string, migration: RouteProvenance | undefined][] = [
-  ['perspectiveIndex', perspectiveIndex.migration],
+  ['insightIndex', insightIndex.migration],
   ['caseStudyIndex', caseStudyIndex.migration],
 ]
 
@@ -54,9 +54,9 @@ describe('collection index provenance', () => {
    * marker should fail a test, not quietly clear the largest coverage gap on
    * map #33.
    */
-  it('marks /perspectives provisional — it has no canonical frame (#49)', () => {
-    expect(perspectiveIndex.migration?.provisional).toBe(true)
-    expect(perspectiveIndex.migration?.provisionalNote).toMatch(/frame/i)
+  it('marks /insights provisional — it has no canonical frame (#49)', () => {
+    expect(insightIndex.migration?.provisional).toBe(true)
+    expect(insightIndex.migration?.provisionalNote).toMatch(/frame/i)
   })
 
   it('does not mark /work provisional — it has one (#43)', () => {

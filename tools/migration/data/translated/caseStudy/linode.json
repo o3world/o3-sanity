@@ -151,7 +151,7 @@
     "sourceFile": "caseStudy/linode.json",
     "sourceHash": "sha256:0f770c9d3fb8d8660561e9ecb2caea47018d55600fa95b8413c784dc3214ba6a",
     "rulesFile": "rules/caseStudy.md",
-    "rulesHash": "sha256:82c77133745714f60061ad6e91b695f9e9f823dd78133221f4ecd331d7b04d72",
+    "rulesHash": "sha256:9a0c271dab4ca8fd1807f0a7af12c4734a49be6f65ba7eb84f3ca5430ab33e6f",
     "model": "claude-opus-5",
     "translatedAt": "2026-08-02",
     "flags": [

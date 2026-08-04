@@ -1,0 +1,365 @@
+{
+  "_id": "insight-wp-992",
+  "_type": "insight",
+  "title": "Brian Crumley, O3 Developer, greatest hits (accomplishments) list",
+  "slug": {
+    "_type": "slug",
+    "current": "brian-crumley-o3-developer-greatest-hits-accomplishments-list"
+  },
+  "excerpt": "Check out the incredible work of stand out O3 Developer",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-11",
+      "_key": "cat-11"
+    }
+  ],
+  "publishedAt": "2018-05-22T22:37:32Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-4.jpg"
+    },
+    "alt": "Brian Crumley, O3 Developer, greatest hits (accomplishments) list"
+  },
+  "body": [
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A celebration is in order as one of our developers, Brian Crumley, is celebrating 6 years at O3. In honor of that great achievement, we’re putting together his Greatest Hits (or accomplishments) list!",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "His O3 Highlight Reel:",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "He’s been a major contributor to some of our biggest websites and applications including, Vertex, SEI, various Thompson Reuters properties, Houghton International, The Institutes and various iterations of the O3 website and associated microsites.",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "He’s the primary author of our Front-end guidelines that ",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "you can find here",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.o3world.com/news/front-end-development-standards-and-best-practices/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Has been one of the largest leaders of our accessibility efforts.",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Led the adoption of style guide-driven development.",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Helped establish initial build processes for SCSS files (Codekit).",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Provided guidance on Google Analytics implementation on Vertex and other sites.",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Established process for creating SVGs and SVG sprites, as well as implementing web fonts across O3 projects.",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Brian, in partnership with Steve Gengler, another O3 developer, is helping to improve O3’s development practice by defining O3 architectural standards. The goal is to define and align the team on “how” we build technology.",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Additionally, Brian is heavily involved in the community holding various positions with ",
+          "_key": "k0028"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "PhillyCHI",
+          "_key": "k0029"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", running ",
+          "_key": "k0030"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Barcamp",
+          "_key": "k0031"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", producing the ",
+          "_key": "k0032"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Forge Conference",
+          "_key": "k0033"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and being a regular speaker during Philly Tech Week.",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://twitter.com/PhillyCHI?lang=en"
+        },
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://2017.barcampphilly.org/"
+        },
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "http://www.forgeconf.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We could rattle off SO many more of his accomplishments, but Justin Handler, our head of accounts, said it best:",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“Brian’s kinda like a silent assassin, he does so much for the organization both internally and externally but is incredibly quiet/poised about it.”",
+          "_key": "k0038"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "blockquote"
+    },
+    {
+      "_key": "k0039",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Help us in giving a warm congratulations to Brian on an impressive six years at O3! We’re looking forward to celebrating many more years to come.",
+          "_key": "k0040"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0041",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Wanting this to be you and interested in joining the O3 team? Check out our ",
+          "_key": "k0042"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "careers",
+          "_key": "k0043"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " page for more.",
+          "_key": "k0044"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.o3world.com/careers/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:992"
+  }
+}

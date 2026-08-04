@@ -22,21 +22,39 @@ resolves at the same path on the new site or redirects. There are no gaps.
 
 | Yoast sitemap | URLs | Served at the same path | Redirected | Gaps |
 | ------------- | ---: | ----------------------: | ---------: | ---: |
-| `post`        |  272 |                     243 |         29 |    0 |
+| `post`        |  272 |                       0 |        272 |    0 |
 | `page`        |   21 |                      10 |         11 |    0 |
 | `work`        |   20 |                      17 |          3 |    0 |
 | `services`    |   24 |                       0 |         24 |    0 |
 | `ventures`    |    2 |                       2 |          0 |    0 |
-| **Total**     |  339 |                     272 |         67 |    0 |
+| **Total**     |  339 |                      29 |        310 |    0 |
 
-The `post` and `work` "Redirected" columns are the 32 o3xo.ai-shadowed URLs
-described below — WordPress still lists those documents in its sitemaps while
-301ing their URLs away, and the app mirrors both halves. A row here counts
-what the URL _does_, not whether the document is loaded.
+`work`'s "Redirected" column is the o3xo.ai-shadowed URLs described below —
+WordPress still lists those documents in its sitemaps while 301ing their URLs
+away, and the app mirrors both halves. A row here counts what the URL _does_,
+not whether the document is loaded.
 
-Path parity is not an accident: every mapper calls `checkPathParity` against
-Yoast's own `canonicalRendered`, `PATH_EXCEPTIONS` is still empty, and
-`translated.test.ts` now applies the same check to the 20 translated case
+## What ADR 0017 cost
+
+**Every `post` URL now redirects.** Until [ADR 0017](adr/0017-the-collection-is-an-insight.md)
+this table read `243 served at the same path, 29 redirected`: the collection
+lived at `/perspectives/*` on both sites, so all but the o3xo-shadowed posts
+resolved at their own address. Renaming the collection to `/insights/*` moved
+243 of them behind a 301.
+
+That is a real cost, not a re-tabulation. A 301 preserves most but not all
+link equity, and 243 URLs have to be recrawled before the new address is the
+one search engines serve. It was accepted because the alternative — a URL that
+disagrees forever with the word in the nav next to it — is a cost paid on every
+visit rather than once. The figure is asserted in
+`map/redirects.test.ts` → "moves exactly the URLs ADR 0017 said it would", so
+it cannot drift quietly, and a future collection rename shows up there as a
+change rather than a silently larger number.
+
+Path parity is still not an accident: every mapper calls `checkPathParity`
+against Yoast's own `canonicalRendered`, and a moved path has to be declared in
+`PATH_EXCEPTIONS` / `PATH_PREFIX_EXCEPTIONS` (`map/paths.ts`) or conversion
+fails. `translated.test.ts` applies the same check to the 20 translated case
 studies, which have no mapper to do it for them.
 
 ### The other direction — what the new site adds
@@ -44,10 +62,10 @@ studies, which have no mapper to do it for them.
 Two paths this site serves that no live sitemap lists. Both greenfield, neither
 a slug that moved:
 
-| Path                                                              | Why it is new                         |
-| ----------------------------------------------------------------- | ------------------------------------- |
-| `/live`                                                           | A net-new layer (ADR 0011)            |
-| `/perspectives/how-we-redesigned-our-website-in-a-single-weekend` | A seeded perspective about this build |
+| Path                                                          | Why it is new                     |
+| ------------------------------------------------------------- | --------------------------------- |
+| `/live`                                                       | A net-new layer (ADR 0011)        |
+| `/insights/how-we-redesigned-our-website-in-a-single-weekend` | A seeded insight about this build |
 
 `/ventures/rec-philly` and `/ventures/urvin` were in this list until #23 seeded
 them. They are the reason this diff exists: `ventures` is a custom post type,
@@ -84,14 +102,14 @@ the plugin the site is administered through.
 
 ### Where they go
 
-| Destination                | Rows | Note                                                              |
-| -------------------------- | ---: | ----------------------------------------------------------------- |
-| `/solutions`               |   59 | ADR 0013's consolidation, plus the partner pages                  |
-| External (o3xo.ai)         |   39 | 32 of them shadow a migrated document — see below                 |
-| `/about`                   |   30 | Team bios, careers, culture                                       |
-| `/perspectives` and a post |  138 | Mostly `/news/*` → `/perspectives/*`, the 2022 rename             |
-| `/`                        |   25 | Campaign landing pages WordPress already retired                  |
-| Everything else            |   26 | `/work/*`, `/live`, `/1682-conference-ai-innovation`, `/ventures` |
+| Destination            | Rows | Note                                                              |
+| ---------------------- | ---: | ----------------------------------------------------------------- |
+| `/solutions`           |   59 | ADR 0013's consolidation, plus the partner pages                  |
+| External (o3xo.ai)     |   39 | 32 of them shadow a migrated document — see below                 |
+| `/about`               |   30 | Team bios, careers, culture                                       |
+| `/insights` and a post |  138 | Mostly `/news/*` → `/insights/*`, the 2022 rename                 |
+| `/`                    |   25 | Campaign landing pages WordPress already retired                  |
+| Everything else        |   26 | `/work/*`, `/live`, `/1682-conference-ai-innovation`, `/ventures` |
 
 Nothing chains: every source points at its terminal, per ADR 0013's "redirect
 to the terminal, never to a redirect". The resolver walks WordPress's own
@@ -142,7 +160,7 @@ ADR 0013's relevance rule — the source URL tells you what the visitor wanted:
 | `/mike-gadsby-chief-innovation-officer`                         | `/about`                         |
 | `/1682-photos`                                                  | `/1682-conference-ai-innovation` |
 | `/lunch-and-learn-with-o3-empower-your-team-with-ai-insights`   | `/live`                          |
-| `/conversing-with-the-future-an-interactive-chatgpt-experience` | `/perspectives`                  |
+| `/conversing-with-the-future-an-interactive-chatgpt-experience` | `/insights`                      |
 | `/acquia-o3`                                                    | `/solutions`                     |
 | `/sitecore`                                                     | `/solutions`                     |
 
@@ -158,7 +176,7 @@ ADR 0013's relevance rule — the source URL tells you what the visitor wanted:
 | `/utm_source…` → `/unknown`                | Same — a mangled campaign URL pointing at a page that never existed.                                                                                                                                                                                                                                         |
 | 10 duplicate-source rows                   | Redirection lets two rows claim one source; **position decides which one WordPress serves**, so the earlier row is carried and the later recorded here. 8 are trailing-slash twins whose targets normalize identically; the two that differ are decided by ADR 0013 or resolve to the position-first target. |
 
-One row was **corrected** rather than carried: `/perspectives/ai-roi-beyond-efficiency`
+One row was **corrected** rather than carried: `/insights/ai-roi-beyond-efficiency`
 points at `https://www.o3xo.ai.com/…`, a host that does not resolve (checked
 2026-08-02) while its 32 siblings all use `o3xo.ai`. Shipping the typo would be
 a redirect into DNS failure; the correction is recorded in `TERMINAL_OVERRIDES`.
@@ -171,16 +189,16 @@ a redirect into DNS failure; the correction is recorded in `TERMINAL_OVERRIDES`.
 `apps/web/src/lib/seo.ts` re-derives the rest at render time. What actually
 migrated:
 
-| Field                  |             Documents carrying an override |
-| ---------------------- | -----------------------------------------: |
-| `title`                |  106 perspectives, 12 case studies, 1 page |
-| `description`          | 179 perspectives, 20 case studies, 7 pages |
-| `ogImage`              |                             6 perspectives |
-| `canonical`            |  0 — unset across the whole WordPress site |
-| `noIndex` / `noFollow` |                              0 — see below |
+| Field                  |            Documents carrying an override |
+| ---------------------- | ----------------------------------------: |
+| `title`                |     106 insights, 12 case studies, 1 page |
+| `description`          |    179 insights, 20 case studies, 7 pages |
+| `ogImage`              |                                6 insights |
+| `canonical`            | 0 — unset across the whole WordPress site |
+| `noIndex` / `noFollow` |                             0 — see below |
 
 `seoParity.render.test.tsx` renders one of each kind through its real route
-and asserts the tags: a perspective that overrode all three fields, a
+and asserts the tags: an insight that overrode all three fields, a
 translated case study that overrode title and description and falls back to
 its hero for the social card, and a migrated page that overrode only its
 description.

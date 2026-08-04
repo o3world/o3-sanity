@@ -1,0 +1,354 @@
+{
+  "_id": "insight-wp-8047",
+  "_type": "insight",
+  "title": "O3's onsite ChatGPT activation at The Kimmel Center",
+  "slug": {
+    "_type": "slug",
+    "current": "o3s-onsite-chatgtp-activation-at-the-kimmel-center"
+  },
+  "excerpt": "Showcasing the transformative potential of AI and empowering business leaders to explore the future of AI-driven solutions.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2023-08-01T15:16:31Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/08/O3-website-imagery_-Perspectives.jpg"
+    },
+    "alt": "Woman sitting at a table and testing an O3 prototype at the BCA event in the Kimmel Center"
+  },
+  "body": [
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3’s ",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Mike Gadsby",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and ",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Nick Lewis",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " presented an onsite activation, “Exploring the future of business,” which took place at the ",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "BCA",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " Hospitality Breakfast at ",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Kimmel Cultural Campus",
+          "_key": "k0014"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " on July 28th. Bringing together 250 Philadelphia business leaders, the event showcased the immense potential of AI across all sectors, powered by OpenAI’s cutting-edge language model, ",
+          "_key": "k0015"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "ChatGPT",
+          "_key": "k0016"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/michaelgadsby/"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/nicklewisatx/"
+        },
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://bcaproud.com/about-bca/"
+        },
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.kimmelculturalcampus.org/"
+        },
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://chat.openai.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This activation was designed exclusively for ",
+          "_key": "k0019"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "BCA",
+          "_key": "k0020"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " members, offering an immersive and interactive chat experience that allowed participants to experience the potential of generative AI technology, and how it can simplify day-to-day processes. Held during a networking session, attendees had the opportunity to interact directly with ChatGPT, gaining valuable insights and personalized guidance on essential topics.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://bcaproud.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/07/Image-from-iOS.jpg"
+      },
+      "alt": "BCA chat screen ",
+      "_key": "k0022"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Business strategy",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Through dynamic conversations, ChatGPT unveiled hidden gems of business strategy, including market analysis, competitive intelligence, and growth opportunities, tailored to each attendee’s specific interests.",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Sales and marketing solutions",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Participants discovered effective sales and marketing strategies, receiving practical recommendations and addressing specific queries to optimize sales performance and enhance digital marketing tactics.",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "HR and employee management",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "ChatGPT provided valuable perspectives on HR challenges and effective employee management techniques, covering talent acquisition, performance evaluation, training programs, and fostering a positive work culture.",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "AI and the future of business",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "With a significant focus on AI, attendees explored the untapped potential of this game-changing technology across various industries. ChatGPT engaged in discussions about AI adoption, automation opportunities, and its potential implications on different sectors.",
+          "_key": "k0038"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "embed",
+      "_key": "k0039",
+      "url": "https://www.o3world.com/wp-content/uploads/2023/07/PXL_20230728_113636252.TS_.mp4"
+    },
+    {
+      "_key": "k0041",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The activation garnered a flood of positive feedback, with participants thrilled by ChatGPT’s ability to deliver relevant and valuable information. The use cases presented were versatile, making the activation relevant and beneficial to all attendees, irrespective of their industry or role.",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0043",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "At O3, we firmly believe in the power of AI to reshape the future of business across all sectors. This activation not only showcased the capabilities of ChatGPT but also served as a testament to the impact AI can have on businesses’ growth and success. If you’d like to chat about how we can support your brand, ",
+          "_key": "k0044"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0040"
+          ],
+          "text": "get in touch",
+          "_key": "k0045"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0046"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0040",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "O3's Onsite Activation with ChatGPT",
+    "description": "O3's onsite activation, powered by ChatGPT, where business leaders delve into the future of AI-driven solutions, empowering them with valuable insights and strategies to elevate their businesses."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:8047"
+  }
+}

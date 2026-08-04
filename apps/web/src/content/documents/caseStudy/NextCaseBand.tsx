@@ -11,7 +11,7 @@ type NextCase = NonNullable<NonNullable<CASE_STUDY_QUERY_RESULT>['next']>
 /**
  * The band that closes a case study — the frame's "Blog" band (`1710:2609`,
  * mobile `1906:1039`), which the layer names for what it actually holds:
- * the **next project**, not a perspectives row. #44.
+ * the **next project**, not a insights row. #44.
  *
  * ```
  *            402                        1440

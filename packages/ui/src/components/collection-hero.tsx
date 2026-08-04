@@ -44,7 +44,7 @@ export interface CollectionHeroProps {
  * Home hero uses.
  *
  * Generic and presentational, so it lives in `packages/ui` with a kebab-case
- * filename and takes no schema binding — `/work` and `/perspectives` both
+ * filename and takes no schema binding — `/work` and `/insights` both
  * render it, and neither has a document behind its composition.
  */
 export function CollectionHero({

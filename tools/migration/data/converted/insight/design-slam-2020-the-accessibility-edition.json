@@ -1,0 +1,650 @@
+{
+  "_id": "insight-wp-3768",
+  "_type": "insight",
+  "title": "Design Slam 2020: The accessibility edition",
+  "slug": {
+    "_type": "slug",
+    "current": "design-slam-2020-the-accessibility-edition"
+  },
+  "excerpt": "A fun challenge that allows participants to flex their design, strategy and presentation muscles.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-63",
+      "_key": "cat-63"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2020-08-21T03:22:12Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-18.jpg"
+    },
+    "alt": "O3 pattern"
+  },
+  "body": [
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Accessibility design slam",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Strategists from all disciplines answered the question, “How might we make the grocery shopping experience more accessible to everyone, including individuals with various disabilities?” during O3’s annual Design Slam event.",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The O3 team recently gathered for a Design Slam, which is a fun challenge that allows participants to flex their design, strategy and presentation muscles. It’s a creative problem-solving competition that consists of groups from various disciplines working together to solve a real-world problem.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Last year, we held a design slam focused on ",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "reimagining the ATM experience",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". Learning from last year’s design slam, we decided to center this year’s challenge around accessibility. We upped the ante and required that all concepts apply universal design principles to help improve experiences for individuals with disabilities.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.o3world.com/news/o3-world-design-super-slam-recap/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our design slam introduced four design thinking exercises to help each team collaborate. If you’re envisioning a designer’s version of “Chopped” you’re on the right track. We gave each team the same ingredients to create something spectacular.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our Prompt",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "With universal principles of design in mind, how might we make the grocery shopping experience more accessible to everyone, including individuals with various disabilities? This could be how the store is designed (from the layout of the store to the arrangement of the shelves), to assistive technologies within the store, or any other ideas the teams could imagine. For the purpose of this exercise, we challenged teams to come up with a single solution that greatly impacts all. We also asked the teams to focus on what they could change inside the store, assuming the grocery store is fully accessible outside with curb cuts, handicap spaces and large door entrances.",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "While the groups were free to explore the prompt in whatever way made sense to them, we provided a framework to help guide them through a series of design thinking exercises.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Rose, Thorn, Bud",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The goal of the Rose, Thorn, Bud exercise is to identify things as positive, negative, or having potential. This allows teams to ideate on pain points and opportunities to improve the experience of people in the grocery store.",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/Work-Screenshot1.jpg"
+      },
+      "alt": "rose-thorn-bud-exercise",
+      "_key": "k0026"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Affinity Clustering & Voting",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Building upon the output from the Rose, Thorn, Bud exercise, we asked participants to group their thoughts into affinity clusters, or ideas that are thematically similar. This helped each team group like-minded ideas and vote to pick an area to focus on to further refine.",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/Work-Screenshot2.jpg"
+      },
+      "alt": "affinity-clustering-exercise",
+      "_key": "k0031"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Concept Sketching",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "After each team pinpointed a problem to solve for, they moved on to thumbnail sketching. This technique enabled them to craft a series of small drawings to quickly illustrate potential concepts and create alignment in their groups for the final solution to present to the judges.",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/Work-Screenshot3.jpg"
+      },
+      "alt": "concept-sketching-exercise",
+      "_key": "k0036"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Concept Poster",
+          "_key": "k0038"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0039",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The final exercise asked each team to articulate the purpose and features of their concept along with key things to consider like cost, time and limitations. This format helped ensure that each team was considering all major ideas in their presentation so we could focus on judging each idea on a level playing field.",
+          "_key": "k0040"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0041",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our Panel of Judges",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0043",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We were fortunate to enlist the help of several judges, both internal to O3 and in our community: ",
+          "_key": "k0044"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Suzanne Erb",
+          "_key": "k0045"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " (Accessibility Advisor for Networks for Training and Development), ",
+          "_key": "k0046"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Isabella Gong",
+          "_key": "k0047"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " (Full Stack Developer and Accessibility Evangelist), and Jessica Gidding (Lead Engineer at O3 World and ",
+          "_key": "k0048"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Certified Professional in Accessibility Core Competencies",
+          "_key": "k0049"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ") to bring their accessibility knowledge to the forefront and select a winning team. Once each team presented, we had our judges score each team based on the following criteria: (on a scale from 1-10, with 10 being the highest.)",
+          "_key": "k0050"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.networksfortraining.org/person/suzanne-erb/"
+        },
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/isabellagong/"
+        },
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.accessibilityassociation.org/cpacccertification"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0051",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Creativity: Is the solution inventive, innovative or creative?",
+          "_key": "k0052"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0053",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Feasibility: Is the solution feasible and practical?",
+          "_key": "k0054"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0055",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Accessibility: Is the solution accessible to a range of disabilities?",
+          "_key": "k0056"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0057",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Inclusivity: Is the solution taking a universal design approach?",
+          "_key": "k0058"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0059",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our Solutions",
+          "_key": "k0060"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0061",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "There were some trends among the solutions created, each with their own positives and pitfalls.",
+          "_key": "k0062"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0063",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The first team created Robo Cart, a modular shopping cart assistant to help people buy groceries. The Robo Cart includes a variety of assistive technologies to help shoppers of varying abilities, such as a motorized set of wheels to power the cart. The Robo Cart also featured an easy-to-use screen to direct users around the store and enter their grocery list, allowing for each store wayfinding and navigation to find particular items, a common pain point for individuals who are blind or have limited vision. While the judges enjoyed the practicality of the concept, there were a number of questions about the logistics of this Robo Cart, including how it’d be charged and maintained, how to prevent theft and how it’d accommodate someone with a motor or physical disability.",
+          "_key": "k0064"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/Post-Team1.jpg"
+      },
+      "alt": "design-slam-team-1-concept",
+      "_key": "k0065"
+    },
+    {
+      "_key": "k0066",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0067",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0068",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The second team also created a smart shopping cart, the SmartCart 2.0, to address the ergonomic issues of the traditional shopping cart. With some similar concepts to the Robo Cart, such as in-store wayfinding using geolocation for store navigation using beacons, there were some additional features: adjustable shopping cart height, a basket that is more shallow for easier reach, and improved design for better use with a wheelchair. The cart also featured a built in scale and product scanner. The judges appreciated the accommodations for individuals who use a wheelchair, but questioned ease of access to the various compartments in the cart itself.",
+          "_key": "k0069"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/Post-Team2.jpg"
+      },
+      "alt": "design-slam-team-2-concept",
+      "_key": "k0070"
+    },
+    {
+      "_key": "k0071",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0072",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0073",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The final team went in a completely different direction by creating an AR application for people with hearing, visual, or motor impairments, called SupermAR-kit. SupermAR-kit is a digital platform for grocery store operations teams and customers that leverages augmented reality, image recognition and GPS to create interactive maps of stores. The goal is to solve the problem of not being able to easily stock and find items within a store, using existing technology to make it more feasible and accessible to grocery stores. Employees can also use the app to identify their specialties, such as the languages they speak. This feature was created to better assist customers in the store find employees that they can easily communicate with. For example, the app will notify customers as to which register to visit for help from an employee with similar language skills.",
+          "_key": "k0074"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/Post-Team3.jpg"
+      },
+      "alt": "design-slam-team-3-concept",
+      "_key": "k0075"
+    },
+    {
+      "_key": "k0076",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our Winner",
+          "_key": "k0077"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0078",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "There could only be one winner and by unanimous decision, the judges felt that Team 3’s SupermAR-kit augmented reality app reigned supreme. The solution was best aligned with the prompt to create a universally designed solution, so the use of existing technology and tools that each individual has with them made this concept most feasible and accessible to all.",
+          "_key": "k0079"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0080",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Suzanne Erb commented, “It’s really useful for everyone, regardless of disability or not. Because you’re using your own device, it’s actually possible to implement and scale it.”",
+          "_key": "k0081"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "blockquote"
+    },
+    {
+      "_key": "k0082",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Collectively, we all learned something new and gained a new perspective into the world of solving for accessibility, creating an environment to help coworkers learn to work together digitally, and to how to better ourselves when designing for accessibility in the real world.",
+          "_key": "k0083"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "O3 asked Design Slam attendees to consider how to make the grocery shopping experience more accessible to everyone."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:3768"
+  }
+}

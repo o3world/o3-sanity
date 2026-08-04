@@ -52,7 +52,7 @@ backs it**, so anything placed there is a code decision.
 
 Size **interpolates** between the two frame widths; composition **switches** at
 `lg`. Two sections diverge structurally — the NavBar (pill → hamburger) and the
-perspectives carousel (→ vertical stack). Full reasoning and the band-by-band
+insights carousel (→ vertical stack). Full reasoning and the band-by-band
 comparison: [ADR 0006](../../docs/adr/0006-responsive-contract.md).
 
 ## Surfaces
@@ -63,7 +63,7 @@ enum on section blocks survives, but the darks split three ways:
 | Token      | Value     | Role                                                           |
 | ---------- | --------- | -------------------------------------------------------------- |
 | `white`    | `#FFFFFF` | Plain light band (platforms, ways-to-work); light button fill  |
-| `bone`     | `#F0F0F0` | Partners, pull quote, perspectives — often washed, not flat    |
+| `bone`     | `#F0F0F0` | Partners, pull quote, insights — often washed, not flat        |
 | `ink`      | `#0A0A0A` | The dominant dark: headlines on light, dark buttons, card base |
 | `ink-warm` | `#0F100B` | The Work / Live hero band only                                 |
 | `ink-deep` | `#030303` | Gradient stops and the footer band                             |
@@ -117,7 +117,7 @@ both ends are read values (ADR 0006).
 | `text-eyebrow-lg`   | `18px` | `18px` | 0.1em     | Section kicker ("OUR PARTNERS")                    |
 | `text-eyebrow`      | `16px` | `16px` | 0.1em     | Card kicker ("HEALTHCARE"), Work hero kicker       |
 | `text-nav`          | `14px` | `14px` | 0         | Footer navigation links                            |
-| `text-meta`         | `13px` | `13px` | 0.1em     | Perspectives-card meta row                         |
+| `text-meta`         | `13px` | `13px` | 0.1em     | Insights-card meta row                             |
 | `text-legal`        | `12px` | `12px` | 0         | Footer legal row                                   |
 
 **Small UI text does not scale** — button, eyebrow, meta, nav and legal are
@@ -203,7 +203,7 @@ namespace, so these are plain custom properties.
 | -------------------------------- | --------------- | -------------------------------------------------------------- |
 | `--gradient-statement`           | `text-gradient` | Background-clipped onto the 64px statement headlines           |
 | `--gradient-card-scrim`          | —               | Horizontal scrim over case-study card photography              |
-| `--gradient-card-veil`           | —               | Vertical scrim on the perspectives cards                       |
+| `--gradient-card-veil`           | —               | Vertical scrim on the insights cards                           |
 | `--gradient-brand-glow`          | `bg-brand-glow` | Figma `Gradient/Red/1` — two stacked radials; the red at scale |
 | `--gradient-surface-wash`        | —               | Light bands washing white → `#F0F0F0` instead of sitting flat  |
 | `--gradient-surface-wash-angled` | —               | The 188° variant behind the case-study card stack              |

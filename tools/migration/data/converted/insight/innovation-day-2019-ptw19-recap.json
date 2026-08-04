@@ -1,0 +1,454 @@
+{
+  "_id": "insight-wp-2462",
+  "_type": "insight",
+  "title": "Innovation Day 2019 & PTW19 recap",
+  "slug": {
+    "_type": "slug",
+    "current": "innovation-day-2019-ptw19-recap"
+  },
+  "excerpt": "Another year, another Philly Tech Week. We love being a part of the city’s vibrant tech community, and a lot of O3 employees attended events last week. We were at Drupaldelphia, the Dev Conference, and Philly CHI’s Design Slam to name a few. Plenty of people were busy attending events, and a few were featured at different talks and panels.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    }
+  ],
+  "publishedAt": "2019-05-13T16:15:25Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/07/O3-website-imagery_-Insights-8.jpg"
+    },
+    "alt": "Innovation Day 2019 & PTW19 recap"
+  },
+  "body": [
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Out and About at PTW19",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our own People Growth Manager Beth Perkins was on the panel for",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": " Could Company Benefits Outweigh Pay? Key Strategies to Attract and Retain Talent",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " at Introduced. She made excellent points on the importance of flexibility and other benefits in the workplace.",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Amanda Vuocolo, an Engineer at O3 World, gave a lightning talk at ",
+          "_key": "k0014"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "ChickTech Philly’s Building Diverse Tech Teams: An Evening of Lightning Talks",
+          "_key": "k0015"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". She talked about the importance of gender diversity in the hiring process and even gave some tips on how to learn about company diversity in the interview process.",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/051319-PTW19-Amanda-Vuocolo.jpg"
+      },
+      "alt": "Amanda Vuocolo",
+      "_key": "k0017"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Innovation Day",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Of course, any talk about Philly Tech Week isn’t complete without a mention of Innovation Day. We hosted Innovation Day for the 3rd year in a row, and it may have been our best one yet.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/051319-Innovation-Day-NeuroFlow.jpg"
+      },
+      "alt": "Innovation Day 2019 - NeuroFlow",
+      "_key": "k0022"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Search & Big Data",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Wil Reynolds (Founder & Director of Digital Strategy at ",
+          "_key": "k0026"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "SEER Interactive",
+          "_key": "k0027"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ") started off the day strong. Along with talking about some of the common difficulties people face with innovation, he also focused on how SEER plans on using big data and other emerging technology to improve and disrupt the digital marketing industry.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.seerinteractive.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Machine Learning & AI",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Next, we had David Lauer (CEO of ",
+          "_key": "k0032"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Urvin",
+          "_key": "k0033"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "). We gained valuable insight into the AI lifecycle and the important role data plays in AI and machine learning. His company has a lot of ideas on how to use AI and machine learning to improve businesses and industries.",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://urvin.ai/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/051319-Innovation-Day-Urvin-02.jpg"
+      },
+      "alt": "Innovation Day 2019 - Urvin",
+      "_key": "k0035"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Big Data & Health Care",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Julie Caster (Director of Product) and Bill Lynch (Lead Data Scientist) from ",
+          "_key": "k0039"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "NeuroFlow",
+          "_key": "k0040"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " have an exciting new app that could revolutionize the way we treat mental health. ",
+          "_key": "k0041"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Their tools",
+          "_key": "k0042"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " use data collected from patients to make improved treatment plans for patients and incentivize them to live healthier lifestyles.",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.neuroflowsolution.com/"
+        },
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.neuroflowsolution.com/integratehealth/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0044",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Growth & Innovation",
+          "_key": "k0045"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0046",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Brian Williams (Co-Founder & CEO of ",
+          "_key": "k0047"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "Viget",
+          "_key": "k0048"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ") shared his company’s 20-year-long journey and gave us an inside look at Viget’s internal labs program ",
+          "_key": "k0049"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "Pointless Corp.",
+          "_key": "k0050"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " They’ve been focused on innovation since 1999, and since their beginning, they’ve worked on a lot of outstanding and interesting projects.",
+          "_key": "k0051"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.viget.com/"
+        },
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "http://pointlesscorp.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0052",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "RPA, Labs & Bots",
+          "_key": "k0053"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0054",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our own Tim Breslin (CTO) and Zuhib Daud (Lead Engineer) closed out Innovation Day with their work on RPA (Robotic Process Automation) and Taskbot. They’ve both been hard at work on O3 World’s latest labs project, and we’re happy to share the end results with the world. If you want to learn more about Taskbot, check out our write-up on the project.",
+          "_key": "k0055"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0056",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "There’s nothing we love more than innovation at O3 World, and Philly Tech Week is a great example of how we live in a city made for innovators. If you want a little more innovation from us, ",
+          "_key": "k0057"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0006"
+          ],
+          "text": "check out our post",
+          "_key": "k0058"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " on the latest way we’re bringing innovation to Philadelphia.",
+          "_key": "k0059"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0006",
+          "_type": "link",
+          "href": "https://www.o3world.com/news/why-1682-and-why-not-forge/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:2462"
+  }
+}

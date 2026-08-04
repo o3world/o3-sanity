@@ -1,0 +1,459 @@
+{
+  "_id": "insight-wp-2697",
+  "_type": "insight",
+  "title": "Movers, shakers & innovators - 1682 speaker spotlight (Part 2)",
+  "slug": {
+    "_type": "slug",
+    "current": "movers-shakers-innovators-1682-speaker-spotlight-part-2"
+  },
+  "excerpt": "Here's the second part of our series of posts on speakers and moderators for the 1682 conference.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    }
+  ],
+  "publishedAt": "2019-09-30T23:23:16Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/07/O3-website-imagery_-Insights-8.jpg"
+    },
+    "alt": "Movers, shakers & innovators - 1682 speaker spotlight (Part 2)"
+  },
+  "body": [
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "When we first started to plan 1682, we envisioned creating a conference where leaders in business, design, and technology can come together and discuss the behind-the-scenes realities of innovation. We’re so proud of what our business of innovation conference has evolved into, and we truly have a phenomenal line-up of speakers and moderators planned for the day. Here’s the second part of our series of posts on speakers and moderators.",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/1682-Speakers-Adam.jpg"
+      },
+      "alt": "1682 speaker Adam Furtado",
+      "_key": "k0005"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Adam Furtado",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Company:",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " ",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Kessel Run",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", U.S. Air Force\n",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Title:",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " Lab Director",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://kesselrun.af.mil/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Adam Furtado is the Lab Director & Branch Chief for Kessel Run, a U.S. Air Force digital transformation initiative revolutionizing how the Air Force builds and delivers software. He leads a team of 200+ government disruptors who are changing the way the Department of Defense does business. Kessel Run has introduced agile and lean principles to the Air Force and navigated the complexities that come with rapid growth and is driving significant change within the world’s largest bureaucracy.",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/1682-Speakers-Edy.jpg"
+      },
+      "alt": "1682 speaker Edy Liongosari",
+      "_key": "k0017"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Edy Liongosari",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Company:",
+          "_key": "k0021"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " Accenture\n",
+          "_key": "k0022"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Title:",
+          "_key": "k0023"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " Chief Research Scientist and Managing Director",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Edy Liongosari is Accenture’s, Chief Research Scientist and Managing Director. In this capacity, he is responsible for the agenda and outcomes of Accenture Labs’ applied technology research across all seven global locations. The research defines the future for large enterprises, shapes the technology market, and creates strong business results for Accenture’s clients.",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Edy has been with Accenture for over 30 years. Prior to his current role, he lead the Systems and Platforms Research Group, which covers key technology areas such as the industrial internet of things, high-performance computing, model-driven DevOps, data engineering, services, and analytics.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "He also was the head of Accenture R&D Labs in Bangalore, India for a number of years, where he led a global team of R&D personnel to industrialize Accenture’s system development process. Edy and his team have received numerous patents and awards for innovation. A copy of his research work has also been placed in the Smithsonian’s permanent research collection. Edy has a Master’s in computer science from Indiana University.",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/1682-Speakers-Melissa.jpg"
+      },
+      "alt": "1682 speaker Melissa Doran Rayer",
+      "_key": "k0031"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Melissa Doran Rayer",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Company:",
+          "_key": "k0035"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " ",
+          "_key": "k0036"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "SEI",
+          "_key": "k0037"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\n",
+          "_key": "k0038"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Title:",
+          "_key": "k0039"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " Director of Digital Consumer Strategy",
+          "_key": "k0040"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://seic.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0041",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Melissa Doran Rayer is the Director of Digital Consumer Strategy at SEI. Leveraging over 30 years of experience in wealth management, financial planning, and product development at SEI, Melissa leads SEI’s effort to expand its direct-to-consumer business. She oversees the development and distribution of digital solutions based on investors’ diverse and unique needs. Melissa received her MBA in finance from Villanova University and her B.A. in economics and political science from Yale University.",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/1682-Speaker-Andy.jpg"
+      },
+      "alt": "1682 speaker Andy Verone",
+      "_key": "k0043"
+    },
+    {
+      "_key": "k0044",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Andy Verone",
+          "_key": "k0045"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0046",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Company:",
+          "_key": "k0047"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " ",
+          "_key": "k0048"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Oracle",
+          "_key": "k0049"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\n",
+          "_key": "k0050"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Title:",
+          "_key": "k0051"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " Global Vice President, Industry and Innovation Strategy",
+          "_key": "k0052"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.oracle.com/index.html"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0053",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Andy Verone is the Global Vice President for Oracle’s Construction and Engineering Global Business Unit responsible for Innovation and Industry Strategy globally. Andy is also the co-founder of Oracle’s Construction and Engineering innovation lab located in Chicago.",
+          "_key": "k0054"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0055",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Andy has over 30 years of executive and international business experience across the globe in the engineering and construction industry, including previously serving as Executive Vice President and Chief Information Officer at both Michael Baker International and Transfield Services (Broadspectrum).",
+          "_key": "k0056"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0057",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "His background includes the implementation of global project-based information and delivery systems and knowledge management programs, as well as Board of Directors-level experience developing IT Strategic Plans and Governance programs. He also has managed large capital projects and government contracts.",
+          "_key": "k0058"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:2697"
+  }
+}

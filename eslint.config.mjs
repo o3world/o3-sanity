@@ -5,7 +5,7 @@ import nextPlugin from '@next/eslint-plugin-next'
  * Draft-preview boundary (issue #15). Everything the web app renders must
  * fetch through `sanityFetch` from `@/sanity/live` and mount visual editing
  * through `@/sanity/VisualEditing` — a bare Sanity client (published
- * perspective, CDN, cached) or the raw next-sanity `<VisualEditing />`
+ * insight, CDN, cached) or the raw next-sanity `<VisualEditing />`
  * (declines mutation refreshes) silently freezes content in the
  * Presentation tool. Only `src/sanity/` may touch the low-level pieces.
  */

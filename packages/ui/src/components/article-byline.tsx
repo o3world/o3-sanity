@@ -23,7 +23,7 @@ function initial(name: string | null | undefined): string {
 }
 
 /**
- * The article byline — the perspective hero's author line (`1710:2946`), #45.
+ * The article byline — the insight hero's author line (`1710:2946`), #45.
  *
  * ```
  * row, 12px above, gap 13, centre

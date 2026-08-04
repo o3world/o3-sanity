@@ -1,0 +1,95 @@
+{
+  "_id": "insight-wp-3444",
+  "_type": "insight",
+  "title": "7 ways to use chatbots effectively in your customer experience",
+  "slug": {
+    "_type": "slug",
+    "current": "7-ways-to-use-chatbots-effectively-in-your-customer-experience"
+  },
+  "excerpt": "According to Tim Breslin, CTO of O3, chatbots will need to assist customers with more complex problems, not just the most simple ones.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-15",
+      "_key": "cat-15"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-11",
+      "_key": "cat-11"
+    }
+  ],
+  "publishedAt": "2020-05-06T20:43:19Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-16.jpg"
+    },
+    "alt": "Red pattern"
+  },
+  "body": [
+    {
+      "_key": "k0001",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "There are a few essential strategies when it comes to effectively implementing chatbots in your customer experience.",
+          "_key": "k0002"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "According to Tim Breslin, CTO of O3, chatbots will need to assist customers with more complex problems, not just the most simple ones. Tim, along with other top technology leaders, shared their insights on what other strategies are essential in Phil Britt’s article on CMSWire.",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Enhance your brand’s experience",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.cmswire.com/customer-experience/7-ways-to-use-chatbots-effectively-in-your-customer-experience/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "According to O3's CTO, chatbots will need to assist customers with more complex problems, not just the most simple ones."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:3444"
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "_id": "insight-wp-4287",
+  "_type": "insight",
+  "title": "Episode 4: Making innovation work inside your organization",
+  "slug": {
+    "_type": "slug",
+    "current": "mindshift-004"
+  },
+  "excerpt": "Tune in on Wednesday, May 26, 2021 at 4 pm ET",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    }
+  ],
+  "publishedAt": "2021-05-11T18:05:21Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/07/O3-website-imagery_-Insights-8.jpg"
+    },
+    "alt": "Episode 4: Making innovation work inside your organization"
+  },
+  "body": [
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Mind Shift: Episode 4",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Tune in on Wednesday, May 26, 2021 at 4 pm ET to hear ",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Alberto Machado",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", chief executive officer at Valudor Products and ",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Eliza Pollack",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", director of innovation at The City of Philadelphia discuss how to tackle today’s business problems with innovation. They’ll share interesting perspectives for how their teams leverage trusted techniques to workshop ideas, scope possible solutions, build prototypes and test concepts. ",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Natalie Nixon",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", creative strategist and president at Figure 8 Thinking will moderate the discussion.",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/alberto-machado-482b545/"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/elizapollack/"
+        },
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/natalienixonphd/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We’re excited to partner with ",
+          "_key": "k0016"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "NKST, a growth acceleration agency",
+          "_key": "k0017"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", to bring these dynamic speakers together to offer practical insights and inspiration on what it takes to innovate in 2021.",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.whatsnkst.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "Watch the recording",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.youtube.com/watch?v=FfediR74Zi8&t=8s"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "Register for the next MindShift webinar to gain practical insights on how to adapt and grow your business in an age of uncertainty."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:4287"
+  }
+}

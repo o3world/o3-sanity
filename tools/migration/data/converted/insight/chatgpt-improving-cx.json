@@ -1,0 +1,343 @@
+{
+  "_id": "insight-wp-7257",
+  "_type": "insight",
+  "title": "How AI can help humans strategize: ChatGPT as a tool to revolutionize the customer experience",
+  "slug": {
+    "_type": "slug",
+    "current": "chatgpt-improving-cx"
+  },
+  "excerpt": "You may be thinking about ways to leverage ChatGPT, but you’re just not sure. Is it ethical? How legitimate are its capabilities? Can I use it to help expedite content creation? O3 explores these questions and more in our latest discussion on the rising popularity of conversational AI.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-18"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-11",
+      "_key": "cat-11"
+    }
+  ],
+  "publishedAt": "2023-02-06T16:41:03Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/02/O3-website-imagery_-Insights-25.jpg"
+    },
+    "alt": "ChatCPT robot"
+  },
+  "body": [
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If you’ve been paying attention to social media recently (or, really, anywhere on the internet), you will no doubt have seen or read stories about ",
+          "_key": "k0005"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "ChatGPT",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://chat.openai.com"
+        }
+      ],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "It has the potential to significantly impact a wide range of industries and applications by providing advanced natural language processing capabilities. According to Reuters, GhatCPT is estimated to have reached 100 million monthly active users in January 2023, just two months after its launch. The buzz around ChatGPT in recent weeks has driven a series of questions about its use, effectiveness and even appropriate place in content creation. Released in November of 2022, ChatGPT is a natural language processing tool developed by OpenAI, which can quickly and concisely generate articulate, thorough answers to complex questions across a large domain of knowledge. While a search engine can link you to content, ChatGPT can actually respond to a question with a detailed response or generate new content. It can write long form content, essays, emails, and even generate code or creative content such as poetry.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Although questions around accuracy or even ethical usage have begun to pop up, its role in the future of creating effective and impactful customer experiences is extremely compelling. Ultimately, like any other AI, ChatGPT’s greatest value is in augmenting how humans work by automating tedious tasks and allowing humans to focus on more thoughtful, creative solutions to improve experiences.",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "At O3, we have begun to examine and develop CX solutions in a few key areas using ChatGPT:",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Conversational AI",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "One way ChatGPT is improving CX is through the use of conversational AI, where ChatGPT can be used to create chatbots or virtual assistants that can interact with customers in a more natural and conversational manner. These chatbots can assist customers with tasks such as answering questions, providing information, and helping with troubleshooting. The friendly and professional tone helps to build trust and establish a positive relationship with users, which can lead to increased engagement and a better user experience.",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Personalization",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Another way ChatGPT can improve CX is by providing ",
+          "_key": "k0021"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "personalized responses",
+          "_key": "k0022"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and/or marketing content based on a customer’s intent and tailoring responses to their specific needs. This is particularly compelling as we consider the tedious task of creating personalization solutions and the content strategy to support it. The human nature of these responses leaves a user with a positive experience, ultimately strengthening the relationship between a brand and a customer. Based on this positive interaction, loyal customers and increased engagement directly impacts a company’s success.",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.o3world.com/news/personalization-creating-an-individualized-journey-for-your-customers/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Customer insight",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "While the customer insight feedback loop is critical to informing CX or product strategy within organizations, the pace of delivering this insight is often too slow to be effective. ChatGPT can be used to analyze and understand customer feedback, which can help companies identify areas for improvement in their products or services almost instantaneously and more effectively.",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Accelerating content creation",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As any marketing team will admit, the process of creating quality content and maintaining a regular and effective cadence is daunting. ChatGPT’s language generation capabilities can be used to accelerate the process. We even created the framework of this article with the help of AI; we asked a series of questions and it provided acceptable responses. While we still had to piece them together in a coherent way, it certainly helped that the facts were readily available. For more tedious content creation, such as generating product descriptions or customer service scripts, ChatGPT is a perfect tool to support these tasks.",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In conclusion",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "While there are hundreds of use cases for how, where, and when to leverage ChatGPT along the customer journey, what’s critical is developing a strategy; this preemptive approach helps in examining customer needs, understanding workflow gaps, and finding smart ways to use the tool (or, AI tools like it) to enhance customer outcomes. As time goes on, we will be keeping an eye on its impact on areas like SEO, general accuracy, and/or shortcomings such as language or domain knowledge gaps.",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Bard",
+          "_key": "k0037"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", Google’s new chatbot is in testing and will be launched “in the coming weeks.” Stay tuned for more thought leadership from O3 pertaining to ChatGPT.",
+          "_key": "k0038"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://blog.google/technology/ai/bard-google-ai-search-updates/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0039",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "For more questions about ChatGPT or to begin thinking about how it might fit into your CX program, ",
+          "_key": "k0040"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "contact us",
+          "_key": "k0041"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Improving your companies CX strategy with ChatGTP",
+    "description": "ChatGPT, a natural language processing tool developed by OpenAI can lead to increased engagement and improved CX for your company"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:7257"
+  }
+}

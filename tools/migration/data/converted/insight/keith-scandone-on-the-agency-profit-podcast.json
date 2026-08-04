@@ -1,0 +1,93 @@
+{
+  "_id": "insight-wp-3357",
+  "_type": "insight",
+  "title": "Keith Scandone on The Agency Profit podcast",
+  "slug": {
+    "_type": "slug",
+    "current": "keith-scandone-on-the-agency-profit-podcast"
+  },
+  "excerpt": "What agency leaders must do to build and cultivate a culture of curiosity, as well as the lessons he’s learned from enduring the 2008-2009 recession.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-1",
+      "_key": "cat-1"
+    }
+  ],
+  "publishedAt": "2020-03-18T17:33:55Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/06/O3-website-imagery_-Insights-10.jpg"
+    },
+    "alt": "Keith Scandone giving an impassioned speech at the office."
+  },
+  "body": [
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 World co-founder and CEO ",
+          "_key": "k0003"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Keith Scandone",
+          "_key": "k0004"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", recently connected with Marcel Petitpas, CEO of Parakeeto and host of The Agency Profit podcast, to discuss his journey in co-founding O3 World, what agency leaders must do to build and cultivate a culture of curiosity, as well as the lessons he’s learned from enduring the 2008-2009 recession.",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.o3world.com/about/team/keith-scandone/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Listen here",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://parakeeto.com/blog/surviving-and-thriving-through-a-recession-with-keith-scandone-episode-29/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:3357"
+  }
+}

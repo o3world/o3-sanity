@@ -24,7 +24,7 @@ import { isImageAssetId } from './lib/media'
 import { CORPUS_DIRS, refsIn } from './lib/corpus'
 import { categoryDoc } from './map/category'
 import { personDoc } from './map/person'
-import { perspectiveDoc } from './map/perspective'
+import { insightDoc } from './map/insight'
 import { siteSettingsDoc } from './map/siteSettings'
 
 const client = getCliClient({ apiVersion: '2026-07-01' })
@@ -33,7 +33,7 @@ type AnyDoc = { _id: string; _type: string; [k: string]: unknown }
 
 /** Zod gates by type. A type without one is only checked structurally. */
 const GATES: Record<string, { safeParse: (v: unknown) => { success: boolean } }> = {
-  perspective: perspectiveDoc,
+  insight: insightDoc,
   category: categoryDoc,
   person: personDoc,
   siteSettings: siteSettingsDoc,
@@ -118,7 +118,7 @@ async function main() {
   )
 
   // 1. Everything committed is actually in the dataset. The count is the
-  //    headline check the ticket asks for (272 perspectives vs the WP
+  //    headline check the ticket asks for (272 insights vs the WP
   //    inventory), stated per type so a shortfall names itself.
   const missing = committed.filter((d) => !liveById.has(d._id)).map((d) => `${d._id} not loaded`)
   report('every committed document is in the dataset', missing)

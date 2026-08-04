@@ -87,7 +87,7 @@ const map = buildRedirectMap({
   wp,
   sitePaths: sitePaths({
     pageSlugs: slugs.page ?? [],
-    perspectiveSlugs: slugs.perspective ?? [],
+    insightSlugs: slugs.insight ?? [],
     caseStudySlugs: slugs.caseStudy ?? [],
   }),
 })

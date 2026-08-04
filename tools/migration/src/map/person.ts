@@ -57,7 +57,7 @@ export function normalizeName(name: string): string {
  *   byline**. `post_author` is just whoever hit publish — o3world.com renders
  *   nothing from it, so there is no `refForUser`: a lookup by WP user id
  *   exists only to answer "who published this", which is not a question the
- *   new model asks. Dropping it is why `perspective.author` is optional.
+ *   new model asks. Dropping it is why `insight.author` is optional.
  * - A user and a team member are the same person when they share an email
  *   (case-insensitively) or a name. Email is the stronger key and comes
  *   first: three WP accounts never had a display name set, so their "name" is
@@ -108,7 +108,7 @@ export function buildPersonDirectory(
   }
 
   // Users first, so a person who has a WP account keeps `person-wp-<userId>`
-  // — the id every already-converted perspective references.
+  // — the id every already-converted insight references.
   for (const user of users) {
     findOrCreate({ email: user.email, name: user.name }, () => ({
       id: `person-wp-${user.wpId}`,

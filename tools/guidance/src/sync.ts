@@ -9,7 +9,7 @@
  *   pnpm guidance:sync
  *
  * Documents are written **published** (no `drafts.` prefix): a consumer using
- * the default published perspective has to see them without asking for
+ * the default published insight has to see them without asking for
  * drafts. Ids are deterministic, so a re-run replaces rather than duplicates,
  * and a document whose source row is gone is deleted — the dataset holds what
  * the repo says and nothing else.

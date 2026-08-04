@@ -1,0 +1,137 @@
+{
+  "_id": "insight-wp-543",
+  "_type": "insight",
+  "title": "O3's Mike Gadsby and Justin Handler tag-team presentation at LaSalle University",
+  "slug": {
+    "_type": "slug",
+    "current": "o3-worlds-mike-gadsby-and-justin-handler-tag-team-presentation-at-lasalle-university"
+  },
+  "excerpt": "Team O3 gave a presentation at LaSalle University.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    }
+  ],
+  "publishedAt": "2016-04-08T20:28:16Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights-3.jpg"
+    },
+    "alt": "O3's Mike Gadsby and Justin Handler tag-team presentation at LaSalle University"
+  },
+  "body": [
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Tonight, O3 World CXO ",
+          "_key": "k0004"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Mike Gadsby",
+          "_key": "k0005"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and Account Strategist ",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Justin Handler",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " head to ",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "LaSalle University",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " to speak to students in the marketing and digital arts departments. Both Mike and Justin bring unique perspectives on working in digital agencies.",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "/about/team/mike-gadsby"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "/about/team/justin-handler"
+        },
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "http://lasalle.edu"
+        }
+      ],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "After graduating from the University of Pennsylvania and getting his feet wet in the branding world, Mike Gadsby elected to take their reins himself and become self-employed at 24. In 2005, he took an even bigger leap, when he co-founded O3 World. Now, after more than 10 years in business, Mike is a business owner, an employer, a mentor, and an innovator. He’ll talk about that and offer insights into what he looks for in employees.",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Justin Handler, on the other hand, has a different experience. After beginning his career in project management at an agency just outside New York City, this LaSalle grad joined O3 World in 2010 and is now the company’s longest-tenured employee. Over the next five years, he rose through the ranks to become lead project manager. Now, as account strategist, he’ll take the project management skills he’s honed, the client relationships he’s built, and his thoughtful, strategic mindset to a new level. He’ll share his experience in finding a job after college, building a successful career, and more with the Explorers today.",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:543"
+  }
+}

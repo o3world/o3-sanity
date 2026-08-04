@@ -192,10 +192,10 @@ describe('asset-manifest.json', () => {
       'eng-embedded.svg',
       'eng-ownership.svg',
       'eng-squad.svg',
-      'perspective-process-frontier.svg',
-      'perspective-process-hero.svg',
-      'perspective-process-pipeline.svg',
-      'perspective-process-sources.svg',
+      'insight-process-frontier.svg',
+      'insight-process-hero.svg',
+      'insight-process-pipeline.svg',
+      'insight-process-sources.svg',
     ]) {
       expect(locked.has(`${ASSET_DIR}/${name}`), name).toBe(true)
     }

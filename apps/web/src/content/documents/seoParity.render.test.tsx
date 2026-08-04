@@ -6,7 +6,7 @@ import { buildDetailRoute, buildCatchAllRoute } from '@/lib/content-routes/build
 import { CATCH_ALL_TYPES } from '@/content/documents'
 import {
   aMigratedPage,
-  aMigratedPerspective,
+  aMigratedInsight,
   aTranslatedCaseStudy,
   renderRoute,
   siteSettings,
@@ -14,7 +14,7 @@ import {
 } from '@/test'
 
 import { caseStudy } from './caseStudy/entry'
-import { perspective } from './perspective/entry'
+import { insight } from './insight/entry'
 
 /**
  * SEO parity with WordPress, spot-checked end to end (#24).
@@ -37,8 +37,8 @@ import { perspective } from './perspective/entry'
  * every branch of the chain at once.
  */
 const B2C_SLUG = 'creating-success-in-a-business-to-consumer-environment'
-const b2c = await renderRoute(buildDetailRoute(perspective), {
-  data: withSettings(aMigratedPerspective(B2C_SLUG), siteSettings()),
+const b2c = await renderRoute(buildDetailRoute(insight), {
+  data: withSettings(aMigratedInsight(B2C_SLUG), siteSettings()),
   params: { slug: B2C_SLUG },
 })
 
@@ -55,12 +55,12 @@ const privacy = await renderRoute(buildCatchAllRoute(CATCH_ALL_TYPES, PAGE_QUERY
   params: { segments: ['privacy-policy'] },
 })
 
-const anyPerspective = await renderRoute(buildDetailRoute(perspective), {
-  data: withSettings(aMigratedPerspective(), siteSettings()),
+const anyInsight = await renderRoute(buildDetailRoute(insight), {
+  data: withSettings(aMigratedInsight(), siteSettings()),
   params: { slug: 'any' },
 })
 
-describe('a converted perspective that overrode all three Yoast fields', () => {
+describe('a converted insight that overrode all three Yoast fields', () => {
   it('serves the Yoast title override, not the post title', () => {
     expect(b2c.metadata.title).toBe(
       'Insurance providers pivot to business-to-consumer (B2C) models.',
@@ -92,7 +92,7 @@ describe('a converted perspective that overrode all three Yoast fields', () => {
 
   it('is its own canonical, and never WordPress’s', () => {
     expect(b2c.metadata.alternates?.canonical).toBe(
-      'http://localhost:3000/perspectives/creating-success-in-a-business-to-consumer-environment',
+      'http://localhost:3000/insights/creating-success-in-a-business-to-consumer-environment',
     )
   })
 })
@@ -138,7 +138,7 @@ describe('a migrated page', () => {
 
 describe('robots parity', () => {
   it('indexes and follows, with the crawl maxima Yoast emitted', () => {
-    const robots = anyPerspective.metadata.robots as {
+    const robots = anyInsight.metadata.robots as {
       index?: boolean
       follow?: boolean
       googleBot?: Record<string, unknown>

@@ -1,0 +1,466 @@
+{
+  "_id": "insight-wp-8536",
+  "_type": "insight",
+  "title": "An essential guide to workshop facilitation",
+  "slug": {
+    "_type": "slug",
+    "current": "essential-guide-workshop-facilitation"
+  },
+  "excerpt": "A comprehensive guide to successful workshop facilitation, from covering pre-workshop considerations to post-workshop follow-up.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-3984"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-15",
+      "_key": "cat-15"
+    }
+  ],
+  "publishedAt": "2023-12-19T15:15:34Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/12/workshop-faciltation.jpg"
+    },
+    "alt": "An essential guide to workshop facilitation"
+  },
+  "body": [
+    {
+      "_key": "k0001",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Workshops are a wonderful environment for collaborative problem-solving, ideation, and experimentation. And, when done well, they lead to more inclusive, tangible, and impactful outcomes. But they require one key thing to be successful: a master facilitator. And that facilitator doesn’t always need to be the designer in the bunch; with the right tools and mindset, anyone can successfully master the art of workshop facilitation.",
+          "_key": "k0002"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Things to consider before your workshop day",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Get alignment on the problem",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The most critical step in getting started is to first ensure that you have alignment on goals, objectives, and desired outcomes for your workshop. What’s the problem you’re trying to solve, and how will you know you’ve been successful in solving it? If you’re working with multiple stakeholders, a workshop brief may help to get alignment on the problem and solution framework, KPIs, and, most importantly, the right participants. And in the case of workshopping, the more, the merrier; you’ll want to ensure you’re capturing as many voices and perspectives as possible.",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Determine the hosting format and venue",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If you’re hosting a workshop in person, make sure it’s a place where you’ll have limited distractions and lots of wall space; you’ll be covering it all with your great ideas! To that point, you’ll also want to make sure you have plenty of stickies, sharpies, and easel pads (with activities mapped out). If you’re workshopping remotely, or even in a hybrid format, make sure everyone has access to the collaboration tool you’ll be using (for me, that’s Miro), and that your activities are set up and defined. Regardless of the structure, you’ll also want to ensure you set and share your agenda in advance; let those participating know what they can expect from your time together.",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Yay, it’s workshop day!",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "And now it’s time for the big day. You’ve tested technology, you have all of your boards and materials in place, and you’re ready to go.",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Get things rolling by introducing everyone",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "To kick things off, introduce yourself as the workshop’s facilitator. In this role, you will act as a guide, orchestrator, and supporter, creating an atmosphere that encourages participation, collaboration, and a focus on outcomes. Then, if it is appropriate, let everyone introduce themselves to one another. An icebreaker question can be a great way to break the ice and get people talking during those first few uncomfortable moments. It could be something as simple as their favorite color or the best thing they ate recently.",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Establish the ground rules for participation",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Ask for everyone to be present, agree that all voices are equal (regardless of rank or role), embrace an iterative mindset (building off of each other with ‘yes and’), and agree that no answers are wrong answers. If you are hosting online, ask that everyone has their cameras on to ensure everyone has equal space to engage. You may also consider asking everyone to put their technology aside and do not disturb mode on. As the facilitator, you’ll be helping to make sure ground rules are adhered to, and you’ll keep the group on time and on topic.",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Divide activities into small chunks",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Break down the workshop content into smaller modules that align with your goals and objectives. Each module should have a clear purpose or outcome. Consider a healthy flow of ideation, consolidation, and reflection. If you’re not sure which activities would best align with your problem statement, take a look at IDEO’s designkit.org. They have a wonderful library of methods for inspiration, ideation, and implementation.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Give people time to think individually and collectively",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Individual reflection allows participants to process information, reflect on the content presented, and internalize concepts or ideas. In a group setting, some individuals might hesitate to speak up immediately. Allowing time for individual reflection before group discussions ensures that everyone gets a chance to formulate their thoughts, fostering more balanced participation.",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Make time for breaks",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "For every 60 minutes of workshopping, plan on carving out 5–10 minutes for your participants to stretch, refresh, and recharge. Be attentive to cues from the participants. If you notice signs of restlessness or decreased engagement, it might be a good time for a break.",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Wrapping the workshop",
+          "_key": "k0038"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0039",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Connect the dots back to your problem statement",
+          "_key": "k0040"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0041",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Once you’ve completed all of your modules, make time to connect the dots. Recap the main ideas and key takeaways covered during the workshop. Revisit the goals and objectives, highlighting how each objective was addressed or achieved during the session. Ask participants to consider actionable steps they can take after the workshop to apply their newfound knowledge, skills, or ideas.",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0043",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Ask for feedback",
+          "_key": "k0044"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0045",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Request feedback on the workshop experience; this can help to improve future workshops and demonstrate your commitment to continuous improvement.",
+          "_key": "k0046"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0047",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Thank your participants",
+          "_key": "k0048"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0049",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Send a thank-you message expressing gratitude for their participation, contributions, and commitment. This helps in building relationships and encouraging future engagement.",
+          "_key": "k0050"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0051",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Follow up",
+          "_key": "k0052"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0053",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "After a few weeks, check back in with your participants to see how they are doing and feeling after the workshop. Schedule follow-up meetings to track progress on open action items.",
+          "_key": "k0054"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0055",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We’re here if you need a hand",
+          "_key": "k0056"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0057",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "At O3, workshops are part of our DNA; we’ve run impactful workshops for our teams, our partners, and our community. ",
+          "_key": "k0058"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Connect with us",
+          "_key": "k0059"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " if you’d like help setting up or running a workshop customized just for you!",
+          "_key": "k0060"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Mastering workshop facilitation: A step-by-step guide for success",
+    "description": "Learn the essential steps to workshop facilitation, from pre-workshop planning and hosting considerations to effective participant engagement, reflection, and post-workshop follow-up."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:8536"
+  }
+}

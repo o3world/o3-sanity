@@ -14,7 +14,7 @@ import {
   caseShowcaseSection,
   railPanelsSection,
   quoteSection,
-  perspectivesCarouselSection,
+  insightsCarouselSection,
   ctaSection,
   disciplineGridSection,
   personGridSection,
@@ -25,7 +25,7 @@ import {
   mediaSection,
   listingSection,
 } from './blocks/section'
-import { perspective } from './documents/perspective'
+import { insight } from './documents/insight'
 import { caseStudy } from './documents/caseStudy'
 import { page } from './documents/page'
 import { person, client, category, industry, siteSettings } from './documents/supporting'
@@ -51,7 +51,7 @@ export const schemaTypes = [
   caseShowcaseSection,
   railPanelsSection,
   quoteSection,
-  perspectivesCarouselSection,
+  insightsCarouselSection,
   ctaSection,
   disciplineGridSection,
   personGridSection,
@@ -62,7 +62,7 @@ export const schemaTypes = [
   mediaSection,
   listingSection,
   // documents
-  perspective,
+  insight,
   caseStudy,
   page,
   person,

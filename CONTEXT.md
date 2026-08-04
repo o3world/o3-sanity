@@ -4,15 +4,15 @@ Terms resolved so far. Use these exact words in schema names, code, issues, and 
 
 ## Content types
 
-- **Perspective** — a blog article. The canonical term (not "post", not "insight" — the mockup's "Insights" nav label is display copy stored in Site Settings). URL: `/perspectives/{slug}`. Body is **Portable Text** with a small closed set of inline objects — never section blocks. 272 migrate from WordPress.
+- **Insight** — a blog article. The canonical term (not "post", not "perspective" — that was the name until [ADR 0017](docs/adr/0017-the-collection-is-an-insight.md), and it survives only in `data/extract/`, which keeps WordPress's vocabulary). URL: `/insights/{slug}`; WordPress serves `/perspectives/{slug}` and 301s. Body is **Portable Text** with a small closed set of inline objects — never section blocks. 272 migrate from WordPress.
 - **Case Study** — a client engagement write-up; the collection is called **Work**. URL: `/work/{slug}`. Fully **structured** (not section-built): client reference, industry references + industry detail string, **narrative headline** (the problem-framing sentence shown on cards), **stats** (array; first is the headline stat), hero media, **chapters** (ordered; kicker + title + body; numbers derived from order), **deliverables** ("What we shipped"), optional **extra sections** for per-case flourishes.
 - **Page** — a modular marketing page composed of a two-tier **sections** array (see ADR 0001). Carries `pageType`, a closed developer-managed enum: `standard | service`. Service pages get a conditional **card** fieldset (short title, excerpt, icon) that listing blocks project — but **no service page exists or is planned** (ADR 0013; see Known drift). Slugs are multi-segment and carry their prefix (`ventures/rec-philly`). Ventures are ordinary standard pages — deliberately not a type.
 
 ## Supporting types
 
-- **Person** — name, title, headshot. Authors of perspectives; **12** migrate from WordPress — one per person something actually references, which is 11 bylines plus Kelly Navari, who is on the About team grid without having written anything. A **byline** is the ACF `author` field and nothing else: `post_author` is whoever hit publish, which o3world.com shows a reader nowhere, so 239 of the 272 articles have no author at all (#32). `perspective.author` is optional for that reason.
+- **Person** — name, title, headshot. Authors of insights; **12** migrate from WordPress — one per person something actually references, which is 11 bylines plus Kelly Navari, who is on the About team grid without having written anything. A **byline** is the ACF `author` field and nothing else: `post_author` is whoever hit publish, which o3world.com shows a reader nowhere, so 239 of the 272 articles have no author at all (#32). `insight.author` is optional for that reason.
 - **Client** — name + logo. Single source for the homepage logo wall and `caseStudy.client`.
-- **Category** — editorial taxonomy for perspectives (11 migrate; cleanup is post-migration editorial work). WordPress tags do **not** migrate.
+- **Category** — editorial taxonomy for insights (11 migrate; cleanup is post-migration editorial work). WordPress tags do **not** migrate.
 - **Industry** — minimal taxonomy (name + slug) referenced by case studies for the "Healthcare · Pediatric Systems" eyebrow; the second half is the case study's `industryDetail` string. Deliberately not invested in beyond that.
 - **Site Settings** — singleton: nav, footer, social, default SEO, display labels.
 - **Guidance** — a document that tells an _agent_ how to write, not a reader what to read: the voice guide and the brand foundation behind it, stored so an MCP consumer (the Claude Desktop authoring skill, #68) can fetch them at session start. **The repo is source of truth** — each one is synced from markdown under `.claude/skills/` by `pnpm guidance:sync`, every field is `readOnly` in Studio, and `pnpm guidance:check` fails on drift. Deliberately outside the editorial model: not routable, no `slug`, no `seo`, no `migration` object, and ids (`guidance-o3-voice`) that miss the pipeline's ownership contract so `load` never retires them. Body is **raw markdown in a text field**, not Portable Text — agents consume it verbatim.
@@ -23,19 +23,19 @@ Testimonials/quotes are **inline** in the quote section block — no document ty
 
 Not everything with a URL is a document. Four **route kinds** exist; the glossary term is the kind, not the file it lives in.
 
-- **Detail** — one document at its own URL beneath a prefix (`/perspectives/{slug}`, `/work/{slug}`).
+- **Detail** — one document at its own URL beneath a prefix (`/insights/{slug}`, `/work/{slug}`).
 - **Catch-all** — a Page, resolved by matching its multi-segment slug (`solutions`, `ventures/rec-philly`).
 - **Singleton** — a fixed route backed by one known document (the homepage).
-- **Collection index** — the paginated landing page for a Collection (`/work`, `/perspectives`). **It has no backing document**: the entry is a query plus static SEO, so there is nothing in Studio to edit and nothing for the migration pipeline to own. This is the one route kind that breaks the document-per-URL assumption, which is why it gets a name.
+- **Collection index** — the paginated landing page for a Collection (`/work`, `/insights`). **It has no backing document**: the entry is a query plus static SEO, so there is nothing in Studio to edit and nothing for the migration pipeline to own. This is the one route kind that breaks the document-per-URL assumption, which is why it gets a name.
 
-A **Collection** is a document type with a URL prefix and a collection index. Two exist — Perspective (`/perspectives`) and Case Study (`/work`, whose display name is **Work**). `COLLECTION_PREFIXES` is the single source of the prefix.
+A **Collection** is a document type with a URL prefix and a collection index. Two exist — Insight (`/insights`) and Case Study (`/work`, whose display name is **Work**). `COLLECTION_PREFIXES` is the single source of the prefix.
 
-**"Listing" is the section block; "index" is the route.** `listingSection` projects page cards by `pageType` from inside a Page. A collection index is an entire route with pagination and no document. They share nothing but a word, so they no longer share one: the route kind is `index` (`caseStudyIndex`, `perspectiveIndex`, `CaseStudyIndexView`).
+**"Listing" is the section block; "index" is the route.** `listingSection` projects page cards by `pageType` from inside a Page. A collection index is an entire route with pagination and no document. They share nothing but a word, so they no longer share one: the route kind is `index` (`caseStudyIndex`, `insightIndex`, `CaseStudyIndexView`).
 
 ## Preview
 
 - **Draft mode** — Next.js's own switch (`draftMode()`), and the only thing that decides whether a page shows drafts. `defineLive` keys off it entirely, so nothing else in the app needs a notion of "published vs draft".
-- **Preview switcher** — the fixed corner chip that flips a page between Published and Drafts for someone holding a Sanity Studio session (#60). **Never call it a perspective switcher**: `perspective` is this repo's blog document type, and Sanity's own API parameter, so a third meaning would make the word useless. The feature is `preview switcher`; the state is `draft`.
+- **Preview switcher** — the fixed corner chip that flips a page between Published and Drafts for someone holding a Sanity Studio session (#60). **Never call it a perspective switcher.** `perspective` now means exactly one thing here — Sanity's own published-vs-draft API parameter — and that is worth keeping. It used to mean this repo's blog type as well, which is part of why [ADR 0017](docs/adr/0017-the-collection-is-an-insight.md) renamed the type to `insight`. The feature is `preview switcher`; the state is `draft`.
 - **Studio session** — there is no site auth. "Logged in" means holding a Sanity Studio token for this project, which the same-origin Studio at `/studio` leaves in `localStorage`. That token is a **hint** the browser may act on and a **claim** the server must verify against Sanity before enabling draft mode (`src/sanity/draftModeRoutes.ts`); it is never a decision on its own.
 
 ## Naming
@@ -46,7 +46,7 @@ One word per concept, everywhere. These rules bind schema names, field names, GR
 
 | Kind          | Rule                                 | Examples                                         |
 | ------------- | ------------------------------------ | ------------------------------------------------ |
-| Document      | camelCase singular noun              | `perspective`, `caseStudy`, `siteSettings`       |
+| Document      | camelCase singular noun              | `insight`, `caseStudy`, `siteSettings`           |
 | Section block | camelCase, **always** ends `Section` | `heroSection`, `layoutSection`, `listingSection` |
 | Base block    | camelCase, **no** suffix             | `richText`, `statGroup`                          |
 | Shared object | camelCase, no suffix                 | `cta`, `figure`, `stat`, `chapter`, `seo`        |
@@ -98,7 +98,7 @@ Two conventions, split by whether the file is bound to a schema type:
 Fix on sight; don't imitate. As of 2026-08-01 the rules above are the target, and these are the gap:
 
 - Enforcement is not wired yet: the factories don't check name shape, and `tools/check-schema-symmetry` doesn't exist. Until both land, the suffix and folder rules are convention only — follow them anyway.
-- `perspective.featuredImage` should be `heroMedia` (`caseStudy` already uses it). Requires touching the five converted JSON docs in `tools/migration/data/converted/perspective/` and the translate step.
+- `insight.featuredImage` should be `heroMedia` (`caseStudy` already uses it). Requires touching the five converted JSON docs in `tools/migration/data/converted/insight/` and the translate step.
 - `pageType: 'service'`, the conditional `card` fieldset it gates, and `listingSection` have **no consumer**. They were specced for a `/services` listing that [ADR 0013](docs/adr/0013-services-consolidate-into-solutions.md) removed — the 24 WordPress services consolidate into `/solutions`, which draws no listing. Removing all three is a schema conversation raised on #47, not a page layer's call; until it happens, `pageType` reads as a two-value enum with one value in use.
 - `heroSection.headlineLines` is an array because each line animates separately — a genuine exception to `heading`, not a synonym.
 - The `decoration` enum is copy-pasted into three section blocks; it belongs in a shared field factory.
@@ -106,12 +106,12 @@ Fix on sight; don't imitate. As of 2026-08-01 the rules above are the target, an
 ## Migration language
 
 - **Extract → Translate → Review** — the pipeline stage that turns WordPress content into new-model documents. **Type-generic** by design (parameterized by source query, target schema, translation rules). Extraction and loading are deterministic plumbing; **translation is performed by Claude Code** under the stage's guarantees. Guarantees: each translated doc carries its extracted source for side-by-side review; translation only restructures what the source contains — missing facts **stay empty**, proposed creative copy is flagged for rewrite-or-approve; re-runs are deterministic and **never touch a locked document**. Translated docs **load published**, like every other tree — [ADR 0016](docs/adr/0016-publish-what-wordpress-publishes.md) retired the drafts-only guarantee, because what the translate track holds is content WordPress publishes today.
-- **Migrate fully**: perspectives, authors, categories, ~3–5 utility pages, referenced media only. **Translate + review**: the 20 case studies. **Greenfield**: homepage, about, solutions, campaigns, the consolidated services story, ventures.
+- **Migrate fully**: insights, authors, categories, ~3–5 utility pages, referenced media only. **Translate + review**: the 20 case studies. **Greenfield**: homepage, about, solutions, campaigns, the consolidated services story, ventures.
 - **Seed** — a committed JSON document for greenfield content (`data/seed/<type>/<slug>.json`), authored by hand or agent, loaded by the same pipeline — so no content is ever entered manually twice. First seed: the homepage wireframe.
 - **Migration lock** — `migrationLock` boolean in the hidden `migration` provenance object on every pipeline-owned document. The pipeline never touches a locked doc, in any mode; locking is an explicit act (Studio toggle), replacing edited-draft inference. Reviewers lock docs they take over.
 - **Rebuild** — while building out, **committed JSON is the source of truth and the dataset is disposable**: `load` recreates every unlocked pipeline-owned document from `data/` and deletes the pipeline-owned documents the corpus no longer contains. All three trees — converted, seed and translated — load **published** (ADR 0016). Deterministic IDs: `<type>-wp-<id>` (migrated), `<type>-seed-<slug>` (greenfield). Pipeline lives in `tools/migration` (temporary, deleted post-migration).
 - **Provisional** — a document that exists so a route resolves, whose content is **not authoritative**: either the route has no canonical frame, or its real content has not been migrated yet. Marked `provisional: true` + `provisionalNote` in the `migration` object; `verify` lists every one each run, and **none may survive to launch** (#48). On a case study it is the stronger claim — the document invents client outcomes — and `seed.test.ts` fails any case study not sourced from WordPress that omits it. Sourcing order and the per-route table: [`docs/content-sourcing.md`](docs/content-sourcing.md).
-  - A **collection index has no document to mark**, so the same two field names sit on the route entry instead (`IndexEntry.migration`, #49, [ADR 0012](docs/adr/0012-provisional-routes.md)) — `/perspectives` is the case that forced it. `verify` cannot see them (it reads the dataset and the committed JSON, and a composition is in neither), so the enforcement point is `provisionalRoutes.render.test.tsx`. The launch gate covers both halves.
+  - A **collection index has no document to mark**, so the same two field names sit on the route entry instead (`IndexEntry.migration`, #49, [ADR 0012](docs/adr/0012-provisional-routes.md)) — `/insights` is the case that forced it. `verify` cannot see them (it reads the dataset and the committed JSON, and a composition is in neither), so the enforcement point is `provisionalRoutes.render.test.tsx`. The launch gate covers both halves.
 - **Migration wins the facts, Figma wins the page** — the conflict rule (ADR 0007). Figma is authoritative for composition, visual language, and the copy it authors; WordPress is authoritative for anything asserting something happened — client stats, outcomes, published editorial. The Case Study frame's fully-written case study is _demo copy_, not a client's results.
 
 ## Design language

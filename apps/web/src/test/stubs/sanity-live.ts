@@ -13,7 +13,7 @@ export interface FetchCall {
   readonly params?: Record<string, unknown>
   readonly tags?: string[]
   readonly stega?: boolean
-  readonly perspective?: string
+  readonly insight?: string
 }
 
 /** Returns the document(s) a query resolves to, or `null` for a miss. */

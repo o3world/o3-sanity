@@ -91,7 +91,7 @@ export const colors: readonly ColorSpec[] = [
   {
     name: 'surface',
     value: '#F0F0F0',
-    role: 'The warm-neutral light band: partners/intro, the pull quote, the perspectives row. The design’s equivalent of "bone".',
+    role: 'The warm-neutral light band: partners/intro, the pull quote, the insights row. The design’s equivalent of "bone".',
     token: 'bone (#F0F0F0)',
   },
   {
@@ -105,14 +105,14 @@ export const colors: readonly ColorSpec[] = [
     name: 'text-default',
     value: '#232323',
     variable: 'text/default',
-    role: 'Body copy and perspectives-card titles on light bands. Also `icons/default`.',
+    role: 'Body copy and insights-card titles on light bands. Also `icons/default`.',
     token: 'fg (#232323)',
   },
   {
     name: 'text-tertiary',
     value: '#636363',
     variable: 'text/tertiary',
-    role: 'The neutral eyebrow ("OUR PARTNERS") and perspectives-card meta ("3 MINS · 7/27/26").',
+    role: 'The neutral eyebrow ("OUR PARTNERS") and insights-card meta ("3 MINS · 7/27/26").',
     token: 'fg-muted (#636363)',
   },
   {
@@ -125,7 +125,7 @@ export const colors: readonly ColorSpec[] = [
     name: 'surface-muted',
     value: '#D3D3D3',
     variable: 'bg/button/secondary',
-    role: 'The circular carousel controls beside the perspectives heading (Icon / Surface).',
+    role: 'The circular carousel controls beside the insights heading (Icon / Surface).',
     token: 'surface-muted (#D3D3D3)',
   },
   {
@@ -219,7 +219,7 @@ export const gradients: readonly GradientSpec[] = [
     name: 'card-veil',
     token: '--gradient-card-veil',
     value: 'linear-gradient(180deg, rgba(3, 3, 3, 0) 0%, rgba(3, 3, 3, 0.75) 90%)',
-    role: 'Vertical scrim on the perspectives cards, weighting the bottom where the label sits.',
+    role: 'Vertical scrim on the insights cards, weighting the bottom where the label sits.',
     nodeId: '1734:1725',
   },
   {
@@ -227,7 +227,7 @@ export const gradients: readonly GradientSpec[] = [
     token: '--gradient-brand-glow',
     value:
       'radial-gradient(circle at 115% 24%, rgba(235, 16, 0, 0.5) 0%, rgba(3, 3, 3, 0) 100%), radial-gradient(circle at 0% 0%, rgba(114, 8, 0, 1) 0%, rgba(3, 3, 3, 1) 65%)',
-    role: 'Figma variable `Gradient/Red/1`. Two stacked radials — the ember card in the perspectives row, and how brand red reaches the page at scale.',
+    role: 'Figma variable `Gradient/Red/1`. Two stacked radials — the ember card in the insights row, and how brand red reaches the page at scale.',
     nodeId: '1734:1737',
   },
   {
@@ -364,7 +364,7 @@ export const typeScale: readonly TypeSpec[] = [
     letterSpacing: '0',
     weight: 400,
     style: 'Regular',
-    role: 'Platform descriptions and perspectives-card titles — same size as `lead`, but tracked normally and set tighter.',
+    role: 'Platform descriptions and insights-card titles — same size as `lead`, but tracked normally and set tighter.',
     nodeId: '1762:2133',
   },
   {
@@ -448,7 +448,7 @@ export const typeScale: readonly TypeSpec[] = [
     weight: 700,
     style: 'Bold',
     uppercase: true,
-    role: 'The perspectives-card meta row ("3 MINS · 7/27/26").',
+    role: 'The insights-card meta row ("3 MINS · 7/27/26").',
     nodeId: '1683:2490',
   },
   {
@@ -525,7 +525,7 @@ export const sectionRhythm: readonly SectionRhythmSpec[] = [
     nodeId: '1762:2149',
   },
   {
-    section: 'Perspectives',
+    section: 'Insights',
     padding: '96px 0',
     gap: '48px',
     surface: '#F0F0F0',
@@ -561,7 +561,7 @@ export const elementPadding = {
 /* ── Radius ────────────────────────────────────────────────────────────────── */
 
 /**
- * The exploration is SQUARE. Buttons, case-study cards, perspectives cards
+ * The exploration is SQUARE. Buttons, case-study cards, insights cards
  * and media frames all carry radius 0 — against the prototype's 6px buttons
  * and 16px cards. The only curves on the page are the 5.8px inner chip of the
  * carousel control and the 787.77px lozenge masking a card pattern, both of

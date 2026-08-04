@@ -48,8 +48,10 @@ describe('site nav', () => {
     }
   })
 
-  it('uses the redesign’s display copy, not WordPress’s type names', () => {
-    // CONTEXT.md: "Insights" is display copy for the Perspectives collection.
+  it('uses the redesign’s vocabulary, not WordPress’s', () => {
+    // WordPress's menu still says "Perspectives"; the nav says the type name
+    // (ADR 0017). The mapper's DISPLAY_LABELS override is what makes that so,
+    // and this is what fails if it is ever dropped as redundant.
     expect(navHtml).toContain('Insights')
     expect(navHtml).not.toContain('Perspectives')
   })
@@ -68,7 +70,7 @@ describe('site nav', () => {
   })
 
   it('links to the paths WordPress serves today, so parity survives the chrome', () => {
-    expect(navHtml).toContain('href="/perspectives"')
+    expect(navHtml).toContain('href="/insights"')
     expect(navHtml).toContain('href="/work"')
   })
 
@@ -219,7 +221,7 @@ describe('every chrome destination is a route the build-out lands (#48)', () => 
     '/': 'seeded — data/seed/page/index.json',
     '/work': 'Work index — #43',
     '/live': 'Live — #50 (route name still to be confirmed there)',
-    '/perspectives': 'Perspectives index — #49',
+    '/insights': 'Insights index — #49',
     '/solutions': 'Solutions — #47',
     '/about': 'About — #46',
     '/about#careers': 'the Careers section of About (#34) — #46',

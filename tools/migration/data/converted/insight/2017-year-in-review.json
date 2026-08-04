@@ -1,0 +1,1349 @@
+{
+  "_id": "insight-wp-781",
+  "_type": "insight",
+  "title": "2017 year in review",
+  "slug": {
+    "_type": "slug",
+    "current": "2017-year-in-review"
+  },
+  "excerpt": "Check out what we’ve been up to, reflect on what we've done and look toward an even more eventful and prosperous 2018!",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    }
+  ],
+  "publishedAt": "2017-12-29T13:08:47Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/05/O3-website-imagery_-Insights-11.jpg"
+    },
+    "alt": "Greyscale, exterior shot of O3 office with logo on brick."
+  },
+  "body": [
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What a year! We’ve done a lot, created a lot and continued to push the needle of innovation. We ",
+          "_key": "k0031"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "expanded our C-suite",
+          "_key": "k0032"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", were ",
+          "_key": "k0033"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "recognized as one of the best places to work",
+          "_key": "k0034"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " in Philadelphia (four years in a row!) and continued to work with some of the most talented partners and people. With that, we’re excited to highlight what we’ve been up to, reflect on what we’ve done and look toward an even more eventful and prosperous 2018 (this list isn’t comprehensive, just some of our favorites)!",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "/perspectives/o3-world-expands-c-suite-leadership-team-invests-in-agency-growth/"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "/perspectives/o3-world-recognized-as-best-places-to-work-in-philadelphia-4-years-in-a-row/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Things We Created",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We combined IBM Watson’s Personality Insights API with IoT to create ",
+          "_key": "k0039"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "O3 Moods",
+          "_key": "k0040"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and transform the atmosphere of a room based on the user’s personality traits.",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "/labs/o3-moods/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0042",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Again, utilizing IBM Watson’s API, and an algorithm that analyzes different types of coffee roasts, ",
+          "_key": "k0043"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "O3 Barista",
+          "_key": "k0044"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " predicts coffee selections and provides personalized recommendations based on the user’s Twitter personality.",
+          "_key": "k0045"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "/labs/o3-barista/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0046",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In order to eliminate the indecisions about deciding what’s for lunch, we created ",
+          "_key": "k0047"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "O3 Lunchbot",
+          "_key": "k0048"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", an Alexa skill that simulates conversation with human users, to sort through menu items at local lunch spots.",
+          "_key": "k0049"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "/labs/o3-lunchbot/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0050",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Places We’ve Gone",
+          "_key": "k0051"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0052",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "One of our favorite conferences of the year, ",
+          "_key": "k0053"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "SXSW Interactive",
+          "_key": "k0054"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " provided us with emerging technology insights and motivation to continue our work. We’re already looking forward to 2018!",
+          "_key": "k0055"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.sxsw.com/festivals/interactive/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0056",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We showed some client love to Vertex at this year’s ",
+          "_key": "k0057"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0006"
+          ],
+          "text": "#VertexExchange",
+          "_key": "k0058"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". The conference took place in sunny San Diego — ",
+          "_key": "k0059"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0007"
+          ],
+          "text": "check out this view",
+          "_key": "k0060"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and ",
+          "_key": "k0061"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0008"
+          ],
+          "text": "venue",
+          "_key": "k0062"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "!",
+          "_key": "k0063"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0006",
+          "_type": "link",
+          "href": "https://twitter.com/hashtag/VertexExchange?src=hash"
+        },
+        {
+          "_key": "k0007",
+          "_type": "link",
+          "href": "https://twitter.com/o3world/status/922464071311609856"
+        },
+        {
+          "_key": "k0008",
+          "_type": "link",
+          "href": "https://twitter.com/o3world/status/923194304142733312"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0064",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Two of our talented DPMs, Ashley C. and Ashley M., headed west to Las Vegas for a packed two days filled with presentations and lightning talks to discuss the craft of DPM. ",
+          "_key": "k0065"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0009"
+          ],
+          "text": "Read the full recap of “Craft of DPM”",
+          "_key": "k0066"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0067"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0009",
+          "_type": "link",
+          "href": "/perspectives/lessons-learned-three-takeaways-from-the-2017-dpm-summit/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0068",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We also went to many conferences in the local area including, ",
+          "_key": "k0069"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0010"
+          ],
+          "text": "Liberty JS",
+          "_key": "k0070"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", ",
+          "_key": "k0071"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0011"
+          ],
+          "text": "Ela Conference",
+          "_key": "k0072"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", ",
+          "_key": "k0073"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0012"
+          ],
+          "text": "Philly Tech Week",
+          "_key": "k0074"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", ",
+          "_key": "k0075"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0013"
+          ],
+          "text": "Software as Craft",
+          "_key": "k0076"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", and ",
+          "_key": "k0077"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0014"
+          ],
+          "text": "PACT Capital Conference",
+          "_key": "k0078"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0079"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0010",
+          "_type": "link",
+          "href": "https://twitter.com/o3world/status/931248194318753793"
+        },
+        {
+          "_key": "k0011",
+          "_type": "link",
+          "href": "https://twitter.com/o3world/status/924286107176656896"
+        },
+        {
+          "_key": "k0012",
+          "_type": "link",
+          "href": "/perspectives/join-us-at-innovation-day-on-may-5th/"
+        },
+        {
+          "_key": "k0013",
+          "_type": "link",
+          "href": "https://twitter.com/o3world/status/920276061325205506"
+        },
+        {
+          "_key": "k0014",
+          "_type": "link",
+          "href": "https://philadelphiapact.com/pactcapitalconference/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0080",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Talks We’ve Given",
+          "_key": "k0081"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0082",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Mike Gadsby, our CXO, spoke at ",
+          "_key": "k0083"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0015"
+          ],
+          "text": "Google SF",
+          "_key": "k0084"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " (the debate for west coast best coast is still out) with ",
+          "_key": "k0085"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0016"
+          ],
+          "text": "Seer Interactive",
+          "_key": "k0086"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " about UX and AI.",
+          "_key": "k0087"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0015",
+          "_type": "link",
+          "href": "https://twitter.com/o3world/status/918873481781051392"
+        },
+        {
+          "_key": "k0016",
+          "_type": "link",
+          "href": "http://www.seerinteractive.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0088",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Keith Scandone, our CEO, presented at Digital Agency Summit about ways to drive agency growth. ",
+          "_key": "k0089"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0017"
+          ],
+          "text": "Watch the full presentation",
+          "_key": "k0090"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0091"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0017",
+          "_type": "link",
+          "href": "/perspectives/adapt-connect-collaborate-3-keys-to-agency-growth/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0092",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Sam Roth, a DPM, presented on mnemonics at ",
+          "_key": "k0093"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0018"
+          ],
+          "text": "BarCamp",
+          "_key": "k0094"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". He shared how he powers through his to-do list.",
+          "_key": "k0095"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0018",
+          "_type": "link",
+          "href": "/perspectives/project-management-protip-mnemonics/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0096",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Justin Handler, Head of Accounts, spoke to the Digital Project Manager about how to be an invisible project manager. ",
+          "_key": "k0097"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0019"
+          ],
+          "text": "Listen to the podcast.",
+          "_key": "k0098"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0019",
+          "_type": "link",
+          "href": "http://www.thedigitalprojectmanager.com/dpm-podcast-invisible-project-manager/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0099",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Dan Singer, UX strategist, focused in on the “default and other in edge cases” at World Usability Day 2017. ",
+          "_key": "k0100"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0020"
+          ],
+          "text": "Check out the slides",
+          "_key": "k0101"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0102"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0020",
+          "_type": "link",
+          "href": "https://speakerdeck.com/dansinger/it-goes-without-saying-default-and-other-in-edge-cases-world-usability-day-philly-2017"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0103",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Things We’ve Done (as a team)",
+          "_key": "k0104"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0105",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0021"
+          ],
+          "text": "Agency Field Day",
+          "_key": "k0106"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " is always a big highlight of our year. This year five agencies in the Philadelphia-area came together for a ",
+          "_key": "k0107"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "little",
+          "_key": "k0108"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " friendly competition.",
+          "_key": "k0109"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0021",
+          "_type": "link",
+          "href": "/perspectives/recapping-2017-agency-field-day/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0110",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We’re proud to partner with Greensgrow Farms to make our community more sustainable. This year they saw a lot of us, particularly at the ",
+          "_key": "k0111"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0022"
+          ],
+          "text": "Greensgrow Fall Festival",
+          "_key": "k0112"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " where 12 members of our staff helped out.",
+          "_key": "k0113"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0022",
+          "_type": "link",
+          "href": "/perspectives/o3-world-volunteers-at-greensgrow-farms-fall-festival/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0114",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We hosted ",
+          "_key": "k0115"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0023"
+          ],
+          "text": "Innovation Day",
+          "_key": "k0116"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " as a part of Philly Tech week 2017. The event consisted of different talks that generated awareness around innovation and emerging technologies. And our favorite sponsor/coffee roaster/neighbor, La Colombe coffee.",
+          "_key": "k0117"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0023",
+          "_type": "link",
+          "href": "/perspectives/2017-philly-tech-week-innovation-day-recap/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0118",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Earlier this year, our development team volunteered at ",
+          "_key": "k0119"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0024"
+          ],
+          "text": "Code by: Kids",
+          "_key": "k0120"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and our design team hosted a ",
+          "_key": "k0121"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0025"
+          ],
+          "text": "design thinking workshop",
+          "_key": "k0122"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " with Roxborough High School. We also hosted a 24-hour hackathon with ",
+          "_key": "k0123"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0026"
+          ],
+          "text": "CodeDay Philly",
+          "_key": "k0124"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". Mentorship, y’all — it’s important.",
+          "_key": "k0125"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0024",
+          "_type": "link",
+          "href": "http://www.codedbykids.com/"
+        },
+        {
+          "_key": "k0025",
+          "_type": "link",
+          "href": "https://twitter.com/o3world/status/941788423815352321"
+        },
+        {
+          "_key": "k0026",
+          "_type": "link",
+          "href": "/perspectives/codeday-philly-at-o3-world/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0126",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What happens outside our four walls is just as important as what’s in it. That’s why we run the Travis Manion ",
+          "_key": "k0127"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0027"
+          ],
+          "text": "9/11 heroes",
+          "_key": "k0128"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " run every year.",
+          "_key": "k0129"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0027",
+          "_type": "link",
+          "href": "https://twitter.com/o3world/status/906524243885780992"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0130",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "To round out the year, Greg Aiello and Dan Laufer, two of our devs, contributed to the open-source Drupal community.",
+          "_key": "k0131"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0132",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Things We’re Doing (individually)",
+          "_key": "k0133"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0134",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A familiar face in the community, Brian Crumley continues to lead ",
+          "_key": "k0135"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0028"
+          ],
+          "text": "PhillyCHI",
+          "_key": "k0136"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " for the third year in a row and also helps co-organize BarCamp.",
+          "_key": "k0137"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0028",
+          "_type": "link",
+          "href": "https://phillychi.acm.org/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0138",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "One of our DPMs, Ashley Cecere, takes a weekly ceramics class.",
+          "_key": "k0139"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0140",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Jessica Warhus, one of our devs, is training for a half and full marathon in 2018. Catch her running over the Ben Franklin bridge, her favorite route.",
+          "_key": "k0141"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0142",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "JM, our COO, sits on the board of ",
+          "_key": "k0143"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0029"
+          ],
+          "text": "GRIT",
+          "_key": "k0144"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", an organization that empowers girls to pursue STEM subjects.",
+          "_key": "k0145"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0029",
+          "_type": "link",
+          "href": "https://www.gritphl.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0146",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Everyone knows big cities have trash problems, Tim Breslin, CTO, is building an app to incentivize people to pick up trash.",
+          "_key": "k0147"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0148",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "People We’ve Welcomed",
+          "_key": "k0149"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0150",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The design team welcomed:",
+          "_key": "k0151"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0152",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Christina Lewis, senior UI/UX designer",
+          "_key": "k0153"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 2,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0154",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Calvin Gohd, UI/UX designer",
+          "_key": "k0155"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 2,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0156",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Josh Soldiers, UX strategist",
+          "_key": "k0157"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 2,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0158",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Joshua Buckwalter, senior UI/UX designer",
+          "_key": "k0159"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 2,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0160",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The accounts team added:",
+          "_key": "k0161"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0162",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Tara Threewits, associate project manager",
+          "_key": "k0163"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 2,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0164",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Sam Roth, project manager",
+          "_key": "k0165"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 2,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0166",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Justin Mathews (JM), COO",
+          "_key": "k0167"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 2,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0168",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Aleesha Halbach, brand manager",
+          "_key": "k0169"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 2,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0170",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The development team also grew with:",
+          "_key": "k0171"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0172",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Dan Laufer, developer",
+          "_key": "k0173"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 2,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0174",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Tim Breslin, CTO",
+          "_key": "k0175"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 2,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0176",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Zuhib Daud, developer",
+          "_key": "k0177"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 2,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0178",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Jocelyn Harper, developer",
+          "_key": "k0179"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 2,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0180",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We can’t wait to see what 2018 brings and we’ll be sure to share updates with you along the way. Want to learn even more about who we are, what we do and what makes us tick? Drop us a line below. Until then, we’ll see you in the new year!",
+          "_key": "k0181"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "embed",
+      "url": "https://albumizr.com/a/L-N-",
+      "_key": "k0182"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:781"
+  }
+}

@@ -137,7 +137,7 @@ as the 402 half of a breakpoint pair; it is a `SECTION` holding two frames calle
 ### Not every page layer has both
 
 The Design Concept section holds **five** mobile frames — Home `1814:1618`, Work `1906:851`,
-Case Study `1906:928`, Insights (= Perspective detail) `1906:1046`, Live `1906:334`. **About
+Case Study `1906:928`, Insights (= Insight detail) `1906:1046`, Live `1906:334`. **About
 (`1924:5344`) and Solutions (`1925:6138`) have no 402 frame at all**, and neither does any
 collection index. That is a coverage gap, not a missing read: ADR 0006 already makes responsive a
 renderer concern, so the mobile composition on those pages is a code decision, and it should say so
@@ -145,14 +145,14 @@ at the call site.
 
 ### Two frames named "Insights"
 
-Neither is the `/perspectives` index (which has **no** canonical frame — #49):
+Neither is the `/insights` index (which has **no** canonical frame — #49):
 
-- `1710:2823` → **Perspective detail**, `/perspectives/{slug}` (#45)
+- `1710:2823` → **Insight detail**, `/insights/{slug}` (#45)
 - `1924:5344` → **About**, `/about` (#46)
 
 ## Vocabulary
 
 Figma layer names do not always match this project's ubiquitous language. `CONTEXT.md` wins:
-a Figma frame labelled "Insights" is a **Perspective**; the "Work" collection holds **Case Studies**.
+a Figma frame labelled "Insights" is a **Insight**; the "Work" collection holds **Case Studies**.
 Nav _display_ labels are a separate thing again — they live in Site Settings, and the `NavBar`
 component (`1710:2271`) is their source of record.

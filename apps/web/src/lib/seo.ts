@@ -41,7 +41,7 @@ export interface SeoOverrides {
 export interface DocumentSeo {
   /** The document's own title, without the site-name suffix. */
   readonly title?: string | null
-  /** Description fallback — a perspective's excerpt, a case study's narrative headline. */
+  /** Description fallback — an insight's excerpt, a case study's narrative headline. */
   readonly description?: string | null
   /**
    * Social-image fallback: the document's lead image. Accepts a bare image or
@@ -49,7 +49,7 @@ export interface DocumentSeo {
    * straight through).
    */
   readonly image?: SanityImageSource | { readonly image?: SanityImageSource | null } | null
-  /** Route path with a leading slash — `/perspectives/foo`, or `/` for the homepage. */
+  /** Route path with a leading slash — `/insights/foo`, or `/` for the homepage. */
   readonly path: string
   /**
    * `og:type`. Dated, authored writing is an `article` — Yoast said so on the

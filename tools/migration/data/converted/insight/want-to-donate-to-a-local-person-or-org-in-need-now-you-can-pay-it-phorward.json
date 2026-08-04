@@ -1,0 +1,165 @@
+{
+  "_id": "insight-wp-3457",
+  "_type": "insight",
+  "title": "Want to donate to a local person or org in need? Now you can ‘Pay It Phorward’",
+  "slug": {
+    "_type": "slug",
+    "current": "want-to-donate-to-a-local-person-or-org-in-need-now-you-can-pay-it-phorward"
+  },
+  "excerpt": "A peer-to-peer grant program that aims to help individuals and businesses in Philadelphia.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-11",
+      "_key": "cat-11"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-1",
+      "_key": "cat-1"
+    }
+  ],
+  "publishedAt": "2020-05-08T21:53:12Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights-3.jpg"
+    },
+    "alt": "Want to donate to a local person or org in need? Now you can ‘Pay It Phorward’"
+  },
+  "body": [
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Pay It Phorward",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 World’s CEO, ",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Keith Scandone",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", along with David M. Davis, managing director for Accenture’s Public Sector, have launched ",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Pay It Phorward",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", a peer-to-peer grant program that aims to help individuals and businesses in Philadelphia impacted by COVID-19.",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.o3world.com/about/team/keith-scandone/"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://payitphorward.org"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Keith chatted recently with ",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Technical.ly’s",
+          "_key": "k0014"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " Paige Gross about the Pay It Phorward program, as well as other ways our team is aiming to support the Philadelphia community during these uncertain times.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://technical.ly/philly/2020/05/08/o3-world-keith-scandone-donation-app-pay-it-phorward/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Read on",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://technical.ly/diversity-equity-inclusion/o3-world-keith-scandone-donation-app-pay-it-phorward/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:3457"
+  }
+}

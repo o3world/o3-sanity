@@ -126,7 +126,7 @@ export const Everything: Story = {
       {
         _type: 'figure',
         _key: k(),
-        image: seedImage('tools/migration/data/seed/assets/perspective-weekend-worktrees.png'),
+        image: seedImage('tools/migration/data/seed/assets/insight-weekend-worktrees.png'),
         alt: 'Three parallel tracks converging on a single branch.',
         caption: 'One ticket, one worktree, one session.',
       },

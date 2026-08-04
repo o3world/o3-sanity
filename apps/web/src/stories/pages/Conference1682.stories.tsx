@@ -8,7 +8,7 @@ import { PageMockup } from '../PageMockup'
  *
  * **No canonical Figma frame** — see the note on `Pages/Contact`.
  *
- * The one seeded page whose `perspectivesCarouselSection` carries a **curated**
+ * The one seeded page whose `insightsCarouselSection` carries a **curated**
  * list rather than falling back to the latest feed, so it is where the
  * curated path gets exercised end to end: three named articles, dereferenced,
  * in the editor's order rather than by date.

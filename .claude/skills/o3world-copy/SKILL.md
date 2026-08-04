@@ -114,7 +114,7 @@ These match the section blocks in the Sanity schema; live examples are in
 - **Body prose**: admits cost and tradeoffs plainly — that's what grounded
   sounds like. "It's a slower way to grow. It's the only way to do work this
   deep."
-- **Perspective title + long-form prose**: the title carries the fact — a
+- **Insight title + long-form prose**: the title carries the fact — a
   reader who sees only the title knows what actually happened or what we
   claim. "We rebuilt our site in a weekend. The AI made almost none of the
   decisions." passes; "Notes on a weekend rebuild" doesn't. In the body,

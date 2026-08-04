@@ -28,8 +28,8 @@ export const mainDocumentRoutes: DocumentResolver[] = [
     filter: `_type == "caseStudy" && slug.current == $slug`,
   },
   {
-    route: `${COLLECTION_PREFIXES.perspective}/:slug`,
-    filter: `_type == "perspective" && slug.current == $slug`,
+    route: `${COLLECTION_PREFIXES.insight}/:slug`,
+    filter: `_type == "insight" && slug.current == $slug`,
   },
   {
     // Catch-all pages store their full multi-segment path in `slug.current`

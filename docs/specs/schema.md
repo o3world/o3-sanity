@@ -13,7 +13,7 @@ Resolves wayfinder ticket #6. Inputs: the content model (ticket #5, `CONTEXT.md`
 
 ### Routable
 
-- **`perspective`** — title, `slug` (req), excerpt, `author` → person (optional — the ACF byline where WordPress had one; 239 of 272 have none, #32), `categories` → category[], publishedAt, featuredImage (figure), `body` (Portable Text — see set below), seo. Read time computed at render, not stored.
+- **`insight`** — title, `slug` (req), excerpt, `author` → person (optional — the ACF byline where WordPress had one; 239 of 272 have none, #32), `categories` → category[], publishedAt, featuredImage (figure), `body` (Portable Text — see set below), seo. Read time computed at render, not stored.
 - **`caseStudy`** — title, `slug` (req), `client` → client (req), `industries` → industry[], `industryDetail` (string — eyebrow's second half), `narrativeHeadline` (text, req — the card sentence), `stats[]` (stat; first = headline stat), `heroMedia` (figure), `chapters[]` ({kicker, title, body: Portable Text}; numbering derived from order), `deliverables[]` (string — "What we shipped"), `extraSections[]` (section blocks, optional), seo.
 - **`page`** — title, `slug` (req, multi-segment), `pageType` (`standard | service`, closed enum, initial `standard`), `card` fieldset conditional on `pageType == 'service'` ({shortTitle, excerpt, icon/image}) — projected by `listingSection`, `sections[]` (section blocks), seo. ⚠️ No `service` page exists or is planned — see `listingSection` below and [ADR 0013](../adr/0013-services-consolidate-into-solutions.md).
 
@@ -23,7 +23,7 @@ Resolves wayfinder ticket #6. Inputs: the content model (ticket #5, `CONTEXT.md`
 - **`client`** — name, logo.
 - **`category`** — title, slug.
 - **`industry`** — title, slug. (Deliberately minimal.)
-- **`siteSettings`** (singleton) — nav items (cta[]), footer content, social links, default seo, display labels (e.g. Perspectives collection shown as "Insights").
+- **`siteSettings`** (singleton) — nav items (cta[]), footer content, social links, default seo, display labels (e.g. Insights collection shown as "Insights").
 
 ## Shared objects
 
@@ -35,7 +35,7 @@ Resolves wayfinder ticket #6. Inputs: the content model (ticket #5, `CONTEXT.md`
 - **`embed`** — URL (video/oEmbed).
 - **`pullQuote`** — text, attribution (optional).
 
-## Portable Text (perspective bodies, chapter bodies)
+## Portable Text (insight bodies, chapter bodies)
 
 Standard marks + closed inline-object set: **`figure`, `embed`, `pullQuote`**. A `codeBlock` is added only if extraction reports code in the 272 WP bodies — do not pre-add.
 
@@ -43,7 +43,7 @@ Standard marks + closed inline-object set: **`figure`, `embed`, `pullQuote`**. A
 
 ### Section tier — bespoke (from the `prototype/` design)
 
-`heroSection`, `logoWallSection` (statement + client refs or manual logos; layout `grid | marquee`), `caseShowcaseSection` (caseStudy refs; projects narrativeHeadline + first stat), `railPanelsSection` (heading, intro, `layout` (`rail | cards`), `rail` (`label | number`), panels {railLabel, heading, logo, body, note, cta, media} — serves Home's "platforms" and "how we work" bands as `rail`, and the Solutions frame's engagement cards (`1925:6108`) as `cards`), `quoteSection` (inline quote + attribution — no testimonial type), `perspectivesCarouselSection` (curated refs or latest-N by category), `ctaSection`.
+`heroSection`, `logoWallSection` (statement + client refs or manual logos; layout `grid | marquee`), `caseShowcaseSection` (caseStudy refs; projects narrativeHeadline + first stat), `railPanelsSection` (heading, intro, `layout` (`rail | cards`), `rail` (`label | number`), panels {railLabel, heading, logo, body, note, cta, media} — serves Home's "platforms" and "how we work" bands as `rail`, and the Solutions frame's engagement cards (`1925:6108`) as `cards`), `quoteSection` (inline quote + attribution — no testimonial type), `insightsCarouselSection` (curated refs or latest-N by category), `ctaSection`.
 
 ### Section tier — from the canonical Figma frames (#56)
 

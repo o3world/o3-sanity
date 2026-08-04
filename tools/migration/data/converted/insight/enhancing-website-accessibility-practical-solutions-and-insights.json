@@ -1,0 +1,520 @@
+{
+  "_id": "insight-wp-9000",
+  "_type": "insight",
+  "title": "Enhancing website accessibility: Practical solutions and insights",
+  "slug": {
+    "_type": "slug",
+    "current": "enhancing-website-accessibility-practical-solutions-and-insights"
+  },
+  "excerpt": "Register today and discover simple and effective strategies to make your experience inclusive and accessible for all users.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2024-05-29T13:02:49Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/05/O3-webinar-2500-IG-Enhancing-website-accessibility_-Practical-solutions-and-insights.jpg"
+    },
+    "alt": "Enhancing website accessibility: Practical solutions and insights"
+  },
+  "body": [
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Learn key techniques for improving website accessibility",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 believes accessibility is not just a feature—it’s a fundamental right that every company should consider in their digital experience. Our leading accessibility expert, in partnership with ",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Tamman Inc",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", is hosting a practical webinar to provide solutions and tools. In this session, we will explore the importance of making websites accessible for all users and provide simple yet effective strategies to achieve it.",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://tammaninc.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Title",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Enhancing website accessibility: Practical solutions and insights",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://o3world.zoom.us/webinar/register/WN_Lkt8pXT_RGuazTG8hrTPPA#/registration"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Date",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "June 6, 2024",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Time",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "12:00 PM – 1:00 PM ET",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Purpose",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Participants will gain essential skills to recognize and tackle accessibility issues within their platforms, ensuring a more inclusive user experience. This workshop offers practical knowledge, strategies, and techniques to enhance your website’s accessibility.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Key Takeaways",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Identify common accessibility problems: Learn to spot the most frequent accessibility issues that users face.",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Implement practical solutions: Discover ways to make your website easier to navigate for everyone.",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Enhance engagement through inclusive design: Understand how inclusivity can boost engagement and reach a wider audience.",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Leverage tools and resources: Get familiar with the tools and resources that can help you improve your site’s accessibility.",
+          "_key": "k0038"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0039",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Register for the webinar",
+          "_key": "k0040"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://o3world.zoom.us/webinar/register/WN_Lkt8pXT_RGuazTG8hrTPPA#/registration"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0041",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0042",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0043",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Meet the speakers",
+          "_key": "k0044"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0045",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Brian Crumley",
+          "_key": "k0046"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " (O3)",
+          "_key": "k0047"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/briancrumley/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0048",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As O3’s leading accessibility expert, Brian Crumley has an unwavering commitment to advocacy. He fearlessly challenges engineers to elevate the code standards and ensures that every O3 solution adheres to the highest accessibility benchmarks. When he’s not staying ahead of the curve in the ever-evolving accessibility space, out getting his geek on or cheering on his Baltimore Ravens, Brian is usually eating his way around Philly, checking out the latest movies, or pretending to be a snowboarder. He holds a Certified Professional in Accessibility Core Competencies (CPACC) certification from the IAAP.",
+          "_key": "k0049"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0050",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "Kristen Witucki",
+          "_key": "k0051"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " (Tamman)",
+          "_key": "k0052"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/kristenwitucki/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0053",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Kristen Witucki is an author, a teacher of students who are blind or have low vision, and part of Tamman’s Accessibility team. She has been totally blind since birth, lives in a biracial, multi-ability family in New Jersey, and she’s always looking for ways to bring facets of people’s individual disability experiences to a wider audience.",
+          "_key": "k0054"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0055",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "Wally Zielinski",
+          "_key": "k0056"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " (Tamman)",
+          "_key": "k0057"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/wallyzielinski/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0058",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Wally Zielinski is Senior Digital Accessibility Engineer at Tamman. He is passionate about building innovative and inclusive digital experiences, while marching towards new, more accessible horizons on the web. He believes the power of community will drive us to a more progressive and equitable future for all. He holds a Certified Professional in Web Accessibility (CPWA) certification from the International Association of Accessibility Professionals (IAAP). (Use LinkedIn only for socials.)",
+          "_key": "k0059"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0060",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 and accessibility",
+          "_key": "k0061"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0062",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 is committed to ",
+          "_key": "k0063"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0006"
+          ],
+          "text": "advancing accessibility and inclusive design in all our digital products and services",
+          "_key": "k0064"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". We integrate accessibility into every stage of our development process, from initial concept and design through to deployment and maintenance. Our team of CPACC-certified accessibility experts work to identify and eliminate barriers, ensuring that our digital solutions are compliant with Web Content Accessibility Guidelines (WCAG) 2.1. Through rigorous audits, ongoing monitoring, and proactive remediation, we help our clients achieve and maintain high accessibility standards, empowering them to reach broader audiences and foster a more inclusive digital world.",
+          "_key": "k0065"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0006",
+          "_type": "link",
+          "href": "https://www.o3world.com/accessibility-solutions/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0066",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0067",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Enhancing website accessibility: Webinar on solutions and insights | June 6",
+    "description": "Improve website inclusivity with our practical webinar on accessibility solutions. Learn how to address common accessibility issues and enhance engagement through inclusive design."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:9000"
+  }
+}

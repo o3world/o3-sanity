@@ -14,7 +14,7 @@
  *   Case study cards   96px              gap 48    (1683:2661)
  *   Pull quote         192px 96px        gap 128   (1683:2137)
  *   Platforms          128px 96px 192px  gap 128   (1762:2149)
- *   Perspectives       96px 0            gap 48    (1683:2467)
+ *   Insights       96px 0            gap 48    (1683:2467)
  *   Work hero          164px 96px 64px   —         (1634:1181)
  *   Footer             96px 96px 16px    gap 128   (1680:2096)
  *
@@ -75,7 +75,7 @@
   --container-content: 64.625rem; /* 1034px */
   /* article — 822px: the prose measure. The frames reserve `content` (1034)
    * for centred statements and drop to 822 for anything meant to be READ —
-   * case-study chapters (1710:2631), the perspective body (1894:3908), the
+   * case-study chapters (1710:2631), the insight body (1894:3908), the
    * contained media figure (1899:4186) and the quote attribution. The
    * SiteNav pill is also 822px wide; that is a coincidence of the nav frame,
    * not this measure, and stays a call-site literal. Class-accessible via

@@ -1,0 +1,363 @@
+{
+  "_id": "insight-wp-4625",
+  "_type": "insight",
+  "title": "Meet the team: Josh Friedman",
+  "slug": {
+    "_type": "slug",
+    "current": "meet-the-team-josh-friedman"
+  },
+  "excerpt": "For the latest edition of our Meet the Team blog series, we asked Josh Friedman to take a break from his role as a Senior Engineer to ask about he career and the journey he took to become the amazing team member he is today.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    }
+  ],
+  "publishedAt": "2021-09-15T18:45:58Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/09/New-RGB-O3-website-imagery-5.jpg"
+    },
+    "alt": "Headshot, Josh Friedman, Senior Engineer."
+  },
+  "body": [
+    {
+      "_key": "k0000",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We continue our Meet the Team blog series this week by chatting with one of the members of O3’s talented engineering team, Josh Friedman. Josh came to O3 with a degree in computer science and a background working for multiple Philadelphia agencies. His creativity and propensity to learn new skills have made him a valuable asset to the team and we were interested to dig into his history to find out more.",
+          "_key": "k0001"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "What’s your role at O3?",
+          "_key": "k0003"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "I’m a web developer, primarily focused on front-end development.",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "For the layman who might not know about front-end development, what does that mean?",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Anything on a website that you can interact with or interface with, visual components. Basically, I interpret databases and back-end data so that the output is a front-end experience that’s legible and usable for someone who might not understand that data. I take the designs from our experience team and make them real, bring them to life, so to speak.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Let’s back up a few years, what was the first job you remember having?",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The first job I ever had was as a DJ for weddings and bar mitzvahs. I did that for about 10 years. I was always into music and had the opportunity to get into that world which was a lot of fun. It got repetitive after a while but ultimately it was a good experience because it set me up to work on a team. When you’re in those types of situations, in a party or entertainment setting, it’s very much like you’re doing your job with a group of friends so there was a sense of team building. You have to get along with the people you’re doing it with and work together to have a good time.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Do you still dabble in any type of music producing?",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Yes, I do production when I find the time for it but I haven’t DJed in a while. When I shifted gears to focus on my career I took a break from it because I liked having my weekends, but I’ve been producing some stuff for the branding work we’re doing at O3.",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "How did the transition from DJ-for-hire to front-end developer happen? How did you get to where you are today?",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "I went to college in New Haven, Connecticut for sound engineering. I was only there for 3 or 4 months because I came down with pneumonia and had to come home, it was pretty bad. During the time I spent at home I reevaluated things and made the decision that I didn’t want to pursue sound engineering as a career. I ended up going to a community college in New Jersey and got my associate’s degree in psychology. At the time I was very interested in criminal profiling in law enforcement, but then I took a programming course and found it scratched that same creative itch as when I produce music. I’d always been into computers and video games and growing up I enjoyed troubleshooting certain things on my computer so it became second nature to me. When it came time to finish my undergrad degree, I decided to go into computer science.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "It was a bit of a left turn, but that’s how I ended up where I am – a lot of diving into the unknown and seeing if it would work out. Switching from psychology to a degree in computer science was a big step. There was a lot of math, which isn’t my forte, but I made it through. The program I was in was very much designed to prepare me for working at a large software company, like Lockheed Martin, but that’s not something that appealed to me. I don’t enjoy the cubicle environment so I sought out something better and landed on web development. I had never programmed anything or used HTML. I found an internship opportunity with a large agency. I worked with them full-time for no pay, which was a massive risk, but it was the best thing I could have done because the agency community in Philadelphia is very close-knit. It resulted in a full-time (paid) position at another agency which I worked at for a year before I accepted my role at O3.",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Sounds like your networking skills were crucial in securing your role at O3, is there any advice you have for someone who might be on the same career path as you?",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "I would say embrace uncertainty. It feels uncomfortable for a while and you might be completely lost but if you stay true to yourself and trust your instincts, ultimately things will work out. Keep networking and meeting and talking to as many people as possible because a majority of people in this industry are fantastic resources who can teach you a lot if you ask the right questions. Always keep those lines of communication open within your network.",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "When you’re not working, how do you like to spend your time?",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "I’m always trying something new – throughout my whole life I’ve been doing one thing for a month and then it’s onto the next thing. It’s a constant revolving door but I like to play video games, work out at the gym and listen to music.",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "How do you usually listen to music? While you’re working out, when you’re relaxing at home?",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Now when I’m listening to music, I’m working. Throughout my career, there have always been certain albums and certain styles of music that are forever tied to a project for me. If I really need to grind out some work I’ll put on some Slipknot or something heavy like some house music and let the Spotify algorithm do its thing. When I hear that music again it reminds me of the work project it helped get me through.",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "We’ve heard about your work and your hobbies, how did the pandemic change those things?",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Initially, it was difficult. When the pandemic started, there were some big projects that I was leading the charge on and not having face-to-face communication was definitely something I had to adapt to. At the end of the day, we’re adaptive creatures, so finding that rhythm took a little time but once I found it I got comfortable working in the same apartment every day of the week and learning when to shut off and when not to. I like interacting with people and talking to them was the best part of being in the office. Once you remove that from the situation, all that’s left is work. On a positive note, it became easier to focus on difficult challenges without any distractions. You gain certain things in one area and lose them in another.",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Were there any highlights for you during the pandemic?",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0042",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We built a chrome extension for a client that was the most challenging project I’ve ever worked on in my career. I’m not sure I would’ve been able to complete it had it not been for the pandemic. The intricacies of the project required me to be completely isolated and focused because I had never worked on a browser extension before. Having to learn a new code language and overcoming that project was a major highlight for me.",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "We continue our Meet the Team blog series this week by chatting with one of the members of O3's talented engineering team, Josh Friedman."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:4625"
+  }
+}

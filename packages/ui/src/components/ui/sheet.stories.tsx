@@ -17,7 +17,7 @@ type Story = StoryObj<typeof meta>
 const LINKS = [
   { label: 'Work', href: '/work' },
   { label: 'Live', href: '/live' },
-  { label: 'Insights', href: '/perspectives' },
+  { label: 'Insights', href: '/insights' },
   { label: 'Solutions', href: '/solutions' },
   { label: 'About', href: '/about' },
 ]

@@ -21,9 +21,7 @@ export { getCard, CARD_PROJECTIONS } from './card-registry'
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const VIEW_OVERRIDES: Record<string, ComponentType<any>> = {
-  perspective: dynamic(() =>
-    import('./perspective/PerspectiveView').then((m) => m.PerspectiveView),
-  ),
+  insight: dynamic(() => import('./insight/InsightView').then((m) => m.InsightView)),
   caseStudy: dynamic(() => import('./caseStudy/CaseStudyView').then((m) => m.CaseStudyView)),
   page: dynamic(() => import('./page/PageView').then((m) => m.PageView)),
 }

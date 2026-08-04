@@ -1,0 +1,352 @@
+{
+  "_id": "insight-wp-9944",
+  "_type": "insight",
+  "title": "Impact & Innovation series hosted by Philly Ad Club",
+  "slug": {
+    "_type": "slug",
+    "current": "adobe-ai-creativity-impact-innovation-recap"
+  },
+  "excerpt": "Dive into the highlights from Philly Ad Club’s Impact & Innovation event, where Adobe unveiled insights, showcased live demos, and sparked a forward-thinking dialogue around AI and the creative process.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2025-02-27T21:05:34Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/02/O3-website-imagery_-Perspectives-74.jpg"
+    },
+    "alt": "Impact & Innovation: How Adobe is shaping the future of creativity with AI"
+  },
+  "body": [
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Last week, ",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Philly Ad Club’s Impact & Innovation Series",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " kicked off 2025 with an event that truly captured the evolving relationship between creativity and technology. Held on February 20th at the Audacy Performance Studio in downtown Philadelphia, the gathering brought together industry leaders and creative professionals to explore how artificial intelligence was beginning to redefine the creative process.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.phillyadclub.com/event-calendar/club-events/#!event/2025/2/20/impact-innovation-ai-adobe-and-design"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A conversation on creativity and AI",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The heart of the event was a fireside chat featuring Adobe’s ",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Jason Druss",
+          "_key": "k0014"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and O3’s ",
+          "_key": "k0015"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Christine Sheller",
+          "_key": "k0016"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". Their conversation dove deep into how AI was not only enhancing existing workflows but also opening up entirely new creative possibilities. Jason emphasized that “AI doesn’t replace jobs—it expands creative capacity, increases revenue, and creates more opportunities because the demand for content is insatiable.” This statement resonated throughout the discussion, underscoring the view that technology serves as a powerful ally rather than a threat.",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/jasondruss/"
+        },
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/christine-sheller/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Throughout the session, both speakers stressed the importance of using AI systematically and creatively. They discussed how Adobe’s innovative AI-powered tools in Premiere Pro and After Effects were streamlining the creative process, allowing professionals to work faster while still preserving the unique touch that only human creativity can offer. “The key to AI in creative industries is learning how to use it systematically and creatively to expand the amount of work we can accomplish,” Jason noted, a sentiment that perfectly captured the spirit of the event.",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Highlights from the live demo",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A major highlight of the day was Jason’s live demo, which showcased Adobe’s latest AI features. Attendees saw firsthand how assistive technology could enhance video editing and motion graphics. The demo illustrated how these new tools were designed not to take over the creative process, but to empower users to push their artistic boundaries. From speeding up routine tasks to offering new ways to personalize content at scale, the demonstration left many inspired about the future of digital storytelling.",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Addressing the creative community’s concerns",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Despite the excitement surrounding AI’s potential, the discussion also touched on the natural apprehension felt by many in the creative field. One memorable moment recalled a candid remark from Jason: “I think you’ll be very hard pressed to find a group of people that have more anxiety about AI than creative professionals.” However, the overall tone of the conversation quickly shifted from concern to optimism. The speakers argued that while AI is a powerful tool, it is the human touch—impeccable taste, style, and the ability to curate content—that ultimately drives meaningful innovation.",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The dialogue recalled the early days of the internet, a time when new technology seemed wild and uncharted. Much like the initial chaos that eventually gave way to clear guidelines and innovative breakthroughs, the creative community was beginning to harness AI as another set of tools to further elevate their work.",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/02/Philly-ad-club-.png"
+      },
+      "alt": "Philly Ad Club: Adobe and O3 ",
+      "_key": "k0030"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\nA look to the future",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "By the end of the event, it was clear that the future of creativity would be defined by a seamless integration of human ingenuity and advanced technology. Both speakers agreed that strategy and vision would always be led by people, with AI serving as an assistant that helps execute ideas more efficiently. The event left its audience with a renewed sense of purpose and a clear message: creativity is not at risk—it’s being amplified.",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The Impact & Innovation event served as a timely reminder that in an era defined by rapid technological advancements, the most valuable skill remains the human capacity to imagine, curate, and innovate. The conversation between Adobe and O3 set the stage for what promises to be an exciting journey ahead, where creativity continues to evolve alongside groundbreaking technological tools.",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3: Turning AI innovation into action",
+          "_key": "k0038"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0039",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 helps organizations strategically implement ",
+          "_key": "k0040"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "AI solutions",
+          "_key": "k0041"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " that ",
+          "_key": "k0042"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "enhance creativity",
+          "_key": "k0043"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", improve workflows, and drive innovation. If your team is looking to harness AI to streamline processes, scale content, or push creative boundaries, ",
+          "_key": "k0044"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "let’s chat!",
+          "_key": "k0045"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.o3world.com/solutions/ai-solutions/"
+        },
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.o3world.com/perspectives/5-ux-trends-shaping-digital-experiences-in-2025/"
+        },
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Adobe’s AI & Philly Ad Club’s Impact & Innovation recap",
+    "description": "Discover how Adobe and O3 are shaping the future of creativity with AI. Explore insights from the Impact & Innovation event, featuring live demos, fireside chats, and groundbreaking tools in Premiere Pro and After Effects."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:9944"
+  }
+}

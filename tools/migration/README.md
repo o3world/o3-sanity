@@ -43,7 +43,7 @@ Rules of the road:
 
 ## The full archive: what the long tail turned out to be (#17)
 
-All 272 perspectives convert with an **empty fail-loud report**. Getting there
+All 272 insights convert with an **empty fail-loud report**. Getting there
 meant two new mapper arms, five recorded drop decisions, and two corrections to
 how authorship was being read — the second one (#32) deleted the byline from
 239 of them, because the live site never showed one.
@@ -74,7 +74,7 @@ Five things do not migrate. None of them is silent — each is reported as a
    the provider named so an editor can re-add a CTA. This was already a silent
    loss: block-tools discards `<script>` and `<form>` without a word.
    **Still dropped after #58.** That ticket added `formSection`, but a section
-   block cannot appear inside a perspective body — a body is Portable Text with
+   block cannot appear inside an insight body — a body is Portable Text with
    a closed inline-object set (`figure`, `embed`, `pullQuote`), never section
    blocks (CONTEXT.md). Admitting a form into a body is its own schema
    conversation, and the form it would admit still has no handler and no
@@ -141,7 +141,7 @@ source cleanup, not a conversion failure.
   are unpublished, and a former employee is still the author of what they wrote.
 - **Person documents are reference-driven.** Only people something points at
   are emitted — the team CPT lists everyone who ever worked here. That "some
-  thing" includes the seed tree, not just perspectives: the About page's team
+  thing" includes the seed tree, not just insights: the About page's team
   grid names six people, one of whom (Kelly Navari, `person-wp-4`) has never
   been a byline. 12 person documents survive; `person-wp-16` (Brian Crumley)
   and `person-wp-20` (jennifero3) left with the fallback and were retired from
@@ -179,7 +179,7 @@ case study — so they are recorded once, here:
    prose, which is used as the source for its `narrativeHeadline` and flagged
    there rather than dropped.
 4. **Alt text falling back to the attachment title** (5 images across 3 posts).
-   Five carousel images have no alt in WordPress. The perspective mapper's
+   Five carousel images have no alt in WordPress. The insight mapper's
    fallback applies — the attachment title stands in — but the titles describe
    the file (`LegalDocBot (1)`), not the picture, so each carries a `proposed`
    flag. Of everything the batch translated, these five are the fields most in
@@ -344,7 +344,7 @@ done silently (a `notes` entry does **not** fail the document):
 
 **A migrated document keeps the URL path WordPress serves it at today** —
 the full path, character for character, minus WordPress's trailing slash.
-The WordPress URL space (`/perspectives/…`, `/work/…`, `/services/…`,
+The WordPress URL space (`/insights/…`, `/work/…`, `/services/…`,
 `/ventures/…`) is exactly the space ADR 0001 routes, so nothing has to move.
 
 Every mapper calls `checkPathParity(post.seo.canonicalRendered, newPath)`

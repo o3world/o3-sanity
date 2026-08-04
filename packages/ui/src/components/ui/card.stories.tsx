@@ -15,7 +15,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-/** The insight card from the perspectives carousel (white card on bone). */
+/** The insight card from the insights carousel (white card on bone). */
 export const InsightCard: Story = {
   globals: { backgrounds: { value: 'bone' } },
   render: (args) => (

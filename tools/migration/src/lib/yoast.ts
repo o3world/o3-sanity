@@ -1,6 +1,6 @@
 /**
  * The Yoast half of extraction — one PHP fragment, reused by every post type
- * (#26). Perspectives use it today; pages (#18) and case studies (#21) get
+ * (#26). Insights use it today; pages (#18) and case studies (#21) get
  * complete SEO by dropping `yoastPhp()` into their own `wp eval` snippet
  * instead of re-deciding which meta keys matter.
  *

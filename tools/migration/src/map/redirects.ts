@@ -1,7 +1,7 @@
 import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
 
 import type { WpRedirectExport } from '../lib/redirects'
-import { PATH_EXCEPTIONS } from './paths'
+import { movedPath, PATH_EXCEPTIONS, PATH_PREFIX_EXCEPTIONS } from './paths'
 
 /**
  * WordPress's redirect map → the app's redirects (#24).
@@ -108,6 +108,11 @@ export const ADR_0013_CHAIN_TERMINALS: Readonly<Record<string, string>> = {
  * not exist here; send it to Y instead."
  *
  * A row is only here because the alternative is a 301 into a 404.
+ *
+ * **Keys are WordPress's paths, values are this site's.** The three
+ * `/perspectives/*` keys are not stale: WordPress still serves that prefix and
+ * always will, while the destinations moved to `/insights` with ADR 0017. Any
+ * terminal not overridden here goes through `movedPath` for the same reason.
  */
 export const TERMINAL_OVERRIDES: Readonly<Record<string, { to: string; why: string }>> = {
   '/careers': {
@@ -131,15 +136,15 @@ export const TERMINAL_OVERRIDES: Readonly<Record<string, { to: string; why: stri
     why: 'Names a case study that is not among the 20 WordPress serves today.',
   },
   '/perspectives/evolution-of-agile': {
-    to: '/perspectives',
+    to: '/insights',
     why: 'Names a post that is no longer published, so it is not in the 272 that migrated.',
   },
   '/perspectives/keith-scandone-on-architecting-great-customer-experiences': {
-    to: '/perspectives',
+    to: '/insights',
     why: 'Names a post that is no longer published, so it is not in the 272 that migrated.',
   },
   '/perspectives/slack-amazon-better-team-collaboration': {
-    to: '/perspectives',
+    to: '/insights',
     why: 'Names a post that is no longer published, so it is not in the 272 that migrated.',
   },
   'https://www.o3xo.ai.com/insights/ai-roi-beyond-efficiency/': {
@@ -180,7 +185,7 @@ export const UNREDIRECTED_LIVE_URLS: Readonly<Record<string, { to: string; why: 
     why: 'A past O3 event. /live is where appearances and events live (ADR 0011).',
   },
   '/conversing-with-the-future-an-interactive-chatgpt-experience': {
-    to: '/perspectives',
+    to: '/insights',
     why: 'A one-off interactive AI piece with no home in the new sitemap; the writing archive is the nearest thing.',
   },
   '/acquia-o3': {
@@ -347,14 +352,31 @@ function terminalFor(
 /** Every path the new site serves, for deciding whether a terminal is real. */
 export function sitePaths(input: {
   readonly pageSlugs: readonly string[]
-  readonly perspectiveSlugs: readonly string[]
+  readonly insightSlugs: readonly string[]
   readonly caseStudySlugs: readonly string[]
 }): Set<string> {
-  const paths = new Set(['/', COLLECTION_PREFIXES.caseStudy, COLLECTION_PREFIXES.perspective])
+  const paths = new Set(['/', COLLECTION_PREFIXES.caseStudy, COLLECTION_PREFIXES.insight])
   for (const slug of input.pageSlugs) paths.add(slug === 'index' ? '/' : `/${slug}`)
-  for (const slug of input.perspectiveSlugs) paths.add(`${COLLECTION_PREFIXES.perspective}/${slug}`)
+  for (const slug of input.insightSlugs) paths.add(`${COLLECTION_PREFIXES.insight}/${slug}`)
   for (const slug of input.caseStudySlugs) paths.add(`${COLLECTION_PREFIXES.caseStudy}/${slug}`)
   return paths
+}
+
+/**
+ * Sources allowed to resolve to themselves, each with the reason it happens.
+ *
+ * A self-redirect is normally a bug that Next.js turns into an infinite loop,
+ * so `buildRedirectMap` throws on one. A collection rename is the case where
+ * it is not: WordPress has always redirected `/insights` to `/perspectives`,
+ * and once `/perspectives/*` moves to `/insights/*` (ADR 0017) that row points
+ * at its own source. It is dropped, because the destination is now a route
+ * this site serves directly — but dropped *on purpose*, with the reason in the
+ * generated report, like every other row this file discards.
+ */
+const SELF_REDIRECT_EXCEPTIONS: Readonly<Record<string, string>> = {
+  [COLLECTION_PREFIXES.insight]:
+    'WordPress redirected /insights → /perspectives; ADR 0017 moved /perspectives to ' +
+    '/insights, so the row now names its own source. The app serves this path.',
 }
 
 export function buildRedirectMap({ wp, sitePaths: paths }: BuildRedirectMapInput): RedirectMap {
@@ -392,6 +414,13 @@ export function buildRedirectMap({ wp, sitePaths: paths }: BuildRedirectMapInput
     const override = TERMINAL_OVERRIDES[target]
     if (override) target = override.to
 
+    // A terminal WordPress still names by its old path — `/perspectives/foo`
+    // — has to arrive at the path this site actually serves (ADR 0017).
+    // Without this the map would 301 visitors onto a route that only
+    // redirects again, adding a hop to 145 rows.
+    const moved = movedPath(target)
+    if (moved) target = moved
+
     // An external terminal is allowed to shadow a document this migration
     // loaded, and 32 of them do: WordPress still holds the posts (so the
     // extractor found them) while 301ing their URLs to o3xo.ai, which is where
@@ -406,6 +435,23 @@ export function buildRedirectMap({ wp, sitePaths: paths }: BuildRedirectMapInput
       continue
     }
 
+    if (target === source) {
+      const excused = SELF_REDIRECT_EXCEPTIONS[source]
+      if (!excused) {
+        // Not a row to quietly discard. Next.js would serve this as an
+        // infinite redirect, and the only way one appears is that a rule
+        // above rewrote the terminal onto its own source — a mistake in this
+        // file, not in WordPress's data. Fail the generator so it is found
+        // here rather than in production.
+        throw new Error(
+          `redirect resolves to itself: "${source}" → "${target}". ` +
+            `If this is expected — a collection rename can turn an old row into a ` +
+            `self-reference — record it in SELF_REDIRECT_EXCEPTIONS with the reason.`,
+        )
+      }
+      dropped.push({ source, target, reason: excused })
+      continue
+    }
     // An internal one may not: it would shadow the page it names for no gain.
     if (paths.has(source)) {
       dropped.push({
@@ -413,10 +459,6 @@ export function buildRedirectMap({ wp, sitePaths: paths }: BuildRedirectMapInput
         target,
         reason: 'the source is a path this site serves — a redirect here would shadow the document',
       })
-      continue
-    }
-    if (target === source) {
-      dropped.push({ source, target, reason: 'resolves to itself' })
       continue
     }
     if (!paths.has(target.split('#')[0]!)) {
@@ -431,8 +473,27 @@ export function buildRedirectMap({ wp, sitePaths: paths }: BuildRedirectMapInput
     redirects.push({ source, destination: target, via: resolved.via })
   }
 
+  /**
+   * A moved collection, as one parameterized rule per prefix rather than one
+   * row per document (ADR 0017). 272 rows would say the same thing 272 times
+   * and go stale the first time a slug changed.
+   *
+   * Appended **after** the sorted rows on purpose: Next.js takes the first
+   * match, and some of those rows are more specific than this one. Three
+   * retired articles redirect to the index rather than to their own new path,
+   * and a wildcard placed above them would send visitors to a 404 instead.
+   */
+  const prefixRules: AppRedirect[] = []
+  for (const rule of PATH_PREFIX_EXCEPTIONS) {
+    prefixRules.push({ source: rule.fromPrefix, destination: rule.toPrefix })
+    prefixRules.push({
+      source: `${rule.fromPrefix}/:slug`,
+      destination: `${rule.toPrefix}/:slug`,
+    })
+  }
+
   return {
-    redirects: redirects.sort((a, b) => a.source.localeCompare(b.source)),
+    redirects: [...redirects.sort((a, b) => a.source.localeCompare(b.source)), ...prefixRules],
     dropped: dropped.sort((a, b) => a.source.localeCompare(b.source)),
     external,
   }

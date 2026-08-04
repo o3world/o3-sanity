@@ -38,7 +38,7 @@ export function isImageAssetId(ref: string): boolean {
  * dot — and under the old extension-only test exactly one of those uploaded as
  * a `file-…` asset. `@sanity/image-url` rejects a file ref, so it did not fail
  * at load time: it failed much later as `Malformed asset _ref` while
- * prerendering the perspective that used it, taking the production build down
+ * prerendering the insight that used it, taking the production build down
  * with it and blocking the `pre-push` hook for everyone.
  *
  * Sniffing bytes also survives the media cache, which stores the response body

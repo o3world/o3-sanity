@@ -1,0 +1,219 @@
+{
+  "_id": "insight-wp-8415",
+  "_type": "insight",
+  "title": "O3's Brian Crumley joins ProFound as a founding member, paving the way for disability-inclusive leadership",
+  "slug": {
+    "_type": "slug",
+    "current": "o3s-brian-crumley-joins-profound-as-a-founding-member-paving-the-way-for-disability-inclusive-leadership"
+  },
+  "excerpt": "O3's Brian Crumley is advancing disability inclusion and accessibility within a powerful professional network of like-minded leaders.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-63",
+      "_key": "cat-63"
+    }
+  ],
+  "publishedAt": "2023-10-13T14:49:06Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/10/Profound-Brian.jpg"
+    },
+    "alt": "Brian Crumley- Profound."
+  },
+  "body": [
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Brian Crumley CPACC",
+          "_key": "k0004"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", a Staff Engineer at O3, has become a founding member of ProFound, an initiative dedicated to creating a powerful professional network of disability-inclusive leaders.",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/briancrumley/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/10/1696104662102.jpeg"
+      },
+      "alt": "Profound graphic ",
+      "_key": "k0006"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\nThe vision of ProFound",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "ProFound",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", an organization dedicated to advancing disability inclusion and accessibility in the professional realm, is bringing together like-minded professionals who champion the cause of disability inclusivity. ProFound seeks to create a network that can effect change, both within individual organizations and across industries.",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://profound.eco/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Brian Crumley’s role",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As a Staff Engineer at O3, Brian has consistently demonstrated an unrelenting commitment to advance O3’s accessibility efforts. Being part of the September cohort of Founding Members at ProFound is a testament to Brian’s dedication. He joins a select group of innovators who are making a tangible impact on the workforce and the world at large.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3’s commitment to accessibility",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 has long been at the forefront of advocating for accessibility and inclusivity. The company understands that ",
+          "_key": "k0019"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "creating accessible and inclusive customer experiences",
+          "_key": "k0020"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " is not just a moral obligation but an imperative. Brian’s involvement in this initiative not only reflects his personal dedication but also aligns with O3’s values.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.o3world.com/include/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "ProFound’s approach to creating a professional network of disability-inclusive leaders emphasizes the power of collaboration. In an interconnected world, change often happens when individuals and organizations come together to share knowledge, experiences, and resources.",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "By joining this powerful professional network of disability-inclusive leaders, O3 continues to play a pivotal role in driving positive change in the workforce and the broader community. Through collaboration, shared knowledge, and a shared passion for inclusivity, O3 and ProFound are working together to make a positive impact on the world. Together, we’re proving that disability inclusion is not just an ideal but a reality that can be achieved through collective effort.",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "O3's Brian Crumley joins ProFound as a founding member",
+    "description": "Discover how Brian Crumley of O3 is pioneering disability inclusion as a Founding Member of ProFound, a professional network committed to accessibility and change."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:8415"
+  }
+}

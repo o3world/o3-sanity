@@ -72,7 +72,7 @@ export const NoDecoration: Story = {
       _type: 'cta',
       label: 'Read more',
       variant: 'light',
-      href: '/perspectives',
+      href: '/insights',
       target: null,
     },
     decoration: 'none',

@@ -1,6 +1,6 @@
 ---
 name: o3-authoring
-description: Draft or revise o3world.com content in Sanity — perspectives (blog posts), case studies, and pages. Use whenever asked to write, draft, or edit O3 World site content from an idea or notes.
+description: Draft or revise o3world.com content in Sanity — insights (blog posts), case studies, and pages. Use whenever asked to write, draft, or edit O3 World site content from an idea or notes.
 ---
 
 # O3 authoring
@@ -51,7 +51,7 @@ Every Sanity tool call uses `resource: {projectId: "naorcr6k", dataset: "product
 2. **Outline in chat.** Get a nod before touching Sanity.
 3. **Draft.** Create the document as a draft. Slugs are lowercase-hyphenated;
    check for collisions first.
-4. **Iterate.** Share the draft's path (e.g. `/perspectives/{slug}`) for
+4. **Iterate.** Share the draft's path (e.g. `/insights/{slug}`) for
    preview, and apply reactions with `patch_documents`.
 5. **Hand off.** End with a summary: what was created (document ID and path),
    imagery needed per empty slot, facts still unverified, and anything the

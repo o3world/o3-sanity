@@ -1,0 +1,342 @@
+{
+  "_id": "insight-wp-8396",
+  "_type": "insight",
+  "title": "Accessibility roundtable recap: Addressing barriers together",
+  "slug": {
+    "_type": "slug",
+    "current": "navigating-accessibility-roundtable-discussion"
+  },
+  "excerpt": "O3 explores the challenges faced by individuals with disabilities at a recent roundtable discussion and a personal journey as compelling examples.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-63",
+      "_key": "cat-63"
+    }
+  ],
+  "publishedAt": "2023-10-03T14:16:00Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/10/O3-website-imagery_-Perspectives-27.jpg"
+    },
+    "alt": "Accessibility roundtable recap"
+  },
+  "body": [
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Introduction",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Accessibility in the digital world and beyond has become a crucial topic of discussion in recent years. It’s a fundamental aspect of ensuring that everyone, regardless of their abilities, can fully participate in all aspects of life. O3 recently hosted a quarterly internal roundtable discussion. The conversation was inspired by a ",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "thought-provoking article",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " by O3’s ",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Christine Sheller,",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " who shared her firsthand experience with accessibility struggles.",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.o3world.com/perspectives/when-accessibility-flies-under-the-radar-how-i-navigated-travel-with-a-short-term-disability/"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/christine-sheller/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The roundtable discussion",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The quarterly roundtable discussions are a chance for O3 team members to openly communicate and share their thoughts on the state of accessibility in today’s digital landscape. There was a lot of talk about how difficult it can be to make things accessible, especially on platforms and with services that value efficiency over user experience.",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A prominent example discussed during the round table was the evolution of Twitter, once celebrated for its accessibility efforts but now facing ",
+          "_key": "k0020"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "criticism for neglecting the accessibility of its features",
+          "_key": "k0021"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". Team members expressed concerns about Twitter’s apparent shift away from prioritizing accessibility and its lack of dedicated staff for accessibility-related issues.",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.washingtonpost.com/wellness/2022/11/18/disability-support-twitter-harassment/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "LinkedIn, on the other hand, was recognized for its dedication to ",
+          "_key": "k0024"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "enhancing accessibility features",
+          "_key": "k0025"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " as it introduces new tools, such as Microsoft’s Immersive Reader, offering features like text-to-speech assistance and Content Isolation to streamline content consumption, aligning with the observance of Dyslexia Awareness Month and National Disability Employment Awareness Month.",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.techradar.com/pro/linkedin-is-making-its-platform-more-accessible-with-some-useful-microsoft-tools"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Christine’s personal journey:",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The heart of the round table discussion was Christine’s personal account, which she detailed in an article titled “",
+          "_key": "k0030"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "When accessibility flies under the radar: How I navigated travel with a short-term disability",
+          "_key": "k0031"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "”. Christine underwent hip replacement surgery and faced numerous accessibility challenges during unplanned travel. Her story served as a powerful reminder of the daily obstacles people with disabilities encounter, even in seemingly routine situations.",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.o3world.com/perspectives/when-accessibility-flies-under-the-radar-how-i-navigated-travel-with-a-short-term-disability/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Her story resonated with team members and helped to highlight the opportunity we all have to deliver more inclusive experiences for all.",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Conclusion:",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Both the O3 round table discussion and Christine’s story highlight the importance of constant dialogue and advocacy for accessibility. In a world where technology and services continually evolve, it’s imperative that accessibility remains a top priority for organizations and individuals alike.",
+          "_key": "k0038"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0039",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Constant communication about accessibility issues keeps them at the forefront of our collective consciousness. By sharing personal stories and engaging in open dialogues like the one at O3, we can work together to create a more inclusive world for all. Accessibility is not just a checkbox; it’s a commitment to ensuring that everyone, regardless of their abilities, can fully participate in every aspect of life. ",
+          "_key": "k0040"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "Contact us",
+          "_key": "k0041"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " about how O3 can ",
+          "_key": "k0042"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0006"
+          ],
+          "text": "transform your brand’s accessibility experience",
+          "_key": "k0043"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0044"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        },
+        {
+          "_key": "k0006",
+          "_type": "link",
+          "href": "https://www.o3world.com/include/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Accessibility roundtable discussion inspired by real experiences",
+    "description": "Explore the significance of accessibility in the digital world and beyond through a thought-provoking roundtable discussion at O3, inspired by Christine Sheller's personal journey."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:8396"
+  }
+}

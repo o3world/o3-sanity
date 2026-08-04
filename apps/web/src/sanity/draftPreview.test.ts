@@ -95,7 +95,7 @@ describe('shouldShowPreviewSwitcher', () => {
 
 describe('safeReturnPath', () => {
   it('keeps a same-origin path, query and all', () => {
-    expect(safeReturnPath('/perspectives?page=3')).toBe('/perspectives?page=3')
+    expect(safeReturnPath('/insights?page=3')).toBe('/insights?page=3')
     expect(safeReturnPath('/')).toBe('/')
   })
 
@@ -104,7 +104,7 @@ describe('safeReturnPath', () => {
     expect(safeReturnPath('/\\evil.example')).toBe('/')
     expect(safeReturnPath('https://evil.example')).toBe('/')
     expect(safeReturnPath('javascript:alert(1)')).toBe('/')
-    expect(safeReturnPath('perspectives')).toBe('/')
+    expect(safeReturnPath('insights')).toBe('/')
   })
 
   it('refuses header smuggling and missing input', () => {

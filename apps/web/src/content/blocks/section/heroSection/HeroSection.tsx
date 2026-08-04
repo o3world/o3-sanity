@@ -48,7 +48,7 @@ export function HeroSection({
   // The interior-page hero: a shallow ink-warm strip, not the full orbital
   // band. Work (`1634:1181`), About (`1924:5344`) and Solutions (`1925:6141`)
   // all draw it, so it is `CollectionHero` — the same component the /work and
-  // /perspectives routes render, which is what stops a page-authored hero and
+  // /insights routes render, which is what stops a page-authored hero and
   // a route-owned hero drifting apart.
   if (stegaClean(variant) === 'band') {
     const centred = !subheading

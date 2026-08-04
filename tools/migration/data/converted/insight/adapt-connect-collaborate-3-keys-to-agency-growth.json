@@ -1,0 +1,311 @@
+{
+  "_id": "insight-wp-665",
+  "_type": "insight",
+  "title": "Adapt, connect, collaborate: 3 keys to growth",
+  "slug": {
+    "_type": "slug",
+    "current": "adapt-connect-collaborate-3-keys-to-agency-growth"
+  },
+  "excerpt": "Adapting your business model to meet market needs, as well as collaborating with peers and potential competitors are crucial to digital agency success.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2017-04-21T17:32:46Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/07/O3-website-imagery_-Insights-8.jpg"
+    },
+    "alt": "Adapt, connect, collaborate: 3 keys to growth"
+  },
+  "body": [
+    {
+      "_type": "embed",
+      "url": "//www.slideshare.net/slideshow/embed_code/key/24I9lzmyZ4EnXW",
+      "_key": "k0004"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our CEO and Co-Founder ",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Keith Scandone",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " presented at ",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Digital Agency Summit",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", a 5-day online summit that brings together leading experts from around the world who have successfully grown their agencies or helped other agency owners achieve it, to share their system and experience on how to scale an agency to the next level.",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "/about/team/keith-scandone/"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "http://digitalagencysummit.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Throughout today’s digital ecosphere, change is constant. Owning an agency means keeping up with that change. Keith’s presentation, “Adapt, Connect, and Collaborate – 3 Keys to Agency Growth” focuses on these three points for drive successful agency growth. Adapting your business model to meet market needs, as well as collaborating with peers and potential competitors are crucial to digital agency success.",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Adapt",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Don’t be a one trick pony. Over the years, Keith and his business partner, ",
+          "_key": "k0016"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Mike Gadsby",
+          "_key": "k0017"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " CXO, have made it a priority to adapt to changes within the technology space. While it’s important to have a specialization that makes your team the experts, the main business strategy must be focused on the pace of which the industry is growing and evolving. Technology is constantly emerging. Change is inevitable and we all need to better ourselves about adapting to technology. If you don’t try to broaden your skillset within your current specialization, you could get left behind.",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "/about/team/mike-gadsby"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Internally at O3 World, we have weekly department meetings to look at new programs, new processes, new technology and new ways of doing things constantly. We also have a Labs division where we have the opportunity to experiment with new and emerging technology. This enables us to leverage some of our innovative ideas to pitch to existing clients, and it’s also been unbelievably valuable from a PR standpoint.",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Connect",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Absolutely nothing can replace face-to-face communication",
+          "_key": "k0024"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". Most companies think they’re doing a sufficient enough job networking and connecting with peers. But the truth is, you can never do enough work on the account management side. From the very first phone call, to the first meeting, to the project kickoff, every touchpoint is extremely important.",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The majority of O3’s business is from existing relationships or referrals. This enables us to be very selective up-front with the type of clients that we want to work with as opposed to taking any clients just for the profit. O3 has been fortunate to experience significant growth over the last 5 years, and this can all be attributed to finding the right relationships upfront, and looking at long-term opportunity for growth. We are continually managing relationships, staying in front of it to show that we are innovative, and always showing that we’re our clients’ advocates. We approach each relationship with mutual respect and focus on our clients’ business goals, which has proven to be an effective relationship building model.",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Collaborate",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Collaborate with everybody, ",
+          "_key": "k0031"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong",
+            "em"
+          ],
+          "text": "even",
+          "_key": "k0032"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": " with your competition.",
+          "_key": "k0033"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " You do not specialize in EVERY service, and that’s okay. Just be honest and consultative. Be a strategic lead in the process, and make recommendations. Find strategic partners that can provide the work and produce better products, because this will make you look good in the end. This also supports point #2 and drives trust within clients. 47% of our business is referrals from another agency because we have built strong relationships and bonds with others. We have looked out for them, and they have looked out for us.",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Collaborate for the greater good",
+          "_key": "k0036"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". Every city has too many events and too many meetups which creates noise and time management challenges. We need to build better events, get better attendees and network more efficiently, letting the city, industry, and community drive our success. For Forge Conference, a digital product design conference founded by O3, we’ve worked with our competitors to get the site and materials out. We’ve put out press releases on how we’ve worked together, showing our willingness to share resources and ideas. We supported the city and the industry, which has been beneficial to our strategic relationships. We also host an annual ",
+          "_key": "k0037"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Agency Field Day",
+          "_key": "k0038"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", which is an afternoon of fun and healthy competition for Philadelphia’s digital agencies. We purposely connect with competing agencies to get out for the day to play games, have a few drinks, and get to know one another to remind each other that we’re all in this together.",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.o3world.com/perspectives/agency-field-day-returns-this-summer/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:665"
+  }
+}

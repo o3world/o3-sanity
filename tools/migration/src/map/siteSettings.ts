@@ -3,7 +3,7 @@ import { z } from 'zod'
 import type { WpChrome, WpMenuItem } from '../lib/chrome'
 import type { ConversionIssue } from '../lib/htmlToPortableText'
 import type { WpSiteSeo } from '../lib/yoast'
-import { wpPath } from './paths'
+import { movedPath, wpPath } from './paths'
 import { seoObject } from './seo'
 import { failed, ok, type ExtractMeta, type Mapped } from './types'
 
@@ -47,8 +47,12 @@ import { failed, ok, type ExtractMeta, type Mapped } from './types'
  */
 
 /**
- * Redesign renames, keyed by the path they point at. "Perspectives" becomes
- * "Insights" in the chrome (CONTEXT.md: display copy, not a type rename).
+ * Redesign renames, keyed by **the path WordPress points at**.
+ *
+ * WordPress's own menu title for the collection is "Perspectives" — the word
+ * this redesign retired (ADR 0017) — so the override is what puts "Insights"
+ * in the nav. It is keyed by the WordPress path because that is what
+ * `hrefForMenuItem` has in hand before `movedPath` rewrites it.
  *
  * `/solutions` used to be renamed to "Services" for the prototype's nav. Figma
  * reads "Solutions" (`1928:6562`) — which is WordPress's own menu title — so
@@ -71,21 +75,21 @@ interface ChromeLink {
 const FIGMA_NAV: readonly ChromeLink[] = [
   { href: '/work', label: 'Work' },
   { href: '/live', label: 'Live' },
-  { href: '/perspectives', label: 'Insights' },
+  { href: '/insights', label: 'Insights' },
   { href: '/solutions', label: 'Solutions' },
   { href: '/about', label: 'About' },
 ]
 
 /**
  * The footer's "Company" column (`1680:2103`). Differs from the nav twice over:
- * Careers is an anchor into About, and the perspectives link reads "Blog".
+ * Careers is an anchor into About, and the insights link reads "Blog".
  */
 const FIGMA_COMPANY_COLUMN: readonly ChromeLink[] = [
   { href: '/work', label: 'Work' },
   { href: '/about', label: 'About' },
   { href: '/solutions', label: 'Solutions' },
   { href: '/about#careers', label: 'Careers' },
-  { href: '/perspectives', label: 'Blog' },
+  { href: '/insights', label: 'Blog' },
 ]
 
 /**
@@ -104,7 +108,6 @@ export const siteSettingsDoc = z.object({
   _id: z.literal('siteSettings'),
   _type: z.literal('siteSettings'),
   title: z.string().min(1),
-  perspectivesLabel: z.string().min(1),
   navItems: z.array(z.object({ _type: z.literal('cta'), _key: z.string(), label: z.string() })),
   primaryCta: z.object({ _type: z.literal('cta'), label: z.string() }).loose(),
   footerTagline: z.string().min(1),
@@ -139,6 +142,10 @@ export type SiteSettingsDoc = z.infer<typeof siteSettingsDoc>
 /**
  * A menu item's destination as the new site spells it: an internal WordPress
  * URL becomes its path (parity, #26), an external one stays absolute.
+ *
+ * A path this redesign moved is rewritten to where it moved to. Without that,
+ * the nav would link `/perspectives` and rely on its own 301 — an extra hop on
+ * every visit, and a link that disagrees with the word next to it (ADR 0017).
  */
 export function hrefForMenuItem(item: WpMenuItem, siteUrl: string): string | null {
   if (!item.url) return null
@@ -155,7 +162,8 @@ export function hrefForMenuItem(item: WpMenuItem, siteUrl: string): string | nul
     host = ''
   }
   if (url.host !== host) return url.toString()
-  return wpPath(item.url)
+  const path = wpPath(item.url)
+  return path === null ? null : (movedPath(path) ?? path)
 }
 
 interface ResolvedItem {
@@ -281,7 +289,6 @@ export function mapSiteSettings(
     _id: 'siteSettings' as const,
     _type: 'siteSettings' as const,
     title: site.siteName,
-    perspectivesLabel: DISPLAY_LABELS['/perspectives'] ?? 'Insights',
     navItems: navItems.map((item, i) => cta(item, `nav-${i}`)),
     primaryCta: {
       _type: 'cta' as const,

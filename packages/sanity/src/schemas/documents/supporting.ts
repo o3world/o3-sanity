@@ -65,12 +65,10 @@ export const siteSettings = defineType({
   type: 'document',
   fields: [
     defineField({ name: 'title', type: 'string', initialValue: 'O3' }),
-    defineField({
-      name: 'perspectivesLabel',
-      type: 'string',
-      initialValue: 'Insights',
-      description: 'Display name for the Perspectives collection in nav and headings.',
-    }),
+    // No collection-label field. It existed to render the collection as
+    // "Insights" while the type was called `perspective`; now that the type is
+    // `insight`, it translated a word into itself (ADR 0017). A nav item's own
+    // `label` still overrides per link, like every other entry.
     defineField({ name: 'navItems', type: 'array', of: [defineArrayMember({ type: 'cta' })] }),
     defineField({ name: 'primaryCta', type: 'cta', description: 'The nav’s "Let’s talk" button.' }),
     defineField({ name: 'footerTagline', type: 'text', rows: 2 }),

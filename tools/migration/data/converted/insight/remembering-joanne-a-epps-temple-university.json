@@ -1,0 +1,118 @@
+{
+  "_id": "insight-wp-8329",
+  "_type": "insight",
+  "title": "Remembering JoAnne A. Epps: A beacon of light for Temple University and Philadelphia",
+  "slug": {
+    "_type": "slug",
+    "current": "remembering-joanne-a-epps-temple-university"
+  },
+  "excerpt": "Acting president of Temple University, left an enduring legacy as a visionary leader in higher education and a dedicated advocate for the Philadelphia community.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    }
+  ],
+  "publishedAt": "2023-09-21T15:47:11Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/09/O3-website-imagery_-Perspectives-3.png"
+    },
+    "alt": "Remembering JoAnne A. Epps"
+  },
+  "body": [
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "It is with heavy hearts that we reflect on the ",
+          "_key": "k0003"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "passing of JoAnne A. Epps",
+          "_key": "k0004"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", the acting president of Temple University, a distinguished higher education leader with an illustrious career. JoAnne Epps, aged 72, left an indelible mark on both the university and the Philadelphia community.",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.inquirer.com/education/joanne-epps-temple-university-president-dies-20230919.html?utm_source=newsletter&utm_medium=email&utm_campaign=news_alerts_09_19_2023&sfmc_id=0031U00001WQUXFQA5&sub_source=news-alert-newsletter&list_name=DE34_Newsletter_News_Alert&int_promo=newsletter&et_rid=228088442"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "For many of us at O3, Temple has been more than an institution; it’s been a source of inspiration and talent. Several of our current employees, including Christine Sheller, Alan Cho, and Erica Minton, proudly hail from ",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Temple’s Tyler Art School",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://tyler.temple.edu/academic-programs"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "JoAnne Epps was more than an administrator; she was a friend, a visionary, and a tireless advocate for education and community. Her memory will live on in the hearts of those she touched, and her contributions to higher education and the Philadelphia community will forever be cherished.",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Remembering JoAnne A. Epps, Temple University'",
+    "description": "Remembering Temple University's acting president and a revered education leader. Her legacy in higher education and Philadelphia endures in the hearts of many."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:8329"
+  }
+}

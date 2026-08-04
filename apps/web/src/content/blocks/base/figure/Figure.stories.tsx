@@ -24,7 +24,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const IMAGE = seedImage('tools/migration/data/seed/assets/perspective-weekend-hero.png')
+const IMAGE = seedImage('tools/migration/data/seed/assets/insight-weekend-hero.png')
 
 export const WithCaption: Story = {
   args: {

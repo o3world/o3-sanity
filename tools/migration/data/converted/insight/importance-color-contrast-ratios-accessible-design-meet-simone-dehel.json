@@ -1,0 +1,583 @@
+{
+  "_id": "insight-wp-8862",
+  "_type": "insight",
+  "title": "The basics of color contrast ratios",
+  "slug": {
+    "_type": "slug",
+    "current": "importance-color-contrast-ratios-accessible-design-meet-simone-dehel"
+  },
+  "excerpt": "Hear from Senior UX Designer and accessibility expert, Simone Dehel, to learn how color contrast ratios can make your designs accessible to everyone.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-7875"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-63",
+      "_key": "cat-63"
+    }
+  ],
+  "publishedAt": "2024-03-28T15:55:51Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/03/O3-website-imagery_-Perspectives-37.jpg"
+    },
+    "alt": "Simone Dehel"
+  },
+  "body": [
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The world is a vibrant and colorful place, but for some, it can be challenging to navigate. As designers, it is our responsibility to ensure that our work is not only visually appealing but also accessible to all users. One key aspect of creating accessible designs is the appropriate use of color contrast ratios. This article aims to illuminate the benefits of using color contrast ratios and how to effectively apply them in your designs.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Understanding color contrast ratios",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Color contrast ratios are the difference in light between the foreground color (the color of the text) and the background color. It’s a numerical value that ranges from 1:1 (no contrast) to 21:1 (maximum contrast). A high contrast ratio makes text more legible and content more distinguishable for users with visual impairments. The Web Content Accessibility Guidelines (WCAG) recommend a minimum contrast ratio of 4.5:1 for normal text and 3:1 for large text.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The role of color contrast ratios",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Color contrast ratios play a crucial role in creating accessible designs. They ensure that the content is readable by everyone, including those with color vision deficiencies or other visual impairments. High-contrast colors help distinguish text from its background, making the content easier to read and understand. Apart from text, contrast is also required in interactive elements like buttons, forms, and icons, where low contrast can make these components difficult to identify.",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "While most elements need to meet color contrast requirements, ",
+          "_key": "k0019"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "WCAG lists a few page elements that do not have a contrast requirement",
+          "_key": "k0020"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". These include incidental elements, like text or images of text that are pure decoration, and logotypes, text that is part of a logo or brand name.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Integrate accessibility into your process",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Several tools can assist designers in checking color contrast ratios. Websites like ",
+          "_key": "k0025"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "WebAIM",
+          "_key": "k0026"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and ",
+          "_key": "k0027"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Colorable",
+          "_key": "k0028"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " provide free resources to validate if your color combinations adhere to WCAG guidelines.",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://webaim.org/resources/contrastchecker/"
+        },
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://colorable.jxnblk.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/03/WebAIM.png"
+      },
+      "alt": "WebAIM",
+      "_key": "k0030"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/03/Colorable.png"
+      },
+      "alt": "",
+      "_key": "k0031"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Color accessibility with tools like WebAIM and Colorable, ensure your designs meet WCAG guidelines.",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Additionally, Stark’s Accessibility Checker (available as a ",
+          "_key": "k0035"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Chrome extension",
+          "_key": "k0036"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and/or ",
+          "_key": "k0037"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "Figma plugin",
+          "_key": "k0038"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ") conveniently checks color combinations against WCAG guidelines and provides recommendations for any color combination that does not pass contrast requirements. Stark’s Accessibility Checker also features a vision simulator that designers can use to see how their designs render for people with vision deficiencies such as color blindness + blurred vision.",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://chromewebstore.google.com/detail/stark-accessibility-check/fkfaapnmfippddbeemjjbclenphooipm"
+        },
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.figma.com/community/plugin/732603254453395948/stark-contrast-accessibility-tools"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/03/Stark_Contrast.png"
+      },
+      "alt": "Stark contrast example ",
+      "_key": "k0040"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/03/ab8eb27c-7cb5-4b27-8c72-29caa3c830bc.png"
+      },
+      "alt": "Stark contrast example ",
+      "_key": "k0041"
+    },
+    {
+      "_key": "k0042",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Seamlessly validate color combinations against WCAG guidelines",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0044",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0045",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0046",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0047",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0048",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0049",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0050",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0051",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0052",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0053",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0054",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0055",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0056",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0057",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0058",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0059",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0060",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Integrating any of these tools into your work will provide invaluable support in the design process as well as ensure your designs are visually appealing and accessible to all users.",
+          "_key": "k0061"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0062",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Good design is accessible design",
+          "_key": "k0063"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0064",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Color contrast ratios are a fundamental aspect of accessible design. It’s crucial for designers to understand the requirements of color contrast ratios and apply suitable color contrast ratios in their work. With the right tools and a keen eye for color, designers can create visually stunning designs that are accessible to everyone.",
+          "_key": "k0065"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0066",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Meet O3’s expert",
+          "_key": "k0067"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0068",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Meet ",
+          "_key": "k0069"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "Simone Dehel",
+          "_key": "k0070"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", a certified expert in CPACC (Certified Professional in Accessibility Core) at O3. Simone is a Senior UX Designer who’s passionate about bridging the gap between accessible experiences and design. Simone is one of our leading accessibility champions at O3, is the founder of our culture club, and serves as a ",
+          "_key": "k0071"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0006"
+          ],
+          "text": "design mentor at ADP List",
+          "_key": "k0072"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". Simone embodies inclusivity, making sure accessibility is not just an add-on but a core part of creating experiences.",
+          "_key": "k0073"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/simone-dehel-cpacc-0b596a10a/"
+        },
+        {
+          "_key": "k0006",
+          "_type": "link",
+          "href": "https://adplist.org/mentors/simone-dehel?utm_source=linkedin&utm_medium=social&utm_campaign=user_profileshare&utm_content=simonedehel"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0074",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our skilled designers are continuously expanding their knowledge and are here to address your inquiries on ",
+          "_key": "k0075"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0007"
+          ],
+          "text": "all things related to accessibility",
+          "_key": "k0076"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". Explore how our accessibility solution has transformed brands across industries and stay tuned for continued thought leadership.",
+          "_key": "k0077"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0007",
+          "_type": "link",
+          "href": "https://www.o3world.com/include/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "The importance of color contrast ratios in accessible design",
+    "description": "Discover the significance of color contrast ratios in creating accessible designs with Simone Dghel, UX Designer and CPACC expert."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:8862"
+  }
+}

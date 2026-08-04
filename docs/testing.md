@@ -49,15 +49,15 @@ Renders a real route through the real route builder, with fixture documents inst
 
 ```tsx
 import { buildDetailRoute } from '@/lib/content-routes/build'
-import { aPerspective, renderRoute, expectNotFound } from '@/test'
+import { anInsight, renderRoute, expectNotFound } from '@/test'
 
-import { perspective } from './entry'
+import { insight } from './entry'
 
-const route = buildDetailRoute(perspective)
+const route = buildDetailRoute(insight)
 
 it('displays the fields a reader came for', async () => {
   const { html, metadata } = await renderRoute(route, {
-    data: aPerspective({ title: 'Headless CMS vs traditional CMS' }),
+    data: anInsight({ title: 'Headless CMS vs traditional CMS' }),
     params: { slug: 'headless-cms' },
   })
 
@@ -73,13 +73,13 @@ it('404s when nothing matches', async () => {
 `renderRoute` returns `{ html, metadata, calls }`. `calls` is every `sanityFetch` the render made —
 use it to assert cache tags and the stega-off rule on metadata.
 
-**Fixtures are typed against the generated query results** (`aPerspective`, `aPage`,
-`aPerspectivesPage` in `@/test`). A query projection change breaks stale fixtures at compile time,
+**Fixtures are typed against the generated query results** (`anInsight`, `aPage`,
+`aInsightsPage` in `@/test`). A query projection change breaks stale fixtures at compile time,
 the same guardrail the block registry uses. Pass only the field your assertion is about.
 
-**`aMigratedPerspective(slug)` loads a real converted document** and shapes it into what the query
+**`aMigratedInsight(slug)` loads a real converted document** and shapes it into what the query
 returns. That is the migration → render bridge: a mapper change producing something the renderer
-can't display fails here rather than in Studio. `migratedPerspectiveSlugs()` sweeps all of them.
+can't display fails here rather than in Studio. `migratedInsightSlugs()` sweeps all of them.
 
 **The 402 half of ADR 0006 is assertable** via `@/test`'s responsive helpers (`responsive.ts`):
 `unprefixedHorizontalScrollUtilities(html)` must come back empty — a bare `overflow-x-auto`/`snap-x`

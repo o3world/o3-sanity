@@ -1,0 +1,129 @@
+{
+  "_id": "insight-wp-3879",
+  "_type": "insight",
+  "title": "Keith Scandone on the future of remote and in-office teams",
+  "slug": {
+    "_type": "slug",
+    "current": "keith-scandone-on-the-future-of-remote-and-in-office-teams"
+  },
+  "excerpt": "CEO of O3, wrote for the Bureau of Digital’s blog on how COVID-19 has impacted the work practices at the company, and how he’s always valued an in-office team.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-1",
+      "_key": "cat-1"
+    }
+  ],
+  "publishedAt": "2020-08-29T02:23:35Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-15.jpg"
+    },
+    "alt": "Co-founder Keith Scandone stretching out in the office."
+  },
+  "body": [
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Keith Scandone",
+          "_key": "k0003"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", CEO of O3, wrote for the Bureau of Digital’s blog on how COVID-19 has impacted the work practices at the company, and how he’s always valued an in-office team.",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.o3world.com/about/team/keith-scandone/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“For all of the damage and distress COVID-19 has created, it forced us into thinking differently. How we work, where we work and in many cases, what kind of work are we now doing.” – Keith Scandone, CEO",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Citing O3’s impact on the hyper-local community economy, the ease of in-person collaboration and communication, and his desire to remain connected to the personal and professional growth of his employees, Keith reiterates the value of in-person work, while giving a nod to the distinct advantages of distributed teams.",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Here’s why he believes the melding of in-office and remote will create the best environment for all",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://bureauofdigital.com/blog/2020/8/28/the-future-of-remote-and-in-office-teams-a-happy-medium"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "O3 CEO, Keith Scandone, discusses how COVID-19 has impacted the work practices at the company, and how he’s always valued an in-office team."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:3879"
+  }
+}
