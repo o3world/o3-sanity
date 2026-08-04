@@ -1,6 +1,7 @@
 export * from './defineBlockStories'
 export * from './defineCardStories'
 export * from './defineVariantStories'
+export * from './figma'
 export * from './knobs'
 export * from './title'
 export * from './types'

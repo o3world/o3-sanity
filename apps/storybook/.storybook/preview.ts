@@ -58,6 +58,12 @@ const preview: Preview = {
           'Motion',
           'Content',
           ['Blocks', ['Base', 'Section'], 'Cards', 'Documents'],
+          // Whole pages, chrome included, from the committed seed content —
+          // the level a Figma page frame is actually drawn at, and the only
+          // place band-against-band properties (surface sequence, the pinned
+          // nav's ink flip, inter-band rhythm) are visible. After the parts,
+          // because it is what the parts add up to.
+          'Pages',
           // Last, deliberately: captured artifacts are history, not the
           // system. See apps/storybook/prototypes/README.md.
           'Prototypes',

@@ -96,6 +96,57 @@ const config: StorybookConfig = {
     // tsconfig.json `paths`.
     cfg.plugins = [...(cfg.plugins ?? []), tsconfigPaths()]
 
+    // ── The same pin, for the dependency PRE-BUNDLE ────────────────────────
+    //
+    // `cfg.resolve.alias` governs the module graph. It does not govern
+    // `optimizeDeps`, which runs esbuild with its own resolver — and there the
+    // Next preset's `react` → `next/dist/compiled/react/index.js` alias wins
+    // and esbuild appends the subpath to it. A dependency whose first line is
+    // `import { c } from "react/compiler-runtime"` (the React Compiler's
+    // output; `@portabletext/react` and `@sanity/visual-editing` both ship it)
+    // therefore asks for
+    // `…/compiled/react/index.js/compiler-runtime` — a path that treats a file
+    // as a directory — and the optimizer dies before a single story renders.
+    //
+    // Same fix as above, applied one layer down: resolve every React entry to
+    // the workspace copy. Excluding each offending package from pre-bundling
+    // also works and was tried first; it is whack-a-mole, because the failing
+    // import is the compiler's standard preamble and any dependency can grow
+    // one on a minor bump.
+    //
+    // This is the wall `apps/web` has been coding around: `CtaLink` and
+    // `InquiryForm` both carry a "never the next-sanity barrel, it drags in
+    // @portabletext/react" comment with a lint rule behind it. Those stay
+    // worth keeping (the barrel drags in far more than this), but the reason
+    // is now "the barrel is heavy" rather than "Storybook cannot load portable
+    // text" — which is what lets a page mockup render a `richText` block, and
+    // a page mockup render at all.
+    cfg.optimizeDeps = cfg.optimizeDeps ?? {}
+    cfg.optimizeDeps.esbuildOptions = {
+      ...(cfg.optimizeDeps.esbuildOptions ?? {}),
+      plugins: [
+        ...(cfg.optimizeDeps.esbuildOptions?.plugins ?? []),
+        {
+          name: 'o3-pin-react-compiler-runtime',
+          setup(build) {
+            // ONLY `react/compiler-runtime`, deliberately. Pinning the whole
+            // `reactEntries` set here also builds, and then every story fails
+            // at runtime with "Cannot read properties of null (reading
+            // 'useContext')" from the addon's `virtual:next/image` — because
+            // the pre-bundle would then carry the workspace React while the
+            // addon's own virtual modules still carry next's compiled copy,
+            // which is the two-copies bug at the top of this file, inverted.
+            // `compiler-runtime` is the one entry with no counterpart in
+            // next's compiled bundle, so it is the one that has to be pinned
+            // and the only one that may be.
+            build.onResolve({ filter: /^react\/compiler-runtime$/ }, () => ({
+              path: reactEntries['react/compiler-runtime'],
+            }))
+          },
+        },
+      ],
+    }
+
     // The workspace has `'use client'` components (packages/ui client
     // primitives, later apps/web chrome). Vite strips the directive when
     // bundling for Storybook (non-Next) and emits a MODULE_LEVEL_DIRECTIVE

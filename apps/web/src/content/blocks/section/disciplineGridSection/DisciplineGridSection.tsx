@@ -44,6 +44,20 @@ export function DisciplineGridSection({
   const orbital = stegaClean(layout) === 'orbital'
   const onInk = resolveSurface(surface, 'white') === 'ink'
 
+  /**
+   * A discipline sits under the band's own heading, so it is normally an `h3`.
+   * When the band carries **no** heading there is no `h2` above it, and an
+   * `h3` straight after the page's `h1` is a skipped level.
+   *
+   * That is not hypothetical: the Solutions frame (`1925:6138`) draws this
+   * band with no heading at all, so `/solutions` shipped an invalid heading
+   * order — visible only below `lg`, because the `orbital` composition renders
+   * its labels as `<p>` and the grid fallback is what carries the headings.
+   * Found by the `Pages/Solutions` mobile mockup, which is the first thing to
+   * render the whole page and axe-scan it.
+   */
+  const disciplineTag = heading ? 'h3' : 'h2'
+
   const grid = (
     <div className="grid gap-x-8 gap-y-4 md:grid-cols-2">
       {items.map((discipline) => (
@@ -56,7 +70,7 @@ export function DisciplineGridSection({
           />
           <div className="flex flex-col justify-center gap-2">
             {discipline.heading ? (
-              <DisplayHeading as="h3" level="lg" className="tracking-[-0.0222em]">
+              <DisplayHeading as={disciplineTag} level="lg" className="tracking-[-0.0222em]">
                 {discipline.heading}
               </DisplayHeading>
             ) : null}

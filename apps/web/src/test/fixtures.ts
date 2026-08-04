@@ -11,6 +11,8 @@ import type {
   SITE_SETTINGS_QUERY_RESULT,
 } from '@o3/sanity/types/generated'
 
+import { projectSeedPage, resolveAssetMarkers, type SeedDoc } from './seedProjection'
+
 /**
  * Fixture builders for the `render` layer.
  *
@@ -156,24 +158,18 @@ export function withSettings(
  * path) instead of a URL and are resolved the same way. The ref is a sha1 of the source
  * URL, which is both deterministic and the shape `@sanity/image-url` parses
  * (`image-<40 hex>-<width>x<height>-<ext>`); anything looser is rejected.
+ *
+ * A **fabricated** id, deliberately: this layer renders to a string and never
+ * fetches, so what matters is that the id parses. The stories layer resolves
+ * the real ids out of `data/assets.json` instead, because a browser actually
+ * loads the picture — see `src/stories/seedContent.ts`.
  */
 function resolveWpSrcMarkers(node: unknown): unknown {
-  if (Array.isArray(node)) return node.map(resolveWpSrcMarkers)
-  if (node && typeof node === 'object') {
-    const obj = node as Record<string, unknown>
-    const marker = typeof obj._wpSrc === 'string' ? '_wpSrc' : '_localSrc'
-    if (typeof obj[marker] === 'string') {
-      const source = obj[marker] as string
-      const rest = Object.fromEntries(Object.entries(obj).filter(([k]) => k !== marker))
-      const id = createHash('sha1').update(source).digest('hex')
-      const ext = /\.(\w+)$/.exec(source)?.[1]?.toLowerCase() ?? 'jpg'
-      return { ...rest, asset: { _type: 'reference', _ref: `image-${id}-1200x630-${ext}` } }
-    }
-    return Object.fromEntries(
-      Object.entries(obj).map(([key, value]) => [key, resolveWpSrcMarkers(value)]),
-    )
-  }
-  return node
+  return resolveAssetMarkers(node, (source) => {
+    const id = createHash('sha1').update(source).digest('hex')
+    const ext = /\.(\w+)$/.exec(source)?.[1]?.toLowerCase() ?? 'jpg'
+    return `image-${id}-1200x630-${ext}`
+  })
 }
 
 /**
@@ -406,52 +402,16 @@ export function aSeededPage(name: string): Record<string, unknown> {
     ...translatedCaseStudies().map((doc) => [doc._id as string, doc] as const),
   ])
 
-  const deref = (ref: unknown): Record<string, unknown> | null => {
+  const resolve = (ref: unknown): SeedDoc | null => {
     const id = (ref as { _ref?: string } | null)?._ref
     return id ? (byId.get(id) ?? null) : null
   }
 
-  /** Flatten `slug` the way every card projection does. */
-  const card = (doc: Record<string, unknown> | null) => {
-    if (!doc) return null
-    const { slug, client, industries, ...rest } = doc
-    return {
-      ...rest,
-      slug: (slug as { current?: string } | undefined)?.current ?? null,
-      headlineStat: (doc.stats as unknown[] | undefined)?.[0] ?? null,
-      ...(client !== undefined ? { client: deref(client) } : {}),
-      ...(industries !== undefined
-        ? { industries: (industries as unknown[]).map(deref).filter(Boolean) }
-        : {}),
-    }
-  }
-
-  const page = readSeed('page', name)
-  const sections = ((page.sections ?? []) as Record<string, unknown>[]).map((section) => {
-    switch (section._type) {
-      case 'logoWallSection':
-        return { ...section, clients: ((section.clients ?? []) as unknown[]).map(deref) }
-      case 'caseShowcaseSection':
-        return {
-          ...section,
-          caseStudies: ((section.caseStudies ?? []) as unknown[]).map((r) => card(deref(r))),
-        }
-      case 'personGridSection':
-        return { ...section, people: ((section.people ?? []) as unknown[]).map(deref) }
-      case 'perspectivesCarouselSection':
-        // An empty curated list is the seeded state; the renderer falls back
-        // to the `latest` feed the query fetches alongside it.
-        return { ...section, curated: [], latest: [aPerspective()] }
-      default:
-        return section
-    }
+  return projectSeedPage({
+    page: readSeed('page', name),
+    resolve,
+    latestPerspectives: [aPerspective()],
   })
-
-  return {
-    ...page,
-    slug: (page.slug as { current?: string } | undefined)?.current ?? null,
-    sections,
-  }
 }
 
 /** Every converted perspective slug on disk — for `it.each` sweeps. */

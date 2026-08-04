@@ -103,10 +103,32 @@ Structural a11y (roles, labels, alt text, heading order) fails the run. `color-c
 back — the 12 current violations are all muted-foreground tokens, which is a palette decision, not a
 component defect. See the note in `.storybook/preview.ts`.
 
-> **Import `stegaClean` from `@sanity/client/stega`, never the `next-sanity` barrel.** The barrel
-> drags in `@portabletext/react`, whose `react/compiler-runtime` import cannot resolve under
-> Storybook's Next preset — which breaks every story for the block that imports it. A lint rule
-> enforces this.
+> **Import `stegaClean` from `@sanity/client/stega`, never the `next-sanity` barrel.** The barrel is
+> heavy and the lint rule enforcing this stays. The old reason — that `@portabletext/react`'s
+> `react/compiler-runtime` import could not resolve under Storybook's Next preset — is fixed:
+> `.storybook/main.ts` now pins that entry for the dependency pre-bundle as well as the module
+> graph. Portable text renders in Storybook.
+
+### `Pages` — whole pages, from the committed seeds
+
+`apps/web/src/stories/pages/` renders each seeded page through the **real block renderer**, inside
+the real nav and footer, from `tools/migration/data/` — real copy, real order, real uploaded
+imagery. Frame-backed pages carry a `parameters.design` link to their canonical Figma frame, so the
+built page and the frame sit one tab apart.
+
+This is the level a Figma page frame is actually drawn at, and it answers what no single block story
+can: the surface sequence between bands, the rhythm between them, and the pinned nav's ink flip
+against real content. It found three defects on its first run — a skipped heading level on
+`/solutions`, a `<dl>` full of `<p>`s in `statGroup`, and a keyboard-unreachable scroller on
+`/live`.
+
+Fixtures come from `src/stories/seedContent.ts`, which shares its projection with the render layer
+(`src/test/seedProjection.ts`) and differs only in loading JSON by static import rather than
+`node:fs`, and in resolving **real** asset ids out of the committed `data/assets.json` — a browser
+actually loads the picture, so a fabricated id would be a mockup of empty boxes.
+
+`seededSectionArgs(page, type)` gives a section block its "as seeded" story from the same source, so
+a block story cannot drift from the content the site ships.
 
 ## What is deliberately not here
 

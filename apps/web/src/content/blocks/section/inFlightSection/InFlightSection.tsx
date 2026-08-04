@@ -89,7 +89,35 @@ export function InFlightSection({
     <SectionShell surface={resolveSurface(surface, 'white')} top="sm" bottom="sm">
       <div className="flex flex-col gap-8 lg:gap-12">
         <Header heading={heading} subheading={subheading} />
-        <ul className="flex flex-col gap-8 lg:snap-x lg:snap-mandatory lg:flex-row lg:overflow-x-auto lg:pb-2 lg:[scrollbar-width:none] lg:[&::-webkit-scrollbar]:hidden">
+        {/*
+         * `tabIndex={0}` + a name, because from `lg` this row is a scrollable
+         * region whose contents are **not focusable** — the frame draws these
+         * cards anonymous and unlinked on purpose, so there is not a single
+         * link or button inside to tab to. A mouse can scroll it and a
+         * keyboard could not reach it at all: axe's
+         * `scrollable-region-focusable`, found the moment this band got a
+         * story.
+         *
+         * The usual fix — "there are links inside, so it is already
+         * reachable" — is unavailable here precisely because of the design
+         * decision above. Making the container itself focusable is the
+         * remaining honest answer; `aria-label` is what stops it announcing as
+         * an unnamed stop on the way past. If the cards ever become links,
+         * both attributes should come back off.
+         *
+         * `jsx-a11y/no-noninteractive-tabindex` disagrees, and it is disabled
+         * here rather than worked around: the two rules are in genuine
+         * tension, one reasoning from element semantics and the other from
+         * what a keyboard can actually reach. A region a keyboard cannot
+         * scroll is a real failure; a `<ul>` in the tab order is a lint
+         * preference. The real behaviour wins.
+         */}
+        <ul
+          // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- keyboard-scrollable region with no focusable content; see above
+          tabIndex={0}
+          aria-label={stegaClean(heading) ?? 'In flight'}
+          className="focus-visible:ring-brand flex flex-col gap-8 focus-visible:outline-none focus-visible:ring-2 lg:snap-x lg:snap-mandatory lg:flex-row lg:overflow-x-auto lg:pb-2 lg:[scrollbar-width:none] lg:[&::-webkit-scrollbar]:hidden"
+        >
           {items.map((entry) => (
             <li key={entry._key} className="lg:w-[394px] lg:shrink-0 lg:snap-start">
               <EntryCard entry={entry} />

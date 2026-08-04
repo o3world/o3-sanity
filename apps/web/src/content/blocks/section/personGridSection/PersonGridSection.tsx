@@ -49,9 +49,17 @@ export function PersonGridSection({ eyebrow, heading, people, surface }: PersonG
           {members.map((person) => (
             <li key={person._id} className="flex flex-col gap-6">
               <PortraitTile>
+                {/*
+                 * Empty alt, deliberately. The portrait carries nothing the
+                 * name below it does not already say, so alt text here makes a
+                 * screen reader announce "Mike Gadsby, image, Mike Gadsby" —
+                 * axe's `image-redundant-alt`, which the `Missing Role` story
+                 * caught. A decorative image beside its own caption takes
+                 * `alt=""` and lets the caption speak.
+                 */}
                 <SanityImage
                   source={person.headshot}
-                  alt={person.name ?? ''}
+                  alt=""
                   ratio="fill"
                   width={800}
                   sizes="(min-width: 1024px) 395px, (min-width: 640px) 50vw, 100vw"
