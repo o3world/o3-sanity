@@ -54,6 +54,12 @@ describe('published mode', () => {
     expect(html).toContain('z-50')
   })
 
+  it('sits bottom-right, where #60 asked for it', () => {
+    expect(html).toContain('bottom-4')
+    expect(html).toContain('right-4')
+    expect(html).not.toContain('left-4')
+  })
+
   it('names itself for assistive tech without claiming to be site navigation', () => {
     expect(html).toContain('aria-label="Preview mode"')
     expect(html).toContain('<aside')

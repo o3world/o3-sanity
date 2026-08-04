@@ -42,9 +42,11 @@ export function PreviewSwitcherView({
   return (
     <aside
       aria-label="Preview mode"
-      // bottom-left: the nav owns the top (z-50, fixed) and a "back to top"
-      // affordance conventionally owns bottom-right.
-      className="text-legal border-on-ink-line bg-ink/95 fixed bottom-4 left-4 z-50 flex items-center gap-1 border p-1 font-sans shadow-lg print:hidden"
+      // bottom-right, by editorial preference (#60). This sat bottom-left to
+      // leave room for a "back to top" affordance that was never built and is
+      // not planned; reserving a corner for a hypothesis cost the real chip
+      // the corner an editor looks in.
+      className="text-legal border-on-ink-line bg-ink/95 fixed bottom-4 right-4 z-50 flex items-center gap-1 border p-1 font-sans shadow-lg print:hidden"
     >
       <span className="text-on-ink-subtle px-2 uppercase tracking-[0.1em]">Preview</span>
 
