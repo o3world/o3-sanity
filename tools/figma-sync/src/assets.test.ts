@@ -1,10 +1,17 @@
 import { describe, expect, it } from 'vitest'
 
 import { ASSET_DIR } from './asset-manifest'
-import { applyAssetDecisions, assetSourceNodeIds, decideAssetAction, planAssetSync } from './assets'
+import {
+  applyAssetDecisions,
+  assetSourceNodeIds,
+  carryOpenConflicts,
+  decideAssetAction,
+  fingerprintAssetEntry,
+  planAssetSync,
+} from './assets'
 import { createFigmaClient } from './figma-api'
 
-import type { AssetEntry, AssetManifest } from './types'
+import type { AssetEntry, AssetManifest, OpenAssetConflict } from './types'
 
 /**
  * The re-export stage (#81). Two halves, and the seam between them is the
@@ -183,6 +190,8 @@ interface Written {
   readonly bytes: Uint8Array
 }
 
+const RAN_AT = '2026-08-03T12:00:00.000Z'
+
 async function run(
   manifest: AssetManifest,
   previous: Record<string, string>,
@@ -192,15 +201,21 @@ async function run(
     ['1751:2010', documentWithFill('sha-1-of-the-bytes')],
     ['1928:6505', { id: '1928:6505', name: 'image 21', type: 'FRAME' }],
   ],
+  stillOpen: readonly OpenAssetConflict[] = [],
 ) {
   const written: Written[] = []
   const { calls, fetchImpl } = recordingFetch(handler)
-  const result = await applyAssetDecisions(planAssetSync(manifest, previous, current), current, {
-    fileKey: FILE_KEY,
-    client: createFigmaClient('token', fetchImpl),
-    documents: new Map(documents),
-    writeAsset: (path, bytes) => written.push({ path, bytes }),
-  })
+  const result = await applyAssetDecisions(
+    planAssetSync(manifest, previous, current),
+    current,
+    {
+      fileKey: FILE_KEY,
+      client: createFigmaClient('token', fetchImpl),
+      documents: new Map(documents),
+      writeAsset: (path, bytes) => written.push({ path, bytes }),
+    },
+    { ranAt: RAN_AT, stillOpen },
+  )
   return { result, written, calls }
 }
 
@@ -287,13 +302,89 @@ describe('applyAssetDecisions', () => {
         nodeId: '1751:2010',
         reason: 'node-changed',
         note: 'Hand-cropped 527×544 out of the 791×544 original.',
+        state: 'firstSeen',
+        firstSeenAt: RAN_AT,
       },
     ])
     expect(result.regenerated).toEqual([])
-    // The conflict is reported by the run that saw it and the baseline moves
-    // on: the alternative is a report that repeats itself for ever and a
-    // short-circuit that never fires again.
+    // The hash still advances — the short-circuit needs the baseline to cover
+    // every asset node. What persists is the conflict *record*, not the stale
+    // hash.
     expect(result.hashes).toEqual({ '1751:2010': 'b' })
+    expect(result.openConflicts).toEqual([
+      {
+        path: `${ASSET_DIR}/live-healthcare.png`,
+        nodeId: '1751:2010',
+        conflictHash: 'b',
+        entryFingerprint: fingerprintAssetEntry(locked),
+        firstSeenAt: RAN_AT,
+        reason: 'node-changed',
+        note: 'Hand-cropped 527×544 out of the 791×544 original.',
+      },
+    ])
+  })
+
+  it('re-reports a conflict the baseline is still carrying, keeping its original date', async () => {
+    const locked = entry({ locked: true, note: 'Hand-cropped after export.' })
+    const open: OpenAssetConflict = {
+      path: locked.path,
+      nodeId: '1751:2010',
+      conflictHash: 'b',
+      entryFingerprint: fingerprintAssetEntry(locked),
+      firstSeenAt: '2026-07-30T09:00:00.000Z',
+      reason: 'node-changed',
+      note: 'Hand-cropped after export.',
+    }
+    // The node has not moved again: `decideAssetAction` says `nothing`, and
+    // without the carried record the conflict would have vanished (#81).
+    const { result, written, calls } = await run(
+      manifestOf(locked),
+      { '1751:2010': 'b' },
+      { '1751:2010': 'b' },
+      happyPath,
+      undefined,
+      [open],
+    )
+
+    expect(written).toEqual([])
+    expect(calls).toEqual([])
+    expect(result.lockedConflicts).toEqual([
+      {
+        path: locked.path,
+        nodeId: '1751:2010',
+        reason: 'node-changed',
+        note: 'Hand-cropped after export.',
+        state: 'stillOpen',
+        firstSeenAt: '2026-07-30T09:00:00.000Z',
+      },
+    ])
+    expect(result.openConflicts).toEqual([open])
+  })
+
+  it('lets a fresh conflict supersede the carried one rather than reporting the asset twice', async () => {
+    const locked = entry({ locked: true, note: 'Hand-cropped after export.' })
+    const stale: OpenAssetConflict = {
+      path: locked.path,
+      nodeId: '1751:2010',
+      conflictHash: 'b',
+      entryFingerprint: fingerprintAssetEntry(locked),
+      firstSeenAt: '2026-07-30T09:00:00.000Z',
+      reason: 'node-changed',
+      note: 'Hand-cropped after export.',
+    }
+    const { result } = await run(
+      manifestOf(locked),
+      { '1751:2010': 'b' },
+      { '1751:2010': 'c' },
+      happyPath,
+      undefined,
+      [stale],
+    )
+
+    expect(result.lockedConflicts).toHaveLength(1)
+    expect(result.lockedConflicts[0]).toMatchObject({ state: 'firstSeen', firstSeenAt: RAN_AT })
+    expect(result.openConflicts).toHaveLength(1)
+    expect(result.openConflicts[0]?.conflictHash).toBe('c')
   })
 
   it('fails an id Figma will not export — a null URL is not a file', async () => {
@@ -407,5 +498,73 @@ describe('applyAssetDecisions', () => {
     const imageCalls = calls.filter((url) => url.startsWith('https://api.figma.com/v1/images/'))
     // scale=3 twice and scale=1.5 once: two calls, not three.
     expect(imageCalls).toHaveLength(2)
+  })
+})
+
+/**
+ * A locked conflict is *visible, not silent* (#81), which means it outlives the
+ * run that found it. The baseline carries it, every later run re-reports it,
+ * and exactly one thing closes it: **the manifest entry changes** — its
+ * `nodeId`, its `locked`, or its `note`. (A source node that moves again does
+ * not close it either; it replaces it with a newer conflict.)
+ */
+describe('carryOpenConflicts', () => {
+  const locked = entry({ locked: true, note: 'Hand-cropped after export.' })
+  const open: OpenAssetConflict = {
+    path: locked.path,
+    nodeId: '1751:2010',
+    conflictHash: 'b',
+    entryFingerprint: fingerprintAssetEntry(locked),
+    firstSeenAt: '2026-07-30T09:00:00.000Z',
+    reason: 'node-changed',
+    note: 'Hand-cropped after export.',
+  }
+  const unchanged = { '1751:2010': 'b' }
+
+  it('keeps a conflict nobody has reconciled', () => {
+    const carried = carryOpenConflicts(manifestOf(locked), [open], unchanged)
+    expect(carried.stillOpen).toEqual([open])
+    expect(carried.cleared).toEqual([])
+  })
+
+  it('clears it when the lock is lifted — the next run re-exports instead', () => {
+    const carried = carryOpenConflicts(
+      manifestOf(entry({ locked: false, note: undefined })),
+      [open],
+      unchanged,
+    )
+    expect(carried.stillOpen).toEqual([])
+    expect(carried.cleared).toEqual([open])
+  })
+
+  it('clears it when the entry is remapped to another source node', () => {
+    const remapped = entry({
+      locked: true,
+      note: 'Hand-cropped after export.',
+      nodeId: '1751:9999',
+    })
+    expect(carryOpenConflicts(manifestOf(remapped), [open], unchanged).stillOpen).toEqual([])
+  })
+
+  it('clears it when the note is rewritten — that is how a hand-fix is acknowledged', () => {
+    const acknowledged = entry({
+      locked: true,
+      note: 'Re-cropped 527×544 out of the 2026-08 original.',
+    })
+    expect(carryOpenConflicts(manifestOf(acknowledged), [open], unchanged).stillOpen).toEqual([])
+  })
+
+  it('clears it when the asset leaves the manifest entirely', () => {
+    expect(carryOpenConflicts(manifestOf(), [open], unchanged).stillOpen).toEqual([])
+  })
+
+  it('clears it when the source node moved again — a newer conflict supersedes it', () => {
+    expect(carryOpenConflicts(manifestOf(locked), [open], { '1751:2010': 'c' }).stillOpen).toEqual(
+      [],
+    )
+  })
+
+  it('clears it when the source node is gone — that is a failure, not a stale conflict', () => {
+    expect(carryOpenConflicts(manifestOf(locked), [open], {}).stillOpen).toEqual([])
   })
 })

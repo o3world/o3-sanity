@@ -32,13 +32,28 @@
  *
  * ## What a locked conflict does to the baseline
  *
- * It **records the new hash anyway**. The conflict belongs to the run that saw
- * the source move — and a sync is a commit, so that report is in git. Holding
- * the hash back would repeat the same conflict in every future report and,
- * because the short-circuit needs the baseline to cover every asset node, would
- * also mean this package never takes its cheap path again. A failure is the
- * opposite case: its hash is *not* recorded, so the next run retries.
+ * It **records the new hash anyway** — the short-circuit needs the baseline to
+ * cover every asset node, and holding the hash back would mean this package
+ * never took its cheap path again. But the hash advancing must not make the
+ * conflict disappear: an unreconciled conflict is *visible, not silent* (#81),
+ * so the baseline also carries an `OpenAssetConflict` record and every later
+ * run re-reports it as `stillOpen`.
+ *
+ * **One thing closes a conflict: the manifest entry changes.** `nodeId`
+ * remapped, `locked` lifted, the entry deleted, or the `note` rewritten — that
+ * last one is how a human says "I reconciled this by hand", and
+ * `asset-manifest.test.ts` already requires every locked entry to carry a note.
+ * `fingerprintAssetEntry` is the digest of exactly those fields. A source node
+ * that moves *again* does not close a conflict either: it supersedes it with a
+ * newer one, dated to the run that saw the newer move.
+ *
+ * A failure is the opposite case throughout: its hash is *not* recorded, so the
+ * next run retries.
  */
+
+import { createHash } from 'node:crypto'
+
+import { lockedAssets, resolvedAssets } from './asset-manifest'
 
 import type { FigmaClient } from './figma-api'
 import type {
@@ -47,6 +62,7 @@ import type {
   AssetFailure,
   AssetManifest,
   LockedAssetConflict,
+  OpenAssetConflict,
   RegeneratedAsset,
 } from './types'
 
@@ -64,10 +80,57 @@ export interface AssetDecision {
 
 /** The nodes a run has to hash on the assets' behalf — resolved entries, deduped. */
 export function assetSourceNodeIds(manifest: AssetManifest): string[] {
-  const ids = manifest.assets
-    .filter((entry) => !entry.unresolved && entry.nodeId)
-    .map((entry) => entry.nodeId as string)
+  const ids = resolvedAssets(manifest)
+    .map((entry) => entry.nodeId)
+    .filter((nodeId): nodeId is string => nodeId !== undefined)
   return [...new Set(ids)]
+}
+
+/**
+ * The digest an open conflict compares itself against — the entry's
+ * **reconcilable** fields and nothing else. Change any of them and the conflict
+ * clears; a `figmaName` correction or a `scale` fix is not a reconciliation and
+ * deliberately does not count.
+ */
+export function fingerprintAssetEntry(entry: AssetEntry): string {
+  return createHash('sha256')
+    .update(JSON.stringify([entry.nodeId ?? null, entry.locked, entry.note ?? null]))
+    .digest('hex')
+}
+
+/** Open conflicts split by whether this run still has to report them. */
+export interface CarriedConflicts {
+  readonly stillOpen: OpenAssetConflict[]
+  readonly cleared: OpenAssetConflict[]
+}
+
+/**
+ * The baseline's open conflicts against what the manifest and the file say now.
+ * Pure — the reconciliation mechanic in one place, and the whole of it.
+ */
+export function carryOpenConflicts(
+  manifest: AssetManifest,
+  previous: readonly OpenAssetConflict[],
+  currentHashes: Readonly<Record<string, string>>,
+): CarriedConflicts {
+  const locked = new Map(lockedAssets(manifest).map((entry) => [entry.path, entry]))
+  const stillOpen: OpenAssetConflict[] = []
+  const cleared: OpenAssetConflict[] = []
+
+  for (const conflict of previous) {
+    const entry = locked.get(conflict.path)
+    const open =
+      entry !== undefined &&
+      entry.nodeId === conflict.nodeId &&
+      fingerprintAssetEntry(entry) === conflict.entryFingerprint &&
+      // Gone from the file → a `fail`, not a stale conflict. Moved again → a
+      // fresh conflict this run, which supersedes this one.
+      currentHashes[conflict.nodeId] === conflict.conflictHash
+    if (open) stillOpen.push(conflict)
+    else cleared.push(conflict)
+  }
+
+  return { stillOpen, cleared }
 }
 
 export function decideAssetAction(
@@ -159,6 +222,16 @@ export interface AssetSyncOutcome {
   readonly failures: AssetFailure[]
   /** nodeId → hash the baseline should carry forward. A failure's is missing. */
   readonly hashes: Record<string, string>
+  /** What the **next** baseline should carry: this run's conflicts plus the unreconciled ones. */
+  readonly openConflicts: OpenAssetConflict[]
+}
+
+/** The run's own facts — what the executor needs but cannot look up. */
+export interface AssetSyncContext {
+  /** The run's timestamp; a conflict opened now is dated with it. */
+  readonly ranAt: string
+  /** Conflicts the baseline is still carrying, already reconciled (`carryOpenConflicts`). */
+  readonly stillOpen?: readonly OpenAssetConflict[]
 }
 
 /** A download URL for one export, or the reason there is not one. */
@@ -251,12 +324,14 @@ export async function applyAssetDecisions(
   decisions: readonly AssetDecision[],
   currentHashes: Readonly<Record<string, string>>,
   ports: AssetSyncPorts,
+  context: AssetSyncContext,
 ): Promise<AssetSyncOutcome> {
   const outcome: AssetSyncOutcome = {
     regenerated: [],
     lockedConflicts: [],
     failures: [],
     hashes: {},
+    openConflicts: [],
   }
   const settle = (entry: AssetEntry) => {
     const hash = entry.nodeId ? currentHashes[entry.nodeId] : undefined
@@ -283,11 +358,26 @@ export async function applyAssetDecisions(
     }
 
     if (action === 'conflict') {
+      const nodeId = entry.nodeId as string
+      const note = entry.note ?? 'locked, with no note — the manifest should not have allowed that'
       outcome.lockedConflicts.push({
         path: entry.path,
-        nodeId: entry.nodeId as string,
+        nodeId,
         reason: reason as AssetChangeReason,
-        note: entry.note ?? 'locked, with no note — the manifest should not have allowed that',
+        note,
+        state: 'firstSeen',
+        firstSeenAt: context.ranAt,
+      })
+      // The hash advances (see the header), so this record is the only thing
+      // that will still know about the conflict on the next run.
+      outcome.openConflicts.push({
+        path: entry.path,
+        nodeId,
+        conflictHash: currentHashes[nodeId] as string,
+        entryFingerprint: fingerprintAssetEntry(entry),
+        firstSeenAt: context.ranAt,
+        reason: reason as AssetChangeReason,
+        note,
       })
       settle(entry)
       continue
@@ -320,6 +410,22 @@ export async function applyAssetDecisions(
       reason: reason as AssetChangeReason,
     })
     settle(entry)
+  }
+
+  // Everything still unreconciled, reported again. A path this run opened a
+  // fresh conflict on is already spoken for: the new one supersedes the old.
+  const opened = new Set(outcome.openConflicts.map((conflict) => conflict.path))
+  for (const conflict of context.stillOpen ?? []) {
+    if (opened.has(conflict.path)) continue
+    outcome.openConflicts.push(conflict)
+    outcome.lockedConflicts.push({
+      path: conflict.path,
+      nodeId: conflict.nodeId,
+      reason: conflict.reason,
+      note: conflict.note,
+      state: 'stillOpen',
+      firstSeenAt: conflict.firstSeenAt,
+    })
   }
 
   return outcome

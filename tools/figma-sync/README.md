@@ -15,7 +15,8 @@ imply: **re-exports the committed seed assets whose source node moved**.
 1. GET /v1/files/RvraLJaZ0zWm8UaD5AJf43?depth=1     ← one call, file metadata only
 2. version + lastModified match the baseline, and the baseline covers every
    tracked node *and* every asset source node?
-                   →  "no changes since <syncedAt>", exit 0. One API call total.
+                   →  "no changes since <syncedAt>", exit 0. One API call total,
+                      and **nothing on disk is touched** — see below.
 3. otherwise       →  GET /v1/files/:key/nodes?ids=… in small batches,
                       normalize each subtree, sha256 it, diff against the baseline
 4. …and one GET /v1/files/:key/nodes?ids=<section>&depth=1 — the new-frame probe
@@ -32,6 +33,22 @@ this account (`docs/agents/figma.md`).
 
 **A sync is a commit.** `data/baseline.json` is what makes the next run's short-circuit possible, so
 commit it along with the report; git carries the history, the files only ever describe the last run.
+
+**A short-circuited run writes nothing at all** — not the report, not the baseline, not a fresh
+`ranAt`. There is nothing to commit because nothing was learned, and rewriting the report with a new
+timestamp would clobber the last real run's findings and make every consecutive-run `git diff`
+non-empty for no reason. So `data/report.{json,md}` always describes **the last run that had
+something to say**, and running `pnpm figma:sync` twice in a row leaves `git status` clean.
+
+The one thing that has to survive that silence is an unreconciled locked-asset conflict, and it does:
+the baseline carries open conflicts (below), and a short-circuited run prints them:
+
+```
+no changes since 2026-08-04T03:36:18.480Z
+1 unreconciled locked-asset conflict — nothing was written, and nothing has closed them:
+  conflict tools/migration/data/seed/assets/live-fintech.png  ← 1751:2003 (open since …)
+nothing written — tools/figma-sync/data/ still describes the last real run
+```
 
 **The judgment layer lives in [`.claude/skills/figma-sync`](../../.claude/skills/figma-sync/SKILL.md)**
 (#82) — invoked as `/figma-sync`. This package decides nothing: it hashes, diffs, re-exports the
@@ -196,34 +213,73 @@ never arose. If a future manifest addition ever _does_ regenerate with meaningle
 answer is the same one this package gives everywhere else: the git diff is the review surface, and
 whoever reads it decides.
 
-### Locked assets, and why the baseline moves anyway
+### Locked conflicts — the hash moves on, the conflict does not
 
 A locked conflict says _the design moved underneath a file somebody hand-edited_, and it carries the
 manifest's own note so the reader knows what to reconcile against. The file is not touched and no
 export call is made for it.
 
-The baseline **does** record the new hash. A sync is a commit, so the conflict is preserved in the
-report of the run that found it; holding the hash back would instead repeat the same conflict in
-every future report and — because the short-circuit needs the baseline to cover every asset node —
-would mean this package never took its cheap path again. A failure is the opposite: no hash, retry
-next run.
+The baseline **does** record the new hash: the short-circuit needs the baseline to cover every asset
+node, and holding the hash back would mean this package never took its cheap path again. But the
+advancing hash must not be what closes the conflict — #81 asks for conflicts that are **visible, not
+silent**, and a conflict reported once and then forgotten is exactly the silent kind. So the baseline
+carries the conflict as well, in `openAssetConflicts`, and **every** later run re-reports it:
 
-The first live run reported all three locked assets (`about-portrait-gadsby.png`,
-`live-fintech.png`, `live-saas.png`) as `new-to-baseline` conflicts, and wrote none of them.
+```jsonc
+// baseline.openAssetConflicts — the durable half of a lockedConflicts entry
+{
+  "path": "tools/…/live-fintech.png",
+  "nodeId": "1751:2003",
+  "conflictHash": "…", // the source-node hash that opened it
+  "entryFingerprint": "…", // sha256 of the entry's nodeId + locked + note
+  "firstSeenAt": "2026-08-04T03:36:18.480Z",
+  "reason": "node-changed",
+  "note": "Exact and hand-cropped: …",
+}
+```
+
+A report entry says which it is: `state: "firstSeen"` this run, or `"stillOpen"` since
+`firstSeenAt`. A failure is the opposite of both: no hash, no record, retry next run.
+
+#### How a conflict closes — one mechanic
+
+**The manifest entry changes.** `entryFingerprint` is the sha256 of exactly the three fields a
+reconciliation touches, and the conflict clears the moment any of them differs:
+
+| Edit `asset-manifest.json` to…   | Means                                                       |
+| -------------------------------- | ----------------------------------------------------------- |
+| point `nodeId` at another node   | the source moved and you have found where it went           |
+| set `locked: false`              | a re-export is correct now — the next run does it           |
+| rewrite the `note`               | **you reconciled it by hand**; the note says what it is now |
+| delete the entry (and the asset) | there is nothing left to conflict                           |
+
+The rewritten `note` is the door for the common case — the hand-crop redone against the new original
+— and it costs nothing extra, because `asset-manifest.test.ts` already requires every locked entry to
+carry a note. Nothing else clears a conflict: not a re-run, not a `figmaName` correction, and not
+time. The one non-edit exit is the design moving **again**, which does not close the conflict so much
+as replace it: the old record is dropped and a new one opens, dated to the run that saw the new move.
+
+The first live run of #81 reported all three locked assets (`about-portrait-gadsby.png`,
+`live-fintech.png`, `live-saas.png`) as `new-to-baseline` conflicts and wrote none of them —
+**under the old semantics**, which settled them on the spot. Those three were consumed before this
+mechanic existed and no record was fabricated for them retroactively; the baseline they left behind
+carries their hashes and no open conflicts. If any of the three sources moves again it opens a
+conflict that persists properly. Everything from here forward gets the durable treatment.
 
 ## Report schema — version 1, fixed
 
-`data/report.json`, overwritten every run. **Later tickets fill sections; they do not reshape them.**
-Every section is present as an empty array from the first run, so a consumer can read
-`report.assets.failures` today and get `[]` rather than `undefined`. A change to what any key means
-bumps `schemaVersion`.
+`data/report.json`, overwritten by every run **that fetched anything** — a short-circuited run writes
+no report at all, so `ranAt` on disk is the last run that had something to say, not the last run.
+**Later tickets fill sections; they do not reshape them.** Every section is present as an empty array
+from the first run, so a consumer can read `report.assets.failures` today and get `[]` rather than
+`undefined`. A change to what any key means bumps `schemaVersion`.
 
 ```jsonc
 {
   "schemaVersion": 1,
   "ranAt": "2026-08-03T20:14:07.921Z", // ISO timestamp of the run
   "fileVersion": "2467893184", // Figma's file version at the time
-  "shortCircuited": true, // true = stopped after the version check
+  "shortCircuited": false, // always false on disk — see above
   "changedFrames": [], // tracked pageFrames whose hash moved
   "changedComponentSets": [], // same, for kind: "componentSet"
   "untrackedFrames": [], // frames in the section but not the manifest — triage them
@@ -260,6 +316,13 @@ frames say _where it shows_. `component-sets.test.ts` fixes that with overlappin
 one the baseline has and the manifest no longer tracks — reported even when nothing describes it any
 more, in which case `name` falls back to the node id and `route`/`variant` are `null`.
 
+**A removed node is still filed under the right heading.** Removal is the one case where the manifest
+cannot answer "what was this?", so the baseline remembers: `baseline.kinds` is `nodeId` → `pageFrame`
+| `componentSet`, written for every node a run hashes. A deleted component set lands in
+`changedComponentSets` (with `codeComponent: null`, since nothing describes it any more) rather than
+reading as a page that vanished. A removed node the manifest still describes takes its kind from the
+manifest as usual.
+
 The three `assets` arrays (#81 filled them; #78 fixed the keys). `reason` is `node-changed` or
 `new-to-baseline` in both of the first two, and it is the difference between "the design moved" and
 "nothing had ever hashed this node":
@@ -271,8 +334,11 @@ The three `assets` arrays (#81 filled them; #78 fixed the keys). `reason` is `no
 
 // assets.lockedConflicts — the file was NOT touched. `note` is the manifest's
 // own words for why it is locked: what to reconcile the change against.
+// `state` says whether this run found it or is asking again; a stillOpen
+// conflict keeps the `firstSeenAt` of the run that opened it.
 { "path": "tools/…/live-fintech.png", "nodeId": "1751:2003",
-  "reason": "node-changed", "note": "Exact and hand-cropped: …" }
+  "reason": "node-changed", "note": "Exact and hand-cropped: …",
+  "state": "stillOpen", "firstSeenAt": "2026-08-04T03:36:18.480Z" }
 
 // assets.failures — nothing written, no baseline hash recorded, retried next run
 { "path": "tools/…/about-culture-team.png", "nodeId": "1927:6432",
@@ -282,7 +348,9 @@ The three `assets` arrays (#81 filled them; #78 fixed the keys). `reason` is `no
 `data/baseline.json` gained `assetHashes` — `nodeId` → sha256, the same digest as `hashes` but for
 the nodes assets came from. It is a separate map because those nodes are not tracked nodes: they are
 never diffed into `changedFrames`, and the short-circuit counts the two lists by different rules
-(exact coverage for tracked ids, presence-only for asset ids — see `diff.ts`).
+(exact coverage for tracked ids, presence-only for asset ids — see `diff.ts`). It also carries
+`kinds` (what each hashed node was, for removals) and `openAssetConflicts` (the conflicts nothing has
+reconciled yet). Neither participates in the short-circuit check.
 
 `untrackedFrames` entries:
 

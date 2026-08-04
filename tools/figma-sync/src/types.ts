@@ -97,12 +97,52 @@ export interface Baseline {
   /** nodeId → sha256 of its normalized subtree. */
   readonly hashes: Readonly<Record<string, string>>
   /**
+   * nodeId → what kind of thing it was when it was last hashed.
+   *
+   * Only removal needs this, and only removal can need it: a node that is
+   * *gone* is a node the manifest may no longer describe, and without a memory
+   * of its kind a deleted component set files itself under `changedFrames` and
+   * reads as a page that vanished. Absent on a baseline written before this.
+   */
+  readonly kinds?: Readonly<Record<string, TrackedKind>>
+  /**
    * The same hash, for the nodes committed **assets** were exported from
    * (#81) — a separate map because these are not tracked nodes: they are
    * never diffed into `changedFrames`, and the short-circuit counts the two
    * lists separately. Absent on a baseline written before #81.
    */
   readonly assetHashes?: Readonly<Record<string, string>>
+  /**
+   * Locked-asset conflicts nobody has reconciled yet (#81). The hash of a
+   * conflicted node still advances — the short-circuit needs the baseline to
+   * cover every asset node — so *this* is what makes a conflict outlive the
+   * run that found it. See `carryOpenConflicts` for the one thing that
+   * closes one.
+   */
+  readonly openAssetConflicts?: readonly OpenAssetConflict[]
+}
+
+/**
+ * A locked-asset conflict as the **baseline** carries it between runs (#81) —
+ * the durable half of `LockedAssetConflict`, which is what a report says.
+ *
+ * It clears when the manifest entry it names changes: a different `nodeId`,
+ * `locked` lifted, the entry deleted, or the `note` rewritten (which is how a
+ * human says "I reconciled this"). A source node that moves *again* does not
+ * clear it either — it supersedes it with a newer conflict.
+ */
+export interface OpenAssetConflict {
+  readonly path: string
+  readonly nodeId: string
+  /** The source-node hash that opened it. A later run seeing another supersedes it. */
+  readonly conflictHash: string
+  /** Digest of the entry's reconcilable fields — see `fingerprintAssetEntry`. */
+  readonly entryFingerprint: string
+  /** `ranAt` of the run that first reported it. Carried, never refreshed. */
+  readonly firstSeenAt: string
+  readonly reason: AssetChangeReason
+  /** The manifest's own words for the lock, as of the run that opened this. */
+  readonly note: string
 }
 
 export type ChangeKind = 'added' | 'modified' | 'removed'
@@ -148,6 +188,14 @@ export interface LockedAssetConflict {
   readonly reason: AssetChangeReason
   /** The manifest's own words for why the lock exists — what to reconcile against. */
   readonly note: string
+  /**
+   * `firstSeen` this run, or `stillOpen` from an earlier one. A conflict is
+   * reported **every** run until it is reconciled, so this is the difference
+   * between news and a standing debt.
+   */
+  readonly state: 'firstSeen' | 'stillOpen'
+  /** `ranAt` of the run that first reported it — equal to `ranAt` when `firstSeen`. */
+  readonly firstSeenAt: string
 }
 
 /** An asset the run tried to reproduce and could not. Never a silent skip (#81). */

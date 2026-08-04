@@ -78,7 +78,7 @@ export function writeBaseline(baseline: Baseline): void {
 }
 
 export function writeReport(report: Report, markdown: string): void {
+  // `writeJson` has already made `data/` — both files live in it.
   writeJson(REPORT_JSON, report)
-  mkdirSync(DATA, { recursive: true })
   writeFileSync(REPORT_MD, markdown)
 }

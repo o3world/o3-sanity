@@ -17,8 +17,18 @@
  * `data/baseline.json` plus `data/report.{json,md}` describe the run that
  * produced them, any asset it rewrote is right there in the same diff, and git
  * carries the history.
+ *
+ * A run that stops at step 2 writes **nothing at all** — not even a fresh
+ * `ranAt`. The files on disk go on describing the last run that had something
+ * to say, so two syncs in a row leave `git status` empty, and the console is
+ * where a short-circuited run reports the conflicts the baseline still carries.
  */
-import { applyAssetDecisions, assetSourceNodeIds, planAssetSync } from './assets'
+import {
+  applyAssetDecisions,
+  assetSourceNodeIds,
+  carryOpenConflicts,
+  planAssetSync,
+} from './assets'
 import { diffHashes, isBaselineFresh } from './diff'
 import { readFigmaToken } from './env'
 import { createFigmaClient } from './figma-api'
@@ -32,15 +42,14 @@ import {
   writeSeedAsset,
 } from './paths'
 import { findUntrackedFrames } from './probe'
-import { buildReport, renderReportMarkdown } from './report'
+import {
+  buildReport,
+  formatChangedEntry,
+  renderReportMarkdown,
+  shortCircuitSummary,
+} from './report'
 
-import type { Baseline, ChangedEntry } from './types'
-
-const line = (entry: ChangedEntry) =>
-  `  ${entry.change.padEnd(8)} ${entry.name}${entry.variant ? ` (${entry.variant})` : ''}` +
-  `${entry.route ? ` → ${entry.route}` : ''}` +
-  `${entry.codeComponent === undefined ? '' : ` → ${entry.codeComponent ?? 'no code target'}`}` +
-  `  ${entry.nodeId}`
+import type { Baseline, TrackedKind } from './types'
 
 async function main() {
   const manifest = readManifest()
@@ -63,15 +72,9 @@ async function main() {
   const trackedIds = manifest.entries.map((entry) => entry.nodeId)
   const assetIds = assetSourceNodeIds(assetManifest)
 
-  if (isBaselineFresh(baseline, meta, trackedIds, assetIds)) {
-    console.log(`no changes since ${baseline?.syncedAt}`)
-    const report = buildReport({
-      ranAt,
-      fileVersion: meta.version,
-      shortCircuited: true,
-      manifest,
-    })
-    writeReport(report, renderReportMarkdown(report))
+  // `isBaselineFresh` is false without a baseline, so there is one here.
+  if (baseline && isBaselineFresh(baseline, meta, trackedIds, assetIds)) {
+    for (const summary of shortCircuitSummary(baseline)) console.log(summary)
     return
   }
 
@@ -94,6 +97,9 @@ async function main() {
   const untrackedFrames = children ? findUntrackedFrames(children, manifest) : []
 
   const hashes: Record<string, string> = {}
+  // What each node *was*, so a removal the manifest no longer describes still
+  // knows whether it was a page or a component set.
+  const kinds: Record<string, TrackedKind> = {}
   for (const entry of manifest.entries) {
     const document = documents.get(entry.nodeId)
     if (document === undefined) {
@@ -105,6 +111,7 @@ async function main() {
       continue
     }
     hashes[entry.nodeId] = hashSubtree(document)
+    kinds[entry.nodeId] = entry.kind
   }
 
   // The asset stage (#81): the same hash, a different question — not "which
@@ -115,6 +122,10 @@ async function main() {
     const document = documents.get(nodeId)
     if (document !== undefined) assetHashes[nodeId] = hashSubtree(document)
   }
+  // Conflicts the baseline is carrying, minus the ones something has closed:
+  // an unreconciled locked conflict is reported by *every* run, not just the
+  // one that found it (#81).
+  const carried = carryOpenConflicts(assetManifest, baseline?.openAssetConflicts ?? [], assetHashes)
   const assets = await applyAssetDecisions(
     planAssetSync(assetManifest, baseline?.assetHashes ?? {}, assetHashes),
     assetHashes,
@@ -124,6 +135,7 @@ async function main() {
       documents,
       writeAsset: writeSeedAsset,
     },
+    { ranAt, stillOpen: carried.stillOpen },
   )
 
   const diff = diffHashes(baseline?.hashes ?? {}, hashes)
@@ -133,6 +145,7 @@ async function main() {
     shortCircuited: false,
     manifest,
     diff,
+    previousKinds: baseline?.kinds,
     untrackedFrames,
     assets,
     errors,
@@ -145,9 +158,13 @@ async function main() {
     lastModified: meta.lastModified,
     syncedAt: ranAt,
     hashes,
+    kinds,
     // Only what this run settled: an asset whose export failed keeps no hash,
     // so the next run tries again instead of calling it done.
     assetHashes: assets.hashes,
+    // The conflicts that outlive this run. The hashes above moved on; these
+    // are what keep the conflict visible until the manifest entry changes.
+    openAssetConflicts: assets.openConflicts,
   }
   writeBaseline(next)
 
@@ -156,7 +173,7 @@ async function main() {
     console.log(`file moved, but no tracked node changed (${trackedIds.length} checked)`)
   } else {
     console.log(`${changed.length} of ${trackedIds.length} tracked nodes changed:`)
-    for (const entry of changed) console.log(line(entry))
+    for (const entry of changed) console.log(formatChangedEntry(entry, 'plain'))
   }
   if (untrackedFrames.length > 0) {
     console.log(
@@ -178,11 +195,21 @@ async function main() {
   if (assets.lockedConflicts.length > 0) {
     console.log(
       `\n${assets.lockedConflicts.length} locked asset(s) whose source moved — nothing was written.` +
-        ' Reconcile by hand:',
+        ' Reconcile by hand (edit the manifest entry to close one):',
     )
     for (const conflict of assets.lockedConflicts) {
-      console.log(`  conflict ${conflict.path}  ← ${conflict.nodeId} (${conflict.reason})`)
+      const age =
+        conflict.state === 'stillOpen'
+          ? `still open since ${conflict.firstSeenAt}`
+          : conflict.reason
+      console.log(`  conflict ${conflict.path}  ← ${conflict.nodeId} (${age})`)
     }
+  }
+  if (carried.cleared.length > 0) {
+    console.log(
+      `\n${carried.cleared.length} locked-asset conflict(s) closed since the last run` +
+        ' — the manifest entry changed, or a newer conflict replaced it.',
+    )
   }
   for (const failure of assets.failures) {
     console.error(`  failed   ${failure.path}  ← ${failure.nodeId ?? '?'}: ${failure.error}`)

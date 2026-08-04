@@ -20,13 +20,14 @@ Read it when a key surprises you; do not re-derive it here.
 
 Facts you will need repeatedly:
 
-|                        |                                                                               |
-| ---------------------- | ----------------------------------------------------------------------------- |
-| File key               | `RvraLJaZ0zWm8UaD5AJf43` — _O3DX: Visual exploration_                         |
-| Design Concept section | `1632:1510` — the only canonical section                                      |
-| Frame/set manifest     | `tools/figma-sync/data/tracked-nodes.json`                                    |
-| Asset provenance       | `tools/figma-sync/data/asset-manifest.json`                                   |
-| Report                 | `tools/figma-sync/data/report.json` (`report.md` is the same run for a human) |
+|                        |                                                                                |
+| ---------------------- | ------------------------------------------------------------------------------ |
+| File key               | `RvraLJaZ0zWm8UaD5AJf43` — _O3DX: Visual exploration_                          |
+| Design Concept section | `1632:1510` — the only canonical section                                       |
+| Frame/set manifest     | `tools/figma-sync/data/tracked-nodes.json`                                     |
+| Asset provenance       | `tools/figma-sync/data/asset-manifest.json`                                    |
+| Report                 | `tools/figma-sync/data/report.json` (`report.md` is the same run for a human)  |
+| ↳ what it describes    | the last run that **fetched** something — a short-circuited run writes nothing |
 
 ---
 
@@ -44,20 +45,21 @@ what turn a node id into a route or a code path.
 
 **Stop conditions — check these before anything else.**
 
-- `shortCircuited: true` → the file's version never moved. Nothing to do.
+- the command printed **"no changes since `<syncedAt>`"** → the file's version never moved.
+  It short-circuited, and a short-circuited run **writes nothing**: the report files on disk
+  still describe the last _real_ run, so do not read them as this run's findings.
 - every section empty (`changedFrames`, `changedComponentSets`, `untrackedFrames`,
   all three `assets` arrays, `errors`) → the file moved somewhere the repo does not
   watch. Also nothing to do.
 
-In either case: say **"nothing changed since `<baseline.syncedAt>`"**, file no tickets,
-and commit nothing. The run still rewrote `report.json`/`report.md` with a fresh `ranAt`;
-that churn is not history, so throw it away:
+In either case: say **"nothing changed since `<syncedAt>`"**, file no tickets, and commit
+nothing. There is nothing to clean up — `git status` in `tools/figma-sync/data/` is already
+clean, and if it is not, the run was not a short-circuit. Then stop; do not continue to
+step 2 looking for something to say.
 
-```sh
-git restore tools/figma-sync/data/report.json tools/figma-sync/data/report.md
-```
-
-Then stop. Do not continue to step 2 looking for something to say.
+A short-circuited run still prints any **unreconciled locked-asset conflicts** the baseline
+is carrying (`N unreconciled locked-asset conflict…`). That is not "nothing changed" —
+handle it per the `lockedConflicts` rule below before you stop.
 
 **`errors` is not a design finding.** A non-empty `errors[]` means a tracked id the file
 no longer has, or a manifest that describes another file — the machinery is wrong, not the
@@ -174,11 +176,34 @@ conflicted asset, **quoting the manifest's `note` verbatim** — that note is wh
 against (a hand-crop, a higher-resolution original, a source that moved). Combine into one
 ticket when several share a cause (the two hand-cropped `live-*.png` crops are one story).
 
-**Check `reason` first.** `node-changed` is a real conflict — the design moved. But
+**Check `state` first — it decides whether you file anything at all.** A conflict persists in
+the baseline until it is reconciled, so it is re-reported by every run:
+
+- `state: "firstSeen"` → new this run. Triage it, then file.
+- `state: "stillOpen"` → it was reported before, on `firstSeenAt`, and **a ticket for it
+  almost certainly already exists**. Look before filing a duplicate:
+
+  ```sh
+  gh issue list --state all --search "<asset filename> in:title,body" --limit 20
+  ```
+
+  Found one that is still open → say so ("`live-fintech.png` still unreconciled, #93 open
+  since …") and file nothing. Found one that was **closed** without the conflict clearing →
+  that is worth saying out loud: the fix did not close the conflict, which usually means the
+  manifest entry was never updated. Found nothing → file it now and note that it has been
+  open since `firstSeenAt`.
+
+**Then check `reason`.** `node-changed` is a real conflict — the design moved. But
 `new-to-baseline` means nothing had ever hashed that node: a first run, or a manifest
 addition. That is the baseline being seeded, not a design change. Confirm against
 `git show HEAD:tools/figma-sync/data/baseline.json` — if the previous baseline had no hash
 for that node, note it in the commit message and file nothing.
+
+**A conflict only closes when the manifest entry changes** — `nodeId` remapped, `locked`
+lifted, the entry deleted, or the `note` rewritten to describe the reconciliation. Fixing the
+asset file without touching `asset-manifest.json` leaves the conflict open for ever, so
+whoever does the work has to land the manifest edit in the same commit. Say that in the
+ticket. (Full mechanic: `tools/figma-sync/README.md`, "How a conflict closes".)
 
 ### `assets.failures` → investigate, then ticket if it persists
 
@@ -202,7 +227,7 @@ downscaled — _that_ is a ticket, and the fix is often a `locked` entry in
 | `changedComponentSets`   | one ticket at `codeComponent`; `null` target → note, no ticket                         |
 | `untrackedFrames`        | question to the user; never a ticket, never a manifest edit                            |
 | `assets.regenerated`     | no ticket — read the git diff                                                          |
-| `assets.lockedConflicts` | reconcile ticket per asset (or per shared cause), quoting the note                     |
+| `assets.lockedConflicts` | `firstSeen` → reconcile ticket, quoting the note; `stillOpen` → find the existing one  |
 | `assets.failures`        | re-run once; persistent → one ticket                                                   |
 | `errors`                 | fix the machinery first, before any design triage                                      |
 
@@ -282,7 +307,8 @@ stop and ask the user; do not create it.
 ## 5. Commit, then report
 
 A sync is a commit — `data/baseline.json` is what makes the next run's short-circuit
-possible, and any asset the run rewrote belongs in the same diff.
+possible, and any asset the run rewrote belongs in the same diff. (A short-circuited run has
+nothing to commit: it wrote nothing. Confirm with `git status tools/figma-sync/data`.)
 
 ```sh
 git add tools/figma-sync/data tools/migration/data/seed/assets

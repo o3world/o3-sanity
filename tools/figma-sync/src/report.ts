@@ -1,12 +1,15 @@
 import type { HashDiff } from './diff'
 import type {
   AssetFailure,
+  Baseline,
   ChangeKind,
   ChangedEntry,
   LockedAssetConflict,
   RegeneratedAsset,
   Report,
+  TrackedKind,
   TrackedManifest,
+  TrackedNode,
   UntrackedFrame,
 } from './types'
 
@@ -40,46 +43,64 @@ export interface ReportInput {
   readonly untrackedFrames?: readonly UntrackedFrame[]
   /** What the asset stage did, already decided and carried out (`assets.ts`). */
   readonly assets?: ReportAssets
+  /**
+   * What the baseline remembers each node **was** (`baseline.kinds`). Only
+   * `removed` needs it, and only `removed` can: a node the manifest no longer
+   * describes has no other way to say it was a component set rather than a
+   * page, and defaulting to `pageFrame` files a deleted set under
+   * `changedFrames`.
+   */
+  readonly previousKinds?: Readonly<Record<string, TrackedKind>>
   readonly errors?: readonly string[]
 }
 
-function entryFor(manifest: TrackedManifest, nodeId: string, change: ChangeKind): ChangedEntry {
-  const tracked = manifest.entries.find((node) => node.nodeId === nodeId)
+/** A `changedComponentSets` entry is a `changedFrames` entry plus this one key (#79). */
+const isComponentSet = (entry: ChangedEntry): boolean => entry.codeComponent !== undefined
+
+function entryFor(
+  tracked: TrackedNode | undefined,
+  kind: TrackedKind,
+  nodeId: string,
+  change: ChangeKind,
+): ChangedEntry {
   // A removed node can be one the manifest no longer describes — it is still
   // worth reporting, so it falls back to naming itself.
-  if (!tracked) return { nodeId, name: nodeId, route: null, variant: null, change }
   const base = {
     nodeId,
-    name: tracked.name,
-    route: tracked.route ?? null,
-    variant: tracked.variant ?? null,
+    name: tracked?.name ?? nodeId,
+    route: tracked?.route ?? null,
+    variant: tracked?.variant ?? null,
   }
   // A set that maps to nothing says `null` out loud: "we checked" reads
   // differently from "nobody has looked".
-  return tracked.kind === 'componentSet'
-    ? { ...base, codeComponent: tracked.codeComponent ?? null, change }
+  return kind === 'componentSet'
+    ? { ...base, codeComponent: tracked?.codeComponent ?? null, change }
     : { ...base, change }
 }
 
 export function buildReport(input: ReportInput): Report {
   const { manifest, diff } = input
+  const byId = new Map(manifest.entries.map((node) => [node.nodeId, node]))
+  const previousKinds = input.previousKinds ?? {}
+  const entryOf = (nodeId: string, change: ChangeKind) => {
+    const tracked = byId.get(nodeId)
+    return entryFor(tracked, tracked?.kind ?? previousKinds[nodeId] ?? 'pageFrame', nodeId, change)
+  }
   const changes: ChangedEntry[] = diff
     ? [
-        ...diff.added.map((id) => entryFor(manifest, id, 'added')),
-        ...diff.modified.map((id) => entryFor(manifest, id, 'modified')),
-        ...diff.removed.map((id) => entryFor(manifest, id, 'removed')),
+        ...diff.added.map((id) => entryOf(id, 'added')),
+        ...diff.modified.map((id) => entryOf(id, 'modified')),
+        ...diff.removed.map((id) => entryOf(id, 'removed')),
       ]
     : []
-  const kindOf = (nodeId: string) =>
-    manifest.entries.find((node) => node.nodeId === nodeId)?.kind ?? 'pageFrame'
 
   return {
     schemaVersion: 1,
     ranAt: input.ranAt,
     fileVersion: input.fileVersion,
     shortCircuited: input.shortCircuited,
-    changedFrames: changes.filter((entry) => kindOf(entry.nodeId) === 'pageFrame'),
-    changedComponentSets: changes.filter((entry) => kindOf(entry.nodeId) === 'componentSet'),
+    changedFrames: changes.filter((entry) => !isComponentSet(entry)),
+    changedComponentSets: changes.filter(isComponentSet),
     untrackedFrames: [...(input.untrackedFrames ?? [])],
     assets: {
       regenerated: [...(input.assets?.regenerated ?? [])],
@@ -90,17 +111,28 @@ export function buildReport(input: ReportInput): Report {
   }
 }
 
-const describe = (entry: ChangedEntry): string => {
-  const where = entry.route ? ` → \`${entry.route}\`` : ''
+/** Markdown for the report, plain text for the console — the same four fragments. */
+export type EntryStyle = 'markdown' | 'plain'
+
+/**
+ * One `ChangedEntry` line. Both callers used to compose these fragments
+ * themselves, in two places, which is exactly how a report and the summary
+ * that describes it drift apart.
+ */
+export function formatChangedEntry(entry: ChangedEntry, style: EntryStyle): string {
+  const tick = style === 'markdown' ? '`' : ''
   const variant = entry.variant ? ` (${entry.variant})` : ''
+  const where = entry.route ? ` → ${tick}${entry.route}${tick}` : ''
   // Only component sets carry the key at all; `null` on one is a decision.
   const code =
     entry.codeComponent === undefined
       ? ''
       : entry.codeComponent
-        ? ` → \`${entry.codeComponent}\``
+        ? ` → ${tick}${entry.codeComponent}${tick}`
         : ' → no code target'
-  return `- **${entry.name}**${variant}${where}${code} — ${entry.change} \`${entry.nodeId}\``
+  return style === 'markdown'
+    ? `- **${entry.name}**${variant}${where}${code} — ${entry.change} \`${entry.nodeId}\``
+    : `  ${entry.change.padEnd(8)} ${entry.name}${variant}${where}${code}  ${entry.nodeId}`
 }
 
 const describeRegenerated = (asset: RegeneratedAsset): string =>
@@ -111,7 +143,12 @@ const describeConflict = (conflict: LockedAssetConflict): string => {
     conflict.reason === 'node-changed'
       ? 'changed'
       : 'is new to the baseline (nothing had hashed it before)'
-  return `- \`${conflict.path}\` — \`${conflict.nodeId}\` ${moved}. Locked: ${conflict.note}`
+  // A conflict nobody has acted on has to read as a debt, not as news.
+  const age =
+    conflict.state === 'stillOpen'
+      ? ` **still open** since ${conflict.firstSeenAt}.`
+      : ` First seen ${conflict.firstSeenAt}.`
+  return `- \`${conflict.path}\` — \`${conflict.nodeId}\` ${moved}.${age} Locked: ${conflict.note}`
 }
 
 const describeFailure = (failure: AssetFailure): string =>
@@ -136,10 +173,20 @@ export function renderReportMarkdown(report: Report): string {
     lines.push('No changes to any tracked node.', '')
   } else {
     if (report.changedFrames.length > 0) {
-      lines.push('## Changed frames', '', ...report.changedFrames.map(describe), '')
+      lines.push(
+        '## Changed frames',
+        '',
+        ...report.changedFrames.map((entry) => formatChangedEntry(entry, 'markdown')),
+        '',
+      )
     }
     if (report.changedComponentSets.length > 0) {
-      lines.push('## Changed component sets', '', ...report.changedComponentSets.map(describe), '')
+      lines.push(
+        '## Changed component sets',
+        '',
+        ...report.changedComponentSets.map((entry) => formatChangedEntry(entry, 'markdown')),
+        '',
+      )
     }
   }
 
@@ -173,6 +220,7 @@ export function renderReportMarkdown(report: Report): string {
         '### Locked conflicts',
         '',
         'Source changed, asset locked — **reconcile by hand**. Nothing was written.',
+        'A conflict is re-reported every run until the manifest entry changes.',
         '',
         ...lockedConflicts.map(describeConflict),
         '',
@@ -195,4 +243,28 @@ export function renderReportMarkdown(report: Report): string {
   }
 
   return lines.join('\n')
+}
+
+/**
+ * The whole output of a short-circuited run. It writes **nothing** — no report,
+ * no baseline — so `data/report.{json,md}` keeps describing the last real run
+ * and two consecutive syncs leave an empty `git status`. That makes the console
+ * the only place an unreconciled locked conflict can surface, so it does.
+ */
+export function shortCircuitSummary(baseline: Baseline): string[] {
+  const lines = [`no changes since ${baseline.syncedAt}`]
+  const open = baseline.openAssetConflicts ?? []
+  if (open.length > 0) {
+    lines.push(
+      `${open.length} unreconciled locked-asset conflict${open.length === 1 ? '' : 's'} —` +
+        ' nothing was written, and nothing has closed them:',
+    )
+    for (const conflict of open) {
+      lines.push(
+        `  conflict ${conflict.path}  ← ${conflict.nodeId} (open since ${conflict.firstSeenAt})`,
+      )
+    }
+  }
+  lines.push('nothing written — tools/figma-sync/data/ still describes the last real run')
+  return lines
 }
