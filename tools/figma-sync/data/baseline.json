@@ -1,8 +1,8 @@
 {
   "fileKey": "RvraLJaZ0zWm8UaD5AJf43",
-  "version": "2383642339965845360",
-  "lastModified": "2026-08-04T01:00:39Z",
-  "syncedAt": "2026-08-04T03:36:18.480Z",
+  "version": "2383704929469388694",
+  "lastModified": "2026-08-04T01:00:40Z",
+  "syncedAt": "2026-08-04T04:05:42.440Z",
   "hashes": {
     "1680:2134": "391699fed55b306a2acd4f7fb80924f4a1c2a812908ea1b6ba48e2d5ed3bfcf0",
     "1814:1618": "13dba510774902ce7f519c37ab16427c74e00dc5c63b29be9218e59dcf03412d",
@@ -41,6 +41,44 @@
     "1275:1631": "e7df2cb62bce85cbf581b87bfd1375bca928dcdfe1ad32d9d24cd88fec4b0473",
     "270:814": "ee679ec916fcb3ca39260cac990da8b8c572b60bd68daa9d4179dcd3a5f9baf9"
   },
+  "kinds": {
+    "1680:2134": "pageFrame",
+    "1814:1618": "pageFrame",
+    "1634:1167": "pageFrame",
+    "1906:851": "pageFrame",
+    "1710:2300": "pageFrame",
+    "1906:928": "pageFrame",
+    "1710:2823": "pageFrame",
+    "1906:1046": "pageFrame",
+    "1924:5344": "pageFrame",
+    "1925:6138": "pageFrame",
+    "1644:1889": "pageFrame",
+    "1906:334": "pageFrame",
+    "136:754": "componentSet",
+    "264:260": "componentSet",
+    "264:50": "componentSet",
+    "778:1862": "componentSet",
+    "1203:1227": "componentSet",
+    "136:14": "componentSet",
+    "1710:2271": "componentSet",
+    "1280:1885": "componentSet",
+    "264:573": "componentSet",
+    "466:570": "componentSet",
+    "1393:3025": "componentSet",
+    "172:140": "componentSet",
+    "778:1447": "componentSet",
+    "356:639": "componentSet",
+    "242:310": "componentSet",
+    "270:819": "componentSet",
+    "270:748": "componentSet",
+    "172:54": "componentSet",
+    "734:1073": "componentSet",
+    "400:2219": "componentSet",
+    "134:343": "componentSet",
+    "1261:4877": "componentSet",
+    "1275:1631": "componentSet",
+    "270:814": "componentSet"
+  },
   "assetHashes": {
     "1928:6501": "893f118fa20b264be088498074fad55859114005b40c4d9aa9f33a00576b00a9",
     "1928:6505": "440f428639bf4fb82f4346985602eb8188b537aee6bdaf24c493fcaeb4da0238",
@@ -50,5 +88,6 @@
     "1751:2003": "38707cf5ffbd007a0c2455ebca245e67390b111a607c752530449be36ddc8b2c",
     "1751:2010": "b232a03da2bf33391833937e08791ce82f385c5d7540f37d90ed1bc11fcbe29e",
     "1899:4421": "a1fae57041b78b83346955e099790ecea5204cffdaa8a524ddcd11cc373bbfc7"
-  }
+  },
+  "openAssetConflicts": []
 }
