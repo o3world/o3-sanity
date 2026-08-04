@@ -6,6 +6,12 @@ The component half of map #33's committed mapping. Frames are
 
 Read [`docs/agents/figma.md`](./agents/figma.md) before opening the file.
 
+Every node id below is also carried, verified, in
+[`tools/figma-sync/data/tracked-nodes.json`](../tools/figma-sync/data/tracked-nodes.json) — the
+machine-readable half of this document (#79). `pnpm figma:sync` hashes each set and tells you which
+one changed and what code it routes to. **Edit both halves together**: a row added here without a
+manifest entry is a set nothing is watching.
+
 ## The rule
 
 **One Figma variant axis → one `cva` variants key** (ADR 0008). Figma's value

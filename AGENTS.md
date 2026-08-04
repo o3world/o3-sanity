@@ -56,9 +56,16 @@ frame, and the two-generations distinction that tells canonical frames from impo
 
 Frame → route map: [`docs/figma-frames.md`](https://github.com/o3world/o3-sanity/blob/research/figma-frame-inventory/docs/figma-frames.md)
 (on branch `research/figma-frame-inventory`). Never build a page layer without checking it first.
+Its canonical page frames are also on `main` as a machine-readable manifest —
+[`tools/figma-sync/data/tracked-nodes.json`](./tools/figma-sync/data/tracked-nodes.json), every node
+id verified as a frame. `pnpm figma:sync` tells you which of them changed since the last sync (one
+API call when nothing has); see [`tools/figma-sync/README.md`](./tools/figma-sync/README.md).
+**Commit the baseline it writes** — it is what makes the next run cheap.
 
 Component → code map: [`docs/figma-components.md`](./docs/figma-components.md) — every component set,
-its variant axes, and what it maps to (or deliberately doesn't). One Figma variant axis → one `cva`
+its variant axes, and what it maps to (or deliberately doesn't). Its node ids are in the manifest
+too, so `figma:sync` names the set that changed and the code it routes to; the same run asks about
+any frame in the Design Concept section nobody has triaged yet. One Figma variant axis → one `cva`
 variants key; `State=Hover` is never a variant. Icons are inline SVG, not a font (ADR 0009).
 
 ### Captured prototypes

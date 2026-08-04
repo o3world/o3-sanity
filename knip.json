@@ -27,6 +27,9 @@
     },
     "tools/guidance": {
       "entry": ["src/{sync,check}.ts", "sanity.cli.ts"]
+    },
+    "tools/figma-sync": {
+      "entry": ["src/sync.ts", "src/**/*.test.ts"]
     }
   }
 }

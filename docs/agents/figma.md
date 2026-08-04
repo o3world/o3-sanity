@@ -7,6 +7,36 @@ amended by #33). This page is how you read the file without wasting a session on
 - **File**: `RvraLJaZ0zWm8UaD5AJf43` — "O3DX: Visual exploration"
 - **Frame → route map**: [`docs/figma-frames.md`](https://github.com/o3world/o3-sanity/blob/research/figma-frame-inventory/docs/figma-frames.md) — on branch `research/figma-frame-inventory`, per the repo's research convention. Read it before touching a page layer.
 - **Component → code map**: [`docs/figma-components.md`](../figma-components.md) — every component set, its variant axes, and what it maps to (or deliberately doesn't)
+- **Tracked-frame manifest**: [`tools/figma-sync/data/tracked-nodes.json`](../../tools/figma-sync/data/tracked-nodes.json) — the canonical page frames as machine-readable data, node ids verified against the file
+- **Asset provenance**: [`tools/figma-sync/data/asset-manifest.json`](../../tools/figma-sync/data/asset-manifest.json) — every committed seed asset and the node it was exported from, or an explicit "no source found" (#80). Read it before re-exporting anything: ten of the thirty are `locked`, including all seven hand-authored animated SVGs, and the format is documented in [`tools/figma-sync/README.md`](../../tools/figma-sync/README.md)
+
+## Has the design changed?
+
+```bash
+pnpm figma:sync    # one API call when nothing moved; otherwise names what did
+```
+
+Or invoke **`/figma-sync`** ([`.claude/skills/figma-sync`](../../.claude/skills/figma-sync/SKILL.md))
+— the same command plus the judgment on top of it: reading the report, deciding noise from real work,
+grouping the changes, filing tickets on the board, and asking you about frames nobody has ruled on.
+The script is deterministic and decides nothing; the skill decides everything.
+
+`@o3/figma-sync` hashes a normalized subtree per tracked node and diffs it against the committed
+baseline, reporting changes by frame name **and route**
+([`tools/figma-sync/README.md`](../../tools/figma-sync/README.md)). It talks to the REST API
+directly — no MCP, no rate limit. **A sync is a commit**: `data/baseline.json` and
+`data/report.{json,md}` describe the run that produced them.
+
+It watches two things and asks about a third (#79):
+
+- **Canonical page frames** — the manifest's `pageFrame` entries.
+- **Component sets** — all 24 nodes of the component→code map below, so a rework of `Button /
+Solid` reads as "that set changed → `button.tsx#Button`" instead of as unexplained diffs on
+  every frame that instances it. It reports the set **alongside** those frames, not instead.
+- **New work** — each real run lists the Design Concept section's direct children and names any
+  frame the manifest has never heard of. That is a question, not a finding: decide it is canonical
+  and add it to `tracked-nodes.json`, or decide it is noise and add it to `ignoredNodeIds` with a
+  reason. The probe never promotes anything itself — the two-generations rule below is exactly why.
 
 ## Which MCP server to use
 

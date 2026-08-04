@@ -1,0 +1,47 @@
+{
+  "id": "1680:2134",
+  "name": "Home",
+  "type": "FRAME",
+  "scrollBehavior": "SCROLLS",
+  "absoluteBoundingBox": { "x": 1200, "y": -480, "width": 1440, "height": 3200 },
+  "absoluteRenderBounds": { "x": 1200, "y": -480, "width": 1440.24, "height": 3200.24 },
+  "clipsContent": true,
+  "layoutMode": "VERTICAL",
+  "itemSpacing": 96,
+  "children": [
+    {
+      "id": "1680:2140",
+      "name": "Hero",
+      "type": "FRAME",
+      "scrollBehavior": "SCROLLS",
+      "absoluteBoundingBox": { "x": 1200, "y": -480, "width": 1440, "height": 900 },
+      "relativeTransform": [
+        [1, 0, 0],
+        [0, 1, 0]
+      ],
+      "fills": [{ "type": "SOLID", "color": { "r": 0.05, "g": 0.05, "b": 0.06, "a": 1 } }],
+      "children": [
+        {
+          "id": "1680:2141",
+          "name": "Headline",
+          "type": "TEXT",
+          "scrollBehavior": "SCROLLS",
+          "characters": "Digital experiences that move.",
+          "absoluteBoundingBox": { "x": 1280, "y": -320, "width": 880, "height": 168 },
+          "style": { "fontFamily": "Inter", "fontSize": 72, "lineHeightPx": 84 }
+        }
+      ]
+    },
+    {
+      "id": "1680:2160",
+      "name": "Case studies",
+      "type": "FRAME",
+      "absoluteBoundingBox": { "x": 1200, "y": 516, "width": 1440, "height": 1200 },
+      "relativeTransform": [
+        [1, 0, 0],
+        [0, 1, 996]
+      ],
+      "children": []
+    }
+  ]
+}

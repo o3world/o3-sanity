@@ -16,6 +16,7 @@
     "dev:web": "turbo run dev --filter @o3/web",
     "down": "./scripts/down.sh",
     "env:pull": "vercel link --project o3-sanity-web --scope o3-world --yes && vercel env pull apps/web/.env.local --environment=development",
+    "figma:sync": "pnpm --filter @o3/figma-sync sync",
     "format": "turbo run format",
     "frontier": "./scripts/frontier.sh",
     "guidance:check": "pnpm --filter @o3/guidance check",

@@ -1,0 +1,19 @@
+{
+  "name": "@o3/figma-sync",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Figma change detection — which canonical page frames moved since the last sync (#78).",
+  "scripts": {
+    "lint": "eslint src/",
+    "sync": "tsx src/sync.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@o3/typescript-config": "workspace:*",
+    "@types/node": "^24.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^4.1.10"
+  }
+}
