@@ -1,0 +1,102 @@
+{
+  "fileKey": "RvraLJaZ0zWm8UaD5AJf43",
+  "sectionNodeId": "1632:1510",
+  "entries": [
+    {
+      "nodeId": "1680:2134",
+      "kind": "pageFrame",
+      "name": "Home",
+      "figmaName": "Home",
+      "route": "/",
+      "variant": "desktop"
+    },
+    {
+      "nodeId": "1814:1618",
+      "kind": "pageFrame",
+      "name": "Home",
+      "figmaName": "Home - Mobile",
+      "route": "/",
+      "variant": "mobile"
+    },
+    {
+      "nodeId": "1634:1167",
+      "kind": "pageFrame",
+      "name": "Work index",
+      "figmaName": "Work",
+      "route": "/work",
+      "variant": "desktop"
+    },
+    {
+      "nodeId": "1906:851",
+      "kind": "pageFrame",
+      "name": "Work index",
+      "figmaName": "Work - Mobile",
+      "route": "/work",
+      "variant": "mobile"
+    },
+    {
+      "nodeId": "1710:2300",
+      "kind": "pageFrame",
+      "name": "Case Study detail",
+      "figmaName": "Case Study",
+      "route": "/work/{slug}",
+      "variant": "desktop"
+    },
+    {
+      "nodeId": "1906:928",
+      "kind": "pageFrame",
+      "name": "Case Study detail",
+      "figmaName": "Case Study - Mobile",
+      "route": "/work/{slug}",
+      "variant": "mobile"
+    },
+    {
+      "nodeId": "1710:2823",
+      "kind": "pageFrame",
+      "name": "Perspective detail",
+      "figmaName": "Insights",
+      "route": "/perspectives/{slug}",
+      "variant": "desktop"
+    },
+    {
+      "nodeId": "1906:1046",
+      "kind": "pageFrame",
+      "name": "Perspective detail",
+      "figmaName": "Insights",
+      "route": "/perspectives/{slug}",
+      "variant": "mobile"
+    },
+    {
+      "nodeId": "1924:5344",
+      "kind": "pageFrame",
+      "name": "About",
+      "figmaName": "Insights",
+      "route": "/about",
+      "variant": "desktop"
+    },
+    {
+      "nodeId": "1925:6138",
+      "kind": "pageFrame",
+      "name": "Solutions",
+      "figmaName": "Solutions",
+      "route": "/solutions",
+      "variant": "desktop"
+    },
+    {
+      "nodeId": "1644:1889",
+      "kind": "pageFrame",
+      "name": "Live",
+      "figmaName": "Live",
+      "route": "/live",
+      "variant": "desktop"
+    },
+    {
+      "nodeId": "1906:334",
+      "kind": "pageFrame",
+      "name": "Live",
+      "figmaName": "Live - Mobile",
+      "route": "/live",
+      "variant": "mobile"
+    }
+  ]
+}

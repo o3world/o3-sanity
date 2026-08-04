@@ -35,6 +35,7 @@ export default defineConfig({
           // `.test.ts` only — the render layer's files are `.render.test.tsx`,
           // so the two layers cannot collect each other's tests by accident.
           include: [
+            'tools/figma-sync/src/**/*.test.ts',
             'tools/migration/src/**/*.test.ts',
             'apps/web/src/**/*.test.ts',
             'packages/*/src/**/*.test.ts',

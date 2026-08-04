@@ -7,6 +7,19 @@ amended by #33). This page is how you read the file without wasting a session on
 - **File**: `RvraLJaZ0zWm8UaD5AJf43` — "O3DX: Visual exploration"
 - **Frame → route map**: [`docs/figma-frames.md`](https://github.com/o3world/o3-sanity/blob/research/figma-frame-inventory/docs/figma-frames.md) — on branch `research/figma-frame-inventory`, per the repo's research convention. Read it before touching a page layer.
 - **Component → code map**: [`docs/figma-components.md`](../figma-components.md) — every component set, its variant axes, and what it maps to (or deliberately doesn't)
+- **Tracked-frame manifest**: [`tools/figma-sync/data/tracked-nodes.json`](../../tools/figma-sync/data/tracked-nodes.json) — the canonical page frames as machine-readable data, node ids verified against the file
+
+## Has the design changed?
+
+```bash
+pnpm figma:sync    # one API call when nothing moved; otherwise names what did
+```
+
+`@o3/figma-sync` hashes a normalized subtree per tracked frame and diffs it against the committed
+baseline, reporting changes by frame name **and route**
+([`tools/figma-sync/README.md`](../../tools/figma-sync/README.md)). It talks to the REST API
+directly — no MCP, no rate limit. **A sync is a commit**: `data/baseline.json` and
+`data/report.{json,md}` describe the run that produced them.
 
 ## Which MCP server to use
 
