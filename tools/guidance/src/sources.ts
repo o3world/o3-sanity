@@ -28,6 +28,14 @@ const GUIDANCE_SOURCES = [
     title: 'O3 brand foundation',
     sourcePath: '.claude/skills/o3world-copy/brand.md',
   },
+  {
+    /* Same delegation, same reason: the voice guide's revision pass sends the
+     * reader here for the machine tells, and for the reconciliation of the
+     * four O3 moves that sit close to a banned pattern. */
+    key: 'o3-slop',
+    title: 'O3 slop patterns',
+    sourcePath: '.claude/skills/o3world-copy/slop.md',
+  },
 ] as const
 
 /** Deterministic and outside the load pipeline's `<type>-(wp|seed)-` ownership contract. */

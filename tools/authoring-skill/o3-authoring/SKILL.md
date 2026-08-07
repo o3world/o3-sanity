@@ -17,8 +17,11 @@ Every Sanity tool call uses `resource: {projectId: "naorcr6k", dataset: "product
    via the Sanity connector. `body` is raw markdown — read it as written.
    `key == "o3-voice"` is the voice guide: follow it over your defaults, every
    time. `key == "o3-brand"` is the brand foundation behind it — source
-   material for claims, never copy to paste. If no guidance documents exist,
-   say so and stop — never improvise the voice.
+   material for claims, never copy to paste. `key == "o3-slop"` is the machine
+   tells the voice guide's revision pass sends you to; read it before you
+   revise, and read it first when the job is auditing a draft rather than
+   writing one. If no guidance documents exist, say so and stop — never
+   improvise the voice.
 2. **Fetch the schema per type.** Before authoring any document type or
    section block, call `get_schema` for that **specific type**. The no-type
    overview omits field descriptions, and the descriptions carry required

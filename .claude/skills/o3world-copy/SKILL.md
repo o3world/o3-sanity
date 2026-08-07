@@ -1,6 +1,6 @@
 ---
 name: o3world-copy
-description: Write, rewrite, or review copy in the O3 World voice — headlines, subheads, CTAs, section text, case-study narratives, stats, bios, proposals, or any user-facing words for o3world.com. Use whenever generating or editing copy in seed JSON (tools/migration/data/seed/), Sanity documents, or drafts, and when asked to "write copy", "punch up", "make this sound like us", or review tone.
+description: Write, rewrite, or review copy in the O3 World voice — headlines, subheads, CTAs, section text, case-study narratives, stats, bios, proposals, or any user-facing words for o3world.com. Use whenever generating or editing copy in seed JSON (tools/migration/data/seed/), Sanity documents, or drafts, and when asked to "write copy", "punch up", "make this sound like us", review tone, or check whether writing reads as AI-generated.
 ---
 
 # O3 World copy
@@ -13,6 +13,12 @@ not to impress them with vocabulary, and not to posture.
 The brand foundation (pillars, delivery principles, values) lives in
 [brand.md](brand.md). It is **source material, not copy**. Never paste a pillar
 into a headline. Write what the belief looks like as a specific claim.
+
+The machine tells — the sentence shapes and filler that make copy read as
+generated — live in [slop.md](slop.md), along with the reconciliation for the
+four O3 moves that sit close to a banned pattern. Read it before the revision
+pass, and read it whenever the job is to edit someone else's draft or to audit
+writing for AI tells rather than rewrite it.
 
 ## The register
 
@@ -73,11 +79,18 @@ writing a word:
 6. **Show the belief, don't label it.** We never settle for the status quo —
    so the copy makes a concrete, forward claim; it doesn't say "we're
    innovative."
-7. **No agency clichés.** Banned unless quoting someone: seamless,
-   world-class, cutting-edge, leverage, empower, delight, transform(ational),
-   elevate, best-in-class, holistic, robust, solutions (as a noun for
-   "work"), passionate. (The old site leaned on these hard — the ban is the
-   correction, and the strongest recent pieces prove it works.)
+7. **No agency clichés and no machine clichés.** Banned unless quoting
+   someone. From the old site: seamless, world-class, cutting-edge, leverage,
+   empower, delight, transform(ational), elevate, best-in-class, holistic,
+   robust, solutions (as a noun for "work"), passionate. From the model:
+   delve, foster, utilize, facilitate, streamline, harness, supercharge,
+   embark, paradigm shift, game changer, tapestry, realm, beacon,
+   multifaceted, meticulous, intricate, paramount, ever-evolving, "this
+   changes everything". (The old site leaned on the first list hard — the ban
+   is the correction, and the strongest recent pieces prove it works. The
+   second list is what a draft picks up when nobody is watching.) The
+   conditional cuts — empty adverbs and filler phrases — are in
+   [slop.md](slop.md).
 8. **Person:** "you/your" for the client's world, "we" for O3 — and "we" is
    the team and its community, not a vendor. Never "users will be able to" —
    say what people can do.
@@ -135,11 +148,14 @@ Draft, then:
 5. Check the banned list (rule 7) — and check for the competitor-foil
    ("most firms…") and the repeated "X, not Y". One antithesis per page,
    zero foils.
-6. Check the register against the surface table. A case study is not a
+6. Run the checks at the end of [slop.md](slop.md). They catch the shapes this
+   list doesn't: colon reveals, puffery, `-ing` analysis, fake kickers,
+   recap endings, em-dash clutter, robotic symmetry.
+7. Check the register against the surface table. A case study is not a
    birthday post; a birthday post is not a case study.
-7. Check the warmth: does culture/community copy contain actual people? Does
+8. Check the warmth: does culture/community copy contain actual people? Does
    the reader leave invited and equipped, or merely impressed?
-8. Read it aloud. Anywhere you'd breathe wrong, break or cut.
+9. Read it aloud. Anywhere you'd breathe wrong, break or cut.
 
 ## Worked example
 
