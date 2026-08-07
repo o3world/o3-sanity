@@ -6,7 +6,18 @@ set -uo pipefail
 
 ROOT=$(git rev-parse --show-toplevel 2>/dev/null || { cd "$(dirname "$0")/.." && pwd; })
 
+# Port overrides live in the repo-root .env (loaded by scripts/dev.sh);
+# keep the defaults in the list so stale servers from before an override die too.
+if [ -f "$ROOT/.env" ]; then
+  set -a
+  # shellcheck source=/dev/null
+  . "$ROOT/.env"
+  set +a
+fi
+
 PORTS=(3000 3001 3002 3003 6006)
+[ -n "${WEB_PORT:-}" ] && PORTS+=("$WEB_PORT")
+[ -n "${STORYBOOK_PORT:-}" ] && PORTS+=("$STORYBOOK_PORT")
 PATTERNS=('turbo run dev' 'turbo run storybook' 'next-server' 'next dev' 'storybook dev')
 
 killed=0
