@@ -1,0 +1,262 @@
+{
+  "_id": "insight-wp-8151",
+  "_type": "insight",
+  "title": "Revolutionizing customer experiences: Join O3's Mike Gadsby at Applied Intelligence Live! Austin",
+  "slug": {
+    "_type": "slug",
+    "current": "mike-gadsby-at-applied-intelligence-live-austin"
+  },
+  "excerpt": "Join this unique opportunity to explore the intersection of innovative technologies and customer experiences.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2023-08-31T18:01:05Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/08/O3-website-imagery-Insights-gadsby-ia-austin.jpg"
+    },
+    "alt": "Mike Gadsby at Applied Intelligence Live! Austin"
+  },
+  "body": [
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 is excited to make waves at ",
+          "_key": "k0005"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Applied Intelligence Live! Austin",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". This dynamic event celebrates the convergence of transformative technologies and CX. We’re gearing up for two days of premium content, meaningful connections, and game-changing deals that will shape the future of business as we know it.",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://austin.appliedintelligence.live/welcome"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3’s Co-Founder and Chief Innovation Officer, ",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Mike Gadsby",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", is set to ",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "take the stage",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " as a distinguished speaker at the event. Mike’s journey is an inspiring testament to the possibilities of innovation and customer-centric thinking. As the driving force behind O3, a CX consultancy based in the heart of Philadelphia, Mike has been at the forefront of revolutionizing customer experiences for over two decades.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/michaelgadsby/"
+        },
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://austin.appliedintelligence.live/speakers/mike-gadsby?&categories=16010FBB-D5B7-7CF3-36DC920BA01BE174&sortby=__piwikviews&searchgroup=libraryentry-speakers"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "embed",
+      "url": "https://www.youtube.com/embed/iT_7HhuwqXc?feature=oembed",
+      "_key": "k0014"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "(Watch the Applied Intelligence Live! Austin 2023 trailer)",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Session spotlight",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "On September 21st, from 12:00 to 12:25, Mike will host a session titled “",
+          "_key": "k0020"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Personalized, Proactive + Predictive: Leveraging AI For Remarkable Customer Experience.",
+          "_key": "k0021"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "” He will unravel the pivotal role that customer experience plays in a business’s triumph and dive into the realm of AI and how it can elevate your CX strategy.",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://austin.appliedintelligence.live/speakers/mike-gadsby?&categories=16010FBB-D5B7-7CF3-36DC920BA01BE174&sortby=__piwikviews&searchgroup=libraryentry-speakers"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In this session, you’ll gain an understanding of the benefits of crafting an exceptional CX strategy and discover how AI can supercharge it. Mike’s engaging approach will use real-world examples and case studies to showcase how AI isn’t just changing the game – it’s revolutionizing it. By the end of the talk, you’ll walk away with a crystal-clear understanding of how AI can bolster your CX strategy, fuel growth, and boost profitability.",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Join the Movement – Let’s transform the future together",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Applied Intelligence Live! Austin is more than an event – it’s a platform for dreamers, thinkers, and doers to connect, collaborate, and shape the future. We invite you to be a part of this experience, where insights meet innovation and ideas become reality.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Ready to be inspired? We know we are. Don’t miss out on Mike Gadsby’s thought-provoking session that promises to leave you with a fresh perspective on the power of AI in crafting remarkable customer experiences.",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Stay tuned for updates, sneak peeks, and behind-the-scenes glimpses as we gear up for Applied Intelligence Live! Austin.",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "O3's Mike Gadsby at Applied Intelligence Live! Austin",
+    "description": "Explore the fusion of innovative technologies and leverage AI for remarkable customer experiences."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:8151"
+  }
+}

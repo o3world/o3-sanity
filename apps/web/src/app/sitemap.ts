@@ -44,7 +44,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = getBaseUrl()
   const entries: MetadataRoute.Sitemap = [
     entry(base, '', undefined, 1.0),
-    entry(base, '/perspectives', undefined, 0.8),
+    entry(base, '/insights', undefined, 0.8),
     entry(base, '/work', undefined, 0.8),
   ]
 
@@ -55,9 +55,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       stega: false,
     })
 
-    for (const row of (data?.perspectives ?? []) as SitemapRow[]) {
+    for (const row of (data?.insights ?? []) as SitemapRow[]) {
       if (!row.slug) continue
-      const path = `${COLLECTION_PREFIXES.perspective}/${row.slug}`
+      const path = `${COLLECTION_PREFIXES.insight}/${row.slug}`
       if (isRedirected(path)) continue
       entries.push(entry(base, path, row._updatedAt))
     }

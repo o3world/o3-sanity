@@ -108,7 +108,7 @@
           "cta": {
             "_type": "cta",
             "label": "Read the thinking",
-            "href": "/perspectives",
+            "href": "/insights",
             "variant": "dark"
           }
         }

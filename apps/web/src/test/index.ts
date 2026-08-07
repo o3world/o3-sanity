@@ -1,7 +1,7 @@
 /**
  * The `render` test layer's public surface — import everything from `@/test`.
  *
- *   import { renderRoute, aPerspective } from '@/test'
+ *   import { renderRoute, anInsight } from '@/test'
  *
  * Deliberately narrow: it exports what tests use today, not what they might.
  * `installDataset` (drive the fetch stub by hand) lives in ./stubs/sanity-live
@@ -17,13 +17,13 @@ export {
   aCaseStudiesPage,
   aCaseStudyCard,
   aMigratedPage,
-  aMigratedPerspective,
-  aPerspective,
-  aPerspectivesPage,
+  aMigratedInsight,
+  anInsight,
+  anInsightsPage,
   aSeededPage,
   aTranslatedCaseStudy,
   migratedPageSlugs,
-  migratedPerspectiveSlugs,
+  migratedInsightSlugs,
   paragraph,
   siteSettings,
   withSettings,

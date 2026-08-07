@@ -1,0 +1,252 @@
+{
+  "_id": "insight-wp-6187",
+  "_type": "insight",
+  "title": "Personalization: Creating an individualized journey for your customers",
+  "slug": {
+    "_type": "slug",
+    "current": "personalization-creating-an-individualized-journey-for-your-customers"
+  },
+  "excerpt": "Why your brand should be using personalization to optimize your experience.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-15",
+      "_key": "cat-15"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-62",
+      "_key": "cat-62"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-1",
+      "_key": "cat-1"
+    }
+  ],
+  "publishedAt": "2023-01-10T21:49:31Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights-2.jpg"
+    },
+    "alt": "Greyscale, photo of deserted road leading into the sunset."
+  },
+  "body": [
+    {
+      "_key": "k0000",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Personalization is a practice that leverages behavioral analytics to create unique and individualized experiences for your customers. Whether it’s advertising messages or generating and creating product experiences, personalization optimizes user engagement with strategic messaging at the right time. This implementation is also an opportunity for brands to collect data and identify patterns, which can be a useful tool in targeting potential leads. If your company is considering personalized marketing tactics, check out how O3 can implement a strategic approach to drive results.",
+          "_key": "k0001"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“91% of consumers say they are more likely to shop with brands that provide offers and recommendations that are relevant to them.”",
+          "_key": "k0003"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "– Accenture",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Getting started",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 strongly believes that personalization is key to delivering better experiences. However, the fact remains that implementing a personalization strategy requires finesse. There is no one-size-fits-all solution. Our team strategically advocates for a crawl, walk, run approach where data and feedback loops are leveraged to optimize the experience.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/Crawl_Walk_Run-1836x1033-1.png"
+      },
+      "alt": "",
+      "_key": "k0010"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Crawl – Goals & simple segmentation",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Once we align on goals and KPIs, we shift our focus to simple segmentation needs. We identify content to personalize and who to personalize it for. Marketing teams are likely doing this in some capacity through industry vertical, topic or need already. While simply segmenting is not the same as personalization, it is the first step. We create our segments by analyzing CRM and project data combined with historical Google Analytics engagement metrics. Then, we experiment. With minimal investment in tools or technologies, the goal is to measure success and refine the strategy. It’s important to consider the whole experience from channel to first touch to outreach through email or text.",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Walk – Refine, extend & automate",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As data rolls in, teams should know which segments are engaged and which strategies are performing well. Depending on goals and success, graduating from an automation platform may allow marketers to move from simple tests to an end-to-end, personalization journey where user behavior triggers an array of content depending on which actions they may take. Platforms like Acquia, Optimizely, and Sitecore use a point system for this, while others require manual prioritization of these actions. Either way, this automation allows marketers to turn segments into potential persona types. Automation also allows teams to consider second, third or fourth visits where messaging may alter based on the stage of the buying or engagement process.",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Run – AI-driven personalization",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Even with automation, most rely on a human to look at data then create the rules necessary to personalize around each segment. The future of personalization lies in looking at trends among large data sets of profile and behavioral data to automate or suggest segmentation. The goal is to hyper-personalize each journey down to the account or even individual level;these systems rely on large volumes of data and aggregation among CRM, web data and even 3rd party sources.",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Big picture – Personalizing across the customer journey",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As an organization, our interest in personalization goes well beyond the marketing and sales process. We see an opportunity to personalize at every touch point throughout the customer journey. While the path to personalization may start simply as a means to better engage users or improve conversions, we see the impact on the overall customer experience as the ultimate goal ——regardless of industry.",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Small steps towards personalization now and developing data models that can grow and evolve will set B2B organizations up for a future of success. If you’d like to discuss opportunities to personalize your customer experience, contact us to chat.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:6187"
+  }
+}

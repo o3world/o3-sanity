@@ -1,0 +1,1046 @@
+{
+  "_id": "insight-wp-7513",
+  "_type": "insight",
+  "title": "What does ChatGPT think about project management?",
+  "slug": {
+    "_type": "slug",
+    "current": "what-does-chatgpt-think-about-project-management"
+  },
+  "excerpt": "With the global rise of interest in ChatGPT and other AI language models our project management office thought it would be interesting to take a deeper dive into what ChatGPT has to say about our role. But does ChatGPT miss the mark?",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    }
+  ],
+  "publishedAt": "2023-03-30T14:55:57Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/03/O3-website-imagery_-Insights-39.jpg"
+    },
+    "alt": "Kelly: Chat GPT perspective"
+  },
+  "body": [
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Does ChatGPT value project managers?",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This year, ",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "TeamStage found",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " that 42% of companies undervalue the importance of project management as a crucial component for project success. But what does ChatGPT think? Just for fun, our team wanted to know what ChatGPT thought of us – so we asked.",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://teamstage.io/project-management-statistics/#:~:text=The%20latest%20project%20management%20stats,crucial%20component%20for%20project%20success."
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em",
+            "strong"
+          ],
+          "text": "O3 World:",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": " “Would you use a project manager if you needed a web application built?”",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0013",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em",
+            "strong"
+          ],
+          "text": "ChatGPT:",
+          "_key": "k0015"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "“As an AI language model, I don’t have the ability to hire or work on projects, but I can provide some insight into the benefits of using a project manager for building a web application…A project manager can help streamline the web application development process, ensuring that all tasks are completed in a timely and efficient manner. This can help reduce costs, minimize delays, and improve the overall quality of the application. Therefore, using a project manager for building a web application can be a wise investment for organizations that want to ensure a successful project outcome.”",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Whew – sounds like ChatGPT values our role! That’s one smart cookie because ",
+          "_key": "k0018"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "research also shows",
+          "_key": "k0019"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " that projects are 2.5 times more successful when project management practices are implemented, and organizations that invest in project management practices waste 28 times less money. Wanting to see if ChatGPT would spill some AI tea, we got a little playful and asked…",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://teamstage.io/project-management-statistics/#:~:text=The%20latest%20project%20management%20stats,crucial%20component%20for%20project%20success."
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em",
+            "strong"
+          ],
+          "text": "O3 World:",
+          "_key": "k0022"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": " Do you like project managers?",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0025",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em",
+            "strong"
+          ],
+          "text": "ChatGPT:",
+          "_key": "k0027"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": " As an AI language model, I don’t have personal feelings or emotions, so I don’t have a preference for or against project managers. However, I recognize the importance of project management in ensuring the success of projects and the value that skilled project managers bring to organizations.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We were honestly hoping ChatGPT would confess its love for project managers, but we get it – it’s complicated. At least the importance and value were spot on. Let’s see what ChatGPT really knows about project managers anyway.",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Does ChatGPT understand what it takes to be a standout project manager?",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We asked ChatGPT and the reply was well thought out and thorough but missing a few key components.",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em",
+            "strong"
+          ],
+          "text": "O3 World:",
+          "_key": "k0036"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": " “What qualities make a good project manager?”",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0039",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em",
+            "strong"
+          ],
+          "text": "ChatGPT:",
+          "_key": "k0041"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": " “There are several qualities that make a good project manager, including:",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0043",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0044",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0045",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em",
+            "strong"
+          ],
+          "text": "Leadership",
+          "_key": "k0046"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": ": A good project manager should be able to lead and inspire their team, providing direction and guidance when needed.",
+          "_key": "k0047"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0048",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em",
+            "strong"
+          ],
+          "text": "Communication",
+          "_key": "k0049"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": ": A good project manager should be an excellent communicator, able to convey information clearly and effectively to all stakeholders.",
+          "_key": "k0050"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0051",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em",
+            "strong"
+          ],
+          "text": "Organizational skills",
+          "_key": "k0052"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": ": A good project manager should be highly organized, able to manage multiple tasks, and prioritize work effectively.",
+          "_key": "k0053"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0054",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em",
+            "strong"
+          ],
+          "text": "Time management",
+          "_key": "k0055"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": ": A good project manager should be skilled in time management, and able to deliver the project on time and within the project timeline.",
+          "_key": "k0056"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0057",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em",
+            "strong"
+          ],
+          "text": "Problem-solving",
+          "_key": "k0058"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": ": A good project manager should be a skilled problem solver, able to identify potential issues and develop effective solutions to address them.",
+          "_key": "k0059"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0060",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em",
+            "strong"
+          ],
+          "text": "Team management",
+          "_key": "k0061"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": ": A good project manager should be able to manage their team effectively, creating a positive team environment and fostering collaboration and communication.",
+          "_key": "k0062"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0063",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em",
+            "strong"
+          ],
+          "text": "Strategic thinking",
+          "_key": "k0064"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": ": A good project manager should be able to think strategically, see the big picture and understand how the project fits into the broader organizational goals.",
+          "_key": "k0065"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0066",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em",
+            "strong"
+          ],
+          "text": "Flexibility",
+          "_key": "k0067"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": ": A good project manager should be flexible, and able to adapt to changing project requirements, timelines, and priorities.",
+          "_key": "k0068"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0069",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em",
+            "strong"
+          ],
+          "text": "Attention to detail",
+          "_key": "k0070"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": ": A good project manager should have strong attention to detail, able to ensure that all aspects of the project are properly managed and delivered to the required quality standards.”",
+          "_key": "k0071"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0072",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "That’s good, right? ChatGPT’s response was textbook. As an AI tool, it did a fantastic job of finding so many of the key elements of a good project manager. However, there are a few qualities O3 values in project management that we think ChatGPT failed to mention.",
+          "_key": "k0073"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0074",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What are the important qualities of a project manager that ChatGPT misses?",
+          "_key": "k0075"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0076",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "ChatGPT was trained on a large body of text from a variety of sources (e.g., Wikipedia, books, news articles, and scientific journals). As ChatGPT found, the following qualities are mentioned less frequently in relation to project management. Maybe because they are more difficult to teach; maybe because it’s hard for an interview panel to really judge if a candidate holds these values and traits. In general, these are more humanistic traits, but they are equally critical to being an excellent project manager.",
+          "_key": "k0077"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0078",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Transparency",
+          "_key": "k0079"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0080",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0081",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0082",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Transparency builds trust with team members and stakeholders. It facilitates good decision making because everyone is given all of the information to consider. Transparency fosters open communication and promotes teamwork.",
+          "_key": "k0083"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0084",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0085",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0086",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Entrepreneurial thinking",
+          "_key": "k0087"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0088",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0089",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0090",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The entrepreneurial mindset takes initiative, adapts to change, finds creative solutions, and is comfortable with risk. People who have adopted this mindset see challenges as opportunities. A good entrepreneur will bring determination and unmatched effort toward meeting goals and achieving success. This is the mentality O3 project managers bring to our clients’ endeavors.",
+          "_key": "k0091"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0092",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0093",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0094",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Creativity",
+          "_key": "k0095"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0096",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0097",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0098",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "ChatGPT talked about problem solving but in today’s technical and competitive landscape, one cannot solve problems without being extremely creative. In addition to problem solving, O3’s project managers use our diverse experience to provide creative ideation to our clients. These ideas focus on how to move brands in the right direction and meet business objectives.",
+          "_key": "k0099"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0100",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0101",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0102",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Integrity",
+          "_key": "k0103"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0104",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0105",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0106",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Integrity is the combination of many things including honesty, ethics, trustworthiness, accountability, and professionalism. Project managers need these principles to build trust, maintain credibility, and ensure project success.",
+          "_key": "k0107"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0108",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0109",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0110",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Enthusiasm",
+          "_key": "k0111"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0112",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0113",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0114",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Enthusiasm is essential to keeping teams and stakeholders motivated and engaged. Successful project teams will have all members ready to take on any challenge and exceed client expectations at every turn.",
+          "_key": "k0115"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0116",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0117",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0118",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Empathy",
+          "_key": "k0119"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0120",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0121",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0122",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Empathy is important because it enables project managers to understand and relate to the needs, concerns, and perspectives of team members, stakeholders, and clients. This helps build stronger relationships and promotes teamwork.",
+          "_key": "k0123"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0124",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Thankfully ChatGPT hasn’t put project managers out of work just yet. We had some fun and learned that while ChatGPT is extremely smart, we still hope that with age will come wisdom. Clearly, ChatGPT is intelligent; however, wisdom is the combination of intelligence, experience, ",
+          "_key": "k0125"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "and",
+          "_key": "k0126"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " good judgment. While ChatGPT continues to build wisdom, its use cases today are endless and we’re already recognizing the positive impacts it can have in project management.",
+          "_key": "k0127"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0128",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 is excited to begin using ChatGPT to propel the products we serve and to implement its efficiencies throughout our operations. If you’re interested in learning how ChatGPT can be used for your business, ",
+          "_key": "k0129"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "contact our team today",
+          "_key": "k0130"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0131"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "/contact"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "Learn what ChatGPT thinks about project management in this light-hearted discussion with O3. Find out if what ChatGPT is missing."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:7513"
+  }
+}

@@ -32,7 +32,7 @@ function chrome(overrides: Partial<WpChrome> = {}): WpChrome & { _meta: ExtractM
           item('Solutions', 'http://www.o3world.com/solutions/'),
           item('Work', 'http://www.o3world.com/work/'),
           item('About', 'http://www.o3world.com/about/'),
-          item('Perspectives', 'http://www.o3world.com/perspectives/'),
+          item('Insights', 'http://www.o3world.com/insights/'),
           item('Contact', 'http://www.o3world.com/contact/'),
         ],
       },
@@ -122,10 +122,24 @@ describe('mapSiteSettings', () => {
       'Solutions',
       'About',
     ])
-    // "Perspectives" is the type name; the chrome shows display copy (#19).
+    // WordPress's own menu title for the collection is still "Perspectives" —
+    // the word ADR 0017 retired — so `DISPLAY_LABELS` is what puts the type
+    // name in the nav. Dropping that override would put the old word back.
     expect(doc.navItems.map((i) => i.label)).not.toContain('Perspectives')
     // The prototype's "Services" rename is reversed — Figma reads "Solutions".
     expect(doc.navItems.map((i) => i.label)).not.toContain('Services')
+  })
+
+  /**
+   * The nav links where the site serves, not where WordPress did. Before
+   * ADR 0017 these were the same path; now the menu item's WordPress URL says
+   * `/perspectives` and only `movedPath` turns it into the route that exists.
+   * Without it every visit to Insights would take a 301 first.
+   */
+  it('points the moved collection at its new path, not through a redirect', () => {
+    const doc = expectOk(mapSiteSettings(chrome(), SITE))
+    expect(doc.navItems.find((i) => i.label === 'Insights')).toMatchObject({ href: '/insights' })
+    expect(doc.navItems.map((i) => ('href' in i ? i.href : null))).not.toContain('/perspectives')
   })
 
   it('carries Live, which WordPress has no page for at all (#50)', () => {

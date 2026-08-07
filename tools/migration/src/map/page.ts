@@ -43,7 +43,7 @@ export interface WpPage {
  * | `error404`                    | empty; a header and nothing else | drop — 404 is a Next.js route, not a document |
  * | `contact`                     | one `form` module                | greenfield (#23) — no form block in the schema |
  * | `careers`                     | marketing + a Greenhouse feed    | greenfield (#23) |
- * | `home`, `about`, `solutions`, the three service children, `ventures`, `work`, `perspectives`, the 1682 pages, `community-engagement`, `1682-photos`, `lunch-and-learn…`, `mike-gadsby…` | design-led | greenfield (#23) or a listing route |
+ * | `home`, `about`, `solutions`, the three service children, `ventures`, `work`, `insights`, the 1682 pages, `community-engagement`, `1682-photos`, `lunch-and-learn…`, `mike-gadsby…` | design-led | greenfield (#23) or a listing route |
  *
  * Adding a page here is a decision, and it will fail loud if its modules have
  * no mapper — which is the point.
@@ -115,7 +115,7 @@ function headerSection(
  * One WordPress page → one `page` document, or the reasons it could not be
  * converted (ADR 0002).
  *
- * The module set is the fail-loud surface, as it is for perspectives: a
+ * The module set is the fail-loud surface, as it is for insights: a
  * `flexible_content` layout with no arm here is reported, never dropped. Only
  * `text` has one, because only `text` appears on a keeper — adding another
  * page to `KEEPER_SLUGS` will surface exactly which modules it needs.

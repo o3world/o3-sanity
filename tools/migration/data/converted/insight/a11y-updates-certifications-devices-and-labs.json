@@ -1,0 +1,393 @@
+{
+  "_id": "insight-wp-2987",
+  "_type": "insight",
+  "title": "A11Y updates: certifications, devices and labs",
+  "slug": {
+    "_type": "slug",
+    "current": "a11y-updates-certifications-devices-and-labs"
+  },
+  "excerpt": "Since officially launching a program focused on accessibility education and building empathy, we’ve made a lot of changes to the way we approach designing and building products that work for all users. Here’s what we’ve been working on.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-63",
+      "_key": "cat-63"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-15",
+      "_key": "cat-15"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-1",
+      "_key": "cat-1"
+    }
+  ],
+  "publishedAt": "2019-11-22T02:54:51Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/07/O3-website-imagery_-Insights-7.jpg"
+    },
+    "alt": "A11Y updates: certifications, devices and labs"
+  },
+  "body": [
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Certifications",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A group of O3 World employees (including a mix of designers, developers, and project managers) are working on earning two key certifications: Certified Professional in Accessibility Core Competencies (",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "CPACC",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ") and Web Accessibility Specialist (",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "WAS",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ").",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.accessibilityassociation.org/cpacccertification"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.accessibilityassociation.org/wascertification"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Earning both certifications isn’t an easy task. The tests for each are challenging and focus on many facets of accessibility, including a particular focus on broad, cross-disciplinary conceptual knowledge, as well as a deep understanding of current Web Content Accessibility Guidelines (",
+          "_key": "k0014"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "WCAG",
+          "_key": "k0015"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "). Learning how to implement best practices for accessibility is essential, but earning certifications can help take that knowledge to the next level.",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.w3.org/WAI/standards-guidelines/wcag/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Empathy Lab Improvements",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "After running a few internal empathy labs, we’ve gained insight into how to iterate and improve them for different audiences. One big takeaway was the impact of sighted users working with screen readers.",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Screen readers play an important role in the digital experiences of so many users. Aside from seeing how screen readers respond to different sites, they also saw how nuanced changes in design and development could make the difference between a pleasant experience and a frustrating one.",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Giving everyone more time to reflect on the experiences they’ve had will be also important, so our facilitators devoted more time to open-ended discussions at the end of the lab.",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "People will have a chance to digest everything they’ve learned, and the opportunity to discuss and brainstorm ideas with others who just completed the lab. We’ve already had some great thoughts come out of these conversations, and can’t wait to start putting them into practice!",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "New Devices",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Proper equipment is important for an effective empathy lab. After we received feedback from participants, we decided to expand the assistive devices featured in the lab. We’ve set up more screen readers and screen magnifiers, and have also added a mouth stick, head wand, switch control, and other devices.",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The expanded lab options will allow our teams to interact with a greater variety of assistive devices. We’ll gain a deeper understanding of how people interact with the digital space around them and learn how to create better products.",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "New Internal Libraries",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We’re always trying out new accessibility features and adding devices to our library. The best way to keep track of our work is to create an internal accessible component library that everyone in the company can access.",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The library will compile all our existing knowledge on accessibility and make it easy for everyone to understand best practices. Additionally, the library will inform people of the best ways to utilize FE semantics and SEO.",
+          "_key": "k0038"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0039",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Future External Labs",
+          "_key": "k0040"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0041",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our empathy labs can do much more than educate O3 World employees on the best accessibility practices for design and development. Ultimately, we want to share our knowledge with our clients and the tech community as a whole.",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0043",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We recently ran an empathy lab with ",
+          "_key": "k0044"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "our client Caron",
+          "_key": "k0045"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and got a lot of positive feedback from the experience. Eventually, we hope to host our own empathy lab in the office that will be open to the public.",
+          "_key": "k0046"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.o3world.com/news/project-spotlight-caron-treatment-centers-digital-transformation-in-addiction-treatment/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0047",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Do you want to learn more about our approach to digital accessibility? Would you like to have a workshop at your own office or meetup group? ",
+          "_key": "k0048"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "Drop us a line",
+          "_key": "k0049"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", and we’ll get in touch.",
+          "_key": "k0050"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:2987"
+  }
+}

@@ -1,0 +1,601 @@
+{
+  "_id": "insight-wp-9062",
+  "_type": "insight",
+  "title": "AI, a new UI, Figma Slides – oh my!",
+  "slug": {
+    "_type": "slug",
+    "current": "ai-a-new-ui-figma-slides-oh-my"
+  },
+  "excerpt": "Recapping all the exciting news + upgrades announced at Config 2024",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-7875"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    }
+  ],
+  "publishedAt": "2024-07-01T15:03:01Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/07/O3-website-imagery_-Perspectives-47.jpg"
+    },
+    "alt": "Recapping all the exciting news + upgrades announced at Config 2024"
+  },
+  "body": [
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As ",
+          "_key": "k0015"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Dylan Field",
+          "_key": "k0016"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", Figma’s Co-Founder + CEO, stepped onto Config’s stage on Wednesday wearing a “Now with AI” t-shirt, I knew we were in for a treat – and this year’s announcements did not disappoint. Here’s a list of updates, features + products announced at Config 2024 that I’m most excited about:",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/dylanfield"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Work smarter, not harder",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "From finding designs with visual search to generating UI designs with prompts to renaming layers with a click of a button, ",
+          "_key": "k0021"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Figma AI",
+          "_key": "k0022"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " is going to streamline our daily workflow + help us be more efficient.",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.figma.com/ai/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A redesigned interface",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "UI3, ",
+          "_key": "k0027"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Figma’s third redesign",
+          "_key": "k0028"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", focuses on streamlining our work, creating consistency and prioritizing the future.",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.figma.com/blog/behind-our-redesign-ui3/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Ready for Dev enhancements",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Statuses, notes + focus views will make ",
+          "_key": "k0033"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "collaborating with devs",
+          "_key": "k0034"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " so much more efficient.",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.figma.com/blog/config-2024-recap/#updates-to-dev-mode-from-design-ready-to-dev"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Auto Layout improvements",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "With the new “",
+          "_key": "k0039"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "Suggest auto layout",
+          "_key": "k0040"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "” feature, you can now build responsive components with a click of a button – say goodbye to the tedious task of adding auto layout frame-by-frame.",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://help.figma.com/hc/en-us/articles/5731482952599-Add-auto-layout-to-a-design#suggest"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0042",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Getting started support",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0044",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Access ",
+          "_key": "k0045"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "Apple iOS",
+          "_key": "k0046"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", ",
+          "_key": "k0047"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0006"
+          ],
+          "text": "Google Material Design 3",
+          "_key": "k0048"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", and ",
+          "_key": "k0049"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0007"
+          ],
+          "text": "Figma’s Simple Design System",
+          "_key": "k0050"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " UI kits to help you get started on your next project.",
+          "_key": "k0051"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.figma.com/community/file/1385659531316001292/ios-18-and-ipados-18"
+        },
+        {
+          "_key": "k0006",
+          "_type": "link",
+          "href": "https://www.figma.com/community/file/1035203688168086460"
+        },
+        {
+          "_key": "k0007",
+          "_type": "link",
+          "href": "https://www.figma.com/community/file/1380235722331273046"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0052",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Prototype upgrades",
+          "_key": "k0053"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0054",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Preview your designs across different screen sizes with the new responsive prototype viewing option.",
+          "_key": "k0055"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0056",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "and last but not least…",
+          "_key": "k0057"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0058",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A new way to present",
+          "_key": "k0059"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0060",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0008"
+          ],
+          "text": "Figma Slides",
+          "_key": "k0061"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", Figma’s newest product, is a presentation tool built with designers, their colleagues + their clients in mind and enables a new approach to crafting stories + engaging with audiences.",
+          "_key": "k0062"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0008",
+          "_type": "link",
+          "href": "https://www.figma.com/slides/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0063",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "I’m so eager to implement all of these improvements into my workflow. Each update has the potential to improve the way we work on a day to day basis, which is why it makes it so hard to pick a favorite update. But if I had to pick… I’d choose Figma Slides! In full transparency, my excitement may be a *little* biased due to my team’s involvement with the project (more on that later), but biases aside, ",
+          "_key": "k0064"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0009"
+          ],
+          "text": "Slides",
+          "_key": "k0065"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " is truly going to reimagine the way we engage with our clients + showcase our work.",
+          "_key": "k0066"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0009",
+          "_type": "link",
+          "href": "https://www.youtube.com/watch?v=w00XRYprOuw&list=PLXDU_eVOJTx7qh8vf8VjjXET0gZ50IHKx&index=3"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/07/FigmaSlides-e1719845043186.png"
+      },
+      "alt": "Figma slides ",
+      "_key": "k0067"
+    },
+    {
+      "_key": "k0068",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Meet O3’s expert",
+          "_key": "k0069"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0070",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Meet ",
+          "_key": "k0071"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0010"
+          ],
+          "text": "Simone Dehel",
+          "_key": "k0072"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", a certified expert in CPACC (Certified Professional in Accessibility Core) at O3. Simone is a Senior UX Designer who’s passionate about bridging the gap between accessible experiences and design. She embodies inclusivity, making sure accessibility is not just an add-on but a core part of creating experiences. Simone is one of our leading accessibility champions at O3, is the founder of our culture club, and serves as a ",
+          "_key": "k0073"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0011"
+          ],
+          "text": "design mentor at ADP List",
+          "_key": "k0074"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0075"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0010",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/simone-dehel-cpacc-0b596a10a/"
+        },
+        {
+          "_key": "k0011",
+          "_type": "link",
+          "href": "https://adplist.org/mentors/simone-dehel?utm_source=linkedin&utm_medium=social&utm_campaign=user_profileshare&utm_content=simonedehel"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0076",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our team is dedicated to delivering innovative design solutions that not only meet but exceed expectations for your brand. By continually ",
+          "_key": "k0077"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0012"
+          ],
+          "text": "expanding our knowledge",
+          "_key": "k0078"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and embracing the latest advancements, we ensure that your projects are executed with precision and creativity. ",
+          "_key": "k0079"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0013"
+          ],
+          "text": "Contact us today",
+          "_key": "k0080"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " to discover how our expertise and forward-thinking approach can transform your vision into a reality, fostering success and growth for your brand.",
+          "_key": "k0081"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0012",
+          "_type": "link",
+          "href": "https://www.o3world.com/perspectives/"
+        },
+        {
+          "_key": "k0013",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Config 2024: Exciting Figma AI updates, new features, and Figma slides",
+    "description": "Explore the latest updates from Figma's Config 2024, including Figma AI, a redesigned interface, enhanced developer tools, and the new Figma Slides."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:9062"
+  }
+}

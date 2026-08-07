@@ -36,7 +36,7 @@
  */
 import type {
   PAGE_QUERY_RESULT,
-  PERSPECTIVE_QUERY_RESULT,
+  INSIGHT_QUERY_RESULT,
   SITE_SETTINGS_QUERY_RESULT,
 } from '@o3/sanity/types/generated'
 
@@ -84,7 +84,7 @@ import caseCaron from '../../../../tools/migration/data/translated/caseStudy/car
 import caseIronman from '../../../../tools/migration/data/translated/caseStudy/case-studies-ironman-digital-experience-drupal-acquia.json'
 import caseVertex from '../../../../tools/migration/data/translated/caseStudy/vertex.json'
 
-// ── People: the About team band, plus the perspective bylines ──────────────
+// ── People: the About team band, plus the insight bylines ──────────────
 import personGadsby from '../../../../tools/migration/data/converted/person/person-wp-18.json'
 import personHandler from '../../../../tools/migration/data/converted/person/person-wp-3.json'
 import personSheller from '../../../../tools/migration/data/converted/person/person-wp-3984.json'
@@ -95,23 +95,23 @@ import personLewis from '../../../../tools/migration/data/converted/person/perso
 import personHalligan from '../../../../tools/migration/data/converted/person/person-wp-9147.json'
 import personLeone from '../../../../tools/migration/data/converted/person/person-wp-7875.json'
 
-// ── Categories those perspectives carry ────────────────────────────────────
+// ── Categories those insights carry ────────────────────────────────────
 import categoryAi from '../../../../tools/migration/data/converted/category/artificial-intelligence-ai.json'
 import categoryInnovation from '../../../../tools/migration/data/converted/category/innovation.json'
 import categoryResearch from '../../../../tools/migration/data/converted/category/research.json'
 import categoryTechnology from '../../../../tools/migration/data/converted/category/technology.json'
 
-// ── The perspectives feed the carousels fall back to ───────────────────────
-import perspectiveWeekend from '../../../../tools/migration/data/seed/perspective/how-we-redesigned-our-website-in-a-single-weekend.json'
-import perspectiveSaas from '../../../../tools/migration/data/converted/perspective/we-replaced-a-35000-saas-tool-in-527-prompts.json'
-import perspectiveGeo from '../../../../tools/migration/data/converted/perspective/google-weighs-in-on-geo-what-just-changed-for-your-ai-search-strategy.json'
-import perspectiveCms from '../../../../tools/migration/data/converted/perspective/what-a-marketing-director-actually-gets-out-of-an-ai-connected-cms.json'
-import perspectiveConversion from '../../../../tools/migration/data/converted/perspective/why-your-conversion-rates-are-stuck-and-how-ai-breaks-the-cycle.json'
+// ── The insights feed the carousels fall back to ───────────────────────
+import insightWeekend from '../../../../tools/migration/data/seed/insight/how-we-redesigned-our-website-in-a-single-weekend.json'
+import insightSaas from '../../../../tools/migration/data/converted/insight/we-replaced-a-35000-saas-tool-in-527-prompts.json'
+import insightGeo from '../../../../tools/migration/data/converted/insight/google-weighs-in-on-geo-what-just-changed-for-your-ai-search-strategy.json'
+import insightCms from '../../../../tools/migration/data/converted/insight/what-a-marketing-director-actually-gets-out-of-an-ai-connected-cms.json'
+import insightConversion from '../../../../tools/migration/data/converted/insight/why-your-conversion-rates-are-stuck-and-how-ai-breaks-the-cycle.json'
 
 // ── The three articles `/1682-conference-ai-innovation` curates by hand ────
-import perspectiveRecap from '../../../../tools/migration/data/converted/perspective/1682-conference-recap-unveiling-ais-realities-and-innovation-insights.json'
-import perspectiveBrand from '../../../../tools/migration/data/converted/perspective/1682-the-making-of-the-brand.json'
-import perspectiveSahay from '../../../../tools/migration/data/converted/perspective/sahay-ai-triumphs-1682-venture-awards.json'
+import insightRecap from '../../../../tools/migration/data/converted/insight/1682-conference-recap-unveiling-ais-realities-and-innovation-insights.json'
+import insightBrand from '../../../../tools/migration/data/converted/insight/1682-the-making-of-the-brand.json'
+import insightSahay from '../../../../tools/migration/data/converted/insight/sahay-ai-triumphs-1682-venture-awards.json'
 
 /**
  * `data/assets.json` keys converted sources by their WordPress URL and seeded
@@ -188,15 +188,15 @@ function readingMinutesOf(body: unknown): number {
   return Math.max(1, Math.round(text.length / 5 / 200))
 }
 
-type PerspectiveCard = NonNullable<PERSPECTIVE_QUERY_RESULT>
+type InsightCard = NonNullable<INSIGHT_QUERY_RESULT>
 
 /** The `author->{name, title, headshot}` / `categories[]->{title, slug}` projection. */
-function projectPerspective(raw: SeedDoc): PerspectiveCard {
+function projectInsight(raw: SeedDoc): InsightCard {
   const doc = resolveAssetMarkers(raw, assetIdFor) as SeedDoc
   const author = resolve(doc.author) as SeedDoc | null
   return {
     _id: doc._id,
-    _type: 'perspective',
+    _type: 'insight',
     title: doc.title ?? null,
     slug: (doc.slug as { current?: string } | undefined)?.current ?? null,
     excerpt: doc.excerpt ?? null,
@@ -217,38 +217,38 @@ function projectPerspective(raw: SeedDoc): PerspectiveCard {
     seo: doc.seo ?? null,
     related: [],
     latest: [],
-  } as unknown as PerspectiveCard
+  } as unknown as InsightCard
 }
 
 /**
- * The perspectives feed, newest first — the seeded weekend piece plus four
+ * The insights feed, newest first — the seeded weekend piece plus four
  * migrated articles that carry a hero image, a byline and an excerpt (most of
  * the 272 carry none of the three, so an unfiltered feed would draw four blank
  * cards and say nothing about the composition).
  */
-export const PERSPECTIVES: readonly PerspectiveCard[] = [
-  perspectiveWeekend,
-  perspectiveSaas,
-  perspectiveGeo,
-  perspectiveCms,
-  perspectiveConversion,
-].map((doc) => projectPerspective(doc as SeedDoc))
+export const INSIGHTS: readonly InsightCard[] = [
+  insightWeekend,
+  insightSaas,
+  insightGeo,
+  insightCms,
+  insightConversion,
+].map((doc) => projectInsight(doc as SeedDoc))
 
 /**
- * Every perspective a seed page names outright, by `_id` — the curated arm of
- * `perspectivesCarouselSection`. Only `/1682-conference-ai-innovation` uses
- * it today; the rest fall back to `PERSPECTIVES`.
+ * Every insight a seed page names outright, by `_id` — the curated arm of
+ * `insightsCarouselSection`. Only `/1682-conference-ai-innovation` uses
+ * it today; the rest fall back to `INSIGHTS`.
  */
-const CURATED_PERSPECTIVES = new Map(
-  [perspectiveRecap, perspectiveBrand, perspectiveSahay].map((doc) => [
+const CURATED_INSIGHTS = new Map(
+  [insightRecap, insightBrand, insightSahay].map((doc) => [
     (doc as SeedDoc)._id as string,
-    projectPerspective(doc as SeedDoc),
+    projectInsight(doc as SeedDoc),
   ]),
 )
 
-function curatedPerspective(ref: unknown): PerspectiveCard | null {
+function curatedInsight(ref: unknown): InsightCard | null {
   const id = (ref as { _ref?: string } | null)?._ref
-  return id ? (CURATED_PERSPECTIVES.get(id) ?? null) : null
+  return id ? (CURATED_INSIGHTS.get(id) ?? null) : null
 }
 
 /** Site Settings as `SITE_SETTINGS_QUERY` returns them — the real committed document. */
@@ -281,8 +281,8 @@ export function seededPage(name: SeedPageName): NonNullable<PAGE_QUERY_RESULT> {
   return projectSeedPage({
     page,
     resolve,
-    latestPerspectives: PERSPECTIVES,
-    projectPerspective: curatedPerspective,
+    latestInsights: INSIGHTS,
+    projectInsight: curatedInsight,
   }) as unknown as NonNullable<PAGE_QUERY_RESULT>
 }
 

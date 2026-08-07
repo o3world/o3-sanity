@@ -1,0 +1,1293 @@
+{
+  "_id": "insight-wp-9224",
+  "_type": "insight",
+  "title": "1682 conference recap: Unveiling AI’s realities and innovation insights",
+  "slug": {
+    "_type": "slug",
+    "current": "1682-conference-recap-unveiling-ais-realities-and-innovation-insights"
+  },
+  "excerpt": "Explore the key takeaways from the 1682 Conference, hosted by O3. This blog highlights insights from industry leaders and the unfiltered truths about AI.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-9147"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2024-10-18T21:13:57Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/10/1682-website-social-imagery-66.jpg"
+    },
+    "alt": "1682 Conference AI insights"
+  },
+  "body": [
+    {
+      "_type": "embed",
+      "url": "https://www.o3world.com/wp-content/uploads/2024/10/o3_recap_v2-720p.mp4?_=2",
+      "_key": "k0030"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "At the ",
+          "_key": "k0032"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "1682 Conference",
+          "_key": "k0033"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", hosted by O3, thought leaders, innovators, and visionaries converged to explore the ever-evolving landscape of business, AI, and customer experience. Designed to be more than a series of discussions, the event showcased the challenges and opportunities of AI in shaping future business models. Here’s a look at the key insights and takeaways that defined the conference.",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.1682conference.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Opening the doors to innovation",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The day began with an inspiring introduction by ",
+          "_key": "k0038"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Kenneth Bull",
+          "_key": "k0039"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", CEO of Five Below, and ",
+          "_key": "k0040"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Keith Scandone",
+          "_key": "k0041"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", CEO of O3. They highlighted the importance of reframing traditional business models to prioritize customer experience. Bull shared how Five Below was created to fill a gap for kids, transforming retail with a focus on memorable experiences rather than transactions, underscoring that “innovation is not what you are doing but how you are doing it.”",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/ken-bull-5a66225/"
+        },
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/keith-scandone/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0043",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Mike Gadsby’s keynote: The hard truths of AI",
+          "_key": "k0044"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0045",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3’s Chief Innovation Officer, ",
+          "_key": "k0046"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Mike Gadsby",
+          "_key": "k0047"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", delivered a keynote titled “AI Unveiled: Five Hard Truths,” offering unfiltered insights based on years of experimentation and strategic work with clients:",
+          "_key": "k0048"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/michaelgadsby/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0049",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "AI Is Here to Stay",
+          "_key": "k0050"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0051",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Gadsby stressed that AI’s impact is undeniable. Companies that delay integrating AI risk falling behind as competitors leverage its capabilities to enhance customer experiences and streamline operations.",
+          "_key": "k0052"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0053",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Data is foundational—But costly",
+          "_key": "k0054"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0055",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Data is both abundant and expensive. Gadsby noted that investing in high-quality data management is crucial for AI success. Without it, even the most sophisticated AI models fail to deliver impactful results.",
+          "_key": "k0056"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0057",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Humans are the biggest problem—and opportunity",
+          "_key": "k0058"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0059",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“People resist what they don’t understand,” Gadsby explained. He emphasized that education and open dialogue are essential to shifting mindsets, and transforming resistance into opportunities for empowerment and growth.",
+          "_key": "k0060"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0061",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "AI won’t take your job—But someone who knows AI might",
+          "_key": "k0062"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0063",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Emphasizing the evolution of work, Gadsby encouraged companies to upskill their teams to adapt and leverage AI effectively, turning technology into a tool for enhancing human expertise.",
+          "_key": "k0064"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0065",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Expect the unexpected",
+          "_key": "k0066"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0067",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The rapid pace of AI development demands agility. Companies must adopt a test-and-learn approach to remain adaptable and manage the inherent uncertainties of AI technology.",
+          "_key": "k0068"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0069",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Key panels: Balancing AI and industry realities",
+          "_key": "k0070"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0071",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Following Gadsby’s keynote, a series of panels expanded on these themes, diving into industry-specific applications and challenges:",
+          "_key": "k0072"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0073",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Navigating AI at the intersection of risk and regulation",
+          "_key": "k0074"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0075",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Moderated by ",
+          "_key": "k0076"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "April Walker",
+          "_key": "k0077"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", Strategic Advisor, this panel included insights from ",
+          "_key": "k0078"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "Mike Urban",
+          "_key": "k0079"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " of Best Egg and ",
+          "_key": "k0080"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0006"
+          ],
+          "text": "Nate Gach",
+          "_key": "k0081"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " of Independence Blue Cross. Urban discussed how AI supports fraud detection and customer support but stressed the importance of building internal AI councils to create usage policies and build comfort with the technology. Gach highlighted the industry’s cautious approach, noting that no insurance company is yet using generative AI for customer-facing applications due to regulatory concerns.",
+          "_key": "k0082"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/aprilwalkermbams/"
+        },
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/michael-urban01/"
+        },
+        {
+          "_key": "k0006",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/nategach/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0083",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Shaping the future of healthcare: Evolving processes, operations, and careers",
+          "_key": "k0084"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0085",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Moderated by ",
+          "_key": "k0086"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0007"
+          ],
+          "text": "Abhay Patel",
+          "_key": "k0087"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " from Children’s Hospital of Philadelphia, this panel featured ",
+          "_key": "k0088"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0008"
+          ],
+          "text": "Maureen Rinkunas",
+          "_key": "k0089"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " of Redesign Health and ",
+          "_key": "k0090"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0009"
+          ],
+          "text": "Michelle Cleary",
+          "_key": "k0091"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " from Cigna. They explored how AI enhances patient care, particularly in diagnostic imaging and administrative tasks. Cleary shared Cigna’s approach to AI governance, which includes a detailed vetting process and guardrails to mitigate risk, though she noted that regulatory red tape often delays progress.",
+          "_key": "k0092"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0007",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/abhayspatel/"
+        },
+        {
+          "_key": "k0008",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/mwrinkunas/"
+        },
+        {
+          "_key": "k0009",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/michelle-c-217a862aa/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0093",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0094",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/10/C4A00679-1.jpg"
+      },
+      "alt": "1682 panel \"Retail is a brutal place for innovation\"",
+      "_key": "k0095"
+    },
+    {
+      "_key": "k0096",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "1682 panel titled”Retail is a brutal place for innovation”",
+          "_key": "k0097"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0098",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "CIO perspectives: Retail is a brutal place for innovation",
+          "_key": "k0099"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0100",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0010"
+          ],
+          "text": "Amit Jhunjhunwala",
+          "_key": "k0101"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " of Five Below led this session with ",
+          "_key": "k0102"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0011"
+          ],
+          "text": "John Collier",
+          "_key": "k0103"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " from Wawa and ",
+          "_key": "k0104"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0012"
+          ],
+          "text": "Priya Serai",
+          "_key": "k0105"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " of Zeus Fire and Security. Collier discussed Wawa’s efforts to merge digital and in-store experiences while maintaining a balance between personalization and privacy. The panelists highlighted the need for gamification strategies and leveraging real-time feedback loops to enhance customer engagement. Serai noted the challenge of deploying AI technologies in retail, emphasizing the importance of change management and employee buy-in.",
+          "_key": "k0106"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0010",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/amit-jhunjhunwala-87123163/"
+        },
+        {
+          "_key": "k0011",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/johnkcollier/"
+        },
+        {
+          "_key": "k0012",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/priyaserai/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0107",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0108",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/10/C4A00845.jpg"
+      },
+      "alt": "1682 sports panel ",
+      "_key": "k0109"
+    },
+    {
+      "_key": "k0110",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "1682 panel titled “Investing in AI: Separating hype from real value”",
+          "_key": "k0111"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0112",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Investing in AI",
+          "_key": "k0113"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0114",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0013"
+          ],
+          "text": "Sushma Rajagopalan",
+          "_key": "k0115"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " of Rittenhouse Ventures moderated a discussion with ",
+          "_key": "k0116"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0014"
+          ],
+          "text": "Russ Kliman",
+          "_key": "k0117"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " (Future Crafted), ",
+          "_key": "k0118"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0015"
+          ],
+          "text": "Emily Foote",
+          "_key": "k0119"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " (Osage Venture Partners), and ",
+          "_key": "k0120"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0016"
+          ],
+          "text": "Omar Mencin",
+          "_key": "k0121"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " (Ben Franklin Technology Partners). The panelists advised focusing on investments that have measurable ROI. Kliman emphasized the importance of proprietary data, while Foote highlighted the need for clarity in problem selection to ensure AI’s value is fully realized.",
+          "_key": "k0122"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0013",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/sushma/"
+        },
+        {
+          "_key": "k0014",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/russkliman/"
+        },
+        {
+          "_key": "k0015",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/emilycfoote/"
+        },
+        {
+          "_key": "k0016",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/omar-mencin-a445ab1/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0123",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Building smarter products",
+          "_key": "k0124"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0125",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Leveraging AI for Meaningful Digital Experiences: ",
+          "_key": "k0126"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0017"
+          ],
+          "text": "Christine Sheller",
+          "_key": "k0127"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " of O3 moderated this session with ",
+          "_key": "k0128"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0018"
+          ],
+          "text": "Deanna Ballew",
+          "_key": "k0129"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " (Acquia), ",
+          "_key": "k0130"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0019"
+          ],
+          "text": "Rick Nucci",
+          "_key": "k0131"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " (Guru), and ",
+          "_key": "k0132"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0020"
+          ],
+          "text": "Shikha Miglani",
+          "_key": "k0133"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " (Saarthee). Ballew stressed the integration of data and design, while Miglani emphasized the importance of aligning AI solutions with customer needs. Nucci shared examples of using AI for internal discovery processes, highlighting how AI can connect disparate data points to create efficient workflows.",
+          "_key": "k0134"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0017",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/christine-sheller/"
+        },
+        {
+          "_key": "k0018",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/deannaballew/"
+        },
+        {
+          "_key": "k0019",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/ricknucci/"
+        },
+        {
+          "_key": "k0020",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/shikha-miglani-40a1ba5/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0135",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Game on: Enhancing the fan experience with AI-driven data",
+          "_key": "k0136"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0137",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This session, moderated by ",
+          "_key": "k0138"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0021"
+          ],
+          "text": "Dan Hou",
+          "_key": "k0139"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " of Eskridge, featured ",
+          "_key": "k0140"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0022"
+          ],
+          "text": "Jenna Kurath",
+          "_key": "k0141"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " from Comcast and ",
+          "_key": "k0142"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0023"
+          ],
+          "text": "Anthony Brock",
+          "_key": "k0143"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " of the Flyers. They explored AI’s role in transforming sports marketing and fan engagement. Kurath discussed using AI to gain deeper insights into fan behavior, enabling personalized in-game and online experiences. Brock emphasized integrating GenAI with traditional models to provide actionable, real-time data, ensuring sports experiences are more impactful and engaging for fans.",
+          "_key": "k0144"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0021",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/danhou/"
+        },
+        {
+          "_key": "k0022",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/jennakurath/"
+        },
+        {
+          "_key": "k0023",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/anthonydbrock/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0145",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Showcasing ventures: Innovators pitching the future",
+          "_key": "k0146"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0147",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A standout element of the conference was the platform for emerging ventures to pitch their AI-driven innovations. These startups presented solutions addressing diverse challenges, such as enhancing supply chain efficiency and transforming educational technologies. This segment underscored the conference’s commitment to fostering innovation and supporting new voices in the AI space. The 2024 winner of the Venture Awards is ",
+          "_key": "k0148"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0024"
+          ],
+          "text": "Sahay AI",
+          "_key": "k0149"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0150"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0024",
+          "_type": "link",
+          "href": "https://sahayai.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0151",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Sahay AI leverages advanced AI to revolutionize railway inspections. Their AI models, real-time monitoring dashboard, and portable robots increase inspection speed by 10 times and reduce costs by 90%.",
+          "_key": "k0152"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0153",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0154",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/10/C4A01356.jpg"
+      },
+      "alt": "Michael Bachman’s Closing Keynote",
+      "_key": "k0155"
+    },
+    {
+      "_key": "k0156",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "1682 keynote speaker, Michael Bachman (Head of Research, Architecture + AI Strategy at Boomi Innovation Group)",
+          "_key": "k0157"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0158",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Michael Bachman’s closing keynote: A path between here and AGI",
+          "_key": "k0159"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0160",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The final keynote by ",
+          "_key": "k0161"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0025"
+          ],
+          "text": "Michael Bachman",
+          "_key": "k0162"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", Head of Research, Architecture, and AI Strategy at Boomi Innovation Group, offered a visionary outlook on AI’s future. Bachman discussed the roadmap toward Artificial General Intelligence (AGI), emphasizing ethical development and the need for collaborative AI-human systems. His insights tied together the conference’s themes of responsible innovation, risk management, and long-term strategy, leaving attendees with a forward-looking perspective on AI’s trajectory.",
+          "_key": "k0163"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0025",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/michaelbachmanphilly/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0164",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Closing thoughts: Moving beyond the hype",
+          "_key": "k0165"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0166",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The 1682 Conference was more than just a gathering of industry experts; it was an exploration of AI’s current state and its potential future. Attendees were challenged to think critically about integrating AI responsibly, balancing innovation with human expertise and regulatory frameworks.",
+          "_key": "k0167"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0168",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As we move forward, the lessons from this conference reinforce a fundamental truth: innovation isn’t just about technology—it’s about people, processes, and purpose. The ",
+          "_key": "k0169"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0026"
+          ],
+          "text": "1682 Conference",
+          "_key": "k0170"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " serves as a call to action for organizations to embrace strategic, bold, and adaptable approaches to drive meaningful impact in a rapidly changing world.",
+          "_key": "k0171"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0026",
+          "_type": "link",
+          "href": "https://www.1682conference.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0172",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "For more insights from the 1682 Conference, visit ",
+          "_key": "k0173"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0027"
+          ],
+          "text": "O3 World",
+          "_key": "k0174"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " or ",
+          "_key": "k0175"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0028"
+          ],
+          "text": "reach out to our team directly",
+          "_key": "k0176"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0177"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0027",
+          "_type": "link",
+          "href": "https://www.o3world.com/"
+        },
+        {
+          "_key": "k0028",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0178",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0179",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0180",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "Written by O3 Senior Strategist, ",
+          "_key": "k0181"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em",
+            "k0029"
+          ],
+          "text": "Brady Halligan",
+          "_key": "k0182"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": ".",
+          "_key": "k0183"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0029",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/bradyhalligan/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "1682 Conference AI insights on business innovation",
+    "description": "Explore the key insights from the 1682 Conference AI insights and learn how AI is shaping future business models."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:9224"
+  }
+}

@@ -1,0 +1,287 @@
+{
+  "_id": "insight-wp-8788",
+  "_type": "insight",
+  "title": "Revolutionizing recall: How AI's new frontier with Gemini 1.5 transforms data retention",
+  "slug": {
+    "_type": "slug",
+    "current": "revolutionizing-recall-how-ais-new-frontier-with-gemini-1-5-transforms-data-retention"
+  },
+  "excerpt": "Gemini 1.5 breaks new ground in AI technology, boasting unparalleled information recall capabilities that promise to reshape how we interact with vast data sets.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    }
+  ],
+  "publishedAt": "2024-02-21T19:04:57Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/02/O3-website-imagery_-Perspectives-37.png"
+    },
+    "alt": "Revolutionizing recall: How AI's new frontier with Gemini 1.5 transforms data retention"
+  },
+  "body": [
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Imagine a world where technology achieves a 99% accuracy in recalling millions of bits of information. Enter, ",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Gemini 1.5",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", an artificial intelligence (AI) model that is reinventing the standards of large-context AI performance. Its astounding capabilities seem like a space-age fantasy but rest assured, we are discussing technology that’s making ripples today.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://blog.google/technology/ai/google-gemini-next-generation-model-february-2024/"
+        }
+      ],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "OpenAI",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and ",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Google",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " have been pioneers in AI, pushing the boundaries year after year. However, the unveiling of Gemini 1.5 might just mark the most influential breakthrough in modern AI technology comparable only to the release of GPT4.",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://openai.com/"
+        },
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "http://google.com"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What makes Gemini 1.5 so extraordinary?",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "It is a master at remembering. It can accurately recall more than 99% of the information contained within a context window of 10M tokens – which is akin to around 2% of the entirety of English language Wikipedia or 7 million words. Imagine the enormity of the information that is! Yet, out of all of that content, Gemini 1.5 was only wrong 5 times. This astounding precision and ability to recall is unheard of in current models or even when a model is paired with RAG (Retrieval-Augmented Generation), a revolutionary development that almost feels unreal to even our experts at O3. Within the findings from Google’s research, there is a strong indication that with Gemini 1.5, the more information you feed, the more accurate it becomes, inverting the standard model of AI learning and setting a new bar for recall techniques.",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Gemini 1.5’s excellence extends to audio as well, outperforming other models with a marginal error of 5%. And when it comes to video, Google had to create new benchmarks because the current standards couldn’t match up.",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Considerations with Gemini 1.5",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As exciting as these developments are, it’s crucial to remember that Gemini 1.5, like any other AI model, isn’t without limitations. Google also points out in their research that recalling information is not the same as reasoning. So yes, while Gemeni 1.5 will provide almost unlimited context windows, it may not be great at understanding the content that it’s recalling. It’s not particularly adept at recognizing text in images and struggles to decide what questions are grounded and not. Gemini 1.5 may block a totally valid question or let an invalid question be asked. Yet, these minor limitations do not overshadow its impressive capabilities.",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Why it matters to you",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "When we think about the possible applications of a tool like Gemini 1.5, they stretch as far as our imagination. Its proficiency in understanding long-form video content could revolutionize sectors from journalism to history, making the exploration of archival content a breeze. The unveiling of Gemini 1.5 is not just another breakthrough. It’s a glimpse into a future where AI’s learning potential equals that of humans but with near instant recall.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Thank you to O3 AI expert, ",
+          "_key": "k0030"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Josh Friedman",
+          "_key": "k0031"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " for these timely insights. As a leader in AI innovation, we are excited to be at the forefront of a future sculpted by precision, efficiency, and an unfathomable capacity for data comprehension. If you are looking to adopt or ",
+          "_key": "k0032"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "learn more about O3’s AI strategies",
+          "_key": "k0033"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", get ",
+          "_key": "k0034"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "in touch with our team today",
+          "_key": "k0035"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/josh-friedman/"
+        },
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.o3world.com/transcend/"
+        },
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Gemini 1.5: AI information recall with unprecedented accuracy",
+    "description": "Discover Gemini 1.5's transformative impact on AI's ability to recall information with near-perfect accuracy, challenging existing technological limits and expanding the horizons for data management."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:8788"
+  }
+}

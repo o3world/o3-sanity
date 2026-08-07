@@ -1,0 +1,629 @@
+{
+  "_id": "insight-wp-2632",
+  "_type": "insight",
+  "title": "Movers, shakers & innovators - 1682 moderator spotlight",
+  "slug": {
+    "_type": "slug",
+    "current": "movers-shakers-innovators-1682-moderator-spotlight"
+  },
+  "excerpt": "Take some time to get to know our moderators for the day.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    }
+  ],
+  "publishedAt": "2019-09-19T22:33:00Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/08/O3-website-imagery_-Insights-6.jpg"
+    },
+    "alt": "O3 blue pattern"
+  },
+  "body": [
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "When we first started to plan 1682, we envisioned creating a conference where leaders in business, design, and technology can come together and discuss the behind the scenes realities of innovation. We’re so proud of what our business of innovation conference has evolved into, and we truly have a phenomenal line-up of speakers and moderators planned for the day. We want to take the next few weeks to highlight who we have featured for the day. Take some time to get to know our moderators for the day.",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/1682_MikeLeb_blog.jpg"
+      },
+      "alt": "1682 Moderator Mike Lebowitz",
+      "_key": "k0007"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Michael Lebowitz",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Company: ",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Big Spaceship",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\n",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Title: ",
+          "_key": "k0014"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Founder & CEO",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.bigspaceship.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Michael Lebowitz is the Founder and CEO of Big Spaceship. Since launching Big Spaceship in 2000, he has defined its innovative structure, strategy, and vision, while working closely with the agency’s clients, including Brightstar Care, Chase, Google Fi, Google Maps, Hasbro, International Rescue Committee, JetBlue, Kirkus, NFL, Puma, Roku, Sidewalk Labs, SiriusXM, Stadia, Starbucks, and YouTube.",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/1682_NatalieNixon_blog.jpg"
+      },
+      "alt": "1682 Moderator Natalie Nixon",
+      "_key": "k0018"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Natalie Nixon",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Company: ",
+          "_key": "k0022"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Figure 8 Thinking LLC",
+          "_key": "k0023"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\n",
+          "_key": "k0024"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Title: ",
+          "_key": "k0025"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Creativity Strategist & President",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.figure8thinking.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Natalie Nixon, PhD is a creativity strategist and President of Figure 8 Thinking, LLC. She works in the innovation, consumer insights, and change management spaces. Natalie advises leaders on how to achieve priority business goals, develop inventive thinking and design customer-centric products & services.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "She does this by applying her expertise in qualitative research, design thinking and foresight. Natalie is a published author (Strategic Design Thinking and INC online magazine) and a global speaker. She earned her BA in Anthropology and Africana Studies from Vassar College and her PhD in Design Management from the University of Westminster.",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/1682_DavidLauer_blog.jpg"
+      },
+      "alt": "1682 Moderator Dave Lauer",
+      "_key": "k0031"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Dave Lauer",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Company: ",
+          "_key": "k0035"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Urvin AI",
+          "_key": "k0036"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\n",
+          "_key": "k0037"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Title: ",
+          "_key": "k0038"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "CEO",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://urvin.ai/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Dave Lauer is CEO of Urvin AI, an artificial intelligence agency and consultancy that specializes in helping firms navigate the AI lifecycle and develops full-stack solutions leveraging this advanced technology. His current work focuses on combining unique approaches to analyzing quantitative and text data with a focus on business value and challenges across industries, including automotive, aerospace, financial services, legal and politics. In addition to this work, he continues consulting for a wide range of financial services market participants—including institutional buy-side, sell-side, ATSs, exchanges, regulators and retail robo-advisors. Dave channels his unique body of knowledge toward helping firms navigate increasingly complex modern markets.",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0042",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "He serves as an Independent Director on the Aequitas NEO Board of Directors, sits on FINRA’s Market Regulation Committee, and advises multiple FinTech start-ups. His previous work includes co-founding the Healthy Markets Association, market structure and technology consulting with Mile 59, technology architecture at Verdande Finance and IEX Group, public advocacy at Better Markets, and electronic trading at Allston Trading and Citadel Investment Group. Dave has testified before the US Senate Banking Committee twice and the SEC multiple times. Dave also helped develop high-speed messaging technology for Tervela as an early employee during its formative stages.",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/1682_PamelaRaitt_blog.jpg"
+      },
+      "alt": "1682 Moderator Pamela Raitt",
+      "_key": "k0044"
+    },
+    {
+      "_key": "k0045",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Pamela Raitt",
+          "_key": "k0046"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0047",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Company: ",
+          "_key": "k0048"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Bellatrix Group\n",
+          "_key": "k0049"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Title: ",
+          "_key": "k0050"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Chief Strategy Officer",
+          "_key": "k0051"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0052",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Pamela is an established digital, design, and strategy leader who has spent the last 25 years helping global brands create meaningful, memorable cross-channel touch-points, helping them establish or reset their brand identity, leading enterprise-level digital initiatives, and fostering human-centric innovation and design thinking practices into her clients’ work, and cultures.",
+          "_key": "k0053"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0054",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As Chief Strategy Officer at Bellatrix Group, she oversees all aspects of the firm’s go-to-market strategy and service portfolio, and works directly with clients to identify and map out their brand and business objectives, understand and empathize with their core customer, figure out how technology can best support their goals, and ultimately, how to turn their customers into engaged loyalists.",
+          "_key": "k0055"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0056",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Pamela began her career on Madison Avenue and was privileged to work across channels with large consumer brands including Bank of America, Lucky Strike, CVS, and Wendy’s. She later spent several years in Silicon Valley where she helped then emergent brands like Microsoft, eBay, Sony, Yahoo!, and Charles Schwab create unique, memorable digital engagement strategies for their prospects and customers. Eventually, she made her way to product development, overseeing an experience design team that worked across content strategy, user experience, user interface design, and front-end development to bring end-to-end, platform-driven initiatives to global clients.",
+          "_key": "k0057"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0058",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Pamela brings passion, enthusiasm, intellectual curiosity, and drive to her work every single day. She continues to be excited and engaged by how technology enables humans and is grateful to partner with clients who are looking for new ways to solve problems, with people at the center. Pamela lives in Logan Square with her 13-year-old son.",
+          "_key": "k0059"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/1682_CarolEggert_blog.jpg"
+      },
+      "alt": "1682 Moderator Carol Eggert",
+      "_key": "k0060"
+    },
+    {
+      "_key": "k0061",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Carol Eggert",
+          "_key": "k0062"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0063",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Company: ",
+          "_key": "k0064"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Comcast NBCUniversal",
+          "_key": "k0065"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\n",
+          "_key": "k0066"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Title: ",
+          "_key": "k0067"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Vice President of Military and Veteran Affairs",
+          "_key": "k0068"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://corporate.comcast.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0069",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Carol Eggert is Senior Vice President of Military and Veteran Affairs at Comcast NBCUniversal. In this role, she leads an eight-person team that works collaboratively across Comcast NBCUniversal to provide strategic leadership to all aspects of programs and outreach engaging the military and veteran community. Carol is a retired U.S. Army brigadier general and brings more than 30 years of military and civilian experience to Comcast. Her leadership in the private sector has been recognized by We Are The Mighty, and her military awards and commendations include the Legion of Merit, Bronze Star, and Purple Heart.",
+          "_key": "k0070"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/1682_LaurenCox_blog.jpg"
+      },
+      "alt": "1682 Moderator Lauren Cox",
+      "_key": "k0071"
+    },
+    {
+      "_key": "k0072",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Lauren Cox",
+          "_key": "k0073"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0074",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Company: ",
+          "_key": "k0075"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "Office of the Mayor, City of Philadelphia",
+          "_key": "k0076"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\n",
+          "_key": "k0077"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Title: ",
+          "_key": "k0078"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Deputy Communications Director",
+          "_key": "k0079"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.phila.gov/departments/mayor/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0080",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Lauren Cox is Deputy Communications Director for Mayor Jim Kenney and has worked for the City of Philadelphia for over six years. In her current position, Lauren supports a portfolio of more than a dozen City departments and initiatives—handling media relations, providing strategic guidance, and assisting with digital needs. Over the course of her career, Lauren has been part of the communications efforts for some of the biggest events and projects in Philadelphia’s history, including: the annual July 4th festival, 2015 Papal Visit, 2016 Democratic National Convention, Eagles Super Bowl parade, and Amazon HQ2 bid. Lauren is a graduate of Temple University and has a Bachelor of Arts in Strategic Communication.",
+          "_key": "k0081"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:2632"
+  }
+}

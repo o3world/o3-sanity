@@ -73,7 +73,7 @@ machine-readable half.
 - `nodeId` is a **verified** node id in `1680:2134` form. A share URL's `node-id` is usually a
   child, not the frame, and it uses `-` — both mistakes are caught by `manifest.test.ts`.
 - `name` is the page layer in this project's language (CONTEXT.md), not the Figma layer name: two
-  different frames are called "Insights" in that file and neither is the Perspectives index.
+  different frames are called "Insights" in that file and neither is the Insights index.
   `figmaName` records what Figma calls it. For a component set the two are the same string — the
   Figma set name _is_ what this project calls it.
 - `kind: "pageFrame"` carries a `route` and a `variant`; `kind: "componentSet"` carries neither
@@ -141,8 +141,8 @@ the manifest says why rather than picking a plausible node:
 | Not from Figma                            | Why                                                                   |
 | ----------------------------------------- | --------------------------------------------------------------------- |
 | 12 `partner-*` / `plat-*` / `work-*` PNGs | byte-identical to `prototype/assets/` — the retired prototype (#33)   |
-| 3 `perspective-weekend-*` PNGs            | design-sourced for the post; no matching fill, no node with its ratio |
-| 7 `eng-*` / `perspective-process-*` SVGs  | hand-authored animated SVG — see below                                |
+| 3 `insight-weekend-*` PNGs                | design-sourced for the post; no matching fill, no node with its ratio |
+| 7 `eng-*` / `insight-process-*` SVGs      | hand-authored animated SVG — see below                                |
 
 ### `locked` — three ways to earn it
 

@@ -16,8 +16,8 @@ import {
  * re-exports it, feed it fixture documents, and get back the HTML a visitor
  * would receive plus the `<head>` metadata Next would emit.
  *
- *   const { html, metadata } = await renderRoute(buildDetailRoute(perspective), {
- *     data: aPerspective(),
+ *   const { html, metadata } = await renderRoute(buildDetailRoute(insight), {
+ *     data: anInsight(),
  *     params: { slug: 'hello' },
  *   })
  *   expect(html).toContain('Hello world')

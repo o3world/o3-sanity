@@ -9,7 +9,7 @@ import { PersonGridSection } from './PersonGridSection'
  * The About frame's "Our team" band (`1927:6435`).
  *
  * The people are **referenced**, not inlined — a person is already a document
- * (they author perspectives), so inlining names here would have created a
+ * (they author insights), so inlining names here would have created a
  * second, drifting copy of the same fact. These stories therefore render the
  * real migrated `person` documents, headshots and all, which makes this also
  * the check that the converted person tree still carries them.

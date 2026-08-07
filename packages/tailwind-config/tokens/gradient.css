@@ -89,7 +89,7 @@
     rgba(3, 3, 3, 0.88) 100%
   );
   /*
-   * Vertical scrim on the perspectives ("Blog") cards — transparent at the
+   * Vertical scrim on the insights ("Blog") cards — transparent at the
    * top, 75% ink at the bottom where the card's label sits (node 1734:1725).
    */
   --gradient-card-veil: linear-gradient(180deg, rgba(3, 3, 3, 0) 0%, rgba(3, 3, 3, 0.75) 90%);
@@ -97,7 +97,7 @@
   /* ── Brand glow ────────────────────────────────────────────────────────── */
   /*
    * Figma variable `Gradient/Red/1` — two stacked radials that give the red
-   * perspectives card its ember look (node 1734:1737). Declared as ONE
+   * insights card its ember look (node 1734:1737). Declared as ONE
    * comma-separated background-image, top layer first, exactly as Figma
    * stacks them: a 50% brand-red bloom off the top-right corner over a deep
    * maroon-to-ink base anchored at the top-left.

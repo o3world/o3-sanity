@@ -68,12 +68,7 @@ describe('published mode', () => {
 
 describe('draft mode', () => {
   const html = renderToStaticMarkup(
-    <PreviewSwitcherView
-      isDraft
-      returnTo="/perspectives?page=3"
-      status="idle"
-      onEnableDrafts={noop}
-    />,
+    <PreviewSwitcherView isDraft returnTo="/insights?page=3" status="idle" onEnableDrafts={noop} />,
   )
 
   it('says the page is showing drafts', () => {
@@ -87,7 +82,7 @@ describe('draft mode', () => {
   })
 
   it('carries the exact URL you were on, query string included', () => {
-    expect(html).toContain('to=%2Fperspectives%3Fpage%3D3')
+    expect(html).toContain('to=%2Finsights%3Fpage%3D3')
   })
 
   it('offers no way to re-enter draft mode it is already in', () => {

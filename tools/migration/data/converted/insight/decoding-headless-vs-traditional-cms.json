@@ -1,0 +1,815 @@
+{
+  "_id": "insight-wp-7667",
+  "_type": "insight",
+  "title": "Decoding headless vs. traditional CMS",
+  "slug": {
+    "_type": "slug",
+    "current": "decoding-headless-vs-traditional-cms"
+  },
+  "excerpt": "A guide to understanding its benefits, challenges, and use cases",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-11",
+      "_key": "cat-11"
+    }
+  ],
+  "publishedAt": "2023-04-19T14:01:35Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/04/O3-website-imagery_-Perspectives-2.jpg"
+    },
+    "alt": "Headless article featured image"
+  },
+  "body": [
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Defining the architectural requirements for a martech ecosystem can feel daunting. It’s easy to brush off because gathering requirements and laying that out into a plan requires significant effort and resources – and time is money.",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Long-term impact on customers, employees, product, and brand must be considered when implementing web and mobile apps. Gathering information beforehand is crucial for informed decision-making and meeting everyone’s needs.",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "During project discovery, I’m frequently asked about “decoupled” and “headless” for martech architecture. From my experience, both headless and traditional CMS have their merits depending on the business needs. This article aims to clarify the terminology, benefits, challenges, and common use cases of headless applications.",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Defining a headless application",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "While researching headless architecture, there are many keywords that crop up – for example: decoupled, headless, omni-channel, – also what makes a frontend and a backend different? Below is a small glossary that defines each term in the context of headless architecture.",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Frontend",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The frontend is where users interact with an application, built with technologies like React, Vue, JavaScript, and CSS. It has a separate codebase and web address from the backend.",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Backend",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The backend manages the database and behind-the-scenes operations. Editors add content here, which is then transmitted through an API to the frontend. It has a separate codebase and web address from the frontend.",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Decoupled",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A separation of the frontend code and the backend code.",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Headless",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Headless is a decoupled system without a predefined presentation layer. The backend delivers content to various channels, making it a data hub surfaced in multiple ways on web, mobile, and smart devices.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Omni-channel",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A content strategy used to provide a unified customer experience across all possible touch points, including online and physical.",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Pros and cons of headless",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The benefits",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A headless architecture can be impactful for the user experience (your customers), the engineers and marketing teams (your employees), and ultimately the bottom line of the business in the following ways:",
+          "_key": "k0038"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0039",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Serve content across multiple channels",
+          "_key": "k0040"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0041",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The primary benefit of headless architecture is delivering content across various channels, minimizing duplication of effort, ensuring consistency, reducing sharing outdated information, and building trust with customers.",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0043",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Superior user experience",
+          "_key": "k0044"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0045",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Communities developing headless technologies optimize cache, reduce code overhead, and use serverless architecture to improve performance. Careful planning is required to avoid excessive data that could hinder performance by monitoring response and bundle sizes.",
+          "_key": "k0046"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0047",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Scalability that leads to better delivery",
+          "_key": "k0048"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0049",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The decoupled nature of a headless architecture offers flexibility and scalability compared to a monolithic CMS by easily accommodating new channels and technologies as your business grows.",
+          "_key": "k0050"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0051",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The challenges",
+          "_key": "k0052"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0053",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Headless architecture offers numerous advantages, but let’s briefly touch on the potential challenges it could pose for your team.",
+          "_key": "k0054"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0055",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The ever-changing landscape",
+          "_key": "k0056"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0057",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "With technology rapidly evolving, dependencies can become outdated quickly, making tech debt remediation a continuous process in every sprint, rather than a task put in the backlog. An ongoing investment is necessary for maintaining a high-quality headless application.",
+          "_key": "k0058"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0059",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Cost and complexity",
+          "_key": "k0060"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0061",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Although headless architecture can offer scalability and improved user experience, it can also be costly and complex to implement. This approach requires significant investment in terms of time, resources, and money, as well as advanced technical expertise, which can be expensive and difficult to obtain.",
+          "_key": "k0062"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/04/Headless-Architecture2-1.png"
+      },
+      "alt": "Headless vs traditional architecture graph",
+      "_key": "k0063"
+    },
+    {
+      "_key": "k0064",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Is “hybrid headless” the right option for you?",
+          "_key": "k0065"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0066",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If you’re thinking of using a headless CMS, a “hybrid headless” approach could be worth considering. This combines headless and traditional CMS features to offer benefits such as flexibility and scalability, while also allowing editors to manage content and presentation traditionally for specific areas of the website or application.",
+          "_key": "k0067"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0068",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "One of the drawbacks of a pure headless CMS is that digital marketers may lose the ability to use “what you see is what you get” (WYSIWYG) editors and create marketing endpoints without the help of a development team. Hybrid headless CMS addresses this issue by including a presentation layer that enables non-technical users to manage content and presentation in a more familiar way. This can be especially useful if you have a marketing team that needs to preview and edit content in a visual way before it is published. This allows marketers to iterate and test new content ideas more easily, which can lead to better engagement with your target audience.",
+          "_key": "k0069"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0070",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Evaluating headless for your project",
+          "_key": "k0071"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0072",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "To ensure a successful implementation, businesses should consider a range of criteria when evaluating the suitability of a headless architecture. These might include:",
+          "_key": "k0073"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0074",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Integration requirements with existing systems, such as CRM and payment processing tools.",
+          "_key": "k0075"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0076",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Performance goals, such as reducing bounce rates or achieving a specific load time.",
+          "_key": "k0077"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0078",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Security requirements, including compliance with relevant regulations or company requirements.",
+          "_key": "k0079"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0080",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Content management needs, such as the ability to quickly update content across multiple channels.",
+          "_key": "k0081"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0082",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Scalability and flexibility to support future growth and changes.",
+          "_key": "k0083"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0084",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Budget and resource availability for ongoing maintenance and updates.",
+          "_key": "k0085"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0086",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Headless in the real world",
+          "_key": "k0087"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0088",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Headless applications are common in various industries, and the following two examples illustrate their practical use in the real world.",
+          "_key": "k0089"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0090",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Content management",
+          "_key": "k0091"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0092",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Headless content management systems (CMS) allow content creators to focus on creating and managing content without worrying about the presentation layer. This allows content to be disseminated to multiple endpoints like a website, mobile app, digital display, or a kiosk.",
+          "_key": "k0093"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0094",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Mobile apps",
+          "_key": "k0095"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0096",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Headless architectures are becoming more common in mobile app development. Instead of building a native app with a tightly coupled backend, developers can use APIs to build a headless app that can be used across multiple platforms. This allows for greater flexibility and faster development times.",
+          "_key": "k0097"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0098",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Transform your ecosystem with O3’s headless architecture expertise",
+          "_key": "k0099"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0100",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If you’re exploring the possibility of implementing a headless architecture in your martech ecosystem, O3 is well-equipped to assist. Our team of seasoned architects and designers possesses extensive knowledge of headless architecture while providing expert guidance throughout the process. We have found that using ",
+          "_key": "k0101"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Drupal",
+          "_key": "k0102"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and ",
+          "_key": "k0103"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Acquia",
+          "_key": "k0104"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " together provides a powerful solution for creating flexible and scalable martech ecosystems that can adapt to the evolving needs of our clients.",
+          "_key": "k0105"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.drupal.org/"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.acquia.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0106",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We specialize in offering customized solutions that can seamlessly integrate with your current systems while placing importance on scalability, security, and user experience. Moreover, we provide continuous maintenance and support to ensure that your headless application runs optimally. ",
+          "_key": "k0107"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Get in touch",
+          "_key": "k0108"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " with us today to learn more about how we can transform your experience.",
+          "_key": "k0109"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "Understanding the benefits and challenges of martech architecture. Check out our guide to understanding its benefits, challenges, and use cases."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:7667"
+  }
+}

@@ -9,7 +9,7 @@ import { hrefForDoc } from './urls'
  */
 describe('hrefForDoc', () => {
   it('prefixes collection types', () => {
-    expect(hrefForDoc({ _type: 'perspective', slug: 'a-post' })).toBe('/perspectives/a-post')
+    expect(hrefForDoc({ _type: 'insight', slug: 'a-post' })).toBe('/insights/a-post')
     expect(hrefForDoc({ _type: 'caseStudy', slug: 'a-case' })).toBe('/work/a-case')
   })
 

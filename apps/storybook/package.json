@@ -4,8 +4,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "storybook dev -p 6006 --no-open",
-    "storybook": "storybook dev -p 6006 --no-open",
+    "dev": "../../scripts/dev.sh storybook",
+    "storybook": "../../scripts/dev.sh storybook",
     "build": "storybook build",
     "build-storybook": "storybook build",
     "lint": "eslint .",

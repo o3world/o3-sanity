@@ -1,7 +1,7 @@
 /*
  * Radius — the canonical design is SQUARE.
  *
- * Buttons (1868:3262), case-study cards, perspectives cards and media frames
+ * Buttons (1868:3262), case-study cards, insights cards and media frames
  * all carry radius 0 in the frames, against the prototype's 6px buttons and
  * 16px cards. The tokens stay (25 call sites reference `rounded-btn` /
  * `rounded-card`, and keeping the names means a future decision is one edit
@@ -18,7 +18,7 @@
 @theme {
   /* Buttons, both sizes and both fills. */
   --radius-btn: 0px;
-  /* Case-study cards, perspectives cards, media frames. */
+  /* Case-study cards, insights cards, media frames. */
   --radius-card: 0px;
   /* Figma declares a `radius-small` variable at 4px but the canonical Home
    * frame never consumes it. Recorded, not exported as a utility, so that

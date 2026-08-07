@@ -148,7 +148,7 @@
           "cta": {
             "_type": "cta",
             "label": "Read how Sahay AI won",
-            "href": "/perspectives/sahay-ai-triumphs-1682-venture-awards",
+            "href": "/insights/sahay-ai-triumphs-1682-venture-awards",
             "variant": "ghost"
           }
         },
@@ -169,7 +169,7 @@
           "cta": {
             "_type": "cta",
             "label": "Pitch at the venture awards",
-            "href": "/perspectives/the-o3-venture-awards-at-1682-a-chance-to-pitch-win-and-promote-your-ai-startup",
+            "href": "/insights/the-o3-venture-awards-at-1682-a-chance-to-pitch-win-and-promote-your-ai-startup",
             "variant": "ghost"
           }
         }
@@ -184,7 +184,7 @@
       "cta": {
         "_type": "cta",
         "label": "Discover 1682",
-        "href": "/perspectives/1682-conference-recap-unveiling-ais-realities-and-innovation-insights",
+        "href": "/insights/1682-conference-recap-unveiling-ais-realities-and-innovation-insights",
         "variant": "light"
       },
       "decoration": "orbs"

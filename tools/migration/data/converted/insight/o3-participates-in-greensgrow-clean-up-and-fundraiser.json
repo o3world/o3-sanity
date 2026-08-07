@@ -1,0 +1,141 @@
+{
+  "_id": "insight-wp-1406",
+  "_type": "insight",
+  "title": "O3 participates in Greensgrow clean up and fundraiser",
+  "slug": {
+    "_type": "slug",
+    "current": "o3-participates-in-greensgrow-clean-up-and-fundraiser"
+  },
+  "excerpt": "Last week, a few of us rolled up our sleeves and headed across the street to revitalize a local garden bed. The group cleared out the overgrowth and then planted vegetables, melons and other shrubbery.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-1",
+      "_key": "cat-1"
+    }
+  ],
+  "publishedAt": "2018-07-03T01:10:07Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-4.jpg"
+    },
+    "alt": "O3 participates in Greensgrow clean up and fundraiser"
+  },
+  "body": [
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2018/07/070218-Greensgrow.jpeg"
+      },
+      "alt": "Greensgrow and O3 team ",
+      "_key": "k0001"
+    },
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "One of our big goals this year was for growth and expansion in ourselves and the community. We’re proud to partner again with ",
+          "_key": "k0003"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Greensgrow Farms",
+          "_key": "k0004"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", an urban farm and community center, to rethink how our community can be more sustainable. Here’s what we’ve been working on with them:",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Last week, a few of us rolled up our sleeves and headed across the street to revitalize a local garden bed. The group cleared out the overgrowth and then planted vegetables, melons and other shrubbery. More pictures from that can be found over on our ",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Twitter",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " page.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://twitter.com/o3world/status/1005182286231408641"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In addition, we also attended A Taste of Kensington, a benefit for the Greensgrow community kitchen. We caught up with old friends, sipped on some of our favorite brews from around Philly and enjoyed food from some of the best chefs in Kensington (we’re even included in the photo above!).",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We’re looking forward to our continued partnership with Greensgrow, stay tuned for more updates!",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:1406"
+  }
+}

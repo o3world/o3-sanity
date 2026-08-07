@@ -19,7 +19,7 @@ import type { WpChrome } from './lib/chrome'
 import type { WpSiteSeo } from './lib/yoast'
 import { mapCategory, type WpCategory } from './map/category'
 import { buildPersonDirectory, type WpPerson, type WpTeamMember } from './map/person'
-import { mapPerspective, type WpPerspective } from './map/perspective'
+import { mapInsight, type WpPerspective } from './map/insight'
 import { checkTranslation, translatedCaseStudy } from './map/caseStudy'
 import { KEEPER_SLUGS, mapPage, type WpPage } from './map/page'
 import { mapSiteSettings } from './map/siteSettings'
@@ -110,24 +110,27 @@ for (const slug of KEEPER_SLUGS) {
   }
 }
 
-// --- perspectives + the persons they reference ---
-// The byline directory is built first: a perspective's author reference is
-// resolved through it, so it has to exist before any perspective converts.
+// --- insights + the persons they reference ---
+// The byline directory is built first: an insight's author reference is
+// resolved through it, so it has to exist before any insight converts.
 const people = buildPersonDirectory(
   readDir<WpPerson>('person'),
   existsSync(join(EXTRACT_DIR, 'team')) ? readDir<WpTeamMember>('team') : [],
 )
 
 const referencedPeople = new Set<string>()
+// `extract/perspective/` on the way in, `insight` on the way out. The extract
+// tree keeps WordPress's vocabulary — it is the record of what WordPress said
+// — and this line is the seam where it becomes ours (ADR 0017).
 for (const post of readDir<WpPerspective>('perspective')) {
-  const result = mapPerspective(post, site, people)
+  const result = mapInsight(post, site, people)
   if (!result.ok) {
     failures.push({ slug: post.slug, issues: result.issues })
     continue
   }
-  emit('perspective', post.slug, result.doc)
+  emit('insight', post.slug, result.doc)
   note(post.slug, result)
-  // Most perspectives carry no byline (see `mapPerspective`), so this set is
+  // Most insights carry no byline (see `mapInsight`), so this set is
   // built from the ones that do — which is what shrinks the person corpus.
   // The full `refsIn` sweep, not just `.author`: today a converted document
   // holds a person only there, but a future mapper that references one from
@@ -138,7 +141,7 @@ for (const post of readDir<WpPerspective>('perspective')) {
 }
 
 // Hand-written documents point at people too — the About page's team grid
-// names six, and a seeded perspective has a byline — and those trees are not
+// names six, and a seeded insight has a byline — and those trees are not
 // converted here, so their references have to be read off disk. This became
 // load-bearing when `post_author` stopped standing in for a byline (#32): the
 // archive attributes 11 people now, and Kelly Navari (`person-wp-4`) is on the

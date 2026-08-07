@@ -1,6 +1,6 @@
 ---
 name: o3-authoring
-description: Draft or revise o3world.com content in Sanity — perspectives (blog posts), case studies, and pages. Use whenever asked to write, draft, or edit O3 World site content from an idea or notes.
+description: Draft or revise o3world.com content in Sanity — insights (blog posts), case studies, and pages. Use whenever asked to write, draft, or edit O3 World site content from an idea or notes.
 ---
 
 # O3 authoring
@@ -17,8 +17,11 @@ Every Sanity tool call uses `resource: {projectId: "naorcr6k", dataset: "product
    via the Sanity connector. `body` is raw markdown — read it as written.
    `key == "o3-voice"` is the voice guide: follow it over your defaults, every
    time. `key == "o3-brand"` is the brand foundation behind it — source
-   material for claims, never copy to paste. If no guidance documents exist,
-   say so and stop — never improvise the voice.
+   material for claims, never copy to paste. `key == "o3-slop"` is the machine
+   tells the voice guide's revision pass sends you to; read it before you
+   revise, and read it first when the job is auditing a draft rather than
+   writing one. If no guidance documents exist, say so and stop — never
+   improvise the voice.
 2. **Fetch the schema per type.** Before authoring any document type or
    section block, call `get_schema` for that **specific type**. The no-type
    overview omits field descriptions, and the descriptions carry required
@@ -51,7 +54,7 @@ Every Sanity tool call uses `resource: {projectId: "naorcr6k", dataset: "product
 2. **Outline in chat.** Get a nod before touching Sanity.
 3. **Draft.** Create the document as a draft. Slugs are lowercase-hyphenated;
    check for collisions first.
-4. **Iterate.** Share the draft's path (e.g. `/perspectives/{slug}`) for
+4. **Iterate.** Share the draft's path (e.g. `/insights/{slug}`) for
    preview, and apply reactions with `patch_documents`.
 5. **Hand off.** End with a summary: what was created (document ID and path),
    imagery needed per empty slot, facts still unverified, and anything the

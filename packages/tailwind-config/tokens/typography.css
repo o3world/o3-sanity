@@ -124,9 +124,9 @@
   --text-display-md--letter-spacing: -0.0286em;
   --text-display-md--font-weight: 400;
 
-  /* display-sm — 24px. The perspective-card title: 24 at 1440 (`1683:2491`),
+  /* display-sm — 24px. The insight-card title: 24 at 1440 (`1683:2491`),
    * 20 at 402 (`1814:1873` / `1814:1887`) — both read, found while #49 built
-   * `/perspectives` on the Blog row's card. One call site, like `quote` — and
+   * `/insights` on the Blog row's card. One call site, like `quote` — and
    * tokenised for the same reason: a solved two-endpoint clamp inlined in a
    * `className` is where nothing would ever check it against the frame again
    * (ADR 0006). */
@@ -143,7 +143,7 @@
   --text-lead--letter-spacing: -0.0333em;
   --text-lead--font-weight: 400;
 
-  /* body — 20px/1.6. LONG-FORM PROSE: the perspective article body
+  /* body — 20px/1.6. LONG-FORM PROSE: the insight article body
    * (`1894:3914` at 1440, `1906:1057` at 402) and every other `bodyText`
    * field that renders through the same Portable Text renderer. The one step
    * on the ramp with a line-height of 1.6 rather than 1.2 — it is the only
@@ -196,7 +196,7 @@
   --text-eyebrow-lg--font-weight: 700;
 
   /* ── Small ─────────────────────────────────────────────────────────────── */
-  /* meta — 13px. The perspectives-card meta row ("3 MINS · 7/27/26",
+  /* meta — 13px. The insights-card meta row ("3 MINS · 7/27/26",
    * 1683:2490). Uppercase and tracked like an eyebrow. */
   --text-meta: 13px;
   --text-meta--line-height: 1.2;

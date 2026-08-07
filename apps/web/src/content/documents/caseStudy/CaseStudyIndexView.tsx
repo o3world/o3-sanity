@@ -30,14 +30,14 @@ function pageHref(page: number): string {
  * ## Why a route and not a page document
  *
  * #43 left this open: a `page` with a listing block, or a dedicated route like
- * `/perspectives`. This is a **dedicated route**, for two reasons.
+ * `/insights`. This is a **dedicated route**, for two reasons.
  *
  * The existing `listingSection` lists **pages by `pageType`**, so it cannot
  * project case studies at all — serving this through a page document would
  * mean a new block whose only job is to hard-code one collection, which is
  * what a route already is.
  *
- * And `/perspectives` is already a dedicated route on exactly this shape.
+ * And `/insights` is already a dedicated route on exactly this shape.
  * Splitting the two collections across two mechanisms would leave the next
  * person guessing which one a collection index uses.
  *

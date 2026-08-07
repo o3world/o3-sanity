@@ -426,7 +426,7 @@ describe('committed seed content', () => {
    *
    * Scoped to `cta` objects — the nav, the footer, and every button a seeded
    * page draws. That is the set this build authors. Portable Text `link`
-   * marks are deliberately out: 272 migrated perspective bodies link into a
+   * marks are deliberately out: 272 migrated insight bodies link into a
    * 2017 URL space (`/careers`, `/labs/o3-barista/`, `/about/team/…`) that
    * this redesign does not have, and auditing the archive's editorial links
    * is its own ticket, not a gate on seeding a page.
@@ -521,7 +521,7 @@ describe('committed seed content', () => {
         'quoteSection',
         'railPanelsSection',
         'railPanelsSection',
-        'perspectivesCarouselSection',
+        'insightsCarouselSection',
         'ctaSection',
       ])
     })

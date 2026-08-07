@@ -5,7 +5,7 @@
  * so anything that turns a band into a horizontally-scrolling track has to
  * carry an `lg:` (or `md:`) prefix. Unprefixed, it applies from 320 up, and a
  * 402 phone gets a hidden scroll region where the frame draws a stack. That is
- * exactly how the perspectives carousel diverged: `overflow-x-auto` with no
+ * exactly how the insights carousel diverged: `overflow-x-auto` with no
  * prefix, shipped and unnoticed because nobody opened the page at 402.
  *
  * These helpers read the rendered HTML rather than the source, so they hold

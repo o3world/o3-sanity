@@ -83,7 +83,7 @@ old template), and every ACF `acfe_*` key.
 
 ## Body text
 
-`chapter.body` is `bodyText` — Portable Text, same closed set as a perspective
+`chapter.body` is `bodyText` — Portable Text, same closed set as an insight
 (`block`, `figure`, `embed`, `pullQuote`; no code block, ADR 0005). Keys are
 `k0000`, `k0001`, … in document order, exactly as the deterministic converter
 produces them, so a re-translation diffs cleanly.

@@ -1,0 +1,454 @@
+{
+  "_id": "insight-wp-3289",
+  "_type": "insight",
+  "title": "Innovation in a time of crisis – adapting and evolving",
+  "slug": {
+    "_type": "slug",
+    "current": "innovation-in-a-time-of-crisis-adapting-and-evolving"
+  },
+  "excerpt": "History has proven that in times of great crisis the real leaders and the truly resilient people always seem to step up and take charge.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    }
+  ],
+  "publishedAt": "2020-03-24T23:39:46Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/05/O3-website-imagery_-Insights-11.jpg"
+    },
+    "alt": "Greyscale, exterior shot of O3 office with logo on brick."
+  },
+  "body": [
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "I’m an optimist. I’ve just always seen the glass half full. Though, in the current climate that has become more challenging than ever. And yet, I continue to be in awe of the positive and productive spirit I see in so many people as the COVID-19 situation continues to unwind. While there is fear and uncertainty, there is also hope and glimmers of true innovation. People are doing what they do best: adapting and evolving.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Innovation in a Time of Crisis",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "History has proven that in times of great crisis the real leaders and the truly resilient people always seem to step up and take charge. My grandparents lived through the Great Depression, when for the better part of a decade all seemed lost. And then when it seemed like things couldn’t get worse, WWII forced nation-wide rationing and sent an entire generation off to war in Europe and the South Pacific. It also unified people around a cause.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "While the world could have done without 15 years of despair, we saw an evolution in medicine, science and technology. Penicillin was invented and the world’s first computers helped crack codes that saved countless lives. Foundations were laid for years of innovation and perspective gave people a reason to think forward.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Connecting and Evolving Through Technology",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Innovation is about turning problems into opportunities. Like everyone else, we’ve been forced to adapt. Luckily, we’re a digital product agency, so the move to work from home has been a rather seamless one. But, what’s been most impressive to me is how quickly it’s forced all of our people at O3 to rethink their days and routines. We’ve over communicated status through Slack, and through the magic of Zoom and ",
+          "_key": "k0019"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "we’ve had some fun along the way",
+          "_key": "k0020"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.instagram.com/p/B94QRepDehU/?utm_source=ig_web_copy_link"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The human connections we’re making daily are encouraging. I think I’ve made more eye contact in the last week than I have in the last year. While I’d much prefer to see everyone in person, the steady flow of ideas about “how do we make this work” has motivated me more than ever. We are being forced to problem solve our condition on a daily basis, and it’s inspiring.",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A New Way to Collaborate and Engage",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The power of online communication and video conferencing has absolutely blown my mind. Not that the technology is particularly new, but the access to one another while we’re stuck in our homes is critical to keep business moving along and to keep us sane through the process.",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As an example, we’re planning a series of design thinking workshops geared towards educating professionals using human centered design methodologies. What have typically been in person workshops are now going to be offered online. We’re in the process of piecing together a series of tools to allow a large group to break into sub-groups and share a workspace to create and share ideas. In the future, this new skill and our ability to facilitate interactive workshops from across the globe will allow us to bring a more diverse set of ideas together.",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Small Businesses Go Virtual",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Outside of O3, the rest of the world is adjusting, too. While many industries are struggling, I’ve seen new opportunities start to arise. The ",
+          "_key": "k0033"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Crossfit gym",
+          "_key": "k0034"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " I go to, and its owner George Caroulis, is now ",
+          "_key": "k0035"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "offering classes via video",
+          "_key": "k0036"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " so they continue to “grow stronger together”. In addition to supporting his existing customer base, he’s now expanded his community of fanatical athletes. And while that may not make up for an overall loss of business, I appreciate how quickly he adapted to continue to provide his service using the tools at his disposal.",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "http://crossfit2st.com/"
+        },
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://philadelphia.cbslocal.com/2020/03/16/coronavirus-in-philadelphia-gym-owner-gets-creative-to-keep-customers-fit-during-closure/?fbclid=IwAR2ABBIgZKf57-U-a76v2fhAhxRGQgNI4cAYMy-7A46lkRWkrcvpMdFP4-E"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Rethinking Education",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "On the home front, like most parents, my wife and I are dealing with our new responsibility as educators to our kids. I have to say, I’ve never appreciated teachers as much as I do right now. Not that I wasn’t aware of the importance of their work, but watching some of these educators (and, in particular, my daughter’s second grade teacher, Mrs. McLaughlin) think on the fly and leverage a series of tools to deliver their curriculum, has been remarkable.",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0042",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Innovation isn’t always about technology. Simply keeping kids engaged for a full day at a distance is a problem that needs solving.",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0044",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The Big Picture: Innovation on a Global Scale",
+          "_key": "k0045"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0046",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As we all navigate the daily COVID-19 realities, it’s important that we keep our eye toward the future and brighter days. As countries and state administrations continue to advise that we all lock down, advancements in science, medicine and technology are being fast-tracked in unprecedented ways. Drugs that treat other diseases like malaria or Ebola are showing promising results in clinical trials. ",
+          "_key": "k0047"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Possible cures",
+          "_key": "k0048"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " are also being identified – there are at least 15 possible vaccines in trials already. That’s encouraging, but also seeing ",
+          "_key": "k0049"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "alcohol distillers turn their efforts towards making hand sanitizer",
+          "_key": "k0050"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " or ",
+          "_key": "k0051"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "car manufacturers use their factories to make ventilators",
+          "_key": "k0052"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " or ",
+          "_key": "k0053"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0006"
+          ],
+          "text": "Broadway’s best",
+          "_key": "k0054"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " using social media to create a stage for all the world’s young stars are all signs of what our collective resources can produce. It’ll be interesting to see how this all impacts the world when this is all behind us.",
+          "_key": "k0055"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.news.com.au/lifestyle/health/health-problems/coronavirus-australia-queensland-researchers-find-cure-want-drug-trial/news-story/93e7656da0cff4fc4d2c5e51706accb5"
+        },
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.nytimes.com/2020/03/19/us/distilleries-virus-hand-sanitizer.html"
+        },
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.npr.org/sections/coronavirus-live-updates/2020/03/19/818402194/automakers-could-retool-to-make-ventilators"
+        },
+        {
+          "_key": "k0006",
+          "_type": "link",
+          "href": "https://people.com/theater/broadway-star-laura-benanti-wants-to-build-a-community-through-sunshinesongs-amid-covid-19/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0056",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "While this is a difficult time for everyone, it’s important to note that we’re all in this together. We’re responsible for more than simply our own well-being, and what this has proven to me is that we’re capable of so much more. In a time of crisis, innovation is more important than ever – so, problem solving, resourceful thinking and community consciousness are critical. But, brighter days are coming. I have no doubt.",
+          "_key": "k0057"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0058",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Hang in there, everyone and keep innovating. And, if we can help in any way, ",
+          "_key": "k0059"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0007"
+          ],
+          "text": "please let us know",
+          "_key": "k0060"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0061"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0007",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:3289"
+  }
+}

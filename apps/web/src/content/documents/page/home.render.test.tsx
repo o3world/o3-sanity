@@ -55,7 +55,7 @@ describe('the seeded homepage', () => {
     ['engagement heading', 'Three ways in. You decide how much of the problem to give.'],
     ['engagement panel', 'Embedded Team Member'],
     ['engagement body', 'Best when you trust the direction and need the horsepower.'],
-    ['perspectives carousel', 'The thinking behind the work.'],
+    ['insights carousel', 'The thinking behind the work.'],
     ['closing CTA', 'The best partnerships don’t have an end date.'],
     ['closing CTA body', 'We stay and build it. That&#x27;s the whole offer.'],
   ])('shows the frame’s %s', (_label, copy) => {
@@ -102,7 +102,7 @@ describe('the seeded homepage', () => {
 
 /**
  * The mobile frame, `1814:1618`. Desktop was verified when #42 was built and
- * 402 was not, which is how the perspectives carousel shipped scrolling
+ * 402 was not, which is how the insights carousel shipped scrolling
  * sideways on a phone for a whole batch. These are the invariants that would
  * have caught it — read off the rendered classes, so they hold for whatever
  * the blocks actually emit rather than for what a component file says.
@@ -114,7 +114,7 @@ describe('the homepage at 402 (ADR 0006)', () => {
     expect(unprefixedHorizontalScrollUtilities(html)).toEqual([])
   })
 
-  it('keeps the perspectives carousel a stack until lg', () => {
+  it('keeps the insights carousel a stack until lg', () => {
     // `1814:1867`: cards stacked, gap 24, no prev/next. The track, its snap
     // points and the 394px card are all `lg:`.
     expect(html).toContain('lg:overflow-x-auto')

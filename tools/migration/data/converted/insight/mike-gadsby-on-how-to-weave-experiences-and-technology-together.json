@@ -1,0 +1,81 @@
+{
+  "_id": "insight-wp-4730",
+  "_type": "insight",
+  "title": "Mike Gadsby on how to weave experiences and technology together",
+  "slug": {
+    "_type": "slug",
+    "current": "mike-gadsby-on-how-to-weave-experiences-and-technology-together"
+  },
+  "excerpt": "Mike Gadsby joined Joseph Browning on the Innovation in Audio podcast.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-15",
+      "_key": "cat-15"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-1",
+      "_key": "cat-1"
+    }
+  ],
+  "publishedAt": "2021-10-18T21:57:57Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/10/New-RGB-O3-website-imagery-3.jpg"
+    },
+    "alt": "Mike Gadsby, Chief Innovation Officer, getting excited about customer experience."
+  },
+  "body": [
+    {
+      "_key": "k0001",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 Co-Founder and Chief Innovation Officer Mike Gadsby joined Joseph Browning on the Innovation in Audio podcast recently to discuss how brands can exceed customer expectations by creating predictive and proactive experiences that are easy and intuitive. Mike points out that the key to unlocking effortless and delightful experiences is having a strong grasp on who your customers are, what they need and acting on those signals.",
+          "_key": "k0002"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Listen to Mike’s insights on how brands can deliver the most value back to their customers.",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://soundcloud.com/joseph-browning-185891037/9-29-innovation-in-audio-w"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "O3's Co-Founder, Mike Gadsby discusses how brands can exceed customer expectations by creating predictive experiences that are easy to use."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:4730"
+  }
+}

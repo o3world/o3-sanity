@@ -417,7 +417,7 @@ describe('the seeded 1682 conference page', () => {
 
   // WordPress's module order, carried: header, intro + mark + attend CTA, the
   // events list, the about-1682 panels, the recap video, the selected
-  // perspectives, the page callout.
+  // insights, the page callout.
   it('resolves to WordPress’s band sequence', () => {
     expect(sections.map((s) => s._type)).toEqual([
       'heroSection',
@@ -425,7 +425,7 @@ describe('the seeded 1682 conference page', () => {
       'layoutSection',
       'railPanelsSection',
       'layoutSection',
-      'perspectivesCarouselSection',
+      'insightsCarouselSection',
       'ctaSection',
     ])
   })
@@ -436,7 +436,7 @@ describe('the seeded 1682 conference page', () => {
     ['the attend CTA', 'Attend the 1682 conference on October 8'],
     ['the events heading', 'Events'],
     ['the panels heading', 'Shaping the future of AI + innovation'],
-    ['the perspectives heading', 'Expert insights driving impactful solutions'],
+    ['the insights heading', 'Expert insights driving impactful solutions'],
     ['the callout heading', 'Let’s explore your future in AI and innovation'],
   ])('carries WordPress’s %s', (_label, copy) => {
     expect(html).toContain(copy)

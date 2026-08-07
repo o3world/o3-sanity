@@ -1,0 +1,242 @@
+{
+  "_id": "insight-wp-1987",
+  "_type": "insight",
+  "title": "What's new at O3 January 2019: Innovation with the city, Capital One and Career Dev with Philly CHI",
+  "slug": {
+    "_type": "slug",
+    "current": "whats-new-at-o3-january-2019-recap"
+  },
+  "excerpt": "There’s nothing like getting a new year off to a fantastic start. To say that we started 2019 off with a bang would be an understatement. Between signing new clients and bringing on new employees, we’ve also been attending and hosting quite a few events.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2019-01-31T23:40:35Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/07/O3-website-imagery_-Insights-8.jpg"
+    },
+    "alt": "What's new at O3 January 2019: Innovation with the city, Capital One and Career Dev with Philly CHI"
+  },
+  "body": [
+    {
+      "_key": "k0000",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Listing everywhere we’ve been would take another entire post, so we’re going to take a little time to focus on some event highlights from January.",
+          "_key": "k0001"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Innovation with the City of Philadelphia",
+          "_key": "k0003"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "There’s a lot to love about working in Philadelphia. Culture, food, and entertainment aside, we most admire the city’s commitment to using innovation and technology to solve some of Philly’s most pressing issues.",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Since the city began its innovation labs program in 2014, dozens of employees from across a variety of city sectors have been able to learn about the best ways to combine innovation and problem-solving.",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We had the opportunity to meet some graduates of the city’s program on January 9th when we hosted a lunch and learn with the city’s Office of Innovation. We had a powerful panel discussion that we didn’t want to end (we really didn’t, it ran overtime), and broke out into smaller groups to brainstorm solutions to problems.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Seeing people from all backgrounds come together to talk about the true meaning of innovation and the best ways to utilize it was an inspiring way to spend an afternoon.",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "UX and AI with Capital One",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What goes into creating a human-centered experience with bots and AI? We’ve worked on a lot of different projects and concepts about forming a truly human-centric user experience, and we had the opportunity to learn how other professionals in the field handle.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Members of Capital One’s AI design team joined us for lunch. Our team learned about the creation of their chatbot Eno, and got helpful pointers on UX writing.",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/013119-Capital-One.jpg"
+      },
+      "alt": "Capital One Presenting at O3",
+      "_key": "k0018"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Career Development with Philly CHI",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We love supporting local tech organizations, and Philly CHI is one that’s near and dear to our hearts. Our Head of UX Strategy, Lauren Slattery, joined a panel of other UX professionals for Philly CHI’s first event of 2019.",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "So, You Want A Job In UX was designed to help newcomers break into the industry. Everything from portfolio management, needed skills, and interview tips were covered during the night. A lucky few were even able to win portfolio reviews from panelists.",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Wish you could have attended? Don’t worry, we’re here to give you a little taste of what you missed. Check out Lauren giving advice on the best ways to demonstrate your passion for UX if you’re new to the field:",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "embed",
+      "url": "https://www.youtube.com/embed/Z5nXtgC_5sw",
+      "_key": "k0027"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Want to stay up to date on the latest happenings at O3? Keep checking our blog and follow us on social!",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:1987"
+  }
+}

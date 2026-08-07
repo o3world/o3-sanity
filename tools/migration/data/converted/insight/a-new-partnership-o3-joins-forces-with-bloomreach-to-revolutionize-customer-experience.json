@@ -1,0 +1,661 @@
+{
+  "_id": "insight-wp-7451",
+  "_type": "insight",
+  "title": "O3 joins forces with Bloomreach to revolutionize customer experiences",
+  "slug": {
+    "_type": "slug",
+    "current": "a-new-partnership-o3-joins-forces-with-bloomreach-to-revolutionize-customer-experience"
+  },
+  "excerpt": "In this article, we'll explore how Bloomreach's Commerce Experience Cloud can help your CX strategy and what benefits it can bring to your business.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-11",
+      "_key": "cat-11"
+    }
+  ],
+  "publishedAt": "2023-03-21T19:13:28Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/03/O3-website-imagery_-Insights-38.jpg"
+    },
+    "alt": "Bloomreach + O3"
+  },
+  "body": [
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Customer experience (CX) has become a critical aspect of business success in today’s highly competitive landscape. Companies are looking for innovative ways to enhance capabilities and processes to drive revenue. O3 is excited to announce our partnership with ",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Bloomreach",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", a leading digital experience platform that helps businesses improve their CX strategies.",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.bloomreach.com/en?spz=navigation_var"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0016",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“We are thrilled to announce our new partnership with Bloomreach, a leading provider of digital experience solutions. With their AI-powered platform, we can now deliver even more personalized and relevant experiences to our clients. We look forward to collaborating with Bloomreach to enhance our clients’ digital strategies, improve engagement and drive conversions.”",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Mahesh Gaitonde",
+          "_key": "k0020"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", Chief Digital Officer, O3",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/maheshgaitonde/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0023",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Who is Bloomreach?",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Raj De Datta",
+          "_key": "k0027"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " founded ",
+          "_key": "k0028"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Bloomreach",
+          "_key": "k0029"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " in 2009. He recognized that by tailoring each online experience to meet the unique needs and interests of individual customers, significant enhancements can be made. This approach relies on intelligent algorithms that continually improve over time. The company provides a range of products designed to help businesses create, manage, and optimize their online content and commerce experiences.",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/rdedatta/"
+        },
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.bloomreach.com/en?spz=navigation_var"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Bloomreach’s digital experience platform enables businesses to deliver personalized and relevant content to their customers across multiple channels. The platform uses artificial intelligence (AI) and machine learning (ML) to analyze customer behavior and provide personalized content, products, and recommendations. It is a powerful tool for businesses that want to create seamless customer experiences across all touchpoints.",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Bloomreach’s Capabilities",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Bloomreach offers a range of capabilities that can help businesses improve their CX strategies. Here are some of the key capabilities:",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "Customer Data Platform (CDP)",
+          "_key": "k0038"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://visit.bloomreach.com/customer-data-platform-2-ps?utm_term=campaignid=12364211647:tid=kwd-1414608493180:dev=c:adp=:gclid=CjwKCAjwq-WgBhBMEiwAzKSH6N0yDM8tbn2g9g4CoVohcJlIRoMypGgWphmDO8bv43RTLuesz3h1rRoC-iwQAvD_BwE&utm_campaign=Bloomreach_Brand_All_New-Business_NA_EN_Search&utm_source=adwords&utm_medium=ppc&utm_content=547040223795&hsa_acc=3874528946&hsa_cam=18485399240&hsa_grp=126230982614&hsa_ad=547040223795&hsa_src=g&hsa_tgt=kwd-1414608493180&hsa_kw=bloomreach%20cdp&hsa_mt=b&hsa_net=adwords&hsa_ver=3&gclid=CjwKCAjwq-WgBhBMEiwAzKSH6N0yDM8tbn2g9g4CoVohcJlIRoMypGgWphmDO8bv43RTLuesz3h1rRoC-iwQAvD_BwE"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0039",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This is a powerful tool for businesses to collect, unify, and activate their customer data. With the CDP, businesses can capture data from various sources such as website behavior, social media activity, and purchase history to create a single, comprehensive view of their customers. This allows businesses to better understand their customers’ preferences, behavior, and needs and to deliver more personalized and relevant experiences across all channels.",
+          "_key": "k0040"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0041",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "Personalization",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.bloomreach.com/en/library/topic/personalization?spz=navigation_var"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0043",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Bloomreach uses AI and ML to analyze customer behavior and personalize the content and recommendations they receive. This helps businesses deliver more relevant content to their customers, which can lead to increased engagement and conversions.",
+          "_key": "k0044"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0045",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0006"
+          ],
+          "text": "Search and Merchandising",
+          "_key": "k0046"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0006",
+          "_type": "link",
+          "href": "https://www.bloomreach.com/en/products/discovery?utm_term=campaignid=12364211647:tid=kwd-1134579057277:dev=c:adp=:gclid=CjwKCAjwq-WgBhBMEiwAzKSH6DPOhGrK5e_H5XiRchBd2kotc_hnVEOTDOC59DQ9ygUmuFn1O9utTxoCZE8QAvD_BwE&utm_campaign=Bloomreach_Brand_All_New-Business_NA_EN_Search&utm_source=adwords&utm_medium=ppc&utm_content=585497781315&hsa_acc=3874528946&hsa_cam=18485399240&hsa_grp=135625887802&hsa_ad=585497781315&hsa_src=g&hsa_tgt=kwd-1134579057277&hsa_kw=bloomreach%20search%20and%20merchandising&hsa_mt=b&hsa_net=adwords&hsa_ver=3&gclid=CjwKCAjwq-WgBhBMEiwAzKSH6DPOhGrK5e_H5XiRchBd2kotc_hnVEOTDOC59DQ9ygUmuFn1O9utTxoCZE8QAvD_BwE"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0047",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Bloomreach provides a powerful search and merchandising engine that helps eCommerce businesses improve their site search functionality and optimize their product listings. This can help customers find what they are looking for more easily and improve their overall shopping experience.",
+          "_key": "k0048"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0049",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0007"
+          ],
+          "text": "Content Management",
+          "_key": "k0050"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0007",
+          "_type": "link",
+          "href": "https://www.bloomreach.com/en/products/content?spz=navigation_var"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0051",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Bloomreach’s content management capabilities enable businesses to create and manage content across multiple channels, including web, mobile, and social media. This can help businesses deliver consistent and compelling content to their customers across all touchpoints.",
+          "_key": "k0052"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0053",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0008"
+          ],
+          "text": "Analytics",
+          "_key": "k0054"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0008",
+          "_type": "link",
+          "href": "https://www.bloomreach.com/en/products/engagement/marketing-intelligence?utm_term=campaignid%3D18798490511%3Atid%3Ddsa-437115340933%3Adev%3Dc%3Aadp%3D%3Agclid%3DCjwKCAjwq-WgBhBMEiwAzKSH6BsI8Ls9YA5eODi3ONJnwMGINYDjU3uhcBMTp1HNBxq9N7WGVycSoRoCtnEQAvD_BwE&utm_campaign=Enagement-DSA_Engagement_New-Business_NA_EN_Search&utm_source=adwords&utm_medium=ppc&utm_content=632383118613&hsa_acc=3874528946&hsa_cam=18485399240&hsa_grp=142355147759&hsa_ad=632383118613&hsa_src=g&hsa_tgt=dsa-437115340933&hsa_kw=&hsa_mt=&hsa_net=adwords&hsa_ver=3&gclid=CjwKCAjwq-WgBhBMEiwAzKSH6BsI8Ls9YA5eODi3ONJnwMGINYDjU3uhcBMTp1HNBxq9N7WGVycSoRoCtnEQAvD_BwE&spz=navigation_var"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0055",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Bloomreach provides comprehensive analytics that enables businesses to measure the effectiveness of their CX strategies and make data-driven decisions. This can help businesses identify areas for improvement and optimize their CX strategies over time.",
+          "_key": "k0056"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0057",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0009"
+          ],
+          "text": "Omnichannel Marketing Automation",
+          "_key": "k0058"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0009",
+          "_type": "link",
+          "href": "https://www.bloomreach.com/en/library/topic/omnichannel-marketing-automation"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0059",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Bloomreach is the only all-in-one Omnichannel Marketing solution (customer data, marketing (email, SMS, ads, web, mobile app, social), AI, and analytics) that makes real-time personalized marketing simple, measurable, and up-to-the-millisecond fast.",
+          "_key": "k0060"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0061",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Benefits of Bloomreach for CX Strategy",
+          "_key": "k0062"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0063",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Implementing a solution such as Bloomreach can positively impact a company’s larger CX strategy through various channels.",
+          "_key": "k0064"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0065",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Increase your conversion rates",
+          "_key": "k0066"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0067",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "By delivering personalized experiences to customers, Bloomreach can help companies to increase their conversion rates. This is because customers are more likely to make a purchase when they feel that the experience has been tailored to their needs.",
+          "_key": "k0068"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0069",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Enhance your customer insights",
+          "_key": "k0070"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0071",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Bloomreach’s platform provides companies with detailed insights into customer behavior and preferences. This can help companies to understand their customers better and make more informed decisions about their CX strategy.",
+          "_key": "k0072"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0073",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Streamline your content management",
+          "_key": "k0074"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0075",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Bloomreach’s platform makes it easy for companies to manage content across various digital channels. This can help to improve the consistency and quality of the customer experience.",
+          "_key": "k0076"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0077",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Increase your efficiency",
+          "_key": "k0078"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0079",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "By automating many tasks related to CX, Bloomreach can help companies to be more efficient and effective in their CX strategy. This can lead to cost savings and increased revenue.",
+          "_key": "k0080"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0081",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "How can O3 help?",
+          "_key": "k0082"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0083",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 is a CX consultancy that works alongside your company to implement solutions that improve your customer experience (CX), ensuring the strategy is tailored to meet the specific needs of your business. We understand that every company is unique, and we take the time to understand your business goals, customer needs, and pain points to create custom solutions that align with your vision. Our team of experienced consultants has a deep understanding of the latest industry trends and best practices, which allows us to provide you with innovative and effective solutions.",
+          "_key": "k0084"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0085",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We believe that technology can be a powerful tool for improving customer experience, and we work with you to identify the right technologies and solutions to help you achieve your goals. Our solutions are designed to be scalable, flexible, and adaptable, so they can grow and evolve with your business. ",
+          "_key": "k0086"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0010"
+          ],
+          "text": "Contact us",
+          "_key": "k0087"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " to learn how we can help you transform your customer experience and drive business growth.",
+          "_key": "k0088"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0010",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Parnership: O3 + Bloomreach",
+    "description": "Learn how Bloomreach DXP can enhance your CX strategy and improve your business's revenue. By partnering with O3, you can leverage innovative technologies to create a custom CX strategy."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:7451"
+  }
+}

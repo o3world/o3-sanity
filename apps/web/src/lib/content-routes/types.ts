@@ -84,7 +84,7 @@ export interface CatchAllEntry<Q extends string = string> extends BaseEntry<Q> {
 
 /**
  * Detail entries own a URL prefix and serve `<prefix>/[slug]/page.tsx`
- * (e.g. perspective at `/perspectives`, caseStudy at `/work`).
+ * (e.g. insight at `/insights`, caseStudy at `/work`).
  */
 export interface DetailEntry<Q extends string = string> extends BaseEntry<Q> {
   readonly kind: 'detail'
@@ -118,7 +118,7 @@ export type IndexRendererProps<Q extends string> = NonNullable<QueryResult<Q>> &
  * ADR 0007 put `provisional` + `provisionalNote` on the `migration` object,
  * and `verify` lists every document carrying it. A **collection index has no
  * backing document** (CONTEXT.md: "it has no backing document — the entry is a
- * query plus static SEO"), so `/perspectives` — the largest coverage gap on
+ * query plus static SEO"), so `/insights` — the largest coverage gap on
  * map #33 — had nothing to hang the marker on. The route entry is the thing
  * that exists, so the marker goes here, under the same two field names and the
  * same rule: **the note is required whenever the flag is set**, because "no

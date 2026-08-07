@@ -1,0 +1,178 @@
+{
+  "_id": "insight-wp-4940",
+  "_type": "insight",
+  "title": "Mahesh Gaitonde on how B2B brands can move to a D2C model",
+  "slug": {
+    "_type": "slug",
+    "current": "mahesh-gaintinode-on-how-b2b-brands-can-move-to-a-d2c-model"
+  },
+  "excerpt": "O3's Chief Digital Officer, Mahesh Gaitonde, lays out how B2B brands can successfully execute a D2C model by focusing on three key areas: customer experience, data, and the digital experience platform technology stack.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-15",
+      "_key": "cat-15"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    }
+  ],
+  "publishedAt": "2022-04-07T15:15:04Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/04/Mahesh-Gaitonde-on-how-B2B-brands-can-move-to-a-D2C-model.png"
+    },
+    "alt": "Mahesh Gaitonde enlightening the O3 team with a presentation."
+  },
+  "body": [
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Mahesh advises ",
+          "_key": "k0003"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Destination CRM",
+          "_key": "k0004"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " readers that, the ability to react in a way that’s fast, agile, and flexible will continue to increase.",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.destinationcrm.com/Default.aspx"
+        }
+      ],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Read the ",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "full article for tips on how to adopt composable approaches to outpace your competition",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.destinationcrm.com/Articles/Web-Exclusives/Viewpoints/How-B2B-Businesses-Can-Successfully-Move-to-a-D2C-Model-152261.aspx"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0011",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0013",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0015",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0017",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0019",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "O3's Chief Digital Officer, offers advice to Destination CRM readers who work in B2B on how they can successfully execute a D2C model."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:4940"
+  }
+}

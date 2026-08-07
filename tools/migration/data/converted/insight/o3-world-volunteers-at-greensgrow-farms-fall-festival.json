@@ -1,0 +1,176 @@
+{
+  "_id": "insight-wp-755",
+  "_type": "insight",
+  "title": "O3 volunteers at Greensgrow Farms' fall festival",
+  "slug": {
+    "_type": "slug",
+    "current": "o3-world-volunteers-at-greensgrow-farms-fall-festival"
+  },
+  "excerpt": "O3 team rolled up their sleeves and headed north for Greensgrow Farms’ fall festival.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    }
+  ],
+  "publishedAt": "2017-10-10T17:54:11Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/05/O3-website-imagery_-Insights-11.jpg"
+    },
+    "alt": "Greyscale, exterior shot of O3 office with logo on brick."
+  },
+  "body": [
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As we’ve written about before, we’re proud to partner with Greensgrow Farms to make our Fishtown, and greater Philadelphia community, more sustainable through social entrepreneurship, urban agriculture and community greening.",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This past weekend, about a dozen members of the O3 team rolled up their sleeves and headed north for ",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Greensgrow Farms’ fall festival",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". The team helped out at the cider pressing station, judged the apple pie-making contest and chili competition, and chipped in where needed.",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "http://www.greensgrow.org/about-us/subarufallfestival/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "At O3 World, we emphasize a strong culture that is fostered around teamwork and community giving. We believe that it ultimately helps us push each other and the industry forward by stepping outside the office and giving back in a way that is impactful to not only O3, but those around us.",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Check out the fun photos from the event on our ",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Facebook page",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "!",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.facebook.com/O3World/posts/10159528674360327"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2018/07/070218-Greensgrow.jpeg"
+      },
+      "alt": "Greensgrow and O3 team",
+      "_key": "k0015"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Want to learn more how the O3 World team gives back? You can learn more about other initiatives that we’ve participated in. And if you’re interested in learning more about how you can join the team at O3 World and get involved in these activities, check out our ",
+          "_key": "k0017"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "careers page",
+          "_key": "k0018"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "/careers"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:755"
+  }
+}

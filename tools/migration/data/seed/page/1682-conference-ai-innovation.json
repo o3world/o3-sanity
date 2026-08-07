@@ -323,25 +323,25 @@
       ]
     },
     {
-      "_type": "perspectivesCarouselSection",
+      "_type": "insightsCarouselSection",
       "_key": "insights",
       "surface": "bone",
       "heading": "Expert insights driving impactful solutions",
-      "perspectives": [
+      "insights": [
         {
           "_type": "reference",
           "_key": "insight-recap",
-          "_ref": "perspective-wp-9224"
+          "_ref": "insight-wp-9224"
         },
         {
           "_type": "reference",
           "_key": "insight-brand",
-          "_ref": "perspective-wp-9343"
+          "_ref": "insight-wp-9343"
         },
         {
           "_type": "reference",
           "_key": "insight-sahay",
-          "_ref": "perspective-wp-9299"
+          "_ref": "insight-wp-9299"
         }
       ]
     },

@@ -10,7 +10,7 @@ export type { ArrowIconProps } from './components/arrow-icon'
 export { ArrowLink, arrowLinkVariants } from './components/arrow-link'
 export type { ArrowLinkProps } from './components/arrow-link'
 
-// ArticleByline — the perspective hero's author line (1710:2946)
+// ArticleByline — the insight hero's author line (1710:2946)
 export { ArticleByline } from './components/article-byline'
 export type { ArticleBylineProps } from './components/article-byline'
 

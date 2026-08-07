@@ -1,0 +1,326 @@
+{
+  "_id": "insight-wp-5038",
+  "_type": "insight",
+  "title": "State of the Ozone recap",
+  "slug": {
+    "_type": "slug",
+    "current": "state-of-the-ozone-recap"
+  },
+  "excerpt": "Recently, we had the exciting opportunity to bring everyone together in person for our bi-annual #StateoftheOzone gathering.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    }
+  ],
+  "publishedAt": "2022-07-14T20:49:54Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/WinterSOTO.png"
+    },
+    "alt": "Two team members sharing a hearty laugh during SOTO gift exchange."
+  },
+  "body": [
+    {
+      "_key": "k0001",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Over the past two years the team has come to recognize these face to face moments as pivotal benchmarks for our team’s growth and culture. From California to New Jersey, and 14 other states, the O3 team was ecstatic to reunite in Fishtown. We welcomed our out-of-town guests with care packages, sponsored a PhillyCHI + Design Brew Summer Social, and capped things off with a team celebration at Liberty Point.",
+          "_key": "k0002"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/O3_WORLD_SOTO.jpg"
+      },
+      "alt": "",
+      "_key": "k0003"
+    },
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "SOTO (as we like to call it) is a chance to celebrate wins, reflect on challenges, and align on the road ahead.",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“As an ‘experience’ consultancy, our core focus is making lives better and experiences more impactful. Bringing the team together in person for a few days to reflect on our journey together and share our ideas and thoughts for the future is such an amazing part of the O3 experience. You can literally feel the positivity emanate from every room and every conversation.”",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "-Mike Gadsby, O3 Co-Founder / Chief Innovation Officer at O3",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We always evaluate how we’re doing through the lens of our core values. Here’s how we recapped all that we accomplished in the first half of year:",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We applied optimism",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "It’s no secret that staying closely connected in a remote environment brings on its own set of challenges. Over the past two years O3 has grown to adapt to this remote environment, while prioritizing communication and collaboration. We value wins and encourage employee recognition via Bonusly. In our free time, the team stays competitive and sharp on Quizzo. We understand that a cohesive and close knit team is vital to provide outstanding service to our clients. We are committed to a consistently positive approach and perspective on problem solving.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We trusted in people",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Collaboration is key to growth, and O3 deeply values each team member’s unique skillset. An openness to having respectful, constructive dialogue has been at the forefront of O3’s success. One testament to this success is O3’s unrivaled employee onboarding experience. Like all products, we continue to gather feedback, test and improve this experience. Since January, the O3 team has welcomed 16 new employees and is actively looking to expand the team. Through constant internal and client feedback, O3 is committed to a constructive evolution.",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We were committed to the community",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 values diversity, equity and inclusion inside the company and within our communities. Our commitment to the community is strong, backed by our charitable match program and donations to organizations such as PURA, PhillyChi and Design Brew. Now that our communities all look a bit different, each O3 team member is encouraged to take part in our Day of Service. We continue to look for opportunities to donate our time and money to help the communities we work within.\nWe Embraced Iteration: Opportunity for continuous improvement requires a strong sense of flexibility, with a willingness to grow from yourself and those around you. We’re constantly searching for ways to grow our skill set and processes to improve the experiences we deliver. Ongoing process assessment and refinements ensure that our team is delivering superior results.",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We focused on the future",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 is constantly forward focused on what’s next, for both clients and ourselves. Our team is excited about our short-term and long-term incentive program, and an increased employee referral program. Commitment to education and learning opportunities allows our team to push boundaries and be on the cutting edge. From growing demand on accessibility standards to exciting new industry partnerships with Acquia, Optimizely and Heap.io, O3 continues to expand upon our technology, data and CX capabilities.",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The energy of being all together in person again is hard to achieve in a virtual environment. From new faces to new capabilities, O3’s exciting trajectory was apparent at SOTO. We can’t wait to celebrate our continued growth when we meet all together again in just a few months.",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“I started during the pandemic so it was incredible to meet so many of my coworkers face to face and come together to talk openly about our collective goals. Everyone was so excited to talk to as many people as they could and just hang out for the first time.”",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "-Carly Karas, O3 Experience Strategy Manager",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0035",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0037",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "A post shared by O3 (@o3worl",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.instagram.com/reel/Cf_yFU1AkCW/?utm_source=ig_embed&utm_campaign=loading"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "ogImage": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/07/03_WORLD_6_16_22-432-1.jpg"
+    }
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:5038"
+  }
+}

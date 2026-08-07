@@ -32,7 +32,7 @@ const structure: StructureResolver = (S) =>
       S.divider(),
       S.documentTypeListItem('page').title('Pages'),
       S.documentTypeListItem('caseStudy').title('Work'),
-      S.documentTypeListItem('perspective').title('Perspectives'),
+      S.documentTypeListItem('insight').title('Insights'),
       S.divider(),
       S.documentTypeListItem('person').title('People'),
       S.documentTypeListItem('client').title('Clients'),
@@ -73,15 +73,15 @@ const resolve: PresentationPluginOptions['resolve'] = {
         ],
       }),
     }),
-    perspective: defineLocations({
+    insight: defineLocations({
       select: { title: 'title', slug: 'slug.current' },
       resolve: (doc) => ({
         locations: [
           {
             title: doc?.title || 'Untitled',
-            href: `${COLLECTION_PREFIXES.perspective}/${doc?.slug ?? ''}`,
+            href: `${COLLECTION_PREFIXES.insight}/${doc?.slug ?? ''}`,
           },
-          { title: 'All perspectives', href: COLLECTION_PREFIXES.perspective },
+          { title: 'All insights', href: COLLECTION_PREFIXES.insight },
         ],
       }),
     }),

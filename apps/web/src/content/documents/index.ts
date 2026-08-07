@@ -3,8 +3,8 @@ import type { AnyCatchAllEntry } from '@/lib/content-routes/types'
 import { caseStudy } from './caseStudy/entry'
 import { caseStudyIndex } from './caseStudy/collectionIndex'
 import { home, page } from './page/entry'
-import { perspective } from './perspective/entry'
-import { perspectiveIndex } from './perspective/collectionIndex'
+import { insight } from './insight/entry'
+import { insightIndex } from './insight/collectionIndex'
 
 /**
  * Catch-all entries serve `apps/web/src/app/(site)/[...segments]/page.tsx`,
@@ -20,4 +20,4 @@ import { perspectiveIndex } from './perspective/collectionIndex'
 export const CATCH_ALL_TYPES: readonly AnyCatchAllEntry[] = [page]
 
 // Re-export named entries so route files can import a single entry by name.
-export { caseStudy, caseStudyIndex, home, page, perspective, perspectiveIndex }
+export { caseStudy, caseStudyIndex, home, page, insight, insightIndex }

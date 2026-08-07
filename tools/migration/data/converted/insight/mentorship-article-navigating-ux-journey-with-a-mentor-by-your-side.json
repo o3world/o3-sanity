@@ -1,0 +1,323 @@
+{
+  "_id": "insight-wp-8897",
+  "_type": "insight",
+  "title": "Navigating your UX journey with a mentor by your side",
+  "slug": {
+    "_type": "slug",
+    "current": "mentorship-article-navigating-ux-journey-with-a-mentor-by-your-side"
+  },
+  "excerpt": "Discover the power of mentorship in the ever-evolving world of UX design, guided by the insights and experiences of O3 SVP, Christine Sheller.",
+  "author": {
+    "_type": "reference",
+    "_ref": "person-wp-3984"
+  },
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    }
+  ],
+  "publishedAt": "2024-04-08T14:20:07Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/04/Mentorship-article-image.jpg"
+    },
+    "alt": "Navigating your UX journey with a mentor by your side"
+  },
+  "body": [
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Navigating your UX design career can often feel like charting unknown territories. With the rapid pace of technology and shifting paradigms, it’s easy to feel overwhelmed by the sheer magnitude of things to learn, apply, and try. This is where the value of having a great mentor by your side can add value. Through my own experiences as both a mentee and a mentor, I’ve realized the impact mentorship has had on personal and professional growth within my own design and UX journey.",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What a great mentor can do for you",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A great mentor is someone who not only has expertise in their field, but also possesses excellent communication skills and a genuine desire to help others grow. They should be able to provide guidance, support, and constructive criticism without being overly critical or dismissive. A mentor should also be open-minded, adaptable, and willing to learn from their mentee as well.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "On the other hand, a mentor is not someone who will do the work for you or give you all the answers. They are there to guide and support you in your own growth and development. A mentor should also not impose their own agenda or biases onto their mentee, but rather provide objective feedback and advice. It’s important to have a clear understanding of what a mentor can offer and what your expectations are before entering into a mentorship relationship. So always choose a mentor who aligns with your goals and values, and remember that the best mentorships are built on mutual respect, trust, and collaboration!",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The perks of having a mentor",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A great mentor can provide invaluable support and guidance in terms of skills development, offering practical advice and sharing their own experiences in the industry. They can also offer valuable insights into industry trends and perspectives that may not be easily accessible otherwise. Additionally, a mentor can help expand your network by introducing you to other professionals and providing opportunities for networking within the field. Having a mentor who is invested in your growth and success can greatly impact your personal and professional development.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "How to make the most of mentorship",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As a mentor, I have found that the best mentees are those who come into the relationship with clear expectations of what they want to gain from it. It’s important to set goals and communicate them with your mentor so that both parties are on the same page. Additionally, coming prepared to each meeting with specific topics or questions shows dedication and a desire for growth. Being open to feedback and following up on action items discussed during meetings also demonstrates a commitment to learning and improvement. And finally, being proactive in scheduling meetings shows that you value your mentor’s time and are willing to put in the effort to make the most out of the mentorship experience. Overall, actively engaging in the process and being intentional about your development will help you get the most out of mentorship.",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Where to find a great mentor",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "When searching for a mentor, start by looking at your existing network; consider colleagues, friends, or even classmates who may have experience in the field you’re interested in. ",
+          "_key": "k0023"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "ADPList.org",
+          "_key": "k0024"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " is an incredible platform to connect with experienced professionals willing to share their knowledge, guidance, and support. Additionally, reach out to professional organizations or attend networking events to connect with potential mentors. Don’t be afraid to reach out and ask for guidance – many professionals are happy to share their knowledge and support emerging talent in their field. Whichever method you use, remember to do your research and choose a mentor who aligns with your goals, values, and areas of interest. A great mentor can play a crucial role in your personal and professional development, so take the time to find the right one for you.",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "http://ADPList.org"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Conclusion",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "One of my great mentors, the late great ",
+          "_key": "k0029"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Alina Wheeler",
+          "_key": "k0030"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", often talked about the importance of having an ‘I believe in you’ person. For me, it was her; she was a wonderful friend and mentor to me, and I am forever grateful to her. As I hit the milestone of 100 ADPList sessions with my mentees, I am also filled with gratitude for the opportunity to be someone else’s ‘I believe in you person’ and to contribute to the ever-evolving landscape of design. My journey as a mentor has been incredibly rewarding, and I look forward to continuing to support and empower others as they embark on their own design journeys.",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.designingbrandidentity.info/alina-wheeler-tribute"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "So, here’s to more moments of inspiration, learning, and growth as I continue to evolve alongside my mentees and the design community at large. So get out there and find your mentor or become one yourself – you never know how much you’ll both grow in the process! 🚀",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "About the author",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Christine Sheller",
+          "_key": "k0037"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " is the SVP of Experience Research + Design here at O3. In her role, she leads the talented team responsible for all UX research and design activities. In addition to her work at O3, Christine also teaches UX research at ArtCenter College of Design and serves as a mentor at the University of Texas McCombs School of Business post-graduate UX program. ",
+          "_key": "k0038"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "She is a proud member of the ADPList community",
+          "_key": "k0039"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", having recently completed over 100 mentorship sessions and 3,000 minutes of mentorship. With her vast experience in the industry, Christine has been rated in the top 1% of design mentors, is rated one of the Top 10 female mentors in Content Creation, and is considered among the top 10% of contributors in her field of expertise.",
+          "_key": "k0040"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/christine-sheller/"
+        },
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://adplist.org/mentors/christine-sheller"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Navigating your UX journey with a mentor",
+    "description": "Explore the significance of mentorship in navigating your UX journey with insights from O3 SVP Christine Sheller. Learn how a mentor can enhance your career, where to find one, and how to make the most of the mentorship experience."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:8897"
+  }
+}

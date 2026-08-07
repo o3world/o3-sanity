@@ -1,0 +1,285 @@
+{
+  "_id": "insight-wp-3822",
+  "_type": "insight",
+  "title": "The journey to becoming certified professionals in accessibility",
+  "slug": {
+    "_type": "slug",
+    "current": "the-journey-to-becoming-certified-professionals-in-accessibility"
+  },
+  "excerpt": "This foundational certification represents a broad, cross-disciplinary conceptual knowledge about 1) disabilities, 2) accessibility and universal design and 3) accessibility-related standards, laws and management strategies.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-63",
+      "_key": "cat-63"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-62",
+      "_key": "cat-62"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-1",
+      "_key": "cat-1"
+    }
+  ],
+  "publishedAt": "2020-08-05T03:23:00Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-5.jpg"
+    },
+    "alt": "O3 accessibility and pattern"
+  },
+  "body": [
+    {
+      "_key": "k0000",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 is proud to announce that Experience Designer, Alan Cho and Senior Engineer, Brian Crumley passed the IAAP – Certified Professional in Accessibility Core Competency (CPACC) examination! Their hard work, study and perseverance helped them achieve a significant goal – recognition of their skills and knowledge as accessibility professionals.",
+          "_key": "k0001"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "This foundational certification represents a broad, cross-disciplinary conceptual knowledge about…",
+          "_key": "k0003"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Disabilities",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Accessibility and universal design",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Accessibility-related standards",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Laws and management strategies.",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The Driving Force",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Prior to taking the exam this team served as O3 World’s de-facto subject matter experts on all things related to digital accessibility. They each had the hands on know-how, the theoretical knowledge and now they have the certification to reinforce their prowess. These individuals are dedicated to helping shape how people think about accessibility.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Their end goal is to educate, empower and advance the implementation of accessibility in practice. They’ve made it a priority to get certified because they are passionate about helping our clients create equitable experiences for all users.",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Preparing for the CPACC Exam",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "On a weekly basis the O3 a11y group met up to review study guides and quiz each other.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/a11y-jeopardy.jpg"
+      },
+      "alt": "A laptop with shared screen showing an Accessibility-themed Jeopardy game.",
+      "_key": "k0022"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\n“There’s a lot to know about designing accessible platforms and the amount of work our team put into grasping not only things for the web, but also how to help people with disabilities and how to make people with disabilities lives easier through our work really shows how devoted we all are to building accessible experiences.”\n-Alan Cho",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "blockquote"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What’s Next",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Building and promoting accessibility within an organization, empowering and training others to take part in this practice and the practical and legal considerations of accessibility can be a lot to take on, but you don’t have to do it alone. Our CPACC team is creating a series of e-books to help others understand accessibility best practices.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "They’re also setting their sights on the IAAP’s second credential exam. The Web Accessibility Specialist (WAS) is a technical level credential ideal for those who personally design, develop, implement, evaluate, or manage the technical details of accessible web solutions.",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Congratulations again on this achievement! Our certified O3’ers are now part of a select group of over 1,400 IAAP CPACCs around the world. We’re available to help craft accessibility strategies or talk through the ongoing efforts required to remain compliant with the latest WCAG standards. Whether you’re starting a project from scratch or looking to improve upon an existing online experience, O3 World can guide you through the process.",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:3822"
+  }
+}

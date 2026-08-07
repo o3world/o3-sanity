@@ -48,7 +48,7 @@ Same shape, four differences: add to `BASE_BLOCKS`; define with `defineBaseBlock
 1. `CONTEXT.md` first — a new document type is new ubiquitous language. If you can't write its one-line definition, you don't have the type yet.
 2. Schema in `packages/sanity/src/schemas/documents/`. Every document ends with `seo` then `migration`. Routable types carry a required `slug` (ADR 0001).
 3. Routable? Add to `ROUTABLE_TYPES` and `COLLECTION_PREFIXES` in `constants.ts`, then one folder under `apps/web/src/content/documents/<type>/` with `entry.tsx` + registry line.
-4. Card projection goes in `queries.ts` next to `PERSPECTIVE_CARD` / `CASE_STUDY_CARD`, shared by every consumer — never duplicated inline.
+4. Card projection goes in `queries.ts` next to `INSIGHT_CARD` / `CASE_STUDY_CARD`, shared by every consumer — never duplicated inline.
 
 ## Renaming
 

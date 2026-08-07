@@ -26,7 +26,7 @@ import { ListingSection } from './section/listingSection/ListingSection'
 import { LogoWallSection } from './section/logoWallSection/LogoWallSection'
 import { MediaSection } from './section/mediaSection/MediaSection'
 import { PersonGridSection } from './section/personGridSection/PersonGridSection'
-import { PerspectivesCarouselSection } from './section/perspectivesCarouselSection/PerspectivesCarouselSection'
+import { InsightsCarouselSection } from './section/insightsCarouselSection/InsightsCarouselSection'
 import { QuoteSection } from './section/quoteSection/QuoteSection'
 import { RailPanelsSection } from './section/railPanelsSection/RailPanelsSection'
 import { RoleListSection } from './section/roleListSection/RoleListSection'
@@ -48,7 +48,7 @@ export const CLIENT_SECTION_BINDINGS = [
   defineBlockRender('caseShowcaseSection', { component: CaseShowcaseSection }),
   defineBlockRender('railPanelsSection', { component: RailPanelsSection }),
   defineBlockRender('quoteSection', { component: QuoteSection }),
-  defineBlockRender('perspectivesCarouselSection', { component: PerspectivesCarouselSection }),
+  defineBlockRender('insightsCarouselSection', { component: InsightsCarouselSection }),
   defineBlockRender('ctaSection', { component: CtaSection }),
   defineBlockRender('disciplineGridSection', { component: DisciplineGridSection }),
   defineBlockRender('personGridSection', { component: PersonGridSection }),

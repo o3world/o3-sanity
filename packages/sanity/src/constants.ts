@@ -34,14 +34,29 @@ export function resolveProjectId(): string {
 }
 
 /** Document types the web app routes (ADR 0001: every one carries a required slug). */
-export const ROUTABLE_TYPES = ['perspective', 'caseStudy', 'page'] as const
+export const ROUTABLE_TYPES = ['insight', 'caseStudy', 'page'] as const
 export type RoutableType = (typeof ROUTABLE_TYPES)[number]
 
 /** URL prefixes per collection; `page` slugs are multi-segment and carry their own prefix. */
 export const COLLECTION_PREFIXES = {
-  perspective: '/perspectives',
+  insight: '/insights',
   caseStudy: '/work',
 } as const
+
+/**
+ * Where WordPress serves a collection, when this redesign moved it (ADR 0017).
+ *
+ * `insight` was `perspective` in every layer — type, route and URL — until the
+ * word the design had used since the first mockup became the word the code
+ * uses. WordPress still serves `/perspectives/*` and will until it is retired,
+ * so the old prefix has to survive in exactly three places: the parity check
+ * that proves every live URL still resolves, the 301s that make it resolve,
+ * and the nav hrefs built from WordPress's own menus. One declaration feeds
+ * all three — a second copy of it is how they drift apart.
+ */
+export const WORDPRESS_PREFIXES: Readonly<Partial<Record<RoutableType, string>>> = {
+  insight: '/perspectives',
+}
 
 export const PAGE_TYPES = ['standard', 'service'] as const
 export type PageType = (typeof PAGE_TYPES)[number]

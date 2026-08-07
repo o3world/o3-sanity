@@ -122,7 +122,7 @@ export const Layout: Story = {
 
       <Section
         title="Corners"
-        note="Buttons, case-study cards, perspectives cards and media frames all carry radius 0."
+        note="Buttons, case-study cards, insights cards and media frames all carry radius 0."
       >
         <div className="flex flex-wrap items-end gap-8">
           <div className="flex flex-col items-center gap-3">

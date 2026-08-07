@@ -11,7 +11,7 @@
  * but the darks split three ways in the canonical frames:
  *
  *   white      #FFFFFF  platforms, ways-to-work
- *   bone       #F0F0F0  partners, pull quote, perspectives
+ *   bone       #F0F0F0  partners, pull quote, insights
  *   ink        #0A0A0A  the dominant dark — headlines, dark buttons, cards
  *   ink-warm   #0F100B  the Work / Live hero band only
  *   ink-deep   #030303  gradient stops and the footer band
@@ -48,7 +48,7 @@
    * fill — prefer --color-ink for a dark area. */
   --color-ink-deep: #030303;
   /* #F0F0F0 — the light band: partners/intro (1864:2390), the pull quote
-   * (1683:2137), the perspectives row (1683:2467). Often washes to white
+   * (1683:2137), the insights row (1683:2467). Often washes to white
    * rather than sitting flat — see --gradient-surface-wash. */
   --color-bone: #f0f0f0;
   /* #FFFFFF — Figma `color/white/solid`. The plain light band (1762:2149),
@@ -65,7 +65,7 @@
    * also `icons/default`. */
   --color-fg: #232323;
   /* #636363 — Figma `text/tertiary`. The NEUTRAL eyebrow ("OUR PARTNERS",
-   * 1864:2392) and perspectives-card meta ("3 MINS · 7/27/26"). Note the
+   * 1864:2392) and insights-card meta ("3 MINS · 7/27/26"). Note the
    * eyebrow is this grey, not brand red — see the Eyebrow default-tone note
    * in #38. */
   --color-fg-muted: #636363;
@@ -104,7 +104,7 @@
    * opposite number, and the same NO CANONICAL ANCHOR note applies. */
   --color-on-light-line: rgba(0, 0, 0, 0.1);
   /* #D3D3D3 — Figma `bg/button/secondary`. The circular carousel controls
-   * beside the perspectives heading. */
+   * beside the insights heading. */
   --color-surface-muted: #d3d3d3;
 
   /* ── Borders / placeholders ────────────────────────────────────────────── */

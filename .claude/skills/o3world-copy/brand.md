@@ -50,10 +50,10 @@ clear path forward.
 
 ## How pillars map to copy
 
-| Belief                  | What it sounds like on the page                                                                                                 |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| Never settle            | A claim that unsettles: "Most firms ship what you asked for. We solve what was actually in the way."                            |
-| Ongoing journey         | Endings framed as starts: "The end of a project is the beginning of its next iteration" → case studies that end on what's next. |
-| Stay grounded           | Business consequences, named costs, admitted tradeoffs: "It's a slower way to grow. It's the only way to do work this deep."    |
-| Plan for the unexpected | Copy that acknowledges the reader's messy reality (org charts, twelve portals, stakes) instead of a frictionless fantasy.       |
-| Bring visions to life   | Concrete deeds with human subjects: "We built the front door that made it feel like one."                                       |
+| Belief                  | What it sounds like on the page                                                                                                                                      |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Never settle            | A forward claim about the reader's problem: "We start with the problem behind the request — the one that's still there after the launch." (Never a competitor foil.) |
+| Ongoing journey         | Endings framed as starts: "The end of a project is the beginning of its next iteration" → case studies that end on what's next.                                      |
+| Stay grounded           | Business consequences, named costs, admitted tradeoffs: "It's a slower way to grow. It's the only way to do work this deep."                                         |
+| Plan for the unexpected | Copy that acknowledges the reader's messy reality (org charts, twelve portals, stakes) instead of a frictionless fantasy.                                            |
+| Bring visions to life   | Concrete deeds with human subjects: "We built the front door that made it feel like one."                                                                            |

@@ -6,7 +6,7 @@ import { SanityImage } from '@/content/SanityImage'
 import { toEmbedSrc } from './embedSrc'
 
 /**
- * The Portable Text renderer for perspective bodies and case-study chapter
+ * The Portable Text renderer for insight bodies and case-study chapter
  * bodies (the `bodyText` schema type): standard marks + the closed inline
  * object set — figure, embed, pullQuote.
  */
@@ -50,7 +50,7 @@ const components: PortableTextComponents = {
             className="rounded-card w-full"
             // 822px is `--container-article`, the measure both detail
             // templates wrap this renderer in — the same value
-            // `PerspectiveView` declares for its hero. The old 720 matched no
+            // `InsightView` declares for its hero. The old 720 matched no
             // measure in the system: it made the browser pick the 750 candidate
             // for an 822 slot and upscale every inline figure by ~10%.
             sizes="(min-width: 1024px) 822px, 100vw"
@@ -97,7 +97,7 @@ const components: PortableTextComponents = {
 }
 
 /**
- * `className` overrides the default measure. A perspective body sets its own
+ * `className` overrides the default measure. An insight body sets its own
  * ~65ch column, but a case-study chapter is already inside the frame's 822px
  * article measure (`1710:2631`) and would otherwise be narrowed twice — pass
  * `max-w-none` there. Paragraph size is inherited, so the band around this

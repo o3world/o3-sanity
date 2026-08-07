@@ -117,9 +117,9 @@ every screenshot taken to check the work was of the old content.
 ### Agent guidance in the dataset
 
 The Claude Desktop authoring skill carries no knowledge — it fetches it (#68).
-The voice guide and brand foundation live in the repo as markdown and are
-pushed into the dataset as `guidance` documents by a separate tool, which
-outlives the migration pipeline:
+The voice guide, the brand foundation, and the slop patterns live in the repo
+as markdown and are pushed into the dataset as `guidance` documents by a
+separate tool, which outlives the migration pipeline:
 
 ```bash
 pnpm guidance:sync    # .claude/skills/o3world-copy/*.md → guidance documents

@@ -54,7 +54,7 @@ export const Gradients: Story = {
 
       <Section
         title="Card scrims"
-        note="All three sit above a photographic fill and exist to hold copy legible — horizontal on the wide case-study card, weighted to the ends on the stacked one, bottom-heavy on the perspectives cards. None of them is opaque anywhere: the specimen chequer showing through is the point, and a scrim that hides it is holding the copy up with ink that should have come from the composition."
+        note="All three sit above a photographic fill and exist to hold copy legible — horizontal on the wide case-study card, weighted to the ends on the stacked one, bottom-heavy on the insights cards. None of them is opaque anywhere: the specimen chequer showing through is the point, and a scrim that hides it is holding the copy up with ink that should have come from the composition."
       >
         <div className="grid gap-5 md:grid-cols-3">
           <div className="border-line relative h-[260px] overflow-hidden border">

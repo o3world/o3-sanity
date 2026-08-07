@@ -1,0 +1,367 @@
+{
+  "_id": "insight-wp-2525",
+  "_type": "insight",
+  "title": "A11Y lunch: O3 and accessibility workshops",
+  "slug": {
+    "_type": "slug",
+    "current": "a11y-lunch-o3-world-and-accessibility"
+  },
+  "excerpt": "What does accessibility mean in the digital space? Most of us are familiar with braille signs, handicap parking spots, and ramps, but bringing accessibility to digital experiences is a relatively new topic.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-63",
+      "_key": "cat-63"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-1",
+      "_key": "cat-1"
+    }
+  ],
+  "publishedAt": "2019-07-22T17:26:40Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/09/O3-website-imagery_-Insights-5.jpg"
+    },
+    "alt": "O3 accessibility and pattern"
+  },
+  "body": [
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The Current State of Accessibility",
+          "_key": "k0003"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A disability is not an internal failure – it’s a mismatch with your environment. The World Bank estimates that approximately ",
+          "_key": "k0005"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "1 billion people",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", around 15% of the total world population, experience some form of disability.",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.worldbank.org/en/topic/disability"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "When physical and digital products are designed without consideration for users with disabilities, they’re excluding that entire user base from engaging with them. That’s almost 1/7th of the world’s population!",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The advent of new assistive technology (like screen readers, manual switch controllers, and dictation) has helped make certain websites and digital products more accessible, but there is still a long way to go.",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As it stands, many websites and digital platforms aren’t designed for people with visual, auditory, physical, speech, cognitive, or neurological disabilities. The lack of focus on accessibility can make these platforms and websites difficult or impossible for people with disabilities to use, and everyone deserves fair and equal access to the web and web-based services.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Where to Start",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Creating accessible web experiences is not only important from a moral standpoint, it’s also good for business. When something is designed for users of all needs, the product is ultimately better overall.",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Weaving accessibility considerations into your planning and designs might seem costly or challenging, but even small changes can start you down the right path. Considerations for disabled users throughout your processes can help expand your customer base, increase revenue and create a more inclusive experience overall.",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What we’re Doing",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "At O3 World we take pride in creating truly extraordinary digital experiences. A key factor in making something extraordinary is making it accessible to as many people as possible.",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "To get accessibility at the forefront of our team’s minds, we created an internal Accessibility Committee here at O3. The committee’s goals are to provide tools to support our teams in their approach to accessible design, create opportunities for sharing knowledge, and make the conversation part of our daily work.",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our first initiative was intended to help build the foundation for accessible design and development: Empathy! With an empathetic mindset, it is easier to consider users who will interact with our products in a different way than we normally would.",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our First a11y Session",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We recently had a company-wide lunch to talk about current issues in the world of accessibility. Afterward, employees were able to go through a variety of activities to help put them in the shoes of disabled users.",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We heard from one of our Senior Engineers, Brian Crumley, on the accessibility front. He gave us background into the basic concepts of accessibility (like the “",
+          "_key": "k0033"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "curb cut effect",
+          "_key": "k0034"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "”) and the current industry landscape of the practice.",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://ssir.org/articles/entry/the_curb_cut_effect"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "One of our Lead-Developers, Jessica Warhus, gave a few quick tips on things we can start doing today to make our products more accessible. Finally, we heard from one of our Experience Designers, Alan Cho. He talked us through some of the simple things he’s already doing to make accessible design a consideration in his work.",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "After our talks, we revealed our very own “Empathy Lab”. Our committee worked to come up with ten interactive stations meant to create a sense of what it’s like to navigate the web with a disability. The intention wasn’t to simulate a personal experience but to give people the opportunity to work with assistive technology and experience first-hand the frustrations that can arise when accessibility is not part of the design and code.",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The Future",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0042",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our first a11y lunch was a rousing success with employees, and now we’re already planning our next steps. Soon each internal O3 project team will have its own checklist for accessibility standards to follow. We’ll also continue to hold empathy labs so we can build upon what we learned.",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0044",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Accessibility is already a cornerstone of our work, and we’ll be working on different ways to show the value of accessibility to our clients. We’re excited to see how our focus on accessibility will continue to shape our employees and projects. Be sure to check back for more news on our a11y work!",
+          "_key": "k0045"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:2525"
+  }
+}

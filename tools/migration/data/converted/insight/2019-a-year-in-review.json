@@ -1,0 +1,530 @@
+{
+  "_id": "insight-wp-3103",
+  "_type": "insight",
+  "title": "2019: A year in review",
+  "slug": {
+    "_type": "slug",
+    "current": "2019-a-year-in-review"
+  },
+  "excerpt": "Here’s a quick recap on what made 2019 a stand out year for O3.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-1",
+      "_key": "cat-1"
+    }
+  ],
+  "publishedAt": "2019-12-30T18:18:00Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2021/05/O3-website-imagery_-Insights-12.jpg"
+    },
+    "alt": "Ascending up the stairs at the O3 office."
+  },
+  "body": [
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "2019 was a fantastic year for O3 World. Between unprecedented growth, new projects, and exciting events, we truly closed out the decade in style. Here’s a quick recap on what made 2019 a stand-out year for O3.",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "New Faces",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "2019 was a year of growth for our entire staff. We’ve seen plenty of promotions, team additions, and new roles open up at O3 World.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We saw growth in all of our departments, and also added several high-level roles to help ensure that we continue to grow and deliver high-quality digital experiences for all of our clients. After nearly doubling our size in just a year, we can’t wait to continue to grow into 2020 and beyond.",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3HG",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our staff grew a lot in 2019, and our space had to grow along with them. We still have our home office on Frankford Avenue, but we’ve expanded into another well-known Fishtown location.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The Honeygrow test kitchen and corporate office is much more than a place to experiment with new food. It’s also the location of our new satellite office.",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Getting to know the people behind one of Philadelphia’s fastest-growing food franchises has been a real treat. Our new office mates have been very friendly and accommodating, and their chefs always impress us during our weekly staff lunches.",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "_key": "k0027",
+          "text": "",
+          "marks": []
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Talks, Presentations, and Community Growth",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We’d need a whole new post to name every single group and organization we worked with in 2019. O3’s presence in the tech community can’t be ignored.",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Whether we’re speaking at an event or are hosting one, we love being a part of this city’s vibrant technology and design community. We plan on doing a lot more events in 2020, and we already have our ",
+          "_key": "k0033"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "first event of 2020",
+          "_key": "k0034"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " scheduled.",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.meetup.com/DesignBrew/events/266462878/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "1682",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "After taking a break from ",
+          "_key": "k0039"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Forge",
+          "_key": "k0040"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", we knew we wanted to do something different for our next conference. We spent a good portion of 2019 planning ",
+          "_key": "k0041"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "1682",
+          "_key": "k0042"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", and our hard work paid off.",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "http://www.forgeconf.com/"
+        },
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://1682conf.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0044",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "You know you’ve made an impactful conference when attendees are still raving about it months later. If you want to learn a bit more about how the day went and see feedback from attendees, ",
+          "_key": "k0045"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "check out",
+          "_key": "k0046"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " our recap post.",
+          "_key": "k0047"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.o3world.com/news/1682-the-business-of-conference-innovation/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0048",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Ozone Ventures",
+          "_key": "k0049"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0050",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We may have publicly debuted our ",
+          "_key": "k0051"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "Ozone Ventures",
+          "_key": "k0052"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " program in October, but we worked with our inaugural Venture partners, ",
+          "_key": "k0053"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "REC Philly",
+          "_key": "k0054"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and ",
+          "_key": "k0055"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0006"
+          ],
+          "text": "Urvin.AI",
+          "_key": "k0056"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", throughout the entire year.",
+          "_key": "k0057"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.o3world.com/ventures/"
+        },
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.o3world.com/ventures/rec-philly/"
+        },
+        {
+          "_key": "k0006",
+          "_type": "link",
+          "href": "https://www.o3world.com/ventures/urvin/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0058",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0007"
+          ],
+          "text": "REC Philly recently",
+          "_key": "k0059"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " celebrated a successful launch of its new space in the city’s Fashion District. We worked with the REC team to build a customized administration tool that can handle scheduling and other important duties for their members.",
+          "_key": "k0060"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0007",
+          "_type": "link",
+          "href": "https://www.o3world.com/news/ozone-ventures-update-see-philadelphias-newest-place-for-creators/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0061",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We’ve been working closely with the Urvin team to give them the strategic guidance they need to grow their business and improve their offerings. You can expect to hear more from Urvin and REC in the future, along with other new Venture projects.",
+          "_key": "k0062"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0063",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "#AlwaysGrowing",
+          "_key": "k0064"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0065",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Innovation isn’t just a service we offer at O3 World, it’s woven into everything we do. We want everyone at O3 to make innovation a part of their everyday lives. That’s why we spent more time than ever on labs and internal initiatives in 2019.",
+          "_key": "k0066"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0067",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our labs work on ",
+          "_key": "k0068"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0008"
+          ],
+          "text": "Taskbot",
+          "_key": "k0069"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " allowed us to experiment with Dialogflow and find new ways to simplify internal processes. O3’s ",
+          "_key": "k0070"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0009"
+          ],
+          "text": "A11y committee",
+          "_key": "k0071"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " took our accessibility efforts to the next level and is currently finding ways to share our work with the tech community.",
+          "_key": "k0072"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0008",
+          "_type": "link",
+          "href": "https://www.o3world.com/labs/taskbot/"
+        },
+        {
+          "_key": "k0009",
+          "_type": "link",
+          "href": "https://www.o3world.com/news/a11y-updates-certifications-devices-and-labs/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:3103"
+  }
+}

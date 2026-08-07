@@ -1,0 +1,170 @@
+{
+  "_id": "insight-wp-454",
+  "_type": "insight",
+  "title": "Entrepreneur names O3 one of the best entrepreneurial companies",
+  "slug": {
+    "_type": "slug",
+    "current": "o3-world-named-one-of-the-best-entrepreneurial-companies"
+  },
+  "excerpt": "O3 World has been named one of the “Best Entrepreneurial Companies” by Entrepreneur Magazine’s inaugural Entrepreneur360™ Performance Index.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    }
+  ],
+  "publishedAt": "2015-10-22T21:38:12Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-16.jpg"
+    },
+    "alt": "Red pattern"
+  },
+  "body": [
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Building on our recent “Best Places to Work” success, we are thrilled to announce that O3 World has been named one of the “Best Entrepreneurial Companies” by ",
+          "_key": "k0003"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "Entrepreneur",
+          "_key": "k0004"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " Magazine’s inaugural ",
+          "_key": "k0005"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Entrepreneur360™",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " Performance Index.",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "http://www.entrepreneur.com/article/251291"
+        }
+      ],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This study, forged by ",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "Entrepreneur",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", set out to identify companies that exemplify growth, not just in top and bottom lines, but in sustainability and ability to achieve lasting success. O3 World was recognized as one of 15 ",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Classics",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", companies that rely on input from clients and employees to continue to grow and succeed, according to *Entrepreneur*.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "http://www.entrepreneur.com/article/251280"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This is high praise for our agency. While beautiful design and seamless development are two of O3 World’s areas of expertise, we also pride ourselves on our ability to treat our employees and our clients as true partners. Internally, we’ve achieved this by creating and nurturing an empowered agency culture marked by an entrepreneurial spirit. Externally, this same energy has helped us design and develop innovative, revenue-generating digital solutions to our clients’ most pressing business problems.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“Those honored [in the E360 Index] have identified a problem, come up with a unique solution, and bravely built their enterprises around it,” says Ryan Shea, president of Entrepreneur Media. “They’ve accomplished new ways of producing sustainable growth and are an inspiration to others who want to fulfill their own entrepreneurial goals.”",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 World is proud to be part of this prestigious inaugural list.",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:454"
+  }
+}

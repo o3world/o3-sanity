@@ -8,7 +8,7 @@ import { PageMockup } from '../PageMockup'
  *
  * Eight bands off `data/seed/page/index.json`, in the seed's order: the
  * orbital hero, the partners wall, the case showcase, the pull quote, the two
- * rail-panel bands, the perspectives carousel and the closing CTA.
+ * rail-panel bands, the insights carousel and the closing CTA.
  *
  * The **surface sequence** is the thing this story shows that no block story
  * can: ink → bone → wash → bone → white → white → bone → ink. The hero's bone

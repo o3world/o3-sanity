@@ -13,7 +13,7 @@ import { checkPathParity } from './map/paths'
 import { pageDoc } from './map/page'
 import { personDoc } from './map/person'
 import { siteSettingsDoc } from './map/siteSettings'
-import { perspectiveDoc } from './map/perspective'
+import { insightDoc } from './map/insight'
 
 /**
  * Invariants over the ACTUAL committed conversion output, not fixtures.
@@ -50,12 +50,12 @@ function corpusDocs(): unknown[] {
   return docs
 }
 
-const perspectives = readType<Record<string, unknown>>('perspective')
+const insights = readType<Record<string, unknown>>('insight')
 const categories = readType<Record<string, unknown>>('category')
 const persons = readType<Record<string, unknown>>('person')
 const siteSettings = readType<Record<string, unknown>>('siteSettings')
 const pages = readType<Record<string, unknown>>('page')
-const all = [...perspectives, ...categories, ...persons, ...siteSettings, ...pages]
+const all = [...insights, ...categories, ...persons, ...siteSettings, ...pages]
 
 /**
  * The closed set of block types the `bodyText` schema allows. A converter that
@@ -69,9 +69,9 @@ describe('committed conversion output', () => {
     expect(all.length).toBeGreaterThan(0)
   })
 
-  it('validates every perspective against the schema gate', () => {
-    for (const { file, doc } of perspectives) {
-      const parsed = perspectiveDoc.safeParse(doc)
+  it('validates every insight against the schema gate', () => {
+    for (const { file, doc } of insights) {
+      const parsed = insightDoc.safeParse(doc)
       expect(parsed.success, `${file}: ${JSON.stringify(parsed.error?.issues)}`).toBe(true)
     }
   })
@@ -117,7 +117,7 @@ describe('committed conversion output', () => {
 
   /**
    * A byline is optional (#32 item 1.1) — WordPress shows one only where an
-   * editor set the ACF author, so most perspectives carry none. What must
+   * editor set the ACF author, so most insights carry none. What must
    * still hold is the pair of invariants around the ones that do: the
    * reference resolves, and no person document is committed that nothing
    * attributes (person emission is reference-driven in `convert.ts`, so a
@@ -125,7 +125,7 @@ describe('committed conversion output', () => {
    */
   it('resolves every author reference to a committed person document', () => {
     const personIds = new Set(persons.map(({ doc }) => doc._id as string))
-    for (const { file, doc } of perspectives) {
+    for (const { file, doc } of insights) {
       const ref = (doc.author as { _ref: string } | undefined)?._ref
       if (!ref) continue
       expect(personIds, `${file} references missing author ${ref}`).toContain(ref)
@@ -145,7 +145,7 @@ describe('committed conversion output', () => {
 
   it('resolves every category reference to a committed category document', () => {
     const categoryIds = new Set(categories.map(({ doc }) => doc._id as string))
-    for (const { file, doc } of perspectives) {
+    for (const { file, doc } of insights) {
       for (const ref of doc.categories as { _ref: string }[]) {
         expect(categoryIds, `${file} references missing category ${ref._ref}`).toContain(ref._ref)
       }
@@ -153,7 +153,7 @@ describe('committed conversion output', () => {
   })
 
   it('emits only body block types the bodyText schema allows', () => {
-    for (const { file, doc } of perspectives) {
+    for (const { file, doc } of insights) {
       for (const block of doc.body as { _type: string }[]) {
         expect(ALLOWED_BODY_TYPES, `${file} has an unexpected block "${block._type}"`).toContain(
           block._type,
@@ -163,7 +163,7 @@ describe('committed conversion output', () => {
   })
 
   it('gives every body block a _key unique within its document', () => {
-    for (const { file, doc } of perspectives) {
+    for (const { file, doc } of insights) {
       const keys = (doc.body as { _key?: string }[]).map((b) => b._key)
       expect(keys.every(Boolean), `${file} has a body block with no _key`).toBe(true)
       expect(new Set(keys).size, `${file} has duplicate body _keys`).toBe(keys.length)
@@ -207,15 +207,24 @@ describe('committed conversion output', () => {
   // Path parity (#26). The mapper gates this per document at convert time;
   // this re-checks the committed corpus, so a hand-edited slug in
   // data/converted/ is caught too.
-  it('serves every perspective at the exact path WordPress serves it at', () => {
-    for (const { file, doc } of perspectives) {
+  it('serves every insight at the path WordPress serves it at, or a recorded move', () => {
+    // `extract/perspective/` — the extract tree keeps WordPress's vocabulary
+    // (ADR 0017). Reading the wrong directory here would make `existsSync`
+    // skip every document and the check would pass without testing anything,
+    // so the count is asserted below.
+    let checked = 0
+    for (const { file, doc } of insights) {
       const extract = join(EXTRACT_DIR, 'perspective', file)
       if (!existsSync(extract)) continue
       const { seo } = JSON.parse(readFileSync(extract, 'utf8')) as { seo?: WpSeo }
       const slug = (doc.slug as { current: string }).current
-      const issue = checkPathParity(seo?.canonicalRendered ?? '', `/perspectives/${slug}`)
+      const issue = checkPathParity(seo?.canonicalRendered ?? '', `/insights/${slug}`)
       expect(issue?.detail, file).toBeUndefined()
+      checked++
     }
+    expect(checked, 'no migrated insight was checked — wrong extract directory?').toBeGreaterThan(
+      200,
+    )
   })
 
   // A canonical pointing back at www.o3world.com tells Google the new page is
@@ -231,7 +240,7 @@ describe('committed conversion output', () => {
   // Images are migrated from the full-size original; a `-768x432` suffix means
   // a thumbnail slipped through and the asset would upload at the wrong size.
   it('points every image marker at a full-size upload, never a WP thumbnail', () => {
-    for (const { file, doc } of perspectives) {
+    for (const { file, doc } of insights) {
       const markers = JSON.stringify(doc).match(/"_wpSrc":"[^"]+"/g) ?? []
       for (const marker of markers) {
         expect(marker, `${file} migrates a thumbnail`).not.toMatch(/-\d+x\d+\.\w+"$/)

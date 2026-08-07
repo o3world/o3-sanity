@@ -1,7 +1,7 @@
 import { defineArrayMember, defineType } from 'sanity'
 
 /**
- * The shared Portable Text shape for perspective bodies and case-study
+ * The shared Portable Text shape for insight bodies and case-study
  * chapters. Closed inline-object set per the schema spec: figure, embed,
  * pullQuote — and deliberately no codeBlock: extracting all 272 WordPress
  * bodies found zero `<pre>`, `<code>`, or highlighted blocks (ADR 0005).

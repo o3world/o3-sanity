@@ -19,7 +19,7 @@ type PersonGridSectionProps = SectionProps<'personGridSection'>
  * **This is the block the 12 migrated `person` documents existed for.** They
  * came in with #17 and were rendered nowhere until this band; that is why the
  * people are **referenced**, not inlined. A person is already a document —
- * they author perspectives — so inlining names here would have created a
+ * they author insights — so inlining names here would have created a
  * second, drifting copy of the same fact. The reference goes both ways now:
  * since #32 dropped the `post_author` byline, this band is the *only* thing
  * keeping Kelly Navari (`person-wp-4`) in the corpus.

@@ -1,0 +1,76 @@
+{
+  "_id": "insight-wp-4865",
+  "_type": "insight",
+  "title": "Keith Scandone shares what today's leaders need to be effective",
+  "slug": {
+    "_type": "slug",
+    "current": "keith-scandone-shares-what-todays-leaders-need-to-be-effective"
+  },
+  "excerpt": "Check O3 CEO's perspective on what effective leadership looks like during a pandemic.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-1",
+      "_key": "cat-1"
+    }
+  ],
+  "publishedAt": "2022-02-02T01:20:20Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/02/O3-website-imagery_-Insights-1.png"
+    },
+    "alt": "Co-founder Keith standing in the hallway of the O3 office."
+  },
+  "body": [
+    {
+      "_key": "k0001",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Authority Magazine spoke with O3’s Co-Founder and CEO, Keith Scandone, to get his perspective on what effective leadership looks like during a pandemic. Keith reflects on his journey as a CEO and shares lessons learned. He calls out several mistakes leaders often make and how to avoid them as well as five things leaders in any industry should do to have a positive impact.",
+          "_key": "k0002"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Check out Keith’s full interview here.",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://medium.com/authority-magazine/keith-scandone-of-o3-world-five-things-you-need-to-be-a-highly-effective-leader-during-turbulent-ece0505868e5"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "Authority Magazine spoke with O3 CEO, Keith Scandone, to get his perspective on what effective leadership looks like during a pandemic."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:4865"
+  }
+}

@@ -93,7 +93,7 @@ function backgroundOf(element: Element) {
  * answer available and the one the designer chose as its base.
  *
  * **A candidate also has to be wide enough to BE the surface.** The hero's
- * white CTA and the bone perspectives cards both sit under the sample point on
+ * white CTA and the bone insights cards both sit under the sample point on
  * the way past, and both won the walk on colour alone — a 180px button flipping
  * a 1130px bar is a false positive that reads as a flicker while scrolling. So
  * a candidate must span the header horizontally, which is the same "bands are
@@ -110,7 +110,7 @@ function backgroundOf(element: Element) {
  * ── KNOWN LIMITATION: PICTURES ─────────────────────────────────────────────
  *
  * An `<img>` has no background-color, so the walk passes straight through it to
- * whatever contains it. Scrolling a Perspectives article, the bar crosses the
+ * whatever contains it. Scrolling a Insights article, the bar crosses the
  * inline photographs still wearing the light skin it took from the white column
  * behind them — verified in the browser, and it is dark ink over a dark picture
  * for the height of each one.

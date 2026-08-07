@@ -1,0 +1,363 @@
+{
+  "_id": "insight-wp-3328",
+  "_type": "insight",
+  "title": "Drupal owners: Time to move version 7 to 8",
+  "slug": {
+    "_type": "slug",
+    "current": "drupal-owners-time-to-move-version-7-to-8"
+  },
+  "excerpt": "Drupal 8 is not just a tweak with some bells and whistles. It is future-facing, with a completely different codebase that rebuilds the entire CMS from the ground up.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-11",
+      "_key": "cat-11"
+    }
+  ],
+  "publishedAt": "2020-04-22T01:18:13Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-17.jpg"
+    },
+    "alt": "Drupal owners: Time to move version 7 to 8"
+  },
+  "body": [
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "It’s time to march forward, Drupal-ites.",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Drupal 7 of the popular open-source content management system (CMS) will go end of life in November 2021. The last feature release of ",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Drupal 8",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " was announced late last year, and Drupal 9 will become available sometime in June.",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.drupal.org/blog/drupal-8-8-0"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "And that means that companies using Drupal 7 need to upgrade to 8 in the not-too-distant future.",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Drupal 8 is not just a tweak with some bells and whistles. It is future-facing, with a completely different codebase that rebuilds the entire CMS from the ground up.",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Sure, the transition from 6 to 7 was a pretty big update, but 8 is an entirely new ballgame. For example, it implements object-oriented programming so that developers can more easily add or modify components. It offers a more robust platform that provides more control over caching and new features like an official media library module.",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A big change",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Once Drupal 7 hits its end of life in about 18 months, it will no longer be supported by the open source community – or by us at O3 World. It’s best to plan a migration from 7 to 8 now, since a publisher will also need to migrate the entire content repository, any third-party modules, and any integrations, such as analytics engines or marketing platforms.",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "By comparison, the move from 8 to 9 will require relatively low effort. Because 8 is such a big change and requires an entirely new instance, users would be wise to migrate to 8 before 9.",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“Upgrading to Drupal 8 now will make the eventual upgrade to Drupal 9 far easier,” ",
+          "_key": "k0022"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "advises",
+          "_key": "k0023"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " the Drupal Association.",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.drupal.org/docs/9/drupal-9-release-date-and-what-it-means/what-happens-to-drupal-7-after-drupal-9-is-released"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The difficulty of the 8-to-9 migration depends on several variables, including the number and complexity of modules and custom integrations, how much content you’re moving over, and how many different content types you have, such as blog posts or events.",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "To prepare for the migration, Drupal users should take several actions.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Audit, confirm, test, evaluate",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "First, conduct an audit of the structure and size of your content repository, the types of content being migrated, and any other custom integrations or Drupal modules in use.",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Confirm that the modules and integrations with other platforms are supported in Drupal versions 8 and 9.",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Set up a post-migration testing plan, to make sure the site, your SEO and analytics will all work properly. While your daily workflows — such as story creation, editing, and posting — should remain roughly the same in the new version, it’s best to familiarize yourself with Drupal 8’s interface and functionality.",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Remember to migrate your Drupal 7 themes to Drupal 8, as the underlying code, originally written in pure PHP, will now be handled by the Twig templating language. As a result, you’ll need to migrate your theme files if you want to keep the same look and feel. It may get wonky, but if you’re familiar with Drupal 7 templating basics, you should be able to pick up Drupal 8 fairly easily.",
+          "_key": "k0038"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0039",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Now may also be a good time to reevaluate the appearance and behavior of your site. Though Drupal 8 and 9 will be able to replicate your current page’s look and feel, the migration process provides an opportunity to reflect on the functionality, aesthetics, and user experience of your site. Starting with a fresh website redesign lets you start with a “blank slate” Drupal 8 theme.",
+          "_key": "k0040"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0041",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Drupal is a very robust and developer-friendly content platform, which helps account for its popularity. It is now modernizing itself and we can help you follow the platform into the future.",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0043",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Contact us if you want to talk through your ",
+          "_key": "k0044"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Drupal migration plans",
+          "_key": "k0045"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". And if Drupal is not your cup of tea, we also work with other common site platforms like WordPress, Craft CMS and e-commerce platform Magento. Either way, we’re here to help.",
+          "_key": "k0046"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:3328"
+  }
+}

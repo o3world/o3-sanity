@@ -1,0 +1,113 @@
+{
+  "_id": "insight-wp-467",
+  "_type": "insight",
+  "title": "#O3TakesDC: Heading to our Nation’s Capital to celebrate 10 Years",
+  "slug": {
+    "_type": "slug",
+    "current": "o3-takes-dc"
+  },
+  "excerpt": "To celebrate our successes so far, O3 World employees set off for Washington, DC – where we’ve recently expanded – for a full day of fun.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-10",
+      "_key": "cat-10"
+    }
+  ],
+  "publishedAt": "2015-11-23T12:47:53Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2020/08/O3-website-imagery_-Insights-17.jpg"
+    },
+    "alt": "#O3TakesDC: Heading to our Nation’s Capital to celebrate 10 Years"
+  },
+  "body": [
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This year, O3 World celebrates its 10-year anniversary.",
+          "_key": "k0003"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In the decade since O3 World launched, the agency has taken inspiration from the constantly changing business world and transformed itself into what it is now – a digital product design and development agency.",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "To celebrate our successes so far, O3 World employees set off for Washington, DC – where we’ve recently expanded – for a full day of fun. For a recap, check out the #O3TakesDC hashtag on ",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Twitter",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and ",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Instagram",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". Here’s to 10 more great years!",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://twitter.com/search?q=%23o3takesdc&src=typd"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.instagram.com/explore/tags/o3takesdc"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:467"
+  }
+}

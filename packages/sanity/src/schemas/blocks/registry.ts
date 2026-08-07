@@ -10,7 +10,7 @@ export const SECTION_BLOCKS = [
   'caseShowcaseSection',
   'railPanelsSection',
   'quoteSection',
-  'perspectivesCarouselSection',
+  'insightsCarouselSection',
   'ctaSection',
   'disciplineGridSection',
   'personGridSection',

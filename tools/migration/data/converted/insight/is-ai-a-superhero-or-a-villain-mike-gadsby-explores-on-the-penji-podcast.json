@@ -1,0 +1,275 @@
+{
+  "_id": "insight-wp-8459",
+  "_type": "insight",
+  "title": "Is AI a superhero or a villain? Mike Gadsby explores on the Penji podcast",
+  "slug": {
+    "_type": "slug",
+    "current": "is-ai-a-superhero-or-a-villain-mike-gadsby-explores-on-the-penji-podcast"
+  },
+  "excerpt": "In a recent podcast hosted by Penji, Mike Gadsby shared his insights on the evolving landscape of AI. The conversation delved into various aspects of AI, examining its future, applications in customer experiences, and the challenges it poses to businesses.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    }
+  ],
+  "publishedAt": "2023-11-02T18:21:27Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/11/O3-website-imagery_-Perspectives-10.png"
+    },
+    "alt": "Penji podcast- Mike Gadsby, O3 CIO"
+  },
+  "body": [
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "AI’s Role in shaping the future",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Mike Gadsby",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " sat down with ",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Penji",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " CEO ",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Khai Tran",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " to discuss the remarkable progress made in AI, especially in the realms of digital marketing and graphic design. Free AI writing tools like ChatGPT and AI graphic design generators such as ",
+          "_key": "k0014"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "DALL-E",
+          "_key": "k0015"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " have become readily available, and the two are now fully integrated in a recent release. The availability of AI tools has created a unique opportunity for business owners to cut costs associated with branding and marketing material creation.",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/michaelgadsby/"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://penji.co/"
+        },
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/khai-tran/"
+        },
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://shakiroslann.medium.com/dall-e-3-is-now-integrated-into-chatgpt-64a8a3bf4008"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "However, this progress comes with a caveat: as AI technology advances, businesses are presented with new challenges and opportunities. It raises the question of whether AI is a superhero, coming to the rescue with its cost-saving and efficiency-boosting capabilities, or if it poses a potential threat, thus becoming the villain in the story of business success.",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "AI’s impact on customer experiences",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h2"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Mike emphasized the importance of creating seamless and personalized customer experiences, a field where AI plays a pivotal role. AI can analyze vast amounts of customer data to tailor marketing and product recommendations. This personalization not only enhances customer satisfaction but also drives sales and brand loyalty.",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The duality of AI",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "One of the central themes of the podcast was the dual nature of AI – is it a superhero or a villain? Mike acknowledged that while AI offers tremendous advantages, it also presents challenges to agencies. As more entrepreneurs embrace AI for content creation, image generation, and advertising, traditional agencies must adapt to stay relevant. AI can automate tasks that were once labor-intensive, making it a cost-effective solution for businesses. This makes AI a superhero by reducing operational expenses and increasing efficiency.",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The increasing reliance on AI for creative tasks raises concerns about the authenticity and uniqueness of content. AI-generated content can sometimes lack the human touch and creative insight that sets businesses apart. This raises questions about the ethical implications of automation, as well as the potential loss of jobs in creative industries. In this context, AI may assume the role of a villain, posing challenges to those who rely on traditional, manual creative processes.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3 is at the forefront of ",
+          "_key": "k0030"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "AI solutions",
+          "_key": "k0031"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", helping businesses navigate a complex terrain. With innovative AI tools and strategies, O3 is empowering companies to harness the power of AI to create more personalized customer experiences while maintaining the human touch that sets them apart in the market.",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.o3world.com/transcend/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "Watch the full podcast",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.youtube.com/watch?v=yBoW6uEyeTc&t=17s"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "AI in Marketing: Future Trends and Challenges",
+    "description": "What is AI to businesses today? Hear insights from Mike Gadsby about AI's role in digital marketing and graphic design."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:8459"
+  }
+}

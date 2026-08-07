@@ -2,7 +2,6 @@
   "_id": "siteSettings",
   "_type": "siteSettings",
   "title": "O3",
-  "perspectivesLabel": "Insights",
   "navItems": [
     {
       "_type": "cta",
@@ -20,7 +19,7 @@
       "_type": "cta",
       "_key": "nav-2",
       "label": "Insights",
-      "href": "/perspectives"
+      "href": "/insights"
     },
     {
       "_type": "cta",
@@ -80,7 +79,7 @@
           "_type": "cta",
           "_key": "g0-4",
           "label": "Blog",
-          "href": "/perspectives",
+          "href": "/insights",
           "variant": "light"
         }
       ]

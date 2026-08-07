@@ -1,3 +1,5 @@
+import { COLLECTION_PREFIXES, WORDPRESS_PREFIXES } from '@o3/sanity/constants'
+
 import type { ConversionIssue } from '../lib/htmlToPortableText'
 
 /**
@@ -17,6 +19,7 @@ import type { ConversionIssue } from '../lib/htmlToPortableText'
  * happen.
  */
 
+/** One path that moved. */
 export interface PathException {
   /** The path WordPress serves today, no host, no trailing slash. */
   readonly from: string
@@ -27,17 +30,64 @@ export interface PathException {
 }
 
 /**
- * Deliberate path changes. Empty by design: the WordPress URL space
- * (`/perspectives/…`, `/work/…`, `/services/…`, `/ventures/…`) is exactly the
- * URL space ADR 0001 routes, so nothing has to move. Entries added here are
- * decisions, not conversion accidents.
+ * A whole collection that moved — every path under one prefix, by one rule.
+ *
+ * A collection rename is a single decision, not N of them. Spelling it out per
+ * document would bury that decision in 272 identical rows, go stale the first
+ * time a slug changed, and make the redirect generator ship 272 rows where one
+ * prefix rule says the same thing.
+ */
+export interface PathPrefixException {
+  readonly fromPrefix: string
+  readonly toPrefix: string
+  readonly reason: string
+}
+
+/**
+ * Deliberate path changes — the record of every URL this redesign moves.
+ *
+ * Both lists were empty by design until ADR 0017: the WordPress URL space was
+ * exactly the URL space ADR 0001 routes, so nothing had to move. Entries here
+ * are decisions, not conversion accidents, and this is the only place a moved
+ * path is declared — `checkPathParity` reads it, and so does the #24 redirect
+ * generator.
  */
 export const PATH_EXCEPTIONS: readonly PathException[] = []
+
+export const PATH_PREFIX_EXCEPTIONS: readonly PathPrefixException[] = [
+  {
+    fromPrefix: WORDPRESS_PREFIXES.insight!,
+    toPrefix: COLLECTION_PREFIXES.insight,
+    reason:
+      'ADR 0017: the collection is an Insight. The nav has read "Insights" since the ' +
+      'first mockup and the sibling brand already publishes at /insights, so the code ' +
+      'took the word the design was already using. All 272 articles and the index move.',
+  },
+]
 
 const EXCEPTION_BY_FROM = new Map(PATH_EXCEPTIONS.map((e) => [e.from, e]))
 
 /**
- * `https://www.o3world.com/perspectives/foo/` → `/perspectives/foo`.
+ * The new path for a path WordPress serves, or `null` when nothing moved it.
+ * An exact entry wins over a prefix rule, so one document can always opt out
+ * of its collection's move.
+ */
+export function movedPath(from: string): string | null {
+  const exact = EXCEPTION_BY_FROM.get(from)
+  if (exact) return exact.to
+  for (const rule of PATH_PREFIX_EXCEPTIONS) {
+    if (from === rule.fromPrefix) return rule.toPrefix
+    if (from.startsWith(`${rule.fromPrefix}/`)) {
+      return rule.toPrefix + from.slice(rule.fromPrefix.length)
+    }
+  }
+  return null
+}
+
+/**
+ * `https://www.o3world.com/perspectives/foo/` → `/perspectives/foo`. The input
+ * is a WordPress URL, so it still carries WordPress's prefix; `movedPath` is
+ * what turns that into the path this site serves.
  * Returns `null` for input that isn't a URL with a path, which is itself a
  * parity failure the caller reports.
  */
@@ -71,13 +121,12 @@ export function checkPathParity(
   }
   if (from === newPath) return null
 
-  const exception = EXCEPTION_BY_FROM.get(from)
-  if (exception && exception.to === newPath) return null
+  if (movedPath(from) === newPath) return null
 
   return {
     element: 'path parity',
     detail:
       `WordPress serves "${from}" but this document maps to "${newPath}". ` +
-      `Either fix the slug or record the change in PATH_EXCEPTIONS (map/paths.ts) so it becomes a redirect.`,
+      `Either fix the slug or record the change in PATH_EXCEPTIONS / PATH_PREFIX_EXCEPTIONS (map/paths.ts) so it becomes a redirect.`,
   }
 }

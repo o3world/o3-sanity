@@ -9,7 +9,7 @@ import { defineQuery } from 'groq'
  * literal types survive into the `defineQuery` calls below — that is what
  * keeps each query a `keyof SanityQueries` after typegen (TS#33304).
  */
-export const PERSPECTIVE_CARD = /* groq */ `
+export const INSIGHT_CARD = /* groq */ `
   _id,
   _type,
   title,
@@ -61,10 +61,10 @@ const CTA_TARGET = /* groq */ `"target": target->{_type, title, "slug": slug.cur
  * each block renderer needs beyond the raw fields:
  * - cta targets are dereferenced everywhere a cta appears (incl. layoutSection
  *   column items);
- * - logo wall / case showcase / perspectives carousel expand their references
+ * - logo wall / case showcase / insights carousel expand their references
  *   into card projections, and personGridSection does the same for the
  *   `person` documents the About team band points at;
- * - perspectivesCarouselSection also fetches a `latest` fallback feed so an
+ * - insightsCarouselSection also fetches a `latest` fallback feed so an
  *   empty curated list auto-fills (renderer picks `curated` when non-empty);
  * - listingSection resolves its page list at query time so the renderer stays
  *   a pure component.
@@ -85,9 +85,9 @@ const SECTION_FIELDS = /* groq */ `
   _type == "railPanelsSection" => {
     panels[]{..., cta{..., ${CTA_TARGET}}}
   },
-  _type == "perspectivesCarouselSection" => {
-    "curated": perspectives[]->{${PERSPECTIVE_CARD}},
-    "latest": *[_type == "perspective" && (!defined(^.category) || ^.category._ref in categories[]._ref)] | order(publishedAt desc)[0...8]{${PERSPECTIVE_CARD}}
+  _type == "insightsCarouselSection" => {
+    "curated": insights[]->{${INSIGHT_CARD}},
+    "latest": *[_type == "insight" && (!defined(^.category) || ^.category._ref in categories[]._ref)] | order(publishedAt desc)[0...8]{${INSIGHT_CARD}}
   },
   _type == "ctaSection" => {
     cta{..., ${CTA_TARGET}}
@@ -111,7 +111,6 @@ const SECTION_FIELDS = /* groq */ `
 
 export const SITE_SETTINGS_QUERY = defineQuery(`*[_type == "siteSettings"][0]{
   title,
-  perspectivesLabel,
   navItems[]{..., ${CTA_TARGET}},
   primaryCta{..., ${CTA_TARGET}},
   footerTagline,
@@ -125,36 +124,36 @@ export const SITE_SETTINGS_QUERY = defineQuery(`*[_type == "siteSettings"][0]{
 }`)
 
 /**
- * The perspective detail route (#45).
+ * The insight detail route (#45).
  *
  * `related` / `latest` feed the frame's closing "Keep reading." band
  * (`1751:1947`), which is the Home Blog row's carousel drawn onto the article
- * page. Two lists rather than one, the same shape `perspectivesCarouselSection`
+ * page. Two lists rather than one, the same shape `insightsCarouselSection`
  * uses: `related` shares a category with the article, `latest` is the fallback
- * for a perspective whose category is a dead end. Both exclude the article
+ * for an insight whose category is a dead end. Both exclude the article
  * itself — the one thing a reader is guaranteed not to want next.
  *
  * ⚠️ **`^.^` in the category match is not a typo.** `^` inside the `*[]`
  * filter is this document (which is why `_id != ^._id` works), but the array
  * filter inside `count()` opens a further scope, so one caret there resolves
- * to the *candidate* document — comparing every perspective's categories to
+ * to the *candidate* document — comparing every insight's categories to
  * its own and matching all 272. Two carets reach back out to the article.
  */
-export const PERSPECTIVE_QUERY = defineQuery(`*[_type == "perspective" && slug.current == $slug][0]{
-  ${PERSPECTIVE_CARD},
+export const INSIGHT_QUERY = defineQuery(`*[_type == "insight" && slug.current == $slug][0]{
+  ${INSIGHT_CARD},
   body,
   seo,
-  "related": *[_type == "perspective" && _id != ^._id && count((categories[]._ref)[@ in ^.^.categories[]._ref]) > 0] | order(publishedAt desc)[0...8]{${PERSPECTIVE_CARD}},
-  "latest": *[_type == "perspective" && _id != ^._id] | order(publishedAt desc)[0...8]{${PERSPECTIVE_CARD}}
+  "related": *[_type == "insight" && _id != ^._id && count((categories[]._ref)[@ in ^.^.categories[]._ref]) > 0] | order(publishedAt desc)[0...8]{${INSIGHT_CARD}},
+  "latest": *[_type == "insight" && _id != ^._id] | order(publishedAt desc)[0...8]{${INSIGHT_CARD}}
 }`)
 
-export const PERSPECTIVE_SLUGS_QUERY = defineQuery(
-  `*[_type == "perspective" && defined(slug.current)].slug.current`,
+export const INSIGHT_SLUGS_QUERY = defineQuery(
+  `*[_type == "insight" && defined(slug.current)].slug.current`,
 )
 
-export const PERSPECTIVES_PAGE_QUERY = defineQuery(`{
-  "items": *[_type == "perspective"] | order(publishedAt desc) [$offset...$end]{${PERSPECTIVE_CARD}},
-  "total": count(*[_type == "perspective"])
+export const INSIGHTS_PAGE_QUERY = defineQuery(`{
+  "items": *[_type == "insight"] | order(publishedAt desc) [$offset...$end]{${INSIGHT_CARD}},
+  "total": count(*[_type == "insight"])
 }`)
 
 /**
@@ -167,8 +166,8 @@ export const CASE_STUDIES_PAGE_QUERY = defineQuery(`{
   "total": count(*[_type == "caseStudy"])
 }`)
 
-export const LATEST_PERSPECTIVES_QUERY = defineQuery(
-  `*[_type == "perspective" && ($categoryId == null || $categoryId in categories[]._ref)] | order(publishedAt desc) [0...$limit]{${PERSPECTIVE_CARD}}`,
+export const LATEST_INSIGHTS_QUERY = defineQuery(
+  `*[_type == "insight" && ($categoryId == null || $categoryId in categories[]._ref)] | order(publishedAt desc) [0...$limit]{${INSIGHT_CARD}}`,
 )
 
 export const CASE_STUDY_QUERY = defineQuery(`*[_type == "caseStudy" && slug.current == $slug][0]{
@@ -222,7 +221,7 @@ export const PAGES_BY_TYPE_QUERY = defineQuery(
  * contradiction that costs crawl budget and trust (#26, verified by #24).
  */
 export const SITEMAP_QUERY = defineQuery(`{
-  "perspectives": *[_type == "perspective" && defined(slug.current) && (seo.noIndex != true)]{"slug": slug.current, _updatedAt},
+  "insights": *[_type == "insight" && defined(slug.current) && (seo.noIndex != true)]{"slug": slug.current, _updatedAt},
   "caseStudies": *[_type == "caseStudy" && defined(slug.current) && (seo.noIndex != true)]{"slug": slug.current, _updatedAt},
   "pages": *[_type == "page" && defined(slug.current) && (seo.noIndex != true)]{"slug": slug.current, _updatedAt}
 }`)

@@ -6,8 +6,8 @@ import { fileURLToPath } from 'node:url'
 import { SITE_SETTINGS_QUERY } from '@o3/sanity/queries'
 import type {
   CASE_STUDIES_PAGE_QUERY_RESULT,
-  PERSPECTIVE_QUERY_RESULT,
-  PERSPECTIVES_PAGE_QUERY_RESULT,
+  INSIGHT_QUERY_RESULT,
+  INSIGHTS_PAGE_QUERY_RESULT,
   SITE_SETTINGS_QUERY_RESULT,
 } from '@o3/sanity/types/generated'
 
@@ -26,7 +26,7 @@ import { projectSeedPage, resolveAssetMarkers, type SeedDoc } from './seedProjec
  * default, so a test reads as "this one thing differs".
  */
 
-type Perspective = NonNullable<PERSPECTIVE_QUERY_RESULT>
+type Insight = NonNullable<INSIGHT_QUERY_RESULT>
 
 /** A Portable Text paragraph, the shape `htmlToBlocks` produces. */
 export function paragraph(text: string, key = 'k0000') {
@@ -39,12 +39,12 @@ export function paragraph(text: string, key = 'k0000') {
   }
 }
 
-export function aPerspective(overrides: Partial<Perspective> = {}): Perspective {
+export function anInsight(overrides: Partial<Insight> = {}): Insight {
   return {
-    _id: 'perspective-wp-101',
-    _type: 'perspective',
-    title: 'A Perspective',
-    slug: 'a-perspective',
+    _id: 'insight-wp-101',
+    _type: 'insight',
+    title: 'An Insight',
+    slug: 'an-insight',
     excerpt: 'Why this matters.',
     publishedAt: '2026-05-04T13:20:00Z',
     featuredImage: null,
@@ -58,28 +58,22 @@ export function aPerspective(overrides: Partial<Perspective> = {}): Perspective 
     related: [],
     latest: [],
     ...overrides,
-  } as Perspective
+  } as Insight
 }
 
-/** The card half of a perspective — what every listing and feed projects. */
-function toCard({
-  body: _body,
-  seo: _seo,
-  related: _related,
-  latest: _latest,
-  ...card
-}: Perspective) {
+/** The card half of an insight — what every listing and feed projects. */
+function toCard({ body: _body, seo: _seo, related: _related, latest: _latest, ...card }: Insight) {
   return card
 }
 
-export function aPerspectivesPage(
-  items: Perspective[] = [aPerspective()],
+export function anInsightsPage(
+  items: Insight[] = [anInsight()],
   total = items.length,
-): PERSPECTIVES_PAGE_QUERY_RESULT {
+): INSIGHTS_PAGE_QUERY_RESULT {
   return {
     items: items.map(toCard),
     total,
-  } as PERSPECTIVES_PAGE_QUERY_RESULT
+  } as INSIGHTS_PAGE_QUERY_RESULT
 }
 
 type CaseStudyCard = CASE_STUDIES_PAGE_QUERY_RESULT['items'][number]
@@ -118,7 +112,6 @@ export function siteSettings(
 ): SITE_SETTINGS_QUERY_RESULT {
   return {
     title: 'O3',
-    perspectivesLabel: 'Insights',
     navItems: [],
     primaryCta: null,
     footerTagline: null,
@@ -137,7 +130,7 @@ export function siteSettings(
  * A dataset resolver for a route that fetches both a document and Site
  * Settings — which, since #26, is every route with `generateMetadata`.
  *
- *   renderRoute(route, { data: withSettings(aPerspective()), params: { slug } })
+ *   renderRoute(route, { data: withSettings(anInsight()), params: { slug } })
  */
 export function withSettings(
   doc: unknown,
@@ -182,13 +175,13 @@ function resolveWpSrcMarkers(node: unknown): unknown {
  * produces something the renderer cannot display fails here rather than in
  * Studio. Pass no slug to get the first document on disk.
  */
-export function aMigratedPerspective(slug?: string): Perspective {
+export function aMigratedInsight(slug?: string): Insight {
   const dir = join(
     dirname(fileURLToPath(import.meta.url)),
-    '../../../../tools/migration/data/converted/perspective',
+    '../../../../tools/migration/data/converted/insight',
   )
   const file = slug ? `${slug}.json` : readdirSync(dir).filter((f) => f.endsWith('.json'))[0]
-  if (!file) throw new Error(`No converted perspective found in ${dir}`)
+  if (!file) throw new Error(`No converted insight found in ${dir}`)
 
   const doc = resolveWpSrcMarkers(JSON.parse(readFileSync(join(dir, file), 'utf8'))) as {
     _id: string
@@ -202,28 +195,28 @@ export function aMigratedPerspective(slug?: string): Perspective {
     seo?: unknown
   }
 
-  return aPerspective({
+  return anInsight({
     _id: doc._id,
     title: doc.title,
     slug: doc.slug.current,
     excerpt: doc.excerpt,
     publishedAt: doc.publishedAt,
-    body: doc.body as Perspective['body'],
+    body: doc.body as Insight['body'],
     readingMinutes: readingMinutesOf(doc.body),
     // The byline as it really is: 239 of the 272 migrated documents have none
     // (#32 item 1.1), so the default fixture author would hide the state most
     // of the archive is actually in.
     author: migratedPerson(doc.author?._ref),
-    featuredImage: (doc.featuredImage ?? null) as Perspective['featuredImage'],
-    seo: (doc.seo ?? null) as Perspective['seo'],
+    featuredImage: (doc.featuredImage ?? null) as Insight['featuredImage'],
+    seo: (doc.seo ?? null) as Insight['seo'],
   })
 }
 
 /** The `author->{name, title, headshot}` projection, off the committed person. */
-function migratedPerson(ref: string | undefined): Perspective['author'] {
+function migratedPerson(ref: string | undefined): Insight['author'] {
   if (!ref) return null
   const path = join(CONVERTED_DIR, 'person', `${ref}.json`)
-  if (!existsSync(path)) throw new Error(`converted perspective references missing ${ref}`)
+  if (!existsSync(path)) throw new Error(`converted insight references missing ${ref}`)
   const person = resolveWpSrcMarkers(JSON.parse(readFileSync(path, 'utf8'))) as {
     name: string
     title?: string
@@ -232,7 +225,7 @@ function migratedPerson(ref: string | undefined): Perspective['author'] {
   return {
     name: person.name,
     title: person.title ?? null,
-    headshot: (person.headshot ?? null) as NonNullable<Perspective['author']>['headshot'],
+    headshot: (person.headshot ?? null) as NonNullable<Insight['author']>['headshot'],
   }
 }
 
@@ -410,15 +403,15 @@ export function aSeededPage(name: string): Record<string, unknown> {
   return projectSeedPage({
     page: readSeed('page', name),
     resolve,
-    latestPerspectives: [aPerspective()],
+    latestInsights: [anInsight()],
   })
 }
 
-/** Every converted perspective slug on disk — for `it.each` sweeps. */
-export function migratedPerspectiveSlugs(): string[] {
+/** Every converted insight slug on disk — for `it.each` sweeps. */
+export function migratedInsightSlugs(): string[] {
   const dir = join(
     dirname(fileURLToPath(import.meta.url)),
-    '../../../../tools/migration/data/converted/perspective',
+    '../../../../tools/migration/data/converted/insight',
   )
   return readdirSync(dir)
     .filter((f) => f.endsWith('.json'))

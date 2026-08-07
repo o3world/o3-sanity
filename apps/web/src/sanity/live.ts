@@ -7,7 +7,7 @@ import { clientConfig } from '@o3/sanity/client'
  * Draft-aware data fetching and live revalidation.
  *
  * - `sanityFetch`: use in server components instead of `client.fetch`.
- *   Automatically switches to the draft perspective when `draftMode()` is
+ *   Automatically switches to the draft insight when `draftMode()` is
  *   enabled (Presentation tool / preview links).
  * - `SanityLive`: rendered once in `(site)/layout.tsx`. Subscribes to
  *   Sanity's Live Content API and triggers revalidation when content changes.
@@ -26,12 +26,29 @@ import { clientConfig } from '@o3/sanity/client'
  * official guidance is to reuse the Viewer read token — set
  * `SANITY_API_BROWSER_TOKEN` only if you need a narrower browser scope.
  */
+const readToken = process.env.SANITY_API_READ_TOKEN
+
+/**
+ * The token is on the base client, not just on draft reads.
+ *
+ * `production` is a public dataset, so unauthenticated reads worked and this
+ * was never needed. `development` is private — and a private dataset answers
+ * an unauthenticated query with an empty result rather than a 401, so the app
+ * rendered an empty nav and a 404 homepage with nothing in the logs to say
+ * why. Authenticating every server-side read makes `pnpm dataset <name>` work
+ * whatever the dataset's ACL is.
+ *
+ * Server-only: `SANITY_API_READ_TOKEN` has no `NEXT_PUBLIC_` prefix, so it is
+ * `undefined` in any client bundle. Every importer of this module is a server
+ * component, a route handler or the sitemap. The separate `browserToken`
+ * below is the one that reaches the browser, and only after next-sanity's
+ * draft-mode handshake.
+ */
 export const client = createClient({
   ...clientConfig,
+  ...(readToken ? { token: readToken } : {}),
   stega: { studioUrl: '/studio' },
 })
-
-const readToken = process.env.SANITY_API_READ_TOKEN
 const browserToken = process.env.SANITY_API_BROWSER_TOKEN ?? readToken
 
 if (process.env.NODE_ENV === 'development' && !browserToken) {

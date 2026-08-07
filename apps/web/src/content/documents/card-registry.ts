@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import type { ComponentType } from 'react'
 
-import { CASE_STUDY_CARD, PERSPECTIVE_CARD } from '@o3/sanity/queries'
+import { CASE_STUDY_CARD, INSIGHT_CARD } from '@o3/sanity/queries'
 
 import { DefaultCard } from './_defaults/DefaultCard'
 
@@ -13,9 +13,7 @@ import { DefaultCard } from './_defaults/DefaultCard'
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const CARD_OVERRIDES: Record<string, ComponentType<any>> = {
-  perspective: dynamic(() =>
-    import('./perspective/PerspectiveCard').then((m) => m.PerspectiveCard),
-  ),
+  insight: dynamic(() => import('./insight/InsightCard').then((m) => m.InsightCard)),
   caseStudy: dynamic(() => import('./caseStudy/CaseStudyCard').then((m) => m.CaseStudyCard)),
   page: dynamic(() => import('./page/PageCard').then((m) => m.PageCard)),
 }
@@ -33,6 +31,6 @@ export function getCard(type: string): ComponentType<any> {
  * feed query.
  */
 export const CARD_PROJECTIONS: Record<string, string> = {
-  perspective: PERSPECTIVE_CARD,
+  insight: INSIGHT_CARD,
   caseStudy: CASE_STUDY_CARD,
 }

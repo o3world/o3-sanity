@@ -7,7 +7,7 @@ export function formatMonthYear(iso: string | null | undefined): string | null {
 }
 
 /**
- * "7/27/26" — the perspectives-card meta row (`1683:2490`). Numeric and
+ * "7/27/26" — the insights-card meta row (`1683:2490`). Numeric and
  * two-digit year, exactly as the frame writes it; `en-US` because that is the
  * order the frame reads in (month first).
  */

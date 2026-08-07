@@ -199,24 +199,24 @@ export const quoteSection = defineSectionBlock({
   preview: { select: { title: 'quote' } },
 })
 
-export const perspectivesCarouselSection = defineSectionBlock({
-  name: 'perspectivesCarouselSection',
-  title: 'Perspectives carousel',
+export const insightsCarouselSection = defineSectionBlock({
+  name: 'insightsCarouselSection',
+  title: 'Insights carousel',
   defaultSurface: 'bone',
   fields: [
     defineField({ name: 'heading', type: 'string', initialValue: 'The thinking behind the work.' }),
     defineField({
-      name: 'perspectives',
+      name: 'insights',
       type: 'array',
-      of: [defineArrayMember({ type: 'reference', to: [{ type: 'perspective' }] })],
-      description: 'Leave empty to show the latest perspectives automatically.',
+      of: [defineArrayMember({ type: 'reference', to: [{ type: 'insight' }] })],
+      description: 'Leave empty to show the latest insights automatically.',
     }),
     defineField({
       name: 'category',
       type: 'reference',
       to: [{ type: 'category' }],
       description: 'When auto-filling, limit to this category.',
-      hidden: ({ parent }) => Boolean(parent?.perspectives?.length),
+      hidden: ({ parent }) => Boolean(parent?.insights?.length),
     }),
   ],
   preview: { select: { title: 'heading' } },
@@ -302,7 +302,7 @@ export const personGridSection = defineSectionBlock({
       type: 'array',
       of: [defineArrayMember({ type: 'reference', to: [{ type: 'person' }] })],
       description:
-        'Referenced, not inlined — a person is already a document (they author perspectives), so the About band points at the same record rather than re-typing it.',
+        'Referenced, not inlined — a person is already a document (they author insights), so the About band points at the same record rather than re-typing it.',
       validation: (rule) => rule.required().min(1),
     }),
   ],
@@ -331,7 +331,7 @@ export const roleListSection = defineSectionBlock({
        * months and is authored in one place.
        *
        * Promote it the day something needs to link to a role — an /apply
-       * route, a role referenced from a perspective, or an ATS feed with its
+       * route, a role referenced from an insight, or an ATS feed with its
        * own ids. Until then this is the cheaper half of a reversible choice.
        */
       of: [

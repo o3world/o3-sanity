@@ -16,7 +16,7 @@ function CaseStudyIndexRenderer({ pagination, ...rest }: Props) {
 }
 
 /**
- * The /work index — #43. Same shape as `perspectiveIndex`: no backing
+ * The /work index — #43. Same shape as `insightIndex`: no backing
  * document, `{items, total}` from the query, static metadata.
  *
  * **Nine per page**, not twelve. The cards are full-width 1248 × 556 bands
@@ -37,7 +37,7 @@ export const caseStudyIndex = defineIndexType({
   },
   // The Work frame — hero `1634:1181`, grid `1634:1186`, mobile `1906:851`.
   // Recorded here so the two collection indexes state their provenance the
-  // same way, and so "/perspectives is provisional" reads as a difference
+  // same way, and so "/insights is provisional" reads as a difference
   // between them rather than as the norm (#49).
   migration: { figmaNode: '1634:1167' },
 })

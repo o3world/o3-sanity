@@ -1,0 +1,458 @@
+{
+  "_id": "insight-wp-2582",
+  "_type": "insight",
+  "title": "Innovation in action: O3 design super slam recap",
+  "slug": {
+    "_type": "slug",
+    "current": "o3-world-design-super-slam-recap"
+  },
+  "excerpt": "A fun challenge that allows participants to flex their design, strategy and presentation muscles.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-61",
+      "_key": "cat-61"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-7",
+      "_key": "cat-7"
+    },
+    {
+      "_type": "reference",
+      "_ref": "category-wp-8",
+      "_key": "cat-8"
+    }
+  ],
+  "publishedAt": "2019-09-04T22:10:51Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/O3-website-imagery_-Insights-3.jpg"
+    },
+    "alt": "Innovation in action: O3 design super slam recap"
+  },
+  "body": [
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Finding ways to encourage innovative thinking at digital product agencies is essential. Design slams are a great way to give people time to ideate and create innovative solutions to common problems, and also encourage collaboration across departments. This is an exercise we do quite often on ",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "client projects",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". We explore innovative solutions quickly through a process of divergent and convergent thinking.",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.o3world.com/work/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/o3_sumnmer_slam_6.jpg"
+      },
+      "alt": "Team member looking at post-it notes",
+      "_key": "k0009"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "When you participate in a design slam, you typically use a design thinking methodology known as ",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "the double diamond",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". You start with the problem, then work through cycles of clearly identifying the problem statement to ensure that you’re focusing on the right issue. Once you’ve clearly evaluated the problem and its cause, you can start working on a solution.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.designcouncil.org.uk/news-opinion/design-process-what-double-diamond"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The goal of our design slams is to get more people at O3 World involved in and comfortable with design thinking. Everyone has a hand in ideating around possible solutions. It also helps us naturally incorporate design thinking into our culture and allows us to get more diverse perspectives in the work we create day-to-day.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our Prompt",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "PNC Bank wants to increase ATM presence to the streets of Philadelphia and cater to their tech-savvy customers. They need your help to redesign the traditional banking experience into a teller-less experience that would provide all the services and support that you’d expect from a physical branch.",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The Rules",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Each team had two hours to ideate on the prompt. The teams were judged on creativity, feasibility, execution, and presentation. This year we had two teams of O3 employees participate, and both came up with innovative solutions for PNC’s ATMs.",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/o3_sumnmer_slam_9.jpg"
+      },
+      "alt": "Team 1 members collaborating",
+      "_key": "k0024"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Team 1 Solution: Eliminate the need for ATMs by helping businesses use cashless transactions",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Instead of redesigning the ATM itself, Team 1 came up with a solution that would eliminate the need to use an ATM altogether. They wanted to find a way to help cash-only businesses accept electronic transactions without any fees or financial impact.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Team 1’s solution to the ATM problem was Penny, a cashless payment system for cash-only businesses. People without PNC bank accounts would be able to use the app, but PNC account holders would be able to use Penny at a discounted rate.",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Participating businesses would receive small devices to initiate the transaction. The customer would download the Penny app, link it to their bank account, and start using it wherever Penny is accepted. To make it appealing and affordable for cashless businesses, any usage or transaction fees would be paid for by the customer.",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/o3_sumnmer_slam_8-1480x833-1.jpg"
+      },
+      "alt": "Design slam team 2 solution",
+      "_key": "k0033"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Team 2 Solution: Use the existing PNC app to improve the ATM experience",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Team 2’s solution was focused around utilizing PNC’s existing app to make ATM experiences faster, easier, and more personalized.",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The app could be used to dramatically cut down transaction times by allowing users to pre-order money and simply insert their cards into machines to have the money released. They also thought of ways to access the ATM without a debit card through phone signals, biometrics, or a simple key fob.",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The team also thought about possible marketing tie-ins that could make using the ATM more appealing. PNC could use the receipt as advertising space that could showcase gift cards, prepaid visas, and other exclusive offers.",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_wpSrc": "https://www.o3world.com/wp-content/uploads/2022/09/o3_sumnmer_slam_12-1480x833-1.jpg"
+      },
+      "alt": "Design slam team 1 solution",
+      "_key": "k0042"
+    },
+    {
+      "_key": "k0043",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The “Winners”",
+          "_key": "k0044"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0045",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Both teams produced innovative solutions for the PNC prompt, but ultimately, judges went with Team 2’s solution on the grounds of creativity and feasibility. You technically have to designate a winner in these activities, but nobody ends up truly “losing.” Participants got to enjoy an afternoon together (along with free pizza and beer), and find new ways to stretch their creative muscles.",
+          "_key": "k0046"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0047",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "There’s something that’s fun and freeing about participating in a design slam that a lot of creative people find irresistible. Alan Cho, one of our Experience Designers and a co-planner of our latest Design Slam, put it best:",
+          "_key": "k0048"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0049",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "“I like hosting and participating in design slams because of that unknown factor. Who doesn’t like a challenge? No one knows what to expect. It’s exciting to see where people start from (the prompt and initial thoughts) to full-fledged solutions with sketches and drawings.”",
+          "_key": "k0050"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0051",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We love ",
+          "_key": "k0052"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "bringing our teams together",
+          "_key": "k0053"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " to spark innovative ideas, and we could do the same for your company. We regularly conduct ",
+          "_key": "k0054"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "innovation workshops",
+          "_key": "k0055"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " with our clients to find solutions to pressing questions and problems. If you’re interested in learning more about ways we can collaborate and innovate, ",
+          "_key": "k0056"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "contact us",
+          "_key": "k0057"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " so we can start a conversation.",
+          "_key": "k0058"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.o3world.com/about/culture/"
+        },
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.o3world.com/labs/innovation-workshops/"
+        },
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.o3world.com/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:2582"
+  }
+}

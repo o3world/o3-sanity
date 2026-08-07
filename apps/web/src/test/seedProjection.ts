@@ -79,14 +79,14 @@ export interface ProjectSeedPageOptions {
   /** How to dereference a `{_ref}` against the committed trees. */
   resolve: ResolveRef
   /**
-   * The feed `perspectivesCarouselSection` falls back to when its curated list
+   * The feed `insightsCarouselSection` falls back to when its curated list
    * is empty. The query fetches it alongside the curated array; a caller
-   * supplies whatever perspectives it has.
+   * supplies whatever insights it has.
    */
-  latestPerspectives?: readonly unknown[]
+  latestInsights?: readonly unknown[]
   /**
-   * Project one curated `perspectives[]` reference into the card shape
-   * `"curated": perspectives[]->{…}` returns, or null if it cannot be
+   * Project one curated `insights[]` reference into the card shape
+   * `"curated": insights[]->{…}` returns, or null if it cannot be
    * resolved.
    *
    * Optional, and the two layers answer differently on purpose. The **stories**
@@ -94,11 +94,11 @@ export interface ProjectSeedPageOptions {
    * named articles and a mockup that quietly showed the latest feed instead
    * would be a mockup of a page that does not exist. The **render** layer
    * omits it: resolving a curated ref means sweeping 272 committed
-   * perspectives per call, and its assertions are about the fallback feed the
+   * insights per call, and its assertions are about the fallback feed the
    * homepage actually uses. Omitted, curated stays empty — which is the
    * pre-#45 behaviour and still correct for every seed but one.
    */
-  projectPerspective?: (ref: unknown) => unknown | null
+  projectInsight?: (ref: unknown) => unknown | null
 }
 
 /**
@@ -112,8 +112,8 @@ export interface ProjectSeedPageOptions {
 export function projectSeedPage({
   page,
   resolve,
-  latestPerspectives = [],
-  projectPerspective,
+  latestInsights = [],
+  projectInsight,
 }: ProjectSeedPageOptions): SeedDoc {
   const sections = ((page.sections ?? []) as SeedDoc[]).map((section) => {
     switch (section._type) {
@@ -128,16 +128,16 @@ export function projectSeedPage({
         }
       case 'personGridSection':
         return { ...section, people: ((section.people ?? []) as unknown[]).map(resolve) }
-      case 'perspectivesCarouselSection': {
+      case 'insightsCarouselSection': {
         // The renderer prefers `curated` and falls back to the `latest` feed
         // the query fetches alongside it. Most seeds curate nothing, so most
         // of the time this is the fallback path.
-        const curated = projectPerspective
-          ? ((section.perspectives ?? []) as unknown[])
-              .map((ref) => projectPerspective(ref))
+        const curated = projectInsight
+          ? ((section.insights ?? []) as unknown[])
+              .map((ref) => projectInsight(ref))
               .filter((card) => card != null)
           : []
-        return { ...section, curated, latest: [...latestPerspectives] }
+        return { ...section, curated, latest: [...latestInsights] }
       }
       default:
         return section

@@ -1,0 +1,686 @@
+{
+  "_id": "insight-wp-8821",
+  "_type": "insight",
+  "title": "Accessibility Q&A with Fred Maahs",
+  "slug": {
+    "_type": "slug",
+    "current": "accessibility-advocacy-fred-maahs-interview"
+  },
+  "excerpt": "Join us as we sit with Fred Maahs, a tireless advocate for accessibility, to hear his profound insights and stories that highlight the importance of inclusivity in every aspect of society.",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-wp-63",
+      "_key": "cat-63"
+    }
+  ],
+  "publishedAt": "2024-03-14T13:24:26Z",
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/03/Fred-Maahs-perspective-piece.png"
+    },
+    "alt": "Fred Maahs Interview"
+  },
+  "body": [
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As O3 celebrates National Disability Awareness Month, we are honored to feature a leading voice in the movement for accessibility and inclusivity: ",
+          "_key": "k0004"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Fred Maahs",
+          "_key": "k0005"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", Global Accessibility Visionary at Journeyable. In a world where most executives follow the same beaten path, Fred stands out for his expertise and dedication to bringing about change in how we understand and approach accessibility.",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/fred-maahs-jr-54304a6/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The journey of an accessibility trailblazer",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Meet Fred Maahs. With a journey that spans over three decades, his contribution extends beyond corporate roles. In 2022, Fred co-founded ",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Journeyable",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", stepping up as a visionary leader to highlight the importance of accessibility at the core of business operations.",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://journeyable.org/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Before his current role, in 2019, Fred founded Maahs Travels, a consultancy that champions the need for accessible travel and tourism. Changing the industry landscape, he also partners as COO at Travel for All, turning the dreams of barrier-free travel into reality for countless individuals.",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A symbol of real-time advocacy",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "While preparing for the interview with Fred, we asked for a headshot. Amidst discussions of using his LinkedIn photo, Fred paused to recount an impromptu yet impactful incident that perfectly encapsulates his mission for inclusivity.",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "It was the 50th anniversary of the historic March on Washington—, 750,000 to 1 million voices entwined in unity, among them Fred, a stalwart for the nation’s disability community. Fred was invited as Chairperson of the American Association of People with Disabilities by the King Foundation to speak on the steps of the Lincoln Memorial. Approaching the podium, it became starkly evident that the accommodation of a wireless microphone for a speaker who uses a wheelchair hadn’t been planned. The photograph we chose for this story captures the heartening instance when a US National Park ranger stepped forward to hold the microphone for Fred in a spontaneous gesture of empathetic action. This image illustrates the essence of real-time advocacy and the beauty of compassion, bridging the gap where planning had overlooked an essential need.",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Groundwork of success: understanding your accessibility journey",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The first step on the road to accessible and inclusive experiences is understanding where you stand. It requires a blend of regulatory understanding, user empathy, and technical assessment for businesses.",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "As the Global Accessibility Visionary at Journeyable, what are your primary responsibilities and goals?",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "Fred actively partners with corporate leadership and diverse teams around the world to bolster accessibility programs, offers deep expertise on best practices and legal frameworks around disability rights, and passionately promotes the integration of individuals with disabilities into every layer of the global travel and tourism fabric. His work is pivotal to Journeyable’s mission and ensures that the company’s values are imbued with a genuine spirit of inclusivity.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What are the essential components of a successful accessibility strategy for any organization?",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "The need for inclusivity right from the conception. User feedback, comprehensive training and technological advancements are pivotal in implementing a successful strategy — a tapestry of elements woven with input from diverse voices.",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Here are the two key components Fred recommends businesses prioritize following in their accessibility strategies:",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "User-centric approach: Accessibility should be built into the user experience from the start, not as an afterthought. This approach ensures a seamless and intuitive experience for all individuals.",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Ongoing education and training: Accessibility is a constantly evolving field, and it’s crucial to stay updated on the latest standards and",
+          "_key": "k0038"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0039",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What advice do you have for organizations looking to enhance their accessibility strategy but are unsure where to start?",
+          "_key": "k0040"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0041",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Starting can be daunting, especially in retrospect of missed opportunities. But Fred’s voice is clear — the beginning is about inclusivity in company culture through involving individuals with disabilities in planning and execution.",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0043",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Conduct an accessibility assessment",
+          "_key": "k0044"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ": A comprehensive assessment provides a baseline and identifies areas of improvement.",
+          "_key": "k0045"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0046",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Establish clear goals",
+          "_key": "k0047"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ": Setting realistic, achievable goals enables businesses to prioritize and measure progress accurately.",
+          "_key": "k0048"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0049",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Incorporate user input",
+          "_key": "k0050"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ": The best way to ensure inclusivity is by seeking direct feedback from individuals with disabilities. This helps identify potential barriers and fine-tune the accessibility strategy.",
+          "_key": "k0051"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0052",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Invest in technology",
+          "_key": "k0053"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ": There are numerous assistive technologies available to enhance accessibility, such as screen readers, voice recognition software, and more. Understand your audience and choose the appropriate technology accordingly.",
+          "_key": "k0054"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0055",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Industry trailblazers: Pioneering the path to inclusion",
+          "_key": "k0056"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0057",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Accessibility is not just a compliance matter; it’s a movement that industry visionaries have embraced. Leading companies have made strides in setting benchmarks for accessibility. Here, Fred shares insights on some of the key players in the accessibility space:",
+          "_key": "k0058"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0059",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What companies do you see as trailblazers in the accessibility space?",
+          "_key": "k0060"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0061",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "Companies like Accenture, Boeing, Microsoft, Google, and my last corporate experience – Comcast NBCUniversal, are championing inclusivity through their practices. Fred commends these organizations for their holistic approach toward accessibility, setting the gold standard for inclusive design and employment practices. He also highlights the importance of collaboration between companies in advancing accessibility, citing Apple and Microsoft’s partnership to promote inclusive design across their platforms.",
+          "_key": "k0062"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0063",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Shaping policy and perception: Accessibility advocacy on a national scale",
+          "_key": "k0064"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0065",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Fred’s role extends beyond corporate strategy; his advocacy reaches the highest levels of policy-making, directly influencing how accessibility is perceived and practiced across the nation. Here, he sheds light on the initiatives he passionately advocates for:",
+          "_key": "k0066"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0067",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "In your role on President-Elect Joe Biden’s Disability Policy Committee, what initiatives or policies did you advocate for?",
+          "_key": "k0068"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0069",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "Fred’s commitment reflects a dedication to fundamental shifts in policy. He highlights the Biden Administration’s work on ensuring equal pay for individuals with disabilities and the amendment of the Americans with Disabilities Act to reflect contemporary accessibility needs, among other things. The Biden Administration is arguably doing more for the disability population than any other prior Administration.",
+          "_key": "k0070"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0071",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The ripple effect: Accessible experiences and business outcomes",
+          "_key": "k0072"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0073",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A question often asked is, “What’s the ROI of accessibility?” The answer lies in its intrinsic value. Accessibility not only creates more inclusive experiences but also strengthens businesses.",
+          "_key": "k0074"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0075",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Can you share a success story where improved accessibility had a significant positive impact on a business or destination?",
+          "_key": "k0076"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0077",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "Accessibility is fundamentally transforming businesses, with examples ranging from the installation of basic facilities like elevators to sophisticated technological solutions that empower individuals with disabilities.",
+          "_key": "k0078"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0079",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "Fred mentioned “Eyegaze Edge, a groundbreaking piece of technology for individuals with severe motor restrictions—such as those who cannot move any part of their bodies except their eyes. This system tracks eye movement, allowing a user to operate a computer cursor and effectively communicate. Fred Maahs points out that the ingenuity behind the “Eyegaze Edge” embodies the profound impact accessibility equipment can have — it isn’t merely a device, it’s a lifeline, unlocking the world of interaction and self-expression for those who might have felt locked away from the digital conversation.",
+          "_key": "k0080"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0081",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Future-proofing through accessibility: O3’s vision",
+          "_key": "k0082"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0083",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3’s vision is clear — accessibility must become a natural, integral part of every business operation. From the digital realm to physical touchpoints, the commitment to accessibility must be unwavering, adaptive, and forward-looking.",
+          "_key": "k0084"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0085",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our experts are committed to ushering businesses into a new era of inclusive experiences. O3’s suite of solutions is tailored to ",
+          "_key": "k0086"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "cultivate sustainable accessibility practices",
+          "_key": "k0087"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", ensuring businesses meet compliance and go beyond to foster a truly inclusive environment.",
+          "_key": "k0088"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.o3world.com/include/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "title": "Accessibility advocacy with Fred Maahs - championing inclusivity",
+    "description": "Join us as we sit with Fred Maahs, a tireless advocate for accessibility, to hear his profound insights and stories that highlight the importance of inclusivity in every aspect of society."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:post:8821"
+  }
+}

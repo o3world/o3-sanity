@@ -145,53 +145,53 @@
       "note": "Not from Figma. Byte-identical to `prototype/assets/partner-lacolombe.png`, composed from `prototype/uploads/La-Colombe-Coffee-Roasters-Logo-Vector.svg-.png`. See `partner-amerigas.png`."
     },
     {
-      "path": "tools/migration/data/seed/assets/perspective-process-frontier.svg",
+      "path": "tools/migration/data/seed/assets/insight-process-frontier.svg",
       "format": "svg",
       "locked": true,
       "unresolved": true,
       "note": "Hand-authored, never in Figma. What `pnpm frontier` prints, drawn: 3 `@keyframes`, 4 `animation:` declarations, `prefers-reduced-motion`, `#EB1000` six times, and 69 lines of explanatory comment inside the file. No node in the file has its 1000×520 geometry and no `imageRef` matches its bytes."
     },
     {
-      "path": "tools/migration/data/seed/assets/perspective-process-hero.svg",
+      "path": "tools/migration/data/seed/assets/insight-process-hero.svg",
       "format": "svg",
       "locked": true,
       "unresolved": true,
       "note": "Hand-authored, never in Figma. 3 `@keyframes`, 6 `animation:` declarations, `prefers-reduced-motion`, inlined `#EB1000`, 68 comment lines. 1200×630 matches no node in the file."
     },
     {
-      "path": "tools/migration/data/seed/assets/perspective-process-pipeline.svg",
+      "path": "tools/migration/data/seed/assets/insight-process-pipeline.svg",
       "format": "svg",
       "locked": true,
       "unresolved": true,
       "note": "Hand-authored, never in Figma. 2 `@keyframes`, 4 `animation:` declarations, `prefers-reduced-motion`, `#EB1000` five times, 49 comment lines. 1000×470 matches no node in the file."
     },
     {
-      "path": "tools/migration/data/seed/assets/perspective-process-sources.svg",
+      "path": "tools/migration/data/seed/assets/insight-process-sources.svg",
       "format": "svg",
       "locked": true,
       "unresolved": true,
       "note": "Hand-authored, never in Figma. 2 `@keyframes`, 3 `animation:` declarations, `prefers-reduced-motion`, inlined `#EB1000`, 43 comment lines. 1000×480 matches no node in the file."
     },
     {
-      "path": "tools/migration/data/seed/assets/perspective-weekend-hero.png",
+      "path": "tools/migration/data/seed/assets/insight-weekend-hero.png",
       "format": "png",
       "locked": false,
       "unresolved": true,
       "note": "No source node found. Design-sourced for the weekend-redesign post rather than migrated (#8bda1a6) — an abstract 1584×672 field of rectangular outlines resolving into register. Its bytes match none of the file's 163 image fills, and no node in the file carries its 2.357 aspect ratio at any scale. Most likely produced outside Figma; do not guess a node."
     },
     {
-      "path": "tools/migration/data/seed/assets/perspective-weekend-maps.png",
+      "path": "tools/migration/data/seed/assets/insight-weekend-maps.png",
       "format": "png",
       "locked": false,
       "unresolved": true,
-      "note": "No source node found. 1376×768, same origin story as `perspective-weekend-hero.png`: no matching `imageRef`, no node with its 1.792 ratio."
+      "note": "No source node found. 1376×768, same origin story as `insight-weekend-hero.png`: no matching `imageRef`, no node with its 1.792 ratio."
     },
     {
-      "path": "tools/migration/data/seed/assets/perspective-weekend-worktrees.png",
+      "path": "tools/migration/data/seed/assets/insight-weekend-worktrees.png",
       "format": "png",
       "locked": false,
       "unresolved": true,
-      "note": "No source node found. 1584×672, same origin story as `perspective-weekend-hero.png`."
+      "note": "No source node found. 1584×672, same origin story as `insight-weekend-hero.png`."
     },
     {
       "path": "tools/migration/data/seed/assets/plat-lovable-logo.png",

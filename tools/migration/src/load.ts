@@ -42,18 +42,47 @@ const assetMap: Record<string, { sha256?: string; assetId: string }> = existsSyn
   ? JSON.parse(readFileSync(ASSET_MAP, 'utf8'))
   : {}
 
+/**
+ * Which assets the **target dataset** already holds.
+ *
+ * `assets.json` records that a binary was uploaded, not which dataset it was
+ * uploaded to — and a reference to an asset that dataset does not have fails
+ * the whole transaction (`documentReferenceDoesNotExistError`). Loading into a
+ * fresh dataset therefore used to be impossible: the map said "already done"
+ * for 414 assets that only existed in `production`.
+ *
+ * Re-uploading is safe and cheap. Sanity derives an asset id from the file's
+ * hash and dimensions, so the same bytes get the same id in every dataset —
+ * the committed map stays correct, and `data/media-cache/` means the binaries
+ * come off disk rather than back off WordPress. This is what makes ADR 0003's
+ * "wipe and rebuild reproduces the dataset" true of *any* dataset.
+ */
+let assetsInDataset: Set<string> | null = null
+async function existsInDataset(assetId: string): Promise<boolean> {
+  if (!assetsInDataset) {
+    const ids = await client.fetch<string[]>(
+      '*[_type in ["sanity.imageAsset", "sanity.fileAsset"]]._id',
+    )
+    assetsInDataset = new Set(ids)
+    console.log(`dataset holds ${assetsInDataset.size} assets`)
+  }
+  return assetsInDataset.has(assetId)
+}
+
 async function upload(key: string, filename: string, buf: Buffer): Promise<string> {
   const asset = await client.assets.upload(isImageBuffer(buf, filename) ? 'image' : 'file', buf, {
     filename,
   })
   assetMap[key] = { sha256: asset.sha1hash, assetId: asset._id }
+  assetsInDataset?.add(asset._id)
   writeFileSync(ASSET_MAP, JSON.stringify(assetMap, null, 2) + '\n')
   console.log(`  ↑ asset ${filename} → ${asset._id}`)
   return asset._id
 }
 
 async function uploadAsset(url: string): Promise<string> {
-  if (assetMap[url]) return assetMap[url].assetId
+  const known = assetMap[url]
+  if (known && (await existsInDataset(known.assetId))) return known.assetId
   mkdirSync(MEDIA_CACHE, { recursive: true })
   const cacheFile = join(MEDIA_CACHE, encodeURIComponent(url))
   let buf: Buffer
@@ -77,7 +106,8 @@ async function uploadAsset(url: string): Promise<string> {
  */
 async function uploadLocalAsset(relativePath: string): Promise<string> {
   const key = `file:${relativePath}`
-  if (assetMap[key]) return assetMap[key].assetId
+  const known = assetMap[key]
+  if (known && (await existsInDataset(known.assetId))) return known.assetId
   if (relativePath.startsWith('/') || relativePath.includes('..')) {
     throw new Error(`_localSrc must be a repo-relative path without "..": ${relativePath}`)
   }
