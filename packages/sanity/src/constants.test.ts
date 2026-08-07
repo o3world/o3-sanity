@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import { afterEach, describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import {
   DATASETS,
@@ -56,8 +56,18 @@ describe('the dataset an unconfigured checkout resolves to', () => {
 })
 
 describe('resolveProjectId', () => {
+  afterEach(() => vi.unstubAllEnvs())
+
   it('falls back to the committed project id', () => {
+    // CI sets NEXT_PUBLIC_SANITY_PROJECT_ID to a literal for module-level
+    // config validation (checks.yml); the fallback only shows with it unset.
+    vi.stubEnv('NEXT_PUBLIC_SANITY_PROJECT_ID', '')
     expect(resolveProjectId()).toBe(PROJECT_ID)
+  })
+
+  it('prefers the environment when set', () => {
+    vi.stubEnv('NEXT_PUBLIC_SANITY_PROJECT_ID', 'from-env')
+    expect(resolveProjectId()).toBe('from-env')
   })
 })
 
