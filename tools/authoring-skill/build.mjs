@@ -1,6 +1,8 @@
 #!/usr/bin/env node
-// Builds the uploadable skill ZIP from the checked-in source. The ZIP is a
-// build artifact — never hand-edit it, never commit it.
+// Builds the uploadable Claude Desktop skill ZIP from the checked-in source.
+// The ZIP is a build artifact — never hand-edit it, never commit it.
+// (Claude Code needs no build: this directory is a plugin, installed straight
+// from git via the repo-root .claude-plugin/marketplace.json.)
 //
 // Packaging contract (Anthropic custom-skills docs, verified 2026-08-02 in
 // docs/research/claude-desktop-delivery.md): the skill folder is the ZIP
@@ -12,8 +14,9 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = dirname(fileURLToPath(import.meta.url))
+const skillsRoot = join(root, 'skills')
 const skillDir = 'o3-authoring'
-const skillMd = readFileSync(join(root, skillDir, 'SKILL.md'), 'utf8')
+const skillMd = readFileSync(join(skillsRoot, skillDir, 'SKILL.md'), 'utf8')
 
 const frontmatter = skillMd.match(/^---\n([\s\S]*?)\n---/)?.[1]
 if (!frontmatter) throw new Error('SKILL.md has no frontmatter')
@@ -30,7 +33,7 @@ const outDir = join(root, 'dist')
 rmSync(outDir, { recursive: true, force: true })
 mkdirSync(outDir)
 const zipPath = join(outDir, `${name}.zip`)
-execFileSync('zip', ['-r', zipPath, skillDir], { cwd: root, stdio: 'inherit' })
+execFileSync('zip', ['-r', zipPath, skillDir], { cwd: skillsRoot, stdio: 'inherit' })
 console.log(`\nBuilt ${zipPath}`)
 console.log(
   'Upload at claude.ai → Settings → Customize → Skills (re-upload to update; shared/org-provisioned recipients update automatically).',
