@@ -1,68 +1,64 @@
 {
   "schemaVersion": 1,
-  "ranAt": "2026-08-13T18:57:49.962Z",
+  "ranAt": "2026-08-13T21:59:04.740Z",
   "fileVersion": "2386937043801380426",
   "shortCircuited": false,
-  "changedFrames": [
-    {
-      "nodeId": "2360:2879",
-      "name": "Solutions",
-      "route": "/solutions",
-      "variant": "desktop",
-      "change": "added"
-    },
-    {
-      "nodeId": "2336:4310",
-      "name": "Insight index",
-      "route": "/insights",
-      "variant": "desktop",
-      "change": "added"
-    },
-    {
-      "nodeId": "2354:2446",
-      "name": "Sanity partnership",
-      "route": "/sanity",
-      "variant": "desktop",
-      "change": "added"
-    },
-    {
-      "nodeId": "1925:6138",
-      "name": "1925:6138",
-      "route": null,
-      "variant": null,
-      "change": "removed"
-    }
-  ],
+  "changedFrames": [],
   "changedComponentSets": [
     {
-      "nodeId": "2225:2920",
-      "name": "NavBar",
+      "nodeId": "2134:1785",
+      "name": "Button (2026-08 rebuild)",
       "route": null,
       "variant": null,
-      "codeComponent": "apps/web/src/ui/SiteNav.tsx#SiteNav",
+      "codeComponent": "packages/ui/src/components/filter-chip.tsx#FilterChip",
       "change": "added"
-    },
-    {
-      "nodeId": "2250:1445",
-      "name": "Utility Nav",
-      "route": null,
-      "variant": null,
-      "codeComponent": "apps/web/src/ui/UtilityNav.tsx#UtilityNav",
-      "change": "added"
-    },
-    {
-      "nodeId": "1710:2271",
-      "name": "1710:2271",
-      "route": null,
-      "variant": null,
-      "codeComponent": null,
-      "change": "removed"
     }
   ],
   "untrackedFrames": [],
   "assets": {
     "regenerated": [],
-    "lockedConflicts": [],
+    "lockedConflicts": [
+      {
+        "path": "tools/migration/data/seed/assets/partner-caron.png",
+        "nodeId": "1883:3430",
+        "reason": "new-to-baseline",
+        "note": "Replaces the prototype-derived wordmark with the fill original from the partners strip (`1883:3429`) - a different lockup, carrying the \"Transformational Care\" line the old file did not. Alpha-trimmed. Locked because of that.",
+        "state": "firstSeen",
+        "firstSeenAt": "2026-08-13T21:59:04.740Z"
+      },
+      {
+        "path": "tools/migration/data/seed/assets/partner-hireheroes.png",
+        "nodeId": "1875:3332",
+        "reason": "new-to-baseline",
+        "note": "New partner with the 2026-08 restructure (#89). Fill original from the partners strip (`1875:3331`), alpha-trimmed. Locked because of the trim.",
+        "state": "firstSeen",
+        "firstSeenAt": "2026-08-13T21:59:04.740Z"
+      },
+      {
+        "path": "tools/migration/data/seed/assets/partner-ironman.png",
+        "nodeId": "1875:3335",
+        "reason": "new-to-baseline",
+        "note": "Replaces the prototype-derived 600x240 raster with the fill original from the partners strip (`1875:3334`). The uploaded file is a 3840x2160 canvas that is mostly transparent margin, which Figma cover-crops into the tile; the committed copy is alpha-trimmed and downscaled to 1200px instead, so `object-fit` never has to. Locked because of that edit.",
+        "state": "firstSeen",
+        "firstSeenAt": "2026-08-13T21:59:04.740Z"
+      },
+      {
+        "path": "tools/migration/data/seed/assets/partner-lacolombe.png",
+        "nodeId": "2250:1484",
+        "reason": "new-to-baseline",
+        "note": "Replaces the prototype-derived navy raster with the fill original from the partners strip (`2082:3954`), which the frame draws in black. Alpha-trimmed; already small (512x99), so not downscaled. Locked because of the trim.",
+        "state": "firstSeen",
+        "firstSeenAt": "2026-08-13T21:59:04.740Z"
+      },
+      {
+        "path": "tools/migration/data/seed/assets/partner-vertex.png",
+        "nodeId": "1864:2396",
+        "reason": "new-to-baseline",
+        "note": "Downloaded fill original from the partners strip (`1864:2390` -> `1864:2395`), then ALPHA-TRIMMED to its bounding box and downscaled to 1200px wide, hence locked. The frame gives every mark a 152px box and lets its natural height fall out at 28-42px, which only works if the file carries no margin of its own.",
+        "state": "firstSeen",
+        "firstSeenAt": "2026-08-13T21:59:04.740Z"
+      }
+    ],
     "failures": []
   },
   "errors": []
