@@ -1,5 +1,6 @@
 import { defineArrayMember, defineField } from 'sanity'
 import { defineSectionBlock } from './defineBlocks'
+import { decorationField } from './fields'
 import { SECTION_BLOCKS } from './registry'
 import { PAGE_TYPES } from '../../constants'
 
@@ -36,12 +37,7 @@ export const heroSection = defineSectionBlock({
     }),
     defineField({ name: 'subheading', type: 'text', rows: 2 }),
     defineField({ name: 'cta', type: 'cta' }),
-    defineField({
-      name: 'decoration',
-      type: 'string',
-      options: { list: ['orbs', 'none'], layout: 'radio', direction: 'horizontal' },
-      initialValue: 'orbs',
-    }),
+    decorationField(['orbs', 'none']),
   ],
   preview: { select: { title: 'headlineLines.0' } },
 })
@@ -129,7 +125,7 @@ export const railPanelsSection = defineSectionBlock({
       // Both canonical bands (1762:2149 and 1762:2168) share one composition
       // and differ only here, so this is a variant of the block rather than a
       // second block — #42. Numbers derive from order, the same rule
-      // caseStudy.chapters already follows (CONTEXT.md).
+      // caseStudy.story’s chapters already follow (CONTEXT.md).
       options: { list: ['label', 'number'], layout: 'radio', direction: 'horizontal' },
       initialValue: 'label',
       hidden: ({ parent }) => parent?.layout === 'cards',
@@ -200,12 +196,11 @@ export const quoteSection = defineSectionBlock({
       type: 'string',
       description: 'e.g. "Business Leader, Global Health Brand".',
     }),
-    defineField({
-      name: 'decoration',
-      type: 'string',
-      options: { list: ['orbs', 'none'], layout: 'radio', direction: 'horizontal' },
-      initialValue: 'orbs',
-    }),
+    // `molecule` is the 2026-08 case-study quote (`2250:1525`): the same band,
+    // with the molecule mark set at 699px and 10% behind the copy instead of
+    // the two spheres. A third value on this block's list rather than a second
+    // block — the composition is identical.
+    decorationField(['orbs', 'molecule', 'none']),
   ],
   preview: { select: { title: 'quote' } },
 })
@@ -241,12 +236,7 @@ export const ctaSection = defineSectionBlock({
     defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
     defineField({ name: 'body', type: 'text', rows: 2 }),
     defineField({ name: 'cta', type: 'cta' }),
-    defineField({
-      name: 'decoration',
-      type: 'string',
-      options: { list: ['orbs', 'none'], layout: 'radio', direction: 'horizontal' },
-      initialValue: 'orbs',
-    }),
+    decorationField(['orbs', 'none']),
   ],
   preview: { select: { title: 'heading' } },
 })
@@ -561,13 +551,97 @@ export const mediaSection = defineSectionBlock({
   fields: [
     defineField({ name: 'media', type: 'figure', validation: (rule) => rule.required() }),
     defineField({
+      name: 'variant',
+      type: 'string',
+      description:
+        'Plain draws the figure itself. Capture floats a tall page screenshot on a dark stage and crops it at the band’s floor — the frame’s "here is the whole page" moment.',
+      // `1647:1720` (#97): the same block, a different treatment — a 700px
+      // dark band the capture is CROPPED by, rather than a figure sized to
+      // its own aspect. A variant on the block instead of a second block,
+      // the call `railPanelsSection.layout` and `heroSection.variant` make.
+      options: { list: ['plain', 'capture'], layout: 'radio', direction: 'horizontal' },
+      initialValue: 'plain',
+    }),
+    defineField({
       name: 'width',
       type: 'string',
       options: { list: ['contained', 'full-bleed'], layout: 'radio', direction: 'horizontal' },
       initialValue: 'contained',
+      // A capture is a full-bleed stage by construction, so the axis has
+      // nothing left to choose.
+      hidden: ({ parent }) => parent?.variant === 'capture',
     }),
   ],
-  preview: { select: { title: 'media.alt' } },
+  preview: { select: { title: 'media.alt', subtitle: 'variant' } },
+})
+
+/**
+ * Tiled product screenshots on gradient plates — the case-study frame's screen
+ * bands (`2230:3315`, `2230:7559`), #97.
+ *
+ * Registered as an ordinary section block rather than a case-study element:
+ * ADR 0018's showcase rule is that every band the case study needs is a block
+ * any content type can compose, so this is available to `page.sections` on the
+ * day it lands.
+ *
+ * Two fields per screen and no more. The frame's plates differ in exactly two
+ * ways — the colour behind the screenshot (`tone`) and whether the tile takes
+ * one column or both (`span`) — and everything else about a tile (32px radius,
+ * the 12px-radius screenshot inside it, the crop) is composition the renderer
+ * owns. Plate HEIGHT is deliberately not a field: `2230:7559` draws 716 for a
+ * wide tile and 342 for a small one, so height follows `span` (ADR 0006 —
+ * renderers decide).
+ */
+export const screenGridSection = defineSectionBlock({
+  name: 'screenGridSection',
+  title: 'Screen grid',
+  fields: [
+    defineField({
+      name: 'screens',
+      type: 'array',
+      description: 'Tiles fill the two-column grid in order; a wide screen takes both columns.',
+      validation: (rule) => rule.required().min(1),
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'screen',
+          fields: [
+            defineField({ name: 'media', type: 'figure', validation: (rule) => rule.required() }),
+            defineField({
+              name: 'tone',
+              type: 'string',
+              description: 'The plate the screenshot sits on.',
+              options: {
+                list: ['ink', 'brand', 'bone'],
+                layout: 'radio',
+                direction: 'horizontal',
+              },
+              initialValue: 'ink',
+            }),
+            defineField({
+              name: 'span',
+              type: 'string',
+              description: 'Wide takes both columns — the frame’s lead tile.',
+              options: { list: ['standard', 'wide'], layout: 'radio', direction: 'horizontal' },
+              initialValue: 'standard',
+            }),
+          ],
+          preview: { select: { title: 'media.alt', subtitle: 'tone', media: 'media.image' } },
+        }),
+      ],
+    }),
+  ],
+  preview: {
+    // The lead tile stands for the band in the array, the way `figure` previews
+    // on its own `alt`. A grid whose first screen has no alt yet falls back to
+    // the block's name rather than showing an empty row.
+    select: { alt: 'screens.0.media.alt', media: 'screens.0.media.image', screens: 'screens' },
+    prepare: (sel) => ({
+      title: (sel.alt as string | undefined) ?? 'Screen grid',
+      subtitle: `${((sel.screens as unknown[] | undefined) ?? []).length} screens`,
+      media: sel.media,
+    }),
+  },
 })
 
 export const listingSection = defineSectionBlock({
@@ -588,8 +662,9 @@ export const listingSection = defineSectionBlock({
 })
 
 /**
- * What `page.sections` and `caseStudy.extraSections` will accept — **derived
- * from the registry**, not restated.
+ * What `page.sections` and `caseStudy.story` will accept — **derived from the
+ * registry**, not restated. (`story` also takes `chapter`, which is a shared
+ * object rather than a block, so it is added beside these members — ADR 0018.)
  *
  * This was a second hand-maintained copy of `SECTION_BLOCKS` in the same
  * order, and #58 found out why that costs: `formSection` was registered,

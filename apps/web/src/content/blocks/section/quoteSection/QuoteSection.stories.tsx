@@ -61,6 +61,18 @@ export const Unattributed: Story = {
   globals: { backgrounds: { value: 'bone' } },
 }
 
+/**
+ * `decoration: 'molecule'` — the 2026-08 case-study band (`2250:1525`, #97).
+ * The same column and the same gradient fill, with the molecule mark at 699px
+ * and 10% hung off the right edge instead of the two spheres, clipped by the
+ * band. Hidden below `lg`, like the spheres.
+ */
+export const Molecule: Story = {
+  args: { ...seededSectionArgs('index', 'quoteSection'), decoration: 'molecule' },
+  globals: { backgrounds: { value: 'bone' } },
+  parameters: { design: figmaDesign('2250:1525') },
+}
+
 /** `decoration: 'none'` drops the sphere; the column and the fade stay. */
 export const NoDecoration: Story = {
   args: { ...seededSectionArgs('index', 'quoteSection'), decoration: 'none' },

@@ -7,7 +7,7 @@ Read this and `data/extract/caseStudy/<slug>.json`; write
 **Why this is a translation and not a mapper.** The source is four levels of
 nested ACF flexible content (`flexible_content[].column[].content[]`) laid out
 for a page template that no longer exists; the target is a structured document
-— client, narrative headline, stats, chapters, deliverables. Two prose blocks
+— client, narrative headline, stats, story, deliverables. Two prose blocks
 headed "Opportunity" and "Solution" have to become chapters with kickers and
 titles; three `title` rows in a column have to become `stats`. There is no
 mechanical transform between those shapes, so a person (or an agent under
@@ -40,7 +40,7 @@ should decide on.
 Every flag is an entry in `_meta.flags`:
 
 ```json
-{ "field": "chapters[0].title", "kind": "proposed", "note": "why, and what it was drawn from" }
+{ "field": "story[0].title", "kind": "proposed", "note": "why, and what it was drawn from" }
 ```
 
 | `kind`     | Means                                                                       | Reviewer does                                 |
@@ -57,29 +57,62 @@ in the translation, not a clean run.
 
 ## Field mapping
 
-| Target               | Source                                                       | Notes                                                                                                                                                                         |
-| -------------------- | ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `_id`                | —                                                            | `caseStudy-wp-<wpId>`.                                                                                                                                                        |
-| `title`              | `title`                                                      | Verbatim.                                                                                                                                                                     |
-| `slug.current`       | `path`                                                       | The path WordPress serves, minus `/work/` and slashes. **Never re-slugged** (#26).                                                                                            |
-| `client`             | `title`                                                      | Reference `client-seed-<slug>`. Create the client if it does not exist.                                                                                                       |
-| `industries`         | —                                                            | No source. Propose one `industry-seed-<slug>` and flag it, or leave empty.                                                                                                    |
-| `industryDetail`     | —                                                            | No source. Flag if proposed.                                                                                                                                                  |
-| `narrativeHeadline`  | the "Opportunity" prose                                      | **Required.** The problem the client had, in one sentence, drawn from that prose.                                                                                             |
-| `stats`              | `multiple_columns` rows whose `content[]` are `title` blocks | `value` ← `title`, `label` ← `description`. Verbatim, first one is the headline stat.                                                                                         |
-| `heroMedia`          | `featuredImage`                                              | `_wpSrc` marker + `alt`; the loader uploads it.                                                                                                                               |
-| `chapters`           | the `text` blocks in `multiple_columns`                      | One chapter per block. `kicker` ← its heading ("Opportunity", "Solution"). `title` is required and usually unsourced — propose and flag. `body` ← the prose as Portable Text. |
-| `deliverables`       | —                                                            | Only if the source lists what was shipped. Usually empty.                                                                                                                     |
-| `extraSections`      | `image_carousel` images                                      | One `mediaSection` each, `width: "contained"`.                                                                                                                                |
-| `seo.description`    | `seo.descriptionOverride`                                    | Overrides only, exactly as `map/seo.ts` does it — never the rendered value (#26).                                                                                             |
-| `migration.sourceId` | —                                                            | `wp:work:<wpId>`.                                                                                                                                                             |
-| `migration.locked`   | —                                                            | Always `false`. A reviewer taking the document over sets it in Studio.                                                                                                        |
+| Target               | Source                                                       | Notes                                                                                 |
+| -------------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
+| `_id`                | —                                                            | `caseStudy-wp-<wpId>`.                                                                |
+| `title`              | `title`                                                      | Verbatim.                                                                             |
+| `slug.current`       | `path`                                                       | The path WordPress serves, minus `/work/` and slashes. **Never re-slugged** (#26).    |
+| `client`             | `title`                                                      | Reference `client-seed-<slug>`. Create the client if it does not exist.               |
+| `industries`         | —                                                            | No source. Propose one `industry-seed-<slug>` and flag it, or leave empty.            |
+| `industryDetail`     | —                                                            | No source. Flag if proposed.                                                          |
+| `narrativeHeadline`  | the "Opportunity" prose                                      | **Required.** The problem the client had, in one sentence, drawn from that prose.     |
+| `stats`              | `multiple_columns` rows whose `content[]` are `title` blocks | `value` ← `title`, `label` ← `description`. Verbatim, first one is the headline stat. |
+| `heroMedia`          | `featuredImage`                                              | `_wpSrc` marker + `alt`; the loader uploads it.                                       |
+| `story`              | the `text` blocks, then the `image_carousel` images          | One interleaved array — see below.                                                    |
+| `deliverables`       | —                                                            | Only if the source lists what was shipped. Usually empty.                             |
+| `seo.description`    | `seo.descriptionOverride`                                    | Overrides only, exactly as `map/seo.ts` does it — never the rendered value (#26).     |
+| `migration.sourceId` | —                                                            | `wp:work:<wpId>`.                                                                     |
+| `migration.locked`   | —                                                            | Always `false`. A reviewer taking the document over sets it in Studio.                |
 
 **Ignore** `project_feed` (a "related projects" widget the new site derives),
 `introduction`/`kicker_tag`/`heading_level`/`heading_tag` (presentation for the
 old template), and every ACF `acfe_*` key.
 
 ---
+
+## `story`
+
+One array holding the chapters and the bands between them, in reading order
+([ADR 0018](../../docs/adr/0018-case-study-story-interleaves-chapters-and-bands.md)).
+A chapter's number is its position among the _chapter_ members, so a band
+between two chapters costs nothing — and a flag names a chapter by its index
+in `story`, which is the path a reviewer can find.
+
+The default weave for a `work` post, whose source is two prose blocks and one
+carousel: **opening chapter → the carousel's first slide → second chapter →
+the rest of the carousel.** The first slide is nearly always the client's
+brand card; the ones after it are the work. Keep both source orders.
+
+Bands, and what each is for:
+
+| Band                                 | Use it when                                                                        |
+| ------------------------------------ | ---------------------------------------------------------------------------------- |
+| `mediaSection`                       | One editorial image standing alone. `width: "contained"`.                          |
+| `mediaSection`, `variant: "capture"` | A tall page screenshot floating on a dark stage. `width` says nothing here — omit. |
+| `screenGridSection`                  | Two or more product screens that read as tiles. First screen `span: "wide"`.       |
+
+`screenGridSection` is one band per case study, not one per screenshot. Give
+every screen an explicit `tone` and `span`, and every band an explicit
+`surface`: Studio's `initialValue` is a Studio thing, and `load` writes JSON
+straight to the dataset.
+
+**`chapter.details`** — the term/description rows — are written **only where
+the source names the disciplines and says what each one did.** Vertex's
+"a team of nimble strategists, designers and technology experts" earns three
+rows, because the Solution then says what each of the three delivered. A
+source that names no disciplines gets no rows; three plausible ones invented
+from a paragraph of prose is exactly what rule 1 forbids. Labels come from the
+source's own vocabulary, and the rows carry a `derived` flag.
 
 ## Body text
 

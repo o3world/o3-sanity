@@ -96,6 +96,23 @@
    */
   --gradient-card-veil: linear-gradient(180deg, rgba(3, 3, 3, 0) 0%, rgba(3, 3, 3, 0.75) 90%);
 
+  /* ── Screen plates ─────────────────────────────────────────────────────── */
+  /*
+   * The dark plate a product screenshot sits on. ONE pair of stops
+   * (#3C3C3C → #161616) at the two angles the case-study frames draw it:
+   * 180° on the screen-grid tiles (`2230:3315`'s lead plate, `2230:7559`) and
+   * 135° on the full-bleed page-capture stage (`1647:1720`). Both landed with
+   * #97; the pair recurring across two bands is what earns them tokens, and
+   * the angle differing is what makes them two rather than one — a gradient
+   * custom property cannot take its angle from the call site.
+   *
+   * The grid also draws 225° variants on individual tiles; those are the
+   * IRONMAN demo content's own brand colours (ADR 0007 — the frame's case is
+   * demo copy), not a third role, so the renderer offers `ink` and stops.
+   */
+  --gradient-screen-plate: linear-gradient(180deg, #3c3c3c 0%, #161616 100%);
+  --gradient-screen-stage: linear-gradient(135deg, #3c3c3c 0%, #161616 100%);
+
   /* ── Brand glow ────────────────────────────────────────────────────────── */
   /*
    * Figma variable `Gradient/Red/1` — two stacked radials that give the red

@@ -5,7 +5,7 @@ Terms resolved so far. Use these exact words in schema names, code, issues, and 
 ## Content types
 
 - **Insight** — a blog article. The canonical term (not "post", not "perspective" — that was the name until [ADR 0017](docs/adr/0017-the-collection-is-an-insight.md), and it survives only in `data/extract/`, which keeps WordPress's vocabulary). URL: `/insights/{slug}`; WordPress serves `/perspectives/{slug}` and 301s. Body is **Portable Text** with a small closed set of inline objects — never section blocks. 272 migrate from WordPress.
-- **Case Study** — a client engagement write-up; the collection is called **Work**. URL: `/work/{slug}`. Fully **structured** (not section-built): client reference, industry references + industry detail string, **narrative headline** (the problem-framing sentence shown on cards), **stats** (array; first is the headline stat), hero media, **chapters** (ordered; kicker + title + body; numbers derived from order), **deliverables** ("What we shipped"), optional **extra sections** for per-case flourishes.
+- **Case Study** — a client engagement write-up; the collection is called **Work**. URL: `/work/{slug}`. **Structured around a compositional middle** ([ADR 0018](docs/adr/0018-case-study-story-interleaves-chapters-and-bands.md)): client reference, industry references + industry detail string, **narrative headline** (the problem-framing sentence shown on cards), **stats** (array; first is the headline stat), hero media and **deliverables** ("What we shipped") are fixed fields — and between them sits the **story**, one array interleaving **chapters** (kicker + title + body + optional **details** rows; numbers derived from a chapter's order _among the chapters_) with whatever section blocks the case weaves between them.
 - **Page** — a modular marketing page composed of a two-tier **sections** array (see ADR 0001). Carries `pageType`, a closed developer-managed enum: `standard | service`. Service pages get a conditional **card** fieldset (short title, excerpt, icon) that listing blocks project — but **no service page exists or is planned** (ADR 0013; see Known drift). Slugs are multi-segment and carry their prefix (`ventures/rec-philly`). Ventures are ordinary standard pages — deliberately not a type.
 
 ## Supporting types
@@ -80,13 +80,15 @@ Closed vocabulary. If the field you want isn't here and isn't obviously domain-s
 | `reasons`         | The form's "Reason" options, in shown order (`formSection`)      | `options`, `choices`                                 |
 | `consentLabel`    | The opt-in checkbox's words; empty = no checkbox (`formSection`) | `consent`, `optIn`                                   |
 | `submitLabel`     | The submit button's words (`formSection`)                        | `buttonText`, `cta` — there's no link here           |
+| `story`           | A structured document's interleaved narrative array              | `sections` (a page's flat composition), `chapters`   |
+| `details`         | Term/description rows under a body (`chapter.details`)           | `specs`, `meta`, a second `body`                     |
 | `utilityNavItems` | The brand-property strip's links (`siteSettings`)                | `properties`, `brandLinks`, a second `footerGroup`   |
 
 The lexicon governs **editorial** fields — the ones an author fills in. Machine-written fields are outside it, and are `readOnly` in Studio: the hidden `migration` provenance object (`sourceId`, `extractedAt`, `locked`, `figmaNode`, `provisional`, `provisionalNote`) names pipeline state, and `guidance.key` / `guidance.sourcePath` name where a synced document came from and what queries it. Both are provenance, not content.
 
 It also governs the **props** a presentational component exposes, even in `packages/ui` where nothing is schema-bound. A prop is where a field's value lands, so a renderer that writes `deck={subheading}` forces every reader to learn the same concept twice and quietly reintroduces the synonym the lexicon exists to kill. Design vocabulary belongs in the prop's _doc comment_ ("the 24px standfirst pinned right"), never in its name.
 
-Shape conventions: reference fields are singular for one (`client`, `author`), plural for arrays (`categories`, `caseStudies`); arrays of objects take a plural noun (`stats`, `chapters`, `panels`); closed enums are a bare noun with an `options.list` (`variant`, `layout`, `width`, `pageType`, `decoration`) and always carry an `initialValue`.
+Shape conventions: reference fields are singular for one (`client`, `author`), plural for arrays (`categories`, `caseStudies`); arrays of objects take a plural noun (`stats`, `details`, `panels`); closed enums are a bare noun with an `options.list` (`variant`, `layout`, `width`, `pageType`, `decoration`) and always carry an `initialValue`. `story` is the one array named with a **collective singular**, and it earns it: it holds two unlike member types (chapters and section blocks), so no plural noun names its contents.
 
 ### Component and file names
 
@@ -103,7 +105,7 @@ Fix on sight; don't imitate. As of 2026-08-01 the rules above are the target, an
 - `insight.featuredImage` should be `heroMedia` (`caseStudy` already uses it). Requires touching the five converted JSON docs in `tools/migration/data/converted/insight/` and the translate step.
 - `pageType: 'service'`, the conditional `card` fieldset it gates, and `listingSection` have **no consumer**. They were specced for a `/services` listing that [ADR 0013](docs/adr/0013-services-consolidate-into-solutions.md) removed — the 24 WordPress services consolidate into `/solutions`, which draws no listing. Removing all three is a schema conversation raised on #47, not a page layer's call; until it happens, `pageType` reads as a two-value enum with one value in use.
 - `heroSection.headlineLines` is an array because each line animates separately — a genuine exception to `heading`, not a synonym.
-- The `decoration` enum is copy-pasted into three section blocks; it belongs in a shared field factory.
+- ~~The `decoration` enum is copy-pasted into three section blocks; it belongs in a shared field factory.~~ **Closed (#97)** — it is now `decorationField(options)` in `packages/sanity/src/schemas/blocks/fields.ts`, the module every shared field factory belongs in from here. Each block still passes its own option list. Kept listed so the next copy-pasted field lands there instead of starting the drift again.
 
 ## Migration language
 

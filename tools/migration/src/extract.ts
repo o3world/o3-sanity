@@ -205,7 +205,7 @@ echo json_encode($out, JSON_PARTIAL_OUTPUT_ON_ERROR);`,
  * case study's ACF is four levels of nested flexible content
  * (`flexible_content[].column[].content[]`) laid out for a page that no
  * longer exists, and the new `caseStudy` is a structured document — client,
- * narrative headline, stats, chapters, deliverables. There is no mechanical
+ * narrative headline, stats, story, deliverables. There is no mechanical
  * transform between those two shapes, which is the whole reason the pipeline
  * has a translate track (ADR 0002's addendum): the restructuring is Claude
  * Code's job, working from this JSON and `rules/caseStudy.md`.

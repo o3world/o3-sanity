@@ -13,9 +13,23 @@ import { caseStudy } from './entry'
  * survives a rebuild: chapters keep their kickers, the stats keep their exact
  * figures, the hero renders. It reads the committed JSON, which is the source
  * of truth; the dataset is disposable.
+ *
+ * Since ADR 0018 the middle of the document is **one interleaved `story`
+ * array**, so the assertions below check the two halves separately: the
+ * chapters by their content, and the bands between them by the fact that they
+ * render at all where they sit.
  */
 const route = buildDetailRoute(caseStudy)
 const doc = aTranslatedCaseStudy('la-colombe')
+
+type StoryMember = { _type: string; [key: string]: unknown }
+const story = (doc.story ?? []) as StoryMember[]
+const chapters = story.filter((member) => member._type === 'chapter') as unknown as {
+  kicker: string
+  title: string
+  details?: { label: string; body: string }[]
+}[]
+const bands = story.filter((member) => member._type !== 'chapter')
 
 const rendered = await renderRoute(route, {
   data: withSettings(doc, siteSettings()),
@@ -29,10 +43,24 @@ describe('the translated La Colombe case study', () => {
   })
 
   it('renders both chapters with their kickers', () => {
-    for (const chapter of doc.chapters as { kicker: string; title: string }[]) {
+    expect(chapters.length).toBeGreaterThan(1)
+    for (const chapter of chapters) {
       expect(html, `missing kicker ${chapter.kicker}`).toContain(chapter.kicker)
       expect(html, `missing title ${chapter.title}`).toContain(chapter.title)
     }
+  })
+
+  it('renders the chapter’s details rows as a term list', () => {
+    // `2274:4009` — the Strategy / Design / Research breakdown under the
+    // first chapter's prose. jsdom is not involved: this is server HTML, so a
+    // row hidden behind script would simply not be here.
+    const details = chapters[0]?.details ?? []
+    expect(details.length).toBeGreaterThan(0)
+    for (const detail of details) {
+      expect(html, `missing detail ${detail.label}`).toContain(detail.label)
+      expect(html).toContain(detail.body.slice(0, 40))
+    }
+    expect(html).toContain('<dl')
   })
 
   it('renders every stat with its exact figure', () => {
@@ -57,11 +85,41 @@ describe('the translated La Colombe case study', () => {
     expect(html).toContain('La Colombe Coffee Roasters')
   })
 
-  it('renders the hero media and the carousel images as sections', () => {
-    const extras = (doc.extraSections ?? []) as unknown[]
-    expect(extras).toHaveLength(3)
-    // hero + one per extra section.
-    expect((html.match(/<img\b/g) ?? []).length).toBeGreaterThanOrEqual(extras.length + 1)
+  it('weaves the bands between the chapters rather than after them', () => {
+    // The point of ADR 0018. `story` here is chapter → media → chapter →
+    // screen grid, so the first band has to land strictly BETWEEN the two
+    // chapter titles — which is what the old appended `extraSections` could
+    // not do, since anything appended sits after every chapter.
+    //
+    // The band is found by its OWN alt text, read off the fixture. Counting
+    // `<img` would not distinguish it from the hero (always first) or the
+    // screen grid (always last), so the appended layout would pass too.
+    const firstBand = story.find((member) => member._type !== 'chapter') as {
+      media?: { alt?: string }
+    }
+    const bandAlt = firstBand.media?.alt
+    expect(
+      bandAlt,
+      'the first band should be the media section, which carries alt text',
+    ).toBeTruthy()
+
+    const firstChapterAt = html.indexOf(chapters[0]!.title)
+    const bandAt = html.indexOf(bandAlt!)
+    const secondChapterAt = html.indexOf(chapters[1]!.title)
+
+    expect(firstChapterAt).toBeGreaterThan(-1)
+    expect(bandAt).toBeGreaterThan(firstChapterAt)
+    expect(secondChapterAt).toBeGreaterThan(bandAt)
+  })
+
+  it('renders the hero, and every band that carries a picture', () => {
+    expect(bands.length).toBeGreaterThan(0)
+    // hero + one per media band + one per screen in the grid.
+    const screens = bands.flatMap((band) => (band.screens as unknown[] | undefined) ?? [])
+    const mediaBands = bands.filter((band) => band._type === 'mediaSection')
+    expect((html.match(/<img\b/g) ?? []).length).toBeGreaterThanOrEqual(
+      mediaBands.length + screens.length + 1,
+    )
   })
 
   it('keeps the URL WordPress serves it at (#26)', () => {

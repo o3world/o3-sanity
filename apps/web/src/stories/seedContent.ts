@@ -341,10 +341,14 @@ export function seededSectionArgs<K extends PageSection['_type']>(
   return section as SectionProps<K>
 }
 
-/** An image object pointing at a committed seed asset, for a hand-built story. */
-export function seedImage(repoPath: string) {
+/**
+ * An image object pointing at a committed asset, for a hand-built story —
+ * either marker form the manifest keys (a repo path under
+ * `tools/migration/data/`, or the WordPress URL a converted asset came from).
+ */
+export function seedImage(source: string) {
   return {
     _type: 'image' as const,
-    asset: { _type: 'reference' as const, _ref: assetIdFor(repoPath) },
+    asset: { _type: 'reference' as const, _ref: assetIdFor(source) },
   }
 }

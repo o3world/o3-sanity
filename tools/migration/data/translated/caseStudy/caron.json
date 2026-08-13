@@ -47,7 +47,7 @@
     },
     "alt": "Caron case study"
   },
-  "chapters": [
+  "story": [
     {
       "_type": "chapter",
       "_key": "chapter-0",
@@ -68,7 +68,36 @@
             }
           ]
         }
+      ],
+      "details": [
+        {
+          "_type": "detail",
+          "_key": "detail-0",
+          "label": "Design",
+          "body": "A conversion-centric design that makes the contact opportunities clear on every channel."
+        },
+        {
+          "_type": "detail",
+          "_key": "detail-1",
+          "label": "Technology",
+          "body": "A technical solution tying content and marketing together, so the right message reaches a patient at the right time."
+        }
       ]
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-0",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-0",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/Caron-casestudy1.png"
+        },
+        "alt": "Caron logo."
+      }
     },
     {
       "_type": "chapter",
@@ -91,53 +120,43 @@
           ]
         }
       ]
-    }
-  ],
-  "extraSections": [
-    {
-      "_type": "mediaSection",
-      "_key": "media-0",
-      "surface": "white",
-      "width": "contained",
-      "media": {
-        "_type": "figure",
-        "_key": "fig-0",
-        "image": {
-          "_type": "image",
-          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/Caron-casestudy1.png"
-        },
-        "alt": "Caron logo."
-      }
     },
     {
-      "_type": "mediaSection",
-      "_key": "media-1",
+      "_type": "screenGridSection",
+      "_key": "screens-0",
       "surface": "white",
-      "width": "contained",
-      "media": {
-        "_type": "figure",
-        "_key": "fig-1",
-        "image": {
-          "_type": "image",
-          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/Caron-casestudy2-1.jpg"
+      "screens": [
+        {
+          "_type": "screen",
+          "_key": "media-1",
+          "media": {
+            "_type": "figure",
+            "_key": "fig-1",
+            "image": {
+              "_type": "image",
+              "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/Caron-casestudy2-1.jpg"
+            },
+            "alt": "Caron homepage that communicates recovery is not just possible - it's probable. Background features a happy mother and child hugging."
+          },
+          "tone": "ink",
+          "span": "wide"
         },
-        "alt": "Caron homepage that communicates recovery is not just possible - it's probable. Background features a happy mother and child hugging."
-      }
-    },
-    {
-      "_type": "mediaSection",
-      "_key": "media-2",
-      "surface": "white",
-      "width": "contained",
-      "media": {
-        "_type": "figure",
-        "_key": "fig-2",
-        "image": {
-          "_type": "image",
-          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/Caron-casestudy3.png"
-        },
-        "alt": "Screenshots of Caron website on mobile."
-      }
+        {
+          "_type": "screen",
+          "_key": "media-2",
+          "media": {
+            "_type": "figure",
+            "_key": "fig-2",
+            "image": {
+              "_type": "image",
+              "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/Caron-casestudy3.png"
+            },
+            "alt": "Screenshots of Caron website on mobile."
+          },
+          "tone": "ink",
+          "span": "standard"
+        }
+      ]
     }
   ],
   "seo": {
@@ -152,9 +171,9 @@
     "sourceFile": "caseStudy/caron.json",
     "sourceHash": "sha256:2d8f99c2474e2b312c92883438b8f40a928ac4608980d1b8ca3517a9223a7b7f",
     "rulesFile": "rules/caseStudy.md",
-    "rulesHash": "sha256:9a0c271dab4ca8fd1807f0a7af12c4734a49be6f65ba7eb84f3ca5430ab33e6f",
+    "rulesHash": "sha256:39b0782ef8158eb2f57b7d5ec98cece7fc22f6aebf64f87e182c6f6e68ae821f",
     "model": "claude-opus-5",
-    "translatedAt": "2026-08-02",
+    "translatedAt": "2026-08-13",
     "flags": [
       {
         "field": "narrativeHeadline",
@@ -162,14 +181,24 @@
         "note": "Compressed from the Opportunity — “adapt to the changes of Caron’s offerings by simplifying and streamlining access to critical information on their website” — with the three audiences named by the Solution’s “patient, family and referring professional interviews”. Both halves are in the source; the join is the rewrite."
       },
       {
-        "field": "chapters[0].title",
+        "field": "story[0].title",
         "kind": "proposed",
         "note": "chapter.title is required; the source heading is only the kicker. Drawn from the changing program and service architecture and the hard access to critical information."
       },
       {
-        "field": "chapters[1].title",
+        "field": "story[2].title",
         "kind": "proposed",
         "note": "Same: required, unsourced. Drawn from “simplified navigation system” and “making contact opportunities clear across all channels”."
+      },
+      {
+        "field": "story",
+        "kind": "derived",
+        "note": "One interleaved array now (ADR 0018). The logo slide sits between the chapters; the homepage and the mobile screens become one `screenGridSection` after the Solution, the first tile at `span: wide`. Nothing added or dropped, every `_key` unchanged."
+      },
+      {
+        "field": "story[0].details",
+        "kind": "derived",
+        "note": "The Opportunity asks for “an implementation partner who could weave together a design and technology solution”, and the Solution says what each half did. Two rows, not three: the patient, family and referring-professional interviews the source also describes are never named as a discipline, so they get no row."
       },
       {
         "field": "industries",

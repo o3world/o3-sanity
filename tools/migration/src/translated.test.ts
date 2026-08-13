@@ -128,11 +128,13 @@ describe('committed translations', () => {
     for (const { file, doc } of translated) {
       const flagged = new Set(doc._meta.flags.map((f) => f.field))
       expect(flagged, `${file} did not flag its narrativeHeadline`).toContain('narrativeHeadline')
-      const chapters = (doc.chapters ?? []) as unknown[]
-      chapters.forEach((_, i) => {
-        expect(flagged, `${file} did not flag chapters[${i}].title`).toContain(
-          `chapters[${i}].title`,
-        )
+      // A chapter's path is its index in `story`, which also holds the bands
+      // woven between the chapters (ADR 0018) — so the third member of the
+      // array can be the second chapter, and the flag says `story[2].title`.
+      const story = (doc.story ?? []) as { _type: string }[]
+      story.forEach((member, i) => {
+        if (member._type !== 'chapter') return
+        expect(flagged, `${file} did not flag story[${i}].title`).toContain(`story[${i}].title`)
       })
     }
   })

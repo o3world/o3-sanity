@@ -37,8 +37,36 @@ export const Default: Story = {
 }
 
 /**
- * Numbering derives from array order, so a later chapter differs only in its
- * numeral (`caseStudy.chapters`, CONTEXT.md).
+ * The frame's breakdown rows under the prose (`2274:4009`) — a fixed 180px
+ * term column at desktop, stacking below `lg`.
+ */
+export const WithDetails: Story = {
+  args: {
+    number: '01',
+    kicker: 'Opportunity',
+    title: 'Translating a cafe experience into a digital one',
+    children: body,
+    details: [
+      {
+        label: 'Strategy',
+        body: 'We have led La Colombe’s online strategy since 2014 — new product launches, and a growing online customer base.',
+      },
+      {
+        label: 'Design',
+        body: 'A multi-channel digital commerce experience, designed and built to bring La Colombe into many more American homes.',
+      },
+      {
+        label: 'Research',
+        body: 'Continuous user research, and new concepts that extend the digital platform.',
+      },
+    ],
+  },
+}
+
+/**
+ * Numbering derives from a chapter's order among the chapter members of
+ * `caseStudy.story`, so a later chapter differs only in its numeral
+ * (CONTEXT.md, ADR 0018).
  */
 export const LaterChapter: Story = {
   args: {

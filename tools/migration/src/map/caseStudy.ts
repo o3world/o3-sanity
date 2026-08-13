@@ -25,10 +25,10 @@ import { seoObject } from './seo'
  *   source, or under different rules, is not the translation that was
  *   reviewed.
  * - **Required-but-unsourced fields are flagged.** `narrativeHeadline` and
- *   every `chapter.title` are required by the schema and usually absent from
- *   the source, so they are written by an agent. A document that supplies
- *   them with no flag has quietly invented copy — the one failure mode this
- *   track exists to prevent.
+ *   every chapter's `title` are required by the schema and usually absent
+ *   from the source, so they are written by an agent. A document that
+ *   supplies them with no flag has quietly invented copy — the one failure
+ *   mode this track exists to prevent.
  * - **Nothing is published.** Enforced in `load`, asserted here.
  */
 
@@ -52,6 +52,93 @@ export const translationMeta = z.object({
 
 const portableTextBlock = z.object({ _type: z.string(), _key: z.string() }).loose()
 
+const figure = z
+  .object({ _type: z.literal('figure'), image: migratableImage, alt: z.string().min(1) })
+  .loose()
+
+const SURFACES = ['white', 'bone', 'ink'] as const
+
+/**
+ * A chapter of the narrative. `details` is the frame's term/description
+ * breakdown (`2274:4009`, #97) — written only where the source names the
+ * disciplines and says what each one did, like every other field here.
+ */
+const chapter = z.object({
+  _type: z.literal('chapter'),
+  _key: z.string(),
+  kicker: z.string().min(1),
+  title: z.string().min(1),
+  body: z.array(portableTextBlock).min(1),
+  details: z
+    .array(
+      z.object({
+        _type: z.literal('detail'),
+        _key: z.string(),
+        label: z.string().min(1),
+        body: z.string().min(1).optional(),
+      }),
+    )
+    .min(1)
+    .optional(),
+})
+
+/**
+ * The two section blocks the translate track actually writes, checked in
+ * full. `variant: 'capture'` is the tall page screenshot on a dark stage;
+ * `width` says nothing under it, so it is left off there.
+ */
+const mediaSection = z.object({
+  _type: z.literal('mediaSection'),
+  _key: z.string(),
+  surface: z.enum(SURFACES).optional(),
+  variant: z.enum(['plain', 'capture']).optional(),
+  width: z.enum(['contained', 'full-bleed']).optional(),
+  media: figure,
+})
+
+const screenGridSection = z.object({
+  _type: z.literal('screenGridSection'),
+  _key: z.string(),
+  surface: z.enum(SURFACES).optional(),
+  screens: z
+    .array(
+      z.object({
+        _type: z.literal('screen'),
+        _key: z.string(),
+        media: figure,
+        tone: z.enum(['ink', 'brand', 'bone']).optional(),
+        span: z.enum(['standard', 'wide']).optional(),
+      }),
+    )
+    .min(1),
+})
+
+const MODELLED = new Set(['chapter', 'mediaSection', 'screenGridSection'])
+
+/**
+ * Any other registered section block. `story` accepts everything
+ * `page.sections` does (ADR 0018), and restating that list here would be the
+ * second copy `sectionBlockMembers` exists to prevent — so an unmodelled
+ * block passes on shape alone.
+ *
+ * The refusal is the point of the arm: without it, a `chapter` or a
+ * `mediaSection` that failed the check above would fall through to this one
+ * and load malformed.
+ */
+const unmodelledSection = z
+  .object({ _type: z.string().min(1), _key: z.string() })
+  .loose()
+  .refine((block) => !MODELLED.has(block._type), {
+    message: 'block does not match the shape this gate checks for its type',
+  })
+
+/**
+ * The interleaved narrative — chapters and bands in reading order (ADR 0018).
+ * Chapter numbering derives from a chapter's order among the *chapter*
+ * members, so a band between two chapters costs nothing.
+ */
+const storyMember = z.union([chapter, mediaSection, screenGridSection, unmodelledSection])
+
 export const caseStudyDoc = z.object({
   _id: z.string().regex(/^caseStudy-wp-\d+$/),
   _type: z.literal('caseStudy'),
@@ -73,23 +160,9 @@ export const caseStudyDoc = z.object({
       }),
     )
     .optional(),
-  heroMedia: z
-    .object({ _type: z.literal('figure'), image: migratableImage, alt: z.string().min(1) })
-    .loose()
-    .optional(),
-  chapters: z
-    .array(
-      z.object({
-        _type: z.literal('chapter'),
-        _key: z.string(),
-        kicker: z.string().min(1),
-        title: z.string().min(1),
-        body: z.array(portableTextBlock).min(1),
-      }),
-    )
-    .optional(),
+  heroMedia: figure.optional(),
+  story: z.array(storyMember).optional(),
   deliverables: z.array(z.string().min(1)).optional(),
-  extraSections: z.array(portableTextBlock).optional(),
   seo: seoObject.optional(),
   migration: z.object({
     locked: z.literal(false),
@@ -121,7 +194,12 @@ export interface TranslationIssue {
  */
 function unsourcedRequiredFields(doc: CaseStudyDoc): string[] {
   const fields = ['narrativeHeadline']
-  doc.chapters?.forEach((_, i) => fields.push(`chapters[${i}].title`))
+  // Story-relative: a chapter's path is its index in `story`, not its index
+  // among the chapters — the array holds bands too (ADR 0018), and a flag has
+  // to name the thing a reviewer can find.
+  doc.story?.forEach((member, i) => {
+    if (member._type === 'chapter') fields.push(`story[${i}].title`)
+  })
   return fields
 }
 

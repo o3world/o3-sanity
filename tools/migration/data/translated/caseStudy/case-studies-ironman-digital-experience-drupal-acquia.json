@@ -53,7 +53,7 @@
     },
     "alt": "IRONMAN race photo of a woman running across a puddle"
   },
-  "chapters": [
+  "story": [
     {
       "_type": "chapter",
       "_key": "chapter-0",
@@ -102,7 +102,42 @@
             }
           ]
         }
+      ],
+      "details": [
+        {
+          "_type": "detail",
+          "_key": "detail-0",
+          "label": "Strategy",
+          "body": "A phased plan: the Pro Series experience for the announced April 2024 date, then the full ironman.com overhaul later in the year."
+        },
+        {
+          "_type": "detail",
+          "_key": "detail-1",
+          "label": "Design",
+          "body": "User experience design that puts athletes at the center — dynamic video, bold visuals, and navigation built to tell their stories."
+        },
+        {
+          "_type": "detail",
+          "_key": "detail-2",
+          "label": "Technology",
+          "body": "Drupal CMS on Acquia’s platform, chosen after a market analysis, replacing a system heading for end of life."
+        }
       ]
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-0",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-0",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/05/IM-1-1-scaled.jpg"
+        },
+        "alt": "IRONMAN race photo of a woman running across a puddle"
+      }
     },
     {
       "_type": "chapter",
@@ -159,29 +194,12 @@
           ]
         }
       ]
-    }
-  ],
-  "extraSections": [
-    {
-      "_type": "mediaSection",
-      "_key": "media-0",
-      "surface": "white",
-      "width": "contained",
-      "media": {
-        "_type": "figure",
-        "_key": "fig-0",
-        "image": {
-          "_type": "image",
-          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/05/IM-1-1-scaled.jpg"
-        },
-        "alt": "IRONMAN race photo of a woman running across a puddle"
-      }
     },
     {
       "_type": "mediaSection",
       "_key": "media-1",
       "surface": "white",
-      "width": "contained",
+      "variant": "capture",
       "media": {
         "_type": "figure",
         "_key": "fig-1",
@@ -193,64 +211,71 @@
       }
     },
     {
-      "_type": "mediaSection",
-      "_key": "media-2",
+      "_type": "screenGridSection",
+      "_key": "screens-0",
       "surface": "white",
-      "width": "contained",
-      "media": {
-        "_type": "figure",
-        "_key": "fig-2",
-        "image": {
-          "_type": "image",
-          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/04/IM-3-2.jpg"
+      "screens": [
+        {
+          "_type": "screen",
+          "_key": "media-2",
+          "media": {
+            "_type": "figure",
+            "_key": "fig-2",
+            "image": {
+              "_type": "image",
+              "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/04/IM-3-2.jpg"
+            },
+            "alt": "IRONMAN digital transformation"
+          },
+          "tone": "ink",
+          "span": "wide"
         },
-        "alt": "IRONMAN digital transformation"
-      }
-    },
-    {
-      "_type": "mediaSection",
-      "_key": "media-3",
-      "surface": "white",
-      "width": "contained",
-      "media": {
-        "_type": "figure",
-        "_key": "fig-3",
-        "image": {
-          "_type": "image",
-          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/04/IM-4-2.jpg"
+        {
+          "_type": "screen",
+          "_key": "media-3",
+          "media": {
+            "_type": "figure",
+            "_key": "fig-3",
+            "image": {
+              "_type": "image",
+              "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/04/IM-4-2.jpg"
+            },
+            "alt": "IRONMAN digital transformation"
+          },
+          "tone": "ink",
+          "span": "standard"
         },
-        "alt": "IRONMAN digital transformation"
-      }
-    },
-    {
-      "_type": "mediaSection",
-      "_key": "media-4",
-      "surface": "white",
-      "width": "contained",
-      "media": {
-        "_type": "figure",
-        "_key": "fig-4",
-        "image": {
-          "_type": "image",
-          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/04/IM-5-2.jpg"
+        {
+          "_type": "screen",
+          "_key": "media-4",
+          "media": {
+            "_type": "figure",
+            "_key": "fig-4",
+            "image": {
+              "_type": "image",
+              "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/04/IM-5-2.jpg"
+            },
+            "alt": "IRONMAN digital transformation"
+          },
+          "tone": "ink",
+          "span": "standard"
         },
-        "alt": "IRONMAN digital transformation"
-      }
-    },
-    {
-      "_type": "mediaSection",
-      "_key": "media-5",
-      "surface": "white",
-      "width": "contained",
-      "media": {
-        "_type": "figure",
-        "_key": "fig-5",
-        "image": {
-          "_type": "image",
-          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/04/IM-6-2.jpg"
-        },
-        "alt": "IRONMAN digital transformation"
-      }
+        {
+          "_type": "screen",
+          "_key": "media-5",
+          "media": {
+            "_type": "figure",
+            "_key": "fig-5",
+            "image": {
+              "_type": "image",
+              "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/04/IM-6-2.jpg"
+            },
+            "alt": "IRONMAN digital transformation"
+          },
+          "tone": "ink",
+          "span": "standard"
+        }
+      ]
     }
   ],
   "seo": {
@@ -265,9 +290,9 @@
     "sourceFile": "caseStudy/case-studies-ironman-digital-experience-drupal-acquia.json",
     "sourceHash": "sha256:81537d6c6b8fb664c5051f5edf0bd372ed462c990cece1183a2b37e949e768d9",
     "rulesFile": "rules/caseStudy.md",
-    "rulesHash": "sha256:9a0c271dab4ca8fd1807f0a7af12c4734a49be6f65ba7eb84f3ca5430ab33e6f",
+    "rulesHash": "sha256:39b0782ef8158eb2f57b7d5ec98cece7fc22f6aebf64f87e182c6f6e68ae821f",
     "model": "claude-opus-5",
-    "translatedAt": "2026-08-02",
+    "translatedAt": "2026-08-13",
     "flags": [
       {
         "field": "narrativeHeadline",
@@ -275,17 +300,27 @@
         "note": "Compressed from the Opportunity’s first two paragraphs — the CMS bottleneck and its “inevitable end of life”, the “vast amount of unstructured data spread across thousands of pages”, and the announced April 2024 Pro Series timeline. No new facts."
       },
       {
-        "field": "chapters[0].title",
+        "field": "story[0].title",
         "kind": "proposed",
         "note": "chapter.title is required; the source heading is only the kicker. Drawn from the end-of-life CMS and the announced launch date."
       },
       {
-        "field": "chapters[1].title",
+        "field": "story[2].title",
         "kind": "proposed",
         "note": "Same: required, unsourced. Drawn from the phased strategy — Pro Series launch first, then the ironman.com transformation."
       },
       {
-        "field": "chapters[].kicker",
+        "field": "story",
+        "kind": "derived",
+        "note": "One interleaved array now (ADR 0018), with the six carousel slides placed by what they show. The brand cover sits between the chapters; the Pro Series page capture follows the Solution as a `capture` band, because it is already a page screenshot floating on a dark stage; the ironman.com captures lead a `screenGridSection` at `span: wide`, with the three visual-system boards as standard tiles. Nothing added or dropped, every `_key` unchanged."
+      },
+      {
+        "field": "story[0].details",
+        "kind": "derived",
+        "note": "The Opportunity names the three disciplines the work needed — “digital strategy, user experience design, and technological implementation” — and the Solution says what each one did. Each row is compressed from that prose: the announced April 2024 timeline, the athlete-centered experience, and the Drupal/Acquia choice. Labels are the source’s own words, shortened. No new facts."
+      },
+      {
+        "field": "story[].kicker",
         "kind": "derived",
         "note": "Source heading(s) arrive in capitals (“SOLUTION”) — the old template shouted them through its `type-kicker` class. Normalized to sentence case; the new renderer owns the casing."
       },

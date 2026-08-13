@@ -14,7 +14,7 @@ Resolves wayfinder ticket #6. Inputs: the content model (ticket #5, `CONTEXT.md`
 ### Routable
 
 - **`insight`** — title, `slug` (req), excerpt, `author` → person (optional — the ACF byline where WordPress had one; 239 of 272 have none, #32), `categories` → category[], publishedAt, featuredImage (figure), `body` (Portable Text — see set below), seo. Read time computed at render, not stored.
-- **`caseStudy`** — title, `slug` (req), `client` → client (req), `industries` → industry[], `industryDetail` (string — eyebrow's second half), `narrativeHeadline` (text, req — the card sentence), `stats[]` (stat; first = headline stat), `heroMedia` (figure), `chapters[]` ({kicker, title, body: Portable Text}; numbering derived from order), `deliverables[]` (string — "What we shipped"), `extraSections[]` (section blocks, optional), seo.
+- **`caseStudy`** — title, `slug` (req), `client` → client (req), `industries` → industry[], `industryDetail` (string — eyebrow's second half), `narrativeHeadline` (text, req — the card sentence), `stats[]` (stat; first = headline stat), `heroMedia` (figure), `story[]`, `deliverables[]` (string — "What we shipped"), seo. **`story` is one interleaved array** of `chapter` objects and section blocks ([ADR 0018](../adr/0018-case-study-story-interleaves-chapters-and-bands.md)) — the members are derived from the block registry, exactly as `page.sections` is — and a chapter's number derives from its order _among the chapter members_, so a band between two chapters costs no numeral. It replaces the `chapters` + appended `extraSections` pair, which could not express the alternation the frame draws.
 - **`page`** — title, `slug` (req, multi-segment), `pageType` (`standard | service`, closed enum, initial `standard`), `card` fieldset conditional on `pageType == 'service'` ({shortTitle, excerpt, icon/image}) — projected by `listingSection`, `sections[]` (section blocks), seo. ⚠️ No `service` page exists or is planned — see `listingSection` below and [ADR 0013](../adr/0013-services-consolidate-into-solutions.md).
 
 ### Supporting
@@ -31,7 +31,7 @@ Resolves wayfinder ticket #6. Inputs: the content model (ticket #5, `CONTEXT.md`
 - **`cta`** — label, target (internal reference **or** external URL), variant (`brand | inverse | ghost`).
 - **`figure`** — image, alt (req), caption (optional).
 - **`stat`** — value (string — supports "89% → 114%"), label.
-- **`chapter`** — kicker, title, body (Portable Text).
+- **`chapter`** — kicker, title, body (Portable Text), `details[]` ({label (req), body} — the frame's hairline term/description rows, `2274:4009`). A member of `caseStudy.story`, never a document.
 - **`embed`** — URL (video/oEmbed).
 - **`pullQuote`** — text, attribution (optional).
 
@@ -43,7 +43,7 @@ Standard marks + closed inline-object set: **`figure`, `embed`, `pullQuote`**. A
 
 ### Section tier — bespoke (from the `prototype/` design)
 
-`heroSection`, `logoWallSection` (statement + client refs or manual logos; layout `grid | marquee`), `caseShowcaseSection` (caseStudy refs; projects narrativeHeadline + first stat), `railPanelsSection` (heading, intro, `layout` (`rail | cards`), `rail` (`label | number`), panels {railLabel, heading, logo, body, note, cta, media} — serves Home's "platforms" and "how we work" bands as `rail`, and the Solutions frame's engagement cards (`1925:6108`) as `cards`), `quoteSection` (inline quote + attribution — no testimonial type), `insightsCarouselSection` (curated refs or latest-N by category), `ctaSection`.
+`heroSection`, `logoWallSection` (statement + client refs or manual logos; layout `grid | marquee`), `caseShowcaseSection` (caseStudy refs; projects narrativeHeadline + first stat), `railPanelsSection` (heading, intro, `layout` (`rail | cards`), `rail` (`label | number`), panels {railLabel, heading, logo, body, note, cta, media} — serves Home's "platforms" and "how we work" bands as `rail`, and the Solutions frame's engagement cards (`1925:6108`) as `cards`), `quoteSection` (inline quote + attribution — no testimonial type; `decoration` is `orbs | molecule | none`, where `molecule` is the 2026-08 case-study band `2250:1525`), `insightsCarouselSection` (curated refs or latest-N by category), `ctaSection`.
 
 ### Section tier — from the canonical Figma frames (#56)
 
@@ -57,7 +57,8 @@ Surfaced by #46/#47 and built against the About (`1924:5344`) and Solutions (`19
 ### Section tier — generic
 
 - **`layoutSection`** — the one true two-tier block: 1–3 columns of base blocks.
-- **`mediaSection`** — full-width figure/video moment.
+- **`mediaSection`** — media, `variant` (`plain | capture`), `width` (`contained | full-bleed`, hidden on `capture`). `plain` is the figure moment the block shipped with; `capture` is the case-study frame's page-capture band (`1647:1720`, #97) — a full-bleed dark stage 700px tall that a tall screenshot is **cropped by**, not fitted into.
+- **`screenGridSection`** — `screens[]` ({media (req), `tone` (`ink | brand | bone`), `span` (`standard | wide`)}). The case-study frame's tiled product screenshots on gradient plates (`2230:3315`, `2230:7559`, #97): a two-column grid of 32px-radius plates, each clipping the screenshot inside it, a `wide` tile taking both columns. Registered as a general section block rather than a case-study element — ADR 0018's showcase rule is that every band the case study needs is available to `page.sections` too. Plate height is **not** a field: it follows `span` (ADR 0006).
 - **`listingSection`** — lists pages by `pageType` via their `card` fieldset. ⚠️ **Orphaned.** It was specced to power `/services`, and [ADR 0013](../adr/0013-services-consolidate-into-solutions.md) removed that route: the Solutions frame draws no listing, no `service` page exists, and nothing else lists by `pageType`. The block, `pageType: 'service'` and `page.card` now have no consumer — a schema conversation raised on #47, not something a page layer deletes on the way past.
 
 - **`formSection`** — eyebrow, `heading` (req), `note`, `reasons[]` (req), `consentLabel`, `submitLabel` (req). The inquiry band on `/contact` (#58). **Its input set is code, not schema** — the six fields are transcribed from the Gravity Form 1 the live site serves, and `reasons` is the only part an editor owns ([ADR 0014](../adr/0014-form-fields-are-code-form-copy-is-content.md)). ⚠️ **No submission handler and no destination exist**, so the renderer disables its submit and says so on the page; #58 stays open for both.

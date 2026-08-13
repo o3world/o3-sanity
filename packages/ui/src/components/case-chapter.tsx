@@ -3,6 +3,20 @@ import type { ReactNode } from 'react'
 import { cn } from '../lib/utils'
 import { Eyebrow } from './eyebrow'
 
+export interface CaseChapterDetail {
+  /**
+   * A stable identity for the row — Sanity's array-member `_key` when the
+   * caller has one. Optional so a hand-built fixture (a story) can leave it
+   * out; the list falls back to the index there, which is safe because a
+   * literal array never reorders.
+   */
+  key?: string
+  /** The term in the fixed left column ("Strategy", "Design", "Research"). */
+  label: ReactNode
+  /** The description beside it. */
+  body?: ReactNode
+}
+
 export interface CaseChapterProps {
   /**
    * The chapter's position, already formatted ("01"). Derived from array
@@ -14,6 +28,8 @@ export interface CaseChapterProps {
   title: ReactNode
   /** The chapter body — long-form prose, rendered by the caller. */
   children?: ReactNode
+  /** The hairline term/description rows under the body (`2274:4009`). */
+  details?: readonly CaseChapterDetail[]
   className?: string
 }
 
@@ -47,8 +63,26 @@ export interface CaseChapterProps {
  * The kicker holds at the 18px section step at both widths, following ADR
  * 0006's rule that small UI text does not scale — the mobile frame's 16px is
  * the same 2px drift it shows on the "next project" kicker.
+ *
+ * **`details` is the frame's breakdown table** (`2274:4009`, #97): rows of a
+ * term against its description, each opened by a 1px `border-line` rule, 24px
+ * of padding, and a **180px** term column at desktop. Both halves are set at
+ * `text-body` — the frame's Body/Small is 20/32, which is exactly that step —
+ * and the term takes `fg-muted` against the description's ink, which is the
+ * only thing separating them typographically. Below `lg` the pair stacks: 180
+ * of a 362px column would leave a description four words wide.
+ *
+ * A `<dl>`, not a table: this is a term list, and the frame draws no header
+ * row, no second column of data, and nothing to align across rows.
  */
-export function CaseChapter({ number, kicker, title, children, className }: CaseChapterProps) {
+export function CaseChapter({
+  number,
+  kicker,
+  title,
+  children,
+  details,
+  className,
+}: CaseChapterProps) {
   const label = [number, kicker].filter(Boolean).join(' — ')
 
   return (
@@ -59,6 +93,19 @@ export function CaseChapter({ number, kicker, title, children, className }: Case
           <h2 className="font-display text-ink text-body-heading text-balance">{title}</h2>
         </div>
         {children ? <div className="text-fg text-body">{children}</div> : null}
+        {details?.length ? (
+          <dl className="flex flex-col">
+            {details.map((detail, index) => (
+              <div
+                key={detail.key ?? index}
+                className="border-line flex flex-col gap-2 border-t py-6 lg:flex-row lg:gap-6"
+              >
+                <dt className="text-fg-muted text-body lg:w-[180px] lg:shrink-0">{detail.label}</dt>
+                <dd className="text-ink text-body flex-1">{detail.body}</dd>
+              </div>
+            ))}
+          </dl>
+        ) : null}
       </div>
     </section>
   )
