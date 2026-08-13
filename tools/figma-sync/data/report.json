@@ -1,166 +1,69 @@
 {
   "schemaVersion": 1,
-  "ranAt": "2026-08-13T18:13:01.726Z",
+  "ranAt": "2026-08-13T18:57:49.962Z",
   "fileVersion": "2386937043801380426",
   "shortCircuited": false,
   "changedFrames": [
     {
-      "nodeId": "1680:2134",
-      "name": "Home",
-      "route": "/",
-      "variant": "desktop",
-      "change": "modified"
-    },
-    {
-      "nodeId": "1814:1618",
-      "name": "Home",
-      "route": "/",
-      "variant": "mobile",
-      "change": "modified"
-    },
-    {
-      "nodeId": "1634:1167",
-      "name": "Work index",
-      "route": "/work",
-      "variant": "desktop",
-      "change": "modified"
-    },
-    {
-      "nodeId": "1906:851",
-      "name": "Work index",
-      "route": "/work",
-      "variant": "mobile",
-      "change": "modified"
-    },
-    {
-      "nodeId": "1710:2300",
-      "name": "Case Study detail",
-      "route": "/work/{slug}",
-      "variant": "desktop",
-      "change": "modified"
-    },
-    {
-      "nodeId": "1710:2823",
-      "name": "Insight detail",
-      "route": "/insights/{slug}",
-      "variant": "desktop",
-      "change": "modified"
-    },
-    {
-      "nodeId": "1906:1046",
-      "name": "Insight detail",
-      "route": "/insights/{slug}",
-      "variant": "mobile",
-      "change": "modified"
-    },
-    {
-      "nodeId": "1924:5344",
-      "name": "About",
-      "route": "/about",
-      "variant": "desktop",
-      "change": "modified"
-    },
-    {
-      "nodeId": "1925:6138",
+      "nodeId": "2360:2879",
       "name": "Solutions",
       "route": "/solutions",
       "variant": "desktop",
-      "change": "modified"
+      "change": "added"
     },
     {
-      "nodeId": "1644:1889",
-      "name": "Live",
-      "route": "/live",
+      "nodeId": "2336:4310",
+      "name": "Insight index",
+      "route": "/insights",
       "variant": "desktop",
-      "change": "modified"
+      "change": "added"
     },
     {
-      "nodeId": "1906:334",
-      "name": "Live",
-      "route": "/live",
-      "variant": "mobile",
-      "change": "modified"
+      "nodeId": "2354:2446",
+      "name": "Sanity partnership",
+      "route": "/sanity",
+      "variant": "desktop",
+      "change": "added"
+    },
+    {
+      "nodeId": "1925:6138",
+      "name": "1925:6138",
+      "route": null,
+      "variant": null,
+      "change": "removed"
     }
   ],
   "changedComponentSets": [
     {
-      "nodeId": "1710:2271",
+      "nodeId": "2225:2920",
       "name": "NavBar",
       "route": null,
       "variant": null,
       "codeComponent": "apps/web/src/ui/SiteNav.tsx#SiteNav",
-      "change": "modified"
+      "change": "added"
     },
     {
-      "nodeId": "1280:1885",
-      "name": "Footer",
+      "nodeId": "2250:1445",
+      "name": "Utility Nav",
       "route": null,
       "variant": null,
-      "codeComponent": null,
-      "change": "modified"
+      "codeComponent": "apps/web/src/ui/UtilityNav.tsx#UtilityNav",
+      "change": "added"
     },
     {
-      "nodeId": "134:343",
-      "name": "Cover status",
+      "nodeId": "1710:2271",
+      "name": "1710:2271",
       "route": null,
       "variant": null,
       "codeComponent": null,
       "change": "removed"
     }
   ],
-  "untrackedFrames": [
-    {
-      "nodeId": "2336:4310",
-      "name": "Insights",
-      "width": 1440
-    },
-    {
-      "nodeId": "2252:3535",
-      "name": "Frame 2611219",
-      "width": 1440
-    },
-    {
-      "nodeId": "2117:800",
-      "name": "Blog Post",
-      "width": 1440
-    },
-    {
-      "nodeId": "2118:858",
-      "name": "Blog Post",
-      "width": 1440
-    },
-    {
-      "nodeId": "2118:909",
-      "name": "Blog Post",
-      "width": 1440
-    },
-    {
-      "nodeId": "2118:1068",
-      "name": "Blog Post",
-      "width": 1440
-    },
-    {
-      "nodeId": "2118:1015",
-      "name": "Blog Post",
-      "width": 1440
-    },
-    {
-      "nodeId": "2354:2446",
-      "name": "Sanity",
-      "width": 1440
-    },
-    {
-      "nodeId": "2360:2879",
-      "name": "Solutions",
-      "width": 1440
-    }
-  ],
+  "untrackedFrames": [],
   "assets": {
     "regenerated": [],
     "lockedConflicts": [],
     "failures": []
   },
-  "errors": [
-    "134:343 (Cover status, componentSet) not found in the file"
-  ]
+  "errors": []
 }
