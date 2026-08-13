@@ -16,7 +16,7 @@
         "You see the problem in front of you.",
         "We’re working on the one behind it."
       ],
-      "subheading": "Strategy, design, engineering and AI under one roof. The same senior team that finds the move is the team that builds it.",
+      "subheading": "Strategy, design, engineering, and AI under one roof. The senior team that finds the move is the team that builds it.",
       "cta": {
         "_type": "cta",
         "label": "View our work",
@@ -74,7 +74,7 @@
       "_type": "caseShowcaseSection",
       "_key": "work",
       "surface": "ink",
-      "heading": "Most firms ship what you asked for. We solve what was actually in the way.",
+      "heading": "Most firms can ship what you ask for. We solve what was actually in the way.",
       "cta": {
         "_type": "cta",
         "label": "View our work",
@@ -264,7 +264,7 @@
     }
   ],
   "seo": {
-    "description": "Strategy, design, engineering and AI under one roof. The same senior team that finds the move is the team that builds it."
+    "description": "Strategy, design, engineering, and AI under one roof. The senior team that finds the move is the team that builds it."
   },
   "migration": {
     "locked": false,

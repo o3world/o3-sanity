@@ -45,9 +45,9 @@ describe('the seeded homepage', () => {
 
   it.each([
     ['hero', 'You see the problem in front of you.'],
-    ['hero subheading', 'The same senior team that finds the move is the team that builds it.'],
+    ['hero subheading', 'The senior team that finds the move is the team that builds it.'],
     ['partners statement', 'where the stakes — and the org charts — are real'],
-    ['case showcase heading', 'Most firms ship what you asked for'],
+    ['case showcase heading', 'Most firms can ship what you ask for'],
     ['a case study’s narrative headline', 'CMS was heading for end of life'],
     ['quote', 'positioned our company as the leader and shaper'],
     ['platform rail', 'The platforms we go deep on'],
