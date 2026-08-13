@@ -29,6 +29,13 @@ function MarkPaths({ fill }: { fill: string }) {
 }
 
 /**
+ * The mark's own bounds inside the 64 box, read off the two path `d` strings
+ * above: x 16.6016–55.4410, y 16.5947–55.3753. `BrandMark`'s `trim` renders
+ * through this instead of the full box; nothing else needs it.
+ */
+const MARK_BOUNDS = '16.6016 16.5947 38.8394 38.7806'
+
+/**
  * The O3 mark — Figma's `Brand / Logo` component set (`264:50`).
  *
  * A filled square with the ring-and-superscript mark knocked out in white.
@@ -43,9 +50,12 @@ const brandLogoVariants = cva('block shrink-0', {
   variants: {
     /** Figma axis `Color`. */
     color: {
-      /** `264:52` — `#030303` (`Jawn/Primary/Schuylkill`). The NavBar mark. */
+      /** `264:52` — `#030303` (`Jawn/Primary/Schuylkill`). */
       black: 'text-ink-deep',
-      /** `264:51` — `#EB1000`. The footer mark, at 176px. */
+      /**
+       * `264:51` — `#EB1000`. Drew the footer at 176px until the 2026-08
+       * `Footer` (`1280:1885`) dropped the plate — see `BrandMark` below.
+       */
       red: 'text-brand',
     },
   },
@@ -67,6 +77,10 @@ export interface BrandLogoProps
  * reverse with the surface — the answer to that turned out to be `BrandMark`
  * below, not an inverted tile, and an inverted tile has no caller. The tile
  * itself has never flipped anywhere and does not now.
+ *
+ * The 2026-08 `Footer` (`1280:1885`) draws a white logo and still does not call
+ * for it: that logo is the two paths alone, tight-bounded, with no plate at all
+ * (`1280:1856`) — `BrandMark`, not a white tile. #87.
  */
 export function BrandLogo({ size = 64, color, className, ...rest }: BrandLogoProps) {
   return (
@@ -88,17 +102,21 @@ export function BrandLogo({ size = 64, color, className, ...rest }: BrandLogoPro
 }
 
 export interface BrandMarkProps extends SVGProps<SVGSVGElement> {
-  /** Rendered box edge in px — the same box `BrandLogo` fills, minus the fill. */
+  /**
+   * Rendered box edge in px — the same box `BrandLogo` fills, minus the fill.
+   * Under `trim`, the drawn mark itself.
+   */
   size?: number
+  /** Crop the box to the mark's own bounds, as Figma's footer vector is. */
+  trim?: boolean
 }
 
 /**
  * The O3 mark **without its plate** — the ring and the superscript alone, in
  * `currentColor`.
  *
- * NO FIGMA COMPONENT DRAWS THIS. `Brand / Logo` is a square in all three of its
- * variants, and every canonical frame instances the square. Two things anchor
- * it instead:
+ * NO COMPONENT SET DRAWS THIS — `Brand / Logo` is a square in all three of its
+ * variants. It was built ahead of any Figma node, on two anchors:
  *
  * - Nick's direction, 2026-08-02: "the color of o3 changes so it's visible,
  *   without the square box".
@@ -107,21 +125,30 @@ export interface BrandMarkProps extends SVGProps<SVGSVGElement> {
  *   band. Intent and sequence from a prototype is the sanctioned use of one
  *   (AGENTS.md); the geometry here is still Figma's, path for path.
  *
- * It keeps the 64 viewBox on purpose. The mark occupies the same region of
+ * The 2026-08 `Footer` (`1280:1885`) then drew it — a plate-less white vector
+ * of these two paths (`1280:1856`) — which settles the direction against a
+ * canonical node rather than an interpretation of one (#87).
+ *
+ * It keeps the 64 viewBox by default. The mark occupies the same region of
  * that box it occupied inside the tile, so swapping `BrandLogo` for `BrandMark`
  * at the same `size` removes the plate and moves nothing else.
+ *
+ * `trim` is for callers whose Figma node is bounded to the mark rather than to
+ * the tile — the footer's vector is 148px of ink flush with the container's
+ * left edge, where the tile's margin would inset it by 25.9% of `size` on two
+ * sides. It crops the viewBox to `MARK_BOUNDS`, making `size` the drawn mark.
  *
  * There is no `color` variant and there should not be: the whole point is that
  * the surrounding surface decides the ink. Give it a text color, or let it
  * inherit one — `SiteNav` inherits, so the mark rides the bar's own ink
  * transition without a second rule.
  */
-export function BrandMark({ size = 64, className, ...rest }: BrandMarkProps) {
+export function BrandMark({ size = 64, trim = false, className, ...rest }: BrandMarkProps) {
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 64 64"
+      viewBox={trim ? MARK_BOUNDS : '0 0 64 64'}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"

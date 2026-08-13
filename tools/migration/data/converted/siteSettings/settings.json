@@ -2,6 +2,26 @@
   "_id": "siteSettings",
   "_type": "siteSettings",
   "title": "O3",
+  "utilityNavItems": [
+    {
+      "_type": "cta",
+      "_key": "utility-0",
+      "label": "O3 World",
+      "href": "/"
+    },
+    {
+      "_type": "cta",
+      "_key": "utility-1",
+      "label": "1682 Conference",
+      "href": "/1682-conference-ai-innovation"
+    },
+    {
+      "_type": "cta",
+      "_key": "utility-2",
+      "label": "O3XO",
+      "href": "https://www.o3xo.ai/"
+    }
+  ],
   "navItems": [
     {
       "_type": "cta",

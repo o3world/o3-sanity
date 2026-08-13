@@ -21,7 +21,10 @@ export const Black: Story = {
   globals: { backgrounds: { value: 'bone' } },
 }
 
-/** The footer mark — 176px, brand red (`1680:2099`). */
+/**
+ * `264:51` — brand red at 176px. It drew the footer until the 2026-08 rework
+ * dropped the plate for the box-less mark below (#87).
+ */
 export const Red: Story = {
   args: { color: 'red', size: 176 },
   globals: { backgrounds: { value: 'ink' } },
@@ -43,6 +46,22 @@ export const Mark: Story = {
       <div className="bg-bone text-fg flex items-center justify-center p-8">
         <BrandMark size={64} />
       </div>
+    </div>
+  ),
+}
+
+/**
+ * `trim` against the default box, at one `size`. The footer's Figma vector
+ * (`1280:1856`) is bounded to the mark itself, so it needs the left one; the
+ * nav's mark keeps the tile's margin, which is the right one.
+ */
+export const Trimmed: Story = {
+  args: { color: 'black', size: 148 },
+  globals: { backgrounds: { value: 'ink' } },
+  render: () => (
+    <div className="flex items-start gap-6 text-white">
+      <BrandMark trim size={148} />
+      <BrandMark size={148} />
     </div>
   ),
 }

@@ -106,6 +106,21 @@
   /* #D3D3D3 — Figma `bg/button/secondary`. The circular carousel controls
    * beside the insights heading. */
   --color-surface-muted: #d3d3d3;
+  /* #000000 — the Utility Nav strip's fill (2250:1445), the brand-property bar
+   * the 2026-08 pass put above the pill. A SIXTH dark, and the only pure black
+   * in the design: the five neutrals stop at --color-ink-deep (#030303). It is
+   * a token rather than a call-site literal because Figma binds it to a
+   * variable (theme.css → what earns a token); the variable's NAME is not
+   * readable with this token's scopes, so the role is named here. */
+  --color-utility: #000000;
+  /* #AAA69E — the strip's link copy. Warm grey, and the one place the design
+   * sets copy on dark as a SOLID rather than white at an alpha: the strip is
+   * opaque black with nothing behind it to composite over, so the on-ink
+   * alphas would resolve to a colder grey than the frame draws. */
+  --color-on-utility: #aaa69e;
+  /* #242322 — the strip's 1px hairline, its --color-on-ink-line. Solid for the
+   * same reason the copy is. */
+  --color-on-utility-line: #242322;
 
   /* ── Borders / placeholders ────────────────────────────────────────────── */
   /* NO CANONICAL ANCHOR — the frames draw separation with the surface wash

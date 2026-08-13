@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { BrandLogo } from '@o3/ui'
+import { BrandMark } from '@o3/ui'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { resolveCtaHref } from '@/content/CtaLink'
@@ -10,12 +10,13 @@ interface SiteFooterProps {
 }
 
 /**
- * The site footer, built to the canonical Home frame's `Footer`
- * (`1680:2096`, mobile `1814:1784`) — #41.
+ * The site footer, built to the `Footer` component (`1280:1885`, mobile
+ * `2225:2671`) — `#000000`, `64px 96px`.
  *
- * **Not** built to the `Footer` component on the Local Components canvas
- * (`1280:1885`): #38 found it stale — `#141414` with `64px 96px 16px` padding,
- * against the frame's `#030303` and `96px 96px 16px`. The frame wins.
+ * The component is the source of record as of the 2026-08-13 sync (#87): the
+ * 2026-08 pass reworked it and made Home's footer an override-free instance,
+ * and the frame footer this was first built from (`1680:2096`) no longer
+ * exists in the file.
  *
  * Every string still comes from Site Settings (#19); the component decides only
  * the year and the arrangement.
@@ -35,15 +36,16 @@ export function SiteFooter({ settings }: SiteFooterProps) {
   const [leadGroup, ...restGroups] = groups
 
   return (
-    <footer
-      id="footer"
-      className="bg-ink-deep px-gutter pt-band-sm relative overflow-hidden pb-4 text-white"
-    >
+    <footer id="footer" className="px-gutter relative overflow-hidden bg-black py-16 text-white">
       {/*
-       * The orbital arc (`1680:2097`): a 1275×1277 two-ring vector stroked at
-       * 2px in `rgba(255,255,255,0.2)`, bleeding off the left edge. Decorative
-       * and drawn exactly once, so it is inline SVG at the call site rather
-       * than a component.
+       * The orbital arc: a 1275×1277 two-ring vector stroked at 2px in
+       * `rgba(255,255,255,0.2)`, bleeding off the left edge. Decorative and
+       * drawn exactly once, so it is inline SVG at the call site rather than a
+       * component.
+       *
+       * Carried from the dead frame footer (`1680:2097`). The component draws
+       * the ring as a FILLED `#0A0A0B` donut instead (`1320:117`) — a delta
+       * #87 left alone, being neither of the two it was scoped to.
        */}
       <svg
         viewBox="0 0 1276 1277"
@@ -61,7 +63,11 @@ export function SiteFooter({ settings }: SiteFooterProps) {
       <div className="max-w-section relative mx-auto flex w-full flex-col gap-12 lg:gap-32">
         {/* "Left" — logo beside the tagline block at 1440, stacked at 402. */}
         <div className="flex flex-col gap-9 lg:flex-row lg:justify-between">
-          <BrandLogo color="red" size={176} />
+          {/* `1280:1856` — the mark alone in white, tight-bounded at 148px and
+              128 at 402 (`2225:2613`); the red tile went with the rework. No
+              color class: it takes the footer's own white through
+              `currentColor`, the way the nav's takes the bar's ink. */}
+          <BrandMark trim size={128} className="lg:size-[148px]" />
 
           <div className="flex flex-col gap-24 lg:w-[600px] lg:gap-9">
             {settings?.footerTagline ? (
@@ -126,7 +132,16 @@ export function SiteFooter({ settings }: SiteFooterProps) {
             <p>
               © {year} {legalName}. All rights reserved.
             </p>
-            {settings?.copyrightNote ? <p>{settings.copyrightNote}</p> : null}
+            {/* The `Go birds.` easter egg (`1275:1631`), which reaches the page
+                as Site Settings' copyrightNote rather than as chrome. Its
+                `State=Hover` is the whole component: the line turns Eagles
+                green. The set's eagle illustration is a 40×12 art vector that
+                draws nothing in the footer instance, so it is not exported. */}
+            {settings?.copyrightNote ? (
+              <p className="duration-(--duration-hover) transition-colors ease-out hover:text-[#339c5e]">
+                {settings.copyrightNote}
+              </p>
+            ) : null}
           </div>
         </div>
       </div>

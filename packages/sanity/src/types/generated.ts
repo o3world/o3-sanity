@@ -49,6 +49,11 @@ export type SiteSettings = {
   _updatedAt: string
   _rev: string
   title?: string
+  utilityNavItems?: Array<
+    {
+      _key: string
+    } & Cta
+  >
   navItems?: Array<
     {
       _key: string
@@ -849,9 +854,33 @@ export type AllSanitySchemaTypes =
 
 // Source: src/queries.ts
 // Variable: SITE_SETTINGS_QUERY
-// Query: *[_type == "siteSettings"][0]{  title,  navItems[]{..., "target": target->{_type, title, "slug": slug.current}},  primaryCta{..., "target": target->{_type, title, "slug": slug.current}},  footerTagline,  footerGroups[]{..., links[]{..., "target": target->{_type, title, "slug": slug.current}}},  socialsLabel,  socialLinks,  legalLinks[]{..., "target": target->{_type, title, "slug": slug.current}},  legalName,  copyrightNote,  defaultSeo}
+// Query: *[_type == "siteSettings"][0]{  title,  utilityNavItems[]{..., "target": target->{_type, title, "slug": slug.current}},  navItems[]{..., "target": target->{_type, title, "slug": slug.current}},  primaryCta{..., "target": target->{_type, title, "slug": slug.current}},  footerTagline,  footerGroups[]{..., links[]{..., "target": target->{_type, title, "slug": slug.current}}},  socialsLabel,  socialLinks,  legalLinks[]{..., "target": target->{_type, title, "slug": slug.current}},  legalName,  copyrightNote,  defaultSeo}
 export type SITE_SETTINGS_QUERY_RESULT = {
   title: string | null
+  utilityNavItems: Array<{
+    _key: string
+    _type: 'cta'
+    label?: string
+    target:
+      | {
+          _type: 'caseStudy'
+          title: string | null
+          slug: string | null
+        }
+      | {
+          _type: 'insight'
+          title: string | null
+          slug: string | null
+        }
+      | {
+          _type: 'page'
+          title: string | null
+          slug: string | null
+        }
+      | null
+    href?: string
+    variant?: 'dark' | 'ghost' | 'light'
+  }> | null
   navItems: Array<{
     _key: string
     _type: 'cta'
@@ -2307,7 +2336,7 @@ export type SITEMAP_QUERY_RESULT = {
 import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
-    '*[_type == "siteSettings"][0]{\n  title,\n  navItems[]{..., "target": target->{_type, title, "slug": slug.current}},\n  primaryCta{..., "target": target->{_type, title, "slug": slug.current}},\n  footerTagline,\n  footerGroups[]{..., links[]{..., "target": target->{_type, title, "slug": slug.current}}},\n  socialsLabel,\n  socialLinks,\n  legalLinks[]{..., "target": target->{_type, title, "slug": slug.current}},\n  legalName,\n  copyrightNote,\n  defaultSeo\n}': SITE_SETTINGS_QUERY_RESULT
+    '*[_type == "siteSettings"][0]{\n  title,\n  utilityNavItems[]{..., "target": target->{_type, title, "slug": slug.current}},\n  navItems[]{..., "target": target->{_type, title, "slug": slug.current}},\n  primaryCta{..., "target": target->{_type, title, "slug": slug.current}},\n  footerTagline,\n  footerGroups[]{..., links[]{..., "target": target->{_type, title, "slug": slug.current}}},\n  socialsLabel,\n  socialLinks,\n  legalLinks[]{..., "target": target->{_type, title, "slug": slug.current}},\n  legalName,\n  copyrightNote,\n  defaultSeo\n}': SITE_SETTINGS_QUERY_RESULT
     '*[_type == "insight" && slug.current == $slug][0]{\n  \n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  \n  "author": author->{name, title, headshot},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n,\n  body,\n  seo,\n  "related": *[_type == "insight" && _id != ^._id && count((categories[]._ref)[@ in ^.^.categories[]._ref]) > 0] | order(publishedAt desc)[0...8]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  \n  "author": author->{name, title, headshot},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n},\n  "latest": *[_type == "insight" && _id != ^._id] | order(publishedAt desc)[0...8]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  \n  "author": author->{name, title, headshot},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n}\n}': INSIGHT_QUERY_RESULT
     '*[_type == "insight" && defined(slug.current)].slug.current': INSIGHT_SLUGS_QUERY_RESULT
     '{\n  "items": *[_type == "insight"] | order(publishedAt desc) [$offset...$end]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  \n  "author": author->{name, title, headshot},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n},\n  "total": count(*[_type == "insight"])\n}': INSIGHTS_PAGE_QUERY_RESULT

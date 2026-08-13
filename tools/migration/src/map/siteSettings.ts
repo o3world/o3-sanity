@@ -25,12 +25,13 @@ import { failed, ok, type ExtractMeta, type Mapped } from './types'
  *    after, so these links do not have to be revisited when the documents
  *    land. Swapping an href for a reference later is per-item and optional.
  * 2. **Figma owns the chrome; WordPress owns the facts** (ADR 0007, map #33).
- *    The `NavBar` (`1710:2271`) and `Footer` (`1680:2096`) components decide
- *    which links exist, in what order, and what they are called — so `FIGMA_NAV`
- *    and `FIGMA_COMPANY_COLUMN` below are declared lists, not the WordPress
- *    menus filtered. WordPress keeps everything that asserts something true
- *    about the business: the social profile URLs, the legal pages and their
- *    paths, the registered entity, and the Yoast SEO defaults.
+ *    The `NavBar` (`2225:2920`, rebuilt 2026-08 from `1710:2271`), the
+ *    `Utility Nav` (`2250:1445`) and the `Footer` (`1680:2096`) decide which
+ *    links exist, in what order, and what they are called — so `FIGMA_NAV`,
+ *    `FIGMA_UTILITY_NAV` and `FIGMA_COMPANY_COLUMN` below are declared lists,
+ *    not the WordPress menus filtered. WordPress keeps everything that asserts
+ *    something true about the business: the social profile URLs, the legal
+ *    pages and their paths, the registered entity, and the Yoast SEO defaults.
  *
  * Three consequences of the realignment (#41) worth naming here:
  *
@@ -47,6 +48,15 @@ import { failed, ok, type ExtractMeta, type Mapped } from './types'
  */
 
 /**
+ * The two O3 properties that are not this site. Both are WordPress facts — the
+ * campaign page it serves and the venture URL its secondary menu links — and
+ * both are read twice over: by the footer's "Everything else" column and by the
+ * utility strip. One constant each, so the two surfaces cannot drift apart.
+ */
+const CONFERENCE_PATH = '/1682-conference-ai-innovation'
+const O3XO_URL = 'https://www.o3xo.ai/'
+
+/**
  * Redesign renames, keyed by **the path WordPress points at**.
  *
  * WordPress's own menu title for the collection is "Perspectives" — the word
@@ -60,7 +70,7 @@ import { failed, ok, type ExtractMeta, type Mapped } from './types'
  */
 const DISPLAY_LABELS: Readonly<Record<string, string>> = {
   '/perspectives': 'Insights',
-  'https://www.o3xo.ai/': 'O3XO',
+  [O3XO_URL]: 'O3XO',
 }
 
 interface ChromeLink {
@@ -78,6 +88,29 @@ const FIGMA_NAV: readonly ChromeLink[] = [
   { href: '/insights', label: 'Insights' },
   { href: '/solutions', label: 'Solutions' },
   { href: '/about', label: 'About' },
+]
+
+/**
+ * The Utility Nav (`2250:1445`) — the brand-property strip the 2026-08 pass put
+ * above the pill, reading O3 World · 1682 Conference · O3XO.
+ *
+ * **Figma authors the labels; WordPress owns the destinations.** The text nodes
+ * carry no hyperlink metadata, so the hrefs are the ones the site already
+ * publishes for the same two properties: the campaign page and the venture URL
+ * out of the secondary menu, which `EXTRAS_PATHS` puts in the footer's
+ * "Everything else" column from the same two constants. Nothing here is
+ * invented — the only new string is the wording, and that is Figma's to set.
+ *
+ * "O3 World" is this site, so it points at `/`. The frame gives all three links
+ * the same fill (`#AAA69E`, State=Default), so the property you are ON gets no
+ * highlight; the strip is a switcher, not a breadcrumb.
+ */
+const FIGMA_UTILITY_NAV: readonly ChromeLink[] = [
+  { href: '/', label: 'O3 World' },
+  // Figma capitalises the C; WordPress's menu title is "1682 conference", and
+  // the footer keeps that. Chrome wording is Figma's (ADR 0007), per surface.
+  { href: CONFERENCE_PATH, label: '1682 Conference' },
+  { href: O3XO_URL, label: 'O3XO' },
 ]
 
 /**
@@ -101,13 +134,25 @@ const FIGMA_COMPANY_COLUMN: readonly ChromeLink[] = [
  *
  * Order here is the rendered order.
  */
-const EXTRAS_PATHS = ['/1682-conference-ai-innovation', 'https://www.o3xo.ai/']
+const EXTRAS_PATHS = [CONFERENCE_PATH, O3XO_URL]
 const LEGAL_PATHS = ['/privacy-policy', '/accessibility-statement']
 
 export const siteSettingsDoc = z.object({
   _id: z.literal('siteSettings'),
   _type: z.literal('siteSettings'),
   title: z.string().min(1),
+  // `href` is required here where `navItems` leaves it open: a brand-property
+  // link with no destination is the whole content of the strip missing.
+  utilityNavItems: z
+    .array(
+      z.object({
+        _type: z.literal('cta'),
+        _key: z.string(),
+        label: z.string().min(1),
+        href: z.string().min(1),
+      }),
+    )
+    .min(1),
   navItems: z.array(z.object({ _type: z.literal('cta'), _key: z.string(), label: z.string() })),
   primaryCta: z.object({ _type: z.literal('cta'), label: z.string() }).loose(),
   footerTagline: z.string().min(1),
@@ -289,6 +334,7 @@ export function mapSiteSettings(
     _id: 'siteSettings' as const,
     _type: 'siteSettings' as const,
     title: site.siteName,
+    utilityNavItems: FIGMA_UTILITY_NAV.map((item, i) => cta(item, `utility-${i}`)),
     navItems: navItems.map((item, i) => cta(item, `nav-${i}`)),
     primaryCta: {
       _type: 'cta' as const,

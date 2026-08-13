@@ -13,7 +13,11 @@ interface SiteNavProps {
 }
 
 /**
- * The site nav, built to Figma's `NavBar` component (`1710:2271`) — #41.
+ * The site nav, built to Figma's `NavBar` component — #41. The 2026-08 pass
+ * rebuilt that component as `2225:2920` and emptied the node the measurements
+ * below were read from (`1710:2271`); the labels and the composition are
+ * unchanged, so the node ids in this file are kept as the provenance of each
+ * value rather than rewritten to a frame they were not read from.
  *
  * The two widths are **structurally** different, which makes this a
  * composition switch at `lg` rather than a resize (ADR 0006):
@@ -33,12 +37,20 @@ interface SiteNavProps {
  * earlier note here said the blur was dropped, and it was, until the carry was
  * asked for outright.
  *
- * Figma places the desktop bar at `y: 30` over a hero with 164px of top
- * padding — over the page, not in flow. c1ee258 read that as `lg:absolute` and
- * let the desktop bar scroll away. It is `fixed` at every width again, because
- * the ink flip below is a **pinned** bar's behaviour: a bar that leaves never
- * crosses a light band and has nothing to flip against. Every Figma-derived
- * offset is untouched — `top-[30px]`, the gutter padding, the pill cap.
+ * Figma places the desktop bar over a hero with 164px of top padding — over the
+ * page, not in flow. c1ee258 read that as `lg:absolute` and let the desktop bar
+ * scroll away. It is `fixed` at every width again, because the ink flip below
+ * is a **pinned** bar's behaviour: a bar that leaves never crosses a light band
+ * and has nothing to flip against.
+ *
+ * **The offset is 64px, not the 30px this shipped with** (#88). The 2026-08
+ * pass put the `Utility Nav` strip (`2250:1445`) above the pill, and the Home
+ * frame draws the rebuilt `NavBar` (`2225:2967`, `ABSOLUTE` + `FIXED`) at
+ * `y: 64` — the strip's 50px plus a 14px gap. `UtilityNav` renders that strip
+ * in flow at the top of the document, so at rest the two sit exactly as the
+ * frame draws them; the strip then scrolls away and the pill holds 64px, which
+ * is what `FIXED` on that node means. Below `lg` there is no strip and the bar
+ * still starts at `top-0`.
  *
  * **The cap is 1130px, measured off `.figma/frames/hero-image.png`.** That
  * frame is the hero at 1440 × 892, exported at 1.7014× (2450 / 1440 = 1.7014,
@@ -114,7 +126,7 @@ export function SiteNav({ settings }: SiteNavProps) {
   return (
     <header
       id={NAV_INK_TARGET}
-      className="lg:px-gutter group fixed inset-x-0 top-0 z-50 lg:top-[30px]"
+      className="lg:px-gutter group fixed inset-x-0 top-0 z-50 lg:top-[64px]"
     >
       <NavInk />
       <nav

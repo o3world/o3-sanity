@@ -14,7 +14,8 @@ Terms resolved so far. Use these exact words in schema names, code, issues, and 
 - **Client** — name + logo. Single source for the homepage logo wall and `caseStudy.client`.
 - **Category** — editorial taxonomy for insights (11 migrate; cleanup is post-migration editorial work). WordPress tags do **not** migrate.
 - **Industry** — minimal taxonomy (name + slug) referenced by case studies for the "Healthcare · Pediatric Systems" eyebrow; the second half is the case study's `industryDetail` string. Deliberately not invested in beyond that.
-- **Site Settings** — singleton: nav, footer, social, default SEO, display labels.
+- **Site Settings** — singleton: nav, **utility nav**, footer, social, default SEO, display labels.
+- **Utility nav** — the brand-property strip above the nav pill: O3 World · 1682 Conference · O3XO. It names the properties O3 runs, not the pages this site has, which is why it is its own field (`siteSettings.utilityNavItems`) and its own component rather than a sixth nav item. Desktop only, and in flow — it scrolls away where the nav pill stays pinned.
 - **Guidance** — a document that tells an _agent_ how to write, not a reader what to read — the voice guide, the brand foundation behind it, and the slop patterns its revision pass delegates to, stored so an MCP consumer (the Claude Desktop authoring skill, #68) can fetch them at session start. **The repo is source of truth** — each one is synced from markdown under `.claude/skills/` by `pnpm guidance:sync`, every field is `readOnly` in Studio, and `pnpm guidance:check` fails on drift. Deliberately outside the editorial model: not routable, no `slug`, no `seo`, no `migration` object, and ids (`guidance-o3-voice`) that miss the pipeline's ownership contract so `load` never retires them. Body is **raw markdown in a text field**, not Portable Text — agents consume it verbatim.
 
 Testimonials/quotes are **inline** in the quote section block — no document type until a quote is actually reused.
@@ -59,26 +60,27 @@ The enforcement point is `registry.ts`, not the suffix: both factories reject a 
 
 Closed vocabulary. If the field you want isn't here and isn't obviously domain-specific (`industryDetail`, `narrativeHeadline`, `railLabel`), you're probably reaching for a synonym of something that is.
 
-| Field          | Meaning                                                          | Don't use for it                                     |
-| -------------- | ---------------------------------------------------------------- | ---------------------------------------------------- |
-| `title`        | A document's own name; the `slug` source                         | Never on a block — blocks use `heading`              |
-| `slug`         | URL segment(s); required on every routable type                  | —                                                    |
-| `eyebrow`      | Small label above a heading                                      | `kicker` (reserved: `chapter.kicker`), `label`       |
-| `heading`      | A block's primary display text                                   | `title`, `headline`                                  |
-| `subheading`   | The secondary line under a `heading`                             | `subtitle`, `deck`                                   |
-| `body`         | Long-form prose (`text` or `bodyText`)                           | `content`, `description`, `copy`                     |
-| `excerpt`      | Short summary shown on cards and listings                        | `summary`, `intro`, `teaser`                         |
-| `label`        | Short UI string on a leaf object                                 | `name`, `text`                                       |
-| `note`         | Quieter secondary line (the "Best when…" line)                   | `caption` (reserved: `figure.caption`)               |
-| `media`        | A `figure` on a block                                            | `image` — that's the raw asset field inside `figure` |
-| `heroMedia`    | A document's lead `figure`                                       | `featuredImage`, `banner`                            |
-| `cta`          | A single call to action (type `cta`)                             | `link`, `button`, `action`                           |
-| `date`         | When a leaf object's thing happens (the Live MON / DD marker)    | `publishedAt` — that's a document's publication time |
-| `name`         | A person's or organization's real-world name                     | Anything that isn't a proper noun                    |
-| `surface`      | `white \| bone \| ink` — injected by `defineSectionBlock`        | Never hand-author it                                 |
-| `reasons`      | The form's "Reason" options, in shown order (`formSection`)      | `options`, `choices`                                 |
-| `consentLabel` | The opt-in checkbox's words; empty = no checkbox (`formSection`) | `consent`, `optIn`                                   |
-| `submitLabel`  | The submit button's words (`formSection`)                        | `buttonText`, `cta` — there's no link here           |
+| Field             | Meaning                                                          | Don't use for it                                     |
+| ----------------- | ---------------------------------------------------------------- | ---------------------------------------------------- |
+| `title`           | A document's own name; the `slug` source                         | Never on a block — blocks use `heading`              |
+| `slug`            | URL segment(s); required on every routable type                  | —                                                    |
+| `eyebrow`         | Small label above a heading                                      | `kicker` (reserved: `chapter.kicker`), `label`       |
+| `heading`         | A block's primary display text                                   | `title`, `headline`                                  |
+| `subheading`      | The secondary line under a `heading`                             | `subtitle`, `deck`                                   |
+| `body`            | Long-form prose (`text` or `bodyText`)                           | `content`, `description`, `copy`                     |
+| `excerpt`         | Short summary shown on cards and listings                        | `summary`, `intro`, `teaser`                         |
+| `label`           | Short UI string on a leaf object                                 | `name`, `text`                                       |
+| `note`            | Quieter secondary line (the "Best when…" line)                   | `caption` (reserved: `figure.caption`)               |
+| `media`           | A `figure` on a block                                            | `image` — that's the raw asset field inside `figure` |
+| `heroMedia`       | A document's lead `figure`                                       | `featuredImage`, `banner`                            |
+| `cta`             | A single call to action (type `cta`)                             | `link`, `button`, `action`                           |
+| `date`            | When a leaf object's thing happens (the Live MON / DD marker)    | `publishedAt` — that's a document's publication time |
+| `name`            | A person's or organization's real-world name                     | Anything that isn't a proper noun                    |
+| `surface`         | `white \| bone \| ink` — injected by `defineSectionBlock`        | Never hand-author it                                 |
+| `reasons`         | The form's "Reason" options, in shown order (`formSection`)      | `options`, `choices`                                 |
+| `consentLabel`    | The opt-in checkbox's words; empty = no checkbox (`formSection`) | `consent`, `optIn`                                   |
+| `submitLabel`     | The submit button's words (`formSection`)                        | `buttonText`, `cta` — there's no link here           |
+| `utilityNavItems` | The brand-property strip's links (`siteSettings`)                | `properties`, `brandLinks`, a second `footerGroup`   |
 
 The lexicon governs **editorial** fields — the ones an author fills in. Machine-written fields are outside it, and are `readOnly` in Studio: the hidden `migration` provenance object (`sourceId`, `extractedAt`, `locked`, `figmaNode`, `provisional`, `provisionalNote`) names pipeline state, and `guidance.key` / `guidance.sourcePath` name where a synced document came from and what queries it. Both are provenance, not content.
 

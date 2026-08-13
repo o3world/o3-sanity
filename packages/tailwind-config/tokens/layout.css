@@ -16,7 +16,7 @@
  *   Platforms          128px 96px 192px  gap 128   (1762:2149)
  *   Insights       96px 0            gap 48    (1683:2467)
  *   Work hero          164px 96px 64px   —         (1634:1181)
- *   Footer             96px 96px 16px    gap 128   (1680:2096)
+ *   Footer             64px 96px         gap 128   (1280:1885)
  *
  * So this file ships the STEPS as tokens and keeps `--spacing-section-y` as a
  * sane default for a band that has no frame of its own. Teaching SectionShell

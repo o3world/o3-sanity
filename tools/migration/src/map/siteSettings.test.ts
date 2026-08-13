@@ -147,6 +147,29 @@ describe('mapSiteSettings', () => {
     expect(doc.navItems.find((i) => i.label === 'Live')).toMatchObject({ href: '/live' })
   })
 
+  it('builds the utility strip Figma’s brand-property bar reads (#88)', () => {
+    const doc = expectOk(mapSiteSettings(chrome(), SITE))
+    expect(doc.utilityNavItems.map((i) => i.label)).toEqual(['O3 World', '1682 Conference', 'O3XO'])
+    // Figma authors the wording; the destinations are the ones WordPress
+    // already publishes for the same two properties — the pair the footer's
+    // "Everything else" column carries. `/` is this site.
+    expect(doc.utilityNavItems.map((i) => i.href)).toEqual([
+      '/',
+      '/1682-conference-ai-innovation',
+      'https://www.o3xo.ai/',
+    ])
+  })
+
+  it('lets the strip and the footer disagree about the conference’s capital C', () => {
+    // Two surfaces, two read values: the Utility Nav says "1682 Conference"
+    // (2250:1445), the footer column keeps WordPress's "1682 conference"
+    // (1680:2114). Collapsing them would be an editorial decision, not a
+    // conversion one — the same call the Insights/Blog split already made.
+    const doc = expectOk(mapSiteSettings(chrome(), SITE))
+    expect(doc.utilityNavItems.map((i) => i.label)).toContain('1682 Conference')
+    expect(doc.footerGroups[1]?.links.map((l) => l.label)).toContain('1682 conference')
+  })
+
   it('moves Contact out of the nav and into the primary CTA', () => {
     const doc = expectOk(mapSiteSettings(chrome(), SITE))
     expect(doc.navItems.map((i) => i.label)).not.toContain('Contact')

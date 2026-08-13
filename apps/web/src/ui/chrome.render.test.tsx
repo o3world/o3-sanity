@@ -9,6 +9,7 @@ import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { SiteFooter } from './SiteFooter'
 import { SiteNav } from './SiteNav'
+import { UtilityNav } from './UtilityNav'
 
 /**
  * The site chrome (#19), rendered from the **committed** Site Settings
@@ -28,16 +29,20 @@ const settings = JSON.parse(
 ) as NonNullable<SITE_SETTINGS_QUERY_RESULT>
 
 const navHtml = renderToStaticMarkup(<SiteNav settings={settings} />)
+const utilityHtml = renderToStaticMarkup(<UtilityNav settings={settings} />)
 const footerHtml = renderToStaticMarkup(<SiteFooter settings={settings} />)
 
 /**
- * The O3 mark in each piece of chrome, matched on its 64 viewBox — which both
- * `BrandLogo` and `BrandMark` keep, and nothing else in the chrome uses.
- * Matching the whole element is what lets a test say "no plate in here"
- * without the hamburger's `<rect>` bars answering for it.
+ * The O3 mark in each piece of chrome, matched on its viewBox — the tile's 64
+ * box in the nav, and `BrandMark`'s trimmed box in the footer, whose Figma
+ * vector is bounded to the mark itself (`1280:1856`). Nothing else in the
+ * chrome draws either. Matching the whole element is what lets a test say "no
+ * plate in here" without the hamburger's `<rect>` bars answering for it.
  */
 const markIn = (html: string) =>
-  html.match(/<svg[^>]*viewBox="0 0 64 64"[\s\S]*?<\/svg>/)?.[0] ?? ''
+  html.match(
+    /<svg[^>]*viewBox="(?:0 0 64 64|16\.6016 16\.5947 38\.8394 38\.7806)"[\s\S]*?<\/svg>/,
+  )?.[0] ?? ''
 const navMark = markIn(navHtml)
 const footerMark = markIn(footerHtml)
 
@@ -134,14 +139,14 @@ describe('the nav bar’s pinned, dark-ink default', () => {
 
   it('draws the mark without its plate, so there is nothing to invert', () => {
     // Nick's direction, 2026-08-02: the O3 changes colour to stay visible,
-    // "without the square box". `BrandLogo`'s filled square IS the plate — the
-    // nav uses `BrandMark` instead, and the tile stays a tile in the footer.
+    // "without the square box". `BrandLogo`'s filled square IS the plate, so
+    // the nav uses `BrandMark`.
     //
-    // Scoped to the 64 box: the hamburger draws its two bars as `<rect>` too,
-    // so a document-wide probe for one would pass on the wrong element.
+    // Scoped to the mark's own svg: the hamburger draws its two bars as
+    // `<rect>` too, so a document-wide probe for one would pass on the wrong
+    // element.
     expect(navMark, 'the nav mark was not found at all').not.toBe('')
     expect(navMark).not.toContain('<rect')
-    expect(footerMark).toContain('<rect width="64" height="64" fill="currentColor"')
   })
 
   it('lets the mark take the bar’s ink rather than carrying its own', () => {
@@ -158,6 +163,74 @@ describe('the nav bar’s pinned, dark-ink default', () => {
     const links = navHtml.match(/<a [^>]*class="[^"]*text-button[^"]*"/g) ?? []
     expect(links.length, 'the nav links were not found at all').toBeGreaterThan(0)
     for (const link of links) expect(link).not.toContain('text-white')
+  })
+})
+
+/**
+ * The brand-property strip (#88). It is the only piece of chrome that is NOT
+ * pinned — the Home frame draws it in flow, above everything, with the pill
+ * fixed 14px under it — so the assertions worth having are the ones that break
+ * if someone folds it into the nav's fixed header or gives one property a state
+ * the frame does not draw.
+ */
+describe('utility nav', () => {
+  it('renders the three brand properties, in the frame’s order', () => {
+    expect(settings.utilityNavItems?.map((i) => i.label)).toEqual([
+      'O3 World',
+      '1682 Conference',
+      'O3XO',
+    ])
+    for (const item of settings.utilityNavItems ?? []) {
+      expect(utilityHtml, `strip is missing "${item.label}"`).toContain(item.label as string)
+    }
+  })
+
+  it('points each property at the destination the site already publishes', () => {
+    // Nothing invented: `/` is this site, and the other two are the URLs the
+    // footer's "Everything else" column has carried since #19.
+    expect(utilityHtml).toContain('href="/"')
+    expect(utilityHtml).toContain('href="/1682-conference-ai-innovation"')
+    expect(utilityHtml).toContain('href="https://www.o3xo.ai/"')
+  })
+
+  it('scrolls with the page instead of pinning like the pill', () => {
+    // `2250:1453` is an in-flow child of the Home frame (`scrollBehavior:
+    // SCROLLS`) where `NavBar` is `ABSOLUTE` + `FIXED`. A `fixed` here would
+    // also cover the top 50px of every hero for the length of the page.
+    expect(utilityHtml).not.toContain('fixed')
+  })
+
+  it('is desktop-only, because mobile Home has no strip above the bar', () => {
+    // `1814:1618` opens on the nav bar at y:0. Hidden rather than restyled —
+    // and hidden costs no height, so the 402 chrome is untouched.
+    expect(utilityHtml).toContain('hidden')
+    expect(utilityHtml).toContain('lg:flex')
+  })
+
+  it('highlights no property, because the frame highlights none', () => {
+    // All three links are State=Default at the same fill, so the strip is a
+    // switcher, not a breadcrumb. `aria-current` would be a claim the design
+    // does not make, and a second colour class would be one you could see.
+    expect(utilityHtml).not.toContain('aria-current')
+    const links = utilityHtml.match(/<a [^>]*class="[^"]*"/g) ?? []
+    expect(links.length).toBe(3)
+    const classes = new Set(links.map((link) => link.match(/class="([^"]*)"/)?.[1]))
+    expect(classes.size, 'one property is styled differently from the others').toBe(1)
+  })
+
+  it('takes the strip’s own tokens, not the pill’s scrim', () => {
+    // The bar is opaque black with a solid hairline; the pill is two alphas
+    // that flip. Reaching for `bg-scrim` here would make it flip with them.
+    expect(utilityHtml).toContain('bg-utility')
+    expect(utilityHtml).toContain('text-on-utility')
+    expect(utilityHtml).toContain('border-on-utility-line')
+    expect(utilityHtml).not.toContain('bg-scrim')
+    expect(utilityHtml).not.toContain('group-data-[ink=dark]')
+  })
+
+  it('hovers to brand red — a read state, not a house habit', () => {
+    // `2225:2893`, and the design's one canonical red-on-dark anchor.
+    expect(utilityHtml).toContain('hover:text-brand')
   })
 })
 
@@ -186,13 +259,25 @@ describe('site footer', () => {
     }
   })
 
-  it('keeps the red tile, which the nav’s box-less mark never touched', () => {
-    // `1680:2099`. The two components share their geometry, so the assertion
-    // worth having is that the footer still gets the PLATE and the brand fill —
-    // the two parts the nav gave up — with its counterforms knocked out white.
+  it('draws the logo as the plate-less mark, taking the band’s white (#87)', () => {
+    // `1280:1856` — the 2026-08 component drops the red tile for a white vector
+    // of the mark alone. So: no plate, no brand fill, and no colour class,
+    // because the mark inherits the footer's `text-white` the way the nav's
+    // inherits the bar's ink.
     expect(footerMark, 'the footer mark was not found at all').not.toBe('')
-    expect(footerMark).toContain('text-brand')
-    expect(footerMark).toContain('fill="white"')
+    expect(footerMark).not.toContain('<rect')
+    expect(footerMark).not.toContain('text-brand')
+    expect(footerMark).toContain('fill="currentColor"')
+  })
+
+  it('sits on the component’s black band, padded 64px 96px (#87)', () => {
+    // `1280:1885` is `#000000`, not `--color-ink-deep`'s `#030303`, and 64px
+    // top AND bottom where the frame footer this was first built from had
+    // `96px 96px 16px`.
+    expect(footerHtml).toContain('bg-black')
+    expect(footerHtml).toContain('px-gutter')
+    expect(footerHtml).toContain('py-16')
+    expect(footerHtml).not.toContain('bg-ink-deep')
   })
 
   it('opens external social profiles safely', () => {
@@ -206,6 +291,9 @@ describe('site footer', () => {
     expect(footerHtml).toContain(settings.legalName as string)
     expect(footerHtml).toContain(settings.copyrightNote as string)
     expect(footerHtml).toContain(String(new Date().getFullYear()))
+    // The copyright note IS the `Go birds.` easter egg (`1275:1631`), whose
+    // only state is `State=Hover` — Eagles green, `#339C5E`.
+    expect(footerHtml).toContain('hover:text-[#339c5e]')
   })
 })
 
@@ -232,6 +320,7 @@ describe('every chrome destination is a route the build-out lands (#48)', () => 
   }
 
   const chromeHrefs = [
+    ...(settings.utilityNavItems ?? []),
     ...(settings.navItems ?? []),
     settings.primaryCta,
     ...(settings.footerGroups ?? []).flatMap((g) => g.links ?? []),

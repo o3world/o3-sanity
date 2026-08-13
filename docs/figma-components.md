@@ -42,21 +42,25 @@ generations, so **a low node id does not mean archived**: `Button / Solid` is
 Verified by direct reads of the canonical frames, or recorded in
 `packages/ui/src/foundations/figma-home-spec.ts`.
 
-| Figma set                       | Node        | Variant axes                                   | Code target                           | Status                                                                                            |
-| ------------------------------- | ----------- | ---------------------------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `Button / Solid`                | `136:754`   | Size = Base \| Large; State = Default \| Hover | `Button` (`ui/button.tsx`)            | ⚠️ **Divergent** — see below                                                                      |
-| `Button / Ghost`                | `264:260`   | Size = Base; State = Default                   | `Button variant="ghost"`              | Exists; needs Figma's fill/label                                                                  |
-| `Brand / Logo`                  | `264:50`    | Color = Black \| Red \| White                  | `BrandLogo` (`brand-logo.tsx`)        | ✅ #41 — `White` unbuilt, below                                                                   |
-| `Icon / Surface`                | `778:1862`  | Size = Base; State = Hover                     | `CarouselControl` — **to build**      | The insights prev/next (#42)                                                                      |
-| `Icon / Soft`                   | `1203:1227` | Size = Base; State = Default                   | Inner chip of `Icon / Surface`        | Not standalone — a part                                                                           |
-| `.building block Icon_text`     | `136:14`    | prop: `Icon name` (Material Symbols)           | **No component** — ADR 0009           | `<ArrowIcon />`, `<CloseIcon />`                                                                  |
-| `NavBar` (component, not a set) | `2225:2920` | —                                              | `SiteNav` (`web/src/ui`)              | ✅ #41 — rebuilt 2026-08; the old `1710:2271` was emptied to a bare pill. Labels unchanged        |
-| `Utility Nav` (component)       | `2250:1445` | —                                              | **To build** — with the NavBar rework | New 2026-08: O3 World · 1682 Conference · O3XO                                                    |
-| `Footer` (component, not a set) | `1280:1885` | —                                              | `SiteFooter` (`web/src/ui`)           | ⚠️ **Became canonical 2026-08** — Home's footer is now an override-free instance of it; see below |
+| Figma set                       | Node        | Variant axes                                   | Code target                      | Status                                                                                            |
+| ------------------------------- | ----------- | ---------------------------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `Button / Solid`                | `136:754`   | Size = Base \| Large; State = Default \| Hover | `Button` (`ui/button.tsx`)       | ⚠️ **Divergent** — see below                                                                      |
+| `Button / Ghost`                | `264:260`   | Size = Base; State = Default                   | `Button variant="ghost"`         | Exists; needs Figma's fill/label                                                                  |
+| `Brand / Logo`                  | `264:50`    | Color = Black \| Red \| White                  | `BrandLogo` (`brand-logo.tsx`)   | ✅ #41 — `White` unbuilt, below                                                                   |
+| `Icon / Surface`                | `778:1862`  | Size = Base; State = Hover                     | `CarouselControl` — **to build** | The insights prev/next (#42)                                                                      |
+| `Icon / Soft`                   | `1203:1227` | Size = Base; State = Default                   | Inner chip of `Icon / Surface`   | Not standalone — a part                                                                           |
+| `.building block Icon_text`     | `136:14`    | prop: `Icon name` (Material Symbols)           | **No component** — ADR 0009      | `<ArrowIcon />`, `<CloseIcon />`                                                                  |
+| `NavBar` (component, not a set) | `2225:2920` | —                                              | `SiteNav` (`web/src/ui`)         | ✅ #41 — rebuilt 2026-08; the old `1710:2271` was emptied to a bare pill. Labels unchanged        |
+| `Utility Nav` (component)       | `2250:1445` | —                                              | `UtilityNav` (`web/src/ui`)      | ✅ #88 — new 2026-08: O3 World · 1682 Conference · O3XO, in flow above the pill, desktop only     |
+| `Footer` (component, not a set) | `1280:1885` | —                                              | `SiteFooter` (`web/src/ui`)      | ⚠️ **Became canonical 2026-08** — Home's footer is now an override-free instance of it; see below |
 
 `BrandLogo` ships `Color=Black` and `Color=Red` only. No canonical Design
 Concept frame instances `Color=White`, so its knockout colour would be a guess;
 it is added when a frame calls for it rather than invented now.
+
+The 2026-08 `Footer` looked like that caller and is not one (#87). Its logo is
+white, but it is a tight-bounded vector of the two mark paths with no plate at
+all (`1280:1856`) — `BrandMark`, not a white tile. `White` stays unbuilt.
 
 `Color=White` briefly shipped, on 2026-08-02, and was removed the same day. The
 direction it was built from — the nav's mark should change colour so it stays
@@ -67,20 +71,25 @@ worked example: a variant needs a frame or an equally explicit direction, and a
 direction that has been _interpreted_ is neither until the interpretation is
 confirmed.
 
-### `BrandMark` has no Figma counterpart
+### `BrandMark` has no component set
 
 `BrandMark` (same file) draws the ring and the superscript on their own, in
 `currentColor`, with no plate. **No component set contains it** — `Brand / Logo`
-is a square in all three variants, and every canonical frame instances the
-square. It is anchored on Nick's direction of 2026-08-02 ("the color of o3
-changes so it's visible, without the square box", plus a reference of the nav in
-both states) and on the prototype's nav, which draws precisely this and flips it
-between `#fff` and `#232323`.
+is a square in all three variants. It is anchored on Nick's direction of
+2026-08-02 ("the color of o3 changes so it's visible, without the square box",
+plus a reference of the nav in both states) and on the prototype's nav, which
+draws precisely this and flips it between `#fff` and `#232323`.
 
-Same 64 viewBox and the same two path `d` strings as the tile — shared in the
-file, not copied — so `BrandLogo` → `BrandMark` at a given `size` removes the
-plate and moves nothing else. It has no `color` axis on purpose: the surface
-decides the ink, which is what lets `SiteNav` flip it by inheritance alone.
+A canonical node draws it since 2026-08: the `Footer`'s logo (`1280:1856`) is
+these two paths, white, with no tile — which is the direction landing on a
+Figma node rather than on an interpretation of one (#87).
+
+Same two path `d` strings as the tile, shared in the file rather than copied,
+and the same 64 viewBox by default — so `BrandLogo` → `BrandMark` at a given
+`size` removes the plate and moves nothing else. `trim` crops that box to the
+mark's own bounds, for callers whose Figma node is bounded the same way the
+footer's vector is. It has no `color` axis on purpose: the surface decides the
+ink, which is what lets `SiteNav` flip it by inheritance alone.
 
 ### `Button` is divergent
 
@@ -119,9 +128,15 @@ The 2026-08 design pass inverted that: the component was reworked
 (`#000000`, `64px 96px`, three link columns, legal row, "Go birds." badge) and
 the Home frame's footer is now an **override-free instance** of it
 (`2435:1840`); `1680:2096` no longer exists. The component is the source of
-record now. Known `SiteFooter` deltas ticketed from the 2026-08-13 sync: the
-logo is white in Figma vs hardcoded red in code, and the "Go birds." badge has
-no code counterpart.
+record now, and `SiteFooter` is built to it as of #87: `bg-black`, `py-16`, and
+the plate-less white mark at 148px (128 at 402, `2225:2613`). The "Go birds."
+badge (`1275:1631`) already reached the page as Site Settings' `copyrightNote`
+and gained the set's only state, the green hover.
+
+Two deltas #87 did not close, neither of them ticketed: the component draws the
+orbital ring as a filled `#0A0A0B` donut (`1320:117`) where the code strokes the
+dead frame's two rings in `rgba(255,255,255,0.2)`, and the legal row is `#AAA69E`
+against `--color-fg-subtle`'s `#A3A3A3`.
 
 ### The 402 nav's two extra parts
 
@@ -171,7 +186,7 @@ Every component in the package, against the Figma library.
 | ---------------- | ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | `Button`         | **Has counterpart** — `Button / Solid`               | Divergent; realign (above)                                                                                     |
 | `BrandLogo`      | **Has counterpart** — `Brand / Logo`                 | Added #41. `Color` is the one axis; `White` unbuilt                                                            |
-| `BrandMark`      | **Code-only** — no set draws a box-less mark         | Added 2026-08-02 by direction; the nav's mark, same geometry as the tile                                       |
+| `BrandMark`      | **Code-only** — no set draws a box-less mark         | Added 2026-08-02 by direction; the `Footer`'s logo (`1280:1856`) draws it too, #87                             |
 | `MenuIcon`       | **Has counterpart** — `1814:1636` (drawn, not a set) | Added #41. Two bars, per the frame                                                                             |
 | `CloseIcon`      | **Has counterpart** — `close` glyph                  | Added #41 (ADR 0009)                                                                                           |
 | `Sheet`          | **Code-only** — shadcn                               | Added #41 for the 402 nav; the panel has no frame (ADR 0006)                                                   |

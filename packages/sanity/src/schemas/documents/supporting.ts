@@ -69,6 +69,20 @@ export const siteSettings = defineType({
     // "Insights" while the type was called `perspective`; now that the type is
     // `insight`, it translated a word into itself (ADR 0017). A nav item's own
     // `label` still overrides per link, like every other entry.
+    /**
+     * The brand-property strip above the nav pill (Figma `Utility Nav`,
+     * `2250:1445`): O3 World, 1682 Conference, O3XO. Its own field rather than
+     * a second `footerGroup` — the group's label has nowhere to go on a bar
+     * that shows only its links, and the strip's membership is the set of
+     * properties O3 runs, which is not the nav's concern.
+     */
+    defineField({
+      name: 'utilityNavItems',
+      title: 'Utility nav',
+      type: 'array',
+      of: [defineArrayMember({ type: 'cta' })],
+      description: 'The brand-property strip above the nav. Desktop only.',
+    }),
     defineField({ name: 'navItems', type: 'array', of: [defineArrayMember({ type: 'cta' })] }),
     defineField({ name: 'primaryCta', type: 'cta', description: 'The nav’s "Let’s talk" button.' }),
     defineField({ name: 'footerTagline', type: 'text', rows: 2 }),

@@ -111,6 +111,7 @@ const SECTION_FIELDS = /* groq */ `
 
 export const SITE_SETTINGS_QUERY = defineQuery(`*[_type == "siteSettings"][0]{
   title,
+  utilityNavItems[]{..., ${CTA_TARGET}},
   navItems[]{..., ${CTA_TARGET}},
   primaryCta{..., ${CTA_TARGET}},
   footerTagline,
