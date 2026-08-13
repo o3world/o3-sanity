@@ -1,0 +1,14 @@
+{
+  "_id": "client-seed-hire-heroes-usa",
+  "_type": "client",
+  "name": "Hire Heroes USA",
+  "logo": {
+    "_type": "image",
+    "_localSrc": "tools/migration/data/seed/assets/partner-hireheroes.png"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:homepage-wireframe",
+    "extractedAt": "2026-08-13T00:00:00Z"
+  }
+}

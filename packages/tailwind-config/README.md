@@ -39,8 +39,10 @@ pull-quote attribution's `1.5em` line-height, the 5.8px carousel chip, the 87px
 CTA bleed strip, the 1026px partners measure.
 
 Two tokens deliberately break the rule and are marked **NO CANONICAL ANCHOR**:
-`brand-tint` and `line`/`line-soft` are prototype-era values kept alive by
-existing call sites, pending #38.
+`brand-tint` and `line-soft` are prototype-era values kept alive by existing
+call sites, pending #38. `line` left that list in the 2026-08 partners
+restructure — the hairline around each logo plate (`1864:2395`) is the frames'
+first real rule, so the token took its value.
 
 ## Responsive
 
@@ -76,21 +78,23 @@ are in each token's comment in `tokens/color.css`.
 
 ## Colors (`--color-*`)
 
-| Token                | Value                   | Role                                                            |
-| -------------------- | ----------------------- | --------------------------------------------------------------- |
-| `brand`              | `#EB1000`               | Flat **once** on Home — the footer link headers. Else the glow. |
-| `brand-tint`         | `#FF6A5A`               | ⚠️ No canonical anchor — prototype-era, pending #38             |
-| `fg`                 | `#232323`               | Body copy and card titles on light bands (`text/default`)       |
-| `fg-muted`           | `#76746F`               | The **neutral** eyebrow and card meta (was `#636363`)           |
-| `fg-subtle`          | `#A3A3A3`               | ⚠️ No canonical anchor — legal row moved to `on-utility`, #38   |
-| `fg-quiet`           | `rgba(10,10,10,.5)`     | Pull-quote attribution — tinted ink, not a grey                 |
-| `on-ink`             | `rgba(255,255,255,.92)` | CTA band headline (`color/white/ 92%`)                          |
-| `on-ink-muted`       | `rgba(255,255,255,.65)` | Stat labels beside the 48px figure                              |
-| `on-ink-subtle`      | `rgba(255,255,255,.6)`  | CTA band subhead (`color/white/ 60%`)                           |
-| `on-ink-line`        | `rgba(255,255,255,.2)`  | The orbital arc behind the footer; hairlines on dark            |
-| `scrim`              | `rgba(3,3,3,.2)`        | The floating pill NavBar fill                                   |
-| `surface-muted`      | `#D3D3D3`               | Carousel controls (`bg/button/secondary`)                       |
-| `line` / `line-soft` | `#DDDDDB` / `#ECECEA`   | ⚠️ No canonical anchor — the frames separate with washes        |
+| Token           | Value                   | Role                                                                 |
+| --------------- | ----------------------- | -------------------------------------------------------------------- |
+| `brand`         | `#EB1000`               | Flat **once** on Home — the footer link headers. Else the glow.      |
+| `brand-tint`    | `#FF6A5A`               | ⚠️ No canonical anchor — prototype-era, pending #38                  |
+| `fg`            | `#232323`               | Body copy and card titles on light bands (`text/default`)            |
+| `fg-muted`      | `#76746F`               | The **neutral** eyebrow and card meta (was `#636363`)                |
+| `fg-body`       | `#55524E`               | `Body/Default` on the redesigned frames — partners, Solutions        |
+| `fg-subtle`     | `#A3A3A3`               | ⚠️ No canonical anchor — legal row moved to `on-utility`, #38        |
+| `fg-quiet`      | `rgba(10,10,10,.5)`     | Pull-quote attribution — tinted ink, not a grey                      |
+| `on-ink`        | `rgba(255,255,255,.92)` | CTA band headline (`color/white/ 92%`)                               |
+| `on-ink-muted`  | `rgba(255,255,255,.65)` | Stat labels beside the 48px figure                                   |
+| `on-ink-subtle` | `rgba(255,255,255,.6)`  | CTA band subhead (`color/white/ 60%`)                                |
+| `on-ink-line`   | `rgba(255,255,255,.2)`  | The orbital arc behind the footer; hairlines on dark                 |
+| `scrim`         | `rgba(3,3,3,.2)`        | The floating pill NavBar fill                                        |
+| `surface-muted` | `#D3D3D3`               | Carousel controls (`bg/button/secondary`)                            |
+| `line`          | `#D6D3CC`               | The logo-plate hairline (`1864:2395`) — the one rule the frames draw |
+| `line-soft`     | `#ECECEA`               | ⚠️ No canonical anchor — the frames separate with washes             |
 
 **Copy on dark is white at an alpha, never a solid grey** — it has to
 composite over the photography behind it. `fg-inverse-muted` and `ink-soft`
@@ -100,31 +104,36 @@ existing call sites keep compiling; both go in #38.
 ## Typography
 
 **Figtree** is both the display and the body face. Display weight is **400**
-(Regular) — there is no Light in the canonical frames — and line-height is
-**1.2** nearly everywhere. This package does not load the font; the app does,
+(Regular) and line-height is **1.2** nearly everywhere — with one growing
+exception: the 2026-08 frames carry named heading styles (`Heading/h1`,
+`Heading/h2`, `Heading/h3`) that are all Figtree **Light 300**. `text-hero` has
+followed; `display-xl` and `display-lg` have not, because they still carry the
+400-weight headlines on every frame the redesign has not reached, so the two
+bands built against the new styles set `font-light` at the call site. The
+ramp-wide flip is its own token pass. This package does not load the font; the app does,
 exposing the family as `--font-figtree`.
 
 Figma specifies a **fixed px ramp at each frame width**. Every clamp is
 **solved** to hit the 402 frame's value at 402 and the 1440 frame's at 1440 —
 both ends are read values (ADR 0006).
 
-| Utility             | 402    | 1440   | Tracking  | Role                                               |
-| ------------------- | ------ | ------ | --------- | -------------------------------------------------- |
-| `text-hero`         | `36px` | `64px` | 0         | Home hero headline; the partners statement         |
-| `text-quote`        | `30px` | `48px` | 0         | The pull quote (desktop dropped 64 → 48, 2026-08)  |
-| `text-cta`          | `36px` | `64px` | -1px      | The CTA band headline — rides the hero variable    |
-| `text-display-xl`   | `40px` | `48px` | 0         | **Every** section headline; the Work hero          |
-| `text-display-lg`   | `18px` | `36px` | 0         | Pull-quote attribution, rail numerals              |
-| `text-display-md`   | `22px` | `28px` | -0.0286em | Case-study problem statement ⚠️ floor interpolated |
-| `text-lead`         | `20px` | `24px` | 0         | Standfirst beside a headline; CTA subhead          |
-| `text-body`         | `16px` | `20px` | 0, lh 1.6 | Long-form prose — every `bodyText` field           |
-| `text-body-heading` | `40px` | `36px` | 0         | An h2 inside a body ⚠️ descends — both ends read   |
-| `text-button`       | `18px` | `18px` | 0, wt 500 | Every button label                                 |
-| `text-eyebrow-lg`   | `18px` | `18px` | 0.1em     | Section kicker ("OUR PARTNERS")                    |
-| `text-eyebrow`      | `16px` | `16px` | 0.1em     | Card kicker ("HEALTHCARE"), Work hero kicker       |
-| `text-nav`          | `14px` | `14px` | 0         | Footer navigation links                            |
-| `text-meta`         | `13px` | `13px` | 0.1em     | Insights-card meta row                             |
-| `text-legal`        | `12px` | `12px` | 0         | Footer legal row                                   |
+| Utility             | 402    | 1440   | Tracking  | Role                                                |
+| ------------------- | ------ | ------ | --------- | --------------------------------------------------- |
+| `text-hero`         | `36px` | `64px` | -1px      | Home hero headline (`Heading/h1`, **Light 300**)    |
+| `text-quote`        | `30px` | `48px` | 0         | The pull quote (desktop dropped 64 → 48, 2026-08)   |
+| `text-cta`          | `36px` | `64px` | -1px      | The CTA band headline — rides the hero variable     |
+| `text-display-xl`   | `40px` | `48px` | 0         | **Every** section headline; the Work hero; partners |
+| `text-display-lg`   | `18px` | `36px` | 0         | Pull-quote attribution, rail numerals               |
+| `text-display-md`   | `22px` | `28px` | -0.0286em | Case-study problem statement ⚠️ floor interpolated  |
+| `text-lead`         | `20px` | `24px` | 0         | Standfirst beside a headline; CTA subhead           |
+| `text-body`         | `16px` | `20px` | 0, lh 1.6 | Long-form prose — every `bodyText` field            |
+| `text-body-heading` | `40px` | `36px` | 0         | An h2 inside a body ⚠️ descends — both ends read    |
+| `text-button`       | `18px` | `18px` | 0, wt 500 | Every button label                                  |
+| `text-eyebrow-lg`   | `18px` | `18px` | 0.1em     | Section kicker ("OUR PARTNERS")                     |
+| `text-eyebrow`      | `16px` | `16px` | 0.1em     | Card kicker ("HEALTHCARE"), Work hero kicker        |
+| `text-nav`          | `14px` | `14px` | 0         | Footer navigation links                             |
+| `text-meta`         | `13px` | `13px` | 0.1em     | Insights-card meta row                              |
+| `text-legal`        | `12px` | `12px` | 0         | Footer legal row                                    |
 
 **Small UI text does not scale** — button, eyebrow, meta, nav and legal are
 identical at both widths, read rather than assumed. Only display type and

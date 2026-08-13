@@ -50,13 +50,16 @@ describe('collection index provenance', () => {
   })
 
   /**
-   * Pinned by name rather than left to the generic rules above: deleting the
-   * marker should fail a test, not quietly clear the largest coverage gap on
-   * map #33.
+   * Pinned by name rather than left to the generic rules above. This was the
+   * largest coverage gap on map #33 — 272 articles behind a top-level nav link
+   * that no frame drew — and #61 closed it: `2336:4310` was commissioned,
+   * ruled canonical on 2026-08-13, and the route is transcribed from it. The
+   * assertion inverts rather than disappearing, so the marker cannot come back
+   * without someone saying why.
    */
-  it('marks /insights provisional — it has no canonical frame (#49)', () => {
-    expect(insightIndex.migration?.provisional).toBe(true)
-    expect(insightIndex.migration?.provisionalNote).toMatch(/frame/i)
+  it('no longer marks /insights provisional — it has a frame now (#61)', () => {
+    expect(insightIndex.migration?.provisional).not.toBe(true)
+    expect(insightIndex.migration?.figmaNode).toBe('2336:4310')
   })
 
   it('does not mark /work provisional — it has one (#43)', () => {

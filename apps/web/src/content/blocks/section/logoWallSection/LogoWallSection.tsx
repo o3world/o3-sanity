@@ -8,88 +8,120 @@ import type { SectionProps } from '@/content/blocks/sectionTypes'
 type LogoWallSectionProps = SectionProps<'logoWallSection'>
 
 /**
- * Section block: statement + client logo wall, built to the Home frame's
- * "Intro section" (`1864:2390`) — #42.
+ * Section block: the partners band, rebuilt to the 2026-08 frame
+ * `Section - Partners` (`1864:2390`) — #89.
  *
- * `96px 96px 128px`, contents centred, 96px between the three parts:
+ * `128px 96px`, contents centred, 128px between the three parts, on the warm
+ * wash (`--gradient-surface-wash-warm`, #F7F7F6 → #F1F0EC) rather than the
+ * flat bone the band used to sit on.
  *
- * 1. **Eyebrow** — 18px (`Eyebrow size="lg"`), NEUTRAL `#636363` (`1864:2392`).
- * 2. **Statement** — 64px in a **1026px** column that is centred while its own
- *    text stays flush **left**, filled with `--gradient-statement` so the
- *    closing line fades out. That fill is the exploration's signature move and
- *    the most visible thing the scaffold was missing here.
- * 3. **Logo wall** — a **3 × 2 grid of six**, inside the gutter, capped at the
- *    statement's 1026px so the wall sits under the sentence it belongs to.
- *    Two columns at 402, three from `lg` — three across is what lets each mark
- *    be *big*: a 342px cell against 246px in the old row, and a 96px ceiling
- *    against 68px. The marquee had to keep tiles small because the row's whole
- *    argument was how many of them there were; a wall of six can afford to let
- *    each one be read.
- * 4. **CTA** — `Button / Solid` Size=**Large**, dark fill (`1864:2405`).
+ * | Part     | Frame        | Treatment                                       |
+ * | -------- | ------------ | ----------------------------------------------- |
+ * | Eyebrow  | `1864:2392`  | 18/22 (`Eyebrow size="lg"`), `fg-muted`         |
+ * | Heading  | `1864:2393`  | `Heading/h2` — 48/58 **Light**, ink, 1026px     |
+ * | Body     | `2250:1307`  | 24/34 (`--text-lead`), `fg-body`, 724px         |
+ * | Logo bar | `1864:2394`  | one centred row of six 280 × 280 tiles          |
+ * | CTA      | `2209:2255`  | solid ink, "See all partners", trailing arrow   |
  *
- * ── THE ROW NO LONGER MOVES ────────────────────────────────────────────────
+ * ── WHAT THE RESTRUCTURE CHANGED ───────────────────────────────────────────
  *
- * It used to. The frame draws a row clipped at both edges, which reads as a
- * marquee's middle frame, and the prototype's `.o3-clients-track` crawled it —
- * two passes, one lap per `--duration-marquee`, paused under a pointer. A
- * crawling logo row is a tell: it says "look, clients" in a way that makes a
- * reader stop reading the logos. Six marks standing still, at full colour and
- * at size, say the same thing and are legible while they say it.
+ * The band used to be one 64px `statement` filled with `--gradient-statement`
+ * over a 3 × 2 wall of six large marks. All three of those moved:
  *
- * Full colour is the other half of that. The row was `grayscale contrast-125`
- * so six brand palettes read as one band; the cost was that CHOP's blue and La
- * Colombe's red — the part of a mark a reader recognises before the wordmark —
- * were the first thing thrown away. A grid holds the row together on its own
- * geometry, so the desaturation has nothing left to buy.
+ * - **The statement split.** One display sentence became a heading with a
+ *   standfirst under it, which is why the schema carries `heading` + `body`
+ *   now instead of `statement`.
+ * - **The gradient fill is gone from this band.** `1864:2393` is a SOLID ink
+ *   (#0A0A0B, the new ink variable) where it used to be the statement
+ *   gradient's co-anchor. The token survives — the pull quote still draws it —
+ *   but reaching for `text-gradient` here is now wrong.
+ * - **The wall became a strip.** Six square plates in ONE row, hairlined
+ *   rather than floating, and the row is deliberately wider than the page:
+ *   6 × 280 = 1680 against a 1248 content column, centred, so the two end
+ *   tiles are clipped by the viewport. That is what the frame draws (see the
+ *   export of `1864:2390`), and it is why this band bleeds past the gutter.
+ *
+ * ── THE MARKS ARE DESATURATED AGAIN ────────────────────────────────────────
+ *
+ * #42 removed `grayscale` on the argument that a wall of six large marks
+ * should show CHOP's blue and La Colombe's red. The redesign reverses it: the
+ * uploaded artwork is full colour, but every tile applies a Figma image
+ * adjustment that renders it grey — visible in the frame export, though the
+ * REST payload does not carry the adjustment. It follows the composition
+ * change rather than contradicting it: a small mark inside a hairlined plate
+ * is a mark in a set, and six palettes fighting inside six identical boxes is
+ * the noise the plates exist to remove.
  */
 export function LogoWallSection({
   eyebrow,
-  statement,
+  heading,
+  body,
   clients,
   cta,
   surface,
 }: LogoWallSectionProps) {
   return (
     <section
-      className={`${SURFACE_CLASS[resolveSurface(surface, 'bone')]} pt-band-sm pb-band-md px-gutter`}
+      className={`${SURFACE_CLASS[resolveSurface(surface, 'bone')]} px-gutter pt-band-sm pb-band-md lg:pt-band-md lg:gap-band-md bg-(image:--gradient-surface-wash-warm) flex flex-col items-center gap-12`}
     >
-      <div className="flex flex-col items-center gap-5 lg:gap-8">
-        {eyebrow ? (
-          <Eyebrow size="lg" className="text-center">
-            {eyebrow}
-          </Eyebrow>
+      {/* 32 at 1440 (`1864:2391`), 20 at 402 (`1814:1642`). */}
+      <div className="flex w-full flex-col items-center gap-5 text-center lg:gap-8">
+        {eyebrow ? <Eyebrow size="lg">{eyebrow}</Eyebrow> : null}
+        {heading ? (
+          // `font-light` is the call site's, not the token's: `Heading/h2` is
+          // Figtree Light on every redesigned frame, but `display-xl` still
+          // carries the 400-weight section headlines on the frames the
+          // redesign has not reached. See tokens/typography.css.
+          <h2 className="text-display-xl font-display text-ink max-w-[1026px] text-balance font-light">
+            {heading}
+          </h2>
         ) : null}
-        {statement ? (
-          <p className="text-hero font-display text-gradient max-w-[1026px] self-center text-left">
-            {statement}
-          </p>
-        ) : null}
+        {body ? <p className="text-lead text-fg-body max-w-[724px] text-pretty">{body}</p> : null}
       </div>
 
-      <ul className="lg:mt-band-sm mx-auto mt-12 grid max-w-[1026px] grid-cols-2 items-center gap-x-10 gap-y-12 lg:grid-cols-3 lg:gap-x-12 lg:gap-y-16">
-        {(clients ?? []).map((client) => (
-          // A cell, not a 310 × 132 tile: the grid gives each mark the same
-          // box, and the mark is centred in it with its height capped so a
-          // wide wordmark and a tall roundel carry the same visual weight.
-          // The cap is the size control — 96px at `lg`, down to 64px at 402
-          // where the cell is half a 362px column and a 96px mark would
-          // collide with its neighbour.
-          <li key={client._id} className="flex h-24 items-center justify-center lg:h-32">
-            <SanityImage
-              source={client.logo}
-              alt={client.name ?? ''}
-              width={684}
-              className="max-h-16 w-auto max-w-full object-contain lg:max-h-24"
-            />
-          </li>
-        ))}
-      </ul>
+      {/*
+       * The strip bleeds: `-mx-gutter` gives the row the full viewport, and
+       * `justify-center` + `overflow-hidden` clip it symmetrically, which is
+       * the frame's own composition at 1440 (120px off each end).
+       *
+       * Below `lg` it wraps instead of clipping — three across at `sm`, two on
+       * a phone. The 402 frame is un-migrated (`1814:1898` still draws the old
+       * four-tile column), so this is a renderer decision under ADR 0006
+       * rather than a read value; what it protects is that a phone sees all
+       * six partners rather than one and a half. Clipping there would also be
+       * a hidden scroll region, which `home.render.test` forbids outright.
+       */}
+      <div className="-mx-gutter flex justify-center overflow-hidden">
+        {/* The px compensates the tiles' negative margins so the outer edge
+         * keeps its hairline; without it the top and left rules are clipped. */}
+        <ul className="ml-px mt-px flex flex-wrap justify-center lg:flex-nowrap">
+          {(clients ?? []).map((client) => (
+            // 280 × 280 with 64px of side padding, so the artwork gets a
+            // 152px box (`1864:2395`). Adjacent tiles share one hairline —
+            // Figma centres the stroke, so the seams collapse; `-ml-px`
+            // `-mt-px` is the CSS equivalent.
+            <li
+              key={client._id}
+              className="border-line -ml-px -mt-px flex size-[168px] shrink-0 items-center justify-center border px-8 sm:size-[224px] sm:px-12 lg:size-[280px] lg:px-16"
+            >
+              {/*
+               * Width-filling, natural height. Every mark is trimmed to its
+               * own bounding box, so a 152px box puts each one at the 28–42px
+               * the frame's rectangles read — no per-logo height cap, and no
+               * cover-crop.
+               */}
+              <SanityImage
+                source={client.logo}
+                alt={client.name ?? ''}
+                width={456}
+                className="w-full grayscale"
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
 
-      {cta ? (
-        <div className="lg:mt-band-sm mt-12 flex justify-center">
-          <CtaLink cta={cta} arrow size="large" />
-        </div>
-      ) : null}
+      {cta ? <CtaLink cta={cta} arrow size="large" /> : null}
     </section>
   )
 }

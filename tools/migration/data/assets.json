@@ -1654,5 +1654,13 @@
   "file:tools/migration/data/seed/assets/eng-ownership.svg": {
     "sha256": "7d38ddb7902f49b17cc3cf0541ca48b473012fd6",
     "assetId": "image-7d38ddb7902f49b17cc3cf0541ca48b473012fd6-300x300-svg"
+  },
+  "file:tools/migration/data/seed/assets/partner-hireheroes.png": {
+    "sha256": "2e8edb209e909570eb7fc1e33cdf4d1d7c76874d",
+    "assetId": "image-2e8edb209e909570eb7fc1e33cdf4d1d7c76874d-954x214-png"
+  },
+  "file:tools/migration/data/seed/assets/partner-vertex.png": {
+    "sha256": "c4e6317ffd073039904d3e1c833aec3a504c8a11",
+    "assetId": "image-c4e6317ffd073039904d3e1c833aec3a504c8a11-1200x221-png"
   }
 }

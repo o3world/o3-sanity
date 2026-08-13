@@ -7,14 +7,15 @@ import { PageMockup } from '../PageMockup'
  * `/` — the canonical Home frame (`1680:2134`, mobile `1814:1618`).
  *
  * Eight bands off `data/seed/page/index.json`, in the seed's order: the
- * orbital hero, the partners wall, the case showcase, the pull quote, the two
+ * orbital hero, the partners strip, the case showcase, the pull quote, the two
  * rail-panel bands, the insights carousel and the closing CTA.
  *
  * The **surface sequence** is the thing this story shows that no block story
- * can: ink → bone → wash → bone → white → white → bone → ink. The hero's bone
- * dome only works because the band under it is bone, and the CTA band's fade
- * strip only works because the footer under it is `ink-deep`. Both are page
- * properties; change one band's surface and this is where it shows.
+ * can: ink → warm wash → wash → bone → white → white → bone → ink. The hero's
+ * curve is `bone-soft` because that is where the partners band's wash starts,
+ * and the CTA band's fade strip only works because the footer under it is
+ * black. Both are page properties; change one band's surface and this is where
+ * it shows.
  */
 const meta = {
   title: 'Pages/Home',
@@ -36,8 +37,9 @@ export const Desktop: Story = {
 /**
  * `1814:1618`. Every composition switch in the page fires between these two
  * stories — the nav collapses from a 1130px pill to a full-width bar, the hero
- * goes flush left, the logo wall drops to two across, and the rail panels
- * restack. ADR 0006 is the record of which of those are deliberate.
+ * goes flush left, the partners strip wraps to two plates across instead of
+ * clipping one row of six, and the rail panels restack. ADR 0006 is the record
+ * of which of those are deliberate.
  */
 export const Mobile: Story = {
   args: { page: 'index' },

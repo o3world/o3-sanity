@@ -102,6 +102,15 @@
    * also strokes the Insight-index filter pills (`2050:1227`, a border-role
    * variable) — #61's build can reach for border-fg-muted. */
   --color-fg-muted: #76746f;
+  /* #55524E — the colour the 2026-08 frames set `Body/Default` in: the
+   * partners standfirst (`2250:1307`) and the Solutions overview paragraph
+   * (`2360:2869`), two frames, one value. Warmer and a shade lighter than
+   * --color-fg (#232323), which is where the pre-redesign frames put body
+   * copy. LIKELY THE NEW-GENERATION BODY COLOUR rather than a third role —
+   * but every un-migrated frame still draws prose at #232323, so this is a
+   * second token instead of a redefinition of the first. Which one survives
+   * is a token-pass call (#38), not a page layer's. */
+  --color-fg-body: #55524e;
   /* #A3A3A3 — NO CANONICAL ANCHOR since the 2026-08 footer rework: the legal
    * row this token was read from (1680:2121) is gone, and the Footer
    * component's legal row binds the same #AAA69E variable as the Utility Nav
@@ -175,10 +184,19 @@
   --color-on-utility-line: #242321;
 
   /* ── Borders / placeholders ────────────────────────────────────────────── */
-  /* NO CANONICAL ANCHOR — the frames draw separation with the surface wash
-   * (see gradient.css), not with rules. These two are prototype-era values
-   * retained for the components that still stroke a border; a frame that
-   * needs a rule should promote its own value here. */
-  --color-line: #dddddb;
+  /* #D6D3CC — the hairline, and since the 2026-08 partners restructure it
+   * finally has an anchor: the `Logo` tile on the redesigned partners band
+   * (`1864:2395` and its five siblings) strokes 1px of exactly this warm grey
+   * around each 280 × 280 plate. That is the frames' first real rule — every
+   * other band still separates with the surface wash (see gradient.css) — so
+   * per this token's own standing instruction the frame value is promoted
+   * here rather than inlined at the call site. WAS the prototype-era #DDDDDB,
+   * a cooler grey half a step lighter; the five components that stroke
+   * `border-line` (PageCard, DefaultCard, the case-study stat and deliverable
+   * rules, the Storybook frame) follow it warm, which is the same direction
+   * bone and fg-muted moved in the 2026-08 pass. */
+  --color-line: #d6d3cc;
+  /* NO CANONICAL ANCHOR — prototype-era, kept for the call sites that want a
+   * lighter rule than the one above. */
   --color-line-soft: #ececea;
 }

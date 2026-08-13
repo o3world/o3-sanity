@@ -107,8 +107,21 @@ export interface Pagination {
   readonly totalPages: number
 }
 
+/**
+ * The facet values a collection index was asked for, by URL parameter name —
+ * `{ category: 'design' }` for `/insights?category=design`, and `null` for a
+ * facet the URL does not name (#61).
+ *
+ * They are GROQ params as much as renderer props: the route builder spreads
+ * them into the query's variables, so a `facets: ['category']` entry answers
+ * `$category` in its own query and hands the same value to the view for the
+ * chip that has to look selected. One name, one value, both ends.
+ */
+export type Facets = Readonly<Record<string, string | null>>
+
 export type IndexRendererProps<Q extends string> = NonNullable<QueryResult<Q>> & {
   readonly pagination: Pagination
+  readonly facets: Facets
 }
 
 /**
@@ -162,6 +175,17 @@ export interface IndexEntry<Q extends string = string> {
   readonly query: Q
   /** Items per page. Default 12. */
   readonly pageSize?: number
+  /**
+   * URL parameters this index filters on, e.g. `['category']` (#61). Each one
+   * becomes a GROQ param of the same name — `null` when the URL omits it, so
+   * the query's `$category == null` arm is what "unfiltered" means — and
+   * reaches the renderer as `facets`.
+   *
+   * A list of names rather than a parse function: the filter's vocabulary is
+   * the content's (a category slug), so there is nothing to validate here that
+   * the query does not already answer by returning an empty feed.
+   */
+  readonly facets?: readonly string[]
   readonly renderer: (props: IndexRendererProps<Q>) => ReactNode
   /**
    * Static — there is no document to derive from — but it goes through the

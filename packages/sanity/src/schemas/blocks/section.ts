@@ -52,22 +52,33 @@ export const logoWallSection = defineSectionBlock({
   defaultSurface: 'bone',
   fields: [
     defineField({ name: 'eyebrow', type: 'string' }),
+    // The single `statement` this band shipped with split in two on the
+    // 2026-08 frame (`1864:2390`, #89): a 48px heading over a 24px standfirst,
+    // both centred. They are `heading` + `body` rather than a second
+    // statement field because that is what the lexicon calls them — the
+    // block's primary display text and the prose under it.
     defineField({
-      name: 'statement',
+      name: 'heading',
+      type: 'string',
+      description: 'The section headline above the logos (`1864:2393`).',
+    }),
+    defineField({
+      name: 'body',
       type: 'text',
-      rows: 2,
-      description: 'The large display statement above the logos.',
+      rows: 3,
+      description: 'The standfirst under the heading (`2250:1307`).',
     }),
     defineField({
       name: 'clients',
       type: 'array',
       of: [defineArrayMember({ type: 'reference', to: [{ type: 'client' }] })],
-      description: 'Six reads as a full 3 × 2 wall; the grid wraps whatever it is given.',
+      description:
+        'Six is what the frame draws — one centred row of square tiles, wrapping below lg. The row takes whatever it is given.',
       validation: (rule) => rule.required().min(1),
     }),
     defineField({ name: 'cta', type: 'cta' }),
   ],
-  preview: { select: { title: 'statement' } },
+  preview: { select: { title: 'heading' } },
 })
 
 export const caseShowcaseSection = defineSectionBlock({

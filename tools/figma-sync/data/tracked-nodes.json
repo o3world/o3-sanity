@@ -134,6 +134,14 @@
       "note": "The `variant=\"ghost\"` case; still needs Figma's fill and label treatment."
     },
     {
+      "nodeId": "2134:1785",
+      "kind": "componentSet",
+      "name": "Button (2026-08 rebuild)",
+      "figmaName": "Button",
+      "codeComponent": "packages/ui/src/components/filter-chip.tsx#FilterChip",
+      "note": "The redesign's button — Theme = Black | White, radius 2, 12x16 padding — which the Insights filter bar and every redesigned CTA instance. Tracked 2026-08-13 with #61, which built `FilterChip` to it. The shipped `Button` is still on `136:754` and is now a generation behind in geometry as well as vocabulary; realigning it is the schema-touching job docs/figma-components.md records."
+    },
+    {
       "nodeId": "264:50",
       "kind": "componentSet",
       "name": "Brand / Logo",

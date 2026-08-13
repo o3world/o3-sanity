@@ -29,6 +29,10 @@ export type { MenuIconProps } from './components/menu-icon'
 export { Button, buttonVariants } from './components/ui/button'
 export type { ButtonProps } from './components/ui/button'
 
+// FilterChip — the Insights index filter bar's chip (2337:4486)
+export { FilterChip, filterChipVariants } from './components/filter-chip'
+export type { FilterChipProps } from './components/filter-chip'
+
 // CollectionHero — the Work frame's index hero (1634:1181)
 export { CollectionHero } from './components/collection-hero'
 export type { CollectionHeroProps } from './components/collection-hero'

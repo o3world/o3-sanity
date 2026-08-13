@@ -16,16 +16,13 @@ import type { FetchCall } from '@/test/stubs/sanity-live'
 import { insightIndex } from './collectionIndex'
 
 /**
- * The paginated /insights index. Pagination is the only real logic on
- * this route — an out-of-range `?page=` must clamp rather than 404 or render
- * an empty grid, and the clamp costs a second fetch, so both are pinned here.
+ * The paginated, filterable /insights index.
  *
- * The route is **provisional** (#49): no canonical frame draws it, so the
- * composition borrows the Work hero (`1634:1181`) and the Home Blog band
- * (`1683:2467`). The second describe block below holds the borrowed values, so
- * that a change to them is a deliberate act rather than a drift — this is the
- * only place the borrowing is written down as an assertion rather than as a
- * comment. The marker itself is `provisionalRoutes.render.test.tsx`.
+ * Two things on this route are real logic rather than layout: an out-of-range
+ * `?page=` must clamp rather than 404 or render an empty grid, and
+ * `?category=` must reach the query as a GROQ param and come back to the view
+ * as the chip that looks selected. Both are pinned here, along with the
+ * composition the canonical frame (`2336:4310`, #61) settles.
  */
 const route = buildIndexRoute(insightIndex)
 
@@ -46,6 +43,11 @@ function manyInsights(count: number) {
     }),
   )
 }
+
+const CATEGORIES = [
+  { title: 'AI', slug: 'artificial-intelligence-ai' },
+  { title: 'Design', slug: 'design' },
+]
 
 describe('insights collection index route', () => {
   it('renders the items on the first page', async () => {
@@ -102,7 +104,7 @@ describe('insights collection index route', () => {
   })
 
   /**
-   * The card draws no byline in either state — the frame (`1683:2491`) gives
+   * The card draws no byline in either state — the frame (`2337:4493`) gives
    * it a meta line and a title and nothing else. Worth pinning now that a
    * byline is optional (#32 item 1.1): the card is the one surface where
    * "authorless" must be indistinguishable from "authored", and the projection
@@ -132,38 +134,138 @@ describe('insights collection index route', () => {
 })
 
 /**
- * The borrowed composition, #49. Every value below was read off a canonical
- * frame; the node is named beside it so the next person can check it rather
- * than trust it.
+ * The category filter (#61) — the question `2337:4486` answered and #49 left
+ * open. It is a URL parameter resolved on the server, so every assertion here
+ * is about the request and the markup, and none is about client state.
+ */
+describe('insights index category filter', () => {
+  it('passes no category to the query on the unfiltered index', async () => {
+    const { calls } = await renderRoute(route, {
+      data: anInsightsPage(manyInsights(3), 3, CATEGORIES),
+    })
+    expect(feedCalls(calls)[0]?.params).toMatchObject({ category: null })
+  })
+
+  it('hands the requested category to the query as a GROQ param', async () => {
+    const { calls } = await renderRoute(route, {
+      data: anInsightsPage(manyInsights(3), 3, CATEGORIES),
+      searchParams: { category: 'design' },
+    })
+    expect(feedCalls(calls)[0]?.params).toMatchObject({ category: 'design' })
+  })
+
+  it('draws one chip per category, plus All', async () => {
+    const { html } = await renderRoute(route, {
+      data: anInsightsPage(manyInsights(3), 3, CATEGORIES),
+    })
+
+    expect(html).toContain('href="/insights"')
+    expect(html).toContain('href="/insights?category=artificial-intelligence-ai"')
+    expect(html).toContain('href="/insights?category=design"')
+    expect(html).toContain('>All<')
+    expect(html).toContain('>Design<')
+  })
+
+  it('marks the active chip — and only it — as current', async () => {
+    const { html } = await renderRoute(route, {
+      data: anInsightsPage(manyInsights(3), 3, CATEGORIES),
+      searchParams: { category: 'design' },
+    })
+    expect(html.match(/aria-current="page"/g)).toHaveLength(1)
+    // The selected chip is Theme=Black (`2337:4542`): ink fill, white label.
+    expect(html).toMatch(/aria-current="page"[^>]*href="\/insights\?category=design"/)
+  })
+
+  it('marks All as current when nothing is filtered', async () => {
+    const { html } = await renderRoute(route, {
+      data: anInsightsPage(manyInsights(3), 3, CATEGORIES),
+    })
+    expect(html).toMatch(/aria-current="page"[^>]*href="\/insights"/)
+  })
+
+  it('keeps the filter on every pager link', async () => {
+    const { html } = await renderRoute(route, {
+      data: anInsightsPage(manyInsights(12), 40, CATEGORIES),
+      searchParams: { category: 'design', page: '2' },
+    })
+
+    expect(html).toContain('href="/insights?category=design"')
+    expect(html).toContain('href="/insights?category=design&amp;page=3"')
+  })
+
+  /** A chip is a fresh cut of the collection; page 4 of the old one is not in it. */
+  it('drops the page when a chip is followed', async () => {
+    const { html } = await renderRoute(route, {
+      data: anInsightsPage(manyInsights(12), 40, CATEGORIES),
+      searchParams: { category: 'design', page: '2' },
+    })
+    expect(html).toContain('href="/insights?category=artificial-intelligence-ai"')
+    expect(html).not.toContain('category=artificial-intelligence-ai&amp;page=')
+  })
+
+  it('clamps a filtered page against the filtered total, not the collection', async () => {
+    const { calls } = await renderRoute(route, {
+      data: anInsightsPage(manyInsights(2), 2, CATEGORIES),
+      searchParams: { category: 'design', page: '9' },
+    })
+
+    // Two matches is one page, so the clamp refetches page 1 — with the
+    // filter still on it.
+    expect(feedCalls(calls)).toHaveLength(2)
+    expect(feedCalls(calls)[1]?.params).toMatchObject({ offset: 0, end: 12, category: 'design' })
+  })
+
+  it('says so rather than drawing an empty grid', async () => {
+    const { html } = await renderRoute(route, {
+      data: anInsightsPage([], 0, CATEGORIES),
+      searchParams: { category: 'nothing-here' },
+    })
+    expect(html).toContain('No insights under that filter')
+  })
+
+  it('draws no bar at all when nothing is categorised', async () => {
+    const { html } = await renderRoute(route, { data: anInsightsPage(manyInsights(3), 3, []) })
+    expect(html).not.toContain('aria-label="Filter by category"')
+  })
+})
+
+/**
+ * The composition, read off `2336:4310`. Every value below is on the frame and
+ * the node is named beside it, so the next person can check it rather than
+ * trust it — the same job the borrowed-values block did while this route was
+ * provisional (#49).
  */
 const page = await renderRoute(route, {
-  data: anInsightsPage(manyInsights(12), 40),
+  data: anInsightsPage(manyInsights(12), 40, CATEGORIES),
   searchParams: { page: '2' },
 })
 
 describe('insights index composition', () => {
-  it('opens on the Work index’s hero band, with the Blog row’s headline', () => {
-    // `1683:2469` — the Home Blog row's own line, not new copy.
-    expect(page.html).toContain('The thinking behind the work.')
-    // `1634:1183` treatment: the collection's name as the band's eyebrow.
+  it('opens on the Interior Hero, in the frame’s own words', () => {
+    // `2336:4477` — the hero the frame writes, standfirst included. That line
+    // is the one this route used to carry as unsourced copy.
+    expect(page.html).toContain('News of the world')
+    expect(page.html).toContain('Looking for some firsthand knowledge from our world?')
     expect(page.html).toContain('Insights')
   })
 
-  it('carries the one line of copy no frame writes', () => {
-    // Flagged provisional on the entry. Asserted so that removing the marker
-    // while leaving the copy — or the reverse — is visible.
-    expect(page.html).toContain('What we tried, what broke')
+  it('paints the hero ink rather than the Work band’s warm black', () => {
+    // The 2026-08 `Interior Hero` component (`2101:828`) is #0A0A0B; the older
+    // Work/Live band is #0F100B and stays that way until its frame is redrawn.
+    const tokens = classTokens(page.html)
+    expect(tokens).toContain('bg-ink')
+    expect(tokens).not.toContain('bg-ink-warm')
   })
 
-  it('lays the cards on the Blog band’s bone surface at its 96px rhythm', () => {
-    // `1683:2467` and `1924:5388`: fill #F0F0F0, padding 96px 0.
+  it('lays the cards on a bone band at the frame’s 128px rhythm', () => {
+    // `2337:4485`: fill #F1F0EC, padding 128px 96px.
     const tokens = classTokens(page.html)
     expect(tokens).toContain('bg-bone')
-    expect(tokens).toContain('py-band-sm')
+    expect(tokens).toContain('py-band-md')
   })
 
   it('fills the 1248 column with three of the frame’s own cards', () => {
-    // 3 × 394.67 + 2 × 32 = 1248 = --container-section. gap-x-8 is the 32.
+    // 3 × 395 + 2 × 32 = 1249 = --container-section. gap-x-8 is the 32.
     const tokens = classTokens(page.html)
     expect(tokens).toContain('max-w-section')
     expect(tokens).toContain('gap-x-8')
@@ -178,10 +280,17 @@ describe('insights index composition', () => {
     expect(tokens.filter((t) => t.startsWith('md:grid-cols'))).toEqual([])
   })
 
-  it('keeps the stacked cards 48px apart, the value read at 402', () => {
-    // `1814:1738` sets 48 between stacked cards. Unprefixed: no frame stacks
-    // this card at 1440, so the desktop row gap is that value carried up.
+  it('opens the rows to 64px where the frame says so, and 48 below it', () => {
+    // `2337:4492` wraps its rows 64px apart at 1440. No frame stacks this card
+    // at 402, so the mobile value is still the Blog band's 48 (`1814:1738`).
     expect(variantsOf(page.html, 'gap-y-12')).toEqual(['gap-y-12'])
+    expect(variantsOf(page.html, 'gap-y-16')).toEqual(['lg:gap-y-16'])
+  })
+
+  it('closes on the shared CTA band', () => {
+    // `2336:4351` — the component's own copy, which five seed pages carry too.
+    expect(page.html).toContain('Let’s get started on your next big thing.')
+    expect(page.html).toContain('href="/contact"')
   })
 
   it('gives a phone no hidden scroll region', () => {

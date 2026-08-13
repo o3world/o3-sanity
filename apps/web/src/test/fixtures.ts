@@ -66,13 +66,21 @@ function toCard({ body: _body, seo: _seo, related: _related, latest: _latest, ..
   return card
 }
 
+/**
+ * The /insights feed as its query returns it. `categories` is the filter
+ * bar's options (#61) — every category with an article, which the query
+ * answers separately from the items on the page, so it is a third argument
+ * rather than something derived from `items`.
+ */
 export function anInsightsPage(
   items: Insight[] = [anInsight()],
   total = items.length,
+  categories: INSIGHTS_PAGE_QUERY_RESULT['categories'] = [],
 ): INSIGHTS_PAGE_QUERY_RESULT {
   return {
     items: items.map(toCard),
     total,
+    categories,
   } as INSIGHTS_PAGE_QUERY_RESULT
 }
 

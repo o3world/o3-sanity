@@ -21,6 +21,20 @@ export interface CollectionHeroProps {
    * no left-aligned 60px one.
    */
   align?: 'start' | 'center'
+  /**
+   * Which generation of the band to draw. `band` is the original Work/Live
+   * hero (`1634:1181`) — `ink-warm`, 164px of pill clearance, the two columns
+   * centred on each other. `interior` is the 2026-08 `Interior Hero` component
+   * (`2107:1051` / `2101:828`), which the redesigned frames instance: `ink`,
+   * 192px of clearance, and the two columns sitting on a shared baseline.
+   *
+   * Two values rather than a rewrite because the older frames have not been
+   * redrawn: `/work` and `/live` are still canonical at `band`, and flipping
+   * the default would silently repaint two pages against frames that say
+   * otherwise. Expect these to collapse into one when those frames land — the
+   * component-realignment work on #55.
+   */
+  variant?: 'band' | 'interior'
   /** Slot for the band's decoration — About hangs an orbital off the right. */
   decoration?: ReactNode
   className?: string
@@ -52,15 +66,19 @@ export function CollectionHero({
   heading,
   subheading,
   align = 'start',
+  variant = 'band',
   decoration,
   className,
 }: CollectionHeroProps) {
   const centred = align === 'center'
+  const interior = variant === 'interior'
 
   return (
     <section
       className={cn(
-        'bg-ink-warm px-gutter pb-band-sm relative isolate overflow-hidden pt-[164px] text-white lg:pb-16',
+        'px-gutter pb-band-sm relative isolate overflow-hidden text-white lg:pb-16',
+        // `2101:789`: the Interior Hero's container is 192px 0 64px on #0A0A0B.
+        interior ? 'bg-ink pt-[192px]' : 'bg-ink-warm pt-[164px]',
         className,
       )}
     >
@@ -71,6 +89,8 @@ export function CollectionHero({
           centred
             ? 'items-center text-center'
             : 'items-start justify-between lg:flex-row lg:items-center',
+          // The redesigned band sits both columns on one baseline instead.
+          !centred && interior && 'lg:items-end',
         )}
       >
         <div className={cn('flex flex-col gap-4', centred ? 'items-center' : 'lg:w-[588px]')}>

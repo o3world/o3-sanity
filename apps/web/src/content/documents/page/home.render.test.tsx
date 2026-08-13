@@ -46,7 +46,8 @@ describe('the seeded homepage', () => {
   it.each([
     ['hero', 'You see the problem in front of you.'],
     ['hero subheading', 'The senior team that finds the move is the team that builds it.'],
-    ['partners statement', 'where the stakes — and the org charts — are real'],
+    ['partners heading', 'Trusted by organizations shaping what&#x27;s next.'],
+    ['partners standfirst', 'From Fortune 500 enterprises to high-growth organizations'],
     ['case showcase heading', 'Most firms can ship what you ask for'],
     ['a case study’s narrative headline', 'CMS was heading for end of life'],
     ['quote', 'positioned our company as the leader and shaper'],
@@ -69,10 +70,14 @@ describe('the seeded homepage', () => {
     expect(html).toContain('>03<')
   })
 
-  it('renders the client logos the logo wall references', () => {
+  it('renders the client logos the partners strip references', () => {
     // Dereferenced from the committed client seeds, not inlined on the page.
-    expect(html).toContain('AmeriGas')
+    // The six changed with the 2026-08 restructure (#89): AmeriGas and
+    // Aramark left, Vertex and Hire Heroes USA arrived.
+    expect(html).toContain('Vertex')
+    expect(html).toContain('Hire Heroes USA')
     expect(html).toContain('La Colombe Coffee Roasters')
+    expect(html).not.toContain('AmeriGas')
   })
 
   /**
@@ -132,30 +137,39 @@ describe('the homepage at 402 (ADR 0006)', () => {
     expect(variantsOf(html, 'snap-x')).toEqual(['snap-x'])
   })
 
-  it('keeps the partner logos a two-across grid inside the gutter', () => {
-    // The wall used to be a crawling row wider than the page — clipped at
-    // both edges at 1440, and at 402 showing a logo and a half. It is a
-    // 3 × 2 grid now, which is two across on a phone and never leaves the
-    // gutter at any width.
-    expect(html).toContain('lg:grid-cols-3')
+  it('wraps the partner strip instead of clipping it at 402', () => {
+    // The strip is one row of six 280px plates at 1440 (`1864:2394`) — 1680px
+    // wide, clipped by the viewport on purpose. At 402 that would show one
+    // plate and a half, so it wraps: `flex-nowrap` is the thing that has to
+    // carry the `lg:`. The clip itself must stay `overflow-hidden`; the moment
+    // it becomes a scroll region the test above fails instead.
+    expect(variantsOf(html, 'flex-nowrap')).toEqual(['lg:flex-nowrap'])
     expect(html).not.toContain('animate-marquee')
     expect(html).not.toContain('lg:w-max')
   })
 
-  it('renders the partner marks big and in their own colour', () => {
-    // 96px at lg against the marquee tile's 68px, and no `grayscale` — the
-    // wall's whole argument is that six marks can be looked at.
-    const logo = html.match(/<img[^>]*class="[^"]*max-h-16[^"]*"[^>]*>/)?.[0] ?? ''
+  it('sizes the partner plates from each frame’s own read', () => {
+    // 280 square at 1440; 168 at 402, which is the largest square that still
+    // fits two inside a 362px column. The plates are what the restructure
+    // added — before #89 the marks floated in a grid cell with no rule.
+    const plate = html.match(/<li class="([^"]*lg:size-\[280px\][^"]*)"/)?.[1] ?? ''
+    expect(plate, 'no partner plate was rendered').not.toBe('')
+    expect(plate).toContain('size-[168px]')
+    expect(plate).toContain('border-line')
+  })
+
+  it('desaturates the partner marks', () => {
+    // Reversed by the redesign: every tile on `1864:2390` renders its
+    // full-colour artwork grey.
+    const logo = html.match(/<img[^>]*class="[^"]*grayscale[^"]*"[^>]*>/)?.[0] ?? ''
     expect(logo, 'no partner logo image was rendered').not.toBe('')
-    expect(logo).toContain('lg:max-h-24')
-    expect(logo).not.toContain('grayscale')
   })
 
   it('sets the hero flush to the gutter, centring it only at lg', () => {
-    // `1814:1622` is a 362px column at x=20; `1810:1616` centres on the
-    // sphere. Matched on the hero's own class attribute — `items-start` alone
-    // is on half the cards on the page and would pass without the hero.
-    const heroClasses = html.match(/class="([^"]*min-h-\[420px\][^"]*)"/)?.[1] ?? ''
+    // `1814:1622` is a 362px column at x=20; `2089:4316` centres its column.
+    // Matched on the hero's own class attribute — `items-start` alone is on
+    // half the cards on the page and would pass without the hero.
+    const heroClasses = html.match(/class="([^"]*pt-\[276px\][^"]*)"/)?.[1] ?? ''
     expect(heroClasses, 'the hero band was not found at all').not.toBe('')
     expect(heroClasses).toContain('items-start')
     expect(heroClasses).toContain('text-left')
@@ -163,32 +177,51 @@ describe('the homepage at 402 (ADR 0006)', () => {
     expect(heroClasses).toContain('lg:text-center')
   })
 
+  it('gives the hero band each frame’s own vertical rhythm', () => {
+    // 276 above / 353 below at 402 (`1814:1622` at y 276 in an 874 band);
+    // 288 / 470 at 1440 (`2089:4313` at y 288 in an 1100 band). Read values
+    // at both ends, so the band's height is the frames' rather than a
+    // `min-h` someone picked.
+    const heroClasses = html.match(/class="([^"]*pt-\[276px\][^"]*)"/)?.[1] ?? ''
+    expect(heroClasses).toContain('pb-[353px]')
+    expect(heroClasses).toContain('lg:pt-[288px]')
+    expect(heroClasses).toContain('lg:pb-[470px]')
+  })
+
   it('sizes the three statements from the step its own frame reads', () => {
     /*
      * ADR 0006's amendment (2026-08-02). The 30px floor was read off
      * `1814:1684` — the PULL QUOTE — and applied to `--text-hero`, which three
-     * bands share. The other two read 36 at 402: the hero headline
-     * `1814:1624` (36/40) and the partners statement `1814:1894` (36/1.25).
-     * All three are 64 at 1440, so the quote needs a second clamp; it cannot
-     * be a second class on the same one.
+     * bands shared. Two of them read 36 at 402: the hero headline
+     * `1814:1624` (36/40) and the partners statement `1814:1894` (36/1.25);
+     * both were 64 at 1440, so the quote needed a second clamp.
+     *
+     * TWO SHARE IT NOW, NOT THREE. The 2026-08 restructure (#89) took the
+     * partners band off the 64px step entirely: `1864:2393` is `Heading/h2`,
+     * 48/58, which is `display-xl` — so the band that used to pull this clamp
+     * around no longer touches it.
      *
      * Asserted on each band's own class attribute, because `text-hero`
      * appearing anywhere in the document would pass while the quote still
      * dragged the floor down.
      */
     const heroHeadline = html.match(/<h1 class="([^"]*)"/)?.[1] ?? ''
-    const statement = html.match(/class="([^"]*max-w-\[1026px\][^"]*)"/)?.[1] ?? ''
+    const partnersHeading = html.match(/class="([^"]*max-w-\[1026px\][^"]*)"/)?.[1] ?? ''
     const pullQuote = html.match(/<blockquote[^>]*>.*?<p class="([^"]*)"/s)?.[1] ?? ''
 
     expect(heroHeadline, 'the hero h1 was not found at all').not.toBe('')
-    expect(statement, 'the partners statement was not found at all').not.toBe('')
+    expect(partnersHeading, 'the partners heading was not found at all').not.toBe('')
     expect(pullQuote, 'the pull quote was not found at all').not.toBe('')
 
     // 36 at 402 → 64 at 1440.
     expect(heroHeadline).toContain('text-hero')
-    expect(statement).toContain('text-hero')
 
-    // 30 at 402 → 64 at 1440 — its own step, or the other two follow it down.
+    // 40 at 402 → 48 at 1440, Light — the workhorse section-headline step.
+    expect(partnersHeading).toContain('text-display-xl')
+    expect(partnersHeading).toContain('font-light')
+    expect(partnersHeading).not.toContain('text-hero')
+
+    // 30 at 402 → 64 at 1440 — its own step, or the hero follows it down.
     expect(pullQuote).toContain('text-quote')
     expect(pullQuote).not.toContain('text-hero')
   })

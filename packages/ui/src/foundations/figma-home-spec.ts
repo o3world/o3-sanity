@@ -39,6 +39,23 @@
  * SHIPPED tokens and say so where they moved; the `value:`/`variable:`
  * readings are the original extraction and stay as recorded. The current
  * vocabulary lives in packages/tailwind-config/tokens/*.css.
+ *
+ * ⚠️ 2026-08-13, later the same day: TWO OF THE BANDS BELOW HAVE BEEN
+ * REDRAWN, and their readings are history rather than description (#89):
+ *
+ * - **Partners / intro** (`1864:2390`) — `96px 96px 128px`, gap 96, flat
+ *   `#F0F0F0`, one 64px gradient-filled statement over a 3 × 2 wall. It is
+ *   now `128px 96px`, gap 128, on `--gradient-surface-wash-warm`, with a 48px
+ *   SOLID `Heading/h2` (`1864:2393`) over a 24px standfirst (`2250:1307`) and
+ *   a single row of six hairlined 280 × 280 plates. `statement` — both the
+ *   type step and the gradient's co-anchor — survives only on the pull quote.
+ * - **Hero** (`1810:1616`) — the photographic raster with no live text, which
+ *   is the whole reason this file says there is no hero type step. `2089:4316`
+ *   replaces it with a 1100px ink band carrying live `Heading/h1` copy at
+ *   64/76 Light, and the orbital sphere is gone from the frame entirely.
+ *
+ * Neither is re-extracted here. The next pass over this file should decide
+ * whether the reading record follows the redesign or is dated and frozen.
  */
 
 /** The Figma file + frame everything here was read from. */

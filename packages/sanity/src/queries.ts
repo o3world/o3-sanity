@@ -152,9 +152,38 @@ export const INSIGHT_SLUGS_QUERY = defineQuery(
   `*[_type == "insight" && defined(slug.current)].slug.current`,
 )
 
+/**
+ * The /insights index (#61), filtered by one category slug.
+ *
+ * `$category` is null on the unfiltered index, which the `== null` arm short-
+ * circuits — the same shape `LATEST_INSIGHTS_QUERY` uses for its optional
+ * category. Matching on the **slug** rather than the reference id is what lets
+ * the filter live in the URL (`/insights?category=design`) instead of leaking
+ * a document id into it.
+ *
+ * `total` repeats the filter deliberately: the pager counts the filtered feed,
+ * so switching category re-pages rather than leaving page 4 of an unfiltered
+ * collection pointing at nothing.
+ *
+ * The third key is the **filter bar's own options** (`2337:4486`), fetched in
+ * the same round-trip rather than as a second request. Two rules shape it:
+ *
+ * - **only categories that have an article** — a chip that returns an empty
+ *   grid is a broken control, and 11 categories exist against a feed that does
+ *   not use all of them;
+ * - **never `uncategorized`** — WordPress's "nobody filed this" sentinel, which
+ *   migrated as an ordinary document. As a chip it would promise a topic and
+ *   deliver 45 unrelated articles. They stay reachable under All.
+ *
+ * Ordered by title, the same ordering `listingSection` gives its pages. The
+ * frame draws five chips (AI, Design, Technology, 1682 Conference, Life at O3)
+ * — a curated subset no schema field can express today, so this returns every
+ * category that earns one and the bar wraps.
+ */
 export const INSIGHTS_PAGE_QUERY = defineQuery(`{
-  "items": *[_type == "insight"] | order(publishedAt desc) [$offset...$end]{${INSIGHT_CARD}},
-  "total": count(*[_type == "insight"])
+  "items": *[_type == "insight" && ($category == null || $category in categories[]->slug.current)] | order(publishedAt desc) [$offset...$end]{${INSIGHT_CARD}},
+  "total": count(*[_type == "insight" && ($category == null || $category in categories[]->slug.current)]),
+  "categories": *[_type == "category" && slug.current != "uncategorized" && count(*[_type == "insight" && references(^._id)]) > 0] | order(title asc){title, "slug": slug.current}
 }`)
 
 /**

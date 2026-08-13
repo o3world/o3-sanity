@@ -5,12 +5,15 @@ import { CollectionHero } from './collection-hero'
 import { OrbitalSphere } from './orbital-sphere'
 
 /**
- * The interior-page opener, in the three compositions the canonical frames
- * draw it in. All three are the same band — `ink-warm`, 164px of clearance for
- * the floating pill — and differ only in `align` and what hangs behind it.
+ * The interior-page opener, in the compositions the canonical frames draw it
+ * in. The first three are the original band — `ink-warm`, 164px of clearance
+ * for the floating pill — differing only in `align` and what hangs behind it.
+ * The fourth is the 2026-08 `Interior Hero` component that replaces it on the
+ * redesigned frames; put it beside `Work` and the two differences are visible
+ * at once, which is the point of keeping both.
  *
  * Every story pins the ink background, because this band always paints its own
- * `#0F100B` and a white canvas behind it hides where the band actually ends.
+ * dark and a white canvas behind it hides where the band actually ends.
  */
 const meta = {
   title: 'UI/CollectionHero',
@@ -52,6 +55,24 @@ export const AboutWithSphere: Story = {
       <OrbitalSphere className="-z-10 hidden lg:bottom-[-30%] lg:right-[-14%] lg:block lg:w-[720px]" />
     ),
   },
+}
+
+/**
+ * `/insights` (`2336:4477`) — the 2026-08 `Interior Hero` component
+ * (`2101:828`), which the redesigned frames instance. Two changes from the
+ * band above and nothing else: the fill is `ink` rather than `ink-warm`, and
+ * the headline and standfirst sit on one baseline instead of being centred on
+ * each other. The clearance goes 164 → 192 with it.
+ */
+export const Interior: Story = {
+  args: {
+    variant: 'interior',
+    eyebrow: 'Insights',
+    heading: 'News of the world',
+    subheading:
+      'Looking for some firsthand knowledge from our world? Check out our in-depth thoughts about the industry today, our culture at O3, the future of AI and digital experiences, and other relevant topics.',
+  },
+  parameters: { design: figmaDesign('2336:4477') },
 }
 
 /**

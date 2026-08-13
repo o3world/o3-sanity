@@ -8,31 +8,39 @@ import type { SectionProps } from '@/content/blocks/sectionTypes'
 type HeroSectionProps = SectionProps<'heroSection'>
 
 /**
- * Section block: the page hero, built to the canonical Home frame's opening
- * band (`1810:1616`) — #42.
+ * Section block: the page hero, built to the Home frame's opening band and
+ * re-measured against the 2026-08 redesign of it (`2089:4316`, #89).
  *
- * The frame flattens this band into a single raster (`1810:1588`) with the
- * NavBar and the whole headline baked into the pixels, keeping only four live
- * nodes. So the composition below is read off those pixels, against the nodes
- * the frame does keep:
+ * The band's live nodes now carry every dimension — the raster the #42 build
+ * had to read off pixels is gone:
  *
- * | Part       | Frame                                                        |
- * | ---------- | ------------------------------------------------------------ |
- * | Band       | 1440 × 892 of `#030303` under the orbital field              |
- * | Headline   | **centred**, 64px (`--text-hero`); the closing line sits back |
- * | Subheading | centred, 24px (`--text-lead`), ~600px measure                |
- * | CTA        | `Button / Solid` Size=Base, **white** fill (`1868:3262`)     |
- * | Dome       | a 2182 × 863 `#F0F0F0` ellipse at (−371, 784)                |
+ * | Part       | 1440 (`2089:4316`)                    | 402 (`1814:1619`)        |
+ * | ---------- | ------------------------------------- | ------------------------ |
+ * | Band       | 1440 × **1100** of `#0A0A0B`          | 402 × 874 of `#030303`   |
+ * | Headline   | centred, `Heading/h1` 64/76 **Light** | flush left, 36/40        |
+ * | 2nd line   | white at 50%                          | white at 60%             |
+ * | Subheading | centred, 24/34, **724** wide, 50%     | **absent**               |
+ * | CTA        | white fill, radius 2 (`2205:1298`)    | `Button / Solid` Base    |
+ * | Curve      | 1440 × **108**, `#F7F7F6`             | ellipse, **34** visible  |
+ * | Rhythm     | 288 above, 41, 33, 470 below          | 276 above, 39, 353 below |
  *
- * Two things the pre-#42 hero had wrong: it set the headline flush left
- * against the gutter (the frame centres everything on the sphere), and its
- * CTA was brand red (no red button exists on the canonical frame).
+ * The band is padding, not a `min-h` with the content centred inside it: both
+ * frames place the headline at a measured distance from the top of the band
+ * and let the sphere have the rest, so the two paddings are read values and
+ * the height between them is whatever the copy needs.
  *
- * The dome belongs to the hero rather than to the section beneath it because
+ * ⚠️ **The orbital sphere is not on the redesigned frame.** `2089:4316` draws
+ * a blurred 1926 × 400 photographic graphic under a 50% scrim where the sphere
+ * used to be, and the 402 frame does the same. The sphere stays here because
+ * removing it is a composition change and this pass was a measurement one —
+ * #89 carries the finding.
+ *
+ * The curve belongs to the hero rather than to the section beneath it because
  * the frame draws it inside this band and lets it overlap — it is what turns
- * a hard band boundary into the curve the partners section rises through. Its
- * fill is therefore `bone`, and a hero followed by a non-bone band would show
- * a seam. That is the frame's own constraint, not one added here.
+ * a hard band boundary into the shape the partners band rises through. Its
+ * fill is `bone-soft` (#F7F7F6), which is also where the partners band's warm
+ * wash starts, so the two meet with no seam. A hero followed by a band that
+ * does not open on #F7F7F6 would show one.
  */
 export function HeroSection({
   variant,
@@ -92,23 +100,29 @@ export function HeroSection({
       ) : null}
 
       {/*
-       * 164px of clearance for the floating pill, which sits at y 30.
+       * The band's rhythm, read off both frames rather than centred inside a
+       * `min-h`: the headline starts 288px down at 1440 (`2089:4313`) and
+       * 276px down at 402 (`1814:1622`), and the sphere gets the 470 / 353
+       * underneath. Together with the copy that resolves to the frames'
+       * 1100 / 874 band heights.
        *
        * **Alignment switches at `lg`.** The 1440 frame centres the whole
-       * block on the sphere; the 402 frame (`1814:1622`) sets it as a 362px
-       * column flush to the 20px gutter, headline and button both left. That
-       * is composition, so it lives here rather than in a token (ADR 0006).
+       * block; the 402 frame sets it as a 362px column flush to the 20px
+       * gutter, headline and button both left. That is composition, so it
+       * lives here rather than in a token (ADR 0006).
        */}
-      <div className="max-w-content relative z-10 mx-auto flex min-h-[420px] flex-col items-start justify-center gap-[18px] pb-[220px] pt-[164px] text-left lg:min-h-[520px] lg:items-center lg:pb-[368px] lg:text-center">
+      <div className="max-w-content relative z-10 mx-auto flex flex-col items-start pb-[353px] pt-[276px] text-left lg:items-center lg:pb-[470px] lg:pt-[288px] lg:text-center">
         <h1 className="text-hero font-display text-balance">
           <MaskedLines
             lines={lines.map((line, index) => (
               // The frame steps the value between lines rather than fading the
-              // block: within a line it is flat, and the step is hard.
+              // block: within a line it is flat, and the step is hard. Both
+              // ends are solid white — the 92% `on-ink` alpha belongs to the
+              // CTA band, and this headline is drawn at full opacity.
               <span
                 key={line}
                 className={
-                  index === lines.length - 1 && lines.length > 1 ? 'text-white/50' : 'text-on-ink'
+                  index === lines.length - 1 && lines.length > 1 ? 'text-white/50' : 'text-white'
                 }
               >
                 {line}
@@ -118,15 +132,19 @@ export function HeroSection({
         </h1>
 
         {subheading ? (
-          <Reveal delay={120}>
-            <p className="text-lead text-on-ink-subtle mx-auto max-w-[760px] text-balance">
+          // 724px and white at 50% (`2089:4315`) — the same alpha as the
+          // headline's closing line, not the CTA band's 60% subhead.
+          <Reveal delay={120} className="mt-10">
+            <p className="text-lead mx-auto max-w-[724px] text-balance text-white/50">
               {subheading}
             </p>
           </Reveal>
         ) : null}
 
         {cta ? (
-          <Reveal delay={220} className="mt-6">
+          // 33 below the standfirst at 1440, 39 below the headline at 402
+          // (`1814:1622`'s column gap, where there is no standfirst at all).
+          <Reveal delay={220} className="mt-10 lg:mt-8">
             {/*
              * `light` is forced for the same reason the nav pill forces it:
              * this band owns its background. The hero is always the orbital
@@ -139,14 +157,20 @@ export function HeroSection({
       </div>
 
       {/*
-       * The dome (`1810:1614`) — a 2182 × 863 ellipse at (−371, 784) on an
-       * 892-tall band, i.e. 151.5% of the band's width with only its top 108px
-       * above the foot. Reproduced as a masked strip that height, so the ratio
-       * (and with it how shallow the curve reads) is the frame's, not a guess:
-       * a shorter, rounder dome is the most obvious way to get this wrong.
+       * The curve. Both frames draw the same shape and neither draws it the
+       * same way twice: 1440 is now an explicit `Curve` vector (`2089:4309`,
+       * 1440 × 108 at the band's foot, filled #F7F7F6 — the redesign replaced
+       * the 2182 × 863 ellipse the #42 build read); 402 is still an ellipse
+       * (`1864:2410`, 715.53 × 283 at y 840 on an 874-tall band, i.e. 178% of
+       * the band's width showing its top 34px).
+       *
+       * Reproduced as one masked ellipse at both widths, because the two
+       * shapes have the same proportion to a tenth of a percent (2182/863 =
+       * 2.528, 715.53/283 = 2.529) — what differs is how much of it shows.
+       * Getting that wrong is the obvious failure: a shorter, rounder dome.
        */}
-      <div className="absolute inset-x-0 bottom-0 z-0 h-[54px] overflow-hidden lg:h-[108px]">
-        <div className="bg-bone absolute left-1/2 top-0 aspect-[2182/863] w-[151.5%] -translate-x-1/2 rounded-[50%]" />
+      <div className="absolute inset-x-0 bottom-0 z-0 h-[34px] overflow-hidden lg:h-[108px]">
+        <div className="bg-bone-soft absolute left-1/2 top-0 aspect-[2182/863] w-[178%] -translate-x-1/2 rounded-[50%] lg:w-[151.5%]" />
       </div>
     </section>
   )

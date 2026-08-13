@@ -1,143 +1,219 @@
 import Link from 'next/link'
 
-import { ArrowIcon, Button, CollectionHero } from '@o3/ui'
+import { ArrowIcon, Button, CollectionHero, FilterChip } from '@o3/ui'
 import type { INSIGHTS_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { InsightCard } from './InsightCard'
+import { CtaSection } from '@/content/blocks/section/ctaSection/CtaSection'
 import type { Pagination } from '@/lib/content-routes/types'
 
+type IndexData = NonNullable<INSIGHTS_PAGE_QUERY_RESULT>
+
 interface InsightIndexViewProps {
-  readonly items: NonNullable<INSIGHTS_PAGE_QUERY_RESULT>['items']
+  readonly items: IndexData['items']
+  /** Every category with an article to show — the filter bar's options. */
+  readonly categories: IndexData['categories']
+  /** The category slug the URL asked for, or null on the unfiltered index. */
+  readonly category: string | null
   readonly pagination: Pagination
 }
 
-function pageHref(page: number): string {
-  return page <= 1 ? '/insights' : `/insights?page=${page}`
+/**
+ * `/insights` and `/insights?category=design&page=2` — one builder, so a chip
+ * and a pager link can never disagree about how this route spells its state.
+ * A chip resets the page (a new filter has no page 4 in common with the old
+ * one); the pager keeps the filter.
+ */
+function insightsHref({
+  category,
+  page,
+}: { category?: string | null; page?: number } = {}): string {
+  const params = new URLSearchParams()
+  if (category) params.set('category', category)
+  if (page && page > 1) params.set('page', String(page))
+  const query = params.toString()
+  return query ? `/insights?${query}` : '/insights'
 }
 
 /**
- * The paginated /insights index — **provisional (#49)**.
- *
- * This route has no canonical frame. 272 migrated articles sit behind a
- * top-level nav link and nobody drew the index; #34 found only a
- * Wireframes-canvas capture of the old HTML prototype (`1065:4601`), which is
- * generation-1 reference, not canonical. That makes it the largest coverage
- * gap on map #33, and the map's coverage rule applies: compose from blocks
- * that **are** drawn, and mark the result provisional.
- *
- * ## What each element traces to
+ * The /insights index, built to the frame #61 commissioned (`2336:4310`).
  *
  * ```
- * hero      1634:1181   CollectionHero, the Work index's ink-warm band
- * band      1683:2467   96px 0, bone #F0F0F0     ← the Home "Blog" row
- *           1924:5388   the same band on About, unchanged
- * card      1734:1729   394.67 wide, gap 24      ← InsightCard (#42)
- * grid gap  1683:2467   32px between cards; 3 × 394.67 + 2 × 32 = 1248 exactly
- * stack     1814:1738   one column at 402, cards 48px apart
- * pager     136:754     Button / Solid, `Show right icon`, light fill
- *           1683:2490   the 13px tracked meta step for the counter
+ * hero      2336:4477   Interior Hero, ink, 192/64, eyebrow + h2 + standfirst
+ * band      2337:4485   bone #F1F0EC, 128px 96px, gap 48
+ *   filters 2337:4486   chip row, gap 10, All + one per category
+ *   grid    2337:4492   1249 wide, wrap, gap 64 × 32 — three 395px cards
+ *   card    2337:4493   the same InsightCard the Home row draws
+ * cta       2336:4351   the shared CTA band, its own default copy
  * ```
  *
- * The 1248 arithmetic is the reason this is a plain three-up grid rather than
- * a guess: `max-w-section` is 1248, and three of the frame's own cards at the
- * frame's own 32px gap fill it to the pixel. Nothing was resized to fit.
+ * The route was **provisional** until this frame: it borrowed the Work hero
+ * and the Home Blog band, and three elements traced to nothing. Two of those
+ * are now drawn — the hero standfirst is the frame's own copy, and the desktop
+ * row gap is its 64. The third is still open, below.
  *
- * ## The three things that trace to nothing
+ * ## The filter is the point of the frame
  *
- * Stated here rather than buried, because "provisional" is only useful if it
- * names what is unsourced:
+ * #49 declined to invent a category filter and #61 asked the frame to settle
+ * it. It did: `2337:4486` draws All plus five categories, and the labels are
+ * five real migrated categories (AI, Design, Technology, 1682 Conference, Life
+ * at O3) rather than sample words — so the control filters on `category`, and
+ * the chips come from the collection instead of from a hand-kept list here.
  *
- * 1. **The hero standfirst.** No frame writes one for this route. The
- *    headline is not invented — it is the Blog row's own line (`1683:2469`) —
- *    and the eyebrow is the collection's name, the same treatment `WORK` gets
- *    on `1634:1183`. The standfirst is new copy.
- * 2. **The row gap above 402.** The 48px comes from `1814:1738`, where the
- *    mobile Blog band stacks its cards. No 1440 frame ever stacks this card,
- *    so the desktop row gap is that value carried up rather than read.
- * 3. **The pager.** Nothing in the file paginates anything. The parts are
- *    canonical — `Button / Solid` with the arrow, the card's meta type step
- *    for the counter — but the arrangement is not. `Show left icon` is a real
- *    boolean on the Figma set, so the reversed arrow on Previous is the set's
- *    own affordance rather than a new one.
+ * It is **server-side and in the URL** (`?category=design`), which is what
+ * makes a filtered index linkable, crawlable and free of client state. The
+ * mechanism is `IndexEntry.facets` — see `content-routes/build.tsx`.
  *
- * **No category filter.** 11 categories migrated, and no frame anywhere draws
- * a filter UI — not a chip row, not a select, not a sidebar. Building one
- * would be inventing a control, which is the trade #25's working agreement 3
- * declines. Raised on #49 instead.
+ * Two divergences from the frame worth stating rather than burying:
  *
- * A real frame changes this file and `collectionIndex.tsx`'s marker, and
- * nothing else.
+ * 1. **The frame draws five chips; this draws every category that has an
+ *    article.** A curated subset would need a field marking a category as
+ *    featured, and no schema says that. The bar wraps instead.
+ * 2. **The frame has no pager**, because nine cards fit its canvas. 273
+ *    articles do not, so the pager stays — the same one, at the same 12 a
+ *    page. It remains the one element on this route no frame draws.
+ *
+ * The card is untouched: the frame's cards are 395 wide with a 24px gap, a
+ * square image under the ink veil, and a 13px meta line over a 24px title —
+ * `InsightCard` exactly. Its meta line reads "Jun 2026 · 15 min read" here
+ * against "3 MINS · 7/27/26" on the redesigned Home Blog component
+ * (`2134:1191`), which is the same card component in Figma; the component wins
+ * over the loose copies of it, so the shipped format stays.
  */
-export function InsightIndexView({ items, pagination }: InsightIndexViewProps) {
+export function InsightIndexView({
+  items,
+  categories,
+  category,
+  pagination,
+}: InsightIndexViewProps) {
   const { page, totalPages } = pagination
+  const activeTitle = categories.find((option) => option.slug === category)?.title
 
   return (
     <>
       <CollectionHero
+        variant="interior"
         eyebrow="Insights"
-        heading="The thinking behind the work."
-        subheading="Notes from inside the work. What we tried, what broke, and what we'd do again."
+        heading="News of the world"
+        subheading="Looking for some firsthand knowledge from our world? Check out our in-depth thoughts about the industry today, our culture at O3, the future of AI and digital experiences, and other relevant topics."
       />
 
-      {/* The Blog band: bone, 96px 0, inset by the gutter. Unlike the Home and
-          About rows this one does not bleed past the right edge — there is
-          nothing to scroll to, so the overhang would promise a gesture the
-          page cannot honour. */}
-      <div className="px-gutter py-band-sm bg-bone">
-        {/*
-         * One column below `lg`, three at `lg` — the two frame widths and
-         * nothing between them (ADR 0006: composition switches at `lg`, size
-         * interpolates). A `md:grid-cols-2` would be a third composition no
-         * frame draws.
-         */}
-        <ul className="max-w-section mx-auto grid grid-cols-1 gap-x-8 gap-y-12 lg:grid-cols-3">
-          {(items ?? []).map((item) => (
-            <li key={item._id}>
-              <InsightCard {...item} />
-            </li>
-          ))}
-        </ul>
+      {/* `2337:4485` — bone, 128px 96px, 48px between the filter bar and the
+          grid. Unlike the Home and About Blog rows this one does not bleed
+          past the right edge: there is nothing to scroll to, so the overhang
+          would promise a gesture the page cannot honour. */}
+      <div className="px-gutter py-band-md bg-bone">
+        <div className="max-w-section mx-auto flex flex-col gap-12">
+          {/*
+           * The band the frame draws has no heading — the Home Blog row's
+           * "The thinking behind the work." is the hero's job here. But the
+           * cards are `h3`s under the hero's `h1`, and a page that skips a
+           * level fails an axe heading-order scan for real reasons: a screen
+           * reader's heading list would offer no way into the grid, and no way
+           * to tell a filtered grid from the whole collection. So the level
+           * exists and is only unseen, and it says which cut is on screen.
+           */}
+          <h2 className="sr-only">{activeTitle ? `${activeTitle} insights` : 'All insights'}</h2>
 
-        {totalPages > 1 ? (
-          <nav
-            aria-label="Pagination"
-            /* 48px clear of the grid — the Blog band's own gap (`1683:2467`),
-               not a new step. */
-            className="max-w-section mx-auto mt-12 grid grid-cols-3 items-center gap-4"
-          >
-            <div className="justify-self-start">
-              {page > 1 ? (
-                <Button asChild variant="light">
-                  <Link href={pageHref(page - 1)} rel="prev">
-                    {/* `Show left icon` on `Button / Solid` — the same glyph,
-                        reversed, which is how the set draws a back arrow. */}
-                    <ArrowIcon className="rotate-180" />
-                    Previous
-                  </Link>
-                </Button>
-              ) : null}
-            </div>
+          {categories.length > 0 ? (
+            /* `2337:4486`: a row 10px apart. It wraps because the number of
+               chips is the collection's business, not the frame's. */
+            <nav aria-label="Filter by category" className="flex flex-wrap items-center gap-2.5">
+              <FilterChip asChild selected={!category}>
+                <Link href={insightsHref()}>All</Link>
+              </FilterChip>
+              {categories.map((option) =>
+                option.slug ? (
+                  <FilterChip key={option.slug} asChild selected={category === option.slug}>
+                    <Link href={insightsHref({ category: option.slug })}>{option.title}</Link>
+                  </FilterChip>
+                ) : null,
+              )}
+            </nav>
+          ) : null}
 
-            {/* One interpolated string, not three children: React splits
-                adjacent expressions with comment markers, which puts them
-                inside the accessible name a screen reader reads out. */}
-            <p className="text-meta text-fg-muted justify-self-center text-center uppercase">
-              {`Page ${page} of ${totalPages}`}
-            </p>
+          {items.length > 0 ? (
+            /*
+             * One column below `lg`, three at `lg` — the two frame widths and
+             * nothing between them (ADR 0006: composition switches at `lg`,
+             * size interpolates). A `md:grid-cols-2` would be a third
+             * composition no frame draws.
+             *
+             * 3 × 395 + 2 × 32 = 1249, which is the frame's own row width and
+             * `max-w-section` to the pixel. The 64px row gap is read at 1440
+             * (`2337:4492`); below `lg` the cards stack 48 apart, the value
+             * the 402 Blog band uses (`1814:1738`).
+             */
+            <ul className="grid grid-cols-1 gap-x-8 gap-y-12 lg:grid-cols-3 lg:gap-y-16">
+              {items.map((item) => (
+                <li key={item._id}>
+                  <InsightCard {...item} />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            /* Reachable by hand-typing a category slug the feed has nothing
+               for — the chips only offer categories that do. Unsourced: no
+               frame draws an empty index. */
+            <p className="text-lead text-fg-muted">No insights under that filter yet.</p>
+          )}
 
-            <div className="justify-self-end">
-              {page < totalPages ? (
-                <Button asChild variant="light">
-                  <Link href={pageHref(page + 1)} rel="next">
-                    Next
-                    <ArrowIcon />
-                  </Link>
-                </Button>
-              ) : null}
-            </div>
-          </nav>
-        ) : null}
+          {totalPages > 1 ? (
+            <nav aria-label="Pagination" className="mt-4 grid grid-cols-3 items-center gap-4">
+              <div className="justify-self-start">
+                {page > 1 ? (
+                  <Button asChild variant="light">
+                    <Link href={insightsHref({ category, page: page - 1 })} rel="prev">
+                      {/* `Show left icon` on `Button / Solid` — the same glyph,
+                          reversed, which is how the set draws a back arrow. */}
+                      <ArrowIcon className="rotate-180" />
+                      Previous
+                    </Link>
+                  </Button>
+                ) : null}
+              </div>
+
+              {/* One interpolated string, not three children: React splits
+                  adjacent expressions with comment markers, which puts them
+                  inside the accessible name a screen reader reads out. */}
+              <p className="text-meta text-fg-muted justify-self-center text-center uppercase">
+                {`Page ${page} of ${totalPages}`}
+              </p>
+
+              <div className="justify-self-end">
+                {page < totalPages ? (
+                  <Button asChild variant="light">
+                    <Link href={insightsHref({ category, page: page + 1 })} rel="next">
+                      Next
+                      <ArrowIcon />
+                    </Link>
+                  </Button>
+                ) : null}
+              </div>
+            </nav>
+          ) : null}
+        </div>
       </div>
+
+      {/*
+       * `2336:4351` — the shared CTA band closes this page as it closes the
+       * other six frames that instance it. The copy is the component's own
+       * default, which is also the line five seed pages already carry, so
+       * nothing here is authored for this route; a collection index has no
+       * document to hold it, the same reason the hero copy is in this file.
+       */}
+      <CtaSection
+        heading="Let’s get started on your next big thing."
+        body="We partner with businesses like yours to build experiences that matter. If you’re ready, we’re ready."
+        cta={{
+          _type: 'cta',
+          label: 'Get in touch',
+          href: '/contact',
+          variant: 'light',
+          target: null,
+        }}
+        decoration="orbs"
+      />
     </>
   )
 }

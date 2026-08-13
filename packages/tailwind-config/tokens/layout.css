@@ -9,7 +9,9 @@
  * clamp(120px, 14vw, 200px) on every band; the frames hand-tune it per band
  * from a three-step scale, and the top and bottom of a band often differ:
  *
- *   Partners / intro   96px 96px 128px   gap 96    (1864:2390)
+ *   Partners           128px 96px        gap 128   (1864:2390, restructured
+ *                                                   2026-08; was 96/96/128
+ *                                                   with a 96 gap)
  *   Case studies head  96px 96px 0       gap 64    (1683:2657)
  *   Case study cards   96px              gap 48    (1683:2661)
  *   Pull quote         192px 96px        gap 128   (1683:2137)

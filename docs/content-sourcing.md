@@ -24,7 +24,7 @@ canonical frames carry finished copy, and the frame it came from is recorded in
 | `/`                                       | `1680:2134` / `1814:1618` | seed-from-frame       | `page-seed-index` — **reconciled against the frame** (#42): composition, section order and copy all now the frame's. The showcase's three cards are the real IRONMAN, Vertex and Caron case studies, the clients the frame's own cards carry (ADR 0016)                                                  | #42 ✅   |
 | `/work`                                   | `1634:1167` / `1906:851`  | migrate               | **Dedicated route**, not a document — lists `caseStudy`; composition is code                                                                                                                                                                                                                             | #43 ✅   |
 | `/work/{slug}`                            | `1710:2300` / `1906:928`  | migrate ✅            | **All 20 translated** (#22) and **published** — WordPress publishes all 20 today ([ADR 0016](./adr/0016-publish-what-wordpress-publishes.md)). 17 serve here; the other 3 are among the o3xo.ai-shadowed set, so their URLs 301 away and the sitemap declines them                                       | #44, #22 |
-| `/insights`                               | **none**                  | provisional ⚠️        | Composition has no frame; borrows the Work hero + Home blog card rather than inventing one. **No document to mark**, so the marker is on the route entry — see below                                                                                                                                     | #49      |
+| `/insights`                               | `2336:4310` — **no 402**  | seed-from-frame       | **Dedicated route**, not a document — lists `insight`; composition is code. The frame #61 commissioned settles it, filter bar included, so the route is no longer provisional                                                                                                                            | #61 ✅   |
 | `/insights/{slug}`                        | `1710:2823` / `1906:1046` | migrate               | 272 insights, 12 persons, 11 categories — **loaded**. 33 carry a byline (the ACF `author`); the other 239 carry none, because the live site shows none (#32)                                                                                                                                             | #45      |
 | `/about`                                  | `1924:5344`               | seed-from-frame       | `page-seed-about` — transcribed; the disciplines grid, team and Careers bands render through their own blocks (#56), and the frame's band imagery is committed under `seed/assets/`. Careers is a section, not a route                                                                                   | #46 ✅   |
 | `/solutions`                              | `1925:6138` — **no 402**  | seed-from-frame       | `page-seed-solutions` — transcribed; the orbital diagram is `disciplineGridSection` `layout: orbital` (#56) and the engagement cards `railPanelsSection` `layout: cards` (#47). The 24 WordPress services consolidate **into this page** — [ADR 0013](./adr/0013-services-consolidate-into-solutions.md) | #47 ✅   |
@@ -92,15 +92,24 @@ has nothing to sit on and `verify` — which reads the dataset and the committed
 JSON — has nothing to list. The marker therefore lives on the **route entry**,
 under the same two field names, with the same rule that the note is required:
 
-| Route       | Entry                                                        | Why                                                                                                                                                                                                               | Cleared by                                                                                             |
-| ----------- | ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| `/insights` | `apps/web/src/content/documents/insight/collectionIndex.tsx` | No canonical frame draws the index (#49). Hero, card and bone band are borrowed from `1634:1181`, `1683:2467`, `1924:5388`; the hero standfirst, the stacked-row gap above 402, and the whole pager are unsourced | A commissioned index frame — which would also settle the category filter this build declines to invent |
+| Route    | Entry | Why | Cleared by |
+| -------- | ----- | --- | ---------- |
+| _(none)_ | —     | —   | —          |
+
+**`/insights` was the case that forced this mechanism, and #61 cleared it.**
+The frame it asked for (`2336:4310`) landed on 2026-08-13, so the entry now
+carries `figmaNode: '2336:4310'` instead of the marker: the hero standfirst it
+used to invent is the frame's own copy, the desktop row gap is the frame's 64,
+and the category filter #49 declined to invent is drawn as a chip bar. The
+pager is the one element still unsourced — no frame paginates anything — and it
+stays because 273 articles do not fit a canvas; that is recorded on
+`InsightIndexView` rather than as a provisional route, since a page is not
+provisional for keeping one control a frame had no reason to draw.
 
 Enforcement is `apps/web/src/content/documents/provisionalRoutes.render.test.tsx`,
-which applies `seed.test.ts`'s three rules to route entries. `/work` sits in the
-same list carrying `figmaNode: '1634:1167'` and no `provisional`, so the
-difference between the two collection indexes is a value rather than an
-absence.
+which applies `seed.test.ts`'s three rules to route entries. Both collection
+indexes now carry a `figmaNode` and no `provisional`, and both are pinned by
+name there, so a marker coming back is a deliberate act.
 
 **#48's gate covers both halves.** No document and no route may still be
 provisional at launch.

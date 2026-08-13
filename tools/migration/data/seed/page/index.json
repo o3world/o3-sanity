@@ -30,11 +30,12 @@
       "_key": "partners",
       "surface": "bone",
       "eyebrow": "Our Partners",
-      "statement": "We work with B2B and enterprise teams where the stakes — and the org charts — are real.",
+      "heading": "Trusted by organizations shaping what's next.",
+      "body": "From Fortune 500 enterprises to high-growth organizations, we've helped teams launch products, modernize platforms, and improve digital performance.",
       "clients": [
         {
           "_type": "reference",
-          "_ref": "client-seed-chop",
+          "_ref": "client-seed-vertex",
           "_key": "client-0"
         },
         {
@@ -44,12 +45,12 @@
         },
         {
           "_type": "reference",
-          "_ref": "client-seed-aramark",
+          "_ref": "client-seed-chop",
           "_key": "client-2"
         },
         {
           "_type": "reference",
-          "_ref": "client-seed-amerigas",
+          "_ref": "client-seed-la-colombe",
           "_key": "client-3"
         },
         {
@@ -59,7 +60,7 @@
         },
         {
           "_type": "reference",
-          "_ref": "client-seed-la-colombe",
+          "_ref": "client-seed-hire-heroes-usa",
           "_key": "client-5"
         }
       ],

@@ -14,6 +14,7 @@ import { encodePathParam } from './encodePathParam'
 
 import type {
   DetailEntry,
+  Facets,
   IndexEntry,
   QueryResult,
   RoutableEntry,
@@ -53,7 +54,7 @@ export interface SingletonRouteShim {
 export interface IndexRouteShim {
   readonly generateMetadata: () => Promise<Metadata>
   readonly Page: (props: {
-    searchParams: Promise<{ page?: string | string[] }>
+    searchParams: Promise<Record<string, string | string[] | undefined>>
   }) => Promise<JSX.Element>
 }
 
@@ -278,16 +279,25 @@ export function buildSingletonRoute<Q extends string>(
  * feed). The requested page is clamped against `total`; the rare
  * out-of-range request costs one refetch. Fetches are tagged per
  * `itemTypes` so an item edit invalidates the index that lists it.
+ *
+ * **Filtering is the same mechanism as paging** (#61): an entry declaring
+ * `facets: ['category']` gets `$category` as a GROQ param and the renderer
+ * gets it back as `facets.category`. The filter is therefore in the URL and
+ * resolved on the server — no client state, no `use client` on the view, and a
+ * filtered index is a linkable, crawlable page. It also composes with the
+ * clamp for free: `total` counts the filtered feed, so `?category=design&page=9`
+ * lands on the last page that category actually has.
  */
 export function buildIndexRoute<Q extends string>(entry: IndexEntry<Q>): IndexRouteShim {
   const pageSize = entry.pageSize ?? 12
   const tags = entry.itemTypes.map(typeTag)
+  const facetNames = entry.facets ?? []
 
-  const fetchPage = async (page: number) => {
+  const fetchPage = async (page: number, facets: Facets) => {
     const { offset, end } = pageRange(page, pageSize)
     const { data } = await sanityFetch({
       query: entry.query,
-      params: { offset, end },
+      params: { offset, end, ...facets },
       tags,
     })
     return data
@@ -299,18 +309,42 @@ export function buildIndexRoute<Q extends string>(entry: IndexEntry<Q>): IndexRo
   }
 
   const Page: IndexRouteShim['Page'] = async ({ searchParams }) => {
-    const { page: pageParam } = await searchParams
-    const requested = parsePage(pageParam)
+    const params = await searchParams
+    const requested = parsePage(params.page)
+    const facets = readFacets(facetNames, params)
 
-    let data = await fetchPage(requested)
+    let data = await fetchPage(requested, facets)
     const total = (data as { total?: unknown } | null)?.total
     const totalPages = Math.max(1, Math.ceil((typeof total === 'number' ? total : 0) / pageSize))
     const page = clampPage(requested, totalPages)
-    if (page !== requested) data = await fetchPage(page)
+    if (page !== requested) data = await fetchPage(page, facets)
     if (!data) notFound()
 
-    return renderEntry(entry, data, { slug: '', pagination: { page, totalPages } })
+    return renderEntry(entry, data, { slug: '', pagination: { page, totalPages }, facets })
   }
 
   return { generateMetadata, Page }
+}
+
+/**
+ * The declared facets, read off the URL: first value wins where Next hands a
+ * repeated parameter as an array, blank is the same as absent, and anything
+ * the entry did not declare is ignored.
+ *
+ * **Absent is `null`, never `undefined`.** These go straight into GROQ params,
+ * and an undefined variable is an error there rather than a null — so the
+ * "unfiltered" arm of a query (`$category == null`) needs the value present
+ * and empty, which is exactly the state a bare `/insights` is in.
+ */
+function readFacets(
+  names: readonly string[],
+  searchParams: Record<string, string | string[] | undefined>,
+): Facets {
+  const facets: Record<string, string | null> = {}
+  for (const name of names) {
+    const raw = searchParams[name]
+    const value = (Array.isArray(raw) ? raw[0] : raw)?.trim()
+    facets[name] = value ? value : null
+  }
+  return facets
 }

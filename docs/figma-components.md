@@ -46,6 +46,7 @@ Verified by direct reads of the canonical frames, or recorded in
 | ------------------------------- | ----------- | ---------------------------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------- |
 | `Button / Solid`                | `136:754`   | Size = Base \| Large; State = Default \| Hover | `Button` (`ui/button.tsx`)       | ⚠️ **Divergent** — see below                                                                      |
 | `Button / Ghost`                | `264:260`   | Size = Base; State = Default                   | `Button variant="ghost"`         | Exists; needs Figma's fill/label                                                                  |
+| `Button` (the 2026-08 rebuild)  | `2134:1785` | Theme = Black \| White; State = Default        | `FilterChip` (`filter-chip.tsx`) | ⚠️ Partly built — see below                                                                       |
 | `Brand / Logo`                  | `264:50`    | Color = Black \| Red \| White                  | `BrandLogo` (`brand-logo.tsx`)   | ✅ #41 — `White` unbuilt, below                                                                   |
 | `Icon / Surface`                | `778:1862`  | Size = Base; State = Hover                     | `CarouselControl` — **to build** | The insights prev/next (#42)                                                                      |
 | `Icon / Soft`                   | `1203:1227` | Size = Base; State = Default                   | Inner chip of `Icon / Surface`   | Not standalone — a part                                                                           |
@@ -107,6 +108,16 @@ Under the rule this becomes `variants: { size: { base, large }, fill: { dark, li
 with `defaultVariants: { size: 'base', fill: 'dark' }`. The red variant does not
 disappear silently — if it survives, it needs a comment saying which frame
 justifies it.
+
+**And the set moved again.** The 2026-08 pass drew a second `Button` set
+(`2134:1785`) with a `Theme = Black | White` axis, radius **2px**, 12×16
+padding and a 12px gap — the geometry every redesigned frame's button now
+carries, including the CTA band's (`2336:4351`). The shipped `Button` is still
+built to `136:754`, so it is now a generation behind in shape as well as in
+vocabulary. `FilterChip` (#61) is built to the new set directly, because the
+Insights filter bar is where it first had to be right, and its doc comment says
+why it is not a `Button` prop. Realigning `Button` itself is the same schema-
+touching job below.
 
 ⚠️ **This is not a component edit.** ADR 0008 called the realignment "#38's
 first job"; auditing it here shows it reaches further than that assumed. The
@@ -182,27 +193,28 @@ person does not have to re-derive that.
 
 Every component in the package, against the Figma library.
 
-| Component        | Classification                                       | Notes                                                                                                          |
-| ---------------- | ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `Button`         | **Has counterpart** — `Button / Solid`               | Divergent; realign (above)                                                                                     |
-| `BrandLogo`      | **Has counterpart** — `Brand / Logo`                 | Added #41. `Color` is the one axis; `White` unbuilt                                                            |
-| `BrandMark`      | **Code-only** — no set draws a box-less mark         | Added 2026-08-02 by direction; the `Footer`'s logo (`1280:1856`) draws it too, #87                             |
-| `MenuIcon`       | **Has counterpart** — `1814:1636` (drawn, not a set) | Added #41. Two bars, per the frame                                                                             |
-| `CloseIcon`      | **Has counterpart** — `close` glyph                  | Added #41 (ADR 0009)                                                                                           |
-| `Sheet`          | **Code-only** — shadcn                               | Added #41 for the 402 nav; the panel has no frame (ADR 0006)                                                   |
-| `Card`           | **Code-only**                                        | Canonical case-study cards are frames, not a component set                                                     |
-| `SectionShell`   | **Code-only**                                        | The three-surface organism; ADR 0008 — shadcn cannot model it                                                  |
-| `ArrowIcon`      | **Has counterpart** — `.building block Icon_text`    | Glyph becomes a component, not a string prop (ADR 0009)                                                        |
-| `ArrowLink`      | **Code-only**                                        | No Figma equivalent; the frames use `Button / Ghost` for this job — **candidate for retirement in #42**        |
-| `Eyebrow`        | **Code-only**                                        | A type style, not a component. ⚠️ still defaults to `tone="brand"`; canonical eyebrows are neutral `#636363`   |
-| `DisplayHeading` | **Code-only**                                        | A type style                                                                                                   |
-| `HalftoneDisc`   | **Drawn, not a component set**                       | Added #56 from `1925:5922` / `1925:6068`. Both export as the SAME dot pattern — a halftone, not four icons     |
-| `OrbitalDiagram` | **Drawn, not a component set**                       | Added #56 from `1928:6526`. **Not `OrbitalSphere`** — six straight dashed paths, no arc anywhere in it         |
-| `PortraitTile`   | **Code-only**                                        | Added #56. The frame's team card (`1925:5864`) bakes portrait + arc + black into one raster; rebuilt in layers |
-| `MaskedLines`    | **Code-only**                                        | Motion, which the static frames cannot express (#33)                                                           |
-| `Reveal`         | **Code-only**                                        | ”                                                                                                              |
-| `LogoTile`       | **Code-only**                                        | The partner logo wall is drawn as frames                                                                       |
-| `Stat`           | **Code-only**                                        | Case-study stats are drawn inline (`1883:3564`)                                                                |
+| Component        | Classification                                       | Notes                                                                                                                                                                        |
+| ---------------- | ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Button`         | **Has counterpart** — `Button / Solid`               | Divergent; realign (above)                                                                                                                                                   |
+| `FilterChip`     | **Has counterpart** — `Button` (`2134:1785`)         | Added #61 for the Insights filter bar. Built to the 2026-08 set, so it is the one component already on its geometry                                                          |
+| `BrandLogo`      | **Has counterpart** — `Brand / Logo`                 | Added #41. `Color` is the one axis; `White` unbuilt                                                                                                                          |
+| `BrandMark`      | **Code-only** — no set draws a box-less mark         | Added 2026-08-02 by direction; the `Footer`'s logo (`1280:1856`) draws it too, #87                                                                                           |
+| `MenuIcon`       | **Has counterpart** — `1814:1636` (drawn, not a set) | Added #41. Two bars, per the frame                                                                                                                                           |
+| `CloseIcon`      | **Has counterpart** — `close` glyph                  | Added #41 (ADR 0009)                                                                                                                                                         |
+| `Sheet`          | **Code-only** — shadcn                               | Added #41 for the 402 nav; the panel has no frame (ADR 0006)                                                                                                                 |
+| `Card`           | **Code-only**                                        | Canonical case-study cards are frames, not a component set                                                                                                                   |
+| `SectionShell`   | **Code-only**                                        | The three-surface organism; ADR 0008 — shadcn cannot model it                                                                                                                |
+| `ArrowIcon`      | **Has counterpart** — `.building block Icon_text`    | Glyph becomes a component, not a string prop (ADR 0009)                                                                                                                      |
+| `ArrowLink`      | **Code-only**                                        | No Figma equivalent; the frames use `Button / Ghost` for this job — **candidate for retirement in #42**                                                                      |
+| `Eyebrow`        | **Code-only**                                        | A type style, not a component. ⚠️ still defaults to `tone="brand"`; canonical eyebrows are neutral `#636363`                                                                 |
+| `DisplayHeading` | **Code-only**                                        | A type style                                                                                                                                                                 |
+| `HalftoneDisc`   | **Drawn, not a component set**                       | Added #56 from `1925:5922` / `1925:6068`. Both export as the SAME dot pattern — a halftone, not four icons                                                                   |
+| `OrbitalDiagram` | **Drawn, not a component set**                       | Added #56 from `1928:6526`. **Not `OrbitalSphere`** — six straight dashed paths, no arc anywhere in it                                                                       |
+| `PortraitTile`   | **Code-only**                                        | Added #56. The frame's team card (`1925:5864`) bakes portrait + arc + black into one raster; rebuilt in layers                                                               |
+| `MaskedLines`    | **Code-only**                                        | Motion, which the static frames cannot express (#33)                                                                                                                         |
+| `Reveal`         | **Code-only**                                        | ”                                                                                                                                                                            |
+| `LogoTile`       | **Code-only** — superseded                           | ⚠️ Unused since #89: the partners plate is a 280 × 280 hairlined frame (`1864:2395`) that `LogoWallSection` draws inline. This 110px row is prototype-era — retire it in #38 |
+| `Stat`           | **Code-only**                                        | Case-study stats are drawn inline (`1883:3564`)                                                                                                                              |
 
 **Nothing is to-be-replaced.** `ArrowLink` is the one open question, and it
 belongs to the Home page layer (#42) rather than here.

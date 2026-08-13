@@ -2,6 +2,10 @@
   "_id": "client-seed-vertex",
   "_type": "client",
   "name": "Vertex",
+  "logo": {
+    "_type": "image",
+    "_localSrc": "tools/migration/data/seed/assets/partner-vertex.png"
+  },
   "migration": {
     "locked": false,
     "sourceId": "seed:case-study-clients",

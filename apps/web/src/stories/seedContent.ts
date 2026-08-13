@@ -73,6 +73,7 @@ import clientAmerigas from '../../../../tools/migration/data/seed/client/ameriga
 import clientCaron from '../../../../tools/migration/data/seed/client/caron.json'
 import clientLaColombe from '../../../../tools/migration/data/seed/client/la-colombe.json'
 import clientVertex from '../../../../tools/migration/data/seed/client/vertex.json'
+import clientHireHeroes from '../../../../tools/migration/data/seed/client/hire-heroes-usa.json'
 
 // ── Industries those case studies carry ────────────────────────────────────
 import industryHealthcare from '../../../../tools/migration/data/seed/industry/healthcare.json'
@@ -138,6 +139,7 @@ const DOCUMENTS: readonly SeedDoc[] = [
   clientCaron,
   clientLaColombe,
   clientVertex,
+  clientHireHeroes,
   industryHealthcare,
   industrySports,
   industryTechnology,
