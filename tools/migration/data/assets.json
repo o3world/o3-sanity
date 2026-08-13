@@ -1662,5 +1662,9 @@
   "file:tools/migration/data/seed/assets/partner-vertex.png": {
     "sha256": "c4e6317ffd073039904d3e1c833aec3a504c8a11",
     "assetId": "image-c4e6317ffd073039904d3e1c833aec3a504c8a11-1200x221-png"
+  },
+  "file:tools/migration/data/seed/assets/insight-sync-hero.svg": {
+    "sha256": "7c92a5bd7f0cf8999686e2e5eea57bef995910ae",
+    "assetId": "image-7c92a5bd7f0cf8999686e2e5eea57bef995910ae-1200x630-svg"
   }
 }
