@@ -380,6 +380,7 @@ describe('the committed redirect map', () => {
       const added = [...paths].filter((p) => !liveSet.has(p)).sort()
       expect(added).toEqual([
         '/insights/how-we-redesigned-our-website-in-a-single-weekend',
+        '/insights/the-design-team-moved-the-file',
         '/live',
       ])
     })

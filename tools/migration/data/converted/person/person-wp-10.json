@@ -1,0 +1,14 @@
+{
+  "_id": "person-wp-10",
+  "_type": "person",
+  "name": "Talia Edmundson",
+  "title": "Director of Human Resources",
+  "headshot": {
+    "_type": "image",
+    "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/02/Talia.jpg"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:user:10"
+  }
+}

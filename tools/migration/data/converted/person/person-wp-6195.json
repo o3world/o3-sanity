@@ -1,0 +1,14 @@
+{
+  "_id": "person-wp-6195",
+  "_type": "person",
+  "name": "Jackie Ost",
+  "title": "Finance Manager",
+  "headshot": {
+    "_type": "image",
+    "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/02/Jackie.jpg"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:team:6195"
+  }
+}

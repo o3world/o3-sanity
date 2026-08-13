@@ -124,18 +124,13 @@
         },
         {
           "_type": "reference",
-          "_key": "p-handler",
-          "_ref": "person-wp-3"
+          "_key": "p-scandone",
+          "_ref": "person-wp-21"
         },
         {
           "_type": "reference",
-          "_key": "p-sheller",
-          "_ref": "person-wp-3984"
-        },
-        {
-          "_type": "reference",
-          "_key": "p-gaitonde",
-          "_ref": "person-wp-4706"
+          "_key": "p-edmundson",
+          "_ref": "person-wp-10"
         },
         {
           "_type": "reference",
@@ -144,8 +139,28 @@
         },
         {
           "_type": "reference",
+          "_key": "p-halligan",
+          "_ref": "person-wp-9147"
+        },
+        {
+          "_type": "reference",
+          "_key": "p-handler",
+          "_ref": "person-wp-3"
+        },
+        {
+          "_type": "reference",
           "_key": "p-navari",
           "_ref": "person-wp-4"
+        },
+        {
+          "_type": "reference",
+          "_key": "p-ost",
+          "_ref": "person-wp-6195"
+        },
+        {
+          "_type": "reference",
+          "_key": "p-boenisch",
+          "_ref": "person-wp-10559"
         }
       ]
     },

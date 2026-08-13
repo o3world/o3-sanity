@@ -1,0 +1,14 @@
+{
+  "_id": "person-wp-10559",
+  "_type": "person",
+  "name": "Alex Boenisch",
+  "title": "UX Design Manager",
+  "headshot": {
+    "_type": "image",
+    "_wpSrc": "https://www.o3world.com/wp-content/uploads/2026/03/85b1f0fa-230d-11f1-beac-a2c508ea3134.avif"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "wp:team:10559"
+  }
+}
