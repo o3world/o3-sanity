@@ -26,23 +26,72 @@ is exactly the sequence #25 describes in prose.
 assignee, so the frontier rules are enforced where work actually starts rather
 than in a document nobody re-reads. `--force` overrides both.
 
-## Why the script exists
+## Or from Orca
 
-`git worktree add` alone leaves you with a checkout that cannot build. Three
-things have to happen after it:
+Orca creates worktrees from the app side, under
+`~/orca/workspaces/o3-sanity/<name>`. It runs the same provisioning through
+`orca.yaml`, so a checkout is set up identically whichever made it:
 
-1. **`pnpm install`.** node_modules is not shared between worktrees.
-2. **Carry the gitignored env across** — `.env.local`, `apps/web/.env.local`,
+```bash
+orca worktree create --repo path:$PWD --name <task> --agent claude --json
+```
+
+Orca does not know about the frontier, so it will not claim the ticket or
+refuse a blocked one — do that yourself
+(`gh issue edit <n> --add-assignee @me`) before starting work. That is the only
+difference; `pnpm wt new` remains the shorter path when you are working from a
+ticket number.
+
+Orca reads `orca.yaml` only when the repo's command source is set to
+**orca.yaml** (or _orca.yaml + local_) in its repo settings. A repo left on
+_local only_ silently ignores the file and keeps running whatever command is
+stored in the app — the failure mode is a worktree with node_modules and no
+env.
+
+## What provisioning does
+
+`git worktree add` alone leaves you with a checkout that cannot build.
+`scripts/worktree-provision.sh` is the shared body both paths call, and it
+does four things:
+
+1. **Carry the gitignored env across** — `.env.local`, `apps/web/.env.local`,
    `.vercel/project.json`. Without these a worktree can't reach Sanity or
    Vercel, and the failure looks like a code bug rather than a missing file.
-3. **Claim the issue** (`--add-assignee @me`), which is what stops two sessions
-   picking up the same ticket.
+2. **Symlink `prototype/`** — 22 MB of seed image assets, gitignored, that the
+   migration seed test asserts against. Without it that suite fails in every
+   worktree for reasons that have nothing to do with the ticket being worked.
+3. **Allocate dev ports**, written to the worktree's own `.env`: web from
+   3600-3609, storybook from 6660-6669, skipping anything a sibling worktree
+   has already claimed or that is currently listening. Two checkouts both
+   booting on 3600 is the first thing that breaks when a second session starts.
+4. **`pnpm install`.** node_modules is not shared between worktrees.
 
-Worktrees live in a **sibling** directory, `../o3-sanity-worktrees/<issue>-<slug>`,
-not inside the repo. Each carries its own ~1.1 GB node_modules; nesting that
-under the checkout puts it in front of every editor indexer and file glob in the
-toolchain. Claude Code's own auto-worktrees still land in `.claude/worktrees/`
-(gitignored) — `pnpm wt ls` lists both, and both should be removed when done.
+It is safe to re-run and will not overwrite an env file, a symlink, or a `.env`
+that is already there.
+
+**The web port pool is bounded by Sanity CORS.** Every port a browser hits
+needs a matching origin on the project or client logos and live content stop
+rendering. 3600-3609 are registered; widening the pool means registering the
+new ports first:
+
+```bash
+pnpm sanity cors add http://localhost:<port> --credentials
+```
+
+Worktrees live **outside** the checkout — `../o3-sanity-worktrees/<issue>-<slug>`
+for `pnpm wt`, `~/orca/workspaces/o3-sanity/<name>` for Orca. Each carries its
+own ~1.1 GB node_modules; nesting that under the checkout puts it in front of
+every editor indexer and file glob in the toolchain. Claude Code's own
+auto-worktrees still land in `.claude/worktrees/` (gitignored) — `pnpm wt ls`
+lists them all, and they should all be removed when done.
+
+## Tearing one down
+
+`pnpm wt rm <n>` removes the worktree and its branch if merged. Orca's archive
+hook runs `scripts/down.sh` before removing a worktree, which stops only the
+dev servers whose working directory is inside _that_ checkout — the other
+sessions' servers are left alone. Removing a worktree by hand skips that; run
+`pnpm down` in it first.
 
 ## Turbo remote cache — do this once
 

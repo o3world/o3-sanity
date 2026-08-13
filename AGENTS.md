@@ -16,8 +16,9 @@ pnpm wt new <n>      # claim it, branch it, worktree it, install, carry env acro
 ```
 
 One ticket, one worktree, one session. `pnpm wt new` refuses a blocked or already-claimed ticket, so
-you cannot start work two sessions are duplicating. See `docs/agents/worktrees.md` — read it before
-running more than one session at a time.
+you cannot start work two sessions are duplicating. Orca creates worktrees too, provisioned the same
+way via `orca.yaml`, but it does not claim the ticket for you. See `docs/agents/worktrees.md` — read
+it before running more than one session at a time.
 
 **Every open task hangs off a map.** `frontier` walks maps downward, so a ticket attached to nothing
 is invisible to it — the mechanism that quietly stranded eight tickets, including a one-line fix, in
