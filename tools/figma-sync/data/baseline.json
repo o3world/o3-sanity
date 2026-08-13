@@ -2,7 +2,7 @@
   "fileKey": "RvraLJaZ0zWm8UaD5AJf43",
   "version": "2386937043801380426",
   "lastModified": "2026-08-12T20:12:02Z",
-  "syncedAt": "2026-08-13T18:57:49.962Z",
+  "syncedAt": "2026-08-13T21:59:04.740Z",
   "hashes": {
     "1680:2134": "c85734bb735db4194a084d126a653fa0725564fb5c53d2fe0b7a2ec82251f515",
     "1814:1618": "95b4db66f77c103dc243046932164b62cf8a9f6828e9ea49ea7768b78526e815",
@@ -20,6 +20,7 @@
     "1906:334": "e9e02020cc85246b52a162289a76358e4d4861d58f0c1abe810275d367f58ea9",
     "136:754": "b1ae9d97da5fd827b8d53328715c9475482440d0d2deab50dbcec2c08649ed76",
     "264:260": "11e1d53acbe6d5825e16f69b26b85b39ef42e1f1beb8546da4240cccea8c1b62",
+    "2134:1785": "4ab7a715a39f54f4c02cfb10847da3e46fe0d770d28d9c92fb83112033738e35",
     "264:50": "fbd6930943936a3fbbeca669acc6db0a0ff4b55563eea6c0d4f5bf4b3767005a",
     "778:1862": "396859fffe5125238f976e3f7e08ed8a99e93a46c7ff80a619cab3afd9795149",
     "1203:1227": "69fbc8dab3793d94e1436bb69d3207cb276843f205c2e502d42403b9446ad860",
@@ -60,6 +61,7 @@
     "1906:334": "pageFrame",
     "136:754": "componentSet",
     "264:260": "componentSet",
+    "2134:1785": "componentSet",
     "264:50": "componentSet",
     "778:1862": "componentSet",
     "1203:1227": "componentSet",
@@ -91,7 +93,58 @@
     "2032:577": "21cf85cd881115dde9cdf3b3edf09deff54fbfe86c3ea885cc0a49d53e676c1b",
     "1751:2003": "38707cf5ffbd007a0c2455ebca245e67390b111a607c752530449be36ddc8b2c",
     "1751:2010": "b232a03da2bf33391833937e08791ce82f385c5d7540f37d90ed1bc11fcbe29e",
-    "1899:4421": "a1fae57041b78b83346955e099790ecea5204cffdaa8a524ddcd11cc373bbfc7"
+    "1899:4421": "a1fae57041b78b83346955e099790ecea5204cffdaa8a524ddcd11cc373bbfc7",
+    "1883:3430": "8e7d86a2ac288ef5c40ac577a48ac094ad292e8c9fb7c0feae1f966ab752f2dd",
+    "1875:3332": "ab8a1c42eda8c3893f3f1940868ddb65ec5a55970525314f14c3eb7c279f7055",
+    "1875:3335": "af38a161b057867d78a4260f4d06d54c5d30d31c4d7f461d351374ac98a0ab82",
+    "2250:1484": "e51f2e585d069b1917634200d7cc37d5a10bcfc46f97bf11a58675996052dd74",
+    "1864:2396": "d6d0cd6a725ddeb3ccb1b5784896a70b86a485cce8107543430a3d277bc6fd29"
   },
-  "openAssetConflicts": []
+  "openAssetConflicts": [
+    {
+      "path": "tools/migration/data/seed/assets/partner-caron.png",
+      "nodeId": "1883:3430",
+      "conflictHash": "8e7d86a2ac288ef5c40ac577a48ac094ad292e8c9fb7c0feae1f966ab752f2dd",
+      "entryFingerprint": "e9c447216e4a35e4f6e24a6173c4609dae47b866f5b9488f1ec63c595d20c451",
+      "firstSeenAt": "2026-08-13T21:59:04.740Z",
+      "reason": "new-to-baseline",
+      "note": "Replaces the prototype-derived wordmark with the fill original from the partners strip (`1883:3429`) - a different lockup, carrying the \"Transformational Care\" line the old file did not. Alpha-trimmed. Locked because of that."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/partner-hireheroes.png",
+      "nodeId": "1875:3332",
+      "conflictHash": "ab8a1c42eda8c3893f3f1940868ddb65ec5a55970525314f14c3eb7c279f7055",
+      "entryFingerprint": "51896d134eaddeb5536e9037df2e7417196637c38b14f08d6212e3448cc905a7",
+      "firstSeenAt": "2026-08-13T21:59:04.740Z",
+      "reason": "new-to-baseline",
+      "note": "New partner with the 2026-08 restructure (#89). Fill original from the partners strip (`1875:3331`), alpha-trimmed. Locked because of the trim."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/partner-ironman.png",
+      "nodeId": "1875:3335",
+      "conflictHash": "af38a161b057867d78a4260f4d06d54c5d30d31c4d7f461d351374ac98a0ab82",
+      "entryFingerprint": "6c8c67c0b4aafad58abd53149a0c8758dcb6ee2affc251c26d4d83272b82ad09",
+      "firstSeenAt": "2026-08-13T21:59:04.740Z",
+      "reason": "new-to-baseline",
+      "note": "Replaces the prototype-derived 600x240 raster with the fill original from the partners strip (`1875:3334`). The uploaded file is a 3840x2160 canvas that is mostly transparent margin, which Figma cover-crops into the tile; the committed copy is alpha-trimmed and downscaled to 1200px instead, so `object-fit` never has to. Locked because of that edit."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/partner-lacolombe.png",
+      "nodeId": "2250:1484",
+      "conflictHash": "e51f2e585d069b1917634200d7cc37d5a10bcfc46f97bf11a58675996052dd74",
+      "entryFingerprint": "30fd3a4d53660afb7242cf26bb9e3f1f3e3d8c9dd8ac1a5a2b8576f132516092",
+      "firstSeenAt": "2026-08-13T21:59:04.740Z",
+      "reason": "new-to-baseline",
+      "note": "Replaces the prototype-derived navy raster with the fill original from the partners strip (`2082:3954`), which the frame draws in black. Alpha-trimmed; already small (512x99), so not downscaled. Locked because of the trim."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/partner-vertex.png",
+      "nodeId": "1864:2396",
+      "conflictHash": "d6d0cd6a725ddeb3ccb1b5784896a70b86a485cce8107543430a3d277bc6fd29",
+      "entryFingerprint": "0410fc66959df1da1bae26849622aa2fe9f17504727eaf81b88ef39f0c01505b",
+      "firstSeenAt": "2026-08-13T21:59:04.740Z",
+      "reason": "new-to-baseline",
+      "note": "Downloaded fill original from the partners strip (`1864:2390` -> `1864:2395`), then ALPHA-TRIMMED to its bounding box and downscaled to 1200px wide, hence locked. The frame gives every mark a 152px box and lets its natural height fall out at 28-42px, which only works if the file carries no margin of its own."
+    }
+  ]
 }
