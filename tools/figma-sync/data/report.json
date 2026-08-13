@@ -1,14 +1,122 @@
 {
   "schemaVersion": 1,
-  "ranAt": "2026-08-04T04:05:42.440Z",
-  "fileVersion": "2383704929469388694",
+  "ranAt": "2026-08-13T18:13:01.726Z",
+  "fileVersion": "2386937043801380426",
   "shortCircuited": false,
-  "changedFrames": [],
-  "changedComponentSets": [],
+  "changedFrames": [
+    {
+      "nodeId": "1680:2134",
+      "name": "Home",
+      "route": "/",
+      "variant": "desktop",
+      "change": "modified"
+    },
+    {
+      "nodeId": "1814:1618",
+      "name": "Home",
+      "route": "/",
+      "variant": "mobile",
+      "change": "modified"
+    },
+    {
+      "nodeId": "1634:1167",
+      "name": "Work index",
+      "route": "/work",
+      "variant": "desktop",
+      "change": "modified"
+    },
+    {
+      "nodeId": "1906:851",
+      "name": "Work index",
+      "route": "/work",
+      "variant": "mobile",
+      "change": "modified"
+    },
+    {
+      "nodeId": "1710:2300",
+      "name": "Case Study detail",
+      "route": "/work/{slug}",
+      "variant": "desktop",
+      "change": "modified"
+    },
+    {
+      "nodeId": "1710:2823",
+      "name": "Insight detail",
+      "route": "/insights/{slug}",
+      "variant": "desktop",
+      "change": "modified"
+    },
+    {
+      "nodeId": "1906:1046",
+      "name": "Insight detail",
+      "route": "/insights/{slug}",
+      "variant": "mobile",
+      "change": "modified"
+    },
+    {
+      "nodeId": "1924:5344",
+      "name": "About",
+      "route": "/about",
+      "variant": "desktop",
+      "change": "modified"
+    },
+    {
+      "nodeId": "1925:6138",
+      "name": "Solutions",
+      "route": "/solutions",
+      "variant": "desktop",
+      "change": "modified"
+    },
+    {
+      "nodeId": "1644:1889",
+      "name": "Live",
+      "route": "/live",
+      "variant": "desktop",
+      "change": "modified"
+    },
+    {
+      "nodeId": "1906:334",
+      "name": "Live",
+      "route": "/live",
+      "variant": "mobile",
+      "change": "modified"
+    }
+  ],
+  "changedComponentSets": [
+    {
+      "nodeId": "1710:2271",
+      "name": "NavBar",
+      "route": null,
+      "variant": null,
+      "codeComponent": "apps/web/src/ui/SiteNav.tsx#SiteNav",
+      "change": "modified"
+    },
+    {
+      "nodeId": "1280:1885",
+      "name": "Footer",
+      "route": null,
+      "variant": null,
+      "codeComponent": null,
+      "change": "modified"
+    },
+    {
+      "nodeId": "134:343",
+      "name": "Cover status",
+      "route": null,
+      "variant": null,
+      "codeComponent": null,
+      "change": "removed"
+    }
+  ],
   "untrackedFrames": [
     {
-      "nodeId": "2050:891",
-      "name": "Contact",
+      "nodeId": "2336:4310",
+      "name": "Insights",
+      "width": 1440
+    },
+    {
+      "nodeId": "2252:3535",
+      "name": "Frame 2611219",
       "width": 1440
     },
     {
@@ -35,6 +143,16 @@
       "nodeId": "2118:1015",
       "name": "Blog Post",
       "width": 1440
+    },
+    {
+      "nodeId": "2354:2446",
+      "name": "Sanity",
+      "width": 1440
+    },
+    {
+      "nodeId": "2360:2879",
+      "name": "Solutions",
+      "width": 1440
     }
   ],
   "assets": {
@@ -42,5 +160,7 @@
     "lockedConflicts": [],
     "failures": []
   },
-  "errors": []
+  "errors": [
+    "134:343 (Cover status, componentSet) not found in the file"
+  ]
 }

@@ -31,7 +31,8 @@ Solid` — become **props, not variants**. They toggle the presence of a child,
 ## The Local Components canvas is not the library
 
 ⚠️ Worth knowing before you go looking. **`🧩 Local Components` (`1275:1586`)
-holds exactly two things** — the `Go birds.` easter egg and a stale `Footer`.
+holds exactly two things** — the `Go birds.` easter egg and the `Footer`
+(canonical since 2026-08, see below).
 The real component sets live on other canvases and are referenced across
 generations, so **a low node id does not mean archived**: `Button / Solid` is
 `136:754` and is the button the canonical frames use.
@@ -41,16 +42,17 @@ generations, so **a low node id does not mean archived**: `Button / Solid` is
 Verified by direct reads of the canonical frames, or recorded in
 `packages/ui/src/foundations/figma-home-spec.ts`.
 
-| Figma set                       | Node        | Variant axes                                   | Code target                      | Status                           |
-| ------------------------------- | ----------- | ---------------------------------------------- | -------------------------------- | -------------------------------- |
-| `Button / Solid`                | `136:754`   | Size = Base \| Large; State = Default \| Hover | `Button` (`ui/button.tsx`)       | ⚠️ **Divergent** — see below     |
-| `Button / Ghost`                | `264:260`   | Size = Base; State = Default                   | `Button variant="ghost"`         | Exists; needs Figma's fill/label |
-| `Brand / Logo`                  | `264:50`    | Color = Black \| Red \| White                  | `BrandLogo` (`brand-logo.tsx`)   | ✅ #41 — `White` unbuilt, below  |
-| `Icon / Surface`                | `778:1862`  | Size = Base; State = Hover                     | `CarouselControl` — **to build** | The insights prev/next (#42)     |
-| `Icon / Soft`                   | `1203:1227` | Size = Base; State = Default                   | Inner chip of `Icon / Surface`   | Not standalone — a part          |
-| `.building block Icon_text`     | `136:14`    | prop: `Icon name` (Material Symbols)           | **No component** — ADR 0009      | `<ArrowIcon />`, `<CloseIcon />` |
-| `NavBar` (component, not a set) | `1710:2271` | —                                              | `SiteNav` (`web/src/ui`)         | ✅ #41                           |
-| `Footer` (component, not a set) | `1280:1885` | —                                              | `SiteFooter` (`web/src/ui`)      | ✅ #41 — **from the frame**      |
+| Figma set                       | Node        | Variant axes                                   | Code target                           | Status                                                                                            |
+| ------------------------------- | ----------- | ---------------------------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `Button / Solid`                | `136:754`   | Size = Base \| Large; State = Default \| Hover | `Button` (`ui/button.tsx`)            | ⚠️ **Divergent** — see below                                                                      |
+| `Button / Ghost`                | `264:260`   | Size = Base; State = Default                   | `Button variant="ghost"`              | Exists; needs Figma's fill/label                                                                  |
+| `Brand / Logo`                  | `264:50`    | Color = Black \| Red \| White                  | `BrandLogo` (`brand-logo.tsx`)        | ✅ #41 — `White` unbuilt, below                                                                   |
+| `Icon / Surface`                | `778:1862`  | Size = Base; State = Hover                     | `CarouselControl` — **to build**      | The insights prev/next (#42)                                                                      |
+| `Icon / Soft`                   | `1203:1227` | Size = Base; State = Default                   | Inner chip of `Icon / Surface`        | Not standalone — a part                                                                           |
+| `.building block Icon_text`     | `136:14`    | prop: `Icon name` (Material Symbols)           | **No component** — ADR 0009           | `<ArrowIcon />`, `<CloseIcon />`                                                                  |
+| `NavBar` (component, not a set) | `2225:2920` | —                                              | `SiteNav` (`web/src/ui`)              | ✅ #41 — rebuilt 2026-08; the old `1710:2271` was emptied to a bare pill. Labels unchanged        |
+| `Utility Nav` (component)       | `2250:1445` | —                                              | **To build** — with the NavBar rework | New 2026-08: O3 World · 1682 Conference · O3XO                                                    |
+| `Footer` (component, not a set) | `1280:1885` | —                                              | `SiteFooter` (`web/src/ui`)           | ⚠️ **Became canonical 2026-08** — Home's footer is now an override-free instance of it; see below |
 
 `BrandLogo` ships `Color=Black` and `Color=Red` only. No canonical Design
 Concept frame instances `Color=White`, so its knockout colour would be a guess;
@@ -106,13 +108,20 @@ so it belongs to the page layer that rebuilds the CTAs against the frame
 (**#42**, with the chrome buttons in #41), not to an inventory ticket. Recorded
 here rather than done.
 
-### The `Footer` component is stale
+### The `Footer` component became canonical (2026-08)
 
-`1280:1885` on Local Components is `#141414` with `64px 96px 16px` padding. The
-footer the **canonical Home frame actually renders** (`1680:2096`) is a `#030303`
-gradient with `96px 96px 16px`. Build `SiteFooter` from the frame, not the
-component. **Resolved in #41** — `SiteFooter` is built from `1680:2096` (mobile
-`1814:1784`), and the component is left alone.
+History: `1280:1885` on Local Components was stale — `#141414` with
+`64px 96px 16px` padding against the canonical frame footer's (`1680:2096`)
+`#030303` gradient — so #41 built `SiteFooter` from the frame, not the
+component.
+
+The 2026-08 design pass inverted that: the component was reworked
+(`#000000`, `64px 96px`, three link columns, legal row, "Go birds." badge) and
+the Home frame's footer is now an **override-free instance** of it
+(`2435:1840`); `1680:2096` no longer exists. The component is the source of
+record now. Known `SiteFooter` deltas ticketed from the 2026-08-13 sync: the
+logo is white in Figma vs hardcoded red in code, and the "Go birds." badge has
+no code counterpart.
 
 ### The 402 nav's two extra parts
 
@@ -150,7 +159,6 @@ person does not have to re-derive that.
 | `Social links`              | `172:54`                          | **Revisited in #41 and still no.** The frame's footer draws Socials as a plain `Link Group` (`1680:2110`) — no instance                                                                                                                                                                                    |
 | `Shapes`                    | `734:1073`                        | Decorative quarter-circles — a background treatment, not a component                                                                                                                                                                                                                                       |
 | `close`                     | `400:2219`                        | Glyph, not a component (ADR 0009)                                                                                                                                                                                                                                                                          |
-| `Cover status`              | `134:343`                         | Figma file furniture                                                                                                                                                                                                                                                                                       |
 | `Pro-series`                | `1261:4877`                       | AB WIP canvas                                                                                                                                                                                                                                                                                              |
 | `Go birds.`                 | `1275:1631`                       | Easter egg. Not a site component.                                                                                                                                                                                                                                                                          |
 | `.building block Icon_text` | `270:814`                         | Duplicate of `136:14`                                                                                                                                                                                                                                                                                      |

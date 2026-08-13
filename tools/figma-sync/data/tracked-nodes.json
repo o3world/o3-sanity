@@ -147,20 +147,28 @@
       "note": "No component — ADR 0009. Material Symbols glyphs are inline SVG (`ArrowIcon`, `CloseIcon`), never a string prop."
     },
     {
-      "nodeId": "1710:2271",
+      "nodeId": "2225:2920",
       "kind": "componentSet",
       "name": "NavBar",
       "figmaName": "NavBar",
       "codeComponent": "apps/web/src/ui/SiteNav.tsx#SiteNav",
-      "note": "A component, not a set, and it sits loose in the Design Concept section. Source of record for the nav's display labels."
+      "note": "A component, not a set. Rebuilt 2026-08: the old NavBar (`1710:2271`) was emptied to a bare pill and canonical frames now instance this node — same labels (Work · Live · Insights · Solutions · About + \"Let's talk\"). Source of record for the nav's display labels."
+    },
+    {
+      "nodeId": "2250:1445",
+      "kind": "componentSet",
+      "name": "Utility Nav",
+      "figmaName": "Utility Nav",
+      "codeComponent": null,
+      "note": "New 2026-08 brand-property bar above the NavBar (O3 World · 1682 Conference · O3XO), instanced by canonical frames. No code counterpart yet — the build is ticketed with the NavBar rework."
     },
     {
       "nodeId": "1280:1885",
       "kind": "componentSet",
       "name": "Footer",
       "figmaName": "Footer",
-      "codeComponent": null,
-      "note": "Stale — `SiteFooter` is built from the frame's footer (`1680:2096`), not from this component (#41). Tracked so a rework of it is visible, not because it maps anywhere."
+      "codeComponent": "apps/web/src/ui/SiteFooter.tsx#SiteFooter",
+      "note": "Became canonical 2026-08: the Home frame's footer (`2435:1840`) is now an override-free instance of this component — the old frame footer `1680:2096` is gone, superseding #41's from-the-frame decision. `SiteFooter` realignment (white logo, \"Go birds.\" badge) is ticketed."
     },
     {
       "nodeId": "264:573",
@@ -257,14 +265,6 @@
       "figmaName": "close",
       "codeComponent": null,
       "note": "Glyph, not a component (ADR 0009) — `CloseIcon` draws it inline."
-    },
-    {
-      "nodeId": "134:343",
-      "kind": "componentSet",
-      "name": "Cover status",
-      "figmaName": "Cover status",
-      "codeComponent": null,
-      "note": "Figma file furniture."
     },
     {
       "nodeId": "1261:4877",

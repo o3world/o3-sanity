@@ -95,8 +95,10 @@ describe('tracked-nodes.json', () => {
  */
 describe('tracked component sets', () => {
   it('carries the whole component→code map, canonical and not', () => {
-    // docs/figma-components.md: 8 canonical rows and 14 non-canonical ones —
+    // docs/figma-components.md: 9 canonical rows and 13 non-canonical ones —
     // 24 nodes, because `Case study cards` is three competing sets.
+    // (`Cover status` 134:343 was deleted from the file, and `Utility Nav`
+    // 2250:1445 arrived with the 2026-08 nav rebuild — both seen 2026-08-13.)
     expect(componentSets.length).toBe(24)
   })
 
