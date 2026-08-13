@@ -7,28 +7,21 @@
 #   pnpm wt ls            every worktree, its ticket, and whether it's dirty
 #   pnpm wt rm 26         remove the worktree (and its branch, if merged)
 #
+# Orca does the same job from the app side (its worktrees land under
+# ~/orca/workspaces/o3-sanity/) and runs the same provisioning through
+# orca.yaml. Both paths call scripts/worktree-provision.sh, so a checkout is
+# set up identically whichever made it. What this script adds on top is the
+# frontier discipline: it refuses a blocked or already-claimed ticket, and
+# claims the one you asked for.
+#
 # Worktrees live in a SIBLING directory, not inside the repo: each one carries
 # its own ~1.1 GB node_modules, and nesting that under the checkout puts it in
 # front of every editor indexer and file-glob in the toolchain.
-#
-# The env files and .vercel/ are gitignored, so a fresh worktree cannot reach
-# Sanity or Vercel until they are copied across. `new` does that; it is the
-# whole reason this script exists rather than a bare `git worktree add`.
 
 set -euo pipefail
 
 MAIN_ROOT="$(dirname "$(git rev-parse --path-format=absolute --git-common-dir)")"
 WT_HOME="$(dirname "$MAIN_ROOT")/o3-sanity-worktrees"
-
-# Gitignored, so `git worktree add` cannot bring them along.
-CARRY_FILES=(.env.local apps/web/.env.local .vercel/project.json)
-
-# Also gitignored, and also load-bearing: `prototype/` holds the seed docs'
-# image assets, and tools/migration's seed test asserts every asset marker
-# resolves on disk. Without it that suite fails in every worktree for reasons
-# that have nothing to do with the ticket being worked. Symlinked rather than
-# copied — it is 22 MB of read-only reference material that #48 retires.
-CARRY_DIRS=(prototype)
 
 die() {
   echo "error: $*" >&2
@@ -76,31 +69,19 @@ cmd_new() {
     git worktree add -b "$branch" "$path" main
   fi
 
-  for f in "${CARRY_FILES[@]}"; do
-    if [[ -f "$MAIN_ROOT/$f" ]]; then
-      mkdir -p "$(dirname "$path/$f")"
-      cp "$MAIN_ROOT/$f" "$path/$f"
-    else
-      echo "  note: $MAIN_ROOT/$f not found — run \`pnpm env:pull\` in the worktree" >&2
-    fi
-  done
-
-  for d in "${CARRY_DIRS[@]}"; do
-    if [[ -d $MAIN_ROOT/$d && ! -e $path/$d ]]; then
-      ln -s "$MAIN_ROOT/$d" "$path/$d"
-    fi
-  done
-
-  echo "installing dependencies…"
-  (cd "$path" && pnpm install --reporter=silent)
+  bash "$MAIN_ROOT/scripts/worktree-provision.sh" "$path"
 
   gh issue edit "$issue" --add-assignee @me >/dev/null && echo "claimed #$issue"
+
+  local web_port
+  web_port="$(sed -nE 's/^WEB_PORT=([0-9]+).*/\1/p' "$path/.env" 2>/dev/null | head -1)"
 
   cat <<EOF
 
   #$issue  $title
   branch  $branch
   path    $path
+  web     http://localhost:${web_port:-?}
 
   cd $path && claude
 EOF

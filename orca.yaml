@@ -1,0 +1,24 @@
+# Orca worktree hooks. See scripts/orca-hooks.sh for what each one does, and
+# docs/agents/worktrees.md for how they fit the parallel-session workflow.
+#
+# These only run once the repo's command source is set to "orca.yaml" (or
+# "orca.yaml + local") in Orca's repo settings — a repo left on "local only"
+# ignores this file and keeps running whatever command is stored in the app.
+#
+# Both hooks run with cwd set to the worktree, under a non-interactive
+# /bin/bash, and are killed at 120s.
+scripts:
+  setup: bash scripts/orca-hooks.sh setup
+  archive: bash scripts/orca-hooks.sh archive
+
+# Terminals opened in every new worktree. Left commented out: `pnpm dev` boots
+# both servers on the ports setup just allocated, but starting it before a
+# session has decided what it's doing burns a Next build in every worktree.
+# defaultTabs:
+#   - title: dev
+#     command: pnpm dev
+#
+# Other keys Orca reads here, unused for now: worktree.sharedDirectories
+# (git-ignored dirs symlinked in from the main checkout — `prototype/` is
+# handled by the setup hook instead, alongside the env files it belongs with),
+# issueCommand, environmentRecipes.
