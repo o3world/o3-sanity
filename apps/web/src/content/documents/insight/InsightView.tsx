@@ -1,4 +1,4 @@
-import { ArticleByline, Eyebrow, OrbitalSphere, ReadingProgress, SectionShell } from '@o3/ui'
+import { ArticleByline, Eyebrow, ReadingProgress, SectionShell } from '@o3/ui'
 import type { INSIGHT_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { CarouselTrack } from '@/content/blocks/section/insightsCarouselSection/CarouselTrack'
@@ -20,16 +20,37 @@ type InsightViewProps = NonNullable<INSIGHT_QUERY_RESULT>
  * ```
  * band          desktop      mobile       renders as
  * ────────────────────────────────────────────────────────────────────────
- * hero          1710:2825    1906:1048    <header>, ink-warm, 164/gutter/64
+ * hero          2252:3554    2262:3859    <header>, photograph + scrim, 164/gutter/64
  *   back-link   —            —            <BackToInsights> (precursor 1379:2186)
- *   eyebrow     1710:2827    1906:1050    <Eyebrow tone="inverse"> — the category
- *   h1          1710:2828    1906:1051    text-display-xl (48 / 40)
- *   deck        1710:2829    1906:1052    text-lead, the document's excerpt
- *   byline      1710:2946    1906:1254    <ArticleByline>
- *   orbital     1715:1549    —            <OrbitalSphere>, desktop only
+ *   eyebrow     2252:3558    2262:3862    <Eyebrow tone="inverse"> — the category
+ *   h1          2252:3559    2262:3863    text-display-xl (48 / 40)
+ *   deck        2252:3560    2262:3864    text-lead, the document's excerpt
+ *   byline      2252:3561    2262:3865    <ArticleByline>
  * body          1710:2836    1906:1053    white band, 822px measure, <PortableTextBody>
- * keep reading  1751:1947    1906:1213    bone band, the Home Blog row's carousel
+ * keep reading  2252:3675    2262:3905    bone band, the Home Blog row's carousel
  * ```
+ *
+ * ## The hero is photographic (#90)
+ *
+ * Both hero frames fill the band with an `IMAGE` paint under a `#030303`
+ * linear gradient, left to right: opaque to 16.8% then clear at 1440
+ * (`2252:3554`), opaque to 50% across the whole width at 402 (`2262:3859`) —
+ * a narrow band has no clear side to keep legible, the same trade
+ * `CaseStudyHero` makes. The photograph is the document's featured image; the
+ * frames name no second image field and the schema has none.
+ *
+ * The band it replaces was a flat `bg-ink-warm` strip with the `OrbitalSphere`
+ * hung off it (`1715:1549`, a node that no longer resolves). **No
+ * sphere-equivalent exists anywhere in the new hero subtree**, so it is gone
+ * from this view; the component still serves Home, the CTA band and the quote
+ * band.
+ *
+ * `bg-ink-warm` stays on the `<header>` as the **no-image fallback**. The
+ * field is optional in the schema and an editor can clear it, and a scrim
+ * over nothing is a black band rather than a design — so with no image
+ * neither the photograph nor the scrim is drawn, and the band renders exactly
+ * as it did before this change. It is also what sits under the photograph
+ * while it loads.
  *
  * "Keep reading" renders through the same `SectionShell` the Home Blog band
  * uses, so heading, controls and row all sit in the standard 1248px column and
@@ -43,11 +64,25 @@ type InsightViewProps = NonNullable<INSIGHT_QUERY_RESULT>
  * come from `(site)/layout.tsx`, and the CTA band the desktop frame ends on is
  * `ctaSection` copy that the mobile frame drops — see the ticket notes.
  *
- * ## Two things the frames do not settle
+ * ## Three things the frames do not settle
  *
- * **The featured image has no band in either frame.** All 272 migrated
- * articles carry one and #45 requires it displayed, so it opens the body band
- * at the section measure — the only composition here not read off a frame.
+ * **The featured image keeps its own band as well as the hero.** Neither
+ * frame draws a figure at the top of the article, but #45 requires the image
+ * displayed and the 2026-08-13 sync re-confirmed the body band against both
+ * frames, so it stays at the section measure. The hero shows the same asset
+ * cropped to the band and the figure shows it whole, which is what the frames
+ * ask for read literally — if the repetition is wrong, dropping the figure is
+ * a one-block delete.
+ *
+ * **The hero's top padding is the pill's clearance, not the frame's 256.**
+ * `2252:3554` puts the eyebrow 256px below the band top (64 frame padding +
+ * 192 on `2252:3556`) and `2262:3859` puts it at 128 — but neither frame
+ * draws the back-link, which the code hangs above the eyebrow with a 32px
+ * gap, so the two cannot be compared directly. `pt-[164px]` is the floating
+ * nav pill's clearance and is shared verbatim with `CaseStudyHero`,
+ * `CollectionHero` and the Home hero; moving it here alone would break that
+ * agreement to chase a number the composition does not license. Left as it
+ * is, deliberately (#90).
  *
  * **Reading time is computed, never stored.** The value comes from the GROQ
  * projection (`INSIGHT_CARD.readingMinutes`), which is where the decision
@@ -81,14 +116,41 @@ export function InsightView({
   const keepReading = related?.length ? related : (latest ?? [])
   const Card = getCard('insight')
 
+  // The hero photograph (#90). No second image field exists on the document,
+  // and the frames name none — the featured image is the band's fill.
+  const heroImage = featuredImage?.image ?? null
+
   return (
     <article>
       <ReadingProgress />
 
+      {/* `bg-ink-warm` is the no-image case: the flat band this hero was
+          before #90, drawn when the document has no featured image to fill
+          it. With an image it is only what shows while the photograph
+          loads. */}
       <header className="bg-ink-warm px-gutter relative isolate overflow-hidden pb-16 pt-[164px] text-white">
-        {/* `1715:1549` — the wireframe globe, hung right of the copy and
-            running off the band. The mobile frame drops it entirely. */}
-        <OrbitalSphere className="left-[43%] top-[198px] hidden w-[1278px] lg:block" />
+        {heroImage ? (
+          <>
+            <div className="absolute inset-0 -z-20">
+              <SanityImage
+                source={heroImage}
+                alt=""
+                ratio="fill"
+                width={2400}
+                sizes="100vw"
+                priority
+              />
+            </div>
+            {/* The `#030303` scrim both frames lay over the photograph, left
+                to right. At 1440 (`2252:3554`) it is opaque to 16.8% and
+                clear by the right edge, which keeps the 588px copy column
+                legible and leaves the picture open beside it. At 402
+                (`2262:3859`) the copy is full-width, so the stop never falls
+                below 50% — the same trade `CaseStudyHero` makes at that
+                width. */}
+            <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(3,3,3,1)_0%,rgba(3,3,3,0.5)_100%)] lg:bg-[linear-gradient(90deg,rgba(3,3,3,1)_16.83%,rgba(3,3,3,0)_100%)]" />
+          </>
+        ) : null}
 
         <div className="max-w-section relative mx-auto flex flex-col gap-8">
           <BackToInsights />
@@ -130,7 +192,9 @@ export function InsightView({
                 width={1644}
                 className="rounded-card w-full"
                 sizes="(min-width: 1024px) 822px, 100vw"
-                priority
+                // Not `priority`: since #90 the same asset fills the hero,
+                // which is the LCP element and holds the preload. Two
+                // priority images of one picture only fight each other.
               />
               {featuredImage.caption ? (
                 <figcaption className="text-fg-subtle mt-3 text-sm">

@@ -95,11 +95,16 @@ how big it is — switches at `lg`, in the renderer.
 
 ### The three structurally-divergent sections
 
-| Section          | base (402)                                                                        | `lg` (1440)                                                                                           |
-| ---------------- | --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| **NavBar**       | Full-width bar, square, logo + a 42×42 **"Open menu"** hamburger (`1814:1636`)    | 822px **pill**, `border-radius: 900px`, five items + "Let's talk" (`1710:2271`)                       |
-| **Perspectives** | Cards **stacked vertically**, gap 24, prev/next controls **absent** (`1814:1738`) | Horizontal **carousel** — overflowing track plus two circular `Icon / Surface` controls (`1683:2470`) |
-| **Case studies** | Cards stacked, gap 24 (`1889:3620`)                                               | Cards stacked, gap 48 (`1683:2661`)                                                                   |
+| Section             | base (402)                                                                        | `lg` (1440)                                                                                           |
+| ------------------- | --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| **NavBar**          | Full-width bar, square, logo + a 42×42 **"Open menu"** hamburger (`1814:1636`)    | 822px **pill**, `border-radius: 900px`, five items + "Let's talk" (`1710:2271`)                       |
+| **Perspectives** ⚠️ | Cards **stacked vertically**, gap 24, prev/next controls **absent** (`1814:1738`) | Horizontal **carousel** — overflowing track plus two circular `Icon / Surface` controls (`1683:2470`) |
+| **Case studies**    | Cards stacked, gap 24 (`1889:3620`)                                               | Cards stacked, gap 48 (`1683:2661`)                                                                   |
+
+⚠️ The Perspectives row is **superseded**. The band became the `Blog` component
+set, whose 402 variant now draws the same prev/next controls as desktop, so it
+is no longer a structural divergence — see the
+[2026-08-13 amendment](#amendment-2026-08-13). The other two rows stand.
 
 Case studies is listed to record that it **is not a divergence**. The ticket
 described it as "a sticky-stacking card set on desktop", but both frames show a
@@ -237,3 +242,63 @@ the new floor: 30 → 36 at 402. Its sibling non-lead labels are
 `clamp(30px, 2.78vw, 40px)`, so the lead now reads larger than them at 402
 where it used to tie. No frame contradicts that, and it is the better of the
 two readings, so it is left to inherit rather than pinned.
+
+---
+
+## Amendment 2026-08-13
+
+**Perspectives is no longer a structurally-divergent section.** Everything
+above stands; this corrects one row of the divergence table, and the frame it
+was read from is superseded rather than re-read.
+
+### What changed in the file
+
+`pnpm figma:sync` (file version `2386937043801380426`,
+[issue #90](https://github.com/o3world/o3-sanity/issues/90)) found the
+Perspectives band promoted to a shared component set — **`Blog` `2205:1146`**
+— with two variants, where the original decision compared two hand-drawn
+frames:
+
+| Variant                     | Heading                                    | Buttons                       | Row                         |
+| --------------------------- | ------------------------------------------ | ----------------------------- | --------------------------- |
+| `Property 1=Default` (1440) | `2134:1179`, horizontal, subhead + buttons | `2134:1181`, two 48px, gap 20 | `2134:1185`, horizontal, 32 |
+| `Property 1=Mobile` (402)   | `2177:1428`, **vertical**, gap 32          | `2209:2566`, two 48px, gap 20 | `2177:1433`, vertical, 32   |
+
+The ADR's row said mobile has "prev/next controls **absent**", cited to
+`1814:1738`. **The mobile variant now carries the same two controls as
+desktop**, and its heading was re-laid vertically to make room for them —
+which is authoring, not residue: a horizontal heading row at 402 has nowhere
+to put a 116px button pair. The Insights detail instance (`2262:3905`) and the
+Home instance both inherit it.
+
+### The decision this amends
+
+Perspectives comes **out** of the "three structurally-divergent sections"
+table. The controls render at every width, and the track is a horizontal
+snap-scroller at every width, so the composition no longer switches at `lg` —
+only the card measure does (full-column below `lg`, 394.67px at `lg`).
+
+Case studies and the NavBar are untouched, so the table is now two rows, not
+three.
+
+### What this deliberately does not follow
+
+The mobile variant's `Row` (`2177:1433`) is still a **vertical stack**. Taken
+with the controls it is self-contradictory: prev/next mean nothing over a
+track that cannot move, and honouring both would ship a permanently dead
+button pair on every phone — which the ADR's own reasoning ("a hidden overflow
+affordance on a 402 phone") rejects in the other direction.
+
+The controls are the newer and more specific signal, so they decide it, and
+the stack is the part not followed. If that reading is wrong the fix is the
+`lg:` prefixes on `CarouselTrack`'s `<ul>` and `<li>`, and this section is
+where to start.
+
+Two smaller reads recorded but not acted on:
+
+- **Row gap at 402 is now 32**, not the 48 the renderer uses from the older
+  frame. Adopting the scroller made it moot — the horizontal gap is 32 at both
+  widths, which is what ships.
+- **The controls are 48px in both variants**, against `CarouselControl`'s
+  58px, read from `Icon / Surface` `778:1862`. That gap is the same at 1440,
+  so it is not a mobile divergence and not this amendment's to close.

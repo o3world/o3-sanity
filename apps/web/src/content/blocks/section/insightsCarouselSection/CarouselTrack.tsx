@@ -12,30 +12,38 @@ export interface CarouselTrackProps {
 }
 
 /**
- * The Blog band's card set — a **carousel only at `lg`**.
+ * The Blog band's card set — a carousel at **every** width since #90.
  *
- * ADR 0006 lists this as one of three structurally-divergent sections: the
- * 402 frame (`1814:1738`) stacks the cards vertically 48px apart (the 24px
- * inside `1814:1867` is the card's own media→info gap, not the row gap) with
- * **no prev/next controls at all**, and only the 1440 frame
- * (`1683:2470`) draws the overflowing track plus its two `Icon / Surface`
- * buttons. The track used to scroll horizontally at every width, which put a
- * 280px card and a hidden overflow affordance on a 402 phone — the divergence
- * this pass closes.
+ * ADR 0006 listed this as one of three structurally-divergent sections,
+ * because the 402 frame it read (`1814:1738`) stacked the cards vertically
+ * with **no prev/next controls at all**, and only the 1440 frame
+ * (`1683:2470`) drew the overflowing track plus its two buttons. The
+ * 2026-08-13 sync found that premise gone: the shared `Blog` component set
+ * (`2205:1146`) now has a `Property 1=Mobile` variant (`2204:1145`) whose
+ * heading is re-laid **vertically** — subhead, then a 32px gap, then the same
+ * two `Icon Button`s the desktop variant carries (`2209:2566`). That is
+ * authored, not left over: a horizontal heading row had no space for them.
+ * See the amendment on ADR 0006.
  *
- * So: base is a plain `flex-col` list; the scroll container, the snap points
- * and the 394px card all switch on at `lg`. The whole thing renders inside
- * the SectionShell's standard 1248px column — see the note on the `<ul>`.
+ * So the composition is one thing at both widths — a native scroll container
+ * with snap points, one card per view below `lg` (the frame's 370px card is
+ * its container's full width) and the frame's 394.67px card at `lg`. Native
+ * rather than a transform-driven track because it keeps keyboard, trackpad
+ * and touch scrolling working, and the controls just call `scrollBy`. Each
+ * step is one card plus the 32px gap the frame gives at **both** widths.
  *
- * At `lg` the row is a native scroll container with snap points rather than a
- * transform-driven track: it keeps keyboard and trackpad scrolling working,
- * and the controls just call `scrollBy`. Each step is one card plus the 32px
- * gap, read off the frame's 394.67px card.
+ * The one thing the mobile variant still draws that this does not follow is
+ * its `Row`, which is a vertical stack of two cards. Controls are only
+ * meaningful over a track that moves, so drawing both would mean shipping a
+ * dead prev/next pair on every phone; the controls are the newer and more
+ * specific signal, and they decide it. Reverting is the `lg:` prefixes on the
+ * `<ul>` and its `<li>`, nothing else.
+ *
+ * The whole thing renders inside the SectionShell's standard 1248px column —
+ * see the note on the `<ul>`.
  *
  * Controls disable at each end, and hide entirely when everything already
- * fits — a dead prev/next pair on a three-card row is worse than none. Below
- * `lg` there is nothing to scroll, so `scrollWidth === clientWidth` keeps them
- * hidden on their own; the `lg:` on the wrapper says so out loud.
+ * fits — a dead prev/next pair on a three-card row is worse than none.
  */
 export function CarouselTrack({ heading, cards }: CarouselTrackProps) {
   const trackRef = useRef<HTMLUListElement>(null)
@@ -73,14 +81,17 @@ export function CarouselTrack({ heading, cards }: CarouselTrackProps) {
 
   return (
     <>
-      <div className="mb-12 flex items-center justify-between gap-8">
+      {/* `2134:1179` / `2177:1428` — one row at 1440 with the buttons pushed
+          to the far edge, stacked at 402 with the frame's 32px gap between
+          subhead and buttons. 48px to the row either way. */}
+      <div className="mb-12 flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between">
         {heading ? (
           <h2 className="text-display-xl font-display text-balance">{heading}</h2>
         ) : (
           <span />
         )}
         {scrollable ? (
-          <div className="hidden shrink-0 gap-5 lg:flex">
+          <div className="flex shrink-0 gap-5">
             <CarouselControl direction="prev" onClick={() => step(-1)} disabled={atStart} />
             <CarouselControl direction="next" onClick={() => step(1)} disabled={atEnd} />
           </div>
@@ -93,15 +104,16 @@ export function CarouselTrack({ heading, cards }: CarouselTrackProps) {
        * that measure the resting row is exactly three cards (394 × 3 + two
        * 32px gaps = 1246); the 1440 frame's bleed past the right edge is
        * deliberately not kept, and the prev/next controls carry the "this
-       * scrolls" affordance. Below `lg` nothing overflows.
+       * scrolls" affordance. Below `lg` the same column is one card wide, so
+       * the resting row is one card and the controls page through them.
        */}
       <ul
         ref={trackRef}
         onScroll={sync}
-        className="flex flex-col gap-12 lg:snap-x lg:snap-mandatory lg:flex-row lg:gap-8 lg:overflow-x-auto lg:pb-2 lg:[scrollbar-width:none] lg:[&::-webkit-scrollbar]:hidden"
+        className="flex snap-x snap-mandatory gap-8 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {cards.map((card, index) => (
-          <li key={index} className="w-full lg:w-[394px] lg:shrink-0 lg:snap-start">
+          <li key={index} className="w-full shrink-0 snap-start lg:w-[394px]">
             {card}
           </li>
         ))}

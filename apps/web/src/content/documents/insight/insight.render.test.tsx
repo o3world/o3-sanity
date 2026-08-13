@@ -153,6 +153,56 @@ describe('insight detail route', () => {
     expect(html).not.toContain('<figure')
   })
 
+  /**
+   * The hero is photographic since #90 (`2252:3554` / `2262:3859`): the
+   * featured image fills the band under a `#030303` scrim. There is no second
+   * image field, so the same asset serves the hero and the body figure — the
+   * hero cropped to the band, the figure whole.
+   */
+  describe('the photographic hero', () => {
+    const HERO_ID = '3333333333333333333333333333333333333333'
+    const withHero = () =>
+      anInsight({
+        featuredImage: {
+          _type: 'figure',
+          image: {
+            _type: 'image',
+            asset: { _type: 'reference', _ref: `image-${HERO_ID}-2000x1200-jpg` },
+          },
+          alt: 'The lead photograph',
+        } as never,
+      })
+
+    it('fills the band with the featured image, under the scrim', async () => {
+      const { html } = await render(withHero())
+      const header = html.slice(0, html.indexOf('</header>'))
+      expect(header).toContain(HERO_ID)
+      expect(header).toContain('linear-gradient(90deg,rgba(3,3,3,1)_0%,rgba(3,3,3,0.5)_100%)')
+      expect(header).toContain(
+        'lg:bg-[linear-gradient(90deg,rgba(3,3,3,1)_16.83%,rgba(3,3,3,0)_100%)]',
+      )
+    })
+
+    /**
+     * The no-image case: the flat `ink-warm` band this hero was before #90.
+     * A scrim over nothing is a black strip, not a design, so neither the
+     * photograph nor the gradient is drawn.
+     */
+    it('falls back to the flat ink band, scrim and all, when there is no image', async () => {
+      const { html } = await render(anInsight({ featuredImage: null }))
+      const header = html.slice(0, html.indexOf('</header>'))
+      expect(header).toContain('bg-ink-warm')
+      expect(header).not.toContain('linear-gradient')
+      expect(header).not.toContain('<img')
+    })
+
+    /** The sphere is gone from the new hero subtree — no node replaces it. */
+    it('draws no orbital sphere', async () => {
+      const { html } = await render(withHero())
+      expect(html.slice(0, html.indexOf('</header>'))).not.toContain('w-[1278px]')
+    })
+  })
+
   it('404s when no document matches the slug', async () => {
     await expectNotFound(route, { data: null, params: { slug: 'does-not-exist' } })
   })

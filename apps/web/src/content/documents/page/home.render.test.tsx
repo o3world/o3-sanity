@@ -103,23 +103,33 @@ describe('the seeded homepage', () => {
 /**
  * The mobile frame, `1814:1618`. Desktop was verified when #42 was built and
  * 402 was not, which is how the insights carousel shipped scrolling
- * sideways on a phone for a whole batch. These are the invariants that would
- * have caught it — read off the rendered classes, so they hold for whatever
- * the blocks actually emit rather than for what a component file says.
+ * sideways on a phone for a whole batch — unnoticed, with no affordance. These
+ * are the invariants that would have caught it, read off the rendered classes
+ * so they hold for whatever the blocks actually emit rather than for what a
+ * component file says.
+ *
+ * The carousel scrolls sideways at 402 again since ADR 0006's 2026-08-13
+ * amendment (#90) — the difference is that the frame now draws the prev/next
+ * controls there, so the scroll is announced. The guard below is exact rather
+ * than empty for that reason.
  */
 describe('the homepage at 402 (ADR 0006)', () => {
-  it('has no horizontally-scrolling band', () => {
-    // `lg:overflow-x-auto` — the desktop carousel — is fine and expected.
-    // Anything unprefixed is live on a 402 phone.
-    expect(unprefixedHorizontalScrollUtilities(html)).toEqual([])
+  it('scrolls sideways nowhere but the insights carousel', () => {
+    // Since the 2026-08-13 amendment (#90) the carousel is a snap-scroller at
+    // every width, so its own `overflow-x-auto` + `snap-x` are expected here.
+    // The assertion is exact, not empty: a band that starts sizing itself
+    // `w-max` or `w-screen`, or a second `overflow-scroll` region, still fails
+    // — which is the 402 regression this was written for.
+    expect(unprefixedHorizontalScrollUtilities(html)).toEqual(['overflow-x-auto', 'snap-x'])
   })
 
-  it('keeps the insights carousel a stack until lg', () => {
-    // `1814:1867`: cards stacked, gap 24, no prev/next. The track, its snap
-    // points and the 394px card are all `lg:`.
-    expect(html).toContain('lg:overflow-x-auto')
+  it('gives the insights carousel one card per view until lg', () => {
+    // `2204:1145` draws the controls at 402, so the track has to move there;
+    // what stays `lg:` is the card measure — full column below, the frame's
+    // 394.67px card at 1440 (`2134:1186`).
     expect(html).toContain('lg:w-[394px]')
-    expect(variantsOf(html, 'snap-x')).toEqual(['lg:snap-x'])
+    expect(variantsOf(html, 'overflow-x-auto')).toEqual(['overflow-x-auto'])
+    expect(variantsOf(html, 'snap-x')).toEqual(['snap-x'])
   })
 
   it('keeps the partner logos a two-across grid inside the gutter', () => {
