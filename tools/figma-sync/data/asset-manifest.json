@@ -122,6 +122,13 @@
       "note": "No source node found. 1584×672, same origin story as `insight-weekend-hero.png`."
     },
     {
+      "path": "tools/migration/data/seed/assets/insight-sync-hero.svg",
+      "format": "svg",
+      "locked": true,
+      "unresolved": true,
+      "note": "Hand-authored, never in Figma. Hero for the figma-sync insight (2026-08-13): the tracked frames as a quiet grid, the one that moved pulsing brand red, the report as a dashed seam, four tickets arriving in order. 3 `@keyframes`, 6 `animation:` declarations, `prefers-reduced-motion`, palette inlined at the warmed 2026-08 values (`#0A0A0B`, `#F1F0EC`, `#EB1000`, `#76746F`) because an SVG in an `<img>` cannot see the page stylesheet. No node in the file has its 1200×630 geometry and no `imageRef` matches its bytes."
+    },
+    {
       "path": "tools/migration/data/seed/assets/live-fintech.png",
       "nodeId": "1751:2003",
       "figmaName": "Case study cards",
