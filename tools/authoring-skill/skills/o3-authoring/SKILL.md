@@ -9,12 +9,18 @@ Turn a vague idea into a publishable-quality Sanity **draft** in the O3 voice.
 This skill is a bootstrap: the knowledge lives in Sanity, not here. Fetch it
 before writing.
 
+The Sanity tools arrive via the Sanity MCP server (Claude Code, preconfigured
+by this plugin) or the Sanity connector (Claude Desktop) — the workflow is
+identical. If no Sanity tools are available, stop and say so: in Claude Code
+run `/mcp` to authenticate the `sanity` server; in Desktop connect the
+connector. Auth is always the human's own — never ask for tokens.
+
 Every Sanity tool call uses `resource: {projectId: "naorcr6k", dataset: "production"}`.
 
 ## Before writing anything
 
 1. **Fetch the live guidance.** Query `*[_type == "guidance"]{key, title, body}`
-   via the Sanity connector. `body` is raw markdown — read it as written.
+   with the query tool. `body` is raw markdown — read it as written.
    `key == "o3-voice"` is the voice guide: follow it over your defaults, every
    time. `key == "o3-brand"` is the brand foundation behind it — source
    material for claims, never copy to paste. `key == "o3-slop"` is the machine

@@ -1,0 +1,12 @@
+{
+  "name": "o3world",
+  "owner": { "name": "O3 World", "url": "https://github.com/o3world" },
+  "description": "O3 World's Claude Code plugins.",
+  "plugins": [
+    {
+      "name": "o3-authoring",
+      "source": "./tools/authoring-skill",
+      "description": "Draft o3world.com content in Sanity — insights (blog posts), case studies, and pages — in the O3 voice. Drafts only; a human publishes in Studio."
+    }
+  ]
+}
