@@ -27,14 +27,16 @@ describe('tracked-nodes.json', () => {
     expect(manifest.sectionNodeId).toBe('1632:1510')
   })
 
-  it('tracks at least the seven canonical page layers', () => {
+  it('tracks at least the nine canonical page layers', () => {
     const names = new Set(pageFrames.map((entry) => entry.name))
     expect([...names].sort()).toEqual([
       'About',
       'Case Study detail',
       'Home',
       'Insight detail',
+      'Insight index',
       'Live',
+      'Sanity partnership',
       'Solutions',
       'Work index',
     ])
@@ -64,20 +66,21 @@ describe('tracked-nodes.json', () => {
   })
 
   it('uses this project’s language for names, not Figma’s', () => {
-    // Three frames are *named* "Insights" in Figma and none of them is the
-    // Insights index (docs/agents/figma.md) — one of them is About, which is
-    // simply mislabelled in the file. That is the failure this guards, and it
-    // is unchanged by ADR 0017.
+    // Four frames are *named* "Insights" in Figma and only one is the
+    // Insight index (`2336:4310`, tracked 2026-08-13) — one of them is About,
+    // which is simply mislabelled in the file. That is the failure this
+    // guards, and it is unchanged by ADR 0017.
     //
-    // Two of the three now agree with `name` because the project adopted the
-    // word Figma was already using. That coincidence is a decision, not a
-    // reason to collapse the two fields: `figmaName` still records what the
-    // file says, and the About row is the standing proof it can be wrong.
+    // Most now agree with `name` because the project adopted the word Figma
+    // was already using. That coincidence is a decision, not a reason to
+    // collapse the two fields: `figmaName` still records what the file says,
+    // and the About row is the standing proof it can be wrong.
     const insights = entries.filter((entry) => entry.figmaName?.startsWith('Insights'))
     expect(insights.map((entry) => entry.name).sort()).toEqual([
       'About',
       'Insight detail',
       'Insight detail',
+      'Insight index',
     ])
   })
 

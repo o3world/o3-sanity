@@ -75,12 +75,31 @@
       "variant": "desktop"
     },
     {
-      "nodeId": "1925:6138",
+      "nodeId": "2360:2879",
       "kind": "pageFrame",
       "name": "Solutions",
       "figmaName": "Solutions",
       "route": "/solutions",
-      "variant": "desktop"
+      "variant": "desktop",
+      "note": "The 2026-08 redesign, ruled canonical 2026-08-13 — Interior Hero, Service Grid, statement band, Use cases. Supersedes `1925:6138`; #93 rebuilds the route against it."
+    },
+    {
+      "nodeId": "2336:4310",
+      "kind": "pageFrame",
+      "name": "Insight index",
+      "figmaName": "Insights",
+      "route": "/insights",
+      "variant": "desktop",
+      "note": "The frame #61 commissioned — Interior Hero, filter bar, card grid. Ruled canonical 2026-08-13; #61 clears the provisional marker against it."
+    },
+    {
+      "nodeId": "2354:2446",
+      "kind": "pageFrame",
+      "name": "Sanity partnership",
+      "figmaName": "Sanity",
+      "route": "/sanity",
+      "variant": "desktop",
+      "note": "New page type ruled canonical 2026-08-13 — a platform-partnership landing page. The route here is provisional; #92 decides it and builds the page."
     },
     {
       "nodeId": "1644:1889",
@@ -292,6 +311,41 @@
     }
   ],
   "ignoredNodeIds": [
+    {
+      "nodeId": "1925:6138",
+      "name": "Solutions",
+      "note": "The pre-redesign Solutions frame, superseded 2026-08-13 by `2360:2879`. Ignored so the probe stays quiet about it; its last change was an accidental instance-override collapse, not work."
+    },
+    {
+      "nodeId": "2117:800",
+      "name": "Blog Post",
+      "note": "Hero-treatment study (full-bleed image, left gradient) of the IRONMAN×Sanity article — one of five variants of one hero, no footer/CTA. Ruled noise 2026-08-13."
+    },
+    {
+      "nodeId": "2118:858",
+      "name": "Blog Post",
+      "note": "Hero-treatment study (full-bleed image, bottom gradient) — same family as `2117:800`. Ruled noise 2026-08-13."
+    },
+    {
+      "nodeId": "2118:909",
+      "name": "Blog Post",
+      "note": "Hero-treatment study (side image, row layout) — same family as `2117:800`. Ruled noise 2026-08-13."
+    },
+    {
+      "nodeId": "2118:1068",
+      "name": "Blog Post",
+      "note": "Hero-treatment study (side image, circle crop) — same family as `2117:800`. Ruled noise 2026-08-13."
+    },
+    {
+      "nodeId": "2118:1015",
+      "name": "Blog Post",
+      "note": "Hero-treatment study (large circular background image) — same family as `2117:800`. Ruled noise 2026-08-13."
+    },
+    {
+      "nodeId": "2252:3535",
+      "name": "Frame 2611219",
+      "note": "Bare hero fragment of the same IRONMAN×Sanity article as the Blog Post studies — unnamed, no chrome. Ruled noise 2026-08-13."
+    },
     {
       "nodeId": "1799:1607",
       "name": "Intro section",
