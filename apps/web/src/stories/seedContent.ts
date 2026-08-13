@@ -95,6 +95,10 @@ import personNavari from '../../../../tools/migration/data/converted/person/pers
 import personLewis from '../../../../tools/migration/data/converted/person/person-wp-8710.json'
 import personHalligan from '../../../../tools/migration/data/converted/person/person-wp-9147.json'
 import personLeone from '../../../../tools/migration/data/converted/person/person-wp-7875.json'
+import personScandone from '../../../../tools/migration/data/converted/person/person-wp-21.json'
+import personEdmundson from '../../../../tools/migration/data/converted/person/person-wp-10.json'
+import personOst from '../../../../tools/migration/data/converted/person/person-wp-6195.json'
+import personBoenisch from '../../../../tools/migration/data/converted/person/person-wp-10559.json'
 
 // ── Categories those insights carry ────────────────────────────────────
 import categoryAi from '../../../../tools/migration/data/converted/category/artificial-intelligence-ai.json'
@@ -155,6 +159,10 @@ const DOCUMENTS: readonly SeedDoc[] = [
   personLewis,
   personHalligan,
   personLeone,
+  personScandone,
+  personEdmundson,
+  personOst,
+  personBoenisch,
   categoryAi,
   categoryInnovation,
   categoryResearch,

@@ -92,8 +92,10 @@ describe('the seeded About page', () => {
    */
   it('renders the migrated person documents the team band references', () => {
     expect(html).toContain('Mike Gadsby')
-    expect(html).toContain('Christine Sheller')
-    expect(html).toContain('Chief Experience Officer')
+    // Two of the four person docs b117780's roster repoint newly emitted —
+    // proof the converted tree carries them, not just the Feb-2025 fourteen.
+    expect(html).toContain('Keith Scandone')
+    expect(html).toContain('Director of Human Resources')
   })
 
   it('gives every role row its own Apply button', () => {
