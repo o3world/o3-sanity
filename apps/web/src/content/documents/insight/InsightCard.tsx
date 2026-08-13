@@ -19,7 +19,8 @@ export type InsightCardData = NonNullable<SectionProps<'insightsCarouselSection'
  * 394.67 wide, column, gap 24
  *   media   square, --gradient-card-veil over the image (ink 0 → 0.75 at 90%)
  *   info    gap 6
- *     meta  13px / 700 / 0.1em uppercase, #636363 — "3 MINS · 7/27/26"
+ *     meta  13px / 700 / 0.1em uppercase, fg-muted (#76746F since the 2026-08
+ *     warm shift; the frame's meta binds that variable) — "3 MINS · 7/27/26"
  *     title 24px regular, #232323
  * ```
  *

@@ -24,11 +24,13 @@
 :root {
   /* ── Display text fill ─────────────────────────────────────────────────── */
   /*
-   * The exploration's signature move: 64px statement headlines are filled
-   * with a top-to-bottom fade to 40% rather than a solid ink, so the last
-   * line sits back. Used on the partners statement ("We work with B2B and
-   * enterprise teams…", node 1864:2393) and the pull quote (node 1683:2143).
-   * Needs background-clip:text — reach for the `text-gradient` utility below
+   * The exploration's signature move: statement headlines filled with a
+   * top-to-bottom fade to 40% rather than a solid ink, so the last line sits
+   * back. As of the 2026-08 pass its one remaining anchor is the pull quote
+   * (node 1683:2143, now 48px) — the partners statement (1864:2393) went
+   * SOLID ink, bound to the #0A0A0B variable; that band is #89's open
+   * restructure, so the fill change lands there, not here. Needs
+   * background-clip:text — reach for the `text-gradient` utility below
    * rather than wiring this by hand.
    */
   --gradient-statement: linear-gradient(180deg, #030303 0%, rgba(3, 3, 3, 0.4) 100%);
@@ -109,19 +111,30 @@
   /* ── Surface washes ────────────────────────────────────────────────────── */
   /*
    * The light bands are not flat in the exploration — they wash between white
-   * and #F0F0F0 so consecutive sections separate without a rule. Vertical
-   * version on the case-studies heading (node 1683:2657)…
+   * and bone (#F1F0EC since the 2026-08 warm shift; the case-studies band
+   * 1683:2656 binds the bone variable at one end and white at the other).
+   * Vertical version on the case-studies heading (node 1683:2657)…
    */
-  --gradient-surface-wash: linear-gradient(0deg, #ffffff 0%, #f0f0f0 100%);
+  --gradient-surface-wash: linear-gradient(0deg, #ffffff 0%, #f1f0ec 100%);
   /* …and the 188° version under the case-study card stack (node 1683:2661). */
-  --gradient-surface-wash-angled: linear-gradient(188deg, #ffffff 85%, #f0f0f0 100%);
+  --gradient-surface-wash-angled: linear-gradient(188deg, #ffffff 85%, #f1f0ec 100%);
+  /*
+   * The 2026-08 pass added a second, all-warm wash that never reaches white:
+   * bone-soft (#F7F7F6) down to bone (#F1F0EC), both ends bound to the new
+   * color variables (`2050:1217` → `2050:1218`). The partners band
+   * (1864:2390) and the Sanity client-partners section (2332:1708) draw it.
+   */
+  --gradient-surface-wash-warm: linear-gradient(180deg, #f7f7f6 0%, #f1f0ec 100%);
 
   /* ── Band fade ─────────────────────────────────────────────────────────── */
   /*
-   * The 87px bleed strip that fades the CTA band into the ink footer
-   * (node 1928:6596) — ink at the bottom, transparent at the top.
+   * The 87px bleed strip that fades the CTA band into the footer
+   * (node 1928:6596) — solid at the bottom, transparent at the top. The
+   * bottom stop followed the footer to pure black in the 2026-08 rework
+   * (both bind the same variable, `2460:2096`); the transparent end stays on
+   * ink-deep, exactly as the frame draws it.
    */
-  --gradient-ink-fade: linear-gradient(0deg, rgba(3, 3, 3, 1) 0%, rgba(3, 3, 3, 0) 100%);
+  --gradient-ink-fade: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(3, 3, 3, 0) 100%);
 }
 
 /* ── Gradient text ─────────────────────────────────────────────────────────── */

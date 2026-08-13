@@ -13,7 +13,7 @@ export const NAV_INK_TARGET = 'site-nav'
  * Perceived luminance above which a surface counts as light —
  * `0.299r + 0.587g + 0.114b > 140`, the prototype's threshold verbatim.
  *
- * It sits deliberately above mid-grey (127.5): `--color-bone` (#F0F0F0, 240)
+ * It sits deliberately above mid-grey (127.5): `--color-bone` (#F1F0EC, ~240)
  * and white clear it easily, and every ink surface in the palette is nowhere
  * near it — `--color-ink` lands at 10.
  */

@@ -13,7 +13,8 @@ type CtaSectionProps = SectionProps<'ctaSection'>
  * ```
  * 1440 × 790, the orbital field behind it
  *   copy      600px column centred, gap 18
- *     heading 60px (--text-cta) at 92% white, centred
+ *     heading 64px (--text-cta, the 2026-08 shared CTA component's step) at
+ *     92% white, centred
  *     body    24px at 60% white in a 446px measure
  *   cta       Button / Solid Size=Base, WHITE fill
  *   bleed     an 87px strip of --gradient-ink-fade along the foot (1928:6596)

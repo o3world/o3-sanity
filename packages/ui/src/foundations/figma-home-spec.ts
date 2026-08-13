@@ -32,6 +32,13 @@
  *
  * Figma variable names are quoted verbatim (`text/tertiary`, `Layout/Layout
  * 128`) so a value can be traced back to the file.
+ *
+ * 2026-08-13: the designer replaced those loose styles with a proper variable
+ * collection (mode-based, ids only — names are unreadable on this seat) and
+ * nudged several values warm. The `token:` annotations below track the
+ * SHIPPED tokens and say so where they moved; the `value:`/`variable:`
+ * readings are the original extraction and stay as recorded. The current
+ * vocabulary lives in packages/tailwind-config/tokens/*.css.
  */
 
 /** The Figma file + frame everything here was read from. */
@@ -74,7 +81,7 @@ export const colors: readonly ColorSpec[] = [
     value: '#0A0A0A',
     variable: 'color/grey/4',
     role: 'The dominant dark: every section headline on a light band, the solid dark button, the quote attribution base. Effectively the design’s black.',
-    token: 'ink (#0A0A0A)',
+    token: 'ink (#0A0A0B since the 2026-08 variable pass)',
   },
   {
     name: 'ink-deep',
@@ -92,7 +99,7 @@ export const colors: readonly ColorSpec[] = [
     name: 'surface',
     value: '#F0F0F0',
     role: 'The warm-neutral light band: partners/intro, the pull quote, the insights row. The design’s equivalent of "bone".',
-    token: 'bone (#F0F0F0)',
+    token: 'bone (#F1F0EC since the 2026-08 variable pass)',
   },
   {
     name: 'white',
@@ -113,13 +120,14 @@ export const colors: readonly ColorSpec[] = [
     value: '#636363',
     variable: 'text/tertiary',
     role: 'The neutral eyebrow ("OUR PARTNERS") and insights-card meta ("3 MINS · 7/27/26").',
-    token: 'fg-muted (#636363)',
+    token: 'fg-muted (#76746F since the 2026-08 variable pass)',
   },
   {
     name: 'text-faint',
     value: '#A3A3A3',
     role: 'Footer legal row — privacy, accessibility, copyright.',
-    token: 'fg-subtle (#A3A3A3)',
+    token:
+      'fg-subtle — deprecated; the 2026-08 Footer component binds this row to the #AAA69E variable (on-utility)',
   },
   {
     name: 'surface-muted',
@@ -233,14 +241,14 @@ export const gradients: readonly GradientSpec[] = [
   {
     name: 'surface-wash',
     token: '--gradient-surface-wash',
-    value: 'linear-gradient(0deg, #ffffff 0%, #f0f0f0 100%)',
+    value: 'linear-gradient(0deg, #ffffff 0%, #f0f0f0 100%)', // token now ends on the warmed bone #F1F0EC
     role: 'Light bands wash rather than sit flat, so consecutive sections separate without a rule.',
     nodeId: '1683:2657',
   },
   {
     name: 'surface-wash-angled',
     token: '--gradient-surface-wash-angled',
-    value: 'linear-gradient(188deg, #ffffff 85%, #f0f0f0 100%)',
+    value: 'linear-gradient(188deg, #ffffff 85%, #f0f0f0 100%)', // token now ends on the warmed bone #F1F0EC
     role: 'The 188° variant behind the case-study card stack.',
     nodeId: '1683:2661',
   },

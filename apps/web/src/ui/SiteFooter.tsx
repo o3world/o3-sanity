@@ -117,8 +117,12 @@ export function SiteFooter({ settings }: SiteFooterProps) {
           </div>
         </div>
 
-        {/* "Lower" — legal row; stacked at 402 (`1814:1807`), split at 1440. */}
-        <div className="text-legal text-fg-subtle flex flex-col gap-3 lg:flex-row lg:justify-between">
+        {/* "Lower" — legal row; stacked at 402 (`1814:1807`), split at 1440.
+            The copy is `on-utility` (#AAA69E): the component binds the same
+            Figma variable here as the Utility Nav's links (`2050:1226`) — the
+            warm solid for muted copy on the black chrome, which replaced the
+            `fg-subtle` grey this row shipped with (2026-08-13 token pass). */}
+        <div className="text-legal text-on-utility flex flex-col gap-3 lg:flex-row lg:justify-between">
           <ul className="flex flex-wrap gap-6">
             {legalLinks.map((link) => (
               <li key={link._key}>

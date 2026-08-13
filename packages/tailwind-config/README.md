@@ -60,13 +60,19 @@ comparison: [ADR 0006](../../docs/adr/0006-responsive-contract.md).
 The design runs on **five neutrals**, not three. The `white | bone | ink`
 enum on section blocks survives, but the darks split three ways:
 
-| Token      | Value     | Role                                                           |
-| ---------- | --------- | -------------------------------------------------------------- |
-| `white`    | `#FFFFFF` | Plain light band (platforms, ways-to-work); light button fill  |
-| `bone`     | `#F0F0F0` | Partners, pull quote, insights — often washed, not flat        |
-| `ink`      | `#0A0A0A` | The dominant dark: headlines on light, dark buttons, card base |
-| `ink-warm` | `#0F100B` | The Work / Live hero band only                                 |
-| `ink-deep` | `#030303` | Gradient stops and the footer band                             |
+| Token       | Value     | Role                                                           |
+| ----------- | --------- | -------------------------------------------------------------- |
+| `white`     | `#FFFFFF` | Plain light band (platforms, ways-to-work); light button fill  |
+| `bone`      | `#F1F0EC` | Partners, pull quote, insights — often washed, not flat        |
+| `bone-soft` | `#F7F7F6` | Bone's lighter end — the warm wash's near-white                |
+| `ink`       | `#0A0A0B` | The dominant dark: headlines on light, dark buttons, card base |
+| `ink-warm`  | `#0F100B` | The Work / Live hero band only                                 |
+| `ink-deep`  | `#030303` | Gradient stops and the NavBar pill                             |
+| `utility`   | `#000000` | The black chrome: Utility Nav strip and the footer band        |
+
+The 2026-08 Figma token pass bound these to a proper variable collection and
+warmed two of them (`bone` was `#F0F0F0`, `ink` was `#0A0A0A`); variable ids
+are in each token's comment in `tokens/color.css`.
 
 ## Colors (`--color-*`)
 
@@ -75,8 +81,8 @@ enum on section blocks survives, but the darks split three ways:
 | `brand`              | `#EB1000`               | Flat **once** on Home — the footer link headers. Else the glow. |
 | `brand-tint`         | `#FF6A5A`               | ⚠️ No canonical anchor — prototype-era, pending #38             |
 | `fg`                 | `#232323`               | Body copy and card titles on light bands (`text/default`)       |
-| `fg-muted`           | `#636363`               | The **neutral** eyebrow and card meta (`text/tertiary`)         |
-| `fg-subtle`          | `#A3A3A3`               | Footer legal row                                                |
+| `fg-muted`           | `#76746F`               | The **neutral** eyebrow and card meta (was `#636363`)           |
+| `fg-subtle`          | `#A3A3A3`               | ⚠️ No canonical anchor — legal row moved to `on-utility`, #38   |
 | `fg-quiet`           | `rgba(10,10,10,.5)`     | Pull-quote attribution — tinted ink, not a grey                 |
 | `on-ink`             | `rgba(255,255,255,.92)` | CTA band headline (`color/white/ 92%`)                          |
 | `on-ink-muted`       | `rgba(255,255,255,.65)` | Stat labels beside the 48px figure                              |
@@ -105,12 +111,12 @@ both ends are read values (ADR 0006).
 | Utility             | 402    | 1440   | Tracking  | Role                                               |
 | ------------------- | ------ | ------ | --------- | -------------------------------------------------- |
 | `text-hero`         | `36px` | `64px` | 0         | Home hero headline; the partners statement         |
-| `text-quote`        | `30px` | `64px` | 0         | The pull quote — 6px below `hero` at 402 only      |
-| `text-cta`          | `40px` | `60px` | -0.0233em | The CTA band headline                              |
+| `text-quote`        | `30px` | `48px` | 0         | The pull quote (desktop dropped 64 → 48, 2026-08)  |
+| `text-cta`          | `36px` | `64px` | -1px      | The CTA band headline — rides the hero variable    |
 | `text-display-xl`   | `40px` | `48px` | 0         | **Every** section headline; the Work hero          |
 | `text-display-lg`   | `18px` | `36px` | 0         | Pull-quote attribution, rail numerals              |
 | `text-display-md`   | `22px` | `28px` | -0.0286em | Case-study problem statement ⚠️ floor interpolated |
-| `text-lead`         | `18px` | `24px` | -0.0333em | Standfirst beside a headline; CTA subhead          |
+| `text-lead`         | `20px` | `24px` | 0         | Standfirst beside a headline; CTA subhead          |
 | `text-body`         | `16px` | `20px` | 0, lh 1.6 | Long-form prose — every `bodyText` field           |
 | `text-body-heading` | `40px` | `36px` | 0         | An h2 inside a body ⚠️ descends — both ends read   |
 | `text-button`       | `18px` | `18px` | 0, wt 500 | Every button label                                 |
@@ -125,10 +131,14 @@ identical at both widths, read rather than assumed. Only display type and
 rhythm interpolate. `display-md` is the one floor with no 402 example to read,
 so it is interpolated from the ramp and says so in the file.
 
-`hero` and `quote` are one step at 1440 and two at 402. That is not
-duplication: the 402 frame sets the hero headline and the partners statement
-36 and the pull quote 30, so a single clamp has to be wrong for two of the
-three. See ADR 0006's 2026-08-02 amendment.
+The 2026-08 Figma token pass bound the display ramp to variables with a
+desktop and a mobile mode, landing exactly on ADR 0006's two endpoint widths.
+It also moved three steps: the desktop quote dropped from 64 to 48
+(display-xl's ceiling, but the un-migrated 402 node keeps the 30 floor), the
+60px CTA step was retired for the hero's 36 → 64 with -1px tracking (the
+shared CTA component on seven frames), and `lead` now shares one variable
+pair with `display-sm` (24/34 desktop, 20/26 mobile) — display line heights
+are read px pairs now, not a flat 1.2. Details on each token.
 
 `body-heading` is the one step whose clamp **descends**: the Insights frames
 read 40px at 402 and 36px at 1440, and solving the clamp to both ends the way
@@ -205,9 +215,10 @@ namespace, so these are plain custom properties.
 | `--gradient-card-scrim`          | —               | Horizontal scrim over case-study card photography              |
 | `--gradient-card-veil`           | —               | Vertical scrim on the insights cards                           |
 | `--gradient-brand-glow`          | `bg-brand-glow` | Figma `Gradient/Red/1` — two stacked radials; the red at scale |
-| `--gradient-surface-wash`        | —               | Light bands washing white → `#F0F0F0` instead of sitting flat  |
+| `--gradient-surface-wash`        | —               | Light bands washing white → bone instead of sitting flat       |
 | `--gradient-surface-wash-angled` | —               | The 188° variant behind the case-study card stack              |
-| `--gradient-ink-fade`            | —               | The bleed strip fading the CTA band into the ink footer        |
+| `--gradient-surface-wash-warm`   | —               | The all-warm wash, `bone-soft` → `bone` (partners, Sanity)     |
+| `--gradient-ink-fade`            | —               | The bleed strip fading the CTA band into the black footer      |
 
 ```jsx
 <div className="bg-(image:--gradient-card-scrim)" />

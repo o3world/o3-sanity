@@ -11,10 +11,15 @@
  * but the darks split three ways in the canonical frames:
  *
  *   white      #FFFFFF  platforms, ways-to-work
- *   bone       #F0F0F0  partners, pull quote, insights
- *   ink        #0A0A0A  the dominant dark — headlines, dark buttons, cards
+ *   bone       #F1F0EC  partners, pull quote, insights (warmed 2026-08)
+ *   ink        #0A0A0B  the dominant dark — headlines, dark buttons, cards
  *   ink-warm   #0F100B  the Work / Live hero band only
- *   ink-deep   #030303  gradient stops and the footer band
+ *   ink-deep   #030303  gradient stops and the NavBar pill
+ *
+ * The 2026-08 pass bound these to a proper variable collection (ids in each
+ * token's comment; names unreadable on this seat) and nudged two of them warm.
+ * The footer band left ink-deep for the pure-black chrome — see
+ * --color-utility.
  *
  * COPY ON DARK IS WHITE AT AN ALPHA, never a solid grey — it has to composite
  * over the photography behind it. That is the `on-ink-*` set below.
@@ -36,47 +41,85 @@
   --color-brand-tint: #ff6a5a;
 
   /* ── Surfaces ──────────────────────────────────────────────────────────── */
-  /* #0A0A0A — Figma `color/grey/4`, the dominant dark. Every section headline
-   * on a light band, the solid dark button (1864:2405), the case-study card
-   * base. Effectively the design's black. */
-  --color-ink: #0a0a0a;
+  /* #0A0A0B — the dominant dark. Every section headline on a light band, the
+   * solid dark button, the CTA band (2124:1066), the Work interior hero
+   * (2101:861), the footer's ring donut (1320:117). Effectively the design's
+   * black.
+   *
+   * WAS #0A0A0A until the 2026-08 token pass: the designer's new variable
+   * (`VariableID:2083:1071`, name unreadable on this seat) pins the dark at
+   * #0A0A0B across every redesigned frame — ~200 bound uses, fills, strokes
+   * and text alike. The old-generation variable (`1065:223`, #0A0A0A) and raw
+   * #0A0A0A fills survive only on frames the migration has not reached (Live,
+   * About, the mobile set). */
+  --color-ink: #0a0a0b;
   /* #0F100B — the warm-black hero band on Work (1634:1181) and Live. The only
    * place this value appears; it is a surface, not a text color. */
   --color-ink-warm: #0f100b;
   /* #030303 — reserved for gradient stops (every scrim, the statement fade,
-   * the brand-glow base) and the footer band (1680:2096). Rarely a flat
-   * fill — prefer --color-ink for a dark area. */
+   * the brand-glow base) and the NavBar pill's 20% fill (--color-scrim). The
+   * footer band this comment used to claim is gone — the 2026-08 Footer
+   * component is pure black (see --color-utility). Rarely a flat fill —
+   * prefer --color-ink for a dark area. */
   --color-ink-deep: #030303;
-  /* #F0F0F0 — the light band: partners/intro (1864:2390), the pull quote
-   * (1683:2137), the insights row (1683:2467). Often washes to white
-   * rather than sitting flat — see --gradient-surface-wash. */
-  --color-bone: #f0f0f0;
+  /* #F1F0EC — the light band: the pull quote (1683:2137), the insights row
+   * (2134:1352), the Solutions intro (2360:2861), the Insight-index card grid
+   * (2337:4485). Often washes rather than sitting flat — see
+   * --gradient-surface-wash and the warm variant below.
+   *
+   * WAS #F0F0F0 until the 2026-08 token pass warmed it: variables
+   * `2050:1218` / `2459:1858` bind #F1F0EC on exactly the bands this token
+   * always named, including its original anchors. Raw #F0F0F0 survives only
+   * on un-migrated frames (Live, About's blog row, the mobile set). */
+  --color-bone: #f1f0ec;
+  /* #F7F7F6 — bone's lighter end: the near-white the warm wash rises to on
+   * the partners band (1864:2390), the hero's Curve vector (2089:4309), and
+   * the Sanity client-partners section (2332:1708). Bound to variable
+   * `2050:1217`; landed with the same 2026-08 pass as the #F1F0EC bone. */
+  --color-bone-soft: #f7f7f6;
   /* #FFFFFF — Figma `color/white/solid`. The plain light band (1762:2149),
    * the light button fill, and all display copy on dark. */
   --color-white: #ffffff;
-  /* #0A0A0B → now identical to --color-ink. DEPRECATED alias kept so the two
-   * remaining `bg-ink-soft` call sites keep compiling; the lifted-dark
-   * distinction it encoded does not exist in the canonical frames. Remove in
-   * #38. */
-  --color-ink-soft: #0a0a0a;
+  /* DEPRECATED alias, again identical to --color-ink — which since the
+   * 2026-08 token pass IS #0A0A0B, the value this alias was born with. The
+   * lifted-dark distinction it encoded still does not exist; kept only so the
+   * two remaining `bg-ink-soft` call sites compile. Remove in #38. */
+  --color-ink-soft: #0a0a0b;
 
   /* ── Text on light surfaces (white / bone) ─────────────────────────────── */
   /* #232323 — Figma `text/default`. Body copy and card titles on light bands;
    * also `icons/default`. */
   --color-fg: #232323;
-  /* #636363 — Figma `text/tertiary`. The NEUTRAL eyebrow ("OUR PARTNERS",
-   * 1864:2392) and insights-card meta ("3 MINS · 7/27/26"). Note the
-   * eyebrow is this grey, not brand red — see the Eyebrow default-tone note
-   * in #38. */
-  --color-fg-muted: #636363;
-  /* #A3A3A3 — the footer legal row (1680:2121). */
+  /* #76746F — the NEUTRAL eyebrow ("OUR PARTNERS", 1864:2392) and
+   * insights-card meta ("3 MINS · 7/27/26", 2134:1191). Note the eyebrow is
+   * this grey, not brand red — see the Eyebrow default-tone note in #38.
+   *
+   * WAS #636363 (`text/tertiary`) until the 2026-08 token pass warmed it:
+   * variable `2083:1073` binds #76746F on both of this token's anchor nodes.
+   * Two stragglers on un-migrated content: raw #636363 (Live's section
+   * eyebrows, About's role lines) and the old-generation variable `1065:4403`
+   * #757575 (About's OUR TEAM / CULTURE / CAREERS eyebrows). The same #76746F
+   * also strokes the Insight-index filter pills (`2050:1227`, a border-role
+   * variable) — #61's build can reach for border-fg-muted. */
+  --color-fg-muted: #76746f;
+  /* #A3A3A3 — NO CANONICAL ANCHOR since the 2026-08 footer rework: the legal
+   * row this token was read from (1680:2121) is gone, and the Footer
+   * component's legal row binds the same #AAA69E variable as the Utility Nav
+   * copy (`2050:1226`) — see --color-on-utility, which now owns that role.
+   * Raw #A3A3A3 survives only on the un-migrated mobile frames' footers.
+   * Kept for the Storybook/spec chrome that reads it on light surfaces,
+   * where #AAA69E would be wrong; resolve in #38. */
   --color-fg-subtle: #a3a3a3;
   /* rgba(10,10,10,0.5) — the pull-quote attribution (1683:2144). The one place
    * the design tints ink instead of reaching for a grey. */
   --color-fg-quiet: rgba(10, 10, 10, 0.5);
 
   /* ── Text on dark surfaces ─────────────────────────────────────────────── */
-  /* Figma `color/white/ 92%` — the CTA band headline. Not pure white. */
+  /* Figma `color/white/ 92%` — the CTA band headline (Home's band 1680:2088,
+   * bound to `1065:298`). Not pure white. The 2026-08 shared CTA component
+   * (2112:1165, on seven frames) draws its copy at an UNBOUND 94% instead —
+   * flagged as a likely slip rather than adopted, since the bound variable
+   * still says 92. */
   --color-on-ink: rgba(255, 255, 255, 0.92);
   /* Case-study stat labels ("NRR") beside the 48px figure (1883:3565). */
   --color-on-ink-muted: rgba(255, 255, 255, 0.65);
@@ -106,21 +149,30 @@
   /* #D3D3D3 — Figma `bg/button/secondary`. The circular carousel controls
    * beside the insights heading. */
   --color-surface-muted: #d3d3d3;
-  /* #000000 — the Utility Nav strip's fill (2250:1445), the brand-property bar
-   * the 2026-08 pass put above the pill. A SIXTH dark, and the only pure black
-   * in the design: the five neutrals stop at --color-ink-deep (#030303). It is
-   * a token rather than a call-site literal because Figma binds it to a
-   * variable (theme.css → what earns a token); the variable's NAME is not
-   * readable with this token's scopes, so the role is named here. */
+  /* #000000 — the black chrome: the Utility Nav strip's fill (2250:1445,
+   * variable `2050:1232`) and, since the 2026-08 rework, the Footer band too
+   * (1280:1885, its own variable `2460:2096` — the same pure black). No
+   * longer quite a sixth dark so much as the chrome's own surface, bracketing
+   * the page top and bottom; the in-page neutrals still stop at
+   * --color-ink-deep (#030303). A token rather than a call-site literal
+   * because Figma binds it (theme.css → what earns a token); the variables'
+   * NAMES are not readable with this seat's scopes, so the role is named
+   * here. SiteFooter paints with `bg-black` (same value) — a call-site
+   * cleanup for #38. */
   --color-utility: #000000;
-  /* #AAA69E — the strip's link copy. Warm grey, and the one place the design
-   * sets copy on dark as a SOLID rather than white at an alpha: the strip is
-   * opaque black with nothing behind it to composite over, so the on-ink
-   * alphas would resolve to a colder grey than the frame draws. */
+  /* #AAA69E — muted warm copy on the black chrome. One Figma variable
+   * (`2050:1226`) paints all of it: the strip's link copy, the Footer
+   * component's legal row (1280:1877–1880 — this role moved here from
+   * --color-fg-subtle in the 2026-08 rework) and the "Go birds." line beside
+   * it. Warm grey, and the one place the design sets copy on dark as a SOLID
+   * rather than white at an alpha: both chrome bands are opaque black with
+   * nothing behind them to composite over, so the on-ink alphas would resolve
+   * to a colder grey than the frames draw. */
   --color-on-utility: #aaa69e;
-  /* #242322 — the strip's 1px hairline, its --color-on-ink-line. Solid for the
-   * same reason the copy is. */
-  --color-on-utility-line: #242322;
+  /* #242321 — the strip's 1px hairline, its --color-on-ink-line. Solid for the
+   * same reason the copy is. Bound to `2050:1230`; the #242322 this shipped
+   * with was a misread of the same swatch, corrected 2026-08-13. */
+  --color-on-utility-line: #242321;
 
   /* ── Borders / placeholders ────────────────────────────────────────────── */
   /* NO CANONICAL ANCHOR — the frames draw separation with the surface wash

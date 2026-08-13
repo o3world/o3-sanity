@@ -291,6 +291,11 @@ describe('site footer', () => {
     expect(footerHtml).toContain(settings.legalName as string)
     expect(footerHtml).toContain(settings.copyrightNote as string)
     expect(footerHtml).toContain(String(new Date().getFullYear()))
+    // The legal row is `on-utility` (#AAA69E) — the component binds the same
+    // variable here as the Utility Nav links (`2050:1226`), not the cool
+    // `fg-subtle` grey the row shipped with (2026-08-13 token pass).
+    expect(footerHtml).toContain('text-on-utility')
+    expect(footerHtml).not.toContain('text-fg-subtle')
     // The copyright note IS the `Go birds.` easter egg (`1275:1631`), whose
     // only state is `State=Hover` — Eagles green, `#339C5E`.
     expect(footerHtml).toContain('hover:text-[#339c5e]')
