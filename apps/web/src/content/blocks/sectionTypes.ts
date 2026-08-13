@@ -6,7 +6,7 @@ import type { PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
  * types include the query-time expansions: dereferenced cta targets, card
  * projections, listing subqueries).
  *
- * `caseStudy.extraSections` shares the same projection fragment
+ * `caseStudy.story` shares the same projection fragment
  * (SECTION_FIELDS in @o3/sanity/queries), so this union covers both hosts.
  */
 export type PageSection = NonNullable<NonNullable<PAGE_QUERY_RESULT>['sections']>[number]

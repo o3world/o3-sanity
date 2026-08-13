@@ -51,12 +51,26 @@ export const caseStudy = defineType({
       description: 'The first stat is the headline stat shown on showcase cards.',
     }),
     defineField({ name: 'heroMedia', type: 'figure', group: 'card' }),
+    /**
+     * THE NARRATIVE IS ONE INTERLEAVED ARRAY — ADR 0018.
+     *
+     * `chapters` and `extraSections` were two fields, and the frame
+     * (`1710:2300`) alternates chapter → band → chapter → band, which two
+     * fields cannot express. One array of `chapter` members and section
+     * blocks can, and every band the case study needs is then a block any
+     * page can compose too. The section members are derived from the registry
+     * (`sectionBlockMembers`), never restated.
+     */
     defineField({
-      name: 'chapters',
+      name: 'story',
       type: 'array',
-      of: [defineArrayMember({ type: 'chapter' })],
+      of: [
+        defineArrayMember({ type: 'chapter' }),
+        ...sectionBlockMembers.map((member) => defineArrayMember(member)),
+      ],
       group: 'story',
-      description: 'Numbered chapters ("01 — Overview"); numbering derives from order.',
+      description:
+        'The narrative in order — numbered chapters with whatever bands sit between them. Numbering derives from a chapter’s order among the other chapters, so a band between two chapters costs nothing.',
     }),
     defineField({
       name: 'deliverables',
@@ -64,13 +78,6 @@ export const caseStudy = defineType({
       type: 'array',
       of: [{ type: 'string' }],
       group: 'story',
-    }),
-    defineField({
-      name: 'extraSections',
-      type: 'array',
-      of: sectionBlockMembers.map((member) => defineArrayMember(member)),
-      group: 'story',
-      description: 'Optional per-case flourishes appended after the chapters.',
     }),
     defineField({ name: 'seo', type: 'seo' }),
     defineField({ name: 'migration', type: 'migration' }),

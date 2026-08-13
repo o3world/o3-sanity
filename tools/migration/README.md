@@ -218,6 +218,25 @@ logo wall.
 copy. The five fallback `alt` strings and the four anonymized client names are
 now fix-forward work, still flagged on the document and still listed here.
 
+### The `story` restructure (#97)
+
+`chapters` and `extraSections` became one interleaved `story` array
+([ADR 0018](../../docs/adr/0018-case-study-story-interleaves-chapters-and-bands.md)),
+and all 20 were rewritten into it: opening chapter, the carousel's cover
+slide, second chapter, the rest of the carousel. No prose was re-derived and
+no `_key` moved, so the diff is structural — but the rules file changed, which
+is what the new `rulesHash` on every document records.
+
+Four cases carry more than the default weave, because their sources support
+it: IRONMAN, Vertex, Caron and La Colombe name the disciplines they hired for,
+so their opening chapter gains `details` rows drawn from what the Solution
+says each discipline did. Vertex, Caron and La Colombe fold their two product
+screenshots into a `screenGridSection`; IRONMAN's Pro Series page capture
+becomes a `mediaSection` with `variant: "capture"` and its four remaining
+slides one screen grid. **No case study has a `quoteSection`** — the archive's
+`work` posts hold no pull quote — so `decoration: "molecule"` has no content
+to land on here, and waits for a seeded page.
+
 ---
 
 ## Seeds: greenfield content, same pipeline (#20)

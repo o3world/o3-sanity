@@ -54,7 +54,7 @@ export function ClientBlockRenderer({
   // `reconcileOptimisticOrder` re-maps the payload's `_key` ordering back
   // onto the full block data we already hold. A no-op outside a relevant drag.
   // The second generic is the optimistic DOCUMENT shape (the reducer's action
-  // wraps it) — the field hosting the blocks varies (sections/extraSections),
+  // wraps it) — the field hosting the blocks varies (sections/story),
   // so it stays a loose record and reconcile picks `fieldPath` off it.
   const orderedBlocks = useOptimistic<SanityBlock[], Record<string, unknown>>(
     blocks,

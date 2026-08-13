@@ -9,10 +9,11 @@ import { MediaSection } from './MediaSection'
  * A full-width figure moment, built to the Case Study frame's two media
  * treatments (#44) — the only canonical frame that draws this block.
  *
- * | `width`      | Frame                    | Shape                              |
- * | ------------ | ------------------------ | ---------------------------------- |
- * | `full-bleed` | `1647:1721` / `1906:900` | edge to edge, 1440 × 576           |
- * | `contained`  | `1899:4186`              | the 822px article measure + shadow |
+ * | `variant` / `width`    | Frame                    | Shape                              |
+ * | ---------------------- | ------------------------ | ---------------------------------- |
+ * | `plain` / `full-bleed` | `1647:1721` / `1906:900` | edge to edge, 1440 × 576           |
+ * | `plain` / `contained`  | `1899:4186`              | the 822px article measure + shadow |
+ * | `capture`              | `1647:1720`              | a 700px dark stage that crops      |
  *
  * `contained` sits on the **article measure**, not `--container-content`: the
  * frame lines a contained figure up with the chapter prose around it, not with
@@ -55,6 +56,29 @@ export const FullBleedMobile: Story = {
   args: { ...seededSectionArgs('ventures-urvin', 'mediaSection'), width: 'full-bleed' },
   globals: { viewport: { value: 'mobile' } },
   parameters: { design: figmaDesign('1906:900') },
+}
+
+/**
+ * `1647:1720` (#97) — the capture. A tall page screenshot hung 64px from the
+ * top of a full-bleed dark stage, which then **crops it at the band's floor**:
+ * the picture is meant to run past the bottom edge, so a story where it fits
+ * would be showing the wrong thing. `width` is ignored here (Studio hides it),
+ * which is what this story pins.
+ */
+export const Capture: Story = {
+  args: {
+    ...seededSectionArgs('ventures-urvin', 'mediaSection'),
+    variant: 'capture',
+    width: 'contained',
+  },
+  parameters: { design: figmaDesign('1647:1720') },
+}
+
+/** The capture stage at 402, where the band shortens rather than scaling. */
+export const CaptureMobile: Story = {
+  args: { ...seededSectionArgs('ventures-urvin', 'mediaSection'), variant: 'capture' },
+  globals: { viewport: { value: 'mobile' } },
+  parameters: { design: figmaDesign('1647:1720') },
 }
 
 /** On ink — the contained shadow is authored for a light band. */

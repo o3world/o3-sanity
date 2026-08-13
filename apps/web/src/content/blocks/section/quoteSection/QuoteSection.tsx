@@ -1,4 +1,4 @@
-import { OrbitalSphere, SURFACE_CLASS } from '@o3/ui'
+import { MoleculeMark, OrbitalSphere, SURFACE_CLASS } from '@o3/ui'
 import { stegaClean } from '@sanity/client/stega'
 
 import { resolveSurface } from '@/content/blocks/surface'
@@ -30,15 +30,28 @@ type QuoteSectionProps = SectionProps<'quoteSection'>
  * The quotation marks belong to the frame's string, so they are added here
  * rather than stored: an editor should not have to remember to type the
  * glyphs, and a typed `"` would render as a straight quote.
+ *
+ * **`decoration: 'molecule'`** is the 2026-08 case-study band (`2250:1525`,
+ * #97): the same column and the same gradient fill, with the molecule mark
+ * instead of the two spheres — 699px at 10%, hung off the band's right edge at
+ * the frame's own offsets (x 944 against a 1440 frame, y 181) and clipped by
+ * the band's `overflow-hidden`. Hidden below `lg` for the same reason the
+ * spheres are: a 699px decoration on a 402px frame is not a decoration.
  */
 export function QuoteSection({ quote, attribution, decoration, surface }: QuoteSectionProps) {
   if (!quote) return null
-  const showOrbs = stegaClean(decoration) !== 'none'
+  const chosen = stegaClean(decoration)
+  const showMolecule = chosen === 'molecule'
+  const showOrbs = !showMolecule && chosen !== 'none'
 
   return (
     <section
       className={`${SURFACE_CLASS[resolveSurface(surface, 'bone')]} px-gutter py-band-lg relative isolate overflow-hidden`}
     >
+      {showMolecule ? (
+        <MoleculeMark className="text-ink absolute -z-10 hidden opacity-10 lg:right-[-203px] lg:top-[181px] lg:block lg:w-[699px]" />
+      ) : null}
+
       {showOrbs ? (
         <>
           {/*

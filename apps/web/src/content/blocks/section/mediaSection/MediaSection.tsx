@@ -11,10 +11,19 @@ type MediaSectionProps = SectionProps<'mediaSection'>
  * Section block: a full-width figure moment, built to the Case Study frame's
  * two media treatments (#44) — the only canonical frame that draws this block.
  *
- * | `width`      | Frame                    | Shape                                  |
- * | ------------ | ------------------------ | -------------------------------------- |
- * | `full-bleed` | `1647:1721` / `1906:900` | edge to edge, 1440 × 576 (402 × 257)   |
- * | `contained`  | `1899:4186`              | the 822px article measure, soft shadow |
+ * | `variant` / `width`     | Frame                    | Shape                                  |
+ * | ----------------------- | ------------------------ | -------------------------------------- |
+ * | `plain` / `full-bleed`  | `1647:1721` / `1906:900` | edge to edge, 1440 × 576 (402 × 257)   |
+ * | `plain` / `contained`   | `1899:4186`              | the 822px article measure, soft shadow |
+ * | `capture`               | `1647:1720`              | a 700px dark stage the capture is cropped by |
+ *
+ * **`capture` is a band that crops, not a figure that fits** (#97). The frame
+ * hangs an 822 × 1555 page screenshot on a full-bleed dark stage, 64px from
+ * the top, and lets the band's 700px floor cut it off — the "here is the whole
+ * page, and it keeps going" move. So the image renders at its own proportions
+ * on the article measure and the band clips it, exactly as `ScreenGridSection`
+ * treats a plate. `width` is hidden in Studio when this variant is on, because
+ * a capture is full-bleed by construction.
  *
  * `contained` sits on the **article measure**, not `--container-content` —
  * the frame lines a contained figure up with the chapter prose around it (824
@@ -29,10 +38,42 @@ type MediaSectionProps = SectionProps<'mediaSection'>
  * The band builds its own `<section>` rather than using `SectionShell`,
  * because `full-bleed` has to escape the gutter the shell always applies.
  */
-export function MediaSection({ media, width, surface }: MediaSectionProps) {
+export function MediaSection({ media, variant, width, surface }: MediaSectionProps) {
   if (!media) return null
   const fullBleed = stegaClean(width) === 'full-bleed'
   const surfaceClass = SURFACE_CLASS[resolveSurface(surface, 'white')]
+
+  if (stegaClean(variant) === 'capture') {
+    return (
+      <section className={surfaceClass}>
+        <figure>
+          {/*
+           * The stage: `--gradient-screen-stage` at 135° with the frame's
+           * `inset 0 -16px 16px rgba(0,0,0,0.05)` foot, 64px of top padding,
+           * and a fixed height it clips at. 700 is the 1440 value; below `lg`
+           * the band shortens rather than scaling the capture, so the same
+           * amount of page is legible at both widths (ADR 0006).
+           */}
+          <div className="px-gutter bg-(image:--gradient-screen-stage) relative h-[520px] overflow-hidden pt-16 shadow-[inset_0_-16px_16px_0_rgba(0,0,0,0.05)] lg:h-[700px]">
+            <div className="max-w-article mx-auto w-full">
+              <SanityImage
+                source={media.image}
+                alt={media.alt}
+                width={1650}
+                className="w-full rounded-[12px] shadow-[0_0_32px_0_rgba(0,0,0,0.4)]"
+                sizes="(min-width: 1024px) 822px, 100vw"
+              />
+            </div>
+          </div>
+          {media.caption ? (
+            <figcaption className="text-fg-subtle px-gutter mt-4 text-sm">
+              {media.caption}
+            </figcaption>
+          ) : null}
+        </figure>
+      </section>
+    )
+  }
 
   if (fullBleed) {
     return (

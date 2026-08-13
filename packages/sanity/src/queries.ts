@@ -57,7 +57,7 @@ const CTA_TARGET = /* groq */ `"target": target->{_type, title, "slug": slug.cur
 
 /**
  * The section-array projection shared by `page.sections` and
- * `caseStudy.extraSections`. Per-type conditional arms expand exactly what
+ * `caseStudy.story`. Per-type conditional arms expand exactly what
  * each block renderer needs beyond the raw fields:
  * - cta targets are dereferenced everywhere a cta appears (incl. layoutSection
  *   column items);
@@ -203,9 +203,14 @@ export const LATEST_INSIGHTS_QUERY = defineQuery(
 export const CASE_STUDY_QUERY = defineQuery(`*[_type == "caseStudy" && slug.current == $slug][0]{
   ${CASE_STUDY_CARD},
   stats,
-  chapters,
   deliverables,
-  "extraSections": extraSections[]{${SECTION_FIELDS}},
+  ${
+    /* The interleaved narrative — chapters and section blocks in one array
+      (ADR 0018). SECTION_FIELDS opens with `...`, so a `chapter` member falls
+      through it untouched (its `body` and `details` are inline) and each
+      section member still gets its own expansion arm. */ ''
+  }
+  "story": story[]{${SECTION_FIELDS}},
   seo,
   "next": *[_type == "caseStudy" && _id != ^._id] | order(_createdAt desc) [0]{title, "slug": slug.current, heroMedia, "client": client->{name}}
 }`)

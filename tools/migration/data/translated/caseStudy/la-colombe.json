@@ -47,7 +47,7 @@
     },
     "alt": "La Colombe case study"
   },
-  "chapters": [
+  "story": [
     {
       "_type": "chapter",
       "_key": "chapter-0",
@@ -68,7 +68,42 @@
             }
           ]
         }
+      ],
+      "details": [
+        {
+          "_type": "detail",
+          "_key": "detail-0",
+          "label": "Strategy",
+          "body": "We have led La Colombe’s online strategy since 2014 — new product launches, and a growing online customer base."
+        },
+        {
+          "_type": "detail",
+          "_key": "detail-1",
+          "label": "Design",
+          "body": "A multi-channel digital commerce experience, designed and built to bring La Colombe into many more American homes."
+        },
+        {
+          "_type": "detail",
+          "_key": "detail-2",
+          "label": "Research",
+          "body": "Continuous user research, and new concepts that extend the digital platform."
+        }
       ]
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-0",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-0",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/LaColombe-casestudy1.png"
+        },
+        "alt": "La Colombe logo with three La Colombe canned lattes."
+      }
     },
     {
       "_type": "chapter",
@@ -105,53 +140,43 @@
           ]
         }
       ]
-    }
-  ],
-  "extraSections": [
-    {
-      "_type": "mediaSection",
-      "_key": "media-0",
-      "surface": "white",
-      "width": "contained",
-      "media": {
-        "_type": "figure",
-        "_key": "fig-0",
-        "image": {
-          "_type": "image",
-          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/LaColombe-casestudy1.png"
-        },
-        "alt": "La Colombe logo with three La Colombe canned lattes."
-      }
     },
     {
-      "_type": "mediaSection",
-      "_key": "media-1",
+      "_type": "screenGridSection",
+      "_key": "screens-0",
       "surface": "white",
-      "width": "contained",
-      "media": {
-        "_type": "figure",
-        "_key": "fig-1",
-        "image": {
-          "_type": "image",
-          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/LaColombe-casestudy2.jpg"
+      "screens": [
+        {
+          "_type": "screen",
+          "_key": "media-1",
+          "media": {
+            "_type": "figure",
+            "_key": "fig-1",
+            "image": {
+              "_type": "image",
+              "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/LaColombe-casestudy2.jpg"
+            },
+            "alt": "LaColombe’s Homepage. Featuring a product shot of their signature draft latte and a call to action to purchase through their shop."
+          },
+          "tone": "ink",
+          "span": "wide"
         },
-        "alt": "LaColombe’s Homepage. Featuring a product shot of their signature draft latte and a call to action to purchase through their shop."
-      }
-    },
-    {
-      "_type": "mediaSection",
-      "_key": "media-2",
-      "surface": "white",
-      "width": "contained",
-      "media": {
-        "_type": "figure",
-        "_key": "fig-2",
-        "image": {
-          "_type": "image",
-          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/LaColombe-casestudy3.png"
-        },
-        "alt": "Collection of screenshots of La Colombe ecommerce solution on mobile."
-      }
+        {
+          "_type": "screen",
+          "_key": "media-2",
+          "media": {
+            "_type": "figure",
+            "_key": "fig-2",
+            "image": {
+              "_type": "image",
+              "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/LaColombe-casestudy3.png"
+            },
+            "alt": "Collection of screenshots of La Colombe ecommerce solution on mobile."
+          },
+          "tone": "ink",
+          "span": "standard"
+        }
+      ]
     }
   ],
   "seo": {
@@ -165,9 +190,9 @@
     "sourceFile": "caseStudy/la-colombe.json",
     "sourceHash": "sha256:75373759e1a25b044c96b50238f520b9701e2feab72dfa74ce65c1bc82c94492",
     "rulesFile": "rules/caseStudy.md",
-    "rulesHash": "sha256:9a0c271dab4ca8fd1807f0a7af12c4734a49be6f65ba7eb84f3ca5430ab33e6f",
+    "rulesHash": "sha256:39b0782ef8158eb2f57b7d5ec98cece7fc22f6aebf64f87e182c6f6e68ae821f",
     "model": "claude-opus-5",
-    "translatedAt": "2026-08-01",
+    "translatedAt": "2026-08-13",
     "flags": [
       {
         "field": "narrativeHeadline",
@@ -175,14 +200,24 @@
         "note": "Compressed from the Opportunity paragraph’s two claims — an outstanding in-cafe and wholesale brand experience, not yet expressed digitally. No new facts, but it is a rewrite rather than a quotation."
       },
       {
-        "field": "chapters[0].title",
+        "field": "story[0].title",
         "kind": "proposed",
         "note": "chapter.title is required; the source chapter has only the heading “Opportunity”, which is the kicker. Drawn from the paragraph’s closing line about translating the experience into the digital space."
       },
       {
-        "field": "chapters[1].title",
+        "field": "story[2].title",
         "kind": "proposed",
         "note": "Same: required, unsourced. Drawn from “Since 2014, we’ve led La Colombe’s online strategy”."
+      },
+      {
+        "field": "story",
+        "kind": "derived",
+        "note": "One interleaved array now (ADR 0018). The brand slide sits between the chapters; the homepage and the mobile commerce screens become one `screenGridSection` after the Solution, the first tile at `span: wide`. Nothing added or dropped, every `_key` unchanged."
+      },
+      {
+        "field": "story[0].details",
+        "kind": "derived",
+        "note": "The Solution names three kinds of work and says what each did: “we’ve led La Colombe’s online strategy” since 2014, “we designed and developed a multi-channel digital commerce experience”, and “we continually conduct user research”. Labels are the source’s own words. No new facts."
       },
       {
         "field": "industries",

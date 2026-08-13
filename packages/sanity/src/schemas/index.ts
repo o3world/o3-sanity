@@ -23,6 +23,7 @@ import {
   formSection,
   layoutSection,
   mediaSection,
+  screenGridSection,
   listingSection,
 } from './blocks/section'
 import { insight } from './documents/insight'
@@ -60,6 +61,7 @@ export const schemaTypes = [
   formSection,
   layoutSection,
   mediaSection,
+  screenGridSection,
   listingSection,
   // documents
   insight,

@@ -32,7 +32,7 @@ export function renderDispatchedBlocks(opts: {
   Placeholder: ComponentType<{ blockKey: string; blockType: string }>
   documentId?: string
   documentType?: string
-  /** The document array field hosting the blocks (`sections` | `extraSections`). */
+  /** The document array field hosting the blocks (`sections` | `story`). */
   fieldPath?: string
 }): ReactNode[] {
   const { blocks, lookup, Placeholder, documentId, documentType, fieldPath = 'sections' } = opts

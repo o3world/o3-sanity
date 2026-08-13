@@ -47,7 +47,7 @@
     },
     "alt": "Vertex case study"
   },
-  "chapters": [
+  "story": [
     {
       "_type": "chapter",
       "_key": "chapter-0",
@@ -68,7 +68,42 @@
             }
           ]
         }
+      ],
+      "details": [
+        {
+          "_type": "detail",
+          "_key": "detail-0",
+          "label": "Strategy",
+          "body": "An assessment of Vertex’s market, data and customer journey came first."
+        },
+        {
+          "_type": "detail",
+          "_key": "detail-1",
+          "label": "Design",
+          "body": "A personalized, multi-visit B2B experience, built to scale and nurture prospects across an organization."
+        },
+        {
+          "_type": "detail",
+          "_key": "detail-2",
+          "label": "Technology",
+          "body": "A globalized site carrying regional content, with several points of entry — a partner channel and automated chat among them."
+        }
       ]
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-0",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-0",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy1.png"
+        },
+        "alt": "Vertex logo over graphical arrow patterns."
+      }
     },
     {
       "_type": "chapter",
@@ -91,53 +126,43 @@
           ]
         }
       ]
-    }
-  ],
-  "extraSections": [
-    {
-      "_type": "mediaSection",
-      "_key": "media-0",
-      "surface": "white",
-      "width": "contained",
-      "media": {
-        "_type": "figure",
-        "_key": "fig-0",
-        "image": {
-          "_type": "image",
-          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy1.png"
-        },
-        "alt": "Vertex logo over graphical arrow patterns."
-      }
     },
     {
-      "_type": "mediaSection",
-      "_key": "media-1",
+      "_type": "screenGridSection",
+      "_key": "screens-0",
       "surface": "white",
-      "width": "contained",
-      "media": {
-        "_type": "figure",
-        "_key": "fig-1",
-        "image": {
-          "_type": "image",
-          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy2.png"
+      "screens": [
+        {
+          "_type": "screen",
+          "_key": "media-1",
+          "media": {
+            "_type": "figure",
+            "_key": "fig-1",
+            "image": {
+              "_type": "image",
+              "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy2.png"
+            },
+            "alt": "Collection of pages from the Vertex website on a mobile device."
+          },
+          "tone": "ink",
+          "span": "wide"
         },
-        "alt": "Collection of pages from the Vertex website on a mobile device."
-      }
-    },
-    {
-      "_type": "mediaSection",
-      "_key": "media-2",
-      "surface": "white",
-      "width": "contained",
-      "media": {
-        "_type": "figure",
-        "_key": "fig-2",
-        "image": {
-          "_type": "image",
-          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy3.jpg"
-        },
-        "alt": "Vertex landing page with headline, Tax compliance solutions empowering companies of all sizes to do business anywhere, anytime - without friction."
-      }
+        {
+          "_type": "screen",
+          "_key": "media-2",
+          "media": {
+            "_type": "figure",
+            "_key": "fig-2",
+            "image": {
+              "_type": "image",
+              "_wpSrc": "https://www.o3world.com/wp-content/uploads/2023/01/Vertex-casestudy3.jpg"
+            },
+            "alt": "Vertex landing page with headline, Tax compliance solutions empowering companies of all sizes to do business anywhere, anytime - without friction."
+          },
+          "tone": "ink",
+          "span": "standard"
+        }
+      ]
     }
   ],
   "seo": {
@@ -151,9 +176,9 @@
     "sourceFile": "caseStudy/vertex.json",
     "sourceHash": "sha256:940b9b3d0b8e45a1c87f07be38d8ab0451ea251ad879eecceeae72ddef7e35ed",
     "rulesFile": "rules/caseStudy.md",
-    "rulesHash": "sha256:9a0c271dab4ca8fd1807f0a7af12c4734a49be6f65ba7eb84f3ca5430ab33e6f",
+    "rulesHash": "sha256:39b0782ef8158eb2f57b7d5ec98cece7fc22f6aebf64f87e182c6f6e68ae821f",
     "model": "claude-opus-5",
-    "translatedAt": "2026-08-02",
+    "translatedAt": "2026-08-13",
     "flags": [
       {
         "field": "narrativeHeadline",
@@ -161,14 +186,24 @@
         "note": "Compressed from the Opportunity — “take the complexity out of sales and use tax, global taxation, and tax data”, “their partner network was rapidly expanding, their products were maturing and their marketing needs were growing”. No new facts."
       },
       {
-        "field": "chapters[0].title",
+        "field": "story[0].title",
         "kind": "proposed",
         "note": "chapter.title is required; the source heading is only the kicker. Drawn from the three simultaneous pressures the Opportunity lists."
       },
       {
-        "field": "chapters[1].title",
+        "field": "story[2].title",
         "kind": "proposed",
         "note": "Same: required, unsourced. Drawn from “the globalized site allows for regional-centric content” and “various points of entry including a partner channel and automated chat”."
+      },
+      {
+        "field": "story",
+        "kind": "derived",
+        "note": "One interleaved array now (ADR 0018). The brand slide sits between the chapters; the two product screens — the site on mobile and the tax-compliance landing page — become one `screenGridSection` after the Solution, the first tile at `span: wide`. Nothing added or dropped, every `_key` unchanged."
+      },
+      {
+        "field": "story[0].details",
+        "kind": "derived",
+        "note": "The Opportunity asks for “a team of nimble strategists, designers and technology experts”, and the Solution says what each of the three delivered: the market, data and customer-journey assessment; the personalized multi-visit B2B experience; the globalized site with its partner channel and automated chat. Labels are the source’s own three words. No new facts."
       },
       {
         "field": "industries",

@@ -19,6 +19,7 @@ export const SECTION_BLOCKS = [
   'formSection',
   'layoutSection',
   'mediaSection',
+  'screenGridSection',
   'listingSection',
 ] as const
 

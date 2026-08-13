@@ -30,6 +30,7 @@ import { InsightsCarouselSection } from './section/insightsCarouselSection/Insig
 import { QuoteSection } from './section/quoteSection/QuoteSection'
 import { RailPanelsSection } from './section/railPanelsSection/RailPanelsSection'
 import { RoleListSection } from './section/roleListSection/RoleListSection'
+import { ScreenGridSection } from './section/screenGridSection/ScreenGridSection'
 
 /**
  * Render bindings for every client-safe SECTION block — the single authoring
@@ -57,6 +58,7 @@ export const CLIENT_SECTION_BINDINGS = [
   defineBlockRender('formSection', { component: FormSection }),
   defineBlockRender('layoutSection', { component: LayoutSection }),
   defineBlockRender('mediaSection', { component: MediaSection }),
+  defineBlockRender('screenGridSection', { component: ScreenGridSection }),
   defineBlockRender('listingSection', { component: ListingSection }),
 ] satisfies ReadonlyArray<ClientBlockRenderBinding<SectionBlockName>>
 

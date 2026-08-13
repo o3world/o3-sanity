@@ -43,7 +43,7 @@ export type { CaseStudyHeroProps } from './components/case-study-hero'
 
 // CaseChapter — the numbered article band on a case study (1647:1714)
 export { CaseChapter } from './components/case-chapter'
-export type { CaseChapterProps } from './components/case-chapter'
+export type { CaseChapterDetail, CaseChapterProps } from './components/case-chapter'
 
 // CarouselControl — Figma's `Icon / Surface` (778:1862)
 export { CarouselControl } from './components/carousel-control'
@@ -83,6 +83,10 @@ export type { HalftoneDiscProps } from './components/halftone-disc'
 // LogoTile
 export { LogoTile } from './components/logo-tile'
 export type { LogoTileProps } from './components/logo-tile'
+
+// MoleculeMark — the mark behind the 2026-08 quote band (2250:1498 / 2250:1525)
+export { MoleculeMark } from './components/molecule-mark'
+export type { MoleculeMarkProps } from './components/molecule-mark'
 
 // OrbitalDiagram — the Solutions disciplines net (1928:6524). NOT the sphere.
 export { OrbitalDiagram } from './components/orbital-diagram'

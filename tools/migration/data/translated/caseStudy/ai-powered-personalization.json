@@ -47,7 +47,7 @@
     },
     "alt": "AI-powered personalization case study photo"
   },
-  "chapters": [
+  "story": [
     {
       "_type": "chapter",
       "_key": "chapter-0",
@@ -83,6 +83,21 @@
           ]
         }
       ]
+    },
+    {
+      "_type": "mediaSection",
+      "_key": "media-0",
+      "surface": "white",
+      "width": "contained",
+      "media": {
+        "_type": "figure",
+        "_key": "fig-0",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/04/Allied-1-3.jpg"
+        },
+        "alt": "AI-powered personalization case study photo"
+      }
     },
     {
       "_type": "chapter",
@@ -159,23 +174,6 @@
           ]
         }
       ]
-    }
-  ],
-  "extraSections": [
-    {
-      "_type": "mediaSection",
-      "_key": "media-0",
-      "surface": "white",
-      "width": "contained",
-      "media": {
-        "_type": "figure",
-        "_key": "fig-0",
-        "image": {
-          "_type": "image",
-          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/04/Allied-1-3.jpg"
-        },
-        "alt": "AI-powered personalization case study photo"
-      }
     },
     {
       "_type": "mediaSection",
@@ -220,9 +218,9 @@
     "sourceFile": "caseStudy/ai-powered-personalization.json",
     "sourceHash": "sha256:b493095dbcb8b823a05f574d5df9f9797bb0e46d5e00148252dd645b0923fb77",
     "rulesFile": "rules/caseStudy.md",
-    "rulesHash": "sha256:9a0c271dab4ca8fd1807f0a7af12c4734a49be6f65ba7eb84f3ca5430ab33e6f",
+    "rulesHash": "sha256:39b0782ef8158eb2f57b7d5ec98cece7fc22f6aebf64f87e182c6f6e68ae821f",
     "model": "claude-opus-5",
-    "translatedAt": "2026-08-02",
+    "translatedAt": "2026-08-13",
     "flags": [
       {
         "field": "narrativeHeadline",
@@ -230,17 +228,22 @@
         "note": "Compressed from the Opportunity’s first paragraph — the 36% and 68% figures and the “generic brochures and standardized campus tours” line, in that order. No new facts."
       },
       {
-        "field": "chapters[0].title",
+        "field": "story[0].title",
         "kind": "proposed",
         "note": "chapter.title is required; the source heading is only the kicker. Drawn from the first paragraph’s framing of a competitive, digital recruitment landscape against generic outreach."
       },
       {
-        "field": "chapters[1].title",
+        "field": "story[2].title",
         "kind": "proposed",
         "note": "Same: required, unsourced. Drawn from “conversational prompts… transformed into personalized video”."
       },
       {
-        "field": "chapters[].kicker",
+        "field": "story",
+        "kind": "derived",
+        "note": "`chapters` and `extraSections` are one interleaved array now (ADR 0018). The carousel’s cover slide sits between the two chapters and the rest follow the Solution, which is the alternation the frame draws. Nothing was added or dropped and every `_key` is unchanged."
+      },
+      {
+        "field": "story[].kicker",
         "kind": "derived",
         "note": "Source heading(s) arrive in capitals (“OPPORTUNITY”, “SOLUTION”) — the old template shouted them through its `type-kicker` class. Normalized to sentence case; the new renderer owns the casing."
       },
@@ -260,7 +263,7 @@
         "note": "WordPress never names the institution — the Opportunity describes higher ed in general and the Solution names Allied Pixel as O3’s co-developer, not the client. The post title stands in so the required reference resolves; a reviewer should either name the real client or retire the record."
       },
       {
-        "field": "extraSections[2].media.alt",
+        "field": "story[4].media.alt",
         "kind": "proposed",
         "note": "Source image carries no alt text; the WordPress attachment title “Allied 3” stands in, the same fallback the perspective mapper uses. It describes the file, not the picture — needs real alt text before this publishes."
       },
