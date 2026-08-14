@@ -102,6 +102,13 @@ export type Knob = {
   name: string
   /** What an editor reads on the control. */
   title: string
+  /**
+   * The sentence an editor needs in order to choose. Not decoration: it is
+   * where a block says what `orbital` means as opposed to `band`, and it
+   * carries into the Studio field's `description` and the knob menu's help
+   * text alike. Absent when the title and the option labels already say it.
+   */
+  description?: string
   icon?: KnobIcon
   /** The closed value set, normalised. Never empty. */
   options: readonly KnobOption[]
@@ -118,6 +125,7 @@ export type Knob = {
 export type KnobInput = {
   name: string
   title: string
+  description?: string
   icon?: KnobIcon
   options: readonly KnobOptionInput[]
   initialValue?: string

@@ -20,6 +20,17 @@ describe('knob', () => {
     expect(k.options).toEqual([{ value: 'band', title: 'The band', previewUrl: '/shots/band.png' }])
   })
 
+  it('carries a description when there is one, and omits the key when there is not', () => {
+    const described = knob({
+      name: 'variant',
+      title: 'Composition',
+      description: 'Orbital is the Home opener.',
+      options: ['orbital', 'band'],
+    })
+    expect(described.description).toBe('Orbital is the Home opener.')
+    expect('description' in knob({ name: 'variant', title: 'Variant', options: ['a'] })).toBe(false)
+  })
+
   it('defaults bar membership to false, because the bar is a curated subset', () => {
     expect(knob({ name: 'variant', title: 'Variant', options: ['a'] }).bar).toBe(false)
     expect(knob({ name: 'variant', title: 'Variant', options: ['a'], bar: true }).bar).toBe(true)

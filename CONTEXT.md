@@ -66,6 +66,8 @@ A **knob** is one design option on a block: a closed value set with a title, an 
 
 A knob is **declared once** and everything else is derived from it: the Sanity field, the Storybook control, and the canvas toolbar's control all read the same object ([ADR 0020](docs/adr/0020-a-block-declares-its-knobs-once.md)). Declarations live in `packages/sanity/src/knobs/<blockName>.ts` — their own directory, because all sixteen section blocks share one `schemas/blocks/section.ts` and there is no "beside" — and that directory may not import `sanity` (lint-enforced; the whole point is that the preview bundle can read it).
 
+The block's schema passes its declaration as `knobs:` and then **names each knob as a bare string where its field belongs** in `fields` — `fields: ['variant', eyebrowField, …, 'decoration']`. Field order is a fact about the form an editor reads, so it stays in one visible list; a knob nobody names is appended after the editorial fields, which is how `surface` keeps the last place it has always had. `defaultSurface` is the shorthand a block that has no declaration yet still uses, and it builds a one-knob spec so `surface` reaches the form by the same path either way ([#113](https://github.com/o3world/o3-sanity/issues/113) retires it).
+
 This is the same concept the Figma rule names one step upstream, and the chain is worth holding in one piece:
 
 > Figma variant **axis** → one `cva` variants key → one **knob** → one Sanity field

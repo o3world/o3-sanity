@@ -1,30 +1,32 @@
 import { defineArrayMember, defineField } from 'sanity'
 import { defineSectionBlock } from './defineBlocks'
 import { decorationField } from './fields'
+import { hiddenUnless } from './knobFields'
 import { SECTION_BLOCKS } from './registry'
 import { PAGE_TYPES } from '../../constants'
+import { heroSectionKnobs } from '../../knobs/heroSection'
 
+/**
+ * The first block whose design options are declared rather than written out
+ * (ADR 0020). `variant`, `decoration` and `surface` live in
+ * `src/knobs/heroSection.ts`; the strings in `fields` say where their
+ * generated fields sit. Everything else here is editorial and stays
+ * hand-written.
+ */
 export const heroSection = defineSectionBlock({
   name: 'heroSection',
   title: 'Hero',
-  defaultSurface: 'ink',
+  knobs: heroSectionKnobs,
   fields: [
-    defineField({
-      name: 'variant',
-      type: 'string',
-      description:
-        'Orbital is the Home opener — the full sphere band with the bone dome. Band is the interior-page hero: a shallow ink-warm strip with an eyebrow.',
-      // Home (1810:1616) against Work (1634:1181) / About (1924:5344) /
-      // Solutions (1925:6141). Same block, two compositions — added in #42
-      // as a field on the existing block rather than a second block type.
-      options: { list: ['orbital', 'band'], layout: 'radio', direction: 'horizontal' },
-      initialValue: 'orbital',
-    }),
+    'variant',
     defineField({
       name: 'eyebrow',
       type: 'string',
       description: 'Band variant only — the uppercase kicker ("WORK", "ABOUT O3").',
-      hidden: ({ parent }) => parent?.variant !== 'band',
+      // Was `({parent}) => parent?.variant !== 'band'`. The gate is the same;
+      // it is now written down, so the canvas toolbar can read it instead of
+      // guessing at a closure it cannot call (ADR 0020).
+      hidden: hiddenUnless({ at: 'variant', mode: 'oneOf', values: ['band'] }),
     }),
     defineField({
       name: 'headlineLines',
@@ -37,7 +39,7 @@ export const heroSection = defineSectionBlock({
     }),
     defineField({ name: 'subheading', type: 'text', rows: 2 }),
     defineField({ name: 'cta', type: 'cta' }),
-    decorationField(['orbs', 'none']),
+    'decoration',
   ],
   preview: { select: { title: 'headlineLines.0' } },
 })
