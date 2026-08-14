@@ -30,8 +30,17 @@ const render = (queue: ReturnType<typeof createCanvasNoticeQueue>) =>
   renderToStaticMarkup(<CanvasNoticesView notices={queue.notices()} />)
 
 describe('what an editor sees when the draft refuses an edit', () => {
-  it('costs the page nothing until something fails', () => {
-    expect(render(createCanvasNoticeQueue())).toBe('')
+  // The live region is there from the first render and the notices are not.
+  // A screen reader announces a change inside a region it was already
+  // watching; a region that arrives carrying its first notice announces
+  // nothing, which would make this surface silent for exactly the editor least
+  // able to see a red box appear in a corner.
+  it('is watching before anything fails, and says nothing yet', () => {
+    const html = render(createCanvasNoticeQueue())
+
+    expect(html).toContain('aria-live="polite"')
+    expect(html).not.toContain('data-testid="canvas-notice"')
+    expect(html).not.toContain('<ul')
   })
 
   it('names the action, the path and the reason', () => {
