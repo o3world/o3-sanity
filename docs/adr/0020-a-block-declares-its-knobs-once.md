@@ -192,3 +192,66 @@ so a block's definition is one file again.
   one, deciding whether a list-level style reaches any member — does not fit,
   and would need either a fifth mode or an escape hatch. Deferred until a real
   case appears here rather than designed for now.
+
+## Consequences, revisited
+
+Written after six blocks were converted (`heroSection`, `railPanelsSection`,
+`disciplineGridSection`, `inFlightSection`, `mediaSection`, `layoutSection` —
+15 knobs) and after [#114](https://github.com/o3world/o3-sanity/issues/114)'s
+guard landed. What follows is what happened, checked against what the section
+above claimed.
+
+- **The guard is one test, and it passed the first time it ran.** It walks all
+  15 knobs across 148 document states — every combination of every knob's
+  options plus unset — and asserts both directions against the form's own
+  `hidden` predicate. It is as boring as predicted, and it is not vacuous:
+  inverting the sign inside `hiddenUnless` produces 72 disagreements that name
+  `railPanelsSection.rail` in both directions at once. The dozen parity tests
+  and the frozen fixtures did not come with it. Neither did the generated JSON,
+  the catalog module, the staleness test or the icon table.
+
+- **The predicted cost is real, and it landed in a place the prediction
+  missed.** Two files per block, as expected. What was not expected is that
+  field _order_ would need rescuing: generating the knob fields would have
+  moved `variant` from the top of the hero's form to the bottom, so `fields`
+  grew a second kind of entry — a bare string naming the slot a knob's field
+  sits in. That is a third thing an author has to know, and it exists only to
+  keep an authored fact authored.
+
+- **A gate is not always a knob.** The Context above counts
+  `heroSection.eyebrow` and `railPanelsSection.rail` together as "two closures
+  we already have". They converted differently. `rail` is a design option, so
+  its gate rides the knob and the toolbar reads it. `eyebrow` is prose an
+  editor types, so it stays a hand-written field and only borrows the gate
+  compiler — which is why `hiddenUnless` is exported at all. Visibility being
+  data turned out to be worth having for editorial fields too, and the
+  consequence for #114 is that **gating cannot be the tell for what is a
+  control**. The closed value set is; the rule is written down in
+  `knobGuard.test.ts` beside the direction that needs it.
+
+- **The pure layer met a typed field and grew a property for it**
+  ([#119](https://github.com/o3world/o3-sanity/issues/119)). "Option values are
+  strings" is right on this side of the seam and wrong at the schema boundary:
+  `layoutSection.columns` is a `number` field whose literal union typegen
+  publishes into the renderer's props. `valueType` is declared rather than
+  sniffed for the reason this ADR exists, but it is a cost the inversion
+  introduced — vtx-web's walker read the field's type off the schema and never
+  had to be told. The seam has a live defect on its write leg
+  ([#123](https://github.com/o3world/o3-sanity/issues/123)), which is the same
+  crossing in the other direction.
+
+- **`options.list` still means one thing, and that is what makes the second
+  direction safe to state.** The guard reads a closed value set as a
+  _suspicion_ that a field is a design option, and its only power is to fail
+  and ask a human. Nothing is promoted to a control by its shape, so the leak
+  that put a machine field in front of an editor in the prior art still has no
+  path — and the denylist that failed to contain it there has no reason to
+  exist here.
+
+- **What the guard does not cover, and why.** `visibleKnobs({nested: true})`
+  drops band knobs while the form keeps showing the field, because nesting is a
+  fact about the host rather than about the document — a disagreement by
+  design, and unreachable today besides. Item-surface knobs
+  ([#122](https://github.com/o3world/o3-sanity/issues/122)) are the one change
+  the guard should expect: both its field walk and its state product need an
+  array-member context before an item knob can be checked.
