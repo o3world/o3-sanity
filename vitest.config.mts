@@ -35,8 +35,14 @@ const webSrc = resolve(root, 'apps/web/src')
  * URL belongs to the test environment, not to the dev server — so the layer
  * declares the port it asserts against, and each project declares it because
  * an inline project does not inherit root-level `test` options.
+ * `NEXT_PUBLIC_BASE_URL` is pinned too: it is the first thing `getBaseUrl()`
+ * reads, ahead of `VERCEL_URL`, so the origin also cannot follow a deployment
+ * host when the suite runs in a Vercel build.
  */
-const TEST_ENV = { WEB_PORT: '3000' }
+const TEST_ENV = {
+  WEB_PORT: '3000',
+  NEXT_PUBLIC_BASE_URL: 'http://localhost:3000',
+}
 
 export default defineConfig({
   test: {

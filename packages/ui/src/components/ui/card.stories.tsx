@@ -40,7 +40,7 @@ export const InkSurface: Story = {
   render: (args) => (
     <Card {...args} surface="ink" className="w-[520px]">
       <CardContent className="p-10">
-        <Eyebrow tone="tint" className="mb-4">
+        <Eyebrow tone="inverse" className="mb-4">
           Healthcare · Pediatric Systems
         </Eyebrow>
         <CardTitle className="text-display-md mb-0 text-white">

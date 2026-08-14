@@ -8,6 +8,8 @@ import {
   DATASETS,
   DEFAULT_DATASET,
   PROJECT_ID,
+  PUBLIC_DATASETS,
+  readsNeedToken,
   resolveDataset,
   resolveProjectId,
 } from './constants'
@@ -52,6 +54,34 @@ describe('the dataset an unconfigured checkout resolves to', () => {
 
   it('is a dataset the project actually declares', () => {
     expect(DATASETS).toContain(DEFAULT_DATASET)
+  })
+})
+
+/**
+ * The default dataset being the private one is what made #100 invisible: an
+ * unconfigured checkout read `development` anonymously, got `200 {"result":
+ * null}` for every query, and served 404s and empty listings without a line in
+ * the log. `readsNeedToken` is what the web app's fetch checks before it
+ * believes an empty answer, so the two constants have to stay in step — the
+ * failing combination is precisely the one a checkout falls into by default.
+ */
+describe('which datasets a tokenless read can trust', () => {
+  it('needs a token for the dataset an unconfigured checkout lands on', () => {
+    expect(readsNeedToken(DEFAULT_DATASET)).toBe(true)
+  })
+
+  it('does not need one for a public dataset', () => {
+    expect(readsNeedToken('production')).toBe(false)
+  })
+
+  it('treats a dataset nobody has vouched for as needing one', () => {
+    // Fail closed: an unknown name is more likely a private scratch dataset
+    // than a public one, and being wrong the other way is silent.
+    expect(readsNeedToken('scratch-2026')).toBe(true)
+  })
+
+  it('lists only datasets the project declares', () => {
+    expect(DATASETS).toEqual(expect.arrayContaining([...PUBLIC_DATASETS]))
   })
 })
 

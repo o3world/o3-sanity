@@ -2,13 +2,9 @@
 // prototype/O3 Homepage v2.dc.html. See components.json for shadcn config.
 export { cn } from './lib/utils'
 
-// ArrowIcon — the O3 arrow glyph shared by Button/ArrowLink
+// ArrowIcon — the O3 arrow glyph Button and the case-study chips draw
 export { ArrowIcon } from './components/arrow-icon'
 export type { ArrowIconProps } from './components/arrow-icon'
-
-// ArrowLink
-export { ArrowLink, arrowLinkVariants } from './components/arrow-link'
-export type { ArrowLinkProps } from './components/arrow-link'
 
 // ArticleByline — the insight hero's author line (1710:2946)
 export { ArticleByline } from './components/article-byline'

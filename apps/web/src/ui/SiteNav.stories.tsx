@@ -23,7 +23,7 @@ import { SiteNav } from './SiteNav'
  * white copy. `ScrollsOverBands` is the story that actually shows the flip;
  * scroll it.
  *
- * Two widths, structurally different (ADR 0006): a 1130px pill at 1440, a
+ * Two widths, structurally different (ADR 0006): a 900px pill at 1440, a
  * full-width square bar at 402 with the links behind "Open menu".
  *
  * The CTA is **brand red on both skins** and is the one thing on the bar that

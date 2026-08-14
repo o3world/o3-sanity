@@ -78,13 +78,15 @@ new ports first:
 pnpm sanity cors add http://localhost:<port> --credentials
 ```
 
-**The test suite pins its own port, so `WEB_PORT` cannot reach a canonical
-URL.** `vitest.config.mts` sets `WEB_PORT=3000` on both the `unit` and `render`
-projects (#116). Before that, Vitest loaded the worktree's `.env`, `getBaseUrl()`
-read the allocated port, and seven SEO assertions failed in every worktree over
-a port rather than over the ticket being worked. If you see a canonical-URL
-failure mentioning `:36xx`, that pin has been removed or bypassed — restore it
-rather than editing the expected URL, which lands a hardcoded port in a test and
+**The test suite pins its own origin, so `WEB_PORT` cannot reach a canonical
+URL.** Vitest loads the worktree's `.env`, and `getBaseUrl()` reads
+`NEXT_PUBLIC_BASE_URL`, then the Vercel hosts, then `WEB_PORT` — so unpinned,
+the canonical/OpenGraph assertions would compare against whichever port this
+checkout owns, or a deployment host in CI. `vitest.config.mts` pins both
+`WEB_PORT=3000` and `NEXT_PUBLIC_BASE_URL=http://localhost:3000` on the `unit`
+and `render` projects (#116). If a canonical assertion fails on a `:36xx` port
+or a vercel.app host, that pin has been removed or bypassed — restore it rather
+than editing the expected URL, which lands a hardcoded port in a test and
 breaks the next worktree differently.
 
 Worktrees live **outside** the checkout — `../o3-sanity-worktrees/<issue>-<slug>`

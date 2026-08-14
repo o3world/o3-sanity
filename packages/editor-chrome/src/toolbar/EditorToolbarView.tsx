@@ -91,7 +91,10 @@ export function EditorToolbarView({
       </a>
 
       {status === 'error' ? (
-        <span className="text-brand-tint px-2" role="status">
+        // A literal, not a token: this toolbar takes no design language from
+        // the frames. #FF6A5A rather than the brand red because the string is
+        // 12px on near-black, where #EB1000 lands under 4.5:1.
+        <span className="px-2 text-[#ff6a5a]" role="status">
           Sign in at /studio
         </span>
       ) : null}

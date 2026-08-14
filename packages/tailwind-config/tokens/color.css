@@ -33,12 +33,10 @@
    * see --gradient-brand-glow in gradient.css. Reach for the gradient first;
    * a flat red area is almost always wrong in this design. */
   --color-brand: #eb1000;
-  /* #FF6A5A — the lifted red for use ON dark surfaces.
-   * NO CANONICAL ANCHOR: this is a prototype-era value, kept because 17 call
-   * sites depend on it and the canonical frames simply never place a red
-   * accent on ink. Resolve it in #38 (component inventory) — either a frame
-   * justifies it or the call sites move to the brand glow. */
-  --color-brand-tint: #ff6a5a;
+  /* There is deliberately no lifted red for dark surfaces: the design's one
+   * red on ink is the Utility Nav hover, and it is this flat brand red
+   * (`2225:2893`). Everywhere else, red on ink reaches the page as the brand
+   * glow — don't add a tint token without a frame that anchors it. */
 
   /* ── Surfaces ──────────────────────────────────────────────────────────── */
   /* #0A0A0B — the dominant dark. Every section headline on a light band, the

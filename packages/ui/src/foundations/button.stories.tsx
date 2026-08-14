@@ -126,7 +126,7 @@ export const ButtonSpec: Story = {
 
       <Section
         title="Against the shipped Button"
-        note="Left: rebuilt from the Figma spec. Right: the Button component as it ships today — now square, but still red by default."
+        note="Left: rebuilt from the Figma spec. Right: the Button component as it ships today."
       >
         <div className="border-line bg-line grid gap-px border md:grid-cols-2">
           <div className="flex flex-col items-start gap-4 bg-white p-10">
@@ -141,13 +141,13 @@ export const ButtonSpec: Story = {
           </div>
         </div>
         <Callout>
-          The corners went square with the radius tokens, and the label style landed as{' '}
-          <Mono>--text-button</Mono> (<Mono>15px/600 → 18px/500</Mono>). What is left is the{' '}
-          <strong>component contract</strong>, not a value: the fill should drop from brand red to{' '}
-          <Mono>#0A0A0A</Mono>, the glyph should become <Mono>arrow_forward</Mono> from Material
-          Symbols rather than the house arrow, and the default variant should stop being{' '}
-          <Mono>brand</Mono> — the design has no red button anywhere. That is the cva variant set,
-          which is #38.
+          The shipped component matches the spec: square corners from the radius tokens, the label
+          on <Mono>--text-button</Mono>, the cva variant set on Figma&apos;s vocabulary —{' '}
+          <Mono>dark | light | ghost</Mono> over <Mono>base | large</Mono>, no red fill anywhere,
+          the glyph on a 20px box. The one remaining delta is a <strong>drawing</strong>: the arrow
+          is the house <Mono>ArrowIcon</Mono>, stroked at 2.2, where Figma sets Material
+          Symbols&apos; <Mono>arrow_forward</Mono>. ADR 0009 says a glyph is an inline SVG of the
+          Material path, so that is a redraw whenever someone wants it, not a contract gap.
         </Callout>
       </Section>
     </Page>
