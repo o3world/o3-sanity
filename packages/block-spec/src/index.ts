@@ -22,10 +22,20 @@
  * const { all, bySurface } = visibleKnobs({ spec, read, nested })
  * const { value, title, isDefault } = resolveKnobValue(layout, stored)
  * ```
+ *
+ * An array member declares its own, against its own root (#122). Everything
+ * above works on it unchanged, because every path a reader takes is relative to
+ * the root it was handed:
+ *
+ * ```ts
+ * const screen = defineItemKnobs({ type: 'screen', title: 'Screen', knobs: [tone] })
+ * const grid = defineBlockKnobs({ …, items: { screens: screen } })
+ * ```
  */
 
-export { defineBlockKnobs, knob } from './knob'
+export { defineBlockKnobs, defineItemKnobs, knob } from './knob'
 export { humanize } from './humanize'
+export { itemKnobsAt, patchableItemRoots } from './items'
 export { patchableKnobRoots } from './patchableRoots'
 export { resolveKnobValue, UNRESOLVED_KNOB_TITLE } from './resolveKnobValue'
 export { showWhenSatisfied } from './showWhen'
@@ -38,12 +48,14 @@ export { visibleKnobs } from './visibleKnobs'
 export type {
   BlockKnobs,
   BlockTier,
+  ItemKnobs,
   Knob,
   KnobIcon,
   KnobInput,
   KnobOption,
   KnobOptionInput,
   KnobReader,
+  KnobRoot,
   KnobSurface,
   KnobValue,
   KnobValueType,

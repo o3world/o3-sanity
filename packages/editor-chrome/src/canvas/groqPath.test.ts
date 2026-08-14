@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest'
 import {
   blockRootPath,
   isNestedBlockGroqPath,
+  itemArrayField,
   keyedItemParts,
   nearestArrayItemPath,
   parseGroqPath,
@@ -138,6 +139,30 @@ describe('keyedItemParts', () => {
   it('has no parts when the prefix is not a path we can resolve', () => {
     // An unresolvable array path would aim a truncate at the document root.
     expect(keyedItemParts('sections[0][_key=="a"]')).toBeUndefined()
+  })
+})
+
+describe('which of the block\u2019s arrays the item sits in', () => {
+  const BLOCK = 'sections[_key=="a"]'
+
+  it('names the array a direct member sits in', () => {
+    expect(itemArrayField(BLOCK, `${BLOCK}.panels[_key=="p"]`)).toBe('panels')
+  })
+
+  it('reaches an array nested in an object on the block', () => {
+    expect(itemArrayField(BLOCK, `${BLOCK}.rail.panels[_key=="p"]`)).toBe('rail.panels')
+  })
+
+  it('says nothing for an item inside another item', () => {
+    // A member of a member is a second root question. Answering `panels` here
+    // would attach the outer array\u2019s spec to the inner member.
+    expect(itemArrayField(BLOCK, `${BLOCK}.panels[_key=="p"].cards[_key=="c"]`)).toBeUndefined()
+  })
+
+  it('says nothing for the block itself, a plain field, or a foreign path', () => {
+    expect(itemArrayField(BLOCK, BLOCK)).toBeUndefined()
+    expect(itemArrayField(BLOCK, `${BLOCK}.heading`)).toBeUndefined()
+    expect(itemArrayField(BLOCK, 'sections[_key=="b"].panels[_key=="p"]')).toBeUndefined()
   })
 })
 

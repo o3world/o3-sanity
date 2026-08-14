@@ -1,9 +1,11 @@
-import { defineBlockKnobs, knob } from '@o3/block-spec'
+import { defineBlockKnobs, defineItemKnobs, knob } from '@o3/block-spec'
 import { describe, expect, it } from 'vitest'
 
 import {
   applyKnobArgs,
   gateSourcePaths,
+  itemArgTarget,
+  itemKnobControls,
   knobControls,
   matrixAxes,
   matrixCells,
@@ -135,17 +137,116 @@ describe('rosterKnobs', () => {
     ).toEqual(['layout'])
   })
 
-  it('leaves item-surface knobs to an item-level story surface', () => {
-    const withItem = defineBlockKnobs({
-      type: 'x',
-      title: 'X',
-      tier: 'section',
-      knobs: [
-        knob({ name: 'layout', title: 'Layout', options: ['a', 'b'] }),
-        knob({ name: 'tone', title: 'Tone', options: ['a', 'b'], surface: 'item' }),
-      ],
+  it('answers for an array member the same way it answers for a block', () => {
+    // A member is its own knob root (#122), so nothing here needs to know it is
+    // one — same walk, same gate, one root down.
+    expect(
+      rosterKnobs({ spec: screenKnobs, fixture: { tone: 'wide' } }).map((k) => k.name),
+    ).toEqual(['tone', 'span'])
+    expect(rosterKnobs({ spec: screenKnobs, fixture: {} }).map((k) => k.name)).toEqual([
+      'tone',
+      'span',
+    ])
+  })
+})
+
+/** A block whose array members declare their own options (#122). */
+const screenKnobs = defineItemKnobs({
+  type: 'screen',
+  title: 'Screen',
+  knobs: [
+    knob({ name: 'tone', title: 'Tone', options: ['ink', 'wide'], initialValue: 'ink' }),
+    knob({
+      name: 'span',
+      title: 'Span',
+      options: ['standard', 'full'],
+      showWhen: { at: 'tone', mode: 'oneOf', values: ['wide'] },
+    }),
+  ],
+})
+
+const grid = defineBlockKnobs({
+  type: 'screenGridSection',
+  title: 'Screen grid',
+  tier: 'section',
+  knobs: [knob({ name: 'surface', title: 'Surface', options: ['white', 'ink'] })],
+  items: { screens: screenKnobs },
+})
+
+type Screen = { _key: string; tone: string; span?: string; media: { url: string } }
+
+const gridFixture: { surface: string; screens: Screen[] } = {
+  surface: 'white',
+  screens: [
+    { _key: 'a', tone: 'ink', media: { url: '/a.png' } },
+    { _key: 'b', tone: 'wide', media: { url: '/b.png' } },
+  ],
+}
+
+describe('the item story surface', () => {
+  it('offers one control per member, categorised by the member it paints', () => {
+    const { argTypes, idToPath } = itemKnobControls({ spec: grid, fixture: gridFixture })
+    expect(Object.values(idToPath).sort()).toEqual([
+      'screens.0.span',
+      'screens.0.tone',
+      'screens.1.span',
+      'screens.1.tone',
+    ])
+    expect(argTypes[knobId('screens.0.tone')]?.table.category).toBe('Screen 1')
+    expect(argTypes[knobId('screens.1.tone')]?.table.category).toBe('Screen 2')
+  })
+
+  it('points a gate at the arg on the SAME member, not at a member-relative id', () => {
+    const { argTypes } = itemKnobControls({ spec: grid, fixture: gridFixture })
+    expect(argTypes[knobId('screens.1.span')]?.if).toEqual({
+      arg: knobId('screens.1.tone'),
+      eq: 'wide',
     })
-    expect(rosterKnobs({ spec: withItem, fixture: {} }).map((k) => k.name)).toEqual(['layout'])
+  })
+
+  it('has nothing to offer a block with no knobbed arrays', () => {
+    expect(itemKnobControls({ spec, fixture: {} }).idToPath).toEqual({})
+  })
+
+  it('splits a story path back into the member and the path inside it', () => {
+    expect(itemArgTarget(grid, 'screens.1.tone')).toMatchObject({
+      field: 'screens',
+      index: 1,
+      memberPath: 'screens.1',
+      rel: 'tone',
+    })
+    expect(itemArgTarget(grid, 'surface')).toBeUndefined()
+    expect(itemArgTarget(grid, 'panels.0.tone')).toBeUndefined()
+    expect(itemArgTarget(screenKnobs, 'screens.0.tone')).toBeUndefined()
+  })
+
+  it('writes a pick into that member and leaves its siblings alone', () => {
+    const { idToPath } = itemKnobControls({ spec: grid, fixture: gridFixture })
+    const next = applyKnobArgs({
+      spec: grid,
+      fixture: gridFixture,
+      args: { [knobId('screens.0.tone')]: 'wide' },
+      idToPath,
+    })
+    expect(next.screens.map((screen) => screen.tone)).toEqual(['wide', 'wide'])
+    // The array is still an array, and the untouched member is untouched.
+    expect(Array.isArray(next.screens)).toBe(true)
+    expect(next.screens[1]).toBe(gridFixture.screens[1])
+    expect(next.screens[0]?.media).toEqual({ url: '/a.png' })
+  })
+
+  it('refuses an item control that the member’s own gate hides', () => {
+    // The same guarantee as the block's, one root down: `span` shows only on a
+    // `wide` screen, so a control cannot set it on an `ink` one.
+    const { idToPath } = itemKnobControls({ spec: grid, fixture: gridFixture })
+    const next = applyKnobArgs({
+      spec: grid,
+      fixture: gridFixture,
+      args: { [knobId('screens.0.span')]: 'full', [knobId('screens.1.span')]: 'full' },
+      idToPath,
+    })
+    expect(next.screens[0]?.span).toBeUndefined()
+    expect(next.screens[1]?.span).toBe('full')
   })
 })
 
