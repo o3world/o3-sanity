@@ -40,6 +40,9 @@ A **Collection** is a document type with a URL prefix and a collection index. Tw
 - **Preview switcher** — the Published ⇄ Drafts control **inside** the toolbar, for someone holding a Sanity Studio session. **Never call it a perspective switcher.** `perspective` now means exactly one thing here — Sanity's own published-vs-draft API parameter — and that is worth keeping. It used to mean this repo's blog type as well, which is part of why [ADR 0017](docs/adr/0017-the-collection-is-an-insight.md) renamed the type to `insight`. The control is the `preview switcher`; the state is `draft`.
 - **Studio session** — there is no site auth. "Logged in" means holding a Sanity Studio token for this project, which the same-origin Studio at `/studio` leaves in `localStorage`. That token is a **hint** the browser may act on and a **claim** the server must verify against Sanity before enabling draft mode (`@o3/editor-chrome/draft-mode`); it is never a decision on its own.
 - **Presentation is where `/studio` opens.** `sanity@6.8` has no `defaultTool` option — the first entry of the resolved `tools` array is the default — so `sanity.config.ts` sorts it there, and structure keeps a door back: every routable document carries an **Open in Presentation** action beside Publish (ADR 0019).
+- **Canvas toolbar** — the hover bar on a block **inside the Presentation preview**, carrying that block's bar-visible knobs. Not the editor toolbar: that one is the corner chip on the site, this one is on the canvas. "Canvas" is Sanity's own word for the preview surface. Lives in `@o3/editor-chrome/canvas`, wired by exactly one prop — `<VisualEditing components={…}>` — so removing the feature is deleting that prop.
+- **Knob menu** — the right-click surface on the canvas, carrying the subject's **complete** knob roster plus its item actions (duplicate, remove, move, insert). The bar carries a curated subset and the menu carries everything; that split is why both exist. Its subject is the innermost keyed array item under the cursor — the panel when you are in a panel, the block when you are in band padding.
+- **Item action** — duplicate, remove, or move on that subject (#111). It is generic array plumbing over a GROQ path and a document snapshot: it takes no knob, no spec, and no block type, so a section in `page.sections` and a panel in `railPanelsSection.panels` are one problem. Two rules bind it. **`truncate` + `insert` against the parent array, never a whole-array `set`** — a `set` claims every item changed, so two editors reordering two different sections resolve as one clobbering the other and the history records a rewrite where a reorder happened; ours has to match the mutations Presentation's own menu emits. And **schema validation does not hide a row**: `railPanelsSection.panels` declares `min(2)`, but a control is dead when it cannot change the document, not when it produces a document the Studio will flag. Removing at the minimum is what the form already does, and refusing it here traps an editor at exactly the count where "remove and re-add" is the only way to fix a bad item.
 
 ## Naming
 
@@ -57,6 +60,42 @@ One word per concept, everywhere. These rules bind schema names, field names, GR
 The `Section` suffix is the tier marker: if a name ends in `Section` it is a full-width page section rendered inside `SectionShell` and belongs in `SECTION_BLOCKS`; anything else that renders is a base block or a shared object, and lives inside a `layoutSection` column. A block name must never end in `Block` — the suffix carries no information (every block is a block) and the tier is what an agent actually needs to know. `figure`, `embed`, and `cta` are shared objects that double as base blocks; that dual use is why the base tier takes no suffix.
 
 The enforcement point is `registry.ts`, not the suffix: both factories reject a name missing from `SECTION_BLOCKS` / `BASE_BLOCKS`, and the web app's `BLOCK_REGISTRY` is compile-checked against the types generated from those lists. The suffix rule itself is upheld by whoever curates the registry — neither factory inspects name shape (see Known drift).
+
+### Knobs
+
+A **knob** is one design option on a block: a closed value set with a title, an icon, and a declared rule for when it applies. `heroSection.variant` is a knob; so are `decoration`, `surface`, and `railPanelsSection.layout`. One word covers both the declaration and the control an editor turns — there is deliberately no second word for the two halves.
+
+A knob is **declared once** and everything else is derived from it: the Sanity field, the Storybook control, and the canvas toolbar's control all read the same object ([ADR 0020](docs/adr/0020-a-block-declares-its-knobs-once.md)). Declarations live in `packages/sanity/src/knobs/<blockName>.ts` — their own directory, because all sixteen section blocks share one `schemas/blocks/section.ts` and there is no "beside" — and that directory may not import `sanity` (lint-enforced; the whole point is that the preview bundle can read it).
+
+The block's schema passes its declaration as `knobs:` and then **names each knob as a bare string where its field belongs** in `fields` — `fields: ['variant', eyebrowField, …, 'decoration']`. Field order is a fact about the form an editor reads, so it stays in one visible list; a knob nobody names is appended after the editorial fields, which is how `surface` keeps the last place it has always had. `defaultSurface` is the shorthand a block that has no declaration yet still uses, and it builds a one-knob spec so `surface` reaches the form by the same path either way ([#113](https://github.com/o3world/o3-sanity/issues/113) retires it).
+
+This is the same concept the Figma rule names one step upstream, and the chain is worth holding in one piece:
+
+> Figma variant **axis** → one `cva` variants key → one **knob** → one Sanity field
+
+The Figma rule keeps Figma's word (`axis`) because that is what the design file calls it. Everything on this side of the seam is a knob.
+
+A knob is delivered on two surfaces, and the split is deliberate. The **knob menu** (right-click) carries a subject's _complete_ roster. The **canvas toolbar** carries a curated subset — a knob rides it only when it declares `bar: true`.
+
+What earns a bar slot: **`surface`, and the one axis that changes what the block is.** A block's composition — `heroSection.variant`, `railPanelsSection.layout`, `mediaSection.variant` — is the thing an editor is looking at, so it is the axis every bar shows. Everything else (`decoration`, `rail`, `width`) is menu-only: reachable, but not competing for the strip of chrome sitting over the design. There is no special-casing in code — `bar` is a plain declaration, and this rule is applied by whoever writes it.
+
+Every knob belongs to a **knob surface** — the chrome that delivers it, decided by the container it configures, not by where it is declared:
+
+| Surface | Configures                              | Example                           |
+| ------- | --------------------------------------- | --------------------------------- |
+| `band`  | the full-width strip the block occupies | `surface`                         |
+| `block` | the block itself                        | `variant`, `layout`, `decoration` |
+| `item`  | one member of the block's array         | a panel's own styling             |
+
+Ownership is answered by a longest-matching-prefix table in `@o3/block-spec` and nowhere else, so no surface keeps its own roster of field names in step with the schema. `block` is the default — an unlisted knob configures the block, and nothing disappears into a menu nobody opened. There is no `header` surface: our blocks carry `eyebrow` / `heading` / `subheading` as plain fields rather than a `header` object, so there is no `header.*` cluster to deliver. The header element is still attributed, because that is what lets the canvas toolbar name what you are hovering.
+
+A **nested block forms no band** — its host owns the strip — so band knobs drop when the block sits in another block's array. That is the surface table's job too, not a second flag per knob.
+
+Three rules that are easy to get wrong:
+
+- **Visibility is data, never a closure.** Write `showWhen: { at: 'variant', mode: 'oneOf', values: ['band'] }`, not `hidden: ({parent}) => …`. The declaration generates the form's predicate _and_ is read by the toolbar; a closure can only be read by the form, so a control gated with one silently disappears from the canvas with no error.
+- **An enum is not a knob.** `options.list` declares a value domain and nothing else. `pageType` and `formSection.reasons` are closed enums and neither is a knob. The test is whether an editor changing it is making a **design** decision on the canvas.
+- **A knob's option values are strings; its stored type is declared.** Write the options as strings whatever the field holds — `optionKey` coerces a stored number back to a string, so gates, controls and check-marks all compare one type. If the document field is not a string, say so with `valueType: 'number'` and the adapter generates that field type. Never inferred from the digits: `['1','2','3']` is `layoutSection.columns`, and it is also what a version or a zero-padded code would look like. Getting it wrong moves `generated.ts` and changes the renderer's props.
 
 ### Field lexicon
 

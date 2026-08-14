@@ -2,7 +2,7 @@ import type { ComponentType, ReactNode } from 'react'
 
 import type { SanityBlock } from '@o3/sanity/types'
 
-import { dataAttr, rootArrayItemLoc } from '@/sanity/dataAttribute'
+import { arrayItemLoc, dataAttr } from '@/sanity/dataAttribute'
 
 /**
  * The per-block dispatch loop shared by `BlockRenderer` (server, published)
@@ -19,6 +19,19 @@ import { dataAttr, rootArrayItemLoc } from '@/sanity/dataAttribute'
  * SectionShell contract is `surface` + children only, so the dispatch seam
  * owns visual-editing attribution. The attribute is inert outside the
  * Presentation runtime.
+ *
+ * **#107 re-asked that question and the seam won again.** `SectionShellProps
+ * extends HTMLAttributes<HTMLElement>` and spreads `...rest`, so the shell
+ * *could* carry the attribute without a contract change — but five blocks
+ * (`heroSection`, `ctaSection`, `logoWallSection`, `quoteSection`,
+ * `screenGridSection`) build their own `<section>` rather than use the shell,
+ * because they bleed past the gutter or paint a gradient. Routing band
+ * attribution through the shell would attribute eleven blocks and silently
+ * skip five. The seam attributes all sixteen identically, and `@o3/ui` keeps
+ * knowing nothing about Sanity. What #107 *did* change is that the seam now also
+ * hands each block its own location, so the block can attribute the levels
+ * below it — its header, its keyed items — off a path it did not have to
+ * build.
  */
 export function renderDispatchedBlocks(opts: {
   blocks: readonly SanityBlock[]
@@ -46,11 +59,15 @@ export function renderDispatchedBlocks(opts: {
     }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { _type, ...props } = block
-    const rendered = <Component {...props} />
     const loc =
       documentId && documentType
-        ? rootArrayItemLoc({ id: documentId, type: documentType }, fieldPath, block._key)
+        ? arrayItemLoc({ id: documentId, type: documentType }, fieldPath, block._key)
         : undefined
+    // `loc` is passed AFTER the spread deliberately: a block field of that
+    // name would otherwise shadow the location and take the sub-block
+    // attribution down with it, silently. `loc` is not in the field lexicon
+    // (CONTEXT.md → Naming), so the collision is a rule rather than a hope.
+    const rendered = <Component {...props} loc={loc} />
     return loc ? (
       <div key={block._key} data-sanity={dataAttr(loc)}>
         {rendered}

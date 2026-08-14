@@ -7,6 +7,7 @@ import { SanityImage } from '@/content/SanityImage'
 import { resolveCtaHref } from '@/content/CtaLink'
 import { resolveSurface } from '@/content/blocks/surface'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
+import { fieldAttr } from '@/sanity/dataAttribute'
 
 type InFlightSectionProps = SectionProps<'inFlightSection'>
 type Entry = NonNullable<InFlightSectionProps['entries']>[number]
@@ -59,6 +60,7 @@ export function InFlightSection({
   layout,
   entries,
   surface,
+  loc,
 }: InFlightSectionProps) {
   const items = entries ?? []
   const asRows = stegaClean(layout) === 'rows'
@@ -67,7 +69,7 @@ export function InFlightSection({
     return (
       <SectionShell surface={resolveSurface(surface, 'white')} top="md" bottom="md">
         <div className="flex flex-col gap-8 lg:gap-16">
-          <Header heading={heading} subheading={subheading} />
+          <Header heading={heading} subheading={subheading} loc={loc} />
           <ul className="flex flex-col">
             {items.map((entry) => (
               <EntryRow key={entry._key} entry={entry} />
@@ -88,7 +90,7 @@ export function InFlightSection({
     // from `lg`.
     <SectionShell surface={resolveSurface(surface, 'white')} top="sm" bottom="sm">
       <div className="flex flex-col gap-8 lg:gap-12">
-        <Header heading={heading} subheading={subheading} />
+        <Header heading={heading} subheading={subheading} loc={loc} />
         {/*
          * `tabIndex={0}` + a name, because from `lg` this row is a scrollable
          * region whose contents are **not focusable** — the frame draws these
@@ -129,9 +131,16 @@ export function InFlightSection({
   )
 }
 
-function Header({ heading, subheading }: Pick<InFlightSectionProps, 'heading' | 'subheading'>) {
+function Header({
+  heading,
+  subheading,
+  loc,
+}: Pick<InFlightSectionProps, 'heading' | 'subheading' | 'loc'>) {
   return (
-    <header className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between lg:gap-8">
+    <header
+      data-sanity={fieldAttr(loc, 'heading')}
+      className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between lg:gap-8"
+    >
       {heading ? <DisplayHeading className="lg:max-w-[571px]">{heading}</DisplayHeading> : null}
       {subheading ? (
         <p className="text-lead leading-[1.2] lg:w-[395px] lg:shrink-0">{subheading}</p>

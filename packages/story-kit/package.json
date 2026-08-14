@@ -9,6 +9,9 @@
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit"
   },
+  "dependencies": {
+    "@o3/block-spec": "workspace:*"
+  },
   "devDependencies": {
     "@o3/typescript-config": "workspace:*",
     "@storybook/nextjs-vite": "^10.4.1",

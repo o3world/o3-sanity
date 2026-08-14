@@ -3,6 +3,7 @@ import { DisplayHeading, Eyebrow, HalftoneDisc, SectionShell } from '@o3/ui'
 import { CtaLink } from '@/content/CtaLink'
 import { resolveSurface } from '@/content/blocks/surface'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
+import { fieldAttr } from '@/sanity/dataAttribute'
 
 type RoleListSectionProps = SectionProps<'roleListSection'>
 
@@ -33,14 +34,14 @@ type RoleListSectionProps = SectionProps<'roleListSection'>
  * `docs/figma-components.md` makes about the rest of `Button`'s divergence.
  * The fill stays the editor's, via `cta.variant`.
  */
-export function RoleListSection({ eyebrow, heading, roles, surface }: RoleListSectionProps) {
+export function RoleListSection({ eyebrow, heading, roles, surface, loc }: RoleListSectionProps) {
   const items = roles ?? []
 
   return (
     <SectionShell surface={resolveSurface(surface, 'white')} top="md" bottom="md">
       <div className="flex flex-col gap-10 lg:gap-16">
         {eyebrow || heading ? (
-          <header className="flex flex-col gap-2">
+          <header data-sanity={fieldAttr(loc, 'heading')} className="flex flex-col gap-2">
             {eyebrow ? <Eyebrow size="lg">{eyebrow}</Eyebrow> : null}
             {heading ? <DisplayHeading className="lg:max-w-121.5">{heading}</DisplayHeading> : null}
           </header>

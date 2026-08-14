@@ -22,10 +22,20 @@
     "packages/*": {
       "entry": ["src/index.ts", "src/**/*.stories.tsx", "sanity.cli.ts"]
     },
+    "packages/sanity": {
+      "entry": [
+        "src/index.ts",
+        "src/**/*.stories.tsx",
+        "sanity.cli.ts",
+        "src/knobs/index.ts",
+        "src/**/*.test.ts"
+      ]
+    },
     "packages/editor-chrome": {
       "entry": [
         "src/studio/index.ts",
         "src/toolbar/index.ts",
+        "src/canvas/index.ts",
         "src/draft-mode/index.ts",
         "src/**/*.test.ts"
       ]

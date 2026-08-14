@@ -40,11 +40,30 @@ describe('reconcileOptimisticOrder', () => {
     expect((next[0] as unknown as { media?: unknown }).media).toEqual({ alt: 'b' })
   })
 
-  it('overlays the plain-JSON knobs a Studio field can patch', () => {
-    const current = [block('a', { surface: 'white' })]
-    const next = reorder(current, [stub('a', 'mediaSection', { surface: 'ink' })])
+  it('overlays every root a declared knob can patch, so a pick repaints on the click', () => {
+    // `surface` and `variant` are both declared knobs (`@o3/sanity/knobs`), and
+    // the overlay's roster is DERIVED from those declarations — a knob on a new
+    // root folds back without this file being reopened, which is the failure
+    // the hand-kept predecessor shipped.
+    const current = [block('a', { surface: 'white', variant: 'orbital' })]
+    const next = reorder(current, [stub('a', 'mediaSection', { surface: 'ink', variant: 'band' })])
 
-    expect(next[0]).toMatchObject({ _key: 'a', surface: 'ink', media: { alt: 'a' } })
+    expect(next[0]).toMatchObject({
+      _key: 'a',
+      surface: 'ink',
+      variant: 'band',
+      media: { alt: 'a' },
+    })
+  })
+
+  it('leaves editorial fields alone — the roster is the knobs, not the document', () => {
+    // `heading` is content, not a design option, so it is not a knob and the
+    // overlay must not adopt it: the payload carries the STORED shape, and
+    // anything the GROQ projection reshapes would come back wrong.
+    const current = [block('a', { heading: 'projected' })]
+    const next = reorder(current, [stub('a', 'mediaSection', { heading: 'stored' })])
+
+    expect(next[0]).toMatchObject({ _key: 'a', heading: 'projected' })
   })
 
   it('is a no-op for another document, an unknown id, or a field it cannot find', () => {

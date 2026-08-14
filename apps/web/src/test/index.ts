@@ -9,6 +9,8 @@
  *
  * See docs/testing.md for which layer to reach for.
  */
+export { bandPaths, subBlockPaths } from './attribution'
+
 export { expectNotFound, renderRoute } from './renderRoute'
 
 export { classTokens, unprefixedHorizontalScrollUtilities, variantsOf } from './responsive'

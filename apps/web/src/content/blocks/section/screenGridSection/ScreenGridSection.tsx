@@ -4,6 +4,7 @@ import { stegaClean } from '@sanity/client/stega'
 import { SanityImage } from '@/content/SanityImage'
 import { resolveSurface } from '@/content/blocks/surface'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
+import { itemAttr } from '@/sanity/dataAttribute'
 
 type ScreenGridSectionProps = SectionProps<'screenGridSection'>
 
@@ -72,7 +73,7 @@ function spanOf(value: string | null | undefined): Span {
   return stegaClean(value) === 'wide' ? 'wide' : 'standard'
 }
 
-export function ScreenGridSection({ screens, surface }: ScreenGridSectionProps) {
+export function ScreenGridSection({ screens, surface, loc }: ScreenGridSectionProps) {
   if (!screens?.length) return null
 
   return (
@@ -83,6 +84,9 @@ export function ScreenGridSection({ screens, surface }: ScreenGridSectionProps) 
           return (
             <li
               key={screen._key}
+              // The tile's own path. This band has no header to attribute —
+              // it is screens and nothing else.
+              data-sanity={itemAttr(loc, 'screens', screen._key)}
               className={`aspect-4/3 relative overflow-hidden rounded-[32px] ${TONE_CLASS[toneOf(screen.tone)]} ${SPAN_CLASS[span]}`}
             >
               <div className="absolute inset-x-0 top-0 flex justify-center px-8 pt-8 lg:px-16 lg:pt-16">
