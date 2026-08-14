@@ -6,6 +6,7 @@ import { CtaLink } from '@/content/CtaLink'
 import { SanityImage } from '@/content/SanityImage'
 import { resolveSurface } from '@/content/blocks/surface'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
+import { fieldAttr, itemAttr } from '@/sanity/dataAttribute'
 
 import { PanelBand } from './PanelBand'
 import { PanelCards } from './PanelCards'
@@ -77,6 +78,7 @@ export function RailPanelsSection({
   rail,
   panels,
   surface,
+  loc,
 }: RailPanelsSectionProps) {
   const items = panels ?? []
   const isCards = stegaClean(layout) === 'cards'
@@ -88,6 +90,11 @@ export function RailPanelsSection({
 
   const header = (
     <div
+      // The band's header surface (#107). There is no `header` object in the
+      // schema — the three parts are flat fields — so the wrapper resolves to
+      // `heading`, the one that is always the subject when an editor reaches
+      // for this region.
+      data-sanity={fieldAttr(loc, 'heading')}
       className={cn(
         'flex w-full flex-col gap-6',
         isCards
@@ -131,6 +138,9 @@ export function RailPanelsSection({
               heading: panel.heading ?? panel.railLabel,
               body: panel.body,
               note: panel.note,
+              // The card IS the panel, so it carries the panel's own path —
+              // the same one the `<article>` in the band layout carries.
+              dataSanity: itemAttr(loc, 'panels', panel._key),
             }))}
           />
         </div>
@@ -158,6 +168,10 @@ export function RailPanelsSection({
             <article
               key={panel._key}
               id={panelId(panel._key, index)}
+              // The panel's own path — `sections[_key=="…"].panels[_key=="…"]`.
+              // `panels` has exactly one member type, so it serialises as an
+              // `arrayItem` and resolves natively at this depth (#104).
+              data-sanity={itemAttr(loc, 'panels', panel._key)}
               className={cn(
                 // At 402 a panel is one compact ROW — `ContentPlatform -
                 // Mobile`, drawn twice: `1814:1691` for platforms (a bare

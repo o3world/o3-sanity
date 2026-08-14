@@ -127,7 +127,16 @@ export function projectSeedPage({
           ),
         }
       case 'personGridSection':
-        return { ...section, people: ((section.people ?? []) as unknown[]).map(resolve) }
+        // The item's `_key` survives the dereference — the query spreads the
+        // person into the array item rather than replacing it, so the band
+        // can attribute each card with the reference's own path (#107).
+        return {
+          ...section,
+          people: ((section.people ?? []) as SeedDoc[]).map((ref) => ({
+            _key: ref._key,
+            ...resolve(ref),
+          })),
+        }
       case 'insightsCarouselSection': {
         // The renderer prefers `curated` and falls back to the `latest` feed
         // the query fetches alongside it. Most seeds curate nothing, so most

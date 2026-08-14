@@ -3,8 +3,10 @@ import { describe, expect, it } from 'vitest'
 import { buildSingletonRoute } from '@/lib/content-routes/build'
 import {
   aSeededPage,
+  bandPaths,
   renderRoute,
   siteSettings,
+  subBlockPaths,
   unprefixedHorizontalScrollUtilities,
   variantsOf,
   withSettings,
@@ -39,8 +41,38 @@ describe('the seeded homepage', () => {
     const sections = (aSeededPage('index').sections ?? []) as unknown[]
     expect(sections).toHaveLength(8)
     // The dispatcher wraps each block in a keyed div, so the count is the
-    // honest measure of "did anything fail to dispatch".
-    expect(html.match(/data-sanity=/g) ?? []).toHaveLength(sections.length)
+    // honest measure of "did anything fail to dispatch". A band path is a
+    // bare `sections:<key>`; everything #107 added hangs below one.
+    expect(bandPaths(html)).toHaveLength(sections.length)
+  })
+
+  /**
+   * Sub-block attribution (#107) — the elements the canvas toolbar attaches
+   * to. A toolbar whose surfaces are *section / header / item* needs three
+   * attributed elements; before this the band was the only one, so every
+   * surface collapsed onto it.
+   *
+   * Asserted as the complete list rather than a count, because the interesting
+   * failures are silent ones: a path one segment wrong resolves to nothing in
+   * Presentation and logs nothing (#104), and an over-eager attribution — a
+   * header stamped on a band that has no header field — looks identical in
+   * the HTML. Both show up here as a wrong string.
+   */
+  it('attributes each band’s header and every keyed item beneath it', () => {
+    expect(subBlockPaths(html)).toEqual([
+      'sections:platforms.heading',
+      'sections:platforms.panels:plat-sanity',
+      'sections:platforms.panels:plat-vercel',
+      'sections:platforms.panels:plat-lovable',
+      'sections:engagements.heading',
+      'sections:engagements.panels:eng-embedded',
+      'sections:engagements.panels:eng-squad',
+      'sections:engagements.panels:eng-ownership',
+      // The carousel's header row — heading plus its prev/next controls. Its
+      // cards are `insight` documents rather than array items, so the band
+      // stops at the header: there is no slot under this block to attribute.
+      'sections:insights.heading',
+    ])
   })
 
   it.each([

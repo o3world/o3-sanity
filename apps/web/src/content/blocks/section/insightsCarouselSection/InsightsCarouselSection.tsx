@@ -3,6 +3,7 @@ import { SectionShell } from '@o3/ui'
 import { getCard } from '@/content/documents/card-registry'
 import { resolveSurface } from '@/content/blocks/surface'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
+import { fieldAttr } from '@/sanity/dataAttribute'
 
 import { CarouselTrack } from './CarouselTrack'
 
@@ -33,6 +34,7 @@ export function InsightsCarouselSection({
   curated,
   latest,
   surface,
+  loc,
 }: InsightsCarouselSectionProps) {
   const items = curated?.length ? curated : (latest ?? [])
   const Card = getCard('insight')
@@ -41,6 +43,7 @@ export function InsightsCarouselSection({
     <SectionShell surface={resolveSurface(surface, 'bone')} top="sm" bottom="sm">
       <CarouselTrack
         heading={heading}
+        headingAttr={fieldAttr(loc, 'heading')}
         cards={items.map((item) => (
           <Card key={item._id} {...item} />
         ))}

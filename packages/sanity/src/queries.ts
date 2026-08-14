@@ -93,7 +93,15 @@ const SECTION_FIELDS = /* groq */ `
     cta{..., ${CTA_TARGET}}
   },
   _type == "personGridSection" => {
-    "people": people[]->{_id, name, title, headshot}
+    ${
+      /* `_key` is the ARRAY ITEM's, not the person's, and the dereference
+        would drop it — so the projection spreads the person into the item
+        rather than replacing it. The band stamps each card with
+        `…people[_key=="…"]` (#107), which is the reference's own path: the
+        thing an editor reorders or removes here is the slot, not the
+        `person` document behind it. */ ''
+    }
+    "people": people[]{_key, ...@->{_id, name, title, headshot}}
   },
   _type == "roleListSection" => {
     roles[]{..., cta{..., ${CTA_TARGET}}}
