@@ -29,7 +29,7 @@ interface UtilityNavProps {
  * switcher rather than a breadcrumb, and "O3 World" gets no active treatment
  * for being the site you are already on. The hover variant (`2225:2893`) takes
  * brand red — the design's one canonical anchor for `#EB1000` on a dark
- * surface, and the finding that retired `--color-brand-tint` in #55.
+ * surface.
  *
  * ── IT SCROLLS; THE PILL DOES NOT ──────────────────────────────────────────
  *

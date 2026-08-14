@@ -141,14 +141,13 @@ export const ButtonSpec: Story = {
           </div>
         </div>
         <Callout>
-          The corners went square with the radius tokens, the label style landed as{' '}
-          <Mono>--text-button</Mono> (<Mono>15px/600 → 18px/500</Mono>), and #42 rebuilt the cva
-          variant set on Figma&apos;s vocabulary — <Mono>dark | light | ghost</Mono> over{' '}
-          <Mono>base | large</Mono>, with no red fill anywhere. #55 then took the glyph box from 15
-          to the spec&apos;s 20. What is left is one <strong>drawing</strong>: the arrow is the
-          house <Mono>ArrowIcon</Mono>, stroked at 2.2, where Figma sets Material Symbols&apos;{' '}
-          <Mono>arrow_forward</Mono>. ADR 0009 says a glyph is an inline SVG of the Material path,
-          so that is a redraw whenever someone wants it, not a contract gap.
+          The shipped component matches the spec: square corners from the radius tokens, the label
+          on <Mono>--text-button</Mono>, the cva variant set on Figma&apos;s vocabulary —{' '}
+          <Mono>dark | light | ghost</Mono> over <Mono>base | large</Mono>, no red fill anywhere,
+          the glyph on a 20px box. The one remaining delta is a <strong>drawing</strong>: the arrow
+          is the house <Mono>ArrowIcon</Mono>, stroked at 2.2, where Figma sets Material
+          Symbols&apos; <Mono>arrow_forward</Mono>. ADR 0009 says a glyph is an inline SVG of the
+          Material path, so that is a redraw whenever someone wants it, not a contract gap.
         </Callout>
       </Section>
     </Page>

@@ -21,10 +21,8 @@ const eyebrowVariants = cva('block', {
       // every section eyebrow on the canonical frames is this grey.
       muted: 'text-fg-muted',
       // inverse — plain white, for an eyebrow on an ink band or over a card
-      // scrim (`1883:3561`, `1634:1183`). THE dark-surface treatment: a `tint`
-      // tone (`--color-brand-tint`) sat beside this until #55, and went with
-      // the token — no canonical frame places a red accent on ink, and every
-      // call site it had was a story.
+      // scrim (`1883:3561`, `1634:1183`). THE dark-surface treatment: no
+      // canonical frame places a red accent on ink.
       inverse: 'text-white',
       // brand — the red kicker. Brand red is a flat fill exactly ONCE on the
       // canonical Home frame (the footer link-group headers), so this is the
