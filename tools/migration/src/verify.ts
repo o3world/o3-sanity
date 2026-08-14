@@ -22,6 +22,7 @@ import type { Migration } from '@o3/sanity/types/generated'
 
 import { isImageAssetId } from './lib/media'
 import { CORPUS_DIRS, refsIn } from './lib/corpus'
+import { untouchedPlaceholders } from './lib/placeholders'
 import { categoryDoc } from './map/category'
 import { personDoc } from './map/person'
 import { insightDoc } from './map/insight'
@@ -239,6 +240,33 @@ async function main() {
       `\n⚠ provisional content (${provisional.length}) — not authoritative, clear before launch`,
     )
     for (const line of provisional) console.log(`    ${line}`)
+  }
+
+  // 10. Sections added from the canvas that nobody has written yet (#112).
+  //     Reported here, under the same heading and by the same rule as the
+  //     documents above, because they are the same thing one tier down: content
+  //     that exists so the page has a shape, not because anyone meant it.
+  //
+  //     Also NOT a finding, and for a second reason. A placeholder is how a
+  //     block gets onto a page, so an editor mid-edit will always have one; the
+  //     failure this prevents is a placeholder nobody came back to reaching a
+  //     reader, and counting them out loud every run is what catches that.
+  const placeholders = untouchedPlaceholders(live)
+  if (placeholders.length > 0) {
+    console.log(
+      `\n⚠ placeholder sections (${placeholders.length}) — inserted from the canvas and not yet written`,
+    )
+    for (const line of placeholders) console.log(`    ${line}`)
+    // ⚠️ THE THING THAT SURPRISES PEOPLE, said where they will read it. The
+    // committed JSON under `data/` is the source of truth during build-out
+    // (ADR 0003), and `load` recreates every unlocked pipeline-owned document
+    // from it — so a section added in Studio lives ONLY in the dataset. The
+    // next `load` removes it, silently, along with whatever was written into
+    // it. Seed it into `data/seed/` or lock the document; there is no third
+    // option, and nothing in Presentation can say so from inside its iframe.
+    console.log(
+      '    (these live only in the dataset — the next `load` recreates the document from data/)',
+    )
   }
 
   if (findings.length > 0) {

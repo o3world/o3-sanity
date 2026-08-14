@@ -78,6 +78,15 @@ new ports first:
 pnpm sanity cors add http://localhost:<port> --credentials
 ```
 
+**The test suite pins its own port, so `WEB_PORT` cannot reach a canonical
+URL.** `vitest.config.mts` sets `WEB_PORT=3000` on both the `unit` and `render`
+projects (#116). Before that, Vitest loaded the worktree's `.env`, `getBaseUrl()`
+read the allocated port, and seven SEO assertions failed in every worktree over
+a port rather than over the ticket being worked. If you see a canonical-URL
+failure mentioning `:36xx`, that pin has been removed or bypassed — restore it
+rather than editing the expected URL, which lands a hardcoded port in a test and
+breaks the next worktree differently.
+
 Worktrees live **outside** the checkout — `../o3-sanity-worktrees/<issue>-<slug>`
 for `pnpm wt`, `~/orca/workspaces/o3-sanity/<name>` for Orca. Each carries its
 own ~1.1 GB node_modules; nesting that under the checkout puts it in front of

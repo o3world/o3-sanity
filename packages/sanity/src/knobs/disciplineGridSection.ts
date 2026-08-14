@@ -1,5 +1,6 @@
 import { defineBlockKnobs, knob } from '@o3/block-spec'
 import { surfaceKnob } from './surface'
+import type { DisciplineGridSection } from '../types/generated'
 
 /**
  * The discipline band's design options.
@@ -33,4 +34,23 @@ export const disciplineGridSectionKnobs = defineBlockKnobs({
     }),
     surfaceKnob({ initialValue: 'white' }),
   ],
+  /**
+   * One discipline, not four. `disciplines` requires exactly four on the
+   * `orbital` layout and at least one otherwise, and the knob's default is
+   * `grid` — so one is the smallest thing that satisfies what an inserted band
+   * actually is. Switching to orbital then asks for three more, which is the
+   * form telling the truth about the diagram.
+   */
+  placeholder: {
+    _type: 'disciplineGridSection',
+    heading: 'A heading for this grid.',
+    disciplines: [
+      {
+        _key: 'first',
+        _type: 'discipline',
+        heading: 'First discipline',
+        body: 'Add this discipline’s copy.',
+      },
+    ],
+  } satisfies DisciplineGridSection,
 })

@@ -255,3 +255,18 @@ above claimed.
   ([#122](https://github.com/o3world/o3-sanity/issues/122)) are the one change
   the guard should expect: both its field walk and its state product need an
   array-member context before an item knob can be checked.
+
+- **The migration state is closed, and closing it cost one judgement**
+  ([#120](https://github.com/o3world/o3-sanity/issues/120)). All sixteen section
+  blocks declare their knobs, `knobs:` is required, and the two things that held
+  the half-converted repo together — the `defaultSurface` shorthand and #105's
+  one-off shape guard — are gone with the state they existed for. Six of the
+  last nine blocks declare nothing but `surface`, which is the shape the
+  inversion always implied and reads as thin only until you notice that the old
+  spelling published the same field with nothing able to read it. The Negative
+  above that predicted "judgement moved to the author" collected its bill here:
+  `listingSection.pageType` is the one closed set on a converted block that is
+  not a design option, and the guard now has to be told so by name. That is one
+  entry, in the open, and it fails loudly if it is ever too small — the opposite
+  failure direction from the prior art's denylist, which suppressed and was
+  walked around.

@@ -1,5 +1,7 @@
 import { defineBlockKnobs, knob } from '@o3/block-spec'
+import { decorationKnob } from './decoration'
 import { surfaceKnob } from './surface'
+import type { HeroSection } from '../types/generated'
 
 /**
  * The hero's design options — the first block converted under ADR 0020.
@@ -27,16 +29,21 @@ export const heroSectionKnobs = defineBlockKnobs({
       // it goes on the hover bar rather than only in the menu.
       bar: true,
     }),
-    knob({
-      name: 'decoration',
-      title: 'Decoration',
-      // No description, because the field it replaces had none — the shared
-      // `decorationField()` factory says what the enum means in one place and
-      // the two option labels say the rest. #113 converts the other two
-      // blocks that call the factory and can retire it then.
-      options: ['orbs', 'none'],
-      initialValue: 'orbs',
-    }),
+    // The same knob the quote and CTA bands carry, with the hero's own list.
+    // Was declared inline here while `decorationField()` still served the other
+    // two; #120 converted them, so the shared meaning moved to the pure side
+    // and the factory that generated a field directly is gone.
+    decorationKnob(['orbs', 'none']),
     surfaceKnob({ initialValue: 'ink' }),
   ],
+  /**
+   * A hero with one line in it and nothing to correct. `variant` is not spelled
+   * here — the knob's own `initialValue` supplies it (`placeholder.ts`), so an
+   * inserted hero opens orbital exactly as one created from the form does.
+   */
+  placeholder: {
+    _type: 'heroSection',
+    headlineLines: ['A headline for this hero.'],
+    subheading: 'Add the line that sits under it.',
+  } satisfies HeroSection,
 })

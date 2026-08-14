@@ -2,7 +2,14 @@ import type { ComponentType } from 'react'
 import type { BlockKnobs, BlockTier } from '@o3/block-spec'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
-import { applyKnobArgs, knobControls, matrixAxes, matrixCells, type KnobArgType } from './knobArgs'
+import {
+  applyKnobArgs,
+  itemKnobControls,
+  knobControls,
+  matrixAxes,
+  matrixCells,
+  type KnobArgType,
+} from './knobArgs'
 import { toProps } from './types'
 
 /**
@@ -98,6 +105,14 @@ export function defineKnobStories<T extends object>(
 
   const { knobs, argTypes, args, idToPath } = knobControls({ spec, fixture, nested })
 
+  // One more set of controls per member of every knobbed array (#122). Merged
+  // into the same three maps because Storybook has one args namespace; kept out
+  // of `knobs`, which is the block's own roster and what the Matrix grids.
+  const items = itemKnobControls({ spec, fixture })
+  const playgroundArgTypes = { ...argTypes, ...items.argTypes }
+  const playgroundArgs = { ...args, ...items.args }
+  const playgroundPaths = { ...idToPath, ...items.idToPath }
+
   const meta: Meta = {
     title: opts.title ?? titleForSpec(spec),
     component: Component,
@@ -106,10 +121,10 @@ export function defineKnobStories<T extends object>(
   }
 
   const Playground: AnyStory = {
-    argTypes,
-    args,
+    argTypes: playgroundArgTypes,
+    args: playgroundArgs,
     render: (storyArgs: Record<string, unknown>) =>
-      render(applyKnobArgs({ spec, fixture, args: storyArgs, idToPath, nested })),
+      render(applyKnobArgs({ spec, fixture, args: storyArgs, idToPath: playgroundPaths, nested })),
   }
 
   const cells = matrixCells({
@@ -137,5 +152,5 @@ export function defineKnobStories<T extends object>(
     ),
   }
 
-  return { meta, Playground, Matrix, argTypes }
+  return { meta, Playground, Matrix, argTypes: playgroundArgTypes }
 }

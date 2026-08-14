@@ -1,6 +1,7 @@
 import { visibleKnobs } from '@o3/block-spec'
-import type { BlockKnobs, KnobReader, KnobSurface, ResolvedKnob } from '@o3/block-spec'
+import type { BlockKnobs, ItemKnobs, KnobReader, KnobSurface, ResolvedKnob } from '@o3/block-spec'
 
+import { insertActionGroups } from './insertActions'
 import { itemActionGroups, type ItemActionGroup } from './itemActions'
 
 /**
@@ -56,6 +57,14 @@ export interface KnobMenuModel {
    * empty altogether while the draft snapshot has not resolved the item.
    */
   itemActions: readonly ItemActionGroup[]
+  /**
+   * Add above / add below (#112), each listing what the subject's array
+   * declares it accepts. Its own field rather than more `itemActions` because
+   * the two answer different questions — those act on the subject, these add a
+   * sibling beside it — and because only this one needs to know what a block
+   * is. Same shape, so the view renders both with one loop.
+   */
+  insertActions: readonly ItemActionGroup[]
   /** Always last, and always non-empty: the jump is the menu's floor. */
   actions: readonly KnobMenuAction[]
 }
@@ -96,11 +105,11 @@ export interface KnobMenuSubject {
  * The menu still opens: the jump row is what it has to offer, and offering it
  * is the honest answer.
  *
- * WHY `item` KNOBS DROP WHEN THE BLOCK IS THE SUBJECT. An item knob configures
- * one member of one of the block's arrays. With the cursor in band padding
- * there is no member to name, so a row for it could only write to a path the
- * menu cannot resolve — the exact dead control the rule above forbids. The
- * group is absent there, and present the moment the cursor is inside an item.
+ * WHERE THE ITEM GROUP COMES FROM. Not from `spec`: an array member is its own
+ * knob root (#122), so its options are declared against the member and read
+ * with a member-relative reader. `item` is the caller's answer to "which member,
+ * and what does it currently hold" — absent whenever the cursor is not inside
+ * one, which is also why a row here can always name the path it writes.
  *
  * WHY THE BLOCK'S KNOBS STAY WHEN AN ITEM IS THE SUBJECT. The block is still
  * under the cursor — an item is inside it — and the alternative is an editor
@@ -112,14 +121,23 @@ export function knobMenuModel({
   spec,
   read,
   nested,
+  item,
   subject,
   componentName,
   snapshot,
   subjectPath,
+  insert,
 }: {
   spec: BlockKnobs | undefined
   read: KnobReader
   nested: boolean
+  /**
+   * The member under the cursor and a reader rooted AT IT — `undefined` on the
+   * band, on a plain field, and inside an array whose members declare no knobs.
+   * The spec and the reader travel together because a member-relative reader
+   * against a block-relative spec is the silent write #122 was filed for.
+   */
+  item?: { spec: ItemKnobs; read: KnobReader } | undefined
   subject: KnobMenuSubject
   /** The block's name — the title of the `block` group, and the header's fallback. */
   componentName?: string | undefined
@@ -137,12 +155,23 @@ export function knobMenuModel({
    * honest answer for a caller that has no document to patch.
    */
   subjectPath?: string | undefined
+  /**
+   * What the subject's own array accepts, and every block's declaration to
+   * build it from (#112). Absent whenever the caller could not address the
+   * array or the site declared nothing for it — which is the honest answer for
+   * an array nobody has said is a composition surface, and the reason the menu
+   * offers no insert rows there rather than a guess.
+   */
+  insert?: { members: readonly string[]; specs: Readonly<Record<string, BlockKnobs>> } | undefined
 }): KnobMenuModel {
   // `.all` and not `bySurface`: the menu's roster IS the complete roster, and
   // reading the flat list keeps that visible. The grouping below is a
   // presentation of it, so nothing can be delivered that the roster does not
   // contain.
   const all = spec ? visibleKnobs({ spec, read, nested }).all : []
+  // Resolved against the member, so one screen's `tone` reads that screen's
+  // value and a gate on a sibling is an ordinary same-root gate.
+  const itemKnobs = item ? visibleKnobs({ spec: item.spec, read: item.read }).all : []
 
   const titles: Record<KnobSurface, string | undefined> = {
     // The band is the full-width strip the block occupies (CONTEXT.md → Knobs).
@@ -155,7 +184,8 @@ export function knobMenuModel({
   const groups: KnobMenuGroup[] = []
   for (const surface of SURFACE_ORDER) {
     if (surface === 'item' && subject.kind !== 'item') continue
-    const knobs = all.filter((resolved) => resolved.surface === surface)
+    const knobs =
+      surface === 'item' ? itemKnobs : all.filter((resolved) => resolved.surface === surface)
     if (knobs.length === 0) continue
     groups.push({ surface, title: titles[surface] ?? humanSurface(surface), knobs })
   }
@@ -166,6 +196,10 @@ export function knobMenuModel({
     itemActions: subjectPath
       ? itemActionGroups({ snapshot, itemPath: subjectPath, subjectTitle: subject.title })
       : [],
+    insertActions:
+      subjectPath && insert
+        ? insertActionGroups({ snapshot, itemPath: subjectPath, ...insert })
+        : [],
     actions: [OPEN_FORM_ACTION],
   }
 }

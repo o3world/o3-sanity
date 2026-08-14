@@ -7,20 +7,36 @@
  * pay for the overlay runtime. `./studio` splits off `sanity` for the mirror
  * reason. Nothing here is reachable from either.
  *
- * One import, one prop:
+ * One import, one prop, and one sibling:
  *
- *     import { createCanvasComponents } from '@o3/editor-chrome/canvas'
- *     <VisualEditing components={createCanvasComponents({ blockKnobs: BLOCK_KNOBS })} />
+ *     import { CanvasNotices, createCanvasComponents } from '@o3/editor-chrome/canvas'
+ *     <VisualEditing components={createCanvasComponents({ blockKnobs, blockArrays })} />
+ *     <CanvasNotices />
+ *
+ * The sibling is not decoration. An overlay component renders only while its
+ * element is hovered, so a refused mutation reported from inside the toolbar
+ * has nowhere to be read (#124). `<CanvasNotices />` mounts in the page's tree
+ * and reads the queue the toolbar writes to.
  *
  * The knob declarations are the site's own (ADR 0020) — this package knows the
  * vocabulary and none of the instances.
  */
 export { barKnobs, blockKnobReader } from './barKnobs'
+export { CanvasNotices } from './CanvasNotices'
+export { CanvasNoticesView, type CanvasNoticesViewProps } from './CanvasNoticesView'
 export { createCanvasComponents } from './canvasComponents'
 export { CanvasToolbar, type CanvasToolbarProps } from './CanvasToolbar'
 export { CanvasToolbarView, type CanvasToolbarViewProps } from './CanvasToolbarView'
 export { canvasSubject, type CanvasLevel, type CanvasSubject } from './subject'
 export { componentName, subjectName } from './identity'
+export {
+  blockArrayKey,
+  insertActionGroups,
+  insertItemPatch,
+  insertOffers,
+  type InsertOffer,
+  type InsertPosition,
+} from './insertActions'
 export {
   duplicateItemPatch,
   itemActionGroups,
@@ -43,3 +59,5 @@ export {
   type KnobMenuSubject,
 } from './menuModel'
 export { knobPatch } from './knobPatch'
+export { canvasNotices, createCanvasNoticeQueue, type CanvasNotice } from './notices'
+export { reportCanvasFailure } from './draftPatch'

@@ -1,5 +1,6 @@
 import { defineBlockKnobs, knob } from '@o3/block-spec'
 import { surfaceKnob } from './surface'
+import type { RailPanelsSection } from '../types/generated'
 
 /**
  * The rail band's design options — the block with two axes, where the second
@@ -49,4 +50,31 @@ export const railPanelsSectionKnobs = defineBlockKnobs({
     }),
     surfaceKnob({ initialValue: 'white' }),
   ],
+  /**
+   * Two panels, because `panels` declares `min(2)` and a rail with one panel is
+   * not the band. A placeholder answers for what the schema requires: an insert
+   * is a plain `insert` patch, so nothing applies the form's own initial values
+   * on the way in.
+   */
+  placeholder: {
+    _type: 'railPanelsSection',
+    heading: 'A heading for this section.',
+    intro: 'Add the standfirst that introduces the panels.',
+    panels: [
+      {
+        _key: 'first',
+        _type: 'panel',
+        railLabel: 'First',
+        heading: 'First panel',
+        body: 'Add this panel’s copy.',
+      },
+      {
+        _key: 'second',
+        _type: 'panel',
+        railLabel: 'Second',
+        heading: 'Second panel',
+        body: 'Add this panel’s copy.',
+      },
+    ],
+  } satisfies RailPanelsSection,
 })

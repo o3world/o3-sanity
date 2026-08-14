@@ -2,7 +2,7 @@ import { Fragment, type ComponentType, type Ref } from 'react'
 import type { ResolvedKnob } from '@o3/block-spec'
 
 import { MENU_COLOR } from './KnobControl'
-import type { ItemAction } from './itemActions'
+import type { ItemAction, ItemActionGroup } from './itemActions'
 import { CANVAS_CHROME_ATTR, type KnobMenuAction, type KnobMenuModel } from './menuModel'
 
 /**
@@ -27,8 +27,23 @@ import { CANVAS_CHROME_ATTR, type KnobMenuAction, type KnobMenuModel } from './m
  *     │   To top                 │  a row exists only when it moves something
  *     │   Down                   │
  *     ├──────────────────────────┤
+ *     │ ADD ABOVE                │  what this array accepts (#112), derived
+ *     │   Hero                   │
+ *     │   Logo wall              │
+ *     │   …                      │
+ *     │ ADD BELOW                │
+ *     │   …                      │
+ *     ├──────────────────────────┤
  *     │ All options — open form  │  always last
  *     └──────────────────────────┘
+ *
+ * THE PANEL SCROLLS, and the insert offer is why. `page.sections` accepts all
+ * sixteen section blocks, listed once per position, so the menu on a page band
+ * is comfortably taller than a laptop viewport — and `computeMenuDock` clamps
+ * by height, so an unbounded panel would be pinned to the top of the screen
+ * with its floor still off it. A max height and an inner scroll keeps the
+ * "all options — open form" row reachable, which matters most on exactly the
+ * menus that are too long.
  *
  * DUPLICATE AND REMOVE CARRY NO GROUP HEADING. Every knob group is titled with
  * the container it configures, so a block knob under a menu headed "Panel"
@@ -89,7 +104,7 @@ export function KnobMenu({ model, onPick, onAction, onItemAction, panelRef }: Kn
     >
       <div
         style={{ background: MENU_COLOR }}
-        className="min-w-44 max-w-72 rounded-[3px] py-1 text-white shadow-md"
+        className="max-h-[70vh] min-w-44 max-w-72 overflow-y-auto rounded-[3px] py-1 text-white shadow-md"
       >
         {model.title ? (
           <div
@@ -116,29 +131,16 @@ export function KnobMenu({ model, onPick, onAction, onItemAction, panelRef }: Kn
             header (which already draws a border) would double it. */}
         {model.itemActions.length > 0 && model.groups.length > 0 ? <Separator /> : null}
         {model.itemActions.map((group) => (
-          <div key={group.id} role="group" aria-label={group.label}>
-            {group.title ? (
-              <div className="truncate whitespace-nowrap px-2 pb-0.5 pt-1.5 text-[9px] font-semibold uppercase tracking-wide opacity-60">
-                {group.title}
-              </div>
-            ) : null}
-            {group.actions.map((action) => (
-              <button
-                key={action.id}
-                type="button"
-                role="menuitem"
-                data-testid="canvas-menu-item-action"
-                onClick={() => onItemAction?.(action)}
-                // Indented under a heading, flush without one — the same
-                // relationship an option row has to the knob that owns it.
-                className={`flex w-full items-center whitespace-nowrap py-1 pr-2 text-left text-[11px] hover:bg-white/15 focus:bg-white/15 focus:outline-none ${
-                  group.title ? 'pl-4' : 'pl-2'
-                }`}
-              >
-                {action.title}
-              </button>
-            ))}
-          </div>
+          <ActionGroup key={group.id} group={group} onItemAction={onItemAction} />
+        ))}
+
+        {/* The insert groups act on the subject's ARRAY rather than on the
+            subject, so they get their own rule — the first heading under it is
+            "Add above", which reads as a new thought rather than a third way
+            to move what is already there. */}
+        {model.insertActions.length > 0 ? <Separator /> : null}
+        {model.insertActions.map((group) => (
+          <ActionGroup key={group.id} group={group} onItemAction={onItemAction} />
         ))}
 
         {model.actions.map((action) => (
@@ -162,6 +164,49 @@ export function KnobMenu({ model, onPick, onAction, onItemAction, panelRef }: Kn
 
 function Separator() {
   return <div role="separator" className="my-1 border-t border-white/15" />
+}
+
+/**
+ * One group of rows that carry their own patches — duplicate/remove/move
+ * (#111) and add above/below (#112) alike.
+ *
+ * They share this because they are the same thing to the menu: a row that
+ * commits a mutation someone else already built. Which array it lands in and
+ * what it puts there is a question answered two files away, and drawing them
+ * twice would be two places to get an indent or a role wrong.
+ */
+function ActionGroup({
+  group,
+  onItemAction,
+}: {
+  group: ItemActionGroup
+  onItemAction?: (action: ItemAction) => void
+}) {
+  return (
+    <div role="group" aria-label={group.label}>
+      {group.title ? (
+        <div className="truncate whitespace-nowrap px-2 pb-0.5 pt-1.5 text-[9px] font-semibold uppercase tracking-wide opacity-60">
+          {group.title}
+        </div>
+      ) : null}
+      {group.actions.map((action) => (
+        <button
+          key={action.id}
+          type="button"
+          role="menuitem"
+          data-testid="canvas-menu-item-action"
+          onClick={() => onItemAction?.(action)}
+          // Indented under a heading, flush without one — the same
+          // relationship an option row has to the knob that owns it.
+          className={`flex w-full items-center whitespace-nowrap py-1 pr-2 text-left text-[11px] hover:bg-white/15 focus:bg-white/15 focus:outline-none ${
+            group.title ? 'pl-4' : 'pl-2'
+          }`}
+        >
+          {action.title}
+        </button>
+      ))}
+    </div>
+  )
 }
 
 /**

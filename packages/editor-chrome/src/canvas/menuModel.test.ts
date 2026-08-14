@@ -1,10 +1,11 @@
 import { describe, expect, it } from 'vitest'
-import { defineBlockKnobs, knob, visibleKnobs } from '@o3/block-spec'
+import { defineBlockKnobs, defineItemKnobs, knob, visibleKnobs } from '@o3/block-spec'
 
 import { barKnobs, blockKnobReader } from './barKnobs'
 import { CANVAS_CHROME_ATTR, dismissesMenu, knobMenuModel, OPEN_FORM_ACTION } from './menuModel'
 
 const BLOCK = 'sections[_key=="abc"]'
+const ITEM = `${BLOCK}.panels[_key=="p1"]`
 
 /**
  * A block with one knob on each surface, and one of them off the bar — the
@@ -25,26 +26,58 @@ const hero = defineBlockKnobs({
       options: ['on', 'off'],
       showWhen: { at: 'variant', mode: 'oneOf', values: ['band'] },
     }),
-    knob({ name: 'tone', title: 'Tone', options: ['plain', 'wide'], surface: 'item' }),
   ],
 })
 
-const snapshotWith = (block: Record<string, unknown>) => ({
-  sections: [{ _key: 'abc', _type: 'heroSection', ...block }],
+/**
+ * The member's own declaration (#122). `tone` is a path relative to the PANEL,
+ * so nothing about it is expressible on the block above — which is why it lives
+ * here and not in `hero.knobs`.
+ */
+const panel = defineItemKnobs({
+  type: 'panel',
+  title: 'Panel',
+  knobs: [
+    knob({ name: 'tone', title: 'Tone', options: ['plain', 'wide'] }),
+    knob({
+      name: 'span',
+      title: 'Span',
+      options: ['one', 'two'],
+      showWhen: { at: 'tone', mode: 'oneOf', values: ['wide'] },
+    }),
+  ],
+})
+
+const snapshotWith = (block: Record<string, unknown>, item: Record<string, unknown> = {}) => ({
+  sections: [
+    {
+      _key: 'abc',
+      _type: 'heroSection',
+      ...block,
+      panels: [{ _key: 'p1', _type: 'panel', ...item }],
+    },
+  ],
 })
 
 const menuFor = (
   block: Record<string, unknown>,
   subject: { kind: 'block' | 'item'; title?: string } = { kind: 'block', title: 'Hero section' },
-  { nested = false }: { nested?: boolean } = {},
-) =>
-  knobMenuModel({
+  { nested = false, item = {} }: { nested?: boolean; item?: Record<string, unknown> } = {},
+) => {
+  const snapshot = snapshotWith(block, item)
+  return knobMenuModel({
     spec: hero,
-    read: blockKnobReader(snapshotWith(block), BLOCK),
+    read: blockKnobReader(snapshot, BLOCK),
     nested,
+    // The toolbar passes this exactly when an item spec resolved for the
+    // hovered member, which is exactly when the subject is that member.
+    ...(subject.kind === 'item'
+      ? { item: { spec: panel, read: blockKnobReader(snapshot, ITEM) } }
+      : {}),
     subject,
     componentName: 'Hero section',
   })
+}
 
 const titlesIn = (
   model: ReturnType<typeof knobMenuModel>,
@@ -134,6 +167,42 @@ describe('the no-dead-control rule', () => {
     expect(titlesIn(model, 'item')).toEqual(['Tone'])
   })
 
+  it('resolves an item knob against THAT member, not against the block', () => {
+    // One panel, one answer. The block-rooted spelling this replaces returned
+    // one resolution for every member of the array.
+    const model = menuFor(
+      { variant: 'band' },
+      { kind: 'item', title: 'Panel' },
+      {
+        item: { tone: 'wide' },
+      },
+    )
+    const tone = model.groups
+      .find((group) => group.surface === 'item')!
+      .knobs.find((r) => r.knob.name === 'tone')
+    expect(tone!.current).toEqual({ value: 'wide', title: 'Wide', isDefault: false })
+  })
+
+  it('reads an item knob’s gate at the member root, like any same-root gate', () => {
+    const closed = menuFor({}, { kind: 'item', title: 'Panel' }, { item: { tone: 'plain' } })
+    const open = menuFor({}, { kind: 'item', title: 'Panel' }, { item: { tone: 'wide' } })
+    expect(titlesIn(closed, 'item')).toEqual(['Tone'])
+    expect(titlesIn(open, 'item')).toEqual(['Tone', 'Span'])
+  })
+
+  it('omits the item group for a member whose type declares no knobs', () => {
+    // The lookup missed, so there is nothing to offer — and a row here could
+    // only write to a spec the menu does not have.
+    const model = knobMenuModel({
+      spec: hero,
+      read: blockKnobReader(snapshotWith({}), BLOCK),
+      nested: false,
+      subject: { kind: 'item', title: 'Figure' },
+      componentName: 'Hero section',
+    })
+    expect(model.groups.map((group) => group.surface)).toEqual(['band', 'block'])
+  })
+
   it('builds no group at all for a surface with no surviving knobs', () => {
     const bare = defineBlockKnobs({
       type: 'mediaSection',
@@ -186,6 +255,7 @@ describe('what the menu says it is about', () => {
       spec: hero,
       read: () => undefined,
       nested: false,
+      item: { spec: panel, read: () => undefined },
       subject: { kind: 'item' },
       componentName: undefined,
     })
@@ -279,6 +349,62 @@ describe('the item actions the menu carries (#111)', () => {
     const block = model('sections[_key=="abc"]', { kind: 'block', title: 'Hero section' })
     expect(block.actions).toEqual([OPEN_FORM_ACTION])
     expect(block.itemActions.length).toBeGreaterThan(0)
+  })
+})
+
+describe('the insert rows the menu carries (#112)', () => {
+  const snapshot = {
+    _type: 'page',
+    sections: [{ _key: 'abc', _type: 'heroSection' }],
+  }
+
+  const quote = defineBlockKnobs({
+    type: 'quoteSection',
+    title: 'Quote',
+    tier: 'section',
+    knobs: [knob({ name: 'surface', title: 'Surface', options: ['white', 'ink'] })],
+    placeholder: { _type: 'quoteSection', quote: 'Add the quote.' },
+  })
+
+  const model = (insert?: Parameters<typeof knobMenuModel>[0]['insert']) =>
+    knobMenuModel({
+      spec: hero,
+      read: blockKnobReader(snapshot, BLOCK),
+      nested: false,
+      subject: { kind: 'block', title: 'Hero section' },
+      componentName: 'Hero section',
+      snapshot,
+      subjectPath: BLOCK,
+      insert,
+    })
+
+  it('offers what the array accepts, above and below', () => {
+    const groups = model({
+      members: ['quoteSection'],
+      specs: { quoteSection: quote },
+    }).insertActions
+
+    expect(groups.map((group) => group.title)).toEqual(['Add above', 'Add below'])
+    expect(groups[0]!.actions.map((action) => action.title)).toEqual(['Quote'])
+  })
+
+  // A caller that could not address the array — or a site that declared none —
+  // gets a menu with no insert rows rather than a guess at what belongs here.
+  it('offers nothing when the array was not declared', () => {
+    expect(model().insertActions).toEqual([])
+  })
+
+  it('keeps the insert rows separate from the actions ON the subject', () => {
+    const built = model({ members: ['quoteSection'], specs: { quoteSection: quote } })
+
+    // Duplicate/Remove act on the hero; Add above/below act on `sections`.
+    // Same shape, two questions — the menu draws a rule between them.
+    expect(
+      built.itemActions.flatMap((group) => group.actions.map((action) => action.id)),
+    ).toContain('duplicate')
+    expect(
+      built.insertActions.flatMap((group) => group.actions.map((action) => action.id)),
+    ).toEqual(['insert-before-quoteSection', 'insert-after-quoteSection'])
   })
 })
 

@@ -52,7 +52,15 @@ import { keyedItemParts, parseGroqPath, resolveGroqPath } from './groqPath'
 
 export type ItemMove = 'first' | 'previous' | 'next' | 'last'
 
-export type ItemActionId = 'duplicate' | 'remove' | `move-${ItemMove}`
+export type ItemActionId =
+  | 'duplicate'
+  | 'remove'
+  | `move-${ItemMove}`
+  // Insert rows are built from an array's declared members (#112), so the type
+  // half of the id is only known at runtime. They are the same shape of thing
+  // as the rows above — a row carrying its own patches, against the subject's
+  // array — which is why they widen this union rather than starting a second.
+  | `insert-${'before' | 'after'}-${string}`
 
 /**
  * A duplicate's `_key`, in Sanity's own charset and length: 12 hex characters
@@ -70,7 +78,7 @@ export type ItemActionId = 'duplicate' | 'remove' | `move-${ItemMove}`
  * characters — `slice(0, undefined)` returns the whole string. The Studio's
  * length is the one to match; the overlay's is an accident.
  */
-function randomKey(length = 12): string {
+export function randomKey(length = 12): string {
   const bytes = new Uint8Array(length)
   crypto.getRandomValues(bytes)
   return Array.from(bytes, (byte) => byte.toString(16).padStart(2, '0'))
@@ -79,7 +87,7 @@ function randomKey(length = 12): string {
 }
 
 /** Everything an action needs to know about where the item sits. */
-interface ArrayItemLocation {
+export interface ArrayItemLocation {
   arrayPath: string
   key: string
   index: number
@@ -99,7 +107,10 @@ interface ArrayItemLocation {
  * is an error worth reporting and all of them mean the same thing to a menu:
  * offer no row.
  */
-function locateArrayItem(snapshot: unknown, itemPath: string): ArrayItemLocation | undefined {
+export function locateArrayItem(
+  snapshot: unknown,
+  itemPath: string,
+): ArrayItemLocation | undefined {
   const parts = keyedItemParts(itemPath)
   if (!parts) return undefined
 
@@ -233,7 +244,13 @@ export interface ItemAction {
 }
 
 export interface ItemActionGroup {
-  id: 'item' | 'move'
+  /**
+   * `insert-before` / `insert-after` are built by `insertActions.ts` (#112) and
+   * share this shape on purpose: an insert row carries its own patches against
+   * the subject's array exactly as a duplicate does, so the commit path, the
+   * failure reporting and the markup are the ones that already exist.
+   */
+  id: 'item' | 'move' | 'insert-before' | 'insert-after'
   /**
    * The rendered heading. ABSENT for the subject's own actions, because the
    * menu header one line above already names what "Remove" would remove, and a

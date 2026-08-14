@@ -1,15 +1,25 @@
 import { defineArrayMember, defineField } from 'sanity'
+import { defineArrayItem } from './defineArrayItem'
 import { defineSectionBlock } from './defineBlocks'
-import { decorationField } from './fields'
 import { hiddenUnless } from './knobFields'
-import { SECTION_BLOCKS } from './registry'
+import { blockArrayMembers } from './registry'
 import { PAGE_TYPES } from '../../constants'
+import { caseShowcaseSectionKnobs } from '../../knobs/caseShowcaseSection'
+import { ctaSectionKnobs } from '../../knobs/ctaSection'
 import { disciplineGridSectionKnobs } from '../../knobs/disciplineGridSection'
+import { formSectionKnobs } from '../../knobs/formSection'
 import { heroSectionKnobs } from '../../knobs/heroSection'
 import { inFlightSectionKnobs } from '../../knobs/inFlightSection'
+import { insightsCarouselSectionKnobs } from '../../knobs/insightsCarouselSection'
 import { layoutSectionKnobs } from '../../knobs/layoutSection'
+import { listingSectionKnobs } from '../../knobs/listingSection'
+import { logoWallSectionKnobs } from '../../knobs/logoWallSection'
 import { mediaSectionKnobs } from '../../knobs/mediaSection'
+import { personGridSectionKnobs } from '../../knobs/personGridSection'
+import { quoteSectionKnobs } from '../../knobs/quoteSection'
 import { railPanelsSectionKnobs } from '../../knobs/railPanelsSection'
+import { roleListSectionKnobs } from '../../knobs/roleListSection'
+import { screenGridSectionKnobs, screenKnobs } from '../../knobs/screenGridSection'
 
 /**
  * The first block whose design options are declared rather than written out
@@ -49,10 +59,11 @@ export const heroSection = defineSectionBlock({
   preview: { select: { title: 'headlineLines.0' } },
 })
 
+/** `surface` is declared in `src/knobs/logoWallSection.ts` (ADR 0020). */
 export const logoWallSection = defineSectionBlock({
   name: 'logoWallSection',
   title: 'Logo wall',
-  defaultSurface: 'bone',
+  knobs: logoWallSectionKnobs,
   fields: [
     defineField({ name: 'eyebrow', type: 'string' }),
     // The single `statement` this band shipped with split in two on the
@@ -84,10 +95,11 @@ export const logoWallSection = defineSectionBlock({
   preview: { select: { title: 'heading' } },
 })
 
+/** `surface` is declared in `src/knobs/caseShowcaseSection.ts` (ADR 0020). */
 export const caseShowcaseSection = defineSectionBlock({
   name: 'caseShowcaseSection',
   title: 'Case study showcase',
-  defaultSurface: 'ink',
+  knobs: caseShowcaseSectionKnobs,
   fields: [
     defineField({ name: 'heading', type: 'string', initialValue: 'Our Work' }),
     defineField({ name: 'cta', type: 'cta' }),
@@ -179,10 +191,16 @@ export const railPanelsSection = defineSectionBlock({
   preview: { select: { title: 'heading' } },
 })
 
+/**
+ * `decoration` and `surface` are declared in `src/knobs/quoteSection.ts`
+ * (ADR 0020), including the `molecule` value and the frame it came from. This
+ * block and `ctaSection` were the last two callers of `decorationField()`, so
+ * the factory retired with them (#120).
+ */
 export const quoteSection = defineSectionBlock({
   name: 'quoteSection',
   title: 'Quote',
-  defaultSurface: 'bone',
+  knobs: quoteSectionKnobs,
   fields: [
     defineField({ name: 'quote', type: 'text', rows: 4, validation: (rule) => rule.required() }),
     defineField({
@@ -190,19 +208,21 @@ export const quoteSection = defineSectionBlock({
       type: 'string',
       description: 'e.g. "Business Leader, Global Health Brand".',
     }),
-    // `molecule` is the 2026-08 case-study quote (`2250:1525`): the same band,
-    // with the molecule mark set at 699px and 10% behind the copy instead of
-    // the two spheres. A third value on this block's list rather than a second
-    // block — the composition is identical.
-    decorationField(['orbs', 'molecule', 'none']),
+    'decoration',
   ],
   preview: { select: { title: 'quote' } },
 })
 
+/**
+ * `surface` is declared in `src/knobs/insightsCarouselSection.ts` (ADR 0020).
+ * `category`'s gate stays a closure: it reads whether `insights` holds
+ * anything, which no `showWhen` mode says, and an editorial field is allowed
+ * one where a knob is not.
+ */
 export const insightsCarouselSection = defineSectionBlock({
   name: 'insightsCarouselSection',
   title: 'Insights carousel',
-  defaultSurface: 'bone',
+  knobs: insightsCarouselSectionKnobs,
   fields: [
     defineField({ name: 'heading', type: 'string', initialValue: 'The thinking behind the work.' }),
     defineField({
@@ -222,15 +242,19 @@ export const insightsCarouselSection = defineSectionBlock({
   preview: { select: { title: 'heading' } },
 })
 
+/**
+ * `decoration` and `surface` are declared in `src/knobs/ctaSection.ts`
+ * (ADR 0020).
+ */
 export const ctaSection = defineSectionBlock({
   name: 'ctaSection',
   title: 'CTA',
-  defaultSurface: 'ink',
+  knobs: ctaSectionKnobs,
   fields: [
     defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
     defineField({ name: 'body', type: 'text', rows: 2 }),
     defineField({ name: 'cta', type: 'cta' }),
-    decorationField(['orbs', 'none']),
+    'decoration',
   ],
   preview: { select: { title: 'heading' } },
 })
@@ -288,9 +312,11 @@ export const disciplineGridSection = defineSectionBlock({
   preview: { select: { title: 'heading', subtitle: 'layout' } },
 })
 
+/** `surface` is declared in `src/knobs/personGridSection.ts` (ADR 0020). */
 export const personGridSection = defineSectionBlock({
   name: 'personGridSection',
   title: 'Person grid',
+  knobs: personGridSectionKnobs,
   fields: [
     defineField({ name: 'eyebrow', type: 'string' }),
     defineField({ name: 'heading', type: 'string' }),
@@ -306,9 +332,11 @@ export const personGridSection = defineSectionBlock({
   preview: { select: { title: 'heading', subtitle: 'eyebrow' } },
 })
 
+/** `surface` is declared in `src/knobs/roleListSection.ts` (ADR 0020). */
 export const roleListSection = defineSectionBlock({
   name: 'roleListSection',
   title: 'Role list',
+  knobs: roleListSectionKnobs,
   fields: [
     defineField({ name: 'eyebrow', type: 'string' }),
     defineField({ name: 'heading', type: 'string' }),
@@ -456,7 +484,10 @@ export const inFlightSection = defineSectionBlock({
  * `reasons` is the exception, and shows where the line falls: the dropdown's
  * options are studio taxonomy that changes when the business changes
  * ("Ventures request", "Labs request"), and every value is just a string to
- * any handler. So they are content; the input that carries them is not.
+ * any handler. So they are content; the input that carries them is not — and
+ * for the same reason they are **not a knob** (#120): an editor editing them is
+ * authoring the form, not making a design decision on the canvas. `surface` is
+ * the block's whole roster, declared in `src/knobs/formSection.ts`.
  *
  * ⚠️ **There is no submission handler and no destination.** #58's other two
  * halves are open, so the renderer disables its submit and says so on the
@@ -465,7 +496,7 @@ export const inFlightSection = defineSectionBlock({
 export const formSection = defineSectionBlock({
   name: 'formSection',
   title: 'Form',
-  defaultSurface: 'bone',
+  knobs: formSectionKnobs,
   fields: [
     defineField({ name: 'eyebrow', type: 'string' }),
     defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
@@ -534,16 +565,13 @@ export const layoutSection = defineSectionBlock({
     defineField({
       name: 'items',
       type: 'array',
-      of: [
-        defineArrayMember({ type: 'richText' }),
-        defineArrayMember({ type: 'figure' }),
-        defineArrayMember({ type: 'embed' }),
-        defineArrayMember({ type: 'cta' }),
-        defineArrayMember({ type: 'statGroup' }),
-        // Titled "Orb" here: on its own in a column the mark is the animation
-        // an editor came for, not the disc beside a row.
-        defineArrayMember({ type: 'mark', title: 'Orb' }),
-      ],
+      // Derived from `BLOCK_ARRAYS`, not restated — the same declaration the
+      // canvas insert menu reads (#112). A base block registered but missing
+      // from here is a block an editor cannot author, which is the state #58
+      // spent three files finding out about. `mark` arrives through it, which
+      // is why the column's picker says "Mark" rather than "Orb": a member
+      // title here would be the one hand-kept fact in a derived list.
+      of: blockArrayMembers('layoutSection.items').map((member) => defineArrayMember(member)),
       validation: (rule) => rule.required().min(1),
     }),
   ],
@@ -579,17 +607,24 @@ export const mediaSection = defineSectionBlock({
  * any content type can compose, so this is available to `page.sections` on the
  * day it lands.
  *
- * Two fields per screen and no more. The frame's plates differ in exactly two
- * ways — the colour behind the screenshot (`tone`) and whether the tile takes
- * one column or both (`span`) — and everything else about a tile (32px radius,
- * the 12px-radius screenshot inside it, the crop) is composition the renderer
- * owns. Plate HEIGHT is deliberately not a field: `2230:7559` draws 716 for a
- * wide tile and 342 for a small one, so height follows `span` (ADR 0006 —
- * renderers decide).
+ * Two design options per screen and no more. The frame's plates differ in
+ * exactly two ways — the colour behind the screenshot (`tone`) and whether the
+ * tile takes one column or both (`span`) — and everything else about a tile
+ * (32px radius, the 12px-radius screenshot inside it, the crop) is composition
+ * the renderer owns. Plate HEIGHT is deliberately not a field: `2230:7559`
+ * draws 716 for a wide tile and 342 for a small one, so height follows `span`
+ * (ADR 0006 — renderers decide).
+ *
+ * Both of those belong to the SCREEN rather than to the band, so they are
+ * declared against the member and their fields come from `defineArrayItem` —
+ * the first item-surface knobs in the repo (#118, ADR 0021). The block's own
+ * roster is `surface` and nothing else, which is why its declaration looks
+ * thin: the knobs an editor reaches for on this band are on the tiles.
  */
 export const screenGridSection = defineSectionBlock({
   name: 'screenGridSection',
   title: 'Screen grid',
+  knobs: screenGridSectionKnobs,
   fields: [
     defineField({
       name: 'screens',
@@ -597,29 +632,12 @@ export const screenGridSection = defineSectionBlock({
       description: 'Tiles fill the two-column grid in order; a wide screen takes both columns.',
       validation: (rule) => rule.required().min(1),
       of: [
-        defineArrayMember({
-          type: 'object',
-          name: 'screen',
+        defineArrayItem({
+          knobs: screenKnobs,
           fields: [
             defineField({ name: 'media', type: 'figure', validation: (rule) => rule.required() }),
-            defineField({
-              name: 'tone',
-              type: 'string',
-              description: 'The plate the screenshot sits on.',
-              options: {
-                list: ['ink', 'brand', 'bone'],
-                layout: 'radio',
-                direction: 'horizontal',
-              },
-              initialValue: 'ink',
-            }),
-            defineField({
-              name: 'span',
-              type: 'string',
-              description: 'Wide takes both columns — the frame’s lead tile.',
-              options: { list: ['standard', 'wide'], layout: 'radio', direction: 'horizontal' },
-              initialValue: 'standard',
-            }),
+            'tone',
+            'span',
           ],
           preview: { select: { title: 'media.alt', subtitle: 'tone', media: 'media.image' } },
         }),
@@ -639,9 +657,20 @@ export const screenGridSection = defineSectionBlock({
   },
 })
 
+/**
+ * `surface` is declared in `src/knobs/listingSection.ts` (ADR 0020).
+ *
+ * **`pageType` is a closed enum and deliberately not a knob** — it names a
+ * content category, not a design option, so an editor changing it is choosing
+ * what the band is about rather than how it looks (#120). It is the one
+ * editorial closed set on a converted block, which means `knobGuard.test.ts`
+ * has to be told about it by name; the reasoning is written down there and in
+ * the knobs file rather than remembered.
+ */
 export const listingSection = defineSectionBlock({
   name: 'listingSection',
   title: 'Listing',
+  knobs: listingSectionKnobs,
   fields: [
     defineField({ name: 'heading', type: 'string' }),
     defineField({
@@ -655,21 +684,3 @@ export const listingSection = defineSectionBlock({
   ],
   preview: { select: { title: 'heading', subtitle: 'pageType' } },
 })
-
-/**
- * What `page.sections` and `caseStudy.story` will accept — **derived from the
- * registry**, not restated. (`story` also takes `chapter`, which is a shared
- * object rather than a block, so it is added beside these members — ADR 0018.)
- *
- * This was a second hand-maintained copy of `SECTION_BLOCKS` in the same
- * order, and #58 found out why that costs: `formSection` was registered,
- * defined, rendered and bound, and still could not appear in a page, because
- * this list had not heard of it. The failure surfaced as a typecheck error in
- * the *renderer* (`SectionProps<'formSection'>` not satisfying the generated
- * union) — three files away from the omission, and only because typegen
- * derives the query result from the array's members.
- *
- * A registered block an editor cannot author is not a state worth being able
- * to express, so it is no longer expressible.
- */
-export const sectionBlockMembers = SECTION_BLOCKS.map((type) => ({ type }))

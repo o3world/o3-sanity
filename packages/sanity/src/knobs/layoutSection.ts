@@ -1,5 +1,6 @@
 import { defineBlockKnobs, knob } from '@o3/block-spec'
 import { surfaceKnob } from './surface'
+import type { LayoutSection } from '../types/generated'
 
 /**
  * The layout band's design options — the block that carries the repo's only
@@ -32,4 +33,33 @@ export const layoutSectionKnobs = defineBlockKnobs({
     // paints rather than inheriting one nobody can see (#117).
     surfaceKnob({ initialValue: 'white' }),
   ],
+  /**
+   * One `richText` item, because `items` declares `min(1)` and a layout band
+   * with nothing in it is a gap on the page rather than a block. Its Portable
+   * Text is written out longhand — a block, a span, the `markDefs` array the
+   * type requires — because there is no builder on this side of the seam and
+   * `@o3/block-spec` may not grow one.
+   */
+  placeholder: {
+    _type: 'layoutSection',
+    heading: 'A heading for this section.',
+    subheading: 'Add the quieter line under it.',
+    items: [
+      {
+        _key: 'first',
+        _type: 'richText',
+        body: [
+          {
+            _key: 'paragraph',
+            _type: 'block',
+            style: 'normal',
+            markDefs: [],
+            children: [
+              { _key: 'text', _type: 'span', marks: [], text: 'Add the copy for this column.' },
+            ],
+          },
+        ],
+      },
+    ],
+  } satisfies LayoutSection,
 })

@@ -28,10 +28,25 @@ export function parseGroqPath(path: string): GroqPathSegment[] {
   return out
 }
 
-/** Value at `path` under `root`, or undefined as soon as a segment misses. */
+/**
+ * Value at `path` under `root`, or undefined as soon as a segment misses.
+ *
+ * UNPARSEABLE IS NOT THE ROOT. `parseGroqPath` reports "I do not know this
+ * syntax" as an empty list, which is also what the empty path legitimately
+ * produces — so without the guard below the loop body never runs and
+ * `resolveGroqPath(doc, 'sections[0].heading')` hands back the WHOLE DOCUMENT
+ * instead of undefined. That reached two live callers: `typeAt` in
+ * CanvasToolbar, where only `typeName`'s `typeof === 'string'` check stood
+ * between a document and a component name, and `blockKnobReader` for any
+ * composed path that failed to parse. `keyedItemParts` guards against the same
+ * thing by hand a few lines down, which is the tell that the guard belongs
+ * here instead.
+ */
 export function resolveGroqPath(root: unknown, path: string): unknown {
+  const segments = parseGroqPath(path)
+  if (path !== '' && segments.length === 0) return undefined
   let current: unknown = root
-  for (const segment of parseGroqPath(path)) {
+  for (const segment of segments) {
     if (current == null) return undefined
     if (typeof segment === 'string') {
       current = (current as Record<string, unknown>)[segment]
@@ -112,6 +127,71 @@ export function keyedItemParts(path: string): KeyedItemParts | undefined {
   // would aim a truncate at the document root.
   if (parseGroqPath(arrayPath).length === 0) return undefined
   return { arrayPath, key: m[2]! }
+}
+
+/** Where an array hangs: the thing that owns it, and what it is called there. */
+export interface ArrayHostParts {
+  /**
+   * The path of the type-bearing thing the array is a field of — a block for a
+   * nested array, and the EMPTY STRING for one on the document itself. Empty
+   * rather than undefined because "the document" is a real host with a real
+   * `_type`, and a caller that has to distinguish "no host" from "the root
+   * host" ends up with two rules where the address needs one.
+   */
+  hostPath: string
+  /** The array's own field name, relative to that host — `sections`, `panels`. */
+  field: string
+}
+
+/**
+ * Split an array's path into the host that declares it and the field it is:
+ * `sections[_key=="a"].panels` → `sections[_key=="a"]` + `panels`.
+ *
+ * This is what addresses an array's declared members (#112). The overlay knows
+ * nothing about any schema, so "what does this array accept" has to be looked
+ * up — and the only key that cannot collide is the host's `_type` plus the
+ * field name, both of which are already in hand: the type from the draft
+ * snapshot, the field from here. A bare field name would not do, for the same
+ * reason ADR 0021 refused a registry keyed on a member's `_type` — `items` is a
+ * plausible field on more than one type, and the wrong roster on the
+ * right-looking band is a live editorial surface offering the wrong content.
+ *
+ * Undefined for anything that is not `<path>.<identifier>` or a bare
+ * identifier. A trailing keyed segment cannot match, which is what keeps a
+ * `_key` containing a dot from being read as a field boundary.
+ */
+export function arrayHostParts(arrayPath: string): ArrayHostParts | undefined {
+  const m = /^(?:(.*)\.)?([A-Za-z_][A-Za-z0-9_]*)$/.exec(arrayPath)
+  if (!m) return undefined
+  return { hostPath: m[1] ?? '', field: m[2]! }
+}
+
+/**
+ * WHICH OF THE BLOCK'S ARRAYS THE HOVERED ITEM SITS IN — the second half of the
+ * key that reaches a member's knob declaration (#122).
+ *
+ *   block `sections[_key=="a"]`, item `sections[_key=="a"].screens[_key=="b"]`
+ *     → `screens`
+ *
+ * The item's `_type` is the obvious key and it is the wrong one: a member name
+ * is local to its array, so two blocks may each declare a `screen` and a map
+ * keyed on `_type` would have to arbitrate (ADR 0021). The block type is
+ * already read from the snapshot, and this is the rest of the address —
+ * available from the path the overlay was handed, with nothing to look up.
+ *
+ * Undefined when the item is not a DIRECT member of one of the block's arrays:
+ * an item inside another item is a second root question this does not answer,
+ * and returning its outer array would attach the wrong spec.
+ */
+export function itemArrayField(blockPath: string, itemPath: string): string | undefined {
+  const parts = keyedItemParts(itemPath)
+  if (!parts) return undefined
+  const prefix = `${blockPath}.`
+  if (!parts.arrayPath.startsWith(prefix)) return undefined
+  const relative = parts.arrayPath.slice(prefix.length)
+  // A keyed segment in the remainder means another item stands between this one
+  // and the block.
+  return relative === '' || relative.includes('[') ? undefined : relative
 }
 
 /**

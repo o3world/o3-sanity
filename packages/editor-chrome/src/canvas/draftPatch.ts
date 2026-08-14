@@ -1,5 +1,7 @@
 import type { NodePatchList } from '@sanity/mutate'
 
+import { canvasNotices } from './notices'
+
 /**
  * READING AND WRITING THE DRAFT — one path for every canvas surface, so they
  * settle and fail identically rather than each re-deriving the promise
@@ -79,27 +81,37 @@ export function tryGetDocument<T>(getDocument: (id: string) => T, id: string): T
 }
 
 /**
- * WHERE A REJECTED MUTATION GOES — the console, for v1, and deliberately so
- * (#111 decides this).
+ * WHERE A REJECTED MUTATION GOES — to the editor, and to the console (#124).
  *
- * There is no toast to raise. Sanity's `useToast` is a Studio-side context and
- * our chrome mounts inside the preview iframe, under `<VisualEditing />`'s own
- * root rather than under Studio's providers, so there is nothing to call. Our
- * own surface is not a line either: a toast has to OUTLIVE the hover to be
- * read, and a custom overlay component is unmounted the moment the pointer
- * leaves the element (#108, constraint 1), so it would have to live beside
- * `<VisualEditing />` with its own mount, stacking, dismissal and geometry.
- * That is a ticket, and #124 is it.
+ * #111 shipped this as a console line and said on the ticket that it was a v1
+ * answer. It was, for two reasons that are still true and that neither the
+ * message nor this function could fix on its own. There is no toast to raise:
+ * Sanity's `useToast` is a Studio-side context and our chrome mounts inside the
+ * preview iframe, under `<VisualEditing />`'s own portal rather than under
+ * Studio's providers. And a notice has to OUTLIVE the hover, while a custom
+ * overlay component is unmounted the moment the pointer leaves the element
+ * (#108, constraint 1) — which is exactly when an editor moves it to see what
+ * happened.
  *
- * What this function buys in the meantime is that there is exactly ONE place to
- * attach that surface when it exists, and that every message names the action
- * and the path rather than saying a patch failed. "The patch vanished" is a
- * recurring support shape in the prior art, and a console line an editor never
- * opens does not fix it — but it is the difference between a report someone can
- * act on and one that starts from nothing.
+ * So the surface is not in the toolbar's tree at all. `canvasNotices` is a
+ * module-level queue and `<CanvasNotices />` mounts beside `<VisualEditing />`
+ * to read it. This function is the seam #111 left for it: ONE place every
+ * canvas failure passes through, with a message that names the action and the
+ * GROQ path rather than saying a patch failed.
+ *
+ * THE CONSOLE LINE STAYS. The queue carries what an editor can act on — the
+ * action, the path, the reason. The console keeps the error OBJECT, stack and
+ * all, which is what whoever they report it to needs. Two audiences, two
+ * lines; dropping either would cost one of them.
+ *
+ * WHAT DOES NOT COME HERE. `tryGetDocument` above logs without raising a
+ * notice, and that is the boundary: an unresolved snapshot is a state the
+ * toolbar recovers from a frame later on its own. A notice is for a mutation
+ * an editor has already seen the canvas repaint.
  */
 export function reportCanvasFailure(what: string, error: unknown): void {
   console.error(`[canvas] ${what}`, error)
+  canvasNotices.publish(what, error)
 }
 
 export interface CommitHandlers {

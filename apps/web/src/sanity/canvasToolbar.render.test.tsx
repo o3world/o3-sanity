@@ -11,6 +11,7 @@ import {
   knobMenuModel,
 } from '@o3/editor-chrome/canvas'
 import { BLOCK_KNOBS, heroSectionKnobs, railPanelsSectionKnobs } from '@o3/sanity/knobs'
+import { BLOCK_ARRAYS, SECTION_BLOCKS } from '@o3/sanity/schemas/registry'
 
 import { buildSingletonRoute } from '@/lib/content-routes/build'
 import { home } from '@/content/documents/page/entry'
@@ -43,7 +44,10 @@ import {
 const route = buildSingletonRoute(home)
 
 /** The site's own resolver, wired the way `VisualEditing.tsx` wires it. */
-const canvasComponents = createCanvasComponents({ blockKnobs: BLOCK_KNOBS })
+const canvasComponents = createCanvasComponents({
+  blockKnobs: BLOCK_KNOBS,
+  blockArrays: BLOCK_ARRAYS,
+})
 
 const rendered = await renderRoute(route, {
   data: withSettings(aSeededPage('index'), siteSettings()),
@@ -113,6 +117,16 @@ describe('what the resolver attaches, and where', () => {
     }
     expect(resolved.props.blockKnobs).toBe(BLOCK_KNOBS)
     expect(resolved.props.blockKnobs.heroSection).toBeDefined()
+  })
+
+  it('carries the site’s array declarations across the same seam (#112)', () => {
+    // What an array accepts is a schema fact, and the overlay knows no schema.
+    // Same argument as the knobs beside it: the site hands it in.
+    const resolved = canvasComponents({ node: { path: 'sections[_key=="a"]' } } as never) as {
+      props: { blockArrays: Record<string, readonly string[]> }
+    }
+    expect(resolved.props.blockArrays).toBe(BLOCK_ARRAYS)
+    expect(resolved.props.blockArrays['page.sections']).toEqual([...SECTION_BLOCKS])
   })
 })
 
@@ -567,5 +581,102 @@ describe('at most one menu open, and none until asked', () => {
     // covers every opener and every dropdown it holds.
     const html = renderToStaticMarkup(<CanvasToolbarView componentName="Hero section" />)
     expect(html).toContain('data-canvas-chrome')
+  })
+})
+
+/**
+ * THE INSERT MENU (#112) — "add a section above this one", against the real
+ * schema's real member list.
+ *
+ * The claim under test is the derived one. `BLOCK_ARRAYS['page.sections']` is
+ * `SECTION_BLOCKS`, the schema's own `of:` is built from the same entry, and
+ * every block declares a placeholder — so the rows the menu draws and the
+ * members the form offers are the same set by construction, and the assertions
+ * below compare the menu against the registry rather than against a list
+ * written here.
+ */
+describe('what the knob menu can add beside the subject', () => {
+  const draft = {
+    _type: 'page',
+    sections: [
+      { _key: 'h', _type: 'heroSection', variant: 'band' },
+      { _key: 'm', _type: 'mediaSection' },
+    ],
+  }
+
+  const model = (subjectPath: string, members: readonly string[] | undefined) =>
+    knobMenuModel({
+      spec: heroSectionKnobs,
+      read: blockKnobReader(draft, 'sections[_key=="h"]'),
+      nested: false,
+      subject: { kind: 'block', title: 'Hero section' },
+      componentName: 'Hero section',
+      snapshot: draft,
+      subjectPath,
+      ...(members ? { insert: { members, specs: BLOCK_KNOBS } } : {}),
+    })
+
+  const render = (subjectPath: string, members: readonly string[] | undefined) =>
+    renderToStaticMarkup(
+      <KnobMenu
+        model={model(subjectPath, members)}
+        onPick={() => {}}
+        onAction={() => {}}
+        onItemAction={() => {}}
+      />,
+    )
+
+  const hero = () => render('sections[_key=="h"]', BLOCK_ARRAYS['page.sections'])
+
+  it('offers every section block the page array accepts, above and below', () => {
+    const html = hero()
+    expect(html).toContain('>Add above</div>')
+    expect(html).toContain('>Add below</div>')
+
+    // Derived, not listed: one row per registered section block, per position.
+    // The four beside them are what this hero already had — duplicate, remove,
+    // and the two moves a first-of-two section can make.
+    const rows = html.match(/data-testid="canvas-menu-item-action"/g) ?? []
+    expect(rows).toHaveLength(SECTION_BLOCKS.length * 2 + 4)
+  })
+
+  it('names each row with the block’s own title, not its type', () => {
+    const html = hero()
+    for (const type of SECTION_BLOCKS) {
+      expect(html, type).toContain(`>${BLOCK_KNOBS[type]!.title}</button>`)
+    }
+    expect(html).not.toContain('heroSection<')
+  })
+
+  it('offers nothing in an array the site declared nothing for', () => {
+    // `railPanelsSection.panels` holds panels, not blocks — there is no entry
+    // for it, so the menu says so by having no rows rather than by guessing.
+    const html = render('sections[_key=="h"]', undefined)
+    expect(html).not.toContain('Add above')
+  })
+
+  it('keeps the jump last, after the insert rows as well', () => {
+    const html = hero()
+    expect(html.lastIndexOf('data-testid="canvas-menu-item-action"')).toBeLessThan(
+      html.indexOf('data-testid="canvas-menu-action"'),
+    )
+  })
+
+  it('inserts a real block with placeholder content, not an empty shell', () => {
+    // The definition of done, asserted on the patch the row carries: adding a
+    // section above the hero writes a `quoteSection` with the quote its
+    // declaration says a new one starts with, and the surface its knob says.
+    const groups = model('sections[_key=="h"]', BLOCK_ARRAYS['page.sections']).insertActions
+    const above = groups.find((group) => group.id === 'insert-before')!
+    const quote = above.actions.find((action) => action.id === 'insert-before-quoteSection')!
+    const op = quote.patches[0]!.op as { position: string; items: Record<string, unknown>[] }
+
+    expect(quote.patches[0]!.path).toEqual(['sections'])
+    expect(op.position).toBe('before')
+    expect(op.items[0]).toMatchObject({
+      ...BLOCK_KNOBS.quoteSection!.placeholder!,
+      surface: 'bone',
+    })
+    expect(op.items[0]!._key).toMatch(/^[0-9a-f]{12}$/)
   })
 })

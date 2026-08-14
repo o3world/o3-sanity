@@ -251,15 +251,29 @@ describe('defineSectionBlock knob placement', () => {
   })
 
   /**
-   * The migration state ADR 0020 accepts: fifteen blocks still say
-   * `defaultSurface`, and their `surface` field has to come out of the same
-   * generator as the converted block's.
+   * A one-knob block is an ordinary block. Six bands declare nothing but
+   * `surface` (#120), and their field has to come out of the same generator as
+   * a five-knob block's — which it does, because the shorthand that used to
+   * build this spec from a `defaultSurface` string is gone and there is only
+   * one path left.
    */
-  it('builds a surface-only spec for a block that has not been converted', () => {
+  it('generates the surface field for a block whose whole roster is surface', () => {
     const block = defineSectionBlock({
       name: 'quoteSection',
       title: 'Quote',
-      defaultSurface: 'bone',
+      knobs: defineBlockKnobs({
+        type: 'quoteSection',
+        title: 'Quote',
+        tier: 'section',
+        knobs: [
+          knob({
+            name: 'surface',
+            title: 'Surface',
+            options: ['white', 'bone'],
+            initialValue: 'bone',
+          }),
+        ],
+      }),
       fields: [defineField({ name: 'quote', type: 'text' })],
     })
     const fields = readFields(block)
