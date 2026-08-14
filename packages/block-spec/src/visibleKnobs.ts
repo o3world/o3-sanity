@@ -1,6 +1,6 @@
 import { resolveKnobValue } from './resolveKnobValue'
 import { showWhenSatisfied } from './showWhen'
-import type { BlockKnobs, Knob, KnobReader, KnobSurface, ResolvedKnob } from './types'
+import type { Knob, KnobReader, KnobRoot, KnobSurface, ResolvedKnob } from './types'
 
 /**
  * The knobs a knob at `name` inherits its gate from: every knob in the spec
@@ -22,7 +22,12 @@ const EMPTY_BY_SURFACE = (): Record<KnobSurface, ResolvedKnob[]> => ({
 })
 
 /**
- * THE ONE QUESTION: what does this block offer, under this document state?
+ * THE ONE QUESTION: what does this ROOT offer, under this document state?
+ *
+ * The root is a block, or one member of a block's arrays (#122). Nothing below
+ * asks which: every path is relative to the root it was handed, so an item's
+ * knobs resolve against one named member with no array vocabulary anywhere in
+ * the walk.
  *
  * Every gate lives behind this call — the nesting gate, inherited gates,
  * `showWhen`, option resolution, default resolution and surface ownership —
@@ -47,7 +52,7 @@ export function visibleKnobs({
   read,
   nested = false,
 }: {
-  spec: BlockKnobs
+  spec: KnobRoot
   read: KnobReader
   nested?: boolean
 }): { all: ResolvedKnob[]; bySurface: Record<KnobSurface, ResolvedKnob[]> } {
