@@ -115,7 +115,7 @@ Closed vocabulary. If the field you want isn't here and isn't obviously domain-s
 | `media`           | A `figure` on a block                                            | `image` — that's the raw asset field inside `figure` |
 | `heroMedia`       | A document's lead `figure`                                       | `featuredImage`, `banner`                            |
 | `cta`             | A single call to action (type `cta`)                             | `link`, `button`, `action`                           |
-| `orb`             | An animated thought orb (type `orb`)                             | `animation`, `indicator`, `spinner`                  |
+| `mark`            | The dotted circle beside an item (type `mark`)                   | `icon`, `disc`, `orb` — `orb` is one of its `kind`s  |
 | `date`            | When a leaf object's thing happens (the Live MON / DD marker)    | `publishedAt` — that's a document's publication time |
 | `name`            | A person's or organization's real-world name                     | Anything that isn't a proper noun                    |
 | `surface`         | `white \| bone \| ink` — injected by `defineSectionBlock`        | Never hand-author it                                 |

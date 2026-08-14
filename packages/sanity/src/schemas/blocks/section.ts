@@ -162,7 +162,13 @@ export const railPanelsSection = defineSectionBlock({
             defineField({
               name: 'media',
               type: 'figure',
-              description: 'Rail layout only. A card draws a halftone disc instead.',
+              description: 'Rail layout only. A card draws its mark instead.',
+            }),
+            defineField({
+              name: 'mark',
+              type: 'mark',
+              description:
+                'Cards layout only — the circle the frame centres on the card. An orb unless set to disc.',
             }),
           ],
           preview: { select: { title: 'railLabel' } },
@@ -268,10 +274,10 @@ export const disciplineGridSection = defineSectionBlock({
             defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
             defineField({ name: 'body', type: 'text', rows: 3 }),
             defineField({
-              name: 'orb',
-              type: 'orb',
+              name: 'mark',
+              type: 'mark',
               description:
-                'Optional — an animated orb in place of the halftone disc this row otherwise draws. Grid layout only; the orbital diagram places its own nodes.',
+                'The dotted circle beside the row — an orb unless set to disc. Grid layout only; the orbital diagram places its own nodes.',
             }),
           ],
           preview: { select: { title: 'heading', subtitle: 'body' } },
@@ -337,6 +343,11 @@ export const roleListSection = defineSectionBlock({
               description: 'The row’s small label — the frame reads "REMOTE · PHILADELPHIA".',
             }),
             defineField({ name: 'cta', type: 'cta', description: 'The row’s Apply button.' }),
+            defineField({
+              name: 'mark',
+              type: 'mark',
+              description: 'The circle at the head of the row — an orb unless set to disc.',
+            }),
           ],
           preview: { select: { title: 'heading', subtitle: 'eyebrow' } },
         }),
@@ -406,13 +417,19 @@ export const inFlightSection = defineSectionBlock({
               name: 'date',
               type: 'date',
               description:
-                'When it happens — the rows layout draws it as the red MON / DD marker. Leave empty and the row leads with the halftone disc instead.',
+                'When it happens — the rows layout draws it as the red MON / DD marker. Leave empty and the row leads with its mark instead.',
             }),
             defineField({
               name: 'cta',
               type: 'cta',
               description:
                 'Where the row goes. The label is never drawn — it names the arrow control for a screen reader.',
+            }),
+            defineField({
+              name: 'mark',
+              type: 'mark',
+              description:
+                'The circle a dateless row leads with — an orb unless set to disc. A row with a date draws the date marker instead.',
             }),
           ],
           preview: { select: { title: 'heading', subtitle: 'eyebrow', media: 'media.image' } },
@@ -523,7 +540,9 @@ export const layoutSection = defineSectionBlock({
         defineArrayMember({ type: 'embed' }),
         defineArrayMember({ type: 'cta' }),
         defineArrayMember({ type: 'statGroup' }),
-        defineArrayMember({ type: 'orb' }),
+        // Titled "Orb" here: on its own in a column the mark is the animation
+        // an editor came for, not the disc beside a row.
+        defineArrayMember({ type: 'mark', title: 'Orb' }),
       ],
       validation: (rule) => rule.required().min(1),
     }),

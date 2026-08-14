@@ -65,7 +65,15 @@
           "railLabel": "Embedded",
           "heading": "Embedded Team Member",
           "body": "Senior hands, inside your team.",
-          "note": "Best when you trust the direction and need the horsepower."
+          "note": "Best when you trust the direction and need the horsepower.",
+          "mark": {
+            "_type": "mark",
+            "kind": "orb",
+            "state": "connecting",
+            "size": 64,
+            "speed": 1,
+            "paused": false
+          }
         },
         {
           "_type": "panel",
@@ -73,7 +81,15 @@
           "railLabel": "Product Squad",
           "heading": "Product Squad",
           "body": "A cross-functional pod that takes a problem and runs.",
-          "note": "Best when you need momentum and a team that owns delivery."
+          "note": "Best when you need momentum and a team that owns delivery.",
+          "mark": {
+            "_type": "mark",
+            "kind": "orb",
+            "state": "weaving",
+            "size": 64,
+            "speed": 1,
+            "paused": false
+          }
         },
         {
           "_type": "panel",
@@ -81,7 +97,15 @@
           "railLabel": "Full Ownership",
           "heading": "Full Ownership",
           "body": "Hand us the outcome, not the tasks.",
-          "note": "Best when a single point of accountability is worth more than a seat at every standup."
+          "note": "Best when a single point of accountability is worth more than a seat at every standup.",
+          "mark": {
+            "_type": "mark",
+            "kind": "orb",
+            "state": "solving",
+            "size": 64,
+            "speed": 1,
+            "paused": false
+          }
         }
       ]
     },

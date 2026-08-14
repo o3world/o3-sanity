@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import { stegaClean } from '@sanity/client/stega'
 
-import { ArrowIcon, DisplayHeading, Eyebrow, HalftoneDisc, SectionShell } from '@o3/ui'
+import { ArrowIcon, DisplayHeading, Eyebrow, SectionShell } from '@o3/ui'
 
+import { Mark, markProps } from '@/content/blocks/base/mark/Mark'
 import { SanityImage } from '@/content/SanityImage'
 import { resolveCtaHref } from '@/content/CtaLink'
 import { resolveSurface } from '@/content/blocks/surface'
@@ -64,6 +65,7 @@ export function InFlightSection({
 }: InFlightSectionProps) {
   const items = entries ?? []
   const asRows = stegaClean(layout) === 'rows'
+  const onInk = resolveSurface(surface, 'white') === 'ink'
 
   if (asRows) {
     return (
@@ -72,7 +74,7 @@ export function InFlightSection({
           <Header heading={heading} subheading={subheading} loc={loc} />
           <ul className="flex flex-col">
             {items.map((entry) => (
-              <EntryRow key={entry._key} entry={entry} />
+              <EntryRow key={entry._key} entry={entry} onInk={onInk} />
             ))}
           </ul>
         </div>
@@ -173,7 +175,7 @@ function EntryCard({ entry }: { entry: Entry }) {
   )
 }
 
-function EntryRow({ entry }: { entry: Entry }) {
+function EntryRow({ entry, onInk }: { entry: Entry; onInk: boolean }) {
   const href = entry.cta ? resolveCtaHref(entry.cta) : null
   // `aria-label` is the one place a stega'd string is NOT invisible: the
   // encoding rides in the attribute value, so a screen reader announces the
@@ -205,10 +207,9 @@ function EntryRow({ entry }: { entry: Entry }) {
             />
           </>
         ) : (
-          // The 113px halftone (`1899:4245`) — byte-for-byte the disc the
-          // About careers band already draws, so it is the same component at
-          // a different diameter, not a second graphic.
-          <HalftoneDisc className="hidden w-[113px] lg:block" />
+          // The 113px slot (`1899:4245`) — the same mark the About careers
+          // band draws at a different diameter, not a second graphic.
+          <Mark {...markProps(entry.mark)} onInk={onInk} className="hidden w-[113px] lg:block" />
         )}
         <div className="flex flex-col justify-center gap-2">
           {entry.eyebrow ? (

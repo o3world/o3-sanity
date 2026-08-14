@@ -1,14 +1,7 @@
-import {
-  DisplayHeading,
-  HalftoneDisc,
-  OrbitalDiagram,
-  SectionShell,
-  ThinkingOrb,
-  type OrbSize,
-  type OrbState,
-} from '@o3/ui'
+import { DisplayHeading, OrbitalDiagram, SectionShell } from '@o3/ui'
 import { stegaClean } from '@sanity/client/stega'
 
+import { Mark, markProps } from '@/content/blocks/base/mark/Mark'
 import { resolveSurface } from '@/content/blocks/surface'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
 
@@ -37,11 +30,10 @@ type DisciplineGridSectionProps = SectionProps<'disciplineGridSection'>
  * passed. Two block types would have made "add a discipline" a question about
  * which page you were on.
  *
- * **The disc is a default, not a fixture.** A discipline carrying an `orb`
- * draws the animated `thinking-orbs` canvas at the disc's diameter instead —
- * per row, so a band can mix them. It applies to the `grid` composition only:
- * the orbital diagram draws its own nodes into one 1120×1172 canvas and has
- * no slot to swap.
+ * **The mark is per discipline** (`Mark`): the animated orb by default, the
+ * frame's halftone disc when a row asks for it, so a band can mix them. It
+ * applies to the `grid` composition only — the orbital diagram draws its own
+ * nodes into one 1120×1172 canvas and has no slot to swap.
  *
  * The orbital composition is `lg` and up. 1120px of absolutely-positioned copy
  * has no honest 402 form and no 402 frame to copy, so below `lg` it falls back
@@ -76,30 +68,14 @@ export function DisciplineGridSection({
     <div className="grid gap-x-8 gap-y-4 md:grid-cols-2">
       {items.map((discipline) => (
         <div key={discipline._key} className="flex items-center gap-8 py-8 lg:px-8 lg:py-12">
-          {discipline.orb ? (
-            /* The orb fills the disc's well — 80px, 138px from `lg` — rather
-               than sitting at its preset size inside it. `fill` paints the
-               engine at the measured diameter, so the mark carries the same
-               weight the halftone disc it replaces does. Theme is pinned from
-               the band's surface: `auto` would read the OS, and this page is
-               light whatever the visitor's is. */
-            <ThinkingOrb
-              state={stegaClean(discipline.orb.state) as OrbState | undefined}
-              size={stegaClean(discipline.orb.size) as OrbSize | undefined}
-              speed={stegaClean(discipline.orb.speed)}
-              paused={stegaClean(discipline.orb.paused)}
-              theme={onInk ? 'dark' : 'light'}
-              fill
-              className="lg:w-34.5 aspect-square w-20"
-            />
-          ) : (
-            /* 138px on the frame, at the ink the frame draws it in (#0A0A0A —
-               `text-ink`, not the band's #232323 body colour). The ink surface
-               has no frame for this layout; white is the only honest inversion. */
-            <HalftoneDisc
-              className={onInk ? 'lg:w-34.5 w-20 text-white' : 'text-ink lg:w-34.5 w-20'}
-            />
-          )}
+          {/* 138px on the frame. A disc here draws at the ink the frame
+                  uses (#0A0A0A — `text-ink`, not the band's #232323 body
+                  colour); on ink, white is the only honest inversion. */}
+          <Mark
+            {...markProps(discipline.mark)}
+            onInk={onInk}
+            className={onInk ? 'lg:w-34.5 w-20 text-white' : 'text-ink lg:w-34.5 w-20'}
+          />
           <div className="flex flex-col justify-center gap-2">
             {discipline.heading ? (
               <DisplayHeading as={disciplineTag} level="lg" className="tracking-[-0.0222em]">

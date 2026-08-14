@@ -14,7 +14,9 @@
       "surface": "ink",
       "variant": "band",
       "eyebrow": "Live",
-      "headlineLines": ["What we’re working on."],
+      "headlineLines": [
+        "What we’re working on."
+      ],
       "subheading": "The problems in front of us right now — the work in the studio, the rooms we'll be in, and the ideas we're chasing before they reach you.",
       "decoration": "none"
     },
@@ -110,6 +112,14 @@
             "label": "Read the thinking",
             "href": "/insights",
             "variant": "dark"
+          },
+          "mark": {
+            "_type": "mark",
+            "kind": "orb",
+            "state": "searching",
+            "size": 64,
+            "speed": 1,
+            "paused": false
           }
         }
       ]

@@ -1,5 +1,6 @@
-import { DisplayHeading, Eyebrow, HalftoneDisc, SectionShell } from '@o3/ui'
+import { DisplayHeading, Eyebrow, SectionShell } from '@o3/ui'
 
+import { Mark, markProps } from '@/content/blocks/base/mark/Mark'
 import { CtaLink } from '@/content/CtaLink'
 import { resolveSurface } from '@/content/blocks/surface'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
@@ -36,6 +37,7 @@ type RoleListSectionProps = SectionProps<'roleListSection'>
  */
 export function RoleListSection({ eyebrow, heading, roles, surface, loc }: RoleListSectionProps) {
   const items = roles ?? []
+  const onInk = resolveSurface(surface, 'white') === 'ink'
 
   return (
     <SectionShell surface={resolveSurface(surface, 'white')} top="md" bottom="md">
@@ -54,7 +56,7 @@ export function RoleListSection({ eyebrow, heading, roles, surface, loc }: RoleL
               className="flex flex-col gap-6 border-b border-[rgba(0,0,0,0.55)] pb-8 pt-8 first:pt-0 sm:flex-row sm:items-center sm:justify-between lg:gap-8 lg:pb-12 lg:pt-12 lg:first:pt-0"
             >
               <div className="flex items-center gap-8">
-                <HalftoneDisc className="w-17.5" />
+                <Mark {...markProps(role.mark)} onInk={onInk} className="w-17.5" />
                 <div className="flex flex-col justify-center gap-2">
                   {role.eyebrow ? (
                     // 16px/0.1em bold at 60% ink — `--text-eyebrow` in

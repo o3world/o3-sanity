@@ -138,6 +138,7 @@ export function RailPanelsSection({
               heading: panel.heading ?? panel.railLabel,
               body: panel.body,
               note: panel.note,
+              mark: panel.mark,
               // The card IS the panel, so it carries the panel's own path —
               // the same one the `<article>` in the band layout carries.
               dataSanity: itemAttr(loc, 'panels', panel._key),

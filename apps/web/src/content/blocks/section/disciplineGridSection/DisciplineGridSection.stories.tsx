@@ -24,10 +24,10 @@ import { DisciplineGridSection } from './DisciplineGridSection'
  * under the band's `h2`, and an `h2` when the band carries no heading — which
  * the Solutions frame does not. `NoHeading` is that case.
  *
- * **The mark is per discipline.** A row carrying an `orb` draws the animated
- * canvas; a row without one draws the frame's halftone disc. `/about` seeds
- * orbs, so `Grid` is the orb arm and `GridDiscs` is the disc arm — both ship,
- * and a band can mix them.
+ * **The mark is per discipline.** Each row's `mark` draws the animated orb —
+ * the default, including when the field is empty — or the frame's halftone
+ * disc when an editor picks it. `Grid` is the orb arm and `GridDiscs` is the
+ * disc arm; both ship, and a band can mix them.
  */
 const meta = {
   title: 'Content/Blocks/Section/DisciplineGridSection',
@@ -43,10 +43,13 @@ type Story = StoryObj<typeof meta>
 
 type Args = Parameters<typeof DisciplineGridSection>[0]
 
-/** The seeded band with every discipline's orb removed, so it draws discs. */
-const withoutOrbs = (args: Args): Args => ({
+/** The seeded band with every discipline's mark set to the disc. */
+const asDiscs = (args: Args): Args => ({
   ...args,
-  disciplines: args.disciplines?.map((discipline) => ({ ...discipline, orb: undefined })),
+  disciplines: args.disciplines?.map((discipline) => ({
+    ...discipline,
+    mark: { ...discipline.mark, _type: 'mark' as const, kind: 'disc' as const },
+  })),
 })
 
 /** `/about` — the grid, with the band's own heading above it. */
@@ -54,9 +57,9 @@ export const Grid: Story = {
   args: seededSectionArgs('about', 'disciplineGridSection'),
 }
 
-/** The same band with the orbs taken off: the frame's halftone discs. */
+/** The same band with every mark set to disc: the frame's original. */
 export const GridDiscs: Story = {
-  args: withoutOrbs(seededSectionArgs('about', 'disciplineGridSection')),
+  args: asDiscs(seededSectionArgs('about', 'disciplineGridSection')),
 }
 
 /** `/solutions` — the dotted tetrahedron, at `lg` and up. */

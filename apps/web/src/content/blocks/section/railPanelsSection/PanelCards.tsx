@@ -1,10 +1,12 @@
-import { HalftoneDisc } from '@o3/ui'
+import { Mark, markProps, type MarkProps } from '@/content/blocks/base/mark/Mark'
 
 interface PanelCard {
   key: string
   heading?: string | null
   body?: string | null
   note?: string | null
+  /** The circle the frame centres on the card — an orb unless set to disc. */
+  mark?: MarkProps | null
   /**
    * The panel's `data-sanity`, built by the section (#107). A pre-built
    * string rather than a location, so this presentational subcomponent stays
@@ -21,7 +23,7 @@ interface PanelCard {
  * row  gap 39                       three cards, 394.67 × 526.23, #030303
  *   card  6 × 8 grid, content in cols 2–5 / rows 2–7  →  a flat 65.78 inset
  *     top     stack, gap 8    28/500 −0.0286em heading  |  18/1.2 line
- *     middle  halftone disc, 132                        (centred)
+ *     middle  mark, 132                                 (centred)
  *     bottom  20/1.2 "Best when…" line
  * ```
  *
@@ -32,7 +34,7 @@ interface PanelCard {
  * and nothing here references a `caseStudy`. So this is a local composition,
  * not a shared card component.
  *
- * The inset is one number at 1440 and the disc is fixed, so the only thing
+ * The inset is one number at 1440 and the mark is fixed, so the only thing
  * that scales below `lg` is the padding — Solutions has **no 402 frame** (the
  * "Solutions section" at `1924:4768` is a generation-1 capture, 1920/390), so
  * the stack below `lg` is a renderer decision under ADR 0006 rather than a
@@ -58,8 +60,9 @@ export function PanelCards({ items }: { items: PanelCard[] }) {
             {item.body ? <p className="text-[18px] leading-[1.2]">{item.body}</p> : null}
           </div>
 
-          {/* 132px, and the one element on the card the frame centres. */}
-          <HalftoneDisc className="w-[132px] text-white" />
+          {/* 132px, and the one element on the card the frame centres. The
+              card is always ink, so the mark is always on ink. */}
+          <Mark {...markProps(item.mark)} onInk className="w-[132px]" />
 
           {item.note ? (
             // 20/1.2 — `text-body` reaches 20 at 1440; the frame's line-height

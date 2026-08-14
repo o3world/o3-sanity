@@ -213,7 +213,7 @@ export type LayoutSection = {
       } & StatGroup)
     | ({
         _key: string
-      } & Orb)
+      } & Mark)
   >
   surface?: 'white' | 'bone' | 'ink'
 }
@@ -240,6 +240,7 @@ export type InFlightSection = {
     media?: Figure
     date?: string
     cta?: Cta
+    mark?: Mark
     _type: 'entry'
     _key: string
   }>
@@ -254,6 +255,7 @@ export type RoleListSection = {
     heading?: string
     eyebrow?: string
     cta?: Cta
+    mark?: Mark
     _type: 'role'
     _key: string
   }>
@@ -286,7 +288,7 @@ export type DisciplineGridSection = {
   disciplines?: Array<{
     heading?: string
     body?: string
-    orb?: Orb
+    mark?: Mark
     _type: 'discipline'
     _key: string
   }>
@@ -354,6 +356,7 @@ export type RailPanelsSection = {
     note?: string
     cta?: Cta
     media?: Figure
+    mark?: Mark
     _type: 'panel'
     _key: string
   }>
@@ -418,8 +421,9 @@ export type RichText = {
   body?: BodyText
 }
 
-export type Orb = {
-  _type: 'orb'
+export type Mark = {
+  _type: 'mark'
+  kind?: 'orb' | 'disc'
   state?:
     | 'working'
     | 'searching'
@@ -875,7 +879,7 @@ export type AllSanitySchemaTypes =
   | HeroSection
   | StatGroup
   | RichText
-  | Orb
+  | Mark
   | Chapter
   | BodyText
   | PullQuote
@@ -1370,7 +1374,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         disciplines?: Array<{
           heading?: string
           body?: string
-          orb?: Orb
+          mark?: Mark
           _type: 'discipline'
           _key: string
         }>
@@ -1454,6 +1458,7 @@ export type CASE_STUDY_QUERY_RESULT = {
             href?: string
             variant?: 'dark' | 'ghost' | 'light'
           } | null
+          mark?: Mark
           _type: 'entry'
           _key: string
         }> | null
@@ -1574,7 +1579,8 @@ export type CASE_STUDY_QUERY_RESULT = {
             }
           | {
               _key: string
-              _type: 'orb'
+              _type: 'mark'
+              kind?: 'disc' | 'orb'
               state?:
                 | 'breathing'
                 | 'composing'
@@ -1745,6 +1751,7 @@ export type CASE_STUDY_QUERY_RESULT = {
             variant?: 'dark' | 'ghost' | 'light'
           } | null
           media?: Figure
+          mark?: Mark
           _type: 'panel'
           _key: string
         }> | null
@@ -1781,6 +1788,7 @@ export type CASE_STUDY_QUERY_RESULT = {
             href?: string
             variant?: 'dark' | 'ghost' | 'light'
           } | null
+          mark?: Mark
           _type: 'role'
           _key: string
         }> | null
@@ -1982,7 +1990,7 @@ export type PAGE_QUERY_RESULT = {
         disciplines?: Array<{
           heading?: string
           body?: string
-          orb?: Orb
+          mark?: Mark
           _type: 'discipline'
           _key: string
         }>
@@ -2066,6 +2074,7 @@ export type PAGE_QUERY_RESULT = {
             href?: string
             variant?: 'dark' | 'ghost' | 'light'
           } | null
+          mark?: Mark
           _type: 'entry'
           _key: string
         }> | null
@@ -2186,7 +2195,8 @@ export type PAGE_QUERY_RESULT = {
             }
           | {
               _key: string
-              _type: 'orb'
+              _type: 'mark'
+              kind?: 'disc' | 'orb'
               state?:
                 | 'breathing'
                 | 'composing'
@@ -2357,6 +2367,7 @@ export type PAGE_QUERY_RESULT = {
             variant?: 'dark' | 'ghost' | 'light'
           } | null
           media?: Figure
+          mark?: Mark
           _type: 'panel'
           _key: string
         }> | null
@@ -2393,6 +2404,7 @@ export type PAGE_QUERY_RESULT = {
             href?: string
             variant?: 'dark' | 'ghost' | 'light'
           } | null
+          mark?: Mark
           _type: 'role'
           _key: string
         }> | null

@@ -65,6 +65,13 @@ export const SURFACES = ['white', 'bone', 'ink'] as const
 export type Surface = (typeof SURFACES)[number]
 
 /**
+ * What a `mark` can draw: the animated orb, or the halftone disc the canonical
+ * frames draw. First value is the default, so a mark left alone animates.
+ */
+export const MARK_KINDS = ['orb', 'disc'] as const
+export type MarkKind = (typeof MARK_KINDS)[number]
+
+/**
  * The nine animations `thinking-orbs` ships (orbs.jakubantalik.com). Values
  * are the library's own state names, so the schema, the seed JSON and the
  * canvas all say the same word — a translation table here would be a third
