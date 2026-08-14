@@ -117,7 +117,12 @@ listeners() { # <comma-separated ports> -> "<port> <cwd>" lines
 cmd_ls() {
   local paths ports claimed live path branch state web sb dupes tilde='~'
 
-  paths="$(git worktree list --porcelain | awk '/^worktree /{print $2}')"
+  # `pnpm vr` keeps a detached checkout of the baseline commit at
+  # `<worktree>/.vr/base` so it can render the "before" side of a visual
+  # comparison. It is a machine artifact with no ports and nobody working in
+  # it — listing it would put a permanently-`clean`, permanently-`HEAD` row in
+  # front of every real worktree.
+  paths="$(git worktree list --porcelain | awk '/^worktree /{print $2}' | grep -v '/\.vr/base$')"
 
   # `ports` is everything to probe; `claimed` is only what a .env actually
   # reserves. Two unprovisioned worktrees both defaulting to 3000 is already
