@@ -205,7 +205,7 @@ Every component in the package, against the Figma library.
 | `Card`           | **Code-only**                                        | Canonical case-study cards are frames, not a component set                                                                                                                   |
 | `SectionShell`   | **Code-only**                                        | The three-surface organism; ADR 0008 — shadcn cannot model it                                                                                                                |
 | `ArrowIcon`      | **Has counterpart** — `.building block Icon_text`    | Glyph becomes a component, not a string prop (ADR 0009)                                                                                                                      |
-| `ArrowLink`      | **Code-only**                                        | No Figma equivalent; the frames use `Button / Ghost` for this job — **candidate for retirement in #42**                                                                      |
+| `ArrowLink`      | **Retired** in #55                                   | No Figma equivalent; the frames use `Button / Ghost` for this job, and #42 built every text CTA that way — so it ended with no call site and was deleted                     |
 | `Eyebrow`        | **Code-only**                                        | A type style, not a component. ⚠️ still defaults to `tone="brand"`; canonical eyebrows are neutral `#636363`                                                                 |
 | `DisplayHeading` | **Code-only**                                        | A type style                                                                                                                                                                 |
 | `HalftoneDisc`   | **Drawn, not a component set**                       | Added #56 from `1925:5922` / `1925:6068`. Both export as the SAME dot pattern — a halftone, not four icons                                                                   |
@@ -216,8 +216,10 @@ Every component in the package, against the Figma library.
 | `LogoTile`       | **Code-only** — superseded                           | ⚠️ Unused since #89: the partners plate is a 280 × 280 hairlined frame (`1864:2395`) that `LogoWallSection` draws inline. This 110px row is prototype-era — retire it in #38 |
 | `Stat`           | **Code-only**                                        | Case-study stats are drawn inline (`1883:3564`)                                                                                                                              |
 
-**Nothing is to-be-replaced.** `ArrowLink` is the one open question, and it
-belongs to the Home page layer (#42) rather than here.
+**Nothing is to-be-replaced.** `ArrowLink` was the one open question, and #55
+answered it: #42 reached for `Button variant="ghost"` at every text CTA the
+frames draw one at, which left `ArrowLink` with no call site outside its own
+stories. It is deleted rather than deprecated — nothing imported it.
 
 ## Not audited
 

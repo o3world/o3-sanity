@@ -136,7 +136,7 @@ Shape conventions: reference fields are singular for one (`client`, `author`), p
 Two conventions, split by whether the file is bound to a schema type:
 
 - **Schema-symmetric** — `apps/web/src/content/blocks/{base,section}/<schemaName>/<PascalName>.tsx`. Folder name === schema name, exactly; component name === PascalCase of it. A renderer that doesn't match its schema name is a lint error (`tools/check-schema-symmetry`).
-- **Generic presentational** — `packages/ui/src/components/<kebab-name>.tsx`, exporting a PascalCase component. These are design-system parts with no schema binding (`SectionShell`, `Eyebrow`, `ArrowLink`), so they take no schema name and use kebab-case files.
+- **Generic presentational** — `packages/ui/src/components/<kebab-name>.tsx`, exporting a PascalCase component. These are design-system parts with no schema binding (`SectionShell`, `Eyebrow`, `ArrowIcon`), so they take no schema name and use kebab-case files.
 
 ### Known drift
 

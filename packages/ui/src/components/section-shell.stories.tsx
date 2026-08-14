@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
-import { ArrowLink } from './arrow-link'
+import { ArrowIcon } from './arrow-icon'
 import { Button } from './ui/button'
 import { DisplayHeading } from './display-heading'
 import { Eyebrow } from './eyebrow'
@@ -25,7 +25,7 @@ function PlaceholderContent({ surface }: { surface: Surface }) {
   const onInk = surface === 'ink'
   return (
     <div className="flex flex-col items-start gap-7">
-      <Eyebrow tone={onInk ? 'tint' : 'brand'}>Our Partners</Eyebrow>
+      <Eyebrow tone={onInk ? 'inverse' : 'muted'}>Our Partners</Eyebrow>
       <DisplayHeading level="xl">
         We work with B2B and enterprise teams to reimagine experiences.
       </DisplayHeading>
@@ -40,9 +40,15 @@ function PlaceholderContent({ surface }: { surface: Surface }) {
         <Button variant={onInk ? 'light' : 'dark'} arrow>
           View our work
         </Button>
-        <ArrowLink href="#partners" tone={onInk ? 'tint' : 'default'}>
-          See all partners
-        </ArrowLink>
+        {/* The tertiary text CTA is `Button / Ghost` (264:260) — its label
+            follows the band, so it needs no per-surface tone. `asChild`
+            ignores the `arrow` prop, so the glyph goes inside the anchor. */}
+        <Button variant="ghost" asChild>
+          <a href="#partners">
+            See all partners
+            <ArrowIcon />
+          </a>
+        </Button>
       </div>
     </div>
   )

@@ -44,7 +44,6 @@ function walk(dir, acc = []) {
 const THEME_DERIVED = [
   // Surfaces — the five neutrals plus chrome.
   'bg-brand',
-  'bg-brand-tint',
   'bg-ink',
   'bg-ink-warm',
   'bg-ink-deep',
@@ -59,7 +58,6 @@ const THEME_DERIVED = [
   'text-fg-subtle',
   'text-fg-quiet',
   'text-brand',
-  'text-brand-tint',
   // Text on dark — white at an alpha.
   'text-on-ink',
   'text-on-ink-muted',

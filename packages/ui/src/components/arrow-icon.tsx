@@ -1,7 +1,7 @@
 import type { SVGProps } from 'react'
 
 export interface ArrowIconProps extends SVGProps<SVGSVGElement> {
-  /** Rendered width/height in px. The prototype uses 15 everywhere. */
+  /** Rendered width/height in px. The frames draw the glyph at 20. */
   size?: number
 }
 
@@ -9,8 +9,14 @@ export interface ArrowIconProps extends SVGProps<SVGSVGElement> {
  * The O3 arrow — a long shaft + chevron head, traced from the prototype's
  * inline SVG (every "View our work" / "Read the case" / "Let's talk" CTA).
  * Strokes with currentColor so it follows the surrounding text color.
+ *
+ * **20px by default** — `Button / Solid` (`1868:3262`) sets its trailing
+ * `arrow_forward` on a 20px box, recorded as `button.icon.size` in
+ * `foundations/figma-home-spec.ts`. The old 15 was the prototype's, and it
+ * survived the #42 realignment because that ticket moved the label and the
+ * fills and left the glyph alone (#55).
  */
-export function ArrowIcon({ size = 15, className, ...rest }: ArrowIconProps) {
+export function ArrowIcon({ size = 20, className, ...rest }: ArrowIconProps) {
   return (
     <svg
       width={size}

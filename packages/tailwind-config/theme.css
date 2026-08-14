@@ -49,9 +49,11 @@
  * would grow the token surface without giving any second call site a name to
  * reach for.
  *
- * Two tokens deliberately break the rule and are marked NO CANONICAL ANCHOR
- * in color.css (`brand-tint`, `line`/`line-soft`): they are prototype-era
- * values kept alive by existing call sites, pending #38.
+ * One token still breaks the rule and is marked NO CANONICAL ANCHOR in
+ * color.css (`line-soft`): a prototype-era value kept alive by existing call
+ * sites. `line` left that list when the logo plate gave it an anchor, and
+ * `brand-tint` left it in #55 by being retired — the frames never place a red
+ * accent on ink, and the component tones that reached for it went with it.
  *
  * Adding a token: put it in the file that owns its concern, never here.
  */
