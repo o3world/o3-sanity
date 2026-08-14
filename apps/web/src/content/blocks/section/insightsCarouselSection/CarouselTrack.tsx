@@ -6,6 +6,13 @@ import { CarouselControl } from '@o3/ui'
 
 export interface CarouselTrackProps {
   heading?: string | null
+  /**
+   * The band header's `data-sanity`, built by the section (#107). A
+   * pre-built string rather than a location: this shell is also used by the
+   * insight detail route's "Keep reading" band, which is markup rather than a
+   * block and therefore has no location at all.
+   */
+  headingAttr?: string
   /** Pre-rendered cards. Server components stay on the server; only the
       scrolling shell is client-side. */
   cards: readonly ReactNode[]
@@ -45,7 +52,7 @@ export interface CarouselTrackProps {
  * Controls disable at each end, and hide entirely when everything already
  * fits — a dead prev/next pair on a three-card row is worse than none.
  */
-export function CarouselTrack({ heading, cards }: CarouselTrackProps) {
+export function CarouselTrack({ heading, headingAttr, cards }: CarouselTrackProps) {
   const trackRef = useRef<HTMLUListElement>(null)
   const [atStart, setAtStart] = useState(true)
   const [atEnd, setAtEnd] = useState(true)
@@ -84,7 +91,10 @@ export function CarouselTrack({ heading, cards }: CarouselTrackProps) {
       {/* `2134:1179` / `2177:1428` — one row at 1440 with the buttons pushed
           to the far edge, stacked at 402 with the frame's 32px gap between
           subhead and buttons. 48px to the row either way. */}
-      <div className="mb-12 flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between">
+      <div
+        data-sanity={headingAttr}
+        className="mb-12 flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between"
+      >
         {heading ? (
           <h2 className="text-display-xl font-display text-balance">{heading}</h2>
         ) : (

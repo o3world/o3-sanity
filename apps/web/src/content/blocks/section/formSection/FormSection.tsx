@@ -2,6 +2,7 @@ import { DisplayHeading, Eyebrow, SectionShell } from '@o3/ui'
 
 import { resolveSurface } from '@/content/blocks/surface'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
+import { fieldAttr } from '@/sanity/dataAttribute'
 
 import { InquiryForm } from './InquiryForm'
 
@@ -42,6 +43,7 @@ export function FormSection({
   consentLabel,
   submitLabel,
   surface,
+  loc,
 }: FormSectionProps) {
   const resolved = resolveSurface(surface, 'bone')
 
@@ -49,7 +51,7 @@ export function FormSection({
     <SectionShell surface={resolved} top="sm" bottom="sm">
       <div className="max-w-160 flex flex-col gap-10 lg:gap-16">
         {eyebrow || heading || note ? (
-          <header className="flex flex-col gap-4">
+          <header data-sanity={fieldAttr(loc, 'heading')} className="flex flex-col gap-4">
             {eyebrow ? <Eyebrow size="lg">{eyebrow}</Eyebrow> : null}
             {heading ? <DisplayHeading>{heading}</DisplayHeading> : null}
             {note ? <p className="text-lead text-current/70">{note}</p> : null}

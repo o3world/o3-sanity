@@ -7,8 +7,10 @@ import { buildCatchAllRoute } from '@/lib/content-routes/build'
 import { CATCH_ALL_TYPES } from '@/content/documents'
 import {
   aSeededPage,
+  bandPaths,
   renderRoute,
   siteSettings,
+  subBlockPaths,
   unprefixedHorizontalScrollUtilities,
   variantsOf,
   withSettings,
@@ -54,7 +56,38 @@ describe('the seeded About page', () => {
   const sections = (aSeededPage('about').sections ?? []) as { _type: string }[]
 
   it('renders every section in the array — none silently dropped', () => {
-    expect(html.match(/data-sanity=/g) ?? []).toHaveLength(sections.length)
+    expect(bandPaths(html)).toHaveLength(sections.length)
+  })
+
+  /**
+   * Sub-block attribution (#107). The team band is the only place a
+   * **reference** array is attributed: the path is the array item's, not the
+   * person document's, because what an editor changes on a card is which
+   * person occupies the slot. `_key` survives the dereference only because
+   * `PAGE_QUERY` spreads the person into the item rather than replacing it.
+   */
+  it('attributes the team band’s header and one path per person slot', () => {
+    const team = sections.find((s) => s._type === 'personGridSection') as {
+      people?: { _key: string }[]
+    }
+    expect(subBlockPaths(html).filter((path) => path.startsWith('sections:team.'))).toEqual([
+      'sections:team.heading',
+      ...(team.people ?? []).map((person) => `sections:team.people:${person._key}`),
+    ])
+  })
+
+  /**
+   * `layoutSection.items` is deliberately unattributed (#115). It is the one
+   * polymorphic array at depth ≥ 2 in the repo, and the Presentation overlay
+   * cannot attach a component inside it at `sanity@6.8.0` — **silently**
+   * (#104: the resolver context comes back undefined and the resolver is
+   * never called, with no console warning). About carries three of them, so
+   * this is the page that proves nothing leaked in: a path under a column
+   * would look correct in the HTML and do nothing on the canvas.
+   */
+  it('attributes nothing inside a layoutSection column', () => {
+    expect(sections.filter((s) => s._type === 'layoutSection')).toHaveLength(3)
+    expect(subBlockPaths(html).filter((path) => path.includes('.items'))).toEqual([])
   })
 
   // The frame's band order (`1924:5344`): hero, Why O3, the disciplines grid,
@@ -133,7 +166,7 @@ describe('the seeded Solutions page', () => {
   const sections = (aSeededPage('solutions').sections ?? []) as { _type: string }[]
 
   it('renders every section in the array — none silently dropped', () => {
-    expect(html.match(/data-sanity=/g) ?? []).toHaveLength(sections.length)
+    expect(bandPaths(html)).toHaveLength(sections.length)
   })
 
   it('replaces the two-column approximation with the orbital diagram', () => {
@@ -208,7 +241,7 @@ describe('the seeded Live page', () => {
   const sections = (aSeededPage('live').sections ?? []) as { _type: string; layout?: string }[]
 
   it('renders every section in the array — none silently dropped', () => {
-    expect(html.match(/data-sanity=/g) ?? []).toHaveLength(sections.length)
+    expect(bandPaths(html)).toHaveLength(sections.length)
   })
 
   // The frame's band order (`1644:1889`): the ink-warm hero, the studio card
@@ -280,7 +313,7 @@ describe('the seeded Contact page', () => {
   const sections = (aSeededPage('contact').sections ?? []) as { _type: string }[]
 
   it('renders every section in the array — none silently dropped', () => {
-    expect(html.match(/data-sanity=/g) ?? []).toHaveLength(sections.length)
+    expect(bandPaths(html)).toHaveLength(sections.length)
   })
 
   // No frame authored this order — it is the seed's own: hero, the inquiry
@@ -414,7 +447,7 @@ describe('the seeded 1682 conference page', () => {
   }[]
 
   it('renders every section in the array — none silently dropped', () => {
-    expect(html.match(/data-sanity=/g) ?? []).toHaveLength(sections.length)
+    expect(bandPaths(html)).toHaveLength(sections.length)
   })
 
   // WordPress's module order, carried: header, intro + mark + attend CTA, the

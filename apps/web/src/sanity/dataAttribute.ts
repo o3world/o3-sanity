@@ -23,6 +23,17 @@ function assertSafeKey(key: string): void {
   }
 }
 
+// The same argument one segment up. Field names are literals at every call
+// site today, but they are `string` parameters and the cost of saying so is
+// four lines.
+const SAFE_FIELD = /^[A-Za-z_][A-Za-z0-9_]*$/
+
+function assertSafeField(field: string): void {
+  if (!SAFE_FIELD.test(field)) {
+    throw new Error(`Unsafe field for data-sanity path: ${JSON.stringify(field)}`)
+  }
+}
+
 // The embedded Studio lives at `/studio`; `createDataAttribute` defaults
 // `baseUrl` to `/`, which would 404 Presentation's "Open in Studio" links.
 const STUDIO_BASE_URL = '/studio'
@@ -31,19 +42,64 @@ export function dataAttr(loc: SanityLoc): string {
   return createDataAttribute({ baseUrl: STUDIO_BASE_URL, ...loc }).toString()
 }
 
-// Build a location for an item inside a top-level document array, e.g.
-// `sections[_key=="abc"]` under a page document.
-export function rootArrayItemLoc(
-  doc: { id: string; type: string },
-  arrayField: string,
-  key: string,
-): SanityLoc {
+/**
+ * A document reference the builders below hang a path off. A `SanityLoc`
+ * satisfies it structurally, which is what lets a location compose: pass the
+ * parent location as the document and its own `path` as the parent path.
+ */
+type DocRef = { id: string; type: string }
+
+/**
+ * Build a location for a named field under `parentPath` — `''` for a field on
+ * the document itself, a block's own path for a field on that block.
+ *
+ * Paths are built by **composition** and never by inspecting a segment name.
+ * That is the whole answer to the trap vtx-web's overlay resolver hit: a
+ * portable-text field is also called `content`, so a path can carry several
+ * prefixes that look like block roots without being one. A builder that only
+ * ever appends cannot get that wrong, and `layoutSection` — which nests blocks
+ * inside blocks — needs it to stay that way.
+ */
+export function fieldLoc(doc: DocRef, parentPath: string, field: string): SanityLoc {
+  assertSafeField(field)
+  return { id: doc.id, type: doc.type, path: parentPath ? `${parentPath}.${field}` : field }
+}
+
+/**
+ * Build a location for a keyed item in the array at `arrayPath` — the array's
+ * full path, so this composes at any depth (`sections[_key=="a"].panels`).
+ */
+export function arrayItemLoc(doc: DocRef, arrayPath: string, key: string): SanityLoc {
   assertSafeKey(key)
-  return { id: doc.id, type: doc.type, path: `${arrayField}[_key=="${key}"]` }
+  return { id: doc.id, type: doc.type, path: `${arrayPath}[_key=="${key}"]` }
 }
 
 // Build a location for a named top-level field, e.g. the page's `sections`
 // array itself (the container element Presentation treats as reorderable).
-export function rootFieldLoc(doc: { id: string; type: string }, field: string): SanityLoc {
-  return { id: doc.id, type: doc.type, path: field }
+export function rootFieldLoc(doc: DocRef, field: string): SanityLoc {
+  return fieldLoc(doc, '', field)
+}
+
+/**
+ * The two block-facing builders: the `data-sanity` value for a field or a
+ * keyed array item **under a block's own location**, or `undefined` when
+ * there is no location to build from.
+ *
+ * A block renders in three places — a document view, a Storybook story, a
+ * render test — and only the first has a document behind it. Tolerating an
+ * absent `loc` here is what keeps that guard out of every call site; React
+ * drops an attribute whose value is `undefined`.
+ */
+export function fieldAttr(loc: SanityLoc | undefined, field: string): string | undefined {
+  return loc ? dataAttr(fieldLoc(loc, loc.path, field)) : undefined
+}
+
+export function itemAttr(
+  loc: SanityLoc | undefined,
+  arrayField: string,
+  key: string | undefined,
+): string | undefined {
+  if (!loc || !key) return undefined
+  const array = fieldLoc(loc, loc.path, arrayField)
+  return dataAttr(arrayItemLoc(array, array.path, key))
 }

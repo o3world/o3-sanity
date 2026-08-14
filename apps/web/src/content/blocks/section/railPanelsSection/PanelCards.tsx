@@ -5,6 +5,12 @@ interface PanelCard {
   heading?: string | null
   body?: string | null
   note?: string | null
+  /**
+   * The panel's `data-sanity`, built by the section (#107). A pre-built
+   * string rather than a location, so this presentational subcomponent stays
+   * free of anything Sanity — it is handed one attribute value and stamps it.
+   */
+  dataSanity?: string
 }
 
 /**
@@ -38,6 +44,7 @@ export function PanelCards({ items }: { items: PanelCard[] }) {
       {items.map((item) => (
         <article
           key={item.key}
+          data-sanity={item.dataSanity}
           className="bg-ink-deep flex flex-col items-center justify-between gap-10 p-8 text-white lg:aspect-[394.67/526.23] lg:gap-0 lg:p-[66px]"
         >
           <div className="flex w-full flex-col gap-2">

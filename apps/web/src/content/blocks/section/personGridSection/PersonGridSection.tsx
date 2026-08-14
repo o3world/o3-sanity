@@ -3,6 +3,7 @@ import { DisplayHeading, Eyebrow, PortraitTile, SectionShell } from '@o3/ui'
 import { SanityImage } from '@/content/SanityImage'
 import { resolveSurface } from '@/content/blocks/surface'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
+import { fieldAttr, itemAttr } from '@/sanity/dataAttribute'
 
 type PersonGridSectionProps = SectionProps<'personGridSection'>
 
@@ -32,14 +33,20 @@ type PersonGridSectionProps = SectionProps<'personGridSection'>
  * is the one place this band reads a document field whose name the block
  * lexicon would otherwise reserve for a document's own name.
  */
-export function PersonGridSection({ eyebrow, heading, people, surface }: PersonGridSectionProps) {
+export function PersonGridSection({
+  eyebrow,
+  heading,
+  people,
+  surface,
+  loc,
+}: PersonGridSectionProps) {
   const members = people ?? []
 
   return (
     <SectionShell surface={resolveSurface(surface, 'white')} top="md" bottom="md">
       <div className="flex flex-col gap-10 lg:gap-12">
         {eyebrow || heading ? (
-          <header className="flex flex-col gap-2">
+          <header data-sanity={fieldAttr(loc, 'heading')} className="flex flex-col gap-2">
             {eyebrow ? <Eyebrow size="lg">{eyebrow}</Eyebrow> : null}
             {heading ? <DisplayHeading>{heading}</DisplayHeading> : null}
           </header>
@@ -47,7 +54,18 @@ export function PersonGridSection({ eyebrow, heading, people, surface }: PersonG
 
         <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {members.map((person) => (
-            <li key={person._id} className="flex flex-col gap-6">
+            <li
+              key={person._id}
+              /*
+               * The **reference's** path, not the person document's: what an
+               * editor changes on this card is which person occupies the slot,
+               * and the slot is a `sections[…].people[_key=="…"]` array item.
+               * Editing the person themselves is a different document, which
+               * is why the card does not point at one.
+               */
+              data-sanity={itemAttr(loc, 'people', person._key)}
+              className="flex flex-col gap-6"
+            >
               <PortraitTile>
                 {/*
                  * Empty alt, deliberately. The portrait carries nothing the
