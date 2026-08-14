@@ -22,4 +22,14 @@ export { CanvasToolbarView, type CanvasToolbarViewProps } from './CanvasToolbarV
 export { canvasSubject, type CanvasLevel, type CanvasSubject } from './subject'
 export { componentName, subjectName } from './identity'
 export { KnobControl, type KnobControlProps } from './KnobControl'
+export { KnobMenu, type KnobMenuProps } from './KnobMenu'
+export {
+  dismissesMenu,
+  knobMenuModel,
+  OPEN_FORM_ACTION,
+  type KnobMenuAction,
+  type KnobMenuGroup,
+  type KnobMenuModel,
+  type KnobMenuSubject,
+} from './menuModel'
 export { knobPatch } from './knobPatch'

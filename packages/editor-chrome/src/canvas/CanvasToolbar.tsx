@@ -7,10 +7,11 @@ import type { BlockKnobs, ResolvedKnob } from '@o3/block-spec'
 
 import { barKnobs, blockKnobReader } from './barKnobs'
 import { CanvasToolbarView } from './CanvasToolbarView'
-import { computeChipDock, dockToAnchor, findAttributedElement } from './dock'
+import { computeChipDock, computeMenuDock, dockToAnchor, findAttributedElement } from './dock'
 import { commitPatch, initialDraftSnapshot, tryGetDocument } from './draftPatch'
 import { componentName, subjectName } from './identity'
 import { resolveGroqPath } from './groqPath'
+import { knobMenuModel, type KnobMenuAction } from './menuModel'
 import { knobPatch } from './knobPatch'
 import type { CanvasLevel } from './subject'
 
@@ -155,7 +156,21 @@ function CanvasToolbarInner({
     typeof blockType === 'string' && Object.prototype.hasOwnProperty.call(blockKnobs, blockType)
       ? blockKnobs[blockType]
       : undefined
-  const knobs = spec ? barKnobs({ spec, read: blockKnobReader(snapshot, blockPath), nested }) : []
+  const read = blockKnobReader(snapshot, blockPath)
+  const knobs = spec ? barKnobs({ spec, read, nested }) : []
+
+  // WHAT THE RIGHT-CLICK MENU OFFERS (#110). The same walk as the bar's, kept
+  // whole instead of filtered to `knob.bar` — that filter is the entire
+  // difference between the two surfaces. The subject is the innermost keyed
+  // item under the cursor, which is the item when one encloses it and the block
+  // otherwise; `canvasSubject` already answered that as `itemPath`.
+  const menu = knobMenuModel({
+    spec,
+    read,
+    nested,
+    subject: itemPath ? { kind: 'item', title: subject } : { kind: 'block', title: component },
+    componentName: component,
+  })
 
   /**
    * A pick, committed to the draft.
@@ -180,6 +195,56 @@ function CanvasToolbarInner({
         console.error(`[canvas] could not set ${resolved.knob.name} on ${blockPath}`, error)
       },
     })
+  }
+
+  /**
+   * THE JUMP — "all options — open form", the menu's last row.
+   *
+   * A REAL CLICK ON THE HOVERED ELEMENT, and it has to be exactly that. The
+   * overlay controller's click handler is registered per element, fires only
+   * when that element is the top of the hover stack, and reads the Sanity node
+   * off the ELEMENT rather than off the event target — so a click anywhere else
+   * (on our own chrome, on a parent) reaches nothing. There is no exported
+   * hook, context or dispatch in `@sanity/visual-editing@5` that posts
+   * `visual-editing/focus` directly; relaying a synthetic `MouseEvent` to the
+   * element is the pattern Sanity's own bundled overlay component uses, so it
+   * is the sanctioned one rather than a workaround.
+   *
+   * It works as a plain click here only because the right-click was preempted:
+   * the hover stack the controller compares against is still intact. Without
+   * that, this would need the prior art's synthetic-mouseenter dance to put the
+   * element back on top of a stack the blur had just emptied.
+   */
+  const openForm = () => {
+    element.dispatchEvent(
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+        view: element.ownerDocument.defaultView,
+      }),
+    )
+  }
+
+  const runMenuAction = (action: KnobMenuAction) => {
+    if (action.id === 'open-form') openForm()
+  }
+
+  // The knob menu opens AT THE POINTER rather than at a docked corner — it is a
+  // context menu, and the cursor is already where the eye is. Flipped and
+  // clamped into the viewport by `computeMenuDock`, because a panel pushed
+  // outside the iframe is not clipped but unreachable: the pointer leaving the
+  // frame drops the overlay's hover and takes the menu with it.
+  const dockMenu = (el: HTMLDivElement | null, pointer: { x: number; y: number }) => {
+    const win = el?.ownerDocument.defaultView
+    if (!el || !win) return
+    const position = computeMenuDock({
+      pointer,
+      element: element.getBoundingClientRect(),
+      menu: { width: el.offsetWidth, height: el.offsetHeight },
+      viewport: { width: win.innerWidth, height: win.innerHeight },
+    })
+    el.style.left = `${position.left}px`
+    el.style.top = `${position.top}px`
   }
 
   // Dock the bar at the BAND's corner, imperatively through a callback ref —
@@ -236,8 +301,11 @@ function CanvasToolbarInner({
       subjectName={subject}
       knobs={knobs}
       onPickKnob={pickKnob}
+      menu={menu}
+      onMenuAction={runMenuAction}
       barRef={dockBar}
       chipRef={dockChip}
+      menuDock={dockMenu}
     />
   )
 }

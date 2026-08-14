@@ -5,10 +5,12 @@ import {
   attrPath,
   computeChipDock,
   computeDock,
+  computeMenuDock,
   DOCK_VIEWPORT_MARGIN,
   findAttributedElement,
   groqPathToAttr,
   STOCK_ACTION_GAP,
+  viewportShiftX,
   type DockStyleTarget,
   type RectLike,
 } from './dock'
@@ -248,5 +250,80 @@ describe('findAttributedElement', () => {
     const leaf = node(null, node(null))
     expect(findAttributedElement(leaf, 'sections[_key=="abc"]')).toBeNull()
     expect(findAttributedElement(null, 'sections[_key=="abc"]')).toBeNull()
+  })
+})
+
+describe('sliding an opened dropdown back inside the viewport', () => {
+  // #109 shipped a fixed right-alignment rule and flagged it: right for a bar
+  // docked at the band's right corner, wrong for a bar CLAMPED near the left
+  // edge, which opens its menu leftwards off the band. This is the measurement
+  // that has no such precondition.
+  it('leaves a panel already inside the viewport alone', () => {
+    expect(viewportShiftX({ left: 400, right: 620 }, 1200)).toBe(0)
+  })
+
+  it('pulls a panel back from the right edge by exactly the overhang', () => {
+    expect(viewportShiftX({ left: 1100, right: 1260 }, 1200)).toBe(
+      -(1260 - 1200 + DOCK_VIEWPORT_MARGIN),
+    )
+  })
+
+  it('pushes a panel back from the left edge', () => {
+    expect(viewportShiftX({ left: -30, right: 130 }, 1200)).toBe(30 + DOCK_VIEWPORT_MARGIN)
+  })
+
+  it('keeps the LEFT edge when a panel is wider than the viewport', () => {
+    // Both corrections apply; the one that survives is the edge where reading
+    // starts, so the first option is visible rather than the last.
+    const shift = viewportShiftX({ left: 0, right: 1400 }, 1200)
+    expect(0 + shift).toBe(DOCK_VIEWPORT_MARGIN)
+  })
+})
+
+describe('where the knob menu opens', () => {
+  const wrapper = rect({ top: 100, right: 900, bottom: 400, left: 200 })
+  const viewport = { width: 1200, height: 800 }
+  const menu = { width: 240, height: 300 }
+
+  it('opens at the pointer, as offsets from the overlay wrapper', () => {
+    expect(
+      computeMenuDock({ pointer: { x: 500, y: 250 }, element: wrapper, menu, viewport }),
+    ).toEqual({ left: 500 - 200, top: 250 - 100 })
+  })
+
+  it('flips leftwards near the right edge rather than being clipped', () => {
+    // A panel pushed outside the iframe is not clipped, it is unreachable: the
+    // pointer leaving the frame drops the overlay hover and closes the menu.
+    const { left } = computeMenuDock({
+      pointer: { x: 1150, y: 250 },
+      element: wrapper,
+      menu,
+      viewport,
+    })
+    expect(left).toBe(1150 - menu.width - 200)
+  })
+
+  it('flips upwards near the bottom edge', () => {
+    const { top } = computeMenuDock({
+      pointer: { x: 500, y: 780 },
+      element: wrapper,
+      menu,
+      viewport,
+    })
+    expect(top).toBe(780 - menu.height - 100)
+  })
+
+  it('clamps to the viewport margin when the flip would overshoot the other edge', () => {
+    // A menu wider than the room on either side: flipping puts it off the LEFT,
+    // so the clamp catches it. Flip first, clamp second — clamping alone would
+    // slide the panel out from under the cursor.
+    const wide = { width: 400, height: 300 }
+    const { left } = computeMenuDock({
+      pointer: { x: 300, y: 250 },
+      element: wrapper,
+      menu: wide,
+      viewport: { width: 320, height: 800 },
+    })
+    expect(left).toBe(DOCK_VIEWPORT_MARGIN - 200)
   })
 })
