@@ -78,13 +78,16 @@ new ports first:
 pnpm sanity cors add http://localhost:<port> --credentials
 ```
 
-**`WEB_PORT` moves the dev server, never the tests.** Vitest loads the same
-`.env`, and `getBaseUrl()` reads `WEB_PORT`, so for a while every provisioned
-worktree failed the seven canonical/OpenGraph assertions with a port it had
-been handed rather than a bug it had written (#116). The `render` project now
-pins `NEXT_PUBLIC_BASE_URL` to `http://localhost:3000` in `vitest.config.mts`.
-If a canonical assertion ever fails on a port again, fix the pin — never the
-expected URL in the test.
+**The test suite pins its own origin, so `WEB_PORT` cannot reach a canonical
+URL.** Vitest loads the worktree's `.env`, and `getBaseUrl()` reads
+`NEXT_PUBLIC_BASE_URL`, then the Vercel hosts, then `WEB_PORT` — so unpinned,
+the canonical/OpenGraph assertions would compare against whichever port this
+checkout owns, or a deployment host in CI. `vitest.config.mts` pins both
+`WEB_PORT=3000` and `NEXT_PUBLIC_BASE_URL=http://localhost:3000` on the `unit`
+and `render` projects (#116). If a canonical assertion fails on a `:36xx` port
+or a vercel.app host, that pin has been removed or bypassed — restore it rather
+than editing the expected URL, which lands a hardcoded port in a test and
+breaks the next worktree differently.
 
 Worktrees live **outside** the checkout — `../o3-sanity-worktrees/<issue>-<slug>`
 for `pnpm wt`, `~/orca/workspaces/o3-sanity/<name>` for Orca. Each carries its

@@ -24,7 +24,26 @@ const webSrc = resolve(root, 'apps/web/src')
  *                                   so its addon resolves from that package.
  *
  * Run one layer with `pnpm test --project unit`.
+ *
+ * **The suite pins its own port** (#116). Vitest loads the repo-root `.env`
+ * into `process.env`, and provisioning writes a unique `WEB_PORT` into every
+ * worktree's `.env` so parallel dev servers do not collide. `getBaseUrl()`
+ * reads that same variable, so without the pin below the canonical and
+ * OpenGraph assertions compare `http://localhost:3000` against whichever port
+ * this checkout happens to own, and seven SEO tests fail in every worktree for
+ * reasons that have nothing to do with the ticket being worked. A canonical
+ * URL belongs to the test environment, not to the dev server — so the layer
+ * declares the port it asserts against, and each project declares it because
+ * an inline project does not inherit root-level `test` options.
+ * `NEXT_PUBLIC_BASE_URL` is pinned too: it is the first thing `getBaseUrl()`
+ * reads, ahead of `VERCEL_URL`, so the origin also cannot follow a deployment
+ * host when the suite runs in a Vercel build.
  */
+const TEST_ENV = {
+  WEB_PORT: '3000',
+  NEXT_PUBLIC_BASE_URL: 'http://localhost:3000',
+}
+
 export default defineConfig({
   test: {
     projects: [
@@ -32,6 +51,7 @@ export default defineConfig({
         test: {
           name: 'unit',
           environment: 'node',
+          env: TEST_ENV,
           // `.test.ts` only — the render layer's files are `.render.test.tsx`,
           // so the two layers cannot collect each other's tests by accident.
           include: [
@@ -95,18 +115,9 @@ export default defineConfig({
         test: {
           name: 'render',
           environment: 'node',
+          env: TEST_ENV,
           include: ['apps/web/src/**/*.render.test.tsx'],
           setupFiles: [resolve(webSrc, 'test/setup.ts')],
-          // The canonical and OG assertions compare against a literal origin,
-          // so the origin has to belong to the test environment rather than to
-          // this checkout. Left alone, `getBaseUrl()` would answer with
-          // whichever WEB_PORT the worktree owns (vitest loads the repo-root
-          // `.env`, which provisioning writes a unique port into) or with
-          // VERCEL_URL on a deployment build — a green suite would then depend
-          // on where it ran. NEXT_PUBLIC_BASE_URL is the first thing
-          // `getBaseUrl()` reads, so pinning it here settles the origin ahead
-          // of both. (#116)
-          env: { NEXT_PUBLIC_BASE_URL: 'http://localhost:3000' },
         },
       },
       './apps/storybook/vitest.config.ts',

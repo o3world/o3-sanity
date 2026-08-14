@@ -1,5 +1,5 @@
-import { resolveKnobValue, storedValue, visibleKnobs } from '@o3/block-spec'
-import type { BlockKnobs, Knob, KnobReader, ShowWhen } from '@o3/block-spec'
+import { itemKnobsAt, resolveKnobValue, storedValue, visibleKnobs } from '@o3/block-spec'
+import type { BlockKnobs, ItemKnobs, Knob, KnobReader, KnobRoot, ShowWhen } from '@o3/block-spec'
 
 import { applyKnobs, FIXTURE_VALUE, getAtPath, knobId, setAtPath } from './knobs'
 
@@ -18,21 +18,68 @@ function setKnob<T>(state: T, knob: Knob, optionValue: string): T {
 }
 
 /**
+ * WHICH MEMBER A STORY PATH TARGETS — `screens.0.tone` → the first screen, and
+ * `tone` inside it.
+ *
+ * An array member is its own knob root (#122), so an item control's arg has to
+ * carry two things a block control's does not: which member, and the path
+ * inside it. They are folded into one dotted string because Storybook args are
+ * flat, and split back out here rather than at three call sites.
+ *
+ * Undefined for a block-rooted path, which is every path on a block that
+ * declares no knobbed arrays.
+ */
+export interface ItemArgTarget {
+  /** The block-relative array field — `screens`. */
+  field: string
+  /** Where the member sits in the fixture's array. */
+  index: number
+  /** `screens.0` — the root the knob path below is relative to. */
+  memberPath: string
+  /** The member-relative knob path — `tone`. */
+  rel: string
+  spec: ItemKnobs
+}
+
+export function itemArgTarget(spec: KnobRoot, path: string): ItemArgTarget | undefined {
+  if (spec.tier === 'item') return undefined
+  const [field, index, ...rest] = path.split('.')
+  if (!field || index === undefined || rest.length === 0) return undefined
+  if (!/^\d+$/.test(index)) return undefined
+  const itemSpec = itemKnobsAt(spec, field)
+  if (!itemSpec) return undefined
+  return {
+    field,
+    index: Number(index),
+    memberPath: `${field}.${index}`,
+    rel: rest.join('.'),
+    spec: itemSpec,
+  }
+}
+
+/** The knob a story path names, at whichever root it belongs to. */
+export function knobAt(spec: KnobRoot, path: string): Knob | undefined {
+  const direct = spec.knobs.find((knob) => knob.name === path)
+  if (direct) return direct
+  const target = itemArgTarget(spec, path)
+  return target?.spec.knobs.find((knob) => knob.name === target.rel)
+}
+
+/**
  * The same conversion for a whole Storybook args map, which arrives keyed by
  * `knobId` rather than by knob. `FIXTURE_VALUE` and anything the spec does not
  * declare pass through untouched — the sentinel means "leave the fixture
  * alone", and converting it would write the literal string.
  */
 function convertArgs(
-  spec: BlockKnobs,
+  spec: KnobRoot,
   args: Record<string, unknown>,
   idToPath: Record<string, string>,
 ): Record<string, unknown> {
-  const byPath = new Map(spec.knobs.map((knob) => [knob.name, knob]))
   const out: Record<string, unknown> = { ...args }
   for (const [id, path] of Object.entries(idToPath)) {
     const value = out[id]
-    const knob = byPath.get(path)
+    const knob = knobAt(spec, path)
     if (!knob || typeof value !== 'string' || value === FIXTURE_VALUE) continue
     out[id] = storedValue(knob, value)
   }
@@ -109,10 +156,10 @@ function reachableStates<T>(fixture: T, sources: readonly Knob[]): T[] {
  * field the story does not offer) stays out, because the story genuinely
  * cannot reach it.
  *
- * `item`-surface knobs are the one exclusion. An item knob configures one
- * member of the block's array and its path names no single place on the block,
- * so there is nothing for a block-level control to set. #113 needs an
- * item-level story surface the first time a block declares one.
+ * The root is a block or one of its array members (#122). An item knob used to
+ * be excluded here, because a block-rooted path named no single member for a
+ * control to set; now the member is the root, so its knobs are ordinary ones
+ * and `itemKnobControls` builds a control per member from the same walk.
  *
  * Returned in spec order, which is the order an editor reads them in the form.
  */
@@ -121,7 +168,7 @@ export function rosterKnobs({
   fixture,
   nested = false,
 }: {
-  spec: BlockKnobs
+  spec: KnobRoot
   fixture: unknown
   nested?: boolean
 }): Knob[] {
@@ -132,7 +179,7 @@ export function rosterKnobs({
       reachable.add(knob.name)
     }
   }
-  return spec.knobs.filter((k) => k.surface !== 'item' && reachable.has(k.name))
+  return spec.knobs.filter((k) => reachable.has(k.name))
 }
 
 /** What a knob's control offers and where its value lands. */
@@ -208,7 +255,7 @@ export function knobControls({
   nested = false,
   category = 'Knobs',
 }: {
-  spec: BlockKnobs
+  spec: KnobRoot
   fixture: unknown
   nested?: boolean
   category?: string
@@ -261,7 +308,7 @@ export function applyKnobArgs<T>({
   idToPath,
   nested = false,
 }: {
-  spec: BlockKnobs
+  spec: KnobRoot
   fixture: T
   args: Record<string, unknown>
   idToPath: Record<string, string>
@@ -277,8 +324,95 @@ export function applyKnobArgs<T>({
   const visible = new Set(
     visibleKnobs({ spec, read: readFixture(candidate), nested }).all.map((r) => r.knob.name),
   )
-  const gated = Object.fromEntries(Object.entries(idToPath).filter(([, path]) => visible.has(path)))
+  // An item knob is gated against ITS OWN member, so the second pass asks
+  // `visibleKnobs` once per member the args touch rather than once per block.
+  // Same guarantee, one root down: a screen's `span` cannot be set from a
+  // control while that screen's `tone` hides the field.
+  const perMember = new Map<string, ReadonlySet<string>>()
+  const visibleInMember = (target: ItemArgTarget): ReadonlySet<string> => {
+    const cached = perMember.get(target.memberPath)
+    if (cached) return cached
+    const answer = new Set(
+      visibleKnobs({
+        spec: target.spec,
+        read: readFixture(getAtPath(candidate, target.memberPath)),
+      }).all.map((r) => r.knob.name),
+    )
+    perMember.set(target.memberPath, answer)
+    return answer
+  }
+
+  const gated = Object.fromEntries(
+    Object.entries(idToPath).filter(([, path]) => {
+      const target = itemArgTarget(spec, path)
+      return target ? visibleInMember(target).has(target.rel) : visible.has(path)
+    }),
+  )
   return applyKnobs(fixture, args, gated)
+}
+
+/**
+ * THE ITEM STORY SURFACE (#106, #122) — one set of controls per member of every
+ * array whose member type declares knobs.
+ *
+ * `knobControls` already answers everything for one root; a member IS a root,
+ * so this walks the fixture's members and re-keys each answer under
+ * `<field>.<index>.`. Arg ids stay flat because Storybook's do, and the paths
+ * they carry are what `applyKnobArgs` splits back apart.
+ *
+ * One category per member — "Screen 1", "Screen 2" — because the alternative is
+ * a panel where five screens' `tone` controls sit in a row with nothing saying
+ * which tile each one paints.
+ *
+ * A block with no knobbed arrays gets an empty answer, which is every block
+ * today, so nothing on an existing story moves.
+ */
+export function itemKnobControls({
+  spec,
+  fixture,
+  category,
+}: {
+  spec: BlockKnobs
+  fixture: unknown
+  /** Overrides the per-member category. Rarely what you want. */
+  category?: string
+}): KnobControls {
+  const knobs: Knob[] = []
+  const argTypes: Record<string, KnobArgType> = {}
+  const args: Record<string, string> = {}
+  const idToPath: Record<string, string> = {}
+
+  for (const [field, itemSpec] of Object.entries(spec.items ?? {})) {
+    const members = getAtPath(fixture, field)
+    if (!Array.isArray(members)) continue
+
+    members.forEach((member, index) => {
+      const memberPath = `${field}.${index}`
+      const inner = knobControls({
+        spec: itemSpec,
+        fixture: member,
+        category: category ?? `${itemSpec.title} ${index + 1}`,
+      })
+      knobs.push(...inner.knobs)
+
+      for (const [innerId, relPath] of Object.entries(inner.idToPath)) {
+        const path = `${memberPath}.${relPath}`
+        const id = knobId(path)
+        idToPath[id] = path
+        args[id] = inner.args[innerId] as string
+        const argType = inner.argTypes[innerId] as KnobArgType
+        // A gate's `arg` still names the member-relative control, so it has to
+        // be re-keyed too or the condition points at an arg nothing declares
+        // and Storybook silently treats it as false.
+        const gateOn = argType.if ? inner.idToPath[argType.if.arg] : undefined
+        argTypes[id] = gateOn
+          ? { ...argType, if: { ...argType.if!, arg: knobId(`${memberPath}.${gateOn}`) } }
+          : argType
+      }
+    })
+  }
+
+  return { knobs, argTypes, args, idToPath }
 }
 
 /** The two knobs a Matrix story grids against each other. */

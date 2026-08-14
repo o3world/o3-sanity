@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import type { OverlayComponent } from '@sanity/visual-editing'
 import { useDocuments, useVisualEditingEnvironment } from '@sanity/visual-editing/react'
-import { storedValue } from '@o3/block-spec'
+import { itemKnobsAt, storedValue } from '@o3/block-spec'
 import type { BlockKnobs, ResolvedKnob } from '@o3/block-spec'
 
 import { barKnobs, blockKnobReader } from './barKnobs'
@@ -16,7 +16,7 @@ import {
   tryGetDocument,
 } from './draftPatch'
 import { componentName, subjectName } from './identity'
-import { resolveGroqPath } from './groqPath'
+import { itemArrayField, resolveGroqPath } from './groqPath'
 import type { ItemAction } from './itemActions'
 import { knobMenuModel, type KnobMenuAction } from './menuModel'
 import { knobPatch } from './knobPatch'
@@ -48,6 +48,10 @@ import type { CanvasLevel } from './subject'
  *     the draft snapshot  →  itemActionGroups(snapshot, subject) the rows
  *     an item action      →  the row's own patches (#111)
  *                         →  commitPatch                        the draft
+ *
+ * The same chain runs a second time for the member under the cursor (#122),
+ * rooted at `itemPath` rather than `blockPath` — a different root, not a longer
+ * path, so every function in it is the same one.
  *
  * Everything with a rule in it — which knobs apply, what each currently reads,
  * what a pick writes — is a pure function above this file. What is left is the
@@ -119,20 +123,33 @@ function CanvasToolbarInner({
   const [snapshot, setSnapshot] = useState<Record<string, unknown> | undefined>(() =>
     doc ? initialDraftSnapshot(doc) : undefined,
   )
+  // STALE, NOT ABSENT. A commit has to re-arm the effect below, and the obvious
+  // way to do that is to drop the snapshot — but every single thing the bar
+  // draws is derived from it. With it cleared, `typeAt(blockPath)` is
+  // undefined, so `spec` is undefined, `knobs` is empty, and `componentName`
+  // returns undefined at item and field level; the view renders the bar only
+  // when it can name the component, so the WHOLE BAR unmounted for as long as
+  // the async re-pull took. Picking "Ink" from the Surface dropdown made the
+  // control you just used disappear and come back. Marking the snapshot stale
+  // re-arms the pull while leaving the last known values on screen.
+  const [stale, setStale] = useState(false)
 
   // The sync getter is empty until the machine has fetched the document —
-  // settle it asynchronously once, so the names are right a frame later
-  // rather than never.
+  // settle it asynchronously, so the names are right a frame later rather than
+  // never, and again after every commit.
   useEffect(() => {
-    if (snapshot || !doc) return
+    if (!doc) return
+    if (snapshot && !stale) return
     let cancelled = false
     void doc.getSnapshot().then((settled) => {
-      if (!cancelled && settled) setSnapshot(settled as unknown as Record<string, unknown>)
+      if (cancelled || !settled) return
+      setSnapshot(settled as unknown as Record<string, unknown>)
+      setStale(false)
     })
     return () => {
       cancelled = true
     }
-  }, [doc, snapshot])
+  }, [doc, snapshot, stale])
 
   const typeAt = (at: string) => resolveGroqPath(snapshot, `${at}._type`)
 
@@ -170,6 +187,15 @@ function CanvasToolbarInner({
   const read = blockKnobReader(snapshot, blockPath)
   const knobs = spec ? barKnobs({ spec, read, nested }) : []
 
+  // WHAT THE HOVERED ITEM OFFERS (#122). An array member is its own knob root,
+  // so its spec is reached through the block that hosts it — block `_type` plus
+  // the array the item sits in — and read with a reader rooted AT THE ITEM.
+  // Both halves come from the path the overlay was handed, which is what makes
+  // this order-independent the way the block lookup already is.
+  const itemSpec = itemPath ? itemKnobsAt(spec, itemArrayField(blockPath, itemPath)) : undefined
+  const item =
+    itemPath && itemSpec ? { spec: itemSpec, read: blockKnobReader(snapshot, itemPath) } : undefined
+
   // WHAT THE RIGHT-CLICK MENU OFFERS (#110). The same walk as the bar's, kept
   // whole instead of filtered to `knob.bar` — that filter is the entire
   // difference between the two surfaces. The subject is the innermost keyed
@@ -185,6 +211,7 @@ function CanvasToolbarInner({
     spec,
     read,
     nested,
+    item,
     subject: itemPath ? { kind: 'item', title: subject } : { kind: 'block', title: component },
     componentName: component,
     snapshot,
@@ -212,12 +239,18 @@ function CanvasToolbarInner({
     // (#123). `storedValue` is the inverse of the `optionKey` every reader
     // already goes through.
     const stored = storedValue(resolved.knob, value)
-    void commitPatch(doc, knobPatch(blockPath, resolved.knob.name, stored), {
-      onSettle: () => setSnapshot(undefined),
+    // WHICH ROOT THE PATCH IS RELATIVE TO. An item knob's path is relative to
+    // the member, so the member's path is what `knobPatch` takes as its root —
+    // the two-level keyed write it already handles. Handing it the block path
+    // instead is the write that made #122: no error, and a value inside a field
+    // no schema declares.
+    const root = resolved.surface === 'item' && itemPath ? itemPath : blockPath
+    void commitPatch(doc, knobPatch(root, resolved.knob.name, stored), {
+      onSettle: () => setStale(true),
       // A rejected patch used to arrive as an unhandled rejection while the bar
       // sat there looking like it had worked.
       onError: (error: unknown) =>
-        reportCanvasFailure(`could not set ${resolved.knob.name} on ${blockPath}`, error),
+        reportCanvasFailure(`could not set ${resolved.knob.name} on ${root}`, error),
     })
   }
 
@@ -237,7 +270,7 @@ function CanvasToolbarInner({
   const runItemAction = (action: ItemAction) => {
     if (!doc) return
     void commitPatch(doc, action.patches, {
-      onSettle: () => setSnapshot(undefined),
+      onSettle: () => setStale(true),
       onError: (error: unknown) =>
         reportCanvasFailure(`could not ${action.id} ${actionPath}`, error),
     })

@@ -1,6 +1,14 @@
 import { humanize } from './humanize'
 import { surfaceForKnobPath } from './surfaces'
-import type { BlockKnobs, BlockTier, Knob, KnobInput, KnobOption, KnobOptionInput } from './types'
+import type {
+  BlockKnobs,
+  BlockTier,
+  ItemKnobs,
+  Knob,
+  KnobInput,
+  KnobOption,
+  KnobOptionInput,
+} from './types'
 
 function normaliseOption(input: KnobOptionInput): KnobOption {
   if (typeof input === 'string') return { value: input, title: humanize(input) }
@@ -83,28 +91,101 @@ export function knob({
   }
 }
 
+/** One path declared twice is one control writing over another. */
+function refuseDuplicatePaths(where: string, knobs: readonly Knob[]): void {
+  const seen = new Set<string>()
+  for (const k of knobs) {
+    if (seen.has(k.name)) {
+      throw new Error(`${where}: two knobs declare the path "${k.name}".`)
+    }
+    seen.add(k.name)
+  }
+}
+
 /**
  * The knobs one block declares. This is the object an adapter reads: the
  * Sanity schema, the Storybook stories and the canvas toolbar are all
  * generated from it, so none of them can disagree about what a block offers.
+ *
+ * `items` carries the arrays whose MEMBERS declare knobs of their own, keyed
+ * by the block-relative field name. A member is its own knob root (#122), so
+ * its options never appear in `knobs` — which is also why an item knob cannot
+ * reach `patchableKnobRoots` and overlay a whole array by accident.
  */
 export function defineBlockKnobs({
   type,
   title,
   tier,
   knobs,
+  items,
 }: {
   type: string
   title: string
   tier: BlockTier
   knobs: readonly Knob[]
+  items?: Readonly<Record<string, ItemKnobs>>
 }): BlockKnobs {
-  const seen = new Set<string>()
+  refuseDuplicatePaths(`defineBlockKnobs("${type}")`, knobs)
   for (const k of knobs) {
-    if (seen.has(k.name)) {
-      throw new Error(`defineBlockKnobs("${type}"): two knobs declare the path "${k.name}".`)
+    // The failure this replaces was silent in the one place it mattered.
+    // `knobFields` threw at schema load, but `knobPatch` split `screens[].tone`
+    // on the dot and wrote the value into a field literally called `screens[]`
+    // — a real mutation, into a field no schema declares (#122).
+    if (k.surface === 'item') {
+      throw new Error(
+        `defineBlockKnobs("${type}"): knob "${k.name}" claims the item surface, but a block cannot ` +
+          `name which member it configures. Declare it with defineItemKnobs() and hang that spec ` +
+          `off the array in \`items\`.`,
+      )
     }
-    seen.add(k.name)
   }
-  return { type, title, tier, knobs }
+  const roots = new Set(knobs.map((k) => k.name.split('.')[0]))
+  for (const field of Object.keys(items ?? {})) {
+    if (field === '') {
+      throw new Error(
+        `defineBlockKnobs("${type}"): an item spec is filed under an empty field name.`,
+      )
+    }
+    if (roots.has(field)) {
+      throw new Error(
+        `defineBlockKnobs("${type}"): "${field}" is both a knob and an array with item knobs. ` +
+          `One field cannot be a design option and hold members that have their own.`,
+      )
+    }
+  }
+  return { type, title, tier, knobs, ...(items ? { items } : {}) }
+}
+
+/**
+ * The knobs one ARRAY MEMBER declares — a screen in a grid, a panel in a rail.
+ *
+ * Same vocabulary, different root. Every path here is relative to the member,
+ * so `tone` is the member's own field and a gate at `span` reads the member's
+ * own `span`; nothing in this spec can see the block above it, which is the
+ * property that makes every existing reader and writer work unchanged.
+ *
+ * **Surface is stamped, not computed.** The prefix table answers ownership for
+ * a block-rooted path and has no array vocabulary to answer with here — and it
+ * should not grow one, because `item` is a fact about the spec rather than
+ * about the path. Every knob this takes is delivered in the member's own knob
+ * menu, so it is marked as such once, here, and no author has to remember an
+ * override on each one.
+ */
+export function defineItemKnobs({
+  type,
+  title,
+  knobs,
+}: {
+  /** The member's `_type` — `screen`. Local to its array. */
+  type: string
+  title: string
+  knobs: readonly Knob[]
+}): ItemKnobs {
+  refuseDuplicatePaths(`defineItemKnobs("${type}")`, knobs)
+  return {
+    type,
+    title,
+    tier: 'item',
+    knobs: knobs.map((k) => (k.surface === 'item' ? k : { ...k, surface: 'item' })),
+  }
 }

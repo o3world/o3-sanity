@@ -61,15 +61,35 @@ describe('canvasSubject', () => {
     })
   })
 
-  it('flags a block nested in another block’s array', () => {
-    // Nothing produces this today — layoutSection.items is unattributed until
-    // #115 — but the band is still the outer item, not the inner one.
+  // The name used to say "flags a block nested in another block's array" while
+  // asserting the opposite. What it actually pins is that the band is the OUTER
+  // keyed item: an inner keyed segment reads as an item OF that band, which is
+  // the right answer for `screenGridSection.screens` and the wrong one for
+  // `layoutSection.items`, whose members are blocks in their own right.
+  it('treats an inner keyed segment as an item of the outer band', () => {
     expect(canvasSubject('sections[_key=="abc"].items[_key=="x"]')).toEqual({
       level: 'item',
       blockPath: 'sections[_key=="abc"]',
       itemPath: 'sections[_key=="abc"].items[_key=="x"]',
       nested: false,
     })
+  })
+
+  // `nested` is STRUCTURALLY false today, not merely false for want of data:
+  // `blockRootPath` matches exactly one keyed segment, so the value
+  // `isNestedBlockGroqPath` is asked about can never contain two. The call
+  // stays because it starts answering correctly the moment `blockRootPath`
+  // learns to descend — which is #115's job, and #115 is where the "a nested
+  // block would be handed the HOST's blockPath" trap is written down. Deleting
+  // this test because it looks tautological is deleting the tripwire.
+  it('cannot report nested until blockRootPath learns to descend (#115)', () => {
+    for (const path of [
+      'sections[_key=="a"]',
+      'sections[_key=="a"].items[_key=="x"]',
+      'sections[_key=="a"].items[_key=="x"].panels[_key=="p"].heading',
+    ]) {
+      expect(canvasSubject(path)?.nested).toBe(false)
+    }
   })
 
   // The cold-start property the prior art's block-reference cache lacked: a

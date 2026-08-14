@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import type { SanityBlock } from '@o3/sanity/types'
 
-import { reconcileOptimisticOrder } from './optimisticOrder'
+import { overlayItemKnobs, reconcileOptimisticOrder } from './optimisticOrder'
 
 /**
  * The optimistic-reorder reducer behind an on-canvas drag in Presentation.
@@ -153,5 +153,49 @@ describe('reconcileOptimisticOrder', () => {
 
       expect(keysOf(next)).toEqual(['c', 'a', 'b'])
     })
+  })
+})
+
+/**
+ * An ITEM knob's fold-back (#122). The root behind one is the whole array, and
+ * a root copy is exactly what must not happen here: the projection carries a
+ * dereferenced asset where the echo carries a bare `{_ref}`, so adopting the
+ * array wholesale would blank every image in the grid on the click.
+ */
+describe('overlayItemKnobs', () => {
+  const projected = [
+    { _key: 'a', _type: 'screen', tone: 'ink', media: { image: { url: '/a.png' } } },
+    { _key: 'b', _type: 'screen', tone: 'ink', media: { image: { url: '/b.png' } } },
+  ]
+  const echoed = [
+    { _key: 'a', _type: 'screen', tone: 'bone', media: { image: { _ref: 'image-a' } } },
+    { _key: 'b', _type: 'screen', tone: 'ink', media: { image: { _ref: 'image-b' } } },
+  ]
+
+  it('moves only the member the editor picked, matched by _key', () => {
+    const next = overlayItemKnobs(projected, echoed, ['tone'])!
+    expect(next.map((member) => (member as { tone: string }).tone)).toEqual(['bone', 'ink'])
+    // The untouched member comes back by identity, so React re-renders one tile.
+    expect(next[1]).toBe(projected[1])
+  })
+
+  it('keeps the projection everywhere the knob does not write', () => {
+    const [first] = overlayItemKnobs(projected, echoed, ['tone'])! as { media: unknown }[]
+    expect(first!.media).toEqual({ image: { url: '/a.png' } })
+  })
+
+  it('says nothing when the echo moved no knob field, so the array holds still', () => {
+    expect(overlayItemKnobs(projected, projected, ['tone'])).toBeUndefined()
+    expect(overlayItemKnobs(projected, echoed, ['span'])).toBeUndefined()
+  })
+
+  it('leaves a member the echo does not carry alone', () => {
+    const next = overlayItemKnobs(projected, [echoed[0]], ['tone'])!
+    expect(next[1]).toBe(projected[1])
+  })
+
+  it('says nothing when either side is not an array', () => {
+    expect(overlayItemKnobs(undefined, echoed, ['tone'])).toBeUndefined()
+    expect(overlayItemKnobs(projected, undefined, ['tone'])).toBeUndefined()
   })
 })

@@ -112,6 +112,12 @@ export type ShowWhen = LeafShowWhen | { mode: 'allOf'; all: readonly LeafShowWhe
  * - `block` — the block itself: its identity and its layout. The default.
  * - `item` — a keyed array item inside the block, delivered in that item's
  *   own knob menu.
+ *
+ * `item` IS NOT A VALUE THE PREFIX TABLE COMPUTES. It is a fact about which
+ * spec you are holding: `defineItemKnobs` stamps it on every knob it takes, and
+ * `defineBlockKnobs` refuses one. An item knob configures a member the block
+ * cannot name, so a block-rooted path could only ever write somewhere the
+ * writer would have to invent — see `ItemKnobs`.
  */
 export type KnobSurface = 'band' | 'block' | 'item'
 
@@ -171,6 +177,36 @@ export type KnobInput = {
  */
 export type BlockTier = 'section' | 'base'
 
+/**
+ * AN ARRAY MEMBER IS ITS OWN KNOB ROOT (#122), not a longer path from the block.
+ *
+ * Every reader and writer in the repo takes a path relative to the root it was
+ * handed. A member's design options have no such path from the block: the
+ * member they configure is not identified until an editor points at one, so
+ * `screens[].tone` names no field, resolves to one answer for five screens, and
+ * — the reason this type exists — writes a `setIfMissing({})` at a field
+ * literally called `screens[]` without any layer objecting.
+ *
+ * So the member gets a root of its own. `tone` is then an ordinary knob path,
+ * `visibleKnobs` resolves it against ONE named screen, `knobPatch` writes to
+ * that screen through the two-level keyed path it already handles, and a gate
+ * on a sibling (`span` shown only for a `wide` screen) is an ordinary
+ * same-root gate.
+ */
+export type ItemKnobs = {
+  /**
+   * The member's `_type` — `screen`. **Local to its array, never global.** Two
+   * blocks may each declare a `screen` member with different fields, which is
+   * why a spec is reached through its host block rather than through a map
+   * keyed on this (ADR 0021).
+   */
+  type: string
+  title: string
+  /** Discriminates against `BlockTier`, which deliberately has no `item`. */
+  tier: 'item'
+  knobs: readonly Knob[]
+}
+
 /** Every knob one block declares. */
 export type BlockKnobs = {
   /** The Sanity type name — `heroSection`. */
@@ -178,12 +214,32 @@ export type BlockKnobs = {
   title: string
   tier: BlockTier
   knobs: readonly Knob[]
+  /**
+   * The block's arrays whose members declare knobs of their own, keyed by the
+   * block-relative field name — `screens`.
+   *
+   * Declared here rather than in a registry keyed on the member's `_type`,
+   * because a member name is local to its array and two blocks can collide on
+   * one (ADR 0021). A hovered item already knows its block and the array it
+   * sits in, so the host answers the lookup and the collision cannot happen.
+   */
+  items?: Readonly<Record<string, ItemKnobs>>
 }
 
 /**
- * Reads a path **relative to the block root** out of whatever the consumer
+ * Anything a knob path is relative to: a block, or one member of its arrays.
+ *
+ * Every query in this package takes one of these, because the questions they
+ * answer — what applies here, what is it set to, what does a gate read — are
+ * the same questions at either root.
+ */
+export type KnobRoot = BlockKnobs | ItemKnobs
+
+/**
+ * Reads a path **relative to the knob root** out of whatever the consumer
  * has: a document snapshot in the preview, a fixture in Storybook, the form's
- * `parent` in the Studio.
+ * `parent` in the Studio. The root is the block for a `BlockKnobs` and the
+ * hovered member for an `ItemKnobs`.
  *
  * A reader rather than a value object, because a compound gate reads more than
  * one path and the caller cannot know how many before it has looked at the

@@ -21,21 +21,23 @@ Ask in this order — each "yes" stops you from adding a type that shouldn't exi
 
 1. Check the **field lexicon** in `CONTEXT.md`. If your concept is in the table, use that exact name. If it isn't, check that you aren't reaching for a synonym of one that is (`content`/`copy` → `body`, `summary`/`intro` → `excerpt`, `image` on a block → `media`).
 2. Genuinely new domain concept? Use it, and add a row to the lexicon in the same commit. A field name that isn't in the table and isn't obviously domain-specific is the thing that starts drift.
-3. Use the shared field factories where one exists (`headingField()`, `eyebrowField()`, `ctaField()`, `mediaField()`, `decorationField()`) rather than retyping the `defineField` call. If you're about to copy a field definition from another block, that's the signal to add a factory instead.
-4. Enums: bare noun, `options.list` from a `constants.ts` const array where the values are shared, always an `initialValue`.
-5. Required fields get `validation: (rule) => rule.required()`. Anything an editor could plausibly leave blank should stay optional — the renderer handles absence.
+3. If you're about to copy a field definition from another block, that's the signal to add a factory instead — `packages/sanity/src/schemas/blocks/fields.ts` for an editorial field (the module is empty right now; re-create it), `packages/sanity/src/knobs/` for a design option, beside `surfaceKnob()` and `decorationKnob()`.
+4. **Is it a design option or a content field?** A closed set an editor picks a _look_ from is a knob, declared in `packages/sanity/src/knobs/<block>.ts` — never a hand-written `defineField` with an `options.list`, which is invisible to everything but the Studio form (CONTEXT.md → Knobs). A closed set naming a content category is not (`listingSection.pageType`, `formSection.reasons`); write down why, because `knobGuard.test.ts` asks.
+5. Enums that are not knobs: bare noun, `options.list` from a `constants.ts` const array where the values are shared, always an `initialValue`.
+6. Required fields get `validation: (rule) => rule.required()`. Anything an editor could plausibly leave blank should stay optional — the renderer handles absence.
 
 ## Adding a section block
 
 Name it `<thing>Section`. Never `<thing>Block`.
 
 1. `packages/sanity/src/schemas/blocks/registry.ts` — add to `SECTION_BLOCKS`. The factory throws until you do.
-2. `packages/sanity/src/schemas/blocks/section.ts` — `defineSectionBlock({ name, title, defaultSurface, fields, preview })`. Don't add a `surface` field; the factory injects it.
-3. `packages/sanity/src/schemas/index.ts` — import and add to `schemaTypes`, in the section-blocks group.
-4. `packages/sanity/src/queries.ts` — add a `_type == "<name>Section" => { … }` arm to `SECTION_FIELDS` **only if** the block needs query-time expansion (dereferenced `cta` targets, reference→card projections, a subquery). Renderers must stay pure components: resolve data here, not in the component.
-5. `apps/web/src/content/blocks/section/<name>Section/<Name>Section.tsx` — folder name === schema name exactly. Type props with `SectionProps<'<name>Section'>` from `sectionTypes.ts`; never hand-write the prop shape.
-6. `apps/web/src/content/blocks/clientComponents.ts` — add a `defineBlockRender('<name>Section', { component: … })` entry to `CLIENT_SECTION_BINDINGS`.
-7. `pnpm typegen`, then `pnpm typecheck`. The `satisfies` clause in `apps/web/src/content/blocks/registry.ts` is what catches a renderer whose props drifted from the generated shape.
+2. `packages/sanity/src/knobs/<name>Section.ts` — the block's design options, at minimum `surfaceKnob({ initialValue: … })`; export it from `knobs/index.ts` and add it to `BLOCK_KNOBS`. Required, not optional (ADR 0020).
+3. `packages/sanity/src/schemas/blocks/section.ts` — `defineSectionBlock({ name, title, knobs, fields, preview })`. Don't add a `surface` field; the factory generates it from the knob.
+4. `packages/sanity/src/schemas/index.ts` — import and add to `schemaTypes`, in the section-blocks group.
+5. `packages/sanity/src/queries.ts` — add a `_type == "<name>Section" => { … }` arm to `SECTION_FIELDS` **only if** the block needs query-time expansion (dereferenced `cta` targets, reference→card projections, a subquery). Renderers must stay pure components: resolve data here, not in the component.
+6. `apps/web/src/content/blocks/section/<name>Section/<Name>Section.tsx` — folder name === schema name exactly. Type props with `SectionProps<'<name>Section'>` from `sectionTypes.ts`; never hand-write the prop shape.
+7. `apps/web/src/content/blocks/clientComponents.ts` — add a `defineBlockRender('<name>Section', { component: … })` entry to `CLIENT_SECTION_BINDINGS`.
+8. `pnpm typegen`, then `pnpm typecheck`. The `satisfies` clause in `apps/web/src/content/blocks/registry.ts` is what catches a renderer whose props drifted from the generated shape.
 
 ## Adding a base block
 

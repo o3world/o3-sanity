@@ -1,4 +1,4 @@
-import { patchableKnobRoots } from '@o3/block-spec'
+import { patchableItemRoots, patchableKnobRoots } from '@o3/block-spec'
 import { BLOCK_KNOBS } from '@o3/sanity/knobs'
 import type { SanityBlock } from '@o3/sanity/types'
 
@@ -33,6 +33,66 @@ export interface OptimisticOrderAction {
  * "can a patch write it". Every knob root today is a plain string.
  */
 const OPTIMISTIC_KNOB_ROOTS = patchableKnobRoots(Object.values(BLOCK_KNOBS))
+
+/**
+ * The same job for an ITEM knob (#122), and it cannot be done the same way.
+ *
+ * The root behind a member's knob is the whole array — `screens` — and a
+ * screen holds a `figure` whose asset is a reference. The projection
+ * dereferences it; the echo document does not. So the root copy above would
+ * trade every resolved image in the grid for a bare `{_ref}` the moment an
+ * editor picks a tone, which is the "does the document echo look like the
+ * projection" hazard `patchableKnobRoots` documents, landing for the first
+ * time.
+ *
+ * A keyed overlay instead: match members by `_key`, and copy only the fields a
+ * member's knobs actually write. Everything else on the member stays projected,
+ * so the picture cannot go backwards.
+ *
+ * Keyed by block type rather than by array name, because an array name is only
+ * unique within a block — two blocks may each call theirs `items`.
+ */
+const OPTIMISTIC_ITEM_ROOTS: Readonly<Record<string, Readonly<Record<string, readonly string[]>>>> =
+  Object.fromEntries(
+    Object.entries(BLOCK_KNOBS)
+      .map(([type, spec]) => [type, patchableItemRoots(spec)] as const)
+      .filter(([, plan]) => Object.keys(plan).length > 0),
+  )
+
+/**
+ * The array members the renderer holds, with each knob field the echo moved —
+ * or `undefined` when the echo changed none of them, so the caller can keep the
+ * projected array by identity.
+ *
+ * Exported because it is where the rule lives, and because the wiring above it
+ * is unreachable until a block declares item knobs (#118).
+ */
+export function overlayItemKnobs(
+  held: unknown,
+  echoed: unknown,
+  fields: readonly string[],
+): unknown[] | undefined {
+  if (!Array.isArray(held) || !Array.isArray(echoed)) return undefined
+  const byKey = new Map(
+    echoed.map((member) => [(member as { _key?: string } | null)?._key, member]),
+  )
+  let changed = false
+  const next = held.map((member) => {
+    const echo = byKey.get((member as { _key?: string } | null)?._key) as
+      Record<string, unknown> | undefined
+    if (!echo || member == null || typeof member !== 'object') return member
+    const patch: Record<string, unknown> = {}
+    for (const field of fields) {
+      if (field in echo && echo[field] !== (member as Record<string, unknown>)[field]) {
+        patch[field] = echo[field]
+      }
+    }
+    if (Object.keys(patch).length === 0) return member
+    changed = true
+    return { ...(member as Record<string, unknown>), ...patch }
+  })
+  return changed ? next : undefined
+}
 
 /**
  * Apply an optimistic reorder to `current` while preserving full block data.
@@ -97,6 +157,17 @@ export function reconcileOptimisticOrder(
     const overlay: Record<string, unknown> = {}
     for (const root of OPTIMISTIC_KNOB_ROOTS) {
       if (root in raw) overlay[root] = raw[root]
+    }
+    // The block's own type, off the block the renderer holds — not off the
+    // echo, whose stub is the thing being reconciled.
+    const itemPlan = OPTIMISTIC_ITEM_ROOTS[rich._type] ?? {}
+    for (const [field, fields] of Object.entries(itemPlan)) {
+      const merged = overlayItemKnobs(
+        (rich as unknown as Record<string, unknown>)[field],
+        raw[field],
+        fields,
+      )
+      if (merged) overlay[field] = merged
     }
     return Object.keys(overlay).length > 0 ? ({ ...rich, ...overlay } as SanityBlock) : rich
   })

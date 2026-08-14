@@ -1666,5 +1666,21 @@
   "file:tools/migration/data/seed/assets/insight-sync-hero.svg": {
     "sha256": "7c92a5bd7f0cf8999686e2e5eea57bef995910ae",
     "assetId": "image-7c92a5bd7f0cf8999686e2e5eea57bef995910ae-1200x630-svg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/02/Talia.jpg": {
+    "sha256": "45d36c497ab00900a200949a731633e6c0fd3710",
+    "assetId": "image-45d36c497ab00900a200949a731633e6c0fd3710-2500x2500-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2026/03/85b1f0fa-230d-11f1-beac-a2c508ea3134.avif": {
+    "sha256": "65ea3034a000a63471ef5bc6fb283541f3a0ee8d",
+    "assetId": "image-65ea3034a000a63471ef5bc6fb283541f3a0ee8d-600x600-avif"
+  },
+  "https://www.o3world.com/wp-content/uploads/2018/06/Keith-Scandone.jpg": {
+    "sha256": "3a62e4d327ca9ccbea4494f32f626b9ef2ce40f6",
+    "assetId": "image-3a62e4d327ca9ccbea4494f32f626b9ef2ce40f6-2500x2500-jpg"
+  },
+  "https://www.o3world.com/wp-content/uploads/2025/02/Jackie.jpg": {
+    "sha256": "0fbaeda2053021d368b940d320bcdb433547ef25",
+    "assetId": "image-0fbaeda2053021d368b940d320bcdb433547ef25-2500x2500-jpg"
   }
 }
