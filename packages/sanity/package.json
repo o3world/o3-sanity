@@ -11,6 +11,7 @@
     "typegen": "sanity schema extract --force --path=schema.json && sanity typegen generate"
   },
   "dependencies": {
+    "@o3/block-spec": "workspace:*",
     "@sanity/client": "^7.26.0",
     "@sanity/icons": "^5.2.1",
     "@sanity/image-url": "^2.1.1",
@@ -29,6 +30,7 @@
     "./client": "./src/client.ts",
     "./constants": "./src/constants.ts",
     "./image": "./src/image.ts",
+    "./knobs": "./src/knobs/index.ts",
     "./queries": "./src/queries.ts",
     "./schemas": "./src/schemas/index.ts",
     "./schemas/registry": "./src/schemas/blocks/registry.ts",

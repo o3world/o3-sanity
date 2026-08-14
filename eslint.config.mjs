@@ -89,6 +89,36 @@ export default [
       ],
     },
   },
+  // Knob purity (ADR 0020). Knob declarations are read by the Presentation
+  // overlay inside the site bundle and by Storybook, neither of which can
+  // carry the Studio runtime — so this directory has no edge to `sanity`, and
+  // the package boundary that would otherwise enforce it is replaced by this
+  // rule. It fails at lint time with a one-line fix instead of at bundle time
+  // with a stack trace, which is the whole reason it is a rule and not a test.
+  //
+  // `@sanity/icons` is inside the ban, and no knob declares an icon yet. When
+  // one wants to (#106), that is a decision to make out loud rather than by
+  // deleting a line: icons on the knob are what let ADR 0020 remove vtx-web's
+  // KNOB_ICONS mirror, and the package is a leaf React library with no Studio
+  // runtime in it — but it is still weight in the site bundle, and this rule
+  // is the only thing that would have said so.
+  {
+    files: ['packages/sanity/src/knobs/**/*.ts'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['sanity', 'sanity/*', '@sanity/*'],
+              message:
+                'A knob declaration may not import the Studio runtime — the preview bundle reads this directory (ADR 0020). The Sanity adapter lives in schemas/blocks/knobFields.ts.',
+            },
+          ],
+        },
+      ],
+    },
+  },
   // Draft-preview boundary for the whole web app (content/ gets its own
   // merged object below — flat config resolves same-rule collisions by
   // last-object-wins, so the rule must carry every restriction for the

@@ -23,6 +23,7 @@ function normaliseOption(input: KnobOptionInput): KnobOption {
 export function knob({
   name,
   title,
+  description,
   icon,
   options,
   initialValue,
@@ -50,6 +51,7 @@ export function knob({
   return {
     name,
     title,
+    ...(description ? { description } : {}),
     ...(icon ? { icon } : {}),
     options: resolved,
     ...(initialValue !== undefined ? { initialValue } : {}),
