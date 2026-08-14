@@ -43,6 +43,7 @@ export type {
   KnobReader,
   KnobSurface,
   KnobValue,
+  KnobValueType,
   LeafShowWhen,
   ResolvedKnob,
   ShowWhen,

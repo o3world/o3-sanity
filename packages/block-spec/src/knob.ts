@@ -27,6 +27,7 @@ export function knob({
   icon,
   options,
   initialValue,
+  valueType = 'string',
   showWhen,
   surface,
   bar,
@@ -41,6 +42,18 @@ export function knob({
       throw new Error(`knob("${name}"): duplicate option value "${option.value}".`)
     }
     seen.add(option.value)
+    // A numeric knob is written as strings and stored as numbers, so the two
+    // spellings have to be the same string in both directions. `'01'` parses
+    // to 1 and comes back as `'1'`, which would make a stored value match no
+    // option and the control read "Default" for a value the editor chose —
+    // `resolveKnobValue`'s branch 3, arrived at silently. Checked here so the
+    // module fails to load rather than the canvas failing to agree with itself.
+    if (valueType === 'number' && String(Number(option.value)) !== option.value) {
+      throw new Error(
+        `knob("${name}"): option "${option.value}" is declared number-valued but does not survive ` +
+          `the round trip through Number() — a stored value would match no option.`,
+      )
+    }
   }
   if (initialValue !== undefined && !seen.has(initialValue)) {
     throw new Error(
@@ -55,6 +68,9 @@ export function knob({
     ...(icon ? { icon } : {}),
     options: resolved,
     ...(initialValue !== undefined ? { initialValue } : {}),
+    // Always present, like `surface` and `bar`: a `Knob` answers what its
+    // values are wherever it travels, so no consumer has to spell the default.
+    valueType,
     ...(showWhen ? { showWhen } : {}),
     // Resolved once, here, so a `Knob` is complete wherever it travels. An
     // author overrides when the block's own shape disagrees with the table.

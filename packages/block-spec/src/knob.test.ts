@@ -44,6 +44,35 @@ describe('knob', () => {
     ).toBe('item')
   })
 
+  /**
+   * Declared, never inferred (#119). `['1','2','3']` is the option set of
+   * `layoutSection.columns` and it is also the option set a version or a grade
+   * would have; only the declaration can tell the schema field's type.
+   */
+  it('defaults its value type to string, and takes number when declared', () => {
+    expect(knob({ name: 'variant', title: 'Variant', options: ['a'] }).valueType).toBe('string')
+    expect(knob({ name: 'grade', title: 'Grade', options: ['1', '2'] }).valueType).toBe('string')
+    expect(
+      knob({ name: 'columns', title: 'Columns', valueType: 'number', options: ['1', '2', '3'] })
+        .valueType,
+    ).toBe('number')
+  })
+
+  /**
+   * A number-valued option is stored as a number and compared as a string, so
+   * `String(Number(v))` has to give back exactly what was declared. `'01'`
+   * would come back `'1'`, match no option, and make the control read
+   * "Default" for a value the editor picked.
+   */
+  it('refuses a number-valued option that does not survive the round trip', () => {
+    expect(() =>
+      knob({ name: 'columns', title: 'Columns', valueType: 'number', options: ['01', '2'] }),
+    ).toThrow(/round trip/)
+    expect(() =>
+      knob({ name: 'columns', title: 'Columns', valueType: 'number', options: ['one'] }),
+    ).toThrow(/round trip/)
+  })
+
   it('refuses an empty option set', () => {
     expect(() => knob({ name: 'variant', title: 'Variant', options: [] })).toThrow(/at least one/)
   })

@@ -7,6 +7,7 @@ import { PAGE_TYPES } from '../../constants'
 import { disciplineGridSectionKnobs } from '../../knobs/disciplineGridSection'
 import { heroSectionKnobs } from '../../knobs/heroSection'
 import { inFlightSectionKnobs } from '../../knobs/inFlightSection'
+import { layoutSectionKnobs } from '../../knobs/layoutSection'
 import { mediaSectionKnobs } from '../../knobs/mediaSection'
 import { railPanelsSectionKnobs } from '../../knobs/railPanelsSection'
 
@@ -478,9 +479,20 @@ export const formSection = defineSectionBlock({
   preview: { select: { title: 'heading', subtitle: 'eyebrow' } },
 })
 
+/**
+ * `columns` and `surface` are declared in `src/knobs/layoutSection.ts`
+ * (ADR 0020). `columns` is the repo's only number-valued knob: it declares
+ * `valueType: 'number'`, which is what keeps the generated field `type:
+ * 'number'` and `generated.ts` publishing `columns?: 1 | 2 | 3`.
+ *
+ * `items` is not a knob and is not one waiting to happen — it is the block's
+ * content. The design options an editor might want on an individual item wait
+ * on #122 (an array member as its own knob root).
+ */
 export const layoutSection = defineSectionBlock({
   name: 'layoutSection',
   title: 'Layout section',
+  knobs: layoutSectionKnobs,
   fields: [
     // The interior frames head almost every band with the same three-part
     // stack — eyebrow, heading, and a set-back second line (`1924:5344`'s
@@ -495,12 +507,7 @@ export const layoutSection = defineSectionBlock({
       rows: 2,
       description: 'The quieter second line under the heading.',
     }),
-    defineField({
-      name: 'columns',
-      type: 'number',
-      options: { list: [1, 2, 3], layout: 'radio', direction: 'horizontal' },
-      initialValue: 1,
-    }),
+    'columns',
     defineField({
       name: 'items',
       type: 'array',
