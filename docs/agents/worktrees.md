@@ -78,6 +78,14 @@ new ports first:
 pnpm sanity cors add http://localhost:<port> --credentials
 ```
 
+**`WEB_PORT` moves the dev server, never the tests.** Vitest loads the same
+`.env`, and `getBaseUrl()` reads `WEB_PORT`, so for a while every provisioned
+worktree failed the seven canonical/OpenGraph assertions with a port it had
+been handed rather than a bug it had written (#116). The `render` project now
+pins `NEXT_PUBLIC_BASE_URL` to `http://localhost:3000` in `vitest.config.mts`.
+If a canonical assertion ever fails on a port again, fix the pin — never the
+expected URL in the test.
+
 Worktrees live **outside** the checkout — `../o3-sanity-worktrees/<issue>-<slug>`
 for `pnpm wt`, `~/orca/workspaces/o3-sanity/<name>` for Orca. Each carries its
 own ~1.1 GB node_modules; nesting that under the checkout puts it in front of

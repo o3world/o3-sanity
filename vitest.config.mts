@@ -97,6 +97,16 @@ export default defineConfig({
           environment: 'node',
           include: ['apps/web/src/**/*.render.test.tsx'],
           setupFiles: [resolve(webSrc, 'test/setup.ts')],
+          // The canonical and OG assertions compare against a literal origin,
+          // so the origin has to belong to the test environment rather than to
+          // this checkout. Left alone, `getBaseUrl()` would answer with
+          // whichever WEB_PORT the worktree owns (vitest loads the repo-root
+          // `.env`, which provisioning writes a unique port into) or with
+          // VERCEL_URL on a deployment build — a green suite would then depend
+          // on where it ran. NEXT_PUBLIC_BASE_URL is the first thing
+          // `getBaseUrl()` reads, so pinning it here settles the origin ahead
+          // of both. (#116)
+          env: { NEXT_PUBLIC_BASE_URL: 'http://localhost:3000' },
         },
       },
       './apps/storybook/vitest.config.ts',
