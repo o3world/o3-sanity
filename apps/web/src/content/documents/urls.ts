@@ -18,3 +18,22 @@ export function hrefForDoc(doc: { _type: string; slug?: string | null }): string
       return '/'
   }
 }
+
+/**
+ * The same URL, asked from inside the Studio — where the slug is still an
+ * object and "no slug yet" is a real answer.
+ *
+ * `hrefForDoc` serves links on rendered pages, so it can never fail: a missing
+ * slug becomes `/` and the card still works. The "Open in Presentation" action
+ * needs the opposite — a document with no slug has no page, and sending an
+ * editor to the homepage instead would look like the action is broken. `null`
+ * is what turns the action off.
+ */
+export function previewPathForDoc(doc: {
+  _type: string
+  slug?: { current?: string } | null
+}): string | null {
+  const slug = doc.slug?.current
+  if (!slug) return null
+  return hrefForDoc({ _type: doc._type, slug })
+}

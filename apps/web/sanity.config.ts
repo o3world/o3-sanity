@@ -7,9 +7,20 @@ import {
 } from 'sanity/presentation'
 import { structureTool, type StructureResolver } from 'sanity/structure'
 
-import { COLLECTION_PREFIXES, resolveDataset, resolveProjectId } from '@o3/sanity/constants'
+import {
+  defaultToolFirst,
+  DEFAULT_PRESENTATION_TOOL_NAME,
+  editorChrome,
+} from '@o3/editor-chrome/studio'
+import {
+  COLLECTION_PREFIXES,
+  ROUTABLE_TYPES,
+  resolveDataset,
+  resolveProjectId,
+} from '@o3/sanity/constants'
 import { schemaTypes } from '@o3/sanity/schemas'
 
+import { previewPathForDoc } from './src/content/documents/urls'
 import { mainDocumentRoutes } from './src/sanity/presentationRoutes'
 
 const projectId = resolveProjectId()
@@ -97,6 +108,11 @@ const resolve: PresentationPluginOptions['resolve'] = {
  * Same-origin with the site on every deploy, which is what makes
  * Presentation live editing work on unpredictable preview URLs
  * (scaffold plan: embedded-only, no standalone studio app).
+ *
+ * **Presentation is the default tool** (#99, ADR 0019). `sanity@6.8` has no
+ * `defaultTool` option — the default is the first entry of the resolved
+ * `tools` array — so the `tools` callback below is the whole mechanism, and
+ * the `plugins` order stays as it reads: structure, then presentation.
  */
 export default defineConfig({
   name: 'o3',
@@ -114,5 +130,10 @@ export default defineConfig({
         previewMode: { enable: '/api/draft-mode/enable' },
       },
     }),
+    // Every routable document gets a door into Presentation, opened on its own
+    // page. `previewPathForDoc` is the app's own link builder — the route table
+    // it reads is the one `hrefForDoc` and `mainDocumentRoutes` read.
+    editorChrome({ types: ROUTABLE_TYPES, previewPath: previewPathForDoc }),
   ],
+  tools: (prev) => defaultToolFirst(prev, DEFAULT_PRESENTATION_TOOL_NAME),
 })
