@@ -72,6 +72,18 @@ This is the same concept the Figma rule names one step upstream, and the chain i
 
 The Figma rule keeps Figma's word (`axis`) because that is what the design file calls it. Everything on this side of the seam is a knob.
 
+Every knob belongs to a **knob surface** — the chrome that delivers it, decided by the container it configures, not by where it is declared:
+
+| Surface | Configures                              | Example                           |
+| ------- | --------------------------------------- | --------------------------------- |
+| `band`  | the full-width strip the block occupies | `surface`                         |
+| `block` | the block itself                        | `variant`, `layout`, `decoration` |
+| `item`  | one member of the block's array         | a panel's own styling             |
+
+Ownership is answered by a longest-matching-prefix table in `@o3/block-spec` and nowhere else, so no surface keeps its own roster of field names in step with the schema. `block` is the default — an unlisted knob configures the block, and nothing disappears into a menu nobody opened. There is no `header` surface: our blocks carry `eyebrow` / `heading` / `subheading` as plain fields rather than a `header` object, so there is no `header.*` cluster to deliver. The header element is still attributed, because that is what lets the canvas toolbar name what you are hovering.
+
+A **nested block forms no band** — its host owns the strip — so band knobs drop when the block sits in another block's array. That is the surface table's job too, not a second flag per knob.
+
 Two rules that are easy to get wrong:
 
 - **Visibility is data, never a closure.** Write `showWhen: { at: 'variant', mode: 'oneOf', values: ['band'] }`, not `hidden: ({parent}) => …`. The declaration generates the form's predicate _and_ is read by the toolbar; a closure can only be read by the form, so a control gated with one silently disappears from the canvas with no error.
