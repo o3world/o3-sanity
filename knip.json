@@ -35,6 +35,7 @@
       "entry": [
         "src/studio/index.ts",
         "src/toolbar/index.ts",
+        "src/canvas/index.ts",
         "src/draft-mode/index.ts",
         "src/**/*.test.ts"
       ]
