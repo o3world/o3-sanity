@@ -24,6 +24,10 @@ import { noticeHeadline, type CanvasNotice } from './notices'
  * `fixed` in the page's own tree with nothing between it and `<body>`, so one
  * z-index is the whole of the stacking argument.
  *
+ * THE REGION MOUNTS WITH THE PAGE and is empty until something fails, which is
+ * the one thing here that is not obvious from the pixels — see the comment on
+ * `aria-live` below. Empty, it is zero pixels tall and has nothing to hit.
+ *
  * WHY IT DOES NOT TIME OUT. A notice that dismisses itself is a notice an
  * editor can miss, and missing it is the bug — "the patch vanished" is the
  * support shape this whole ticket exists to end. It stays until it is
@@ -54,11 +58,6 @@ export function CanvasNoticesView({
   onDismiss,
   onDismissAll,
 }: CanvasNoticesViewProps) {
-  // Nothing at all, rather than an empty positioned box: this sits over the
-  // page for the whole of a draft session and must cost it nothing until it has
-  // something to say.
-  if (notices.length === 0) return null
-
   return (
     <aside
       aria-label="Canvas notices"
@@ -67,43 +66,56 @@ export function CanvasNoticesView({
       // saying buys nothing an editor can act on any sooner.
       aria-live="polite"
       data-testid="canvas-notices"
+      // THE REGION IS ALWAYS HERE, EMPTY OR NOT — the one thing about this
+      // surface that is not obvious from looking at it. A screen reader
+      // announces a change INSIDE a live region it was already watching; a
+      // region that arrives carrying its first notice usually announces
+      // nothing, because there was no region to watch when the content
+      // appeared. So the box mounts with the page and stays empty, which costs
+      // it no size and nothing to hit: an empty flex column is zero pixels
+      // tall.
       className="fixed bottom-4 left-4 z-[10000000] flex max-w-sm flex-col items-start gap-1 font-sans print:hidden"
     >
-      <ul className="flex flex-col gap-1">
-        {notices.map((notice) => (
-          <li
-            key={notice.id}
-            data-testid="canvas-notice"
-            style={{ background: NOTICE_COLOR }}
-            className="flex items-start gap-2 rounded-[3px] px-2 py-1.5 text-white shadow-lg"
-          >
-            <div className="min-w-0">
-              <p className="text-[11px] font-semibold">{noticeHeadline(notice.what)}</p>
-              {notice.detail ? <p className="text-[11px] opacity-80">{notice.detail}</p> : null}
-            </div>
-            {notice.count > 1 ? (
-              // The count is the difference between "it failed" and "it has
-              // failed every time you tried", which is the difference between
-              // waiting and going to find someone.
-              <span
-                data-testid="canvas-notice-count"
-                aria-label={`Reported ${notice.count} times`}
-                className="shrink-0 rounded-[2px] bg-white/20 px-1 text-[10px] font-semibold"
-              >
-                ×{notice.count}
-              </span>
-            ) : null}
-            <button
-              type="button"
-              aria-label="Dismiss notice"
-              onClick={() => onDismiss?.(notice.id)}
-              className="shrink-0 text-[11px] leading-4 opacity-70 hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none"
+      {/* The list itself is conditional even though the region is not: an
+          empty `<ul>` is a list with no items, which is a thing to explain to
+          anyone reading the accessibility tree. */}
+      {notices.length > 0 ? (
+        <ul className="flex flex-col gap-1">
+          {notices.map((notice) => (
+            <li
+              key={notice.id}
+              data-testid="canvas-notice"
+              style={{ background: NOTICE_COLOR }}
+              className="flex items-start gap-2 rounded-[3px] px-2 py-1.5 text-white shadow-lg"
             >
-              ✕
-            </button>
-          </li>
-        ))}
-      </ul>
+              <div className="min-w-0">
+                <p className="text-[11px] font-semibold">{noticeHeadline(notice.what)}</p>
+                {notice.detail ? <p className="text-[11px] opacity-80">{notice.detail}</p> : null}
+              </div>
+              {notice.count > 1 ? (
+                // The count is the difference between "it failed" and "it has
+                // failed every time you tried", which is the difference between
+                // waiting and going to find someone.
+                <span
+                  data-testid="canvas-notice-count"
+                  aria-label={`Reported ${notice.count} times`}
+                  className="shrink-0 rounded-[2px] bg-white/20 px-1 text-[10px] font-semibold"
+                >
+                  ×{notice.count}
+                </span>
+              ) : null}
+              <button
+                type="button"
+                aria-label="Dismiss notice"
+                onClick={() => onDismiss?.(notice.id)}
+                className="shrink-0 text-[11px] leading-4 opacity-70 hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none"
+              >
+                ✕
+              </button>
+            </li>
+          ))}
+        </ul>
+      ) : null}
       {notices.length > 1 ? (
         <button
           type="button"
