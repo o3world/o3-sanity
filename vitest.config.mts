@@ -24,7 +24,20 @@ const webSrc = resolve(root, 'apps/web/src')
  *                                   so its addon resolves from that package.
  *
  * Run one layer with `pnpm test --project unit`.
+ *
+ * **The suite pins its own port** (#116). Vitest loads the repo-root `.env`
+ * into `process.env`, and provisioning writes a unique `WEB_PORT` into every
+ * worktree's `.env` so parallel dev servers do not collide. `getBaseUrl()`
+ * reads that same variable, so without the pin below the canonical and
+ * OpenGraph assertions compare `http://localhost:3000` against whichever port
+ * this checkout happens to own, and seven SEO tests fail in every worktree for
+ * reasons that have nothing to do with the ticket being worked. A canonical
+ * URL belongs to the test environment, not to the dev server — so the layer
+ * declares the port it asserts against, and each project declares it because
+ * an inline project does not inherit root-level `test` options.
  */
+const TEST_ENV = { WEB_PORT: '3000' }
+
 export default defineConfig({
   test: {
     projects: [
@@ -32,6 +45,7 @@ export default defineConfig({
         test: {
           name: 'unit',
           environment: 'node',
+          env: TEST_ENV,
           // `.test.ts` only — the render layer's files are `.render.test.tsx`,
           // so the two layers cannot collect each other's tests by accident.
           include: [
@@ -95,6 +109,7 @@ export default defineConfig({
         test: {
           name: 'render',
           environment: 'node',
+          env: TEST_ENV,
           include: ['apps/web/src/**/*.render.test.tsx'],
           setupFiles: [resolve(webSrc, 'test/setup.ts')],
         },
