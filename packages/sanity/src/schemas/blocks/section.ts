@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField } from 'sanity'
+import { defineArrayItem } from './defineArrayItem'
 import { defineSectionBlock } from './defineBlocks'
 import { decorationField } from './fields'
 import { hiddenUnless } from './knobFields'
@@ -10,6 +11,7 @@ import { inFlightSectionKnobs } from '../../knobs/inFlightSection'
 import { layoutSectionKnobs } from '../../knobs/layoutSection'
 import { mediaSectionKnobs } from '../../knobs/mediaSection'
 import { railPanelsSectionKnobs } from '../../knobs/railPanelsSection'
+import { screenGridSectionKnobs, screenKnobs } from '../../knobs/screenGridSection'
 
 /**
  * The first block whose design options are declared rather than written out
@@ -553,17 +555,24 @@ export const mediaSection = defineSectionBlock({
  * any content type can compose, so this is available to `page.sections` on the
  * day it lands.
  *
- * Two fields per screen and no more. The frame's plates differ in exactly two
- * ways — the colour behind the screenshot (`tone`) and whether the tile takes
- * one column or both (`span`) — and everything else about a tile (32px radius,
- * the 12px-radius screenshot inside it, the crop) is composition the renderer
- * owns. Plate HEIGHT is deliberately not a field: `2230:7559` draws 716 for a
- * wide tile and 342 for a small one, so height follows `span` (ADR 0006 —
- * renderers decide).
+ * Two design options per screen and no more. The frame's plates differ in
+ * exactly two ways — the colour behind the screenshot (`tone`) and whether the
+ * tile takes one column or both (`span`) — and everything else about a tile
+ * (32px radius, the 12px-radius screenshot inside it, the crop) is composition
+ * the renderer owns. Plate HEIGHT is deliberately not a field: `2230:7559`
+ * draws 716 for a wide tile and 342 for a small one, so height follows `span`
+ * (ADR 0006 — renderers decide).
+ *
+ * Both of those belong to the SCREEN rather than to the band, so they are
+ * declared against the member and their fields come from `defineArrayItem` —
+ * the first item-surface knobs in the repo (#118, ADR 0021). The block's own
+ * roster is `surface` and nothing else, which is why its declaration looks
+ * thin: the knobs an editor reaches for on this band are on the tiles.
  */
 export const screenGridSection = defineSectionBlock({
   name: 'screenGridSection',
   title: 'Screen grid',
+  knobs: screenGridSectionKnobs,
   fields: [
     defineField({
       name: 'screens',
@@ -571,29 +580,12 @@ export const screenGridSection = defineSectionBlock({
       description: 'Tiles fill the two-column grid in order; a wide screen takes both columns.',
       validation: (rule) => rule.required().min(1),
       of: [
-        defineArrayMember({
-          type: 'object',
-          name: 'screen',
+        defineArrayItem({
+          knobs: screenKnobs,
           fields: [
             defineField({ name: 'media', type: 'figure', validation: (rule) => rule.required() }),
-            defineField({
-              name: 'tone',
-              type: 'string',
-              description: 'The plate the screenshot sits on.',
-              options: {
-                list: ['ink', 'brand', 'bone'],
-                layout: 'radio',
-                direction: 'horizontal',
-              },
-              initialValue: 'ink',
-            }),
-            defineField({
-              name: 'span',
-              type: 'string',
-              description: 'Wide takes both columns — the frame’s lead tile.',
-              options: { list: ['standard', 'wide'], layout: 'radio', direction: 'horizontal' },
-              initialValue: 'standard',
-            }),
+            'tone',
+            'span',
           ],
           preview: { select: { title: 'media.alt', subtitle: 'tone', media: 'media.image' } },
         }),

@@ -136,8 +136,12 @@ the overlay entirely.
   schema and the `items` key. Nothing checks that they agree, because the knobs
   directory may not import `sanity` and cannot see the schema. A typo files the
   spec under an array that does not exist and the menu silently offers nothing
-  — the same class of miss as an unconverted block, and #114's guard does not
-  reach it yet.
+  — the same class of miss as an unconverted block. **Closed by
+  [#118](https://github.com/o3world/o3-sanity/issues/118)**, which taught
+  #114's guard to walk the member root: the guard imports both the schema and
+  the declarations, so it is the one place that can see the two halves of the
+  key at once, and a spec hung off an array the schema does not carry is
+  reported by name.
 - **Risks / open questions:** the lookup deliberately answers nothing for a
   member inside another member. Nothing produces one today, and the overlay
   cannot attach inside `layoutSection.items` anyway (#115), but a second

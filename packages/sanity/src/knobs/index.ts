@@ -20,6 +20,7 @@ import { inFlightSectionKnobs } from './inFlightSection'
 import { layoutSectionKnobs } from './layoutSection'
 import { mediaSectionKnobs } from './mediaSection'
 import { railPanelsSectionKnobs } from './railPanelsSection'
+import { screenGridSectionKnobs } from './screenGridSection'
 
 export { disciplineGridSectionKnobs } from './disciplineGridSection'
 export { heroSectionKnobs } from './heroSection'
@@ -27,6 +28,7 @@ export { inFlightSectionKnobs } from './inFlightSection'
 export { layoutSectionKnobs } from './layoutSection'
 export { mediaSectionKnobs } from './mediaSection'
 export { railPanelsSectionKnobs } from './railPanelsSection'
+export { screenGridSectionKnobs, screenKnobs } from './screenGridSection'
 export { surfaceKnob } from './surface'
 
 /**
@@ -50,4 +52,5 @@ export const BLOCK_KNOBS: Readonly<Record<string, BlockKnobs>> = {
   [inFlightSectionKnobs.type]: inFlightSectionKnobs,
   [mediaSectionKnobs.type]: mediaSectionKnobs,
   [layoutSectionKnobs.type]: layoutSectionKnobs,
+  [screenGridSectionKnobs.type]: screenGridSectionKnobs,
 }

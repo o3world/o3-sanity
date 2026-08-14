@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from 'node:fs'
 import { dirname, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { patchableKnobRoots, visibleKnobs } from '@o3/block-spec'
-import type { BlockKnobs, Knob } from '@o3/block-spec'
+import type { Knob, KnobRoot } from '@o3/block-spec'
 import { describe, expect, it } from 'vitest'
 import { BLOCK_KNOBS } from '../../knobs'
 import * as baseBlocks from './base'
@@ -40,6 +40,15 @@ import * as sectionBlocks from './section'
  * mirror was rebuilt without anyone noticing — say so on the issue rather than
  * widening the test.
  *
+ * **An array member is a root, so the walk runs twice** (#118, ADR 0021). A
+ * member's knobs are relative to the member exactly as a block's are to the
+ * block, so both directions are asked again of the member's own fields with
+ * the member as `parent`. That is the change this file always expected the
+ * item surface to need, not a second guard — and it closes ADR 0021's one
+ * unguarded seam on the way past: a spec filed under an array name the schema
+ * does not carry is reported here, which is the only place in the repo that
+ * can see both halves of that key at once.
+ *
  * WHAT IT DOES NOT COVER, deliberately:
  *
  * - **`nested`.** `visibleKnobs({nested: true})` drops band knobs because a
@@ -49,11 +58,6 @@ import * as sectionBlocks from './section'
  *   disagreement that is the design. No section block hosts another section
  *   block today (`layoutSection.items` takes base blocks), so the state is
  *   unreachable as well as out of scope.
- * - **`item`-surface knobs (#122).** None are declared, and none work yet. The
- *   walk below reads a block's root fields, which is exactly the domain
- *   `knobFields` will generate into; when item knobs land, both the field walk
- *   and the state product need an array-member context, and that is the one
- *   change this file should expect.
  * - **the write leg (#123).** States are built in the shape the document
  *   honestly holds — `columns: 1`, a number, because `valueType` says so. The
  *   string the write leg currently stores is a live defect, and modelling it
@@ -66,6 +70,8 @@ type ReadableField = {
   type: string
   options?: { list?: unknown }
   hidden?: unknown
+  /** An array's members. Only the inline objects a member spec can name. */
+  of?: { name?: string; fields?: ReadableField[] }[]
 }
 
 type ReadableBlock = { name: string; fields?: ReadableField[] }
@@ -125,8 +131,8 @@ function storedValues(knob: Knob): unknown[] {
   ]
 }
 
-/** Every combination of the block's own knob values: the states it can reach. */
-function statesOf(spec: BlockKnobs): State[] {
+/** Every combination of the root's own knob values: the states it can reach. */
+function statesOf(spec: KnobRoot): State[] {
   return spec.knobs.reduce<State[]>(
     (states, knob) =>
       states.flatMap((state) =>
@@ -142,7 +148,8 @@ function statesOf(spec: BlockKnobs): State[] {
  *
  * A block's fields sit at the block root, so `parent` is the block value —
  * the same thing `document` would be for a gate that reaches for it, and what
- * `hiddenUnless` reads. A field with no `hidden` shows.
+ * `hiddenUnless` reads. A member's fields sit at the member, and Studio hands
+ * the member as `parent` there, so the same call answers for both.
  */
 function formShows(field: ReadableField, state: State): boolean {
   const gate = field.hidden
@@ -190,6 +197,66 @@ const offersAClosedSet = (field: ReadableField) => Array.isArray(field.options?.
 const spell = (state: State) =>
   JSON.stringify(state, (_key, value: unknown) => (value === undefined ? '⟨unset⟩' : value))
 
+/**
+ * BOTH DIRECTIONS AT ONE ROOT — a block against its own fields, or one of its
+ * array members against its own (#118, ADR 0021).
+ *
+ * Nothing here asks which it was handed. A knob path is relative to the root
+ * either way, `visibleKnobs` takes either spec, and `parent` is whichever
+ * object holds the fields — which is the property the item surface was built
+ * to have, checked rather than assumed.
+ *
+ * `home` is the knobs file a missing declaration belongs in, so the failure
+ * for a member names the block's file and not a file called `screen.ts`.
+ */
+function disagreementsAt({
+  where,
+  home,
+  spec,
+  fields,
+}: {
+  where: string
+  home: string
+  spec: KnobRoot
+  fields: readonly ReadableField[]
+}): string[] {
+  const disagreements: string[] = []
+
+  for (const state of statesOf(spec)) {
+    const at = `${where} ${spell(state)}`
+    const offered = new Set(
+      visibleKnobs({ spec, read: (path) => readAt(state, path) }).all.map(
+        (resolved) => resolved.knob.name,
+      ),
+    )
+
+    // (1) Nothing the toolbar offers is missing from, or hidden in, the form.
+    for (const name of offered) {
+      const field = fields.find((candidate) => candidate.name === name)
+      if (!field) {
+        disagreements.push(`${at}: the toolbar offers "${name}"; the form has no such field.`)
+      } else if (!formShows(field, state)) {
+        disagreements.push(`${at}: the toolbar offers "${name}"; the form hides it.`)
+      }
+    }
+
+    // (2) Nothing the form offers as a closed set is missing from the toolbar.
+    // A knob's own generated field lands here too, which is what catches the
+    // symmetric gate failure: the form showing "rail" where the toolbar drops it.
+    for (const field of fields) {
+      if (!offersAClosedSet(field)) continue
+      if (!formShows(field, state)) continue
+      if (offered.has(field.name)) continue
+      disagreements.push(
+        `${at}: the form offers a closed value set at "${field.name}"; no knob answers for it. ` +
+          `Declare it in ${home}, or say why it is editorial.`,
+      )
+    }
+  }
+
+  return disagreements
+}
+
 describe('the guard: a control exists exactly when it does something', () => {
   it('offers exactly the design options the form shows, in every state a block’s knobs can reach', () => {
     const disagreements: string[] = []
@@ -203,39 +270,32 @@ describe('the guard: a control exists exactly when it does something', () => {
         continue
       }
       const fields = block.fields ?? []
+      const home = `src/knobs/${spec.type}.ts`
 
-      for (const state of statesOf(spec)) {
-        const where = `${spec.type} ${spell(state)}`
-        const offered = new Set(
-          visibleKnobs({ spec, read: (path) => readAt(state, path) }).all.map(
-            (resolved) => resolved.knob.name,
-          ),
-        )
+      disagreements.push(...disagreementsAt({ where: spec.type, home, spec, fields }))
 
-        // (1) Nothing the toolbar offers is missing from, or hidden in, the form.
-        for (const name of offered) {
-          const field = fields.find((candidate) => candidate.name === name)
-          if (!field) {
-            disagreements.push(
-              `${where}: the toolbar offers "${name}"; the form has no such field.`,
-            )
-          } else if (!formShows(field, state)) {
-            disagreements.push(`${where}: the toolbar offers "${name}"; the form hides it.`)
-          }
-        }
-
-        // (2) Nothing the form offers as a closed set is missing from the toolbar.
-        // A knob's own generated field lands here too, which is what catches the
-        // symmetric gate failure: the form showing "rail" where the toolbar drops it.
-        for (const field of fields) {
-          if (!offersAClosedSet(field)) continue
-          if (!formShows(field, state)) continue
-          if (offered.has(field.name)) continue
+      // The member root. An `items` key names a block-relative array field and
+      // the member spec names the member's `_type`; both are load-bearing and
+      // nothing else in the repo sees them beside the schema (ADR 0021), so a
+      // miss on either is a disagreement rather than a skipped walk.
+      for (const [arrayField, item] of Object.entries(spec.items ?? {})) {
+        const array = fields.find((candidate) => candidate.name === arrayField)
+        const member = array?.of?.find((candidate) => candidate.name === item.type)
+        if (!member) {
           disagreements.push(
-            `${where}: the form offers a closed value set at "${field.name}"; no knob answers for it. ` +
-              `Declare it in src/knobs/${spec.type}.ts, or say why it is editorial.`,
+            `${spec.type}: hangs "${item.type}" knobs off "${arrayField}"; the schema has no such ` +
+              `array member. The knobs directory cannot see the schema, so this key agrees with it or nothing does.`,
           )
+          continue
         }
+        disagreements.push(
+          ...disagreementsAt({
+            where: `${spec.type}.${arrayField}[]`,
+            home,
+            spec: item,
+            fields: member.fields ?? [],
+          }),
+        )
       }
     }
 
