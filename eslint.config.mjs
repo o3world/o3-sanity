@@ -96,12 +96,21 @@ export default [
   // rule. It fails at lint time with a one-line fix instead of at bundle time
   // with a stack trace, which is the whole reason it is a rule and not a test.
   //
-  // `@sanity/icons` is inside the ban, and no knob declares an icon yet. When
-  // one wants to (#106), that is a decision to make out loud rather than by
-  // deleting a line: icons on the knob are what let ADR 0020 remove vtx-web's
-  // KNOB_ICONS mirror, and the package is a leaf React library with no Studio
-  // runtime in it — but it is still weight in the site bundle, and this rule
-  // is the only thing that would have said so.
+  // `@sanity/icons` is the one exception, decided out loud rather than by
+  // deleting a line. A knob carries its own icon because that is what lets
+  // ADR 0020 delete vtx-web's `KNOB_ICONS` — a table in a different package
+  // that silently decided whether an option was editable at all. Putting the
+  // icon anywhere but the knob rebuilds that mirror.
+  //
+  // It is safe to allow here: the package is a leaf React icon library with no
+  // Studio runtime, `packages/editor-chrome` already depends on it, and
+  // ADR 0009 governs *site* icons (the Figma glyph inventory) rather than
+  // Studio chrome. Import the subpath, never the barrel — `@sanity/icons` v5
+  // dropped barrel exports, which `OpenInPresentationAction.tsx` found first.
+  //
+  // The cost is real but small and paid only in draft mode: the icons a knob
+  // names are bundled wherever knobs are read. If that ever stops being true,
+  // narrow this rule rather than moving the icons.
   {
     files: ['packages/sanity/src/knobs/**/*.ts'],
     rules: {
@@ -110,9 +119,13 @@ export default [
         {
           patterns: [
             {
-              group: ['sanity', 'sanity/*', '@sanity/*'],
+              // A regex, not a `group`: gitignore-style negation inside a
+              // single group array does not un-match in this rule (verified —
+              // `!@sanity/icons/**` still reported). The lookahead is the only
+              // form that carves out the one allowed scope.
+              regex: '^(sanity(/.*)?|@sanity/(?!icons/).*)$',
               message:
-                'A knob declaration may not import the Studio runtime — the preview bundle reads this directory (ADR 0020). The Sanity adapter lives in schemas/blocks/knobFields.ts.',
+                'A knob declaration may not import the Studio runtime — the preview bundle and Storybook read this directory (ADR 0020). `@sanity/icons/<Name>` is allowed; the Sanity adapter lives in schemas/blocks/knobFields.ts.',
             },
           ],
         },
