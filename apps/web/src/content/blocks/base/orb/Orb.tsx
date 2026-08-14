@@ -13,6 +13,12 @@ type OrbProps = BaseProps<'orb'>
  * arriving from a Presentation-mode draft carries invisible encoding
  * characters and `"working…"` matches no state (the same trap
  * `DisciplineGridSection` documents for its `layout` field).
+ *
+ * Theme is pinned light rather than left on the library's `auto`. A base block
+ * sits in a `layoutSection` column and is not told its band's surface, and
+ * `auto` falls through to `prefers-color-scheme` — which would paint a
+ * light-ink orb, invisible, for every visitor whose OS is in dark mode. The
+ * site has one palette; the orb follows it.
  */
 export function Orb({ state, size, speed, paused }: OrbProps) {
   return (
@@ -21,6 +27,7 @@ export function Orb({ state, size, speed, paused }: OrbProps) {
       size={stegaClean(size) as OrbSize | undefined}
       speed={stegaClean(speed)}
       paused={stegaClean(paused)}
+      theme="light"
     />
   )
 }

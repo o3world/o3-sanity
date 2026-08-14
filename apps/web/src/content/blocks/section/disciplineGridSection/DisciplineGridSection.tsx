@@ -38,10 +38,10 @@ type DisciplineGridSectionProps = SectionProps<'disciplineGridSection'>
  * which page you were on.
  *
  * **The disc is a default, not a fixture.** A discipline carrying an `orb`
- * draws the animated `thinking-orbs` canvas in the disc's well instead — per
- * row, so a band can mix them. It applies to the `grid` composition only: the
- * orbital diagram draws its own nodes into one 1120×1172 canvas and has no
- * slot to swap.
+ * draws the animated `thinking-orbs` canvas at the disc's diameter instead —
+ * per row, so a band can mix them. It applies to the `grid` composition only:
+ * the orbital diagram draws its own nodes into one 1120×1172 canvas and has
+ * no slot to swap.
  *
  * The orbital composition is `lg` and up. 1120px of absolutely-positioned copy
  * has no honest 402 form and no 402 frame to copy, so below `lg` it falls back
@@ -77,17 +77,19 @@ export function DisciplineGridSection({
       {items.map((discipline) => (
         <div key={discipline._key} className="flex items-center gap-8 py-8 lg:px-8 lg:py-12">
           {discipline.orb ? (
-            /* The orb takes the disc's well rather than its diameter: the
-               library's 64px preset is a tuned drawing, and stretching its
-               canvas to 138 would soften every dot. Theme is pinned from the
-               band's surface — `auto` would read the document, which is
-               always light here, and paint dark ink on the ink band. */
+            /* The orb fills the disc's well — 80px, 138px from `lg` — rather
+               than sitting at its preset size inside it. `fill` paints the
+               engine at the measured diameter, so the mark carries the same
+               weight the halftone disc it replaces does. Theme is pinned from
+               the band's surface: `auto` would read the OS, and this page is
+               light whatever the visitor's is. */
             <ThinkingOrb
               state={stegaClean(discipline.orb.state) as OrbState | undefined}
               size={stegaClean(discipline.orb.size) as OrbSize | undefined}
               speed={stegaClean(discipline.orb.speed)}
               paused={stegaClean(discipline.orb.paused)}
               theme={onInk ? 'dark' : 'light'}
+              fill
               className="lg:w-34.5 aspect-square w-20"
             />
           ) : (

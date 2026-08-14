@@ -53,6 +53,20 @@ export const States: Story = {
   ),
 }
 
+/**
+ * `fill` — the same 64px tuning painted at the box's size, beside the preset
+ * it came from. Compare the dots: the large one is drawn at 138, not stretched
+ * from 64, so nothing is soft.
+ */
+export const Fill: Story = {
+  render: () => (
+    <div className="flex items-center gap-8">
+      <ThinkingOrb state="weaving" theme="light" fill className="aspect-square w-[138px]" />
+      <ThinkingOrb state="weaving" theme="light" />
+    </div>
+  ),
+}
+
 /** The 20px preset — the inline-status drawing, beside its 64px sibling. */
 export const Sizes: Story = {
   render: () => (
