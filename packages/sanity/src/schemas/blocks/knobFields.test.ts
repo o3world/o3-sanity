@@ -86,6 +86,51 @@ describe('knobFields', () => {
     expect(field?.hidden).toBeUndefined()
   })
 
+  /**
+   * The conversion #119 exists for. `layoutSection.columns` is `type: 'number'`
+   * holding `1 | 2 | 3`, and typegen publishes that literal union into
+   * `LayoutSection`'s props — so a knob declared `valueType: 'number'` has to
+   * come out of here as a number field with numeric options, or `generated.ts`
+   * moves and the renderer's props change underneath it.
+   */
+  it('generates a number field with numeric options for a number-valued knob', () => {
+    const [field] = knobFields(
+      specOf(
+        knob({
+          name: 'columns',
+          title: 'Columns',
+          valueType: 'number',
+          options: ['1', '2', '3'],
+          initialValue: '1',
+        }),
+      ),
+    ) as unknown as ReadableField[]
+
+    expect(field).toMatchObject({ name: 'columns', type: 'number', initialValue: 1 })
+    expect(field?.options).toEqual({
+      list: [
+        { value: 1, title: '1' },
+        { value: 2, title: '2' },
+        { value: 3, title: '3' },
+      ],
+      layout: 'radio',
+      direction: 'horizontal',
+    })
+  })
+
+  /**
+   * The half that makes declaring the type worth more than sniffing it: a knob
+   * whose values only LOOK numeric keeps the string field it always had.
+   */
+  it('leaves a knob that never declared a value type on type: string', () => {
+    const [field] = knobFields(
+      specOf(knob({ name: 'grade', title: 'Grade', options: ['1', '2'] })),
+    ) as unknown as ReadableField[]
+
+    expect(field).toMatchObject({ type: 'string' })
+    expect(field?.options).toMatchObject({ list: [{ value: '1' }, { value: '2' }] })
+  })
+
   it('refuses a nested knob path, which has no flat field to generate', () => {
     expect(() =>
       knobFields(

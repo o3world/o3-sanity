@@ -20,9 +20,35 @@
  */
 export type KnobIcon = (props: never) => unknown
 
+/**
+ * How a knob's chosen option is STORED, as opposed to how it is declared.
+ *
+ * **Declared, never inferred** (#119). Option values are strings everywhere on
+ * this side of the seam — `optionKey` coerces a stored number back to one, so
+ * every comparison, gate, arg and data attribute stays a string — and this says
+ * what the document field underneath holds. `layoutSection.columns` is the
+ * first `'number'`: the field is `type: 'number'` with `1 | 2 | 3`, and it has
+ * to stay that way or the generated types move under the renderer.
+ *
+ * Inferring it from the option set (`['1','2','3']` looks numeric, so emit a
+ * number field) was the cheaper half. It is rejected for the reason ADR 0020
+ * exists: a knob whose values happen to read as numbers but mean strings — a
+ * version, a grade, a zero-padded code — would flip the schema field's type
+ * with nothing at the call site saying so, and the failure lands in
+ * `generated.ts` and the renderer's props rather than here. The same argument
+ * `knob()` already makes about enum-ness: shape publishes nothing, declarations
+ * do. Saying `valueType: 'number'` costs one line and cannot be a guess.
+ */
+export type KnobValueType = 'string' | 'number'
+
 /** One member of a knob's closed value set. */
 export type KnobOption = {
-  /** What is stored in the document. */
+  /**
+   * What is stored in the document, as a string. A `number`-typed knob stores
+   * `Number(value)` and this is its exact decimal spelling — the adapter
+   * converts at the schema boundary, and `optionKey` converts back on the way
+   * in, so the two directions round-trip.
+   */
   value: string
   /** What an editor reads. */
   title: string
@@ -114,6 +140,8 @@ export type Knob = {
   options: readonly KnobOption[]
   /** The schema default. Always names one of `options` when `knob()` built it. */
   initialValue?: string
+  /** What the document field holds. Resolved to `'string'` when unstated. */
+  valueType: KnobValueType
   showWhen?: ShowWhen
   /** Resolved from the prefix table at declaration time, or overridden. */
   surface: KnobSurface
@@ -129,6 +157,8 @@ export type KnobInput = {
   icon?: KnobIcon
   options: readonly KnobOptionInput[]
   initialValue?: string
+  /** Defaults to `'string'`, which is what every design option but one is. */
+  valueType?: KnobValueType
   showWhen?: ShowWhen
   surface?: KnobSurface
   bar?: boolean

@@ -90,10 +90,11 @@ Ownership is answered by a longest-matching-prefix table in `@o3/block-spec` and
 
 A **nested block forms no band** — its host owns the strip — so band knobs drop when the block sits in another block's array. That is the surface table's job too, not a second flag per knob.
 
-Two rules that are easy to get wrong:
+Three rules that are easy to get wrong:
 
 - **Visibility is data, never a closure.** Write `showWhen: { at: 'variant', mode: 'oneOf', values: ['band'] }`, not `hidden: ({parent}) => …`. The declaration generates the form's predicate _and_ is read by the toolbar; a closure can only be read by the form, so a control gated with one silently disappears from the canvas with no error.
 - **An enum is not a knob.** `options.list` declares a value domain and nothing else. `pageType` and `formSection.reasons` are closed enums and neither is a knob. The test is whether an editor changing it is making a **design** decision on the canvas.
+- **A knob's option values are strings; its stored type is declared.** Write the options as strings whatever the field holds — `optionKey` coerces a stored number back to a string, so gates, controls and check-marks all compare one type. If the document field is not a string, say so with `valueType: 'number'` and the adapter generates that field type. Never inferred from the digits: `['1','2','3']` is `layoutSection.columns`, and it is also what a version or a zero-padded code would look like. Getting it wrong moves `generated.ts` and changes the renderer's props.
 
 ### Field lexicon
 

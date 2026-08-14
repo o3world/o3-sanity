@@ -53,13 +53,43 @@ export function hiddenUnless(gate: ShowWhen): (context: { parent?: unknown }) =>
 }
 
 /**
+ * THE ONE PLACE A KNOB'S VALUE STOPS BEING A STRING (#119).
+ *
+ * Option values are strings throughout `@o3/block-spec` — declared as strings,
+ * compared as strings, and coerced back to strings by `optionKey` when a
+ * document hands one over as a number. That is deliberate: gates, args, data
+ * attributes and check-marks all want one comparable type, and a knob that
+ * carried two would make every consumer ask which it had.
+ *
+ * The document field underneath does not get that luxury. `layoutSection.columns`
+ * is `type: 'number'` holding `1 | 2 | 3`, and typegen publishes that literal
+ * union straight into `LayoutSection`'s props. Emitting `type: 'string'` here
+ * would move `generated.ts` and change the renderer's props out from under
+ * `apps/web` — which is the thing the conversion is not allowed to do.
+ *
+ * So the adapter converts, and it converts on a DECLARED type (`knob.valueType`)
+ * rather than a sniffed one. `['1','2','3']` looks numeric; `['1','2','3']`
+ * meaning a version, a grade or a zero-padded code looks identical, and the
+ * difference between the two is only knowable at the declaration. See
+ * `KnobValueType` for the full argument. `knob()` has already checked that a
+ * number-valued option survives `String(Number(v)) === v`, so this conversion
+ * is total and its inverse is `optionKey`.
+ *
+ * The two branches are spelled out rather than parameterised on
+ * `type: knob.valueType`, because `defineField`'s overloads key on a LITERAL
+ * type and a `'string' | 'number'` union silently resolves to one of them —
+ * which typechecks the `options.list` of the wrong field shape. Two calls, and
+ * each one is checked against the field it actually generates.
+ */
+
+/** A radio row, which is what every design option is drawn as. */
+const RADIO = { layout: 'radio', direction: 'horizontal' } as const
+
+/**
  * One knob as one field.
  *
- * `type: 'string'` and a radio list, because that is what every design option
- * in this repo is and was: a small closed set of strings the editor picks one
- * of. A knob whose values are numbers (`layoutSection.columns`) has no path
- * through here yet — it needs a `type` on the declaration, which is #113's
- * problem when it meets one.
+ * A radio list either way, because that is what a design option is: a small
+ * closed set the editor picks one of.
  */
 function knobField(knob: Knob): FieldDefinition {
   if (knob.name.includes('.')) {
@@ -68,18 +98,33 @@ function knobField(knob: Knob): FieldDefinition {
         `Declare the containing object as a schema field and give it its own knobs (#113).`,
     )
   }
-  return defineField({
+  const shared = {
     name: knob.name,
     title: knob.title,
-    type: 'string',
     ...(knob.description ? { description: knob.description } : {}),
+    ...(knob.showWhen ? { hidden: hiddenUnless(knob.showWhen) } : {}),
+  }
+
+  if (knob.valueType === 'number') {
+    return defineField({
+      ...shared,
+      type: 'number',
+      options: {
+        list: knob.options.map(({ value, title }) => ({ value: Number(value), title })),
+        ...RADIO,
+      },
+      ...(knob.initialValue !== undefined ? { initialValue: Number(knob.initialValue) } : {}),
+    })
+  }
+
+  return defineField({
+    ...shared,
+    type: 'string',
     options: {
       list: knob.options.map(({ value, title }) => ({ value, title })),
-      layout: 'radio',
-      direction: 'horizontal',
+      ...RADIO,
     },
     ...(knob.initialValue !== undefined ? { initialValue: knob.initialValue } : {}),
-    ...(knob.showWhen ? { hidden: hiddenUnless(knob.showWhen) } : {}),
   })
 }
 
