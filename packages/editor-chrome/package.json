@@ -8,9 +8,14 @@
     "lint": "eslint src/",
     "typecheck": "tsc --noEmit"
   },
+  "dependencies": {
+    "@o3/block-spec": "workspace:*"
+  },
   "devDependencies": {
     "@o3/typescript-config": "workspace:*",
     "@sanity/icons": "^5.2.1",
+    "@sanity/mutate": "^0.18.1",
+    "@sanity/visual-editing": "^5.7.3",
     "@types/react": "^19.0.0",
     "next": "^16.2.4",
     "next-sanity": "^13.2.3",
@@ -20,6 +25,7 @@
   },
   "peerDependencies": {
     "@sanity/icons": "^5",
+    "@sanity/visual-editing": "^5",
     "next": "^16",
     "next-sanity": "^13",
     "react": "^19",
@@ -28,6 +34,7 @@
   "exports": {
     "./studio": "./src/studio/index.ts",
     "./toolbar": "./src/toolbar/index.ts",
+    "./canvas": "./src/canvas/index.ts",
     "./draft-mode": "./src/draft-mode/index.ts"
   }
 }
