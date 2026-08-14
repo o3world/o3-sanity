@@ -4,7 +4,7 @@
 # once without co-editing one checkout.
 #
 #   pnpm wt new 26        create ../o3-sanity-worktrees/26-<slug>, install, claim #26
-#   pnpm wt ls            every worktree, its ticket, and whether it's dirty
+#   pnpm wt ls            every worktree, its ports, and which servers are up
 #   pnpm wt rm 26         remove the worktree (and its branch, if merged)
 #
 # Orca does the same job from the app side (its worktrees land under
@@ -87,16 +87,86 @@ cmd_new() {
 EOF
 }
 
+# The port a checkout serves on is written into its own .env by
+# worktree-provision.sh; a worktree that never went through provisioning has no
+# .env and silently falls back to the dev.sh defaults, which is how two of them
+# end up fighting over 3000. Marked `?` below so it reads as a missing claim
+# rather than a real one.
+port_of() { # <worktree> <var> <default>
+  local value
+  value="$(sed -nE "s/^[[:space:]]*$2=([0-9]+).*/\1/p" "$1/.env" 2>/dev/null | head -1)"
+  echo "${value:-$3}"
+}
+
+# Which of those ports are actually serving, and from where. One lsof pass over
+# every port in play, then a cwd lookup per listener: `next dev` and `storybook
+# dev` inherit the app dir, so the owning checkout is a prefix of that cwd. A
+# port held from outside the repo therefore shows as nobody's, which is right —
+# it is claimed but not by us.
+listeners() { # <comma-separated ports> -> "<port> <cwd>" lines
+  local pid port cwd
+  [[ -n $1 ]] || return 0
+  lsof -nP -sTCP:LISTEN -iTCP:"$1" 2>/dev/null |
+    sed -nE 's/^[^ ]+ +([0-9]+) .*:([0-9]+) \(LISTEN\)$/\1 \2/p' | sort -u |
+    while read -r pid port; do
+      cwd="$(lsof -a -d cwd -p "$pid" -Fn 2>/dev/null | sed -n 's/^n//p' | head -1)"
+      [[ -n $cwd ]] && echo "$port $cwd"
+    done
+}
+
 cmd_ls() {
-  git worktree list --porcelain | awk '/^worktree /{print $2}' | while read -r path; do
-    local_branch="$(git -C "$path" rev-parse --abbrev-ref HEAD 2>/dev/null || echo '?')"
+  local paths ports claimed live path branch state web sb dupes tilde='~'
+
+  paths="$(git worktree list --porcelain | awk '/^worktree /{print $2}')"
+
+  # `ports` is everything to probe; `claimed` is only what a .env actually
+  # reserves. Two unprovisioned worktrees both defaulting to 3000 is already
+  # said by the `?` marker, so keeping them out of `claimed` leaves the
+  # collision line for the case worth acting on: two real reservations.
+  ports=""
+  claimed=""
+  while read -r path; do
+    [[ -n $path ]] || continue
+    ports+="$(port_of "$path" WEB_PORT 3000),$(port_of "$path" STORYBOOK_PORT 6006),"
+    [[ -f "$path/.env" ]] &&
+      claimed+="$(port_of "$path" WEB_PORT 3000),$(port_of "$path" STORYBOOK_PORT 6006),"
+  done <<<"$paths"
+  live="$(listeners "${ports%,}")"
+
+  # A port counts as up for this worktree only when the listener's cwd is inside
+  # it — the same port number appearing twice means two checkouts claim it, and
+  # only one of them can be the one you have open.
+  url_for() { # <worktree> <port>
+    local marker=" "
+    grep -q "^$2 $1\(/\|$\)" <<<"$live" && marker="●"
+    [[ -f "$1/.env" ]] || set -- "$1" "$2?"
+    printf '%s %-6s' "$marker" ":$2"
+  }
+
+  printf '%-8s %-8s %-6s %-36s %s\n' '  WEB' '  STORYBK' 'STATE' 'BRANCH' 'PATH'
+  while read -r path; do
+    [[ -n $path ]] || continue
+    branch="$(git -C "$path" rev-parse --abbrev-ref HEAD 2>/dev/null || echo '?')"
     if [[ -n "$(git -C "$path" status --porcelain 2>/dev/null)" ]]; then
       state="dirty"
     else
       state="clean"
     fi
-    printf '%-8s %-34s %s\n' "$state" "$local_branch" "$path"
-  done
+    # Ticket branches run long; truncating keeps PATH in a readable column.
+    [[ ${#branch} -gt 36 ]] && branch="${branch:0:35}…"
+    web="$(url_for "$path" "$(port_of "$path" WEB_PORT 3000)")"
+    sb="$(url_for "$path" "$(port_of "$path" STORYBOOK_PORT 6006)")"
+    printf '%s %s %-6s %-36s %s\n' "$web" "$sb" "$state" "$branch" "${path/#$HOME/$tilde}"
+  done <<<"$paths"
+
+  echo
+  echo "● listening — open http://localhost:<port>    ? no .env, so it would boot on the dev.sh default"
+
+  # Two checkouts pointing at one port is only visible across the whole list.
+  dupes="$(tr ',' '\n' <<<"$claimed" | grep -v '^$' | sort | uniq -d | tr '\n' ' ')"
+  [[ -n $dupes ]] && echo "collision: ${dupes% } claimed by more than one worktree — re-provision one of them:"
+  [[ -n $dupes ]] && echo "           rm <worktree>/.env && bash scripts/worktree-provision.sh <worktree>"
+  return 0
 }
 
 cmd_rm() {
