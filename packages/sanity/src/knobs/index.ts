@@ -14,9 +14,15 @@
  */
 
 import type { BlockKnobs } from '@o3/block-spec'
+import { disciplineGridSectionKnobs } from './disciplineGridSection'
 import { heroSectionKnobs } from './heroSection'
+import { inFlightSectionKnobs } from './inFlightSection'
+import { railPanelsSectionKnobs } from './railPanelsSection'
 
+export { disciplineGridSectionKnobs } from './disciplineGridSection'
 export { heroSectionKnobs } from './heroSection'
+export { inFlightSectionKnobs } from './inFlightSection'
+export { railPanelsSectionKnobs } from './railPanelsSection'
 export { surfaceKnob } from './surface'
 
 /**
@@ -29,7 +35,13 @@ export { surfaceKnob } from './surface'
  * Studio form is silent about them. That is the migration state ADR 0020
  * accepts, so a caller must treat a miss as "no knobs yet", never as "no
  * knobs".
+ *
+ * Keyed off each spec's own `type` rather than a literal, so a block cannot be
+ * filed under a name its declaration does not answer to.
  */
 export const BLOCK_KNOBS: Readonly<Record<string, BlockKnobs>> = {
   [heroSectionKnobs.type]: heroSectionKnobs,
+  [railPanelsSectionKnobs.type]: railPanelsSectionKnobs,
+  [disciplineGridSectionKnobs.type]: disciplineGridSectionKnobs,
+  [inFlightSectionKnobs.type]: inFlightSectionKnobs,
 }
