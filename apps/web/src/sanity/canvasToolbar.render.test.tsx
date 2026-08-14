@@ -1,6 +1,14 @@
 import { describe, expect, it } from 'vitest'
 import { renderToStaticMarkup } from 'react-dom/server'
-import { canvasComponents, canvasSubject, CanvasToolbarView } from '@o3/editor-chrome/canvas'
+import {
+  barKnobs,
+  blockKnobReader,
+  canvasSubject,
+  CanvasToolbarView,
+  createCanvasComponents,
+  KnobControl,
+} from '@o3/editor-chrome/canvas'
+import { BLOCK_KNOBS, heroSectionKnobs } from '@o3/sanity/knobs'
 
 import { buildSingletonRoute } from '@/lib/content-routes/build'
 import { home } from '@/content/documents/page/entry'
@@ -31,6 +39,9 @@ import {
  */
 
 const route = buildSingletonRoute(home)
+
+/** The site's own resolver, wired the way `VisualEditing.tsx` wires it. */
+const canvasComponents = createCanvasComponents({ blockKnobs: BLOCK_KNOBS })
 
 const rendered = await renderRoute(route, {
   data: withSettings(aSeededPage('index'), siteSettings()),
@@ -89,6 +100,129 @@ describe('what the resolver attaches, and where', () => {
         itemPath: 'sections[_key=="a"].panels[_key=="p1"]',
       },
     })
+  })
+
+  it('carries the site’s knob declarations across the seam', () => {
+    // The overlay package knows the vocabulary and none of our blocks
+    // (ADR 0020), so the registry travels on the props. The resolver cannot do
+    // the lookup itself — the block's `_type` comes from the draft snapshot.
+    const resolved = canvasComponents({ node: { path: 'sections[_key=="a"]' } } as never) as {
+      props: { blockKnobs: Record<string, unknown> }
+    }
+    expect(resolved.props.blockKnobs).toBe(BLOCK_KNOBS)
+    expect(resolved.props.blockKnobs.heroSection).toBeDefined()
+  })
+})
+
+describe('what the hero offers on the bar', () => {
+  /** A hero block in a page's `sections`, as the mutator's draft snapshot has it. */
+  const heroAt = (hero: Record<string, unknown>) => ({
+    sections: [{ _key: 'h', _type: 'heroSection', ...hero }],
+  })
+
+  const heroKnobs = (hero: Record<string, unknown>, nested = false) =>
+    barKnobs({
+      spec: heroSectionKnobs,
+      read: blockKnobReader(heroAt(hero), 'sections[_key=="h"]'),
+      nested,
+    })
+
+  it('shows Surface and Composition, and leaves Decoration to the menu', () => {
+    // Not a table in the app: `bar: true` on the declaration is the whole rule
+    // (ADR 0020), and `decoration` does not declare it.
+    expect(heroKnobs({ variant: 'band' }).map((resolved) => resolved.knob.title)).toEqual([
+      'Surface',
+      'Composition',
+    ])
+  })
+
+  it('names the stored option, and the default’s own title when nothing is stored', () => {
+    const chosen = heroKnobs({ variant: 'band' }).find((r) => r.knob.name === 'variant')
+    expect(chosen!.current).toEqual({ value: 'band', title: 'Band', isDefault: false })
+
+    // Unset and explicitly-default draw the same page, so the title is the
+    // same — `isDefault` is the only thing that says the value is inherited.
+    const inherited = heroKnobs({}).find((r) => r.knob.name === 'variant')
+    expect(inherited!.current).toEqual({ value: 'orbital', title: 'Orbital', isDefault: true })
+  })
+
+  it('renders one control per bar knob, on the bar, beside the component name', () => {
+    const html = renderToStaticMarkup(
+      <CanvasToolbarView componentName="Hero section" knobs={heroKnobs({ variant: 'band' })} />,
+    )
+    expect(html.match(/data-testid="canvas-knob"/g)).toHaveLength(2)
+    expect(html).toContain('Hero section')
+    expect(html).toContain('Composition')
+    expect(html).toContain('Band')
+    expect(html).not.toContain('Decoration')
+  })
+
+  it('marks an inherited value on the trigger rather than hiding it', () => {
+    const html = renderToStaticMarkup(
+      <CanvasToolbarView componentName="Hero section" knobs={heroKnobs({})} />,
+    )
+    expect(html).toContain('Orbital')
+    expect(html).toContain('(inherited)')
+  })
+
+  it('renders no bar knobs for a block with no declaration yet', () => {
+    // ADR 0020 is a migration: a block absent from the registry declares its
+    // design options as plain fields, and the bar is silent about them rather
+    // than claiming the block has none.
+    const html = renderToStaticMarkup(<CanvasToolbarView componentName="Media section" />)
+    expect(html).toContain('Media section')
+    expect(html).not.toContain('data-testid="canvas-knob"')
+  })
+})
+
+describe('what one knob’s menu says', () => {
+  const variant = () =>
+    barKnobs({
+      spec: heroSectionKnobs,
+      read: blockKnobReader(
+        { sections: [{ _key: 'h', _type: 'heroSection', variant: 'band' }] },
+        'sections[_key=="h"]',
+      ),
+      nested: false,
+    }).find((resolved) => resolved.knob.name === 'variant')!
+
+  const menu = (open: boolean) =>
+    renderToStaticMarkup(
+      <KnobControl knob={variant()} open={open} onToggle={() => {}} onPick={() => {}} />,
+    )
+
+  it('offers every declared option, and only those', () => {
+    const html = menu(true)
+    expect(html).toContain('Orbital')
+    expect(html).toContain('Band')
+    expect(html.match(/role="menuitemradio"/g)).toHaveLength(2)
+  })
+
+  it('checks the option the trigger names — one resolution, every surface', () => {
+    // The trigger label and the check mark both read `resolveKnobValue`, which
+    // is what stops them from disagreeing about what is set.
+    const html = menu(true)
+    expect(html).toContain('aria-checked="true"')
+    expect(html.match(/aria-checked="true"/g)).toHaveLength(1)
+    expect(html).toContain('✓')
+  })
+
+  it('tags the declared default, so an editor can tell it from a choice', () => {
+    expect(menu(true)).toContain('default')
+  })
+
+  it('stays closed until it is opened', () => {
+    expect(menu(false)).not.toContain('role="menu"')
+  })
+
+  it('opens with padding and to the right, where the bar is docked', () => {
+    // A margin below the trigger is dead ground the pointer cannot cross, and
+    // a left-aligned menu on a bar docked at the band's right corner opens
+    // past the edge of the preview — both drop the overlay hover mid-reach.
+    const html = menu(true)
+    expect(html).toContain('pt-1')
+    expect(html).not.toContain('mt-1')
+    expect(html).toContain('right-0')
   })
 })
 

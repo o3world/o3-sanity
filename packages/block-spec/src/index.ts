@@ -26,6 +26,7 @@
 
 export { defineBlockKnobs, knob } from './knob'
 export { humanize } from './humanize'
+export { patchableKnobRoots } from './patchableRoots'
 export { resolveKnobValue, UNRESOLVED_KNOB_TITLE } from './resolveKnobValue'
 export { optionKey, showWhenSatisfied } from './showWhen'
 export { DEFAULT_KNOB_SURFACE, SURFACE_RULES, surfaceForKnobPath } from './surfaces'

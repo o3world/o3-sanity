@@ -1,3 +1,5 @@
+import { patchableKnobRoots } from '@o3/block-spec'
+import { BLOCK_KNOBS } from '@o3/sanity/knobs'
 import type { SanityBlock } from '@o3/sanity/types'
 
 // The optimistic-reorder reducer payload. During an on-canvas drag in the
@@ -11,12 +13,26 @@ export interface OptimisticOrderAction {
   document?: Record<string, unknown> | null
 }
 
-// The plain-JSON style roots a Studio knob can patch. When the optimistic
-// document carries them (unlike a reorder's `{_key,_type}` stubs), they
-// overlay the rich projected block so the edit shows instantly. ONLY these
-// roots — adopting arrays raw would clobber the GROQ derefs (client->,
-// caseStudies[]->, …) the projected block holds.
-const OPTIMISTIC_KNOB_ROOTS = ['surface', 'layout', 'decoration', 'width'] as const
+/**
+ * The roots a knob can patch. When the optimistic document carries one (unlike
+ * a reorder's `{_key,_type}` stubs) it overlays the rich projected block, so a
+ * pick on the canvas toolbar repaints on the click rather than a second later
+ * on the mutation refresh. ONLY these roots — adopting arrays raw would clobber
+ * the GROQ derefs (`client->`, `caseStudies[]->`, …) the projected block holds.
+ *
+ * DERIVED FROM THE DECLARATIONS, never listed here. A hand-kept version of this
+ * list is what shipped first, and it is the reason `patchableKnobRoots` exists:
+ * in the prior art it "stayed at four entries through three toolbar reworks"
+ * while the schema grew three more roots, so those knobs patched correctly and
+ * then sat there doing nothing visible. Nothing fails when the list falls
+ * behind, which is exactly why it does.
+ *
+ * The day a knob lands on a root the projection RESHAPES — a reference, an
+ * array of derefs — it has to be excluded here, because this answers "does the
+ * document echo look like the projection" while `patchableKnobRoots` answers
+ * "can a patch write it". Every knob root today is a plain string.
+ */
+const OPTIMISTIC_KNOB_ROOTS = patchableKnobRoots(Object.values(BLOCK_KNOBS))
 
 /**
  * Apply an optimistic reorder to `current` while preserving full block data.

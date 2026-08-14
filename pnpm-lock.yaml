@@ -150,6 +150,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@o3/block-spec':
+        specifier: workspace:*
+        version: link:../../packages/block-spec
       '@o3/editor-chrome':
         specifier: workspace:*
         version: link:../../packages/editor-chrome
@@ -251,6 +254,9 @@ importers:
       '@o3/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
+      '@sanity/client':
+        specifier: ^7.26.0
+        version: 7.26.0
       '@sanity/icons':
         specifier: ^5.2.1
         version: 5.2.1(react@19.2.8)
@@ -263,6 +269,9 @@ importers:
       '@types/react':
         specifier: ^19.0.0
         version: 19.2.18
+      '@vercel/stega':
+        specifier: ^1.1.0
+        version: 1.1.0
       next:
         specifier: ^16.2.4
         version: 16.2.12(@babel/core@7.29.7)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)

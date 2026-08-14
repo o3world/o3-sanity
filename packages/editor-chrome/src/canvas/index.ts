@@ -9,11 +9,17 @@
  *
  * One import, one prop:
  *
- *     import { canvasComponents } from '@o3/editor-chrome/canvas'
- *     <VisualEditing components={canvasComponents} />
+ *     import { createCanvasComponents } from '@o3/editor-chrome/canvas'
+ *     <VisualEditing components={createCanvasComponents({ blockKnobs: BLOCK_KNOBS })} />
+ *
+ * The knob declarations are the site's own (ADR 0020) — this package knows the
+ * vocabulary and none of the instances.
  */
-export { canvasComponents } from './canvasComponents'
+export { barKnobs, blockKnobReader } from './barKnobs'
+export { createCanvasComponents } from './canvasComponents'
 export { CanvasToolbar, type CanvasToolbarProps } from './CanvasToolbar'
 export { CanvasToolbarView, type CanvasToolbarViewProps } from './CanvasToolbarView'
 export { canvasSubject, type CanvasLevel, type CanvasSubject } from './subject'
 export { componentName, subjectName } from './identity'
+export { KnobControl, type KnobControlProps } from './KnobControl'
+export { knobPatch } from './knobPatch'

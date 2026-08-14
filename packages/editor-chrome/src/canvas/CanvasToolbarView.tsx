@@ -1,10 +1,14 @@
-import type { Ref } from 'react'
+import { useState, type Ref } from 'react'
+import type { ResolvedKnob } from '@o3/block-spec'
+
+import { KnobControl } from './KnobControl'
 
 /**
- * THE CANVAS TOOLBAR'S PIXELS — two surfaces, no behaviour.
+ * THE CANVAS TOOLBAR'S PIXELS — two surfaces, and the one piece of state that
+ * belongs to pixels rather than to the document.
  *
- *   [ Rail panels section ]            ← the section bar, at the band's corner
- *                        [ Panel ]     ← the identity chip, at the item's
+ *   [ Hero │ COMPOSITION Orbital ▾ │ SURFACE Ink ▾ ]  ← the bar, at the band's
+ *                        [ Panel ]                    ← the chip, at the item's
  *
  * Split from `CanvasToolbar` so it can be rendered from a test: this app's
  * render layer mounts components through `react-dom/server`, which runs no
@@ -39,6 +43,10 @@ export interface CanvasToolbarViewProps {
   componentName?: string | undefined
   /** The keyed item or field under the cursor. */
   subjectName?: string | undefined
+  /** The bar-visible knobs, already gated and resolved (`barKnobs`). */
+  knobs?: readonly ResolvedKnob[]
+  /** Commit a pick. The view knows nothing about drafts or patches. */
+  onPickKnob?: (knob: ResolvedKnob, value: string) => void
   barRef?: Ref<HTMLDivElement>
   chipRef?: Ref<HTMLDivElement>
 }
@@ -46,9 +54,17 @@ export interface CanvasToolbarViewProps {
 export function CanvasToolbarView({
   componentName,
   subjectName,
+  knobs = [],
+  onPickKnob,
   barRef,
   chipRef,
 }: CanvasToolbarViewProps) {
+  // WHICH MENU IS OPEN is the one thing the bar decides for itself: it is about
+  // this bar's pixels and nothing else reads it, and it must be exclusive —
+  // two menus open at once overlap each other on a bar this narrow. Keyed by
+  // knob path because that is what is unique within a block.
+  const [openKnob, setOpenKnob] = useState<string | null>(null)
+
   return (
     <>
       {componentName ? (
@@ -69,13 +85,39 @@ export function CanvasToolbarView({
             <span className="max-w-56 self-center truncate whitespace-nowrap px-2 py-1 text-[11px] font-semibold">
               {componentName}
             </span>
+            {knobs.map((resolved) => (
+              // A hairline rather than a gap: the controls have to be
+              // contiguous with each other and with the name, or the pointer
+              // crosses ground that is not chrome on its way along the bar and
+              // the whole overlay drops.
+              <div
+                key={resolved.knob.name}
+                className="flex border-l border-white/25"
+                data-testid="canvas-knob-slot"
+              >
+                <KnobControl
+                  knob={resolved}
+                  open={openKnob === resolved.knob.name}
+                  onToggle={() =>
+                    setOpenKnob((current) =>
+                      current === resolved.knob.name ? null : resolved.knob.name,
+                    )
+                  }
+                  onPick={(value) => {
+                    setOpenKnob(null)
+                    onPickKnob?.(resolved, value)
+                  }}
+                />
+              </div>
+            ))}
           </div>
         </div>
       ) : null}
       {subjectName ? (
-        // Inert for now: the label must not swallow a click on the thing it
-        // names. #109 adds the item's own controls beside it, and those take
-        // the pointer back one span at a time.
+        // Still inert: the label must not swallow a click on the thing it
+        // names, and an item's knobs are delivered by the knob menu (#110)
+        // rather than here — the bar cannot say WHICH item it would configure,
+        // which is exactly why item knobs are not on it.
         <div
           ref={chipRef}
           data-testid="canvas-identity"
