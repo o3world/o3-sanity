@@ -33,6 +33,31 @@ export function resolveProjectId(): string {
   return process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || PROJECT_ID
 }
 
+/**
+ * The datasets that answer an **unauthenticated** read.
+ *
+ * `production` is public. `development` is private — and Content Lake answers a
+ * private dataset's anonymous query with `200 {"result": null}` rather than a
+ * 401, so nothing in the response tells "no such document" apart from "you may
+ * not see it" (#100). A checkout with no `SANITY_API_READ_TOKEN` therefore
+ * points, by default, at a dataset every read comes back empty from: the
+ * homepage and the catch-all 404'd, the collection indexes rendered themselves
+ * empty, and the server log said nothing at all.
+ *
+ * Naming the public datasets is the only way to see that coming, so this list
+ * is an ACL fact and has to be kept true — a dataset missing from it is treated
+ * as needing a token.
+ */
+export const PUBLIC_DATASETS: readonly string[] = ['production']
+
+/**
+ * True when reading `dataset` anonymously would come back silently empty.
+ * `apps/web/src/sanity/live.ts` turns that into a thrown error at the fetch.
+ */
+export function readsNeedToken(dataset: string): boolean {
+  return !PUBLIC_DATASETS.includes(dataset)
+}
+
 /** Document types the web app routes (ADR 0001: every one carries a required slug). */
 export const ROUTABLE_TYPES = ['insight', 'caseStudy', 'page'] as const
 export type RoutableType = (typeof ROUTABLE_TYPES)[number]
