@@ -1,0 +1,330 @@
+import { existsSync, readFileSync } from 'node:fs'
+import { dirname, relative, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { patchableKnobRoots, visibleKnobs } from '@o3/block-spec'
+import type { BlockKnobs, Knob } from '@o3/block-spec'
+import { describe, expect, it } from 'vitest'
+import { BLOCK_KNOBS } from '../../knobs'
+import * as baseBlocks from './base'
+import * as sectionBlocks from './section'
+
+/**
+ * THE GUARD (#114, ADR 0020): **a control exists exactly when it does
+ * something.**
+ *
+ * One test, both directions, every converted block, every state that block's
+ * own knobs can reach:
+ *
+ * 1. every knob `visibleKnobs` offers is a field the Studio form also shows
+ *    under that state — otherwise the toolbar draws a control that writes a
+ *    field the editor cannot see;
+ * 2. every design option the form shows is a knob `visibleKnobs` offers —
+ *    otherwise there is a setting an editor can only reach by leaving the
+ *    canvas and opening the form.
+ *
+ * Either direction alone permits one of the two failures the inversion exists
+ * to design out, which is why neither is here on its own.
+ *
+ * **The form side is asked with the form's own predicate.** We build the real
+ * block, find the field, and call the `hidden` callback Studio calls, with the
+ * state under test as `parent`. Nothing is restated from the declaration, so
+ * agreement is observed rather than asserted — and a hand-written `hidden:`
+ * closure, which is the habit this guard is here to catch, is answered by
+ * exactly the same call.
+ *
+ * **This test should be boring, and its being boring is the finding.** The
+ * declaration generates the field, so agreement is the default rather than a
+ * coincidence; the prior art needed roughly a dozen parity tests and frozen
+ * fixtures to hold six hand-kept mirrors together. If this file ever grows a
+ * second guard, or a special case for one block, that is the signal that a
+ * mirror was rebuilt without anyone noticing — say so on the issue rather than
+ * widening the test.
+ *
+ * WHAT IT DOES NOT COVER, deliberately:
+ *
+ * - **`nested`.** `visibleKnobs({nested: true})` drops band knobs because a
+ *   nested block's host owns the strip. That is a fact about which chrome
+ *   *delivers* a knob, not about whether the form shows the field — the form
+ *   has no idea where the block sits — so folding it in here would assert a
+ *   disagreement that is the design. No section block hosts another section
+ *   block today (`layoutSection.items` takes base blocks), so the state is
+ *   unreachable as well as out of scope.
+ * - **`item`-surface knobs (#122).** None are declared, and none work yet. The
+ *   walk below reads a block's root fields, which is exactly the domain
+ *   `knobFields` will generate into; when item knobs land, both the field walk
+ *   and the state product need an array-member context, and that is the one
+ *   change this file should expect.
+ * - **the write leg (#123).** States are built in the shape the document
+ *   honestly holds — `columns: 1`, a number, because `valueType` says so. The
+ *   string the write leg currently stores is a live defect, and modelling it
+ *   here would quietly certify it.
+ */
+
+/** A schema field as this test reads it. `hidden` is `unknown` until called. */
+type ReadableField = {
+  name: string
+  type: string
+  options?: { list?: unknown }
+  hidden?: unknown
+}
+
+type ReadableBlock = { name: string; fields?: ReadableField[] }
+
+/**
+ * Every block schema, from the two block barrels rather than a list here — a
+ * converted block is found by the name its own declaration answers to, so
+ * adding one costs this file nothing.
+ */
+const BLOCK_SCHEMAS = [
+  ...Object.values(sectionBlocks),
+  ...Object.values(baseBlocks),
+] as unknown as ReadableBlock[]
+
+const blockNamed = (type: string) => BLOCK_SCHEMAS.find((block) => block.name === type)
+
+/** A block value under test: what the document holds for this block. */
+type State = Record<string, unknown>
+
+/** Read a block-relative path, the way `hiddenUnless` and the toolbar both do. */
+function readAt(state: State, path: string): unknown {
+  return path.split('.').reduce<unknown>((node, segment) => {
+    if (node === null || typeof node !== 'object') return undefined
+    return (node as Record<string, unknown>)[segment]
+  }, state)
+}
+
+/** The same state with one knob's path set, creating objects along the way. */
+function withValue(state: State, path: string, value: unknown): State {
+  const [head, ...rest] = path.split('.')
+  if (!head) return state
+  if (rest.length === 0) return { ...state, [head]: value }
+  const child = state[head]
+  const branch = (child !== null && typeof child === 'object' ? child : {}) as State
+  return { ...state, [head]: withValue(branch, rest.join('.'), value) }
+}
+
+/**
+ * What a knob's field can hold, **in the document's spelling**.
+ *
+ * `undefined` first, because unset is a state every knob reaches and the one
+ * a gate is most often wrong about — Sanity never writes `initialValue` into
+ * a document saved before the field existed.
+ *
+ * The values are converted on the knob's DECLARED `valueType`, so
+ * `layoutSection.columns` is compared as `1` and not `'1'`. Both sides coerce
+ * (`optionKey` on the query side, `Number()` at the schema boundary), so
+ * feeding strings would still pass — and would prove agreement about a value
+ * no document holds.
+ */
+function storedValues(knob: Knob): unknown[] {
+  return [
+    undefined,
+    ...knob.options.map((option) =>
+      knob.valueType === 'number' ? Number(option.value) : option.value,
+    ),
+  ]
+}
+
+/** Every combination of the block's own knob values: the states it can reach. */
+function statesOf(spec: BlockKnobs): State[] {
+  return spec.knobs.reduce<State[]>(
+    (states, knob) =>
+      states.flatMap((state) =>
+        storedValues(knob).map((value) => withValue(state, knob.name, value)),
+      ),
+    [{}],
+  )
+}
+
+/**
+ * Does the Studio form show this field under this state? Asked of the field's
+ * own `hidden`, which is what Studio asks.
+ *
+ * A block's fields sit at the block root, so `parent` is the block value —
+ * the same thing `document` would be for a gate that reaches for it, and what
+ * `hiddenUnless` reads. A field with no `hidden` shows.
+ */
+function formShows(field: ReadableField, state: State): boolean {
+  const gate = field.hidden
+  if (typeof gate === 'boolean') return !gate
+  if (typeof gate !== 'function') return true
+  const ask = gate as (context: { parent: State; value: unknown; document: State }) => boolean
+  return !ask({ parent: state, value: readAt(state, field.name), document: state })
+}
+
+/**
+ * WHAT COUNTS AS "A DESIGN OPTION THE FORM SHOWS" — the rule direction (2)
+ * turns on, and the one most likely to be got wrong later.
+ *
+ * **A design option is a field an editor PICKS from a closed set. An editorial
+ * field is one an editor FILLS IN.** A published `options.list` is the tell,
+ * because that is what a picker is; a string, a text, an array, an image or a
+ * reference is not one however it is gated.
+ *
+ * **A declared gate is not the tell.** `heroSection.eyebrow` is band-only via
+ * `hiddenUnless` and is still editorial — it is prose an editor types, and
+ * `showWhen` says *when a field applies*, never *what kind of field it is*.
+ * Writing a gate down (rather than closing over it) is a good habit for an
+ * editorial field too, and this guard must not tax it by demanding a knob for
+ * every field whose visibility is declared. So gating is read on neither side
+ * of this rule: it decides visibility, and visibility is what we compare.
+ *
+ * **This is a suspicion, not a definition, and the difference is the whole
+ * lesson of ADR 0020.** Enum-ness publishes nothing here — a field becomes a
+ * control by being declared a knob and by nothing else — and that stays true,
+ * because the only thing a closed set does in this file is FAIL A TEST and ask
+ * a human which kind of field it is. The prior art let `options.list` mean
+ * "publish this as an editor control" at runtime, so a list added for an
+ * unrelated reason put a machine field in front of an editor; the fix was a
+ * denylist of root names, which a differently-named field walked around a few
+ * months later. A loud question costs one line of triage. A silent promotion
+ * costs an editor a control that writes a value the contract rejects, and a
+ * silent omission costs them a setting they can only reach by opening the
+ * form. There is deliberately no exclusion list here: the day a converted
+ * block wants a genuinely editorial closed set, that is a judgement someone
+ * makes in the open, in the diff, and writes down.
+ */
+const offersAClosedSet = (field: ReadableField) => Array.isArray(field.options?.list)
+
+/** The state, spelled so a failure names the document it is talking about. */
+const spell = (state: State) =>
+  JSON.stringify(state, (_key, value: unknown) => (value === undefined ? '⟨unset⟩' : value))
+
+describe('the guard: a control exists exactly when it does something', () => {
+  it('offers exactly the design options the form shows, in every state a block’s knobs can reach', () => {
+    const disagreements: string[] = []
+
+    for (const spec of Object.values(BLOCK_KNOBS)) {
+      const block = blockNamed(spec.type)
+      if (!block) {
+        disagreements.push(
+          `${spec.type}: declares knobs, and no block schema answers to that name.`,
+        )
+        continue
+      }
+      const fields = block.fields ?? []
+
+      for (const state of statesOf(spec)) {
+        const where = `${spec.type} ${spell(state)}`
+        const offered = new Set(
+          visibleKnobs({ spec, read: (path) => readAt(state, path) }).all.map(
+            (resolved) => resolved.knob.name,
+          ),
+        )
+
+        // (1) Nothing the toolbar offers is missing from, or hidden in, the form.
+        for (const name of offered) {
+          const field = fields.find((candidate) => candidate.name === name)
+          if (!field) {
+            disagreements.push(
+              `${where}: the toolbar offers "${name}"; the form has no such field.`,
+            )
+          } else if (!formShows(field, state)) {
+            disagreements.push(`${where}: the toolbar offers "${name}"; the form hides it.`)
+          }
+        }
+
+        // (2) Nothing the form offers as a closed set is missing from the toolbar.
+        // A knob's own generated field lands here too, which is what catches the
+        // symmetric gate failure: the form showing "rail" where the toolbar drops it.
+        for (const field of fields) {
+          if (!offersAClosedSet(field)) continue
+          if (!formShows(field, state)) continue
+          if (offered.has(field.name)) continue
+          disagreements.push(
+            `${where}: the form offers a closed value set at "${field.name}"; no knob answers for it. ` +
+              `Declare it in src/knobs/${spec.type}.ts, or say why it is editorial.`,
+          )
+        }
+      }
+    }
+
+    expect(disagreements).toEqual([])
+  })
+})
+
+/**
+ * Two pins the guard rests on, asserted separately because they are about the
+ * knobs' reach rather than about form agreement (#114's "also worth pinning").
+ */
+describe('what the knob declarations reach', () => {
+  const KNOBS_ENTRY = resolve(dirname(fileURLToPath(import.meta.url)), '../../knobs/index.ts')
+
+  /** `sanity`, `sanity/…` and `@sanity/…` — except the icons the knobs carry. */
+  const STUDIO_RUNTIME = /^(sanity(\/.*)?|@sanity\/(?!icons\/).*)$/
+  const IMPORTS = /(?:from|import)\s+'([^']+)'/g
+
+  const resolveRelative = (fromFile: string, specifier: string): string | undefined => {
+    const base = resolve(dirname(fromFile), specifier)
+    for (const candidate of [base, `${base}.ts`, `${base}/index.ts`]) {
+      if (candidate.endsWith('.ts') && existsSync(candidate)) return candidate
+    }
+    return undefined
+  }
+
+  /**
+   * The knob barrel and everything it pulls in by relative import.
+   *
+   * The eslint rule is scoped to `src/knobs/**`, so `../constants` — which
+   * `surfaceKnob` imports, and which sits outside that scope — is the one step
+   * a Studio import could enter by without lint saying a word. The site bundle
+   * reads this barrel (`apps/web/src/sanity/VisualEditing.tsx`), so the walk is
+   * the cheap half of the bundle-cleanliness claim ADR 0020 makes; workspace
+   * packages are not followed, because `@o3/block-spec` has no dependencies to
+   * follow.
+   */
+  const walk = (entry: string): Map<string, string> => {
+    const seen = new Map<string, string>()
+    const queue = [entry]
+    while (queue.length > 0) {
+      const file = queue.pop() as string
+      if (seen.has(file)) continue
+      const source = readFileSync(file, 'utf8')
+      seen.set(file, source)
+      for (const [, specifier] of source.matchAll(IMPORTS)) {
+        if (!specifier?.startsWith('.')) continue
+        const target = resolveRelative(file, specifier)
+        if (target) queue.push(target)
+      }
+    }
+    return seen
+  }
+
+  it('imports no Studio runtime, so the preview bundle can read them', () => {
+    const offenders: string[] = []
+    for (const [file, source] of walk(KNOBS_ENTRY)) {
+      for (const [, specifier] of source.matchAll(IMPORTS)) {
+        if (specifier && STUDIO_RUNTIME.test(specifier)) {
+          offenders.push(`${relative(process.cwd(), file)} imports "${specifier}"`)
+        }
+      }
+    }
+
+    expect(offenders).toEqual([])
+  })
+
+  /**
+   * The optimistic overlay copies `patchableKnobRoots(...)` off the mutated
+   * document onto the projected block so a pick repaints on the click
+   * (`apps/web/src/content/blocks/optimisticOrder.ts`). The list is derived
+   * from the declarations, so it cannot fall behind them — but the derivation
+   * rests on a condition nothing checks: every one of those roots holds a
+   * plain value. A root holding a reference is stored as `{_ref}` and projected
+   * dereferenced, so overlaying it would swap resolved data for a bare ref.
+   *
+   * Checked against EVERY block, not only converted ones, because the overlay
+   * applies the same root list to whatever block it is handed.
+   */
+  it('patches only plain-valued roots, which is what the optimistic overlay assumes', () => {
+    const roots = patchableKnobRoots(Object.values(BLOCK_KNOBS))
+    const plain = ['string', 'number', 'boolean']
+
+    const offenders = BLOCK_SCHEMAS.flatMap((block) =>
+      (block.fields ?? [])
+        .filter((field) => roots.includes(field.name) && !plain.includes(field.type))
+        .map((field) => `${block.name}.${field.name} is type "${field.type}"`),
+    )
+
+    expect(offenders).toEqual([])
+  })
+})
