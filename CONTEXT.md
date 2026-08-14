@@ -40,6 +40,8 @@ A **Collection** is a document type with a URL prefix and a collection index. Tw
 - **Preview switcher** — the Published ⇄ Drafts control **inside** the toolbar, for someone holding a Sanity Studio session. **Never call it a perspective switcher.** `perspective` now means exactly one thing here — Sanity's own published-vs-draft API parameter — and that is worth keeping. It used to mean this repo's blog type as well, which is part of why [ADR 0017](docs/adr/0017-the-collection-is-an-insight.md) renamed the type to `insight`. The control is the `preview switcher`; the state is `draft`.
 - **Studio session** — there is no site auth. "Logged in" means holding a Sanity Studio token for this project, which the same-origin Studio at `/studio` leaves in `localStorage`. That token is a **hint** the browser may act on and a **claim** the server must verify against Sanity before enabling draft mode (`@o3/editor-chrome/draft-mode`); it is never a decision on its own.
 - **Presentation is where `/studio` opens.** `sanity@6.8` has no `defaultTool` option — the first entry of the resolved `tools` array is the default — so `sanity.config.ts` sorts it there, and structure keeps a door back: every routable document carries an **Open in Presentation** action beside Publish (ADR 0019).
+- **Canvas toolbar** — the hover bar on a block **inside the Presentation preview**, carrying that block's bar-visible knobs. Not the editor toolbar: that one is the corner chip on the site, this one is on the canvas. "Canvas" is Sanity's own word for the preview surface. Lives in `@o3/editor-chrome/canvas`, wired by exactly one prop — `<VisualEditing components={…}>` — so removing the feature is deleting that prop.
+- **Knob menu** — the right-click surface on the canvas, carrying the subject's **complete** knob roster plus its item actions (duplicate, remove, move, insert). The bar carries a curated subset and the menu carries everything; that split is why both exist. Its subject is the innermost keyed array item under the cursor — the panel when you are in a panel, the block when you are in band padding.
 
 ## Naming
 
@@ -57,6 +59,23 @@ One word per concept, everywhere. These rules bind schema names, field names, GR
 The `Section` suffix is the tier marker: if a name ends in `Section` it is a full-width page section rendered inside `SectionShell` and belongs in `SECTION_BLOCKS`; anything else that renders is a base block or a shared object, and lives inside a `layoutSection` column. A block name must never end in `Block` — the suffix carries no information (every block is a block) and the tier is what an agent actually needs to know. `figure`, `embed`, and `cta` are shared objects that double as base blocks; that dual use is why the base tier takes no suffix.
 
 The enforcement point is `registry.ts`, not the suffix: both factories reject a name missing from `SECTION_BLOCKS` / `BASE_BLOCKS`, and the web app's `BLOCK_REGISTRY` is compile-checked against the types generated from those lists. The suffix rule itself is upheld by whoever curates the registry — neither factory inspects name shape (see Known drift).
+
+### Knobs
+
+A **knob** is one design option on a block: a closed value set with a title, an icon, and a declared rule for when it applies. `heroSection.variant` is a knob; so are `decoration`, `surface`, and `railPanelsSection.layout`. One word covers both the declaration and the control an editor turns — there is deliberately no second word for the two halves.
+
+A knob is **declared once** and everything else is derived from it: the Sanity field, the Storybook control, and the canvas toolbar's control all read the same object ([ADR 0020](docs/adr/0020-a-block-declares-its-knobs-once.md)). Declarations live in `packages/sanity/src/knobs/<blockName>.ts` — their own directory, because all sixteen section blocks share one `schemas/blocks/section.ts` and there is no "beside" — and that directory may not import `sanity` (lint-enforced; the whole point is that the preview bundle can read it).
+
+This is the same concept the Figma rule names one step upstream, and the chain is worth holding in one piece:
+
+> Figma variant **axis** → one `cva` variants key → one **knob** → one Sanity field
+
+The Figma rule keeps Figma's word (`axis`) because that is what the design file calls it. Everything on this side of the seam is a knob.
+
+Two rules that are easy to get wrong:
+
+- **Visibility is data, never a closure.** Write `showWhen: { at: 'variant', mode: 'oneOf', values: ['band'] }`, not `hidden: ({parent}) => …`. The declaration generates the form's predicate _and_ is read by the toolbar; a closure can only be read by the form, so a control gated with one silently disappears from the canvas with no error.
+- **An enum is not a knob.** `options.list` declares a value domain and nothing else. `pageType` and `formSection.reasons` are closed enums and neither is a knob. The test is whether an editor changing it is making a **design** decision on the canvas.
 
 ### Field lexicon
 
