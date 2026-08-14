@@ -267,6 +267,12 @@ export const disciplineGridSection = defineSectionBlock({
           fields: [
             defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
             defineField({ name: 'body', type: 'text', rows: 3 }),
+            defineField({
+              name: 'orb',
+              type: 'orb',
+              description:
+                'Optional — an animated orb in place of the halftone disc this row otherwise draws. Grid layout only; the orbital diagram places its own nodes.',
+            }),
           ],
           preview: { select: { title: 'heading', subtitle: 'body' } },
         }),
@@ -517,6 +523,7 @@ export const layoutSection = defineSectionBlock({
         defineArrayMember({ type: 'embed' }),
         defineArrayMember({ type: 'cta' }),
         defineArrayMember({ type: 'statGroup' }),
+        defineArrayMember({ type: 'orb' }),
       ],
       validation: (rule) => rule.required().min(1),
     }),

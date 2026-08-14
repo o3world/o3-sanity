@@ -63,3 +63,30 @@ export type PageType = (typeof PAGE_TYPES)[number]
 
 export const SURFACES = ['white', 'bone', 'ink'] as const
 export type Surface = (typeof SURFACES)[number]
+
+/**
+ * The nine animations `thinking-orbs` ships (orbs.jakubantalik.com). Values
+ * are the library's own state names, so the schema, the seed JSON and the
+ * canvas all say the same word — a translation table here would be a third
+ * vocabulary for something the library already named.
+ */
+export const ORB_STATES = [
+  'working',
+  'searching',
+  'solving',
+  'listening',
+  'connecting',
+  'weaving',
+  'composing',
+  'breathing',
+  'shaping',
+] as const
+export type OrbState = (typeof ORB_STATES)[number]
+
+/**
+ * The two tuned presets, in CSS px. Not a diameter an author picks freely:
+ * each preset carries its own dot count, dot size and speed, so 20 is a
+ * different drawing from 64 rather than a smaller one.
+ */
+export const ORB_SIZES = [64, 20] as const
+export type OrbSize = (typeof ORB_SIZES)[number]

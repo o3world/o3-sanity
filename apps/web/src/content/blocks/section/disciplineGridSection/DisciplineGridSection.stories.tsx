@@ -23,6 +23,11 @@ import { DisciplineGridSection } from './DisciplineGridSection'
  * **Heading level follows the band's own heading.** A discipline is an `h3`
  * under the band's `h2`, and an `h2` when the band carries no heading — which
  * the Solutions frame does not. `NoHeading` is that case.
+ *
+ * **The mark is per discipline.** A row carrying an `orb` draws the animated
+ * canvas; a row without one draws the frame's halftone disc. `/about` seeds
+ * orbs, so `Grid` is the orb arm and `GridDiscs` is the disc arm — both ship,
+ * and a band can mix them.
  */
 const meta = {
   title: 'Content/Blocks/Section/DisciplineGridSection',
@@ -36,9 +41,22 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+type Args = Parameters<typeof DisciplineGridSection>[0]
+
+/** The seeded band with every discipline's orb removed, so it draws discs. */
+const withoutOrbs = (args: Args): Args => ({
+  ...args,
+  disciplines: args.disciplines?.map((discipline) => ({ ...discipline, orb: undefined })),
+})
+
 /** `/about` — the grid, with the band's own heading above it. */
 export const Grid: Story = {
   args: seededSectionArgs('about', 'disciplineGridSection'),
+}
+
+/** The same band with the orbs taken off: the frame's halftone discs. */
+export const GridDiscs: Story = {
+  args: withoutOrbs(seededSectionArgs('about', 'disciplineGridSection')),
 }
 
 /** `/solutions` — the dotted tetrahedron, at `lg` and up. */

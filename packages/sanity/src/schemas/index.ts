@@ -7,6 +7,7 @@ import { embed } from './objects/embed'
 import { pullQuote } from './objects/pullQuote'
 import { bodyText } from './objects/bodyText'
 import { chapter } from './objects/chapter'
+import { orb } from './objects/orb'
 import { richText, statGroup } from './blocks/base'
 import {
   heroSection,
@@ -43,6 +44,7 @@ export const schemaTypes = [
   pullQuote,
   bodyText,
   chapter,
+  orb,
   // base blocks
   richText,
   statGroup,

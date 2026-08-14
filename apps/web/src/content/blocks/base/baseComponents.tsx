@@ -13,6 +13,7 @@ import {
 import { Cta } from './cta/Cta'
 import { Embed } from './embed/Embed'
 import { Figure } from './figure/Figure'
+import { Orb } from './orb/Orb'
 import { RichText } from './richText/RichText'
 import { StatGroup } from './statGroup/StatGroup'
 
@@ -23,6 +24,7 @@ export const BASE_BLOCK_BINDINGS = [
   defineBlockRender('embed', { component: Embed }),
   defineBlockRender('cta', { component: Cta }),
   defineBlockRender('statGroup', { component: StatGroup }),
+  defineBlockRender('orb', { component: Orb }),
 ] satisfies ReadonlyArray<ClientBlockRenderBinding<BaseBlockName>>
 
 /**

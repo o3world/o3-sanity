@@ -96,6 +96,10 @@ export type { OrbitalDiagramItem, OrbitalDiagramProps } from './components/orbit
 export { OrbitalSphere } from './components/orbital-sphere'
 export type { OrbitalSphereProps } from './components/orbital-sphere'
 
+// ThinkingOrb — the `thinking-orbs` canvas orb, wrapped (orbs.jakubantalik.com)
+export { ThinkingOrb } from './components/thinking-orb'
+export type { OrbSize, OrbState, OrbTheme, ThinkingOrbProps } from './components/thinking-orb'
+
 // PortraitTile — the black-and-red-arc tile a team headshot sits on (1925:5864)
 export { PortraitTile } from './components/portrait-tile'
 export type { PortraitTileProps } from './components/portrait-tile'

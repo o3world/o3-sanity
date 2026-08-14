@@ -211,6 +211,9 @@ export type LayoutSection = {
     | ({
         _key: string
       } & StatGroup)
+    | ({
+        _key: string
+      } & Orb)
   >
   surface?: 'white' | 'bone' | 'ink'
 }
@@ -283,6 +286,7 @@ export type DisciplineGridSection = {
   disciplines?: Array<{
     heading?: string
     body?: string
+    orb?: Orb
     _type: 'discipline'
     _key: string
   }>
@@ -412,6 +416,23 @@ export type StatGroup = {
 export type RichText = {
   _type: 'richText'
   body?: BodyText
+}
+
+export type Orb = {
+  _type: 'orb'
+  state?:
+    | 'working'
+    | 'searching'
+    | 'solving'
+    | 'listening'
+    | 'connecting'
+    | 'weaving'
+    | 'composing'
+    | 'breathing'
+    | 'shaping'
+  size?: 64 | 20
+  speed?: number
+  paused?: boolean
 }
 
 export type Chapter = {
@@ -854,6 +875,7 @@ export type AllSanitySchemaTypes =
   | HeroSection
   | StatGroup
   | RichText
+  | Orb
   | Chapter
   | BodyText
   | PullQuote
@@ -1348,6 +1370,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         disciplines?: Array<{
           heading?: string
           body?: string
+          orb?: Orb
           _type: 'discipline'
           _key: string
         }>
@@ -1548,6 +1571,23 @@ export type CASE_STUDY_QUERY_RESULT = {
               }
               alt?: string
               caption?: string
+            }
+          | {
+              _key: string
+              _type: 'orb'
+              state?:
+                | 'breathing'
+                | 'composing'
+                | 'connecting'
+                | 'listening'
+                | 'searching'
+                | 'shaping'
+                | 'solving'
+                | 'weaving'
+                | 'working'
+              size?: 20 | 64
+              speed?: number
+              paused?: boolean
             }
           | {
               _key: string
@@ -1942,6 +1982,7 @@ export type PAGE_QUERY_RESULT = {
         disciplines?: Array<{
           heading?: string
           body?: string
+          orb?: Orb
           _type: 'discipline'
           _key: string
         }>
@@ -2142,6 +2183,23 @@ export type PAGE_QUERY_RESULT = {
               }
               alt?: string
               caption?: string
+            }
+          | {
+              _key: string
+              _type: 'orb'
+              state?:
+                | 'breathing'
+                | 'composing'
+                | 'connecting'
+                | 'listening'
+                | 'searching'
+                | 'shaping'
+                | 'solving'
+                | 'weaving'
+                | 'working'
+              size?: 20 | 64
+              speed?: number
+              paused?: boolean
             }
           | {
               _key: string

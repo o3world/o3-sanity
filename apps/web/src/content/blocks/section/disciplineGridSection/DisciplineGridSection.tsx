@@ -1,4 +1,12 @@
-import { DisplayHeading, HalftoneDisc, OrbitalDiagram, SectionShell } from '@o3/ui'
+import {
+  DisplayHeading,
+  HalftoneDisc,
+  OrbitalDiagram,
+  SectionShell,
+  ThinkingOrb,
+  type OrbSize,
+  type OrbState,
+} from '@o3/ui'
 import { stegaClean } from '@sanity/client/stega'
 
 import { resolveSurface } from '@/content/blocks/surface'
@@ -28,6 +36,12 @@ type DisciplineGridSectionProps = SectionProps<'disciplineGridSection'>
  * they are arranged, which is the same test `railPanelsSection`'s `rail` field
  * passed. Two block types would have made "add a discipline" a question about
  * which page you were on.
+ *
+ * **The disc is a default, not a fixture.** A discipline carrying an `orb`
+ * draws the animated `thinking-orbs` canvas in the disc's well instead — per
+ * row, so a band can mix them. It applies to the `grid` composition only: the
+ * orbital diagram draws its own nodes into one 1120×1172 canvas and has no
+ * slot to swap.
  *
  * The orbital composition is `lg` and up. 1120px of absolutely-positioned copy
  * has no honest 402 form and no 402 frame to copy, so below `lg` it falls back
@@ -62,12 +76,28 @@ export function DisciplineGridSection({
     <div className="grid gap-x-8 gap-y-4 md:grid-cols-2">
       {items.map((discipline) => (
         <div key={discipline._key} className="flex items-center gap-8 py-8 lg:px-8 lg:py-12">
-          {/* 138px on the frame, at the ink the frame draws it in (#0A0A0A —
-              `text-ink`, not the band's #232323 body colour). The ink surface
-              has no frame for this layout; white is the only honest inversion. */}
-          <HalftoneDisc
-            className={onInk ? 'lg:w-34.5 w-20 text-white' : 'text-ink lg:w-34.5 w-20'}
-          />
+          {discipline.orb ? (
+            /* The orb takes the disc's well rather than its diameter: the
+               library's 64px preset is a tuned drawing, and stretching its
+               canvas to 138 would soften every dot. Theme is pinned from the
+               band's surface — `auto` would read the document, which is
+               always light here, and paint dark ink on the ink band. */
+            <ThinkingOrb
+              state={stegaClean(discipline.orb.state) as OrbState | undefined}
+              size={stegaClean(discipline.orb.size) as OrbSize | undefined}
+              speed={stegaClean(discipline.orb.speed)}
+              paused={stegaClean(discipline.orb.paused)}
+              theme={onInk ? 'dark' : 'light'}
+              className="lg:w-34.5 aspect-square w-20"
+            />
+          ) : (
+            /* 138px on the frame, at the ink the frame draws it in (#0A0A0A —
+               `text-ink`, not the band's #232323 body colour). The ink surface
+               has no frame for this layout; white is the only honest inversion. */
+            <HalftoneDisc
+              className={onInk ? 'lg:w-34.5 w-20 text-white' : 'text-ink lg:w-34.5 w-20'}
+            />
+          )}
           <div className="flex flex-col justify-center gap-2">
             {discipline.heading ? (
               <DisplayHeading as={disciplineTag} level="lg" className="tracking-[-0.0222em]">
