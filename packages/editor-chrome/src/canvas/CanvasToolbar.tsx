@@ -3,12 +3,15 @@
 import { useEffect, useRef, useState } from 'react'
 import type { OverlayComponent } from '@sanity/visual-editing'
 import { useDocuments, useVisualEditingEnvironment } from '@sanity/visual-editing/react'
+import type { BlockKnobs, ResolvedKnob } from '@o3/block-spec'
 
+import { barKnobs, blockKnobReader } from './barKnobs'
 import { CanvasToolbarView } from './CanvasToolbarView'
 import { computeChipDock, dockToAnchor, findAttributedElement } from './dock'
-import { initialDraftSnapshot, tryGetDocument } from './draftPatch'
+import { commitPatch, initialDraftSnapshot, tryGetDocument } from './draftPatch'
 import { componentName, subjectName } from './identity'
 import { resolveGroqPath } from './groqPath'
+import { knobPatch } from './knobPatch'
 import type { CanvasLevel } from './subject'
 
 /**
@@ -26,9 +29,23 @@ import type { CanvasLevel } from './subject'
  * Presentation's own element tab (top-left), so the stock chrome and ours read
  * as two groups rather than one crowded one.
  *
- * No knobs yet — #109 adds them. What is here is attachment, geometry and
- * naming, which is the part that has to be right before a control can sit on
- * it.
+ * THE CHAIN (#109), end to end and all of it visible from here:
+ *
+ *     the draft snapshot  →  blockKnobReader(snapshot, blockPath)
+ *                         →  barKnobs({spec, read, nested})     the controls
+ *     a pick              →  knobPatch(blockPath, name, value)  the patches
+ *                         →  commitPatch                        the draft
+ *                         →  the preview repaints
+ *
+ * Everything with a rule in it — which knobs apply, what each currently reads,
+ * what a pick writes — is a pure function above this file. What is left is the
+ * snapshot, the commit, and the settle.
+ *
+ * THE KNOB SPECS ARRIVE AS A PROP. This package knows the knob VOCABULARY
+ * (`@o3/block-spec`, zero dependencies) and no block's declarations: the site
+ * hands its own registry in through `createCanvasComponents`. An import of
+ * `@o3/sanity` here would make the shareable overlay depend on this repo's
+ * schema package for a lookup the app can just as easily perform.
  */
 
 // A type alias rather than an interface: `OverlayComponent` constrains its
@@ -39,18 +56,26 @@ export type CanvasToolbarProps = {
   blockPath?: string
   itemPath?: string
   /**
-   * The block sits in another block's array. Nothing reads it yet — it is the
-   * argument `visibleKnobs({nested})` takes in #109, where a nested block
-   * drops its band knobs because its host owns the strip. Declared rather than
-   * passed silently so the contract says what crosses this seam.
+   * The block sits in another block's array, so it forms no band of its own and
+   * its band knobs drop — the host owns the strip. Passed straight to
+   * `visibleKnobs({nested})`.
    */
   nested?: boolean
+  /**
+   * Every block's declared knobs, keyed by `_type` — the site's registry,
+   * handed in by `createCanvasComponents`. A type absent from it has no knobs
+   * DECLARED YET (ADR 0020 is a migration in progress), which is not the same
+   * as having none, so the bar stays silent about it rather than saying so.
+   */
+  blockKnobs?: Readonly<Record<string, BlockKnobs>>
 }
 
 interface InnerProps {
   level: CanvasLevel
   blockPath: string
   itemPath: string | undefined
+  nested: boolean
+  blockKnobs: Readonly<Record<string, BlockKnobs>>
   documentId: string
   /** The hovered element's own GROQ path — the chip's subject when no item encloses it. */
   path: string
@@ -65,6 +90,8 @@ function CanvasToolbarInner({
   level,
   blockPath,
   itemPath,
+  nested,
+  blockKnobs,
   documentId,
   path,
   element,
@@ -119,6 +146,42 @@ function CanvasToolbarInner({
       })
     : undefined
 
+  // WHAT THE BAR OFFERS. The block names its own type, the site's registry
+  // turns that into a declaration, and `barKnobs` answers the rest. Own-
+  // property guard because the key comes from a document: a block stored as
+  // `constructor` would otherwise resolve to something off Object.prototype.
+  const blockType = typeAt(blockPath)
+  const spec =
+    typeof blockType === 'string' && Object.prototype.hasOwnProperty.call(blockKnobs, blockType)
+      ? blockKnobs[blockType]
+      : undefined
+  const knobs = spec ? barKnobs({ spec, read: blockKnobReader(snapshot, blockPath), nested }) : []
+
+  /**
+   * A pick, committed to the draft.
+   *
+   * SETTLE AFTER, NEVER BESIDE. Dropping the snapshot re-arms the effect above,
+   * which re-pulls it — and only once the mutation has landed. Re-reading it
+   * synchronously beside the commit reads the draft before the write, so the
+   * control snaps back to the old value and then quietly corrects itself.
+   *
+   * The repaint an editor sees is not this refetch: the mutator's own local
+   * rebase reaches `useOptimistic` in the page's block renderer immediately,
+   * which is what makes the pick land on the click rather than a second later.
+   * This is only what makes the CONTROL agree with it.
+   */
+  const pickKnob = (resolved: ResolvedKnob, value: string) => {
+    if (!doc) return
+    void commitPatch(doc, knobPatch(blockPath, resolved.knob.name, value), {
+      onSettle: () => setSnapshot(undefined),
+      onError: (error: unknown) => {
+        // A rejected patch used to arrive as an unhandled rejection while the
+        // bar sat there looking like it had worked.
+        console.error(`[canvas] could not set ${resolved.knob.name} on ${blockPath}`, error)
+      },
+    })
+  }
+
   // Dock the bar at the BAND's corner, imperatively through a callback ref —
   // no setState-in-effect cascade, and the deltas are read at the moment they
   // are written.
@@ -171,6 +234,8 @@ function CanvasToolbarInner({
     <CanvasToolbarView
       componentName={component}
       subjectName={subject}
+      knobs={knobs}
+      onPickKnob={pickKnob}
       barRef={dockBar}
       chipRef={dockChip}
     />
@@ -190,6 +255,8 @@ export const CanvasToolbar: OverlayComponent<CanvasToolbarProps> = ({
   level = 'field',
   blockPath,
   itemPath,
+  nested = false,
+  blockKnobs = {},
 }) => {
   // DRAFT EDITING ONLY. `VisualEditing` itself mounts only in draft mode, but
   // the draft cookie survives leaving Presentation — browsing the site
@@ -207,6 +274,8 @@ export const CanvasToolbar: OverlayComponent<CanvasToolbarProps> = ({
         level={level}
         blockPath={blockPath}
         itemPath={itemPath}
+        nested={nested}
+        blockKnobs={blockKnobs}
         documentId={node.id}
         path={node.path}
         element={element}
