@@ -3,13 +3,13 @@ import { describe, expect, it } from 'vitest'
 import {
   disableDraftModeHref,
   readStudioToken,
-  safeReturnPath,
-  shouldShowPreviewSwitcher,
+  shouldShowEditorToolbar,
   studioTokenStorageKey,
   type TokenStorage,
 } from './draftPreview'
 
 const PROJECT = 'naorcr6k'
+const DISABLE_PATH = '/api/draft-mode/disable'
 
 function storage(entries: Record<string, string>): TokenStorage {
   return { getItem: (key) => entries[key] ?? null }
@@ -52,10 +52,10 @@ describe('readStudioToken', () => {
   })
 })
 
-describe('shouldShowPreviewSwitcher', () => {
+describe('shouldShowEditorToolbar', () => {
   it('shows nothing to an anonymous visitor', () => {
     expect(
-      shouldShowPreviewSwitcher({
+      shouldShowEditorToolbar({
         isDraft: false,
         hasStudioToken: false,
         isPresentationTool: null,
@@ -65,13 +65,13 @@ describe('shouldShowPreviewSwitcher', () => {
 
   it('offers drafts to a Studio user reading published content', () => {
     expect(
-      shouldShowPreviewSwitcher({ isDraft: false, hasStudioToken: true, isPresentationTool: null }),
+      shouldShowEditorToolbar({ isDraft: false, hasStudioToken: true, isPresentationTool: null }),
     ).toBe(true)
   })
 
   it('offers the way out once draft mode is on, session token or not', () => {
     expect(
-      shouldShowPreviewSwitcher({
+      shouldShowEditorToolbar({
         isDraft: true,
         hasStudioToken: false,
         isPresentationTool: false,
@@ -81,47 +81,32 @@ describe('shouldShowPreviewSwitcher', () => {
 
   it('stays out of Presentation, which owns draft mode in its own frame', () => {
     expect(
-      shouldShowPreviewSwitcher({ isDraft: true, hasStudioToken: true, isPresentationTool: true }),
+      shouldShowEditorToolbar({ isDraft: true, hasStudioToken: true, isPresentationTool: true }),
     ).toBe(false)
   })
 
   it('waits for the presentation verdict rather than flashing inside it', () => {
     // `null` is the pre-handshake state; showing then hiding would be visible.
     expect(
-      shouldShowPreviewSwitcher({ isDraft: true, hasStudioToken: true, isPresentationTool: null }),
+      shouldShowEditorToolbar({ isDraft: true, hasStudioToken: true, isPresentationTool: null }),
     ).toBe(false)
-  })
-})
-
-describe('safeReturnPath', () => {
-  it('keeps a same-origin path, query and all', () => {
-    expect(safeReturnPath('/insights?page=3')).toBe('/insights?page=3')
-    expect(safeReturnPath('/')).toBe('/')
-  })
-
-  it('refuses anything a browser would resolve off-origin', () => {
-    expect(safeReturnPath('//evil.example')).toBe('/')
-    expect(safeReturnPath('/\\evil.example')).toBe('/')
-    expect(safeReturnPath('https://evil.example')).toBe('/')
-    expect(safeReturnPath('javascript:alert(1)')).toBe('/')
-    expect(safeReturnPath('insights')).toBe('/')
-  })
-
-  it('refuses header smuggling and missing input', () => {
-    expect(safeReturnPath('/ok\r\nSet-Cookie: a=b')).toBe('/')
-    expect(safeReturnPath(null)).toBe('/')
-    expect(safeReturnPath(undefined)).toBe('/')
   })
 })
 
 describe('disableDraftModeHref', () => {
   it('encodes the destination into the disable route', () => {
-    expect(disableDraftModeHref('/work/acme?x=1')).toBe(
+    expect(disableDraftModeHref(DISABLE_PATH, '/work/acme?x=1')).toBe(
       '/api/draft-mode/disable?to=%2Fwork%2Facme%3Fx%3D1',
     )
   })
 
   it('sanitises before encoding, so a bad ?to= never reaches the server', () => {
-    expect(disableDraftModeHref('//evil.example')).toBe('/api/draft-mode/disable?to=%2F')
+    expect(disableDraftModeHref(DISABLE_PATH, '//evil.example')).toBe(
+      '/api/draft-mode/disable?to=%2F',
+    )
+  })
+
+  it('takes the route from config — the path is the host app’s to name', () => {
+    expect(disableDraftModeHref('/preview/off', '/')).toBe('/preview/off?to=%2F')
   })
 })

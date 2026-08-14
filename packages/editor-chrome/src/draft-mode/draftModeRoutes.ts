@@ -1,11 +1,11 @@
-import { safeReturnPath, SANITY_PROJECT_ID } from './draftPreview'
+import { safeReturnPath } from '../paths'
 
 /**
- * The two draft-mode route handlers, lifted out of `app/api/` so they can be
- * unit-tested (#60). Every effect they have is injected: `draftMode` and the
- * token verifier come in as dependencies, and the result is a plain `Response`
- * — so nothing here imports `next/headers` or `next/server`, and a test needs
- * no request scope.
+ * The two draft-mode route handlers, lifted out of the app's `app/api/` so
+ * they can be unit-tested (#60). Every effect they have is injected:
+ * `draftMode` and the token verifier come in as dependencies, and the result
+ * is a plain `Response` — so nothing here imports `next/headers` or
+ * `next/server`, and a test needs no request scope.
  *
  * **The security rule this file exists to hold:** draft mode reveals every
  * unpublished document in the dataset, so it is never enabled because the
@@ -37,7 +37,8 @@ export function studioUsersMeUrl(projectId: string): string {
 }
 
 export interface VerifyStudioTokenOptions {
-  projectId?: string
+  /** The project a caller must be a member of. No default — guessing it is the bug. */
+  projectId: string
   /** Injected in tests; defaults to the platform `fetch`. */
   fetchImpl?: typeof fetch
 }
@@ -66,7 +67,7 @@ interface SanityUser {
  */
 export async function verifyStudioToken(
   token: string,
-  { projectId = SANITY_PROJECT_ID, fetchImpl = fetch }: VerifyStudioTokenOptions = {},
+  { projectId, fetchImpl = fetch }: VerifyStudioTokenOptions,
 ): Promise<boolean> {
   if (!token) return false
 
@@ -107,13 +108,13 @@ export interface EnableDraftModeDeps {
 }
 
 /**
- * `POST /api/draft-mode/enable` — the preview switcher's way in.
+ * `POST <enablePath>` — the editor toolbar's way in.
  *
- * Distinct from the `GET` on the same route, which is next-sanity's
- * `defineEnableDraftMode` and validates a Presentation preview-URL secret.
- * Both are "enable draft mode"; they differ only in which credential the
- * caller can produce, which is why they share a URL rather than inventing a
- * second one.
+ * Distinct from the `GET` a host app usually mounts on the same route, which
+ * is next-sanity's `defineEnableDraftMode` and validates a Presentation
+ * preview-URL secret. Both are "enable draft mode"; they differ only in which
+ * credential the caller can produce, which is why they share a URL rather than
+ * inventing a second one.
  *
  * The response carries the draft-mode cookie, so the caller's `router.refresh()`
  * re-renders the very URL it was on — no redirect, no lost scroll position.
@@ -141,9 +142,9 @@ export interface DisableDraftModeDeps {
 }
 
 /**
- * `GET /api/draft-mode/disable` — the way out, and deliberately unauthenticated:
- * the worst a stranger can do is see published content, which is what they
- * were already entitled to.
+ * `GET <disablePath>` — the way out, and deliberately unauthenticated: the
+ * worst a stranger can do is see published content, which is what they were
+ * already entitled to.
  *
  * A plain link rather than a fetch, so leaving draft mode works with no
  * JavaScript and the navigation itself is the refresh. `?to=` is sanitised by

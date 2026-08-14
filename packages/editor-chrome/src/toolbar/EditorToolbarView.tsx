@@ -3,10 +3,10 @@
 import { disableDraftModeHref } from './draftPreview'
 
 /**
- * The preview switcher's pixels (#60) — a pure function of props, with no
+ * The editor toolbar's pixels (#60, #99) — a pure function of props, with no
  * hooks and no imports beyond the href helper.
  *
- * Kept apart from `PreviewSwitcherChip` on purpose: the chip's presentation
+ * Kept apart from `EditorToolbarChip` on purpose: the chip's presentation
  * detection reaches for `next-sanity/hooks`, which pulls the whole visual
  * editing runtime in behind it. Splitting the view off means the render layer
  * can mount every state (ADR 0004) without loading any of that.
@@ -18,14 +18,18 @@ import { disableDraftModeHref } from './draftPreview'
  * page or cost a layout shift.
  */
 
-export type PreviewSwitcherStatus = 'idle' | 'working' | 'error'
+export type EditorToolbarStatus = 'idle' | 'working' | 'error'
 
-export interface PreviewSwitcherViewProps {
+export interface EditorToolbarViewProps {
   /** Next.js draft mode is on — the page is showing drafts. */
   isDraft: boolean
   /** The path to come back to after leaving draft mode. */
   returnTo: string
-  status: PreviewSwitcherStatus
+  /** Where `GET`ting turns draft mode off. */
+  disablePath: string
+  /** Presentation, opened on this page — `presentationHref`. */
+  editHref: string
+  status: EditorToolbarStatus
   onEnableDrafts: () => void
 }
 
@@ -33,25 +37,27 @@ const SEGMENT = 'px-2 py-1 transition-opacity duration-(--duration-hover) ease-o
 const CURRENT = `${SEGMENT} bg-white/10 text-on-ink`
 const ACTION = `${SEGMENT} text-on-ink-subtle hover:text-on-ink focus-visible:ring-brand focus-visible:outline-none focus-visible:ring-2 disabled:opacity-50`
 
-export function PreviewSwitcherView({
+export function EditorToolbarView({
   isDraft,
   returnTo,
+  disablePath,
+  editHref,
   status,
   onEnableDrafts,
-}: PreviewSwitcherViewProps) {
+}: EditorToolbarViewProps) {
   return (
     <aside
-      aria-label="Preview mode"
+      aria-label="Editor toolbar"
       // bottom-right, by editorial preference (#60). This sat bottom-left to
       // leave room for a "back to top" affordance that was never built and is
-      // not planned; reserving a corner for a hypothesis cost the real chip
+      // not planned; reserving a corner for a hypothesis cost the real toolbar
       // the corner an editor looks in.
       className="text-legal border-on-ink-line bg-ink/95 fixed bottom-4 right-4 z-50 flex items-center gap-1 border p-1 font-sans shadow-lg print:hidden"
     >
       <span className="text-on-ink-subtle px-2 uppercase tracking-[0.1em]">Preview</span>
 
       {isDraft ? (
-        <a className={ACTION} href={disableDraftModeHref(returnTo)}>
+        <a className={ACTION} href={disableDraftModeHref(disablePath, returnTo)}>
           Published
         </a>
       ) : (
@@ -74,6 +80,15 @@ export function PreviewSwitcherView({
           {status === 'working' ? 'Checking…' : 'Drafts'}
         </button>
       )}
+
+      {/* The whole point of the toolbar growing past the switcher: one hop
+          from the page to the tool that edits it, on the page you are on.
+          Same tab — Presentation loads this page back into its own frame, so
+          nothing is lost by leaving. */}
+      <span aria-hidden="true" className="bg-on-ink-line mx-1 h-4 w-px" />
+      <a className={ACTION} href={editHref}>
+        Edit this page
+      </a>
 
       {status === 'error' ? (
         <span className="text-brand-tint px-2" role="status">

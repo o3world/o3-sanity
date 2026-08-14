@@ -1,7 +1,8 @@
 import { draftMode } from 'next/headers'
+import { enableDraftModeForStudioSession, verifyStudioToken } from '@o3/editor-chrome/draft-mode'
 import { defineEnableDraftMode } from 'next-sanity/draft-mode'
 
-import { enableDraftModeForStudioSession, verifyStudioToken } from '@/sanity/draftModeRoutes'
+import { editorToolbarConfig } from '@/sanity/editorToolbar'
 import { client } from '@/sanity/live'
 
 /**
@@ -12,11 +13,14 @@ import { client } from '@/sanity/live'
  * `previewMode.enable`). next-sanity validates the preview-url secret with the
  * token-bearing client before enabling Next.js draft mode.
  *
- * `POST` is the preview switcher's (#60): an editor browsing the site normally
+ * `POST` is the editor toolbar's (#60): an editor browsing the site normally
  * has no preview secret, only the Studio session sitting in same-origin
  * `localStorage`. The token comes up in the body and is checked against the
  * Sanity API for membership of this project before draft mode is enabled — the
  * client's claim on its own is never enough.
+ *
+ * Both halves are adapters. The rules live in `@o3/editor-chrome/draft-mode`,
+ * which takes plain `Request`s and knows nothing about Next.
  */
 export const { GET } = defineEnableDraftMode({
   client: client.withConfig({ token: process.env.SANITY_API_READ_TOKEN }),
@@ -25,6 +29,6 @@ export const { GET } = defineEnableDraftMode({
 export async function POST(request: Request): Promise<Response> {
   return enableDraftModeForStudioSession(request, {
     draftMode,
-    verifyToken: (token) => verifyStudioToken(token),
+    verifyToken: (token) => verifyStudioToken(token, { projectId: editorToolbarConfig.projectId }),
   })
 }

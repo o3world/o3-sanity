@@ -1,0 +1,33 @@
+{
+  "name": "@o3/editor-chrome",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "format": "prettier --write .",
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@o3/typescript-config": "workspace:*",
+    "@sanity/icons": "^5.2.1",
+    "@types/react": "^19.0.0",
+    "next": "^16.2.4",
+    "next-sanity": "^13.2.3",
+    "react": "^19.2.7",
+    "sanity": "6.8.0",
+    "typescript": "^5.7.0"
+  },
+  "peerDependencies": {
+    "@sanity/icons": "^5",
+    "next": "^16",
+    "next-sanity": "^13",
+    "react": "^19",
+    "sanity": "^6.8.0"
+  },
+  "exports": {
+    "./studio": "./src/studio/index.ts",
+    "./toolbar": "./src/toolbar/index.ts",
+    "./draft-mode": "./src/draft-mode/index.ts"
+  }
+}

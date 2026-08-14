@@ -4,8 +4,8 @@ import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
 
 /**
  * Presentation's route <-> document wiring, lifted out of `sanity.config.ts`
- * so it can be unit-tested — the same move `draftModeRoutes.ts` makes for the
- * draft-mode handlers.
+ * so it can be unit-tested — the same move `@o3/editor-chrome/draft-mode`
+ * makes for the draft-mode handlers.
  *
  * These strings are parsed by **path-to-regexp**, bundled inside `sanity`, and
  * a malformed pattern is not a soft failure: `getRouteContext` re-throws out of

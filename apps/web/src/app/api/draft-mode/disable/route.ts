@@ -1,6 +1,5 @@
 import { draftMode } from 'next/headers'
-
-import { disableDraftModeAndReturn } from '@/sanity/draftModeRoutes'
+import { disableDraftModeAndReturn } from '@o3/editor-chrome/draft-mode'
 
 /**
  * The way out of draft mode (#60) — the counterpart the scaffold never had.

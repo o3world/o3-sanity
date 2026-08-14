@@ -1,8 +1,9 @@
 import type React from 'react'
 import { draftMode } from 'next/headers'
+import { EditorToolbar } from '@o3/editor-chrome/toolbar'
 
+import { editorToolbarConfig } from '@/sanity/editorToolbar'
 import { SanityLive } from '@/sanity/live'
-import { PreviewSwitcher } from '@/sanity/PreviewSwitcher'
 import { getSiteSettings } from '@/sanity/siteSettings'
 import { VisualEditing } from '@/sanity/VisualEditing'
 import { SiteFooter } from '@/ui/SiteFooter'
@@ -26,10 +27,10 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       <SiteFooter settings={settings} />
       <SanityLive />
       {isDraft ? <VisualEditing /> : null}
-      {/* Renders nothing unless the visitor holds a Studio session (#60).
+      {/* Renders nothing unless the visitor holds a Studio session (#60, #99).
           `<VisualEditing />` above is what lets it tell Presentation's frame
-          from an ordinary tab — see shouldShowPreviewSwitcher. */}
-      <PreviewSwitcher isDraft={isDraft} />
+          from an ordinary tab — see shouldShowEditorToolbar. */}
+      <EditorToolbar isDraft={isDraft} config={editorToolbarConfig} />
     </>
   )
 }
