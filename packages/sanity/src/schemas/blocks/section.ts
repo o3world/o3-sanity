@@ -4,7 +4,10 @@ import { decorationField } from './fields'
 import { hiddenUnless } from './knobFields'
 import { SECTION_BLOCKS } from './registry'
 import { PAGE_TYPES } from '../../constants'
+import { disciplineGridSectionKnobs } from '../../knobs/disciplineGridSection'
 import { heroSectionKnobs } from '../../knobs/heroSection'
+import { inFlightSectionKnobs } from '../../knobs/inFlightSection'
+import { railPanelsSectionKnobs } from '../../knobs/railPanelsSection'
 
 /**
  * The first block whose design options are declared rather than written out
@@ -98,40 +101,20 @@ export const caseShowcaseSection = defineSectionBlock({
   preview: { select: { title: 'heading' } },
 })
 
+/**
+ * `layout`, `rail` and `surface` are declared in
+ * `src/knobs/railPanelsSection.ts` (ADR 0020), including the gate that used to
+ * be `rail`'s `hidden` closure. Everything here is editorial.
+ */
 export const railPanelsSection = defineSectionBlock({
   name: 'railPanelsSection',
   title: 'Rail + panels',
+  knobs: railPanelsSectionKnobs,
   fields: [
     defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
     defineField({ name: 'intro', type: 'text', rows: 3 }),
-    defineField({
-      name: 'layout',
-      type: 'string',
-      description:
-        'How the panels are arranged: a numbered/labelled rail beside tall panels (Home), or a row of ink cards (Solutions).',
-      // The Solutions frame (1925:6108) carries the SAME band as Home's
-      // ways-to-work (1762:2168) — same heading, same standfirst, same three
-      // engagements — in a different arrangement: no rail, no media square,
-      // three 394×526 ink cards each holding a halftone disc. Identical
-      // content, different shape, so it is a layout axis rather than a second
-      // block — the test disciplineGridSection's `grid | orbital` and
-      // inFlightSection's `cards | rows` already passed (#47, #56, #50).
-      options: { list: ['rail', 'cards'], layout: 'radio', direction: 'horizontal' },
-      initialValue: 'rail',
-    }),
-    defineField({
-      name: 'rail',
-      type: 'string',
-      description:
-        'Rail layout only — what the rail counts off: each panel’s label (the platforms band) or its position (the ways-to-work band, where the frame numbers 01/02/03).',
-      // Both canonical bands (1762:2149 and 1762:2168) share one composition
-      // and differ only here, so this is a variant of the block rather than a
-      // second block — #42. Numbers derive from order, the same rule
-      // caseStudy.story’s chapters already follow (CONTEXT.md).
-      options: { list: ['label', 'number'], layout: 'radio', direction: 'horizontal' },
-      initialValue: 'label',
-      hidden: ({ parent }) => parent?.layout === 'cards',
-    }),
+    'layout',
+    'rail',
     defineField({
       name: 'panels',
       type: 'array',
@@ -164,10 +147,11 @@ export const railPanelsSection = defineSectionBlock({
               type: 'string',
               description: 'The quieter "Best when…" line — the foot of a card.',
             }),
-            // `cta` and `media` are rail-layout elements like `rail` above,
+            // `cta` and `media` are rail-layout elements like the `rail` knob,
             // but a panel field's `hidden` callback sees only the panel it
-            // sits in, not the section's `layout` — so these two carry the
-            // gate as prose where `rail` gets the mechanical one.
+            // sits in, not the section's `layout` — and a `showWhen` reads
+            // block-relative paths for the same reason. So these two carry the
+            // gate as prose where `rail` gets the declared one.
             defineField({
               name: 'cta',
               type: 'cta',
@@ -243,23 +227,19 @@ export const ctaSection = defineSectionBlock({
   preview: { select: { title: 'heading' } },
 })
 
+/**
+ * `layout` and `surface` are declared in `src/knobs/disciplineGridSection.ts`
+ * (ADR 0020). The `disciplines` length rule still reads `layout` from the form
+ * value, because what a choice requires of the rest of the document is
+ * validation rather than a knob.
+ */
 export const disciplineGridSection = defineSectionBlock({
   name: 'disciplineGridSection',
   title: 'Discipline grid',
+  knobs: disciplineGridSectionKnobs,
   fields: [
     defineField({ name: 'heading', type: 'string' }),
-    defineField({
-      name: 'layout',
-      type: 'string',
-      description:
-        'Grid is the About band — a 2×2 of halftone-disc rows. Orbital is the Solutions centrepiece: the same four disciplines placed on a dotted tetrahedron.',
-      // The same four disciplines appear twice in the canonical frames — as
-      // rows on About (`1925:5915`) and as the diagram on Solutions
-      // (`1928:6524`). Same content, two compositions, which is a `layout`
-      // axis rather than a second block (#56, surfaced by #46 and #47).
-      options: { list: ['grid', 'orbital'], layout: 'radio', direction: 'horizontal' },
-      initialValue: 'grid',
-    }),
+    'layout',
     defineField({
       name: 'disciplines',
       type: 'array',
@@ -358,9 +338,14 @@ export const roleListSection = defineSectionBlock({
   preview: { select: { title: 'heading', subtitle: 'eyebrow' } },
 })
 
+/**
+ * `layout` and `surface` are declared in `src/knobs/inFlightSection.ts`
+ * (ADR 0020). Everything here is editorial.
+ */
 export const inFlightSection = defineSectionBlock({
   name: 'inFlightSection',
   title: 'In flight',
+  knobs: inFlightSectionKnobs,
   fields: [
     defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
     defineField({
@@ -369,20 +354,7 @@ export const inFlightSection = defineSectionBlock({
       rows: 2,
       description: 'The 24px standfirst beside the heading. The Ideas band has none.',
     }),
-    defineField({
-      name: 'layout',
-      type: 'string',
-      description:
-        'Cards is the studio band — a scrolling row of image cards. Rows is the hairline list: a date or a halftone disc, a kicker, a title, and a link.',
-      // The Live frame draws the same three-field entry three times
-      // (`1751:1994`, `1710:1800`, `1732:1409`) in two compositions, so this
-      // is a layout axis on one block rather than three blocks — the call
-      // `disciplineGridSection.layout` and `railPanelsSection.rail` already
-      // make (#56, #42). Which lead a row draws is NOT a third enum: an entry
-      // with a `date` gets the date column, everything else gets the disc.
-      options: { list: ['cards', 'rows'], layout: 'radio', direction: 'horizontal' },
-      initialValue: 'cards',
-    }),
+    'layout',
     defineField({
       name: 'entries',
       type: 'array',
