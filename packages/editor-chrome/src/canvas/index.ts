@@ -21,6 +21,16 @@ export { CanvasToolbar, type CanvasToolbarProps } from './CanvasToolbar'
 export { CanvasToolbarView, type CanvasToolbarViewProps } from './CanvasToolbarView'
 export { canvasSubject, type CanvasLevel, type CanvasSubject } from './subject'
 export { componentName, subjectName } from './identity'
+export {
+  duplicateItemPatch,
+  itemActionGroups,
+  moveItemPatch,
+  removeItemPatch,
+  type ItemAction,
+  type ItemActionGroup,
+  type ItemActionId,
+  type ItemMove,
+} from './itemActions'
 export { KnobControl, type KnobControlProps } from './KnobControl'
 export { KnobMenu, type KnobMenuProps } from './KnobMenu'
 export {

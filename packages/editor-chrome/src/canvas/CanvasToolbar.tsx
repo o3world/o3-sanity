@@ -8,9 +8,15 @@ import type { BlockKnobs, ResolvedKnob } from '@o3/block-spec'
 import { barKnobs, blockKnobReader } from './barKnobs'
 import { CanvasToolbarView } from './CanvasToolbarView'
 import { computeChipDock, computeMenuDock, dockToAnchor, findAttributedElement } from './dock'
-import { commitPatch, initialDraftSnapshot, tryGetDocument } from './draftPatch'
+import {
+  commitPatch,
+  initialDraftSnapshot,
+  reportCanvasFailure,
+  tryGetDocument,
+} from './draftPatch'
 import { componentName, subjectName } from './identity'
 import { resolveGroqPath } from './groqPath'
+import type { ItemAction } from './itemActions'
 import { knobMenuModel, type KnobMenuAction } from './menuModel'
 import { knobPatch } from './knobPatch'
 import type { CanvasLevel } from './subject'
@@ -37,6 +43,10 @@ import type { CanvasLevel } from './subject'
  *     a pick              →  knobPatch(blockPath, name, value)  the patches
  *                         →  commitPatch                        the draft
  *                         →  the preview repaints
+ *
+ *     the draft snapshot  →  itemActionGroups(snapshot, subject) the rows
+ *     an item action      →  the row's own patches (#111)
+ *                         →  commitPatch                        the draft
  *
  * Everything with a rule in it — which knobs apply, what each currently reads,
  * what a pick writes — is a pure function above this file. What is left is the
@@ -164,12 +174,20 @@ function CanvasToolbarInner({
   // difference between the two surfaces. The subject is the innermost keyed
   // item under the cursor, which is the item when one encloses it and the block
   // otherwise; `canvasSubject` already answered that as `itemPath`.
+  //
+  // ITEM ACTIONS (#111) ride the same subject. `itemPath ?? blockPath` is the
+  // innermost keyed array item under the cursor, which is what `canvasSubject`
+  // already computed and what the `kind` below is derived from — one rule,
+  // stated once, rather than a second notion of what the menu is about.
+  const actionPath = itemPath ?? blockPath
   const menu = knobMenuModel({
     spec,
     read,
     nested,
     subject: itemPath ? { kind: 'item', title: subject } : { kind: 'block', title: component },
     componentName: component,
+    snapshot,
+    subjectPath: actionPath,
   })
 
   /**
@@ -189,11 +207,32 @@ function CanvasToolbarInner({
     if (!doc) return
     void commitPatch(doc, knobPatch(blockPath, resolved.knob.name, value), {
       onSettle: () => setSnapshot(undefined),
-      onError: (error: unknown) => {
-        // A rejected patch used to arrive as an unhandled rejection while the
-        // bar sat there looking like it had worked.
-        console.error(`[canvas] could not set ${resolved.knob.name} on ${blockPath}`, error)
-      },
+      // A rejected patch used to arrive as an unhandled rejection while the bar
+      // sat there looking like it had worked.
+      onError: (error: unknown) =>
+        reportCanvasFailure(`could not set ${resolved.knob.name} on ${blockPath}`, error),
+    })
+  }
+
+  /**
+   * DUPLICATE / REMOVE / MOVE, committed to the draft (#111).
+   *
+   * The row arrives carrying its own patches, because the patches are what
+   * decided the row exists — a builder that returned nothing produced no row.
+   * So there is nothing left to decide here: this is the snapshot, the commit
+   * and the settle, exactly as `pickKnob` is.
+   *
+   * SETTLE AFTER, as everywhere else. It matters more for these than for a
+   * knob: after a move or a remove the array's INDICES have changed, and the
+   * next action's builder reads them off this snapshot. Re-pulling beside the
+   * commit would hand the next click a stale order.
+   */
+  const runItemAction = (action: ItemAction) => {
+    if (!doc) return
+    void commitPatch(doc, action.patches, {
+      onSettle: () => setSnapshot(undefined),
+      onError: (error: unknown) =>
+        reportCanvasFailure(`could not ${action.id} ${actionPath}`, error),
     })
   }
 
@@ -303,6 +342,7 @@ function CanvasToolbarInner({
       onPickKnob={pickKnob}
       menu={menu}
       onMenuAction={runMenuAction}
+      onItemAction={runItemAction}
       barRef={dockBar}
       chipRef={dockChip}
       menuDock={dockMenu}

@@ -412,6 +412,136 @@ describe('what the knob menu carries that the bar does not', () => {
   })
 })
 
+/**
+ * ITEM ACTIONS (#111) — Duplicate, Remove and Move, back after #110 preempted
+ * the stock menu that used to carry them.
+ *
+ * Located by ROLE like every other row: an action is a `menuitem`, the same
+ * role the jump uses, because both are a single command rather than one member
+ * of a closed set. What separates them in a test is the testid, and what
+ * separates them on screen is that the jump is always last.
+ */
+describe('what the knob menu can do to the subject', () => {
+  /** A page as the mutator's draft snapshot has it: three sections, three panels. */
+  const draft = {
+    sections: [
+      { _key: 'h', _type: 'heroSection', variant: 'band' },
+      {
+        _key: 'r',
+        _type: 'railPanelsSection',
+        layout: 'rail',
+        panels: [
+          { _key: 'p1', _type: 'panel' },
+          { _key: 'p2', _type: 'panel' },
+          { _key: 'p3', _type: 'panel' },
+        ],
+      },
+      { _key: 'm', _type: 'mediaSection' },
+    ],
+  }
+
+  const render = (subjectPath: string, subject: Parameters<typeof knobMenuModel>[0]['subject']) =>
+    renderToStaticMarkup(
+      <KnobMenu
+        model={knobMenuModel({
+          spec: railPanelsSectionKnobs,
+          read: blockKnobReader(draft, 'sections[_key=="r"]'),
+          nested: false,
+          subject,
+          componentName: 'Rail panels section',
+          snapshot: draft,
+          subjectPath,
+        })}
+        onPick={() => {}}
+        onAction={() => {}}
+        onItemAction={() => {}}
+      />,
+    )
+
+  const panel = () =>
+    render('sections[_key=="r"].panels[_key=="p2"]', { kind: 'item', title: 'Panel' })
+
+  it('offers duplicate, remove and every move that moves something', () => {
+    const html = panel()
+    expect(html).toContain('Duplicate')
+    expect(html).toContain('Remove')
+    // A middle panel can go all four ways.
+    for (const label of ['To top', 'Up', 'Down', 'To bottom']) {
+      expect(html, label).toContain(`>${label}</button>`)
+    }
+    // Six rows plus the jump, and not one `menuitemradio` among them.
+    expect(html.match(/data-testid="canvas-menu-item-action"/g)).toHaveLength(6)
+    expect(rolesIn(html, 'menuitem')).toHaveLength(7)
+  })
+
+  it('keeps the jump last, after the actions as well as after the knobs', () => {
+    const html = panel()
+    expect(html.lastIndexOf('data-testid="canvas-menu-item-action"')).toBeLessThan(
+      html.indexOf('data-testid="canvas-menu-action"'),
+    )
+    expect(html.lastIndexOf('role="menuitemradio"')).toBeLessThan(
+      html.indexOf('data-testid="canvas-menu-item-action"'),
+    )
+  })
+
+  it('drops the move rows that would move nothing', () => {
+    // The no-dead-control rule, at the two ends of the array. `>Up<` and not
+    // `Up`, because "Up" is a substring of nothing here but "To top" is a
+    // substring of the group heading's own words in other layouts.
+    const first = render('sections[_key=="r"].panels[_key=="p1"]', { kind: 'item', title: 'Panel' })
+    expect(first).not.toContain('>To top</button>')
+    expect(first).not.toContain('>Up</button>')
+    expect(first).toContain('>Down</button>')
+
+    const last = render('sections[_key=="r"].panels[_key=="p3"]', { kind: 'item', title: 'Panel' })
+    expect(last).toContain('>Up</button>')
+    expect(last).not.toContain('>Down</button>')
+    expect(last).not.toContain('>To bottom</button>')
+  })
+
+  it('names the untitled group for a screen reader, and titles Move for an eye', () => {
+    // Duplicate and Remove carry no visible heading — the menu header one line
+    // above already names what Remove would remove — so the label is the only
+    // thing that says it aloud.
+    const html = panel()
+    expect(html).toContain('aria-label="Panel"')
+    expect(html).toContain('aria-label="Move"')
+    expect(html).toContain('>Move</div>')
+  })
+
+  it('acts on the block when the block is the subject', () => {
+    // One subject rule, both levels. A section in `page.sections` is a keyed
+    // array member exactly the way a panel is.
+    const html = render('sections[_key=="r"]', { kind: 'block', title: 'Rail panels section' })
+    expect(html).toContain('Duplicate')
+    // The rail section is in the middle of three, so it can go all four ways.
+    expect(html.match(/data-testid="canvas-menu-item-action"/g)).toHaveLength(6)
+  })
+
+  it('offers no actions at all while the draft snapshot has not settled', () => {
+    // The frame between the first hover and the snapshot arriving. The knobs
+    // and the jump still render; a row that would patch nothing does not.
+    const html = renderToStaticMarkup(
+      <KnobMenu
+        model={knobMenuModel({
+          spec: heroSectionKnobs,
+          read: () => undefined,
+          nested: false,
+          subject: { kind: 'block', title: 'Hero section' },
+          componentName: 'Hero section',
+          snapshot: undefined,
+          subjectPath: 'sections[_key=="h"]',
+        })}
+        onPick={() => {}}
+        onAction={() => {}}
+      />,
+    )
+    expect(html).not.toContain('data-testid="canvas-menu-item-action"')
+    expect(rolesIn(html, 'menuitem')).toHaveLength(1)
+    expect(html).toContain('open form')
+  })
+})
+
 describe('at most one menu open, and none until asked', () => {
   it('renders no knob menu until a right-click opens one', () => {
     // The view is mounted through `react-dom/server`, which runs no effects —

@@ -82,6 +82,38 @@ export function blockRootPath(path: string): string | undefined {
   return m?.[0]
 }
 
+/** An array item's own two coordinates: the array it sits in, and its key. */
+export interface KeyedItemParts {
+  /** The PARENT array's path — what an item action patches. */
+  arrayPath: string
+  key: string
+}
+
+/**
+ * Split a keyed item's path into the array that holds it and its own key:
+ * `sections[_key=="a"].panels[_key=="b"]` → `sections[_key=="a"].panels` + `b`.
+ *
+ * Undefined for anything that is not itself an array item — a field
+ * (`sections[_key=="a"].heading`), a container (`sections`), a numeric index.
+ * Item actions patch the PARENT array (#111), so this is the one question they
+ * have to ask about a path, and asking it here rather than by string surgery at
+ * the call site is what keeps the parse in one place.
+ *
+ * The prefix is greedy, so the LAST keyed segment is the item and everything
+ * before it is the array. A nested item therefore resolves against its own
+ * array rather than the document's.
+ */
+export function keyedItemParts(path: string): KeyedItemParts | undefined {
+  const m = /^(.+)\[_key=="([^"]+)"\]$/.exec(path)
+  if (!m) return undefined
+  const arrayPath = m[1]!
+  // The prefix has to be a path we can resolve. `parseGroqPath` returns an
+  // empty list for syntax it does not know, and an unresolvable array path
+  // would aim a truncate at the document root.
+  if (parseGroqPath(arrayPath).length === 0) return undefined
+  return { arrayPath, key: m[2]! }
+}
+
 /**
  * A block hosted inside another block's array rather than in a document array
  * — two or more keyed segments in its own root path.

@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest'
 import {
   blockRootPath,
   isNestedBlockGroqPath,
+  keyedItemParts,
   nearestArrayItemPath,
   parseGroqPath,
   resolveGroqPath,
@@ -108,6 +109,35 @@ describe('blockRootPath', () => {
     expect(blockRootPath('sections[_key=="a"].items[_key=="x"].heading')).toBe(
       'sections[_key=="a"]',
     )
+  })
+})
+
+describe('keyedItemParts', () => {
+  it('splits an item into the array that holds it and its key', () => {
+    expect(keyedItemParts('sections[_key=="a"]')).toEqual({ arrayPath: 'sections', key: 'a' })
+  })
+
+  it('takes the LAST keyed segment, so a nested item resolves against its own array', () => {
+    // The array an item action patches is the one the item is a member of —
+    // `panels`, not `sections`.
+    expect(keyedItemParts('sections[_key=="a"].panels[_key=="b"]')).toEqual({
+      arrayPath: 'sections[_key=="a"].panels',
+      key: 'b',
+    })
+  })
+
+  it('has no parts for anything that is not itself an array item', () => {
+    // A field under a block, the container, a plain document field. None of
+    // them is a member of anything, so there is no array to patch.
+    expect(keyedItemParts('sections[_key=="a"].heading')).toBeUndefined()
+    expect(keyedItemParts('sections')).toBeUndefined()
+    expect(keyedItemParts('seo.title')).toBeUndefined()
+    expect(keyedItemParts('')).toBeUndefined()
+  })
+
+  it('has no parts when the prefix is not a path we can resolve', () => {
+    // An unresolvable array path would aim a truncate at the document root.
+    expect(keyedItemParts('sections[0][_key=="a"]')).toBeUndefined()
   })
 })
 

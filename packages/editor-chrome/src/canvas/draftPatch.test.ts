@@ -1,7 +1,13 @@
 import { describe, expect, it, vi } from 'vitest'
 import type { NodePatchList } from '@sanity/mutate'
 
-import { commitPatch, initialDraftSnapshot, tryGetDocument, type PatchTarget } from './draftPatch'
+import {
+  commitPatch,
+  initialDraftSnapshot,
+  reportCanvasFailure,
+  tryGetDocument,
+  type PatchTarget,
+} from './draftPatch'
 
 const patches = [] as unknown as NodePatchList
 
@@ -110,6 +116,22 @@ describe('initialDraftSnapshot', () => {
         },
       }),
     ).toBeUndefined()
+  })
+})
+
+describe('reportCanvasFailure', () => {
+  // The v1 answer to "where does a rejected mutation go" (#111): the console,
+  // through ONE function, so #124 has a single place to attach a surface an
+  // editor can actually see. What it buys today is that the message names the
+  // action and the path instead of saying a patch failed.
+  it('names what failed, tagged so a console filter can find it', () => {
+    const logged = vi.spyOn(console, 'error').mockImplementation(() => {})
+    const error = new Error('Event "mutate" was sent to stopped actor')
+
+    reportCanvasFailure('could not remove sections[_key=="a"]', error)
+
+    expect(logged).toHaveBeenCalledWith('[canvas] could not remove sections[_key=="a"]', error)
+    logged.mockRestore()
   })
 })
 
