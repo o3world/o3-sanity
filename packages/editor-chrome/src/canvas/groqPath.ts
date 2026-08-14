@@ -115,6 +115,34 @@ export function keyedItemParts(path: string): KeyedItemParts | undefined {
 }
 
 /**
+ * WHICH OF THE BLOCK'S ARRAYS THE HOVERED ITEM SITS IN — the second half of the
+ * key that reaches a member's knob declaration (#122).
+ *
+ *   block `sections[_key=="a"]`, item `sections[_key=="a"].screens[_key=="b"]`
+ *     → `screens`
+ *
+ * The item's `_type` is the obvious key and it is the wrong one: a member name
+ * is local to its array, so two blocks may each declare a `screen` and a map
+ * keyed on `_type` would have to arbitrate (ADR 0021). The block type is
+ * already read from the snapshot, and this is the rest of the address —
+ * available from the path the overlay was handed, with nothing to look up.
+ *
+ * Undefined when the item is not a DIRECT member of one of the block's arrays:
+ * an item inside another item is a second root question this does not answer,
+ * and returning its outer array would attach the wrong spec.
+ */
+export function itemArrayField(blockPath: string, itemPath: string): string | undefined {
+  const parts = keyedItemParts(itemPath)
+  if (!parts) return undefined
+  const prefix = `${blockPath}.`
+  if (!parts.arrayPath.startsWith(prefix)) return undefined
+  const relative = parts.arrayPath.slice(prefix.length)
+  // A keyed segment in the remainder means another item stands between this one
+  // and the block.
+  return relative === '' || relative.includes('[') ? undefined : relative
+}
+
+/**
  * A block hosted inside another block's array rather than in a document array
  * — two or more keyed segments in its own root path.
  *
