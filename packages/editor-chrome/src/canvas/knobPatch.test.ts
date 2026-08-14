@@ -71,4 +71,16 @@ describe('writing a knob value into the draft', () => {
     expect(() => knobPatch(BLOCK, '', 'band')).toThrow(/field path/)
     expect(() => knobPatch(BLOCK, 'media.', 'band')).toThrow(/field path/)
   })
+
+  it('writes a number unchanged, for a knob whose field is not a string (#123)', () => {
+    // `layoutSection.columns` is `type: 'number'` holding `1 | 2 | 3`. The
+    // caller converts through `storedValue`; this asserts the patch does not
+    // stringify it back on the way out. Sanity's mutation API does not
+    // typecheck, so a string here is written and never rejected — the page
+    // still renders (the renderer coerces) while the document violates its own
+    // schema and the Studio's number radio shows nothing selected.
+    const [patch] = knobPatch(BLOCK, 'columns', 2)
+    expect(patch!.op).toEqual({ type: 'set', value: 2 })
+    expect(typeof (patch!.op as { value: unknown }).value).toBe('number')
+  })
 })

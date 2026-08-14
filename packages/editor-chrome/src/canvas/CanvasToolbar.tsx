@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import type { OverlayComponent } from '@sanity/visual-editing'
 import { useDocuments, useVisualEditingEnvironment } from '@sanity/visual-editing/react'
+import { storedValue } from '@o3/block-spec'
 import type { BlockKnobs, ResolvedKnob } from '@o3/block-spec'
 
 import { barKnobs, blockKnobReader } from './barKnobs'
@@ -205,7 +206,13 @@ function CanvasToolbarInner({
    */
   const pickKnob = (resolved: ResolvedKnob, value: string) => {
     if (!doc) return
-    void commitPatch(doc, knobPatch(blockPath, resolved.knob.name, value), {
+    // `value` is the OPTION KEY, which is always a string. What gets stored is
+    // the knob's declared type — `columns` is `type: 'number'`, so writing the
+    // key straight through put `'2'` in a number field and nothing complained
+    // (#123). `storedValue` is the inverse of the `optionKey` every reader
+    // already goes through.
+    const stored = storedValue(resolved.knob, value)
+    void commitPatch(doc, knobPatch(blockPath, resolved.knob.name, stored), {
       onSettle: () => setSnapshot(undefined),
       // A rejected patch used to arrive as an unhandled rejection while the bar
       // sat there looking like it had worked.

@@ -1,4 +1,7 @@
+import { optionKey } from './optionValue'
 import type { KnobReader, LeafShowWhen, ShowWhen } from './types'
+
+export { optionKey } from './optionValue'
 
 /**
  * The empty set every mode agrees on. Sanity stores an unfilled string as
@@ -10,19 +13,6 @@ function isEmpty(value: unknown, extra: readonly string[] = []): boolean {
   if (value === undefined || value === null || value === '') return true
   if (Array.isArray(value)) return value.length === 0
   return typeof value === 'string' && extra.includes(value)
-}
-
-/**
- * A stored value as an option key. Numbers and booleans coerce because a
- * closed enum of numbers (`columns: 1 | 2 | 3`) is stored as a number and
- * declared as strings — everything downstream of a knob is a string. Anything
- * else (an object, an array) matches nothing rather than stringifying into a
- * value that could collide.
- */
-export function optionKey(value: unknown): string | undefined {
-  if (typeof value === 'string') return value
-  if (typeof value === 'number' || typeof value === 'boolean') return String(value)
-  return undefined
 }
 
 function leafSatisfied(gate: LeafShowWhen, read: KnobReader): boolean {

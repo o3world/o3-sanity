@@ -1,7 +1,43 @@
-import { resolveKnobValue, visibleKnobs } from '@o3/block-spec'
+import { resolveKnobValue, storedValue, visibleKnobs } from '@o3/block-spec'
 import type { BlockKnobs, Knob, KnobReader, ShowWhen } from '@o3/block-spec'
 
 import { applyKnobs, FIXTURE_VALUE, getAtPath, knobId, setAtPath } from './knobs'
+
+/**
+ * Write an option key into a fixture AS THE DOCUMENT WOULD HOLD IT.
+ *
+ * A knob's options are strings; the field underneath may be a number
+ * (`layoutSection.columns` is `1 | 2 | 3`). Every write in this module goes
+ * through here rather than `setAtPath` directly, because `setAtPath<T>(…,
+ * value: unknown): T` returns `T` whatever it was handed — so a story that put
+ * `'2'` into a prop typed `1 | 2 | 3` compiled cleanly and rendered fine, and
+ * the mismatch only showed up in a document (#123).
+ */
+function setKnob<T>(state: T, knob: Knob, optionValue: string): T {
+  return setAtPath(state, knob.name, storedValue(knob, optionValue))
+}
+
+/**
+ * The same conversion for a whole Storybook args map, which arrives keyed by
+ * `knobId` rather than by knob. `FIXTURE_VALUE` and anything the spec does not
+ * declare pass through untouched — the sentinel means "leave the fixture
+ * alone", and converting it would write the literal string.
+ */
+function convertArgs(
+  spec: BlockKnobs,
+  args: Record<string, unknown>,
+  idToPath: Record<string, string>,
+): Record<string, unknown> {
+  const byPath = new Map(spec.knobs.map((knob) => [knob.name, knob]))
+  const out: Record<string, unknown> = { ...args }
+  for (const [id, path] of Object.entries(idToPath)) {
+    const value = out[id]
+    const knob = byPath.get(path)
+    if (!knob || typeof value !== 'string' || value === FIXTURE_VALUE) continue
+    out[id] = storedValue(knob, value)
+  }
+  return out
+}
 
 /**
  * THE STORYBOOK ADAPTER for the knob vocabulary (ADR 0020) — knobs in,
@@ -55,7 +91,7 @@ function reachableStates<T>(fixture: T, sources: readonly Knob[]): T[] {
   const product = sources.reduce<T[]>(
     (states, source) =>
       states.flatMap((state) =>
-        source.options.map((option) => setAtPath(state, source.name, option.value)),
+        source.options.map((option) => setKnob(state, source, option.value)),
       ),
     [fixture],
   )
@@ -231,6 +267,12 @@ export function applyKnobArgs<T>({
   idToPath: Record<string, string>
   nested?: boolean
 }): T {
+  // Storybook hands back the OPTION KEY, always a string. The fixture has to
+  // carry what the document would — `columns` is `1 | 2 | 3`, not `'1'` — or a
+  // derived story renders props the renderer is not typed for (#123).
+  // `setAtPath<T>(…, value: unknown): T` erases that mismatch, so nothing would
+  // have caught it at compile time.
+  args = convertArgs(spec, args, idToPath)
   const candidate = applyKnobs(fixture, args, idToPath)
   const visible = new Set(
     visibleKnobs({ spec, read: readFixture(candidate), nested }).all.map((r) => r.knob.name),
@@ -310,7 +352,7 @@ export function matrixCells<T>({
   const cells: MatrixCell<T>[] = []
 
   for (const rowOption of rows.options) {
-    const rowState = setAtPath(fixture, rows.name, rowOption.value)
+    const rowState = setKnob(fixture, rows, rowOption.value)
     const rowLabel = `${rows.title}: ${rowOption.title}`
     const visible = new Set(
       visibleKnobs({ spec, read: readFixture(rowState), nested }).all.map((r) => r.knob.name),
@@ -323,7 +365,7 @@ export function matrixCells<T>({
       cells.push({
         key: `${rowOption.value}·${colOption.value}`,
         label: `${rowLabel} · ${cols.title}: ${colOption.title}`,
-        data: setAtPath(rowState, cols.name, colOption.value),
+        data: setKnob(rowState, cols, colOption.value),
       })
     }
   }

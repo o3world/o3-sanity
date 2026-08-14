@@ -28,7 +28,10 @@ export { defineBlockKnobs, knob } from './knob'
 export { humanize } from './humanize'
 export { patchableKnobRoots } from './patchableRoots'
 export { resolveKnobValue, UNRESOLVED_KNOB_TITLE } from './resolveKnobValue'
-export { optionKey, showWhenSatisfied } from './showWhen'
+export { showWhenSatisfied } from './showWhen'
+// The read leg and the write leg, exported as the pair they are — see
+// `optionValue.ts` for why having only one of them was #123.
+export { optionKey, storedValue } from './optionValue'
 export { DEFAULT_KNOB_SURFACE, SURFACE_RULES, surfaceForKnobPath } from './surfaces'
 export { visibleKnobs } from './visibleKnobs'
 

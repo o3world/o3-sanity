@@ -35,7 +35,19 @@ import { parseGroqPath } from './groqPath'
  * on. `parseGroqPath` is ours, it is tested, and the segments it emits (`string
  * | {_key}`) are exactly `@sanity/mutate`'s `PathElement`.
  */
-export function knobPatch(blockPath: string, relPath: string, value: string): NodePatch[] {
+export function knobPatch(
+  blockPath: string,
+  relPath: string,
+  /**
+   * What to STORE, already converted from the option key — `storedValue(knob,
+   * option)` in `@o3/block-spec`. Deliberately not a bare `string`: that
+   * signature is what let a numeric knob write `'2'` into a `type: 'number'`
+   * field, silently, because nothing downstream typechecks a mutation (#123).
+   * This function cannot do the conversion itself — it never sees the knob —
+   * so the type is the reminder that somebody upstream must have.
+   */
+  value: string | number,
+): NodePatch[] {
   const root = parseGroqPath(blockPath)
   if (root.length === 0) {
     // An unparseable block path would silently become a patch at the DOCUMENT
