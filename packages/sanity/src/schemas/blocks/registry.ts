@@ -72,10 +72,17 @@ export const BLOCK_ARRAYS = {
    */
   'caseStudy.story': SECTION_BLOCKS,
   /**
-   * Unreachable from the canvas today: the overlay is never asked to resolve a
-   * path inside `layoutSection.items`, a polymorphic array at depth ≥ 2 (#104,
-   * deferred to #115). Declared anyway, because the schema below derives its
-   * members from this entry and the day #115 lands the menu already knows.
+   * Unreachable from the canvas, and staying that way (ADR 0022). This is the
+   * repo's only polymorphic array below a block root, which is the one shape
+   * the Presentation overlay cannot resolve at `sanity@6.8.0` /
+   * `@sanity/visual-editing@5.7.3` — silently, so nothing reports it (#104,
+   * #115). We keep the array polymorphic rather than wrapping its members in a
+   * discriminator, because that wrapper would outlive the bug it works around
+   * and would cost the `satisfies` guardrail that checks the base renderers.
+   * `nestedUnionArrays.test.ts` holds the line at this one entry.
+   *
+   * Declared here anyway: the schema below derives its members from this entry,
+   * and if the bugs in `docs/upstream/` are fixed the menu already knows.
    */
   'layoutSection.items': BASE_BLOCKS,
 } as const satisfies Readonly<Record<string, readonly string[]>>

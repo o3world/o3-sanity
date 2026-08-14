@@ -24,9 +24,11 @@ import { canvasSubject } from './subject'
  * cannot resolve, `ElementOverlay.tsx:286` returns an undefined context and
  * `useCustomComponents` bails before reaching this function — no error, no
  * warning (#104). That is the state inside `layoutSection.items`, a
- * polymorphic array at depth ≥ 2, which is out of scope until #115. Nothing
- * below tries to work around it, because from here there is nothing to work
- * around: we are simply never asked.
+ * polymorphic array at depth ≥ 2, and #115 decided to leave it that way (ADR
+ * 0022) rather than de-polymorphise the array or carry two pnpm patches for a
+ * column whose members declare no design options. Nothing below tries to work
+ * around it, because from here there is nothing to work around: we are simply
+ * never asked.
  *
  * WHY A FACTORY AND NOT A CONSTANT. The toolbar needs to know what each block
  * type offers, and the declarations are the SITE's (`@o3/sanity/knobs`), not

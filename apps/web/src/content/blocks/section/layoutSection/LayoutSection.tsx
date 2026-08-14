@@ -56,6 +56,22 @@ export function LayoutSection({
             ) : null}
           </header>
         ) : null}
+        {/*
+         * NO `itemAttr` HERE, AND IT IS NOT AN OMISSION (ADR 0022). Every other
+         * block with a keyed array attributes its items so the canvas toolbar
+         * can dock to one — `railPanelsSection.panels`,
+         * `screenGridSection.screens`. This one cannot: `items` is the repo's
+         * only polymorphic array below a block root, and at `sanity@6.8.0` /
+         * `@sanity/visual-editing@5.7.3` the overlay resolves nothing inside it
+         * (#104, #115). The failure is silent — the resolver context comes back
+         * undefined and our component resolver is never called, with no error
+         * and no console warning — so an attribute added here would look
+         * correct, test correct, and do nothing on the canvas.
+         *
+         * `docs/upstream/` has both bugs written up. When they are fixed, this
+         * loop takes `itemAttr(loc, 'items', item._key)` and `loc` comes back
+         * into the destructure above.
+         */}
         <div className={`grid items-start gap-10 ${columnClass}`}>
           {(items ?? []).map((item) => {
             const Component = Object.prototype.hasOwnProperty.call(

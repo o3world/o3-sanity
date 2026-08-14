@@ -55,7 +55,21 @@ export function defineSectionBlock({ name, title, fields, preview, knobs }: Bloc
   })
 }
 
-/** A base-tier block: content that lives inside a layoutSection column. */
+/**
+ * A base-tier block: content that lives inside a layoutSection column.
+ *
+ * **No `knobs` argument, and that is load-bearing** (ADR 0022). The canvas
+ * toolbar cannot attach anywhere inside `layoutSection.items` at
+ * `sanity@6.8.0` / `@sanity/visual-editing@5.7.3` — it is the repo's one
+ * polymorphic array below a block root, and the overlay resolves nothing there,
+ * silently (#104, #115). We left it that way because a base block has no design
+ * option to offer: there is nothing to be silent about.
+ *
+ * So adding `knobs` here is the trigger to re-read ADR 0022 first. The knob
+ * would generate a field, the form would show it, and the toolbar would go on
+ * showing nothing — which is the failure the whole declaration exists to make
+ * impossible.
+ */
 export function defineBaseBlock({
   name,
   title,
