@@ -1,5 +1,6 @@
 import { defineBlockKnobs } from '@o3/block-spec'
 import { surfaceKnob } from './surface'
+import type { ListingSection } from '../types/generated'
 
 /**
  * The listing band's design options — `surface` and nothing else.
@@ -20,4 +21,16 @@ export const listingSectionKnobs = defineBlockKnobs({
   title: 'Listing',
   tier: 'section',
   knobs: [surfaceKnob({ initialValue: 'white' })],
+  /**
+   * `pageType` is spelled out because it is required and is NOT a knob, so
+   * nothing else answers for it — the form's `initialValue` only fires when the
+   * form creates the item, and a canvas insert never goes near the form. The
+   * value matches that `initialValue`; that it names a page type nothing uses
+   * yet is CONTEXT.md's known drift, not this placeholder's opinion.
+   */
+  placeholder: {
+    _type: 'listingSection',
+    heading: 'A heading for this listing.',
+    pageType: 'service',
+  } satisfies ListingSection,
 })

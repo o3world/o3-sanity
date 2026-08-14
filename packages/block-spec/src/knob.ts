@@ -1,7 +1,9 @@
 import { humanize } from './humanize'
+import { placeholderReferences } from './placeholder'
 import { surfaceForKnobPath } from './surfaces'
 import type {
   BlockKnobs,
+  BlockPlaceholder,
   BlockTier,
   ItemKnobs,
   Knob,
@@ -118,14 +120,45 @@ export function defineBlockKnobs({
   tier,
   knobs,
   items,
+  placeholder,
 }: {
   type: string
   title: string
   tier: BlockTier
   knobs: readonly Knob[]
   items?: Readonly<Record<string, ItemKnobs>>
+  /** What one insert of this block writes (#112). See `placeholder.ts`. */
+  placeholder?: BlockPlaceholder
 }): BlockKnobs {
   refuseDuplicatePaths(`defineBlockKnobs("${type}")`, knobs)
+  if (placeholder) {
+    // A placeholder is written `satisfies HeroSection`, and the generated type
+    // pins `_type` to a literal — so this can only fail when a file was copied
+    // and half-renamed, which is exactly when it is worth failing. The spec
+    // would otherwise insert content under a type nothing renders.
+    if (placeholder._type !== type) {
+      throw new Error(
+        `defineBlockKnobs("${type}"): its placeholder declares _type "${placeholder._type}". ` +
+          `An insert would write a member of a type this block does not answer to.`,
+      )
+    }
+    // THE COMMIT-SAFE RULE, at declaration time. A placeholder may be written
+    // to a real document by an editor who never reviewed it, so a document
+    // reference in one asserts a relationship nobody authored — and it
+    // publishes looking exactly like an authored one. Asset references are not
+    // checked here: whether an asset is seeded is a fact about the dataset,
+    // which this package cannot see (`tools/migration/src/placeholder.test.ts`
+    // holds that half, against the manifest).
+    const documentRefs = placeholderReferences(placeholder).document
+    if (documentRefs.length > 0) {
+      throw new Error(
+        `defineBlockKnobs("${type}"): its placeholder references a document at ` +
+          `${documentRefs.map((found) => `${found.path || '<root>'} → ${found.ref}`).join(', ')}. ` +
+          `A placeholder is commit-safe content and may never point at a document — leave the ` +
+          `field empty and let the editor pick.`,
+      )
+    }
+  }
   for (const k of knobs) {
     // The failure this replaces was silent in the one place it mattered.
     // `knobFields` threw at schema load, but `knobPatch` split `screens[].tone`
@@ -153,7 +186,14 @@ export function defineBlockKnobs({
       )
     }
   }
-  return { type, title, tier, knobs, ...(items ? { items } : {}) }
+  return {
+    type,
+    title,
+    tier,
+    knobs,
+    ...(items ? { items } : {}),
+    ...(placeholder ? { placeholder } : {}),
+  }
 }
 
 /**

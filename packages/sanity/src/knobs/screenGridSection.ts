@@ -1,5 +1,6 @@
 import { defineBlockKnobs, defineItemKnobs, knob } from '@o3/block-spec'
 import { surfaceKnob } from './surface'
+import type { ScreenGridSection } from '../types/generated'
 
 /**
  * One screen's design options — the first `item`-surface knobs in the repo
@@ -66,4 +67,20 @@ export const screenGridSectionKnobs = defineBlockKnobs({
   tier: 'section',
   knobs: [surfaceKnob({ initialValue: 'white' })],
   items: { screens: screenKnobs },
+  /**
+   * One screen, because `screens` declares `min(1)` and the band renders
+   * nothing without one. `tone` and `span` are not spelled here — the SCREEN's
+   * own knobs supply them (ADR 0021, and `newBlockContent` applies a member's
+   * defaults the same way it applies the block's).
+   */
+  placeholder: {
+    _type: 'screenGridSection',
+    screens: [
+      {
+        _key: 'first',
+        _type: 'screen',
+        media: { _type: 'figure', alt: 'Describe the screenshot that goes here.' },
+      },
+    ],
+  } satisfies ScreenGridSection,
 })

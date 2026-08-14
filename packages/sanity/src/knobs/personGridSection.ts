@@ -1,5 +1,6 @@
 import { defineBlockKnobs } from '@o3/block-spec'
 import { surfaceKnob } from './surface'
+import type { PersonGridSection } from '../types/generated'
 
 /**
  * The person grid's design options — `surface` and nothing else.
@@ -14,4 +15,10 @@ export const personGridSectionKnobs = defineBlockKnobs({
   title: 'Person grid',
   tier: 'section',
   knobs: [surfaceKnob({ initialValue: 'white' })],
+  /** `people` stays empty — a person is a document, and a placeholder never references one. */
+  placeholder: {
+    _type: 'personGridSection',
+    eyebrow: 'The team',
+    heading: 'A heading for this grid.',
+  } satisfies PersonGridSection,
 })

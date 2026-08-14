@@ -13,6 +13,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@o3/block-spec": "workspace:*",
     "@o3/sanity": "workspace:*",
     "@portabletext/block-tools": "^5.1.12",
     "@sanity/schema": "^6.8.0",

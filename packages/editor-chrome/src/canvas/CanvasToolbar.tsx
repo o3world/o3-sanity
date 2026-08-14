@@ -17,6 +17,7 @@ import {
 } from './draftPatch'
 import { componentName, subjectName } from './identity'
 import { itemArrayField, resolveGroqPath } from './groqPath'
+import { blockArrayKey } from './insertActions'
 import type { ItemAction } from './itemActions'
 import { knobMenuModel, type KnobMenuAction } from './menuModel'
 import { knobPatch } from './knobPatch'
@@ -84,6 +85,14 @@ export type CanvasToolbarProps = {
    * as having none, so the bar stays silent about it rather than saying so.
    */
   blockKnobs?: Readonly<Record<string, BlockKnobs>>
+  /**
+   * What each block-bearing array accepts, keyed `<host type>.<field>` — the
+   * site's own declaration, handed in beside the knobs (#112). Absent, or
+   * missing the array the cursor is in, means the menu offers no insert rows:
+   * an array nobody declared as a composition surface is not one this package
+   * gets to decide about.
+   */
+  blockArrays?: Readonly<Record<string, readonly string[]>>
 }
 
 interface InnerProps {
@@ -92,6 +101,7 @@ interface InnerProps {
   itemPath: string | undefined
   nested: boolean
   blockKnobs: Readonly<Record<string, BlockKnobs>>
+  blockArrays: Readonly<Record<string, readonly string[]>>
   documentId: string
   /** The hovered element's own GROQ path — the chip's subject when no item encloses it. */
   path: string
@@ -108,6 +118,7 @@ function CanvasToolbarInner({
   itemPath,
   nested,
   blockKnobs,
+  blockArrays,
   documentId,
   path,
   element,
@@ -206,7 +217,21 @@ function CanvasToolbarInner({
   // innermost keyed array item under the cursor, which is what `canvasSubject`
   // already computed and what the `kind` below is derived from — one rule,
   // stated once, rather than a second notion of what the menu is about.
+  //
+  // ADD ABOVE / ADD BELOW (#112) ride it too, and what they offer is the
+  // subject's own ARRAY rather than the subject: `page.sections` for a band,
+  // `railPanelsSection.panels` for a panel. That address is read from the
+  // snapshot and the path — the host's `_type` plus the field — so the same
+  // rule answers at either level, and an array the site declared nothing for
+  // simply produces no rows.
   const actionPath = itemPath ?? blockPath
+  const arrayKey = blockArrayKey(snapshot, actionPath)
+  // Own-property guard for the same reason the block lookup keeps one: the key
+  // is built from a document's own `_type`.
+  const insertMembers =
+    arrayKey && Object.prototype.hasOwnProperty.call(blockArrays, arrayKey)
+      ? blockArrays[arrayKey]
+      : undefined
   const menu = knobMenuModel({
     spec,
     read,
@@ -216,6 +241,7 @@ function CanvasToolbarInner({
     componentName: component,
     snapshot,
     subjectPath: actionPath,
+    ...(insertMembers ? { insert: { members: insertMembers, specs: blockKnobs } } : {}),
   })
 
   /**
@@ -405,6 +431,7 @@ export const CanvasToolbar: OverlayComponent<CanvasToolbarProps> = ({
   itemPath,
   nested = false,
   blockKnobs = {},
+  blockArrays = {},
 }) => {
   // DRAFT EDITING ONLY. `VisualEditing` itself mounts only in draft mode, but
   // the draft cookie survives leaving Presentation — browsing the site
@@ -424,6 +451,7 @@ export const CanvasToolbar: OverlayComponent<CanvasToolbarProps> = ({
         itemPath={itemPath}
         nested={nested}
         blockKnobs={blockKnobs}
+        blockArrays={blockArrays}
         documentId={node.id}
         path={node.path}
         element={element}

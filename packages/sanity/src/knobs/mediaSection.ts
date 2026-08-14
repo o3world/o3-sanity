@@ -1,5 +1,6 @@
 import { defineBlockKnobs, knob } from '@o3/block-spec'
 import { surfaceKnob } from './surface'
+import type { MediaSection } from '../types/generated'
 
 /**
  * The media band's design options — the block where one axis switches the
@@ -41,4 +42,24 @@ export const mediaSectionKnobs = defineBlockKnobs({
     }),
     surfaceKnob({ initialValue: 'white' }),
   ],
+  /**
+   * A figure with no image. `MediaSection` returns null without a `media`
+   * object at all, so the placeholder has to supply one or the inserted band
+   * would render nothing an editor could hover — and there would be no way back
+   * to the menu that made it. The caption is what gives the empty band
+   * something to draw.
+   *
+   * The image itself stays empty rather than pointing at a seeded asset: the
+   * commit-safe rule allows a seeded one, nothing in this repo needs one yet,
+   * and an image a placeholder chose is one an editor has to notice is not
+   * theirs.
+   */
+  placeholder: {
+    _type: 'mediaSection',
+    media: {
+      _type: 'figure',
+      alt: 'Describe the image that goes here.',
+      caption: 'Add a caption, or clear this line.',
+    },
+  } satisfies MediaSection,
 })

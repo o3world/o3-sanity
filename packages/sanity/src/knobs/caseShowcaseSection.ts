@@ -1,5 +1,6 @@
 import { defineBlockKnobs } from '@o3/block-spec'
 import { surfaceKnob } from './surface'
+import type { CaseShowcaseSection } from '../types/generated'
 
 /**
  * The case-study showcase's design options — `surface` and nothing else.
@@ -16,4 +17,9 @@ export const caseShowcaseSectionKnobs = defineBlockKnobs({
   title: 'Case study showcase',
   tier: 'section',
   knobs: [surfaceKnob({ initialValue: 'ink' })],
+  /** `caseStudies` stays empty — a placeholder never references a document. */
+  placeholder: {
+    _type: 'caseShowcaseSection',
+    heading: 'A heading for this showcase.',
+  } satisfies CaseShowcaseSection,
 })

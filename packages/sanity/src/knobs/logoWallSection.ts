@@ -1,5 +1,6 @@
 import { defineBlockKnobs } from '@o3/block-spec'
 import { surfaceKnob } from './surface'
+import type { LogoWallSection } from '../types/generated'
 
 /**
  * The logo wall's design options — `surface` and nothing else.
@@ -17,4 +18,16 @@ export const logoWallSectionKnobs = defineBlockKnobs({
   title: 'Logo wall',
   tier: 'section',
   knobs: [surfaceKnob({ initialValue: 'bone' })],
+  /**
+   * `clients` is left empty, and it is the field the band is FOR. A client is a
+   * document, and a placeholder may never reference one — it would assert a
+   * relationship nobody authored, and it would publish looking authored. The
+   * form flags the empty array as required, which is the correct prompt: the
+   * one thing an editor has to do here is pick the logos.
+   */
+  placeholder: {
+    _type: 'logoWallSection',
+    heading: 'A heading for this logo wall.',
+    body: 'Add the line that sits under it.',
+  } satisfies LogoWallSection,
 })

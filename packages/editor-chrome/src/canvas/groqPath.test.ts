@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import {
+  arrayHostParts,
   blockRootPath,
   isNestedBlockGroqPath,
   itemArrayField,
@@ -178,6 +179,37 @@ describe('which of the block\u2019s arrays the item sits in', () => {
     expect(itemArrayField(BLOCK, BLOCK)).toBeUndefined()
     expect(itemArrayField(BLOCK, `${BLOCK}.heading`)).toBeUndefined()
     expect(itemArrayField(BLOCK, 'sections[_key=="b"].panels[_key=="p"]')).toBeUndefined()
+  })
+})
+
+describe('where an array hangs', () => {
+  it('reads a document-level array as a field of the document itself', () => {
+    // The empty host path is the DOCUMENT, not "no host" — its `_type` is at
+    // the root, which is what makes `page.sections` addressable by the same
+    // rule as `railPanelsSection.panels`.
+    expect(arrayHostParts('sections')).toEqual({ hostPath: '', field: 'sections' })
+  })
+
+  it('reads a nested array as a field of the block that holds it', () => {
+    expect(arrayHostParts('sections[_key=="a"].panels')).toEqual({
+      hostPath: 'sections[_key=="a"]',
+      field: 'panels',
+    })
+  })
+
+  it('reads an array on an object on a block', () => {
+    expect(arrayHostParts('sections[_key=="a"].rail.panels')).toEqual({
+      hostPath: 'sections[_key=="a"].rail',
+      field: 'panels',
+    })
+  })
+
+  it('says nothing for a path that does not end in a field', () => {
+    // A `_key` may contain a dot, so the field half has to be a real
+    // identifier at the very end or the split would land inside the key.
+    expect(arrayHostParts('sections[_key=="a"]')).toBeUndefined()
+    expect(arrayHostParts('sections[_key=="a.b"]')).toBeUndefined()
+    expect(arrayHostParts('')).toBeUndefined()
   })
 })
 

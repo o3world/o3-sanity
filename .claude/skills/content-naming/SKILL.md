@@ -31,7 +31,7 @@ Ask in this order — each "yes" stops you from adding a type that shouldn't exi
 Name it `<thing>Section`. Never `<thing>Block`.
 
 1. `packages/sanity/src/schemas/blocks/registry.ts` — add to `SECTION_BLOCKS`. The factory throws until you do.
-2. `packages/sanity/src/knobs/<name>Section.ts` — the block's design options, at minimum `surfaceKnob({ initialValue: … })`; export it from `knobs/index.ts` and add it to `BLOCK_KNOBS`. Required, not optional (ADR 0020).
+2. `packages/sanity/src/knobs/<name>Section.ts` — the block's design options, at minimum `surfaceKnob({ initialValue: … })`; export it from `knobs/index.ts` and add it to `BLOCK_KNOBS`. Required, not optional (ADR 0020). Add a `placeholder` in the same file, typed `satisfies <Name>Section` — it is what the canvas insert menu writes, and `knobs/placeholder.test.ts` fails without one. It must be **commit-safe**: fill every required field, never reference a document, and leave design options to the knobs (CONTEXT.md → Placeholder).
 3. `packages/sanity/src/schemas/blocks/section.ts` — `defineSectionBlock({ name, title, knobs, fields, preview })`. Don't add a `surface` field; the factory generates it from the knob.
 4. `packages/sanity/src/schemas/index.ts` — import and add to `schemaTypes`, in the section-blocks group.
 5. `packages/sanity/src/queries.ts` — add a `_type == "<name>Section" => { … }` arm to `SECTION_FIELDS` **only if** the block needs query-time expansion (dereferenced `cta` targets, reference→card projections, a subquery). Renderers must stay pure components: resolve data here, not in the component.
@@ -43,7 +43,7 @@ Name it `<thing>Section`. Never `<thing>Block`.
 
 Name it with **no** suffix (`richText`, `statGroup`).
 
-Same shape, four differences: add to `BASE_BLOCKS`; define with `defineBaseBlock` in `blocks/base.ts`; register the renderer in `base/baseComponents.tsx`; and add it as a `defineArrayMember` to `layoutSection.items` in `section.ts` — a base block not listed there can never be authored.
+Same shape, three differences: add to `BASE_BLOCKS`; define with `defineBaseBlock` in `blocks/base.ts`; register the renderer in `base/baseComponents.tsx`. `layoutSection.items` needs no edit — its `of:` is derived from `BLOCK_ARRAYS['layoutSection.items']`, which is `BASE_BLOCKS`, so registering the block is what makes it authorable and insertable at once.
 
 ## Adding a document type
 

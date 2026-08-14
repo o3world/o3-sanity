@@ -10,7 +10,7 @@ import { canvasSubject } from './subject'
  * THE EXPERIMENTAL SEAM — the whole of our dependency on the `@alpha`
  * overlay-components API, in one function.
  *
- *     <VisualEditing components={createCanvasComponents({ blockKnobs: BLOCK_KNOBS })} />
+ *     <VisualEditing components={createCanvasComponents({ blockKnobs: BLOCK_KNOBS, blockArrays: BLOCK_ARRAYS })} />
  *
  * Removing the feature is deleting that prop. Keep it that way: `components`
  * is the only unstable surface the site depends on, and everything it reaches
@@ -38,13 +38,21 @@ import { canvasSubject } from './subject'
  */
 export function createCanvasComponents({
   blockKnobs,
+  blockArrays = {},
 }: {
   blockKnobs: Readonly<Record<string, BlockKnobs>>
+  /**
+   * What each block-bearing array accepts, keyed `<host type>.<field>` — the
+   * site's `BLOCK_ARRAYS` (#112). Optional, and omitting it is a real
+   * configuration rather than a broken one: the toolbar and the knob menu work
+   * without it, and the insert rows are simply not offered.
+   */
+  blockArrays?: Readonly<Record<string, readonly string[]>>
 }): OverlayComponentResolver {
   return ({ node }) => {
     if (!('path' in node)) return undefined
     const subject = canvasSubject(node.path)
     if (!subject) return undefined
-    return { component: CanvasToolbar, props: { ...subject, blockKnobs } }
+    return { component: CanvasToolbar, props: { ...subject, blockKnobs, blockArrays } }
   }
 }

@@ -2,7 +2,7 @@ import { defineArrayMember, defineField } from 'sanity'
 import { defineArrayItem } from './defineArrayItem'
 import { defineSectionBlock } from './defineBlocks'
 import { hiddenUnless } from './knobFields'
-import { SECTION_BLOCKS } from './registry'
+import { blockArrayMembers } from './registry'
 import { PAGE_TYPES } from '../../constants'
 import { caseShowcaseSectionKnobs } from '../../knobs/caseShowcaseSection'
 import { ctaSectionKnobs } from '../../knobs/ctaSection'
@@ -542,13 +542,11 @@ export const layoutSection = defineSectionBlock({
     defineField({
       name: 'items',
       type: 'array',
-      of: [
-        defineArrayMember({ type: 'richText' }),
-        defineArrayMember({ type: 'figure' }),
-        defineArrayMember({ type: 'embed' }),
-        defineArrayMember({ type: 'cta' }),
-        defineArrayMember({ type: 'statGroup' }),
-      ],
+      // Derived from `BLOCK_ARRAYS`, not restated — the same declaration the
+      // canvas insert menu reads (#112). A base block registered but missing
+      // from here is a block an editor cannot author, which is the state #58
+      // spent three files finding out about.
+      of: blockArrayMembers('layoutSection.items').map((member) => defineArrayMember(member)),
       validation: (rule) => rule.required().min(1),
     }),
   ],
@@ -661,21 +659,3 @@ export const listingSection = defineSectionBlock({
   ],
   preview: { select: { title: 'heading', subtitle: 'pageType' } },
 })
-
-/**
- * What `page.sections` and `caseStudy.story` will accept — **derived from the
- * registry**, not restated. (`story` also takes `chapter`, which is a shared
- * object rather than a block, so it is added beside these members — ADR 0018.)
- *
- * This was a second hand-maintained copy of `SECTION_BLOCKS` in the same
- * order, and #58 found out why that costs: `formSection` was registered,
- * defined, rendered and bound, and still could not appear in a page, because
- * this list had not heard of it. The failure surfaced as a typecheck error in
- * the *renderer* (`SectionProps<'formSection'>` not satisfying the generated
- * union) — three files away from the omission, and only because typegen
- * derives the query result from the array's members.
- *
- * A registered block an editor cannot author is not a state worth being able
- * to express, so it is no longer expressible.
- */
-export const sectionBlockMembers = SECTION_BLOCKS.map((type) => ({ type }))

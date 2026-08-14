@@ -207,6 +207,23 @@ export type ItemKnobs = {
   knobs: readonly Knob[]
 }
 
+/**
+ * The content one newly inserted block starts with — the second authored
+ * artifact a block declares (#112), beside its knobs.
+ *
+ * Typed structurally here for the same reason `KnobIcon` is: this package has
+ * zero dependencies and cannot name a generated type. The declaration site
+ * does, and that is where the guarantee lives — every placeholder in this repo
+ * is written `satisfies HeroSection`, against the type typegen publishes for
+ * its own block, so a placeholder cannot carry a field the schema dropped.
+ *
+ * `_type` is required and redundant on purpose. `defineBlockKnobs` checks it
+ * against the spec's own `type`, which is what makes `satisfies HeroSection`
+ * — the whole reason the placeholder is typed at all — impossible to write
+ * against the wrong block and have it pass.
+ */
+export type BlockPlaceholder = { _type: string } & Record<string, unknown>
+
 /** Every knob one block declares. */
 export type BlockKnobs = {
   /** The Sanity type name — `heroSection`. */
@@ -214,6 +231,12 @@ export type BlockKnobs = {
   title: string
   tier: BlockTier
   knobs: readonly Knob[]
+  /**
+   * What an editor gets when they insert this block from the canvas. Absent
+   * means the block is not offered by the insert menu — see `placeholder.ts`
+   * for the commit-safety rule that governs what may go in one.
+   */
+  placeholder?: BlockPlaceholder
   /**
    * The block's arrays whose members declare knobs of their own, keyed by the
    * block-relative field name — `screens`.

@@ -1,6 +1,7 @@
 import { defineBlockKnobs } from '@o3/block-spec'
 import { decorationKnob } from './decoration'
 import { surfaceKnob } from './surface'
+import type { QuoteSection } from '../types/generated'
 
 /**
  * The quote band's design options.
@@ -19,4 +20,9 @@ export const quoteSectionKnobs = defineBlockKnobs({
   title: 'Quote',
   tier: 'section',
   knobs: [decorationKnob(['orbs', 'molecule', 'none']), surfaceKnob({ initialValue: 'bone' })],
+  placeholder: {
+    _type: 'quoteSection',
+    quote: 'Add the quote this band carries.',
+    attribution: 'Who said it',
+  } satisfies QuoteSection,
 })

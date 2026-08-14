@@ -483,6 +483,9 @@ importers:
 
   tools/migration:
     dependencies:
+      '@o3/block-spec':
+        specifier: workspace:*
+        version: link:../../packages/block-spec
       '@o3/sanity':
         specifier: workspace:*
         version: link:../../packages/sanity

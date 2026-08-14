@@ -343,7 +343,31 @@ describe('what the knob declarations reach', () => {
 
   /** `sanity`, `sanity/…` and `@sanity/…` — except the icons the knobs carry. */
   const STUDIO_RUNTIME = /^(sanity(\/.*)?|@sanity\/(?!icons\/).*)$/
-  const IMPORTS = /(?:from|import)\s+'([^']+)'/g
+  const FROM_IMPORTS = /\b(?:import|export)\s+(type\s+)?[\s\S]*?\bfrom\s*'([^']+)'/g
+  const SIDE_EFFECT_IMPORTS = /\bimport\s*'([^']+)'/g
+
+  /**
+   * Every module a file imports, and whether the import was **type-only**.
+   *
+   * `import type` is erased before anything is bundled, so it puts nothing in
+   * the preview bundle and cannot be the edge this guard exists to catch. The
+   * distinction became load-bearing with the placeholders (#112): each knobs
+   * file names its block's generated type (`import type { HeroSection } from
+   * '../types/generated'`), and `generated.ts` — a typegen artifact nobody
+   * hand-writes — imports `@sanity/client` for its own reference types. Reading
+   * that as a violation would mean a placeholder could not be typed against the
+   * schema it writes into, which is the one guarantee it has.
+   */
+  const importsIn = (source: string): { specifier: string; typeOnly: boolean }[] => [
+    ...[...source.matchAll(FROM_IMPORTS)].map((m) => ({
+      specifier: m[2]!,
+      typeOnly: Boolean(m[1]),
+    })),
+    ...[...source.matchAll(SIDE_EFFECT_IMPORTS)].map((m) => ({
+      specifier: m[1]!,
+      typeOnly: false,
+    })),
+  ]
 
   const resolveRelative = (fromFile: string, specifier: string): string | undefined => {
     const base = resolve(dirname(fromFile), specifier)
@@ -372,8 +396,8 @@ describe('what the knob declarations reach', () => {
       if (seen.has(file)) continue
       const source = readFileSync(file, 'utf8')
       seen.set(file, source)
-      for (const [, specifier] of source.matchAll(IMPORTS)) {
-        if (!specifier?.startsWith('.')) continue
+      for (const { specifier, typeOnly } of importsIn(source)) {
+        if (typeOnly || !specifier.startsWith('.')) continue
         const target = resolveRelative(file, specifier)
         if (target) queue.push(target)
       }
@@ -384,8 +408,8 @@ describe('what the knob declarations reach', () => {
   it('imports no Studio runtime, so the preview bundle can read them', () => {
     const offenders: string[] = []
     for (const [file, source] of walk(KNOBS_ENTRY)) {
-      for (const [, specifier] of source.matchAll(IMPORTS)) {
-        if (specifier && STUDIO_RUNTIME.test(specifier)) {
+      for (const { specifier, typeOnly } of importsIn(source)) {
+        if (!typeOnly && STUDIO_RUNTIME.test(specifier)) {
           offenders.push(`${relative(process.cwd(), file)} imports "${specifier}"`)
         }
       }

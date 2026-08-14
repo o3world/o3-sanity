@@ -37,6 +37,14 @@ export { defineBlockKnobs, defineItemKnobs, knob } from './knob'
 export { humanize } from './humanize'
 export { itemKnobsAt, patchableItemRoots } from './items'
 export { patchableKnobRoots } from './patchableRoots'
+// What one insert writes, and the rule that makes it safe to write (#112).
+export {
+  initialKnobValues,
+  newBlockContent,
+  placeholderReferences,
+  retainsPlaceholder,
+  type PlaceholderReferences,
+} from './placeholder'
 export { resolveKnobValue, UNRESOLVED_KNOB_TITLE } from './resolveKnobValue'
 export { showWhenSatisfied } from './showWhen'
 // The read leg and the write leg, exported as the pair they are — see
@@ -47,6 +55,7 @@ export { visibleKnobs } from './visibleKnobs'
 
 export type {
   BlockKnobs,
+  BlockPlaceholder,
   BlockTier,
   ItemKnobs,
   Knob,

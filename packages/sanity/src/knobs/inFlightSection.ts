@@ -1,5 +1,6 @@
 import { defineBlockKnobs, knob } from '@o3/block-spec'
 import { surfaceKnob } from './surface'
+import type { InFlightSection } from '../types/generated'
 
 /**
  * The in-flight band's design options.
@@ -29,4 +30,18 @@ export const inFlightSectionKnobs = defineBlockKnobs({
     }),
     surfaceKnob({ initialValue: 'white' }),
   ],
+  /**
+   * The entry carries no `media` and no `date`, which is a state the band is
+   * built for: the rows layout leads with a halftone disc when there is no
+   * date, and a card with no image draws the same disc. An empty figure would
+   * have been the alternative and it renders nothing.
+   */
+  placeholder: {
+    _type: 'inFlightSection',
+    heading: 'A heading for this section.',
+    subheading: 'Add the standfirst beside it.',
+    entries: [
+      { _key: 'first', _type: 'entry', heading: 'An entry title', eyebrow: 'Sector · Focus' },
+    ],
+  } satisfies InFlightSection,
 })

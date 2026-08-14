@@ -1,5 +1,6 @@
 import { defineBlockKnobs } from '@o3/block-spec'
 import { surfaceKnob } from './surface'
+import type { InsightsCarouselSection } from '../types/generated'
 
 /**
  * The insights carousel's design options — `surface` and nothing else.
@@ -17,4 +18,14 @@ export const insightsCarouselSectionKnobs = defineBlockKnobs({
   title: 'Insights carousel',
   tier: 'section',
   knobs: [surfaceKnob({ initialValue: 'bone' })],
+  /**
+   * Nothing else is needed: an empty `insights` is the band's auto-fill state,
+   * so a placeholder carousel draws the latest insights rather than an empty
+   * rail. That is the one block where leaving a reference field alone produces
+   * a finished-looking band.
+   */
+  placeholder: {
+    _type: 'insightsCarouselSection',
+    heading: 'A heading for this carousel.',
+  } satisfies InsightsCarouselSection,
 })

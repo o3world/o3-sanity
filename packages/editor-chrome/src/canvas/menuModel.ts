@@ -1,6 +1,7 @@
 import { visibleKnobs } from '@o3/block-spec'
 import type { BlockKnobs, ItemKnobs, KnobReader, KnobSurface, ResolvedKnob } from '@o3/block-spec'
 
+import { insertActionGroups } from './insertActions'
 import { itemActionGroups, type ItemActionGroup } from './itemActions'
 
 /**
@@ -56,6 +57,14 @@ export interface KnobMenuModel {
    * empty altogether while the draft snapshot has not resolved the item.
    */
   itemActions: readonly ItemActionGroup[]
+  /**
+   * Add above / add below (#112), each listing what the subject's array
+   * declares it accepts. Its own field rather than more `itemActions` because
+   * the two answer different questions — those act on the subject, these add a
+   * sibling beside it — and because only this one needs to know what a block
+   * is. Same shape, so the view renders both with one loop.
+   */
+  insertActions: readonly ItemActionGroup[]
   /** Always last, and always non-empty: the jump is the menu's floor. */
   actions: readonly KnobMenuAction[]
 }
@@ -117,6 +126,7 @@ export function knobMenuModel({
   componentName,
   snapshot,
   subjectPath,
+  insert,
 }: {
   spec: BlockKnobs | undefined
   read: KnobReader
@@ -145,6 +155,14 @@ export function knobMenuModel({
    * honest answer for a caller that has no document to patch.
    */
   subjectPath?: string | undefined
+  /**
+   * What the subject's own array accepts, and every block's declaration to
+   * build it from (#112). Absent whenever the caller could not address the
+   * array or the site declared nothing for it — which is the honest answer for
+   * an array nobody has said is a composition surface, and the reason the menu
+   * offers no insert rows there rather than a guess.
+   */
+  insert?: { members: readonly string[]; specs: Readonly<Record<string, BlockKnobs>> } | undefined
 }): KnobMenuModel {
   // `.all` and not `bySurface`: the menu's roster IS the complete roster, and
   // reading the flat list keeps that visible. The grouping below is a
@@ -178,6 +196,10 @@ export function knobMenuModel({
     itemActions: subjectPath
       ? itemActionGroups({ snapshot, itemPath: subjectPath, subjectTitle: subject.title })
       : [],
+    insertActions:
+      subjectPath && insert
+        ? insertActionGroups({ snapshot, itemPath: subjectPath, ...insert })
+        : [],
     actions: [OPEN_FORM_ACTION],
   }
 }

@@ -1,6 +1,7 @@
 import { defineBlockKnobs, knob } from '@o3/block-spec'
 import { decorationKnob } from './decoration'
 import { surfaceKnob } from './surface'
+import type { HeroSection } from '../types/generated'
 
 /**
  * The hero's design options — the first block converted under ADR 0020.
@@ -35,4 +36,14 @@ export const heroSectionKnobs = defineBlockKnobs({
     decorationKnob(['orbs', 'none']),
     surfaceKnob({ initialValue: 'ink' }),
   ],
+  /**
+   * A hero with one line in it and nothing to correct. `variant` is not spelled
+   * here — the knob's own `initialValue` supplies it (`placeholder.ts`), so an
+   * inserted hero opens orbital exactly as one created from the form does.
+   */
+  placeholder: {
+    _type: 'heroSection',
+    headlineLines: ['A headline for this hero.'],
+    subheading: 'Add the line that sits under it.',
+  } satisfies HeroSection,
 })

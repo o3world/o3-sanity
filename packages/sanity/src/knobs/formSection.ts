@@ -1,5 +1,6 @@
 import { defineBlockKnobs } from '@o3/block-spec'
 import { surfaceKnob } from './surface'
+import type { FormSection } from '../types/generated'
 
 /**
  * The inquiry form's design options — `surface` and nothing else.
@@ -22,4 +23,16 @@ export const formSectionKnobs = defineBlockKnobs({
   title: 'Form',
   tier: 'section',
   knobs: [surfaceKnob({ initialValue: 'bone' })],
+  /**
+   * `reasons` needs one option to satisfy `min(1)`, and it is the only field
+   * here an editor authors — the inputs are fixed in `FormSection.tsx`.
+   * `submitLabel` is left out because the renderer already absorbs its absence
+   * with the same words the schema's `initialValue` would have written.
+   */
+  placeholder: {
+    _type: 'formSection',
+    heading: 'A heading for this form.',
+    note: 'Add the line under the heading.',
+    reasons: ['General enquiry'],
+  } satisfies FormSection,
 })

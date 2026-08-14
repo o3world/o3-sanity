@@ -352,6 +352,62 @@ describe('the item actions the menu carries (#111)', () => {
   })
 })
 
+describe('the insert rows the menu carries (#112)', () => {
+  const snapshot = {
+    _type: 'page',
+    sections: [{ _key: 'abc', _type: 'heroSection' }],
+  }
+
+  const quote = defineBlockKnobs({
+    type: 'quoteSection',
+    title: 'Quote',
+    tier: 'section',
+    knobs: [knob({ name: 'surface', title: 'Surface', options: ['white', 'ink'] })],
+    placeholder: { _type: 'quoteSection', quote: 'Add the quote.' },
+  })
+
+  const model = (insert?: Parameters<typeof knobMenuModel>[0]['insert']) =>
+    knobMenuModel({
+      spec: hero,
+      read: blockKnobReader(snapshot, BLOCK),
+      nested: false,
+      subject: { kind: 'block', title: 'Hero section' },
+      componentName: 'Hero section',
+      snapshot,
+      subjectPath: BLOCK,
+      insert,
+    })
+
+  it('offers what the array accepts, above and below', () => {
+    const groups = model({
+      members: ['quoteSection'],
+      specs: { quoteSection: quote },
+    }).insertActions
+
+    expect(groups.map((group) => group.title)).toEqual(['Add above', 'Add below'])
+    expect(groups[0]!.actions.map((action) => action.title)).toEqual(['Quote'])
+  })
+
+  // A caller that could not address the array — or a site that declared none —
+  // gets a menu with no insert rows rather than a guess at what belongs here.
+  it('offers nothing when the array was not declared', () => {
+    expect(model().insertActions).toEqual([])
+  })
+
+  it('keeps the insert rows separate from the actions ON the subject', () => {
+    const built = model({ members: ['quoteSection'], specs: { quoteSection: quote } })
+
+    // Duplicate/Remove act on the hero; Add above/below act on `sections`.
+    // Same shape, two questions — the menu draws a rule between them.
+    expect(
+      built.itemActions.flatMap((group) => group.actions.map((action) => action.id)),
+    ).toContain('duplicate')
+    expect(
+      built.insertActions.flatMap((group) => group.actions.map((action) => action.id)),
+    ).toEqual(['insert-before-quoteSection', 'insert-after-quoteSection'])
+  })
+})
+
 describe('what dismisses an open menu', () => {
   interface FakeNode {
     hasAttribute(name: string): boolean

@@ -129,6 +129,43 @@ export function keyedItemParts(path: string): KeyedItemParts | undefined {
   return { arrayPath, key: m[2]! }
 }
 
+/** Where an array hangs: the thing that owns it, and what it is called there. */
+export interface ArrayHostParts {
+  /**
+   * The path of the type-bearing thing the array is a field of — a block for a
+   * nested array, and the EMPTY STRING for one on the document itself. Empty
+   * rather than undefined because "the document" is a real host with a real
+   * `_type`, and a caller that has to distinguish "no host" from "the root
+   * host" ends up with two rules where the address needs one.
+   */
+  hostPath: string
+  /** The array's own field name, relative to that host — `sections`, `panels`. */
+  field: string
+}
+
+/**
+ * Split an array's path into the host that declares it and the field it is:
+ * `sections[_key=="a"].panels` → `sections[_key=="a"]` + `panels`.
+ *
+ * This is what addresses an array's declared members (#112). The overlay knows
+ * nothing about any schema, so "what does this array accept" has to be looked
+ * up — and the only key that cannot collide is the host's `_type` plus the
+ * field name, both of which are already in hand: the type from the draft
+ * snapshot, the field from here. A bare field name would not do, for the same
+ * reason ADR 0021 refused a registry keyed on a member's `_type` — `items` is a
+ * plausible field on more than one type, and the wrong roster on the
+ * right-looking band is a live editorial surface offering the wrong content.
+ *
+ * Undefined for anything that is not `<path>.<identifier>` or a bare
+ * identifier. A trailing keyed segment cannot match, which is what keeps a
+ * `_key` containing a dot from being read as a field boundary.
+ */
+export function arrayHostParts(arrayPath: string): ArrayHostParts | undefined {
+  const m = /^(?:(.*)\.)?([A-Za-z_][A-Za-z0-9_]*)$/.exec(arrayPath)
+  if (!m) return undefined
+  return { hostPath: m[1] ?? '', field: m[2]! }
+}
+
 /**
  * WHICH OF THE BLOCK'S ARRAYS THE HOVERED ITEM SITS IN — the second half of the
  * key that reaches a member's knob declaration (#122).

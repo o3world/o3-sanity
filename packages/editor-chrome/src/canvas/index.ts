@@ -10,7 +10,7 @@
  * One import, one prop, and one sibling:
  *
  *     import { CanvasNotices, createCanvasComponents } from '@o3/editor-chrome/canvas'
- *     <VisualEditing components={createCanvasComponents({ blockKnobs: BLOCK_KNOBS })} />
+ *     <VisualEditing components={createCanvasComponents({ blockKnobs, blockArrays })} />
  *     <CanvasNotices />
  *
  * The sibling is not decoration. An overlay component renders only while its
@@ -29,6 +29,14 @@ export { CanvasToolbar, type CanvasToolbarProps } from './CanvasToolbar'
 export { CanvasToolbarView, type CanvasToolbarViewProps } from './CanvasToolbarView'
 export { canvasSubject, type CanvasLevel, type CanvasSubject } from './subject'
 export { componentName, subjectName } from './identity'
+export {
+  blockArrayKey,
+  insertActionGroups,
+  insertItemPatch,
+  insertOffers,
+  type InsertOffer,
+  type InsertPosition,
+} from './insertActions'
 export {
   duplicateItemPatch,
   itemActionGroups,

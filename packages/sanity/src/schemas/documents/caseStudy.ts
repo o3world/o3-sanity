@@ -1,5 +1,5 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
-import { sectionBlockMembers } from '../blocks/section'
+import { blockArrayMembers } from '../blocks/registry'
 
 export const caseStudy = defineType({
   name: 'caseStudy',
@@ -59,14 +59,14 @@ export const caseStudy = defineType({
      * fields cannot express. One array of `chapter` members and section
      * blocks can, and every band the case study needs is then a block any
      * page can compose too. The section members are derived from the registry
-     * (`sectionBlockMembers`), never restated.
+     * (`BLOCK_ARRAYS`), never restated.
      */
     defineField({
       name: 'story',
       type: 'array',
       of: [
         defineArrayMember({ type: 'chapter' }),
-        ...sectionBlockMembers.map((member) => defineArrayMember(member)),
+        ...blockArrayMembers('caseStudy.story').map((member) => defineArrayMember(member)),
       ],
       group: 'story',
       description:

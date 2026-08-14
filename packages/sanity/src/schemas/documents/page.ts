@@ -1,6 +1,6 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
 import { PAGE_TYPES } from '../../constants'
-import { sectionBlockMembers } from '../blocks/section'
+import { blockArrayMembers } from '../blocks/registry'
 
 export const page = defineType({
   name: 'page',
@@ -37,7 +37,7 @@ export const page = defineType({
     defineField({
       name: 'sections',
       type: 'array',
-      of: sectionBlockMembers.map((member) => defineArrayMember(member)),
+      of: blockArrayMembers('page.sections').map((member) => defineArrayMember(member)),
     }),
     defineField({ name: 'seo', type: 'seo' }),
     defineField({ name: 'migration', type: 'migration' }),

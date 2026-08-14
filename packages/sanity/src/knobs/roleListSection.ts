@@ -1,5 +1,6 @@
 import { defineBlockKnobs } from '@o3/block-spec'
 import { surfaceKnob } from './surface'
+import type { RoleListSection } from '../types/generated'
 
 /**
  * The role list's design options — `surface` and nothing else.
@@ -16,4 +17,10 @@ export const roleListSectionKnobs = defineBlockKnobs({
   title: 'Role list',
   tier: 'section',
   knobs: [surfaceKnob({ initialValue: 'white' })],
+  placeholder: {
+    _type: 'roleListSection',
+    eyebrow: 'Careers',
+    heading: 'A heading for this list.',
+    roles: [{ _key: 'first', _type: 'role', heading: 'A role title', eyebrow: 'Location · Type' }],
+  } satisfies RoleListSection,
 })

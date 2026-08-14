@@ -6,6 +6,7 @@ import { VisualEditing as NextSanityVisualEditing } from 'next-sanity/visual-edi
 import type { HistoryRefresh } from '@sanity/visual-editing'
 import { CanvasNotices, createCanvasComponents } from '@o3/editor-chrome/canvas'
 import { BLOCK_KNOBS } from '@o3/sanity/knobs'
+import { BLOCK_ARRAYS } from '@o3/sanity/schemas/registry'
 
 /**
  * The one VisualEditing mount for the site (issue #15).
@@ -27,9 +28,13 @@ import { BLOCK_KNOBS } from '@o3/sanity/knobs'
  * prop. It is an `@alpha` API on `@sanity/visual-editing` and the one unstable
  * surface the site depends on — worth keeping to a single line.
  *
- * `BLOCK_KNOBS` is the one thing the site has to supply: the overlay package
- * knows the knob vocabulary and none of our blocks' declarations (ADR 0020),
- * so the registry is handed in here rather than imported over there.
+ * `BLOCK_KNOBS` and `BLOCK_ARRAYS` are what the site has to supply: the overlay
+ * package knows the knob vocabulary and none of our blocks' declarations
+ * (ADR 0020), so both registries are handed in here rather than imported over
+ * there. The second is what the insert menu offers (#112) — which arrays hold
+ * blocks and which blocks each holds, derived from the same registry the
+ * schema's own `of:` is built from, so the menu and the form cannot disagree
+ * about what a page accepts.
  *
  * `<CanvasNotices />` is a SIBLING and cannot be anything else (#124). An
  * overlay component renders only while its element is hovered, so a refused
@@ -38,7 +43,10 @@ import { BLOCK_KNOBS } from '@o3/sanity/knobs'
  * the page; the toolbar feeds it through a queue in the same package. It
  * renders nothing until something fails.
  */
-const canvasComponents = createCanvasComponents({ blockKnobs: BLOCK_KNOBS })
+const canvasComponents = createCanvasComponents({
+  blockKnobs: BLOCK_KNOBS,
+  blockArrays: BLOCK_ARRAYS,
+})
 
 export function VisualEditing() {
   const router = useRouter()
