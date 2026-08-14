@@ -32,20 +32,16 @@ interface SiteNavProps {
  * sits over whatever the hero is showing. The frames put no blur on it, but
  * the pill carries the prototype's `blur(14px)` anyway: a bar that never
  * leaves crosses photography, headlines and body copy all the way down the
- * page, and a 20% scrim laid straight over a paragraph is unreadable. That is
- * the prototype's behaviour being carried deliberately, not a hunch — the
- * earlier note here said the blur was dropped, and it was, until the carry was
- * asked for outright.
+ * page, and a 20% scrim laid straight over a paragraph is unreadable. The
+ * carry is deliberate, asked for outright — not a hunch.
  *
- * Figma places the desktop bar over a hero with 164px of top padding — over the
- * page, not in flow. c1ee258 read that as `lg:absolute` and let the desktop bar
- * scroll away. It is `fixed` at every width again, because the ink flip below
- * is a **pinned** bar's behaviour: a bar that leaves never crosses a light band
- * and has nothing to flip against.
+ * Figma places the desktop bar over a hero with 164px of top padding — over
+ * the page, not in flow. That reads as `lg:absolute`, but the bar is `fixed`
+ * at every width: the ink flip below is a **pinned** bar's behaviour — a bar
+ * that leaves never crosses a light band and has nothing to flip against.
  *
- * **The offset is 64px, not the 30px this shipped with** (#88). The 2026-08
- * pass put the `Utility Nav` strip (`2250:1445`) above the pill, and the Home
- * frame draws the rebuilt `NavBar` (`2225:2967`, `ABSOLUTE` + `FIXED`) at
+ * **The offset is 64px** (#88). The `Utility Nav` strip (`2250:1445`) sits
+ * above the pill, and the Home frame draws the rebuilt `NavBar` (`2225:2967`, `ABSOLUTE` + `FIXED`) at
  * `y: 64` — the strip's 50px plus a 14px gap. `UtilityNav` renders that strip
  * in flow at the top of the document, so at rest the two sit exactly as the
  * frame draws them; the strip then scrolls away and the pill holds 64px, which
@@ -58,22 +54,14 @@ interface SiteNavProps {
  * — Home `2225:2967`, Insights index `2336:4382`, Sanity `2332:1679`, Solutions
  * `2354:2584`, each 900px inside a 1440 frame with 270px of margin either side.
  * (Sanity's sits 3px right of centre, 273 / 267. That is a placement nudge in
- * one frame, not a second width.) Four frames agreeing is what made a shared
- * dimension safe to move; reading it off one frame is how it went wrong before.
+ * one frame, not a second width.) The pill runs narrower than the Home hero's
+ * heading and subheading boxes — 978 and 962 (`2089:4313`, `2089:4318`) — so a
+ * bar under its headline is the frame's composition, not a defect to fix.
  *
- * The 1130 this replaces was measured off `.figma/frames/hero-image.png` — the
- * hero exported at 1440 × 892 / 1.7014×, where the pill's stroke ran x 267.5 →
- * 2190, or 1923 frame px. That read was right for `1710:2271`, which the
- * 2026-08 pass then emptied. **The proportion check inverted with it**: the old
- * note said to expect a pill comfortably WIDER than the headline it sits over,
- * and at 900 it is narrower — the Home hero's heading and subheading boxes are
- * 978 and 962 (`2089:4313`, `2089:4318`), both wider than the bar. That is the
- * rebuilt frame's own composition, so it is the new thing to check against.
- *
- * **Only the width moved.** `2225:2920` also draws a 12px radius over an opaque
- * `#030303` fill, 16px side padding and a 643px link row, where this ships a
- * full round over `bg-scrim` at 32px and 589px. Reconciling that skin is a
- * separate read against the rebuilt component, not part of this cap.
+ * **The skin deliberately does not follow `2225:2920`**, which draws a 12px
+ * radius over an opaque `#030303` fill, 16px side padding and a 643px link
+ * row, where this ships a full round over `bg-scrim` at 32px and 589px.
+ * Reconciling that skin is its own read against the rebuilt component (#91).
  *
  * ── INK FLIP ───────────────────────────────────────────────────────────────
  *

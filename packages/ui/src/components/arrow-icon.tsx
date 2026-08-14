@@ -12,9 +12,7 @@ export interface ArrowIconProps extends SVGProps<SVGSVGElement> {
  *
  * **20px by default** — `Button / Solid` (`1868:3262`) sets its trailing
  * `arrow_forward` on a 20px box, recorded as `button.icon.size` in
- * `foundations/figma-home-spec.ts`. The old 15 was the prototype's, and it
- * survived the #42 realignment because that ticket moved the label and the
- * fills and left the glyph alone (#55).
+ * `foundations/figma-home-spec.ts`.
  */
 export function ArrowIcon({ size = 20, className, ...rest }: ArrowIconProps) {
   return (
