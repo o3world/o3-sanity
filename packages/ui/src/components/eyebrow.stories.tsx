@@ -8,7 +8,7 @@ const meta = {
   parameters: { layout: 'padded' },
   argTypes: {
     size: { control: 'inline-radio', options: ['base', 'lg'] },
-    tone: { control: 'select', options: ['muted', 'inverse', 'brand', 'tint'] },
+    tone: { control: 'select', options: ['muted', 'inverse', 'brand'] },
   },
 } satisfies Meta<typeof Eyebrow>
 

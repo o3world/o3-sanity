@@ -38,11 +38,14 @@ comment. A value that appears exactly once is composition, not vocabulary — th
 pull-quote attribution's `1.5em` line-height, the 5.8px carousel chip, the 87px
 CTA bleed strip, the 1026px partners measure.
 
-Two tokens deliberately break the rule and are marked **NO CANONICAL ANCHOR**:
-`brand-tint` and `line-soft` are prototype-era values kept alive by existing
-call sites, pending #38. `line` left that list in the 2026-08 partners
-restructure — the hairline around each logo plate (`1864:2395`) is the frames'
-first real rule, so the token took its value.
+One token deliberately breaks the rule and is marked **NO CANONICAL ANCHOR**:
+`line-soft` is a prototype-era value kept alive by existing call sites. Two
+others have left that list. `line` left it in the 2026-08 partners restructure
+— the hairline around each logo plate (`1864:2395`) is the frames' first real
+rule, so the token took its value. `brand-tint` left it in #55 by being
+**retired**: no frame places a red accent on ink (the Utility Nav's hover is
+flat `brand`), and its call sites came down to `ArrowLink`, which went with it,
+and the editor toolbar, which is chrome and now carries the hex as a literal.
 
 ## Responsive
 
@@ -81,7 +84,6 @@ are in each token's comment in `tokens/color.css`.
 | Token           | Value                   | Role                                                                 |
 | --------------- | ----------------------- | -------------------------------------------------------------------- |
 | `brand`         | `#EB1000`               | Flat **once** on Home — the footer link headers. Else the glow.      |
-| `brand-tint`    | `#FF6A5A`               | ⚠️ No canonical anchor — prototype-era, pending #38                  |
 | `fg`            | `#232323`               | Body copy and card titles on light bands (`text/default`)            |
 | `fg-muted`      | `#76746F`               | The **neutral** eyebrow and card meta (was `#636363`)                |
 | `fg-body`       | `#55524E`               | `Body/Default` on the redesigned frames — partners, Solutions        |
