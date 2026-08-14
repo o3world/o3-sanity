@@ -348,6 +348,10 @@ importers:
         version: 5.9.3
 
   packages/story-kit:
+    dependencies:
+      '@o3/block-spec':
+        specifier: workspace:*
+        version: link:../block-spec
     devDependencies:
       '@o3/typescript-config':
         specifier: workspace:*
