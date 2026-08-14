@@ -17,7 +17,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-/** 15px — the size every `Button` and `ArrowLink` draws it at. */
+/** 20px — `Button / Solid`'s glyph box (`1868:3262`), and the default. */
 export const Default: Story = {
   args: { className: 'text-ink' },
 }
@@ -33,7 +33,7 @@ export const Sizes: Story = {
   args: { className: 'text-ink' },
   render: () => (
     <div className="text-ink flex items-center gap-6">
-      {[15, 24, 40, 64].map((size) => (
+      {[20, 24, 40, 64].map((size) => (
         <ArrowIcon key={size} size={size} />
       ))}
     </div>
