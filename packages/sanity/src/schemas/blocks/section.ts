@@ -7,6 +7,7 @@ import { PAGE_TYPES } from '../../constants'
 import { disciplineGridSectionKnobs } from '../../knobs/disciplineGridSection'
 import { heroSectionKnobs } from '../../knobs/heroSection'
 import { inFlightSectionKnobs } from '../../knobs/inFlightSection'
+import { mediaSectionKnobs } from '../../knobs/mediaSection'
 import { railPanelsSectionKnobs } from '../../knobs/railPanelsSection'
 
 /**
@@ -519,32 +520,19 @@ export const layoutSection = defineSectionBlock({
   },
 })
 
+/**
+ * `variant`, `width` and `surface` are declared in `src/knobs/mediaSection.ts`
+ * (ADR 0020), including the gate that used to be `width`'s `hidden` closure.
+ * `media` is the only editorial field the band has.
+ */
 export const mediaSection = defineSectionBlock({
   name: 'mediaSection',
   title: 'Media section',
+  knobs: mediaSectionKnobs,
   fields: [
     defineField({ name: 'media', type: 'figure', validation: (rule) => rule.required() }),
-    defineField({
-      name: 'variant',
-      type: 'string',
-      description:
-        'Plain draws the figure itself. Capture floats a tall page screenshot on a dark stage and crops it at the band’s floor — the frame’s "here is the whole page" moment.',
-      // `1647:1720` (#97): the same block, a different treatment — a 700px
-      // dark band the capture is CROPPED by, rather than a figure sized to
-      // its own aspect. A variant on the block instead of a second block,
-      // the call `railPanelsSection.layout` and `heroSection.variant` make.
-      options: { list: ['plain', 'capture'], layout: 'radio', direction: 'horizontal' },
-      initialValue: 'plain',
-    }),
-    defineField({
-      name: 'width',
-      type: 'string',
-      options: { list: ['contained', 'full-bleed'], layout: 'radio', direction: 'horizontal' },
-      initialValue: 'contained',
-      // A capture is a full-bleed stage by construction, so the axis has
-      // nothing left to choose.
-      hidden: ({ parent }) => parent?.variant === 'capture',
-    }),
+    'variant',
+    'width',
   ],
   preview: { select: { title: 'media.alt', subtitle: 'variant' } },
 })

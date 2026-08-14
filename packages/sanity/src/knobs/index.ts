@@ -17,11 +17,13 @@ import type { BlockKnobs } from '@o3/block-spec'
 import { disciplineGridSectionKnobs } from './disciplineGridSection'
 import { heroSectionKnobs } from './heroSection'
 import { inFlightSectionKnobs } from './inFlightSection'
+import { mediaSectionKnobs } from './mediaSection'
 import { railPanelsSectionKnobs } from './railPanelsSection'
 
 export { disciplineGridSectionKnobs } from './disciplineGridSection'
 export { heroSectionKnobs } from './heroSection'
 export { inFlightSectionKnobs } from './inFlightSection'
+export { mediaSectionKnobs } from './mediaSection'
 export { railPanelsSectionKnobs } from './railPanelsSection'
 export { surfaceKnob } from './surface'
 
@@ -44,4 +46,5 @@ export const BLOCK_KNOBS: Readonly<Record<string, BlockKnobs>> = {
   [railPanelsSectionKnobs.type]: railPanelsSectionKnobs,
   [disciplineGridSectionKnobs.type]: disciplineGridSectionKnobs,
   [inFlightSectionKnobs.type]: inFlightSectionKnobs,
+  [mediaSectionKnobs.type]: mediaSectionKnobs,
 }
