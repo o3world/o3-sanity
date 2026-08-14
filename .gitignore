@@ -39,3 +39,8 @@ prototype
 
 # figma mcp image downloads
 .figma/
+
+# visual regression: the baseline checkout, both Storybook builds, every
+# screenshot, and the report. All of it is derived from a commit and none of it
+# is shared — see tools/visual-regression/README.md.
+.vr/

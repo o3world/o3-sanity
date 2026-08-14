@@ -141,6 +141,13 @@ Read `docs/testing.md` before writing one; decisions are in `docs/adr/0004-layer
 migration batch or a new block — not after every edit, and never in watch mode during agent work.
 There is no git hook; `pnpm verify` does not run tests. CI runs the suite as its own job.
 
+**`pnpm vr` answers a different question than the suite does** — not "did it break?" but "what does
+it look like now?". It builds Storybook for your working tree and for the merge base with `main`,
+screenshots the stories your change can reach at two viewports, and opens a pixel diff. Local only:
+no baselines are committed and nothing is uploaded. See
+[`tools/visual-regression/README.md`](./tools/visual-regression/README.md), and tag a story
+`vr:skip` if its pixels are genuinely non-deterministic.
+
 Two rules that will otherwise cost an hour:
 
 - A component with a story needs no test file — the story IS the test.

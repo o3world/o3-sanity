@@ -48,6 +48,9 @@
     },
     "tools/figma-sync": {
       "entry": ["src/sync.ts", "src/**/*.test.ts"]
+    },
+    "tools/visual-regression": {
+      "entry": ["src/cli.ts", "src/**/*.test.ts"]
     }
   }
 }

@@ -1,0 +1,24 @@
+{
+  "name": "@o3/visual-regression",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local visual regression for changed stories — renders them on both sides of a git ref and diffs the pixels (#122).",
+  "scripts": {
+    "vr": "tsx src/cli.ts",
+    "lint": "eslint src/",
+    "lint:fix": "eslint --fix src/",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@o3/typescript-config": "workspace:*",
+    "@types/node": "^24.0.0",
+    "@types/pngjs": "^6.0.5",
+    "pixelmatch": "^7.2.0",
+    "playwright": "^1.62.1",
+    "pngjs": "^7.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}

@@ -33,6 +33,7 @@
     "typecheck": "turbo run typecheck",
     "typegen": "pnpm --filter @o3/sanity typegen",
     "verify": "turbo run lint typecheck build --affected",
+    "vr": "pnpm --filter @o3/visual-regression run vr",
     "wt": "./scripts/worktree.sh"
   },
   "devDependencies": {

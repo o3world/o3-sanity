@@ -1,0 +1,108 @@
+import { describe, expect, it } from 'vitest'
+
+import { affectedStoryFiles, entryPath, storiesFor } from './affected'
+import type { StatsModule, StoryEntry } from './storybook'
+
+/**
+ * Module ids as Storybook writes them: relative to `apps/storybook`, with
+ * `reasons` naming the modules that import each one.
+ */
+const modules: StatsModule[] = [
+  { id: './globals.css', reasons: [{ moduleName: './.storybook/preview.ts' }] },
+  {
+    id: './.storybook/preview.ts',
+    reasons: [{ moduleName: '/virtual:/@storybook/builder-vite/storybook-config-entry.js' }],
+  },
+  {
+    id: './../../packages/ui/src/components/stat.tsx',
+    reasons: [
+      { moduleName: './../../packages/ui/src/components/stat.stories.tsx' },
+      { moduleName: './../../packages/ui/src/index.ts' },
+    ],
+  },
+  {
+    id: './../../packages/ui/src/index.ts',
+    reasons: [{ moduleName: './../../apps/web/src/ui/SiteNav.stories.tsx' }],
+  },
+  {
+    id: './../../packages/ui/src/components/stat.stories.tsx',
+    reasons: [{ moduleName: '/virtual:/@storybook/builder-vite/storybook-stories.js' }],
+  },
+  {
+    id: './../../apps/web/src/ui/SiteNav.stories.tsx',
+    reasons: [{ moduleName: '/virtual:/@storybook/builder-vite/storybook-stories.js' }],
+  },
+  { id: './../../packages/ui/src/lib/unused.ts', reasons: [] },
+]
+
+const STAT_STORY = 'packages/ui/src/components/stat.stories.tsx'
+const NAV_STORY = 'apps/web/src/ui/SiteNav.stories.tsx'
+
+describe('affectedStoryFiles', () => {
+  it('climbs from a component to every story that renders it', () => {
+    // stat.tsx is imported by its own story and by the barrel the nav story
+    // imports — the second one is the reason a graph beats a filename guess.
+    expect(affectedStoryFiles(modules, ['packages/ui/src/components/stat.tsx'])).toEqual({
+      storyFiles: [NAV_STORY, STAT_STORY],
+      everything: false,
+    })
+  })
+
+  it('selects a changed story file itself', () => {
+    expect(affectedStoryFiles(modules, [STAT_STORY]).storyFiles).toEqual([STAT_STORY])
+  })
+
+  it('selects a story file that is too new to be in the graph', () => {
+    expect(affectedStoryFiles(modules, ['packages/ui/src/components/brand.stories.tsx'])).toEqual({
+      storyFiles: ['packages/ui/src/components/brand.stories.tsx'],
+      everything: false,
+    })
+  })
+
+  it('treats a global as reaching everything', () => {
+    expect(affectedStoryFiles(modules, ['apps/storybook/globals.css']).everything).toBe(true)
+    expect(affectedStoryFiles(modules, ['apps/storybook/.storybook/preview.ts']).everything).toBe(
+      true,
+    )
+  })
+
+  it('selects nothing for a file no story imports', () => {
+    expect(affectedStoryFiles(modules, ['tools/migration/src/load.ts', 'README.md'])).toEqual({
+      storyFiles: [],
+      everything: false,
+    })
+    expect(affectedStoryFiles(modules, ['packages/ui/src/lib/unused.ts']).storyFiles).toEqual([])
+  })
+})
+
+describe('storiesFor', () => {
+  const index: StoryEntry[] = [
+    {
+      id: 'ui-stat--default',
+      name: 'Default',
+      title: 'UI/Stat',
+      importPath: '../../packages/ui/src/components/stat.stories.tsx',
+      type: 'story',
+    },
+    {
+      id: 'ui-sitenav--default',
+      name: 'Default',
+      title: 'UI/SiteNav',
+      importPath: '../../apps/web/src/ui/SiteNav.stories.tsx',
+      type: 'story',
+    },
+  ]
+
+  it('resolves an index entry to its repo-relative file', () => {
+    expect(entryPath(index[0] as StoryEntry)).toBe(STAT_STORY)
+  })
+
+  it('keeps only the stories whose file is affected', () => {
+    const stories = storiesFor(index, { storyFiles: [STAT_STORY], everything: false })
+    expect(stories.map((entry) => entry.id)).toEqual(['ui-stat--default'])
+  })
+
+  it('keeps every story when the change is global', () => {
+    expect(storiesFor(index, { storyFiles: [], everything: true })).toHaveLength(2)
+  })
+})

@@ -56,6 +56,7 @@ export default defineConfig({
           // so the two layers cannot collect each other's tests by accident.
           include: [
             'tools/figma-sync/src/**/*.test.ts',
+            'tools/visual-regression/src/**/*.test.ts',
             'tools/migration/src/**/*.test.ts',
             'apps/web/src/**/*.test.ts',
             'packages/*/src/**/*.test.ts',
