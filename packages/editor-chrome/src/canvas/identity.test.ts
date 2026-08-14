@@ -69,7 +69,16 @@ describe('lastFieldSegment', () => {
     expect(lastFieldSegment('sections')).toBe('sections')
   })
 
-  it('has no answer for a path it cannot parse', () => {
-    expect(lastFieldSegment('sections[0]')).toBeUndefined()
+  // It is the LAST-RESORT label, so it has to answer for the paths nothing else
+  // can name. A stega'd run inside `heroSection.headlineLines` arrives with a
+  // numeric index, has no stored `_type` and no schema title — this used to
+  // return undefined there and the identity chip rendered blank.
+  it('reads a name off a numeric index too', () => {
+    expect(lastFieldSegment('sections[_key=="a"].headlineLines[0]')).toBe('headlineLines')
+    expect(lastFieldSegment('sections[0]')).toBe('sections')
+  })
+
+  it('has no answer only when there is no field name at all', () => {
+    expect(lastFieldSegment('')).toBeUndefined()
   })
 })

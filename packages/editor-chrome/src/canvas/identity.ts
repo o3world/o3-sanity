@@ -1,7 +1,5 @@
 import { humanize } from '@o3/block-spec'
 
-import { parseGroqPath } from './groqPath'
-
 /**
  * WHAT TO CALL THE THING UNDER THE CURSOR.
  *
@@ -44,17 +42,29 @@ function typeName(storedType: unknown): string | undefined {
   return storedType
 }
 
+/** A path part's field name, whatever subscript follows it: `panels[_key=="b"]` → `panels`. */
+const FIELD_NAME = /^([A-Za-z_][A-Za-z0-9_]*)/
+
 /**
- * The last **field** name in a path, keyed segments ignored: `panels` for
- * `sections[_key=="a"].panels[_key=="b"]`, `heading` for a header. The
- * last-resort label, and the only one available for a slot holding a
- * reference.
+ * The last **field** name in a path, subscripts ignored: `panels` for
+ * `sections[_key=="a"].panels[_key=="b"]`, `heading` for a header,
+ * `headlineLines` for `sections[_key=="a"].headlineLines[0]`. The last-resort
+ * label, and the only one available for a slot holding a reference.
+ *
+ * READS THE PATH, NOT THE PARSE. It used to walk `parseGroqPath`'s output,
+ * which rejects a numeric index outright and returns an empty list — so the
+ * label was undefined for exactly the paths that have nothing else to fall back
+ * on. A stega-encoded run inside `heroSection.headlineLines` arrives as
+ * `sections[_key=="a"].headlineLines[0]`: `field` level, no stored `_type`, no
+ * schema title, and the identity chip rendered blank rather than "Headline
+ * lines". This is a label, not a resolution — an index it cannot resolve is
+ * still an index it can read a name off.
  */
 export function lastFieldSegment(path: string): string | undefined {
-  const segments = parseGroqPath(path)
-  for (let i = segments.length - 1; i >= 0; i--) {
-    const segment = segments[i]
-    if (typeof segment === 'string') return segment
+  const parts = path.split('.')
+  for (let i = parts.length - 1; i >= 0; i--) {
+    const name = FIELD_NAME.exec(parts[i]!)?.[1]
+    if (name) return name
   }
   return undefined
 }

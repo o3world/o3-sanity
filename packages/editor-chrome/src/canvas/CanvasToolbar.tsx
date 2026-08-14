@@ -123,20 +123,33 @@ function CanvasToolbarInner({
   const [snapshot, setSnapshot] = useState<Record<string, unknown> | undefined>(() =>
     doc ? initialDraftSnapshot(doc) : undefined,
   )
+  // STALE, NOT ABSENT. A commit has to re-arm the effect below, and the obvious
+  // way to do that is to drop the snapshot — but every single thing the bar
+  // draws is derived from it. With it cleared, `typeAt(blockPath)` is
+  // undefined, so `spec` is undefined, `knobs` is empty, and `componentName`
+  // returns undefined at item and field level; the view renders the bar only
+  // when it can name the component, so the WHOLE BAR unmounted for as long as
+  // the async re-pull took. Picking "Ink" from the Surface dropdown made the
+  // control you just used disappear and come back. Marking the snapshot stale
+  // re-arms the pull while leaving the last known values on screen.
+  const [stale, setStale] = useState(false)
 
   // The sync getter is empty until the machine has fetched the document —
-  // settle it asynchronously once, so the names are right a frame later
-  // rather than never.
+  // settle it asynchronously, so the names are right a frame later rather than
+  // never, and again after every commit.
   useEffect(() => {
-    if (snapshot || !doc) return
+    if (!doc) return
+    if (snapshot && !stale) return
     let cancelled = false
     void doc.getSnapshot().then((settled) => {
-      if (!cancelled && settled) setSnapshot(settled as unknown as Record<string, unknown>)
+      if (cancelled || !settled) return
+      setSnapshot(settled as unknown as Record<string, unknown>)
+      setStale(false)
     })
     return () => {
       cancelled = true
     }
-  }, [doc, snapshot])
+  }, [doc, snapshot, stale])
 
   const typeAt = (at: string) => resolveGroqPath(snapshot, `${at}._type`)
 
@@ -233,7 +246,7 @@ function CanvasToolbarInner({
     // no schema declares.
     const root = resolved.surface === 'item' && itemPath ? itemPath : blockPath
     void commitPatch(doc, knobPatch(root, resolved.knob.name, stored), {
-      onSettle: () => setSnapshot(undefined),
+      onSettle: () => setStale(true),
       // A rejected patch used to arrive as an unhandled rejection while the bar
       // sat there looking like it had worked.
       onError: (error: unknown) =>
@@ -257,7 +270,7 @@ function CanvasToolbarInner({
   const runItemAction = (action: ItemAction) => {
     if (!doc) return
     void commitPatch(doc, action.patches, {
-      onSettle: () => setSnapshot(undefined),
+      onSettle: () => setStale(true),
       onError: (error: unknown) =>
         reportCanvasFailure(`could not ${action.id} ${actionPath}`, error),
     })

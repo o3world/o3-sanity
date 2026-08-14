@@ -54,6 +54,21 @@ describe('resolveGroqPath', () => {
     // undefined root is the ordinary first render, not an error.
     expect(resolveGroqPath(undefined, 'sections[_key=="a"]._type')).toBeUndefined()
   })
+
+  // The failure this guards is not a miss, it is the OPPOSITE of a miss: an
+  // unparseable path used to resolve to the whole document, and `typeAt` was one
+  // `typeof === 'string'` check away from naming a component after it.
+  it('an unparseable path is undefined, not the root', () => {
+    expect(resolveGroqPath(doc, 'sections[0].heading')).toBeUndefined()
+    expect(resolveGroqPath(doc, 'sections[0]')).toBeUndefined()
+    expect(resolveGroqPath(doc, 'not a path at all')).toBeUndefined()
+  })
+
+  // The empty path still means the root — `parseGroqPath('')` returns an empty
+  // list because there is nothing to walk, not because it failed.
+  it('the empty path is the root', () => {
+    expect(resolveGroqPath(doc, '')).toBe(doc)
+  })
 })
 
 describe('nearestArrayItemPath', () => {

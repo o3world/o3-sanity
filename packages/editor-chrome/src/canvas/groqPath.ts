@@ -28,10 +28,25 @@ export function parseGroqPath(path: string): GroqPathSegment[] {
   return out
 }
 
-/** Value at `path` under `root`, or undefined as soon as a segment misses. */
+/**
+ * Value at `path` under `root`, or undefined as soon as a segment misses.
+ *
+ * UNPARSEABLE IS NOT THE ROOT. `parseGroqPath` reports "I do not know this
+ * syntax" as an empty list, which is also what the empty path legitimately
+ * produces — so without the guard below the loop body never runs and
+ * `resolveGroqPath(doc, 'sections[0].heading')` hands back the WHOLE DOCUMENT
+ * instead of undefined. That reached two live callers: `typeAt` in
+ * CanvasToolbar, where only `typeName`'s `typeof === 'string'` check stood
+ * between a document and a component name, and `blockKnobReader` for any
+ * composed path that failed to parse. `keyedItemParts` guards against the same
+ * thing by hand a few lines down, which is the tell that the guard belongs
+ * here instead.
+ */
 export function resolveGroqPath(root: unknown, path: string): unknown {
+  const segments = parseGroqPath(path)
+  if (path !== '' && segments.length === 0) return undefined
   let current: unknown = root
-  for (const segment of parseGroqPath(path)) {
+  for (const segment of segments) {
     if (current == null) return undefined
     if (typeof segment === 'string') {
       current = (current as Record<string, unknown>)[segment]
