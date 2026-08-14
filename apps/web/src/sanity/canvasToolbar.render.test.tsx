@@ -7,8 +7,10 @@ import {
   CanvasToolbarView,
   createCanvasComponents,
   KnobControl,
+  KnobMenu,
+  knobMenuModel,
 } from '@o3/editor-chrome/canvas'
-import { BLOCK_KNOBS, heroSectionKnobs } from '@o3/sanity/knobs'
+import { BLOCK_KNOBS, heroSectionKnobs, railPanelsSectionKnobs } from '@o3/sanity/knobs'
 
 import { buildSingletonRoute } from '@/lib/content-routes/build'
 import { home } from '@/content/documents/page/entry'
@@ -270,5 +272,170 @@ describe('what the two surfaces say', () => {
     const html = view({ subjectName: 'Heading' })
     expect(html).toContain('right-0')
     expect(html).toContain('top-0')
+  })
+})
+
+/**
+ * THE KNOB MENU (#110) — the right-click surface, against the real declarations.
+ *
+ * Rows are located by ROLE and not by markup: an option is a `menuitemradio`
+ * (one member of a closed set, the same role the bar's dropdown uses) and an
+ * action is a `menuitem`. `role="menuitem"` with its closing quote cannot match
+ * inside `role="menuitemradio"`, so the two counts stay honest.
+ */
+const rolesIn = (html: string, role: string) => html.match(new RegExp(`role="${role}"`, 'g')) ?? []
+
+describe('what the knob menu carries that the bar does not', () => {
+  const blockPath = 'sections[_key=="h"]'
+  const snapshot = (type: string, block: Record<string, unknown>) => ({
+    sections: [{ _key: 'h', _type: type, ...block }],
+  })
+
+  const menuFor = (
+    spec: typeof heroSectionKnobs,
+    block: Record<string, unknown>,
+    subject: Parameters<typeof knobMenuModel>[0]['subject'],
+    componentName: string,
+  ) =>
+    knobMenuModel({
+      spec,
+      read: blockKnobReader(snapshot(spec.type, block), blockPath),
+      nested: false,
+      subject,
+      componentName,
+    })
+
+  const render = (model: ReturnType<typeof knobMenuModel>) =>
+    renderToStaticMarkup(<KnobMenu model={model} onPick={() => {}} onAction={() => {}} />)
+
+  it('reaches Decoration, which rides no bar and was reachable from nowhere', () => {
+    // The live example the split exists for: `heroSection.decoration` resolves
+    // and applies and declares no `bar`. Not a table in the app — `bar: true`
+    // on the declaration is still the whole rule (ADR 0020).
+    const bar = barKnobs({
+      spec: heroSectionKnobs,
+      read: blockKnobReader(snapshot('heroSection', { variant: 'band' }), blockPath),
+      nested: false,
+    }).map((resolved) => resolved.knob.title)
+    expect(bar).toEqual(['Surface', 'Composition'])
+
+    const html = render(
+      menuFor(
+        heroSectionKnobs,
+        { variant: 'band' },
+        { kind: 'block', title: 'Hero section' },
+        'Hero section',
+      ),
+    )
+    expect(html).toContain('Decoration')
+    expect(html).toContain('Composition')
+    expect(html).toContain('Surface')
+  })
+
+  it('offers every option of every knob the hero declares, and nothing else', () => {
+    const html = render(
+      menuFor(
+        heroSectionKnobs,
+        { variant: 'band' },
+        { kind: 'block', title: 'Hero section' },
+        'Hero section',
+      ),
+    )
+    // orbital|band + orbs|none + white|bone|ink.
+    const declared = heroSectionKnobs.knobs.reduce((n, knob) => n + knob.options.length, 0)
+    expect(rolesIn(html, 'menuitemradio')).toHaveLength(declared)
+    // One resolution per knob, so exactly one row per knob is checked.
+    expect(rolesIn(html, 'menuitemradio').length).toBeGreaterThan(0)
+    expect(html.match(/aria-checked="true"/g)).toHaveLength(heroSectionKnobs.knobs.length)
+  })
+
+  it('puts the jump last, after every knob row', () => {
+    const html = render(
+      menuFor(heroSectionKnobs, {}, { kind: 'block', title: 'Hero section' }, 'Hero section'),
+    )
+    expect(rolesIn(html, 'menuitem')).toHaveLength(1)
+    expect(html).toContain('open form')
+    expect(html.lastIndexOf('role="menuitemradio"')).toBeLessThan(html.indexOf('role="menuitem"'))
+  })
+
+  it('titles each group with the container it configures, so no group lies', () => {
+    // A block knob shown under a menu headed "Panel" would claim the panel is
+    // what it changes. The group heading is what keeps that honest.
+    const html = render(
+      menuFor(
+        railPanelsSectionKnobs,
+        { layout: 'rail' },
+        { kind: 'item', title: 'Panel' },
+        'Rail panels section',
+      ),
+    )
+    expect(html).toContain('aria-label="Band"')
+    expect(html).toContain('aria-label="Rail panels section"')
+    // Layout and Rail ride no bar either — right-clicking a panel is the only
+    // place in the product they can be reached.
+    expect(html).toContain('Layout')
+    expect(html).toContain('Rail')
+  })
+
+  it('drops a gated knob exactly where the form drops it', () => {
+    // `rail` is `notOneOf: ['cards']`. The menu asks `visibleKnobs`, which is
+    // the same declaration the Studio field's predicate is generated from.
+    const at = (layout: string) =>
+      render(
+        menuFor(
+          railPanelsSectionKnobs,
+          { layout },
+          { kind: 'block', title: 'Rail panels section' },
+          'Rail panels section',
+        ),
+      )
+    // Surface (3) + Layout (2) + Rail (2) on the rail layout; Rail's two rows
+    // are gone on cards. Counted by role rather than matched by label, because
+    // "Rail" is also one of Layout's own option titles.
+    expect(rolesIn(at('rail'), 'menuitemradio')).toHaveLength(7)
+    expect(rolesIn(at('cards'), 'menuitemradio')).toHaveLength(5)
+  })
+
+  it('marks the inherited value for a screen reader, not only for an eye', () => {
+    const html = render(
+      menuFor(heroSectionKnobs, {}, { kind: 'block', title: 'Hero section' }, 'Hero section'),
+    )
+    expect(html).toContain('(inherited)')
+    expect(html).toContain('default')
+  })
+
+  it('marks itself as chrome, so a pointerdown inside it is not outside', () => {
+    const html = render(
+      menuFor(heroSectionKnobs, {}, { kind: 'block', title: 'Hero section' }, 'Hero section'),
+    )
+    expect(html).toContain('data-canvas-chrome')
+  })
+})
+
+describe('at most one menu open, and none until asked', () => {
+  it('renders no knob menu until a right-click opens one', () => {
+    // The view is mounted through `react-dom/server`, which runs no effects —
+    // so this is the closed state by construction, which is also the state
+    // every first render is in.
+    const html = renderToStaticMarkup(
+      <CanvasToolbarView
+        componentName="Hero section"
+        menu={knobMenuModel({
+          spec: heroSectionKnobs,
+          read: () => undefined,
+          nested: false,
+          subject: { kind: 'block', title: 'Hero section' },
+          componentName: 'Hero section',
+        })}
+      />,
+    )
+    expect(html).not.toContain('data-testid="canvas-menu"')
+  })
+
+  it('marks the bar as chrome too, so a click on a trigger cannot dismiss its own menu', () => {
+    // The exemption sits on the BAR rather than on each trigger: one mark
+    // covers every opener and every dropdown it holds.
+    const html = renderToStaticMarkup(<CanvasToolbarView componentName="Hero section" />)
+    expect(html).toContain('data-canvas-chrome')
   })
 })

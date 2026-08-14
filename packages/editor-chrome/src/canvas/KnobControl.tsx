@@ -1,6 +1,8 @@
 import type { ComponentType } from 'react'
 import type { ResolvedKnob } from '@o3/block-spec'
 
+import { viewportShiftX } from './dock'
+
 /**
  * ONE KNOB ON THE HOVER BAR — a trigger that says what the value is now, and a
  * menu of the values it could be.
@@ -15,8 +17,31 @@ import type { ResolvedKnob } from '@o3/block-spec'
 /** The menu's own ground. Near-black rather than the bar's orange: the menu is
  *  a list to read, and a saturated fill behind eight rows of small text is not.
  *  It is still Studio chrome, so it is a literal colour and not a brand token —
- *  same argument as `CanvasToolbarView`. */
-const MENU_COLOR = '#1c1917'
+ *  same argument as `CanvasToolbarView`. Shared with the knob menu (#110), so
+ *  the two menus on this canvas are visibly one kind of thing. */
+export const MENU_COLOR = '#1c1917'
+
+/**
+ * Slide an opened dropdown back inside the viewport, measured.
+ *
+ * #109 shipped this as a fixed right-alignment rule and flagged it: correct
+ * while the bar is docked at the band's right corner, wrong the moment the bar
+ * CLAMPS near the left edge, where right-alignment opens the menu leftwards off
+ * the band. A panel pushed outside the iframe is not merely clipped — the
+ * pointer reaching for it leaves the frame, the overlay drops the hover, and
+ * the menu closes under the cursor.
+ *
+ * A transform rather than a repositioned `right`, so the class-driven alignment
+ * stays the layout and this stays a correction on top of it. Measured once when
+ * the panel mounts: the bar's horizontal dock is scroll-invariant, so nothing
+ * that happens afterwards moves it sideways.
+ */
+function clampIntoViewport(el: HTMLDivElement | null): void {
+  const win = el?.ownerDocument.defaultView
+  if (!el || !win) return
+  const shift = viewportShiftX(el.getBoundingClientRect(), win.innerWidth)
+  el.style.transform = shift === 0 ? '' : `translateX(${shift}px)`
+}
 
 export interface KnobControlProps {
   knob: ResolvedKnob
@@ -78,11 +103,12 @@ export function KnobControl({ knob: resolved, open, onToggle, onPick }: KnobCont
         // crosses ground that is not chrome, and a margin here is a strip the
         // pointer cannot survive on its way down into the menu.
         //
-        // Right-aligned, always. The bar is docked at the BAND's top-right
-        // corner, so a left-aligned menu on the rightmost control opens past
-        // the edge of the preview — off the iframe, where hovering it drops
-        // the overlay and the menu closes under the cursor.
+        // Right-aligned by default, because the bar is docked at the BAND's
+        // top-right corner — and then CLAMPED by measurement, because that
+        // default stops being right the moment the bar itself clamps near the
+        // left edge of the viewport.
         <div
+          ref={clampIntoViewport}
           data-testid="canvas-knob-menu"
           role="menu"
           aria-label={knob.title}

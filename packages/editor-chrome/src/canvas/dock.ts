@@ -156,6 +156,74 @@ export function computeDock({
   return { right, top: null, bottom: element.bottom - anchor.top }
 }
 
+/**
+ * THE MEASURED CLAMP, in one function — used by the knob menu (which opens at
+ * the pointer) and by every dropdown on the bar (which opens under its trigger).
+ *
+ * How far a panel has to move horizontally to sit inside the viewport. Positive
+ * moves it right, negative left, zero leaves it alone.
+ *
+ * #109 shipped the bar's dropdowns with a FIXED right-alignment rule instead —
+ * correct while the bar is docked at the band's right corner, and wrong the
+ * moment the bar clamps near the left edge, where the same rule opens the menu
+ * leftwards off the band. A measured clamp has no such precondition, and it is
+ * three lines.
+ *
+ * The left edge wins when a panel is wider than the viewport: the right-edge
+ * correction is applied first and then re-checked, so what survives is the edge
+ * where reading starts rather than the edge where it ends.
+ */
+export function viewportShiftX(
+  rect: { left: number; right: number },
+  viewportWidth: number,
+  margin: number = DOCK_VIEWPORT_MARGIN,
+): number {
+  let shift = 0
+  if (rect.right > viewportWidth - margin) shift = viewportWidth - margin - rect.right
+  if (rect.left + shift < margin) shift = margin - rect.left
+  return shift
+}
+
+export interface MenuDockInput {
+  /** Where the right-click happened, in viewport coordinates. */
+  pointer: { x: number; y: number }
+  /** The overlay wrapper's viewport rect — what the returned offsets are relative to. */
+  element: RectLike
+  /** The panel's own rendered size. */
+  menu: { width: number; height: number }
+  viewport: { width: number; height: number }
+}
+
+/**
+ * WHERE THE KNOB MENU OPENS — at the pointer, flipped into the viewport.
+ *
+ * A context menu belongs under the cursor: that is where the eye already is,
+ * and it is the one position that needs no travel to reach. What it must not do
+ * is extend past the preview's edge. Options pushed outside the iframe are not
+ * merely clipped — the pointer leaving the iframe drops the overlay's hover,
+ * which unmounts the toolbar and takes the menu with it. So the panel FLIPS to
+ * open leftwards (or upwards) rather than being clipped, and then clamps, in
+ * that order: flipping first keeps the pointer on a corner of the panel, and
+ * clamping alone would slide the panel out from under the cursor.
+ */
+export function computeMenuDock({ pointer, element, menu, viewport }: MenuDockInput): {
+  left: number
+  top: number
+} {
+  const flippedLeft =
+    pointer.x + menu.width > viewport.width - DOCK_VIEWPORT_MARGIN
+      ? pointer.x - menu.width
+      : pointer.x
+  const flippedTop =
+    pointer.y + menu.height > viewport.height - DOCK_VIEWPORT_MARGIN
+      ? pointer.y - menu.height
+      : pointer.y
+  return {
+    left: Math.max(flippedLeft, DOCK_VIEWPORT_MARGIN) - element.left,
+    top: Math.max(flippedTop, DOCK_VIEWPORT_MARGIN) - element.top,
+  }
+}
+
 export interface ChipDockInput {
   /** The ITEM's viewport rect — the chip pins inside its top-right corner. */
   anchor: RectLike

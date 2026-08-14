@@ -1,14 +1,28 @@
-import { useState, type Ref } from 'react'
+import { useEffect, useRef, useState, type Ref } from 'react'
 import type { ResolvedKnob } from '@o3/block-spec'
 
 import { KnobControl } from './KnobControl'
+import { KnobMenu } from './KnobMenu'
+import {
+  CANVAS_CHROME_ATTR,
+  dismissesMenu,
+  type KnobMenuAction,
+  type KnobMenuModel,
+} from './menuModel'
 
 /**
- * THE CANVAS TOOLBAR'S PIXELS — two surfaces, and the one piece of state that
+ * THE CANVAS TOOLBAR'S PIXELS — three surfaces, and the one piece of state that
  * belongs to pixels rather than to the document.
  *
  *   [ Hero │ COMPOSITION Orbital ▾ │ SURFACE Ink ▾ ]  ← the bar, at the band's
  *                        [ Panel ]                    ← the chip, at the item's
+ *                     ┌─────────────┐                 ← the knob menu, at the
+ *                     │ …everything │                   pointer, on right-click
+ *                     └─────────────┘
+ *
+ * The bar carries `knob.bar` and the menu carries the whole roster; that split
+ * is why both exist (#110). One state slot holds whichever is open, so a bar
+ * dropdown and the knob menu can never be on screen together.
  *
  * Split from `CanvasToolbar` so it can be rendered from a test: this app's
  * render layer mounts components through `react-dom/server`, which runs no
@@ -47,23 +61,135 @@ export interface CanvasToolbarViewProps {
   knobs?: readonly ResolvedKnob[]
   /** Commit a pick. The view knows nothing about drafts or patches. */
   onPickKnob?: (knob: ResolvedKnob, value: string) => void
+  /**
+   * The right-click menu's roster (#110) — the subject's COMPLETE set, against
+   * the bar's curated subset above. Absent means no menu opens at all, which is
+   * what a test rendering only the bar gets.
+   */
+  menu?: KnobMenuModel
+  /** A menu action. Today there is one, and it jumps to the Studio form. */
+  onMenuAction?: (action: KnobMenuAction) => void
   barRef?: Ref<HTMLDivElement>
   chipRef?: Ref<HTMLDivElement>
+  /**
+   * Positions the menu panel at the pointer. Curried rather than a plain `Ref`
+   * because the position is not a property of the element — it is where the
+   * right-click happened, and only this component knows that.
+   */
+  menuDock?: (el: HTMLDivElement | null, pointer: { x: number; y: number }) => void
 }
+
+/**
+ * WHICH SURFACE IS OPEN — one slot, so at most one menu exists at a time
+ * across the bar's dropdowns and the knob menu. Two open menus on a bar this
+ * narrow overlap each other, and a knob menu opened behind a dropdown is a menu
+ * an editor has to dismiss twice.
+ */
+type OpenSurface =
+  /** A bar dropdown, keyed by knob path — what is unique within a block. */
+  | { kind: 'knob'; name: string }
+  /** The knob menu, at the viewport point the right-click happened. */
+  | { kind: 'menu'; x: number; y: number }
+  | null
 
 export function CanvasToolbarView({
   componentName,
   subjectName,
   knobs = [],
   onPickKnob,
+  menu,
+  onMenuAction,
   barRef,
   chipRef,
+  menuDock,
 }: CanvasToolbarViewProps) {
-  // WHICH MENU IS OPEN is the one thing the bar decides for itself: it is about
-  // this bar's pixels and nothing else reads it, and it must be exclusive —
-  // two menus open at once overlap each other on a bar this narrow. Keyed by
-  // knob path because that is what is unique within a block.
-  const [openKnob, setOpenKnob] = useState<string | null>(null)
+  // The one thing the chrome decides for itself: it is about these pixels and
+  // nothing else reads it.
+  const [open, setOpen] = useState<OpenSurface>(null)
+
+  // A mirror the window listeners can read. They are registered once, so their
+  // closure never sees a later `open` — and two of them have to know whether
+  // anything is open BEFORE React re-renders (Escape decides from it whether to
+  // let the event through). Every write goes through `setOpenSurface`, so the
+  // ref cannot drift from the state.
+  const openRef = useRef<OpenSurface>(null)
+  const setOpenSurface = (next: OpenSurface | ((current: OpenSurface) => OpenSurface)) => {
+    const value = typeof next === 'function' ? next(openRef.current) : next
+    openRef.current = value
+    setOpen(value)
+  }
+
+  /**
+   * PREEMPT THE STOCK CONTEXT MENU — capture phase, on the window.
+   *
+   * Presentation registers its own `contextmenu` handler capture-phase ON THE
+   * ELEMENT, and it fires only where the hovered element's own path ends in a
+   * keyed segment. Deferring to it therefore produces two menus on a panel and
+   * one in band padding, which is not a rule anyone can hold. A capture-phase
+   * listener on the WINDOW runs before any element listener, so preempting is
+   * the only way to get one menu everywhere.
+   *
+   * `stopPropagation` is the load-bearing half, and not for the stock menu.
+   * The controller also registers `handleBlur` on the window in the BUBBLE
+   * phase, and a right-click that reaches it wipes the hover stack — which is
+   * what forced the prior art's synthetic-mouseenter dance before it could jump
+   * to the form. Stopping propagation at window-capture skips the window's own
+   * bubble listeners, the hover survives, and the jump becomes an ordinary
+   * click.
+   *
+   * ON THE WINDOW, BUT NOT ALWAYS-ON. A custom overlay component mounts only
+   * for the HOVERED element (`ElementOverlay.tsx:594` — a non-hovered element
+   * renders a bare positioned div with no children), and `element/mouseenter`
+   * clears `hovered` on every other element. So this listener exists exactly
+   * once, exactly while the pointer is on something attributed — which is
+   * exactly when a right-click can want it. Where nothing is hovered there is
+   * no listener and the browser's own menu appears, which is the right answer
+   * for the site header. Anything that must survive the hover belongs beside
+   * `<VisualEditing />` instead, not here.
+   *
+   * BAIL ON `defaultPrevented` anyway. Only one instance can be mounted, so
+   * this is insurance rather than the mechanism — but `stopPropagation` does
+   * not suppress a sibling listener in the same phase, and `defaultPrevented`
+   * is the only thing one instance could see of another if that ever changed.
+   */
+  useEffect(() => {
+    const onContextMenu = (event: MouseEvent) => {
+      if (event.defaultPrevented) return
+      event.preventDefault()
+      event.stopPropagation()
+      setOpenSurface({ kind: 'menu', x: event.clientX, y: event.clientY })
+    }
+    /**
+     * Escape dismisses — and, WHEN SOMETHING WAS OPEN, stops there. The
+     * controller's own Escape handler empties the hover stack and blurs the
+     * overlay, so letting it through would close the menu and drop the chrome
+     * with it: one keystroke doing two things, only one of which was asked for.
+     * With nothing open, Escape is the controller's again and deselects as it
+     * always did.
+     */
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape' || !openRef.current) return
+      event.stopPropagation()
+      setOpenSurface(null)
+    }
+    // Pointerdown rather than click, because the menu has to be gone before
+    // whatever was pressed reacts; and capture, so a handler that stops
+    // propagation cannot strand it open.
+    const onPointerDown = (event: PointerEvent) => {
+      if (!openRef.current) return
+      if (dismissesMenu(event.target as Element | null)) setOpenSurface(null)
+    }
+    window.addEventListener('contextmenu', onContextMenu, { capture: true })
+    window.addEventListener('keydown', onKeyDown, { capture: true })
+    window.addEventListener('pointerdown', onPointerDown, { capture: true })
+    return () => {
+      window.removeEventListener('contextmenu', onContextMenu, { capture: true })
+      window.removeEventListener('keydown', onKeyDown, { capture: true })
+      window.removeEventListener('pointerdown', onPointerDown, { capture: true })
+    }
+    // Registered once for the toolbar's life: `setOpenSurface` writes through a
+    // ref, so nothing here goes stale and nothing re-subscribes per render.
+  }, [])
 
   return (
     <>
@@ -75,6 +201,10 @@ export function CanvasToolbarView({
         // cross, and the bar vanishes on the way to it.
         <div
           ref={barRef}
+          // Marks the whole bar — triggers and their open dropdowns alike — as
+          // ground an outside-pointerdown does not count as outside. One
+          // attribute on the container exempts every opener it holds.
+          {...{ [CANVAS_CHROME_ATTR]: '' }}
           data-testid="canvas-toolbar"
           className="pointer-events-auto absolute pb-1"
         >
@@ -97,14 +227,16 @@ export function CanvasToolbarView({
               >
                 <KnobControl
                   knob={resolved}
-                  open={openKnob === resolved.knob.name}
+                  open={open?.kind === 'knob' && open.name === resolved.knob.name}
                   onToggle={() =>
-                    setOpenKnob((current) =>
-                      current === resolved.knob.name ? null : resolved.knob.name,
+                    setOpenSurface((current) =>
+                      current?.kind === 'knob' && current.name === resolved.knob.name
+                        ? null
+                        : { kind: 'knob', name: resolved.knob.name },
                     )
                   }
                   onPick={(value) => {
-                    setOpenKnob(null)
+                    setOpenSurface(null)
                     onPickKnob?.(resolved, value)
                   }}
                 />
@@ -126,6 +258,23 @@ export function CanvasToolbarView({
         >
           {subjectName}
         </div>
+      ) : null}
+      {menu && open?.kind === 'menu' ? (
+        <KnobMenu
+          model={menu}
+          onPick={(resolved, value) => {
+            setOpenSurface(null)
+            onPickKnob?.(resolved, value)
+          }}
+          onAction={(action) => {
+            // Closed BEFORE the action runs. The jump is a real click on the
+            // hovered element, and a menu still painted over that element is a
+            // menu the click has to travel through.
+            setOpenSurface(null)
+            onMenuAction?.(action)
+          }}
+          panelRef={(el) => menuDock?.(el, { x: open.x, y: open.y })}
+        />
       ) : null}
     </>
   )
