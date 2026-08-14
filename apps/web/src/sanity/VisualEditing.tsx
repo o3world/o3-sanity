@@ -4,7 +4,7 @@ import { useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { VisualEditing as NextSanityVisualEditing } from 'next-sanity/visual-editing'
 import type { HistoryRefresh } from '@sanity/visual-editing'
-import { createCanvasComponents } from '@o3/editor-chrome/canvas'
+import { CanvasNotices, createCanvasComponents } from '@o3/editor-chrome/canvas'
 import { BLOCK_KNOBS } from '@o3/sanity/knobs'
 
 /**
@@ -30,6 +30,13 @@ import { BLOCK_KNOBS } from '@o3/sanity/knobs'
  * `BLOCK_KNOBS` is the one thing the site has to supply: the overlay package
  * knows the knob vocabulary and none of our blocks' declarations (ADR 0020),
  * so the registry is handed in here rather than imported over there.
+ *
+ * `<CanvasNotices />` is a SIBLING and cannot be anything else (#124). An
+ * overlay component renders only while its element is hovered, so a refused
+ * mutation reported from inside the toolbar is gone the instant the editor
+ * looks away from the thing that refused it. Mounted here the notice belongs to
+ * the page; the toolbar feeds it through a queue in the same package. It
+ * renders nothing until something fails.
  */
 const canvasComponents = createCanvasComponents({ blockKnobs: BLOCK_KNOBS })
 
@@ -49,5 +56,10 @@ export function VisualEditing() {
     [router],
   )
 
-  return <NextSanityVisualEditing refresh={refresh} components={canvasComponents} />
+  return (
+    <>
+      <NextSanityVisualEditing refresh={refresh} components={canvasComponents} />
+      <CanvasNotices />
+    </>
+  )
 }

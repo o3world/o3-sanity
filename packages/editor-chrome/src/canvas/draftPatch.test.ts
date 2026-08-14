@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import type { NodePatchList } from '@sanity/mutate'
 
 import {
@@ -8,6 +8,7 @@ import {
   tryGetDocument,
   type PatchTarget,
 } from './draftPatch'
+import { canvasNotices } from './notices'
 
 const patches = [] as unknown as NodePatchList
 
@@ -120,10 +121,14 @@ describe('initialDraftSnapshot', () => {
 })
 
 describe('reportCanvasFailure', () => {
-  // The v1 answer to "where does a rejected mutation go" (#111): the console,
-  // through ONE function, so #124 has a single place to attach a surface an
-  // editor can actually see. What it buys today is that the message names the
-  // action and the path instead of saying a patch failed.
+  // Both audiences, from one call (#124). Every canvas failure passes through
+  // here, so this is the one place either half could be lost.
+  beforeEach(() => {
+    canvasNotices.clear()
+  })
+
+  // The console keeps the error OBJECT, stack and all — what whoever the
+  // editor reports it to needs, and the half a queue entry cannot carry.
   it('names what failed, tagged so a console filter can find it', () => {
     const logged = vi.spyOn(console, 'error').mockImplementation(() => {})
     const error = new Error('Event "mutate" was sent to stopped actor')
@@ -131,6 +136,61 @@ describe('reportCanvasFailure', () => {
     reportCanvasFailure('could not remove sections[_key=="a"]', error)
 
     expect(logged).toHaveBeenCalledWith('[canvas] could not remove sections[_key=="a"]', error)
+    logged.mockRestore()
+  })
+
+  // The seam #111 left, now attached to something. `<CanvasNotices />` reads
+  // this queue from beside `<VisualEditing />`, which is what lets the notice
+  // outlive the hover that produced it.
+  it('raises a notice an editor can read, not only a console line', () => {
+    const logged = vi.spyOn(console, 'error').mockImplementation(() => {})
+
+    reportCanvasFailure(
+      'could not set variant on sections[_key=="a"]',
+      new Error('Document "page-index" not found'),
+    )
+
+    expect(canvasNotices.notices()).toEqual([
+      {
+        id: expect.any(String),
+        what: 'could not set variant on sections[_key=="a"]',
+        detail: 'Document "page-index" not found',
+        count: 1,
+      },
+    ])
+    logged.mockRestore()
+  })
+
+  it('collapses a run of the same failure into one notice', () => {
+    const logged = vi.spyOn(console, 'error').mockImplementation(() => {})
+    const error = new Error('Event "mutate" was sent to stopped actor')
+
+    reportCanvasFailure('could not remove sections[_key=="a"]', error)
+    reportCanvasFailure('could not remove sections[_key=="a"]', error)
+
+    expect(canvasNotices.notices()).toHaveLength(1)
+    expect(canvasNotices.notices()[0]).toMatchObject({ count: 2 })
+    // The console still counts them: a support drawer showing one line for two
+    // rejections is a support drawer that lost a fact.
+    expect(logged).toHaveBeenCalledTimes(2)
+    logged.mockRestore()
+  })
+})
+
+describe('what does NOT reach the editor', () => {
+  // The boundary (#124). An unresolved snapshot is a state the toolbar recovers
+  // from a frame later on its own — a notice for it would fire on an ordinary
+  // first hover and teach an editor to ignore the corner.
+  it('a document the mutator cannot serve yet stays in the console', () => {
+    const logged = vi.spyOn(console, 'error').mockImplementation(() => {})
+    canvasNotices.clear()
+
+    tryGetDocument(() => {
+      throw new Error("The 'useDocuments' hook cannot be used in this context")
+    }, 'page-index')
+
+    expect(logged).toHaveBeenCalled()
+    expect(canvasNotices.notices()).toEqual([])
     logged.mockRestore()
   })
 })
