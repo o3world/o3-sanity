@@ -74,6 +74,10 @@ This is the same concept the Figma rule names one step upstream, and the chain i
 
 The Figma rule keeps Figma's word (`axis`) because that is what the design file calls it. Everything on this side of the seam is a knob.
 
+A knob is delivered on two surfaces, and the split is deliberate. The **knob menu** (right-click) carries a subject's _complete_ roster. The **canvas toolbar** carries a curated subset — a knob rides it only when it declares `bar: true`.
+
+What earns a bar slot: **`surface`, and the one axis that changes what the block is.** A block's composition — `heroSection.variant`, `railPanelsSection.layout`, `mediaSection.variant` — is the thing an editor is looking at, so it is the axis every bar shows. Everything else (`decoration`, `rail`, `width`) is menu-only: reachable, but not competing for the strip of chrome sitting over the design. There is no special-casing in code — `bar` is a plain declaration, and this rule is applied by whoever writes it.
+
 Every knob belongs to a **knob surface** — the chrome that delivers it, decided by the container it configures, not by where it is declared:
 
 | Surface | Configures                              | Example                           |
