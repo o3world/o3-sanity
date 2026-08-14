@@ -1,16 +1,24 @@
 import { defineArrayMember, defineField } from 'sanity'
 import { defineArrayItem } from './defineArrayItem'
 import { defineSectionBlock } from './defineBlocks'
-import { decorationField } from './fields'
 import { hiddenUnless } from './knobFields'
 import { SECTION_BLOCKS } from './registry'
 import { PAGE_TYPES } from '../../constants'
+import { caseShowcaseSectionKnobs } from '../../knobs/caseShowcaseSection'
+import { ctaSectionKnobs } from '../../knobs/ctaSection'
 import { disciplineGridSectionKnobs } from '../../knobs/disciplineGridSection'
+import { formSectionKnobs } from '../../knobs/formSection'
 import { heroSectionKnobs } from '../../knobs/heroSection'
 import { inFlightSectionKnobs } from '../../knobs/inFlightSection'
+import { insightsCarouselSectionKnobs } from '../../knobs/insightsCarouselSection'
 import { layoutSectionKnobs } from '../../knobs/layoutSection'
+import { listingSectionKnobs } from '../../knobs/listingSection'
+import { logoWallSectionKnobs } from '../../knobs/logoWallSection'
 import { mediaSectionKnobs } from '../../knobs/mediaSection'
+import { personGridSectionKnobs } from '../../knobs/personGridSection'
+import { quoteSectionKnobs } from '../../knobs/quoteSection'
 import { railPanelsSectionKnobs } from '../../knobs/railPanelsSection'
+import { roleListSectionKnobs } from '../../knobs/roleListSection'
 import { screenGridSectionKnobs, screenKnobs } from '../../knobs/screenGridSection'
 
 /**
@@ -51,10 +59,11 @@ export const heroSection = defineSectionBlock({
   preview: { select: { title: 'headlineLines.0' } },
 })
 
+/** `surface` is declared in `src/knobs/logoWallSection.ts` (ADR 0020). */
 export const logoWallSection = defineSectionBlock({
   name: 'logoWallSection',
   title: 'Logo wall',
-  defaultSurface: 'bone',
+  knobs: logoWallSectionKnobs,
   fields: [
     defineField({ name: 'eyebrow', type: 'string' }),
     // The single `statement` this band shipped with split in two on the
@@ -86,10 +95,11 @@ export const logoWallSection = defineSectionBlock({
   preview: { select: { title: 'heading' } },
 })
 
+/** `surface` is declared in `src/knobs/caseShowcaseSection.ts` (ADR 0020). */
 export const caseShowcaseSection = defineSectionBlock({
   name: 'caseShowcaseSection',
   title: 'Case study showcase',
-  defaultSurface: 'ink',
+  knobs: caseShowcaseSectionKnobs,
   fields: [
     defineField({ name: 'heading', type: 'string', initialValue: 'Our Work' }),
     defineField({ name: 'cta', type: 'cta' }),
@@ -175,10 +185,16 @@ export const railPanelsSection = defineSectionBlock({
   preview: { select: { title: 'heading' } },
 })
 
+/**
+ * `decoration` and `surface` are declared in `src/knobs/quoteSection.ts`
+ * (ADR 0020), including the `molecule` value and the frame it came from. This
+ * block and `ctaSection` were the last two callers of `decorationField()`, so
+ * the factory retired with them (#120).
+ */
 export const quoteSection = defineSectionBlock({
   name: 'quoteSection',
   title: 'Quote',
-  defaultSurface: 'bone',
+  knobs: quoteSectionKnobs,
   fields: [
     defineField({ name: 'quote', type: 'text', rows: 4, validation: (rule) => rule.required() }),
     defineField({
@@ -186,19 +202,21 @@ export const quoteSection = defineSectionBlock({
       type: 'string',
       description: 'e.g. "Business Leader, Global Health Brand".',
     }),
-    // `molecule` is the 2026-08 case-study quote (`2250:1525`): the same band,
-    // with the molecule mark set at 699px and 10% behind the copy instead of
-    // the two spheres. A third value on this block's list rather than a second
-    // block — the composition is identical.
-    decorationField(['orbs', 'molecule', 'none']),
+    'decoration',
   ],
   preview: { select: { title: 'quote' } },
 })
 
+/**
+ * `surface` is declared in `src/knobs/insightsCarouselSection.ts` (ADR 0020).
+ * `category`'s gate stays a closure: it reads whether `insights` holds
+ * anything, which no `showWhen` mode says, and an editorial field is allowed
+ * one where a knob is not.
+ */
 export const insightsCarouselSection = defineSectionBlock({
   name: 'insightsCarouselSection',
   title: 'Insights carousel',
-  defaultSurface: 'bone',
+  knobs: insightsCarouselSectionKnobs,
   fields: [
     defineField({ name: 'heading', type: 'string', initialValue: 'The thinking behind the work.' }),
     defineField({
@@ -218,15 +236,19 @@ export const insightsCarouselSection = defineSectionBlock({
   preview: { select: { title: 'heading' } },
 })
 
+/**
+ * `decoration` and `surface` are declared in `src/knobs/ctaSection.ts`
+ * (ADR 0020).
+ */
 export const ctaSection = defineSectionBlock({
   name: 'ctaSection',
   title: 'CTA',
-  defaultSurface: 'ink',
+  knobs: ctaSectionKnobs,
   fields: [
     defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
     defineField({ name: 'body', type: 'text', rows: 2 }),
     defineField({ name: 'cta', type: 'cta' }),
-    decorationField(['orbs', 'none']),
+    'decoration',
   ],
   preview: { select: { title: 'heading' } },
 })
@@ -278,9 +300,11 @@ export const disciplineGridSection = defineSectionBlock({
   preview: { select: { title: 'heading', subtitle: 'layout' } },
 })
 
+/** `surface` is declared in `src/knobs/personGridSection.ts` (ADR 0020). */
 export const personGridSection = defineSectionBlock({
   name: 'personGridSection',
   title: 'Person grid',
+  knobs: personGridSectionKnobs,
   fields: [
     defineField({ name: 'eyebrow', type: 'string' }),
     defineField({ name: 'heading', type: 'string' }),
@@ -296,9 +320,11 @@ export const personGridSection = defineSectionBlock({
   preview: { select: { title: 'heading', subtitle: 'eyebrow' } },
 })
 
+/** `surface` is declared in `src/knobs/roleListSection.ts` (ADR 0020). */
 export const roleListSection = defineSectionBlock({
   name: 'roleListSection',
   title: 'Role list',
+  knobs: roleListSectionKnobs,
   fields: [
     defineField({ name: 'eyebrow', type: 'string' }),
     defineField({ name: 'heading', type: 'string' }),
@@ -435,7 +461,10 @@ export const inFlightSection = defineSectionBlock({
  * `reasons` is the exception, and shows where the line falls: the dropdown's
  * options are studio taxonomy that changes when the business changes
  * ("Ventures request", "Labs request"), and every value is just a string to
- * any handler. So they are content; the input that carries them is not.
+ * any handler. So they are content; the input that carries them is not — and
+ * for the same reason they are **not a knob** (#120): an editor editing them is
+ * authoring the form, not making a design decision on the canvas. `surface` is
+ * the block's whole roster, declared in `src/knobs/formSection.ts`.
  *
  * ⚠️ **There is no submission handler and no destination.** #58's other two
  * halves are open, so the renderer disables its submit and says so on the
@@ -444,7 +473,7 @@ export const inFlightSection = defineSectionBlock({
 export const formSection = defineSectionBlock({
   name: 'formSection',
   title: 'Form',
-  defaultSurface: 'bone',
+  knobs: formSectionKnobs,
   fields: [
     defineField({ name: 'eyebrow', type: 'string' }),
     defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
@@ -605,9 +634,20 @@ export const screenGridSection = defineSectionBlock({
   },
 })
 
+/**
+ * `surface` is declared in `src/knobs/listingSection.ts` (ADR 0020).
+ *
+ * **`pageType` is a closed enum and deliberately not a knob** — it names a
+ * content category, not a design option, so an editor changing it is choosing
+ * what the band is about rather than how it looks (#120). It is the one
+ * editorial closed set on a converted block, which means `knobGuard.test.ts`
+ * has to be told about it by name; the reasoning is written down there and in
+ * the knobs file rather than remembered.
+ */
 export const listingSection = defineSectionBlock({
   name: 'listingSection',
   title: 'Listing',
+  knobs: listingSectionKnobs,
   fields: [
     defineField({ name: 'heading', type: 'string' }),
     defineField({

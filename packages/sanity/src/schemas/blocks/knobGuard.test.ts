@@ -62,6 +62,9 @@ import * as sectionBlocks from './section'
  *   honestly holds — `columns: 1`, a number, because `valueType` says so. The
  *   string the write leg currently stores is a live defect, and modelling it
  *   here would quietly certify it.
+ * - **one named editorial closed set** (`EDITORIAL_CLOSED_SETS`, #120). Not a
+ *   special case for a block and not a mirror: direction (2) is a suspicion,
+ *   and this is the one place a human has answered it. See its own note.
  */
 
 /** A schema field as this test reads it. `hidden` is `unknown` until called. */
@@ -193,6 +196,33 @@ function formShows(field: ReadableField, state: State): boolean {
  */
 const offersAClosedSet = (field: ReadableField) => Array.isArray(field.options?.list)
 
+/**
+ * THE ANSWER TO THE QUESTION ABOVE, FOR THE ONE FIELD THAT HAS BEEN ASKED IT.
+ *
+ * The rule above promised that the day a converted block wants a genuinely
+ * editorial closed set, someone makes that judgement in the open, in the diff,
+ * and writes it down. #120 converted the last block and that day arrived with
+ * it, so this is the writing down — not an exemption mechanism, and not the
+ * denylist the prior art walked around.
+ *
+ * The difference is which way it fails. The prior art's list suppressed fields
+ * from becoming controls, so a field it missed was silently PROMOTED and put a
+ * machine value in front of an editor. This one suppresses nothing: a closed
+ * set that is not named here still fails the guard and still asks a human. It
+ * can only ever be too small, and too small is loud.
+ *
+ * **`listingSection.pageType`** names a content category — which pages the band
+ * lists, via their card fieldset — from `PAGE_TYPES`, a list developers close
+ * and editors do not extend. An editor changing it is choosing what the band is
+ * about, not how it looks, which is the test ADR 0020 hands to the author.
+ * CONTEXT.md and the ADR have both said so since the vocabulary existed; this
+ * is where the guard is told.
+ *
+ * Keyed by the root the field sits on, so a member's field is spelled
+ * `blockType.array[].field` and cannot be excused by a block-level entry.
+ */
+const EDITORIAL_CLOSED_SETS: ReadonlySet<string> = new Set(['listingSection.pageType'])
+
 /** The state, spelled so a failure names the document it is talking about. */
 const spell = (state: State) =>
   JSON.stringify(state, (_key, value: unknown) => (value === undefined ? '⟨unset⟩' : value))
@@ -245,6 +275,7 @@ function disagreementsAt({
     // symmetric gate failure: the form showing "rail" where the toolbar drops it.
     for (const field of fields) {
       if (!offersAClosedSet(field)) continue
+      if (EDITORIAL_CLOSED_SETS.has(`${where}.${field.name}`)) continue
       if (!formShows(field, state)) continue
       if (offered.has(field.name)) continue
       disagreements.push(

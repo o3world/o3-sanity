@@ -14,43 +14,71 @@
  */
 
 import type { BlockKnobs } from '@o3/block-spec'
+import { caseShowcaseSectionKnobs } from './caseShowcaseSection'
+import { ctaSectionKnobs } from './ctaSection'
 import { disciplineGridSectionKnobs } from './disciplineGridSection'
+import { formSectionKnobs } from './formSection'
 import { heroSectionKnobs } from './heroSection'
 import { inFlightSectionKnobs } from './inFlightSection'
+import { insightsCarouselSectionKnobs } from './insightsCarouselSection'
 import { layoutSectionKnobs } from './layoutSection'
+import { listingSectionKnobs } from './listingSection'
+import { logoWallSectionKnobs } from './logoWallSection'
 import { mediaSectionKnobs } from './mediaSection'
+import { personGridSectionKnobs } from './personGridSection'
+import { quoteSectionKnobs } from './quoteSection'
 import { railPanelsSectionKnobs } from './railPanelsSection'
+import { roleListSectionKnobs } from './roleListSection'
 import { screenGridSectionKnobs } from './screenGridSection'
 
+export { caseShowcaseSectionKnobs } from './caseShowcaseSection'
+export { ctaSectionKnobs } from './ctaSection'
+export { decorationKnob } from './decoration'
 export { disciplineGridSectionKnobs } from './disciplineGridSection'
+export { formSectionKnobs } from './formSection'
 export { heroSectionKnobs } from './heroSection'
 export { inFlightSectionKnobs } from './inFlightSection'
+export { insightsCarouselSectionKnobs } from './insightsCarouselSection'
 export { layoutSectionKnobs } from './layoutSection'
+export { listingSectionKnobs } from './listingSection'
+export { logoWallSectionKnobs } from './logoWallSection'
 export { mediaSectionKnobs } from './mediaSection'
+export { personGridSectionKnobs } from './personGridSection'
+export { quoteSectionKnobs } from './quoteSection'
 export { railPanelsSectionKnobs } from './railPanelsSection'
+export { roleListSectionKnobs } from './roleListSection'
 export { screenGridSectionKnobs, screenKnobs } from './screenGridSection'
 export { surfaceKnob } from './surface'
 
 /**
- * Every converted block, keyed by its Sanity `_type` — what a consumer reads
- * when it has a document and needs the knobs behind it (#106's canvas
- * toolbar).
+ * Every block, keyed by its Sanity `_type` — what a consumer reads when it has
+ * a document and needs the knobs behind it (#106's canvas toolbar).
  *
- * **Partial until #113.** A block absent from this map declares its design
- * options as plain schema fields, and every editorial surface outside the
- * Studio form is silent about them. That is the migration state ADR 0020
- * accepts, so a caller must treat a miss as "no knobs yet", never as "no
- * knobs".
+ * **Complete since #113.** Every one of the sixteen section blocks declares its
+ * design options here, so a miss is now a block that does not exist rather than
+ * a block nobody has converted yet, and `defineSectionBlock` requires the
+ * declaration — there is no longer a way for a block to reach the form with
+ * design options no editorial surface can see. The order matches
+ * `SECTION_BLOCKS`, so the two lists read against each other.
  *
  * Keyed off each spec's own `type` rather than a literal, so a block cannot be
  * filed under a name its declaration does not answer to.
  */
 export const BLOCK_KNOBS: Readonly<Record<string, BlockKnobs>> = {
   [heroSectionKnobs.type]: heroSectionKnobs,
+  [logoWallSectionKnobs.type]: logoWallSectionKnobs,
+  [caseShowcaseSectionKnobs.type]: caseShowcaseSectionKnobs,
   [railPanelsSectionKnobs.type]: railPanelsSectionKnobs,
+  [quoteSectionKnobs.type]: quoteSectionKnobs,
+  [insightsCarouselSectionKnobs.type]: insightsCarouselSectionKnobs,
+  [ctaSectionKnobs.type]: ctaSectionKnobs,
   [disciplineGridSectionKnobs.type]: disciplineGridSectionKnobs,
+  [personGridSectionKnobs.type]: personGridSectionKnobs,
+  [roleListSectionKnobs.type]: roleListSectionKnobs,
   [inFlightSectionKnobs.type]: inFlightSectionKnobs,
-  [mediaSectionKnobs.type]: mediaSectionKnobs,
+  [formSectionKnobs.type]: formSectionKnobs,
   [layoutSectionKnobs.type]: layoutSectionKnobs,
+  [mediaSectionKnobs.type]: mediaSectionKnobs,
   [screenGridSectionKnobs.type]: screenGridSectionKnobs,
+  [listingSectionKnobs.type]: listingSectionKnobs,
 }
