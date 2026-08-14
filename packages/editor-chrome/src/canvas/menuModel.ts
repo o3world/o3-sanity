@@ -1,6 +1,8 @@
 import { visibleKnobs } from '@o3/block-spec'
 import type { BlockKnobs, KnobReader, KnobSurface, ResolvedKnob } from '@o3/block-spec'
 
+import { itemActionGroups, type ItemActionGroup } from './itemActions'
+
 /**
  * WHAT THE RIGHT-CLICK MENU OFFERS — the composition rules, as a pure function.
  *
@@ -35,7 +37,10 @@ export interface KnobMenuGroup {
   knobs: readonly ResolvedKnob[]
 }
 
-/** A row that is not a knob. Today there is exactly one, and it is always last. */
+/**
+ * The menu's floor — the row that is neither a knob nor an edit to the
+ * document. Today there is exactly one and it is always last.
+ */
 export interface KnobMenuAction {
   id: 'open-form'
   title: string
@@ -45,6 +50,12 @@ export interface KnobMenuModel {
   /** The subject the menu is about — the item under the cursor, or the block. */
   title?: string
   groups: readonly KnobMenuGroup[]
+  /**
+   * Duplicate / Remove / Move on the subject (#111) — what the stock context
+   * menu carried before #110 preempted it. Absent groups, never empty ones, and
+   * empty altogether while the draft snapshot has not resolved the item.
+   */
+  itemActions: readonly ItemActionGroup[]
   /** Always last, and always non-empty: the jump is the menu's floor. */
   actions: readonly KnobMenuAction[]
 }
@@ -103,6 +114,8 @@ export function knobMenuModel({
   nested,
   subject,
   componentName,
+  snapshot,
+  subjectPath,
 }: {
   spec: BlockKnobs | undefined
   read: KnobReader
@@ -110,6 +123,20 @@ export function knobMenuModel({
   subject: KnobMenuSubject
   /** The block's name — the title of the `block` group, and the header's fallback. */
   componentName?: string | undefined
+  /**
+   * The draft snapshot, for the item actions (#111) — the same one `read`
+   * already closes over, taken whole because an array action needs the
+   * subject's SIBLINGS and a knob reader only ever answers about one field.
+   */
+  snapshot?: unknown
+  /**
+   * The subject's own GROQ path: `itemPath ?? blockPath`, which is what
+   * `canvasSubject` already computes and what `subject.kind` above is derived
+   * from. Passed rather than re-derived so there is one rule for what the
+   * subject is and not two. Absent means no item actions — which is also the
+   * honest answer for a caller that has no document to patch.
+   */
+  subjectPath?: string | undefined
 }): KnobMenuModel {
   // `.all` and not `bySurface`: the menu's roster IS the complete roster, and
   // reading the flat list keeps that visible. The grouping below is a
@@ -136,6 +163,9 @@ export function knobMenuModel({
   return {
     title: subject.title ?? componentName,
     groups,
+    itemActions: subjectPath
+      ? itemActionGroups({ snapshot, itemPath: subjectPath, subjectTitle: subject.title })
+      : [],
     actions: [OPEN_FORM_ACTION],
   }
 }

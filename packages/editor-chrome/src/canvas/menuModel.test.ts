@@ -207,6 +207,81 @@ describe('what the menu says it is about', () => {
   })
 })
 
+describe('the item actions the menu carries (#111)', () => {
+  const snapshot = {
+    sections: [
+      { _key: 'abc', _type: 'heroSection' },
+      {
+        _key: 'rail',
+        _type: 'railPanelsSection',
+        panels: [
+          { _key: 'p1', _type: 'panel' },
+          { _key: 'p2', _type: 'panel' },
+        ],
+      },
+    ],
+  }
+
+  const model = (subjectPath: string, subject: { kind: 'block' | 'item'; title?: string }) =>
+    knobMenuModel({
+      spec: hero,
+      read: blockKnobReader(snapshot, BLOCK),
+      nested: false,
+      subject,
+      componentName: 'Hero section',
+      snapshot,
+      subjectPath,
+    })
+
+  it('acts on the subject the menu is already about, and not a second one', () => {
+    // `subjectPath` is `itemPath ?? blockPath` — the same innermost keyed item
+    // `canvasSubject` computed and the same one `subject.kind` came from. Here
+    // that is the panel, so Remove patches `panels` and not `sections`.
+    const panel = model('sections[_key=="rail"].panels[_key=="p1"]', {
+      kind: 'item',
+      title: 'Panel',
+    })
+    const remove = panel.itemActions[0]!.actions.find((action) => action.id === 'remove')!
+    expect(remove.patches[0]!.path).toEqual(['sections', { _key: 'rail' }, 'panels'])
+  })
+
+  it('offers the same actions on a block as on an item inside one', () => {
+    const block = model('sections[_key=="abc"]', { kind: 'block', title: 'Hero section' })
+    expect(block.itemActions.map((group) => group.id)).toEqual(['item', 'move'])
+    expect(block.itemActions[0]!.actions.map((action) => action.id)).toEqual([
+      'duplicate',
+      'remove',
+    ])
+  })
+
+  it('carries none at all while the snapshot has not resolved the subject', () => {
+    // The frame between the first hover and the draft settling. The knob groups
+    // and the jump still render; the rows that would patch nothing do not.
+    const settling = knobMenuModel({
+      spec: hero,
+      read: () => undefined,
+      nested: false,
+      subject: { kind: 'block', title: 'Hero section' },
+      componentName: 'Hero section',
+      snapshot: undefined,
+      subjectPath: BLOCK,
+    })
+    expect(settling.itemActions).toEqual([])
+    expect(settling.actions).toEqual([OPEN_FORM_ACTION])
+  })
+
+  it('carries none for a caller that passes no subject path', () => {
+    // The bar-only render path, and every test that predates #111.
+    expect(menuFor({}).itemActions).toEqual([])
+  })
+
+  it('keeps the jump last, after the actions as well as after the knobs', () => {
+    const block = model('sections[_key=="abc"]', { kind: 'block', title: 'Hero section' })
+    expect(block.actions).toEqual([OPEN_FORM_ACTION])
+    expect(block.itemActions.length).toBeGreaterThan(0)
+  })
+})
+
 describe('what dismisses an open menu', () => {
   interface FakeNode {
     hasAttribute(name: string): boolean

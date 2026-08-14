@@ -2,6 +2,7 @@ import { Fragment, type ComponentType, type Ref } from 'react'
 import type { ResolvedKnob } from '@o3/block-spec'
 
 import { MENU_COLOR } from './KnobControl'
+import type { ItemAction } from './itemActions'
 import { CANVAS_CHROME_ATTR, type KnobMenuAction, type KnobMenuModel } from './menuModel'
 
 /**
@@ -20,8 +21,23 @@ import { CANVAS_CHROME_ATTR, type KnobMenuAction, type KnobMenuModel } from './m
  *     │       Band               │
  *     │   Decoration             │  ← reachable from nowhere before this
  *     ├──────────────────────────┤
+ *     │ Duplicate                │  what the stock menu carried, back (#111)
+ *     │ Remove                   │
+ *     │ MOVE                     │
+ *     │   To top                 │  a row exists only when it moves something
+ *     │   Down                   │
+ *     ├──────────────────────────┤
  *     │ All options — open form  │  always last
  *     └──────────────────────────┘
+ *
+ * DUPLICATE AND REMOVE CARRY NO GROUP HEADING. Every knob group is titled with
+ * the container it configures, so a block knob under a menu headed "Panel"
+ * cannot read as something that changes the panel. These rows configure
+ * nothing — they act ON the subject, which the menu header names one line
+ * above — so a second "Panel" heading under the first would say nothing and
+ * cost a line. The group still carries an `aria-label`, because a screen reader
+ * does not get the header for free the way an eye does. Move keeps its heading:
+ * "Up" on its own is not a sentence.
  *
  * EVERY OPTION IS ONE CLICK, and no row opens a submenu. A submenu inside this
  * overlay would have to be crossed by a pointer that the controller is watching:
@@ -45,6 +61,12 @@ export interface KnobMenuProps {
   onPick: (knob: ResolvedKnob, value: string) => void
   onAction: (action: KnobMenuAction) => void
   /**
+   * Commit one item action. The row already carries its own patches — they were
+   * what decided the row exists — so this receives a mutation rather than an
+   * instruction to go and build one.
+   */
+  onItemAction?: (action: ItemAction) => void
+  /**
    * Positions the panel at the pointer, flipped into the viewport. Imperative
    * and supplied by the toolbar, which is the half that may touch the DOM —
    * same division as the bar's `barRef` and the chip's `chipRef`.
@@ -52,7 +74,7 @@ export interface KnobMenuProps {
   panelRef?: Ref<HTMLDivElement>
 }
 
-export function KnobMenu({ model, onPick, onAction, panelRef }: KnobMenuProps) {
+export function KnobMenu({ model, onPick, onAction, onItemAction, panelRef }: KnobMenuProps) {
   return (
     // `absolute` with no class position: `computeMenuDock` writes `left`/`top`
     // against the overlay wrapper. `pointer-events-auto` because the whole
@@ -89,9 +111,39 @@ export function KnobMenu({ model, onPick, onAction, panelRef }: KnobMenuProps) {
           </div>
         ))}
 
+        {/* One rule above the item actions, not one per group — the Move
+            heading is its own separation, and a rule directly under the menu
+            header (which already draws a border) would double it. */}
+        {model.itemActions.length > 0 && model.groups.length > 0 ? <Separator /> : null}
+        {model.itemActions.map((group) => (
+          <div key={group.id} role="group" aria-label={group.label}>
+            {group.title ? (
+              <div className="truncate whitespace-nowrap px-2 pb-0.5 pt-1.5 text-[9px] font-semibold uppercase tracking-wide opacity-60">
+                {group.title}
+              </div>
+            ) : null}
+            {group.actions.map((action) => (
+              <button
+                key={action.id}
+                type="button"
+                role="menuitem"
+                data-testid="canvas-menu-item-action"
+                onClick={() => onItemAction?.(action)}
+                // Indented under a heading, flush without one — the same
+                // relationship an option row has to the knob that owns it.
+                className={`flex w-full items-center whitespace-nowrap py-1 pr-2 text-left text-[11px] hover:bg-white/15 focus:bg-white/15 focus:outline-none ${
+                  group.title ? 'pl-4' : 'pl-2'
+                }`}
+              >
+                {action.title}
+              </button>
+            ))}
+          </div>
+        ))}
+
         {model.actions.map((action) => (
           <Fragment key={action.id}>
-            <div role="separator" className="my-1 border-t border-white/15" />
+            <Separator />
             <button
               type="button"
               role="menuitem"
@@ -106,6 +158,10 @@ export function KnobMenu({ model, onPick, onAction, panelRef }: KnobMenuProps) {
       </div>
     </div>
   )
+}
+
+function Separator() {
+  return <div role="separator" className="my-1 border-t border-white/15" />
 }
 
 /**

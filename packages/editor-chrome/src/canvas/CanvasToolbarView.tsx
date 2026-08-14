@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type Ref } from 'react'
 import type { ResolvedKnob } from '@o3/block-spec'
 
+import type { ItemAction } from './itemActions'
 import { KnobControl } from './KnobControl'
 import { KnobMenu } from './KnobMenu'
 import {
@@ -69,6 +70,8 @@ export interface CanvasToolbarViewProps {
   menu?: KnobMenuModel
   /** A menu action. Today there is one, and it jumps to the Studio form. */
   onMenuAction?: (action: KnobMenuAction) => void
+  /** Duplicate / Remove / Move (#111) — a mutation the row already carries. */
+  onItemAction?: (action: ItemAction) => void
   barRef?: Ref<HTMLDivElement>
   chipRef?: Ref<HTMLDivElement>
   /**
@@ -99,6 +102,7 @@ export function CanvasToolbarView({
   onPickKnob,
   menu,
   onMenuAction,
+  onItemAction,
   barRef,
   chipRef,
   menuDock,
@@ -272,6 +276,14 @@ export function CanvasToolbarView({
             // menu the click has to travel through.
             setOpenSurface(null)
             onMenuAction?.(action)
+          }}
+          onItemAction={(action) => {
+            // Closed first here too, and for a sharper reason: Remove deletes
+            // the element this whole overlay is anchored to. A menu left open
+            // over a subject that no longer exists is a menu positioned against
+            // a rect that has stopped meaning anything.
+            setOpenSurface(null)
+            onItemAction?.(action)
           }}
           panelRef={(el) => menuDock?.(el, { x: open.x, y: open.y })}
         />

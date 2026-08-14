@@ -78,6 +78,30 @@ export function tryGetDocument<T>(getDocument: (id: string) => T, id: string): T
   }
 }
 
+/**
+ * WHERE A REJECTED MUTATION GOES — the console, for v1, and deliberately so
+ * (#111 decides this).
+ *
+ * There is no toast to raise. Sanity's `useToast` is a Studio-side context and
+ * our chrome mounts inside the preview iframe, under `<VisualEditing />`'s own
+ * root rather than under Studio's providers, so there is nothing to call. Our
+ * own surface is not a line either: a toast has to OUTLIVE the hover to be
+ * read, and a custom overlay component is unmounted the moment the pointer
+ * leaves the element (#108, constraint 1), so it would have to live beside
+ * `<VisualEditing />` with its own mount, stacking, dismissal and geometry.
+ * That is a ticket, and #124 is it.
+ *
+ * What this function buys in the meantime is that there is exactly ONE place to
+ * attach that surface when it exists, and that every message names the action
+ * and the path rather than saying a patch failed. "The patch vanished" is a
+ * recurring support shape in the prior art, and a console line an editor never
+ * opens does not fix it — but it is the difference between a report someone can
+ * act on and one that starts from nothing.
+ */
+export function reportCanvasFailure(what: string, error: unknown): void {
+  console.error(`[canvas] ${what}`, error)
+}
+
 export interface CommitHandlers {
   /** Re-pull the snapshot — runs only after the mutation has landed. */
   onSettle: () => void
