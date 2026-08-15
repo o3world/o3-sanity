@@ -198,3 +198,26 @@ Fix on sight; don't imitate. As of 2026-08-01 the rules above are the target, an
 - **Motion is the one thing Figma cannot supply**, so `packages/ui` carries it: `OrbitalSphere` (the wireframe globe), `Reveal`, and `MaskedLines`. The orbital vocabulary has left `prototype/`.
 - **Orbital / band** — the two compositions the sphere appears in, and the `heroSection.variant` enum that names them. `orbital` is the Home opener (full sphere band under a bone dome); `band` is the interior-page hero (a shallow ink-warm strip with an eyebrow), shared with every collection index as `CollectionHero`.
 - **Captured prototype** — an answered visual proposal, committed to `apps/storybook/prototypes/` as a dated read-only snapshot (ADR 0010). **Not a source of record**: take intent and sequence from one, never values. Distinct from the retired root `prototype/`.
+
+## Authoring language
+
+The three named stages of the `o3-authoring` workflow (#142), and the thing the third one emits. All three are **procedure**, which is why they live in the plugin; the standards they apply are knowledge and live in the guidance corpus (ADR 0024).
+
+- **The brief** — the interview that opens an authoring session, before any Sanity call. Two fixed rounds with recommended answers: audience, claim and content type, then the claim's **warrant** and the evidence in hand. It emits **an agreed thesis** — one sentence, confirmed in chat — and the reader test's five questions. It is a **gate**: the skill does not create a document without a thesis, though the human may supply one directly and skip the rounds. What it may never do is invent one and proceed.
+- **Warrant** — the unstated principle that carries a claim from its evidence to its conclusion, in Toulmin's sense. The brief asks for one **somebody could disagree with**, because a claim with grounds and no arguable warrant is the shape thought-leadership mush takes.
+- **The reader test** — the pre-hand-off check that a draft argues what its author thinks. A **context-free reader** — holding the title, the excerpt, and the body as rendered prose, and nothing else — answers the five questions the brief locked. Question one is always _"in one sentence, what is this arguing?"_, and its answer is compared against the agreed thesis; a mismatch, or a reader who cannot answer, is a fail. **A fail blocks hand-off, not drafting**: the draft stays and the human decides. The skill never re-drafts to make its own test pass.
+  - The isolation is the point, not the automation, so the human carries it: the skill emits a self-contained prompt for a fresh chat. Where a subagent tool exists it is used instead, which is an implementation upgrade and not a different test.
+  - The five questions are **locked at brief time** — forecast from the thesis, not from the finished draft. Up to two may be added after drafting; none may be removed or reworded. The question you cannot answer is the one that otherwise gets quietly dropped.
+- **The review mode** — the workflow branch for a document that already exists, against the brief-and-draft branch for one that does not. It reports before it writes: a table of findings, then row-level approval, then **one `ifRevisionId`-locked patch** carrying the approved rows. It runs the reader test too, where the reader's thesis is confirmed by the human rather than checked against a brief.
+- **Finding** — one row of that table: `id`, `tier`, `location`, `current`, `proposed`, `why`. Ids are `F1…Fn`, stable for the session, so approval is "apply F1, F3, F7". Three tiers, named for what the human does with them:
+  - **`error`** — wrong. A fact, a broken reference, or something the voice guide or slop patterns name outright.
+  - **`craft`** — weaker than it should be.
+  - **`advisory`** — structural, and **never lands in a patch**. "This prose wants to be a `pullQuote`" is advice about a block; it cites the composition catalog rather than restating it.
+
+### Portable text write mechanics
+
+Verified against `naorcr6k`/`development`, 2026-08-15 — not folklore, and the folklore was wrong.
+
+- **Author `_key` on every block and every span yourself.** The Content Lake mints none on create, and then mints one on the **next** write, derived from that revision's id. So an unkeyed item is unaddressable by `_key` until something names it a value you could not have predicted, and the copy in your context is stale for exactly those items.
+- **Keys you authored survive a patch unchanged** — only the index moves. Re-fetch before patching and pass **`ifRevisionId`**: the reason is a concurrent edit, not key churn, and the guard turns a silent clobber into a failed call.
+- **`markDefs: []` and `marks: []` are a convention, not a requirement.** The write path stores them when supplied and omits them when not. Include them for the Studio editor and typegen — but a rule that overstates its danger is one that gets ignored the first time it turns out to be survivable.
