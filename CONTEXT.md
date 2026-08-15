@@ -67,6 +67,16 @@ The `Section` suffix is the tier marker: if a name ends in `Section` it is a ful
 
 The enforcement point is `registry.ts`, not the suffix: both factories reject a name missing from `SECTION_BLOCKS` / `BASE_BLOCKS`, and the web app's `BLOCK_REGISTRY` is compile-checked against the types generated from those lists. The suffix rule itself is upheld by whoever curates the registry — neither factory inspects name shape (see Known drift).
 
+### Component, instance, slot
+
+The component-system ontology, and it is deliberately Figma's — the design file is the source of record, so this side of the seam keeps the pair the file already uses, with no translation the way `axis` → knob translates ([ADR 0023](docs/adr/0023-an-instance-is-configured-by-its-component.md)).
+
+- **Component** — the definition: a schema type, its renderer, and its knob spec, declared once. Section blocks, base blocks, and shared objects are all components; the tier names stay, because a tier answers where a component may be placed, which "component" alone does not.
+- **Instance** — one placed occurrence of a component in a document. `heroSection.cta`'s value is an instance; each member of `layoutSection.items` is an instance. **An instance is configured by its component** — the same spec wherever it sits, never by its placement (ADR 0023; Figma, Web Components, and Storybook all put properties on the definition, and so do we). A field whose type is a component is an **instance field**; the empty position needs no noun of its own, because `field` already covers it.
+  - **Not an item.** An item — a panel, a screen — is an inline object with no identity outside its host's array: no registered type, no spec of its own, configured through its host ([ADR 0021](docs/adr/0021-an-array-member-is-its-own-knob-root.md)). The test is whether the thing has a spec of its own or only relative to a host.
+- **Slot** — a rendered area of a component that its parent fills. The Web Components / Vue sense, and only that sense; `CollectionHero`'s decoration slot is the model use.
+  - **`asChild` is not a slot.** Radix's helper _replaces_ the rendered element rather than filling an area — that pattern is called `asChild`, its import is spelled `SlotPrimitive`, and "slot" is never said of it. MUI's `slots`/`slotProps` (replaceable internals) is the same trap from the other direction.
+
 ### Knobs
 
 A **knob** is one design option on a block: a closed value set with a title, an icon, and a declared rule for when it applies. `heroSection.variant` is a knob; so are `decoration`, `surface`, and `railPanelsSection.layout`. One word covers both the declaration and the control an editor turns — there is deliberately no second word for the two halves.
@@ -83,7 +93,7 @@ The Figma rule keeps Figma's word (`axis`) because that is what the design file 
 
 A knob is delivered on two surfaces, and the split is deliberate. The **knob menu** (right-click) carries a subject's _complete_ roster. The **canvas toolbar** carries a curated subset — a knob rides it only when it declares `bar: true`.
 
-What earns a bar slot: **`surface`, and the one axis that changes what the block is.** A block's composition — `heroSection.variant`, `railPanelsSection.layout`, `mediaSection.variant` — is the thing an editor is looking at, so it is the axis every bar shows. Everything else (`decoration`, `rail`, `width`) is menu-only: reachable, but not competing for the strip of chrome sitting over the design. There is no special-casing in code — `bar` is a plain declaration, and this rule is applied by whoever writes it.
+What earns a place on the bar: **`surface`, and the one axis that changes what the block is.** A block's composition — `heroSection.variant`, `railPanelsSection.layout`, `mediaSection.variant` — is the thing an editor is looking at, so it is the axis every bar shows. Everything else (`decoration`, `rail`, `width`) is menu-only: reachable, but not competing for the strip of chrome sitting over the design. There is no special-casing in code — `bar` is a plain declaration, and this rule is applied by whoever writes it.
 
 Every knob belongs to a **knob surface** — the chrome that delivers it, decided by the container it configures, not by where it is declared:
 

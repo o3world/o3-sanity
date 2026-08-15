@@ -63,10 +63,10 @@ describe('the seeded About page', () => {
    * Sub-block attribution (#107). The team band is the only place a
    * **reference** array is attributed: the path is the array item's, not the
    * person document's, because what an editor changes on a card is which
-   * person occupies the slot. `_key` survives the dereference only because
+   * person the card shows. `_key` survives the dereference only because
    * `PAGE_QUERY` spreads the person into the item rather than replacing it.
    */
-  it('attributes the team band’s header and one path per person slot', () => {
+  it('attributes the team band’s header and one path per person card', () => {
     const team = sections.find((s) => s._type === 'personGridSection') as {
       people?: { _key: string }[]
     }
@@ -180,11 +180,11 @@ describe('the seeded Solutions page', () => {
   })
 
   /**
-   * Slot order is the array's, not the author's — apex first, then the base
-   * ring. The frame puts Strategy at the apex and reads AI, Engineering,
+   * Position order is the array's, not the author's — apex first, then the
+   * base ring. The frame puts Strategy at the apex and reads AI, Engineering,
    * Design around the base, so the seed carries them in that order.
    */
-  it('places the four disciplines in the frame’s slot order', () => {
+  it('places the four disciplines in the frame’s position order', () => {
     const disciplines = (
       sections.find((s) => s._type === 'disciplineGridSection') as
         { disciplines?: { heading?: string }[] } | undefined

@@ -12,7 +12,7 @@ import { cn } from '../lib/utils'
  * (250 at 43 → 168), `1928:6551` (250 at 827 → 952), `1928:6557` (280 at 420 →
  * 560). Only the apex sits above its node.
  */
-const SLOTS = [
+const POSITIONS = [
   /** Apex — the frame gives Strategy 64px and the room to say more (`1928:6536`). */
   { x: 560, y: 339.88, place: 'above', measure: 531, lead: true },
   /** Base ring, left (`1928:6544`). */
@@ -28,8 +28,8 @@ const BOX_H = 1172
 const pct = (value: number, of: number) => `${(value / of) * 100}%`
 
 /** The six dashed paths are every pair of the four nodes — a complete graph. */
-const EDGES = SLOTS.flatMap((from, index) =>
-  SLOTS.slice(index + 1).map((to) => ({ d: `M${from.x} ${from.y}L${to.x} ${to.y}` })),
+const EDGES = POSITIONS.flatMap((from, index) =>
+  POSITIONS.slice(index + 1).map((to) => ({ d: `M${from.x} ${from.y}L${to.x} ${to.y}` })),
 )
 
 export interface OrbitalDiagramItem {
@@ -38,7 +38,7 @@ export interface OrbitalDiagramItem {
 }
 
 export interface OrbitalDiagramProps {
-  /** Four disciplines, in slot order: apex, then the base ring left → right → front. */
+  /** Four disciplines, in position order: apex, then the base ring left → right → front. */
   items: OrbitalDiagramItem[]
   className?: string
 }
@@ -55,9 +55,9 @@ export interface OrbitalDiagramProps {
  * drawing wearing this one's description, so the geometry is rebuilt from the
  * export instead of the sphere being bent to fit.
  *
- * **Position comes from array order, never from the author.** Slot 0 is the
- * apex — the frame sets it at 64px with a 531px measure because it is the
- * discipline everything else hangs off — and slots 1–3 take the base ring.
+ * **Position comes from array order, never from the author.** Position 0 is
+ * the apex — the frame sets it at 64px with a 531px measure because it is the
+ * discipline everything else hangs off — and positions 1–3 take the base ring.
  * That is the same rule `railPanelsSection` numbering follows: an editor
  * orders a list, they do not type coordinates.
  *
@@ -66,9 +66,9 @@ export interface OrbitalDiagramProps {
  * renders it falls back to its grid layout below `lg` (ADR 0006).
  */
 export function OrbitalDiagram({ items, className }: OrbitalDiagramProps) {
-  const placed = SLOTS.flatMap((slot, index) => {
+  const placed = POSITIONS.flatMap((position, index) => {
     const item = items[index]
-    return item ? [{ slot, item }] : []
+    return item ? [{ position, item }] : []
   })
 
   return (
@@ -94,14 +94,14 @@ export function OrbitalDiagram({ items, className }: OrbitalDiagramProps) {
           ))}
         </g>
         <g className="fill-brand">
-          {SLOTS.map((slot) => (
-            <circle key={`${slot.x}-${slot.y}`} cx={slot.x} cy={slot.y} r={5.5} />
+          {POSITIONS.map((position) => (
+            <circle key={`${position.x}-${position.y}`} cx={position.x} cy={position.y} r={5.5} />
           ))}
         </g>
       </svg>
 
-      {placed.map(({ slot, item }) => {
-        const above = slot.place === 'above'
+      {placed.map(({ position, item }) => {
+        const above = position.place === 'above'
         return (
           <div
             key={item.heading}
@@ -113,15 +113,15 @@ export function OrbitalDiagram({ items, className }: OrbitalDiagramProps) {
               above ? '-translate-y-full gap-7' : 'gap-8',
             )}
             style={{
-              left: pct(slot.x, BOX_W),
-              top: pct(above ? slot.y - 59.63 : slot.y + 58.59, BOX_H),
-              width: pct(slot.measure, BOX_W),
+              left: pct(position.x, BOX_W),
+              top: pct(above ? position.y - 59.63 : position.y + 58.59, BOX_H),
+              width: pct(position.measure, BOX_W),
             }}
           >
             <p
               className={cn(
                 'font-display text-balance text-white',
-                slot.lead
+                position.lead
                   ? 'text-hero font-medium tracking-[-0.0219em]'
                   : 'text-[clamp(30px,2.78vw,40px)] font-medium leading-[1.2] tracking-[-0.015em]',
               )}
@@ -132,7 +132,7 @@ export function OrbitalDiagram({ items, className }: OrbitalDiagramProps) {
               <p
                 className={cn(
                   'text-on-ink-subtle text-pretty',
-                  slot.lead ? 'text-[18px] leading-[1.6]' : 'text-[15px] leading-[1.55]',
+                  position.lead ? 'text-[18px] leading-[1.6]' : 'text-[15px] leading-[1.55]',
                 )}
               >
                 {item.body}
