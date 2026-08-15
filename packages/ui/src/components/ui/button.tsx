@@ -27,7 +27,13 @@ const buttonVariants = cva(
   // label 18/24 Figtree Medium (`--text-button`). Height is hug — 48px at
   // `base` falls out of the padding and the label's leading, so nothing sets
   // one.
-  'inline-flex items-center justify-center gap-3 whitespace-nowrap rounded-btn text-button transition-colors duration-(--duration-hover) ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0',
+  //
+  // Tracking is the button's own, not the token's. `--text-button` is 18/24/500
+  // with no tracking, which is what the nav `Link` set (`2225:2894`) draws and
+  // what every other borrower of `text-button` renders; the `Button` label
+  // (`2134:1789`) alone carries `0.01em`. One of the two has to be the literal,
+  // and it is the smaller set.
+  'inline-flex items-center justify-center gap-3 whitespace-nowrap rounded-btn text-button tracking-[0.01em] transition-colors duration-(--duration-hover) ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0',
   {
     variants: {
       variant: {

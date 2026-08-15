@@ -217,9 +217,15 @@
   --text-body-heading--letter-spacing: 0;
   --text-body-heading--font-weight: 400;
 
-  /* button — 18/24 Medium. Every button label, both sizes, both fills
-   * (1868:3262). Figma's `Interactive/Large` variable still names Inter; the
-   * instances all render Figtree, so the variable's family is stale. */
+  /* button — 18/24 Medium. Shared by the button label and every 18px
+   * interactive label beside it: the nav links (`Link`, 2225:2894), the
+   * utility strip, the mobile menu rows, the pagination links. Figma's
+   * `Interactive/Large` variable still names Inter; the instances all render
+   * Figtree, so the variable's family is stale.
+   *
+   * Tracking is 0 because that is what the `Link` set and the rest draw. The
+   * `Button` label (2134:1789) is the one exception at 0.01em, and it sets
+   * that itself. */
   --text-button: 18px;
   --text-button--line-height: 1.333; /* 24px / 18px */
   --text-button--letter-spacing: 0;
