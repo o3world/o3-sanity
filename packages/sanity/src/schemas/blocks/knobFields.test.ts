@@ -180,6 +180,14 @@ describe('hiddenUnless', () => {
   })
 })
 
+/**
+ * `anchor` closes every list below it. It is a plain field the factory appends
+ * after the knob splice (#149) — not a design option, so it is not generated
+ * from a declaration — and it is spelled out here rather than trimmed off,
+ * because what these tests are about is the ORDER a section block's fields come
+ * out in: that order is what typegen publishes and what every renderer's props
+ * are shaped by.
+ */
 describe('defineSectionBlock knob placement', () => {
   const knobs = defineBlockKnobs({
     type: 'heroSection',
@@ -200,7 +208,12 @@ describe('defineSectionBlock knob placement', () => {
       fields: ['variant', defineField({ name: 'eyebrow', type: 'string' })],
     })
 
-    expect(readFields(block).map((field) => field.name)).toEqual(['variant', 'eyebrow', 'surface'])
+    expect(readFields(block).map((field) => field.name)).toEqual([
+      'variant',
+      'eyebrow',
+      'surface',
+      'anchor',
+    ])
   })
 
   it('appends a knob the field list never names, so surface keeps its old last place', () => {
@@ -212,7 +225,12 @@ describe('defineSectionBlock knob placement', () => {
       fields: [defineField({ name: 'eyebrow', type: 'string' }), 'variant'],
     })
 
-    expect(readFields(block).map((field) => field.name)).toEqual(['eyebrow', 'variant', 'surface'])
+    expect(readFields(block).map((field) => field.name)).toEqual([
+      'eyebrow',
+      'variant',
+      'surface',
+      'anchor',
+    ])
   })
 
   it('refuses a placement that names no knob', () => {
@@ -285,7 +303,7 @@ describe('defineSectionBlock knob placement', () => {
     })
     const fields = readFields(block)
 
-    expect(fields.map((field) => field.name)).toEqual(['quote', 'surface'])
+    expect(fields.map((field) => field.name)).toEqual(['quote', 'surface', 'anchor'])
     expect(fields[1]).toMatchObject({ type: 'string', initialValue: 'bone' })
   })
 })

@@ -80,8 +80,9 @@ export const RelativeHref: Story = {
 /**
  * The anchor arm — a place further down the page the visitor is already on.
  *
- * Authorable ahead of its target: no section carries a name yet, so this link
- * resolves to `#how-we-work` and lands nowhere until one does.
+ * The name is stored without the `#` and emitted with one, and it is the same
+ * name a band carries in its own `anchor` field (#149). A row of these is what
+ * `buttonGroup` holds.
  */
 export const AnchorOnThisPage: Story = {
   args: { label: 'How we work', anchor: 'how-we-work', variant: 'dark', target: null },

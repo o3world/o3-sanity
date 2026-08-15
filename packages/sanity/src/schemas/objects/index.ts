@@ -13,6 +13,7 @@
  */
 export { bodyText } from './bodyText'
 export { button } from './button'
+export { buttonGroup } from './buttonGroup'
 export { chapter } from './chapter'
 export { embed } from './embed'
 export { figure } from './figure'

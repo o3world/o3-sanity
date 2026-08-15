@@ -187,3 +187,31 @@ Remove / Move and the insert menu until base blocks grow knobs.
   have no home. Whoever answers that lands on this decision immediately, and at
   that point the patches are the option to weigh first: they cost an e2e harness
   once, and they expire.
+
+## Addendum, 2026-08-15 — the trigger is armed, twice (#145, #149)
+
+The question above has been answered, and the answer arms the trigger without
+going anywhere near `defineBaseBlock`. ADR 0023 made a **shared object its own
+knob root**, so a member of `layoutSection.items` now declares design options
+through `defineSharedObject` rather than through the base-block factory:
+`button` declares a fill (#145), and `buttonGroup` declares an alignment
+(#149). Two members of the repo's one unreachable array carry a control the
+canvas cannot draw.
+
+**Nothing here changes.** The declaration is ready for the layout column and the
+canvas surface is not: both objects are configured identically wherever else
+they are placed, and it is only inside `items` that the overlay resolves
+nothing. The trade this ADR weighed is the same trade, and the two upstream bugs
+in `docs/upstream/` are still the fix that removes the constraint for everyone.
+
+What changes is the size of the payoff, which was the whole of the "not yet".
+The case for deferring rested on there being nothing to show in there; there is
+now something, on two of the seven members. So the patches are no longer bought
+with nothing, and the next person to hit an unreachable knob in a layout column
+should re-read this record — including the alternatives — rather than debug the
+overlay. The failure is still silent, and it is still three files from the
+symptom.
+
+`defineBaseBlock`'s doc comment names the trigger it can see; it cannot see this
+one, because `defineSharedObject` is a different door into the same array. Both
+factories now point here.

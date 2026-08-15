@@ -113,7 +113,11 @@ const SECTION_FIELDS = /* groq */ `
     entries[]{..., button{..., ${BUTTON_TARGET}}}
   },
   _type == "layoutSection" => {
-    items[]{..., _type == "button" => {${BUTTON_TARGET}}}
+    items[]{
+      ...,
+      _type == "button" => {${BUTTON_TARGET}},
+      _type == "buttonGroup" => {buttons[]{..., ${BUTTON_TARGET}}}
+    }
   },
   _type == "listingSection" => {
     "pages": *[_type == "page" && pageType == ^.pageType && slug.current != "index"] | order(title asc){_id, _type, title, "slug": slug.current, card}

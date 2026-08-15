@@ -16,6 +16,7 @@
 
 import type { BlockKnobs, ObjectKnobs } from '@o3/block-spec'
 import { buttonKnobs } from './button'
+import { buttonGroupKnobs } from './buttonGroup'
 import { caseShowcaseSectionKnobs } from './caseShowcaseSection'
 import { ctaSectionKnobs } from './ctaSection'
 import { disciplineGridSectionKnobs } from './disciplineGridSection'
@@ -35,6 +36,7 @@ import { roleListSectionKnobs } from './roleListSection'
 import { screenGridSectionKnobs } from './screenGridSection'
 
 export { buttonKnobs } from './button'
+export { buttonGroupKnobs } from './buttonGroup'
 export { caseShowcaseSectionKnobs } from './caseShowcaseSection'
 export { ctaSectionKnobs } from './ctaSection'
 export { decorationKnob } from './decoration'
@@ -112,4 +114,5 @@ export const BLOCK_KNOBS: Readonly<Record<string, BlockKnobs>> = {
 export const OBJECT_KNOBS: Readonly<Record<string, ObjectKnobs>> = {
   [markKnobs.type]: markKnobs,
   [buttonKnobs.type]: buttonKnobs,
+  [buttonGroupKnobs.type]: buttonGroupKnobs,
 }
