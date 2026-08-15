@@ -27,7 +27,16 @@ GitHub shares one number space across issues and PRs, so a bare `#42` may be eit
 
 ## When a skill says "publish to the issue tracker"
 
-Create a GitHub issue.
+Create a GitHub issue, then **attach it to a map in the same breath** — see Parent issues below.
+An unattached issue is invisible to `pnpm frontier` whatever else is true of it.
+
+## When a skill says to apply `ready-for-agent`
+
+That label does not exist here. `/setup-matt-pocock-skills` writes the five canonical triage labels
+only when the `triage` skill is installed, and it is not; this repo uses `wayfinder:*` and the
+frontier instead. Substitute **`wayfinder:task` plus attachment to a map**, which is what makes a
+ticket agent-grabbable here. The same substitution covers `needs-triage` and `ready-for-human`:
+the first is a ticket nobody has attached yet, the second is `awaiting:nick`.
 
 ## When a skill says "fetch the relevant ticket"
 
