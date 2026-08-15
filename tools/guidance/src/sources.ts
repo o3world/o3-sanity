@@ -36,6 +36,15 @@ const GUIDANCE_SOURCES = [
     title: 'O3 slop patterns',
     sourcePath: 'docs/guidance/slop.md',
   },
+  {
+    /* The cross-block half of design-system knowledge (ADR 0025): what order
+     * bands go in, which surfaces they paint, which block carries which job.
+     * The other half — what one block is for — lives in that block's schema
+     * `description`, where `get_schema` already delivers it. */
+    key: 'o3-composition',
+    title: 'O3 page composition',
+    sourcePath: 'docs/guidance/composition.md',
+  },
 ] as const
 
 /** Deterministic and outside the load pipeline's `<type>-(wp|seed)-` ownership contract. */
