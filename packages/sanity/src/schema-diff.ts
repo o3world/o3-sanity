@@ -19,7 +19,8 @@
  * into an object, `of` into an array's member type.
  */
 export interface SchemaNode {
-  readonly name: string
+  /** Absent on a union's members, which are identified by `type` alone. */
+  readonly name?: string
   readonly type: string
   readonly description?: string
   readonly fields?: readonly SchemaNode[]
@@ -49,10 +50,18 @@ export function diffSchemas(repo: readonly SchemaNode[], deployed: readonly Sche
 }
 
 /**
- * One level of the tree, matched by name, then the same again for whatever
- * each node contains. Nodes are matched by name rather than position because
- * the manifest's field order is the Studio's, and reordering a form is not
- * drift.
+ * What addresses a node among its siblings. A field has a `name`; a union's
+ * members have only their `type`, and `page.sections` lists twenty of them
+ * that way.
+ */
+function identify(node: SchemaNode): string {
+  return node.name ?? node.type
+}
+
+/**
+ * One level of the tree, matched by identity, then the same again for whatever
+ * each node contains. Nodes are matched rather than zipped because the
+ * manifest's order is the Studio's, and reordering a form is not drift.
  */
 function compare(
   repo: readonly SchemaNode[],
@@ -60,11 +69,12 @@ function compare(
   prefix: string,
   drift: Drift[],
 ): void {
-  const deployedByName = new Map(deployed.map((node) => [node.name, node]))
+  const deployedById = new Map(deployed.map((node) => [identify(node), node]))
 
   for (const node of repo) {
-    const path = prefix ? `${prefix}.${node.name}` : node.name
-    const actual = deployedByName.get(node.name)
+    const id = identify(node)
+    const path = prefix ? `${prefix}.${id}` : id
+    const actual = deployedById.get(id)
 
     if (!actual) {
       // A whole type absent from the deploy is a different finding from a

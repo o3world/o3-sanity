@@ -37,6 +37,40 @@ describe('diffSchemas', () => {
     ])
   })
 
+  /* A union's members carry a `type` and no `name` — `page.sections` lists
+   * twenty section types that way. Keying them by name puts every member under
+   * `undefined`, so the walk compares whichever two happened to sort first and
+   * reports the rest as drift against the wrong sibling. Order is the Studio's
+   * and is not drift. */
+  it('identifies an array member by type when it has no name, as a union does', () => {
+    const member = (type: string, description: string) => ({ type, description })
+    const sections = (of: { type: string; description: string }[]) => ({
+      name: 'sections',
+      type: 'array',
+      of,
+    })
+    const repo = [
+      {
+        name: 'page',
+        type: 'document',
+        fields: [
+          sections([member('heroSection', 'The opener.'), member('ctaSection', 'The ask.')]),
+        ],
+      },
+    ]
+    const deployed = [
+      {
+        name: 'page',
+        type: 'document',
+        fields: [
+          sections([member('ctaSection', 'The ask.'), member('heroSection', 'The opener.')]),
+        ],
+      },
+    ]
+
+    expect(diffSchemas(repo, deployed)).toEqual([])
+  })
+
   /* Both strings are the ones #139 recorded off the live schema. A field the
    * deploy still has, describing itself the way the design used to work, is
    * the failure the knowledge contract cannot survive — the field is present,
