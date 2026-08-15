@@ -60,6 +60,11 @@ export default defineConfig({
             'tools/migration/src/**/*.test.ts',
             'apps/web/src/**/*.test.ts',
             'packages/*/src/**/*.test.ts',
+            // The worktree scripts are shell, and their seams are subcommands.
+            // A test here shells out to the script the same way a session does,
+            // so `pnpm test` stays the one checkpoint rather than growing a
+            // second runner for the half of the toolchain written in bash.
+            'scripts/*.test.ts',
           ],
           // Studio v6.8 added a top-level `import "@sanity-labs/ui-poc/styles.css"`
           // to the `sanity` barrel. The migration mappers reach that barrel for

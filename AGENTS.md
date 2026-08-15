@@ -17,8 +17,9 @@ pnpm wt new <n>      # claim it, branch it, worktree it, install, carry env acro
 
 One ticket, one worktree, one session. `pnpm wt new` refuses a blocked or already-claimed ticket, so
 you cannot start work two sessions are duplicating. Orca creates worktrees too, provisioned the same
-way via `orca.yaml`, but it does not claim the ticket for you. See `docs/agents/worktrees.md` — read
-it before running more than one session at a time.
+way via `orca.yaml`; created **from an issue**, its `issueCommand` claims the ticket and puts the
+number in the branch, which is what makes the checkout reapable. Created any other way it does
+neither. See `docs/agents/worktrees.md` — read it before running more than one session at a time.
 
 **Every open task hangs off a map.** `frontier` walks maps downward, so a ticket attached to nothing
 is invisible to it — the mechanism that quietly stranded eight tickets, including a one-line fix, in
@@ -38,6 +39,36 @@ Two labels carry meaning beyond `wayfinder:*`:
 - **`awaiting:nick`** — stalled on a decision no agent can make. Do not pick these up; if your work
   produces one, label it and say on the ticket what you need decided.
 - **`bug`** — a defect in shipped work, as opposed to map-advancing work. Both can be `wayfinder:task`.
+
+#### The label picks the skill
+
+A lookup, read once when you claim, so the same kind of work gets the same treatment whoever picks
+it up. It is not a wrapper: reach for the skill directly.
+
+| You claimed a…        | Work it with                                                            |
+| --------------------- | ----------------------------------------------------------------------- |
+| `bug`                 | `mattpocock-skills:diagnosing-bugs`                                     |
+| `wayfinder:task`      | `mattpocock-skills:tdd`                                                 |
+| `wayfinder:research`  | `mattpocock-skills:research`                                            |
+| `wayfinder:prototype` | `mattpocock-skills:prototype`                                           |
+| `wayfinder:grilling`  | `mattpocock-skills:grilling`                                            |
+| `wayfinder:map`       | nothing — it is a grouping. `frontier` recurses past it to its children |
+| `awaiting:nick`       | nothing — do not pick it up                                             |
+
+Two things the `wayfinder:task` row does not mean. **TDD is how you work the ticket, not who
+dispatches it** — `/mattpocock-skills:implement` is still Nick's to fire (it runs one ticket per
+subagent), and a session inside one of those subagents is exactly where `tdd` belongs. And **a task
+with no behavior to drive out just gets done**: config, a doc, a table like this one. Red-green needs
+something that can be red.
+
+Skills that fire on what comes up mid-ticket rather than on the label:
+
+| When                                                        | Reach for                       |
+| ----------------------------------------------------------- | ------------------------------- |
+| a decision got made with alternatives weighed               | `architecture-decision-records` |
+| you are naming a schema, block, field or renderer           | `content-naming`                |
+| you are writing copy for the site                           | `o3world-copy`                  |
+| you are writing engineering prose — README, ADR, commit, PR | `no-slop`                       |
 
 #### Never make Nick look a number up
 

@@ -94,6 +94,7 @@ pnpm typegen                  # schema.json + generated types, after a schema ed
 pnpm guidance:sync            # voice corpus → guidance documents
 pnpm guidance:check           # fails if the dataset drifted from the repo
 pnpm schema:deploy            # deploy the schema so get_schema sees it
+pnpm schema:check             # fails if the deployed schema drifted from the repo
 pnpm figma:sync               # what changed in the design file since last sync
 pnpm env:pull                 # restore apps/web/.env.local from Vercel
 ```
