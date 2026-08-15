@@ -57,7 +57,8 @@
           "_key": "intro-cta",
           "label": "Let’s build the future together",
           "href": "/contact",
-          "contrast": "dark"
+          "contrast": "dark",
+          "icon": "none"
         }
       ]
     },
