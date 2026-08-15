@@ -42,6 +42,7 @@
       "_type": "logoWallSection",
       "_key": "brands",
       "surface": "bone",
+      "layout": "bar",
       "heading": "Trusted brands using Sanity",
       "clients": [
         { "_type": "reference", "_ref": "client-seed-vertex", "_key": "client-0" },

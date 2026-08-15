@@ -411,6 +411,7 @@ export type ClientReference = {
 export type LogoWallSection = {
   _type: 'logoWallSection'
   eyebrow?: string
+  layout?: 'plates' | 'bar'
   heading?: string
   body?: string
   clients?: Array<
@@ -1790,6 +1791,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         _key: string
         _type: 'logoWallSection'
         eyebrow?: string
+        layout?: 'bar' | 'plates'
         heading?: string
         body?: string
         clients: Array<{
@@ -2513,6 +2515,7 @@ export type PAGE_QUERY_RESULT = {
         _key: string
         _type: 'logoWallSection'
         eyebrow?: string
+        layout?: 'bar' | 'plates'
         heading?: string
         body?: string
         clients: Array<{

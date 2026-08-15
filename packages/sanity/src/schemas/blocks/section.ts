@@ -88,15 +88,16 @@ export const heroSection = defineSectionBlock({
   preview: { select: { title: 'headlineLines.0' } },
 })
 
-/** `surface` is declared in `src/knobs/logoWallSection.ts` (ADR 0020). */
+/** `layout` and `surface` are declared in `src/knobs/logoWallSection.ts` (ADR 0020). */
 export const logoWallSection = defineSectionBlock({
   name: 'logoWallSection',
   description:
-    'Proof by association — a heading and standfirst over a centred row of client marks. Reach for it when the argument needs borrowed credibility rather than explanation, early on a page that is about to ask for trust. The frame draws six in a row, but the row takes whatever it is given.',
+    'Proof by association — a heading and standfirst over a centred row of client marks. Reach for it when the argument needs borrowed credibility rather than explanation, early on a page that is about to ask for trust. Plates give each mark a hairlined square and make the row the band’s subject; bar sets the same marks in a short unplated strip under the heading. Six is what the frames draw, but the row takes whatever it is given.',
   title: 'Logo wall',
   knobs: logoWallSectionKnobs,
   fields: [
     defineField({ name: 'eyebrow', type: 'string' }),
+    'layout',
     // The single `statement` this band shipped with split in two on the
     // 2026-08 frame (`1864:2390`, #89): a 48px heading over a 24px standfirst,
     // both centred. They are `heading` + `body` rather than a second

@@ -123,7 +123,7 @@ caseShowcaseSection → quoteSection` — who trusts us, what we did, what they
 
 ## One block, more than one job
 
-Four blocks change job with a knob rather than being two blocks. Recognising
+Five blocks change job with a knob rather than being two blocks. Recognising
 this is what stops a page proposing a block that already exists:
 
 - **`railPanelsSection`** — `layout: rail` with `rail: label` is the default
@@ -141,6 +141,11 @@ this is what stops a page proposing a block that already exists:
   and none needs a band of its own.
 - **`inFlightSection`** — `cards` for work in progress, `rows` for dated
   appearances and ideas. The same entry, two compositions.
+- **`logoWallSection`** — `plates` gives each mark a hairlined 280px square
+  and makes the row the band's subject; `bar` drops the plate and shortens the
+  strip, so the logos read as a footnote to the heading above them. Reach for
+  `bar` when the band is naming someone else's customers rather than claiming
+  them.
 - **`ctaSection`** — with `body` it makes a closing argument; heading and
   button alone is a quieter "back up one level" link, which is what both
   venture detail pages use.

@@ -1,4 +1,6 @@
 import { Eyebrow, SURFACE_CLASS, SurfaceProvider } from '@o3/ui'
+import { cn } from '@o3/ui/lib/utils'
+import { stegaClean } from '@sanity/client/stega'
 
 import { ButtonLink } from '@/content/ButtonLink'
 import { SanityImage } from '@/content/SanityImage'
@@ -41,6 +43,23 @@ type LogoWallSectionProps = SectionProps<'logoWallSection'>
  *   tiles are clipped by the viewport. That is what the frame draws (see the
  *   export of `1864:2390`), and it is why this band bleeds past the gutter.
  *
+ * ── `layout: bar` — the partner page's band (`2332:1708`), #92 ─────────────
+ *
+ * ```
+ * 64px 96px, centred, gap 24
+ *   heading   Heading/h3 — 36/44, not the 48px h2
+ *   logo bar  six 280 × 100 frames, 64px side padding, NO stroke
+ * ```
+ *
+ * Three differences from `plates`, and they all say the same thing: this row
+ * is a footnote to the heading rather than the band's subject. The plate is
+ * gone, the tile is 100 tall instead of 280, and the band is a 64px strip
+ * rather than the 96/128 one. The bleed and the clipping stay — 6 × 280 is
+ * still wider than the page, and that is still what the frame draws.
+ *
+ * The eyebrow, standfirst and button all still render if a band carries them;
+ * the partner frame simply writes none of the three.
+ *
  * ── THE MARKS ARE DESATURATED AGAIN ────────────────────────────────────────
  *
  * #42 removed `grayscale` on the argument that a wall of six large marks
@@ -56,16 +75,27 @@ export function LogoWallSection({
   eyebrow,
   heading,
   body,
+  layout,
   clients,
   button,
   surface,
 }: LogoWallSectionProps) {
   const resolved = resolveSurface(surface, 'bone')
+  const isBar = stegaClean(layout) === 'bar'
 
   return (
     <SurfaceProvider surface={resolved}>
       <section
-        className={`${SURFACE_CLASS[resolved]} px-gutter pt-band-sm pb-band-md lg:pt-band-md lg:gap-band-md bg-(image:--gradient-surface-wash-warm) flex flex-col items-center gap-12`}
+        className={cn(
+          SURFACE_CLASS[resolved],
+          'px-gutter bg-(image:--gradient-surface-wash-warm) flex flex-col items-center',
+          // `1864:2390` is 96/128 with 128 between its three parts; the bar
+          // band (`2332:1708`) is a 64px strip with 24 between heading and
+          // logos, which is most of what makes it read as a footnote.
+          isBar
+            ? 'pb-band-sm pt-band-sm gap-6'
+            : 'pt-band-sm pb-band-md lg:pt-band-md lg:gap-band-md gap-12',
+        )}
       >
         {/* 32 at 1440 (`1864:2391`), 20 at 402 (`1814:1642`). */}
         <div className="flex w-full flex-col items-center gap-5 text-center lg:gap-8">
@@ -75,7 +105,15 @@ export function LogoWallSection({
             // Figtree Light on every redesigned frame, but `display-xl` still
             // carries the 400-weight section headlines on the frames the
             // redesign has not reached. See tokens/typography.css.
-            <h2 className="text-display-xl font-display text-ink max-w-[1026px] text-balance font-light">
+            //
+            // The bar band steps the heading down to `Heading/h3` (`2332:1711`)
+            // — it is introducing the logos, not making the page's claim.
+            <h2
+              className={cn(
+                'font-display text-ink text-balance font-light',
+                isBar ? 'text-display-lg max-w-[1026px]' : 'text-display-xl max-w-[1026px]',
+              )}
+            >
               {heading}
             </h2>
           ) : null}
@@ -97,15 +135,27 @@ export function LogoWallSection({
         <div className="-mx-gutter flex justify-center overflow-hidden">
           {/* The px compensates the tiles' negative margins so the outer edge
            * keeps its hairline; without it the top and left rules are clipped. */}
-          <ul className="ml-px mt-px flex flex-wrap justify-center lg:flex-nowrap">
+          <ul
+            className={cn('flex flex-wrap justify-center lg:flex-nowrap', !isBar && 'ml-px mt-px')}
+          >
             {(clients ?? []).map((client) => (
-              // 280 × 280 with 64px of side padding, so the artwork gets a
-              // 152px box (`1864:2395`). Adjacent tiles share one hairline —
-              // Figma centres the stroke, so the seams collapse; `-ml-px`
-              // `-mt-px` is the CSS equivalent.
+              // `plates` — 280 × 280 with 64px of side padding, so the artwork
+              // gets a 152px box (`1864:2395`). Adjacent tiles share one
+              // hairline — Figma centres the stroke, so the seams collapse;
+              // `-ml-px` `-mt-px` is the CSS equivalent.
+              //
+              // `bar` — the same 280 width and the same 64px padding, at 100
+              // tall and with no stroke at all (`2471:2112`). Dropping the
+              // plate is what the variant IS, so the negative margins that
+              // collapse the seams go with it.
               <li
                 key={client._id}
-                className="border-line -ml-px -mt-px flex size-[168px] shrink-0 items-center justify-center border px-8 sm:size-[224px] sm:px-12 lg:size-[280px] lg:px-16"
+                className={cn(
+                  'flex shrink-0 items-center justify-center',
+                  isBar
+                    ? 'h-[100px] w-[168px] px-8 sm:w-[224px] sm:px-12 lg:w-[280px] lg:px-16'
+                    : 'border-line -ml-px -mt-px size-[168px] border px-8 sm:size-[224px] sm:px-12 lg:size-[280px] lg:px-16',
+                )}
               >
                 {/*
                  * Width-filling, natural height. Every mark is trimmed to its

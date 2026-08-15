@@ -91,3 +91,20 @@ export const MissingLogo: Story = {
   },
   globals: { backgrounds: { value: 'bone' } },
 }
+
+/**
+ * `layout: bar` — the partner page's band (`2332:1708`), #92. The same six
+ * marks with the plate dropped and the tile at 100 tall, under a 36px heading
+ * in a 64px strip: a footnote to the heading rather than the band's subject.
+ */
+export const Bar: Story = {
+  args: seededSectionArgs('partners-sanity', 'logoWallSection'),
+  parameters: { design: figmaDesign('2332:1708') },
+  globals: { backgrounds: { value: 'bone' } },
+}
+
+/** The bar below `lg`, where the row wraps instead of clipping. */
+export const BarMobile: Story = {
+  args: seededSectionArgs('partners-sanity', 'logoWallSection'),
+  globals: { viewport: { value: 'mobile' }, backgrounds: { value: 'bone' } },
+}
