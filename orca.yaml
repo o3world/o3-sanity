@@ -5,11 +5,21 @@
 # "orca.yaml + local") in Orca's repo settings — a repo left on "local only"
 # ignores this file and keeps running whatever command is stored in the app.
 #
-# Both hooks run with cwd set to the worktree, under a non-interactive
-# /bin/bash, and are killed at 120s.
+# Every hook here runs with cwd set to the worktree, under a non-interactive
+# /bin/bash, and is killed at 120s.
 scripts:
   setup: bash scripts/orca-hooks.sh setup
   archive: bash scripts/orca-hooks.sh archive
+
+# Run when a worktree is created from an issue. `{{artifact_url}}` is the only
+# substitution Orca makes, and it is the issue's URL.
+#
+# Orca names a checkout after the session's intent and cannot be told otherwise,
+# so this is where the ticket gets into the branch — which `pnpm wt issue` reads,
+# and so `reap`, `ls` and `rm` after it. It claims the ticket in the same pass:
+# that is the frontier discipline `pnpm wt new` enforces and Orca otherwise skips.
+issueCommand: |
+  bash scripts/orca-hooks.sh issue {{artifact_url}}
 
 # Terminals opened in every new worktree. Left commented out: `pnpm dev` boots
 # both servers on the ports setup just allocated, but starting it before a
@@ -21,4 +31,4 @@ scripts:
 # Other keys Orca reads here, unused for now: worktree.sharedDirectories
 # (git-ignored dirs symlinked in from the main checkout — `prototype/` is
 # handled by the setup hook instead, alongside the env files it belongs with),
-# issueCommand, environmentRecipes.
+# environmentRecipes.

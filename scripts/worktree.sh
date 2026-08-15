@@ -7,13 +7,15 @@
 #   pnpm wt ls            every worktree, its ports, and which servers are up
 #   pnpm wt rm 26         remove the worktree (and its branch, if merged)
 #   pnpm wt reap          remove every worktree whose ticket is closed (--yes to apply)
+#   pnpm wt issue <path>  which ticket a checkout belongs to (exit 1 if none)
 #
 # Orca does the same job from the app side (its worktrees land under
 # ~/orca/workspaces/o3-sanity/) and runs the same provisioning through
 # orca.yaml. Both paths call scripts/worktree-provision.sh, so a checkout is
 # set up identically whichever made it. What this script adds on top is the
 # frontier discipline: it refuses a blocked or already-claimed ticket, and
-# claims the one you asked for.
+# claims the one you asked for — which orca.yaml's `issueCommand` now does on
+# the Orca side, along with putting the ticket into the branch name.
 #
 # Worktrees live in a SIBLING directory, not inside the repo: each one carries
 # its own ~1.1 GB node_modules, and nesting that under the checkout puts it in
@@ -218,9 +220,13 @@ cmd_rm() {
 # Which ticket a checkout belongs to, from its own name or its branch's.
 #
 # `pnpm wt new` writes both as `<issue>-<slug>`, so either answers. Orca names
-# its worktrees after intent instead (`feat-design-system`), which is why a
-# checkout can come back empty here — an unnamed worktree is invisible to the
-# reap, and that is the thing to fix in Orca rather than guess around.
+# its checkout after the session's intent and cannot be told otherwise, so the
+# branch is the only half of the pair its worktrees can carry a ticket in —
+# which is what `issueCommand` renames it for (scripts/orca-hooks.sh issue).
+#
+# Any prefix, because that branch is `<github-login>/…` and a login holds
+# uppercase, digits and hyphens; `o3world/nick/159-x` nests one deeper again.
+# The last segment is where the ticket has to be, so match to the final slash.
 issue_of() { # <path> -> issue number, or empty
   local path="$1" branch number
   number="$(basename "$path" | sed -nE 's/^([0-9]+)-.*/\1/p')"
@@ -229,7 +235,21 @@ issue_of() { # <path> -> issue number, or empty
     return 0
   }
   branch="$(git -C "$path" rev-parse --abbrev-ref HEAD 2>/dev/null || true)"
-  sed -nE 's#^[a-z]+/([0-9]+)-.*#\1#p' <<<"$branch"
+  sed -nE 's#^.*/([0-9]+)-.*#\1#p' <<<"$branch"
+}
+
+# The resolver, as a subcommand — `reap` decides what to sweep by it and `rm`
+# finds a checkout by it, so it is worth being able to ask directly which ticket
+# a path belongs to. A path with no ticket exits 1: that is an answer, not a
+# failure, and keeping it off stdout leaves the output parseable.
+cmd_issue() {
+  local path="${1:-}"
+  [[ -n $path ]] || die "usage: pnpm wt issue <path>"
+
+  local issue
+  issue="$(issue_of "$path")"
+  [[ -n $issue ]] || return 1
+  echo "$issue"
 }
 
 # Reap → every checkout whose ticket is closed, gone.
@@ -302,10 +322,11 @@ case "${1:-}" in
   ls | list) cmd_ls ;;
   rm | remove) shift && cmd_rm "$@" ;;
   reap) shift && cmd_reap "$@" ;;
+  issue) shift && cmd_issue "$@" ;;
   *)
     # -E because BSD sed does not take `\?` in a basic regex, and leaves the
     # `#` on every usage line when it silently fails to match.
-    sed -n '3,9p' "$0" | sed -E 's/^# ?//'
+    sed -n '3,10p' "$0" | sed -E 's/^# ?//'
     exit 1
     ;;
 esac

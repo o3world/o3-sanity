@@ -15,6 +15,7 @@ cd ../o3-sanity-worktrees/26-seo-extraction-discipline && claude
 # …work the ticket…
 pnpm wt rm 26        # after it's merged
 pnpm wt reap         # or sweep every checkout whose ticket is closed
+pnpm wt issue <path> # which ticket does this checkout belong to?
 ```
 
 `pnpm frontier` prints every open child of a parent issue as `READY`,
@@ -37,11 +38,18 @@ Orca creates worktrees from the app side, under
 orca worktree create --repo path:$PWD --name <task> --agent claude --json
 ```
 
-Orca does not know about the frontier, so it will not claim the ticket or
-refuse a blocked one — do that yourself
-(`gh issue edit <n> --add-assignee @me`) before starting work. That is the only
-difference; `pnpm wt new` remains the shorter path when you are working from a
-ticket number.
+Create it **from an issue** and `orca.yaml`'s `issueCommand` runs
+`scripts/orca-hooks.sh issue`, which claims the ticket and renames the branch to
+carry its number — `NickO3/wayfinder-map` becomes `NickO3/159-wayfinder-map`.
+Orca names a checkout after the session's intent and cannot be told otherwise,
+so the branch is the only half of the pair that can hold the ticket; putting it
+there is what lets `wt issue`, and so `reap`, `ls` and `rm`, place the checkout
+at all.
+
+Created any other way, nothing claims the ticket and nothing binds the checkout
+to it. Orca still will not refuse a blocked ticket the way `pnpm wt new` does —
+check `pnpm frontier` first. `pnpm wt new` remains the shorter path when you are
+working from a ticket number.
 
 Orca reads `orca.yaml` only when the repo's command source is set to
 **orca.yaml** (or _orca.yaml + local_) in its repo settings. A repo left on
@@ -104,9 +112,14 @@ lists them all, and they should all be removed when done.
 `pnpm wt reap` does the same for every checkout at once, asking `gh` whether
 each one's ticket is closed. It reports and stops — pass `--yes` to apply. A
 checkout is kept when its ticket is open, when the tree is dirty, or when
-nothing in its name or branch says which ticket it belongs to. That last case
-is every Orca worktree, which is named after intent rather than `<issue>-<slug>`
-and so cannot be swept; name them for the ticket if you want them reaped.
+nothing in its name or branch says which ticket it belongs to.
+
+`pnpm wt issue <path>` is that last question on its own — the ticket a checkout
+belongs to, or exit 1. `reap` decides what to sweep by it and `rm <n>` finds a
+checkout by it, so it is the one place to look when a worktree is being kept and
+you cannot see why. A worktree Orca made before `issueCommand` existed is the
+usual answer: nothing put the ticket in its branch, so rename it by hand
+(`git branch -m <login>/<issue>-<name>`) if you want it swept.
 
 Reaping is the step that was missing while `wt new` ran at every claim and
 nothing ran at any close. By August 2026 twenty checkouts for long-closed
