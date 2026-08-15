@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { BrandMark } from '@o3/ui'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
-import { resolveButtonHref } from '@/content/ButtonLink'
+import { resolveButtonHref } from '@/content/buttonDestination'
 
 interface SiteFooterProps {
   settings: SITE_SETTINGS_QUERY_RESULT

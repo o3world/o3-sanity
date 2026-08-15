@@ -1,22 +1,9 @@
 import Link from 'next/link'
 import { stegaClean } from '@sanity/client/stega'
 
-import { Button } from '@o3/ui'
+import { ArrowIcon, Button, buttonVariants, cn, type ButtonProps } from '@o3/ui'
 
-import { hrefForDoc } from '@/content/documents/urls'
-
-/**
- * Structural button shape — every query projects buttons as
- * `{..., "target": target->{_type, title, "slug": slug.current}}`, so the
- * generated shapes (heroSection.button, navItems[], layoutSection button
- * items, …) are all assignable here without per-site casts.
- */
-export interface ButtonLinkData {
-  label?: string | null
-  variant?: string | null
-  href?: string | null
-  target?: { _type: string; title?: string | null; slug?: string | null } | null
-}
+import { buttonDestination, type ButtonLinkData } from '@/content/buttonDestination'
 
 const VARIANTS = ['dark', 'light', 'ghost'] as const
 type ButtonVariant = (typeof VARIANTS)[number]
@@ -30,11 +17,6 @@ type ButtonVariant = (typeof VARIANTS)[number]
  */
 const LEGACY_VARIANTS: Record<string, ButtonVariant> = { brand: 'dark', inverse: 'light' }
 
-export function resolveButtonHref(button: ButtonLinkData): string {
-  const href = button.target ? hrefForDoc(button.target) : (button.href ?? '/')
-  return stegaClean(href) ?? '/'
-}
-
 function resolveVariant(value: string | null | undefined): ButtonVariant {
   const clean = stegaClean(value) ?? ''
   if (VARIANTS.includes(clean as ButtonVariant)) return clean as ButtonVariant
@@ -42,8 +24,19 @@ function resolveVariant(value: string | null | undefined): ButtonVariant {
 }
 
 /**
- * The one button renderer: resolves internal-reference-or-external-URL into an
- * href and renders the `@o3/ui` Button in the editor-chosen variant.
+ * The one button renderer.
+ *
+ * **It picks its own element from its own data.** A button with a destination
+ * is a link and renders one; a button with none acts on the page it is
+ * standing on and renders a real `<button>`. Nothing is passed in to decide
+ * that — the caller has no say, because a visitor's ability to middle-click a
+ * link, and a screen reader's ability to announce one, follow from what the
+ * editor filled in rather than from where the button was placed.
+ *
+ * That is why this is one element rather than a `<button>` inside an `<a>`:
+ * nested interactive elements are what made the old markup announce twice and
+ * swallow a cmd-click. `buttonVariants` is the shared drawing, applied to
+ * whichever element wins.
  *
  * `arrow` is a render-side prop, not a schema field, for the reason #38 gives:
  * Figma's `Show right icon` toggles the presence of a child rather than the
@@ -58,6 +51,7 @@ export function ButtonLink({
   variant,
   className,
   buttonClassName,
+  control,
 }: {
   button: ButtonLinkData | null | undefined
   arrow?: boolean
@@ -70,30 +64,62 @@ export function ButtonLink({
    * Settings editor picks. Content bands leave this alone.
    */
   variant?: ButtonVariant
-  /** Styles the `<Link>`. Positioning and spacing — never the fill. */
+  /** Positioning and spacing on the rendered element — never the fill. */
   className?: string
   /**
-   * Styles the `<Button>` itself, merged into its variant classes.
+   * Overrides on the rendered element's own fill classes, merged over its
+   * variant.
    *
-   * The wrapping `Link` is what `className` reaches, so a caller that needs to
-   * reach the FILL has nowhere to put it — and the nav does: its button has to
-   * invert with the bar's ink flip, and `Button` already owns both fills. This
-   * is the seam for a caller whose surface changes underneath a button, not a
-   * general escape hatch; a fill a *document* chooses is `variant`.
+   * This is the seam for a caller whose surface changes underneath a button —
+   * the nav's has to invert with the bar's ink flip — not a general escape
+   * hatch; a fill a *document* chooses is `variant`.
    */
   buttonClassName?: string
+  /**
+   * Attributes for the control arm, applied only when there is no destination.
+   * A link has no `type` and cannot be disabled, so a button that goes
+   * somewhere ignores them.
+   */
+  control?: Pick<ButtonProps, 'type' | 'aria-disabled' | 'aria-describedby'>
 }) {
   if (!button?.label) return null
-  return (
-    <Link href={resolveButtonHref(button)} className={className}>
+
+  const fill = variant ?? resolveVariant(button.variant)
+  const destination = buttonDestination(button)
+  // One expression for both arms: the label and whatever trails it are the
+  // same drawing whichever element is underneath.
+  const content = (
+    <>
+      {button.label}
+      {arrow ? <ArrowIcon /> : null}
+    </>
+  )
+
+  if (destination.kind === 'none') {
+    return (
       <Button
-        variant={variant ?? resolveVariant(button.variant)}
+        variant={fill}
         size={size}
-        arrow={arrow}
-        className={buttonClassName}
+        className={cn(className, buttonClassName)}
+        type="button"
+        {...control}
       >
-        {button.label}
+        {content}
       </Button>
+    )
+  }
+
+  return (
+    <Link
+      href={destination.href}
+      className={cn(buttonVariants({ variant: fill, size }), className, buttonClassName)}
+      // A URL that leaves the site opens beside the page the visitor was
+      // reading, and `noopener` keeps the opened page off `window.opener`.
+      {...(destination.kind === 'external' && destination.offsite
+        ? { target: '_blank', rel: 'noopener noreferrer' }
+        : {})}
+    >
+      {content}
     </Link>
   )
 }

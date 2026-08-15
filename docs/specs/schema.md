@@ -28,7 +28,7 @@ Resolves wayfinder ticket #6. Inputs: the content model (ticket #5, `CONTEXT.md`
 ## Shared objects
 
 - **`seo`** — title, description, ogImage, noIndex. (Yoast fields map here in migration.)
-- **`button`** — label, target (internal reference **or** external URL), variant (`brand | inverse | ghost`).
+- **`button`** — label, a destination, variant (`brand | inverse | ghost`). The destination is a union of four arms — nothing, `target` (internal reference), `href` (external URL), `anchor` (a named place on the current page) — read in that precedence, and the renderer picks its element from the answer: a destination draws a link, no destination draws a `<button>`.
 - **`figure`** — image, alt (req), caption (optional).
 - **`stat`** — value (string — supports "89% → 114%"), label.
 - **`chapter`** — kicker, title, body (Portable Text), `details[]` ({label (req), body} — the frame's hairline term/description rows, `2274:4009`). A member of `caseStudy.story`, never a document.
@@ -61,7 +61,7 @@ Surfaced by #46/#47 and built against the About (`1924:5344`) and Solutions (`19
 - **`screenGridSection`** — `screens[]` ({media (req), `tone` (`ink | brand | bone`), `span` (`standard | wide`)}). The case-study frame's tiled product screenshots on gradient plates (`2230:3315`, `2230:7559`, #97): a two-column grid of 32px-radius plates, each clipping the screenshot inside it, a `wide` tile taking both columns. Registered as a general section block rather than a case-study element — ADR 0018's showcase rule is that every band the case study needs is available to `page.sections` too. Plate height is **not** a field: it follows `span` (ADR 0006).
 - **`listingSection`** — lists pages by `pageType` via their `card` fieldset. ⚠️ **Orphaned.** It was specced to power `/services`, and [ADR 0013](../adr/0013-services-consolidate-into-solutions.md) removed that route: the Solutions frame draws no listing, no `service` page exists, and nothing else lists by `pageType`. The block, `pageType: 'service'` and `page.card` now have no consumer — a schema conversation raised on #47, not something a page layer deletes on the way past.
 
-- **`formSection`** — eyebrow, `heading` (req), `note`, `reasons[]` (req), `consentLabel`, `submitLabel` (req). The inquiry band on `/contact` (#58). **Its input set is code, not schema** — the six fields are transcribed from the Gravity Form 1 the live site serves, and `reasons` is the only part an editor owns ([ADR 0014](../adr/0014-form-fields-are-code-form-copy-is-content.md)). ⚠️ **No submission handler and no destination exist**, so the renderer disables its submit and says so on the page; #58 stays open for both.
+- **`formSection`** — eyebrow, `heading` (req), `note`, `reasons[]` (req), `consentLabel`, `button`. The inquiry band on `/contact` (#58). Its submit is an ordinary `button` instance, so it offers everything any other button does; an empty destination is what keeps it a control. **Its input set is code, not schema** — the six fields are transcribed from the Gravity Form 1 the live site serves, and `reasons` is the only part an editor owns ([ADR 0014](../adr/0014-form-fields-are-code-form-copy-is-content.md)). ⚠️ **No submission handler and no destination exist**, so the renderer disables its submit and says so on the page; #58 stays open for both.
 
 No FAQ/accordion/tabs until a designed page needs them.
 

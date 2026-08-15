@@ -92,6 +92,9 @@ const SECTION_FIELDS = /* groq */ `
   _type == "ctaSection" => {
     button{..., ${BUTTON_TARGET}}
   },
+  _type == "formSection" => {
+    button{..., ${BUTTON_TARGET}}
+  },
   _type == "personGridSection" => {
     ${
       /* `_key` is the ARRAY ITEM's, not the person's, and the dereference

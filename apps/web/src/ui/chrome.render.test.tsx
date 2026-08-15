@@ -123,9 +123,10 @@ describe('the nav bar’s pinned, dark-ink default', () => {
     // Nick's reference of both states (2026-08-02) draws it red on the light
     // pill and the dark one alike, as the prototype's `.o3btn` did. The red is
     // forced by the chrome, not a `Button` variant an editor could reach.
-    // `rounded-btn` is `Button`'s own base class, which is what separates the
-    // two nav buttons from the hamburger's plain `<button>` trigger.
-    const buttons = (navHtml.match(/<button[^>]*>/g) ?? []).filter((b) => b.includes('rounded-btn'))
+    // They are anchors: the nav button carries a destination, and a button
+    // with one renders a link. `rounded-btn` is the button's own base class,
+    // which is what separates the two of them from the plain nav links.
+    const buttons = (navHtml.match(/<a [^>]*>/g) ?? []).filter((b) => b.includes('rounded-btn'))
     expect(buttons.length, 'the nav button was not found at all').toBe(2) // 1440 + 402
     for (const button of buttons) {
       expect(button).toContain('bg-brand')
@@ -159,8 +160,12 @@ describe('the nav bar’s pinned, dark-ink default', () => {
 
   it('leaves the ink to the bar rather than pinning it on each link', () => {
     // A `text-white` on a link would survive the flip and strand one word in
-    // white on a light band.
-    const links = navHtml.match(/<a [^>]*class="[^"]*text-button[^"]*"/g) ?? []
+    // white on a light band. The nav button is an anchor too and is excluded
+    // by `rounded-btn`: its white label is the brand-red override's, and that
+    // one is meant to survive the flip.
+    const links = (navHtml.match(/<a [^>]*class="[^"]*text-button[^"]*"/g) ?? []).filter(
+      (link) => !link.includes('rounded-btn'),
+    )
     expect(links.length, 'the nav links were not found at all').toBeGreaterThan(0)
     for (const link of links) expect(link).not.toContain('text-white')
   })

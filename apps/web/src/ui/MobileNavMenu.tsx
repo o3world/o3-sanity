@@ -6,7 +6,8 @@ import Link from 'next/link'
 import { MenuIcon, Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from '@o3/ui'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
-import { ButtonLink, resolveButtonHref } from '@/content/ButtonLink'
+import { ButtonLink } from '@/content/ButtonLink'
+import { resolveButtonHref } from '@/content/buttonDestination'
 
 type Settings = NonNullable<SITE_SETTINGS_QUERY_RESULT>
 

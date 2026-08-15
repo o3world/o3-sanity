@@ -489,6 +489,11 @@ export const inFlightSection = defineSectionBlock({
  * authoring the form, not making a design decision on the canvas. `surface` is
  * the block's whole roster, declared in `src/knobs/formSection.ts`.
  *
+ * The submit is an ordinary `button` instance, so it carries the same fields
+ * and the same knob as a button in a hero or a nav — an instance is configured
+ * by its component, and a form button that re-declared its own words would be
+ * a second declaration of one (ADR 0023).
+ *
  * ⚠️ **There is no submission handler and no destination.** #58's other two
  * halves are open, so the renderer disables its submit and says so on the
  * page. This block is honest scaffolding, not a working form.
@@ -521,13 +526,14 @@ export const formSection = defineSectionBlock({
         'The opt-in checkbox beside the submit. Leave empty and no checkbox is drawn — an opt-in nobody asked for is worse than none.',
     }),
     defineField({
-      name: 'submitLabel',
-      type: 'string',
-      description: 'The submit button’s words. Disabled until #58 has a handler behind it.',
+      name: 'button',
+      type: 'button',
+      description:
+        'The submit. Leave its destination empty and it stays a control; give it one and it becomes a link like any other button. Disabled until #58 has a handler behind it.',
       // Optional, not required(): the renderer absorbs absence with the same
       // 'Send message' fallback, so a missing value costs nothing (skill rule:
       // fields the renderer can absorb stay optional).
-      initialValue: 'Send message',
+      initialValue: { _type: 'button', label: 'Send message' },
     }),
   ],
   preview: { select: { title: 'heading', subtitle: 'eyebrow' } },

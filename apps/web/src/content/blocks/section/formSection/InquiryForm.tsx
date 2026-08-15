@@ -5,7 +5,10 @@ import { useState, type ChangeEvent, type FocusEvent, type FormEvent } from 'rea
 // cannot resolve under Storybook's Next preset. A lint rule enforces this.
 import { stegaClean } from '@sanity/client/stega'
 
-import { Button, FIELD_CONTROL_CLASS, FormField, type Surface } from '@o3/ui'
+import { FIELD_CONTROL_CLASS, FormField, type Surface } from '@o3/ui'
+
+import { ButtonLink } from '@/content/ButtonLink'
+import type { ButtonLinkData } from '@/content/buttonDestination'
 
 /**
  * The field set, fixed in code.
@@ -62,7 +65,12 @@ export interface InquiryFormProps {
   reasons: readonly string[]
   /** The opt-in checkbox. Absent means no checkbox. */
   consentLabel?: string | null
-  submitLabel: string
+  /**
+   * The submit, as an ordinary button instance. An empty destination is what
+   * keeps it a `<button>`; an editor who points it somewhere gets a link,
+   * which is the same answer every other button gives.
+   */
+  button?: ButtonLinkData | null
   /**
    * The band's resolved surface — the submit's fill follows it. `Button`'s
    * `dark` variant is ink-on-white and disappears on an ink band, and a fill
@@ -70,6 +78,9 @@ export interface InquiryFormProps {
    */
   surface: Surface
 }
+
+/** What the submit says when the document has not named it. */
+const SUBMIT_LABEL = 'Send message'
 
 /**
  * The inquiry form's controls and their client-side state.
@@ -82,7 +93,9 @@ export interface InquiryFormProps {
  * - `onSubmit` calls `preventDefault()` unconditionally — that is the no-op,
  *   and it covers Enter in a text input as well as the button;
  * - the button is `aria-disabled` (focusable, so its notice is announced) and
- *   a visible notice above it says why;
+ *   a visible notice above it says why. Both ride the control arm, so an
+ *   editor who gives the submit a destination gets a link that goes there
+ *   instead — which is a form with no submit, and visibly so;
  * - there is no success state, no optimistic message, and nothing that could
  *   be mistaken for "sent".
  *
@@ -90,7 +103,9 @@ export interface InquiryFormProps {
  * #58's other two halves land, this component gains a handler and loses the
  * notice — the fields, the labels and the validation stay as they are.
  */
-export function InquiryForm({ reasons, consentLabel, submitLabel, surface }: InquiryFormProps) {
+export function InquiryForm({ reasons, consentLabel, button, surface }: InquiryFormProps) {
+  const submit: ButtonLinkData = button?.label ? button : { ...(button ?? {}), label: SUBMIT_LABEL }
+
   const [values, setValues] = useState<Record<FieldName, string>>(EMPTY_VALUES)
   const [errors, setErrors] = useState<Partial<Record<FieldName, string>>>({})
   const [consent, setConsent] = useState(false)
@@ -243,15 +258,16 @@ export function InquiryForm({ reasons, consentLabel, submitLabel, surface }: Inq
           phone on this page and a person will answer.
         </p>
         <div>
-          <Button
-            type="submit"
+          <ButtonLink
+            button={submit}
             size="large"
             variant={surface === 'ink' ? 'light' : 'dark'}
-            aria-disabled
-            aria-describedby="form-not-connected"
-          >
-            {submitLabel}
-          </Button>
+            control={{
+              type: 'submit',
+              'aria-disabled': true,
+              'aria-describedby': 'form-not-connected',
+            }}
+          />
         </div>
       </div>
     </form>

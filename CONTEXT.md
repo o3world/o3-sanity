@@ -78,6 +78,7 @@ The component-system ontology, and it is deliberately Figma's — the design fil
   - **Not an item.** An item — a panel, a screen — is an inline object with no identity outside its host's array: no registered type, no spec of its own, configured through its host ([ADR 0021](docs/adr/0021-an-array-member-is-its-own-knob-root.md)). The test is whether the thing has a spec of its own or only relative to a host.
 - **Slot** — a rendered area of a component that its parent fills. The Web Components / Vue sense, and only that sense; `CollectionHero`'s decoration slot is the model use.
   - **`asChild` is not a slot.** Radix's helper _replaces_ the rendered element rather than filling an area — that pattern is called `asChild`, its import is spelled `SlotPrimitive`, and "slot" is never said of it. MUI's `slots`/`slotProps` (replaceable internals) is the same trap from the other direction.
+  - **A component choosing its own element is neither.** `ButtonLink` draws a link when its instance carries a destination and a `<button>` when it does not. No caller supplies the element and no area is filled — the component reads its own data — so this is not `asChild` and it is not a slot. It needs no name of its own; it is what a component doing its job looks like.
 
 ### Knobs
 
@@ -139,14 +140,14 @@ Closed vocabulary. If the field you want isn't here and isn't obviously domain-s
 | `note`            | Quieter secondary line (the "Best when…" line)                   | `caption` (reserved: `figure.caption`)               |
 | `media`           | A `figure` on a block                                            | `image` — that's the raw asset field inside `figure` |
 | `heroMedia`       | A document's lead `figure`                                       | `featuredImage`, `banner`                            |
-| `button`          | A single button (type `button`)                                  | `cta`, `link`, `action`                              |
+| `button`          | A single button (type `button`), the form's submit included      | `cta`, `link`, `action`, `submitLabel`               |
+| `anchor`          | A named place on the current page a button jumps to (`button`)   | `id`, `hash`, `fragment`, `jumpTo`                   |
 | `mark`            | The dotted circle beside an item (type `mark`)                   | `icon`, `disc`, `orb` — `orb` is one of its `kind`s  |
 | `date`            | When a leaf object's thing happens (the Live MON / DD marker)    | `publishedAt` — that's a document's publication time |
 | `name`            | A person's or organization's real-world name                     | Anything that isn't a proper noun                    |
 | `surface`         | `white \| bone \| ink` — injected by `defineSectionBlock`        | Never hand-author it                                 |
 | `reasons`         | The form's "Reason" options, in shown order (`formSection`)      | `options`, `choices`                                 |
 | `consentLabel`    | The opt-in checkbox's words; empty = no checkbox (`formSection`) | `consent`, `optIn`                                   |
-| `submitLabel`     | The submit button's words (`formSection`)                        | `buttonText`, `button` — there's no link here        |
 | `story`           | A structured document's interleaved narrative array              | `sections` (a page's flat composition), `chapters`   |
 | `details`         | Term/description rows under a body (`chapter.details`)           | `specs`, `meta`, a second `body`                     |
 | `utilityNavItems` | The brand-property strip's links (`siteSettings`)                | `properties`, `brandLinks`, a second `footerGroup`   |

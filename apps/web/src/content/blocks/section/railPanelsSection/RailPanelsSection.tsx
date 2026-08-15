@@ -277,7 +277,7 @@ export function RailPanelsSection({
                       // label and an arrow, no fill), the editor's own fill
                       // from `lg` up. One element, so the switch has to be
                       // a class rather than a second variant.
-                      className="max-lg:[&_button]:bg-transparent max-lg:[&_button]:px-0 max-lg:[&_button]:text-current"
+                      buttonClassName="max-lg:bg-transparent max-lg:px-0 max-lg:text-current"
                     />
                   </div>
                 ) : null}

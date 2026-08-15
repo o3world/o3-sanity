@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
-import { resolveButtonHref } from '@/content/ButtonLink'
+import { resolveButtonHref } from '@/content/buttonDestination'
 
 interface UtilityNavProps {
   settings: SITE_SETTINGS_QUERY_RESULT
