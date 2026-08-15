@@ -17,7 +17,9 @@ type Alignment = keyof typeof ALIGNMENTS
 
 function resolveAlignment(value: string | null | undefined): Alignment {
   const clean = stegaClean(value) ?? ''
-  return clean in ALIGNMENTS ? (clean as Alignment) : 'start'
+  return Object.prototype.hasOwnProperty.call(ALIGNMENTS, clean)
+    ? (clean as Alignment)
+    : 'start'
 }
 
 /**

@@ -231,13 +231,13 @@ function resolveMenu(chrome: WpChrome, slug: string, siteUrl: string): ResolvedI
   return out
 }
 
-function button(item: ResolvedItem, key: string, variant?: 'dark' | 'light' | 'ghost') {
+function button(item: ResolvedItem, key: string, contrast?: 'dark' | 'light' | 'ghost') {
   return {
     _type: 'button' as const,
     _key: key,
     label: item.label,
     href: item.href,
-    ...(variant ? { variant } : {}),
+    ...(contrast ? { contrast } : {}),
   }
 }
 
@@ -340,10 +340,11 @@ export function mapSiteSettings(
       _type: 'button' as const,
       label: copy.primaryButtonLabel,
       href: contact?.href ?? '/contact',
-      // `Button / Solid` on the pill is WHITE with an ink label (`1710:2250`),
-      // not brand red — no red button appears on any canonical frame. #42
-      // renamed the enum to say so: `inverse` became `light`.
-      variant: 'light' as const,
+      // The pill's button is `Theme=White` (`2205:1298`, instanced at
+      // `2225:2877`) — white fill, ink label. Written explicitly rather than
+      // left to Auto, because chrome resolving to the same value is a fact
+      // about the nav's surface and this is a fact about the design.
+      contrast: 'light' as const,
     },
     footerTagline: copy.footerTagline,
     footerGroups: groups.map((group, g) => ({

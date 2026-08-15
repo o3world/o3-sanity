@@ -71,7 +71,13 @@ export function resolveContrast(stored: unknown, surface: BandSurface | undefine
 
   if (key === 'dark' || key === 'light' || key === 'ghost') return key
 
-  const legacy = key === undefined ? undefined : LEGACY_FILLS[key]
+  // `hasOwnProperty`, not a bare index: a stored `"constructor"` would
+  // otherwise resolve off `Object.prototype` and be returned as a fill, which
+  // is branch 3's case reaching branch 2's exit.
+  const legacy =
+    key !== undefined && Object.prototype.hasOwnProperty.call(LEGACY_FILLS, key)
+      ? LEGACY_FILLS[key]
+      : undefined
   if (legacy) return legacy
 
   return surface ? READABLE_ON[surface] : 'dark'

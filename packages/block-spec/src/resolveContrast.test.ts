@@ -51,6 +51,12 @@ const rows: {
   { what: 'legacy brand on ink', stored: 'brand', surface: 'ink', fill: 'dark' },
   { what: 'legacy inverse', stored: 'inverse', surface: 'ink', fill: 'light' },
   { what: 'legacy inverse on white', stored: 'inverse', surface: 'white', fill: 'light' },
+  // A stored value naming an `Object.prototype` member is still just an
+  // unrecognised value, and branch 3 owns it. A bare index would hand back the
+  // inherited member as a fill and paint the button with neither.
+  { what: 'a prototype member on ink', stored: 'constructor', surface: 'ink', fill: 'light' },
+  { what: 'a prototype member on white', stored: 'toString', surface: 'white', fill: 'dark' },
+  { what: 'a prototype member with no surface', stored: 'valueOf', surface: undefined, fill: 'dark' },
 
   // Anything else resolves like Auto rather than like dark, because that is
   // what the knob's control is showing the editor: `resolveKnobValue` falls an

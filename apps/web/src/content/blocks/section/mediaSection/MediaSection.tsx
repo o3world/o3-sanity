@@ -80,24 +80,26 @@ export function MediaSection({ media, variant, width, surface }: MediaSectionPro
 
   if (fullBleed) {
     return (
-      <section className={surfaceClass}>
-        <figure>
-          <div className="relative aspect-[402/257] overflow-hidden lg:aspect-[1440/576]">
-            <SanityImage
-              source={media.image}
-              alt={media.alt}
-              ratio="fill"
-              width={2400}
-              sizes="100vw"
-            />
-          </div>
-          {media.caption ? (
-            <figcaption className="text-fg-subtle px-gutter mt-4 text-sm">
-              {media.caption}
-            </figcaption>
-          ) : null}
-        </figure>
-      </section>
+      <SurfaceProvider surface={resolved}>
+        <section className={surfaceClass}>
+          <figure>
+            <div className="relative aspect-[402/257] overflow-hidden lg:aspect-[1440/576]">
+              <SanityImage
+                source={media.image}
+                alt={media.alt}
+                ratio="fill"
+                width={2400}
+                sizes="100vw"
+              />
+            </div>
+            {media.caption ? (
+              <figcaption className="text-fg-subtle px-gutter mt-4 text-sm">
+                {media.caption}
+              </figcaption>
+            ) : null}
+          </figure>
+        </section>
+      </SurfaceProvider>
     )
   }
 

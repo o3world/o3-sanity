@@ -77,7 +77,10 @@ export function ButtonLink({
   // which is what all of them were passed by hand. A name the set does not hold
   // — `none`, or a value from a dataset the schema has moved past — draws
   // nothing, because a button with no icon is a real answer.
-  const Icon = BUTTON_ICONS[stegaClean(button.icon) || 'arrow']
+  const iconName = stegaClean(button.icon) || 'arrow'
+  const Icon = Object.prototype.hasOwnProperty.call(BUTTON_ICONS, iconName)
+    ? BUTTON_ICONS[iconName]
+    : undefined
   const icon = Icon ? <Icon /> : null
 
   if (destination.kind === 'none') {
