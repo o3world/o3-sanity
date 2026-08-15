@@ -58,16 +58,16 @@ describe('the dataset an unconfigured checkout resolves to', () => {
 })
 
 /**
- * The default dataset being the private one is what made #100 invisible: an
- * unconfigured checkout read `development` anonymously, got `200 {"result":
- * null}` for every query, and served 404s and empty listings without a line in
- * the log. `readsNeedToken` is what the web app's fetch checks before it
- * believes an empty answer, so the two constants have to stay in step — the
- * failing combination is precisely the one a checkout falls into by default.
+ * `readsNeedToken` is what the web app's fetch checks before it believes an
+ * empty answer, because Content Lake answers a private dataset's anonymous
+ * query with `200 {"result": null}` rather than a 401 (#100). An unconfigured
+ * checkout has no `SANITY_API_READ_TOKEN`, so the dataset it lands on by
+ * default has to be one that reads without one — otherwise every query comes
+ * back empty and nothing in the log says why.
  */
 describe('which datasets a tokenless read can trust', () => {
-  it('needs a token for the dataset an unconfigured checkout lands on', () => {
-    expect(readsNeedToken(DEFAULT_DATASET)).toBe(true)
+  it('reads the dataset an unconfigured checkout lands on without a token', () => {
+    expect(readsNeedToken(DEFAULT_DATASET)).toBe(false)
   })
 
   it('does not need one for a public dataset', () => {
