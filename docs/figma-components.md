@@ -104,9 +104,11 @@ decision — `base` is the set's geometry, `large` adds 4px of vertical padding
 for a section-level CTA — and it is declared as authored rather than read.
 
 The set's `Theme=Red` is not built, and neither is the red hover the Black and
-White themes draw. The fill vocabulary is a **schema enum** (`button.variant`,
-stored in committed seed JSON and regenerated into types), so it moves with the
-content model rather than with the component: that is #137's contrast work.
+White themes draw. The fill vocabulary is a **knob** (`button.contrast`, stored
+in committed seed JSON and regenerated into types), so it moves with the content
+model rather than with the component. Its default, `auto`, is not a fill at all:
+it reads the surface the instance stands on and picks between `Theme=Black` and
+`Theme=White` — ADR 0024.
 
 ### The `Footer` component became canonical (2026-08)
 

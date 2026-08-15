@@ -129,6 +129,10 @@ export {
   SURFACES,
 } from './components/section-shell'
 export type { BandStep, SectionShellProps, SectionWidth, Surface } from './components/section-shell'
+// The band's surface, readable from inside it. `SectionShell` and
+// `CollectionHero` declare their own; a bespoke band or a piece of chrome
+// declares its own with this (#147, ADR 0024).
+export { SurfaceProvider, useSurface } from './components/surface-context'
 
 // Stat
 export { Stat, statLabelVariants } from './components/stat'

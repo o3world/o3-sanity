@@ -100,12 +100,12 @@ What earns a place on the bar: **`surface`, and the one axis that changes what t
 
 Every knob belongs to a **knob surface** — the chrome that delivers it, decided by the container it configures, not by where it is declared:
 
-| Surface    | Configures                              | Example                               |
-| ---------- | --------------------------------------- | ------------------------------------- |
-| `band`     | the full-width strip the block occupies | `surface`                             |
-| `block`    | the block itself                        | `variant`, `layout`, `decoration`     |
-| `item`     | one member of the block's array         | a screen's `tone`                     |
-| `instance` | one placed occurrence of a component    | a mark's `kind`, a button's `variant` |
+| Surface    | Configures                              | Example                                |
+| ---------- | --------------------------------------- | -------------------------------------- |
+| `band`     | the full-width strip the block occupies | `surface`                              |
+| `block`    | the block itself                        | `variant`, `layout`, `decoration`      |
+| `item`     | one member of the block's array         | a screen's `tone`                      |
+| `instance` | one placed occurrence of a component    | a mark's `kind`, a button's `contrast` |
 
 **An array member is its own knob root** ([ADR 0021](docs/adr/0021-an-array-member-is-its-own-knob-root.md)). A screen's own styling is declared with `defineItemKnobs` against the screen — `tone`, not `screens[].tone` — and the block hangs that spec off the array it belongs to: `defineBlockKnobs({…, items: {screens: screenKnobs}})`. Its schema fields come from `defineArrayItem`, the same splice `defineSectionBlock` uses. Every reader and writer then works unchanged, because each one takes a path relative to the root it was handed: `visibleKnobs` resolves against one named screen, a gate on a sibling is an ordinary same-root gate, and `knobPatch` takes the member's path as its root. A member's spec is reached through its host block and never through its `_type` — member names are local to their array, so two blocks may each declare a `screen`.
 

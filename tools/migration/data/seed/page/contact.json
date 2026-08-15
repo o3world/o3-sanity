@@ -130,7 +130,7 @@
           "_key": "reach-cta",
           "label": "Email us",
           "href": "mailto:hello@o3world.com",
-          "variant": "dark"
+          "contrast": "dark"
         }
       ]
     },

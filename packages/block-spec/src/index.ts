@@ -53,6 +53,10 @@ export {
   retainsPlaceholder,
   type PlaceholderReferences,
 } from './placeholder'
+// What a button DRAWS for a stored contrast, beside what a CONTROL displays
+// for a stored knob value — the first context-resolved knob (#147, ADR 0024).
+export { resolveContrast } from './resolveContrast'
+export type { BandSurface, ButtonFill } from './resolveContrast'
 export { resolveKnobValue, UNRESOLVED_KNOB_TITLE } from './resolveKnobValue'
 export { showWhenSatisfied } from './showWhen'
 // The read leg and the write leg, exported as the pair they are — see

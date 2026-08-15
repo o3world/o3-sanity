@@ -3,7 +3,15 @@
 import { useState } from 'react'
 import Link from 'next/link'
 
-import { MenuIcon, Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from '@o3/ui'
+import {
+  MenuIcon,
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+  SurfaceProvider,
+} from '@o3/ui'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { ButtonLink } from '@/content/ButtonLink'
@@ -44,27 +52,31 @@ export function MobileNavMenu({ items, button }: MobileNavMenuProps) {
         <MenuIcon />
       </SheetTrigger>
 
-      <SheetContent side="right" className="bg-ink-deep w-full text-white sm:max-w-sm">
-        <SheetTitle className="sr-only">Menu</SheetTitle>
-        <nav aria-label="Menu" className="flex flex-col gap-8 px-5 pt-24">
-          {items.map((item, i) => (
-            // Closing on navigation is manual: a client-side route change does
-            // not unmount the portal, so the panel would survive the link.
-            <SheetClose asChild key={item._key ?? `nav-${i}`}>
-              <Link href={resolveButtonHref(item)} className="text-button text-white">
-                {item.label}
-              </Link>
-            </SheetClose>
-          ))}
-          {button ? (
-            <SheetClose asChild>
-              <div className="mt-4 self-start">
-                <ButtonLink button={button} arrow />
-              </div>
-            </SheetClose>
-          ) : null}
-        </nav>
-      </SheetContent>
+      {/* The panel is its own dark field, portalled out of the bar — so it
+          declares the surface rather than inheriting the bar's. */}
+      <SurfaceProvider surface="ink">
+        <SheetContent side="right" className="bg-ink-deep w-full text-white sm:max-w-sm">
+          <SheetTitle className="sr-only">Menu</SheetTitle>
+          <nav aria-label="Menu" className="flex flex-col gap-8 px-5 pt-24">
+            {items.map((item, i) => (
+              // Closing on navigation is manual: a client-side route change does
+              // not unmount the portal, so the panel would survive the link.
+              <SheetClose asChild key={item._key ?? `nav-${i}`}>
+                <Link href={resolveButtonHref(item)} className="text-button text-white">
+                  {item.label}
+                </Link>
+              </SheetClose>
+            ))}
+            {button ? (
+              <SheetClose asChild>
+                <div className="mt-4 self-start">
+                  <ButtonLink button={button} arrow />
+                </div>
+              </SheetClose>
+            ) : null}
+          </nav>
+        </SheetContent>
+      </SurfaceProvider>
     </Sheet>
   )
 }

@@ -21,14 +21,28 @@ export const buttonKnobs = defineObjectKnobs({
   title: 'Button',
   knobs: [
     knob({
-      name: 'variant',
-      title: 'Variant',
+      name: 'contrast',
+      title: 'Contrast',
       description:
-        'Solid dark on a light band, solid light on ink or over a card scrim, or ghost. There is no red button in the canonical frames — brand red arrives as a gradient.',
-      // Figma's `Button / Solid` (136:754) fills plus `Button / Ghost`
-      // (264:260). See docs/figma-components.md → "Button is divergent".
-      options: ['dark', 'light', 'ghost'],
-      initialValue: 'dark',
+        'How the button stands out from what is behind it. Auto reads the band underneath and picks the readable fill; the rest override it. There is no red button in the canonical frames — brand red arrives as a gradient.',
+      /*
+       * **Contrast, not variant** (ADR 0024). `variant` is already this repo's
+       * word for the axis that changes what a block *is* — `heroSection`,
+       * `mediaSection` and `collectionHero` all carry one — and an emphasis
+       * axis added later beside a knob called `variant` would leave nobody
+       * able to say which is which. The axis this names is the button's
+       * relationship to its background, and that is what it is called.
+       *
+       * `auto` defers to `resolveContrast(stored, surface)` — the selector
+       * exists and one of its options declines to answer, which is what makes
+       * this a knob and a context-resolved value at once.
+       *
+       * The three fills are Figma's `Button` set (`2134:1785`) `Theme=Black` /
+       * `Theme=White`, plus `Button / Ghost` (`264:260`). See
+       * docs/figma-components.md → "Button is divergent".
+       */
+      options: ['auto', 'dark', 'light', 'ghost'],
+      initialValue: 'auto',
     }),
   ],
 })

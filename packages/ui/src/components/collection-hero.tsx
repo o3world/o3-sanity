@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 
 import { cn } from '../lib/utils'
 import { Eyebrow } from './eyebrow'
+import { SurfaceProvider } from './surface-context'
 
 export interface CollectionHeroProps {
   /** The 16px uppercase kicker — "WORK". */
@@ -74,40 +75,45 @@ export function CollectionHero({
   const interior = variant === 'interior'
 
   return (
-    <section
-      className={cn(
-        'px-gutter pb-band-sm relative isolate overflow-hidden text-white lg:pb-16',
-        // `2101:789`: the Interior Hero's container is 192px 0 64px on #0A0A0B.
-        interior ? 'bg-ink pt-[192px]' : 'bg-ink-warm pt-[164px]',
-        className,
-      )}
-    >
-      {decoration}
-      <div
+    // Both generations paint a dark band — `ink-warm` at `band`, `ink` at
+    // `interior` — so the band declares `ink` either way. The block's own
+    // `surface` field never reaches this component and could not change it.
+    <SurfaceProvider surface="ink">
+      <section
         className={cn(
-          'max-w-section relative mx-auto flex flex-col gap-8',
-          centred
-            ? 'items-center text-center'
-            : 'items-start justify-between lg:flex-row lg:items-center',
-          // The redesigned band sits both columns on one baseline instead.
-          !centred && interior && 'lg:items-end',
+          'px-gutter pb-band-sm relative isolate overflow-hidden text-white lg:pb-16',
+          // `2101:789`: the Interior Hero's container is 192px 0 64px on #0A0A0B.
+          interior ? 'bg-ink pt-[192px]' : 'bg-ink-warm pt-[164px]',
+          className,
         )}
       >
-        <div className={cn('flex flex-col gap-4', centred ? 'items-center' : 'lg:w-[588px]')}>
-          {eyebrow ? <Eyebrow tone="inverse">{eyebrow}</Eyebrow> : null}
-          <h1
-            className={cn(
-              'font-display text-balance',
-              centred ? 'text-cta text-on-ink max-w-[650px]' : 'text-display-xl',
-            )}
-          >
-            {heading}
-          </h1>
+        {decoration}
+        <div
+          className={cn(
+            'max-w-section relative mx-auto flex flex-col gap-8',
+            centred
+              ? 'items-center text-center'
+              : 'items-start justify-between lg:flex-row lg:items-center',
+            // The redesigned band sits both columns on one baseline instead.
+            !centred && interior && 'lg:items-end',
+          )}
+        >
+          <div className={cn('flex flex-col gap-4', centred ? 'items-center' : 'lg:w-[588px]')}>
+            {eyebrow ? <Eyebrow tone="inverse">{eyebrow}</Eyebrow> : null}
+            <h1
+              className={cn(
+                'font-display text-balance',
+                centred ? 'text-cta text-on-ink max-w-[650px]' : 'text-display-xl',
+              )}
+            >
+              {heading}
+            </h1>
+          </div>
+          {subheading && !centred ? (
+            <p className="text-lead leading-[1.2] lg:w-[395px]">{subheading}</p>
+          ) : null}
         </div>
-        {subheading && !centred ? (
-          <p className="text-lead leading-[1.2] lg:w-[395px]">{subheading}</p>
-        ) : null}
-      </div>
-    </section>
+      </section>
+    </SurfaceProvider>
   )
 }

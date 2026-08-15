@@ -60,12 +60,10 @@ export function FormSection({
           </header>
         ) : null}
 
-        <InquiryForm
-          reasons={reasons ?? []}
-          consentLabel={consentLabel}
-          button={button}
-          surface={resolved}
-        />
+        {/* The submit's fill is not passed down: `SectionShell` declares this
+            band's surface and the submit is an ordinary button instance, so it
+            resolves from the band the way every other button does. */}
+        <InquiryForm reasons={reasons ?? []} consentLabel={consentLabel} button={button} />
       </div>
     </SectionShell>
   )

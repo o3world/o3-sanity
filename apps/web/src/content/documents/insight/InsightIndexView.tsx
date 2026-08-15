@@ -205,11 +205,12 @@ export function InsightIndexView({
       <CtaSection
         heading="Let’s get started on your next big thing."
         body="We partner with businesses like yours to build experiences that matter. If you’re ready, we’re ready."
+        // No contrast: the band declares ink and Auto reads it, so this
+        // route-owned button carries the same fill an authored one would.
         button={{
           _type: 'button',
           label: 'Get in touch',
           href: '/contact',
-          variant: 'light',
           target: null,
         }}
         decoration="orbs"

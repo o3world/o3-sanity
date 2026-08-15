@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import { SurfaceProvider } from '@o3/ui'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { resolveButtonHref } from '@/content/buttonDestination'
@@ -56,29 +57,34 @@ export function UtilityNav({ settings }: UtilityNavProps) {
   if (items.length === 0) return null
 
   return (
-    <nav
-      aria-label="O3 properties"
-      // Figma strokes the whole box; only the bottom edge meets anything, so
-      // that is the edge that gets a hairline — the other three sit against the
-      // viewport's edges, where a 1px dark line on a black bar draws nothing.
-      className="border-on-utility-line bg-utility px-gutter hidden h-[50px] items-center gap-6 border-b lg:flex"
-    >
-      <ul className="contents">
-        {items.map((item, i) => (
-          <li key={item._key ?? `utility-${i}`}>
-            <Link
-              href={resolveButtonHref(item)}
-              // The hover is a read state for once (`2225:2893`), not a code
-              // decision: brand red, over 200ms ease-out in the file, which is
-              // `--duration-hover` (220ms) here rather than a second literal
-              // 20ms away from the house value.
-              className="text-button text-on-utility hover:text-brand focus-visible:ring-brand duration-(--duration-hover) transition-colors ease-out focus-visible:outline-none focus-visible:ring-2"
-            >
-              {item.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    // Chrome outside the band system, so it declares its own: `--color-utility`
+    // is black. Nothing in the strip is a button today; the declaration is what
+    // stops one added later resolving against nothing.
+    <SurfaceProvider surface="ink">
+      <nav
+        aria-label="O3 properties"
+        // Figma strokes the whole box; only the bottom edge meets anything, so
+        // that is the edge that gets a hairline — the other three sit against the
+        // viewport's edges, where a 1px dark line on a black bar draws nothing.
+        className="border-on-utility-line bg-utility px-gutter hidden h-[50px] items-center gap-6 border-b lg:flex"
+      >
+        <ul className="contents">
+          {items.map((item, i) => (
+            <li key={item._key ?? `utility-${i}`}>
+              <Link
+                href={resolveButtonHref(item)}
+                // The hover is a read state for once (`2225:2893`), not a code
+                // decision: brand red, over 200ms ease-out in the file, which is
+                // `--duration-hover` (220ms) here rather than a second literal
+                // 20ms away from the house value.
+                className="text-button text-on-utility hover:text-brand focus-visible:ring-brand duration-(--duration-hover) transition-colors ease-out focus-visible:outline-none focus-visible:ring-2"
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </SurfaceProvider>
   )
 }

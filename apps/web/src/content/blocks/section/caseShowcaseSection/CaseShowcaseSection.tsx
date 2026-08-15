@@ -1,3 +1,5 @@
+import { SurfaceProvider } from '@o3/ui'
+
 import { ButtonLink } from '@/content/ButtonLink'
 import { getCard } from '@/content/documents/card-registry'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
@@ -29,28 +31,32 @@ export function CaseShowcaseSection({ heading, button, caseStudies }: CaseShowca
   const items = caseStudies ?? []
 
   return (
-    <section className="text-fg">
-      <div className="bg-(image:--gradient-surface-wash) px-gutter pt-band-sm">
-        <div className="max-w-section mx-auto flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
-          {heading ? (
-            <h2 className="text-display-xl font-display max-w-[571px] text-balance">{heading}</h2>
-          ) : null}
-          {button ? <ButtonLink button={button} arrow size="large" /> : null}
+    // Both washes are light and the band takes `text-fg`, so it declares
+    // `white` — the surface a reader sees, rather than the unused field.
+    <SurfaceProvider surface="white">
+      <section className="text-fg">
+        <div className="bg-(image:--gradient-surface-wash) px-gutter pt-band-sm">
+          <div className="max-w-section mx-auto flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
+            {heading ? (
+              <h2 className="text-display-xl font-display max-w-[571px] text-balance">{heading}</h2>
+            ) : null}
+            {button ? <ButtonLink button={button} arrow size="large" /> : null}
+          </div>
         </div>
-      </div>
 
-      <div className="bg-(image:--gradient-surface-wash-angled) px-gutter py-band-sm">
-        {/*
-         * Gap 24 at 402 (`1889:3620`), 48 at 1440 (`1683:2661`). ADR 0006
-         * lists this band precisely because it is *not* a composition
-         * divergence — both frames stack the cards, and only the gap moves.
-         */}
-        <div className="max-w-section mx-auto flex flex-col gap-6 lg:gap-12">
-          {items.map((caseStudy) => (
-            <Card key={caseStudy._id} {...caseStudy} />
-          ))}
+        <div className="bg-(image:--gradient-surface-wash-angled) px-gutter py-band-sm">
+          {/*
+           * Gap 24 at 402 (`1889:3620`), 48 at 1440 (`1683:2661`). ADR 0006
+           * lists this band precisely because it is *not* a composition
+           * divergence — both frames stack the cards, and only the gap moves.
+           */}
+          <div className="max-w-section mx-auto flex flex-col gap-6 lg:gap-12">
+            {items.map((caseStudy) => (
+              <Card key={caseStudy._id} {...caseStudy} />
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </SurfaceProvider>
   )
 }

@@ -90,7 +90,7 @@
             "_type": "button",
             "label": "Details and registration",
             "href": "/contact",
-            "variant": "dark"
+            "contrast": "dark"
           }
         }
       ]
@@ -111,7 +111,7 @@
             "_type": "button",
             "label": "Read the thinking",
             "href": "/insights",
-            "variant": "dark"
+            "contrast": "dark"
           },
           "mark": {
             "_type": "mark",
@@ -134,7 +134,7 @@
         "_type": "button",
         "label": "Get in touch",
         "href": "/contact",
-        "variant": "light"
+        "contrast": "light"
       },
       "decoration": "orbs"
     }

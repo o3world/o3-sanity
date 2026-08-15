@@ -389,7 +389,7 @@
             "_type": "button",
             "label": "Apply",
             "href": "mailto:careers@o3world.com",
-            "variant": "dark"
+            "contrast": "dark"
           },
           "mark": {
             "_type": "mark",
@@ -409,7 +409,7 @@
             "_type": "button",
             "label": "Apply",
             "href": "mailto:careers@o3world.com",
-            "variant": "dark"
+            "contrast": "dark"
           },
           "mark": {
             "_type": "mark",
@@ -429,7 +429,7 @@
             "_type": "button",
             "label": "Apply",
             "href": "mailto:careers@o3world.com",
-            "variant": "dark"
+            "contrast": "dark"
           },
           "mark": {
             "_type": "mark",
@@ -449,7 +449,7 @@
             "_type": "button",
             "label": "Apply",
             "href": "mailto:careers@o3world.com",
-            "variant": "dark"
+            "contrast": "dark"
           },
           "mark": {
             "_type": "mark",
@@ -472,7 +472,7 @@
         "_type": "button",
         "label": "Get in touch",
         "href": "/contact",
-        "variant": "light"
+        "contrast": "light"
       },
       "decoration": "orbs"
     }

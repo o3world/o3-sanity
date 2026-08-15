@@ -57,7 +57,7 @@
           "_key": "intro-cta",
           "label": "Let’s build the future together",
           "href": "/contact",
-          "variant": "dark"
+          "contrast": "dark"
         }
       ]
     },
@@ -128,7 +128,7 @@
             "_type": "button",
             "label": "Read the REC case study",
             "href": "/work/scarlet-ai-hyper-personalizing-creative-gig-economy",
-            "variant": "ghost"
+            "contrast": "ghost"
           }
         },
         {
@@ -149,7 +149,7 @@
             "_type": "button",
             "label": "Read how Sahay AI won",
             "href": "/insights/sahay-ai-triumphs-1682-venture-awards",
-            "variant": "ghost"
+            "contrast": "ghost"
           }
         },
         {
@@ -170,7 +170,7 @@
             "_type": "button",
             "label": "Pitch at the venture awards",
             "href": "/insights/the-o3-venture-awards-at-1682-a-chance-to-pitch-win-and-promote-your-ai-startup",
-            "variant": "ghost"
+            "contrast": "ghost"
           }
         }
       ]
@@ -185,7 +185,7 @@
         "_type": "button",
         "label": "Discover 1682",
         "href": "/insights/1682-conference-recap-unveiling-ais-realities-and-innovation-insights",
-        "variant": "light"
+        "contrast": "light"
       },
       "decoration": "orbs"
     }

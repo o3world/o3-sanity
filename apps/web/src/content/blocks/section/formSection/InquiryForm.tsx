@@ -5,7 +5,7 @@ import { useState, type ChangeEvent, type FocusEvent, type FormEvent } from 'rea
 // cannot resolve under Storybook's Next preset. A lint rule enforces this.
 import { stegaClean } from '@sanity/client/stega'
 
-import { FIELD_CONTROL_CLASS, FormField, type Surface } from '@o3/ui'
+import { FIELD_CONTROL_CLASS, FormField } from '@o3/ui'
 
 import { ButtonLink } from '@/content/ButtonLink'
 import type { ButtonLinkData } from '@/content/buttonDestination'
@@ -71,12 +71,6 @@ export interface InquiryFormProps {
    * which is the same answer every other button gives.
    */
   button?: ButtonLinkData | null
-  /**
-   * The band's resolved surface — the submit's fill follows it. `Button`'s
-   * `dark` variant is ink-on-white and disappears on an ink band, and a fill
-   * is not something a schema enum should have to restate per placement.
-   */
-  surface: Surface
 }
 
 /** What the submit says when the document has not named it. */
@@ -103,7 +97,7 @@ const SUBMIT_LABEL = 'Send message'
  * #58's other two halves land, this component gains a handler and loses the
  * notice — the fields, the labels and the validation stay as they are.
  */
-export function InquiryForm({ reasons, consentLabel, button, surface }: InquiryFormProps) {
+export function InquiryForm({ reasons, consentLabel, button }: InquiryFormProps) {
   const submit: ButtonLinkData = button?.label ? button : { ...(button ?? {}), label: SUBMIT_LABEL }
 
   const [values, setValues] = useState<Record<FieldName, string>>(EMPTY_VALUES)
@@ -261,7 +255,6 @@ export function InquiryForm({ reasons, consentLabel, button, surface }: InquiryF
           <ButtonLink
             button={submit}
             size="large"
-            variant={surface === 'ink' ? 'light' : 'dark'}
             control={{
               type: 'submit',
               'aria-disabled': true,

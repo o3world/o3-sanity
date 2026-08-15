@@ -119,7 +119,7 @@
         "_type": "button",
         "label": "Get in touch",
         "href": "/contact",
-        "variant": "light"
+        "contrast": "light"
       },
       "decoration": "orbs"
     }

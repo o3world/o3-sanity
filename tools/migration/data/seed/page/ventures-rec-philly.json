@@ -71,7 +71,7 @@
         "_type": "button",
         "label": "See the ventures program",
         "href": "/ventures",
-        "variant": "light"
+        "contrast": "light"
       },
       "decoration": "orbs"
     }

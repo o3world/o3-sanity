@@ -39,10 +39,11 @@ const fixture: SectionProps<'heroSection'> = {
   headlineLines: ['You see the problem in front of you.', 'We’re working on the one behind it.'],
   subheading:
     'Strategy, design, engineering and AI under one roof. The same senior team that finds the move is the team that builds it.',
+  // No contrast, so the white fill in the story is Auto reading the band's
+  // own ink — the hero forces nothing any more (#147).
   button: {
     _type: 'button',
     label: 'View our work',
-    variant: 'light',
     href: '/work',
     target: null,
   },

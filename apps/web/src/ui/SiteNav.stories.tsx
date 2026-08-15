@@ -26,10 +26,11 @@ import { SiteNav } from './SiteNav'
  * Two widths, structurally different (ADR 0006): a 900px pill at 1440, a
  * full-width square bar at 402 with the links behind "Open menu".
  *
- * The button is **brand red on both skins** and is the one thing on the bar that
- * does not move. `Button` has no red fill — the chrome forces its own, because
- * a red variant is something a Site Settings editor could then put on a
- * content band, and no canonical frame has one.
+ * The button is **`Theme=White` on both skins** and is the one thing on the bar
+ * that does not move. The bar declares itself an `ink` surface and the button's
+ * Auto contrast reads it (#147), so the fill is the frame's rather than a
+ * chrome override — and it does not follow the flip, because contrast resolves
+ * from a declared surface and the flip is a read of what is passing under.
  */
 const meta = {
   title: 'Chrome/SiteNav',
