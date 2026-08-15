@@ -14,6 +14,7 @@ pnpm wt new 26       # claim #26, branch, install, carry env across
 cd ../o3-sanity-worktrees/26-seo-extraction-discipline && claude
 # …work the ticket…
 pnpm wt rm 26        # after it's merged
+pnpm wt reap         # or sweep every checkout whose ticket is closed
 ```
 
 `pnpm frontier` prints every open child of a parent issue as `READY`,
@@ -98,7 +99,22 @@ lists them all, and they should all be removed when done.
 
 ## Tearing one down
 
-`pnpm wt rm <n>` removes the worktree and its branch if merged. Orca's archive
+`pnpm wt rm <n>` removes the worktree and its branch if merged.
+
+`pnpm wt reap` does the same for every checkout at once, asking `gh` whether
+each one's ticket is closed. It reports and stops — pass `--yes` to apply. A
+checkout is kept when its ticket is open, when the tree is dirty, or when
+nothing in its name or branch says which ticket it belongs to. That last case
+is every Orca worktree, which is named after intent rather than `<issue>-<slug>`
+and so cannot be swept; name them for the ticket if you want them reaped.
+
+Reaping is the step that was missing while `wt new` ran at every claim and
+nothing ran at any close. By August 2026 twenty checkouts for long-closed
+tickets held 26 GB. Branches are never the thing at risk: `git branch -d`
+refuses one whose commits are not already on main, and fourteen of those
+branches had never been pushed anywhere.
+
+Orca's archive
 hook runs `scripts/down.sh` before removing a worktree, which stops only the
 dev servers whose working directory is inside _that_ checkout — the other
 sessions' servers are left alone. Removing a worktree by hand skips that; run
