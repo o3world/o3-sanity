@@ -86,3 +86,28 @@ it beside `ArrowIcon`, give it a story.
 - If a future frame needs many glyphs at once, this decision is worth revisiting
   against `lucide-react` — but only alongside a design decision to change icon
   language, since the two are the same question.
+
+## Addendum — 2026-08-15 (#151): the design's icon language moved to Lucide
+
+The reopen trigger above named the one thing that would change this: "a design
+decision to change icon language". That happened. The 2026-08 redesign draws a
+component set called `Icon` (`2177:1556`) — twenty-nine glyphs in a 20×20 frame,
+`arrow-right`, `chevron-down`, `external-link`, `sliders-vertical` — which are
+**Lucide's names and Lucide's geometry**, verified path by path against the
+file's own bounding boxes. `.building block Icon_text` and its Material Symbols
+prop belong to the previous generation.
+
+**The decision stands, and only the source of the paths moves.** Inline SVG, one
+component per glyph, no icon package: every reason above is about how a glyph
+ships rather than which library drew it, and none of them weakened. What did
+change is the rejected `lucide-react` option's one real objection — that it
+"silently substitutes the design's icon language". Tracing from Lucide now
+_follows_ the design's icon language, so a glyph copied from Lucide is as
+faithful as one copied from Material Symbols was.
+
+The `lucide-react` package is still not installed. That half of the argument was
+never about fidelity: a dependency for three glyphs is the same trade it always
+was, and the reopen trigger for it is unchanged — many glyphs at once.
+
+Attribution: Lucide is ISC-licensed, and the same rule applies as for Material
+Symbols — the licence is carried where the glyphs live.

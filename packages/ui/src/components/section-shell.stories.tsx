@@ -37,12 +37,12 @@ function PlaceholderContent({ surface }: { surface: Surface }) {
       </p>
       <Stat value="89% → 114%" label="NRR" tone={onInk ? 'inverse' : 'default'} />
       <div className="flex items-center gap-6">
-        <Button variant={onInk ? 'light' : 'dark'} arrow>
+        <Button variant={onInk ? 'light' : 'dark'} icon={<ArrowIcon />}>
           View our work
         </Button>
         {/* The tertiary text CTA is `Button / Ghost` (264:260) — its label
             follows the band, so it needs no per-surface tone. `asChild`
-            ignores the `arrow` prop, so the glyph goes inside the anchor. */}
+            ignores the icon slot, so the glyph goes inside the anchor. */}
         <Button variant="ghost" asChild>
           <a href="#partners">
             See all partners

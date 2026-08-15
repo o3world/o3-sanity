@@ -17,7 +17,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-/** 20px — `Button / Solid`'s glyph box (`1868:3262`), and the default. */
+/** 20px — the `Button` set's trailing-icon wrapper (`2134:1785`), and the default. */
 export const Default: Story = {
   args: { className: 'text-ink' },
 }

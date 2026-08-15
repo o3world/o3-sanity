@@ -2,6 +2,7 @@ import type { ComponentType } from 'react'
 import type { ResolvedKnob } from '@o3/block-spec'
 
 import { viewportShiftX } from './dock'
+import { OptionGlyph, type OptionGlyphs } from './OptionGlyph'
 
 /**
  * ONE KNOB ON THE HOVER BAR — a trigger that says what the value is now, and a
@@ -49,9 +50,11 @@ export interface KnobControlProps {
   open: boolean
   onToggle: () => void
   onPick: (value: string) => void
+  /** Name → drawing, for a knob whose options describe themselves as glyphs. */
+  glyphs?: OptionGlyphs
 }
 
-export function KnobControl({ knob: resolved, open, onToggle, onPick }: KnobControlProps) {
+export function KnobControl({ knob: resolved, open, onToggle, onPick, glyphs }: KnobControlProps) {
   const { knob, current } = resolved
   // `KnobIcon` is structural — `(props: never) => unknown` — because
   // `@o3/block-spec` has zero dependencies and cannot name `react`. Narrowing
@@ -134,6 +137,7 @@ export function KnobControl({ knob: resolved, open, onToggle, onPick }: KnobCont
                   <span aria-hidden="true" className="w-2.5 shrink-0 text-[9px]">
                     {checked ? '✓' : ''}
                   </span>
+                  <OptionGlyph knob={knob} value={option.value} glyphs={glyphs} />
                   <span className="grow">{option.title}</span>
                   {option.value === knob.initialValue ? (
                     <span className="text-[9px] italic opacity-60">default</span>

@@ -31,9 +31,9 @@ import { Button } from './Button'
  *   strings and a locked document keeps them forever. The canonical frames
  *   have no red button, which is why `brand` maps to `dark` rather than
  *   growing a red fill.
- * - **`arrow` is a prop, not a field** (#38) — Figma's `Show right icon`
- *   toggles the presence of a child, and this block never sets it, so a base
- *   button has no arrow.
+ * - **the icon it trails.** `icon` is a knob on the component, so the glyph is
+ *   the editor's rather than the caller's: the arrow is what an unset field
+ *   resolves to, `none` takes it away, and the other two are the curated set.
  */
 const meta = {
   title: 'Content/Blocks/Base/Button',
@@ -185,6 +185,9 @@ export const NoDestination: Story = {
  */
 const offSchemaContrast = (contrast: string) => contrast as 'auto' | 'dark' | 'light' | 'ghost'
 
+/** The same honesty for a glyph name the curated set has never held. */
+const offSchemaIcon = (icon: string) => icon as 'arrow' | 'external' | 'down' | 'none'
+
 export const LegacyBrandContrast: Story = {
   args: {
     label: 'Let’s talk',
@@ -221,6 +224,49 @@ export const UnknownContrast: Story = {
   },
   decorators: [on('ink')],
   globals: { backgrounds: { value: 'ink' } },
+}
+
+/**
+ * **No stored icon** — which is what every button saved before the field
+ * existed carries, and what every call site used to pass by hand. The arrow is
+ * the knob's default, so the common case costs an editor nothing.
+ *
+ * (`AutoOnWhite` and the arms above are all in this state too; this one says so
+ * on purpose.)
+ */
+export const DefaultIcon: Story = {
+  args: { label: 'View our work', href: '/work', target: null },
+  decorators: [on('white')],
+}
+
+/** The icon removed. A button that should be bare can be bare. */
+export const NoIcon: Story = {
+  args: { label: 'Send message', icon: 'none', target: null },
+}
+
+/** The URL arm, saying so. `external` is the glyph for a link that leaves the site. */
+export const ExternalIcon: Story = {
+  args: { label: 'Visit O3XO', href: 'https://www.o3xo.ai/', icon: 'external', target: null },
+}
+
+/** The anchor arm, saying so — the jump-link row's glyph (#149). */
+export const DownIcon: Story = {
+  args: { label: 'How we work', anchor: 'how-we-work', icon: 'down', target: null },
+}
+
+/**
+ * A glyph name the curated set does not hold — a value from a dataset the
+ * schema has moved past. It draws no icon rather than falling back to the
+ * arrow: a button with nothing after its label is a shape the design has, and
+ * silently substituting a different glyph would be a drawing nobody chose.
+ */
+export const UnknownIcon: Story = {
+  args: {
+    label: 'Let’s talk',
+    href: '/contact',
+    icon: offSchemaIcon('sparkles'),
+    target: null,
+  },
 }
 
 /** No label — `ButtonLink` renders nothing, so an empty button cannot leave a bare link. */

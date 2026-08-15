@@ -4,6 +4,7 @@ import type { ResolvedKnob } from '@o3/block-spec'
 import type { ItemAction } from './itemActions'
 import { KnobControl } from './KnobControl'
 import { KnobMenu } from './KnobMenu'
+import type { OptionGlyphs } from './OptionGlyph'
 import {
   CANVAS_CHROME_ATTR,
   dismissesMenu,
@@ -80,6 +81,13 @@ export interface CanvasToolbarViewProps {
    * right-click happened, and only this component knows that.
    */
   menuDock?: (el: HTMLDivElement | null, pointer: { x: number; y: number }) => void
+  /**
+   * Name → drawing, for the knobs whose options describe themselves as glyphs
+   * (`optionPreview: 'glyph'`). The site's own icons, handed down rather than
+   * imported — this package draws Studio chrome and owns none of the page's
+   * pictures.
+   */
+  glyphs?: OptionGlyphs
 }
 
 /**
@@ -106,6 +114,7 @@ export function CanvasToolbarView({
   barRef,
   chipRef,
   menuDock,
+  glyphs,
 }: CanvasToolbarViewProps) {
   // The one thing the chrome decides for itself: it is about these pixels and
   // nothing else reads it.
@@ -243,6 +252,7 @@ export function CanvasToolbarView({
                     setOpenSurface(null)
                     onPickKnob?.(resolved, value)
                   }}
+                  glyphs={glyphs}
                 />
               </div>
             ))}
@@ -286,6 +296,7 @@ export function CanvasToolbarView({
             onItemAction?.(action)
           }}
           panelRef={(el) => menuDock?.(el, { x: open.x, y: open.y })}
+          glyphs={glyphs}
         />
       ) : null}
     </>

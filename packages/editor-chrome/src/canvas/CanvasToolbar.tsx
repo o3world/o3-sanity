@@ -21,6 +21,7 @@ import { nearestInstance } from './instance'
 import { blockArrayKey } from './insertActions'
 import type { ItemAction } from './itemActions'
 import { knobMenuModel, type KnobMenuAction } from './menuModel'
+import type { OptionGlyphs } from './OptionGlyph'
 import { knobPatch } from './knobPatch'
 import type { CanvasLevel } from './subject'
 
@@ -102,6 +103,12 @@ export type CanvasToolbarProps = {
    * gets to decide about.
    */
   blockArrays?: Readonly<Record<string, readonly string[]>>
+  /**
+   * The drawings a `optionPreview: 'glyph'` knob's option values name — the
+   * site's own icons, handed in beside the registries (#151). Absent means the
+   * options are listed by title, which is what every knob but one wants.
+   */
+  glyphs?: OptionGlyphs
 }
 
 interface InnerProps {
@@ -112,6 +119,7 @@ interface InnerProps {
   blockKnobs: Readonly<Record<string, BlockKnobs>>
   objectKnobs: Readonly<Record<string, ObjectKnobs>>
   blockArrays: Readonly<Record<string, readonly string[]>>
+  glyphs: OptionGlyphs | undefined
   documentId: string
   /** The hovered element's own GROQ path — the chip's subject when no item encloses it. */
   path: string
@@ -130,6 +138,7 @@ function CanvasToolbarInner({
   blockKnobs,
   objectKnobs,
   blockArrays,
+  glyphs,
   documentId,
   path,
   element,
@@ -440,6 +449,7 @@ function CanvasToolbarInner({
       barRef={dockBar}
       chipRef={dockChip}
       menuDock={dockMenu}
+      glyphs={glyphs}
     />
   )
 }
@@ -461,6 +471,7 @@ export const CanvasToolbar: OverlayComponent<CanvasToolbarProps> = ({
   blockKnobs = {},
   objectKnobs = {},
   blockArrays = {},
+  glyphs,
 }) => {
   // DRAFT EDITING ONLY. `VisualEditing` itself mounts only in draft mode, but
   // the draft cookie survives leaving Presentation — browsing the site
@@ -482,6 +493,7 @@ export const CanvasToolbar: OverlayComponent<CanvasToolbarProps> = ({
         blockKnobs={blockKnobs}
         objectKnobs={objectKnobs}
         blockArrays={blockArrays}
+        glyphs={glyphs}
         documentId={node.id}
         path={node.path}
         element={element}

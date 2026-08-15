@@ -149,7 +149,7 @@ export function HeroSection({
             // 33 below the standfirst at 1440, 39 below the headline at 402
             // (`1814:1622`'s column gap, where there is no standfirst at all).
             <Reveal delay={220} className="mt-10 lg:mt-8">
-              <ButtonLink button={button} arrow />
+              <ButtonLink button={button} />
             </Reveal>
           ) : null}
         </div>

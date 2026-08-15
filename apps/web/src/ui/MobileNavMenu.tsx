@@ -70,7 +70,7 @@ export function MobileNavMenu({ items, button }: MobileNavMenuProps) {
             {button ? (
               <SheetClose asChild>
                 <div className="mt-4 self-start">
-                  <ButtonLink button={button} arrow />
+                  <ButtonLink button={button} />
                 </div>
               </SheetClose>
             ) : null}

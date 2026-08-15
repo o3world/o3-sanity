@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 import { Button } from './button'
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from './sheet'
+import { ArrowIcon } from '../arrow-icon'
 import { MenuIcon } from '../menu-icon'
 
 const meta = {
@@ -42,7 +43,7 @@ export const MobileNavMenu: Story = {
               {label}
             </a>
           ))}
-          <Button variant="light" arrow className="mt-4 self-start">
+          <Button variant="light" icon={<ArrowIcon />} className="mt-4 self-start">
             Let’s talk
           </Button>
         </nav>

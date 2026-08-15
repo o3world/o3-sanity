@@ -4,6 +4,7 @@ import type { OverlayComponentResolver } from '@sanity/visual-editing'
 import type { BlockKnobs, ObjectKnobs } from '@o3/block-spec'
 
 import { CanvasToolbar } from './CanvasToolbar'
+import type { OptionGlyphs } from './OptionGlyph'
 import { canvasSubject } from './subject'
 
 /**
@@ -42,6 +43,7 @@ export function createCanvasComponents({
   blockKnobs,
   objectKnobs = {},
   blockArrays = {},
+  glyphs,
 }: {
   blockKnobs: Readonly<Record<string, BlockKnobs>>
   /**
@@ -58,11 +60,22 @@ export function createCanvasComponents({
    * without it, and the insert rows are simply not offered.
    */
   blockArrays?: Readonly<Record<string, readonly string[]>>
+  /**
+   * The site's own glyphs, keyed by the option value that names one (#151). A
+   * knob declaring `optionPreview: 'glyph'` says its VALUES are icon names and
+   * carries no drawing — `@o3/block-spec` has zero dependencies and cannot name
+   * React — so this is where the names become pictures. Optional: without it
+   * every option is listed by title, which is what the other knobs already do.
+   */
+  glyphs?: OptionGlyphs
 }): OverlayComponentResolver {
   return ({ node }) => {
     if (!('path' in node)) return undefined
     const subject = canvasSubject(node.path)
     if (!subject) return undefined
-    return { component: CanvasToolbar, props: { ...subject, blockKnobs, objectKnobs, blockArrays } }
+    return {
+      component: CanvasToolbar,
+      props: { ...subject, blockKnobs, objectKnobs, blockArrays, glyphs },
+    }
   }
 }

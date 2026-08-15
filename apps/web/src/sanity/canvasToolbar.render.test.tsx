@@ -10,7 +10,13 @@ import {
   KnobMenu,
   knobMenuModel,
 } from '@o3/editor-chrome/canvas'
-import { BLOCK_KNOBS, heroSectionKnobs, railPanelsSectionKnobs } from '@o3/sanity/knobs'
+import {
+  BLOCK_KNOBS,
+  buttonKnobs,
+  heroSectionKnobs,
+  railPanelsSectionKnobs,
+} from '@o3/sanity/knobs'
+import { BUTTON_ICONS } from '@o3/ui'
 import { BLOCK_ARRAYS, SECTION_BLOCKS } from '@o3/sanity/schemas/registry'
 
 import { buildSingletonRoute } from '@/lib/content-routes/build'
@@ -678,5 +684,77 @@ describe('what the knob menu can add beside the subject', () => {
       surface: 'bone',
     })
     expect(op.items[0]!._key).toMatch(/^[0-9a-f]{12}$/)
+  })
+})
+
+/**
+ * THE ICON PICKER (#151) — an editor choosing an icon has to see the shape,
+ * not read its name.
+ *
+ * The chain under test is the whole of the mechanism: `button.icon` declares
+ * `optionPreview: 'glyph'` and option values that are icon NAMES, the site
+ * hands `BUTTON_ICONS` to the overlay, and the control resolves one against the
+ * other. Nothing in `@o3/block-spec` names a component, which is why this can
+ * only be asserted from the app's side of the seam — the same side that owns
+ * the drawings.
+ */
+describe('what the icon picker shows', () => {
+  const instance = {
+    spec: buttonKnobs,
+    read: blockKnobReader({ button: { _type: 'button', label: 'View our work' } }, 'button'),
+  }
+
+  const model = knobMenuModel({
+    spec: undefined,
+    read: () => undefined,
+    nested: false,
+    instance,
+    subject: { kind: 'block', title: 'Button' },
+  })
+
+  const render = (glyphs?: Parameters<typeof KnobMenu>[0]['glyphs']) =>
+    renderToStaticMarkup(
+      <KnobMenu model={model} onPick={() => {}} onAction={() => {}} glyphs={glyphs} />,
+    )
+
+  it('draws a glyph for every icon option the site has one for', () => {
+    const html = render(BUTTON_ICONS)
+    // Three named glyphs; `None` names no drawing, and its row is a title.
+    expect(html.match(/<svg/g)).toHaveLength(3)
+    expect(html).toContain('None')
+  })
+
+  it('draws nothing for a knob that describes no preview', () => {
+    // `contrast` sits in the same menu with the same option rows. A control
+    // that drew glyphs for it would be resolving something nobody declared.
+    expect(render(BUTTON_ICONS)).toContain('Ghost')
+    const contrastOnly = knobMenuModel({
+      spec: undefined,
+      read: () => undefined,
+      nested: false,
+      instance: {
+        spec: { ...buttonKnobs, knobs: buttonKnobs.knobs.filter((k) => k.name === 'contrast') },
+        read: instance.read,
+      },
+      subject: { kind: 'block', title: 'Button' },
+    })
+    expect(
+      renderToStaticMarkup(
+        <KnobMenu
+          model={contrastOnly}
+          onPick={() => {}}
+          onAction={() => {}}
+          glyphs={BUTTON_ICONS}
+        />,
+      ),
+    ).not.toContain('<svg')
+  })
+
+  it('lists the options by title when the site hands in no glyphs at all', () => {
+    // The overlay is shareable, and a project that declares knobs and ships no
+    // icons is a real configuration rather than a broken one.
+    const html = render(undefined)
+    expect(html).not.toContain('<svg')
+    expect(html).toContain('Arrow')
   })
 })

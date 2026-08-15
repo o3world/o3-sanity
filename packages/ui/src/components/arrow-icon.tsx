@@ -6,13 +6,13 @@ export interface ArrowIconProps extends SVGProps<SVGSVGElement> {
 }
 
 /**
- * The O3 arrow — a long shaft + chevron head, traced from the prototype's
- * inline SVG (every "View our work" / "Read the case" / "Let's talk" CTA).
+ * The O3 arrow — a long shaft + chevron head. Figma's `Icon=arrow-right`
+ * (`2177:1559`), the default fill of the button's icon slot and what every
+ * "View our work" / "Read the case" / "Let's talk" CTA in the file carries.
  * Strokes with currentColor so it follows the surrounding text color.
  *
- * **20px by default** — `Button / Solid` (`1868:3262`) sets its trailing
- * `arrow_forward` on a 20px box, recorded as `button.icon.size` in
- * `foundations/figma-home-spec.ts`.
+ * **20px by default** — the `Button` set (`2134:1785`) draws its trailing icon
+ * in a 20×20 wrapper, which is the whole of the `Icon` set's own frame size.
  */
 export function ArrowIcon({ size = 20, className, ...rest }: ArrowIconProps) {
   return (

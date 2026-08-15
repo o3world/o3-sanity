@@ -25,6 +25,10 @@ export type { MenuIconProps } from './components/menu-icon'
 export { Button, buttonVariants } from './components/ui/button'
 export type { ButtonProps } from './components/ui/button'
 
+// The curated set that fills the button's icon slot — Figma's `Icon` (2177:1556)
+export { BUTTON_ICONS, ChevronDownIcon, ExternalLinkIcon } from './components/button-icons'
+export type { ButtonIconProps } from './components/button-icons'
+
 // FilterChip — the Insights index filter bar's chip (2337:4486)
 export { FilterChip, filterChipVariants } from './components/filter-chip'
 export type { FilterChipProps } from './components/filter-chip'

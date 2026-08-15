@@ -144,6 +144,7 @@ export type Button = {
   href?: string
   anchor?: string
   contrast?: 'auto' | 'dark' | 'light' | 'ghost'
+  icon?: 'arrow' | 'external' | 'down' | 'none'
 }
 
 export type Industry = {
@@ -963,6 +964,7 @@ export type SITE_SETTINGS_QUERY_RESULT = {
     href?: string
     anchor?: string
     contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+    icon?: 'arrow' | 'down' | 'external' | 'none'
   }> | null
   navItems: Array<{
     _key: string
@@ -988,6 +990,7 @@ export type SITE_SETTINGS_QUERY_RESULT = {
     href?: string
     anchor?: string
     contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+    icon?: 'arrow' | 'down' | 'external' | 'none'
   }> | null
   primaryButton: {
     _type: 'button'
@@ -1012,6 +1015,7 @@ export type SITE_SETTINGS_QUERY_RESULT = {
     href?: string
     anchor?: string
     contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+    icon?: 'arrow' | 'down' | 'external' | 'none'
   } | null
   footerTagline: string | null
   footerGroups: Array<{
@@ -1040,6 +1044,7 @@ export type SITE_SETTINGS_QUERY_RESULT = {
       href?: string
       anchor?: string
       contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+      icon?: 'arrow' | 'down' | 'external' | 'none'
     }> | null
     _type: 'footerGroup'
     _key: string
@@ -1075,6 +1080,7 @@ export type SITE_SETTINGS_QUERY_RESULT = {
     href?: string
     anchor?: string
     contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+    icon?: 'arrow' | 'down' | 'external' | 'none'
   }> | null
   legalName: string | null
   copyrightNote: string | null
@@ -1329,6 +1335,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           href?: string
           anchor?: string
           contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         caseStudies: Array<{
           _id: string
@@ -1401,6 +1408,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           href?: string
           anchor?: string
           contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'none' | 'orbs'
         surface?: 'bone' | 'ink' | 'white'
@@ -1452,6 +1460,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           href?: string
           anchor?: string
           contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         surface?: 'bone' | 'ink' | 'white'
         anchor?: string
@@ -1486,6 +1495,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           href?: string
           anchor?: string
           contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'none' | 'orbs'
         surface?: 'bone' | 'ink' | 'white'
@@ -1525,6 +1535,7 @@ export type CASE_STUDY_QUERY_RESULT = {
             href?: string
             anchor?: string
             contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+            icon?: 'arrow' | 'down' | 'external' | 'none'
           } | null
           mark?: Mark
           _type: 'entry'
@@ -1628,6 +1639,7 @@ export type CASE_STUDY_QUERY_RESULT = {
               href?: string
               anchor?: string
               contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+              icon?: 'arrow' | 'down' | 'external' | 'none'
             }
           | {
               _key: string
@@ -1655,7 +1667,8 @@ export type CASE_STUDY_QUERY_RESULT = {
                   | null
                 href?: string
                 anchor?: string
-                variant?: 'dark' | 'ghost' | 'light'
+                contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+                icon?: 'arrow' | 'down' | 'external' | 'none'
               }> | null
               alignment?: 'center' | 'end' | 'start'
             }
@@ -1779,6 +1792,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           href?: string
           anchor?: string
           contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         surface?: 'bone' | 'ink' | 'white'
         anchor?: string
@@ -1858,6 +1872,7 @@ export type CASE_STUDY_QUERY_RESULT = {
             href?: string
             anchor?: string
             contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+            icon?: 'arrow' | 'down' | 'external' | 'none'
           } | null
           media?: Figure
           mark?: Mark
@@ -1898,6 +1913,7 @@ export type CASE_STUDY_QUERY_RESULT = {
             href?: string
             anchor?: string
             contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+            icon?: 'arrow' | 'down' | 'external' | 'none'
           } | null
           mark?: Mark
           _type: 'role'
@@ -2035,6 +2051,7 @@ export type PAGE_QUERY_RESULT = {
           href?: string
           anchor?: string
           contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         caseStudies: Array<{
           _id: string
@@ -2094,6 +2111,7 @@ export type PAGE_QUERY_RESULT = {
           href?: string
           anchor?: string
           contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'none' | 'orbs'
         surface?: 'bone' | 'ink' | 'white'
@@ -2145,6 +2163,7 @@ export type PAGE_QUERY_RESULT = {
           href?: string
           anchor?: string
           contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         surface?: 'bone' | 'ink' | 'white'
         anchor?: string
@@ -2179,6 +2198,7 @@ export type PAGE_QUERY_RESULT = {
           href?: string
           anchor?: string
           contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'none' | 'orbs'
         surface?: 'bone' | 'ink' | 'white'
@@ -2218,6 +2238,7 @@ export type PAGE_QUERY_RESULT = {
             href?: string
             anchor?: string
             contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+            icon?: 'arrow' | 'down' | 'external' | 'none'
           } | null
           mark?: Mark
           _type: 'entry'
@@ -2321,6 +2342,7 @@ export type PAGE_QUERY_RESULT = {
               href?: string
               anchor?: string
               contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+              icon?: 'arrow' | 'down' | 'external' | 'none'
             }
           | {
               _key: string
@@ -2348,7 +2370,8 @@ export type PAGE_QUERY_RESULT = {
                   | null
                 href?: string
                 anchor?: string
-                variant?: 'dark' | 'ghost' | 'light'
+                contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+                icon?: 'arrow' | 'down' | 'external' | 'none'
               }> | null
               alignment?: 'center' | 'end' | 'start'
             }
@@ -2472,6 +2495,7 @@ export type PAGE_QUERY_RESULT = {
           href?: string
           anchor?: string
           contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         surface?: 'bone' | 'ink' | 'white'
         anchor?: string
@@ -2551,6 +2575,7 @@ export type PAGE_QUERY_RESULT = {
             href?: string
             anchor?: string
             contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+            icon?: 'arrow' | 'down' | 'external' | 'none'
           } | null
           media?: Figure
           mark?: Mark
@@ -2591,6 +2616,7 @@ export type PAGE_QUERY_RESULT = {
             href?: string
             anchor?: string
             contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+            icon?: 'arrow' | 'down' | 'external' | 'none'
           } | null
           mark?: Mark
           _type: 'role'

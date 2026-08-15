@@ -7,6 +7,7 @@ import type { HistoryRefresh } from '@sanity/visual-editing'
 import { CanvasNotices, createCanvasComponents } from '@o3/editor-chrome/canvas'
 import { BLOCK_KNOBS, OBJECT_KNOBS } from '@o3/sanity/knobs'
 import { BLOCK_ARRAYS } from '@o3/sanity/schemas/registry'
+import { BUTTON_ICONS } from '@o3/ui'
 
 /**
  * The one VisualEditing mount for the site (issue #15).
@@ -37,6 +38,13 @@ import { BLOCK_ARRAYS } from '@o3/sanity/schemas/registry'
  * from the same registry the schema's own `of:` is built from, so the menu and
  * the form cannot disagree about what a page accepts.
  *
+ * `BUTTON_ICONS` is the fourth, and the only one that is a drawing (#151). A
+ * knob whose options are icons declares `optionPreview: 'glyph'` and their
+ * NAMES; the declaration cannot carry the glyph itself, because the knobs
+ * directory is bundled into the Studio and the preview overlay and must not
+ * pull `@o3/ui` into either. So the site — which already renders these icons on
+ * the page — hands the same components to the control that draws the picker.
+ *
  * `<CanvasNotices />` is a SIBLING and cannot be anything else (#124). An
  * overlay component renders only while its element is hovered, so a refused
  * mutation reported from inside the toolbar is gone the instant the editor
@@ -48,6 +56,7 @@ const canvasComponents = createCanvasComponents({
   blockKnobs: BLOCK_KNOBS,
   objectKnobs: OBJECT_KNOBS,
   blockArrays: BLOCK_ARRAYS,
+  glyphs: BUTTON_ICONS,
 })
 
 export function VisualEditing() {

@@ -2,6 +2,7 @@ import { Fragment, type ComponentType, type Ref } from 'react'
 import type { ResolvedKnob } from '@o3/block-spec'
 
 import { MENU_COLOR } from './KnobControl'
+import { OptionGlyph, type OptionGlyphs } from './OptionGlyph'
 import type { ItemAction, ItemActionGroup } from './itemActions'
 import { CANVAS_CHROME_ATTR, type KnobMenuAction, type KnobMenuModel } from './menuModel'
 
@@ -87,9 +88,18 @@ export interface KnobMenuProps {
    * same division as the bar's `barRef` and the chip's `chipRef`.
    */
   panelRef?: Ref<HTMLDivElement>
+  /** Name → drawing, for a knob whose options describe themselves as glyphs. */
+  glyphs?: OptionGlyphs
 }
 
-export function KnobMenu({ model, onPick, onAction, onItemAction, panelRef }: KnobMenuProps) {
+export function KnobMenu({
+  model,
+  onPick,
+  onAction,
+  onItemAction,
+  panelRef,
+  glyphs,
+}: KnobMenuProps) {
   return (
     // `absolute` with no class position: `computeMenuDock` writes `left`/`top`
     // against the overlay wrapper. `pointer-events-auto` because the whole
@@ -121,7 +131,12 @@ export function KnobMenu({ model, onPick, onAction, onItemAction, panelRef }: Kn
               {group.title}
             </div>
             {group.knobs.map((resolved) => (
-              <KnobRows key={resolved.knob.name} resolved={resolved} onPick={onPick} />
+              <KnobRows
+                key={resolved.knob.name}
+                resolved={resolved}
+                onPick={onPick}
+                glyphs={glyphs}
+              />
             ))}
           </div>
         ))}
@@ -221,9 +236,11 @@ function ActionGroup({
 function KnobRows({
   resolved,
   onPick,
+  glyphs,
 }: {
   resolved: ResolvedKnob
   onPick: (knob: ResolvedKnob, value: string) => void
+  glyphs?: OptionGlyphs
 }) {
   const { knob, current } = resolved
   // Structural in `@o3/block-spec` (zero dependencies, cannot name `react`);
@@ -260,6 +277,7 @@ function KnobRows({
             <span aria-hidden="true" className="w-2.5 shrink-0 text-[9px]">
               {checked ? '✓' : ''}
             </span>
+            <OptionGlyph knob={knob} value={option.value} glyphs={glyphs} />
             <span className={`grow ${checked && current.isDefault ? 'opacity-70' : ''}`}>
               {option.title}
             </span>

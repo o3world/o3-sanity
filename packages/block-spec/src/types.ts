@@ -41,6 +41,27 @@ export type KnobIcon = (props: never) => unknown
  */
 export type KnobValueType = 'string' | 'number'
 
+/**
+ * How a control draws each of a knob's options, beside its title.
+ *
+ * **A description, not a drawing.** This package has zero dependencies, so it
+ * cannot name a colour token or a component — and it should not want to: a
+ * declaration that carried an `<ArrowIcon />` would pull the site's render
+ * layer into the Studio bundle and into the preview overlay, for a picture.
+ * So the declaration says what KIND of thing an option looks like and the
+ * control resolves it against a registry the app hands in.
+ *
+ * - `glyph` — each option's own VALUE names an icon. `button.icon`'s options
+ *   are `arrow`, `external`, `down` and `none`; the canvas is given a map from
+ *   those names to components and draws the one it finds. A name it has no
+ *   glyph for simply draws nothing, which is the right answer for `none`.
+ *
+ * Opt-in per knob: a knob that says nothing gets titles alone, which is what
+ * every knob but one wants. Distinct from `KnobOption.previewUrl`, which is a
+ * captured screenshot of a whole block and still deferred.
+ */
+export type KnobOptionPreview = 'glyph'
+
 /** One member of a knob's closed value set. */
 export type KnobOption = {
   /**
@@ -146,6 +167,8 @@ export type Knob = {
    */
   description?: string
   icon?: KnobIcon
+  /** How a control draws each option beside its title. Titles alone when absent. */
+  optionPreview?: KnobOptionPreview
   /** The closed value set, normalised. Never empty. */
   options: readonly KnobOption[]
   /** The schema default. Always names one of `options` when `knob()` built it. */
@@ -165,6 +188,7 @@ export type KnobInput = {
   title: string
   description?: string
   icon?: KnobIcon
+  optionPreview?: KnobOptionPreview
   options: readonly KnobOptionInput[]
   initialValue?: string
   /** Defaults to `'string'`, which is what every design option but one is. */

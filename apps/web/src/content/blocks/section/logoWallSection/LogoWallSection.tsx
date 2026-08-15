@@ -124,7 +124,7 @@ export function LogoWallSection({
           </ul>
         </div>
 
-        {button ? <ButtonLink button={button} arrow size="large" /> : null}
+        {button ? <ButtonLink button={button} size="large" /> : null}
       </section>
     </SurfaceProvider>
   )
