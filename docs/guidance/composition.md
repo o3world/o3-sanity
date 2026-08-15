@@ -148,6 +148,11 @@ Being honest about the gaps, so an author does not read absence as prohibition:
 - **`statGroup`** is used by no page seed at all, and **`mark` never appears as
   a column item** — it is used only as a field inside other blocks' items.
 - **`listingSection` has no rendered route.** Do not compose it.
+- **`buttonGroup` and the jump-link idiom are authorable and unused.** Every
+  band takes an `anchor` — a name the editor writes, never derived from the
+  heading — and a `buttonGroup` holds a row of buttons pointed at those names.
+  A long page can be made navigable without anyone shipping code. No page seed
+  does it yet.
 - Several knob values are unexercised: the `capture` media variant, full-bleed
   media, the `molecule` quote decoration, and `disc` marks. Available, unproven.
 
