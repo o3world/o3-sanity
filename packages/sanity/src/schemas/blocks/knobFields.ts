@@ -82,28 +82,13 @@ export function hiddenUnless(gate: ShowWhen): (context: { parent?: unknown }) =>
  * each one is checked against the field it actually generates.
  */
 
-/** A radio row — how a small closed set is drawn. */
-const RADIO = { layout: 'radio', direction: 'horizontal' } as const
-
-/**
- * The largest set a radio ROW can hold before it stops reading as one choice.
- *
- * Above it the field falls back to Sanity's default select, which is what a
- * hand-written nine-value list already did (`mark.state`, the orb animations).
- * DERIVED FROM THE OPTION COUNT rather than declared, because how many values
- * there are is the only thing the answer depends on — a `layout:` property on
- * `Knob` would be a presentation fact travelling into a package that has no
- * business holding one, and one more thing for an author to get wrong.
- */
-const RADIO_LIMIT = 4
-
-const listLayout = (knob: Knob) => (knob.options.length <= RADIO_LIMIT ? RADIO : {})
-
 /**
  * One knob as one field.
  *
- * A list either way, because that is what a design option is: a closed set the
- * editor picks one of. Only its drawing varies with how many values it has.
+ * A select list, which is what a design option is: a closed set the editor
+ * picks one of. Sanity draws a `list` that way by default, so no `layout:`
+ * is set — a radio row costs vertical space per option and stops reading as
+ * one choice as soon as a set grows, and knob sets grow.
  */
 function knobField(knob: Knob): FieldDefinition {
   if (knob.name.includes('.')) {
@@ -125,7 +110,6 @@ function knobField(knob: Knob): FieldDefinition {
       type: 'number',
       options: {
         list: knob.options.map(({ value, title }) => ({ value: Number(value), title })),
-        ...listLayout(knob),
       },
       ...(knob.initialValue !== undefined ? { initialValue: Number(knob.initialValue) } : {}),
     })
@@ -136,7 +120,6 @@ function knobField(knob: Knob): FieldDefinition {
     type: 'string',
     options: {
       list: knob.options.map(({ value, title }) => ({ value, title })),
-      ...listLayout(knob),
     },
     ...(knob.initialValue !== undefined ? { initialValue: knob.initialValue } : {}),
   })

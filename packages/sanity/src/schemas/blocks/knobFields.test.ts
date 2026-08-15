@@ -65,8 +65,6 @@ describe('knobFields', () => {
         { value: 'contained', title: 'Contained' },
         { value: 'full-bleed', title: 'Full bleed' },
       ],
-      layout: 'radio',
-      direction: 'horizontal',
     })
   })
 
@@ -113,8 +111,6 @@ describe('knobFields', () => {
         { value: 2, title: '2' },
         { value: 3, title: '3' },
       ],
-      layout: 'radio',
-      direction: 'horizontal',
     })
   })
 

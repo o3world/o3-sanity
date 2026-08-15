@@ -19,7 +19,7 @@ export const page = defineType({
     defineField({
       name: 'pageType',
       type: 'string',
-      options: { list: [...PAGE_TYPES], layout: 'radio', direction: 'horizontal' },
+      options: { list: [...PAGE_TYPES] },
       initialValue: 'standard',
       validation: (rule) => rule.required(),
     }),

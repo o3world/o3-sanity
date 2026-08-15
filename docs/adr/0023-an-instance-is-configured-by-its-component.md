@@ -150,13 +150,12 @@ claimed.
   `hiddenUnless`. The rule ADR 0020 arrived at for `heroSection.eyebrow` holds
   one root down: gating is not the tell, the closed value set is.
 
-- **The adapter learned one thing the block roots never asked of it.** Every
-  knob before this had three or four options and was drawn as a radio row;
-  `mark.state` has nine, and a nine-value radio row is a wall. `knobFields` now
-  falls back to a plain select above four options — derived from the option
-  count, not declared, because how many values there are is the only thing the
-  answer depends on and a `layout:` property on `Knob` would put a presentation
-  fact in a package that has no business holding one.
+- **The adapter draws every knob as a select list.** `mark.state` has nine
+  options and forced the question; the answer is that a knob is a select
+  whatever its size, which is the house preference and the shape that keeps
+  reading as one choice as a set grows. `knobFields` sets no `layout:` at all
+  and takes Sanity's default, so there is no size rule to remember and no
+  presentation fact travelling into `Knob`.
 
 - **`generated.ts` did not move.** Field order and field types are preserved
   through `withKnobFields`, which is the whole reason the splice is shared, and
