@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import type { OverlayComponent } from '@sanity/visual-editing'
 import { useDocuments, useVisualEditingEnvironment } from '@sanity/visual-editing/react'
 import { itemKnobsAt, storedValue } from '@o3/block-spec'
-import type { BlockKnobs, ResolvedKnob } from '@o3/block-spec'
+import type { BlockKnobs, ObjectKnobs, ResolvedKnob } from '@o3/block-spec'
 
 import { barKnobs, blockKnobReader } from './barKnobs'
 import { CanvasToolbarView } from './CanvasToolbarView'
@@ -17,6 +17,7 @@ import {
 } from './draftPatch'
 import { componentName, subjectName } from './identity'
 import { itemArrayField, resolveGroqPath } from './groqPath'
+import { nearestInstance } from './instance'
 import { blockArrayKey } from './insertActions'
 import type { ItemAction } from './itemActions'
 import { knobMenuModel, type KnobMenuAction } from './menuModel'
@@ -50,9 +51,10 @@ import type { CanvasLevel } from './subject'
  *     an item action      →  the row's own patches (#111)
  *                         →  commitPatch                        the draft
  *
- * The same chain runs a second time for the member under the cursor (#122),
- * rooted at `itemPath` rather than `blockPath` — a different root, not a longer
- * path, so every function in it is the same one.
+ * The same chain runs again for the member under the cursor (#122), rooted at
+ * `itemPath`, and again for the nearest enclosing INSTANCE (#145), rooted at
+ * the path `nearestInstance` walked out to — different roots, not longer paths,
+ * so every function in the chain is the same one.
  *
  * Everything with a rule in it — which knobs apply, what each currently reads,
  * what a pick writes — is a pure function above this file. What is left is the
@@ -86,6 +88,13 @@ export type CanvasToolbarProps = {
    */
   blockKnobs?: Readonly<Record<string, BlockKnobs>>
   /**
+   * Every shared object that declares knobs, keyed by its type name (#145) —
+   * the site's registry again, and the third root the chain below runs at.
+   * Absent, or missing the type under the cursor, means no instance group:
+   * a component nobody declared options for has none to offer.
+   */
+  objectKnobs?: Readonly<Record<string, ObjectKnobs>>
+  /**
    * What each block-bearing array accepts, keyed `<host type>.<field>` — the
    * site's own declaration, handed in beside the knobs (#112). Absent, or
    * missing the array the cursor is in, means the menu offers no insert rows:
@@ -101,6 +110,7 @@ interface InnerProps {
   itemPath: string | undefined
   nested: boolean
   blockKnobs: Readonly<Record<string, BlockKnobs>>
+  objectKnobs: Readonly<Record<string, ObjectKnobs>>
   blockArrays: Readonly<Record<string, readonly string[]>>
   documentId: string
   /** The hovered element's own GROQ path — the chip's subject when no item encloses it. */
@@ -118,6 +128,7 @@ function CanvasToolbarInner({
   itemPath,
   nested,
   blockKnobs,
+  objectKnobs,
   blockArrays,
   documentId,
   path,
@@ -207,6 +218,16 @@ function CanvasToolbarInner({
   const item =
     itemPath && itemSpec ? { spec: itemSpec, read: blockKnobReader(snapshot, itemPath) } : undefined
 
+  // WHAT THE HOVERED INSTANCE OFFERS (#145). A shared object declares its knobs
+  // once against its own type name, so the walk is outward rather than a
+  // lookup: the hovered path is climbed to the nearest enclosing object the
+  // snapshot names as a declared type. The reader is rooted AT THAT PATH, for
+  // the same reason the item's is rooted at the member.
+  const found = nearestInstance({ path, blockPath, typeAt, objectKnobs })
+  const instance = found
+    ? { spec: found.spec, read: blockKnobReader(snapshot, found.path) }
+    : undefined
+
   // WHAT THE RIGHT-CLICK MENU OFFERS (#110). The same walk as the bar's, kept
   // whole instead of filtered to `knob.bar` — that filter is the entire
   // difference between the two surfaces. The subject is the innermost keyed
@@ -237,6 +258,7 @@ function CanvasToolbarInner({
     read,
     nested,
     item,
+    instance,
     subject: itemPath ? { kind: 'item', title: subject } : { kind: 'block', title: component },
     componentName: component,
     snapshot,
@@ -265,12 +287,18 @@ function CanvasToolbarInner({
     // (#123). `storedValue` is the inverse of the `optionKey` every reader
     // already goes through.
     const stored = storedValue(resolved.knob, value)
-    // WHICH ROOT THE PATCH IS RELATIVE TO. An item knob's path is relative to
-    // the member, so the member's path is what `knobPatch` takes as its root —
-    // the two-level keyed write it already handles. Handing it the block path
-    // instead is the write that made #122: no error, and a value inside a field
-    // no schema declares.
-    const root = resolved.surface === 'item' && itemPath ? itemPath : blockPath
+    // WHICH ROOT THE PATCH IS RELATIVE TO — the knob's own surface says, and
+    // nothing else does. An item knob's path is relative to the member and an
+    // instance knob's to the instance, so each one's own path is what
+    // `knobPatch` takes as its root. Handing it the block path instead is the
+    // write that made #122: no error, and a value inside a field no schema
+    // declares.
+    const root =
+      resolved.surface === 'instance' && found
+        ? found.path
+        : resolved.surface === 'item' && itemPath
+          ? itemPath
+          : blockPath
     void commitPatch(doc, knobPatch(root, resolved.knob.name, stored), {
       onSettle: () => setStale(true),
       // A rejected patch used to arrive as an unhandled rejection while the bar
@@ -431,6 +459,7 @@ export const CanvasToolbar: OverlayComponent<CanvasToolbarProps> = ({
   itemPath,
   nested = false,
   blockKnobs = {},
+  objectKnobs = {},
   blockArrays = {},
 }) => {
   // DRAFT EDITING ONLY. `VisualEditing` itself mounts only in draft mode, but
@@ -451,6 +480,7 @@ export const CanvasToolbar: OverlayComponent<CanvasToolbarProps> = ({
         itemPath={itemPath}
         nested={nested}
         blockKnobs={blockKnobs}
+        objectKnobs={objectKnobs}
         blockArrays={blockArrays}
         documentId={node.id}
         path={node.path}

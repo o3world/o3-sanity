@@ -29,6 +29,7 @@ export { CanvasToolbar, type CanvasToolbarProps } from './CanvasToolbar'
 export { CanvasToolbarView, type CanvasToolbarViewProps } from './CanvasToolbarView'
 export { canvasSubject, type CanvasLevel, type CanvasSubject } from './subject'
 export { componentName, subjectName } from './identity'
+export { nearestInstance, type CanvasInstance } from './instance'
 export {
   blockArrayKey,
   insertActionGroups,

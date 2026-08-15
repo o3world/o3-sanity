@@ -4,7 +4,8 @@ import { fileURLToPath } from 'node:url'
 import { patchableKnobRoots, visibleKnobs } from '@o3/block-spec'
 import type { Knob, KnobRoot } from '@o3/block-spec'
 import { describe, expect, it } from 'vitest'
-import { BLOCK_KNOBS } from '../../knobs'
+import { BLOCK_KNOBS, OBJECT_KNOBS } from '../../knobs'
+import * as sharedObjects from '../objects'
 import * as baseBlocks from './base'
 import * as sectionBlocks from './section'
 
@@ -49,6 +50,17 @@ import * as sectionBlocks from './section'
  * does not carry is reported here, which is the only place in the repo that
  * can see both halves of that key at once.
  *
+ * **A shared object is a third root, so the walk runs over those too** (#145,
+ * ADR 0023). Same two directions, asked of the object's own fields with the
+ * instance as `parent`, because an instance is configured by its component and
+ * its knobs are relative to it wherever it was placed. It carries one thing the
+ * other two roots do not need: direction (2) runs over EVERY registered shared
+ * object, declared or not. A block cannot exist without a declaration —
+ * `defineSectionBlock` requires one — but a shared object can still reach for
+ * `defineType` directly, so this is the enforcement point ADR 0023 names. An
+ * object that publishes a closed value set nobody declared fails here rather
+ * than offering an empty menu.
+ *
  * WHAT IT DOES NOT COVER, deliberately:
  *
  * - **`nested`.** `visibleKnobs({nested: true})` drops band knobs because a
@@ -90,6 +102,16 @@ const BLOCK_SCHEMAS = [
 ] as unknown as ReadableBlock[]
 
 const blockNamed = (type: string) => BLOCK_SCHEMAS.find((block) => block.name === type)
+
+/**
+ * Every shared object, from its own barrel for the same reason — a registered
+ * type is found by the name it answers to, and adding one costs this file
+ * nothing. `figure`, `stat` and the rest are in here deliberately: an object
+ * with no declaration is exactly what direction (2) has to be asked about.
+ */
+const OBJECT_SCHEMAS = Object.values(sharedObjects) as unknown as ReadableBlock[]
+
+const objectNamed = (type: string) => OBJECT_SCHEMAS.find((object) => object.name === type)
 
 /** A block value under test: what the document holds for this block. */
 type State = Record<string, unknown>
@@ -326,6 +348,66 @@ describe('the guard: a control exists exactly when it does something', () => {
             spec: item,
             fields: member.fields ?? [],
           }),
+        )
+      }
+    }
+
+    expect(disagreements).toEqual([])
+  })
+
+  /**
+   * THE OBJECT ROOT (#145, ADR 0023), in the same two directions.
+   *
+   * Its own `it` rather than a third branch inside the block walk, because the
+   * subject is different: that one iterates DECLARATIONS and asks whether a
+   * schema answers, and a shared object has to be iterated the other way round
+   * as well — every registered object, whether or not anybody declared knobs
+   * for it. Both directions still run, and neither is a special case for a
+   * type.
+   */
+  it('offers exactly the design options a shared object’s form shows, wherever an instance is placed', () => {
+    const disagreements: string[] = []
+
+    for (const object of OBJECT_SCHEMAS) {
+      const fields = object.fields ?? []
+      const home = `src/knobs/${object.name}.ts`
+      const spec = Object.prototype.hasOwnProperty.call(OBJECT_KNOBS, object.name)
+        ? OBJECT_KNOBS[object.name]
+        : undefined
+
+      if (spec) {
+        disagreementsAt({ where: object.name, home, spec, fields }).forEach((d) =>
+          disagreements.push(d),
+        )
+        continue
+      }
+
+      // UNDECLARED, WHICH IS THE ANSWER FOR MOST OF THEM. `figure`, `stat` and
+      // `chapter` carry editorial fields and nothing else, so there is no menu
+      // to open and nothing to declare. A closed value set is the one thing
+      // that cannot be silent: it is a picker the form draws and the canvas has
+      // never heard of, and an editor reaches it only by leaving the canvas.
+      // Gating is not read here for the reason it is not read anywhere in this
+      // file — it decides visibility, not what kind of field something is.
+      for (const field of fields) {
+        if (!offersAClosedSet(field)) continue
+        if (EDITORIAL_CLOSED_SETS.has(`${object.name}.${field.name}`)) continue
+        disagreements.push(
+          `${object.name}: the form offers a closed value set at "${field.name}"; the shared object ` +
+            `declares no knobs, so a hovered instance offers nothing. Declare it in ${home} with ` +
+            `defineObjectKnobs(), or say why it is editorial.`,
+        )
+      }
+    }
+
+    // And the other way: a declaration filed under a name no shared object
+    // answers to. `OBJECT_KNOBS` is keyed on a GLOBAL type name (which is what
+    // makes the registry safe at all, ADR 0023), so this is the one check that
+    // the name is really registered.
+    for (const spec of Object.values(OBJECT_KNOBS)) {
+      if (!objectNamed(spec.type)) {
+        disagreements.push(
+          `${spec.type}: declares knobs, and no shared object schema answers to that name.`,
         )
       }
     }

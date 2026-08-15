@@ -195,6 +195,40 @@ export function itemArrayField(blockPath: string, itemPath: string): string | un
 }
 
 /**
+ * EVERY PATH FROM THE CURSOR OUTWARD TO A FLOOR, innermost first.
+ *
+ *   path  `sections[_key=="a"].panels[_key=="p"].mark.kind`
+ *   floor `sections[_key=="a"]`
+ *     → the leaf, the mark, the panel — and then it stops.
+ *
+ * The ancestor chain a resolution walks when the thing it is looking for
+ * cannot be recognised from the path alone. Instances are the case (#145): a
+ * `mark` is not keyed and its field name is not a type, so the only way to
+ * know one is under the cursor is to ask the draft snapshot what `_type` sits
+ * at each step — which is a question for a caller holding the snapshot, not
+ * for this module. What belongs here is the chain.
+ *
+ * Every segment is a candidate, keyed ones included: a mark in a layout column
+ * is an array member whose own `_type` is the shared object, so a walk that
+ * skipped keyed segments would miss the placement the whole thing is for.
+ *
+ * The floor itself is excluded, and a path that does not sit under it produces
+ * nothing — the caller passes the block root, and the block is a component of
+ * another kind with its own registry.
+ */
+export function enclosingPaths(path: string, floor: string): string[] {
+  if (floor === '' || !path.startsWith(`${floor}.`)) return []
+  const parts = path.split('.')
+  const chain: string[] = []
+  for (let end = parts.length; end > 0; end--) {
+    const prefix = parts.slice(0, end).join('.')
+    if (prefix === floor) break
+    chain.push(prefix)
+  }
+  return chain
+}
+
+/**
  * A block hosted inside another block's array rather than in a document array
  * — two or more keyed segments in its own root path.
  *

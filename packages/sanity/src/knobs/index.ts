@@ -8,13 +8,15 @@
  * the impure one. The adapter that turns a knob into a `defineField` lives on
  * the other side of that line, in `schemas/blocks/knobFields.ts`.
  *
- * One file per block, named for the block. Their own directory rather than
- * beside their schema, because all sixteen section blocks share a single
+ * One file per component, named for it — the sixteen section blocks, and the
+ * shared objects that declare their own (ADR 0023). Their own directory rather
+ * than beside their schema, because all sixteen section blocks share a single
  * `schemas/blocks/section.ts` and there is no "beside".
  */
 
-import type { BlockKnobs } from '@o3/block-spec'
+import type { BlockKnobs, ObjectKnobs } from '@o3/block-spec'
 import { caseShowcaseSectionKnobs } from './caseShowcaseSection'
+import { ctaKnobs } from './cta'
 import { ctaSectionKnobs } from './ctaSection'
 import { disciplineGridSectionKnobs } from './disciplineGridSection'
 import { formSectionKnobs } from './formSection'
@@ -24,6 +26,7 @@ import { insightsCarouselSectionKnobs } from './insightsCarouselSection'
 import { layoutSectionKnobs } from './layoutSection'
 import { listingSectionKnobs } from './listingSection'
 import { logoWallSectionKnobs } from './logoWallSection'
+import { markKnobs } from './mark'
 import { mediaSectionKnobs } from './mediaSection'
 import { personGridSectionKnobs } from './personGridSection'
 import { quoteSectionKnobs } from './quoteSection'
@@ -32,6 +35,7 @@ import { roleListSectionKnobs } from './roleListSection'
 import { screenGridSectionKnobs } from './screenGridSection'
 
 export { caseShowcaseSectionKnobs } from './caseShowcaseSection'
+export { ctaKnobs } from './cta'
 export { ctaSectionKnobs } from './ctaSection'
 export { decorationKnob } from './decoration'
 export { disciplineGridSectionKnobs } from './disciplineGridSection'
@@ -42,6 +46,7 @@ export { insightsCarouselSectionKnobs } from './insightsCarouselSection'
 export { layoutSectionKnobs } from './layoutSection'
 export { listingSectionKnobs } from './listingSection'
 export { logoWallSectionKnobs } from './logoWallSection'
+export { markKnobs, ORB_ONLY } from './mark'
 export { mediaSectionKnobs } from './mediaSection'
 export { personGridSectionKnobs } from './personGridSection'
 export { quoteSectionKnobs } from './quoteSection'
@@ -81,4 +86,30 @@ export const BLOCK_KNOBS: Readonly<Record<string, BlockKnobs>> = {
   [mediaSectionKnobs.type]: mediaSectionKnobs,
   [screenGridSectionKnobs.type]: screenGridSectionKnobs,
   [listingSectionKnobs.type]: listingSectionKnobs,
+}
+
+/**
+ * Every shared object that declares design options, keyed by its Sanity type
+ * name — what the canvas reads when it has resolved a hovered element outward
+ * to an instance (#145, ADR 0023).
+ *
+ * **A type name, unlike `BLOCK_KNOBS`' sibling for array members.** Sanity
+ * registers a shared object globally, so two types cannot silently agree on
+ * `cta`; a member name is local to its array, which is why `ItemKnobs` is
+ * reached through its host block instead (ADR 0021).
+ *
+ * **Only the objects that have design options are here, and absence is not a
+ * migration state.** `figure`, `stat`, `chapter`, `embed` and the rest carry
+ * nothing but editorial fields, so there is nothing for an instance menu to
+ * offer and no declaration to write. What would be a miss — a shared object
+ * that publishes a closed value set and declares no knob — fails
+ * `knobGuard.test.ts` by name, in the same walk that checks the two other
+ * roots.
+ *
+ * Keyed off each spec's own `type`, so an object cannot be filed under a name
+ * its declaration does not answer to.
+ */
+export const OBJECT_KNOBS: Readonly<Record<string, ObjectKnobs>> = {
+  [markKnobs.type]: markKnobs,
+  [ctaKnobs.type]: ctaKnobs,
 }

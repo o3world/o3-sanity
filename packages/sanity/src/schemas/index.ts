@@ -1,13 +1,15 @@
-import { seo } from './objects/seo'
-import { migration } from './objects/migration'
-import { cta } from './objects/cta'
-import { figure } from './objects/figure'
-import { stat } from './objects/stat'
-import { embed } from './objects/embed'
-import { pullQuote } from './objects/pullQuote'
-import { bodyText } from './objects/bodyText'
-import { chapter } from './objects/chapter'
-import { mark } from './objects/mark'
+import {
+  bodyText,
+  chapter,
+  cta,
+  embed,
+  figure,
+  mark,
+  migration,
+  pullQuote,
+  seo,
+  stat,
+} from './objects'
 import { richText, statGroup } from './blocks/base'
 import {
   heroSection,

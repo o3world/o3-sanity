@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest'
 import {
   arrayHostParts,
   blockRootPath,
+  enclosingPaths,
   isNestedBlockGroqPath,
   itemArrayField,
   keyedItemParts,
@@ -210,6 +211,33 @@ describe('where an array hangs', () => {
     expect(arrayHostParts('sections[_key=="a"]')).toBeUndefined()
     expect(arrayHostParts('sections[_key=="a.b"]')).toBeUndefined()
     expect(arrayHostParts('')).toBeUndefined()
+  })
+})
+
+describe('enclosingPaths', () => {
+  const BLOCK = 'sections[_key=="a"]'
+
+  it('climbs from the leaf to the floor, innermost first', () => {
+    expect(enclosingPaths(`${BLOCK}.panels[_key=="p"].mark.kind`, BLOCK)).toEqual([
+      `${BLOCK}.panels[_key=="p"].mark.kind`,
+      `${BLOCK}.panels[_key=="p"].mark`,
+      `${BLOCK}.panels[_key=="p"]`,
+    ])
+  })
+
+  it('includes the hovered path itself, because the cursor may be ON the thing', () => {
+    expect(enclosingPaths(`${BLOCK}.mark`, BLOCK)).toEqual([`${BLOCK}.mark`])
+  })
+
+  it('excludes the floor', () => {
+    expect(enclosingPaths(BLOCK, BLOCK)).toEqual([])
+  })
+
+  it('says nothing for a path that does not sit under the floor', () => {
+    expect(enclosingPaths('seo.title', BLOCK)).toEqual([])
+    // An empty floor would make every document field a candidate, and the
+    // document is not a component the canvas configures.
+    expect(enclosingPaths('seo.title', '')).toEqual([])
   })
 })
 

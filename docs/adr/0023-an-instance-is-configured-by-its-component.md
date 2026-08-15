@@ -112,3 +112,60 @@ instance with no surface.
   resolving band contrast from the nearest surface) is deliberately allowed by
   the resolution-not-declaration rule above, but no such knob exists yet; the
   first one should cite this ADR and say how it resolves.
+
+## Consequences, revisited
+
+Written after [#145](https://github.com/o3world/o3-sanity/issues/145) converted
+`mark` and `cta` — the whole of the decision, both roots and both directions of
+the guard. What follows is what happened, checked against what the section above
+claimed.
+
+- **The fourth level is not in `subject.ts`, and it cannot be.** The Decision
+  says the canvas gains an `instance` level "between `item` and `field`", which
+  reads as a change to `canvasSubject`. `canvasSubject` is a pure function of
+  the hovered path, and an instance is not knowable from a path: `mark` is a
+  field name on four blocks and a keyed member in a column, and only the stored
+  `_type` distinguishes it from any other field. The overlay resolver has the
+  path and no document, so the walk lives one level down in `nearestInstance`,
+  where the draft snapshot is. `instance` is a fourth **knob surface** instead —
+  which is what the menu groups on, and what routes a pick to the right root.
+
+- **`defineBlockKnobs` refuses an instance knob**, the way it already refused an
+  item knob, so "a placement may not redefine an instance's knobs" is a compile
+  path that does not exist rather than a rule someone remembers.
+
+- **The guard learned the object registry, and it learned it asymmetrically.**
+  Blocks are walked declaration-first, because `defineSectionBlock` will not
+  build one without a spec. Shared objects are walked schema-first, over every
+  registered object whether or not anybody declared knobs for it — because a
+  shared object can still reach for `defineType` directly, and the silent miss
+  this ADR predicted is exactly an object that publishes a closed set nobody
+  declared. `defineSharedObject` is the compile-time half; the guard is the half
+  that catches an object which does not use it.
+
+- **`mark` had four closures, not three, and only three of them were knobs.**
+  `kind`, `state` and `size` are closed sets and convert; `speed` (a free
+  multiplier) and `paused` (a boolean) are not sets an editor picks from, so
+  they stay hand-written fields and borrow the same declared gate through
+  `hiddenUnless`. The rule ADR 0020 arrived at for `heroSection.eyebrow` holds
+  one root down: gating is not the tell, the closed value set is.
+
+- **The adapter learned one thing the block roots never asked of it.** Every
+  knob before this had three or four options and was drawn as a radio row;
+  `mark.state` has nine, and a nine-value radio row is a wall. `knobFields` now
+  falls back to a plain select above four options — derived from the option
+  count, not declared, because how many values there are is the only thing the
+  answer depends on and a `layout:` property on `Knob` would put a presentation
+  fact in a package that has no business holding one.
+
+- **`generated.ts` did not move.** Field order and field types are preserved
+  through `withKnobFields`, which is the whole reason the splice is shared, and
+  a typegen run produces a byte-identical file. That is the property that let
+  two schema types convert without touching a renderer.
+
+- **Optimistic fold-back does not reach an instance yet.** `patchableKnobRoots`
+  answers for a block's own roots and `patchableItemRoots` for a member's, and
+  an instance inside an array member is neither. A pick on a mark lands on the
+  mutation round-trip rather than on the click. Nothing is wrong on screen, it
+  is a beat slower than a block knob — the same gap #122 closed for members, at
+  the root added here.

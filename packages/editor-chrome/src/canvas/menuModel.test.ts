@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest'
-import { defineBlockKnobs, defineItemKnobs, knob, visibleKnobs } from '@o3/block-spec'
+import {
+  defineBlockKnobs,
+  defineItemKnobs,
+  defineObjectKnobs,
+  knob,
+  visibleKnobs,
+} from '@o3/block-spec'
 
 import { barKnobs, blockKnobReader } from './barKnobs'
 import { CANVAS_CHROME_ATTR, dismissesMenu, knobMenuModel, OPEN_FORM_ACTION } from './menuModel'
@@ -48,6 +54,25 @@ const panel = defineItemKnobs({
   ],
 })
 
+/**
+ * The component's own declaration (#145), keyed by a GLOBAL type name. The same
+ * spec answers for a mark on the block, a mark inside the panel and a mark in a
+ * layout column — nothing about it names a placement.
+ */
+const markKnobs = defineObjectKnobs({
+  type: 'mark',
+  title: 'Mark',
+  knobs: [
+    knob({ name: 'kind', title: 'Kind', options: ['orb', 'disc'] }),
+    knob({
+      name: 'state',
+      title: 'State',
+      options: ['working', 'solving'],
+      showWhen: { at: 'kind', mode: 'oneOf', values: ['orb'], emptyMatches: true },
+    }),
+  ],
+})
+
 const snapshotWith = (block: Record<string, unknown>, item: Record<string, unknown> = {}) => ({
   sections: [
     {
@@ -81,7 +106,7 @@ const menuFor = (
 
 const titlesIn = (
   model: ReturnType<typeof knobMenuModel>,
-  surface: 'band' | 'block' | 'item',
+  surface: 'band' | 'block' | 'item' | 'instance',
 ): string[] =>
   model.groups.find((group) => group.surface === surface)?.knobs.map((r) => r.knob.title) ?? []
 
@@ -274,6 +299,81 @@ describe('what the menu says it is about', () => {
   it('puts the jump last, always, and never anything after it', () => {
     expect(menuFor({}).actions).toEqual([OPEN_FORM_ACTION])
     expect(OPEN_FORM_ACTION.title).toContain('open form')
+  })
+})
+
+describe('the instance the cursor is in (#145)', () => {
+  const MARK = `${ITEM}.mark`
+  const snapshot = {
+    sections: [
+      {
+        _key: 'abc',
+        _type: 'heroSection',
+        panels: [{ _key: 'p1', _type: 'panel', mark: { _type: 'mark', kind: 'orb' } }],
+      },
+    ],
+  }
+
+  const menuWithMark = (mark?: { spec: typeof markKnobs; read: (path: string) => unknown }) =>
+    knobMenuModel({
+      spec: hero,
+      read: blockKnobReader(snapshot, BLOCK),
+      nested: false,
+      item: { spec: panel, read: blockKnobReader(snapshot, ITEM) },
+      instance: mark ?? { spec: markKnobs, read: blockKnobReader(snapshot, MARK) },
+      subject: { kind: 'item', title: 'Panel' },
+      componentName: 'Hero section',
+    })
+
+  it('delivers the instance’s roster in its own group, innermost of the four', () => {
+    const model = menuWithMark()
+    expect(model.groups.map((group) => group.surface)).toEqual([
+      'band',
+      'block',
+      'item',
+      'instance',
+    ])
+    expect(titlesIn(model, 'instance')).toEqual(['Kind', 'State'])
+  })
+
+  it('titles the group with the COMPONENT, not with where it was placed', () => {
+    // "An instance is configured by its component" is a claim about the title
+    // as much as about the roster: a mark is a Mark in a panel, in a column and
+    // on a block alike.
+    expect(menuWithMark().groups.at(-1)?.title).toBe('Mark')
+  })
+
+  it('gates against the instance’s own value, not the block’s', () => {
+    const disc = {
+      sections: [
+        {
+          _key: 'abc',
+          _type: 'heroSection',
+          panels: [{ _key: 'p1', _type: 'panel', mark: { _type: 'mark', kind: 'disc' } }],
+        },
+      ],
+    }
+    const model = menuWithMark({ spec: markKnobs, read: blockKnobReader(disc, MARK) })
+    expect(titlesIn(model, 'instance')).toEqual(['Kind'])
+  })
+
+  it('is absent, never empty, when no declared object encloses the cursor', () => {
+    // The no-dead-control rule at the fourth root: a `figure` under the cursor
+    // declares nothing, so there is no group rather than an empty one.
+    expect(
+      menuFor({}, { kind: 'item', title: 'Panel' }).groups.map((g) => g.surface),
+    ).not.toContain('instance')
+  })
+
+  it('rides no bar, because the bar is docked at the band', () => {
+    // `barKnobs` never sees an object spec. Stated here so a later `bar: true`
+    // on an instance knob is understood as a declaration nothing reads.
+    const onBar = barKnobs({
+      spec: hero,
+      read: blockKnobReader(snapshot, BLOCK),
+      nested: false,
+    }).map((r) => r.knob.name)
+    expect(onBar).not.toContain('kind')
   })
 })
 

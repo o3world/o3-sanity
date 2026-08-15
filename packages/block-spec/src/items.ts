@@ -1,4 +1,4 @@
-import type { BlockKnobs, ItemKnobs } from './types'
+import type { BlockKnobs, ItemKnobs, KnobRoot } from './types'
 
 /**
  * REACHING AN ARRAY MEMBER'S SPEC — through the block that hosts it, and never
@@ -21,13 +21,19 @@ import type { BlockKnobs, ItemKnobs } from './types'
  * called `constructor` would otherwise resolve to something off
  * `Object.prototype` and hand a function to a caller expecting a spec. Same
  * guard the canvas already keeps on the block registry.
+ *
+ * Takes any root, and answers `undefined` for the two that host nothing. A
+ * caller holding a `KnobRoot` asks the same question whichever one it is, and
+ * the alternative is a tier check at each call site that means "does this shape
+ * have an `items` key" — which is this function's job.
  */
 export function itemKnobsAt(
-  spec: BlockKnobs | undefined,
+  spec: KnobRoot | undefined,
   field: string | undefined,
 ): ItemKnobs | undefined {
-  if (!spec?.items || !field) return undefined
-  return Object.prototype.hasOwnProperty.call(spec.items, field) ? spec.items[field] : undefined
+  const items = spec && 'items' in spec ? spec.items : undefined
+  if (!items || !field) return undefined
+  return Object.prototype.hasOwnProperty.call(items, field) ? items[field] : undefined
 }
 
 /**

@@ -10,6 +10,7 @@ import type {
   KnobInput,
   KnobOption,
   KnobOptionInput,
+  ObjectKnobs,
 } from './types'
 
 function normaliseOption(input: KnobOptionInput): KnobOption {
@@ -171,6 +172,17 @@ export function defineBlockKnobs({
           `off the array in \`items\`.`,
       )
     }
+    // Same refusal, one root over. A block that declared an instance's options
+    // would be declaring them per placement, which is the thing ADR 0023
+    // forbids: four blocks carry a `mark`, and four copies of its roster drift
+    // apart with nothing failing.
+    if (k.surface === 'instance') {
+      throw new Error(
+        `defineBlockKnobs("${type}"): knob "${k.name}" claims the instance surface, but a block ` +
+          `does not configure the components placed in it. Declare it with defineObjectKnobs() ` +
+          `against the shared object's own type name.`,
+      )
+    }
   }
   const roots = new Set(knobs.map((k) => k.name.split('.')[0]))
   for (const field of Object.keys(items ?? {})) {
@@ -227,5 +239,41 @@ export function defineItemKnobs({
     title,
     tier: 'item',
     knobs: knobs.map((k) => (k.surface === 'item' ? k : { ...k, surface: 'item' })),
+  }
+}
+
+/**
+ * The knobs one SHARED OBJECT declares — a mark, a button (#145, ADR 0023).
+ *
+ * Same vocabulary, a third root. Every path here is relative to the instance,
+ * so `kind` is the instance's own field wherever that instance sits: a mark on
+ * a discipline row, a mark inside a rail panel and a mark in a layout column
+ * are one component with one spec, and nothing is re-declared per placement.
+ *
+ * **Keyed on the type name, unlike an array member** (ADR 0021). Sanity
+ * registers a shared object globally, so two types cannot silently agree on
+ * `cta` the way two blocks can each declare a `screen` — the silent collision
+ * that forced host-routing for members has no path here.
+ *
+ * **Surface is stamped, not computed**, for the reason `defineItemKnobs`
+ * stamps `item`: `instance` is a fact about the spec rather than about the
+ * path, and every knob this takes is delivered in the instance's own knob menu.
+ */
+export function defineObjectKnobs({
+  type,
+  title,
+  knobs,
+}: {
+  /** The shared object's registered Sanity type name — `mark`. Global. */
+  type: string
+  title: string
+  knobs: readonly Knob[]
+}): ObjectKnobs {
+  refuseDuplicatePaths(`defineObjectKnobs("${type}")`, knobs)
+  return {
+    type,
+    title,
+    tier: 'object',
+    knobs: knobs.map((k) => (k.surface === 'instance' ? k : { ...k, surface: 'instance' })),
   }
 }

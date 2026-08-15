@@ -19,15 +19,17 @@ const EMPTY_BY_SURFACE = (): Record<KnobSurface, ResolvedKnob[]> => ({
   band: [],
   block: [],
   item: [],
+  instance: [],
 })
 
 /**
  * THE ONE QUESTION: what does this ROOT offer, under this document state?
  *
- * The root is a block, or one member of a block's arrays (#122). Nothing below
- * asks which: every path is relative to the root it was handed, so an item's
- * knobs resolve against one named member with no array vocabulary anywhere in
- * the walk.
+ * The root is a block, one member of a block's arrays (#122), or one instance
+ * of a shared object (#145). Nothing below asks which: every path is relative
+ * to the root it was handed, so an item's knobs resolve against one named
+ * member and an instance's against one placement, with no array vocabulary and
+ * no host vocabulary anywhere in the walk.
  *
  * Every gate lives behind this call — the nesting gate, inherited gates,
  * `showWhen`, option resolution, default resolution and surface ownership —

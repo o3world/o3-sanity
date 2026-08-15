@@ -1,5 +1,12 @@
 import { visibleKnobs } from '@o3/block-spec'
-import type { BlockKnobs, ItemKnobs, KnobReader, KnobSurface, ResolvedKnob } from '@o3/block-spec'
+import type {
+  BlockKnobs,
+  ItemKnobs,
+  KnobReader,
+  KnobSurface,
+  ObjectKnobs,
+  ResolvedKnob,
+} from '@o3/block-spec'
 
 import { insertActionGroups } from './insertActions'
 import { itemActionGroups, type ItemActionGroup } from './itemActions'
@@ -81,10 +88,11 @@ export const OPEN_FORM_ACTION: KnobMenuAction = {
 
 /**
  * Outside-in, the same order the bar renders in: the band is the largest
- * container, the block sits in it, the item sits in the block. One rule for
- * both surfaces rather than two orders to keep in step.
+ * container, the block sits in it, the item sits in the block, and the instance
+ * sits innermost — a mark is inside a panel, which is inside a band. One rule
+ * for every surface rather than four orders to keep in step.
  */
-const SURFACE_ORDER: readonly KnobSurface[] = ['band', 'block', 'item']
+const SURFACE_ORDER: readonly KnobSurface[] = ['band', 'block', 'item', 'instance']
 
 export interface KnobMenuSubject {
   /**
@@ -105,11 +113,13 @@ export interface KnobMenuSubject {
  * The menu still opens: the jump row is what it has to offer, and offering it
  * is the honest answer.
  *
- * WHERE THE ITEM GROUP COMES FROM. Not from `spec`: an array member is its own
- * knob root (#122), so its options are declared against the member and read
- * with a member-relative reader. `item` is the caller's answer to "which member,
- * and what does it currently hold" — absent whenever the cursor is not inside
- * one, which is also why a row here can always name the path it writes.
+ * WHERE THE ITEM AND INSTANCE GROUPS COME FROM. Not from `spec`: an array
+ * member and a shared object are each their own knob root (#122, #145), so
+ * their options are declared against the member or the component and read with
+ * a reader rooted there. `item` and `instance` are the caller's answers to
+ * "which one, and what does it currently hold" — absent whenever the cursor is
+ * not inside one, which is also why a row here can always name the path it
+ * writes.
  *
  * WHY THE BLOCK'S KNOBS STAY WHEN AN ITEM IS THE SUBJECT. The block is still
  * under the cursor — an item is inside it — and the alternative is an editor
@@ -122,6 +132,7 @@ export function knobMenuModel({
   read,
   nested,
   item,
+  instance,
   subject,
   componentName,
   snapshot,
@@ -138,6 +149,14 @@ export function knobMenuModel({
    * against a block-relative spec is the silent write #122 was filed for.
    */
   item?: { spec: ItemKnobs; read: KnobReader } | undefined
+  /**
+   * The nearest enclosing shared object that declares knobs, and a reader
+   * rooted AT IT (#145) — `undefined` when no such object encloses the cursor,
+   * and when the one that does declares none. The spec and the reader travel
+   * together for the reason `item`'s do: a reader rooted anywhere else against
+   * this spec writes into a field no schema declares.
+   */
+  instance?: { spec: ObjectKnobs; read: KnobReader } | undefined
   subject: KnobMenuSubject
   /** The block's name — the title of the `block` group, and the header's fallback. */
   componentName?: string | undefined
@@ -172,6 +191,12 @@ export function knobMenuModel({
   // Resolved against the member, so one screen's `tone` reads that screen's
   // value and a gate on a sibling is an ordinary same-root gate.
   const itemKnobs = item ? visibleKnobs({ spec: item.spec, read: item.read }).all : []
+  // Resolved against the instance, so a mark inside a panel reads that mark's
+  // own `kind` and its gates are ordinary same-root gates — the same sentence
+  // as above, at the root a component owns rather than a host.
+  const instanceKnobs = instance
+    ? visibleKnobs({ spec: instance.spec, read: instance.read }).all
+    : []
 
   const titles: Record<KnobSurface, string | undefined> = {
     // The band is the full-width strip the block occupies (CONTEXT.md → Knobs).
@@ -179,13 +204,21 @@ export function knobMenuModel({
     band: 'Band',
     block: componentName,
     item: subject.kind === 'item' ? subject.title : undefined,
+    // The COMPONENT's title, not the subject's. An instance is named by what it
+    // is — "Mark" — wherever it was placed, which is the same thing its spec
+    // being keyed by type name says.
+    instance: instance?.spec.title,
   }
 
   const groups: KnobMenuGroup[] = []
   for (const surface of SURFACE_ORDER) {
     if (surface === 'item' && subject.kind !== 'item') continue
     const knobs =
-      surface === 'item' ? itemKnobs : all.filter((resolved) => resolved.surface === surface)
+      surface === 'item'
+        ? itemKnobs
+        : surface === 'instance'
+          ? instanceKnobs
+          : all.filter((resolved) => resolved.surface === surface)
     if (knobs.length === 0) continue
     groups.push({ surface, title: titles[surface] ?? humanSurface(surface), knobs })
   }
@@ -204,13 +237,26 @@ export function knobMenuModel({
   }
 }
 
+const SURFACE_FALLBACKS: Record<KnobSurface, string> = {
+  band: 'Band',
+  block: 'Block',
+  item: 'Item',
+  // "Component" rather than "Instance": an editor reading a group header wants
+  // the kind of thing they are configuring, and the instance's real name — the
+  // component's title — replaces this as soon as the snapshot settles.
+  instance: 'Component',
+}
+
 /**
  * The last-resort group title, for the window between the first hover and the
  * draft snapshot settling. A group titled by its surface still says what it
  * configures; an untitled one says nothing.
+ *
+ * A total map rather than a chain of ternaries, so a new surface is a compile
+ * error here instead of silently reading as "Block".
  */
 function humanSurface(surface: KnobSurface): string {
-  return surface === 'item' ? 'Item' : surface === 'band' ? 'Band' : 'Block'
+  return SURFACE_FALLBACKS[surface]
 }
 
 /**
