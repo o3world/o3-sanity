@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
+import { ArrowIcon } from '../components/arrow-icon'
 import { Button } from '../components/ui/button'
 import { button, figmaUrl } from './figma-home-spec'
 import { Callout, Mono, Page, Row, Section, SpecTable } from './spec-ui'
@@ -137,7 +138,7 @@ export const ButtonSpec: Story = {
           </div>
           <div className="flex flex-col items-start gap-4 bg-white p-10">
             <p className="eyebrow text-fg-subtle">Shipped</p>
-            <Button arrow>View our work</Button>
+            <Button icon={<ArrowIcon />}>View our work</Button>
           </div>
         </div>
         <Callout>

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { stegaClean } from '@sanity/client/stega'
 
 import { resolveContrast } from '@o3/block-spec'
-import { ArrowIcon, Button, buttonVariants, cn, useSurface, type ButtonProps } from '@o3/ui'
+import { BUTTON_ICONS, Button, buttonVariants, cn, useSurface, type ButtonProps } from '@o3/ui'
 
 import { buttonDestination, type ButtonLinkData } from '@/content/buttonDestination'
 
@@ -31,21 +31,18 @@ import { buttonDestination, type ButtonLinkData } from '@/content/buttonDestinat
  * but `dark | light | ghost`, and `useSurface` is the only reason this
  * component is a client component at all.
  *
- * `arrow` is a render-side prop, not a schema field, for the reason #38 gives:
- * Figma's `Show right icon` toggles the presence of a child rather than the
- * button's appearance, so it is a prop everywhere — including here. The chrome
- * button sets it because the nav pill's button (`2225:2877`) carries a trailing
- * icon.
+ * **It also picks its own icon** (#151). `icon` is a knob on the component, so
+ * the glyph is the editor's and no caller passes one: the arrow is the default,
+ * which is what the nav pill (`2225:2877`) and every other frame draws, and
+ * `none` is how an editor takes it away.
  */
 export function ButtonLink({
   button,
-  arrow = false,
   size,
   className,
   control,
 }: {
   button: ButtonLinkData | null | undefined
-  arrow?: boolean
   /** `Button`'s authored size step. Base is what the frames draw; section headers use Large. */
   size?: 'base' | 'large'
   /**
@@ -74,19 +71,26 @@ export function ButtonLink({
   // would otherwise match no fill and quietly resolve as Auto in draft mode.
   const fill = resolveContrast(stegaClean(button.contrast), surface)
   const destination = buttonDestination(button)
-  // One expression for both arms: the label and whatever trails it are the
-  // same drawing whichever element is underneath.
-  const content = (
-    <>
-      {button.label}
-      {arrow ? <ArrowIcon /> : null}
-    </>
-  )
+  // ONE GLYPH NODE, drawn by whichever arm wins. An absent field is the knob's
+  // default — Sanity writes `initialValue` only when the form creates the
+  // instance, so every button saved before this field existed reads as `arrow`,
+  // which is what all of them were passed by hand. A name the set does not hold
+  // — `none`, or a value from a dataset the schema has moved past — draws
+  // nothing, because a button with no icon is a real answer.
+  const Icon = BUTTON_ICONS[stegaClean(button.icon) || 'arrow']
+  const icon = Icon ? <Icon /> : null
 
   if (destination.kind === 'none') {
     return (
-      <Button variant={fill} size={size} className={className} type="button" {...control}>
-        {content}
+      <Button
+        variant={fill}
+        size={size}
+        className={className}
+        type="button"
+        icon={icon}
+        {...control}
+      >
+        {button.label}
       </Button>
     )
   }
@@ -101,7 +105,12 @@ export function ButtonLink({
         ? { target: '_blank', rel: 'noopener noreferrer' }
         : {})}
     >
-      {content}
+      {button.label}
+      {/* The same node the control arm hands to `Button`'s icon slot. This arm
+          styles a `<Link>` with `buttonVariants` and never mounts `Button`, so
+          there is no slot here to fill — the glyph is placed directly, in the
+          position the same drawing puts it. */}
+      {icon}
     </Link>
   )
 }

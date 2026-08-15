@@ -50,6 +50,7 @@ export {
 } from './itemActions'
 export { KnobControl, type KnobControlProps } from './KnobControl'
 export { KnobMenu, type KnobMenuProps } from './KnobMenu'
+export { OptionGlyph, type OptionGlyphs } from './OptionGlyph'
 export {
   dismissesMenu,
   knobMenuModel,

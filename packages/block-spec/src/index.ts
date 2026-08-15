@@ -75,6 +75,7 @@ export type {
   KnobInput,
   KnobOption,
   KnobOptionInput,
+  KnobOptionPreview,
   KnobReader,
   KnobRoot,
   KnobSurface,

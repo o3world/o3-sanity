@@ -73,7 +73,7 @@ export function RoleListSection({ eyebrow, heading, roles, surface, loc }: RoleL
               </div>
               {role.button ? (
                 <div className="shrink-0">
-                  <ButtonLink button={role.button} arrow size="large" />
+                  <ButtonLink button={role.button} size="large" />
                 </div>
               ) : null}
             </li>

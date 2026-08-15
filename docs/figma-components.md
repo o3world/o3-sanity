@@ -24,9 +24,12 @@ Two things that are _not_ variants:
   draw hover as a separate component because it has no `:hover`; code does not.
   Every `State` axis below collapses to a `hover:` utility.
 - **`Show right icon` / `Show left icon`** — the boolean props on `Button /
-Solid` — become **props, not variants**. They toggle the presence of a child,
+Solid`, spelled `Show Leading Icon` / `Show Trailing Icon?` on the 2026-08
+  set — become **a slot, not a variant**. They toggle the presence of a child,
   not the appearance of the button, and cva variants exist to select classes.
-  The existing `Button` already models this as `arrow?: boolean`.
+  `Button` exposes the trailing one as `icon?: ReactNode`, which the content
+  layer fills from the `icon` knob (#151); no canonical instance turns the
+  leading one on, so there is no area for it.
 
 ## The Local Components canvas is not the library
 
@@ -48,6 +51,7 @@ Verified by direct reads of the canonical frames, or recorded in
 | `Button / Ghost`                | `264:260`   | Size = Base; State = Default                   | `Button variant="ghost"`                                     | The one fill the 2026-08 set does not draw                                                        |
 | `Button / Solid`                | `136:754`   | Size = Base \| Large; State = Default \| Hover | **Superseded** by `2134:1785`                                | Nothing follows it                                                                                |
 | `Brand / Logo`                  | `264:50`    | Color = Black \| Red \| White                  | `BrandLogo` (`brand-logo.tsx`)                               | ✅ #41 — `White` unbuilt, below                                                                   |
+| `Icon` (the 2026-08 set)        | `2177:1556` | Icon = 29 named glyphs                         | `BUTTON_ICONS` (`button-icons.tsx`)                          | ✅ #151 — three curated for the button's icon knob; the rest route nowhere                        |
 | `Icon / Surface`                | `778:1862`  | Size = Base; State = Hover                     | `CarouselControl` — **to build**                             | The insights prev/next (#42)                                                                      |
 | `Icon / Soft`                   | `1203:1227` | Size = Base; State = Default                   | Inner chip of `Icon / Surface`                               | Not standalone — a part                                                                           |
 | `.building block Icon_text`     | `136:14`    | prop: `Icon name` (Material Symbols)           | **No component** — ADR 0009                                  | `<ArrowIcon />`, `<CloseIcon />`                                                                  |

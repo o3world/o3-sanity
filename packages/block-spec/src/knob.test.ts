@@ -20,6 +20,17 @@ describe('knob', () => {
     expect(k.options).toEqual([{ value: 'band', title: 'The band', previewUrl: '/shots/band.png' }])
   })
 
+  it('carries an option preview when there is one, and omits the key when there is not', () => {
+    const previewed = knob({
+      name: 'icon',
+      title: 'Icon',
+      optionPreview: 'glyph',
+      options: ['arrow', 'none'],
+    })
+    expect(previewed.optionPreview).toBe('glyph')
+    expect('optionPreview' in knob({ name: 'icon', title: 'Icon', options: ['arrow'] })).toBe(false)
+  })
+
   it('carries a description when there is one, and omits the key when there is not', () => {
     const described = knob({
       name: 'variant',

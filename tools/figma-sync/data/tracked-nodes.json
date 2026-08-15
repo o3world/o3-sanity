@@ -142,6 +142,14 @@
       "note": "The redesign's button — Theme = Black | White | Red, radius 2, 12x16 padding, 12px gap — which every redesigned frame instances. `Button` carries its geometry (#150) and `FilterChip` (packages/ui/src/components/filter-chip.tsx) is drawn from it too, so a change here routes to both. The set has no size axis; `Button`'s base | large is authored."
     },
     {
+      "nodeId": "2177:1556",
+      "kind": "componentSet",
+      "name": "Icon (2026-08 set)",
+      "figmaName": "Icon",
+      "codeComponent": "packages/ui/src/components/button-icons.tsx#BUTTON_ICONS",
+      "note": "Twenty-nine Lucide glyphs in a 20x20 frame, one variant axis (`Icon`). Three of them are the curated set a button's `icon` knob picks from (#151) — arrow-right (2177:1559), external-link (2177:1585), chevron-down (2177:1567) — vendored as inline SVG rather than installed (ADR 0009). A change to one of those three routes to `button-icons.tsx`; a change to the other twenty-six routes nowhere yet."
+    },
+    {
       "nodeId": "264:50",
       "kind": "componentSet",
       "name": "Brand / Logo",

@@ -36,6 +36,7 @@ export function knob({
   title,
   description,
   icon,
+  optionPreview,
   options,
   initialValue,
   valueType = 'string',
@@ -77,6 +78,7 @@ export function knob({
     title,
     ...(description ? { description } : {}),
     ...(icon ? { icon } : {}),
+    ...(optionPreview ? { optionPreview } : {}),
     options: resolved,
     ...(initialValue !== undefined ? { initialValue } : {}),
     // Always present, like `surface` and `bar`: a `Knob` answers what its

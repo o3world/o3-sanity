@@ -1,7 +1,7 @@
 import { defineObjectKnobs, knob } from '@o3/block-spec'
 
 /**
- * The button's one design option (#145, ADR 0023) — the last of #113's closed
+ * The button's design options (#145, ADR 0023) — the last of #113's closed
  * sets to leave the schema and become a declaration.
  *
  * A `button` sits on eight blocks, inside three array members, in a layout
@@ -43,6 +43,40 @@ export const buttonKnobs = defineObjectKnobs({
        */
       options: ['auto', 'dark', 'light', 'ghost'],
       initialValue: 'auto',
+    }),
+    knob({
+      name: 'icon',
+      title: 'Icon',
+      description:
+        'What trails the label. The arrow is what a button carries unless you say otherwise, and None leaves the label bare.',
+      /*
+       * **A closed set, not a free icon name.** Figma's `Icon` set
+       * (`2177:1556`) holds twenty-nine glyphs and a button trails three of
+       * them; offering the rest would let an editor pick a shape no frame
+       * draws. Each of these answers one of the destinations a button can
+       * already have — an ordinary link, a URL that leaves the site, a place
+       * further down this page — and `none` is the fourth answer rather than an
+       * empty field.
+       *
+       * `arrow` is the default because every canonical instance of the `Button`
+       * set (`2134:1785`) sets `Show Trailing Icon?` true, and because every
+       * call site in `apps/web` set the boolean this replaces by hand.
+       *
+       * **The glyphs are drawn by the control, not by this file.** The knobs
+       * directory is bundled into the Studio and into the preview overlay, so a
+       * declaration that imported `@o3/ui` would drag the site's render layer
+       * into both. `optionPreview: 'glyph'` says the option VALUES name icons;
+       * the canvas is handed the map from names to components by the app, and
+       * resolves them there.
+       */
+      optionPreview: 'glyph',
+      options: [
+        { value: 'arrow', title: 'Arrow' },
+        { value: 'external', title: 'External link' },
+        { value: 'down', title: 'Down' },
+        { value: 'none', title: 'None' },
+      ],
+      initialValue: 'arrow',
     }),
   ],
 })

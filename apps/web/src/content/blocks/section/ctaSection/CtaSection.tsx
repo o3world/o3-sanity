@@ -82,7 +82,7 @@ export function CtaSection({ heading, body, button, decoration }: CtaSectionProp
           ) : null}
           {button ? (
             <div className="mt-6">
-              <ButtonLink button={button} arrow />
+              <ButtonLink button={button} />
             </div>
           ) : null}
         </div>

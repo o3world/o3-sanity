@@ -40,7 +40,7 @@ export function CaseShowcaseSection({ heading, button, caseStudies }: CaseShowca
             {heading ? (
               <h2 className="text-display-xl font-display max-w-[571px] text-balance">{heading}</h2>
             ) : null}
-            {button ? <ButtonLink button={button} arrow size="large" /> : null}
+            {button ? <ButtonLink button={button} size="large" /> : null}
           </div>
         </div>
 

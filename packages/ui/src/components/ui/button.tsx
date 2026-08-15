@@ -3,7 +3,6 @@ import { Slot as SlotPrimitive } from 'radix-ui'
 import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn } from '@o3/ui/lib/utils'
-import { ArrowIcon } from '../arrow-icon'
 
 /**
  * Figma's `Button` set (`2134:1785`), which every redesigned frame instances.
@@ -12,6 +11,7 @@ import { ArrowIcon } from '../arrow-icon'
  * | ----- | -------------------------------- | ----------------------------------- |
  * | Theme | `Black` \| `White`               | `variant: dark \| light`            |
  * | State | `Default` … `Disabled`           | `hover:` / `disabled:` utilities    |
+ * | Icon  | `Show Trailing Icon?`            | the `icon` slot, filled or empty    |
  *
  * `ghost` is the one fill that set does not draw — it is `Button / Ghost`
  * (`264:260`), unfilled, taking the band's ink. It carries the same geometry
@@ -63,12 +63,20 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   asChild?: boolean
   /**
-   * Append the O3 arrow after the label. A **prop, not a variant**: Figma's
-   * `Show right icon` toggles the presence of a child rather than the button's
-   * appearance (#38). Ignored with `asChild` — put an `<ArrowIcon />` inside
-   * your child instead (Radix Slot accepts exactly one child element).
+   * **The icon slot** — a rendered area after the label that the parent fills
+   * (CONTEXT.md → Component, instance, slot). The button decides where the
+   * glyph sits and what colour it takes; what glyph it is, is the parent's to
+   * say, and the content layer says it from an editor's choice.
+   *
+   * Trailing only. Figma's set carries `Show Leading Icon` too, and every
+   * canonical instance sets it `false`, so there is no leading area to fill and
+   * no prop for one.
+   *
+   * Ignored with `asChild` — the replaced element takes the whole of the
+   * button's inside, and Radix Slot accepts exactly one child, so a filled slot
+   * would have nowhere to go. Put the glyph inside your child instead.
    */
-  arrow?: boolean
+  icon?: React.ReactNode
   ref?: React.Ref<HTMLButtonElement>
 }
 
@@ -77,7 +85,7 @@ function Button({
   variant,
   size,
   asChild = false,
-  arrow = false,
+  icon,
   children,
   ref,
   ...props
@@ -90,7 +98,7 @@ function Button({
       ) : (
         <>
           {children}
-          {arrow ? <ArrowIcon /> : null}
+          {icon}
         </>
       )}
     </Comp>

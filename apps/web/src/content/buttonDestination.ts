@@ -13,6 +13,7 @@ import { hrefForDoc } from './documents/urls'
 export interface ButtonLinkData {
   label?: string | null
   contrast?: string | null
+  icon?: string | null
   href?: string | null
   anchor?: string | null
   target?: { _type: string; title?: string | null; slug?: string | null } | null

@@ -159,14 +159,14 @@ export function SiteNav({ settings }: SiteNavProps) {
                 </li>
               ))}
             </ul>
-            {button ? <ButtonLink button={button} arrow /> : null}
+            {button ? <ButtonLink button={button} /> : null}
           </div>
 
           {/* 402: button + hamburger, 32px apart (`1814:1632`). The 402 bar
             crosses the same bands the pill does, so its button flips on the
             same terms. */}
           <div className="flex items-center gap-8 lg:hidden">
-            {button ? <ButtonLink button={button} arrow /> : null}
+            {button ? <ButtonLink button={button} /> : null}
             <MobileNavMenu items={navItems} button={button} />
           </div>
         </nav>
