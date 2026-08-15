@@ -39,6 +39,20 @@ Two labels carry meaning beyond `wayfinder:*`:
   produces one, label it and say on the ticket what you need decided.
 - **`bug`** — a defect in shipped work, as opposed to map-advancing work. Both can be `wayfinder:task`.
 
+#### Never make Nick look a number up
+
+**Every issue number you write gets a one-sentence summary the first time it appears in a reply.**
+`#152` on its own is a lookup; "#152 — the nav pill is a design generation behind" is a sentence he
+can act on. This holds for tickets you file, tickets you cite as related, and tickets another
+session filed. One sentence, not a paragraph: what it is, and its state if that is the point.
+
+**A decision you need from Nick gets asked in the chat, in full, not filed and pointed at.** Filing
+`awaiting:nick` is how the work is _tracked_; it is not how the question is _asked_. Put the actual
+choice in your reply — what is being decided, the two or three real answers, and which you would
+pick — so he can answer in a sentence without opening anything. Then record the answer on the
+ticket. An agent that files a ticket and says "see #157" has moved the work onto Nick's plate
+instead of off it.
+
 The board is [org Project 5](https://github.com/orgs/o3world/projects/5): `Board` is the kanban,
 `Awaiting Nick` and `Ready to pick up` are the two views worth checking first. Its _auto-add
 sub-issues_ workflow means attaching a ticket to a map puts it on the board — one more reason
