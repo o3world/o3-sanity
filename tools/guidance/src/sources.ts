@@ -12,7 +12,7 @@ const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..'
  *
  * The repo is source of truth (map #63 — voice is never packaged in the skill
  * ZIP, and never authored in Studio). Adding a guidance document is adding a
- * row here; the composition guide joins when #66 produces it.
+ * row here.
  */
 const GUIDANCE_SOURCES = [
   {
@@ -37,12 +37,14 @@ const GUIDANCE_SOURCES = [
     sourcePath: 'docs/guidance/slop.md',
   },
   {
-    /* The cross-block half of design-system knowledge (ADR 0025): what order
-     * bands go in, which surfaces they paint, which block carries which job.
-     * The other half — what one block is for — lives in that block's schema
-     * `description`, where `get_schema` already delivers it. */
+    /* Two parts. Part one is the cross-block half of design-system knowledge
+     * (ADR 0025): what order bands go in, which surfaces they paint, which
+     * block carries which job — the other half, what one block is for, lives
+     * in that block's schema `description` where `get_schema` delivers it.
+     * Part two is how one long argument holds up, which is what the authoring
+     * skill's brief applies before it writes anything. */
     key: 'o3-composition',
-    title: 'O3 page composition',
+    title: 'O3 composition catalog',
     sourcePath: 'docs/guidance/composition.md',
   },
   {
