@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { BrandMark } from '@o3/ui'
+import { BrandMark, SurfaceProvider } from '@o3/ui'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { ButtonLink } from '@/content/ButtonLink'
@@ -76,8 +76,9 @@ interface SiteNavProps {
  *
  * Nick's reference of both states (2026-08-02) is the answer sheet, and it is
  * a COLOUR answer sheet only — geometry, blur, fills, hairlines, spacing and
- * the link treatment are as built. Dark pill: white mark, white links, red
- * button. Light pill: ink mark, ink links, red button.
+ * the link treatment are as built. Dark pill: white mark, white links. Light
+ * pill: ink mark, ink links. The button is the third element on the bar and
+ * takes neither skin — see below.
  *
  * **The mark loses its plate rather than inverting.** The bar draws
  * `BrandMark` — the ring and the superscript, free-standing — not
@@ -87,112 +88,89 @@ interface SiteNavProps {
  * "invert the tile" and shipped a `Color=White` square; that variant is gone
  * again, and brand-logo.tsx records why.
  *
- * **The button is brand red on both surfaces** — the one thing on the bar that
- * does not move. That is the prototype's `.o3btn` and it is now Nick's
- * reference too, which matters because `Button` has no red fill: "there is no
- * red button on the canonical Home frame" is still true of every content band,
- * and the red here is chrome forcing its own fill rather than a variant an
- * editor could reach. See `BUTTON_BRAND_RED`.
+ * **The button is `Theme=White`** — the pill instances `2205:1298`, a white
+ * fill with an ink label `#0A0A0B`. The bar declares itself an `ink` surface
+ * (#147, ADR 0024) and the button resolves that fill for itself, the same way
+ * a button on any ink band does; nothing here forces one. The bar is the one
+ * piece of chrome sitting outside the band system, so without that declaration
+ * Auto would have nothing to read exactly where the fill matters most.
+ *
+ * The fill does not follow the ink flip. Contrast resolves from the surface a
+ * band declares, and `NavInk`'s flip is a runtime read of what is passing
+ * underneath — so the button holds the skin the frame draws, which is also
+ * what every SSR, no-JS and jsdom render sees.
  */
-/**
- * The nav button's fill, forced past the editor's choice and past `Button`'s
- * three variants.
- *
- * **Nav only, and deliberately not a variant.** `button.variant` is a schema enum
- * — anything added to the cva is something a Site Settings editor can put on a
- * content band, and the canonical frames have no red button (button.tsx; the
- * `brand → dark` legacy mapping in ButtonLink.tsx exists to retire exactly that).
- * The chrome owns its own surface, so it forces its own fill instead — three
- * classes that `cn` resolves over whichever variant is underneath.
- *
- * `variant="light"` stays on the call sites even though this replaces all
- * three of its classes. It pins the BASE the override lands on: without it the
- * editor's `button.variant` decides, and `ghost` would leave its own
- * `hover:opacity-70` in place beside this hover — an editor field quietly
- * changing the nav.
- *
- * Anchored twice: the prototype's `.o3btn` is `#EB1000` on both nav states,
- * and Nick's 2026-08-02 reference draws it red on the light pill and the dark
- * one alike. The hover follows the house idiom (`Button`'s own
- * `dark: bg-ink … hover:bg-ink/85`), not the prototype's `#d5d5d5`, which is a
- * prototype artefact with no token behind it.
- *
- * No `--duration-ink` here: this fill never changes with the bar, so the
- * button keeps `Button`'s own 220ms hover.
- */
-const BUTTON_BRAND_RED = 'bg-brand text-white hover:bg-brand/85'
-
 export function SiteNav({ settings }: SiteNavProps) {
   const navItems = settings?.navItems ?? []
   const button = settings?.primaryButton ?? null
 
   return (
-    <header
-      id={NAV_INK_TARGET}
-      className="lg:px-gutter group fixed inset-x-0 top-0 z-50 lg:top-[64px]"
-    >
-      <NavInk />
-      <nav
-        aria-label="Primary"
-        // The 1440 pill carries a hairline at `--color-on-ink-line`; without
-        // it the `bg-scrim` fill is invisible over a dark hero and the pill
-        // stops reading as a pill at all. Flipped, both sides invert together:
-        // `--color-scrim-light` over `--color-on-light-line`.
-        //
-        // `color` lives here rather than on each link so the one transition on
-        // this element carries the whole bar — the links, the hamburger's
-        // `currentColor` bars and anything else added to the row inherit the
-        // value mid-interpolation, and each keeps its own hover timing.
-        className="bg-scrim lg:border-on-ink-line group-data-[ink=dark]:bg-scrim-light lg:group-data-[ink=dark]:border-on-light-line group-data-[ink=dark]:text-fg duration-(--duration-ink) flex items-center justify-between px-5 py-2 text-white backdrop-blur-[14px] transition-[background-color,border-color,color] ease-out lg:mx-auto lg:w-full lg:max-w-[900px] lg:rounded-full lg:border lg:px-8"
+    // Chrome declares its own surface: the pill is a dark scrim over whatever
+    // it is floating across, and the mobile bar is the same fill.
+    <SurfaceProvider surface="ink">
+      <header
+        id={NAV_INK_TARGET}
+        className="lg:px-gutter group fixed inset-x-0 top-0 z-50 lg:top-[64px]"
       >
-        <Link
-          href="/"
-          aria-label={`${settings?.title ?? 'O3'} home`}
-          className="focus-visible:ring-brand shrink-0 focus-visible:outline-none focus-visible:ring-2"
+        <NavInk />
+        <nav
+          aria-label="Primary"
+          // The 1440 pill carries a hairline at `--color-on-ink-line`; without
+          // it the `bg-scrim` fill is invisible over a dark hero and the pill
+          // stops reading as a pill at all. Flipped, both sides invert together:
+          // `--color-scrim-light` over `--color-on-light-line`.
+          //
+          // `color` lives here rather than on each link so the one transition on
+          // this element carries the whole bar — the links, the hamburger's
+          // `currentColor` bars and anything else added to the row inherit the
+          // value mid-interpolation, and each keeps its own hover timing.
+          className="bg-scrim lg:border-on-ink-line group-data-[ink=dark]:bg-scrim-light lg:group-data-[ink=dark]:border-on-light-line group-data-[ink=dark]:text-fg duration-(--duration-ink) flex items-center justify-between px-5 py-2 text-white backdrop-blur-[14px] transition-[background-color,border-color,color] ease-out lg:mx-auto lg:w-full lg:max-w-[900px] lg:rounded-full lg:border lg:px-8"
         >
-          {/* No text color here on purpose: the mark is `currentColor`, so it
+          <Link
+            href="/"
+            aria-label={`${settings?.title ?? 'O3'} home`}
+            className="focus-visible:ring-brand shrink-0 focus-visible:outline-none focus-visible:ring-2"
+          >
+            {/* No text color here on purpose: the mark is `currentColor`, so it
               inherits the bar's ink and rides the bar's own 350ms transition
               rather than carrying a second pair of classes. That also lands it
               on `--color-fg` (#232323) when flipped — the same ink as the
               links, and the exact value the prototype's nav mark flips to. */}
-          <BrandMark size={64} />
-        </Link>
+            <BrandMark size={64} />
+          </Link>
 
-        {/* 1440: the 589px row (`1710:2245`). `contents` promotes the list
+          {/* 1440: the 589px row (`1710:2245`). `contents` promotes the list
             items to flex children, so space-between spreads links and the
             button. */}
-        <div className="hidden items-center justify-between lg:flex lg:w-[589px]">
-          <ul className="contents">
-            {navItems.map((item, i) => (
-              <li key={item._key ?? `nav-${i}`}>
-                <Link
-                  href={resolveButtonHref(item)}
-                  // `Button / Ghost` ships no Hover variant, so this hover is a
-                  // code decision rather than a read one (#38's State rule).
-                  // No `text-*` here: the ink is the bar's, inherited, so the
-                  // flip needs no second rule per link.
-                  className="text-button focus-visible:ring-brand duration-(--duration-hover) transition-opacity ease-out hover:opacity-70 focus-visible:outline-none focus-visible:ring-2"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          {button ? (
-            <ButtonLink button={button} arrow variant="light" buttonClassName={BUTTON_BRAND_RED} />
-          ) : null}
-        </div>
+          <div className="hidden items-center justify-between lg:flex lg:w-[589px]">
+            <ul className="contents">
+              {navItems.map((item, i) => (
+                <li key={item._key ?? `nav-${i}`}>
+                  <Link
+                    href={resolveButtonHref(item)}
+                    // `Button / Ghost` ships no Hover variant, so this hover is a
+                    // code decision rather than a read one (#38's State rule).
+                    // No `text-*` here: the ink is the bar's, inherited, so the
+                    // flip needs no second rule per link.
+                    className="text-button focus-visible:ring-brand duration-(--duration-hover) transition-opacity ease-out hover:opacity-70 focus-visible:outline-none focus-visible:ring-2"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            {button ? <ButtonLink button={button} arrow /> : null}
+          </div>
 
-        {/* 402: button + hamburger, 32px apart (`1814:1632`). The 402 bar
+          {/* 402: button + hamburger, 32px apart (`1814:1632`). The 402 bar
             crosses the same bands the pill does, so its button flips on the
             same terms. */}
-        <div className="flex items-center gap-8 lg:hidden">
-          {button ? (
-            <ButtonLink button={button} arrow variant="light" buttonClassName={BUTTON_BRAND_RED} />
-          ) : null}
-          <MobileNavMenu items={navItems} button={button} />
-        </div>
-      </nav>
-    </header>
+          <div className="flex items-center gap-8 lg:hidden">
+            {button ? <ButtonLink button={button} arrow /> : null}
+            <MobileNavMenu items={navItems} button={button} />
+          </div>
+        </nav>
+      </header>
+    </SurfaceProvider>
   )
 }

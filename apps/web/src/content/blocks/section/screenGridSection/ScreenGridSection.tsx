@@ -1,4 +1,4 @@
-import { SURFACE_CLASS } from '@o3/ui'
+import { SURFACE_CLASS, SurfaceProvider } from '@o3/ui'
 import { stegaClean } from '@sanity/client/stega'
 
 import { SanityImage } from '@/content/SanityImage'
@@ -77,35 +77,37 @@ export function ScreenGridSection({ screens, surface, loc }: ScreenGridSectionPr
   if (!screens?.length) return null
 
   return (
-    <section className={`${SURFACE_CLASS[resolveSurface(surface, 'white')]} px-gutter py-8`}>
-      <ul className="mx-auto grid w-full gap-8 lg:grid-cols-2">
-        {screens.map((screen) => {
-          const span = spanOf(screen.span)
-          return (
-            <li
-              key={screen._key}
-              // The tile's own path. This band has no header to attribute —
-              // it is screens and nothing else.
-              data-sanity={itemAttr(loc, 'screens', screen._key)}
-              className={`aspect-4/3 relative overflow-hidden rounded-[32px] ${TONE_CLASS[toneOf(screen.tone)]} ${SPAN_CLASS[span]}`}
-            >
-              <div className="absolute inset-x-0 top-0 flex justify-center px-8 pt-8 lg:px-16 lg:pt-16">
-                <SanityImage
-                  source={screen.media?.image}
-                  alt={screen.media?.alt}
-                  width={1600}
-                  className="w-full rounded-[12px] shadow-[0_0_32px_0_rgba(0,0,0,0.25)]"
-                  sizes={
-                    span === 'wide'
-                      ? '(min-width: 1024px) 1120px, 100vw'
-                      : '(min-width: 1024px) 480px, 100vw'
-                  }
-                />
-              </div>
-            </li>
-          )
-        })}
-      </ul>
-    </section>
+    <SurfaceProvider surface={resolveSurface(surface, 'white')}>
+      <section className={`${SURFACE_CLASS[resolveSurface(surface, 'white')]} px-gutter py-8`}>
+        <ul className="mx-auto grid w-full gap-8 lg:grid-cols-2">
+          {screens.map((screen) => {
+            const span = spanOf(screen.span)
+            return (
+              <li
+                key={screen._key}
+                // The tile's own path. This band has no header to attribute —
+                // it is screens and nothing else.
+                data-sanity={itemAttr(loc, 'screens', screen._key)}
+                className={`aspect-4/3 relative overflow-hidden rounded-[32px] ${TONE_CLASS[toneOf(screen.tone)]} ${SPAN_CLASS[span]}`}
+              >
+                <div className="absolute inset-x-0 top-0 flex justify-center px-8 pt-8 lg:px-16 lg:pt-16">
+                  <SanityImage
+                    source={screen.media?.image}
+                    alt={screen.media?.alt}
+                    width={1600}
+                    className="w-full rounded-[12px] shadow-[0_0_32px_0_rgba(0,0,0,0.25)]"
+                    sizes={
+                      span === 'wide'
+                        ? '(min-width: 1024px) 1120px, 100vw'
+                        : '(min-width: 1024px) 480px, 100vw'
+                    }
+                  />
+                </div>
+              </li>
+            )
+          })}
+        </ul>
+      </section>
+    </SurfaceProvider>
   )
 }

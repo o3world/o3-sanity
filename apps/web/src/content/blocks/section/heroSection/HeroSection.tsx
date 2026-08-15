@@ -1,6 +1,6 @@
 import { stegaClean } from '@sanity/client/stega'
 
-import { CollectionHero, MaskedLines, OrbitalSphere, Reveal } from '@o3/ui'
+import { CollectionHero, MaskedLines, OrbitalSphere, Reveal, SurfaceProvider } from '@o3/ui'
 
 import { ButtonLink } from '@/content/ButtonLink'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
@@ -78,100 +78,99 @@ export function HeroSection({
   }
 
   return (
-    <section className="bg-ink px-gutter relative isolate overflow-hidden text-white">
-      {showOrbs ? (
-        /*
-         * Only the sphere's cap is ever visible. Solving the frame's limb
-         * (see OrbitalSphere) gives r ≈ 581 centred 339px below the band's
-         * foot — 80.7% of the frame width, apex 242px up from the foot. Held
-         * in `vw` so the ratio survives any viewport, and anchored to the
-         * foot so the copy can grow above it.
-         *
-         * The ratio does NOT carry to 402: the band is barely a third the
-         * width but only a quarter shorter, so 80.7vw leaves a 67px sliver of
-         * sphere under a 660px band. The proportion the eye reads is
-         * apex-height against band-height, so at 402 the sphere doubles and
-         * hangs lower to hold roughly the frame's quarter-of-the-band cap.
-         */
-        <OrbitalSphere
-          motion="orbit"
-          className="bottom-[-124vw] left-1/2 w-[165vw] -translate-x-1/2 lg:bottom-[-77.1vw] lg:w-[95.5vw]"
-        />
-      ) : null}
-
-      {/*
-       * The band's rhythm, read off both frames rather than centred inside a
-       * `min-h`: the headline starts 288px down at 1440 (`2089:4313`) and
-       * 276px down at 402 (`1814:1622`), and the sphere gets the 470 / 353
-       * underneath. Together with the copy that resolves to the frames'
-       * 1100 / 874 band heights.
-       *
-       * **Alignment switches at `lg`.** The 1440 frame centres the whole
-       * block; the 402 frame sets it as a 362px column flush to the 20px
-       * gutter, headline and button both left. That is composition, so it
-       * lives here rather than in a token (ADR 0006).
-       */}
-      <div className="max-w-content relative z-10 mx-auto flex flex-col items-start pb-[353px] pt-[276px] text-left lg:items-center lg:pb-[470px] lg:pt-[288px] lg:text-center">
-        <h1 className="text-hero font-display text-balance">
-          <MaskedLines
-            lines={lines.map((line, index) => (
-              // The frame steps the value between lines rather than fading the
-              // block: within a line it is flat, and the step is hard. Both
-              // ends are solid white — the 92% `on-ink` alpha belongs to the
-              // CTA band, and this headline is drawn at full opacity.
-              <span
-                key={line}
-                className={
-                  index === lines.length - 1 && lines.length > 1 ? 'text-white/50' : 'text-white'
-                }
-              >
-                {line}
-              </span>
-            ))}
+    // The orbital band always paints ink, whatever the block's `surface` field
+    // says — the field never reaches this composition. Declaring it is what
+    // gives the button below a readable fill without anyone forcing one.
+    <SurfaceProvider surface="ink">
+      <section className="bg-ink px-gutter relative isolate overflow-hidden text-white">
+        {showOrbs ? (
+          /*
+           * Only the sphere's cap is ever visible. Solving the frame's limb
+           * (see OrbitalSphere) gives r ≈ 581 centred 339px below the band's
+           * foot — 80.7% of the frame width, apex 242px up from the foot. Held
+           * in `vw` so the ratio survives any viewport, and anchored to the
+           * foot so the copy can grow above it.
+           *
+           * The ratio does NOT carry to 402: the band is barely a third the
+           * width but only a quarter shorter, so 80.7vw leaves a 67px sliver of
+           * sphere under a 660px band. The proportion the eye reads is
+           * apex-height against band-height, so at 402 the sphere doubles and
+           * hangs lower to hold roughly the frame's quarter-of-the-band cap.
+           */
+          <OrbitalSphere
+            motion="orbit"
+            className="bottom-[-124vw] left-1/2 w-[165vw] -translate-x-1/2 lg:bottom-[-77.1vw] lg:w-[95.5vw]"
           />
-        </h1>
-
-        {subheading ? (
-          // 724px and white at 50% (`2089:4315`) — the same alpha as the
-          // headline's closing line, not the CTA band's 60% subhead.
-          <Reveal delay={120} className="mt-10">
-            <p className="text-lead mx-auto max-w-[724px] text-balance text-white/50">
-              {subheading}
-            </p>
-          </Reveal>
         ) : null}
 
-        {button ? (
-          // 33 below the standfirst at 1440, 39 below the headline at 402
-          // (`1814:1622`'s column gap, where there is no standfirst at all).
-          <Reveal delay={220} className="mt-10 lg:mt-8">
-            {/*
-             * `light` is forced for the same reason the nav pill forces it:
-             * this band owns its background. The hero is always the orbital
-             * field, so `surface` never reaches it and a `dark` fill would be
-             * an ink button on ink whatever an editor picked.
-             */}
-            <ButtonLink button={button} arrow variant="light" />
-          </Reveal>
-        ) : null}
-      </div>
+        {/*
+         * The band's rhythm, read off both frames rather than centred inside a
+         * `min-h`: the headline starts 288px down at 1440 (`2089:4313`) and
+         * 276px down at 402 (`1814:1622`), and the sphere gets the 470 / 353
+         * underneath. Together with the copy that resolves to the frames'
+         * 1100 / 874 band heights.
+         *
+         * **Alignment switches at `lg`.** The 1440 frame centres the whole
+         * block; the 402 frame sets it as a 362px column flush to the 20px
+         * gutter, headline and button both left. That is composition, so it
+         * lives here rather than in a token (ADR 0006).
+         */}
+        <div className="max-w-content relative z-10 mx-auto flex flex-col items-start pb-[353px] pt-[276px] text-left lg:items-center lg:pb-[470px] lg:pt-[288px] lg:text-center">
+          <h1 className="text-hero font-display text-balance">
+            <MaskedLines
+              lines={lines.map((line, index) => (
+                // The frame steps the value between lines rather than fading the
+                // block: within a line it is flat, and the step is hard. Both
+                // ends are solid white — the 92% `on-ink` alpha belongs to the
+                // CTA band, and this headline is drawn at full opacity.
+                <span
+                  key={line}
+                  className={
+                    index === lines.length - 1 && lines.length > 1 ? 'text-white/50' : 'text-white'
+                  }
+                >
+                  {line}
+                </span>
+              ))}
+            />
+          </h1>
 
-      {/*
-       * The curve. Both frames draw the same shape and neither draws it the
-       * same way twice: 1440 is now an explicit `Curve` vector (`2089:4309`,
-       * 1440 × 108 at the band's foot, filled #F7F7F6 — the redesign replaced
-       * the 2182 × 863 ellipse the #42 build read); 402 is still an ellipse
-       * (`1864:2410`, 715.53 × 283 at y 840 on an 874-tall band, i.e. 178% of
-       * the band's width showing its top 34px).
-       *
-       * Reproduced as one masked ellipse at both widths, because the two
-       * shapes have the same proportion to a tenth of a percent (2182/863 =
-       * 2.528, 715.53/283 = 2.529) — what differs is how much of it shows.
-       * Getting that wrong is the obvious failure: a shorter, rounder dome.
-       */}
-      <div className="absolute inset-x-0 bottom-0 z-0 h-[34px] overflow-hidden lg:h-[108px]">
-        <div className="bg-bone-soft absolute left-1/2 top-0 aspect-[2182/863] w-[178%] -translate-x-1/2 rounded-[50%] lg:w-[151.5%]" />
-      </div>
-    </section>
+          {subheading ? (
+            // 724px and white at 50% (`2089:4315`) — the same alpha as the
+            // headline's closing line, not the CTA band's 60% subhead.
+            <Reveal delay={120} className="mt-10">
+              <p className="text-lead mx-auto max-w-[724px] text-balance text-white/50">
+                {subheading}
+              </p>
+            </Reveal>
+          ) : null}
+
+          {button ? (
+            // 33 below the standfirst at 1440, 39 below the headline at 402
+            // (`1814:1622`'s column gap, where there is no standfirst at all).
+            <Reveal delay={220} className="mt-10 lg:mt-8">
+              <ButtonLink button={button} arrow />
+            </Reveal>
+          ) : null}
+        </div>
+
+        {/*
+         * The curve. Both frames draw the same shape and neither draws it the
+         * same way twice: 1440 is now an explicit `Curve` vector (`2089:4309`,
+         * 1440 × 108 at the band's foot, filled #F7F7F6 — the redesign replaced
+         * the 2182 × 863 ellipse the #42 build read); 402 is still an ellipse
+         * (`1864:2410`, 715.53 × 283 at y 840 on an 874-tall band, i.e. 178% of
+         * the band's width showing its top 34px).
+         *
+         * Reproduced as one masked ellipse at both widths, because the two
+         * shapes have the same proportion to a tenth of a percent (2182/863 =
+         * 2.528, 715.53/283 = 2.529) — what differs is how much of it shows.
+         * Getting that wrong is the obvious failure: a shorter, rounder dome.
+         */}
+        <div className="absolute inset-x-0 bottom-0 z-0 h-[34px] overflow-hidden lg:h-[108px]">
+          <div className="bg-bone-soft absolute left-1/2 top-0 aspect-[2182/863] w-[178%] -translate-x-1/2 rounded-[50%] lg:w-[151.5%]" />
+        </div>
+      </section>
+    </SurfaceProvider>
   )
 }

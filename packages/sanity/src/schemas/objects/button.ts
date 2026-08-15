@@ -8,9 +8,11 @@ import { defineSharedObject } from './defineSharedObject'
  * A button, wherever one is placed — including the one that submits the
  * inquiry form.
  *
- * `variant` is declared in `src/knobs/button.ts` and its field is generated
+ * `contrast` is declared in `src/knobs/button.ts` and its field is generated
  * from that declaration (ADR 0023), so the canvas offers the fill an editor can
- * already see in the form. Everything else here is editorial.
+ * already see in the form. Its default, `auto`, is resolved from the surface
+ * the instance is standing on rather than stored (ADR 0024). Everything else
+ * here is editorial.
  *
  * **A destination is a union of four arms**: nothing, `target`, `href`, or
  * `anchor`. Which arm a button is on is read back from which field carries a
@@ -62,7 +64,7 @@ export const button = defineSharedObject({
       validation: (rule) => rule.custom((value: string | undefined) => validateAnchorName(value)),
       hidden: ({ parent }) => Boolean(parent?.target || parent?.href),
     }),
-    'variant',
+    'contrast',
   ],
   preview: {
     select: { title: 'label', subtitle: 'href' },

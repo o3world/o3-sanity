@@ -1,4 +1,4 @@
-import { SURFACE_CLASS } from '@o3/ui'
+import { SURFACE_CLASS, SurfaceProvider } from '@o3/ui'
 import { stegaClean } from '@sanity/client/stega'
 
 import { SanityImage } from '@/content/SanityImage'
@@ -41,37 +41,40 @@ type MediaSectionProps = SectionProps<'mediaSection'>
 export function MediaSection({ media, variant, width, surface }: MediaSectionProps) {
   if (!media) return null
   const fullBleed = stegaClean(width) === 'full-bleed'
-  const surfaceClass = SURFACE_CLASS[resolveSurface(surface, 'white')]
+  const resolved = resolveSurface(surface, 'white')
+  const surfaceClass = SURFACE_CLASS[resolved]
 
   if (stegaClean(variant) === 'capture') {
     return (
-      <section className={surfaceClass}>
-        <figure>
-          {/*
-           * The stage: `--gradient-screen-stage` at 135° with the frame's
-           * `inset 0 -16px 16px rgba(0,0,0,0.05)` foot, 64px of top padding,
-           * and a fixed height it clips at. 700 is the 1440 value; below `lg`
-           * the band shortens rather than scaling the capture, so the same
-           * amount of page is legible at both widths (ADR 0006).
-           */}
-          <div className="px-gutter bg-(image:--gradient-screen-stage) relative h-[520px] overflow-hidden pt-16 shadow-[inset_0_-16px_16px_0_rgba(0,0,0,0.05)] lg:h-[700px]">
-            <div className="max-w-article mx-auto w-full">
-              <SanityImage
-                source={media.image}
-                alt={media.alt}
-                width={1650}
-                className="w-full rounded-[12px] shadow-[0_0_32px_0_rgba(0,0,0,0.4)]"
-                sizes="(min-width: 1024px) 822px, 100vw"
-              />
+      <SurfaceProvider surface={resolved}>
+        <section className={surfaceClass}>
+          <figure>
+            {/*
+             * The stage: `--gradient-screen-stage` at 135° with the frame's
+             * `inset 0 -16px 16px rgba(0,0,0,0.05)` foot, 64px of top padding,
+             * and a fixed height it clips at. 700 is the 1440 value; below `lg`
+             * the band shortens rather than scaling the capture, so the same
+             * amount of page is legible at both widths (ADR 0006).
+             */}
+            <div className="px-gutter bg-(image:--gradient-screen-stage) relative h-[520px] overflow-hidden pt-16 shadow-[inset_0_-16px_16px_0_rgba(0,0,0,0.05)] lg:h-[700px]">
+              <div className="max-w-article mx-auto w-full">
+                <SanityImage
+                  source={media.image}
+                  alt={media.alt}
+                  width={1650}
+                  className="w-full rounded-[12px] shadow-[0_0_32px_0_rgba(0,0,0,0.4)]"
+                  sizes="(min-width: 1024px) 822px, 100vw"
+                />
+              </div>
             </div>
-          </div>
-          {media.caption ? (
-            <figcaption className="text-fg-subtle px-gutter mt-4 text-sm">
-              {media.caption}
-            </figcaption>
-          ) : null}
-        </figure>
-      </section>
+            {media.caption ? (
+              <figcaption className="text-fg-subtle px-gutter mt-4 text-sm">
+                {media.caption}
+              </figcaption>
+            ) : null}
+          </figure>
+        </section>
+      </SurfaceProvider>
     )
   }
 
@@ -99,19 +102,21 @@ export function MediaSection({ media, variant, width, surface }: MediaSectionPro
   }
 
   return (
-    <section className={`${surfaceClass} px-gutter pb-band-article`}>
-      <figure className="max-w-article mx-auto w-full">
-        <SanityImage
-          source={media.image}
-          alt={media.alt}
-          width={1650}
-          className="w-full shadow-[0_0_64px_0_rgba(0,0,0,0.1)]"
-          sizes="(min-width: 1024px) 822px, 100vw"
-        />
-        {media.caption ? (
-          <figcaption className="text-fg-subtle mt-4 text-sm">{media.caption}</figcaption>
-        ) : null}
-      </figure>
-    </section>
+    <SurfaceProvider surface={resolved}>
+      <section className={`${surfaceClass} px-gutter pb-band-article`}>
+        <figure className="max-w-article mx-auto w-full">
+          <SanityImage
+            source={media.image}
+            alt={media.alt}
+            width={1650}
+            className="w-full shadow-[0_0_64px_0_rgba(0,0,0,0.1)]"
+            sizes="(min-width: 1024px) 822px, 100vw"
+          />
+          {media.caption ? (
+            <figcaption className="text-fg-subtle mt-4 text-sm">{media.caption}</figcaption>
+          ) : null}
+        </figure>
+      </section>
+    </SurfaceProvider>
   )
 }

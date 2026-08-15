@@ -2,6 +2,7 @@ import type { HTMLAttributes } from 'react'
 import { cva } from 'class-variance-authority'
 
 import { cn } from '../lib/utils'
+import { SurfaceProvider } from './surface-context'
 
 /** The three-surface system every section block renders on (docs/specs/schema.md). */
 export const SURFACES = ['white', 'bone', 'ink'] as const
@@ -85,7 +86,9 @@ export interface SectionShellProps extends HTMLAttributes<HTMLElement> {
  * case-study cards) or paint a **gradient** behind its container builds its own
  * `<section>` and reaches for `SURFACE_CLASS` instead. That is deliberate:
  * teaching this shell every exception would make it the union of all eight
- * bands rather than the shape they share.
+ * bands rather than the shape they share. Such a band reaches for
+ * `SurfaceProvider` in the same breath — painting a surface and declaring it
+ * are one act, and the nine bands that use this shell get both here.
  */
 export function SectionShell({
   surface,
@@ -98,11 +101,16 @@ export function SectionShell({
   ...rest
 }: SectionShellProps) {
   return (
-    <section className={cn(sectionShellVariants({ surface, top, bottom }), className)} {...rest}>
-      <div className={cn('mx-auto w-full', SECTION_WIDTH_CLASS[width], contentClassName)}>
-        {children}
-      </div>
-    </section>
+    // `?? 'white'` is the cva default spelled once more, because the band
+    // declares what it PAINTS: an omitted prop draws white, so it declares
+    // white.
+    <SurfaceProvider surface={surface ?? 'white'}>
+      <section className={cn(sectionShellVariants({ surface, top, bottom }), className)} {...rest}>
+        <div className={cn('mx-auto w-full', SECTION_WIDTH_CLASS[width], contentClassName)}>
+          {children}
+        </div>
+      </section>
+    </SurfaceProvider>
   )
 }
 

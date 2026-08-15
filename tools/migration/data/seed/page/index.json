@@ -21,7 +21,7 @@
         "_type": "button",
         "label": "View our work",
         "href": "/work",
-        "variant": "light"
+        "contrast": "light"
       },
       "decoration": "orbs"
     },
@@ -68,7 +68,7 @@
         "_type": "button",
         "label": "See all partners",
         "href": "/work",
-        "variant": "dark"
+        "contrast": "dark"
       }
     },
     {
@@ -80,7 +80,7 @@
         "_type": "button",
         "label": "View our work",
         "href": "/work",
-        "variant": "dark"
+        "contrast": "dark"
       },
       "caseStudies": [
         {
@@ -129,7 +129,7 @@
             "_type": "button",
             "label": "View our Sanity work",
             "href": "/work",
-            "variant": "dark"
+            "contrast": "dark"
           }
         },
         {
@@ -145,7 +145,7 @@
             "_type": "button",
             "label": "View our Vercel work",
             "href": "/work",
-            "variant": "dark"
+            "contrast": "dark"
           }
         },
         {
@@ -161,7 +161,7 @@
             "_type": "button",
             "label": "View our Lovable work",
             "href": "/work",
-            "variant": "dark"
+            "contrast": "dark"
           }
         }
       ],
@@ -193,7 +193,7 @@
             "_type": "button",
             "label": "View our work",
             "href": "/work",
-            "variant": "dark"
+            "contrast": "dark"
           }
         },
         {
@@ -215,7 +215,7 @@
             "_type": "button",
             "label": "View our work",
             "href": "/work",
-            "variant": "dark"
+            "contrast": "dark"
           }
         },
         {
@@ -237,7 +237,7 @@
             "_type": "button",
             "label": "View our work",
             "href": "/work",
-            "variant": "dark"
+            "contrast": "dark"
           }
         }
       ],
@@ -259,7 +259,7 @@
         "_type": "button",
         "label": "View our work",
         "href": "/work",
-        "variant": "light"
+        "contrast": "light"
       },
       "decoration": "orbs"
     }

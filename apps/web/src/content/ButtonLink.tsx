@@ -1,27 +1,12 @@
+'use client'
+
 import Link from 'next/link'
 import { stegaClean } from '@sanity/client/stega'
 
-import { ArrowIcon, Button, buttonVariants, cn, type ButtonProps } from '@o3/ui'
+import { resolveContrast } from '@o3/block-spec'
+import { ArrowIcon, Button, buttonVariants, cn, useSurface, type ButtonProps } from '@o3/ui'
 
 import { buttonDestination, type ButtonLinkData } from '@/content/buttonDestination'
-
-const VARIANTS = ['dark', 'light', 'ghost'] as const
-type ButtonVariant = (typeof VARIANTS)[number]
-
-/**
- * The pre-#42 enum, mapped rather than dropped. `load` replaces every
- * pipeline-owned document, but a dataset that has not been rebuilt since the
- * rename still carries the old strings — and a locked document keeps them
- * forever. `brand` becomes `dark` because the canonical frames have no red
- * button (docs/figma-components.md); `inverse` was already the white fill.
- */
-const LEGACY_VARIANTS: Record<string, ButtonVariant> = { brand: 'dark', inverse: 'light' }
-
-function resolveVariant(value: string | null | undefined): ButtonVariant {
-  const clean = stegaClean(value) ?? ''
-  if (VARIANTS.includes(clean as ButtonVariant)) return clean as ButtonVariant
-  return LEGACY_VARIANTS[clean] ?? 'dark'
-}
 
 /**
  * The one button renderer.
@@ -38,6 +23,14 @@ function resolveVariant(value: string | null | undefined): ButtonVariant {
  * swallow a cmd-click. `buttonVariants` is the shared drawing, applied to
  * whichever element wins.
  *
+ * **It also picks its own fill** (#147, ADR 0024). `contrast` defaults to
+ * `auto`, and Auto reads the nearest declared surface — so a band changing
+ * from white to ink repaints the buttons on it, and no caller forces a fill
+ * past the editor's choice. This is the layer that knows about surfaces:
+ * `resolveContrast` is the whole rule, `@o3/ui`'s `Button` still knows nothing
+ * but `dark | light | ghost`, and `useSurface` is the only reason this
+ * component is a client component at all.
+ *
  * `arrow` is a render-side prop, not a schema field, for the reason #38 gives:
  * Figma's `Show right icon` toggles the presence of a child rather than the
  * button's appearance, so it is a prop everywhere — including here. The chrome
@@ -48,9 +41,7 @@ export function ButtonLink({
   button,
   arrow = false,
   size,
-  variant,
   className,
-  buttonClassName,
   control,
 }: {
   button: ButtonLinkData | null | undefined
@@ -58,23 +49,14 @@ export function ButtonLink({
   /** `Button`'s authored size step. Base is what the frames draw; section headers use Large. */
   size?: 'base' | 'large'
   /**
-   * Force the fill, ignoring the editor's choice. For **chrome and section
-   * shells that own their own background**: the nav pill is always a dark
-   * scrim, so a `dark` button on it is unreadable no matter what a Site
-   * Settings editor picks. Content bands leave this alone.
-   */
-  variant?: ButtonVariant
-  /** Positioning and spacing on the rendered element — never the fill. */
-  className?: string
-  /**
-   * Overrides on the rendered element's own fill classes, merged over its
-   * variant.
+   * Positioning, spacing, and the responsive exceptions a composition owns —
+   * merged over the resolved fill's own classes, which is how the rail panels
+   * draw a ghost at 402 and the editor's fill from `lg` up.
    *
-   * This is the seam for a caller whose surface changes underneath a button —
-   * the nav's has to invert with the bar's ink flip — not a general escape
-   * hatch; a fill a *document* chooses is `variant`.
+   * A fill a *document* chooses is `contrast`, and a fill a *band* implies is
+   * the surface it declares. Neither is this.
    */
-  buttonClassName?: string
+  className?: string
   /**
    * Attributes for the control arm, applied only when there is no destination.
    * A link has no `type` and cannot be disabled, so a button that goes
@@ -82,9 +64,15 @@ export function ButtonLink({
    */
   control?: Pick<ButtonProps, 'type' | 'aria-disabled' | 'aria-describedby'>
 }) {
+  // Before the early return: a hook cannot sit behind one.
+  const surface = useSurface()
+
   if (!button?.label) return null
 
-  const fill = variant ?? resolveVariant(button.variant)
+  // Cleaned here rather than inside `resolveContrast`, which lives in the
+  // zero-dependency spec package and cannot import stega. A stega'd `"ghost"`
+  // would otherwise match no fill and quietly resolve as Auto in draft mode.
+  const fill = resolveContrast(stegaClean(button.contrast), surface)
   const destination = buttonDestination(button)
   // One expression for both arms: the label and whatever trails it are the
   // same drawing whichever element is underneath.
@@ -97,13 +85,7 @@ export function ButtonLink({
 
   if (destination.kind === 'none') {
     return (
-      <Button
-        variant={fill}
-        size={size}
-        className={cn(className, buttonClassName)}
-        type="button"
-        {...control}
-      >
+      <Button variant={fill} size={size} className={className} type="button" {...control}>
         {content}
       </Button>
     )
@@ -112,7 +94,7 @@ export function ButtonLink({
   return (
     <Link
       href={destination.href}
-      className={cn(buttonVariants({ variant: fill, size }), className, buttonClassName)}
+      className={cn(buttonVariants({ variant: fill, size }), className)}
       // A URL that leaves the site opens beside the page the visitor was
       // reading, and `noopener` keeps the opened page off `window.opener`.
       {...(destination.kind === 'external' && destination.offsite

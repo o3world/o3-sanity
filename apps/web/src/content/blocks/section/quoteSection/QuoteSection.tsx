@@ -1,4 +1,4 @@
-import { MoleculeMark, OrbitalSphere, SURFACE_CLASS } from '@o3/ui'
+import { MoleculeMark, OrbitalSphere, SURFACE_CLASS, SurfaceProvider } from '@o3/ui'
 import { stegaClean } from '@sanity/client/stega'
 
 import { resolveSurface } from '@/content/blocks/surface'
@@ -45,40 +45,44 @@ export function QuoteSection({ quote, attribution, decoration, surface }: QuoteS
   const showOrbs = !showMolecule && chosen !== 'none'
 
   return (
-    <section
-      className={`${SURFACE_CLASS[resolveSurface(surface, 'bone')]} px-gutter py-band-lg relative isolate overflow-hidden`}
-    >
-      {showMolecule ? (
-        <MoleculeMark className="text-ink absolute -z-10 hidden opacity-10 lg:right-[-203px] lg:top-[181px] lg:block lg:w-[699px]" />
-      ) : null}
-
-      {showOrbs ? (
-        <>
-          {/*
-           * Two spheres bleeding off opposite edges (`1683:2139` at −563/258,
-           * `1683:2655` at 734/643). On bone they are fine dark line-art with
-           * no bloom — OrbitalSphere's `light` tone. Hidden below `lg`, where
-           * the 402 frame has room for neither.
-           */}
-          <OrbitalSphere
-            tone="light"
-            className="-z-10 hidden lg:left-[-563px] lg:top-[258px] lg:block lg:w-[1155px]"
-          />
-          <OrbitalSphere
-            tone="light"
-            className="-z-10 hidden lg:left-[734px] lg:top-[643px] lg:block lg:w-[1304px]"
-          />
-        </>
-      ) : null}
-
-      <blockquote className="max-w-content relative mx-auto flex flex-col gap-6">
-        <p className="text-quote font-display text-gradient text-balance">&ldquo;{quote}&rdquo;</p>
-        {attribution ? (
-          <footer className="text-display-lg text-fg-quiet max-w-article leading-[1.5em]">
-            {attribution}
-          </footer>
+    <SurfaceProvider surface={resolveSurface(surface, 'bone')}>
+      <section
+        className={`${SURFACE_CLASS[resolveSurface(surface, 'bone')]} px-gutter py-band-lg relative isolate overflow-hidden`}
+      >
+        {showMolecule ? (
+          <MoleculeMark className="text-ink absolute -z-10 hidden opacity-10 lg:right-[-203px] lg:top-[181px] lg:block lg:w-[699px]" />
         ) : null}
-      </blockquote>
-    </section>
+
+        {showOrbs ? (
+          <>
+            {/*
+             * Two spheres bleeding off opposite edges (`1683:2139` at −563/258,
+             * `1683:2655` at 734/643). On bone they are fine dark line-art with
+             * no bloom — OrbitalSphere's `light` tone. Hidden below `lg`, where
+             * the 402 frame has room for neither.
+             */}
+            <OrbitalSphere
+              tone="light"
+              className="-z-10 hidden lg:left-[-563px] lg:top-[258px] lg:block lg:w-[1155px]"
+            />
+            <OrbitalSphere
+              tone="light"
+              className="-z-10 hidden lg:left-[734px] lg:top-[643px] lg:block lg:w-[1304px]"
+            />
+          </>
+        ) : null}
+
+        <blockquote className="max-w-content relative mx-auto flex flex-col gap-6">
+          <p className="text-quote font-display text-gradient text-balance">
+            &ldquo;{quote}&rdquo;
+          </p>
+          {attribution ? (
+            <footer className="text-display-lg text-fg-quiet max-w-article leading-[1.5em]">
+              {attribution}
+            </footer>
+          ) : null}
+        </blockquote>
+      </section>
+    </SurfaceProvider>
   )
 }

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { BrandMark } from '@o3/ui'
+import { BrandMark, SurfaceProvider } from '@o3/ui'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { resolveButtonHref } from '@/content/buttonDestination'
@@ -36,120 +36,125 @@ export function SiteFooter({ settings }: SiteFooterProps) {
   const [leadGroup, ...restGroups] = groups
 
   return (
-    <footer id="footer" className="px-gutter relative overflow-hidden bg-black py-16 text-white">
-      {/*
-       * The orbital arc: a 1275×1277 two-ring vector stroked at 2px in
-       * `rgba(255,255,255,0.2)`, bleeding off the left edge. Decorative and
-       * drawn exactly once, so it is inline SVG at the call site rather than a
-       * component.
-       *
-       * Carried from the dead frame footer (`1680:2097`). The component draws
-       * the ring as a FILLED `#0A0A0B` donut instead (`1320:117`) — a delta
-       * #87 left alone, being neither of the two it was scoped to.
-       */}
-      <svg
-        viewBox="0 0 1276 1277"
-        fill="none"
-        aria-hidden="true"
-        focusable="false"
-        className="stroke-on-ink-line pointer-events-none absolute -left-[570px] top-[228px] h-[1277px] w-[1276px] lg:top-[148px]"
-      >
-        <path
-          d="M637.572 1C988.607 1 1274.14 286.893 1274.14 638.463C1274.14 990.033 988.534 1276 637.572 1276C286.611 1276 1 989.959 1 638.463C1.0002 286.967 286.537 1 637.572 1ZM637.572 255.993C427.023 255.993 255.679 427.525 255.679 638.463C255.679 849.401 426.949 1021.01 637.572 1021.01C848.196 1021.01 1019.47 849.327 1019.47 638.463C1019.47 427.525 848.122 255.993 637.572 255.993Z"
-          strokeWidth="2"
-        />
-      </svg>
+    // The third piece of chrome outside the band system. Black, so `ink`.
+    <SurfaceProvider surface="ink">
+      <footer id="footer" className="px-gutter relative overflow-hidden bg-black py-16 text-white">
+        {/*
+         * The orbital arc: a 1275×1277 two-ring vector stroked at 2px in
+         * `rgba(255,255,255,0.2)`, bleeding off the left edge. Decorative and
+         * drawn exactly once, so it is inline SVG at the call site rather than a
+         * component.
+         *
+         * Carried from the dead frame footer (`1680:2097`). The component draws
+         * the ring as a FILLED `#0A0A0B` donut instead (`1320:117`) — a delta
+         * #87 left alone, being neither of the two it was scoped to.
+         */}
+        <svg
+          viewBox="0 0 1276 1277"
+          fill="none"
+          aria-hidden="true"
+          focusable="false"
+          className="stroke-on-ink-line pointer-events-none absolute -left-[570px] top-[228px] h-[1277px] w-[1276px] lg:top-[148px]"
+        >
+          <path
+            d="M637.572 1C988.607 1 1274.14 286.893 1274.14 638.463C1274.14 990.033 988.534 1276 637.572 1276C286.611 1276 1 989.959 1 638.463C1.0002 286.967 286.537 1 637.572 1ZM637.572 255.993C427.023 255.993 255.679 427.525 255.679 638.463C255.679 849.401 426.949 1021.01 637.572 1021.01C848.196 1021.01 1019.47 849.327 1019.47 638.463C1019.47 427.525 848.122 255.993 637.572 255.993Z"
+            strokeWidth="2"
+          />
+        </svg>
 
-      <div className="max-w-section relative mx-auto flex w-full flex-col gap-12 lg:gap-32">
-        {/* "Left" — logo beside the tagline block at 1440, stacked at 402. */}
-        <div className="flex flex-col gap-9 lg:flex-row lg:justify-between">
-          {/* `1280:1856` — the mark alone in white, tight-bounded at 148px and
+        <div className="max-w-section relative mx-auto flex w-full flex-col gap-12 lg:gap-32">
+          {/* "Left" — logo beside the tagline block at 1440, stacked at 402. */}
+          <div className="flex flex-col gap-9 lg:flex-row lg:justify-between">
+            {/* `1280:1856` — the mark alone in white, tight-bounded at 148px and
               128 at 402 (`2225:2613`); the red tile went with the rework. No
               color class: it takes the footer's own white through
               `currentColor`, the way the nav's takes the bar's ink. */}
-          <BrandMark trim size={128} className="lg:size-[148px]" />
+            <BrandMark trim size={128} className="lg:size-[148px]" />
 
-          <div className="flex flex-col gap-24 lg:w-[600px] lg:gap-9">
-            {settings?.footerTagline ? (
-              <p className="text-display-xl max-w-[600px] text-balance">{settings.footerTagline}</p>
-            ) : null}
-
-            {/* "Upper" — three columns side by side at both widths. */}
-            <nav aria-label="Footer" className="flex justify-between gap-6 pb-16">
-              {leadGroup ? (
-                <FooterColumn label={leadGroup.label}>
-                  {(leadGroup.links ?? []).map((link) => (
-                    <li key={link._key}>
-                      <FooterLink href={resolveButtonHref(link)}>{link.label}</FooterLink>
-                    </li>
-                  ))}
-                </FooterColumn>
+            <div className="flex flex-col gap-24 lg:w-[600px] lg:gap-9">
+              {settings?.footerTagline ? (
+                <p className="text-display-xl max-w-[600px] text-balance">
+                  {settings.footerTagline}
+                </p>
               ) : null}
 
-              {socialLinks.length > 0 ? (
-                <FooterColumn label={settings?.socialsLabel ?? 'Socials'}>
-                  {socialLinks.map((social) => (
-                    <li key={social._key}>
-                      {/* External profiles, so a plain anchor, not next/link. */}
-                      <a
-                        href={social.url ?? '#'}
-                        className="text-nav duration-(--duration-hover) text-white transition-opacity ease-out hover:opacity-70"
-                        rel="noreferrer"
-                        target="_blank"
-                      >
-                        {social.label}
-                      </a>
-                    </li>
-                  ))}
-                </FooterColumn>
-              ) : null}
+              {/* "Upper" — three columns side by side at both widths. */}
+              <nav aria-label="Footer" className="flex justify-between gap-6 pb-16">
+                {leadGroup ? (
+                  <FooterColumn label={leadGroup.label}>
+                    {(leadGroup.links ?? []).map((link) => (
+                      <li key={link._key}>
+                        <FooterLink href={resolveButtonHref(link)}>{link.label}</FooterLink>
+                      </li>
+                    ))}
+                  </FooterColumn>
+                ) : null}
 
-              {restGroups.map((group) => (
-                <FooterColumn key={group._key} label={group.label}>
-                  {(group.links ?? []).map((link) => (
-                    <li key={link._key}>
-                      <FooterLink href={resolveButtonHref(link)}>{link.label}</FooterLink>
-                    </li>
-                  ))}
-                </FooterColumn>
-              ))}
-            </nav>
+                {socialLinks.length > 0 ? (
+                  <FooterColumn label={settings?.socialsLabel ?? 'Socials'}>
+                    {socialLinks.map((social) => (
+                      <li key={social._key}>
+                        {/* External profiles, so a plain anchor, not next/link. */}
+                        <a
+                          href={social.url ?? '#'}
+                          className="text-nav duration-(--duration-hover) text-white transition-opacity ease-out hover:opacity-70"
+                          rel="noreferrer"
+                          target="_blank"
+                        >
+                          {social.label}
+                        </a>
+                      </li>
+                    ))}
+                  </FooterColumn>
+                ) : null}
+
+                {restGroups.map((group) => (
+                  <FooterColumn key={group._key} label={group.label}>
+                    {(group.links ?? []).map((link) => (
+                      <li key={link._key}>
+                        <FooterLink href={resolveButtonHref(link)}>{link.label}</FooterLink>
+                      </li>
+                    ))}
+                  </FooterColumn>
+                ))}
+              </nav>
+            </div>
           </div>
-        </div>
 
-        {/* "Lower" — legal row; stacked at 402 (`1814:1807`), split at 1440.
+          {/* "Lower" — legal row; stacked at 402 (`1814:1807`), split at 1440.
             The copy is `on-utility` (#AAA69E): the component binds the same
             Figma variable here as the Utility Nav's links (`2050:1226`) — the
             warm solid for muted copy on the black chrome, which replaced the
             `fg-subtle` grey this row shipped with (2026-08-13 token pass). */}
-        <div className="text-legal text-on-utility flex flex-col gap-3 lg:flex-row lg:justify-between">
-          <ul className="flex flex-wrap gap-6">
-            {legalLinks.map((link) => (
-              <li key={link._key}>
-                <Link href={resolveButtonHref(link)} className="hover:text-white">
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <div className="flex gap-6 lg:w-[277px] lg:justify-between">
-            <p>
-              © {year} {legalName}. All rights reserved.
-            </p>
-            {/* The `Go birds.` easter egg (`1275:1631`), which reaches the page
+          <div className="text-legal text-on-utility flex flex-col gap-3 lg:flex-row lg:justify-between">
+            <ul className="flex flex-wrap gap-6">
+              {legalLinks.map((link) => (
+                <li key={link._key}>
+                  <Link href={resolveButtonHref(link)} className="hover:text-white">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <div className="flex gap-6 lg:w-[277px] lg:justify-between">
+              <p>
+                © {year} {legalName}. All rights reserved.
+              </p>
+              {/* The `Go birds.` easter egg (`1275:1631`), which reaches the page
                 as Site Settings' copyrightNote rather than as chrome. Its
                 `State=Hover` is the whole component: the line turns Eagles
                 green. The set's eagle illustration is a 40×12 art vector that
                 draws nothing in the footer instance, so it is not exported. */}
-            {settings?.copyrightNote ? (
-              <p className="duration-(--duration-hover) transition-colors ease-out hover:text-[#339c5e]">
-                {settings.copyrightNote}
-              </p>
-            ) : null}
+              {settings?.copyrightNote ? (
+                <p className="duration-(--duration-hover) transition-colors ease-out hover:text-[#339c5e]">
+                  {settings.copyrightNote}
+                </p>
+              ) : null}
+            </div>
           </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+    </SurfaceProvider>
   )
 }
 

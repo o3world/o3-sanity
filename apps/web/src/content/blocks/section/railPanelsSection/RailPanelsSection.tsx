@@ -274,10 +274,10 @@ export function RailPanelsSection({
                       button={panel.button}
                       arrow
                       // `Button / Ghost` at 402 (`1814:1694` — an 18/24
-                      // label and an arrow, no fill), the editor's own fill
-                      // from `lg` up. One element, so the switch has to be
-                      // a class rather than a second variant.
-                      buttonClassName="max-lg:bg-transparent max-lg:px-0 max-lg:text-current"
+                      // label and an arrow, no fill), the resolved fill from
+                      // `lg` up. One element, so the switch has to be a class
+                      // rather than a second variant.
+                      className="max-lg:bg-transparent max-lg:px-0 max-lg:text-current"
                     />
                   </div>
                 ) : null}

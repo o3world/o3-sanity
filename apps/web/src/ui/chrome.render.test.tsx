@@ -119,19 +119,22 @@ describe('the nav bar’s pinned, dark-ink default', () => {
     expect(navHtml).toContain('duration-(--duration-ink)')
   })
 
-  it('holds the button brand red through the flip — the one thing that stays put', () => {
-    // Nick's reference of both states (2026-08-02) draws it red on the light
-    // pill and the dark one alike, as the prototype's `.o3btn` did. The red is
-    // forced by the chrome, not a `Button` variant an editor could reach.
+  it('resolves the button’s fill from the surface the bar declares, and holds it through the flip', () => {
+    // The pill instances `Theme=White` (`2205:1298`). Nothing here forces that:
+    // `SiteNav` declares the bar an `ink` surface and Auto reads it, which is
+    // the whole of #147 at the one place the band system does not reach.
+    //
     // They are anchors: the nav button carries a destination, and a button
     // with one renders a link. `rounded-btn` is the button's own base class,
     // which is what separates the two of them from the plain nav links.
     const buttons = (navHtml.match(/<a [^>]*>/g) ?? []).filter((b) => b.includes('rounded-btn'))
     expect(buttons.length, 'the nav button was not found at all').toBe(2) // 1440 + 402
     for (const button of buttons) {
-      expect(button).toContain('bg-brand')
-      expect(button).toContain('hover:bg-brand/85')
-      // Nothing on this button may hang off the bar's ink.
+      expect(button).toContain('bg-white')
+      expect(button).toContain('text-ink')
+      // Nothing on this button may hang off the bar's ink: contrast resolves
+      // from a declared surface, and the flip is a runtime read of what is
+      // passing underneath.
       expect(button).not.toContain('group-data-[ink=dark]')
       // …and with no flip to land, it keeps Button's own 220ms hover.
       expect(button).not.toContain('duration-(--duration-ink)')
@@ -161,8 +164,8 @@ describe('the nav bar’s pinned, dark-ink default', () => {
   it('leaves the ink to the bar rather than pinning it on each link', () => {
     // A `text-white` on a link would survive the flip and strand one word in
     // white on a light band. The nav button is an anchor too and is excluded
-    // by `rounded-btn`: its white label is the brand-red override's, and that
-    // one is meant to survive the flip.
+    // by `rounded-btn`: its ink label is its resolved fill's, and that one is
+    // meant to survive the flip.
     const links = (navHtml.match(/<a [^>]*class="[^"]*text-button[^"]*"/g) ?? []).filter(
       (link) => !link.includes('rounded-btn'),
     )
