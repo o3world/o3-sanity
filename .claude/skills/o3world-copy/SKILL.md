@@ -97,6 +97,20 @@ writing a word:
 9. **Exclamation marks and stated excitement** belong only in the openly-warm
    register (community, events, people news), and sparingly there. Never on
    marketing pages, case studies, or essays.
+10. **US English.** O3 is a Philadelphia company writing for a mostly American
+    audience, and a British spelling in an American sentence reads as
+    borrowed — which is the one thing our copy cannot afford right now.
+    Spelling: `-ize`/`-ization` not `-ise`/`-isation` (organize, recognize,
+    penalize, prioritize), `-or` not `-our` (behavior, favor), `-er` not `-re`
+    (center, meter), `-led`/`-ing` with one `l` (traveled, modeling), plus
+    license and practice as both noun and verb, defense, gray, program.
+    Vocabulary, which spellcheck will not catch: **queue** is a waiting list
+    or a line; also whilst → while, amongst → among, learnt → learned, amid
+    → amid (not amidst), fortnight, full stop (the punctuation mark is a
+    period), and "different to" → "different from". Dates are August 2, 2026.
+    **Quotations and proper names keep their own spelling** — the EU's Code of
+    Practice is a Code of Practice, a British client's job title is theirs, and
+    a quoted sentence is never silently Americanized.
 
 ## Structures by surface
 
@@ -153,9 +167,12 @@ Draft, then:
    recap endings, em-dash clutter, robotic symmetry.
 7. Check the register against the surface table. A case study is not a
    birthday post; a birthday post is not a case study.
-8. Check the warmth: does culture/community copy contain actual people? Does
+8. Grep the draft for British spellings and vocabulary (rule 10). A model
+   drafting about European subjects picks them up from its sources, and one
+   `-ise` next to an American sentence is the tell.
+9. Check the warmth: does culture/community copy contain actual people? Does
    the reader leave invited and equipped, or merely impressed?
-9. Read it aloud. Anywhere you'd breathe wrong, break or cut.
+10. Read it aloud. Anywhere you'd breathe wrong, break or cut.
 
 ## Worked example
 
