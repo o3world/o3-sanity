@@ -78,7 +78,7 @@ interface SiteNavProps {
  * a COLOUR answer sheet only — geometry, blur, fills, hairlines, spacing and
  * the link treatment are as built. Dark pill: white mark, white links. Light
  * pill: ink mark, ink links. The button is the third element on the bar and
- * takes neither skin — see below.
+ * inverts with them — see below.
  *
  * **The mark loses its plate rather than inverting.** The bar draws
  * `BrandMark` — the ring and the superscript, free-standing — not
@@ -95,11 +95,21 @@ interface SiteNavProps {
  * piece of chrome sitting outside the band system, so without that declaration
  * Auto would have nothing to read exactly where the fill matters most.
  *
- * The fill does not follow the ink flip. Contrast resolves from the surface a
- * band declares, and `NavInk`'s flip is a runtime read of what is passing
- * underneath — so the button holds the skin the frame draws, which is also
- * what every SSR, no-JS and jsdom render sees.
+ * **The fill follows the ink flip, in CSS.** A white button on the flipped pill
+ * is white on `--color-scrim-light` over a light band: the label survives and
+ * the button's shape does not, which is the one thing chrome cannot afford. So
+ * it inverts on the same `data-ink` signal the links and the hairline already
+ * ride, in `NAV_BUTTON_INK` below.
+ *
+ * It is CSS rather than a resolved value because the flip is: `NavInk` toggles
+ * one attribute and the whole bar interpolates off it. That also settles what
+ * SSR sees — with no JS there is no attribute, so every server, no-JS and jsdom
+ * render draws the frame's skin, and only a browser that has actually measured
+ * a light band underneath draws the other one.
  */
+const NAV_BUTTON_INK =
+  'group-data-[ink=dark]:bg-ink group-data-[ink=dark]:text-white group-data-[ink=dark]:hover:bg-ink/85'
+
 export function SiteNav({ settings }: SiteNavProps) {
   const navItems = settings?.navItems ?? []
   const button = settings?.primaryButton ?? null
@@ -159,14 +169,14 @@ export function SiteNav({ settings }: SiteNavProps) {
                 </li>
               ))}
             </ul>
-            {button ? <ButtonLink button={button} /> : null}
+            {button ? <ButtonLink button={button} className={NAV_BUTTON_INK} /> : null}
           </div>
 
           {/* 402: button + hamburger, 32px apart (`1814:1632`). The 402 bar
             crosses the same bands the pill does, so its button flips on the
             same terms. */}
           <div className="flex items-center gap-8 lg:hidden">
-            {button ? <ButtonLink button={button} /> : null}
+            {button ? <ButtonLink button={button} className={NAV_BUTTON_INK} /> : null}
             <MobileNavMenu items={navItems} button={button} />
           </div>
         </nav>

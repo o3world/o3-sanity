@@ -119,7 +119,7 @@ describe('the nav bar’s pinned, dark-ink default', () => {
     expect(navHtml).toContain('duration-(--duration-ink)')
   })
 
-  it('resolves the button’s fill from the surface the bar declares, and holds it through the flip', () => {
+  it('resolves the button’s fill from the surface the bar declares, and inverts it with the flip', () => {
     // The pill instances `Theme=White` (`2205:1298`). Nothing here forces that:
     // `SiteNav` declares the bar an `ink` surface and Auto reads it, which is
     // the whole of #147 at the one place the band system does not reach.
@@ -130,14 +130,15 @@ describe('the nav bar’s pinned, dark-ink default', () => {
     const buttons = (navHtml.match(/<a [^>]*>/g) ?? []).filter((b) => b.includes('rounded-btn'))
     expect(buttons.length, 'the nav button was not found at all').toBe(2) // 1440 + 402
     for (const button of buttons) {
+      // The resolved skin, and the only one a server, no-JS or jsdom render
+      // ever draws — `data-ink` exists solely because a browser measured a
+      // light band under the bar.
       expect(button).toContain('bg-white')
       expect(button).toContain('text-ink')
-      // Nothing on this button may hang off the bar's ink: contrast resolves
-      // from a declared surface, and the flip is a runtime read of what is
-      // passing underneath.
-      expect(button).not.toContain('group-data-[ink=dark]')
-      // …and with no flip to land, it keeps Button's own 220ms hover.
-      expect(button).not.toContain('duration-(--duration-ink)')
+      // Flipped, it inverts with the links and the hairline. White on
+      // `--color-scrim-light` keeps the label and loses the button.
+      expect(button).toContain('group-data-[ink=dark]:bg-ink')
+      expect(button).toContain('group-data-[ink=dark]:text-white')
     }
   })
 
