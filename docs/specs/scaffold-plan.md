@@ -24,7 +24,7 @@ packages/
 
 ## Sanity
 
-- Project `naorcr6k`. One dataset: **`production`** (live; extract→translate→review loads published documents here — editors review in the real studio, [ADR 0016](../adr/0016-publish-what-wordpress-publishes.md)). No staging dataset. The `development` scratch dataset was deleted for the Free-tier dataset cap (#144); a dry-run target can be recreated by env var if room is made, since the pipeline rebuilds any dataset from the committed JSON (ADR 0003).
+- Project `naorcr6k`. Datasets: **`production`** (live; extract→translate→review loads published documents here — editors review in the real studio, [ADR 0016](../adr/0016-publish-what-wordpress-publishes.md)) and **`development`** (pipeline dry-runs, schema experiments). No staging dataset. Switching is by env var only — `pnpm dataset`. The Comments add-on dataset `production-comments` is complimentary and does not count toward the plan's dataset limit; see [`docs/agents/ops.md`](../agents/ops.md), which also carries the rule that agents never create or delete a dataset.
 - Local dev reads `production` with a read token.
 - `sanity typegen` output in `packages/sanity` is the compile-time contract (ADR 0001); a CI drift job fails if generated types are stale.
 
