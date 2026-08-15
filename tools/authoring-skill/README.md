@@ -34,10 +34,11 @@ Wiring a machine for the first time is four browser steps and easy to get
 subtly wrong, so run the wizard instead of the paragraph above:
 
 ```
-./tools/authoring-skill/wire-desktop.sh
+pnpm skill:wire
 ```
 
 It builds the ZIP, opens each page in order, and then checks from the
 outside that the draft your Desktop session claims to have made actually
-reached `naorcr6k/production` — the one failure the app itself reports as
-success.
+reached `naorcr6k/development` — the one failure the app itself reports as
+success. Its smoke test hands the skill a thesis, which is the brief's one
+override; without one the skill is meant to create nothing.

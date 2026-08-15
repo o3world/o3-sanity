@@ -96,6 +96,7 @@ pnpm guidance:check           # fails if the dataset drifted from the repo
 pnpm schema:deploy            # deploy the schema so get_schema sees it
 pnpm schema:check             # fails if the deployed schema drifted from the repo
 pnpm figma:sync               # what changed in the design file since last sync
+pnpm skill:wire               # wire Claude Desktop for the authoring skill
 pnpm env:pull                 # restore apps/web/.env.local from Vercel
 ```
 
