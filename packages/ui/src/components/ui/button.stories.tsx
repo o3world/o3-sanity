@@ -22,12 +22,12 @@ type Story = StoryObj<typeof meta>
 export const Playground = kit.Playground as Story
 export const Matrix = kit.Matrix as Story
 
-/** `Button / Solid`, Size=Large, on a light band — the partners CTA (1864:2405). */
+/** `Theme=Black` (2134:1786) on a light band, at the repo's `large` step. */
 export const Dark: Story = {
   args: { size: 'large', children: 'See all partners', arrow: true },
 }
 
-/** `Button / Solid`, Size=Base, on ink — the hero CTA (1868:3262). */
+/** `Theme=White` (2205:1298) on ink — the CTA band's button (2336:4351). */
 export const Light: Story = {
   args: { variant: 'light', children: 'View our work', arrow: true },
   globals: { backgrounds: { value: 'ink' } },

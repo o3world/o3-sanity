@@ -34,26 +34,26 @@ Solid` — become **props, not variants**. They toggle the presence of a child,
 holds exactly two things** — the `Go birds.` easter egg and the `Footer`
 (canonical since 2026-08, see below).
 The real component sets live on other canvases and are referenced across
-generations, so **a low node id does not mean archived**: `Button / Solid` is
-`136:754` and is the button the canonical frames use.
+generations, so **a low node id does not mean archived**: `Button / Ghost` is
+`264:260` and still draws the ghost fill.
 
 ## Canonical — used by the Design Concept frames
 
 Verified by direct reads of the canonical frames, or recorded in
 `packages/ui/src/foundations/figma-home-spec.ts`.
 
-| Figma set                       | Node        | Variant axes                                   | Code target                      | Status                                                                                            |
-| ------------------------------- | ----------- | ---------------------------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `Button / Solid`                | `136:754`   | Size = Base \| Large; State = Default \| Hover | `Button` (`ui/button.tsx`)       | ⚠️ **Divergent** — see below                                                                      |
-| `Button / Ghost`                | `264:260`   | Size = Base; State = Default                   | `Button variant="ghost"`         | Exists; needs Figma's fill/label                                                                  |
-| `Button` (the 2026-08 rebuild)  | `2134:1785` | Theme = Black \| White; State = Default        | `FilterChip` (`filter-chip.tsx`) | ⚠️ Partly built — see below                                                                       |
-| `Brand / Logo`                  | `264:50`    | Color = Black \| Red \| White                  | `BrandLogo` (`brand-logo.tsx`)   | ✅ #41 — `White` unbuilt, below                                                                   |
-| `Icon / Surface`                | `778:1862`  | Size = Base; State = Hover                     | `CarouselControl` — **to build** | The insights prev/next (#42)                                                                      |
-| `Icon / Soft`                   | `1203:1227` | Size = Base; State = Default                   | Inner chip of `Icon / Surface`   | Not standalone — a part                                                                           |
-| `.building block Icon_text`     | `136:14`    | prop: `Icon name` (Material Symbols)           | **No component** — ADR 0009      | `<ArrowIcon />`, `<CloseIcon />`                                                                  |
-| `NavBar` (component, not a set) | `2225:2920` | —                                              | `SiteNav` (`web/src/ui`)         | ✅ #41 — rebuilt 2026-08; the old `1710:2271` was emptied to a bare pill. Labels unchanged        |
-| `Utility Nav` (component)       | `2250:1445` | —                                              | `UtilityNav` (`web/src/ui`)      | ✅ #88 — new 2026-08: O3 World · 1682 Conference · O3XO, in flow above the pill, desktop only     |
-| `Footer` (component, not a set) | `1280:1885` | —                                              | `SiteFooter` (`web/src/ui`)      | ⚠️ **Became canonical 2026-08** — Home's footer is now an override-free instance of it; see below |
+| Figma set                       | Node        | Variant axes                                   | Code target                                                  | Status                                                                                            |
+| ------------------------------- | ----------- | ---------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| `Button` (the 2026-08 rebuild)  | `2134:1785` | Theme = Black \| White \| Red; State ×5        | `Button` (`ui/button.tsx`), `FilterChip` (`filter-chip.tsx`) | ✅ #150 — geometry below                                                                          |
+| `Button / Ghost`                | `264:260`   | Size = Base; State = Default                   | `Button variant="ghost"`                                     | The one fill the 2026-08 set does not draw                                                        |
+| `Button / Solid`                | `136:754`   | Size = Base \| Large; State = Default \| Hover | **Superseded** by `2134:1785`                                | Nothing follows it                                                                                |
+| `Brand / Logo`                  | `264:50`    | Color = Black \| Red \| White                  | `BrandLogo` (`brand-logo.tsx`)                               | ✅ #41 — `White` unbuilt, below                                                                   |
+| `Icon / Surface`                | `778:1862`  | Size = Base; State = Hover                     | `CarouselControl` — **to build**                             | The insights prev/next (#42)                                                                      |
+| `Icon / Soft`                   | `1203:1227` | Size = Base; State = Default                   | Inner chip of `Icon / Surface`                               | Not standalone — a part                                                                           |
+| `.building block Icon_text`     | `136:14`    | prop: `Icon name` (Material Symbols)           | **No component** — ADR 0009                                  | `<ArrowIcon />`, `<CloseIcon />`                                                                  |
+| `NavBar` (component, not a set) | `2225:2920` | —                                              | `SiteNav` (`web/src/ui`)                                     | ✅ #41 — rebuilt 2026-08; the old `1710:2271` was emptied to a bare pill. Labels unchanged        |
+| `Utility Nav` (component)       | `2250:1445` | —                                              | `UtilityNav` (`web/src/ui`)                                  | ✅ #88 — new 2026-08: O3 World · 1682 Conference · O3XO, in flow above the pill, desktop only     |
+| `Footer` (component, not a set) | `1280:1885` | —                                              | `SiteFooter` (`web/src/ui`)                                  | ⚠️ **Became canonical 2026-08** — Home's footer is now an override-free instance of it; see below |
 
 `BrandLogo` ships `Color=Black` and `Color=Red` only. No canonical Design
 Concept frame instances `Color=White`, so its knockout colour would be a guess;
@@ -92,41 +92,21 @@ mark's own bounds, for callers whose Figma node is bounded the same way the
 footer's vector is. It has no `color` axis on purpose: the surface decides the
 ink, which is what lets `SiteNav` flip it by inheritance alone.
 
-### `Button` is divergent
+### `Button` carries the 2026-08 geometry
 
-The shipped `Button` predates the frames and does not match its component set:
+`2134:1785` draws one button at both frame widths — **12×16 padding, a 12px
+gap, radius 2, an 18/24 Figtree Medium label** — and every redesigned frame
+instances it, including the CTA band (`2336:4351`) and the nav pill
+(`2225:2877`). `Button` and `FilterChip` are both built to it.
 
-|           | Shipped                     | Figma (`136:754`)                                    |
-| --------- | --------------------------- | ---------------------------------------------------- |
-| Size axis | `sm \| default \| lg`       | `Base \| Large`                                      |
-| Fill axis | `brand \| inverse \| ghost` | Solid `#0A0A0A` on light, `#FFFFFF` on dark          |
-| Brand red | the **default** variant     | **no red button exists on the canonical Home frame** |
-| Label     | 15px / 600                  | 18px / 500 (`--text-button`)                         |
-| Radius    | was 6px                     | 0 (already fixed in #37)                             |
+The set has **no size axis**. `Button`'s `base | large` is this repo's own
+decision — `base` is the set's geometry, `large` adds 4px of vertical padding
+for a section-level CTA — and it is declared as authored rather than read.
 
-Under the rule this becomes `variants: { size: { base, large }, fill: { dark, light } }`
-with `defaultVariants: { size: 'base', fill: 'dark' }`. The red variant does not
-disappear silently — if it survives, it needs a comment saying which frame
-justifies it.
-
-**And the set moved again.** The 2026-08 pass drew a second `Button` set
-(`2134:1785`) with a `Theme = Black | White` axis, radius **2px**, 12×16
-padding and a 12px gap — the geometry every redesigned frame's button now
-carries, including the CTA band's (`2336:4351`). The shipped `Button` is still
-built to `136:754`, so it is now a generation behind in shape as well as in
-vocabulary. `FilterChip` (#61) is built to the new set directly, because the
-Insights filter bar is where it first had to be right, and its doc comment says
-why it is not a `Button` prop. Realigning `Button` itself is the same schema-
-touching job below.
-
-⚠️ **This is not a component edit.** ADR 0008 called the realignment "#38's
-first job"; auditing it here shows it reaches further than that assumed. The
-variant vocabulary is a **schema enum** — `cta.variant`, `brand | inverse |
-ghost` — stored in committed seed JSON and regenerated into types. Changing it
-touches the content model, the seed corpus, the renderer and typegen together,
-so it belongs to the page layer that rebuilds the CTAs against the frame
-(**#42**, with the chrome buttons in #41), not to an inventory ticket. Recorded
-here rather than done.
+The set's `Theme=Red` is not built, and neither is the red hover the Black and
+White themes draw. The fill vocabulary is a **schema enum** (`cta.variant`,
+stored in committed seed JSON and regenerated into types), so it moves with the
+content model rather than with the component: that is #137's contrast work.
 
 ### The `Footer` component became canonical (2026-08)
 
@@ -195,8 +175,8 @@ Every component in the package, against the Figma library.
 
 | Component        | Classification                                       | Notes                                                                                                                                                                        |
 | ---------------- | ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Button`         | **Has counterpart** — `Button / Solid`               | Divergent; realign (above)                                                                                                                                                   |
-| `FilterChip`     | **Has counterpart** — `Button` (`2134:1785`)         | Added #61 for the Insights filter bar. Built to the 2026-08 set, so it is the one component already on its geometry                                                          |
+| `Button`         | **Has counterpart** — `Button` (`2134:1785`)         | Realigned to the 2026-08 set in #150. `ghost` is `Button / Ghost` (`264:260`), which that set does not draw                                                                  |
+| `FilterChip`     | **Has counterpart** — `Button` (`2134:1785`)         | Added #61 for the Insights filter bar. Same set as `Button`; a chip is a link with `aria-current`, which is why it is not a `Button` prop                                    |
 | `BrandLogo`      | **Has counterpart** — `Brand / Logo`                 | Added #41. `Color` is the one axis; `White` unbuilt                                                                                                                          |
 | `BrandMark`      | **Code-only** — no set draws a box-less mark         | Added 2026-08-02 by direction; the `Footer`'s logo (`1280:1856`) draws it too, #87                                                                                           |
 | `MenuIcon`       | **Has counterpart** — `1814:1636` (drawn, not a set) | Added #41. Two bars, per the frame                                                                                                                                           |

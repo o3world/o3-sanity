@@ -122,8 +122,8 @@
       "kind": "componentSet",
       "name": "Button / Solid",
       "figmaName": "Button / Solid",
-      "codeComponent": "packages/ui/src/components/ui/button.tsx#Button",
-      "note": "Divergent — Figma is Size = Base | Large on a dark/light fill, the shipped variant vocabulary is a schema enum. Realignment belongs to the page layer that rebuilds the CTAs (#42), not here."
+      "codeComponent": null,
+      "note": "Superseded by the 2026-08 `Button` set (`2134:1785`), which `Button` is now built to (#150). Still tracked so an edit to it reads as a change to a dead set rather than as an unexplained frame diff."
     },
     {
       "nodeId": "264:260",
@@ -138,8 +138,8 @@
       "kind": "componentSet",
       "name": "Button (2026-08 rebuild)",
       "figmaName": "Button",
-      "codeComponent": "packages/ui/src/components/filter-chip.tsx#FilterChip",
-      "note": "The redesign's button — Theme = Black | White, radius 2, 12x16 padding — which the Insights filter bar and every redesigned CTA instance. Tracked 2026-08-13 with #61, which built `FilterChip` to it. The shipped `Button` is still on `136:754` and is now a generation behind in geometry as well as vocabulary; realigning it is the schema-touching job docs/figma-components.md records."
+      "codeComponent": "packages/ui/src/components/ui/button.tsx#Button",
+      "note": "The redesign's button — Theme = Black | White | Red, radius 2, 12x16 padding, 12px gap — which every redesigned frame instances. `Button` carries its geometry (#150) and `FilterChip` (packages/ui/src/components/filter-chip.tsx) is drawn from it too, so a change here routes to both. The set has no size axis; `Button`'s base | large is authored."
     },
     {
       "nodeId": "264:50",

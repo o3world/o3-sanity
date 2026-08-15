@@ -8,7 +8,7 @@ const meta = {
   title: 'Foundations/Button spec',
   parameters: {
     layout: 'fullscreen',
-    design: { type: 'figma', url: figmaUrl('1868-3262') },
+    design: { type: 'figma', url: figmaUrl('136-754') },
   },
 } satisfies Meta
 
@@ -126,7 +126,7 @@ export const ButtonSpec: Story = {
 
       <Section
         title="Against the shipped Button"
-        note="Left: rebuilt from the Figma spec. Right: the Button component as it ships today."
+        note="Left: rebuilt from this reading record. Right: the Button component as it ships today."
       >
         <div className="border-line bg-line grid gap-px border md:grid-cols-2">
           <div className="flex flex-col items-start gap-4 bg-white p-10">
@@ -141,13 +141,15 @@ export const ButtonSpec: Story = {
           </div>
         </div>
         <Callout>
-          The shipped component matches the spec: square corners from the radius tokens, the label
-          on <Mono>--text-button</Mono>, the cva variant set on Figma&apos;s vocabulary —{' '}
-          <Mono>dark | light | ghost</Mono> over <Mono>base | large</Mono>, no red fill anywhere,
-          the glyph on a 20px box. The one remaining delta is a <strong>drawing</strong>: the arrow
-          is the house <Mono>ArrowIcon</Mono>, stroked at 2.2, where Figma sets Material
-          Symbols&apos; <Mono>arrow_forward</Mono>. ADR 0009 says a glyph is an inline SVG of the
-          Material path, so that is a redraw whenever someone wants it, not a contract gap.
+          <strong>These are two generations of the same button.</strong> This page reads{' '}
+          <Mono>Button / Solid</Mono>; the shipped component is built to the redesign&apos;s{' '}
+          <Mono>Button</Mono> set (<Mono>2134:1785</Mono>) — <Mono>12px 16px</Mono> padding, a 12px
+          gap and a 2px corner, against the <Mono>8px 20px</Mono>, 8px gap and square corner on the
+          left. The label is the same <Mono>--text-button</Mono> in both, and so is the 20px glyph
+          box. The glyph itself is the house <Mono>ArrowIcon</Mono>, stroked at 2.2, where Figma
+          sets Material Symbols&apos; <Mono>arrow_forward</Mono>; ADR 0009 says a glyph is an inline
+          SVG of the Material path, so that is a redraw whenever someone wants it, not a contract
+          gap.
         </Callout>
       </Section>
     </Page>
