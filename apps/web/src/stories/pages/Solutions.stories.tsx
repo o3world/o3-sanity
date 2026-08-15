@@ -12,7 +12,7 @@ import { PageMockup } from '../PageMockup'
  *
  * - the **centred** `CollectionHero` (`1925:6141`), which takes the headline
  *   to 60px — the only place that size appears;
- * - `disciplineGridSection` in its `orbital` layout (`1928:6524`), the dotted
+ * - `featureGridSection` in its `orbital` layout (`1928:6524`), the dotted
  *   tetrahedron. That composition is `lg` and up and falls back to the grid
  *   below it (ADR 0006), so this story at desktop and the same story at mobile
  *   are showing two genuinely different drawings rather than one reflowing.

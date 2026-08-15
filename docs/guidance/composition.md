@@ -61,14 +61,14 @@ explicitly — no page leans on the default.
 The hero states the claim; the band under it has to pay something back
 immediately. There is no single block for this — there is a job. Observed:
 
-| Second band             | Pays back with            | Seen on               |
-| ----------------------- | ------------------------- | --------------------- |
-| `logoWallSection`       | borrowed credibility      | home                  |
-| `layoutSection`         | the positioning statement | About, Ventures, 1682 |
-| `formSection`           | the action itself         | Contact               |
-| `inFlightSection`       | the actual list           | Live                  |
-| `disciplineGridSection` | the diagram               | Solutions             |
-| `mediaSection`          | the subject, shown        | both venture pages    |
+| Second band          | Pays back with            | Seen on               |
+| -------------------- | ------------------------- | --------------------- |
+| `logoWallSection`    | borrowed credibility      | home                  |
+| `layoutSection`      | the positioning statement | About, Ventures, 1682 |
+| `formSection`        | the action itself         | Contact               |
+| `inFlightSection`    | the actual list           | Live                  |
+| `featureGridSection` | the diagram               | Solutions             |
+| `mediaSection`       | the subject, shown        | both venture pages    |
 
 What none of them do is warm up. Background, history and context do not go
 here; if the page needs them, they come after the payoff.
@@ -89,7 +89,7 @@ Match the job the band has to do, not the shape you imagine:
 | Prove it with work that shipped | `caseShowcaseSection`               |
 | Let someone else say it         | `quoteSection`                      |
 | Lay out parallel options        | `railPanelsSection`                 |
-| Show the shape of the practice  | `disciplineGridSection`             |
+| Show the shape of the practice  | `featureGridSection`                |
 | Show who does it                | `personGridSection`                 |
 | Show current momentum           | `inFlightSection`                   |
 | Show the thing existing         | `mediaSection`, `screenGridSection` |
@@ -128,11 +128,17 @@ this is what stops a page proposing a block that already exists:
 
 - **`railPanelsSection`** — `layout: rail` with `rail: label` is the default
   list of parallel things; `rail: number` makes it a sequence of steps;
-  `layout: cards` makes it a row of ink cards. Surface tracks the job: `white`
+  `layout: cards` makes it a row of ink cards; `layout: rows` gives each one a
+  numbered full-width row with room for labelled breakdowns under its prose. Surface tracks the job: `white`
   when the band leads the page's argument and carries an intro, `bone` when it
   is a secondary list.
-- **`disciplineGridSection`** — `grid` lays the disciplines out flat; `orbital`
-  puts the same four on the diagram and takes exactly four.
+- **`featureGridSection`** — a set of parallel short claims, each a mark with a
+  heading and optional body. `grid` pairs mark and copy two across; `stack`
+  sets the mark above the copy three across, and is the one to reach for when
+  the features are single lines; `rows` gives each a hairlined full-width row
+  with the body pinned right; `orbital` puts four on the diagram and takes
+  exactly four. Reach for it whenever several things are true in the same way
+  and none needs a band of its own.
 - **`inFlightSection`** — `cards` for work in progress, `rows` for dated
   appearances and ideas. The same entry, two compositions.
 - **`ctaSection`** — with `body` it makes a closing argument; heading and

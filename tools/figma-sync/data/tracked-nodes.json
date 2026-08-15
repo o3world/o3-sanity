@@ -97,9 +97,9 @@
       "kind": "pageFrame",
       "name": "Sanity partnership",
       "figmaName": "Sanity",
-      "route": "/sanity",
+      "route": "/partners/sanity",
       "variant": "desktop",
-      "note": "New page type ruled canonical 2026-08-13 — a platform-partnership landing page. The route here is provisional; #92 decides it and builds the page."
+      "note": "A platform-partnership landing page, ruled canonical 2026-08-13. #92 settled the route as /partners/sanity — a multi-segment page slug under a new pageType 'partner', with Vercel and Lovable behind it; the Home platforms rail already names all three. No 402 frame, the same gap About and Solutions have."
     },
     {
       "nodeId": "1644:1889",

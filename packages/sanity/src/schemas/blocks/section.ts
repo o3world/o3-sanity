@@ -1,12 +1,13 @@
 import { defineArrayMember, defineField } from 'sanity'
 import { defineArrayItem } from './defineArrayItem'
 import { defineSectionBlock } from './defineBlocks'
+import { detailsField } from './fields'
 import { hiddenUnless } from './knobFields'
 import { blockArrayMembers } from './registry'
 import { PAGE_TYPES } from '../../constants'
 import { caseShowcaseSectionKnobs } from '../../knobs/caseShowcaseSection'
 import { ctaSectionKnobs } from '../../knobs/ctaSection'
-import { disciplineGridSectionKnobs } from '../../knobs/disciplineGridSection'
+import { featureGridSectionKnobs } from '../../knobs/featureGridSection'
 import { formSectionKnobs } from '../../knobs/formSection'
 import { heroSectionKnobs } from '../../knobs/heroSection'
 import { inFlightSectionKnobs } from '../../knobs/inFlightSection'
@@ -45,6 +46,23 @@ export const heroSection = defineSectionBlock({
       // guessing at a closure it cannot call (ADR 0020).
       hidden: hiddenUnless({ at: 'variant', mode: 'oneOf', values: ['band'] }),
     }),
+    /**
+     * The partner lockup — O3's mark, a ×, and the partner's (`2479:2205`),
+     * #92. Only the partner half is content: the mark and the × are the
+     * lockup's own chrome and the renderer draws them, the same call
+     * `LogoKnockout` already makes about which half of a pairing is data.
+     *
+     * `logo` rather than `media` or a new word: `railPanelsSection.panel.logo`
+     * is already an optional image that stands in a place a heading would
+     * otherwise be, which is exactly what this is.
+     */
+    defineField({
+      name: 'logo',
+      type: 'image',
+      description:
+        'Band variant only — the partner mark, locked up with O3’s. Upload the mark alone; the renderer draws the O3 half and the ×.',
+      hidden: hiddenUnless({ at: 'variant', mode: 'oneOf', values: ['band'] }),
+    }),
     defineField({
       name: 'headlineLines',
       title: 'Headline lines',
@@ -55,6 +73,15 @@ export const heroSection = defineSectionBlock({
       validation: (rule) => rule.required().min(1).max(3),
     }),
     defineField({ name: 'subheading', type: 'text', rows: 2 }),
+    // The band's right-hand column, when what belongs there is a credential
+    // list rather than a standfirst (`2401:3196` — "O3 EXPERTISE:" over three
+    // lines). The two are alternatives, not a stack: the frame draws one 394px
+    // column and only ever puts one thing in it, so a hero carrying both
+    // renders the details and the standfirst is what an editor removes.
+    detailsField({
+      description:
+        'Band variant only — the labelled list pinned right, where a standfirst would otherwise sit. One label, its lines under it.',
+    }),
     defineField({ name: 'button', type: 'button' }),
     'decoration',
   ],
@@ -190,6 +217,14 @@ export const railPanelsSection = defineSectionBlock({
               description:
                 'Cards layout only — the circle the frame centres on the card. An orb unless set to disc.',
             }),
+            // Rows layout only (`2334:2165`, `2334:2166`) — the same gate as
+            // `button` and `media`, carried as prose for the same reason: a
+            // panel field's `hidden` callback sees only the panel it sits in,
+            // not the section's `layout`.
+            detailsField({
+              description:
+                'Rows layout only. Labelled breakdowns under the panel’s body — "Migration targets we’ve handled", then what the client ends up with. The frame draws the LAST one as the promise, in brand red.',
+            }),
           ],
           preview: { select: { title: 'railLabel' } },
         }),
@@ -274,22 +309,30 @@ export const ctaSection = defineSectionBlock({
 })
 
 /**
- * `layout` and `surface` are declared in `src/knobs/disciplineGridSection.ts`
- * (ADR 0020). The `disciplines` length rule still reads `layout` from the form
- * value, because what a choice requires of the rest of the document is
- * validation rather than a knob.
+ * `layout`, `decoration` and `surface` are declared in
+ * `src/knobs/featureGridSection.ts` (ADR 0020). The `features` length rule
+ * still reads `layout` from the form value, because what a choice requires of
+ * the rest of the document is validation rather than a knob.
+ *
+ * **Named for the composition, not for the first page that used it.** It was
+ * `disciplineGridSection` while About's four disciplines were its only caller;
+ * the partner page draws the same {mark, heading, body} set three more times
+ * as reasons, enablements and use cases (#92), and "discipline" told an editor
+ * adding "Multi-channel publishing from one source" the wrong thing about what
+ * they were authoring. `feature` is the design-system word for it — the
+ * category Tailwind Plus and most marketing-component libraries file it under.
  */
-export const disciplineGridSection = defineSectionBlock({
-  name: 'disciplineGridSection',
+export const featureGridSection = defineSectionBlock({
+  name: 'featureGridSection',
   description:
-    'Capability as a set — disciplines with a heading, body and mark, drawn as a grid or placed on the orbital diagram. Reach for it when the page needs to show the shape of what the studio does rather than argue a point. The orbital layout takes exactly four and derives each position from array order, the first being the apex.',
-  title: 'Discipline grid',
-  knobs: disciplineGridSectionKnobs,
+    'A set of parallel short claims, each a mark with a heading and optional body — capabilities, reasons to pick you, what a platform enables, the situations a reader might be in. Reach for it when several things are true in the same way and none needs a whole band. Four arrangements: paired two across, stacked three across, hairlined full-width rows, or the orbital diagram, which takes exactly four and derives each position from array order.',
+  title: 'Feature grid',
+  knobs: featureGridSectionKnobs,
   fields: [
     defineField({ name: 'heading', type: 'string' }),
     'layout',
     defineField({
-      name: 'disciplines',
+      name: 'features',
       type: 'array',
       description:
         'Order is meaningful on the orbital layout: the first is the apex, the rest take the base ring left → right → front. Positions derive from order, never from the author.',
@@ -297,33 +340,40 @@ export const disciplineGridSection = defineSectionBlock({
         rule
           .required()
           .min(1)
-          .custom((disciplines, context) => {
+          .custom((features, context) => {
             const layout = (context.parent as { layout?: string } | undefined)?.layout
             if (layout !== 'orbital') return true
             // The diagram has exactly four nodes drawn into it (`1928:6526`);
-            // a fifth discipline has nowhere to stand.
-            return (disciplines as unknown[] | undefined)?.length === 4
+            // a fifth feature has nowhere to stand.
+            return (features as unknown[] | undefined)?.length === 4
               ? true
-              : 'The orbital layout places exactly four disciplines.'
+              : 'The orbital layout places exactly four features.'
           }),
       of: [
         defineArrayMember({
           type: 'object',
-          name: 'discipline',
+          name: 'feature',
           fields: [
             defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
-            defineField({ name: 'body', type: 'text', rows: 3 }),
+            defineField({
+              name: 'body',
+              type: 'text',
+              rows: 3,
+              description:
+                'Optional — `2334:2122` draws a whole band of features that are a heading and nothing else.',
+            }),
             defineField({
               name: 'mark',
               type: 'mark',
               description:
-                'The dotted circle beside the row — an orb unless set to disc. Grid layout only; the orbital diagram places its own nodes.',
+                'The dotted circle the frame sets with the copy — an orb unless set to disc. Drawn by every layout except orbital, which places its own nodes.',
             }),
           ],
           preview: { select: { title: 'heading', subtitle: 'body' } },
         }),
       ],
     }),
+    'decoration',
   ],
   preview: { select: { title: 'heading', subtitle: 'layout' } },
 })

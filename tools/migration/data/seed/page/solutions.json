@@ -20,31 +20,31 @@
       "decoration": "none"
     },
     {
-      "_type": "disciplineGridSection",
-      "_key": "disciplines",
+      "_type": "featureGridSection",
+      "_key": "features",
       "surface": "ink",
       "layout": "orbital",
-      "disciplines": [
+      "features": [
         {
-          "_type": "discipline",
+          "_type": "feature",
           "_key": "s-strategy",
           "heading": "Strategy",
           "body": "The root of every engagement. We find the real problem and the move worth making — before a line of code is written."
         },
         {
-          "_type": "discipline",
+          "_type": "feature",
           "_key": "s-ai",
           "heading": "AI",
           "body": "Applied where it compounds the work, not where it decorates it — our O3XO practice, embedded where it earns its keep."
         },
         {
-          "_type": "discipline",
+          "_type": "feature",
           "_key": "s-engineering",
           "heading": "Engineering",
           "body": "Senior engineers who build it to last and to scale — the fix that ships, not a prototype to hand off."
         },
         {
-          "_type": "discipline",
+          "_type": "feature",
           "_key": "s-design",
           "heading": "Design",
           "body": "Product-grade design that gives the move a form people actually want to use."

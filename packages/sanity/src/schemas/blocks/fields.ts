@@ -1,4 +1,4 @@
-import { defineField } from 'sanity'
+import { defineArrayMember, defineField } from 'sanity'
 
 /**
  * SHARED EDITORIAL FIELDS — the counterpart to `src/knobs/` (CONTEXT.md →
@@ -58,5 +58,52 @@ export function anchorField() {
     description:
       'A name for this band, so a button can jump to it. Written without the #. Keep it once people are sharing the link — changing it breaks every link already sent. Two bands with the same name resolve to the first.',
     validation: (rule) => rule.custom((value: string | undefined) => validateAnchorName(value)),
+  })
+}
+
+/**
+ * A LABELLED BREAKDOWN — a term over the values under it (#92).
+ *
+ * Two blocks draw it, which is what earns it a place here rather than a
+ * `defineField` in each. The partner hero (`2401:3196`) sets "O3 EXPERTISE:"
+ * over three credentials, pinned right where a standfirst would sit; a service
+ * row (`2334:2165`) sets "Migration targets we've handled:" over three
+ * platforms laid across, then the promise under its own label.
+ *
+ * **`items`, not a `body`.** `chapter.details` calls its second half `body`
+ * because `2274:4009` flows one description beside a 180px term. Both frames
+ * here lay SHORT values across instead, so the shape is a list — and a
+ * one-item list is how the single-sentence case is spelled, rather than a
+ * second field the renderer has to choose between. The word `details` is
+ * shared with `chapter` deliberately: the lexicon's entry is "term/description
+ * rows", and that is what both are.
+ *
+ * The gate is the caller's: both uses apply to one composition of their block,
+ * and neither can be expressed as a `hidden` closure from where the field
+ * sits, so each call site says so in its `description`.
+ */
+export function detailsField({ description }: { description?: string } = {}) {
+  return defineField({
+    name: 'details',
+    type: 'array',
+    description,
+    of: [
+      defineArrayMember({
+        type: 'object',
+        name: 'detail',
+        fields: [
+          defineField({ name: 'label', type: 'string', validation: (rule) => rule.required() }),
+          defineField({
+            name: 'items',
+            type: 'array',
+            of: [defineArrayMember({ type: 'string' })],
+            description:
+              'Laid across under the label. One item reads as a sentence; three read as a set.',
+            validation: (rule) => rule.required().min(1),
+          }),
+        ],
+        preview: { select: { title: 'label', subtitle: 'items.0' } },
+      }),
+    ],
   })
 }

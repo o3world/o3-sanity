@@ -19,7 +19,7 @@ import { buttonKnobs } from './button'
 import { buttonGroupKnobs } from './buttonGroup'
 import { caseShowcaseSectionKnobs } from './caseShowcaseSection'
 import { ctaSectionKnobs } from './ctaSection'
-import { disciplineGridSectionKnobs } from './disciplineGridSection'
+import { featureGridSectionKnobs } from './featureGridSection'
 import { formSectionKnobs } from './formSection'
 import { heroSectionKnobs } from './heroSection'
 import { inFlightSectionKnobs } from './inFlightSection'
@@ -40,7 +40,7 @@ export { buttonGroupKnobs } from './buttonGroup'
 export { caseShowcaseSectionKnobs } from './caseShowcaseSection'
 export { ctaSectionKnobs } from './ctaSection'
 export { decorationKnob } from './decoration'
-export { disciplineGridSectionKnobs } from './disciplineGridSection'
+export { featureGridSectionKnobs } from './featureGridSection'
 export { formSectionKnobs } from './formSection'
 export { heroSectionKnobs } from './heroSection'
 export { inFlightSectionKnobs } from './inFlightSection'
@@ -79,7 +79,7 @@ export const BLOCK_KNOBS: Readonly<Record<string, BlockKnobs>> = {
   [quoteSectionKnobs.type]: quoteSectionKnobs,
   [insightsCarouselSectionKnobs.type]: insightsCarouselSectionKnobs,
   [ctaSectionKnobs.type]: ctaSectionKnobs,
-  [disciplineGridSectionKnobs.type]: disciplineGridSectionKnobs,
+  [featureGridSectionKnobs.type]: featureGridSectionKnobs,
   [personGridSectionKnobs.type]: personGridSectionKnobs,
   [roleListSectionKnobs.type]: roleListSectionKnobs,
   [inFlightSectionKnobs.type]: inFlightSectionKnobs,

@@ -90,13 +90,13 @@ describe('the seeded About page', () => {
     expect(subBlockPaths(html).filter((path) => path.includes('.items'))).toEqual([])
   })
 
-  // The frame's band order (`1924:5344`): hero, Why O3, the disciplines grid,
+  // The frame's band order (`1924:5344`): hero, Why O3, the feature grid,
   // the team, Culture, the beyond-client-services row, Careers, CTA.
   it('follows the frame’s band sequence, with the team band restored', () => {
     expect(sections.map((s) => s._type)).toEqual([
       'heroSection',
       'layoutSection',
-      'disciplineGridSection',
+      'featureGridSection',
       'personGridSection',
       'layoutSection',
       'layoutSection',
@@ -106,8 +106,8 @@ describe('the seeded About page', () => {
   })
 
   it.each([
-    ['disciplines heading', '4 disciplines. One team.'],
-    ['a discipline body', 'before a line of code is written'],
+    ['feature-grid heading', '4 disciplines. One team.'],
+    ['a feature body', 'before a line of code is written'],
     ['team eyebrow', 'Our team'],
     ['team heading', 'The people who find it and build it.'],
     ['careers eyebrow', 'Careers'],
@@ -172,7 +172,7 @@ describe('the seeded Solutions page', () => {
   it('replaces the two-column approximation with the orbital diagram', () => {
     expect(sections.map((s) => s._type)).toEqual([
       'heroSection',
-      'disciplineGridSection',
+      'featureGridSection',
       'railPanelsSection',
       'ctaSection',
     ])
@@ -184,16 +184,16 @@ describe('the seeded Solutions page', () => {
    * base ring. The frame puts Strategy at the apex and reads AI, Engineering,
    * Design around the base, so the seed carries them in that order.
    */
-  it('places the four disciplines in the frame’s position order', () => {
-    const disciplines = (
-      sections.find((s) => s._type === 'disciplineGridSection') as
-        { disciplines?: { heading?: string }[] } | undefined
-    )?.disciplines
-    expect(disciplines?.map((d) => d.heading)).toEqual(['Strategy', 'AI', 'Engineering', 'Design'])
+  it('places the four features in the frame’s position order', () => {
+    const features = (
+      sections.find((s) => s._type === 'featureGridSection') as
+        { features?: { heading?: string }[] } | undefined
+    )?.features
+    expect(features?.map((f) => f.heading)).toEqual(['Strategy', 'AI', 'Engineering', 'Design'])
   })
 
   it.each([
-    ['apex discipline', 'The root of every engagement'],
+    ['apex feature', 'The root of every engagement'],
     ['engagement band heading', 'Three ways in.'],
     ['an engagement card', 'Embedded Team Member'],
     ['an engagement card’s one line', 'Senior hands, inside your team.'],

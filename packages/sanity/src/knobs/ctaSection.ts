@@ -10,15 +10,22 @@ import type { CtaSection } from '../types/generated'
  * canvas toolbar's controls, are generated from it, so neither can offer a
  * value this file does not list.
  *
- * `orbs | none` and not the quote band's three: the closing band draws the two
- * spheres or nothing behind its heading, and the molecule belongs to the
- * case-study quote it was drawn for.
+ * **`molecule` is what the canonical component draws, and `orbs` is still the
+ * default.** The `CTA` component set (`2177:1354`) hangs one decoration: the
+ * molecule, 775.9px at 15%, centred behind the copy. Every redesigned frame
+ * instances it override-free — the Home closer (`2336:4351`) and the partner
+ * page's (`2478:2134`) differ only in their words — so `orbs` (`1680:2132`) is
+ * a generation behind on every band that draws it.
+ *
+ * Flipping the default is a four-page repaint and is #163's, not #92's: this
+ * list gains the value the partner page needs and nothing else moves, because
+ * no seed pins `decoration` and the default is what every existing CTA reads.
  */
 export const ctaSectionKnobs = defineBlockKnobs({
   type: 'ctaSection',
   title: 'CTA',
   tier: 'section',
-  knobs: [decorationKnob(['orbs', 'none']), surfaceKnob({ initialValue: 'ink' })],
+  knobs: [decorationKnob(['orbs', 'molecule', 'none']), surfaceKnob({ initialValue: 'ink' })],
   /**
    * The `button` carries a label and no destination, so it draws as a control
    * until an editor points it somewhere — an inserted band links nowhere by

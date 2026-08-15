@@ -1,4 +1,4 @@
-import { OrbitalSphere, SurfaceProvider } from '@o3/ui'
+import { MoleculeMark, OrbitalSphere, SurfaceProvider } from '@o3/ui'
 import { stegaClean } from '@sanity/client/stega'
 
 import { ButtonLink } from '@/content/ButtonLink'
@@ -28,7 +28,9 @@ type CtaSectionProps = SectionProps<'ctaSection'>
  * CTA band shows the middle of it where the hero shows only the cap.
  */
 export function CtaSection({ heading, body, button, decoration }: CtaSectionProps) {
-  const showOrbs = stegaClean(decoration) !== 'none'
+  const chosen = stegaClean(decoration)
+  const showMolecule = chosen === 'molecule'
+  const showOrbs = !showMolecule && chosen !== 'none'
 
   return (
     // The band always paints its own ink field, so it declares one: `ink-deep`
@@ -71,6 +73,20 @@ export function CtaSection({ heading, body, button, decoration }: CtaSectionProp
             motion="orbit"
             className="bottom-[4%] left-1/2 w-[150vw] -translate-x-1/2 lg:w-[90vw]"
           />
+        ) : null}
+
+        {/*
+         * What the canonical `CTA` component actually hangs (`2124:72`) — the
+         * molecule, not the sphere. 775.9 on a 1440 band is 53.9% of the width,
+         * centred on it (x 332.05 + 388 = 720.0) and starting a hair above the
+         * band's top edge, at 15%.
+         *
+         * White rather than `currentColor`'s inherited ink: the band is
+         * `ink-deep` and the frame draws the glyph in the light, which is the
+         * inverse of the quote band's use of the same mark on bone.
+         */}
+        {showMolecule ? (
+          <MoleculeMark className="absolute left-1/2 top-0 -z-0 w-[54%] min-w-[420px] -translate-x-1/2 -translate-y-[3%] text-white opacity-15" />
         ) : null}
 
         <div className="py-band-lg relative z-10 mx-auto flex max-w-[600px] flex-col items-center gap-[18px] text-center">

@@ -58,6 +58,10 @@ import pageIndex from '../../../../tools/migration/data/seed/page/index.json'
 import pageAbout from '../../../../tools/migration/data/seed/page/about.json'
 import pageSolutions from '../../../../tools/migration/data/seed/page/solutions.json'
 import pageLive from '../../../../tools/migration/data/seed/page/live.json'
+// The first partner landing page (#92) — the only seed carrying
+// `railPanelsSection` `layout: rows` and the two new `featureGridSection`
+// compositions, so it is where those arms get real content to render.
+import pagePartnersSanity from '../../../../tools/migration/data/seed/page/partners-sanity.json'
 import pageContact from '../../../../tools/migration/data/seed/page/contact.json'
 import pageVentures from '../../../../tools/migration/data/seed/page/ventures.json'
 // The one seeded page carrying a `mediaSection`, so the block has a real
@@ -269,6 +273,7 @@ const SEED_PAGES = {
   about: pageAbout,
   solutions: pageSolutions,
   live: pageLive,
+  'partners-sanity': pagePartnersSanity,
   contact: pageContact,
   ventures: pageVentures,
   'ventures-urvin': pageVenturesUrvin,

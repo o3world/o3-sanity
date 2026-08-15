@@ -1,0 +1,271 @@
+{
+  "_id": "page-seed-partners-sanity",
+  "_type": "page",
+  "title": "Sanity Development Partner",
+  "slug": {
+    "_type": "slug",
+    "current": "partners/sanity"
+  },
+  "pageType": "partner",
+  "card": {
+    "shortTitle": "Sanity",
+    "excerpt": "Structure, flexibility, and scale. That's what Sanity does. That's what we build on it."
+  },
+  "sections": [
+    {
+      "_type": "heroSection",
+      "_key": "hero",
+      "surface": "ink",
+      "variant": "band",
+      "eyebrow": "Technology partners",
+      "logo": {
+        "_type": "image",
+        "_localSrc": "tools/migration/data/seed/assets/plat-sanity-logo.png"
+      },
+      "headlineLines": ["Sanity Development Partner"],
+      "subheading": "Structure, flexibility, and scale. That's what Sanity does. That's what we build on it.",
+      "details": [
+        {
+          "_type": "detail",
+          "_key": "expertise",
+          "label": "o3 expertise:",
+          "items": [
+            "20+ Sanity implementations",
+            "Certified Sanity developers",
+            "Partners in production"
+          ]
+        }
+      ],
+      "decoration": "none"
+    },
+    {
+      "_type": "logoWallSection",
+      "_key": "brands",
+      "surface": "bone",
+      "heading": "Trusted brands using Sanity",
+      "clients": [
+        { "_type": "reference", "_ref": "client-seed-vertex", "_key": "client-0" },
+        { "_type": "reference", "_ref": "client-seed-ironman", "_key": "client-1" },
+        { "_type": "reference", "_ref": "client-seed-chop", "_key": "client-2" },
+        { "_type": "reference", "_ref": "client-seed-aramark", "_key": "client-3" },
+        { "_type": "reference", "_ref": "client-seed-la-colombe", "_key": "client-4" },
+        { "_type": "reference", "_ref": "client-seed-amerigas", "_key": "client-5" }
+      ]
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "services",
+      "surface": "white",
+      "layout": "rows",
+      "heading": "Three Core Services",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "svc-implementation",
+          "railLabel": "Implementation",
+          "heading": "Sanity Implementation & Migration",
+          "note": "Move to Sanity without the chaos",
+          "body": "We handle the full lifecycle: audit your current CMS, design scalable content models, build custom migration frameworks to move your data safely, and set up editorial workflows that match how your team actually works.",
+          "details": [
+            {
+              "_type": "detail",
+              "_key": "targets",
+              "label": "Migration targets we've handled:",
+              "items": [
+                "Legacy CMSs (Drupal, AEM, Sitecore)",
+                "Headless platforms (Contentful, Strapi, WordPress)",
+                "Completely unstructured content"
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "outcome",
+              "label": "what you get:",
+              "items": [
+                "A live Sanity instance with clean data, documented schemas, and a team trained on how to use it."
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "panel",
+          "_key": "svc-front-end",
+          "railLabel": "Front end",
+          "heading": "Composable Front Ends",
+          "note": "The half your customers actually see",
+          "body": "Sanity holds the content. We build what it becomes — a Next.js front end on Vercel, a design system your engineers can extend, and visual editing so an editor can see the page they are changing while they change it.",
+          "details": [
+            {
+              "_type": "detail",
+              "_key": "build",
+              "label": "What we build on it:",
+              "items": [
+                "Next.js front ends on Vercel",
+                "Design systems in code, tied to Figma",
+                "Live preview and visual editing"
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "outcome",
+              "label": "what you get:",
+              "items": [
+                "A site your editors can change without a ticket, and your engineers can extend without a rewrite."
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "panel",
+          "_key": "svc-operations",
+          "railLabel": "Operations",
+          "heading": "Content Operations & AI",
+          "note": "The part that starts after launch",
+          "body": "A content model is only as good as the operation around it. We set the editorial standards, put them in the dataset where the tools can read them, and wire AI into the drafting work that is genuinely repetitive — leaving the judgment calls with your team.",
+          "details": [
+            {
+              "_type": "detail",
+              "_key": "applies",
+              "label": "Where it applies:",
+              "items": [
+                "Voice and brand guidance agents can read",
+                "Draft generation inside the studio",
+                "Performance and content-health monitoring"
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "outcome",
+              "label": "what you get:",
+              "items": [
+                "An editorial operation that holds its standards as it scales, and the numbers to show it is working."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "featureGridSection",
+      "_key": "why",
+      "surface": "ink",
+      "layout": "stack",
+      "decoration": "molecule",
+      "heading": "Why Sanity + O3",
+      "features": [
+        {
+          "_type": "feature",
+          "_key": "why-both",
+          "heading": "You get both strategy and execution.",
+          "body": "We don't just implement Sanity. We audit your content operations, design your information architecture, and build for what you'll need 18 months from now.",
+          "mark": { "_type": "mark", "kind": "disc" }
+        },
+        {
+          "_type": "feature",
+          "_key": "why-scale",
+          "heading": "We work at scale.",
+          "body": "We've shipped 20+ Sanity implementations for enterprises. We know the patterns that work and the ones that fail.",
+          "mark": { "_type": "mark", "kind": "disc" }
+        },
+        {
+          "_type": "feature",
+          "_key": "why-stay",
+          "heading": "We stay involved.",
+          "body": "Implementation does not end at handover. We monitor performance, help with optimization, and improve the system as your business evolves.",
+          "mark": { "_type": "mark", "kind": "disc" }
+        }
+      ]
+    },
+    {
+      "_type": "featureGridSection",
+      "_key": "use-cases",
+      "surface": "white",
+      "layout": "rows",
+      "heading": "Use cases.",
+      "features": [
+        {
+          "_type": "feature",
+          "_key": "uc-legacy",
+          "heading": "You're stuck in a legacy CMS and content production is slow",
+          "body": "We migrate to Sanity with custom workflows that actually match how your team works. Content production goes from a bottleneck to a rhythm.",
+          "mark": { "_type": "mark", "kind": "disc" }
+        },
+        {
+          "_type": "feature",
+          "_key": "uc-model",
+          "heading": "You already run Sanity, and nobody trusts the content model",
+          "body": "Schemas grew by accretion, every page is a one-off, and editors work around the studio instead of in it. We remodel it against what you actually publish, then move the content you already have onto the new shape.",
+          "mark": { "_type": "mark", "kind": "disc" }
+        },
+        {
+          "_type": "feature",
+          "_key": "uc-channels",
+          "heading": "The same content has to reach four places and it gets written four times",
+          "body": "One source, structured properly, feeding the site, the app, the email tool and the sales deck. Your team writes it once and stops reconciling versions.",
+          "mark": { "_type": "mark", "kind": "disc" }
+        }
+      ]
+    },
+    {
+      "_type": "featureGridSection",
+      "_key": "enables",
+      "surface": "bone",
+      "layout": "stack",
+      "heading": "What it enables.",
+      "features": [
+        {
+          "_type": "feature",
+          "_key": "en-speed",
+          "heading": "5–10x faster content production cycles",
+          "mark": { "_type": "mark", "kind": "disc" }
+        },
+        {
+          "_type": "feature",
+          "_key": "en-channels",
+          "heading": "Multi-channel publishing from one source",
+          "mark": { "_type": "mark", "kind": "disc" }
+        },
+        {
+          "_type": "feature",
+          "_key": "en-collab",
+          "heading": "Team collaboration without version chaos",
+          "mark": { "_type": "mark", "kind": "disc" }
+        },
+        {
+          "_type": "feature",
+          "_key": "en-monitoring",
+          "heading": "Performance monitoring built in",
+          "mark": { "_type": "mark", "kind": "disc" }
+        },
+        {
+          "_type": "feature",
+          "_key": "en-governance",
+          "heading": "Scalable content governance",
+          "mark": { "_type": "mark", "kind": "disc" }
+        }
+      ]
+    },
+    {
+      "_type": "ctaSection",
+      "_key": "cta",
+      "surface": "ink",
+      "decoration": "molecule",
+      "heading": "Ready to make your technology work harder?",
+      "body": "We turn the right technology into scalable systems built around where you're headed next.",
+      "button": {
+        "_type": "button",
+        "label": "Talk to our team",
+        "href": "/contact",
+        "icon": "arrow"
+      }
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:partners-sanity",
+    "extractedAt": "2026-08-15T00:00:00Z",
+    "figmaNode": "2354:2446",
+    "provisional": true,
+    "provisionalNote": "Three things to settle before launch. (1) The frame authors ONE service and ONE use case and duplicates each three times — services 02/03 and use cases 02/03 are written here in the O3 voice and are unreviewed. (2) The logo bar's heading is 'Trusted brands using Sanity' but the six clients referenced are O3's, not a verified list of Sanity customers; confirm which brands may be named under that heading. (3) Two Figma-authored strings were rewritten against the voice guide rather than transcribed, which is a conflict with ADR 0007: 'Most implementation partners hand off code' is the banned competitor foil and is now 'Implementation does not end at handover', and the CTA's 'scalable solutions' uses a banned word and is now 'scalable systems'. Either the frame changes or the exception is recorded."
+  }
+}

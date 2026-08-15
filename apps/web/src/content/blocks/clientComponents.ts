@@ -17,7 +17,7 @@ import {
 } from './defineBlockRender'
 import { CaseShowcaseSection } from './section/caseShowcaseSection/CaseShowcaseSection'
 import { CtaSection } from './section/ctaSection/CtaSection'
-import { DisciplineGridSection } from './section/disciplineGridSection/DisciplineGridSection'
+import { FeatureGridSection } from './section/featureGridSection/FeatureGridSection'
 import { FormSection } from './section/formSection/FormSection'
 import { HeroSection } from './section/heroSection/HeroSection'
 import { InFlightSection } from './section/inFlightSection/InFlightSection'
@@ -51,7 +51,7 @@ export const CLIENT_SECTION_BINDINGS = [
   defineBlockRender('quoteSection', { component: QuoteSection }),
   defineBlockRender('insightsCarouselSection', { component: InsightsCarouselSection }),
   defineBlockRender('ctaSection', { component: CtaSection }),
-  defineBlockRender('disciplineGridSection', { component: DisciplineGridSection }),
+  defineBlockRender('featureGridSection', { component: FeatureGridSection }),
   defineBlockRender('personGridSection', { component: PersonGridSection }),
   defineBlockRender('roleListSection', { component: RoleListSection }),
   defineBlockRender('inFlightSection', { component: InFlightSection }),

@@ -22,7 +22,7 @@ export const inFlightSectionKnobs = defineBlockKnobs({
       // The Live frame draws the same three-field entry three times
       // (`1751:1994`, `1710:1800`, `1732:1409`) in two compositions, so this
       // is a layout axis on one block rather than three blocks — the call
-      // `disciplineGridSection.layout` and `railPanelsSection.rail` already
+      // `featureGridSection.layout` and `railPanelsSection.rail` already
       // make (#56, #42). Which lead a row draws is NOT a third enum: an entry
       // with a `date` gets the date column, everything else gets the disc.
       options: ['cards', 'rows'],

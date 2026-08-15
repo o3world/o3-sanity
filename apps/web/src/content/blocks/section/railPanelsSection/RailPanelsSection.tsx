@@ -10,6 +10,7 @@ import { fieldAttr, itemAttr } from '@/sanity/dataAttribute'
 
 import { PanelBand } from './PanelBand'
 import { PanelCards } from './PanelCards'
+import { PanelRows } from './PanelRows'
 
 type RailPanelsSectionProps = SectionProps<'railPanelsSection'>
 
@@ -60,7 +61,7 @@ type RailPanelsSectionProps = SectionProps<'railPanelsSection'>
  * heading, the same standfirst, the same three engagements. What changes is
  * the arrangement — no rail, no media square, three ink cards side by side —
  * so it is a `layout` axis rather than a second block, the same call
- * `disciplineGridSection` and `inFlightSection` already make.
+ * `featureGridSection` and `inFlightSection` already make.
  *
  * ```
  * 128px 0, gap 65
@@ -81,7 +82,9 @@ export function RailPanelsSection({
   loc,
 }: RailPanelsSectionProps) {
   const items = panels ?? []
-  const isCards = stegaClean(layout) === 'cards'
+  const chosenLayout = stegaClean(layout)
+  const isCards = chosenLayout === 'cards'
+  const isRows = chosenLayout === 'rows'
   const mode = stegaClean(rail) === 'number' ? 'number' : 'label'
   // Panel `_key`s are unique within the document, so they identify a panel
   // across both halves of the band without the section needing its own id
@@ -126,6 +129,29 @@ export function RailPanelsSection({
       ) : null}
     </div>
   )
+
+  if (isRows) {
+    return (
+      // `2334:2170` — 128px above, 64px below, and the header is the heading
+      // alone: the frame writes no standfirst over the services. `intro` still
+      // renders if a band carries one, in the rail header's measure.
+      <SectionShell surface={resolveSurface(surface, 'white')} top="md" bottom="sm">
+        <div className="flex flex-col gap-10 lg:gap-16">
+          {header}
+          <PanelRows
+            items={items.map((panel, index) => ({
+              key: panel._key ?? String(index),
+              heading: panel.heading ?? panel.railLabel,
+              note: panel.note,
+              body: panel.body,
+              details: panel.details,
+              dataSanity: itemAttr(loc, 'panels', panel._key),
+            }))}
+          />
+        </div>
+      </SectionShell>
+    )
+  }
 
   if (isCards) {
     return (

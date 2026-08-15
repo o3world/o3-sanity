@@ -382,6 +382,10 @@ describe('the committed redirect map', () => {
         '/insights/how-we-redesigned-our-website-in-a-single-weekend',
         '/insights/the-design-team-moved-the-file',
         '/live',
+        // The first partner landing page (#92) — a canonical frame
+        // (`2354:2446`) for a page WordPress never served. Vercel and Lovable
+        // are behind it, and each will land here the same way.
+        '/partners/sanity',
       ])
     })
   })

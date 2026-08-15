@@ -1,8 +1,18 @@
 import { stegaClean } from '@sanity/client/stega'
 
-import { CollectionHero, MaskedLines, OrbitalSphere, Reveal, SurfaceProvider } from '@o3/ui'
+import {
+  BrandLogo,
+  CloseIcon,
+  CollectionHero,
+  Eyebrow,
+  MaskedLines,
+  OrbitalSphere,
+  Reveal,
+  SurfaceProvider,
+} from '@o3/ui'
 
 import { ButtonLink } from '@/content/ButtonLink'
+import { LogoKnockout } from '@/content/LogoKnockout'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
 
 type HeroSectionProps = SectionProps<'heroSection'>
@@ -47,6 +57,8 @@ export function HeroSection({
   eyebrow,
   headlineLines,
   subheading,
+  logo,
+  details,
   button,
   decoration,
 }: HeroSectionProps) {
@@ -59,13 +71,67 @@ export function HeroSection({
   // /insights routes render, which is what stops a page-authored hero and
   // a route-owned hero drifting apart.
   if (stegaClean(variant) === 'band') {
-    const centred = !subheading
+    const detailGroups = details ?? []
+    /*
+     * The partner lockup (`2479:2205`): O3's red tile, a 12px ×, and the
+     * partner's mark as a white knockout — the same "Mask group" treatment the
+     * case-study cards give a client logo, which is what the frame draws here
+     * too. Only the partner half is content; the other two are the lockup's
+     * chrome.
+     */
+    const lockup = logo ? (
+      <div className="flex items-center gap-6">
+        <BrandLogo color="red" size={71} />
+        <CloseIcon className="size-3 text-white" aria-hidden="true" />
+        <LogoKnockout source={logo} alt="" width={257} className="h-[70px]" />
+      </div>
+    ) : null
+
+    /*
+     * The right column when it holds credentials rather than a standfirst
+     * (`2401:3196`) — a 12px-gap stack of one 18px eyebrow over its lines,
+     * each line a list item so the three read as a set to a screen reader.
+     */
+    const aside = detailGroups.length ? (
+      <div className="flex flex-col gap-8">
+        {detailGroups.map((detail, index) => (
+          <div key={detail._key ?? index} className="flex flex-col gap-3">
+            {detail.label ? (
+              <Eyebrow size="lg" tone="inverse">
+                {detail.label}
+              </Eyebrow>
+            ) : null}
+            <ul className="text-lead flex list-disc flex-col gap-1 pl-5">
+              {(detail.items ?? []).map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    ) : null
+
+    // Centred is the Solutions shape, and it is only reachable when the band
+    // has nothing to put in its right column at all.
+    const centred = !subheading && !aside
+
     return (
       <CollectionHero
         eyebrow={eyebrow}
         heading={lines.join(' ')}
         subheading={subheading}
+        lockup={lockup}
+        aside={aside}
         align={centred ? 'center' : 'start'}
+        /*
+         * A hero carrying either 2026-08 field is by definition drawn against
+         * the redesigned `Interior Hero` (`2107:1051`) rather than the Work
+         * band it predates — ink instead of ink-warm, 192px of pill clearance
+         * instead of 164, and the two columns on a shared baseline. `/work`,
+         * `/about`, `/solutions` and `/live` carry neither and keep the older
+         * generation until their frames are redrawn (#55).
+         */
+        variant={lockup || aside ? 'interior' : 'band'}
         decoration={
           showOrbs ? (
             // About hangs the sphere off the right edge of the band

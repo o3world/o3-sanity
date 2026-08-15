@@ -25,16 +25,21 @@ export const railPanelsSectionKnobs = defineBlockKnobs({
       // engagements — in a different arrangement: no rail, no media square,
       // three 394×526 ink cards each holding a halftone disc. Identical
       // content, different shape, so it is a layout axis rather than a second
-      // block — the test disciplineGridSection's `grid | orbital` and
+      // block — the test featureGridSection's `grid | orbital` and
       // inFlightSection's `cards | rows` already passed (#47, #56, #50).
-      options: ['rail', 'cards'],
+      // `rows` is the partner page's "Three Core Services" (`2334:2170`, #92):
+      // the same ordered set of offers again, as full-width hairlined rows
+      // with the numeral inline in an ink circle instead of in a sticky rail.
+      // Third arrangement, same content, so it joins the axis rather than
+      // starting a fourth block.
+      options: ['rail', 'cards', 'rows'],
       initialValue: 'rail',
     }),
     knob({
       name: 'rail',
       title: 'Rail',
       description:
-        'Rail layout only — what the rail counts off: each panel’s label (the platforms band) or its position (the ways-to-work band, where the frame numbers 01/02/03).',
+        'Rail layout only — what the rail counts off: each panel’s label (the platforms band) or its position (the ways-to-work band, where the frame numbers 01/02/03). The rows layout always numbers, so it does not ask.',
       // Both canonical bands (1762:2149 and 1762:2168) share one composition
       // and differ only here, so this is a variant of the block rather than a
       // second block — #42. Numbers derive from order, the same rule
@@ -46,7 +51,7 @@ export const railPanelsSectionKnobs = defineBlockKnobs({
       // a design option: the toolbar has to know not to draw it on the cards
       // layout, and a closure would tell it nothing (ADR 0020). `notOneOf`
       // shows on an unset `layout`, which is what the closure did too.
-      showWhen: { at: 'layout', mode: 'notOneOf', values: ['cards'] },
+      showWhen: { at: 'layout', mode: 'notOneOf', values: ['cards', 'rows'] },
     }),
     surfaceKnob({ initialValue: 'white' }),
   ],

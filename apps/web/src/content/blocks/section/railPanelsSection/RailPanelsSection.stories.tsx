@@ -81,3 +81,20 @@ export const SinglePanel: Story = {
     panels: (seededSectionArgs('index', 'railPanelsSection', 0).panels ?? []).slice(0, 1),
   },
 }
+
+/**
+ * `layout: rows` — the partner page's "Three Core Services" (`2334:2170`),
+ * #92. The numeral moves out of the sticky rail into an ink circle on the row,
+ * and each panel's `details` draw under its body: the breakdowns in ink, the
+ * last one — the promise — in brand red.
+ */
+export const Rows: Story = {
+  args: seededSectionArgs('partners-sanity', 'railPanelsSection'),
+  parameters: { design: figmaDesign('2334:2170') },
+}
+
+/** The rows layout below `lg`: the 394 and 608 columns stack under the numeral. */
+export const RowsMobile: Story = {
+  args: seededSectionArgs('partners-sanity', 'railPanelsSection'),
+  globals: { viewport: { value: 'mobile' } },
+}

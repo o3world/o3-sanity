@@ -12,6 +12,17 @@ export interface CollectionHeroProps {
   /** The 24px standfirst pinned right, in a 395px measure. Left-aligned only. */
   subheading?: ReactNode
   /**
+   * The lockup between the eyebrow and the headline — the partner page sets
+   * O3's mark, a ×, and the partner's here (`2479:2205`). Left-aligned only.
+   */
+  lockup?: ReactNode
+  /**
+   * What stands in the right column INSTEAD of the standfirst — the partner
+   * page's "O3 EXPERTISE:" list (`2401:3196`). The frame draws one 394px
+   * column and only ever fills it once, so this wins where both are given.
+   */
+  aside?: ReactNode
+  /**
    * `start` is the Work and About shape — headline left in a 588px measure,
    * subheading pinned right (`1634:1181`, `1924:5344`). `center` is the
    * Solutions shape: eyebrow and headline stacked on the centre line at
@@ -66,6 +77,8 @@ export function CollectionHero({
   eyebrow,
   heading,
   subheading,
+  lockup,
+  aside,
   align = 'start',
   variant = 'band',
   decoration,
@@ -98,8 +111,19 @@ export function CollectionHero({
             !centred && interior && 'lg:items-end',
           )}
         >
-          <div className={cn('flex flex-col gap-4', centred ? 'items-center' : 'lg:w-[588px]')}>
+          <div
+            className={cn(
+              'flex flex-col gap-4',
+              centred ? 'items-center' : 'lg:w-[588px]',
+              // `2401:3187` — 608 wide, and 24px between the eyebrow, the
+              // lockup, the headline and the standfirst where the older band
+              // sets 588 and 16. Both are read values, so the lockup carries
+              // its own rather than one of them being made to win.
+              !centred && lockup && 'gap-6 lg:w-[608px]',
+            )}
+          >
             {eyebrow ? <Eyebrow tone="inverse">{eyebrow}</Eyebrow> : null}
+            {!centred && lockup ? lockup : null}
             <h1
               className={cn(
                 'font-display text-balance',
@@ -108,8 +132,19 @@ export function CollectionHero({
             >
               {heading}
             </h1>
+            {/*
+             * The standfirst moves UNDER the headline when the right column is
+             * already spoken for. `2401:3191` is the partner hero's — 24/34
+             * white, in the left column, where the Work band pins its own to
+             * the right (`1634:1181`).
+             */}
+            {subheading && !centred && aside ? (
+              <p className="text-lead leading-[1.2]">{subheading}</p>
+            ) : null}
           </div>
-          {subheading && !centred ? (
+          {!centred && aside ? (
+            <div className="lg:w-[394px] lg:shrink-0">{aside}</div>
+          ) : subheading && !centred ? (
             <p className="text-lead leading-[1.2] lg:w-[395px]">{subheading}</p>
           ) : null}
         </div>

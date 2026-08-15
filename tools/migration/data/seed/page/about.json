@@ -78,14 +78,14 @@
       ]
     },
     {
-      "_type": "disciplineGridSection",
-      "_key": "disciplines",
+      "_type": "featureGridSection",
+      "_key": "features",
       "surface": "white",
       "layout": "grid",
       "heading": "4 disciplines. One team.",
-      "disciplines": [
+      "features": [
         {
-          "_type": "discipline",
+          "_type": "feature",
           "_key": "d-strategy",
           "heading": "Strategy",
           "body": "Finds the real problem and the move worth making, before a line of code is written.",
@@ -99,7 +99,7 @@
           }
         },
         {
-          "_type": "discipline",
+          "_type": "feature",
           "_key": "d-design",
           "heading": "Design",
           "body": "Product-grade design that gives the move a form people actually want to use.",
@@ -113,7 +113,7 @@
           }
         },
         {
-          "_type": "discipline",
+          "_type": "feature",
           "_key": "d-engineering",
           "heading": "Engineering",
           "body": "Senior engineers who build it to last and to scale — the fix that ships, not a prototype to hand off.",
@@ -127,7 +127,7 @@
           }
         },
         {
-          "_type": "discipline",
+          "_type": "feature",
           "_key": "d-ai",
           "heading": "AI",
           "body": "Applied where it compounds the work, not where it decorates it — our O3XO practice, embedded where it earns its keep.",

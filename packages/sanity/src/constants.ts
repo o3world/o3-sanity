@@ -83,7 +83,16 @@ export const WORDPRESS_PREFIXES: Readonly<Partial<Record<RoutableType, string>>>
   insight: '/perspectives',
 }
 
-export const PAGE_TYPES = ['standard', 'service'] as const
+/**
+ * What a `page` is, for the two things that read it: the conditional `card`
+ * fieldset, and `listingSection`.
+ *
+ * `partner` is a platform-partnership landing page — `/partners/sanity`
+ * (`2354:2446`, #92), with Vercel and Lovable behind it: the Home platforms
+ * rail already names all three. It is the first value with both a document and
+ * a frame; `service` still has neither (CONTEXT.md → Known drift).
+ */
+export const PAGE_TYPES = ['standard', 'service', 'partner'] as const
 export type PageType = (typeof PAGE_TYPES)[number]
 
 export const SURFACES = ['white', 'bone', 'ink'] as const

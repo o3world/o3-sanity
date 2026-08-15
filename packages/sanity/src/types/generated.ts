@@ -24,7 +24,7 @@ export type SanityImageAssetReference = {
 
 export type Logo = {
   asset?: SanityImageAssetReference
-  media?: unknown // Unable to locate the referenced type "logo.media" in schema
+  media?: unknown // Unable to locate the referenced type "panel.logo.media" in schema
   hotspot?: SanityImageHotspot
   crop?: SanityImageCrop
   _type: 'image'
@@ -167,7 +167,7 @@ export type Slug = {
 export type ListingSection = {
   _type: 'listingSection'
   heading?: string
-  pageType?: 'standard' | 'service'
+  pageType?: 'standard' | 'service' | 'partner'
   surface?: 'white' | 'bone' | 'ink'
   anchor?: string
 }
@@ -294,17 +294,18 @@ export type PersonGridSection = {
   anchor?: string
 }
 
-export type DisciplineGridSection = {
-  _type: 'disciplineGridSection'
+export type FeatureGridSection = {
+  _type: 'featureGridSection'
   heading?: string
-  layout?: 'grid' | 'orbital'
-  disciplines?: Array<{
+  layout?: 'grid' | 'stack' | 'rows' | 'orbital'
+  features?: Array<{
     heading?: string
     body?: string
     mark?: Mark
-    _type: 'discipline'
+    _type: 'feature'
     _key: string
   }>
+  decoration?: 'none' | 'molecule'
   surface?: 'white' | 'bone' | 'ink'
   anchor?: string
 }
@@ -314,7 +315,7 @@ export type CtaSection = {
   heading?: string
   body?: string
   button?: Button
-  decoration?: 'orbs' | 'none'
+  decoration?: 'orbs' | 'molecule' | 'none'
   surface?: 'white' | 'bone' | 'ink'
   anchor?: string
 }
@@ -363,7 +364,7 @@ export type RailPanelsSection = {
   _type: 'railPanelsSection'
   heading?: string
   intro?: string
-  layout?: 'rail' | 'cards'
+  layout?: 'rail' | 'cards' | 'rows'
   rail?: 'label' | 'number'
   panels?: Array<{
     railLabel?: string
@@ -374,6 +375,12 @@ export type RailPanelsSection = {
     button?: Button
     media?: Figure
     mark?: Mark
+    details?: Array<{
+      label?: string
+      items?: Array<string>
+      _type: 'detail'
+      _key: string
+    }>
     _type: 'panel'
     _key: string
   }>
@@ -420,8 +427,21 @@ export type HeroSection = {
   _type: 'heroSection'
   variant?: 'orbital' | 'band'
   eyebrow?: string
+  logo?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   headlineLines?: Array<string>
   subheading?: string
+  details?: Array<{
+    label?: string
+    items?: Array<string>
+    _type: 'detail'
+    _key: string
+  }>
   button?: Button
   decoration?: 'orbs' | 'none'
   surface?: 'white' | 'bone' | 'ink'
@@ -552,7 +572,7 @@ export type Page = {
   _rev: string
   title?: string
   slug?: Slug
-  pageType?: 'standard' | 'service'
+  pageType?: 'standard' | 'service' | 'partner'
   card?: {
     shortTitle?: string
     excerpt?: string
@@ -588,7 +608,7 @@ export type Page = {
       } & CtaSection)
     | ({
         _key: string
-      } & DisciplineGridSection)
+      } & FeatureGridSection)
     | ({
         _key: string
       } & PersonGridSection)
@@ -690,7 +710,7 @@ export type CaseStudy = {
       } & CtaSection)
     | ({
         _key: string
-      } & DisciplineGridSection)
+      } & FeatureGridSection)
     | ({
         _key: string
       } & PersonGridSection)
@@ -897,7 +917,7 @@ export type AllSanitySchemaTypes =
   | RoleListSection
   | PersonReference
   | PersonGridSection
-  | DisciplineGridSection
+  | FeatureGridSection
   | CtaSection
   | CategoryReference
   | InsightsCarouselSection
@@ -1410,22 +1430,23 @@ export type CASE_STUDY_QUERY_RESULT = {
           contrast?: 'auto' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
-        decoration?: 'none' | 'orbs'
+        decoration?: 'molecule' | 'none' | 'orbs'
         surface?: 'bone' | 'ink' | 'white'
         anchor?: string
       }
     | {
         _key: string
-        _type: 'disciplineGridSection'
+        _type: 'featureGridSection'
         heading?: string
-        layout?: 'grid' | 'orbital'
-        disciplines?: Array<{
+        layout?: 'grid' | 'orbital' | 'rows' | 'stack'
+        features?: Array<{
           heading?: string
           body?: string
           mark?: Mark
-          _type: 'discipline'
+          _type: 'feature'
           _key: string
         }>
+        decoration?: 'molecule' | 'none'
         surface?: 'bone' | 'ink' | 'white'
         anchor?: string
       }
@@ -1470,8 +1491,21 @@ export type CASE_STUDY_QUERY_RESULT = {
         _type: 'heroSection'
         variant?: 'band' | 'orbital'
         eyebrow?: string
+        logo?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         headlineLines?: Array<string>
         subheading?: string
+        details?: Array<{
+          label?: string
+          items?: Array<string>
+          _type: 'detail'
+          _key: string
+        }>
         button: {
           _type: 'button'
           label?: string
@@ -1731,7 +1765,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         _key: string
         _type: 'listingSection'
         heading?: string
-        pageType?: 'service' | 'standard'
+        pageType?: 'partner' | 'service' | 'standard'
         surface?: 'bone' | 'ink' | 'white'
         anchor?: string
         pages: Array<{
@@ -1841,7 +1875,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         _type: 'railPanelsSection'
         heading?: string
         intro?: string
-        layout?: 'cards' | 'rail'
+        layout?: 'cards' | 'rail' | 'rows'
         rail?: 'label' | 'number'
         panels: Array<{
           railLabel?: string
@@ -1876,6 +1910,12 @@ export type CASE_STUDY_QUERY_RESULT = {
           } | null
           media?: Figure
           mark?: Mark
+          details?: Array<{
+            label?: string
+            items?: Array<string>
+            _type: 'detail'
+            _key: string
+          }>
           _type: 'panel'
           _key: string
         }> | null
@@ -2022,7 +2062,7 @@ export type PAGE_QUERY_RESULT = {
   _type: 'page'
   title: string | null
   slug: string | null
-  pageType: 'service' | 'standard' | null
+  pageType: 'partner' | 'service' | 'standard' | null
   sections: Array<
     | {
         _key: string
@@ -2113,22 +2153,23 @@ export type PAGE_QUERY_RESULT = {
           contrast?: 'auto' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
-        decoration?: 'none' | 'orbs'
+        decoration?: 'molecule' | 'none' | 'orbs'
         surface?: 'bone' | 'ink' | 'white'
         anchor?: string
       }
     | {
         _key: string
-        _type: 'disciplineGridSection'
+        _type: 'featureGridSection'
         heading?: string
-        layout?: 'grid' | 'orbital'
-        disciplines?: Array<{
+        layout?: 'grid' | 'orbital' | 'rows' | 'stack'
+        features?: Array<{
           heading?: string
           body?: string
           mark?: Mark
-          _type: 'discipline'
+          _type: 'feature'
           _key: string
         }>
+        decoration?: 'molecule' | 'none'
         surface?: 'bone' | 'ink' | 'white'
         anchor?: string
       }
@@ -2173,8 +2214,21 @@ export type PAGE_QUERY_RESULT = {
         _type: 'heroSection'
         variant?: 'band' | 'orbital'
         eyebrow?: string
+        logo?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
         headlineLines?: Array<string>
         subheading?: string
+        details?: Array<{
+          label?: string
+          items?: Array<string>
+          _type: 'detail'
+          _key: string
+        }>
         button: {
           _type: 'button'
           label?: string
@@ -2434,7 +2488,7 @@ export type PAGE_QUERY_RESULT = {
         _key: string
         _type: 'listingSection'
         heading?: string
-        pageType?: 'service' | 'standard'
+        pageType?: 'partner' | 'service' | 'standard'
         surface?: 'bone' | 'ink' | 'white'
         anchor?: string
         pages: Array<{
@@ -2544,7 +2598,7 @@ export type PAGE_QUERY_RESULT = {
         _type: 'railPanelsSection'
         heading?: string
         intro?: string
-        layout?: 'cards' | 'rail'
+        layout?: 'cards' | 'rail' | 'rows'
         rail?: 'label' | 'number'
         panels: Array<{
           railLabel?: string
@@ -2579,6 +2633,12 @@ export type PAGE_QUERY_RESULT = {
           } | null
           media?: Figure
           mark?: Mark
+          details?: Array<{
+            label?: string
+            items?: Array<string>
+            _type: 'detail'
+            _key: string
+          }>
           _type: 'panel'
           _key: string
         }> | null
