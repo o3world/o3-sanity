@@ -10,8 +10,14 @@ import { Button } from './Button'
  * Which makes the interesting surface `ButtonLink`'s resolution rules, and that
  * is what these stories cover:
  *
- * - **href or target, never both.** A `target` is an internal reference and
- *   wins; `href` is the external escape hatch.
+ * - **the element the button chooses.** A destination draws a link; no
+ *   destination draws a `<button>`. Inspect the rendered element — that is the
+ *   whole difference, and it is what a screen reader announces and what a
+ *   cmd-click acts on.
+ * - **the four arms**, in precedence: a `target` is an internal reference and
+ *   wins, then `href`, then `anchor`, and nothing at all is the fourth.
+ *   `href` is the only arm that can leave the site, and an absolute URL is
+ *   what earns the new tab.
  * - **the legacy variant map.** `brand → dark` and `inverse → light`, because
  *   a dataset that has not been rebuilt since #42 still carries the old
  *   strings and a locked document keeps them forever. The canonical frames
@@ -55,9 +61,40 @@ export const InternalTarget: Story = {
   },
 }
 
-/** An external URL — the `href` arm, with no reference behind it. */
+/**
+ * An external URL — the `href` arm, with no reference behind it. Absolute, so
+ * it leaves the site and opens in a new tab with `rel="noopener noreferrer"`.
+ */
 export const ExternalHref: Story = {
   args: { label: 'Visit O3XO', href: 'https://www.o3xo.ai/', variant: 'dark', target: null },
+}
+
+/**
+ * The same arm, pointing at a route on this site. Most of the seeded buttons
+ * are here: a relative path is still a link, and still stays in this tab.
+ */
+export const RelativeHref: Story = {
+  args: { label: 'Let’s talk', href: '/contact', variant: 'dark', target: null },
+}
+
+/**
+ * The anchor arm — a place further down the page the visitor is already on.
+ *
+ * Authorable ahead of its target: no section carries a name yet, so this link
+ * resolves to `#how-we-work` and lands nowhere until one does.
+ */
+export const AnchorOnThisPage: Story = {
+  args: { label: 'How we work', anchor: 'how-we-work', variant: 'dark', target: null },
+}
+
+/**
+ * The fourth arm: nothing. **This renders a `<button>`, not a link** — the
+ * element the component picks when the editor has not sent the visitor
+ * anywhere. It is what the inquiry form's submit is, and it is why the form's
+ * submit needs no type of its own.
+ */
+export const NoDestination: Story = {
+  args: { label: 'Send message', variant: 'dark', target: null },
 }
 
 /**

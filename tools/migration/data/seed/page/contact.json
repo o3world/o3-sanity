@@ -35,7 +35,7 @@
         "Other"
       ],
       "consentLabel": "Sign up for our newsletter",
-      "submitLabel": "Send message"
+      "button": { "_type": "button", "label": "Send message" }
     },
     {
       "_type": "layoutSection",

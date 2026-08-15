@@ -337,7 +337,7 @@ describe('committed seed content', () => {
    *
    * Schema validation runs in Studio, and a seed never goes through Studio —
    * `load` writes the JSON straight to the dataset. So a `required()` rule on
-   * `reasons` or `submitLabel` is enforced for an editor and enforced by
+   * `reasons` or on the submit button's label is enforced for an editor and enforced by
    * nothing at all for the corpus, which is where every form on the site
    * currently comes from. These are that enforcement.
    */
@@ -365,11 +365,14 @@ describe('committed seed content', () => {
       }
     })
 
-    it('gives every form a submit label', () => {
+    // The submit is an ordinary button instance, and a button with no label
+    // renders nothing at all — so a form seeded without one has no submit.
+    it('gives every form a submit button with words on it', () => {
       for (const { file, section } of forms) {
+        const label = (section.button as { label?: unknown } | undefined)?.label
         expect(
-          typeof section.submitLabel === 'string' && section.submitLabel.trim().length > 0,
-          `${file}: formSection has no submitLabel`,
+          typeof label === 'string' && label.trim().length > 0,
+          `${file}: formSection has no button label`,
         ).toBe(true)
       }
     })

@@ -3,7 +3,8 @@ import Link from 'next/link'
 import { BrandMark } from '@o3/ui'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
-import { ButtonLink, resolveButtonHref } from '@/content/ButtonLink'
+import { ButtonLink } from '@/content/ButtonLink'
+import { resolveButtonHref } from '@/content/buttonDestination'
 
 import { MobileNavMenu } from './MobileNavMenu'
 import { NAV_INK_TARGET, NavInk } from './NavInk'

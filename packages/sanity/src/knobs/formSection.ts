@@ -26,8 +26,8 @@ export const formSectionKnobs = defineBlockKnobs({
   /**
    * `reasons` needs one option to satisfy `min(1)`, and it is the only field
    * here an editor authors — the inputs are fixed in `FormSection.tsx`.
-   * `submitLabel` is left out because the renderer already absorbs its absence
-   * with the same words the schema's `initialValue` would have written.
+   * `button` is left out because the renderer already absorbs its absence with
+   * the same words the schema's `initialValue` would have written.
    */
   placeholder: {
     _type: 'formSection',

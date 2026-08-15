@@ -5,7 +5,7 @@ import { ArrowIcon, DisplayHeading, Eyebrow, SectionShell } from '@o3/ui'
 
 import { Mark, markProps } from '@/content/blocks/base/mark/Mark'
 import { SanityImage } from '@/content/SanityImage'
-import { resolveButtonHref } from '@/content/ButtonLink'
+import { resolveButtonHref } from '@/content/buttonDestination'
 import { resolveSurface } from '@/content/blocks/surface'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
 import { fieldAttr } from '@/sanity/dataAttribute'

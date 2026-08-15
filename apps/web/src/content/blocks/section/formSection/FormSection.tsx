@@ -30,10 +30,12 @@ type FormSectionProps = SectionProps<'formSection'>
  * their own bands on the seeded page, and a form narrow enough to sit beside
  * an image is a form nobody finishes on a phone.
  *
- * The heading, the note, the dropdown's options and the submit's words are
- * the editor's. **The fields are not** — see the schema's doc comment and
- * ADR 0014. The submit is disabled; #58 has neither a handler nor a
- * destination, and `InquiryForm` says so on the page rather than pretending.
+ * The heading, the note, the dropdown's options and the submit button are the
+ * editor's — the submit is an ordinary `button` instance, so it offers
+ * everything any other button does. **The fields are not** — see the schema's
+ * doc comment and ADR 0014. The submit is disabled; #58 has neither a handler
+ * nor a destination, and `InquiryForm` says so on the page rather than
+ * pretending.
  */
 export function FormSection({
   eyebrow,
@@ -41,7 +43,7 @@ export function FormSection({
   note,
   reasons,
   consentLabel,
-  submitLabel,
+  button,
   surface,
   loc,
 }: FormSectionProps) {
@@ -61,7 +63,7 @@ export function FormSection({
         <InquiryForm
           reasons={reasons ?? []}
           consentLabel={consentLabel}
-          submitLabel={submitLabel ?? 'Send message'}
+          button={button}
           surface={resolved}
         />
       </div>
