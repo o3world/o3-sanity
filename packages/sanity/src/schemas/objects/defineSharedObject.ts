@@ -25,14 +25,37 @@ import { withKnobFields, type KnobbedField } from '../blocks/knobFields'
  * The object's `name` and `title` come from the spec, so a type cannot be filed
  * under a name its declaration does not answer to — the rule `BLOCK_KNOBS` and
  * `defineArrayItem` already keep.
+ *
+ * **An object registered in `BASE_BLOCKS` reaches the layout column, and the
+ * canvas toolbar does not reach it back** (ADR 0022, addendum). `defineBaseBlock`
+ * takes no `knobs` precisely so that a base block cannot declare one the overlay
+ * would be silent about — but this factory is a second door into the same
+ * array, and `button` and `buttonGroup` have both walked through it. Their
+ * options are reachable at every other placement and unreachable in a column.
+ * Declaring one there is not forbidden; discovering it does nothing on the
+ * canvas is what that ADR exists to explain.
  */
 export function defineSharedObject({
   knobs,
+  description,
   fields,
   preview,
 }: {
   /** The object's design options, carrying its registered type name and title. */
   knobs: ObjectKnobs
+  /**
+   * What the object is for, written for an author who cannot see the rendered
+   * site — the same standard `defineSectionBlock` holds a block to, and the
+   * same two consumers: `get_schema` serves it to every MCP client, and Studio
+   * draws it under the type.
+   *
+   * Optional here where it is required there, because a block is a page's
+   * composition and an object is a part: `seo` and `migration` are machinery an
+   * author never composes with, and a description on either would be an
+   * explanation of nothing. An object an editor **places** — one that doubles
+   * as a base block, or that a page's shape depends on — writes one.
+   */
+  description?: string
   /** Editorial fields, and each knob's name where its generated field belongs. */
   fields: KnobbedField[]
   preview?: ObjectDefinition['preview']
@@ -40,6 +63,7 @@ export function defineSharedObject({
   return defineType({
     name: knobs.type,
     title: knobs.title,
+    ...(description ? { description } : {}),
     type: 'object',
     fields: withKnobFields('defineSharedObject', knobs.type, fields, knobs),
     ...(preview ? { preview } : {}),

@@ -1,6 +1,7 @@
 import { defineType } from 'sanity'
 import type { FieldDefinition, ObjectDefinition } from 'sanity'
 import type { BlockKnobs } from '@o3/block-spec'
+import { anchorField } from './fields'
 import { withKnobFields, type KnobbedField } from './knobFields'
 import { BASE_BLOCKS, SECTION_BLOCKS } from './registry'
 
@@ -29,8 +30,17 @@ type BlockOptions = {
 /**
  * A section-tier block: a full-width page section rendered inside
  * SectionShell. The factory generates each declared knob's field, appends the
- * shared `surface` knob wherever the block did not place it, and refuses names
- * missing from the registry.
+ * shared `surface` knob wherever the block did not place it, appends the
+ * shared `anchor` field after them, and refuses names missing from the
+ * registry.
+ *
+ * **Two shared fields, injected by two different mechanisms, and the split is
+ * the rule rather than an accident** (#149). `surface` is a closed set an
+ * editor picks a look from, so it is a knob and its field is generated from
+ * that declaration. `anchor` is a name an editor types, so it is a plain field
+ * and there is no control for a toolbar to draw. Adding a third: if a block
+ * would have a picker for it, it belongs in `src/knobs/`; otherwise it belongs
+ * beside `anchorField` in `fields.ts`.
  */
 export function defineSectionBlock({ name, title, fields, preview, knobs }: BlockOptions) {
   if (!SECTION_BLOCKS.includes(name as (typeof SECTION_BLOCKS)[number])) {
@@ -47,7 +57,10 @@ export function defineSectionBlock({ name, title, fields, preview, knobs }: Bloc
     name,
     title,
     type: 'object',
-    fields: withKnobFields('defineSectionBlock', name, fields, knobs),
+    // The anchor lands last, after the knobs the splice appends: it is the one
+    // field on a band that is about the page rather than about the band, and a
+    // form an editor reads top-down should not open on it.
+    fields: [...withKnobFields('defineSectionBlock', name, fields, knobs), anchorField()],
     preview: preview ?? {
       select: { title: 'title' },
       prepare: (sel) => ({ title: sel.title ?? title, subtitle: title }),

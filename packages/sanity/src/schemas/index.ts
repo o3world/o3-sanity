@@ -1,6 +1,7 @@
 import {
   bodyText,
   button,
+  buttonGroup,
   chapter,
   embed,
   figure,
@@ -40,6 +41,7 @@ export const schemaTypes = [
   seo,
   migration,
   button,
+  buttonGroup,
   figure,
   stat,
   embed,

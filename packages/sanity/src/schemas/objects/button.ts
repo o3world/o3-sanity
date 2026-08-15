@@ -1,6 +1,7 @@
 import { defineField } from 'sanity'
 import { ROUTABLE_TYPES } from '../../constants'
 import { buttonKnobs } from '../../knobs/button'
+import { validateAnchorName } from '../blocks/fields'
 import { defineSharedObject } from './defineSharedObject'
 
 /**
@@ -54,15 +55,11 @@ export const button = defineSharedObject({
       title: 'Anchor on this page',
       type: 'string',
       description: 'A named place further down this page, written without the #.',
-      // Authorable before anything can be pointed at: no section carries a name
-      // yet, so an anchor written today resolves to a `#` link that lands
-      // nowhere until one does.
-      validation: (rule) =>
-        rule.custom((value: string | undefined) =>
-          !value || /^[^\s#]+$/.test(value)
-            ? true
-            : 'Write the anchor’s name on its own — no # and no spaces.',
-        ),
+      // The same rule the band's own `anchor` field validates against, called
+      // rather than restated (#149): this end writes `#` + the value and that
+      // end writes it as an `id`, so a rule enforced at one end only would let
+      // an editor author a link that can never resolve.
+      validation: (rule) => rule.custom((value: string | undefined) => validateAnchorName(value)),
       hidden: ({ parent }) => Boolean(parent?.target || parent?.href),
     }),
     'variant',

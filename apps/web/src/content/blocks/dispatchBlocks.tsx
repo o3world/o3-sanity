@@ -4,6 +4,8 @@ import type { SanityBlock } from '@o3/sanity/types'
 
 import { arrayItemLoc, dataAttr } from '@/sanity/dataAttribute'
 
+import { ANCHOR_OFFSET_CLASS, sectionAnchors } from './anchors'
+
 /**
  * The per-block dispatch loop shared by `BlockRenderer` (server, published)
  * and `ClientBlockRenderer` (Presentation Tool draft preview): look the
@@ -49,6 +51,12 @@ export function renderDispatchedBlocks(opts: {
   fieldPath?: string
 }): ReactNode[] {
   const { blocks, lookup, Placeholder, documentId, documentType, fieldPath = 'sections' } = opts
+  // The seam owns the anchor for the same reason it owns band attribution:
+  // five of the sixteen blocks build their own `<section>` rather than use the
+  // shell, so a jump target routed through the shell would work on eleven
+  // bands and silently miss five. Resolved for the array rather than per block
+  // because two bands claiming one name is only visible from here (#149).
+  const anchors = sectionAnchors(blocks)
   return blocks.map((block) => {
     // The one cast on the dispatch seam: registry values are heterogeneous
     // component types; each block's props are validated where the registry
@@ -68,12 +76,16 @@ export function renderDispatchedBlocks(opts: {
     // attribution down with it, silently. `loc` is not in the field lexicon
     // (CONTEXT.md → Naming), so the collision is a rule rather than a hope.
     const rendered = <Component {...props} loc={loc} />
+    const anchor = anchors.get(block._key)
+    const anchorProps = anchor ? { id: anchor, className: ANCHOR_OFFSET_CLASS } : undefined
     return loc ? (
-      <div key={block._key} data-sanity={dataAttr(loc)}>
+      <div key={block._key} data-sanity={dataAttr(loc)} {...anchorProps}>
         {rendered}
       </div>
     ) : (
-      <div key={block._key}>{rendered}</div>
+      <div key={block._key} {...anchorProps}>
+        {rendered}
+      </div>
     )
   })
 }
