@@ -36,6 +36,8 @@ import { defineSharedObject } from './defineSharedObject'
  */
 export const button = defineSharedObject({
   knobs: buttonKnobs,
+  description:
+    'A single button — a label, where it goes, and how much it stands out. Point it at a page in the site, an external URL, or a band’s anchor further down; a button with nowhere to go is a control rather than a link, which is what the contact form’s submit is. Contrast is Auto by default, so it reads against whichever band it lands on without anyone choosing.',
   fields: [
     defineField({ name: 'label', type: 'string', validation: (rule) => rule.required() }),
     defineField({

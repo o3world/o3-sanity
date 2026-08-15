@@ -45,17 +45,19 @@ export function defineSharedObject({
   knobs: ObjectKnobs
   /**
    * What the object is for, written for an author who cannot see the rendered
-   * site — the same standard `defineSectionBlock` holds a block to, and the
-   * same two consumers: `get_schema` serves it to every MCP client, and Studio
-   * draws it under the type.
+   * site — the same standard `defineSectionBlock` holds a block to (#138), and
+   * the same two consumers: `get_schema` serves it to every MCP client, and
+   * Studio draws it under the type.
    *
-   * Optional here where it is required there, because a block is a page's
-   * composition and an object is a part: `seo` and `migration` are machinery an
-   * author never composes with, and a description on either would be an
-   * explanation of nothing. An object an editor **places** — one that doubles
-   * as a base block, or that a page's shape depends on — writes one.
+   * Required, on the same argument. Every object that comes through this
+   * factory is one an editor **places**: all three register in `BASE_BLOCKS`
+   * and appear in the insert menu beside the section blocks, where an
+   * undescribed entry is the only one that cannot say what it is for. The
+   * machinery objects a description would explain nothing about — `seo`,
+   * `migration` — carry no knobs and reach `defineType` directly, so they
+   * never arrive here to be burdened by it.
    */
-  description?: string
+  description: string
   /** Editorial fields, and each knob's name where its generated field belongs. */
   fields: KnobbedField[]
   preview?: ObjectDefinition['preview']

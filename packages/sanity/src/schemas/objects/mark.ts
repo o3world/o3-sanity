@@ -35,6 +35,8 @@ import { defineSharedObject } from './defineSharedObject'
  */
 export const mark = defineSharedObject({
   knobs: markKnobs,
+  description:
+    'The dotted circle set beside a piece of copy — an animated orb by default, or the frame’s original flat disc. Used two ways: as the mark field on a card, a row or a discipline, and on its own in a layout column, where it is the animation rather than a bullet. Same object either way, so it is configured identically wherever it sits.',
   fields: [
     'kind',
     'state',
