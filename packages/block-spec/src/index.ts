@@ -31,9 +31,17 @@
  * const screen = defineItemKnobs({ type: 'screen', title: 'Screen', knobs: [tone] })
  * const grid = defineBlockKnobs({ …, items: { screens: screen } })
  * ```
+ *
+ * A shared object declares its own, once, against its registered type name
+ * (#145). Every placement of it exposes that declaration — an instance is
+ * configured by its component, never by where it sits:
+ *
+ * ```ts
+ * const mark = defineObjectKnobs({ type: 'mark', title: 'Mark', knobs: [kind, state] })
+ * ```
  */
 
-export { defineBlockKnobs, defineItemKnobs, knob } from './knob'
+export { defineBlockKnobs, defineItemKnobs, defineObjectKnobs, knob } from './knob'
 export { humanize } from './humanize'
 export { itemKnobsAt, patchableItemRoots } from './items'
 export { patchableKnobRoots } from './patchableRoots'
@@ -69,6 +77,7 @@ export type {
   KnobValue,
   KnobValueType,
   LeafShowWhen,
+  ObjectKnobs,
   ResolvedKnob,
   ShowWhen,
   SurfaceRule,

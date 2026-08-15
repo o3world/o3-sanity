@@ -1,7 +1,7 @@
 'use client'
 
 import type { OverlayComponentResolver } from '@sanity/visual-editing'
-import type { BlockKnobs } from '@o3/block-spec'
+import type { BlockKnobs, ObjectKnobs } from '@o3/block-spec'
 
 import { CanvasToolbar } from './CanvasToolbar'
 import { canvasSubject } from './subject'
@@ -40,9 +40,17 @@ import { canvasSubject } from './subject'
  */
 export function createCanvasComponents({
   blockKnobs,
+  objectKnobs = {},
   blockArrays = {},
 }: {
   blockKnobs: Readonly<Record<string, BlockKnobs>>
+  /**
+   * Every shared object that declares design options, keyed by its type name —
+   * the site's `OBJECT_KNOBS` (#145, ADR 0023). Optional, and omitting it is a
+   * real configuration rather than a broken one: a project whose components
+   * declare nothing simply gets no instance group.
+   */
+  objectKnobs?: Readonly<Record<string, ObjectKnobs>>
   /**
    * What each block-bearing array accepts, keyed `<host type>.<field>` — the
    * site's `BLOCK_ARRAYS` (#112). Optional, and omitting it is a real
@@ -55,6 +63,6 @@ export function createCanvasComponents({
     if (!('path' in node)) return undefined
     const subject = canvasSubject(node.path)
     if (!subject) return undefined
-    return { component: CanvasToolbar, props: { ...subject, blockKnobs, blockArrays } }
+    return { component: CanvasToolbar, props: { ...subject, blockKnobs, objectKnobs, blockArrays } }
   }
 }

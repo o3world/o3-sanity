@@ -1,5 +1,8 @@
-import { defineField, defineType } from 'sanity'
-import { MARK_KINDS, ORB_SIZES, ORB_STATES } from '../../constants'
+import { defineField } from 'sanity'
+import { ORB_STATES } from '../../constants'
+import { markKnobs, ORB_ONLY } from '../../knobs/mark'
+import { hiddenUnless } from '../blocks/knobFields'
+import { defineSharedObject } from './defineSharedObject'
 
 /**
  * The dotted circle a card, a row or a discipline sets beside its copy.
@@ -21,44 +24,28 @@ import { MARK_KINDS, ORB_SIZES, ORB_STATES } from '../../constants'
  * `embed` and `cta` already have: authors pick it from a `layoutSection`
  * column (titled "Orb" there — a mark on its own in a column is the animation,
  * not a bullet), and the same object is the mark field on four section blocks.
- * One definition, so a mark is configured identically wherever it is placed.
+ * One definition, so a mark is configured identically wherever it is placed —
+ * a sentence the registry's shape now enforces rather than asserts: `kind`,
+ * `state` and `size` are declared once in `src/knobs/mark.ts`, keyed by this
+ * type name, and their fields are generated from that declaration (ADR 0023).
+ *
+ * `speed` and `paused` are not design options — a free multiplier and a
+ * boolean, neither a set an editor picks from — so they stay hand-written and
+ * borrow the orb-only gate the knobs ride.
  */
-export const mark = defineType({
-  name: 'mark',
-  title: 'Mark',
-  type: 'object',
+export const mark = defineSharedObject({
+  knobs: markKnobs,
   fields: [
-    defineField({
-      name: 'kind',
-      type: 'string',
-      description: 'Orb is the animated canvas; disc is the frame’s static halftone.',
-      options: { list: [...MARK_KINDS], layout: 'radio', direction: 'horizontal' },
-      initialValue: MARK_KINDS[0],
-    }),
-    defineField({
-      name: 'state',
-      type: 'string',
-      description: 'Which of the nine animations the orb draws.',
-      options: { list: [...ORB_STATES] },
-      initialValue: ORB_STATES[0],
-      hidden: ({ parent }) => parent?.kind === 'disc',
-    }),
-    defineField({
-      name: 'size',
-      type: 'number',
-      description:
-        'Which tuning the orb draws with — the library’s two presets, in px. Beside copy the orb fills its slot, so this sets the texture (dot count and pace), not the diameter: 64 is the standard drawing, 20 the finer one.',
-      options: { list: [...ORB_SIZES], layout: 'radio', direction: 'horizontal' },
-      initialValue: ORB_SIZES[0],
-      hidden: ({ parent }) => parent?.kind === 'disc',
-    }),
+    'kind',
+    'state',
+    'size',
     defineField({
       name: 'speed',
       type: 'number',
       description: 'Multiplier on the animation’s baked speed — 1 is as tuned, 0.5 is half pace.',
       initialValue: 1,
       validation: (rule) => rule.min(0.1).max(4),
-      hidden: ({ parent }) => parent?.kind === 'disc',
+      hidden: hiddenUnless(ORB_ONLY),
     }),
     defineField({
       name: 'paused',
@@ -66,7 +53,7 @@ export const mark = defineType({
       description:
         'Hold the animation on a frame. Motion is already skipped for anyone who asks for reduced motion — this is an editorial choice on top of that.',
       initialValue: false,
-      hidden: ({ parent }) => parent?.kind === 'disc',
+      hidden: hiddenUnless(ORB_ONLY),
     }),
   ],
   preview: {

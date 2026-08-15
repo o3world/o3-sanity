@@ -1,10 +1,17 @@
-import { defineField, defineType } from 'sanity'
+import { defineField } from 'sanity'
 import { ROUTABLE_TYPES } from '../../constants'
+import { ctaKnobs } from '../../knobs/cta'
+import { defineSharedObject } from './defineSharedObject'
 
-export const cta = defineType({
-  name: 'cta',
-  title: 'Call to action',
-  type: 'object',
+/**
+ * A call to action, wherever one is placed.
+ *
+ * `variant` is declared in `src/knobs/cta.ts` and its field is generated from
+ * that declaration (ADR 0023), so the canvas offers the fill an editor can
+ * already see in the form. Everything else here is editorial.
+ */
+export const cta = defineSharedObject({
+  knobs: ctaKnobs,
   fields: [
     defineField({ name: 'label', type: 'string', validation: (rule) => rule.required() }),
     defineField({
@@ -19,20 +26,11 @@ export const cta = defineType({
       title: 'External URL',
       type: 'url',
       validation: (rule) => rule.uri({ scheme: ['http', 'https', 'mailto'], allowRelative: true }),
+      // Stays a closure: the gate reads whether a REFERENCE is filled in, which
+      // no `showWhen` mode expresses. An editorial field is allowed one.
       hidden: ({ parent }) => Boolean(parent?.target),
     }),
-    defineField({
-      name: 'variant',
-      type: 'string',
-      description:
-        'Solid dark on a light band, solid light on ink or over a card scrim, or ghost. There is no red button in the canonical frames — brand red arrives as a gradient.',
-      // Figma's `Button / Solid` (136:754) fills plus `Button / Ghost`
-      // (264:260). Renamed from brand|inverse|ghost in #42: the shipped
-      // vocabulary named a red button the design does not have. See
-      // docs/figma-components.md → "Button is divergent".
-      options: { list: ['dark', 'light', 'ghost'], layout: 'radio' },
-      initialValue: 'dark',
-    }),
+    'variant',
   ],
   preview: {
     select: { title: 'label', subtitle: 'href' },

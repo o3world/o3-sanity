@@ -112,14 +112,18 @@ export type ShowWhen = LeafShowWhen | { mode: 'allOf'; all: readonly LeafShowWhe
  * - `block` — the block itself: its identity and its layout. The default.
  * - `item` — a keyed array item inside the block, delivered in that item's
  *   own knob menu.
+ * - `instance` — one placed occurrence of a shared object, delivered in that
+ *   instance's own knob menu. Innermost: an instance sits inside a block, and
+ *   often inside an item as well.
  *
- * `item` IS NOT A VALUE THE PREFIX TABLE COMPUTES. It is a fact about which
- * spec you are holding: `defineItemKnobs` stamps it on every knob it takes, and
- * `defineBlockKnobs` refuses one. An item knob configures a member the block
+ * `item` AND `instance` ARE NOT VALUES THE PREFIX TABLE COMPUTES. Each is a
+ * fact about which spec you are holding: `defineItemKnobs` and
+ * `defineObjectKnobs` stamp theirs on every knob they take, and
+ * `defineBlockKnobs` refuses both. Either one configures something the block
  * cannot name, so a block-rooted path could only ever write somewhere the
- * writer would have to invent — see `ItemKnobs`.
+ * writer would have to invent — see `ItemKnobs` and `ObjectKnobs`.
  */
-export type KnobSurface = 'band' | 'block' | 'item'
+export type KnobSurface = 'band' | 'block' | 'item' | 'instance'
 
 /** One row of the surface-ownership table. */
 export type SurfaceRule = {
@@ -208,6 +212,40 @@ export type ItemKnobs = {
 }
 
 /**
+ * A SHARED OBJECT IS ITS OWN KNOB ROOT (#145, ADR 0023), keyed by its own type
+ * name, and every placement of it exposes that declaration.
+ *
+ * A `mark` is a named field on four section blocks, a member of
+ * `layoutSection.items`, and a field on the nav and the footer outside the
+ * block tree entirely. Hanging its options off each host would declare them
+ * five times over — the drift ADR 0020 exists to remove — and could not reach
+ * the polymorphic column at all, since `ItemKnobs` is one spec per array field
+ * and that array holds six member types.
+ *
+ * **An instance is configured by its component** (CONTEXT.md → Component,
+ * instance, slot). A placement may not redefine an instance's knobs;
+ * configuration that varies by position is a resolution concern — a value read
+ * from context — never a second declaration.
+ *
+ * The collision argument that forced host-routing for `ItemKnobs` does not
+ * apply here, and the distinction is principled rather than convenient: Sanity
+ * registers a shared object's name globally, so two types cannot silently agree
+ * on `cta` the way two blocks can each declare a `screen`.
+ */
+export type ObjectKnobs = {
+  /**
+   * The shared object's registered Sanity type name — `mark`, `cta`. **Global,
+   * never local**, which is what makes a `_type`-keyed registry safe here where
+   * ADR 0021 refused one for array members.
+   */
+  type: string
+  title: string
+  /** Discriminates against `BlockTier` and `ItemKnobs`, neither of which has it. */
+  tier: 'object'
+  knobs: readonly Knob[]
+}
+
+/**
  * The content one newly inserted block starts with — the second authored
  * artifact a block declares (#112), beside its knobs.
  *
@@ -250,19 +288,20 @@ export type BlockKnobs = {
 }
 
 /**
- * Anything a knob path is relative to: a block, or one member of its arrays.
+ * Anything a knob path is relative to: a block, one member of its arrays, or
+ * one instance of a shared object.
  *
  * Every query in this package takes one of these, because the questions they
  * answer — what applies here, what is it set to, what does a gate read — are
- * the same questions at either root.
+ * the same questions at every root.
  */
-export type KnobRoot = BlockKnobs | ItemKnobs
+export type KnobRoot = BlockKnobs | ItemKnobs | ObjectKnobs
 
 /**
  * Reads a path **relative to the knob root** out of whatever the consumer
  * has: a document snapshot in the preview, a fixture in Storybook, the form's
- * `parent` in the Studio. The root is the block for a `BlockKnobs` and the
- * hovered member for an `ItemKnobs`.
+ * `parent` in the Studio. The root is the block for a `BlockKnobs`, the hovered
+ * member for an `ItemKnobs`, and the hovered instance for an `ObjectKnobs`.
  *
  * A reader rather than a value object, because a compound gate reads more than
  * one path and the caller cannot know how many before it has looked at the
