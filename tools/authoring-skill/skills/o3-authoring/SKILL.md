@@ -35,8 +35,9 @@ this conversation.
    material for claims, never copy to paste. `key == "o3-slop"` is the machine
    tells the voice guide's revision pass sends you to; read it before you
    revise, and read it first when the job is auditing a draft rather than
-   writing one. If no guidance documents exist, say so and stop — never
-   improvise the voice.
+   writing one. `key == "o3-visual"` is the design's palette and geometry,
+   for the point at which you make a picture rather than write. If no
+   guidance documents exist, say so and stop — never improvise the voice.
 2. **Fetch the schema per type.** Before authoring any document type or
    section block, call `get_schema` for that **specific type**. The no-type
    overview omits field descriptions, and the descriptions carry required
@@ -55,10 +56,14 @@ this conversation.
 - **Never invent facts.** Real names, numbers, outcomes, and quotes come from
   the human. For case studies, interview until you have them; gaps stay gaps
   and go in the handoff summary.
-- **Imagery:** reference existing image assets (query
-  `*[_type == "sanity.imageAsset"]` with filters) when one genuinely fits;
-  otherwise leave the field empty and list what's needed in the handoff
-  summary. Never call `generate_image`.
+- **Imagery:** reference an existing asset (query
+  `*[_type == "sanity.imageAsset"]` with filters) when one genuinely fits.
+  Otherwise `generate_image` is available, and `key == "o3-visual"` governs
+  what comes out of it — the palette by hex, the gradients the red and the
+  light bands arrive as, the square geometry, and the rule that a generated
+  image carries no type. Read it before the first prompt, not after the first
+  result. An empty field with a note in the handoff summary beats an image
+  that is nearly right.
 - **Portable text is raw JSON** — build block arrays by hand to match the
   schema; there are no markdown convenience tools.
 

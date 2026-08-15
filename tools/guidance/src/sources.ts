@@ -45,6 +45,16 @@ const GUIDANCE_SOURCES = [
     title: 'O3 page composition',
     sourcePath: 'docs/guidance/composition.md',
   },
+  {
+    /* What the design looks like, for the agent that has to make a picture
+     * rather than read one. Values are the `packages/tailwind-config/tokens/`
+     * set restated for a prompt — a Desktop agent can reach the dataset and
+     * not the CSS, and an image model needs hex numbers and a described
+     * gradient rather than a custom property. */
+    key: 'o3-visual',
+    title: 'O3 visual language',
+    sourcePath: 'docs/guidance/visual.md',
+  },
 ] as const
 
 /** Deterministic and outside the load pipeline's `<type>-(wp|seed)-` ownership contract. */
