@@ -6,43 +6,44 @@ import { cn } from '@o3/ui/lib/utils'
 import { ArrowIcon } from '../arrow-icon'
 
 /**
- * Realigned to Figma's `Button / Solid` (`136:754`) and `Button / Ghost`
- * (`264:260`) — the divergence `docs/figma-components.md` recorded and handed
- * to #42, because the variant vocabulary is also the `cta.variant` schema enum.
+ * Figma's `Button` set (`2134:1785`), which every redesigned frame instances.
  *
- * | Axis    | Figma                                | Here                          |
- * | ------- | ------------------------------------ | ----------------------------- |
- * | Size    | `Base` \| `Large`                    | `size: base \| large`         |
- * | Fill    | Solid `#0A0A0A` / `#FFFFFF`, Ghost   | `variant: dark \| light \| ghost` |
- * | State   | `Default` \| `Hover`                 | a `hover:` utility, never a variant |
+ * | Axis  | Figma                            | Here                                |
+ * | ----- | -------------------------------- | ----------------------------------- |
+ * | Theme | `Black` \| `White`               | `variant: dark \| light`            |
+ * | State | `Default` … `Disabled`           | `hover:` / `disabled:` utilities    |
  *
- * Fill is not a Figma *axis* — `Solid` ships one fill per band and `Ghost` is
- * its own set. The frames pick between them by what the button sits on, so
- * they collapse into one cva key here (ADR 0008: shadcn's anatomy, O3's
- * tokens). **There is no red button on the canonical Home frame**; the old
- * `brand` fill is gone rather than kept on a hunch, and brand red now reaches
- * the page only as a gradient.
+ * `ghost` is the one fill that set does not draw — it is `Button / Ghost`
+ * (`264:260`), unfilled, taking the band's ink. It carries the same geometry
+ * so the three fills read as one button (ADR 0008: shadcn's anatomy, O3's
+ * tokens).
+ *
+ * **Size is authored, not read.** The set draws a single geometry at both
+ * frame widths, so `base` is that geometry and `large` is this repo's step
+ * above it for a section-level CTA: 4px more vertical padding, nothing else.
  */
 const buttonVariants = cva(
-  // `1868:3262`: inline-flex, 8px gap to the arrow, radius 0 (rounded-btn
-  // resolves to 0), label 18/24 Figtree Medium (`--text-button`).
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-btn text-button transition-colors duration-(--duration-hover) ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0',
+  // `2134:1785`: inline-flex, 12px gap to the icon, radius 2 (`--radius-btn`),
+  // label 18/24 Figtree Medium (`--text-button`). Height is hug — 48px at
+  // `base` falls out of the padding and the label's leading, so nothing sets
+  // one.
+  'inline-flex items-center justify-center gap-3 whitespace-nowrap rounded-btn text-button transition-colors duration-(--duration-hover) ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0',
   {
     variants: {
       variant: {
-        // Solid on a light band — `#0A0A0A` with a white label (1864:2405).
+        // Theme=Black (2134:1786) — `#0A0A0B` with a white label.
         dark: 'bg-ink text-white hover:bg-ink/85',
-        // Solid on ink, over a card scrim, or in the nav pill — `#FFFFFF`
-        // with an ink label (1868:3262, 1680:2090, 1710:2250).
+        // Theme=White (2205:1298) — `#FFFFFF` with an ink label. The CTA band
+        // (2336:4351) and the nav pill (2225:2877) both instance it.
         light: 'bg-white text-ink hover:bg-surface-muted',
         // `Button / Ghost` (264:260) — no fill, label follows the band.
         ghost: 'bg-transparent text-current hover:opacity-70',
       },
       size: {
-        // Base — 8px 20px. Hero, CTA band, in-card.
-        base: 'px-5 py-2',
-        // Large — 12px 20px. Section headers, platform panels.
-        large: 'px-5 py-3',
+        // The set's own 12px 16px. Hero, CTA band, nav pill, in-card.
+        base: 'px-4 py-3',
+        // Section headers and platform panels.
+        large: 'px-4 py-4',
       },
     },
     defaultVariants: {

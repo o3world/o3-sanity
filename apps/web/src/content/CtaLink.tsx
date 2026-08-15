@@ -48,7 +48,8 @@ function resolveVariant(value: string | null | undefined): CtaVariant {
  * `arrow` is a render-side prop, not a schema field, for the reason #38 gives:
  * Figma's `Show right icon` toggles the presence of a child rather than the
  * button's appearance, so it is a prop everywhere — including here. The chrome
- * CTA sets it because `1710:2250` carries `arrow_forward`.
+ * CTA sets it because the nav pill's button (`2225:2877`) carries a trailing
+ * icon.
  */
 export function CtaLink({
   cta,
@@ -60,7 +61,7 @@ export function CtaLink({
 }: {
   cta: CtaLinkData | null | undefined
   arrow?: boolean
-  /** Figma's `Size` axis. Base is the frames' default; section headers use Large. */
+  /** `Button`'s authored size step. Base is what the frames draw; section headers use Large. */
   size?: 'base' | 'large'
   /**
    * Force the fill, ignoring the editor's choice. For **chrome and section
