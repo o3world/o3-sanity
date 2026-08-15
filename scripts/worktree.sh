@@ -6,6 +6,7 @@
 #   pnpm wt new 26        create ../o3-sanity-worktrees/26-<slug>, install, claim #26
 #   pnpm wt ls            every worktree, its ports, and which servers are up
 #   pnpm wt rm 26         remove the worktree (and its branch, if merged)
+#   pnpm wt reap          remove every worktree whose ticket is closed (--yes to apply)
 #
 # Orca does the same job from the app side (its worktrees land under
 # ~/orca/workspaces/o3-sanity/) and runs the same provisioning through
@@ -179,6 +180,25 @@ cmd_ls() {
   return 0
 }
 
+# Drop one checkout, and its branch only when the branch is redundant.
+#
+# `git branch -d` is the whole safety argument for `reap`: it refuses a branch
+# whose commits are not already on main, so removing a checkout can never
+# strand work. Fourteen of the branches behind the August 2026 cleanup had
+# never been pushed anywhere — the ref in the main checkout was the only copy.
+remove_worktree() { # <path> -> 1 if the checkout is dirty
+  local path="$1" branch
+  branch="$(git -C "$path" rev-parse --abbrev-ref HEAD 2>/dev/null || echo '?')"
+  git worktree remove "$path" || return 1
+
+  if git branch -d "$branch" 2>/dev/null; then
+    echo "removed $path and merged branch $branch"
+  else
+    echo "removed $path — branch $branch kept (not merged into main)"
+  fi
+  git worktree prune
+}
+
 cmd_rm() {
   local target="${1:-}"
   [[ -n $target ]] || die "usage: pnpm wt rm <issue-number|path>"
@@ -191,25 +211,101 @@ cmd_rm() {
     [[ -n $path ]] || die "no worktree for #$target under $WT_HOME"
   fi
 
-  local branch
-  branch="$(git -C "$path" rev-parse --abbrev-ref HEAD)"
-  git worktree remove "$path" || die "worktree is dirty — commit, or re-run \`git worktree remove --force $path\`"
+  remove_worktree "$path" ||
+    die "worktree is dirty — commit, or re-run \`git worktree remove --force $path\`"
+}
 
-  # Only delete a branch whose commits are already on main; -d refuses otherwise.
-  if git branch -d "$branch" 2>/dev/null; then
-    echo "removed $path and merged branch $branch"
+# Which ticket a checkout belongs to, from its own name or its branch's.
+#
+# `pnpm wt new` writes both as `<issue>-<slug>`, so either answers. Orca names
+# its worktrees after intent instead (`feat-design-system`), which is why a
+# checkout can come back empty here — an unnamed worktree is invisible to the
+# reap, and that is the thing to fix in Orca rather than guess around.
+issue_of() { # <path> -> issue number, or empty
+  local path="$1" branch number
+  number="$(basename "$path" | sed -nE 's/^([0-9]+)-.*/\1/p')"
+  [[ -n $number ]] && {
+    echo "$number"
+    return 0
+  }
+  branch="$(git -C "$path" rev-parse --abbrev-ref HEAD 2>/dev/null || true)"
+  sed -nE 's#^[a-z]+/([0-9]+)-.*#\1#p' <<<"$branch"
+}
+
+# Reap → every checkout whose ticket is closed, gone.
+#
+# `wt new` runs when you claim a ticket; nothing ran when you closed one, so
+# checkouts accumulated at ~1.1 GB each until twenty of them for long-closed
+# tickets held 26 GB. This is the other half of that pair, and it reports
+# before it deletes: a bare `reap` is a dry run.
+cmd_reap() {
+  local apply="${1:-}"
+  local self paths path issue state reap=0 kept=0 tilde='~'
+
+  # Never the checkout asking for the reap, and never the main one: both would
+  # pull the directory out from under the shell running this.
+  self="$(git rev-parse --show-toplevel 2>/dev/null || true)"
+  paths="$(git worktree list --porcelain | awk '/^worktree /{print $2}' | grep -v '/\.vr/base$')"
+
+  printf '%-6s %-7s %-28s %s\n' 'ACTION' 'TICKET' 'WHY' 'PATH'
+  while read -r path; do
+    [[ -n $path ]] || continue
+    [[ $path == "$MAIN_ROOT" || $path == "$self" ]] && continue
+
+    issue="$(issue_of "$path")"
+    if [[ -z $issue ]]; then
+      printf '%-6s %-7s %-28s %s\n' 'keep' '?' 'no ticket in name or branch' "${path/#$HOME/$tilde}"
+      kept=$((kept + 1))
+      continue
+    fi
+
+    # An unreadable ticket is a reason to leave the checkout alone, not a
+    # reason to stop: one deleted issue should not block the whole sweep.
+    state="$(gh issue view "$issue" --json state --jq .state 2>/dev/null || true)"
+    if [[ $state != "CLOSED" ]]; then
+      printf '%-6s %-7s %-28s %s\n' 'keep' "#$issue" "${state:-unreadable}" "${path/#$HOME/$tilde}"
+      kept=$((kept + 1))
+      continue
+    fi
+
+    # Uncommitted work outranks a closed ticket — the ticket says the work
+    # landed, the dirty tree says something here did not.
+    if [[ -n "$(git -C "$path" status --porcelain 2>/dev/null)" ]]; then
+      printf '%-6s %-7s %-28s %s\n' 'keep' "#$issue" 'closed, but dirty' "${path/#$HOME/$tilde}"
+      kept=$((kept + 1))
+      continue
+    fi
+
+    reap=$((reap + 1))
+    if [[ $apply == "--yes" ]]; then
+      remove_worktree "$path" >/dev/null ||
+        printf '%-6s %-7s %-28s %s\n' 'FAIL' "#$issue" 'remove refused' "${path/#$HOME/$tilde}"
+      printf '%-6s %-7s %-28s %s\n' 'reaped' "#$issue" 'closed' "${path/#$HOME/$tilde}"
+    else
+      printf '%-6s %-7s %-28s %s\n' 'reap' "#$issue" 'closed' "${path/#$HOME/$tilde}"
+    fi
+  done <<<"$paths"
+
+  echo
+  if [[ $apply == "--yes" ]]; then
+    echo "reaped $reap, kept $kept. Branches are kept unless already on main."
+  elif [[ $reap -gt 0 ]]; then
+    echo "$reap to reap, $kept kept. Nothing removed — run \`pnpm wt reap --yes\` to apply."
   else
-    echo "removed $path — branch $branch kept (not merged into main)"
+    echo "nothing to reap ($kept kept)."
   fi
-  git worktree prune
+  return 0
 }
 
 case "${1:-}" in
   new) shift && cmd_new "$@" ;;
   ls | list) cmd_ls ;;
   rm | remove) shift && cmd_rm "$@" ;;
+  reap) shift && cmd_reap "$@" ;;
   *)
-    sed -n '3,9p' "$0" | sed 's/^# \?//'
+    # -E because BSD sed does not take `\?` in a basic regex, and leaves the
+    # `#` on every usage line when it silently fails to match.
+    sed -n '3,9p' "$0" | sed -E 's/^# ?//'
     exit 1
     ;;
 esac

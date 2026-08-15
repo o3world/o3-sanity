@@ -36,19 +36,22 @@ export function resolveProjectId(): string {
 /**
  * The datasets that answer an **unauthenticated** read.
  *
- * `production` is public. `development` is private — and Content Lake answers a
- * private dataset's anonymous query with `200 {"result": null}` rather than a
- * 401, so nothing in the response tells "no such document" apart from "you may
- * not see it" (#100). A checkout with no `SANITY_API_READ_TOKEN` therefore
- * points, by default, at a dataset every read comes back empty from: the
- * homepage and the catch-all 404'd, the collection indexes rendered themselves
- * empty, and the server log said nothing at all.
+ * `production` and `development` both are. The list still has to exist because
+ * Content Lake answers a private dataset's anonymous query with
+ * `200 {"result": null}` rather than a 401, so nothing in the response tells
+ * "no such document" apart from "you may not see it" (#100). A checkout with no
+ * `SANITY_API_READ_TOKEN` pointed at a dataset missing from this list reads
+ * back silently empty: the homepage and the catch-all 404, the collection
+ * indexes render themselves empty, and the server log says nothing at all.
  *
  * Naming the public datasets is the only way to see that coming, so this list
  * is an ACL fact and has to be kept true — a dataset missing from it is treated
- * as needing a token.
+ * as needing a token. An anonymous query is the check, and the only one that
+ * settles it; sanity.io/manage agreeing is not the same evidence:
+ *
+ *     curl "https://naorcr6k.api.sanity.io/v2021-06-07/data/query/<dataset>?query=count(*)"
  */
-export const PUBLIC_DATASETS: readonly string[] = ['production']
+export const PUBLIC_DATASETS: readonly string[] = ['production', 'development']
 
 /**
  * True when reading `dataset` anonymously would come back silently empty.
