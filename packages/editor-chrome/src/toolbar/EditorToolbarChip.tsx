@@ -5,7 +5,12 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useIsPresentationTool } from 'next-sanity/hooks'
 
 import { presentationHref } from '../paths'
-import { readStudioToken, shouldShowEditorToolbar, type EditorToolbarConfig } from './draftPreview'
+import {
+  browserTokenStorage,
+  readStudioToken,
+  shouldShowEditorToolbar,
+  type EditorToolbarConfig,
+} from './draftPreview'
 import { EditorToolbarView, type EditorToolbarStatus } from './EditorToolbarView'
 
 /**
@@ -47,7 +52,7 @@ export function EditorToolbarChip({
   const onEnableDrafts = useCallback(async () => {
     setStatus('working')
 
-    const token = readStudioToken(window.localStorage, projectId)
+    const token = readStudioToken(browserTokenStorage(), projectId)
     if (!token) {
       setStatus('error')
       return

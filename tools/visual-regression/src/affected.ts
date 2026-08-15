@@ -97,3 +97,27 @@ export function storiesFor(index: StoryEntry[], affected: Affected): StoryEntry[
 export function entryPath(entry: StoryEntry): string {
   return path.normalize(path.join(STORYBOOK_DIR, entry.importPath))
 }
+
+/**
+ * Stories the baseline had and this checkout does not — the "removed" cards.
+ *
+ * **The test is the story id, not the file.** Deleting one `export const` from
+ * a stories file that still exists drops an id from the current index while the
+ * file stays put, so a file-deletion test misses it entirely: the id lands in
+ * neither shot map and the report says "0 removed" over a story that silently
+ * stopped shipping. A rename is one removed and one added, which is honest.
+ *
+ * `touched` is every file the diff mentions, deletions included — outside an
+ * explicit `--story`/`--all` scope it is the only evidence left that a story
+ * which no longer exists was this run's business.
+ */
+export function removedStories(
+  baselineIndex: StoryEntry[],
+  currentIds: Set<string>,
+  touched: Set<string>,
+  affected: Affected,
+): StoryEntry[] {
+  return baselineIndex.filter(
+    (entry) => !currentIds.has(entry.id) && (affected.everything || touched.has(entryPath(entry))),
+  )
+}

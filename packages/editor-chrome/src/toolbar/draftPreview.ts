@@ -45,6 +45,25 @@ export interface TokenStorage {
 }
 
 /**
+ * This origin's `localStorage`, or `null` where the browser will not hand it
+ * over.
+ *
+ * **The property access itself throws**, before any method is called:
+ * `SecurityError` in a browser with cookies and site data blocked, and in a
+ * sandboxed iframe without `allow-same-origin`. So it can never appear as an
+ * argument expression at a call site — that evaluates outside `readStudioToken`
+ * and outside its try/catch, and the throw lands in whatever effect or callback
+ * asked. Every caller goes through here instead.
+ */
+export function browserTokenStorage(): TokenStorage | null {
+  try {
+    return typeof window === 'undefined' ? null : window.localStorage
+  } catch {
+    return null
+  }
+}
+
+/**
  * The Studio session token, or `null` if there isn't a plausible one.
  *
  * Every failure mode returns `null`: no storage (SSR), storage throwing

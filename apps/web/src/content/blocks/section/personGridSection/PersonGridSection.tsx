@@ -40,7 +40,11 @@ export function PersonGridSection({
   surface,
   loc,
 }: PersonGridSectionProps) {
-  const members = people ?? []
+  // `people[]{_key, ...@->{…}}` spreads nothing when the reference is dangling,
+  // so a slot pointing at a deleted person arrives as `{_key}` alone and would
+  // render a tile with no portrait and no name. Typegen assumes the dereference
+  // succeeds, which is why the guard reads as redundant and is not.
+  const members = (people ?? []).filter((person) => person._id)
 
   return (
     <SectionShell surface={resolveSurface(surface, 'white')} top="md" bottom="md">
@@ -55,7 +59,10 @@ export function PersonGridSection({
         <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {members.map((person) => (
             <li
-              key={person._id}
+              // The slot's key, not the person's: two slots may reference one
+              // person, and a duplicate React key mis-reconciles the `<li>`s —
+              // which would dock the overlay below to the wrong card.
+              key={person._key}
               /*
                * The **reference's** path, not the person document's: what an
                * editor changes on this card is which person occupies the slot,

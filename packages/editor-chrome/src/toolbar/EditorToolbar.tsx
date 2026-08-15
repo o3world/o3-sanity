@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 
-import { readStudioToken, type EditorToolbarConfig } from './draftPreview'
+import { browserTokenStorage, readStudioToken, type EditorToolbarConfig } from './draftPreview'
 
 /**
  * The editor toolbar's mount point (#60, #99), rendered on every page by the
@@ -39,7 +39,7 @@ export function EditorToolbar({
   const [hasStudioToken, setHasStudioToken] = useState(false)
 
   useEffect(() => {
-    setHasStudioToken(readStudioToken(window.localStorage, config.projectId) !== null)
+    setHasStudioToken(readStudioToken(browserTokenStorage(), config.projectId) !== null)
   }, [config.projectId])
 
   // Draft mode is itself proof of a session this app already verified, so an
