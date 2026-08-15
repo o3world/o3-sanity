@@ -17,8 +17,8 @@
         "We’re working on the one behind it."
       ],
       "subheading": "Strategy, design, engineering, and AI under one roof. The senior team that finds the move is the team that builds it.",
-      "cta": {
-        "_type": "cta",
+      "button": {
+        "_type": "button",
         "label": "View our work",
         "href": "/work",
         "variant": "light"
@@ -64,8 +64,8 @@
           "_key": "client-5"
         }
       ],
-      "cta": {
-        "_type": "cta",
+      "button": {
+        "_type": "button",
         "label": "See all partners",
         "href": "/work",
         "variant": "dark"
@@ -76,8 +76,8 @@
       "_key": "work",
       "surface": "ink",
       "heading": "Most firms can ship what you ask for. We solve what was actually in the way.",
-      "cta": {
-        "_type": "cta",
+      "button": {
+        "_type": "button",
         "label": "View our work",
         "href": "/work",
         "variant": "dark"
@@ -125,8 +125,8 @@
             "_localSrc": "tools/migration/data/seed/assets/plat-sanity-logo.png"
           },
           "body": "Structured content and real-time editing, wired into the systems your team already runs — not bolted on beside them.",
-          "cta": {
-            "_type": "cta",
+          "button": {
+            "_type": "button",
             "label": "View our Sanity work",
             "href": "/work",
             "variant": "dark"
@@ -141,8 +141,8 @@
             "_localSrc": "tools/migration/data/seed/assets/plat-vercel-logo.png"
           },
           "body": "Modern web infrastructure — fast, reliable frontends deployed globally, with the developer velocity to match.",
-          "cta": {
-            "_type": "cta",
+          "button": {
+            "_type": "button",
             "label": "View our Vercel work",
             "href": "/work",
             "variant": "dark"
@@ -157,8 +157,8 @@
             "_localSrc": "tools/migration/data/seed/assets/plat-lovable-logo.png"
           },
           "body": "AI-native product building — from prompt to production, shipping working software at the speed of the idea.",
-          "cta": {
-            "_type": "cta",
+          "button": {
+            "_type": "button",
             "label": "View our Lovable work",
             "href": "/work",
             "variant": "dark"
@@ -189,8 +189,8 @@
             },
             "alt": "Nine nodes in a three-by-three grid joined by thin grey lines. The centre node is filled brand red; the other eight are grey."
           },
-          "cta": {
-            "_type": "cta",
+          "button": {
+            "_type": "button",
             "label": "View our work",
             "href": "/work",
             "variant": "dark"
@@ -211,8 +211,8 @@
             },
             "alt": "Six nodes spaced evenly around a thin grey ring, each joined by a spoke to the centre. The node at the top is filled brand red."
           },
-          "cta": {
-            "_type": "cta",
+          "button": {
+            "_type": "button",
             "label": "View our work",
             "href": "/work",
             "variant": "dark"
@@ -233,8 +233,8 @@
             },
             "alt": "Three concentric orbit rings carrying grey nodes of decreasing size around a brand-red core."
           },
-          "cta": {
-            "_type": "cta",
+          "button": {
+            "_type": "button",
             "label": "View our work",
             "href": "/work",
             "variant": "dark"
@@ -255,8 +255,8 @@
       "surface": "ink",
       "heading": "The best partnerships don’t have an end date.",
       "body": "Most firms hand you the strategy and leave. We stay and build it. That's the whole offer.",
-      "cta": {
-        "_type": "cta",
+      "button": {
+        "_type": "button",
         "label": "View our work",
         "href": "/work",
         "variant": "light"

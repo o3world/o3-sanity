@@ -23,7 +23,7 @@ export const SECTION_BLOCKS = [
   'listingSection',
 ] as const
 
-export const BASE_BLOCKS = ['richText', 'figure', 'embed', 'cta', 'statGroup', 'mark'] as const
+export const BASE_BLOCKS = ['richText', 'figure', 'embed', 'button', 'statGroup', 'mark'] as const
 
 export type SectionBlockName = (typeof SECTION_BLOCKS)[number]
 export type BaseBlockName = (typeof BASE_BLOCKS)[number]

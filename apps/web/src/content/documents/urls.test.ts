@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { hrefForDoc, previewPathForDoc } from './urls'
 
 /**
- * ADR 0001's flat URL space. These are the links every card, cta and sitemap
+ * ADR 0001's flat URL space. These are the links every card, button and sitemap
  * entry is built from, so a regression here is a site-wide broken-link event
  * rather than a single bad page.
  */

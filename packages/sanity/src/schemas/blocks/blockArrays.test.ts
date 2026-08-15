@@ -39,9 +39,9 @@ const REGISTERED = new Set<string>([...SECTION_BLOCKS, ...BASE_BLOCKS])
  * WHAT THE FIRST ASSERTION CAN HONESTLY CLAIM, and why it is narrower than
  * "holds a registered block".
  *
- * `cta`, `figure` and `embed` are base blocks AND shared objects (CONTEXT.md →
+ * `button`, `figure` and `embed` are base blocks AND shared objects (CONTEXT.md →
  * Type names), and a schema cannot tell the two uses apart:
- * `siteSettings.navItems` and `siteSettings.legalLinks` are arrays of `cta`,
+ * `siteSettings.navItems` and `siteSettings.legalLinks` are arrays of `button`,
  * and they are nav links rather than a canvas an editor inserts blocks onto.
  * Reading them as block arrays would demand a `BLOCK_ARRAYS` entry that would
  * put an insert menu on the site's navigation.

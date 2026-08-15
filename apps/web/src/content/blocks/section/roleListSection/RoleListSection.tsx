@@ -1,7 +1,7 @@
 import { DisplayHeading, Eyebrow, SectionShell } from '@o3/ui'
 
 import { Mark, markProps } from '@/content/blocks/base/mark/Mark'
-import { CtaLink } from '@/content/CtaLink'
+import { ButtonLink } from '@/content/ButtonLink'
 import { resolveSurface } from '@/content/blocks/surface'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
 import { fieldAttr } from '@/sanity/dataAttribute'
@@ -31,9 +31,9 @@ type RoleListSectionProps = SectionProps<'roleListSection'>
  * ⚠️ The frame's Apply buttons are `Button / Solid Size=Large` with the fill
  * **overridden on the instance** to `#D3D3D3` (`--color-surface-muted`). That
  * is an instance override, not a variant of the component set, so it is
- * recorded here rather than added as a fourth `cta.variant` — the same call
+ * recorded here rather than added as a fourth `button.variant` — the same call
  * `docs/figma-components.md` makes about the rest of `Button`'s divergence.
- * The fill stays the editor's, via `cta.variant`.
+ * The fill stays the editor's, via `button.variant`.
  */
 export function RoleListSection({ eyebrow, heading, roles, surface, loc }: RoleListSectionProps) {
   const items = roles ?? []
@@ -71,9 +71,9 @@ export function RoleListSection({ eyebrow, heading, roles, surface, loc }: RoleL
                   ) : null}
                 </div>
               </div>
-              {role.cta ? (
+              {role.button ? (
                 <div className="shrink-0">
-                  <CtaLink cta={role.cta} arrow size="large" />
+                  <ButtonLink button={role.button} arrow size="large" />
                 </div>
               ) : null}
             </li>

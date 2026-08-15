@@ -47,7 +47,7 @@ export const Mobile: Story = {
 
 /** Heading alone — the 600px column and its 18px gaps must not collapse. */
 export const HeadingOnly: Story = {
-  args: { ...seededSectionArgs('index', 'ctaSection'), body: undefined, cta: null },
+  args: { ...seededSectionArgs('index', 'ctaSection'), body: undefined, button: null },
 }
 
 /** `decoration: 'none'` — the band without its field, fade strip intact. */

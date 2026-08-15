@@ -126,7 +126,7 @@
           }
         },
         {
-          "_type": "cta",
+          "_type": "button",
           "_key": "reach-cta",
           "label": "Email us",
           "href": "mailto:hello@o3world.com",

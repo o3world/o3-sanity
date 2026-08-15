@@ -104,7 +104,7 @@ decision — `base` is the set's geometry, `large` adds 4px of vertical padding
 for a section-level CTA — and it is declared as authored rather than read.
 
 The set's `Theme=Red` is not built, and neither is the red hover the Black and
-White themes draw. The fill vocabulary is a **schema enum** (`cta.variant`,
+White themes draw. The fill vocabulary is a **schema enum** (`button.variant`,
 stored in committed seed JSON and regenerated into types), so it moves with the
 content model rather than with the component: that is #137's contrast work.
 

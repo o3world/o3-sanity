@@ -205,8 +205,8 @@ export function InsightIndexView({
       <CtaSection
         heading="Let’s get started on your next big thing."
         body="We partner with businesses like yours to build experiences that matter. If you’re ready, we’re ready."
-        cta={{
-          _type: 'cta',
+        button={{
+          _type: 'button',
           label: 'Get in touch',
           href: '/contact',
           variant: 'light',

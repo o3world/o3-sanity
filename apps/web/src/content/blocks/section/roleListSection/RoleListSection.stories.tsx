@@ -59,7 +59,7 @@ export const NoApplyLink: Story = {
   args: {
     ...seededSectionArgs('about', 'roleListSection'),
     roles: (seededSectionArgs('about', 'roleListSection').roles ?? []).map((role, i) =>
-      i === 0 ? { ...role, cta: null } : role,
+      i === 0 ? { ...role, button: null } : role,
     ),
   },
 }

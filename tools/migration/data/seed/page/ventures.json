@@ -53,7 +53,7 @@
           }
         },
         {
-          "_type": "cta",
+          "_type": "button",
           "_key": "intro-cta",
           "label": "Let’s build the future together",
           "href": "/contact",
@@ -124,8 +124,8 @@
               "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/02/o3-rec-featured-cs-image.jpg"
             }
           },
-          "cta": {
-            "_type": "cta",
+          "button": {
+            "_type": "button",
             "label": "Read the REC case study",
             "href": "/work/scarlet-ai-hyper-personalizing-creative-gig-economy",
             "variant": "ghost"
@@ -145,8 +145,8 @@
               "_wpSrc": "https://www.o3world.com/wp-content/uploads/2024/10/1682-website-social-imagery-6.png"
             }
           },
-          "cta": {
-            "_type": "cta",
+          "button": {
+            "_type": "button",
             "label": "Read how Sahay AI won",
             "href": "/insights/sahay-ai-triumphs-1682-venture-awards",
             "variant": "ghost"
@@ -166,8 +166,8 @@
               "_wpSrc": "https://www.o3world.com/wp-content/uploads/2019/08/O3-website-imagery_-Perspectives-60.webp"
             }
           },
-          "cta": {
-            "_type": "cta",
+          "button": {
+            "_type": "button",
             "label": "Pitch at the venture awards",
             "href": "/insights/the-o3-venture-awards-at-1682-a-chance-to-pitch-win-and-promote-your-ai-startup",
             "variant": "ghost"
@@ -181,8 +181,8 @@
       "surface": "ink",
       "heading": "Where ventures, thought leadership + AI innovation converge",
       "body": "O3 Ventures, our thought leadership initiatives, and the 1682 Conference are all part of our commitment to shaping the future of innovation and AI. We don’t just talk about innovation - we help build it, connecting visionary startups with the insights, resources, and networks they need to scale. Explore how 1682 brings it all together.",
-      "cta": {
-        "_type": "cta",
+      "button": {
+        "_type": "button",
         "label": "Discover 1682",
         "href": "/insights/1682-conference-recap-unveiling-ais-realities-and-innovation-insights",
         "variant": "light"

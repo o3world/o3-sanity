@@ -10,7 +10,7 @@ import {
   defineBlockRender,
   type ClientBlockRenderBinding,
 } from '../defineBlockRender'
-import { Cta } from './cta/Cta'
+import { Button } from './button/Button'
 import { Embed } from './embed/Embed'
 import { Figure } from './figure/Figure'
 import { Mark } from './mark/Mark'
@@ -22,7 +22,7 @@ export const BASE_BLOCK_BINDINGS = [
   defineBlockRender('richText', { component: RichText }),
   defineBlockRender('figure', { component: Figure }),
   defineBlockRender('embed', { component: Embed }),
-  defineBlockRender('cta', { component: Cta }),
+  defineBlockRender('button', { component: Button }),
   defineBlockRender('statGroup', { component: StatGroup }),
   defineBlockRender('mark', { component: Mark }),
 ] satisfies ReadonlyArray<ClientBlockRenderBinding<BaseBlockName>>

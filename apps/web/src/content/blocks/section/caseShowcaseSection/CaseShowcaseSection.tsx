@@ -1,4 +1,4 @@
-import { CtaLink } from '@/content/CtaLink'
+import { ButtonLink } from '@/content/ButtonLink'
 import { getCard } from '@/content/documents/card-registry'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
 
@@ -24,7 +24,7 @@ type CaseShowcaseSectionProps = SectionProps<'caseShowcaseSection'>
  * both. A dark treatment, if a page ever wants one, is a second `variant` —
  * not a surface.
  */
-export function CaseShowcaseSection({ heading, cta, caseStudies }: CaseShowcaseSectionProps) {
+export function CaseShowcaseSection({ heading, button, caseStudies }: CaseShowcaseSectionProps) {
   const Card = getCard('caseStudy')
   const items = caseStudies ?? []
 
@@ -35,7 +35,7 @@ export function CaseShowcaseSection({ heading, cta, caseStudies }: CaseShowcaseS
           {heading ? (
             <h2 className="text-display-xl font-display max-w-[571px] text-balance">{heading}</h2>
           ) : null}
-          {cta ? <CtaLink cta={cta} arrow size="large" /> : null}
+          {button ? <ButtonLink button={button} arrow size="large" /> : null}
         </div>
       </div>
 

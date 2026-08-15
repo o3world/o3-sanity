@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
-import { resolveCtaHref } from '@/content/CtaLink'
+import { resolveButtonHref } from '@/content/ButtonLink'
 
 interface UtilityNavProps {
   settings: SITE_SETTINGS_QUERY_RESULT
@@ -67,7 +67,7 @@ export function UtilityNav({ settings }: UtilityNavProps) {
         {items.map((item, i) => (
           <li key={item._key ?? `utility-${i}`}>
             <Link
-              href={resolveCtaHref(item)}
+              href={resolveButtonHref(item)}
               // The hover is a read state for once (`2225:2893`), not a code
               // decision: brand red, over 200ms ease-out in the file, which is
               // `--duration-hover` (220ms) here rather than a second literal

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { BrandMark } from '@o3/ui'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
-import { CtaLink, resolveCtaHref } from '@/content/CtaLink'
+import { ButtonLink, resolveButtonHref } from '@/content/ButtonLink'
 
 import { MobileNavMenu } from './MobileNavMenu'
 import { NAV_INK_TARGET, NavInk } from './NavInk'
@@ -22,11 +22,11 @@ interface SiteNavProps {
  * The two widths are **structurally** different, which makes this a
  * composition switch at `lg` rather than a resize (ADR 0006):
  *
- * |       | 402 (`1814:1630`)                 | 1440 (`1710:2271`)                     |
- * | ----- | --------------------------------- | -------------------------------------- |
- * | Shape | full-width square bar, `8px 20px` | 900px pill, radius 900px, `8px 32px`   |
- * | Links | behind "Open menu"                | five inline, in a 589px space-between  |
- * | CTA   | inline, beside the hamburger      | inline, ending the row                 |
+ * |        | 402 (`1814:1630`)                 | 1440 (`1710:2271`)                    |
+ * | ------ | --------------------------------- | ------------------------------------- |
+ * | Shape  | full-width square bar, `8px 20px` | 900px pill, radius 900px, `8px 32px`  |
+ * | Links  | behind "Open menu"                | five inline, in a 589px space-between |
+ * | Button | inline, beside the hamburger      | inline, ending the row                |
  *
  * Both fills are `rgba(3,3,3,0.2)` — `bg-scrim`. It stays an alpha because it
  * sits over whatever the hero is showing. The frames put no blur on it, but
@@ -75,8 +75,8 @@ interface SiteNavProps {
  *
  * Nick's reference of both states (2026-08-02) is the answer sheet, and it is
  * a COLOUR answer sheet only — geometry, blur, fills, hairlines, spacing and
- * the link treatment are as built. Dark pill: white mark, white links, red CTA.
- * Light pill: ink mark, ink links, red CTA.
+ * the link treatment are as built. Dark pill: white mark, white links, red
+ * button. Light pill: ink mark, ink links, red button.
  *
  * **The mark loses its plate rather than inverting.** The bar draws
  * `BrandMark` — the ring and the superscript, free-standing — not
@@ -86,27 +86,27 @@ interface SiteNavProps {
  * "invert the tile" and shipped a `Color=White` square; that variant is gone
  * again, and brand-logo.tsx records why.
  *
- * **The CTA is brand red on both surfaces** — the one thing on the bar that
+ * **The button is brand red on both surfaces** — the one thing on the bar that
  * does not move. That is the prototype's `.o3btn` and it is now Nick's
  * reference too, which matters because `Button` has no red fill: "there is no
  * red button on the canonical Home frame" is still true of every content band,
  * and the red here is chrome forcing its own fill rather than a variant an
- * editor could reach. See `CTA_BRAND_RED`.
+ * editor could reach. See `BUTTON_BRAND_RED`.
  */
 /**
- * The nav CTA's fill, forced past the editor's choice and past `Button`'s
+ * The nav button's fill, forced past the editor's choice and past `Button`'s
  * three variants.
  *
- * **Nav only, and deliberately not a variant.** `cta.variant` is a schema enum
+ * **Nav only, and deliberately not a variant.** `button.variant` is a schema enum
  * — anything added to the cva is something a Site Settings editor can put on a
  * content band, and the canonical frames have no red button (button.tsx; the
- * `brand → dark` legacy mapping in CtaLink.tsx exists to retire exactly that).
+ * `brand → dark` legacy mapping in ButtonLink.tsx exists to retire exactly that).
  * The chrome owns its own surface, so it forces its own fill instead — three
  * classes that `cn` resolves over whichever variant is underneath.
  *
  * `variant="light"` stays on the call sites even though this replaces all
  * three of its classes. It pins the BASE the override lands on: without it the
- * editor's `cta.variant` decides, and `ghost` would leave its own
+ * editor's `button.variant` decides, and `ghost` would leave its own
  * `hover:opacity-70` in place beside this hover — an editor field quietly
  * changing the nav.
  *
@@ -119,11 +119,11 @@ interface SiteNavProps {
  * No `--duration-ink` here: this fill never changes with the bar, so the
  * button keeps `Button`'s own 220ms hover.
  */
-const CTA_BRAND_RED = 'bg-brand text-white hover:bg-brand/85'
+const BUTTON_BRAND_RED = 'bg-brand text-white hover:bg-brand/85'
 
 export function SiteNav({ settings }: SiteNavProps) {
   const navItems = settings?.navItems ?? []
-  const cta = settings?.primaryCta ?? null
+  const button = settings?.primaryButton ?? null
 
   return (
     <header
@@ -158,13 +158,14 @@ export function SiteNav({ settings }: SiteNavProps) {
         </Link>
 
         {/* 1440: the 589px row (`1710:2245`). `contents` promotes the list
-            items to flex children, so space-between spreads links and CTA. */}
+            items to flex children, so space-between spreads links and the
+            button. */}
         <div className="hidden items-center justify-between lg:flex lg:w-[589px]">
           <ul className="contents">
             {navItems.map((item, i) => (
               <li key={item._key ?? `nav-${i}`}>
                 <Link
-                  href={resolveCtaHref(item)}
+                  href={resolveButtonHref(item)}
                   // `Button / Ghost` ships no Hover variant, so this hover is a
                   // code decision rather than a read one (#38's State rule).
                   // No `text-*` here: the ink is the bar's, inherited, so the
@@ -176,14 +177,19 @@ export function SiteNav({ settings }: SiteNavProps) {
               </li>
             ))}
           </ul>
-          {cta ? <CtaLink cta={cta} arrow variant="light" buttonClassName={CTA_BRAND_RED} /> : null}
+          {button ? (
+            <ButtonLink button={button} arrow variant="light" buttonClassName={BUTTON_BRAND_RED} />
+          ) : null}
         </div>
 
-        {/* 402: CTA + hamburger, 32px apart (`1814:1632`). The 402 bar crosses
-            the same bands the pill does, so its CTA flips on the same terms. */}
+        {/* 402: button + hamburger, 32px apart (`1814:1632`). The 402 bar
+            crosses the same bands the pill does, so its button flips on the
+            same terms. */}
         <div className="flex items-center gap-8 lg:hidden">
-          {cta ? <CtaLink cta={cta} arrow variant="light" buttonClassName={CTA_BRAND_RED} /> : null}
-          <MobileNavMenu items={navItems} cta={cta} />
+          {button ? (
+            <ButtonLink button={button} arrow variant="light" buttonClassName={BUTTON_BRAND_RED} />
+          ) : null}
+          <MobileNavMenu items={navItems} button={button} />
         </div>
       </nav>
     </header>

@@ -268,7 +268,7 @@ describe('retainsPlaceholder', () => {
   const placeholder = {
     _type: 'ctaSection',
     heading: 'Section heading',
-    cta: { _type: 'cta', label: 'Add a link' },
+    button: { _type: 'button', label: 'Add a link' },
   }
 
   it('matches content nobody came back to', () => {
@@ -279,7 +279,7 @@ describe('retainsPlaceholder', () => {
           _type: 'ctaSection',
           surface: 'ink',
           heading: 'Section heading',
-          cta: { _type: 'cta', label: 'Add a link' },
+          button: { _type: 'button', label: 'Add a link' },
         },
         placeholder,
       ),
@@ -295,7 +295,7 @@ describe('retainsPlaceholder', () => {
           _type: 'ctaSection',
           heading: 'Section heading',
           body: 'Real prose.',
-          cta: { _type: 'cta', label: 'Add a link' },
+          button: { _type: 'button', label: 'Add a link' },
         },
         placeholder,
       ),
@@ -305,7 +305,11 @@ describe('retainsPlaceholder', () => {
   it('stops matching the moment the copy is edited', () => {
     expect(
       retainsPlaceholder(
-        { _type: 'ctaSection', heading: 'Talk to us', cta: { _type: 'cta', label: 'Add a link' } },
+        {
+          _type: 'ctaSection',
+          heading: 'Talk to us',
+          button: { _type: 'button', label: 'Add a link' },
+        },
         placeholder,
       ),
     ).toBe(false)

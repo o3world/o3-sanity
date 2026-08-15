@@ -6,13 +6,13 @@ import Link from 'next/link'
 import { MenuIcon, Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from '@o3/ui'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
-import { CtaLink, resolveCtaHref } from '@/content/CtaLink'
+import { ButtonLink, resolveButtonHref } from '@/content/ButtonLink'
 
 type Settings = NonNullable<SITE_SETTINGS_QUERY_RESULT>
 
 interface MobileNavMenuProps {
   items: readonly NonNullable<Settings['navItems']>[number][]
-  cta?: Settings['primaryCta'] | null
+  button?: Settings['primaryButton'] | null
 }
 
 /**
@@ -27,7 +27,7 @@ interface MobileNavMenuProps {
  *
  * The only interactive part of the chrome, hence the one client component.
  */
-export function MobileNavMenu({ items, cta }: MobileNavMenuProps) {
+export function MobileNavMenu({ items, button }: MobileNavMenuProps) {
   const [open, setOpen] = useState(false)
 
   return (
@@ -50,15 +50,15 @@ export function MobileNavMenu({ items, cta }: MobileNavMenuProps) {
             // Closing on navigation is manual: a client-side route change does
             // not unmount the portal, so the panel would survive the link.
             <SheetClose asChild key={item._key ?? `nav-${i}`}>
-              <Link href={resolveCtaHref(item)} className="text-button text-white">
+              <Link href={resolveButtonHref(item)} className="text-button text-white">
                 {item.label}
               </Link>
             </SheetClose>
           ))}
-          {cta ? (
+          {button ? (
             <SheetClose asChild>
               <div className="mt-4 self-start">
-                <CtaLink cta={cta} arrow />
+                <ButtonLink button={button} arrow />
               </div>
             </SheetClose>
           ) : null}

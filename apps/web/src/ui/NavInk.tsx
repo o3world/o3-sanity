@@ -93,7 +93,7 @@ function backgroundOf(element: Element) {
  * answer available and the one the designer chose as its base.
  *
  * **A candidate also has to be wide enough to BE the surface.** The hero's
- * white CTA and the bone insights cards both sit under the sample point on
+ * white button and the bone insights cards both sit under the sample point on
  * the way past, and both won the walk on colour alone — a 180px button flipping
  * a 900px bar is a false positive that reads as a flicker while scrolling. So
  * a candidate must span the header horizontally, which is the same "bands are

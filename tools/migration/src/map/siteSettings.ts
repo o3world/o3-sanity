@@ -20,7 +20,7 @@ import { failed, ok, type ExtractMeta, type Mapped } from './types'
  * 1. **Links become paths, not references.** Every nav destination is a
  *    document that has not been migrated yet (#18 brings the utility pages,
  *    #23 seeds the greenfield ones), so a `target` reference would dangle for
- *    the whole build-out. `cta.href` takes a relative path instead, and path
+ *    the whole build-out. `button.href` takes a relative path instead, and path
  *    parity (#26) is what makes that safe: `/work` is `/work` before and
  *    after, so these links do not have to be revisited when the documents
  *    land. Swapping an href for a reference later is per-item and optional.
@@ -146,15 +146,15 @@ export const siteSettingsDoc = z.object({
   utilityNavItems: z
     .array(
       z.object({
-        _type: z.literal('cta'),
+        _type: z.literal('button'),
         _key: z.string(),
         label: z.string().min(1),
         href: z.string().min(1),
       }),
     )
     .min(1),
-  navItems: z.array(z.object({ _type: z.literal('cta'), _key: z.string(), label: z.string() })),
-  primaryCta: z.object({ _type: z.literal('cta'), label: z.string() }).loose(),
+  navItems: z.array(z.object({ _type: z.literal('button'), _key: z.string(), label: z.string() })),
+  primaryButton: z.object({ _type: z.literal('button'), label: z.string() }).loose(),
   footerTagline: z.string().min(1),
   footerGroups: z
     .array(
@@ -162,7 +162,7 @@ export const siteSettingsDoc = z.object({
         _type: z.literal('footerGroup'),
         _key: z.string(),
         label: z.string().min(1),
-        links: z.array(z.object({ _type: z.literal('cta'), _key: z.string() }).loose()).min(1),
+        links: z.array(z.object({ _type: z.literal('button'), _key: z.string() }).loose()).min(1),
       }),
     )
     .min(1),
@@ -175,7 +175,7 @@ export const siteSettingsDoc = z.object({
       url: z.string().url(),
     }),
   ),
-  legalLinks: z.array(z.object({ _type: z.literal('cta'), _key: z.string() }).loose()),
+  legalLinks: z.array(z.object({ _type: z.literal('button'), _key: z.string() }).loose()),
   legalName: z.string().min(1),
   copyrightNote: z.string().optional(),
   defaultSeo: seoObject.optional(),
@@ -231,9 +231,9 @@ function resolveMenu(chrome: WpChrome, slug: string, siteUrl: string): ResolvedI
   return out
 }
 
-function cta(item: ResolvedItem, key: string, variant?: 'dark' | 'light' | 'ghost') {
+function button(item: ResolvedItem, key: string, variant?: 'dark' | 'light' | 'ghost') {
   return {
-    _type: 'cta' as const,
+    _type: 'button' as const,
     _key: key,
     label: item.label,
     href: item.href,
@@ -260,7 +260,7 @@ export interface SiteSettingsCopy {
   readonly companyLabel: string
   readonly socialsLabel: string
   /** The nav's primary button. */
-  readonly primaryCtaLabel: string
+  readonly primaryButtonLabel: string
 }
 
 /**
@@ -275,7 +275,7 @@ export const REDESIGN_COPY: SiteSettingsCopy = {
   companyLabel: 'Company',
   extrasLabel: 'Everything else',
   socialsLabel: 'Socials',
-  primaryCtaLabel: 'Let’s talk',
+  primaryButtonLabel: 'Let’s talk',
 }
 
 export function mapSiteSettings(
@@ -296,7 +296,7 @@ export function mapSiteSettings(
 
   const contact = primary.find((item) => item.href === '/contact')
   if (!contact) {
-    issues.push({ element: 'primaryCta', detail: 'no /contact item in primary-navigation' })
+    issues.push({ element: 'primaryButton', detail: 'no /contact item in primary-navigation' })
   }
 
   // Figma's five, in Figma's order. The primary menu is still read above —
@@ -334,11 +334,11 @@ export function mapSiteSettings(
     _id: 'siteSettings' as const,
     _type: 'siteSettings' as const,
     title: site.siteName,
-    utilityNavItems: FIGMA_UTILITY_NAV.map((item, i) => cta(item, `utility-${i}`)),
-    navItems: navItems.map((item, i) => cta(item, `nav-${i}`)),
-    primaryCta: {
-      _type: 'cta' as const,
-      label: copy.primaryCtaLabel,
+    utilityNavItems: FIGMA_UTILITY_NAV.map((item, i) => button(item, `utility-${i}`)),
+    navItems: navItems.map((item, i) => button(item, `nav-${i}`)),
+    primaryButton: {
+      _type: 'button' as const,
+      label: copy.primaryButtonLabel,
       href: contact?.href ?? '/contact',
       // `Button / Solid` on the pill is WHITE with an ink label (`1710:2250`),
       // not brand red — no red button appears on any canonical frame. #42
@@ -350,7 +350,7 @@ export function mapSiteSettings(
       _type: 'footerGroup' as const,
       _key: `group-${g}`,
       label: group.label,
-      links: group.links.map((item, i) => cta(item, `g${g}-${i}`, 'light')),
+      links: group.links.map((item, i) => button(item, `g${g}-${i}`, 'light')),
     })),
     socialsLabel: copy.socialsLabel,
     socialLinks: socialLinks.map((s, i) => ({
@@ -359,7 +359,7 @@ export function mapSiteSettings(
       label: s.label,
       url: s.url,
     })),
-    legalLinks: legalLinks.map((item, i) => cta(item, `legal-${i}`, 'light')),
+    legalLinks: legalLinks.map((item, i) => button(item, `legal-${i}`, 'light')),
     legalName: copy.legalName,
     copyrightNote: copy.copyrightNote,
     // Yoast's site-wide defaults, the bottom tier of the render-time SEO

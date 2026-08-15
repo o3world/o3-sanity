@@ -121,7 +121,7 @@ export function siteSettings(
   return {
     title: 'O3',
     navItems: [],
-    primaryCta: null,
+    primaryButton: null,
     footerTagline: null,
     footerGroups: [],
     socialsLabel: 'Socials',

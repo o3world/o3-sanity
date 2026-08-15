@@ -418,13 +418,13 @@ describe('committed seed content', () => {
   /**
    * No dead ends in the wireframe sitemap (#23).
    *
-   * A `cta.href` is a plain string, not a reference — the loader will not
+   * A `button.href` is a plain string, not a reference — the loader will not
    * complain about it, `verify` cannot see it, and the page renders a link
    * that 404s. That is the one failure this corpus can ship silently, and it
    * gets easier to ship with every page seeded, so it is checked here rather
    * than found in a browser.
    *
-   * Scoped to `cta` objects — the nav, the footer, and every button a seeded
+   * Scoped to `button` objects — the nav, the footer, and every button a seeded
    * page draws. That is the set this build authors. Portable Text `link`
    * marks are deliberately out: 272 migrated insight bodies link into a
    * 2017 URL space (`/careers`, `/labs/o3-barista/`, `/about/team/…`) that
@@ -437,21 +437,21 @@ describe('committed seed content', () => {
   describe('internal links', () => {
     const CODE_ROUTES = new Set(['/', ...Object.values(COLLECTION_PREFIXES)])
 
-    /** Every `cta.href` in a document, with the path that reached it. */
-    function ctaHrefsIn(
+    /** Every `button.href` in a document, with the path that reached it. */
+    function buttonHrefsIn(
       node: unknown,
       path = '',
       found: { path: string; href: string }[] = [],
     ): { path: string; href: string }[] {
       if (Array.isArray(node)) {
-        node.forEach((item, i) => ctaHrefsIn(item, `${path}[${i}]`, found))
+        node.forEach((item, i) => buttonHrefsIn(item, `${path}[${i}]`, found))
       } else if (node && typeof node === 'object') {
         const obj = node as Record<string, unknown>
-        if (obj._type === 'cta' && typeof obj.href === 'string') {
+        if (obj._type === 'button' && typeof obj.href === 'string') {
           found.push({ path: path || '(root)', href: obj.href })
         }
         for (const [key, value] of Object.entries(obj)) {
-          ctaHrefsIn(value, path ? `${path}.${key}` : key, found)
+          buttonHrefsIn(value, path ? `${path}.${key}` : key, found)
         }
       }
       return found
@@ -466,7 +466,7 @@ describe('committed seed content', () => {
     }
 
     const internalLinks = allPipelineDocs.flatMap(({ file, doc }) =>
-      ctaHrefsIn(doc)
+      buttonHrefsIn(doc)
         .filter(({ href }) => href.startsWith('/'))
         .map(({ path, href }) => ({ file, path, href })),
     )

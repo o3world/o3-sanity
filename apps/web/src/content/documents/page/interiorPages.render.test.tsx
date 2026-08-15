@@ -215,7 +215,7 @@ describe('the seeded Solutions page', () => {
 
     expect(band?.layout).toBe('cards')
     expect(band?.panels).toHaveLength(3)
-    expect(band?.panels?.some((panel) => panel.cta ?? panel.media)).toBe(false)
+    expect(band?.panels?.some((panel) => panel.button ?? panel.media)).toBe(false)
     expect(html).not.toContain('rail-panel-eng-embedded')
   })
 
@@ -295,10 +295,10 @@ describe('the seeded Live page', () => {
 
   /**
    * The frame's rows end in an icon-only control, so its accessible name has
-   * to come from the cta label — that is the label's whole job here (nothing
+   * to come from the button label — that is the label's whole job here (nothing
    * draws it).
    */
-  it('names every row control from its cta label', () => {
+  it('names every row control from its button label', () => {
     expect(html).toContain('aria-label="Details and registration"')
     expect(html).toContain('aria-label="Read the thinking"')
   })

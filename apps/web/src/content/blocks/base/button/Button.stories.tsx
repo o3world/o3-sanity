@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
-import { Cta } from './Cta'
+import { Button } from './Button'
 
 /**
- * The shared `cta` object placed directly in a `layoutSection` column. The
- * block's fields **are** the cta fields, so it forwards itself to `CtaLink`
- * and adds nothing.
+ * The shared `button` object placed directly in a `layoutSection` column. The
+ * block's fields **are** the button fields, so it forwards itself to
+ * `ButtonLink` and adds nothing.
  *
- * Which makes the interesting surface `CtaLink`'s resolution rules, and that
+ * Which makes the interesting surface `ButtonLink`'s resolution rules, and that
  * is what these stories cover:
  *
  * - **href or target, never both.** A `target` is an internal reference and
@@ -19,13 +19,13 @@ import { Cta } from './Cta'
  *   growing a red fill.
  * - **`arrow` is a prop, not a field** (#38) — Figma's `Show right icon`
  *   toggles the presence of a child, and this block never sets it, so a base
- *   cta has no arrow.
+ *   button has no arrow.
  */
 const meta = {
-  title: 'Content/Blocks/Base/Cta',
-  component: Cta,
+  title: 'Content/Blocks/Base/Button',
+  component: Button,
   parameters: { layout: 'centered' },
-} satisfies Meta<typeof Cta>
+} satisfies Meta<typeof Button>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -105,7 +105,7 @@ export const UnknownVariant: Story = {
   },
 }
 
-/** No label — `CtaLink` renders nothing, so an empty cta cannot leave a bare link. */
+/** No label — `ButtonLink` renders nothing, so an empty button cannot leave a bare link. */
 export const NoLabel: Story = {
   args: { label: undefined, href: '/work', variant: 'dark', target: null },
 }

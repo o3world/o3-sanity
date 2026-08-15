@@ -26,7 +26,7 @@ import { SiteNav } from './SiteNav'
  * Two widths, structurally different (ADR 0006): a 900px pill at 1440, a
  * full-width square bar at 402 with the links behind "Open menu".
  *
- * The CTA is **brand red on both skins** and is the one thing on the bar that
+ * The button is **brand red on both skins** and is the one thing on the bar that
  * does not move. `Button` has no red fill — the chrome forces its own, because
  * a red variant is something a Site Settings editor could then put on a
  * content band, and no canonical frame has one.
@@ -88,7 +88,7 @@ export const ScrollsOverBands: Story = {
   ),
 }
 
-/** 402: a full-width square bar, CTA beside the two-bar hamburger. */
+/** 402: a full-width square bar, button beside the two-bar hamburger. */
 export const Mobile: Story = {
   globals: { backgrounds: { value: 'ink' }, viewport: { value: 'mobile' } },
   render: (args) => (
@@ -98,9 +98,9 @@ export const Mobile: Story = {
   ),
 }
 
-/** No primary CTA authored — the row must close up rather than leave a gap. */
-export const WithoutCta: Story = {
-  args: { settings: SITE_SETTINGS ? { ...SITE_SETTINGS, primaryCta: null } : SITE_SETTINGS },
+/** No primary button authored — the row must close up rather than leave a gap. */
+export const WithoutButton: Story = {
+  args: { settings: SITE_SETTINGS ? { ...SITE_SETTINGS, primaryButton: null } : SITE_SETTINGS },
   globals: { backgrounds: { value: 'ink' } },
   render: (args) => (
     <div className="bg-ink h-[420px]">
@@ -111,7 +111,7 @@ export const WithoutCta: Story = {
 
 /**
  * No nav items. Reachable on a fresh dataset before Site Settings is authored,
- * and the bar must still be a bar — mark and CTA, not a collapsed strip.
+ * and the bar must still be a bar — mark and button, not a collapsed strip.
  */
 export const WithoutNavItems: Story = {
   args: { settings: SITE_SETTINGS ? { ...SITE_SETTINGS, navItems: [] } : SITE_SETTINGS },

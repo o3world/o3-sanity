@@ -52,15 +52,15 @@ export const CASE_STUDY_CARD = /* groq */ `
   industryDetail
 ` as const
 
-/** Dereference a cta's internal target into the `{_type, title, slug}` shape `hrefForDoc` consumes. */
-const CTA_TARGET = /* groq */ `"target": target->{_type, title, "slug": slug.current}` as const
+/** Dereference a button's internal target into the `{_type, title, slug}` shape `hrefForDoc` consumes. */
+const BUTTON_TARGET = /* groq */ `"target": target->{_type, title, "slug": slug.current}` as const
 
 /**
  * The section-array projection shared by `page.sections` and
  * `caseStudy.story`. Per-type conditional arms expand exactly what
  * each block renderer needs beyond the raw fields:
- * - cta targets are dereferenced everywhere a cta appears (incl. layoutSection
- *   column items);
+ * - button targets are dereferenced everywhere a button appears (incl.
+ *   layoutSection column items);
  * - logo wall / case showcase / insights carousel expand their references
  *   into card projections, and personGridSection does the same for the
  *   `person` documents the About team band points at;
@@ -72,25 +72,25 @@ const CTA_TARGET = /* groq */ `"target": target->{_type, title, "slug": slug.cur
 const SECTION_FIELDS = /* groq */ `
   ...,
   _type == "heroSection" => {
-    cta{..., ${CTA_TARGET}}
+    button{..., ${BUTTON_TARGET}}
   },
   _type == "logoWallSection" => {
     "clients": clients[]->{_id, name, logo},
-    cta{..., ${CTA_TARGET}}
+    button{..., ${BUTTON_TARGET}}
   },
   _type == "caseShowcaseSection" => {
     "caseStudies": caseStudies[]->{${CASE_STUDY_CARD}},
-    cta{..., ${CTA_TARGET}}
+    button{..., ${BUTTON_TARGET}}
   },
   _type == "railPanelsSection" => {
-    panels[]{..., cta{..., ${CTA_TARGET}}}
+    panels[]{..., button{..., ${BUTTON_TARGET}}}
   },
   _type == "insightsCarouselSection" => {
     "curated": insights[]->{${INSIGHT_CARD}},
     "latest": *[_type == "insight" && (!defined(^.category) || ^.category._ref in categories[]._ref)] | order(publishedAt desc)[0...8]{${INSIGHT_CARD}}
   },
   _type == "ctaSection" => {
-    cta{..., ${CTA_TARGET}}
+    button{..., ${BUTTON_TARGET}}
   },
   _type == "personGridSection" => {
     ${
@@ -104,13 +104,13 @@ const SECTION_FIELDS = /* groq */ `
     "people": people[]{_key, ...@->{_id, name, title, headshot}}
   },
   _type == "roleListSection" => {
-    roles[]{..., cta{..., ${CTA_TARGET}}}
+    roles[]{..., button{..., ${BUTTON_TARGET}}}
   },
   _type == "inFlightSection" => {
-    entries[]{..., cta{..., ${CTA_TARGET}}}
+    entries[]{..., button{..., ${BUTTON_TARGET}}}
   },
   _type == "layoutSection" => {
-    items[]{..., _type == "cta" => {${CTA_TARGET}}}
+    items[]{..., _type == "button" => {${BUTTON_TARGET}}}
   },
   _type == "listingSection" => {
     "pages": *[_type == "page" && pageType == ^.pageType && slug.current != "index"] | order(title asc){_id, _type, title, "slug": slug.current, card}
@@ -119,14 +119,14 @@ const SECTION_FIELDS = /* groq */ `
 
 export const SITE_SETTINGS_QUERY = defineQuery(`*[_type == "siteSettings"][0]{
   title,
-  utilityNavItems[]{..., ${CTA_TARGET}},
-  navItems[]{..., ${CTA_TARGET}},
-  primaryCta{..., ${CTA_TARGET}},
+  utilityNavItems[]{..., ${BUTTON_TARGET}},
+  navItems[]{..., ${BUTTON_TARGET}},
+  primaryButton{..., ${BUTTON_TARGET}},
   footerTagline,
-  footerGroups[]{..., links[]{..., ${CTA_TARGET}}},
+  footerGroups[]{..., links[]{..., ${BUTTON_TARGET}}},
   socialsLabel,
   socialLinks,
-  legalLinks[]{..., ${CTA_TARGET}},
+  legalLinks[]{..., ${BUTTON_TARGET}},
   legalName,
   copyrightNote,
   defaultSeo

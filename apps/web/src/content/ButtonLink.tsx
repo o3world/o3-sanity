@@ -6,12 +6,12 @@ import { Button } from '@o3/ui'
 import { hrefForDoc } from '@/content/documents/urls'
 
 /**
- * Structural cta shape — every query projects ctas as
+ * Structural button shape — every query projects buttons as
  * `{..., "target": target->{_type, title, "slug": slug.current}}`, so the
- * generated shapes (heroSection.cta, navItems[], layoutSection cta items, …)
- * are all assignable here without per-site casts.
+ * generated shapes (heroSection.button, navItems[], layoutSection button
+ * items, …) are all assignable here without per-site casts.
  */
-export interface CtaLinkData {
+export interface ButtonLinkData {
   label?: string | null
   variant?: string | null
   href?: string | null
@@ -19,7 +19,7 @@ export interface CtaLinkData {
 }
 
 const VARIANTS = ['dark', 'light', 'ghost'] as const
-type CtaVariant = (typeof VARIANTS)[number]
+type ButtonVariant = (typeof VARIANTS)[number]
 
 /**
  * The pre-#42 enum, mapped rather than dropped. `load` replaces every
@@ -28,38 +28,38 @@ type CtaVariant = (typeof VARIANTS)[number]
  * forever. `brand` becomes `dark` because the canonical frames have no red
  * button (docs/figma-components.md); `inverse` was already the white fill.
  */
-const LEGACY_VARIANTS: Record<string, CtaVariant> = { brand: 'dark', inverse: 'light' }
+const LEGACY_VARIANTS: Record<string, ButtonVariant> = { brand: 'dark', inverse: 'light' }
 
-export function resolveCtaHref(cta: CtaLinkData): string {
-  const href = cta.target ? hrefForDoc(cta.target) : (cta.href ?? '/')
+export function resolveButtonHref(button: ButtonLinkData): string {
+  const href = button.target ? hrefForDoc(button.target) : (button.href ?? '/')
   return stegaClean(href) ?? '/'
 }
 
-function resolveVariant(value: string | null | undefined): CtaVariant {
+function resolveVariant(value: string | null | undefined): ButtonVariant {
   const clean = stegaClean(value) ?? ''
-  if (VARIANTS.includes(clean as CtaVariant)) return clean as CtaVariant
+  if (VARIANTS.includes(clean as ButtonVariant)) return clean as ButtonVariant
   return LEGACY_VARIANTS[clean] ?? 'dark'
 }
 
 /**
- * The one cta renderer: resolves internal-reference-or-external-URL into an
+ * The one button renderer: resolves internal-reference-or-external-URL into an
  * href and renders the `@o3/ui` Button in the editor-chosen variant.
  *
  * `arrow` is a render-side prop, not a schema field, for the reason #38 gives:
  * Figma's `Show right icon` toggles the presence of a child rather than the
  * button's appearance, so it is a prop everywhere — including here. The chrome
- * CTA sets it because the nav pill's button (`2225:2877`) carries a trailing
+ * button sets it because the nav pill's button (`2225:2877`) carries a trailing
  * icon.
  */
-export function CtaLink({
-  cta,
+export function ButtonLink({
+  button,
   arrow = false,
   size,
   variant,
   className,
   buttonClassName,
 }: {
-  cta: CtaLinkData | null | undefined
+  button: ButtonLinkData | null | undefined
   arrow?: boolean
   /** `Button`'s authored size step. Base is what the frames draw; section headers use Large. */
   size?: 'base' | 'large'
@@ -69,30 +69,30 @@ export function CtaLink({
    * scrim, so a `dark` button on it is unreadable no matter what a Site
    * Settings editor picks. Content bands leave this alone.
    */
-  variant?: CtaVariant
+  variant?: ButtonVariant
   /** Styles the `<Link>`. Positioning and spacing — never the fill. */
   className?: string
   /**
    * Styles the `<Button>` itself, merged into its variant classes.
    *
    * The wrapping `Link` is what `className` reaches, so a caller that needs to
-   * reach the FILL has nowhere to put it — and the nav does: its CTA has to
+   * reach the FILL has nowhere to put it — and the nav does: its button has to
    * invert with the bar's ink flip, and `Button` already owns both fills. This
    * is the seam for a caller whose surface changes underneath a button, not a
    * general escape hatch; a fill a *document* chooses is `variant`.
    */
   buttonClassName?: string
 }) {
-  if (!cta?.label) return null
+  if (!button?.label) return null
   return (
-    <Link href={resolveCtaHref(cta)} className={className}>
+    <Link href={resolveButtonHref(button)} className={className}>
       <Button
-        variant={variant ?? resolveVariant(cta.variant)}
+        variant={variant ?? resolveVariant(button.variant)}
         size={size}
         arrow={arrow}
         className={buttonClassName}
       >
-        {cta.label}
+        {button.label}
       </Button>
     </Link>
   )

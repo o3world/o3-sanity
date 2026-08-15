@@ -53,7 +53,7 @@ export const heroSection = defineSectionBlock({
       validation: (rule) => rule.required().min(1).max(3),
     }),
     defineField({ name: 'subheading', type: 'text', rows: 2 }),
-    defineField({ name: 'cta', type: 'cta' }),
+    defineField({ name: 'button', type: 'button' }),
     'decoration',
   ],
   preview: { select: { title: 'headlineLines.0' } },
@@ -90,7 +90,7 @@ export const logoWallSection = defineSectionBlock({
         'Six is what the frame draws — one centred row of square tiles, wrapping below lg. The row takes whatever it is given.',
       validation: (rule) => rule.required().min(1),
     }),
-    defineField({ name: 'cta', type: 'cta' }),
+    defineField({ name: 'button', type: 'button' }),
   ],
   preview: { select: { title: 'heading' } },
 })
@@ -102,7 +102,7 @@ export const caseShowcaseSection = defineSectionBlock({
   knobs: caseShowcaseSectionKnobs,
   fields: [
     defineField({ name: 'heading', type: 'string', initialValue: 'Our Work' }),
-    defineField({ name: 'cta', type: 'cta' }),
+    defineField({ name: 'button', type: 'button' }),
     defineField({
       name: 'caseStudies',
       type: 'array',
@@ -161,14 +161,14 @@ export const railPanelsSection = defineSectionBlock({
               type: 'string',
               description: 'The quieter "Best when…" line — the foot of a card.',
             }),
-            // `cta` and `media` are rail-layout elements like the `rail` knob,
+            // `button` and `media` are rail-layout elements like the `rail` knob,
             // but a panel field's `hidden` callback sees only the panel it
             // sits in, not the section's `layout` — and a `showWhen` reads
             // block-relative paths for the same reason. So these two carry the
             // gate as prose where `rail` gets the declared one.
             defineField({
-              name: 'cta',
-              type: 'cta',
+              name: 'button',
+              type: 'button',
               description: 'Rail layout only. The frame’s cards carry no button.',
             }),
             defineField({
@@ -253,7 +253,7 @@ export const ctaSection = defineSectionBlock({
   fields: [
     defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
     defineField({ name: 'body', type: 'text', rows: 2 }),
-    defineField({ name: 'cta', type: 'cta' }),
+    defineField({ name: 'button', type: 'button' }),
     'decoration',
   ],
   preview: { select: { title: 'heading' } },
@@ -349,7 +349,7 @@ export const roleListSection = defineSectionBlock({
        *
        * A `role` document would buy exactly one thing: a URL to link to. The
        * Careers band (`1925:6061`) links out instead — every row's Apply
-       * button is a `cta`, and the frame draws no role detail page, no
+       * button is a `button`, and the frame draws no role detail page, no
        * listing of roles anywhere else, and no cross-reference to one. A
        * document type also costs a routable slug, a card projection and a
        * Studio section per ADR 0001, for content that turns over every few
@@ -370,7 +370,7 @@ export const roleListSection = defineSectionBlock({
               type: 'string',
               description: 'The row’s small label — the frame reads "REMOTE · PHILADELPHIA".',
             }),
-            defineField({ name: 'cta', type: 'cta', description: 'The row’s Apply button.' }),
+            defineField({ name: 'button', type: 'button', description: 'The row’s Apply button.' }),
             defineField({
               name: 'mark',
               type: 'mark',
@@ -448,8 +448,8 @@ export const inFlightSection = defineSectionBlock({
                 'When it happens — the rows layout draws it as the red MON / DD marker. Leave empty and the row leads with its mark instead.',
             }),
             defineField({
-              name: 'cta',
-              type: 'cta',
+              name: 'button',
+              type: 'button',
               description:
                 'Where the row goes. The label is never drawn — it names the arrow control for a screen reader.',
             }),

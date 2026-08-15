@@ -1,6 +1,6 @@
 import { Eyebrow, SURFACE_CLASS } from '@o3/ui'
 
-import { CtaLink } from '@/content/CtaLink'
+import { ButtonLink } from '@/content/ButtonLink'
 import { SanityImage } from '@/content/SanityImage'
 import { resolveSurface } from '@/content/blocks/surface'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
@@ -57,7 +57,7 @@ export function LogoWallSection({
   heading,
   body,
   clients,
-  cta,
+  button,
   surface,
 }: LogoWallSectionProps) {
   return (
@@ -121,7 +121,7 @@ export function LogoWallSection({
         </ul>
       </div>
 
-      {cta ? <CtaLink cta={cta} arrow size="large" /> : null}
+      {button ? <ButtonLink button={button} arrow size="large" /> : null}
     </section>
   )
 }

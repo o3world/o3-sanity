@@ -1,7 +1,7 @@
 import {
   bodyText,
+  button,
   chapter,
-  cta,
   embed,
   figure,
   mark,
@@ -39,7 +39,7 @@ export const schemaTypes = [
   // objects
   seo,
   migration,
-  cta,
+  button,
   figure,
   stat,
   embed,

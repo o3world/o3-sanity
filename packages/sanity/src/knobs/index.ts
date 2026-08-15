@@ -15,8 +15,8 @@
  */
 
 import type { BlockKnobs, ObjectKnobs } from '@o3/block-spec'
+import { buttonKnobs } from './button'
 import { caseShowcaseSectionKnobs } from './caseShowcaseSection'
-import { ctaKnobs } from './cta'
 import { ctaSectionKnobs } from './ctaSection'
 import { disciplineGridSectionKnobs } from './disciplineGridSection'
 import { formSectionKnobs } from './formSection'
@@ -34,8 +34,8 @@ import { railPanelsSectionKnobs } from './railPanelsSection'
 import { roleListSectionKnobs } from './roleListSection'
 import { screenGridSectionKnobs } from './screenGridSection'
 
+export { buttonKnobs } from './button'
 export { caseShowcaseSectionKnobs } from './caseShowcaseSection'
-export { ctaKnobs } from './cta'
 export { ctaSectionKnobs } from './ctaSection'
 export { decorationKnob } from './decoration'
 export { disciplineGridSectionKnobs } from './disciplineGridSection'
@@ -95,7 +95,7 @@ export const BLOCK_KNOBS: Readonly<Record<string, BlockKnobs>> = {
  *
  * **A type name, unlike `BLOCK_KNOBS`' sibling for array members.** Sanity
  * registers a shared object globally, so two types cannot silently agree on
- * `cta`; a member name is local to its array, which is why `ItemKnobs` is
+ * `button`; a member name is local to its array, which is why `ItemKnobs` is
  * reached through its host block instead (ADR 0021).
  *
  * **Only the objects that have design options are here, and absence is not a
@@ -111,5 +111,5 @@ export const BLOCK_KNOBS: Readonly<Record<string, BlockKnobs>> = {
  */
 export const OBJECT_KNOBS: Readonly<Record<string, ObjectKnobs>> = {
   [markKnobs.type]: markKnobs,
-  [ctaKnobs.type]: ctaKnobs,
+  [buttonKnobs.type]: buttonKnobs,
 }
