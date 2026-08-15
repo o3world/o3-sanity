@@ -33,7 +33,10 @@ const buttonVariants = cva(
   // what every other borrower of `text-button` renders; the `Button` label
   // (`2134:1789`) alone carries `0.01em`. One of the two has to be the literal,
   // and it is the smaller set.
-  'inline-flex items-center justify-center gap-3 whitespace-nowrap rounded-btn text-button tracking-[0.01em] transition-colors duration-(--duration-hover) ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0',
+  // `w-fit` because the set hugs its label at every instance, and this element
+  // is now the styled one on both arms — as a grid or flex child its
+  // `inline-flex` is blockified to `flex` and it would stretch to the track.
+  'inline-flex w-fit items-center justify-center gap-3 whitespace-nowrap rounded-btn text-button tracking-[0.01em] transition-colors duration-(--duration-hover) ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0',
   {
     variants: {
       variant: {
