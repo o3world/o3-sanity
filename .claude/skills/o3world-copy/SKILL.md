@@ -1,6 +1,6 @@
 ---
 name: o3world-copy
-description: Write, rewrite, or review copy in the O3 World voice — headlines, subheads, CTAs, section text, case-study narratives, stats, bios, proposals, or any user-facing words for o3world.com. Use whenever generating or editing copy in seed JSON (tools/migration/data/seed/), Sanity documents, or drafts, and when asked to "write copy", "punch up", "make this sound like us", review tone, or check whether writing reads as AI-generated.
+description: Write, rewrite, or review copy in the O3 World voice — headlines, subheads, CTAs, section text, case-study narratives, stats, bios, proposals, or any user-facing words for o3world.com. Use whenever generating or editing copy in seed JSON (tools/migration/data/seed/), Sanity documents, or drafts, and when asked to "write copy", "punch up", "make this sound like us", review tone, or check whether writing reads as AI-generated. This skill owns o3world.com site copy and is the one to use for it; use no-slop instead for engineering prose — READMEs, commits, ADRs, docs — whose register is plainer than the brand voice.
 ---
 
 # O3 World copy
@@ -11,11 +11,11 @@ experiences, and the copy's job is to help them see a clear path forward —
 not to impress them with vocabulary, and not to posture.
 
 The brand foundation (pillars, delivery principles, values) lives in
-[brand.md](brand.md). It is **source material, not copy**. Never paste a pillar
+[brand.md](../../../docs/guidance/brand.md). It is **source material, not copy**. Never paste a pillar
 into a headline. Write what the belief looks like as a specific claim.
 
 The machine tells — the sentence shapes and filler that make copy read as
-generated — live in [slop.md](slop.md), along with the reconciliation for the
+generated — live in [slop.md](../../../docs/guidance/slop.md), along with the reconciliation for the
 four O3 moves that sit close to a banned pattern. Read it before the revision
 pass, and read it whenever the job is to edit someone else's draft or to audit
 writing for AI tells rather than rewrite it.
@@ -90,7 +90,7 @@ writing a word:
    is the correction, and the strongest recent pieces prove it works. The
    second list is what a draft picks up when nobody is watching.) The
    conditional cuts — empty adverbs and filler phrases — are in
-   [slop.md](slop.md).
+   [slop.md](../../../docs/guidance/slop.md).
 8. **Person:** "you/your" for the client's world, "we" for O3 — and "we" is
    the team and its community, not a vendor. Never "users will be able to" —
    say what people can do.
@@ -148,7 +148,7 @@ Draft, then:
 5. Check the banned list (rule 7) — and check for the competitor-foil
    ("most firms…") and the repeated "X, not Y". One antithesis per page,
    zero foils.
-6. Run the checks at the end of [slop.md](slop.md). They catch the shapes this
+6. Run the checks at the end of [slop.md](../../../docs/guidance/slop.md). They catch the shapes this
    list doesn't: colon reveals, puffery, `-ing` analysis, fake kickers,
    recap endings, em-dash clutter, robotic symmetry.
 7. Check the register against the surface table. A case study is not a
