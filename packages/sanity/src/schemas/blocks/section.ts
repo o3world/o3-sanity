@@ -30,6 +30,8 @@ import { screenGridSectionKnobs, screenKnobs } from '../../knobs/screenGridSecti
  */
 export const heroSection = defineSectionBlock({
   name: 'heroSection',
+  description:
+    'The page’s opening claim — one or two headline lines, a subheading, one CTA. One per page, at the top: the tension → turn move lives here.',
   title: 'Hero',
   knobs: heroSectionKnobs,
   fields: [
@@ -62,6 +64,8 @@ export const heroSection = defineSectionBlock({
 /** `surface` is declared in `src/knobs/logoWallSection.ts` (ADR 0020). */
 export const logoWallSection = defineSectionBlock({
   name: 'logoWallSection',
+  description:
+    'Proof by association — a heading and standfirst over one centred row of client marks.',
   title: 'Logo wall',
   knobs: logoWallSectionKnobs,
   fields: [
@@ -98,6 +102,8 @@ export const logoWallSection = defineSectionBlock({
 /** `surface` is declared in `src/knobs/caseShowcaseSection.ts` (ADR 0020). */
 export const caseShowcaseSection = defineSectionBlock({
   name: 'caseShowcaseSection',
+  description:
+    'Proof by work — sticky-stacking case-study cards, each projecting its narrative headline and headline stat from the referenced document.',
   title: 'Case study showcase',
   knobs: caseShowcaseSectionKnobs,
   fields: [
@@ -122,6 +128,8 @@ export const caseShowcaseSection = defineSectionBlock({
  */
 export const railPanelsSection = defineSectionBlock({
   name: 'railPanelsSection',
+  description:
+    'An ordered set of offers or platforms — a labelled rail or a row of cards, one panel per item, each with its quieter “Best when…” note.',
   title: 'Rail + panels',
   knobs: railPanelsSectionKnobs,
   fields: [
@@ -199,6 +207,7 @@ export const railPanelsSection = defineSectionBlock({
  */
 export const quoteSection = defineSectionBlock({
   name: 'quoteSection',
+  description: 'One borrowed voice — a single quote and its attribution, given a whole band.',
   title: 'Quote',
   knobs: quoteSectionKnobs,
   fields: [
@@ -221,6 +230,8 @@ export const quoteSection = defineSectionBlock({
  */
 export const insightsCarouselSection = defineSectionBlock({
   name: 'insightsCarouselSection',
+  description:
+    'The thinking behind the work — an insights carousel, hand-picked or auto-filled with the latest, optionally limited to one category.',
   title: 'Insights carousel',
   knobs: insightsCarouselSectionKnobs,
   fields: [
@@ -248,6 +259,7 @@ export const insightsCarouselSection = defineSectionBlock({
  */
 export const ctaSection = defineSectionBlock({
   name: 'ctaSection',
+  description: 'The ask — a heading, up to two lines of body, one CTA. The band a page ends on.',
   title: 'CTA',
   knobs: ctaSectionKnobs,
   fields: [
@@ -267,6 +279,8 @@ export const ctaSection = defineSectionBlock({
  */
 export const disciplineGridSection = defineSectionBlock({
   name: 'disciplineGridSection',
+  description:
+    'Capability as a set — disciplines on a grid, or exactly four of them on the orbital diagram.',
   title: 'Discipline grid',
   knobs: disciplineGridSectionKnobs,
   fields: [
@@ -315,6 +329,7 @@ export const disciplineGridSection = defineSectionBlock({
 /** `surface` is declared in `src/knobs/personGridSection.ts` (ADR 0020). */
 export const personGridSection = defineSectionBlock({
   name: 'personGridSection',
+  description: 'People — a grid of referenced person documents, never re-typed bios.',
   title: 'Person grid',
   knobs: personGridSectionKnobs,
   fields: [
@@ -335,6 +350,8 @@ export const personGridSection = defineSectionBlock({
 /** `surface` is declared in `src/knobs/roleListSection.ts` (ADR 0020). */
 export const roleListSection = defineSectionBlock({
   name: 'roleListSection',
+  description:
+    'Open roles — inline rows, each with its Apply button. Content that turns over too fast to be documents.',
   title: 'Role list',
   knobs: roleListSectionKnobs,
   fields: [
@@ -391,6 +408,8 @@ export const roleListSection = defineSectionBlock({
  */
 export const inFlightSection = defineSectionBlock({
   name: 'inFlightSection',
+  description:
+    'What we’re working on now — anonymous in-progress cards, or dated rows for appearances. Deliberately not case studies: nothing here has shipped.',
   title: 'In flight',
   knobs: inFlightSectionKnobs,
   fields: [
@@ -495,6 +514,8 @@ export const inFlightSection = defineSectionBlock({
  */
 export const formSection = defineSectionBlock({
   name: 'formSection',
+  description:
+    'The inquiry band — the fixed contact form. The words around it are content; the field set is code and not authorable (ADR 0014).',
   title: 'Form',
   knobs: formSectionKnobs,
   fields: [
@@ -545,6 +566,8 @@ export const formSection = defineSectionBlock({
  */
 export const layoutSection = defineSectionBlock({
   name: 'layoutSection',
+  description:
+    'The general-purpose prose band — one to three columns of base blocks under an optional eyebrow / heading stack. Reach for it before proposing a new section block.',
   title: 'Layout section',
   knobs: layoutSectionKnobs,
   fields: [
@@ -588,6 +611,8 @@ export const layoutSection = defineSectionBlock({
  */
 export const mediaSection = defineSectionBlock({
   name: 'mediaSection',
+  description:
+    'A figure moment — one media band, full-bleed or contained. The case-study capture stage.',
   title: 'Media section',
   knobs: mediaSectionKnobs,
   fields: [
@@ -623,6 +648,8 @@ export const mediaSection = defineSectionBlock({
  */
 export const screenGridSection = defineSectionBlock({
   name: 'screenGridSection',
+  description:
+    'Tiled product screenshots on gradient plates — a two-column grid where a wide tile takes both columns.',
   title: 'Screen grid',
   knobs: screenGridSectionKnobs,
   fields: [
@@ -669,6 +696,8 @@ export const screenGridSection = defineSectionBlock({
  */
 export const listingSection = defineSectionBlock({
   name: 'listingSection',
+  description:
+    'Pages of one type as cards, via their card fieldset. Currently reaches no rendered route (ADR 0013).',
   title: 'Listing',
   knobs: listingSectionKnobs,
   fields: [

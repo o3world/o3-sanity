@@ -10,6 +10,7 @@ import { defineBaseBlock } from './defineBlocks'
 
 export const richText = defineBaseBlock({
   name: 'richText',
+  description: 'A column of prose — body text inside a layout-section column.',
   title: 'Rich text',
   fields: [defineField({ name: 'body', type: 'bodyText', validation: (rule) => rule.required() })],
   preview: { select: { title: 'body.0.children.0.text' } },
@@ -17,6 +18,7 @@ export const richText = defineBaseBlock({
 
 export const statGroup = defineBaseBlock({
   name: 'statGroup',
+  description: 'One to four stats in a row — a big value over its label.',
   title: 'Stat group',
   fields: [
     defineField({

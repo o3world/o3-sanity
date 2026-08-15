@@ -199,6 +199,7 @@ describe('defineSectionBlock knob placement', () => {
     const block = defineSectionBlock({
       name: 'heroSection',
       title: 'Hero',
+      description: 'The page’s opening claim.',
       knobs,
       fields: ['variant', defineField({ name: 'eyebrow', type: 'string' })],
     })
@@ -210,6 +211,7 @@ describe('defineSectionBlock knob placement', () => {
     const block = defineSectionBlock({
       name: 'heroSection',
       title: 'Hero',
+      description: 'The page’s opening claim.',
       knobs,
       fields: [defineField({ name: 'eyebrow', type: 'string' }), 'variant'],
     })
@@ -219,7 +221,13 @@ describe('defineSectionBlock knob placement', () => {
 
   it('refuses a placement that names no knob', () => {
     expect(() =>
-      defineSectionBlock({ name: 'heroSection', title: 'Hero', knobs, fields: ['layout'] }),
+      defineSectionBlock({
+        name: 'heroSection',
+        title: 'Hero',
+        description: 'The page’s opening claim.',
+        knobs,
+        fields: ['layout'],
+      }),
     ).toThrow(/places a knob called "layout"/)
   })
 
@@ -228,6 +236,7 @@ describe('defineSectionBlock knob placement', () => {
       defineSectionBlock({
         name: 'heroSection',
         title: 'Hero',
+        description: 'The page’s opening claim.',
         knobs,
         fields: [defineField({ name: 'variant', type: 'string' })],
       }),
@@ -239,6 +248,7 @@ describe('defineSectionBlock knob placement', () => {
       defineSectionBlock({
         name: 'heroSection',
         title: 'Hero',
+        description: 'The page’s opening claim.',
         knobs: defineBlockKnobs({
           type: 'heroSection',
           title: 'Hero',
@@ -261,6 +271,7 @@ describe('defineSectionBlock knob placement', () => {
     const block = defineSectionBlock({
       name: 'quoteSection',
       title: 'Quote',
+      description: 'One borrowed voice.',
       knobs: defineBlockKnobs({
         type: 'quoteSection',
         title: 'Quote',
