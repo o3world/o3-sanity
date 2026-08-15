@@ -148,4 +148,7 @@ the overlay entirely.
   nesting host would need a decision rather than an extension. Shared objects
   that are both base blocks and inline members (`figure`, `cta`, `stat`) still
   have no home for their per-item knobs — map #101's open fog, and the one case
-  where a `_type` key would have been natural.
+  where a `_type` key would have been natural. **Answered by
+  [ADR 0023](/adr/0023-an-instance-is-configured-by-its-component)**, which
+  gives them exactly that key: a shared object's name is global, so the
+  silent-collision argument above does not apply to it.

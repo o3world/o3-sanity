@@ -20,7 +20,7 @@ type Story = StoryObj<typeof meta>
 /**
  * The Solutions centrepiece as `1928:6524` draws it — Strategy at the apex,
  * then AI, Engineering and Design around the base ring. The order of the array
- * is the order of the slots.
+ * is the order of the positions.
  */
 export const FourDisciplines: Story = {
   args: {
@@ -45,7 +45,7 @@ export const FourDisciplines: Story = {
   },
 }
 
-/** Fewer than four leaves the net intact and the empty slots unlabelled. */
+/** Fewer than four leaves the net intact and the empty positions unlabelled. */
 export const PartiallyFilled: Story = {
   args: {
     items: [{ heading: 'Strategy', body: 'The root of every engagement.' }, { heading: 'AI' }],
