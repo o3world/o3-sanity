@@ -47,7 +47,7 @@ type Story = StoryObj<typeof meta>
 /**
  * A band, for the stories that need one. Storybook's background addon paints
  * behind the canvas; this paints the surface AND declares it, which is the
- * pairing the whole feature rests on (ADR 0024).
+ * pairing the whole feature rests on (ADR 0026).
  */
 const on = (surface: Surface): Decorator => {
   const Band: Decorator = (Story) => (

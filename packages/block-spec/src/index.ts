@@ -54,7 +54,7 @@ export {
   type PlaceholderReferences,
 } from './placeholder'
 // What a button DRAWS for a stored contrast, beside what a CONTROL displays
-// for a stored knob value — the first context-resolved knob (#147, ADR 0024).
+// for a stored knob value — the first context-resolved knob (#147, ADR 0026).
 export { resolveContrast } from './resolveContrast'
 export type { BandSurface, ButtonFill } from './resolveContrast'
 export { resolveKnobValue, UNRESOLVED_KNOB_TITLE } from './resolveKnobValue'

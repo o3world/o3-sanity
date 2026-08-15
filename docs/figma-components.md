@@ -108,7 +108,7 @@ White themes draw. The fill vocabulary is a **knob** (`button.contrast`, stored
 in committed seed JSON and regenerated into types), so it moves with the content
 model rather than with the component. Its default, `auto`, is not a fill at all:
 it reads the surface the instance stands on and picks between `Theme=Black` and
-`Theme=White` — ADR 0024.
+`Theme=White` — ADR 0026.
 
 ### The `Footer` component became canonical (2026-08)
 

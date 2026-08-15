@@ -3,7 +3,7 @@
 - **Status:** Accepted
 - **Date:** 2026-08-14
 - **Deciders:** NickO3 + Claude
-- **Related:** [map #101](https://github.com/o3world/o3-sanity/issues/101), [issue #113](https://github.com/o3world/o3-sanity/issues/113), [ADR 0021](/adr/0021-an-array-member-is-its-own-knob-root), [ADR 0020](/adr/0020-a-block-declares-its-knobs-once), [ADR 0024](./0024-contrast-resolves-from-the-nearest-declared-surface.md) — the context-resolved knob this ADR pre-authorised
+- **Related:** [map #101](https://github.com/o3world/o3-sanity/issues/101), [issue #113](https://github.com/o3world/o3-sanity/issues/113), [ADR 0021](/adr/0021-an-array-member-is-its-own-knob-root), [ADR 0020](/adr/0020-a-block-declares-its-knobs-once), [ADR 0026](./0026-contrast-resolves-from-the-nearest-declared-surface.md) — the context-resolved knob this ADR pre-authorised
 
 ## Context
 

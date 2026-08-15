@@ -23,7 +23,7 @@ import { buttonDestination, type ButtonLinkData } from '@/content/buttonDestinat
  * swallow a cmd-click. `buttonVariants` is the shared drawing, applied to
  * whichever element wins.
  *
- * **It also picks its own fill** (#147, ADR 0024). `contrast` defaults to
+ * **It also picks its own fill** (#147, ADR 0026). `contrast` defaults to
  * `auto`, and Auto reads the nearest declared surface — so a band changing
  * from white to ink repaints the buttons on it, and no caller forces a fill
  * past the editor's choice. This is the layer that knows about surfaces:

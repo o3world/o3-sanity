@@ -90,7 +90,7 @@ interface SiteNavProps {
  *
  * **The button is `Theme=White`** — the pill instances `2205:1298`, a white
  * fill with an ink label `#0A0A0B`. The bar declares itself an `ink` surface
- * (#147, ADR 0024) and the button resolves that fill for itself, the same way
+ * (#147, ADR 0026) and the button resolves that fill for itself, the same way
  * a button on any ink band does; nothing here forces one. The bar is the one
  * piece of chrome sitting outside the band system, so without that declaration
  * Auto would have nothing to read exactly where the fill matters most.

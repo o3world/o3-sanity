@@ -6,7 +6,7 @@ import type { Surface } from './section-shell'
 
 /**
  * WHICH SURFACE A SUBTREE IS STANDING ON, so a component inside it can answer
- * a question about its own background without being told (#147, ADR 0024).
+ * a question about its own background without being told (#147, ADR 0026).
  *
  * `undefined` — nothing declared one — is a real answer and the default. It is
  * what an element outside the band system reaches when its chrome has not said

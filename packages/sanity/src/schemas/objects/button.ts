@@ -11,7 +11,7 @@ import { defineSharedObject } from './defineSharedObject'
  * `contrast` is declared in `src/knobs/button.ts` and its field is generated
  * from that declaration (ADR 0023), so the canvas offers the fill an editor can
  * already see in the form. Its default, `auto`, is resolved from the surface
- * the instance is standing on rather than stored (ADR 0024). Everything else
+ * the instance is standing on rather than stored (ADR 0026). Everything else
  * here is editorial.
  *
  * **A destination is a union of four arms**: nothing, `target`, `href`, or

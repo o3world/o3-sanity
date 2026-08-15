@@ -1,4 +1,4 @@
-# 0024. Contrast resolves from the nearest declared surface
+# 0026. Contrast resolves from the nearest declared surface
 
 - **Status:** Accepted
 - **Date:** 2026-08-15

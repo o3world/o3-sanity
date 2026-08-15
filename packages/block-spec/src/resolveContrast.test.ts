@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { resolveContrast, type BandSurface, type ButtonFill } from './resolveContrast'
 
 /**
- * The whole of Auto, as the table it is (#147, ADR 0024).
+ * The whole of Auto, as the table it is (#147, ADR 0026).
  *
  * One row per thing an editor or a document can do: leave the knob alone on
  * each of the three surfaces, leave it alone nowhere near a band, choose a

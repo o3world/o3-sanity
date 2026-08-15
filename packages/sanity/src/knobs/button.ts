@@ -26,7 +26,7 @@ export const buttonKnobs = defineObjectKnobs({
       description:
         'How the button stands out from what is behind it. Auto reads the band underneath and picks the readable fill; the rest override it. There is no red button in the canonical frames — brand red arrives as a gradient.',
       /*
-       * **Contrast, not variant** (ADR 0024). `variant` is already this repo's
+       * **Contrast, not variant** (ADR 0026). `variant` is already this repo's
        * word for the axis that changes what a block *is* — `heroSection`,
        * `mediaSection` and `collectionHero` all carry one — and an emphasis
        * axis added later beside a knob called `variant` would leave nobody
