@@ -1,7 +1,7 @@
 {
   "name": "o3-authoring",
   "displayName": "O3 Authoring",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Draft o3world.com content in Sanity — insights (blog posts), case studies, and pages — in the O3 voice. Drafts only; a human publishes in Studio.",
   "author": { "name": "O3 World", "url": "https://github.com/o3world" },
   "repository": "https://github.com/o3world/o3-sanity",

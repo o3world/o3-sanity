@@ -27,6 +27,7 @@
     "prepare": "[ -n \"$VERCEL\" ] || [ -n \"$CI\" ] || lefthook install",
     "schema:check": "pnpm --filter @o3/sanity schema:check",
     "schema:deploy": "pnpm --filter @o3/sanity schema:deploy",
+    "skill:wire": "./tools/authoring-skill/wire-desktop.sh",
     "storybook": "turbo run storybook",
     "test": "vitest run",
     "test:fast": "vitest run --project unit --project render",

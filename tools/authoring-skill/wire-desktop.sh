@@ -194,12 +194,14 @@ TOTAL_STAGES=5
 TOTAL_MINUTES=10
 
 PROJECT_ID="naorcr6k"
-DATASET="production"
+# The dataset the skill drafts to by default, so the smoke test checks the one
+# a real session will use. `production` is opt-in by name, in the conversation.
+DATASET="development"
 SKILL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SKILL_DIR/../.." && pwd)"
 ZIP="$SKILL_DIR/dist/o3-authoring.zip"
 
-# groq QUERY — run a GROQ query against production as the logged-in Sanity user.
+# groq QUERY — run a GROQ query against $DATASET as the logged-in Sanity user.
 groq() {
   (cd "$REPO_ROOT/packages/sanity" &&
     npx --no-install sanity documents query "$1" \
@@ -255,14 +257,17 @@ say "Start a new Claude Desktop chat and paste this:"
 printf '\n%s' "$DIM"
 cat <<'PROMPT'
   Use the o3-authoring skill against Sanity project naorcr6k, dataset
-  production. Fetch the guidance documents, then fetch the full schema for
-  the `insight` type, then create a throwaway draft insight titled
-  "Desktop wire-up smoke test — delete me" with a one-line body. Report the
-  document ID, the guidance keys you found, and one field description you
-  read off the insight schema.
+  development. Fetch the guidance documents, then fetch the full schema for
+  the `insight` type. My thesis is "a wire-up is not working until something
+  outside the app says so" — skip the brief's rounds and use it. Then create
+  a throwaway draft insight titled "Desktop wire-up smoke test — delete me"
+  with a one-line body. Report the document ID, the guidance keys you found,
+  and one field description you read off the insight schema.
 PROMPT
 printf '%s\n' "$RESET"
-note "Expect four guidance keys: o3-voice, o3-brand, o3-slop, o3-composition."
+note "Expect five guidance keys: o3-voice, o3-brand, o3-slop, o3-composition,"
+note "o3-visual. Handing it a thesis is the brief's one override — without it,"
+note "the skill is supposed to refuse to create anything."
 pause "Claude says it created the draft?"
 
 say "Checking the dataset from this side…"

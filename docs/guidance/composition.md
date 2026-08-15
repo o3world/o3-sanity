@@ -1,4 +1,23 @@
-# Composing a page
+# Composition catalog
+
+Two parts. **Part one — composing a page** is which band follows which. **Part
+two — composing a piece** is how a long argument moves inside one body.
+
+They ground differently, and reading one part's authority into the other is the
+mistake to avoid:
+
+- Part one is counted against the nine built pages, and **a canonical Figma
+  frame outranks all of it**.
+- Part two's craft claims answer to the published corpus — the decade of real
+  writing the voice guide was calibrated against. A Figma frame has nothing to
+  say about where an essay turns.
+- **Part two's argument-shaping standards answer to neither.** "A warrant
+  somebody could disagree with" is a criterion borrowed from rhetoric, not an
+  observation about how O3 writes. It is the test the brief applies. Do not
+  read it as a description of the corpus, and do not go looking for the nine
+  pages that prove it.
+
+## Part one — composing a page
 
 How o3world.com pages are put together: what order bands go in, which surfaces
 they paint, and which block carries which job. Read this with the schema — the
@@ -14,7 +33,7 @@ transcribed from frames, which is exactly as it should be.
 Every claim here is counted against the nine built pages. Where the evidence is
 one or two instances, it says so — treat those as precedent, not law.
 
-## The spine
+### The spine
 
 Every page is a flat, ordered array of full-width bands. A reader meets them in
 order, so composition is the argument's shape: what is claimed, what proves it,
@@ -37,7 +56,7 @@ ctaSection             the ask                 last, always ink
 - Four to eight bands. The transcribed frames run longest (About is eight);
   assembled pages settle at four or five.
 
-## Surface rhythm
+### Surface rhythm
 
 Three surfaces: `white`, `bone`, `ink`. Every band in every page sets one
 explicitly — no page leans on the default.
@@ -56,7 +75,7 @@ explicitly — no page leans on the default.
   long run is a change of subject: Live's third band switches to `bone` where
   the content stops being the studio's own work.
 
-## The opening
+### The opening
 
 The hero states the claim; the band under it has to pay something back
 immediately. There is no single block for this — there is a job. Observed:
@@ -78,7 +97,7 @@ here; if the page needs them, they come after the payoff.
 one link out. It is the default second band for a page with something to
 explain rather than something to show.
 
-## Choosing the block
+### Choosing the block
 
 Match the job the band has to do, not the shape you imagine:
 
@@ -104,7 +123,7 @@ instances across five pages, doing prose, multi-column lists, an intro
 statement and a video stage. Try it before concluding the design system is
 missing a block.
 
-## Sequences worth reusing
+### Sequences worth reusing
 
 - **Rail into the close** (3 instances): a `railPanelsSection` immediately
   before `ctaSection`. Laying out the options and then asking is a complete
@@ -121,7 +140,7 @@ caseShowcaseSection → quoteSection` — who trusts us, what we did, what they
   One instance, so precedent rather than convention, but the escalation is
   worth stealing.
 
-## One block, more than one job
+### One block, more than one job
 
 Five blocks change job with a knob rather than being two blocks. Recognising
 this is what stops a page proposing a block that already exists:
@@ -150,7 +169,7 @@ this is what stops a page proposing a block that already exists:
   button alone is a quieter "back up one level" link, which is what both
   venture detail pages use.
 
-## What the built pages do not show
+### What the built pages do not show
 
 Being honest about the gaps, so an author does not read absence as prohibition:
 
@@ -167,7 +186,7 @@ Being honest about the gaps, so an author does not read absence as prohibition:
 - Several knob values are unexercised: the `capture` media variant, full-bleed
   media, the `molecule` quote decoration, and `disc` marks. Available, unproven.
 
-## Anti-patterns
+### Anti-patterns
 
 - **A page with two asks.** One `ctaSection`, at the end. A second CTA band
   mid-page competes with the close.
@@ -182,3 +201,91 @@ Being honest about the gaps, so an author does not read absence as prohibition:
 - **Inventing proof.** `caseShowcaseSection` and `logoWallSection` render only
   what the referenced documents already say. If the proof does not exist as a
   document, the band cannot fake it.
+
+## Part two — composing a piece
+
+An insight or a case-study narrative is not made of bands. It is one argument,
+and it either has a shape or it is a set of correct observations in no
+particular order.
+
+This part opens with the standards the brief applies before a word is drafted:
+what a claim has to be, what carries it, and what counts as enough evidence.
+They are the test, not a description of the corpus — read the note at the top
+of the file before treating any of it as precedent.
+
+### The claim
+
+One sentence, and it has to be **arguable**. State its opposite out loud. If
+the opposite is something nobody would ever say — "shipping working software
+matters", "clients want value" — the sentence is a platitude wearing a claim's
+clothes, and everything built on it will read as filler however well written.
+
+- A claim names a subject and asserts something about it. "AI and delivery" is
+  a topic; "the tools are new and the management is old" is a claim.
+- A claim the reader already agrees with is not worth 2,000 words. A claim the
+  reader would refuse outright is a different piece — one that has to earn the
+  disagreement rather than assume it.
+- Narrow beats broad. "Design systems fail" is unwinnable. "A design system
+  fails when nobody owns the second version" can be argued in one piece.
+
+### The warrant
+
+The unstated principle that carries the evidence to the claim. Toulmin's term,
+and the one thing an interview can extract that a draft cannot invent.
+
+Evidence says _what happened_. The claim says _what is true_. The warrant is
+the sentence in between, and it is usually the sentence nobody writes down:
+
+> We rebuilt the site in a weekend (grounds), so the bottleneck was never
+> typing speed (claim) — because the work that takes the time is deciding, not
+> producing (warrant).
+
+- **A defensible warrant is one somebody could disagree with.** Same test as
+  the claim, applied one level down. "Deciding is the slow part" is arguable;
+  a reasonable person can hold that the producing was always the slow part and
+  the tools just got faster.
+- **A warrant is a warrant _for_ something.** It cannot be settled before the
+  claim exists, which is why the brief asks for it in the second round.
+- **One warrant per piece.** If two are load-bearing, one of them is the real
+  subject and the other is a second piece.
+- If the warrant only holds for this one case, the claim is a story, not an
+  argument. Write it as a story — that is an honest piece — but stop calling it
+  a thesis.
+
+### The evidence
+
+Named, dated, numbered, or attributable. What O3 did, what it cost, who said
+so, what the number was.
+
+Evidence is **too thin** when:
+
+- The only support is the author's confidence. "We've seen this again and
+  again" with no instance behind it.
+- The instances are illustrations rather than support — they show what the
+  claim would look like if true, and would look identical if it were false.
+- It is one case carrying a general claim. One project is a story; the general
+  claim needs either a second instance or a narrower claim.
+- The number has no denominator, no baseline, or no source. "41% fewer missed
+  appointments" is evidence; "significantly fewer" is a mood.
+
+When the evidence is thin, there are three honest moves and one dishonest one.
+Narrow the claim until the evidence carries it; say plainly what would change
+your mind; or write the smaller piece you can actually support. The dishonest
+move is to raise the register until the prose sounds like proof.
+
+### Mush
+
+The failure this whole part exists to prevent: a claim with grounds and no
+arguable warrant. Every sentence is true, every paragraph is competent, and
+there is nothing at stake anywhere in it.
+
+The tells, in the order they show up:
+
+- The claim nobody would contest, so nothing in the piece has to work.
+- Evidence that illustrates instead of supports.
+- A middle that changes subject rather than advancing — three sections that
+  could be read in any order.
+- An ending that restates the opening in warmer words.
+
+A piece that fails this is not fixed by editing sentences. It goes back to the
+brief.
