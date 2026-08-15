@@ -32,12 +32,28 @@ Name it `<thing>Section`. Never `<thing>Block`.
 
 1. `packages/sanity/src/schemas/blocks/registry.ts` — add to `SECTION_BLOCKS`. The factory throws until you do.
 2. `packages/sanity/src/knobs/<name>Section.ts` — the block's design options, at minimum `surfaceKnob({ initialValue: … })`; export it from `knobs/index.ts` and add it to `BLOCK_KNOBS`. Required, not optional (ADR 0020). Add a `placeholder` in the same file, typed `satisfies <Name>Section` — it is what the canvas insert menu writes, and `knobs/placeholder.test.ts` fails without one. It must be **commit-safe**: fill every required field, never reference a document, and leave design options to the knobs (CONTEXT.md → Placeholder).
-3. `packages/sanity/src/schemas/blocks/section.ts` — `defineSectionBlock({ name, title, knobs, fields, preview })`. Don't add a `surface` field; the factory generates it from the knob.
+3. `packages/sanity/src/schemas/blocks/section.ts` — `defineSectionBlock({ name, title, description, knobs, fields, preview })`. Don't add a `surface` field; the factory generates it from the knob. `description` is required and has a standard (below).
 4. `packages/sanity/src/schemas/index.ts` — import and add to `schemaTypes`, in the section-blocks group.
 5. `packages/sanity/src/queries.ts` — add a `_type == "<name>Section" => { … }` arm to `SECTION_FIELDS` **only if** the block needs query-time expansion (dereferenced `button` targets, reference→card projections, a subquery). Renderers must stay pure components: resolve data here, not in the component.
 6. `apps/web/src/content/blocks/section/<name>Section/<Name>Section.tsx` — folder name === schema name exactly. Type props with `SectionProps<'<name>Section'>` from `sectionTypes.ts`; never hand-write the prop shape.
 7. `apps/web/src/content/blocks/clientComponents.ts` — add a `defineBlockRender('<name>Section', { component: … })` entry to `CLIENT_SECTION_BINDINGS`.
 8. `pnpm typegen`, then `pnpm typecheck`. The `satisfies` clause in `apps/web/src/content/blocks/registry.ts` is what catches a renderer whose props drifted from the generated shape.
+
+## Writing a block description
+
+Every block defined through a factory carries a required `description` (ADR 0025). It is read
+by two audiences at once — a human editor under the block in Studio, and any agent fetching
+`get_schema` — so write it for **an author who cannot see the rendered site**, in three parts:
+
+1. **The message it carries.** What the block says on a page, not what fields it has.
+   "Proof by association — a heading and standfirst over one centred row of client marks."
+2. **Reach for it when…** The situation that calls for it, if the message alone doesn't say.
+3. **The one constraint the fields don't show.** "One per page, at the top." "The orbital
+   layout places exactly four." Skip it if there isn't one — don't invent a constraint.
+
+Two or three sentences. **Never name another block** — a comparison ("use X instead when…")
+is composition knowledge and belongs in the `o3-composition` guidance document, not in a
+description. That's the locality rule: one block → description; two or more blocks → catalog.
 
 ## Adding a base block
 

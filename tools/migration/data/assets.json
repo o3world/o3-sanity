@@ -76,20 +76,20 @@
     "assetId": "image-ad14f8a2d51a3d50e9a0dabfe1b0b07a0c4447e5-600x240-png"
   },
   "file:tools/migration/data/seed/assets/partner-caron.png": {
-    "sha256": "bd76cd7f7e62a621891d9386604af7675b64057a",
-    "assetId": "image-bd76cd7f7e62a621891d9386604af7675b64057a-600x240-png"
+    "sha256": "ea82738b49dab09dd7f9364528065f3576764579",
+    "assetId": "image-ea82738b49dab09dd7f9364528065f3576764579-1059x263-png"
   },
   "file:tools/migration/data/seed/assets/partner-chop.png": {
-    "sha256": "5d4e152a842fae2aec840410c2431759b6cfb576",
-    "assetId": "image-5d4e152a842fae2aec840410c2431759b6cfb576-600x240-png"
+    "sha256": "30fddbd04c314b07763b5592bad4d07ac8d51f4e",
+    "assetId": "image-30fddbd04c314b07763b5592bad4d07ac8d51f4e-580x122-png"
   },
   "file:tools/migration/data/seed/assets/partner-ironman.png": {
-    "sha256": "a44035bf9bbfb743725655aac9871ea7f98faabc",
-    "assetId": "image-a44035bf9bbfb743725655aac9871ea7f98faabc-600x240-png"
+    "sha256": "79d44c241bc1bab4c6dd9dcde12ae2f4917986da",
+    "assetId": "image-79d44c241bc1bab4c6dd9dcde12ae2f4917986da-1200x297-png"
   },
   "file:tools/migration/data/seed/assets/partner-lacolombe.png": {
-    "sha256": "6540bfed169ee453769828082c1829cadd40178c",
-    "assetId": "image-6540bfed169ee453769828082c1829cadd40178c-600x240-png"
+    "sha256": "f1eb42a01dbf878fc53d11fb7c935d953ab3023c",
+    "assetId": "image-f1eb42a01dbf878fc53d11fb7c935d953ab3023c-512x99-png"
   },
   "file:tools/migration/data/seed/assets/plat-vercel-logo.png": {
     "sha256": "c4b9d63cff23032118f82cd5f103dbd1b9fa9e85",

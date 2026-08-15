@@ -106,12 +106,15 @@ port_of() { # <worktree> <var> <default>
 listeners() { # <comma-separated ports> -> "<port> <cwd>" lines
   local pid port cwd
   [[ -n $1 ]] || return 0
+  # Nothing listening is the ordinary case, and `lsof` says so by exiting 1 —
+  # which `pipefail` would otherwise turn into an errexit that kills `wt ls`
+  # before it prints a row.
   lsof -nP -sTCP:LISTEN -iTCP:"$1" 2>/dev/null |
     sed -nE 's/^[^ ]+ +([0-9]+) .*:([0-9]+) \(LISTEN\)$/\1 \2/p' | sort -u |
     while read -r pid port; do
       cwd="$(lsof -a -d cwd -p "$pid" -Fn 2>/dev/null | sed -n 's/^n//p' | head -1)"
       [[ -n $cwd ]] && echo "$port $cwd"
-    done
+    done || true
 }
 
 cmd_ls() {
@@ -168,7 +171,9 @@ cmd_ls() {
   echo "● listening — open http://localhost:<port>    ? no .env, so it would boot on the dev.sh default"
 
   # Two checkouts pointing at one port is only visible across the whole list.
-  dupes="$(tr ',' '\n' <<<"$claimed" | grep -v '^$' | sort | uniq -d | tr '\n' ' ')"
+  # No claimed ports at all leaves `grep` matching nothing and exiting 1, which
+  # under `pipefail` would abort the run right after the legend.
+  dupes="$(tr ',' '\n' <<<"$claimed" | grep -v '^$' | sort | uniq -d | tr '\n' ' ')" || true
   [[ -n $dupes ]] && echo "collision: ${dupes% } claimed by more than one worktree — re-provision one of them:"
   [[ -n $dupes ]] && echo "           rm <worktree>/.env && bash scripts/worktree-provision.sh <worktree>"
   return 0

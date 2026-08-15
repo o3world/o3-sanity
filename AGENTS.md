@@ -153,6 +153,14 @@ browser.** Skipping it once (#42's build-out) left a whole homepage
 reconciliation invisible: the seeds were correct, the dataset was stale, and
 every screenshot taken to check the work was of the old content.
 
+**Loading a dataset is your job; creating or deleting one is not.** Deleting a
+dataset here is unrecoverable — backups are an Enterprise feature and are not
+enabled — and the Comments add-on (`production-comments`) is complimentary, so
+it never counts toward a plan's dataset limit. Both rules, the rebuild-from-
+scratch recipe, and the everyday command list live in
+[`docs/agents/ops.md`](./docs/agents/ops.md). Read it before running any
+`datasets` CLI command or touching sanity.io/manage.
+
 ### Agent guidance in the dataset
 
 The Claude Desktop authoring skill carries no knowledge — it fetches it (#68).

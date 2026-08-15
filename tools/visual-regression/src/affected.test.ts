@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { affectedStoryFiles, entryPath, storiesFor } from './affected'
+import { affectedStoryFiles, entryPath, removedStories, storiesFor } from './affected'
 import type { StatsModule, StoryEntry } from './storybook'
 
 /**
@@ -104,5 +104,65 @@ describe('storiesFor', () => {
 
   it('keeps every story when the change is global', () => {
     expect(storiesFor(index, { storyFiles: [], everything: true })).toHaveLength(2)
+  })
+})
+
+describe('removedStories', () => {
+  const story = (id: string, name: string, importPath: string): StoryEntry => ({
+    id,
+    name,
+    title: 'UI/Stat',
+    importPath,
+    type: 'story',
+  })
+
+  const STAT_IMPORT = '../../packages/ui/src/components/stat.stories.tsx'
+  const baseline: StoryEntry[] = [
+    story('ui-stat--default', 'Default', STAT_IMPORT),
+    story('ui-stat--large', 'Large', STAT_IMPORT),
+  ]
+  const scoped = { storyFiles: [STAT_STORY], everything: false }
+
+  it('reports a deleted export from a file that still exists', () => {
+    // The whole bug: the file is `M`, not `D`, so a file-deletion test misses
+    // it and `Large` disappears from the report rather than from the run.
+    const gone = removedStories(
+      baseline,
+      new Set(['ui-stat--default']),
+      new Set([STAT_STORY]),
+      scoped,
+    )
+    expect(gone.map((entry) => entry.id)).toEqual(['ui-stat--large'])
+  })
+
+  it('reports every story in a file this branch deleted outright', () => {
+    const gone = removedStories(baseline, new Set(), new Set([STAT_STORY]), scoped)
+    expect(gone.map((entry) => entry.id)).toEqual(['ui-stat--default', 'ui-stat--large'])
+  })
+
+  it('reads a rename as one removed, leaving the new id to be added', () => {
+    const gone = removedStories(
+      baseline,
+      new Set(['ui-stat--default', 'ui-stat--huge']),
+      new Set([STAT_STORY]),
+      scoped,
+    )
+    expect(gone.map((entry) => entry.id)).toEqual(['ui-stat--large'])
+  })
+
+  it('reports nothing when the baseline and this checkout agree', () => {
+    const current = new Set(['ui-stat--default', 'ui-stat--large'])
+    expect(removedStories(baseline, current, new Set([STAT_STORY]), scoped)).toEqual([])
+  })
+
+  it('leaves a story alone when the diff never mentions its file', () => {
+    // Someone else's removed carousel is not this run's business.
+    expect(removedStories(baseline, new Set(), new Set(['README.md']), scoped)).toEqual([])
+  })
+
+  it('takes every missing story once the scope is explicit', () => {
+    const everything = { storyFiles: [], everything: true }
+    const gone = removedStories(baseline, new Set(), new Set(), everything)
+    expect(gone).toHaveLength(2)
   })
 })

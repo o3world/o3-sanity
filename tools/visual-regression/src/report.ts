@@ -33,6 +33,18 @@ function escapeHtml(value: string): string {
   )
 }
 
+/**
+ * JSON for an inline `<script>`.
+ *
+ * `JSON.stringify` escapes nothing HTML cares about, so a story error carrying
+ * the literal text `</script>` — and a React error message quoting markup is
+ * exactly that — would close the block and blank the whole report. Escaping
+ * every `<` leaves a JSON parser the same string and an HTML one no tag.
+ */
+function embedJson(value: unknown): string {
+  return JSON.stringify(value).replace(/</g, '\\u003c')
+}
+
 function relative(reportDir: string, file: string | undefined): string | null {
   return file ? path.relative(reportDir, file).split(path.sep).join('/') : null
 }
@@ -155,8 +167,13 @@ function page(data: unknown[], counts: Record<string, number>, meta: ReportMeta)
 </header>
 <main id="cards"></main>
 <script>
-const DATA = ${JSON.stringify(data)};
-const COUNTS = ${JSON.stringify(counts)};
+const DATA = ${embedJson(data)};
+const COUNTS = ${embedJson(counts)};
+// Everything below builds markup by concatenation, so anything that came from a
+// story — its label, its viewport, and above all a render error quoting the
+// component that threw — goes through here first.
+const esc = (value) => String(value ?? '').replace(/[&<>"']/g,
+  (character) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[character]);
 const COLOURS = { changed: 'var(--changed)', added: 'var(--added)', removed: 'var(--removed)',
   error: 'var(--error)', unchanged: 'var(--unchanged)' };
 const active = new Set(Object.keys(COUNTS).filter(k => COUNTS[k] > 0 && k !== 'unchanged'));
@@ -181,7 +198,7 @@ const percent = (n) => (n * 100 < 0.01 && n > 0 ? '<0.01%' : (n * 100).toFixed(2
 
 function stage(item, mode) {
   const framed = (html) => '<div class="frame">' + html + '</div>';
-  if (item.verdict === 'error') return '<div class="empty error">' + (item.error || 'render failed') + '</div>';
+  if (item.verdict === 'error') return '<div class="empty error">' + esc(item.error || 'render failed') + '</div>';
   if (mode === 'diff' && item.diff) return framed('<img src="' + item.diff + '" alt="diff">');
   if (mode === 'slider' && item.baseline && item.current)
     return framed('<div class="slider"><img class="under" src="' + item.current + '" alt="current">' +
@@ -238,8 +255,8 @@ function render() {
       : '';
     card.innerHTML =
       '<div class="head"><span class="tag ' + item.verdict + '">' + item.verdict + '</span>' +
-      '<h2>' + item.label + '</h2>' +
-      '<code>' + item.viewport +
+      '<h2>' + esc(item.label) + '</h2>' +
+      '<code>' + esc(item.viewport) +
         (item.verdict === 'changed' ? ' · ' + percent(item.ratio) + ' of pixels' : '') + size + '</code>' +
       '<div class="modes"></div></div><div class="stage"></div>';
     const modes = card.querySelector('.modes');

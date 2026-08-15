@@ -10,6 +10,14 @@ type SectionField = KnobbedField
 type BlockOptions = {
   name: string
   title: string
+  /**
+   * What the block is for, written for an author who cannot see the rendered
+   * site (ADR 0025): the message it carries, when to reach for it, and the one
+   * constraint the fields don't show. One block only — anything naming another
+   * block belongs in the `o3-composition` guidance document. Surfaced to every
+   * MCP consumer via `get_schema`, and to editors under the block in Studio.
+   */
+  description: string
   fields: SectionField[]
   preview?: ObjectDefinition['preview']
   /**
@@ -32,7 +40,14 @@ type BlockOptions = {
  * shared `surface` knob wherever the block did not place it, and refuses names
  * missing from the registry.
  */
-export function defineSectionBlock({ name, title, fields, preview, knobs }: BlockOptions) {
+export function defineSectionBlock({
+  name,
+  title,
+  description,
+  fields,
+  preview,
+  knobs,
+}: BlockOptions) {
   if (!SECTION_BLOCKS.includes(name as (typeof SECTION_BLOCKS)[number])) {
     throw new Error(
       `defineSectionBlock: "${name}" is not in SECTION_BLOCKS — register it in registry.ts first.`,
@@ -43,9 +58,11 @@ export function defineSectionBlock({ name, title, fields, preview, knobs }: Bloc
       `defineSectionBlock: "${name}" declares knobs but no surface knob — every section block paints a band. Add surfaceKnob().`,
     )
   }
+  requireDescription('defineSectionBlock', name, description)
   return defineType({
     name,
     title,
+    description,
     type: 'object',
     fields: withKnobFields('defineSectionBlock', name, fields, knobs),
     preview: preview ?? {
@@ -73,6 +90,7 @@ export function defineSectionBlock({ name, title, fields, preview, knobs }: Bloc
 export function defineBaseBlock({
   name,
   title,
+  description,
   fields,
   preview,
 }: Omit<BlockOptions, 'knobs' | 'fields'> & { fields: FieldDefinition[] }) {
@@ -81,5 +99,15 @@ export function defineBaseBlock({
       `defineBaseBlock: "${name}" is not in BASE_BLOCKS — register it in registry.ts first.`,
     )
   }
-  return defineType({ name, title, type: 'object', fields, preview })
+  requireDescription('defineBaseBlock', name, description)
+  return defineType({ name, title, description, type: 'object', fields, preview })
+}
+
+/** The type makes it required; this catches the empty string the type cannot. */
+function requireDescription(factory: string, name: string, description: string) {
+  if (!description?.trim()) {
+    throw new Error(
+      `${factory}: "${name}" has a blank description — write what the block is for (ADR 0025; the standard is in the content-naming skill).`,
+    )
+  }
 }

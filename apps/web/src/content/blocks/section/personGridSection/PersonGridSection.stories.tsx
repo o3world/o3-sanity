@@ -1,3 +1,4 @@
+import type { ComponentProps } from 'react'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { figmaDesign } from '@o3/story-kit'
 
@@ -29,6 +30,11 @@ const meta = {
 
 export default meta
 type Story = StoryObj<typeof meta>
+
+/** The projected slot shape. Typegen assumes every `people[]` dereference
+ *  lands, so `DanglingReference` — the case where one does not — has to say so
+ *  by hand. */
+type People = NonNullable<ComponentProps<typeof PersonGridSection>['people']>
 
 /** The six people the About seed references. */
 export const AsSeeded: Story = {
@@ -77,5 +83,34 @@ export const MissingRole: Story = {
     people: (seededSectionArgs('about', 'personGridSection').people ?? []).map((person, i) =>
       i === 0 ? { ...person, title: null } : person,
     ),
+  },
+}
+
+/**
+ * One person in two slots — a band of six with a repeat, which an editor gets
+ * by duplicating a row. Both cards render, and each keeps its own overlay: the
+ * slot's `_key` is the only thing that separates two `<li>`s holding the same
+ * document, so anything else here reconciles them into one.
+ */
+export const SamePersonTwice: Story = {
+  args: {
+    ...seededSectionArgs('about', 'personGridSection'),
+    people: (seededSectionArgs('about', 'personGridSection').people ?? []).map((person, i, all) =>
+      i === 3 ? { ...(all[0] as People[number]), _key: person._key } : person,
+    ),
+  },
+}
+
+/**
+ * A slot whose person was deleted. The projection spreads nothing, so the item
+ * arrives as `{_key}` alone — the state a band is in mid-`load`. It renders as
+ * five cards, never as a sixth tile with no portrait and no name.
+ */
+export const DanglingReference: Story = {
+  args: {
+    ...seededSectionArgs('about', 'personGridSection'),
+    people: (seededSectionArgs('about', 'personGridSection').people ?? []).map((person, i) =>
+      i === 2 ? { _key: person._key } : person,
+    ) as People,
   },
 }

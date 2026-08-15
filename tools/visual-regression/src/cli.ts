@@ -13,8 +13,14 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { parseArgs } from 'node:util'
 
-import { affectedStoryFiles, entryPath, storiesFor, type Affected } from './affected'
-import { captureAll, type Shot, type Viewport } from './capture'
+import {
+  affectedStoryFiles,
+  entryPath,
+  removedStories,
+  storiesFor,
+  type Affected,
+} from './affected'
+import { captureAll, captureKey, type Shot, type Viewport } from './capture'
 import { compare, type Comparison } from './compare'
 import { changedFiles, ensureBaseCheckout, git, repoRoot, resolveBase, shortSha } from './git'
 import { writeReport } from './report'
@@ -188,23 +194,34 @@ async function main(): Promise<void> {
   // Stories the baseline does not have are new; asking its Storybook for them
   // would only produce a "story not found" error display to screenshot.
   const baselineStories = stories.filter((entry) => baselineIds.has(entry.id))
-  // …and story files this branch deleted still deserve a "removed" card.
-  const deleted = new Set(
-    git(['diff', '--name-only', '--diff-filter=D', base.sha, '--'], root)
+  // …and a story the baseline had and this checkout does not still deserves a
+  // "removed" card. `changedFiles` reports every status but `D`, so the two
+  // together are what "the diff mentions this file" means.
+  const touched = new Set([
+    ...changedFiles(root, base.sha),
+    ...git(['diff', '--name-only', '--diff-filter=D', base.sha, '--'], root)
       .split('\n')
       .filter(Boolean),
-  )
-  const removedStories = baselineIndex.filter(
-    (entry) => deleted.has(entryPath(entry)) && wanted(entry),
-  )
+  ])
+  const gone = removedStories(
+    baselineIndex,
+    new Set(index.map((entry) => entry.id)),
+    touched,
+    affected,
+  ).filter(wanted)
 
-  const shotsDir = path.join(cache, 'shots', baseShort)
+  // Keyed by capture settings as well as by commit — see `captureKey`.
+  const shotsDir = path.join(
+    cache,
+    'shots',
+    `${baseShort}-${captureKey(viewports, Number(values.settle))}`,
+  )
   if (values.refresh) fs.rmSync(shotsDir, { recursive: true, force: true })
 
   const baselineShots = await withServer(baseBuild, (url) =>
     captureAll({
       baseUrl: url,
-      stories: [...baselineStories, ...removedStories],
+      stories: [...baselineStories, ...gone],
       viewports,
       dir: shotsDir,
       settleMs: Number(values.settle),

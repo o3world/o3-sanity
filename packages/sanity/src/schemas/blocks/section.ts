@@ -30,6 +30,8 @@ import { screenGridSectionKnobs, screenKnobs } from '../../knobs/screenGridSecti
  */
 export const heroSection = defineSectionBlock({
   name: 'heroSection',
+  description:
+    'The page’s opening claim: one to three headline lines, a subheading, and a single call to action. Reach for it once, at the top — it is where the page states the tension it intends to turn. Lines animate in separately, so write them as beats rather than a sentence that happens to wrap.',
   title: 'Hero',
   knobs: heroSectionKnobs,
   fields: [
@@ -62,6 +64,8 @@ export const heroSection = defineSectionBlock({
 /** `surface` is declared in `src/knobs/logoWallSection.ts` (ADR 0020). */
 export const logoWallSection = defineSectionBlock({
   name: 'logoWallSection',
+  description:
+    'Proof by association — a heading and standfirst over a centred row of client marks. Reach for it when the argument needs borrowed credibility rather than explanation, early on a page that is about to ask for trust. The frame draws six in a row, but the row takes whatever it is given.',
   title: 'Logo wall',
   knobs: logoWallSectionKnobs,
   fields: [
@@ -98,6 +102,8 @@ export const logoWallSection = defineSectionBlock({
 /** `surface` is declared in `src/knobs/caseShowcaseSection.ts` (ADR 0020). */
 export const caseShowcaseSection = defineSectionBlock({
   name: 'caseShowcaseSection',
+  description:
+    'Proof by work — sticky-stacking cards for referenced case studies, each projecting that document’s narrative headline and headline stat. Reach for it when a claim needs evidence that actually shipped. There is nothing to write here: the band renders only what the referenced case studies already say.',
   title: 'Case study showcase',
   knobs: caseShowcaseSectionKnobs,
   fields: [
@@ -122,6 +128,8 @@ export const caseShowcaseSection = defineSectionBlock({
  */
 export const railPanelsSection = defineSectionBlock({
   name: 'railPanelsSection',
+  description:
+    'An ordered set of parallel things — offers, platforms, ways of working — as a labelled rail or a row of cards. Reach for it when several options differ in kind rather than degree and each needs its own short pitch and a quieter “Best when…” line. Two panels minimum; a rail panel can carry a CTA and media, a card carries a mark and one line of body.',
   title: 'Rail + panels',
   knobs: railPanelsSectionKnobs,
   fields: [
@@ -199,6 +207,8 @@ export const railPanelsSection = defineSectionBlock({
  */
 export const quoteSection = defineSectionBlock({
   name: 'quoteSection',
+  description:
+    'One borrowed voice, given a whole band. Reach for it to let someone outside the studio make the claim the page would sound boastful making itself. Quotes are inline rather than documents, so the same words used twice are two separate edits.',
   title: 'Quote',
   knobs: quoteSectionKnobs,
   fields: [
@@ -221,6 +231,8 @@ export const quoteSection = defineSectionBlock({
  */
 export const insightsCarouselSection = defineSectionBlock({
   name: 'insightsCarouselSection',
+  description:
+    'Thinking, as a carousel of insights — hand-picked, or filled automatically with the most recent. Reach for it late on a page, where a reader who is now interested should be given somewhere further to go. Leave the list empty and it self-fills, optionally within one category, and stays current without anyone maintaining it.',
   title: 'Insights carousel',
   knobs: insightsCarouselSectionKnobs,
   fields: [
@@ -248,6 +260,8 @@ export const insightsCarouselSection = defineSectionBlock({
  */
 export const ctaSection = defineSectionBlock({
   name: 'ctaSection',
+  description:
+    'The ask: a heading, up to two lines of body, and one call to action. Reach for it to close a page, or to break a long one at the point a reader might reasonably act. One CTA — a band offering two next steps offers none.',
   title: 'CTA',
   knobs: ctaSectionKnobs,
   fields: [
@@ -267,6 +281,8 @@ export const ctaSection = defineSectionBlock({
  */
 export const disciplineGridSection = defineSectionBlock({
   name: 'disciplineGridSection',
+  description:
+    'Capability as a set — disciplines with a heading, body and mark, drawn as a grid or placed on the orbital diagram. Reach for it when the page needs to show the shape of what the studio does rather than argue a point. The orbital layout takes exactly four and derives each position from array order, the first being the apex.',
   title: 'Discipline grid',
   knobs: disciplineGridSectionKnobs,
   fields: [
@@ -315,6 +331,8 @@ export const disciplineGridSection = defineSectionBlock({
 /** `surface` is declared in `src/knobs/personGridSection.ts` (ADR 0020). */
 export const personGridSection = defineSectionBlock({
   name: 'personGridSection',
+  description:
+    'The people behind the work, as a grid. Reach for it when credibility rests on who is in the room. People are referenced rather than typed in, so a title fixed here is fixed everywhere that person appears.',
   title: 'Person grid',
   knobs: personGridSectionKnobs,
   fields: [
@@ -335,6 +353,8 @@ export const personGridSection = defineSectionBlock({
 /** `surface` is declared in `src/knobs/roleListSection.ts` (ADR 0020). */
 export const roleListSection = defineSectionBlock({
   name: 'roleListSection',
+  description:
+    'Open roles, as rows with their own Apply buttons. Reach for it on a page that is recruiting. Roles are authored inline and exist nowhere else, so there is no role page to link to and the list is only as current as someone keeps it.',
   title: 'Role list',
   knobs: roleListSectionKnobs,
   fields: [
@@ -391,6 +411,8 @@ export const roleListSection = defineSectionBlock({
  */
 export const inFlightSection = defineSectionBlock({
   name: 'inFlightSection',
+  description:
+    'What the studio is working on now — anonymous in-progress cards, or dated rows for appearances and ideas. Reach for it when the job is showing current momentum rather than finished results; nothing here has shipped, which is why a card names no client. An entry with a date draws the date marker, one without draws its mark.',
   title: 'In flight',
   knobs: inFlightSectionKnobs,
   fields: [
@@ -500,6 +522,8 @@ export const inFlightSection = defineSectionBlock({
  */
 export const formSection = defineSectionBlock({
   name: 'formSection',
+  description:
+    'The inquiry band: the contact form, with the words around it editable and the input set fixed in code. Reach for it on a page whose purpose is to start a conversation. The reasons list is the only part of the form’s shape an editor owns — and no submission handler exists yet, so the renderer disables the submit and says so on the page.',
   title: 'Form',
   knobs: formSectionKnobs,
   fields: [
@@ -551,6 +575,8 @@ export const formSection = defineSectionBlock({
  */
 export const layoutSection = defineSectionBlock({
   name: 'layoutSection',
+  description:
+    'The general-purpose prose band — one to three columns of base blocks under an optional eyebrow, heading and subheading. Reach for it whenever a page needs words, a figure, an embed or a stat group and no bespoke band is already doing that job. It is the block to try before concluding the design system is missing one.',
   title: 'Layout section',
   knobs: layoutSectionKnobs,
   fields: [
@@ -594,6 +620,8 @@ export const layoutSection = defineSectionBlock({
  */
 export const mediaSection = defineSectionBlock({
   name: 'mediaSection',
+  description:
+    'A figure given a whole band. Reach for it when an image or video carries the argument rather than decorating it. The plain variant is a contained or full-bleed figure; the capture variant is a tall dark stage that crops a long screenshot rather than fitting it.',
   title: 'Media section',
   knobs: mediaSectionKnobs,
   fields: [
@@ -629,6 +657,8 @@ export const mediaSection = defineSectionBlock({
  */
 export const screenGridSection = defineSectionBlock({
   name: 'screenGridSection',
+  description:
+    'Product screenshots on gradient plates, tiled two to a row. Reach for it to show an interface actually existing, usually in more than one state. Each screen picks its plate tone and whether it spans one column or both; plate height follows the span and is not something to set.',
   title: 'Screen grid',
   knobs: screenGridSectionKnobs,
   fields: [
@@ -675,6 +705,8 @@ export const screenGridSection = defineSectionBlock({
  */
 export const listingSection = defineSectionBlock({
   name: 'listingSection',
+  description:
+    'Pages of one type, listed as cards drawn from their card fieldset. It currently reaches no rendered route and lists a page type nothing uses, so a page being composed today should not reach for it.',
   title: 'Listing',
   knobs: listingSectionKnobs,
   fields: [

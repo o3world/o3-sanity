@@ -1,6 +1,7 @@
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import {
+  browserTokenStorage,
   disableDraftModeHref,
   readStudioToken,
   shouldShowEditorToolbar,
@@ -49,6 +50,39 @@ describe('readStudioToken', () => {
     }
     expect(readStudioToken(hostile, PROJECT)).toBeNull()
     expect(readStudioToken(null, PROJECT)).toBeNull()
+  })
+})
+
+describe('browserTokenStorage', () => {
+  afterEach(() => {
+    vi.unstubAllGlobals()
+  })
+
+  it('returns null where reading the property throws, rather than throwing', () => {
+    // Chrome with cookies and site data blocked, and any sandboxed iframe
+    // without `allow-same-origin`, throw on the *property access* — before
+    // `readStudioToken` is entered and outside every guard inside it. Passing
+    // `window.localStorage` as an argument expression is what took the whole
+    // client tree down for an ordinary anonymous visitor.
+    vi.stubGlobal('window', {
+      get localStorage(): TokenStorage {
+        throw new Error('Failed to read the localStorage property from Window: Access is denied.')
+      },
+    })
+    expect(() => browserTokenStorage()).not.toThrow()
+    expect(browserTokenStorage()).toBeNull()
+    expect(readStudioToken(browserTokenStorage(), PROJECT)).toBeNull()
+  })
+
+  it('returns null on the server, where there is no window at all', () => {
+    vi.stubGlobal('window', undefined)
+    expect(browserTokenStorage()).toBeNull()
+  })
+
+  it('hands back the real storage when the browser allows it', () => {
+    const entries = { [studioTokenStorageKey(PROJECT)]: JSON.stringify({ token: 'sk1' }) }
+    vi.stubGlobal('window', { localStorage: storage(entries) })
+    expect(readStudioToken(browserTokenStorage(), PROJECT)).toBe('sk1')
   })
 })
 

@@ -5,6 +5,7 @@
  * byte-identical PNGs. A pixel diff is only worth reading if the only thing
  * that can move a pixel is the code under test.
  */
+import { createHash } from 'node:crypto'
 import fs from 'node:fs'
 import path from 'node:path'
 
@@ -57,6 +58,24 @@ const FREEZE_SCRIPT = `
 
 export function shotFile(dir: string, storyId: string, viewport: string): string {
   return path.join(dir, `${storyId}--${viewport}.png`)
+}
+
+/**
+ * What a cached screenshot was taken *with*, short enough to sit in a path.
+ *
+ * `shotFile` names a PNG after the viewport's **name**, so a baseline captured
+ * at `mobile:390x844` and one at `mobile:414x896` are the same filename;
+ * `reuseExisting` accepts whichever exists on `fs.existsSync` alone, and every
+ * story then diffs against a screenshot of the wrong width and reports changed.
+ * Naming the cache directory with this closes that: different geometry is a
+ * different directory, not a stale hit. `settleMs` is in the key for the same
+ * reason — it changes the pixels.
+ */
+export function captureKey(viewports: Viewport[], settleMs: number): string {
+  const shape = viewports
+    .map((viewport) => `${viewport.name}:${viewport.width}x${viewport.height}`)
+    .join(',')
+  return createHash('sha1').update(`${shape}@${settleMs}`).digest('hex').slice(0, 8)
 }
 
 async function captureStory(

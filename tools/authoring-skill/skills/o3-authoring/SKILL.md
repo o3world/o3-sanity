@@ -9,6 +9,11 @@ Turn a vague idea into a publishable-quality Sanity **draft** in the O3 voice.
 This skill is a bootstrap: the knowledge lives in Sanity, not here. Fetch it
 before writing.
 
+This skill owns o3world.com site copy. If a plain-technical-English editing
+skill is also installed, it is for engineering prose — READMEs, commits, docs —
+and its register is not the brand's; the voice guide you fetch below wins on
+anything that reaches the site.
+
 The Sanity tools arrive via the Sanity MCP server (Claude Code, preconfigured
 by this plugin) or the Sanity connector (Claude Desktop) — the workflow is
 identical. If no Sanity tools are available, stop and say so: in Claude Code

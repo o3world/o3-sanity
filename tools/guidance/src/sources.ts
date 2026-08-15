@@ -26,7 +26,7 @@ const GUIDANCE_SOURCES = [
      * store carries the foundation too or the delegation dead-ends. */
     key: 'o3-brand',
     title: 'O3 brand foundation',
-    sourcePath: '.claude/skills/o3world-copy/brand.md',
+    sourcePath: 'docs/guidance/brand.md',
   },
   {
     /* Same delegation, same reason: the voice guide's revision pass sends the
@@ -34,7 +34,16 @@ const GUIDANCE_SOURCES = [
      * four O3 moves that sit close to a banned pattern. */
     key: 'o3-slop',
     title: 'O3 slop patterns',
-    sourcePath: '.claude/skills/o3world-copy/slop.md',
+    sourcePath: 'docs/guidance/slop.md',
+  },
+  {
+    /* The cross-block half of design-system knowledge (ADR 0025): what order
+     * bands go in, which surfaces they paint, which block carries which job.
+     * The other half — what one block is for — lives in that block's schema
+     * `description`, where `get_schema` already delivers it. */
+    key: 'o3-composition',
+    title: 'O3 page composition',
+    sourcePath: 'docs/guidance/composition.md',
   },
 ] as const
 
