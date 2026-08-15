@@ -35,7 +35,7 @@
         "Other"
       ],
       "consentLabel": "Sign up for our newsletter",
-      "button": { "_type": "button", "label": "Send message" }
+      "button": { "_type": "button", "label": "Send message", "icon": "none" }
     },
     {
       "_type": "layoutSection",
@@ -130,7 +130,8 @@
           "_key": "reach-cta",
           "label": "Email us",
           "href": "mailto:hello@o3world.com",
-          "contrast": "dark"
+          "contrast": "dark",
+          "icon": "none"
         }
       ]
     },

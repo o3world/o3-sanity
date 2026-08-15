@@ -57,7 +57,8 @@
           "_key": "intro-cta",
           "label": "Attend the 1682 conference on October 8",
           "href": "https://www.1682conference.com/",
-          "contrast": "dark"
+          "contrast": "dark",
+          "icon": "none"
         }
       ]
     },
