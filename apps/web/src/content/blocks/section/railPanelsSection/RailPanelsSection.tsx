@@ -2,7 +2,7 @@ import { SectionShell } from '@o3/ui'
 import { cn } from '@o3/ui/lib/utils'
 import { stegaClean } from '@sanity/client/stega'
 
-import { CtaLink } from '@/content/CtaLink'
+import { ButtonLink } from '@/content/ButtonLink'
 import { SanityImage } from '@/content/SanityImage'
 import { resolveSurface } from '@/content/blocks/surface'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
@@ -266,12 +266,12 @@ export function RailPanelsSection({
                   </p>
                 ) : null}
 
-                {panel.cta ? (
+                {panel.button ? (
                   // The ways-to-work rows have no button at 402 (`1814:1714`);
                   // the platforms rows put theirs at the far end of the row.
                   <div className={mode === 'number' ? 'hidden lg:block' : 'shrink-0'}>
-                    <CtaLink
-                      cta={panel.cta}
+                    <ButtonLink
+                      button={panel.button}
                       arrow
                       // `Button / Ghost` at 402 (`1814:1694` — an 18/24
                       // label and an arrow, no fill), the editor's own fill

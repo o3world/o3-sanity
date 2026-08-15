@@ -80,11 +80,15 @@ export const siteSettings = defineType({
       name: 'utilityNavItems',
       title: 'Utility nav',
       type: 'array',
-      of: [defineArrayMember({ type: 'cta' })],
+      of: [defineArrayMember({ type: 'button' })],
       description: 'The brand-property strip above the nav. Desktop only.',
     }),
-    defineField({ name: 'navItems', type: 'array', of: [defineArrayMember({ type: 'cta' })] }),
-    defineField({ name: 'primaryCta', type: 'cta', description: 'The nav’s "Let’s talk" button.' }),
+    defineField({ name: 'navItems', type: 'array', of: [defineArrayMember({ type: 'button' })] }),
+    defineField({
+      name: 'primaryButton',
+      type: 'button',
+      description: 'The nav’s "Let’s talk" button.',
+    }),
     defineField({ name: 'footerTagline', type: 'text', rows: 2 }),
     /**
      * The footer's labelled link columns, in order. The prototype's footer is
@@ -101,7 +105,11 @@ export const siteSettings = defineType({
           name: 'footerGroup',
           fields: [
             defineField({ name: 'label', type: 'string', validation: (rule) => rule.required() }),
-            defineField({ name: 'links', type: 'array', of: [defineArrayMember({ type: 'cta' })] }),
+            defineField({
+              name: 'links',
+              type: 'array',
+              of: [defineArrayMember({ type: 'button' })],
+            }),
           ],
           preview: { select: { title: 'label' } },
         }),
@@ -130,7 +138,7 @@ export const siteSettings = defineType({
     defineField({
       name: 'legalLinks',
       type: 'array',
-      of: [defineArrayMember({ type: 'cta' })],
+      of: [defineArrayMember({ type: 'button' })],
       description: 'Privacy, accessibility — the small print row beside the copyright.',
     }),
     defineField({

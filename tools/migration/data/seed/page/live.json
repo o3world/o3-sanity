@@ -86,8 +86,8 @@
           "date": "2026-10-15",
           "eyebrow": "Workshop · Online",
           "heading": "Strategy in the age of AI: what still can't be automated",
-          "cta": {
-            "_type": "cta",
+          "button": {
+            "_type": "button",
             "label": "Details and registration",
             "href": "/contact",
             "variant": "dark"
@@ -107,8 +107,8 @@
           "_key": "idea-ai-latency",
           "eyebrow": "Healthcare",
           "heading": "Where AI earns its keep — and where it just adds latency",
-          "cta": {
-            "_type": "cta",
+          "button": {
+            "_type": "button",
             "label": "Read the thinking",
             "href": "/insights",
             "variant": "dark"
@@ -130,8 +130,8 @@
       "surface": "ink",
       "heading": "Let’s get started on your next big thing.",
       "body": "We partner with businesses like yours to build experiences that matter. If you’re ready, we’re ready.",
-      "cta": {
-        "_type": "cta",
+      "button": {
+        "_type": "button",
         "label": "Get in touch",
         "href": "/contact",
         "variant": "light"

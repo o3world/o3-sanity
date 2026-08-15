@@ -42,11 +42,11 @@ export const Mobile: Story = {
 
 /**
  * The heading row is `space-between` aligned to **flex-end**, so the 48px
- * headline and the Size=Large button share a baseline. With no CTA the
+ * headline and the Size=Large button share a baseline. With no button the
  * headline should not recentre itself.
  */
-export const NoCta: Story = {
-  args: { ...seededSectionArgs('index', 'caseShowcaseSection'), cta: null },
+export const NoButton: Story = {
+  args: { ...seededSectionArgs('index', 'caseShowcaseSection'), button: null },
 }
 
 /** One card — the wash bands still have to hold their proportions. */

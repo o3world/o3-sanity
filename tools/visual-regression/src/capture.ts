@@ -86,7 +86,7 @@ async function captureStory(
     // the story has rendered, `sb-show-errordisplay` when it threw. Waiting on
     // `#storybook-root` having children instead would look right and hang for
     // thirty seconds on every deliberately empty story — `RichText/Empty`,
-    // `Cta/NoLabel`, `MediaSection/NoMedia` — whose whole point is to render
+    // `Button/NoLabel`, `MediaSection/NoMedia` — whose whole point is to render
     // nothing.
     const state = await page.waitForFunction(
       () => {

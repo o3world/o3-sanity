@@ -31,7 +31,7 @@ const meta = {
   },
   args: {
     items: SITE_SETTINGS?.navItems ?? [],
-    cta: SITE_SETTINGS?.primaryCta ?? null,
+    button: SITE_SETTINGS?.primaryButton ?? null,
   },
   globals: { backgrounds: { value: 'ink' }, viewport: { value: 'mobile' } },
 } satisfies Meta<typeof MobileNavMenu>
@@ -56,9 +56,9 @@ export const Flipped: Story = {
   ),
 }
 
-/** No CTA — the panel is links only, and must not leave the 16px gap. */
-export const WithoutCta: Story = {
-  args: { cta: null },
+/** No button — the panel is links only, and must not leave the 16px gap. */
+export const WithoutButton: Story = {
+  args: { button: null },
 }
 
 /** No nav items: the trigger still has to open onto something, not a void. */

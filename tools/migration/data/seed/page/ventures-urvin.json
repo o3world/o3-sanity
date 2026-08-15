@@ -170,8 +170,8 @@
       "_key": "cta",
       "surface": "ink",
       "heading": "Investing in exceptional people, products + experiences",
-      "cta": {
-        "_type": "cta",
+      "button": {
+        "_type": "button",
         "label": "See the ventures program",
         "href": "/ventures",
         "variant": "light"

@@ -1,17 +1,17 @@
 import { defineField } from 'sanity'
 import { ROUTABLE_TYPES } from '../../constants'
-import { ctaKnobs } from '../../knobs/cta'
+import { buttonKnobs } from '../../knobs/button'
 import { defineSharedObject } from './defineSharedObject'
 
 /**
- * A call to action, wherever one is placed.
+ * A button, wherever one is placed.
  *
- * `variant` is declared in `src/knobs/cta.ts` and its field is generated from
- * that declaration (ADR 0023), so the canvas offers the fill an editor can
+ * `variant` is declared in `src/knobs/button.ts` and its field is generated
+ * from that declaration (ADR 0023), so the canvas offers the fill an editor can
  * already see in the form. Everything else here is editorial.
  */
-export const cta = defineSharedObject({
-  knobs: ctaKnobs,
+export const button = defineSharedObject({
+  knobs: buttonKnobs,
   fields: [
     defineField({ name: 'label', type: 'string', validation: (rule) => rule.required() }),
     defineField({

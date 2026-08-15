@@ -2,7 +2,7 @@ import { defineField } from 'sanity'
 import { defineBaseBlock } from './defineBlocks'
 
 /**
- * Base-tier blocks. `figure`, `embed`, and `cta` are shared objects that
+ * Base-tier blocks. `figure`, `embed`, and `button` are shared objects that
  * double as base blocks — they're registered in BASE_BLOCKS and included in
  * layoutSection columns directly; only the types unique to the base tier are
  * defined here.

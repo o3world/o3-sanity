@@ -2,7 +2,7 @@ import { stegaClean } from '@sanity/client/stega'
 
 import { CollectionHero, MaskedLines, OrbitalSphere, Reveal } from '@o3/ui'
 
-import { CtaLink } from '@/content/CtaLink'
+import { ButtonLink } from '@/content/ButtonLink'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
 
 type HeroSectionProps = SectionProps<'heroSection'>
@@ -47,7 +47,7 @@ export function HeroSection({
   eyebrow,
   headlineLines,
   subheading,
-  cta,
+  button,
   decoration,
 }: HeroSectionProps) {
   const lines = headlineLines ?? []
@@ -141,7 +141,7 @@ export function HeroSection({
           </Reveal>
         ) : null}
 
-        {cta ? (
+        {button ? (
           // 33 below the standfirst at 1440, 39 below the headline at 402
           // (`1814:1622`'s column gap, where there is no standfirst at all).
           <Reveal delay={220} className="mt-10 lg:mt-8">
@@ -151,7 +151,7 @@ export function HeroSection({
              * field, so `surface` never reaches it and a `dark` fill would be
              * an ink button on ink whatever an editor picked.
              */}
-            <CtaLink cta={cta} arrow variant="light" />
+            <ButtonLink button={button} arrow variant="light" />
           </Reveal>
         ) : null}
       </div>

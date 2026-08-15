@@ -53,7 +53,7 @@
           }
         },
         {
-          "_type": "cta",
+          "_type": "button",
           "_key": "intro-cta",
           "label": "Attend the 1682 conference on October 8",
           "href": "https://www.1682conference.com/",
@@ -351,8 +351,8 @@
       "surface": "ink",
       "heading": "Let’s explore your future in AI and innovation",
       "body": "Discover how the insights and connections from 1682 can transform your business. Reach out to learn more.",
-      "cta": {
-        "_type": "cta",
+      "button": {
+        "_type": "button",
         "label": "Get in touch",
         "href": "/contact",
         "variant": "light"

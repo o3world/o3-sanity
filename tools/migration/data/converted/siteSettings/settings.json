@@ -4,19 +4,19 @@
   "title": "O3",
   "utilityNavItems": [
     {
-      "_type": "cta",
+      "_type": "button",
       "_key": "utility-0",
       "label": "O3 World",
       "href": "/"
     },
     {
-      "_type": "cta",
+      "_type": "button",
       "_key": "utility-1",
       "label": "1682 Conference",
       "href": "/1682-conference-ai-innovation"
     },
     {
-      "_type": "cta",
+      "_type": "button",
       "_key": "utility-2",
       "label": "O3XO",
       "href": "https://www.o3xo.ai/"
@@ -24,38 +24,38 @@
   ],
   "navItems": [
     {
-      "_type": "cta",
+      "_type": "button",
       "_key": "nav-0",
       "label": "Work",
       "href": "/work"
     },
     {
-      "_type": "cta",
+      "_type": "button",
       "_key": "nav-1",
       "label": "Live",
       "href": "/live"
     },
     {
-      "_type": "cta",
+      "_type": "button",
       "_key": "nav-2",
       "label": "Insights",
       "href": "/insights"
     },
     {
-      "_type": "cta",
+      "_type": "button",
       "_key": "nav-3",
       "label": "Solutions",
       "href": "/solutions"
     },
     {
-      "_type": "cta",
+      "_type": "button",
       "_key": "nav-4",
       "label": "About",
       "href": "/about"
     }
   ],
-  "primaryCta": {
-    "_type": "cta",
+  "primaryButton": {
+    "_type": "button",
     "label": "Let’s talk",
     "href": "/contact",
     "variant": "light"
@@ -68,35 +68,35 @@
       "label": "Company",
       "links": [
         {
-          "_type": "cta",
+          "_type": "button",
           "_key": "g0-0",
           "label": "Work",
           "href": "/work",
           "variant": "light"
         },
         {
-          "_type": "cta",
+          "_type": "button",
           "_key": "g0-1",
           "label": "About",
           "href": "/about",
           "variant": "light"
         },
         {
-          "_type": "cta",
+          "_type": "button",
           "_key": "g0-2",
           "label": "Solutions",
           "href": "/solutions",
           "variant": "light"
         },
         {
-          "_type": "cta",
+          "_type": "button",
           "_key": "g0-3",
           "label": "Careers",
           "href": "/about#careers",
           "variant": "light"
         },
         {
-          "_type": "cta",
+          "_type": "button",
           "_key": "g0-4",
           "label": "Blog",
           "href": "/insights",
@@ -110,14 +110,14 @@
       "label": "Everything else",
       "links": [
         {
-          "_type": "cta",
+          "_type": "button",
           "_key": "g1-0",
           "label": "1682 conference",
           "href": "/1682-conference-ai-innovation",
           "variant": "light"
         },
         {
-          "_type": "cta",
+          "_type": "button",
           "_key": "g1-1",
           "label": "O3XO",
           "href": "https://www.o3xo.ai/",
@@ -143,14 +143,14 @@
   ],
   "legalLinks": [
     {
-      "_type": "cta",
+      "_type": "button",
       "_key": "legal-0",
       "label": "Privacy policy",
       "href": "/privacy-policy",
       "variant": "light"
     },
     {
-      "_type": "cta",
+      "_type": "button",
       "_key": "legal-1",
       "label": "Accessibility statement",
       "href": "/accessibility-statement",

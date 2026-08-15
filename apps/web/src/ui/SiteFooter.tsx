@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { BrandMark } from '@o3/ui'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
-import { resolveCtaHref } from '@/content/CtaLink'
+import { resolveButtonHref } from '@/content/ButtonLink'
 
 interface SiteFooterProps {
   settings: SITE_SETTINGS_QUERY_RESULT
@@ -80,7 +80,7 @@ export function SiteFooter({ settings }: SiteFooterProps) {
                 <FooterColumn label={leadGroup.label}>
                   {(leadGroup.links ?? []).map((link) => (
                     <li key={link._key}>
-                      <FooterLink href={resolveCtaHref(link)}>{link.label}</FooterLink>
+                      <FooterLink href={resolveButtonHref(link)}>{link.label}</FooterLink>
                     </li>
                   ))}
                 </FooterColumn>
@@ -108,7 +108,7 @@ export function SiteFooter({ settings }: SiteFooterProps) {
                 <FooterColumn key={group._key} label={group.label}>
                   {(group.links ?? []).map((link) => (
                     <li key={link._key}>
-                      <FooterLink href={resolveCtaHref(link)}>{link.label}</FooterLink>
+                      <FooterLink href={resolveButtonHref(link)}>{link.label}</FooterLink>
                     </li>
                   ))}
                 </FooterColumn>
@@ -126,7 +126,7 @@ export function SiteFooter({ settings }: SiteFooterProps) {
           <ul className="flex flex-wrap gap-6">
             {legalLinks.map((link) => (
               <li key={link._key}>
-                <Link href={resolveCtaHref(link)} className="hover:text-white">
+                <Link href={resolveButtonHref(link)} className="hover:text-white">
                   {link.label}
                 </Link>
               </li>

@@ -5,7 +5,7 @@ import { ArrowIcon, DisplayHeading, Eyebrow, SectionShell } from '@o3/ui'
 
 import { Mark, markProps } from '@/content/blocks/base/mark/Mark'
 import { SanityImage } from '@/content/SanityImage'
-import { resolveCtaHref } from '@/content/CtaLink'
+import { resolveButtonHref } from '@/content/ButtonLink'
 import { resolveSurface } from '@/content/blocks/surface'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
 import { fieldAttr } from '@/sanity/dataAttribute'
@@ -176,12 +176,12 @@ function EntryCard({ entry }: { entry: Entry }) {
 }
 
 function EntryRow({ entry, onInk }: { entry: Entry; onInk: boolean }) {
-  const href = entry.cta ? resolveCtaHref(entry.cta) : null
+  const href = entry.button ? resolveButtonHref(entry.button) : null
   // `aria-label` is the one place a stega'd string is NOT invisible: the
   // encoding rides in the attribute value, so a screen reader announces the
   // whole payload. Every other label in this block is rendered text, where
   // the characters are zero-width.
-  const label = stegaClean(entry.cta?.label) ?? null
+  const label = stegaClean(entry.button?.label) ?? null
 
   return (
     <li className="relative flex items-center justify-between gap-8 border-b border-[rgba(0,0,0,0.55)] py-6 lg:py-12 lg:first:pt-0">

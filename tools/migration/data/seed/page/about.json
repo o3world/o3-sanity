@@ -385,8 +385,8 @@
           "_key": "role-strategist",
           "eyebrow": "Remote · Philadelphia",
           "heading": "Senior Product Strategist",
-          "cta": {
-            "_type": "cta",
+          "button": {
+            "_type": "button",
             "label": "Apply",
             "href": "mailto:careers@o3world.com",
             "variant": "dark"
@@ -405,8 +405,8 @@
           "_key": "role-designer",
           "eyebrow": "Remote · Philadelphia",
           "heading": "Senior Product Designer",
-          "cta": {
-            "_type": "cta",
+          "button": {
+            "_type": "button",
             "label": "Apply",
             "href": "mailto:careers@o3world.com",
             "variant": "dark"
@@ -425,8 +425,8 @@
           "_key": "role-engineer",
           "eyebrow": "Remote · Philadelphia",
           "heading": "Senior Full-Stack Engineer",
-          "cta": {
-            "_type": "cta",
+          "button": {
+            "_type": "button",
             "label": "Apply",
             "href": "mailto:careers@o3world.com",
             "variant": "dark"
@@ -445,8 +445,8 @@
           "_key": "role-ai",
           "eyebrow": "Remote · Philadelphia",
           "heading": "AI Solutions Architect",
-          "cta": {
-            "_type": "cta",
+          "button": {
+            "_type": "button",
             "label": "Apply",
             "href": "mailto:careers@o3world.com",
             "variant": "dark"
@@ -468,8 +468,8 @@
       "surface": "ink",
       "heading": "Let’s get started on your next big thing.",
       "body": "We partner with businesses like yours to build experiences that matter. If you’re ready, we’re ready.",
-      "cta": {
-        "_type": "cta",
+      "button": {
+        "_type": "button",
         "label": "Get in touch",
         "href": "/contact",
         "variant": "light"

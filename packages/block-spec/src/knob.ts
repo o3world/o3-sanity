@@ -252,7 +252,7 @@ export function defineItemKnobs({
  *
  * **Keyed on the type name, unlike an array member** (ADR 0021). Sanity
  * registers a shared object globally, so two types cannot silently agree on
- * `cta` the way two blocks can each declare a `screen` — the silent collision
+ * `button` the way two blocks can each declare a `screen` — the silent collision
  * that forced host-routing for members has no path here.
  *
  * **Surface is stamped, not computed**, for the reason `defineItemKnobs`

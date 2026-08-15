@@ -47,11 +47,11 @@ export const Mobile: Story = {
 }
 
 /**
- * Heading and strip with no CTA — the band must not leave the 128px gap where
+ * Heading and strip with no button — the band must not leave the 128px gap where
  * the button was.
  */
-export const NoCta: Story = {
-  args: { ...seededSectionArgs('index', 'logoWallSection'), cta: null },
+export const NoButton: Story = {
+  args: { ...seededSectionArgs('index', 'logoWallSection'), button: null },
   globals: { backgrounds: { value: 'bone' } },
 }
 

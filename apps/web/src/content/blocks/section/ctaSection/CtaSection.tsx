@@ -1,7 +1,7 @@
 import { OrbitalSphere } from '@o3/ui'
 import { stegaClean } from '@sanity/client/stega'
 
-import { CtaLink } from '@/content/CtaLink'
+import { ButtonLink } from '@/content/ButtonLink'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
 
 type CtaSectionProps = SectionProps<'ctaSection'>
@@ -16,7 +16,7 @@ type CtaSectionProps = SectionProps<'ctaSection'>
  *     heading 64px (--text-cta, the 2026-08 shared CTA component's step) at
  *     92% white, centred
  *     body    24px at 60% white in a 446px measure
- *   cta       Button / Solid Size=Base, WHITE fill
+ *   button    Button / Solid Size=Base, WHITE fill
  *   bleed     an 87px strip of --gradient-ink-fade along the foot (1928:6596)
  * ```
  *
@@ -27,7 +27,7 @@ type CtaSectionProps = SectionProps<'ctaSection'>
  * The sphere runs at `soft` and centred, rather than hung below the foot — the
  * CTA band shows the middle of it where the hero shows only the cap.
  */
-export function CtaSection({ heading, body, cta, decoration }: CtaSectionProps) {
+export function CtaSection({ heading, body, button, decoration }: CtaSectionProps) {
   const showOrbs = stegaClean(decoration) !== 'none'
 
   return (
@@ -76,11 +76,11 @@ export function CtaSection({ heading, body, cta, decoration }: CtaSectionProps) 
         {body ? (
           <p className="text-lead text-on-ink-subtle max-w-[446px] text-balance">{body}</p>
         ) : null}
-        {cta ? (
+        {button ? (
           <div className="mt-6">
             {/* Same reasoning as the hero: this band always paints its own ink
                 field, so the fill is structural rather than editorial. */}
-            <CtaLink cta={cta} arrow variant="light" />
+            <ButtonLink button={button} arrow variant="light" />
           </div>
         ) : null}
       </div>

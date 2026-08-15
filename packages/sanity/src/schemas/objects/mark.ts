@@ -21,7 +21,7 @@ import { defineSharedObject } from './defineSharedObject'
  * original.
  *
  * **A shared object that doubles as a base block**, the shape `figure`,
- * `embed` and `cta` already have: authors pick it from a `layoutSection`
+ * `embed` and `button` already have: authors pick it from a `layoutSection`
  * column (titled "Orb" there — a mark on its own in a column is the animation,
  * not a bullet), and the same object is the mark field on four section blocks.
  * One definition, so a mark is configured identically wherever it is placed —

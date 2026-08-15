@@ -114,7 +114,7 @@ const config: StorybookConfig = {
     // import is the compiler's standard preamble and any dependency can grow
     // one on a minor bump.
     //
-    // This is the wall `apps/web` has been coding around: `CtaLink` and
+    // This is the wall `apps/web` has been coding around: `ButtonLink` and
     // `InquiryForm` both carry a "never the next-sanity barrel, it drags in
     // @portabletext/react" comment with a lint rule behind it. Those stay
     // worth keeping (the barrel drags in far more than this), but the reason

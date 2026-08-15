@@ -23,12 +23,12 @@ Resolves wayfinder ticket #6. Inputs: the content model (ticket #5, `CONTEXT.md`
 - **`client`** — name, logo.
 - **`category`** — title, slug.
 - **`industry`** — title, slug. (Deliberately minimal.)
-- **`siteSettings`** (singleton) — nav items (cta[]), footer content, social links, default seo, display labels (e.g. Insights collection shown as "Insights").
+- **`siteSettings`** (singleton) — nav items (button[]), footer content, social links, default seo, display labels (e.g. Insights collection shown as "Insights").
 
 ## Shared objects
 
 - **`seo`** — title, description, ogImage, noIndex. (Yoast fields map here in migration.)
-- **`cta`** — label, target (internal reference **or** external URL), variant (`brand | inverse | ghost`).
+- **`button`** — label, target (internal reference **or** external URL), variant (`brand | inverse | ghost`).
 - **`figure`** — image, alt (req), caption (optional).
 - **`stat`** — value (string — supports "89% → 114%"), label.
 - **`chapter`** — kicker, title, body (Portable Text), `details[]` ({label (req), body} — the frame's hairline term/description rows, `2274:4009`). A member of `caseStudy.story`, never a document.
@@ -43,7 +43,7 @@ Standard marks + closed inline-object set: **`figure`, `embed`, `pullQuote`**. A
 
 ### Section tier — bespoke (from the `prototype/` design)
 
-`heroSection`, `logoWallSection` (statement + client refs or manual logos; layout `grid | marquee`), `caseShowcaseSection` (caseStudy refs; projects narrativeHeadline + first stat), `railPanelsSection` (heading, intro, `layout` (`rail | cards`), `rail` (`label | number`), panels {railLabel, heading, logo, body, note, cta, media, mark} — serves Home's "platforms" and "how we work" bands as `rail`, and the Solutions frame's engagement cards (`1925:6108`) as `cards`), `quoteSection` (inline quote + attribution — no testimonial type; `decoration` is `orbs | molecule | none`, where `molecule` is the 2026-08 case-study band `2250:1525`), `insightsCarouselSection` (curated refs or latest-N by category), `ctaSection`.
+`heroSection`, `logoWallSection` (statement + client refs or manual logos; layout `grid | marquee`), `caseShowcaseSection` (caseStudy refs; projects narrativeHeadline + first stat), `railPanelsSection` (heading, intro, `layout` (`rail | cards`), `rail` (`label | number`), panels {railLabel, heading, logo, body, note, button, media, mark} — serves Home's "platforms" and "how we work" bands as `rail`, and the Solutions frame's engagement cards (`1925:6108`) as `cards`), `quoteSection` (inline quote + attribution — no testimonial type; `decoration` is `orbs | molecule | none`, where `molecule` is the 2026-08 case-study band `2250:1525`), `insightsCarouselSection` (curated refs or latest-N by category), `ctaSection`.
 
 ### Section tier — from the canonical Figma frames (#56)
 
@@ -51,8 +51,8 @@ Surfaced by #46/#47 and built against the About (`1924:5344`) and Solutions (`19
 
 - **`disciplineGridSection`** — `heading`, `layout` (`grid | orbital`), `disciplines[]` ({heading, body, mark}). A row's `mark` draws the orb or the frame's disc, on the `grid` layout only — the orbital diagram places its own nodes. One block, not two: About draws the four disciplines as a 2×2 grid (`1925:5915`) and Solutions places the same four on a dotted tetrahedron (`1928:6524`). Slot position on the orbital layout derives from array order — apex first, then the base ring — and that layout takes exactly four.
 - **`personGridSection`** — eyebrow, heading, `people[]` → person. The band the 12 migrated `person` documents existed for (`1927:6435`). People are **referenced**, never inlined.
-- **`roleListSection`** — eyebrow, heading, `roles[]` ({heading, eyebrow, cta, mark}). The Careers band (`1925:6061`), which the frame settles as a **section of About rather than its own route**. Roles are **inline objects, not a document type**: a `role` document would buy only a URL to link to, and nothing on the frame links to one — promote it when an /apply route, a cross-reference or an ATS feed needs an id.
-- **`inFlightSection`** — heading, subheading, `layout` (`cards | rows`), `entries[]` ({heading, eyebrow, media, date, cta, mark}). The three middle bands of the Live frame (`1644:1889` — #50): the studio cards (`1751:1994`) and the appearances/ideas rows (`1710:1800`, `1732:1409`) are the same entry in two compositions, the call `disciplineGridSection.layout` already makes. An entry with a `date` draws the red date column; one without draws its `mark` — derived, not a third enum. Entries are **inline objects**: the cards are deliberately anonymous (no caseStudy refs — ADR 0007), and an `event` document is justified only when an appearance needs its own URL.
+- **`roleListSection`** — eyebrow, heading, `roles[]` ({heading, eyebrow, button, mark}). The Careers band (`1925:6061`), which the frame settles as a **section of About rather than its own route**. Roles are **inline objects, not a document type**: a `role` document would buy only a URL to link to, and nothing on the frame links to one — promote it when an /apply route, a cross-reference or an ATS feed needs an id.
+- **`inFlightSection`** — heading, subheading, `layout` (`cards | rows`), `entries[]` ({heading, eyebrow, media, date, button, mark}). The three middle bands of the Live frame (`1644:1889` — #50): the studio cards (`1751:1994`) and the appearances/ideas rows (`1710:1800`, `1732:1409`) are the same entry in two compositions, the call `disciplineGridSection.layout` already makes. An entry with a `date` draws the red date column; one without draws its `mark` — derived, not a third enum. Entries are **inline objects**: the cards are deliberately anonymous (no caseStudy refs — ADR 0007), and an `event` document is justified only when an appearance needs its own URL.
 
 ### Section tier — generic
 
@@ -67,8 +67,8 @@ No FAQ/accordion/tabs until a designed page needs them.
 
 ### Base tier
 
-`richText`, `figure`, `video`, `cta`, `statGroup`, `mark`.
+`richText`, `figure`, `video`, `button`, `statGroup`, `mark`.
 
-`mark` is the dotted circle an item draws beside its copy — `kind` (`orb | disc`), plus the orb's knobs: `state` (nine tuned animations from `thinking-orbs`, MIT, orbs.jakubantalik.com), `size` (64 | 20 — two tuned drawings rather than one scaled, and beside copy it sets texture, not diameter), `speed`, `paused`. **The orb is the default**, including when the field is absent; `disc` is the deliberate step back to the frame's halftone. Like `figure`, `embed` and `cta` it is a **shared object that doubles as a base block** (titled "Orb" in a `layoutSection` column), and it is the `mark` field on `disciplineGridSection`, `railPanelsSection`, `roleListSection` and `inFlightSection`. One renderer draws it everywhere: `blocks/base/mark/Mark.tsx`.
+`mark` is the dotted circle an item draws beside its copy — `kind` (`orb | disc`), plus the orb's knobs: `state` (nine tuned animations from `thinking-orbs`, MIT, orbs.jakubantalik.com), `size` (64 | 20 — two tuned drawings rather than one scaled, and beside copy it sets texture, not diameter), `speed`, `paused`. **The orb is the default**, including when the field is absent; `disc` is the deliberate step back to the frame's halftone. Like `figure`, `embed` and `button` it is a **shared object that doubles as a base block** (titled "Orb" in a `layoutSection` column), and it is the `mark` field on `disciplineGridSection`, `railPanelsSection`, `roleListSection` and `inFlightSection`. One renderer draws it everywhere: `blocks/base/mark/Mark.tsx`.
 
 All section blocks render inside `SectionShell` with `surface: white | bone | ink` (the design's three-surface system) — surface is a section-block field, not per-page.

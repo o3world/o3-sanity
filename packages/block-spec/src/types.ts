@@ -230,11 +230,11 @@ export type ItemKnobs = {
  * The collision argument that forced host-routing for `ItemKnobs` does not
  * apply here, and the distinction is principled rather than convenient: Sanity
  * registers a shared object's name globally, so two types cannot silently agree
- * on `cta` the way two blocks can each declare a `screen`.
+ * on `button` the way two blocks can each declare a `screen`.
  */
 export type ObjectKnobs = {
   /**
-   * The shared object's registered Sanity type name — `mark`, `cta`. **Global,
+   * The shared object's registered Sanity type name — `mark`, `button`. **Global,
    * never local**, which is what makes a `_type`-keyed registry safe here where
    * ADR 0021 refused one for array members.
    */

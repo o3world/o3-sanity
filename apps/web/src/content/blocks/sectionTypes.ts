@@ -5,7 +5,7 @@ import type { SanityLoc } from '@/sanity/dataAttribute'
 /**
  * The canonical pin points for the two block-tier unions, sourced from the
  * generated result of PAGE_QUERY's section projection (so renderer prop
- * types include the query-time expansions: dereferenced cta targets, card
+ * types include the query-time expansions: dereferenced button targets, card
  * projections, listing subqueries).
  *
  * `caseStudy.story` shares the same projection fragment
@@ -44,5 +44,5 @@ export type SectionProps<K extends PageSection['_type']> = Omit<
 /** The props a base block component receives. */
 export type BaseProps<K extends LayoutItem['_type']> = Omit<BaseBlockData<K>, '_key' | '_type'>
 
-/** The dereferenced cta shape every block-level CTA field shares. */
-export type CtaData = NonNullable<SectionProps<'heroSection'>['cta']>
+/** The dereferenced button shape every block-level button field shares. */
+export type ButtonData = NonNullable<SectionProps<'heroSection'>['button']>

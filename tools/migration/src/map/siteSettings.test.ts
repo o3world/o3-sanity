@@ -170,10 +170,10 @@ describe('mapSiteSettings', () => {
     expect(doc.footerGroups[1]?.links.map((l) => l.label)).toContain('1682 conference')
   })
 
-  it('moves Contact out of the nav and into the primary CTA', () => {
+  it('moves Contact out of the nav and into the primary button', () => {
     const doc = expectOk(mapSiteSettings(chrome(), SITE))
     expect(doc.navItems.map((i) => i.label)).not.toContain('Contact')
-    expect(doc.primaryCta).toMatchObject({ label: 'Let’s talk', href: '/contact' })
+    expect(doc.primaryButton).toMatchObject({ label: 'Let’s talk', href: '/contact' })
   })
 
   it('builds the footer columns the Figma frame reads, in order', () => {

@@ -39,7 +39,13 @@ const fixture: SectionProps<'heroSection'> = {
   headlineLines: ['You see the problem in front of you.', 'We’re working on the one behind it.'],
   subheading:
     'Strategy, design, engineering and AI under one roof. The same senior team that finds the move is the team that builds it.',
-  cta: { _type: 'cta', label: 'View our work', variant: 'light', href: '/work', target: null },
+  button: {
+    _type: 'button',
+    label: 'View our work',
+    variant: 'light',
+    href: '/work',
+    target: null,
+  },
   decoration: 'orbs',
   surface: 'ink',
 }
@@ -70,15 +76,15 @@ export const Matrix = kit.Matrix as Story
 
 /** A single headline line gets no set-back — the treatment needs two or more. */
 export const SingleLine: Story = {
-  args: { ...fixture, headlineLines: ['One line only'], subheading: undefined, cta: null },
+  args: { ...fixture, headlineLines: ['One line only'], subheading: undefined, button: null },
 }
 
-/** Headline alone: no subheading, no cta. The layout must not collapse. */
+/** Headline alone: no subheading, no button. The layout must not collapse. */
 export const HeadlineOnly: Story = {
   args: {
     ...fixture,
     headlineLines: ['Just the headline', 'and nothing else'],
     subheading: undefined,
-    cta: null,
+    button: null,
   },
 }

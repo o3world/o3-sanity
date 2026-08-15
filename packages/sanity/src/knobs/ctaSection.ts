@@ -20,7 +20,7 @@ export const ctaSectionKnobs = defineBlockKnobs({
   tier: 'section',
   knobs: [decorationKnob(['orbs', 'none']), surfaceKnob({ initialValue: 'ink' })],
   /**
-   * The `cta` carries a label and no destination, which `CtaLink` resolves to
+   * The `button` carries a label and no destination, which `ButtonLink` resolves to
    * `/`. `variant` is left alone deliberately: it is the last design option in
    * the repo still on a hand-written field, and giving it a value here would be
    * this ticket quietly answering the shared-object question ADR 0021 left open
@@ -30,6 +30,6 @@ export const ctaSectionKnobs = defineBlockKnobs({
     _type: 'ctaSection',
     heading: 'A heading for this call to action.',
     body: 'Add the line that sits under it.',
-    cta: { _type: 'cta', label: 'Add a link' },
+    button: { _type: 'button', label: 'Add a link' },
   } satisfies CtaSection,
 })

@@ -12,8 +12,8 @@
  * answers to, and adding one costs the guard nothing.
  */
 export { bodyText } from './bodyText'
+export { button } from './button'
 export { chapter } from './chapter'
-export { cta } from './cta'
 export { embed } from './embed'
 export { figure } from './figure'
 export { mark } from './mark'

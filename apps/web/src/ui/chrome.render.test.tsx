@@ -79,8 +79,8 @@ describe('site nav', () => {
     expect(navHtml).toContain('href="/work"')
   })
 
-  it('renders the primary CTA', () => {
-    expect(navHtml).toContain(settings.primaryCta?.label as string)
+  it('renders the primary button', () => {
+    expect(navHtml).toContain(settings.primaryButton?.label as string)
   })
 })
 
@@ -119,14 +119,14 @@ describe('the nav bar’s pinned, dark-ink default', () => {
     expect(navHtml).toContain('duration-(--duration-ink)')
   })
 
-  it('holds the CTA brand red through the flip — the one thing that stays put', () => {
+  it('holds the button brand red through the flip — the one thing that stays put', () => {
     // Nick's reference of both states (2026-08-02) draws it red on the light
     // pill and the dark one alike, as the prototype's `.o3btn` did. The red is
     // forced by the chrome, not a `Button` variant an editor could reach.
     // `rounded-btn` is `Button`'s own base class, which is what separates the
-    // two CTAs from the hamburger's plain `<button>` trigger.
+    // two nav buttons from the hamburger's plain `<button>` trigger.
     const buttons = (navHtml.match(/<button[^>]*>/g) ?? []).filter((b) => b.includes('rounded-btn'))
-    expect(buttons.length, 'the nav CTA was not found at all').toBe(2) // 1440 + 402
+    expect(buttons.length, 'the nav button was not found at all').toBe(2) // 1440 + 402
     for (const button of buttons) {
       expect(button).toContain('bg-brand')
       expect(button).toContain('hover:bg-brand/85')
@@ -327,12 +327,12 @@ describe('every chrome destination is a route the build-out lands (#48)', () => 
   const chromeHrefs = [
     ...(settings.utilityNavItems ?? []),
     ...(settings.navItems ?? []),
-    settings.primaryCta,
+    settings.primaryButton,
     ...(settings.footerGroups ?? []).flatMap((g) => g.links ?? []),
     ...(settings.legalLinks ?? []),
   ]
-    .filter((cta) => cta != null)
-    .map((cta) => cta.href)
+    .filter((button) => button != null)
+    .map((button) => button.href)
     .filter((href): href is string => typeof href === 'string')
     .filter((href) => href.startsWith('/'))
 

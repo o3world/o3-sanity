@@ -61,9 +61,11 @@ One word per concept, everywhere. These rules bind schema names, field names, GR
 | Document      | camelCase singular noun              | `insight`, `caseStudy`, `siteSettings`           |
 | Section block | camelCase, **always** ends `Section` | `heroSection`, `layoutSection`, `listingSection` |
 | Base block    | camelCase, **no** suffix             | `richText`, `statGroup`                          |
-| Shared object | camelCase, no suffix                 | `cta`, `figure`, `stat`, `chapter`, `seo`        |
+| Shared object | camelCase, no suffix                 | `button`, `figure`, `stat`, `chapter`, `seo`     |
 
-The `Section` suffix is the tier marker: if a name ends in `Section` it is a full-width page section rendered inside `SectionShell` and belongs in `SECTION_BLOCKS`; anything else that renders is a base block or a shared object, and lives inside a `layoutSection` column. A block name must never end in `Block` — the suffix carries no information (every block is a block) and the tier is what an agent actually needs to know. `figure`, `embed`, and `cta` are shared objects that double as base blocks; that dual use is why the base tier takes no suffix.
+The `Section` suffix is the tier marker: if a name ends in `Section` it is a full-width page section rendered inside `SectionShell` and belongs in `SECTION_BLOCKS`; anything else that renders is a base block or a shared object, and lives inside a `layoutSection` column. A block name must never end in `Block` — the suffix carries no information (every block is a block) and the tier is what an agent actually needs to know. `figure`, `embed`, and `button` are shared objects that double as base blocks; that dual use is why the base tier takes no suffix.
+
+**`ctaSection` is the one name that keeps the older word, deliberately.** The band genuinely is a call to action — it is what the design file's own CTA component set draws — and it is not a button, so the two words name two things again rather than one word covering both. Nothing else keeps it: the component an editor places inside the band, and every field that reaches it, is `button`.
 
 The enforcement point is `registry.ts`, not the suffix: both factories reject a name missing from `SECTION_BLOCKS` / `BASE_BLOCKS`, and the web app's `BLOCK_REGISTRY` is compile-checked against the types generated from those lists. The suffix rule itself is upheld by whoever curates the registry — neither factory inspects name shape (see Known drift).
 
@@ -72,7 +74,7 @@ The enforcement point is `registry.ts`, not the suffix: both factories reject a 
 The component-system ontology, and it is deliberately Figma's — the design file is the source of record, so this side of the seam keeps the pair the file already uses, with no translation the way `axis` → knob translates ([ADR 0023](docs/adr/0023-an-instance-is-configured-by-its-component.md)).
 
 - **Component** — the definition: a schema type, its renderer, and its knob spec, declared once. Section blocks, base blocks, and shared objects are all components; the tier names stay, because a tier answers where a component may be placed, which "component" alone does not.
-- **Instance** — one placed occurrence of a component in a document. `heroSection.cta`'s value is an instance; each member of `layoutSection.items` is an instance. **An instance is configured by its component** — the same spec wherever it sits, never by its placement (ADR 0023; Figma, Web Components, and Storybook all put properties on the definition, and so do we). A field whose type is a component is an **instance field**; the empty position needs no noun of its own, because `field` already covers it.
+- **Instance** — one placed occurrence of a component in a document. `heroSection.button`'s value is an instance; each member of `layoutSection.items` is an instance. **An instance is configured by its component** — the same spec wherever it sits, never by its placement (ADR 0023; Figma, Web Components, and Storybook all put properties on the definition, and so do we). A field whose type is a component is an **instance field**; the empty position needs no noun of its own, because `field` already covers it.
   - **Not an item.** An item — a panel, a screen — is an inline object with no identity outside its host's array: no registered type, no spec of its own, configured through its host ([ADR 0021](docs/adr/0021-an-array-member-is-its-own-knob-root.md)). The test is whether the thing has a spec of its own or only relative to a host.
 - **Slot** — a rendered area of a component that its parent fills. The Web Components / Vue sense, and only that sense; `CollectionHero`'s decoration slot is the model use.
   - **`asChild` is not a slot.** Radix's helper _replaces_ the rendered element rather than filling an area — that pattern is called `asChild`, its import is spelled `SlotPrimitive`, and "slot" is never said of it. MUI's `slots`/`slotProps` (replaceable internals) is the same trap from the other direction.
@@ -97,16 +99,16 @@ What earns a place on the bar: **`surface`, and the one axis that changes what t
 
 Every knob belongs to a **knob surface** — the chrome that delivers it, decided by the container it configures, not by where it is declared:
 
-| Surface    | Configures                              | Example                            |
-| ---------- | --------------------------------------- | ---------------------------------- |
-| `band`     | the full-width strip the block occupies | `surface`                          |
-| `block`    | the block itself                        | `variant`, `layout`, `decoration`  |
-| `item`     | one member of the block's array         | a screen's `tone`                  |
-| `instance` | one placed occurrence of a component    | a mark's `kind`, a cta's `variant` |
+| Surface    | Configures                              | Example                               |
+| ---------- | --------------------------------------- | ------------------------------------- |
+| `band`     | the full-width strip the block occupies | `surface`                             |
+| `block`    | the block itself                        | `variant`, `layout`, `decoration`     |
+| `item`     | one member of the block's array         | a screen's `tone`                     |
+| `instance` | one placed occurrence of a component    | a mark's `kind`, a button's `variant` |
 
 **An array member is its own knob root** ([ADR 0021](docs/adr/0021-an-array-member-is-its-own-knob-root.md)). A screen's own styling is declared with `defineItemKnobs` against the screen — `tone`, not `screens[].tone` — and the block hangs that spec off the array it belongs to: `defineBlockKnobs({…, items: {screens: screenKnobs}})`. Its schema fields come from `defineArrayItem`, the same splice `defineSectionBlock` uses. Every reader and writer then works unchanged, because each one takes a path relative to the root it was handed: `visibleKnobs` resolves against one named screen, a gate on a sibling is an ordinary same-root gate, and `knobPatch` takes the member's path as its root. A member's spec is reached through its host block and never through its `_type` — member names are local to their array, so two blocks may each declare a `screen`.
 
-**A shared object is its own knob root too** ([ADR 0023](docs/adr/0023-an-instance-is-configured-by-its-component.md)). A mark's options are declared with `defineObjectKnobs` against the mark — `kind`, not `panels[].mark.kind` — and keyed by its **type name** in `OBJECT_KNOBS`, which is safe here and was not for a member: Sanity registers a shared object globally, so two types cannot silently agree on `cta`. Its schema fields come from `defineSharedObject`, the same splice the other two roots use. An instance is configured by its component, so nothing is re-declared per placement — a mark on a discipline row, a mark inside a panel and a mark in a layout column read one spec. Configuration that varies by position is a **resolution** concern (a value read from context), never a second declaration.
+**A shared object is its own knob root too** ([ADR 0023](docs/adr/0023-an-instance-is-configured-by-its-component.md)). A mark's options are declared with `defineObjectKnobs` against the mark — `kind`, not `panels[].mark.kind` — and keyed by its **type name** in `OBJECT_KNOBS`, which is safe here and was not for a member: Sanity registers a shared object globally, so two types cannot silently agree on `button`. Its schema fields come from `defineSharedObject`, the same splice the other two roots use. An instance is configured by its component, so nothing is re-declared per placement — a mark on a discipline row, a mark inside a panel and a mark in a layout column read one spec. Configuration that varies by position is a **resolution** concern (a value read from context), never a second declaration.
 
 Reaching one is the part the other roots do not need. A band and an item are recognisable from the hovered path alone; `mark` is a field name on four blocks and a keyed member in a column, and neither spelling says what it is. So the canvas walks **outward from the hovered element to the nearest enclosing object the draft snapshot names as a declared type** (`nearestInstance`), stopping at the block. That is why the resolver cannot decide it and the toolbar can: the resolver has the path and no document.
 
@@ -137,14 +139,14 @@ Closed vocabulary. If the field you want isn't here and isn't obviously domain-s
 | `note`            | Quieter secondary line (the "Best when…" line)                   | `caption` (reserved: `figure.caption`)               |
 | `media`           | A `figure` on a block                                            | `image` — that's the raw asset field inside `figure` |
 | `heroMedia`       | A document's lead `figure`                                       | `featuredImage`, `banner`                            |
-| `cta`             | A single call to action (type `cta`)                             | `link`, `button`, `action`                           |
+| `button`          | A single button (type `button`)                                  | `cta`, `link`, `action`                              |
 | `mark`            | The dotted circle beside an item (type `mark`)                   | `icon`, `disc`, `orb` — `orb` is one of its `kind`s  |
 | `date`            | When a leaf object's thing happens (the Live MON / DD marker)    | `publishedAt` — that's a document's publication time |
 | `name`            | A person's or organization's real-world name                     | Anything that isn't a proper noun                    |
 | `surface`         | `white \| bone \| ink` — injected by `defineSectionBlock`        | Never hand-author it                                 |
 | `reasons`         | The form's "Reason" options, in shown order (`formSection`)      | `options`, `choices`                                 |
 | `consentLabel`    | The opt-in checkbox's words; empty = no checkbox (`formSection`) | `consent`, `optIn`                                   |
-| `submitLabel`     | The submit button's words (`formSection`)                        | `buttonText`, `cta` — there's no link here           |
+| `submitLabel`     | The submit button's words (`formSection`)                        | `buttonText`, `button` — there's no link here        |
 | `story`           | A structured document's interleaved narrative array              | `sections` (a page's flat composition), `chapters`   |
 | `details`         | Term/description rows under a body (`chapter.details`)           | `specs`, `meta`, a second `body`                     |
 | `utilityNavItems` | The brand-property strip's links (`siteSettings`)                | `properties`, `brandLinks`, a second `footerGroup`   |

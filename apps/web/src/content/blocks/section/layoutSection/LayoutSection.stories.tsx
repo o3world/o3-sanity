@@ -14,7 +14,7 @@ import { LayoutSection } from './LayoutSection'
  * eyebrow, the 48px heading, and a set-back subheading.
  *
  * The base tier never contains sections, so nothing here can nest — the
- * columns hold `richText`, `figure`, `embed`, `cta` and `statGroup`, and that
+ * columns hold `richText`, `figure`, `embed`, `button` and `statGroup`, and that
  * is the whole vocabulary. Each of those has its own story under
  * `Content/Blocks/Base`.
  */
