@@ -20,7 +20,11 @@ identical. If no Sanity tools are available, stop and say so: in Claude Code
 run `/mcp` to authenticate the `sanity` server; in Desktop connect the
 connector. Auth is always the human's own — never ask for tokens.
 
-Every Sanity tool call uses `resource: {projectId: "naorcr6k", dataset: "production"}`.
+Every Sanity tool call needs `resource: {projectId: "naorcr6k", dataset: "development"}`.
+`development` is a full, disposable copy of the content — draft there by
+default, and say which dataset you are writing to in the handoff summary. Use
+`production`, the dataset the site serves, only when the human names it in
+this conversation.
 
 ## Before writing anything
 
