@@ -44,6 +44,44 @@ The board is [org Project 5](https://github.com/orgs/o3world/projects/5): `Board
 sub-issues_ workflow means attaching a ticket to a map puts it on the board — one more reason
 attachment is not optional.
 
+### Spec, tickets, implement
+
+Work moves through three commands, in this order. **All three are `disable-model-invocation: true`
+— only Nick can fire them.** An agent that needs one asks him to type it; it may not call the Skill
+tool, and it may not do the work by hand instead. Doing it by hand is what happened on 2026-08-14,
+and it produced a spec in the wrong place and tickets in the wrong shape.
+
+```
+/mattpocock-skills:to-spec       conversation → a spec, published as a GitHub issue
+/mattpocock-skills:to-tickets    that spec → tracer-bullet tickets with blocking edges
+/mattpocock-skills:implement     a ticket → the code, reviewed and committed
+```
+
+**A spec is a GitHub issue, not a file.** `docs/specs/` holds two documents that predate this rule —
+`schema.md` and `scaffold-plan.md` — and they stay, because `README.md`, the `content-naming` skill
+and several ADRs cite them as live references. Nothing new goes in that directory.
+
+**Use the skill's template as written**, including the long User Stories list. It is not the
+decision-first register `docs/specs/schema.md` uses, and that is deliberate: `to-tickets` and
+`implement` read the spec downstream, so the shape they expect wins over the shape the older
+documents have.
+
+**`ready-for-agent` does not exist here.** `to-spec` and `to-tickets` both say to apply it; the
+`triage` skill was never installed, so this repo has `wayfinder:*` and the frontier instead. Apply
+**`wayfinder:task`** and **attach the issue to a map in the same breath** — an unattached ticket is
+invisible to `frontier` whatever its labels say. `to-tickets`' blocking edges are native GitHub
+dependencies, which is the same mechanism the frontier already walks, so they need no translation.
+
+**`implement` runs one ticket per subagent.** One ticket, one worktree, one session is already the
+rule (`docs/agents/worktrees.md`); a dispatched implementer inherits it. Two traps, both paid for
+already:
+
+- **Parallel implementers must not share a worktree.** File-heavy agents in one tree overwrite each
+  other, and a green check mid-flight proves nothing — verify the settled tree.
+- **The orchestrator reads across the tickets, the implementers do not.** Converging abstractions —
+  two tickets growing the same helper from opposite ends — are only visible from above, so the
+  orchestrator reviews for them rather than trusting each agent's own report.
+
 ### Content naming
 
 Naming and wiring rules for schemas, fields, blocks, and renderers. Vocabulary lives in `CONTEXT.md` → Naming; the procedure is the `content-naming` skill (`.claude/skills/content-naming/`). Read both before touching `packages/sanity/src/schemas/` or `apps/web/src/content/`.
