@@ -382,10 +382,12 @@ describe('the committed redirect map', () => {
         '/insights/how-we-redesigned-our-website-in-a-single-weekend',
         '/insights/the-design-team-moved-the-file',
         '/live',
-        // The first partner landing page (#92) — a canonical frame
-        // (`2354:2446`) for a page WordPress never served. Vercel and Lovable
-        // are behind it, and each will land here the same way.
+        // The partner landing pages (#92). Sanity has the canonical frame
+        // (`2354:2446`); Vercel and Lovable follow its composition. WordPress
+        // served none of the three.
+        '/partners/lovable',
         '/partners/sanity',
+        '/partners/vercel',
         // The first service landing page (#93) — frame `2360:2879`, a
         // standalone page under /solutions/. WordPress's service pages 301
         // into /solutions; this slug is new content, not a move.

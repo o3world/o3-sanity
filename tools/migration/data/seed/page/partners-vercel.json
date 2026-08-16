@@ -1,0 +1,256 @@
+{
+  "_id": "page-seed-partners-vercel",
+  "_type": "page",
+  "title": "Vercel Partner",
+  "slug": {
+    "_type": "slug",
+    "current": "partners/vercel"
+  },
+  "pageType": "partner",
+  "card": {
+    "shortTitle": "Vercel",
+    "excerpt": "Next.js on Vercel, planned and built by one senior team. Every change gets a URL your stakeholders can open before it goes live."
+  },
+  "sections": [
+    {
+      "_type": "heroSection",
+      "_key": "hero",
+      "surface": "ink",
+      "variant": "band",
+      "eyebrow": "Technology partners",
+      "logo": {
+        "_type": "image",
+        "_localSrc": "tools/migration/data/seed/assets/plat-vercel-logo.png"
+      },
+      "headlineLines": ["Your web presence outgrew its platform.", "We rebuild it on Vercel."],
+      "subheading": "Next.js on Vercel, planned and built by one senior team. Every change gets a URL your stakeholders can open before it goes live.",
+      "details": [
+        {
+          "_type": "detail",
+          "_key": "expertise",
+          "label": "o3 expertise:",
+          "items": [
+            "Vercel Partner Program",
+            "Next.js front ends on Vercel",
+            "Drupal, AEM and Sitecore replatforming",
+            "Preview, staging and promote pipelines"
+          ]
+        }
+      ],
+      "decoration": "none"
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "services",
+      "surface": "white",
+      "layout": "rows",
+      "heading": "Three Core Services",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "svc-replatform",
+          "railLabel": "Replatform",
+          "heading": "Replatforming onto Vercel",
+          "note": "Move without a bad launch week",
+          "body": "We move large sites off the platform that is slowing them down — Drupal, AEM, Sitecore, WordPress — onto Next.js and Vercel. The redirect map, the DNS switch and the rollback are all planned before cutover, so the day you switch is the least eventful day of the project.",
+          "details": [
+            {
+              "_type": "detail",
+              "_key": "cutover",
+              "label": "What we plan before cutover:",
+              "items": [
+                "A redirect for every URL you already rank for",
+                "A DNS switch with automated rollback",
+                "Performance benchmarks against the site you're leaving",
+                "SOC 2, GDPR and HIPAA evidence for your security review"
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "outcome",
+              "label": "what you get:",
+              "items": [
+                "A site on new infrastructure that keeps the URLs and the rankings you already earned."
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "panel",
+          "_key": "svc-publishing",
+          "railLabel": "Publishing",
+          "heading": "Campaign and Content Publishing",
+          "note": "The gap between ready and live",
+          "body": "Marketing teams lose weeks between \"the page is ready\" and \"the page is live.\" We close that gap: content in a headless CMS, a component library your team assembles pages from, and a preview URL for every change so brand, legal and leadership can sign off on the real page.",
+          "details": [
+            {
+              "_type": "detail",
+              "_key": "review",
+              "label": "How a review works:",
+              "items": [
+                "Every change deploys to its own URL",
+                "Reviewers open the real page on a real device",
+                "Going live is one deliberate step"
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "outcome",
+              "label": "what you get:",
+              "items": ["Campaign pages that launch on the day the campaign starts."]
+            }
+          ]
+        },
+        {
+          "_type": "panel",
+          "_key": "svc-performance",
+          "railLabel": "Performance",
+          "heading": "Performance and Scale",
+          "note": "For the days your traffic is not normal",
+          "body": "Core Web Vitals are a Google ranking signal, and the architecture decides them long before anyone runs an audit. We make the rendering, caching and image decisions up front — static where it can be, cached at the edge where it should be, live where it has to be.",
+          "details": [
+            {
+              "_type": "detail",
+              "_key": "decisions",
+              "label": "Decisions we make up front:",
+              "items": [
+                "What each page type renders, and when",
+                "What gets cached at the edge, and what never should",
+                "How images and fonts load"
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "outcome",
+              "label": "what you get:",
+              "items": [
+                "A site that holds on the day the campaign lands, and the numbers that show it held."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "featureGridSection",
+      "_key": "why",
+      "surface": "ink",
+      "layout": "stack",
+      "decoration": "molecule",
+      "heading": "Why Vercel + O3",
+      "features": [
+        {
+          "_type": "feature",
+          "_key": "why-dogfood",
+          "heading": "We run this site the way we'd run yours.",
+          "body": "Every branch of o3world.com deploys to its own URL, main sits on staging, and production is a deliberate promote. Your team gets the same pipeline.",
+          "mark": { "_type": "mark", "kind": "disc" }
+        },
+        {
+          "_type": "feature",
+          "_key": "why-unblock",
+          "heading": "Marketing and engineering stop waiting on each other.",
+          "body": "Editors change content in the CMS and see it in place. Engineers extend the component library underneath. Splitting the two is the point, and it only pays off if both halves are built for it.",
+          "mark": { "_type": "mark", "kind": "disc" }
+        },
+        {
+          "_type": "feature",
+          "_key": "why-continuity",
+          "heading": "The same people, from architecture to the week after launch.",
+          "body": "Whoever chooses how your pages render is still there when real traffic arrives. Nothing changes hands at go-live.",
+          "mark": { "_type": "mark", "kind": "disc" }
+        }
+      ]
+    },
+    {
+      "_type": "featureGridSection",
+      "_key": "use-cases",
+      "surface": "white",
+      "layout": "rows",
+      "heading": "Use cases.",
+      "features": [
+        {
+          "_type": "feature",
+          "_key": "uc-campaign",
+          "heading": "Your campaign pages take six weeks and the campaign takes four",
+          "body": "We give your team a component library and a CMS they can assemble a page from, then a preview URL to get it approved. The build stops being the long pole.",
+          "mark": { "_type": "mark", "kind": "disc" }
+        },
+        {
+          "_type": "feature",
+          "_key": "uc-many-sites",
+          "heading": "You run twelve sites and none of them look related",
+          "body": "One design system and one set of tokens across every property, so twelve sites finally read as one company — with each team still shipping on its own schedule.",
+          "mark": { "_type": "mark", "kind": "disc" }
+        },
+        {
+          "_type": "feature",
+          "_key": "uc-preview",
+          "heading": "Nobody can see a change until it is already live",
+          "body": "Every change gets its own URL before it reaches production, so the argument about a headline happens on a staging link instead of on your homepage.",
+          "mark": { "_type": "mark", "kind": "disc" }
+        }
+      ]
+    },
+    {
+      "_type": "featureGridSection",
+      "_key": "enables",
+      "surface": "bone",
+      "layout": "stack",
+      "heading": "What it enables.",
+      "features": [
+        {
+          "_type": "feature",
+          "_key": "en-launch",
+          "heading": "Campaign pages live on the day they are due",
+          "mark": { "_type": "mark", "kind": "disc" }
+        },
+        {
+          "_type": "feature",
+          "_key": "en-preview",
+          "heading": "A preview URL for every change",
+          "mark": { "_type": "mark", "kind": "disc" }
+        },
+        {
+          "_type": "feature",
+          "_key": "en-vitals",
+          "heading": "Core Web Vitals that hold under load",
+          "mark": { "_type": "mark", "kind": "disc" }
+        },
+        {
+          "_type": "feature",
+          "_key": "en-system",
+          "heading": "One design system across every property",
+          "mark": { "_type": "mark", "kind": "disc" }
+        },
+        {
+          "_type": "feature",
+          "_key": "en-rollback",
+          "heading": "A rollback that takes seconds",
+          "mark": { "_type": "mark", "kind": "disc" }
+        }
+      ]
+    },
+    {
+      "_type": "ctaSection",
+      "_key": "cta",
+      "surface": "ink",
+      "decoration": "molecule",
+      "heading": "How long does a page take to go live?",
+      "body": "Walk us through how a page gets from a brief to your homepage today. We'll show you where the weeks are going.",
+      "button": {
+        "_type": "button",
+        "label": "Talk to our team",
+        "href": "/contact",
+        "icon": "arrow"
+      }
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:partners-vercel",
+    "extractedAt": "2026-08-16T00:00:00Z",
+    "provisional": true,
+    "provisionalNote": "Greenfield copy with no Figma frame — the layout mirrors the Sanity partner page (frame 2354:2446), which #92 established with Vercel and Lovable behind it. Written for corporate marketing teams running large web presences, so the copy translates infrastructure into launch dates, sign-off steps and rankings. The partnership itself is sourced: Vercel's Partner Program onboarding deck, supplied 2026-08-16, which is why the page names it. Four things to settle before launch. (1) TIER AND CERTIFICATION: the program runs Enrolled → Silver → Gold → Platinum on enterprise project count, and O3's tier is not recorded anywhere in this repo, so the page claims membership and no tier. It also claims no certified engineers — the badges are 'Vercel Certified Solution Partner' and 'Vercel Certified Engineer', and the deck has self-serve registration still to come, so the Sanity page's 'Certified Sanity developers' line has no Vercel equivalent yet. Both can be added once someone confirms them. (2) ATTRIBUTION: Vercel's trademark terms require the line 'Vercel, the Vercel design, Next.js and related marks, designs and logos are trademarks or registered trademarks of Vercel, Inc.' wherever the marks appear, and this page draws the logo without it — the site has nowhere to put trademark attribution yet. (3) HEADLINE SHAPE: the Sanity and Lovable heroes use the partner title as the headline; this one uses a claim aimed at the audience and lets the eyebrow carry the category label, which is what the voice guide asks for. One of the two patterns should win across all three. (4) PROOF: every claim is either a capability /solutions/software-engineering already publishes, a first-person fact about this repo's pipeline (`.github/branch-aliases.yml`, `.github/workflows/promote.yml`), or Vercel's public platform posture (security.vercel.com). The onboarding deck's customer numbers — Balsam Brands, Medion, Straumann Group — are Vercel's results for Vercel's customers and are deliberately unused; a named O3 replatforming case study is still the strongest thing this page could gain."
+  }
+}

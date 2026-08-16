@@ -1,0 +1,256 @@
+{
+  "_id": "page-seed-partners-lovable",
+  "_type": "page",
+  "title": "Lovable Development Partner",
+  "slug": {
+    "_type": "slug",
+    "current": "partners/lovable"
+  },
+  "pageType": "partner",
+  "card": {
+    "shortTitle": "Lovable",
+    "excerpt": "Lovable makes the build fast. We make it something your company can run on."
+  },
+  "sections": [
+    {
+      "_type": "heroSection",
+      "_key": "hero",
+      "surface": "ink",
+      "variant": "band",
+      "eyebrow": "Technology partners",
+      "logo": {
+        "_type": "image",
+        "_localSrc": "tools/migration/data/seed/assets/plat-lovable-logo.png"
+      },
+      "headlineLines": ["Lovable Development Partner"],
+      "subheading": "Lovable makes the build fast. We make it something your company can run on.",
+      "details": [
+        {
+          "_type": "detail",
+          "_key": "expertise",
+          "label": "o3 expertise:",
+          "items": [
+            "Lovable delivery partner",
+            "Dialed: our own operations app, built in Lovable",
+            "Enterprise security and deployment framework"
+          ]
+        }
+      ],
+      "decoration": "none"
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "services",
+      "surface": "white",
+      "layout": "rows",
+      "heading": "Three Core Services",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "svc-audit",
+          "railLabel": "Audit",
+          "heading": "SaaS Audit & Replacement Planning",
+          "note": "Find the tools you pay the most for and love the least",
+          "body": "We went line by line through our own software spend and found a pattern: premium prices for tools that fit at maybe 70 percent, with workarounds and side spreadsheets covering the rest. We run the same audit on your stack and come back with the tools worth replacing.",
+          "details": [
+            {
+              "_type": "detail",
+              "_key": "signals",
+              "label": "What we look for:",
+              "items": [
+                "Tools that fit at 70 percent, priced at 100",
+                "Workarounds and spreadsheets on the side",
+                "Renewals running on inertia"
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "outcome",
+              "label": "what you get:",
+              "items": [
+                "A shortlist of replaceable tools, each with the cost of keeping it and the cost of replacing it."
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "panel",
+          "_key": "svc-build",
+          "railLabel": "Build",
+          "heading": "Custom Builds in Lovable",
+          "note": "Software shaped around exactly how you work",
+          "body": "We build the replacement in Lovable, shaped around how your team actually operates — the features you use, built the way you use them, and nothing you don't. Ours is called Dialed: resource planning and financial operations, with Slack, Harvest, HubSpot, and Bamboo wired in. It replaced a $35,000-a-year tool.",
+          "details": [
+            {
+              "_type": "detail",
+              "_key": "proof",
+              "label": "What Dialed proved:",
+              "items": [
+                "A $35,000 SaaS tool replaced for $127 in AI credits",
+                "527 prompts and under 40 hours of effort",
+                "Fixes and enhancements ship in a few prompts"
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "outcome",
+              "label": "what you get:",
+              "items": [
+                "An app that bends to your process instead of the other way around."
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "panel",
+          "_key": "svc-production",
+          "railLabel": "Production",
+          "heading": "Prototype-to-Production Hardening",
+          "note": "The gap where vibe-coding stories fall apart",
+          "body": "A prototype that works in a demo is not a product your company can run its finances on. Our security and deployment framework closes that gap — the unglamorous engineering that turns \"this works\" into \"this is trusted.\" Dialed went through it, and the process is repeatable.",
+          "details": [
+            {
+              "_type": "detail",
+              "_key": "covers",
+              "label": "What the framework covers:",
+              "items": [
+                "Security review and access controls",
+                "Data handling and deployment pipelines",
+                "Monitoring once it's live"
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "outcome",
+              "label": "what you get:",
+              "items": [
+                "An app your company can trust with real work, and a process your IT team can inspect."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "featureGridSection",
+      "_key": "why",
+      "surface": "ink",
+      "layout": "stack",
+      "decoration": "molecule",
+      "heading": "Why Lovable + O3",
+      "features": [
+        {
+          "_type": "feature",
+          "_key": "why-dogfood",
+          "heading": "We run our own company on it.",
+          "body": "Dialed handles O3's resource planning and financial operations. We built it in Lovable, hardened it with the same framework we offer you, and use it every day.",
+          "mark": { "_type": "mark", "kind": "disc" }
+        },
+        {
+          "_type": "feature",
+          "_key": "why-both",
+          "heading": "Speed needs discipline behind it.",
+          "body": "The AI tools compress the build. Twenty-one years of shipping production software for enterprise clients is what makes the result trustworthy. You need both, and we bring both.",
+          "mark": { "_type": "mark", "kind": "disc" }
+        },
+        {
+          "_type": "feature",
+          "_key": "why-repeatable",
+          "heading": "The path is repeatable.",
+          "body": "Audit the spend, build the replacement, harden it for production. Dialed was the first trip down that path; the same process is ready to run for your organization.",
+          "mark": { "_type": "mark", "kind": "disc" }
+        }
+      ]
+    },
+    {
+      "_type": "featureGridSection",
+      "_key": "use-cases",
+      "surface": "white",
+      "layout": "rows",
+      "heading": "Use cases.",
+      "features": [
+        {
+          "_type": "feature",
+          "_key": "uc-misfit",
+          "heading": "You're paying premium prices for a tool that fits at 70 percent",
+          "body": "The missing 30 percent shows up as workarounds, side spreadsheets, and features you pay for but never touch. We build the replacement that fits how you actually operate — all of it.",
+          "mark": { "_type": "mark", "kind": "disc" }
+        },
+        {
+          "_type": "feature",
+          "_key": "uc-stuck-prototype",
+          "heading": "Your team has a prototype nobody will put in production",
+          "body": "The demo works; the security review, access controls, and deployment pipeline don't exist yet. We harden it into something your IT and security teams can sign off on.",
+          "mark": { "_type": "mark", "kind": "disc" }
+        },
+        {
+          "_type": "feature",
+          "_key": "uc-budget",
+          "heading": "Custom software never used to make the budget",
+          "body": "A year ago, an internal tool couldn't justify its build cost. That math has changed — ours cost $127 in AI credits — and we'll help you find where it has changed for you.",
+          "mark": { "_type": "mark", "kind": "disc" }
+        }
+      ]
+    },
+    {
+      "_type": "featureGridSection",
+      "_key": "enables",
+      "surface": "bone",
+      "layout": "stack",
+      "heading": "What it enables.",
+      "features": [
+        {
+          "_type": "feature",
+          "_key": "en-budget",
+          "heading": "Custom software at internal-tool budgets",
+          "mark": { "_type": "mark", "kind": "disc" }
+        },
+        {
+          "_type": "feature",
+          "_key": "en-replace",
+          "heading": "Replacements for the SaaS you've outgrown",
+          "mark": { "_type": "mark", "kind": "disc" }
+        },
+        {
+          "_type": "feature",
+          "_key": "en-speed",
+          "heading": "Working software in weeks",
+          "mark": { "_type": "mark", "kind": "disc" }
+        },
+        {
+          "_type": "feature",
+          "_key": "en-iterate",
+          "heading": "Fixes and enhancements in a few prompts",
+          "mark": { "_type": "mark", "kind": "disc" }
+        },
+        {
+          "_type": "feature",
+          "_key": "en-one-team",
+          "heading": "One team from first prompt to production",
+          "mark": { "_type": "mark", "kind": "disc" }
+        }
+      ]
+    },
+    {
+      "_type": "ctaSection",
+      "_key": "cta",
+      "surface": "ink",
+      "decoration": "molecule",
+      "heading": "Which tool in your stack is worth replacing?",
+      "body": "Pull up your renewals for the next 12 months and find the tools you pay the most for and love the least. We'll tell you what a replacement costs now.",
+      "button": {
+        "_type": "button",
+        "label": "Talk to our team",
+        "href": "/contact",
+        "icon": "arrow"
+      }
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:partners-lovable",
+    "extractedAt": "2026-08-16T00:00:00Z",
+    "provisional": true,
+    "provisionalNote": "Greenfield copy with no Figma frame — the layout mirrors the Sanity partner page (frame 2354:2446), which #92 established with Vercel and Lovable behind it. Every number and claim comes from the published insight 'We replaced a $35,000 SaaS tool in 527 prompts' (insight-wp-10635): Dialed, the $35,000/$127/527-prompts figures, the integrations list, and the security-and-deployment framework. Two things to settle before launch: (1) the hero says 'Lovable Development Partner' and the details say 'Lovable delivery partner' — confirm the partnership's official title once the program name is known; (2) the Sanity page's logo wall was dropped here rather than invented — decide whether a proof band (Lovable's upcoming Dialed case study, or the insight itself) takes its place."
+  }
+}

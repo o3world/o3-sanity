@@ -128,8 +128,16 @@
           "button": {
             "_type": "button",
             "label": "View our Sanity work",
-            "href": "/work",
+            "href": "/partners/sanity",
             "contrast": "dark"
+          },
+          "media": {
+            "_type": "figure",
+            "image": {
+              "_type": "image",
+              "_localSrc": "tools/migration/data/seed/assets/plat-sanity-mark.png"
+            },
+            "alt": "The Sanity monogram, a white angular zigzag on a black square."
           }
         },
         {
@@ -144,8 +152,16 @@
           "button": {
             "_type": "button",
             "label": "View our Vercel work",
-            "href": "/work",
+            "href": "/partners/vercel",
             "contrast": "dark"
+          },
+          "media": {
+            "_type": "figure",
+            "image": {
+              "_type": "image",
+              "_localSrc": "tools/migration/data/seed/assets/plat-vercel-mark.png"
+            },
+            "alt": "The Vercel mark, a white triangle centered on a black square."
           }
         },
         {
@@ -160,8 +176,16 @@
           "button": {
             "_type": "button",
             "label": "View our Lovable work",
-            "href": "/work",
+            "href": "/partners/lovable",
             "contrast": "dark"
+          },
+          "media": {
+            "_type": "figure",
+            "image": {
+              "_type": "image",
+              "_localSrc": "tools/migration/data/seed/assets/plat-lovable-mark.png"
+            },
+            "alt": "The Lovable mark, a rounded heart filled with a gradient running from orange through pink to blue."
           }
         }
       ],
