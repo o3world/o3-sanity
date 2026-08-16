@@ -27,7 +27,10 @@ import { REPO_ROOT } from './repo'
 
 import type { CorpusSnapshotDocument } from './corpus/plan'
 
-const client = getCliClient({ apiVersion: '2026-07-01' })
+/* `raw`, because the default perspective hides drafts and the document a key
+ * collision would destroy is usually one the authoring skill never published
+ * (ADR 0027). `normalizeSnapshot` folds the two copies back into one row. */
+const client = getCliClient({ apiVersion: '2026-07-01', perspective: 'raw' })
 
 async function main() {
   const corpus = briefCorpus()
