@@ -37,15 +37,24 @@ const GUIDANCE_SOURCES = [
     sourcePath: 'docs/guidance/slop.md',
   },
   {
-    /* Two parts. Part one is the cross-block half of design-system knowledge
-     * (ADR 0025): what order bands go in, which surfaces they paint, which
-     * block carries which job — the other half, what one block is for, lives
-     * in that block's schema `description` where `get_schema` delivers it.
-     * Part two is how one long argument holds up, which is what the authoring
-     * skill's brief applies before it writes anything. */
+    /* The cross-block half of design-system knowledge (ADR 0025): what order
+     * bands go in, which surfaces they paint, which block carries which job.
+     * The other half, what one block is for, lives in that block's schema
+     * `description` where `get_schema` delivers it. */
     key: 'o3-composition',
     title: 'O3 composition catalog',
     sourcePath: 'docs/guidance/composition.md',
+  },
+  {
+    /* How one long argument holds up — claim, warrant, evidence, arc, turn,
+     * ending. The brief applies it before drafting and the shuffle test checks
+     * it afterwards. Separate from the composition catalog because arranging
+     * bands on a page and shaping prose inside one body answer to different
+     * evidence: the catalog yields to a canonical Figma frame, and nothing in
+     * Figma has anything to say about where an essay turns. */
+    key: 'o3-argument',
+    title: 'O3 long-form argument',
+    sourcePath: 'docs/guidance/argument.md',
   },
   {
     /* What the design looks like, for the agent that has to make a picture

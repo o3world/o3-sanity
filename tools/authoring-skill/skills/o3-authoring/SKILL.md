@@ -30,17 +30,18 @@ this conversation.
 
 1. **Fetch the live guidance.** Query `*[_type == "guidance"]{key, title, body}`
    with the query tool. `body` is raw markdown — read it as written.
-   `key == "o3-voice"` is the voice guide: follow it over your defaults, every
-   time. `key == "o3-brand"` is the brand foundation behind it — source
-   material for claims, never copy to paste. `key == "o3-slop"` is the machine
-   tells the voice guide's revision pass sends you to; read it before you
-   revise, and read it first when the job is auditing a draft rather than
-   writing one. `key == "o3-composition"` is how things are put together —
-   part one is which band follows which on a page, part two is how a long
-   argument holds up, and the brief below runs on part two.
-   `key == "o3-visual"` is the design's palette and geometry, for the point at
-   which you make a picture rather than write. If no guidance documents exist,
-   say so and stop — never improvise the voice.
+
+   | `key`            | What it is                           | Reach for it                                          |
+   | ---------------- | ------------------------------------ | ----------------------------------------------------- |
+   | `o3-voice`       | the voice guide                      | always; it outranks your defaults, every time         |
+   | `o3-brand`       | pillars, delivery principles, values | claims about O3 — source material, never paste        |
+   | `o3-slop`        | the machine tells, and the checks    | before you revise, and first when the job is an audit |
+   | `o3-composition` | which band follows which on a page   | composing or editing a page                           |
+   | `o3-argument`    | how a long argument holds up         | the brief, and any insight or case-study narrative    |
+   | `o3-visual`      | palette, gradients, geometry         | when you make a picture rather than write             |
+
+   If no guidance documents exist, say so and stop — never improvise the voice.
+
 2. **Fetch the schema per type.** Before authoring any document type or
    section block, call `get_schema` for that **specific type**. The no-type
    overview omits field descriptions, and the descriptions carry required
@@ -95,9 +96,9 @@ Before any Sanity write. Two rounds of questions, and **two is the whole
 interview** — do not open a third. Every question carries your recommended
 answer, so the human can nod rather than compose; a nod is an answer.
 
-Read part two of `o3-composition` first and hold it open while you ask. It
-defines the claim, the warrant and the evidence bar, and it is what you judge
-the answers against — apply it, do not restate it from memory.
+Read `o3-argument` first and hold it open while you ask. It defines the claim,
+the warrant and the evidence bar, and it is what you judge the answers
+against — apply it, do not restate it from memory.
 
 **Round one** — askable cold:
 
@@ -140,9 +141,24 @@ collisions first.
 Share the draft's path (e.g. `/insights/{slug}`) for preview, and apply
 reactions with `patch_documents`.
 
-### 5. The reader test
+### 5. The gates
 
-Run it before the hand-off summary, every time.
+Four gates, run in this order before the hand-off summary, every time. Each
+one's content lives in the document that owns it; this is the order they run
+in and nothing else.
+
+1. **The shuffle test** — `o3-argument`. Every section is only readable in its
+   place. Structure goes first because a piece with the wrong shape is not
+   fixed by editing sentences: `o3-argument`'s **Mush** section sends it back
+   to the brief instead, and every sentence you polished before finding that
+   out is wasted work.
+2. **The revision pass** — `o3-voice`, ten numbered steps. Sentence level.
+3. **The checks** — `o3-slop`, ten numbered items. The shapes the revision pass
+   does not catch.
+4. **The reader test** — below. Last, because it is the only one that blocks
+   the hand-off.
+
+#### The reader test
 
 A **context-free reader** answers the five locked questions. It gets the title,
 the excerpt, and the body **as rendered prose** — nothing else. Not the raw

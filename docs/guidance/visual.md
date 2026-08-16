@@ -79,7 +79,7 @@ and not something an image should imitate.
 ## Shape and size
 
 The insight card is square, and images that arrive at the wrong aspect or too
-small have to be redone (#77). Generate square for an insight's `featuredImage`
+small have to be redone. Generate square for an insight's `featuredImage`
 unless the block's schema description says otherwise, and generate large — an
 image can be cropped down and cannot be invented back up.
 
@@ -96,7 +96,7 @@ Say all of these, every time:
 
 Abstract, textural, and architectural subjects sit inside this palette without
 argument. Literal illustrations of a concept — a robot for AI, a padlock for
-security, a lightbulb for an idea — are the stock-photo register the voice guide
+security, a lightbulb for an idea — are the stock-photo register `o3-voice`
 rejects in words, and they read the same way in pictures.
 
 ## Checking the result before you attach it

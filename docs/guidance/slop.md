@@ -1,6 +1,6 @@
 # Slop patterns
 
-The voice guide sets the register. This file removes the machine tells — the
+`o3-voice` sets the register. This document removes the machine tells — the
 sentence shapes and filler words that make copy read as generated, whatever
 the register. Adapted from [no-ai-slop](https://github.com/petergyang/no-ai-slop)
 and reconciled with the O3 voice below, so the overlap is settled here rather
@@ -96,7 +96,7 @@ clearly beat a comma, a period, or parentheses. Break up clusters.
 
 ## Filler words
 
-The banned-cliché list is rule 7 in the voice guide; these two lists are the
+The banned-cliché list is rule 7 of `o3-voice`; these two lists are the
 softer cuts, and both are conditional.
 
 **Often-empty adverbs:** just, literally, honestly, simply, actually, truly,
@@ -143,7 +143,7 @@ sentence _before_ the fact that announces a fact is coming.
 
 ## Editing someone else's draft
 
-The voice guide governs copy O3 publishes as O3. A teammate's insight or
+`o3-voice` governs copy O3 publishes as O3. A teammate's insight or
 personal essay is a different job: preserve their voice while removing the
 machine tells.
 
@@ -165,13 +165,13 @@ machine tells.
 
 When asked whether something reads as AI — "does this sound generated," "audit
 this," "flag the slop" — report, don't rewrite. Name each pattern from this
-file that appears, quote the line, and give the fix in a few words. Don't score
+document that appears, quote the line, and give the fix in a few words. Don't score
 the draft and don't claim to know whether a machine wrote it; detectors guess,
 named patterns are evidence the reader can check. Offer to edit afterward.
 
 ## The checks
 
-Run these after the revision pass in the voice guide. Any failure means fix and
+Run these after the revision pass in `o3-voice`. Any failure means fix and
 re-read.
 
 1. Zero binary contrasts, negative listings, rhetorical setups, and
