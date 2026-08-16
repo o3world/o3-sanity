@@ -58,8 +58,9 @@ this conversation.
   `discard_drafts`, or schema/project admin tools. A human publishes in
   Studio.
 - **Never invent facts.** Real names, numbers, outcomes, and quotes come from
-  the human. For case studies, interview until you have them; gaps stay gaps
-  and go in the handoff summary.
+  the human. For case studies, interview until you have them; gaps stay gaps,
+  and they go in the brief's `record` as well as the handoff summary — the
+  summary scrolls away, the field is queryable.
 - **Imagery:** reference an existing asset (query
   `*[_type == "sanity.imageAsset"]` with filters) when one genuinely fits.
   Otherwise `generate_image` is available, and `key == "o3-visual"` governs
@@ -92,7 +93,8 @@ tests first, and the reason is in each.
 
 ### 1. The brief
 
-Before any Sanity write. Two rounds of questions, and **two is the whole
+The interview comes before any Sanity write, and it ends in one: the brief
+document below. Two rounds of questions, and **two is the whole
 interview** — do not open a third. Every question carries your recommended
 answer, so the human can nod rather than compose; a nod is an answer.
 
@@ -121,11 +123,67 @@ Then two things, in the chat, before anything is written:
   one is fixed: _"In one sentence, what is this arguing?"_ You choose the other
   four. Write all five out and **lock them**.
 
-**The brief is a gate.** Nothing is written to Sanity without an agreed
-thesis — no `create_documents`, no `patch_documents`. The reads above are what
-the brief runs on, so they come first; the gate is on the writes. The human may
-hand you a thesis directly and skip the rounds, and that is the only override.
-Inventing one and proceeding is not.
+**Then write the brief document.** The interview leaves a document behind, and
+it is the first thing written to Sanity — before the piece, so the piece has
+something to point at.
+
+- **One `create_documents` call**, type `brief`, with `_id: "brief-<key>"`.
+  The key is lowercase words joined by hyphens (`[a-z0-9]+(-[a-z0-9]+)*`) and
+  names the subject rather than the piece, because a second piece on the same
+  subject reuses it. Check for a collision first: an existing `brief-<key>` is
+  either this subject — patch what the interview added rather than creating a
+  second — or a different one that needs a different key. `title` says what the
+  brief is about in a few words.
+- **Never set `sourcePath`.** Its absence is what says this brief was written
+  here rather than synced from a markdown file, and `brief:check` reads that
+  absence to know it may not audit this document.
+- **The editorial slots carry the human's material, not yours.** `background`
+  is the raw material they supplied — notes, transcripts, pasted evidence, the
+  evidence and the warrant in their words. `instructions` is what they asked
+  for: the reader, the content type, what to argue, what to avoid. `links` is
+  the URLs they gave. Nothing you inferred goes in these three.
+- **`record` is yours**, in the format below. It is `readOnly` in Studio, which
+  keeps a human out of a field the skill maintains; the API takes your write.
+
+A brief holds what one piece is written from; the `guidance` documents hold how
+to write for O3 anywhere. Per-piece material never goes into a `guidance`
+document, whatever it teaches you mid-session.
+
+#### The `record` format
+
+Three sections, these headings, this order. Plain markdown in a text field,
+read by the next session as much as by a human:
+
+```markdown
+## Thesis
+
+<the sentence that was confirmed>
+
+## Reader-test questions
+
+1. In one sentence, what is this arguing?
+2. <the four you chose>
+
+## Gaps
+
+- <what is missing, and who can supply it>
+```
+
+A gap is what a human still has to supply or decide before this can publish — a
+fact nobody has, a slot nobody filled. `## Gaps` says `- None` when there are
+none, so a later session can tell an empty list from an unwritten one, and a
+gap that closes says so where it stands rather than disappearing: that it was
+once open is part of what the next session needs. Questions added after
+drafting are appended to the list; none is ever removed or reworded. When
+`record` stops being true, patch it — step 6 is the last chance.
+
+**The brief is a gate, and it stands one step later than the interview.**
+Nothing is written to Sanity without an agreed thesis, and with one the brief
+document is what gets written first: no `create_documents` for the piece and no
+`patch_documents` until the brief is in the dataset. The reads above are what
+the brief runs on, so they come before all of it. The human may hand you a
+thesis directly and skip the rounds, and that is the only override. Inventing
+one and proceeding is not.
 
 ### 2. The outline
 
@@ -156,6 +214,13 @@ proposal, and that is the only override. Inventing one and proceeding is not.
 
 Create the document as a draft. Slugs are lowercase-hyphenated; check for
 collisions first.
+
+**Point it at the brief.** `briefs` is an array of weak references, so it
+carries `{_type: "reference", _ref: "brief-<key>", _weak: true, _key: "<key>"}`
+— your own `_key`, same as any other array item. Reference the published id
+even though the brief you just wrote is a draft: that is how a reference
+addresses a document, and weak is why it costs nothing while the human has yet
+to publish either one.
 
 ### 4. Iterate
 
@@ -218,9 +283,15 @@ quietly dropped.
 
 ### 6. Hand off
 
-End with a summary: what was created (document ID and path), which dataset,
-the reader-test result, imagery needed per empty slot, facts still unverified,
-and anything the human must do before publishing.
+**Patch the brief first**, wherever `record` has stopped being true: questions
+added after drafting, gaps the drafting closed or opened. The gaps in the
+document and the gaps in the summary are one list, and the document is the copy
+that outlives the chat.
+
+Then end with a summary: what was created (document ID and path), which
+dataset, the brief it was written from and its id, the reader-test result,
+imagery needed per empty slot, facts still unverified, and anything the human
+must do before publishing.
 
 ## Review mode
 
@@ -228,16 +299,46 @@ The branch for a document that already exists — insights, case studies and
 pages alike. It reports before it writes.
 
 1. **Fetch the document** and read it against the guidance, same as any other
-   job.
-2. **Run the reader test** (step 5 above), before the findings table rather
-   than after it.
-   There is no brief, so there is no agreed thesis: the reader states what the
-   document argues and **the human confirms whether that is the intended one**.
-   A mismatch is a single `error`-tier finding with no proposed patch — "this
-   does not argue what you think it argues" has no row-level fix — and it can
-   only be a row of the table if the test has already run. Question one is
-   fixed as always; forecast the other four from the document in front of you.
-3. **Report the findings as a table**, before proposing any write:
+   job. **Fetch what its `briefs` point at in the same breath** — drafts
+   included, because a brief the skill wrote and nobody published exists only
+   as one:
+
+   ```groq
+   *[_type == "brief" && _id in $ids]{_id, title, background, instructions, links, record}
+   ```
+
+   `$ids` holds both `brief-<key>` and `drafts.brief-<key>` for every
+   reference, and the perspective is `raw` — any other one collapses the two
+   ids into one before the filter sees them, which is the whole reason for
+   naming both. Where both come back, read the draft.
+
+2. **Interview only for what changed — where there is a brief.** The thesis and
+   the five questions are in `record`, and they are settled: asking them again
+   is asking the human to redo work the document already holds. Ask what the
+   brief cannot answer — what has changed since it was written, what the piece
+   now has to do that it did not, evidence that arrived after — and nothing
+   whose answer is already in `record`. Read the recorded thesis and reader
+   back and ask whether they still hold; never ask the human to state them
+   again. Patch `record` with whatever the answers moved (a revised thesis, a
+   gap closed, a gap opened) before you propose a single write to the document
+   itself.
+
+   Where there is no brief, there is nothing to interview against and none is
+   written here: review mode reports and patches, it does not brief.
+
+3. **Run the reader test** (step 5 above), before the findings table rather
+   than after it. Question one is fixed as always.
+   - **With a brief**, the locked questions and the agreed thesis come out of
+     `record`, and answer one is compared against that thesis exactly as in the
+     drafting branch.
+   - **With none**, there is no agreed thesis: the reader states what the
+     document argues and **the human confirms whether that is the intended
+     one**. A mismatch is a single `error`-tier finding with no proposed
+     patch — "this does not argue what you think it argues" has no row-level
+     fix — and it can only be a row of the table if the test has already run.
+     Forecast the other four questions from the document in front of you.
+
+4. **Report the findings as a table**, before proposing any write:
 
    | id  | tier | location | current | proposed | why |
    | --- | ---- | -------- | ------- | -------- | --- |
@@ -252,12 +353,13 @@ pages alike. It reports before it writes.
      advice about the shape of the piece; cite the composition catalog rather
      than restating it. **An advisory never lands in a patch.**
 
-4. **Take row-level approval**, then send **one** `patch_documents` call with
+5. **Take row-level approval**, then send **one** `patch_documents` call with
    `ifRevisionId` set to the revision you read. Rejected rows are dropped from
    the batch, not deferred to a second call.
-5. **On an `ifRevisionId` rejection: abort, re-fetch, re-derive.** Never retry
+6. **On an `ifRevisionId` rejection: abort, re-fetch, re-derive.** Never retry
    blind. The approvals were given against text that no longer exists, and
    reapplying them is the clobber the guard exists to prevent. Run the findings
    pass again and re-present, marking which approved rows still stand.
-6. **Hand off** as above: which rows landed, which were dropped, the reader
-   test's result, and what is left for the human.
+7. **Hand off** as above: which rows landed, which were dropped, the brief this
+   ran against and what its `record` now says — or that there was none — the
+   reader test's result, and what is left for the human.
