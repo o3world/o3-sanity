@@ -10,14 +10,14 @@ import { QuoteSection } from './QuoteSection'
  * `molecule` the 2026-08 case-study band (`2250:1525`, #97), `none` the opt
  * out — and the quote itself must read identically under all three.
  */
-function render(decoration: string | null) {
+function render(decoration: string | null, surface = 'bone') {
   return renderToStaticMarkup(
     <QuoteSection
       {...({
         quote: 'Simply the best. Better than all the rest.',
         attribution: 'Business Leader, Global Health Brand',
         decoration,
-        surface: 'bone',
+        surface,
       } as unknown as SectionProps<'quoteSection'>)}
     />,
   )
@@ -53,6 +53,15 @@ describe('the quote band’s molecule decoration', () => {
 
   it('is not announced to a reader', () => {
     expect(html).toContain('aria-hidden="true"')
+  })
+
+  it('follows the band’s surface rather than a colour spelled once', () => {
+    // The glyph is ink on bone and white on ink. A fixed colour here draws an
+    // invisible decoration the moment an editor turns the surface knob.
+    expect(html).toContain('text-ink')
+    // `text-white` alone would prove nothing — the ink surface class carries
+    // it. The absence of `text-ink` is what says the glyph moved with the band.
+    expect(render('molecule', 'ink')).not.toContain('text-ink')
   })
 })
 
