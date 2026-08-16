@@ -6,7 +6,7 @@
  * running it against a project.
  */
 import { driftOf, fieldsOf, idFor, ownedFieldsOf, planCorpus } from './plan'
-import { renderGlobbedSource } from './read'
+import { CORPUS_KEY, renderGlobbedSource } from './read'
 
 import type {
   Corpus,
@@ -147,10 +147,27 @@ export function exportCorpus(
     return { writes: [], status: 0 }
   }
 
+  /* Before anything is built from it: the key becomes a filename under the
+   * corpus directory, and one carrying a separator would land outside it. */
+  if (!CORPUS_KEY.test(request.key)) {
+    out.error(`✗ "${request.key}" ${NOT_KEBAB}`)
+    return { writes: [], status: 1 }
+  }
+
   const _id = idFor(corpus.type, request.key)
   const candidate = candidates.find((document) => document._id === _id)
   if (!candidate) {
     out.error(`✗ ${describeUnexportable(corpus, plan, snapshot, _id)}`)
+    return { writes: [], status: 1 }
+  }
+
+  /* From here `request.key` is the document's key as well as its id's, so the
+   * file, the frontmatter and the stamp all spell the same one. */
+  const malformed = malformedKey(corpus.type, candidate)
+  if (malformed) {
+    out.error(
+      `✗ ${_id} is malformed: ${malformed} — patch \`key\` or \`_id\` by hand until the two spell one key, then export`,
+    )
     return { writes: [], status: 1 }
   }
 
@@ -164,7 +181,7 @@ export function exportCorpus(
     return { writes: [], status: 1 }
   }
 
-  const sourcePath = `${request.directory}/${candidate.key}.md`
+  const sourcePath = `${request.directory}/${request.key}.md`
   if (request.occupied.includes(sourcePath)) {
     out.error(`✗ ${sourcePath} already exists — export never writes over a file in the corpus`)
     return { writes: [], status: 1 }
@@ -182,7 +199,7 @@ export function exportCorpus(
   const document: CorpusDocument = {
     _id,
     _type: corpus.type,
-    key: String(candidate.key),
+    key: request.key,
     title,
     [corpus.bodyField]: body,
     sourcePath,
@@ -216,6 +233,28 @@ export function exportCorpus(
     writes,
     status: 0,
   }
+}
+
+/** The grammar refusal, in one wording, because two would read as two rules. */
+const NOT_KEBAB = `is not lowercase kebab-case (${CORPUS_KEY.source})`
+
+/**
+ * Why a document cannot be exported under the key its id spells, or
+ * `undefined` when it can be.
+ *
+ * A key is written three times by an export — the filename, the frontmatter,
+ * and the stamp on the document — and only the id is what the operator names.
+ * A document whose `key` disagrees with its `_id` (an API writer can leave one
+ * that way) would file itself under one key and stamp the other, and the next
+ * sync would create the file's document without the `record` and retire the
+ * one the stamp orphaned.
+ */
+function malformedKey(type: string, candidate: CorpusSnapshotDocument): string | undefined {
+  const key = candidate.key
+  if (typeof key !== 'string' || key === '') return 'it has no key'
+  if (!CORPUS_KEY.test(key)) return `its key "${key}" ${NOT_KEBAB}`
+  if (candidate._id !== idFor(type, key)) return `its key "${key}" is not the key its id spells`
+  return undefined
 }
 
 /**

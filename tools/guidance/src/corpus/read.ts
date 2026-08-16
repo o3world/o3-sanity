@@ -83,9 +83,12 @@ export function readDeclaredSources(
 
 /**
  * The key grammar: lowercase kebab, so the deterministic `<type>-<key>` id
- * stays unambiguous everywhere it is matched.
+ * stays unambiguous everywhere it is matched, and a key is always a filename
+ * rather than a path. One definition, because export writes the files this
+ * reads: a key either side accepted alone would be a corpus that cannot be
+ * read back.
  */
-const KEY = /^[a-z0-9]+(-[a-z0-9]+)*$/
+export const CORPUS_KEY = /^[a-z0-9]+(-[a-z0-9]+)*$/
 
 /**
  * What a globbed corpus directory holds, repo-relative and sorted, so a plan
@@ -120,7 +123,7 @@ export function readGlobbedSources(root: string, directory: string): CorpusSourc
     const { key, title } = data
     if (!key) throw new Error(`${sourcePath} has no \`key\` in its frontmatter`)
     if (!title) throw new Error(`${sourcePath} has no \`title\` in its frontmatter`)
-    if (!KEY.test(key)) {
+    if (!CORPUS_KEY.test(key)) {
       throw new Error(`${sourcePath} declares key "${key}", which is not lowercase kebab-case`)
     }
     /* Two sources sharing a key map to one _id: sync would last-write-win

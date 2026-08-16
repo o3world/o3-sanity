@@ -6,7 +6,7 @@ import { describe, expect, it } from 'vitest'
 
 import { checkCorpus, exportCorpus, syncCorpus } from './commands'
 import { normalizeSnapshot } from './plan'
-import { readGlobbedSources } from './read'
+import { CORPUS_KEY, readGlobbedSources } from './read'
 
 import type { CorpusWrite } from './commands'
 import type { Corpus, CorpusSnapshotDocument } from './plan'
@@ -643,6 +643,62 @@ describe('exportCorpus', () => {
 
     expect(result).toEqual({ writes: [], status: 1 })
     expect(errored()).toContain('brief-sanity-partner has no background to export')
+  })
+
+  /**
+   * The id is what the operator names and the key is what the file and the
+   * frontmatter carry. An API writer can leave the two disagreeing, and export
+   * would then file `bar.md` while stamping `brief-foo`: the next sync creates
+   * `brief-bar` from the file — without the `record` — and retires the
+   * orphaned `brief-foo`. Nothing here can pick which one the operator meant.
+   */
+  it('refuses a document whose key is not the key its id spells', () => {
+    const { out, errored } = sink()
+
+    const result = exportCorpus(
+      BRIEFS,
+      [{ ...DATASET_BORN, key: 'partnership-page' }],
+      { ...REQUEST, key: 'sanity-partner' },
+      out,
+    )
+
+    expect(result).toEqual({ writes: [], status: 1 })
+    expect(errored()).toContain('brief-sanity-partner')
+    expect(errored()).toContain('partnership-page')
+    expect(errored()).toMatch(/malformed/)
+  })
+
+  /**
+   * The reader enforces the key grammar and the writer did not, so a key the
+   * dataset accepts could reach a file every brief command then throws on —
+   * and one holding a separator could put that file outside the corpus
+   * directory altogether.
+   */
+  it('refuses a document whose key is not lowercase kebab-case', () => {
+    const { out, errored } = sink()
+
+    const result = exportCorpus(
+      BRIEFS,
+      [{ ...DATASET_BORN, key: 'Sanity.Partner' }],
+      { ...REQUEST, key: 'sanity-partner' },
+      out,
+    )
+
+    expect(result).toEqual({ writes: [], status: 1 })
+    expect(errored()).toContain('lowercase kebab-case')
+    expect(errored()).toContain(CORPUS_KEY.source)
+  })
+
+  it('refuses a key that would write outside the corpus directory', () => {
+    const { out, errored } = sink()
+
+    for (const key of ['../../etc/passwd', 'briefs/nested']) {
+      const result = exportCorpus(BRIEFS, [DATASET_BORN], { ...REQUEST, key }, out)
+
+      expect(result).toEqual({ writes: [], status: 1 })
+    }
+
+    expect(errored()).toContain('lowercase kebab-case')
   })
 
   /**
