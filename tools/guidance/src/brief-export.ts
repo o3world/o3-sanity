@@ -13,7 +13,7 @@
  * and one transaction: the file, and the dataset copy stamped with the
  * `sourcePath` that makes it file-backed from here on.
  */
-import { mkdirSync, writeFileSync } from 'node:fs'
+import { mkdirSync, rmSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 
 import { getCliClient } from 'sanity/cli'
@@ -54,12 +54,23 @@ async function main() {
   )
 
   if (file) {
+    const path = join(REPO_ROOT, file.sourcePath)
     mkdirSync(join(REPO_ROOT, BRIEF_DIR), { recursive: true })
-    writeFileSync(join(REPO_ROOT, file.sourcePath), file.contents, 'utf8')
+    writeFileSync(path, file.contents, 'utf8')
 
-    const tx = client.transaction()
-    commitWrites(tx, writes)
-    await tx.commit({ visibility: 'sync' })
+    /* The file goes first and is taken back if the transaction does not land.
+     * Committing first would risk the worse half: a document stamped with a
+     * `sourcePath` nothing backs is one the next sync retires, record and all,
+     * while a file with no stamp only registers a key twice. Neither half is
+     * an export, so an export leaves neither. */
+    try {
+      const tx = client.transaction()
+      commitWrites(tx, writes)
+      await tx.commit({ visibility: 'sync' })
+    } catch (error) {
+      rmSync(path, { force: true })
+      throw error
+    }
 
     console.log(`\ndone — commit ${file.sourcePath}; \`pnpm brief:sync\` now has nothing to write`)
   }
