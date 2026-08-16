@@ -224,6 +224,22 @@ describe('planCorpus', () => {
     expect(plan.orphans.map((document) => document._id)).toEqual(['brief-retired'])
     expect(plan.disowned.map((document) => document._id)).toEqual(['brief-session'])
   })
+
+  /**
+   * A GROQ projection returns a field the document does not have as `null`
+   * rather than leaving it out, so a snapshot fetched from the dataset says
+   * `sourcePath: null` where a hand-written one says nothing at all. Read
+   * strictly, that is a file-backed document, and sync deletes it — which is
+   * what a dataset-born brief looked like the first time this ran for real.
+   */
+  it('reads a null sourcePath as no sourcePath', () => {
+    const plan = planCorpus(briefs([]), [
+      { _id: 'brief-session', key: 'session', title: 'Session', background: 'y', sourcePath: null },
+    ])
+
+    expect(plan.orphans).toEqual([])
+    expect(plan.disowned.map((document) => document._id)).toEqual(['brief-session'])
+  })
 })
 
 describe('driftOf', () => {

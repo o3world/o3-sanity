@@ -54,12 +54,17 @@ export type CorpusDocument = {
   [field: string]: unknown
 }
 
-/** Published documents of the corpus type, as the dataset currently holds them. */
+/**
+ * Published documents of the corpus type, as the dataset currently holds them.
+ *
+ * A GROQ projection returns a field the document does not have as `null`, so
+ * every optional field here is nullable and absence has two spellings.
+ */
 export type CorpusSnapshotDocument = {
   _id: string
-  key?: string
-  title?: string
-  sourcePath?: string
+  key?: string | null
+  title?: string | null
+  sourcePath?: string | null
   [field: string]: unknown
 }
 
@@ -142,7 +147,7 @@ export function planCorpus(
   const claimed = new Set(entries.map((entry) => entry.document._id))
   const unclaimed = snapshot.filter((document) => !claimed.has(document._id))
   const ours = (document: CorpusSnapshotDocument) =>
-    corpus.claimsOrphans === 'every' || document.sourcePath !== undefined
+    corpus.claimsOrphans === 'every' || document.sourcePath != null
 
   return {
     entries,
@@ -170,7 +175,7 @@ export function driftOf(plan: CorpusPlan): CorpusDrift[] {
   const unsourced = plan.orphans.map((document): CorpusDrift => ({
     kind: 'unsourced',
     _id: document._id,
-    sourcePath: document.sourcePath,
+    sourcePath: document.sourcePath ?? undefined,
   }))
 
   return [...stale, ...unsourced]
