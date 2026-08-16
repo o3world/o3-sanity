@@ -307,6 +307,28 @@ describe('syncCorpus', () => {
     ])
   })
 
+  /**
+   * A standing draft is export's problem, not sync's: on a file-backed
+   * document the draft can only be an accident, and the entry that writes the
+   * published copy deletes it either way.
+   */
+  it('writes the same thing whether or not a draft stands beside the document', () => {
+    const { out } = sink()
+
+    const settled: CorpusSnapshotDocument = {
+      _id: 'brief-figma-sync',
+      key: 'figma-sync',
+      title: 'The Figma sync pipeline',
+      background: 'Something the repo no longer says.',
+      sourcePath: 'tools/guidance/briefs/figma-sync.md',
+    }
+
+    const plain = syncCorpus(BRIEFS, [settled], out)
+    const marked = syncCorpus(BRIEFS, [{ ...settled, draftBeside: true }], out)
+
+    expect(marked).toEqual(plain)
+  })
+
   it('never retires a document the corpus disowned, and says it left it alone', () => {
     const { out, logged } = sink()
 
@@ -397,6 +419,22 @@ describe('checkCorpus', () => {
     expect(code).toBe(1)
     expect(errored()).toContain('tools/guidance/briefs/figma-sync.md')
     expect(errored()).toMatch(/export|different key/)
+  })
+
+  it('says nothing about a draft standing beside a settled document', () => {
+    const { out, errored } = sink()
+
+    const settled: CorpusSnapshotDocument = {
+      _id: 'brief-figma-sync',
+      key: 'figma-sync',
+      title: 'The Figma sync pipeline',
+      background: 'What the watcher does and what it refuses to do.',
+      sourcePath: 'tools/guidance/briefs/figma-sync.md',
+      draftBeside: true,
+    }
+
+    expect(checkCorpus(BRIEFS, [settled], out)).toBe(0)
+    expect(errored()).toBe('')
   })
 
   it('still fails when the markdown behind a file-backed document is gone', () => {
@@ -568,6 +606,27 @@ describe('exportCorpus', () => {
     expect(result).toEqual({ writes: [], status: 1 })
     expect(errored()).toContain('tools/guidance/briefs/figma-sync.md')
     expect(errored()).toContain('different key')
+  })
+
+  /**
+   * A brief published once and edited in Studio since: the fold hands export
+   * the published copy, and the file it would write is a version behind. The
+   * next sync deletes the draft — the newer `record` with it — so export stops
+   * here rather than picking one of the two copies for the operator.
+   */
+  it('refuses a document an unpublished draft still stands beside', () => {
+    const { out, errored } = sink()
+
+    const snapshot = normalizeSnapshot([
+      { ...DATASET_BORN, background: 'Published once.' },
+      { ...DATASET_BORN, _id: 'drafts.brief-sanity-partner', background: 'Edited since.' },
+    ])
+
+    const result = exportCorpus(BRIEFS, snapshot, { ...REQUEST, key: 'sanity-partner' }, out)
+
+    expect(result).toEqual({ writes: [], status: 1 })
+    expect(errored()).toContain('brief-sanity-partner')
+    expect(errored()).toMatch(/publish or discard/)
   })
 
   // The corpus reader refuses a file that is nothing but frontmatter, so a

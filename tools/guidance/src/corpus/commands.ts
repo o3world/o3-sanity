@@ -154,6 +154,16 @@ export function exportCorpus(
     return { writes: [], status: 1 }
   }
 
+  /* The row carries the published copy, so a draft edited since holds material
+   * the file would not: export would write the older body, and the draft delete
+   * the next sync makes would take the newer one — `record` included. */
+  if (candidate.draftBeside) {
+    out.error(
+      `✗ ${_id} has an unpublished draft beside it — publish or discard it in Studio, then export`,
+    )
+    return { writes: [], status: 1 }
+  }
+
   const sourcePath = `${request.directory}/${candidate.key}.md`
   if (request.occupied.includes(sourcePath)) {
     out.error(`✗ ${sourcePath} already exists — export never writes over a file in the corpus`)
@@ -249,7 +259,15 @@ function describeUnexportable(
  * mutation body: `_id` and `_type` are set from the corpus, and the rest are the
  * dataset's to write.
  */
-const RESERVED = new Set(['_id', '_type', '_rev', '_createdAt', '_updatedAt', 'draftOnly'])
+const RESERVED = new Set([
+  '_id',
+  '_type',
+  '_rev',
+  '_createdAt',
+  '_updatedAt',
+  'draftOnly',
+  'draftBeside',
+])
 
 /** Everything a snapshot row holds that a mutation body may carry back. */
 function heldFields(candidate: CorpusSnapshotDocument): Record<string, unknown> {

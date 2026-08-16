@@ -396,8 +396,30 @@ describe('normalizeSnapshot', () => {
         key: 'figma-sync',
         title: 'The Figma sync pipeline',
         sourcePath: 'tools/guidance/briefs/figma-sync.md',
+        draftBeside: true,
       },
     ])
+  })
+
+  /**
+   * The fold loses the draft's fields, and sync deletes the draft itself. That
+   * is right for a file-backed document, whose draft can only be an accident,
+   * and wrong for a dataset-born one, where the draft is the newer edit — so
+   * the row says the draft was there and export refuses to promote past it.
+   */
+  it('marks a published row that a draft still stands beside', () => {
+    const folded = normalizeSnapshot([
+      { _id: 'brief-sanity-partner', key: 'sanity-partner', background: 'Published once.' },
+      { _id: 'drafts.brief-sanity-partner', key: 'sanity-partner', background: 'Edited since.' },
+    ])
+
+    expect(folded).toMatchObject([{ _id: 'brief-sanity-partner', draftBeside: true }])
+  })
+
+  it('leaves the marker off a row no draft shadows', () => {
+    const folded = normalizeSnapshot([{ _id: 'brief-sanity-partner', key: 'sanity-partner' }])
+
+    expect(folded[0]?.draftBeside).toBeUndefined()
   })
 
   it('keeps a draft nobody published, under the id it will publish as', () => {
@@ -434,6 +456,7 @@ describe('normalizeSnapshot', () => {
         _id: 'brief-figma-sync',
         key: 'figma-sync',
         sourcePath: 'tools/guidance/briefs/figma-sync.md',
+        draftBeside: true,
       },
     ])
   })

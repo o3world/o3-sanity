@@ -70,6 +70,11 @@ export type CorpusSnapshotDocument = {
    * fetch that excludes drafts never produces one.
    */
   draftOnly?: boolean
+  /**
+   * A draft stands beside the published copy this row carries. Set by
+   * `normalizeSnapshot`; the fields are the published ones either way.
+   */
+  draftBeside?: boolean
   [field: string]: unknown
 }
 
@@ -107,10 +112,16 @@ export function normalizeSnapshot(
     const live = published.get(_id)
     const draft = drafts.get(_id)
     if (!live) return { ...draft, _id, draftOnly: true }
+
+    /* The fold keeps the published fields, so a draft edited since is an edit
+     * the row cannot show. Sync deletes such a draft — right on a file-backed
+     * document, whose draft can only be an accident — so the row says the
+     * draft is there and export refuses to promote the copy under it. */
+    const beside = draft ? { draftBeside: true } : {}
     if (live.sourcePath == null && draft?.sourcePath != null) {
-      return { ...live, sourcePath: draft.sourcePath }
+      return { ...live, ...beside, sourcePath: draft.sourcePath }
     }
-    return live
+    return { ...live, ...beside }
   })
 }
 
