@@ -41,7 +41,7 @@ type QuoteSectionProps = SectionProps<'quoteSection'>
  */
 export function QuoteSection({ quote, attribution, decoration, surface }: QuoteSectionProps) {
   if (!quote) return null
-  const resolved = resolveSurface(surface, 'bone')
+  const resolved = resolveSurface(surface, 'quoteSection')
   // The spheres and the molecule are alternatives: the band draws one or neither.
   const showOrbs = resolveDecoration(decoration) === 'orbs'
 

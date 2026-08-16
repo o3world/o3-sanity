@@ -8,12 +8,13 @@ export type Decoration = 'molecule' | 'orbs' | 'none'
  * draws. `stegaClean` strips the invisible characters draft-mode strings
  * carry; a stega'd `"molecule"` fails a bare `===` and silently draws nothing.
  *
- * **The fallback is `orbs`, and it is baked in rather than passed** — which is
- * the one way this differs from its sibling `resolveSurface`. Every block whose
- * knob offers orbs lists them first, so `orbs` IS the declared `initialValue`
- * wherever the answer can be `orbs` at all; a block whose knob is
- * `['none', 'molecule']` never asks for anything but `molecule`, so what the
- * other two arms resolve to cannot reach it.
+ * **The fallback is one literal, not a per-block lookup** — which is the one way
+ * this differs from its sibling `resolveSurface`, which reads each block's own
+ * default off `BLOCK_KNOBS`. Every block whose knob offers orbs lists them
+ * first, so `orbs` IS the declared `initialValue` wherever the answer can be
+ * `orbs` at all; a block whose knob is `['none', 'molecule']` never asks for
+ * anything but `molecule`, so what the other two arms resolve to cannot reach
+ * it.
  */
 export function resolveDecoration(value: string | null | undefined): Decoration {
   const chosen = stegaClean(value)

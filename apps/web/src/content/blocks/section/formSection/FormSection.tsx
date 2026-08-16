@@ -47,7 +47,7 @@ export function FormSection({
   surface,
   loc,
 }: FormSectionProps) {
-  const resolved = resolveSurface(surface, 'bone')
+  const resolved = resolveSurface(surface, 'formSection')
 
   return (
     <SectionShell surface={resolved} top="sm" bottom="sm">

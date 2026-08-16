@@ -41,7 +41,7 @@ type MediaSectionProps = SectionProps<'mediaSection'>
 export function MediaSection({ media, variant, width, surface }: MediaSectionProps) {
   if (!media) return null
   const fullBleed = stegaClean(width) === 'full-bleed'
-  const resolved = resolveSurface(surface, 'white')
+  const resolved = resolveSurface(surface, 'mediaSection')
   const surfaceClass = SURFACE_CLASS[resolved]
 
   if (stegaClean(variant) === 'capture') {

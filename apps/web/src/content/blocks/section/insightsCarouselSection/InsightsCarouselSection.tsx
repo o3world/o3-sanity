@@ -40,7 +40,7 @@ export function InsightsCarouselSection({
   const Card = getCard('insight')
 
   return (
-    <SectionShell surface={resolveSurface(surface, 'bone')} top="sm" bottom="sm">
+    <SectionShell surface={resolveSurface(surface, 'insightsCarouselSection')} top="sm" bottom="sm">
       <CarouselTrack
         heading={heading}
         headingAttr={fieldAttr(loc, 'heading')}

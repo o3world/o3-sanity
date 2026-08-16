@@ -37,7 +37,7 @@ export function LayoutSection({
   surface,
 }: LayoutSectionProps) {
   const columnClass = COLUMN_CLASSES[resolveColumns(columns)]
-  const resolved = resolveSurface(surface, 'white')
+  const resolved = resolveSurface(surface, 'layoutSection')
   const showMolecule = resolveDecoration(decoration) === 'molecule'
   return (
     <SectionShell

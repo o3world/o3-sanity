@@ -16,23 +16,19 @@ import { ANCHOR_OFFSET_CLASS, sectionAnchors } from './anchors'
  * Leaf module (no 'use client', no registry imports) so both bundles can
  * share it without widening either.
  *
- * The item-level `data-sanity` lands on a wrapper `<div>` rather than inside
- * the block component (vtx stamped it inside SectionShell): `@o3/ui`'s
- * SectionShell contract is `surface` + children only, so the dispatch seam
- * owns visual-editing attribution. The attribute is inert outside the
- * Presentation runtime.
- *
- * **#107 re-asked that question and the seam won again.** `SectionShellProps
- * extends HTMLAttributes<HTMLElement>` and spreads `...rest`, so the shell
- * *could* carry the attribute without a contract change — but five blocks
+ * **The item-level `data-sanity` lands on a wrapper `<div>`, not on
+ * `SectionShell`.** `SectionShellProps extends HTMLAttributes<HTMLElement>` and
+ * spreads `...rest`, so the shell *could* carry the attribute — but five blocks
  * (`heroSection`, `ctaSection`, `logoWallSection`, `quoteSection`,
  * `screenGridSection`) build their own `<section>` rather than use the shell,
  * because they bleed past the gutter or paint a gradient. Routing band
- * attribution through the shell would attribute eleven blocks and silently
- * skip five. The seam attributes all sixteen identically, and `@o3/ui` keeps
- * knowing nothing about Sanity. What #107 *did* change is that the seam now also
- * hands each block its own location, so the block can attribute the levels
- * below it — its header, its keyed items — off a path it did not have to
+ * attribution through the shell would attribute eleven blocks and silently skip
+ * five. The seam attributes all sixteen identically, and `@o3/ui` keeps knowing
+ * nothing about Sanity. The attribute is inert outside the Presentation
+ * runtime.
+ *
+ * The seam also hands each block its own location, so a block can attribute the
+ * levels below it — its header, its keyed items — off a path it did not have to
  * build.
  */
 export function renderDispatchedBlocks(opts: {

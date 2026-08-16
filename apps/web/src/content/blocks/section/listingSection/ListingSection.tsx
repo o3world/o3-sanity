@@ -14,7 +14,7 @@ type ListingSectionProps = SectionProps<'listingSection'>
 export function ListingSection({ heading, pages, surface }: ListingSectionProps) {
   const Card = getCard('page')
   return (
-    <SectionShell surface={resolveSurface(surface, 'white')}>
+    <SectionShell surface={resolveSurface(surface, 'listingSection')}>
       <div className="flex flex-col gap-12 py-24">
         {heading ? <DisplayHeading>{heading}</DisplayHeading> : null}
         <ul className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">

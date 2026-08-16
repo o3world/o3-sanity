@@ -69,7 +69,7 @@ export function FeatureGridSection({
   const items = features ?? []
   const chosen = stegaClean(layout)
   const orbital = chosen === 'orbital'
-  const resolved = resolveSurface(surface, 'white')
+  const resolved = resolveSurface(surface, 'featureGridSection')
   const onInk = resolved === 'ink'
 
   /**

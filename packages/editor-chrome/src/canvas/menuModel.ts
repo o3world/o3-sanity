@@ -20,8 +20,8 @@ import { itemActionGroups, type ItemActionGroup } from './itemActions'
  * six-control bar is a wall. The menu carries `visibleKnobs(...).all`: the
  * subject's COMPLETE roster, gated exactly the way the Studio form gates it.
  * `heroSection.decoration` is the live example — it resolves, it applies, and
- * it declares no `bar`, so before this it was reachable from no editorial
- * surface at all.
+ * it declares no `bar`, so the menu is the only place on the canvas that offers
+ * it.
  *
  * Pure and in-package for the reason ADR 0004 gives: the `unit` vitest project
  * is `.test.ts` only, so anything importing a component is out of its reach.
@@ -59,9 +59,10 @@ export interface KnobMenuModel {
   title?: string
   groups: readonly KnobMenuGroup[]
   /**
-   * Duplicate / Remove / Move on the subject (#111) — what the stock context
-   * menu carried before #110 preempted it. Absent groups, never empty ones, and
-   * empty altogether while the draft snapshot has not resolved the item.
+   * Duplicate / Remove / Move on the subject — the array actions the Studio's
+   * own context menu offers, restated here because this menu preempts it.
+   * Absent groups, never empty ones, and empty altogether while the draft
+   * snapshot has not resolved the item.
    */
   itemActions: readonly ItemActionGroup[]
   /**
