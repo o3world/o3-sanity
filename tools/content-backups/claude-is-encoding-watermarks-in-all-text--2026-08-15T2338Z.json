@@ -1,0 +1,871 @@
+{
+  "_createdAt": "2026-08-15T20:26:23Z",
+  "_id": "071cfb32-c38d-49c3-ae8a-1ff5b4783d0a",
+  "_rev": "JIJewTNDNk27RW6M6aCTIa",
+  "_system": {
+    "base": {
+      "id": "071cfb32-c38d-49c3-ae8a-1ff5b4783d0a",
+      "rev": "JIJewTNDNk27RW6M6a0IvN"
+    }
+  },
+  "_type": "insight",
+  "_updatedAt": "2026-08-15T23:38:20Z",
+  "author": {
+    "_ref": "person-wp-8710",
+    "_type": "reference"
+  },
+  "body": [
+    {
+      "_key": "r0100",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0101",
+          "_type": "span",
+          "marks": [],
+          "text": "Every Claude model launched on or after August 2, 2026 "
+        },
+        {
+          "_key": "r0102",
+          "_type": "span",
+          "marks": ["m1"],
+          "text": "marks the text it writes"
+        },
+        {
+          "_key": "r0103",
+          "_type": "span",
+          "marks": [],
+          "text": ". The mark is woven into the words rather than attached beside them, so it survives a copy and paste into a Google Doc and some editing after that. Images and files get signed C2PA provenance instead. It runs everywhere Claude is offered, including the API, the apps, Claude Code and the cloud resellers. Older models are not marked yet."
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "m1",
+          "_type": "link",
+          "href": "https://support.claude.com/en/articles/16266773-how-claude-marks-ai-generated-content"
+        }
+      ],
+      "style": "normal"
+    },
+    {
+      "_key": "r0110",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0111",
+          "_type": "span",
+          "marks": [],
+          "text": "There is no detector. Anthropic says it is working to let third parties read the mark and will publish the mechanism later. So one organization can currently read a signature being written into a growing share of the world's text."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "r0120",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0121",
+          "_type": "span",
+          "marks": [],
+          "text": "That is the story everyone covered, and it is the smaller one. The rule that changes what you have to do started the same day, it has nothing to do with the watermark, and it is addressed to you rather than to Anthropic."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "r0200",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0201",
+          "_type": "span",
+          "marks": [],
+          "text": "The duty is yours, and it started in August"
+        }
+      ],
+      "markDefs": [],
+      "style": "h2"
+    },
+    {
+      "_key": "r0210",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0211",
+          "_type": "span",
+          "marks": ["m2"],
+          "text": "Article 50"
+        },
+        {
+          "_key": "r0212",
+          "_type": "span",
+          "marks": [],
+          "text": " of the EU AI Act applied from August 2, 2026, and it splits the work in two. The provider marks machine-readably, which is Anthropic's obligation under 50(2) and what the watermark is for. The deployer discloses. The deployer is any professional user publishing the output, which is you."
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "m2",
+          "_type": "link",
+          "href": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-50"
+        }
+      ],
+      "style": "normal"
+    },
+    {
+      "_key": "r0220",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0221",
+          "_type": "span",
+          "marks": [],
+          "text": "Article 50(4) catches text that is published, meant to inform the public, and about a matter of public interest. All three have to be true at once. The Commission's list of what counts as public interest runs from politics and public administration through health, consumer safety and fundamental rights to economic and cultural developments that may be a relevant subject of public debate. That is wide enough to hold a great deal of ordinary commentary."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "r0230",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0231",
+          "_type": "span",
+          "marks": [],
+          "text": "Then the part that gets missed. The Commission has "
+        },
+        {
+          "_key": "r0232",
+          "_type": "span",
+          "marks": ["m3"],
+          "text": "said plainly"
+        },
+        {
+          "_key": "r0233",
+          "_type": "span",
+          "marks": [],
+          "text": " that deployers cannot simply rely on the machine-readable marking the provider embedded under 50(2) to meet their own duty. Disclosure has to reach a person at first exposure, in something they can see or hear, without technical tools. Brussels wrote off the watermark as a way of telling your reader anything, months before the watermark shipped."
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "m3",
+          "_type": "link",
+          "href": "https://digital-strategy.ec.europa.eu/en/faqs/transparency-obligations-under-article-50-ai-act"
+        }
+      ],
+      "style": "normal"
+    },
+    {
+      "_key": "r0240",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0241",
+          "_type": "span",
+          "marks": [],
+          "text": "One date is going around as a deadline, and it is not yours. The "
+        },
+        {
+          "_key": "r0242",
+          "_type": "span",
+          "marks": ["m4"],
+          "text": "Digital Omnibus"
+        },
+        {
+          "_key": "r0243",
+          "_type": "span",
+          "marks": [],
+          "text": " left Article 50 standing but gave a four-month grace period to providers whose systems were already on the market before August 2. They have until December 2, 2026 to meet the 50(2) marking obligation. That is a clock for model providers with older systems, and nobody else. Your disclosure duty under 50(4) has been live since August 2, with no grace period at all."
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "m4",
+          "_type": "link",
+          "href": "https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/"
+        }
+      ],
+      "style": "normal"
+    },
+    {
+      "_key": "r0300",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0301",
+          "_type": "span",
+          "marks": [],
+          "text": "What actually discharges it"
+        }
+      ],
+      "markDefs": [],
+      "style": "h2"
+    },
+    {
+      "_key": "r0310",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0311",
+          "_type": "span",
+          "marks": [],
+          "text": "The duty does not apply where the content has had human review or editorial control and a person or entity holds editorial responsibility for it. The Commission is specific about what that means: deliberate examination of the substance by people with relevant knowledge and professional judgment, and an entity with the authority to approve, alter or reject on substantive grounds. It names spell-checking and grammar correction as examples that do not count."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "r0320",
+      "_type": "pullQuote",
+      "attribution": null,
+      "text": "The carve-out is not a loophole. It is a description of editing, written into law."
+    },
+    {
+      "_key": "r0330",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0331",
+          "_type": "span",
+          "marks": [],
+          "text": "So the compliance question is not what your tools did. It is whether a competent person examined the substance, and whether somebody is answerable for publishing it. Both are auditable by a human. Both survive whatever the detection tooling does next. And neither punishes the person who used a model to fix their prepositions or to read the screen."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "r0340",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0341",
+          "_type": "span",
+          "marks": [],
+          "text": "Getting it wrong is expensive. Transparency breaches run to 15 million euros or 3% of worldwide annual turnover, whichever is higher, enforced by national market surveillance authorities across 27 member states rather than by one office in Brussels. Our reading of the interpretive parts above is a reading. We are not lawyers."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "r0350",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0351",
+          "_type": "span",
+          "marks": [],
+          "text": "What that means this week"
+        }
+      ],
+      "markDefs": [],
+      "style": "h3"
+    },
+    {
+      "_key": "r0360",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0361",
+          "_type": "span",
+          "marks": [],
+          "text": "None of this needs a lawyer to start, and none of it is new work if you were already editing properly."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "r0370",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0371",
+          "_type": "span",
+          "marks": [],
+          "text": "Decide which of your surfaces are in scope. Published, meant to inform, about a matter of public interest, all three at once. A product page is usually out. A point of view on your industry is usually in."
+        }
+      ],
+      "level": 1,
+      "listItem": "number",
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "r0380",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0381",
+          "_type": "span",
+          "marks": [],
+          "text": "Name who reviews, and say what reviewing means. Substance, not spelling, by someone who knows the subject, with the authority to reject the piece. Write it down somewhere that survives that person leaving."
+        }
+      ],
+      "level": 1,
+      "listItem": "number",
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "r0390",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0391",
+          "_type": "span",
+          "marks": [],
+          "text": "Where a piece is in scope and nobody reviewed it that way, disclose in words on the page. A visible line a reader meets on arrival, not a tag in the head and not a machine-readable mark."
+        }
+      ],
+      "level": 1,
+      "listItem": "number",
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "r0400b",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0401b",
+          "_type": "span",
+          "marks": [],
+          "text": "Stop waiting for December 2. It is not your date, and your date has passed."
+        }
+      ],
+      "level": 1,
+      "listItem": "number",
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "r0400",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0401",
+          "_type": "span",
+          "marks": [],
+          "text": "What the mark can and cannot tell you"
+        }
+      ],
+      "markDefs": [],
+      "style": "h2"
+    },
+    {
+      "_key": "r0410",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0411",
+          "_type": "span",
+          "marks": [],
+          "text": "Anthropic's own list of limitations is unusually candid, and it does most of the work of explaining what the mark is worth. A detected mark means content may have been processed by Claude. It does not mean Claude wrote it. Proofreading leaves a mark, so does translation, and so does asking for a summary of something you wrote yourself. Absence proves as little: older models leave nothing, heavy editing removes the signal, and short passages never carried enough of it to begin with."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "r0420",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0421",
+          "_type": "span",
+          "marks": [],
+          "text": "What is left is roughly one bit, and a noisy one. It was never a human-versus-machine detector, and Anthropic does not claim it is."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "r0430",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0431",
+          "_type": "span",
+          "marks": [],
+          "text": "The practical consequence is that the mark lands on human work. Someone writing in their second language who runs a paragraph through Claude to fix the prepositions gets the same mark as a content farm. So does someone using it to read the screen. The signal cannot tell them apart, and an institution that treats the signal as a verdict will not try."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "r0500",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0501",
+          "_type": "span",
+          "marks": [],
+          "text": "The mark was not built for your reader"
+        }
+      ],
+      "markDefs": [],
+      "style": "h2"
+    },
+    {
+      "_key": "r0510",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0511",
+          "_type": "span",
+          "marks": [],
+          "text": "Ask who wants a watermark badly enough to build one before being told to, and the answer is not the public. Training pipelines want it. Synthetic text is a real share of the open web now, and models trained on their own output "
+        },
+        {
+          "_key": "r0512",
+          "_type": "span",
+          "marks": ["m5"],
+          "text": "degrade"
+        },
+        {
+          "_key": "r0513",
+          "_type": "span",
+          "marks": [],
+          "text": ". Filtering marked text out of a crawl is plausibly the largest practical use of this technology, and it appears in no announcement."
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "m5",
+          "_type": "link",
+          "href": "https://www.nature.com/articles/s41586-024-07566-y"
+        }
+      ],
+      "style": "normal"
+    },
+    {
+      "_key": "r0520",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0521",
+          "_type": "span",
+          "marks": [],
+          "text": "Watermarks are also "
+        },
+        {
+          "_key": "r0522",
+          "_type": "span",
+          "marks": ["m6"],
+          "text": "radioactive"
+        },
+        {
+          "_key": "r0523",
+          "_type": "span",
+          "marks": [],
+          "text": ". Fine-tune a model on watermarked output and traces of the mark show up in the model that comes out. A transparency measure is also evidence in a distillation dispute."
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "m6",
+          "_type": "link",
+          "href": "https://arxiv.org/abs/2402.14904"
+        }
+      ],
+      "style": "normal"
+    },
+    {
+      "_key": "r0530",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0531",
+          "_type": "span",
+          "marks": [],
+          "text": "These interests sit alongside the public case rather than against it. A mark that helps the information ecosystem can also protect the weights. But those are two claims, and only one of them is in the announcement. If you are waiting for the watermark to solve a problem you have, notice that it was built to solve somebody else's."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "r0600",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0601",
+          "_type": "span",
+          "marks": [],
+          "text": "Who gets to read it, and when"
+        }
+      ],
+      "markDefs": [],
+      "style": "h2"
+    },
+    {
+      "_key": "r0610",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0611",
+          "_type": "span",
+          "marks": [],
+          "text": "Access to detection is being handed out in order, and the order is public. Anthropic reads it now. The European Commission's voluntary "
+        },
+        {
+          "_key": "r0612",
+          "_type": "span",
+          "marks": ["m7"],
+          "text": "Code of Practice on transparency of AI-generated content"
+        },
+        {
+          "_key": "r0613",
+          "_type": "span",
+          "marks": [],
+          "text": " sets out who is next: signatories have to make detection accessible and free to end users, platforms, fact-checkers, researchers and regulators, and hand market surveillance authorities their compliance documentation and detection tools on reasoned request."
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "m7",
+          "_type": "link",
+          "href": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ],
+      "style": "normal"
+    },
+    {
+      "_key": "r0620",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0621",
+          "_type": "span",
+          "marks": [],
+          "text": "Forensic detection, meaning identification of AI content where the marking was stripped, is optional under the Code, and access to its results can be restricted to verified expert users. That is the provision shaped like surveillance, and it is not the one anybody is quoting."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "r0630",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0631",
+          "_type": "span",
+          "marks": [],
+          "text": "February 2, 2027 is the date to keep. By then signatories have to make detection interoperable through one of four routes: an industry-standard access method for detection queries, a publicly readable signpost embedded in the content naming which service to use, a shared provider-agnostic detection service, or something comparable. Until one of those lands, a watermark is a fact about a document that almost nobody can check. After it, the fact is one anyone can look up."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "r0640",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0641",
+          "_type": "span",
+          "marks": [],
+          "text": "Your readers are not on that list at all."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "r0700",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0701",
+          "_type": "span",
+          "marks": [],
+          "text": "What one bit does inside an institution"
+        }
+      ],
+      "markDefs": [],
+      "style": "h2"
+    },
+    {
+      "_key": "r0710",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0711",
+          "_type": "span",
+          "marks": [],
+          "text": "We have run this experiment. The classifier-detector era put a probability score in front of teachers and hiring managers, who read it as a verdict, and the people it hurt worst were the ones writing in a second language. A watermark is better evidence than those classifiers ever were. It is still one bit, and the institutions are the same institutions."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "r0715",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0716",
+          "_type": "span",
+          "marks": [],
+          "text": "How Claude's mark works is inference, because Anthropic has not published the algorithm. "
+        },
+        {
+          "_key": "r0717",
+          "_type": "span",
+          "marks": ["m8"],
+          "text": "Kirchenbauer and colleagues"
+        },
+        {
+          "_key": "r0718",
+          "_type": "span",
+          "marks": [],
+          "text": " described the canonical scheme in 2023: split the vocabulary pseudorandomly at each step using a secret key, nudge the model toward one half, then detect by counting. Google's SynthID-Text was the first deployment of that family at production scale."
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "m8",
+          "_type": "link",
+          "href": "https://arxiv.org/abs/2301.10226"
+        }
+      ],
+      "style": "normal"
+    },
+    {
+      "_key": "r0720",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0721",
+          "_type": "span",
+          "marks": [],
+          "text": "The security research makes this harder rather than easier. ETH Zurich's SRI Lab "
+        },
+        {
+          "_key": "r0722",
+          "_type": "span",
+          "marks": ["m9"],
+          "text": "probed SynthID-Text"
+        },
+        {
+          "_key": "r0723",
+          "_type": "span",
+          "marks": [],
+          "text": " and found it hard to forge and easy to erase: a 4% spoofing success rate against more than 80% for the schemes it was measured against, with forgery attempts leaving discoverable clues, but better than 90% removal from an off-the-shelf paraphraser and close to 100% when the attacker had also stolen the watermark. The asymmetry is the right way round, because it is worse to frame someone than to miss them. It also means a missing mark tells you nothing, and an institution holding a detector will read a missing mark as clearance."
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "m9",
+          "_type": "link",
+          "href": "https://www.sri.inf.ethz.ch/blog/probingsynthid"
+        }
+      ],
+      "style": "normal"
+    },
+    {
+      "_key": "r0730",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0731",
+          "_type": "span",
+          "marks": [],
+          "text": "There is a small irony in the erasing. Rewriting enough of a passage to remove the mark is close to the amount of substantive human work that earns the Article 50(4) exemption in the first place. The cheat and the compliant route converge."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "r0800",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0801",
+          "_type": "span",
+          "marks": [],
+          "text": "What this does to search, briefly"
+        }
+      ],
+      "markDefs": [],
+      "style": "h2"
+    },
+    {
+      "_key": "r0810",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0811",
+          "_type": "span",
+          "marks": [],
+          "text": "At I/O in May, Google announced that "
+        },
+        {
+          "_key": "r0812",
+          "_type": "span",
+          "marks": ["m10"],
+          "text": "SynthID and C2PA verification"
+        },
+        {
+          "_key": "r0813",
+          "_type": "span",
+          "marks": [],
+          "text": " are coming to Search and Chrome, after 50 million verifications in the Gemini app. That is media provenance: images, video, audio. Google announced no signal that detects or penalizes AI-written text in ranking, and its stated position has not moved. It targets scaled content abuse and thin content, not the method of production. In the same announcement, OpenAI, Kakao and ElevenLabs said they will adopt SynthID for their own output."
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "m10",
+          "_type": "link",
+          "href": "https://blog.google/innovation-and-ai/products/identifying-ai-generated-media-online/"
+        }
+      ],
+      "style": "normal"
+    },
+    {
+      "_key": "r0820",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0821",
+          "_type": "span",
+          "marks": [],
+          "text": "Capability changed, policy did not. Passage-level detection of machine-written text is now available to a search engine in a way no third-party detector ever was. Whether it is used in ranking is unknown, and anyone selling you a study on watermarks and rankings two weeks in is selling you noise."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "r0830",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0831",
+          "_type": "span",
+          "marks": [],
+          "text": "The defensible advice is boring. Put Content Credentials on original photography. Check that your CDN and image pipeline are not stripping signed metadata, because most of them were built to strip anything they did not recognize. Keep authorship markup clean and true."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "r0840",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0841",
+          "_type": "span",
+          "marks": [],
+          "text": "One speculation, labeled as such: if labs filter marked text out of training and retrieval corpora for their own hygiene, heavily marked content could quietly lose ground in AI-generated answers regardless of what happens in blue links. We have no evidence for this. It is what we would watch."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "r0900",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0901",
+          "_type": "span",
+          "marks": [],
+          "text": "Where the line actually is"
+        }
+      ],
+      "markDefs": [],
+      "style": "h2"
+    },
+    {
+      "_key": "r0910",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0911",
+          "_type": "span",
+          "marks": [],
+          "text": "Human versus machine is the wrong line to draw. Nobody can measure it, the watermark does not try, and the law did not ask. The mark records a machine's involvement, which is a smaller and much duller fact than the one everybody wants."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "r0920",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0921",
+          "_type": "span",
+          "marks": [],
+          "text": "The line the EU drew is better, and it is worth adopting whatever your own regulator ends up asking for. Did a competent person examine the substance? Is somebody answerable for publishing it? Those questions were answerable before any of this shipped, and they will still be answerable after the detectors arrive in 2027."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    },
+    {
+      "_key": "r0930",
+      "_type": "block",
+      "children": [
+        {
+          "_key": "r0931",
+          "_type": "span",
+          "marks": [],
+          "text": "This piece is a borderline Article 50(4) case by its own subject matter. It is published, it means to inform, and it is about a legal and technological development plainly under public debate. It carries the mark. It also carries a byline, and a person checked every claim in it against a primary source. A detector can find the mark. It cannot find the byline."
+        }
+      ],
+      "markDefs": [],
+      "style": "normal"
+    }
+  ],
+  "categories": [
+    {
+      "_key": "cat-75",
+      "_ref": "category-wp-75",
+      "_type": "reference"
+    },
+    {
+      "_key": "cat-11",
+      "_ref": "category-wp-11",
+      "_type": "reference"
+    }
+  ],
+  "excerpt": "Every Claude model launched since August 2 marks the text it writes, and only Anthropic can read the mark. That is the smaller story. The disclosure duty that lands on you started the same day, no watermark discharges it, and the only thing that does is a competent person reading the work.",
+  "featuredImage": {
+    "_type": "figure",
+    "alt": "A dark panelled surface in deep relief, raked by a red light entering from the top-left corner and falling away to black across the middle.",
+    "image": {
+      "_type": "image",
+      "asset": {
+        "_ref": "image-411bc3e28e862c7896872c514f1f222217596314-1024x1024-jpg",
+        "_type": "reference"
+      }
+    }
+  },
+  "publishedAt": "2026-08-15T22:00:00Z",
+  "seo": {
+    "description": "Claude's watermark is not your compliance story. The EU put the disclosure duty on the publisher, it applied on August 2, 2026, and only real human review clears it.",
+    "title": "Claude watermarks its text now. Disclosure is still your job."
+  },
+  "slug": {
+    "_type": "slug",
+    "current": "claude-is-encoding-watermarks-in-all-text"
+  },
+  "title": "Claude watermarks its text now, and the EU already made disclosure your job."
+}
