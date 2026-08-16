@@ -3,9 +3,9 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 import type { ConditionalPropertyCallback } from 'sanity'
 
 /**
- * A file-backed brief is owned by its markdown (ADR 0027): `brief:sync` writes
- * the whole document from the repo, so an edit made here survives until the
- * next sync and then vanishes without a word. Studio shows those briefs and
+ * A file-backed brief is owned by its markdown (ADR 0027): the repo is the
+ * source of truth for it, and one owner means no field of it is Studio's to
+ * edit — the markdown is where the change goes. Studio shows those briefs and
  * edits none of them. A dataset-born brief has no `sourcePath` and stays
  * editable.
  */
