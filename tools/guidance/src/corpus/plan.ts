@@ -55,7 +55,7 @@ export type CorpusDocument = {
 }
 
 /**
- * Published documents of the corpus type, as the dataset currently holds them.
+ * One document of the corpus type, as the dataset currently holds it.
  *
  * A GROQ projection returns a field the document does not have as `null`, so
  * every optional field here is nullable and absence has two spellings.
@@ -65,7 +65,47 @@ export type CorpusSnapshotDocument = {
   key?: string | null
   title?: string | null
   sourcePath?: string | null
+  /**
+   * The dataset holds this id only as a draft. Set by `normalizeSnapshot`; a
+   * fetch that excludes drafts never produces one.
+   */
+  draftOnly?: boolean
   [field: string]: unknown
+}
+
+const DRAFT_PREFIX = 'drafts.'
+
+/**
+ * A fetch that includes drafts → one row per id.
+ *
+ * A draft and its published copy are two rows of one document, and the corpus
+ * plans against documents: the published copy's fields are what a sync
+ * compares, and `sourcePath` counts from either copy, because provenance
+ * belongs to the document rather than to the copy that happens to carry it.
+ *
+ * Drafts have to reach the plan at all because the document a key collision
+ * would destroy is usually one the authoring skill never published (ADR 0027).
+ */
+export function normalizeSnapshot(
+  rows: readonly CorpusSnapshotDocument[],
+): CorpusSnapshotDocument[] {
+  const published = new Map<string, CorpusSnapshotDocument>()
+  const drafts = new Map<string, CorpusSnapshotDocument>()
+  for (const row of rows) {
+    if (row._id.startsWith(DRAFT_PREFIX)) drafts.set(row._id.slice(DRAFT_PREFIX.length), row)
+    else published.set(row._id, row)
+  }
+
+  const draftOnlyIds = [...drafts.keys()].filter((id) => !published.has(id))
+  return [...published.keys(), ...draftOnlyIds].map((_id) => {
+    const live = published.get(_id)
+    const draft = drafts.get(_id)
+    if (!live) return { ...draft, _id, draftOnly: true }
+    if (live.sourcePath == null && draft?.sourcePath != null) {
+      return { ...live, sourcePath: draft.sourcePath }
+    }
+    return live
+  })
 }
 
 /**
@@ -85,8 +125,23 @@ type CorpusEntry = {
   fields: string[]
 }
 
+/**
+ * A source whose id is already held by a document the corpus does not own.
+ * Nothing is planned for it: writing would patch the repo's copy over work the
+ * dataset owns and convert it to file-backed on the way (ADR 0027).
+ */
+export type CorpusConflict = {
+  _id: string
+  /** The markdown that asks for the id. */
+  sourcePath?: string
+  /** How the dataset holds the id — as a published document, or as a draft. */
+  live: 'published' | 'draft'
+}
+
 export type CorpusPlan = {
   entries: CorpusEntry[]
+  /** Sources the corpus cannot commit, because the dataset owns the id already. */
+  conflicts: CorpusConflict[]
   /** Snapshot documents no source claims. What to do with one is the command's call. */
   orphans: CorpusSnapshotDocument[]
   /** Snapshot documents outside the corpus's authority — never written, never reported. */
@@ -95,11 +150,13 @@ export type CorpusPlan = {
 
 /** One verdict in the drift report: a document the dataset disagrees with the repo about. */
 export type CorpusDrift = {
-  kind: 'missing' | 'drifted' | 'unsourced'
+  kind: 'missing' | 'drifted' | 'unsourced' | 'conflicted'
   _id: string
   sourcePath?: string
   /** Which fields disagree. Present only on `drifted`. */
   fields?: string[]
+  /** How the dataset holds a contested id. Present only on `conflicted`. */
+  live?: CorpusConflict['live']
 }
 
 /**
@@ -134,23 +191,47 @@ export function planCorpus(
 ): CorpusPlan {
   const byId = new Map(snapshot.map((document) => [document._id, document]))
   const fields = fieldsOf(corpus)
-
-  const entries = corpus.sources.map((source): CorpusEntry => {
-    const document = documentFor(corpus, source)
-    const live = byId.get(document._id)
-    if (!live) return { document, state: 'created', fields: [] }
-
-    const stale = fields.filter((field) => live[field] !== document[field])
-    return { document, state: stale.length > 0 ? 'updated' : 'unchanged', fields: stale }
-  })
-
-  const claimed = new Set(entries.map((entry) => entry.document._id))
-  const unclaimed = snapshot.filter((document) => !claimed.has(document._id))
   const ours = (document: CorpusSnapshotDocument) =>
     corpus.claimsOrphans === 'every' || document.sourcePath != null
 
+  const entries: CorpusEntry[] = []
+  const conflicts: CorpusConflict[] = []
+
+  for (const source of corpus.sources) {
+    const document = documentFor(corpus, source)
+    const live = byId.get(document._id)
+
+    /* The id is derived from the key, so a new source can land on one the
+     * dataset already owns. Writing it would be a silent conversion. */
+    if (live && !ours(live)) {
+      conflicts.push({
+        _id: document._id,
+        sourcePath: document.sourcePath,
+        live: live.draftOnly ? 'draft' : 'published',
+      })
+      continue
+    }
+
+    /* A draft-only id has no published copy to compare, so the document the
+     * corpus writes is missing however complete the draft is. */
+    if (!live || live.draftOnly) {
+      entries.push({ document, state: 'created', fields: [] })
+      continue
+    }
+
+    const stale = fields.filter((field) => live[field] !== document[field])
+    entries.push({ document, state: stale.length > 0 ? 'updated' : 'unchanged', fields: stale })
+  }
+
+  const claimed = new Set([
+    ...entries.map((entry) => entry.document._id),
+    ...conflicts.map((conflict) => conflict._id),
+  ])
+  const unclaimed = snapshot.filter((document) => !claimed.has(document._id))
+
   return {
     entries,
+    conflicts,
     orphans: unclaimed.filter(ours),
     disowned: unclaimed.filter((document) => !ours(document)),
   }
@@ -162,6 +243,13 @@ export function planCorpus(
  * `check` asks.
  */
 export function driftOf(plan: CorpusPlan): CorpusDrift[] {
+  const contested = plan.conflicts.map(({ _id, sourcePath, live }): CorpusDrift => ({
+    kind: 'conflicted',
+    _id,
+    sourcePath,
+    live,
+  }))
+
   const stale = plan.entries.flatMap(({ document, state, fields }): CorpusDrift[] => {
     if (state === 'created') {
       return [{ kind: 'missing', _id: document._id, sourcePath: document.sourcePath }]
@@ -178,5 +266,5 @@ export function driftOf(plan: CorpusPlan): CorpusDrift[] {
     sourcePath: document.sourcePath ?? undefined,
   }))
 
-  return [...stale, ...unsourced]
+  return [...contested, ...stale, ...unsourced]
 }

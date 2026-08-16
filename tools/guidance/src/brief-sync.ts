@@ -11,13 +11,15 @@
  * client. Two things differ from `guidance:sync`, both from the ADR. Documents
  * are patched rather than replaced, so the `record` the authoring skill wrote
  * survives. And a brief with no `sourcePath` was born in the dataset — this
- * never touches one.
+ * never touches one, and refuses to sync a file that asks for its id, exiting
+ * non-zero instead.
  */
 import { getCliClient } from 'sanity/cli'
 
 import { BRIEF_DIR, BRIEF_FIELDS, BRIEF_TYPE, briefCorpus } from './briefs'
 import { commitWrites } from './commit'
 import { syncCorpus } from './corpus/commands'
+import { normalizeSnapshot } from './corpus/plan'
 
 import type { CorpusSnapshotDocument } from './corpus/plan'
 
@@ -30,15 +32,23 @@ async function main() {
     `syncing ${corpus.sources.length} brief(s) from ${BRIEF_DIR} → ${projectId}/${dataset}\n`,
   )
 
-  const snapshot = await client.fetch<CorpusSnapshotDocument[]>(
-    `*[_type == $type && !(_id in path("drafts.**"))]{_id, ${BRIEF_FIELDS.join(', ')}}`,
-    { type: BRIEF_TYPE },
+  /* Drafts included: the authoring skill writes a brief as a draft and never
+   * publishes it, so a published-only fetch cannot see the document a key
+   * collision would destroy. `normalizeSnapshot` folds the two copies back
+   * into one row per id. */
+  const snapshot = normalizeSnapshot(
+    await client.fetch<CorpusSnapshotDocument[]>(
+      `*[_type == $type]{_id, ${BRIEF_FIELDS.join(', ')}}`,
+      { type: BRIEF_TYPE },
+    ),
   )
 
   const tx = client.transaction()
-  commitWrites(tx, syncCorpus(corpus, snapshot, console))
+  const { writes, status } = syncCorpus(corpus, snapshot, console)
+  commitWrites(tx, writes)
 
   await tx.commit({ visibility: 'sync' })
+  process.exitCode = status
   console.log(`\ndone — a piece reaches its briefs with briefs[]->{title, background, record}`)
 }
 

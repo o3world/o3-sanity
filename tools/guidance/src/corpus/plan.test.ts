@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { driftOf, planCorpus } from './plan'
+import { driftOf, normalizeSnapshot, planCorpus } from './plan'
 
 import type { Corpus, CorpusSource } from './plan'
 
@@ -240,6 +240,209 @@ describe('planCorpus', () => {
     expect(plan.orphans).toEqual([])
     expect(plan.disowned.map((document) => document._id)).toEqual(['brief-session'])
   })
+
+  /**
+   * The id is derived from the key, so a file dropped into the corpus can land
+   * on one the authoring skill already wrote in the dataset. Claiming it by id
+   * alone would patch the repo's background over a session's work, stamp a
+   * `sourcePath` on it, and delete its draft — a silent conversion of a
+   * dataset-born brief into a file-backed one (ADR 0027). The collision is a
+   * conflict instead: no entry, so nothing is written for it at all.
+   */
+  it('refuses a source whose id is already a dataset-born document', () => {
+    const plan = planCorpus(
+      briefs([
+        {
+          key: 'session',
+          title: 'The session brief',
+          body: 'What the repo says.',
+          sourcePath: 'tools/guidance/briefs/session.md',
+        },
+      ]),
+      [
+        {
+          _id: 'brief-session',
+          key: 'session',
+          title: 'Session',
+          background: 'y',
+          sourcePath: null,
+        },
+      ],
+    )
+
+    expect(plan.entries).toEqual([])
+    expect(plan.conflicts).toEqual([
+      {
+        _id: 'brief-session',
+        sourcePath: 'tools/guidance/briefs/session.md',
+        live: 'published',
+      },
+    ])
+    expect(plan.orphans).toEqual([])
+    expect(plan.disowned).toEqual([])
+  })
+
+  /**
+   * The skill writes a brief as a draft and never publishes it, so the
+   * document a collision would destroy is exactly the one a published-only
+   * snapshot cannot see. `normalizeSnapshot` folds the draft in; the guard
+   * reads it like any other dataset-born document.
+   */
+  it('refuses a source whose id is a draft nobody published', () => {
+    const plan = planCorpus(
+      briefs([
+        {
+          key: 'session',
+          title: 'The session brief',
+          body: 'What the repo says.',
+          sourcePath: 'tools/guidance/briefs/session.md',
+        },
+      ]),
+      normalizeSnapshot([
+        { _id: 'drafts.brief-session', key: 'session', title: 'Session', background: 'y' },
+      ]),
+    )
+
+    expect(plan.entries).toEqual([])
+    expect(plan.conflicts).toMatchObject([{ _id: 'brief-session', live: 'draft' }])
+  })
+
+  it('claims a source whose live document is already file-backed', () => {
+    const plan = planCorpus(
+      briefs([
+        {
+          key: 'session',
+          title: 'The session brief',
+          body: 'What the repo says.',
+          sourcePath: 'tools/guidance/briefs/session.md',
+        },
+      ]),
+      [
+        {
+          _id: 'brief-session',
+          key: 'session',
+          title: 'The session brief',
+          background: 'What the repo says.',
+          sourcePath: 'tools/guidance/briefs/session.md',
+        },
+      ],
+    )
+
+    expect(plan.conflicts).toEqual([])
+    expect(plan.entries.map((entry) => entry.state)).toEqual(['unchanged'])
+  })
+
+  // Guidance is the whole truth of its type — there is no such thing as a
+  // dataset-born guidance document, so a live copy with no `sourcePath` is a
+  // document to overwrite rather than one to step around.
+  it('never conflicts in a corpus that claims every document', () => {
+    const plan = planCorpus(
+      guidance([source({ key: 'o3-voice', sourcePath: 'docs/guidance/voice.md' })]),
+      [{ _id: 'guidance-o3-voice', key: 'o3-voice', title: 'Something else', body: 'x' }],
+    )
+
+    expect(plan.conflicts).toEqual([])
+    expect(plan.entries).toMatchObject([{ state: 'updated' }])
+  })
+
+  // A published copy that exists is what sync compares against; a draft-only
+  // id has no published copy to compare, so the document is missing.
+  it('counts a file-backed id the dataset holds only as a draft as missing', () => {
+    const plan = planCorpus(
+      briefs([
+        {
+          key: 'session',
+          title: 'The session brief',
+          body: 'What the repo says.',
+          sourcePath: 'tools/guidance/briefs/session.md',
+        },
+      ]),
+      normalizeSnapshot([
+        {
+          _id: 'drafts.brief-session',
+          key: 'session',
+          title: 'The session brief',
+          background: 'What the repo says.',
+          sourcePath: 'tools/guidance/briefs/session.md',
+        },
+      ]),
+    )
+
+    expect(plan.conflicts).toEqual([])
+    expect(plan.entries).toMatchObject([{ state: 'created' }])
+  })
+})
+
+/**
+ * Drafts have to reach the plan — the document a key collision would destroy
+ * is usually one the authoring skill never published (ADR 0027) — but they are
+ * not separate documents to the corpus. One id, one row.
+ */
+describe('normalizeSnapshot', () => {
+  it('folds a draft into the published copy it shadows, published fields winning', () => {
+    expect(
+      normalizeSnapshot([
+        {
+          _id: 'brief-figma-sync',
+          key: 'figma-sync',
+          title: 'The Figma sync pipeline',
+          sourcePath: 'tools/guidance/briefs/figma-sync.md',
+        },
+        { _id: 'drafts.brief-figma-sync', key: 'figma-sync', title: 'Edited in Studio' },
+      ]),
+    ).toEqual([
+      {
+        _id: 'brief-figma-sync',
+        key: 'figma-sync',
+        title: 'The Figma sync pipeline',
+        sourcePath: 'tools/guidance/briefs/figma-sync.md',
+      },
+    ])
+  })
+
+  it('keeps a draft nobody published, under the id it will publish as', () => {
+    expect(
+      normalizeSnapshot([
+        { _id: 'drafts.brief-session', key: 'session', title: 'Session', background: 'y' },
+      ]),
+    ).toEqual([
+      {
+        _id: 'brief-session',
+        key: 'session',
+        title: 'Session',
+        background: 'y',
+        draftOnly: true,
+      },
+    ])
+  })
+
+  // Provenance is the document's, not the copy's: a published row that lost
+  // its `sourcePath` while the draft still carries one is a file-backed brief
+  // to patch, not a dataset-born one to step around.
+  it('takes a sourcePath from whichever copy has one', () => {
+    expect(
+      normalizeSnapshot([
+        { _id: 'brief-figma-sync', key: 'figma-sync', sourcePath: null },
+        {
+          _id: 'drafts.brief-figma-sync',
+          key: 'figma-sync',
+          sourcePath: 'tools/guidance/briefs/figma-sync.md',
+        },
+      ]),
+    ).toEqual([
+      {
+        _id: 'brief-figma-sync',
+        key: 'figma-sync',
+        sourcePath: 'tools/guidance/briefs/figma-sync.md',
+      },
+    ])
+  })
+
+  it('passes a published-only snapshot through unchanged', () => {
+    const rows = [{ _id: 'guidance-o3-voice', key: 'o3-voice', body: 'x' }]
+
+    expect(normalizeSnapshot(rows)).toEqual(rows)
+  })
 })
 
 describe('driftOf', () => {
@@ -289,6 +492,31 @@ describe('driftOf', () => {
     ])
 
     expect(driftOf(plan)).toEqual([])
+  })
+
+  // A key collision is drift the repo cannot fix by syncing: the check has to
+  // fail, and it has to name the file that cannot have the id it asks for.
+  it('reports a source that collides with a dataset-born document', () => {
+    const plan = planCorpus(
+      briefs([
+        {
+          key: 'session',
+          title: 'The session brief',
+          body: 'What the repo says.',
+          sourcePath: 'tools/guidance/briefs/session.md',
+        },
+      ]),
+      [{ _id: 'brief-session', key: 'session', title: 'Session', background: 'y' }],
+    )
+
+    expect(driftOf(plan)).toEqual([
+      {
+        kind: 'conflicted',
+        _id: 'brief-session',
+        sourcePath: 'tools/guidance/briefs/session.md',
+        live: 'published',
+      },
+    ])
   })
 
   // `brief:check` audits file-backed briefs and says nothing about the rest —

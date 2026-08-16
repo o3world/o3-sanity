@@ -35,9 +35,11 @@ async function main() {
   )
 
   const tx = client.transaction()
-  commitWrites(tx, syncCorpus(corpus, snapshot, console))
+  const { writes, status } = syncCorpus(corpus, snapshot, console)
+  commitWrites(tx, writes)
 
   await tx.commit({ visibility: 'sync' })
+  process.exitCode = status
   console.log(`\ndone — query them with *[_type == "guidance"]{key, title, body}`)
   console.log(`the voice guide is ${idFor(GUIDANCE_TYPE, 'o3-voice')}`)
 }

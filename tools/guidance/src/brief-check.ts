@@ -7,7 +7,9 @@
  * Exits non-zero on any drift, so it works as a checkpoint rather than a report
  * nobody reads. It audits **file-backed** briefs only: a brief with no
  * `sourcePath` was written in the dataset by the authoring skill, and this
- * command's silence about one says nothing about whether it is any good.
+ * command's silence about one says nothing about whether it is any good. It
+ * speaks about one in a single case — a markdown file asking for the id that
+ * brief already holds, which no sync can settle.
  * The verdicts come from the corpus plan (`src/corpus/`); this file supplies
  * the client.
  */
@@ -15,6 +17,7 @@ import { getCliClient } from 'sanity/cli'
 
 import { BRIEF_FIELDS, BRIEF_TYPE, briefCorpus } from './briefs'
 import { checkCorpus } from './corpus/commands'
+import { normalizeSnapshot } from './corpus/plan'
 
 import type { CorpusSnapshotDocument } from './corpus/plan'
 
@@ -24,9 +27,14 @@ async function main() {
   const corpus = briefCorpus()
   const { projectId, dataset } = client.config()
 
-  const snapshot = await client.fetch<CorpusSnapshotDocument[]>(
-    `*[_type == $type && !(_id in path("drafts.**"))]{_id, ${BRIEF_FIELDS.join(', ')}}`,
-    { type: BRIEF_TYPE },
+  /* Drafts included, folded into one row per id: a brief the authoring skill
+   * wrote and never published still owns its id, and a file that asks for the
+   * same one is drift the repo cannot sync away. */
+  const snapshot = normalizeSnapshot(
+    await client.fetch<CorpusSnapshotDocument[]>(
+      `*[_type == $type]{_id, ${BRIEF_FIELDS.join(', ')}}`,
+      { type: BRIEF_TYPE },
+    ),
   )
 
   console.log(

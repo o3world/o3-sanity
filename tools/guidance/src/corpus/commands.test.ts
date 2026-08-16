@@ -93,7 +93,7 @@ describe('syncCorpus', () => {
   it('writes every source as a published document when the dataset is empty', () => {
     const { out } = sink()
 
-    const writes = syncCorpus(CORPUS, [], out)
+    const { writes } = syncCorpus(CORPUS, [], out)
 
     expect(writes.filter((write) => write.op === 'createOrReplace')).toEqual([
       {
@@ -124,7 +124,7 @@ describe('syncCorpus', () => {
   it('clears the draft shadow of every document it writes', () => {
     const { out } = sink()
 
-    const writes = syncCorpus(CORPUS, IN_STEP, out)
+    const { writes } = syncCorpus(CORPUS, IN_STEP, out)
 
     expect(writes.filter((write) => write.op === 'delete')).toEqual([
       { op: 'delete', _id: 'drafts.guidance-o3-voice' },
@@ -135,7 +135,7 @@ describe('syncCorpus', () => {
   it('retires a published document no source claims, draft and all', () => {
     const { out, logged } = sink()
 
-    const writes = syncCorpus(
+    const { writes } = syncCorpus(
       CORPUS,
       [...IN_STEP, { _id: 'guidance-o3-retired', key: 'gone' }],
       out,
@@ -164,7 +164,7 @@ describe('syncCorpus', () => {
   it('leaves a dataset-owned field alone when the corpus merges', () => {
     const { out } = sink()
 
-    const writes = syncCorpus(
+    const { writes } = syncCorpus(
       BRIEFS,
       [
         {
@@ -203,10 +203,79 @@ describe('syncCorpus', () => {
     })
   })
 
+  /**
+   * The severe case (ADR 0027): a markdown file lands on the id the authoring
+   * skill already wrote in the dataset. Patching would put the repo's
+   * background over the session's work and stamp a `sourcePath` on it; the
+   * draft delete that follows every entry would take the skill's draft with
+   * it. So the entry is dropped whole — no create, no patch, no draft delete —
+   * and the operator is told, because a source that never syncs is otherwise
+   * indistinguishable from one that did.
+   */
+  it('writes nothing at all for a source whose id the dataset owns', () => {
+    const { out, errored } = sink()
+
+    const { writes, status } = syncCorpus(
+      BRIEFS,
+      [{ ...DATASET_BORN, _id: 'brief-figma-sync', key: 'figma-sync' }],
+      out,
+    )
+
+    expect(writes).toEqual([])
+    expect(status).toBe(1)
+    expect(errored()).toContain('brief-figma-sync')
+    expect(errored()).toContain('tools/guidance/briefs/figma-sync.md')
+    expect(errored()).toMatch(/export|different key/)
+  })
+
+  it('names a contested id the dataset holds only as a draft', () => {
+    const { out, errored } = sink()
+
+    const { writes, status } = syncCorpus(
+      BRIEFS,
+      [{ ...DATASET_BORN, _id: 'brief-figma-sync', key: 'figma-sync', draftOnly: true }],
+      out,
+    )
+
+    expect(writes).toEqual([])
+    expect(status).toBe(1)
+    expect(errored()).toContain('draft')
+  })
+
+  it('syncs the rest of the corpus around a conflict', () => {
+    const { out } = sink()
+
+    const corpus = {
+      ...BRIEFS,
+      sources: [
+        ...BRIEFS.sources,
+        {
+          key: 'sanity-partner',
+          title: 'The Sanity partnership page',
+          body: 'What the partnership is.',
+          sourcePath: 'tools/guidance/briefs/sanity-partner.md',
+        },
+      ],
+    }
+
+    const { writes, status } = syncCorpus(
+      corpus,
+      [{ ...DATASET_BORN, _id: 'brief-figma-sync', key: 'figma-sync' }],
+      out,
+    )
+
+    expect(status).toBe(1)
+    expect(writes.map((write) => ('document' in write ? write.document._id : write._id))).toEqual([
+      'brief-sanity-partner',
+      'brief-sanity-partner',
+      'drafts.brief-sanity-partner',
+    ])
+  })
+
   it('never retires a document the corpus disowned, and says it left it alone', () => {
     const { out, logged } = sink()
 
-    const writes = syncCorpus(BRIEFS, [DATASET_BORN], out)
+    const { writes } = syncCorpus(BRIEFS, [DATASET_BORN], out)
 
     expect(writes.filter((write) => write.op === 'delete')).toEqual([
       { op: 'delete', _id: 'drafts.brief-figma-sync' },
@@ -264,6 +333,22 @@ describe('checkCorpus', () => {
 
     expect(checkCorpus(BRIEFS, [settled, DATASET_BORN], out)).toBe(0)
     expect(errored()).toBe('')
+  })
+
+  // The one drift a sync cannot settle: it names the file, the id, and the two
+  // ways out, because the resolution is a decision rather than a re-run.
+  it('fails when a source asks for an id the dataset owns', () => {
+    const { out, errored } = sink()
+
+    const code = checkCorpus(
+      BRIEFS,
+      [{ ...DATASET_BORN, _id: 'brief-figma-sync', key: 'figma-sync' }],
+      out,
+    )
+
+    expect(code).toBe(1)
+    expect(errored()).toContain('tools/guidance/briefs/figma-sync.md')
+    expect(errored()).toMatch(/export|different key/)
   })
 
   it('still fails when the markdown behind a file-backed document is gone', () => {
