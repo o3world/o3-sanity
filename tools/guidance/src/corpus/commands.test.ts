@@ -204,6 +204,34 @@ describe('syncCorpus', () => {
   })
 
   /**
+   * A settled merge entry has nothing to set, and patching it anyway bumps
+   * `_rev` and `_updatedAt` on every run — a no-op sync that leaves the whole
+   * corpus looking freshly edited. The create stays: it costs nothing against
+   * a document that exists and repairs one that does not.
+   */
+  it('patches nothing when the dataset already agrees with the source', () => {
+    const { out } = sink()
+
+    const { writes } = syncCorpus(
+      BRIEFS,
+      [
+        {
+          _id: 'brief-figma-sync',
+          key: 'figma-sync',
+          title: 'The Figma sync pipeline',
+          background: 'What the watcher does and what it refuses to do.',
+          sourcePath: 'tools/guidance/briefs/figma-sync.md',
+          record: 'Thesis: noticing no longer belongs to anyone.',
+        },
+      ],
+      out,
+    )
+
+    expect(writes.some((write) => write.op === 'patch')).toBe(false)
+    expect(writes).toContainEqual({ op: 'createIfNotExists', document: expect.anything() })
+  })
+
+  /**
    * The severe case (ADR 0027): a markdown file lands on the id the authoring
    * skill already wrote in the dataset. Patching would put the repo's
    * background over the session's work and stamp a `sourcePath` on it; the

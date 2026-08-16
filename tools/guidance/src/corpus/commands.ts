@@ -38,14 +38,15 @@ export type CorpusSync = {
 }
 
 /**
- * Every source the corpus can commit is written, settled or not: the writes are
- * idempotent against a deterministic id, and writing the whole corpus is what
- * makes a re-run a repair rather than a diff to trust.
+ * Every source the corpus can commit is written: the writes are idempotent
+ * against a deterministic id, and writing the whole corpus is what makes a
+ * re-run a repair rather than a diff to trust.
  *
  * A `replace` corpus goes out whole. A `merge` corpus creates the document and
  * then sets only the fields the source owns, because the dataset writes some of
  * them: replacing a brief would wipe the `record` the authoring skill left in
- * it (ADR 0027).
+ * it (ADR 0027). A settled merge entry sets nothing at all — the create is free
+ * against a document that exists, the patch would bump `_rev` on every run.
  *
  * A source the plan calls a conflict is skipped whole, writes and draft delete
  * alike, and reported as an error.
@@ -68,7 +69,9 @@ export function syncCorpus(
       writes.push({ op: 'createOrReplace', document })
     } else {
       writes.push({ op: 'createIfNotExists', document })
-      writes.push({ op: 'patch', _id: document._id, set: ownedFieldsOf(corpus, document) })
+      if (state !== 'unchanged') {
+        writes.push({ op: 'patch', _id: document._id, set: ownedFieldsOf(corpus, document) })
+      }
     }
   }
 
