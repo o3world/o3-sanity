@@ -1,7 +1,14 @@
+import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
+
 import { describe, expect, it } from 'vitest'
 
-import { checkCorpus, syncCorpus } from './commands'
+import { checkCorpus, exportCorpus, syncCorpus } from './commands'
+import { normalizeSnapshot } from './plan'
+import { readGlobbedSources } from './read'
 
+import type { CorpusWrite } from './commands'
 import type { Corpus, CorpusSnapshotDocument } from './plan'
 
 const CORPUS: Corpus = {
@@ -390,5 +397,314 @@ describe('checkCorpus', () => {
 
     expect(code).toBe(1)
     expect(errored()).toContain('brief-retired has no source in the corpus')
+  })
+})
+
+/**
+ * Export promotes a dataset-born document into the repo (ADR 0027). The
+ * candidates are exactly the documents the corpus disowns, and the operator
+ * picks one — exporting the lot blindly would file everything a session ever
+ * scribbled.
+ */
+describe('exportCorpus', () => {
+  const REQUEST = { directory: 'tools/guidance/briefs', occupied: [] }
+
+  it('names the dataset-born documents and exports nothing when asked for no key', () => {
+    const { out, logged } = sink()
+
+    const result = exportCorpus(BRIEFS, [DATASET_BORN], REQUEST, out)
+
+    expect(result).toEqual({ writes: [], status: 0 })
+    expect(logged()).toContain('sanity-partner')
+    expect(logged()).toContain('The Sanity partnership page')
+  })
+
+  /**
+   * The stamp lands on the published copy — the copy sync compares and a
+   * `briefs` reference resolves to — and carries the fields the file now backs
+   * with it, so the document matches its own markdown and the next sync has
+   * nothing to write. Everything else the document holds is untouched.
+   */
+  it('turns a published document into a file and stamps its provenance', () => {
+    const { out } = sink()
+
+    const result = exportCorpus(BRIEFS, [DATASET_BORN], { ...REQUEST, key: 'sanity-partner' }, out)
+
+    expect(result.file).toEqual({
+      sourcePath: 'tools/guidance/briefs/sanity-partner.md',
+      contents:
+        '---\nkey: sanity-partner\ntitle: The Sanity partnership page\n---\n\nGathered in the session that drafted it.\n',
+    })
+    expect(result.writes).toEqual([
+      {
+        op: 'patch',
+        _id: 'brief-sanity-partner',
+        set: {
+          key: 'sanity-partner',
+          title: 'The Sanity partnership page',
+          background: 'Gathered in the session that drafted it.',
+          sourcePath: 'tools/guidance/briefs/sanity-partner.md',
+        },
+      },
+    ])
+    expect(result.status).toBe(0)
+  })
+
+  /**
+   * The authoring skill writes a brief as a draft and never publishes it, so
+   * most candidates arrive draft-only. Stamping the draft and leaving the rest
+   * to sync would create the published copy from the file — and the file
+   * carries only `background`, so the `record` the interview produced would be
+   * deleted with the draft. Export publishes the draft whole instead.
+   */
+  it('publishes a draft-only document whole, rather than stamping the draft', () => {
+    const { out } = sink()
+
+    const snapshot = normalizeSnapshot([
+      {
+        _id: 'drafts.brief-sanity-partner',
+        _rev: 'a1b2c3',
+        _createdAt: '2026-08-15T00:00:00Z',
+        key: 'sanity-partner',
+        title: 'The Sanity partnership page',
+        background: 'Gathered in the session that drafted it.',
+        record: 'Thesis: the partnership is a delivery claim.',
+      },
+    ])
+
+    const result = exportCorpus(BRIEFS, snapshot, { ...REQUEST, key: 'sanity-partner' }, out)
+
+    expect(result.writes).toEqual([
+      {
+        op: 'createOrReplace',
+        document: {
+          _id: 'brief-sanity-partner',
+          _type: 'brief',
+          key: 'sanity-partner',
+          title: 'The Sanity partnership page',
+          background: 'Gathered in the session that drafted it.',
+          record: 'Thesis: the partnership is a delivery claim.',
+          sourcePath: 'tools/guidance/briefs/sanity-partner.md',
+        },
+      },
+      { op: 'delete', _id: 'drafts.brief-sanity-partner' },
+    ])
+    expect(result.status).toBe(0)
+  })
+
+  // A file-backed document is already in the repo, and the file is the source
+  // of truth for it: exporting again would write the dataset's copy over it.
+  it('refuses a document the repo already backs', () => {
+    const { out, errored } = sink()
+
+    const result = exportCorpus(
+      BRIEFS,
+      [
+        {
+          _id: 'brief-figma-sync',
+          key: 'figma-sync',
+          title: 'The Figma sync pipeline',
+          background: 'What the watcher does and what it refuses to do.',
+          sourcePath: 'tools/guidance/briefs/figma-sync.md',
+        },
+      ],
+      { ...REQUEST, key: 'figma-sync' },
+      out,
+    )
+
+    expect(result).toEqual({ writes: [], status: 1 })
+    expect(errored()).toContain('brief-figma-sync is already file-backed')
+    expect(errored()).toContain('tools/guidance/briefs/figma-sync.md')
+  })
+
+  // The file a key maps to is not always the file that registers it — one
+  // named for another key would be overwritten without ever being read.
+  it('refuses to write over a file the directory already holds', () => {
+    const { out, errored } = sink()
+
+    const result = exportCorpus(
+      BRIEFS,
+      [DATASET_BORN],
+      {
+        ...REQUEST,
+        key: 'sanity-partner',
+        occupied: ['tools/guidance/briefs/sanity-partner.md'],
+      },
+      out,
+    )
+
+    expect(result).toEqual({ writes: [], status: 1 })
+    expect(errored()).toContain('tools/guidance/briefs/sanity-partner.md already exists')
+  })
+
+  /**
+   * The collision sync and check refuse (ADR 0027) sends the operator here, so
+   * export has to name the same two ways out rather than claim the brief does
+   * not exist: the key is taken by a file, and the document is real.
+   */
+  it('refuses a key a markdown file already registers, and says what to do', () => {
+    const { out, errored } = sink()
+
+    const result = exportCorpus(
+      BRIEFS,
+      [{ ...DATASET_BORN, _id: 'brief-figma-sync', key: 'figma-sync' }],
+      { ...REQUEST, key: 'figma-sync' },
+      out,
+    )
+
+    expect(result).toEqual({ writes: [], status: 1 })
+    expect(errored()).toContain('tools/guidance/briefs/figma-sync.md')
+    expect(errored()).toContain('different key')
+  })
+
+  // The corpus reader refuses a file that is nothing but frontmatter, so a
+  // document with an empty body would export to a file sync then throws on.
+  it('refuses a document with no body to write', () => {
+    const { out, errored } = sink()
+
+    const result = exportCorpus(
+      BRIEFS,
+      [{ ...DATASET_BORN, background: '  ' }],
+      { ...REQUEST, key: 'sanity-partner' },
+      out,
+    )
+
+    expect(result).toEqual({ writes: [], status: 1 })
+    expect(errored()).toContain('brief-sanity-partner has no background to export')
+  })
+
+  /**
+   * A brief is wider than its file: `instructions`, `links` and `record` have
+   * no slot in the markdown and stay on the document, where a merge sync writes
+   * around them. Losing them from the file is fine; not knowing is not.
+   */
+  it('names the fields the file does not carry', () => {
+    const { out, logged } = sink()
+
+    exportCorpus(
+      BRIEFS,
+      [
+        {
+          ...DATASET_BORN,
+          instructions: 'Lead with the delivery claim.',
+          links: ['https://o3world.com'],
+          record: 'Thesis: the partnership is a delivery claim.',
+        },
+      ],
+      { ...REQUEST, key: 'sanity-partner' },
+      out,
+    )
+
+    expect(logged()).toContain('instructions, links, record')
+  })
+})
+
+/**
+ * What an export is for (ADR 0027): the brief survives a rebuild. The file goes
+ * out through the real reader and the writes through a model of the transaction
+ * `commitWrites` builds, so the loop is exercised end to end without a project.
+ */
+describe('export → sync', () => {
+  /** The dataset after a transaction: the same fold `commitWrites` hands the client. */
+  function applied(
+    snapshot: readonly CorpusSnapshotDocument[],
+    writes: readonly CorpusWrite[],
+  ): CorpusSnapshotDocument[] {
+    const byId = new Map(snapshot.map((document) => [document._id, { ...document }]))
+    for (const write of writes) {
+      if (write.op === 'delete') byId.delete(write._id)
+      else if (write.op === 'patch') {
+        const live = byId.get(write._id)
+        if (live) byId.set(write._id, { ...live, ...write.set })
+      } else if (write.op === 'createOrReplace' || !byId.has(write.document._id)) {
+        byId.set(write.document._id, { ...write.document })
+      }
+    }
+    return [...byId.values()]
+  }
+
+  /** The exported file, read back the way `brief:sync` reads the corpus. */
+  function corpusFrom(file: { sourcePath: string; contents: string }): Corpus {
+    const root = mkdtempSync(join(tmpdir(), 'corpus-export-'))
+    mkdirSync(join(root, 'briefs'))
+    writeFileSync(join(root, file.sourcePath), file.contents, 'utf8')
+    return { ...BRIEFS, sources: readGlobbedSources(root, 'briefs') }
+  }
+
+  /** The authoring skill's output: a draft nobody published, with its interview in `record`. */
+  const AUTHORED = normalizeSnapshot([
+    {
+      _id: 'drafts.brief-sanity-partner',
+      key: 'sanity-partner',
+      title: 'The Sanity partnership page',
+      background: 'Gathered in the session that drafted it.\n',
+      record: 'Thesis: the partnership is a delivery claim.',
+    },
+  ])
+
+  it('leaves the next sync nothing to write', () => {
+    const { out } = sink()
+
+    const exported = exportCorpus(
+      BRIEFS,
+      AUTHORED,
+      { key: 'sanity-partner', directory: 'briefs', occupied: [] },
+      out,
+    )
+    const sync = syncCorpus(corpusFrom(exported.file!), applied(AUTHORED, exported.writes), out)
+
+    expect(sync.status).toBe(0)
+    expect(sync.writes.filter((write) => write.op === 'patch')).toEqual([])
+    expect(sync.writes.filter((write) => write.op === 'delete')).toEqual([
+      { op: 'delete', _id: 'drafts.brief-sanity-partner' },
+    ])
+  })
+
+  it('keeps the interview on the document the export published', () => {
+    const { out } = sink()
+
+    const exported = exportCorpus(
+      BRIEFS,
+      AUTHORED,
+      { key: 'sanity-partner', directory: 'briefs', occupied: [] },
+      out,
+    )
+
+    expect(applied(AUTHORED, exported.writes)).toEqual([
+      {
+        _id: 'brief-sanity-partner',
+        _type: 'brief',
+        key: 'sanity-partner',
+        title: 'The Sanity partnership page',
+        background: 'Gathered in the session that drafted it.',
+        record: 'Thesis: the partnership is a delivery claim.',
+        sourcePath: 'briefs/sanity-partner.md',
+      },
+    ])
+  })
+
+  // The rebuild: an empty dataset and the exported file are enough to put the
+  // brief back, which is the whole of what a dataset-born one cannot do.
+  it('restores the brief from the file alone after the dataset is rebuilt', () => {
+    const { out } = sink()
+
+    const exported = exportCorpus(
+      BRIEFS,
+      AUTHORED,
+      { key: 'sanity-partner', directory: 'briefs', occupied: [] },
+      out,
+    )
+    const rebuilt = syncCorpus(corpusFrom(exported.file!), [], out)
+
+    expect(applied([], rebuilt.writes)).toEqual([
+      {
+        _id: 'brief-sanity-partner',
+        _type: 'brief',
+        key: 'sanity-partner',
+        title: 'The Sanity partnership page',
+        background: 'Gathered in the session that drafted it.',
+        sourcePath: 'briefs/sanity-partner.md',
+      },
+    ])
   })
 })

@@ -1,9 +1,13 @@
+import { mkdtempSync, mkdirSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { describe, expect, it } from 'vitest'
 
-import { readDeclaredSources, readGlobbedSources } from './read'
+import { readDeclaredSources, readGlobbedSources, renderGlobbedSource } from './read'
+
+import type { CorpusSource } from './plan'
 
 /** Stands in for the repo root, so a fixture's `sourcePath` reads the way a real one does. */
 const FIXTURE_ROOT = join(dirname(fileURLToPath(import.meta.url)), '__fixtures__')
@@ -72,6 +76,55 @@ describe('readGlobbedSources', () => {
     expect(() => readGlobbedSources(FIXTURE_ROOT, 'unterminated')).toThrow(
       'unterminated/dashes.md has no `key` in its frontmatter',
     )
+  })
+})
+
+/**
+ * The writer is only as good as the reader's agreement with it, so every case
+ * goes through the real one: render, write the file, glob the directory back.
+ */
+function roundTrip(source: CorpusSource): CorpusSource[] {
+  const root = mkdtempSync(join(tmpdir(), 'corpus-render-'))
+  mkdirSync(join(root, 'briefs'))
+  writeFileSync(join(root, 'briefs', `${source.key}.md`), renderGlobbedSource(source), 'utf8')
+  return readGlobbedSources(root, 'briefs')
+}
+
+describe('renderGlobbedSource', () => {
+  it('writes a file the reader registers as the source it came from', () => {
+    expect(
+      roundTrip({
+        key: 'sanity-partner',
+        title: 'The Sanity partnership page',
+        body: 'What the partnership is, and what the page has to prove.',
+      }),
+    ).toEqual([
+      {
+        key: 'sanity-partner',
+        title: 'The Sanity partnership page',
+        body: 'What the partnership is, and what the page has to prove.',
+        sourcePath: 'briefs/sanity-partner.md',
+      },
+    ])
+  })
+
+  /**
+   * A title a human typed in Studio is not a frontmatter value yet. The reader
+   * unquotes a matched pair and trims, so a title already wearing quotes comes
+   * back stripped unless the writer quotes it again.
+   */
+  it('quotes a title the reader would otherwise unquote', () => {
+    expect(roundTrip({ key: 'quoted', title: '"Ship it"', body: 'Notes.' })).toMatchObject([
+      { title: '"Ship it"' },
+    ])
+  })
+
+  // Frontmatter is one value per line. A title carrying a newline cannot be
+  // written at all — half of it would read back as a field of its own.
+  it('refuses a title no frontmatter line can hold', () => {
+    expect(() =>
+      renderGlobbedSource({ key: 'wrapped', title: 'Two\nlines', body: 'Notes.' }),
+    ).toThrow('title spans more than one line')
   })
 })
 
