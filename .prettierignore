@@ -24,6 +24,13 @@ apps/storybook/prototypes/*/
 # the one thing `redirects.test.ts` checks.
 apps/web/src/lib/redirects.generated.ts
 
+# Next writes this file on every dev and build, with double quotes and a
+# semicolon its writer hardcodes. Prettier's `semi: false, singleQuote: true`
+# rewrites exactly that line, the pre-commit hook stages the rewrite, and the
+# next `dev` writes it back — a dirty tree on every run. The file says it
+# should not be edited; this is how we stop editing it.
+apps/web/next-env.d.ts
+
 # Build output
 **/.next/
 **/storybook-static/
