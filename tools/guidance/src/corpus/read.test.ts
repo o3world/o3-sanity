@@ -26,6 +26,17 @@ describe('readGlobbedSources', () => {
     ])
   })
 
+  /**
+   * Git does not track an empty directory, so deleting the last markdown file
+   * deletes the corpus directory with it, and a fresh checkout has nothing to
+   * read. That is exactly when sync has to run — the dataset still holds the
+   * document the deleted file left behind — so an absent directory is a corpus
+   * of nothing rather than a crash.
+   */
+  it('reads a directory that is not there as no sources at all', () => {
+    expect(readGlobbedSources(FIXTURE_ROOT, 'briefs-that-were-deleted')).toEqual([])
+  })
+
   it('refuses a markdown file that registers nothing', () => {
     expect(() => readGlobbedSources(FIXTURE_ROOT, 'unregistered')).toThrow(
       'unregistered/no-key.md has no `key` in its frontmatter',

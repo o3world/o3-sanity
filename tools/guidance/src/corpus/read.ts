@@ -66,12 +66,27 @@ export function readDeclaredSources(
 const KEY = /^[a-z0-9]+(-[a-z0-9]+)*$/
 
 /**
+ * Deleting the last file in a globbed corpus deletes the directory too — git
+ * does not track an empty one — and sync has to run on that checkout to retire
+ * the document the file left behind in the dataset. So a directory that is not
+ * there is a corpus of nothing, and any other read error is still an error.
+ */
+function markdownIn(directory: string): string[] {
+  try {
+    return readdirSync(directory)
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT') return []
+    throw error
+  }
+}
+
+/**
  * A globbed corpus directory: every markdown file in it is a document, and its
  * frontmatter `key` and `title` are the whole registration. Sorted by path, so
  * a plan reads the same on every machine.
  */
 export function readGlobbedSources(root: string, directory: string): CorpusSource[] {
-  const files = readdirSync(join(root, directory))
+  const files = markdownIn(join(root, directory))
     .filter((file) => file.endsWith('.md'))
     .sort()
 
