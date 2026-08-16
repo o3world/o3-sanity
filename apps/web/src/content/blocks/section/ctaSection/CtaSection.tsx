@@ -7,30 +7,42 @@ import type { SectionProps } from '@/content/blocks/sectionTypes'
 type CtaSectionProps = SectionProps<'ctaSection'>
 
 /**
- * Section block: the closing CTA band, built to the Home frame's `1680:2132`
- * — #42.
+ * Section block: the closing CTA band.
  *
  * ```
- * 1440 × 790, the orbital field behind it
+ * 1440 × 790, the decoration behind it
  *   copy      600px column centred, gap 18
  *     heading 64px (--text-cta, the 2026-08 shared CTA component's step) at
  *     92% white, centred
  *     body    24px at 60% white in a 446px measure
- *   button    Button / Solid Size=Base, WHITE fill
- *   bleed     an 87px strip of --gradient-ink-fade along the foot (1928:6596)
+ *   button    Button Theme=White
  * ```
  *
- * The bleed strip is this band's whole reason for being a bespoke `<section>`:
- * it fades the band into the `#030303` footer beneath it, so the two dark
- * areas read as one field rather than two bands that happen to touch.
+ * **Only the decoration is the `CTA` component's.** Those measurements are
+ * `1680:2132`'s, and the component (`2124:72`, set `2177:1354`) does not agree
+ * with them: it gaps the copy 24 and the button 48, measures the body at 580,
+ * and stretches the column to the 96px gutter instead of pinning it at 600.
+ * Reconciling that is a repaint of every closer's typography and is nobody's
+ * ticket yet — read the numbers above as this band's, not as the component's.
  *
- * The sphere runs at `soft` and centred, rather than hung below the foot — the
- * CTA band shows the middle of it where the hero shows only the cap.
+ * **`orbs` is the pre-redesign band (`1680:2132`), and it is a pair.** The
+ * sphere and the 87px `--gradient-ink-fade` strip along the foot (`1928:6596`)
+ * are one composition: the strip dissolves the sphere's lower limb into the
+ * `#030303` footer, so the two dark areas read as one field rather than two
+ * bands that happen to touch. The component draws neither, so neither the
+ * molecule nor `none` carries a strip — there is no limb to hide and no colour
+ * step to soften.
+ *
+ * Home is the one page still on it (#163): its frame keeps the bespoke closer
+ * where About, Solutions, Live and the two collection indexes moved to the
+ * component.
  */
 export function CtaSection({ heading, body, button, decoration }: CtaSectionProps) {
   const chosen = stegaClean(decoration)
-  const showMolecule = chosen === 'molecule'
-  const showOrbs = !showMolecule && chosen !== 'none'
+  // Unset draws the molecule, the same value `decorationKnob` starts a newly
+  // inserted band on.
+  const showOrbs = chosen === 'orbs'
+  const showMolecule = !showOrbs && chosen !== 'none'
 
   return (
     // The band always paints its own ink field, so it declares one: `ink-deep`
@@ -59,8 +71,9 @@ export function CtaSection({ heading, body, button, decoration }: CtaSectionProp
          * it. But that file is the video capture with a mouse cursor in the
          * middle of it, which orbital-sphere.tsx already refuses to take
          * geometry from, and it is one frame of a globe that was turning. Intent
-         * here is Nick's. The canonical CTA frame is `1799:1470` and is not
-         * exported to `.figma/frames/`; pull it before treating this as settled.
+         * here is Nick's. The sphere layer inside Home's closer is `1799:1470`
+         * and is not exported to `.figma/frames/`; pull it before treating this
+         * as settled.
          *
          * What every reading agrees on: the original `w-[120vw]` centred on the
          * band was wrong. It put the limb off-screen left, right AND bottom and
@@ -68,25 +81,36 @@ export function CtaSection({ heading, body, button, decoration }: CtaSectionProp
          * of does not read as a globe at all.
          */}
         {showOrbs ? (
-          <OrbitalSphere
-            intensity="soft"
-            motion="orbit"
-            className="bottom-[4%] left-1/2 w-[150vw] -translate-x-1/2 lg:w-[90vw]"
-          />
+          <>
+            <OrbitalSphere
+              intensity="soft"
+              motion="orbit"
+              className="bottom-[4%] left-1/2 w-[150vw] -translate-x-1/2 lg:w-[90vw]"
+            />
+            {/* `1928:6596` — 87px of --gradient-ink-fade, transparent at the top. */}
+            <div className="bg-(image:--gradient-ink-fade) pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[87px]" />
+          </>
         ) : null}
 
         {/*
          * What the canonical `CTA` component actually hangs (`2124:72`) — the
-         * molecule, not the sphere. 775.9 on a 1440 band is 53.9% of the width,
-         * centred on it (x 332.05 + 388 = 720.0) and starting a hair above the
-         * band's top edge, at 15%.
+         * molecule, not the sphere. 775.9 square at x 332.05, y -63.95 on a
+         * 1440 band, at 15%:
+         *
+         *   width   775.9 / 1440    = 53.9%
+         *   centre  332.05 + 387.95 = 720.0, the middle of 1440
+         *   rise    -63.95 / 775.9  = 8.24%
+         *
+         * The rise is a fraction of the MARK, not the band — that is what a
+         * percentage translate resolves against — so it holds at every width
+         * the square keeps its proportion at.
          *
          * White rather than `currentColor`'s inherited ink: the band is
          * `ink-deep` and the frame draws the glyph in the light, which is the
          * inverse of the quote band's use of the same mark on bone.
          */}
         {showMolecule ? (
-          <MoleculeMark className="absolute left-1/2 top-0 -z-0 w-[54%] min-w-[420px] -translate-x-1/2 -translate-y-[3%] text-white opacity-15" />
+          <MoleculeMark className="absolute left-1/2 top-0 -z-0 w-[54%] min-w-[420px] -translate-x-1/2 -translate-y-[8.24%] text-white opacity-15" />
         ) : null}
 
         <div className="py-band-lg relative z-10 mx-auto flex max-w-[600px] flex-col items-center gap-[18px] text-center">
@@ -102,9 +126,6 @@ export function CtaSection({ heading, body, button, decoration }: CtaSectionProp
             </div>
           ) : null}
         </div>
-
-        {/* `1928:6596` — 87px of --gradient-ink-fade, transparent at the top. */}
-        <div className="bg-(image:--gradient-ink-fade) pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[87px]" />
       </section>
     </SurfaceProvider>
   )

@@ -10,22 +10,22 @@ import type { CtaSection } from '../types/generated'
  * canvas toolbar's controls, are generated from it, so neither can offer a
  * value this file does not list.
  *
- * **`molecule` is what the canonical component draws, and `orbs` is still the
- * default.** The `CTA` component set (`2177:1354`) hangs one decoration: the
+ * **`molecule` is the default, because it is what the canonical component
+ * draws.** The `CTA` component set (`2177:1354`) hangs one decoration: the
  * molecule, 775.9px at 15%, centred behind the copy. Every redesigned frame
- * instances it override-free — the Home closer (`2336:4351`) and the partner
- * page's (`2478:2134`) differ only in their words — so `orbs` (`1680:2132`) is
- * a generation behind on every band that draws it.
+ * instances it override-free — About (`2124:1120`), Solutions (`2124:1160`),
+ * Live (`2124:1084`), Work (`2124:1066`), the insight index (`2336:4351`) and
+ * the partner pages differ only in their words.
  *
- * Flipping the default is a four-page repaint and is #163's, not #92's: this
- * list gains the value the partner page needs and nothing else moves, because
- * no seed pins `decoration` and the default is what every existing CTA reads.
+ * `orbs` (`1680:2132`) stays on the list for the one frame that has not moved:
+ * the Home closer, which is still a bespoke band with the sphere and its bleed
+ * strip rather than an instance of the component. Its seed pins the value.
  */
 export const ctaSectionKnobs = defineBlockKnobs({
   type: 'ctaSection',
   title: 'CTA',
   tier: 'section',
-  knobs: [decorationKnob(['orbs', 'molecule', 'none']), surfaceKnob({ initialValue: 'ink' })],
+  knobs: [decorationKnob(['molecule', 'orbs', 'none']), surfaceKnob({ initialValue: 'ink' })],
   /**
    * The `button` carries a label and no destination, so it draws as a control
    * until an editor points it somewhere — an inserted band links nowhere by

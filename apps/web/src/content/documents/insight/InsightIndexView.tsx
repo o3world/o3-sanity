@@ -213,7 +213,7 @@ export function InsightIndexView({
           href: '/contact',
           target: null,
         }}
-        decoration="orbs"
+        decoration="molecule"
       />
     </>
   )

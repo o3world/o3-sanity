@@ -331,7 +331,7 @@ export type CtaSection = {
   heading?: string
   body?: string
   button?: Button
-  decoration?: 'orbs' | 'molecule' | 'none'
+  decoration?: 'molecule' | 'orbs' | 'none'
   surface?: 'white' | 'bone' | 'ink'
   anchor?: string
 }
