@@ -239,6 +239,7 @@ directory rather than by a declared list:
 ```bash
 pnpm brief:sync     # tools/guidance/briefs/*.md → brief documents
 pnpm brief:check    # fails if a file-backed brief has drifted
+pnpm brief:export   # a dataset-born brief becomes a file in the corpus
 ```
 
 Briefing a piece is three steps. Drop a markdown file in
@@ -250,7 +251,10 @@ either order; the reference is weak for that reason.
 Two rules the corpus config carries and the commands do not restate. A brief
 syncs by **merge**, so the `record` the authoring skill writes survives. And a
 brief with no `sourcePath` was **born in the dataset** — `check` ignores it and
-`sync` never deletes it.
+`sync` never deletes it. A file whose key a dataset-born brief already holds is
+**refused rather than merged**, and `pnpm brief:export <key>` is the way out: it
+writes that brief to `tools/guidance/briefs/` and makes the dataset copy
+file-backed, so the next sync has nothing to write.
 
 ### Testing
 
