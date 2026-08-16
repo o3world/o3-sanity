@@ -28,8 +28,10 @@ set -uo pipefail
 # with the project already — widening them means adding origins first.
 WEB_POOL_START=3600
 WEB_POOL_END=3609
-STORYBOOK_POOL_START=6660
-STORYBOOK_POOL_END=6669
+# Storybook ports need no CORS origin, but they do have to be reachable from a
+# browser: Chrome and Firefox refuse 6665-6669 outright (IRC) with ERR_UNSAFE_PORT.
+STORYBOOK_POOL_START=6600
+STORYBOOK_POOL_END=6609
 
 CARRY_FILES=(.env.local apps/web/.env.local .vercel/project.json)
 CARRY_DIRS=(prototype)

@@ -70,7 +70,7 @@ does four things:
    migration seed test asserts against. Without it that suite fails in every
    worktree for reasons that have nothing to do with the ticket being worked.
 3. **Allocate dev ports**, written to the worktree's own `.env`: web from
-   3600-3609, storybook from 6660-6669, skipping anything a sibling worktree
+   3600-3609, storybook from 6600-6609, skipping anything a sibling worktree
    has already claimed or that is currently listening. Two checkouts both
    booting on 3600 is the first thing that breaks when a second session starts.
 4. **`pnpm install`.** node_modules is not shared between worktrees.
