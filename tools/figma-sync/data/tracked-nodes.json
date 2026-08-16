@@ -75,13 +75,22 @@
       "variant": "desktop"
     },
     {
-      "nodeId": "2360:2879",
+      "nodeId": "1925:6138",
       "kind": "pageFrame",
       "name": "Solutions",
       "figmaName": "Solutions",
       "route": "/solutions",
       "variant": "desktop",
-      "note": "The 2026-08 redesign, ruled canonical 2026-08-13 — Interior Hero, Service Grid, statement band, Use cases. Supersedes `1925:6138`; #93 rebuilds the route against it."
+      "note": "Re-tracked 2026-08-16: the 2026-08-13 ruling took `2360:2879` for a /solutions redesign, but that frame is a service landing page under /solutions/ — this frame stays the route's source of record."
+    },
+    {
+      "nodeId": "2360:2879",
+      "kind": "pageFrame",
+      "name": "Software Engineering service page",
+      "figmaName": "Solutions",
+      "route": "/solutions/software-engineering",
+      "variant": "desktop",
+      "note": "Named \"Solutions\" in the file but re-ruled by Nick 2026-08-16: a standalone service landing page under /solutions/, not the index — Interior Hero, Service Grid, statement band, Use cases. #93 built the layer at this route; `1925:6138` stays the /solutions frame."
     },
     {
       "nodeId": "2336:4310",
@@ -327,11 +336,6 @@
     }
   ],
   "ignoredNodeIds": [
-    {
-      "nodeId": "1925:6138",
-      "name": "Solutions",
-      "note": "The pre-redesign Solutions frame, superseded 2026-08-13 by `2360:2879`. Ignored so the probe stays quiet about it; its last change was an accidental instance-override collapse, not work."
-    },
     {
       "nodeId": "2117:800",
       "name": "Blog Post",

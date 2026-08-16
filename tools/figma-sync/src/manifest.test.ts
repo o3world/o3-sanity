@@ -27,7 +27,7 @@ describe('tracked-nodes.json', () => {
     expect(manifest.sectionNodeId).toBe('1632:1510')
   })
 
-  it('tracks at least the nine canonical page layers', () => {
+  it('tracks at least the ten canonical page layers', () => {
     const names = new Set(pageFrames.map((entry) => entry.name))
     expect([...names].sort()).toEqual([
       'About',
@@ -37,6 +37,7 @@ describe('tracked-nodes.json', () => {
       'Insight index',
       'Live',
       'Sanity partnership',
+      'Software Engineering service page',
       'Solutions',
       'Work index',
     ])

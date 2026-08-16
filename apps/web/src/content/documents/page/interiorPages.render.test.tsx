@@ -51,6 +51,13 @@ const live = await render('live')
 const contact = await render('contact')
 const conference = await render('1682-conference-ai-innovation')
 
+// The service page's file name and its slug differ (`solutions-software-engineering`
+// vs `solutions/software-engineering`), so it cannot go through `render()`.
+const softwareEngineering = await renderRoute(route, {
+  data: withSettings(aSeededPage('solutions-software-engineering'), siteSettings()),
+  params: { segments: ['solutions', 'software-engineering'] },
+})
+
 describe('the seeded About page', () => {
   const html = about.html
   const sections = (aSeededPage('about').sections ?? []) as { _type: string }[]
@@ -169,11 +176,88 @@ describe('the seeded Solutions page', () => {
     expect(bandPaths(html)).toHaveLength(sections.length)
   })
 
-  // The redesigned frame's band order (`2360:2879`, #93): Interior Hero, the
-  // Overview intro, the service grid, the proof-point band, the use cases,
-  // the CTA. The old frame's orbital diagram and engagement rail are gone —
-  // the redesign draws neither.
-  it('follows the redesigned frame’s band sequence', () => {
+  it('replaces the two-column approximation with the orbital diagram', () => {
+    expect(sections.map((s) => s._type)).toEqual([
+      'heroSection',
+      'featureGridSection',
+      'railPanelsSection',
+      'ctaSection',
+    ])
+    expect(html).toContain('data-testid="orbital-diagram"')
+  })
+
+  /**
+   * Position order is the array's, not the author's — apex first, then the
+   * base ring. The frame puts Strategy at the apex and reads AI, Engineering,
+   * Design around the base, so the seed carries them in that order.
+   */
+  it('places the four features in the frame’s position order', () => {
+    const features = (
+      sections.find((s) => s._type === 'featureGridSection') as
+        { features?: { heading?: string }[] } | undefined
+    )?.features
+    expect(features?.map((f) => f.heading)).toEqual(['Strategy', 'AI', 'Engineering', 'Design'])
+  })
+
+  it.each([
+    ['apex feature', 'The root of every engagement'],
+    ['engagement band heading', 'Three ways in.'],
+    ['an engagement card', 'Embedded Team Member'],
+    ['an engagement card’s one line', 'Senior hands, inside your team.'],
+    ['an engagement card’s Best-when foot', 'Best when you trust the direction'],
+  ])('shows the frame’s %s', (_label, copy) => {
+    expect(html).toContain(copy)
+  })
+
+  /**
+   * The band is Home's ways-to-work band (`1762:2168`) in the Solutions
+   * frame's arrangement (`1925:6108`) — three ink cards, no rail, no media
+   * square, no button. `layout` is what says so; the numerals, the 395px
+   * media slot and the panel CTAs are all rail-layout elements, so their
+   * absence is the assertion (#47).
+   */
+  it('draws the engagement band as cards, not the rail', () => {
+    const band = sections.find((s) => s._type === 'railPanelsSection') as
+      RailPanelsSection | undefined
+
+    expect(band?.layout).toBe('cards')
+    expect(band?.panels).toHaveLength(3)
+    expect(band?.panels?.some((panel) => panel.button ?? panel.media)).toBe(false)
+    expect(html).not.toContain('rail-panel-eng-embedded')
+  })
+
+  /**
+   * **Solutions has no 402 frame.** The "Solutions section" at `1924:4768` is
+   * a generation-1 capture (1920 / 390, DOM-ish layer names), not the
+   * breakpoint pair the ticket assumed — the Design Concept section holds one
+   * Solutions frame and it is 1440. So every mobile composition on this page
+   * is a renderer decision under ADR 0006, and these are the invariants that
+   * keep it honest: nothing scrolls sideways, and the three-across card row
+   * and the 1120px orbital diagram are both `lg:`.
+   */
+  it('is a stack at 402, with no frame to copy', () => {
+    expect(unprefixedHorizontalScrollUtilities(html)).toEqual([])
+    expect(variantsOf(html, 'grid-cols-3')).toEqual(['lg:grid-cols-3'])
+    expect(html).toContain('data-testid="orbital-diagram"')
+    expect(html).toContain('lg:block')
+  })
+})
+
+describe('the seeded Software Engineering service page', () => {
+  const html = softwareEngineering.html
+  const sections = (aSeededPage('solutions-software-engineering').sections ?? []) as {
+    _type: string
+  }[]
+
+  it('renders every section in the array — none silently dropped', () => {
+    expect(bandPaths(html)).toHaveLength(sections.length)
+  })
+
+  // The frame's band order (`2360:2879`, #93): Interior Hero, the Overview
+  // intro, the service grid, the proof-point band, the use cases, the CTA.
+  // The frame is named "Solutions" in the file but draws a standalone page
+  // under `/solutions/`, not the index.
+  it("follows the frame's band sequence", () => {
     expect(sections.map((s) => s._type)).toEqual([
       'heroSection',
       'layoutSection',
@@ -182,7 +266,6 @@ describe('the seeded Solutions page', () => {
       'featureGridSection',
       'ctaSection',
     ])
-    expect(html).not.toContain('data-testid="orbital-diagram"')
   })
 
   it.each([
@@ -198,7 +281,7 @@ describe('the seeded Solutions page', () => {
     ['transcribed use case', 'stuck in a legacy CMS'],
     ['authored use case', 'one system of record'],
     ['CTA heading', 'Engineering that scales with your business.'],
-  ])('shows the frame’s %s', (_label, copy) => {
+  ])("shows the frame's %s", (_label, copy) => {
     expect(html).toContain(copy)
   })
 
@@ -237,11 +320,10 @@ describe('the seeded Solutions page', () => {
   })
 
   /**
-   * **Solutions still has no 402 frame** — the redesign (`2360:2879`) is
-   * 1440-only, so every mobile composition on this page stays a renderer
-   * decision under ADR 0006, and these are the invariants that keep it
-   * honest: nothing scrolls sideways, and the three-across service grid is
-   * `lg:`.
+   * The frame (`2360:2879`) is 1440-only, so every mobile composition on
+   * this page is a renderer decision under ADR 0006, and these are the
+   * invariants that keep it honest: nothing scrolls sideways, and the
+   * three-across service grid is `lg:`.
    */
   it('is a stack at 402, with no frame to copy', () => {
     expect(unprefixedHorizontalScrollUtilities(html)).toEqual([])

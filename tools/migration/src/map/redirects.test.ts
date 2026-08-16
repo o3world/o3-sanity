@@ -386,6 +386,10 @@ describe('the committed redirect map', () => {
         // (`2354:2446`) for a page WordPress never served. Vercel and Lovable
         // are behind it, and each will land here the same way.
         '/partners/sanity',
+        // The first service landing page (#93) — frame `2360:2879`, a
+        // standalone page under /solutions/. WordPress's service pages 301
+        // into /solutions; this slug is new content, not a move.
+        '/solutions/software-engineering',
       ])
     })
   })

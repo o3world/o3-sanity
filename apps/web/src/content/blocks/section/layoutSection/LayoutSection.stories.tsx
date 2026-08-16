@@ -80,18 +80,21 @@ export const OnInk: Story = {
 }
 
 /**
- * `/solutions` — the proof-point band (`2357:2690`, #93): ink, with the
- * molecule hung off the band's right edge at 25%. The `decoration` knob's
- * canonical instance on this block.
+ * `/solutions/software-engineering` — the proof-point band (`2357:2690`,
+ * #93): ink, with the molecule hung off the band's right edge at 25%. The
+ * `decoration` knob's canonical instance on this block.
  */
 export const WithMolecule: Story = {
-  args: seededSectionArgs('solutions', 'layoutSection', 1),
+  args: seededSectionArgs('solutions-software-engineering', 'layoutSection', 1),
   parameters: { design: figmaDesign('2357:2690') },
   globals: { backgrounds: { value: 'ink' } },
 }
 
-/** `/solutions` — the Overview band (`2360:2861`): prose beside the photo. */
+/**
+ * `/solutions/software-engineering` — the Overview band (`2360:2861`): prose
+ * beside the photo.
+ */
 export const OverviewWithPhoto: Story = {
-  args: seededSectionArgs('solutions', 'layoutSection', 0),
+  args: seededSectionArgs('solutions-software-engineering', 'layoutSection', 0),
   parameters: { design: figmaDesign('2360:2861') },
 }

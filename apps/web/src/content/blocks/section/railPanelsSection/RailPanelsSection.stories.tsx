@@ -14,10 +14,10 @@ import { RailPanelsSection } from './RailPanelsSection'
  * the pair of stories below is the argument for that decision — flip between
  * them and everything but the rail is identical.
  *
- * `layout` is the other axis: `rail` is the Home composition; `cards` is
- * three ink cards (`1925:6113`–`6115`), drawn by no seed — the fixture below
- * carries it; `rows` is the partner page's services (`2334:2170`); `grid` is
- * the Solutions service grid (`2358:2788`).
+ * `layout` is the other axis: `rail` is the Home composition; `cards` is the
+ * Solutions engagement band (`1925:6113`–`6115`, #47); `rows` is the partner
+ * page's services (`2334:2170`); `grid` is the software-engineering service
+ * page's grid (`2358:2788`, #93).
  *
  * 82 + 238 + 500 + 33 + 395 = 1248 — the whole band is the standard content
  * column, right-aligned inside it. If it ever stops adding up, that sum is
@@ -46,53 +46,9 @@ export const RailByNumber: Story = {
   parameters: { design: figmaDesign('1762:2168') },
 }
 
-/**
- * `layout: cards` — three engagement cards side by side (`1925:6108`). No
- * seed draws this arm, so the story carries its own band.
- */
-const CARDS_FIXTURE: Parameters<typeof RailPanelsSection>[0] = {
-  surface: 'white',
-  layout: 'cards',
-  heading: 'Three ways in. You decide how much of the problem to hand us.',
-  intro:
-    'From senior hands inside your team to owning the whole outcome — the right engagement depends on how much of the problem is yours to keep.',
-  panels: [
-    {
-      _type: 'panel',
-      _key: 'eng-embedded',
-      railLabel: 'Embedded',
-      heading: 'Embedded Team Member',
-      body: 'Senior hands, inside your team.',
-      note: 'Best when you trust the direction and need the horsepower.',
-      mark: { _type: 'mark', kind: 'orb', state: 'connecting', size: 64, speed: 1, paused: false },
-      button: null,
-    },
-    {
-      _type: 'panel',
-      _key: 'eng-squad',
-      railLabel: 'Product Squad',
-      heading: 'Product Squad',
-      body: 'A cross-functional pod that takes a problem and runs.',
-      note: 'Best when you need momentum and a team that owns delivery.',
-      mark: { _type: 'mark', kind: 'orb', state: 'weaving', size: 64, speed: 1, paused: false },
-      button: null,
-    },
-    {
-      _type: 'panel',
-      _key: 'eng-full',
-      railLabel: 'Full Ownership',
-      heading: 'Full Ownership',
-      body: 'Hand us the outcome, not the tasks.',
-      note: 'Best when a single point of accountability is worth more than a seat at every standup.',
-      mark: { _type: 'mark', kind: 'orb', state: 'solving', size: 64, speed: 1, paused: false },
-      button: null,
-    },
-  ],
-}
-
-/** Three engagement cards side by side — no rail, no media square. */
+/** The Solutions composition: `layout: cards`, three engagement cards. */
 export const Cards: Story = {
-  args: CARDS_FIXTURE,
+  args: seededSectionArgs('solutions', 'railPanelsSection'),
   parameters: { design: figmaDesign('1925:6138') },
 }
 
@@ -106,7 +62,7 @@ export const RailMobile: Story = {
 }
 
 export const CardsMobile: Story = {
-  args: CARDS_FIXTURE,
+  args: seededSectionArgs('solutions', 'railPanelsSection'),
   globals: { viewport: { value: 'mobile' } },
 }
 
@@ -151,12 +107,12 @@ export const RowsMobile: Story = {
  * promise-in-red.
  */
 export const Grid: Story = {
-  args: seededSectionArgs('solutions', 'railPanelsSection'),
+  args: seededSectionArgs('solutions-software-engineering', 'railPanelsSection'),
   parameters: { design: figmaDesign('2358:2788') },
 }
 
 /** The grid below `lg` — three columns become one stack. */
 export const GridMobile: Story = {
-  args: seededSectionArgs('solutions', 'railPanelsSection'),
+  args: seededSectionArgs('solutions-software-engineering', 'railPanelsSection'),
   globals: { viewport: { value: 'mobile' } },
 }
