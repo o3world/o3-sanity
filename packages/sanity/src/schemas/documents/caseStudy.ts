@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
+import { briefsField } from '../blocks/fields'
 import { blockArrayMembers } from '../blocks/registry'
 
 export const caseStudy = defineType({
@@ -79,6 +80,7 @@ export const caseStudy = defineType({
       of: [{ type: 'string' }],
       group: 'story',
     }),
+    briefsField(),
     defineField({ name: 'seo', type: 'seo' }),
     defineField({ name: 'migration', type: 'migration' }),
   ],

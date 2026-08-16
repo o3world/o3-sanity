@@ -30,6 +30,21 @@ export type Logo = {
   _type: 'image'
 }
 
+export type Brief = {
+  _id: string
+  _type: 'brief'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  background?: string
+  instructions?: string
+  links?: Array<string>
+  key?: string
+  sourcePath?: string
+  record?: string
+}
+
 export type Guidance = {
   _id: string
   _type: 'guidance'
@@ -566,6 +581,13 @@ export type ButtonGroup = {
   alignment?: 'start' | 'center' | 'end'
 }
 
+export type BriefReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'brief'
+}
+
 export type Page = {
   _id: string
   _type: 'page'
@@ -635,6 +657,11 @@ export type Page = {
     | ({
         _key: string
       } & ListingSection)
+  >
+  briefs?: Array<
+    {
+      _key: string
+    } & BriefReference
   >
   seo?: Seo
   migration?: Migration
@@ -739,6 +766,11 @@ export type CaseStudy = {
       } & ListingSection)
   >
   deliverables?: Array<string>
+  briefs?: Array<
+    {
+      _key: string
+    } & BriefReference
+  >
   seo?: Seo
   migration?: Migration
 }
@@ -778,6 +810,11 @@ export type Insight = {
   publishedAt?: string
   featuredImage?: Figure
   body?: BodyText
+  briefs?: Array<
+    {
+      _key: string
+    } & BriefReference
+  >
   seo?: Seo
   migration?: Migration
 }
@@ -900,6 +937,7 @@ export type Geopoint = {
 export type AllSanitySchemaTypes =
   | SanityImageAssetReference
   | Logo
+  | Brief
   | Guidance
   | SiteSettings
   | Migration
@@ -940,6 +978,7 @@ export type AllSanitySchemaTypes =
   | Stat
   | Figure
   | ButtonGroup
+  | BriefReference
   | Page
   | SanityImageCrop
   | SanityImageHotspot

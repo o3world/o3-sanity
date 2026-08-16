@@ -21,7 +21,7 @@ import { schemaTypes } from '@o3/sanity/schemas'
 import type { Migration } from '@o3/sanity/types/generated'
 
 import { isImageAssetId } from './lib/media'
-import { CORPUS_DIRS, refsIn } from './lib/corpus'
+import { BRIEF_ID, CORPUS_DIRS, isInternalType, refsIn } from './lib/corpus'
 import { untouchedPlaceholders } from './lib/placeholders'
 import { categoryDoc } from './map/category'
 import { personDoc } from './map/person'
@@ -147,6 +147,12 @@ async function main() {
       // Asset refs point at uploads rather than documents, so they are never in
       // `live` and cannot be checked here. That they are the *right kind* of
       // asset for the field holding them is check 3.
+      //
+      // A `briefs` entry is weak and points at a document this pipeline does
+      // not sync, so an absent brief is a state ADR 0027 accepts rather than a
+      // finding: nothing renders a brief, and a dataset-born one that survived
+      // no rebuild is exactly the standing bet that ADR took.
+      if (BRIEF_ID.test(ref)) continue
       if (!liveById.has(ref) && !ref.startsWith('image-') && !ref.startsWith('file-')) {
         dangling.push(`${doc._id} → ${ref}`)
       }
@@ -211,11 +217,11 @@ async function main() {
   // 8. Anything the pipeline did not put there. Not a failure on its own — an
   //    editor may have created it — but during build-out it is usually
   //    leftover scaffolding, and a routable one shadows a seed.
-  //    `guidance` documents are owned by a different tool on purpose (#72:
-  //    `pnpm guidance:sync`, checked by `pnpm guidance:check`), so they are
-  //    not orphans — this pipeline is deleted post-migration and they are not.
+  //    `guidance` and `brief` documents are owned by a different tool on
+  //    purpose (`INTERNAL_TYPES`), so they are not orphans — this pipeline is
+  //    deleted post-migration and they are not.
   const orphans = live
-    .filter((doc) => doc._type !== 'guidance')
+    .filter((doc) => !isInternalType(doc._type))
     .filter((doc) => !expectedIds.has(doc._id))
     .map(
       (doc) =>

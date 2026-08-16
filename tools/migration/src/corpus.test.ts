@@ -3,7 +3,7 @@ import { join } from 'node:path'
 
 import { describe, expect, it } from 'vitest'
 
-import { CORPUS_DIRS, isPipelineOwned } from './lib/corpus'
+import { CORPUS_DIRS, isInternalType, isPipelineOwned } from './lib/corpus'
 
 /**
  * Invariants over the whole committed corpus — converted, seed and translated
@@ -48,5 +48,49 @@ describe('the committed corpus', () => {
     expect(isPipelineOwned('siteSettings')).toBe(false)
     expect(isPipelineOwned('64cd37cf-1a2b-4c3d-8e9f-000000000000')).toBe(false)
     expect(isPipelineOwned('drafts.64cd37cf-1a2b-4c3d-8e9f-000000000000')).toBe(false)
+  })
+
+  /**
+   * The other half of the same contract, for the two types a different tool
+   * owns (ADR 0027, ADR 0024). `guidance-*` and `brief-*` ids miss the
+   * `<type>-(wp|seed)-` shape on purpose, which is what makes `load` leave
+   * them alone in every mode: the loader only writes what the corpus holds and
+   * only retires what it owns.
+   */
+  it('leaves guidance and brief ids outside the ownership contract', () => {
+    expect(isPipelineOwned('guidance-o3-voice')).toBe(false)
+    expect(isPipelineOwned('brief-sanity-partner-page')).toBe(false)
+    expect(isPipelineOwned('drafts.brief-sanity-partner-page')).toBe(false)
+  })
+
+  /**
+   * `verify` reads the whole dataset, so a document this pipeline never wrote
+   * would be reported as an orphan — a finding that exits non-zero and is
+   * wrong. Guidance and briefs are exactly that: written by `guidance:sync`
+   * and `brief:sync`, and outliving the pipeline, which is deleted
+   * post-migration.
+   */
+  it('names the types a different tool owns, so verify can stay quiet about them', () => {
+    expect(isInternalType('guidance')).toBe(true)
+    expect(isInternalType('brief')).toBe(true)
+    expect(isInternalType('page')).toBe(false)
+    expect(isInternalType('insight')).toBe(false)
+    expect(isInternalType('siteSettings')).toBe(false)
+  })
+
+  /**
+   * And the corpus is the other side of it: a `brief` or `guidance` document
+   * committed under `data/` would be written by `load` and then retired by the
+   * next sync, with the two tools overwriting each other every run.
+   */
+  it('commits no document of a type a different tool owns', () => {
+    const offenders: string[] = []
+    for (const root of CORPUS_DIRS) {
+      if (!existsSync(root)) continue
+      for (const type of readdirSync(root)) {
+        if (isInternalType(type)) offenders.push(`${root}/${type}`)
+      }
+    }
+    expect(offenders).toEqual([])
   })
 })
