@@ -127,9 +127,30 @@ the brief runs on, so they come first; the gate is on the writes. The human may
 hand you a thesis directly and skip the rounds, and that is the only override.
 Inventing one and proceeding is not.
 
-### 2. Outline in chat
+### 2. The outline
 
-Get a nod on the shape before touching Sanity.
+**Propose an arc by name** from `o3-argument`'s **How the argument moves**, and
+say why this material takes that shape rather than the nearest alternative —
+name the runner-up and why not. Naming it is the point: a second draft should
+be a **different shape**, not the same paragraphs reordered.
+
+**The three arcs are examples, not a taxonomy.** A shape none of them fits may
+be proposed as a new arc, specified the way `o3-argument` specifies its
+three — what it opens on, how it moves, how it ends, when to reach for
+it — and with which of the three came closest and where it broke.
+
+**The outline is the section list in the arc's order**, each section only
+readable in its place. That is the commitment gate 1 runs the shuffle test
+against, so write the list you are willing to be held to.
+
+**Forecast the length here, as advice.** Check the section list against
+`o3-argument`'s **Length and proportion** bars. An outline pointing past the
+top of the band usually means the claim is two claims — say so while the
+middle is still a list of headings, not at the hand-off.
+
+**The outline is a gate.** Drafting starts once the human confirms the named
+arc and the section list. The human may hand you an arc directly and skip the
+proposal, and that is the only override. Inventing one and proceeding is not.
 
 ### 3. Draft
 
@@ -144,14 +165,18 @@ reactions with `patch_documents`.
 ### 5. The gates
 
 Four gates, run in this order before the hand-off summary, every time. Each
-one's content lives in the document that owns it; this is the order they run
-in and nothing else.
+one's content lives in the document that owns it; what this list adds is the
+order they run in, and one distinction. The shuffle test and the reader test
+both test coherence and catch different failures — a piece can arrive at its
+claim as a list, and an arc can hold around a claim nobody can restate — so
+both run.
 
 1. **The shuffle test** — `o3-argument`. Every section is only readable in its
-   place. Structure goes first because a piece with the wrong shape is not
-   fixed by editing sentences: `o3-argument`'s **Mush** section sends it back
-   to the brief instead, and every sentence you polished before finding that
-   out is wasted work.
+   place, and the arc named in step 2 is what holds them there: the piece runs
+   the shape you proposed, in that order. Structure goes first because a piece
+   with the wrong shape is not fixed by editing sentences: `o3-argument`'s
+   **Mush** section sends it back to the brief instead, and every sentence you
+   polished before finding that out is wasted work.
 2. **The revision pass** — `o3-voice`, ten numbered steps. Sentence level.
 3. **The checks** — `o3-slop`, ten numbered items. The shapes the revision pass
    does not catch.
