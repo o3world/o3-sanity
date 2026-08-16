@@ -471,6 +471,33 @@ describe('exportCorpus', () => {
   })
 
   /**
+   * A brief created in Studio has a UUID for an id and no key at all — the
+   * field is `readOnly` there — so no key the operator could type reaches it.
+   * Listing it beside the exportable ones as `undefined` promised an export
+   * that cannot happen; the id and the reason are what a repair needs.
+   */
+  it('lists what it cannot export apart, by id and reason', () => {
+    const { out, logged } = sink()
+
+    const result = exportCorpus(
+      BRIEFS,
+      [
+        DATASET_BORN,
+        { _id: 'brief-b7d1e3f0-4a2c-4c6e-9f1a-2d3b4c5d6e7f', title: 'My half-written brief' },
+        { ...DATASET_BORN, _id: 'brief-partnership-page' },
+      ],
+      REQUEST,
+      out,
+    )
+
+    expect(result).toEqual({ writes: [], status: 0 })
+    expect(logged()).toContain('1 dataset-born brief document(s) to export')
+    expect(logged()).toContain('sanity-partner  The Sanity partnership page')
+    expect(logged()).toContain('brief-b7d1e3f0-4a2c-4c6e-9f1a-2d3b4c5d6e7f  no key')
+    expect(logged()).toContain('brief-partnership-page  key "sanity-partner"')
+  })
+
+  /**
    * The stamp lands on the published copy — the copy sync compares and a
    * `briefs` reference resolves to — and carries the fields the file now backs
    * with it, so the document matches its own markdown and the next sync has

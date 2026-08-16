@@ -140,9 +140,26 @@ export function exportCorpus(
       out.log(`no dataset-born ${corpus.type} document to export`)
       return { writes: [], status: 0 }
     }
-    out.log(`${candidates.length} dataset-born ${corpus.type} document(s) to export:`)
-    for (const candidate of candidates) {
-      out.log(`  ${candidate.key}  ${candidate.title ?? ''}`.trimEnd())
+
+    /* Split, because the operator exports by key and a listed key that no
+     * lookup can honour is a promise: a document created in Studio carries a
+     * UUID id and no key at all, the field being `readOnly` there. */
+    const listed = candidates.map((document) => ({
+      document,
+      malformed: malformedKey(corpus.type, document),
+    }))
+    const exportable = listed.filter((row) => !row.malformed)
+    const broken = listed.filter((row) => row.malformed)
+
+    if (exportable.length > 0) {
+      out.log(`${exportable.length} dataset-born ${corpus.type} document(s) to export:`)
+      for (const { document } of exportable) {
+        out.log(`  ${document.key}  ${document.title ?? ''}`.trimEnd())
+      }
+    }
+    if (broken.length > 0) {
+      out.log(`\n${broken.length} no key can name — repair the document, then export:`)
+      for (const { document, malformed } of broken) out.log(`  ${document._id}  ${malformed}`)
     }
     return { writes: [], status: 0 }
   }
@@ -166,7 +183,7 @@ export function exportCorpus(
   const malformed = malformedKey(corpus.type, candidate)
   if (malformed) {
     out.error(
-      `✗ ${_id} is malformed: ${malformed} — patch \`key\` or \`_id\` by hand until the two spell one key, then export`,
+      `✗ ${_id} is malformed — ${malformed}; patch \`key\` or \`_id\` by hand until the two spell one key, then export`,
     )
     return { writes: [], status: 1 }
   }
@@ -251,9 +268,9 @@ const NOT_KEBAB = `is not lowercase kebab-case (${CORPUS_KEY.source})`
  */
 function malformedKey(type: string, candidate: CorpusSnapshotDocument): string | undefined {
   const key = candidate.key
-  if (typeof key !== 'string' || key === '') return 'it has no key'
-  if (!CORPUS_KEY.test(key)) return `its key "${key}" ${NOT_KEBAB}`
-  if (candidate._id !== idFor(type, key)) return `its key "${key}" is not the key its id spells`
+  if (typeof key !== 'string' || key === '') return 'no key'
+  if (!CORPUS_KEY.test(key)) return `key "${key}" ${NOT_KEBAB}`
+  if (candidate._id !== idFor(type, key)) return `key "${key}" is not the key its id spells`
   return undefined
 }
 
