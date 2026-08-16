@@ -9,58 +9,32 @@
  *   pnpm guidance:check
  *
  * Exits non-zero on any drift, so it works as a checkpoint rather than a
- * report nobody reads.
+ * report nobody reads. The verdicts come from the corpus plan (`src/corpus/`);
+ * this file supplies the client.
  */
 import { getCliClient } from 'sanity/cli'
 
-import { readGuidance } from './sources'
+import { checkCorpus } from './corpus/commands'
+import { GUIDANCE_TYPE, guidanceCorpus } from './sources'
+
+import type { CorpusSnapshotDocument } from './corpus/plan'
 
 const client = getCliClient({ apiVersion: '2026-07-01' })
 
-type LiveDoc = { _id: string; key?: string; title?: string; body?: string; sourcePath?: string }
-
 async function main() {
-  const expected = readGuidance()
+  const corpus = guidanceCorpus()
   const { projectId, dataset } = client.config()
 
-  const live = await client.fetch<LiveDoc[]>(
-    '*[_type == "guidance" && !(_id in path("drafts.**"))]{_id, key, title, body, sourcePath}',
+  const snapshot = await client.fetch<CorpusSnapshotDocument[]>(
+    `*[_type == $type && !(_id in path("drafts.**"))]{_id, key, title, body, sourcePath}`,
+    { type: GUIDANCE_TYPE },
   )
-  const liveById = new Map(live.map((doc) => [doc._id, doc]))
 
   console.log(
-    `repo: ${expected.length} guidance document(s) · dataset: ${live.length} · ${projectId}/${dataset}\n`,
+    `repo: ${corpus.sources.length} guidance document(s) · dataset: ${snapshot.length} · ${projectId}/${dataset}\n`,
   )
 
-  const findings: string[] = []
-  for (const doc of expected) {
-    const actual = liveById.get(doc._id)
-    if (!actual) {
-      findings.push(`${doc._id} is missing from the dataset`)
-      continue
-    }
-    const fields = (['key', 'title', 'body', 'sourcePath'] as const).filter(
-      (field) => actual[field] !== doc[field],
-    )
-    if (fields.length > 0) {
-      findings.push(`${doc._id} drifted from ${doc.sourcePath}: ${fields.join(', ')}`)
-      continue
-    }
-    console.log(`  ✓ ${doc._id}  ${doc.sourcePath}`)
-  }
-
-  const known = new Set(expected.map((doc) => doc._id))
-  for (const doc of live) {
-    if (!known.has(doc._id)) findings.push(`${doc._id} has no source in GUIDANCE_SOURCES`)
-  }
-
-  if (findings.length > 0) {
-    console.error(`\n✗ guidance has drifted (${findings.length}) — run \`pnpm guidance:sync\`:`)
-    for (const line of findings) console.error(`    ${line}`)
-    process.exitCode = 1
-  } else {
-    console.log('\nguidance matches the repo')
-  }
+  process.exitCode = checkCorpus(corpus, snapshot, console)
 }
 
 await main()
