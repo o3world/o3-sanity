@@ -1686,5 +1686,17 @@
   "file:tools/migration/data/seed/assets/solutions-overview-1682.png": {
     "sha256": "629964fcc2548c57d0c920a47279ba6aa105c945",
     "assetId": "image-629964fcc2548c57d0c920a47279ba6aa105c945-1600x1065-png"
+  },
+  "file:tools/migration/data/seed/assets/plat-vercel-mark.png": {
+    "sha256": "6a92218a62b8576bbf1a51f025e59f8a7234c3bc",
+    "assetId": "image-6a92218a62b8576bbf1a51f025e59f8a7234c3bc-800x800-png"
+  },
+  "file:tools/migration/data/seed/assets/plat-lovable-mark.png": {
+    "sha256": "03090679191643d5fcda5b43ac5dedd2898d9798",
+    "assetId": "image-03090679191643d5fcda5b43ac5dedd2898d9798-1883x1920-png"
+  },
+  "file:tools/migration/data/seed/assets/plat-sanity-mark.png": {
+    "sha256": "bc47376c3d341b95daac21cece78c2a18aa4db45",
+    "assetId": "image-bc47376c3d341b95daac21cece78c2a18aa4db45-460x460-png"
   }
 }

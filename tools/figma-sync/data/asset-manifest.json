@@ -251,6 +251,27 @@
       "note": "Not from Figma. Byte-identical to `prototype/assets/plat-vercel-logo.png`, same 800×220 platform-bar canvas. See `partner-amerigas.png`."
     },
     {
+      "path": "tools/migration/data/seed/assets/plat-lovable-mark.png",
+      "format": "png",
+      "locked": true,
+      "unresolved": true,
+      "note": "Not from Figma, and not ours to author. Fetched from Lovable's brand hub (`lovablebrand.lovable.app`) by `pnpm --filter @o3/migration brand-assets`, which declares the source URL and the vendor's published trademark terms in `tools/migration/src/brand-assets-sources.ts`. Locked because that script owns the bytes: re-run it to check whether the vendor has changed the mark. The 1883×1920 gradient logomark — the only one of the three published at a real size."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/plat-sanity-mark.png",
+      "format": "png",
+      "locked": true,
+      "unresolved": true,
+      "note": "Not from Figma, and not ours to author. Fetched from Sanity's GitHub organization avatar by `pnpm --filter @o3/migration brand-assets`, which declares the source URL and the vendor's published trademark terms in `tools/migration/src/brand-assets-sources.ts`. Locked because that script owns the bytes: re-run it to check whether the vendor has changed the mark. sanity.io publishes no brand page and the `sanity-io/logos` repo was archived in July 2026, so this 460×460 monogram is the largest official square mark that exists publicly. Sanity's ToS §9.4 requires prior written consent for any use of their marks, with no nominative-use carve-out — the one of the three to get sign-off on."
+    },
+    {
+      "path": "tools/migration/data/seed/assets/plat-vercel-mark.png",
+      "format": "png",
+      "locked": true,
+      "unresolved": true,
+      "note": "Not from Figma, and not ours to author. Fetched from Vercel's own asset CDN (`assets.vercel.com`) by `pnpm --filter @o3/migration brand-assets`, which declares the source URL and the vendor's published trademark terms in `tools/migration/src/brand-assets-sources.ts`. Locked because that script owns the bytes: re-run it to check whether the vendor has changed the mark. A Cloudinary endpoint, so `w_800` is a supported transform rather than an upscale we did. Vercel requires a trademark attribution line wherever the mark appears, which the site has nowhere to put yet."
+    },
+    {
       "path": "tools/migration/data/seed/assets/work-city.png",
       "format": "png",
       "locked": false,
