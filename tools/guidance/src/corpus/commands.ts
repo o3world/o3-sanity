@@ -158,7 +158,7 @@ export function exportCorpus(
       }
     }
     if (broken.length > 0) {
-      out.log(`\n${broken.length} no key can name — repair the document, then export:`)
+      out.log(`\n${broken.length} unexportable until repaired:`)
       for (const { document, malformed } of broken) out.log(`  ${document._id}  ${malformed}`)
     }
     return { writes: [], status: 0 }
