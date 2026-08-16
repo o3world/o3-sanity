@@ -31,6 +31,37 @@ describe('readGlobbedSources', () => {
       'unregistered/no-key.md has no `key` in its frontmatter',
     )
   })
+
+  // The key becomes half of a deterministic id, and every matcher of those
+  // ids (`brief-<key>`) speaks lowercase kebab — a key outside that grammar
+  // would sync a document nothing can validate against.
+  it('refuses a key outside the id grammar', () => {
+    expect(() => readGlobbedSources(FIXTURE_ROOT, 'misdeclared')).toThrow(
+      'misdeclared/underscored.md declares key "Agent_Tooling", which is not lowercase kebab-case',
+    )
+  })
+
+  // Two sources with one key map to one _id — sync would last-write-win
+  // silently and check would report a drift naming neither file.
+  it('refuses two files claiming one key', () => {
+    expect(() => readGlobbedSources(FIXTURE_ROOT, 'duplicated')).toThrow(
+      'duplicated/second.md and duplicated/first.md both declare key "copied-brief"',
+    )
+  })
+
+  // Quotes strip only as a matched pair; a lone apostrophe is content.
+  it('unquotes frontmatter values without eating unmatched quotes', () => {
+    const titles = readGlobbedSources(FIXTURE_ROOT, 'quoting').map((source) => source.title)
+    expect(titles).toEqual(["The agents' brief", "St James'"])
+  })
+
+  // A dash run longer than the fence must not close the frontmatter mid-line
+  // and silently swallow body text; the file fails registration instead.
+  it('treats an unterminated frontmatter block as no frontmatter at all', () => {
+    expect(() => readGlobbedSources(FIXTURE_ROOT, 'unterminated')).toThrow(
+      'unterminated/dashes.md has no `key` in its frontmatter',
+    )
+  })
 })
 
 describe('readDeclaredSources', () => {

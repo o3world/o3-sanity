@@ -8,8 +8,12 @@ import { join } from 'node:path'
 
 import type { CorpusSource } from './plan'
 
-/** Leading `---` block, if there is one: `key: value` lines, everything else ignored. */
-const FRONTMATTER = /^---\r?\n([\s\S]*?)\r?\n---\r?\n*/
+/**
+ * Leading `---` block, if there is one: `key: value` lines, everything else
+ * ignored. The closing fence must end its line — otherwise `\n---` inside a
+ * longer dash run would close the block mid-line and swallow real body text.
+ */
+const FRONTMATTER = /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n+|$)/
 
 type Frontmatter = { data: Record<string, string>; body: string }
 
@@ -26,7 +30,8 @@ function parseFrontmatter(markdown: string): Frontmatter {
   const data: Record<string, string> = {}
   for (const line of block.split(/\r?\n/)) {
     const [, field, value = ''] = /^([A-Za-z][\w-]*):\s*(.*)$/.exec(line) ?? []
-    if (field) data[field] = value.trim().replace(/^['"]|['"]$/g, '')
+    // Only a matched pair is quoting; a lone quote is part of the value.
+    if (field) data[field] = value.trim().replace(/^(['"])(.*)\1$/, '$2')
   }
 
   return { data, body: markdown.slice(matched.length).trim() }
@@ -55,6 +60,12 @@ export function readDeclaredSources(
 }
 
 /**
+ * The key grammar: lowercase kebab, so the deterministic `<type>-<key>` id
+ * stays unambiguous everywhere it is matched.
+ */
+const KEY = /^[a-z0-9]+(-[a-z0-9]+)*$/
+
+/**
  * A globbed corpus directory: every markdown file in it is a document, and its
  * frontmatter `key` and `title` are the whole registration. Sorted by path, so
  * a plan reads the same on every machine.
@@ -64,12 +75,21 @@ export function readGlobbedSources(root: string, directory: string): CorpusSourc
     .filter((file) => file.endsWith('.md'))
     .sort()
 
+  const claimed = new Map<string, string>()
   return files.map((file) => {
     const sourcePath = `${directory}/${file}`
     const { data, body } = sourceFrom(root, sourcePath)
     const { key, title } = data
     if (!key) throw new Error(`${sourcePath} has no \`key\` in its frontmatter`)
     if (!title) throw new Error(`${sourcePath} has no \`title\` in its frontmatter`)
+    if (!KEY.test(key)) {
+      throw new Error(`${sourcePath} declares key "${key}", which is not lowercase kebab-case`)
+    }
+    /* Two sources sharing a key map to one _id: sync would last-write-win
+     * silently and check would report a drift that names neither file. */
+    const rival = claimed.get(key)
+    if (rival) throw new Error(`${sourcePath} and ${rival} both declare key "${key}"`)
+    claimed.set(key, sourcePath)
     return { key, title, body, sourcePath }
   })
 }

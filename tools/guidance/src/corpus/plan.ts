@@ -42,7 +42,7 @@ export type CorpusSnapshotDocument = {
 }
 
 /** The fields a source owns — everything the dataset copy is compared on. */
-const CORPUS_FIELDS = ['key', 'title', 'body', 'sourcePath'] as const
+export const CORPUS_FIELDS = ['key', 'title', 'body', 'sourcePath'] as const
 
 type CorpusField = (typeof CORPUS_FIELDS)[number]
 

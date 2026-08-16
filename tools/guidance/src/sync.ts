@@ -17,7 +17,7 @@ import { getCliClient } from 'sanity/cli'
 
 import { syncCorpus } from './corpus/commands'
 import { idFor } from './corpus/plan'
-import { GUIDANCE_TYPE, guidanceCorpus } from './sources'
+import { GUIDANCE_FIELDS, GUIDANCE_TYPE, guidanceCorpus } from './sources'
 
 import type { CorpusSnapshotDocument } from './corpus/plan'
 
@@ -29,7 +29,7 @@ async function main() {
   console.log(`syncing ${corpus.sources.length} guidance document(s) → ${projectId}/${dataset}\n`)
 
   const snapshot = await client.fetch<CorpusSnapshotDocument[]>(
-    `*[_type == $type && !(_id in path("drafts.**"))]{_id, key, title, body, sourcePath}`,
+    `*[_type == $type && !(_id in path("drafts.**"))]{_id, ${GUIDANCE_FIELDS.join(', ')}}`,
     { type: GUIDANCE_TYPE },
   )
 

@@ -1,6 +1,7 @@
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
+import { CORPUS_FIELDS } from './corpus/plan'
 import { readDeclaredSources } from './corpus/read'
 
 import type { Corpus } from './corpus/plan'
@@ -12,6 +13,14 @@ const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..'
 
 /** Pinned to the schema, so renaming the document type breaks the build rather than the sync. */
 export const GUIDANCE_TYPE = 'guidance' satisfies Guidance['_type']
+
+/**
+ * The compared fields, pinned the same way: rename a guidance field in the
+ * schema and this fails the build, instead of sync writing a field the schema
+ * no longer declares while check agrees with it. Also what the snapshot
+ * queries project, so comparison and fetch cannot drift apart.
+ */
+export const GUIDANCE_FIELDS = CORPUS_FIELDS satisfies readonly (keyof Guidance)[]
 
 /**
  * The guidance corpus: repo markdown → dataset document, one row per document.
