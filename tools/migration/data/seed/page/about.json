@@ -376,6 +376,7 @@
     {
       "_type": "roleListSection",
       "_key": "careers",
+      "anchor": "careers",
       "surface": "white",
       "eyebrow": "Careers",
       "heading": "Work with us.",
