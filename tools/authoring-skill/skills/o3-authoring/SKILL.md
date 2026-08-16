@@ -181,7 +181,10 @@ both run.
 3. **The checks** — `o3-slop`, ten numbered items. The shapes the revision pass
    does not catch.
 4. **The reader test** — below. Last, because it is the only one that blocks
-   the hand-off.
+   the hand-off. It runs on the settled text: every patch from gates 1 through
+   3 is written to the draft before the reader sees a word, because a reader
+   shown a stale revision tests a document that no longer exists — and the
+   no-re-run rule means there is no second attempt.
 
 #### The reader test
 
