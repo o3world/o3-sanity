@@ -1,6 +1,6 @@
 ---
 name: o3-authoring
-description: Draft or revise o3world.com content in Sanity — insights (blog posts), case studies, and pages. Use whenever asked to write, draft, or edit O3 World site content from an idea or notes.
+description: Draft, resume, or revise o3world.com content in Sanity — insights (blog posts), case studies, and pages. Use when asked to write, draft, edit, or continue O3 World site content from an idea or notes.
 ---
 
 # O3 authoring
@@ -26,6 +26,27 @@ default, and say which dataset you are writing to in the handoff summary. Use
 `production`, the dataset the site serves, only when the human names it in
 this conversation.
 
+## The pipeline
+
+Five stages — **gather → converge → outline → build → verify** — and the brief
+document is their spine. Stage 1 runs before the brief exists and is what the
+brief gets created from; from there each stage reads the brief, does its work,
+and patches the brief before the next one starts. Where a piece stands is a
+document in the dataset rather than a position in a conversation, which is what
+lets a run stop here and continue in a different session, on either surface.
+
+Two branches. A document that does not exist yet runs the pipeline. One that
+already exists goes to **review mode**. Both run the reader test and both end
+with a hand-off summary — the pipeline tests last, review mode tests first, and
+the reason is in each.
+
+**A run that is already underway resumes rather than restarts.** Stage 1 sweeps
+the dataset, and a brief on this subject is the first thing it finds: its
+`## Pipeline` section names the stage reached, the confirmations taken, and the
+next step. Start at that stage. A confirmation in the record has been taken —
+read it back for a nod if you like, but never re-run the interview that
+produced it.
+
 ## Before writing anything
 
 1. **Fetch the live guidance.** Query `*[_type == "guidance"]{key, title, body}`
@@ -36,9 +57,14 @@ this conversation.
    | `o3-voice`       | the voice guide                      | always; it outranks your defaults, every time         |
    | `o3-brand`       | pillars, delivery principles, values | claims about O3 — source material, never paste        |
    | `o3-slop`        | the machine tells, and the checks    | before you revise, and first when the job is an audit |
-   | `o3-composition` | which band follows which on a page   | composing or editing a page                           |
+   | `o3-composition` | which band follows which on a page   | any block-bearing field — see below                   |
    | `o3-argument`    | how a long argument holds up         | the brief, and any insight or case-study narrative    |
    | `o3-visual`      | palette, gradients, geometry         | when you make a picture rather than write             |
+
+   `o3-composition` governs a page's `sections`, and it also governs an insight
+   or case-study body, because `bodyText` admits `figure`, `embed` and
+   `pullQuote` — choosing among those is composition, at a smaller scale. Read
+   it whenever you compose a field that holds blocks.
 
    If no guidance documents exist, say so and stop — never improvise the voice.
 
@@ -46,10 +72,19 @@ this conversation.
    section block, call `get_schema` for that **specific type**. The no-type
    overview omits field descriptions, and the descriptions carry required
    authoring guidance. Never compose a section you haven't fetched.
+
+   The document type is fetchable now, and you need it at stage 2 — its
+   required fields are what that stage asks about. Section blocks wait for
+   stage 3: which blocks a piece needs is unknowable until its outline exists.
+
 3. **Fetch exemplars.** Query 1–2 recently published documents of the same
    type as reference for structure and register. Content migrated from
    WordPress predates the current voice — treat it as subject-matter
-   reference, never as a voice model.
+   reference, never as a voice model. Its **shape** is a separate question:
+   where `o3-argument` names a migrated piece as the canonical instance of an
+   arc, that piece is a legitimate example of the shape, and its sentences are
+   still not the model. What the corpus **says** is stage 1's business, not
+   this step's.
 
 ## Hard rules
 
@@ -57,10 +92,14 @@ this conversation.
   `patch_documents`. Never `publish_documents`, `unpublish_documents`,
   `discard_drafts`, or schema/project admin tools. A human publishes in
   Studio.
-- **Never invent facts.** Real names, numbers, outcomes, and quotes come from
-  the human. For case studies, interview until you have them; gaps stay gaps,
-  and they go in the brief's `record` as well as the handoff summary — the
-  summary scrolls away, the field is queryable.
+- **Never invent facts.** Real names, numbers, outcomes, and quotes reach the
+  piece one of two ways: the human supplied them, or you gathered them with a
+  source. Everything else — what you inferred, reasoned to, or recall without
+  a source — stays out of the piece and out of the brief's editorial slots,
+  however confident you are. Attribute what you gathered where it lands: a URL
+  for the web, a document id for the dataset. Gaps stay gaps, and they go in
+  the brief's `record` as well as the handoff summary — the summary scrolls
+  away, the field is queryable.
 - **Imagery:** reference an existing asset (query
   `*[_type == "sanity.imageAsset"]` with filters) when one genuinely fits.
   Otherwise `generate_image` is available, and `key == "o3-visual"` governs
@@ -84,19 +123,74 @@ this conversation.
     when supplied, absent when not. Include them for the Studio editor and
     typegen.
 
-## Workflow
+## Stage 1 — Gather
 
-Two branches. A document that does not exist yet starts at **the brief**; one
-that already exists goes to **review mode**. Both run **the reader test** and
-both end with a hand-off summary — the brief's branch tests last, review mode
-tests first, and the reason is in each.
+Gathering runs by default, before the interview, and it ends at a human gate.
+The human describes a subject; you arrive at the interview holding what is
+already known about it, so the questions are the ones only they can answer.
 
-### 1. The brief
+**Internal — the corpus.** Query the dataset for what it holds on this
+subject, and read those documents for what they **say**: the facts, numbers,
+quotes and claims O3 has already put in public. The exemplar fetch above reads
+a document for form; this one reads it for content, and they are different
+reads of the same corpus.
 
-The interview comes before any Sanity write, and it ends in one: the brief
-document below. Two rounds of questions, and **two is the whole
-interview** — do not open a third. Every question carries your recommended
-answer, so the human can nod rather than compose; a nod is an answer.
+Resolve every pointer the human gives. "Pull from our case studies" names a
+search you run, not a gap you log — a pointer resolved to document ids is
+retrieval, and retrieval is sourced material.
+
+Four things to come back with, past the material itself:
+
+- **Documents already on this subject.** A slug collision is a naming problem;
+  a subject collision is an editorial one, and the dataset will not flag it.
+  Query broadly — by title, by slug segment, by the subject's own words — and
+  carry every hit to the gate.
+- **Briefs.** A brief on this subject is either the run you are resuming or the
+  one this piece reuses; read its `record` before you plan a thing.
+- **Provisional notes.** `migration.provisionalNote` marks a claim nobody has
+  verified. A number found under one is not evidence — it is a gap wearing a
+  number's clothes.
+- **Attributable quotes.** Who said it and where it was published, or it is not
+  a quote you can use.
+
+**External — the web.** Where the piece's claims are publicly checkable, check
+them: one source per claim, and the source is a URL you actually opened.
+Regulations, product announcements, dated events and third-party figures all
+belong here — a piece that cites an article number, a penalty or a deadline
+needs a source for each, and gathering them is this stage's job rather than the
+human's. Where the surface running you has no web access, say so plainly at the
+gate; each unchecked claim goes on the gap list as unverifiable here, not as a
+fact.
+
+**Raw material handed over from outside the dataset** — a prior draft, a
+transcript, a deck, given as material for a fresh piece rather than as a
+document to revise — is supplied material. It goes into `background` as it
+stands. Two things it is not: it is not review mode, which is keyed on a
+_Sanity_ document existing; and its claims are not sourced by having been
+written down once. Treat a fact from a prior draft the way you treat a fact
+from the human, and gather a source for it like any other.
+
+**Then the gate.** Present three lists and stop:
+
+- **Found** — each item with its source, a URL or a document id.
+- **Missing** — what the piece needs that nobody has, and who could supply it.
+- **Unverifiable** — claims you could not source, and what would settle each.
+
+Say what a subject collision leaves open, in the three real options: **extend**
+the existing document, **supersede** it, or **differentiate** deliberately with
+a stated difference. The human answers before you converge.
+
+This is a gate: the interview does not start until the human has responded to
+these lists. Their corrections and additions are material — carry them into the
+brief with the rest.
+
+## Stage 2 — Converge
+
+The interview. It ends in the first Sanity write of the run: the brief
+document. Two rounds of questions, and **two is the whole interview** — do not
+open a third. Every question carries your recommended answer, so the human can
+nod rather than compose; a nod is an answer. What you gathered is what makes
+the recommendations worth nodding at, so bring it into the questions.
 
 Read `o3-argument` first and hold it open while you ask. It defines the claim,
 the warrant and the evidence bar, and it is what you judge the answers
@@ -108,10 +202,30 @@ against — apply it, do not restate it from memory.
 2. What is the one claim?
 3. Which content type — insight, case study, page?
 
+**The required fields**, once the type is known. Read them off the schema you
+fetched: every field the type marks required, plus its taxonomy references —
+on an insight that is `publishedAt`, `author` and `categories`; on a case study
+the client and the industries; on a page the `pageType`. Put them in one
+message as a list with a recommended answer each, drawn from the corpus you
+swept. This is a list to nod at, not a third round of the interview.
+
+Where the human has no answer, the default depends on what the slot holds:
+
+- **A required slot the piece itself decides** — a date, a page type — takes
+  your recommendation, and the recommendation is recorded as a decision. An
+  unset required field is a draft the human cannot publish without coming back
+  to you, and a publication date is a publishing slot rather than a claim about
+  the world: stamp the day you drafted and say you stamped it.
+- **A reference slot** — a byline, a category, a client — stays empty and
+  becomes a gap. Recommend the closest existing document by name; never mint a
+  new one. A byline is a person's name and a missing category is a taxonomy
+  change, and neither is yours to invent.
+
 **Round two** — none of it is askable before the claim exists:
 
 4. What is the warrant?
-5. What evidence is in hand?
+5. What evidence is in hand? Put stage 1's found list in front of them and ask
+   what it missed — what they hold that the sweep could not reach.
 
 Then two things, in the chat, before anything is written:
 
@@ -120,41 +234,53 @@ Then two things, in the chat, before anything is written:
   the questions.
 - **The five reader-test questions.** Forecast them from the thesis and the
   audience — what a reader should be able to answer after one pass. Question
-  one is fixed: _"In one sentence, what is this arguing?"_ You choose the other
-  four. Write all five out and **lock them**.
+  one is fixed: _"In one sentence, what is this arguing?"_ On a page, question
+  two is fixed as well: _"What does this page recommend, and why?"_ — a page
+  can carry its argument past a reader who never retains the name of the thing
+  it is selling. You choose the rest. Write all five out and **lock them**.
 
 **Then write the brief document.** The interview leaves a document behind, and
 it is the first thing written to Sanity — before the piece, so the piece has
 something to point at.
 
-- **One `create_documents` call**, type `brief`, with `_id: "brief-<key>"`.
-  The key is lowercase words joined by hyphens (`[a-z0-9]+(-[a-z0-9]+)*`) and
-  names the subject rather than the piece, because a second piece on the same
-  subject reuses it. Check for a collision first: an existing `brief-<key>` is
-  either this subject — patch what the interview added rather than creating a
-  second — or a different one that needs a different key. `title` says what the
-  brief is about in a few words.
+- **One `create_documents` call**, type `brief`, with `_id: "brief-<key>"`. The
+  call makes a draft, so the document you get back is `drafts.brief-<key>`; the
+  id you write is the published one, and that is the id everything else
+  addresses. The key is lowercase words joined by hyphens
+  (`[a-z0-9]+(-[a-z0-9]+)*`) and names the subject rather than the piece,
+  because a second piece on the same subject reuses it. Stage 1 already listed
+  the briefs: an existing `brief-<key>` is either this subject — patch what the
+  interview added rather than creating a second — or a different one that needs
+  a different key. `title` says what the brief is about in a few words.
 - **Never set `sourcePath`.** Its absence is what says this brief was written
   here rather than synced from a markdown file, and `brief:check` reads that
   absence to know it may not audit this document.
-- **The editorial slots carry the human's material, not yours.** `background`
-  is the raw material they supplied — notes, transcripts, pasted evidence, the
-  evidence and the warrant in their words. `instructions` is what they asked
-  for: the reader, the content type, what to argue, what to avoid. `links` is
-  the URLs they gave. Nothing you inferred goes in these three.
-- **`record` is yours**, in the format below. It is `readOnly` in Studio, which
-  keeps a human out of a field the skill maintains; the API takes your write.
+- **The editorial slots carry supplied and gathered material, nothing you
+  inferred.** `background` is the raw material: the human's notes, transcripts
+  and pasted evidence in their words, and beside them what stage 1 found, each
+  item carrying its source. `instructions` is what they asked for — the reader,
+  the content type, what to argue, what to avoid. `links` is every URL, theirs
+  and the ones you gathered.
+- **`record` is yours**, in the format below. `record` and `key` are both
+  `readOnly` in Studio, which keeps a human out of fields the skill maintains;
+  the API takes your write to either.
 
 A brief holds what one piece is written from; the `guidance` documents hold how
 to write for O3 anywhere. Per-piece material never goes into a `guidance`
 document, whatever it teaches you mid-session.
 
-#### The `record` format
+### The `record` format
 
-Three sections, these headings, this order. Plain markdown in a text field,
-read by the next session as much as by a human:
+Five sections, these headings, this order. Plain markdown in a text field, read
+by the next session as much as by a human:
 
 ```markdown
+## Pipeline
+
+- Stage: <gather | converge | outline | build | verify | handed off>
+- Confirmations: <each one taken, and what it settled>
+- Next: <the one thing a session picking this up does first>
+
 ## Thesis
 
 <the sentence that was confirmed>
@@ -162,20 +288,35 @@ read by the next session as much as by a human:
 ## Reader-test questions
 
 1. In one sentence, what is this arguing?
-2. <the four you chose>
+2. <the rest, in the order you locked them>
+
+## Decisions
+
+- <what was chosen, and what it ruled out>
 
 ## Gaps
 
 - <what is missing, and who can supply it>
 ```
 
+`## Pipeline` is what makes a run resumable. It arrives with the brief carrying
+stage 1's result, and from there it is patched at the end of every stage rather
+than at the end of the run. Three confirmations exist to record: the gather
+gate, the agreed thesis, and the outline gate.
+
+`## Decisions` holds the scoping calls — material you deliberately cut, an
+angle deferred to another piece, a required field you filled from a
+recommendation, a subject collision resolved. A decision is not a gap: nobody
+is waiting on it, and the reason it is written down is that a later session
+would otherwise read the absence as an oversight and put the material back.
+
 A gap is what a human still has to supply or decide before this can publish — a
-fact nobody has, a slot nobody filled. `## Gaps` says `- None` when there are
-none, so a later session can tell an empty list from an unwritten one, and a
-gap that closes says so where it stands rather than disappearing: that it was
-once open is part of what the next session needs. Questions added after
-drafting are appended to the list; none is ever removed or reworded. When
-`record` stops being true, patch it — step 6 is the last chance.
+fact nobody has, a slot nobody filled, a claim nobody could source. `## Gaps`
+says `- None` when there are none, so a later session can tell an empty list
+from an unwritten one, and a gap that closes says so where it stands rather
+than disappearing: that it was once open is part of what the next session
+needs. Questions added after drafting are appended to the list; none is ever
+removed or reworded.
 
 **The brief is a gate, and it stands one step later than the interview.**
 Nothing is written to Sanity without an agreed thesis, and with one the brief
@@ -185,7 +326,13 @@ the brief runs on, so they come before all of it. The human may hand you a
 thesis directly and skip the rounds, and that is the only override. Inventing
 one and proceeding is not.
 
-### 2. The outline
+## Stage 3 — Outline
+
+The outline forks on the content type, because a page is composed and an
+argument is arranged, and the two guidance documents split on exactly that
+line.
+
+### An insight or a case study — propose an arc
 
 **Propose an arc by name** from `o3-argument`'s **How the argument moves**, and
 say why this material takes that shape rather than the nearest alternative —
@@ -198,22 +345,61 @@ three — what it opens on, how it moves, how it ends, when to reach for
 it — and with which of the three came closest and where it broke.
 
 **The outline is the section list in the arc's order**, each section only
-readable in its place. That is the commitment gate 1 runs the shuffle test
-against, so write the list you are willing to be held to.
+readable in its place. That is the commitment the shuffle test runs against, so
+write the list you are willing to be held to.
 
 **Forecast the length here, as advice.** Check the section list against
 `o3-argument`'s **Length and proportion** bars. An outline pointing past the
 top of the band usually means the claim is two claims — say so while the
 middle is still a list of headings, not at the hand-off.
 
-**The outline is a gate.** Drafting starts once the human confirms the named
-arc and the section list. The human may hand you an arc directly and skip the
-proposal, and that is the only override. Inventing one and proceeding is not.
+### A page — propose a band list
 
-### 3. Draft
+Propose the page from `o3-composition`'s catalog. **The band list is the
+section list**: each band named by block type, in order, with its job on the
+page and the surface it lands on. Surface rhythm is part of the proposal, not
+a styling detail applied afterwards — the ink bookends and the single mid-page
+ink moment decide which band can carry the turn, so they are decided here.
 
-Create the document as a draft. Slugs are lowercase-hyphenated; check for
-collisions first.
+**The length bar is the band count**, `o3-composition`'s own. `o3-argument`'s
+word-count bands are measured across insights and mean nothing on a landing
+page; a page inside the band count is the right length whatever it weighs.
+`o3-argument`'s proportion split is still worth a glance — a page whose middle
+has vanished has no mechanism — but the count is the bar.
+
+**On a page, `o3-composition` outranks `o3-argument` wherever they disagree.**
+The argument guide opens by saying a page is not made of bands and hands page
+arrangement to the catalog; take it at its word. Two disagreements are known:
+the argument guide's warning against a closing sales line, against the
+catalog's rule that a page ends on a `ctaSection` — the catalog wins; and the
+argument guide's "a section that could be cut without breaking the next one
+should be cut", against a band the catalog places for rhythm — the catalog
+wins. `o3-argument` still governs the page's claim, its warrant and its
+evidence bar. It does not govern the arrangement.
+
+### Both types
+
+**The outline is a gate.** Drafting starts once the human confirms the outline
+as proposed — the named arc and its section list, or the band list and its
+surfaces. The human may hand you one directly and skip the proposal, and that
+is the only override. Inventing one and proceeding is not.
+
+**Fetch the block schemas once the gate is taken**, per the per-type rule
+above: every section block the outline names, and the object types inside them.
+This is the first moment the list exists.
+
+**Patch `record` before stage 4**: the outline as confirmed, the confirmation
+itself, and what was ruled out getting there.
+
+## Stage 4 — Build
+
+Create the document as a draft.
+
+**The slug.** Lowercase-hyphenated, checked for collisions first. A free slug
+is not a free subject — the subject check belongs to stage 1 and its answer was
+taken at the gather gate. Where you arrived here without one, because the human
+handed over a thesis and skipped ahead, run it now: `create_documents` is the
+point of no return for a second document on a subject that already has one.
 
 **Point it at the brief.** `briefs` is an array of weak references, so it
 carries `{_type: "reference", _ref: "brief-<key>", _weak: true, _key: "<key>"}`
@@ -222,12 +408,16 @@ even though the brief you just wrote is a draft: that is how a reference
 addresses a document, and weak is why it costs nothing while the human has yet
 to publish either one.
 
-### 4. Iterate
+**Iterate.** Share the draft's path (e.g. `/insights/{slug}`) for preview, ask
+for reactions once, and apply what comes back with `patch_documents`. Then say
+you are moving to the gates, and move — the exit is one round, and a round with
+no reactions in it is still a round. Reactions arriving after the gates start
+are welcome; they cost a re-run of the gates they invalidate, so say which.
 
-Share the draft's path (e.g. `/insights/{slug}`) for preview, and apply
-reactions with `patch_documents`.
+**Patch `record` before stage 5**: the stage, what the drafting decided, and
+any gap it opened or closed.
 
-### 5. The gates
+## Stage 5 — Verify
 
 Four gates, run in this order before the hand-off summary, every time. Each
 one's content lives in the document that owns it; what this list adds is the
@@ -237,11 +427,13 @@ claim as a list, and an arc can hold around a claim nobody can restate — so
 both run.
 
 1. **The shuffle test** — `o3-argument`. Every section is only readable in its
-   place, and the arc named in step 2 is what holds them there: the piece runs
-   the shape you proposed, in that order. Structure goes first because a piece
-   with the wrong shape is not fixed by editing sentences: `o3-argument`'s
-   **Mush** section sends it back to the brief instead, and every sentence you
-   polished before finding that out is wasted work.
+   place, and the outline confirmed at stage 3 is what holds them there: the
+   piece runs the shape you proposed, in that order. Structure goes first
+   because a piece with the wrong shape is not fixed by editing sentences:
+   `o3-argument`'s **Mush** section sends it back to the brief instead, and
+   every sentence you polished before finding that out is wasted work. On a
+   page, a band the catalog places survives this test even where the argument
+   guide would cut it — that is the precedence rule at stage 3, applied.
 2. **The revision pass** — `o3-voice`, ten numbered steps. Sentence level.
 3. **The checks** — `o3-slop`, ten numbered items. The shapes the revision pass
    does not catch.
@@ -251,12 +443,19 @@ both run.
    shown a stale revision tests a document that no longer exists — and the
    no-re-run rule means there is no second attempt.
 
-#### The reader test
+### The reader test
 
 A **context-free reader** answers the five locked questions. It gets the title,
 the excerpt, and the body **as rendered prose** — nothing else. Not the raw
 portable text, which shows structure a reader cannot see and spends attention
 on `_key`s. Not the thesis, which is the answer.
+
+**On a page, those three fields need translating**, and this is the
+translation: the title is the page's, the excerpt is `card.excerpt`, and the
+body is the bands flattened into what a visitor meets from the top — eyebrows,
+headings and subheadings in order, each feature or panel heading with its body,
+button labels in square brackets. Keep the cues a visitor genuinely sees; drop
+`_key`, `_type`, block names and surfaces.
 
 Two ways to run it, same test:
 
@@ -269,9 +468,12 @@ Two ways to run it, same test:
 
 Compare answer one against the agreed thesis:
 
-- **Pass** — they say the same thing.
-- **Fail** — they do not, or the reader could not answer. Report both sentences
-  side by side, say it failed, and stop.
+- **Pass** — they say the same thing. An answer that carries the claim but
+  re-weights it is a pass: a reader who leads on the half you put second, or
+  drops an emphasis into a later answer, has read the piece. Say which weight
+  moved and record it in `## Decisions`.
+- **Fail** — a different claim, or the reader could not answer. Report both
+  sentences side by side, say it failed, and stop.
 
 **A fail blocks the hand-off, not the draft.** The draft stays where it is and
 the human decides what happens to it. Never re-draft to make your own test
@@ -281,17 +483,18 @@ You may **add up to two** questions after drafting. You may never remove or
 reword one. The question you cannot answer is the one that otherwise gets
 quietly dropped.
 
-### 6. Hand off
+## Hand off
 
-**Patch the brief first**, wherever `record` has stopped being true: questions
-added after drafting, gaps the drafting closed or opened. The gaps in the
-document and the gaps in the summary are one list, and the document is the copy
-that outlives the chat.
+**Patch the brief first**, wherever `record` has stopped being true: the stage
+is now `handed off`, `Next:` says what the human does, questions added after
+drafting are appended, and gaps the drafting closed or opened are recorded. The
+gaps in the document and the gaps in the summary are one list, and the document
+is the copy that outlives the chat.
 
 Then end with a summary: what was created (document ID and path), which
-dataset, the brief it was written from and its id, the reader-test result,
-imagery needed per empty slot, facts still unverified, and anything the human
-must do before publishing.
+dataset, the brief it was written from and its id, what gathering found and
+what it could not source, the reader-test result, imagery needed per empty
+slot, facts still unverified, and anything the human must do before publishing.
 
 ## Review mode
 
@@ -326,17 +529,18 @@ pages alike. It reports before it writes.
    Where there is no brief, there is nothing to interview against and none is
    written here: review mode reports and patches, it does not brief.
 
-3. **Run the reader test** (step 5 above), before the findings table rather
-   than after it. Question one is fixed as always.
+3. **Run the reader test** (stage 5 above), before the findings table rather
+   than after it. Question one is fixed as always, and on a page so is question
+   two.
    - **With a brief**, the locked questions and the agreed thesis come out of
      `record`, and answer one is compared against that thesis exactly as in the
-     drafting branch.
+     pipeline branch.
    - **With none**, there is no agreed thesis: the reader states what the
      document argues and **the human confirms whether that is the intended
      one**. A mismatch is a single `error`-tier finding with no proposed
      patch — "this does not argue what you think it argues" has no row-level
      fix — and it can only be a row of the table if the test has already run.
-     Forecast the other four questions from the document in front of you.
+     Forecast the other questions from the document in front of you.
 
 4. **Report the findings as a table**, before proposing any write:
 
