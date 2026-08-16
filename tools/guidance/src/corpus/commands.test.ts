@@ -4,6 +4,7 @@ import { join } from 'node:path'
 
 import { describe, expect, it } from 'vitest'
 
+import { commitWrites } from '../commit'
 import { checkCorpus, exportCorpus, syncCorpus } from './commands'
 import { normalizeSnapshot } from './plan'
 import { CORPUS_KEY, readGlobbedSources } from './read'
@@ -814,21 +815,32 @@ describe('exportCorpus', () => {
  * `commitWrites` builds, so the loop is exercised end to end without a project.
  */
 describe('export → sync', () => {
-  /** The dataset after a transaction: the same fold `commitWrites` hands the client. */
+  /**
+   * The dataset after a transaction. The writes go through `commitWrites` —
+   * the one place that knows what a write turns into — against a map standing
+   * in for the client, so the round-trip exercises the real translation rather
+   * than a second opinion about it.
+   */
   function applied(
     snapshot: readonly CorpusSnapshotDocument[],
     writes: readonly CorpusWrite[],
   ): CorpusSnapshotDocument[] {
     const byId = new Map(snapshot.map((document) => [document._id, { ...document }]))
-    for (const write of writes) {
-      if (write.op === 'delete') byId.delete(write._id)
-      else if (write.op === 'patch') {
-        const live = byId.get(write._id)
-        if (live) byId.set(write._id, { ...live, ...write.set })
-      } else if (write.op === 'createOrReplace' || !byId.has(write.document._id)) {
-        byId.set(write.document._id, { ...write.document })
-      }
-    }
+
+    commitWrites(
+      {
+        createOrReplace: (document) => byId.set(document._id, { ...document }),
+        createIfNotExists: (document) =>
+          byId.has(document._id) || byId.set(document._id, { ...document }),
+        patch: (id, { set }) => {
+          const live = byId.get(id)
+          return live && byId.set(id, { ...live, ...set })
+        },
+        delete: (id) => byId.delete(id),
+      },
+      writes,
+    )
+
     return [...byId.values()]
   }
 
