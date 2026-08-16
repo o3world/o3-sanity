@@ -1,18 +1,16 @@
-import { dirname, join } from 'node:path'
-import { fileURLToPath } from 'node:url'
-
-import { CORPUS_FIELDS } from './corpus/plan'
+import { fieldsOf } from './corpus/plan'
 import { readDeclaredSources } from './corpus/read'
+import { REPO_ROOT } from './repo'
 
 import type { Corpus } from './corpus/plan'
 import type { SourceDeclaration } from './corpus/read'
 import type { Guidance } from '@o3/sanity/types/generated'
 
-/** The monorepo root — sources are declared repo-relative so they read the same in Studio. */
-const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..')
-
 /** Pinned to the schema, so renaming the document type breaks the build rather than the sync. */
 export const GUIDANCE_TYPE = 'guidance' satisfies Guidance['_type']
+
+/** Where one source file's markdown lands. Guidance is the corpus that calls it `body`. */
+const GUIDANCE_BODY = 'body' satisfies keyof Guidance
 
 /**
  * The compared fields, pinned the same way: rename a guidance field in the
@@ -20,7 +18,9 @@ export const GUIDANCE_TYPE = 'guidance' satisfies Guidance['_type']
  * no longer declares while check agrees with it. Also what the snapshot
  * queries project, so comparison and fetch cannot drift apart.
  */
-export const GUIDANCE_FIELDS = CORPUS_FIELDS satisfies readonly (keyof Guidance)[]
+export const GUIDANCE_FIELDS = fieldsOf({
+  bodyField: GUIDANCE_BODY,
+}) satisfies readonly (keyof Guidance)[]
 
 /**
  * The guidance corpus: repo markdown → dataset document, one row per document.
@@ -84,7 +84,18 @@ const GUIDANCE_SOURCES: SourceDeclaration[] = [
   },
 ]
 
-/** The guidance corpus as the repo currently defines it, read off disk. */
+/**
+ * The guidance corpus as the repo currently defines it, read off disk.
+ *
+ * The repo owns every field of a guidance document and every document of the
+ * type, so sync writes them whole and a document no row claims is a leftover.
+ */
 export function guidanceCorpus(): Corpus {
-  return { type: GUIDANCE_TYPE, sources: readDeclaredSources(REPO_ROOT, GUIDANCE_SOURCES) }
+  return {
+    type: GUIDANCE_TYPE,
+    bodyField: GUIDANCE_BODY,
+    writes: 'replace',
+    claimsOrphans: 'every',
+    sources: readDeclaredSources(REPO_ROOT, GUIDANCE_SOURCES),
+  }
 }
