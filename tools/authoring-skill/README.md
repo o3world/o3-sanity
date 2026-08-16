@@ -6,7 +6,9 @@ page — in the O3 voice. The skill is a thin bootstrap; voice, schema
 guidance, and exemplars are fetched live from Sanity, so knowledge updates
 propagate with a git push and never require repackaging.
 
-One skill source (`skills/o3-authoring/SKILL.md`), two distributions:
+One skill source (`skills/o3-authoring/SKILL.md`), two distributions. Changes
+to it are checked by running the scenarios in [`scenarios/`](./scenarios) and
+diffing the transcripts.
 
 ## Claude Code (plugin)
 
