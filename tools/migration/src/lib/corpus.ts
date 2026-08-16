@@ -62,7 +62,7 @@ export function isPipelineOwned(id: string): boolean {
  * under `data/`, `load` never writes or retires one (their ids miss
  * `isPipelineOwned` deliberately), and `verify` does not count one an orphan.
  */
-export const INTERNAL_TYPES: readonly string[] = ['guidance', 'brief']
+const INTERNAL_TYPES: readonly string[] = ['guidance', 'brief']
 
 export function isInternalType(type: string): boolean {
   return INTERNAL_TYPES.includes(type)
