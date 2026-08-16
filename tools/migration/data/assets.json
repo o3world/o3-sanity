@@ -1682,5 +1682,9 @@
   "https://www.o3world.com/wp-content/uploads/2025/02/Jackie.jpg": {
     "sha256": "0fbaeda2053021d368b940d320bcdb433547ef25",
     "assetId": "image-0fbaeda2053021d368b940d320bcdb433547ef25-2500x2500-jpg"
+  },
+  "file:tools/migration/data/seed/assets/solutions-overview-1682.png": {
+    "sha256": "629964fcc2548c57d0c920a47279ba6aa105c945",
+    "assetId": "image-629964fcc2548c57d0c920a47279ba6aa105c945-1600x1065-png"
   }
 }

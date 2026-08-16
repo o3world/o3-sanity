@@ -19,7 +19,7 @@ export const railPanelsSectionKnobs = defineBlockKnobs({
       name: 'layout',
       title: 'Layout',
       description:
-        'How the panels are arranged: a numbered/labelled rail beside tall panels (Home), or a row of ink cards (Solutions).',
+        'How the panels are arranged: a numbered/labelled rail beside tall panels, a row of ink cards, hairlined numbered rows, or side-by-side columns of details.',
       // The Solutions frame (1925:6108) carries the SAME band as Home's
       // ways-to-work (1762:2168) — same heading, same standfirst, same three
       // engagements — in a different arrangement: no rail, no media square,
@@ -32,7 +32,10 @@ export const railPanelsSectionKnobs = defineBlockKnobs({
       // with the numeral inline in an ink circle instead of in a sticky rail.
       // Third arrangement, same content, so it joins the axis rather than
       // starting a fourth block.
-      options: ['rail', 'cards', 'rows'],
+      // `grid` is the redesigned Solutions frame's service grid (`2358:2788`,
+      // #93): the panels side by side as columns, each one's details stacked
+      // under its heading — no rail, no numerals, no media square.
+      options: ['rail', 'cards', 'rows', 'grid'],
       initialValue: 'rail',
     }),
     knob({
@@ -46,12 +49,16 @@ export const railPanelsSectionKnobs = defineBlockKnobs({
       // caseStudy.story’s chapters already follow (CONTEXT.md).
       options: ['label', 'number'],
       initialValue: 'label',
-      // Was `({parent}) => parent?.layout === 'cards'`. The gate lives on the
-      // knob rather than on a `hiddenUnless` wrapper, because `rail` is itself
-      // a design option: the toolbar has to know not to draw it on the cards
-      // layout, and a closure would tell it nothing (ADR 0020). `notOneOf`
-      // shows on an unset `layout`, which is what the closure did too.
-      showWhen: { at: 'layout', mode: 'notOneOf', values: ['cards', 'rows'] },
+      // The gate lives on the knob rather than on a `hiddenUnless` wrapper,
+      // because `rail` is itself a design option: the toolbar has to know not
+      // to draw it on the rail-less layouts, and a closure would tell it
+      // nothing (ADR 0020). Stated as the one layout that HAS a rail rather
+      // than the list that lack one, so a fifth layout never has to remember
+      // to join a negative list — and a single-value gate is the only shape
+      // `knobArgs` can map to a Storybook `if` condition. `emptyMatches`,
+      // because an unset `layout` falls back to the rail composition (the
+      // `ORB_ONLY` precedent in `mark.ts`).
+      showWhen: { at: 'layout', mode: 'oneOf', values: ['rail'], emptyMatches: true },
     }),
     surfaceKnob({ initialValue: 'white' }),
   ],

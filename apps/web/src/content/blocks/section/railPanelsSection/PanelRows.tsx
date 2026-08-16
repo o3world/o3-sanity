@@ -2,6 +2,7 @@ import { DisplayHeading, Eyebrow } from '@o3/ui'
 import { cn } from '@o3/ui/lib/utils'
 
 export interface PanelRowDetail {
+  _key?: string
   label?: string | null
   items?: readonly (string | null)[] | null
 }
@@ -82,7 +83,7 @@ export function PanelRows({ items }: PanelRowsProps) {
               {(panel.details ?? []).map((detail, detailIndex, all) => {
                 const isPromise = detailIndex === all.length - 1 && all.length > 1
                 return (
-                  <div key={detail.label ?? detailIndex} className="flex flex-col gap-3">
+                  <div key={detail._key ?? detailIndex} className="flex flex-col gap-3">
                     {detail.label ? (
                       <Eyebrow size="lg" tone={isPromise ? 'brand' : 'muted'}>
                         {detail.label}
@@ -98,8 +99,8 @@ export function PanelRows({ items }: PanelRowsProps) {
                           : 'flex flex-col',
                       )}
                     >
-                      {(detail.items ?? []).filter(Boolean).map((item) => (
-                        <p key={item}>{item}</p>
+                      {(detail.items ?? []).filter(Boolean).map((item, itemIndex) => (
+                        <p key={itemIndex}>{item}</p>
                       ))}
                     </div>
                   </div>

@@ -9,12 +9,12 @@ import { FeatureGridSection } from './FeatureGridSection'
  * A set of parallel short claims, in the four compositions the canonical frames
  * draw them in — one block with a `layout` field, not four block types.
  *
- * | `layout`  | Frame       | Page               |
- * | --------- | ----------- | ------------------ |
- * | `grid`    | `1925:5915` | `/about`           |
- * | `stack`   | `2354:2530` | `/partners/sanity` |
- * | `rows`    | `2341:2250` | `/partners/sanity` |
- * | `orbital` | `1928:6524` | `/solutions`       |
+ * | `layout`  | Frame       | Page                          |
+ * | --------- | ----------- | ----------------------------- |
+ * | `grid`    | `1925:5915` | `/about`                      |
+ * | `stack`   | `2354:2530` | `/partners/sanity`            |
+ * | `rows`    | `2341:2250` | `/partners/sanity`, `/solutions` |
+ * | `orbital` | `1928:6524` | none — see `ORBITAL_FIXTURE`  |
  *
  * The orbital composition is `lg` and up: 1120px of absolutely-positioned copy
  * has no honest 402 form and no 402 frame to copy, so below `lg` it falls back
@@ -64,19 +64,55 @@ export const GridDiscs: Story = {
   args: asDiscs(seededSectionArgs('about', 'featureGridSection')),
 }
 
-/** `/solutions` — the dotted tetrahedron, at `lg` and up. */
+/**
+ * `layout: orbital` — the dotted tetrahedron (`1928:6524`). No seed draws
+ * this arm, so the story carries its own band: four disciplines, apex first
+ * then the base ring left → right → front.
+ */
+const ORBITAL_FIXTURE: Args = {
+  surface: 'ink',
+  layout: 'orbital',
+  features: [
+    {
+      _type: 'feature',
+      _key: 's-strategy',
+      heading: 'Strategy',
+      body: 'The root of every engagement. We find the real problem and the move worth making — before a line of code is written.',
+    },
+    {
+      _type: 'feature',
+      _key: 's-ai',
+      heading: 'AI',
+      body: 'Applied where it compounds the work, not where it decorates it — our O3XO practice, embedded where it earns its keep.',
+    },
+    {
+      _type: 'feature',
+      _key: 's-engineering',
+      heading: 'Engineering',
+      body: 'Senior engineers who build it to last and to scale — the fix that ships, not a prototype to hand off.',
+    },
+    {
+      _type: 'feature',
+      _key: 's-design',
+      heading: 'Design',
+      body: 'Product-grade design that gives the move a form people actually want to use.',
+    },
+  ],
+}
+
+/** The dotted tetrahedron, at `lg` and up. */
 export const Orbital: Story = {
-  args: seededSectionArgs('solutions', 'featureGridSection'),
+  args: ORBITAL_FIXTURE,
   parameters: { design: figmaDesign('1928:6524') },
 }
 
 /**
  * The same block below `lg`. The tetrahedron is gone and the grid is standing
- * in for it — and because the Solutions band has no heading, each feature
- * is an `h2` here rather than an `h3`.
+ * in for it — and because the band has no heading, each feature is an `h2`
+ * here rather than an `h3`.
  */
 export const OrbitalMobile: Story = {
-  args: seededSectionArgs('solutions', 'featureGridSection'),
+  args: ORBITAL_FIXTURE,
   globals: { viewport: { value: 'mobile' } },
 }
 

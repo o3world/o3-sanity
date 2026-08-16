@@ -49,8 +49,8 @@ explicitly — no page leans on the default.
   from the ink hero before the page gets to work.
 - **Mid-page `ink` is a feature moment, not a normal band.** Three instances in
   the whole corpus, each one the page's centrepiece: the homepage's case
-  showcase, the Solutions diagram, the 1682 video. Reach for a third ink band
-  and you are claiming this is the thing the page is about.
+  showcase, the Solutions proof point, the 1682 video. Reach for a third ink
+  band and you are claiming this is the thing the page is about.
 - **`ctaSection` never follows another ink band** (8 of 8). The close needs the
   contrast to land; give it a lighter band to rise out of.
 - **Two bands may share a surface.** "Never repeat" is not a rule and is broken
@@ -64,22 +64,22 @@ explicitly — no page leans on the default.
 The hero states the claim; the band under it has to pay something back
 immediately. There is no single block for this — there is a job. Observed:
 
-| Second band          | Pays back with            | Seen on               |
-| -------------------- | ------------------------- | --------------------- |
-| `logoWallSection`    | borrowed credibility      | home                  |
-| `layoutSection`      | the positioning statement | About, Ventures, 1682 |
-| `formSection`        | the action itself         | Contact               |
-| `inFlightSection`    | the actual list           | Live                  |
-| `featureGridSection` | the diagram               | Solutions             |
-| `mediaSection`       | the subject, shown        | both venture pages    |
+| Second band       | Pays back with            | Seen on                          |
+| ----------------- | ------------------------- | -------------------------------- |
+| `logoWallSection` | borrowed credibility      | home                             |
+| `layoutSection`   | the positioning statement | About, Solutions, Ventures, 1682 |
+| `formSection`     | the action itself         | Contact                          |
+| `inFlightSection` | the actual list           | Live                             |
+| `mediaSection`    | the subject, shown        | both venture pages               |
 
 What none of them do is warm up. Background, history and context do not go
 here; if the page needs them, they come after the payoff.
 
-**The intro molecule** (3 instances — a real idiom): `layoutSection` at
+**The intro molecule** (4 instances — a real idiom): `layoutSection` at
 `columns: 2` holding `richText` + `figure` + `cta`. A statement, a picture, and
 one link out. It is the default second band for a page with something to
-explain rather than something to show.
+explain rather than something to show. Solutions' Overview band is the same
+idiom without the link.
 
 ## Choosing the block
 
@@ -126,15 +126,22 @@ caseShowcaseSection → quoteSection` — who trusts us, what we did, what they
 
 ## One block, more than one job
 
-Five blocks change job with a knob rather than being two blocks. Recognising
+Six blocks change job with a knob rather than being two blocks. Recognising
 this is what stops a page proposing a block that already exists:
 
 - **`railPanelsSection`** — `layout: rail` with `rail: label` is the default
   list of parallel things; `rail: number` makes it a sequence of steps;
   `layout: cards` makes it a row of ink cards; `layout: rows` gives each one a
-  numbered full-width row with room for labelled breakdowns under its prose. Surface tracks the job: `white`
+  numbered full-width row with room for labelled breakdowns under its prose;
+  `layout: grid` sets up to three panels side by side as columns, each one's
+  labelled breakdowns stacked under its heading (Solutions' service grid).
+  Surface tracks the job: `white`
   when the band leads the page's argument and carries an intro, `bone` when it
   is a secondary list.
+- **`layoutSection`** — `columns` is the axis (one to three columns of base
+  blocks), and `decoration: molecule` hangs the glyph behind the band —
+  which is what makes it the statement band on ink (Solutions' proof point)
+  as well as the default prose band.
 - **`featureGridSection`** — a set of parallel short claims, each a mark with a
   heading and optional body. `grid` pairs mark and copy two across; `stack`
   sets the mark above the copy three across, and is the one to reach for when

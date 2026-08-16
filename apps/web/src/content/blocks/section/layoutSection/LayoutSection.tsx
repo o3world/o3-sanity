@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react'
 
-import { DisplayHeading, Eyebrow, SectionShell } from '@o3/ui'
+import { DisplayHeading, Eyebrow, MoleculeMark, SectionShell } from '@o3/ui'
 import { stegaClean } from '@sanity/client/stega'
 
 import { BASE_BLOCK_COMPONENTS } from '../../base/baseComponents'
@@ -30,12 +30,34 @@ export function LayoutSection({
   heading,
   subheading,
   columns,
+  decoration,
   items,
   surface,
 }: LayoutSectionProps) {
   const columnClass = COLUMN_CLASSES[resolveColumns(columns)]
+  const resolved = resolveSurface(surface, 'white')
+  const showMolecule = stegaClean(decoration) === 'molecule'
   return (
-    <SectionShell surface={resolveSurface(surface, 'white')} top="md" bottom="md">
+    <SectionShell
+      surface={resolved}
+      top="md"
+      bottom="md"
+      className={showMolecule ? 'relative isolate overflow-hidden' : undefined}
+    >
+      {/*
+       * `2357:2690` — the Solutions proof-point band hangs the molecule at
+       * 1300px and 25%, running off the band's right edge and past its foot,
+       * the same treatment `featureGridSection` gives "Why Sanity + O3"
+       * (`2354:2551`). White on ink, ink on the light surfaces — the glyph
+       * takes the band's own text colour either way.
+       */}
+      {showMolecule ? (
+        <MoleculeMark
+          className={`pointer-events-none absolute right-[-28%] top-0 -z-10 hidden w-[90vw] opacity-25 lg:block ${
+            resolved === 'ink' ? 'text-white' : 'text-ink'
+          }`}
+        />
+      ) : null}
       <div className="flex flex-col gap-12">
         {/*
          * The three-part band header the interior frames use everywhere

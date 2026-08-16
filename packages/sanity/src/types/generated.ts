@@ -200,6 +200,7 @@ export type LayoutSection = {
   heading?: string
   subheading?: string
   columns?: 1 | 2 | 3
+  decoration?: 'none' | 'molecule'
   items?: Array<
     | ({
         _key: string
@@ -364,7 +365,7 @@ export type RailPanelsSection = {
   _type: 'railPanelsSection'
   heading?: string
   intro?: string
-  layout?: 'rail' | 'cards' | 'rows'
+  layout?: 'rail' | 'cards' | 'rows' | 'grid'
   rail?: 'label' | 'number'
   panels?: Array<{
     railLabel?: string
@@ -1649,6 +1650,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         heading?: string
         subheading?: string
         columns?: 1 | 2 | 3
+        decoration?: 'molecule' | 'none'
         items: Array<
           | {
               _key: string
@@ -1877,7 +1879,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         _type: 'railPanelsSection'
         heading?: string
         intro?: string
-        layout?: 'cards' | 'rail' | 'rows'
+        layout?: 'cards' | 'grid' | 'rail' | 'rows'
         rail?: 'label' | 'number'
         panels: Array<{
           railLabel?: string
@@ -2373,6 +2375,7 @@ export type PAGE_QUERY_RESULT = {
         heading?: string
         subheading?: string
         columns?: 1 | 2 | 3
+        decoration?: 'molecule' | 'none'
         items: Array<
           | {
               _key: string
@@ -2601,7 +2604,7 @@ export type PAGE_QUERY_RESULT = {
         _type: 'railPanelsSection'
         heading?: string
         intro?: string
-        layout?: 'cards' | 'rail' | 'rows'
+        layout?: 'cards' | 'grid' | 'rail' | 'rows'
         rail?: 'label' | 'number'
         panels: Array<{
           railLabel?: string

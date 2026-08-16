@@ -169,70 +169,83 @@ describe('the seeded Solutions page', () => {
     expect(bandPaths(html)).toHaveLength(sections.length)
   })
 
-  it('replaces the two-column approximation with the orbital diagram', () => {
+  // The redesigned frame's band order (`2360:2879`, #93): Interior Hero, the
+  // Overview intro, the service grid, the proof-point band, the use cases,
+  // the CTA. The old frame's orbital diagram and engagement rail are gone —
+  // the redesign draws neither.
+  it('follows the redesigned frame’s band sequence', () => {
     expect(sections.map((s) => s._type)).toEqual([
       'heroSection',
-      'featureGridSection',
+      'layoutSection',
       'railPanelsSection',
+      'layoutSection',
+      'featureGridSection',
       'ctaSection',
     ])
-    expect(html).toContain('data-testid="orbital-diagram"')
-  })
-
-  /**
-   * Position order is the array's, not the author's — apex first, then the
-   * base ring. The frame puts Strategy at the apex and reads AI, Engineering,
-   * Design around the base, so the seed carries them in that order.
-   */
-  it('places the four features in the frame’s position order', () => {
-    const features = (
-      sections.find((s) => s._type === 'featureGridSection') as
-        { features?: { heading?: string }[] } | undefined
-    )?.features
-    expect(features?.map((f) => f.heading)).toEqual(['Strategy', 'AI', 'Engineering', 'Design'])
+    expect(html).not.toContain('data-testid="orbital-diagram"')
   })
 
   it.each([
-    ['apex feature', 'The root of every engagement'],
-    ['engagement band heading', 'Three ways in.'],
-    ['an engagement card', 'Embedded Team Member'],
-    ['an engagement card’s one line', 'Senior hands, inside your team.'],
-    ['an engagement card’s Best-when foot', 'Best when you trust the direction'],
+    ['hero headline', 'Build for scale and performance.'],
+    ['hero deck', 'architecting for performance, flexibility, and growth'],
+    ['Overview intro', 'migrate legacy systems without breaking them'],
+    ['a service column', 'Custom Development'],
+    ['a service detail label', 'CRM integration'],
+    ['a service detail', 'React, Next.js, TypeScript (with rendering strategies)'],
+    ['proof-point heading', 'ship and disappear.'],
+    ['proof-point body', 'replatform every couple of years'],
+    ['use-cases band heading', 'Use cases.'],
+    ['transcribed use case', 'stuck in a legacy CMS'],
+    ['authored use case', 'one system of record'],
+    ['CTA heading', 'Engineering that scales with your business.'],
   ])('shows the frame’s %s', (_label, copy) => {
     expect(html).toContain(copy)
   })
 
   /**
-   * The band is Home's ways-to-work band (`1762:2168`) in the Solutions
-   * frame's arrangement (`1925:6108`) — three ink cards, no rail, no media
-   * square, no button. `layout` is what says so; the numerals, the 395px
-   * media slot and the panel CTAs are all rail-layout elements, so their
-   * absence is the assertion (#47).
+   * The service band is `railPanelsSection` in its fourth arrangement
+   * (`2358:2788`): three columns, each panel's details stacked under its
+   * heading — no rail, no numerals, no media square, no button (#93).
    */
-  it('draws the engagement band as cards, not the rail', () => {
+  it('draws the service band as the grid, not the rail', () => {
     const band = sections.find((s) => s._type === 'railPanelsSection') as
       RailPanelsSection | undefined
 
-    expect(band?.layout).toBe('cards')
+    expect(band?.layout).toBe('grid')
     expect(band?.panels).toHaveLength(3)
+    expect(band?.panels?.every((panel) => (panel.details?.length ?? 0) >= 4)).toBe(true)
     expect(band?.panels?.some((panel) => panel.button ?? panel.media)).toBe(false)
-    expect(html).not.toContain('rail-panel-eng-embedded')
   })
 
   /**
-   * **Solutions has no 402 frame.** The "Solutions section" at `1924:4768` is
-   * a generation-1 capture (1920 / 390, DOM-ish layer names), not the
-   * breakpoint pair the ticket assumed — the Design Concept section holds one
-   * Solutions frame and it is 1440. So every mobile composition on this page
-   * is a renderer decision under ADR 0006, and these are the invariants that
-   * keep it honest: nothing scrolls sideways, and the three-across card row
-   * and the 1120px orbital diagram are both `lg:`.
+   * The proof-point band (`2357:2690`) and the CTA (`2354:2640`) both hang
+   * the molecule — the first through `layoutSection`'s decoration knob, the
+   * second through `ctaSection`'s. Exactly two glyphs: the Overview band's
+   * molecule is almost entirely cropped off-canvas in the frame and is
+   * deliberately not drawn.
+   */
+  it('hangs the molecule behind the proof point and the CTA', () => {
+    const decorations = sections
+      .filter((s) => s._type === 'layoutSection')
+      .map((s) => (s as { decoration?: string }).decoration)
+    expect(decorations).toEqual(['none', 'molecule'])
+    expect(html.match(/viewBox="0 0 699 699"/g) ?? []).toHaveLength(2)
+  })
+
+  it('gives the page a single h1', () => {
+    expect(html.match(/<h1[\s>]/g) ?? []).toHaveLength(1)
+  })
+
+  /**
+   * **Solutions still has no 402 frame** — the redesign (`2360:2879`) is
+   * 1440-only, so every mobile composition on this page stays a renderer
+   * decision under ADR 0006, and these are the invariants that keep it
+   * honest: nothing scrolls sideways, and the three-across service grid is
+   * `lg:`.
    */
   it('is a stack at 402, with no frame to copy', () => {
     expect(unprefixedHorizontalScrollUtilities(html)).toEqual([])
     expect(variantsOf(html, 'grid-cols-3')).toEqual(['lg:grid-cols-3'])
-    expect(html).toContain('data-testid="orbital-diagram"')
-    expect(html).toContain('lg:block')
   })
 })
 

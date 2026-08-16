@@ -14,98 +14,228 @@
       "surface": "ink",
       "variant": "band",
       "eyebrow": "Solutions",
-      "headlineLines": [
-        "We don't sell services. We sell the move, and the team that makes it real."
-      ],
+      "headlineLines": ["Build for scale and performance."],
+      "subheading": "Software engineering that solves today's problems and scales for the future. That means architecting for performance, flexibility, and growth from day one.",
       "decoration": "none"
     },
     {
-      "_type": "featureGridSection",
-      "_key": "features",
-      "surface": "ink",
-      "layout": "orbital",
-      "features": [
+      "_type": "layoutSection",
+      "_key": "overview",
+      "surface": "bone",
+      "columns": 2,
+      "decoration": "none",
+      "heading": "Overview",
+      "items": [
         {
-          "_type": "feature",
-          "_key": "s-strategy",
-          "heading": "Strategy",
-          "body": "The root of every engagement. We find the real problem and the move worth making — before a line of code is written."
+          "_type": "richText",
+          "_key": "overview-body",
+          "body": [
+            {
+              "_type": "block",
+              "_key": "p0",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p0s",
+                  "text": "We build, optimize, and migrate legacy systems without breaking them. And we maintain the systems we build: our team keeps monitoring and improving the applications we deliver after launch. That continuity matters, especially when you're running a business on the platform we built.",
+                  "marks": []
+                }
+              ]
+            }
+          ]
         },
         {
-          "_type": "feature",
-          "_key": "s-ai",
-          "heading": "AI",
-          "body": "Applied where it compounds the work, not where it decorates it — our O3XO practice, embedded where it earns its keep."
-        },
-        {
-          "_type": "feature",
-          "_key": "s-engineering",
-          "heading": "Engineering",
-          "body": "Senior engineers who build it to last and to scale — the fix that ships, not a prototype to hand off."
-        },
-        {
-          "_type": "feature",
-          "_key": "s-design",
-          "heading": "Design",
-          "body": "Product-grade design that gives the move a form people actually want to use."
+          "_type": "figure",
+          "_key": "overview-photo",
+          "image": {
+            "_type": "image",
+            "_localSrc": "tools/migration/data/seed/assets/solutions-overview-1682.png"
+          },
+          "alt": "Two engineers at a worktable comparing notes across their laptops, photographed in black and white through the studio's glass wall."
         }
       ]
     },
     {
       "_type": "railPanelsSection",
-      "_key": "engagements",
+      "_key": "services",
       "surface": "white",
-      "layout": "cards",
-      "heading": "Three ways in. You decide how much of the problem to hand us.",
-      "intro": "From senior hands inside your team to owning the whole outcome — the right engagement depends on how much of the problem is yours to keep.",
+      "layout": "grid",
+      "heading": "Service Grid.",
       "panels": [
         {
           "_type": "panel",
-          "_key": "eng-embedded",
-          "railLabel": "Embedded",
-          "heading": "Embedded Team Member",
-          "body": "Senior hands, inside your team.",
-          "note": "Best when you trust the direction and need the horsepower.",
-          "mark": {
-            "_type": "mark",
-            "kind": "orb",
-            "state": "connecting",
-            "size": 64,
-            "speed": 1,
-            "paused": false
-          }
+          "_key": "svc-development",
+          "railLabel": "Development",
+          "heading": "Custom Development",
+          "mark": { "_type": "mark", "kind": "disc" },
+          "details": [
+            {
+              "_type": "detail",
+              "_key": "frontend",
+              "label": "Frontend",
+              "items": ["React, Next.js, TypeScript (with rendering strategies)"]
+            },
+            {
+              "_type": "detail",
+              "_key": "backend",
+              "label": "Backend",
+              "items": ["Node.js, API design, serverless vs. traditional approaches"]
+            },
+            {
+              "_type": "detail",
+              "_key": "cms",
+              "label": "CMS integration",
+              "items": ["Sanity, Drupal, WordPress (no template constraints)"]
+            },
+            {
+              "_type": "detail",
+              "_key": "crm",
+              "label": "CRM integration",
+              "items": ["HubSpot, Salesforce APIs (unified data systems)"]
+            },
+            {
+              "_type": "detail",
+              "_key": "performance",
+              "label": "Performance as architecture",
+              "items": ["Caching strategies, query optimization, image optimization"]
+            }
+          ]
         },
         {
           "_type": "panel",
-          "_key": "eng-squad",
-          "railLabel": "Product Squad",
-          "heading": "Product Squad",
-          "body": "A cross-functional pod that takes a problem and runs.",
-          "note": "Best when you need momentum and a team that owns delivery.",
-          "mark": {
-            "_type": "mark",
-            "kind": "orb",
-            "state": "weaving",
-            "size": 64,
-            "speed": 1,
-            "paused": false
-          }
+          "_key": "svc-architecture",
+          "railLabel": "Architecture",
+          "heading": "Headless & Composable Architecture",
+          "mark": { "_type": "mark", "kind": "disc" },
+          "details": [
+            {
+              "_type": "detail",
+              "_key": "cms-first",
+              "label": "CMS-first",
+              "items": ["Sanity + Next.js + Edge Functions"]
+            },
+            {
+              "_type": "detail",
+              "_key": "api",
+              "label": "API-driven integrations",
+              "items": ["HubSpot/Salesforce API patterns (no webhook hacks)"]
+            },
+            {
+              "_type": "detail",
+              "_key": "composable",
+              "label": "Composable frontend",
+              "items": ["React components in Storybook, versioned and reusable"]
+            },
+            {
+              "_type": "detail",
+              "_key": "database",
+              "label": "Database architecture",
+              "items": ["Caching strategies that fit the data (Redis, CDN caching, ISR)"]
+            },
+            {
+              "_type": "detail",
+              "_key": "channels",
+              "label": "Multi-channel",
+              "items": ["One Sanity instance, multiple frontends (web, email, mobile, APIs)"]
+            }
+          ]
         },
         {
           "_type": "panel",
-          "_key": "eng-full",
-          "railLabel": "Full Ownership",
-          "heading": "Full Ownership",
-          "body": "Hand us the outcome, not the tasks.",
-          "note": "Best when a single point of accountability is worth more than a seat at every standup.",
-          "mark": {
-            "_type": "mark",
-            "kind": "orb",
-            "state": "solving",
-            "size": 64,
-            "speed": 1,
-            "paused": false
-          }
+          "_key": "svc-migration",
+          "railLabel": "Migration",
+          "heading": "Migration & Replatforming",
+          "mark": { "_type": "mark", "kind": "disc" },
+          "details": [
+            {
+              "_type": "detail",
+              "_key": "zero-downtime",
+              "label": "Zero-downtime",
+              "items": ["DNS switches, automated rollback"]
+            },
+            {
+              "_type": "detail",
+              "_key": "data",
+              "label": "Data migration and transformation",
+              "items": ["Legacy CMS to Sanity or Drupal"]
+            },
+            {
+              "_type": "detail",
+              "_key": "testing",
+              "label": "Testing & validation",
+              "items": ["Automated tests, API contracts, performance benchmarking"]
+            },
+            {
+              "_type": "detail",
+              "_key": "database-migration",
+              "label": "Database migration",
+              "items": ["Monolith breaking, schema redesign (Drupal + Acquia to Next.js + Sanity)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "layoutSection",
+      "_key": "proof",
+      "surface": "ink",
+      "columns": 1,
+      "decoration": "molecule",
+      "eyebrow": "Proof point",
+      "heading": "Code doesn't ship and disappear.",
+      "items": [
+        {
+          "_type": "richText",
+          "_key": "proof-body",
+          "body": [
+            {
+              "_type": "block",
+              "_key": "p0",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "p0s",
+                  "text": "We stay involved because we built it. We monitor, improve, and optimize because products and technologies evolve every day. Keeping up with the pace of change will set your business up so you don't have to replatform every couple of years.",
+                  "marks": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "featureGridSection",
+      "_key": "use-cases",
+      "surface": "white",
+      "layout": "rows",
+      "decoration": "none",
+      "heading": "Use cases.",
+      "features": [
+        {
+          "_type": "feature",
+          "_key": "uc-legacy",
+          "heading": "You're stuck in a legacy CMS and content production is slow",
+          "body": "We migrate to Sanity with custom workflows that actually match how your team works. Content production goes from a bottleneck to a rhythm.",
+          "mark": { "_type": "mark", "kind": "disc" }
+        },
+        {
+          "_type": "feature",
+          "_key": "uc-performance",
+          "heading": "Your site slows down on the days that matter most",
+          "body": "We treat performance as architecture, not cleanup: caching strategy, query optimization, and rendering decisions made up front. The site holds on its biggest day.",
+          "mark": { "_type": "mark", "kind": "disc" }
+        },
+        {
+          "_type": "feature",
+          "_key": "uc-integrations",
+          "heading": "Every integration was a one-off, and now your data lives in five places",
+          "body": "We connect your CMS, CRM, and marketing tools through their APIs into one system of record. Your team stops re-keying data and starts trusting it.",
+          "mark": { "_type": "mark", "kind": "disc" }
         }
       ]
     },
@@ -113,22 +243,23 @@
       "_type": "ctaSection",
       "_key": "cta",
       "surface": "ink",
-      "heading": "Let’s get started on your next big thing.",
-      "body": "We partner with businesses like yours to build experiences that matter. If you’re ready, we’re ready.",
+      "decoration": "molecule",
+      "heading": "Engineering that scales with your business.",
+      "body": "Let's build something.",
       "button": {
         "_type": "button",
-        "label": "Get in touch",
+        "label": "Contact us",
         "href": "/contact",
-        "contrast": "light"
-      },
-      "decoration": "orbs"
+        "icon": "arrow"
+      }
     }
   ],
   "migration": {
     "locked": false,
     "sourceId": "seed:solutions",
-    "extractedAt": "2026-08-01T00:00:00Z",
-    "figmaNode": "1925:6138",
-    "provisional": false
+    "extractedAt": "2026-08-16T00:00:00Z",
+    "figmaNode": "2360:2879",
+    "provisional": true,
+    "provisionalNote": "Rebuilt against the 2026-08 redesign (#93); five things to settle before launch. (1) The frame authors ONE use case and duplicates it three times — uc-performance and uc-integrations are written here in the O3 voice from the old site's service pages and are unreviewed; uc-legacy is also the partner page's first use case, so the same row currently ships on two routes. (2) The Overview body's 'while agencies hand off code and move to the next project' is the banned competitor foil (the same ADR 0007 conflict partners-sanity recorded) and is rewritten without the clause. (3) The hero deck's 'that solve today's problem' is transcribed with the grammar fixed ('solves today's problems'), and three service-grid details drop what read as designer notes: 'Edge Functions specifics' → 'Edge Functions', 'Specific caching strategies' → 'Caching strategies that fit the data', 'specific stack examples (Drupal + Acquia → Next.js + Sanity)' → the example alone. (4) The frame writes the eyebrow 'CMS INTEGRATION' twice in the Custom Development column; the second covers HubSpot/Salesforce and is corrected to 'CRM integration'. (5) 'Service Grid.' is transcribed as the band heading but reads as a working title, and the frame's engagement rail ('Three ways in…') does not appear in the redesign — it is dropped here and survives only as the cards-layout story fixture."
   }
 }

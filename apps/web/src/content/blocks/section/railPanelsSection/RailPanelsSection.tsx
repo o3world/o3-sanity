@@ -10,6 +10,7 @@ import { fieldAttr, itemAttr } from '@/sanity/dataAttribute'
 
 import { PanelBand } from './PanelBand'
 import { PanelCards } from './PanelCards'
+import { PanelGrid } from './PanelGrid'
 import { PanelRows } from './PanelRows'
 
 type RailPanelsSectionProps = SectionProps<'railPanelsSection'>
@@ -85,6 +86,7 @@ export function RailPanelsSection({
   const chosenLayout = stegaClean(layout)
   const isCards = chosenLayout === 'cards'
   const isRows = chosenLayout === 'rows'
+  const isGrid = chosenLayout === 'grid'
   const mode = stegaClean(rail) === 'number' ? 'number' : 'label'
   // Panel `_key`s are unique within the document, so they identify a panel
   // across both halves of the band without the section needing its own id
@@ -144,6 +146,30 @@ export function RailPanelsSection({
               heading: panel.heading ?? panel.railLabel,
               note: panel.note,
               body: panel.body,
+              details: panel.details,
+              dataSanity: itemAttr(loc, 'panels', panel._key),
+            }))}
+          />
+        </div>
+      </SectionShell>
+    )
+  }
+
+  if (isGrid) {
+    const resolved = resolveSurface(surface, 'white')
+    return (
+      // `2358:2788` — 128px above and below, 48px between the heading and the
+      // columns. The header is the heading alone on the frame; `intro` still
+      // renders if a band carries one, in the rows header's measure.
+      <SectionShell surface={resolved} top="md" bottom="md">
+        <div className="flex flex-col gap-10 lg:gap-12">
+          {header}
+          <PanelGrid
+            onInk={resolved === 'ink'}
+            items={items.map((panel, index) => ({
+              key: panel._key ?? String(index),
+              heading: panel.heading ?? panel.railLabel,
+              mark: panel.mark,
               details: panel.details,
               dataSanity: itemAttr(loc, 'panels', panel._key),
             }))}

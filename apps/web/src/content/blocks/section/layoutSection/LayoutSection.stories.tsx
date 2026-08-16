@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { figmaDesign } from '@o3/story-kit'
 
 import { seededSectionArgs } from '@/stories/seedContent'
 
@@ -76,4 +77,21 @@ export const Mobile: Story = {
 export const OnInk: Story = {
   args: { ...seededSectionArgs('about', 'layoutSection', 0), surface: 'ink' },
   globals: { backgrounds: { value: 'ink' } },
+}
+
+/**
+ * `/solutions` — the proof-point band (`2357:2690`, #93): ink, with the
+ * molecule hung off the band's right edge at 25%. The `decoration` knob's
+ * canonical instance on this block.
+ */
+export const WithMolecule: Story = {
+  args: seededSectionArgs('solutions', 'layoutSection', 1),
+  parameters: { design: figmaDesign('2357:2690') },
+  globals: { backgrounds: { value: 'ink' } },
+}
+
+/** `/solutions` — the Overview band (`2360:2861`): prose beside the photo. */
+export const OverviewWithPhoto: Story = {
+  args: seededSectionArgs('solutions', 'layoutSection', 0),
+  parameters: { design: figmaDesign('2360:2861') },
 }

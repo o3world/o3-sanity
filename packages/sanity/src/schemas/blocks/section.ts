@@ -157,7 +157,7 @@ export const caseShowcaseSection = defineSectionBlock({
 export const railPanelsSection = defineSectionBlock({
   name: 'railPanelsSection',
   description:
-    'An ordered set of parallel things — offers, platforms, ways of working — as a labelled rail or a row of cards. Reach for it when several options differ in kind rather than degree and each needs its own short pitch and a quieter “Best when…” line. Two panels minimum; a rail panel can carry a CTA and media, a card carries a mark and one line of body.',
+    'An ordered set of parallel things — offers, platforms, ways of working — as a labelled rail, a row of cards, numbered rows, or side-by-side columns of details. Reach for it when several options differ in kind rather than degree and each needs its own short pitch and a quieter “Best when…” line. Two panels minimum; a rail panel can carry a CTA and media, a card carries a mark and one line of body.',
   title: 'Rail + panels',
   knobs: railPanelsSectionKnobs,
   fields: [
@@ -168,7 +168,19 @@ export const railPanelsSection = defineSectionBlock({
     defineField({
       name: 'panels',
       type: 'array',
-      validation: (rule) => rule.required().min(2),
+      validation: (rule) =>
+        rule
+          .required()
+          .min(2)
+          .custom((panels, context) => {
+            const layout = (context.parent as { layout?: string } | undefined)?.layout
+            if (layout !== 'grid') return true
+            // The grid draws one row of columns (`2358:2788`); a fourth panel
+            // wraps outside the two explicit rows its subgrid aligns on.
+            return ((panels as unknown[] | undefined)?.length ?? 0) <= 3
+              ? true
+              : 'The grid layout holds at most three panels.'
+          }),
       of: [
         defineArrayMember({
           type: 'object',
@@ -216,7 +228,7 @@ export const railPanelsSection = defineSectionBlock({
               name: 'mark',
               type: 'mark',
               description:
-                'Cards layout only — the circle the frame centres on the card. An orb unless set to disc.',
+                'Cards and grid layouts only — the circle the frame centres on the card, or sets beside a grid column’s heading. An orb unless set to disc.',
             }),
             // Rows layout only (`2334:2165`, `2334:2166`) — the same gate as
             // `button` and `media`, carried as prose for the same reason: a
@@ -224,7 +236,7 @@ export const railPanelsSection = defineSectionBlock({
             // not the section's `layout`.
             detailsField({
               description:
-                'Rows layout only. Labelled breakdowns under the panel’s body — "Migration targets we’ve handled", then what the client ends up with. The frame draws the LAST one as the promise, in brand red.',
+                'Rows and grid layouts. Labelled breakdowns under the panel’s body — "Migration targets we’ve handled", then what the client ends up with. The rows frame draws the LAST one as the promise, in brand red; the grid stacks them plain.',
             }),
           ],
           preview: { select: { title: 'railLabel' } },
@@ -615,10 +627,11 @@ export const formSection = defineSectionBlock({
 })
 
 /**
- * `columns` and `surface` are declared in `src/knobs/layoutSection.ts`
- * (ADR 0020). `columns` is the repo's only number-valued knob: it declares
- * `valueType: 'number'`, which is what keeps the generated field `type:
- * 'number'` and `generated.ts` publishing `columns?: 1 | 2 | 3`.
+ * `columns`, `decoration` and `surface` are declared in
+ * `src/knobs/layoutSection.ts` (ADR 0020). `columns` is the repo's only
+ * number-valued knob: it declares `valueType: 'number'`, which is what keeps
+ * the generated field `type: 'number'` and `generated.ts` publishing
+ * `columns?: 1 | 2 | 3`.
  *
  * `items` is not a knob and is not one waiting to happen — it is the block's
  * content. The design options an editor might want on an individual item wait
@@ -645,6 +658,7 @@ export const layoutSection = defineSectionBlock({
       description: 'The quieter second line under the heading.',
     }),
     'columns',
+    'decoration',
     defineField({
       name: 'items',
       type: 'array',
