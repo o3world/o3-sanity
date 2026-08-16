@@ -14,8 +14,7 @@
  * never touches one, and refuses to sync a file that asks for its id, exiting
  * non-zero instead.
  */
-import { getCliClient } from 'sanity/cli'
-
+import { briefClient } from './brief-client'
 import { BRIEF_DIR, BRIEF_FIELDS, BRIEF_TYPE, briefCorpus } from './briefs'
 import { commitWrites } from './commit'
 import { syncCorpus } from './corpus/commands'
@@ -23,10 +22,7 @@ import { normalizeSnapshot } from './corpus/plan'
 
 import type { CorpusSnapshotDocument } from './corpus/plan'
 
-/* `raw`, because the default perspective hides drafts and the document a key
- * collision would destroy is usually one the authoring skill never published
- * (ADR 0027). `normalizeSnapshot` folds the two copies back into one row. */
-const client = getCliClient({ apiVersion: '2026-07-01', perspective: 'raw' })
+const client = briefClient()
 
 async function main() {
   const corpus = briefCorpus()

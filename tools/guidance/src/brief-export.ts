@@ -16,8 +16,7 @@
 import { mkdirSync, rmSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 
-import { getCliClient } from 'sanity/cli'
-
+import { briefClient } from './brief-client'
 import { BRIEF_DIR, BRIEF_TYPE, briefCorpus } from './briefs'
 import { commitWrites } from './commit'
 import { exportCorpus } from './corpus/commands'
@@ -27,10 +26,7 @@ import { REPO_ROOT } from './repo'
 
 import type { CorpusSnapshotDocument } from './corpus/plan'
 
-/* `raw`, because the default perspective hides drafts and the document a key
- * collision would destroy is usually one the authoring skill never published
- * (ADR 0027). `normalizeSnapshot` folds the two copies back into one row. */
-const client = getCliClient({ apiVersion: '2026-07-01', perspective: 'raw' })
+const client = briefClient()
 
 async function main() {
   const corpus = briefCorpus()
