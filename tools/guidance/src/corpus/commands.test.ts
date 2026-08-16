@@ -370,6 +370,19 @@ describe('checkCorpus', () => {
     expect(errored()).toBe('')
   })
 
+  // The shape most dataset-born briefs actually have: a draft nobody
+  // published, and nothing to export it yet. Check says nothing about it.
+  it('passes with an unexported draft nobody published in the dataset', () => {
+    const { out, errored } = sink()
+
+    const snapshot = normalizeSnapshot([
+      { _id: 'drafts.brief-sanity-partner', key: 'sanity-partner', background: 'Session notes.' },
+    ])
+
+    expect(checkCorpus({ ...BRIEFS, sources: [] }, snapshot, out)).toBe(0)
+    expect(errored()).toBe('')
+  })
+
   // The one drift a sync cannot settle: it names the file, the id, and the two
   // ways out, because the resolution is a decision rather than a re-run.
   it('fails when a source asks for an id the dataset owns', () => {
