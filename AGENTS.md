@@ -223,6 +223,13 @@ it just makes everything an agent writes that session quietly wrong. Sources
 are declared in `tools/guidance/src/sources.ts`; consumers read
 `*[_type == "guidance"]{key, title, body}`.
 
+Both commands are thin. The engine under them is `tools/guidance/src/corpus/` —
+one pure function from (sources, dataset snapshot) to a plan: what to write,
+what drifted, what no source claims. `sync.ts` and `check.ts` supply the client
+and nothing else, which is what lets the plan be unit-tested without a project
+or a token. A second corpus registers itself by frontmatter in a globbed
+directory instead of a declared list, and feeds the same function.
+
 ### Testing
 
 Three layers — `unit` (`*.test.ts`), `render` (`*.render.test.tsx`), `stories` (`*.stories.tsx`).

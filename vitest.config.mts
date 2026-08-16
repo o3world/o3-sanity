@@ -58,6 +58,7 @@ export default defineConfig({
             'tools/figma-sync/src/**/*.test.ts',
             'tools/visual-regression/src/**/*.test.ts',
             'tools/migration/src/**/*.test.ts',
+            'tools/guidance/src/**/*.test.ts',
             'apps/web/src/**/*.test.ts',
             'packages/*/src/**/*.test.ts',
             // The worktree scripts are shell, and their seams are subcommands.

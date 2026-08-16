@@ -1,20 +1,27 @@
-import { readFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
+import { readDeclaredSources } from './corpus/read'
+
+import type { Corpus } from './corpus/plan'
+import type { SourceDeclaration } from './corpus/read'
 import type { Guidance } from '@o3/sanity/types/generated'
 
 /** The monorepo root — sources are declared repo-relative so they read the same in Studio. */
 const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..')
+
+/** Pinned to the schema, so renaming the document type breaks the build rather than the sync. */
+export const GUIDANCE_TYPE = 'guidance' satisfies Guidance['_type']
 
 /**
  * The guidance corpus: repo markdown → dataset document, one row per document.
  *
  * The repo is source of truth (map #63 — voice is never packaged in the skill
  * ZIP, and never authored in Studio). Adding a guidance document is adding a
- * row here.
+ * row here. Registration is declared rather than globbed because two of these
+ * files live outside any corpus directory, and one of them is a Claude skill.
  */
-const GUIDANCE_SOURCES = [
+const GUIDANCE_SOURCES: SourceDeclaration[] = [
   {
     key: 'o3-voice',
     title: 'O3 voice guide',
@@ -66,35 +73,9 @@ const GUIDANCE_SOURCES = [
     title: 'O3 visual language',
     sourcePath: 'docs/guidance/visual.md',
   },
-] as const
+]
 
-/** Deterministic and outside the load pipeline's `<type>-(wp|seed)-` ownership contract. */
-export const idFor = (key: string) => `guidance-${key}`
-
-export type GuidanceDoc = Required<Pick<Guidance, '_id' | '_type' | 'key' | 'title' | 'body'>> &
-  Pick<Guidance, 'sourcePath'>
-
-/**
- * Skill frontmatter is packaging metadata for Claude's skill loader, not
- * guidance — it names and describes the file for a system the dataset's
- * readers are not part of, so it is stripped rather than synced.
- */
-function stripFrontmatter(markdown: string): string {
-  return markdown.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n+/, '')
-}
-
-/** The guidance documents as the repo currently defines them. */
-export function readGuidance(): GuidanceDoc[] {
-  return GUIDANCE_SOURCES.map((source) => {
-    const body = stripFrontmatter(readFileSync(join(REPO_ROOT, source.sourcePath), 'utf8')).trim()
-    if (!body) throw new Error(`${source.sourcePath} is empty after stripping frontmatter`)
-    return {
-      _id: idFor(source.key),
-      _type: 'guidance',
-      key: source.key,
-      title: source.title,
-      body,
-      sourcePath: source.sourcePath,
-    }
-  })
+/** The guidance corpus as the repo currently defines it, read off disk. */
+export function guidanceCorpus(): Corpus {
+  return { type: GUIDANCE_TYPE, sources: readDeclaredSources(REPO_ROOT, GUIDANCE_SOURCES) }
 }
