@@ -8,7 +8,7 @@ import { SECTION_BLOCKS } from '@o3/sanity/schemas/registry'
 
 import type { Migration } from '@o3/sanity/types/generated'
 
-import { refsIn } from './lib/corpus'
+import { BRIEF_ID, refsIn } from './lib/corpus'
 import { CONVERTED_DIR, REPO_ROOT, SEED_DIR, TRANSLATED_DIR } from './lib/paths'
 
 /**
@@ -88,6 +88,38 @@ const allPipelineDocs = readAllPipelineDocs()
  */
 const pipelineIds = new Set(allPipelineDocs.map(({ doc }) => doc._id))
 
+/** Every member of a `briefs` array in a document, with the path that reached it. */
+function briefEntriesIn(
+  node: unknown,
+  path = '',
+  found: { path: string; entry: unknown }[] = [],
+): { path: string; entry: unknown }[] {
+  if (Array.isArray(node)) {
+    node.forEach((item, i) => briefEntriesIn(item, `${path}[${i}]`, found))
+  } else if (node && typeof node === 'object') {
+    for (const [key, value] of Object.entries(node as Record<string, unknown>)) {
+      const here = path ? `${path}.${key}` : key
+      if (key === 'briefs' && Array.isArray(value)) {
+        value.forEach((entry, i) => found.push({ path: `${here}[${i}]`, entry }))
+      }
+      briefEntriesIn(value, here, found)
+    }
+  }
+  return found
+}
+
+/** Why a `briefs` entry is malformed, or `null` when it is the shape ADR 0027 asks for. */
+function briefEntryProblem(entry: unknown): string | null {
+  if (!entry || typeof entry !== 'object') return 'is not an object'
+  const { _type, _ref, _weak } = entry as Record<string, unknown>
+  if (_type !== 'reference') return `has _type "${String(_type)}", not "reference"`
+  if (typeof _ref !== 'string' || !BRIEF_ID.test(_ref)) {
+    return `points at "${String(_ref)}", which is not a brief-<key> id`
+  }
+  if (_weak !== true) return 'is a strong reference — provenance must never block a publish'
+  return null
+}
+
 function markersIn(node: unknown, found: string[] = []): string[] {
   if (Array.isArray(node)) {
     for (const item of node) markersIn(item, found)
@@ -128,12 +160,65 @@ describe('committed seed content', () => {
   })
 
   // A dangling reference loads without complaint and renders as a hole.
+  //
+  // A brief is the one exception: it is synced by `brief:sync` rather than
+  // loaded, so it is never committed under `data/` and its reference is weak
+  // for exactly that reason (ADR 0027). The shape of those references is
+  // checked below instead.
   it('resolves every reference to another committed document', () => {
     for (const { file, doc } of seeds) {
       for (const ref of refsIn(doc)) {
+        if (BRIEF_ID.test(ref)) continue
         expect(pipelineIds, `${file} references ${ref}, which is not committed`).toContain(ref)
       }
     }
+  })
+
+  /**
+   * The `briefs` array (ADR 0027) — per-piece background an agent fetches
+   * before drafting, pointed at from seed JSON.
+   *
+   * Two things have to hold, and neither loads with an error when it does not.
+   * The id has to be the deterministic `brief-<key>` the sync writes, or the
+   * reference resolves to nothing forever. And the reference has to be
+   * **weak**, or a piece is publish-blocked and delete-locked by its own
+   * provenance — the one thing the ADR spends the weak flag to prevent.
+   */
+  describe('brief references', () => {
+    // The corpus carries no briefs yet, so the rule below would pass over an
+    // empty set. This is what actually exercises it.
+    it('accepts the shape ADR 0027 asks for, and names what is wrong with the rest', () => {
+      expect(
+        briefEntryProblem({ _type: 'reference', _ref: 'brief-sanity-partner', _weak: true }),
+      ).toBeNull()
+      expect(briefEntryProblem({ _type: 'reference', _ref: 'brief-sanity-partner' })).toMatch(
+        /strong reference/,
+      )
+      expect(
+        briefEntryProblem({ _type: 'reference', _ref: 'guidance-o3-voice', _weak: true }),
+      ).toMatch(/not a brief-<key> id/)
+      expect(briefEntryProblem({ _ref: 'brief-sanity-partner', _weak: true })).toMatch(
+        /not "reference"/,
+      )
+      expect(briefEntryProblem('brief-sanity-partner')).toMatch(/not an object/)
+    })
+
+    it('finds a briefs array wherever it sits on a document', () => {
+      const entry = { _type: 'reference', _ref: 'brief-one', _weak: true }
+      expect(briefEntriesIn({ _id: 'insight-seed-x', briefs: [entry] })).toEqual([
+        { path: 'briefs[0]', entry },
+      ])
+    })
+
+    it('carries only weak brief-<key> references in the committed corpus', () => {
+      const offenders = allPipelineDocs.flatMap(({ file, doc }) =>
+        briefEntriesIn(doc)
+          .map(({ path, entry }) => ({ path, problem: briefEntryProblem(entry) }))
+          .filter(({ problem }) => problem !== null)
+          .map(({ path, problem }) => `${file} → ${path} ${problem}`),
+      )
+      expect(offenders).toEqual([])
+    })
   })
 
   // `_localSrc` is only resolved at load time, so a typo would otherwise

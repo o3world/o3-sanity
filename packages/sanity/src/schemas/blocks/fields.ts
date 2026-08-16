@@ -11,6 +11,30 @@ import { defineArrayMember, defineField } from 'sanity'
  * the signal to add it here instead.
  */
 
+/**
+ * WHAT A PIECE WAS WRITTEN FROM — the `briefs` array `insight`, `page` and
+ * `caseStudy` carry (ADR 0027).
+ *
+ * **Weak, deliberately.** A brief is provenance, and provenance must never
+ * publish-block or delete-lock the content it belongs to; weak also means the
+ * order of `load` and `brief:sync` stops mattering, because neither has to
+ * exist before the other.
+ *
+ * Plural because it is an array (CONTEXT.md → shape conventions), and the
+ * plural is real: one topic researched once feeds every piece drawn from it,
+ * and a piece combining two topics draws on both.
+ */
+export function briefsField() {
+  return defineField({
+    name: 'briefs',
+    title: 'Briefs',
+    type: 'array',
+    of: [defineArrayMember({ type: 'reference', to: [{ type: 'brief' }], weak: true })],
+    description:
+      'The background this piece was written from — research, instructions, and what the authoring interview produced. Internal: nothing here reaches the site.',
+  })
+}
+
 /** No `#`, no whitespace — which is also the whole of what an HTML `id` forbids. */
 const ANCHOR_NAME = /^[^\s#]+$/
 

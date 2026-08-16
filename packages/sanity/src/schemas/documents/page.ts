@@ -1,5 +1,6 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
 import { PAGE_TYPES } from '../../constants'
+import { briefsField } from '../blocks/fields'
 import { blockArrayMembers } from '../blocks/registry'
 
 export const page = defineType({
@@ -39,6 +40,7 @@ export const page = defineType({
       type: 'array',
       of: blockArrayMembers('page.sections').map((member) => defineArrayMember(member)),
     }),
+    briefsField(),
     defineField({ name: 'seo', type: 'seo' }),
     defineField({ name: 'migration', type: 'migration' }),
   ],

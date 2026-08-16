@@ -51,3 +51,26 @@ export function slugsByType(): Record<string, string[]> {
 export function isPipelineOwned(id: string): boolean {
   return /^[a-zA-Z]+-(wp|seed)-./.test(id.replace(/^drafts\./, ''))
 }
+
+/**
+ * The document types a different tool owns — `guidance` (#72,
+ * [ADR 0024](../../../../docs/adr/0024-authoring-knowledge-has-one-source-and-one-fan-out.md))
+ * and `brief` ([ADR 0027](../../../../docs/adr/0027-the-brief-is-a-document.md)).
+ *
+ * Both are synced from repo markdown by `tools/guidance`, and both outlive
+ * this pipeline, which is deleted post-migration. So they are never committed
+ * under `data/`, `load` never writes or retires one (their ids miss
+ * `isPipelineOwned` deliberately), and `verify` does not count one an orphan.
+ */
+export const INTERNAL_TYPES: readonly string[] = ['guidance', 'brief']
+
+export function isInternalType(type: string): boolean {
+  return INTERNAL_TYPES.includes(type)
+}
+
+/**
+ * A brief's deterministic id — `brief-<key>`, the id a `briefs` reference in
+ * seed JSON points at. One declaration so the corpus check and the sync tool
+ * cannot disagree about the shape.
+ */
+export const BRIEF_ID = /^brief-[a-z0-9]+(-[a-z0-9]+)*$/

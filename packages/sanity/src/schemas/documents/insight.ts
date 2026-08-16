@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
+import { briefsField } from '../blocks/fields'
 
 export const insight = defineType({
   name: 'insight',
@@ -28,6 +29,7 @@ export const insight = defineType({
     defineField({ name: 'publishedAt', type: 'datetime', validation: (rule) => rule.required() }),
     defineField({ name: 'featuredImage', type: 'figure' }),
     defineField({ name: 'body', type: 'bodyText' }),
+    briefsField(),
     defineField({ name: 'seo', type: 'seo' }),
     defineField({ name: 'migration', type: 'migration' }),
   ],
