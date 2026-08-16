@@ -55,6 +55,25 @@ export const NoDecoration: Story = {
   args: { ...seededSectionArgs('index', 'ctaSection'), decoration: 'none' },
 }
 
+/**
+ * `decoration: 'molecule'` — what the canonical `CTA` component actually hangs
+ * (`2124:72`): the mark at 54% of the band, centred, in place of the sphere.
+ */
+export const WithMolecule: Story = {
+  args: { ...seededSectionArgs('index', 'ctaSection'), decoration: 'molecule' },
+  parameters: { design: figmaDesign('2124:72') },
+}
+
+/**
+ * The molecule at 402, which is the one band that keeps it there. The other
+ * three hang a glyph measured in the frame's pixels and drop it below `lg`;
+ * this one is sized in the band's own terms, so it has an honest small form.
+ */
+export const MoleculeMobile: Story = {
+  args: { ...seededSectionArgs('index', 'ctaSection'), decoration: 'molecule' },
+  globals: { backgrounds: { value: 'ink' }, viewport: { value: 'mobile' } },
+}
+
 /** The About page's closing band, for a second real string in the 446px measure. */
 export const AboutVariant: Story = {
   args: seededSectionArgs('about', 'ctaSection'),

@@ -1,6 +1,7 @@
-import { MoleculeMark, OrbitalSphere, SURFACE_CLASS, SurfaceProvider } from '@o3/ui'
-import { stegaClean } from '@sanity/client/stega'
+import { OrbitalSphere, SURFACE_CLASS, SurfaceProvider } from '@o3/ui'
 
+import { DECORATED_BAND_CLASS, resolveDecoration } from '@/content/blocks/decoration'
+import { MoleculeDecoration } from '@/content/blocks/MoleculeDecoration'
 import { resolveSurface } from '@/content/blocks/surface'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
 
@@ -40,18 +41,20 @@ type QuoteSectionProps = SectionProps<'quoteSection'>
  */
 export function QuoteSection({ quote, attribution, decoration, surface }: QuoteSectionProps) {
   if (!quote) return null
-  const chosen = stegaClean(decoration)
-  const showMolecule = chosen === 'molecule'
-  const showOrbs = !showMolecule && chosen !== 'none'
+  const resolved = resolveSurface(surface, 'bone')
+  // The spheres and the molecule are alternatives: the band draws one or neither.
+  const showOrbs = resolveDecoration(decoration) === 'orbs'
 
   return (
-    <SurfaceProvider surface={resolveSurface(surface, 'bone')}>
+    <SurfaceProvider surface={resolved}>
       <section
-        className={`${SURFACE_CLASS[resolveSurface(surface, 'bone')]} px-gutter py-band-lg relative isolate overflow-hidden`}
+        className={`${SURFACE_CLASS[resolved]} px-gutter py-band-lg ${DECORATED_BAND_CLASS}`}
       >
-        {showMolecule ? (
-          <MoleculeMark className="text-ink absolute -z-10 hidden opacity-10 lg:right-[-203px] lg:top-[181px] lg:block lg:w-[699px]" />
-        ) : null}
+        <MoleculeDecoration
+          decoration={decoration}
+          surface={resolved}
+          className="opacity-10 lg:right-[-203px] lg:top-[181px] lg:w-[699px]"
+        />
 
         {showOrbs ? (
           <>
