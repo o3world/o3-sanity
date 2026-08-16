@@ -23,7 +23,10 @@ import { normalizeSnapshot } from './corpus/plan'
 
 import type { CorpusSnapshotDocument } from './corpus/plan'
 
-const client = getCliClient({ apiVersion: '2026-07-01' })
+/* `raw`, because the default perspective hides drafts and the document a key
+ * collision would destroy is usually one the authoring skill never published
+ * (ADR 0027). `normalizeSnapshot` folds the two copies back into one row. */
+const client = getCliClient({ apiVersion: '2026-07-01', perspective: 'raw' })
 
 async function main() {
   const corpus = briefCorpus()
@@ -32,10 +35,6 @@ async function main() {
     `syncing ${corpus.sources.length} brief(s) from ${BRIEF_DIR} → ${projectId}/${dataset}\n`,
   )
 
-  /* Drafts included: the authoring skill writes a brief as a draft and never
-   * publishes it, so a published-only fetch cannot see the document a key
-   * collision would destroy. `normalizeSnapshot` folds the two copies back
-   * into one row per id. */
   const snapshot = normalizeSnapshot(
     await client.fetch<CorpusSnapshotDocument[]>(
       `*[_type == $type]{_id, ${BRIEF_FIELDS.join(', ')}}`,

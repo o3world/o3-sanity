@@ -1,16 +1,19 @@
 /**
- * The two corpus commands, minus their client. `sync` returns the writes to
- * commit and `check` returns an exit code; both take the dataset as a snapshot
- * and report through an injected sink, so the whole of what an operator sees is
- * exercised by the unit suite rather than by running it against a project.
+ * The corpus commands, minus their client. `sync` returns the writes to commit,
+ * `check` an exit code, `export` a file and the writes that back it; all three
+ * take the dataset as a snapshot and report through an injected sink, so the
+ * whole of what an operator sees is exercised by the unit suite rather than by
+ * running it against a project.
  */
-import { driftOf, ownedFieldsOf, planCorpus } from './plan'
+import { driftOf, fieldsOf, idFor, ownedFieldsOf, planCorpus } from './plan'
+import { renderGlobbedSource } from './read'
 
 import type {
   Corpus,
   CorpusConflict,
   CorpusDocument,
   CorpusDrift,
+  CorpusPlan,
   CorpusSnapshotDocument,
 } from './plan'
 
@@ -95,6 +98,162 @@ export function syncCorpus(
   }
 
   return { writes, status: plan.conflicts.length > 0 ? 1 : 0 }
+}
+
+/** What an export was asked to do, and what the corpus directory already holds. */
+export type CorpusExportRequest = {
+  /** The document to export. Absent lists the candidates instead of exporting one. */
+  key?: string
+  /** The globbed corpus directory the file lands in, repo-relative. */
+  directory: string
+  /** Repo-relative paths already in that directory — an export never clobbers one. */
+  occupied: readonly string[]
+}
+
+/** What an export produced: the file to write, the writes that back it, an exit code. */
+export type CorpusExport = {
+  file?: { sourcePath: string; contents: string }
+  writes: CorpusWrite[]
+  status: number
+}
+
+/**
+ * Export → a dataset-born document becomes a markdown file in the corpus, so it
+ * survives a rebuild (ADR 0027).
+ *
+ * The candidates are exactly `plan.disowned`: documents the corpus refuses to
+ * write and refuses to retire, because a session wrote them rather than the
+ * repo. Naming none lists them — exporting every one blindly would file
+ * everything an authoring session ever scribbled.
+ */
+export function exportCorpus(
+  corpus: Corpus,
+  snapshot: readonly CorpusSnapshotDocument[],
+  request: CorpusExportRequest,
+  out: CommandOutput,
+): CorpusExport {
+  const plan = planCorpus(corpus, snapshot)
+  const candidates = plan.disowned
+
+  if (request.key === undefined) {
+    if (candidates.length === 0) {
+      out.log(`no dataset-born ${corpus.type} document to export`)
+      return { writes: [], status: 0 }
+    }
+    out.log(`${candidates.length} dataset-born ${corpus.type} document(s) to export:`)
+    for (const candidate of candidates) {
+      out.log(`  ${candidate.key}  ${candidate.title ?? ''}`.trimEnd())
+    }
+    return { writes: [], status: 0 }
+  }
+
+  const _id = idFor(corpus.type, request.key)
+  const candidate = candidates.find((document) => document._id === _id)
+  if (!candidate) {
+    out.error(`✗ ${describeUnexportable(corpus, plan, snapshot, _id)}`)
+    return { writes: [], status: 1 }
+  }
+
+  const sourcePath = `${request.directory}/${candidate.key}.md`
+  if (request.occupied.includes(sourcePath)) {
+    out.error(`✗ ${sourcePath} already exists — export never writes over a file in the corpus`)
+    return { writes: [], status: 1 }
+  }
+
+  /* The body as the corpus will read it back: the reader trims, so writing an
+   * untrimmed one would leave the document one sync behind its own file. */
+  const body = String(candidate[corpus.bodyField] ?? '').trim()
+  const title = candidate.title == null ? '' : String(candidate.title)
+  if (!body || !title) {
+    out.error(`✗ ${_id} has no ${body ? 'title' : corpus.bodyField} to export`)
+    return { writes: [], status: 1 }
+  }
+
+  const document: CorpusDocument = {
+    _id,
+    _type: corpus.type,
+    key: String(candidate.key),
+    title,
+    [corpus.bodyField]: body,
+    sourcePath,
+  }
+
+  out.log(`  exported  ${_id}  → ${sourcePath}`)
+  const kept = fieldsKeptOnDocument(corpus, candidate)
+  if (kept.length > 0) {
+    out.log(
+      `  the file carries ${corpus.bodyField} alone — ${kept.join(', ')} stay on the document`,
+    )
+  }
+
+  /* The stamp lands on the published copy: that is the copy sync compares and a
+   * reference resolves to. It carries the owned fields with it, so the document
+   * matches its new file exactly and the next sync has nothing to write.
+   *
+   * A draft-only candidate is published whole first. Stamping the draft instead
+   * would leave sync to build the published copy from the file, and the file
+   * carries only the body — so the `record` an interview produced would go with
+   * the draft that sync then deletes. */
+  const writes: CorpusWrite[] = candidate.draftOnly
+    ? [
+        { op: 'createOrReplace', document: { ...heldFields(candidate), ...document } },
+        { op: 'delete', _id: `drafts.${_id}` },
+      ]
+    : [{ op: 'patch', _id, set: ownedFieldsOf(corpus, document) }]
+
+  return {
+    file: { sourcePath, contents: renderGlobbedSource({ key: document.key, title, body }) },
+    writes,
+    status: 0,
+  }
+}
+
+/**
+ * What the document holds that its file will not: everything outside the fields
+ * a source owns. A merge sync writes around them, so export names them rather
+ * than pretending the markdown is the whole brief.
+ */
+function fieldsKeptOnDocument(corpus: Corpus, candidate: CorpusSnapshotDocument): string[] {
+  const owned = fieldsOf(corpus) as readonly string[]
+  return Object.entries(candidate)
+    .filter(([field]) => !RESERVED.has(field) && !owned.includes(field))
+    .filter(([, value]) => (Array.isArray(value) ? value.length > 0 : Boolean(value)))
+    .map(([field]) => field)
+    .sort()
+}
+
+/**
+ * Why a named key is not a candidate. Three ways: the repo already backs the
+ * document, a file already registers the key over a dataset-born document — the
+ * collision sync and check send here — or the dataset has no such document.
+ */
+function describeUnexportable(
+  corpus: Corpus,
+  plan: CorpusPlan,
+  snapshot: readonly CorpusSnapshotDocument[],
+  _id: string,
+): string {
+  const contested = plan.conflicts.find((conflict) => conflict._id === _id)
+  if (contested) {
+    return `${_id} was born in the dataset, but ${contested.sourcePath} already registers that key — give that file a different key, then export`
+  }
+
+  const live = snapshot.find((document) => document._id === _id)
+  return live
+    ? `${_id} is already file-backed (${live.sourcePath}) — the repo file is the source of truth`
+    : `the dataset holds no dataset-born ${corpus.type} with that key (${_id})`
+}
+
+/**
+ * Sanity's own fields and the snapshot's bookkeeping. Neither belongs in a
+ * mutation body: `_id` and `_type` are set from the corpus, and the rest are the
+ * dataset's to write.
+ */
+const RESERVED = new Set(['_id', '_type', '_rev', '_createdAt', '_updatedAt', 'draftOnly'])
+
+/** Everything a snapshot row holds that a mutation body may carry back. */
+function heldFields(candidate: CorpusSnapshotDocument): Record<string, unknown> {
+  return Object.fromEntries(Object.entries(candidate).filter(([field]) => !RESERVED.has(field)))
 }
 
 /**

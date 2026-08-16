@@ -37,6 +37,28 @@ function parseFrontmatter(markdown: string): Frontmatter {
   return { data, body: markdown.slice(matched.length).trim() }
 }
 
+/**
+ * The inverse of the parser above: a source as the markdown file that registers
+ * it. Written here so the two stay one edit apart — a writer that disagrees with
+ * the reader produces a file the corpus refuses to read back.
+ */
+export function renderGlobbedSource(source: CorpusSource): string {
+  if (/[\r\n]/.test(source.title)) {
+    throw new Error(`"${source.key}": its title spans more than one line`)
+  }
+  return `---\nkey: ${source.key}\ntitle: ${frontmatterValue(source.title)}\n---\n\n${source.body}\n`
+}
+
+/**
+ * A value the reader hands back unchanged. It trims and unquotes a matched
+ * pair, so a title that already wears quotes has to be quoted again to survive
+ * the trip; the outer pair is what the reader strips, whatever is inside it.
+ */
+function frontmatterValue(value: string): string {
+  const survives = value === value.trim() && !/^(['"])[\s\S]*\1$/.test(value)
+  return survives ? value : `"${value}"`
+}
+
 function sourceFrom(root: string, sourcePath: string): Frontmatter {
   const parsed = parseFrontmatter(readFileSync(join(root, sourcePath), 'utf8'))
   if (!parsed.body) throw new Error(`${sourcePath} is empty after stripping frontmatter`)
@@ -66,14 +88,19 @@ export function readDeclaredSources(
 const KEY = /^[a-z0-9]+(-[a-z0-9]+)*$/
 
 /**
- * Deleting the last file in a globbed corpus deletes the directory too — git
- * does not track an empty one — and sync has to run on that checkout to retire
- * the document the file left behind in the dataset. So a directory that is not
- * there is a corpus of nothing, and any other read error is still an error.
+ * What a globbed corpus directory holds, repo-relative and sorted, so a plan
+ * reads the same on every machine.
+ *
+ * Deleting the last file in one deletes the directory too — git does not track
+ * an empty one — and sync has to run on that checkout to retire the document the
+ * file left behind in the dataset. So a directory that is not there is a corpus
+ * of nothing, and any other read error is still an error.
  */
-function markdownIn(directory: string): string[] {
+export function pathsIn(root: string, directory: string): string[] {
   try {
-    return readdirSync(directory)
+    return readdirSync(join(root, directory))
+      .sort()
+      .map((file) => `${directory}/${file}`)
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code === 'ENOENT') return []
     throw error
@@ -82,17 +109,13 @@ function markdownIn(directory: string): string[] {
 
 /**
  * A globbed corpus directory: every markdown file in it is a document, and its
- * frontmatter `key` and `title` are the whole registration. Sorted by path, so
- * a plan reads the same on every machine.
+ * frontmatter `key` and `title` are the whole registration.
  */
 export function readGlobbedSources(root: string, directory: string): CorpusSource[] {
-  const files = markdownIn(join(root, directory))
-    .filter((file) => file.endsWith('.md'))
-    .sort()
+  const files = pathsIn(root, directory).filter((file) => file.endsWith('.md'))
 
   const claimed = new Map<string, string>()
-  return files.map((file) => {
-    const sourcePath = `${directory}/${file}`
+  return files.map((sourcePath) => {
     const { data, body } = sourceFrom(root, sourcePath)
     const { key, title } = data
     if (!key) throw new Error(`${sourcePath} has no \`key\` in its frontmatter`)

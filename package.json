@@ -8,6 +8,7 @@
   },
   "scripts": {
     "brief:check": "pnpm --filter @o3/guidance brief:check",
+    "brief:export": "pnpm --filter @o3/guidance brief:export",
     "brief:sync": "pnpm --filter @o3/guidance brief:sync",
     "build": "turbo run build",
     "build:skill": "node tools/authoring-skill/build.mjs",

@@ -6,6 +6,7 @@
   "description": "Sync agent-facing guidance markdown from the repo into the Sanity dataset (#72).",
   "scripts": {
     "brief:check": "sanity exec src/brief-check.ts --with-user-token --",
+    "brief:export": "sanity exec src/brief-export.ts --with-user-token --",
     "brief:sync": "sanity exec src/brief-sync.ts --with-user-token --",
     "check": "sanity exec src/check.ts --with-user-token --",
     "lint": "eslint src/",
