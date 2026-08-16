@@ -133,6 +133,28 @@ function strayBriefRefPaths(node: unknown, path = '', found: string[] = []): str
   return found
 }
 
+/** Where `brief:sync` reads its markdown from, repo-relative. */
+const BRIEF_CORPUS = 'tools/guidance/briefs'
+
+/**
+ * Every key the brief corpus registers, read off the markdown frontmatter.
+ *
+ * Read rather than imported: `tools/guidance` outlives this pipeline, which is
+ * deleted post-migration, so the dependency only ever points this way. Two
+ * lines of frontmatter parsing is the price of that, and the corpus reader
+ * itself is what enforces the grammar and the uniqueness.
+ */
+function corpusBriefKeys(): string[] {
+  const dir = join(REPO_ROOT, BRIEF_CORPUS)
+  if (!existsSync(dir)) return []
+  return readdirSync(dir)
+    .filter((file) => file.endsWith('.md'))
+    .flatMap((file) => {
+      const frontmatter = /^---\r?\n([\s\S]*?)\r?\n---/.exec(readFileSync(join(dir, file), 'utf8'))
+      return /^key:\s*(.+)$/m.exec(frontmatter?.[1] ?? '')?.[1]?.trim() ?? []
+    })
+}
+
 /** Why a `briefs` entry is malformed, or `null` when it is the shape ADR 0027 asks for. */
 function briefEntryProblem(entry: unknown): string | null {
   if (!entry || typeof entry !== 'object') return 'is not an object'
@@ -264,6 +286,36 @@ describe('committed seed content', () => {
       const offenders = allPipelineDocs.flatMap(({ file, doc }) =>
         strayBriefRefPaths(doc).map((path) => `${file} → ${path}`),
       )
+      expect(offenders).toEqual([])
+    })
+
+    /**
+     * The other half of the reference: a committed `brief-<key>` is a promise
+     * that `tools/guidance/briefs/<something>.md` registers that key. Nothing
+     * else keeps the two ends together — the reference is weak, so it loads,
+     * verifies and renders exactly as well when it points at nothing at all.
+     */
+    const committedBriefRefs = allPipelineDocs.flatMap(({ file, doc }) =>
+      briefEntriesIn(doc).map(({ path, entry }) => ({
+        file,
+        path,
+        ref: String((entry as { _ref?: unknown })._ref),
+      })),
+    )
+
+    it('has committed brief references, and markdown behind them', () => {
+      expect(committedBriefRefs.length).toBeGreaterThan(0)
+      expect(corpusBriefKeys().length).toBeGreaterThan(0)
+    })
+
+    it('resolves every committed brief reference to a key the corpus registers', () => {
+      const keys = new Set(corpusBriefKeys())
+      const offenders = committedBriefRefs
+        .filter(({ ref }) => !keys.has(ref.replace(/^brief-/, '')))
+        .map(
+          ({ file, path, ref }) =>
+            `${file} → ${path} points at ${ref}, which ${BRIEF_CORPUS} does not register`,
+        )
       expect(offenders).toEqual([])
     })
   })

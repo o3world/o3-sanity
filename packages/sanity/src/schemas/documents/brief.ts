@@ -1,5 +1,16 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
+import type { ConditionalPropertyCallback } from 'sanity'
+
+/**
+ * A file-backed brief is owned by its markdown (ADR 0027): `brief:sync` writes
+ * the whole document from the repo, so an edit made here survives until the
+ * next sync and then vanishes without a word. Studio shows those briefs and
+ * edits none of them. A dataset-born brief has no `sourcePath` and stays
+ * editable.
+ */
+const fileBacked: ConditionalPropertyCallback = ({ document }) => Boolean(document?.sourcePath)
+
 /**
  * The persistent background behind one or more pieces of content: what we
  * knew and what we asked for (ADR 0027). An authoring session fetches a
@@ -25,6 +36,7 @@ export const brief = defineType({
     defineField({
       name: 'title',
       type: 'string',
+      readOnly: fileBacked,
       description: 'What this brief is about, in a few words — how an author finds it in a list.',
       validation: (rule) => rule.required(),
     }),
@@ -32,6 +44,7 @@ export const brief = defineType({
       name: 'background',
       type: 'text',
       rows: 20,
+      readOnly: fileBacked,
       description:
         'The raw material: research, notes, transcripts, pasted evidence. What we knew going in, in whatever shape it arrived.',
     }),
@@ -39,6 +52,7 @@ export const brief = defineType({
       name: 'instructions',
       type: 'text',
       rows: 8,
+      readOnly: fileBacked,
       description:
         'The directives for the piece — what to argue, what to avoid, who it is for. What we asked for, as opposed to what we knew.',
     }),
@@ -46,6 +60,7 @@ export const brief = defineType({
       name: 'links',
       type: 'array',
       of: [defineArrayMember({ type: 'url' })],
+      readOnly: fileBacked,
       description: 'External sources behind the piece, as URLs.',
     }),
     defineField({

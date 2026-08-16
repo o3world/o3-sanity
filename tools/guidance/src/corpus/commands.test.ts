@@ -6,6 +6,9 @@ import type { Corpus, CorpusSnapshotDocument } from './plan'
 
 const CORPUS: Corpus = {
   type: 'guidance',
+  bodyField: 'body',
+  writes: 'replace',
+  claimsOrphans: 'every',
   sources: [
     {
       key: 'o3-voice',
@@ -46,6 +49,34 @@ const DRIFTED: CorpusSnapshotDocument[] = [
   { ...VOICE, body: 'Something the repo no longer says.' },
   SLOP,
 ]
+
+/**
+ * The brief corpus: markdown lands in `background`, the dataset owns `record`,
+ * and a document with no `sourcePath` was born there rather than left behind
+ * (ADR 0027).
+ */
+const BRIEFS: Corpus = {
+  type: 'brief',
+  bodyField: 'background',
+  writes: 'merge',
+  claimsOrphans: 'file-backed',
+  sources: [
+    {
+      key: 'figma-sync',
+      title: 'The Figma sync pipeline',
+      body: 'What the watcher does and what it refuses to do.',
+      sourcePath: 'tools/guidance/briefs/figma-sync.md',
+    },
+  ],
+}
+
+/** A brief the authoring skill wrote mid-session: no `sourcePath`, and nobody's to retire. */
+const DATASET_BORN: CorpusSnapshotDocument = {
+  _id: 'brief-sanity-partner',
+  key: 'sanity-partner',
+  title: 'The Sanity partnership page',
+  background: 'Gathered in the session that drafted it.',
+}
 
 /** Captures what a command told the operator, so a test can read the report it prints. */
 function sink() {
@@ -123,6 +154,65 @@ describe('syncCorpus', () => {
     expect(logged()).toContain('updated')
     expect(logged()).toContain('unchanged')
   })
+
+  /**
+   * A merge corpus writes around the fields the dataset owns. `record` is
+   * written by the authoring skill and by nothing in the repo, so a
+   * whole-document replace would delete an interview on every sync — the one
+   * failure that would make briefing a piece unsafe to repeat.
+   */
+  it('leaves a dataset-owned field alone when the corpus merges', () => {
+    const { out } = sink()
+
+    const writes = syncCorpus(
+      BRIEFS,
+      [
+        {
+          _id: 'brief-figma-sync',
+          key: 'figma-sync',
+          title: 'The Figma sync pipeline',
+          background: 'Something the repo no longer says.',
+          sourcePath: 'tools/guidance/briefs/figma-sync.md',
+          record: 'Thesis: noticing no longer belongs to anyone.',
+        },
+      ],
+      out,
+    )
+
+    expect(writes.some((write) => write.op === 'createOrReplace')).toBe(false)
+    expect(writes).toContainEqual({
+      op: 'createIfNotExists',
+      document: {
+        _id: 'brief-figma-sync',
+        _type: 'brief',
+        key: 'figma-sync',
+        title: 'The Figma sync pipeline',
+        background: 'What the watcher does and what it refuses to do.',
+        sourcePath: 'tools/guidance/briefs/figma-sync.md',
+      },
+    })
+    expect(writes).toContainEqual({
+      op: 'patch',
+      _id: 'brief-figma-sync',
+      set: {
+        key: 'figma-sync',
+        title: 'The Figma sync pipeline',
+        background: 'What the watcher does and what it refuses to do.',
+        sourcePath: 'tools/guidance/briefs/figma-sync.md',
+      },
+    })
+  })
+
+  it('never retires a document the corpus disowned, and says it left it alone', () => {
+    const { out, logged } = sink()
+
+    const writes = syncCorpus(BRIEFS, [DATASET_BORN], out)
+
+    expect(writes.filter((write) => write.op === 'delete')).toEqual([
+      { op: 'delete', _id: 'drafts.brief-figma-sync' },
+    ])
+    expect(logged()).toContain('brief-sanity-partner')
+  })
 })
 
 describe('checkCorpus', () => {
@@ -156,5 +246,36 @@ describe('checkCorpus', () => {
 
     expect(code).toBe(1)
     expect(errored()).toContain('guidance-o3-retired has no source in the corpus')
+  })
+
+  // `brief:check` audits file-backed briefs only; its silence about a
+  // dataset-born one is ADR 0027's design rather than a gap in the check.
+  it('passes with a document the corpus disowned sitting in the dataset', () => {
+    const { out, errored } = sink()
+
+    const settled: CorpusSnapshotDocument = {
+      _id: 'brief-figma-sync',
+      key: 'figma-sync',
+      title: 'The Figma sync pipeline',
+      background: 'What the watcher does and what it refuses to do.',
+      sourcePath: 'tools/guidance/briefs/figma-sync.md',
+      record: 'Thesis: noticing no longer belongs to anyone.',
+    }
+
+    expect(checkCorpus(BRIEFS, [settled, DATASET_BORN], out)).toBe(0)
+    expect(errored()).toBe('')
+  })
+
+  it('still fails when the markdown behind a file-backed document is gone', () => {
+    const { out, errored } = sink()
+
+    const code = checkCorpus(
+      BRIEFS,
+      [{ _id: 'brief-retired', key: 'retired', sourcePath: 'tools/guidance/briefs/retired.md' }],
+      out,
+    )
+
+    expect(code).toBe(1)
+    expect(errored()).toContain('brief-retired has no source in the corpus')
   })
 })

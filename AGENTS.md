@@ -227,8 +227,30 @@ Both commands are thin. The engine under them is `tools/guidance/src/corpus/` �
 one pure function from (sources, dataset snapshot) to a plan: what to write,
 what drifted, what no source claims. `sync.ts` and `check.ts` supply the client
 and nothing else, which is what lets the plan be unit-tested without a project
-or a token. A second corpus registers itself by frontmatter in a globbed
-directory instead of a declared list, and feeds the same function.
+or a token.
+
+### Briefing a piece
+
+Guidance tells an agent how to write anywhere; a **brief** is what one piece is
+written from ([ADR 0027](./docs/adr/0027-the-brief-is-a-document.md)). It is the
+second corpus on the same engine, registered by frontmatter in a globbed
+directory rather than by a declared list:
+
+```bash
+pnpm brief:sync     # tools/guidance/briefs/*.md → brief documents
+pnpm brief:check    # fails if a file-backed brief has drifted
+```
+
+Briefing a piece is three steps. Drop a markdown file in
+`tools/guidance/briefs/` with `key` and `title` in its frontmatter — the body
+becomes the brief's `background`. Run `pnpm brief:sync`. Then point the piece's
+seed JSON at `brief-<key>` through its weak `briefs` array. Load and sync in
+either order; the reference is weak for that reason.
+
+Two rules the corpus config carries and the commands do not restate. A brief
+syncs by **merge**, so the `record` the authoring skill writes survives. And a
+brief with no `sourcePath` was **born in the dataset** — `check` ignores it and
+`sync` never deletes it.
 
 ### Testing
 

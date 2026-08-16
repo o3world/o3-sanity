@@ -7,6 +7,8 @@
     "node": ">=22.12"
   },
   "scripts": {
+    "brief:check": "pnpm --filter @o3/guidance brief:check",
+    "brief:sync": "pnpm --filter @o3/guidance brief:sync",
     "build": "turbo run build",
     "build:skill": "node tools/authoring-skill/build.mjs",
     "check": "turbo run lint typecheck --affected",

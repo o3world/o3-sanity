@@ -16,9 +16,30 @@ export type CorpusSource = {
   sourcePath?: string
 }
 
-/** A corpus is its document type plus the sources currently registered for it. */
+/**
+ * How a source commits. `replace` writes the whole document, which is right
+ * when the repo owns every field of it. `merge` creates the document and then
+ * sets only the fields the source owns, so a field the dataset writes —
+ * `brief.record`, where the authoring skill persists its interview — survives
+ * a sync instead of being wiped by it (ADR 0027).
+ */
+export type WriteMode = 'replace' | 'merge'
+
+/**
+ * What a dataset document no source backs means to the corpus. `every` — the
+ * repo is the whole truth, so it is a leftover to retire. `file-backed` — a
+ * document with no `sourcePath` was written in the dataset on purpose and is
+ * outside the corpus's authority entirely (ADR 0027's dataset-born brief).
+ */
+export type OrphanClaim = 'every' | 'file-backed'
+
+/** A corpus is its document type, how it writes, and the sources registered for it. */
 export type Corpus = {
   type: string
+  /** The document field one source's markdown lands in — `brief` has no `body`. */
+  bodyField: string
+  writes: WriteMode
+  claimsOrphans: OrphanClaim
   sources: readonly CorpusSource[]
 }
 
@@ -28,35 +49,48 @@ export type CorpusDocument = {
   _type: string
   key: string
   title: string
-  body: string
   sourcePath?: string
+  /** The markdown body, under whichever field the corpus maps it to. */
+  [field: string]: unknown
 }
 
-/** Published documents of the corpus type, as the dataset currently holds them. */
+/**
+ * Published documents of the corpus type, as the dataset currently holds them.
+ *
+ * A GROQ projection returns a field the document does not have as `null`, so
+ * every optional field here is nullable and absence has two spellings.
+ */
 export type CorpusSnapshotDocument = {
   _id: string
-  key?: string
-  title?: string
-  body?: string
-  sourcePath?: string
+  key?: string | null
+  title?: string | null
+  sourcePath?: string | null
+  [field: string]: unknown
 }
 
-/** The fields a source owns — everything the dataset copy is compared on. */
-export const CORPUS_FIELDS = ['key', 'title', 'body', 'sourcePath'] as const
-
-type CorpusField = (typeof CORPUS_FIELDS)[number]
+/**
+ * The fields a source owns: everything the dataset copy is compared on, what a
+ * merge write sets, and what the snapshot query projects — one list, so
+ * comparison and fetch cannot drift apart. Generic in the body field so a
+ * corpus can still pin the whole list against its generated document type.
+ */
+export function fieldsOf<Body extends string>(corpus: { bodyField: Body }) {
+  return ['key', 'title', corpus.bodyField, 'sourcePath'] as const
+}
 
 type CorpusEntry = {
   document: CorpusDocument
   state: 'created' | 'updated' | 'unchanged'
   /** Which fields the dataset copy disagrees on. Empty unless `updated`. */
-  fields: CorpusField[]
+  fields: string[]
 }
 
 export type CorpusPlan = {
   entries: CorpusEntry[]
   /** Snapshot documents no source claims. What to do with one is the command's call. */
   orphans: CorpusSnapshotDocument[]
+  /** Snapshot documents outside the corpus's authority — never written, never reported. */
+  disowned: CorpusSnapshotDocument[]
 }
 
 /** One verdict in the drift report: a document the dataset disagrees with the repo about. */
@@ -65,7 +99,7 @@ export type CorpusDrift = {
   _id: string
   sourcePath?: string
   /** Which fields disagree. Present only on `drifted`. */
-  fields?: CorpusField[]
+  fields?: string[]
 }
 
 /**
@@ -74,15 +108,24 @@ export type CorpusDrift = {
  */
 export const idFor = (type: string, key: string) => `${type}-${key}`
 
-function documentFor(type: string, source: CorpusSource): CorpusDocument {
+function documentFor(corpus: Corpus, source: CorpusSource): CorpusDocument {
   return {
-    _id: idFor(type, source.key),
-    _type: type,
+    _id: idFor(corpus.type, source.key),
+    _type: corpus.type,
     key: source.key,
     title: source.title,
-    body: source.body,
+    [corpus.bodyField]: source.body,
     ...(source.sourcePath === undefined ? {} : { sourcePath: source.sourcePath }),
   }
+}
+
+/** Just the fields a source owns — what a `merge` write sets and nothing more. */
+export function ownedFieldsOf(corpus: Corpus, document: CorpusDocument): Record<string, unknown> {
+  return Object.fromEntries(
+    fieldsOf(corpus)
+      .filter((field) => document[field] !== undefined)
+      .map((field) => [field, document[field]]),
+  )
 }
 
 export function planCorpus(
@@ -90,20 +133,27 @@ export function planCorpus(
   snapshot: readonly CorpusSnapshotDocument[],
 ): CorpusPlan {
   const byId = new Map(snapshot.map((document) => [document._id, document]))
+  const fields = fieldsOf(corpus)
 
   const entries = corpus.sources.map((source): CorpusEntry => {
-    const document = documentFor(corpus.type, source)
+    const document = documentFor(corpus, source)
     const live = byId.get(document._id)
     if (!live) return { document, state: 'created', fields: [] }
 
-    const fields = CORPUS_FIELDS.filter((field) => live[field] !== document[field])
-    return { document, state: fields.length > 0 ? 'updated' : 'unchanged', fields }
+    const stale = fields.filter((field) => live[field] !== document[field])
+    return { document, state: stale.length > 0 ? 'updated' : 'unchanged', fields: stale }
   })
 
   const claimed = new Set(entries.map((entry) => entry.document._id))
-  const orphans = snapshot.filter((document) => !claimed.has(document._id))
+  const unclaimed = snapshot.filter((document) => !claimed.has(document._id))
+  const ours = (document: CorpusSnapshotDocument) =>
+    corpus.claimsOrphans === 'every' || document.sourcePath != null
 
-  return { entries, orphans: [...orphans] }
+  return {
+    entries,
+    orphans: unclaimed.filter(ours),
+    disowned: unclaimed.filter((document) => !ours(document)),
+  }
 }
 
 /**
@@ -125,7 +175,7 @@ export function driftOf(plan: CorpusPlan): CorpusDrift[] {
   const unsourced = plan.orphans.map((document): CorpusDrift => ({
     kind: 'unsourced',
     _id: document._id,
-    sourcePath: document.sourcePath,
+    sourcePath: document.sourcePath ?? undefined,
   }))
 
   return [...stale, ...unsourced]

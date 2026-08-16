@@ -15,6 +15,7 @@
  */
 import { getCliClient } from 'sanity/cli'
 
+import { commitWrites } from './commit'
 import { syncCorpus } from './corpus/commands'
 import { idFor } from './corpus/plan'
 import { GUIDANCE_FIELDS, GUIDANCE_TYPE, guidanceCorpus } from './sources'
@@ -34,10 +35,7 @@ async function main() {
   )
 
   const tx = client.transaction()
-  for (const write of syncCorpus(corpus, snapshot, console)) {
-    if (write.op === 'createOrReplace') tx.createOrReplace(write.document)
-    else tx.delete(write._id)
-  }
+  commitWrites(tx, syncCorpus(corpus, snapshot, console))
 
   await tx.commit({ visibility: 'sync' })
   console.log(`\ndone — query them with *[_type == "guidance"]{key, title, body}`)
