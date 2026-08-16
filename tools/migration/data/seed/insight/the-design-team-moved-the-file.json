@@ -426,6 +426,14 @@
       ]
     }
   ],
+  "briefs": [
+    {
+      "_type": "reference",
+      "_ref": "brief-figma-sync-pipeline",
+      "_weak": true,
+      "_key": "brief-figma-sync-pipeline"
+    }
+  ],
   "seo": {
     "title": "The design team moved the file. The repo filed the tickets.",
     "description": "A Wednesday design pass rebuilt our chrome and warmed our palette. One command caught it, judgment sorted noise from signal, and the site followed by Thursday."
