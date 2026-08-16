@@ -586,13 +586,43 @@ describe('exportCorpus', () => {
           sourcePath: 'tools/guidance/briefs/figma-sync.md',
         },
       ],
-      { ...REQUEST, key: 'figma-sync' },
+      { ...REQUEST, key: 'figma-sync', occupied: ['tools/guidance/briefs/figma-sync.md'] },
       out,
     )
 
     expect(result).toEqual({ writes: [], status: 1 })
     expect(errored()).toContain('brief-figma-sync is already file-backed')
     expect(errored()).toContain('tools/guidance/briefs/figma-sync.md')
+  })
+
+  /**
+   * The same document with its markdown deleted — or left behind by an export
+   * whose transaction failed. Calling a file that is not there the source of
+   * truth sends the operator to look at nothing, while what is about to happen
+   * is sync retiring the document and the `record` on it.
+   */
+  it('says a claimed file is missing rather than calling it the source of truth', () => {
+    const { out, errored } = sink()
+
+    const result = exportCorpus(
+      BRIEFS,
+      [
+        {
+          _id: 'brief-figma-sync',
+          key: 'figma-sync',
+          title: 'The Figma sync pipeline',
+          background: 'What the watcher does and what it refuses to do.',
+          sourcePath: 'tools/guidance/briefs/figma-sync.md',
+        },
+      ],
+      { ...REQUEST, key: 'figma-sync', occupied: [] },
+      out,
+    )
+
+    expect(result).toEqual({ writes: [], status: 1 })
+    expect(errored()).toContain('tools/guidance/briefs/figma-sync.md')
+    expect(errored()).toContain('brief:sync')
+    expect(errored()).toMatch(/restore/)
   })
 
   // The file a key maps to is not always the file that registers it — one
@@ -613,6 +643,30 @@ describe('exportCorpus', () => {
 
     expect(result).toEqual({ writes: [], status: 1 })
     expect(errored()).toContain('tools/guidance/briefs/sanity-partner.md already exists')
+  })
+
+  /**
+   * The repo lives on a case-insensitive filesystem, where writing
+   * `sanity-partner.md` beside `Sanity-Partner.md` truncates the file already
+   * there rather than adding a second one. Keys are lowercase by grammar;
+   * the filenames in the corpus are not held to matching them.
+   */
+  it('refuses a file the directory already holds under another casing', () => {
+    const { out, errored } = sink()
+
+    const result = exportCorpus(
+      BRIEFS,
+      [DATASET_BORN],
+      {
+        ...REQUEST,
+        key: 'sanity-partner',
+        occupied: ['tools/guidance/briefs/Sanity-Partner.md'],
+      },
+      out,
+    )
+
+    expect(result).toEqual({ writes: [], status: 1 })
+    expect(errored()).toContain('tools/guidance/briefs/Sanity-Partner.md already exists')
   })
 
   /**

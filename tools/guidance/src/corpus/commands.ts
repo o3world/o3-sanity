@@ -174,7 +174,7 @@ export function exportCorpus(
   const _id = idFor(corpus.type, request.key)
   const candidate = candidates.find((document) => document._id === _id)
   if (!candidate) {
-    out.error(`✗ ${describeUnexportable(corpus, plan, snapshot, _id)}`)
+    out.error(`✗ ${describeUnexportable(corpus, plan, snapshot, _id, request.occupied)}`)
     return { writes: [], status: 1 }
   }
 
@@ -199,8 +199,9 @@ export function exportCorpus(
   }
 
   const sourcePath = `${request.directory}/${request.key}.md`
-  if (request.occupied.includes(sourcePath)) {
-    out.error(`✗ ${sourcePath} already exists — export never writes over a file in the corpus`)
+  const taken = occupant(request.occupied, sourcePath)
+  if (taken) {
+    out.error(`✗ ${taken} already exists — export never writes over a file in the corpus`)
     return { writes: [], status: 1 }
   }
 
@@ -252,6 +253,16 @@ export function exportCorpus(
   }
 }
 
+/**
+ * The file in the corpus a path would land on, or `undefined` for open ground.
+ * Compared case-insensitively: the repo checks out on a default-APFS Mac,
+ * where `sanity-partner.md` and `Sanity-Partner.md` are one file, and writing
+ * the second truncates the first.
+ */
+function occupant(occupied: readonly string[], sourcePath: string): string | undefined {
+  return occupied.find((path) => path.toLowerCase() === sourcePath.toLowerCase())
+}
+
 /** The grammar refusal, in one wording, because two would read as two rules. */
 const NOT_KEBAB = `is not lowercase kebab-case (${CORPUS_KEY.source})`
 
@@ -289,15 +300,17 @@ function fieldsKeptOnDocument(corpus: Corpus, candidate: CorpusSnapshotDocument)
 }
 
 /**
- * Why a named key is not a candidate. Three ways: the repo already backs the
- * document, a file already registers the key over a dataset-born document — the
- * collision sync and check send here — or the dataset has no such document.
+ * Why a named key is not a candidate. Four ways: a file already registers the
+ * key over a dataset-born document — the collision sync and check send here —
+ * the repo already backs the document, the document claims a file the corpus
+ * does not hold, or the dataset has no such document.
  */
 function describeUnexportable(
   corpus: Corpus,
   plan: CorpusPlan,
   snapshot: readonly CorpusSnapshotDocument[],
   _id: string,
+  occupied: readonly string[],
 ): string {
   const contested = plan.conflicts.find((conflict) => conflict._id === _id)
   if (contested) {
@@ -305,9 +318,15 @@ function describeUnexportable(
   }
 
   const live = snapshot.find((document) => document._id === _id)
-  return live
-    ? `${_id} is already file-backed (${live.sourcePath}) — the repo file is the source of truth`
-    : `the dataset holds no dataset-born ${corpus.type} with that key (${_id})`
+  const claimed = typeof live?.sourcePath === 'string' ? live.sourcePath : undefined
+  if (!claimed) return `the dataset holds no dataset-born ${corpus.type} with that key (${_id})`
+
+  /* A stamp with nothing behind it: the markdown was deleted, or an export
+   * stamped the document and failed to leave the file. Sync reads the document
+   * as a leftover, so what happens next is a retirement, not an overwrite. */
+  return occupant(occupied, claimed)
+    ? `${_id} is already file-backed (${claimed}) — the repo file is the source of truth`
+    : `${_id} claims ${claimed}, and the corpus has no such file — \`pnpm ${corpus.type}:sync\` will retire the document, record and all; restore the file with git, or clear \`sourcePath\` on the document to make it dataset-born again`
 }
 
 /**
