@@ -52,15 +52,18 @@ describe('the committed corpus', () => {
 
   /**
    * The other half of the same contract, for the two types a different tool
-   * owns (ADR 0027, ADR 0024). `guidance-*` and `brief-*` ids miss the
-   * `<type>-(wp|seed)-` shape on purpose, which is what makes `load` leave
-   * them alone in every mode: the loader only writes what the corpus holds and
-   * only retires what it owns.
+   * owns (ADR 0027, ADR 0024). Internal types are excluded by name rather
+   * than by id shape: a corpus key is any kebab string, so `brief-wp-notes`
+   * is a legal brief id that the bare `<type>-(wp|seed)-` pattern would
+   * claim — and a claimed id is one `load` may retire.
    */
   it('leaves guidance and brief ids outside the ownership contract', () => {
     expect(isPipelineOwned('guidance-o3-voice')).toBe(false)
     expect(isPipelineOwned('brief-sanity-partner-page')).toBe(false)
     expect(isPipelineOwned('drafts.brief-sanity-partner-page')).toBe(false)
+    expect(isPipelineOwned('brief-wp-migration-notes')).toBe(false)
+    expect(isPipelineOwned('brief-seed-notes')).toBe(false)
+    expect(isPipelineOwned('guidance-wp-era-style')).toBe(false)
   })
 
   /**

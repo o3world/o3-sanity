@@ -42,25 +42,14 @@ export function slugsByType(): Record<string, string[]> {
 }
 
 /**
- * Pipeline ownership is the deterministic id contract (CONTEXT.md →
- * Rebuild): `<type>-wp-<id>` for migrated documents, `<type>-seed-<slug>`
- * for greenfield ones. Everything else in the dataset — Studio-created
- * documents, uuid drafts, `siteSettings` — is outside the pipeline's
- * authority and is never retired by `load`.
- */
-export function isPipelineOwned(id: string): boolean {
-  return /^[a-zA-Z]+-(wp|seed)-./.test(id.replace(/^drafts\./, ''))
-}
-
-/**
  * The document types a different tool owns — `guidance` (#72,
  * [ADR 0024](../../../../docs/adr/0024-authoring-knowledge-has-one-source-and-one-fan-out.md))
  * and `brief` ([ADR 0027](../../../../docs/adr/0027-the-brief-is-a-document.md)).
  *
  * Both are synced from repo markdown by `tools/guidance`, and both outlive
  * this pipeline, which is deleted post-migration. So they are never committed
- * under `data/`, `load` never writes or retires one (their ids miss
- * `isPipelineOwned` deliberately), and `verify` does not count one an orphan.
+ * under `data/`, `load` never writes or retires one, and `verify` does not
+ * count one an orphan.
  */
 const INTERNAL_TYPES: readonly string[] = ['guidance', 'brief']
 
@@ -69,8 +58,26 @@ export function isInternalType(type: string): boolean {
 }
 
 /**
+ * Pipeline ownership is the deterministic id contract (CONTEXT.md →
+ * Rebuild): `<type>-wp-<id>` for migrated documents, `<type>-seed-<slug>`
+ * for greenfield ones. Everything else in the dataset — Studio-created
+ * documents, uuid drafts, `siteSettings` — is outside the pipeline's
+ * authority and is never retired by `load`.
+ *
+ * An internal type's documents are excluded by name, not by shape: a corpus
+ * key is any kebab string, so `brief-wp-notes` is a legal brief id that the
+ * bare pattern would otherwise claim.
+ */
+export function isPipelineOwned(id: string): boolean {
+  const bare = id.replace(/^drafts\./, '')
+  if (INTERNAL_TYPES.some((type) => bare.startsWith(`${type}-`))) return false
+  return /^[a-zA-Z]+-(wp|seed)-./.test(bare)
+}
+
+/**
  * A brief's deterministic id — `brief-<key>`, the id a `briefs` reference in
- * seed JSON points at. One declaration so the corpus check and the sync tool
- * cannot disagree about the shape.
+ * seed JSON points at. A matcher only: the id is constructed by `idFor` in
+ * `tools/guidance/src/corpus/plan.ts`, which this tool does not import
+ * because it is deleted post-migration and the corpus tool is not.
  */
 export const BRIEF_ID = /^brief-[a-z0-9]+(-[a-z0-9]+)*$/

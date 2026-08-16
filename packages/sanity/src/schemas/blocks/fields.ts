@@ -29,7 +29,17 @@ export function briefsField() {
     name: 'briefs',
     title: 'Briefs',
     type: 'array',
-    of: [defineArrayMember({ type: 'reference', to: [{ type: 'brief' }], weak: true })],
+    of: [
+      defineArrayMember({
+        type: 'reference',
+        to: [{ type: 'brief' }],
+        weak: true,
+        /* A brief's `key` is machine-written and readOnly, so one born inline
+         * in Studio could never satisfy its own validation — briefs are made
+         * by sync or by the authoring skill, and only pointed at from here. */
+        options: { disableNew: true },
+      }),
+    ],
     description:
       'The background this piece was written from — research, instructions, and what the authoring interview produced. Internal: nothing here reaches the site.',
   })

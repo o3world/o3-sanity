@@ -108,6 +108,31 @@ function briefEntriesIn(
   return found
 }
 
+/**
+ * Paths of brief-shaped references sitting outside any `briefs` array. The
+ * resolver test skips every `brief-<key>` id and `briefEntriesIn` only walks
+ * arrays literally keyed `briefs`, so without this a strong or misplaced
+ * brief reference would escape both gates and dangle forever.
+ */
+function strayBriefRefPaths(node: unknown, path = '', found: string[] = []): string[] {
+  if (Array.isArray(node)) {
+    node.forEach((item, i) => strayBriefRefPaths(item, `${path}[${i}]`, found))
+  } else if (node && typeof node === 'object') {
+    const obj = node as Record<string, unknown>
+    if (
+      typeof obj._ref === 'string' &&
+      BRIEF_ID.test(obj._ref) &&
+      !/(^|\.)briefs\[\d+\]$/.test(path)
+    ) {
+      found.push(path || '(root)')
+    }
+    for (const [key, value] of Object.entries(obj)) {
+      strayBriefRefPaths(value, path ? `${path}.${key}` : key, found)
+    }
+  }
+  return found
+}
+
 /** Why a `briefs` entry is malformed, or `null` when it is the shape ADR 0027 asks for. */
 function briefEntryProblem(entry: unknown): string | null {
   if (!entry || typeof entry !== 'object') return 'is not an object'
@@ -216,6 +241,28 @@ describe('committed seed content', () => {
           .map(({ path, entry }) => ({ path, problem: briefEntryProblem(entry) }))
           .filter(({ problem }) => problem !== null)
           .map(({ path, problem }) => `${file} → ${path} ${problem}`),
+      )
+      expect(offenders).toEqual([])
+    })
+
+    it('sees a brief-shaped reference hiding outside a briefs array', () => {
+      expect(
+        strayBriefRefPaths({
+          _id: 'insight-seed-x',
+          related: [{ _type: 'reference', _ref: 'brief-one', _weak: true }],
+        }),
+      ).toEqual(['related[0]'])
+      expect(
+        strayBriefRefPaths({
+          _id: 'insight-seed-x',
+          briefs: [{ _type: 'reference', _ref: 'brief-one', _weak: true }],
+        }),
+      ).toEqual([])
+    })
+
+    it('confines brief-shaped references to briefs arrays across the corpus', () => {
+      const offenders = allPipelineDocs.flatMap(({ file, doc }) =>
+        strayBriefRefPaths(doc).map((path) => `${file} → ${path}`),
       )
       expect(offenders).toEqual([])
     })
