@@ -438,6 +438,20 @@ describe('normalizeSnapshot', () => {
     ])
   })
 
+  /**
+   * A `raw` fetch returns the copies a release stages too. One of those is a
+   * proposed future document rather than a document the corpus plans against:
+   * left in, it reads as an orphan, and sync would delete a release's contents.
+   */
+  it('drops the copy a release stages', () => {
+    expect(
+      normalizeSnapshot([
+        { _id: 'brief-figma-sync', key: 'figma-sync', title: 'The Figma sync pipeline' },
+        { _id: 'versions.autumn.brief-figma-sync', key: 'figma-sync', title: 'Next autumn' },
+      ]),
+    ).toEqual([{ _id: 'brief-figma-sync', key: 'figma-sync', title: 'The Figma sync pipeline' }])
+  })
+
   it('passes a published-only snapshot through unchanged', () => {
     const rows = [{ _id: 'guidance-o3-voice', key: 'o3-voice', body: 'x' }]
 

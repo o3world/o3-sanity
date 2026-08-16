@@ -74,6 +74,7 @@ export type CorpusSnapshotDocument = {
 }
 
 const DRAFT_PREFIX = 'drafts.'
+const VERSION_PREFIX = 'versions.'
 
 /**
  * A fetch that includes drafts → one row per id.
@@ -85,6 +86,10 @@ const DRAFT_PREFIX = 'drafts.'
  *
  * Drafts have to reach the plan at all because the document a key collision
  * would destroy is usually one the authoring skill never published (ADR 0027).
+ *
+ * A release version — the third copy a `raw` fetch returns — is dropped: it is
+ * a proposed future document, and the corpus plans against the one in the
+ * dataset now.
  */
 export function normalizeSnapshot(
   rows: readonly CorpusSnapshotDocument[],
@@ -92,6 +97,7 @@ export function normalizeSnapshot(
   const published = new Map<string, CorpusSnapshotDocument>()
   const drafts = new Map<string, CorpusSnapshotDocument>()
   for (const row of rows) {
+    if (row._id.startsWith(VERSION_PREFIX)) continue
     if (row._id.startsWith(DRAFT_PREFIX)) drafts.set(row._id.slice(DRAFT_PREFIX.length), row)
     else published.set(row._id, row)
   }
