@@ -139,10 +139,11 @@ something to point at.
   absence to know it may not audit this document.
 - **The editorial slots carry the human's material, not yours.** `background`
   is the raw material they supplied — notes, transcripts, pasted evidence, the
-  evidence answer in their words. `instructions` is what they asked for: the
-  reader, the content type, anything to avoid. `links` is the URLs they gave.
-  Nothing you inferred goes in these three.
-- **`record` is yours**, in the format below.
+  evidence and the warrant in their words. `instructions` is what they asked
+  for: the reader, the content type, what to argue, what to avoid. `links` is
+  the URLs they gave. Nothing you inferred goes in these three.
+- **`record` is yours**, in the format below. It is `readOnly` in Studio, which
+  keeps a human out of a field the skill maintains; the API takes your write.
 
 A brief holds what one piece is written from; the `guidance` documents hold how
 to write for O3 anywhere. Per-piece material never goes into a `guidance`
@@ -168,10 +169,13 @@ read by the next session as much as by a human:
 - <what is missing, and who can supply it>
 ```
 
-`## Gaps` says `- None` when there are none, so a later session can tell an
-empty list from an unwritten one. Questions added after drafting are appended
-to the list; none is ever removed or reworded. When `record` stops being true,
-patch it — step 6 is the last chance.
+A gap is what a human still has to supply or decide before this can publish — a
+fact nobody has, a slot nobody filled. `## Gaps` says `- None` when there are
+none, so a later session can tell an empty list from an unwritten one, and a
+gap that closes says so where it stands rather than disappearing: that it was
+once open is part of what the next session needs. Questions added after
+drafting are appended to the list; none is ever removed or reworded. When
+`record` stops being true, patch it — step 6 is the last chance.
 
 **The brief is a gate, and it stands one step later than the interview.**
 Nothing is written to Sanity without an agreed thesis, and with one the brief
@@ -304,16 +308,20 @@ pages alike. It reports before it writes.
    ```
 
    `$ids` holds both `brief-<key>` and `drafts.brief-<key>` for every
-   reference. Where both come back, read the draft.
+   reference, and the perspective is `raw` — any other one collapses the two
+   ids into one before the filter sees them, which is the whole reason for
+   naming both. Where both come back, read the draft.
 
 2. **Interview only for what changed — where there is a brief.** The thesis and
    the five questions are in `record`, and they are settled: asking them again
    is asking the human to redo work the document already holds. Ask what the
    brief cannot answer — what has changed since it was written, what the piece
    now has to do that it did not, evidence that arrived after — and nothing
-   whose answer is already in `record`. Patch `record` with whatever the
-   answers moved (a revised thesis, a gap closed, a gap opened) before you
-   propose a single write to the document itself.
+   whose answer is already in `record`. Read the recorded thesis and reader
+   back and ask whether they still hold; never ask the human to state them
+   again. Patch `record` with whatever the answers moved (a revised thesis, a
+   gap closed, a gap opened) before you propose a single write to the document
+   itself.
 
    Where there is no brief, there is nothing to interview against and none is
    written here: review mode reports and patches, it does not brief.
@@ -353,5 +361,5 @@ pages alike. It reports before it writes.
    reapplying them is the clobber the guard exists to prevent. Run the findings
    pass again and re-present, marking which approved rows still stand.
 7. **Hand off** as above: which rows landed, which were dropped, the brief this
-   ran against and what its `record` now says, the reader test's result, and
-   what is left for the human.
+   ran against and what its `record` now says — or that there was none — the
+   reader test's result, and what is left for the human.
