@@ -28,3 +28,9 @@ apps/web/src/lib/redirects.generated.ts
 **/.next/
 **/storybook-static/
 **/dist/
+
+# Corpus-reader fixtures. These test how the frontmatter parser treats
+# byte-exact edge cases — a dash run, an unmatched quote — and prettier
+# rewrites exactly those bytes into the well-formed shape the test needs
+# them not to be.
+tools/guidance/src/corpus/__fixtures__/
