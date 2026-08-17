@@ -125,6 +125,7 @@ Set these fields and no others:
 | `gaps`       | one entry per thing nobody has: unreachable pointers by name, unverifiable claims, facts they lack |
 | `stage`      | `gather` — this stage finished, whatever the sweep turned up                                       |
 | `nextStep`   | what a session picking this up does first, in a sentence                                           |
+| `decisions`  | the weight you announced, and the collision the human resolved below                               |
 
 `thesis`, `readerQuestions`, `outline`, `draft`, `verdict` and `pieceId` belong
 to stages nobody has dispatched. Leave them empty. Never set `sourcePath`.

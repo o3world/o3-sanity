@@ -173,15 +173,15 @@ the fields below, never a document rebuilt in context and sent back whole. A
 wholesale write restates `background` and `links` from a copy that is one
 correction out of date.
 
-| Field             | What goes in it                                                                                     |
-| ----------------- | --------------------------------------------------------------------------------------------------- |
-| `instructions`    | what they asked for: the reader they named, the type they picked, what to argue, what to avoid      |
-| `thesis`          | the confirmed sentence, in their words                                                              |
-| `readerQuestions` | the five, in the order they were locked                                                             |
-| `decisions`       | the run's weight, and every recommendation you took rather than were given                          |
-| `gaps`            | appended: every reference slot nobody could fill, and anything the rounds turned up that nobody has |
-| `stage`           | `brief`                                                                                             |
-| `nextStep`        | what stage 3 does first, in a sentence                                                              |
+| Field             | What goes in it                                                                                                    |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `instructions`    | what they asked for: the reader they named, the type they picked, what to argue and on what warrant, what to avoid |
+| `thesis`          | the confirmed sentence, in their words                                                                             |
+| `readerQuestions` | the five, in the order they were locked                                                                            |
+| `decisions`       | the run's weight, and every recommendation you took rather than were given                                         |
+| `gaps`            | appended: every reference slot nobody could fill, and anything the rounds turned up that nobody has                |
+| `stage`           | `brief`                                                                                                            |
+| `nextStep`        | what stage 3 does first, in a sentence                                                                             |
 
 `outline`, `draft`, `verdict` and `pieceId` belong to stages nobody has
 dispatched. Leave them empty, and never set `sourcePath`.
