@@ -109,14 +109,35 @@ document then claims a confirmation that never happened.
 | `o3sanity:review`  | `review`  | `verdict`                                   |
 | `o3sanity:typeset` | `typeset` | `pieceId`, and the piece document           |
 
-Three fields belong to whichever stage is running. `stage` takes that stage's
+Four fields belong to whichever stage is running. `stage` takes that stage's
 own name — the stage that finished, not the one it opens. `typeset` is the one
 exception and writes `handed-off`, the enum's last value: the pipeline is over
 and the piece is a human's to publish. `nextStep` says what
 the next session does first. `decisions` takes any scoping call the run made, so
 a later session reads a deliberate cut as a decision rather than an oversight
-and puts the material back.
+and puts the material back. `gaps` is gather's to open and **every stage's to
+append to** — a stage that finds nobody has something adds a line and never
+rewrites the list, because the entries above it were findings too.
 
 `key` and `sourcePath` are never yours to set past creation. A brief written
 here has no `sourcePath` at all: its absence is what tells `brief:check` this
 document was born in the dataset and is not its to audit.
+
+## How a stage patches the brief
+
+Gathering creates the brief and every stage after it patches the same document.
+Two mechanics, and they hold for every write any stage makes:
+
+- **Per-field ops, never a document rebuilt in context and sent back whole.** A
+  wholesale write restates `background` and `links` from a copy that is one
+  correction out of date, and two sessions writing at once overwrite each
+  other's work rather than landing beside it.
+- **Re-fetch before patching, and pass `ifRevisionId`.** The guard turns a
+  silent clobber into a failed call, and a `_rev` you have been holding since
+  three turns ago is the one it cannot catch. **On a rejection: abort,
+  re-fetch, re-derive.** Never retry blind — what you derived was derived
+  against text that no longer exists.
+
+The same two mechanics govern a patch to a piece document.
+`references/portable-text.md` carries them again alongside the rest of the
+write mechanics, because stage 5 builds documents from that file alone.

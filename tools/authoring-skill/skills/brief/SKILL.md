@@ -168,10 +168,9 @@ order. A question can be added later; none is reworded.
 
 ## 6. Patch the brief
 
-Gathering created the brief and this stage patches it — per-field `set` ops over
-the fields below, never a document rebuilt in context and sent back whole. A
-wholesale write restates `background` and `links` from a copy that is one
-correction out of date.
+Gathering created the brief and this stage patches it, by CORE's two patch
+mechanics: per-field `set` ops over the fields below, never a document rebuilt
+in context and sent back whole, and `ifRevisionId` on the call.
 
 | Field             | What goes in it                                                                                                    |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------ |

@@ -110,3 +110,15 @@ jobs:
             echo "::error::packages/sanity/src/types/generated.ts is stale — run 'pnpm typegen' and commit."
             exit 1
           fi
+
+  # The o3sanity plugin is not a workspace package, so `turbo run lint` never
+  # visits it. Its own job, on the typegen-drift shape.
+  skill-lint:
+    name: skill lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: Validate the authoring skills
+        run: pnpm skill:lint

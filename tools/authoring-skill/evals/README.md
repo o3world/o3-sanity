@@ -48,8 +48,10 @@ The task, written to the agent that will run it.
 **The persona lives in the body.** Plugin eval has no persona field, so a case
 that needs a human writes the scripted answers into the prompt under their own
 heading — who the stakeholder is, what they know, and what they say at every
-point the skill asks for a nod. `../scenarios/` holds the two long-form
-scenarios this format grew out of, and they are the model for that section.
+point the skill asks for a nod. `gather-gate/prompt.md` is the fullest one, and
+the model to copy: the register, the dump he pastes when invited, an answer per
+question the skill asks, and the line that makes the section exhaustive —
+_facts come from this section or they do not exist_.
 
 ## Graders
 
@@ -161,6 +163,16 @@ case that names another model fails before it runs.
 ## What a run may touch
 
 The `development` dataset, drafts only. Never publish, never address
-`production`. Documents a run creates are named `eval-<case>-<slug>` and swept
-at the end of the run; a case that means to leave one behind says so, and the
-report says where it is.
+`production`.
+
+**Briefs are sweepable and pieces are not.** A case keys its brief
+`eval-<case>-<slug>`, so `brief-eval-` matches every brief the suite has ever
+written and a sweep is one query. A piece document takes the id typeset gives
+it — `insight-<slug>`, `page-<slug>`, no prefix — because that id shape is the
+thing the typeset cases exist to check, and an eval-only prefix would test a
+rule the plugin does not have. So the three typeset cases leave drafts a prefix
+cannot find: name them in the run report by id, and delete them by hand.
+
+Run cases in batches of two or three. Cases sharing a fixture id collide under
+parallelism — [#201](https://github.com/o3world/o3-sanity/issues/201) — and the
+symptom is a run that fails on a document another run had already rewritten.

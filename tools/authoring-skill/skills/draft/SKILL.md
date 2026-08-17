@@ -1,6 +1,6 @@
 ---
 name: draft
-description: Proposes the outline — an arc by name, confirmed at a gate — then writes the piece as prose against it: title, excerpt and body, into the brief document rather than into Sanity blocks, so a rewrite costs no block surgery. Use once a thesis is agreed, or when asked to outline, write, rewrite, or extend the body of an o3world.com insight, case study, or page. Stage 3 of 5; hands off to o3sanity:review.
+description: Proposes the outline — an arc by name, confirmed at a gate — then writes the piece as prose against it — title, excerpt and body, into the brief document rather than into Sanity blocks, so a rewrite costs no block surgery. Use once a thesis is agreed, or when asked to outline, write, rewrite, or extend the body of an o3world.com insight, case study, or page. Stage 3 of 5; hands off to o3sanity:review.
 ---
 
 # Draft
@@ -272,8 +272,7 @@ and putting it last in this one.
 
 ## 6. Patch the brief, and hand off
 
-One field per patch, so two sessions writing at once cannot overwrite each
-other's work:
+One field per patch, under `ifRevisionId` — CORE's two patch mechanics:
 
 | Field           | What goes in it                                                        |
 | --------------- | ---------------------------------------------------------------------- |
