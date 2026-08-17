@@ -151,8 +151,8 @@ export const caseShowcaseSection = defineSectionBlock({
 
 /**
  * `layout`, `rail` and `surface` are declared in
- * `src/knobs/railPanelsSection.ts` (ADR 0020), including the gate that used to
- * be `rail`'s `hidden` closure. Everything here is editorial.
+ * `src/knobs/railPanelsSection.ts` (ADR 0020), including the gate that offers
+ * `rail` only on the rail layout. Everything here is editorial.
  */
 export const railPanelsSection = defineSectionBlock({
   name: 'railPanelsSection',
@@ -249,9 +249,8 @@ export const railPanelsSection = defineSectionBlock({
 
 /**
  * `decoration` and `surface` are declared in `src/knobs/quoteSection.ts`
- * (ADR 0020), including the `molecule` value and the frame it came from. This
- * block and `ctaSection` were the last two callers of `decorationField()`, so
- * the factory retired with them (#120).
+ * (ADR 0020), including the `molecule` value and the frame it came from.
+ * Everything here is editorial.
  */
 export const quoteSection = defineSectionBlock({
   name: 'quoteSection',
@@ -680,7 +679,7 @@ export const layoutSection = defineSectionBlock({
 
 /**
  * `variant`, `width` and `surface` are declared in `src/knobs/mediaSection.ts`
- * (ADR 0020), including the gate that used to be `width`'s `hidden` closure.
+ * (ADR 0020), including the gate that withholds `width` from a capture.
  * `media` is the only editorial field the band has.
  */
 export const mediaSection = defineSectionBlock({

@@ -137,7 +137,7 @@ export function RailPanelsSection({
       // `2334:2170` — 128px above, 64px below, and the header is the heading
       // alone: the frame writes no standfirst over the services. `intro` still
       // renders if a band carries one, in the rail header's measure.
-      <SectionShell surface={resolveSurface(surface, 'white')} top="md" bottom="sm">
+      <SectionShell surface={resolveSurface(surface, 'railPanelsSection')} top="md" bottom="sm">
         <div className="flex flex-col gap-10 lg:gap-16">
           {header}
           <PanelRows
@@ -156,7 +156,7 @@ export function RailPanelsSection({
   }
 
   if (isGrid) {
-    const resolved = resolveSurface(surface, 'white')
+    const resolved = resolveSurface(surface, 'railPanelsSection')
     return (
       // `2358:2788` — 128px above and below, 48px between the heading and the
       // columns. The header is the heading alone on the frame; `intro` still
@@ -181,7 +181,7 @@ export function RailPanelsSection({
 
   if (isCards) {
     return (
-      <SectionShell surface={resolveSurface(surface, 'white')} top="md" bottom="md">
+      <SectionShell surface={resolveSurface(surface, 'railPanelsSection')} top="md" bottom="md">
         <div className="flex flex-col gap-10 lg:gap-[65px]">
           {header}
           <PanelCards
@@ -202,7 +202,7 @@ export function RailPanelsSection({
   }
 
   return (
-    <SectionShell surface={resolveSurface(surface, 'white')} top="md" bottom="lg">
+    <SectionShell surface={resolveSurface(surface, 'railPanelsSection')} top="md" bottom="lg">
       <div className="flex flex-col items-end gap-16 lg:gap-32">
         {header}
 

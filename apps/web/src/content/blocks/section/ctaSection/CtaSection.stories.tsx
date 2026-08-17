@@ -62,3 +62,13 @@ export const HeadingOnly: Story = {
 export const NoDecoration: Story = {
   args: { ...seededSectionArgs('about', 'ctaSection'), decoration: 'none' },
 }
+
+/**
+ * The molecule at 402, which is the one band that keeps it there. The other
+ * three hang a glyph measured in the frame's pixels and drop it below `lg`;
+ * this one is sized in the band's own terms, so it has an honest small form.
+ */
+export const MoleculeMobile: Story = {
+  args: seededSectionArgs('about', 'ctaSection'),
+  globals: { backgrounds: { value: 'ink' }, viewport: { value: 'mobile' } },
+}

@@ -65,11 +65,11 @@ export function InFlightSection({
 }: InFlightSectionProps) {
   const items = entries ?? []
   const asRows = stegaClean(layout) === 'rows'
-  const onInk = resolveSurface(surface, 'white') === 'ink'
+  const onInk = resolveSurface(surface, 'inFlightSection') === 'ink'
 
   if (asRows) {
     return (
-      <SectionShell surface={resolveSurface(surface, 'white')} top="md" bottom="md">
+      <SectionShell surface={resolveSurface(surface, 'inFlightSection')} top="md" bottom="md">
         <div className="flex flex-col gap-8 lg:gap-16">
           <Header heading={heading} subheading={subheading} loc={loc} />
           <ul className="flex flex-col">
@@ -90,7 +90,7 @@ export function InFlightSection({
     // at the design width rests at exactly three cards. At 402 the frame
     // stacks the cards instead (`1906:347`), so the row only overflows
     // from `lg`.
-    <SectionShell surface={resolveSurface(surface, 'white')} top="sm" bottom="sm">
+    <SectionShell surface={resolveSurface(surface, 'inFlightSection')} top="sm" bottom="sm">
       <div className="flex flex-col gap-8 lg:gap-12">
         <Header heading={heading} subheading={subheading} loc={loc} />
         {/*

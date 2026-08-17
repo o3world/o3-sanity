@@ -1,7 +1,9 @@
-import { DisplayHeading, MoleculeMark, OrbitalDiagram, SectionShell } from '@o3/ui'
+import { DisplayHeading, OrbitalDiagram, SectionShell } from '@o3/ui'
 import { stegaClean } from '@sanity/client/stega'
 
 import { Mark, markProps } from '@/content/blocks/base/mark/Mark'
+import { DECORATED_BAND_CLASS } from '@/content/blocks/decoration'
+import { MoleculeDecoration } from '@/content/blocks/MoleculeDecoration'
 import { resolveSurface } from '@/content/blocks/surface'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
 
@@ -67,9 +69,8 @@ export function FeatureGridSection({
   const items = features ?? []
   const chosen = stegaClean(layout)
   const orbital = chosen === 'orbital'
-  const resolved = resolveSurface(surface, 'white')
+  const resolved = resolveSurface(surface, 'featureGridSection')
   const onInk = resolved === 'ink'
-  const showMolecule = stegaClean(decoration) === 'molecule'
 
   /**
    * A feature sits under the band's own heading, so it is normally an `h3`.
@@ -199,18 +200,19 @@ export function FeatureGridSection({
       top="md"
       bottom="md"
       width={orbital ? 'full' : 'section'}
-      className="relative isolate overflow-hidden"
+      className={DECORATED_BAND_CLASS}
     >
       {/*
        * `2354:2551` — 1219px at 25%, hung off the right edge of the ink band
        * and running past its foot. 84.6% of the 1440 frame, anchored right so
        * the copy keeps the left of the band whatever the viewport does.
        */}
-      {showMolecule ? (
-        <MoleculeMark
-          className={`pointer-events-none absolute right-[-24%] top-1/4 -z-10 hidden w-[85vw] opacity-25 lg:block ${markTone}`}
-        />
-      ) : null}
+      <MoleculeDecoration
+        decoration={decoration}
+        block="featureGridSection"
+        surface={resolved}
+        className="right-[-24%] top-1/4 w-[85vw] opacity-25"
+      />
 
       <div className="flex flex-col gap-10 lg:gap-16">
         {heading ? <DisplayHeading>{heading}</DisplayHeading> : null}

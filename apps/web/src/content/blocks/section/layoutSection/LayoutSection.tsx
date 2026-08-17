@@ -1,9 +1,11 @@
 import type { ComponentType } from 'react'
 
-import { DisplayHeading, Eyebrow, MoleculeMark, SectionShell } from '@o3/ui'
+import { DisplayHeading, Eyebrow, SectionShell } from '@o3/ui'
 import { stegaClean } from '@sanity/client/stega'
 
 import { BASE_BLOCK_COMPONENTS } from '../../base/baseComponents'
+import { DECORATED_BAND_CLASS, resolveDecoration } from '@/content/blocks/decoration'
+import { MoleculeDecoration } from '@/content/blocks/MoleculeDecoration'
 import { resolveSurface } from '@/content/blocks/surface'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
 
@@ -35,29 +37,31 @@ export function LayoutSection({
   surface,
 }: LayoutSectionProps) {
   const columnClass = COLUMN_CLASSES[resolveColumns(columns)]
-  const resolved = resolveSurface(surface, 'white')
-  const showMolecule = stegaClean(decoration) === 'molecule'
+  const resolved = resolveSurface(surface, 'layoutSection')
+  const showMolecule = resolveDecoration(decoration, 'layoutSection') === 'molecule'
   return (
     <SectionShell
       surface={resolved}
       top="md"
       bottom="md"
-      className={showMolecule ? 'relative isolate overflow-hidden' : undefined}
+      // Only when decorated. A layout column holds arbitrary base blocks, and
+      // an unconditional clip cuts the edge off any that overruns the band —
+      // `/1682-conference-ai-innovation`'s CTA button is 13px wider than a
+      // 390px viewport (#181) and loses the end of its label.
+      className={showMolecule ? DECORATED_BAND_CLASS : undefined}
     >
       {/*
        * `2357:2690` — the Solutions proof-point band hangs the molecule at
        * 1300px and 25%, running off the band's right edge and past its foot,
        * the same treatment `featureGridSection` gives "Why Sanity + O3"
-       * (`2354:2551`). White on ink, ink on the light surfaces — the glyph
-       * takes the band's own text colour either way.
+       * (`2354:2551`).
        */}
-      {showMolecule ? (
-        <MoleculeMark
-          className={`pointer-events-none absolute right-[-28%] top-0 -z-10 hidden w-[90vw] opacity-25 lg:block ${
-            resolved === 'ink' ? 'text-white' : 'text-ink'
-          }`}
-        />
-      ) : null}
+      <MoleculeDecoration
+        decoration={decoration}
+        block="layoutSection"
+        surface={resolved}
+        className="right-[-28%] top-0 w-[90vw] opacity-25"
+      />
       <div className="flex flex-col gap-12">
         {/*
          * The three-part band header the interior frames use everywhere

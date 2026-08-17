@@ -20,9 +20,9 @@ import { CANVAS_CHROME_ATTR, type KnobMenuAction, type KnobMenuModel } from './m
  *     │   Composition            │
  *     │     ✓ Orbital   default  │
  *     │       Band               │
- *     │   Decoration             │  ← reachable from nowhere before this
+ *     │   Decoration             │  ← declares no `bar`: the menu is its only home
  *     ├──────────────────────────┤
- *     │ Duplicate                │  what the stock menu carried, back (#111)
+ *     │ Duplicate                │  the array actions, off the subject's own path
  *     │ Remove                   │
  *     │ MOVE                     │
  *     │   To top                 │  a row exists only when it moves something

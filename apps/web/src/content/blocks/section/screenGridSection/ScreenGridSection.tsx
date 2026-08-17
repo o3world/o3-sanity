@@ -76,9 +76,11 @@ function spanOf(value: string | null | undefined): Span {
 export function ScreenGridSection({ screens, surface, loc }: ScreenGridSectionProps) {
   if (!screens?.length) return null
 
+  const resolved = resolveSurface(surface, 'screenGridSection')
+
   return (
-    <SurfaceProvider surface={resolveSurface(surface, 'white')}>
-      <section className={`${SURFACE_CLASS[resolveSurface(surface, 'white')]} px-gutter py-8`}>
+    <SurfaceProvider surface={resolved}>
+      <section className={`${SURFACE_CLASS[resolved]} px-gutter py-8`}>
         <ul className="mx-auto grid w-full gap-8 lg:grid-cols-2">
           {screens.map((screen) => {
             const span = spanOf(screen.span)

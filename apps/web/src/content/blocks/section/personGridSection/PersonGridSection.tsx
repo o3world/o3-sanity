@@ -47,7 +47,7 @@ export function PersonGridSection({
   const members = (people ?? []).filter((person) => person._id)
 
   return (
-    <SectionShell surface={resolveSurface(surface, 'white')} top="md" bottom="md">
+    <SectionShell surface={resolveSurface(surface, 'personGridSection')} top="md" bottom="md">
       <div className="flex flex-col gap-10 lg:gap-12">
         {eyebrow || heading ? (
           <header data-sanity={fieldAttr(loc, 'heading')} className="flex flex-col gap-2">

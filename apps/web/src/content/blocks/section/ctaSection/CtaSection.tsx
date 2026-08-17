@@ -1,6 +1,7 @@
-import { MoleculeMark, OrbitalSphere, SurfaceProvider } from '@o3/ui'
-import { stegaClean } from '@sanity/client/stega'
+import { OrbitalSphere, SurfaceProvider } from '@o3/ui'
 
+import { DECORATED_BAND_CLASS, resolveDecoration } from '@/content/blocks/decoration'
+import { MoleculeDecoration } from '@/content/blocks/MoleculeDecoration'
 import { ButtonLink } from '@/content/ButtonLink'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
 
@@ -38,18 +39,17 @@ type CtaSectionProps = SectionProps<'ctaSection'>
  * component.
  */
 export function CtaSection({ heading, body, button, decoration }: CtaSectionProps) {
-  const chosen = stegaClean(decoration)
-  // Unset draws the molecule, the same value `decorationKnob` starts a newly
-  // inserted band on.
-  const showOrbs = chosen === 'orbs'
-  const showMolecule = !showOrbs && chosen !== 'none'
+  // The sphere and the molecule are alternatives: the band draws one or neither.
+  // Unset resolves to this block's declared `initialValue`, which is the
+  // molecule — so the renderer and the knob cannot disagree.
+  const showOrbs = resolveDecoration(decoration, 'ctaSection') === 'orbs'
 
   return (
     // The band always paints its own ink field, so it declares one: `ink-deep`
     // is the darker end of the same surface, and the button on it resolves the
     // way it would on any ink band.
     <SurfaceProvider surface="ink">
-      <section className="bg-ink-deep px-gutter relative isolate overflow-hidden text-white">
+      <section className={`bg-ink-deep px-gutter text-white ${DECORATED_BAND_CLASS}`}>
         {/*
          * **The globe's bottom, at the hero's scale.** `95.5vw` is the hero's
          * own width, so the two spheres read as the same object seen twice; the
@@ -105,13 +105,21 @@ export function CtaSection({ heading, body, button, decoration }: CtaSectionProp
          * percentage translate resolves against — so it holds at every width
          * the square keeps its proportion at.
          *
-         * White rather than `currentColor`'s inherited ink: the band is
-         * `ink-deep` and the frame draws the glyph in the light, which is the
-         * inverse of the quote band's use of the same mark on bone.
+         * White rather than `currentColor`'s inherited ink: the band declares
+         * the `ink` surface, and the glyph inverts on ink — the opposite of
+         * the quote band's use of the same mark on bone.
+         *
+         * `visibleFrom="base"` because this glyph is sized in the band's own
+         * terms (54% of it, with a floor) rather than in the frame's pixels,
+         * so it has an honest 402 form where the other three bands' do not.
          */}
-        {showMolecule ? (
-          <MoleculeMark className="absolute left-1/2 top-0 -z-0 w-[54%] min-w-[420px] -translate-x-1/2 -translate-y-[8.24%] text-white opacity-15" />
-        ) : null}
+        <MoleculeDecoration
+          decoration={decoration}
+          block="ctaSection"
+          surface="ink"
+          visibleFrom="base"
+          className="left-1/2 top-0 w-[54%] min-w-[420px] -translate-x-1/2 -translate-y-[8.24%] opacity-15"
+        />
 
         <div className="py-band-lg relative z-10 mx-auto flex max-w-[600px] flex-col items-center gap-[18px] text-center">
           {heading ? (

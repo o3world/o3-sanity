@@ -80,7 +80,7 @@ export function LogoWallSection({
   button,
   surface,
 }: LogoWallSectionProps) {
-  const resolved = resolveSurface(surface, 'bone')
+  const resolved = resolveSurface(surface, 'logoWallSection')
   const isBar = stegaClean(layout) === 'bar'
 
   return (
