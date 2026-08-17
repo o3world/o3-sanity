@@ -85,7 +85,7 @@ nothing; stages 2 to 5 are where they come in.
 
 ## Testing a skill
 
-The test surface is [`evals/`](./evals) — sixteen cases in `claude plugin eval`
+The test surface is [`evals/`](./evals) — cases in `claude plugin eval`
 format, graded mechanically, run today by the `o3-eval-runner` agent and by the
 CLI once the early-access flag lands. A case is a prompt, a scripted persona,
 and the graders that say what right looks like. **A skill change is checked by

@@ -110,6 +110,14 @@ export const BRIEF_STAGES = ['gather', 'brief', 'draft', 'review', 'typeset', 'h
 export type BriefStage = (typeof BRIEF_STAGES)[number]
 
 /**
+ * A verdict's two outcomes, shared by `verdict.result` and each gate's own
+ * result. No initial value anywhere it is used: a default here would be a
+ * verdict nobody ran.
+ */
+export const VERDICT_RESULTS = ['pass', 'fail'] as const
+export type VerdictResult = (typeof VERDICT_RESULTS)[number]
+
+/**
  * What a `mark` can draw: the animated orb, or the halftone disc the canonical
  * frames draw. First value is the default, so a mark left alone animates.
  */

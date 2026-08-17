@@ -144,11 +144,11 @@ in your report. The shape is the CLI's, so a case's history survives the switch:
   },
   "cases": [
     {
-      "name": "guidance-fetch",
+      "name": "references-read",
       "arms": {
         "with": [
           {
-            "runDir": "results/…/guidance-fetch/with-1",
+            "runDir": "results/…/references-read/with-1",
             "graders": [{ "name": "verdict-line", "type": "regex", "passed": true, "score": 1 }]
           }
         ]

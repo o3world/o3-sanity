@@ -1,6 +1,6 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
-import { BRIEF_STAGES } from '../../constants'
+import { BRIEF_STAGES, VERDICT_RESULTS } from '../../constants'
 
 import type { ConditionalPropertyCallback } from 'sanity'
 
@@ -92,7 +92,6 @@ export const brief = defineType({
       name: 'stage',
       type: 'string',
       options: { list: [...BRIEF_STAGES] },
-      initialValue: 'gather',
       readOnly: true,
       description:
         'The last pipeline stage that finished. Where a resuming session picks the piece up, and the only field that says how far it has got.',
@@ -162,7 +161,7 @@ export const brief = defineType({
         defineField({
           name: 'result',
           type: 'string',
-          options: { list: ['pass', 'fail'] },
+          options: { list: [...VERDICT_RESULTS] },
           description: 'Whether the draft may go on to typesetting.',
         }),
         defineField({
@@ -178,7 +177,7 @@ export const brief = defineType({
                 defineField({
                   name: 'result',
                   type: 'string',
-                  options: { list: ['pass', 'fail'] },
+                  options: { list: [...VERDICT_RESULTS] },
                 }),
                 defineField({
                   name: 'note',
