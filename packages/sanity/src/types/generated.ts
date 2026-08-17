@@ -42,7 +42,30 @@ export type Brief = {
   links?: Array<string>
   key?: string
   sourcePath?: string
-  record?: string
+  stage?: 'gather' | 'brief' | 'draft' | 'review' | 'typeset' | 'handed-off'
+  nextStep?: string
+  thesis?: string
+  readerQuestions?: Array<string>
+  outline?: string
+  draft?: {
+    title?: string
+    excerpt?: string
+    body?: string
+  }
+  verdict?: {
+    result?: 'pass' | 'fail'
+    gates?: Array<{
+      label?: string
+      result?: 'pass' | 'fail'
+      note?: string
+      _type: 'gate'
+      _key: string
+    }>
+    readerAnswer?: string
+  }
+  decisions?: Array<string>
+  gaps?: Array<string>
+  pieceId?: string
 }
 
 export type Guidance = {

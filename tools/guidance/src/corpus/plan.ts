@@ -19,9 +19,9 @@ export type CorpusSource = {
 /**
  * How a source commits. `replace` writes the whole document, which is right
  * when the repo owns every field of it. `merge` creates the document and then
- * sets only the fields the source owns, so a field the dataset writes —
- * `brief.record`, where the authoring skill persists its interview — survives
- * a sync instead of being wiped by it (ADR 0027).
+ * sets only the fields the source owns, so a field the dataset writes — a
+ * brief's `stage`, `thesis`, `draft` and the rest of what an authoring run
+ * patches — survives a sync instead of being wiped by it (ADR 0027).
  */
 export type WriteMode = 'replace' | 'merge'
 

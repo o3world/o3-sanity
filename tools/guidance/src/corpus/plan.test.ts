@@ -97,7 +97,7 @@ describe('planCorpus', () => {
           title: 'The Figma sync pipeline',
           background: 'Something the repo no longer says.',
           sourcePath: 'tools/guidance/briefs/figma-sync.md',
-          record: 'Thesis: the file is checkable.',
+          thesis: 'The file is checkable.',
         },
       ],
     )

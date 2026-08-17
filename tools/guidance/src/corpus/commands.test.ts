@@ -59,9 +59,9 @@ const DRIFTED: CorpusSnapshotDocument[] = [
 ]
 
 /**
- * The brief corpus: markdown lands in `background`, the dataset owns `record`,
- * and a document with no `sourcePath` was born there rather than left behind
- * (ADR 0027).
+ * The brief corpus: markdown lands in `background`, the dataset owns every
+ * field the pipeline writes, and a document with no `sourcePath` was born
+ * there rather than left behind (ADR 0027).
  */
 const BRIEFS: Corpus = {
   type: 'brief',
@@ -164,10 +164,11 @@ describe('syncCorpus', () => {
   })
 
   /**
-   * A merge corpus writes around the fields the dataset owns. `record` is
-   * written by the authoring skill and by nothing in the repo, so a
-   * whole-document replace would delete an interview on every sync — the one
-   * failure that would make briefing a piece unsafe to repeat.
+   * A merge corpus writes around the fields the dataset owns. `thesis` and
+   * every other pipeline field are written by the authoring skills and by
+   * nothing in the repo, so a whole-document replace would delete a run's work
+   * on every sync — the one failure that would make briefing a piece unsafe to
+   * repeat.
    */
   it('leaves a dataset-owned field alone when the corpus merges', () => {
     const { out } = sink()
@@ -181,7 +182,7 @@ describe('syncCorpus', () => {
           title: 'The Figma sync pipeline',
           background: 'Something the repo no longer says.',
           sourcePath: 'tools/guidance/briefs/figma-sync.md',
-          record: 'Thesis: noticing no longer belongs to anyone.',
+          thesis: 'Noticing no longer belongs to anyone.',
         },
       ],
       out,
@@ -229,7 +230,7 @@ describe('syncCorpus', () => {
           title: 'The Figma sync pipeline',
           background: 'What the watcher does and what it refuses to do.',
           sourcePath: 'tools/guidance/briefs/figma-sync.md',
-          record: 'Thesis: noticing no longer belongs to anyone.',
+          thesis: 'Noticing no longer belongs to anyone.',
         },
       ],
       out,
@@ -386,7 +387,7 @@ describe('checkCorpus', () => {
       title: 'The Figma sync pipeline',
       background: 'What the watcher does and what it refuses to do.',
       sourcePath: 'tools/guidance/briefs/figma-sync.md',
-      record: 'Thesis: noticing no longer belongs to anyone.',
+      thesis: 'Noticing no longer belongs to anyone.',
     }
 
     expect(checkCorpus(BRIEFS, [settled, DATASET_BORN], out)).toBe(0)
@@ -533,8 +534,8 @@ describe('exportCorpus', () => {
    * The authoring skill writes a brief as a draft and never publishes it, so
    * most candidates arrive draft-only. Stamping the draft and leaving the rest
    * to sync would create the published copy from the file — and the file
-   * carries only `background`, so the `record` the interview produced would be
-   * deleted with the draft. Export publishes the draft whole instead.
+   * carries only `background`, so what the run produced would be deleted with
+   * the draft. Export publishes the draft whole instead.
    */
   it('publishes a draft-only document whole, rather than stamping the draft', () => {
     const { out } = sink()
@@ -547,7 +548,7 @@ describe('exportCorpus', () => {
         key: 'sanity-partner',
         title: 'The Sanity partnership page',
         background: 'Gathered in the session that drafted it.',
-        record: 'Thesis: the partnership is a delivery claim.',
+        thesis: 'The partnership is a delivery claim.',
       },
     ])
 
@@ -562,7 +563,7 @@ describe('exportCorpus', () => {
           key: 'sanity-partner',
           title: 'The Sanity partnership page',
           background: 'Gathered in the session that drafted it.',
-          record: 'Thesis: the partnership is a delivery claim.',
+          thesis: 'The partnership is a delivery claim.',
           sourcePath: 'tools/guidance/briefs/sanity-partner.md',
         },
       },
@@ -600,7 +601,7 @@ describe('exportCorpus', () => {
    * The same document with its markdown deleted — or left behind by an export
    * whose transaction failed. Calling a file that is not there the source of
    * truth sends the operator to look at nothing, while what is about to happen
-   * is sync retiring the document and the `record` on it.
+   * is sync retiring the document and the run state on it.
    */
   it('says a claimed file is missing rather than calling it the source of truth', () => {
     const { out, errored } = sink()
@@ -693,7 +694,7 @@ describe('exportCorpus', () => {
   /**
    * A brief published once and edited in Studio since: the fold hands export
    * the published copy, and the file it would write is a version behind. The
-   * next sync deletes the draft — the newer `record` with it — so export stops
+   * next sync deletes the draft — the newer run state with it — so export stops
    * here rather than picking one of the two copies for the operator.
    */
   it('refuses a document an unpublished draft still stands beside', () => {
@@ -731,7 +732,7 @@ describe('exportCorpus', () => {
    * The id is what the operator names and the key is what the file and the
    * frontmatter carry. An API writer can leave the two disagreeing, and export
    * would then file `bar.md` while stamping `brief-foo`: the next sync creates
-   * `brief-bar` from the file — without the `record` — and retires the
+   * `brief-bar` from the file — without the run state — and retires the
    * orphaned `brief-foo`. Nothing here can pick which one the operator meant.
    */
   it('refuses a document whose key is not the key its id spells', () => {
@@ -784,9 +785,10 @@ describe('exportCorpus', () => {
   })
 
   /**
-   * A brief is wider than its file: `instructions`, `links` and `record` have
-   * no slot in the markdown and stay on the document, where a merge sync writes
-   * around them. Losing them from the file is fine; not knowing is not.
+   * A brief is wider than its file: `instructions`, `links` and everything the
+   * pipeline writes have no slot in the markdown and stay on the document,
+   * where a merge sync writes around them. Losing them from the file is fine;
+   * not knowing is not.
    */
   it('names the fields the file does not carry', () => {
     const { out, logged } = sink()
@@ -798,14 +800,15 @@ describe('exportCorpus', () => {
           ...DATASET_BORN,
           instructions: 'Lead with the delivery claim.',
           links: ['https://o3world.com'],
-          record: 'Thesis: the partnership is a delivery claim.',
+          stage: 'draft',
+          thesis: 'The partnership is a delivery claim.',
         },
       ],
       { ...REQUEST, key: 'sanity-partner' },
       out,
     )
 
-    expect(logged()).toContain('instructions, links, record')
+    expect(logged()).toContain('instructions, links, stage, thesis')
   })
 })
 
@@ -852,14 +855,14 @@ describe('export → sync', () => {
     return { ...BRIEFS, sources: readGlobbedSources(root, 'briefs') }
   }
 
-  /** The authoring skill's output: a draft nobody published, with its interview in `record`. */
+  /** The authoring skill's output: a draft nobody published, carrying a run's `thesis`. */
   const AUTHORED = normalizeSnapshot([
     {
       _id: 'drafts.brief-sanity-partner',
       key: 'sanity-partner',
       title: 'The Sanity partnership page',
       background: 'Gathered in the session that drafted it.\n',
-      record: 'Thesis: the partnership is a delivery claim.',
+      thesis: 'The partnership is a delivery claim.',
     },
   ])
 
@@ -881,7 +884,7 @@ describe('export → sync', () => {
     ])
   })
 
-  it('keeps the interview on the document the export published', () => {
+  it('keeps the run state on the document the export published', () => {
     const { out } = sink()
 
     const exported = exportCorpus(
@@ -898,7 +901,7 @@ describe('export → sync', () => {
         key: 'sanity-partner',
         title: 'The Sanity partnership page',
         background: 'Gathered in the session that drafted it.',
-        record: 'Thesis: the partnership is a delivery claim.',
+        thesis: 'The partnership is a delivery claim.',
         sourcePath: 'briefs/sanity-partner.md',
       },
     ])
