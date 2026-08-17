@@ -69,6 +69,12 @@ from the document is a fail.** The question was agreed before drafting because
 the piece exists to answer it, and an absence is the one defect no
 sentence-level check can see.
 
+**Answered means answered in the kind the question asked for.** A question
+asking which defects a checker decides wants the defects named; an abstraction
+the reader assembled for itself — "a property of a single element" — is the
+reader doing the piece's work. Where the reader can only gesture, the piece only
+gestured, and that is a fail rather than a thin pass.
+
 Report the reader's sentence and the agreed one side by side. Where there is no
 agreed thesis — an existing piece with no brief — the reader states what the
 document argues and **the human confirms whether that is the intended one**. A

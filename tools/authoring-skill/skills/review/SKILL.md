@@ -115,6 +115,11 @@ P0.
 session through 500 words looking for it; "the 57% WebAIM figure is in no source
 this brief holds" is a one-line fix.
 
+**The draft is not edited on a P0 halt.** An invented fact is the human's to
+source or cut, and deleting it yourself removes the evidence for your own
+verdict — the next session reads a clean draft and a failing grade and cannot
+see what happened.
+
 ## 1. `structure`
 
 The shuffle test from `argument.md`, **at both levels**.
@@ -204,6 +209,9 @@ freely does more damage than the defects it finds.
   facts alone. Every name, number, date, quotation and citation that went in
   comes out unchanged; **a pass that adds one is as wrong as a pass that drops
   one**. Where the facts differ, the revision is the error — restore it.
+  Conservation is about drift, not about every cut: removing a claim you have
+  found to be unsourced is a decision, and it goes on `decisions` naming what
+  went and why.
 - **Cap the deletion.** Light editing takes at most 15% of the body's words,
   medium 25%, heavy 35%. Never delete a whole paragraph: a paragraph that should
   go is a structural finding for the human, not an edit.
@@ -248,9 +256,12 @@ alike. **It reports before it writes.**
    human to state them again. Where there is no brief there is nothing to
    interview against, and none is written here: this mode reports and patches.
 
-3. **Run the gates**, reader test included and last, exactly as above. Where
-   there is no agreed thesis, the reader states what the document argues and the
-   human confirms whether that is the intended one.
+3. **Run the gates on the document as it stands.** Here the reader test runs
+   **before** the findings table, not after it: this mode changes nothing until
+   the human approves a row, so the text is already settled and the published
+   document is what a reader actually meets. Where there is no agreed thesis, the
+   reader states what the document argues and the human confirms whether that is
+   the intended one.
 
 4. **Report the findings as a table, before proposing any write:**
 
@@ -263,9 +274,11 @@ alike. **It reports before it writes.**
    - **`error`** — wrong. A fact, a broken reference, or something the style
      floor names outright.
    - **`craft`** — weaker than it should be.
-   - **`advisory`** — structural. "This prose wants to be a `pullQuote`" is
-     advice about the shape of the piece; cite `composition.md` rather than
-     restating it. **An advisory never lands in a patch.**
+   - **`advisory`** — structural. "This prose wants to be a `pullQuote`", or a
+     paragraph that should go: advice about the shape of the piece rather than
+     its words. Cite `composition.md` rather than restating it. **An advisory
+     never lands in a patch**, including under a blanket approval — a human who
+     says "apply it" to a table has approved edits, not a restructuring.
 
 5. **Take row-level approval, then send one `patch_documents` call** with
    `ifRevisionId` set to the revision you read. **Rejected rows are dropped from
