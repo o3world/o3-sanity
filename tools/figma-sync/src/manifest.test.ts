@@ -99,13 +99,16 @@ describe('tracked-nodes.json', () => {
  */
 describe('tracked component sets', () => {
   it('carries the whole component→code map, canonical and not', () => {
-    // docs/figma-components.md: 11 canonical rows and 13 non-canonical ones —
-    // 26 nodes, because `Case study cards` is three competing sets.
+    // docs/figma-components.md: 14 canonical rows and 13 non-canonical ones —
+    // 29 nodes, because `Case study cards` is three competing sets.
     // (`Cover status` 134:343 was deleted from the file, and `Utility Nav`
     // 2250:1445 arrived with the 2026-08 nav rebuild — both seen 2026-08-13.
     // The eleventh canonical row is the redesign's `Icon` set 2177:1556, whose
-    // curated three fill the button's icon slot — tracked with #151.)
-    expect(componentSets.length).toBe(26)
+    // curated three fill the button's icon slot — tracked with #151. The last
+    // three are the band-level sets `CTA`, `Interior Hero` and `Blog`, which a
+    // page frame instances WHOLE — so nothing in a frame diff pointed at them
+    // and the CTA band sat a generation behind unreported until #163.)
+    expect(componentSets.length).toBe(29)
   })
 
   it('states a code target for every set, `null` included', () => {
