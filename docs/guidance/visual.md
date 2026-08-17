@@ -96,7 +96,7 @@ Say all of these, every time:
 
 Abstract, textural, and architectural subjects sit inside this palette without
 argument. Literal illustrations of a concept — a robot for AI, a padlock for
-security, a lightbulb for an idea — are the stock-photo register `o3-voice`
+security, a lightbulb for an idea — are the stock-photo register the voice skill
 rejects in words, and they read the same way in pictures.
 
 ## Checking the result before you attach it

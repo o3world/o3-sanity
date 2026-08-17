@@ -2,11 +2,29 @@
 
 The authoring capability from map #63: a vague idea becomes a
 publishable-quality Sanity draft — an insight (blog post), case study, or
-page — in the O3 voice. The skill is a thin bootstrap; voice, schema
-guidance, and exemplars are fetched live from Sanity, so knowledge updates
-propagate with a git push and never require repackaging.
+page — in the O3 voice.
 
 One skill source (`skills/authoring/SKILL.md`), two distributions.
+
+## What the plugin carries (`references/`)
+
+The structural knowledge the pipeline cannot run without ships as files at the
+plugin root, reachable from a skill as `${CLAUDE_PLUGIN_ROOT}/references/<file>`:
+
+| File                        | What it governs                                                       |
+| --------------------------- | --------------------------------------------------------------------- |
+| `references/argument.md`    | how one long argument holds up — claim, warrant, arc, turn, ending    |
+| `references/composition.md` | which band follows which on a page, and which block carries which job |
+| `references/style.md`       | the style floor: plain sentences, sourced claims, fact conservation   |
+
+These replace the session-start dataset fetch the skill used to do (#192). The
+style floor is a floor and not a voice: persona, brand vocabulary, and the
+slop-pattern list stay in the repo's `o3world-copy` skill and re-enter here only
+as the eval loop produces an observed failure that asks for them.
+
+**`skills/authoring/SKILL.md` is mid-replacement.** It still instructs the
+retired dataset fetch, and #193 replaces the whole skill layout; read it as
+history rather than as the contract.
 
 The plugin's test surface is [`evals/`](./evals) — cases in `claude plugin
 eval` format, graded mechanically, run today by the `o3-eval-runner` agent and

@@ -217,9 +217,9 @@ async function main() {
   // 8. Anything the pipeline did not put there. Not a failure on its own — an
   //    editor may have created it — but during build-out it is usually
   //    leftover scaffolding, and a routable one shadows a seed.
-  //    `guidance` and `brief` documents are owned by a different tool on
-  //    purpose (`INTERNAL_TYPES`), so they are not orphans — this pipeline is
-  //    deleted post-migration and they are not.
+  //    `brief` documents are owned by a different tool on purpose, and
+  //    `guidance` documents are a retired type production still holds
+  //    (`INTERNAL_TYPES`), so neither counts as an orphan.
   const orphans = live
     .filter((doc) => !isInternalType(doc._type))
     .filter((doc) => !expectedIds.has(doc._id))

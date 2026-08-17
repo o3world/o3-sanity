@@ -15,7 +15,8 @@ type BlockOptions = {
    * What the block is for, written for an author who cannot see the rendered
    * site (ADR 0025): the message it carries, when to reach for it, and the one
    * constraint the fields don't show. One block only — anything naming another
-   * block belongs in the `o3-composition` guidance document. Surfaced to every
+   * block belongs in the composition catalog
+   * (`tools/authoring-skill/references/composition.md`). Surfaced to every
    * MCP consumer via `get_schema`, and to editors under the block in Studio.
    */
   description: string

@@ -22,7 +22,7 @@ Two scenarios, and between them they exercise every move the pipeline makes:
 
 The `o3-authoring-scenario` agent (`.claude/agents/o3-authoring-scenario.md`)
 takes one scenario, runs the skill against it exactly as written, and returns a
-structured transcript — which guidance it read, every question and the answer
+structured transcript — which references it read, every question and the answer
 it took, the outline and the confirmation that released it, each gate and its
 result, and every point where the skill's text did not steer it. The transcript
 is the product; the draft is a by-product.

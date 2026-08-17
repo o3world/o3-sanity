@@ -42,14 +42,17 @@ export function slugsByType(): Record<string, string[]> {
 }
 
 /**
- * The document types a different tool owns — `guidance` (#72,
- * [ADR 0024](../../../../docs/adr/0024-authoring-knowledge-has-one-source-and-one-fan-out.md))
- * and `brief` ([ADR 0027](../../../../docs/adr/0027-the-brief-is-a-document.md)).
+ * The document types this pipeline does not own. `brief` is synced from repo
+ * markdown by `tools/guidance`
+ * ([ADR 0027](../../../../docs/adr/0027-the-brief-is-a-document.md)) and
+ * outlives this pipeline, which is deleted post-migration. So a brief is never
+ * committed under `data/`, `load` never writes or retires one, and `verify`
+ * does not count one an orphan.
  *
- * Both are synced from repo markdown by `tools/guidance`, and both outlive
- * this pipeline, which is deleted post-migration. So they are never committed
- * under `data/`, `load` never writes or retires one, and `verify` does not
- * count one an orphan.
+ * `guidance` is a retired type with no schema and no writer (#192), named here
+ * because the `production` dataset still holds six of its documents: without
+ * the name, `verify` reports them as orphans and exits non-zero over documents
+ * nothing is going to rewrite.
  */
 const INTERNAL_TYPES: readonly string[] = ['guidance', 'brief']
 

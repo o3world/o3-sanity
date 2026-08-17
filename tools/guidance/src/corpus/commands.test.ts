@@ -13,49 +13,49 @@ import type { CorpusWrite } from './commands'
 import type { Corpus, CorpusSnapshotDocument } from './plan'
 
 const CORPUS: Corpus = {
-  type: 'guidance',
+  type: 'reference',
   bodyField: 'body',
   writes: 'replace',
   claimsOrphans: 'every',
   sources: [
     {
-      key: 'o3-voice',
-      title: 'O3 voice guide',
+      key: 'argument',
+      title: 'The argument reference',
       body: 'Say the specific thing.',
-      sourcePath: 'docs/guidance/voice.md',
+      sourcePath: 'references/argument.md',
     },
     {
-      key: 'o3-slop',
-      title: 'O3 slop patterns',
+      key: 'style',
+      title: 'The style reference',
       body: 'No em dash pile-ups.',
-      sourcePath: 'docs/guidance/slop.md',
+      sourcePath: 'references/style.md',
     },
   ],
 }
 
-const VOICE: CorpusSnapshotDocument = {
-  _id: 'guidance-o3-voice',
-  key: 'o3-voice',
-  title: 'O3 voice guide',
+const ARGUMENT: CorpusSnapshotDocument = {
+  _id: 'reference-argument',
+  key: 'argument',
+  title: 'The argument reference',
   body: 'Say the specific thing.',
-  sourcePath: 'docs/guidance/voice.md',
+  sourcePath: 'references/argument.md',
 }
 
-const SLOP: CorpusSnapshotDocument = {
-  _id: 'guidance-o3-slop',
-  key: 'o3-slop',
-  title: 'O3 slop patterns',
+const STYLE: CorpusSnapshotDocument = {
+  _id: 'reference-style',
+  key: 'style',
+  title: 'The style reference',
   body: 'No em dash pile-ups.',
-  sourcePath: 'docs/guidance/slop.md',
+  sourcePath: 'references/style.md',
 }
 
 /** The dataset agreeing with the corpus above, which is what most tests perturb. */
-const IN_STEP: CorpusSnapshotDocument[] = [VOICE, SLOP]
+const IN_STEP: CorpusSnapshotDocument[] = [ARGUMENT, STYLE]
 
 /** The drifted fixture: the dataset still holds a sentence the repo no longer says. */
 const DRIFTED: CorpusSnapshotDocument[] = [
-  { ...VOICE, body: 'Something the repo no longer says.' },
-  SLOP,
+  { ...ARGUMENT, body: 'Something the repo no longer says.' },
+  STYLE,
 ]
 
 /**
@@ -107,23 +107,23 @@ describe('syncCorpus', () => {
       {
         op: 'createOrReplace',
         document: {
-          _id: 'guidance-o3-voice',
-          _type: 'guidance',
-          key: 'o3-voice',
-          title: 'O3 voice guide',
+          _id: 'reference-argument',
+          _type: 'reference',
+          key: 'argument',
+          title: 'The argument reference',
           body: 'Say the specific thing.',
-          sourcePath: 'docs/guidance/voice.md',
+          sourcePath: 'references/argument.md',
         },
       },
       {
         op: 'createOrReplace',
         document: {
-          _id: 'guidance-o3-slop',
-          _type: 'guidance',
-          key: 'o3-slop',
-          title: 'O3 slop patterns',
+          _id: 'reference-style',
+          _type: 'reference',
+          key: 'style',
+          title: 'The style reference',
           body: 'No em dash pile-ups.',
-          sourcePath: 'docs/guidance/slop.md',
+          sourcePath: 'references/style.md',
         },
       },
     ])
@@ -135,8 +135,8 @@ describe('syncCorpus', () => {
     const { writes } = syncCorpus(CORPUS, IN_STEP, out)
 
     expect(writes.filter((write) => write.op === 'delete')).toEqual([
-      { op: 'delete', _id: 'drafts.guidance-o3-voice' },
-      { op: 'delete', _id: 'drafts.guidance-o3-slop' },
+      { op: 'delete', _id: 'drafts.reference-argument' },
+      { op: 'delete', _id: 'drafts.reference-style' },
     ])
   })
 
@@ -145,13 +145,13 @@ describe('syncCorpus', () => {
 
     const { writes } = syncCorpus(
       CORPUS,
-      [...IN_STEP, { _id: 'guidance-o3-retired', key: 'gone' }],
+      [...IN_STEP, { _id: 'reference-retired', key: 'gone' }],
       out,
     )
 
-    expect(writes).toContainEqual({ op: 'delete', _id: 'guidance-o3-retired' })
-    expect(writes).toContainEqual({ op: 'delete', _id: 'drafts.guidance-o3-retired' })
-    expect(logged()).toContain('guidance-o3-retired')
+    expect(writes).toContainEqual({ op: 'delete', _id: 'reference-retired' })
+    expect(writes).toContainEqual({ op: 'delete', _id: 'drafts.reference-retired' })
+    expect(logged()).toContain('reference-retired')
   })
 
   it('names each document and the state it is in', () => {
@@ -357,23 +357,23 @@ describe('checkCorpus', () => {
     const code = checkCorpus(CORPUS, DRIFTED, out)
 
     expect(code).toBe(1)
-    expect(errored()).toContain('guidance-o3-voice drifted from docs/guidance/voice.md: body')
+    expect(errored()).toContain('reference-argument drifted from references/argument.md: body')
   })
 
   it('fails when a document is missing from the dataset', () => {
     const { out, errored } = sink()
 
-    expect(checkCorpus(CORPUS, [VOICE], out)).toBe(1)
-    expect(errored()).toContain('guidance-o3-slop is missing from the dataset')
+    expect(checkCorpus(CORPUS, [ARGUMENT], out)).toBe(1)
+    expect(errored()).toContain('reference-style is missing from the dataset')
   })
 
   it('fails when the dataset holds a document no source claims', () => {
     const { out, errored } = sink()
 
-    const code = checkCorpus(CORPUS, [...IN_STEP, { _id: 'guidance-o3-retired' }], out)
+    const code = checkCorpus(CORPUS, [...IN_STEP, { _id: 'reference-retired' }], out)
 
     expect(code).toBe(1)
-    expect(errored()).toContain('guidance-o3-retired has no source in the corpus')
+    expect(errored()).toContain('reference-retired has no source in the corpus')
   })
 
   // `brief:check` audits file-backed briefs only; its silence about a

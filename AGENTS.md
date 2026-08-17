@@ -206,41 +206,45 @@ scratch recipe, and the everyday command list live in
 [`docs/agents/ops.md`](./docs/agents/ops.md). Read it before running any
 `datasets` CLI command or touching sanity.io/manage.
 
-### Agent guidance in the dataset
+### Agent guidance lives in two homes
 
-The Claude Desktop authoring skill carries no knowledge — it fetches it (#68).
-The voice guide, the brand foundation, and the slop patterns live in the repo
-as markdown and are pushed into the dataset as `guidance` documents by a
-separate tool, which outlives the migration pipeline:
+There is no guidance corpus and no `guidance` document type; the authoring
+plugin carries its knowledge as files rather than fetching it (#192). Which
+home a rule belongs to follows what it governs:
 
-```bash
-pnpm guidance:sync    # .claude/skills/o3world-copy/*.md → guidance documents
-pnpm guidance:check   # fails if the dataset has drifted from the repo
-```
+- **Shape** — `tools/authoring-skill/references/`. `argument.md` (how a long
+  argument holds up), `composition.md` (which band follows which on a page),
+  and `style.md` (the style floor: plain sentences, a claim sourced in its own
+  sentence, fact conservation). A skill reads these as
+  `${CLAUDE_PLUGIN_ROOT}/references/<file>`.
+- **Voice** — `.claude/skills/o3world-copy/`, with `docs/guidance/brand.md`,
+  `slop.md` and `visual.md` as its material. Persona, brand vocabulary and the
+  slop-pattern list are deliberately not in the plugin; they re-enter it only
+  when the eval loop produces a failure that asks for them.
 
-**Edit the markdown, then sync.** A stale guidance document does not error —
-it just makes everything an agent writes that session quietly wrong. Sources
-are declared in `tools/guidance/src/sources.ts`; consumers read
-`*[_type == "guidance"]{key, title, body}`.
-
-Both commands are thin. The engine under them is `tools/guidance/src/corpus/` —
-one pure function from (sources, dataset snapshot) to a plan: what to write,
-what drifted, what no source claims. `sync.ts` and `check.ts` supply the client
-and nothing else, which is what lets the plan be unit-tested without a project
-or a token.
+**A rule lives in one home.** Restating one in the other is how the two drift,
+and the drift is silent — it just makes everything written that session quietly
+wrong.
 
 ### Briefing a piece
 
-Guidance tells an agent how to write anywhere; a **brief** is what one piece is
-written from ([ADR 0027](./docs/adr/0027-the-brief-is-a-document.md)). It is the
-second corpus on the same engine, registered by frontmatter in a globbed
-directory rather than by a declared list:
+The references tell an agent how to write anywhere; a **brief** is what one
+piece is written from
+([ADR 0027](./docs/adr/0027-the-brief-is-a-document.md)). It is the repo's one
+corpus — markdown registered by frontmatter in a globbed directory, synced to
+`brief` documents:
 
 ```bash
 pnpm brief:sync     # tools/guidance/briefs/*.md → brief documents
 pnpm brief:check    # fails if a file-backed brief has drifted
 pnpm brief:export   # a dataset-born brief becomes a file in the corpus
 ```
+
+The commands are thin. The engine under them is `tools/guidance/src/corpus/` —
+one pure function from (sources, dataset snapshot) to a plan: what to write,
+what drifted, what no source claims. `brief-sync.ts` and `brief-check.ts`
+supply the client and nothing else, which is what lets the plan be unit-tested
+without a project or a token.
 
 Briefing a piece is three steps. Drop a markdown file in
 `tools/guidance/briefs/` with `key` and `title` in its frontmatter — the body

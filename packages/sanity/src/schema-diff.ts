@@ -3,9 +3,8 @@
  *
  * Field `description`s are a knowledge surface, not documentation: the
  * authoring skill reads them through `get_schema` and composes against them
- * (ADR 0024, ADR 0025). A stale deploy therefore does not error — it feeds
- * every MCP consumer a confident wrong picture, the same silent failure
- * `guidance:check` exists to catch on the guidance half.
+ * (ADR 0025). A stale deploy therefore does not error — it feeds every MCP
+ * consumer a confident wrong picture.
  *
  * Both sides arrive in the studio-manifest shape: `sanity manifest extract`
  * for the repo, `sanity schemas list --json` for the dataset. This module is

@@ -35,11 +35,11 @@ describe('parseFrontmatter', () => {
     const { fields, body } = parseFrontmatter(
       [
         '---',
-        'name: Guidance fetch',
+        'name: References read',
         'runs: 3',
         'tags: [smoke, sanity]',
         "pattern: '^BLOCKING: false \\(.+\\)$'",
-        'target: { source: file, path: guidance.json }',
+        'target: { source: file, path: references.json }',
         'env:',
         '  EVAL_MODE: strict',
         '---',
@@ -49,11 +49,11 @@ describe('parseFrontmatter', () => {
     )
 
     expect(fields).toMatchObject({
-      name: 'Guidance fetch',
+      name: 'References read',
       runs: 3,
       tags: ['smoke', 'sanity'],
       pattern: '^BLOCKING: false \\(.+\\)$',
-      target: { source: 'file', path: 'guidance.json' },
+      target: { source: 'file', path: 'references.json' },
       env: { EVAL_MODE: 'strict' },
     })
     expect(body).toBe('The task.')
@@ -133,8 +133,8 @@ describe('gradeRun', () => {
     const path = caseWith(
       "---\ntype: regex\npattern: '^BLOCKING: false \\(.+\\)$'\nflags: m\n---\n",
     )
-    const passing = run({ 'last-message.md': 'All six.\nBLOCKING: false (guidance present)\n' })
-    const failing = run({ 'last-message.md': 'All six present, nothing to worry about.\n' })
+    const passing = run({ 'last-message.md': 'All three.\nBLOCKING: false (references present)\n' })
+    const failing = run({ 'last-message.md': 'All three present, nothing to worry about.\n' })
 
     expect(gradeRun(path, passing)).toEqual([
       {
@@ -150,15 +150,15 @@ describe('gradeRun', () => {
 
   it('counts matches when the assertion is exact', () => {
     const path = caseWith(
-      "---\ntype: regex\npattern: 'o3-(voice|slop)'\nflags: g\nmatch: count:2\ntarget: { source: file, path: guidance.json }\n---\n",
+      "---\ntype: regex\npattern: '(argument|style)\\.md'\nflags: g\nmatch: count:2\ntarget: { source: file, path: references.json }\n---\n",
     )
-    const both = run({ 'workspace/guidance.json': '["o3-voice","o3-slop"]' })
-    const one = run({ 'workspace/guidance.json': '["o3-voice"]' })
+    const both = run({ 'workspace/references.json': '["argument.md","style.md"]' })
+    const one = run({ 'workspace/references.json': '["argument.md"]' })
 
     expect(gradeRun(path, both)[0]).toMatchObject({ passed: true })
     expect(gradeRun(path, one)[0]).toMatchObject({
       passed: false,
-      detail: '1 match(es) in file guidance.json, wanted 2',
+      detail: '1 match(es) in file references.json, wanted 2',
     })
   })
 

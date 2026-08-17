@@ -52,8 +52,8 @@ by two audiences at once — a human editor under the block in Studio, and any a
    layout places exactly four." Skip it if there isn't one — don't invent a constraint.
 
 Two or three sentences. **Never name another block** — a comparison ("use X instead when…")
-is composition knowledge and belongs in the `o3-composition` guidance document, not in a
-description. That's the locality rule: one block → description; two or more blocks → catalog.
+is composition knowledge and belongs in the composition catalog
+(`tools/authoring-skill/references/composition.md`), not in a description. That's the locality rule: one block → description; two or more blocks → catalog.
 
 ## Adding a base block
 

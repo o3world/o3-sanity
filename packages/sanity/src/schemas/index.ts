@@ -34,7 +34,6 @@ import { insight } from './documents/insight'
 import { caseStudy } from './documents/caseStudy'
 import { page } from './documents/page'
 import { person, client, category, industry, siteSettings } from './documents/supporting'
-import { guidance } from './documents/guidance'
 import { brief } from './documents/brief'
 
 export const schemaTypes = [
@@ -79,6 +78,5 @@ export const schemaTypes = [
   category,
   industry,
   siteSettings,
-  guidance,
   brief,
 ]

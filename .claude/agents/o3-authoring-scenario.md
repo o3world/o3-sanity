@@ -36,7 +36,7 @@ and record what you would have written, field by field.
 **The report is the deliverable.** Return a structured transcript, verbatim
 over summary, in the order the run happened:
 
-- which guidance documents you fetched, by `key`, and which you actually read
+- which of the plugin's `references/` files you opened, and which you actually read
 - the brief's questions, each with the scripted answer you took
 - the agreed thesis, as the one sentence that was confirmed
 - the five locked reader-test questions

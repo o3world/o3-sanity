@@ -69,9 +69,9 @@ describe('the committed corpus', () => {
   /**
    * `verify` reads the whole dataset, so a document this pipeline never wrote
    * would be reported as an orphan — a finding that exits non-zero and is
-   * wrong. Guidance and briefs are exactly that: written by `guidance:sync`
-   * and `brief:sync`, and outliving the pipeline, which is deleted
-   * post-migration.
+   * wrong. Briefs are exactly that: written by `brief:sync`, and outliving the
+   * pipeline, which is deleted post-migration. `guidance` is named alongside
+   * them because `production` still holds documents of a retired type (#192).
    */
   it('names the types a different tool owns, so verify can stay quiet about them', () => {
     expect(isInternalType('guidance')).toBe(true)

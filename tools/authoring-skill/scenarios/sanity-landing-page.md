@@ -60,8 +60,8 @@ the agent to do the legwork he didn't.
     dataset for case studies and brand material, or look anywhere else), or
     do his pointers just become gaps?
   - The piece is a **page**: does the skill's outline stage (argument arcs
-    from `o3-argument`) fit a landing page, or did you have to improvise
-    against `o3-composition`? Record what the text told you versus what you
+    from `references/argument.md`) fit a landing page, or did you have to
+    improvise against `references/composition.md`? Record what the text told you versus what you
     had to decide alone.
   - Which **section block schemas** you fetched before composing, and
     whether anything steered which blocks to reach for.
