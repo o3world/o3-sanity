@@ -62,6 +62,23 @@ Verified by direct reads of the canonical frames, or recorded in
 | `Interior Hero`                 | `2107:1051` | Device = Desktop \| Mobile                     | `CollectionHero variant="interior"` (`ui/collection-hero.tsx`)       | ✅ #163                                                                                           |
 | `Blog`                          | `2205:1146` | Property 1 = Default \| Mobile                 | `InsightsCarouselSection` (`blocks/section/insightsCarouselSection`) | ✅ #163                                                                                           |
 
+`BrandLogo` ships `Color=Black` and `Color=Red` only. No canonical Design
+Concept frame instances `Color=White`, so its knockout colour would be a guess;
+it is added when a frame calls for it rather than invented now.
+
+The 2026-08 `Footer` looked like that caller and is not one (#87). Its logo is
+white, but it is a tight-bounded vector of the two mark paths with no plate at
+all (`1280:1856`) — `BrandMark`, not a white tile. `White` stays unbuilt.
+
+`Color=White` briefly shipped, on 2026-08-02, and was removed the same day. The
+direction it was built from — the nav's mark should change colour so it stays
+visible on either surface — turned out to mean the mark **without its square
+plate**, not an inverted plate. An inverted plate had no caller left, and an
+orphaned variant is exactly what the rule above is for. Worth keeping as a
+worked example: a variant needs a frame or an equally explicit direction, and a
+direction that has been _interpreted_ is neither until the interpretation is
+confirmed.
+
 ### The three band-level sets were unwatched until #163
 
 `CTA`, `Interior Hero` and `Blog` are not components inside a band — they **are**
@@ -81,23 +98,6 @@ than a second vocabulary — one `cva` key under the rule above, not two.
 **Home does not instance `CTA`.** Its frame `1680:2134` still holds the bespoke
 closer, which is why `ctaSection`'s `decoration` knob keeps `orbs` alongside the
 molecule it now defaults to.
-
-`BrandLogo` ships `Color=Black` and `Color=Red` only. No canonical Design
-Concept frame instances `Color=White`, so its knockout colour would be a guess;
-it is added when a frame calls for it rather than invented now.
-
-The 2026-08 `Footer` looked like that caller and is not one (#87). Its logo is
-white, but it is a tight-bounded vector of the two mark paths with no plate at
-all (`1280:1856`) — `BrandMark`, not a white tile. `White` stays unbuilt.
-
-`Color=White` briefly shipped, on 2026-08-02, and was removed the same day. The
-direction it was built from — the nav's mark should change colour so it stays
-visible on either surface — turned out to mean the mark **without its square
-plate**, not an inverted plate. An inverted plate had no caller left, and an
-orphaned variant is exactly what the rule above is for. Worth keeping as a
-worked example: a variant needs a frame or an equally explicit direction, and a
-direction that has been _interpreted_ is neither until the interpretation is
-confirmed.
 
 ### `BrandMark` has no component set
 
