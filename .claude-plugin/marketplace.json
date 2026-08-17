@@ -4,7 +4,7 @@
   "description": "O3 World's Claude Code plugins.",
   "plugins": [
     {
-      "name": "o3-authoring",
+      "name": "o3",
       "source": "./tools/authoring-skill",
       "description": "Draft o3world.com content in Sanity — insights (blog posts), case studies, and pages — in the O3 voice. Drafts only; a human publishes in Studio."
     }

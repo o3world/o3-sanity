@@ -1,4 +1,4 @@
-# o3-authoring
+# O3 authoring (`/o3:authoring`)
 
 The authoring capability from map #63: a vague idea becomes a
 publishable-quality Sanity draft — an insight (blog post), case study, or
@@ -6,7 +6,7 @@ page — in the O3 voice. The skill is a thin bootstrap; voice, schema
 guidance, and exemplars are fetched live from Sanity, so knowledge updates
 propagate with a git push and never require repackaging.
 
-One skill source (`skills/o3-authoring/SKILL.md`), two distributions. Changes
+One skill source (`skills/authoring/SKILL.md`), two distributions. Changes
 to it are checked by running the scenarios in [`scenarios/`](./scenarios) and
 diffing the transcripts.
 
@@ -18,7 +18,7 @@ OAuth via `/mcp`, never distributed. Install from the repo-root marketplace:
 
 ```
 /plugin marketplace add o3world/o3-sanity
-/plugin install o3-authoring@o3world
+/plugin install o3@o3world
 ```
 
 **Install it at user scope.** A project-scoped install belongs to the directory
@@ -36,12 +36,12 @@ The same two steps have a CLI form, which is the one an agent can run:
 
 ```
 claude plugin marketplace update o3world
-claude plugin install o3-authoring@o3world   # --scope user is the default here
+claude plugin install o3@o3world   # --scope user is the default here
 ```
 
 ## Claude Desktop (skill ZIP)
 
-`pnpm build:skill` emits `dist/o3-authoring.zip` — a build artifact, never
+`pnpm build:skill` emits `dist/authoring.zip` — a build artifact, never
 committed. Upload at claude.ai → Settings → Customize → Skills (code
 execution must be on, under Settings → Capabilities); connect the Sanity
 connector separately. Re-upload to update (shared/org-provisioned recipients

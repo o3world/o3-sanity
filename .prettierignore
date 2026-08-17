@@ -42,7 +42,7 @@ apps/web/next-env.d.ts
 # them not to be.
 tools/guidance/src/corpus/__fixtures__/
 
-# The o3-authoring scenario scripts. A scenario's worth is that it is the same
+# The authoring skill's scenario scripts. A scenario's worth is that it is the same
 # input as last run — an edited byte breaks the transcript diff that verifies a
 # change to the skill. Their README says the same thing to a human.
 tools/authoring-skill/scenarios/eu-ai-watermark.md

@@ -199,7 +199,7 @@ PROJECT_ID="naorcr6k"
 DATASET="development"
 SKILL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SKILL_DIR/../.." && pwd)"
-ZIP="$SKILL_DIR/dist/o3-authoring.zip"
+ZIP="$SKILL_DIR/dist/authoring.zip"
 
 # groq QUERY — run a GROQ query against $DATASET as the logged-in Sanity user.
 groq() {
@@ -233,11 +233,11 @@ stage "Upload the skill" 2
 say "Skills are account-level: uploading here reaches Desktop, web, and mobile."
 open_url "https://claude.ai/settings"
 step "Settings → Customize → Skills → Upload a skill."
-step "Choose o3-authoring.zip from the Finder window stage 1 opened."
+step "Choose authoring.zip from the Finder window stage 1 opened."
 note "Re-uploading the same ZIP replaces the installed version — that is how"
 note "you ship a skill update. Voice and composition guidance are NOT in the"
 note "ZIP; they live in the dataset and update with a git push + guidance:sync."
-pause "Does o3-authoring show up in the skills list?"
+pause "Does authoring show up in the skills list?"
 
 # ── 4 ─────────────────────────────────────────────────────────────────────
 stage "Connect Sanity" 3
@@ -256,7 +256,7 @@ stage "Smoke test" 3
 say "Start a new Claude Desktop chat and paste this:"
 printf '\n%s' "$DIM"
 cat <<'PROMPT'
-  Use the o3-authoring skill against Sanity project naorcr6k, dataset
+  Use the authoring skill against Sanity project naorcr6k, dataset
   development. Fetch the guidance documents, then fetch the full schema for
   the `insight` type. My thesis is "a wire-up is not working until something
   outside the app says so" — skip the brief's rounds and use it. Then create

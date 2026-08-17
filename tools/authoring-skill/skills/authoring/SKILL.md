@@ -1,5 +1,5 @@
 ---
-name: o3-authoring
+name: authoring
 description: Draft, resume, or revise o3world.com content in Sanity — insights (blog posts), case studies, and pages. Use when asked to write, draft, edit, or continue O3 World site content from an idea or notes.
 ---
 
