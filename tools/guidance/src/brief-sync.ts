@@ -8,9 +8,9 @@
  *   pnpm brief:sync
  *
  * The plan decides what to write (`src/corpus/`); this file supplies the
- * client. Two things differ from `guidance:sync`, both from the ADR. Documents
- * are patched rather than replaced, so the run state the authoring skills
- * wrote survives. And a brief with no `sourcePath` was born in the dataset — this
+ * client. Two things the ADR asks of this corpus and not of the engine's other
+ * mode. Documents are patched rather than replaced, so the run state the
+ * authoring skills wrote survives. And a brief with no `sourcePath` was born in the dataset — this
  * never touches one, and refuses to sync a file that asks for its id, exiting
  * non-zero instead.
  */

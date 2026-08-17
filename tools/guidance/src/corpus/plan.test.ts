@@ -7,13 +7,16 @@ import type { Corpus, CorpusSource } from './plan'
 const source = (over: Partial<CorpusSource> & Pick<CorpusSource, 'key'>): CorpusSource => ({
   title: `The ${over.key} document`,
   body: `The body of ${over.key}.`,
-  sourcePath: `docs/guidance/${over.key}.md`,
+  sourcePath: `references/${over.key}.md`,
   ...over,
 })
 
-/** The guidance shape: body in `body`, and the repo is the whole truth. */
-const guidance = (sources: CorpusSource[]): Corpus => ({
-  type: 'guidance',
+/**
+ * The replacing shape: the repo owns every field and every document, so a
+ * source commits whole and an unclaimed document is a leftover.
+ */
+const replacing = (sources: CorpusSource[]): Corpus => ({
+  type: 'reference',
   bodyField: 'body',
   writes: 'replace',
   claimsOrphans: 'every',
@@ -32,7 +35,7 @@ const briefs = (sources: CorpusSource[]): Corpus => ({
 describe('planCorpus', () => {
   it('creates every source when the dataset is empty', () => {
     const plan = planCorpus(
-      guidance([{ key: 'o3-voice', title: 'O3 voice guide', body: 'Write plainly.' }]),
+      replacing([{ key: 'argument', title: 'The argument reference', body: 'Write plainly.' }]),
       [],
     )
 
@@ -41,10 +44,10 @@ describe('planCorpus', () => {
         state: 'created',
         fields: [],
         document: {
-          _id: 'guidance-o3-voice',
-          _type: 'guidance',
-          key: 'o3-voice',
-          title: 'O3 voice guide',
+          _id: 'reference-argument',
+          _type: 'reference',
+          key: 'argument',
+          title: 'The argument reference',
           body: 'Write plainly.',
         },
       },
@@ -53,9 +56,9 @@ describe('planCorpus', () => {
 
   /**
    * The engine writes one markdown body into whichever field the corpus
-   * declares: `guidance.body`, `brief.background`. A brief has no `body` field
-   * at all, so a corpus that could not say where its markdown goes would sync
-   * documents the schema does not declare.
+   * declares — `body` for the replacing fixture above, `background` for a
+   * brief. A brief has no `body` field at all, so a corpus that could not say
+   * where its markdown goes would sync documents the schema does not declare.
    */
   it('lands the markdown in the field the corpus maps it to', () => {
     const plan = planCorpus(
@@ -107,21 +110,21 @@ describe('planCorpus', () => {
 
   it('leaves a document alone when the dataset already matches its source', () => {
     const plan = planCorpus(
-      guidance([
+      replacing([
         {
-          key: 'o3-voice',
-          title: 'O3 voice guide',
+          key: 'argument',
+          title: 'The argument reference',
           body: 'Write plainly.',
-          sourcePath: 'docs/guidance/voice.md',
+          sourcePath: 'references/argument.md',
         },
       ]),
       [
         {
-          _id: 'guidance-o3-voice',
-          key: 'o3-voice',
-          title: 'O3 voice guide',
+          _id: 'reference-argument',
+          key: 'argument',
+          title: 'The argument reference',
           body: 'Write plainly.',
-          sourcePath: 'docs/guidance/voice.md',
+          sourcePath: 'references/argument.md',
         },
       ],
     )
@@ -131,21 +134,21 @@ describe('planCorpus', () => {
 
   it('names the fields a stale dataset copy disagrees on', () => {
     const plan = planCorpus(
-      guidance([
+      replacing([
         {
-          key: 'o3-voice',
-          title: 'O3 voice guide',
+          key: 'argument',
+          title: 'The argument reference',
           body: 'Write plainly.',
-          sourcePath: 'docs/guidance/voice.md',
+          sourcePath: 'references/argument.md',
         },
       ]),
       [
         {
-          _id: 'guidance-o3-voice',
-          key: 'o3-voice',
-          title: 'The voice guide',
+          _id: 'reference-argument',
+          key: 'argument',
+          title: 'The argument guide',
           body: 'Write grandly.',
-          sourcePath: 'docs/guidance/voice.md',
+          sourcePath: 'references/argument.md',
         },
       ],
     )
@@ -155,19 +158,19 @@ describe('planCorpus', () => {
 
   it('counts a document the dataset has never seen a field of as drifted', () => {
     const plan = planCorpus(
-      guidance([
+      replacing([
         {
-          key: 'o3-voice',
-          title: 'O3 voice guide',
+          key: 'argument',
+          title: 'The argument reference',
           body: 'Write plainly.',
-          sourcePath: 'docs/guidance/voice.md',
+          sourcePath: 'references/argument.md',
         },
       ]),
       [
         {
-          _id: 'guidance-o3-voice',
-          key: 'o3-voice',
-          title: 'O3 voice guide',
+          _id: 'reference-argument',
+          key: 'argument',
+          title: 'The argument reference',
           body: 'Write plainly.',
         },
       ],
@@ -177,27 +180,27 @@ describe('planCorpus', () => {
   })
 
   it('reports a dataset document no source claims, whole', () => {
-    const plan = planCorpus(guidance([]), [
+    const plan = planCorpus(replacing([]), [
       {
-        _id: 'guidance-retired',
+        _id: 'reference-retired',
         key: 'retired',
         title: 'Retired',
         body: 'x',
         sourcePath: 'gone.md',
       },
-      { _id: 'guidance-session', key: 'session', title: 'Session', body: 'y' },
+      { _id: 'reference-session', key: 'session', title: 'Session', body: 'y' },
     ])
 
     expect(plan.entries).toEqual([])
     expect(plan.orphans).toEqual([
       {
-        _id: 'guidance-retired',
+        _id: 'reference-retired',
         key: 'retired',
         title: 'Retired',
         body: 'x',
         sourcePath: 'gone.md',
       },
-      { _id: 'guidance-session', key: 'session', title: 'Session', body: 'y' },
+      { _id: 'reference-session', key: 'session', title: 'Session', body: 'y' },
     ])
     expect(plan.disowned).toEqual([])
   })
@@ -332,13 +335,13 @@ describe('planCorpus', () => {
     expect(plan.entries.map((entry) => entry.state)).toEqual(['unchanged'])
   })
 
-  // Guidance is the whole truth of its type — there is no such thing as a
-  // dataset-born guidance document, so a live copy with no `sourcePath` is a
-  // document to overwrite rather than one to step around.
+  // A replacing corpus is the whole truth of its type — nothing is born in the
+  // dataset, so a live copy with no `sourcePath` is a document to overwrite
+  // rather than one to step around.
   it('never conflicts in a corpus that claims every document', () => {
     const plan = planCorpus(
-      guidance([source({ key: 'o3-voice', sourcePath: 'docs/guidance/voice.md' })]),
-      [{ _id: 'guidance-o3-voice', key: 'o3-voice', title: 'Something else', body: 'x' }],
+      replacing([source({ key: 'argument', sourcePath: 'references/argument.md' })]),
+      [{ _id: 'reference-argument', key: 'argument', title: 'Something else', body: 'x' }],
     )
 
     expect(plan.conflicts).toEqual([])
@@ -476,7 +479,7 @@ describe('normalizeSnapshot', () => {
   })
 
   it('passes a published-only snapshot through unchanged', () => {
-    const rows = [{ _id: 'guidance-o3-voice', key: 'o3-voice', body: 'x' }]
+    const rows = [{ _id: 'reference-argument', key: 'argument', body: 'x' }]
 
     expect(normalizeSnapshot(rows)).toEqual(rows)
   })
@@ -485,46 +488,46 @@ describe('normalizeSnapshot', () => {
 describe('driftOf', () => {
   it('reports what is missing, what is stale and what has no source, and nothing else', () => {
     const plan = planCorpus(
-      guidance([source({ key: 'missing' }), source({ key: 'stale' }), source({ key: 'settled' })]),
+      replacing([source({ key: 'missing' }), source({ key: 'stale' }), source({ key: 'settled' })]),
       [
         {
-          _id: 'guidance-stale',
+          _id: 'reference-stale',
           key: 'stale',
           title: 'The stale document',
           body: 'Something else.',
-          sourcePath: 'docs/guidance/stale.md',
+          sourcePath: 'references/stale.md',
         },
         {
-          _id: 'guidance-settled',
+          _id: 'reference-settled',
           key: 'settled',
           title: 'The settled document',
           body: 'The body of settled.',
-          sourcePath: 'docs/guidance/settled.md',
+          sourcePath: 'references/settled.md',
         },
-        { _id: 'guidance-orphan', key: 'orphan', title: 'The orphan', body: 'Nobody claims me.' },
+        { _id: 'reference-orphan', key: 'orphan', title: 'The orphan', body: 'Nobody claims me.' },
       ],
     )
 
     expect(driftOf(plan)).toEqual([
-      { kind: 'missing', _id: 'guidance-missing', sourcePath: 'docs/guidance/missing.md' },
+      { kind: 'missing', _id: 'reference-missing', sourcePath: 'references/missing.md' },
       {
         kind: 'drifted',
-        _id: 'guidance-stale',
-        sourcePath: 'docs/guidance/stale.md',
+        _id: 'reference-stale',
+        sourcePath: 'references/stale.md',
         fields: ['body'],
       },
-      { kind: 'unsourced', _id: 'guidance-orphan', sourcePath: undefined },
+      { kind: 'unsourced', _id: 'reference-orphan', sourcePath: undefined },
     ])
   })
 
   it('is empty when the dataset holds exactly what the sources say', () => {
-    const plan = planCorpus(guidance([source({ key: 'settled' })]), [
+    const plan = planCorpus(replacing([source({ key: 'settled' })]), [
       {
-        _id: 'guidance-settled',
+        _id: 'reference-settled',
         key: 'settled',
         title: 'The settled document',
         body: 'The body of settled.',
-        sourcePath: 'docs/guidance/settled.md',
+        sourcePath: 'references/settled.md',
       },
     ])
 

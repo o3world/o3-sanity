@@ -44,7 +44,7 @@
       "entry": ["src/{extract,convert,load}.ts", "sanity.cli.ts", "src/**/*.test.ts"]
     },
     "tools/guidance": {
-      "entry": ["src/{sync,check}.ts", "sanity.cli.ts", "src/**/*.test.ts"]
+      "entry": ["src/brief-{sync,check,export}.ts", "sanity.cli.ts", "src/**/*.test.ts"]
     },
     "tools/figma-sync": {
       "entry": ["src/sync.ts", "src/**/*.test.ts"]

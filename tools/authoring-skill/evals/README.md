@@ -30,13 +30,13 @@ nothing in `plugin.json` has to point at it.
 
 ```yaml
 ---
-name: Guidance fetch
+name: References read
 tags: [smoke]
 plugins: ['../..'] # the plugin under test, relative to the case
 runs: 1 # CLI default is 3
 max_turns: 8
 timeout_seconds: 300
-allowed_tools: [Write, mcp__sanity__query_documents]
+allowed_tools: [Read, Glob, Write]
 model: sonnet
 ---
 The task, written to the agent that will run it.
@@ -106,7 +106,7 @@ Three idioms worth copying:
 
 Dispatch the `o3-eval-runner` agent with the case directory:
 
-> Run the eval case `tools/authoring-skill/evals/guidance-fetch`, arm `with`.
+> Run the eval case `tools/authoring-skill/evals/references-read`, arm `with`.
 
 It runs the prompt, captures the transcript and the artifacts under
 `results/<timestamp>/<case>/<arm>-<n>/`, applies the graders with `grade.mjs`,

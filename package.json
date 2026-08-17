@@ -23,8 +23,6 @@
     "figma:sync": "pnpm --filter @o3/figma-sync sync",
     "format": "turbo run format",
     "frontier": "./scripts/frontier.sh",
-    "guidance:check": "pnpm --filter @o3/guidance check",
-    "guidance:sync": "pnpm --filter @o3/guidance sync",
     "knip": "knip --no-config-hints",
     "lint": "turbo run lint",
     "prepare": "[ -n \"$VERCEL\" ] || [ -n \"$CI\" ] || lefthook install",

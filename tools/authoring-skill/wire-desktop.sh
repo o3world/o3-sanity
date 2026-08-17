@@ -235,8 +235,9 @@ open_url "https://claude.ai/settings"
 step "Settings → Customize → Skills → Upload a skill."
 step "Choose authoring.zip from the Finder window stage 1 opened."
 note "Re-uploading the same ZIP replaces the installed version — that is how"
-note "you ship a skill update. Voice and composition guidance are NOT in the"
-note "ZIP; they live in the dataset and update with a git push + guidance:sync."
+note "you ship a skill update. The ZIP packages skills/authoring/ only, so the"
+note "plugin's references/ files are NOT in it — the Desktop distribution is"
+note "waiting on #193 to say where it reads them from."
 pause "Does authoring show up in the skills list?"
 
 # ── 4 ─────────────────────────────────────────────────────────────────────
@@ -265,9 +266,11 @@ cat <<'PROMPT'
   and one field description you read off the insight schema.
 PROMPT
 printf '%s\n' "$RESET"
-note "Expect five guidance keys: o3-voice, o3-brand, o3-slop, o3-composition,"
-note "o3-visual. Handing it a thesis is the brief's one override — without it,"
-note "the skill is supposed to refuse to create anything."
+note "Expect the guidance fetch to come back empty: the guidance documents and"
+note "their schema type are retired (#192), and the skill has not been rewritten"
+note "off them yet (#193). Judge this run on the draft and the schema"
+note "description alone. Handing it a thesis is the brief's one override —"
+note "without it, the skill is supposed to refuse to create anything."
 pause "Claude says it created the draft?"
 
 say "Checking the dataset from this side…"

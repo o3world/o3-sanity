@@ -3,7 +3,7 @@
 An insight or a case-study narrative is not made of bands. It is one argument,
 and it either has a shape or it is a set of correct observations in no
 particular order. Arranging the page around it is a different job, and that one
-is `o3-composition`.
+is `composition.md`.
 
 This document opens with the standards the brief applies before a word is
 drafted — what a claim has to be, what carries it, what counts as enough
@@ -11,7 +11,7 @@ evidence. Then the shape: how the piece opens, how the argument moves, where it
 turns, how it ends, and how long it runs.
 
 **Where the authority comes from.** The craft claims answer to the published
-corpus, the decade of real writing `o3-voice` was calibrated against. The
+corpus — a decade of o3world.com writing, counted rather than remembered. The
 argument-shaping standards answer to neither the corpus nor a Figma frame: "a
 warrant somebody could disagree with" is a criterion borrowed from rhetoric,
 not an observation about how O3 writes. It is the test the brief applies. Read
@@ -90,8 +90,8 @@ them in that order, inside fifteen seconds, and between them they make a single
 promise. Draft them together and read them in a row before either gets called
 finished.
 
-- **The title carries the fact.** `o3-voice` holds the rule and the examples: a
-  reader who sees only the title knows what happened or what we claim.
+- **The title carries the fact.** A reader who sees only the title knows what
+  happened or what we claim.
 - **The excerpt pays part of what the title promised, and names who it is for.**
   It is the only place the piece says out loud which reader should keep going.
 - **The opening pays the rest.** Whatever the excerpt promised, the first
@@ -112,7 +112,7 @@ The reader arrived having already read the title and the excerpt. Both made a
 promise, and the front-door rules above are where the three were settled against
 each other. This is what the opening does with its own space.
 
-"Nothing warms up" is `o3-composition`'s rule for a page. In prose it means:
+"Nothing warms up" is `composition.md`'s rule for a page. In prose it means:
 
 - **The first sentence is already inside the argument.** Not the industry, not
   the year, not what everyone knows. `the-design-team-moved-the-file` opens on
@@ -223,8 +223,7 @@ bought, what no longer belongs to anyone:
 > changing it for about that much, forever.
 
 Both restate the turn one level up, and both are shorter than the paragraph
-before them. `o3-slop` says what an ending is not; this says where the good one
-comes from. If you cannot derive the last paragraph from the turn, the turn was
+before them. If you cannot derive the last paragraph from the turn, the turn was
 decorative.
 
 Two endings the corpus does have and should not repeat. The **sales line** —

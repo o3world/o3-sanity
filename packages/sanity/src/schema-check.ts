@@ -1,11 +1,9 @@
 /**
  * Check → does the dataset serve the schema the repo declares? (#139)
  *
- * The sibling of `guidance:check`, for the other half of the authoring
- * skill's knowledge contract. Guidance drift is caught by comparing markdown
- * to documents; schema drift needs the same treatment, because field
- * `description`s reach agents through `get_schema` (ADR 0024, ADR 0025) and a
- * stale deploy answers confidently with the old design.
+ * Field `description`s are the one knowledge surface an authoring agent reads
+ * out of the dataset rather than out of the plugin's own files (ADR 0025), so
+ * a stale deploy answers confidently with the old design.
  *
  *   pnpm schema:check
  *

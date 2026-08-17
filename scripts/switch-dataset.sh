@@ -35,7 +35,7 @@ TARGETS=(
   "apps/web/.env.local|web app + embedded Studio"
   "packages/sanity/.env.local|typegen, schema extract/deploy"
   "tools/migration/.env.local|migration load + verify"
-  "tools/guidance/.env.local|guidance sync"
+  "tools/guidance/.env.local|brief sync + check"
 )
 
 # The datasets DATASETS in @o3/sanity/constants declares. Kept in step by
