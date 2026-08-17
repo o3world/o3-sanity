@@ -110,7 +110,9 @@ document then claims a confirmation that never happened.
 | `o3sanity:typeset` | `typeset` | `pieceId`, and the piece document           |
 
 Three fields belong to whichever stage is running. `stage` takes that stage's
-own name — the stage that finished, not the one it opens. `nextStep` says what
+own name — the stage that finished, not the one it opens. `typeset` is the one
+exception and writes `handed-off`, the enum's last value: the pipeline is over
+and the piece is a human's to publish. `nextStep` says what
 the next session does first. `decisions` takes any scoping call the run made, so
 a later session reads a deliberate cut as a decision rather than an oversight
 and puts the material back.
