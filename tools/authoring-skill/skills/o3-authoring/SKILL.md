@@ -199,9 +199,9 @@ This is a gate: the interview does not start until the human has responded to
 these lists. Their corrections and additions are material — carry them into the
 brief with the rest.
 
-## Stage 2 — Converge
+## Stage 2 — Converge, the interview
 
-The interview. It ends in the first Sanity write of the run: the brief
+It ends in the first Sanity write of the run: the brief
 document. Two rounds of questions, and **two is the whole interview** — do not
 open a third. Every question carries your recommended answer, so the human can
 nod rather than compose; a nod is an answer. What you gathered is what makes
@@ -320,19 +320,22 @@ by the next session as much as by a human:
 - <what is missing, and who can supply it>
 ```
 
-`## Pipeline` is what makes a run resumable. It arrives with the brief carrying
-stage 1's result, and from there it is patched at the end of every stage rather
-than at the end of the run. Three confirmations exist to record: the gather
+`## Pipeline` is what makes a run resumable, so **it is written four times, not
+once at the end**: it arrives with the brief carrying stage 1's result and the
+thesis; stage 3 adds the outline as confirmed and what was ruled out reaching
+it; stage 4 adds what the drafting decided and any gap it opened or closed; the
+hand-off writes the last stage and what the human does next. Stage 5 patches
+nothing of its own — the gates run against a settled draft, and their results
+land in the hand-off's write. Three confirmations exist to record: the gather
 gate, the agreed thesis, and the outline gate.
 
 **Write `record` with `set`, and read it back.** Set the whole field every time,
-then query the field and check the line you meant to move actually moved. It is
-one long text field rewritten wholesale at four points in a run, and every way
-of failing at it is silent: a `diffMatchPatch` against offsets you wrote by hand
-reports success and either changes nothing or deletes the line it was aiming at,
-and a `set` carrying a truncated string is accepted just as cheerfully. A stale
-`## Pipeline` is worse than an absent one, because it is what the next session
-trusts most.
+then query it and check the line you meant to move actually moved. It is one
+long text field rewritten wholesale at four points in a run, and its failures
+are silent — the call reports success and the field is stale or truncated. A
+`diffMatchPatch` against offsets you wrote by hand fails that way every time. A
+stale `## Pipeline` is worse than an absent one, because it is what the next
+session trusts most.
 
 **A brief outlives one piece.** The key names the subject, so a second piece
 reuses the brief — and `record` holds one `## Thesis` and one question list. The
@@ -425,8 +428,7 @@ is the only override. Inventing one and proceeding is not.
 above: every section block the outline names, and the object types inside them.
 This is the first moment the list exists.
 
-**Patch `record` before stage 4**: the outline as confirmed, the confirmation
-itself, and what was ruled out getting there.
+Then patch `record`, per the format above.
 
 ## Stage 4 — Build
 
@@ -448,11 +450,16 @@ to publish either one.
 **Iterate.** Share the draft's path (e.g. `/insights/{slug}`) for preview, ask
 for reactions once, and apply what comes back with `patch_documents`. Then say
 you are moving to the gates, and move — the exit is one round, and a round with
-no reactions in it is still a round. Reactions arriving after the gates start
-are welcome; they cost a re-run of the gates they invalidate, so say which.
+no reactions in it is still a round.
 
-**Patch `record` before stage 5**: the stage, what the drafting decided, and
-any gap it opened or closed.
+A reaction arriving later is welcome, and where it lands decides what it costs.
+Before the reader test, apply it and run gates 1 through 3 again on the changed
+sections. After the reader test, the piece is settled: the reader test never
+re-runs, so the reaction goes to `## Gaps` for the human rather than into the
+body. The same holds for a defect you find yourself once the reader has read —
+record it, do not quietly patch the text the test was run against.
+
+Then patch `record`, per the format above.
 
 ## Stage 5 — Verify
 

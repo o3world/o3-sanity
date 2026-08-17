@@ -56,8 +56,8 @@ the mechanism later. February 2, 2027 is the EU deadline for public detection
 through industry standards. Until then, "a watermark is a fact about a
 document that almost nobody can check."
 
-What the mark indicates: a detected mark means the content _may have been
-processed_ by Claude — not that Claude wrote it. Proofreading, translation,
+What the mark indicates: a detected mark means the content *may have been
+processed* by Claude — not that Claude wrote it. Proofreading, translation,
 and summarization all leave marks. The signal is "roughly one bit, and a noisy
 one." Heavy editing can remove it; short passages lack signal. Anthropic
 states it "was never a human-versus-machine detector."
