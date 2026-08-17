@@ -40,9 +40,10 @@ TYPESET: refused — <which it was, and the gate that stopped it>, back to o3san
 ```
 
 The check is mechanical because the temptation is not. "Review's done" means a
-review ran, and a review that ran is exactly how a failing verdict is produced;
-done and passed are different states, and this stage is the last thing standing
-between the second one and a document on the live content model.
+review ran, and a review that ran is exactly how a failing verdict is produced.
+Done and passed are different states, and this stage is the last thing standing
+between a draft that only reached the first one and a document on the live
+content model.
 
 ### The override
 
