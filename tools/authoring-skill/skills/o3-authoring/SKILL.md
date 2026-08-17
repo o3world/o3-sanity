@@ -318,8 +318,13 @@ document, whatever it teaches you mid-session.
 
 ### The `record` format
 
-Five sections, these headings, this order. Plain markdown in a text field, read
-by the next session as much as by a human:
+Five sections, these headings, this order, and no sixth. Plain markdown in a
+text field, read by the next session as much as by a human. Everything a later
+stage adds lands under one of the five — the outline as confirmed, the question
+map, the arc and its runner-up all go in `## Decisions`, which is where a
+resuming session looks for what was settled. A run that invents a heading for
+them writes a record shaped unlike every other one, and the next session is
+reading for structure as much as for content:
 
 ```markdown
 ## Pipeline
@@ -356,7 +361,12 @@ land in the hand-off's write. Three confirmations exist to record: the gather
 gate, the agreed thesis, and the outline gate.
 
 **Write `record` with `set`, and read it back.** Set the whole field every time,
-then query it and check the line you meant to move actually moved. It is one
+then query it and check the line you meant to move actually moved. Read it back
+by splitting the string on a heading and reading the chunk, or by checking
+`length()` against what you sent. A `match` probe answers a different question —
+GROQ tokenizes the pattern, so a trailing period or a hyphen returns `false`
+against a field that is perfectly intact, and you will go looking for a
+truncation that never happened. It is one
 long text field rewritten wholesale at four points in a run, and its failures
 are silent — the call reports success and the field is stale or truncated. A
 `diffMatchPatch` against offsets you wrote by hand fails that way every time. A
@@ -545,10 +555,15 @@ both run.
    then asks what the body argues.
 3. **The revision pass** — `o3-voice`, ten numbered steps. Sentence level, and
    its first step is a sentence-level instruction rather than a word target:
-   tighten every sentence that can be tightened, and let the total land where
-   it lands. A piece already inside the length band it forecast at stage 3
-   holds that band — `o3-argument` sets the total, `o3-voice` sets the
-   sentence.
+   tighten every sentence that can be tightened. `o3-argument` sets the total
+   and `o3-voice` sets the sentence, so the band the outline forecast is what
+   the piece lands in — a piece already inside it does not cut its way out, and
+   a piece that drafted above it cuts until it is in. **Count body prose, not
+   headings or pull-quote text**, so two runs cannot pass and fail the same gate
+   on what they counted. Where the cut needed to reach the band would take out
+   something the argument needs, the forecast was wrong rather than the draft:
+   say so, name what would have to go, and let the human decide between the band
+   and the material.
 4. **The checks** — `o3-slop`, ten numbered items. The shapes the revision pass
    does not catch.
 5. **The reader test** — below. Last, because it is the only one that blocks
