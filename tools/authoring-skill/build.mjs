@@ -15,7 +15,7 @@ import { fileURLToPath } from 'node:url'
 
 const root = dirname(fileURLToPath(import.meta.url))
 const skillsRoot = join(root, 'skills')
-const skillDir = 'o3-authoring'
+const skillDir = 'authoring'
 const skillMd = readFileSync(join(skillsRoot, skillDir, 'SKILL.md'), 'utf8')
 
 const frontmatter = skillMd.match(/^---\n([\s\S]*?)\n---/)?.[1]

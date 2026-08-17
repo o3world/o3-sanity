@@ -207,7 +207,7 @@ Fix on sight; don't imitate. As of 2026-08-01 the rules above are the target, an
 
 ## Authoring language
 
-The three named stages of the `o3-authoring` workflow (#142), and the thing the third one emits. All three are **procedure**, which is why they live in the plugin; the standards they apply are knowledge and live in the guidance corpus (ADR 0024).
+The three named stages of the `o3sanity:authoring` workflow (#142), and the thing the third one emits. All three are **procedure**, which is why they live in the plugin; the standards they apply are knowledge and live in the guidance corpus (ADR 0024).
 
 - **The brief** — both the interview that opens an authoring session and the document it leaves behind ([ADR 0027](docs/adr/0027-the-brief-is-a-document.md)). Two fixed rounds with recommended answers: audience, claim and content type, then the claim's **warrant** and the evidence in hand. It emits **an agreed thesis** — one sentence, confirmed in chat — and the reader test's five questions, and it **persists**: the skill writes a `brief` document (thesis, locked questions, and gaps in its `record` field) before it creates the content that references it. It is a **gate**: the skill does not create a document without a thesis, though the human may supply one directly and skip the rounds. What it may never do is invent one and proceed.
 - **Warrant** — the unstated principle that carries a claim from its evidence to its conclusion, in Toulmin's sense. The brief asks for one **somebody could disagree with**, because a claim with grounds and no arguable warrant is the shape thought-leadership mush takes.
