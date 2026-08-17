@@ -29,6 +29,10 @@ Ask alongside it only for what a sweep cannot find out: who the piece is for,
 and which type it is where the opening leaves that open. Two or three questions.
 The interview belongs to stage 2.
 
+Both answers go into `background` with the rest of what they said. `instructions`
+is stage 2's field, so the audience and the type are recorded here as material
+the human supplied, not written into a slot this stage does not own.
+
 **A source they name is a pointer you resolve, not a note you file.** "Pull from
 our case studies" is a search you run. A path is a file you open. A URL is a URL
 you fetch. Carry every pointer into the sweep below.
