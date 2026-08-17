@@ -21,8 +21,23 @@ OAuth via `/mcp`, never distributed. Install from the repo-root marketplace:
 /plugin install o3-authoring@o3world
 ```
 
+**Install it at user scope.** A project-scoped install belongs to the directory
+it was made in, and this repo works one ticket to one worktree — the directory
+goes away, and the next worktree has the plugin enabled in
+`.claude/settings.json` with nothing installed to serve it. What that looks
+like from inside a session is a skill that is simply absent, so the agent reads
+`SKILL.md` out of the repo instead and the plugin path goes untested.
+
 Update with `/plugin marketplace update o3world` (or enable auto-update in
-`/plugin` → Marketplaces).
+`/plugin` → Marketplaces). The marketplace serves `main`, so a change is only
+installable once it is merged.
+
+The same two steps have a CLI form, which is the one an agent can run:
+
+```
+claude plugin marketplace update o3world
+claude plugin install o3-authoring@o3world   # --scope user is the default here
+```
 
 ## Claude Desktop (skill ZIP)
 
