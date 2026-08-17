@@ -1,83 +1,107 @@
 # O3 authoring (`o3sanity`)
 
-The authoring capability from map #63: a vague idea becomes a
-publishable-quality Sanity draft — an insight (blog post), case study, or
-page — in the O3 voice.
+A Claude Code plugin that takes a vague idea to a publishable-quality Sanity
+draft — an insight (blog post), case study, or page — in the O3 voice. It
+drafts and it never publishes. The last stage hands a human a draft in Studio,
+and the human decides.
 
-**Five skills, one per stage of the pipeline** (#193). Each owns one
-artifact-state of the `brief` document, so where a piece stands is a document in
+Five skills, one per stage of a pipeline (map #63). Each owns one
+artifact-state of a `brief` document, so where a piece stands is a document in
 the dataset rather than a position in a conversation — which is what lets a run
 stop in one session and continue in another.
 
-| Skill              | Stage | What it does                                                | State |
-| ------------------ | ----- | ----------------------------------------------------------- | ----- |
-| `o3sanity:gather`  | 1     | sweeps corpus, web and environment; ends at the gather gate | built |
-| `o3sanity:brief`   | 2     | the interview, the agreed thesis, the locked questions      | built |
-| `o3sanity:draft`   | 3     | the outline, then the piece as prose, into the brief        | built |
-| `o3sanity:review`  | 4     | the gates and the reader test, ending in a verdict          | built |
-| `o3sanity:typeset` | 5     | the reviewed draft becomes the real Sanity document         | built |
+## The pipeline
 
-All five are built, and each one gates on the state the one before it left. The
-pipeline ends at `handed-off`: the piece is a draft on the live content model,
-and publishing it is a human's move in Studio.
+| Skill              | Stage | What it does                                                 | Writes to the brief                         | Ends on                                      |
+| ------------------ | ----- | ------------------------------------------------------------ | ------------------------------------------- | -------------------------------------------- |
+| `o3sanity:gather`  | 1     | sweeps the corpus, the web and the environment               | `background`, `links`, `gaps`               | `GATHER GATE: found n / missing n / …`       |
+| `o3sanity:brief`   | 2     | two rounds of questions, then a sentence the human agrees to | `instructions`, `thesis`, `readerQuestions` | `THESIS AGREED: <the sentence>`              |
+| `o3sanity:draft`   | 3     | proposes a shape, gates it, then writes the prose to it      | `outline`, `draft`                          | `OUTLINE GATE: …`, then the drafted body     |
+| `o3sanity:review`  | 4     | five blocking gates and a context-free reader test           | `verdict`                                   | `BLOCKING: true\|false (<reason>)`           |
+| `o3sanity:typeset` | 5     | the reviewed draft becomes the real Sanity document          | `pieceId`, and the piece itself             | `TYPESET: <document id> — <dataset>, n gaps` |
 
-## What every skill reads first
+Each stage gates on the state the one before it left, and every gate is a line
+a machine can match rather than a paragraph a human has to interpret. Stage 5
+refuses to run on anything but `verdict.result == "pass"`.
 
-[`CORE.md`](./CORE.md) at the plugin root, reached from a skill as
-`${CLAUDE_PLUGIN_ROOT}/CORE.md`. It carries what all five share: the Sanity
-resource block and the dataset rule, the two hard rules (drafts only; every fact
-carries its source), the resume rule, and the table of which stage owns which
-brief field.
+The pipeline ends at `handed-off`: the piece is a draft on the live content
+model, and publishing it is a human's move in Studio.
 
-It sits at the root rather than in `references/` because every skill reads it
-unconditionally, on every run. The files below are reached only by the branch
-that needs them.
+## The brief contract
 
-## What the plugin carries (`references/`)
+The middle column above is the whole of it. A skill writes the fields its own
+stage produces and leaves the rest alone, so a field belonging to a stage
+nobody has dispatched stays empty. That emptiness is load-bearing: it is how a
+later session tells an unanswered gate from an answered one. Filling a field
+early is how a run quietly claims a confirmation nobody gave.
 
-The structural knowledge the pipeline cannot run without, reachable as
-`${CLAUDE_PLUGIN_ROOT}/references/<file>`:
+Four fields belong to whichever stage is running: `stage` (the stage that
+finished), `nextStep` (what the next session does first), `decisions` (any
+scoping call the run made), and `gaps` (opened by gather, appended to by
+everyone). Between `stage` and `nextStep` they are the resume rule — a run
+that stopped mid-flight carries on from there rather than from the top.
 
-| File                          | What it governs                                                        |
-| ----------------------------- | ---------------------------------------------------------------------- |
-| `references/argument.md`      | how one long argument holds up — claim, warrant, arc, turn, ending     |
-| `references/composition.md`   | which band follows which on a page, and which block carries which job  |
-| `references/style.md`         | the style floor: plain sentences, sourced claims, fact conservation    |
-| `references/labels.md`        | the stage directions a draft body carries, and what each one means     |
-| `references/reader-test.md`   | the last gate: both probes, what the reader gets, and what a fail does |
-| `references/portable-text.md` | every write mechanic — keys, the revision guard, labels into blocks    |
+[`CORE.md`](./CORE.md) is where the skills read this, and it is the normative
+copy.
+
+## What the plugin carries
+
+Every skill opens by reading `${CLAUDE_PLUGIN_ROOT}/CORE.md`. It holds what all
+five share: the Sanity resource block and the dataset rule, the two hard rules
+(drafts only; every fact carries its source), the weight classifier, the resume
+rule, how a stage patches the brief, and the field table above.
+
+It sits at the plugin root rather than in `references/` because every skill
+reads it unconditionally, on every run. The files below are reached only by the
+branch that needs them, as `${CLAUDE_PLUGIN_ROOT}/references/<file>`:
+
+| File                          | What it governs                                                        | Read by                |
+| ----------------------------- | ---------------------------------------------------------------------- | ---------------------- |
+| `references/argument.md`      | how one long argument holds up — claim, warrant, arc, turn, ending     | brief, draft, review   |
+| `references/composition.md`   | which band follows which on a page, and which block carries which job  | draft, review, typeset |
+| `references/style.md`         | the style floor: plain sentences, sourced claims, fact conservation    | draft, review          |
+| `references/labels.md`        | the stage directions a draft body carries, and what each one means     | draft, review, typeset |
+| `references/reader-test.md`   | the last gate: both probes, what the reader gets, and what a fail does | review                 |
+| `references/portable-text.md` | every write mechanic — keys, the revision guard, labels into blocks    | typeset                |
 
 These replaced the session-start dataset fetch the skill used to do (#192). The
 style floor is a floor and not a voice: persona, brand vocabulary, and the
-slop-pattern list stay in the repo's `o3world-copy` skill and re-enter here only
-as the eval loop produces an observed failure that asks for them.
+slop-pattern list stay in the repo's `o3world-copy` skill, and re-enter here
+only as the eval loop produces an observed failure that asks for them.
 
-`references/labels.md` is the odd one out: not craft but a **contract**, and the
-only file three skills share. `draft` writes body labels by it, `review` reads
-them as theater directions, `typeset` converts by them — so a change to it is a
-change to three skills at once.
+`references/labels.md` is the odd one out — not craft but a **contract**.
+`draft` writes body labels by it, `review` reads them as theater directions,
+and `typeset` converts by them, so a change to it changes what three skills do
+in lockstep. The other shared files are read for judgement, and two skills
+reading one of those can disagree about a piece without either being wrong.
 
-`references/portable-text.md` is the opposite case: `typeset` is its only reader,
-and it holds every portable-text write mechanic in the plugin. A run building a
-document from anything else is building against mechanics it inferred.
+`references/portable-text.md` is the opposite case: `typeset` is its only
+reader, and it holds every portable-text write mechanic in the plugin. A run
+building a document from anything else is building against mechanics it
+inferred.
 
-`gather` points at none of them — it writes nothing for the site, so it pays for
-nothing. Stages 2 to 5 are where they come in.
+`gather` points at none of them. It writes nothing for the site, so it pays for
+nothing; stages 2 to 5 are where they come in.
 
 ## Testing a skill
 
-The test surface is [`evals/`](./evals) — cases in `claude plugin eval` format,
-graded mechanically, run today by the `o3-eval-runner` agent and by the CLI once
-the early-access flag lands. **A skill change is checked by running cases**, and
-a new skill starts with the RED baseline the eval README sets out: run the
-scenario once with the skill withheld, record the failures verbatim, and write
-only the guidance those failures license. `gather`'s baseline is on
-[#193](https://github.com/o3world/o3-sanity/issues/193).
+The test surface is [`evals/`](./evals) — sixteen cases in `claude plugin eval`
+format, graded mechanically, run today by the `o3-eval-runner` agent and by the
+CLI once the early-access flag lands. A case is a prompt, a scripted persona,
+and the graders that say what right looks like. **A skill change is checked by
+running cases**, not by reading the diff.
 
-[`scenarios/`](./scenarios) holds the two long-form scripts that format grew out
-of.
+A new skill starts with the **RED baseline** the [eval
+README](./evals/README.md) sets out: run the case once with the skill withheld,
+record the failures verbatim, and write only the guidance those failures
+license. Guidance written without one is a guess wearing a rule's clothes. Each
+skill's baseline is on its ticket — gather on
+[#193](https://github.com/o3world/o3-sanity/issues/193), then #194 to #197.
 
-## Claude Code (plugin)
+`pnpm skill:lint` validates all five skill files against the agent-skill spec,
+and CI runs the same command as its own job.
+
+## Install
 
 This directory is a Claude Code plugin. It ships the five skills and
 preconfigures the hosted Sanity MCP server (`https://mcp.sanity.io`); auth is
@@ -92,8 +116,8 @@ marketplace:
 **Install it at user scope.** A project-scoped install belongs to the directory
 it was made in, and this repo works one ticket to one worktree — the directory
 goes away, and the next worktree has the plugin enabled in
-`.claude/settings.json` with nothing installed to serve it. What that looks like
-from inside a session is a skill that is simply absent.
+`.claude/settings.json` with nothing installed to serve it. What that looks
+like from inside a session is a skill that is simply absent.
 
 Update with `/plugin marketplace update o3world` (or enable auto-update in
 `/plugin` → Marketplaces). The marketplace serves `main`, so a change is only
@@ -106,6 +130,14 @@ claude plugin marketplace update o3world
 claude plugin install o3sanity@o3world   # --scope user is the default here
 ```
 
+**Claude Desktop installs from the same marketplace.** The plugin needs no
+separate build and no ZIP. One constraint holds for it: nothing in the plugin
+may depend on a Claude Code feature that Desktop does not have, and the one
+Code-shaped thing it does rely on is `${CLAUDE_PLUGIN_ROOT}` — the variable
+every skill resolves `CORE.md` and the references through. A Desktop
+verification pass has not run yet, so treat that variable as the one thing to
+check there first.
+
 To exercise an unmerged change without installing anything, load this directory
 into one session:
 
@@ -113,16 +145,7 @@ into one session:
 claude --plugin-dir tools/authoring-skill
 ```
 
-That is also how the skill list is checked — all five should appear namespaced,
+That is also how the skill list is checked: all five should appear namespaced,
 `o3sanity:gather` through `o3sanity:typeset`. `claude plugin validate
-tools/authoring-skill` checks the manifest, and the same command against
-`skills/` checks the five skill files.
-
-## Claude Desktop
-
-**No distribution, as of #193.** A Desktop custom skill is one folder and
-nothing outside it is reachable, so a plugin of five skills sharing `CORE.md`
-through `${CLAUDE_PLUGIN_ROOT}` has no correct ZIP to build. `pnpm build:skill`
-and `pnpm skill:wire` both exit non-zero saying so rather than shipping an
-artifact that installs cleanly and then fails on its first instruction. #198
-decides whether Desktop gets its own distribution or the surface retires.
+tools/authoring-skill` checks the manifest — it does not read the skill
+frontmatter as YAML, which is what `pnpm skill:lint` is for.

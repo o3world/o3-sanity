@@ -285,9 +285,11 @@ alike. **It reports before it writes.**
    the batch**, not deferred to a second call and not applied because you were
    sure about them.
 
-6. **On an `ifRevisionId` rejection: abort, re-fetch, re-derive.** Never retry
-   blind. The approvals were given against text that no longer exists. Run the
-   findings pass again and re-present, marking which approved rows still stand.
+6. **On an `ifRevisionId` rejection**, CORE's rule applies to a piece document as
+   it does to a brief: abort, re-fetch, re-derive. Here that means the approvals
+   themselves are void — they were given against text that no longer exists — so
+   run the findings pass again and re-present, marking which approved rows still
+   stand.
 
 7. **Close as above** — which rows landed, which were dropped, the brief this ran
    against and what its verdict now says or that there was none, the reader

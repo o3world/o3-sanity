@@ -214,9 +214,12 @@ home a rule belongs to follows what it governs:
 
 - **Shape** — `tools/authoring-skill/references/`. `argument.md` (how a long
   argument holds up), `composition.md` (which band follows which on a page),
-  and `style.md` (the style floor: plain sentences, a claim sourced in its own
-  sentence, fact conservation). A skill reads these as
-  `${CLAUDE_PLUGIN_ROOT}/references/<file>`.
+  `style.md` (the style floor: plain sentences, a claim sourced in its own
+  sentence, fact conservation), `labels.md` (the stage directions a draft body
+  carries), `reader-test.md` (the last gate) and `portable-text.md` (every
+  write mechanic). A skill reads these as
+  `${CLAUDE_PLUGIN_ROOT}/references/<file>`; the table in the plugin's README
+  says which skill reads which.
 - **Voice** — `.claude/skills/o3world-copy/`, with `docs/guidance/brand.md`,
   `slop.md` and `visual.md` as its material. Persona, brand vocabulary and the
   slop-pattern list are deliberately not in the plugin; they re-enter it only
@@ -281,6 +284,11 @@ with the skill withheld (`arm: without`), and paste the failures — the judged 
 own rationalisations, verbatim — into the ticket before writing a line of guidance. A rule nobody
 watched fail is a guess. The procedure, and how the failure's shape picks the form of the fix, is in
 the eval README.
+
+**`pnpm skill:lint` is the spec check**, and CI runs it as its own job. It validates each of the
+five `SKILL.md` files with `skills-ref validate` — frontmatter that parses as YAML, a `name` that
+matches the directory, a description inside the limit. `claude plugin validate` checks the manifest
+and passes frontmatter that two YAML parsers reject, so it is not a substitute.
 
 ### Testing
 

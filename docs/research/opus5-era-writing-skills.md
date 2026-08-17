@@ -161,7 +161,7 @@ Iron Law `NO SKILL WITHOUT A FAILING TEST FIRST` applied to edits too.
 RED = run a pressure scenario _without_ the skill and record the rationalizations verbatim; GREEN =
 write the skill against those exact rationalizations; REFACTOR = find new loopholes. Scenarios
 combine 3+ pressures and force a lettered choice; pure reference skills are exempt. _Steal:_
-baseline-first — this repo's `o3-authoring-scenario` agent is already that apparatus.
+baseline-first — this repo's `o3-eval-runner` agent is already that apparatus.
 
 ## mattpocock/skills — 219.9k stars
 

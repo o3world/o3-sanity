@@ -97,7 +97,7 @@ pnpm brief:export             # a dataset-born brief becomes a file in the repo
 pnpm schema:deploy            # deploy the schema so get_schema sees it
 pnpm schema:check             # fails if the deployed schema drifted from the repo
 pnpm figma:sync               # what changed in the design file since last sync
-pnpm skill:wire               # on hold — Claude Desktop has no distribution (#198)
+pnpm skill:lint               # validate the o3sanity plugin's five skill files
 pnpm env:pull                 # restore apps/web/.env.local from Vercel
 ```
 
