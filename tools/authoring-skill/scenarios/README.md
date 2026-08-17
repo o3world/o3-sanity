@@ -1,6 +1,6 @@
 # Scenarios
 
-The `o3:authoring` skill's test surface. A scenario is an idea for a piece plus
+The `o3sanity:authoring` skill's test surface. A scenario is an idea for a piece plus
 scripted stakeholder answers — a persona, the facts it knows, and what it says
 at every point the skill asks for a nod. It is not sample content; it exists so
 that a change to `SKILL.md` can be checked against behaviour instead of against

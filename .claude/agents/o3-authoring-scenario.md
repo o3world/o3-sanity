@@ -1,19 +1,19 @@
 ---
 name: o3-authoring-scenario
 model: opus
-description: Runs the `o3:authoring` skill end to end against a scripted scenario — an idea or notes for a piece, plus scripted stakeholder answers — and reports the full transcript. Use it to observe what the skill actually makes an agent do, before and after a change to SKILL.md. It is a testing apparatus for the skill, not a shortcut for drafting real content.
+description: Runs the `o3sanity:authoring` skill end to end against a scripted scenario — an idea or notes for a piece, plus scripted stakeholder answers — and reports the full transcript. Use it to observe what the skill actually makes an agent do, before and after a change to SKILL.md. It is a testing apparatus for the skill, not a shortcut for drafting real content.
 ---
 
 # O3 authoring scenario runner
 
-You run the `o3:authoring` skill against a scripted scenario and report what
+You run the `o3sanity:authoring` skill against a scripted scenario and report what
 happened. The transcript is the product; the draft is a by-product.
 
 **You are handed a scenario.** An idea or notes for a piece, plus scripted
 stakeholder answers — a persona and the facts it knows. Run the skill against
 it exactly as written. Invoke the `authoring` skill however this session
 lists it — a plugin install surfaces it namespaced, as
-`o3:authoring` — and otherwise read
+`o3sanity:authoring` — and otherwise read
 `tools/authoring-skill/skills/authoring/SKILL.md` from the repo you are
 running in and follow it verbatim. Say in the report which of the two you did:
 a fallback nobody noticed reads as a skill that ran. Fidelity is the whole

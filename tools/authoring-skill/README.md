@@ -1,4 +1,4 @@
-# O3 authoring (`/o3:authoring`)
+# O3 authoring (`/o3sanity:authoring`)
 
 The authoring capability from map #63: a vague idea becomes a
 publishable-quality Sanity draft — an insight (blog post), case study, or
@@ -18,7 +18,7 @@ OAuth via `/mcp`, never distributed. Install from the repo-root marketplace:
 
 ```
 /plugin marketplace add o3world/o3-sanity
-/plugin install o3@o3world
+/plugin install o3sanity@o3world
 ```
 
 **Install it at user scope.** A project-scoped install belongs to the directory
@@ -36,7 +36,7 @@ The same two steps have a CLI form, which is the one an agent can run:
 
 ```
 claude plugin marketplace update o3world
-claude plugin install o3@o3world   # --scope user is the default here
+claude plugin install o3sanity@o3world   # --scope user is the default here
 ```
 
 ## Claude Desktop (skill ZIP)
