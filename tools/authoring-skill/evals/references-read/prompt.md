@@ -30,8 +30,8 @@ Check that the references are reachable and complete:
    BLOCKING: false (<reason>)
    ```
 
-   `false` if all three files were there and each carried a body. `BLOCKING:
-true (<reason>)` if any is missing or empty, naming which.
+   Report `false` if all three files were there and each carried a body.
+   Report `true` if any is missing or empty, naming which in the reason.
 
 This run reads and never writes outside its own working directory. Touch no
 Sanity document, and never address the `production` dataset.

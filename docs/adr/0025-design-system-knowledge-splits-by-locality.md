@@ -1,6 +1,6 @@
 # 0025. Design-system knowledge splits by locality
 
-- **Status:** Accepted
+- **Status:** Accepted; the split holds, and [#192](https://github.com/o3world/o3-sanity/issues/192) moved the catalog's home from a `guidance` document to `tools/authoring-skill/references/composition.md`
 - **Date:** 2026-08-15
 - **Deciders:** NickO3 + Claude
 - **Related:** [issue #66](https://github.com/o3world/o3-sanity/issues/66), [issue #73](https://github.com/o3world/o3-sanity/issues/73), [ADR 0024](./0024-authoring-knowledge-has-one-source-and-one-fan-out.md), `packages/sanity/src/schemas/blocks/`
@@ -8,7 +8,7 @@
 ## Context
 
 For a page composed from scratch, an agent needs more than the schema's field
-shapes. It needs to know what each section block is *for* ("proof by
+shapes. It needs to know what each section block is _for_ ("proof by
 association", "one borrowed voice"), and it needs composition — what orders and
 pairings work, how surfaces alternate, where a quote or stat band earns its
 place. Issue #66 asked where each kind lives: in schema `description` strings,
@@ -31,8 +31,8 @@ description), with nothing to catch it.
 
 ## Decision
 
-**Split by locality.** Knowledge about *one block alone* lives in that block's
-schema `description`. Knowledge that *mentions two or more blocks* — arcs,
+**Split by locality.** Knowledge about _one block alone_ lives in that block's
+schema `description`. Knowledge that _mentions two or more blocks_ — arcs,
 pairings, surface rhythm, section-purpose-to-block bindings, anti-patterns —
 lives in the composition catalog: an `o3-composition` guidance document, one
 new row in `tools/guidance/src/sources.ts`, reaching Desktop through the same

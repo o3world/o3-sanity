@@ -91,8 +91,6 @@ pnpm test                     # the full suite (checkpoint, not a loop)
 pnpm vr                       # pixel diff against the merge base
 pnpm typegen                  # schema.json + generated types, after a schema edit
 
-pnpm guidance:sync            # voice corpus → guidance documents
-pnpm guidance:check           # fails if the dataset drifted from the repo
 pnpm brief:sync               # brief markdown → brief documents
 pnpm brief:check              # fails if a file-backed brief drifted
 pnpm brief:export             # a dataset-born brief becomes a file in the repo

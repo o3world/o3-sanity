@@ -5,30 +5,28 @@ description: Write, rewrite, or review copy in the O3 World voice — headlines,
 
 # O3 World copy
 
-This file is read in two places. In this repo it is a Claude Code skill; in the
-Sanity dataset it is the `o3-voice` guidance document, frontmatter stripped,
-and that copy is what every MCP consumer reads. Write for both: name a sibling
-guidance document by its `key`, because a repo file path resolves to nothing in
-the dataset. Repo paths are fine for repo things — seed files, commands — and
-the last section is where they belong.
+This skill is the voice: register, vocabulary, and the shapes a sentence takes
+on each surface. Its material sits beside it in the repo, named by path.
 
 O3's voice is warm and concrete: plain words, real specifics, active
 sentences, and a genuine welcome. We are the client's partner in all things
 experiences, and the copy's job is to help them see a clear path forward —
 not to impress them with vocabulary, and not to posture.
 
-The brand foundation (pillars, delivery principles, values) is `o3-brand`. It
-is **source material, not copy**. Never paste a pillar into a headline. Write
-what the belief looks like as a specific claim.
+The brand foundation (pillars, delivery principles, values) is
+`docs/guidance/brand.md`. It is **source material, not copy**. Never paste a
+pillar into a headline. Write what the belief looks like as a specific claim.
 
 The machine tells — the sentence shapes and filler that make copy read as
-generated — are `o3-slop`, along with the reconciliation for the four O3 moves
-that sit close to a banned pattern. Read it before the revision pass, and read
-it whenever the job is to edit someone else's draft or to audit writing for AI
-tells rather than rewrite it.
+generated — are `docs/guidance/slop.md`, along with the reconciliation for the
+four O3 moves that sit close to a banned pattern. Read it before the revision
+pass, and read it whenever the job is to edit someone else's draft or to audit
+writing for AI tells rather than rewrite it.
 
-How a long piece argues — the claim, the arc, the turn, the ending — is
-`o3-argument`. This file governs the words; that one governs the shape.
+**This skill governs the words, not the shape.** How a long piece argues — the
+claim, the arc, the turn, the ending — and how a page's bands are ordered are
+the o3sanity authoring plugin's, in `tools/authoring-skill/references/`. Do not
+restate them here; a rule in two homes drifts in one of them.
 
 ## The register
 
@@ -98,7 +96,8 @@ writing a word:
    changes everything". (The old site leaned on the first list hard — the ban
    is the correction, and the strongest recent pieces prove it works. The
    second list is what a draft picks up when nobody is watching.) The
-   conditional cuts — empty adverbs and filler phrases — are in `o3-slop`.
+   conditional cuts — empty adverbs and filler phrases — are in
+   `docs/guidance/slop.md`.
 8. **Person:** "you/your" for the client's world, "we" for O3 — and "we" is
    the team and its community, not a vendor. Never "users will be able to" —
    say what people can do.
@@ -149,14 +148,13 @@ These match the section blocks in the Sanity schema; live examples are in
 - **Body prose**: admits cost and tradeoffs plainly — that's what grounded
   sounds like. "It's a slower way to grow. It's the only way to do work this
   deep."
-- **Insight title**: the title carries the fact — a reader who sees only the
-  title knows what actually happened or what we claim. "We rebuilt our site
-  in a weekend. The AI made almost none of the decisions." passes; "Notes on
-  a weekend rebuild" doesn't. The title is settled against the excerpt and the
-  opening paragraph rather than on its own — `o3-argument`'s **front door** is
-  where the three are read in a row. Community content ends on a welcome and an
-  essay ends on a turned observation; where that observation comes from is
-  `o3-argument`, and a sales line is never the answer on either surface.
+- **Insight title**: the words are this skill's — plain, specific, no colon
+  reveal. "We rebuilt our site in a weekend. The AI made almost none of the
+  decisions." passes; "Notes on a weekend rebuild" doesn't. What a title has to
+  carry, and how it is settled against the excerpt and the opening, belong to
+  the authoring plugin's `references/argument.md`.
+- **Endings**: community content ends on a welcome. An essay's ending is
+  argument work, not word work — `references/argument.md` again.
 
 ## Revision pass (run every time)
 
@@ -171,8 +169,8 @@ Draft, then:
 5. Check the banned list (rule 7) — and check for the competitor-foil
    ("most firms…") and the repeated "X, not Y". One antithesis per page,
    zero foils.
-6. Run the checks at the end of `o3-slop`. They catch the shapes this
-   list doesn't: colon reveals, puffery, `-ing` analysis, fake kickers,
+6. Run the checks at the end of `docs/guidance/slop.md`. They catch the shapes
+   this list doesn't: colon reveals, puffery, `-ing` analysis, fake kickers,
    recap endings, em-dash clutter, robotic symmetry.
 7. Check the register against the surface table. A case study is not a
    birthday post; a birthday post is not a case study.
@@ -218,3 +216,7 @@ On-brand rewrite:
   `/studio` or via MCP `patch_documents`.
 - Schema/field naming is governed by the `content-naming` skill — this skill
   governs only the words inside the fields.
+- This skill's own material: `docs/guidance/brand.md` (pillars, principles,
+  values), `docs/guidance/slop.md` (machine tells and the end checks), and
+  `docs/guidance/visual.md` (palette, gradients, geometry, for the job that
+  makes a picture rather than writes).

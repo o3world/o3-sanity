@@ -1,9 +1,9 @@
 # 0024. Authoring knowledge has one source and one fan-out
 
-- **Status:** Accepted
+- **Status:** Superseded by [#192](https://github.com/o3world/o3-sanity/issues/192). The dataset fan-out is retired — no `guidance:sync`, no `guidance` document type. The plugin carries argument, composition and a style floor as files in `tools/authoring-skill/references/`, and the single-source rule survives as a one-home rule per file. Voice stays in `o3world-copy`.
 - **Date:** 2026-08-15
 - **Deciders:** NickO3 + Claude
-- **Related:** [map #63](https://github.com/o3world/o3-sanity/issues/63), [issue #68](https://github.com/o3world/o3-sanity/issues/68), [issue #72](https://github.com/o3world/o3-sanity/issues/72), [ADR 0025](./0025-design-system-knowledge-splits-by-locality.md), `tools/guidance/`
+- **Related:** [map #63](https://github.com/o3world/o3-sanity/issues/63), [issue #68](https://github.com/o3world/o3-sanity/issues/68), [issue #72](https://github.com/o3world/o3-sanity/issues/72), [issue #192](https://github.com/o3world/o3-sanity/issues/192), [ADR 0025](./0025-design-system-knowledge-splits-by-locality.md), `tools/authoring-skill/references/`
 
 ## Context
 
@@ -98,7 +98,7 @@ every publish.
 
 - **Positive:** a voice edit reaches every installed user in two steps —
   commit the markdown, run the sync. The plugin needs a push only when the
-  *workflow* changes.
+  _workflow_ changes.
 - **Positive:** a skipped sync fails loudly (`guidance:check`), and once
   `schema:check` exists the same holds for the one knowledge surface outside
   the store.

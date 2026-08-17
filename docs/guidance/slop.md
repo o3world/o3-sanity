@@ -1,6 +1,6 @@
 # Slop patterns
 
-`o3-voice` sets the register. This document removes the machine tells — the
+The voice skill (`.claude/skills/o3world-copy/SKILL.md`) sets the register. This document removes the machine tells — the
 sentence shapes and filler words that make copy read as generated, whatever
 the register. Adapted from [no-ai-slop](https://github.com/petergyang/no-ai-slop)
 and reconciled with the O3 voice below, so the overlap is settled here rather
@@ -96,7 +96,7 @@ clearly beat a comma, a period, or parentheses. Break up clusters.
 
 ## Filler words
 
-The banned-cliché list is rule 7 of `o3-voice`; these two lists are the
+The banned-cliché list is rule 7 of the voice skill; these two lists are the
 softer cuts, and both are conditional.
 
 **Often-empty adverbs:** just, literally, honestly, simply, actually, truly,
@@ -143,7 +143,7 @@ sentence _before_ the fact that announces a fact is coming.
 
 ## Editing someone else's draft
 
-`o3-voice` governs copy O3 publishes as O3. A teammate's insight or
+The voice skill governs copy O3 publishes as O3. A teammate's insight or
 personal essay is a different job: preserve their voice while removing the
 machine tells.
 
@@ -171,7 +171,7 @@ named patterns are evidence the reader can check. Offer to edit afterward.
 
 ## The checks
 
-Run these after the revision pass in `o3-voice`. Any failure means fix and
+Run these after the revision pass in the voice skill. Any failure means fix and
 re-read.
 
 1. Zero binary contrasts, negative listings, rhetorical setups, and
