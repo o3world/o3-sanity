@@ -17,10 +17,11 @@ export const BRIEF_DIR = 'tools/guidance/briefs'
 
 /**
  * A brief's markdown is its `background` — the raw material the piece was
- * written from. The other three fields are not the corpus's to write, which is
- * why briefs sync by merge: `record` is where the authoring skill persists its
- * interview, and `instructions` and `links` are the human's on a dataset-born
- * brief and locked with every other field on a file-backed one (ADR 0027).
+ * written from. Every other field is outside the corpus's authority, which is
+ * why briefs sync by merge: the pipeline stages patch their own fields as a
+ * run proceeds, and `instructions` and `links` are the human's on a
+ * dataset-born brief and locked with every other field on a file-backed one
+ * (ADR 0027).
  */
 const BRIEF_BODY = 'background' satisfies keyof Brief
 

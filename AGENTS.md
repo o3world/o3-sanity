@@ -248,8 +248,16 @@ becomes the brief's `background`. Run `pnpm brief:sync`. Then point the piece's
 seed JSON at `brief-<key>` through its weak `briefs` array. Load and sync in
 either order; the reference is weak for that reason.
 
+A brief also carries what an authoring run makes of it, one field per stage —
+`stage`, `nextStep`, `thesis`, `readerQuestions`, `outline`, `draft`,
+`verdict`, `decisions`, `gaps`, `pieceId` (#190). Each stage patches its own
+fields, so a resuming session reads `stage` instead of parsing prose and two
+stages cannot clobber each other. The markdown owns `background` and nothing
+else; a brief written before #190 keeps its old `record` value as an
+off-schema field that nothing reads.
+
 Two rules the corpus config carries and the commands do not restate. A brief
-syncs by **merge**, so the `record` the authoring skill writes survives. And a
+syncs by **merge**, so everything a run patched survives a sync. And a
 brief with no `sourcePath` was **born in the dataset** — `check` ignores it and
 `sync` never deletes it. A file whose key a dataset-born brief already holds is
 **refused rather than merged**, and `pnpm brief:export <key>` is the way out: it

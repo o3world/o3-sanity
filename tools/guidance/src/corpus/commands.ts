@@ -47,8 +47,8 @@ export type CorpusSync = {
  *
  * A `replace` corpus goes out whole. A `merge` corpus creates the document and
  * then sets only the fields the source owns, because the dataset writes some of
- * them: replacing a brief would wipe the `record` the authoring skill left in
- * it (ADR 0027). A settled merge entry sets nothing at all — the create is free
+ * them: replacing a brief would wipe the run state the authoring skills left
+ * on it (ADR 0027). A settled merge entry sets nothing at all — the create is free
  * against a document that exists, the patch would bump `_rev` on every run.
  *
  * A source the plan calls a conflict is skipped whole, writes and draft delete
@@ -190,7 +190,7 @@ export function exportCorpus(
 
   /* The row carries the published copy, so a draft edited since holds material
    * the file would not: export would write the older body, and the draft delete
-   * the next sync makes would take the newer one — `record` included. */
+   * the next sync makes would take the newer one — run state included. */
   if (candidate.draftBeside) {
     out.error(
       `✗ ${_id} has an unpublished draft beside it — publish or discard it in Studio, then export`,
@@ -237,8 +237,8 @@ export function exportCorpus(
    *
    * A draft-only candidate is published whole first. Stamping the draft instead
    * would leave sync to build the published copy from the file, and the file
-   * carries only the body — so the `record` an interview produced would go with
-   * the draft that sync then deletes. */
+   * carries only the body — so everything a run produced would go with the
+   * draft that sync then deletes. */
   const writes: CorpusWrite[] = candidate.draftOnly
     ? [
         { op: 'createOrReplace', document: { ...heldFields(candidate), ...document } },
@@ -274,7 +274,7 @@ const NOT_KEBAB = `is not lowercase kebab-case (${CORPUS_KEY.source})`
  * and the stamp on the document — and only the id is what the operator names.
  * A document whose `key` disagrees with its `_id` (an API writer can leave one
  * that way) would file itself under one key and stamp the other, and the next
- * sync would create the file's document without the `record` and retire the
+ * sync would create the file's document without the run state and retire the
  * one the stamp orphaned.
  */
 function malformedKey(type: string, candidate: CorpusSnapshotDocument): string | undefined {
@@ -326,7 +326,7 @@ function describeUnexportable(
    * as a leftover, so what happens next is a retirement, not an overwrite. */
   return occupant(occupied, claimed)
     ? `${_id} is already file-backed (${claimed}) — the repo file is the source of truth`
-    : `${_id} claims ${claimed}, and the corpus has no such file — \`pnpm ${corpus.type}:sync\` will retire the document, record and all; restore the file with git, or clear \`sourcePath\` on the document to make it dataset-born again`
+    : `${_id} claims ${claimed}, and the corpus has no such file — \`pnpm ${corpus.type}:sync\` will retire the document, run state and all; restore the file with git, or clear \`sourcePath\` on the document to make it dataset-born again`
 }
 
 /**

@@ -1,6 +1,6 @@
 # 0027. The brief is a document
 
-- **Status:** Accepted
+- **Status:** Accepted; the one machine slot amended by [#190](https://github.com/o3world/o3-sanity/issues/190)
 - **Date:** 2026-08-16
 - **Deciders:** NickO3 + Claude
 - **Related:** [ADR 0003](./0003-disposable-dataset-migration-lock.md), [ADR 0024](./0024-authoring-knowledge-has-one-source-and-one-fan-out.md), [issue #68](https://github.com/o3world/o3-sanity/issues/68), [issue #142](https://github.com/o3world/o3-sanity/issues/142), `tools/guidance/`
@@ -35,6 +35,12 @@ The shape:
   the locked reader-test questions, the gaps. `record` is a text field
   whose internal format belongs to the skill. Typed fields would couple
   the schema to a workflow #142 already changed once.
+  **Amended by #190**: the pipeline became five skills, each owning one
+  artifact, and one text field they all rewrite is a stale-write clobber
+  waiting to happen. `record` is replaced by a field per artifact —
+  `stage`, `nextStep`, `thesis`, `readerQuestions`, `outline`, `draft`,
+  `verdict`, `decisions`, `gaps`, `pieceId` — each patched by the stage
+  that owns it. The coupling this bullet refused is the price of that.
 - `insight`, `page`, and `caseStudy` carry a `briefs` array of **weak**
   references, written in seed JSON against deterministic ids. Weak, so a
   piece is never publish-blocked or delete-locked by its own provenance,

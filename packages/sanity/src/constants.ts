@@ -102,6 +102,14 @@ export const SURFACES = ['white', 'bone', 'ink'] as const
 export type Surface = (typeof SURFACES)[number]
 
 /**
+ * How far a piece has got through the authoring pipeline. The first five are
+ * the pipeline's own skills, each owning one artifact on the brief; the sixth
+ * is where a finished run stops. A brief that no run has touched has no stage.
+ */
+export const BRIEF_STAGES = ['gather', 'brief', 'draft', 'review', 'typeset', 'handed-off'] as const
+export type BriefStage = (typeof BRIEF_STAGES)[number]
+
+/**
  * What a `mark` can draw: the animated orb, or the halftone disc the canonical
  * frames draw. First value is the default, so a mark left alone animates.
  */

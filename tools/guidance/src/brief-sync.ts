@@ -9,8 +9,8 @@
  *
  * The plan decides what to write (`src/corpus/`); this file supplies the
  * client. Two things differ from `guidance:sync`, both from the ADR. Documents
- * are patched rather than replaced, so the `record` the authoring skill wrote
- * survives. And a brief with no `sourcePath` was born in the dataset — this
+ * are patched rather than replaced, so the run state the authoring skills
+ * wrote survives. And a brief with no `sourcePath` was born in the dataset — this
  * never touches one, and refuses to sync a file that asks for its id, exiting
  * non-zero instead.
  */
@@ -44,7 +44,9 @@ async function main() {
 
   await tx.commit({ visibility: 'sync' })
   process.exitCode = status
-  console.log(`\ndone — a piece reaches its briefs with briefs[]->{title, background, record}`)
+  console.log(
+    `\ndone — a piece reaches its briefs with briefs[]->{title, background, stage, thesis}`,
+  )
 }
 
 await main()

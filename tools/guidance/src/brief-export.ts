@@ -36,7 +36,8 @@ async function main() {
 
   /* Whole documents, not the projection sync compares on: exporting a draft
    * publishes everything it holds, and the fields the markdown cannot carry —
-   * `instructions`, `links`, `record` — are what the report names. Drafts are
+   * `instructions`, `links`, and everything a run patched — are what the
+   * report names. Drafts are
    * included because the authoring skill never publishes one. */
   const snapshot = normalizeSnapshot(
     await client.fetch<CorpusSnapshotDocument[]>(`*[_type == $type]`, { type: BRIEF_TYPE }),
@@ -56,7 +57,7 @@ async function main() {
 
     /* The file goes first and is taken back if the transaction does not land.
      * Committing first would risk the worse half: a document stamped with a
-     * `sourcePath` nothing backs is one the next sync retires, record and all,
+     * `sourcePath` nothing backs is one the next sync retires, run state and all,
      * while a file with no stamp only registers a key twice. Neither half is
      * an export, so an export leaves neither. */
     try {
