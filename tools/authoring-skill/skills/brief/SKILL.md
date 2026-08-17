@@ -85,8 +85,12 @@ Add any field the reader test will need, required or not. On a page that is
 comes from, and the schema does not require it. A reader given an empty one
 tests two-thirds of the piece, and the test does not re-run.
 
-Put them in one list with a recommendation against each line. This is a list to
-nod at, not a round. Where the human has no answer, the slot decides what
+Leave out the fields the drafting writes — `title`, `slug`, `excerpt`. They are
+required, and they are the piece, so asking now is asking the human to nod at a
+headline nobody has written.
+
+Put the rest in one list with a recommendation against each line. This is a list
+to nod at, not a round. Where the human has no answer, the slot decides what
 happens next:
 
 - **A slot the piece itself decides** — a date, a page type — takes your
