@@ -31,6 +31,12 @@ clothes, and everything built on it will read as filler however well written.
   disagreement rather than assume it.
 - Narrow beats broad. "Design systems fail" is unwinnable. "A design system
   fails when nobody owns the second version" can be argued in one piece.
+- **The reader arrives with a question, and the piece answers it.** A named
+  reader has one thing they came to find out, and for a regulation it is always
+  whether it applies to them. A piece that sends that question somewhere else —
+  to counsel, to a later post, to "it depends on your pages" — has taken a claim
+  standing next to its subject rather than on it. Answer the question, or narrow
+  the claim to what the piece can deliver and let the title promise only that.
 
 ## The warrant
 
@@ -77,10 +83,34 @@ Narrow the claim until the evidence carries it; say plainly what would change
 your mind; or write the smaller piece you can actually support. The dishonest
 move is to raise the register until the prose sounds like proof.
 
+## The front door
+
+The title, the excerpt and the first paragraph are one object. A reader meets
+them in that order, inside fifteen seconds, and between them they make a single
+promise. Draft them together and read them in a row before either gets called
+finished.
+
+- **The title carries the fact.** `o3-voice` holds the rule and the examples: a
+  reader who sees only the title knows what happened or what we claim.
+- **The excerpt pays part of what the title promised, and names who it is for.**
+  It is the only place the piece says out loud which reader should keep going.
+- **The opening pays the rest.** Whatever the excerpt promised, the first
+  paragraph pays out. A first paragraph that paraphrases the excerpt has taught
+  the reader, in their first fifteen seconds, that the piece repeats itself.
+- **Each of the three stands on ground the other two do not.** Read them in a
+  row. Where two of them would survive as one sentence, one is spare.
+- **A promise is a fact, not a table of contents.** "Here is what the rule
+  covers, what the marks establish, and what the exemption asks" tells a reader
+  the filing structure and nothing they did not already assume. It is the shape
+  an excerpt and a third paragraph both reach for when the opening has not
+  decided what it is arguing; the fix is upstream, in deciding the argument's
+  first move and stating it.
+
 ## The first two paragraphs
 
 The reader arrived having already read the title and the excerpt. Both made a
-promise. The opening starts paying it; it does not restate it.
+promise, and the front-door rules above are where the three were settled against
+each other. This is what the opening does with its own space.
 
 "Nothing warms up" is `o3-composition`'s rule for a page. In prose it means:
 
@@ -89,9 +119,6 @@ promise. The opening starts paying it; it does not restate it.
   a claim the previous post made and the condition that claim quietly rests on.
   `how-we-redesigned-our-website-in-a-single-weekend` opens by conceding what
   its own title oversold.
-- **The excerpt is spent.** Whatever it promised, the opening pays out rather
-  than repeating it. A first paragraph that paraphrases the excerpt has taught
-  the reader, in their first fifteen seconds, that the piece repeats itself.
 - **Plant the number early so the turn can call it back.** 69 commits and 272
   posts; 527 prompts and $127. Each lands in the first three paragraphs, plainly
   and without ceremony — and the strongest of them return at the turn carrying

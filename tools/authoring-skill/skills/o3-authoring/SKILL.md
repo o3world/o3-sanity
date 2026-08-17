@@ -65,6 +65,10 @@ brief reuses that brief and runs its own stages from the top.
    | `o3-argument`    | how a long argument holds up         | the brief, and any insight or case-study narrative    |
    | `o3-visual`      | palette, gradients, geometry         | when you make a picture rather than write             |
 
+   One query returns all six; the last column says which you read closely for
+   the job in front of you, and the rest you read far enough to know what is in
+   them.
+
    `o3-composition` governs a page's `sections`, and it also governs an insight
    or case-study body, because `bodyText` admits `figure`, `embed` and
    `pullQuote` — choosing among those is composition, at a smaller scale. Read
@@ -77,9 +81,15 @@ brief reuses that brief and runs its own stages from the top.
    overview omits field descriptions, and the descriptions carry required
    authoring guidance. Never compose a section you haven't fetched.
 
-   The document type is fetchable now, and you need it at stage 2 — its
-   required fields are what that stage asks about. Section blocks wait for
-   stage 3: which blocks a piece needs is unknowable until its outline exists.
+   `brief` is a type you author, so it is on this rule with the rest: `key` and
+   `record` are `readOnly` and `title` is required, and fetching it is how you
+   find that out.
+
+   Where the human's opening names the content type, fetch that type now — you
+   need it at stage 2, where its required fields are what that stage asks
+   about. Where the opening leaves it open, round one's third question settles
+   it and the fetch follows the answer. Section blocks wait for stage 3: which
+   blocks a piece needs is unknowable until its outline exists.
 
 3. **Fetch exemplars.** Query 1–2 recently published documents of the same
    type as reference for structure and register. Content migrated from
@@ -104,6 +114,14 @@ brief reuses that brief and runs its own stages from the top.
   for the web, a document id for the dataset. Gaps stay gaps, and they go in
   the brief's `record` as well as the handoff summary — the summary scrolls
   away, the field is queryable.
+
+  **In the piece, the source is named in the sentence that carries the claim** —
+  the outlet, the firm, the researchers who did the work. `links` is where a
+  fact-checker looks; a reader sees only the prose, and `o3-slop`'s
+  weasel-attribution check is run against the prose. "Reporting says" and
+  "studies show" are claims with the source removed, and a claim you cannot
+  attribute in its own sentence comes out of the piece.
+
 - **Imagery:** reference an existing asset (query
   `*[_type == "sanity.imageAsset"]` with filters) when one genuinely fits.
   Otherwise `generate_image` is available, and `key == "o3-visual"` governs
@@ -258,7 +276,15 @@ Then two things, in the chat, before anything is written:
   one is fixed: _"In one sentence, what is this arguing?"_ On a page, question
   two is fixed as well: _"What does this page recommend, and why?"_ — a page
   can carry its argument past a reader who never retains the name of the thing
-  it is selling. You choose the rest. Write all five out and **lock them**.
+  it is selling. You choose the rest.
+
+  **Every question past the first tests a part of the thesis, and one of them
+  is the question the named reader arrives with.** A question about the
+  background a reader needs in order to follow the claim is a note that you
+  found the context interesting, and at stage 3 a section gets built to answer
+  it — which is how a third of a piece ends up on the thing that led to the
+  subject rather than on the subject. Check each question against the thesis
+  sentence before you commit to it, then write all five out and **lock them**.
 
 **Then write the brief document.** The interview leaves a document behind, and
 it is the first thing written to Sanity — before the piece, so the piece has
@@ -419,10 +445,19 @@ evidence bar. It does not govern the arrangement.
 
 ### Both types
 
+**Answer the locked questions with the section list.** Name, for each of the
+five, the section that answers it. This is the only point where the questions
+and the shape are both in front of you, and it is cheap here and expensive
+later: a question no section answers is a hole a reader will fall into, and a
+section answering no question is context — it can stay, but say what it is for,
+because context is where a piece's proportions go wrong. Carry the map to the
+gate. It is as much of what the human is confirming as the order is.
+
 **The outline is a gate.** Drafting starts once the human confirms the outline
 as proposed — the named arc and its section list, or the band list and its
-surfaces. The human may hand you one directly and skip the proposal, and that
-is the only override. Inventing one and proceeding is not.
+surfaces, and the question map either way. The human may hand you one directly
+and skip the proposal, and that is the only override. Inventing one and
+proceeding is not.
 
 **Fetch the block schemas once the gate is taken**, per the per-type rule
 above: every section block the outline names, and the object types inside them.
@@ -433,6 +468,21 @@ Then patch `record`, per the format above.
 ## Stage 4 — Build
 
 Create the document as a draft.
+
+**The front door — the title, the excerpt and the first paragraph.** One
+decision rather than three fields: a reader meets them in that order, inside
+fifteen seconds, and between them they make one promise. Read `o3-argument`'s
+**front door** section before you write any of the three, because it is the one
+that tests them against each other, and `o3-voice` for what a title carries.
+Propose all three together with your recommendation, the way you proposed the
+outline — they are the only strings in the piece a human sees before the body
+exists, and the ones a run otherwise fills in silently between the slug and the
+blocks.
+
+**Fill the fields the piece decided, and leave the rest for the human.** The
+required-fields round at stage 2 settled which are which. A field nobody asked
+about and no gate reads — `seo` is the one that keeps coming up — is a gap in
+the hand-off rather than a slot to fill from inference.
 
 **The slug.** Lowercase-hyphenated, checked for collisions first. A free slug
 is not a free subject — the subject check belongs to stage 1 and its answer was
@@ -453,7 +503,7 @@ you are moving to the gates, and move — the exit is one round, and a round wit
 no reactions in it is still a round.
 
 A reaction arriving later is welcome, and where it lands decides what it costs.
-Before the reader test, apply it and run gates 1 through 3 again on the changed
+Before the reader test, apply it and run gates 1 through 4 again on the changed
 sections. After the reader test, the piece is settled: the reader test never
 re-runs, so the reaction goes to `## Gaps` for the human rather than into the
 body. The same holds for a defect you find yourself once the reader has read —
@@ -463,7 +513,7 @@ Then patch `record`, per the format above.
 
 ## Stage 5 — Verify
 
-Four gates, run in this order before the hand-off summary, every time. Each
+Five gates, run in this order before the hand-off summary, every time. Each
 one's content lives in the document that owns it; what this list adds is the
 order they run in, and one distinction. The shuffle test and the reader test
 both test coherence and catch different failures — a piece can arrive at its
@@ -478,12 +528,25 @@ both run.
    every sentence you polished before finding that out is wasted work. On a
    page, a band the catalog places survives this test even where the argument
    guide would cut it — that is the precedence rule at stage 3, applied.
-2. **The revision pass** — `o3-voice`, ten numbered steps. Sentence level.
-3. **The checks** — `o3-slop`, ten numbered items. The shapes the revision pass
+2. **The front door** — `o3-argument`'s **front door** section, and `o3-voice`
+   on what a title carries. Read the title, the excerpt and the opening
+   paragraph in a row, as a reader meets them, and check each stands on ground
+   the other two do not. It is its own gate because it is the one part of the
+   piece every other gate looks past: the sentence passes below judge sentences
+   and have no reason to compare three of them across two fields, and the
+   reader test hands a reader the title and the excerpt and then asks what the
+   body argues.
+3. **The revision pass** — `o3-voice`, ten numbered steps. Sentence level, and
+   its first step is a sentence-level instruction rather than a word target:
+   tighten every sentence that can be tightened, and let the total land where
+   it lands. A piece already inside the length band it forecast at stage 3
+   holds that band — `o3-argument` sets the total, `o3-voice` sets the
+   sentence.
+4. **The checks** — `o3-slop`, ten numbered items. The shapes the revision pass
    does not catch.
-4. **The reader test** — below. Last, because it is the only one that blocks
+5. **The reader test** — below. Last, because it is the only one that blocks
    the hand-off. It runs on the settled text: every patch from gates 1 through
-   3 is written to the draft before the reader sees a word, because a reader
+   4 is written to the draft before the reader sees a word, because a reader
    shown a stale revision tests a document that no longer exists — and the
    no-re-run rule means there is no second attempt.
 
@@ -531,6 +594,15 @@ Here the test has already run when you add one, and it may not be re-run — so 
 added question is a note to whoever picks the piece up next, not something this
 run answers. Record it in `record` as unanswered, and say why it was worth
 adding.
+
+**Two kinds arrive, and they are filed differently.** A question the draft
+suggested is that note. A question the piece declines to answer is a defect in
+its scope: a reader arrives with it, the piece sends them elsewhere, and it goes
+to `## Gaps` to be settled before publish and into the hand-off as something the
+piece does not do. That one should be rare, and it is rare when stage 2 put the
+reader's own question on the list and stage 3 named the section that answers it.
+Where it happens anyway, say so plainly — a scope defect reported as
+housekeeping is how a piece ships without the answer it was written for.
 
 ## Hand off
 

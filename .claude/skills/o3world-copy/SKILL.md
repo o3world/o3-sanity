@@ -152,7 +152,9 @@ These match the section blocks in the Sanity schema; live examples are in
 - **Insight title**: the title carries the fact — a reader who sees only the
   title knows what actually happened or what we claim. "We rebuilt our site
   in a weekend. The AI made almost none of the decisions." passes; "Notes on
-  a weekend rebuild" doesn't. Community content ends on a welcome and an
+  a weekend rebuild" doesn't. The title is settled against the excerpt and the
+  opening paragraph rather than on its own — `o3-argument`'s **front door** is
+  where the three are read in a row. Community content ends on a welcome and an
   essay ends on a turned observation; where that observation comes from is
   `o3-argument`, and a sales line is never the answer on either surface.
 
