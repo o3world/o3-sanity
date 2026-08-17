@@ -5,11 +5,16 @@ long-form script a case's persona section is written from: the two here predate
 the eval format, they are run by hand through the `o3-authoring-scenario` agent,
 and their judgement is a human reading a transcript rather than a grader.
 
-A scenario is an idea for a piece plus
-scripted stakeholder answers — a persona, the facts it knows, and what it says
-at every point the skill asks for a nod. It is not sample content; it exists so
-that a change to `SKILL.md` can be checked against behaviour instead of against
-a reading of the diff.
+They predate the five-skill split as well (#193). Both were written against the
+retired single skill, so both describe a run through every stage — and only
+stage 1, `o3sanity:gather`, is built. Run either one today and it ends at the
+gather gate. What the rest of each script covers is the material for the cases
+that come with #194 to #197.
+
+A scenario is an idea for a piece plus scripted stakeholder answers — a persona,
+the facts it knows, and what it says at every point a skill asks for a nod. It
+is not sample content; it exists so that a change to a skill can be checked
+against behaviour instead of against a reading of the diff.
 
 Two scenarios, and between them they exercise every move the pipeline makes:
 
@@ -21,11 +26,11 @@ Two scenarios, and between them they exercise every move the pipeline makes:
 ## Running one
 
 The `o3-authoring-scenario` agent (`.claude/agents/o3-authoring-scenario.md`)
-takes one scenario, runs the skill against it exactly as written, and returns a
-structured transcript — which references it read, every question and the answer
-it took, the outline and the confirmation that released it, each gate and its
-result, and every point where the skill's text did not steer it. The transcript
-is the product; the draft is a by-product.
+takes one scenario, runs the skills against it exactly as written, and returns a
+structured transcript — which skill and reference files it read, every question
+and the answer it took, the gather gate as presented, the brief it wrote, where
+the run stopped, and every point where a skill's text did not steer it. The
+transcript is the product; the draft is a by-product.
 
 Give the agent the scenario file and nothing else. An agent that improves the
 skill mid-run measures itself instead of the skill.
@@ -34,11 +39,11 @@ skill mid-run measures itself instead of the skill.
 
 Run and diff. Keep a transcript from before the change, run the same scenario
 against the amended skill, and read the two side by side — the diff is the
-evidence that the change did what it claimed, and the place any regression
-shows up. Judge behaviour, not phrasing: did the run gather and cite before it
-interviewed, hold the gather gate, fork the outline by content type, surface a
-subject collision, fill the required fields, leave pipeline state in the
-brief's `record`.
+evidence that the change did what it claimed, and the place any regression shows
+up. Judge behaviour, not phrasing: did the run sweep all three lanes and cite
+what it found, write the brief whatever the sweep turned up, surface a subject
+collision as the human's choice, hold the gather gate, and leave `stage` and
+`nextStep` saying where the piece stands.
 
 Scripts are the committed artifact; transcripts are not. A transcript belongs
 to one run against one revision of the skill, and it goes stale the moment

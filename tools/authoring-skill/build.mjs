@@ -1,40 +1,36 @@
 #!/usr/bin/env node
-// Builds the uploadable Claude Desktop skill ZIP from the checked-in source.
-// The ZIP is a build artifact — never hand-edit it, never commit it.
-// (Claude Code needs no build: this directory is a plugin, installed straight
-// from git via the repo-root .claude-plugin/marketplace.json.)
+// The Claude Desktop skill ZIP, which this plugin can no longer produce.
 //
-// Packaging contract (Anthropic custom-skills docs, verified 2026-08-02 in
-// docs/research/claude-desktop-delivery.md): the skill folder is the ZIP
-// root, the folder name matches the frontmatter `name` (≤64 chars), and
-// `description` is ≤200 chars.
-import { execFileSync } from 'node:child_process'
-import { mkdirSync, readFileSync, rmSync } from 'node:fs'
-import { dirname, join } from 'node:path'
-import { fileURLToPath } from 'node:url'
+// A Desktop custom skill is one folder: the folder is the ZIP root, its name
+// matches the frontmatter `name`, and nothing outside it is reachable
+// (Anthropic custom-skills docs, verified 2026-08-02 in
+// docs/research/claude-desktop-delivery.md). Since #193 the plugin is five
+// skills that open by reading `${CLAUDE_PLUGIN_ROOT}/CORE.md` — a variable
+// Desktop does not set and a file no single skill folder contains. Any ZIP
+// built from one of them ships a skill whose first instruction fails.
+//
+// So this exits non-zero rather than emitting an artifact that installs and
+// then misbehaves. #198 owns the decision: give Desktop its own distribution,
+// or retire the surface.
+//
+// (Claude Code needs no build. This directory is a plugin, installed from git
+// via the repo-root .claude-plugin/marketplace.json.)
+import { exit, stderr } from 'node:process'
 
-const root = dirname(fileURLToPath(import.meta.url))
-const skillsRoot = join(root, 'skills')
-const skillDir = 'authoring'
-const skillMd = readFileSync(join(skillsRoot, skillDir, 'SKILL.md'), 'utf8')
-
-const frontmatter = skillMd.match(/^---\n([\s\S]*?)\n---/)?.[1]
-if (!frontmatter) throw new Error('SKILL.md has no frontmatter')
-const field = (key) => frontmatter.match(new RegExp(`^${key}:\\s*(.+)$`, 'm'))?.[1].trim() ?? ''
-
-const name = field('name')
-const description = field('description')
-if (name !== skillDir) throw new Error(`frontmatter name "${name}" must match folder "${skillDir}"`)
-if (name.length > 64) throw new Error(`name is ${name.length} chars (max 64)`)
-if (description.length > 200)
-  throw new Error(`description is ${description.length} chars (max 200)`)
-
-const outDir = join(root, 'dist')
-rmSync(outDir, { recursive: true, force: true })
-mkdirSync(outDir)
-const zipPath = join(outDir, `${name}.zip`)
-execFileSync('zip', ['-r', zipPath, skillDir], { cwd: skillsRoot, stdio: 'inherit' })
-console.log(`\nBuilt ${zipPath}`)
-console.log(
-  'Upload at claude.ai → Settings → Customize → Skills (re-upload to update; shared/org-provisioned recipients update automatically).',
+stderr.write(
+  [
+    'build:skill is disabled.',
+    '',
+    'The Desktop skill ZIP packages one skill folder. This plugin is five skills',
+    'sharing CORE.md and references/ at the plugin root, reached through',
+    '${CLAUDE_PLUGIN_ROOT} — a path that does not resolve inside a Desktop skill.',
+    'A ZIP built from any one of them uploads cleanly and then fails on its first',
+    'instruction, which is worse than no ZIP at all.',
+    '',
+    'Deciding what Desktop gets instead is #198. Claude Code is unaffected:',
+    '  claude plugin marketplace update o3world',
+    '  claude plugin install o3sanity@o3world',
+    '',
+  ].join('\n'),
 )
+exit(1)

@@ -50,7 +50,7 @@ export function parseFrontmatter(source) {
   if (!block) return { fields: {}, body: source, hasFrontmatter: false }
   const fields = {}
   let nesting = null
-  for (const line of block[1].split(/\r?\n/)) {
+  for (const line of unwrapFlow(block[1])) {
     if (!line.trim() || line.trim().startsWith('#')) continue
     const nested = line.match(/^\s+([A-Za-z0-9_]+):\s*(.*)$/)
     if (nested && nesting) {
@@ -69,6 +69,60 @@ export function parseFrontmatter(source) {
     fields[key] = value(raw)
   }
   return { fields, body: source.slice(block[0].length).trim(), hasFrontmatter: true }
+}
+
+/** Bracket depth of one line, blind to brackets inside a quoted scalar. */
+function bracketDepth(line) {
+  let depth = 0
+  let quote = null
+  for (const char of line) {
+    if (quote) {
+      if (char === quote) quote = null
+      continue
+    }
+    if (char === '"' || char === "'") quote = char
+    else if (char === '[' || char === '{') depth += 1
+    else if (char === ']' || char === '}') depth -= 1
+  }
+  return depth
+}
+
+/**
+ * Put a flow sequence prettier broke across lines back on one line, and pull a
+ * block that follows a bare `key:` up onto the key. `allowed_tools` passes the
+ * repo's 100-column print width the moment a case names MCP tools, and the
+ * broken form reads to the loop above as an empty nested map — a tool budget
+ * that vanishes without an error.
+ */
+function unwrapFlow(block) {
+  const lines = []
+  let pending = null
+  let depth = 0
+  for (const line of block.split(/\r?\n/)) {
+    if (pending !== null) {
+      pending += ` ${line.trim()}`
+      depth += bracketDepth(line)
+      if (depth <= 0) {
+        lines.push(pending)
+        pending = null
+        depth = 0
+      }
+      continue
+    }
+    depth = bracketDepth(line)
+    if (depth > 0) pending = line.trimEnd()
+    else lines.push(line)
+  }
+  if (pending !== null) lines.push(pending)
+
+  for (let index = 0; index < lines.length - 1; index += 1) {
+    const bare = lines[index].match(/^([A-Za-z0-9_]+):\s*$/)
+    if (bare && /^\s*[[{]/.test(lines[index + 1])) {
+      lines[index] = `${bare[1]}: ${lines[index + 1].trim()}`
+      lines.splice(index + 1, 1)
+    }
+  }
+  return lines
 }
 
 function value(raw) {
