@@ -73,6 +73,13 @@ back, and `{"type":"assistant","text":"…"}` for what you said. Write the line
 as the call happens; a transcript reconstructed from memory at the end is a
 summary wearing a transcript's name.
 
+**`input` is the arguments you sent, verbatim — never a description of them.**
+`tool_used` graders match a regex against that object serialised, so
+`"patches": "[set stage/verdict, insert gaps]"` in place of the real patch
+fails a grader the run actually satisfied, and the failure reads as a defect in
+the skill. `summary` on a `tool_result` is the one field that may paraphrase,
+because nothing is graded against what came back.
+
 **Dataset artifacts are files.** A run that writes to Sanity saves each
 document it touched to `workspace/dataset/<document-id>.json`, fetched back
 from the dataset rather than copied from what you sent. That is what lets a
