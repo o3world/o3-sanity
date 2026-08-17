@@ -528,14 +528,21 @@ both run.
    every sentence you polished before finding that out is wasted work. On a
    page, a band the catalog places survives this test even where the argument
    guide would cut it — that is the precedence rule at stage 3, applied.
+
+   **Run it at both levels.** `o3-argument` shuffles sections and then
+   paragraphs, and the second pass is the one that catches a piece whose
+   sections are in the right order and whose paragraphs read as a stack of true
+   observations. A reader who says the piece does not flow has almost always hit
+   the paragraph level, where there is nothing to point at.
+
 2. **The front door** — `o3-argument`'s **front door** section, and `o3-voice`
    on what a title carries. Read the title, the excerpt and the opening
    paragraph in a row, as a reader meets them, and check each stands on ground
-   the other two do not. It is its own gate because it is the one part of the
-   piece every other gate looks past: the sentence passes below judge sentences
-   and have no reason to compare three of them across two fields, and the
-   reader test hands a reader the title and the excerpt and then asks what the
-   body argues.
+   the other two do not. It is its own gate because it is the part of the piece
+   every other gate looks past: the sentence passes below judge one sentence at
+   a time and have no reason to read three of them across two fields against
+   each other, and the reader test hands a reader the title and the excerpt and
+   then asks what the body argues.
 3. **The revision pass** — `o3-voice`, ten numbered steps. Sentence level, and
    its first step is a sentence-level instruction rather than a word target:
    tighten every sentence that can be tightened, and let the total land where

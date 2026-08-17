@@ -164,6 +164,28 @@ What the three arcs share is one test: **every section is only readable in its
 place.** Move the fourth above the second in any of them and the piece stops
 working. Sections that survive shuffling are a list, not an argument.
 
+### The shuffle, one level down
+
+The same test runs on paragraphs, and this is where a piece that passed the
+section shuffle still reads as a set of correct observations in the right order.
+**A paragraph opens on something the paragraph before it established** — not a
+transition word, but a noun, a number, or a condition the reader is already
+holding. Where every paragraph opens on a fresh subject, each one is true and
+none of them is going anywhere, and a reader feels the piece stall without being
+able to point at the sentence where it happened.
+
+Two checks, both cheap:
+
+- **Read the last sentence of each paragraph against the first sentence of the
+  next.** The pair should read as one move. A pair that would survive being
+  swapped is two paragraphs stacked rather than argued.
+- **Ask of each paragraph whether it could open its section.** One can. When
+  three of them could, the section has no internal order, and those three are
+  where the argument went slack.
+
+The fix is almost never a connective. It is finding the sentence the next
+paragraph is actually answering, and putting it last in this one.
+
 ## The turn
 
 The sentence that reframes the piece. It is not the thesis — the thesis was
