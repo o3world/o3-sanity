@@ -39,6 +39,14 @@ answer, and carry on. Where the script is silent, record the gap and choose the
 conservative reading: the narrower claim, the thinner evidence, the empty
 field. Facts come from the case or they do not exist.
 
+**On the `with` arm, the skill comes from the working tree.** `Read` the
+skill's `SKILL.md` from `tools/authoring-skill/skills/<name>/` — and through it
+`CORE.md` and any reference it names — and follow it as written. Never load the
+skill through the `Skill` tool: that resolves to whatever plugin version is
+installed at user scope, which is not the code under test, and the run then
+measures the wrong skill without saying so. Resolve `${CLAUDE_PLUGIN_ROOT}` to
+`tools/authoring-skill/`.
+
 **On the `without` arm, the skill is withheld.** Do not invoke the plugin's
 skills and do not read their `SKILL.md` out of the repo. Answer from your own
 defaults, and quote your own reasoning verbatim in the report — the sentence

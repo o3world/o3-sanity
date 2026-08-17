@@ -12,12 +12,12 @@ stop in one session and continue in another.
 | Skill              | Stage | What it does                                                | State |
 | ------------------ | ----- | ----------------------------------------------------------- | ----- |
 | `o3sanity:gather`  | 1     | sweeps corpus, web and environment; ends at the gather gate | built |
-| `o3sanity:brief`   | 2     | the interview, the agreed thesis, the locked questions      | #194  |
+| `o3sanity:brief`   | 2     | the interview, the agreed thesis, the locked questions      | built |
 | `o3sanity:draft`   | 3     | the outline, then the piece as prose, into the brief        | built |
 | `o3sanity:review`  | 4     | the gates and the reader test, ending in a verdict          | built |
 | `o3sanity:typeset` | 5     | the reviewed draft becomes the real Sanity document         | #197  |
 
-The unbuilt skills carry their stage contract and stop when triggered. That
+The unbuilt skill carries its stage contract and stops when triggered. That
 is deliberate: a skill that improvises a stage writes a thesis or a verdict
 nobody agreed to, and the document cannot tell that apart from one that was.
 

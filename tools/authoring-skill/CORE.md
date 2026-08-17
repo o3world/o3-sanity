@@ -47,6 +47,39 @@ In the piece itself the source is named in the sentence that carries the claim �
 the outlet, the firm, the researchers who did the work. `links` is where a
 fact-checker looks; a reader sees only the prose.
 
+## The weight of a run
+
+Every run says which of two pipelines it is on before it does any work, in its
+first message, on a line of its own:
+
+```
+WEIGHT: <light|standard> — <why, in a clause>
+```
+
+- **light** — an announcement, a short post, a page whose copy is already
+  decided. Gathering and the interview collapse into one round of questions, and
+  the draft follows that round.
+- **standard** — anything arguing something a reader could disagree with. Every
+  stage runs as written.
+
+Review blocks on both. Light is a shorter road, not an unreviewed one.
+
+**Say it, and let the human overrule it in a word.** A classification announced
+is a call they can see and change in one reply; a call taken silently is an
+editorial decision made on their behalf, and the first they see of it is a piece
+the wrong size.
+
+**The ratchet only turns up.** A light run that turns out to carry a real claim
+announces `WEIGHT: standard — upgraded: <what changed>` and runs standard from
+there. Nothing turns a standard run back down — not a subject that looks thin
+once it has been swept, and not a request to keep it short. **Length is not
+weight**: a 500-word piece arguing something contestable is a standard run that
+happens to be brief.
+
+The weight is a call the run made, so it goes on `decisions` the first time it
+is announced or changed. A session resuming the piece reads it there rather than
+deciding it a second time.
+
 ## Resume, don't restart
 
 The brief is the run's memory. `stage` names the last stage that finished and

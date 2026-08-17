@@ -18,8 +18,12 @@ created or patched before that answer.
 
 ## 1. Take the info dump
 
-Invite it in your first reply, before you search anything, and say it is meant
-to be messy:
+**Open on the weight line.** A new piece arrives here, so this is where a run
+says what size it is: CORE's classifier, first line of your first reply, above
+the invitation below.
+
+Invite the dump in that same reply, before you search anything, and say it is
+meant to be messy:
 
 > Dump everything you have on this — notes, links, half-finished drafts,
 > numbers, who said what, what you have already told a client. Don't organise
@@ -121,6 +125,7 @@ Set these fields and no others:
 | `gaps`       | one entry per thing nobody has: unreachable pointers by name, unverifiable claims, facts they lack |
 | `stage`      | `gather` — this stage finished, whatever the sweep turned up                                       |
 | `nextStep`   | what a session picking this up does first, in a sentence                                           |
+| `decisions`  | the weight you announced, and the collision the human resolved below                               |
 
 `thesis`, `readerQuestions`, `outline`, `draft`, `verdict` and `pieceId` belong
 to stages nobody has dispatched. Leave them empty. Never set `sourcePath`.
