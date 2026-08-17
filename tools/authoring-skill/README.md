@@ -14,7 +14,7 @@ stop in one session and continue in another.
 | `o3sanity:gather`  | 1     | sweeps corpus, web and environment; ends at the gather gate | built |
 | `o3sanity:brief`   | 2     | the interview, the agreed thesis, the locked questions      | #194  |
 | `o3sanity:draft`   | 3     | the outline, then the piece as prose, into the brief        | #195  |
-| `o3sanity:review`  | 4     | the gates and the reader test, ending in a verdict          | #196  |
+| `o3sanity:review`  | 4     | the gates and the reader test, ending in a verdict          | built |
 | `o3sanity:typeset` | 5     | the reviewed draft becomes the real Sanity document         | #197  |
 
 The four unbuilt skills carry their stage contract and stop when triggered. That
@@ -38,11 +38,12 @@ that needs them.
 The structural knowledge the pipeline cannot run without, reachable as
 `${CLAUDE_PLUGIN_ROOT}/references/<file>`:
 
-| File                        | What it governs                                                       |
-| --------------------------- | --------------------------------------------------------------------- |
-| `references/argument.md`    | how one long argument holds up — claim, warrant, arc, turn, ending    |
-| `references/composition.md` | which band follows which on a page, and which block carries which job |
-| `references/style.md`       | the style floor: plain sentences, sourced claims, fact conservation   |
+| File                        | What it governs                                                        |
+| --------------------------- | ---------------------------------------------------------------------- |
+| `references/argument.md`    | how one long argument holds up — claim, warrant, arc, turn, ending     |
+| `references/composition.md` | which band follows which on a page, and which block carries which job  |
+| `references/style.md`       | the style floor: plain sentences, sourced claims, fact conservation    |
+| `references/reader-test.md` | the last gate: both probes, what the reader gets, and what a fail does |
 
 These replaced the session-start dataset fetch the skill used to do (#192). The
 style floor is a floor and not a voice: persona, brand vocabulary, and the
