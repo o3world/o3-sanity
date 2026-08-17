@@ -1,6 +1,6 @@
 ---
 type: regex
-pattern: '\(ctaSection: surface=ink\)'
+pattern: '\(ctaSection: [^)]*surface=ink'
 target: { source: file, path: dataset/brief-eval-draft-page-bands-design-systems-practice.json }
 ---
 

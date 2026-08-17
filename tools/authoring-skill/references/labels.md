@@ -118,6 +118,13 @@ Two fixtures, both from the corpus and both decided at the outline rather than
 applied afterwards: the first label is `heroSection` on `surface=ink`, and the
 last is `ctaSection` on `surface=ink`.
 
+**Name any knob whose schema default is wrong for this piece.** A knob you leave
+out is the knob the schema picks, and its default was chosen for whichever page
+came first — `heroSection` defaults to the home page's `variant`, so an interior
+page that stays silent gets the home page's hero. Check the defaults in
+`get_schema` against the band's job here, and write down every one that differs.
+A label carrying two knobs has said more than a label carrying one, never less.
+
 Where a band holds base blocks rather than a repeating item — `layoutSection` is
 the usual one — the parts name those base blocks in order, and no label nests
 inside another.

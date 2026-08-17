@@ -123,9 +123,7 @@ list of headings is cheap.
 
 ### The proposal, in full
 
-Copy this shape. For a page, `Arc:` becomes `Bands:` naming the blocks in order
-with their surfaces, the numbered items are bands, and the gate line says
-`bands`.
+Copy this shape.
 
 ```
 Arc: <name>
@@ -148,6 +146,28 @@ UNGROUNDED: <concept> — required by <section>, grounded by nothing before it. 
 Length: <n> words across <n> sections — <the band that sits in>
 
 OUTLINE GATE: <arc name> / <n> sections / <n> ungrounded — your call before a word of prose
+```
+
+**A page uses this shape instead**, and the difference is four lines, not a
+mental substitution — a page counts bands, and the word `sections` on a page's
+gate line is the wrong unit reported to the human:
+
+```
+Bands: heroSection (ink) → layoutSection (bone) → railPanelsSection (bone) → ctaSection (ink)
+Runner-up: <the second band you turned down> — <why not>
+
+Prerequisites: <concept>, <concept>
+
+1. **heroSection** — <the job this band does on the page>
+   Requires: —
+   Grounds: <concept>
+   Answers: Q1
+
+UNGROUNDED: <concept> — required by <band>, grounded by nothing before it. <what would close it>
+
+Length: <n> bands — composition.md's bar is four to eight
+
+OUTLINE GATE: page / <n> bands / <n> ungrounded — your call before a word of prose
 ```
 
 Nothing follows the gate line. **Its ungrounded count is the number of
