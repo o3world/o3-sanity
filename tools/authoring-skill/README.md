@@ -12,8 +12,8 @@ stop in one session and continue in another.
 | Skill              | Stage | What it does                                                | State |
 | ------------------ | ----- | ----------------------------------------------------------- | ----- |
 | `o3sanity:gather`  | 1     | sweeps corpus, web and environment; ends at the gather gate | built |
-| `o3sanity:brief`   | 2     | the interview, the agreed thesis, the outline               | #194  |
-| `o3sanity:draft`   | 3     | the piece as prose, into the brief rather than into blocks  | #195  |
+| `o3sanity:brief`   | 2     | the interview, the agreed thesis, the locked questions      | #194  |
+| `o3sanity:draft`   | 3     | the outline, then the piece as prose, into the brief        | #195  |
 | `o3sanity:review`  | 4     | the gates and the reader test, ending in a verdict          | #196  |
 | `o3sanity:typeset` | 5     | the reviewed draft becomes the real Sanity document         | #197  |
 

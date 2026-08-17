@@ -68,13 +68,13 @@ alone. A field belonging to a stage nobody has dispatched stays empty: filling
 it is how a run quietly skips a gate the human was meant to answer, and the
 document then claims a confirmation that never happened.
 
-| Skill              | Stage     | What it writes to the brief                            |
-| ------------------ | --------- | ------------------------------------------------------ |
-| `o3sanity:gather`  | `gather`  | `background`, `links`, `gaps`                          |
-| `o3sanity:brief`   | `brief`   | `instructions`, `thesis`, `readerQuestions`, `outline` |
-| `o3sanity:draft`   | `draft`   | `draft`                                                |
-| `o3sanity:review`  | `review`  | `verdict`                                              |
-| `o3sanity:typeset` | `typeset` | `pieceId`, and the piece document                      |
+| Skill              | Stage     | What it writes to the brief                 |
+| ------------------ | --------- | ------------------------------------------- |
+| `o3sanity:gather`  | `gather`  | `background`, `links`, `gaps`               |
+| `o3sanity:brief`   | `brief`   | `instructions`, `thesis`, `readerQuestions` |
+| `o3sanity:draft`   | `draft`   | `outline`, `draft`                          |
+| `o3sanity:review`  | `review`  | `verdict`                                   |
+| `o3sanity:typeset` | `typeset` | `pieceId`, and the piece document           |
 
 Three fields belong to whichever stage is running. `stage` takes that stage's
 own name — the stage that finished, not the one it opens. `nextStep` says what

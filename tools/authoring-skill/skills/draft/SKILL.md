@@ -1,6 +1,6 @@
 ---
 name: draft
-description: Writes the piece as prose against the agreed thesis and outline — title, excerpt and body, into the brief document rather than into Sanity blocks, so a rewrite costs no block surgery. Use once an outline is confirmed, or when asked to write, rewrite, or extend the body of an o3world.com insight, case study, or page. Stage 3 of 5; hands off to o3sanity:review.
+description: Proposes the outline — an arc by name, confirmed at a gate — then writes the piece as prose against it: title, excerpt and body, into the brief document rather than into Sanity blocks, so a rewrite costs no block surgery. Use once a thesis is agreed, or when asked to outline, write, rewrite, or extend the body of an o3world.com insight, case study, or page. Stage 3 of 5; hands off to o3sanity:review.
 ---
 
 # Draft
@@ -12,11 +12,11 @@ resume rule.
 
 ## The stage contract
 
-|                  |                                                                    |
-| ---------------- | ------------------------------------------------------------------ |
-| Expects on entry | a brief whose `stage` is `brief`, carrying a thesis and an outline |
-| Writes           | `draft.title`, `draft.excerpt`, `draft.body`                       |
-| Leaves           | `stage` = `draft`, and `nextStep` naming what stage 4 does first   |
+|                  |                                                                                     |
+| ---------------- | ----------------------------------------------------------------------------------- |
+| Expects on entry | a brief whose `stage` is `brief`, carrying a thesis and the locked reader questions |
+| Writes           | `outline`, then `draft.title`, `draft.excerpt`, `draft.body`                        |
+| Leaves           | `stage` = `draft`, and `nextStep` naming what stage 4 does first                    |
 
 The piece is prose here, not blocks. `draft.body` is markdown carrying the block
 each passage becomes as an inline label; the grammar of those labels is #195's,

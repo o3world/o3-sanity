@@ -1,6 +1,6 @@
 ---
 name: brief
-description: Turns what gathering found into the plan for one piece — the agreed thesis, the locked reader questions, and the outline, each confirmed by the human before any prose exists. Use once a gather gate has been answered, or when asked to plan, scope, shape, or outline an o3world.com insight, case study, or page. Stage 2 of 5; reads the brief that o3sanity:gather left and hands off to o3sanity:draft.
+description: Turns what gathering found into the commitment one piece is written against — the agreed thesis and the locked reader questions, each confirmed by the human before any prose exists. Use once a gather gate has been answered, or when asked to plan or scope an o3world.com insight, case study, or page. Stage 2 of 5; reads the brief that o3sanity:gather left and hands off to o3sanity:draft.
 ---
 
 # Brief
@@ -15,7 +15,7 @@ resume rule.
 |                  |                                                                  |
 | ---------------- | ---------------------------------------------------------------- |
 | Expects on entry | a brief whose `stage` is `gather`, with an answered gate         |
-| Writes           | `instructions`, `thesis`, `readerQuestions`, `outline`           |
+| Writes           | `instructions`, `thesis`, `readerQuestions`                      |
 | Leaves           | `stage` = `brief`, and `nextStep` naming what stage 3 does first |
 
 ## If you were triggered now
