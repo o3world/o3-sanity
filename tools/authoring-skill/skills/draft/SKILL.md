@@ -220,6 +220,11 @@ fields: a reader meets them in that order inside fifteen seconds, and between
 them they make a single promise. Read `argument.md`'s front-door section before
 writing any of the three.
 
+**A page has a front door too**, and it runs the same way: the page title, the
+`card.excerpt` a listing shows, and the `heroSection` band standing where a
+first paragraph stands. It is the one place `argument.md` still governs a page,
+because a promise is a claim rather than an arrangement.
+
 **Offer two or three, each implying a different thesis-emphasis, and let the
 human pick.** Not three phrasings of one opening — three openings that would
 each commit the piece to a different first move.
