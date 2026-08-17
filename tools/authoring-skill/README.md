@@ -15,11 +15,11 @@ stop in one session and continue in another.
 | `o3sanity:brief`   | 2     | the interview, the agreed thesis, the locked questions      | built |
 | `o3sanity:draft`   | 3     | the outline, then the piece as prose, into the brief        | built |
 | `o3sanity:review`  | 4     | the gates and the reader test, ending in a verdict          | built |
-| `o3sanity:typeset` | 5     | the reviewed draft becomes the real Sanity document         | #197  |
+| `o3sanity:typeset` | 5     | the reviewed draft becomes the real Sanity document         | built |
 
-The unbuilt skill carries its stage contract and stops when triggered. That
-is deliberate: a skill that improvises a stage writes a thesis or a verdict
-nobody agreed to, and the document cannot tell that apart from one that was.
+All five are built, and each one gates on the state the one before it left. The
+pipeline ends at `handed-off`: the piece is a draft on the live content model,
+and publishing it is a human's move in Studio.
 
 ## What every skill reads first
 
@@ -38,13 +38,14 @@ that needs them.
 The structural knowledge the pipeline cannot run without, reachable as
 `${CLAUDE_PLUGIN_ROOT}/references/<file>`:
 
-| File                        | What it governs                                                        |
-| --------------------------- | ---------------------------------------------------------------------- |
-| `references/argument.md`    | how one long argument holds up — claim, warrant, arc, turn, ending     |
-| `references/composition.md` | which band follows which on a page, and which block carries which job  |
-| `references/style.md`       | the style floor: plain sentences, sourced claims, fact conservation    |
-| `references/labels.md`      | the stage directions a draft body carries, and what each one means     |
-| `references/reader-test.md` | the last gate: both probes, what the reader gets, and what a fail does |
+| File                          | What it governs                                                        |
+| ----------------------------- | ---------------------------------------------------------------------- |
+| `references/argument.md`      | how one long argument holds up — claim, warrant, arc, turn, ending     |
+| `references/composition.md`   | which band follows which on a page, and which block carries which job  |
+| `references/style.md`         | the style floor: plain sentences, sourced claims, fact conservation    |
+| `references/labels.md`        | the stage directions a draft body carries, and what each one means     |
+| `references/reader-test.md`   | the last gate: both probes, what the reader gets, and what a fail does |
+| `references/portable-text.md` | every write mechanic — keys, the revision guard, labels into blocks    |
 
 These replaced the session-start dataset fetch the skill used to do (#192). The
 style floor is a floor and not a voice: persona, brand vocabulary, and the
@@ -55,6 +56,10 @@ as the eval loop produces an observed failure that asks for them.
 only file three skills share. `draft` writes body labels by it, `review` reads
 them as theater directions, `typeset` converts by them — so a change to it is a
 change to three skills at once.
+
+`references/portable-text.md` is the opposite case: `typeset` is its only reader,
+and it holds every portable-text write mechanic in the plugin. A run building a
+document from anything else is building against mechanics it inferred.
 
 `gather` points at none of them — it writes nothing for the site, so it pays for
 nothing. Stages 2 to 5 are where they come in.
