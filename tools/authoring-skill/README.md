@@ -13,7 +13,7 @@ stop in one session and continue in another.
 | ------------------ | ----- | ----------------------------------------------------------- | ----- |
 | `o3sanity:gather`  | 1     | sweeps corpus, web and environment; ends at the gather gate | built |
 | `o3sanity:brief`   | 2     | the interview, the agreed thesis, the locked questions      | #194  |
-| `o3sanity:draft`   | 3     | the outline, then the piece as prose, into the brief        | #195  |
+| `o3sanity:draft`   | 3     | the outline, then the piece as prose, into the brief        | built |
 | `o3sanity:review`  | 4     | the gates and the reader test, ending in a verdict          | #196  |
 | `o3sanity:typeset` | 5     | the reviewed draft becomes the real Sanity document         | #197  |
 
@@ -43,14 +43,20 @@ The structural knowledge the pipeline cannot run without, reachable as
 | `references/argument.md`    | how one long argument holds up — claim, warrant, arc, turn, ending    |
 | `references/composition.md` | which band follows which on a page, and which block carries which job |
 | `references/style.md`       | the style floor: plain sentences, sourced claims, fact conservation   |
+| `references/labels.md`      | the stage directions a draft body carries, and what each one means    |
 
 These replaced the session-start dataset fetch the skill used to do (#192). The
 style floor is a floor and not a voice: persona, brand vocabulary, and the
 slop-pattern list stay in the repo's `o3world-copy` skill and re-enter here only
 as the eval loop produces an observed failure that asks for them.
 
+`references/labels.md` is the odd one out: not craft but a **contract**, and the
+only file three skills share. `draft` writes body labels by it, `review` reads
+them as theater directions, `typeset` converts by them — so a change to it is a
+change to three skills at once.
+
 `gather` points at none of them — it writes nothing for the site, so it pays for
-nothing. Stages 2 to 4 are where they come in.
+nothing. Stages 2 to 5 are where they come in.
 
 ## Testing a skill
 
