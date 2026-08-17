@@ -40,6 +40,11 @@ prototype
 # figma mcp image downloads
 .figma/
 
+# eval runs: a judged run belongs to one revision of one skill and is stale the
+# moment either changes. Quote the JSON on the ticket instead — see
+# tools/authoring-skill/evals/README.md.
+tools/authoring-skill/evals/results/
+
 # visual regression: the baseline checkout, both Storybook builds, every
 # screenshot, and the report. All of it is derived from a commit and none of it
 # is shared — see tools/visual-regression/README.md.

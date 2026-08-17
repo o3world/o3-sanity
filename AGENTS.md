@@ -256,6 +256,20 @@ brief with no `sourcePath` was **born in the dataset** — `check` ignores it an
 writes that brief to `tools/guidance/briefs/` and makes the dataset copy
 file-backed, so the next sync has nothing to write.
 
+### Testing a skill in the o3sanity plugin
+
+The plugin's only behavioural seam is its eval suite,
+[`tools/authoring-skill/evals/`](./tools/authoring-skill/evals/README.md) — cases in `claude plugin
+eval` format, run by the `o3-eval-runner` agent until the early-access flag lands, and by the CLI
+unchanged after it. Sonnet runs the case, the skill under test, and any judge; a mechanical grader
+(regex on the verdict line, a file assertion, a tool assertion) is always preferred to one.
+
+**A skill ticket starts with a RED baseline.** Write the case and its graders first, run it once
+with the skill withheld (`arm: without`), and paste the failures — the judged JSON and the model's
+own rationalisations, verbatim — into the ticket before writing a line of guidance. A rule nobody
+watched fail is a guess. The procedure, and how the failure's shape picks the form of the fix, is in
+the eval README.
+
 ### Testing
 
 Three layers — `unit` (`*.test.ts`), `render` (`*.render.test.tsx`), `stories` (`*.stories.tsx`).

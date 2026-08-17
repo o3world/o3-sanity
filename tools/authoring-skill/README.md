@@ -6,9 +6,14 @@ page — in the O3 voice. The skill is a thin bootstrap; voice, schema
 guidance, and exemplars are fetched live from Sanity, so knowledge updates
 propagate with a git push and never require repackaging.
 
-One skill source (`skills/authoring/SKILL.md`), two distributions. Changes
-to it are checked by running the scenarios in [`scenarios/`](./scenarios) and
-diffing the transcripts.
+One skill source (`skills/authoring/SKILL.md`), two distributions.
+
+The plugin's test surface is [`evals/`](./evals) — cases in `claude plugin
+eval` format, graded mechanically, run today by the `o3-eval-runner` agent and
+by the CLI once the early-access flag lands. A skill change is checked by
+running cases, and a new skill starts with the RED baseline the eval README
+sets out. [`scenarios/`](./scenarios) holds the two long-form scripts that
+format grew out of.
 
 ## Claude Code (plugin)
 
