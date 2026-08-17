@@ -100,6 +100,12 @@ can close in this piece, and the human picks between them:
 UNGROUNDED: <concept> — required by <section>, grounded by nothing before it. <what would close it>
 ```
 
+**A Requires that names something on `gaps` is ungrounded by definition.** The
+gap list is already the record that nobody has it, so no section can ground it
+and no amount of drafting will supply it. Check each section's Requires against
+`gaps` before you write the gate line — that check is the one that catches the
+question the brief locked and the material cannot answer.
+
 ### Map the locked questions
 
 Name, for each locked question, the section that answers it. This is the only
@@ -144,8 +150,11 @@ Length: <n> words across <n> sections — <the band that sits in>
 OUTLINE GATE: <arc name> / <n> sections / <n> ungrounded — your call before a word of prose
 ```
 
-Nothing follows the gate line. Where nothing is ungrounded the count is `0` and
-the `UNGROUNDED:` line is absent.
+Nothing follows the gate line. **Its ungrounded count is the number of
+`UNGROUNDED:` lines above it, and the two have to agree** — a count of 1 with no
+line is a flag written into a paragraph, where the human reading the gate will
+not find it. Where nothing is ungrounded the count is `0` and the line is
+absent.
 
 ## 3. The gate
 
