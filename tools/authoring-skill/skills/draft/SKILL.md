@@ -149,23 +149,27 @@ the `UNGROUNDED:` line is absent.
 
 ## 3. The gate
 
-Stop. No prose, no patch, no field. Drafting starts when the human confirms the
-shape as proposed — the arc or band list, the section list, and the question
-map, which they are confirming as much as the order.
+Stop. No prose, no patch, no field — and no piece document at any point in this
+stage, since the insight, case study or page is stage 5's to create. Drafting
+starts when the human confirms the shape as proposed — the arc or band list, the
+section list, and the question map, which they are confirming as much as the
+order.
 
 **A human who hands you an outline is the only override.** Inventing one and
 proceeding is not, and neither is a shape that "barely changed" from a previous
 pass.
 
-Four things you may catch yourself thinking here. Each one was thought by a
-model running this stage without this file, and each is answered:
+Six things you may catch yourself thinking here. Each one was thought, in those
+words, by a model running this stage without this file — and each is answered:
 
-| The thought                                                                  | What is true                                                                                                                     |
-| ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| "A rejected alternative reads as hedging — give one shape, not a menu."      | A menu hedges. A runner-up with a reason is the evidence that a choice was made rather than a first idea kept.                   |
-| "The ledger is bookkeeping for whoever drafts, not for whoever approves."    | The ledger is most of what is being approved. It is the only part of the outline that says the sections are ordered, not listed. |
-| "I flagged that in the paragraph above."                                     | A flag nobody can find is a flag nobody acts on. It goes on its own `UNGROUNDED:` line.                                          |
-| "The thesis moved but the shape mostly survives, so this pass can draft on." | A second pass stops at the same gate. "Mostly survives" is the claim the gate exists to test.                                    |
+| The thought                                                                          | What is true                                                                                                                         |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| "A rejected alternative reads as hedging — give one shape, not a menu."              | A menu hedges. A runner-up with a reason is the evidence that a choice was made rather than a first idea kept.                       |
+| "The ledger is bookkeeping for whoever drafts, not for whoever approves."            | The ledger is most of what is being approved. It is the only part of the outline that says the sections are ordered, not listed.     |
+| "I flagged that in the paragraph above."                                             | A flag nobody can find is a flag nobody acts on. It goes on its own `UNGROUNDED:` line.                                              |
+| "The thesis moved but the shape mostly survives, so this pass can draft on."         | A second pass stops at the same gate. "Mostly survives" is the claim the gate exists to test.                                        |
+| "This brief is specific enough that the shape is not a decision only they can make." | The gate does not scale with the task. A brief specific enough to make the shape obvious is a brief where confirming costs one line. |
+| "Those brief fields are `readOnly`, so they are not mine to write."                  | `readOnly` means Studio does not edit them, because they are machine-written. These are the fields this stage exists to write.       |
 
 **When the human confirms, patch `outline` with the shape they confirmed** —
 their amendments applied, the annotations and the question map included, as
