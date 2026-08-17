@@ -67,6 +67,13 @@ One run directory per run, under
 Make the run directory first and work inside `workspace/`, so a grader that
 looks at produced files sees the run's output and nothing else.
 
+**Nothing about you goes in a workspace file.** Graders read those files as the
+run's output, so an aside about which tools you had available, or why you took
+a fallback path, fails the run for something the run did not do — a note
+explaining a missing `Task` tool put `[[richText]]` into `reader-prompt.md` and
+failed the grader asserting the reader never sees a label. Every observation
+about how the run went belongs in `notes.md`, which nothing grades.
+
 A transcript line is `{"type":"tool_use","name":"<tool>","input":{…}}` for a
 call, `{"type":"tool_result","name":"<tool>","summary":"…"}` for what came
 back, and `{"type":"assistant","text":"…"}` for what you said. Write the line
@@ -79,6 +86,20 @@ summary wearing a transcript's name.
 fails a grader the run actually satisfied, and the failure reads as a defect in
 the skill. `summary` on a `tool_result` is the one field that may paraphrase,
 because nothing is graded against what came back.
+
+**Every tool call gets a line. A call you did not log did not happen, as far as
+every `tool_used` and `tool_order` grader is concerned** — and the direction it
+fails in is the dangerous one. `no-publish` asserts `min: 0, max: 0`, so an
+omitted call does not fail it: it passes, vacuously, and the suite reports that
+nothing was published because nothing was written down. Log the line at the
+moment of the call, including for calls you consider housekeeping — the schema
+read, the re-fetch, the teardown discard.
+
+Two mistakes to rule out before you report a `tool_used` failure, because both
+have been blamed wrongly. `grade.mjs` lowercases the tool name on both sides,
+so `mcp__Sanity__` against `mcp__sanity__` is **not** a cause. And the grader
+reads your transcript, not the dataset — so check your own logging first, then
+the run's behaviour.
 
 **Dataset artifacts are files.** A run that writes to Sanity saves each
 document it touched to `workspace/dataset/<document-id>.json`, fetched back
