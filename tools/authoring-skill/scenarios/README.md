@@ -1,6 +1,11 @@
 # Scenarios
 
-The `o3sanity:authoring` skill's test surface. A scenario is an idea for a piece plus
+**The graded test surface is [`../evals/`](../evals).** A scenario is the
+long-form script a case's persona section is written from: the two here predate
+the eval format, they are run by hand through the `o3-authoring-scenario` agent,
+and their judgement is a human reading a transcript rather than a grader.
+
+A scenario is an idea for a piece plus
 scripted stakeholder answers — a persona, the facts it knows, and what it says
 at every point the skill asks for a nod. It is not sample content; it exists so
 that a change to `SKILL.md` can be checked against behaviour instead of against
