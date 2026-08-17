@@ -47,6 +47,10 @@ next step. Start at that stage. A confirmation in the record has been taken —
 read it back for a nod if you like, but never re-run the interview that
 produced it.
 
+**A human asking for a fresh piece outranks the record.** Resuming is for a run
+that stopped mid-flight. A new piece on a subject that already has a finished
+brief reuses that brief and runs its own stages from the top.
+
 ## Before writing anything
 
 1. **Fetch the live guidance.** Query `*[_type == "guidance"]{key, title, body}`
@@ -170,6 +174,11 @@ _Sanity_ document existing; and its claims are not sourced by having been
 written down once. Treat a fact from a prior draft the way you treat a fact
 from the human, and gather a source for it like any other.
 
+Where that prior draft **is** a Sanity document, the human's instruction decides
+which it is. Asked to revise it, you are in review mode. Asked for a fresh piece
+that mines it, it is material — and it is also a document on this subject, so it
+comes to the gate below with the rest.
+
 **Then the gate.** Present three lists and stop:
 
 - **Found** — each item with its source, a URL or a document id.
@@ -179,6 +188,12 @@ from the human, and gather a source for it like any other.
 Say what a subject collision leaves open, in the three real options: **extend**
 the existing document, **supersede** it, or **differentiate** deliberately with
 a stated difference. The human answers before you converge.
+
+**Supersede has a mechanic worth stating**, because you may not retire anything
+yourself — `discard_drafts` and `unpublish_documents` are off-limits. It means:
+write the new piece, and put retiring the old one on the gap list as a human
+step, naming the document. Until they do it the superseded document still holds
+its slug, so the new piece takes one of its own.
 
 This is a gate: the interview does not start until the human has responded to
 these lists. Their corrections and additions are material — carry them into the
@@ -209,6 +224,11 @@ the client and the industries; on a page the `pageType`. Put them in one
 message as a list with a recommended answer each, drawn from the corpus you
 swept. This is a list to nod at, not a third round of the interview.
 
+Add any field the reader test will need, required or not. On a page that is
+`card.excerpt`: the test hands the reader an excerpt, that field is where a
+page's comes from, and the schema does not require it. A reader given an empty
+one tests two-thirds of the piece, and the test does not re-run.
+
 Where the human has no answer, the default depends on what the slot holds:
 
 - **A required slot the piece itself decides** — a date, a page type — takes
@@ -224,8 +244,9 @@ Where the human has no answer, the default depends on what the slot holds:
 **Round two** — none of it is askable before the claim exists:
 
 4. What is the warrant?
-5. What evidence is in hand? Put stage 1's found list in front of them and ask
-   what it missed — what they hold that the sweep could not reach.
+5. What evidence is in hand? They read the found list at the gate, so do not
+   put it in front of them twice — ask what it missed, which is what they hold
+   that the sweep could not reach.
 
 Then two things, in the chat, before anything is written:
 
@@ -303,6 +324,22 @@ by the next session as much as by a human:
 stage 1's result, and from there it is patched at the end of every stage rather
 than at the end of the run. Three confirmations exist to record: the gather
 gate, the agreed thesis, and the outline gate.
+
+**Write `record` with `set`, and read it back.** Set the whole field every time,
+then query the field and check the line you meant to move actually moved. It is
+one long text field rewritten wholesale at four points in a run, and every way
+of failing at it is silent: a `diffMatchPatch` against offsets you wrote by hand
+reports success and either changes nothing or deletes the line it was aiming at,
+and a `set` carrying a truncated string is accepted just as cheerfully. A stale
+`## Pipeline` is worse than an absent one, because it is what the next session
+trusts most.
+
+**A brief outlives one piece.** The key names the subject, so a second piece
+reuses the brief — and `record` holds one `## Thesis` and one question list. The
+new piece's thesis and questions go under those headings, and the set they
+replace moves to `## Decisions` verbatim, named with the piece it was locked
+against. Nothing is reworded and nothing is dropped: the retired set is what
+tells a later session the earlier piece was briefed too.
 
 `## Decisions` holds the scoping calls — material you deliberately cut, an
 angle deferred to another piece, a required field you filled from a
@@ -454,8 +491,8 @@ on `_key`s. Not the thesis, which is the answer.
 translation: the title is the page's, the excerpt is `card.excerpt`, and the
 body is the bands flattened into what a visitor meets from the top — eyebrows,
 headings and subheadings in order, each feature or panel heading with its body,
-button labels in square brackets. Keep the cues a visitor genuinely sees; drop
-`_key`, `_type`, block names and surfaces.
+labelled detail lists, button labels in square brackets. Keep the cues a visitor
+genuinely sees; drop `_key`, `_type`, block names and surfaces.
 
 Two ways to run it, same test:
 
@@ -482,6 +519,11 @@ pass, and never re-run the test hoping for a better reader.
 You may **add up to two** questions after drafting. You may never remove or
 reword one. The question you cannot answer is the one that otherwise gets
 quietly dropped.
+
+Here the test has already run when you add one, and it may not be re-run — so an
+added question is a note to whoever picks the piece up next, not something this
+run answers. Record it in `record` as unanswered, and say why it was worth
+adding.
 
 ## Hand off
 
