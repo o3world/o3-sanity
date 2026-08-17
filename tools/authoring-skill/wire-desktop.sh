@@ -186,118 +186,20 @@ finish() {
 }
 
 # ──────────────────────────────────────────────────────────────────────────
-# STAGES — author this section. One stage() per step the human takes.
-# Replace the example below. Set the two totals to match the stages you write.
+# STAGES — on hold, so the wizard says so instead of walking a human into a
+# wall. Its five stages assumed one uploadable skill folder. Since #193 the
+# plugin is five skills that open by reading ${CLAUDE_PLUGIN_ROOT}/CORE.md,
+# `pnpm build:skill` refuses to emit a ZIP, and stage 1 would fail on its first
+# command. #198 decides what Desktop gets instead; the library above is intact
+# and the stages come back under it.
 # ──────────────────────────────────────────────────────────────────────────
 
-TOTAL_STAGES=5
-TOTAL_MINUTES=10
-
-PROJECT_ID="naorcr6k"
-# The dataset the skill drafts to by default, so the smoke test checks the one
-# a real session will use. `production` is opt-in by name, in the conversation.
-DATASET="development"
-SKILL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "$SKILL_DIR/../.." && pwd)"
-ZIP="$SKILL_DIR/dist/authoring.zip"
-
-# groq QUERY — run a GROQ query against $DATASET as the logged-in Sanity user.
-groq() {
-  (cd "$REPO_ROOT/packages/sanity" &&
-    npx --no-install sanity documents query "$1" \
-      --project-id "$PROJECT_ID" --dataset "$DATASET" --api-version 2025-08-15 2>/dev/null)
-}
-
-banner "Wire Claude Desktop for O3 authoring"
-
-# ── 1 ─────────────────────────────────────────────────────────────────────
-stage "Build the skill ZIP" 1
-say "The ZIP is a build artifact — never committed, so build it fresh."
-(cd "$REPO_ROOT" && pnpm build:skill)
-[[ -f "$ZIP" ]] || { warn "expected $ZIP — build failed"; exit 1; }
-say "Built: $ZIP"
-step "A Finder window is opening on it. Leave it — stage 3 drags from here."
-open_url "$SKILL_DIR/dist"
-pause
-
-# ── 2 ─────────────────────────────────────────────────────────────────────
-stage "Enable code execution" 1
-say "Skills only appear in settings once code execution is on."
-open_url "https://claude.ai/settings"
-step "Settings → Capabilities → turn on code execution."
-note "Already on? Nothing to do — carry on."
-pause "Done?"
-
-# ── 3 ─────────────────────────────────────────────────────────────────────
-stage "Upload the skill" 2
-say "Skills are account-level: uploading here reaches Desktop, web, and mobile."
-open_url "https://claude.ai/settings"
-step "Settings → Customize → Skills → Upload a skill."
-step "Choose authoring.zip from the Finder window stage 1 opened."
-note "Re-uploading the same ZIP replaces the installed version — that is how"
-note "you ship a skill update. The ZIP packages skills/authoring/ only, so the"
-note "plugin's references/ files are NOT in it — the Desktop distribution is"
-note "waiting on #193 to say where it reads them from."
-pause "Does authoring show up in the skills list?"
-
-# ── 4 ─────────────────────────────────────────────────────────────────────
-stage "Connect Sanity" 3
-say "The connector is the hosted Sanity MCP. You OAuth as yourself; your Sanity"
-say "role bounds what the skill can write. No token is ever shared."
-open_url "https://claude.com/connectors/sanity"
-step "Add the connector, then open Claude Desktop → Settings → Connectors."
-step "Click Connect on Sanity and complete the OAuth login."
-warn "Log in with GitHub. One email can map to several Sanity accounts, and"
-warn "nick@o3world.com resolves through the GitHub provider on this project."
-note "Sessions last about 7 days; a reconnect prompt later is normal, not a fault."
-pause "Connected?"
-
-# ── 5 ─────────────────────────────────────────────────────────────────────
-stage "Smoke test" 3
-say "Start a new Claude Desktop chat and paste this:"
-printf '\n%s' "$DIM"
-cat <<'PROMPT'
-  Use the authoring skill against Sanity project naorcr6k, dataset
-  development. Fetch the guidance documents, then fetch the full schema for
-  the `insight` type. My thesis is "a wire-up is not working until something
-  outside the app says so" — skip the brief's rounds and use it. Then create
-  a throwaway draft insight titled "Desktop wire-up smoke test — delete me"
-  with a one-line body. Report the document ID, the guidance keys you found,
-  and one field description you read off the insight schema.
-PROMPT
-printf '%s\n' "$RESET"
-note "Expect the guidance fetch to come back empty: the guidance documents and"
-note "their schema type are retired (#192), and the skill has not been rewritten"
-note "off them yet (#193). Judge this run on the draft and the schema"
-note "description alone. Handing it a thesis is the brief's one override —"
-note "without it, the skill is supposed to refuse to create anything."
-pause "Claude says it created the draft?"
-
-say "Checking the dataset from this side…"
-DRAFTS=$(groq '*[_id in path("drafts.**") && _type == "insight"]{_id, title}' || true)
-if [[ -z "$DRAFTS" || "$DRAFTS" == "[]" ]]; then
-  warn "no draft insights found — Desktop did not reach the dataset."
-  note "Most likely: the connector is not actually connected, or the OAuth"
-  note "login landed on a Sanity account without write access to $PROJECT_ID."
-  SKIPPED+=("smoke test — no draft insight reached $PROJECT_ID/$DATASET")
-else
-  printf '  %s✓ the draft is really there%s\n' "$GREEN" "$RESET"
-  printf '%s\n' "$DRAFTS"
-  if confirm "Delete the throwaway draft now?"; then
-    for id in $(printf '%s' "$DRAFTS" | grep -oE 'drafts\.[A-Za-z0-9._-]+' || true); do
-      if (cd "$REPO_ROOT/packages/sanity" &&
-          npx --no-install sanity documents delete "$id" \
-            --project-id "$PROJECT_ID" --dataset "$DATASET" >/dev/null 2>&1); then
-        printf '  %s✓ deleted%s %s\n' "$GREEN" "$RESET" "$id"
-      else
-        SKIPPED+=("delete $id by hand in Studio")
-      fi
-    done
-  else
-    SKIPPED+=("discard the smoke-test draft in Studio")
-  fi
-fi
-
-finish
-note "Desktop is wired. Ask it to draft something and it will fetch the voice"
-note "guide before it writes a word."
+printf '\n  Desktop wiring is on hold.\n\n'
+printf '  This wizard uploaded one skill folder to claude.ai. The o3sanity plugin is\n'
+printf '  now five skills sharing CORE.md and references/ at the plugin root, reached\n'
+printf '  through ${CLAUDE_PLUGIN_ROOT} — which Desktop does not set. There is nothing\n'
+printf '  correct to upload until #198 decides what that surface gets.\n\n'
+printf '  Claude Code is unaffected:\n\n'
+printf '    claude plugin marketplace update o3world\n'
+printf '    claude plugin install o3sanity@o3world\n\n'
+exit 1

@@ -59,6 +59,30 @@ describe('parseFrontmatter', () => {
     expect(body).toBe('The task.')
   })
 
+  it('rejoins a flow sequence prettier wrapped across lines, and ignores brackets inside a scalar', () => {
+    const { fields } = parseFrontmatter(
+      [
+        '---',
+        'name: Gather gate',
+        'model: sonnet',
+        'allowed_tools:',
+        '  [',
+        '    Read,',
+        '    mcp__sanity__query_documents,',
+        '  ]',
+        'pattern: \'"gaps"\\s*:\\s*\\[\\s*"\'',
+        'runs: 1',
+        '---',
+        '',
+        'The task.',
+      ].join('\n'),
+    )
+
+    expect(fields.allowed_tools).toEqual(['Read', 'mcp__sanity__query_documents'])
+    expect(fields.pattern).toBe('"gaps"\\s*:\\s*\\[\\s*"')
+    expect(fields.runs).toBe(1)
+  })
+
   it('reports a file with no frontmatter rather than guessing at one', () => {
     expect(parseFrontmatter('just a prompt').hasFrontmatter).toBe(false)
   })
