@@ -11,7 +11,6 @@
     {
       "_type": "heroSection",
       "_key": "hero",
-      "surface": "ink",
       "variant": "band",
       "eyebrow": "Ventures",
       "headlineLines": ["Investing in exceptional people, products + experiences"],
@@ -179,7 +178,6 @@
     {
       "_type": "ctaSection",
       "_key": "cta",
-      "surface": "ink",
       "heading": "Where ventures, thought leadership + AI innovation converge",
       "body": "O3 Ventures, our thought leadership initiatives, and the 1682 Conference are all part of our commitment to shaping the future of innovation and AI. We don’t just talk about innovation - we help build it, connecting visionary startups with the insights, resources, and networks they need to scale. Explore how 1682 brings it all together.",
       "button": {

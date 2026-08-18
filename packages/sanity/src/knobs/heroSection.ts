@@ -1,6 +1,5 @@
 import { defineBlockKnobs, knob } from '@o3/block-spec'
 import { decorationKnob } from './decoration'
-import { surfaceKnob } from './surface'
 import type { HeroSection } from '../types/generated'
 
 /**
@@ -34,8 +33,15 @@ export const heroSectionKnobs = defineBlockKnobs({
     // two; #120 converted them, so the shared meaning moved to the pure side
     // and the factory that generated a field directly is gone.
     decorationKnob(['orbs', 'none']),
-    surfaceKnob({ initialValue: 'ink' }),
+    // NO `surface`. The orbital band paints ink itself, whatever a document
+    // stores, and it has to: the sphere, the bone-soft curve at its foot and
+    // the white copy over both are one composition drawn on that colour. A
+    // knob that turned and repainted nothing was the state of it before, and
+    // that is the failure ADR 0020's guard exists to remove — a control exists
+    // exactly when it does something.
   ],
+  // The band paints ink itself — see the note beside the missing surface knob.
+  paintsOwnSurface: 'ink',
   /**
    * A hero with one line in it and nothing to correct. `variant` is not spelled
    * here — the knob's own `initialValue` supplies it (`placeholder.ts`), so an

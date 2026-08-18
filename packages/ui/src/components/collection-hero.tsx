@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 
 import { cn } from '../lib/utils'
 import { Eyebrow } from './eyebrow'
+import { surfaceAttrs } from './section-shell'
 import { SurfaceProvider } from './surface-context'
 
 export interface CollectionHeroProps {
@@ -93,6 +94,7 @@ export function CollectionHero({
     // `surface` field never reaches this component and could not change it.
     <SurfaceProvider surface="ink">
       <section
+        {...surfaceAttrs('ink')}
         className={cn(
           'px-gutter pb-band-sm relative isolate overflow-hidden text-white lg:pb-16',
           // `2101:789`: the Interior Hero's container is 192px 0 64px on #0A0A0B.

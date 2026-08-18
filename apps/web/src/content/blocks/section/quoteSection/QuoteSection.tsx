@@ -1,4 +1,4 @@
-import { OrbitalSphere, SURFACE_CLASS, SurfaceProvider } from '@o3/ui'
+import { OrbitalSphere, SURFACE_CLASS, SurfaceProvider, surfaceAttrs } from '@o3/ui'
 
 import { DECORATED_BAND_CLASS, resolveDecoration } from '@/content/blocks/decoration'
 import { MoleculeDecoration } from '@/content/blocks/MoleculeDecoration'
@@ -48,6 +48,7 @@ export function QuoteSection({ quote, attribution, decoration, surface }: QuoteS
   return (
     <SurfaceProvider surface={resolved}>
       <section
+        {...surfaceAttrs(resolved)}
         className={`${SURFACE_CLASS[resolved]} px-gutter py-band-lg ${DECORATED_BAND_CLASS}`}
       >
         <MoleculeDecoration

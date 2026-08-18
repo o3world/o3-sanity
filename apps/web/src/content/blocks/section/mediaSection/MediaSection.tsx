@@ -1,4 +1,4 @@
-import { SURFACE_CLASS, SurfaceProvider } from '@o3/ui'
+import { SURFACE_CLASS, SurfaceProvider, surfaceAttrs } from '@o3/ui'
 import { stegaClean } from '@sanity/client/stega'
 
 import { SanityImage } from '@/content/SanityImage'
@@ -47,7 +47,7 @@ export function MediaSection({ media, variant, width, surface }: MediaSectionPro
   if (stegaClean(variant) === 'capture') {
     return (
       <SurfaceProvider surface={resolved}>
-        <section className={surfaceClass}>
+        <section {...surfaceAttrs(resolved)} className={surfaceClass}>
           <figure>
             {/*
              * The stage: `--gradient-screen-stage` at 135° with the frame's
@@ -81,7 +81,7 @@ export function MediaSection({ media, variant, width, surface }: MediaSectionPro
   if (fullBleed) {
     return (
       <SurfaceProvider surface={resolved}>
-        <section className={surfaceClass}>
+        <section {...surfaceAttrs(resolved)} className={surfaceClass}>
           <figure>
             <div className="relative aspect-[402/257] overflow-hidden lg:aspect-[1440/576]">
               <SanityImage
@@ -105,7 +105,7 @@ export function MediaSection({ media, variant, width, surface }: MediaSectionPro
 
   return (
     <SurfaceProvider surface={resolved}>
-      <section className={`${surfaceClass} px-gutter pb-band-article`}>
+      <section {...surfaceAttrs(resolved)} className={`${surfaceClass} px-gutter pb-band-article`}>
         <figure className="max-w-article mx-auto w-full">
           <SanityImage
             source={media.image}

@@ -11,7 +11,6 @@
     {
       "_type": "heroSection",
       "_key": "hero",
-      "surface": "ink",
       "variant": "band",
       "eyebrow": "1682",
       "headlineLines": ["The business of innovation conference"],
@@ -349,7 +348,6 @@
     {
       "_type": "ctaSection",
       "_key": "cta",
-      "surface": "ink",
       "heading": "Let’s explore your future in AI and innovation",
       "body": "Discover how the insights and connections from 1682 can transform your business. Reach out to learn more.",
       "button": {

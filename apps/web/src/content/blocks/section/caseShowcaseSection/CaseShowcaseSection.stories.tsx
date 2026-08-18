@@ -13,9 +13,9 @@ import { CaseShowcaseSection } from './CaseShowcaseSection'
  * thing to look at first: the join between `--gradient-surface-wash` and
  * `--gradient-surface-wash-angled` should not read as a seam.
  *
- * The block's `surface` field is deliberately unused (see the component), so
- * there is no ink story here — a dark treatment would be a second `variant`,
- * not this band on a dark surface.
+ * The block offers no `surface` (see the component), so there is no ink story
+ * here — a dark treatment would be a second `variant`, not this band on a dark
+ * surface.
  */
 const meta = {
   title: 'Content/Blocks/Section/CaseShowcaseSection',

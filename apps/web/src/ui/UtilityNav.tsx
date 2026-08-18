@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { SurfaceProvider } from '@o3/ui'
+import { SurfaceProvider, surfaceAttrs } from '@o3/ui'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { resolveButtonHref } from '@/content/buttonDestination'
@@ -63,6 +63,7 @@ export function UtilityNav({ settings }: UtilityNavProps) {
     <SurfaceProvider surface="ink">
       <nav
         aria-label="O3 properties"
+        {...surfaceAttrs('ink')}
         // Figma strokes the whole box; only the bottom edge meets anything, so
         // that is the edge that gets a hairline — the other three sit against the
         // viewport's edges, where a 1px dark line on a black bar draws nothing.

@@ -11,12 +11,19 @@ import type { PageSection } from '@/content/blocks/sectionTypes'
  *
  * A block whose knob declares nothing is absent here rather than defaulted, so
  * the one arm below that has to invent an answer stays visible. Nothing reaches
- * it today: all sixteen section blocks carry `surfaceKnob`, which `knob()`
- * refuses to build without an `initialValue` naming one of its options.
+ * it today: thirteen section blocks carry `surfaceKnob`, which `knob()` refuses
+ * to build without an `initialValue` naming one of its options, and the other
+ * three declare `paintsOwnSurface` — the answer `defineSectionBlock` accepts
+ * instead. Those three never call this function anyway; they are here so the
+ * table can still say what every section block paints.
  */
 const DECLARED_SURFACE: Readonly<Record<string, Surface>> = Object.fromEntries(
   Object.entries(BLOCK_KNOBS).flatMap(([type, spec]) => {
-    const declared = spec.knobs.find((knob) => knob.name === 'surface')?.initialValue
+    // Either answer to "what colour is this band?" — the knob's default, or
+    // `paintsOwnSurface` where the composition fixes it and there is no knob.
+    // `defineSectionBlock` requires exactly one, so at most one is present.
+    const declared =
+      spec.knobs.find((knob) => knob.name === 'surface')?.initialValue ?? spec.paintsOwnSurface
     return SURFACES.includes(declared as Surface) ? [[type, declared as Surface]] : []
   }),
 )

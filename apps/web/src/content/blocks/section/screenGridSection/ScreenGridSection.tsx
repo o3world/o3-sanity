@@ -1,4 +1,4 @@
-import { SURFACE_CLASS, SurfaceProvider } from '@o3/ui'
+import { SURFACE_CLASS, SurfaceProvider, surfaceAttrs } from '@o3/ui'
 import { stegaClean } from '@sanity/client/stega'
 
 import { SanityImage } from '@/content/SanityImage'
@@ -80,7 +80,7 @@ export function ScreenGridSection({ screens, surface, loc }: ScreenGridSectionPr
 
   return (
     <SurfaceProvider surface={resolved}>
-      <section className={`${SURFACE_CLASS[resolved]} px-gutter py-8`}>
+      <section {...surfaceAttrs(resolved)} className={`${SURFACE_CLASS[resolved]} px-gutter py-8`}>
         <ul className="mx-auto grid w-full gap-8 lg:grid-cols-2">
           {screens.map((screen) => {
             const span = spanOf(screen.span)

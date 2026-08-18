@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { BrandMark, SurfaceProvider } from '@o3/ui'
+import { BrandMark, SurfaceProvider, surfaceAttrs } from '@o3/ui'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { resolveButtonHref } from '@/content/buttonDestination'
@@ -38,7 +38,11 @@ export function SiteFooter({ settings }: SiteFooterProps) {
   return (
     // The third piece of chrome outside the band system. Black, so `ink`.
     <SurfaceProvider surface="ink">
-      <footer id="footer" className="px-gutter relative overflow-hidden bg-black py-16 text-white">
+      <footer
+        id="footer"
+        {...surfaceAttrs('ink')}
+        className="px-gutter relative overflow-hidden bg-black py-16 text-white"
+      >
         {/*
          * The orbital arc: a 1275×1277 two-ring vector stroked at 2px in
          * `rgba(255,255,255,0.2)`, bleeding off the left edge. Decorative and

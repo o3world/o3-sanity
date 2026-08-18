@@ -117,6 +117,13 @@ export function SiteNav({ settings }: SiteNavProps) {
   return (
     // Chrome declares its own surface: the pill is a dark scrim over whatever
     // it is floating across, and the mobile bar is the same fill.
+    //
+    // NO `surfaceAttrs` HERE, and it is not an omission. This is the one
+    // surface that CHANGES without React knowing: `NavInk` toggles
+    // `data-ink=dark` on the header below and the pill flips to light copy in
+    // CSS, so a static `data-surface="ink"` would repaint the flipped pill's
+    // `text-fg` white on white. The chrome draws in literal colours for
+    // exactly that reason and needs no role token inverted.
     <SurfaceProvider surface="ink">
       <header
         id={NAV_INK_TARGET}

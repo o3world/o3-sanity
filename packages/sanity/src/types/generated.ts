@@ -343,7 +343,6 @@ export type CtaSection = {
   body?: string
   button?: Button
   decoration?: 'molecule' | 'orbs' | 'none'
-  surface?: 'white' | 'bone' | 'ink'
   anchor?: string
 }
 
@@ -424,7 +423,6 @@ export type CaseShowcaseSection = {
       _key: string
     } & CaseStudyReference
   >
-  surface?: 'white' | 'bone' | 'ink'
   anchor?: string
 }
 
@@ -472,7 +470,6 @@ export type HeroSection = {
   }>
   button?: Button
   decoration?: 'orbs' | 'none'
-  surface?: 'white' | 'bone' | 'ink'
   anchor?: string
 }
 
@@ -1435,7 +1432,6 @@ export type CASE_STUDY_QUERY_RESULT = {
           }> | null
           industryDetail: string | null
         }> | null
-        surface?: 'bone' | 'ink' | 'white'
         anchor?: string
       }
     | {
@@ -1482,7 +1478,6 @@ export type CASE_STUDY_QUERY_RESULT = {
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'molecule' | 'none' | 'orbs'
-        surface?: 'bone' | 'ink' | 'white'
         anchor?: string
       }
     | {
@@ -1583,7 +1578,6 @@ export type CASE_STUDY_QUERY_RESULT = {
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'none' | 'orbs'
-        surface?: 'bone' | 'ink' | 'white'
         anchor?: string
       }
     | {
@@ -2173,7 +2167,6 @@ export type PAGE_QUERY_RESULT = {
           }> | null
           industryDetail: string | null
         }> | null
-        surface?: 'bone' | 'ink' | 'white'
         anchor?: string
       }
     | {
@@ -2207,7 +2200,6 @@ export type PAGE_QUERY_RESULT = {
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'molecule' | 'none' | 'orbs'
-        surface?: 'bone' | 'ink' | 'white'
         anchor?: string
       }
     | {
@@ -2308,7 +2300,6 @@ export type PAGE_QUERY_RESULT = {
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'none' | 'orbs'
-        surface?: 'bone' | 'ink' | 'white'
         anchor?: string
       }
     | {

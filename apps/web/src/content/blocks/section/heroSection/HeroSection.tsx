@@ -9,6 +9,7 @@ import {
   OrbitalSphere,
   Reveal,
   SurfaceProvider,
+  surfaceAttrs,
 } from '@o3/ui'
 
 import { ButtonLink } from '@/content/ButtonLink'
@@ -144,11 +145,16 @@ export function HeroSection({
   }
 
   return (
-    // The orbital band always paints ink, whatever the block's `surface` field
-    // says — the field never reaches this composition. Declaring it is what
-    // gives the button below a readable fill without anyone forcing one.
+    // The orbital band always paints ink — the sphere, the bone-soft curve at
+    // its foot and the white copy over both are drawn on that colour, which is
+    // why the block offers no `surface` to override it. Declaring it here is
+    // what gives the button below a readable fill without anyone forcing one,
+    // and what inverts the text roles inside (tokens/color.css).
     <SurfaceProvider surface="ink">
-      <section className="bg-ink px-gutter relative isolate overflow-hidden text-white">
+      <section
+        {...surfaceAttrs('ink')}
+        className="bg-ink px-gutter relative isolate overflow-hidden text-white"
+      >
         {showOrbs ? (
           /*
            * Only the sphere's cap is ever visible. Solving the frame's limb

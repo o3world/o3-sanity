@@ -21,6 +21,21 @@ export const SURFACE_CLASS: Record<Surface, string> = {
   ink: 'bg-ink text-white',
 }
 
+/**
+ * The DOM half of declaring a surface, to spread onto the element that paints
+ * it. `[data-surface='ink']` is what re-points the text-role tokens at the
+ * on-ink alphas (tokens/color.css), so a renderer's `text-fg-muted` means
+ * "muted against THIS band" rather than a fixed grey.
+ *
+ * Its React half is `SurfaceProvider`, and they are one act: this shell does
+ * both, and a band that builds its own `<section>` reaches for this beside
+ * `SURFACE_CLASS`. Declaring only the provider leaves a button readable and
+ * the copy above it invisible.
+ */
+export function surfaceAttrs(surface: Surface) {
+  return { 'data-surface': surface } as const
+}
+
 /** The container measures the frames use (tokens/layout.css). */
 export const SECTION_WIDTH_CLASS = {
   /** 1248px — the 1440 design width less two 96px gutters. The standard shell. */
@@ -87,8 +102,9 @@ export interface SectionShellProps extends HTMLAttributes<HTMLElement> {
  * `<section>` and reaches for `SURFACE_CLASS` instead. That is deliberate:
  * teaching this shell every exception would make it the union of all eight
  * bands rather than the shape they share. Such a band reaches for
- * `SurfaceProvider` in the same breath — painting a surface and declaring it
- * are one act, and the nine bands that use this shell get both here.
+ * `SurfaceProvider` and `surfaceAttrs` in the same breath — painting a surface
+ * and declaring it are one act, and the bands that use this shell get all
+ * three here.
  */
 export function SectionShell({
   surface,
@@ -105,7 +121,11 @@ export function SectionShell({
     // declares what it PAINTS: an omitted prop draws white, so it declares
     // white.
     <SurfaceProvider surface={surface ?? 'white'}>
-      <section className={cn(sectionShellVariants({ surface, top, bottom }), className)} {...rest}>
+      <section
+        {...surfaceAttrs(surface ?? 'white')}
+        className={cn(sectionShellVariants({ surface, top, bottom }), className)}
+        {...rest}
+      >
         <div className={cn('mx-auto w-full', SECTION_WIDTH_CLASS[width], contentClassName)}>
           {children}
         </div>

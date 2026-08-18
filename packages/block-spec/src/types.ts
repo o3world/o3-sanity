@@ -309,6 +309,26 @@ export type BlockKnobs = {
    * sits in, so the host answers the lookup and the collision cannot happen.
    */
   items?: Readonly<Record<string, ItemKnobs>>
+  /**
+   * THE BAND PAINTS ITSELF, and this names what it paints.
+   *
+   * Every section block covers a band, so `defineSectionBlock` requires a
+   * block to answer what colour that band is. Thirteen answer with a `surface`
+   * knob and let an editor pick. Three cannot: the hero's sphere, the CTA's
+   * bleed strip and the case showcase's two gradient washes are compositions
+   * drawn ON a colour, and a picker over them turned and repainted nothing.
+   *
+   * So the answer is declared instead of offered. Present means "no control,
+   * and here is the colour a reader sees" — which keeps the invariant intact
+   * rather than punching a hole in it, and keeps `resolveSurface`'s table able
+   * to say what every section block paints.
+   *
+   * Typed as a string for the reason `BlockPlaceholder` is: this package has
+   * no dependencies and cannot name the `Surface` union. `surfaceKnob`'s side
+   * of the seam does, and `defineSectionBlock` checks the value against
+   * `SURFACES`.
+   */
+  paintsOwnSurface?: string
 }
 
 /**
