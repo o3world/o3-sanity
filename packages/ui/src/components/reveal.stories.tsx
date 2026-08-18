@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 import { Card, CardContent, CardDescription, CardTitle } from './ui/card'
+import { SectionShell } from './section-shell'
 import { DisplayHeading } from './display-heading'
 import { Reveal } from './reveal'
 
@@ -62,5 +63,43 @@ export const Staggered: Story = {
         ))}
       </div>
     </div>
+  ),
+}
+
+/**
+ * The band pattern: a `SectionShell` whose children enter in sequence, each
+ * `Reveal` delayed by its index × 80ms — the stagger `Reveal` documents and the
+ * logo wall uses. The tiles are `interactive` cards, so the entrance and the
+ * hover affordance are visible together.
+ *
+ * Nothing here is new component code: `Reveal` already takes `delay`, and the
+ * stagger is composition. The story exists because motion has no Figma anchor
+ * (CONTEXT.md) — `packages/ui` stories are where it is settled.
+ */
+export const StaggeredBand: Story = {
+  render: () => (
+    <SectionShell surface="white">
+      <div className="flex flex-col gap-10">
+        {/* h3 so the h4 CardTitles below do not skip a level — the stories
+            layer axe-scans every story and heading-order is enforced. */}
+        <DisplayHeading level="lg" as="h3">
+          Staggered reveal
+        </DisplayHeading>
+        <div className="grid grid-cols-3 gap-6">
+          {[0, 1, 2, 3, 4, 5].map((i) => (
+            <Reveal key={i} delay={i * 80}>
+              <Card interactive className="h-full">
+                <CardContent>
+                  <CardTitle className="mb-3">Panel {i + 1}</CardTitle>
+                  <CardDescription>
+                    opacity 0 → 1, translateY 24px → 0, entering at {i * 80}ms.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </SectionShell>
   ),
 }

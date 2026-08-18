@@ -1,0 +1,92 @@
+{
+  "projectId": "eff40487-44ca-437d-8f83-8228a6221aae",
+  "pkg": "@o3/ui",
+  "globalName": "O3Ui",
+  "shape": "storybook",
+  "storybookStatic": ".design-sync/sb-reference",
+  "storybookConfigDir": "apps/storybook/.storybook",
+  "tsconfig": "tsconfig.json",
+  "buildCmd": "cd packages/ui && npx tsc -p tsconfig.json --declaration --emitDeclarationOnly --noEmit false --outDir dist/types",
+  "titleMap": {
+    "button": "Button",
+    "ButtonIcons": "ExternalLinkIcon",
+    "Button": null,
+    "ButtonGroup": null,
+    "Embed": null,
+    "Figure": null,
+    "Mark": null,
+    "RichText": null,
+    "StatGroup": null,
+    "CaseShowcaseSection": null,
+    "CtaSection": null,
+    "FeatureGridSection": null,
+    "FormSection": null,
+    "InFlightSection": null,
+    "InsightsCarouselSection": null,
+    "LayoutSection": null,
+    "ListingSection": null,
+    "LogoWallSection": null,
+    "MediaSection": null,
+    "PersonGridSection": null,
+    "QuoteSection": null,
+    "RailPanelsSection": null,
+    "RoleListSection": null,
+    "ScreenGridSection": null,
+    "HeroSection": null,
+    "About": null,
+    "1682Conference": null,
+    "Contact": null,
+    "Home": null,
+    "Insights": null,
+    "Live": null,
+    "SoftwareEngineering": null,
+    "Solutions": null,
+    "Ventures": null,
+    "MobileNavMenu": null,
+    "SiteFooter": null,
+    "SiteNav": null,
+    "UtilityNav": null,
+    "Mobilemenu\u2014threeopenstates(Aug2026)": null,
+    "Mobilemenu\u2014openstate(Aug2026)": null,
+    "Overview": null,
+    "Color": null,
+    "Gradient": null,
+    "Typography": null,
+    "Layout": null,
+    "Buttonspec": null
+  },
+  "tokensPkg": "@o3/tailwind-config",
+  "tokensGlob": "**/*.css",
+  "extraFonts": ["../../apps/storybook/node_modules/@fontsource-variable/figtree/wght.css"],
+  "overrides": {
+    "CaseChapter": {
+      "cardMode": "column"
+    },
+    "CaseStudyHero": {
+      "cardMode": "column"
+    },
+    "SectionShell": {
+      "cardMode": "column"
+    },
+    "BrandLogo": {
+      "cardMode": "column"
+    },
+    "Button": {
+      "cardMode": "column"
+    },
+    "Card": {
+      "cardMode": "column"
+    },
+    "PortraitTile": {
+      "cardMode": "column"
+    },
+    "ReadingProgress": {
+      "cardMode": "single",
+      "primaryStory": "Scrolling"
+    }
+  },
+  "libOverrides": {
+    "preview-gen-storybook.mjs": "stories pin an O3 surface via storybook's backgrounds global and the stock wrapper dropped it (20 components previewed on the wrong surface); it also replaced meta parameters instead of merging them, losing layout:'fullscreen'"
+  },
+  "readmeHeader": ".design-sync/conventions.md"
+}
