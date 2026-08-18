@@ -49,3 +49,17 @@ tools/authoring-skill/evals/results/
 # screenshot, and the report. All of it is derived from a commit and none of it
 # is shared — see tools/visual-regression/README.md.
 .vr/
+
+# design-sync (/design-sync skill). Committed: .design-sync/config.json,
+# NOTES.md, conventions.md, previews/, overrides/ — the inputs a re-sync
+# replays. Everything below is derived: the reference storybook build, the
+# staged converter, its output, and per-run verification state. Verified state
+# travels in the uploaded project's _ds_sync.json, not in git.
+.design-sync/sb-reference/
+.design-sync/learnings/
+.design-sync/.cache/
+.design-sync/node_modules
+.design-sync/*.log
+.design-sync/push-*.txt
+.ds-sync/
+ds-bundle/
