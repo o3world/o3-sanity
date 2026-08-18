@@ -22,6 +22,18 @@
   /* mask — cubic-bezier(0.16,0.9,0.2,1): the hero headline line-mask reveal
    * (`.o3-line` / @keyframes o3mask). Class-accessible via ease-mask. */
   --ease-mask: cubic-bezier(0.16, 0.9, 0.2, 1);
+  /* soft — cubic-bezier(0.33,0,0.15,1): a symmetric ease-in-out, the third
+   * curve offered alongside `out` and `mask` when a transition should settle
+   * rather than arrive. Class-accessible via ease-soft.
+   *
+   * NO FIGMA ANCHOR, AND THERE CANNOT BE ONE. Figma draws stills; motion is
+   * the one thing it cannot supply (CONTEXT.md), so nothing in the frames can
+   * validate a curve. This one was chosen in the `section-shell-motion`
+   * template in the O3 Component Library Claude Design project, whose other
+   * two curves resolved to exactly this file's `out` and `mask` — which is the
+   * reason to trust the third. `packages/ui` stories carry motion from here
+   * on, so a curve is settled by the story that uses it, not by a frame. */
+  --ease-soft: cubic-bezier(0.33, 0, 0.15, 1);
 }
 
 /*

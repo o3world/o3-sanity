@@ -15,6 +15,22 @@ const cardVariants = cva(
         // ink — the work-case card fill (#0A0A0B) on the #030303 section.
         ink: 'bg-ink-soft text-white',
       },
+      // interactive — the card is a link or a target, and says so under the
+      // cursor: a 4px lift on a soft drop shadow, over the hover duration on
+      // the house curve. Opt-in, because a card that only reads does not earn
+      // the affordance.
+      //
+      // NO FIGMA ANCHOR (motion is the one thing the frames cannot supply —
+      // CONTEXT.md). Both values come from the `section-shell-motion` template
+      // in the O3 Component Library Claude Design project; the story below is
+      // what settles them.
+      interactive: {
+        true: [
+          'transition-[transform,box-shadow] duration-(--duration-hover) ease-out',
+          'hover:-translate-y-1 hover:shadow-[0_12px_28px_-18px_rgb(0_0_0/0.35)]',
+          'motion-reduce:transition-none motion-reduce:hover:transform-none',
+        ].join(' '),
+      },
     },
     defaultVariants: { surface: 'white' },
   },
@@ -23,8 +39,8 @@ const cardVariants = cva(
 export interface CardProps
   extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof cardVariants> {}
 
-function Card({ className, surface, ...props }: CardProps) {
-  return <div className={cn(cardVariants({ surface }), className)} {...props} />
+function Card({ className, surface, interactive, ...props }: CardProps) {
+  return <div className={cn(cardVariants({ surface, interactive }), className)} {...props} />
 }
 
 /** Edge-to-edge media strip (the insight card's 220px image area). */
