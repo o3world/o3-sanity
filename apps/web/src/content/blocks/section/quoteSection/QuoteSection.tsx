@@ -43,7 +43,7 @@ export function QuoteSection({ quote, attribution, decoration, surface }: QuoteS
   if (!quote) return null
   const resolved = resolveSurface(surface, 'quoteSection')
   // The spheres and the molecule are alternatives: the band draws one or neither.
-  const showOrbs = resolveDecoration(decoration) === 'orbs'
+  const showOrbs = resolveDecoration(decoration, 'quoteSection') === 'orbs'
 
   return (
     <SurfaceProvider surface={resolved}>
@@ -52,6 +52,7 @@ export function QuoteSection({ quote, attribution, decoration, surface }: QuoteS
       >
         <MoleculeDecoration
           decoration={decoration}
+          block="quoteSection"
           surface={resolved}
           className="opacity-10 lg:right-[-203px] lg:top-[181px] lg:w-[699px]"
         />

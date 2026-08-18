@@ -209,6 +209,7 @@ export function FeatureGridSection({
        */}
       <MoleculeDecoration
         decoration={decoration}
+        block="featureGridSection"
         surface={resolved}
         className="right-[-24%] top-1/4 w-[85vw] opacity-25"
       />

@@ -1,11 +1,17 @@
 import { cn, MoleculeMark } from '@o3/ui'
 
 import { resolveDecoration } from '@/content/blocks/decoration'
+import type { PageSection } from '@/content/blocks/sectionTypes'
 import type { Surface } from '@o3/sanity/constants'
 
 export interface MoleculeDecorationProps {
   /** The band's `decoration` knob value, stega and all. */
   decoration: string | null | undefined
+  /**
+   * The band's Sanity `_type` — what an unset `decoration` is resolved
+   * against, since the fallback is that block's declared `initialValue`.
+   */
+  block: PageSection['_type']
   /** The band's resolved surface — what the glyph's tone is read from. */
   surface: Surface
   /**
@@ -43,11 +49,12 @@ export interface MoleculeDecorationProps {
  */
 export function MoleculeDecoration({
   decoration,
+  block,
   surface,
   className,
   visibleFrom = 'lg',
 }: MoleculeDecorationProps) {
-  if (resolveDecoration(decoration) !== 'molecule') return null
+  if (resolveDecoration(decoration, block) !== 'molecule') return null
 
   return (
     <MoleculeMark

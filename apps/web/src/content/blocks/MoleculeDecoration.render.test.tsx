@@ -11,12 +11,13 @@ const MARK = 'viewBox="0 0 699 699"'
 
 function render(props: {
   decoration?: string | null
+  block?: 'quoteSection' | 'ctaSection'
   surface?: Surface
   className?: string
   visibleFrom?: 'lg' | 'base'
 }) {
   return renderToStaticMarkup(
-    <MoleculeDecoration decoration="molecule" surface="white" {...props} />,
+    <MoleculeDecoration decoration="molecule" block="quoteSection" surface="white" {...props} />,
   )
 }
 
@@ -25,6 +26,16 @@ describe('the molecule decoration', () => {
     expect(render({ decoration: 'orbs' })).toBe('')
     expect(render({ decoration: 'none' })).toBe('')
     expect(render({ decoration: null })).toBe('')
+  })
+
+  /**
+   * An unset knob is the BLOCK's declared default, not one shared literal
+   * (#163). The quote band declares `orbs` and draws nothing; the CTA band
+   * declares `molecule` and draws — from the same absent value.
+   */
+  it('reads an unset knob as the block’s own default', () => {
+    expect(render({ decoration: null, block: 'quoteSection' })).toBe('')
+    expect(render({ decoration: null, block: 'ctaSection' })).toContain(MARK)
   })
 
   it('takes the band’s own ink', () => {

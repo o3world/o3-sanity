@@ -580,3 +580,33 @@ describe('the seeded 1682 conference page', () => {
     expect(html.match(/<h1[\s>]/g) ?? []).toHaveLength(1)
   })
 })
+
+/**
+ * WHICH GENERATION EACH CLOSER DRAWS (#163).
+ *
+ * Every canonical frame in this file instances the `CTA` component
+ * (`2124:72`) override-free — About `2124:1120`, Solutions `2124:1160`, Live
+ * `2124:1084`, Software Engineering inside `2360:2879` — and that component
+ * hangs the molecule and no bleed strip. 1682 has no frame at all, so it takes
+ * the current generation with them.
+ *
+ * Home is the exception and is tested where it lives: its frame keeps the
+ * bespoke sphere band, so its seed pins `orbs` and its closer still fades into
+ * the footer.
+ */
+describe('the closing CTA band', () => {
+  it.each([
+    ['About', about.html, 'about'],
+    ['Solutions', solutions.html, 'solutions'],
+    ['Live', live.html, 'live'],
+    ['Software Engineering', softwareEngineering.html, 'solutions-software-engineering'],
+    ['1682', conference.html, '1682-conference-ai-innovation'],
+  ])('closes %s on the molecule the component hangs', (_label, html, slug) => {
+    const sections = (aSeededPage(slug).sections ?? []) as { _type: string; decoration?: string }[]
+    expect(sections.find((s) => s._type === 'ctaSection')?.decoration).toBe('molecule')
+    // CtaSection's own molecule and bleed strip — neither shared with any
+    // other band on these pages.
+    expect(html).toContain('w-[54%]')
+    expect(html).not.toContain('--gradient-ink-fade')
+  })
+})

@@ -333,6 +333,30 @@
       "figmaName": ".building block Icon_text",
       "codeComponent": null,
       "note": "Duplicate of `136:14`."
+    },
+    {
+      "nodeId": "2177:1354",
+      "kind": "componentSet",
+      "name": "CTA",
+      "figmaName": "CTA",
+      "codeComponent": "apps/web/src/content/blocks/section/ctaSection/CtaSection.tsx#CtaSection",
+      "note": "The closing band every canonical page frame but Home instances override-free: Device = Desktop (`2124:72`) | Mobile (`2177:1353`), 1440/402, black, one decoration — the molecule at 775.9 square, 15%, centred. Tracked from 2026-08-16: #163 found the band a generation behind (it drew the pre-redesign sphere of `1680:2132`) and nothing reported the drift, because the set the band is built to was not watched. Home's closer is still the bespoke `1680:2132` and does not instance this."
+    },
+    {
+      "nodeId": "2107:1051",
+      "kind": "componentSet",
+      "name": "Interior Hero",
+      "figmaName": "Interior Hero",
+      "codeComponent": "packages/ui/src/components/collection-hero.tsx#CollectionHero",
+      "note": "The ink hero on every interior and collection frame: Device = Desktop (`2101:828`) | Mobile (`2107:1042`), #0A0A0B, eyebrow + h2 + standfirst. `CollectionHero`'s `interior` variant is built to it. Tracked from 2026-08-16 alongside `CTA` and `Blog` — the three page-level sets the component map had never carried."
+    },
+    {
+      "nodeId": "2205:1146",
+      "kind": "componentSet",
+      "name": "Blog",
+      "figmaName": "Blog",
+      "codeComponent": "apps/web/src/content/blocks/section/insightsCarouselSection/InsightsCarouselSection.tsx#InsightsCarouselSection",
+      "note": "The insight band on Home and the insight index: Property 1 = Default (`2134:1302`, 1440×866) | Mobile (`2204:1145`, 402×1372), bone, 48px gap. Its axis is the unnamed `Property 1` where the other two page sets use `Device`; the values still read Desktop/Mobile, so it is one axis, not a second vocabulary. `CarouselTrack` already reads the mobile variant. Tracked from 2026-08-16."
     }
   ],
   "ignoredNodeIds": [

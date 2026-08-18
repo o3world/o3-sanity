@@ -6,18 +6,19 @@ import { seededSectionArgs } from '@/stories/seedContent'
 import { CtaSection } from './CtaSection'
 
 /**
- * The closing CTA band (`1680:2132`) — the last thing on almost every page.
+ * The closing CTA band — the last thing on almost every page.
  *
- * Two details this band exists to carry, and neither survives being looked at
- * in isolation for long:
+ * It draws one of two generations, and they are not variations on a theme:
  *
- * - the **87px fade strip** along the foot (`1928:6596`), which exists to melt
- *   the band into the `#030303` footer beneath it. In a story there is no
- *   footer under it, so the strip reads as a band of its own — that is the
- *   story's limitation, not the component's. `Pages/Home` is where the join
- *   is actually visible;
- * - the sphere runs `soft` and **centred**, so the band shows its underside,
- *   where the hero shows only the cap.
+ * - **`molecule`** is the canonical `CTA` component (`2124:72`), which every
+ *   page frame but Home now instances override-free. The mark sits centred at
+ *   53.9% of the band and 15% opacity, and the band closes flush.
+ * - **`orbs`** is the bespoke Home band (`1680:2132`): the sphere run `soft`
+ *   and centred, so the band shows its underside where the hero shows only the
+ *   cap, plus the 87px fade strip (`1928:6596`) that melts its lower limb into
+ *   the `#030303` footer. In a story there is no footer under it, so the strip
+ *   reads as a band of its own — that is the story's limitation, not the
+ *   component's. `Pages/Home` is where the join is actually visible.
  *
  * The CTA fill is forced to `light` for the same reason the nav forces its
  * own: this band always paints ink, so `surface` never reaches it.
@@ -27,7 +28,7 @@ const meta = {
   component: CtaSection,
   parameters: {
     layout: 'fullscreen',
-    design: figmaDesign('1680:2132'),
+    design: figmaDesign('2124:72'),
   },
   globals: { backgrounds: { value: 'ink' } },
 } satisfies Meta<typeof CtaSection>
@@ -35,8 +36,15 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+/** The About closer — the molecule, which is what a new band starts on. */
 export const AsSeeded: Story = {
+  args: seededSectionArgs('about', 'ctaSection'),
+}
+
+/** The Home closer, the one frame still on the sphere and its fade strip. */
+export const Orbs: Story = {
   args: seededSectionArgs('index', 'ctaSection'),
+  parameters: { design: figmaDesign('1680:2132') },
 }
 
 /** The sphere is `150vw` below `lg` against `90vw` above it. */
@@ -47,21 +55,12 @@ export const Mobile: Story = {
 
 /** Heading alone — the 600px column and its 18px gaps must not collapse. */
 export const HeadingOnly: Story = {
-  args: { ...seededSectionArgs('index', 'ctaSection'), body: undefined, button: null },
+  args: { ...seededSectionArgs('about', 'ctaSection'), body: undefined, button: null },
 }
 
-/** `decoration: 'none'` — the band without its field, fade strip intact. */
+/** `decoration: 'none'` — the band with no field behind it and no strip. */
 export const NoDecoration: Story = {
-  args: { ...seededSectionArgs('index', 'ctaSection'), decoration: 'none' },
-}
-
-/**
- * `decoration: 'molecule'` — what the canonical `CTA` component actually hangs
- * (`2124:72`): the mark at 54% of the band, centred, in place of the sphere.
- */
-export const WithMolecule: Story = {
-  args: { ...seededSectionArgs('index', 'ctaSection'), decoration: 'molecule' },
-  parameters: { design: figmaDesign('2124:72') },
+  args: { ...seededSectionArgs('about', 'ctaSection'), decoration: 'none' },
 }
 
 /**
@@ -70,11 +69,6 @@ export const WithMolecule: Story = {
  * this one is sized in the band's own terms, so it has an honest small form.
  */
 export const MoleculeMobile: Story = {
-  args: { ...seededSectionArgs('index', 'ctaSection'), decoration: 'molecule' },
-  globals: { backgrounds: { value: 'ink' }, viewport: { value: 'mobile' } },
-}
-
-/** The About page's closing band, for a second real string in the 446px measure. */
-export const AboutVariant: Story = {
   args: seededSectionArgs('about', 'ctaSection'),
+  globals: { backgrounds: { value: 'ink' }, viewport: { value: 'mobile' } },
 }

@@ -1,24 +1,50 @@
 import { stegaClean } from '@sanity/client/stega'
 
+import { BLOCK_KNOBS } from '@o3/sanity/knobs'
+
+import type { PageSection } from '@/content/blocks/sectionTypes'
+
 /** What a band hangs behind its copy, or nothing (`decorationKnob`). */
 export type Decoration = 'molecule' | 'orbs' | 'none'
+
+const DECORATIONS: readonly Decoration[] = ['molecule', 'orbs', 'none']
+
+/**
+ * Each block's declared decoration default, keyed by its Sanity `_type` — read
+ * off the `decoration` knob in `packages/sanity/src/knobs/<block>.ts`, never
+ * restated. The same construction `surface.ts` uses, for the same reason.
+ *
+ * A block that declares no `decoration` knob is absent here rather than
+ * defaulted, so the one arm below that has to invent an answer stays visible.
+ */
+const DECLARED_DECORATION: Readonly<Record<string, Decoration>> = Object.fromEntries(
+  Object.entries(BLOCK_KNOBS).flatMap(([type, spec]) => {
+    const declared = spec.knobs.find((knob) => knob.name === 'decoration')?.initialValue
+    return DECORATIONS.includes(declared as Decoration) ? [[type, declared as Decoration]] : []
+  }),
+)
 
 /**
  * Resolve a band's editor-chosen `decoration` to the three values a renderer
  * draws. `stegaClean` strips the invisible characters draft-mode strings
  * carry; a stega'd `"molecule"` fails a bare `===` and silently draws nothing.
  *
- * **The fallback is one literal, not a per-block lookup** — which is the one way
- * this differs from its sibling `resolveSurface`, which reads each block's own
- * default off `BLOCK_KNOBS`. Every block whose knob offers orbs lists them
- * first, so `orbs` IS the declared `initialValue` wherever the answer can be
- * `orbs` at all; a block whose knob is `['none', 'molecule']` never asks for
- * anything but `molecule`, so what the other two arms resolve to cannot reach
- * it.
+ * **The caller names the BLOCK, not the fallback.** This read a single `orbs`
+ * literal until #163, on the premise that every offering block lists orbs
+ * first — true right up until the CTA band moved to the molecule its canonical
+ * component draws. A literal here is a mirror of the declaration that nothing
+ * checks: flip a knob's option order and new documents repaint while every
+ * existing one stays on the old glyph, which is the drift ADR 0020 retired
+ * `defaultSurface` to stop. Its sibling `resolveSurface` already reads
+ * `BLOCK_KNOBS` for exactly this; the two now differ in nothing.
  */
-export function resolveDecoration(value: string | null | undefined): Decoration {
+export function resolveDecoration(
+  value: string | null | undefined,
+  block: PageSection['_type'],
+): Decoration {
   const chosen = stegaClean(value)
-  return chosen === 'molecule' || chosen === 'none' ? chosen : 'orbs'
+  if (DECORATIONS.includes(chosen as Decoration)) return chosen as Decoration
+  return DECLARED_DECORATION[block] ?? 'orbs'
 }
 
 /**

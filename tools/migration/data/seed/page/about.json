@@ -475,7 +475,7 @@
         "href": "/contact",
         "contrast": "light"
       },
-      "decoration": "orbs"
+      "decoration": "molecule"
     }
   ],
   "migration": {

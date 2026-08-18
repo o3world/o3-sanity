@@ -276,3 +276,29 @@ describe('the homepage at 402 (ADR 0006)', () => {
     expect(numerals.length).toBeGreaterThanOrEqual(2)
   })
 })
+
+/**
+ * THE ONE CLOSER STILL A GENERATION BACK (#163).
+ *
+ * Every other page's frame instances the `CTA` component (`2124:72`), which
+ * hangs the molecule and closes flush. Home's (`1680:2134`) keeps the bespoke
+ * band `1680:2132` — the sphere layer `1799:1470` plus the `1928:6596` ink
+ * fade that dissolves its lower limb into the footer. So Home is the reason
+ * `orbs` is still on the knob, and its seed pins the value rather than reading
+ * the default.
+ *
+ * If the frame is ever redrawn to instance the component, this is the test
+ * that should fail.
+ */
+describe('the homepage closer', () => {
+  it('still draws the sphere band, with the fade into the footer', () => {
+    const sections = (aSeededPage('index').sections ?? []) as {
+      _type: string
+      decoration?: string
+    }[]
+    expect(sections.find((s) => s._type === 'ctaSection')?.decoration).toBe('orbs')
+    expect(html).toContain('--gradient-ink-fade')
+    // CtaSection's molecule, which this band must not also be drawing.
+    expect(html).not.toContain('w-[54%]')
+  })
+})

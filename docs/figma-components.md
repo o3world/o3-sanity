@@ -45,19 +45,22 @@ generations, so **a low node id does not mean archived**: `Button / Ghost` is
 Verified by direct reads of the canonical frames, or recorded in
 `packages/ui/src/foundations/figma-home-spec.ts`.
 
-| Figma set                       | Node        | Variant axes                                   | Code target                                                  | Status                                                                                            |
-| ------------------------------- | ----------- | ---------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
-| `Button` (the 2026-08 rebuild)  | `2134:1785` | Theme = Black \| White \| Red; State ×5        | `Button` (`ui/button.tsx`), `FilterChip` (`filter-chip.tsx`) | ✅ #150 — geometry below                                                                          |
-| `Button / Ghost`                | `264:260`   | Size = Base; State = Default                   | `Button variant="ghost"`                                     | The one fill the 2026-08 set does not draw                                                        |
-| `Button / Solid`                | `136:754`   | Size = Base \| Large; State = Default \| Hover | **Superseded** by `2134:1785`                                | Nothing follows it                                                                                |
-| `Brand / Logo`                  | `264:50`    | Color = Black \| Red \| White                  | `BrandLogo` (`brand-logo.tsx`)                               | ✅ #41 — `White` unbuilt, below                                                                   |
-| `Icon` (the 2026-08 set)        | `2177:1556` | Icon = 29 named glyphs                         | `BUTTON_ICONS` (`button-icons.tsx`)                          | ✅ #151 — three curated for the button's icon knob; the rest route nowhere                        |
-| `Icon / Surface`                | `778:1862`  | Size = Base; State = Hover                     | `CarouselControl` — **to build**                             | The insights prev/next (#42)                                                                      |
-| `Icon / Soft`                   | `1203:1227` | Size = Base; State = Default                   | Inner chip of `Icon / Surface`                               | Not standalone — a part                                                                           |
-| `.building block Icon_text`     | `136:14`    | prop: `Icon name` (Material Symbols)           | **No component** — ADR 0009                                  | `<ArrowIcon />`, `<CloseIcon />`                                                                  |
-| `NavBar` (component, not a set) | `2225:2920` | —                                              | `SiteNav` (`web/src/ui`)                                     | ✅ #41 — rebuilt 2026-08; the old `1710:2271` was emptied to a bare pill. Labels unchanged        |
-| `Utility Nav` (component)       | `2250:1445` | —                                              | `UtilityNav` (`web/src/ui`)                                  | ✅ #88 — new 2026-08: O3 World · 1682 Conference · O3XO, in flow above the pill, desktop only     |
-| `Footer` (component, not a set) | `1280:1885` | —                                              | `SiteFooter` (`web/src/ui`)                                  | ⚠️ **Became canonical 2026-08** — Home's footer is now an override-free instance of it; see below |
+| Figma set                       | Node        | Variant axes                                   | Code target                                                          | Status                                                                                            |
+| ------------------------------- | ----------- | ---------------------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `Button` (the 2026-08 rebuild)  | `2134:1785` | Theme = Black \| White \| Red; State ×5        | `Button` (`ui/button.tsx`), `FilterChip` (`filter-chip.tsx`)         | ✅ #150 — geometry below                                                                          |
+| `Button / Ghost`                | `264:260`   | Size = Base; State = Default                   | `Button variant="ghost"`                                             | The one fill the 2026-08 set does not draw                                                        |
+| `Button / Solid`                | `136:754`   | Size = Base \| Large; State = Default \| Hover | **Superseded** by `2134:1785`                                        | Nothing follows it                                                                                |
+| `Brand / Logo`                  | `264:50`    | Color = Black \| Red \| White                  | `BrandLogo` (`brand-logo.tsx`)                                       | ✅ #41 — `White` unbuilt, below                                                                   |
+| `Icon` (the 2026-08 set)        | `2177:1556` | Icon = 29 named glyphs                         | `BUTTON_ICONS` (`button-icons.tsx`)                                  | ✅ #151 — three curated for the button's icon knob; the rest route nowhere                        |
+| `Icon / Surface`                | `778:1862`  | Size = Base; State = Hover                     | `CarouselControl` — **to build**                                     | The insights prev/next (#42)                                                                      |
+| `Icon / Soft`                   | `1203:1227` | Size = Base; State = Default                   | Inner chip of `Icon / Surface`                                       | Not standalone — a part                                                                           |
+| `.building block Icon_text`     | `136:14`    | prop: `Icon name` (Material Symbols)           | **No component** — ADR 0009                                          | `<ArrowIcon />`, `<CloseIcon />`                                                                  |
+| `NavBar` (component, not a set) | `2225:2920` | —                                              | `SiteNav` (`web/src/ui`)                                             | ✅ #41 — rebuilt 2026-08; the old `1710:2271` was emptied to a bare pill. Labels unchanged        |
+| `Utility Nav` (component)       | `2250:1445` | —                                              | `UtilityNav` (`web/src/ui`)                                          | ✅ #88 — new 2026-08: O3 World · 1682 Conference · O3XO, in flow above the pill, desktop only     |
+| `Footer` (component, not a set) | `1280:1885` | —                                              | `SiteFooter` (`web/src/ui`)                                          | ⚠️ **Became canonical 2026-08** — Home's footer is now an override-free instance of it; see below |
+| `CTA`                           | `2177:1354` | Device = Desktop \| Mobile                     | `CtaSection` (`blocks/section/ctaSection`)                           | ✅ #163 — the band-level sets, below                                                              |
+| `Interior Hero`                 | `2107:1051` | Device = Desktop \| Mobile                     | `CollectionHero variant="interior"` (`ui/collection-hero.tsx`)       | ✅ #163                                                                                           |
+| `Blog`                          | `2205:1146` | Property 1 = Default \| Mobile                 | `InsightsCarouselSection` (`blocks/section/insightsCarouselSection`) | ✅ #163                                                                                           |
 
 `BrandLogo` ships `Color=Black` and `Color=Red` only. No canonical Design
 Concept frame instances `Color=White`, so its knockout colour would be a guess;
@@ -75,6 +78,26 @@ orphaned variant is exactly what the rule above is for. Worth keeping as a
 worked example: a variant needs a frame or an equally explicit direction, and a
 direction that has been _interpreted_ is neither until the interpretation is
 confirmed.
+
+### The three band-level sets were unwatched until #163
+
+`CTA`, `Interior Hero` and `Blog` are not components inside a band — they **are**
+bands, instanced whole by every redesigned page frame. That is exactly why they
+went unlisted: nothing in a page frame's diff points at them, so a set could be
+redrawn and the frames that instance it would report nothing.
+
+It cost a generation. The `CTA` set hangs the molecule; `ctaSection` drew the
+sphere of the pre-redesign band `1680:2132` on every page for as long as the set
+existed, and no run reported it. Adding the three closes the hole for the class,
+not just for the one that was found.
+
+`Blog`'s axis is the unnamed `Property 1` where the other two use `Device`. Its
+values still read Desktop/Mobile, so it is one axis with a sloppy name rather
+than a second vocabulary — one `cva` key under the rule above, not two.
+
+**Home does not instance `CTA`.** Its frame `1680:2134` still holds the bespoke
+closer, which is why `ctaSection`'s `decoration` knob keeps `orbs` alongside the
+molecule it now defaults to.
 
 ### `BrandMark` has no component set
 
