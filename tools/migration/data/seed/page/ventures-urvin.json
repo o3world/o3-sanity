@@ -11,7 +11,6 @@
     {
       "_type": "heroSection",
       "_key": "hero",
-      "surface": "ink",
       "variant": "band",
       "eyebrow": "Ventures",
       "headlineLines": [
@@ -168,7 +167,6 @@
     {
       "_type": "ctaSection",
       "_key": "cta",
-      "surface": "ink",
       "heading": "Investing in exceptional people, products + experiences",
       "button": {
         "_type": "button",

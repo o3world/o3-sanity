@@ -1,4 +1,4 @@
-import { Eyebrow, SURFACE_CLASS, SurfaceProvider } from '@o3/ui'
+import { Eyebrow, SURFACE_CLASS, SurfaceProvider, surfaceAttrs } from '@o3/ui'
 import { cn } from '@o3/ui/lib/utils'
 import { stegaClean } from '@sanity/client/stega'
 
@@ -86,6 +86,7 @@ export function LogoWallSection({
   return (
     <SurfaceProvider surface={resolved}>
       <section
+        {...surfaceAttrs(resolved)}
         className={cn(
           SURFACE_CLASS[resolved],
           'px-gutter bg-(image:--gradient-surface-wash-warm) flex flex-col items-center',

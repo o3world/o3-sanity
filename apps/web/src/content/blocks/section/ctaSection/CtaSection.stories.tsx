@@ -21,7 +21,7 @@ import { CtaSection } from './CtaSection'
  *   component's. `Pages/Home` is where the join is actually visible.
  *
  * The CTA fill is forced to `light` for the same reason the nav forces its
- * own: this band always paints ink, so `surface` never reaches it.
+ * own: this band always paints ink, which is why it offers no `surface`.
  */
 const meta = {
   title: 'Content/Blocks/Section/CtaSection',

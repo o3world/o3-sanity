@@ -69,3 +69,55 @@ describe('every section renderer', () => {
     }
   })
 })
+
+/**
+ * THE OTHER HALF OF DECLARING A SURFACE. `SurfaceProvider` answers the question
+ * for React — which fill a button resolves Auto to — and `data-surface` answers
+ * it for CSS, which is what re-points the text-role tokens on a dark band
+ * (tokens/color.css). Declaring only the first is the failure that shipped
+ * #232323 body copy onto ink: the button was readable and the paragraph above
+ * it was not.
+ *
+ * So the two are checked as one act. Scanned from source rather than rendered,
+ * because the point is that no file declares half of it — which is a fact about
+ * every call site at once, not about any one component's output.
+ */
+const SURFACE_ROOTS = [
+  join(import.meta.dirname, '..', '..'),
+  join(import.meta.dirname, '..', '..', '..', '..', '..', 'packages', 'ui', 'src'),
+]
+
+/**
+ * `SiteNav` is the one surface that changes without React knowing: `NavInk`
+ * toggles `data-ink` on the header and the pill flips to light copy in CSS, so
+ * a static `data-surface` would repaint the flipped pill's `text-fg` white on
+ * white. The file says so where a reader will look for it.
+ */
+const FLIPS_IN_CSS = ['SiteNav.tsx']
+
+function tsxFilesUnder(dir: string): string[] {
+  return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const path = join(dir, entry.name)
+    if (entry.isDirectory()) return entry.name === 'node_modules' ? [] : tsxFilesUnder(path)
+    return entry.isFile() && entry.name.endsWith('.tsx') && !entry.name.includes('.test.')
+      ? [path]
+      : []
+  })
+}
+
+describe('everything that declares a surface', () => {
+  it('declares it to CSS as well as to React', () => {
+    const declaring = SURFACE_ROOTS.flatMap(tsxFilesUnder)
+      .map((path) => ({ path, source: readFileSync(path, 'utf8') }))
+      .filter(({ source }) => source.includes('<SurfaceProvider'))
+      .filter(({ path }) => !FLIPS_IN_CSS.some((name) => path.endsWith(name)))
+
+    expect(declaring.length).toBeGreaterThan(0)
+    for (const { path, source } of declaring) {
+      expect(
+        source.includes('surfaceAttrs(') || source.includes('data-surface'),
+        `${path} renders a SurfaceProvider but no data-surface — its copy will not invert`,
+      ).toBe(true)
+    }
+  })
+})

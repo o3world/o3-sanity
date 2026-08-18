@@ -149,11 +149,14 @@ describe('what the hero offers on the bar', () => {
       nested,
     })
 
-  it('shows Surface and Composition, and leaves Decoration to the menu', () => {
+  it('shows Composition, and leaves Decoration to the menu', () => {
     // Not a table in the app: `bar: true` on the declaration is the whole rule
     // (ADR 0020), and `decoration` does not declare it.
+    //
+    // No Surface either, and that is the second half of the same rule: the
+    // orbital band paints its own ink, so the hero declares
+    // `paintsOwnSurface` and offers no knob for a control to draw.
     expect(heroKnobs({ variant: 'band' }).map((resolved) => resolved.knob.title)).toEqual([
-      'Surface',
       'Composition',
     ])
   })
@@ -172,11 +175,12 @@ describe('what the hero offers on the bar', () => {
     const html = renderToStaticMarkup(
       <CanvasToolbarView componentName="Hero section" knobs={heroKnobs({ variant: 'band' })} />,
     )
-    expect(html.match(/data-testid="canvas-knob"/g)).toHaveLength(2)
+    expect(html.match(/data-testid="canvas-knob"/g)).toHaveLength(1)
     expect(html).toContain('Hero section')
     expect(html).toContain('Composition')
     expect(html).toContain('Band')
     expect(html).not.toContain('Decoration')
+    expect(html).not.toContain('Surface')
   })
 
   it('marks an inherited value on the trigger rather than hiding it', () => {
@@ -337,7 +341,7 @@ describe('what the knob menu carries that the bar does not', () => {
       read: blockKnobReader(snapshot('heroSection', { variant: 'band' }), blockPath),
       nested: false,
     }).map((resolved) => resolved.knob.title)
-    expect(bar).toEqual(['Surface', 'Composition'])
+    expect(bar).toEqual(['Composition'])
 
     const html = render(
       menuFor(
@@ -349,7 +353,8 @@ describe('what the knob menu carries that the bar does not', () => {
     )
     expect(html).toContain('Decoration')
     expect(html).toContain('Composition')
-    expect(html).toContain('Surface')
+    // And nothing for a surface the block does not offer.
+    expect(html).not.toContain('Surface')
   })
 
   it('offers every option of every knob the hero declares, and nothing else', () => {

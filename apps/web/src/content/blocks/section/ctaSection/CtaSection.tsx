@@ -1,4 +1,4 @@
-import { OrbitalSphere, SurfaceProvider } from '@o3/ui'
+import { OrbitalSphere, SurfaceProvider, surfaceAttrs } from '@o3/ui'
 
 import { DECORATED_BAND_CLASS, resolveDecoration } from '@/content/blocks/decoration'
 import { MoleculeDecoration } from '@/content/blocks/MoleculeDecoration'
@@ -49,7 +49,10 @@ export function CtaSection({ heading, body, button, decoration }: CtaSectionProp
     // is the darker end of the same surface, and the button on it resolves the
     // way it would on any ink band.
     <SurfaceProvider surface="ink">
-      <section className={`bg-ink-deep px-gutter text-white ${DECORATED_BAND_CLASS}`}>
+      <section
+        {...surfaceAttrs('ink')}
+        className={`bg-ink-deep px-gutter text-white ${DECORATED_BAND_CLASS}`}
+      >
         {/*
          * **The globe's bottom, at the hero's scale.** `95.5vw` is the hero's
          * own width, so the two spheres read as the same object seen twice; the

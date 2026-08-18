@@ -11,7 +11,6 @@
     {
       "_type": "heroSection",
       "_key": "hero",
-      "surface": "ink",
       "variant": "band",
       "eyebrow": "Solutions",
       "headlineLines": [
@@ -112,7 +111,6 @@
     {
       "_type": "ctaSection",
       "_key": "cta",
-      "surface": "ink",
       "heading": "Let’s get started on your next big thing.",
       "body": "We partner with businesses like yours to build experiences that matter. If you’re ready, we’re ready.",
       "button": {

@@ -27,11 +27,11 @@ import { HeroSection } from './HeroSection'
  * through `defineKnobStories`, so a schema change that alters the block's shape
  * still breaks this file at compile time.
  *
- * There is **no bone-surface story**. Since #42 the hero always paints its own
- * ink band under the orbital field (`1810:1616`), so `surface` never reaches
- * it — a light hero would be a different block, not this one on a light
- * surface. The `surface` knob is still offered in the Playground, because the
- * block declares it and this file does not get to disagree.
+ * There is **no bone-surface story**, and no `surface` control to draw one
+ * with. Since #42 the hero always paints its own ink band under the orbital
+ * field (`1810:1616`) — a light hero would be a different block, not this one
+ * on a light surface — so the block declares `paintsOwnSurface: 'ink'` and
+ * offers no knob at all.
  */
 const fixture: SectionProps<'heroSection'> = {
   variant: 'orbital',
@@ -48,7 +48,6 @@ const fixture: SectionProps<'heroSection'> = {
     target: null,
   },
   decoration: 'orbs',
-  surface: 'ink',
 }
 
 const kit = defineKnobStories({

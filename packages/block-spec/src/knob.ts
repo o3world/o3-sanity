@@ -124,6 +124,7 @@ export function defineBlockKnobs({
   knobs,
   items,
   placeholder,
+  paintsOwnSurface,
 }: {
   type: string
   title: string
@@ -132,7 +133,16 @@ export function defineBlockKnobs({
   items?: Readonly<Record<string, ItemKnobs>>
   /** What one insert of this block writes (#112). See `placeholder.ts`. */
   placeholder?: BlockPlaceholder
+  /** The colour a band with no `surface` knob paints. See `BlockKnobs`. */
+  paintsOwnSurface?: string
 }): BlockKnobs {
+  if (paintsOwnSurface !== undefined && knobs.some((knob) => knob.name === 'surface')) {
+    throw new Error(
+      `defineBlockKnobs("${type}"): declares paintsOwnSurface "${paintsOwnSurface}" AND a surface ` +
+        `knob. A band either offers the choice or makes it — declaring both leaves an editor a ` +
+        `control that cannot win.`,
+    )
+  }
   refuseDuplicatePaths(`defineBlockKnobs("${type}")`, knobs)
   if (placeholder) {
     // A placeholder is written `satisfies HeroSection`, and the generated type
@@ -207,6 +217,7 @@ export function defineBlockKnobs({
     knobs,
     ...(items ? { items } : {}),
     ...(placeholder ? { placeholder } : {}),
+    ...(paintsOwnSurface !== undefined ? { paintsOwnSurface } : {}),
   }
 }
 

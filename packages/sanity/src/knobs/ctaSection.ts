@@ -1,6 +1,5 @@
 import { defineBlockKnobs } from '@o3/block-spec'
 import { decorationKnob } from './decoration'
-import { surfaceKnob } from './surface'
 import type { CtaSection } from '../types/generated'
 
 /**
@@ -25,7 +24,12 @@ export const ctaSectionKnobs = defineBlockKnobs({
   type: 'ctaSection',
   title: 'CTA',
   tier: 'section',
-  knobs: [decorationKnob(['molecule', 'orbs', 'none']), surfaceKnob({ initialValue: 'ink' })],
+  // Decoration and nothing else. The band's fill is `--color-ink-deep` and
+  // structural — the closer is the page's darkest step by design — so there is
+  // no `surface` knob to offer. See heroSection for the same reasoning.
+  knobs: [decorationKnob(['molecule', 'orbs', 'none'])],
+  // `--color-ink-deep`, the page's darkest step, is what the closer IS.
+  paintsOwnSurface: 'ink',
   /**
    * The `button` carries a label and no destination, so it draws as a control
    * until an editor points it somewhere — an inserted band links nowhere by

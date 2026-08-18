@@ -131,6 +131,7 @@ export {
   SECTION_WIDTH_CLASS,
   SURFACE_CLASS,
   SURFACES,
+  surfaceAttrs,
 } from './components/section-shell'
 export type { BandStep, SectionShellProps, SectionWidth, Surface } from './components/section-shell'
 // The band's surface, readable from inside it. `SectionShell` and

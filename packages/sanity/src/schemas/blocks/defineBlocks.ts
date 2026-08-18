@@ -1,6 +1,7 @@
 import { defineType } from 'sanity'
 import type { FieldDefinition, ObjectDefinition } from 'sanity'
 import type { BlockKnobs } from '@o3/block-spec'
+import { SURFACES, type Surface } from '../../constants'
 import { anchorField } from './fields'
 import { withKnobFields, type KnobbedField } from './knobFields'
 import { BASE_BLOCKS, SECTION_BLOCKS } from './registry'
@@ -64,10 +65,26 @@ export function defineSectionBlock({
       `defineSectionBlock: "${name}" is not in SECTION_BLOCKS — register it in registry.ts first.`,
     )
   }
+  // EVERY SECTION BLOCK PAINTS A BAND, so every one has to say what colour it
+  // is. Two ways to answer, and exactly one of them per block: offer the
+  // choice with `surfaceKnob()`, or make it with `paintsOwnSurface` — the
+  // three bands whose composition is drawn ON a colour (hero, CTA, case
+  // showcase) take the second, because a picker over them turned and repainted
+  // nothing. `defineBlockKnobs` refuses both at once.
   if (!knobs.knobs.some((knob) => knob.name === 'surface')) {
-    throw new Error(
-      `defineSectionBlock: "${name}" declares knobs but no surface knob — every section block paints a band. Add surfaceKnob().`,
-    )
+    if (knobs.paintsOwnSurface === undefined) {
+      throw new Error(
+        `defineSectionBlock: "${name}" declares knobs but no surface knob — every section block ` +
+          `paints a band. Add surfaceKnob(), or declare paintsOwnSurface if the band's ` +
+          `composition fixes its colour.`,
+      )
+    }
+    if (!SURFACES.includes(knobs.paintsOwnSurface as Surface)) {
+      throw new Error(
+        `defineSectionBlock: "${name}" declares paintsOwnSurface "${knobs.paintsOwnSurface}", ` +
+          `which is not one of ${SURFACES.join(' | ')}.`,
+      )
+    }
   }
   requireDescription('defineSectionBlock', name, description)
   return defineType({

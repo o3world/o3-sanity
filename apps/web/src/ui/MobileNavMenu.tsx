@@ -11,6 +11,7 @@ import {
   SheetTitle,
   SheetTrigger,
   SurfaceProvider,
+  surfaceAttrs,
 } from '@o3/ui'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
@@ -55,7 +56,11 @@ export function MobileNavMenu({ items, button }: MobileNavMenuProps) {
       {/* The panel is its own dark field, portalled out of the bar — so it
           declares the surface rather than inheriting the bar's. */}
       <SurfaceProvider surface="ink">
-        <SheetContent side="right" className="bg-ink-deep w-full text-white sm:max-w-sm">
+        <SheetContent
+          side="right"
+          {...surfaceAttrs('ink')}
+          className="bg-ink-deep w-full text-white sm:max-w-sm"
+        >
           <SheetTitle className="sr-only">Menu</SheetTitle>
           <nav aria-label="Menu" className="flex flex-col gap-8 px-5 pt-24">
             {items.map((item, i) => (

@@ -11,7 +11,6 @@
     {
       "_type": "heroSection",
       "_key": "hero",
-      "surface": "ink",
       "headlineLines": [
         "You see the problem in front of you.",
         "We’re working on the one behind it."
@@ -74,7 +73,6 @@
     {
       "_type": "caseShowcaseSection",
       "_key": "work",
-      "surface": "ink",
       "heading": "Most firms can ship what you ask for. We solve what was actually in the way.",
       "button": {
         "_type": "button",
@@ -276,7 +274,6 @@
     {
       "_type": "ctaSection",
       "_key": "cta",
-      "surface": "ink",
       "heading": "The best partnerships don’t have an end date.",
       "body": "Most firms hand you the strategy and leave. We stay and build it. That's the whole offer.",
       "button": {
