@@ -104,7 +104,7 @@ const SECTION_FIELDS = /* groq */ `
         thing an editor reorders or removes here is the slot, not the
         `person` document behind it. */ ''
     }
-    "people": people[]{_key, ...@->{_id, name, title, headshot}}
+    "people": people[]{_key, ...@->{_id, name, title, bio, headshot}}
   },
   _type == "roleListSection" => {
     roles[]{..., button{..., ${BUTTON_TARGET}}}

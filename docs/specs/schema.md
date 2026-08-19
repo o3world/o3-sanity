@@ -19,7 +19,7 @@ Resolves wayfinder ticket #6. Inputs: the content model (ticket #5, `CONTEXT.md`
 
 ### Supporting
 
-- **`person`** — name, title, headshot.
+- **`person`** — name, title, headshot, bio (the few lines a card says about them; the O3XO kit's People card draws one, O3's frame does not).
 - **`client`** — name, logo.
 - **`category`** — title, slug.
 - **`industry`** — title, slug. (Deliberately minimal.)
@@ -43,7 +43,7 @@ Standard marks + closed inline-object set: **`figure`, `embed`, `pullQuote`**. A
 
 ### Section tier — bespoke (from the `prototype/` design)
 
-`heroSection`, `logoWallSection` (eyebrow, heading, body, `layout` (`plates | bar`), client refs, button — `plates` is Home's hairlined 280px squares (`1864:2390`), `bar` the partner page's short unplated strip (`2332:1708`)), `caseShowcaseSection` (caseStudy refs; projects narrativeHeadline + first stat), `railPanelsSection` (heading, intro, `layout` (`rail | cards | rows | grid`), `rail` (`label | number`), panels {railLabel, heading, logo, body, note, button, media, mark, details} — serves Home's "platforms" and "how we work" bands as `rail`, a row of ink engagement cards (`1925:6108`) as `cards`, the partner page's numbered services (`2334:2170`) as `rows`, where a panel's `details` draw the labelled breakdowns under its prose, and the software-engineering service page's grid (`2358:2788`) as `grid` — up to three panels as columns, details stacked under each heading), `quoteSection` (inline quote + attribution — no testimonial type; `decoration` is `orbs | molecule | none`, where `molecule` is the 2026-08 case-study band `2250:1525`), `insightsCarouselSection` (curated refs or latest-N by category), `ctaSection`.
+`heroSection`, `logoWallSection` (eyebrow, heading, body, `layout` (`plates | bar`), client refs, button — `plates` is Home's hairlined 280px squares (`1864:2390`), `bar` the partner page's short unplated strip (`2332:1708`)), `caseShowcaseSection` (caseStudy refs; projects narrativeHeadline + first stat), `railPanelsSection` (heading, intro, `layout` (`rail | cards | rows | grid`), `rail` (`label | number`), panels {railLabel, heading, logo, body, note, button, media, mark, details} — serves Home's "platforms" and "how we work" bands as `rail`, a row of ink engagement cards (`1925:6108`) as `cards`, the partner page's numbered services (`2334:2170`) as `rows`, where a panel's `details` draw the labelled breakdowns under its prose, and the software-engineering service page's grid (`2358:2788`) as `grid` — up to three panels as columns, details stacked under each heading), `quoteSection` (eyebrow, inline quote + attribution — no testimonial type; the eyebrow is a slot the app draws, and only O3XO fills it, with the kit's header pill (`4414:8100`); `decoration` is `orbs | molecule | none`, where `molecule` is the 2026-08 case-study band `2250:1525`), `insightsCarouselSection` (curated refs or latest-N by category), `ctaSection`.
 
 ### Section tier — from the canonical Figma frames (#56)
 

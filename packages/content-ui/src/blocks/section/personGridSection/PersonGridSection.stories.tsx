@@ -63,6 +63,21 @@ export const OnePerson: Story = {
 }
 
 /**
+ * Everyone with a bio — the shape O3XO's About band is in, where the kit draws
+ * a paragraph under every name (`4404:5726`). O3's own frame draws none, so on
+ * o3world.com this is the state a band reaches one editor at a time.
+ */
+export const WithBios: Story = {
+  args: {
+    ...seededSectionArgs('about', 'personGridSection'),
+    people: (seededSectionArgs('about', 'personGridSection').people ?? []).map((person) => ({
+      ...person,
+      bio: 'Strategic leader with 25+ years driving digital transformation across industries, specializing in turning complex business challenges into actionable AI strategies.',
+    })),
+  },
+}
+
+/**
  * A person with no headshot. The tile's black-and-red-arc plate is drawn by
  * `PortraitTile`, so the composition survives a missing portrait — the state
  * a newly-added person is in before their photo lands.

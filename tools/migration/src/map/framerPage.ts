@@ -31,7 +31,10 @@ import type { PersonDoc } from './person'
  * ## What does not migrate, and why
  *
  * Four things, each reported as a note on every run rather than dropped
- * silently, and each recorded on the document's provisional note:
+ * silently, and each recorded on the document's provisional note. The team
+ * bios were a fifth until `person.bio` landed (#247); they migrate now, as
+ * does the label over the homepage's testimonial, which is the quote band's
+ * `eyebrow`.
  *
  * - **The related-content band** on five industry pages. It curates one case
  *   study and one insight; the case studies are #219's documents, so a
@@ -50,10 +53,6 @@ import type { PersonDoc } from './person'
  *   source is. Framer serves the hero's backdrop as a video layer — the kit
  *   draws it as one (`4406:6597`) — and `lib/framerPage.ts` records `<img>`
  *   elements only, so the opener's backdrop is not in the extract to migrate.
- * - **The four team bios.** `person` carries name, role and headshot and
- *   nothing longer. Giving it a field is a schema conversation, not something a
- *   content pass decides on the way past — the same call the case-study
- *   `headline` got.
  */
 
 /** An extract record as committed under the O3XO extract tree. */
@@ -435,7 +434,12 @@ function industryCards(
   }
 }
 
-/** The four people the About page prints, in the order it prints them. */
+/**
+ * The four people the About page prints, in the order it prints them.
+ *
+ * The band runs heading, then one (name, role, biography) triple per person —
+ * the same three lines the kit's People Cards draw (`4404:5726`).
+ */
 export function mapFramerPeople(src: FramerPageRecord): PersonDoc[] {
   const band = src.slug === 'about' ? src.bands[4] : undefined
   if (!band) return []
@@ -444,12 +448,14 @@ export function mapFramerPeople(src: FramerPageRecord): PersonDoc[] {
     const name = band.lines[i]?.text
     const role = band.lines[i + 1]?.text
     if (!name || !role) break
+    const bio = band.lines[i + 2]?.text
     const headshot = band.images.find((image) => image.alt.startsWith(name))
     out.push({
       _id: `person-framer-${idKey(name)}`,
       _type: 'person' as const,
       name,
       title: role,
+      ...(bio ? { bio } : {}),
       ...(headshot ? { headshot: { _type: 'image' as const, _srcUrl: headshot.url } } : {}),
       migration: { locked: false, sourceId: `framer:person:${idKey(name)}` },
     })
@@ -632,16 +638,13 @@ function composeHome(
     })
   }
 
-  // The eyebrow over the quote has nowhere to go: a quote band is one borrowed
-  // voice and carries no label above it.
-  notes.push({
-    element: 'quote eyebrow',
-    detail: `dropped the label over the testimonial: "${testimonial.lines[0]!.text}"`,
-  })
   sections.push({
     _type: 'quoteSection',
     _key: key('testimonial'),
     surface: 'bone',
+    // The band's own label, which the kit draws as a pill above the quote
+    // (`4414:8100`).
+    eyebrow: testimonial.lines[0]!.text,
     quote: testimonial.lines[1]!.text,
     attribution: testimonial.lines[2]!.text,
     decoration: 'none',
@@ -698,13 +701,6 @@ function composeAbout(
     FramerBand,
   ]
   const people = mapFramerPeople(src)
-
-  notes.push({
-    element: 'team bios',
-    detail:
-      `dropped ${people.length} biography paragraphs: a person carries a name, a role and a ` +
-      'headshot, and giving it a bio is a schema conversation',
-  })
 
   return [
     hero(heroBand, key),
@@ -930,7 +926,7 @@ export function mapFramerPage(
         'Migrated from o3xo.ai band by band into O3’s block roster (#220). Provisional because ' +
         'the composition is a translation rather than a design: the hero carries no background ' +
         'photograph, curated case-study and insight cards are left to be derived, and anything ' +
-        'the source does not serve — the FAQ answers, the team bios — is absent rather than ' +
+        'the source does not serve — the FAQ answers — is absent rather than ' +
         'invented. Cleared when the adaptation delta is reviewed and the page is composed ' +
         'against O3XO’s own design.',
     },

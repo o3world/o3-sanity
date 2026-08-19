@@ -198,6 +198,14 @@ describe('mapFramerPage', () => {
     expect(quote.attribution).toBe('Brett Norton, President, Buffalo Construction, Inc')
   })
 
+  /** The label the kit draws as the band's pill (`4414:8100`). */
+  it('keeps the label over the testimonial as the band’s eyebrow', () => {
+    const quote = mapped('index').doc.sections.find((s) => s._type === 'quoteSection') as {
+      eyebrow: string
+    }
+    expect(quote.eyebrow).toBe('Trusted by leading organizations')
+  })
+
   /**
    * Eight questions, one answer. Framer's accordion serves the first item's
    * body under every question in the HTML, so seven of the eight answers are
@@ -247,6 +255,15 @@ describe('mapFramerPeople', () => {
     expect(people[0]!._id).toBe('person-framer-mike-gadsby')
     expect(people[0]!.title).toBe('Co-Founder / Chief Innovation Officer')
     expect(people[0]!.headshot).toMatchObject({ _type: 'image' })
+  })
+
+  /** The third line of each triple — the paragraph the card draws under the role. */
+  it('carries the biography printed under each name', () => {
+    expect(people[0]!.bio).toBe(
+      'Strategic leader with 25+ years driving digital transformation across industries, ' +
+        'specializing in turning complex business challenges into actionable AI strategies.',
+    )
+    expect(people.every((person) => person.bio)).toBe(true)
   })
 
   it('is what the About page’s person grid references', () => {

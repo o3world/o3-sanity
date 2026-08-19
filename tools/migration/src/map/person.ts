@@ -33,6 +33,9 @@ export const personDoc = z.object({
   _type: z.literal('person'),
   name: z.string().min(1),
   title: z.string().min(1).optional(),
+  /* o3xo.ai prints one under every name; WordPress's team posts carry one too
+   * and o3 draws none, so the WordPress side leaves it unmapped. */
+  bio: z.string().min(1).optional(),
   headshot: migratableImage.optional(),
   migration: z.object({ locked: z.boolean(), sourceId: z.string() }),
 })

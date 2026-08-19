@@ -101,6 +101,12 @@ export function PersonGridSection({
                 {/* 25.9px — between display-lg and display-md, and read once.
                     A call-site literal rather than a token nothing shares. */}
                 <p className="font-display text-balance text-[26px] leading-[1.2]">{person.name}</p>
+                {/* The few lines a card says about a person, at the `body`
+                    step and 12px clear of the name — the kit's People card
+                    (`4404:5726`), whose own gap the 6px above adds up to. O3's
+                    frame draws no bio, so on o3world.com this prints only for
+                    a person an editor has written one for. */}
+                {person.bio ? <p className="text-body text-fg-body mt-1.5">{person.bio}</p> : null}
               </div>
             </li>
           ))}

@@ -65,6 +65,44 @@ describe('the quote band’s molecule decoration', () => {
   })
 })
 
+/**
+ * The eyebrow is a slot, not a string this band prints. O3 binds the renderer
+ * with the slot empty — no O3 frame labels a quote — so a band that has stored
+ * an eyebrow still draws nothing here.
+ */
+describe('the quote band’s eyebrow', () => {
+  it('prints nothing of the stored label when no app fills the slot', () => {
+    const html = renderToStaticMarkup(
+      <QuoteSection
+        {...({
+          eyebrow: 'Trusted by leading organizations',
+          quote: 'Simply the best. Better than all the rest.',
+          decoration: 'none',
+          surface: 'bone',
+        } as unknown as SectionProps<'quoteSection'>)}
+      />,
+    )
+    expect(html).not.toContain('Trusted by leading organizations')
+  })
+
+  it('draws what the app puts there, above the quote and on its column', () => {
+    const html = renderToStaticMarkup(
+      <QuoteSection
+        {...({
+          quote: 'Simply the best. Better than all the rest.',
+          decoration: 'none',
+          surface: 'bone',
+        } as unknown as SectionProps<'quoteSection'>)}
+        eyebrowSlot={<p>Trusted by leading organizations</p>}
+      />,
+    )
+    expect(html.indexOf('Trusted by leading organizations')).toBeLessThan(
+      html.indexOf('Simply the best.'),
+    )
+    expect(html).toMatch(/max-w-content[^"]*mb-8/)
+  })
+})
+
 describe('the quote band’s other decorations', () => {
   it('still draws the two spheres on `orbs`', () => {
     const html = render('orbs')

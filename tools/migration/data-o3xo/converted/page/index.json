@@ -184,6 +184,7 @@
       "_type": "quoteSection",
       "_key": "testimonial",
       "surface": "bone",
+      "eyebrow": "Trusted by leading organizations",
       "quote": "\"I was expecting the ROI for our project next year, but we are going to immediately see that value now.\"",
       "attribution": "Brett Norton, President, Buffalo Construction, Inc",
       "decoration": "none"
@@ -226,6 +227,6 @@
     "locked": false,
     "sourceId": "framer:page:index",
     "provisional": true,
-    "provisionalNote": "Migrated from o3xo.ai band by band into O3’s block roster (#220). Provisional because the composition is a translation rather than a design: the hero carries no background photograph, curated case-study and insight cards are left to be derived, and anything the source does not serve — the FAQ answers, the team bios — is absent rather than invented. Cleared when the adaptation delta is reviewed and the page is composed against O3XO’s own design."
+    "provisionalNote": "Migrated from o3xo.ai band by band into O3’s block roster (#220). Provisional because the composition is a translation rather than a design: the hero carries no background photograph, curated case-study and insight cards are left to be derived, and anything the source does not serve — the FAQ answers — is absent rather than invented. Cleared when the adaptation delta is reviewed and the page is composed against O3XO’s own design."
   }
 }

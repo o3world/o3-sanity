@@ -8,6 +8,13 @@ export const person = defineType({
     defineField({ name: 'name', type: 'string', validation: (rule) => rule.required() }),
     defineField({ name: 'title', title: 'Role', type: 'string' }),
     defineField({ name: 'headshot', type: 'image', options: { hotspot: true } }),
+    defineField({
+      name: 'bio',
+      type: 'text',
+      rows: 3,
+      description:
+        'Two or three lines on what this person does — written for a card, not a profile page. A grid that draws bios draws them all at one height, so keep them the same length.',
+    }),
     defineField({ name: 'migration', type: 'migration' }),
   ],
   preview: { select: { title: 'name', subtitle: 'title', media: 'headshot' } },

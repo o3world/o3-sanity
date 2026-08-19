@@ -259,6 +259,12 @@ export const quoteSection = defineSectionBlock({
   title: 'Quote',
   knobs: quoteSectionKnobs,
   fields: [
+    defineField({
+      name: 'eyebrow',
+      type: 'string',
+      description:
+        'The label over the quote — "Trusted by leading organizations". O3XO draws it as the kit’s pill (`4414:8100`); O3’s band draws no label above a quote and leaves this empty.',
+    }),
     defineField({ name: 'quote', type: 'text', rows: 4, validation: (rule) => rule.required() }),
     defineField({
       name: 'attribution',

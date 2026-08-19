@@ -15,10 +15,12 @@ import {
   type ClientBlockRenderBinding,
   type SectionProps,
 } from '@o3/content-runtime/blocks'
+import { fieldAttr } from '@o3/content-runtime/data-attribute'
 
 import { O3xoMark } from '@/brand/O3xoMark'
 import { KeyMetricCards } from '@/cards/KeyMetricCard'
 import { YellowTextCards } from '@/cards/YellowTextCard'
+import { HeaderPill } from '@/components/HeaderPill'
 import { ICONS } from '@/icons/Icon'
 
 // The renderers themselves are shared (@o3/content-ui); the binding below is
@@ -128,6 +130,25 @@ function FeatureGridSectionWithIcons(props: SectionProps<'featureGridSection'>) 
 }
 
 /**
+ * The quote band, with its eyebrow drawn as the kit's pill (`4404:5107`).
+ *
+ * The band's own slot is empty in O3's binding — no O3 frame labels a quote —
+ * so the two brands share the composition and diverge only in the chrome
+ * around those words, which is what a slot is for.
+ */
+function QuoteSectionWithPill({ eyebrow, loc, ...props }: SectionProps<'quoteSection'>) {
+  return (
+    <QuoteSection
+      {...props}
+      loc={loc}
+      eyebrowSlot={
+        eyebrow ? <HeaderPill data-sanity={fieldAttr(loc, 'eyebrow')}>{eyebrow}</HeaderPill> : null
+      }
+    />
+  )
+}
+
+/**
  * Render bindings for every client-safe SECTION block — the single authoring
  * point `SECTION_CLIENT_COMPONENTS` derives from.
  *
@@ -143,7 +164,7 @@ export const CLIENT_SECTION_BINDINGS = [
   defineBlockRender('logoWallSection', { component: LogoWallSection }),
   defineBlockRender('caseShowcaseSection', { component: CaseShowcaseSection }),
   defineBlockRender('railPanelsSection', { component: RailPanelsSectionWithYellowCards }),
-  defineBlockRender('quoteSection', { component: QuoteSection }),
+  defineBlockRender('quoteSection', { component: QuoteSectionWithPill }),
   defineBlockRender('insightsCarouselSection', { component: InsightsCarouselSection }),
   defineBlockRender('ctaSection', { component: CtaSection }),
   defineBlockRender('featureGridSection', { component: FeatureGridSectionWithIcons }),

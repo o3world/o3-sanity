@@ -162,6 +162,7 @@ Closed vocabulary. If the field you want isn't here and isn't obviously domain-s
 | `icon`            | A glyph from a curated set — trailing a button, or beside a feature (`button`, `feature`)           | `glyph`, `symbol`, `arrow`                           |
 | `date`            | When a leaf object's thing happens (the Live MON / DD marker)                                       | `publishedAt` — that's a document's publication time |
 | `name`            | A person's or organization's real-world name                                                        | Anything that isn't a proper noun                    |
+| `bio`             | The few lines a person's card says about them (`person`)                                            | `body`, `excerpt`, `about`, `description`            |
 | `surface`         | Band surface **role** (`white \| bone \| ink`), painted per brand; injected by `defineSectionBlock` | Never hand-author it                                 |
 | `reasons`         | The form's "Reason" options, in shown order (`formSection`)                                         | `options`, `choices`                                 |
 | `consentLabel`    | The opt-in checkbox's words; empty = no checkbox (`formSection`)                                    | `consent`, `optIn`                                   |

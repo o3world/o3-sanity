@@ -67,6 +67,18 @@ describe('the migrated homepage', () => {
     expect(rendered.html).toMatch(/<img[^>]*alt=""/)
   })
 
+  /**
+   * The testimonial's label, drawn as the kit's Header Pill (`4414:8100`).
+   * This app binds the quote band with the pill in its eyebrow slot, so the
+   * words arriving is only half of it — what o3xo.ai draws is the outline
+   * around them.
+   */
+  it('draws the label over the testimonial as the kit’s pill', () => {
+    expect(rendered.html).toMatch(
+      /class="[^"]*rounded-full[^"]*"[^>]*>Trusted by leading organizations/,
+    )
+  })
+
   it('canonicalises the homepage at the root', () => {
     expect(rendered.metadata.title).toContain('Activate AI advantage')
     expect(rendered.metadata.alternates?.canonical).toBe('http://localhost:3000/')
