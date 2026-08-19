@@ -10,7 +10,7 @@ import { buildDocumentMetadata, type DocumentSeo, type SeoOverrides } from '../s
 import { hrefForDoc } from '../urls'
 
 import { docTag, typeTag } from './cacheTags'
-import { encodePathParam } from './encodePathParam'
+import { decodePathParam } from './decodePathParam'
 
 import type {
   DetailEntry,
@@ -150,7 +150,7 @@ export function buildDetailRoute<Q extends string>(entry: DetailEntry<Q>): Detai
 
   const generateMetadata: DetailRouteShim['generateMetadata'] = async ({ params }) => {
     const { slug: rawSlug } = await params
-    const slug = encodePathParam(rawSlug)
+    const slug = decodePathParam(rawSlug)
     // stega: false on metadata — stega characters must never leak into
     // <title> / OG / description.
     const doc = await fetchDoc(slug, /* stega */ false)
@@ -160,7 +160,7 @@ export function buildDetailRoute<Q extends string>(entry: DetailEntry<Q>): Detai
 
   const Page: DetailRouteShim['Page'] = async ({ params }) => {
     const { slug: rawSlug } = await params
-    const slug = encodePathParam(rawSlug)
+    const slug = decodePathParam(rawSlug)
     const doc = await fetchDoc(slug)
     if (!doc) notFound()
     return renderEntry(entry, doc, { slug })
@@ -204,13 +204,13 @@ export function buildCatchAllRoute(
 
   /**
    * Multi-segment slugs join with `/` and carry no leading slash — the same
-   * shape `page.slug.current` stores (`services/ux-audit`). `encodePathParam`
+   * shape `page.slug.current` stores (`services/ux-audit`). `decodePathParam`
    * reconciles Next's raw-vs-decoded param asymmetry between Page and
    * generateMetadata.
    */
   function resolveSlug(segments: string[] | undefined): string {
     if (!segments || segments.length === 0) return ''
-    return segments.map(encodePathParam).join('/')
+    return segments.map(decodePathParam).join('/')
   }
 
   const generateMetadata: CatchAllRouteShim['generateMetadata'] = async ({ params }) => {

@@ -1,0 +1,329 @@
+{
+  "_id": "insight-framer-ai-of-things-on-device-intelligence",
+  "_type": "insight",
+  "title": "The AI of things: intelligence is moving to the edge",
+  "slug": {
+    "_type": "slug",
+    "current": "ai-of-things-on-device-intelligence"
+  },
+  "excerpt": "What on-device AI means for the tools you buy, the systems you build on, and the architecture decisions you should be making right now.",
+  "publishedAt": "2026-06-17T12:00:00Z",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-framer-technology",
+      "_key": "cat-technology"
+    }
+  ],
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_srcUrl": "https://framerusercontent.com/images/GRiIyoEBIOxqwqtpfYHALy1gQI.png"
+    },
+    "alt": "Close-up of a microchip on a circuit board."
+  },
+  "body": [
+    {
+      "_key": "k0001",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A few years ago, running a multi-billion-parameter AI model required a data center with a large GPU cluster. Today, models with 7-billion-parameters run on a mobile phone.",
+          "_key": "k0002"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "One of the shifts that has made this possible is quantization. Compress a large model, trade a little accuracy for dramatically less compute, and you get intelligence that runs locally on the device without a cloud round-trip. This is the foundation of what is being called the AI of Things, or AIoT. And while it sounds like a hardware story, it has immediate implications for the tools your organization buys, the systems you depend on, and the AI architecture decisions you are making right now.",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Why regulated industries should pay close attention",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Cloud-first AI has always carried a tension for industries that operate in the field or under regulatory constraints.",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A construction site with intermittent connectivity cannot depend on a cloud round-trip for real-time monitoring. A field agent taking measurements and running an AI-assisted scope estimate on-device, syncing back to the office once connectivity returns then completes a full productive workflow without the internet ever being load-bearing. We are seeing this pattern emerge in real engagements, and it changes what a field visit actually produces. An industrial technician in a restricted facility cannot route operational data through a third-party inference endpoint. A life sciences organization handling clinical data has regulatory requirements, including HIPAA and 21 CFR Part 11, that make cloud-hosted AI legally complicated and operationally heavy with BAA and audit requirements.",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Local inference collapses the chain. When the model runs on the device, the data does not leave. There is no third-party cloud provider in the mix. For organizations navigating these constraints, AIoT is not a future consideration. It is a present one.",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What to ask your vendors right now",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Most enterprise buyers are not yet thinking about on-device inference as an evaluation criterion. They should be. A few questions worth bringing into your next procurement conversation:",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Where does inference happen: on the device, on-premise, or in a third-party cloud?",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What functionality degrades when network connectivity is unavailable?",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Who has access to the data generated during inference, and where is it stored?",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Is the AI component modular, or tightly coupled to a proprietary cloud platform?",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Vendors with clear answers are thinking about this. Vendors who cannot answer clearly are not.",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "There is also a cost argument worth making explicitly. A large construction or industrial operation with dozens of field workers running AI queries throughout the day is looking at cloud inference costs that are hard to predict and easy to exceed. On-device inference has no per-query charge once the model is deployed. For ops leaders thinking about scaling AI access to frontline workers, that math gets compelling fast.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The architecture decisions that matter now",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "You do not need to be deploying on-device models today to position yourself well for when they arrive. Avoid over-centralizing data in platforms with limited portability. Know where inference is happening across your stack. Build for modularity so your AI components can be swapped as better options emerge. And start paying attention to the AI architecture baked into the equipment and systems you procure, because those procurement cycles are long and those decisions are hard to reverse.",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Thinking things",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "IoT gave us connected things. AIoT gives us thinking things.",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The organizations that will be well-positioned are the ones asking better questions of their vendors and making deliberate architecture decisions now, not after the transition is obvious. If that work is in front of you, we would be glad ",
+          "_key": "k0038"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "to help you think it through",
+          "_key": "k0039"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0040"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "../contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "On-device AI is arriving faster than most enterprises expect. Here's what it means for your vendor decisions, your regulated data, and your AI roadmap."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:insight:VE2RpI7NA"
+  }
+}

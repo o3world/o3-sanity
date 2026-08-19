@@ -38,14 +38,17 @@ export const insightIndex = defineIndexType({
   renderer: InsightIndexRenderer,
   seo: {
     title: brandConfig().collections.insight.title,
+    // o3xo.ai's own meta description for this URL, migrated with the collection.
+    description:
+      'Explore practical perspectives on AI strategy, industry-specific use cases, adoption challenges, and achieving measurable ROI from AI investments.',
     // Paginated and filtered pages canonicalize to the unpaginated index:
     // `?page=2` and `?category=design` are the same collection, not further
     // documents.
     path: COLLECTION_PREFIXES.insight,
   },
-  migration: {
-    provisional: true,
-    provisionalNote:
-      'Composition is O3’s canonical Insights frame (2336:4310), borrowed deliberately (ADR 0028 addendum); the hero copy in the view is a placeholder. Cleared when O3XO’s 41 insights land (#218) and the delta evaluation settles this index’s copy.',
-  },
+  // O3's canonical Insights frame, borrowed deliberately (ADR 0028 addendum) —
+  // this brand has no frame of its own and the adaptation experiment is the
+  // point. No longer provisional (#218): the collection it was waiting for is
+  // migrated, and the hero copy is o3xo.ai's own (`InsightIndexView`).
+  migration: { figmaNode: '2336:4310' },
 })

@@ -464,16 +464,9 @@ sitemap. The only timestamps in the HTML are `data-framer-ssr-released-at` and
 `data-framer-page-optimized-at`, which are the last time the **site** was built:
 the same value on every article, and this week's date for a piece written in 2024.
 
-So a migrated insight carries **no `publishedAt`**, is marked provisional saying
-why, and `verify` counts it out loud every run. `insightDoc` enforces the field
-for every other source, so a WordPress insight cannot lose its date through the
-same hole. The consequences are real and visible: the card meta reads `4 MINS`
-where o3's reads `4 MINS · 7/27/26`, and `order(publishedAt desc)` has nothing
-to sort by.
-
-**The 22 articles with an o3world.com twin have a real date in `data/extract/`,
-under the same slug.** That is where the fix comes from, and it is a decision
-about content rather than about the pipeline.
+The tracer left `publishedAt` off and marked the document provisional for it,
+which put the question on #218 rather than answering it: `order(publishedAt
+desc)` had nothing to sort by. The answer is below.
 
 ### Three more things the source does not carry
 
@@ -497,11 +490,11 @@ instruction rather than part of the asset. Markers store the bare path — the
 same rule `normalizeUploadUrl` enforces for WordPress thumbnails, and the reason
 `assets.json` does not end up with one entry per srcset row.
 
-### What #218 inherits
+### What the tracer handed to #218
 
 - The extract takes `--slugs a,b` or `--insights N|all`, and the sitemap is the
-  inventory (40 insight URLs, in the order the site publishes them — the only
-  ordering evidence there is).
+  inventory, in the order the site publishes them — the only ordering evidence
+  there is.
 - **Two slugs carry a curly apostrophe.** The URL keeps it, because the site
   serves it and path parity requires it; the id key is reduced to what a Sanity
   `_id` may hold. `wpPath` decodes the pathname for the same reason.
@@ -516,6 +509,66 @@ same rule `normalizeUploadUrl` enforces for WordPress thumbnails, and the reason
   legal name and the privacy link. #220 extracts it (below). `verify` still
   applies `siteSettingsDoc` — which describes the **WordPress chrome extract** —
   only to WordPress-sourced settings.
+
+---
+
+## The whole insight collection, and the date it never had (#218)
+
+```sh
+pnpm --filter @o3/migration extract -- --brand o3xo --insights all
+pnpm --filter @o3/migration convert -- --brand o3xo
+```
+
+**Forty, not forty-one.** The sitemap lists 41 URLs under `/insights`: 40
+articles and the collection index, which is a route rather than a document. 41
+is the number the spec (#209) and this ticket's title carry, and the `/insights`
+index is where the extra one came from — the index page draws exactly 40 cards,
+one per URL, with no duplicate. `o3xo.test.ts` pins the count, and the extract
+records what the sitemap listed on the run that produced the corpus.
+
+Every one of the 40 converted with no new mapper arm: the tracer's parse held
+across the whole collection, and the fail-loud shapes (three hero lines, a
+Content region with a paragraph in it) never fired.
+
+### The date is synthetic, and it is a sort key
+
+o3xo.ai publishes none, and Nick's decision (2026-08-19) was to **fabricate one
+per article** rather than backfill from the o3world.com twins or ship the
+collection unordered. `syntheticPublishedAt` in `map/framer.ts` derives it from
+the sitemap position: nine days apart, spread from **2025-08-15** to
+**2026-08-01**, the first URL the sitemap lists being the newest. That is what
+makes `order(publishedAt desc)` — the ordering every feed and the index use —
+put the collection in the site's own order.
+
+Three things hold that value honest.
+
+- **The range is anchored on the oldest article, not the newest**, so a newly
+  published article prepends a date instead of renumbering the archive. The site
+  lists newest first, so one new item shifts every position by one.
+- **No O3XO surface prints a date.** `showsPublishDates` is `false` for the
+  brand (`@o3/sanity/brand`), and the shared insight card and the app's own
+  article byline both ask: the card meta reads `4 MINS` where o3's reads
+  `4 MINS · 7/27/26`. A rendered date would assert a publication nobody made.
+- **`convert` says so on every run**, one note per insight naming the position
+  and the date it produced.
+
+The documents are **not** marked provisional. Provisional says the content is a
+placeholder to be replaced before launch (ADR 0007); nothing here is — the title,
+deck, body and image are the site's own, and the one fabricated field is
+ordering metadata no reader sees.
+
+`insightDoc` requires `publishedAt` again as a result. It was a refinement
+exempting `framer:` documents, which was a hole in the gate for exactly one
+source; with the source dated, the exemption is gone.
+
+### A stored slug is decoded, so the route decodes too
+
+The two curly-apostrophe URLs 404'd on `apps/o3xo`: the corpus stores the
+character, `encodePathParam` normalized the route segment the other way, and the
+query asked for `…pact%E2%80%99s-…`. It is `decodePathParam` now — normalizing
+to the form both corpora store — and o3's slugs are ASCII, so nothing there
+changes. The helper exists at all because Next hands `Page` the raw segment and
+`generateMetadata` the decoded one for the same request.
 
 ---
 

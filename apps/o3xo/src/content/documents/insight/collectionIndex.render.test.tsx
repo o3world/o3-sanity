@@ -91,6 +91,18 @@ describe('the insights index route', () => {
     expect(html).not.toContain('href="/contact"')
   })
 
+  /**
+   * o3xo.ai publishes no date, so the migrated insights' dates are synthetic and
+   * exist to order the collection (#218). A card drawing one would print a
+   * publication date nobody published — `showsPublishDates` is the brand fact
+   * that keeps it off, and the reading time is what the meta row still carries.
+   */
+  it('draws a card’s reading time but never its date', async () => {
+    const { html } = await render(anInsightsPage(manyInsights(3), 3))
+    expect(html).toContain('1 min')
+    expect(html).not.toContain('5/4/26')
+  })
+
   it('says the collection is empty rather than drawing an empty grid', async () => {
     const { html } = await render(anInsightsPage([], 0, CATEGORIES), { category: 'nothing-here' })
     expect(html).toContain('No insights under that filter yet.')
@@ -104,19 +116,23 @@ describe('the insights index route', () => {
  * documents, because a marker that behaves differently depending on where it
  * is written is a marker nobody trusts.
  *
- * This index is provisional: its composition is borrowed from O3's canonical
- * Insights frame and its hero copy is a placeholder. #218 is what clears it.
+ * The marker is **cleared**, and the assertions invert rather than disappearing
+ * — the same way #61 inverted apps/web's — so it cannot come back without
+ * someone saying why. Both halves of the old note are answered: the collection
+ * landed (#218), and the hero copy is o3xo.ai's own rather than a stand-in.
  */
 describe('insights index provenance', () => {
-  it('says what would clear it while it is provisional', () => {
-    expect(insightIndex.migration?.provisional).toBe(true)
-    expect(insightIndex.migration?.provisionalNote?.trim()).toBeTruthy()
+  it('no longer marks the index provisional — the collection landed (#218)', () => {
+    expect(insightIndex.migration?.provisional).not.toBe(true)
+    expect(insightIndex.migration?.provisionalNote).toBeUndefined()
   })
 
-  it('claims no frame of its own while it is provisional', () => {
-    // Mutually exclusive by definition: `figmaNode` says the composition was
-    // transcribed from a frame drawn for this route, `provisional` says none
-    // was. The borrowed frame is named in the note, not in the field.
-    expect(insightIndex.migration?.figmaNode).toBeUndefined()
+  it('names the canonical frame its composition is transcribed from', () => {
+    expect(insightIndex.migration?.figmaNode).toBe('2336:4310')
+  })
+
+  it('heads the index with o3xo.ai’s own line, not the collection’s name twice', async () => {
+    const { html } = await render(anInsightsPage(manyInsights(3), 3))
+    expect(html).toContain('Learn what drives AI advantage')
   })
 })

@@ -1,4 +1,5 @@
 import { ArticleByline, Eyebrow, ReadingProgress, SectionShell } from '@o3/ui'
+import { brandConfig } from '@o3/sanity/brand'
 import type { INSIGHT_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { CarouselTrack, SanityImage } from '@o3/content-ui'
@@ -7,6 +8,8 @@ import { getCard } from '@o3/content-ui/cards'
 import { formatMonthYear } from '@o3/content-ui/format-date'
 
 import { BackToInsights } from './BackToInsights'
+
+const { showsPublishDates } = brandConfig()
 
 type InsightViewProps = NonNullable<INSIGHT_QUERY_RESULT>
 
@@ -104,8 +107,13 @@ export function InsightView({
     .filter(Boolean)
     .join(' · ')
 
-  // "Jun 2026 · 6 min read" — `1710:2951`.
-  const meta = [formatMonthYear(publishedAt), readingMinutes ? `${readingMinutes} min read` : null]
+  // "Jun 2026 · 6 min read" — `1710:2951` — minus the date under this brand:
+  // o3xo.ai publishes none, so a migrated insight's `publishedAt` is synthetic
+  // and orders the collection rather than dating the article (#218).
+  const meta = [
+    showsPublishDates ? formatMonthYear(publishedAt) : null,
+    readingMinutes ? `${readingMinutes} min read` : null,
+  ]
     .filter(Boolean)
     .join(' · ')
 

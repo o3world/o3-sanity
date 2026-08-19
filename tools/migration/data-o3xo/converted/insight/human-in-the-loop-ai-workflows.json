@@ -7,6 +7,7 @@
     "current": "human-in-the-loop-ai-workflows"
   },
   "excerpt": "A perspective on what human in the loop actually means inside enterprise AI workflows, and why trust, accountability, and operational adoption matter more than simply reviewing AI outputs.",
+  "publishedAt": "2026-08-01T12:00:00Z",
   "categories": [
     {
       "_type": "reference",
@@ -421,8 +422,6 @@
   },
   "migration": {
     "locked": false,
-    "sourceId": "framer:insight:KkV56cgmc",
-    "provisional": true,
-    "provisionalNote": "Migrated from o3xo.ai with no publishedAt: the Framer site publishes no date for any article, and the only timestamps in its HTML are site build times. Cleared by supplying the real publication date — for the 22 articles o3world.com also published, its WordPress extract has one."
+    "sourceId": "framer:insight:KkV56cgmc"
   }
 }

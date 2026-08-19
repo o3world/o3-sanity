@@ -20,12 +20,11 @@ import type { CategoryDoc } from './category'
  * **A date.** o3xo.ai publishes none: not on the article, not in the head, not
  * in a feed, not as `lastmod` in the sitemap. The only timestamps the HTML
  * carries are `data-framer-ssr-released-at` and `data-framer-page-optimized-at`,
- * which are the last time the *site* was built — the same value on all 41
- * articles, and this week's date for a piece written in 2024. So `publishedAt`
- * is left off, the document is marked provisional saying so, and `verify` counts
- * it out loud on every run. The alternatives were to invent a date or to refuse
- * the document, and inventing a publication date is the one thing a migration
- * must never do.
+ * which are the last time the *site* was built — the same value on all 40
+ * articles, and this week's date for a piece written in 2024. So the date is
+ * **synthesised from the sitemap position** (`syntheticPublishedAt`), which is
+ * the site's only ordering evidence, and the O3XO site renders no date at all
+ * (`showsPublishDates` in brand config). A note says so on every convert run.
  *
  * **A byline.** No author is rendered anywhere on the site, so no `author`
  * reference is written and no `person` document is created. That is the same
@@ -39,6 +38,13 @@ import type { CategoryDoc } from './category'
 /** An extract record as committed under the O3XO extract tree. */
 export interface FramerInsightRecord extends FramerInsight {
   readonly _meta: ExtractMeta
+  /**
+   * Where the sitemap lists this article, counting from one, and how many it
+   * listed in the same run. The pair is the site's only ordering evidence — it
+   * prints no dates — and `syntheticPublishedAt` is what reads it.
+   */
+  readonly sitemapPosition: number
+  readonly sitemapCount: number
 }
 
 export interface FramerMapOptions {
@@ -47,7 +53,53 @@ export interface FramerMapOptions {
 }
 
 /**
- * A Sanity `_id` may hold only `[a-zA-Z0-9._-]`, and two of the 41 slugs carry
+ * The oldest article's date: the far end of the range the collection is spread
+ * over. Anchored on the **oldest** rather than the newest so that a newly
+ * published article prepends a date instead of renumbering the archive — the
+ * site lists newest first, so one new item shifts every position by one.
+ */
+const OLDEST_PUBLISHED_AT = Date.UTC(2025, 7, 15, 12)
+
+/** Nine days apart puts 40 articles inside 51 weeks. */
+const DAYS_BETWEEN_ARTICLES = 9
+
+const DAY_MS = 86_400_000
+
+/**
+ * A publication date fabricated from a sitemap position — the o3xo insights'
+ * only ordering key (#218).
+ *
+ * o3xo.ai is dateless by design and the sitemap order is the one thing that says
+ * what came first, so a date is synthesised for each article: nine days apart,
+ * spread over roughly a year, in the order the sitemap lists them. That makes
+ * `order(publishedAt desc)` — the query every feed and index uses — put the
+ * collection in the site's own order.
+ *
+ * **The value is ordering metadata, not a claim about the world.** No O3XO
+ * surface renders a date (`showsPublishDates` is `false` for the brand), because
+ * printing one would assert a publication date nobody published.
+ */
+export function syntheticPublishedAt({
+  position,
+  count,
+}: {
+  readonly position: number
+  readonly count: number
+}): string {
+  if (!Number.isInteger(position) || position < 1 || position > count) {
+    throw new Error(
+      `sitemap position ${position} of ${count} is not a place in o3xo.ai's insight inventory`,
+    )
+  }
+  const olderThan = count - position
+  const at = new Date(OLDEST_PUBLISHED_AT + olderThan * DAYS_BETWEEN_ARTICLES * DAY_MS)
+  // Seconds, no milliseconds — the shape `toIso` gives a WordPress date, so one
+  // form of datetime is committed across both sources.
+  return `${at.toISOString().slice(0, 19)}Z`
+}
+
+/**
+ * A Sanity `_id` may hold only `[a-zA-Z0-9._-]`, and two of the 40 slugs carry
  * a curly apostrophe (`…on-pact’s-digital-phorum-podcast`). The URL keeps the
  * character — the site serves it, so path parity requires it — and the id key is
  * reduced to what an id may hold.
@@ -139,11 +191,18 @@ export function mapFramerInsight(
   )
   if (parity) issues.push(parity)
 
-  // Reported on every run, not once: the whole archive is missing its dates, so
-  // the note is what keeps that in front of whoever runs the pipeline.
+  const publishedAt = syntheticPublishedAt({
+    position: src.sitemapPosition,
+    count: src.sitemapCount,
+  })
+
+  // Reported on every run, not once: the whole archive's dates are fabricated,
+  // so the note is what keeps that in front of whoever runs the pipeline.
   notes.push({
     element: 'publishedAt',
-    detail: 'o3xo.ai publishes no date for this article — the document carries none',
+    detail:
+      `o3xo.ai publishes no date, so this one is synthetic — position ${src.sitemapPosition} ` +
+      `of ${src.sitemapCount} in the sitemap, dated ${publishedAt} to order the collection`,
   })
 
   if (issues.length > 0) return failed(issues)
@@ -156,6 +215,7 @@ export function mapFramerInsight(
     title: src.title,
     slug: { _type: 'slug' as const, current: src.slug },
     excerpt,
+    publishedAt,
     ...(src.category
       ? {
           categories: [
@@ -184,12 +244,6 @@ export function mapFramerInsight(
       // provenance has to survive that. Slug-keyed only where Framer's
       // per-page props did not carry an id.
       sourceId: `framer:insight:${src.collectionItemId ?? src.slug}`,
-      provisional: true,
-      provisionalNote:
-        'Migrated from o3xo.ai with no publishedAt: the Framer site publishes no ' +
-        'date for any article, and the only timestamps in its HTML are site build ' +
-        'times. Cleared by supplying the real publication date — for the 22 ' +
-        'articles o3world.com also published, its WordPress extract has one.',
     },
   }
 

@@ -41,6 +41,17 @@ describe('o3xo', () => {
       caseStudy: { prefix: '/case-studies', title: 'Case studies' },
     })
   })
+
+  /**
+   * o3xo.ai is dateless by design, and its migrated insights carry a synthetic
+   * `publishedAt` that exists to order the collection (#218). A rendered date
+   * would assert a publication nobody published, so the brand says it prints
+   * none and every surface that draws one asks.
+   */
+  it('prints no publication date, because its source publishes none', () => {
+    expect(brandConfig('o3xo').showsPublishDates).toBe(false)
+    expect(brandConfig('o3').showsPublishDates).toBe(true)
+  })
 })
 
 /**

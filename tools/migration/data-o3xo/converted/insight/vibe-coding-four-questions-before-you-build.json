@@ -1,0 +1,586 @@
+{
+  "_id": "insight-framer-vibe-coding-four-questions-before-you-build",
+  "_type": "insight",
+  "title": "Should you vibe code it yourself? Four questions before you build",
+  "slug": {
+    "_type": "slug",
+    "current": "vibe-coding-four-questions-before-you-build"
+  },
+  "excerpt": "A practical framework for deciding when to build your own internal tools with AI, drawn from O3XO's own decision to replace a $35,000 SaaS tool.",
+  "publishedAt": "2026-07-23T12:00:00Z",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-framer-strategy",
+      "_key": "cat-strategy"
+    }
+  ],
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_srcUrl": "https://framerusercontent.com/images/lENv9HErA4R8cvCuurKA1rGg5Z8.png"
+    },
+    "alt": "Close-up of analog performance gauge meter"
+  },
+  "body": [
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Vibe coding is not a hobbyist trend anymore. Lovable, the platform we used to build our own resource planning tool and now partner with, has",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": " seen usage accelerate to more than one million new projects a week",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", and apps built on the platform now draw",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": " an average of 720 million visits a month",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://techcrunch.com/2026/06/09/lovable-says-it-has-hit-500m-in-annualized-revenue-with-1-million-new-projects-a-week/"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://lovable.dev/blog/a-first-look-at-the-build-economy"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Building your own internal tool used to be a six to twelve month decision. Now it can take six to twelve days to evaluate, build and deploy! That speed changes what's worth building. But, it doesn't change what makes a build the right call.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We’ve been through this a few times, most recently, making the decision to build ",
+          "_key": "k0015"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "our own resource planning tool",
+          "_key": "k0016"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". Here's the framework we used to evaluate the build, and some key considerations worth running through before you get started.",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.o3world.com/perspectives/we-replaced-a-35000-saas-tool-in-527-prompts/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Start with these four key questions, not the price tag",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We built a working prototype of our resource planning tool,",
+          "_key": "k0021"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": " Dialed",
+          "_key": "k0022"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", using Lovable for $127 in AI credits and 527 prompts. Less than 40 hours of effort total. This replaced a $35,000 annual cost for a SaaS tool we had become reliant on.",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.o3world.com/perspectives/we-replaced-a-35000-saas-tool-in-527-prompts/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "That's eye-popping, but it's also the wrong number to build a decision upon. A hundred dollars and a few prompts gets you a prototype. It does not get you a system your team relies on. Whether building makes sense comes down to four questions, and the price tag only answers one small part.",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "How core is this workflow to operational success?",
+          "_key": "k0027"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " A tool supporting a narrow internal task carries a different bar than one touching your primary revenue process, or one that's client-facing. The wider the footprint the more you have to consider the engineering and security cost that turns a prototype into something trustworthy and reliable. Data sensitivity, number of integrations, compliance requirements, and how many people depend on it all scale that cost up or down.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "How well does an off-the-shelf option actually fit?",
+          "_key": "k0030"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " Workarounds and side spreadsheets are a signal, not a nuisance to tolerate. If your team has already half-built a shadow version of the tool you're paying for, that's a strong signal to consider a build option.",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Do you have someone who can own it, not just build it?",
+          "_key": "k0033"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " More on this below, because it's the one most build stories skip entirely.",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "What's your appetite for being the one responsible when it breaks?",
+          "_key": "k0036"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " Trust us: at some point, it’s going to break. You need to consider your capacity to support the build before you get in too deep.",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Dialed has kept paying off past launch. As our team uses it and gives feedback, we can ship fixes and new features in a few prompts, everything from a new integration to a UI update. That is a different kind of return than the $35,000 line item disappearing.",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If the answers to your build vs buy question are \"core workflow, decent fit, no clear owner, low risk tolerance,\" buying still wins. The math hasn't changed there. What's changed is the middle case: workflows that used to default to buy because building was too slow to justify are now worth a second look, because building got faster and, now, more reliable.",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0042",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "It's not really about speed. It's about who's allowed to build.",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0044",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The old build-versus-buy calculus assumed building meant a six to twelve month project and a dedicated engineering team. That assumption is completely different now. However, with AI's ability to discover and exploit vulnerabilities at speeds and depths we haven't seen before, security matters even more than it used to. So does having someone who can maintain the thing after launch.",
+          "_key": "k0045"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0046",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The bigger shift is who's doing the building. The person who understands the workflow best, who is the subject matter expert living inside the problem every day, can now prototype a solution around their own knowledge without waiting on an engineering team to translate it for them. That's real. It just moves more decisions into the \"worth a second look\" middle case above. It doesn't remove the four questions.",
+          "_key": "k0047"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0048",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The ownership question is the one everyone skips",
+          "_key": "k0049"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0050",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Most build-your-own-tool stories end at launch. That's the wrong ending, because launch is when question three, who owns it, actually gets tested.",
+          "_key": "k0051"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0052",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Who owns this tool once it ships? Who gets the message when an integration breaks on a Friday at five o'clock? What happens when the person who built it takes a new role, or leaves?",
+          "_key": "k0053"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0054",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Tools built this quickly can sprawl just as quickly. Without a clear owner (or, ownership team), what looks like innovation is closer to shadow IT with better production values. The same speed that makes a fast build appealing is what makes it easy to lose track of once nobody's explicitly accountable for it.",
+          "_key": "k0055"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0056",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Building doesn't remove lock-in. It relocates it",
+          "_key": "k0057"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0058",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This is where question four comes in, and it's worth naming directly: building internally doesn't eliminate lock-in, it moves it. There are two versions now. Builder lock-in: you depend on the one person who understands how the tool works, instead of a vendor's roadmap. Platform lock-in: the tool itself may be tied to whatever no-code or AI-build platform it was created in, which comes with its own switching costs down the road.",
+          "_key": "k0059"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0060",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Good documentation and a handoff plan from day one address the first. This is easier than it used to be. Google recently introduced the ",
+          "_key": "k0061"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "Open Knowledge Format (OKF)",
+          "_key": "k0062"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", an open, vendor-neutral way to package product requirements, system knowledge, and decision history in a form any AI agent or new team member can pick up, instead of leaving it in one person's head. If you instruct your AI tools to maintain an OKF package as the build evolves, handoff stops being a scramble.",
+          "_key": "k0063"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0064",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "It's also worth being honest that the cost curve doesn't flatten at launch. The upfront cost is genuinely lower than it used to be, but that cost shifts into ongoing maintenance and feature development instead of disappearing. Budget for that second, quieter cost, not just the price of the prototype.",
+          "_key": "k0065"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0066",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Run the same four questions against your own renewals",
+          "_key": "k0067"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0068",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Pull up your SaaS renewals for the next twelve months. For the ones your team complains about, run them through the same four questions above: how core is the workflow and who touches it, how well does the current tool actually fit, do you have someone who could own a replacement, and what's your risk tolerance if you're the one on the hook when it breaks.",
+          "_key": "k0069"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0070",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "None of that requires a technical background. It requires an honest look at how your team actually works, and a willingness to admit when a tool that seemed indispensable is really just familiar.",
+          "_key": "k0071"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0072",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Vibe coding and the new tools for building fast aren't going anywhere, and they're only getting better. The organizations that benefit most won't be the ones who build the most. They'll be the ones who consider these four questions honestly, and know exactly which few things are worth building.",
+          "_key": "k0073"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0074",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If you're working through that list right now and want a second set of eyes on where you land, ",
+          "_key": "k0075"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "that's a conversation we're glad to have",
+          "_key": "k0076"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0077"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.o3xo.ai/contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "Vibe coding makes building fast, not automatically right. Four questions O3XO used to decide when building your own tool actually pays off."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:insight:CrQYsCPMu"
+  }
+}

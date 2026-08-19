@@ -619,14 +619,14 @@ function composeHome(
     decoration: 'none',
   })
 
-  // Left to fill itself. The band curates three articles, one of which is
-  // migrated so far (#218 has the rest); an empty list self-fills with the
-  // most recent and stays current without anyone maintaining it.
+  // Left to fill itself. The band curates three articles on o3xo.ai; an empty
+  // list self-fills with the most recent of the migrated collection, which stays
+  // current without anyone maintaining it.
   notes.push({
     element: 'curated insights',
     detail:
-      'the insights band curates three articles; the list is left empty so the band self-fills, ' +
-      'because only one of the three is migrated yet (#218)',
+      'the insights band curates three articles; the list is left empty so the band self-fills ' +
+      'with the newest of the collection instead',
   })
   sections.push({
     _type: 'insightsCarouselSection',

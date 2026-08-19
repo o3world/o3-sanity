@@ -77,6 +77,29 @@ export function insightSlugsInSitemap(xml: string): string[] {
 }
 
 /**
+ * Where one slug sits in that inventory, counting from one.
+ *
+ * The site prints no dates, so its sitemap order is the only evidence of what
+ * was published when — and the position is therefore a fact the extract records
+ * per article, the way a WordPress record carries `dateGmt`. `map/framer.ts`
+ * turns it into `publishedAt`; nothing here decides what the date is.
+ *
+ * A slug the sitemap does not list has no position, and inventing one would
+ * invent a place in the publication order. `--slugs` takes names off a command
+ * line, so this throws rather than returning `0`.
+ */
+export function sitemapPosition(inventory: readonly string[], slug: string): number {
+  const at = inventory.indexOf(slug)
+  if (at === -1) {
+    throw new Error(
+      `o3xo.ai's sitemap does not list /insights/${slug}, so the article has no place in the ` +
+        `publication order the collection is ordered by`,
+    )
+  }
+  return at + 1
+}
+
+/**
  * Case-study URLs the site serves that are not case studies.
  *
  * `redirect-input` 302s to `redirect-output`, and `redirect-output` is a

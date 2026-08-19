@@ -30,6 +30,7 @@ import {
   parseCaseStudy,
   parseCaseStudyIndex,
   parseInsight,
+  sitemapPosition,
 } from './lib/framer'
 import { pagePath, pagePathsInSitemap, parsePage } from './lib/framerPage'
 import { MANIFEST_PATH, recordRun } from './lib/manifest'
@@ -62,11 +63,30 @@ function firstN(all: string[], arg: string | null, flagName: string): string[] {
   return all.slice(0, n)
 }
 
-async function wantedInsightSlugs(): Promise<string[]> {
-  if (slugsArg) return list(slugsArg)
-  const all = insightSlugsInSitemap(await fetchPage('/sitemap.xml'))
-  console.log(`sitemap lists ${all.length} insights`)
-  return firstN(all, insightsArg, '--insights')
+/** One insight to extract, with the place in the publication order it holds. */
+interface WantedInsight {
+  readonly slug: string
+  readonly sitemapPosition: number
+  readonly sitemapCount: number
+}
+
+/**
+ * The insights this run extracts, each carrying where the sitemap lists it.
+ *
+ * The sitemap is fetched even when slugs are named on the command line: the
+ * position is the only evidence of what the site published when, and it is what
+ * the mapper dates the article from (#218). An article extracted without it
+ * would convert into a document with no place in its own collection.
+ */
+async function wantedInsights(): Promise<WantedInsight[]> {
+  const inventory = insightSlugsInSitemap(await fetchPage('/sitemap.xml'))
+  console.log(`sitemap lists ${inventory.length} insights`)
+  const slugs = slugsArg ? list(slugsArg) : firstN(inventory, insightsArg, '--insights')
+  return slugs.map((slug) => ({
+    slug,
+    sitemapPosition: sitemapPosition(inventory, slug),
+    sitemapCount: inventory.length,
+  }))
 }
 
 async function wantedPages(): Promise<string[]> {
@@ -87,18 +107,20 @@ const wantsInsights =
   (!wantsCaseStudies && !wantsPages) || slugsArg !== null || insightsArg !== null
 
 if (wantsInsights) {
-  const slugs = await wantedInsightSlugs()
-  if (slugs.length === 0) throw new Error('nothing to extract — pass --slugs, or --insights N|all')
-  for (const slug of slugs) {
+  const wanted = await wantedInsights()
+  if (wanted.length === 0) throw new Error('nothing to extract — pass --slugs, or --insights N|all')
+  for (const { slug, sitemapPosition: position, sitemapCount: count } of wanted) {
     const record = parseInsight(await fetchPage(`/insights/${slug}`), slug)
     writeJson(join(EXTRACT_DIR, 'insight', `${slug}.json`), {
       _meta: { type: 'insight' },
+      sitemapPosition: position,
+      sitemapCount: count,
       ...record,
     })
-    console.log(`✓ insight ${slug}`)
+    console.log(`✓ insight ${slug} (${position} of ${count})`)
   }
   types.push('insight')
-  console.log(`done: ${slugs.length} insight${slugs.length === 1 ? '' : 's'}`)
+  console.log(`done: ${wanted.length} insight${wanted.length === 1 ? '' : 's'}`)
 }
 
 if (wantsCaseStudies) {

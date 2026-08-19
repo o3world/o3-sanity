@@ -1,10 +1,12 @@
 import { describe, expect, it } from 'vitest'
 
 import type { FramerInsightRecord } from './framer'
-import { mapFramerCategory, mapFramerInsight } from './framer'
+import { mapFramerCategory, mapFramerInsight, syntheticPublishedAt } from './framer'
 
 const RECORD: FramerInsightRecord = {
   _meta: { type: 'insight' },
+  sitemapPosition: 1,
+  sitemapCount: 40,
   slug: 'human-in-the-loop-ai-workflows',
   path: '/insights/human-in-the-loop-ai-workflows',
   collectionItemId: 'KkV56cgmc',
@@ -47,7 +49,7 @@ describe('mapFramerInsight', () => {
     expect(doc._id).toBe('insight-framer-human-in-the-loop-ai-workflows')
   })
 
-  // Sanity ids allow `[a-zA-Z0-9._-]`, and two of the 41 slugs carry a curly
+  // Sanity ids allow `[a-zA-Z0-9._-]`, and two of the 40 slugs carry a curly
   // apostrophe. The URL keeps it (path parity); the id cannot.
   it('makes an id out of a slug that has characters an id may not hold', () => {
     const { doc: quirky } = mapped({
@@ -119,19 +121,18 @@ describe('mapFramerInsight', () => {
   })
 
   /**
-   * The finding this tracer exists to surface: **o3xo.ai publishes no date.**
-   * Not on the article, not in the head, not in a feed, not in the sitemap. So
-   * the document carries no `publishedAt` and says why — rather than taking the
-   * page's build timestamp, which would stamp all 41 articles with this week.
+   * o3xo.ai publishes no date anywhere, and the collection still has to have an
+   * order. So the date is **synthesised from the sitemap position** (#218): the
+   * first article the sitemap lists is the newest, and `order(publishedAt desc)`
+   * therefore puts the collection in the order the site lists it.
    */
-  it('omits publishedAt and marks the document provisional for it', () => {
-    expect(doc.publishedAt).toBeUndefined()
-    expect(doc.migration.provisional).toBe(true)
-    expect(doc.migration.provisionalNote).toMatch(/publishedAt/)
+  it('dates the article from where the sitemap lists it', () => {
+    expect(doc.publishedAt).toBe('2026-08-01T12:00:00Z')
   })
 
-  it('notes the missing date on every run, so it is not discovered at launch', () => {
+  it('notes the synthesis on every run, so nobody reads the date as published', () => {
     expect(notes?.map((note) => note.element)).toContain('publishedAt')
+    expect(notes?.find((note) => note.element === 'publishedAt')?.detail).toMatch(/synthetic/)
   })
 
   /**
@@ -153,6 +154,46 @@ describe('mapFramerInsight', () => {
   it('refuses a record with no deck, because excerpt has no second source here', () => {
     const empty = mapFramerInsight({ ...RECORD, deck: '   ' }, OPTIONS)
     expect(empty.ok).toBe(false)
+  })
+})
+
+/**
+ * The date synthesis (#218). o3xo.ai publishes none, and Nick's decision was to
+ * fabricate one per article rather than ship the collection unordered: the value
+ * is a sort key, and the O3XO UI prints no date at all.
+ *
+ * The endpoints below are worked out by hand from the range the mapper declares
+ * — 40 articles, nine days apart, oldest on 2025-08-15 — so they disagree with
+ * the code if either constant moves.
+ */
+describe('syntheticPublishedAt', () => {
+  it('starts the range at the last article the sitemap lists', () => {
+    expect(syntheticPublishedAt({ position: 40, count: 40 })).toBe('2025-08-15T12:00:00Z')
+  })
+
+  it('spreads the collection over roughly a year, ending at the first listed', () => {
+    expect(syntheticPublishedAt({ position: 1, count: 40 })).toBe('2026-08-01T12:00:00Z')
+  })
+
+  it('walks nine days per position, so no two articles share a date', () => {
+    expect(syntheticPublishedAt({ position: 39, count: 40 })).toBe('2025-08-24T12:00:00Z')
+  })
+
+  /**
+   * The range is anchored on the **oldest** article, not the newest, so
+   * publishing a new one prepends a date instead of renumbering the archive: the
+   * site lists newest first, so every existing position shifts by one and would
+   * otherwise rewrite all forty dates in the dataset.
+   */
+  it('leaves an article where it was when the site publishes a newer one', () => {
+    expect(syntheticPublishedAt({ position: 6, count: 41 })).toBe(
+      syntheticPublishedAt({ position: 5, count: 40 }),
+    )
+  })
+
+  it('refuses a position the inventory does not hold', () => {
+    expect(() => syntheticPublishedAt({ position: 41, count: 40 })).toThrow(/position/)
+    expect(() => syntheticPublishedAt({ position: 0, count: 40 })).toThrow(/position/)
   })
 })
 

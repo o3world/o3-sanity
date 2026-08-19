@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { assetUrl, insightSlugsInSitemap, parseInsight } from './framer'
+import { assetUrl, insightSlugsInSitemap, parseInsight, sitemapPosition } from './framer'
 
 /**
  * The O3XO source. o3xo.ai is a Framer site, so there is no CMS to query and
@@ -92,7 +92,7 @@ describe('parseInsight', () => {
    * in the sitemap — the design binds no date field at all. The parse says so
    * rather than substituting the page's build timestamp, which is what
    * `data-framer-ssr-released-at` is and would read as a 2026 publish date on
-   * every one of the 41 articles.
+   * every one of the 40 articles.
    */
   it('reports no published date, because the source has none', () => {
     expect(insight).not.toHaveProperty('publishedAt')
@@ -130,10 +130,30 @@ describe('insightSlugsInSitemap', () => {
     expect(insightSlugsInSitemap(xml)).toEqual(['newest-first', 'then-this-one'])
   })
 
-  // Two of the 41 carry a curly apostrophe in the slug, which the sitemap
+  // Two of the 40 carry a curly apostrophe in the slug, which the sitemap
   // percent-encodes; decoding is what makes the extract filename match the URL.
   it('decodes a percent-encoded slug', () => {
     const xml = `<urlset><url><loc>https://www.o3xo.ai/insights/mike-gadsby-on-pact%E2%80%99s-podcast</loc></url></urlset>`
     expect(insightSlugsInSitemap(xml)).toEqual(['mike-gadsby-on-pact’s-podcast'])
+  })
+})
+
+/**
+ * The sitemap's order is the site's only ordering evidence, so where an
+ * article sits in it is a fact the extract has to record (#218) — the mapper
+ * turns it into `publishedAt`.
+ */
+describe('sitemapPosition', () => {
+  const inventory = ['newest-first', 'then-this-one', 'oldest']
+
+  it('numbers a slug from one, in the order the sitemap lists it', () => {
+    expect(sitemapPosition(inventory, 'newest-first')).toBe(1)
+    expect(sitemapPosition(inventory, 'oldest')).toBe(3)
+  })
+
+  // A position guessed is a date invented twice over. `--slugs` takes a name
+  // off a command line, so the typo is the case this guards.
+  it('refuses a slug the sitemap does not list, rather than guessing a position', () => {
+    expect(() => sitemapPosition(inventory, 'never-published')).toThrow(/sitemap/)
   })
 })

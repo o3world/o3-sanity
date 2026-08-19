@@ -21,7 +21,7 @@ export {
   defineSingletonType,
 } from './define'
 export { docTag, typeTag } from './cacheTags'
-export { encodePathParam } from './encodePathParam'
+export { decodePathParam } from './decodePathParam'
 export { clampPage, pageRange, parsePage } from './pagination'
 export type {
   AnyCatchAllEntry,

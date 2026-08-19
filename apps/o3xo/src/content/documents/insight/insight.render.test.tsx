@@ -61,6 +61,18 @@ describe('the insight detail route', () => {
     expect(html.match(/<h1[\s>]/g) ?? []).toHaveLength(1)
   })
 
+  /**
+   * The byline reads "6 min read" where O3's reads "Jun 2026 · 6 min read".
+   * o3xo.ai publishes no date, so a migrated insight's `publishedAt` is
+   * synthetic and orders the collection only (#218) — printing it would date an
+   * article the site never dated.
+   */
+  it('bylines the article by reading time alone, with no date', async () => {
+    const { html } = await render(anInsight({ readingMinutes: 6 }))
+    expect(html).toContain('6 min read')
+    expect(html).not.toContain('May 2026')
+  })
+
   it('points the article’s way back at this brand’s index', async () => {
     const { html } = await render(anInsight())
     expect(html).toContain('href="/insights"')
@@ -69,6 +81,22 @@ describe('the insight detail route', () => {
   it('canonicalises at this brand’s prefix', async () => {
     const { metadata } = await render(anInsight({ slug: 'a-second-brand' }), 'a-second-brand')
     expect(metadata.alternates?.canonical).toBe('http://localhost:3000/insights/a-second-brand')
+  })
+
+  /**
+   * Two o3xo.ai slugs carry a curly apostrophe, and the corpus stores the
+   * character itself — the site serves it and path parity requires it (#217).
+   * A browser sends the segment percent-encoded, so the route has to ask for the
+   * slug the way the corpus holds it; asking for `pact%E2%80%99s` matched
+   * nothing and 404'd both articles.
+   */
+  it('looks a curly-apostrophe slug up the way the corpus stores it', async () => {
+    const slug = 'mike-gadsby-on-pact’s-digital-phorum-podcast'
+    const { calls } = await render(
+      anInsight({ slug, title: 'On PACT’s Digital Phorum' }),
+      encodeURIComponent(slug),
+    )
+    expect(calls[0]?.params).toMatchObject({ slug })
   })
 
   it('404s when nothing matches the slug', async () => {

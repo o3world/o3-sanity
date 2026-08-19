@@ -213,6 +213,83 @@ describe('the committed O3XO corpus', () => {
   })
 
   /**
+   * The whole insight collection (#218). o3xo.ai's sitemap lists **40** article
+   * URLs — the 41 in this ticket's title counts the `/insights` index among
+   * them, which is a route rather than a document — and all 40 are here.
+   */
+  describe('every migrated insight', () => {
+    /** The extract record beside a converted document: its ordering evidence. */
+    function extractFor(file: string): FramerInsightRecord | null {
+      const path = join(ROOT, 'extract', 'insight', file.split('/').pop()!)
+      return existsSync(path)
+        ? (JSON.parse(readFileSync(path, 'utf8')) as FramerInsightRecord)
+        : null
+    }
+
+    it('has one document per article the sitemap lists', () => {
+      expect(insights.length).toBe(40)
+      const counts = new Set(insights.map(({ file }) => extractFor(file)?.sitemapCount))
+      expect(counts, 'the extract disagrees about how many articles the sitemap listed').toEqual(
+        new Set([40]),
+      )
+    })
+
+    /**
+     * The site publishes no date, so `publishedAt` is **synthetic**: derived
+     * from the sitemap position, which is the only ordering evidence there is
+     * (`map/framer.ts`). What matters is that it is complete, unique, and in the
+     * site's own order — `order(publishedAt desc)` is how every feed and the
+     * index read the collection.
+     */
+    it('dates every insight, and no two the same', () => {
+      const dates = insights.map(({ doc }) => doc.publishedAt as string)
+      expect(dates.every((date) => typeof date === 'string')).toBe(true)
+      expect(new Set(dates).size).toBe(dates.length)
+    })
+
+    it('orders the collection the way the sitemap lists it', () => {
+      const byPosition = insights
+        .map(({ file, doc }) => ({
+          position: extractFor(file)?.sitemapPosition ?? 0,
+          publishedAt: doc.publishedAt as string,
+        }))
+        .sort((a, b) => a.position - b.position)
+
+      expect(byPosition.map(({ position }) => position)).toEqual(
+        Array.from({ length: 40 }, (_, i) => i + 1),
+      )
+      // First listed is newest, so the dates descend as the positions ascend.
+      for (const [i, entry] of byPosition.entries()) {
+        if (i === 0) continue
+        expect(
+          entry.publishedAt < byPosition[i - 1]!.publishedAt,
+          `position ${entry.position} is not older than ${byPosition[i - 1]!.position}`,
+        ).toBe(true)
+      }
+    })
+
+    /** Roughly a year, which is what the synthesis was asked for. */
+    it('spreads the collection over about a year', () => {
+      const dates = insights.map(({ doc }) => Date.parse(doc.publishedAt as string)).sort()
+      const days = (dates.at(-1)! - dates[0]!) / 86_400_000
+      expect(days).toBeGreaterThan(300)
+      expect(days).toBeLessThan(400)
+    })
+
+    /**
+     * Body links to o3xo.ai's own pages are absolute on the source site and are
+     * migrated as written — relativising them is the launch-cutover audit's job
+     * (#223), and this pins that nothing here quietly did it early.
+     */
+    it('keeps a self-link exactly as the source wrote it', () => {
+      const withSelfLinks = insights.filter(({ doc }) =>
+        JSON.stringify(doc.body).includes('https://www.o3xo.ai/'),
+      )
+      expect(withSelfLinks.length).toBeGreaterThan(0)
+    })
+  })
+
+  /**
    * The O3XO singleton is o3xo.ai's own chrome, not the WordPress chrome
    * extract, so `siteSettingsDoc` does not describe it (see `verify.ts`). What
    * the chrome renders is asserted here instead — a settings document missing

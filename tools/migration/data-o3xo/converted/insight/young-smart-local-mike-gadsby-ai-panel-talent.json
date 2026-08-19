@@ -1,0 +1,402 @@
+{
+  "_id": "insight-framer-young-smart-local-mike-gadsby-ai-panel-talent",
+  "_type": "insight",
+  "title": "Young, smart & local: Mike Gadsby AI panel",
+  "slug": {
+    "_type": "slug",
+    "current": "young-smart-local-mike-gadsby-ai-panel-talent"
+  },
+  "excerpt": "Mike Gadsby at Young, Smart & Local Conference in New Orleans as he moderates a thought-provoking panel on 'AI’s Impact on the Future of Talent’.",
+  "publishedAt": "2025-09-20T12:00:00Z",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-framer-perspectives",
+      "_key": "cat-perspectives"
+    }
+  ],
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_srcUrl": "https://framerusercontent.com/images/jc9XonS69yV5h7vbk9TXjW9nik.png"
+    },
+    "alt": "speaker image"
+  },
+  "body": [
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Introduction:",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Artificial intelligence (AI) has proven itself as a transformative force, reshaping the way we live and work. ",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "The Young, Smart & Local conference",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", November 13-15th in New Orleans, is set to host a panel discussion on “AI’s Impact on the Future of Talent,” featuring O3XO’s CIO and Co-founder Mike Gadsby as the moderator. This session will dissect crucial aspects of AI’s practical applications and its unprecedented effects on talent attraction and retention.",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://youngsmartandlocal.com/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "About the conference:",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The three-day conference is aimed at informing and engaging leaders across various sectors on best practices for talent attraction, growth, and retention. As cities nationwide recognize the pivotal role talent plays in their growth, strategies range from college access initiatives to attracting remote workers. The conference, previously held in Philadelphia and Greensboro, is making its way to New Orleans next week.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_srcUrl": "https://framerusercontent.com/images/7gH75pnqoo7B9Puj2cpv3QByDfg.png"
+      },
+      "alt": "Young Smart and Local logo ",
+      "_key": "k0016"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "About the session:",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The spotlight of the event will be the panel discussion titled “AI’s Impact on the Future of Talent,” ",
+          "_key": "k0020"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "scheduled from 11:30 am to 1:15 pm at the Camp St. Warehouse.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The panel includes:",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Barbara Pender",
+          "_key": "k0025"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " is the Global GEN AI Deputy & Delivery Lead at ",
+          "_key": "k0026"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Accenture",
+          "_key": "k0027"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". Pender brings a wealth of experience and expertise in navigating the intricate landscape of artificial intelligence. Her insights shed light on practical applications of AI, emphasizing its transformative potential.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/barbarapenderai/"
+        },
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.linkedin.com/company/accenture/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Rob Lalka",
+          "_key": "k0030"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " is an Albert R. Lepage Professor in Business and Executive Director of the Lepage Center for Entrepreneurship at ",
+          "_key": "k0031"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "Tulane University",
+          "_key": "k0032"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". With a focus on ethical and responsible AI deployment, Lalka explores the intersection of entrepreneurship and AI, highlighting the need for conscientious approaches that align with societal values.",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/lalka/"
+        },
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.linkedin.com/school/tulane-university---a.b.-freeman-school-of-business/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Key Discussion Points:",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Practical applications of AI",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Ethical and responsible AI deployment",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "AI’s Role in talent attraction and retention",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0042",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What O3XO is doing in the AI space",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0044",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3XO offers ",
+          "_key": "k0045"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "AI solutions",
+          "_key": "k0046"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " that prioritize personalized experiences, prediction capabilities, conversational AI, and automation. Our expert team empowers startups and enterprises alike with AI solutions, ensuring that limited expertise in artificial intelligence doesn’t hinder the pursuit of meaningful experiences for customers and employees.",
+          "_key": "k0047"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.o3world.com/transcend/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0048",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Conclusion:",
+          "_key": "k0049"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0050",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The “AI’s Impact on the Future of Talent” panel at Young, Smart & Local offers valuable insights into the multifaceted world of artificial intelligence. Attendees can expect a deep dive into the ethical considerations, practical applications, and regional implications of AI, making this session a must-attend for anyone intrigued by the transformative potential of AI in talent management.",
+          "_key": "k0051"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "Join moderator Mike Gadsby, O3’s CIO, as he leads a panel discussion on the practical applications and ethical dimensions of AI, featuring industry experts Barbara Pender and Rob Lalka."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:insight:gzHj_4QEL"
+  }
+}

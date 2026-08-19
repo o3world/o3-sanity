@@ -1,0 +1,356 @@
+{
+  "_id": "insight-framer-insights-from-o3s-chief-innovation-officer-on-the-disruption-is-now-podcast",
+  "_type": "insight",
+  "title": "Insights from O3XO’s chief innovation officer on “Disruption Is Now”",
+  "slug": {
+    "_type": "slug",
+    "current": "insights-from-o3s-chief-innovation-officer-on-the-disruption-is-now-podcast"
+  },
+  "excerpt": "Check out how artificial intelligence (AI) is revolutionizing customer interfaces and experiences in a conversation on \"The Disruption is Now\" podcast.",
+  "publishedAt": "2025-10-26T12:00:00Z",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-framer-perspectives",
+      "_key": "cat-perspectives"
+    }
+  ],
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_srcUrl": "https://framerusercontent.com/images/7TCSOvnfyExH1cqbNsKR7r5EI.png"
+    },
+    "alt": "Portrait of Mike Gadsby"
+  },
+  "body": [
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In today’s unpredictable technology landscape, businesses are constantly challenged to innovate and improve their customer experiences. O3XO, a leading CX consultancy, is positioned at the intersection of strategy, design, and technology. Recently, ",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Mike Gadsby",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", Chief Innovation Officer at O3XO, shared insights on how artificial intelligence (AI) is revolutionizing customer interfaces and experiences in a ",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "compelling podcast titled “The Disruption is Now.”",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/michaelgadsby/"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.youtube.com/watch?v=o2zaibV96FA&list=PL3Rc7_PbSiJaZBiZxrlz-Fv6h9po7g5MF&index=1"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The Disruption is Now podcast, hosted by ",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Greg Matusky",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", offers insightful discussions on the impact of artificial intelligence (AI) across various industries. Through engaging conversations with leading innovators, Matusky demystifies AI’s potential to reshape industries and redefine work dynamics.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/gregmatusky/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Gadsby delved into the substantial impact of AI on customer interactions. He outlined O3XO’s strategic approach to understanding and addressing evolving consumer needs.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "Here’s a breakdown of key takeaways:",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Strategic evolution",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3XO has evolved into a strategic firm focused on understanding people, positioning ourselves to help our clients leverage gen AI to improve customer touchpoints. By dissecting personas and customer journeys, O3XO identifies friction points and devises digital solutions to enhance those experiences.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Harnessing generative AI",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3XO’s utilization of generative AI across various facets is widespread, from discovery to content creation. This technology enables faster idea framing and ensures consistency in content development processes.",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Diverse toolset",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Reflecting on O3XO’s diverse portfolio, we dove into the array of tools employed by different teams. From ChatGPT streamlining workflows to Copilot aiding code development, O3XO leverages and explores cutting-edge technologies tailored to specific project requirements.",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Conversational AI for web interfaces",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The potential of conversational AI in driving personalized web experiences is enormous. By enabling seamless interactions and hyper-personalization, AI revolutionizes traditional website interfaces, offering tailored experiences to users in a conversational experience that’s familiar to them.",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Hyper-personalized experiences",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Using the example of the home improvement decision-making process, AI streamlines complex decision-making processes. Through automated conversations and product recommendations, AI transforms cumbersome tasks into effortless experiences.",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This conversation reflects O3XO’s commitment to driving meaningful customer and employee experiences through AI-driven strategies. With a track record of successful gen AI and LLM projects, ",
+          "_key": "k0039"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "O3XO is a thought leader in CX + AI integration",
+          "_key": "k0040"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", offering holistic solutions that propel businesses toward success in an AI-driven era.",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.o3world.com/transcend/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0042",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "Listen on Apple Podcasts",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://podcasts.apple.com/us/podcast/the-disruption-is-now/id1699449926"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_srcUrl": "https://i.ytimg.com/vi_webp/o2zaibV96FA/sddefault.webp"
+      },
+      "alt": "",
+      "_key": "k0044"
+    },
+    {
+      "_type": "embed",
+      "url": "https://www.youtube.com/embed/o2zaibV96FA?v=o2zaibV96FA&list=PL3Rc7_PbSiJaZBiZxrlz-Fv6h9po7g5MF&iv_load_policy=3&rel=0&modestbranding=1&playsinline=1&autoplay=0",
+      "_key": "k0045"
+    }
+  ],
+  "seo": {
+    "description": "Discover how artificial intelligence (AI) is transforming customer interfaces and experiences as O3's Chief Innovation Officer shares insights on The Disruption is Now podcast."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:insight:nh5U9EA85"
+  }
+}

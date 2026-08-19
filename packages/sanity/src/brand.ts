@@ -44,6 +44,18 @@ export type BrandConfig = {
    */
   readonly publicDatasets: readonly string[]
   readonly collections: Readonly<Record<CollectionType, CollectionFacts>>
+  /**
+   * Whether this brand's pages print a publication date.
+   *
+   * o3xo.ai publishes none — not on an article, not in its head, not as a
+   * sitemap `lastmod` — so its migrated insights carry a **synthetic**
+   * `publishedAt` taken from their sitemap position, which is the only ordering
+   * evidence the site gives (#218, `tools/migration/src/map/framer.ts`). The
+   * value is a sort key, so a surface that drew it would assert a date nobody
+   * published: `false` is what keeps it off the page. o3's dates are WordPress's
+   * own, and its frames draw them.
+   */
+  readonly showsPublishDates: boolean
 }
 
 /** What the environment may override, read from that brand's own variables. */
@@ -60,6 +72,7 @@ type BrandFacts = {
   /** Where an unset variable lands. o3's is scratch; o3xo has only the one. */
   readonly defaultDataset: string
   readonly collections: Readonly<Record<CollectionType, CollectionFacts>>
+  readonly showsPublishDates: boolean
   /**
    * The brand's own variables, read as literal member expressions.
    *
@@ -87,6 +100,7 @@ const FACTS: Readonly<Record<Brand, BrandFacts>> = {
       insight: { prefix: '/insights', title: 'Insights' },
       caseStudy: { prefix: '/work', title: 'Work' },
     },
+    showsPublishDates: true,
     readEnv: () => ({
       projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
       dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
@@ -101,12 +115,14 @@ const FACTS: Readonly<Record<Brand, BrandFacts>> = {
     datasets: ['production'],
     publicDatasets: ['production'],
     // o3xo has no scratch dataset to fall back to, so the fallback is the one
-    // dataset it has. Nothing has been migrated into it yet.
+    // dataset it has, and it holds nothing but this pipeline's output.
     defaultDataset: 'production',
     collections: {
       insight: { prefix: '/insights', title: 'Insights' },
       caseStudy: { prefix: '/case-studies', title: 'Case studies' },
     },
+    // o3xo.ai prints no date anywhere, and its insights' dates are synthetic.
+    showsPublishDates: false,
     readEnv: () => ({
       projectId: process.env.XO_SANITY_PROJECT_ID,
       dataset: process.env.XO_SANITY_DATASET,
@@ -152,5 +168,6 @@ export function brandConfig(brand: Brand = currentBrand()): BrandConfig {
     datasets: facts.datasets,
     publicDatasets: facts.publicDatasets,
     collections: facts.collections,
+    showsPublishDates: facts.showsPublishDates,
   }
 }

@@ -51,9 +51,13 @@ function insightsHref({
  * ```
  *
  * Borrowing O3's composition is the adaptation experiment (ADR 0028 addendum).
- * The copy is not borrowed — O3's standfirst describes O3's world — so the hero
- * carries a placeholder heading and the route entry is marked provisional until
- * O3XO's insights land (#218).
+ * The copy is not borrowed — O3's standfirst describes O3's world. It is
+ * **o3xo.ai's own**, read off the index the site serves at `/insights` (#218):
+ * the heading and standfirst below are that page's two hero lines. The eyebrow
+ * is the collection's name, which is the role the frame gives it.
+ *
+ * The copy lives here rather than in a document because a collection index has
+ * none (CONTEXT.md) — the same place apps/web keeps its own.
  *
  * Two divergences from the frame, both inherited from apps/web and both still
  * true here: the chip bar draws every category that has an article rather than
@@ -71,7 +75,12 @@ export function InsightIndexView({
 
   return (
     <>
-      <CollectionHero variant="interior" eyebrow={collectionTitle} heading={collectionTitle} />
+      <CollectionHero
+        variant="interior"
+        eyebrow={collectionTitle}
+        heading="Learn what drives AI advantage"
+        subheading="Looking for firsthand knowledge on AI implementation? We’re passionate about helping organizations activate AI and want to share what we’ve learned. Explore our perspectives on practical AI strategy, industry-specific use cases, adoption challenges, and how to achieve measurable ROI from AI investments."
+      />
 
       {/* `2337:4485` — bone, 128px 96px, 48px between the filter bar and the
           grid. Unlike the Home and About Blog rows this one does not bleed

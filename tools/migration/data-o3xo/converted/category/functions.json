@@ -1,0 +1,13 @@
+{
+  "_id": "category-framer-functions",
+  "_type": "category",
+  "title": "Functions",
+  "slug": {
+    "_type": "slug",
+    "current": "functions"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:category:functions"
+  }
+}
