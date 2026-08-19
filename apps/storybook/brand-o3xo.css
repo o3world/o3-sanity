@@ -1,0 +1,73 @@
+/*
+ * O3XO brand theme — a Storybook-only PROBE, not a token source of record.
+ *
+ * Every token in @o3/tailwind-config compiles its utilities to var(--color-*)
+ * (color.css is a plain @theme block), so re-pointing the variables under a
+ * brand attribute reskins every component without touching one. This file is
+ * the experiment that tests whether the shared components survive a full
+ * token swap — which parts are truly semantic, and which leak O3.
+ *
+ * VALUES ARE READ FROM THE O3XO UI KIT (G6M2gu5qKFvhGxwj3W365b), the "↳ Color"
+ * canvas 4214:2932 — swatch names in the comments are the kit's own — with the
+ * action red confirmed against the Button set (4405:6386: every solid variant
+ * fills #DC2626). The kit sets type in Figtree, so no font override is needed.
+ * When XO gets a real token package these move there and inherit the
+ * provenance rule theme.css states.
+ *
+ * Two roles the kit answers differently than O3's vocabulary expects:
+ *   - XO has a decorative accent — `orange/50` #FFBE00, the yellow all over
+ *     the kit's cards and patterns — that no O3 token role names. Left out
+ *     rather than shoehorned; it is a real vocabulary gap the two-brand
+ *     token work has to resolve.
+ *   - `bone-soft` has no XO swatch between grey/95 and white; #F9F9F9 is
+ *     interpolated and marked so.
+ *
+ * Scope: `:root[data-brand='o3xo']` — the html attribute the preview.ts Brand
+ * toolbar sets (`o3xo` is the canonical identifier, per CONTEXT.md → Brands). Element-level [data-surface='ink'] overrides (color.css)
+ * still win inside dark bands, because a section's own declaration beats an
+ * inherited one; the on-ink-* alphas are brand-neutral white and are not
+ * overridden here (the kit's `white/ 5%` / `white/ 20%` overlays agree).
+ */
+
+:root[data-brand='o3xo'] {
+  /* ── Brand ── */
+  /* `red/solid` — the kit's one action color; every solid Button fills it. */
+  --color-brand: #dc2626;
+
+  /* ── Surfaces ── */
+  --color-ink: #111827; /* `azure/11` — the dark surface and darkest text */
+  --color-ink-warm: #20252b; /* `azure/15` */
+  --color-ink-deep: #000000; /* `black/solid` */
+  --color-ink-soft: #111827;
+  --color-bone: #f3f3f3; /* `grey/95` — the light band */
+  --color-bone-soft: #f9f9f9; /* interpolated: no kit swatch between grey/95 and white */
+
+  /* ── Text on light ── */
+  --color-fg: #111827; /* `azure/11` — the White CTA button sets its label in it */
+  --color-fg-body: #4b5563; /* `azure/34` */
+  --color-fg-muted: #4b5563; /* `azure/34` */
+  --color-fg-subtle: #9ca3af; /* `azure/65` */
+  --color-fg-quiet: rgba(17, 24, 39, 0.5);
+
+  /* ── Chrome ── */
+  --color-scrim: rgba(0, 0, 0, 0.2);
+  --color-surface-muted: #e5e7eb; /* `grey/91` */
+  --color-utility: #000000;
+  --color-on-utility: #9ca3af; /* `azure/65` */
+  --color-on-utility-line: #20252b; /* `azure/15` */
+
+  /* ── Borders ── */
+  --color-line: #e5e7eb; /* `grey/91` */
+  --color-line-soft: #f3f3f3;
+
+  /* ── Gradients that carry the brand color ── */
+  --gradient-statement: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0.4) 100%);
+  /* Same two-radial shape as O3's glow, red/solid in place of the O3 red;
+   * the deep base is red/solid at ~30% toward black. */
+  --gradient-brand-glow:
+    radial-gradient(circle at 115% 24%, rgba(220, 38, 38, 0.5) 0%, rgba(0, 0, 0, 0) 100%),
+    radial-gradient(circle at 0% 0%, rgba(105, 15, 15, 1) 0%, rgba(0, 0, 0, 1) 65%);
+  --gradient-surface-wash: linear-gradient(0deg, #ffffff 0%, #f3f3f3 100%);
+  --gradient-surface-wash-angled: linear-gradient(188deg, #ffffff 85%, #f3f3f3 100%);
+  --gradient-surface-wash-warm: linear-gradient(180deg, #f9f9f9 0%, #f3f3f3 100%);
+}

@@ -1,7 +1,31 @@
 import '../globals.css'
+import { createElement } from 'react'
 import type { Preview } from '@storybook/nextjs-vite'
 
 const preview: Preview = {
+  // Brand rides on <html data-brand>, where brand-xo.css re-points the theme's
+  // custom properties — the documentElement rather than a wrapper div, so
+  // portalled content (Sheet, dialogs) is themed too. Idempotent per render.
+  decorators: [
+    (Story, context) => {
+      document.documentElement.dataset.brand = String(context.globals.brand ?? 'o3')
+      return createElement(Story)
+    },
+  ],
+  globalTypes: {
+    brand: {
+      description: 'Brand token set',
+      toolbar: {
+        title: 'Brand',
+        icon: 'paintbrush',
+        items: [
+          { value: 'o3', title: 'O3' },
+          { value: 'o3xo', title: 'O3XO' },
+        ],
+        dynamicTitle: true,
+      },
+    },
+  },
   parameters: {
     /**
      * Every story is axe-scanned when the `stories` layer runs (ADR 0004), and
@@ -35,11 +59,13 @@ const preview: Preview = {
     },
     // The three-surface system as a toolbar: stories set
     // `globals: { backgrounds: { value: 'ink' } }` to pin a surface.
+    // Values are var() so the surface follows whichever brand token set the
+    // Brand toolbar has active, instead of duplicating one brand's hexes.
     backgrounds: {
       options: {
-        white: { name: 'White', value: '#ffffff' },
-        bone: { name: 'Bone', value: '#efeeec' },
-        ink: { name: 'Ink', value: '#030303' },
+        white: { name: 'White', value: 'var(--color-white)' },
+        bone: { name: 'Bone', value: 'var(--color-bone)' },
+        ink: { name: 'Ink', value: 'var(--color-ink-deep)' },
       },
     },
     // Sidebar ordering follows the layered architecture: the extracted design
@@ -73,6 +99,7 @@ const preview: Preview = {
   },
   initialGlobals: {
     backgrounds: { value: 'white' },
+    brand: 'o3',
   },
 }
 

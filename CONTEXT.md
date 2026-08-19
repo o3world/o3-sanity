@@ -2,6 +2,13 @@
 
 Terms resolved so far. Use these exact words in schema names, code, issues, and copy discussions. (Decision detail lives in the wayfinder tickets and `docs/adr/`.)
 
+## Brands
+
+- **Brand** — one of the two site identities this repo ships, named by its canonical identifier: **`o3`** (o3world.com) and **`o3xo`** (the O3XO property the utility nav links to). One word per brand, everywhere — `o3xo`, never a bare `xo` — in app dirs, package names, the `data-brand` attribute, and Sanity project naming. The brands share the content model (documents, shared objects, knobs, routing) and diverge at the **block roster**, the **token package**, and the **site chrome**; each has its own Sanity project with its own members ([ADR 0028](docs/adr/0028-o3xo-is-a-second-app-in-the-monorepo.md)).
+- **Surface names are roles, not colors.** `white | bone | ink` name the band roles every section block paints; each brand's token package decides what a role looks like (`bone` is O3's warm `#F1F0EC` and O3XO's cool light grey). Studio knob _titles_ may be re-labelled per brand; the stored values never vary.
+- **`o3xo` ships at o3xo.ai** (eventually — a Framer site holds the domain today, and its sitemap is the launch redirect audit's input). Collection **prefixes are per-brand**: `o3xo` keeps `/insights` and uses `/case-studies` where `o3` uses `/work`.
+- **Voice is per-brand; the argument is not.** Each brand configures its own voice (persona, vocabulary — `o3world-copy` is `o3`'s home). The authoring plugin's references — argument, composition, style floor, reader test — are brand-agnostic and shared.
+
 ## Content types
 
 - **Insight** — a blog article. The canonical term (not "post", not "perspective" — that was the name until [ADR 0017](docs/adr/0017-the-collection-is-an-insight.md), and it survives only in `data/extract/`, which keeps WordPress's vocabulary). URL: `/insights/{slug}`; WordPress serves `/perspectives/{slug}` and 301s. Body is **Portable Text** with a small closed set of inline objects — never section blocks. 272 migrate from WordPress.
@@ -34,7 +41,7 @@ Not everything with a URL is a document. Four **route kinds** exist; the glossar
 - **Singleton** — a fixed route backed by one known document (the homepage).
 - **Collection index** — the paginated landing page for a Collection (`/work`, `/insights`). **It has no backing document**: the entry is a query plus static SEO, so there is nothing in Studio to edit and nothing for the migration pipeline to own. This is the one route kind that breaks the document-per-URL assumption, which is why it gets a name.
 
-A **Collection** is a document type with a URL prefix and a collection index. Two exist — Insight (`/insights`) and Case Study (`/work`, whose display name is **Work**). `COLLECTION_PREFIXES` is the single source of the prefix.
+A **Collection** is a document type with a URL prefix and a collection index. Two exist — Insight (`/insights`) and Case Study (`/work`, whose display name is **Work**). `COLLECTION_PREFIXES` is the single source of the prefix, and it is **per-brand** ([ADR 0028](docs/adr/0028-o3xo-is-a-second-app-in-the-monorepo.md)): `o3xo` keeps `/insights` and serves case studies at `/case-studies`, with display name "Case studies".
 
 **"Listing" is the section block; "index" is the route.** `listingSection` projects page cards by `pageType` from inside a Page. A collection index is an entire route with pagination and no document. They share nothing but a word, so they no longer share one: the route kind is `index` (`caseStudyIndex`, `insightIndex`, `CaseStudyIndexView`).
 
@@ -133,35 +140,35 @@ Three rules that are easy to get wrong:
 
 Closed vocabulary. If the field you want isn't here and isn't obviously domain-specific (`industryDetail`, `narrativeHeadline`, `railLabel`), you're probably reaching for a synonym of something that is.
 
-| Field             | Meaning                                                          | Don't use for it                                     |
-| ----------------- | ---------------------------------------------------------------- | ---------------------------------------------------- |
-| `title`           | A document's own name; the `slug` source                         | Never on a block — blocks use `heading`              |
-| `slug`            | URL segment(s); required on every routable type                  | —                                                    |
-| `eyebrow`         | Small label above a heading                                      | `kicker` (reserved: `chapter.kicker`), `label`       |
-| `heading`         | A block's primary display text                                   | `title`, `headline`                                  |
-| `subheading`      | The secondary line under a `heading`                             | `subtitle`, `deck`                                   |
-| `body`            | Long-form prose (`text` or `bodyText`)                           | `content`, `description`, `copy`                     |
-| `excerpt`         | Short summary shown on cards and listings                        | `summary`, `intro`, `teaser`                         |
-| `label`           | Short UI string on a leaf object                                 | `name`, `text`                                       |
-| `note`            | Quieter secondary line (the "Best when…" line)                   | `caption` (reserved: `figure.caption`)               |
-| `media`           | A `figure` on a block                                            | `image` — that's the raw asset field inside `figure` |
-| `heroMedia`       | A document's lead `figure`                                       | `featuredImage`, `banner`                            |
-| `button`          | A single button (type `button`), the form's submit included      | `cta`, `link`, `action`, `submitLabel`               |
-| `anchor`          | The name a band is given, and the name a button jumps to; no `#` | `id`, `hash`, `fragment`, `jumpTo`                   |
-| `alignment`       | Where a row sits in the space it was given (`buttonGroup`)       | `align`, `justify`, `position`, `float`              |
-| `mark`            | The dotted circle beside an item (type `mark`)                   | `icon`, `disc`, `orb` — `orb` is one of its `kind`s  |
-| `icon`            | The glyph a button trails, from a curated set (`button`)         | `glyph`, `symbol`, `arrow`                           |
-| `date`            | When a leaf object's thing happens (the Live MON / DD marker)    | `publishedAt` — that's a document's publication time |
-| `name`            | A person's or organization's real-world name                     | Anything that isn't a proper noun                    |
-| `surface`         | `white \| bone \| ink` — injected by `defineSectionBlock`        | Never hand-author it                                 |
-| `reasons`         | The form's "Reason" options, in shown order (`formSection`)      | `options`, `choices`                                 |
-| `consentLabel`    | The opt-in checkbox's words; empty = no checkbox (`formSection`) | `consent`, `optIn`                                   |
-| `story`           | A structured document's interleaved narrative array              | `sections` (a page's flat composition), `chapters`   |
-| `details`         | Term/description rows under a body (`chapter.details`)           | `specs`, `meta`, a second `body`                     |
-| `utilityNavItems` | The brand-property strip's links (`siteSettings`)                | `properties`, `brandLinks`, a second `footerGroup`   |
-| `background`      | A brief's raw material — research, notes, transcripts            | `research`, `context`, `notes`                       |
-| `instructions`    | A brief's directives for how to write the piece                  | `prompt`, `directions`, `guidelines`                 |
-| `links`           | A brief's external source URLs                                   | `sources`, `urls`, a second `references`             |
+| Field             | Meaning                                                                                             | Don't use for it                                     |
+| ----------------- | --------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| `title`           | A document's own name; the `slug` source                                                            | Never on a block — blocks use `heading`              |
+| `slug`            | URL segment(s); required on every routable type                                                     | —                                                    |
+| `eyebrow`         | Small label above a heading                                                                         | `kicker` (reserved: `chapter.kicker`), `label`       |
+| `heading`         | A block's primary display text                                                                      | `title`, `headline`                                  |
+| `subheading`      | The secondary line under a `heading`                                                                | `subtitle`, `deck`                                   |
+| `body`            | Long-form prose (`text` or `bodyText`)                                                              | `content`, `description`, `copy`                     |
+| `excerpt`         | Short summary shown on cards and listings                                                           | `summary`, `intro`, `teaser`                         |
+| `label`           | Short UI string on a leaf object                                                                    | `name`, `text`                                       |
+| `note`            | Quieter secondary line (the "Best when…" line)                                                      | `caption` (reserved: `figure.caption`)               |
+| `media`           | A `figure` on a block                                                                               | `image` — that's the raw asset field inside `figure` |
+| `heroMedia`       | A document's lead `figure`                                                                          | `featuredImage`, `banner`                            |
+| `button`          | A single button (type `button`), the form's submit included                                         | `cta`, `link`, `action`, `submitLabel`               |
+| `anchor`          | The name a band is given, and the name a button jumps to; no `#`                                    | `id`, `hash`, `fragment`, `jumpTo`                   |
+| `alignment`       | Where a row sits in the space it was given (`buttonGroup`)                                          | `align`, `justify`, `position`, `float`              |
+| `mark`            | The dotted circle beside an item (type `mark`)                                                      | `icon`, `disc`, `orb` — `orb` is one of its `kind`s  |
+| `icon`            | The glyph a button trails, from a curated set (`button`)                                            | `glyph`, `symbol`, `arrow`                           |
+| `date`            | When a leaf object's thing happens (the Live MON / DD marker)                                       | `publishedAt` — that's a document's publication time |
+| `name`            | A person's or organization's real-world name                                                        | Anything that isn't a proper noun                    |
+| `surface`         | Band surface **role** (`white \| bone \| ink`), painted per brand; injected by `defineSectionBlock` | Never hand-author it                                 |
+| `reasons`         | The form's "Reason" options, in shown order (`formSection`)                                         | `options`, `choices`                                 |
+| `consentLabel`    | The opt-in checkbox's words; empty = no checkbox (`formSection`)                                    | `consent`, `optIn`                                   |
+| `story`           | A structured document's interleaved narrative array                                                 | `sections` (a page's flat composition), `chapters`   |
+| `details`         | Term/description rows under a body (`chapter.details`)                                              | `specs`, `meta`, a second `body`                     |
+| `utilityNavItems` | The brand-property strip's links (`siteSettings`)                                                   | `properties`, `brandLinks`, a second `footerGroup`   |
+| `background`      | A brief's raw material — research, notes, transcripts                                               | `research`, `context`, `notes`                       |
+| `instructions`    | A brief's directives for how to write the piece                                                     | `prompt`, `directions`, `guidelines`                 |
+| `links`           | A brief's external source URLs                                                                      | `sources`, `urls`, a second `references`             |
 
 The lexicon governs **editorial** fields — the ones an author fills in. Machine-written fields are outside it, and are `readOnly` in Studio: the hidden `migration` provenance object (`sourceId`, `extractedAt`, `locked`, `figmaNode`, `provisional`, `provisionalNote`) names pipeline state, and `brief.key` / `brief.sourcePath` name where a synced brief came from and what queries it. A brief carries one more machine-written set — `stage`, `nextStep`, `thesis`, `readerQuestions`, `outline`, `draft`, `verdict`, `decisions`, `gaps`, `pieceId` — one field per artifact an authoring stage produces, each patched by the stage that owns it. All are provenance or run state, not content.
 
@@ -199,8 +206,8 @@ Fix on sight; don't imitate. As of 2026-08-01 the rules above are the target, an
 
 ## Design language
 
-- **Figma is the design source of record** (map #33) — the "Design Concept" section of _O3DX: Visual exploration_, at **1440 / 402**. It outranks `prototype/`, which is retired (#48). Read [`docs/agents/figma.md`](docs/agents/figma.md) before opening the file.
-- Five neutrals (white / bone / ink / ink-warm / ink-deep), brand red almost always arriving as a **gradient** rather than a flat fill, Figtree at weight **400**, square corners. Tokens and their node references: `packages/tailwind-config`.
+- **Figma is the design source of record** (map #33), per brand: for `o3`, the "Design Concept" section of _O3DX: Visual exploration_, at **1440 / 402**; for `o3xo`, **composition follows O3's canonical frames for now** — the first step is an adaptation experiment (ADR 0028 addendum), and the _O3XO: UI kit_ file (`G6M2gu5qKFvhGxwj3W365b`) is the source of **brand values** (tokens, logo, copy) rather than of composition until the delta is evaluated. Within that file only three regions are trustworthy: the Website Components canvases (Buttons, Cards, Navigation, Quotes, …), the **Layouts** canvas for page-level big picture, and the Styles canvases (↳ Typography / Color / Layouts / Effects) for primitives; `Templates (Old)`, `Asset Dump`, `Admin`, `Utilities` and the rest are working material — ignore them. Figma outranks `prototype/`, which is retired (#48). Read [`docs/agents/figma.md`](docs/agents/figma.md) before opening either file.
+- The `o3` visual language: five neutrals (white / bone / ink / ink-warm / ink-deep), brand red almost always arriving as a **gradient** rather than a flat fill, Figtree at weight **400**, square corners. Tokens and their node references: `packages/tailwind-config`. The `o3xo` language — black + starfield, yellow accent cards, red reserved for actions, Figtree — gets its own token package when `apps/o3xo` lands.
 - **Responsive is a renderer concern** — the frames are endpoints, not breakpoints (ADR 0006). No per-breakpoint schema field.
 - **Motion is the one thing Figma cannot supply**, so `packages/ui` carries it: `OrbitalSphere` (the wireframe globe), `Reveal`, and `MaskedLines`. The orbital vocabulary has left `prototype/`.
 - **Orbital / band** — the two compositions the sphere appears in, and the `heroSection.variant` enum that names them. `orbital` is the Home opener (full sphere band under a bone dome); `band` is the interior-page hero (a shallow ink-warm strip with an eyebrow), shared with every collection index as `CollectionHero`.
