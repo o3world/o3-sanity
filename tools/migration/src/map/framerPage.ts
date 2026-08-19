@@ -44,10 +44,6 @@ import type { PersonDoc } from './person'
  * - **The homepage's case-study showcase**, for the same reason and the same
  *   ticket. `caseShowcaseSection` renders only what the referenced documents
  *   say, so there is nothing to write here in the meantime.
- * - **The approach page's FAQ.** Framer's accordion serves the *first* item's
- *   answer under all eight questions in the HTML, so seven of the eight answers
- *   are not in the source; and `docs/specs/schema.md` holds the line against an
- *   accordion block until a designed page needs one.
  * - **Hero background photography.** Every section block now carries
  *   `backgroundMedia` (#239), so the field is no longer what is missing: the
  *   source is. Framer serves the hero's backdrop as a video layer — the kit
@@ -776,15 +772,71 @@ function composeApproach(
   )
   if (process) sections.push(process)
 
-  const questions = faq.lines.filter((line) => line.text.endsWith('?')).length
-  notes.push({
-    element: 'faq',
-    detail:
-      `dropped the "${faq.lines[0]!.text}" band and its ${questions} questions: Framer's ` +
-      'accordion serves the first answer under every question, so only one of the answers is ' +
-      'in the served HTML, and the schema has no accordion block',
-  })
+  const band = faqBand(faq, key, notes)
+  if (band) sections.push(band)
   return sections
+}
+
+/**
+ * The FAQ band (#248) — the kit draws it on a photograph (`4406:7288`), and
+ * `faqSection` is on O3XO's half of the section roster.
+ *
+ * The questions are the band's own lines and the answers come from the page's
+ * JavaScript, which the extract reads because the served HTML does not carry
+ * them (`lib/framerAccordion.ts`). No answers means the module moved under that
+ * parse: the band is dropped rather than published with the questions bare,
+ * which is what #220 did for the whole band.
+ */
+function faqBand(
+  band: FramerBand,
+  key: (name: string) => string,
+  notes: ConversionIssue[],
+): Record<string, unknown> | null {
+  const [heading, subheading] = band.lines as [FramerLine, FramerLine]
+  if (!band.faq?.length) {
+    notes.push({
+      element: 'faq',
+      detail:
+        `dropped the "${heading.text}" band: its answers are not in the served HTML and no ` +
+        'page module builds them either, so there is nothing to publish under the questions',
+    })
+    return null
+  }
+
+  // The band's backdrop, by the rule the industries band uses: a picture tagged
+  // with the band's own heading is the band's, not an item's.
+  const backdrop = band.images.find((image) => image.near === heading.text)
+  notes.push({
+    element: 'faq answers',
+    detail:
+      'the answers arrive as plain prose — `question.body` is text, so an answer that carries ' +
+      'an inline link on the live site keeps its words and loses its destination',
+  })
+
+  return {
+    _type: 'faqSection',
+    _key: key('faq'),
+    surface: 'ink',
+    ...(backdrop
+      ? {
+          backgroundMedia: {
+            _type: 'backgroundMedia',
+            image: { _type: 'image', _srcUrl: backdrop.url },
+            // No tint, for the reason the industries band declares none: the
+            // picture is already O3XO's near-black starfield.
+            tint: 'none',
+          },
+        }
+      : {}),
+    heading: heading.text,
+    ...(subheading ? { subheading: subheading.text } : {}),
+    questions: band.faq.map((row) => ({
+      _type: 'question',
+      _key: key(idKey(row.question).slice(0, 40)),
+      heading: row.question,
+      body: row.answer,
+    })),
+  }
 }
 
 function composeContact(
@@ -926,7 +978,7 @@ export function mapFramerPage(
         'Migrated from o3xo.ai band by band into O3’s block roster (#220). Provisional because ' +
         'the composition is a translation rather than a design: the hero carries no background ' +
         'photograph, curated case-study and insight cards are left to be derived, and anything ' +
-        'the source does not serve — the FAQ answers — is absent rather than ' +
+        'the source does not serve is absent rather than ' +
         'invented. Cleared when the adaptation delta is reviewed and the page is composed ' +
         'against O3XO’s own design.',
     },

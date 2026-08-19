@@ -17,7 +17,7 @@ import {
   railPanelsSectionKnobs,
 } from '@o3/sanity/knobs'
 import { BUTTON_ICONS } from '@o3/ui'
-import { BLOCK_ARRAYS, SECTION_BLOCKS } from '@o3/sanity/schemas/registry'
+import { BLOCK_ARRAYS, sectionBlocksFor } from '@o3/sanity/schemas/registry'
 
 import { buildSingletonRoute } from '@o3/content-runtime/routes'
 import { home } from '@/content/documents/page/entry'
@@ -132,7 +132,10 @@ describe('what the resolver attaches, and where', () => {
       props: { blockArrays: Record<string, readonly string[]> }
     }
     expect(resolved.props.blockArrays).toBe(BLOCK_ARRAYS)
-    expect(resolved.props.blockArrays['page.sections']).toEqual([...SECTION_BLOCKS])
+    // O3'S ROSTER, not every registered block. The section tier is a core list
+    // plus per-brand extensions (ADR 0028), and this app's canvas offers the
+    // blocks this app can render — o3xo's `faqSection` is not among them.
+    expect(resolved.props.blockArrays['page.sections']).toEqual([...sectionBlocksFor('o3')])
   })
 })
 
@@ -603,7 +606,7 @@ describe('at most one menu open, and none until asked', () => {
  * schema's real member list.
  *
  * The claim under test is the derived one. `BLOCK_ARRAYS['page.sections']` is
- * `SECTION_BLOCKS`, the schema's own `of:` is built from the same entry, and
+ * this brand's roster, the schema's own `of:` is built from the same entry, and
  * every block declares a placeholder — so the rows the menu draws and the
  * members the form offers are the same set by construction, and the assertions
  * below compare the menu against the registry rather than against a list
@@ -651,12 +654,12 @@ describe('what the knob menu can add beside the subject', () => {
     // The four beside them are what this hero already had — duplicate, remove,
     // and the two moves a first-of-two section can make.
     const rows = html.match(/data-testid="canvas-menu-item-action"/g) ?? []
-    expect(rows).toHaveLength(SECTION_BLOCKS.length * 2 + 4)
+    expect(rows).toHaveLength(sectionBlocksFor('o3').length * 2 + 4)
   })
 
   it('names each row with the block’s own title, not its type', () => {
     const html = hero()
-    for (const type of SECTION_BLOCKS) {
+    for (const type of sectionBlocksFor('o3')) {
       expect(html, type).toContain(`>${BLOCK_KNOBS[type]!.title}</button>`)
     }
     expect(html).not.toContain('heroSection<')

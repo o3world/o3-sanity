@@ -266,5 +266,9 @@
   "https://framerusercontent.com/images/1e4Lt5px3pRGJLXB5fC4gqt68M.png": {
     "sha256": "f3917ad78e4cd098e4d0c04ce4d7bbef91186b7a",
     "assetId": "image-f3917ad78e4cd098e4d0c04ce4d7bbef91186b7a-2880x1472-png"
+  },
+  "https://framerusercontent.com/images/bvhrcj8dxlCVF8qGvOcECDSSZI.png": {
+    "sha256": "b01ce05d97438d866ac3b480aae1e2a32eefaa4d",
+    "assetId": "image-b01ce05d97438d866ac3b480aae1e2a32eefaa4d-2880x1448-png"
   }
 }

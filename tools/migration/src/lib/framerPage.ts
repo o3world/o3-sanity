@@ -1,5 +1,6 @@
 import { JSDOM } from 'jsdom'
 
+import type { FramerAccordionRow } from './framerAccordion'
 import { SOURCE, assetUrl } from './framer'
 
 /**
@@ -70,6 +71,52 @@ export interface FramerBand {
   readonly lines: readonly FramerLine[]
   readonly links: readonly FramerLink[]
   readonly images: readonly FramerImage[]
+  /**
+   * The band's accordion rows, where it is one.
+   *
+   * The one thing on these pages the DOM does not carry: Framer draws every row
+   * closed and ships the answers as props in the page module, so the questions
+   * are above in `lines` and the answers arrive from `lib/framerAccordion.ts`
+   * through `withAccordionAnswers`. Absent on every other band, and absent here
+   * too when the module has moved under the parse.
+   */
+  readonly faq?: readonly FramerAccordionRow[]
+}
+
+/**
+ * Whether this page has an accordion whose answers have not been read yet.
+ *
+ * Two questions is the floor: one line ending in a question mark is a headline
+ * asking something, and several in one band is the shape only an accordion has.
+ * The extractor asks this before it goes looking for the page's JavaScript, so
+ * the ten pages without one cost no extra requests.
+ */
+export function needsAccordionAnswers(page: FramerPage): boolean {
+  return page.bands.some(
+    (band) => !band.faq && band.lines.filter((line) => line.text.endsWith('?')).length >= 2,
+  )
+}
+
+/**
+ * The page with each accordion row filed under the band that asks it.
+ *
+ * A band claims the rows whose question it already renders, which is the only
+ * join available: the module knows what the rows say and the DOM knows where
+ * they sit, and neither knows both.
+ */
+export function withAccordionAnswers(
+  page: FramerPage,
+  rows: readonly FramerAccordionRow[],
+): FramerPage {
+  if (rows.length === 0) return page
+  return {
+    ...page,
+    bands: page.bands.map((band) => {
+      const asked = new Set(band.lines.map((line) => line.text))
+      const faq = rows.filter((row) => asked.has(row.question))
+      return faq.length > 0 ? { ...band, faq } : band
+    }),
+  }
 }
 
 /** The site chrome, which is one record shared by every page (see `parseChrome`). */

@@ -1,10 +1,16 @@
+import { BRANDS, type Brand } from '../../brand'
+
 /**
  * The schema-free block registry: single source of block membership. A block
- * that isn't listed here cannot be defined (the factories throw), and the web
+ * that isn't listed here cannot be defined (the factories throw), and each
  * app's BLOCK_REGISTRY is compile-checked against the generated types derived
  * from these schemas — so schema and renderers cannot drift apart.
+ *
+ * The section tier is **a core list plus per-brand extensions** (ADR 0028).
+ * Both brands render the core; a brand's own list is what its design asks for
+ * and the other brand's app has no renderer for.
  */
-export const SECTION_BLOCKS = [
+export const CORE_SECTION_BLOCKS = [
   'heroSection',
   'logoWallSection',
   'caseShowcaseSection',
@@ -23,6 +29,35 @@ export const SECTION_BLOCKS = [
   'listingSection',
 ] as const
 
+/**
+ * What each brand adds to the core roster.
+ *
+ * An entry here is a claim about **one brand's design**, not a staging area: a
+ * block belongs in the core list the moment both brands draw it, and moving it
+ * there is the promotion ADR 0028 already describes for components. Keep the
+ * lists short: a roster of well-known blocks beats two brands' worth of
+ * half-known ones.
+ */
+export const BRAND_SECTION_BLOCKS = {
+  o3: [],
+  /** `faqSection` — the kit's FAQ Accordion (`4406:7288`), which O3 draws nowhere (#248). */
+  o3xo: ['faqSection'],
+} as const satisfies Readonly<Record<Brand, readonly string[]>>
+
+/**
+ * Every section block in the content model, core and brand alike.
+ *
+ * This is the list the factories check, the schema registers and typegen
+ * extracts — one model with one typegen, which ADR 0028 keeps as the thing the
+ * brands may not fork. Which of them a given brand *renders* is
+ * `sectionBlocksFor` below.
+ */
+export const SECTION_BLOCKS = [
+  ...CORE_SECTION_BLOCKS,
+  ...BRAND_SECTION_BLOCKS.o3,
+  ...BRAND_SECTION_BLOCKS.o3xo,
+] as const
+
 export const BASE_BLOCKS = [
   'richText',
   'figure',
@@ -35,6 +70,43 @@ export const BASE_BLOCKS = [
 
 export type SectionBlockName = (typeof SECTION_BLOCKS)[number]
 export type BaseBlockName = (typeof BASE_BLOCKS)[number]
+
+/**
+ * One brand's section roster as a type — core plus that brand's own.
+ *
+ * This is what an app's block bindings are checked against, and it is the whole
+ * enforcement of "an O3XO-only block never forces a renderer into the O3 app":
+ * binding `faqSection` in `apps/web` is a type error at the array's `satisfies`
+ * clause, and omitting it in `apps/o3xo` is one at the record's.
+ */
+export type BrandSectionBlockName<B extends Brand> =
+  (typeof CORE_SECTION_BLOCKS)[number] | (typeof BRAND_SECTION_BLOCKS)[B][number]
+
+/** One brand's section roster as a list — core plus that brand's own. */
+export function sectionBlocksFor(brand: Brand): readonly SectionBlockName[] {
+  return [...CORE_SECTION_BLOCKS, ...BRAND_SECTION_BLOCKS[brand]]
+}
+
+/**
+ * The roster **this process** builds the schema from.
+ *
+ * `NEXT_PUBLIC_BRAND` names one app, and an app's Studio should offer the
+ * blocks its site can render and no others. Unset means every brand, which is
+ * what schema extraction wants: `pnpm typegen` runs from `packages/sanity` with
+ * no brand and has to see the whole model, because the generated types are one
+ * file both apps read. So this is deliberately not `currentBrand()`, whose
+ * unset answer is `o3`.
+ */
+export function rosterSectionBlocks(): readonly SectionBlockName[] {
+  const named = process.env.NEXT_PUBLIC_BRAND
+  if (!named) return SECTION_BLOCKS
+  if (!(BRANDS as readonly string[]).includes(named)) {
+    throw new Error(
+      `NEXT_PUBLIC_BRAND="${named}" is not a brand. Use one of: ${BRANDS.join(', ')}.`,
+    )
+  }
+  return sectionBlocksFor(named as Brand)
+}
 
 /**
  * WHICH ARRAYS HOLD BLOCKS, AND WHICH BLOCKS EACH HOLDS — the one declaration
@@ -50,8 +122,10 @@ export type BaseBlockName = (typeof BASE_BLOCKS)[number]
  * points at the registry above, so registering a block makes it insertable
  * everywhere its tier belongs and no second list has to hear about it. The
  * **arrays** are authored, because "this array holds blocks" is a fact about
- * one field and there is nothing to derive it from — but the direction is the
- * one ADR 0020 argues for: `page.sections`, `caseStudy.story` and
+ * one field and there is nothing to derive it from. The two section arrays take
+ * the **running brand's** roster (ADR 0028), so an app's form and its insert
+ * menu offer the blocks that app can render and nothing else. The direction is
+ * still the one ADR 0020 argues for: `page.sections`, `caseStudy.story` and
  * `layoutSection.items` all build their `of:` from HERE, so the schema is the
  * mirror rather than the source, and `blockArrays.test.ts` catches a
  * block-bearing array that forgot to say so.
@@ -69,7 +143,7 @@ export type BaseBlockName = (typeof BASE_BLOCKS)[number]
  * declared members may be.
  */
 export const BLOCK_ARRAYS = {
-  'page.sections': SECTION_BLOCKS,
+  'page.sections': rosterSectionBlocks(),
   /**
    * `story` also takes `chapter` (ADR 0018), which is a shared object rather
    * than a block. It is added beside these members in `caseStudy.ts` and is
@@ -78,7 +152,7 @@ export const BLOCK_ARRAYS = {
    * is a registry fact — `chapter` is in neither block list — and not a
    * denylist someone has to keep in step.
    */
-  'caseStudy.story': SECTION_BLOCKS,
+  'caseStudy.story': rosterSectionBlocks(),
   /**
    * Unreachable from the canvas, and staying that way (ADR 0022). This is the
    * repo's only polymorphic array below a block root, which is the one shape

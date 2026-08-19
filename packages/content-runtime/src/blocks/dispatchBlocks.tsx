@@ -23,7 +23,7 @@ import { ANCHOR_OFFSET_CLASS, sectionAnchors } from './anchors'
  * `screenGridSection`) build their own `<section>` rather than use the shell,
  * because they bleed past the gutter or paint a gradient. Routing band
  * attribution through the shell would attribute eleven blocks and silently skip
- * five. The seam attributes all sixteen identically, and `@o3/ui` keeps knowing
+ * five. The seam attributes them all identically, and `@o3/ui` keeps knowing
  * nothing about Sanity. The attribute is inert outside the Presentation
  * runtime.
  *
@@ -48,7 +48,7 @@ export function renderDispatchedBlocks(opts: {
 }): ReactNode[] {
   const { blocks, lookup, Placeholder, documentId, documentType, fieldPath = 'sections' } = opts
   // The seam owns the anchor for the same reason it owns band attribution:
-  // five of the sixteen blocks build their own `<section>` rather than use the
+  // five blocks build their own `<section>` rather than use the
   // shell, so a jump target routed through the shell would work on eleven
   // bands and silently miss five. Resolved for the array rather than per block
   // because two bands claiming one name is only visible from here (#149).

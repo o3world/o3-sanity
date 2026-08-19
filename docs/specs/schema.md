@@ -63,7 +63,7 @@ Surfaced by #46/#47 and built against the About (`1924:5344`) and Solutions (`19
 
 - **`formSection`** — eyebrow, `heading` (req), `note`, `reasons[]` (req), `consentLabel`, `button`. The inquiry band on `/contact` (#58). Its submit is an ordinary `button` instance, so it offers everything any other button does; an empty destination is what keeps it a control. **Its input set is code, not schema** — the six fields are transcribed from the Gravity Form 1 the live site serves, and `reasons` is the only part an editor owns ([ADR 0014](../adr/0014-form-fields-are-code-form-copy-is-content.md)). ⚠️ **No submission handler and no destination exist**, so the renderer disables its submit and says so on the page; #58 stays open for both.
 
-No FAQ/accordion/tabs until a designed page needs them.
+No tabs until a designed page needs them. **`faqSection`** is the exception the rule anticipated: the O3XO kit draws an FAQ accordion on a photograph (`4406:7288`) and `/about/approach` carries one, so the block exists on **that brand's roster only** (#248, ADR 0028) — heading, subheading, `questions[]` ({`heading` (req), `body` (req)}).
 
 ### Base tier
 

@@ -145,13 +145,13 @@ the shared chrome's contract for as long as a brand uses it.
 
 ### People (`4404:5648`), Quotes (`4404:4189`), Accordion (`310:1977`)
 
-| Figma node                        | Node         | Variant axes       | Code target         | Status                                                                   |
-| --------------------------------- | ------------ | ------------------ | ------------------- | ------------------------------------------------------------------------ |
-| `People Cards`                    | `4404:5726`  | 4 people (content) | `PersonGridSection` | Needs `person.bio` (#237)                                                |
-| `Quote Block`                     | `4404:4920`  | —                  | `QuoteSection`      | Built                                                                    |
-| `Header Pill`                     | `4414:8100`  | —                  | **None**            | ❌ Missing — one of #224's six. #237 story 7                             |
-| `Slide Quote`                     | `4438:12259` | —                  | **None**            | A deck slide component. Out of scope (#224)                              |
-| `AI Implementation FAQ Accordion` | `4404:4919`  | —                  | **None**            | ❌ Missing — one of #224's six, and the kit's only interactive component |
+| Figma node                        | Node         | Variant axes       | Code target         | Status                                                                  |
+| --------------------------------- | ------------ | ------------------ | ------------------- | ----------------------------------------------------------------------- |
+| `People Cards`                    | `4404:5726`  | 4 people (content) | `PersonGridSection` | Needs `person.bio` (#237)                                               |
+| `Quote Block`                     | `4404:4920`  | —                  | `QuoteSection`      | Built                                                                   |
+| `Header Pill`                     | `4414:8100`  | —                  | **None**            | ❌ Missing — one of #224's six. #237 story 7                            |
+| `Slide Quote`                     | `4438:12259` | —                  | **None**            | A deck slide component. Out of scope (#224)                             |
+| `AI Implementation FAQ Accordion` | `4404:4919`  | —                  | `FaqSection` (o3xo) | Built (#248). Drawn closed only; the open state is invented from tokens |
 
 `Quote Section` (`4404:5107`) is the quote band drawn twice; the Layouts copy (`4406:6954`) is the
 one tracked.
@@ -180,7 +180,7 @@ was the single missing affordance blocking six of them; `backgroundMedia` landed
 | `Quote`                  | `4406:6954`  | `QuoteSection`        | Wants the header pill as its eyebrow (#237)                                           |
 | `Text Cards`             | `4406:7179`  | **None**              | Blocked on the Yellow Text Card                                                       |
 | `People`                 | `4406:7226`  | `PersonGridSection`   | Wants `person.bio`                                                                    |
-| `FAQ`                    | `4406:7288`  | **None**              | Accordion on a photograph. Blocked on `faqSection`                                    |
+| `FAQ`                    | `4406:7288`  | `FaqSection` (o3xo)   | Built (#248) — the accordion on its photograph, through `backgroundMedia`             |
 | `Action Cards`           | `4406:7491`  | **None**              | Action icon cards on a cityscape. Candidate: `FeatureGridSection` + `backgroundMedia` |
 | `3 Cards`                | `4406:7560`  | **None**              | Three icon cards, flat. Candidate: `FeatureGridSection`                               |
 | `Insight Gallery`        | `4406:7594`  | `ListingSection`      | Built                                                                                 |

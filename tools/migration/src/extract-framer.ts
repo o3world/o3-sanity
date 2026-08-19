@@ -32,7 +32,15 @@ import {
   parseInsight,
   sitemapPosition,
 } from './lib/framer'
-import { pagePath, pagePathsInSitemap, parsePage } from './lib/framerPage'
+import { parseAccordion, pageModuleUrls, type FramerAccordionRow } from './lib/framerAccordion'
+import {
+  needsAccordionAnswers,
+  pagePath,
+  pagePathsInSitemap,
+  parsePage,
+  withAccordionAnswers,
+  type FramerPage,
+} from './lib/framerPage'
 import { MANIFEST_PATH, recordRun } from './lib/manifest'
 import { EXTRACT_DIR, writeJson } from './lib/paths'
 
@@ -94,6 +102,36 @@ async function wantedPages(): Promise<string[]> {
   const all = pagePathsInSitemap(await fetchPage('/sitemap.xml'))
   console.log(`sitemap lists ${all.length} non-collection URLs`)
   return all
+}
+
+/**
+ * The accordion rows a page's own JavaScript builds, or none.
+ *
+ * The one place this extract reaches past the served HTML, and it reaches only
+ * when the HTML says there is something to reach for: Framer draws every
+ * accordion row closed and ships the answers as props, so the DOM carries the
+ * questions and one wrong paragraph (`lib/framerAccordion.ts` says why). The
+ * page names no module as its own, so the candidates are read in order until
+ * one answers — which is one extra request on the page that has an accordion
+ * and none on the ten that do not.
+ */
+async function accordionRows(
+  page: FramerPage,
+  html: string,
+  slug: string,
+): Promise<FramerAccordionRow[]> {
+  if (!needsAccordionAnswers(page)) return []
+  for (const url of pageModuleUrls(html)) {
+    const response = await fetch(url)
+    if (!response.ok) continue
+    const rows = parseAccordion(await response.text())
+    if (rows.length > 0) return rows
+  }
+  console.warn(
+    `  ! ${slug}: an accordion is in the markup but no page module builds one — ` +
+      'its answers stay unmigrated and the converter will say so',
+  )
+  return []
 }
 
 const startedAt = new Date().toISOString()
@@ -163,7 +201,9 @@ if (wantsPages) {
   const pageSlugs = await wantedPages()
   if (pageSlugs.length === 0) throw new Error('nothing to extract — pass --pages all|a,b')
   for (const slug of pageSlugs) {
-    const record = parsePage(await fetchPage(pagePath(slug)), slug)
+    const html = await fetchPage(pagePath(slug))
+    const page = parsePage(html, slug)
+    const record = withAccordionAnswers(page, await accordionRows(page, html, slug))
     // A multi-segment slug is one file, not a directory: `industries/construction`
     // is committed as `industries-construction.json`, so the extract tree stays
     // one flat directory per type the way `lib/corpus.ts` walks it.

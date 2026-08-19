@@ -270,6 +270,40 @@
           "alt": "",
           "near": "AI Implementation FAQ"
         }
+      ],
+      "faq": [
+        {
+          "question": "How do we start working with O3XO?",
+          "answer": "We don't build AI for AI's sake—everything starts with your business objectives. Some clients need help identifying use cases and building a roadmap, while others come with defined KPIs ready to scope. In both cases, we focus on measurable impact and ROI. You can start by taking our AI assessment."
+        },
+        {
+          "question": "Should we build or buy AI?",
+          "answer": "Building creates solutions tailored to your needs and minimizes disruption by bridging systems. Buying may fit if a tool aligns closely with your goals, but it often comes with licensing, training, and implementation costs. We’ll help you weigh the trade-offs."
+        },
+        {
+          "question": "Can AI work with our current systems?",
+          "answer": "Yes. We emphasize integration over disruption. We build solutions that connect with both legacy systems and modern SaaS. We look to meet your needs and leverage your existing technology investments as much as we can."
+        },
+        {
+          "question": "How do you define success in AI projects?",
+          "answer": "Success is tied to outcomes that matter: lower costs, greater efficiency, faster response times, or new revenue. We set clear metrics upfront and measure progress throughout."
+        },
+        {
+          "question": "Will AI replace jobs in our company?",
+          "answer": "Our focus is augmentation, not replacement. AI reduces repetitive tasks and empowers employees to focus on higher-value work, strengthening rather than shrinking your teams."
+        },
+        {
+          "question": "What investment is required to begin?",
+          "answer": "Engagements scale to your needs. We generally begin with a fixed-price AI strategy project and use case assessment, then transition to pilot development where we start with smaller projects to prove value and manage risk, then expand to larger initiatives once results are clear."
+        },
+        {
+          "question": "How soon will we see results?",
+          "answer": "Simple solutions can launch in weeks. Larger initiatives are broken into phases that deliver impact within a few months, while keeping long-term transformation on track."
+        },
+        {
+          "question": "How do you train teams on AI initiatives?",
+          "answer": "We build AI fluency across your organization. Training is tied to real use cases, rollout plans, and ongoing engagement programs to create adoption and advocacy."
+        }
       ]
     }
   ],

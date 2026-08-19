@@ -203,6 +203,21 @@ export type Slug = {
   source?: string
 }
 
+export type FaqSection = {
+  _type: 'faqSection'
+  heading?: string
+  subheading?: string
+  questions?: Array<{
+    heading?: string
+    body?: string
+    _type: 'question'
+    _key: string
+  }>
+  surface?: 'white' | 'bone' | 'ink'
+  backgroundMedia?: BackgroundMedia
+  anchor?: string
+}
+
 export type ListingSection = {
   _type: 'listingSection'
   heading?: string
@@ -727,6 +742,9 @@ export type Page = {
     | ({
         _key: string
       } & ListingSection)
+    | ({
+        _key: string
+      } & FaqSection)
   >
   briefs?: Array<
     {
@@ -834,6 +852,9 @@ export type CaseStudy = {
     | ({
         _key: string
       } & ListingSection)
+    | ({
+        _key: string
+      } & FaqSection)
   >
   deliverables?: Array<string>
   briefs?: Array<
@@ -1018,6 +1039,7 @@ export type AllSanitySchemaTypes =
   | Button
   | Industry
   | Slug
+  | FaqSection
   | ListingSection
   | ScreenGridSection
   | MediaSection
@@ -1606,6 +1628,21 @@ export type CASE_STUDY_QUERY_RESULT = {
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'molecule' | 'none' | 'orbs'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'faqSection'
+        heading?: string
+        subheading?: string
+        questions?: Array<{
+          heading?: string
+          body?: string
+          _type: 'question'
+          _key: string
+        }>
+        surface?: 'bone' | 'ink' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -2366,6 +2403,21 @@ export type PAGE_QUERY_RESULT = {
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'molecule' | 'none' | 'orbs'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'faqSection'
+        heading?: string
+        subheading?: string
+        questions?: Array<{
+          heading?: string
+          body?: string
+          _type: 'question'
+          _key: string
+        }>
+        surface?: 'bone' | 'ink' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }

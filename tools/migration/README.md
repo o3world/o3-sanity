@@ -457,6 +457,22 @@ The body stays verbatim HTML in the extract snapshot, exactly as WordPress's
 `text_editor` does, so `convert` remains the only place a mapping decision is
 made — and it runs the same `convertHtml` both sources run.
 
+### One thing the markup does not carry: an accordion's answers
+
+The `/about/approach` FAQ is drawn closed, and Framer ships the copy behind each
+row as a prop in the page's JavaScript. The served HTML therefore holds eight
+questions and **one** paragraph, and that paragraph is the accordion component's
+own default rather than any row's answer — so a parse of the DOM alone would
+publish the same wrong answer eight times, which is why #220 dropped the band.
+
+`src/lib/framerAccordion.ts` reads the module instead, without executing it, and
+`extract-framer.ts` reaches for it only when a band carries two or more
+questions — one extra request on the one page that has an accordion, none on the
+other ten. The rows land on the band as `faq` in the extract, beside the lines
+the DOM gave. It is a parse of minified output, so it is fail-loud in the one
+way that matters: two rows resolving to one answer throws, because that is
+exactly the failure it exists to prevent.
+
 ### o3xo.ai publishes no date
 
 Not on the article, not in the head, not in a feed, not as `lastmod` in the
@@ -736,14 +752,14 @@ The block choices worth knowing:
 Every one is a note on each `convert` run and is named on the document's
 provisional note:
 
-| Dropped                                    | Why                                                                                                                                                                                          |
-| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| The "Related content" band (5 pages)       | Curates one case study (#219's documents) and one insight. The new site derives related work — the `project_feed` call                                                                       |
-| The homepage's "Impact in action" showcase | Same three case studies, same ticket. `caseShowcaseSection` renders only what the referenced documents say                                                                                   |
-| The Approach page's FAQ                    | Framer's accordion serves the **first** item's answer under all eight questions, so seven answers are not in the HTML — and `docs/specs/schema.md` holds the line against an accordion block |
-| The four team bios                         | `person` carries a name, a role and a headshot. A bio field is a schema conversation, like the case-study `headline`                                                                         |
-| Hero background photography                | `heroSection` carries decoration, not a picture                                                                                                                                              |
-| Three band eyebrows and one two-link line  | `quoteSection` and `ctaSection` take no eyebrow, and a band offering two next steps offers none                                                                                              |
+| Dropped                                    | Why                                                                                                                    |
+| ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| The "Related content" band (5 pages)       | Curates one case study (#219's documents) and one insight. The new site derives related work — the `project_feed` call |
+| The homepage's "Impact in action" showcase | Same three case studies, same ticket. `caseShowcaseSection` renders only what the referenced documents say             |
+| The four team bios                         | `person` carries a name, a role and a headshot. A bio field is a schema conversation, like the case-study `headline`   |
+| Hero background photography                | `heroSection` carries decoration, not a picture                                                                        |
+| The links inside two FAQ answers           | `question.body` is plain prose, so an answer that links on the live site keeps its words and loses its destination     |
+| Three band eyebrows and one two-link line  | `quoteSection` and `ctaSection` take no eyebrow, and a band offering two next steps offers none                        |
 
 Two things it deliberately does **not** migrate as written:
 

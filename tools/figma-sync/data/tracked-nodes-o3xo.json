@@ -321,7 +321,7 @@
       "name": "FAQ accordion",
       "figmaName": "AI Implementation FAQ Accordion",
       "codeComponent": null,
-      "note": "Missing — one of #224's six, and the only interactive component in the kit. #237 adds a `faqSection` block to the O3XO roster."
+      "note": "Built as `apps/o3xo`'s `FaqSection` (#248). The kit draws every row closed, so the open state is invented from O3XO's tokens."
     },
     {
       "nodeId": "4404:4613",
@@ -392,7 +392,7 @@
       "name": "FAQ band",
       "figmaName": "FAQ",
       "codeComponent": null,
-      "note": "Accordion on a photograph. Blocked on the `faqSection` block."
+      "note": "Built (#248) — `faqSection` on o3xo's roster, the photograph through `backgroundMedia`."
     },
     {
       "nodeId": "4406:7491",

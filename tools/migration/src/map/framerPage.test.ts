@@ -207,15 +207,33 @@ describe('mapFramerPage', () => {
   })
 
   /**
-   * Eight questions, one answer. Framer's accordion serves the first item's
-   * body under every question in the HTML, so seven of the eight answers are
-   * not in the source at all — and the schema has no accordion to put them in
-   * either (`docs/specs/schema.md`).
+   * Eight questions and eight DIFFERENT answers (#248). The served HTML carries
+   * one answer for all eight — Framer draws every row closed and the one
+   * paragraph in the markup is the component's own default — so the extract
+   * reads them out of the page's JavaScript instead
+   * (`lib/framerAccordion.ts`). Publishing the same paragraph eight times is
+   * the failure this asserts against.
    */
-  it('drops the approach page’s FAQ, because the source serves no answers', () => {
-    const notes = mapped('about/approach').notes ?? []
-    expect(notes.map((note) => note.element)).toContain('faq')
-    expect(JSON.stringify(mapped('about/approach').doc)).not.toContain('AI Implementation FAQ')
+  it('carries the approach page’s FAQ, one answer per question', () => {
+    const faq = mapped('about/approach').doc.sections.find(
+      (section) => section._type === 'faqSection',
+    ) as { heading: string; questions: { heading: string; body: string }[] }
+
+    expect(faq.heading).toBe('AI Implementation FAQ')
+    expect(faq.questions).toHaveLength(8)
+    expect(faq.questions[0]!.heading).toBe('How do we start working with O3XO?')
+    expect(new Set(faq.questions.map((question) => question.body)).size).toBe(8)
+    for (const question of faq.questions) expect(question.body.length).toBeGreaterThan(40)
+  })
+
+  /** The kit draws the band on a photograph, and the extract already had it. */
+  it('sits the FAQ band on the picture the source tags with its heading', () => {
+    const faq = mapped('about/approach').doc.sections.find(
+      (section) => section._type === 'faqSection',
+    ) as { backgroundMedia?: { image: { _srcUrl: string }; tint: string } }
+
+    expect(faq.backgroundMedia?.image._srcUrl).toContain('bvhrcj8dxlCVF8qGvOcECDSSZI')
+    expect(faq.backgroundMedia?.tint).toBe('none')
   })
 
   it('marks every page provisional, saying what the migration could not carry', () => {

@@ -1,6 +1,7 @@
 import type { ComponentType } from 'react'
 
 import { bindingsToRecord, type LayoutItem, type PageSection } from '@o3/content-runtime/blocks'
+import type { BrandSectionBlockName } from '@o3/sanity/schemas/registry'
 
 import { BASE_BLOCK_COMPONENTS } from '@o3/content-ui'
 
@@ -16,7 +17,14 @@ import { CLIENT_SECTION_BINDINGS } from './clientComponents'
  * The renderer is context-agnostic; placement constraints (which tier goes
  * where) are enforced at the schema layer.
  */
-export type DispatchedBlock = PageSection | LayoutItem
+/**
+ * The generated section union NARROWED TO THIS BRAND'S ROSTER (ADR 0028).
+ * Typegen is one file over the whole content model, so `PageSection` holds
+ * every brand's blocks; the roster is what says which of them this app has to
+ * render, and the `satisfies` clause below is where the answer is checked.
+ */
+export type DispatchedBlock =
+  Extract<PageSection, { _type: BrandSectionBlockName<'o3'> }> | LayoutItem
 export type DispatchedBlockType = DispatchedBlock['_type']
 
 type BlockComponentSlot<K extends DispatchedBlockType> = ComponentType<
