@@ -32,6 +32,12 @@ import type {
  * The vtx-web original's i18n (locale param, fallbackOrNotFound,
  * buildAlternates), legacy path rewrites, and materialized-path matching are
  * deliberately not ported — o3 is single-locale and matches on `slug.current`.
+ *
+ * **No builder here turns stega on** (#229). next-sanity's `defineLive` gates
+ * it on a server token, a `studioUrl` and draft mode; a `stega: true` at a
+ * call site overrides all three and hands the invisible characters to every
+ * anonymous visitor. A body fetch therefore passes no `stega` and inherits the
+ * gate — `stega?: false` is the only value a caller may name. See the README.
  */
 
 export interface DetailRouteShim {
@@ -132,7 +138,7 @@ export function buildDetailRoute<Q extends string>(entry: DetailEntry<Q>): Detai
   // React.cache wraps the fetcher so generateMetadata + Page share one
   // underlying sanityFetch per request. Tags follow the per-document scheme
   // so /api/revalidate can invalidate one doc without nuking the type.
-  const fetchDoc = cache(async (slug: string, stega = true) => {
+  const fetchDoc = cache(async (slug: string, stega?: false) => {
     const { data } = await sanityFetch({
       query: entry.query,
       params: { slug },
@@ -179,7 +185,7 @@ export function buildCatchAllRoute(
   const typeTags = entries.map((e) => typeTag(e.type))
   const entryByType = new Map<string, RoutableEntry>(entries.map((e) => [e.type, e]))
 
-  const fetchDoc = cache(async (slug: string, stega = true) => {
+  const fetchDoc = cache(async (slug: string, stega?: false) => {
     const { data } = await sanityFetch({
       query: sharedQuery,
       params: { slug },
@@ -248,7 +254,7 @@ export function buildSingletonRoute<Q extends string>(
   const params = entry.params ?? {}
   const slug = params.slug ?? ''
 
-  const fetchDoc = cache(async (stega = true) => {
+  const fetchDoc = cache(async (stega?: false) => {
     const { data } = await sanityFetch({
       query: entry.query,
       params,

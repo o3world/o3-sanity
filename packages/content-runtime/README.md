@@ -27,6 +27,22 @@ Route entries (`defineDetailType(...)`), the block registry, and the two
 renderers that read it stay in the app. That is what lets one app add a block
 type without forcing a renderer into the other.
 
+## Stega belongs to draft mode, and nothing here turns it on
+
+Stega is the invisible payload Presentation reads out of a rendered string to
+map it back to a field. next-sanity owns the condition: `defineLive` encodes
+only when `serverToken` is set, the client declares a `studioUrl`, and the
+request is in draft mode. Pass `stega: true` to a `sanityFetch` and you
+override all three — every anonymous visitor gets the characters, in copy they
+paste and in markup a crawler reads (#229).
+
+So a body fetch says nothing about stega and inherits the gate. Only a
+metadata fetch says `stega: false`, because `<title>` and OG tags are strings
+no browser renders. A brand app that adds a route builder gets the rule by
+saying nothing;
+`apps/web/src/content/documents/stegaGating.render.test.tsx` fails the build if
+one starts talking.
+
 ## `#live` is the network seam
 
 `build.tsx` and `siteSettings.ts` reach the Sanity client through the package's
