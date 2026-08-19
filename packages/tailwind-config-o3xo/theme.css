@@ -26,7 +26,9 @@
  * (G6M2gu5qKFvhGxwj3W365b), the "↳ Color" canvas (4214:2932). The swatch
  * names in each token's comment are the kit's own. The action red is
  * confirmed against the Button set (4405:6386), where every solid variant
- * fills it. Exactly one value is interpolated rather than read, and says so.
+ * fills it. Two values are not read off a frame — `bone-soft`, interpolated,
+ * and `--gradient-sphere-bloom`, derived from O3's because the kit draws no
+ * sphere — and each says so where it is declared.
  *
  * Only the Website Components canvases, the Layouts canvas and the Styles
  * canvases are trustworthy in that file; `Templates (Old)` and `Asset Dump`

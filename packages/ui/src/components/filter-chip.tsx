@@ -46,14 +46,13 @@ const filterChipVariants = cva(
         // Theme=Black (2337:4542) — the chip for the category being shown.
         true: 'bg-ink text-white',
         /*
-         * Theme=White (2337:4551). The label is `#55524E`, a warm dark grey
-         * that appears on this control and nowhere else — a call-site literal
-         * rather than a token (@o3/tailwind-config: a value used once is
-         * composition, not vocabulary). The stroke IS on the ramp: the same
-         * `#76746F` variable the card meta uses.
+         * Theme=White (2337:4551). Both of the chip's own colours are on the
+         * ramp: the label is `fg-body` — the warm dark grey the 2026-08 frames
+         * set body copy in — and the stroke is the `fg-muted` the card meta
+         * uses.
          */
         false:
-          'bg-white text-[#55524E] border border-fg-muted hover:bg-ink hover:text-white hover:border-ink',
+          'bg-white text-fg-body border border-fg-muted hover:bg-ink hover:text-white hover:border-ink',
       },
     },
     defaultVariants: { selected: false },

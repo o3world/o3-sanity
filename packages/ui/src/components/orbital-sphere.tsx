@@ -39,9 +39,11 @@ import { cn } from '../lib/utils'
  * band is actually composed around. Check that relationship, not the numbers,
  * if it ever looks wrong again.
  *
- * The colour vocabulary is read, not invented: the rim resolves to brand
- * `#EB1000` lightened by the bloom, and the arcs are white at the same `0.2`
- * the footer's orbital stroke uses (`--color-on-ink-line`).
+ * The colour vocabulary is read, not invented: the coloured arcs and node dots
+ * are `--color-brand`, the bloom is `--gradient-sphere-bloom` (the sampled
+ * falloff around the limb, and the token that carries this component's brand
+ * red for both brands), and the wireframe is white at the same `0.2` the
+ * footer's orbital stroke uses (`--color-on-ink-line`).
  */
 export interface OrbitalSphereProps extends HTMLAttributes<HTMLDivElement> {
   /** Dim the whole field. The CTA band runs it quieter than the hero. */
@@ -93,17 +95,13 @@ export function OrbitalSphere({
        * The bloom. Its box overhangs the sphere so the glow can fall off
        * OUTSIDE the limb as well as inside it — the raster carries about 75px
        * of warm falloff above the apex, which on r ≈ 581 is the 6.5% inset
-       * below and puts the limb itself at 88.5% of the bloom's radius.
-       * `closest-side` keeps the stops circular whatever the box does.
+       * below and puts the limb itself at 88.5% of the bloom's radius, which is
+       * where `--gradient-sphere-bloom` sets its brightest stop.
        */}
       {light ? null : (
         <div
-          className="absolute inset-[-6.5%] rounded-full"
-          style={{
-            background:
-              'radial-gradient(closest-side circle at 50% 50%, rgba(120, 22, 14, 0) 0%, rgba(120, 22, 14, 0.16) 60%, rgba(150, 45, 30, 0.5) 82%, rgba(166, 52, 34, 0.62) 88.5%, rgba(140, 34, 22, 0.25) 94%, rgba(140, 34, 22, 0) 100%)',
-            opacity: soft ? 0.75 : 1,
-          }}
+          className="bg-(image:--gradient-sphere-bloom) absolute inset-[-6.5%] rounded-full"
+          style={{ opacity: soft ? 0.75 : 1 }}
         />
       )}
 
@@ -152,10 +150,9 @@ export function OrbitalSphere({
           <g
             key={arc.rotate}
             className={cn(
-              light ? 'stroke-ink' : undefined,
+              light ? 'stroke-ink' : 'stroke-brand',
               turning && !light && `${arc.animate} motion-reduce:animate-none`,
             )}
-            stroke={light ? undefined : '#eb1000'}
             strokeWidth={light ? 1 : 1.6}
             opacity={light ? 0.45 : soft ? 0.28 : 0.4}
           >
@@ -176,11 +173,7 @@ export function OrbitalSphere({
           <circle cx="905" cy="612" r="4.5" />
           <circle cx="392" cy="742" r="4" />
         </g>
-        <g
-          className={light ? 'fill-ink' : undefined}
-          fill={light ? undefined : '#eb1000'}
-          opacity={light ? 0.55 : soft ? 0.4 : 0.65}
-        >
+        <g className={light ? 'fill-ink' : 'fill-brand'} opacity={light ? 0.55 : soft ? 0.4 : 0.65}>
           <circle cx="252" cy="168" r="4" />
           <circle cx="828" cy="392" r="3.5" />
           <circle cx="466" cy="906" r="4" />

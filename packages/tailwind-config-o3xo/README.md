@@ -35,9 +35,10 @@ working material. Read
 package — use the `figma_rest` MCP server, and confirm you are on the frame
 rather than a child node.
 
-Exactly one value is interpolated rather than read, and is marked so:
-`bone-soft`, because the kit has no swatch between `grey/95` and
-`white/solid`.
+Two values are not read off a frame, and each says so where it is declared.
+`bone-soft` is interpolated, because the kit has no swatch between `grey/95`
+and `white/solid`. `--gradient-sphere-bloom` is derived from O3's, because the
+kit draws no orbital sphere — see Gradients below.
 
 ## What this package does not carry
 
@@ -114,9 +115,16 @@ differently:
 
 ## Gradients
 
-Five fills carry a brand color and are re-pointed: `--gradient-statement`,
-`--gradient-brand-glow`, and the three surface washes. Same shapes and stop
-positions as the base theme — those are composition — with O3XO's colors.
+Six fills carry a brand color and are re-pointed: `--gradient-statement`,
+`--gradient-brand-glow`, `--gradient-sphere-bloom`, and the three surface
+washes. Same shapes and stop positions as the base theme — those are
+composition — with O3XO's colors.
+
+`--gradient-sphere-bloom` is the second value in this package that is not read
+off a frame, and the reason differs from `bone-soft`'s: the kit draws no
+orbital sphere at all, because the sphere is O3's composition. Its stops are
+O3's sampled stops moved onto O3XO's red — hue to 0°, saturation × 0.83, value
+held — which keeps the falloff the hero raster was measured for.
 
 `text-gradient` and `bg-brand-glow` are `@utility` classes in the base theme
 that read these custom properties, so they follow the brand with no

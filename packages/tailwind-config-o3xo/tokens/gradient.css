@@ -1,5 +1,5 @@
 /*
- * Gradient — the five base-theme fills that carry a brand color, re-pointed
+ * Gradient — the six base-theme fills that carry a brand color, re-pointed
  * to O3XO's palette. Same shapes, same stop positions; only the colors move,
  * because the shapes are composition and this package carries values (see
  * theme.css).
@@ -24,6 +24,23 @@
   --gradient-brand-glow:
     radial-gradient(circle at 115% 24%, rgba(220, 38, 38, 0.5) 0%, rgba(0, 0, 0, 0) 100%),
     radial-gradient(circle at 0% 0%, rgba(105, 15, 15, 1) 0%, rgba(0, 0, 0, 1) 65%);
+
+  /* The orbital sphere's bloom — DERIVED, not read: the kit draws no sphere,
+   * because the sphere is O3's composition and O3XO wears it during the
+   * adaptation experiment. Each stop is O3's sampled stop moved onto O3XO's
+   * red: hue to 0° from O3's 4°, saturation × 0.83 (the two reds' saturation
+   * ratio, 0.827 / 1), value held — so the rim keeps the falloff the hero
+   * raster was measured for and stops being O3's red. Same shape and stop
+   * positions as the base theme; those are composition. */
+  --gradient-sphere-bloom: radial-gradient(
+    closest-side circle at 50% 50%,
+    rgba(120, 32, 32, 0) 0%,
+    rgba(120, 32, 32, 0.16) 60%,
+    rgba(150, 51, 51, 0.5) 82%,
+    rgba(166, 57, 57, 0.62) 88.5%,
+    rgba(140, 42, 42, 0.25) 94%,
+    rgba(140, 42, 42, 0) 100%
+  );
 
   /* The surface washes: light bands rise from `grey/95` to `white/solid`
    * rather than sitting flat. Vertical, and the 188° variant under the
