@@ -84,4 +84,15 @@ describe('the /work index', () => {
       expect(html).not.toContain('bg-[rgba(3,3,3,0.6)]')
     })
   })
+
+  it('says where you are in one text node', async () => {
+    // Three adjacent JSX expressions render as `Page <!-- -->2<!-- --> of
+    // <!-- -->4`, and the comment markers land inside the accessible name a
+    // screen reader reads out. One interpolated string keeps it one node.
+    const paged = await renderRoute(route, {
+      data: aCaseStudiesPage(cards, 30),
+      searchParams: { page: '2' },
+    })
+    expect(paged.html).toContain('>Page 2 of 4<')
+  })
 })

@@ -78,6 +78,14 @@ describe('the case-study index route', () => {
     expect(html).toContain('href="/case-studies"')
     expect(html).toContain('href="/case-studies?page=3"')
   })
+
+  it('says where you are in one text node', async () => {
+    // Three adjacent JSX expressions render as `Page <!-- -->2<!-- --> of
+    // <!-- -->4`, and the comment markers land inside the accessible name a
+    // screen reader reads out. One interpolated string keeps it one node.
+    const { html } = await render(aCaseStudiesPage(manyCases(9), 30), { page: '2' })
+    expect(html).toContain('>Page 2 of 4<')
+  })
 })
 
 /**

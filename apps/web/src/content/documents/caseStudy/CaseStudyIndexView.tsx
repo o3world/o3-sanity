@@ -77,9 +77,10 @@ export function CaseStudyIndexView({ items, pagination }: CaseStudyIndexViewProp
                 ← Previous
               </Link>
             ) : null}
-            <p className="text-fg-muted text-button">
-              Page {page} of {totalPages}
-            </p>
+            {/* One interpolated string, not three children: React splits
+                adjacent expressions with comment markers, which puts them
+                inside the accessible name a screen reader reads out. */}
+            <p className="text-fg-muted text-button">{`Page ${page} of ${totalPages}`}</p>
             {page < totalPages ? (
               <Link href={pageHref(page + 1)} className="text-fg hover:text-brand text-button">
                 Next →
