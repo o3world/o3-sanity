@@ -74,7 +74,13 @@ Embed stories keep their 16:9 frame and their iframe title, which is what they a
 An asset that cannot be fetched is recorded as unreachable and served as a failed request, so both
 sides agree; the run says how many at the end, and `--refresh` retries them.
 
-### Every image is loaded before the shutter
+### The shutter waits for the page, not for Storybook
+
+`sb-show-main` lands on the body a beat before React has mounted the story, and on a heavy page with
+four workers competing for the machine that beat can outlast the settle: one run in three,
+`Pages/Software Engineering` came back as a 900px screenshot of an empty viewport against a 5383px
+baseline. The capture now waits for the story's own tree — briefly, because `RichText/Empty` and
+friends render nothing on purpose.
 
 Next's `<Image>` is `loading="lazy"`, so on the homepage twelve of twenty-three images had not been
 requested at all when the shutter fired — and a full-page screenshot widens the capture viewport,

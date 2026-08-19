@@ -40,7 +40,7 @@ export function shotFile(dir: string, storyId: string, viewport: string): string
  * a page caught mid-load — reused as a baseline, it reports the waiting rule
  * itself as a regression in every story.
  */
-const CAPTURE_BEHAVIOUR = 'deterministic-assets'
+const CAPTURE_BEHAVIOUR = 'deterministic-assets+mount'
 
 /**
  * What a cached screenshot was taken *with*, short enough to sit in a path.
@@ -83,7 +83,7 @@ const IMAGE_TIMEOUT_MS = 15_000
  * not deliver; a broken image is a legitimate thing to screenshot, so that is
  * caught rather than waited on.
  */
-function awaitImages(timeoutMs: number): Promise<number> {
+function awaitImages(timeoutMs: number): Promise<string> {
   const images = Array.from(document.images)
   for (const image of images) if (image.loading === 'lazy') image.loading = 'eager'
   const settled = images.map((image) =>
@@ -95,25 +95,48 @@ function awaitImages(timeoutMs: number): Promise<number> {
   return Promise.race([
     Promise.all(settled),
     new Promise((resolve) => setTimeout(resolve, timeoutMs)),
-  ]).then(() => images.length)
+  ]).then(() => `${images.length}:${document.documentElement.scrollHeight}`)
 }
 
 /**
- * Run the barrier until the page stops growing new images.
+ * Run the barrier until the page stops changing shape.
  *
  * One pass is not enough: an image that only exists once the one above it has
  * loaded — a card whose height decides whether the next band mounts — appears
- * after the pass that would have waited for it. Two passes agreeing is the
- * signal that the page is done; the third is the cutoff, because a page that
- * keeps making images forever is a different bug.
+ * after the pass that would have waited for it. Two passes agreeing on both the
+ * image count and the page height is the signal that the page is done; the
+ * third is the cutoff, because a page that keeps growing forever is a different
+ * bug.
  */
-async function settleImages(page: Page): Promise<void> {
-  let previous = -1
+async function settleContent(page: Page): Promise<void> {
+  let previous = ''
   for (let pass = 0; pass < 3; pass++) {
-    const count = await page.evaluate(awaitImages, IMAGE_TIMEOUT_MS)
-    if (count === previous) return
-    previous = count
+    const shape = await page.evaluate(awaitImages, IMAGE_TIMEOUT_MS)
+    if (shape === previous) return
+    previous = shape
   }
+}
+
+/**
+ * Wait for the story's own tree, not just for Storybook's decision to show it.
+ *
+ * `sb-show-main` lands on the body a beat before React has mounted anything,
+ * and on a heavy page with four workers competing for the machine that beat can
+ * outlast the settle: one run in three, `Pages/Software Engineering` came back
+ * as a 900px-tall screenshot of an empty viewport against a 5383px baseline.
+ *
+ * Briefly, though. `RichText/Empty`, `Button/NoLabel` and `MediaSection/NoMedia`
+ * render nothing on purpose, and a hard wait would hang for thirty seconds on
+ * each of them; this gives up and captures whatever is there.
+ */
+async function awaitMount(page: Page): Promise<void> {
+  await page
+    .waitForFunction(
+      () => (document.querySelector('#storybook-root')?.childElementCount ?? 0) > 0,
+      undefined,
+      { timeout: 5_000 },
+    )
+    .catch(() => undefined)
 }
 
 async function captureStory(
@@ -140,11 +163,8 @@ async function captureStory(
     })
 
     // Both signals are classes Storybook puts on the body: `sb-show-main` once
-    // the story has rendered, `sb-show-errordisplay` when it threw. Waiting on
-    // `#storybook-root` having children instead would look right and hang for
-    // thirty seconds on every deliberately empty story — `RichText/Empty`,
-    // `Button/NoLabel`, `MediaSection/NoMedia` — whose whole point is to render
-    // nothing.
+    // the story is to be shown, `sb-show-errordisplay` when it threw. Neither
+    // says the tree exists yet — `awaitMount` below is what waits for that.
     const state = await page.waitForFunction(
       () => {
         const classes = document.body.classList
@@ -165,15 +185,15 @@ async function captureStory(
       return shot
     }
 
+    await awaitMount(page)
     // Web fonts change every glyph's shape; a screenshot taken before they
     // land differs from one taken after in a way that has nothing to do with
     // the change under test.
     await page.evaluate(() => document.fonts.ready)
-    // After the settle, not before it: `sb-show-main` goes on the body before
-    // React has mounted the story's own tree, and a barrier that runs then
-    // finds an empty document and waits for nothing.
     await page.waitForTimeout(settleMs)
-    await settleImages(page)
+    // After the settle, not before it: an image barrier that runs while the
+    // tree is still arriving finds an empty document and waits for nothing.
+    await settleContent(page)
     // Two frames: one for whatever the settle timeout kicked off, one to paint.
     await page.evaluate(
       () => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(() => r(null)))),
