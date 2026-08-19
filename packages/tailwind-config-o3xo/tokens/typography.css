@@ -1,0 +1,181 @@
+/*
+ * Typography — the O3XO UI kit's ramp, re-pointed under the brand attribute.
+ *
+ * THE FACE IS FIGTREE IN BOTH BRANDS, so `--font-sans` and `--font-display`
+ * are not restated. The kit draws Figtree Light 300 through Bold 700; the
+ * app loads the variable face through `next/font/google`, whose weight axis
+ * covers all of it.
+ *
+ * ── PROVENANCE ─────────────────────────────────────────────────────────────
+ *
+ * The Typography canvas (`462:833`) is a spec sheet, not a page: each row is
+ * one named style drawn twice, from a two-mode variable collection
+ * (`279:1431`). Mode `279:0` is the desktop column, `279:1` the mobile one.
+ *
+ *   Kit style        mobile      desktop     weight  leading
+ *   H1               48          60          400     120%
+ *   H2               36          48          400     120%
+ *   H3               24          36          400     120%
+ *   H4               20          24          400     120%
+ *   H5               18          18          400     120%
+ *   Intro            18          20          300     150%
+ *   P bold           16          16          700     150%
+ *   P regular        16          16          300     150%
+ *   P small          14          14          300     150%
+ *   Interactive lg   18          18          500     24px
+ *   Interactive md   16          16          500     24px
+ *   Interactive sm   14          14          500     20px
+ *   Interactive xs   12          12          500     20px
+ *   Label            14          14          400     145%
+ *
+ * Tracking is 0 on every one of them.
+ *
+ * ── THE ENDPOINTS ARE 430 AND 1440 ─────────────────────────────────────────
+ *
+ * The kit's page bands are drawn at 1440 (`4406:6595` and its neighbours on
+ * the Layouts canvas) and its phone-portrait artboard is 430 (`4214:3650`).
+ * Each clamp below is SOLVED to hit the mobile column's value at 430 and the
+ * desktop column's at 1440 — the same scheme O3's ramp uses between its own
+ * two frame widths (ADR 0006). The kit's modes are a step; a step shows one
+ * of two samples at every width between them, and both ends are read values.
+ *
+ * SMALL TEXT DOES NOT SCALE. Body, the labels and the interactive steps are
+ * identical in both columns, so they ship flat.
+ *
+ * ── WHAT IS NOT RESTATED ───────────────────────────────────────────────────
+ *
+ * `--text-button`. The kit's Interactive/large is 18/24 at 500 with no
+ * tracking — the base theme's value to the pixel, and a restated value is one
+ * more place to drift.
+ *
+ * ── ROLES THE KIT DOES NOT NAME ────────────────────────────────────────────
+ *
+ * `display-md` sits in the gap between H3 (36) and H4 (24), which the kit's
+ * ramp does not fill. The live site is the fallback record there.
+ *
+ * ── THIS BLOCK IS NOT `@theme` ─────────────────────────────────────────────
+ *
+ * Tailwind compiles every `text-*` utility to `var(--text-*)`, so re-pointing
+ * the custom properties under `:root[data-brand='o3xo']` moves the ramp with
+ * the attribute and leaves O3's alone. Declaring any of this in `@theme`
+ * would land it at `:root` for every brand that loads the file — and
+ * Storybook loads both. `packages/ui/src/brand-ramp-seam.test.ts` is the
+ * guard.
+ */
+
+:root[data-brand='o3xo'] {
+  /* ── Display scale ─────────────────────────────────────────────────────── */
+  /* hero — H1. The Hero band's headline (`4406:6595`) confirms 60/72 at 1440.
+   * O3 sets this step in Light with -1px of tracking; the kit draws Regular
+   * at 0, and so does the live site. */
+  --text-hero: clamp(48px, calc(1.188vw + 42.89px), 60px);
+  --text-hero--line-height: 1.2;
+  --text-hero--letter-spacing: 0;
+  --text-hero--font-weight: 400;
+
+  /* quote — H3's size in Light. The Quote band (`4406:6954`) draws its pull
+   * quote at 36/40 Figtree Light; the kit's ramp has no Light heading, so the
+   * size is H3's and the weight is the band's. */
+  --text-quote: clamp(24px, calc(1.188vw + 18.89px), 36px);
+  --text-quote--line-height: 1.2;
+  --text-quote--letter-spacing: 0;
+  --text-quote--font-weight: 300;
+
+  /* cta — H2. The kit sets the CTA band headline ("Start the conversation",
+   * `4406:7491`) at the same step as every section headline, so `cta` and
+   * `display-xl` ride one pair here. They diverge in O3 only by tracking,
+   * which the kit zeroes. */
+  --text-cta: clamp(36px, calc(1.188vw + 30.89px), 48px);
+  --text-cta--line-height: 1.2;
+  --text-cta--letter-spacing: 0;
+  --text-cta--font-weight: 400;
+
+  /* display-xl — H2. Every section headline on the Layouts canvas. */
+  --text-display-xl: clamp(36px, calc(1.188vw + 30.89px), 48px);
+  --text-display-xl--line-height: 1.2;
+  --text-display-xl--letter-spacing: 0;
+  --text-display-xl--font-weight: 400;
+
+  /* display-lg — H3. */
+  --text-display-lg: clamp(24px, calc(1.188vw + 18.89px), 36px);
+  --text-display-lg--line-height: 1.2;
+  --text-display-lg--letter-spacing: 0;
+  --text-display-lg--font-weight: 400;
+
+  /* display-md — 28px, flat. The kit's ramp steps 36 → 24 with nothing
+   * between, so this one comes off the live site, which draws 28/33.6 (the
+   * same 120% the headings use) on the insights index and inside an insight.
+   * One read width means one value: a clamp would be interpolating from a
+   * single point. */
+  --text-display-md: 28px;
+  --text-display-md--line-height: 1.2;
+  --text-display-md--letter-spacing: 0;
+  --text-display-md--font-weight: 400;
+
+  /* display-sm — H4. The card title. */
+  --text-display-sm: clamp(20px, calc(0.396vw + 18.3px), 24px);
+  --text-display-sm--line-height: 1.2;
+  --text-display-sm--letter-spacing: 0;
+  --text-display-sm--font-weight: 400;
+
+  /* ── Body ──────────────────────────────────────────────────────────────── */
+  /* lead — Intro. The standfirst under a headline; the Hero and Case Studies
+   * bands both draw it. Light, like everything the kit sets to be read. */
+  --text-lead: clamp(18px, calc(0.198vw + 17.15px), 20px);
+  --text-lead--line-height: 1.5;
+  --text-lead--letter-spacing: 0;
+  --text-lead--font-weight: 300;
+
+  /* body — P regular. Long-form prose, flat at 16 in both columns and in the
+   * live insight bodies. O3 runs this step at 20/1.6 in Regular. */
+  --text-body: 16px;
+  --text-body--line-height: 1.5;
+  --text-body--letter-spacing: 0;
+  --text-body--font-weight: 300;
+
+  /* body-heading — H3, the same step as `display-lg`. The kit has no article
+   * template; the live insight body sets its h2 at 36, which is H3's desktop
+   * value. */
+  --text-body-heading: clamp(24px, calc(1.188vw + 18.89px), 36px);
+  --text-body-heading--line-height: 1.2;
+  --text-body-heading--letter-spacing: 0;
+  --text-body-heading--font-weight: 400;
+
+  /* ── Eyebrows ──────────────────────────────────────────────────────────── */
+  /* eyebrow — Label. The card kicker. O3 tracks this step 0.1em at 700; the
+   * kit's Label and the live site's uppercase category tag are both Regular
+   * at 0. The uppercase transform is the shared `eyebrow` utility's, not this
+   * package's. */
+  --text-eyebrow: 14px;
+  --text-eyebrow--line-height: 1.45;
+  --text-eyebrow--letter-spacing: 0;
+  --text-eyebrow--font-weight: 400;
+
+  /* eyebrow-lg — P regular. The kit draws the section-level kicker
+   * ("Trusted by leading organizations", `4406:6954`) as body copy rather
+   * than as a second label step. */
+  --text-eyebrow-lg: 16px;
+  --text-eyebrow-lg--line-height: 1.5;
+  --text-eyebrow-lg--letter-spacing: 0;
+  --text-eyebrow-lg--font-weight: 300;
+
+  /* ── Small ─────────────────────────────────────────────────────────────── */
+  /* meta — Label, the same step as `eyebrow`. The card's meta row is a label,
+   * and the kit names one label style. */
+  --text-meta: 14px;
+  --text-meta--line-height: 1.45;
+  --text-meta--letter-spacing: 0;
+  --text-meta--font-weight: 400;
+
+  /* nav — Interactive/small. Footer navigation links. */
+  --text-nav: 14px;
+  --text-nav--line-height: 1.429; /* 20px / 14px */
+  --text-nav--letter-spacing: 0;
+  --text-nav--font-weight: 500;
+
+  /* legal — Interactive/smallest. The footer legal row. */
+  --text-legal: 12px;
+  --text-legal--line-height: 1.667; /* 20px / 12px */
+  --text-legal--letter-spacing: 0;
+  --text-legal--font-weight: 500;
+}

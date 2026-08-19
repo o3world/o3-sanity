@@ -24,9 +24,14 @@ ADR 0028 adopted.
 ## Provenance
 
 Every value is read off the **O3XO: UI kit** Figma file
-(`G6M2gu5qKFvhGxwj3W365b`), the `↳ Color` canvas (`4214:2932`). Each token's
-comment names the kit's own swatch. The action red is confirmed against the
+(`G6M2gu5qKFvhGxwj3W365b`) — the `↳ Color` canvas (`4214:2932`) for the paint,
+the `↳ Typography` canvas (`462:833`) for the ramp, and the Grids frame on the
+`↳ Layouts` canvas (`4214:3643`) for the breakpoints. Each token's comment
+names the kit's own swatch or style. The action red is confirmed against the
 Button set (`4405:6386`), where every solid variant fills it.
+
+Where the kit is silent, **the live site is the fallback record** (ADR 0028's
+second addendum). One type step comes from it and says so: `display-md`.
 
 Within that file only the Website Components canvases, the Layouts canvas and
 the Styles canvases are trustworthy; `Templates (Old)` and `Asset Dump` are
@@ -42,10 +47,7 @@ kit draws no orbital sphere — see Gradients below.
 
 ## What this package does not carry
 
-Type, layout rhythm, radii, motion, and the document-level base rules. During
-the adaptation experiment O3XO wears O3's composition (ADR 0028 addendum), so
-the UI kit is the source of brand **values** and not of composition — and the
-kit sets type in Figtree, the same face the base theme's ramp is solved for.
+Band rhythm, radii, motion, and the document-level base rules.
 
 Roles the kit paints the way O3 does are left out rather than restated: a
 restated value is one more place to drift. Each token file names the ones it
@@ -112,6 +114,85 @@ differently:
 - **Body and muted copy are one value.** O3's `fg-body` and `fg-muted` are two
   reads off two generations of frame. The kit sets both at `azure/34`, so they
   converge here.
+
+## Typography (`--text-*`)
+
+The face is **Figtree** in both brands, so the family stacks are not restated.
+The kit draws Light 300 through Bold 700 and the app loads the variable face
+through `next/font/google`, whose weight axis covers all of it.
+
+The `↳ Typography` canvas is a spec sheet: each named style is drawn twice,
+from a two-mode variable collection (`279:1431`) — a desktop column and a
+mobile one. The clamps are **solved** to hit the mobile value at **430** (the
+kit's phone-portrait artboard, `4214:3650`) and the desktop value at **1440**
+(the width every kit band is drawn at, `4406:6595` and its neighbours), the
+way O3's ramp is solved between its own two frame widths.
+
+| Utility             | 430    | 1440   | Weight | Leading | Kit style      |
+| ------------------- | ------ | ------ | ------ | ------- | -------------- |
+| `text-hero`         | `48px` | `60px` | 400    | 1.2     | H1             |
+| `text-cta`          | `36px` | `48px` | 400    | 1.2     | H2             |
+| `text-display-xl`   | `36px` | `48px` | 400    | 1.2     | H2             |
+| `text-quote`        | `24px` | `36px` | 300    | 1.2     | H3, in Light   |
+| `text-display-lg`   | `24px` | `36px` | 400    | 1.2     | H3             |
+| `text-body-heading` | `24px` | `36px` | 400    | 1.2     | H3             |
+| `text-display-md`   | `28px` | `28px` | 400    | 1.2     | ⚠️ live site   |
+| `text-display-sm`   | `20px` | `24px` | 400    | 1.2     | H4             |
+| `text-lead`         | `18px` | `20px` | 300    | 1.5     | Intro          |
+| `text-body`         | `16px` | `16px` | 300    | 1.5     | P regular      |
+| `text-eyebrow-lg`   | `16px` | `16px` | 300    | 1.5     | P regular      |
+| `text-button`       | `18px` | `18px` | 500    | 1.333   | Interactive lg |
+| `text-eyebrow`      | `14px` | `14px` | 400    | 1.45    | Label          |
+| `text-meta`         | `14px` | `14px` | 400    | 1.45    | Label          |
+| `text-nav`          | `14px` | `14px` | 500    | 1.429   | Interactive sm |
+| `text-legal`        | `12px` | `12px` | 500    | 1.667   | Interactive xs |
+
+**Tracking is 0 on every step.** O3 tracks `hero`, `cta`, `display-md` and
+both eyebrows; the kit tracks nothing, and neither does the live site.
+
+`text-button` is the one step the two brands agree on to the pixel, so it is
+not restated. `text-display-md` is the one step the kit's ramp does not name —
+it falls in the gap between H3 (36) and H4 (24), and the live site draws 28
+there at both the insights index and inside an insight.
+
+Three shapes are worth naming because they are not O3's:
+
+- **The kit sets long-form prose in Light at 16.** O3 reads it at 20/1.6 in
+  Regular. Every heading, by contrast, is Regular where O3's `Heading/*`
+  styles have moved to Light.
+- **There is no bold, tracked eyebrow.** The kit's one Label style carries
+  both the card kicker and the meta row, and the section-level kicker is drawn
+  as body copy. The uppercase transform stays in the base theme's `eyebrow`
+  utility; the kit's section kicker is sentence case, which is the header
+  pill's business rather than a token's.
+- **`cta` and `display-xl` ride one step.** The kit sets the CTA band headline
+  at the same size as every section headline.
+
+## Breakpoints (`--breakpoint-*`)
+
+The Grids frame (`4214:3643`) states the contract on the frame: Radix widths,
+min-width based. The kit's first band is the unprefixed base, so the five
+prefixes carry the five thresholds above it.
+
+| Prefix | O3XO     | Kit band            | Columns | Gutter | Page margin |
+| ------ | -------- | ------------------- | ------- | ------ | ----------- |
+| —      | `0`      | Phones (portrait)   | 4       | `16px` | `16px`      |
+| `sm`   | `520px`  | Phones (landscape)  | 8       | `16px` | `16px`      |
+| `md`   | `768px`  | Tablets (portrait)  | 8       | `24px` | `16px`      |
+| `lg`   | `1024px` | Tablets (landscape) | 12      | `24px` | `96px`      |
+| `xl`   | `1280px` | Laptops             | 12      | `24px` | `96px`      |
+| `2xl`  | `1640px` | Desktops            | 12      | `24px` | centered    |
+
+Only `sm` and `2xl` move off Tailwind's scale; the other three are named
+anyway so the list reads as one scale and the compiled media queries carry the
+kit's own numbers.
+
+**This is the one thing in the package that is not a brand block.** Tailwind
+compiles `lg:` to a literal media query and no media query can read a custom
+property, so the breakpoints are declared in `@theme` and reach every
+stylesheet that imports this file — `apps/o3xo`, and Storybook, which loads
+both brands. `packages/ui/src/brand-ramp-seam.test.ts` guards both halves: the
+ramp must stay in the brand block, and the breakpoints must stay out of it.
 
 ## Gradients
 

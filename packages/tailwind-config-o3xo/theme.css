@@ -17,8 +17,10 @@
  * This file is an index and nothing else. Each concern lives in its own file
  * under tokens/, in the order below:
  *
- *   color.css     surfaces, text, chrome, borders — and the `accent` role
- *   gradient.css  the fills that carry the brand color
+ *   color.css       surfaces, text, chrome, borders — and the `accent` role
+ *   typography.css  the kit's type ramp
+ *   layout.css      the kit's breakpoints
+ *   gradient.css    the fills that carry the brand color
  *
  * ── PROVENANCE ─────────────────────────────────────────────────────────────
  *
@@ -38,12 +40,16 @@
  *
  * ── WHAT THIS PACKAGE DOES NOT CARRY ───────────────────────────────────────
  *
- * Type, layout rhythm, radii and motion. During the adaptation experiment
- * O3XO wears O3's composition (ADR 0028 addendum), so the UI kit is the
- * source of brand VALUES and not of composition — and the kit sets type in
- * Figtree, the same face the base theme's ramp is solved for. Roles the kit
- * paints the way O3 does are left out rather than restated; a restated value
- * is one more place to drift. Each file names the ones it skipped and why.
+ * Band rhythm, radii and motion. Roles the kit paints the way O3 does are left
+ * out rather than restated; a restated value is one more place to drift. Each
+ * file names the ones it skipped and why.
+ *
+ * ── ONE FILE IS NOT A BRAND BLOCK ──────────────────────────────────────────
+ *
+ * layout.css declares Tailwind's breakpoints in `@theme`, because a media
+ * query cannot read a custom property. Those five are build-time and reach
+ * every stylesheet that imports this one. Everything else rides the
+ * attribute.
  *
  * ── ROLE NAMES ARE SHARED, VOCABULARIES MAY DIVERGE ────────────────────────
  *
@@ -56,4 +62,6 @@
  */
 
 @import './tokens/color.css';
+@import './tokens/typography.css';
+@import './tokens/layout.css';
 @import './tokens/gradient.css';

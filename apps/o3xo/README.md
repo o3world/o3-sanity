@@ -64,8 +64,13 @@ for this brand only; o3's `NEXT_PUBLIC_SANITY_*` are untouched by either app.
 and the root layout sets `data-brand="o3xo"` on `<html>`. The O3XO package is a
 layer over the base theme, not a standalone one — it re-points the base theme's
 custom properties under `:root[data-brand='o3xo']` and declares nothing new
-except `accent`. Drop the attribute and every page renders in O3's paint with no
-error anywhere.
+except `accent`. Drop the attribute and every page renders in O3's paint and
+O3's type with no error anywhere.
+
+The **breakpoints** are the exception, and they arrive through the same import
+without the attribute: Tailwind compiles `lg:` to a literal media query, so the
+kit's Radix widths have to be a build-time `@theme` declaration. This app is
+where they take effect; `apps/web` never imports the package.
 
 Both `@source` lines matter too: Tailwind v4 does not follow into sibling
 workspace packages, so without them no utility used inside `@o3/ui` or

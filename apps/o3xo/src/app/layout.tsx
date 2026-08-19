@@ -8,8 +8,10 @@ import '@/app/globals.css'
 // Side-effect import: validates env vars and asserts the brand (see src/env.ts).
 import '@/env'
 
-// Figtree in both brands: the UI kit sets O3XO's type in the same face the base
-// theme's ramp is solved for, so the token package overrides no type at all.
+// Figtree in both brands — the UI kit's Typography canvas sets the whole O3XO
+// ramp in it, so the token package moves the sizes and leaves the family
+// alone. No `weight`, which loads the variable face: the kit draws Light 300
+// through Bold 700 and the axis covers 300–900.
 const figtree = Figtree({
   subsets: ['latin'],
   variable: '--font-figtree',
