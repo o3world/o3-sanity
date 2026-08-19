@@ -101,9 +101,9 @@ export function CaseStudyCard(card: CaseStudyCardData) {
       <div className="bg-(image:--gradient-card-scrim-stacked) lg:bg-(image:--gradient-card-scrim) absolute inset-0 -z-10" />
 
       {/*
-       * The knockout is a masked fill, so its separation from the photograph
-       * is a drop-shadow rather than a text-shadow — `filter` follows the mask
-       * alpha, and the logo has no glyphs to shadow. Same job as the shadow on
+       * The knockout is a shape, not glyphs, so its separation from the
+       * photograph is a drop-shadow rather than a text-shadow — `filter`
+       * follows the artwork's own alpha. Same job as the shadow on
        * the copy below: it is what lets the scrim stay a wash. Invisible over
        * the ink the scrim actually lays down, and the whole reason a bright
        * patch of sky behind a logo doesn't have to be paid for in ink.
