@@ -70,6 +70,7 @@ Non-zero exit on any finding.
 Rules of the road:
 
 - **Committed JSON is the source of truth; the dataset is disposable.** `load` creates-or-replaces every pipeline-owned document — `converted/`, `seed/` and `translated/` alike — as **published** ([ADR 0016](../../docs/adr/0016-publish-what-wordpress-publishes.md)), and deletes any draft still shadowing one it writes.
+- **CI converts both brands and fails on any diff.** The `convert drift` job in [`checks.yml`](../../.github/workflows/checks.yml) runs `convert` for `o3` and for `o3xo`, then diffs `data/` and `data-o3xo/`, so a mapper that disagrees with its committed output is a red build rather than something the next person to run the pipeline notices. It needs no token and no network: `convert` reads the extract tree and writes the converted tree.
 - **A document with `migration.locked: true` is never touched, in any mode.** Editors lock documents they take over (Studio toggle).
 - Deterministic IDs name the source: `<type>-wp-<id>` (WordPress), `<type>-framer-<key>` (o3xo.ai), `<type>-seed-<slug>` (greenfield).
 - **An image marker names where the bytes come from** — `_wpSrc` a WordPress upload, `_srcUrl` a URL on any other source site, `_localSrc` a repo-relative file committed beside its seed. `load` holds the one table of which resolver each takes, and swaps in an asset ref at upload time; the brand's `assets.json` is the URL→asset audit map. Binaries cache in `media-cache/` (gitignored).
