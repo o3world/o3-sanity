@@ -2,10 +2,10 @@ import Link from 'next/link'
 
 import { ArrowIcon, Button, CollectionHero, FilterChip } from '@o3/ui'
 import type { INSIGHTS_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
+import type { Pagination } from '@o3/content-runtime/routes'
 
 import { InsightCard } from './InsightCard'
 import { CtaSection } from '@/content/blocks/section/ctaSection/CtaSection'
-import type { Pagination } from '@/lib/content-routes/types'
 
 type IndexData = NonNullable<INSIGHTS_PAGE_QUERY_RESULT>
 
@@ -62,7 +62,7 @@ function insightsHref({
  *
  * It is **server-side and in the URL** (`?category=design`), which is what
  * makes a filtered index linkable, crawlable and free of client state. The
- * mechanism is `IndexEntry.facets` — see `content-routes/build.tsx`.
+ * mechanism is `IndexEntry.facets` — see `@o3/content-runtime/routes`.
  *
  * Two divergences from the frame worth stating rather than burying:
  *

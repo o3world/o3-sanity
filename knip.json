@@ -31,6 +31,19 @@
         "src/**/*.test.ts"
       ]
     },
+    "packages/content-runtime": {
+      "entry": [
+        "src/base-url.ts",
+        "src/blocks/index.ts",
+        "src/dataAttribute.ts",
+        "src/live.ts",
+        "src/routes/index.ts",
+        "src/seo.ts",
+        "src/siteSettings.ts",
+        "src/urls.ts",
+        "src/**/*.test.ts"
+      ]
+    },
     "packages/editor-chrome": {
       "entry": [
         "src/studio/index.ts",

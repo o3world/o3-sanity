@@ -8,13 +8,13 @@
 import type { ComponentType } from 'react'
 
 import type { BaseBlockName, SectionBlockName } from '@o3/sanity/schemas/registry'
-
-import { BASE_BLOCK_COMPONENTS } from './base/baseComponents'
 import {
   bindingsToRecord,
   defineBlockRender,
   type ClientBlockRenderBinding,
-} from './defineBlockRender'
+} from '@o3/content-runtime/blocks'
+
+import { BASE_BLOCK_COMPONENTS } from './base/baseComponents'
 import { CaseShowcaseSection } from './section/caseShowcaseSection/CaseShowcaseSection'
 import { CtaSection } from './section/ctaSection/CtaSection'
 import { FeatureGridSection } from './section/featureGridSection/FeatureGridSection'

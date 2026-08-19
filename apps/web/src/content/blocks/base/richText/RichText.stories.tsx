@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
-import type { BaseProps } from '@/content/blocks/sectionTypes'
+import type { BaseProps } from '@o3/content-runtime/blocks'
 import { seedImage } from '@/stories/seedContent'
 
 import { RichText } from './RichText'

@@ -3,7 +3,7 @@ import { stegaClean } from '@sanity/client/stega'
 import { SURFACES, type Surface } from '@o3/sanity/constants'
 import { BLOCK_KNOBS } from '@o3/sanity/knobs'
 
-import type { PageSection } from '@/content/blocks/sectionTypes'
+import type { PageSection } from '@o3/content-runtime/blocks'
 
 /**
  * Each block's declared surface default, keyed by its Sanity `_type` — read off

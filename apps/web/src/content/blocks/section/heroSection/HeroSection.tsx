@@ -11,10 +11,10 @@ import {
   SurfaceProvider,
   surfaceAttrs,
 } from '@o3/ui'
+import type { SectionProps } from '@o3/content-runtime/blocks'
 
 import { ButtonLink } from '@/content/ButtonLink'
 import { LogoKnockout } from '@/content/LogoKnockout'
-import type { SectionProps } from '@/content/blocks/sectionTypes'
 
 type HeroSectionProps = SectionProps<'heroSection'>
 

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 
-import { getBaseUrl } from '@/lib/base-url'
+import { getBaseUrl } from '@o3/content-runtime/base-url'
 
 /**
  * Only the promoted production deployment may be indexed; previews and the

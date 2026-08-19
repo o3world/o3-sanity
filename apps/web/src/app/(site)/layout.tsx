@@ -1,10 +1,10 @@
 import type React from 'react'
 import { draftMode } from 'next/headers'
 import { EditorToolbar } from '@o3/editor-chrome/toolbar'
+import { SanityLive } from '@o3/content-runtime/live'
+import { getSiteSettings } from '@o3/content-runtime/site-settings'
 
 import { editorToolbarConfig } from '@/sanity/editorToolbar'
-import { SanityLive } from '@/sanity/live'
-import { getSiteSettings } from '@/sanity/siteSettings'
 import { VisualEditing } from '@/sanity/VisualEditing'
 import { SiteFooter } from '@/ui/SiteFooter'
 import { SiteNav } from '@/ui/SiteNav'

@@ -3,11 +3,10 @@
 import { useOptimistic } from 'next-sanity/hooks'
 
 import type { SanityBlock } from '@o3/sanity/types'
-
-import { dataAttr, rootFieldLoc } from '@/sanity/dataAttribute'
+import { dataAttr, rootFieldLoc } from '@o3/content-runtime/data-attribute'
+import { renderDispatchedBlocks } from '@o3/content-runtime/blocks'
 
 import { BLOCK_COMPONENTS } from './clientComponents'
-import { renderDispatchedBlocks } from './dispatchBlocks'
 import { reconcileOptimisticOrder } from './optimisticOrder'
 
 interface ClientBlockRendererProps {

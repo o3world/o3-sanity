@@ -1,9 +1,9 @@
 import { draftMode } from 'next/headers'
 import { enableDraftModeForStudioSession, verifyStudioToken } from '@o3/editor-chrome/draft-mode'
+import { client } from '@o3/content-runtime/live'
 import { defineEnableDraftMode } from 'next-sanity/draft-mode'
 
 import { editorToolbarConfig } from '@/sanity/editorToolbar'
-import { client } from '@/sanity/live'
 
 /**
  * Two ways into draft mode, one URL — they differ only in the credential the

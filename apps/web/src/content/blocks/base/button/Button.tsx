@@ -1,5 +1,6 @@
+import type { BaseProps } from '@o3/content-runtime/blocks'
+
 import { ButtonLink } from '@/content/ButtonLink'
-import type { BaseProps } from '@/content/blocks/sectionTypes'
 
 type ButtonProps = BaseProps<'button'>
 

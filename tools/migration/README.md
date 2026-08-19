@@ -346,7 +346,7 @@ mapper. **`seo` holds overrides, never resolved values.** Yoast hands back
 fully resolved output — the title with the site name appended, the site OG
 image standing in for every document that never picked one, `index,follow`
 spelled out 272 times. Copying that in would bake today's defaults into 272
-documents and make changing a default a 272-document edit. `apps/web/src/lib/seo.ts`
+documents and make changing a default a 272-document edit. `packages/content-runtime/src/seo.ts`
 re-derives all of it at render time; `mapSeo` keeps only what a document
 actually overrode.
 
@@ -379,7 +379,7 @@ It is empty today.
 
 ### What the renderer does with it
 
-`apps/web/src/lib/seo.ts` owns the resolution chain, once, for every routable
+`packages/content-runtime/src/seo.ts` owns the resolution chain, once, for every routable
 type: document `seo` → a field on the document → Site Settings `defaultSeo`.
 Route entries declare only the document-shaped half (`DocumentSeo`: title,
 description, image, path, `ogType`), never finished `Metadata` — which is what

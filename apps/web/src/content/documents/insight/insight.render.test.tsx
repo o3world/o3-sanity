@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
-import { buildDetailRoute } from '@/lib/content-routes/build'
+import { buildDetailRoute } from '@o3/content-runtime/routes'
 import {
   aMigratedInsight,
   anInsight,
@@ -209,7 +209,7 @@ describe('insight detail route', () => {
 
   /**
    * The SEO discipline every content ticket inherits (#26). These assertions
-   * are about the shared chain in `@/lib/seo`, pinned through a real route:
+   * are about the shared chain in `@o3/content-runtime/seo`, pinned through a real route:
    * a routable type that emits half the tag set fails here.
    */
   describe('metadata', () => {

@@ -1,11 +1,15 @@
 import { PAGE_QUERY } from '@o3/sanity/queries'
 import type { PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 
-import { defineCatchAllType, defineSingletonType } from '@/lib/content-routes/define'
-import type { RendererProps } from '@/lib/content-routes/types'
-import type { DocumentSeo } from '@/lib/seo'
+import {
+  defineCatchAllType,
+  defineSingletonType,
+  type RendererProps,
+} from '@o3/content-runtime/routes'
+import type { DocumentSeo } from '@o3/content-runtime/seo'
+import { hrefForDoc } from '@o3/content-runtime/urls'
+
 import { getView } from '@/content/documents/registry'
-import { hrefForDoc } from '@/content/documents/urls'
 
 type PageRendererProps = RendererProps<typeof PAGE_QUERY>
 

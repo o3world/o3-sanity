@@ -1,6 +1,6 @@
 import type { PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 
-import type { SanityLoc } from '@/sanity/dataAttribute'
+import type { SanityLoc } from '../dataAttribute'
 
 /**
  * The canonical pin points for the two block-tier unions, sourced from the

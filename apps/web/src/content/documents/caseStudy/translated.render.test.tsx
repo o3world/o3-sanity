@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { buildDetailRoute } from '@/lib/content-routes/build'
+import { buildDetailRoute } from '@o3/content-runtime/routes'
 import { aTranslatedCaseStudy, renderRoute, siteSettings, withSettings } from '@/test'
 
 import { caseStudy } from './entry'

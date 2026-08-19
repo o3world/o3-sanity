@@ -1,9 +1,9 @@
 import { stegaClean } from '@sanity/client/stega'
 
 import { cn } from '@o3/ui'
+import type { BaseProps } from '@o3/content-runtime/blocks'
 
 import { ButtonLink } from '@/content/ButtonLink'
-import type { BaseProps } from '@/content/blocks/sectionTypes'
 
 type ButtonGroupProps = BaseProps<'buttonGroup'>
 
@@ -17,9 +17,7 @@ type Alignment = keyof typeof ALIGNMENTS
 
 function resolveAlignment(value: string | null | undefined): Alignment {
   const clean = stegaClean(value) ?? ''
-  return Object.prototype.hasOwnProperty.call(ALIGNMENTS, clean)
-    ? (clean as Alignment)
-    : 'start'
+  return Object.prototype.hasOwnProperty.call(ALIGNMENTS, clean) ? (clean as Alignment) : 'start'
 }
 
 /**

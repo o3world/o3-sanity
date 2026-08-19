@@ -1,13 +1,13 @@
 import type { ComponentType } from 'react'
 
 import { DisplayHeading, Eyebrow, SectionShell } from '@o3/ui'
+import type { SectionProps } from '@o3/content-runtime/blocks'
 import { stegaClean } from '@sanity/client/stega'
 
 import { BASE_BLOCK_COMPONENTS } from '../../base/baseComponents'
 import { DECORATED_BAND_CLASS, resolveDecoration } from '@/content/blocks/decoration'
 import { MoleculeDecoration } from '@/content/blocks/MoleculeDecoration'
 import { resolveSurface } from '@/content/blocks/surface'
-import type { SectionProps } from '@/content/blocks/sectionTypes'
 
 type LayoutSectionProps = SectionProps<'layoutSection'>
 

@@ -19,7 +19,7 @@ import {
 import { BUTTON_ICONS } from '@o3/ui'
 import { BLOCK_ARRAYS, SECTION_BLOCKS } from '@o3/sanity/schemas/registry'
 
-import { buildSingletonRoute } from '@/lib/content-routes/build'
+import { buildSingletonRoute } from '@o3/content-runtime/routes'
 import { home } from '@/content/documents/page/entry'
 import {
   aSeededPage,

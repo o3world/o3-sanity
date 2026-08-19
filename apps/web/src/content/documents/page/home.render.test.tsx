@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { buildSingletonRoute } from '@/lib/content-routes/build'
+import { buildSingletonRoute } from '@o3/content-runtime/routes'
 import {
   aSeededPage,
   bandPaths,

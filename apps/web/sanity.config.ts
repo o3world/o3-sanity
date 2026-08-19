@@ -20,7 +20,7 @@ import {
 } from '@o3/sanity/constants'
 import { schemaTypes } from '@o3/sanity/schemas'
 
-import { previewPathForDoc } from './src/content/documents/urls'
+import { previewPathForDoc } from '@o3/content-runtime/urls'
 import { mainDocumentRoutes } from './src/sanity/presentationRoutes'
 
 const projectId = resolveProjectId()
@@ -57,7 +57,7 @@ const structure: StructureResolver = (S) =>
  * when none exists yet — the new-page flow); `locations` gives every
  * routable document its "Used on" links so a freshly created draft can be
  * opened in preview immediately. URL shapes mirror
- * `src/content/documents/urls.ts` (hrefForDoc) — keep the two in sync.
+ * `@o3/content-runtime/urls` (hrefForDoc) — keep the two in sync.
  *
  * The route patterns themselves live in `src/sanity/presentationRoutes.ts`,
  * where a test can compile them.

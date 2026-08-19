@@ -1,9 +1,9 @@
 import { OrbitalSphere, SURFACE_CLASS, SurfaceProvider, surfaceAttrs } from '@o3/ui'
+import type { SectionProps } from '@o3/content-runtime/blocks'
 
 import { DECORATED_BAND_CLASS, resolveDecoration } from '@/content/blocks/decoration'
 import { MoleculeDecoration } from '@/content/blocks/MoleculeDecoration'
 import { resolveSurface } from '@/content/blocks/surface'
-import type { SectionProps } from '@/content/blocks/sectionTypes'
 
 type QuoteSectionProps = SectionProps<'quoteSection'>
 

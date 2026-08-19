@@ -3,11 +3,11 @@ import type { ComponentType, JSX, ReactNode } from 'react'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { sanityFetch } from '@/sanity/live'
-import { getSiteSettings } from '@/sanity/siteSettings'
-import { clampPage, pageRange, parsePage } from '@/lib/pagination'
-import { buildDocumentMetadata, type DocumentSeo, type SeoOverrides } from '@/lib/seo'
-import { hrefForDoc } from '@/content/documents/urls'
+import { sanityFetch } from '#live'
+import { getSiteSettings } from '../siteSettings'
+import { clampPage, pageRange, parsePage } from './pagination'
+import { buildDocumentMetadata, type DocumentSeo, type SeoOverrides } from '../seo'
+import { hrefForDoc } from '../urls'
 
 import { docTag, typeTag } from './cacheTags'
 import { encodePathParam } from './encodePathParam'
@@ -68,7 +68,7 @@ interface BaseEntryLike<Q extends string> {
  * The entry contributes only what is document-shaped — title, description and
  * image fallbacks, and the route path. Everything else (the override chain,
  * Site Settings defaults, canonical, robots, OpenGraph, Twitter) is resolved
- * once in `@/lib/seo`, so adding a routable type cannot accidentally ship
+ * once in `@o3/content-runtime/seo`, so adding a routable type cannot accidentally ship
  * with half the tags.
  */
 async function extractMetadata<Q extends string>(

@@ -1,9 +1,10 @@
 import Link from 'next/link'
 
+import { hrefForDoc } from '@o3/content-runtime/urls'
+import type { SectionProps } from '@o3/content-runtime/blocks'
+
 import { SanityImage } from '@/content/SanityImage'
-import { hrefForDoc } from '@/content/documents/urls'
 import { formatNumericDate } from '@/lib/format-date'
-import type { SectionProps } from '@/content/blocks/sectionTypes'
 
 /**
  * The insight card shape — the `INSIGHT_CARD` projection. Pinned to

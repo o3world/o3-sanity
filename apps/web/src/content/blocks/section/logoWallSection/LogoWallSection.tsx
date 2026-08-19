@@ -1,11 +1,11 @@
 import { Eyebrow, SURFACE_CLASS, SurfaceProvider, surfaceAttrs } from '@o3/ui'
 import { cn } from '@o3/ui/lib/utils'
+import type { SectionProps } from '@o3/content-runtime/blocks'
 import { stegaClean } from '@sanity/client/stega'
 
 import { ButtonLink } from '@/content/ButtonLink'
 import { SanityImage } from '@/content/SanityImage'
 import { resolveSurface } from '@/content/blocks/surface'
-import type { SectionProps } from '@/content/blocks/sectionTypes'
 
 type LogoWallSectionProps = SectionProps<'logoWallSection'>
 

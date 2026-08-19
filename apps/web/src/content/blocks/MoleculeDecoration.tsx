@@ -1,8 +1,8 @@
 import { cn, MoleculeMark } from '@o3/ui'
 
 import { resolveDecoration } from '@/content/blocks/decoration'
-import type { PageSection } from '@/content/blocks/sectionTypes'
 import type { Surface } from '@o3/sanity/constants'
+import type { PageSection } from '@o3/content-runtime/blocks'
 
 export interface MoleculeDecorationProps {
   /** The band's `decoration` knob value, stega and all. */

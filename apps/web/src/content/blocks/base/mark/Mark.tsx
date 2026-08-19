@@ -1,7 +1,7 @@
 import { cn, HalftoneDisc, ThinkingOrb, type OrbSize, type OrbState } from '@o3/ui'
 import { stegaClean } from '@sanity/client/stega'
 
-import type { BaseProps } from '@/content/blocks/sectionTypes'
+import type { BaseProps } from '@o3/content-runtime/blocks'
 
 type MarkData = BaseProps<'mark'>
 

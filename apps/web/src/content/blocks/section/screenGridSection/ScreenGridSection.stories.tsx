@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { figmaDesign } from '@o3/story-kit'
 
-import type { SectionProps } from '@/content/blocks/sectionTypes'
+import type { SectionProps } from '@o3/content-runtime/blocks'
 import { seedImage } from '@/stories/seedContent'
 
 import { ScreenGridSection } from './ScreenGridSection'

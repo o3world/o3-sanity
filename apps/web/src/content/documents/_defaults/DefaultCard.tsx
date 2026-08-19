@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { SurfaceProvider, surfaceAttrs } from '@o3/ui'
 
-import { hrefForDoc } from '@/content/documents/urls'
+import { hrefForDoc } from '@o3/content-runtime/urls'
 
 /** Minimal fallback card for types without a bespoke card component. */
 export interface DefaultCardProps {

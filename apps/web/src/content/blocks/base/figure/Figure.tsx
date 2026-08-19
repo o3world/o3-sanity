@@ -1,5 +1,6 @@
+import type { BaseProps } from '@o3/content-runtime/blocks'
+
 import { SanityImage } from '@/content/SanityImage'
-import type { BaseProps } from '@/content/blocks/sectionTypes'
 
 type FigureProps = BaseProps<'figure'>
 

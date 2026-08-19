@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { buildIndexRoute } from '@/lib/content-routes/build'
+import { buildIndexRoute } from '@o3/content-runtime/routes'
 import {
   aCaseStudiesPage,
   aCaseStudyCard,

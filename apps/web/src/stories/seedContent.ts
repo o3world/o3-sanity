@@ -40,7 +40,7 @@ import type {
   SITE_SETTINGS_QUERY_RESULT,
 } from '@o3/sanity/types/generated'
 
-import type { PageSection, SectionBlockData, SectionProps } from '@/content/blocks/sectionTypes'
+import type { PageSection, SectionBlockData, SectionProps } from '@o3/content-runtime/blocks'
 import {
   projectSeedPage,
   resolveAssetMarkers,

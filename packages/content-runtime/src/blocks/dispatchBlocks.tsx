@@ -2,7 +2,7 @@ import type { ComponentType, ReactNode } from 'react'
 
 import type { SanityBlock } from '@o3/sanity/types'
 
-import { arrayItemLoc, dataAttr } from '@/sanity/dataAttribute'
+import { arrayItemLoc, dataAttr } from '../dataAttribute'
 
 import { ANCHOR_OFFSET_CLASS, sectionAnchors } from './anchors'
 

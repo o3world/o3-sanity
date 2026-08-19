@@ -1,5 +1,6 @@
+import { buildIndexRoute } from '@o3/content-runtime/routes'
+
 import { insightIndex } from '@/content/documents'
-import { buildIndexRoute } from '@/lib/content-routes/build'
 
 // Paginated /insights index, 12 per page (?page=N).
 const route = buildIndexRoute(insightIndex)

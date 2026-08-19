@@ -1,6 +1,6 @@
 import { Stat } from '@o3/ui'
 
-import type { BaseProps } from '@/content/blocks/sectionTypes'
+import type { BaseProps } from '@o3/content-runtime/blocks'
 
 type StatGroupProps = BaseProps<'statGroup'>
 

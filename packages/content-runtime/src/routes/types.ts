@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import type { SanityQueries } from '@sanity/client'
 
-import type { DocumentSeo } from '@/lib/seo'
+import type { DocumentSeo } from '../seo'
 
 /**
  * `SanityQueries` is the interface TypeGen augments via
@@ -67,7 +67,7 @@ interface BaseEntry<Q extends string> {
    * What this type contributes to its own SEO: the title/description/image
    * fallbacks and the route path the canonical is built from. NOT the
    * finished `Metadata` — the route builder folds this into the shared
-   * resolution chain (`@/lib/seo`) together with the document's `seo`
+   * resolution chain (`@o3/content-runtime/seo`) together with the document's `seo`
    * overrides and Site Settings' defaults, so every routable type emits the
    * same complete tag set (#26).
    *

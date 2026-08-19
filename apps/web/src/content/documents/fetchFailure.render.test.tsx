@@ -1,14 +1,14 @@
 import { describe, expect, it } from 'vitest'
 
 import { PAGE_QUERY, SITE_SETTINGS_QUERY } from '@o3/sanity/queries'
-
-import { CATCH_ALL_TYPES, home, insight, insightIndex } from '@/content/documents'
 import {
   buildCatchAllRoute,
   buildDetailRoute,
   buildIndexRoute,
   buildSingletonRoute,
-} from '@/lib/content-routes/build'
+} from '@o3/content-runtime/routes'
+
+import { CATCH_ALL_TYPES, home, insight, insightIndex } from '@/content/documents'
 import { expectNotFound, renderRoute, siteSettings } from '@/test'
 
 /**
@@ -22,7 +22,7 @@ import { expectNotFound, renderRoute, siteSettings } from '@/test'
  * listing, so the only symptom of an unreadable dataset was a site that looked
  * like it had no content — which is why the report started at this file rather
  * than at the token. The token check now lives at the fetch
- * (`@/sanity/live`), and what these pin is the other half: a builder must
+ * (`@o3/content-runtime/live`), and what these pin is the other half: a builder must
  * never dress a thrown fetch up as a 404, or the next such failure hides in
  * exactly the same place.
  */

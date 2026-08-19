@@ -186,7 +186,7 @@ a redirect into DNS failure; the correction is recorded in `TERMINAL_OVERRIDES`.
 ## Per-document Yoast meta
 
 `seo` holds **overrides, never resolved values** (#26, `map/seo.ts`), and
-`apps/web/src/lib/seo.ts` re-derives the rest at render time. What actually
+`packages/content-runtime/src/seo.ts` re-derives the rest at render time. What actually
 migrated:
 
 | Field                  |            Documents carrying an override |

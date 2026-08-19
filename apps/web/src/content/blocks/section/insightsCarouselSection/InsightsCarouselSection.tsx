@@ -1,9 +1,9 @@
 import { SectionShell } from '@o3/ui'
+import type { SectionProps } from '@o3/content-runtime/blocks'
+import { fieldAttr } from '@o3/content-runtime/data-attribute'
 
 import { getCard } from '@/content/documents/card-registry'
 import { resolveSurface } from '@/content/blocks/surface'
-import type { SectionProps } from '@/content/blocks/sectionTypes'
-import { fieldAttr } from '@/sanity/dataAttribute'
 
 import { CarouselTrack } from './CarouselTrack'
 

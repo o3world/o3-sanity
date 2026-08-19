@@ -2,9 +2,9 @@ import { CASE_STUDY_QUERY } from '@o3/sanity/queries'
 import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
 import type { CASE_STUDY_QUERY_RESULT } from '@o3/sanity/types/generated'
 
-import { defineDetailType } from '@/lib/content-routes/define'
-import type { RendererProps } from '@/lib/content-routes/types'
-import type { DocumentSeo } from '@/lib/seo'
+import { defineDetailType, type RendererProps } from '@o3/content-runtime/routes'
+import type { DocumentSeo } from '@o3/content-runtime/seo'
+
 import { getView } from '@/content/documents/registry'
 
 type CaseStudyRendererProps = RendererProps<typeof CASE_STUDY_QUERY>

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
-import type { SectionProps } from '@/content/blocks/sectionTypes'
+import type { SectionProps } from '@o3/content-runtime/blocks'
 
 import { ListingSection } from './ListingSection'
 

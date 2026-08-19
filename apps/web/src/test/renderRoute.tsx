@@ -26,7 +26,7 @@ import {
  * No Sanity project, no token, no network, no dev server.
  */
 
-/** The shape every route builder in `@/lib/content-routes/build` returns. */
+/** The shape every route builder in `@o3/content-runtime/routes` returns. */
 export interface RouteShimLike {
   generateMetadata: (props: never) => Promise<Metadata>
   Page: (props: never) => Promise<ReactElement>

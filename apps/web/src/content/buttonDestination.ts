@@ -2,7 +2,7 @@
 // cannot resolve under Storybook's Next preset. A lint rule enforces this.
 import { stegaClean } from '@sanity/client/stega'
 
-import { hrefForDoc } from './documents/urls'
+import { hrefForDoc } from '@o3/content-runtime/urls'
 
 /**
  * Structural button shape — every query projects buttons as

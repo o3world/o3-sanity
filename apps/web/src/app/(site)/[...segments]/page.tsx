@@ -1,8 +1,8 @@
 import { PAGE_QUERY, PAGE_SLUGS_QUERY } from '@o3/sanity/queries'
+import { buildCatchAllRoute } from '@o3/content-runtime/routes'
+import { sanityFetch } from '@o3/content-runtime/live'
 
 import { CATCH_ALL_TYPES } from '@/content/documents'
-import { buildCatchAllRoute } from '@/lib/content-routes/build'
-import { sanityFetch } from '@/sanity/live'
 
 // Known slugs are pre-rendered at build time; unknown ones render on demand
 // (ISR) and 404 if no document matches. Declared explicitly (it is the Next

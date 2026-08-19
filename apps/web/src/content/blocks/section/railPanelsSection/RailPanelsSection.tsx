@@ -1,12 +1,12 @@
 import { SectionShell } from '@o3/ui'
 import { cn } from '@o3/ui/lib/utils'
+import type { SectionProps } from '@o3/content-runtime/blocks'
+import { fieldAttr, itemAttr } from '@o3/content-runtime/data-attribute'
 import { stegaClean } from '@sanity/client/stega'
 
 import { ButtonLink } from '@/content/ButtonLink'
 import { SanityImage } from '@/content/SanityImage'
 import { resolveSurface } from '@/content/blocks/surface'
-import type { SectionProps } from '@/content/blocks/sectionTypes'
-import { fieldAttr, itemAttr } from '@/sanity/dataAttribute'
 
 import { PanelBand } from './PanelBand'
 import { PanelCards } from './PanelCards'

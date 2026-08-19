@@ -1,10 +1,10 @@
 import Link from 'next/link'
 
 import { SurfaceProvider, surfaceAttrs } from '@o3/ui'
+import { hrefForDoc } from '@o3/content-runtime/urls'
+import type { SectionProps } from '@o3/content-runtime/blocks'
 
 import { SanityImage } from '@/content/SanityImage'
-import { hrefForDoc } from '@/content/documents/urls'
-import type { SectionProps } from '@/content/blocks/sectionTypes'
 
 /**
  * The page card shape — the listingSection projection element (the service

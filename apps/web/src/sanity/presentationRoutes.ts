@@ -13,7 +13,7 @@ import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
  * tool down for every URL that reaches the bad pattern. `presentationRoutes.test.ts`
  * compiles each one so that lands in CI instead of in the tool.
  *
- * URL shapes mirror `src/content/documents/urls.ts` (hrefForDoc) — keep the two
+ * URL shapes mirror `@o3/content-runtime/urls` (hrefForDoc) — keep the two
  * in sync.
  */
 

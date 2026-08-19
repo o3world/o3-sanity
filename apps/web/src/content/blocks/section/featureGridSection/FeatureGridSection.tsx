@@ -1,11 +1,11 @@
 import { DisplayHeading, OrbitalDiagram, SectionShell } from '@o3/ui'
+import type { SectionProps } from '@o3/content-runtime/blocks'
 import { stegaClean } from '@sanity/client/stega'
 
 import { Mark, markProps } from '@/content/blocks/base/mark/Mark'
 import { DECORATED_BAND_CLASS } from '@/content/blocks/decoration'
 import { MoleculeDecoration } from '@/content/blocks/MoleculeDecoration'
 import { resolveSurface } from '@/content/blocks/surface'
-import type { SectionProps } from '@/content/blocks/sectionTypes'
 
 type FeatureGridSectionProps = SectionProps<'featureGridSection'>
 

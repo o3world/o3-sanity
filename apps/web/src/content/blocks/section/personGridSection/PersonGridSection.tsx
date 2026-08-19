@@ -1,9 +1,9 @@
 import { DisplayHeading, Eyebrow, PortraitTile, SectionShell } from '@o3/ui'
+import type { SectionProps } from '@o3/content-runtime/blocks'
+import { fieldAttr, itemAttr } from '@o3/content-runtime/data-attribute'
 
 import { SanityImage } from '@/content/SanityImage'
 import { resolveSurface } from '@/content/blocks/surface'
-import type { SectionProps } from '@/content/blocks/sectionTypes'
-import { fieldAttr, itemAttr } from '@/sanity/dataAttribute'
 
 type PersonGridSectionProps = SectionProps<'personGridSection'>
 

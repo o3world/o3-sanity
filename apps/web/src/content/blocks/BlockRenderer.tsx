@@ -1,6 +1,6 @@
 import type { SanityBlock } from '@o3/sanity/types'
 
-import { renderDispatchedBlocks } from './dispatchBlocks'
+import { renderDispatchedBlocks } from '@o3/content-runtime/blocks'
 import { BLOCK_REGISTRY, type DispatchedBlockType } from './registry'
 
 interface BlockRendererProps {

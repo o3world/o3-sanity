@@ -1,11 +1,11 @@
 import Link from 'next/link'
 
 import { ArrowIcon, buttonVariants, Eyebrow } from '@o3/ui'
+import { hrefForDoc } from '@o3/content-runtime/urls'
+import type { SectionProps } from '@o3/content-runtime/blocks'
 
 import { LogoKnockout } from '@/content/LogoKnockout'
 import { SanityImage } from '@/content/SanityImage'
-import { hrefForDoc } from '@/content/documents/urls'
-import type { SectionProps } from '@/content/blocks/sectionTypes'
 
 /**
  * The case-study card shape — the `CASE_STUDY_CARD` projection, pinned to

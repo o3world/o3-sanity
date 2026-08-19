@@ -1,5 +1,5 @@
 /**
- * Stands in for `@/sanity/live` in the `render` test layer (aliased in
+ * Stands in for `@o3/content-runtime/live` in the `render` test layer (aliased in
  * vitest.config.ts). Routes call `sanityFetch` exactly as they do in
  * production; the test decides what comes back.
  *

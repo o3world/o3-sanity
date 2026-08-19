@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { renderToStaticMarkup } from 'react-dom/server'
 
-import type { SectionProps } from '@/content/blocks/sectionTypes'
+import type { SectionProps } from '@o3/content-runtime/blocks'
 
 import { CtaSection } from './CtaSection'
 

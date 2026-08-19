@@ -3,8 +3,8 @@ import { cache } from 'react'
 import { SITE_SETTINGS_QUERY } from '@o3/sanity/queries'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
-import { typeTag } from '@/lib/content-routes/cacheTags'
-import { sanityFetch } from '@/sanity/live'
+import { typeTag } from './routes/cacheTags'
+import { sanityFetch } from '#live'
 
 /**
  * Site Settings, fetched once per request.

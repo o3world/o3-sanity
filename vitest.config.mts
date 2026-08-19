@@ -91,16 +91,25 @@ export default defineConfig({
         // `.tsx` under test reaches the parser with its JSX still in it.
         oxc: { jsx: { runtime: 'automatic', importSource: 'react' } },
         // Anchored regexes, most specific first — an unanchored `@` prefix
-        // alias would swallow `@/sanity/live` before its own entry matched.
+        // alias would swallow `@o3/content-runtime/live` before its own entry
+        // matched.
         resolve: {
           alias: [
             // The one network seam. `installDataset()` feeds routes their
             // documents, so a render test needs no Sanity project, no token,
             // and no network.
+            //
+            // Two entries for one module: the app reaches it by its package
+            // subpath, while the route builders inside @o3/content-runtime
+            // reach it through the package's own `#live` import (package.json
+            // → `imports`). A Vite alias matches the specifier as written, so
+            // stubbing one form does not stub the other — and stubbing only
+            // the app's would leave every route render hitting the network.
             {
-              find: /^@\/sanity\/live$/,
+              find: /^@o3\/content-runtime\/live$/,
               replacement: resolve(webSrc, 'test/stubs/sanity-live.ts'),
             },
+            { find: /^#live$/, replacement: resolve(webSrc, 'test/stubs/sanity-live.ts') },
             // next/image needs Next's build-time image config to render. The
             // component under test is our SanityImage wrapper, whose real work
             // (urlForImage CDN URL construction) happens before next/image is

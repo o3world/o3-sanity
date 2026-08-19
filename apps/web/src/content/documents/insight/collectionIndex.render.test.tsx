@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import { INSIGHTS_PAGE_QUERY } from '@o3/sanity/queries'
 
-import { buildIndexRoute } from '@/lib/content-routes/build'
+import { buildIndexRoute } from '@o3/content-runtime/routes'
 import {
   anInsight,
   anInsightsPage,

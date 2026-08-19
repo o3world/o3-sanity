@@ -19,4 +19,4 @@ Requires a one-time `vercel login`. The pulled vars: `NEXT_PUBLIC_SANITY_PROJECT
 
 - Dev-mode Data Cache can pin a pre-publish `null`: if content seems invisible locally, delete `apps/web/.next`. Production self-heals via the `/api/revalidate` webhook.
 - `/api/revalidate` accepts unsigned POSTs only when `NODE_ENV=development` **and** `SANITY_REVALIDATE_SECRET` is unset.
-- Presentation draft-preview boundary: components fetch through `sanityFetch` (`@/sanity/live`), render section arrays through `Blocks` (`@/content/blocks/Blocks`), and mount `VisualEditing` from `@/sanity/VisualEditing` — ESLint enforces all three (issue #15). Reaching for a bare `@sanity/client` or the raw next-sanity `<VisualEditing />` silently freezes content in the Presentation tool.
+- Presentation draft-preview boundary: components fetch through `sanityFetch` (`@o3/content-runtime/live`), render section arrays through `Blocks` (`@/content/blocks/Blocks`), and mount `VisualEditing` from `@/sanity/VisualEditing` — ESLint enforces all three (issue #15). Reaching for a bare `@sanity/client` or the raw next-sanity `<VisualEditing />` silently freezes content in the Presentation tool.

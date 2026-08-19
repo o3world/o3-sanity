@@ -2,7 +2,7 @@ import { stegaClean } from '@sanity/client/stega'
 
 import { BLOCK_KNOBS } from '@o3/sanity/knobs'
 
-import type { PageSection } from '@/content/blocks/sectionTypes'
+import type { PageSection } from '@o3/content-runtime/blocks'
 
 /** What a band hangs behind its copy, or nothing (`decorationKnob`). */
 export type Decoration = 'molecule' | 'orbs' | 'none'

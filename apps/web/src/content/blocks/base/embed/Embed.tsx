@@ -1,5 +1,6 @@
+import type { BaseProps } from '@o3/content-runtime/blocks'
+
 import { toEmbedSrc } from '@/content/portable-text/embedSrc'
-import type { BaseProps } from '@/content/blocks/sectionTypes'
 
 type EmbedProps = BaseProps<'embed'>
 

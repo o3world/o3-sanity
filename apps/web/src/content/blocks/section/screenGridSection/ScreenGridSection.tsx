@@ -1,10 +1,10 @@
 import { SURFACE_CLASS, SurfaceProvider, surfaceAttrs } from '@o3/ui'
+import type { SectionProps } from '@o3/content-runtime/blocks'
+import { itemAttr } from '@o3/content-runtime/data-attribute'
 import { stegaClean } from '@sanity/client/stega'
 
 import { SanityImage } from '@/content/SanityImage'
 import { resolveSurface } from '@/content/blocks/surface'
-import type { SectionProps } from '@/content/blocks/sectionTypes'
-import { itemAttr } from '@/sanity/dataAttribute'
 
 type ScreenGridSectionProps = SectionProps<'screenGridSection'>
 

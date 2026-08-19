@@ -1,8 +1,8 @@
 import { INSIGHT_SLUGS_QUERY } from '@o3/sanity/queries'
+import { buildDetailRoute } from '@o3/content-runtime/routes'
+import { sanityFetch } from '@o3/content-runtime/live'
 
 import { insight } from '@/content/documents'
-import { buildDetailRoute } from '@/lib/content-routes/build'
-import { sanityFetch } from '@/sanity/live'
 
 export const dynamicParams = true
 

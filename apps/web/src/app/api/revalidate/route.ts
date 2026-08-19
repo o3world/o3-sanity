@@ -2,12 +2,12 @@ import { revalidateTag } from 'next/cache'
 import { type NextRequest, NextResponse } from 'next/server'
 import { parseBody } from 'next-sanity/webhook'
 
-import { docTag, typeTag } from '@/lib/content-routes/cacheTags'
+import { docTag, typeTag } from '@o3/content-runtime/routes'
 
 /**
  * Sanity webhook → Next.js cache revalidation.
  *
- * Tag scheme comes from `@/lib/content-routes/cacheTags` — the same module
+ * Tag scheme comes from `@o3/content-runtime/routes` — the same module
  * the route builders tag their fetches with (writer/reader parity):
  *   - `sanity:<_type>`          — type-level (catches new docs; what the
  *                                 layout's siteSettings fetch subscribes to)

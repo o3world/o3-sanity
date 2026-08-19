@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { heroSectionKnobs } from '@o3/sanity/knobs'
 import { defineKnobStories } from '@o3/story-kit'
 
-import type { SectionProps } from '@/content/blocks/sectionTypes'
+import type { SectionProps } from '@o3/content-runtime/blocks'
 
 import { HeroSection } from './HeroSection'
 

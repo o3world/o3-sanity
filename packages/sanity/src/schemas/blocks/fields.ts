@@ -81,7 +81,7 @@ export function validateAnchorName(value: string | undefined): true | string {
  * shared — and does it silently, on a page nobody was editing.
  *
  * The value reaches the page as an `id` on the band's own wrapper
- * (`apps/web/src/content/blocks/anchors.ts`), which is also where two bands
+ * (`packages/content-runtime/src/blocks/anchors.ts`), which is also where two bands
  * claiming one name are resolved.
  */
 export function anchorField() {

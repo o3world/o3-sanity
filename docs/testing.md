@@ -34,7 +34,7 @@ Node, no React, no filesystem beyond the committed migration JSON.
 
 Two kinds live here:
 
-- **Mappers and helpers.** `tools/migration/src/map/*.test.ts`, `apps/web/src/lib/**`. Migration
+- **Mappers and helpers.** `tools/migration/src/map/*.test.ts`, `packages/content-runtime/src/**`. Migration
   mappers are pure `WpThing → Mapped<Doc>` functions, so a new ACF module type means one arm in the
   mapper and one case in its test.
 - **Corpus invariants.** `tools/migration/src/converted.test.ts` runs over everything actually
@@ -48,7 +48,7 @@ Two kinds live here:
 Renders a real route through the real route builder, with fixture documents instead of Sanity.
 
 ```tsx
-import { buildDetailRoute } from '@/lib/content-routes/build'
+import { buildDetailRoute } from '@o3/content-runtime/routes'
 import { anInsight, renderRoute, expectNotFound } from '@/test'
 
 import { insight } from './entry'
@@ -86,10 +86,11 @@ can't display fails here rather than in Studio. `migratedInsightSlugs()` sweeps 
 is a phone getting a scroll region where the frame draws a stack — and `variantsOf(html, 'gap-12')`
 pins a utility to the widths that emitted it when the two frames disagree on a value.
 
-Four modules are stubbed (see `vitest.config.mts` for why each): `@/sanity/live` is the network
-seam, `next/image` renders a plain `<img>`, `next/headers` lets a test pick the draft or published
-path, and `next/dynamic` becomes `React.lazy` — without that last one every registered View renders
-blank, silently.
+Four modules are stubbed (see `vitest.config.mts` for why each): `@o3/content-runtime/live` is the
+network seam, `next/image` renders a plain `<img>`, `next/headers` lets a test pick the draft or
+published path, and `next/dynamic` becomes `React.lazy` — without that last one every registered
+View renders blank, silently. The live stub is aliased twice, once per specifier: the app imports
+the package subpath, the route builders inside the package import `#live`.
 
 ## `stories` — components in a real browser
 

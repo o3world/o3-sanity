@@ -1,9 +1,9 @@
 import { OrbitalSphere, SurfaceProvider, surfaceAttrs } from '@o3/ui'
+import type { SectionProps } from '@o3/content-runtime/blocks'
 
 import { DECORATED_BAND_CLASS, resolveDecoration } from '@/content/blocks/decoration'
 import { MoleculeDecoration } from '@/content/blocks/MoleculeDecoration'
 import { ButtonLink } from '@/content/ButtonLink'
-import type { SectionProps } from '@/content/blocks/sectionTypes'
 
 type CtaSectionProps = SectionProps<'ctaSection'>
 

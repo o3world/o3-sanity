@@ -2,13 +2,13 @@ import Link from 'next/link'
 import { stegaClean } from '@sanity/client/stega'
 
 import { ArrowIcon, DisplayHeading, Eyebrow, SectionShell } from '@o3/ui'
+import type { SectionProps } from '@o3/content-runtime/blocks'
+import { fieldAttr } from '@o3/content-runtime/data-attribute'
 
 import { Mark, markProps } from '@/content/blocks/base/mark/Mark'
 import { SanityImage } from '@/content/SanityImage'
 import { resolveButtonHref } from '@/content/buttonDestination'
 import { resolveSurface } from '@/content/blocks/surface'
-import type { SectionProps } from '@/content/blocks/sectionTypes'
-import { fieldAttr } from '@/sanity/dataAttribute'
 
 type InFlightSectionProps = SectionProps<'inFlightSection'>
 type Entry = NonNullable<InFlightSectionProps['entries']>[number]

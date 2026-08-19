@@ -1,5 +1,6 @@
+import type { BaseProps } from '@o3/content-runtime/blocks'
+
 import { PortableTextBody } from '@/content/portable-text/PortableTextBody'
-import type { BaseProps } from '@/content/blocks/sectionTypes'
 
 type RichTextProps = BaseProps<'richText'>
 

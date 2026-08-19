@@ -1,10 +1,10 @@
 import { DisplayHeading, Eyebrow, SectionShell } from '@o3/ui'
+import type { SectionProps } from '@o3/content-runtime/blocks'
+import { fieldAttr } from '@o3/content-runtime/data-attribute'
 
 import { Mark, markProps } from '@/content/blocks/base/mark/Mark'
 import { ButtonLink } from '@/content/ButtonLink'
 import { resolveSurface } from '@/content/blocks/surface'
-import type { SectionProps } from '@/content/blocks/sectionTypes'
-import { fieldAttr } from '@/sanity/dataAttribute'
 
 type RoleListSectionProps = SectionProps<'roleListSection'>
 

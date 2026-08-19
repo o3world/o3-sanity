@@ -1,8 +1,8 @@
 import { DisplayHeading, Eyebrow, SectionShell } from '@o3/ui'
+import type { SectionProps } from '@o3/content-runtime/blocks'
+import { fieldAttr } from '@o3/content-runtime/data-attribute'
 
 import { resolveSurface } from '@/content/blocks/surface'
-import type { SectionProps } from '@/content/blocks/sectionTypes'
-import { fieldAttr } from '@/sanity/dataAttribute'
 
 import { InquiryForm } from './InquiryForm'
 

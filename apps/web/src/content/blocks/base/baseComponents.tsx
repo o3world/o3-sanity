@@ -9,7 +9,7 @@ import {
   bindingsToRecord,
   defineBlockRender,
   type ClientBlockRenderBinding,
-} from '../defineBlockRender'
+} from '@o3/content-runtime/blocks'
 import { Button } from './button/Button'
 import { ButtonGroup } from './buttonGroup/ButtonGroup'
 import { Embed } from './embed/Embed'

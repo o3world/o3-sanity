@@ -1,8 +1,8 @@
 import { DisplayHeading, SectionShell } from '@o3/ui'
+import type { SectionProps } from '@o3/content-runtime/blocks'
 
 import { getCard } from '@/content/documents/card-registry'
 import { resolveSurface } from '@/content/blocks/surface'
-import type { SectionProps } from '@/content/blocks/sectionTypes'
 
 type ListingSectionProps = SectionProps<'listingSection'>
 

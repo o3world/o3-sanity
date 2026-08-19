@@ -1,8 +1,8 @@
 import { SurfaceProvider, surfaceAttrs } from '@o3/ui'
+import type { SectionProps } from '@o3/content-runtime/blocks'
 
 import { ButtonLink } from '@/content/ButtonLink'
 import { getCard } from '@/content/documents/card-registry'
-import type { SectionProps } from '@/content/blocks/sectionTypes'
 
 type CaseShowcaseSectionProps = SectionProps<'caseShowcaseSection'>
 
