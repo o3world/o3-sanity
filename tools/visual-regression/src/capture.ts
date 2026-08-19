@@ -11,6 +11,8 @@ import path from 'node:path'
 
 import { chromium, type Browser, type BrowserContext, type Page } from 'playwright'
 
+import { installAssetCache, type AssetCache } from './assets'
+import { FREEZE_SCRIPT } from './freeze'
 import type { StoryEntry } from './storybook'
 
 export interface Viewport {
@@ -28,37 +30,17 @@ export interface Shot {
   error?: string
 }
 
-/**
- * Injected before the first byte of the story renders.
- *
- * Animations and transitions are collapsed rather than paused: an animation
- * left running is the single biggest source of false diffs, and one left
- * *paused* still lands wherever the scheduler happened to stop it. Collapsed,
- * every run screenshots the same end state.
- */
-const FREEZE_CSS = `
-*, *::before, *::after {
-  animation-delay: -1ms !important;
-  animation-duration: 1ms !important;
-  animation-iteration-count: 1 !important;
-  transition-duration: 1ms !important;
-  transition-delay: 0s !important;
-  caret-color: transparent !important;
-}
-html { scroll-behavior: auto !important; }
-`
-
-const FREEZE_SCRIPT = `
-  const style = document.createElement('style')
-  style.textContent = ${JSON.stringify(FREEZE_CSS)}
-  const attach = () => (document.head ?? document.documentElement).appendChild(style)
-  if (document.documentElement) attach()
-  else document.addEventListener('readystatechange', attach, { once: true })
-`
-
 export function shotFile(dir: string, storyId: string, viewport: string): string {
   return path.join(dir, `${storyId}--${viewport}.png`)
 }
+
+/**
+ * Bumped whenever the shutter changes what it waits for. Screenshots are cached
+ * per baseline commit, and a cache written before a waiting rule existed holds
+ * a page caught mid-load — reused as a baseline, it reports the waiting rule
+ * itself as a regression in every story.
+ */
+const CAPTURE_BEHAVIOUR = 'deterministic-assets'
 
 /**
  * What a cached screenshot was taken *with*, short enough to sit in a path.
@@ -75,7 +57,63 @@ export function captureKey(viewports: Viewport[], settleMs: number): string {
   const shape = viewports
     .map((viewport) => `${viewport.name}:${viewport.width}x${viewport.height}`)
     .join(',')
-  return createHash('sha1').update(`${shape}@${settleMs}`).digest('hex').slice(0, 8)
+  return createHash('sha1')
+    .update(`${shape}@${settleMs}/${CAPTURE_BEHAVIOUR}`)
+    .digest('hex')
+    .slice(0, 8)
+}
+
+/** Long enough for a cache miss on a slow morning, short enough to notice. */
+const IMAGE_TIMEOUT_MS = 15_000
+
+/**
+ * Load every image, then wait for all of them — the second half of the fix for
+ * #226, and the half the asset cache cannot do on its own.
+ *
+ * Next's `<Image>` is `loading="lazy"`, so on the homepage twelve of
+ * twenty-three images have not been requested at all when the shutter would
+ * otherwise fire. A full-page screenshot then widens the capture viewport,
+ * which starts those loads *while Chromium is painting* — and whichever of them
+ * wins the race is in the PNG. Forcing them eager and awaiting the decode moves
+ * every image to the same side of the shutter: with this in place the same page
+ * fires zero requests during the capture, where it fired fourteen before.
+ *
+ * Runs in the page, and returns how many images it found so the caller can tell
+ * whether it ran too early. `decode()` rejects for an image the network could
+ * not deliver; a broken image is a legitimate thing to screenshot, so that is
+ * caught rather than waited on.
+ */
+function awaitImages(timeoutMs: number): Promise<number> {
+  const images = Array.from(document.images)
+  for (const image of images) if (image.loading === 'lazy') image.loading = 'eager'
+  const settled = images.map((image) =>
+    image
+      .decode()
+      .catch(() => undefined)
+      .then(() => undefined),
+  )
+  return Promise.race([
+    Promise.all(settled),
+    new Promise((resolve) => setTimeout(resolve, timeoutMs)),
+  ]).then(() => images.length)
+}
+
+/**
+ * Run the barrier until the page stops growing new images.
+ *
+ * One pass is not enough: an image that only exists once the one above it has
+ * loaded — a card whose height decides whether the next band mounts — appears
+ * after the pass that would have waited for it. Two passes agreeing is the
+ * signal that the page is done; the third is the cutoff, because a page that
+ * keeps making images forever is a different bug.
+ */
+async function settleImages(page: Page): Promise<void> {
+  let previous = -1
+  for (let pass = 0; pass < 3; pass++) {
+    const count = await page.evaluate(awaitImages, IMAGE_TIMEOUT_MS)
+    if (count === previous) return
+    previous = count
+  }
 }
 
 async function captureStory(
@@ -131,7 +169,11 @@ async function captureStory(
     // land differs from one taken after in a way that has nothing to do with
     // the change under test.
     await page.evaluate(() => document.fonts.ready)
+    // After the settle, not before it: `sb-show-main` goes on the body before
+    // React has mounted the story's own tree, and a barrier that runs then
+    // finds an empty document and waits for nothing.
     await page.waitForTimeout(settleMs)
+    await settleImages(page)
     // Two frames: one for whatever the settle timeout kicked off, one to paint.
     await page.evaluate(
       () => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(() => r(null)))),
@@ -159,6 +201,10 @@ export async function captureAll(options: {
   settleMs: number
   concurrency: number
   reuseExisting: boolean
+  /** Where remote assets are replayed from — see `./assets`. */
+  assetDir: string
+  /** Shared by both sides of a comparison, so both replay the same bytes. */
+  assetCache: AssetCache
   onProgress?: (done: number, total: number) => void
 }): Promise<Shot[]> {
   const jobs = options.viewports.flatMap((viewport) =>
@@ -198,6 +244,11 @@ export async function captureAll(options: {
         colorScheme: 'light',
       })
       await context.addInitScript(FREEZE_SCRIPT)
+      await installAssetCache(context, {
+        origin: options.baseUrl,
+        dir: options.assetDir,
+        cache: options.assetCache,
+      })
       contexts.set(viewport.name, context)
     }
 

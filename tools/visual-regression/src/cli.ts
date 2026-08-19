@@ -20,6 +20,7 @@ import {
   storiesFor,
   type Affected,
 } from './affected'
+import { forgetUnreachable, type AssetCache } from './assets'
 import { captureAll, captureKey, type Shot, type Viewport } from './capture'
 import { compare, type Comparison } from './compare'
 import { changedFiles, ensureBaseCheckout, git, repoRoot, resolveBase, shortSha } from './git'
@@ -218,6 +219,12 @@ async function main(): Promise<void> {
   )
   if (values.refresh) fs.rmSync(shotsDir, { recursive: true, force: true })
 
+  // Both sides replay their remote assets out of one cache, which is what makes
+  // "the photograph loaded on one side only" impossible (#226).
+  const assetDir = path.join(cache, 'assets')
+  if (values.refresh) forgetUnreachable(assetDir)
+  const assetCache: AssetCache = { unreachable: new Set(), fetched: 0 }
+
   const baselineShots = await withServer(baseBuild, (url) =>
     captureAll({
       baseUrl: url,
@@ -227,6 +234,8 @@ async function main(): Promise<void> {
       settleMs: Number(values.settle),
       concurrency: Number(values.concurrency),
       reuseExisting: true,
+      assetDir,
+      assetCache,
       onProgress: progress(`baseline ${baseShort}`),
     }),
   )
@@ -243,6 +252,8 @@ async function main(): Promise<void> {
       settleMs: Number(values.settle),
       concurrency: Number(values.concurrency),
       reuseExisting: false,
+      assetDir,
+      assetCache,
       onProgress: progress('current  '),
     }),
   )
@@ -284,6 +295,15 @@ async function main(): Promise<void> {
     .map((verdict) => `${count(verdict)} ${verdict}`)
     .join(' · ')
   log(`\n  ${summary}`)
+  if (assetCache.unreachable.size > 0) {
+    // Both sides served the same failure, so this is not a false diff — but a
+    // story whose photograph is missing on both sides is still worth saying out
+    // loud, because the report will not look like the site.
+    log(
+      `  ${assetCache.unreachable.size} remote assets could not be fetched; served as failed. ` +
+        `--refresh retries them.`,
+    )
+  }
   log(`  ${path.relative(root, report)}\n`)
 
   if (values.open && (count('changed') > 0 || count('added') > 0 || count('error') > 0)) {

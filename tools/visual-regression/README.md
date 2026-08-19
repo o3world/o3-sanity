@@ -45,9 +45,9 @@ Two viewports, `mobile` (390×844) and `desktop` (1440×900), full page. Overrid
 `--viewports mobile:390x844,wide:1920x1080` or just `--viewports 1440`.
 
 To keep a rerun of the same commit byte-identical, every capture runs with animations and transitions
-collapsed to 1ms, `prefers-reduced-motion`, a fixed device pixel ratio, and a wait on
-`document.fonts.ready`. A story whose pixels are genuinely non-deterministic — canvas, video, anything
-seeded by a clock — should opt out rather than be tuned around:
+collapsed to 1ms, `prefers-reduced-motion`, a fixed device pixel ratio, a wait on
+`document.fonts.ready`, and the two rules below. A story whose pixels are genuinely non-deterministic
+— canvas, video, anything seeded by a clock — should opt out rather than be tuned around:
 
 ```ts
 export const meta = {
@@ -56,6 +56,36 @@ export const meta = {
   tags: ['vr:skip'],
 }
 ```
+
+### Nothing reaches the network twice
+
+Half the suite fetches something from someone else's server — 256 images from `cdn.sanity.io`, plus
+the YouTube and Vimeo players the Embed block renders. Whether a given one arrived before the shutter
+used to be a property of the morning's bandwidth, and the homepage lost its partner logos in one run
+in three that way (#226).
+
+So a capture reaches the network once per asset, ever. The first run writes each image and font to
+`.vr/assets`; every run after that — and, more to the point, the baseline capture and the current
+capture of the _same_ run — replays those bytes off disk. Anything that would _execute_ is stubbed
+empty instead of cached: a player document renders a different frame, a different consent state and a
+different thumbnail every time it runs, so caching its HTML would not make it deterministic. The
+Embed stories keep their 16:9 frame and their iframe title, which is what they are under test for.
+
+An asset that cannot be fetched is recorded as unreachable and served as a failed request, so both
+sides agree; the run says how many at the end, and `--refresh` retries them.
+
+### Every image is loaded before the shutter
+
+Next's `<Image>` is `loading="lazy"`, so on the homepage twelve of twenty-three images had not been
+requested at all when the shutter fired — and a full-page screenshot widens the capture viewport,
+which starts those loads _while Chromium is painting_. Whichever won the race was in the PNG. Every
+image is now forced eager and decoded before the shutter, which takes that page from fourteen
+requests during the capture to none.
+
+The same freeze that stops the page's animations is written into any SVG served to an `<img>`. An SVG
+loaded as an image is its own document: the page's init script cannot reach it, and neither can
+`prefers-reduced-motion` emulation, so one decorative illustration with four keyframe animations of
+its own rasterised at a different phase in all six of six captures.
 
 ## Reading the report
 
@@ -78,12 +108,14 @@ shows up as the difference it is instead of being cropped away. The header notes
 (default `0`) is the fraction of pixels that still counts as unchanged; raise it to `0.0005` or so if
 a font-rendering wobble is producing noise you have decided to live with. `--settle` (default 200ms)
 is the pause between "rendered" and the shutter — raise it for a story that loads something after
-mount. `--refresh` throws away the cached baseline screenshots and retakes them.
+mount. `--refresh` throws away the cached baseline screenshots and retakes them, and retries the
+assets an earlier run could not fetch.
 
 ## Layout of `.vr/`
 
 ```
 .vr/
+  assets/                remote images and fonts, fetched once and replayed
   base/                  detached worktree at the baseline commit
   build/current/         Storybook build of the working tree
   build/base-<sha>/      Storybook build of the baseline, cached per commit
