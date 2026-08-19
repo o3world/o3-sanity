@@ -19,6 +19,7 @@ import {
 import { O3xoMark } from '@/brand/O3xoMark'
 import { KeyMetricCards } from '@/cards/KeyMetricCard'
 import { YellowTextCards } from '@/cards/YellowTextCard'
+import { ICONS } from '@/icons/Icon'
 
 // The renderers themselves are shared (@o3/content-ui); the binding below is
 // this app's. Re-pointing one line here is what "O3XO adapts a block" costs.
@@ -114,6 +115,19 @@ function LayoutSectionWithAccentCards(props: SectionProps<'layoutSection'>) {
 }
 
 /**
+ * The feature band, with this app's icon set bound into it (#246).
+ *
+ * The same channel as the mark above, for the same reason: the eighteen glyphs
+ * are the O3XO kit's (`4404:5589`) and O3 draws none of them, so the drawing
+ * arrives from the app rather than from the document or the shared package.
+ * `icons` is optional there — a band handed no map renders the dotted mark, and
+ * that is what O3's binding of the bare component gets.
+ */
+function FeatureGridSectionWithIcons(props: SectionProps<'featureGridSection'>) {
+  return <FeatureGridSection {...props} icons={ICONS} />
+}
+
+/**
  * Render bindings for every client-safe SECTION block — the single authoring
  * point `SECTION_CLIENT_COMPONENTS` derives from.
  *
@@ -132,7 +146,7 @@ export const CLIENT_SECTION_BINDINGS = [
   defineBlockRender('quoteSection', { component: QuoteSection }),
   defineBlockRender('insightsCarouselSection', { component: InsightsCarouselSection }),
   defineBlockRender('ctaSection', { component: CtaSection }),
-  defineBlockRender('featureGridSection', { component: FeatureGridSection }),
+  defineBlockRender('featureGridSection', { component: FeatureGridSectionWithIcons }),
   defineBlockRender('personGridSection', { component: PersonGridSection }),
   defineBlockRender('roleListSection', { component: RoleListSection }),
   defineBlockRender('inFlightSection', { component: InFlightSection }),

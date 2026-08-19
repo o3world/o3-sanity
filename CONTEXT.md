@@ -159,7 +159,7 @@ Closed vocabulary. If the field you want isn't here and isn't obviously domain-s
 | `anchor`          | The name a band is given, and the name a button jumps to; no `#`                                    | `id`, `hash`, `fragment`, `jumpTo`                   |
 | `alignment`       | Where a row sits in the space it was given (`buttonGroup`)                                          | `align`, `justify`, `position`, `float`              |
 | `mark`            | The dotted circle beside an item (type `mark`)                                                      | `icon`, `disc`, `orb` — `orb` is one of its `kind`s  |
-| `icon`            | The glyph a button trails, from a curated set (`button`)                                            | `glyph`, `symbol`, `arrow`                           |
+| `icon`            | A glyph from a curated set — trailing a button, or beside a feature (`button`, `feature`)           | `glyph`, `symbol`, `arrow`                           |
 | `date`            | When a leaf object's thing happens (the Live MON / DD marker)                                       | `publishedAt` — that's a document's publication time |
 | `name`            | A person's or organization's real-world name                                                        | Anything that isn't a proper noun                    |
 | `surface`         | Band surface **role** (`white \| bone \| ink`), painted per brand; injected by `defineSectionBlock` | Never hand-author it                                 |

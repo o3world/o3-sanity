@@ -9,6 +9,8 @@ import { BLOCK_KNOBS, OBJECT_KNOBS } from '@o3/sanity/knobs'
 import { BLOCK_ARRAYS } from '@o3/sanity/schemas/registry'
 import { BUTTON_ICONS } from '@o3/ui'
 
+import { ICONS } from '@/icons/Icon'
+
 /**
  * The one VisualEditing mount for the site (issue #15).
  *
@@ -44,6 +46,10 @@ import { BUTTON_ICONS } from '@o3/ui'
  * directory is bundled into the Studio and the preview overlay and must not
  * pull `@o3/ui` into either. So the site — which already renders these icons on
  * the page — hands the same components to the control that draws the picker.
+ * `glyphs` is one flat map keyed by option value across every knob that draws
+ * one, so this app's own set joins it (#246): `feature.icon` offers eighteen
+ * names, and eighteen is exactly the picker that has to show shapes rather than
+ * the words `file magnifying glass`.
  *
  * `<CanvasNotices />` is a SIBLING and cannot be anything else (#124). An
  * overlay component renders only while its element is hovered, so a refused
@@ -56,7 +62,7 @@ const canvasComponents = createCanvasComponents({
   blockKnobs: BLOCK_KNOBS,
   objectKnobs: OBJECT_KNOBS,
   blockArrays: BLOCK_ARRAYS,
-  glyphs: BUTTON_ICONS,
+  glyphs: { ...BUTTON_ICONS, ...ICONS },
 })
 
 export function VisualEditing() {

@@ -7,7 +7,7 @@ import { blockArrayMembers } from './registry'
 import { PAGE_TYPES } from '../../constants'
 import { caseShowcaseSectionKnobs } from '../../knobs/caseShowcaseSection'
 import { ctaSectionKnobs } from '../../knobs/ctaSection'
-import { featureGridSectionKnobs } from '../../knobs/featureGridSection'
+import { featureGridSectionKnobs, featureKnobs } from '../../knobs/featureGridSection'
 import { formSectionKnobs } from '../../knobs/formSection'
 import { heroSectionKnobs } from '../../knobs/heroSection'
 import { inFlightSectionKnobs } from '../../knobs/inFlightSection'
@@ -322,9 +322,11 @@ export const ctaSection = defineSectionBlock({
 
 /**
  * `layout`, `decoration` and `surface` are declared in
- * `src/knobs/featureGridSection.ts` (ADR 0020). The `features` length rule
- * still reads `layout` from the form value, because what a choice requires of
- * the rest of the document is validation rather than a knob.
+ * `src/knobs/featureGridSection.ts` (ADR 0020), and so is `icon` — a feature's
+ * own design option, declared against the member because an array member is its
+ * own knob root (ADR 0021). The `features` length rule still reads `layout`
+ * from the form value, because what a choice requires of the rest of the
+ * document is validation rather than a knob.
  *
  * **Named for the composition, not for the first page that used it.** It was
  * `disciplineGridSection` while About's four disciplines were its only caller;
@@ -362,9 +364,8 @@ export const featureGridSection = defineSectionBlock({
               : 'The orbital layout places exactly four features.'
           }),
       of: [
-        defineArrayMember({
-          type: 'object',
-          name: 'feature',
+        defineArrayItem({
+          knobs: featureKnobs,
           fields: [
             defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
             defineField({
@@ -380,6 +381,9 @@ export const featureGridSection = defineSectionBlock({
               description:
                 'The dotted circle the frame sets with the copy — an orb unless set to disc. Drawn by every layout except orbital, which places its own nodes.',
             }),
+            // Beside `mark`, because the two fill one position: a feature that
+            // names an icon has the glyph where the disc would have been.
+            'icon',
           ],
           preview: { select: { title: 'heading', subtitle: 'body' } },
         }),

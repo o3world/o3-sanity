@@ -337,6 +337,26 @@ export type FeatureGridSection = {
     heading?: string
     body?: string
     mark?: Mark
+    icon?:
+      | 'none'
+      | 'arrow-circle-right'
+      | 'chart-line-up'
+      | 'crosshair'
+      | 'file-magnifying-glass'
+      | 'gear'
+      | 'handshake'
+      | 'hard-drives'
+      | 'lightbulb-filament'
+      | 'line-segments'
+      | 'link'
+      | 'map-trifold'
+      | 'path'
+      | 'share-network'
+      | 'sparkle'
+      | 'sun-horizon'
+      | 'swap'
+      | 'user-gear'
+      | 'users'
     _type: 'feature'
     _key: string
   }>
@@ -1520,6 +1540,26 @@ export type CASE_STUDY_QUERY_RESULT = {
           heading?: string
           body?: string
           mark?: Mark
+          icon?:
+            | 'arrow-circle-right'
+            | 'chart-line-up'
+            | 'crosshair'
+            | 'file-magnifying-glass'
+            | 'gear'
+            | 'handshake'
+            | 'hard-drives'
+            | 'lightbulb-filament'
+            | 'line-segments'
+            | 'link'
+            | 'map-trifold'
+            | 'none'
+            | 'path'
+            | 'share-network'
+            | 'sparkle'
+            | 'sun-horizon'
+            | 'swap'
+            | 'user-gear'
+            | 'users'
           _type: 'feature'
           _key: string
         }>
@@ -2258,6 +2298,26 @@ export type PAGE_QUERY_RESULT = {
           heading?: string
           body?: string
           mark?: Mark
+          icon?:
+            | 'arrow-circle-right'
+            | 'chart-line-up'
+            | 'crosshair'
+            | 'file-magnifying-glass'
+            | 'gear'
+            | 'handshake'
+            | 'hard-drives'
+            | 'lightbulb-filament'
+            | 'line-segments'
+            | 'link'
+            | 'map-trifold'
+            | 'none'
+            | 'path'
+            | 'share-network'
+            | 'sparkle'
+            | 'sun-horizon'
+            | 'swap'
+            | 'user-gear'
+            | 'users'
           _type: 'feature'
           _key: string
         }>
