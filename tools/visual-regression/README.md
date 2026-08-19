@@ -73,7 +73,11 @@ different thumbnail every time it runs, so caching its HTML would not make it de
 Embed stories keep their 16:9 frame and their iframe title, which is what they are under test for.
 
 An asset that cannot be fetched is recorded as unreachable and served as a failed request, so both
-sides agree; the run says how many at the end, and `--refresh` retries them.
+sides agree, and the run says how many at the end. It stays cached for the rest of that run — a 503
+that clears halfway through must not hand the current capture a photograph the baseline capture never
+got — but only a timeout survives into the next one. A refusal the server answered with is re-asked
+every run, because a cached 403 outlives the broken URL that caused it and costs one round-trip to
+re-ask (#236). `--refresh` retries the timeouts too.
 
 ### The shutter waits for the page, not for Storybook
 
@@ -121,7 +125,7 @@ shows up as the difference it is instead of being cropped away. The header notes
 a font-rendering wobble is producing noise you have decided to live with. `--settle` (default 200ms)
 is the pause between "rendered" and the shutter — raise it for a story that loads something after
 mount. `--refresh` throws away the cached baseline screenshots and retakes them, and retries the
-assets an earlier run could not fetch.
+assets an earlier run timed out on.
 
 ## Layout of `.vr/`
 

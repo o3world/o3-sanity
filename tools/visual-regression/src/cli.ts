@@ -20,7 +20,7 @@ import {
   storiesFor,
   type Affected,
 } from './affected'
-import { forgetUnreachable, type AssetCache } from './assets'
+import { forgetErrorResponses, forgetUnreachable, type AssetCache } from './assets'
 import { captureAll, captureKey, type Shot, type Viewport } from './capture'
 import { compare, type Comparison } from './compare'
 import { changedFiles, ensureBaseCheckout, git, repoRoot, resolveBase, shortSha } from './git'
@@ -222,6 +222,11 @@ async function main(): Promise<void> {
   // Both sides replay their remote assets out of one cache, which is what makes
   // "the photograph loaded on one side only" impossible (#226).
   const assetDir = path.join(cache, 'assets')
+  // A refusal the server gave us is re-asked every run: it costs one
+  // round-trip, and a URL fixed since yesterday should not need a flag to be
+  // noticed. A timeout costs a minute of attempts to rediscover, so it waits
+  // for `--refresh`.
+  forgetErrorResponses(assetDir)
   if (values.refresh) forgetUnreachable(assetDir)
   const assetCache: AssetCache = { unreachable: new Set(), fetched: 0 }
 
@@ -301,7 +306,7 @@ async function main(): Promise<void> {
     // loud, because the report will not look like the site.
     log(
       `  ${assetCache.unreachable.size} remote assets could not be fetched; served as failed. ` +
-        `--refresh retries them.`,
+        `The next run re-asks the ones a server refused; --refresh retries the ones that timed out.`,
     )
   }
   log(`  ${path.relative(root, report)}\n`)

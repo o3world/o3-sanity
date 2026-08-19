@@ -48,6 +48,11 @@ interface CachedMeta {
   contentType: string
 }
 
+/** Whether a cached entry holds an asset, as opposed to a server saying no. */
+function arrived(status: number): boolean {
+  return status >= 200 && status < 300
+}
+
 /**
  * Where a URL's bytes live.
  *
@@ -168,8 +173,10 @@ export async function installAssetCache(
     const entry = readCached(file)
     // A miss that stayed a miss: serve the failure the network gave us, and
     // say so afterwards rather than letting a silently absent photograph read
-    // as a pixel change.
-    if (!entry || entry.meta.status === 0) {
+    // as a pixel change. A 403 counts — the bytes are as absent as a timeout's,
+    // and replaying the status instead of reporting it is what made #236's
+    // stale 403 invisible.
+    if (!entry || !arrived(entry.meta.status)) {
       cache.unreachable.add(url)
       return route.abort('failed')
     }
@@ -182,19 +189,39 @@ export async function installAssetCache(
   })
 }
 
-/**
- * Drop the "could not fetch this" markers, keeping the bytes that did arrive.
- *
- * A cached failure is what stops one bad minute of network from producing a
- * different screenshot every run; `--refresh` is where a caller says the bad
- * minute is over.
- */
-export function forgetUnreachable(dir: string): void {
+function forget(dir: string, doomed: (meta: CachedMeta) => boolean): void {
   if (!fs.existsSync(dir)) return
   for (const name of fs.readdirSync(dir)) {
     if (!name.endsWith('.json')) continue
     const file = path.join(dir, name)
     const meta = JSON.parse(fs.readFileSync(file, 'utf8')) as CachedMeta
-    if (meta.status === 0) fs.rmSync(file)
+    if (doomed(meta)) fs.rmSync(file)
   }
+}
+
+/**
+ * Drop the failures a server *answered* with, keeping the bytes that arrived.
+ *
+ * Run at the start of every run, because a cached 403 outlives its cause: the
+ * URL gets fixed, the asset gets reuploaded, and the cache goes on serving the
+ * refusal until someone thinks to empty `.vr/assets` by hand (#236). Re-asking
+ * is cheap — the server answered last time, so it costs one round-trip — and
+ * within a run the answer is still written to disk on first ask and replayed
+ * from there, so a 5xx that clears halfway through cannot hand the current
+ * capture a photograph the baseline capture never got.
+ */
+export function forgetErrorResponses(dir: string): void {
+  forget(dir, (meta) => meta.status !== 0 && !arrived(meta.status))
+}
+
+/**
+ * Drop the "could not fetch this at all" markers, keeping everything else.
+ *
+ * A cached timeout is what stops one bad minute of network from producing a
+ * different screenshot every run, and rediscovering one is not cheap — three
+ * attempts at twenty seconds, for every dead URL, before the first shutter.
+ * So it survives until `--refresh` says the bad minute is over.
+ */
+export function forgetUnreachable(dir: string): void {
+  forget(dir, (meta) => meta.status === 0)
 }
