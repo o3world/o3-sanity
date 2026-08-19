@@ -1,0 +1,56 @@
+{
+  "_meta": {
+    "type": "caseStudy"
+  },
+  "slug": "global-tech-firm",
+  "path": "/case-studies/global-tech-firm",
+  "collectionItemId": "hHAJRRkxA",
+  "title": "Streamlining enterprise RFP responses with intelligent automation",
+  "titleRendered": "Global Tech Firm Case Study: RFP Automation | O3XO",
+  "deck": "This global technology firm needed to respond to hundreds of RFPs annually while maintaining quality. O3XO's generative AI solution dramatically accelerated response times while preserving expertise.",
+  "heroImage": {
+    "url": "https://framerusercontent.com/images/RVgabRp6Vu4urClUHRVZAMnos.webp",
+    "alt": "Business professional typing on laptop, representing AI-driven RFP automation and workflow efficiency"
+  },
+  "chapters": [
+    {
+      "kicker": "Opportunity",
+      "title": "Managing hundreds of high-stakes proposals with precision",
+      "bodyHtml": "<p dir=\"auto\" class=\"framer-text framer-styles-preset-jswlfd\">A global technology firm faced mounting pressure from the sheer volume of Request for Proposals (RFPs) flooding their business development pipeline, hundreds per year across diverse markets and solutions. Each RFP response required extensive manual effort: referencing previous proposals, mining vast databases of technical content, copying and pasting information from disparate sources, and ensuring consistency across complex multi-section documents.</p><p dir=\"auto\" class=\"framer-text framer-styles-preset-jswlfd\">This labor-intensive process created bottlenecks that delayed responses, strained specialist resources, and risked missing critical opportunities in competitive markets.</p><p dir=\"auto\" class=\"framer-text framer-styles-preset-jswlfd\">The challenge lay in accelerating RFP turnaround times while maintaining the precision, customization, and strategic positioning that wins enterprise deals.</p>"
+    },
+    {
+      "kicker": "Solution",
+      "title": "Intelligent content orchestration that amplifies specialist expertise",
+      "bodyHtml": "<p dir=\"auto\" class=\"framer-text framer-styles-preset-jswlfd\">O3XO began with a comprehensive workshop to map the firm's RFP response journey and identify optimal intervention points for AI enhancement. We developed a generative AI solution that augmented rather than replaced the work of RFP specialists, focusing on eliminating repetitive tasks while preserving strategic oversight. The system ingested and normalized content from the company's extensive library of past RFP responses, creating an intelligent knowledge base that could instantly surface relevant sections, technical specifications, and proven messaging.</p><p dir=\"auto\" class=\"framer-text framer-styles-preset-jswlfd\">We built a user experience prioritizing speed, accuracy, and control, allowing specialists to query the system in natural language, receive contextually appropriate content suggestions, and maintain editorial control over final responses.</p>"
+    }
+  ],
+  "stats": [
+    {
+      "value": "40%",
+      "label": "Time saved on RFP responses"
+    }
+  ],
+  "quote": {
+    "text": "\"We've taken huge steps. I'm feeling good because of the journey we've been on: better responses, better structure, and more efficient outcomes.\"",
+    "attribution": "RFP Specialist, Global Technology Firm"
+  },
+  "card": {
+    "slug": "global-tech-firm",
+    "client": "Global tech firm",
+    "subject": "RFP automation",
+    "headline": "Learn how we reduced time and costs for this global tech firm",
+    "stat": {
+      "value": "40%",
+      "label": "Time saved on RFP responses"
+    },
+    "image": {
+      "url": "https://framerusercontent.com/images/MeplhX7zFPEhH4aoDLJA7IAJLk.jpg",
+      "alt": "Business professional typing on laptop, representing AI-driven RFP automation and workflow efficiency"
+    }
+  },
+  "seo": {
+    "canonicalRendered": "https://www.o3xo.ai/case-studies/global-tech-firm",
+    "descriptionOverride": "See how a global technology firm reduced RFP response time by 40% with AI-powered automation, accelerating hundreds of enterprise proposals annually.",
+    "ogImage": "https://framerusercontent.com/images/RVgabRp6Vu4urClUHRVZAMnos.webp?width=788&height=500"
+  }
+}

@@ -9,6 +9,8 @@ import { SECTION_BLOCKS } from '@o3/sanity/schemas/registry'
 import { refsIn } from './lib/corpus'
 import { dataRoot } from './lib/paths'
 import { categoryDoc } from './map/category'
+import { caseStudyDoc } from './map/caseStudy'
+import { clientDoc } from './map/framerCaseStudy'
 import { insightDoc } from './map/insight'
 import { checkPathParity } from './map/paths'
 import type { FramerInsightRecord } from './map/framer'
@@ -102,7 +104,9 @@ describe('the committed O3XO corpus', () => {
 
   it('records provenance naming the source on every document', () => {
     for (const { file, doc } of all) {
-      expect(provenance(doc).sourceId, file).toMatch(/^(framer:(insight|category):.+|seed:.+)$/)
+      expect(provenance(doc).sourceId, file).toMatch(
+        /^(framer:(insight|category|caseStudy|client):.+|seed:.+)$/,
+      )
     }
   })
 
@@ -227,6 +231,89 @@ describe('the committed O3XO corpus', () => {
       expect((settings?.navItems as unknown[] | undefined)?.length).toBeGreaterThan(0)
       expect((settings?.footerGroups as unknown[] | undefined)?.length).toBeGreaterThan(0)
       expect(settings?.footerTagline).toBeTruthy()
+    })
+  })
+
+  /**
+   * The case studies (#219). o3xo.ai publishes six, at six URLs, and the model
+   * carries them whole: the client the collection index names, the two authored
+   * chapters, the results figure and — on five of the six — the client quote.
+   */
+  describe('every migrated case study', () => {
+    const caseStudies = all.filter(({ doc }) => doc._type === 'caseStudy')
+    const clients = all.filter(({ doc }) => doc._type === 'client')
+
+    it('has the whole published collection, and no redirect junk', () => {
+      expect(
+        caseStudies.map(({ doc }) => (doc.slug as { current: string }).current).sort(),
+      ).toEqual([
+        'buffalo-construction',
+        'e-hazard',
+        'fortune-500-insurance-provider',
+        'global-tech-firm',
+        'healthcare-tech-leader',
+        'tyndale',
+      ])
+    })
+
+    it('validates every one against the same gate o3 case studies pass', () => {
+      for (const { file, doc } of caseStudies) {
+        const parsed = caseStudyDoc.safeParse(doc)
+        expect(parsed.success, `${file}: ${JSON.stringify(parsed.error?.issues)}`).toBe(true)
+      }
+    })
+
+    it('validates every client it names', () => {
+      expect(clients.length).toBe(caseStudies.length)
+      for (const { file, doc } of clients) {
+        const parsed = clientDoc.safeParse(doc)
+        expect(parsed.success, `${file}: ${JSON.stringify(parsed.error?.issues)}`).toBe(true)
+      }
+    })
+
+    /**
+     * The narrative is one interleaved array (ADR 0018), and every member of it
+     * is either a chapter or a registered section block — a bespoke `_type`
+     * here would load into a document nothing can render.
+     */
+    it('builds the story from chapters and registered blocks only', () => {
+      for (const { file, doc } of caseStudies) {
+        const story = (doc.story ?? []) as { _type: string; _key?: string }[]
+        expect(story.length, `${file} has no story`).toBeGreaterThan(0)
+        for (const member of story) {
+          if (member._type === 'chapter') continue
+          expect(
+            SECTION_BLOCKS as readonly string[],
+            `${file}: unregistered story member "${member._type}"`,
+          ).toContain(member._type)
+        }
+        const keys = story.map((member) => member._key)
+        expect(keys.every(Boolean), `${file} has a story member with no _key`).toBe(true)
+        expect(new Set(keys).size, `${file} repeats a story _key`).toBe(keys.length)
+      }
+    })
+
+    it('serves every case study at the path o3xo.ai serves it at', () => {
+      const { collections } = brandConfig('o3xo')
+      let checked = 0
+      for (const { file, doc } of caseStudies) {
+        const extract = join(ROOT, 'extract', 'caseStudy', file.split('/').pop()!)
+        if (!existsSync(extract)) continue
+        const record = JSON.parse(readFileSync(extract, 'utf8')) as {
+          seo: { canonicalRendered: string }
+        }
+        const slug = (doc.slug as { current: string }).current
+        const issue = checkPathParity(
+          record.seo.canonicalRendered,
+          `${collections.caseStudy.prefix}/${slug}`,
+          'o3xo.ai',
+        )
+        expect(issue?.detail, file).toBeUndefined()
+        checked++
+      }
+      expect(checked, 'no case study was checked — wrong extract directory?').toBe(
+        caseStudies.length,
+      )
     })
   })
 

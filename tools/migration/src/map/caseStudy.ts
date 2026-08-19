@@ -140,7 +140,9 @@ const unmodelledSection = z
 const storyMember = z.union([chapter, mediaSection, screenGridSection, unmodelledSection])
 
 export const caseStudyDoc = z.object({
-  _id: z.string().regex(/^caseStudy-wp-\d+$/),
+  /* `-wp-<postId>` for a WordPress `work` post, `-framer-<slug>` for one of
+   * o3xo.ai's case studies (`map/framerCaseStudy.ts`). */
+  _id: z.string().regex(/^caseStudy-(wp-\d+|framer-[a-z0-9-]+)$/),
   _type: z.literal('caseStudy'),
   title: z.string().min(1),
   slug: z.object({ _type: z.literal('slug'), current: z.string().min(1) }),
@@ -166,7 +168,12 @@ export const caseStudyDoc = z.object({
   seo: seoObject.optional(),
   migration: z.object({
     locked: z.literal(false),
-    sourceId: z.string().regex(/^wp:work:\d+$/),
+    sourceId: z.string().regex(/^(wp:work:\d+|framer:caseStudy:[A-Za-z0-9_-]+)$/),
+    /* The coverage-gap marker (ADR 0007). Never set by the translate track,
+     * whose whole review mechanism is `_meta.flags`; set by the Framer mapper,
+     * where the gap is the same on all six documents and belongs on each one. */
+    provisional: z.boolean().optional(),
+    provisionalNote: z.string().min(1).optional(),
   }),
 })
 

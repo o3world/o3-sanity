@@ -15,6 +15,11 @@ import { brandConfig } from '@o3/sanity/brand'
 import type { ConversionIssue } from './lib/htmlToPortableText'
 import { CONVERTED_DIR, EXTRACT_DIR, writeJson } from './lib/paths'
 import { mapFramerCategory, mapFramerInsight, type FramerInsightRecord } from './map/framer'
+import {
+  mapFramerCaseStudy,
+  mapFramerClient,
+  type FramerCaseStudyRecord,
+} from './map/framerCaseStudy'
 
 // The prefix comes from brand config, which is the one place a brand's facts
 // live (ADR 0028) — never `/insights` as a literal, even though both brands
@@ -57,8 +62,53 @@ for (const category of categories.values()) {
   written++
 }
 
+/**
+ * Case studies (#219). A second collection off the same source, and the
+ * `client` documents its cards name — reference-driven, exactly as the
+ * categories above are: only clients a case study actually points at become
+ * documents.
+ *
+ * The directory is optional, because a checkout that has only ever extracted
+ * insights is a legitimate state and this driver is what both runs go through.
+ */
+const caseStudiesDir = join(EXTRACT_DIR, 'caseStudy')
+const clients = new Map<string, ReturnType<typeof mapFramerClient>>()
+let caseStudiesWritten = 0
+
+if (existsSync(caseStudiesDir)) {
+  for (const file of readdirSync(caseStudiesDir).filter((f) => f.endsWith('.json'))) {
+    const record = JSON.parse(
+      readFileSync(join(caseStudiesDir, file), 'utf8'),
+    ) as FramerCaseStudyRecord
+    const result = mapFramerCaseStudy(record, {
+      caseStudyPrefix: collections.caseStudy.prefix,
+    })
+    if (!result.ok) {
+      failures.push({ slug: record.slug, issues: result.issues })
+      continue
+    }
+    writeJson(join(CONVERTED_DIR, 'caseStudy', file), result.doc)
+    caseStudiesWritten++
+    written++
+    if (result.notes?.length) notes.push({ slug: record.slug, notes: result.notes })
+    const client = mapFramerClient(record.card.client)
+    clients.set(client._id, client)
+  }
+
+  for (const client of clients.values()) {
+    writeJson(
+      join(CONVERTED_DIR, 'client', `${client._id.replace('client-framer-', '')}.json`),
+      client,
+    )
+    written++
+  }
+}
+
 console.log(
-  `converted ${written} documents (${written - categories.size} insights, ${categories.size} categories) → ${CONVERTED_DIR}`,
+  `converted ${written} documents (` +
+    `${written - categories.size - caseStudiesWritten - clients.size} insights, ` +
+    `${categories.size} categories, ${caseStudiesWritten} case studies, ${clients.size} clients` +
+    `) → ${CONVERTED_DIR}`,
 )
 if (notes.length > 0) {
   console.warn(`\nNOTES (${notes.length}) — converted, but the source is missing something:`)

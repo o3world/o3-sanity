@@ -52,7 +52,7 @@ export interface FramerMapOptions {
  * character — the site serves it, so path parity requires it — and the id key is
  * reduced to what an id may hold.
  */
-function idKey(slug: string): string {
+export function idKey(slug: string): string {
   return slug
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')

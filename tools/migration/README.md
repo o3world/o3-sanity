@@ -21,6 +21,7 @@ once: the extract source, the corpus tree on disk, and the Sanity project.
 
 ```sh
 pnpm --filter @o3/migration extract -- --brand o3xo --insights all
+pnpm --filter @o3/migration extract -- --brand o3xo --case-studies all
 pnpm --filter @o3/migration convert -- --brand o3xo
 pnpm --filter @o3/migration load    -- --brand o3xo
 pnpm --filter @o3/migration verify  -- --brand o3xo
@@ -513,3 +514,101 @@ same rule `normalizeUploadUrl` enforces for WordPress thumbnails, and the reason
   and the privacy link. Until it is, `siteSettings` stays the hand-seeded
   bootstrap #215 wrote, and `verify` applies `siteSettingsDoc` — which describes
   the **WordPress chrome extract** — only to WordPress-sourced settings.
+
+---
+
+## O3XO's case studies: six, and the index is half the source (#219)
+
+```sh
+pnpm --filter @o3/migration extract -- --brand o3xo --case-studies all
+pnpm --filter @o3/migration convert -- --brand o3xo
+```
+
+They serve at `/case-studies/{slug}` on `apps/o3xo`, where o3 serves `/work` —
+the first collection whose prefix differs per brand, and it is read off brand
+config in the mapper as well as in the app.
+
+### The collection index is not a listing
+
+It is a second region of the same CMS item, and the fields on it appear nowhere
+else. The **detail page** carries the headline, the standfirst, the Opportunity
+and Solution bands, the results figures and the client quote. The **index card**
+carries the client's name, a subject label, a card sentence and a card
+photograph.
+
+`caseStudy.client` is required and the detail page never prints the client, so
+the extract reads the index once and hangs a card record off every case study.
+A sitemap slug with no card stops the run — a case study whose client is unknown
+is not one this pipeline will guess at.
+
+### Six real ones, and three URLs that are not
+
+The sitemap advertises eight case-study items. `redirect-input` 302s to
+`redirect-output`, and `redirect-output` is a duplicate of Buffalo Construction
+whose `<title>` still reads "…Copy Copy": a redirect rig somebody left in the
+collection. They are excluded by name in `JUNK_CASE_STUDY_SLUGS`
+(`lib/framer.ts`), because the pages are well-formed and would otherwise migrate
+into two case studies nobody wrote. **#223's redirect audit needs the same two
+names**, and that constant is where they are written down.
+
+The index draws **seven** cards for **six** URLs: two published items are the
+same healthcare engagement, byte for byte. Framer serves one page for the pair,
+so the card list is deduplicated by slug and the duplicate is invisible to a
+URL-driven extract.
+
+### The bands are told apart by structure, never by copy
+
+The RichTextContainer regions on these pages are named after the master
+component's own default text — the box holding the title is called "AI solutions
+making finance + insurance more accessible" on every case study. So a
+`data-framer-name` is read for **structure** and never for meaning: the
+narrative band is the `Section` with `Margin` children, the results band the one
+with `Article` children, the quote band the one with neither. Every band asserts
+its line count, so a band that gains a field stops the run instead of filing the
+new copy under whatever field sits at that index.
+
+The archive is uniform. Two chapters (Opportunity, Solution), one results figure
+with three empty template slots beside it, and a client quote on five of the
+six. Bodies are plain `<p>` — no links, no lists, no images anywhere in the set.
+
+### What the model carries, and what it cannot
+
+| Source                | Field                                                 |
+| --------------------- | ----------------------------------------------------- |
+| hero headline         | `title`                                               |
+| hero deck             | `narrativeHeadline` — the problem-framing sentence    |
+| index card's client   | `client` → a `client-framer-<key>` document           |
+| Opportunity, Solution | two `chapter` members of `story`                      |
+| results figure        | `stats`                                               |
+| client quote          | a `quoteSection` in `story`, `decoration: "molecule"` |
+| hero photograph       | `heroMedia`                                           |
+| meta description      | `seo.description`                                     |
+
+Four things do not migrate, and none of them is invented into a field that means
+something else:
+
+1. **The card's subject label** ("RFP automation") — no field.
+2. **The card's own sentence** — the model has one narrative sentence and the
+   hero deck is it. The two are different copy on this site.
+3. **The card's photograph**, which differs from the hero's on three of the six
+   — the model has one image.
+4. **`client.logo`**, required in Studio. o3xo.ai shows no client mark anywhere,
+   so all six client documents load invalid, which is the correct signal.
+
+The first three are reported as a note on every convert run, and all four are
+named in each document's `provisionalNote`, so `verify` counts them out loud.
+The words stay recoverable, verbatim, in the committed extract. This is the
+answer #22 reached for WordPress's `headline`: giving a field to a dropped source
+field is a schema conversation, not something a migration decides on the way
+past.
+
+### Two things worth knowing before the next collection
+
+- **The quote band draws its own quotation marks.** Every seeded `quoteSection`
+  in this repo stores the words alone; o3xo.ai types the marks into the copy, in
+  both curly and straight forms. The mapper strips a matching pair and reports
+  it — the same doubling `mapSeo` strips a site-name suffix to prevent.
+- **`isPipelineOwned` had never heard of `framer`.** It matched `-wp-` and
+  `-seed-` only, so a Framer-sourced document was written by every load and
+  retired by none — a renamed slug would have left the old document serving its
+  old URL forever. Fixed here; it applies to #217's insight too.

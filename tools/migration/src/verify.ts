@@ -30,6 +30,8 @@ import { brandArg } from './lib/brandArg'
 import { BRIEF_ID, CORPUS_DIRS, isInternalType, refsIn } from './lib/corpus'
 import { untouchedPlaceholders } from './lib/placeholders'
 import { categoryDoc } from './map/category'
+import { caseStudyDoc } from './map/caseStudy'
+import { clientDoc } from './map/framerCaseStudy'
 import { personDoc } from './map/person'
 import { insightDoc } from './map/insight'
 import { siteSettingsDoc } from './map/siteSettings'
@@ -59,6 +61,22 @@ const GATES: Record<string, Gate> = {
   insight: { schema: insightDoc },
   category: { schema: categoryDoc },
   person: { schema: personDoc },
+  /**
+   * `caseStudyDoc` describes both sources, but only the Framer half is checked
+   * here. o3's twenty are the translate track's, and the gate they were written
+   * against is applied by `checkTranslation` over the committed file with its
+   * `_meta` header — a document that has been through `load` no longer carries
+   * one, and the flags that make an agent-written field legitimate live in it.
+   */
+  caseStudy: {
+    schema: caseStudyDoc,
+    only: (doc) =>
+      ((doc.migration as { sourceId?: string } | undefined)?.sourceId ?? '').startsWith('framer:'),
+  },
+  client: {
+    schema: clientDoc,
+    only: (doc) => doc._id.startsWith('client-framer-'),
+  },
   siteSettings: {
     schema: siteSettingsDoc,
     only: (doc) =>

@@ -1,0 +1,56 @@
+{
+  "_meta": {
+    "type": "caseStudy"
+  },
+  "slug": "e-hazard",
+  "path": "/case-studies/e-hazard",
+  "collectionItemId": "xelB1DQef",
+  "title": "Automating electrical safety training operations",
+  "titleRendered": "E-Hazard Case Study: Automating Training Operations | O3XO",
+  "deck": "When industry leaders need to modernize operations while staying focused on their core mission, AI can bridge the gap between legacy processes and future efficiency. For e-Hazard, thoughtful AI implementation delivered real impact without disrupting what already works well.",
+  "heroImage": {
+    "url": "https://framerusercontent.com/images/UICB1h7KSeR5QWIPhevRezsChaY.webp",
+    "alt": "Industrial safety professional reviewing equipment data on a tablet, representing AI-powered certificate automation"
+  },
+  "chapters": [
+    {
+      "kicker": "Opportunity",
+      "title": "AI with purpose and ROI",
+      "bodyHtml": "<p dir=\"auto\" class=\"framer-text framer-styles-preset-jswlfd\">As a leading national provider of electrical safety training, arc flash studies, and consulting services, e-Hazard delivers critical instruction and guidance based on NFPA 70E, NEC, and OSHA standards to help organizations improve workplace safety and maintain compliance. Like many forward-thinking organizations, e-Hazard was eager to explore how AI could drive operational efficiency and create meaningful impact.</p><p dir=\"auto\" class=\"framer-text framer-styles-preset-jswlfd\">Their goal was to identify AI use cases that would not only streamline internal workflows but also enhance the value of their core service offerings, including training programs, risk assessments, and safety consulting. The challenge lay in finding the right applications where AI could deliver measurable ROI and sustainable improvements across the business.</p>"
+    },
+    {
+      "kicker": "Solution",
+      "title": "From manual follow-up to automated workflows",
+      "bodyHtml": "<p dir=\"auto\" class=\"framer-text framer-styles-preset-jswlfd\">To unlock the value of AI within e-Hazard's operations, O3 led a collaborative engagement using our proven AI workshop and prioritization methodology. Together with e-Hazard's leadership, we assessed a range of opportunities and identified a clear area for impact: modernizing their manual, paper-based certificate management process. We mapped the workflow end-to-end and evaluated AI solutions capable of ingesting student lists, reading scanned data, and generating CSV files for seamless integration into their certificate management system.</p><p dir=\"auto\" class=\"framer-text framer-styles-preset-jswlfd\">Working closely with the e-Hazard team, we developed a solution that prioritized accuracy in document ingestion and data formatting. The approach was validated through stakeholder feedback and iterative refinement, ultimately resulting in a faster, more reliable, and cost-effective way to manage student certificates.</p>"
+    }
+  ],
+  "stats": [
+    {
+      "value": "70%",
+      "label": "Reduction in hours spent per week"
+    }
+  ],
+  "quote": {
+    "text": "\"I am over here doing a happy dance in my tears of joy at how amazing this AI program is. Don't mind me, just living my best life!\"",
+    "attribution": "Business Process Owner, e-Hazard"
+  },
+  "card": {
+    "slug": "e-hazard",
+    "client": "e-Hazard",
+    "subject": "Certificate automation magic",
+    "headline": "See how we automated certificate processing for this safety leader",
+    "stat": {
+      "value": "70%",
+      "label": "Reduction in hours spent per week"
+    },
+    "image": {
+      "url": "https://framerusercontent.com/images/gBV69iUYFOyGDA0glXVtS4soE.png",
+      "alt": "Industrial safety professional reviewing equipment data on a tablet, representing AI-powered certificate automation"
+    }
+  },
+  "seo": {
+    "canonicalRendered": "https://www.o3xo.ai/case-studies/e-hazard",
+    "descriptionOverride": "See how e-Hazard reduced manual certificate management time by 70% with AI-powered automation, modernizing their electrical safety training operations.",
+    "ogImage": "https://framerusercontent.com/images/UICB1h7KSeR5QWIPhevRezsChaY.webp?width=1024&height=650"
+  }
+}
