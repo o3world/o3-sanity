@@ -181,12 +181,12 @@ describe('hiddenUnless', () => {
 })
 
 /**
- * `anchor` closes every list below it. It is a plain field the factory appends
- * after the knob splice (#149) — not a design option, so it is not generated
- * from a declaration — and it is spelled out here rather than trimmed off,
- * because what these tests are about is the ORDER a section block's fields come
- * out in: that order is what typegen publishes and what every renderer's props
- * are shaped by.
+ * `backgroundMedia` then `anchor` close every list below it. Both are plain
+ * fields the factory appends after the knob splice (#149, #239) — neither is a
+ * design option, so neither is generated from a declaration — and they are
+ * spelled out here rather than trimmed off, because what these tests are about
+ * is the ORDER a section block's fields come out in: that order is what typegen
+ * publishes and what every renderer's props are shaped by.
  */
 describe('defineSectionBlock knob placement', () => {
   const knobs = defineBlockKnobs({
@@ -212,6 +212,7 @@ describe('defineSectionBlock knob placement', () => {
       'variant',
       'eyebrow',
       'surface',
+      'backgroundMedia',
       'anchor',
     ])
   })
@@ -229,6 +230,7 @@ describe('defineSectionBlock knob placement', () => {
       'eyebrow',
       'variant',
       'surface',
+      'backgroundMedia',
       'anchor',
     ])
   })
@@ -303,7 +305,12 @@ describe('defineSectionBlock knob placement', () => {
     })
     const fields = readFields(block)
 
-    expect(fields.map((field) => field.name)).toEqual(['quote', 'surface', 'anchor'])
+    expect(fields.map((field) => field.name)).toEqual([
+      'quote',
+      'surface',
+      'backgroundMedia',
+      'anchor',
+    ])
     expect(fields[1]).toMatchObject({ type: 'string', initialValue: 'bone' })
   })
 })

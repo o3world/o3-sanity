@@ -45,11 +45,15 @@ import type { PersonDoc } from './person'
  *   answer under all eight questions in the HTML, so seven of the eight answers
  *   are not in the source; and `docs/specs/schema.md` holds the line against an
  *   accordion block until a designed page needs one.
- * - **Hero background photography and the four team bios.** Neither has a
- *   field: `heroSection` carries decoration rather than a picture, and
- *   `person` carries name, role and headshot. Giving either one a field is a
- *   schema conversation, not something a content pass decides on the way past
- *   — the same call the case-study `headline` got.
+ * - **Hero background photography.** Every section block now carries
+ *   `backgroundMedia` (#239), so the field is no longer what is missing: the
+ *   source is. Framer serves the hero's backdrop as a video layer — the kit
+ *   draws it as one (`4406:6597`) — and `lib/framerPage.ts` records `<img>`
+ *   elements only, so the opener's backdrop is not in the extract to migrate.
+ * - **The four team bios.** `person` carries name, role and headshot and
+ *   nothing longer. Giving it a field is a schema conversation, not something a
+ *   content pass decides on the way past — the same call the case-study
+ *   `headline` got.
  */
 
 /** An extract record as committed under the O3XO extract tree. */
@@ -368,10 +372,34 @@ function industryCards(
   issues: ConversionIssue[],
   notes: ConversionIssue[],
 ): Record<string, unknown> {
+  /**
+   * A band picture tagged with the band's OWN heading is behind the band, not
+   * inside a card. `nearestLine` attributes a picture to the nearest text
+   * above it, and a full-bleed backdrop's nearest text is the band's title —
+   * which is exactly what distinguishes it from the per-industry pictures,
+   * each of which lands on its card's name.
+   *
+   * The homepage band is the one that carries one (kit `4406:6755`, "AI
+   * Expertise"); `/industries` draws its pictures on the cards instead, so
+   * nothing there matches.
+   */
+  const backdrop = band.images.find((image) => image.near === heading)
+
   return {
     _type: 'railPanelsSection',
     _key: key('industries'),
     surface: 'ink',
+    ...(backdrop
+      ? {
+          backgroundMedia: {
+            _type: 'backgroundMedia',
+            image: { _type: 'image', _srcUrl: backdrop.url },
+            // No tint: the kit lays this band's copy straight onto the picture,
+            // and the picture is O3XO's near-black starfield.
+            tint: 'none',
+          },
+        }
+      : {}),
     layout: 'rail',
     rail: 'label',
     heading,

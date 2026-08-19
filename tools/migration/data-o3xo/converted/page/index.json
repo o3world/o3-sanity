@@ -93,6 +93,14 @@
       "_type": "railPanelsSection",
       "_key": "industries",
       "surface": "ink",
+      "backgroundMedia": {
+        "_type": "backgroundMedia",
+        "image": {
+          "_type": "image",
+          "_srcUrl": "https://framerusercontent.com/images/1e4Lt5px3pRGJLXB5fC4gqt68M.png"
+        },
+        "tint": "none"
+      },
       "layout": "rail",
       "rail": "label",
       "heading": "AI expertise tailored to your industry",

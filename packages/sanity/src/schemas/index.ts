@@ -1,4 +1,5 @@
 import {
+  backgroundMedia,
   bodyText,
   button,
   buttonGroup,
@@ -49,6 +50,7 @@ export const schemaTypes = [
   bodyText,
   chapter,
   mark,
+  backgroundMedia,
   // base blocks
   richText,
   statGroup,

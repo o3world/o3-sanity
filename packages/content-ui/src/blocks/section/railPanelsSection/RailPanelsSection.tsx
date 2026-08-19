@@ -6,6 +6,7 @@ import { stegaClean } from '@sanity/client/stega'
 
 import { ButtonLink } from '../../../ButtonLink'
 import { SanityImage } from '../../../SanityImage'
+import { sectionBackground } from '../../sectionBackground'
 import { resolveSurface } from '../../surface'
 
 import { PanelBand } from './PanelBand'
@@ -80,9 +81,15 @@ export function RailPanelsSection({
   rail,
   panels,
   surface,
+  backgroundMedia,
   loc,
 }: RailPanelsSectionProps) {
   const items = panels ?? []
+  const resolved = resolveSurface(surface, 'railPanelsSection')
+  // `null` on every band that carries no picture, which is the shell's own
+  // "there is nothing behind this band" — so all four layouts pass it
+  // unconditionally rather than branching.
+  const background = sectionBackground(backgroundMedia, resolved)
   const chosenLayout = stegaClean(layout)
   const isCards = chosenLayout === 'cards'
   const isRows = chosenLayout === 'rows'
@@ -137,7 +144,7 @@ export function RailPanelsSection({
       // `2334:2170` — 128px above, 64px below, and the header is the heading
       // alone: the frame writes no standfirst over the services. `intro` still
       // renders if a band carries one, in the rail header's measure.
-      <SectionShell surface={resolveSurface(surface, 'railPanelsSection')} top="md" bottom="sm">
+      <SectionShell surface={resolved} top="md" bottom="sm" background={background}>
         <div className="flex flex-col gap-10 lg:gap-16">
           {header}
           <PanelRows
@@ -156,12 +163,11 @@ export function RailPanelsSection({
   }
 
   if (isGrid) {
-    const resolved = resolveSurface(surface, 'railPanelsSection')
     return (
       // `2358:2788` — 128px above and below, 48px between the heading and the
       // columns. The header is the heading alone on the frame; `intro` still
       // renders if a band carries one, in the rows header's measure.
-      <SectionShell surface={resolved} top="md" bottom="md">
+      <SectionShell surface={resolved} top="md" bottom="md" background={background}>
         <div className="flex flex-col gap-10 lg:gap-12">
           {header}
           <PanelGrid
@@ -181,7 +187,7 @@ export function RailPanelsSection({
 
   if (isCards) {
     return (
-      <SectionShell surface={resolveSurface(surface, 'railPanelsSection')} top="md" bottom="md">
+      <SectionShell surface={resolved} top="md" bottom="md" background={background}>
         <div className="flex flex-col gap-10 lg:gap-[65px]">
           {header}
           <PanelCards
@@ -202,7 +208,7 @@ export function RailPanelsSection({
   }
 
   return (
-    <SectionShell surface={resolveSurface(surface, 'railPanelsSection')} top="md" bottom="lg">
+    <SectionShell surface={resolved} top="md" bottom="lg" background={background}>
       <div className="flex flex-col items-end gap-16 lg:gap-32">
         {header}
 

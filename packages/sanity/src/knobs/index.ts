@@ -15,6 +15,7 @@
  */
 
 import type { BlockKnobs, ObjectKnobs } from '@o3/block-spec'
+import { backgroundMediaKnobs } from './backgroundMedia'
 import { buttonKnobs } from './button'
 import { buttonGroupKnobs } from './buttonGroup'
 import { caseShowcaseSectionKnobs } from './caseShowcaseSection'
@@ -35,6 +36,7 @@ import { railPanelsSectionKnobs } from './railPanelsSection'
 import { roleListSectionKnobs } from './roleListSection'
 import { screenGridSectionKnobs } from './screenGridSection'
 
+export { backgroundMediaKnobs } from './backgroundMedia'
 export { buttonKnobs } from './button'
 export { buttonGroupKnobs } from './buttonGroup'
 export { caseShowcaseSectionKnobs } from './caseShowcaseSection'
@@ -113,6 +115,7 @@ export const BLOCK_KNOBS: Readonly<Record<string, BlockKnobs>> = {
  */
 export const OBJECT_KNOBS: Readonly<Record<string, ObjectKnobs>> = {
   [markKnobs.type]: markKnobs,
+  [backgroundMediaKnobs.type]: backgroundMediaKnobs,
   [buttonKnobs.type]: buttonKnobs,
   [buttonGroupKnobs.type]: buttonGroupKnobs,
 }

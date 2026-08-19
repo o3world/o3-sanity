@@ -195,6 +195,7 @@ export type ListingSection = {
   heading?: string
   pageType?: 'standard' | 'service' | 'partner'
   surface?: 'white' | 'bone' | 'ink'
+  backgroundMedia?: BackgroundMedia
   anchor?: string
 }
 
@@ -208,6 +209,7 @@ export type ScreenGridSection = {
     _key: string
   }>
   surface?: 'white' | 'bone' | 'ink'
+  backgroundMedia?: BackgroundMedia
   anchor?: string
 }
 
@@ -217,6 +219,7 @@ export type MediaSection = {
   variant?: 'plain' | 'capture'
   width?: 'contained' | 'full-bleed'
   surface?: 'white' | 'bone' | 'ink'
+  backgroundMedia?: BackgroundMedia
   anchor?: string
 }
 
@@ -251,6 +254,7 @@ export type LayoutSection = {
       } & Mark)
   >
   surface?: 'white' | 'bone' | 'ink'
+  backgroundMedia?: BackgroundMedia
   anchor?: string
 }
 
@@ -263,6 +267,7 @@ export type FormSection = {
   consentLabel?: string
   button?: Button
   surface?: 'white' | 'bone' | 'ink'
+  backgroundMedia?: BackgroundMedia
   anchor?: string
 }
 
@@ -282,6 +287,7 @@ export type InFlightSection = {
     _key: string
   }>
   surface?: 'white' | 'bone' | 'ink'
+  backgroundMedia?: BackgroundMedia
   anchor?: string
 }
 
@@ -298,6 +304,7 @@ export type RoleListSection = {
     _key: string
   }>
   surface?: 'white' | 'bone' | 'ink'
+  backgroundMedia?: BackgroundMedia
   anchor?: string
 }
 
@@ -318,6 +325,7 @@ export type PersonGridSection = {
     } & PersonReference
   >
   surface?: 'white' | 'bone' | 'ink'
+  backgroundMedia?: BackgroundMedia
   anchor?: string
 }
 
@@ -334,6 +342,7 @@ export type FeatureGridSection = {
   }>
   decoration?: 'none' | 'molecule'
   surface?: 'white' | 'bone' | 'ink'
+  backgroundMedia?: BackgroundMedia
   anchor?: string
 }
 
@@ -343,6 +352,7 @@ export type CtaSection = {
   body?: string
   button?: Button
   decoration?: 'molecule' | 'orbs' | 'none'
+  backgroundMedia?: BackgroundMedia
   anchor?: string
 }
 
@@ -363,6 +373,7 @@ export type InsightsCarouselSection = {
   >
   category?: CategoryReference
   surface?: 'white' | 'bone' | 'ink'
+  backgroundMedia?: BackgroundMedia
   anchor?: string
 }
 
@@ -383,6 +394,7 @@ export type QuoteSection = {
   attribution?: string
   decoration?: 'orbs' | 'molecule' | 'none'
   surface?: 'white' | 'bone' | 'ink'
+  backgroundMedia?: BackgroundMedia
   anchor?: string
 }
 
@@ -411,6 +423,7 @@ export type RailPanelsSection = {
     _key: string
   }>
   surface?: 'white' | 'bone' | 'ink'
+  backgroundMedia?: BackgroundMedia
   anchor?: string
 }
 
@@ -423,6 +436,7 @@ export type CaseShowcaseSection = {
       _key: string
     } & CaseStudyReference
   >
+  backgroundMedia?: BackgroundMedia
   anchor?: string
 }
 
@@ -446,6 +460,7 @@ export type LogoWallSection = {
   >
   button?: Button
   surface?: 'white' | 'bone' | 'ink'
+  backgroundMedia?: BackgroundMedia
   anchor?: string
 }
 
@@ -470,6 +485,7 @@ export type HeroSection = {
   }>
   button?: Button
   decoration?: 'orbs' | 'none'
+  backgroundMedia?: BackgroundMedia
   anchor?: string
 }
 
@@ -485,6 +501,18 @@ export type StatGroup = {
 export type RichText = {
   _type: 'richText'
   body?: BodyText
+}
+
+export type BackgroundMedia = {
+  _type: 'backgroundMedia'
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  tint?: 'dim' | 'none'
 }
 
 export type Mark = {
@@ -977,6 +1005,7 @@ export type AllSanitySchemaTypes =
   | HeroSection
   | StatGroup
   | RichText
+  | BackgroundMedia
   | Mark
   | Chapter
   | BodyText
@@ -1432,6 +1461,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           }> | null
           industryDetail: string | null
         }> | null
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
     | {
@@ -1478,6 +1508,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'molecule' | 'none' | 'orbs'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
     | {
@@ -1494,6 +1525,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         }>
         decoration?: 'molecule' | 'none'
         surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
     | {
@@ -1530,6 +1562,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
     | {
@@ -1578,6 +1611,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'none' | 'orbs'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
     | {
@@ -1621,6 +1655,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           _key: string
         }> | null
         surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
     | {
@@ -1634,6 +1669,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         >
         category?: CategoryReference
         surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
         curated: Array<{
           _id: string
@@ -1805,6 +1841,7 @@ export type CASE_STUDY_QUERY_RESULT = {
             }
         > | null
         surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
     | {
@@ -1813,6 +1850,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         heading?: string
         pageType?: 'partner' | 'service' | 'standard'
         surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
         pages: Array<{
           _id: string
@@ -1876,6 +1914,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
     | {
@@ -1885,6 +1924,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         variant?: 'capture' | 'plain'
         width?: 'contained' | 'full-bleed'
         surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
     | {
@@ -1906,6 +1946,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           } | null
         }> | null
         surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
     | {
@@ -1915,6 +1956,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         attribution?: string
         decoration?: 'molecule' | 'none' | 'orbs'
         surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
     | {
@@ -1967,6 +2009,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           _key: string
         }> | null
         surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
     | {
@@ -2007,6 +2050,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           _key: string
         }> | null
         surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
     | {
@@ -2020,6 +2064,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           _key: string
         }>
         surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
   > | null
@@ -2167,6 +2212,7 @@ export type PAGE_QUERY_RESULT = {
           }> | null
           industryDetail: string | null
         }> | null
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
     | {
@@ -2200,6 +2246,7 @@ export type PAGE_QUERY_RESULT = {
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'molecule' | 'none' | 'orbs'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
     | {
@@ -2216,6 +2263,7 @@ export type PAGE_QUERY_RESULT = {
         }>
         decoration?: 'molecule' | 'none'
         surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
     | {
@@ -2252,6 +2300,7 @@ export type PAGE_QUERY_RESULT = {
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
     | {
@@ -2300,6 +2349,7 @@ export type PAGE_QUERY_RESULT = {
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'none' | 'orbs'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
     | {
@@ -2343,6 +2393,7 @@ export type PAGE_QUERY_RESULT = {
           _key: string
         }> | null
         surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
     | {
@@ -2356,6 +2407,7 @@ export type PAGE_QUERY_RESULT = {
         >
         category?: CategoryReference
         surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
         curated: Array<{
           _id: string
@@ -2527,6 +2579,7 @@ export type PAGE_QUERY_RESULT = {
             }
         > | null
         surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
     | {
@@ -2535,6 +2588,7 @@ export type PAGE_QUERY_RESULT = {
         heading?: string
         pageType?: 'partner' | 'service' | 'standard'
         surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
         pages: Array<{
           _id: string
@@ -2598,6 +2652,7 @@ export type PAGE_QUERY_RESULT = {
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
     | {
@@ -2607,6 +2662,7 @@ export type PAGE_QUERY_RESULT = {
         variant?: 'capture' | 'plain'
         width?: 'contained' | 'full-bleed'
         surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
     | {
@@ -2628,6 +2684,7 @@ export type PAGE_QUERY_RESULT = {
           } | null
         }> | null
         surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
     | {
@@ -2637,6 +2694,7 @@ export type PAGE_QUERY_RESULT = {
         attribution?: string
         decoration?: 'molecule' | 'none' | 'orbs'
         surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
     | {
@@ -2689,6 +2747,7 @@ export type PAGE_QUERY_RESULT = {
           _key: string
         }> | null
         surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
     | {
@@ -2729,6 +2788,7 @@ export type PAGE_QUERY_RESULT = {
           _key: string
         }> | null
         surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
     | {
@@ -2742,6 +2802,7 @@ export type PAGE_QUERY_RESULT = {
           _key: string
         }>
         surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
         anchor?: string
       }
   > | null

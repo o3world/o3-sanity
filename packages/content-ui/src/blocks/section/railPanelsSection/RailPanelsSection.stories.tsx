@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { figmaDesign } from '@o3/story-kit'
 
-import { seededSectionArgs } from '../../../testing/seedContent'
+import { seedImage, seededSectionArgs } from '../../../testing/seedContent'
 
 import { RailPanelsSection } from './RailPanelsSection'
 
@@ -115,4 +115,36 @@ export const Grid: Story = {
 export const GridMobile: Story = {
   args: seededSectionArgs('solutions-software-engineering', 'railPanelsSection'),
   globals: { viewport: { value: 'mobile' } },
+}
+
+/**
+ * `backgroundMedia` — the band sits on a picture (#239). This is the band the
+ * o3xo homepage migrates onto its own photograph (kit `4406:6755`, "AI
+ * Expertise"); the seeded picture here is O3's, because the stories layer
+ * reads O3's committed tree.
+ *
+ * The surface is still `ink`: it paints under the picture, it decides the
+ * copy's colour, and it is what the tint is made of.
+ */
+export const OnPhotograph: Story = {
+  args: {
+    ...seededSectionArgs('index', 'railPanelsSection', 0),
+    surface: 'ink',
+    backgroundMedia: {
+      _type: 'backgroundMedia',
+      image: seedImage('tools/migration/data/seed/assets/work-city.png'),
+    },
+  },
+}
+
+/** `tint: 'none'` — the picture as it is, which is what the kit draws. */
+export const OnPhotographUntinted: Story = {
+  args: {
+    ...OnPhotograph.args,
+    backgroundMedia: {
+      _type: 'backgroundMedia',
+      image: seedImage('tools/migration/data/seed/assets/work-city.png'),
+      tint: 'none',
+    },
+  },
 }

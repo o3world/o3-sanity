@@ -27,26 +27,34 @@
 /** A committed document, before any projection. */
 export type SeedDoc = Record<string, unknown>
 
-/** Resolve a source marker (`_wpSrc` URL or `_localSrc` repo path) to an asset id. */
+/** Resolve a source marker (`_wpSrc` / `_srcUrl` URL, or `_localSrc` repo path) to an asset id. */
 export type AssetIdFor = (source: string) => string
 
 /** Resolve a `{_ref}` to the committed document it points at, or null. */
 export type ResolveRef = (ref: unknown) => SeedDoc | null
 
 /**
+ * Every marker a committed document can carry, in `load.ts`'s own order:
+ * `_wpSrc` is a WordPress upload URL, `_srcUrl` a URL on any other source site
+ * (o3xo.ai's Framer assets), `_localSrc` a repo-relative file committed beside
+ * its seed. Where the bytes come from is `load`'s problem; here they are three
+ * spellings of "an asset reference goes here".
+ */
+const MARKERS = ['_wpSrc', '_srcUrl', '_localSrc'] as const
+
+/**
  * Stand in for the asset upload `tools/migration/src/load.ts` performs.
  *
- * Converted JSON carries `_wpSrc` URL markers where an asset reference will
- * go; seeds use `_localSrc` (a repo path). A renderer handed the raw marker
- * throws inside `@sanity/image-url`, so every marker is swapped for the
- * reference shape the image pipeline expects before anything renders.
+ * A renderer handed a raw marker throws inside `@sanity/image-url`, so every
+ * marker is swapped for the reference shape the image pipeline expects before
+ * anything renders.
  */
 export function resolveAssetMarkers(node: unknown, assetIdFor: AssetIdFor): unknown {
   if (Array.isArray(node)) return node.map((item) => resolveAssetMarkers(item, assetIdFor))
   if (node && typeof node === 'object') {
     const obj = node as SeedDoc
-    const marker = typeof obj._wpSrc === 'string' ? '_wpSrc' : '_localSrc'
-    if (typeof obj[marker] === 'string') {
+    const marker = MARKERS.find((name) => typeof obj[name] === 'string')
+    if (marker) {
       const source = obj[marker] as string
       const rest = Object.fromEntries(Object.entries(obj).filter(([k]) => k !== marker))
       return { ...rest, asset: { _type: 'reference', _ref: assetIdFor(source) } }

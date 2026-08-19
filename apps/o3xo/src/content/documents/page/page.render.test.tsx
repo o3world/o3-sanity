@@ -51,6 +51,22 @@ describe('the migrated homepage', () => {
     expect(rendered.html).toContain('Key metrics across accounts')
   })
 
+  /**
+   * The industries band sits on o3xo.ai's own backdrop (kit `4406:6755`,
+   * #239). Asserted through the rendered `<img>` rather than the document,
+   * because what the field is for is the picture reaching the page — a band
+   * that stored one and dropped it on the way through would still hold it.
+   */
+  it('draws the industries band on its photograph', () => {
+    const band = (seeded.sections as { _type: string; backgroundMedia?: unknown }[]).find(
+      (section) => section._type === 'railPanelsSection' && section.backgroundMedia,
+    )
+    expect(band).toBeDefined()
+    expect(rendered.html).toContain('AI expertise tailored to your industry')
+    // Decorative: the band's own copy says everything the backdrop does.
+    expect(rendered.html).toMatch(/<img[^>]*alt=""/)
+  })
+
   it('canonicalises the homepage at the root', () => {
     expect(rendered.metadata.title).toContain('Activate AI advantage')
     expect(rendered.metadata.alternates?.canonical).toBe('http://localhost:3000/')

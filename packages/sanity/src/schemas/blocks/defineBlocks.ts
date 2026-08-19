@@ -2,7 +2,7 @@ import { defineType } from 'sanity'
 import type { FieldDefinition, ObjectDefinition } from 'sanity'
 import type { BlockKnobs } from '@o3/block-spec'
 import { SURFACES, type Surface } from '../../constants'
-import { anchorField } from './fields'
+import { anchorField, backgroundMediaField } from './fields'
 import { withKnobFields, type KnobbedField } from './knobFields'
 import { BASE_BLOCKS, SECTION_BLOCKS } from './registry'
 
@@ -44,13 +44,13 @@ type BlockOptions = {
  * shared `anchor` field after them, and refuses names missing from the
  * registry.
  *
- * **Two shared fields, injected by two different mechanisms, and the split is
- * the rule rather than an accident** (#149). `surface` is a closed set an
+ * **Three shared fields, injected by two different mechanisms, and the split
+ * is the rule rather than an accident** (#149). `surface` is a closed set an
  * editor picks a look from, so it is a knob and its field is generated from
- * that declaration. `anchor` is a name an editor types, so it is a plain field
- * and there is no control for a toolbar to draw. Adding a third: if a block
- * would have a picker for it, it belongs in `src/knobs/`; otherwise it belongs
- * beside `anchorField` in `fields.ts`.
+ * that declaration. `anchor` is a name an editor types and `backgroundMedia` a
+ * picture they upload, so both are plain fields with no control for a toolbar
+ * to draw. Adding a fourth: if a block would have a picker for it, it belongs
+ * in `src/knobs/`; otherwise it belongs beside `anchorField` in `fields.ts`.
  */
 export function defineSectionBlock({
   name,
@@ -94,8 +94,14 @@ export function defineSectionBlock({
     type: 'object',
     // The anchor lands last, after the knobs the splice appends: it is the one
     // field on a band that is about the page rather than about the band, and a
-    // form an editor reads top-down should not open on it.
-    fields: [...withKnobFields('defineSectionBlock', name, fields, knobs), anchorField()],
+    // form an editor reads top-down should not open on it. The background sits
+    // in front of it, beside the surface it paints under — the two answer one
+    // question about what the band is drawn on.
+    fields: [
+      ...withKnobFields('defineSectionBlock', name, fields, knobs),
+      backgroundMediaField(),
+      anchorField(),
+    ],
     preview: preview ?? {
       select: { title: 'title' },
       prepare: (sel) => ({ title: sel.title ?? title, subtitle: title }),

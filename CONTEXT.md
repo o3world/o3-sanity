@@ -154,6 +154,7 @@ Closed vocabulary. If the field you want isn't here and isn't obviously domain-s
 | `note`            | Quieter secondary line (the "Best when…" line)                                                      | `caption` (reserved: `figure.caption`)               |
 | `media`           | A `figure` on a block                                                                               | `image` — that's the raw asset field inside `figure` |
 | `heroMedia`       | A document's lead `figure`                                                                          | `featuredImage`, `banner`                            |
+| `backgroundMedia` | The full-bleed picture a band sits on; injected by `defineSectionBlock`                             | `backgroundImage`, `bgImage`, `backdrop`, `photo`    |
 | `button`          | A single button (type `button`), the form's submit included                                         | `cta`, `link`, `action`, `submitLabel`               |
 | `anchor`          | The name a band is given, and the name a button jumps to; no `#`                                    | `id`, `hash`, `fragment`, `jumpTo`                   |
 | `alignment`       | Where a row sits in the space it was given (`buttonGroup`)                                          | `align`, `justify`, `position`, `float`              |

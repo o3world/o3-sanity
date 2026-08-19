@@ -4,7 +4,7 @@ import { ArrowIcon } from './arrow-icon'
 import { Button } from './ui/button'
 import { DisplayHeading } from './display-heading'
 import { Eyebrow } from './eyebrow'
-import { SectionShell, type Surface } from './section-shell'
+import { SectionBackground, SectionShell, type Surface } from './section-shell'
 import { Stat } from './stat'
 
 const meta = {
@@ -95,6 +95,100 @@ export const AllSurfaces: Story = {
     <div>
       {(['white', 'bone', 'ink'] as const).map((surface) => (
         <SectionShell key={surface} surface={surface}>
+          <PlaceholderContent surface={surface} />
+        </SectionShell>
+      ))}
+    </div>
+  ),
+}
+
+/**
+ * A stand-in picture: a starfield drawn in CSS, so the story loads nothing and
+ * two runs of it are the same pixels. On the site the child is a real image —
+ * `packages/content-ui`'s `BackgroundMedia` puts a `SanityImage` here.
+ */
+function Photograph() {
+  return (
+    <div
+      style={{
+        backgroundColor: '#101014',
+        backgroundImage: [
+          'radial-gradient(1px 1px at 12% 30%, rgba(255,255,255,0.5), transparent)',
+          'radial-gradient(1.5px 1.5px at 47% 62%, rgba(255,255,255,0.45), transparent)',
+          'radial-gradient(1px 1px at 73% 18%, rgba(255,255,255,0.55), transparent)',
+          'radial-gradient(2px 2px at 88% 71%, rgba(255,255,255,0.35), transparent)',
+          'radial-gradient(120% 90% at 78% 20%, rgba(120,120,140,0.35), transparent)',
+        ].join(', '),
+      }}
+    />
+  )
+}
+
+/**
+ * `background` — the band sits on a picture (#239). The surface still paints
+ * under it and still decides the copy's colour, so the band declares the
+ * surface it would have declared without one.
+ *
+ * `dim` lays that surface's own colour over the picture. This is the state a
+ * band opens in, because a picture nobody has checked is the one that swallows
+ * the copy.
+ */
+export const OnPhotograph: Story = {
+  args: { surface: 'ink' },
+  render: (args) => (
+    <SectionShell
+      {...args}
+      background={
+        <SectionBackground surface={args.surface ?? 'white'}>
+          <Photograph />
+        </SectionBackground>
+      }
+    >
+      <PlaceholderContent surface={args.surface ?? 'white'} />
+    </SectionShell>
+  ),
+}
+
+/**
+ * `tint: 'none'` — the picture as it is. What the O3XO kit draws on its
+ * photographic bands (`4406:6755`, `4406:6954`), whose imagery is already a
+ * near-black starfield.
+ */
+export const OnPhotographUntinted: Story = {
+  args: { surface: 'ink' },
+  render: (args) => (
+    <SectionShell
+      {...args}
+      background={
+        <SectionBackground surface={args.surface ?? 'white'} tint="none">
+          <Photograph />
+        </SectionBackground>
+      }
+    >
+      <PlaceholderContent surface={args.surface ?? 'white'} />
+    </SectionShell>
+  ),
+}
+
+/**
+ * The tint is the band's OWN colour, so a light band lightens the picture
+ * rather than darkening it — dark copy keeps the contrast its surface promised.
+ * Three bands, one picture, three tints.
+ */
+export const TintPerSurface: Story = {
+  parameters: { controls: { disable: true } },
+  render: () => (
+    <div>
+      {(['white', 'bone', 'ink'] as const).map((surface) => (
+        <SectionShell
+          key={surface}
+          surface={surface}
+          background={
+            <SectionBackground surface={surface}>
+              <Photograph />
+            </SectionBackground>
+          }
+        >
           <PlaceholderContent surface={surface} />
         </SectionShell>
       ))}

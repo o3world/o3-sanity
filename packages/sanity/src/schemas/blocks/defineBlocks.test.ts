@@ -55,3 +55,25 @@ describe('block descriptions (ADR 0025)', () => {
     expect([missing, missingBase]).toHaveLength(2)
   })
 })
+
+describe('the background media every section block carries (#239)', () => {
+  const band = () =>
+    defineSectionBlock({
+      name: 'quoteSection',
+      title: 'Quote',
+      description: 'One borrowed voice.',
+      knobs: quoteSectionKnobs,
+      fields: [quote()],
+    })
+
+  it('injects the field, in front of the anchor', () => {
+    const names = band().fields.map((field) => field.name)
+    expect(names.slice(-2)).toEqual(['backgroundMedia', 'anchor'])
+  })
+
+  it('leaves it optional, so every band saved before it existed still validates', () => {
+    const field = band().fields.find((one) => one.name === 'backgroundMedia')
+    expect(field?.type).toBe('backgroundMedia')
+    expect(field).not.toHaveProperty('validation')
+  })
+})
