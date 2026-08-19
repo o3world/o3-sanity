@@ -1,0 +1,75 @@
+{
+  "_id": "page-seed-index",
+  "_type": "page",
+  "title": "O3XO",
+  "slug": {
+    "_type": "slug",
+    "current": "index"
+  },
+  "pageType": "standard",
+  "sections": [
+    {
+      "_type": "heroSection",
+      "_key": "hero",
+      "variant": "band",
+      "eyebrow": "O3XO",
+      "headlineLines": ["The second brand, on the shared machinery."],
+      "subheading": "Same blocks, same chrome, O3’s composition — painted in O3XO’s tokens. This page is scaffolding: it exists so the paint can be judged before there is content to judge it against.",
+      "button": {
+        "_type": "button",
+        "label": "Case studies",
+        "href": "/case-studies"
+      },
+      "decoration": "none"
+    },
+    {
+      "_type": "layoutSection",
+      "_key": "surfaces",
+      "surface": "bone",
+      "columns": 1,
+      "eyebrow": "Surfaces",
+      "heading": "Three roles, two brands.",
+      "items": [
+        {
+          "_type": "richText",
+          "_key": "surfaces-body",
+          "body": [
+            {
+              "_type": "block",
+              "_key": "surfaces-p1",
+              "style": "normal",
+              "markDefs": [],
+              "children": [
+                {
+                  "_type": "span",
+                  "_key": "surfaces-p1-0",
+                  "text": "This band stores the surface role “bone”. O3 paints it a warm off-white; O3XO paints it a cool grey. Neither app renames the value, and no component knows which brand it is rendering under — the whole difference is one attribute on the html element.",
+                  "marks": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "decoration": "none"
+    },
+    {
+      "_type": "ctaSection",
+      "_key": "closer",
+      "heading": "The content comes next.",
+      "body": "O3XO’s insights and case studies migrate into this model through the same pipeline WordPress goes through. Until they do, the routes resolve and the collections are empty.",
+      "button": {
+        "_type": "button",
+        "label": "Insights",
+        "href": "/insights"
+      },
+      "decoration": "none"
+    }
+  ],
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:o3xo-index",
+    "provisional": true,
+    "provisionalNote": "Scaffolding, not content (#215). It exists so apps/o3xo has a homepage to render while the paint is evaluated, and its copy describes the mechanism rather than the brand — no Figma frame, no o3xo.ai source. Cleared by O3XO's own homepage, composed once the adaptation delta is reviewed and the migrated content (#217, #218) is in the dataset."
+  }
+}

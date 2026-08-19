@@ -82,7 +82,8 @@ pnpm frontier                 # READY / BLOCKED / CLAIMED across every open map
 pnpm frontier 63              # one map
 pnpm wt new <n>               # claim a ticket, branch it, worktree it, install
 
-pnpm dev:web                  # the site
+pnpm dev:web                  # the o3 site
+pnpm dev:o3xo                 # the o3xo site (its own port pool, its own project)
 pnpm storybook                # the component library
 pnpm down                     # stop what dev started
 

@@ -1,6 +1,6 @@
 ---
 name: content-naming
-description: Naming and wiring rules for Sanity content in this repo. Use when adding, renaming, or removing a section block, base block, shared object, document type, schema field, or block renderer — anything under packages/sanity/src/schemas/, packages/content-ui/src/ or apps/web/src/content/. Also use when reviewing a diff that touches those paths.
+description: Naming and wiring rules for Sanity content in this repo. Use when adding, renaming, or removing a section block, base block, shared object, document type, schema field, or block renderer — anything under packages/sanity/src/schemas/, packages/content-ui/src/ or either app's src/content/. Also use when reviewing a diff that touches those paths.
 ---
 
 # Content naming
@@ -65,7 +65,7 @@ Same shape, three differences: add to `BASE_BLOCKS`; define with `defineBaseBloc
 
 1. `CONTEXT.md` first — a new document type is new ubiquitous language. If you can't write its one-line definition, you don't have the type yet.
 2. Schema in `packages/sanity/src/schemas/documents/`. Every document ends with `seo` then `migration`. Routable types carry a required `slug` (ADR 0001).
-3. Routable? Add to `ROUTABLE_TYPES` in `constants.ts`; a collection also needs its prefix and title in every brand's `collections` in `brand.ts`. Then one folder under `apps/web/src/content/documents/<type>/` with `entry.tsx` + registry line.
+3. Routable? Add to `ROUTABLE_TYPES` in `constants.ts`; a collection also needs its prefix and title in every brand's `collections` in `brand.ts`. Then one folder under `src/content/documents/<type>/` with `entry.tsx` + registry line, in **each** app that routes it (`apps/web`, `apps/o3xo`) — a route entry is per-app binding, and its prefix comes from `COLLECTION_PREFIXES`, never a literal.
 4. Card projection goes in `queries.ts` next to `INSIGHT_CARD` / `CASE_STUDY_CARD`, shared by every consumer — never duplicated inline.
 
 ## Renaming

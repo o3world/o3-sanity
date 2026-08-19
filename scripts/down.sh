@@ -17,6 +17,7 @@ fi
 
 PORTS=(3000 3001 3002 3003 6006)
 [ -n "${WEB_PORT:-}" ] && PORTS+=("$WEB_PORT")
+[ -n "${XO_WEB_PORT:-}" ] && PORTS+=("$XO_WEB_PORT")
 [ -n "${STORYBOOK_PORT:-}" ] && PORTS+=("$STORYBOOK_PORT")
 PATTERNS=('turbo run dev' 'turbo run storybook' 'next-server' 'next dev' 'storybook dev')
 

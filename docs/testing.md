@@ -37,6 +37,11 @@ Two kinds live here:
 - **Mappers and helpers.** `tools/migration/src/map/*.test.ts`, `packages/content-runtime/src/**`. Migration
   mappers are pure `WpThing → Mapped<Doc>` functions, so a new ACF module type means one arm in the
   mapper and one case in its test.
+- **Wiring a compiler cannot see.** `apps/o3xo/src/brandBinding.test.ts` reads the app's own files
+  and asserts the four things that would otherwise fail silently in a browser: the brand reaching
+  the bundles, the token layer's import order, `data-brand` on `<html>`, and a route directory per
+  collection prefix. Same shape as `packages/ui/src/components/ui/shadcn-seam.test.ts` — a
+  filesystem lint, in the layer that needs no React.
 - **Corpus invariants.** `tools/migration/src/converted.test.ts` runs over everything actually
   committed under `data/converted/` — every document validates against its zod gate, every author
   and category reference resolves, no body block type the schema doesn't allow, no WP thumbnail
@@ -91,6 +96,12 @@ The layer collects `apps/web/src/**` and `packages/*/src/**` — the renderers m
 `@o3/content-ui` (#212) and their render tests moved with them, while the app keeps the route- and
 view-level ones. A moved test reaches its helpers by package subpath; only app tests get the `@/`
 alias.
+
+**`apps/o3xo` has no render tests yet**, and the reason is the harness rather than the app: the `@/`
+alias and `renderRoute`/fixtures/stubs live in `apps/web/src/test`, and the project resolves one
+`@/` and one brand. A per-app render layer wants the harness promoted to a package first — until
+then the second app's route entries are covered by its unit-layer binding test and by both apps'
+`next build`.
 
 Four modules are stubbed (see `vitest.config.mts` for why each): `@o3/content-runtime/live` is the
 network seam, `next/image` renders a plain `<img>`, `next/headers` lets a test pick the draft or

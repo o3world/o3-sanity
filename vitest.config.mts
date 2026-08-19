@@ -63,6 +63,7 @@ export default defineConfig({
             // reads them is the one part of the harness a machine can check.
             'tools/authoring-skill/evals/*.test.ts',
             'apps/web/src/**/*.test.ts',
+            'apps/o3xo/src/**/*.test.ts',
             'packages/*/src/**/*.test.ts',
             // The worktree scripts are shell, and their seams are subcommands.
             // A test here shells out to the script the same way a session does,

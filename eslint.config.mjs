@@ -2,7 +2,7 @@ import o3Config from '@o3/eslint-config'
 import nextPlugin from '@next/eslint-plugin-next'
 
 /**
- * Draft-preview boundary (issue #15). Everything the web app renders must
+ * Draft-preview boundary (issue #15). Everything either app renders must
  * fetch through `sanityFetch` from `@o3/content-runtime/live` and mount
  * visual editing through `@/sanity/VisualEditing` — a bare Sanity client
  * (published insight, CDN, cached) or the raw next-sanity `<VisualEditing />`
@@ -72,6 +72,69 @@ const imageBoundaryPatterns = [
   },
 ]
 
+/**
+ * One app's three boundary blocks, in the order flat config resolves them.
+ *
+ * Flat config resolves a same-rule collision by last-object-wins, not by
+ * merging, so each block has to carry EVERY restriction for the files it
+ * matches — which is why the content blocks repeat the draft-preview paths
+ * rather than adding to them.
+ *
+ *   src/**          the draft-preview boundary, except `src/sanity/` (the one
+ *                   place allowed to touch the low-level client and visual
+ *                   editing) and `src/content/` (its own blocks below)
+ *   src/content/**  the same, plus the Sanity image boundary — document views,
+ *                   route entries, card consumers
+ *   src/content/blocks/**
+ *                   the registry binding and the renderers that read it, so it
+ *                   drops the "render through Blocks" restriction and keeps
+ *                   the rest
+ */
+function appBoundaries(app) {
+  return [
+    {
+      files: [`${app}/src/**/*.{ts,tsx}`],
+      ignores: [`${app}/src/content/**`, `${app}/src/sanity/**`],
+      rules: {
+        'no-restricted-imports': [
+          'error',
+          { paths: draftBoundaryPaths, patterns: draftBoundaryPatterns },
+        ],
+      },
+    },
+    {
+      files: [`${app}/src/content/**/*.{ts,tsx}`],
+      ignores: [`${app}/src/content/blocks/**`],
+      rules: {
+        'no-restricted-imports': [
+          'error',
+          {
+            paths: [...imageBoundaryPaths, ...draftBoundaryPaths],
+            patterns: [...imageBoundaryPatterns, ...draftBoundaryPatterns],
+          },
+        ],
+      },
+    },
+    {
+      files: [`${app}/src/content/blocks/**/*.{ts,tsx}`],
+      rules: {
+        'no-restricted-imports': [
+          'error',
+          {
+            paths: [...imageBoundaryPaths, ...draftBoundaryPaths],
+            patterns: [
+              ...imageBoundaryPatterns,
+              ...draftBoundaryPatterns.filter(
+                (p) => !p.group.some((g) => g.includes('BlockRenderer')),
+              ),
+            ],
+          },
+        ],
+      },
+    },
+  ]
+}
+
 export default [
   ...o3Config,
   // Captured prototypes are third-party artifacts frozen as a record (ADR
@@ -85,7 +148,11 @@ export default [
   // Registering it repo-wide clashes with the shared config's react/jsx-a11y
   // plugin registrations.
   {
-    files: ['apps/web/**/*.{ts,tsx}', 'packages/content-ui/**/*.{ts,tsx}'],
+    files: [
+      'apps/web/**/*.{ts,tsx}',
+      'apps/o3xo/**/*.{ts,tsx}',
+      'packages/content-ui/**/*.{ts,tsx}',
+    ],
     plugins: {
       '@next/next': nextPlugin,
     },
@@ -154,58 +221,12 @@ export default [
       ],
     },
   },
-  // Draft-preview boundary for the whole web app (content/ gets its own
-  // merged object below — flat config resolves same-rule collisions by
-  // last-object-wins, so the rule must carry every restriction for the
-  // files it matches). src/sanity/ is the one place allowed to touch the
-  // low-level client/visual-editing pieces; content/blocks/ composes the
-  // renderers themselves.
-  {
-    files: ['apps/web/src/**/*.{ts,tsx}'],
-    ignores: ['apps/web/src/content/**', 'apps/web/src/sanity/**'],
-    rules: {
-      'no-restricted-imports': [
-        'error',
-        { paths: draftBoundaryPaths, patterns: draftBoundaryPatterns },
-      ],
-    },
-  },
-  // The app's own content layer — document views, entries, cards' consumers.
-  // Image boundary plus the draft-preview boundary (see above for why they
-  // merge).
-  {
-    files: ['apps/web/src/content/**/*.{ts,tsx}'],
-    ignores: ['apps/web/src/content/blocks/**'],
-    rules: {
-      'no-restricted-imports': [
-        'error',
-        {
-          paths: [...imageBoundaryPaths, ...draftBoundaryPaths],
-          patterns: [...imageBoundaryPatterns, ...draftBoundaryPatterns],
-        },
-      ],
-    },
-  },
-  // content/blocks/ is the app's registry binding and the two renderers that
-  // read it, so it skips the renderer restriction but keeps the image and
-  // client boundaries.
-  {
-    files: ['apps/web/src/content/blocks/**/*.{ts,tsx}'],
-    rules: {
-      'no-restricted-imports': [
-        'error',
-        {
-          paths: [...imageBoundaryPaths, ...draftBoundaryPaths],
-          patterns: [
-            ...imageBoundaryPatterns,
-            ...draftBoundaryPatterns.filter(
-              (p) => !p.group.some((g) => g.includes('BlockRenderer')),
-            ),
-          ],
-        },
-      ],
-    },
-  },
+  // Both apps' boundaries, from one declaration. A rule scoped to a path stops
+  // applying the moment a second app appears at a different path, and it stops
+  // silently — the same trap #212 hit when the renderers moved out. Called per
+  // app rather than matched with a glob so each app's `ignores` stay its own.
+  ...appBoundaries('apps/web'),
+  ...appBoundaries('apps/o3xo'),
   // The shared renderer package (#212). The block renderers, the site chrome
   // and the cards left apps/web/src/content/, and both boundaries left with
   // them — a rule scoped to a path stops applying the moment the path moves,

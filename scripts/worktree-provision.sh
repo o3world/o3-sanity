@@ -26,14 +26,26 @@ set -uo pipefail
 # origin (`pnpm sanity cors add http://localhost:<port> --credentials`) or the
 # client logos and live content stop rendering. The pools below are registered
 # with the project already — widening them means adding origins first.
+#
+# One pool per brand, because a CORS origin belongs to ONE Sanity project: the
+# o3 app's ports are registered on o3's project and the o3xo app's on o3xo's
+# (ADR 0028). Booting the second app on a port from the first pool loads the
+# page and fails every read.
 WEB_POOL_START=3600
 WEB_POOL_END=3609
+XO_WEB_POOL_START=3700
+XO_WEB_POOL_END=3709
 # Storybook ports need no CORS origin, but they do have to be reachable from a
 # browser: Chrome and Firefox refuse 6665-6669 outright (IRC) with ERR_UNSAFE_PORT.
 STORYBOOK_POOL_START=6600
 STORYBOOK_POOL_END=6609
 
 CARRY_FILES=(.env.local apps/web/.env.local .vercel/project.json)
+# Carried when the main checkout has one, silent when it does not. o3xo's
+# `production` dataset reads anonymously, so the app renders with no env file at
+# all — a token only buys draft preview, and warning about a file nobody needs
+# trains people to ignore this script's output.
+CARRY_OPTIONAL=(apps/o3xo/.env.local)
 CARRY_DIRS=(prototype)
 
 WT="$(cd "${1:-$PWD}" 2>/dev/null && pwd)" || {
@@ -56,7 +68,7 @@ claimed_ports() {
     while read -r root; do
       [[ $root == "$WT" ]] && continue
       [[ -f "$root/.env" ]] || continue
-      sed -nE 's/^[[:space:]]*(WEB_PORT|STORYBOOK_PORT)=([0-9]+).*/\2/p' "$root/.env"
+      sed -nE 's/^[[:space:]]*(WEB_PORT|XO_WEB_PORT|STORYBOOK_PORT)=([0-9]+).*/\2/p' "$root/.env"
     done
   lsof -nP -iTCP -sTCP:LISTEN 2>/dev/null | sed -nE 's/.*:([0-9]+) \(LISTEN\)$/\1/p'
 }
@@ -95,6 +107,16 @@ for f in "${CARRY_FILES[@]}"; do
   fi
 done
 
+for f in "${CARRY_OPTIONAL[@]}"; do
+  if [[ -f "$WT/$f" ]]; then
+    echo "  keep    $f (already present)"
+  elif [[ -f "$MAIN_ROOT/$f" ]]; then
+    mkdir -p "$(dirname "$WT/$f")"
+    cp "$MAIN_ROOT/$f" "$WT/$f"
+    echo "  copied  $f"
+  fi
+done
+
 # --- 2. prototype symlink --------------------------------------------------
 
 for d in "${CARRY_DIRS[@]}"; do
@@ -113,20 +135,23 @@ if [[ -f "$WT/.env" ]]; then
 else
   taken="$(claimed_ports | sort -un)"
   web_port="$(first_free_port "$WEB_POOL_START" "$WEB_POOL_END" "$taken")"
+  xo_port="$(first_free_port "$XO_WEB_POOL_START" "$XO_WEB_POOL_END" "$taken")"
   sb_port="$(first_free_port "$STORYBOOK_POOL_START" "$STORYBOOK_POOL_END" "$taken")"
 
-  if [[ -z $web_port || -z $sb_port ]]; then
-    echo "  PORTS   pool exhausted ($WEB_POOL_START-$WEB_POOL_END) — remove a dead worktree, or widen the pool" >&2
-    echo "          and register the new web ports: pnpm sanity cors add http://localhost:<port> --credentials" >&2
+  if [[ -z $web_port || -z $xo_port || -z $sb_port ]]; then
+    echo "  PORTS   pool exhausted ($WEB_POOL_START-$WEB_POOL_END / $XO_WEB_POOL_START-$XO_WEB_POOL_END) — remove a dead worktree, or widen the pool" >&2
+    echo "          and register the new web ports on that brand's project: pnpm sanity cors add http://localhost:<port> --credentials" >&2
   else
     cat >"$WT/.env" <<EOF
 # Dev-server ports for this worktree (git-ignored). Allocated by
-# scripts/worktree-provision.sh from the pool that already has matching Sanity
-# CORS origins; loaded by scripts/dev.sh before the servers boot.
+# scripts/worktree-provision.sh from the pools that already have matching Sanity
+# CORS origins — one pool per brand's project; loaded by scripts/dev.sh before
+# the servers boot.
 WEB_PORT=$web_port
+XO_WEB_PORT=$xo_port
 STORYBOOK_PORT=$sb_port
 EOF
-    echo "  wrote   .env (web :$web_port, storybook :$sb_port)"
+    echo "  wrote   .env (web :$web_port, o3xo :$xo_port, storybook :$sb_port)"
   fi
 fi
 

@@ -30,6 +30,7 @@ apps/web/src/lib/redirects.generated.ts
 # next `dev` writes it back — a dirty tree on every run. The file says it
 # should not be edited; this is how we stop editing it.
 apps/web/next-env.d.ts
+apps/o3xo/next-env.d.ts
 
 # Build output
 **/.next/

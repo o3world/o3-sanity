@@ -130,7 +130,9 @@ already:
 ### Content naming
 
 Naming and wiring rules for schemas, fields, blocks, and renderers. Vocabulary lives in `CONTEXT.md` → Naming; the procedure is the `content-naming` skill (`.claude/skills/content-naming/`). Read both before touching `packages/sanity/src/schemas/`, `packages/content-ui/src/` or
-`apps/web/src/content/`.
+either app's `src/content/`. A block's renderer lives in the shared package and is **bound per
+app**, so adding or renaming one is two bindings — `apps/web` and `apps/o3xo` — and the `satisfies`
+check in each registry is what fails when you do only one.
 
 ### Design source of record
 

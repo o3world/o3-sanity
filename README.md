@@ -7,9 +7,11 @@ Rebuild of [o3world.com](https://www.o3world.com) on Sanity + Next.js. Coordinat
 ```sh
 pnpm install
 pnpm env:pull   # one-time `vercel login` first; writes apps/web/.env.local from Vercel (team: O3 World)
-pnpm dev        # web on localhost:3000, embedded studio at /studio
+pnpm dev:web    # o3 on localhost:3000, embedded studio at /studio
 ```
 
+`pnpm dev:o3xo` runs the second brand's app (O3XO, [ADR 0028](docs/adr/0028-o3xo-is-a-second-app-in-the-monorepo.md))
+on its own port and Sanity project — see [apps/o3xo/README.md](apps/o3xo/README.md).
 `pnpm storybook` runs Storybook on `localhost:6006`.
 
 ## Deploy model

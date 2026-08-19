@@ -15,6 +15,16 @@
         "src/test/stubs/*.{ts,tsx}"
       ]
     },
+    "apps/o3xo": {
+      "entry": [
+        "src/app/**/{page,layout,route,not-found,error,loading}.tsx",
+        "src/app/**/route.ts",
+        "next.config.ts",
+        "sanity.cli.ts",
+        "seed/load.ts",
+        "src/**/*.test.ts"
+      ]
+    },
     "apps/storybook": {
       "entry": [".storybook/{main,preview}.ts", "prototypes/**/*.stories.tsx"],
       "ignore": ["prototypes/*/**"]
