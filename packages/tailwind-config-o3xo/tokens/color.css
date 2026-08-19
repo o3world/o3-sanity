@@ -39,9 +39,10 @@
  * Tailwind compiles the utility to `var(--color-accent, #ffbe00)` — with the
  * declared value baked in as a fallback — so `bg-accent` in a SHARED
  * component still paints yellow under `data-brand="o3"` in Storybook, which
- * is the one host that loads both packages. Nothing in CSS can stop that;
- * the guard is the filesystem lint in #222, and until it lands the tell is a
- * component the Brand toolbar cannot move.
+ * is the one host that loads both packages. Nothing in CSS can stop that; the
+ * guard is `packages/ui/src/brand-token-seam.test.ts`, which derives this
+ * role's brand-only standing from these files and fails the suite on any
+ * shared component that names it.
  */
 @theme reference {
   /* #FFBE00 — `orange/50`. The logo's second yellow is a different value and

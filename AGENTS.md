@@ -173,6 +173,12 @@ one.
 One Figma variant axis → one `cva` variants key. That rule is what makes the
 component map in #38 mechanical rather than ad hoc.
 
+Both brands render `packages/ui` and `packages/content-ui`, so a component there
+may only name a token role **every** brand's package defines. `bg-accent` is
+O3XO's alone and Tailwind bakes the value in as the utility's fallback, so it
+paints yellow on an O3 page; `brand-token-seam.test.ts` derives the shared
+vocabulary from the token packages and fails the suite on a brand-only role.
+
 ### Domain docs
 
 Single-context layout — `CONTEXT.md` and `docs/adr/` at the repo root. See `docs/agents/domain.md`.

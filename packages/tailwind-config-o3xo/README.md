@@ -61,10 +61,13 @@ attribute.
 Where the vocabularies diverge, the brand-only role lives in one package
 alone. Today that is **`accent`** — O3XO's yellow, which no O3 role names.
 
-A component in `packages/ui` may only reach for roles **both** packages
-define. Reaching for `accent` from shared code is what the lint in #222 exists
-to stop; until it lands, the Brand toolbar is the check — a shared component
-that looks identical under both brands where it should not is the symptom.
+A component in `packages/ui` or `packages/content-ui` may only reach for roles
+**both** packages define. `packages/ui/src/brand-token-seam.test.ts` is the
+guard: it derives the shared vocabulary and the brand-only roles from these
+files, so a role added to both packages is legal the moment it lands and a role
+added to one is not. It reads the utility class, a `var()` reference and the raw
+hex alike; comments are exempt, which is what lets a component explain why it
+does not paint with `accent`.
 
 `accent` is declared in a `@theme reference` block so the utilities exist
 without the variable being emitted at `:root`; the only `--color-accent`

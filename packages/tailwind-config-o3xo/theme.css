@@ -49,8 +49,8 @@
  * differently and neither renames them. Where the vocabularies diverge, the
  * brand-only role lives here alone: `accent` (color.css) is O3XO's and O3 has
  * no equivalent. A component in packages/ui may only reach for roles BOTH
- * packages define; reaching for `accent` from shared code is what the lint in
- * #222 exists to stop.
+ * packages define; `packages/ui/src/brand-token-seam.test.ts` derives that
+ * vocabulary from these files and fails on shared code reaching for `accent`.
  */
 
 @import './tokens/color.css';
