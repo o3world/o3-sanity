@@ -29,6 +29,7 @@
     "react": "^19"
   },
   "exports": {
+    "./brand": "./src/brand.ts",
     "./client": "./src/client.ts",
     "./constants": "./src/constants.ts",
     "./image": "./src/image.ts",

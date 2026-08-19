@@ -4,15 +4,8 @@ import { fileURLToPath } from 'node:url'
 
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
-import {
-  DATASETS,
-  DEFAULT_DATASET,
-  PROJECT_ID,
-  PUBLIC_DATASETS,
-  readsNeedToken,
-  resolveDataset,
-  resolveProjectId,
-} from './constants'
+import { brandConfig } from './brand'
+import { COLLECTION_PREFIXES, readsNeedToken, resolveDataset, resolveProjectId } from './constants'
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../../..')
 
@@ -31,10 +24,6 @@ afterEach(() => {
  * fix: unset means scratch, and production is only ever reached by asking.
  */
 describe('the dataset an unconfigured checkout resolves to', () => {
-  it('is development, never production', () => {
-    expect(DEFAULT_DATASET).toBe('development')
-  })
-
   it('is what resolveDataset returns when the variable is unset', () => {
     delete process.env.NEXT_PUBLIC_SANITY_DATASET
     expect(resolveDataset()).toBe('development')
@@ -51,10 +40,6 @@ describe('the dataset an unconfigured checkout resolves to', () => {
     process.env.NEXT_PUBLIC_SANITY_DATASET = 'production'
     expect(resolveDataset()).toBe('production')
   })
-
-  it('is a dataset the project actually declares', () => {
-    expect(DATASETS).toContain(DEFAULT_DATASET)
-  })
 })
 
 /**
@@ -66,8 +51,10 @@ describe('the dataset an unconfigured checkout resolves to', () => {
  * back empty and nothing in the log says why.
  */
 describe('which datasets a tokenless read can trust', () => {
+  afterEach(() => vi.unstubAllEnvs())
+
   it('reads the dataset an unconfigured checkout lands on without a token', () => {
-    expect(readsNeedToken(DEFAULT_DATASET)).toBe(false)
+    expect(readsNeedToken(resolveDataset())).toBe(false)
   })
 
   it('does not need one for a public dataset', () => {
@@ -80,41 +67,76 @@ describe('which datasets a tokenless read can trust', () => {
     expect(readsNeedToken('scratch-2026')).toBe(true)
   })
 
-  it('lists only datasets the project declares', () => {
-    expect(DATASETS).toEqual(expect.arrayContaining([...PUBLIC_DATASETS]))
+  it('answers for the brand this process runs as, not for o3', () => {
+    // o3xo's project has no `development` dataset at all, so o3's answer for
+    // that name is not o3xo's.
+    vi.stubEnv('NEXT_PUBLIC_BRAND', 'o3xo')
+    expect(readsNeedToken('development')).toBe(true)
+    expect(readsNeedToken('production')).toBe(false)
   })
 })
 
-describe('resolveProjectId', () => {
+describe('the project a Sanity entry point talks to', () => {
   afterEach(() => vi.unstubAllEnvs())
 
-  it('falls back to the committed project id', () => {
+  it('is the brand’s own, with nothing set', () => {
     // CI sets NEXT_PUBLIC_SANITY_PROJECT_ID to a literal for module-level
     // config validation (checks.yml); the fallback only shows with it unset.
     vi.stubEnv('NEXT_PUBLIC_SANITY_PROJECT_ID', '')
-    expect(resolveProjectId()).toBe(PROJECT_ID)
+    expect(resolveProjectId()).toBe('naorcr6k')
   })
 
   it('prefers the environment when set', () => {
     vi.stubEnv('NEXT_PUBLIC_SANITY_PROJECT_ID', 'from-env')
     expect(resolveProjectId()).toBe('from-env')
   })
+
+  it('is o3xo’s project, and o3xo’s dataset, when the brand is o3xo', () => {
+    vi.stubEnv('NEXT_PUBLIC_BRAND', 'o3xo')
+    // Set, and deliberately ignored: o3's variables are not o3xo's.
+    vi.stubEnv('NEXT_PUBLIC_SANITY_PROJECT_ID', 'naorcr6k')
+    vi.stubEnv('NEXT_PUBLIC_SANITY_DATASET', 'development')
+    vi.stubEnv('XO_SANITY_PROJECT_ID', '')
+    vi.stubEnv('XO_SANITY_DATASET', '')
+
+    expect(resolveProjectId()).toBe('tunpgire')
+    expect(resolveDataset()).toBe('production')
+  })
+})
+
+/**
+ * The prefix table is a brand fact (ADR 0028) and this is the current brand's
+ * view of it — which is what every route, the sitemap and the redirect map
+ * read.
+ */
+describe('where a collection serves', () => {
+  it('is o3’s prefixes in the o3 app', () => {
+    expect(COLLECTION_PREFIXES).toEqual({ insight: '/insights', caseStudy: '/work' })
+  })
+
+  it('is the same table brand config declares', () => {
+    const { collections } = brandConfig('o3')
+    expect(COLLECTION_PREFIXES).toEqual({
+      insight: collections.insight.prefix,
+      caseStudy: collections.caseStudy.prefix,
+    })
+  })
 })
 
 /**
  * `scripts/switch-dataset.sh` validates its argument against a hardcoded list,
  * because a bash script cannot import a TypeScript const. This is the seam
- * that keeps the two in step — add a dataset to `DATASETS` without adding it
- * to the script and `pnpm dataset <name>` would reject a name the code
- * accepts.
+ * that keeps the two in step — add a dataset to o3's brand config without
+ * adding it to the script and `pnpm dataset <name>` would reject a name the
+ * code accepts. The script switches o3's dataset: it writes o3's variable.
  */
 describe('scripts/switch-dataset.sh', () => {
   const script = readFileSync(resolve(repoRoot, 'scripts/switch-dataset.sh'), 'utf8')
 
-  it('knows exactly the datasets DATASETS declares', () => {
+  it('knows exactly the datasets o3’s project has', () => {
     const known = /^KNOWN=\(([^)]*)\)/m.exec(script)?.[1]
     expect(known, 'KNOWN=(...) not found in the script').toBeDefined()
-    expect(known!.trim().split(/\s+/).sort()).toEqual([...DATASETS].sort())
+    expect(known!.trim().split(/\s+/).sort()).toEqual([...brandConfig('o3').datasets].sort())
   })
 
   it('writes the same variable name every entry point reads', () => {
