@@ -22,9 +22,12 @@ pool already has a CORS origin on the O3XO project; a port from outside it will
 load the page and fail every Sanity read.
 
 No `.env.local` is needed to render published content: O3XO's `production`
-dataset reads anonymously. A read token only becomes necessary for draft preview,
-and goes in `apps/o3xo/.env.local` as `SANITY_API_READ_TOKEN` — provisioning
-carries that file across worktrees the same way it carries `apps/web`'s.
+dataset reads anonymously. Draft preview is the exception, and it is not a
+graceful one — Presentation's `previewMode.enable` hands its secret to a
+token-bearing client, so with no token `/api/draft-mode/enable` answers 500 and
+Presentation errors out instead of opening. The token goes in
+`apps/o3xo/.env.local` as `SANITY_API_READ_TOKEN` — provisioning carries that
+file across worktrees the same way it carries `apps/web`'s.
 
 ## Where it deploys
 
