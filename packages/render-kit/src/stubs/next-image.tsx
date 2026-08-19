@@ -1,13 +1,14 @@
-/* eslint-disable @next/next/no-img-element -- a plain <img> is the entire
- * point of this file: it stands in FOR next/image so the render layer does not
- * need Next's build-time image config. Nothing here ships to a browser. */
-
 import type { CSSProperties } from 'react'
 
 /**
  * Stands in for `next/image` in the `render` test layer — a plain <img> that
- * keeps `src`/`alt` assertable. See the note in vitest.config.ts for why the
+ * keeps `src`/`alt` assertable. See the note in `../project.ts` for why the
  * real component is not used.
+ *
+ * A plain `<img>` is the entire point: this file stands in FOR next/image so
+ * the layer needs no build-time image config, and nothing here ships to a
+ * browser. `@next/next/no-img-element` would forbid it, which is one reason
+ * the Next plugin is not registered over this package.
  */
 interface StubImageProps {
   src: string

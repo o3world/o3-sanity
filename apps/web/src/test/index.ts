@@ -1,36 +1,24 @@
 /**
- * The `render` test layer's public surface — import everything from `@/test`.
+ * This app's instance of the `render` test layer — import everything from
+ * `@/test`.
  *
  *   import { renderRoute, anInsight } from '@/test'
  *
- * Deliberately narrow: it exports what tests use today, not what they might.
- * `installDataset` (drive the fetch stub by hand) lives in ./stubs/sanity-live
- * — promote it here when a test needs it.
+ * Two halves. `@o3/render-kit` is the layer itself: `renderRoute`, the module
+ * stubs, and the fixtures typed against the shared queries. Everything after
+ * it reads O3's migrated corpus off disk, which is this app's content and no
+ * other app's.
  *
- * See docs/testing.md for which layer to reach for.
+ * See docs/testing.md for which layer to reach for, and the kit's README for
+ * how a second app instantiates it.
  */
-export { bandPaths, subBlockPaths } from './attribution'
-
-export { expectNotFound, renderRoute } from './renderRoute'
+export * from '@o3/render-kit'
 
 export {
-  classTokens,
-  unprefixedHorizontalScrollUtilities,
-  variantsOf,
-} from '@o3/content-ui/testing'
-
-export {
-  aCaseStudiesPage,
-  aCaseStudyCard,
   aMigratedPage,
   aMigratedInsight,
-  anInsight,
-  anInsightsPage,
   aSeededPage,
   aTranslatedCaseStudy,
   migratedPageSlugs,
   migratedInsightSlugs,
-  paragraph,
-  siteSettings,
-  withSettings,
 } from './fixtures'

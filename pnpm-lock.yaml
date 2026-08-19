@@ -17,6 +17,9 @@ importers:
       '@o3/eslint-config':
         specifier: workspace:*
         version: link:packages/eslint-config
+      '@o3/render-kit':
+        specifier: workspace:*
+        version: link:packages/render-kit
       '@o3/typescript-config':
         specifier: workspace:*
         version: link:packages/typescript-config
@@ -126,6 +129,9 @@ importers:
         specifier: ^6.1.0
         version: 6.4.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
     devDependencies:
+      '@o3/render-kit':
+        specifier: workspace:*
+        version: link:../../packages/render-kit
       '@o3/tailwind-config':
         specifier: workspace:*
         version: link:../../packages/tailwind-config
@@ -299,6 +305,9 @@ importers:
         specifier: ^6.1.0
         version: 6.4.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
     devDependencies:
+      '@o3/render-kit':
+        specifier: workspace:*
+        version: link:../../packages/render-kit
       '@o3/story-kit':
         specifier: workspace:*
         version: link:../../packages/story-kit
@@ -510,6 +519,43 @@ importers:
       eslint:
         specifier: '>=9'
         version: 9.39.5(jiti@2.7.0)
+
+  packages/render-kit:
+    dependencies:
+      '@o3/content-ui':
+        specifier: workspace:*
+        version: link:../content-ui
+      '@o3/sanity':
+        specifier: workspace:*
+        version: link:../sanity
+    devDependencies:
+      '@o3/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.20.1
+      '@types/react':
+        specifier: ^19.0.0
+        version: 19.2.18
+      '@types/react-dom':
+        specifier: ^19.0.0
+        version: 19.2.4(@types/react@19.2.18)
+      next:
+        specifier: ^16.2.4
+        version: 16.2.12(@babel/core@7.29.7)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      react:
+        specifier: ^19.2.7
+        version: 19.2.8
+      react-dom:
+        specifier: ^19.2.7
+        version: 19.2.8(react@19.2.8)
+      typescript:
+        specifier: ^5.7.0
+        version: 5.9.3
+      vitest:
+        specifier: ^4.1.10
+        version: 4.1.10(@edge-runtime/vm@3.2.0)(@types/node@22.20.1)(@vitest/browser-playwright@4.1.10)(jsdom@29.1.1(@noble/hashes@2.2.0))(vite@8.2.0(@types/node@22.20.1)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.23.1)(yaml@2.9.0))
 
   packages/sanity:
     dependencies:

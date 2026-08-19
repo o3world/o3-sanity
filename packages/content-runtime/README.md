@@ -32,5 +32,5 @@ type without forcing a renderer into the other.
 `build.tsx` and `siteSettings.ts` reach the Sanity client through the package's
 own `#live` import (package.json → `imports`), while apps reach the same module
 as `@o3/content-runtime/live`. A Vite alias matches the specifier as written, so
-the render test layer stubs both forms — see `vitest.config.mts`. Stub only the
+the render test layer stubs both forms — see `@o3/render-kit`. Stub only the
 app's and every route render in the suite goes to the network.

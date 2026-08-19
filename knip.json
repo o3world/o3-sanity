@@ -10,9 +10,7 @@
         "src/**/*.stories.tsx",
         "src/**/*.test.ts",
         "src/**/*.render.test.tsx",
-        "src/test/index.ts",
-        "src/test/setup.ts",
-        "src/test/stubs/*.{ts,tsx}"
+        "src/test/index.ts"
       ]
     },
     "apps/o3xo": {
@@ -22,7 +20,9 @@
         "next.config.ts",
         "sanity.cli.ts",
         "seed/load.ts",
-        "src/**/*.test.ts"
+        "src/**/*.test.ts",
+        "src/**/*.render.test.tsx",
+        "src/test/index.ts"
       ]
     },
     "apps/storybook": {
@@ -67,6 +67,9 @@
         "src/urls.ts",
         "src/**/*.test.ts"
       ]
+    },
+    "packages/render-kit": {
+      "entry": ["src/index.ts", "src/project.ts", "src/setup.ts", "src/stubs/*.{ts,tsx}"]
     },
     "packages/editor-chrome": {
       "entry": [

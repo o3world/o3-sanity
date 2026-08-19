@@ -1,7 +1,7 @@
 /**
- * Stands in for `@o3/content-runtime/live` in the `render` test layer (aliased in
- * vitest.config.ts). Routes call `sanityFetch` exactly as they do in
- * production; the test decides what comes back.
+ * Stands in for `@o3/content-runtime/live` in the `render` test layer (aliased
+ * by `../project.ts`, twice — see the note there). Routes call `sanityFetch`
+ * exactly as they do in production; the test decides what comes back.
  *
  * Install a dataset with `installDataset()` — or, far more usually, let
  * `renderRoute()` do it for you.

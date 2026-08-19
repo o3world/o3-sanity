@@ -10,8 +10,8 @@ import {
   renderRoute,
   unprefixedHorizontalScrollUtilities,
   variantsOf,
+  type FetchCall,
 } from '@/test'
-import type { FetchCall } from '@/test/stubs/sanity-live'
 
 import { insightIndex } from './collectionIndex'
 

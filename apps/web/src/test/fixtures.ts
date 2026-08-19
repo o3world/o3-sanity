@@ -3,149 +3,20 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import { SITE_SETTINGS_QUERY } from '@o3/sanity/queries'
-import type {
-  CASE_STUDIES_PAGE_QUERY_RESULT,
-  INSIGHT_QUERY_RESULT,
-  INSIGHTS_PAGE_QUERY_RESULT,
-  SITE_SETTINGS_QUERY_RESULT,
-} from '@o3/sanity/types/generated'
-
 import { projectSeedPage, resolveAssetMarkers, type SeedDoc } from '@o3/content-ui/testing'
+import { anInsight, type Insight } from '@o3/render-kit'
 
 /**
- * Fixture builders for the `render` layer.
+ * This app's half of the `render` layer's fixtures: the ones that read
+ * documents off disk.
  *
- * Each is typed as the GENERATED query result, so these are not free-form
- * objects: when a query projection changes, typegen changes the result type
- * and every stale fixture becomes a compile error. That is the same
- * compile-time guardrail the block registry uses (ADR 0001), pointed at test
- * data.
- *
- * Pass only the fields your assertion is about; the rest come from a valid
- * default, so a test reads as "this one thing differs".
+ * The invented, brand-neutral builders (`anInsight`, `siteSettings`,
+ * `withSettings`, …) are `@o3/render-kit`'s, because both apps serve the same
+ * queries and a fixture typed against a query result is a fact about the
+ * schema rather than about a site. What is app-specific is the corpus: these
+ * read `tools/migration/data/`, which is O3's migrated WordPress archive and
+ * this app's content. `apps/o3xo/src/test/fixtures.ts` reads its own.
  */
-
-type Insight = NonNullable<INSIGHT_QUERY_RESULT>
-
-/** A Portable Text paragraph, the shape `htmlToBlocks` produces. */
-export function paragraph(text: string, key = 'k0000') {
-  return {
-    _type: 'block' as const,
-    _key: key,
-    style: 'normal' as const,
-    markDefs: [],
-    children: [{ _type: 'span' as const, _key: `${key}s`, text, marks: [] }],
-  }
-}
-
-export function anInsight(overrides: Partial<Insight> = {}): Insight {
-  return {
-    _id: 'insight-wp-101',
-    _type: 'insight',
-    title: 'An Insight',
-    slug: 'an-insight',
-    excerpt: 'Why this matters.',
-    publishedAt: '2026-05-04T13:20:00Z',
-    featuredImage: null,
-    author: { name: 'Brian Crumley', title: 'Partner', headshot: null },
-    categories: [{ title: 'Strategy', slug: 'strategy' }],
-    readingMinutes: 1,
-    body: [paragraph('The body of the article.')],
-    seo: null,
-    // The "Keep reading." band's two feeds (#45). Empty by default so a test
-    // about the article itself doesn't render eight cards it never asked for.
-    related: [],
-    latest: [],
-    ...overrides,
-  } as Insight
-}
-
-/** The card half of an insight — what every listing and feed projects. */
-function toCard({ body: _body, seo: _seo, related: _related, latest: _latest, ...card }: Insight) {
-  return card
-}
-
-/**
- * The /insights feed as its query returns it. `categories` is the filter
- * bar's options (#61) — every category with an article, which the query
- * answers separately from the items on the page, so it is a third argument
- * rather than something derived from `items`.
- */
-export function anInsightsPage(
-  items: Insight[] = [anInsight()],
-  total = items.length,
-  categories: INSIGHTS_PAGE_QUERY_RESULT['categories'] = [],
-): INSIGHTS_PAGE_QUERY_RESULT {
-  return {
-    items: items.map(toCard),
-    total,
-    categories,
-  } as INSIGHTS_PAGE_QUERY_RESULT
-}
-
-type CaseStudyCard = CASE_STUDIES_PAGE_QUERY_RESULT['items'][number]
-
-/** A case study as every card projection sees it — `/work`, Home, next-case. */
-export function aCaseStudyCard(overrides: Partial<CaseStudyCard> = {}): CaseStudyCard {
-  return {
-    _id: 'caseStudy-seed-a-case',
-    _type: 'caseStudy',
-    title: 'A Case Study',
-    slug: 'a-case-study',
-    narrativeHeadline: 'The deeper problem we found.',
-    headlineStat: null,
-    heroMedia: null,
-    client: null,
-    industries: [{ title: 'Healthcare' }],
-    industryDetail: 'Pediatric Systems',
-    ...overrides,
-  } as CaseStudyCard
-}
-
-/** One page of the `/work` index feed. */
-export function aCaseStudiesPage(
-  items: CaseStudyCard[] = [aCaseStudyCard()],
-  total = items.length,
-): CASE_STUDIES_PAGE_QUERY_RESULT {
-  return { items, total } as CASE_STUDIES_PAGE_QUERY_RESULT
-}
-
-/**
- * Site Settings as `SITE_SETTINGS_QUERY` returns them — the defaults tier of
- * the SEO chain (#26) and the source of the nav/footer chrome.
- */
-export function siteSettings(
-  overrides: Partial<NonNullable<SITE_SETTINGS_QUERY_RESULT>> = {},
-): SITE_SETTINGS_QUERY_RESULT {
-  return {
-    title: 'O3',
-    navItems: [],
-    primaryButton: null,
-    footerTagline: null,
-    footerGroups: [],
-    socialsLabel: 'Socials',
-    socialLinks: [],
-    legalLinks: [],
-    legalName: 'O3 World, LLC',
-    copyrightNote: null,
-    defaultSeo: null,
-    ...overrides,
-  } as SITE_SETTINGS_QUERY_RESULT
-}
-
-/**
- * A dataset resolver for a route that fetches both a document and Site
- * Settings — which, since #26, is every route with `generateMetadata`.
- *
- *   renderRoute(route, { data: withSettings(anInsight()), params: { slug } })
- */
-export function withSettings(
-  doc: unknown,
-  settings: SITE_SETTINGS_QUERY_RESULT = siteSettings(),
-): (call: { query: string }) => unknown {
-  return (call) => (call.query === SITE_SETTINGS_QUERY ? settings : doc)
-}
 
 /**
  * Stand in for the asset upload `tools/migration/src/load.ts` performs, so a

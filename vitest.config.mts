@@ -3,8 +3,10 @@ import { fileURLToPath } from 'node:url'
 
 import { defineConfig } from 'vitest/config'
 
+import { renderProject } from '@o3/render-kit/project'
+
 const root = dirname(fileURLToPath(import.meta.url))
-const webSrc = resolve(root, 'apps/web/src')
+const appSrc = (app: string) => resolve(root, 'apps', app, 'src')
 
 /**
  * Three test layers (ADR 0004). Each answers a different question, and the
@@ -16,6 +18,11 @@ const webSrc = resolve(root, 'apps/web/src')
  *   render   `*.render.test.tsx`  — a document or route rendered from fixture
  *                                   data to HTML, with no network. Answers
  *                                   "does this content actually display?"
+ *                                   One project per app: a project resolves
+ *                                   one `@/` and carries one brand, so the
+ *                                   second app is `render:o3xo` rather than a
+ *                                   second glob. The layer itself is
+ *                                   `@o3/render-kit`.
  *   stories  `*.stories.tsx`      — every Storybook story, mounted in real
  *                                   Chromium with real CSS, plus an axe scan.
  *                                   No test files to write: writing the story
@@ -23,7 +30,8 @@ const webSrc = resolve(root, 'apps/web/src')
  *                                   itself (apps/storybook/vitest.config.ts)
  *                                   so its addon resolves from that package.
  *
- * Run one layer with `pnpm test --project unit`.
+ * Run one layer with `pnpm test --project unit`, or both render projects with
+ * `pnpm test --project 'render*'`.
  *
  * **The suite pins its own port** (#116). Vitest loads the repo-root `.env`
  * into `process.env`, and provisioning writes a unique `WEB_PORT` into every
@@ -81,67 +89,32 @@ export default defineConfig({
           server: { deps: { inline: ['sanity'] } },
         },
       },
-      {
-        // Server components are rendered through react-dom/server's streaming
-        // API (see apps/web/src/test/renderRoute.tsx) because the tree
-        // contains async components — the sync renderToStaticMarkup cannot
-        // await them.
-        //
-        // apps/web's tsconfig sets `jsx: "preserve"` because Next runs its own
-        // JSX transform. Vite honours tsconfig, so without this override the
-        // `.tsx` under test reaches the parser with its JSX still in it.
-        oxc: { jsx: { runtime: 'automatic', importSource: 'react' } },
-        // Anchored regexes, most specific first — an unanchored `@` prefix
-        // alias would swallow `@o3/content-runtime/live` before its own entry
-        // matched.
-        resolve: {
-          alias: [
-            // The one network seam. `installDataset()` feeds routes their
-            // documents, so a render test needs no Sanity project, no token,
-            // and no network.
-            //
-            // Two entries for one module: the app reaches it by its package
-            // subpath, while the route builders inside @o3/content-runtime
-            // reach it through the package's own `#live` import (package.json
-            // → `imports`). A Vite alias matches the specifier as written, so
-            // stubbing one form does not stub the other — and stubbing only
-            // the app's would leave every route render hitting the network.
-            {
-              find: /^@o3\/content-runtime\/live$/,
-              replacement: resolve(webSrc, 'test/stubs/sanity-live.ts'),
-            },
-            { find: /^#live$/, replacement: resolve(webSrc, 'test/stubs/sanity-live.ts') },
-            // next/image needs Next's build-time image config to render. The
-            // component under test is our SanityImage wrapper, whose real work
-            // (urlForImage CDN URL construction) happens before next/image is
-            // reached — so stubbing it to a plain <img> keeps the assertion
-            // surface on our code without hiding anything we wrote.
-            { find: /^next\/image$/, replacement: resolve(webSrc, 'test/stubs/next-image.tsx') },
-            // Without a Next build there is no loadable manifest, so the real
-            // next/dynamic resolves to nothing and every registered document
-            // View renders blank — silently. React.lazy is the honest stand-in.
-            {
-              find: /^next\/dynamic$/,
-              replacement: resolve(webSrc, 'test/stubs/next-dynamic.tsx'),
-            },
-            // draftMode() needs a request scope that only exists inside the
-            // Next server. The stub lets a test pick the published or draft
-            // path explicitly.
-            { find: /^next\/headers$/, replacement: resolve(webSrc, 'test/stubs/next-headers.ts') },
-            { find: /^server-only$/, replacement: resolve(webSrc, 'test/stubs/empty.ts') },
-            { find: /^@\//, replacement: `${webSrc}/` },
-          ],
-        },
-        test: {
-          name: 'render',
-          environment: 'node',
-          env: TEST_ENV,
-          // The renderers live in @o3/content-ui and their tests moved with
-          // them (#212); the app keeps the route- and view-level renders.
-          include: ['apps/web/src/**/*.render.test.tsx', 'packages/*/src/**/*.render.test.tsx'],
-          setupFiles: [resolve(webSrc, 'test/setup.ts')],
-        },
-      },
+      /**
+       * O3, plus the shared renderers. `@o3/content-ui`'s own render tests
+       * (#212) run here rather than in a project of their own: the components
+       * take a brand's tokens from CSS the render layer never loads, so one
+       * run of them covers both apps.
+       */
+      renderProject({
+        name: 'render',
+        appSrc: appSrc('web'),
+        env: { ...TEST_ENV, NEXT_PUBLIC_BRAND: 'o3' },
+        include: ['apps/web/src/**/*.render.test.tsx', 'packages/*/src/**/*.render.test.tsx'],
+      }),
+      /**
+       * O3XO. **The brand is pinned the way the port is**, and for the same
+       * kind of reason: `next.config.ts` is what puts `NEXT_PUBLIC_BRAND` in
+       * the running app, vitest never loads it, and `brandConfig()` answers
+       * `o3` when the variable is unset. Unpinned, every route this app builds
+       * would canonicalise to o3world.com and link case studies at `/work`,
+       * and the assertions would agree with it.
+       */
+      renderProject({
+        name: 'render:o3xo',
+        appSrc: appSrc('o3xo'),
+        env: { ...TEST_ENV, NEXT_PUBLIC_BRAND: 'o3xo' },
+        include: ['apps/o3xo/src/**/*.render.test.tsx'],
+      }),
       './apps/storybook/vitest.config.ts',
     ],
   },

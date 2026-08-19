@@ -78,13 +78,15 @@ it('404s when nothing matches', async () => {
 `renderRoute` returns `{ html, metadata, calls }`. `calls` is every `sanityFetch` the render made —
 use it to assert cache tags and the stega-off rule on metadata.
 
-**Fixtures are typed against the generated query results** (`anInsight`, `aPage`,
-`aInsightsPage` in `@/test`). A query projection change breaks stale fixtures at compile time,
+**Fixtures are typed against the generated query results** (`anInsight`, `aCaseStudy`,
+`anInsightsPage` in `@/test`). A query projection change breaks stale fixtures at compile time,
 the same guardrail the block registry uses. Pass only the field your assertion is about.
 
 **`aMigratedInsight(slug)` loads a real converted document** and shapes it into what the query
 returns. That is the migration → render bridge: a mapper change producing something the renderer
-can't display fails here rather than in Studio. `migratedInsightSlugs()` sweeps all of them.
+can't display fails here rather than in Studio. `migratedInsightSlugs()` sweeps all of them. It is
+`apps/web`'s, like every fixture that reads a tree off disk; `apps/o3xo`'s `aSeededPage()` reads
+that app's bootstrap documents instead.
 
 **The 402 half of ADR 0006 is assertable** via the responsive helpers, exported from `@/test` in the
 app and from `@o3/content-ui/testing` in the package that now holds the renderers:
@@ -92,22 +94,28 @@ app and from `@o3/content-ui/testing` in the package that now holds the renderer
 is a phone getting a scroll region where the frame draws a stack — and `variantsOf(html, 'gap-12')`
 pins a utility to the widths that emitted it when the two frames disagree on a value.
 
-The layer collects `apps/web/src/**` and `packages/*/src/**` — the renderers moved to
-`@o3/content-ui` (#212) and their render tests moved with them, while the app keeps the route- and
-view-level ones. A moved test reaches its helpers by package subpath; only app tests get the `@/`
-alias.
+**The layer is `@o3/render-kit`, and each app instantiates it** (#227). A vitest project resolves
+one `@/` alias and carries one environment, so the two brand apps are two projects — `render` and
+`render:o3xo` — built by one `renderProject()` call each in `vitest.config.mts`. Run both with
+`pnpm test --project 'render*'`.
 
-**`apps/o3xo` has no render tests yet**, and the reason is the harness rather than the app: the `@/`
-alias and `renderRoute`/fixtures/stubs live in `apps/web/src/test`, and the project resolves one
-`@/` and one brand. A per-app render layer wants the harness promoted to a package first — until
-then the second app's route entries are covered by its unit-layer binding test and by both apps'
-`next build`.
+The `render` project also collects `packages/*/src/**`: the renderers moved to `@o3/content-ui`
+(#212) and their render tests moved with them, while an app keeps the route- and view-level ones.
+Those components take a brand's tokens from CSS this layer never loads, so one run of them covers
+both apps. A moved test reaches its helpers by package subpath; only app tests get the `@/` alias.
 
-Four modules are stubbed (see `vitest.config.mts` for why each): `@o3/content-runtime/live` is the
-network seam, `next/image` renders a plain `<img>`, `next/headers` lets a test pick the draft or
-published path, and `next/dynamic` becomes `React.lazy` — without that last one every registered
-View renders blank, silently. The live stub is aliased twice, once per specifier: the app imports
-the package subpath, the route builders inside the package import `#live`.
+**The brand is pinned per project, beside the port** — `NEXT_PUBLIC_BRAND: 'o3xo'` on the second
+one. `next.config.ts` is what supplies it to the running app and vitest never loads that file, so
+an unpinned project gets `brandConfig()`'s fallback of `o3`: every URL the second app builds would
+canonicalise to o3world.com and link case studies at `/work`, and the assertions would agree with
+it. Seven of `apps/o3xo`'s render tests fail the moment the pin is removed, which is what it is for.
+
+Four modules are stubbed (see `@o3/render-kit`'s `project.ts` for why each):
+`@o3/content-runtime/live` is the network seam, `next/image` renders a plain `<img>`, `next/headers`
+lets a test pick the draft or published path, and `next/dynamic` becomes `React.lazy` — without that
+last one every registered View renders blank, silently. The live stub is aliased twice, once per
+specifier: the app imports the package subpath, the route builders inside the package import
+`#live`.
 
 ## `stories` — components in a real browser
 
