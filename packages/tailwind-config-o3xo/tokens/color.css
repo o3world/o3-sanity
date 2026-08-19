@@ -1,0 +1,118 @@
+/*
+ * Color — the O3XO palette as the same semantic roles the base theme names,
+ * read off the UI kit's Color canvas (see theme.css for the provenance rule).
+ *
+ * The palette is cool where O3's is warm: azure darks stepping down to a pure
+ * black, neutral greys for the light bands, and one red that does all the
+ * acting. Two structural differences from O3's set are worth knowing before
+ * reading the values:
+ *
+ *   - THE DARKS DO NOT SPLIT THREE WAYS. O3 has ink / ink-warm / ink-deep
+ *     doing three different jobs. The kit draws `azure/11` for the dark
+ *     surface and `black/solid` for the gradient floor, and has no third; so
+ *     `ink-warm` takes the next azure step up rather than inventing a warm
+ *     black the brand does not have.
+ *   - BODY AND MUTED COPY ARE ONE VALUE. O3's `fg-body` and `fg-muted` are
+ *     two reads off two generations of frame. The kit sets both at
+ *     `azure/34`, so they converge here instead of carrying a distinction
+ *     O3XO's design does not draw.
+ *
+ * NOT OVERRIDDEN, deliberately: `white` (the kit's `white/solid` is #FFFFFF),
+ * `utility` (the kit's chrome black and O3's are both #000000), the
+ * `on-ink-*` alphas and `fg-inverse-muted` (white at an alpha is
+ * brand-neutral, and the kit's own `white/ 5%` / `white/ 20%` overlays
+ * agree), and `scrim-light` / `on-light-line` (the same, inverted). The base
+ * theme's `[data-surface='ink']` block is left alone for the same reason: it
+ * re-points the text roles to those white alphas, and an element's own
+ * declaration beats one inherited from <html>, so a dark band inside an O3XO
+ * page still gets the inverted roles.
+ */
+
+/*
+ * `accent` is O3XO's alone — the yellow the kit runs across its cards and
+ * patterns, which no O3 role names. Declared `reference` so the utilities
+ * (`bg-accent`, `text-accent`, `border-accent`) exist without the variable
+ * being emitted at `:root`: the only `--color-accent` declaration that lands
+ * in the document is the O3XO block below.
+ *
+ * That is a narrower guarantee than it sounds, and the difference matters:
+ * Tailwind compiles the utility to `var(--color-accent, #ffbe00)` — with the
+ * declared value baked in as a fallback — so `bg-accent` in a SHARED
+ * component still paints yellow under `data-brand="o3"` in Storybook, which
+ * is the one host that loads both packages. Nothing in CSS can stop that;
+ * the guard is the filesystem lint in #222, and until it lands the tell is a
+ * component the Brand toolbar cannot move.
+ */
+@theme reference {
+  /* #FFBE00 — `orange/50`. The logo's second yellow is a different value and
+   * stays a literal at its call site until a second use appears. */
+  --color-accent: #ffbe00;
+}
+
+:root[data-brand='o3xo'] {
+  /* ── Brand ─────────────────────────────────────────────────────────────── */
+  /* #DC2626 — `red/solid`, the kit's one action color: every solid variant of
+   * the Button set (4405:6386) fills it. Unlike O3's red it is a flat fill
+   * first and a gradient second — see --gradient-brand-glow in gradient.css. */
+  --color-brand: #dc2626;
+  /* #FFBE00 — `orange/50`, the decorative accent. See the @theme block above
+   * for why it is declared twice; this is the only definition that lands in
+   * the document. */
+  --color-accent: #ffbe00;
+
+  /* ── Surfaces ──────────────────────────────────────────────────────────── */
+  /* #111827 — `azure/11`. The dark surface and the darkest text, the way
+   * O3's ink is both. */
+  --color-ink: #111827;
+  /* #20252b — `azure/15`, one step up from the dark surface. O3's ink-warm is
+   * a warm black for one hero band; the kit has no warm black, so this role
+   * takes the lifted azure the kit does draw. */
+  --color-ink-warm: #20252b;
+  /* #000000 — `black/solid`. The gradient floor and the kit's true black. */
+  --color-ink-deep: #000000;
+  /* Deprecated alias of --color-ink in the base theme; tracked to the same
+   * value here so the remaining `bg-ink-soft` call sites paint O3XO's dark. */
+  --color-ink-soft: #111827;
+  /* #F3F3F3 — `grey/95`, the light band. Cool where O3's bone is warm. */
+  --color-bone: #f3f3f3;
+  /* #F9F9F9 — INTERPOLATED: the kit has no swatch between `grey/95` and
+   * `white/solid`, and bone-soft is the near-white the closed surface wash
+   * rises to. The one value in this package not read off a frame. */
+  --color-bone-soft: #f9f9f9;
+
+  /* ── Text on light surfaces (white / bone) ─────────────────────────────── */
+  /* #111827 — `azure/11`. Body copy and card titles; the kit's White CTA
+   * button sets its label in it. Same swatch as the dark surface. */
+  --color-fg: #111827;
+  /* #4B5563 — `azure/34`. Prose on a light band. */
+  --color-fg-body: #4b5563;
+  /* #4B5563 — `azure/34`. The eyebrow and card meta. The kit draws these at
+   * the same value as body copy; see the header note. */
+  --color-fg-muted: #4b5563;
+  /* #9CA3AF — `azure/65`. The quietest solid grey the kit sets on light. */
+  --color-fg-subtle: #9ca3af;
+  /* `azure/11` at 50% — the tinted-ink role, matching how O3 tints its ink
+   * for the pull-quote attribution rather than reaching for a grey. */
+  --color-fg-quiet: rgba(17, 24, 39, 0.5);
+
+  /* ── Chrome ────────────────────────────────────────────────────────────── */
+  /* `black/solid` at 20% — the floating pill NavBar's fill. Stays an alpha
+   * for the reason the base theme's does: it sits over the hero. */
+  --color-scrim: rgba(0, 0, 0, 0.2);
+  /* #E5E7EB — `grey/91`. The carousel controls and other secondary button
+   * fills. */
+  --color-surface-muted: #e5e7eb;
+  /* #9CA3AF — `azure/65`, the muted copy on the black chrome. A solid rather
+   * than white at an alpha, because the chrome bands are opaque with nothing
+   * behind them to composite over. */
+  --color-on-utility: #9ca3af;
+  /* #20252b — `azure/15`, the chrome's 1px hairline. */
+  --color-on-utility-line: #20252b;
+
+  /* ── Borders ───────────────────────────────────────────────────────────── */
+  /* #E5E7EB — `grey/91`, the hairline. The same swatch as surface-muted: the
+   * kit rules and fills with one grey. */
+  --color-line: #e5e7eb;
+  /* #F3F3F3 — `grey/95`, the lighter rule. */
+  --color-line-soft: #f3f3f3;
+}

@@ -1,8 +1,10 @@
 @import 'tailwindcss';
 @import '@o3/tailwind-config/theme.css';
-/* The O3XO brand probe: re-points the theme's custom properties under
- * [data-brand='o3xo'], which the Brand toolbar (preview.ts) sets on <html>. */
-@import './brand-o3xo.css';
+/* The second brand's paint: re-points the theme's custom properties under
+ * [data-brand='o3xo'], which the Brand toolbar (preview.ts) sets on <html>.
+ * Storybook is the one host that loads both packages — it is a two-brand
+ * host, and the toolbar is the standing paint-leak test (ADR 0028). */
+@import '@o3/tailwind-config-o3xo/theme.css';
 
 /* Figtree. apps/web will load it via next/font/google and set --font-figtree
  * on <html>; @storybook/nextjs-vite has NO next/font support, so Storybook

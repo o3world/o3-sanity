@@ -1,0 +1,37 @@
+/*
+ * Gradient — the five base-theme fills that carry a brand color, re-pointed
+ * to O3XO's palette. Same shapes, same stop positions; only the colors move,
+ * because the shapes are composition and this package carries values (see
+ * theme.css).
+ *
+ * NOT OVERRIDDEN, deliberately: the card scrims, the card veil, the screen
+ * plates and the ink fade. Every one of them is near-black at an alpha, and
+ * O3XO's black (#000000) against O3's (#030303) is a difference nothing can
+ * see through a 0.7 wash. `text-gradient` and `bg-brand-glow` are `@utility`
+ * classes in the base theme reading these custom properties, so they follow
+ * the brand without being redeclared.
+ */
+
+:root[data-brand='o3xo'] {
+  /* The statement fill: a top-to-bottom fade to 40% so the last line sits
+   * back. `black/solid` where O3 fades its ink-deep. */
+  --gradient-statement: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0.4) 100%);
+
+  /* The brand glow — two stacked radials, top layer first, the same shape the
+   * base theme reads off Figma `Gradient/Red/1`. `red/solid` blooms off the
+   * top-right at 50%; the base is that red carried ~30% toward black and
+   * anchored at the top-left. */
+  --gradient-brand-glow:
+    radial-gradient(circle at 115% 24%, rgba(220, 38, 38, 0.5) 0%, rgba(0, 0, 0, 0) 100%),
+    radial-gradient(circle at 0% 0%, rgba(105, 15, 15, 1) 0%, rgba(0, 0, 0, 1) 65%);
+
+  /* The surface washes: light bands rise from `grey/95` to `white/solid`
+   * rather than sitting flat. Vertical, and the 188° variant under the
+   * case-study card stack. */
+  --gradient-surface-wash: linear-gradient(0deg, #ffffff 0%, #f3f3f3 100%);
+  --gradient-surface-wash-angled: linear-gradient(188deg, #ffffff 85%, #f3f3f3 100%);
+  /* The wash that never reaches white — bone-soft down to bone. The token's
+   * name is O3's, where that pair is warm; the role is the closed wash, and
+   * O3XO runs it cool. Its top stop is the interpolated #F9F9F9 (color.css). */
+  --gradient-surface-wash-warm: linear-gradient(180deg, #f9f9f9 0%, #f3f3f3 100%);
+}

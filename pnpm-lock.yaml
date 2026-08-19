@@ -80,6 +80,9 @@ importers:
       '@o3/tailwind-config':
         specifier: workspace:*
         version: link:../../packages/tailwind-config
+      '@o3/tailwind-config-o3xo':
+        specifier: workspace:*
+        version: link:../../packages/tailwind-config-o3xo
       '@o3/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -432,6 +435,12 @@ importers:
       tailwindcss:
         specifier: ^4.2.4
         version: 4.3.3
+
+  packages/tailwind-config-o3xo:
+    dependencies:
+      '@o3/tailwind-config':
+        specifier: workspace:*
+        version: link:../tailwind-config
 
   packages/typescript-config: {}
 

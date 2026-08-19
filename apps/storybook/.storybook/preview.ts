@@ -3,9 +3,10 @@ import { createElement } from 'react'
 import type { Preview } from '@storybook/nextjs-vite'
 
 const preview: Preview = {
-  // Brand rides on <html data-brand>, where brand-xo.css re-points the theme's
-  // custom properties — the documentElement rather than a wrapper div, so
-  // portalled content (Sheet, dialogs) is themed too. Idempotent per render.
+  // Brand rides on <html data-brand>, where @o3/tailwind-config-o3xo
+  // re-points the theme's custom properties — the documentElement rather than
+  // a wrapper div, so portalled content (Sheet, dialogs) is themed too.
+  // Idempotent per render.
   decorators: [
     (Story, context) => {
       document.documentElement.dataset.brand = String(context.globals.brand ?? 'o3')
