@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
 import { renderToStaticMarkup } from 'react-dom/server'
 
+import { BrandMark } from '@o3/ui'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { SiteFooter } from './SiteFooter'
@@ -17,6 +18,10 @@ import { UtilityNav } from './UtilityNav'
  * shows, and it is authored entirely in data — so the test that earns its
  * keep is "does the real converted document produce the prototype's nav and
  * footer", not "does the component map an array".
+ *
+ * The marks below are the ones `apps/web` hands the chrome (#228) — the chrome
+ * draws no mark of its own, so every O3-flavoured assertion in this file is
+ * about what that app supplies through the seam.
  */
 const settings = JSON.parse(
   readFileSync(
@@ -28,9 +33,14 @@ const settings = JSON.parse(
   ),
 ) as NonNullable<SITE_SETTINGS_QUERY_RESULT>
 
-const navHtml = renderToStaticMarkup(<SiteNav settings={settings} />)
+const O3_NAV_MARK = <BrandMark size={64} />
+const O3_FOOTER_MARK = <BrandMark trim size={128} className="lg:size-[148px]" />
+
+const navHtml = renderToStaticMarkup(<SiteNav settings={settings} brandMark={O3_NAV_MARK} />)
 const utilityHtml = renderToStaticMarkup(<UtilityNav settings={settings} />)
-const footerHtml = renderToStaticMarkup(<SiteFooter settings={settings} />)
+const footerHtml = renderToStaticMarkup(
+  <SiteFooter settings={settings} brandMark={O3_FOOTER_MARK} />,
+)
 
 /**
  * The O3 mark in each piece of chrome, matched on its viewBox — the tile's 64
@@ -358,11 +368,50 @@ describe('every chrome destination is a route the build-out lands (#48)', () => 
   })
 })
 
+/**
+ * The mark is the app's (#228). Both brands render this chrome, and O3XO's
+ * mark is a different drawing in a colour no shared role names — so the chrome
+ * takes one and draws it, rather than choosing between two.
+ *
+ * A probe in place of a brand's mark is what proves it: whatever the chrome
+ * still draws of its own would show up here as the O3 geometry the seam is
+ * meant to have removed.
+ */
+describe('the mark comes from the app, not the chrome', () => {
+  const probe = <svg data-mark="probe" viewBox="0 0 1 1" />
+  const probeNav = renderToStaticMarkup(<SiteNav settings={settings} brandMark={probe} />)
+  const probeFooter = renderToStaticMarkup(<SiteFooter settings={settings} brandMark={probe} />)
+
+  it.each([
+    ['nav', probeNav],
+    ['footer', probeFooter],
+  ])('draws the mark %s was handed', (_where, html) => {
+    expect(html).toContain('data-mark="probe"')
+  })
+
+  it.each([
+    ['nav', probeNav],
+    ['footer', probeFooter],
+  ])('keeps no mark of its own in the %s', (_where, html) => {
+    // The two boxes O3's mark draws in. Either one surviving a probe render is
+    // a brand's geometry hardcoded in shared chrome.
+    expect(markIn(html)).toBe('')
+  })
+
+  it('puts the nav mark inside the home link, where the whole mark is the target', () => {
+    expect(probeNav).toMatch(/<a[^>]*href="\/"[^>]*>\s*<svg data-mark="probe"/)
+  })
+})
+
 describe('chrome degrades rather than crashing on an empty dataset', () => {
   // The homepage must still render before Site Settings is loaded — a broken
   // layout would take every route down with it.
   it('renders with no settings at all', () => {
-    expect(() => renderToStaticMarkup(<SiteNav settings={null} />)).not.toThrow()
-    expect(() => renderToStaticMarkup(<SiteFooter settings={null} />)).not.toThrow()
+    expect(() =>
+      renderToStaticMarkup(<SiteNav settings={null} brandMark={O3_NAV_MARK} />),
+    ).not.toThrow()
+    expect(() =>
+      renderToStaticMarkup(<SiteFooter settings={null} brandMark={O3_FOOTER_MARK} />),
+    ).not.toThrow()
   })
 })

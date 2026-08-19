@@ -1,6 +1,7 @@
+import type { ReactNode } from 'react'
 import Link from 'next/link'
 
-import { BrandMark, SurfaceProvider } from '@o3/ui'
+import { SurfaceProvider } from '@o3/ui'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { ButtonLink } from '../ButtonLink'
@@ -11,6 +12,12 @@ import { NAV_INK_TARGET, NavInk } from './NavInk'
 
 interface SiteNavProps {
   settings: SITE_SETTINGS_QUERY_RESULT
+  /**
+   * The brand's mark, drawn by the app that mounts this bar (#228). Required
+   * with no fallback: a brand that supplies none is a compile error rather
+   * than a page wearing the other brand's logo.
+   */
+  brandMark: ReactNode
 }
 
 /**
@@ -80,13 +87,12 @@ interface SiteNavProps {
  * pill: ink mark, ink links. The button is the third element on the bar and
  * inverts with them — see below.
  *
- * **The mark loses its plate rather than inverting.** The bar draws
- * `BrandMark` — the ring and the superscript, free-standing — not
- * `BrandLogo`'s square. So there is nothing to invert: the mark simply takes
- * the bar's ink, white then `--color-fg`, and the tile goes on being a tile
- * everywhere it was one (the footer). An earlier pass read the direction as
- * "invert the tile" and shipped a `Color=White` square; that variant is gone
- * again, and brand-logo.tsx records why.
+ * **The mark is the app's, and the bar sets no colour on it.** Both brands
+ * render this bar and their marks are different drawings — O3XO's carries a
+ * yellow no shared token role names — so the app passes one in and the bar
+ * draws it (#228). A mark that inherits colour rides the bar's ink flip for
+ * free; one that carries its own paint keeps it through the flip. Which of
+ * those a brand wants is the brand's answer, made where its mark lives.
  *
  * **The button is `Theme=White`** — the pill instances `2205:1298`, a white
  * fill with an ink label `#0A0A0B`. The bar declares itself an `ink` surface
@@ -110,7 +116,7 @@ interface SiteNavProps {
 const NAV_BUTTON_INK =
   'group-data-[ink=dark]:bg-ink group-data-[ink=dark]:text-white group-data-[ink=dark]:hover:bg-ink/85'
 
-export function SiteNav({ settings }: SiteNavProps) {
+export function SiteNav({ settings, brandMark }: SiteNavProps) {
   const navItems = settings?.navItems ?? []
   const button = settings?.primaryButton ?? null
 
@@ -148,12 +154,12 @@ export function SiteNav({ settings }: SiteNavProps) {
             aria-label={`${settings?.title ?? 'O3'} home`}
             className="focus-visible:ring-brand shrink-0 focus-visible:outline-none focus-visible:ring-2"
           >
-            {/* No text color here on purpose: the mark is `currentColor`, so it
+            {/* No text color here on purpose: a mark drawn in `currentColor`
               inherits the bar's ink and rides the bar's own 350ms transition
-              rather than carrying a second pair of classes. That also lands it
-              on `--color-fg` (#232323) when flipped — the same ink as the
+              rather than carrying a second pair of classes. That is what lands
+              O3's on `--color-fg` (#232323) when flipped — the same ink as the
               links, and the exact value the prototype's nav mark flips to. */}
-            <BrandMark size={64} />
+            {brandMark}
           </Link>
 
           {/* 1440: the 589px row (`1710:2245`). `contents` promotes the list

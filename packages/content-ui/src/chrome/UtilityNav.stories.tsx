@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { figmaDesign } from '@o3/story-kit'
+import { BrandMark } from '@o3/ui'
 
 import { SITE_SETTINGS } from '../testing/seedContent'
 
@@ -48,7 +49,7 @@ export const WithTheNav: Story = {
   render: (args) => (
     <div className="bg-ink h-[420px]">
       <UtilityNav {...args} />
-      <SiteNav settings={args.settings} />
+      <SiteNav settings={args.settings} brandMark={<BrandMark size={64} />} />
     </div>
   ),
 }
@@ -59,7 +60,7 @@ export const Mobile: Story = {
   render: (args) => (
     <div className="bg-ink h-[240px]">
       <UtilityNav {...args} />
-      <SiteNav settings={args.settings} />
+      <SiteNav settings={args.settings} brandMark={<BrandMark size={64} />} />
     </div>
   ),
 }

@@ -1,12 +1,19 @@
+import type { ReactNode } from 'react'
 import Link from 'next/link'
 
-import { BrandMark, SurfaceProvider, surfaceAttrs } from '@o3/ui'
+import { SurfaceProvider, surfaceAttrs } from '@o3/ui'
 import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { resolveButtonHref } from '../buttonDestination'
 
 interface SiteFooterProps {
   settings: SITE_SETTINGS_QUERY_RESULT
+  /**
+   * The brand's mark, drawn by the app that mounts this footer (#228) — the
+   * same seam `SiteNav` takes, and sized there too, because how big a mark
+   * runs depends on its own proportions.
+   */
+  brandMark: ReactNode
 }
 
 /**
@@ -21,7 +28,7 @@ interface SiteFooterProps {
  * Every string still comes from Site Settings (#19); the component decides only
  * the year and the arrangement.
  */
-export function SiteFooter({ settings }: SiteFooterProps) {
+export function SiteFooter({ settings, brandMark }: SiteFooterProps) {
   const year = new Date().getFullYear()
   const groups = settings?.footerGroups ?? []
   const socialLinks = settings?.socialLinks ?? []
@@ -69,11 +76,12 @@ export function SiteFooter({ settings }: SiteFooterProps) {
         <div className="max-w-section relative mx-auto flex w-full flex-col gap-12 lg:gap-32">
           {/* "Left" — logo beside the tagline block at 1440, stacked at 402. */}
           <div className="flex flex-col gap-9 lg:flex-row lg:justify-between">
-            {/* `1280:1856` — the mark alone in white, tight-bounded at 148px and
-              128 at 402 (`2225:2613`); the red tile went with the rework. No
-              color class: it takes the footer's own white through
-              `currentColor`, the way the nav's takes the bar's ink. */}
-            <BrandMark trim size={128} className="lg:size-[148px]" />
+            {/* The app's mark (#228), first thing in the left column. O3's
+              Figma vector here is the mark alone in white, tight-bounded at
+              148px and 128 at 402 (`1280:1856`, `2225:2613`) — a read of one
+              brand's node, so the size travels with the mark rather than
+              being imposed on every brand's from here. */}
+            {brandMark}
 
             <div className="flex flex-col gap-24 lg:w-[600px] lg:gap-9">
               {settings?.footerTagline ? (

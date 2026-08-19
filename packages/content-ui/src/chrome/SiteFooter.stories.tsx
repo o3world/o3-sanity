@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { figmaDesign } from '@o3/story-kit'
+import { BrandMark } from '@o3/ui'
 
 import { SITE_SETTINGS } from '../testing/seedContent'
 
@@ -29,7 +30,12 @@ const meta = {
     layout: 'fullscreen',
     design: figmaDesign('1680:2096'),
   },
-  args: { settings: SITE_SETTINGS },
+  // The mark comes from the app (#228) — O3's here, tight-bounded and taking
+  // the footer's white through `currentColor` (`1280:1856`).
+  args: {
+    settings: SITE_SETTINGS,
+    brandMark: <BrandMark trim size={128} className="lg:size-[148px]" />,
+  },
   globals: { backgrounds: { value: 'ink' } },
 } satisfies Meta<typeof SiteFooter>
 

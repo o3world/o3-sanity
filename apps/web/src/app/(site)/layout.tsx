@@ -6,6 +6,7 @@ import { getSiteSettings } from '@o3/content-runtime/site-settings'
 
 import { editorToolbarConfig } from '@/sanity/editorToolbar'
 import { VisualEditing } from '@/sanity/VisualEditing'
+import { FOOTER_MARK, NAV_MARK } from '@/brand/chromeMarks'
 import { SiteFooter, SiteNav, UtilityNav } from '@o3/content-ui/chrome'
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
@@ -20,9 +21,10 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
           frame); the pill below it is fixed. That difference is why the two are
           siblings here rather than one component. */}
       <UtilityNav settings={settings} />
-      <SiteNav settings={settings} />
+      {/* The chrome draws no mark of its own (#228); these are this app's. */}
+      <SiteNav settings={settings} brandMark={NAV_MARK} />
       <main className="min-h-screen">{children}</main>
-      <SiteFooter settings={settings} />
+      <SiteFooter settings={settings} brandMark={FOOTER_MARK} />
       <SanityLive />
       {isDraft ? <VisualEditing /> : null}
       {/* Renders nothing unless the visitor holds a Studio session (#60, #99).

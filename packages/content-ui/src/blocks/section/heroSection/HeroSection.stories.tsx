@@ -1,7 +1,9 @@
+import type { ReactNode } from 'react'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 import { heroSectionKnobs } from '@o3/sanity/knobs'
 import { defineKnobStories } from '@o3/story-kit'
+import { BrandLogo } from '@o3/ui'
 
 import type { SectionProps } from '@o3/content-runtime/blocks'
 
@@ -33,7 +35,11 @@ import { HeroSection } from './HeroSection'
  * on a light surface — so the block declares `paintsOwnSurface: 'ink'` and
  * offers no knob at all.
  */
-const fixture: SectionProps<'heroSection'> = {
+const fixture: SectionProps<'heroSection'> & { brandMark: ReactNode } = {
+  // The mark reaches the hero from the app's binding, not from Sanity (#228),
+  // so a story stands in for one. This is what `apps/web` binds — the red tile
+  // the partner lockup's `2479:2205` draws.
+  brandMark: <BrandLogo color="red" size={71} />,
   variant: 'orbital',
   eyebrow: 'WORK',
   headlineLines: ['You see the problem in front of you.', 'We’re working on the one behind it.'],

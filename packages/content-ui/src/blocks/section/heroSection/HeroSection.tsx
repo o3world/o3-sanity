@@ -1,7 +1,7 @@
+import type { ReactNode } from 'react'
 import { stegaClean } from '@sanity/client/stega'
 
 import {
-  BrandLogo,
   CloseIcon,
   CollectionHero,
   Eyebrow,
@@ -16,7 +16,15 @@ import type { SectionProps } from '@o3/content-runtime/blocks'
 import { ButtonLink } from '../../../ButtonLink'
 import { LogoKnockout } from '../../../LogoKnockout'
 
-type HeroSectionProps = SectionProps<'heroSection'>
+type HeroSectionProps = SectionProps<'heroSection'> & {
+  /**
+   * The brand's mark, for the partner lockup (#228). It reaches a block
+   * renderer through the app's own binding in `clientComponents.tsx` rather
+   * than from Sanity — the other half of the lockup is the content, and this
+   * half is the app that is rendering it.
+   */
+  brandMark: ReactNode
+}
 
 /**
  * Section block: the page hero, built to the Home frame's opening band and
@@ -62,6 +70,7 @@ export function HeroSection({
   details,
   button,
   decoration,
+  brandMark,
 }: HeroSectionProps) {
   const lines = headlineLines ?? []
   const showOrbs = stegaClean(decoration) !== 'none'
@@ -74,15 +83,15 @@ export function HeroSection({
   if (stegaClean(variant) === 'band') {
     const detailGroups = details ?? []
     /*
-     * The partner lockup (`2479:2205`): O3's red tile, a 12px ×, and the
-     * partner's mark as a white knockout — the same "Mask group" treatment the
-     * case-study cards give a client logo, which is what the frame draws here
-     * too. Only the partner half is content; the other two are the lockup's
-     * chrome.
+     * The partner lockup (`2479:2205`): the brand's own mark, a 12px ×, and
+     * the partner's mark as a white knockout — the same "Mask group" treatment
+     * the case-study cards give a client logo, which is what the frame draws
+     * here too. Only the partner half is content; the × is the lockup's own
+     * chrome and the first half comes from the app.
      */
     const lockup = logo ? (
       <div className="flex items-center gap-6">
-        <BrandLogo color="red" size={71} />
+        {brandMark}
         <CloseIcon className="size-3 text-white" aria-hidden="true" />
         <LogoKnockout source={logo} alt="" width={257} className="h-[70px]" />
       </div>

@@ -12,7 +12,9 @@ import {
   bindingsToRecord,
   defineBlockRender,
   type ClientBlockRenderBinding,
+  type SectionProps,
 } from '@o3/content-runtime/blocks'
+import { BrandLogo } from '@o3/ui'
 
 // The renderers themselves are shared (@o3/content-ui); the binding below is
 // this app's. Re-pointing one line here is what "O3XO adapts a block" costs.
@@ -37,6 +39,21 @@ import {
 } from '@o3/content-ui'
 
 /**
+ * The hero, with this app's mark bound into it (#228).
+ *
+ * The partner lockup draws the brand's mark beside the partner's, and a
+ * renderer's props arrive from Sanity — so the app's channel for a mark is
+ * this binding rather than a field. `brandMark` being required is what makes
+ * an app that binds the bare `HeroSection` a compile error at `registry.ts`'s
+ * `satisfies`, instead of a page quietly wearing the other brand's logo.
+ *
+ * The tile is `2479:2205`'s: O3's mark on its red plate at 71px.
+ */
+function HeroSectionWithMark(props: SectionProps<'heroSection'>) {
+  return <HeroSection {...props} brandMark={<BrandLogo color="red" size={71} />} />
+}
+
+/**
  * Render bindings for every client-safe SECTION block — the single authoring
  * point `SECTION_CLIENT_COMPONENTS` derives from.
  *
@@ -48,7 +65,7 @@ import {
  * still catch a missing binding via its own `satisfies` clause.
  */
 export const CLIENT_SECTION_BINDINGS = [
-  defineBlockRender('heroSection', { component: HeroSection }),
+  defineBlockRender('heroSection', { component: HeroSectionWithMark }),
   defineBlockRender('logoWallSection', { component: LogoWallSection }),
   defineBlockRender('caseShowcaseSection', { component: CaseShowcaseSection }),
   defineBlockRender('railPanelsSection', { component: RailPanelsSection }),

@@ -1,6 +1,7 @@
 import type { INSIGHTS_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { InsightIndexView } from '@/content/documents/insight/InsightIndexView'
+import { FOOTER_MARK, NAV_MARK } from '@/brand/chromeMarks'
 import { SiteFooter, SiteNav } from '@o3/content-ui/chrome'
 
 import { INSIGHTS, SITE_SETTINGS } from '@o3/content-ui/testing/seed'
@@ -44,7 +45,7 @@ export function InsightIndexMockup({
 
   return (
     <div className="bg-white">
-      <SiteNav settings={SITE_SETTINGS} />
+      <SiteNav settings={SITE_SETTINGS} brandMark={NAV_MARK} />
       <main>
         <InsightIndexView
           // One cast, for one reason: `INSIGHTS` is projected as the DETAIL
@@ -57,7 +58,7 @@ export function InsightIndexMockup({
           pagination={{ page, totalPages }}
         />
       </main>
-      <SiteFooter settings={SITE_SETTINGS} />
+      <SiteFooter settings={SITE_SETTINGS} brandMark={FOOTER_MARK} />
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { figmaDesign } from '@o3/story-kit'
+import { BrandMark } from '@o3/ui'
 
 import { SITE_SETTINGS } from '../testing/seedContent'
 
@@ -39,7 +40,10 @@ const meta = {
     layout: 'fullscreen',
     design: figmaDesign('1710:2271'),
   },
-  args: { settings: SITE_SETTINGS },
+  // The mark comes from the app (#228). These stories are the O3 chrome —
+  // their frames are O3's — so they render what `apps/web` hands the bar, and
+  // it is `currentColor`, which is what makes the flip below carry it.
+  args: { settings: SITE_SETTINGS, brandMark: <BrandMark size={64} /> },
 } satisfies Meta<typeof SiteNav>
 
 export default meta
