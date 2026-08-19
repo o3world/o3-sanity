@@ -73,7 +73,8 @@ does four things:
    worktree for reasons that have nothing to do with the ticket being worked.
 3. **Allocate dev ports**, written to the worktree's own `.env`: `WEB_PORT`
    from 3600-3609, `XO_WEB_PORT` from 3700-3709, `STORYBOOK_PORT` from
-   6600-6609, skipping anything a sibling worktree has already claimed or that
+   6600-6609 and `XO_STORYBOOK_PORT` from 6700-6709, skipping anything a
+   sibling worktree has already claimed or that
    is currently listening. Two checkouts both booting on 3600 is the first thing
    that breaks when a second session starts.
 4. **`pnpm install`.** node_modules is not shared between worktrees.

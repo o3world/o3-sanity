@@ -1,0 +1,53 @@
+@import 'tailwindcss';
+@import '@o3/tailwind-config/theme.css';
+/* The order is load-bearing: the O3XO package is a brand LAYER on the base
+ * theme, re-pointing its custom properties under [data-brand='o3xo'], which
+ * this host's preview sets on <html> for every story. Imported alone it paints
+ * nothing. */
+@import '@o3/tailwind-config-o3xo/theme.css';
+
+/* Figtree, self-hosted. Both brands set type in it — the UI kit picked the
+ * same face the base theme's ramp is solved for — and @storybook/nextjs-vite
+ * has NO next/font support, so a host cannot get it the way the apps do.
+ * theme.css's font stacks read
+ *   var(--font-figtree, Figtree), 'Helvetica Neue', …
+ * Custom properties substitute where they are DECLARED (at :root), so if
+ * --font-figtree is undefined there the stack silently falls through to the
+ * plain 'Figtree' family name — which is only available when a <link> loaded
+ * it. Fontsource, not a Google Fonts <link>, because a network font is a flake
+ * vector for offline dev and future CI screenshots; same upstream files Google
+ * serves, so metrics match next/font exactly. */
+@import '@fontsource-variable/figtree';
+
+:root {
+  /* The family name the @fontsource-variable package registers. Feeding the
+   * SAME variable apps/o3xo sets means theme.css needs no Storybook
+   * special-case. */
+  --font-figtree: 'Figtree Variable';
+}
+
+/*
+ * Tailwind v4 auto-discovers `content:` from the importing project's
+ * filesystem tree, but doesn't follow into sibling workspace packages by
+ * default. This host renders the shared packages AND apps/o3xo's own
+ * components, so each source root needs an explicit declaration — a missing
+ * one reads as a broken component rather than a missing line here. (Never
+ * spell a glob inside this comment — the star-slash sequence terminates it
+ * early.)
+ */
+@source '../../packages/ui/src/**/*.{ts,tsx}';
+@source '../../packages/content-ui/src/**/*.{ts,tsx}';
+@source '../o3xo/src/**/*.{ts,tsx}';
+
+/* `@apply` outside a `@layer` block emits UNLAYERED CSS, which beats every
+ * layered rule regardless of specificity/order — keep these in @layer base
+ * so story-level `bg-*`/`text-*` utilities can override them. */
+@layer base {
+  body {
+    @apply text-fg bg-white font-sans antialiased;
+  }
+
+  button {
+    cursor: pointer;
+  }
+}

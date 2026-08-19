@@ -26,9 +26,14 @@ const appSrc = (app: string) => resolve(root, 'apps', app, 'src')
  *   stories  `*.stories.tsx`      — every Storybook story, mounted in real
  *                                   Chromium with real CSS, plus an axe scan.
  *                                   No test files to write: writing the story
- *                                   IS the test. Configured next to Storybook
- *                                   itself (apps/storybook/vitest.config.ts)
- *                                   so its addon resolves from that package.
+ *                                   IS the test. Configured next to each
+ *                                   Storybook host so its addon resolves from
+ *                                   that package. One project per host, and
+ *                                   the second one runs only the stories the
+ *                                   first cannot: `stories` is the shared
+ *                                   packages plus apps/web under O3's tokens,
+ *                                   `stories:o3xo` is apps/o3xo's own under
+ *                                   O3XO's.
  *
  * Run one layer with `pnpm test --project unit`, or both render projects with
  * `pnpm test --project 'render*'`.
@@ -116,6 +121,7 @@ export default defineConfig({
         include: ['apps/o3xo/src/**/*.render.test.tsx'],
       }),
       './apps/storybook/vitest.config.ts',
+      './apps/storybook-o3xo/vitest.config.ts',
     ],
   },
 })

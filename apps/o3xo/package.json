@@ -35,10 +35,12 @@
     "@o3/tailwind-config": "workspace:*",
     "@o3/tailwind-config-o3xo": "workspace:*",
     "@o3/typescript-config": "workspace:*",
+    "@storybook/nextjs-vite": "^10.4.1",
     "@tailwindcss/postcss": "^4.2.4",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "storybook": "^10.4.1",
     "tailwindcss": "^4.2.4",
     "typescript": "^5.7.0",
     "vitest": "^4.1.10"

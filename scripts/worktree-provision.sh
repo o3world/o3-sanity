@@ -39,6 +39,9 @@ XO_WEB_POOL_END=3709
 # browser: Chrome and Firefox refuse 6665-6669 outright (IRC) with ERR_UNSAFE_PORT.
 STORYBOOK_POOL_START=6600
 STORYBOOK_POOL_END=6609
+# The second brand's Storybook host (apps/storybook-o3xo), one pool along.
+XO_STORYBOOK_POOL_START=6700
+XO_STORYBOOK_POOL_END=6709
 
 CARRY_FILES=(.env.local apps/web/.env.local .vercel/project.json)
 # Carried when the main checkout has one, silent when it does not. o3xo's
@@ -68,7 +71,7 @@ claimed_ports() {
     while read -r root; do
       [[ $root == "$WT" ]] && continue
       [[ -f "$root/.env" ]] || continue
-      sed -nE 's/^[[:space:]]*(WEB_PORT|XO_WEB_PORT|STORYBOOK_PORT)=([0-9]+).*/\2/p' "$root/.env"
+      sed -nE 's/^[[:space:]]*(WEB_PORT|XO_WEB_PORT|STORYBOOK_PORT|XO_STORYBOOK_PORT)=([0-9]+).*/\2/p' "$root/.env"
     done
   lsof -nP -iTCP -sTCP:LISTEN 2>/dev/null | sed -nE 's/.*:([0-9]+) \(LISTEN\)$/\1/p'
 }
@@ -137,8 +140,9 @@ else
   web_port="$(first_free_port "$WEB_POOL_START" "$WEB_POOL_END" "$taken")"
   xo_port="$(first_free_port "$XO_WEB_POOL_START" "$XO_WEB_POOL_END" "$taken")"
   sb_port="$(first_free_port "$STORYBOOK_POOL_START" "$STORYBOOK_POOL_END" "$taken")"
+  xo_sb_port="$(first_free_port "$XO_STORYBOOK_POOL_START" "$XO_STORYBOOK_POOL_END" "$taken")"
 
-  if [[ -z $web_port || -z $xo_port || -z $sb_port ]]; then
+  if [[ -z $web_port || -z $xo_port || -z $sb_port || -z $xo_sb_port ]]; then
     echo "  PORTS   pool exhausted ($WEB_POOL_START-$WEB_POOL_END / $XO_WEB_POOL_START-$XO_WEB_POOL_END) — remove a dead worktree, or widen the pool" >&2
     echo "          and register the new web ports on that brand's project: pnpm sanity cors add http://localhost:<port> --credentials" >&2
   else
@@ -150,8 +154,9 @@ else
 WEB_PORT=$web_port
 XO_WEB_PORT=$xo_port
 STORYBOOK_PORT=$sb_port
+XO_STORYBOOK_PORT=$xo_sb_port
 EOF
-    echo "  wrote   .env (web :$web_port, o3xo :$xo_port, storybook :$sb_port)"
+    echo "  wrote   .env (web :$web_port, o3xo :$xo_port, storybook :$sb_port, storybook-o3xo :$xo_sb_port)"
   fi
 fi
 

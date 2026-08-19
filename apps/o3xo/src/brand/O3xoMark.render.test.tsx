@@ -9,8 +9,9 @@ import { O3xoMark } from './O3xoMark'
  *
  * The boxes and fills asserted here are the kit's own node values, not this
  * file's arithmetic, which is what makes the test disagree with the component
- * when someone rebuilds the geometry from a screenshot. There is no story
- * layer for `apps/o3xo` yet, so this stands in for one.
+ * when someone rebuilds the geometry from a screenshot. `O3xoMark.stories.tsx`
+ * shows the same axes painted; a viewBox is not something a rendered story can
+ * assert, which is why both files exist.
  */
 const html = (node: React.ReactElement) => renderToStaticMarkup(node)
 

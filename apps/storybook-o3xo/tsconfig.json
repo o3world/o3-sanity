@@ -11,13 +11,6 @@
       "@o3/ui/*": ["../../packages/ui/src/*"]
     }
   },
-  "include": [
-    ".storybook/**/*.ts",
-    ".storybook/**/*.tsx",
-    "../../packages/ui/src/**/*.stories.ts",
-    "../../packages/ui/src/**/*.stories.tsx",
-    "prototypes/**/*.ts",
-    "prototypes/**/*.tsx"
-  ],
+  "include": [".storybook/**/*.ts", ".storybook/**/*.tsx"],
   "exclude": ["node_modules", "storybook-static"]
 }

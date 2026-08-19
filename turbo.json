@@ -20,7 +20,8 @@
     "SANITY_REVALIDATE_SECRET",
     "WEB_PORT",
     "XO_WEB_PORT",
-    "STORYBOOK_PORT"
+    "STORYBOOK_PORT",
+    "XO_STORYBOOK_PORT"
   ],
   "tasks": {
     "build": {

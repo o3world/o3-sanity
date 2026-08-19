@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
-# Boot one dev server (web | o3xo | storybook) on its configured port.
-# Ports come from the repo-root .env (WEB_PORT, XO_WEB_PORT, STORYBOOK_PORT);
-# without it the defaults stay web 3000, o3xo 3700, storybook 6006. Ports must
-# be real environment variables before boot — Next binds its port before it
-# reads any .env file — which is why the package dev scripts run through here.
+# Boot one dev server (web | o3xo | storybook | storybook-o3xo) on its port.
+# Ports come from the repo-root .env (WEB_PORT, XO_WEB_PORT, STORYBOOK_PORT,
+# XO_STORYBOOK_PORT); without it the defaults stay web 3000, o3xo 3700,
+# storybook 6006, storybook-o3xo 6007. Ports must be real environment variables
+# before boot — Next binds its port before it reads any .env file — which is why
+# the package dev scripts run through here.
 #
 # Collision handling: a stale server this repo left behind is cleared before
 # boot — anything of ours holding the target port, and for a Next app any
@@ -13,7 +14,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-app="${1:?usage: dev.sh web|o3xo|storybook}"
+app="${1:?usage: dev.sh web|o3xo|storybook|storybook-o3xo}"
 
 if [ -f "$ROOT/.env" ]; then
   set -a
@@ -42,8 +43,13 @@ case "$app" in
     dir="$ROOT/apps/storybook"
     cmd=(storybook dev -p "$port" --no-open)
     ;;
+  storybook-o3xo)
+    port="${XO_STORYBOOK_PORT:-6007}"
+    dir="$ROOT/apps/storybook-o3xo"
+    cmd=(storybook dev -p "$port" --no-open)
+    ;;
   *)
-    echo "usage: dev.sh web|o3xo|storybook" >&2
+    echo "usage: dev.sh web|o3xo|storybook|storybook-o3xo" >&2
     exit 64
     ;;
 esac

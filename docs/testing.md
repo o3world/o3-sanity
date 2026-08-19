@@ -119,22 +119,27 @@ specifier: the app imports the package subpath, the route builders inside the pa
 
 ## `stories` — components in a real browser
 
-Every story under the roots `packages/story-kit`'s `STORY_ROOTS` names — `packages/ui/src`,
-`packages/content-ui/src`, `apps/web/src` — is mounted in headless Chromium with real CSS
-and scanned by axe. **Writing the story is writing the test** — there is no second file, which is
-why the wireframe build-out gets its safety net for free.
+Every story is mounted in headless Chromium with real CSS and scanned by axe. **Writing the story
+is writing the test** — there is no second file, which is why the wireframe build-out gets its
+safety net for free.
+
+One project per Storybook host, because a host carries one brand's tokens. `stories` is the O3
+host: the shared roots `packages/story-kit`'s `SHARED_STORY_ROOTS` names — `packages/ui/src` and
+`packages/content-ui/src` — plus `apps/web/src` and the captured prototypes, under O3's paint.
+`stories:o3xo` is the O3XO host, cut back to `apps/o3xo/src`: the shared packages are already
+covered, and what is left is the components whose token roles only O3XO's package declares.
 
 `HeroSection.stories.tsx` is the pattern for section blocks: a story per state the prototype shows.
 
 Structural a11y (roles, labels, alt text, heading order) fails the run. `color-contrast` is held
 back — the 12 current violations are all muted-foreground tokens, which is a palette decision, not a
-component defect. See the note in `.storybook/preview.ts`.
+component defect. See the note in `defineStorybookPreview`.
 
 > **Import `stegaClean` from `@sanity/client/stega`, never the `next-sanity` barrel.** The barrel is
 > heavy and the lint rule enforcing this stays. The old reason — that `@portabletext/react`'s
 > `react/compiler-runtime` import could not resolve under Storybook's Next preset — is fixed:
-> `.storybook/main.ts` now pins that entry for the dependency pre-bundle as well as the module
-> graph. Portable text renders in Storybook.
+> `defineStorybookConfig` now pins that entry for the dependency pre-bundle as well as the module
+> graph, on both hosts. Portable text renders in Storybook.
 
 ### `Pages` — whole pages, from the committed seeds
 

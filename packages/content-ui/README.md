@@ -53,6 +53,7 @@ import breaks every story for the block that reaches it (ADR 0004).
 ## Stories are the tests
 
 One story set, moved with the components, globbed from
-`packages/story-kit`'s `STORY_ROOTS` and run in real Chromium by the `stories`
-layer. Storybook's Brand toolbar renders each of them under both token sets,
+`packages/story-kit`'s `SHARED_STORY_ROOTS` and run in real Chromium by the
+`stories` layer. Both Storybook hosts serve it — the O3 one under O3's paint,
+the O3XO one under O3XO's — and the Brand toolbar flips either to the other,
 which is what makes a hardcoded brand colour here visible the day it lands.

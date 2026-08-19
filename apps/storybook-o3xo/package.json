@@ -1,11 +1,11 @@
 {
-  "name": "@o3/storybook",
+  "name": "@o3/storybook-o3xo",
   "version": "0.1.0",
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "../../scripts/dev.sh storybook",
-    "storybook": "../../scripts/dev.sh storybook",
+    "dev": "../../scripts/dev.sh storybook-o3xo",
+    "storybook": "../../scripts/dev.sh storybook-o3xo",
     "build": "storybook build",
     "build-storybook": "storybook build",
     "lint": "eslint .",
