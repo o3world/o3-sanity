@@ -26,6 +26,17 @@ dataset reads anonymously. A read token only becomes necessary for draft preview
 and goes in `apps/o3xo/.env.local` as `SANITY_API_READ_TOKEN` — provisioning
 carries that file across worktrees the same way it carries `apps/web`'s.
 
+## Where it deploys
+
+The Vercel project is **`xo-sanity-web`** (team `o3-world`), rooted at this
+directory, with `integration/o3xo` as its production branch:
+[xo-sanity-web.vercel.app](https://xo-sanity-web.vercel.app). Every push to the
+repository is offered to it and turned away unless this app's dependency graph
+changed, which is what keeps an `apps/web` commit from costing an O3XO build.
+Both projects' settings, the gate each one uses and the CORS origins that make
+the deployed Studio work are in
+[`docs/agents/ops.md`](../../docs/agents/ops.md) → Deployments.
+
 ## The brand is set in `next.config.ts`
 
 `NEXT_PUBLIC_BRAND=o3xo` is what makes `@o3/sanity` resolve the O3XO project,
