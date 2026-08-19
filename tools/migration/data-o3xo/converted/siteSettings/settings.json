@@ -18,16 +18,168 @@
   ],
   "navItems": [
     {
-      "_type": "button",
+      "_type": "navGroup",
       "_key": "nav-industries",
       "label": "Industries",
-      "href": "/industries"
+      "items": [
+        {
+          "_type": "navGroupItem",
+          "_key": "nav-industries-construction",
+          "button": {
+            "_type": "button",
+            "_key": "link-construction",
+            "label": "Construction",
+            "href": "/industries/construction"
+          },
+          "excerpt": "Project lifecycle automation"
+        },
+        {
+          "_type": "navGroupItem",
+          "_key": "nav-industries-industrial-services",
+          "button": {
+            "_type": "button",
+            "_key": "link-industrial-services",
+            "label": "Industrial services",
+            "href": "/industries/industrial-services"
+          },
+          "excerpt": "Operational efficiency"
+        },
+        {
+          "_type": "navGroupItem",
+          "_key": "nav-industries-life-sciences",
+          "button": {
+            "_type": "button",
+            "_key": "link-life-sciences",
+            "label": "Life sciences",
+            "href": "/industries/life-sciences"
+          },
+          "excerpt": "Research to revenue"
+        },
+        {
+          "_type": "navGroupItem",
+          "_key": "nav-industries-real-estate",
+          "button": {
+            "_type": "button",
+            "_key": "link-real-estate",
+            "label": "Real estate",
+            "href": "/industries/real-estate"
+          },
+          "excerpt": "Lead gen + property mgmt optimization"
+        },
+        {
+          "_type": "navGroupItem",
+          "_key": "nav-industries-finance-insurance",
+          "button": {
+            "_type": "button",
+            "_key": "link-finance-insurance",
+            "label": "Finance + insurance",
+            "href": "/industries/finance-insurance"
+          },
+          "excerpt": "Underwriting + advisory amplification"
+        },
+        {
+          "_type": "navGroupItem",
+          "_key": "nav-industries-technology",
+          "button": {
+            "_type": "button",
+            "_key": "link-technology",
+            "label": "Technology",
+            "href": "/industries/technology"
+          },
+          "excerpt": "Competitive advantage"
+        }
+      ],
+      "button": {
+        "_type": "button",
+        "_key": "more-view-all-industries",
+        "label": "View all industries",
+        "href": "/industries"
+      }
     },
     {
-      "_type": "button",
+      "_type": "navGroup",
       "_key": "nav-case-studies",
       "label": "Case studies",
-      "href": "/case-studies"
+      "items": [
+        {
+          "_type": "navGroupItem",
+          "_key": "nav-case-studies-buffalo-construction",
+          "button": {
+            "_type": "button",
+            "_key": "link-buffalo-construction",
+            "label": "Buffalo Construction",
+            "href": "/case-studies/buffalo-construction"
+          },
+          "eyebrow": "Construction",
+          "excerpt": "AI-powered construction operations"
+        },
+        {
+          "_type": "navGroupItem",
+          "_key": "nav-case-studies-tyndale",
+          "button": {
+            "_type": "button",
+            "_key": "link-tyndale",
+            "label": "Tyndale",
+            "href": "/case-studies/tyndale"
+          },
+          "eyebrow": "Industrial services",
+          "excerpt": "AI-driven product insight"
+        },
+        {
+          "_type": "navGroupItem",
+          "_key": "nav-case-studies-healthcare-tech-leader",
+          "button": {
+            "_type": "button",
+            "_key": "link-healthcare-tech-leader",
+            "label": "Healthcare tech leader",
+            "href": "/case-studies/healthcare-tech-leader"
+          },
+          "eyebrow": "Life sciences",
+          "excerpt": "AI strategy acceleration"
+        },
+        {
+          "_type": "navGroupItem",
+          "_key": "nav-case-studies-e-hazard",
+          "button": {
+            "_type": "button",
+            "_key": "link-e-hazard",
+            "label": "e-Hazard",
+            "href": "/case-studies/e-hazard"
+          },
+          "eyebrow": "Industrial services",
+          "excerpt": "Certificate automation magic"
+        },
+        {
+          "_type": "navGroupItem",
+          "_key": "nav-case-studies-global-tech-firm",
+          "button": {
+            "_type": "button",
+            "_key": "link-global-tech-firm",
+            "label": "Global tech firm",
+            "href": "/case-studies/global-tech-firm"
+          },
+          "eyebrow": "Technology",
+          "excerpt": "RFP automation"
+        },
+        {
+          "_type": "navGroupItem",
+          "_key": "nav-case-studies-fortune-500-insurance-provider",
+          "button": {
+            "_type": "button",
+            "_key": "link-fortune-500-insurance-provider",
+            "label": "Fortune 500 insurance provider",
+            "href": "/case-studies/fortune-500-insurance-provider"
+          },
+          "eyebrow": "Finance + insurance",
+          "excerpt": "Legal document intelligence"
+        }
+      ],
+      "button": {
+        "_type": "button",
+        "_key": "more-view-all-case-studies",
+        "label": "View all case studies",
+        "href": "/case-studies"
+      }
     },
     {
       "_type": "button",
@@ -36,58 +188,51 @@
       "href": "/insights"
     },
     {
-      "_type": "button",
+      "_type": "navGroup",
       "_key": "nav-about",
       "label": "About",
-      "href": "/about"
-    },
-    {
-      "_type": "button",
-      "_key": "nav-contact",
-      "label": "Contact",
-      "href": "/contact"
-    }
-  ],
-  "footerTagline": "Transforming businesses through intelligent AI implementation.",
-  "footerGroups": [
-    {
-      "_type": "footerGroup",
-      "_key": "footer-site",
-      "label": "Site",
-      "links": [
+      "items": [
         {
-          "_type": "button",
-          "_key": "footer-industries",
-          "label": "Industries",
-          "href": "/industries"
+          "_type": "navGroupItem",
+          "_key": "nav-about-our-story-mission",
+          "button": {
+            "_type": "button",
+            "_key": "link-our-story-mission",
+            "label": "Our story + mission",
+            "href": "/about"
+          },
+          "eyebrow": "About O3XO",
+          "excerpt": "20+ years of digital transformation expertise applied to AI strategy and execution"
         },
         {
-          "_type": "button",
-          "_key": "footer-case-studies",
-          "label": "Case studies",
-          "href": "/case-studies"
-        },
-        {
-          "_type": "button",
-          "_key": "footer-insights",
-          "label": "Insights",
-          "href": "/insights"
-        },
-        {
-          "_type": "button",
-          "_key": "footer-about",
-          "label": "About",
-          "href": "/about"
-        },
-        {
-          "_type": "button",
-          "_key": "footer-contact",
-          "label": "Contact",
-          "href": "/contact"
+          "_type": "navGroupItem",
+          "_key": "nav-about-strategy-to-activation",
+          "button": {
+            "_type": "button",
+            "_key": "link-strategy-to-activation",
+            "label": "Strategy to activation",
+            "href": "/about/approach"
+          },
+          "eyebrow": "Our approach",
+          "excerpt": "Our proven methodology from AI roadmap to measurable results"
         }
-      ]
+      ],
+      "button": {
+        "_type": "button",
+        "_key": "more-talk-with-our-team",
+        "label": "Talk with our team",
+        "href": "/contact"
+      }
     }
   ],
+  "primaryButton": {
+    "_type": "button",
+    "_key": "nav-contact",
+    "label": "Contact",
+    "href": "/contact",
+    "icon": "none"
+  },
+  "footerTagline": "Transforming businesses through intelligent AI implementation.",
   "socialsLabel": "Socials",
   "socialLinks": [
     {
@@ -110,6 +255,6 @@
     "locked": false,
     "sourceId": "framer:siteSettings",
     "provisional": true,
-    "provisionalNote": "Extracted from o3xo.ai’s footer and its Organization ld+json (#220), replacing the hand-seeded bootstrap. The nav labels are the site’s; their destinations are the sitemap’s, because Framer renders three of the five as dropdown triggers with no href. No default SEO: o3xo.ai declares no site-wide OG image. Cleared when the chrome is authored against O3XO’s own design."
+    "provisionalNote": "Extracted from o3xo.ai’s footer and its Organization ld+json (#220), then authored against O3XO’s own chrome (#243): the three dropdown panels carry the copy the live nav opens, and Contact is the bar’s button. Destinations are the sitemap’s URLs rather than references. Still provisional for the one fact nothing serves: o3xo.ai declares no site-wide OG image, so there is no default SEO."
   }
 }

@@ -6,8 +6,7 @@ import { getSiteSettings } from '@o3/content-runtime/site-settings'
 
 import { editorToolbarConfig } from '@/sanity/editorToolbar'
 import { VisualEditing } from '@/sanity/VisualEditing'
-import { O3xoMark } from '@/brand/O3xoMark'
-import { SiteFooter, SiteNav, UtilityNav } from '@o3/content-ui/chrome'
+import { SiteFooter, SiteNav } from '@/chrome'
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
   // Shared with every route's generateMetadata via React.cache — one fetch
@@ -16,21 +15,15 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
 
   return (
     <>
-      {/* The brand-property strip sits IN the document above everything else
-          and scrolls away with it (`2250:1453` is an in-flow child of the Home
-          frame); the pill below it is fixed. That difference is why the two are
-          siblings here rather than one component. */}
-      <UtilityNav settings={settings} />
-      {/* This brand's mark, handed to chrome that draws none of its own (#228).
-          Stacked and plate-less on both, in `2 color` — the white word beside
-          the accent star the kit plates on black, and this chrome is black.
-          The two sizes are the boxes O3's frames measure for the nav and the
-          footer; O3XO has no chrome frames of its own yet, so the stacked
-          lockup takes them rather than the layout moving under an unread
-          design. */}
-      <SiteNav settings={settings} brandMark={<O3xoMark layout="stacked" height={64} />} />
+      {/* This app's own chrome (#243, ADR 0028's second addendum) — the kit's
+          dropdown bar and its light footer, not the shared pill. No utility
+          strip: O3XO has no equivalent, and the two property links it would
+          carry are drawn by the footer's own row, which is where the kit puts
+          them. The mark is no longer a slot the layout fills, because the
+          components are this brand's and reach for it themselves. */}
+      <SiteNav settings={settings} />
       <main className="min-h-screen">{children}</main>
-      <SiteFooter settings={settings} brandMark={<O3xoMark layout="stacked" height={128} />} />
+      <SiteFooter settings={settings} />
       <SanityLive />
       {isDraft ? <VisualEditing /> : null}
       {/* Renders nothing unless the visitor holds a Studio session (#60, #99).

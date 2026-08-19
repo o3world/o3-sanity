@@ -951,6 +951,26 @@ interface SettingsButton {
   readonly _key: string
   readonly label: string
   readonly href: string
+  /** The `icon` knob, written only where the design draws no glyph. */
+  readonly icon?: 'none'
+}
+
+/** One card in a dropdown panel: a link, and the two lines drawn around it. */
+interface SettingsNavGroupItem {
+  readonly _type: 'navGroupItem'
+  readonly _key: string
+  readonly button: SettingsButton
+  readonly eyebrow?: string
+  readonly excerpt?: string
+}
+
+/** A nav item that opens a panel instead of going anywhere. */
+interface SettingsNavGroup {
+  readonly _type: 'navGroup'
+  readonly _key: string
+  readonly label: string
+  readonly items: readonly SettingsNavGroupItem[]
+  readonly button: SettingsButton
 }
 
 /** The `siteSettings` singleton, as a document. */
@@ -959,14 +979,9 @@ export interface FramerSiteSettingsDoc {
   readonly _type: 'siteSettings'
   readonly title: string
   readonly utilityNavItems: readonly SettingsButton[]
-  readonly navItems: readonly SettingsButton[]
+  readonly navItems: readonly (SettingsButton | SettingsNavGroup)[]
+  readonly primaryButton: SettingsButton
   readonly footerTagline: string
-  readonly footerGroups: readonly {
-    readonly _type: 'footerGroup'
-    readonly _key: string
-    readonly label: string
-    readonly links: readonly SettingsButton[]
-  }[]
   readonly socialsLabel: string
   readonly socialLinks: readonly {
     readonly _type: 'socialLink'
@@ -985,23 +1000,152 @@ export interface FramerSiteSettingsDoc {
   }
 }
 
+interface NavLink {
+  readonly label: string
+  readonly href: string
+}
+
+interface NavEntry extends NavLink {
+  /** Present iff the item opens a panel — three of the four do. */
+  readonly panel?: {
+    /** The panel's cards, in the order the live grid fills. */
+    readonly items: readonly (NavLink & { eyebrow?: string; excerpt: string })[]
+    /** The row that closes the panel. */
+    readonly more: NavLink
+  }
+}
+
 /**
- * The nav o3xo.ai draws, with a destination for each item.
+ * The nav o3xo.ai draws.
  *
- * The labels are the site's own, in the site's own order. The destinations are
- * not in the markup: Framer renders Industries, Case studies and About as
- * dropdown triggers with no `href` in the served HTML, so what the SSR page
- * carries is three labels with nowhere to go. Each one names a section whose
- * index URL is in the sitemap, and that is what is used — a mapping decision,
- * recorded here, not a guess.
+ * The labels, the copy and the order are the live site's, read off the opened
+ * panels on 2026-08-19 — Industries, Case studies and About render as triggers
+ * with no `href` in the served HTML and fill their panels client-side, so the
+ * SSR page carries three labels with nowhere to go and nothing under them.
+ * The kit's `Navigation` (`4404:4146`) agrees on which three open: those are
+ * the items it draws a caret beside, and Insights is the one it does not.
+ *
+ * A trigger's own `href` is still the section index from the sitemap, and it
+ * lands on the panel's last row rather than on the trigger — a trigger that
+ * also navigates is one control doing two jobs, and the design draws the row
+ * for exactly this.
+ *
+ * Destinations are hrefs rather than references, the way every other link this
+ * mapper writes is: the source is a URL, and resolving it to a document id
+ * here would be inventing a certainty the extract does not carry.
  */
-const NAV: readonly { label: string; href: string }[] = [
-  { label: 'Industries', href: '/industries' },
-  { label: 'Case studies', href: '/case-studies' },
+const NAV: readonly NavEntry[] = [
+  {
+    label: 'Industries',
+    href: '/industries',
+    panel: {
+      items: [
+        {
+          label: 'Construction',
+          href: '/industries/construction',
+          excerpt: 'Project lifecycle automation',
+        },
+        {
+          label: 'Industrial services',
+          href: '/industries/industrial-services',
+          excerpt: 'Operational efficiency',
+        },
+        {
+          label: 'Life sciences',
+          href: '/industries/life-sciences',
+          excerpt: 'Research to revenue',
+        },
+        {
+          label: 'Real estate',
+          href: '/industries/real-estate',
+          excerpt: 'Lead gen + property mgmt optimization',
+        },
+        {
+          label: 'Finance + insurance',
+          href: '/industries/finance-insurance',
+          excerpt: 'Underwriting + advisory amplification',
+        },
+        {
+          label: 'Technology',
+          href: '/industries/technology',
+          excerpt: 'Competitive advantage',
+        },
+      ],
+      more: { label: 'View all industries', href: '/industries' },
+    },
+  },
+  {
+    label: 'Case studies',
+    href: '/case-studies',
+    panel: {
+      items: [
+        {
+          label: 'Buffalo Construction',
+          href: '/case-studies/buffalo-construction',
+          eyebrow: 'Construction',
+          excerpt: 'AI-powered construction operations',
+        },
+        {
+          label: 'Tyndale',
+          href: '/case-studies/tyndale',
+          eyebrow: 'Industrial services',
+          excerpt: 'AI-driven product insight',
+        },
+        {
+          label: 'Healthcare tech leader',
+          href: '/case-studies/healthcare-tech-leader',
+          eyebrow: 'Life sciences',
+          excerpt: 'AI strategy acceleration',
+        },
+        {
+          label: 'e-Hazard',
+          href: '/case-studies/e-hazard',
+          eyebrow: 'Industrial services',
+          excerpt: 'Certificate automation magic',
+        },
+        {
+          label: 'Global tech firm',
+          href: '/case-studies/global-tech-firm',
+          eyebrow: 'Technology',
+          excerpt: 'RFP automation',
+        },
+        {
+          label: 'Fortune 500 insurance provider',
+          href: '/case-studies/fortune-500-insurance-provider',
+          eyebrow: 'Finance + insurance',
+          excerpt: 'Legal document intelligence',
+        },
+      ],
+      more: { label: 'View all case studies', href: '/case-studies' },
+    },
+  },
   { label: 'Insights', href: '/insights' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
+  {
+    label: 'About',
+    href: '/about',
+    panel: {
+      items: [
+        {
+          label: 'Our story + mission',
+          href: '/about',
+          eyebrow: 'About O3XO',
+          excerpt:
+            '20+ years of digital transformation expertise applied to AI strategy and execution',
+        },
+        {
+          label: 'Strategy to activation',
+          href: '/about/approach',
+          eyebrow: 'Our approach',
+          excerpt: 'Our proven methodology from AI roadmap to measurable results',
+        },
+      ],
+      more: { label: 'Talk with our team', href: '/contact' },
+    },
+  },
 ]
+
+/** The bar's own button, drawn filled at the end of the row (`4404:4036`). */
+const NAV_BUTTON: NavLink = { label: 'Contact', href: '/contact' }
 
 /**
  * o3xo.ai's chrome → the `siteSettings` singleton, replacing the hand-seeded
@@ -1010,31 +1154,48 @@ const NAV: readonly { label: string; href: string }[] = [
  *
  * It is not held to `siteSettingsDoc`, which describes the **WordPress chrome
  * extract** — nav menus plus an ACF options page. o3xo.ai has neither, and the
- * fields it genuinely does not carry (a default OG image, a primary nav
- * button) stay absent rather than being filled in with something plausible.
+ * field it genuinely does not carry (a default OG image) stays absent rather
+ * than being filled in with something plausible.
+ *
+ * **No `footerGroups`.** The kit's `Footer` (`4404:4148`) draws no link
+ * columns: one row of properties and the legal link, both of which
+ * `utilityNavItems` and `legalLinks` already carry. The single "Site" column
+ * the bootstrap wrote existed to fill the shared footer's three-column shape,
+ * and o3xo's chrome no longer has one.
  */
 export function mapFramerSiteSettings(chrome: FramerChrome): FramerSiteSettingsDoc {
-  const button = (prefix: string, link: { label: string; href: string }): SettingsButton => ({
+  const button = (prefix: string, link: NavLink): SettingsButton => ({
     _type: 'button',
     _key: `${prefix}-${idKey(link.label)}`,
     label: link.label,
     href: link.href,
   })
+  const navItem = (entry: NavEntry): SettingsButton | SettingsNavGroup => {
+    if (!entry.panel) return button('nav', entry)
+    return {
+      _type: 'navGroup',
+      _key: `nav-${idKey(entry.label)}`,
+      label: entry.label,
+      items: entry.panel.items.map((item) => ({
+        _type: 'navGroupItem',
+        _key: `nav-${idKey(entry.label)}-${idKey(item.label)}`,
+        button: button('link', item),
+        ...(item.eyebrow ? { eyebrow: item.eyebrow } : {}),
+        excerpt: item.excerpt,
+      })),
+      button: button('more', entry.panel.more),
+    }
+  }
   return {
     _id: 'siteSettings',
     _type: 'siteSettings',
     title: chrome.title,
     utilityNavItems: chrome.footerLinks.map((link) => button('utility', link)),
-    navItems: NAV.map((link) => button('nav', link)),
+    navItems: NAV.map(navItem),
+    // No glyph: `4404:4036` is a label alone, where the panel's closing row
+    // (`View all industries →`) keeps the arrow the default writes.
+    primaryButton: { ...button('nav', NAV_BUTTON), icon: 'none' },
     footerTagline: chrome.footerTagline,
-    footerGroups: [
-      {
-        _type: 'footerGroup',
-        _key: 'footer-site',
-        label: 'Site',
-        links: NAV.map((link) => button('footer', link)),
-      },
-    ],
     socialsLabel: 'Socials',
     socialLinks: chrome.socialLinks.map((social) => ({
       _type: 'socialLink',
@@ -1050,11 +1211,11 @@ export function mapFramerSiteSettings(chrome: FramerChrome): FramerSiteSettingsD
       sourceId: 'framer:siteSettings',
       provisional: true,
       provisionalNote:
-        'Extracted from o3xo.ai’s footer and its Organization ld+json (#220), replacing the ' +
-        'hand-seeded bootstrap. The nav labels are the site’s; their destinations are the ' +
-        'sitemap’s, because Framer renders three of the five as dropdown triggers with no href. ' +
-        'No default SEO: o3xo.ai declares no site-wide OG image. Cleared when the chrome is ' +
-        'authored against O3XO’s own design.',
+        'Extracted from o3xo.ai’s footer and its Organization ld+json (#220), then authored ' +
+        'against O3XO’s own chrome (#243): the three dropdown panels carry the copy the live ' +
+        'nav opens, and Contact is the bar’s button. Destinations are the sitemap’s URLs rather ' +
+        'than references. Still provisional for the one fact nothing serves: o3xo.ai declares ' +
+        'no site-wide OG image, so there is no default SEO.',
     },
   }
 }

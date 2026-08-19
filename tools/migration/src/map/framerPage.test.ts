@@ -302,7 +302,70 @@ describe('mapFramerSiteSettings', () => {
       'Case studies',
       'Insights',
       'About',
-      'Contact',
     ])
+    // Contact is the bar's button, not its fifth link — `4404:4036` draws it
+    // as a filled Button and the live nav renders an `<a>` styled as one.
+    expect(settings.primaryButton).toMatchObject({ label: 'Contact', href: '/contact' })
+  })
+
+  it('opens the three items the live nav opens, and leaves the fourth flat', () => {
+    expect(settings.navItems.map((item) => [item._type, item.label])).toEqual([
+      ['navGroup', 'Industries'],
+      ['navGroup', 'Case studies'],
+      ['button', 'Insights'],
+      ['navGroup', 'About'],
+    ])
+  })
+
+  it('gives each Industries card the line the panel draws under its title', () => {
+    const group = settings.navItems[0]
+    if (group?._type !== 'navGroup') throw new Error('Industries is not a group')
+    expect(group.items.map((item) => [item.button.href, item.button.label, item.excerpt])).toEqual([
+      ['/industries/construction', 'Construction', 'Project lifecycle automation'],
+      ['/industries/industrial-services', 'Industrial services', 'Operational efficiency'],
+      ['/industries/life-sciences', 'Life sciences', 'Research to revenue'],
+      ['/industries/real-estate', 'Real estate', 'Lead gen + property mgmt optimization'],
+      [
+        '/industries/finance-insurance',
+        'Finance + insurance',
+        'Underwriting + advisory amplification',
+      ],
+      ['/industries/technology', 'Technology', 'Competitive advantage'],
+    ])
+    // The row that closes the panel. It is the group's own button because the
+    // trigger cannot be it: a trigger that also navigates has two jobs.
+    expect(group.button).toMatchObject({ label: 'View all industries', href: '/industries' })
+  })
+
+  it('carries an eyebrow only where the panel draws one', () => {
+    const [industries, cases, , about] = settings.navItems
+    if (industries?._type !== 'navGroup') throw new Error('Industries is not a group')
+    if (cases?._type !== 'navGroup') throw new Error('Case studies is not a group')
+    if (about?._type !== 'navGroup') throw new Error('About is not a group')
+
+    // Industries names itself; a kicker over "Construction" saying
+    // "Construction" is the label twice.
+    expect(industries.items.every((item) => item.eyebrow === undefined)).toBe(true)
+    // A case-study card is kickered with its industry, an About card with the
+    // page it lands on. Stored in sentence case — the caps are the renderer's.
+    expect(cases.items.map((item) => item.eyebrow)).toEqual([
+      'Construction',
+      'Industrial services',
+      'Life sciences',
+      'Industrial services',
+      'Technology',
+      'Finance + insurance',
+    ])
+    expect(about.items.map((item) => [item.eyebrow, item.button.label])).toEqual([
+      ['About O3XO', 'Our story + mission'],
+      ['Our approach', 'Strategy to activation'],
+    ])
+  })
+
+  it('stops restating the nav as a footer column set', () => {
+    // The kit's `Footer` (`4404:4148`) has no link columns at all — one row of
+    // properties and the legal link, which `utilityNavItems` and `legalLinks`
+    // already carry. The column the bootstrap invented had no reader left.
+    expect(settings).not.toHaveProperty('footerGroups')
   })
 })

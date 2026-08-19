@@ -293,8 +293,8 @@ describe('the committed O3XO corpus', () => {
    * The O3XO singleton is o3xo.ai's own chrome, not the WordPress chrome
    * extract, so `siteSettingsDoc` does not describe it (see `verify.ts`). What
    * the chrome renders is asserted here instead — a settings document missing
-   * one of these renders a nav with no links or a footer with no groups, and
-   * nothing else in the pipeline would say so.
+   * one of these renders a nav with no links or a footer with nothing in it,
+   * and nothing else in the pipeline would say so.
    */
   describe('the site settings singleton', () => {
     const settings = all.find(({ doc }) => doc._type === 'siteSettings')?.doc
@@ -303,11 +303,15 @@ describe('the committed O3XO corpus', () => {
       expect(settings?._id).toBe('siteSettings')
     })
 
-    it('gives the chrome a title, nav links and a footer group', () => {
+    it('gives the chrome a title, nav links and the footer’s three lines', () => {
       expect(settings?.title).toBeTruthy()
       expect((settings?.navItems as unknown[] | undefined)?.length).toBeGreaterThan(0)
-      expect((settings?.footerGroups as unknown[] | undefined)?.length).toBeGreaterThan(0)
       expect(settings?.footerTagline).toBeTruthy()
+      // No `footerGroups`: the kit's `Footer` (`4404:4148`) draws no link
+      // columns, so the one the bootstrap invented has no reader (#243). The
+      // footer's row is `utilityNavItems` + `legalLinks`, both asserted below.
+      expect(settings).not.toHaveProperty('footerGroups')
+      expect((settings?.utilityNavItems as unknown[] | undefined)?.length).toBeGreaterThan(0)
     })
 
     /** The three the hand-seeded bootstrap could not carry (#217, #220). */

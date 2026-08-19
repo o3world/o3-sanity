@@ -345,7 +345,11 @@ describe('every chrome destination is a route the build-out lands (#48)', () => 
 
   const chromeHrefs = [
     ...(settings.utilityNavItems ?? []),
-    ...(settings.navItems ?? []),
+    // `navItems` is a union since O3XO's nav grew dropdowns: a member is a
+    // button or a `navGroup`, and only the button half carries an href. O3
+    // authors no group, so this narrowing drops nothing here — it is what
+    // keeps the sweep honest if it ever does.
+    ...(settings.navItems ?? []).filter((item) => item._type === 'button'),
     settings.primaryButton,
     ...(settings.footerGroups ?? []).flatMap((g) => g.links ?? []),
     ...(settings.legalLinks ?? []),
