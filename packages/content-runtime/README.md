@@ -2,7 +2,8 @@
 
 What turns Sanity documents into rendered pages: the four route builders, the
 block dispatch loop, and the fetch, cache-tag, SEO and URL layers they sit on.
-It holds no block renderers and no site chrome — an app binds those itself.
+It holds no block renderers and no site chrome — those are `@o3/content-ui`,
+which an app binds itself.
 
 This is the part ADR 0028 commits to sharing. A second brand app is a second
 consumer of these modules, not a second copy of them.

@@ -6,9 +6,7 @@ import { getSiteSettings } from '@o3/content-runtime/site-settings'
 
 import { editorToolbarConfig } from '@/sanity/editorToolbar'
 import { VisualEditing } from '@/sanity/VisualEditing'
-import { SiteFooter } from '@/ui/SiteFooter'
-import { SiteNav } from '@/ui/SiteNav'
-import { UtilityNav } from '@/ui/UtilityNav'
+import { SiteFooter, SiteNav, UtilityNav } from '@o3/content-ui/chrome'
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
   // Shared with every route's generateMetadata via React.cache — one fetch

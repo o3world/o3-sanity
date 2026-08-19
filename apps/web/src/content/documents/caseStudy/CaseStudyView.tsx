@@ -2,8 +2,8 @@ import { CaseChapter, CaseStudyHero, Eyebrow, Stat } from '@o3/ui'
 import type { CASE_STUDY_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { Blocks } from '@/content/blocks/Blocks'
-import { SanityImage } from '@/content/SanityImage'
-import { PortableTextBody } from '@/content/portable-text/PortableTextBody'
+import { SanityImage } from '@o3/content-ui'
+import { PortableTextBody } from '@o3/content-ui/portable-text'
 
 import { NextCaseBand } from './NextCaseBand'
 

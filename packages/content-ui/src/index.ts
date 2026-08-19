@@ -1,0 +1,53 @@
+/**
+ * The block renderers and the support layer they are built from. An app
+ * binds these into its own registry (ADR 0028) — nothing here reads a
+ * registry, so a second brand can re-bind one block type without forking
+ * the other fifteen.
+ */
+
+// ── Base tier ──────────────────────────────────────────────────────────────
+// The base bindings ship with the renderers because `LayoutSection`
+// dispatches through them directly: the base tier is the inline vocabulary a
+// section renderer draws with, not a per-app roster.
+export { BASE_BLOCK_BINDINGS, BASE_BLOCK_COMPONENTS } from './blocks/base/baseComponents'
+export { Button } from './blocks/base/button/Button'
+export { ButtonGroup } from './blocks/base/buttonGroup/ButtonGroup'
+export { Embed } from './blocks/base/embed/Embed'
+export { Figure } from './blocks/base/figure/Figure'
+export { Mark, markProps } from './blocks/base/mark/Mark'
+export type { MarkProps } from './blocks/base/mark/Mark'
+export { RichText } from './blocks/base/richText/RichText'
+export { StatGroup } from './blocks/base/statGroup/StatGroup'
+
+// ── Section tier ───────────────────────────────────────────────────────────
+export { CaseShowcaseSection } from './blocks/section/caseShowcaseSection/CaseShowcaseSection'
+export { CtaSection } from './blocks/section/ctaSection/CtaSection'
+export { FeatureGridSection } from './blocks/section/featureGridSection/FeatureGridSection'
+export { FormSection } from './blocks/section/formSection/FormSection'
+export { HeroSection } from './blocks/section/heroSection/HeroSection'
+export { InFlightSection } from './blocks/section/inFlightSection/InFlightSection'
+export { InsightsCarouselSection } from './blocks/section/insightsCarouselSection/InsightsCarouselSection'
+export { CarouselTrack } from './blocks/section/insightsCarouselSection/CarouselTrack'
+export { LayoutSection } from './blocks/section/layoutSection/LayoutSection'
+export { ListingSection } from './blocks/section/listingSection/ListingSection'
+export { LogoWallSection } from './blocks/section/logoWallSection/LogoWallSection'
+export { MediaSection } from './blocks/section/mediaSection/MediaSection'
+export { PersonGridSection } from './blocks/section/personGridSection/PersonGridSection'
+export { QuoteSection } from './blocks/section/quoteSection/QuoteSection'
+export { RailPanelsSection } from './blocks/section/railPanelsSection/RailPanelsSection'
+export { RoleListSection } from './blocks/section/roleListSection/RoleListSection'
+export { ScreenGridSection } from './blocks/section/screenGridSection/ScreenGridSection'
+
+// ── Renderer support ───────────────────────────────────────────────────────
+export { ButtonLink } from './ButtonLink'
+export {
+  buttonDestination,
+  resolveButtonHref,
+  type ButtonDestination,
+  type ButtonLinkData,
+} from './buttonDestination'
+export { LogoKnockout } from './LogoKnockout'
+export { SanityImage, type ImageBox, type ImageRatio, type SanityImageProps } from './SanityImage'
+export { DECORATED_BAND_CLASS, resolveDecoration, type Decoration } from './blocks/decoration'
+export { MoleculeDecoration, type MoleculeDecorationProps } from './blocks/MoleculeDecoration'
+export { resolveSurface } from './blocks/surface'

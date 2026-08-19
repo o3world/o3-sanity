@@ -6,7 +6,7 @@ Resolves wayfinder ticket #6. Inputs: the content model (ticket #5, `CONTEXT.md`
 
 - `defineBlock` / `defineSectionBlock` factories with the two-tier registry (base tier inside section tier).
 - GROQ queries colocated in the schema package; `sanity typegen` runs in the studio app — the generated types are the compile-time contract: entry registries and `BLOCK_REGISTRY` are `satisfies`-checked against them (ADR 0001).
-- Schema-symmetric folders: schema name === folder name in `apps/web/src/content/{documents,blocks/{base,section}}`. Enforced by convention (optionally a small lint script later — never a test suite).
+- Schema-symmetric folders: schema name === folder name in `packages/content-ui/src/blocks/{base,section}` and `apps/web/src/content/documents`. Enforced by convention (optionally a small lint script later — never a test suite).
 - Every routable type has a required `slug`; `page` slugs may be multi-segment and carry their URL prefix (`services/ux-audit`).
 
 ## Document types (8)

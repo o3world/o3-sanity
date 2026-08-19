@@ -81,10 +81,16 @@ the same guardrail the block registry uses. Pass only the field your assertion i
 returns. That is the migration → render bridge: a mapper change producing something the renderer
 can't display fails here rather than in Studio. `migratedInsightSlugs()` sweeps all of them.
 
-**The 402 half of ADR 0006 is assertable** via `@/test`'s responsive helpers (`responsive.ts`):
+**The 402 half of ADR 0006 is assertable** via the responsive helpers, exported from `@/test` in the
+app and from `@o3/content-ui/testing` in the package that now holds the renderers:
 `unprefixedHorizontalScrollUtilities(html)` must come back empty — a bare `overflow-x-auto`/`snap-x`
 is a phone getting a scroll region where the frame draws a stack — and `variantsOf(html, 'gap-12')`
 pins a utility to the widths that emitted it when the two frames disagree on a value.
+
+The layer collects `apps/web/src/**` and `packages/*/src/**` — the renderers moved to
+`@o3/content-ui` (#212) and their render tests moved with them, while the app keeps the route- and
+view-level ones. A moved test reaches its helpers by package subpath; only app tests get the `@/`
+alias.
 
 Four modules are stubbed (see `vitest.config.mts` for why each): `@o3/content-runtime/live` is the
 network seam, `next/image` renders a plain `<img>`, `next/headers` lets a test pick the draft or
@@ -94,7 +100,8 @@ the package subpath, the route builders inside the package import `#live`.
 
 ## `stories` — components in a real browser
 
-Every story under `packages/ui/src` and `apps/web/src` is mounted in headless Chromium with real CSS
+Every story under the roots `packages/story-kit`'s `STORY_ROOTS` names — `packages/ui/src`,
+`packages/content-ui/src`, `apps/web/src` — is mounted in headless Chromium with real CSS
 and scanned by axe. **Writing the story is writing the test** — there is no second file, which is
 why the wireframe build-out gets its safety net for free.
 
@@ -123,8 +130,8 @@ against real content. It found three defects on its first run — a skipped head
 `/solutions`, a `<dl>` full of `<p>`s in `statGroup`, and a keyboard-unreachable scroller on
 `/live`.
 
-Fixtures come from `src/stories/seedContent.ts`, which shares its projection with the render layer
-(`src/test/seedProjection.ts`) and differs only in loading JSON by static import rather than
+Fixtures come from `@o3/content-ui/testing/seed`, which shares its projection with the render layer
+(`@o3/content-ui/testing`) and differs only in loading JSON by static import rather than
 `node:fs`, and in resolving **real** asset ids out of the committed `data/assets.json` — a browser
 actually loads the picture, so a fabricated id would be a mockup of empty boxes.
 

@@ -1,10 +1,9 @@
 import type { INSIGHTS_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { InsightIndexView } from '@/content/documents/insight/InsightIndexView'
-import { SiteFooter } from '@/ui/SiteFooter'
-import { SiteNav } from '@/ui/SiteNav'
+import { SiteFooter, SiteNav } from '@o3/content-ui/chrome'
 
-import { INSIGHTS, SITE_SETTINGS } from './seedContent'
+import { INSIGHTS, SITE_SETTINGS } from '@o3/content-ui/testing/seed'
 
 type IndexData = NonNullable<INSIGHTS_PAGE_QUERY_RESULT>
 

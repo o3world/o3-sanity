@@ -99,7 +99,7 @@ curl -s -H "X-Figma-Token: $FIGMA_API_KEY" \
 
 **Compare against what the code renders today.** Page content is Sanity data, not JSX:
 seed documents in `tools/migration/data/seed/`, block renderers in
-`apps/web/src/content/blocks/`, routes under `apps/web/src/app/(site)/`. A component set
+`packages/content-ui/src/blocks/`, routes under `apps/web/src/app/(site)/`. A component set
 names its target outright (`packages/ui/src/components/ui/button.tsx#Button`). The previous
 run's report is in git (`git log -p -- tools/figma-sync/data/report.json`) when you need to
 know whether this frame has been churning.
@@ -141,7 +141,7 @@ cannot account for one, it is not noise — it is unfinished triage.
   reports the set alongside the frames precisely so you can collapse them.
 - **Independent page-layer changes = one ticket per page layer.** Desktop and mobile of the
   same `route` are the **same ticket** — two frames, one change, one piece of work.
-- **A set that shows everywhere** — `NavBar` `1710:2271` → `apps/web/src/ui/SiteNav.tsx#SiteNav`
+- **A set that shows everywhere** — `NavBar` `1710:2271` → `packages/content-ui/src/chrome/SiteNav.tsx#SiteNav`
   — is one ticket at the component. Never one per page. (`Footer` `1280:1885` is the
   counter-case: tracked, but `codeComponent: null` because `SiteFooter` was built from the
   frame's footer instead. Read the note before assuming a set routes anywhere.)

@@ -2,7 +2,8 @@ import type { ComponentType } from 'react'
 
 import { bindingsToRecord, type LayoutItem, type PageSection } from '@o3/content-runtime/blocks'
 
-import { BASE_BLOCK_COMPONENTS } from './base/baseComponents'
+import { BASE_BLOCK_COMPONENTS } from '@o3/content-ui'
+
 import { CLIENT_SECTION_BINDINGS } from './clientComponents'
 
 /**

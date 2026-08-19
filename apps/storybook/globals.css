@@ -33,6 +33,7 @@
  * this comment — the star-slash sequence terminates it early.)
  */
 @source '../../packages/ui/src/**/*.{ts,tsx}';
+@source '../../packages/content-ui/src/**/*.{ts,tsx}';
 @source '../web/src/**/*.{ts,tsx}';
 
 /* `@apply` outside a `@layer` block emits UNLAYERED CSS, which beats every

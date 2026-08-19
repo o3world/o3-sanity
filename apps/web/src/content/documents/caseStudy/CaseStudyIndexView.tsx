@@ -4,7 +4,7 @@ import { CollectionHero } from '@o3/ui'
 import type { CASE_STUDIES_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 import type { Pagination } from '@o3/content-runtime/routes'
 
-import { CaseStudyCard } from './CaseStudyCard'
+import { CaseStudyCard } from '@o3/content-ui/cards'
 
 interface CaseStudyIndexViewProps {
   readonly items: NonNullable<CASE_STUDIES_PAGE_QUERY_RESULT>['items']

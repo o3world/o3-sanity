@@ -11,6 +11,7 @@
  */
 export const STORY_ROOTS = [
   'packages/ui/src',
+  'packages/content-ui/src',
   'apps/web/src',
   // Captured prototypes — stories that frame a static HTML artifact rather
   // than a component. See apps/storybook/prototypes/README.md.

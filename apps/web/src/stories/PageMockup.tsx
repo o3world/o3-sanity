@@ -9,10 +9,9 @@
  */
 // eslint-disable-next-line no-restricted-imports -- story fixture, not a view; see above
 import { BlockRenderer } from '@/content/blocks/BlockRenderer'
-import { SiteFooter } from '@/ui/SiteFooter'
-import { SiteNav } from '@/ui/SiteNav'
+import { SiteFooter, SiteNav } from '@o3/content-ui/chrome'
 
-import { SITE_SETTINGS, seededPage, type SeedPageName } from './seedContent'
+import { SITE_SETTINGS, seededPage, type SeedPageName } from '@o3/content-ui/testing/seed'
 
 /**
  * A whole page, chrome included, from committed content — what the `Pages`

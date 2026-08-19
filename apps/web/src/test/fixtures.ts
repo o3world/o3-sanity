@@ -11,7 +11,7 @@ import type {
   SITE_SETTINGS_QUERY_RESULT,
 } from '@o3/sanity/types/generated'
 
-import { projectSeedPage, resolveAssetMarkers, type SeedDoc } from './seedProjection'
+import { projectSeedPage, resolveAssetMarkers, type SeedDoc } from '@o3/content-ui/testing'
 
 /**
  * Fixture builders for the `render` layer.
@@ -163,7 +163,7 @@ export function withSettings(
  * A **fabricated** id, deliberately: this layer renders to a string and never
  * fetches, so what matters is that the id parses. The stories layer resolves
  * the real ids out of `data/assets.json` instead, because a browser actually
- * loads the picture — see `src/stories/seedContent.ts`.
+ * loads the picture — see `@o3/content-ui/testing/seed`.
  */
 function resolveWpSrcMarkers(node: unknown): unknown {
   return resolveAssetMarkers(node, (source) => {

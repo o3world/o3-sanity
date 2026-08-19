@@ -1,6 +1,6 @@
 ---
 name: content-naming
-description: Naming and wiring rules for Sanity content in this repo. Use when adding, renaming, or removing a section block, base block, shared object, document type, schema field, or block renderer — anything under packages/sanity/src/schemas/ or apps/web/src/content/. Also use when reviewing a diff that touches those paths.
+description: Naming and wiring rules for Sanity content in this repo. Use when adding, renaming, or removing a section block, base block, shared object, document type, schema field, or block renderer — anything under packages/sanity/src/schemas/, packages/content-ui/src/ or apps/web/src/content/. Also use when reviewing a diff that touches those paths.
 ---
 
 # Content naming
@@ -35,9 +35,9 @@ Name it `<thing>Section`. Never `<thing>Block`.
 3. `packages/sanity/src/schemas/blocks/section.ts` — `defineSectionBlock({ name, title, description, knobs, fields, preview })`. Don't add a `surface` field; the factory generates it from the knob. `description` is required and has a standard (below).
 4. `packages/sanity/src/schemas/index.ts` — import and add to `schemaTypes`, in the section-blocks group.
 5. `packages/sanity/src/queries.ts` — add a `_type == "<name>Section" => { … }` arm to `SECTION_FIELDS` **only if** the block needs query-time expansion (dereferenced `button` targets, reference→card projections, a subquery). Renderers must stay pure components: resolve data here, not in the component.
-6. `apps/web/src/content/blocks/section/<name>Section/<Name>Section.tsx` — folder name === schema name exactly. Type props with `SectionProps<'<name>Section'>` from `@o3/content-runtime/blocks`; never hand-write the prop shape.
-7. `apps/web/src/content/blocks/clientComponents.ts` — add a `defineBlockRender('<name>Section', { component: … })` entry to `CLIENT_SECTION_BINDINGS`.
-8. `pnpm typegen`, then `pnpm typecheck`. The `satisfies` clause in `apps/web/src/content/blocks/registry.ts` is what catches a renderer whose props drifted from the generated shape.
+6. `packages/content-ui/src/blocks/section/<name>Section/<Name>Section.tsx` — folder name === schema name exactly. Type props with `SectionProps<'<name>Section'>` from `@o3/content-runtime/blocks`; never hand-write the prop shape.
+7. Export it from `packages/content-ui/src/index.ts`, then add a `defineBlockRender('<name>Section', { component: … })` entry to `CLIENT_SECTION_BINDINGS` in **each app's** `src/content/blocks/clientComponents.ts` — the binding is per-app (ADR 0028).
+8. `pnpm typegen`, then `pnpm typecheck`. The `satisfies` clause in each app's `src/content/blocks/registry.ts` is what catches a renderer whose props drifted from the generated shape.
 
 ## Writing a block description
 

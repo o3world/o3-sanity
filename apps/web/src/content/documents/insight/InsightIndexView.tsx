@@ -4,8 +4,8 @@ import { ArrowIcon, Button, CollectionHero, FilterChip } from '@o3/ui'
 import type { INSIGHTS_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 import type { Pagination } from '@o3/content-runtime/routes'
 
-import { InsightCard } from './InsightCard'
-import { CtaSection } from '@/content/blocks/section/ctaSection/CtaSection'
+import { InsightCard } from '@o3/content-ui/cards'
+import { CtaSection } from '@o3/content-ui'
 
 type IndexData = NonNullable<INSIGHTS_PAGE_QUERY_RESULT>
 

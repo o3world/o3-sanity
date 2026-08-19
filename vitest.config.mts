@@ -135,7 +135,9 @@ export default defineConfig({
           name: 'render',
           environment: 'node',
           env: TEST_ENV,
-          include: ['apps/web/src/**/*.render.test.tsx'],
+          // The renderers live in @o3/content-ui and their tests moved with
+          // them (#212); the app keeps the route- and view-level renders.
+          include: ['apps/web/src/**/*.render.test.tsx', 'packages/*/src/**/*.render.test.tsx'],
           setupFiles: [resolve(webSrc, 'test/setup.ts')],
         },
       },

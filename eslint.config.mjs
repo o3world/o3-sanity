@@ -52,6 +52,26 @@ const draftBoundaryPatterns = [
   },
 ]
 
+/**
+ * Sanity image boundary: a content component renders a Sanity image through
+ * `SanityImage`, never raw `next/image` or the low-level helpers — the
+ * wrapper is what wires hotspot/crop and the CDN params. It applies wherever
+ * content components live, which since #212 is two places: the shared
+ * renderer package and the app's own views.
+ */
+const imageBoundaryPaths = [
+  {
+    name: 'next/image',
+    message: 'Use SanityImage — it wires hotspot/crop and CDN params.',
+  },
+]
+const imageBoundaryPatterns = [
+  {
+    group: ['@o3/sanity/image'],
+    message: 'Use SanityImage instead of the low-level image helpers.',
+  },
+]
+
 export default [
   ...o3Config,
   // Captured prototypes are third-party artifacts frozen as a record (ADR
@@ -60,10 +80,12 @@ export default [
   // directories are ignored; `frame.tsx` and the story files that wrap them
   // sit one level up and are linted normally.
   { ignores: ['apps/storybook/prototypes/*/**'] },
-  // eslint-config-next scoped to apps/web only — registering it wider clashes
-  // with the shared config's react/jsx-a11y plugin registrations.
+  // eslint-config-next scoped to the Next surfaces — the app and the shared
+  // renderers it mounts (@o3/content-ui uses next/image and next/link).
+  // Registering it repo-wide clashes with the shared config's react/jsx-a11y
+  // plugin registrations.
   {
-    files: ['apps/web/**/*.{ts,tsx}'],
+    files: ['apps/web/**/*.{ts,tsx}', 'packages/content-ui/**/*.{ts,tsx}'],
     plugins: {
       '@next/next': nextPlugin,
     },
@@ -148,9 +170,9 @@ export default [
       ],
     },
   },
-  // Sanity image boundary: content components render Sanity images through
-  // SanityImage, not raw next/image or the low-level image helpers. Also
-  // carries the draft-preview boundary (see above for why they merge).
+  // The app's own content layer — document views, entries, cards' consumers.
+  // Image boundary plus the draft-preview boundary (see above for why they
+  // merge).
   {
     files: ['apps/web/src/content/**/*.{ts,tsx}'],
     ignores: ['apps/web/src/content/blocks/**'],
@@ -158,52 +180,48 @@ export default [
       'no-restricted-imports': [
         'error',
         {
-          paths: [
-            {
-              name: 'next/image',
-              message:
-                'Use SanityImage inside src/content/ — it wires hotspot/crop and CDN params.',
-            },
-            ...draftBoundaryPaths,
-          ],
-          patterns: [
-            {
-              group: ['@o3/sanity/image'],
-              message:
-                'Use SanityImage inside src/content/ instead of the low-level image helpers.',
-            },
-            ...draftBoundaryPatterns,
-          ],
+          paths: [...imageBoundaryPaths, ...draftBoundaryPaths],
+          patterns: [...imageBoundaryPatterns, ...draftBoundaryPatterns],
         },
       ],
     },
   },
-  // content/blocks/ composes the renderers, so it skips the renderer
-  // restriction but keeps the image + client boundaries.
+  // content/blocks/ is the app's registry binding and the two renderers that
+  // read it, so it skips the renderer restriction but keeps the image and
+  // client boundaries.
   {
     files: ['apps/web/src/content/blocks/**/*.{ts,tsx}'],
     rules: {
       'no-restricted-imports': [
         'error',
         {
-          paths: [
-            {
-              name: 'next/image',
-              message:
-                'Use SanityImage inside src/content/ — it wires hotspot/crop and CDN params.',
-            },
-            ...draftBoundaryPaths,
-          ],
+          paths: [...imageBoundaryPaths, ...draftBoundaryPaths],
           patterns: [
-            {
-              group: ['@o3/sanity/image'],
-              message:
-                'Use SanityImage inside src/content/ instead of the low-level image helpers.',
-            },
+            ...imageBoundaryPatterns,
             ...draftBoundaryPatterns.filter(
               (p) => !p.group.some((g) => g.includes('BlockRenderer')),
             ),
           ],
+        },
+      ],
+    },
+  },
+  // The shared renderer package (#212). The block renderers, the site chrome
+  // and the cards left apps/web/src/content/, and both boundaries left with
+  // them — a rule scoped to a path stops applying the moment the path moves,
+  // and it stops silently.
+  {
+    files: ['packages/content-ui/src/**/*.{ts,tsx}'],
+    rules: {
+      // A package has no app router to scan, and the rule prints a "Pages
+      // directory cannot be found" warning on every run when it cannot find
+      // one. The routes these components link to belong to the app.
+      '@next/next/no-html-link-for-pages': 'off',
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [...imageBoundaryPaths, ...draftBoundaryPaths],
+          patterns: [...imageBoundaryPatterns, ...draftBoundaryPatterns],
         },
       ],
     },

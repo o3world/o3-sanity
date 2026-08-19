@@ -13,7 +13,11 @@ export { bandPaths, subBlockPaths } from './attribution'
 
 export { expectNotFound, renderRoute } from './renderRoute'
 
-export { classTokens, unprefixedHorizontalScrollUtilities, variantsOf } from './responsive'
+export {
+  classTokens,
+  unprefixedHorizontalScrollUtilities,
+  variantsOf,
+} from '@o3/content-ui/testing'
 
 export {
   aCaseStudiesPage,

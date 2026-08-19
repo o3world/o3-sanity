@@ -31,6 +31,20 @@
         "src/**/*.test.ts"
       ]
     },
+    "packages/content-ui": {
+      "entry": [
+        "src/index.ts",
+        "src/cards/index.ts",
+        "src/chrome/index.ts",
+        "src/lib/format-date.ts",
+        "src/portable-text/PortableTextBody.tsx",
+        "src/testing/index.ts",
+        "src/testing/seedContent.ts",
+        "src/**/*.stories.tsx",
+        "src/**/*.test.ts",
+        "src/**/*.render.test.tsx"
+      ]
+    },
     "packages/content-runtime": {
       "entry": [
         "src/base-url.ts",

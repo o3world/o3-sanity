@@ -14,23 +14,27 @@ import {
   type ClientBlockRenderBinding,
 } from '@o3/content-runtime/blocks'
 
-import { BASE_BLOCK_COMPONENTS } from './base/baseComponents'
-import { CaseShowcaseSection } from './section/caseShowcaseSection/CaseShowcaseSection'
-import { CtaSection } from './section/ctaSection/CtaSection'
-import { FeatureGridSection } from './section/featureGridSection/FeatureGridSection'
-import { FormSection } from './section/formSection/FormSection'
-import { HeroSection } from './section/heroSection/HeroSection'
-import { InFlightSection } from './section/inFlightSection/InFlightSection'
-import { LayoutSection } from './section/layoutSection/LayoutSection'
-import { ListingSection } from './section/listingSection/ListingSection'
-import { LogoWallSection } from './section/logoWallSection/LogoWallSection'
-import { MediaSection } from './section/mediaSection/MediaSection'
-import { PersonGridSection } from './section/personGridSection/PersonGridSection'
-import { InsightsCarouselSection } from './section/insightsCarouselSection/InsightsCarouselSection'
-import { QuoteSection } from './section/quoteSection/QuoteSection'
-import { RailPanelsSection } from './section/railPanelsSection/RailPanelsSection'
-import { RoleListSection } from './section/roleListSection/RoleListSection'
-import { ScreenGridSection } from './section/screenGridSection/ScreenGridSection'
+// The renderers themselves are shared (@o3/content-ui); the binding below is
+// this app's. Re-pointing one line here is what "O3XO adapts a block" costs.
+import {
+  BASE_BLOCK_COMPONENTS,
+  CaseShowcaseSection,
+  CtaSection,
+  FeatureGridSection,
+  FormSection,
+  HeroSection,
+  InFlightSection,
+  InsightsCarouselSection,
+  LayoutSection,
+  ListingSection,
+  LogoWallSection,
+  MediaSection,
+  PersonGridSection,
+  QuoteSection,
+  RailPanelsSection,
+  RoleListSection,
+  ScreenGridSection,
+} from '@o3/content-ui'
 
 /**
  * Render bindings for every client-safe SECTION block — the single authoring

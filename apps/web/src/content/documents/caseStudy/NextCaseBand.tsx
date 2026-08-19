@@ -4,7 +4,7 @@ import { ArrowIcon, Eyebrow } from '@o3/ui'
 import type { CASE_STUDY_QUERY_RESULT } from '@o3/sanity/types/generated'
 import { hrefForDoc } from '@o3/content-runtime/urls'
 
-import { SanityImage } from '@/content/SanityImage'
+import { SanityImage } from '@o3/content-ui'
 
 type NextCase = NonNullable<NonNullable<CASE_STUDY_QUERY_RESULT>['next']>
 

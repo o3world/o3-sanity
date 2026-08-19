@@ -1,11 +1,10 @@
 import { ArticleByline, Eyebrow, ReadingProgress, SectionShell } from '@o3/ui'
 import type { INSIGHT_QUERY_RESULT } from '@o3/sanity/types/generated'
 
-import { CarouselTrack } from '@/content/blocks/section/insightsCarouselSection/CarouselTrack'
-import { SanityImage } from '@/content/SanityImage'
-import { PortableTextBody } from '@/content/portable-text/PortableTextBody'
-import { getCard } from '@/content/documents/card-registry'
-import { formatMonthYear } from '@/lib/format-date'
+import { CarouselTrack, SanityImage } from '@o3/content-ui'
+import { PortableTextBody } from '@o3/content-ui/portable-text'
+import { getCard } from '@o3/content-ui/cards'
+import { formatMonthYear } from '@o3/content-ui/format-date'
 
 import { BackToInsights } from './BackToInsights'
 

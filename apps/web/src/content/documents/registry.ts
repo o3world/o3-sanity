@@ -3,14 +3,14 @@ import type { ComponentType } from 'react'
 
 import { DefaultView } from './_defaults/DefaultView'
 
-// Card getters live in a client-safe file so section blocks (which render
-// inside ClientBlockRenderer, a 'use client' component) can import them
-// without pulling the view graph into the browser bundle.
-export { getCard, CARD_PROJECTIONS } from './card-registry'
-
 /**
- * View-mode override registry. Maps `_type` to its custom View component
- * when one is registered; otherwise consumers fall back to `DefaultView`.
+ * View-mode override registry. The card half of the pair is not here: cards
+ * moved to `@o3/content-ui/cards` with the section blocks that render them
+ * (#212), and this file's view graph is server-oriented, so a view reaches
+ * that package directly rather than through a re-export.
+ *
+ * Maps `_type` to its custom View component when one is registered; otherwise
+ * consumers fall back to `DefaultView`.
  *
  * Overrides use `next/dynamic` so they don't enter the bundle until a route
  * actually renders one; `DefaultView` is statically imported — a single
