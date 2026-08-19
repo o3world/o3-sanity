@@ -1,11 +1,11 @@
 import Link from 'next/link'
 
-import { ArrowIcon, Button, CollectionHero, FilterChip } from '@o3/ui'
+import { CollectionHero, FilterChip } from '@o3/ui'
 import type { INSIGHTS_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 import type { Pagination } from '@o3/content-runtime/routes'
 
 import { InsightCard } from '@o3/content-ui/cards'
-import { CtaSection } from '@o3/content-ui'
+import { CtaSection, Pager } from '@o3/content-ui'
 
 type IndexData = NonNullable<INSIGHTS_PAGE_QUERY_RESULT>
 
@@ -48,9 +48,9 @@ function insightsHref({
  * ```
  *
  * The route was **provisional** until this frame: it borrowed the Work hero
- * and the Home Blog band, and three elements traced to nothing. Two of those
- * are now drawn — the hero standfirst is the frame's own copy, and the desktop
- * row gap is its 64. The third is still open, below.
+ * and the Home Blog band, and three elements traced to nothing. All three are
+ * now drawn — the hero standfirst is the frame's own copy, the desktop row gap
+ * is its 64, and the pager is `Pager`.
  *
  * ## The filter is the point of the frame
  *
@@ -70,8 +70,9 @@ function insightsHref({
  *    article.** A curated subset would need a field marking a category as
  *    featured, and no schema says that. The bar wraps instead.
  * 2. **The frame has no pager**, because nine cards fit its canvas. 273
- *    articles do not, so the pager stays — the same one, at the same 12 a
- *    page. It remains the one element on this route no frame draws.
+ *    articles do not, so the pager stays, at the same 12 a page. The drawing
+ *    it follows is the O3XO kit's — the one file either brand has that draws
+ *    this control — and `Pager` is shared for that reason.
  *
  * The card is untouched: the frame's cards are 395 wide with a 24px gap, a
  * square image under the ink veil, and a 13px meta line over a 24px title —
@@ -158,40 +159,12 @@ export function InsightIndexView({
             <p className="text-lead text-fg-muted">No insights under that filter yet.</p>
           )}
 
-          {totalPages > 1 ? (
-            <nav aria-label="Pagination" className="mt-4 grid grid-cols-3 items-center gap-4">
-              <div className="justify-self-start">
-                {page > 1 ? (
-                  <Button asChild variant="light">
-                    <Link href={insightsHref({ category, page: page - 1 })} rel="prev">
-                      {/* `Show left icon` on `Button / Solid` — the same glyph,
-                          reversed, which is how the set draws a back arrow. */}
-                      <ArrowIcon className="rotate-180" />
-                      Previous
-                    </Link>
-                  </Button>
-                ) : null}
-              </div>
-
-              {/* One interpolated string, not three children: React splits
-                  adjacent expressions with comment markers, which puts them
-                  inside the accessible name a screen reader reads out. */}
-              <p className="text-meta text-fg-muted justify-self-center text-center uppercase">
-                {`Page ${page} of ${totalPages}`}
-              </p>
-
-              <div className="justify-self-end">
-                {page < totalPages ? (
-                  <Button asChild variant="light">
-                    <Link href={insightsHref({ category, page: page + 1 })} rel="next">
-                      Next
-                      <ArrowIcon />
-                    </Link>
-                  </Button>
-                ) : null}
-              </div>
-            </nav>
-          ) : null}
+          <Pager
+            page={page}
+            totalPages={totalPages}
+            href={(target) => insightsHref({ category, page: target })}
+            className="mt-4"
+          />
         </div>
       </div>
 

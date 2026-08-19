@@ -1,12 +1,13 @@
 import Link from 'next/link'
 
-import { ArrowIcon, Button, CollectionHero, FilterChip } from '@o3/ui'
+import { CollectionHero, FilterChip } from '@o3/ui'
 import { brandConfig } from '@o3/sanity/brand'
 import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
 import type { INSIGHTS_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 import type { Pagination } from '@o3/content-runtime/routes'
 
 import { InsightCard } from '@o3/content-ui/cards'
+import { Pager } from '@o3/content-ui'
 
 const { title: collectionTitle } = brandConfig().collections.insight
 const prefix = COLLECTION_PREFIXES.insight
@@ -62,7 +63,8 @@ function insightsHref({
  * Two divergences from the frame, both inherited from apps/web and both still
  * true here: the chip bar draws every category that has an article rather than
  * the frame's curated five, and the pager exists because a real feed does not
- * fit one canvas.
+ * fit one canvas. The pager is the one part of this route the O3XO kit does
+ * draw (`4404:1821`), and `Pager` is built to it for both brands.
  */
 export function InsightIndexView({
   items,
@@ -142,40 +144,12 @@ export function InsightIndexView({
             <p className="text-lead text-fg-muted">No insights under that filter yet.</p>
           )}
 
-          {totalPages > 1 ? (
-            <nav aria-label="Pagination" className="mt-4 grid grid-cols-3 items-center gap-4">
-              <div className="justify-self-start">
-                {page > 1 ? (
-                  <Button asChild variant="light">
-                    <Link href={insightsHref({ category, page: page - 1 })} rel="prev">
-                      {/* `Show left icon` on `Button / Solid` — the same glyph,
-                          reversed, which is how the set draws a back arrow. */}
-                      <ArrowIcon className="rotate-180" />
-                      Previous
-                    </Link>
-                  </Button>
-                ) : null}
-              </div>
-
-              {/* One interpolated string, not three children: React splits
-                  adjacent expressions with comment markers, which puts them
-                  inside the accessible name a screen reader reads out. */}
-              <p className="text-meta text-fg-muted justify-self-center text-center uppercase">
-                {`Page ${page} of ${totalPages}`}
-              </p>
-
-              <div className="justify-self-end">
-                {page < totalPages ? (
-                  <Button asChild variant="light">
-                    <Link href={insightsHref({ category, page: page + 1 })} rel="next">
-                      Next
-                      <ArrowIcon />
-                    </Link>
-                  </Button>
-                ) : null}
-              </div>
-            </nav>
-          ) : null}
+          <Pager
+            page={page}
+            totalPages={totalPages}
+            href={(target) => insightsHref({ category, page: target })}
+            className="mt-4"
+          />
         </div>
       </div>
 

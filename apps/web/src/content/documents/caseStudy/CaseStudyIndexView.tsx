@@ -1,10 +1,9 @@
-import Link from 'next/link'
-
 import { CollectionHero } from '@o3/ui'
 import type { CASE_STUDIES_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 import type { Pagination } from '@o3/content-runtime/routes'
 
 import { CaseStudyCard } from '@o3/content-ui/cards'
+import { Pager } from '@o3/content-ui'
 
 interface CaseStudyIndexViewProps {
   readonly items: NonNullable<CASE_STUDIES_PAGE_QUERY_RESULT>['items']
@@ -67,27 +66,12 @@ export function CaseStudyIndexView({ items, pagination }: CaseStudyIndexViewProp
           ))}
         </ul>
 
-        {totalPages > 1 ? (
-          <nav
-            aria-label="Pagination"
-            className="max-w-section mx-auto mt-16 flex items-center justify-center gap-6"
-          >
-            {page > 1 ? (
-              <Link href={pageHref(page - 1)} className="text-fg hover:text-brand text-button">
-                ← Previous
-              </Link>
-            ) : null}
-            {/* One interpolated string, not three children: React splits
-                adjacent expressions with comment markers, which puts them
-                inside the accessible name a screen reader reads out. */}
-            <p className="text-fg-muted text-button">{`Page ${page} of ${totalPages}`}</p>
-            {page < totalPages ? (
-              <Link href={pageHref(page + 1)} className="text-fg hover:text-brand text-button">
-                Next →
-              </Link>
-            ) : null}
-          </nav>
-        ) : null}
+        <Pager
+          page={page}
+          totalPages={totalPages}
+          href={pageHref}
+          className="max-w-section mx-auto mt-16"
+        />
       </div>
     </>
   )

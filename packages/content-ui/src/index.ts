@@ -38,6 +38,11 @@ export { RailPanelsSection } from './blocks/section/railPanelsSection/RailPanels
 export { RoleListSection } from './blocks/section/roleListSection/RoleListSection'
 export { ScreenGridSection } from './blocks/section/screenGridSection/ScreenGridSection'
 
+// ── Route furniture ────────────────────────────────────────────────────────
+// Not a block — a collection index has no document to hold one. Every brand's
+// index renders the same pager, so it lives here rather than in either app.
+export { Pager, type PagerProps } from './Pager'
+
 // ── Renderer support ───────────────────────────────────────────────────────
 export { ButtonLink } from './ButtonLink'
 export {

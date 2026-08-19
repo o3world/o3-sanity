@@ -85,14 +85,16 @@ describe('the /work index', () => {
     })
   })
 
-  it('says where you are in one text node', async () => {
-    // Three adjacent JSX expressions render as `Page <!-- -->2<!-- --> of
-    // <!-- -->4`, and the comment markers land inside the accessible name a
-    // screen reader reads out. One interpolated string keeps it one node.
+  it('says where you are by marking the page you are on', async () => {
+    // The pager is numbered (#241), so "where you are" is `aria-current` on
+    // one of the four numbers rather than a sentence beside two arrows.
     const paged = await renderRoute(route, {
       data: aCaseStudiesPage(cards, 30),
       searchParams: { page: '2' },
     })
-    expect(paged.html).toContain('>Page 2 of 4<')
+
+    const current = paged.html.match(/<a[^>]*aria-current="page"[^>]*>/)?.[0] ?? ''
+    expect(current).toContain('href="/work?page=2"')
+    expect([...paged.html.matchAll(/aria-current="page"/g)]).toHaveLength(1)
   })
 })
