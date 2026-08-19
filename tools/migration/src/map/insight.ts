@@ -34,27 +34,39 @@ export interface WpPerspective {
   }
 }
 
-export const insightDoc = z.object({
-  /* Both deterministic id forms (README → Rules of the road): `-wp-<id>` for a
-   * migrated post, `-seed-<slug>` for one written here. `verify` re-runs this
-   * gate over the whole dataset, so a seeded insight has to satisfy the
-   * same shape a converted one does — which is the point, not a loophole. */
-  _id: z.string().regex(/^insight-(wp-\d+|seed-[a-z0-9-]+)$/),
-  _type: z.literal('insight'),
-  title: z.string().min(1),
-  slug: z.object({ _type: z.literal('slug'), current: z.string().min(1) }),
-  excerpt: z.string().min(1),
-  /* Optional, because most posts have no byline. See `mapInsight`. */
-  author: z.object({ _type: z.literal('reference'), _ref: z.string() }).optional(),
-  categories: z.array(
-    z.object({ _type: z.literal('reference'), _ref: z.string(), _key: z.string() }),
-  ),
-  publishedAt: z.string().datetime(),
-  featuredImage: z.unknown().optional(),
-  body: z.array(z.record(z.string(), z.unknown())).min(1),
-  seo: seoObject.optional(),
-  migration: z.object({ locked: z.boolean(), sourceId: z.string() }),
-})
+export const insightDoc = z
+  .object({
+    /* Every deterministic id form (README → Rules of the road): `-wp-<id>` for a
+     * post migrated from WordPress, `-framer-<key>` for one migrated from
+     * o3xo.ai, `-seed-<slug>` for one written here. `verify` re-runs this gate
+     * over the whole dataset — both brands' — so a seeded insight has to satisfy
+     * the same shape a converted one does. That is the point, not a loophole. */
+    _id: z.string().regex(/^insight-(wp-\d+|framer-[a-z0-9-]+|seed-[a-z0-9-]+)$/),
+    _type: z.literal('insight'),
+    title: z.string().min(1),
+    slug: z.object({ _type: z.literal('slug'), current: z.string().min(1) }),
+    excerpt: z.string().min(1),
+    /* Optional, because most posts have no byline. See `mapInsight`. */
+    author: z.object({ _type: z.literal('reference'), _ref: z.string() }).optional(),
+    categories: z.array(
+      z.object({ _type: z.literal('reference'), _ref: z.string(), _key: z.string() }),
+    ),
+    publishedAt: z.string().datetime().optional(),
+    featuredImage: z.unknown().optional(),
+    body: z.array(z.record(z.string(), z.unknown())).min(1),
+    seo: seoObject.optional(),
+    migration: z.object({ locked: z.boolean(), sourceId: z.string() }).loose(),
+  })
+  /* `publishedAt` is required of every source that has a date to give, which is
+   * why it is a refinement rather than an optional field: o3xo.ai is the one
+   * source that publishes none — no article date, no head meta, no feed, no
+   * sitemap `lastmod` — and a document from it carries none rather than
+   * carrying the page's build timestamp (`map/framer.ts`). Every other source
+   * must, or a WordPress insight silently loses its date and its ordering. */
+  .refine((doc) => doc.publishedAt !== undefined || doc.migration.sourceId.startsWith('framer:'), {
+    message: 'publishedAt is required — the source publishes a date, so the document must keep it',
+    path: ['publishedAt'],
+  })
 
 export type InsightDoc = z.infer<typeof insightDoc>
 

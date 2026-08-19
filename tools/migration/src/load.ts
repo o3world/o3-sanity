@@ -1,22 +1,28 @@
 /**
- * Load → Sanity dataset. Runs under `sanity exec --with-user-token`.
+ * Load → the brand's Sanity dataset. Runs under `sanity exec --with-user-token`.
  *
  * Lock rule (ADR 0003): a document whose live copy (draft or published) has
  * migration.locked == true is never touched, in any mode. Every other
  * committed document is created-or-replaced **published**, in all three trees
  * (ADR 0016 — the translate track no longer loads drafts-only). Image nodes
- * carrying `_wpSrc` (a WordPress URL) or `_localSrc` (a repo-relative file,
- * for seeds) are resolved to uploaded assets via data/assets.json.
+ * carrying a marker are resolved to uploaded assets via the brand's
+ * `assets.json`.
  *
  *   pnpm --filter @o3/migration load
+ *   pnpm --filter @o3/migration load -- --brand o3xo
+ *
+ * Which corpus and which dataset both follow that one flag: `lib/paths.ts`
+ * resolves the tree from it and `sanity.cli.ts` resolves the project from it,
+ * so a run cannot read one brand's JSON into the other brand's project.
  */
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
-import { join } from 'node:path'
+import { basename, dirname, join } from 'node:path'
 
 import { getCliClient } from 'sanity/cli'
 
 import { ROUTABLE_TYPES } from '@o3/sanity/constants'
 
+import { brandArg } from './lib/brandArg'
 import { CORPUS_DIRS, isPipelineOwned } from './lib/corpus'
 import { isImageBuffer } from './lib/media'
 import { readManifest } from './lib/manifest'
@@ -117,8 +123,8 @@ async function uploadLocalAsset(relativePath: string): Promise<string> {
 }
 
 /**
- * Media that no longer exists on the WordPress server. Six years of posts
- * outlive their uploads: an image referenced in a 2019 body can 404 today.
+ * Media that no longer exists on the source site. Six years of posts outlive
+ * their uploads: an image referenced in a 2019 body can 404 today.
  *
  * Committed, like `assets.json`, and for the same reason — a run has to be
  * reproducible. The first run that meets a dead URL records it and fails, so
@@ -131,13 +137,34 @@ const missingMedia = new Set<string>(
 )
 const newlyMissing = new Set<string>()
 
-/** Every `_wpSrc` URL in a document tree. */
+/**
+ * Every image marker, in the order a node is searched for one. The marker names
+ * where the bytes come from (`map/types.ts`): `_wpSrc` is a WordPress upload
+ * URL, `_srcUrl` a URL on any other source site, `_localSrc` a repo-relative
+ * file committed beside its seed. The first two are fetched, the third is read
+ * off disk — which is the whole of the difference, and `resolveAssets` below is
+ * where it is spent. A source added without a marker here loads its images as
+ * nothing; `verify`'s check 4 is the second half of that guard.
+ */
+const REMOTE_MARKERS = ['_wpSrc', '_srcUrl'] as const
+const MARKERS = [...REMOTE_MARKERS, '_localSrc'] as const
+
+/** The source URL marker on a node, if it has one. */
+function remoteMarkerOn(obj: Record<string, unknown>): string | null {
+  for (const marker of REMOTE_MARKERS) {
+    if (typeof obj[marker] === 'string') return obj[marker]
+  }
+  return null
+}
+
+/** Every source URL in a document tree, whichever marker carries it. */
 function mediaUrlsIn(node: unknown, found: Set<string> = new Set()): Set<string> {
   if (Array.isArray(node)) {
     for (const item of node) mediaUrlsIn(item, found)
   } else if (node && typeof node === 'object') {
     const obj = node as Record<string, unknown>
-    if (typeof obj._wpSrc === 'string') found.add(obj._wpSrc)
+    const url = remoteMarkerOn(obj)
+    if (url) found.add(url)
     for (const value of Object.values(obj)) mediaUrlsIn(value, found)
   }
   return found
@@ -176,10 +203,9 @@ async function preflightMedia(docs: readonly AnyDoc[]) {
 }
 
 /**
- * Recursively resolve image markers to real asset references: `_wpSrc` for a
- * WordPress URL, `_localSrc` for a repo-relative file. A node whose media is
- * gone from WordPress is dropped — an image block with no asset renders as a
- * hole, which is worse than not rendering at all.
+ * Recursively resolve image markers to real asset references. A node whose
+ * media is gone from the source site is dropped — an image block with no asset
+ * renders as a hole, which is worse than not rendering at all.
  */
 async function resolveAssets(node: unknown): Promise<unknown> {
   if (Array.isArray(node)) {
@@ -188,12 +214,12 @@ async function resolveAssets(node: unknown): Promise<unknown> {
   }
   if (node && typeof node === 'object') {
     const obj = node as Record<string, unknown>
-    const marker = typeof obj._wpSrc === 'string' ? '_wpSrc' : '_localSrc'
-    if (typeof obj[marker] === 'string') {
+    const marker = MARKERS.find((name) => typeof obj[name] === 'string')
+    if (marker) {
       const source = obj[marker] as string
-      if (marker === '_wpSrc' && missingMedia.has(source)) return DROPPED
-      const assetId =
-        marker === '_wpSrc' ? await uploadAsset(source) : await uploadLocalAsset(source)
+      const remote = marker !== '_localSrc'
+      if (remote && missingMedia.has(source)) return DROPPED
+      const assetId = remote ? await uploadAsset(source) : await uploadLocalAsset(source)
       const rest = Object.fromEntries(Object.entries(obj).filter(([k]) => k !== marker))
       return { ...rest, asset: { _type: 'reference', _ref: assetId } }
     }
@@ -226,6 +252,10 @@ const DROPPED = Symbol('dropped')
  * the content, and the committed tree stays a pure function of that content.
  */
 const EXTRACT_OF_SOURCE: ReadonlyArray<readonly [prefix: string, extractType: string]> = [
+  // o3xo.ai has one extract type: a category document is derived from the
+  // insight that files itself under it, so it is dated by the same run.
+  ['framer:insight:', 'insight'],
+  ['framer:category:', 'insight'],
   ['wp:post:', 'perspective'],
   ['wp:page:', 'page'],
   ['wp:work:', 'caseStudy'],
@@ -294,6 +324,13 @@ async function main() {
   // between them was the draft rule; what remains is provenance, which the
   // document carries itself.
   const all = CORPUS_DIRS.flatMap((root) => readTree(root))
+  // Said out loud before anything is written, because this command deletes and
+  // recreates every unlocked pipeline-owned document it finds: which brand,
+  // which corpus on disk, which project and dataset it is about to rewrite.
+  console.log(
+    `brand ${brandArg()} · corpus ${basename(dirname(CORPUS_DIRS[0]))}/ · ` +
+      `target ${client.config().projectId}/${client.config().dataset}\n`,
+  )
   if (all.length === 0) {
     console.log('nothing to load')
     return
@@ -421,7 +458,7 @@ async function main() {
 
   if (newlyMissing.size > 0) {
     console.error(
-      `\nMISSING MEDIA (${newlyMissing.size}) — gone from WordPress, dropped from the loaded documents:`,
+      `\nMISSING MEDIA (${newlyMissing.size}) — gone from the source site, dropped from the loaded documents:`,
     )
     for (const url of [...newlyMissing].sort()) console.error(`  ${url}`)
     console.error(

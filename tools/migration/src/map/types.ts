@@ -4,20 +4,27 @@ import type { ConversionIssue } from '../lib/htmlToPortableText'
 
 /**
  * An image in a pipeline-owned document, in either of its two valid states:
- * carrying a `_wpSrc` URL marker before `load` uploads the binary, or an
- * `asset` reference after. Gates are applied to the committed JSON at convert
- * time AND to the dataset by `verify`, so they have to accept both — a gate
- * that only knows the pre-load shape reports every loaded document as broken.
+ * carrying a URL marker before `load` uploads the binary, or an `asset`
+ * reference after. Gates are applied to the committed JSON at convert time AND
+ * to the dataset by `verify`, so they have to accept both — a gate that only
+ * knows the pre-load shape reports every loaded document as broken.
+ *
+ * **The marker names the source the bytes come from.** `_wpSrc` is a WordPress
+ * upload URL, `_srcUrl` a URL on any other source site, `_localSrc` a
+ * repo-relative file (seed imagery, `load.ts`). That is the same rule the
+ * pipeline already followed with two markers; O3XO's Framer source adds the
+ * third. `load.ts` holds the one table of which resolver each takes.
  */
 export const migratableImage = z
   .object({
     _type: z.literal('image'),
     _wpSrc: z.string().url().optional(),
+    _srcUrl: z.string().url().optional(),
     asset: z.object({ _ref: z.string() }).loose().optional(),
   })
   .loose()
-  .refine((image) => Boolean(image._wpSrc ?? image.asset), {
-    message: 'image has neither a _wpSrc marker nor an uploaded asset',
+  .refine((image) => Boolean(image._wpSrc ?? image._srcUrl ?? image.asset), {
+    message: 'image has neither a source URL marker nor an uploaded asset',
   })
 
 /**

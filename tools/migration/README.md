@@ -1,6 +1,7 @@
 # @o3/migration
 
-WordPress→Sanity pipeline. **Temporary** — deleted after the migration ships (ADR 0002, 0003).
+Live site → Sanity pipeline, one extract source per brand. **Temporary** —
+deleted after the migration ships (ADR 0002, 0003).
 
 ```sh
 pnpm --filter @o3/migration extract -- --posts all       # live WP → data/extract/ (terminus wp eval + ACF get_fields)
@@ -13,29 +14,63 @@ pnpm --filter @o3/migration load                         # data/{converted,trans
 pnpm --filter @o3/migration verify                       # is the dataset what data/ says it is?
 ```
 
-**Which dataset?** Every command above resolves it through `resolveDataset()`
-in `@o3/sanity/constants`, which reads `NEXT_PUBLIC_SANITY_DATASET` and falls
-back to **`development`** — so an unconfigured checkout cannot load into the
-live dataset. `pnpm dataset` prints what each entry point is pointed at,
-`pnpm dataset production` switches them together. Check it before `load`: the
-loader deletes and rewrites every pipeline-owned document it finds.
+## Two brands, one pipeline (#217)
+
+**The brand is a parameter of every command**, and it picks three things at
+once: the extract source, the corpus tree on disk, and the Sanity project.
+
+```sh
+pnpm --filter @o3/migration extract -- --brand o3xo --insights all
+pnpm --filter @o3/migration convert -- --brand o3xo
+pnpm --filter @o3/migration load    -- --brand o3xo
+pnpm --filter @o3/migration verify  -- --brand o3xo
+```
+
+| Brand  | Source                            | Corpus       | Project    |
+| ------ | --------------------------------- | ------------ | ---------- |
+| `o3`   | WordPress, via `terminus wp eval` | `data/`      | `naorcr6k` |
+| `o3xo` | o3xo.ai, a Framer site, as HTML   | `data-o3xo/` | `tunpgire` |
+
+No flag means `o3`, so every command above still means what it always meant.
+`NEXT_PUBLIC_BRAND` is honoured as a fallback for entry points with no argv (the
+Studio, the app CLIs), and the flag wins where both are set.
+
+It is a flag rather than an exported variable because `load` deletes and
+rewrites every unlocked pipeline-owned document in whichever dataset it lands
+on. Resolving the brand through the environment alone made that target depend on
+what a shell happened to have exported — and with two brands, the failure is not
+a wrong flag but the wrong company's content. `load` and `verify` both print
+`brand · corpus · target` before they touch anything.
+
+Only the sources differ. The gate (`insightDoc`), the HTML→Portable Text
+converter, the path-parity check, the id contract, the lock rule, `load` and
+`verify` are shared, and `src/map/framer.ts` records what o3xo.ai does not give
+(a date, a byline, a taxonomy) rather than inventing it.
+
+**Which dataset?** Every command above resolves it through brand config
+(`@o3/sanity/brand`), given the run's brand. o3 falls back to **`development`**,
+so an unconfigured checkout cannot load into the live dataset; `pnpm dataset`
+prints what each entry point is pointed at and `pnpm dataset production`
+switches them together. O3XO has one dataset, `production`, and it holds nothing
+but this pipeline's output. Check it before `load`: the loader deletes and
+rewrites every pipeline-owned document it finds.
 
 `verify` runs after every load (#17; #24 reuses it for parity checks). The
 tests check the committed corpus; `verify` checks the thing the corpus was
 supposed to produce, which fails differently — a document can be perfect on
 disk and missing, half-loaded, or shadowed in the dataset. It reports per-type
 counts, then: every committed document present, every reference resolving, no
-`_wpSrc`/`_localSrc` marker left unresolved, every document passing its zod
-gate, no `_type` the schema does not define, no two documents claiming one
-slug, and nothing routable in the dataset that is not committed under `data/`.
+image marker left unresolved, every document passing its zod gate, no `_type`
+the schema does not define, no two documents claiming one slug, and nothing
+routable in the dataset that is not committed under the brand's corpus.
 Non-zero exit on any finding.
 
 Rules of the road:
 
 - **Committed JSON is the source of truth; the dataset is disposable.** `load` creates-or-replaces every pipeline-owned document — `converted/`, `seed/` and `translated/` alike — as **published** ([ADR 0016](../../docs/adr/0016-publish-what-wordpress-publishes.md)), and deletes any draft still shadowing one it writes.
 - **A document with `migration.locked: true` is never touched, in any mode.** Editors lock documents they take over (Studio toggle).
-- Deterministic IDs: `<type>-wp-<id>` (migrated), `<type>-seed-<slug>` (greenfield).
-- Image nodes carry a `_wpSrc` URL marker until `load` uploads the binary and swaps in an asset ref; `data/assets.json` is the URL→asset audit map. Binaries cache in `data/media-cache/` (gitignored).
+- Deterministic IDs name the source: `<type>-wp-<id>` (WordPress), `<type>-framer-<key>` (o3xo.ai), `<type>-seed-<slug>` (greenfield).
+- **An image marker names where the bytes come from** — `_wpSrc` a WordPress upload, `_srcUrl` a URL on any other source site, `_localSrc` a repo-relative file committed beside its seed. `load` holds the one table of which resolver each takes, and swaps in an asset ref at upload time; the brand's `assets.json` is the URL→asset audit map. Binaries cache in `media-cache/` (gitignored).
 - Agent translation (case studies): input = `data/extract/` + `rules/<type>.md` + typegen types; output = `data/translated/` with `_meta` provenance; reviewed as a PR before loading.
 - **A PHP snippet passed to `wpEval` may contain no single quotes and no `//` comments.** It is flattened to one line before it is sent, so a line comment silently comments out the rest of the program; `wpEval` rejects both up front. Explain the PHP in the TypeScript doc comment above it.
 
@@ -386,3 +421,95 @@ description, image, path, `ogType`), never finished `Metadata` — which is what
 stops the next content type from shipping with a title and nothing else.
 Canonical is derived (a page is its own canonical) unless a document
 explicitly points elsewhere.
+
+---
+
+## The O3XO source: what one insight proved, and what it cost (#217)
+
+One article — `human-in-the-loop-ai-workflows` — goes extract → convert → load →
+render on `apps/o3xo`. It was picked because it is **O3XO-native**: 22 of the 40
+insights on o3xo.ai are o3world.com posts republished under the same slug, and a
+tracer that borrowed one of those would have proved the easy half.
+
+`src/lib/framer.ts` is the source adapter, `src/map/framer.ts` the mapper, and
+between them they answer the questions the WordPress source never had to.
+
+### Extraction is a parse, so the parse is the fail-loud surface
+
+Framer exposes no CMS API to a site's own owner, so the only record of an
+article is the page it serves. The parse hangs off `data-framer-name` — the
+region names authored in the Framer file — and never off generated class names
+(`framer-daqsm4`), which change on every publish. Three shapes it depends on,
+each of which throws rather than returning a half-record:
+
+- `[data-framer-name="Hero"]` holds exactly **three** rich-text lines: eyebrow,
+  headline, deck. Framer emits one copy of each per breakpoint variant, so
+  consecutive duplicates collapse before they are counted.
+- The **first** rich-text container inside `[data-framer-name="Content"]` is the
+  body. The others in that region are the share widget and the related-article
+  cards.
+- The body must hold at least one paragraph.
+
+The body stays verbatim HTML in the extract snapshot, exactly as WordPress's
+`text_editor` does, so `convert` remains the only place a mapping decision is
+made — and it runs the same `convertHtml` both sources run.
+
+### o3xo.ai publishes no date
+
+Not on the article, not in the head, not in a feed, not as `lastmod` in the
+sitemap. The only timestamps in the HTML are `data-framer-ssr-released-at` and
+`data-framer-page-optimized-at`, which are the last time the **site** was built:
+the same value on every article, and this week's date for a piece written in 2024.
+
+So a migrated insight carries **no `publishedAt`**, is marked provisional saying
+why, and `verify` counts it out loud every run. `insightDoc` enforces the field
+for every other source, so a WordPress insight cannot lose its date through the
+same hole. The consequences are real and visible: the card meta reads `4 MINS`
+where o3's reads `4 MINS · 7/27/26`, and `order(publishedAt desc)` has nothing
+to sort by.
+
+**The 22 articles with an o3world.com twin have a real date in `data/extract/`,
+under the same slug.** That is where the fix comes from, and it is a decision
+about content rather than about the pipeline.
+
+### Three more things the source does not carry
+
+- **No byline.** No author is rendered anywhere on o3xo.ai, so none is migrated
+  and no `person` document is created — the answer #32 reached for 232 of o3's
+  own articles.
+- **No taxonomy.** The eyebrow above the headline is the only label an article
+  has, authored as free text on the CMS item. It becomes the one `category`
+  reference, and the category documents are reference-driven like `person`.
+- **A deck that is not the meta description.** They are different sentences and
+  they mean different things: the deck is the `excerpt` a reader sees, the
+  description is the search-result line. Collapsing them would put SEO copy on
+  the page. The `<title>` is the headline plus ` | O3XO`, which is what the app's
+  own title template already composes, so no `seo.title` is stored.
+
+### Asset identity is the path, not the URL
+
+Framer serves every size of one picture off one path with a different resize
+query (`?scale-down-to=512&width=2160&height=2160`), so the query is a rendering
+instruction rather than part of the asset. Markers store the bare path — the
+same rule `normalizeUploadUrl` enforces for WordPress thumbnails, and the reason
+`assets.json` does not end up with one entry per srcset row.
+
+### What #218 inherits
+
+- The extract takes `--slugs a,b` or `--insights N|all`, and the sitemap is the
+  inventory (40 insight URLs, in the order the site publishes them — the only
+  ordering evidence there is).
+- **Two slugs carry a curly apostrophe.** The URL keeps it, because the site
+  serves it and path parity requires it; the id key is reduced to what a Sanity
+  `_id` may hold. `wpPath` decodes the pathname for the same reason.
+- Bodies use `<p>`, `<h3>`, `<ul>/<li>`, `<strong>` and `<a>` — every one of
+  which the `bodyText` schema already allows. The one insight converted needed
+  no new mapper arm.
+- Body links to the site's own pages are **absolute** (`https://www.o3xo.ai/contact/`)
+  and are migrated as written. Relativising them is the launch-cutover audit's
+  job, alongside the redirect audit.
+- O3XO's site chrome is extractable from o3xo.ai and is not extracted yet: the
+  ld+json `sameAs` carries the LinkedIn URL, the footer carries the legal name
+  and the privacy link. Until it is, `siteSettings` stays the hand-seeded
+  bootstrap #215 wrote, and `verify` applies `siteSettingsDoc` — which describes
+  the **WordPress chrome extract** — only to WordPress-sourced settings.

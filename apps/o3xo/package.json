@@ -7,7 +7,6 @@
     "dev": "../../scripts/dev.sh o3xo",
     "format": "prettier --write .",
     "lint": "eslint src/",
-    "seed": "sanity exec seed/load.ts --with-user-token --",
     "start": "next start",
     "typecheck": "tsc --noEmit"
   },

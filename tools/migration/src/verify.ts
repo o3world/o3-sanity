@@ -1,5 +1,5 @@
 /**
- * Verify → is the dataset actually what the committed JSON says it is?
+ * Verify → is the brand's dataset actually what its committed JSON says it is?
  *
  * Runs after every load (#17, reused by #24 for parity checks). The tests
  * check the committed corpus; this checks the thing the corpus was supposed
@@ -7,6 +7,11 @@
  * disk and missing, half-loaded, or shadowed in the dataset.
  *
  *   pnpm --filter @o3/migration verify
+ *   pnpm --filter @o3/migration verify -- --brand o3xo
+ *
+ * The brand picks both sides of the comparison — the corpus tree and the
+ * dataset — so pointing it at one brand's dataset while holding the other's
+ * JSON is not a thing it can be asked to do.
  *
  * Exits non-zero on any finding, so it works as a checkpoint rather than a
  * report nobody reads.
@@ -21,6 +26,7 @@ import { schemaTypes } from '@o3/sanity/schemas'
 import type { Migration } from '@o3/sanity/types/generated'
 
 import { isImageAssetId } from './lib/media'
+import { brandArg } from './lib/brandArg'
 import { BRIEF_ID, CORPUS_DIRS, isInternalType, refsIn } from './lib/corpus'
 import { untouchedPlaceholders } from './lib/placeholders'
 import { categoryDoc } from './map/category'
@@ -32,12 +38,32 @@ const client = getCliClient({ apiVersion: '2026-07-01' })
 
 type AnyDoc = { _id: string; _type: string; [k: string]: unknown }
 
-/** Zod gates by type. A type without one is only checked structurally. */
-const GATES: Record<string, { safeParse: (v: unknown) => { success: boolean } }> = {
-  insight: insightDoc,
-  category: categoryDoc,
-  person: personDoc,
-  siteSettings: siteSettingsDoc,
+/**
+ * Zod gates by type. A type without one is only checked structurally.
+ *
+ * A gate describes what a mapper produces, so `only` is how one that describes
+ * a single source says so. `siteSettingsDoc` is the shape of the **WordPress
+ * chrome extract** — nav menus plus the ACF options page, which is where its
+ * required socials, legal links and legal name come from. O3XO has no chrome
+ * extract yet, so its singleton is a hand-seeded bootstrap with those fields
+ * genuinely absent (#215), and holding it to o3's gate would fail `verify` over
+ * facts about the O3XO entity that nothing has extracted. Its shape is asserted
+ * in `o3xo.test.ts` against what the chrome actually renders.
+ */
+type Gate = {
+  readonly schema: { safeParse: (v: unknown) => { success: boolean } }
+  readonly only?: (doc: AnyDoc) => boolean
+}
+
+const GATES: Record<string, Gate> = {
+  insight: { schema: insightDoc },
+  category: { schema: categoryDoc },
+  person: { schema: personDoc },
+  siteSettings: {
+    schema: siteSettingsDoc,
+    only: (doc) =>
+      ((doc.migration as { sourceId?: string } | undefined)?.sourceId ?? '').startsWith('wp:'),
+  },
 }
 
 const SCHEMA_TYPE_NAMES = new Set(schemaTypes.map((t) => t.name))
@@ -114,7 +140,8 @@ async function main() {
   const liveById = new Map(live.map((d) => [d._id, d]))
 
   console.log(
-    `committed: ${committed.length} documents · dataset: ${live.length} documents · ` +
+    `brand ${brandArg()} · committed: ${committed.length} documents · ` +
+      `dataset: ${live.length} documents · ` +
       `${client.config().projectId}/${client.config().dataset}\n`,
   )
 
@@ -173,10 +200,12 @@ async function main() {
   }
   report('every image field holds an image asset', wrongAssetKind)
 
-  // 4. No image marker survived the load. A `_wpSrc` or `_localSrc` left in
-  //    the dataset means the upload was skipped and the image is invisible.
+  // 4. No image marker survived the load. A source marker left in the dataset
+  //    means the upload was skipped and the image is invisible. All three, by
+  //    the table in `load.ts`: a new source whose marker is missing here would
+  //    load its images as nothing and pass this check.
   const unresolvedMedia = live
-    .filter((doc) => /"_(wpSrc|localSrc)":/.test(JSON.stringify(doc)))
+    .filter((doc) => /"_(wpSrc|srcUrl|localSrc)":/.test(JSON.stringify(doc)))
     .map((doc) => `${doc._id} still carries an unresolved image marker`)
   report('every image resolved to an asset', unresolvedMedia)
 
@@ -185,7 +214,8 @@ async function main() {
   const invalid: string[] = []
   for (const doc of live) {
     const gate = GATES[doc._type]
-    if (gate && !gate.safeParse(doc).success) invalid.push(`${doc._id} fails the ${doc._type} gate`)
+    if (!gate || (gate.only && !gate.only(doc))) continue
+    if (!gate.schema.safeParse(doc).success) invalid.push(`${doc._id} fails the ${doc._type} gate`)
   }
   report('every document validates against its schema gate', invalid)
 

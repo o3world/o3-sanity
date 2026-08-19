@@ -93,19 +93,27 @@ Differences from `apps/web` beyond project and tokens, each one deliberate:
 - **No stories.** Storybook stays a single host with the Brand toolbar as the
   paint-leak test until O3XO has a genuinely divergent component.
 
-## The seed
+## The content
 
-`seed/` is a bootstrap, not a corpus: a homepage and a `siteSettings` document,
-enough for the dev server to render something in O3XO's paint and for an editor
-to open the Studio on a real page.
+Every document in `tunpgire/production` comes from the migration pipeline, which
+takes the brand as a flag (`tools/migration/README.md` → Two brands, one
+pipeline):
 
 ```sh
-pnpm --filter @o3/o3xo seed
+pnpm --filter @o3/migration extract -- --brand o3xo --insights all
+pnpm --filter @o3/migration convert -- --brand o3xo
+pnpm --filter @o3/migration load    -- --brand o3xo
+pnpm --filter @o3/migration verify  -- --brand o3xo
 ```
 
-Both documents are marked `provisional` with a note saying so, and both carry the
-pipeline's deterministic ids (`page-seed-index`, `siteSettings`). Real O3XO
-content arrives through the migration pipeline's second extract source (#217,
-#218), which also owns teaching `verify` about this dataset — until it does,
-`verify` knows nothing about `tunpgire` and would report every document in it as
-an orphan.
+The corpus is committed under `tools/migration/data-o3xo/` and is the source of
+truth (ADR 0003): `load` recreates every unlocked document from it, so a section
+added in Studio lives only in the dataset until it is seeded.
+
+This app had its own `seed/` script until #217. It does not any more — the
+homepage and the `siteSettings` singleton it wrote are `data-o3xo/seed/`, byte
+for byte and under the same ids, because two things writing one dataset is one
+too many and `verify` reports anything it did not write as an orphan. Both are
+still marked `provisional`: the homepage is scaffolding until the adaptation
+delta is reviewed, and the settings document holds the minimum the chrome needs
+until O3XO's own site chrome is extracted from o3xo.ai.

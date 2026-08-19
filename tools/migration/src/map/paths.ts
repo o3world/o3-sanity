@@ -86,16 +86,22 @@ export function movedPath(from: string): string | null {
 
 /**
  * `https://www.o3world.com/perspectives/foo/` → `/perspectives/foo`. The input
- * is a WordPress URL, so it still carries WordPress's prefix; `movedPath` is
- * what turns that into the path this site serves.
+ * is a live site's canonical, so it still carries that site's prefix;
+ * `movedPath` is what turns it into the path this site serves.
  * Returns `null` for input that isn't a URL with a path, which is itself a
  * parity failure the caller reports.
+ *
+ * The pathname is decoded, because `new URL()` percent-encodes anything outside
+ * ASCII and a slug is compared against a stored one that is not encoded. Two of
+ * o3xo.ai's insight slugs carry a curly apostrophe, and their canonicals arrive
+ * as `…on-pact%E2%80%99s-…` — which reads as a moved path against the slug the
+ * document actually holds.
  */
 export function wpPath(canonicalUrl: string): string | null {
   if (!canonicalUrl) return null
   let pathname: string
   try {
-    pathname = new URL(canonicalUrl).pathname
+    pathname = decodeURIComponent(new URL(canonicalUrl).pathname)
   } catch {
     return null
   }
@@ -104,19 +110,25 @@ export function wpPath(canonicalUrl: string): string | null {
 }
 
 /**
- * Compare the path a document will be served at against the one WordPress
- * serves today. Returns the issue to report, or `null` when they agree (or
- * when the difference is a recorded exception).
+ * Compare the path a document will be served at against the one its source
+ * serves today. Returns the issue to report, or `null` when they agree (or when
+ * the difference is a recorded exception).
+ *
+ * `source` names the live site in the message, because the rule now guards two
+ * of them: WordPress for o3, o3xo.ai for O3XO. The exception lists are o3's
+ * facts and no O3XO path is in them, which is correct — O3XO's URL space is the
+ * one ADR 0001 already routes, so nothing there moves.
  */
 export function checkPathParity(
   canonicalRendered: string,
   newPath: string,
+  source = 'WordPress',
 ): ConversionIssue | null {
   const from = wpPath(canonicalRendered)
   if (from === null) {
     return {
       element: 'path parity',
-      detail: `no usable WordPress canonical to compare against (got ${JSON.stringify(canonicalRendered)})`,
+      detail: `no usable ${source} canonical to compare against (got ${JSON.stringify(canonicalRendered)})`,
     }
   }
   if (from === newPath) return null
@@ -126,7 +138,7 @@ export function checkPathParity(
   return {
     element: 'path parity',
     detail:
-      `WordPress serves "${from}" but this document maps to "${newPath}". ` +
+      `${source} serves "${from}" but this document maps to "${newPath}". ` +
       `Either fix the slug or record the change in PATH_EXCEPTIONS / PATH_PREFIX_EXCEPTIONS (map/paths.ts) so it becomes a redirect.`,
   }
 }
