@@ -1,0 +1,119 @@
+{
+  "_id": "page-framer-about-approach",
+  "_type": "page",
+  "title": "AI strategy to activation: A unified approach for organizational success",
+  "slug": {
+    "_type": "slug",
+    "current": "about/approach"
+  },
+  "pageType": "standard",
+  "sections": [
+    {
+      "_type": "heroSection",
+      "_key": "hero",
+      "variant": "band",
+      "headlineLines": [
+        "AI strategy to activation: A unified approach for organizational success"
+      ],
+      "subheading": "Transform AI ambitions into measurable outcomes through our proven strategy and activation methodology. We guide teams from initial assessment to full-scale deployment, ensuring initiatives deliver business value while building internal capabilities for sustained success.",
+      "decoration": "none"
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "process",
+      "surface": "white",
+      "layout": "rows",
+      "heading": "From strategy to measurable results",
+      "intro": "We unite teams and leadership to move from AI planning to execution. We deliver solutions that enhance expertise and drive competitive advantage.",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "educate-explore",
+          "railLabel": "Educate → Explore",
+          "heading": "AI strategy process",
+          "body": "Up front AI education to align team members and comprehensive assessment to identify high-value use cases, prioritize initiatives, and create your AI roadmap.",
+          "details": [
+            {
+              "_type": "detail",
+              "_key": "educate-align",
+              "label": "Educate + Align",
+              "items": [
+                "Educate and align team members on AI's potential and identify opportunities across your operations; assess current systems and workflows."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "evaluate-plan",
+              "label": "Evaluate + Plan",
+              "items": [
+                "Prioritize workshop initiatives based on ROI potential and develop phased implementation roadmap aligned with your business priorities."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "launch-learn",
+              "label": "Launch + Learn",
+              "items": [
+                "Develop and deploy custom AI solutions on pilot initiatives, gather feedback from key stakeholders, refine based on real-world operational requirements."
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "panel",
+          "_key": "execute-adopt",
+          "railLabel": "Execute → Adopt",
+          "heading": "AI activation services to build, learn + scale",
+          "body": "Rapid pilot preparation, development and iteration that proves value in real operations, then scales winning solutions across your entire organization.",
+          "details": [
+            {
+              "_type": "detail",
+              "_key": "ideate-explore",
+              "label": "Ideate + Explore",
+              "items": [
+                "Workshop with leadership and operational teams to generate use cases that reduce manual effort and improve performance."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "design-prepare",
+              "label": "Design + Prepare",
+              "items": [
+                "Design core AI architecture and integrate with your existing technology systems; prepare data for pilot programs."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "scale-embed",
+              "label": "Scale + Embed",
+              "items": [
+                "Roll out across the organization, train teams, establish best practices, and build internal champions."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "ctaSection",
+      "_key": "closer",
+      "heading": "Stop guessing, start discovering",
+      "body": "Identify the AI use cases that matter most for your business.",
+      "button": {
+        "_type": "button",
+        "label": "Get started: Schedule a consultation",
+        "href": "/contact"
+      },
+      "decoration": "none"
+    }
+  ],
+  "seo": {
+    "description": "From education to execution, we guide organizations through AI strategy and activation using our proven Educate → Explore → Execute → Adopt framework."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:page:about/approach",
+    "provisional": true,
+    "provisionalNote": "Migrated from o3xo.ai band by band into O3’s block roster (#220). Provisional because the composition is a translation rather than a design: the hero carries no background photograph, curated case-study and insight cards are left to be derived, and anything the source does not serve — the FAQ answers, the team bios — is absent rather than invented. Cleared when the adaptation delta is reviewed and the page is composed against O3XO’s own design."
+  }
+}

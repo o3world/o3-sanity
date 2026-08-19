@@ -1,0 +1,197 @@
+{
+  "_id": "page-framer-about",
+  "_type": "page",
+  "title": "Built from 20 years of digital transformation expertise",
+  "slug": {
+    "_type": "slug",
+    "current": "about"
+  },
+  "pageType": "standard",
+  "sections": [
+    {
+      "_type": "heroSection",
+      "_key": "hero",
+      "variant": "band",
+      "headlineLines": [
+        "Built from 20 years of digital transformation expertise"
+      ],
+      "subheading": "O3XO was created when we saw organizations making the same AI mistakes we've spent decades helping clients avoid: chasing hype, building unused tools, investing without ROI. We bring proven methodology to cut through the noise and activate measurable advantage.",
+      "decoration": "none"
+    },
+    {
+      "_type": "layoutSection",
+      "_key": "origin",
+      "surface": "white",
+      "columns": 1,
+      "heading": "Reaching beyond the familiar",
+      "items": [
+        {
+          "_type": "richText",
+          "_key": "origin-body",
+          "body": [
+            {
+              "_key": "k0000",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "O3XO was born from O3's recognition that AI requires a specialized approach, one that combines strategic thinking with hands-on execution. The \"XO\" in our name draws inspiration from the exosphere, Earth's outermost atmospheric layer and symbol of the frontier beyond O3, the ozone layer that represents our core brand.",
+                  "_key": "k0001"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            },
+            {
+              "_key": "k0002",
+              "children": [
+                {
+                  "_type": "span",
+                  "marks": [],
+                  "text": "Just as the exosphere represents the boundary between Earth's atmosphere and space, O3XO helps organizations reach beyond the crowded noise of AI hype into the clearer territory where real results happen.",
+                  "_key": "k0003"
+                }
+              ],
+              "markDefs": [],
+              "_type": "block",
+              "style": "normal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "why",
+      "surface": "bone",
+      "layout": "cards",
+      "heading": "Why O3XO",
+      "intro": "We help businesses like yours use AI in meaningful, measurable ways.",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "industry-focused-expertise",
+          "railLabel": "Industry-focused expertise",
+          "heading": "Industry-focused expertise",
+          "body": "Deep knowledge of AI use cases and complex workflows tailored to specific industries where AI delivers the highest impact."
+        },
+        {
+          "_type": "panel",
+          "_key": "prove-value-quickly",
+          "railLabel": "Prove value quickly",
+          "heading": "Prove value quickly",
+          "body": "From strategy to measurable results through low-risk pilots and clear, phased roadmaps"
+        },
+        {
+          "_type": "panel",
+          "_key": "integration-without-disruption",
+          "railLabel": "Integration without disruption",
+          "heading": "Integration without disruption",
+          "body": "Solutions designed to enhance team capabilities while working within your existing systems and processes."
+        },
+        {
+          "_type": "panel",
+          "_key": "strategy-execution-partnership",
+          "railLabel": "Strategy + execution partnership",
+          "heading": "Strategy + execution partnership",
+          "body": "We don't just hand you a roadmap; we stay with you through implementation, scaling, and success."
+        }
+      ]
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "principles",
+      "surface": "ink",
+      "layout": "cards",
+      "heading": "Our guiding principles for responsible AI",
+      "intro": "AI projects fail when organizations chase technology for technology's sake. Our guiding principles ensure every AI initiative we undertake delivers real business value while respecting the human elements that make organizations successful.",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "impact-first-quickly-effectively",
+          "railLabel": "Impact first, quickly + effectively",
+          "heading": "Impact first, quickly + effectively",
+          "body": "We establish clear success metrics upfront, launch working use cases within 90 days, and make decisive go or no-go decisions based on actual performance - not potential."
+        },
+        {
+          "_type": "panel",
+          "_key": "safe-responsible-by-default",
+          "railLabel": "Safe + responsible by default",
+          "heading": "Safe + responsible by default",
+          "body": "Security, compliance, and ethical considerations are built into every solution from day one. We provide guidance on usage and governance policies as a core offering"
+        },
+        {
+          "_type": "panel",
+          "_key": "reusable-solutions-not-just-projects",
+          "railLabel": "Reusable solutions, not just projects",
+          "heading": "Reusable solutions, not just projects",
+          "body": "We create scalable frameworks, reusable components, and documented processes that can be applied across your organization and adapted to your existing technology investments."
+        },
+        {
+          "_type": "panel",
+          "_key": "human-looped-by-design",
+          "railLabel": "Human-looped by design",
+          "heading": "Human-looped by design",
+          "body": "Our solutions enhance your team's expertise rather than replacing them. We look to elevate human capabilities while providing the training needed for successful adoption."
+        },
+        {
+          "_type": "panel",
+          "_key": "data-reality-over-ai-fantasy",
+          "railLabel": "Data reality over AI fantasy",
+          "heading": "Data reality over AI fantasy",
+          "body": "We start with your actual data and existing systems. We select the simplest solutions that deliver results rather than overly complex, sophisticated plans that may fall short."
+        }
+      ]
+    },
+    {
+      "_type": "personGridSection",
+      "_key": "team",
+      "surface": "white",
+      "heading": "Leading with years of AI expertise",
+      "people": [
+        {
+          "_type": "reference",
+          "_ref": "person-framer-mike-gadsby",
+          "_key": "ref-mike-gadsby"
+        },
+        {
+          "_type": "reference",
+          "_ref": "person-framer-josh-friedman",
+          "_key": "ref-josh-friedman"
+        },
+        {
+          "_type": "reference",
+          "_ref": "person-framer-brady-halligan",
+          "_key": "ref-brady-halligan"
+        },
+        {
+          "_type": "reference",
+          "_ref": "person-framer-diego-morales",
+          "_key": "ref-diego-morales"
+        }
+      ]
+    },
+    {
+      "_type": "ctaSection",
+      "_key": "closer",
+      "heading": "Stop guessing, start discovering",
+      "body": "Identify the AI use cases that matter most for your business.",
+      "button": {
+        "_type": "button",
+        "label": "Get started: Schedule a consultation",
+        "href": "/contact"
+      },
+      "decoration": "none"
+    }
+  ],
+  "seo": {
+    "description": "O3XO emerged from 20+ years of digital transformation expertise to help organizations activate AI advantage through strategic implementation focused on measurable ROI."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:page:about",
+    "provisional": true,
+    "provisionalNote": "Migrated from o3xo.ai band by band into O3’s block roster (#220). Provisional because the composition is a translation rather than a design: the hero carries no background photograph, curated case-study and insight cards are left to be derived, and anything the source does not serve — the FAQ answers, the team bios — is absent rather than invented. Cleared when the adaptation delta is reviewed and the page is composed against O3XO’s own design."
+  }
+}

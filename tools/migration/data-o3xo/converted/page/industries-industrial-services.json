@@ -1,0 +1,157 @@
+{
+  "_id": "page-framer-industries-industrial-services",
+  "_type": "page",
+  "title": "AI solutions engineered for industrial services",
+  "slug": {
+    "_type": "slug",
+    "current": "industries/industrial-services"
+  },
+  "pageType": "standard",
+  "sections": [
+    {
+      "_type": "heroSection",
+      "_key": "hero",
+      "variant": "band",
+      "headlineLines": [
+        "AI solutions engineered for industrial services"
+      ],
+      "subheading": "Manufacturing, utilities, and heavy industry face constant pressure to optimize costs, ensure safety, and share product-specific knowledge. Our AI solutions help you reduce risk and maximize performance by integrating with your existing workflows to automate critical processes, share knowledge and streamline operations.",
+      "decoration": "none"
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "pain-points",
+      "surface": "bone",
+      "layout": "cards",
+      "heading": "Your operational costs are eating into margins",
+      "intro": "Eliminate these bottlenecks and drive consistent performance improvements through AI.",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "slow-proposal-rfp-responses",
+          "railLabel": "Slow proposal + RFP responses",
+          "heading": "Slow proposal + RFP responses",
+          "body": "Your sales team spends weeks pricing complex projects, often losing opportunities to faster competitors. Automated estimation tools analyze project specifications and generate accurate, customized proposals in days instead of weeks."
+        },
+        {
+          "_type": "panel",
+          "_key": "inefficient-inventory-management",
+          "railLabel": "Inefficient inventory management",
+          "heading": "Inefficient inventory management",
+          "body": "Critical parts run out while excess inventory ties up working capital across multiple facilities. Smart procurement systems optimize stock levels and automate reordering based on usage patterns and lead times."
+        },
+        {
+          "_type": "panel",
+          "_key": "inconsistent-training-knowledge-transfer",
+          "railLabel": "Inconsistent training + knowledge transfer",
+          "heading": "Inconsistent training + knowledge transfer",
+          "body": "Experienced operators retire while new hires struggle with complex procedures and safety protocols. AI-powered knowledge and training systems deliver personalized response and capture institutional knowledge before it walks out the door."
+        },
+        {
+          "_type": "panel",
+          "_key": "limited-visibility-into-operational-perf",
+          "railLabel": "Limited visibility into operational performance",
+          "heading": "Limited visibility into operational performance",
+          "body": "Your team struggles to track KPIs across multiple facilities and processes, making it difficult to identify improvement opportunities. Real-time analytics dashboards provide instant visibility into performance metrics and highlight areas for optimization."
+        }
+      ]
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "process",
+      "surface": "white",
+      "layout": "rows",
+      "heading": "From strategy to operational excellence",
+      "intro": "We unite leadership and operations teams to move from AI planning to measurable results. We deliver solutions that enhance industrial expertise and drive competitive advantage.",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "educate-explore",
+          "railLabel": "Educate → Explore",
+          "heading": "AI strategy process for industrial services",
+          "body": "Up front AI education to align team members and comprehensive assessment to identify where AI can reduce costs, improve safety, and preserve institutional knowledge.",
+          "details": [
+            {
+              "_type": "detail",
+              "_key": "educate-align",
+              "label": "Educate + Align",
+              "items": [
+                "Align team members on AI's potential and identify opportunities from proposal generation to training systems; assess current infrastructure including ERP, procurement, and operations workflows."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "evaluate-plan",
+              "label": "Evaluate + Plan",
+              "items": [
+                "Prioritize workshop initiatives based on ROI potential and develop phased implementation roadmap aligned with your operational priorities."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "launch-learn",
+              "label": "Launch + Learn",
+              "items": [
+                "Develop and deploy custom AI solutions for pilot projects, gather feedback from operators, managers, and key personnel; refine based on real-world industrial challenges."
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "panel",
+          "_key": "execute-adopt",
+          "railLabel": "Execute → Adopt",
+          "heading": "AI activation services to build, learn + scale",
+          "body": "Rapid pilot preparation, development and iteration that proves value in real operations, then scales winning solutions across your entire business.",
+          "details": [
+            {
+              "_type": "detail",
+              "_key": "ideate-explore",
+              "label": "Ideate + Explore",
+              "items": [
+                "Workshop with leadership, operations, safety managers, and procurement teams to generate use cases that create revenue opportunities, optimize costs and ensure compliance."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "design-prepare",
+              "label": "Design + Prepare",
+              "items": [
+                "Design core AI architecture and integrate with key technology platforms including ERP, procurement, and operations systems; prepare data for pilot projects."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "scale-embed",
+              "label": "Scale + Embed",
+              "items": [
+                "Roll out across all facilities, train key employees including operations and safety teams, establish best practices, and build internal champions."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "ctaSection",
+      "_key": "closer",
+      "heading": "Stop guessing, start discovering",
+      "body": "Identify the AI use cases that matter most for your business.",
+      "button": {
+        "_type": "button",
+        "label": "Get started: Schedule a consultation",
+        "href": "/contact"
+      },
+      "decoration": "none"
+    }
+  ],
+  "seo": {
+    "description": "Optimize costs, ensure safety, and preserve institutional knowledge with AI-powered solutions designed for manufacturing, utilities, and heavy industry."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:page:industries/industrial-services",
+    "provisional": true,
+    "provisionalNote": "Migrated from o3xo.ai band by band into O3’s block roster (#220). Provisional because the composition is a translation rather than a design: the hero carries no background photograph, curated case-study and insight cards are left to be derived, and anything the source does not serve — the FAQ answers, the team bios — is absent rather than invented. Cleared when the adaptation delta is reviewed and the page is composed against O3XO’s own design."
+  }
+}

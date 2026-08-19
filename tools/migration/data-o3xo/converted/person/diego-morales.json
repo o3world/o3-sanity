@@ -1,0 +1,14 @@
+{
+  "_id": "person-framer-diego-morales",
+  "_type": "person",
+  "name": "Diego Morales",
+  "title": "VP of AI Solutions",
+  "headshot": {
+    "_type": "image",
+    "_srcUrl": "https://framerusercontent.com/images/PpmSrcBVSG6W6FYm3xINSZPgmys.png"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:person:diego-morales"
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "_id": "page-framer-industries-finance-insurance",
+  "_type": "page",
+  "title": "AI solutions making finance + insurance more accessible",
+  "slug": {
+    "_type": "slug",
+    "current": "industries/finance-insurance"
+  },
+  "pageType": "standard",
+  "sections": [
+    {
+      "_type": "heroSection",
+      "_key": "hero",
+      "variant": "band",
+      "headlineLines": [
+        "AI solutions making finance + insurance more accessible"
+      ],
+      "subheading": "Financial and insurance institutions must navigate complex regulations while delivering faster, personalized customer experiences. Our AI solutions help you accelerate growth and manage risk by automating underwriting, enhancing operations, and ensuring compliance.",
+      "decoration": "none"
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "pain-points",
+      "surface": "bone",
+      "layout": "cards",
+      "heading": "Legacy processes are constraining operations",
+      "intro": "AI solutions can transform these operational challenges into competitive advantages.",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "slow-underwriting-loan-processing",
+          "railLabel": "Slow underwriting + loan processing",
+          "heading": "Slow underwriting + loan processing",
+          "body": "Your underwriting and loan processing teams spend days manually reviewing applications, creating customer friction and competitive disadvantage. Automated analysis processes applications in minutes while improving the customer experience."
+        },
+        {
+          "_type": "panel",
+          "_key": "proactive-insight-generation-for-advisor",
+          "railLabel": "Proactive insight generation for advisors",
+          "heading": "Proactive insight generation for advisors",
+          "body": "Financial advisors lack real-time customer intelligence to anticipate needs and deliver personalized guidance. AI-powered analytics generate actionable insights that enable targeted outreach, timely advice, and proactive service interventions."
+        },
+        {
+          "_type": "panel",
+          "_key": "inefficient-claims-management",
+          "railLabel": "Inefficient claims management",
+          "heading": "Inefficient claims management",
+          "body": "Insurance claims sit in queues for weeks while manual review processes miss important details. AI-powered claims intelligence automatically validates submissions, detects anomalies, and fast-tracks legitimate claims while flagging suspicious activity for investigation."
+        },
+        {
+          "_type": "panel",
+          "_key": "disconnected-data-personalization-gaps",
+          "railLabel": "Disconnected data + personalization gaps",
+          "heading": "Disconnected data + personalization gaps",
+          "body": "Customer insights remain siloed across products and channels, limiting cross-sell opportunities and personalized delivery. Unified intelligence platforms provide 360-degree views that enable personalized recommendations and proactive interventions."
+        }
+      ]
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "process",
+      "surface": "white",
+      "layout": "rows",
+      "heading": "From strategy to customer lifetime value",
+      "intro": "From AI planning to measurable results, we unite risk, operations, and advisory teams to deliver solutions that enhance financial and insurance services expertise and accelerate competitive advantage.",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "educate-explore",
+          "railLabel": "Educate → Explore",
+          "heading": "AI strategy process for finance + insurance",
+          "body": "Up front AI education to align team members and comprehensive assessment to identify where AI can accelerate underwriting, streamline claims processing, and enable proactive customer insights.",
+          "details": [
+            {
+              "_type": "detail",
+              "_key": "educate-align",
+              "label": "Educate + Align",
+              "items": [
+                "Align team members on AI's potential and identify opportunities from underwriting to customer intelligence; assess current technical infrastructure and data across core banking, claims, and CRM systems."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "evaluate-plan",
+              "label": "Evaluate + Plan",
+              "items": [
+                "Prioritize workshop initiatives based on ROI potential and develop phased implementation roadmap aligned with your growth and compliance priorities."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "launch-learn",
+              "label": "Launch + Learn",
+              "items": [
+                "Develop and deploy custom AI solutions on pilot projects, gather feedback from key personnel including leadership, underwriting and operations teams, refine based on real-world regulatory and customer requirements."
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "panel",
+          "_key": "execute-adopt",
+          "railLabel": "Execute → Adopt",
+          "heading": "AI activation services to build, learn + scale",
+          "body": "Rapid pilot preparation, development and iteration that proves value in real operations, then scales winning solutions across your entire organization.",
+          "details": [
+            {
+              "_type": "detail",
+              "_key": "ideate-explore",
+              "label": "Ideate + Explore",
+              "items": [
+                "Workshop with executive teams, underwriting, operations, and advisory groups to generate use cases that reduce processing time, and improve customer experience while considering risk and security."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "design-prepare",
+              "label": "Design + Prepare",
+              "items": [
+                "Design core AI architecture and integrate with key technologies including core banking, claims, and CRM systems; prepare data for pilot projects."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "scale-embed",
+              "label": "Scale + Embed",
+              "items": [
+                "Roll out across all lines of business, train key personnel who will be leveraging the systems including operations, underwriting and advisory teams, establish best practices, and build internal champions."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "ctaSection",
+      "_key": "closer",
+      "heading": "Stop guessing, start discovering",
+      "body": "Identify the AI use cases that matter most for your business.",
+      "button": {
+        "_type": "button",
+        "label": "Get started: Schedule a consultation",
+        "href": "/contact"
+      },
+      "decoration": "none"
+    }
+  ],
+  "seo": {
+    "description": "Accelerate underwriting, streamline claims processing, and enable proactive customer insights with AI solutions built for financial institutions."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:page:industries/finance-insurance",
+    "provisional": true,
+    "provisionalNote": "Migrated from o3xo.ai band by band into O3’s block roster (#220). Provisional because the composition is a translation rather than a design: the hero carries no background photograph, curated case-study and insight cards are left to be derived, and anything the source does not serve — the FAQ answers, the team bios — is absent rather than invented. Cleared when the adaptation delta is reviewed and the page is composed against O3XO’s own design."
+  }
+}

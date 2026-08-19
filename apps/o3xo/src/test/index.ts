@@ -14,4 +14,4 @@
  */
 export * from '@o3/render-kit'
 
-export { aSeededPage } from './fixtures'
+export { aCorpusPage } from './fixtures'

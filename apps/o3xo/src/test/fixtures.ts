@@ -10,34 +10,33 @@ import { projectSeedPage } from '@o3/content-ui/testing'
  * `@o3/render-kit`'s.
  *
  * What is on disk is this brand's migration corpus, `tools/migration/
- * data-o3xo/seed/` — the pipeline owns O3XO's committed documents, including
- * the bootstrap seed. Migrated documents carry `_wpSrc`/`_localSrc` asset
- * markers this reader does not resolve; a fixture over one of those needs
- * `resolveAssetMarkers` first (see `apps/web/src/test/fixtures.ts` for the
- * shape).
+ * data-o3xo/converted/` — pages extracted from o3xo.ai (#220). None of them
+ * carries an asset marker today (the heroes migrate without photographs); the
+ * day one does, this reader needs `resolveAssetMarkers` from
+ * `@o3/content-ui/testing` first — see `apps/web/src/test/fixtures.ts` for
+ * the shape.
  */
-const SEED_DIR = join(
+const PAGES_DIR = join(
   fileURLToPath(new URL('../../../../', import.meta.url)),
-  'tools/migration/data-o3xo/seed',
+  'tools/migration/data-o3xo/converted/page',
 )
 
 /**
- * A committed bootstrap page, shaped into what `PAGE_QUERY` returns.
+ * A committed corpus page, shaped into what `PAGE_QUERY` returns.
  *
  * The route builders receive documents GROQ has already flattened; the
  * committed JSON is the un-projected form, so the same projections have to be
  * applied here — which `projectSeedPage` does, once, for both apps.
  *
- * That makes this the durable proof that the seed renders. The dataset is
- * disposable (ADR 0003), so "it looked right in the browser once" is not a
- * check that survives a rebuild.
+ * That makes this the durable proof that the migrated corpus renders. The
+ * dataset is disposable (ADR 0003), so "it looked right in the browser once"
+ * is not a check that survives a rebuild.
  */
-export function aSeededPage(slug = 'index'): Record<string, unknown> {
-  const page = JSON.parse(readFileSync(join(SEED_DIR, `page/${slug}.json`), 'utf8')) as Record<
-    string,
-    unknown
-  >
-  // No `resolve`: nothing in this app's seeds is a reference yet, and a
-  // resolver that answered null for one would hide the fact.
+export function aCorpusPage(slug = 'index'): Record<string, unknown> {
+  const file = join(PAGES_DIR, `${slug.replaceAll('/', '-')}.json`)
+  const page = JSON.parse(readFileSync(file, 'utf8')) as Record<string, unknown>
+  // No `resolve`: the only references a migrated page carries are the ones the
+  // projection strips, and a resolver that answered null for a real one would
+  // hide the fact.
   return projectSeedPage({ page, resolve: () => null })
 }

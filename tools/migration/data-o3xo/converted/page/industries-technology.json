@@ -1,0 +1,157 @@
+{
+  "_id": "page-framer-industries-technology",
+  "_type": "page",
+  "title": "AI solutions accelerating technology innovation",
+  "slug": {
+    "_type": "slug",
+    "current": "industries/technology"
+  },
+  "pageType": "standard",
+  "sections": [
+    {
+      "_type": "heroSection",
+      "_key": "hero",
+      "variant": "band",
+      "headlineLines": [
+        "AI solutions accelerating technology innovation"
+      ],
+      "subheading": "Tech companies must differentiate products and scale rapidly while delivering exceptional customer experiences. Our AI solutions enhance product capabilities, automate customer acquisition, and optimize support operations by helping you build competitive advantage and capture market share.",
+      "decoration": "none"
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "pain-points",
+      "surface": "bone",
+      "layout": "cards",
+      "heading": "Product development and scaling challenges are limiting growth potential",
+      "intro": "AI can turn these growth obstacles into revenue-driving capabilities.",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "slow-feature-development-technical-debt",
+          "railLabel": "Slow feature development + technical debt",
+          "heading": "Slow feature development + technical debt",
+          "body": "Engineering teams spend months building capabilities that competitors launch in weeks while legacy code slows innovation. AI-powered code generation and automated testing accelerate feature delivery while reducing technical debt."
+        },
+        {
+          "_type": "panel",
+          "_key": "reactive-customer-support-escalation",
+          "railLabel": "Reactive customer support + escalation",
+          "heading": "Reactive customer support + escalation",
+          "body": "Support teams respond to issues after they impact customers, creating churn risk and overwhelming engineering resources. Proactive monitoring predicts and prevents issues while automatically escalating complex problems to technical experts."
+        },
+        {
+          "_type": "panel",
+          "_key": "inefficient-lead-qualification-proposals",
+          "railLabel": "Inefficient lead qualification + proposals",
+          "heading": "Inefficient lead qualification + proposals",
+          "body": "Sales teams struggle to identify high-intent prospects while spending weeks on enterprise proposals. Predictive lead scoring identifies ready-to-buy prospects while automated systems generate submissions using win data which accelerates sales cycles and improves win rates."
+        },
+        {
+          "_type": "panel",
+          "_key": "disconnected-product-user-intelligence",
+          "railLabel": "Disconnected product + user intelligence",
+          "heading": "Disconnected product + user intelligence",
+          "body": "Product teams lack real-time visibility into feature adoption and user friction across customer segments. Unified analytics platforms provide insights that inform roadmap prioritization, optimize user experiences, and identify expansion opportunities."
+        }
+      ]
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "process",
+      "surface": "white",
+      "layout": "rows",
+      "heading": "From strategy to market leadership",
+      "intro": "We unite product, engineering, and sales teams to move from AI planning to measurable results. We deliver solutions that enhance technology capabilities and drive competitive advantage.",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "educate-explore",
+          "railLabel": "Educate → Explore",
+          "heading": "AI strategy process for technology",
+          "body": "Up front AI education to align team members and comprehensive assessment to identify where AI can accelerate feature development, improve lead conversion, and optimize customer support.",
+          "details": [
+            {
+              "_type": "detail",
+              "_key": "educate-align",
+              "label": "Educate + Align",
+              "items": [
+                "Align team members on AI's potential and identify opportunities from code generation to predictive analytics; assess current product, sales, and support systems."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "evaluate-plan",
+              "label": "Evaluate + Plan",
+              "items": [
+                "Prioritize workshop initiatives based on ROI potential and develop phased implementation roadmap aligned with your product and revenue priorities."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "launch-learn",
+              "label": "Launch + Learn",
+              "items": [
+                "Develop and deploy custom AI solutions on pilot features and processes, gather feedback from engineering and go-to-market teams, refine based on real-world user and customer requirements."
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "panel",
+          "_key": "execute-adopt",
+          "railLabel": "Execute → Adopt",
+          "heading": "AI activation services to build, learn + scale",
+          "body": "Rapid pilot preparation, development and iteration that proves value in real features and processes, then scales winning solutions across your entire platform.",
+          "details": [
+            {
+              "_type": "detail",
+              "_key": "ideate-explore",
+              "label": "Ideate + Explore",
+              "items": [
+                "Workshop with executive, engineering, product, and sales teams to generate use cases that accelerate development cycles and improve customer acquisition."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "design-prepare",
+              "label": "Design + Prepare",
+              "items": [
+                "Design core AI architecture and integrate with product, sales, and support platforms; prepare data for pilot initiatives."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "scale-embed",
+              "label": "Scale + Embed",
+              "items": [
+                "Roll out across all product lines and revenue operations, train engineering, product and sales teams, establish best practices, and build internal champions."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "ctaSection",
+      "_key": "closer",
+      "heading": "Stop guessing, start discovering",
+      "body": "Identify the AI use cases that matter most for your business.",
+      "button": {
+        "_type": "button",
+        "label": "Get started: Schedule a consultation",
+        "href": "/contact"
+      },
+      "decoration": "none"
+    }
+  ],
+  "seo": {
+    "description": "Accelerate feature development, improve lead conversion, and optimize customer support with AI solutions that enhance product capabilities and drive growth."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:page:industries/technology",
+    "provisional": true,
+    "provisionalNote": "Migrated from o3xo.ai band by band into O3’s block roster (#220). Provisional because the composition is a translation rather than a design: the hero carries no background photograph, curated case-study and insight cards are left to be derived, and anything the source does not serve — the FAQ answers, the team bios — is absent rather than invented. Cleared when the adaptation delta is reviewed and the page is composed against O3XO’s own design."
+  }
+}

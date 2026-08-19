@@ -1,0 +1,223 @@
+{
+  "_id": "page-framer-index",
+  "_type": "page",
+  "title": "Activate AI advantage",
+  "slug": {
+    "_type": "slug",
+    "current": "index"
+  },
+  "pageType": "standard",
+  "sections": [
+    {
+      "_type": "heroSection",
+      "_key": "hero",
+      "variant": "band",
+      "headlineLines": [
+        "Activate AI advantage"
+      ],
+      "subheading": "We guide executive teams from education to execution. We design and develop AI initiatives that teams adopt, trust, and use to drive competitive advantage.",
+      "decoration": "none"
+    },
+    {
+      "_type": "layoutSection",
+      "_key": "metrics",
+      "surface": "ink",
+      "columns": 1,
+      "eyebrow": "Key metrics across accounts",
+      "items": [
+        {
+          "_type": "statGroup",
+          "_key": "metrics-stats",
+          "stats": [
+            {
+              "_type": "stat",
+              "_key": "average-efficiency-gains",
+              "value": "50%+",
+              "label": "Average efficiency gains"
+            },
+            {
+              "_type": "stat",
+              "_key": "faster-information-access",
+              "value": "10x",
+              "label": "Faster information access"
+            },
+            {
+              "_type": "stat",
+              "_key": "average-time-to-prove-roi",
+              "value": "<90 days",
+              "label": "Average time to prove ROI"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "partner",
+      "surface": "bone",
+      "layout": "cards",
+      "heading": "Your AI strategy + activation partner",
+      "intro": "Go from boardroom pressure to competitive advantage in less than 90 days with O3XO, which helps executives, technology and innovation leaders move with clarity and direction. Drawing on 20+ years of digital transformation experience and deep industry knowledge, we deliver human-looped, AI solutions that strengthen your team’s skills, demonstrate value quickly and grow sustainably over time.",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "discover-impact",
+          "railLabel": "Discover impact",
+          "heading": "Discover impact",
+          "body": "Identify high-value, industry-specific opportunities"
+        },
+        {
+          "_type": "panel",
+          "_key": "prove-value-quickly",
+          "railLabel": "Prove value quickly",
+          "heading": "Prove value quickly",
+          "body": "Develop solutions that deliver measurable results"
+        },
+        {
+          "_type": "panel",
+          "_key": "empower-teams",
+          "railLabel": "Empower teams",
+          "heading": "Empower teams",
+          "body": "Enhance expertise with training and support"
+        },
+        {
+          "_type": "panel",
+          "_key": "scale-responsibly",
+          "railLabel": "Scale responsibly",
+          "heading": "Scale responsibly",
+          "body": "Integrate seamlessly and grow with governance"
+        }
+      ]
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "industries",
+      "surface": "ink",
+      "layout": "rail",
+      "rail": "label",
+      "heading": "AI expertise tailored to your industry",
+      "intro": "Put AI to work in ways that are meaningful, measurable, and built for real impact.",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "construction",
+          "railLabel": "Construction",
+          "heading": "Construction",
+          "body": "Faster estimates, better profit predictions, smoother project delivery",
+          "button": {
+            "_type": "button",
+            "label": "Construction",
+            "href": "/industries/construction"
+          }
+        },
+        {
+          "_type": "panel",
+          "_key": "real-estate",
+          "railLabel": "Real estate",
+          "heading": "Real estate",
+          "body": "Early tenant identification, streamlined management, accounting efficiency",
+          "button": {
+            "_type": "button",
+            "label": "Real estate",
+            "href": "/industries/real-estate"
+          }
+        },
+        {
+          "_type": "panel",
+          "_key": "industrial-services",
+          "railLabel": "Industrial services",
+          "heading": "Industrial services",
+          "body": "Automate tedious tasks, improve operations, scale expertise in real time",
+          "button": {
+            "_type": "button",
+            "label": "Industrial services",
+            "href": "/industries/industrial-services"
+          }
+        },
+        {
+          "_type": "panel",
+          "_key": "finance-insurance",
+          "railLabel": "Finance + insurance",
+          "heading": "Finance + insurance",
+          "body": "Stronger customer support, smarter underwriting, advisor amplification",
+          "button": {
+            "_type": "button",
+            "label": "Finance + insurance",
+            "href": "/industries/finance-insurance"
+          }
+        },
+        {
+          "_type": "panel",
+          "_key": "life-sciences",
+          "railLabel": "Life sciences",
+          "heading": "Life sciences",
+          "body": "More leads, greater efficiency in R&D, compliance, and commercialization",
+          "button": {
+            "_type": "button",
+            "label": "Life sciences",
+            "href": "/industries/life-sciences"
+          }
+        },
+        {
+          "_type": "panel",
+          "_key": "technology",
+          "railLabel": "Technology",
+          "heading": "Technology",
+          "body": "Product-specific AI, faster lead generation, automated customer support",
+          "button": {
+            "_type": "button",
+            "label": "Technology",
+            "href": "/industries/technology"
+          }
+        }
+      ]
+    },
+    {
+      "_type": "quoteSection",
+      "_key": "testimonial",
+      "surface": "bone",
+      "quote": "\"I was expecting the ROI for our project next year, but we are going to immediately see that value now.\"",
+      "attribution": "Brett Norton, President, Buffalo Construction, Inc",
+      "decoration": "none"
+    },
+    {
+      "_type": "insightsCarouselSection",
+      "_key": "insights",
+      "surface": "white",
+      "heading": "Insights from the next frontier"
+    },
+    {
+      "_type": "ctaSection",
+      "_key": "conference",
+      "heading": "1682: the business of innovation conference",
+      "body": "The 1682 Conference brings together leaders, innovators, and visionaries to explore the power of AI in shaping profit and process.",
+      "button": {
+        "_type": "button",
+        "label": "Learn more about 1682",
+        "href": "https://www.1682conference.com/"
+      },
+      "decoration": "none"
+    },
+    {
+      "_type": "ctaSection",
+      "_key": "closer",
+      "heading": "Stop guessing, start discovering",
+      "body": "Identify the AI use cases that matter most for your business.",
+      "button": {
+        "_type": "button",
+        "label": "Get started: Schedule a consultation",
+        "href": "/contact"
+      },
+      "decoration": "none"
+    }
+  ],
+  "seo": {
+    "description": "O3XO partners with executive teams to activate AI advantage. We guide organizations from education to execution—designing AI initiatives that teams adopt, trust, and use to drive competitive advantage."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:page:index",
+    "provisional": true,
+    "provisionalNote": "Migrated from o3xo.ai band by band into O3’s block roster (#220). Provisional because the composition is a translation rather than a design: the hero carries no background photograph, curated case-study and insight cards are left to be derived, and anything the source does not serve — the FAQ answers, the team bios — is absent rather than invented. Cleared when the adaptation delta is reviewed and the page is composed against O3XO’s own design."
+  }
+}

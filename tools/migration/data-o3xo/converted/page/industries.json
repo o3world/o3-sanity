@@ -1,0 +1,173 @@
+{
+  "_id": "page-framer-industries",
+  "_type": "page",
+  "title": "AI solutions built for your industry",
+  "slug": {
+    "_type": "slug",
+    "current": "industries"
+  },
+  "pageType": "standard",
+  "sections": [
+    {
+      "_type": "heroSection",
+      "_key": "hero",
+      "variant": "band",
+      "headlineLines": [
+        "AI solutions built for your industry"
+      ],
+      "subheading": "Generic AI tools fail because they ignore your industry's workflows, compliance requirements, and operational realities. We've spent over two decades learning what actually works for your industry. Our industry-focused approach identifies use cases that drive real impact and integrates AI into your existing systems through proven, sector-tested strategies.",
+      "decoration": "none"
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "industries",
+      "surface": "ink",
+      "layout": "rail",
+      "rail": "label",
+      "heading": "AI built for your business context",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "construction",
+          "railLabel": "Construction",
+          "heading": "Construction",
+          "body": "Win more profitable bids through intelligent estimating, eliminate cash flow bottlenecks with automated closeout workflows, and accelerate project delivery while reducing manual effort. Our solutions integrate seamlessly with Procore, Sage, and your existing project management systems to deliver value quickly.",
+          "button": {
+            "_type": "button",
+            "label": "Construction",
+            "href": "/industries/construction"
+          },
+          "media": {
+            "_type": "figure",
+            "image": {
+              "_type": "image",
+              "_srcUrl": "https://framerusercontent.com/images/fpVXZr6ZISl6su4svDZl7S1Mk.jpg"
+            },
+            "alt": "Construction worker operating industrial equipment, representing AI-powered project management and workflow automation"
+          }
+        },
+        {
+          "_type": "panel",
+          "_key": "industrial-services",
+          "railLabel": "Industrial Services",
+          "heading": "Industrial Services",
+          "body": "Cut proposal response time by 60% with automated generation, preserve institutional knowledge through AI-powered training systems, and scale expertise across your operations. Our solutions integrate with your existing ERP, procurement, and operations systems, optimizing costs and ensuring safety without disrupting proven workflows.",
+          "button": {
+            "_type": "button",
+            "label": "Industrial Services",
+            "href": "/industries/industrial-services"
+          },
+          "media": {
+            "_type": "figure",
+            "image": {
+              "_type": "image",
+              "_srcUrl": "https://framerusercontent.com/images/QiJBxxLNzYIYF0aKfvPrB0vfEcY.png"
+            },
+            "alt": "Industrial Services"
+          }
+        },
+        {
+          "_type": "panel",
+          "_key": "life-sciences",
+          "railLabel": "Life sciences",
+          "heading": "Life sciences",
+          "body": "Identify high-converting prospects through predictive analytics, accelerate submissions with automated regulatory intelligence, and connect research to commercial success faster. Our solutions integrate with your CRM, trial management, and regulatory systems, compressing timelines and creating positive, measurable outcomes.",
+          "button": {
+            "_type": "button",
+            "label": "Life sciences",
+            "href": "/industries/life-sciences"
+          },
+          "media": {
+            "_type": "figure",
+            "image": {
+              "_type": "image",
+              "_srcUrl": "https://framerusercontent.com/images/zzV9hvqkyaMQnZNecWWJJlePZGA.jpg"
+            },
+            "alt": "Scientist analyzing samples under a microscope, representing AI-powered research and regulatory intelligence"
+          }
+        },
+        {
+          "_type": "panel",
+          "_key": "real-estate",
+          "railLabel": "Real estate",
+          "heading": "Real estate",
+          "body": "Reduce leasing cycles with automated tenant qualification, eliminate manual reconciliation through intelligent cash application, and drive revenue growth while cutting operational overhead. Our solutions integrate with your property, tenant and accounting systems, delivering efficiency and improving lead generation.",
+          "button": {
+            "_type": "button",
+            "label": "Real estate",
+            "href": "/industries/real-estate"
+          },
+          "media": {
+            "_type": "figure",
+            "image": {
+              "_type": "image",
+              "_srcUrl": "https://framerusercontent.com/images/P03AgaQQvy0wo05eFIMAWj1whmc.jpg"
+            },
+            "alt": "Real estate professionals reviewing architectural model, representing AI-driven leasing and portfolio optimization"
+          }
+        },
+        {
+          "_type": "panel",
+          "_key": "finance-insurance",
+          "railLabel": "Finance + insurance",
+          "heading": "Finance + insurance",
+          "body": "Process applications in minutes with automated underwriting, anticipate client needs through proactive insight generation, and accelerate growth while managing risk. Our solutions integrate with your core banking, claims, and CRM systems, improving customer experience without replacing proven processes.",
+          "button": {
+            "_type": "button",
+            "label": "Finance + insurance",
+            "href": "/industries/finance-insurance"
+          },
+          "media": {
+            "_type": "figure",
+            "image": {
+              "_type": "image",
+              "_srcUrl": "https://framerusercontent.com/images/PJ287gXaNBwzCa2qa9t6n5I18rg.jpg"
+            },
+            "alt": "Financial professional reviewing documents, representing AI-powered underwriting and risk analysis"
+          }
+        },
+        {
+          "_type": "panel",
+          "_key": "technology",
+          "railLabel": "Technology",
+          "heading": "Technology",
+          "body": "Accelerate feature development with AI-powered code generation, identify ready-to-buy prospects through predictive lead scoring, and differentiate your products while scaling rapidly. Our solutions enhance your product capabilities and sales and marketing effectiveness, creating competitive advantages that capture market share.",
+          "button": {
+            "_type": "button",
+            "label": "Technology",
+            "href": "/industries/technology"
+          },
+          "media": {
+            "_type": "figure",
+            "image": {
+              "_type": "image",
+              "_srcUrl": "https://framerusercontent.com/images/MeplhX7zFPEhH4aoDLJA7IAJLk.jpg"
+            },
+            "alt": "Technology professional working on laptop, representing AI-driven product development and automation"
+          }
+        }
+      ]
+    },
+    {
+      "_type": "ctaSection",
+      "_key": "closer",
+      "heading": "Stop guessing, start discovering",
+      "body": "Identify the AI use cases that matter most for your business.",
+      "button": {
+        "_type": "button",
+        "label": "Get started: Schedule a consultation",
+        "href": "/contact"
+      },
+      "decoration": "none"
+    }
+  ],
+  "seo": {
+    "description": "AI solutions built for your industry. We deliver focused AI implementation for construction, industrial services, life sciences, real estate, finance, and technology."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:page:industries",
+    "provisional": true,
+    "provisionalNote": "Migrated from o3xo.ai band by band into O3’s block roster (#220). Provisional because the composition is a translation rather than a design: the hero carries no background photograph, curated case-study and insight cards are left to be derived, and anything the source does not serve — the FAQ answers, the team bios — is absent rather than invented. Cleared when the adaptation delta is reviewed and the page is composed against O3XO’s own design."
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "_id": "page-framer-industries-life-sciences",
+  "_type": "page",
+  "title": "AI solutions accelerating life sciences innovation",
+  "slug": {
+    "_type": "slug",
+    "current": "industries/life-sciences"
+  },
+  "pageType": "standard",
+  "sections": [
+    {
+      "_type": "heroSection",
+      "_key": "hero",
+      "variant": "band",
+      "headlineLines": [
+        "AI solutions accelerating life sciences innovation"
+      ],
+      "subheading": "Life sciences companies lose millions when teams can't identify the right targets, regulatory submissions drag on, and critical insights disappear between departments. Our AI solutions eliminate these bottlenecks by accelerating market access, streamlining compliance, and connecting research to commercial success.",
+      "decoration": "none"
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "pain-points",
+      "surface": "bone",
+      "layout": "cards",
+      "heading": "Research and commercialization complexities are slowing your progress",
+      "intro": "AI can drive breakthrough performance across the entire product lifecycle.",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "inefficient-market-access-sales-targetin",
+          "railLabel": "Inefficient market access + sales targeting",
+          "heading": "Inefficient market access + sales targeting",
+          "body": "Commercial teams struggle to identify high-value targets while navigating complex business development landscapes. AI-powered predictive analytics identify the highest-converting prospects while providing real-time insights into competitive positioning and close probability."
+        },
+        {
+          "_type": "panel",
+          "_key": "fragmented-clinical-trial-management",
+          "railLabel": "Fragmented clinical trial management",
+          "heading": "Fragmented clinical trial management",
+          "body": "Patient recruitment struggles and site coordination challenges create costly delays across multiple studies. AI-powered patient matching and trial optimization platforms accelerate enrollment while improving protocol adherence and data quality."
+        },
+        {
+          "_type": "panel",
+          "_key": "lengthy-regulatory-submission-processes",
+          "railLabel": "Lengthy regulatory submission processes",
+          "heading": "Lengthy regulatory submission processes",
+          "body": "Your regulatory teams spend months preparing complex filings, often facing delays due to incomplete documentation or compliance gaps. Automated document analysis and regulatory intelligence systems generate submission-ready materials in weeks instead of months."
+        },
+        {
+          "_type": "panel",
+          "_key": "disconnected-research-development",
+          "railLabel": "Disconnected research + development",
+          "heading": "Disconnected research + development",
+          "body": "Critical insights get lost transitioning between discovery, development, and commercial teams. Integrated knowledge management systems ensure seamless information flow and preserve institutional expertise across the entire product journey."
+        }
+      ]
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "process",
+      "surface": "white",
+      "layout": "rows",
+      "heading": "From strategy to faster commercialization",
+      "intro": "Our approach guides executive, research and commercial teams from AI planning through measurable results, enhancing life sciences expertise while accelerating competitive advantage.",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "educate-explore",
+          "railLabel": "Educate → Explore",
+          "heading": "AI strategy process for life sciences",
+          "body": "Up front AI education to align team members and comprehensive assessment to identify where AI can accelerate regulatory submissions, improve patient targeting, and connect research to commercial success.",
+          "details": [
+            {
+              "_type": "detail",
+              "_key": "educate-align",
+              "label": "Educate + Align",
+              "items": [
+                "Align team members on AI's potential and identify opportunities from patient matching to regulatory intelligence; assess current CRM, trial management, and regulatory systems."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "evaluate-plan",
+              "label": "Evaluate + Plan",
+              "items": [
+                "Prioritize workshop initiatives based on ROI potential and develop phased implementation roadmap aligned with your product pipeline."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "launch-learn",
+              "label": "Launch + Learn",
+              "items": [
+                "Develop and deploy custom AI solutions on pilot trials and submissions, gather feedback from regulatory and clinical teams, refine based on real-world compliance requirements."
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "panel",
+          "_key": "execute-adopt",
+          "railLabel": "Execute → Adopt",
+          "heading": "AI activation services to build, learn + scale",
+          "body": "Rapid pilot preparation, development and iteration that proves value in real studies and submissions, then scales winning solutions across your entire portfolio.",
+          "details": [
+            {
+              "_type": "detail",
+              "_key": "ideate-explore",
+              "label": "Ideate + Explore",
+              "items": [
+                "Workshop with regulatory affairs, clinical operations, and commercial teams to generate use cases that accelerate timelines and improve outcomes."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "design-prepare",
+              "label": "Design + Prepare",
+              "items": [
+                "Design core AI architecture and integrate with CRM, trial management, and regulatory systems; prepare data for pilot programs."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "scale-embed",
+              "label": "Scale + Embed",
+              "items": [
+                "Roll out across all programs, train regulatory affairs and commercial teams, establish best practices, and build internal champions."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "ctaSection",
+      "_key": "closer",
+      "heading": "Stop guessing, start discovering",
+      "body": "Identify the AI use cases that matter most for your business.",
+      "button": {
+        "_type": "button",
+        "label": "Get started: Schedule a consultation",
+        "href": "/contact"
+      },
+      "decoration": "none"
+    }
+  ],
+  "seo": {
+    "description": "Accelerate regulatory submissions, improve patient targeting, and connect research to commercial success with AI solutions built for life sciences."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:page:industries/life-sciences",
+    "provisional": true,
+    "provisionalNote": "Migrated from o3xo.ai band by band into O3’s block roster (#220). Provisional because the composition is a translation rather than a design: the hero carries no background photograph, curated case-study and insight cards are left to be derived, and anything the source does not serve — the FAQ answers, the team bios — is absent rather than invented. Cleared when the adaptation delta is reviewed and the page is composed against O3XO’s own design."
+  }
+}

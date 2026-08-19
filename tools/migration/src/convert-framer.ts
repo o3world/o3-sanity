@@ -20,6 +20,12 @@ import {
   mapFramerClient,
   type FramerCaseStudyRecord,
 } from './map/framerCaseStudy'
+import {
+  mapFramerPage,
+  mapFramerPeople,
+  mapFramerSiteSettings,
+  type FramerPageRecord,
+} from './map/framerPage'
 
 // The prefix comes from brand config, which is the one place a brand's facts
 // live (ADR 0028) — never `/insights` as a literal, even though both brands
@@ -27,18 +33,22 @@ import {
 const { collections } = brandConfig('o3xo')
 
 const insightsDir = join(EXTRACT_DIR, 'insight')
-if (!existsSync(insightsDir)) {
+const pagesDir = join(EXTRACT_DIR, 'page')
+if (!existsSync(insightsDir) && !existsSync(pagesDir)) {
   throw new Error(
-    `no ${insightsDir} — run: pnpm --filter @o3/migration extract -- --brand o3xo --insights all`,
+    `no ${insightsDir} — run: pnpm --filter @o3/migration extract -- --brand o3xo --insights all --pages all`,
   )
 }
+
+const jsonIn = (dir: string): string[] =>
+  existsSync(dir) ? readdirSync(dir).filter((f) => f.endsWith('.json')) : []
 
 const failures: { slug: string; issues: readonly ConversionIssue[] }[] = []
 const notes: { slug: string; notes: readonly ConversionIssue[] }[] = []
 const categories = new Map<string, ReturnType<typeof mapFramerCategory>>()
-let written = 0
+let insights = 0
 
-for (const file of readdirSync(insightsDir).filter((f) => f.endsWith('.json'))) {
+for (const file of jsonIn(insightsDir)) {
   const record = JSON.parse(readFileSync(join(insightsDir, file), 'utf8')) as FramerInsightRecord
   const result = mapFramerInsight(record, { insightPrefix: collections.insight.prefix })
   if (!result.ok) {
@@ -46,7 +56,7 @@ for (const file of readdirSync(insightsDir).filter((f) => f.endsWith('.json'))) 
     continue
   }
   writeJson(join(CONVERTED_DIR, 'insight', file), result.doc)
-  written++
+  insights++
   if (result.notes?.length) notes.push({ slug: record.slug, notes: result.notes })
   // Categories are reference-driven, exactly as `person` documents are on the
   // WordPress side: only the eyebrows something is actually filed under become
@@ -59,7 +69,6 @@ for (const file of readdirSync(insightsDir).filter((f) => f.endsWith('.json'))) 
 
 for (const category of categories.values()) {
   writeJson(join(CONVERTED_DIR, 'category', `${category.slug.current}.json`), category)
-  written++
 }
 
 /**
@@ -89,7 +98,6 @@ if (existsSync(caseStudiesDir)) {
     }
     writeJson(join(CONVERTED_DIR, 'caseStudy', file), result.doc)
     caseStudiesWritten++
-    written++
     if (result.notes?.length) notes.push({ slug: record.slug, notes: result.notes })
     const client = mapFramerClient(record.card.client)
     clients.set(client._id, client)
@@ -100,15 +108,63 @@ if (existsSync(caseStudiesDir)) {
       join(CONVERTED_DIR, 'client', `${client._id.replace('client-framer-', '')}.json`),
       client,
     )
-    written++
   }
 }
 
+/**
+ * Pages (#220). Read in one pass before any is mapped, because a page's links are
+ * checked against the set of pages this run holds — an industry card pointing
+ * at a page nobody migrated is a conversion failure, not a 404 to find later.
+ */
+const pageRecords = jsonIn(pagesDir).map(
+  (file) => JSON.parse(readFileSync(join(pagesDir, file), 'utf8')) as FramerPageRecord,
+)
+const pageSlugs = pageRecords.map((record) => record.slug)
+const people = new Map<string, ReturnType<typeof mapFramerPeople>[number]>()
+let pages = 0
+
+for (const record of pageRecords) {
+  const result = mapFramerPage(record, { pageSlugs })
+  if (!result.ok) {
+    failures.push({ slug: record.slug, issues: result.issues })
+    continue
+  }
+  writeJson(join(CONVERTED_DIR, 'page', `${record.slug.replaceAll('/', '-')}.json`), result.doc)
+  pages++
+  if (result.notes?.length) notes.push({ slug: record.slug, notes: result.notes })
+  // Reference-driven, like categories: only people a page actually names.
+  for (const person of mapFramerPeople(record)) people.set(person._id, person)
+}
+
+for (const person of people.values()) {
+  writeJson(
+    join(CONVERTED_DIR, 'person', `${person._id.replace('person-framer-', '')}.json`),
+    person,
+  )
+}
+
+// The chrome is one record shared by every page, so it is taken from whichever
+// page this run holds — they all serve the same footer.
+const chromeSource = pageRecords[0]
+if (chromeSource) {
+  writeJson(
+    join(CONVERTED_DIR, 'siteSettings', 'settings.json'),
+    mapFramerSiteSettings(chromeSource.chrome),
+  )
+}
+
+const written =
+  insights +
+  categories.size +
+  caseStudiesWritten +
+  clients.size +
+  pages +
+  people.size +
+  (chromeSource ? 1 : 0)
 console.log(
-  `converted ${written} documents (` +
-    `${written - categories.size - caseStudiesWritten - clients.size} insights, ` +
-    `${categories.size} categories, ${caseStudiesWritten} case studies, ${clients.size} clients` +
-    `) → ${CONVERTED_DIR}`,
+  `converted ${written} documents (${insights} insights, ${categories.size} categories, ` +
+    `${caseStudiesWritten} case studies, ${clients.size} clients, ` +
+    `${pages} pages, ${people.size} people${chromeSource ? ', site settings' : ''}) → ${CONVERTED_DIR}`,
 )
 if (notes.length > 0) {
   console.warn(`\nNOTES (${notes.length}) — converted, but the source is missing something:`)

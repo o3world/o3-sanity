@@ -1,0 +1,209 @@
+{
+  "_meta": {
+    "type": "page"
+  },
+  "slug": "contact",
+  "path": "/contact",
+  "title": "Ready to move from AI potential to performance?",
+  "titleRendered": "Contact O3XO | AI Strategy + Activation Consulting",
+  "bands": [
+    {
+      "name": "Section1",
+      "lines": [
+        {
+          "tag": "h1",
+          "text": "Ready to move from AI potential to performance?",
+          "parts": [
+            "Ready to move from AI potential to performance?"
+          ]
+        },
+        {
+          "tag": "p",
+          "text": "Let’s discuss how O3XO can help you identify high-impact AI use cases and deliver measurable results quickly.",
+          "parts": [
+            "Let’s discuss how O3XO can help you identify high-impact AI use cases and deliver measurable results quickly."
+          ]
+        }
+      ],
+      "links": [],
+      "images": [
+        {
+          "url": "https://framerusercontent.com/images/ci8l47YZFE0MddhmnJ98lSNxs.png",
+          "alt": "",
+          "near": ""
+        }
+      ]
+    },
+    {
+      "name": null,
+      "lines": [
+        {
+          "tag": "p",
+          "text": "Start the conversation",
+          "parts": [
+            "Start the conversation"
+          ]
+        },
+        {
+          "tag": "p",
+          "text": "Have specific questions?",
+          "parts": [
+            "Have specific questions?"
+          ]
+        },
+        {
+          "tag": "p",
+          "text": "Schedule a strategy call — Discuss your AI goals and challenges with our team to determine the best path forward.",
+          "parts": [
+            "Schedule a strategy call — Discuss your AI goals and challenges with our team to determine the best path forward."
+          ]
+        },
+        {
+          "tag": "p",
+          "text": "Ready to get started?",
+          "parts": [
+            "Ready to get started?"
+          ]
+        },
+        {
+          "tag": "p",
+          "text": "Take the AI assessment — Get personalized insights into the AI opportunities that matter most for your business in under 10 minutes.",
+          "parts": [
+            "Take the AI assessment — Get personalized insights into the AI opportunities that matter most for your business in under 10 minutes."
+          ]
+        },
+        {
+          "tag": "p",
+          "text": "Need to reach us directly?",
+          "parts": [
+            "Need to reach us directly?"
+          ]
+        },
+        {
+          "tag": "p",
+          "text": "Email us — info@o3world.com",
+          "parts": [
+            "Email us — info@o3world.com"
+          ]
+        }
+      ],
+      "links": [
+        {
+          "label": "Have specific questions?Schedule a strategy call — Discuss your AI goals and challenges with our team to determine the best path forward.",
+          "href": "https://calendly.com/milos-o3world/o3xo-meeting"
+        },
+        {
+          "label": "Ready to get started?Take the AI assessment — Get personalized insights into the AI opportunities that matter most for your business in under 10 minutes.",
+          "href": "http://assessment.o3world.com/"
+        },
+        {
+          "label": "Need to reach us directly?Email us — info@o3world.com",
+          "href": "mailto:info@o3world.com"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://framerusercontent.com/images/qtHPlu8zc69qyxwKol4sDEAndtU.png",
+          "alt": "",
+          "near": "Start the conversation"
+        }
+      ]
+    },
+    {
+      "name": "Section 5",
+      "lines": [
+        {
+          "tag": "p",
+          "text": "What to expect",
+          "parts": [
+            "What to expect"
+          ]
+        },
+        {
+          "tag": "p",
+          "text": "Discovery conversation",
+          "parts": [
+            "Discovery conversation"
+          ]
+        },
+        {
+          "tag": "p",
+          "text": "We'll discuss your business priorities, current challenges, and AI readiness to determine if there's a good fit.",
+          "parts": [
+            "We'll discuss your business priorities, current challenges, and AI readiness to determine if there's a good fit."
+          ]
+        },
+        {
+          "tag": "p",
+          "text": "AI assessment workshop",
+          "parts": [
+            "AI assessment workshop"
+          ]
+        },
+        {
+          "tag": "p",
+          "text": "For qualified opportunities, we'll work together to facilitate a collaborative session to identify your highest-impact AI use cases.",
+          "parts": [
+            "For qualified opportunities, we'll work together to facilitate a collaborative session to identify your highest-impact AI use cases."
+          ]
+        },
+        {
+          "tag": "p",
+          "text": "Activation roadmap",
+          "parts": [
+            "Activation roadmap"
+          ]
+        },
+        {
+          "tag": "p",
+          "text": "Following the workshop, receive a detailed proposal with prioritized initiatives, timeline, and expected ROI for your AI activation plan.",
+          "parts": [
+            "Following the workshop, receive a detailed proposal with prioritized initiatives, timeline, and expected ROI for your AI activation plan."
+          ]
+        }
+      ],
+      "links": [],
+      "images": [
+        {
+          "url": "https://framerusercontent.com/images/ZUVO8coohNETLnG4DIG4tdPXwcU.png",
+          "alt": "",
+          "near": "Discovery conversation"
+        }
+      ]
+    }
+  ],
+  "chrome": {
+    "title": "O3XO",
+    "footerTagline": "Transforming businesses through intelligent AI implementation.",
+    "legalName": "O3 World, LLC",
+    "copyrightNote": "",
+    "footerLinks": [
+      {
+        "label": "O3 World",
+        "href": "https://www.o3world.com/"
+      },
+      {
+        "label": "1682",
+        "href": "https://www.1682conference.com/"
+      }
+    ],
+    "legalLinks": [
+      {
+        "label": "Privacy policy",
+        "href": "https://www.o3world.com/privacy-policy/"
+      }
+    ],
+    "socialLinks": [
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/company/o3xo"
+      }
+    ],
+    "cta": null
+  },
+  "seo": {
+    "canonicalRendered": "https://www.o3xo.ai/contact/",
+    "descriptionOverride": "Ready to activate AI advantage? Contact O3XO to discuss your AI strategy, implementation roadmap, and how we can help drive measurable results for your organization.",
+    "ogImage": "https://framerusercontent.com/assets/GNEb9AoIISnSN2rREA1AbhZBGk.png"
+  }
+}

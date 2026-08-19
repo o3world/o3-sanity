@@ -140,21 +140,6 @@ function text(node: Element | null | undefined): string {
 }
 
 /**
- * The hero's rich-text blocks, in authored order, deduplicated.
- *
- * Framer emits one copy of a text block per breakpoint variant (`ssr-variant`),
- * so the title appears twice or three times depending on how many breakpoints
- * restyle it. Consecutive duplicates collapse; the surviving order is the one
- * the design file declares: eyebrow, headline, deck.
- */
-function heroLines(hero: Element): string[] {
-  const lines = [...hero.querySelectorAll('[data-framer-component-type="RichTextContainer"]')].map(
-    (container) => text(container),
-  )
-  return lines.filter((line, i) => line !== '' && line !== lines[i - 1])
-}
-
-/**
  * One page of served HTML → the record committed under `data-o3xo/extract/`.
  *
  * Pure and fail-loud: it throws on a page whose structure it does not
@@ -178,7 +163,7 @@ export function parseInsight(html: string, slug: string): FramerInsight {
   // eyebrow, headline, deck. Asserted rather than assumed: three is what every
   // insight page on the site emits, and a fourth line means the hero gained a
   // field this parse would otherwise put in the wrong place.
-  const lines = heroLines(hero)
+  const lines = richTextLines(hero)
   if (lines.length !== 3) {
     throw new Error(
       `o3xo.ai/${slug}: expected 3 lines in the hero (eyebrow, headline, deck), got ${lines.length}: ` +
@@ -238,11 +223,10 @@ export async function fetchPage(path: string): Promise<string> {
 /**
  * The rich-text lines under a node, in authored order, deduplicated.
  *
- * Framer emits one copy of a text block per breakpoint variant, so a line
- * appears two or three times depending on how many breakpoints restyle it.
- * Generalises what `heroLines` does for an insight hero; the two collapse into
- * one once #220 has landed and this file is no longer being written from both
- * ends.
+ * Framer emits one copy of a text block per breakpoint variant (`ssr-variant`),
+ * so a line appears two or three times depending on how many breakpoints
+ * restyle it. Consecutive duplicates collapse; the surviving order is the one
+ * the design file declares — for an insight hero: eyebrow, headline, deck.
  */
 function richTextLines(root: Element): string[] {
   const lines = [...root.querySelectorAll('[data-framer-component-type="RichTextContainer"]')].map(

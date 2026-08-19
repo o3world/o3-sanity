@@ -22,6 +22,7 @@ once: the extract source, the corpus tree on disk, and the Sanity project.
 ```sh
 pnpm --filter @o3/migration extract -- --brand o3xo --insights all
 pnpm --filter @o3/migration extract -- --brand o3xo --case-studies all
+pnpm --filter @o3/migration extract -- --brand o3xo --pages all
 pnpm --filter @o3/migration convert -- --brand o3xo
 pnpm --filter @o3/migration load    -- --brand o3xo
 pnpm --filter @o3/migration verify  -- --brand o3xo
@@ -509,11 +510,11 @@ same rule `normalizeUploadUrl` enforces for WordPress thumbnails, and the reason
 - Body links to the site's own pages are **absolute** (`https://www.o3xo.ai/contact/`)
   and are migrated as written. Relativising them is the launch-cutover audit's
   job, alongside the redirect audit.
-- O3XO's site chrome is extractable from o3xo.ai and is not extracted yet: the
-  ld+json `sameAs` carries the LinkedIn URL, the footer carries the legal name
-  and the privacy link. Until it is, `siteSettings` stays the hand-seeded
-  bootstrap #215 wrote, and `verify` applies `siteSettingsDoc` — which describes
-  the **WordPress chrome extract** — only to WordPress-sourced settings.
+- O3XO's site chrome is extractable from o3xo.ai and was not extracted by the
+  tracer: the ld+json `sameAs` carries the LinkedIn URL, the footer carries the
+  legal name and the privacy link. #220 extracts it (below). `verify` still
+  applies `siteSettingsDoc` — which describes the **WordPress chrome extract** —
+  only to WordPress-sourced settings.
 
 ---
 
@@ -612,3 +613,126 @@ past.
   `-seed-` only, so a Framer-sourced document was written by every load and
   retired by none — a renamed slug would have left the old document serving its
   old URL forever. Fixed here; it applies to #217's insight too.
+
+---
+
+## The O3XO pages: eleven URLs, composed band by band (#220)
+
+Every non-collection URL o3xo.ai's sitemap serves is a `page` document —
+`/`, `/about`, `/about/approach`, `/contact`, `/industries` and its six
+industry pages — and the chrome around them is `siteSettings`.
+
+```sh
+pnpm --filter @o3/migration extract -- --brand o3xo --pages all
+pnpm --filter @o3/migration extract -- --brand o3xo --pages about,industries/construction
+```
+
+`src/lib/framerPage.ts` is the parse, `src/map/framerPage.ts` the mapper. They
+sit beside the insight pair rather than inside it, because a marketing page is
+the other shape the Framer source comes in: a CMS item has one template and
+three named regions, a page has whatever bands its designer laid out.
+
+### The parse hangs off the band container, and stops at the copyright
+
+Three of Framer's habits are what the parse is shaped around, and each one
+corrupts a naive read of the HTML:
+
+- **Every band is emitted once per breakpoint variant**, so a page read as
+  written says everything two or three times. Lines dedupe by their own text
+  across the page: within one page a repeated sentence is a breakpoint.
+- **A text container holds one or more authored paragraphs.** The rail's label
+  sits above its heading in one container, so gluing the container's text loses
+  the boundary — and a sentence hard-wrapped over two lines is one paragraph, so
+  splitting it loses the sentence. A line therefore carries both readings,
+  `parts` and their joined `text`.
+- **The footer arrives in the same container list the bands do.** Framer emits
+  no landmark elements, so the chrome is found by content: the widest region
+  around the copyright line that carries no heading. Everything below the first
+  ancestor with an `<h1>` is chrome; the page ends where it starts.
+
+An image records the line it sits beside (`near`), because Framer leaves these
+`alt` attributes empty and a band of six cards emits six pictures in one list.
+
+### The six industry pages are one arm
+
+They are one shape — hero, four pain points, a two-phase process, a
+related-content widget — which is what makes them worth a mapper rather than
+six hand-compositions. Every arm asserts the band and line counts it expects,
+so a page whose shape moves stops the run instead of composing the right words
+into the wrong block.
+
+The block choices worth knowing:
+
+- **A heading with a standfirst and a list of claims is `railPanelsSection`,
+  not `featureGridSection`** — the feature grid has nowhere to put a
+  standfirst, and all these bands have one. On the `cards` layout the rail is
+  not drawn, so `railLabel` and `heading` hold the same words, which is what
+  `data/seed/page/solutions.json` already does.
+- **The two-phase process is `rows`, and that costs the phase labels.** Each
+  phase is a panel and its three steps are that panel's `details` rows. The
+  rows layout numbers its panels instead of labelling them, so
+  "Educate → Explore" is stored and not drawn; the `rail` layout would draw it
+  and drop the six steps instead, because `details` renders on rows and grid
+  only. Six paragraphs of source against two labels, so rows wins.
+- **The industry cards are `rail`**, because that is the one layout whose
+  panels carry a button, and each card on the live site is a link.
+
+### What the pages do not carry, and why
+
+Every one is a note on each `convert` run and is named on the document's
+provisional note:
+
+| Dropped                                    | Why                                                                                                                                                                                          |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The "Related content" band (5 pages)       | Curates one case study (#219's documents) and one insight. The new site derives related work — the `project_feed` call                                                                       |
+| The homepage's "Impact in action" showcase | Same three case studies, same ticket. `caseShowcaseSection` renders only what the referenced documents say                                                                                   |
+| The Approach page's FAQ                    | Framer's accordion serves the **first** item's answer under all eight questions, so seven answers are not in the HTML — and `docs/specs/schema.md` holds the line against an accordion block |
+| The four team bios                         | `person` carries a name, a role and a headshot. A bio field is a schema conversation, like the case-study `headline`                                                                         |
+| Hero background photography                | `heroSection` carries decoration, not a picture                                                                                                                                              |
+| Three band eyebrows and one two-link line  | `quoteSection` and `ctaSection` take no eyebrow, and a band offering two next steps offers none                                                                                              |
+
+Two things it deliberately does **not** migrate as written:
+
+- **The closing ask is a band on every page.** "Stop guessing, start
+  discovering" lives in Framer's footer component, above the copyright, on every
+  page but Contact. The shared model has no site-wide closing band, so it
+  becomes a `ctaSection` per document — ten copies of three lines, and an editor
+  who changes one changes one.
+- **Two links on `/industries` are wrong on the live site**: the "Real estate"
+  card points at `/industries/technology` and "Technology" points nowhere. Both
+  pages exist and both are in the sitemap, so each card's destination is derived
+  from its own name and checked against the slugs the run extracted. The
+  correction is noted per run.
+
+### The chrome is o3xo.ai's own now
+
+`siteSettings` is extracted rather than hand-seeded: the legal name and the
+copyright from the footer's copyright line, the tagline and the brand-property
+links (O3 World, 1682) from the footer, the privacy link as a legal link, and
+LinkedIn from the Organization ld+json. **The nav is the one authored part** —
+Framer renders Industries, Case studies and About as dropdown triggers with no
+`href` in the served HTML, so the labels are the site's and the destinations are
+the sitemap's, recorded in `NAV` in the mapper.
+
+### Two contract fixes this ticket needed
+
+- **`framer` is now a pipeline-owned id prefix** (`lib/corpus.ts`). It was not,
+  so every O3XO document `load` wrote was retired by nothing: deleting one from
+  the corpus left it in the dataset for ever.
+- **`personDoc` admits `person-framer-<name>`**, the same widening
+  `categoryDoc` already carried. o3xo.ai has no per-person record to key on, so
+  the name is the identity.
+
+### Industry pages are `standard`, not a `pageType` of their own
+
+The spec left it open; the answer is no, for four reasons and one that decides
+it: **`industry` already names a document type in this model** — the taxonomy
+case studies reference (CONTEXT.md → Vocabulary) — and a `pageType` spelled the
+same would make one word mean two things, which is the collision "listing" and
+"index" were split to avoid. Beyond that: `listingSection` is the only consumer
+a value would have, and it orders `title asc` where the index's order is the
+design's; the index's copy per industry differs from each page's own deck, so it
+is authored on the index rather than projected from the children; and
+`PAGE_TYPES` is one list both brands' Studios read, so the value would appear in
+O3's Studio with nothing to name. Multi-segment slugs already carry the IA.
+Adding the value later is a one-line change plus a patch of six documents.

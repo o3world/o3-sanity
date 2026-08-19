@@ -26,7 +26,10 @@ export interface WpTeamMember {
 }
 
 export const personDoc = z.object({
-  _id: z.string().regex(/^person-wp-\d+$/),
+  /* `-wp-<id>` for a WordPress user or team post, `-framer-<name>` for someone
+   * o3xo.ai's About page names (`map/framerPage.ts`) — that site has no
+   * per-person record to key on, so the name is the identity. */
+  _id: z.string().regex(/^person-(wp-\d+|framer-[a-z0-9-]+)$/),
   _type: z.literal('person'),
   name: z.string().min(1),
   title: z.string().min(1).optional(),

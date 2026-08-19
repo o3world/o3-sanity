@@ -1,0 +1,115 @@
+{
+  "_id": "siteSettings",
+  "_type": "siteSettings",
+  "title": "O3XO",
+  "utilityNavItems": [
+    {
+      "_type": "button",
+      "_key": "utility-o3-world",
+      "label": "O3 World",
+      "href": "https://www.o3world.com/"
+    },
+    {
+      "_type": "button",
+      "_key": "utility-1682",
+      "label": "1682",
+      "href": "https://www.1682conference.com/"
+    }
+  ],
+  "navItems": [
+    {
+      "_type": "button",
+      "_key": "nav-industries",
+      "label": "Industries",
+      "href": "/industries"
+    },
+    {
+      "_type": "button",
+      "_key": "nav-case-studies",
+      "label": "Case studies",
+      "href": "/case-studies"
+    },
+    {
+      "_type": "button",
+      "_key": "nav-insights",
+      "label": "Insights",
+      "href": "/insights"
+    },
+    {
+      "_type": "button",
+      "_key": "nav-about",
+      "label": "About",
+      "href": "/about"
+    },
+    {
+      "_type": "button",
+      "_key": "nav-contact",
+      "label": "Contact",
+      "href": "/contact"
+    }
+  ],
+  "footerTagline": "Transforming businesses through intelligent AI implementation.",
+  "footerGroups": [
+    {
+      "_type": "footerGroup",
+      "_key": "footer-site",
+      "label": "Site",
+      "links": [
+        {
+          "_type": "button",
+          "_key": "footer-industries",
+          "label": "Industries",
+          "href": "/industries"
+        },
+        {
+          "_type": "button",
+          "_key": "footer-case-studies",
+          "label": "Case studies",
+          "href": "/case-studies"
+        },
+        {
+          "_type": "button",
+          "_key": "footer-insights",
+          "label": "Insights",
+          "href": "/insights"
+        },
+        {
+          "_type": "button",
+          "_key": "footer-about",
+          "label": "About",
+          "href": "/about"
+        },
+        {
+          "_type": "button",
+          "_key": "footer-contact",
+          "label": "Contact",
+          "href": "/contact"
+        }
+      ]
+    }
+  ],
+  "socialsLabel": "Socials",
+  "socialLinks": [
+    {
+      "_type": "socialLink",
+      "_key": "social-linkedin",
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/company/o3xo"
+    }
+  ],
+  "legalLinks": [
+    {
+      "_type": "button",
+      "_key": "legal-privacy-policy",
+      "label": "Privacy policy",
+      "href": "https://www.o3world.com/privacy-policy/"
+    }
+  ],
+  "legalName": "O3 World, LLC",
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:siteSettings",
+    "provisional": true,
+    "provisionalNote": "Extracted from o3xo.ai’s footer and its Organization ld+json (#220), replacing the hand-seeded bootstrap. The nav labels are the site’s; their destinations are the sitemap’s, because Framer renders three of the five as dropdown triggers with no href. No default SEO: o3xo.ai declares no site-wide OG image. Cleared when the chrome is authored against O3XO’s own design."
+  }
+}

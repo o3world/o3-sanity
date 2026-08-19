@@ -2,8 +2,9 @@
  * Extract → `data-o3xo/extract/<type>/<slug>.json` (the O3XO source).
  *
  * o3xo.ai is a Framer site with no CMS API, so the extract fetches the pages the
- * site serves and parses them (`lib/framer.ts`). Everything the corpus contract
- * asks of the WordPress extract holds here too: one file per document, `_meta`
+ * site serves and parses them (`lib/framer.ts` for an insight or case study,
+ * `lib/framerPage.ts` for a marketing page). Everything the corpus contract asks
+ * of the WordPress extract holds here too: one file per document, `_meta`
  * carrying the type and nothing else, run facts in `_manifest.json`, so a
  * non-empty diff under the extract tree means o3xo.ai changed.
  *
@@ -11,16 +12,16 @@
  *   pnpm --filter @o3/migration extract -- --brand o3xo --insights 5
  *   pnpm --filter @o3/migration extract -- --brand o3xo --insights all
  *   pnpm --filter @o3/migration extract -- --brand o3xo --case-studies all
+ *   pnpm --filter @o3/migration extract -- --brand o3xo --pages all
+ *   pnpm --filter @o3/migration extract -- --brand o3xo --pages about,industries/construction
  *
- * The sitemap is the inventory for both collections: it lists every item in the
- * order the site publishes them, which is the only ordering evidence the site
- * gives (it prints no dates — see `map/framer.ts`). Naming no collection means
- * the insights, which is what the flag meant before there was a second one.
+ * The sitemap is the inventory for all three: it lists every collection item in
+ * the order the site publishes them, which is the only ordering evidence the
+ * site gives (it prints no dates — see `map/framer.ts`), and every
+ * non-collection URL that has to keep resolving after the cutover.
  */
 import { join } from 'node:path'
 
-import { MANIFEST_PATH, recordRun } from './lib/manifest'
-import { EXTRACT_DIR, writeJson } from './lib/paths'
 import {
   SOURCE,
   caseStudySlugsInSitemap,
@@ -30,6 +31,9 @@ import {
   parseCaseStudyIndex,
   parseInsight,
 } from './lib/framer'
+import { pagePath, pagePathsInSitemap, parsePage } from './lib/framerPage'
+import { MANIFEST_PATH, recordRun } from './lib/manifest'
+import { EXTRACT_DIR, writeJson } from './lib/paths'
 
 const args = process.argv.slice(2)
 const flag = (name: string): string | null => {
@@ -40,6 +44,13 @@ const flag = (name: string): string | null => {
 const slugsArg = flag('--slugs')
 const insightsArg = flag('--insights')
 const caseStudiesArg = flag('--case-studies')
+const pagesArg = flag('--pages')
+
+const list = (value: string): string[] =>
+  value
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean)
 
 /** `N|all` against the inventory the sitemap gives, or all of it. */
 function firstN(all: string[], arg: string | null, flagName: string): string[] {
@@ -52,24 +63,28 @@ function firstN(all: string[], arg: string | null, flagName: string): string[] {
 }
 
 async function wantedInsightSlugs(): Promise<string[]> {
-  if (slugsArg) {
-    return slugsArg
-      .split(',')
-      .map((s) => s.trim())
-      .filter(Boolean)
-  }
+  if (slugsArg) return list(slugsArg)
   const all = insightSlugsInSitemap(await fetchPage('/sitemap.xml'))
   console.log(`sitemap lists ${all.length} insights`)
   return firstN(all, insightsArg, '--insights')
+}
+
+async function wantedPages(): Promise<string[]> {
+  if (pagesArg !== 'all') return list(pagesArg ?? '')
+  const all = pagePathsInSitemap(await fetchPage('/sitemap.xml'))
+  console.log(`sitemap lists ${all.length} non-collection URLs`)
+  return all
 }
 
 const startedAt = new Date().toISOString()
 const types: string[] = []
 
 // Naming a collection means only that one. Naming none means the insights,
-// which is what `extract --brand o3xo` did before case studies existed.
+// which is what `extract --brand o3xo` did before there was a second one.
 const wantsCaseStudies = caseStudiesArg !== null
-const wantsInsights = !wantsCaseStudies || slugsArg !== null || insightsArg !== null
+const wantsPages = pagesArg !== null
+const wantsInsights =
+  (!wantsCaseStudies && !wantsPages) || slugsArg !== null || insightsArg !== null
 
 if (wantsInsights) {
   const slugs = await wantedInsightSlugs()
@@ -120,6 +135,24 @@ if (wantsCaseStudies) {
   }
   types.push('caseStudy')
   console.log(`done: ${slugs.length} case stud${slugs.length === 1 ? 'y' : 'ies'}`)
+}
+
+if (wantsPages) {
+  const pageSlugs = await wantedPages()
+  if (pageSlugs.length === 0) throw new Error('nothing to extract — pass --pages all|a,b')
+  for (const slug of pageSlugs) {
+    const record = parsePage(await fetchPage(pagePath(slug)), slug)
+    // A multi-segment slug is one file, not a directory: `industries/construction`
+    // is committed as `industries-construction.json`, so the extract tree stays
+    // one flat directory per type the way `lib/corpus.ts` walks it.
+    writeJson(join(EXTRACT_DIR, 'page', `${slug.replaceAll('/', '-')}.json`), {
+      _meta: { type: 'page' },
+      ...record,
+    })
+    console.log(`✓ page ${slug}`)
+  }
+  types.push('page')
+  console.log(`done: ${pageSlugs.length} page${pageSlugs.length === 1 ? '' : 's'}`)
 }
 
 recordRun(SOURCE, types, startedAt)

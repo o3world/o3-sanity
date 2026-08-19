@@ -105,7 +105,7 @@ describe('the committed O3XO corpus', () => {
   it('records provenance naming the source on every document', () => {
     for (const { file, doc } of all) {
       expect(provenance(doc).sourceId, file).toMatch(
-        /^(framer:(insight|category|caseStudy|client):.+|seed:.+)$/,
+        /^(framer:(insight|category|caseStudy|client|page|person):.+|framer:siteSettings|seed:.+)$/,
       )
     }
   })
@@ -213,7 +213,7 @@ describe('the committed O3XO corpus', () => {
   })
 
   /**
-   * The O3XO singleton is a hand-seeded bootstrap, not the WordPress chrome
+   * The O3XO singleton is o3xo.ai's own chrome, not the WordPress chrome
    * extract, so `siteSettingsDoc` does not describe it (see `verify.ts`). What
    * the chrome renders is asserted here instead — a settings document missing
    * one of these renders a nav with no links or a footer with no groups, and
@@ -231,6 +231,13 @@ describe('the committed O3XO corpus', () => {
       expect((settings?.navItems as unknown[] | undefined)?.length).toBeGreaterThan(0)
       expect((settings?.footerGroups as unknown[] | undefined)?.length).toBeGreaterThan(0)
       expect(settings?.footerTagline).toBeTruthy()
+    })
+
+    /** The three the hand-seeded bootstrap could not carry (#217, #220). */
+    it('names the entity behind the site, its socials and its small print', () => {
+      expect(settings?.legalName).toBe('O3 World, LLC')
+      expect((settings?.socialLinks as unknown[] | undefined)?.length).toBeGreaterThan(0)
+      expect((settings?.legalLinks as unknown[] | undefined)?.length).toBeGreaterThan(0)
     })
   })
 
@@ -317,11 +324,36 @@ describe('the committed O3XO corpus', () => {
     })
   })
 
-  describe('every seeded page', () => {
-    const pages = seeds.filter(({ doc }) => doc._type === 'page')
+  describe('every page', () => {
+    const pages = all.filter(({ doc }) => doc._type === 'page')
 
     it('has pages to check', () => {
       expect(pages.length).toBeGreaterThan(0)
+    })
+
+    /**
+     * Every non-collection URL o3xo.ai's sitemap lists resolves on `apps/o3xo`
+     * — which, for a catch-all route, means a `page` document claims its slug
+     * (#220). The homepage's is `index`, which is what the singleton route
+     * fetches.
+     */
+    it('claims every non-collection URL the live sitemap serves', () => {
+      const slugs = new Set(pages.map(({ doc }) => (doc.slug as { current: string }).current))
+      for (const slug of [
+        'index',
+        'about',
+        'about/approach',
+        'contact',
+        'industries',
+        'industries/construction',
+        'industries/technology',
+        'industries/industrial-services',
+        'industries/life-sciences',
+        'industries/real-estate',
+        'industries/finance-insurance',
+      ]) {
+        expect(slugs, `no page claims ${slug}`).toContain(slug)
+      }
     })
 
     it('composes only registered section blocks — no bespoke types', () => {

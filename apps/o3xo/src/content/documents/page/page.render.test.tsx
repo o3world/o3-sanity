@@ -5,7 +5,7 @@ import { PAGE_QUERY } from '@o3/sanity/queries'
 import { buildCatchAllRoute, buildSingletonRoute } from '@o3/content-runtime/routes'
 import { CATCH_ALL_TYPES } from '@/content/documents'
 import {
-  aSeededPage,
+  aCorpusPage,
   bandPaths,
   expectNotFound,
   renderRoute,
@@ -17,26 +17,28 @@ import { home } from './entry'
 
 /**
  * The two routes a `page` document is served through: `/` (the singleton) and
- * `[...segments]` (the catch-all), both against the **committed** bootstrap
- * seed rather than a fixture written to match.
+ * `[...segments]` (the catch-all), both against the **committed** corpus —
+ * the homepage extracted from o3xo.ai (#220) — rather than a fixture written
+ * to match.
  *
  * That is what makes this survive a rebuild. The dataset is disposable
  * (ADR 0003), so "it looked right in the browser once" proves nothing about
- * the next wipe-and-load; what has to hold is that the JSON in `seed/documents/`
- * renders through code nobody wrote specially for it.
+ * the next wipe-and-load; what has to hold is that the JSON in
+ * `data-o3xo/converted/page/` renders through code nobody wrote specially
+ * for it.
  */
 const settings = siteSettings({ title: 'O3XO' })
-const seeded = aSeededPage()
+const seeded = aCorpusPage()
 
 const homeRoute = buildSingletonRoute(home)
 const catchAll = buildCatchAllRoute(CATCH_ALL_TYPES, PAGE_QUERY)
 
 const rendered = await renderRoute(homeRoute, { data: withSettings(seeded, settings) })
 
-describe('the seeded homepage', () => {
+describe('the migrated homepage', () => {
   it('dispatches every section in the array — none silently dropped', () => {
     const sections = (seeded.sections ?? []) as unknown[]
-    expect(sections).toHaveLength(3)
+    expect(sections.length).toBeGreaterThanOrEqual(3)
     // The dispatcher wraps each block in a keyed div stamped with its own
     // path, so the count is the honest measure of "did anything fail to
     // dispatch" — a block type this app's registry does not bind renders
@@ -44,14 +46,13 @@ describe('the seeded homepage', () => {
     expect(bandPaths(rendered.html)).toHaveLength(sections.length)
   })
 
-  it('renders the three bands the seed composes', () => {
-    expect(rendered.html).toContain('The second brand, on the shared machinery.')
-    expect(rendered.html).toContain('Three roles, two brands.')
-    expect(rendered.html).toContain('The content comes next.')
+  it('renders the bands the extracted homepage composes', () => {
+    expect(rendered.html).toContain('Activate AI advantage')
+    expect(rendered.html).toContain('Key metrics across accounts')
   })
 
   it('canonicalises the homepage at the root', () => {
-    expect(rendered.metadata.title).toBe('O3XO')
+    expect(rendered.metadata.title).toContain('Activate AI advantage')
     expect(rendered.metadata.alternates?.canonical).toBe('http://localhost:3000/')
   })
 })
@@ -70,7 +71,7 @@ describe('the catch-all page route', () => {
     })
 
     expect(calls[0]?.params).toMatchObject({ slug: 'about/how-we-work' })
-    expect(html).toContain('The second brand, on the shared machinery.')
+    expect(html).toContain('Activate AI advantage')
     expect(metadata.alternates?.canonical).toBe('http://localhost:3000/about/how-we-work')
   })
 

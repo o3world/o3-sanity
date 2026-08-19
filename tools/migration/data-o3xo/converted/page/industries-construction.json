@@ -1,0 +1,157 @@
+{
+  "_id": "page-framer-industries-construction",
+  "_type": "page",
+  "title": "AI solutions built for construction",
+  "slug": {
+    "_type": "slug",
+    "current": "industries/construction"
+  },
+  "pageType": "standard",
+  "sections": [
+    {
+      "_type": "heroSection",
+      "_key": "hero",
+      "variant": "band",
+      "headlineLines": [
+        "AI solutions built for construction"
+      ],
+      "subheading": "Construction projects demand precision, speed, and accountability. Our AI solutions integrate with your existing workflows to reduce manual effort, protect margins, and accelerate project delivery, helping you win more work and complete it profitably.",
+      "decoration": "none"
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "pain-points",
+      "surface": "bone",
+      "layout": "cards",
+      "heading": "Stop losing money on every project",
+      "intro": "AI can solve these persistent pain points and help you deliver more consistent results.",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "time-intensive-estimation-processes",
+          "railLabel": "Time-intensive estimation processes",
+          "heading": "Time-intensive estimation processes",
+          "body": "Your estimating team spends weeks on complex bids, often missing opportunities. Automated quantity takeoffs and data-driven pricing generate comprehensive estimates in hours instead of weeks."
+        },
+        {
+          "_type": "panel",
+          "_key": "project-delays-cost-overruns",
+          "railLabel": "Project delays + cost overruns",
+          "heading": "Project delays + cost overruns",
+          "body": "Small issues snowball into major schedule and budget problems. Predictive AI solutions can identify potential delays before they occur and provide early warning systems to keep projects on track."
+        },
+        {
+          "_type": "panel",
+          "_key": "messy-handoffs-from-precon-to-constructi",
+          "railLabel": "Messy handoffs from precon to construction",
+          "heading": "Messy handoffs from precon to construction",
+          "body": "Critical project details get lost transitioning from office to field. Seamless documentation systems ensure your project teams always have current project information and decision history."
+        },
+        {
+          "_type": "panel",
+          "_key": "vendor-management-productivity-losses",
+          "railLabel": "Vendor management + productivity losses",
+          "heading": "Vendor management + productivity losses",
+          "body": "Coordinating multiple subcontractors creates constant communication overhead. Streamlined communications and automated performance tracking eliminate the chaos across all your projects and clarity on when and how projects can close out."
+        }
+      ]
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "process",
+      "surface": "white",
+      "layout": "rows",
+      "heading": "From strategy to profitable delivery",
+      "intro": "From AI planning to measurable results, we unite project teams and leadership to deliver solutions that enhance construction expertise and accelerate competitive advantage.",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "educate-explore",
+          "railLabel": "Educate → Explore",
+          "heading": "AI strategy process for construction",
+          "body": "Up front AI education to align team members and comprehensive assessment to identify where AI can win more bids, reduce project costs, and accelerate closeouts.",
+          "details": [
+            {
+              "_type": "detail",
+              "_key": "educate-align",
+              "label": "Educate + Align",
+              "items": [
+                "Align team members on AI's potential and identify opportunities from estimating to closeout; assess current systems and workflows."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "evaluate-plan",
+              "label": "Evaluate + Plan",
+              "items": [
+                "Prioritize workshop initiatives based on ROI potential and develop phased implementation roadmap aligned with your project pipeline."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "launch-learn",
+              "label": "Launch + Learn",
+              "items": [
+                "Develop and deploy custom AI solutions on pilot projects, gather feedback from project teams, refine based on real-world construction challenges."
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "panel",
+          "_key": "execute-adopt",
+          "railLabel": "Execute → Adopt",
+          "heading": "AI activation services to build, learn + scale",
+          "body": "Rapid pilot preparation, development and iteration that proves value on real projects, then scales winning solutions across your entire business.",
+          "details": [
+            {
+              "_type": "detail",
+              "_key": "ideate-explore",
+              "label": "Ideate + Explore",
+              "items": [
+                "Workshop with execs, estimators, PM’s, and field teams to generate use cases that reduce manual effort and improve protect margins."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "design-prepare",
+              "label": "Design + Prepare",
+              "items": [
+                "Design core AI architecture and integrate with construction management, accounting, and document systems; prepare data for pilot projects."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "scale-embed",
+              "label": "Scale + Embed",
+              "items": [
+                "Roll out across all projects, train employees and project teams, establish best practices, and build internal champions."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "ctaSection",
+      "_key": "closer",
+      "heading": "Stop guessing, start discovering",
+      "body": "Identify the AI use cases that matter most for your business.",
+      "button": {
+        "_type": "button",
+        "label": "Get started: Schedule a consultation",
+        "href": "/contact"
+      },
+      "decoration": "none"
+    }
+  ],
+  "seo": {
+    "description": "Transform your construction project lifecycle from estimation to closeout with AI-powered solutions that protect margins, reduce manual effort, and accelerate project delivery."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:page:industries/construction",
+    "provisional": true,
+    "provisionalNote": "Migrated from o3xo.ai band by band into O3’s block roster (#220). Provisional because the composition is a translation rather than a design: the hero carries no background photograph, curated case-study and insight cards are left to be derived, and anything the source does not serve — the FAQ answers, the team bios — is absent rather than invented. Cleared when the adaptation delta is reviewed and the page is composed against O3XO’s own design."
+  }
+}
