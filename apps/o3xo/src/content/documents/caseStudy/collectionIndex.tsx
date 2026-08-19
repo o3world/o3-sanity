@@ -21,9 +21,8 @@ function CaseStudyIndexRenderer({ pagination, ...rest }: Props) {
  * brand's name — both read off brand config rather than written here, which is
  * the whole difference between this file and apps/web's (ADR 0028).
  *
- * **Nine per page**, the same figure apps/web uses: the cards are full-width
- * bands rather than a three-up grid, so a page of twelve is roughly 7000px of
- * scrolling.
+ * **Nine per page**, the same figure apps/web uses: the kit's cards run three
+ * across (`4404:3398`), and nine of them is three whole rows.
  */
 export const caseStudyIndex = defineIndexType({
   itemTypes: ['caseStudy'],
@@ -38,6 +37,6 @@ export const caseStudyIndex = defineIndexType({
   migration: {
     provisional: true,
     provisionalNote:
-      'Composition is O3’s canonical Work frame (1634:1167), which the adaptation experiment borrows deliberately (ADR 0028 addendum) — the copy is not. This index has no document, so its hero copy lives in the view, and it holds a placeholder heading until O3XO’s own case-study content and the delta evaluation say what belongs there.',
+      'The cards and their row are the kit’s (4404:3072, 4404:3398). The band above them is not: the kit draws no case-studies page, so the hero is still O3’s Work frame (1634:1181) carrying a placeholder heading. This index has no document, so that copy lives in the view until O3XO’s own words for it exist.',
   },
 })

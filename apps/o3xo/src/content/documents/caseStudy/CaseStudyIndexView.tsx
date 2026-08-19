@@ -4,8 +4,9 @@ import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
 import type { CASE_STUDIES_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 import type { Pagination } from '@o3/content-runtime/routes'
 
-import { CaseStudyCard } from '@o3/content-ui/cards'
 import { Pager } from '@o3/content-ui'
+
+import { CaseStudyCard } from './CaseStudyCard'
 
 const { title: collectionTitle } = brandConfig().collections.caseStudy
 const prefix = COLLECTION_PREFIXES.caseStudy
@@ -20,20 +21,17 @@ function pageHref(page: number): string {
 }
 
 /**
- * The case-study index, composed as O3's Work frame composes it (`1634:1167`).
+ * The case-study index — the kit's cards, three across.
  *
  * ```
- * hero    1634:1181   ink-warm band, eyebrow + 48px headline
- * grid    1634:1186   white, 96px vertical, 64px gap, 1248 × 556 cards
+ * hero    1634:1181   O3's Work hero: ink-warm band, eyebrow + headline
+ * grid    4404:3398   the kit's Case Study Group — 3 × 379 cards, 32 apart
  * ```
  *
- * Borrowing that composition is the adaptation experiment (ADR 0028 addendum),
- * so the geometry here is not a copy waiting to diverge — it is the hypothesis
- * under test. What it cannot borrow is the copy: O3's hero says something about
- * O3's practice. This index has no document (see apps/web's copy of this file
- * for why a route rather than a page), so its heading is a placeholder in code
- * and the route entry is marked provisional until O3XO's own content and the
- * delta evaluation settle it.
+ * Two frames from two files, because the kit draws the cards and their row but
+ * no case-studies page to put them on. The hero is O3's until O3XO's own copy
+ * and a frame for it exist, which is what the route entry's provisional marker
+ * says; the cards below it are O3XO's own (#245).
  *
  * The prefix and the eyebrow come from brand config, which is also what keeps
  * o3's answers (`/work`, and `Work` as the name) out of this file — see
@@ -47,8 +45,10 @@ export function CaseStudyIndexView({ items, pagination }: CaseStudyIndexViewProp
       <CollectionHero eyebrow={collectionTitle} heading={`${collectionTitle}.`} />
 
       <div className="px-gutter py-band-sm bg-white">
-        {/* Gap 24 at 402 (`1925:5733`), 64 at 1440 (`1634:1186`). */}
-        <ul className="max-w-section mx-auto flex flex-col gap-6 lg:gap-16">
+        {/* One up until the card's own 379 fits twice, then three across as
+         * the kit's group draws them. 32px apart at every width — the group's
+         * only gap, and the kit draws no narrower one. */}
+        <ul className="max-w-section mx-auto grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {(items ?? []).map((item) => (
             <li key={item._id}>
               <CaseStudyCard {...item} />

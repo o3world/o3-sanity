@@ -40,6 +40,36 @@ function feedCalls(calls: readonly FetchCall[]): readonly FetchCall[] {
   return calls.filter((call) => call.query === CASE_STUDIES_PAGE_QUERY)
 }
 
+/** One migrated case study, with every field the kit's card draws. */
+function aBuffaloCase() {
+  return aCaseStudyCard({
+    _id: 'caseStudy-framer-buffalo-construction',
+    slug: 'buffalo-construction',
+    title: 'From “where do we start?” to AI across the project lifecycle',
+    client: { name: 'Buffalo Construction', logo: null },
+    narrativeHeadline: 'Buffalo Construction had the ambition, but no clear path to AI adoption.',
+    headlineStat: {
+      _key: 'k0011',
+      _type: 'stat',
+      value: '2X',
+      label: 'Revenue capacity from 3 AI solutions in < 6 months',
+    },
+    heroMedia: {
+      _type: 'figure',
+      alt: 'Construction team reviewing architectural blueprints',
+      image: {
+        _type: 'image',
+        asset: {
+          _type: 'reference',
+          _ref: 'image-5d901a6029df2e121bbe878301a3f1e043b0c6f4-394x250-webp',
+        },
+      },
+    },
+    industries: null,
+    industryDetail: null,
+  })
+}
+
 describe('the case-study index route', () => {
   it('takes its name from brand config', async () => {
     const { metadata } = await render(aCaseStudiesPage())
@@ -77,6 +107,43 @@ describe('the case-study index route', () => {
     // Page 1 is the unpaginated index, so Previous drops the parameter.
     expect(html).toContain('href="/case-studies"')
     expect(html).toContain('href="/case-studies?page=3"')
+  })
+
+  /**
+   * The kit's card leads with the client, not with the case study's own
+   * title — the title never appears on it (`4404:3072`, and the same is true
+   * of O3's card, where it is only the narrative's fallback).
+   */
+  it('names the client at the head of each card', async () => {
+    const { html } = await render(aCaseStudiesPage([aBuffaloCase()], 1))
+
+    expect(html).toMatch(/<h3[^>]*>Buffalo Construction<\/h3>/)
+    expect(html).not.toContain('From “where do we start?”')
+  })
+
+  it('draws the narrative and the headline stat under it', async () => {
+    const { html } = await render(aCaseStudiesPage([aBuffaloCase()], 1))
+
+    expect(html).toContain('Buffalo Construction had the ambition')
+    expect(html).toContain('2X')
+    expect(html).toContain('Revenue capacity from 3 AI solutions')
+  })
+
+  /**
+   * The photograph is a band across the top of a light card, not the card's
+   * own background under a scrim — which is what makes it an `<img>` with the
+   * document's alt text rather than decoration.
+   */
+  it('heads the card with the hero photograph', async () => {
+    const { html } = await render(aCaseStudiesPage([aBuffaloCase()], 1))
+
+    expect(html).toMatch(/<img[^>]*alt="Construction team reviewing architectural blueprints"/)
+  })
+
+  /** The kit's card carries no button; the whole card is the link. */
+  it('shows no faux CTA inside the card', async () => {
+    const { html } = await render(aCaseStudiesPage([aBuffaloCase()], 1))
+    expect(html).not.toContain('View our work')
   })
 
   it('says where you are by marking the page you are on', async () => {

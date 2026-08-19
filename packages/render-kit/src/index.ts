@@ -10,6 +10,11 @@
  *
  * See docs/testing.md for which layer to reach for, and this package's README
  * for how an app instantiates the layer.
+ *
+ * **A story imports `@o3/render-kit/fixtures` instead.** This barrel reaches
+ * `renderRoute`, which reaches `node:stream`, and the stories layer runs in a
+ * browser — so a story that wants the same fixture data takes the subpath and
+ * leaves the renderer behind.
  */
 export { bandPaths, subBlockPaths } from './attribution'
 
