@@ -1,3 +1,4 @@
+import { figmaDesign, O3XO_FIGMA_FILE_KEY } from '@o3/story-kit'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 import { O3xoMark } from './O3xoMark'
@@ -17,7 +18,10 @@ const meta = {
   title: 'Brand/O3xoMark',
   component: O3xoMark,
   globals: { brand: 'o3xo' },
-  parameters: { layout: 'centered' },
+  parameters: {
+    layout: 'centered',
+    design: figmaDesign('4212:374', O3XO_FIGMA_FILE_KEY),
+  },
   argTypes: {
     layout: { control: 'inline-radio', options: ['horizontal', 'stacked'] },
     color: { control: 'inline-radio', options: ['twoColor', 'white', 'black'] },

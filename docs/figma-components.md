@@ -12,6 +12,10 @@ machine-readable half of this document (#79). `pnpm figma:sync` hashes each set 
 one changed and what code it routes to. **Edit both halves together**: a row added here without a
 manifest entry is a set nothing is watching.
 
+o3xo answers to a different file. Its half of the map is
+[`docs/figma-components-o3xo.md`](./figma-components-o3xo.md), watched by
+`pnpm figma:sync --brand o3xo` (#242).
+
 ## The rule
 
 **One Figma variant axis → one `cva` variants key** (ADR 0008). Figma's value

@@ -135,6 +135,9 @@ importers:
       '@o3/render-kit':
         specifier: workspace:*
         version: link:../../packages/render-kit
+      '@o3/story-kit':
+        specifier: workspace:*
+        version: link:../../packages/story-kit
       '@o3/tailwind-config':
         specifier: workspace:*
         version: link:../../packages/tailwind-config

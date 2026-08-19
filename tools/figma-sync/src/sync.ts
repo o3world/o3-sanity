@@ -1,6 +1,11 @@
 /**
  * `pnpm figma:sync` — what moved in the design file since the last sync
- * (#78, extended by #79 and #81).
+ * (#78, extended by #79, #81 and #242).
+ *
+ * One brand per run: `pnpm figma:sync` watches O3's file, `pnpm figma:sync
+ * --brand o3xo` the O3XO UI kit. A brand is a set of committed files
+ * (`brands.ts`) and nothing else — the pipeline below is the same work over
+ * whichever set it was asked for.
  *
  *   1. one call to `/files/:key?depth=1` for the file's version
  *   2. version unchanged and the baseline covers every tracked node *and*
@@ -23,17 +28,22 @@
  * to say, so two syncs in a row leave `git status` empty, and the console is
  * where a short-circuited run reports the conflicts the baseline still carries.
  */
+import { basename } from 'node:path'
+import { parseArgs } from 'node:util'
+
 import {
   applyAssetDecisions,
   assetSourceNodeIds,
   carryOpenConflicts,
   planAssetSync,
 } from './assets'
+import { BRANDS, DEFAULT_BRAND, isBrand } from './brands'
 import { diffHashes, isBaselineFresh } from './diff'
 import { readFigmaToken } from './env'
 import { createFigmaClient } from './figma-api'
 import { hashSubtree } from './hash'
 import {
+  dataPaths,
   readAssetManifest,
   readBaseline,
   readManifest,
@@ -52,8 +62,17 @@ import {
 import type { Baseline, TrackedKind } from './types'
 
 async function main() {
-  const manifest = readManifest()
-  const assetManifest = readAssetManifest()
+  const { values } = parseArgs({
+    options: { brand: { type: 'string', default: DEFAULT_BRAND } },
+    allowPositionals: false,
+  })
+  if (!isBrand(values.brand)) {
+    throw new Error(`unknown brand ${values.brand} — expected one of ${BRANDS.join(', ')}`)
+  }
+  const brand = values.brand
+
+  const manifest = readManifest(brand)
+  const assetManifest = readAssetManifest(brand)
   // One node fetch serves both manifests, which only works if they describe
   // the same file. They are hand-maintained separately, so say it out loud.
   if (assetManifest.fileKey !== manifest.fileKey) {
@@ -62,12 +81,14 @@ async function main() {
         `claims ${assetManifest.fileKey} — one of them is wrong.`,
     )
   }
-  const baseline = readBaseline()
+  const baseline = readBaseline(brand)
   const client = createFigmaClient(readFigmaToken())
   const ranAt = new Date().toISOString()
 
   const meta = await client.getFileMeta(manifest.fileKey)
-  console.log(`${meta.name} — version ${meta.version}, last modified ${meta.lastModified}`)
+  console.log(
+    `${brand} — ${meta.name} — version ${meta.version}, last modified ${meta.lastModified}`,
+  )
 
   const trackedIds = manifest.entries.map((entry) => entry.nodeId)
   const assetIds = assetSourceNodeIds(assetManifest)
@@ -86,15 +107,19 @@ async function main() {
 
   const errors: string[] = []
 
-  // The probe (#79): one `depth=1` call, and the only thing here that looks
-  // outside the manifest. It surfaces candidates and promotes nothing.
-  const children = await client.getSectionChildren(manifest.fileKey, manifest.sectionNodeId)
-  if (children === null) {
-    errors.push(
-      `section ${manifest.sectionNodeId} not found — the untracked-frame probe was skipped`,
-    )
+  // The probe (#79): one `depth=1` call per watched section, and the only
+  // thing here that looks outside the manifest. It surfaces candidates and
+  // promotes nothing. A kit spreads its work over canvases rather than one
+  // section, so the list is a list (#242).
+  const untrackedFrames = []
+  for (const sectionNodeId of manifest.sectionNodeIds) {
+    const children = await client.getSectionChildren(manifest.fileKey, sectionNodeId)
+    if (children === null) {
+      errors.push(`section ${sectionNodeId} not found — its untracked-node probe was skipped`)
+      continue
+    }
+    untrackedFrames.push(...findUntrackedFrames(children, manifest))
   }
-  const untrackedFrames = children ? findUntrackedFrames(children, manifest) : []
 
   const hashes: Record<string, string> = {}
   // What each node *was*, so a removal the manifest no longer describes still
@@ -150,7 +175,7 @@ async function main() {
     assets,
     errors,
   })
-  writeReport(report, renderReportMarkdown(report))
+  writeReport(report, renderReportMarkdown(report), brand)
 
   const next: Baseline = {
     fileKey: manifest.fileKey,
@@ -166,7 +191,7 @@ async function main() {
     // are what keep the conflict visible until the manifest entry changes.
     openAssetConflicts: assets.openConflicts,
   }
-  writeBaseline(next)
+  writeBaseline(next, brand)
 
   const changed = [...report.changedFrames, ...report.changedComponentSets]
   if (changed.length === 0) {
@@ -177,8 +202,8 @@ async function main() {
   }
   if (untrackedFrames.length > 0) {
     console.log(
-      `\n${untrackedFrames.length} frame(s) in the Design Concept section are not in the manifest —` +
-        ' canonical? add them to tracked-nodes.json. noise? add them to ignoredNodeIds.',
+      `\n${untrackedFrames.length} node(s) in the watched sections are not in the manifest —` +
+        ' canonical? add them to the tracked manifest. noise? add them to ignoredNodeIds.',
     )
     for (const frame of untrackedFrames) {
       console.log(
@@ -215,7 +240,13 @@ async function main() {
     console.error(`  failed   ${failure.path}  ← ${failure.nodeId ?? '?'}: ${failure.error}`)
   }
   for (const error of errors) console.error(`  error    ${error}`)
-  console.log('\nbaseline and report written to tools/figma-sync/data/ — commit them.')
+  const written = dataPaths(brand)
+  console.log(
+    `\nbaseline and report written to tools/figma-sync/data/ — commit them:\n` +
+      `  ${[written.baseline, written.reportJson, written.reportMd]
+        .map((path) => basename(path))
+        .join(', ')}`,
+  )
 }
 
 await main()

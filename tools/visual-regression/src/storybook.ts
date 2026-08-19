@@ -11,6 +11,31 @@ import fs from 'node:fs'
 import http from 'node:http'
 import path from 'node:path'
 
+/** The brands with a Storybook host of their own (#240). */
+export const BRANDS = ['o3', 'o3xo'] as const
+export type Brand = (typeof BRANDS)[number]
+
+/**
+ * A brand's host, repo-relative. Everything else that is brand-shaped follows
+ * from this one string: the directory the build runs in, the prefix Storybook
+ * writes its module ids against, and the two globals that sit above every one
+ * of that host's stories.
+ */
+const HOST_DIR: Record<Brand, string> = {
+  o3: 'apps/storybook',
+  o3xo: 'apps/storybook-o3xo',
+}
+
+export const DEFAULT_BRAND: Brand = 'o3'
+
+export function hostDir(brand: Brand): string {
+  return HOST_DIR[brand]
+}
+
+export function isBrand(value: string): value is Brand {
+  return (BRANDS as readonly string[]).includes(value)
+}
+
 /** One entry of Storybook's `index.json`. */
 export interface StoryEntry {
   id: string
@@ -32,13 +57,19 @@ export interface StatsModule {
   reasons?: { moduleName?: string }[]
 }
 
-export function buildStorybook(checkoutRoot: string, outDir: string, verbose: boolean) {
+export function buildStorybook(
+  checkoutRoot: string,
+  brand: Brand,
+  outDir: string,
+  verbose: boolean,
+) {
+  const host = path.join(checkoutRoot, ...hostDir(brand).split('/'))
   return new Promise<void>((resolve, reject) => {
     const child = spawn(
       'pnpm',
       ['exec', 'storybook', 'build', '--stats-json', '--quiet', '--output-dir', outDir],
       {
-        cwd: path.join(checkoutRoot, 'apps', 'storybook'),
+        cwd: host,
         stdio: verbose ? 'inherit' : ['ignore', 'pipe', 'pipe'],
       },
     )
@@ -48,7 +79,7 @@ export function buildStorybook(checkoutRoot: string, outDir: string, verbose: bo
     child.on('error', reject)
     child.on('close', (code) => {
       if (code === 0) return resolve()
-      reject(new Error(`storybook build failed in ${checkoutRoot}\n\n${output.slice(-4000)}`))
+      reject(new Error(`storybook build failed in ${host}\n\n${output.slice(-4000)}`))
     })
   })
 }

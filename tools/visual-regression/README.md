@@ -2,6 +2,7 @@
 
 ```bash
 pnpm vr                       # the stories your change touches, vs the merge base with main
+pnpm vr --brand o3xo          # the o3xo Storybook host, not o3's
 pnpm vr --base NickO3/toolbar # vs another ref
 pnpm vr --story hero          # these stories, whatever the diff says
 pnpm vr --all                 # every story
@@ -14,6 +15,25 @@ the affected stories in headless Chromium at 390px and 1440px, diffs the pixels,
 report with side-by-side, slider, onion-skin, and diff views.
 
 Nothing leaves the machine and nothing is committed. Everything lives in `.vr/`, which is gitignored.
+
+## Which host
+
+`--brand` names one of the two Storybook hosts (#240): `o3` is `apps/storybook`, `o3xo` is
+`apps/storybook-o3xo`. It defaults to `o3`, so an unqualified `pnpm vr` is what it always was.
+
+The brand is not a decoration on the run — it decides which build the module graph is read from, and
+therefore which files select which stories. Storybook writes module ids relative to the host that
+built them, so `./globals.css` is `apps/storybook/globals.css` on one host and
+`apps/storybook-o3xo/globals.css` on the other; a change to one host's `preview.ts` or `globals.css`
+selects every story on **that** host and nothing on the other. The shared packages sit under both, so
+editing `packages/ui/src/components/stat.tsx` selects the `Stat` stories on either — under O3's
+tokens or O3XO's, depending which brand you asked for.
+
+A change to `packages/story-kit` reaches everything on both hosts, because each host's `preview.ts`
+is a shell over it and the climb runs through that import.
+
+A baseline commit older than the host has no such directory to build. That is reported rather than
+crashed: the baseline index is empty and every story on that host reads as `added`.
 
 ## What it compares
 
@@ -131,15 +151,22 @@ assets an earlier run timed out on.
 
 ```
 .vr/
-  assets/                remote images and fonts, fetched once and replayed
-  base/                  detached worktree at the baseline commit
-  build/current/         Storybook build of the working tree
-  build/base-<sha>/      Storybook build of the baseline, cached per commit
-  shots/<sha>/           baseline screenshots, cached per commit
-  shots/current/         this run's screenshots
-  shots/diff/            this run's diffs
-  report/index.html      the report
+  assets/                  remote images and fonts, fetched once and replayed
+  base/                    detached worktree at the baseline commit
+  <brand>/
+    build/current/         Storybook build of the working tree
+    build/base-<sha>/      Storybook build of the baseline, cached per commit
+    shots/<sha>/           baseline screenshots, cached per commit
+    shots/current/         this run's screenshots
+    shots/diff/            this run's diffs
+    report/index.html      the report
 ```
+
+Everything that renders is under the brand, so running one host does not overwrite the other's
+report or serve it the other's build. The two things above it are brand-independent by nature: the
+baseline checkout is one commit whichever host renders it, and a photograph off `cdn.sanity.io` is
+the same bytes under either set of tokens — which is also what keeps the second brand's first run
+from re-fetching 256 images.
 
 Delete the whole directory to start clean; the next run rebuilds it. `git worktree prune` afterwards
 if you removed it while `.vr/base` existed.

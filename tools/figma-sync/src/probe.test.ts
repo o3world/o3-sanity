@@ -18,7 +18,7 @@ import type { TrackedManifest } from './types'
 
 const manifest: TrackedManifest = {
   fileKey: 'RvraLJaZ0zWm8UaD5AJf43',
-  sectionNodeId: '1632:1510',
+  sectionNodeIds: ['1632:1510'],
   entries: [
     { nodeId: '1680:2134', kind: 'pageFrame', name: 'Home', route: '/', variant: 'desktop' },
     { nodeId: '1814:1618', kind: 'pageFrame', name: 'Home', route: '/', variant: 'mobile' },

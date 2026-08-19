@@ -1,24 +1,21 @@
+import { figmaDesign, O3XO_FIGMA_FILE_KEY } from '@o3/story-kit'
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 import { Pager } from './Pager'
 
 /**
- * The collection index's numbered pager (`4404:1821`).
+ * The collection index's numbered pager (`4404:1821`, Pagination canvas
+ * `347:35854` of the _O3XO: UI kit_).
  *
- * `figmaDesign()` is pinned to O3's file and this component's source is the
- * O3XO UI kit, so the Design tab's URL is written out here. Both brands render
- * the component, so the Brand toolbar is the paint-leak check: every colour it
- * names is a role each token package defines.
+ * Both brands render the component, so the Brand toolbar is the paint-leak
+ * check: every colour it names is a role each token package defines.
  */
 const meta = {
   title: 'Content/Pager',
   component: Pager,
   parameters: {
     layout: 'padded',
-    design: {
-      type: 'figma',
-      url: 'https://www.figma.com/design/G6M2gu5qKFvhGxwj3W365b/?node-id=4404-1821',
-    },
+    design: figmaDesign('4404:1821', O3XO_FIGMA_FILE_KEY),
   },
   args: { href: (page: number) => (page <= 1 ? '/insights' : `/insights?page=${page}`) },
   argTypes: {

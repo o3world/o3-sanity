@@ -17,11 +17,17 @@
  * a human (or the judgement layer) answers, either by adding a manifest entry
  * or by muting the node in `ignoredNodeIds`.
  *
- * Only direct children, and only `FRAME`s: the section also holds loose
- * components (the canonical `NavBar` sits right there), and descending into
- * page frames would report every hero in the file as new.
+ * Only direct children, and only the node types the manifest asks for.
+ * Descending would report every hero in the file as new; taking every type
+ * would report the loose components a site file's section holds (the canonical
+ * `NavBar` sits right there). Which types are news depends on what the file
+ * is, so the manifest says: a site file watches `FRAME`s, and the O3XO kit
+ * watches library nodes because its frames are spec sheets (#242).
  */
 import type { TrackedManifest, UntrackedFrame } from './types'
+
+/** What a site file's section holds that is worth triaging. */
+const DEFAULT_PROBE_TYPES = ['FRAME'] as const
 
 /** As much of a `?depth=1` child as the classification needs. */
 export interface SectionChild {
@@ -43,9 +49,10 @@ export function findUntrackedFrames(
     ...manifest.entries.map((entry) => entry.nodeId),
     ...(manifest.ignoredNodeIds ?? []).map((entry) => entry.nodeId),
   ])
+  const types = new Set<string>(manifest.probeNodeTypes ?? DEFAULT_PROBE_TYPES)
 
   return children
-    .filter((child) => child.type === 'FRAME' && !known.has(child.id))
+    .filter((child) => types.has(child.type) && !known.has(child.id))
     .map((child) => {
       const width = child.absoluteBoundingBox?.width
       return {

@@ -1,0 +1,448 @@
+{
+  "schemaVersion": 1,
+  "ranAt": "2026-08-19T22:22:43.111Z",
+  "fileVersion": "2389158081962590922",
+  "shortCircuited": false,
+  "changedFrames": [],
+  "changedComponentSets": [
+    {
+      "nodeId": "727:1108",
+      "name": "Type ramp",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/tailwind-config-o3xo/tokens/typography.css",
+      "change": "added"
+    },
+    {
+      "nodeId": "4214:2933",
+      "name": "Color",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/tailwind-config-o3xo/tokens/color.css",
+      "change": "added"
+    },
+    {
+      "nodeId": "4214:3419",
+      "name": "Spacing scale",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/tailwind-config-o3xo/tokens/layout.css",
+      "change": "added"
+    },
+    {
+      "nodeId": "4214:3605",
+      "name": "Breakpoints",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/tailwind-config-o3xo/tokens/layout.css",
+      "change": "added"
+    },
+    {
+      "nodeId": "4214:3643",
+      "name": "Grids",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/tailwind-config-o3xo/tokens/layout.css",
+      "change": "added"
+    },
+    {
+      "nodeId": "4214:3911",
+      "name": "Effects",
+      "route": null,
+      "variant": null,
+      "codeComponent": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "4405:6386",
+      "name": "Button",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/ui/src/components/ui/button.tsx#Button",
+      "change": "added"
+    },
+    {
+      "nodeId": "4405:6387",
+      "name": "Button, white CTA",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/ui/src/components/ui/button.tsx#Button",
+      "change": "added"
+    },
+    {
+      "nodeId": "4405:6391",
+      "name": "Button icons",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/ui/src/components/button-icons.tsx#BUTTON_ICONS",
+      "change": "added"
+    },
+    {
+      "nodeId": "4404:5589",
+      "name": "Phosphor icons",
+      "route": null,
+      "variant": null,
+      "codeComponent": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "4404:5590",
+      "name": "Card icon",
+      "route": null,
+      "variant": null,
+      "codeComponent": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "4404:5593",
+      "name": "Mark glyph",
+      "route": null,
+      "variant": null,
+      "codeComponent": "apps/o3xo/src/brand/O3xoMark.tsx#O3xoMark",
+      "change": "added"
+    },
+    {
+      "nodeId": "957:1166",
+      "name": "Icon slot",
+      "route": null,
+      "variant": null,
+      "codeComponent": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "4404:3708",
+      "name": "Insight card",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/content-ui/src/cards/InsightCard.tsx#InsightCard",
+      "change": "added"
+    },
+    {
+      "nodeId": "4404:3773",
+      "name": "Insight card row",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/content-ui/src/blocks/section/listingSection/ListingSection.tsx#ListingSection",
+      "change": "added"
+    },
+    {
+      "nodeId": "4404:3810",
+      "name": "Icon card",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/content-ui/src/blocks/section/featureGridSection/FeatureGridSection.tsx#FeatureGridSection",
+      "change": "added"
+    },
+    {
+      "nodeId": "4404:3907",
+      "name": "Icon card row",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/content-ui/src/blocks/section/featureGridSection/FeatureGridSection.tsx#FeatureGridSection",
+      "change": "added"
+    },
+    {
+      "nodeId": "4404:3811",
+      "name": "Action icon card",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/content-ui/src/blocks/section/featureGridSection/FeatureGridSection.tsx#FeatureGridSection",
+      "change": "added"
+    },
+    {
+      "nodeId": "4404:3873",
+      "name": "Action icon card row",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/content-ui/src/blocks/section/featureGridSection/FeatureGridSection.tsx#FeatureGridSection",
+      "change": "added"
+    },
+    {
+      "nodeId": "4404:3916",
+      "name": "Key metric card",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/ui/src/components/stat.tsx#Stat",
+      "change": "added"
+    },
+    {
+      "nodeId": "4404:3960",
+      "name": "Key metric card row",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/content-ui/src/blocks/base/statGroup/StatGroup.tsx#StatGroup",
+      "change": "added"
+    },
+    {
+      "nodeId": "4404:3934",
+      "name": "Yellow text card",
+      "route": null,
+      "variant": null,
+      "codeComponent": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "4404:4611",
+      "name": "Yellow text card row",
+      "route": null,
+      "variant": null,
+      "codeComponent": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "4404:3072",
+      "name": "Case study card",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/content-ui/src/cards/CaseStudyCard.tsx#CaseStudyCard",
+      "change": "added"
+    },
+    {
+      "nodeId": "4404:3398",
+      "name": "Case study row",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/content-ui/src/blocks/section/caseShowcaseSection/CaseShowcaseSection.tsx#CaseShowcaseSection",
+      "change": "added"
+    },
+    {
+      "nodeId": "4404:4555",
+      "name": "Strategy card",
+      "route": null,
+      "variant": null,
+      "codeComponent": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "4404:4593",
+      "name": "Strategy card stack",
+      "route": null,
+      "variant": null,
+      "codeComponent": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "4404:3706",
+      "name": "Insight image",
+      "route": null,
+      "variant": null,
+      "codeComponent": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "4426:10608",
+      "name": "Insight image layout",
+      "route": null,
+      "variant": null,
+      "codeComponent": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "4212:374",
+      "name": "O3XO mark",
+      "route": null,
+      "variant": null,
+      "codeComponent": "apps/o3xo/src/brand/O3xoMark.tsx#O3xoMark",
+      "change": "added"
+    },
+    {
+      "nodeId": "4404:4146",
+      "name": "Site nav",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/content-ui/src/chrome/SiteNav.tsx#SiteNav",
+      "change": "added"
+    },
+    {
+      "nodeId": "4404:4148",
+      "name": "Site footer",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/content-ui/src/chrome/SiteFooter.tsx#SiteFooter",
+      "change": "added"
+    },
+    {
+      "nodeId": "4404:4147",
+      "name": "Footer CTA",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/content-ui/src/blocks/section/ctaSection/CtaSection.tsx#CtaSection",
+      "change": "added"
+    },
+    {
+      "nodeId": "4404:4188",
+      "name": "Footer block",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/content-ui/src/chrome/SiteFooter.tsx#SiteFooter",
+      "change": "added"
+    },
+    {
+      "nodeId": "4404:5726",
+      "name": "Person card",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/content-ui/src/blocks/section/personGridSection/PersonGridSection.tsx#PersonGridSection",
+      "change": "added"
+    },
+    {
+      "nodeId": "4404:4920",
+      "name": "Quote block",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/content-ui/src/blocks/section/quoteSection/QuoteSection.tsx#QuoteSection",
+      "change": "added"
+    },
+    {
+      "nodeId": "4414:8100",
+      "name": "Header pill",
+      "route": null,
+      "variant": null,
+      "codeComponent": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "4438:12259",
+      "name": "Slide quote",
+      "route": null,
+      "variant": null,
+      "codeComponent": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "4404:4919",
+      "name": "FAQ accordion",
+      "route": null,
+      "variant": null,
+      "codeComponent": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "4404:4613",
+      "name": "Event band",
+      "route": null,
+      "variant": null,
+      "codeComponent": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "4404:1821",
+      "name": "Pager",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/content-ui/src/Pager.tsx#Pager",
+      "change": "added"
+    },
+    {
+      "nodeId": "4406:6595",
+      "name": "Hero band",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/content-ui/src/blocks/section/heroSection/HeroSection.tsx#HeroSection",
+      "change": "added"
+    },
+    {
+      "nodeId": "4406:6642",
+      "name": "Strategy band",
+      "route": null,
+      "variant": null,
+      "codeComponent": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "4406:6755",
+      "name": "Expertise band",
+      "route": null,
+      "variant": null,
+      "codeComponent": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "4406:6954",
+      "name": "Quote band",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/content-ui/src/blocks/section/quoteSection/QuoteSection.tsx#QuoteSection",
+      "change": "added"
+    },
+    {
+      "nodeId": "4406:7179",
+      "name": "Text card band",
+      "route": null,
+      "variant": null,
+      "codeComponent": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "4406:7226",
+      "name": "People band",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/content-ui/src/blocks/section/personGridSection/PersonGridSection.tsx#PersonGridSection",
+      "change": "added"
+    },
+    {
+      "nodeId": "4406:7288",
+      "name": "FAQ band",
+      "route": null,
+      "variant": null,
+      "codeComponent": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "4406:7491",
+      "name": "Action card band",
+      "route": null,
+      "variant": null,
+      "codeComponent": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "4406:7560",
+      "name": "Three card band",
+      "route": null,
+      "variant": null,
+      "codeComponent": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "4406:7594",
+      "name": "Insight gallery band",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/content-ui/src/blocks/section/listingSection/ListingSection.tsx#ListingSection",
+      "change": "added"
+    },
+    {
+      "nodeId": "4407:7758",
+      "name": "Case study band",
+      "route": null,
+      "variant": null,
+      "codeComponent": "packages/content-ui/src/blocks/section/caseShowcaseSection/CaseShowcaseSection.tsx#CaseShowcaseSection",
+      "change": "added"
+    },
+    {
+      "nodeId": "4432:11535",
+      "name": "Wide band, 1920 (824h)",
+      "route": null,
+      "variant": null,
+      "codeComponent": null,
+      "change": "added"
+    },
+    {
+      "nodeId": "4432:11487",
+      "name": "Wide band, 1920 (1090h)",
+      "route": null,
+      "variant": null,
+      "codeComponent": null,
+      "change": "added"
+    }
+  ],
+  "untrackedFrames": [],
+  "assets": {
+    "regenerated": [],
+    "lockedConflicts": [],
+    "failures": []
+  },
+  "errors": []
+}
