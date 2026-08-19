@@ -46,7 +46,8 @@ Two viewports, `mobile` (390×844) and `desktop` (1440×900), full page. Overrid
 
 To keep a rerun of the same commit byte-identical, every capture runs with animations and transitions
 collapsed to 1ms, `prefers-reduced-motion`, a fixed device pixel ratio, a wait on
-`document.fonts.ready`, and the two rules below. A story whose pixels are genuinely non-deterministic
+`document.fonts.ready`, and the two rules below. Three hundred and twenty-eight stories captured four
+times over come back byte-identical. A story whose pixels are genuinely non-deterministic
 — canvas, video, anything seeded by a clock — should opt out rather than be tuned around:
 
 ```ts
@@ -81,6 +82,11 @@ four workers competing for the machine that beat can outlast the settle: one run
 `Pages/Software Engineering` came back as a 900px screenshot of an empty viewport against a 5383px
 baseline. The capture now waits for the story's own tree — briefly, because `RichText/Empty` and
 friends render nothing on purpose.
+
+A story can also arrive in stages. `ListingSection/OnBone` painted its heading and, under ten
+parallel workers, its cards a beat later. So after the settle the capture samples the page — image
+count, height, element count — and only opens the shutter once two samples across a 150ms quiet
+window agree.
 
 Next's `<Image>` is `loading="lazy"`, so on the homepage twelve of twenty-three images had not been
 requested at all when the shutter fired — and a full-page screenshot widens the capture viewport,

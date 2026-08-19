@@ -40,7 +40,7 @@ export function shotFile(dir: string, storyId: string, viewport: string): string
  * a page caught mid-load — reused as a baseline, it reports the waiting rule
  * itself as a regression in every story.
  */
-const CAPTURE_BEHAVIOUR = 'deterministic-assets+mount'
+const CAPTURE_BEHAVIOUR = 'deterministic-assets+quiet'
 
 /**
  * What a cached screenshot was taken *with*, short enough to sit in a path.
@@ -95,25 +95,37 @@ function awaitImages(timeoutMs: number): Promise<string> {
   return Promise.race([
     Promise.all(settled),
     new Promise((resolve) => setTimeout(resolve, timeoutMs)),
-  ]).then(() => `${images.length}:${document.documentElement.scrollHeight}`)
+  ]).then(
+    () =>
+      `${images.length}:${document.documentElement.scrollHeight}:${document.querySelectorAll('*').length}`,
+  )
 }
 
+/** The quiet window that counts as "the page has stopped", and its cutoff. */
+const QUIET_MS = 150
+const QUIET_PASSES = 12
+
 /**
- * Run the barrier until the page stops changing shape.
+ * Wait until the page stops changing: same image count, same height, same
+ * number of elements, twice in a row across a quiet window.
  *
- * One pass is not enough: an image that only exists once the one above it has
- * loaded — a card whose height decides whether the next band mounts — appears
- * after the pass that would have waited for it. Two passes agreeing on both the
- * image count and the page height is the signal that the page is done; the
- * third is the cutoff, because a page that keeps growing forever is a different
- * bug.
+ * Back-to-back samples are not enough, and that is the whole reason this is a
+ * loop with a wait in it. A story arrives in stages — `ListingSection/OnBone`
+ * painted its heading and, under ten parallel workers, its cards a beat later;
+ * two samples taken a millisecond apart both saw the heading and agreed the
+ * page was done. The quiet window is what makes agreement mean something.
+ *
+ * Element count is in the signature because height is not enough on its own:
+ * `InsightsCarouselSection/SingleCard` filled in at exactly the same height it
+ * started at.
  */
 async function settleContent(page: Page): Promise<void> {
   let previous = ''
-  for (let pass = 0; pass < 3; pass++) {
+  for (let pass = 0; pass < QUIET_PASSES; pass++) {
     const shape = await page.evaluate(awaitImages, IMAGE_TIMEOUT_MS)
     if (shape === previous) return
     previous = shape
+    await page.waitForTimeout(QUIET_MS)
   }
 }
 
