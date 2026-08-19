@@ -11,11 +11,14 @@ import type { BaseBlockName, SectionBlockName } from '@o3/sanity/schemas/registr
 import {
   bindingsToRecord,
   defineBlockRender,
+  type BaseProps,
   type ClientBlockRenderBinding,
   type SectionProps,
 } from '@o3/content-runtime/blocks'
 
 import { O3xoMark } from '@/brand/O3xoMark'
+import { KeyMetricCards } from '@/cards/KeyMetricCard'
+import { YellowTextCards } from '@/cards/YellowTextCard'
 
 // The renderers themselves are shared (@o3/content-ui); the binding below is
 // this app's. Re-pointing one line here is what "O3XO adapts a block" costs.
@@ -57,6 +60,60 @@ function HeroSectionWithMark(props: SectionProps<'heroSection'>) {
 }
 
 /**
+ * The rail band, drawing the kit's `Yellow Text Card` where it lays panels out
+ * as cards (#244).
+ *
+ * Only the card is this brand's — the band's shell, header and three other
+ * layouts are the shared renderer's, so this fills its cards slot rather than
+ * forking it. The card is app-local because its plate is `accent`, a role only
+ * O3XO's token package declares (ADR 0028).
+ */
+function RailPanelsSectionWithYellowCards(props: SectionProps<'railPanelsSection'>) {
+  return <RailPanelsSection {...props} panelCards={YellowTextCards} />
+}
+
+/**
+ * The stat row, as the kit's `Key Metric Card Group` (#244) — a yellow plate
+ * per figure where O3 sets the same numbers bare.
+ */
+function StatGroupAsKeyMetrics({ stats }: BaseProps<'statGroup'>) {
+  return (
+    <KeyMetricCards
+      items={(stats ?? []).map((stat, index) => ({
+        key: stat._key ?? String(index),
+        value: stat.value ?? '',
+        label: stat.label ?? '',
+      }))}
+    />
+  )
+}
+
+/**
+ * This app's BASE-tier roster — the shared one with `statGroup` re-pointed.
+ *
+ * Base bindings ship with the renderers rather than per app, because the base
+ * tier is the vocabulary a section renderer draws with. Re-pointing one here
+ * is the same act the section bindings below perform, and it has to be spelled
+ * once and read three times: by the two dispatchers in this file, and by
+ * `LayoutSection`, which is the one band that renders a base block itself.
+ */
+export const BASE_CLIENT_COMPONENTS = {
+  ...BASE_BLOCK_COMPONENTS,
+  statGroup: StatGroupAsKeyMetrics,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+} satisfies Record<BaseBlockName, ComponentType<any>>
+
+/**
+ * The layout band, dispatching its columns through this app's base roster
+ * (#244) — a `statGroup` in a column is where the homepage's key metrics
+ * actually sit, and the band is the only place a base block renders outside
+ * this app's own registry.
+ */
+function LayoutSectionWithAccentCards(props: SectionProps<'layoutSection'>) {
+  return <LayoutSection {...props} baseComponents={BASE_CLIENT_COMPONENTS} />
+}
+
+/**
  * Render bindings for every client-safe SECTION block — the single authoring
  * point `SECTION_CLIENT_COMPONENTS` derives from.
  *
@@ -71,7 +128,7 @@ export const CLIENT_SECTION_BINDINGS = [
   defineBlockRender('heroSection', { component: HeroSectionWithMark }),
   defineBlockRender('logoWallSection', { component: LogoWallSection }),
   defineBlockRender('caseShowcaseSection', { component: CaseShowcaseSection }),
-  defineBlockRender('railPanelsSection', { component: RailPanelsSection }),
+  defineBlockRender('railPanelsSection', { component: RailPanelsSectionWithYellowCards }),
   defineBlockRender('quoteSection', { component: QuoteSection }),
   defineBlockRender('insightsCarouselSection', { component: InsightsCarouselSection }),
   defineBlockRender('ctaSection', { component: CtaSection }),
@@ -80,7 +137,7 @@ export const CLIENT_SECTION_BINDINGS = [
   defineBlockRender('roleListSection', { component: RoleListSection }),
   defineBlockRender('inFlightSection', { component: InFlightSection }),
   defineBlockRender('formSection', { component: FormSection }),
-  defineBlockRender('layoutSection', { component: LayoutSection }),
+  defineBlockRender('layoutSection', { component: LayoutSectionWithAccentCards }),
   defineBlockRender('mediaSection', { component: MediaSection }),
   defineBlockRender('screenGridSection', { component: ScreenGridSection }),
   defineBlockRender('listingSection', { component: ListingSection }),
@@ -102,7 +159,7 @@ export const SECTION_CLIENT_COMPONENTS = bindingsToRecord(
  * registry.ts).
  */
 const CLIENT_BLOCK_COMPONENTS = {
-  ...BASE_BLOCK_COMPONENTS,
+  ...BASE_CLIENT_COMPONENTS,
   ...SECTION_CLIENT_COMPONENTS,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 } satisfies Record<BaseBlockName | SectionBlockName, ComponentType<any>>

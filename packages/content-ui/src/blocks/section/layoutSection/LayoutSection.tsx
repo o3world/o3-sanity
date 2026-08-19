@@ -9,7 +9,20 @@ import { DECORATED_BAND_CLASS, resolveDecoration } from '../../decoration'
 import { MoleculeDecoration } from '../../MoleculeDecoration'
 import { resolveSurface } from '../../surface'
 
-type LayoutSectionProps = SectionProps<'layoutSection'>
+type LayoutSectionProps = SectionProps<'layoutSection'> & {
+  /**
+   * The base-tier roster the columns dispatch through, so an app can swap one
+   * base block's renderer without forking the band (ADR 0028). O3XO swaps
+   * `statGroup` for the kit's key metric cards, whose plate is a token role
+   * only its own package declares (#244).
+   *
+   * This band is the only place a base block is rendered outside an app's own
+   * registry, which is why the seam is here: an app's base binding cannot
+   * reach a layout column any other way.
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  baseComponents?: Record<string, ComponentType<any>>
+}
 
 const COLUMN_CLASSES: Record<number, string> = {
   1: 'grid-cols-1',
@@ -24,8 +37,8 @@ function resolveColumns(value: number | null | undefined): number {
 
 /**
  * The one true two-tier block (ADR 0001): 1–3 columns of base-tier blocks.
- * Items dispatch through the typed base registry directly — the base tier
- * never contains sections, so the full registry isn't needed here.
+ * Items dispatch through the base roster directly — the base tier never
+ * contains sections, so the full registry isn't needed here.
  */
 export function LayoutSection({
   eyebrow,
@@ -35,6 +48,7 @@ export function LayoutSection({
   decoration,
   items,
   surface,
+  baseComponents = BASE_BLOCK_COMPONENTS,
 }: LayoutSectionProps) {
   const columnClass = COLUMN_CLASSES[resolveColumns(columns)]
   const resolved = resolveSurface(surface, 'layoutSection')
@@ -100,12 +114,8 @@ export function LayoutSection({
          */}
         <div className={`grid items-start gap-10 ${columnClass}`}>
           {(items ?? []).map((item) => {
-            const Component = Object.prototype.hasOwnProperty.call(
-              BASE_BLOCK_COMPONENTS,
-              item._type,
-            )
-              ? (BASE_BLOCK_COMPONENTS[item._type as keyof typeof BASE_BLOCK_COMPONENTS] as
-                  ComponentType<Record<string, unknown>> | undefined)
+            const Component = Object.prototype.hasOwnProperty.call(baseComponents, item._type)
+              ? baseComponents[item._type]
               : undefined
             if (!Component) return null
             // eslint-disable-next-line @typescript-eslint/no-unused-vars

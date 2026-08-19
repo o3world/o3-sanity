@@ -35,6 +35,10 @@ export { MediaSection } from './blocks/section/mediaSection/MediaSection'
 export { PersonGridSection } from './blocks/section/personGridSection/PersonGridSection'
 export { QuoteSection } from './blocks/section/quoteSection/QuoteSection'
 export { RailPanelsSection } from './blocks/section/railPanelsSection/RailPanelsSection'
+// The shape the `cards` layout hands each card. Exported so an app can fill
+// the band's cards slot with its own row (ADR 0028) — the band maps its panels
+// once and either brand's cards read the same items.
+export type { PanelCard } from './blocks/section/railPanelsSection/PanelCards'
 export { RoleListSection } from './blocks/section/roleListSection/RoleListSection'
 export { ScreenGridSection } from './blocks/section/screenGridSection/ScreenGridSection'
 

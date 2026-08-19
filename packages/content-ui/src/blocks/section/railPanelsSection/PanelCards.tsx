@@ -1,6 +1,6 @@
 import { Mark, markProps, type MarkProps } from '../../base/mark/Mark'
 
-interface PanelCard {
+export interface PanelCard {
   key: string
   heading?: string | null
   body?: string | null
