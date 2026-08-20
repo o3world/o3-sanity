@@ -369,6 +369,94 @@ describe('gradeRun', () => {
   })
 })
 
+describe('review-p0-fabricated, the P0 gate record', () => {
+  const caseDir = join(evalsDir, 'review-p0-fabricated')
+
+  /**
+   * The note the failing run wrote: 478 characters, the fabricated fact named
+   * in it, which is what the skill asks a P0 finding for. Sanity returns an
+   * array object's keys alphabetically — `_key, label, note, result` — so the
+   * note always sits between the two keys the grader reads.
+   */
+  const note = [
+    'The draft cites "a 2024 WebAIM study" putting automated coverage at 57% of all WCAG failures.',
+    'That figure is in no source this brief holds: it is not in background, links is empty, and Priya',
+    'says she has never seen the study and did not supply the number. It is load-bearing — it licenses',
+    'the whole turn in section two. Source it, or cut it; the draft is not edited here, because removing',
+    'the fact would remove the evidence for this verdict. Halted at P0 — no gate after it ran.',
+  ].join(' ')
+
+  const brief = (gates: object[]) =>
+    JSON.stringify(
+      {
+        _id: 'drafts.brief-eval-review-p0-fabricated-zero-violations',
+        _type: 'brief',
+        stage: 'review',
+        verdict: {
+          _type: 'verdict',
+          gates,
+          readerAnswer: 'Not run — the chain halted at P0.',
+          result: 'fail',
+        },
+      },
+      null,
+      2,
+    )
+
+  /** One gate as Sanity hands it back, keys in alphabetical order. */
+  const gate = (label: string, result: string, why: string) => ({
+    _key: 'a1b2c3d4',
+    _type: 'gate',
+    label,
+    note: why,
+    result,
+  })
+
+  const verdictOn = (gates: object[]) => {
+    const [grader] = gradeRun(
+      caseDir,
+      write({
+        'last-message.md':
+          'BLOCKING: true (the 57% WebAIM figure is in no source this brief holds)\n',
+        'transcript.jsonl':
+          '{"type":"tool_use","name":"mcp__Sanity__patch_documents","input":{"id":"brief-eval-review-p0-fabricated-zero-violations"}}',
+        'workspace/dataset/brief-eval-review-p0-fabricated-zero-violations.json': brief(gates),
+      }),
+    ).filter((graded) => graded.name === 'p0-gate-recorded')
+    return grader
+  }
+
+  it('passes the record the ticket failed — a named P0 with 478 characters of note between the keys', () => {
+    expect(note).toHaveLength(478)
+    expect(verdictOn([gate('P0', 'fail', note)])).toMatchObject({ passed: true })
+  })
+
+  it('passes whichever key the record puts first', () => {
+    expect(verdictOn([{ result: 'fail', note, label: 'P0', _key: 'a1b2c3d4' }])).toMatchObject({
+      passed: true,
+    })
+  })
+
+  it('reads a note holding braces and escaped quotes as a value, not as structure', () => {
+    const quoted =
+      'The body says {"coverage": 57} and cites "a 2024 WebAIM study" — }{ neither is in background.'
+    expect(verdictOn([gate('P0', 'fail', quoted)])).toMatchObject({ passed: true })
+  })
+
+  it('fails a P0 that passed next to a sibling gate that did not', () => {
+    expect(
+      verdictOn([
+        gate('P0', 'pass', 'Every load-bearing fact traced.'),
+        gate('structure', 'fail', note),
+      ]),
+    ).toMatchObject({ passed: false })
+  })
+
+  it('fails a record with no P0 gate in it at all', () => {
+    expect(verdictOn([gate('structure', 'fail', note)])).toMatchObject({ passed: false })
+  })
+})
+
 describe('grade.mjs as a command', () => {
   const cli = (caseDir: string, runDir: string) =>
     spawnSync(execPath, [join(evalsDir, 'grade.mjs'), caseDir, runDir], { encoding: 'utf8' })
