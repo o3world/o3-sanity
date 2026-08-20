@@ -3,6 +3,7 @@ import type { MetadataRoute } from 'next'
 import { SITEMAP_QUERY } from '@o3/sanity/queries'
 import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
 
+import { typeTag } from '@/lib/content-routes/cacheTags'
 import { getBaseUrl } from '@/lib/base-url'
 import { REDIRECTED_PATHS } from '@/lib/redirects.generated'
 import { sanityFetch } from '@/sanity/live'
@@ -53,6 +54,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       query: SITEMAP_QUERY,
       perspective: 'published',
       stega: false,
+      // Explicit type tags so /api/revalidate reaches this fetch — without
+      // them the sitemap would stay frozen at its build-time content.
+      tags: ['page', 'insight', 'caseStudy'].map(typeTag),
     })
 
     for (const row of (data?.insights ?? []) as SitemapRow[]) {

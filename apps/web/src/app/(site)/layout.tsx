@@ -25,8 +25,16 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       <SiteNav settings={settings} />
       <main className="min-h-screen">{children}</main>
       <SiteFooter settings={settings} />
-      <SanityLive />
-      {isDraft ? <VisualEditing /> : null}
+      {/* Draft sessions only: SanityLive is the delivery path for draft
+          updates in Presentation (see live.ts). Published visitors get
+          freshness from the Sanity webhook → /api/revalidate instead, so
+          they hold no Live Content API connection. */}
+      {isDraft ? (
+        <>
+          <SanityLive />
+          <VisualEditing />
+        </>
+      ) : null}
       {/* Renders nothing unless the visitor holds a Studio session (#60, #99).
           `<VisualEditing />` above is what lets it tell Presentation's frame
           from an ordinary tab — see shouldShowEditorToolbar. */}
