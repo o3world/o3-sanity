@@ -5,6 +5,7 @@ plugins: ['../..']
 runs: 1
 max_turns: 50
 timeout_seconds: 2400
+# Server name is the plugin's `sanity`; grade.mjs matches this repo's `Sanity` case-insensitively.
 allowed_tools:
   [
     Skill,
@@ -12,6 +13,7 @@ allowed_tools:
     Glob,
     Grep,
     Write,
+    mcp__sanity__get_document,
     mcp__sanity__query_documents,
     mcp__sanity__get_schema,
     mcp__sanity__create_documents,

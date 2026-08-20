@@ -85,6 +85,27 @@ describe('parseFrontmatter', () => {
     expect(fields.runs).toBe(1)
   })
 
+  it('keeps a comment above a wrapped flow sequence from swallowing the budget under it', () => {
+    const { fields } = parseFrontmatter(
+      [
+        '---',
+        'name: Review verdict',
+        'model: sonnet',
+        "# Server name is the plugin's `sanity`.",
+        'allowed_tools:',
+        '  [',
+        '    Read,',
+        '    mcp__sanity__get_document,',
+        '  ]',
+        '---',
+        '',
+        'The task.',
+      ].join('\n'),
+    )
+
+    expect(fields.allowed_tools).toEqual(['Read', 'mcp__sanity__get_document'])
+  })
+
   it('reports a file with no frontmatter rather than guessing at one', () => {
     expect(parseFrontmatter('just a prompt').hasFrontmatter).toBe(false)
   })
@@ -454,6 +475,60 @@ describe('review-p0-fabricated, the P0 gate record', () => {
 
   it('fails a record with no P0 gate in it at all', () => {
     expect(verdictOn([gate('structure', 'fail', note)])).toMatchObject({ passed: false })
+  })
+})
+
+describe('review-verdict, the labels the reader must not see', () => {
+  const caseDir = join(evalsDir, 'review-verdict')
+
+  /** The turn section of the seeded body, with the label the grammar allows. */
+  const turn = [
+    'The client had been reporting the zero to their board as an accessibility score.',
+    'The eleven templates were the measurement; the dashboard was the thing being measured.',
+    '',
+    '(pullQuote)',
+    '',
+    '> The eleven templates were the measurement. The dashboard was the thing being measured.',
+  ].join('\n')
+
+  const strippedOn = (body: string) => {
+    const [grader] = gradeRun(
+      caseDir,
+      write({
+        'last-message.md': 'BLOCKING: false (every gate passed)\n',
+        'transcript.jsonl':
+          '{"type":"tool_use","name":"mcp__Sanity__patch_documents","input":{"id":"brief-eval-review-verdict-zero-violations"}}',
+        'workspace/reader-prompt.md': `Zero violations is not a passing grade\n\n${body}\n`,
+      }),
+    ).filter((graded) => graded.name === 'labels-stripped')
+    return grader
+  }
+
+  it('fails a reader prompt handed the label the body carries', () => {
+    expect(strippedOn(turn)).toMatchObject({ passed: false })
+  })
+
+  it('passes the same passage with the label line taken out and the quote kept', () => {
+    expect(
+      strippedOn(
+        turn
+          .split('\n')
+          .filter((line) => line !== '(pullQuote)')
+          .join('\n'),
+      ),
+    ).toMatchObject({ passed: true })
+  })
+
+  it('leaves the prose its own parentheses, which are not labels', () => {
+    expect(
+      strippedOn('Run the scan (it is cheap and it catches real defects), then press Tab.'),
+    ).toMatchObject({ passed: true })
+  })
+
+  it('catches a page band label too, knobs and parts and all', () => {
+    expect(strippedOn('(heroSection: surface=ink) heading, body\n\nSome prose.')).toMatchObject({
+      passed: false,
+    })
   })
 })
 
