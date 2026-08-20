@@ -1,6 +1,8 @@
+import { spawnSync } from 'node:child_process'
 import { mkdirSync, mkdtempSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, join, resolve } from 'node:path'
+import { execPath } from 'node:process'
 
 import { afterAll, describe, expect, it } from 'vitest'
 
@@ -254,6 +256,26 @@ describe('gradeRun', () => {
     expect(gradeRun(path, reversed)[0]).toMatchObject({ passed: false })
   })
 
+  it('refuses to grade a transcript line it cannot parse, rather than counting without it', () => {
+    const path = caseWith('---\ntype: tool_used\ntool: Write\n---\n')
+    const damaged = run({
+      'transcript.jsonl': [
+        '{"type":"tool_use","name":"Read","input":{}}',
+        '{"type":"tool_use","name":"Write","input":{"file_path":"draft.md"',
+      ].join('\n'),
+    })
+
+    expect(() => gradeRun(path, damaged)).toThrow(/transcript\.jsonl line 2 does not parse/)
+  })
+
+  it('refuses a grader type it does not know, rather than grading it as tool_order', () => {
+    const path = caseWith('---\ntype: groq\nquery: "*[_type==\'brief\']"\n---\n')
+
+    expect(() => gradeRun(path, run({ 'last-message.md': 'done' }))).toThrow(
+      /grader `only`: unknown type `groq`/,
+    )
+  })
+
   it('defers an llm grader to the runner rather than passing it by default', () => {
     const path = caseWith('---\ntype: llm\ncriteria: Is the thesis one sentence?\n---\n')
     expect(gradeRun(path, run({ 'last-message.md': 'x' }))[0]).toMatchObject({
@@ -261,5 +283,43 @@ describe('gradeRun', () => {
       score: null,
       deferred: true,
     })
+  })
+
+  it('blames the tag when a run that was never settled has no file under the id the case names', () => {
+    const path = caseWith(
+      "---\ntype: regex\npattern: 'thesis'\ntarget: { source: file, path: dataset/brief-eval-x.json }\n---\n",
+    )
+    const tagged = run({
+      'run-id.txt': 'k3f9q2\n',
+      'workspace/dataset/brief-eval-x--k3f9q2.json': '{"thesis":"one sentence"}',
+    })
+
+    expect(gradeRun(path, tagged)[0].detail).toMatch(/still carries its run-id tag/)
+  })
+})
+
+describe('grade.mjs as a command', () => {
+  const cli = (caseDir: string, runDir: string) =>
+    spawnSync(execPath, [join(evalsDir, 'grade.mjs'), caseDir, runDir], { encoding: 'utf8' })
+
+  it('prints the report and exits 0 on a run it can read', () => {
+    const path = caseWith('---\ntype: tool_used\ntool: Write\n---\n')
+    const clean = write({ 'transcript.jsonl': '{"type":"tool_use","name":"Write","input":{}}' })
+
+    const result = cli(path, clean)
+    expect(result.status).toBe(0)
+    expect(JSON.parse(result.stdout).graders[0]).toMatchObject({ passed: true })
+  })
+
+  it('exits 1 with no report at all when a transcript line does not parse', () => {
+    const path = caseWith('---\ntype: tool_used\ntool: Write\n---\n')
+    const damaged = write({
+      'transcript.jsonl': '{"type":"tool_use","name":"Write","input":{"file_path":"draft.md"',
+    })
+
+    const result = cli(path, damaged)
+    expect(result.status).toBe(1)
+    expect(result.stdout).toBe('')
+    expect(result.stderr).toMatch(/transcript\.jsonl line 1 does not parse/)
   })
 })

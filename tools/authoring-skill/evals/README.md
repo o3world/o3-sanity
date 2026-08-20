@@ -73,6 +73,13 @@ it is repeatable, and it does not have an opinion.
 `last_message` (default), `trace`, `files` — the paths the run produced — or
 `{ source: file, path: <produced file> }` for its contents.
 
+**Evidence the engine cannot read stops the grading.** A `transcript.jsonl`
+line that does not parse, or a grader typed outside that table, exits
+`grade.mjs` non-zero with nothing on stdout — there is no run to judge. Graded
+anyway is the dangerous outcome: a dropped tool call fails a `tool_used` grader
+it satisfied, or passes a `max: 0` one it violated, and the report reads as a
+judgement of the skill ([#200](https://github.com/o3world/o3-sanity/issues/200)).
+
 **Write MCP tool names as the plugin declares them.** The plugin's `.mcp.json`
 registers the server as `sanity`, so a case names `mcp__sanity__query_documents`
 — that is the name under `claude plugin eval`. This repo's own `.mcp.json`
