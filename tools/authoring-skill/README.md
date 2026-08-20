@@ -57,7 +57,7 @@ branch that needs them, as `${CLAUDE_PLUGIN_ROOT}/references/<file>`:
 
 | File                          | What it governs                                                        | Read by                |
 | ----------------------------- | ---------------------------------------------------------------------- | ---------------------- |
-| `references/argument.md`      | how one long argument holds up — claim, warrant, arc, turn, ending     | brief, draft, review   |
+| `references/argument.md`      | how one long argument holds up — claim, warrant, arc, turn, hierarchy  | brief, draft, review   |
 | `references/composition.md`   | which band follows which on a page, and which block carries which job  | draft, review, typeset |
 | `references/style.md`         | the style floor: plain sentences, sourced claims, fact conservation    | draft, review          |
 | `references/labels.md`        | the stage directions a draft body carries, and what each one means     | draft, review, typeset |

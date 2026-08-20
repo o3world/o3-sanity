@@ -8,7 +8,8 @@ is `composition.md`.
 This document opens with the standards the brief applies before a word is
 drafted — what a claim has to be, what carries it, what counts as enough
 evidence. Then the shape: how the piece opens, how the argument moves, where it
-turns, how it ends, and how long it runs.
+turns, how it ends, how long it runs, and what gets lifted out of the prose so a
+reader can find their way down it.
 
 **Where the authority comes from.** The craft claims answer to the published
 corpus — a decade of o3world.com writing, counted rather than remembered. The
@@ -256,6 +257,114 @@ runs roughly **15% opening, 60% mechanism, 25% turn and ending together**. So:
   That is the shuffle test, applied section by section.
 - **The ending is short.** Both endings quoted above are two sentences. An
   ending that needs a paragraph to land is still arguing.
+
+## Hierarchy inside the body
+
+The failure this section prevents: **one long body block with nothing lifted out
+of it**. The reader who has already decided to read every word is not the
+problem. The one deciding whether to start comes down the page looking for
+somewhere to land, and 1,200 undifferentiated words give them nowhere, so they
+leave without ever learning what the piece claims.
+
+A long body carries **landmarks** — the subheads, and the passages lifted out of
+the prose beside them. Counted across the 31 published insights past 1,000
+words, the middle half carry one landmark every 132 to 226 words, and the three
+arc pieces sit at 166, 223 and 229. So the rhythm is **one landmark every 150 to
+250 words**, which puts five to eight in a 1,200-word piece. Below that the page
+is a wall. Above it the landmarks are the piece and the prose has become caption.
+
+Which landmark is not a matter of taste. It follows what the document type can
+hold, and the two types hold different things — offering an author a block their
+document has no field for is worse than offering nothing.
+
+### Inside an insight body
+
+`bodyText` takes H2, H3, `>` blockquote, `figure`, `embed` and `pullQuote`, and
+nothing else. There is no `stat` here and no `chapter`, and a band name is page
+vocabulary in a document that has no bands.
+
+**H2 is the section. H3 is for a section that has real parts.** The three pieces
+written for this site use H2 and nothing else. The 850 headings in the migrated
+archive are almost all H3, which is a WordPress theme's doing rather than a
+decision worth copying.
+
+**A subhead states; it does not label.** Read the subheads in a row with no prose
+between them: they should be the argument's spine, so that someone who reads only
+those knows what the piece claims and roughly how it gets there. "The work was
+maps, not pages / What the machines did and what we did / Why this matters if
+you're the client" passes. "Introduction / Background / Conclusion" is a filing
+structure — the table of contents the front-door rule already refuses, one level
+down. Twenty-six headings in the archive are that and nothing else; none of the
+three modern pieces has one.
+
+**A pull quote lifts a sentence. It does not summarise one.** The turn section
+above says which sentence it reaches for and why the sentence has to exist in the
+prose first. Three things that section leaves open:
+
+- **The words are the prose's; the sentence around them is not.** The corpus's
+  one pull quote reads "The migration wins the facts. Figma wins the page." The
+  paragraph it comes from reads "One rule settled most of the fights: the
+  migration wins the facts, Figma wins the page." The setup is dropped, the comma
+  becomes a full stop, the lowercase letter is capitalised, and not one word is
+  new. That is the whole licence: cut what the sentence needed only inside its
+  paragraph, repunctuate what is left so it stands alone, and add nothing.
+  Rewriting it for punch makes it a caption, and a reader who goes looking for it
+  in the prose finds a different sentence there.
+- **It sits where the sentence sits.** A pull quote is a lift, not a move. It
+  goes at the end of the passage that earned it, so the reader meets the sentence
+  in prose and the lift confirms what they have just read. The shipped instance
+  is 28% in, closing the section that establishes the rule, immediately before
+  the next subhead. Not in the opening, where the front door has already made the
+  promise and a second claim competes with it; not in the ending, which is two
+  sentences and needs no help.
+- **One.** `how-we-redesigned-our-website-in-a-single-weekend` carries one in
+  1,340 words. The other two long pieces carry none and neither is worse for it.
+  One is the number for a long argument, none is honest, and two is defensible
+  only past 1,400 words and only where the second lifts a different kind of
+  sentence. Never two in one section, and never two that say the same thing
+  twice.
+
+**A `>` blockquote is somebody else's voice; a pull quote is the piece's own.**
+Quoting a client, a source or a document is a blockquote, with the speaker named
+in the prose that carries the claim. Reach for `pullQuote` only for a sentence
+the piece already wrote.
+
+**A figure is a landmark too, and its caption has to say something.** Both
+figures in the weekend piece carry one that makes a claim rather than renaming
+the picture — "Two maps over one page. The overlap is settled; the slivers are
+the work." A caption a reader lands on and learns nothing from is not a landmark.
+And a `(figure)` with no asset behind it is a gap, written as a label and listed
+on `gaps`, never a placeholder filled in later in silence.
+
+### Inside a case study
+
+`caseStudy.story` is one interleaved array of `chapter` members and bands, and
+`stat` is not in it — stats live on `caseStudy.stats`, which is the card's field.
+
+**A chapter is a movement, not a section.** Its number is derived from its
+position and the reader sees it, so a chapter announces itself the way a section
+does not. All twenty shipped case studies run the same two — Opportunity, then
+Solution — with `mediaSection` bands between and after them, and chapter bodies
+of 150 to 360 words. Two chapters is the observed shape, not a floor to build on.
+
+**A subhead inside a chapter is almost always the wrong block.** Not one of the
+forty shipped chapter bodies contains an H2 or an H3. At 200 words a chapter body
+does not have parts; where one has grown enough to need dividing, either its
+second half is the next chapter or the material belongs to a band between
+chapters. Where a chapter genuinely has named parts, `details` is the block for
+them — the hairline term and description rows, labelled Strategy / Design /
+Research / Technology in the shipped studies — and not a heading.
+
+**A number becomes a `stat` when it survives being read alone.** A stat is a
+`value` and a `label`, rendered on a card away from every sentence that gave it
+meaning, so the label carries the whole thing: "70% / Reduction in hours spent
+per week", never "70% / Improvement". The evidence bar above decides the rest. It
+needs a denominator or a baseline, because a percentage of nothing is a mood; the
+label names what was measured rather than how it felt; and the narrative earns it
+in prose as well, since a stat no chapter mentions is a claim with no grounds.
+Two to four is the count, three the usual one, and four of the twenty studies
+carry none at all — which is what a study with no measured outcome should do
+rather than invent one.
 
 ## Mush
 
