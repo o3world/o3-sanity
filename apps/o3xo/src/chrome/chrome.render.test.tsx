@@ -108,6 +108,24 @@ describe('the dropdowns', () => {
     }
   })
 
+  it('fills every panel opaque, because it is the only dark layer over the page', () => {
+    // o3xo.ai gets away with a translucent panel by stacking two of them: its
+    // fixed bar grows to the open panel's height at 95% black, and the panel
+    // sits on that at 90%, so ~0.5% of the page reaches a visitor. This bar is
+    // sticky and the panel hangs below its box (`SiteNav`), which leaves the
+    // panel the only fill between a visitor and the hero — one 95% fill passes
+    // 5%, and 5% of white type is 13/255, which reads (#250).
+    const controls = [...navHtml.matchAll(/aria-controls="([^"]+)"/g)].map((match) => match[1])
+    expect(controls.length).toBe(groups.length + 1)
+    for (const id of controls) {
+      const open = navHtml.indexOf(`<div id="${id}"`)
+      expect(open, `nothing carries id "${id}"`).toBeGreaterThan(-1)
+      const from = navHtml.indexOf('class="', open) + 'class="'.length
+      const classes = navHtml.slice(from, navHtml.indexOf('"', from)).split(' ')
+      expect(classes, `panel "${id}" is translucent`).toContain('bg-ink-deep')
+    }
+  })
+
   it('points every panel card at a route this site serves', () => {
     const hrefs = groups.flatMap((group) => (group.items ?? []).map((item) => item.button?.href))
     expect(hrefs.length).toBeGreaterThan(0)

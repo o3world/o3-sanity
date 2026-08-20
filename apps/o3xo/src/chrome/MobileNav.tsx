@@ -100,7 +100,13 @@ export function MobileNav({
           // descendant — so a fixed panel resolves `bottom-0` against a 64px
           // bar and collapses to nothing. The bar is `sticky`, so an absolute
           // panel travels with it anyway.
-          'bg-ink-deep/95 absolute inset-x-0 top-full z-40 h-[calc(100svh-4rem)] overflow-y-auto overscroll-contain backdrop-blur-[4px]',
+          //
+          // The fill is opaque because below the bar it is the only one: a
+          // menu at 95% hands back 5% of the page under it, and 5% of white
+          // type still reads. The same `backdrop-filter` that makes the bar a
+          // containing block makes it this panel's backdrop root, so a filter
+          // here would have nothing painted inside the bar to blur.
+          'bg-ink-deep absolute inset-x-0 top-full z-40 h-[calc(100svh-4rem)] overflow-y-auto overscroll-contain',
           !open && 'hidden',
         )}
       >

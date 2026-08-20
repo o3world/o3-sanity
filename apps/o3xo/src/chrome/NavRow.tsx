@@ -179,6 +179,14 @@ function NavDropdown({
        * expands its own fixed bar; ours is `sticky`, so expanding it would
        * push the page down every time a panel opened.
        *
+       * Which is why the fill is opaque. o3xo.ai draws its panel at 90% black
+       * over that expanded bar's own 95%, two fills that between them pass
+       * half a percent of the page. Below the bar this is the only fill there
+       * is, and one at 95% hands back 5% of whatever is behind it — 13/255 of
+       * white type, which reads. Nor is there a `backdrop-filter`: the bar
+       * carries one, so the bar is this panel's backdrop root, and what a
+       * filter here would blur is the nothing painted inside it.
+       *
        * `hidden` rather than unmounted: the markup is the same either way, and
        * a panel that exists in the DOM is one the render layer can assert on
        * without driving a pointer.
@@ -186,10 +194,7 @@ function NavDropdown({
       <div
         id={panelId}
         hidden={!open}
-        className={cn(
-          'bg-ink-deep/95 absolute inset-x-0 top-full z-40 backdrop-blur-[4px]',
-          !open && 'hidden',
-        )}
+        className={cn('bg-ink-deep absolute inset-x-0 top-full z-40', !open && 'hidden')}
       >
         <NavPanel group={group} />
       </div>
