@@ -67,8 +67,9 @@ export const caseStudy = (arrays: BlockArrays) =>
        * (`1710:2300`) alternates chapter → band → chapter → band, which two
        * fields cannot express. One array of `chapter` members and section
        * blocks can, and every band the case study needs is then a block any
-       * page can compose too. The section members are derived from the registry
-       * (`BLOCK_ARRAYS`), never restated.
+       * page can compose too. The section members come from the `arrays`
+       * parameter — `blockArraysFor(brand)` in every real Studio — never
+       * restated.
        */
       defineField({
         name: 'story',

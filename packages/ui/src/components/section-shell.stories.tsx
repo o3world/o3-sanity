@@ -149,14 +149,21 @@ function colourOf(canvasElement: HTMLElement, band: string, role: string): strin
  * axe's `color-contrast` rule is off for the whole suite
  * (storybookPreview.ts), so a story is the only thing watching.
  *
- * The play function compares the card against the same roles on a white BAND
- * rather than against a hex, so it asserts the contract in either brand's paint
- * and nobody has to keep two palettes in a test.
+ * The play function compares the card against the same roles on a BARE
+ * specimen outside any `[data-surface]` — the `:root` values — rather than
+ * against a hex, so it asserts the contract in either brand's paint and nobody
+ * has to keep two palettes in a test. Bare rather than a white band on
+ * purpose: a band carries `data-surface='white'` and would read the same
+ * re-point block as the card, so band-vs-card stays green even when both have
+ * drifted from `:root`. The white band is still drawn and still checked — its
+ * roles must equal the bare specimen's too, which is the "the light block
+ * restates `:root` faithfully" half of the claim.
  */
 export const LightCardOnInk: Story = {
   parameters: { controls: { disable: true } },
   render: () => (
     <div>
+      <RoleSpecimens band="root" />
       <SectionShell surface="white" top="md" bottom="md">
         <RoleSpecimens band="white" />
       </SectionShell>
@@ -175,7 +182,11 @@ export const LightCardOnInk: Story = {
       await expect(
         colourOf(canvasElement, 'card', role),
         `text-${role} inside a light card on an ink band`,
-      ).toBe(colourOf(canvasElement, 'white', role))
+      ).toBe(colourOf(canvasElement, 'root', role))
+      await expect(
+        colourOf(canvasElement, 'white', role),
+        `text-${role} on a white band drifted from :root`,
+      ).toBe(colourOf(canvasElement, 'root', role))
     }
   },
 }

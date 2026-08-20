@@ -129,7 +129,6 @@ export const schemaTypes = schemaTypesWith(BLOCK_ARRAYS)
  *
  * Both brands load through this one function (#251), so putting a block in a
  * Studio is exactly one edit: name it in `BRAND_SECTION_BLOCKS.<brand>`. An O3
- * editor is then never offered a band `apps/web` has no renderer for, which is
- * the state the split left behind when it stopped at the registries.
+ * editor is then never offered a band `apps/web` has no renderer for.
  */
 export const schemaTypesFor = (brand: Brand) => schemaTypesWith(blockArraysFor(brand))

@@ -30,10 +30,10 @@ Ask in this order — each "yes" stops you from adding a type that shouldn't exi
 
 Name it `<thing>Section`. Never `<thing>Block`.
 
-1. `packages/sanity/src/schemas/blocks/registry.ts` — add to `SECTION_BLOCKS`. The factory throws until you do.
+1. `packages/sanity/src/schemas/blocks/registry.ts` — add to `CORE_SECTION_BLOCKS` if both brands draw it, or to `BRAND_SECTION_BLOCKS.<brand>` if one does; `SECTION_BLOCKS` derives from those. The factory throws until you do.
 2. `packages/sanity/src/knobs/<name>Section.ts` — the block's design options, at minimum `surfaceKnob({ initialValue: … })`; export it from `knobs/index.ts` and add it to `BLOCK_KNOBS`. Required, not optional (ADR 0020). Add a `placeholder` in the same file, typed `satisfies <Name>Section` — it is what the canvas insert menu writes, and `knobs/placeholder.test.ts` fails without one. It must be **commit-safe**: fill every required field, never reference a document, and leave design options to the knobs (CONTEXT.md → Placeholder).
 3. `packages/sanity/src/schemas/blocks/section.ts` — `defineSectionBlock({ name, title, description, knobs, fields, preview })`. Don't add a `surface` field; the factory generates it from the knob. `description` is required and has a standard (below).
-4. `packages/sanity/src/schemas/index.ts` — import and add to `schemaTypes`, in the section-blocks group.
+4. `packages/sanity/src/schemas/index.ts` — import and add to the keyed `SECTION_SCHEMAS` record; the roster (step 1) decides which brands' Studios load it.
 5. `packages/sanity/src/queries.ts` — add a `_type == "<name>Section" => { … }` arm to `SECTION_FIELDS` **only if** the block needs query-time expansion (dereferenced `button` targets, reference→card projections, a subquery). Renderers must stay pure components: resolve data here, not in the component.
 6. `packages/content-ui/src/blocks/section/<name>Section/<Name>Section.tsx` — folder name === schema name exactly. Type props with `SectionProps<'<name>Section'>` from `@o3/content-runtime/blocks`; never hand-write the prop shape.
 7. Export it from `packages/content-ui/src/index.ts`, then add a `defineBlockRender('<name>Section', { component: … })` entry to `CLIENT_SECTION_BINDINGS` in **each app's** `src/content/blocks/clientComponents.ts` — the binding is per-app (ADR 0028).

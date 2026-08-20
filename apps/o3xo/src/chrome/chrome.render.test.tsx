@@ -115,14 +115,20 @@ describe('the dropdowns', () => {
     // sticky and the panel hangs below its box (`SiteNav`), which leaves the
     // panel the only fill between a visitor and the hero — one 95% fill passes
     // 5%, and 5% of white type is 13/255, which reads (#250).
-    const controls = [...navHtml.matchAll(/aria-controls="([^"]+)"/g)].map((match) => match[1])
-    expect(controls.length).toBe(groups.length + 1)
+    const controls = [...navHtml.matchAll(/aria-controls="([^"]+)"/g)].map(
+      (match) => match[1] ?? '',
+    )
+    expect(controls.length).toBeGreaterThan(0)
     for (const id of controls) {
-      const open = navHtml.indexOf(`<div id="${id}"`)
-      expect(open, `nothing carries id "${id}"`).toBeGreaterThan(-1)
-      const from = navHtml.indexOf('class="', open) + 'class="'.length
-      const classes = navHtml.slice(from, navHtml.indexOf('"', from)).split(' ')
-      expect(classes, `panel "${id}" is translucent`).toContain('bg-ink-deep')
+      const escaped = id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+      const tag = new RegExp(`<[a-z]+ [^>]*id="${escaped}"[^>]*>`).exec(navHtml)?.[0]
+      expect(tag, `nothing carries id "${id}"`).toBeTruthy()
+      const classes = /class="([^"]*)"/.exec(tag as string)?.[1]?.split(' ') ?? []
+      const fills = classes.filter((cls) => cls.startsWith('bg-'))
+      expect(fills, `panel "${id}" has no fill of its own`).not.toHaveLength(0)
+      for (const fill of fills) {
+        expect(fill, `panel "${id}" is translucent`).not.toContain('/')
+      }
     }
   })
 

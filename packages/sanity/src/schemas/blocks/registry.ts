@@ -168,12 +168,13 @@ function blockArrays(sections: readonly SectionBlockName[]) {
  */
 export const BLOCK_ARRAYS = blockArrays(SECTION_BLOCKS)
 
-/** Which arrays hold blocks and which blocks each holds, for one roster. */
-export type BlockArrays = {
-  readonly 'page.sections': readonly SectionBlockName[]
-  readonly 'caseStudy.story': readonly SectionBlockName[]
-  readonly 'layoutSection.items': readonly BaseBlockName[]
-}
+/**
+ * Which arrays hold blocks and which blocks each holds, for one roster.
+ * Derived from the builder so a new block-bearing array is one edit there —
+ * a hand-written mirror could drift and silently drop the new key from
+ * `BlockArrayKey`.
+ */
+export type BlockArrays = ReturnType<typeof blockArrays>
 
 /** The address of one block-bearing array — `page.sections`. */
 export type BlockArrayKey = keyof BlockArrays

@@ -11,7 +11,7 @@ import { canvasSubject } from './subject'
  * THE EXPERIMENTAL SEAM — the whole of our dependency on the `@alpha`
  * overlay-components API, in one function.
  *
- *     <VisualEditing components={createCanvasComponents({ blockKnobs: BLOCK_KNOBS, blockArrays: BLOCK_ARRAYS })} />
+ *     <VisualEditing components={createCanvasComponents({ blockKnobs: BLOCK_KNOBS, blockArrays: blockArraysFor(brand) })} />
  *
  * Removing the feature is deleting that prop. Keep it that way: `components`
  * is the only unstable surface the site depends on, and everything it reaches
@@ -55,7 +55,8 @@ export function createCanvasComponents({
   objectKnobs?: Readonly<Record<string, ObjectKnobs>>
   /**
    * What each block-bearing array accepts, keyed `<host type>.<field>` — the
-   * site's `BLOCK_ARRAYS` (#112). Optional, and omitting it is a real
+   * site's `blockArraysFor(brand)` (#112, #251), so the insert rows offer one
+   * brand's roster and not the whole model. Optional, and omitting it is a real
    * configuration rather than a broken one: the toolbar and the knob menu work
    * without it, and the insert rows are simply not offered.
    */

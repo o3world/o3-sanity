@@ -62,14 +62,22 @@ async function build(themes: string[], utilities: string[]): Promise<string> {
  *
  * Both halves matter. A brand's declarations are one merged rule only while
  * nothing sits between them, and the light-surface block in `color.css` splits
- * O3XO's into a colour half and a type half. And a selector is a PREFIX of
- * longer ones — `:root[data-brand='o3xo']` also opens
- * `:root[data-brand='o3xo'] [data-surface='white']` — so a block is this
- * selector's only when the `{` follows it through whitespace alone.
+ * O3XO's into a colour half and a type half. And a selector can sit inside a
+ * longer one on either side — `:root[data-brand='o3xo']` is a prefix of
+ * `:root[data-brand='o3xo'] [data-surface='white']`, and `[data-surface='white']`
+ * is its suffix — so a block is this selector's only when the `{` follows it
+ * through whitespace alone AND what precedes it is a rule boundary (start of
+ * sheet, `}`, `{`, `;`) or a `,` in a selector list.
  */
 function block(css: string, selector: string): string {
+  const boundary = (at: number): boolean => {
+    let i = at - 1
+    while (i >= 0 && /\s/.test(css[i] as string)) i--
+    return i < 0 || ['}', '{', ';', ','].includes(css[i] as string)
+  }
   let declared = ''
   for (let at = css.indexOf(selector); at !== -1; at = css.indexOf(selector, at + 1)) {
+    if (!boundary(at)) continue
     const open = css.indexOf('{', at)
     if (open === -1 || css.slice(at + selector.length, open).trim() !== '') continue
 
@@ -85,9 +93,14 @@ function block(css: string, selector: string): string {
   return declared
 }
 
-/** `--text-hero: clamp(48px, …, 60px)` → `clamp(48px, …, 60px)`. */
+/**
+ * `--text-hero: clamp(48px, …, 60px)` → `clamp(48px, …, 60px)`. The LAST
+ * declaration wins, because that is what the cascade does with equal
+ * specificity — `block` can hand back more than one rule's worth.
+ */
 function declared(css: string, property: string): string | undefined {
-  return css.match(new RegExp(`(?<![\\w-])${property}\\s*:\\s*([^;}]+)`))?.[1]?.trim()
+  const matches = [...css.matchAll(new RegExp(`(?<![\\w-])${property}\\s*:\\s*([^;}]+)`, 'g'))]
+  return matches.at(-1)?.[1]?.trim()
 }
 
 /** The width every `@media` rule in a stylesheet fires at, in source order. */
