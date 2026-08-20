@@ -135,11 +135,21 @@ nobody has it, so no section can ground it and no amount of drafting will
 supply it. Its disposition is the only thing left to decide, and that is a
 decision about what the outline does, not about how the line is worded.
 
-The three honest answers to an unmet Requires are a section that grounds it, a
-narrower claim, or a gap nobody can close in this piece — and **the human picks
-between them at the gate.** Narrowing the claim and proposing the narrowed shape
-is taking one of the three alone. Where you can see the narrower claim, name it
-as what would close the line; do not write it into the sections instead.
+The four honest answers to an unmet Requires are a section that grounds it, a
+second sweep that fetches the material, a narrower claim, or a gap nobody can
+close in this piece — and **the human picks between them at the gate.**
+Narrowing the claim and proposing the narrowed shape is taking one of the four
+alone. Where you can see the narrower claim, name it as what would close the
+line; do not write it into the sections instead.
+
+**Where the material exists and nobody has looked, the answer is the second
+sweep.** A gap reading "nobody has looked", a public figure, a regulation, what
+somebody outside O3 published — that is `o3sanity:gather`'s work run again on
+the one question, or a cited research file written before the prose. Name it on
+the `UNGROUNDED:` line as what would close the concept, in those terms, and stop
+at the gate as usual. It is never a third round of interview questions: the
+interview reaches what only the human holds, and a concept the outline needs and
+nobody has is usually not that.
 
 ### Map the locked questions
 
@@ -150,7 +160,7 @@ context, which may stay, but say what it is for.
 
 **A question the material cannot answer is not a question you may drop here.**
 It is a gap engaged: it goes in the `GAP:` block, and from there onto an
-`UNGROUNDED:` line. Dropping it from what the piece promises is one of the three
+`UNGROUNDED:` line. Dropping it from what the piece promises is one of the four
 answers, and the human picks it at the gate.
 
 ### Forecast the length
@@ -230,8 +240,9 @@ order.
 proceeding is not, and neither is a shape that "barely changed" from a previous
 pass.
 
-Six things you may catch yourself thinking here. Each one was thought, in those
-words, by a model running this stage without this file — and each is answered:
+Eight things you may catch yourself thinking here. Each one was thought, in
+those words, by a model running this stage without this file — and each is
+answered:
 
 | The thought                                                                          | What is true                                                                                                                         |
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
@@ -242,6 +253,7 @@ words, by a model running this stage without this file — and each is answered:
 | "The thesis moved but the shape mostly survives, so this pass can draft on."         | A second pass stops at the same gate. "Mostly survives" is the claim the gate exists to test.                                        |
 | "This brief is specific enough that the shape is not a decision only they can make." | The gate does not scale with the task. A brief specific enough to make the shape obvious is a brief where confirming costs one line. |
 | "Those brief fields are `readOnly`, so they are not mine to write."                  | `readOnly` means Studio does not edit them, because they are machine-written. These are the fields this stage exists to write.       |
+| "The run just upgraded to standard, so record the weight before the gate."           | Announced in the turn it changed, written at step 6. CORE puts it on `decisions`; no stage patches ahead of its own gate.            |
 
 **When the human confirms, patch `outline` with the shape they confirmed** —
 their amendments applied, the annotations and the question map included, as

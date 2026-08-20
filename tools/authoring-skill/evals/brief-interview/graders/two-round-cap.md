@@ -1,6 +1,6 @@
 ---
 type: llm
-criteria: The run put questions to Nick in at most two batched rounds, plus at most one list of schema fields to nod at. Every question in those rounds carried the agent's own recommended answer, so Nick could reply by nodding rather than composing. A third batch of interview questions, or questions dribbled out one at a time across many turns, fails.
+criteria: The run put questions to Nick in at most two batched rounds, plus at most one list of schema fields to nod at. Every question in those rounds carried the agent's own recommended answer, so Nick could reply by nodding rather than composing. A third batch of interview questions, or questions dribbled out one at a time across many turns, fails. One bounded clarifying question — naming an answer Nick already gave, answerable in a word — is round two finishing rather than a round of its own, and does not fail this.
 target: trace
 ---
 
