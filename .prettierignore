@@ -36,6 +36,12 @@ apps/web/next-env.d.ts
 **/storybook-static/
 **/dist/
 
+# Baseline scenario scripts (#184). A re-run is judged by diffing its transcript
+# against the 2026-08-16 baseline, which only holds if the script the two runs
+# read is the same bytes. Prettier rewrites the emphasis markers in one of them.
+# Only the scripts; the README beside them is formatted normally.
+tools/authoring-skill/scenarios/scenario-*.md
+
 # Corpus-reader fixtures. These test how the frontmatter parser treats
 # byte-exact edge cases — a dash run, an unmatched quote — and prettier
 # rewrites exactly those bytes into the well-formed shape the test needs
