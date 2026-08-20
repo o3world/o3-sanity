@@ -57,17 +57,32 @@ async function build(themes: string[], utilities: string[]): Promise<string> {
   return compiler.build(utilities)
 }
 
-/** The block a selector opens, up to its closing brace. */
+/**
+ * What a selector declares — every block it opens, in source order.
+ *
+ * Both halves matter. A brand's declarations are one merged rule only while
+ * nothing sits between them, and the light-surface block in `color.css` splits
+ * O3XO's into a colour half and a type half. And a selector is a PREFIX of
+ * longer ones — `:root[data-brand='o3xo']` also opens
+ * `:root[data-brand='o3xo'] [data-surface='white']` — so a block is this
+ * selector's only when the `{` follows it through whitespace alone.
+ */
 function block(css: string, selector: string): string {
-  const start = css.indexOf(selector)
-  if (start === -1) return ''
-  const open = css.indexOf('{', start)
-  let depth = 0
-  for (let i = open; i < css.length; i++) {
-    if (css[i] === '{') depth++
-    if (css[i] === '}' && --depth === 0) return css.slice(open + 1, i)
+  let declared = ''
+  for (let at = css.indexOf(selector); at !== -1; at = css.indexOf(selector, at + 1)) {
+    const open = css.indexOf('{', at)
+    if (open === -1 || css.slice(at + selector.length, open).trim() !== '') continue
+
+    let depth = 0
+    for (let i = open; i < css.length; i++) {
+      if (css[i] === '{') depth++
+      if (css[i] === '}' && --depth === 0) {
+        declared += css.slice(open + 1, i)
+        break
+      }
+    }
   }
-  return ''
+  return declared
 }
 
 /** `--text-hero: clamp(48px, …, 60px)` → `clamp(48px, …, 60px)`. */

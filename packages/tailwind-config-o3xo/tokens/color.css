@@ -26,6 +26,12 @@
  * re-points the text roles to those white alphas, and an element's own
  * declaration beats one inherited from <html>, so a dark band inside an O3XO
  * page still gets the inverted roles.
+ *
+ * OVERRIDDEN, and easy to miss: the base theme's light-surface block at the
+ * foot of this file's counterpart. It carries O3's greys, and it matches the
+ * band ELEMENT — so unlike everything above, `:root[data-brand='o3xo']` is not
+ * in the running, and a white band on an O3XO page would wear #232323 body
+ * copy. See the block at the end of this file.
  */
 
 /*
@@ -116,4 +122,28 @@
   --color-line: #e5e7eb;
   /* #F3F3F3 — `grey/95`, the lighter rule. */
   --color-line-soft: #f3f3f3;
+}
+
+/*
+ * THE LIGHT SURFACES, IN THIS BRAND'S GREYS.
+ *
+ * The base theme re-points the text roles twice — to white alphas on
+ * `[data-surface='ink']`, back to the light values on `[data-surface='white']`
+ * and `[data-surface='bone']` — so that a light card inside a dark band gets
+ * the light roles back. Only the dark half is brand-neutral. The light half
+ * carries O3's warm greys and matches the band element, which outranks nothing
+ * on `:root`: without this block every light band on an O3XO page draws
+ * #232323 instead of `azure/11`.
+ *
+ * The values are the light roles above and stay in step with them; the
+ * `LightCardOnInkO3xo` story (section-shell.stories.tsx) is what fails when
+ * they drift.
+ */
+:root[data-brand='o3xo'] [data-surface='white'],
+:root[data-brand='o3xo'] [data-surface='bone'] {
+  --color-fg: #111827;
+  --color-fg-body: #4b5563;
+  --color-fg-muted: #4b5563;
+  --color-fg-quiet: rgba(17, 24, 39, 0.5);
+  --color-fg-subtle: #9ca3af;
 }

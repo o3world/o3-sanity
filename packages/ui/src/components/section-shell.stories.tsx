@@ -1,10 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { expect } from 'storybook/test'
 
+import { cn } from '../lib/utils'
 import { ArrowIcon } from './arrow-icon'
 import { Button } from './ui/button'
 import { DisplayHeading } from './display-heading'
 import { Eyebrow } from './eyebrow'
-import { SectionBackground, SectionShell, type Surface } from './section-shell'
+import {
+  SURFACE_CLASS,
+  SectionBackground,
+  SectionShell,
+  surfaceAttrs,
+  type Surface,
+} from './section-shell'
 import { Stat } from './stat'
 
 const meta = {
@@ -100,6 +108,87 @@ export const AllSurfaces: Story = {
       ))}
     </div>
   ),
+}
+
+/** Every text role a dark band re-points (tokens/color.css), one specimen each. */
+const TEXT_ROLES = {
+  fg: 'text-fg',
+  'fg-body': 'text-fg-body',
+  'fg-muted': 'text-fg-muted',
+  'fg-quiet': 'text-fg-quiet',
+  'fg-subtle': 'text-fg-subtle',
+} as const
+
+function RoleSpecimens({ band }: { band: string }) {
+  return (
+    <div data-band={band} className="flex flex-col gap-2">
+      {Object.entries(TEXT_ROLES).map(([role, className]) => (
+        <p key={role} data-role={role} className={cn('text-lg', className)}>
+          {className} — 89% → 114% NRR
+        </p>
+      ))}
+    </div>
+  )
+}
+
+/** What a role actually paints on one of the two bands the story draws. */
+function colourOf(canvasElement: HTMLElement, band: string, role: string): string {
+  const specimen = canvasElement.querySelector(`[data-band='${band}'] [data-role='${role}']`)
+  if (!specimen) throw new Error(`no ${role} specimen on the ${band} band`)
+  return getComputedStyle(specimen).color
+}
+
+/**
+ * A LIGHT CARD ON AN INK BAND GETS THE LIGHT ROLES BACK — the nested-surface
+ * half of the contract in `surfaceAttrs`, and the reason the token packages
+ * scope a light block as well as a dark one.
+ *
+ * Custom properties inherit, so without that block the card's `text-fg-muted`
+ * resolves to the band's white-at-65% and the copy is light-on-dark on a light
+ * plate — around 1.7:1, and legible in neither brand. Nothing else catches it:
+ * axe's `color-contrast` rule is off for the whole suite
+ * (storybookPreview.ts), so a story is the only thing watching.
+ *
+ * The play function compares the card against the same roles on a white BAND
+ * rather than against a hex, so it asserts the contract in either brand's paint
+ * and nobody has to keep two palettes in a test.
+ */
+export const LightCardOnInk: Story = {
+  parameters: { controls: { disable: true } },
+  render: () => (
+    <div>
+      <SectionShell surface="white" top="md" bottom="md">
+        <RoleSpecimens band="white" />
+      </SectionShell>
+      <SectionShell surface="ink" top="md" bottom="md">
+        <div
+          {...surfaceAttrs('white')}
+          className={cn(SURFACE_CLASS.white, 'rounded-card border-line border p-10')}
+        >
+          <RoleSpecimens band="card" />
+        </div>
+      </SectionShell>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    for (const role of Object.keys(TEXT_ROLES)) {
+      await expect(
+        colourOf(canvasElement, 'card', role),
+        `text-${role} inside a light card on an ink band`,
+      ).toBe(colourOf(canvasElement, 'white', role))
+    }
+  },
+}
+
+/**
+ * The same contract in O3XO's paint. The brand is pinned — rare in a shared
+ * package, where the Brand toolbar is meant to stay a live question — because
+ * each token package scopes its own light block, so the two are two facts and
+ * this host loads both packages (apps/storybook/globals.css).
+ */
+export const LightCardOnInkO3xo: Story = {
+  ...LightCardOnInk,
+  globals: { brand: 'o3xo' },
 }
 
 /**

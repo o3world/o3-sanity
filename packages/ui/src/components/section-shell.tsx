@@ -27,6 +27,12 @@ export const SURFACE_CLASS: Record<Surface, string> = {
  * on-ink alphas (tokens/color.css), so a renderer's `text-fg-muted` means
  * "muted against THIS band" rather than a fixed grey.
  *
+ * IT WORKS NESTED, and only because a light surface declares itself too: the
+ * roles inherit, so a light card inside an ink band keeps the band's white
+ * alphas until `data-surface="white"` (or `bone`) on the card points them back
+ * at the light values. A plate that is neither — O3XO's yellow accent card —
+ * declares no surface and names `ink`, the role no band re-points.
+ *
  * Its React half is `SurfaceProvider`, and they are one act: this shell does
  * both, and a band that builds its own `<section>` reaches for this beside
  * `SURFACE_CLASS`. Declaring only the provider leaves a button readable and
