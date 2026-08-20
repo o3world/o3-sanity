@@ -1,5 +1,22 @@
 {
+  "extraKnownMarketplaces": {
+    "o3world": {
+      "source": {
+        "source": "github",
+        "repo": "o3world/o3-sanity"
+      },
+      "autoUpdate": true
+    },
+    "sanity-agent-toolkit": {
+      "source": {
+        "source": "github",
+        "repo": "sanity-io/agent-toolkit"
+      },
+      "autoUpdate": true
+    }
+  },
   "enabledPlugins": {
-    "o3sanity@o3world": true
+    "o3sanity@o3world": true,
+    "sanity@sanity-agent-toolkit": true
   }
 }
