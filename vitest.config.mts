@@ -62,6 +62,9 @@ export default defineConfig({
             // The plugin's eval cases are data, and the grader engine that
             // reads them is the one part of the harness a machine can check.
             'tools/authoring-skill/evals/*.test.ts',
+            // The slop linter's own tests, including the calibration that
+            // pins it at zero hits over approved site copy.
+            'tools/authoring-skill/scripts/*.test.ts',
             'apps/web/src/**/*.test.ts',
             'packages/*/src/**/*.test.ts',
             // The worktree scripts are shell, and their seams are subcommands.

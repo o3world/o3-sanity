@@ -47,3 +47,10 @@ tools/authoring-skill/scenarios/scenario-*.md
 # rewrites exactly those bytes into the well-formed shape the test needs
 # them not to be.
 tools/guidance/src/corpus/__fixtures__/
+
+# Generated calibration copy (#143). `scripts/fixtures/extract-approved-copy.mjs`
+# writes these from the seed JSON, verbatim, so the linter scores the copy the
+# site actually publishes. Prettier rewrites emphasis markers and dash runs
+# inside the copy — which is the linter's input, so a reformat would have it
+# measure prettier's punctuation instead of ours.
+tools/authoring-skill/scripts/fixtures/approved-*.md

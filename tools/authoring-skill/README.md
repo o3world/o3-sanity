@@ -83,6 +83,15 @@ inferred.
 `gather` points at none of them. It writes nothing for the site, so it pays for
 nothing; stages 2 to 5 are where they come in.
 
+`scripts/` is the exception to all of this: it is **executed, not read**.
+[`scripts/slop-lint.mjs`](./scripts/slop-lint.mjs) counts the machine tells that
+have a fixed shape, and `review` runs it across its two revision passes as
+`${CLAUDE_PLUGIN_ROOT}/scripts/slop-lint.mjs --delta`. Its rules come from the
+repo's `docs/guidance/slop.md` and are calibrated to score zero over approved
+site copy — [`scripts/fixtures/`](./scripts/fixtures/README.md) is that
+calibration, and the six rules it deleted. The signal is the delta between a
+draft and its revision; the absolute decides nothing.
+
 ## Testing a skill
 
 The test surface is [`evals/`](./evals) — cases in `claude plugin eval`
