@@ -92,18 +92,28 @@ in already holding. A section's Requires is met when it appears in the
 prerequisites or in an earlier section's Grounds. Demand too much up front and
 you shut readers out; ground too much inside and the opening drowns.
 
-**Where a Requires is met by nothing, say so on its own line** — the three
-honest answers are a section that grounds it, a narrower claim, or a gap nobody
-can close in this piece, and the human picks between them:
+Run every section's Requires against the prerequisites, against every earlier
+section's Grounds, and against `gaps`. **Then report what the check found, on
+its own line, whatever it found** — one line per unmet concept, or the single
+line `UNGROUNDED: none` where every Requires is met:
 
 ```
 UNGROUNDED: <concept> — required by <section>, grounded by nothing before it. <what would close it>
 ```
 
+**A proposal with no `UNGROUNDED:` line is malformed, not clean.** Silence is
+not the answer `none`; it is the check going unreported, and it is
+indistinguishable from a run that never made it. The slot is filled every time.
+
+The three honest answers to an unmet Requires are a section that grounds it, a
+narrower claim, or a gap nobody can close in this piece — and **the human picks
+between them at the gate.** Narrowing the claim and proposing the narrowed shape
+is taking one of the three alone. Where you can see the narrower claim, name it
+as what would close the line; do not write it into the sections instead.
+
 **A Requires that names something on `gaps` is ungrounded by definition.** The
 gap list is already the record that nobody has it, so no section can ground it
-and no amount of drafting will supply it. Check each section's Requires against
-`gaps` before you write the gate line — that check is the one that catches the
+and no amount of drafting will supply it. That check is the one that catches the
 question the brief locked and the material cannot answer.
 
 ### Map the locked questions
@@ -170,11 +180,11 @@ Length: <n> bands — composition.md's bar is four to eight
 OUTLINE GATE: page / <n> bands / <n> ungrounded — your call before a word of prose
 ```
 
-Nothing follows the gate line. **Its ungrounded count is the number of
-`UNGROUNDED:` lines above it, and the two have to agree** — a count of 1 with no
-line is a flag written into a paragraph, where the human reading the gate will
-not find it. Where nothing is ungrounded the count is `0` and the line is
-absent.
+Nothing follows the gate line. **Its ungrounded count is the number of concepts
+the `UNGROUNDED:` lines above it name, and the two have to agree** — a count of
+1 with no line is a flag written into a paragraph, where the human reading the
+gate will not find it. Where nothing is ungrounded the count is `0` and the
+slot reads `UNGROUNDED: none`; a `0` over an empty slot is a check nobody ran.
 
 ## 3. The gate
 
@@ -196,6 +206,7 @@ words, by a model running this stage without this file — and each is answered:
 | "A rejected alternative reads as hedging — give one shape, not a menu."              | A menu hedges. A runner-up with a reason is the evidence that a choice was made rather than a first idea kept.                       |
 | "The ledger is bookkeeping for whoever drafts, not for whoever approves."            | The ledger is most of what is being approved. It is the only part of the outline that says the sections are ordered, not listed.     |
 | "I flagged that in the paragraph above."                                             | A flag nobody can find is a flag nobody acts on. It goes on its own `UNGROUNDED:` line.                                              |
+| "Nothing is ungrounded — I wrote a section that stays inside what the brief has."    | Narrowing the claim is one of the three answers, and the human picks. Report the concept you narrowed away from; do not settle it.   |
 | "The thesis moved but the shape mostly survives, so this pass can draft on."         | A second pass stops at the same gate. "Mostly survives" is the claim the gate exists to test.                                        |
 | "This brief is specific enough that the shape is not a decision only they can make." | The gate does not scale with the task. A brief specific enough to make the shape obvious is a brief where confirming costs one line. |
 | "Those brief fields are `readOnly`, so they are not mine to write."                  | `readOnly` means Studio does not edit them, because they are machine-written. These are the fields this stage exists to write.       |
@@ -207,11 +218,23 @@ stage 5 reads the same document; an annotation left in the chat reaches neither.
 
 ### Running again on an amended brief
 
-A brief whose thesis or questions moved gets a shape proposed **fresh**. Name
-the previous arc, say what about the new thesis it no longer fits, and rebuild
-the ledger rather than carrying it over. A second draft is a different shape,
-not the same paragraphs reordered — and naming both arcs is what lets the human
-check that in one line instead of reading 1,200 words to find out.
+A brief whose thesis or questions moved gets a shape proposed **fresh**. Derive
+the arc from the new thesis as though no previous pass existed, and rebuild the
+ledger rather than carrying it over. A second draft is a different shape, not
+the same paragraphs reordered.
+
+**The proposal carries one more line on a re-run, above `Runner-up:`:**
+
+```
+Previous arc: <name> — dropped, and what the moved thesis broke in it | kept, and what the fresh derivation found in it that the moved thesis still takes
+```
+
+A fresh derivation may land on the arc the previous pass used: three arcs is a
+small vocabulary, and a funding claim can honestly want the moves an ownership
+claim wanted. What is never allowed is carrying the name over without
+re-deriving it, so the line names the previous arc either way and says which of
+the two happened. A new arc name over the previous section list fails from the
+other side — the sections and the ledger are where a different shape shows.
 
 ## 4. The front door
 
