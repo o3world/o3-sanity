@@ -28,6 +28,20 @@ is exactly the sequence #25 describes in prose.
 assignee, so the frontier rules are enforced where work actually starts rather
 than in a document nobody re-reads. `--force` overrides both.
 
+**It fetches, and cuts the branch from `origin/main`.** Not from the local
+`main` ref: the main checkout usually sits on a feature branch, so its `main`
+goes stale the moment anything merges, and a worktree cut from it starts behind
+without saying so. Nobody has to reset anything first. Resuming a ticket whose
+branch already exists checks that branch out as it stands — moving it onto a
+newer main is the session's call, not the script's. Either way the summary block
+names the base commit the checkout starts on:
+
+```
+  #167  pnpm wt new branches from a stale local main
+  branch  feat/167-pnpm-wt-new-branches-from-a-stale-local
+  base    6b48e83  origin/main  feat(storybook): an O3XO brand theme, and the…
+```
+
 ## Or from Orca
 
 Orca creates worktrees from the app side, under

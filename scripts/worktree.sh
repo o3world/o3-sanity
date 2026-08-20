@@ -66,10 +66,31 @@ cmd_new() {
   [[ -e $path ]] && die "$path already exists"
 
   mkdir -p "$WT_HOME"
+  local base_ref
   if git show-ref --verify --quiet "refs/heads/$branch"; then
+    # A resume: check the branch out exactly as it stands. Moving it onto
+    # anything newer is the session's call, not this script's.
+    base_ref="$branch"
     git worktree add "$path" "$branch"
   else
-    git worktree add -b "$branch" "$path" main
+    # A fresh branch starts from the remote, never the local `main` ref. The
+    # main checkout usually sits on a feature branch, so its `main` goes stale
+    # the moment anything merges, and a worktree cut from it starts behind
+    # without ever saying so.
+    base_ref="origin/main"
+    git fetch --quiet origin || die "cannot fetch origin — a new branch has to start from origin/main"
+    # --no-track: a ticket branch is nobody's upstream, and tracking origin/main
+    # would make a bare `git push` from the worktree aim at main.
+    git worktree add --no-track -b "$branch" "$path" origin/main
+  fi
+
+  # What this checkout starts on, read from the new worktree rather than from
+  # the ref, so a resume reports where its branch actually is.
+  local base base_subject
+  base="$(git -C "$path" log -1 --format='%h')"
+  base_subject="$(git -C "$path" log -1 --format='%s')"
+  if [[ ${#base_subject} -gt 52 ]]; then
+    base_subject="${base_subject:0:51}…"
   fi
 
   bash "$MAIN_ROOT/scripts/worktree-provision.sh" "$path"
@@ -83,6 +104,7 @@ cmd_new() {
 
   #$issue  $title
   branch  $branch
+  base    $base  $base_ref  $base_subject
   path    $path
   web     http://localhost:${web_port:-?}
 
