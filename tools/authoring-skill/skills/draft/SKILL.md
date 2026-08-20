@@ -92,18 +92,48 @@ in already holding. A section's Requires is met when it appears in the
 prerequisites or in an earlier section's Grounds. Demand too much up front and
 you shut readers out; ground too much inside and the opening drowns.
 
-Run every section's Requires against the prerequisites, against every earlier
-section's Grounds, and against `gaps`. **Then report what the check found, on
-its own line, whatever it found** — one line per unmet concept, or the single
-line `UNGROUNDED: none` where every Requires is met:
+**Leaning on a concept includes declining it.** A section that scopes a concept
+away, says the piece is not about it, or answers a locked reader question about
+it is leaning on it — the reader has to be holding the concept for the sentence
+to land. Requires names what the section leans on, not what you are willing to
+admit it leans on.
+
+### Report the check
+
+Two blocks, in this order, and both of them every time.
+
+**First, walk the brief's `gaps` — one line per gap, in the list's order.** The
+list is given. You did not choose what is on it, and writing the outline a
+different way does not take anything off it.
+
+```
+GAP: <the gap, in the brief's words, shortened> — untouched | engaged by <section>, which <requires it | answers a locked question about it | scopes it away in prose>
+```
+
+A gap is **untouched** only when no section requires it, no section stands on
+its ground, and no locked reader question asks for it. Everything else is
+**engaged**: a section that declines the concept is engaged, and a gap a locked
+question asks about is engaged whatever the sections do. The locked question is
+a promise the brief already made to the reader, and answering it with "nobody
+looked" trades on the gap rather than avoiding it.
+
+**Second, report what is ungrounded** — every Requires met by neither the
+prerequisites nor an earlier section's Grounds, and **every gap the block above
+marked `engaged`**:
 
 ```
 UNGROUNDED: <concept> — required by <section>, grounded by nothing before it. <what would close it>
 ```
 
-**A proposal with no `UNGROUNDED:` line is malformed, not clean.** Silence is
-not the answer `none`; it is the check going unreported, and it is
-indistinguishable from a run that never made it. The slot is filled every time.
+**A proposal missing either block is malformed, not clean.** Silence is not the
+answer `none`; it is the check going unreported, and it is indistinguishable
+from a run that never made it. `UNGROUNDED: none` is legal under a `GAP:` block
+whose every line reads `untouched`, and nowhere else.
+
+**A gap is ungrounded by definition.** The gap list is already the record that
+nobody has it, so no section can ground it and no amount of drafting will
+supply it. Its disposition is the only thing left to decide, and that is a
+decision about what the outline does, not about how the line is worded.
 
 The three honest answers to an unmet Requires are a section that grounds it, a
 narrower claim, or a gap nobody can close in this piece — and **the human picks
@@ -111,17 +141,17 @@ between them at the gate.** Narrowing the claim and proposing the narrowed shape
 is taking one of the three alone. Where you can see the narrower claim, name it
 as what would close the line; do not write it into the sections instead.
 
-**A Requires that names something on `gaps` is ungrounded by definition.** The
-gap list is already the record that nobody has it, so no section can ground it
-and no amount of drafting will supply it. That check is the one that catches the
-question the brief locked and the material cannot answer.
-
 ### Map the locked questions
 
 Name, for each locked question, the section that answers it. This is the only
 point where the questions and the shape are both in front of you. A question no
 section answers is a hole a reader falls into; a section answering no question is
 context, which may stay, but say what it is for.
+
+**A question the material cannot answer is not a question you may drop here.**
+It is a gap engaged: it goes in the `GAP:` block, and from there onto an
+`UNGROUNDED:` line. Dropping it from what the piece promises is one of the three
+answers, and the human picks it at the gate.
 
 ### Forecast the length
 
@@ -151,6 +181,7 @@ Prerequisites: <concept>, <concept>
    Grounds: …
    Answers: Q2
 
+GAP: <the gap, shortened> — untouched | engaged by <section>, which <how>
 UNGROUNDED: <concept> — required by <section>, grounded by nothing before it. <what would close it>
 
 Length: <n> words across <n> sections — <the band that sits in>
@@ -173,6 +204,7 @@ Prerequisites: <concept>, <concept>
    Grounds: <concept>
    Answers: Q1
 
+GAP: <the gap, shortened> — untouched | engaged by <band>, which <how>
 UNGROUNDED: <concept> — required by <band>, grounded by nothing before it. <what would close it>
 
 Length: <n> bands — composition.md's bar is four to eight
@@ -206,7 +238,7 @@ words, by a model running this stage without this file — and each is answered:
 | "A rejected alternative reads as hedging — give one shape, not a menu."              | A menu hedges. A runner-up with a reason is the evidence that a choice was made rather than a first idea kept.                       |
 | "The ledger is bookkeeping for whoever drafts, not for whoever approves."            | The ledger is most of what is being approved. It is the only part of the outline that says the sections are ordered, not listed.     |
 | "I flagged that in the paragraph above."                                             | A flag nobody can find is a flag nobody acts on. It goes on its own `UNGROUNDED:` line.                                              |
-| "Nothing is ungrounded — I wrote a section that stays inside what the brief has."    | Narrowing the claim is one of the three answers, and the human picks. Report the concept you narrowed away from; do not settle it.   |
+| "No section requires it, so nothing is ungrounded."                                  | Requires is yours to write, so the check starts at `gaps` instead. A section that declines a gap engages it, and engaged is a flag.  |
 | "The thesis moved but the shape mostly survives, so this pass can draft on."         | A second pass stops at the same gate. "Mostly survives" is the claim the gate exists to test.                                        |
 | "This brief is specific enough that the shape is not a decision only they can make." | The gate does not scale with the task. A brief specific enough to make the shape obvious is a brief where confirming costs one line. |
 | "Those brief fields are `readOnly`, so they are not mine to write."                  | `readOnly` means Studio does not edit them, because they are machine-written. These are the fields this stage exists to write.       |
