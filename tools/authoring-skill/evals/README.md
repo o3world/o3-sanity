@@ -16,6 +16,7 @@ written today runs unchanged the day the flag lands.
 ```
 evals/
 ├── grade.mjs               the mechanical graders, and the case-format check
+├── fixtures.mjs            run-scoped fixture ids, and the ledger teardown reads
 ├── <case>/
 │   ├── prompt.md           frontmatter + the task
 │   └── graders/
@@ -165,14 +166,34 @@ case that names another model fails before it runs.
 The `development` dataset, drafts only. Never publish, never address
 `production`.
 
-**Briefs are sweepable and pieces are not.** A case keys its brief
-`eval-<case>-<slug>`, so `brief-eval-` matches every brief the suite has ever
-written and a sweep is one query. A piece document takes the id typeset gives
-it — `insight-<slug>`, `page-<slug>`, no prefix — because that id shape is the
-thing the typeset cases exist to check, and an eval-only prefix would test a
-rule the plugin does not have. So the three typeset cases leave drafts a prefix
-cannot find: name them in the run report by id, and delete them by hand.
+**The fixture id belongs to the case; the document belongs to one run.** A case
+writes `brief-eval-<case>-<slug>` and its graders name that same id, so the case
+reads the same whoever runs it. The run mints a six-character tag and puts it on
+the end of every id it seeds — `brief-eval-typeset-insight--k3f9q2` — so two
+runs of one case in one dataset never write the same document. `fixtures.mjs`
+does both halves: `scope` puts the tag on an id going into the dataset, `settle`
+takes it back out of everything the run captured, so a grader targeting
+`dataset/brief-eval-typeset-insight.json` finds the file and matches its
+contents. **No case file mentions a tag**, and none should: a case that names
+one is a case that runs once.
 
-Run cases in batches of two or three. Cases sharing a fixture id collide under
-parallelism — [#201](https://github.com/o3world/o3-sanity/issues/201) — and the
-symptom is a run that fails on a document another run had already rewritten.
+**A piece is deleted by name, not by prefix.** The tag cannot reach a piece
+document, because typeset derives its id from the slug — `insight-<slug>`,
+`page-<slug>`, no prefix — and that id shape is the thing the typeset cases
+exist to check. A prefix here would test a rule the plugin does not have. The
+ledger covers it instead: the runner appends every id it brings into being to
+`created-ids.txt` as the create call happens, and teardown discards exactly
+those. The ledger is what was missing when six runs of the typeset cases left
+pieces in `development` that no sweep could identify
+([#201](https://github.com/o3world/o3-sanity/issues/201)).
+
+**The harness deletes and the skill under test never does.** `CORE.md` gives
+discarding a draft to a human in Studio and every case prompt repeats it, so a
+run that swept up after itself would be failing its own rule. Teardown runs
+after the last message is captured, outside the case's `allowed_tools`, and it
+is not a transcript line.
+
+Run cases in batches of two or three. What limits the batch is how much of a
+report you can read, not id collision. A run that dies before teardown still
+leaves its documents behind, but its `created-ids.txt` survives in `results/` —
+`fixtures.mjs teardown` on that old run directory is how they go.
