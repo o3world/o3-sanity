@@ -3,7 +3,7 @@ import { defineArrayItem } from './defineArrayItem'
 import { defineSectionBlock } from './defineBlocks'
 import { detailsField } from './fields'
 import { hiddenUnless } from './knobFields'
-import { blockArrayMembers } from './registry'
+import { blockArrayMembers, BLOCK_ARRAYS } from './registry'
 import { PAGE_TYPES } from '../../constants'
 import { caseShowcaseSectionKnobs } from '../../knobs/caseShowcaseSection'
 import { ctaSectionKnobs } from '../../knobs/ctaSection'
@@ -678,7 +678,12 @@ export const layoutSection = defineSectionBlock({
       // spent three files finding out about. `mark` arrives through it, which
       // is why the column's picker says "Mark" rather than "Orb": a member
       // title here would be the one hand-kept fact in a derived list.
-      of: blockArrayMembers('layoutSection.items').map((member) => defineArrayMember(member)),
+      //
+      // The model's own arrays, and not a brand's: the base tier is one list
+      // for both brands, so every roster answers this key identically.
+      of: blockArrayMembers('layoutSection.items', BLOCK_ARRAYS).map((member) =>
+        defineArrayMember(member),
+      ),
       validation: (rule) => rule.required().min(1),
     }),
   ],

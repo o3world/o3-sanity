@@ -19,9 +19,10 @@ import {
   resolveDataset,
   resolveProjectId,
 } from '@o3/sanity/constants'
-import { schemaTypes } from '@o3/sanity/schemas'
+import { schemaTypesFor } from '@o3/sanity/schemas'
 
 import { previewPathForDoc } from '@o3/content-runtime/urls'
+import { BRAND } from './brand'
 import { mainDocumentRoutes } from './src/sanity/presentationRoutes'
 
 const projectId = resolveProjectId()
@@ -127,7 +128,10 @@ export default defineConfig({
   basePath: '/studio',
   projectId,
   dataset,
-  schema: { types: schemaTypes },
+  // This brand's roster — core plus O3XO's own bands (ADR 0028), `faqSection`
+  // among them. `BRAND` and not the environment: the Studio's schema is a build
+  // fact, and an unset `NEXT_PUBLIC_BRAND` resolves to the other brand.
+  schema: { types: schemaTypesFor(BRAND) },
   plugins: [
     structureTool({ structure }),
     presentationTool({

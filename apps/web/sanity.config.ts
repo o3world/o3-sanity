@@ -18,7 +18,7 @@ import {
   resolveDataset,
   resolveProjectId,
 } from '@o3/sanity/constants'
-import { schemaTypes } from '@o3/sanity/schemas'
+import { schemaTypesFor } from '@o3/sanity/schemas'
 
 import { previewPathForDoc } from '@o3/content-runtime/urls'
 import { mainDocumentRoutes } from './src/sanity/presentationRoutes'
@@ -120,7 +120,12 @@ export default defineConfig({
   basePath: '/studio',
   projectId,
   dataset,
-  schema: { types: schemaTypes },
+  // O3's roster, named out loud: the section tier is a core list plus per-brand
+  // extensions (ADR 0028), and a Studio offers the blocks its own app can
+  // render. Reading the brand from the environment would offer this one every
+  // block in the model whenever `NEXT_PUBLIC_BRAND` went unset, which is the
+  // default a local checkout runs on.
+  schema: { types: schemaTypesFor('o3') },
   plugins: [
     structureTool({ structure }),
     presentationTool({

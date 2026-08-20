@@ -1,4 +1,4 @@
-import { BRANDS, type Brand } from '../../brand'
+import type { Brand } from '../../brand'
 
 /**
  * The schema-free block registry: single source of block membership. A block
@@ -88,27 +88,6 @@ export function sectionBlocksFor(brand: Brand): readonly SectionBlockName[] {
 }
 
 /**
- * The roster **this process** builds the schema from.
- *
- * `NEXT_PUBLIC_BRAND` names one app, and an app's Studio should offer the
- * blocks its site can render and no others. Unset means every brand, which is
- * what schema extraction wants: `pnpm typegen` runs from `packages/sanity` with
- * no brand and has to see the whole model, because the generated types are one
- * file both apps read. So this is deliberately not `currentBrand()`, whose
- * unset answer is `o3`.
- */
-export function rosterSectionBlocks(): readonly SectionBlockName[] {
-  const named = process.env.NEXT_PUBLIC_BRAND
-  if (!named) return SECTION_BLOCKS
-  if (!(BRANDS as readonly string[]).includes(named)) {
-    throw new Error(
-      `NEXT_PUBLIC_BRAND="${named}" is not a brand. Use one of: ${BRANDS.join(', ')}.`,
-    )
-  }
-  return sectionBlocksFor(named as Brand)
-}
-
-/**
  * WHICH ARRAYS HOLD BLOCKS, AND WHICH BLOCKS EACH HOLDS — the one declaration
  * behind both the schema's `of:` and the canvas insert menu (#112).
  *
@@ -122,13 +101,17 @@ export function rosterSectionBlocks(): readonly SectionBlockName[] {
  * points at the registry above, so registering a block makes it insertable
  * everywhere its tier belongs and no second list has to hear about it. The
  * **arrays** are authored, because "this array holds blocks" is a fact about
- * one field and there is nothing to derive it from. The two section arrays take
- * the **running brand's** roster (ADR 0028), so an app's form and its insert
- * menu offer the blocks that app can render and nothing else. The direction is
- * still the one ADR 0020 argues for: `page.sections`, `caseStudy.story` and
+ * one field and there is nothing to derive it from. The direction is still the
+ * one ADR 0020 argues for: `page.sections`, `caseStudy.story` and
  * `layoutSection.items` all build their `of:` from HERE, so the schema is the
  * mirror rather than the source, and `blockArrays.test.ts` catches a
  * block-bearing array that forgot to say so.
+ *
+ * The two section arrays take **whichever roster the caller builds with**
+ * (ADR 0028): one brand's, for the Studio that brand's editors work in, or the
+ * whole model's, for typegen. The roster is a parameter and never an ambient
+ * read, so the same process can build both — which is what a test walking two
+ * brands' schemas needs.
  *
  * This is what replaced `sectionBlockMembers`, whose comment recorded why the
  * derivation matters: #58 registered, defined, rendered and bound
@@ -142,40 +125,74 @@ export function rosterSectionBlocks(): readonly SectionBlockName[] {
  * is no list of what may not be inserted, because everything in an array's
  * declared members may be.
  */
-export const BLOCK_ARRAYS = {
-  'page.sections': rosterSectionBlocks(),
-  /**
-   * `story` also takes `chapter` (ADR 0018), which is a shared object rather
-   * than a block. It is added beside these members in `caseStudy.ts` and is
-   * deliberately not here: this map answers what the insert menu can BUILD, and
-   * a `chapter` declares no knobs and therefore no placeholder. That exclusion
-   * is a registry fact — `chapter` is in neither block list — and not a
-   * denylist someone has to keep in step.
-   */
-  'caseStudy.story': rosterSectionBlocks(),
-  /**
-   * Unreachable from the canvas, and staying that way (ADR 0022). This is the
-   * repo's only polymorphic array below a block root, which is the one shape
-   * the Presentation overlay cannot resolve at `sanity@6.8.0` /
-   * `@sanity/visual-editing@5.7.3` — silently, so nothing reports it (#104,
-   * #115). We keep the array polymorphic rather than wrapping its members in a
-   * discriminator, because that wrapper would outlive the bug it works around
-   * and would cost the `satisfies` guardrail that checks the base renderers.
-   * `nestedUnionArrays.test.ts` holds the line at this one entry.
-   *
-   * Declared here anyway: the schema below derives its members from this entry,
-   * and if the bugs in `docs/upstream/` are fixed the menu already knows.
-   */
-  'layoutSection.items': BASE_BLOCKS,
-} as const satisfies Readonly<Record<string, readonly string[]>>
+function blockArrays(sections: readonly SectionBlockName[]) {
+  return {
+    'page.sections': sections,
+    /**
+     * `story` also takes `chapter` (ADR 0018), which is a shared object rather
+     * than a block. It is added beside these members in `caseStudy.ts` and is
+     * deliberately not here: this map answers what the insert menu can BUILD,
+     * and a `chapter` declares no knobs and therefore no placeholder. That
+     * exclusion is a registry fact — `chapter` is in neither block list — and
+     * not a denylist someone has to keep in step.
+     */
+    'caseStudy.story': sections,
+    /**
+     * Unreachable from the canvas, and staying that way (ADR 0022). This is the
+     * repo's only polymorphic array below a block root, which is the one shape
+     * the Presentation overlay cannot resolve at `sanity@6.8.0` /
+     * `@sanity/visual-editing@5.7.3` — silently, so nothing reports it (#104,
+     * #115). We keep the array polymorphic rather than wrapping its members in
+     * a discriminator, because that wrapper would outlive the bug it works
+     * around and would cost the `satisfies` guardrail that checks the base
+     * renderers. `nestedUnionArrays.test.ts` holds the line at this one entry.
+     *
+     * Declared here anyway: the schema derives its members from this entry, and
+     * if the bugs in `docs/upstream/` are fixed the menu already knows.
+     *
+     * The base tier is one list for both brands, so this entry is the same in
+     * every roster.
+     */
+    'layoutSection.items': BASE_BLOCKS,
+  } as const satisfies Readonly<Record<string, readonly string[]>>
+}
+
+/**
+ * Every block-bearing array over the **whole model** — core plus every brand's
+ * own sections.
+ *
+ * This is what typegen extracts and what the migration tools compile against:
+ * the generated types are one file both apps read, so schema extraction has to
+ * see blocks neither Studio offers together. A Studio takes `blockArraysFor`
+ * instead.
+ */
+export const BLOCK_ARRAYS = blockArrays(SECTION_BLOCKS)
+
+/** Which arrays hold blocks and which blocks each holds, for one roster. */
+export type BlockArrays = {
+  readonly 'page.sections': readonly SectionBlockName[]
+  readonly 'caseStudy.story': readonly SectionBlockName[]
+  readonly 'layoutSection.items': readonly BaseBlockName[]
+}
 
 /** The address of one block-bearing array — `page.sections`. */
-export type BlockArrayKey = keyof typeof BLOCK_ARRAYS
+export type BlockArrayKey = keyof BlockArrays
+
+/**
+ * One brand's block-bearing arrays — the core sections plus that brand's own.
+ *
+ * The insert menu and the Studio form read the same answer, because both are
+ * built from this: an app hands it to `createCanvasComponents`, and
+ * `schemaTypesFor` builds that brand's `of:` from it.
+ */
+export function blockArraysFor(brand: Brand): BlockArrays {
+  return blockArrays(sectionBlocksFor(brand))
+}
 
 /**
  * One array's members, in the shape `defineArrayMember` takes. The schema calls
  * this; nothing else needs it, because every other reader wants the type names.
  */
-export function blockArrayMembers(key: BlockArrayKey): { type: string }[] {
-  return BLOCK_ARRAYS[key].map((type) => ({ type }))
+export function blockArrayMembers(key: BlockArrayKey, arrays: BlockArrays): { type: string }[] {
+  return arrays[key].map((type) => ({ type }))
 }
