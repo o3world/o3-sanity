@@ -80,6 +80,17 @@ anyway is the dangerous outcome: a dropped tool call fails a `tool_used` grader
 it satisfied, or passes a `max: 0` one it violated, and the report reads as a
 judgement of the skill ([#200](https://github.com/o3world/o3-sanity/issues/200)).
 
+**Evidence nobody wrote down stops it too.** The transcript is narrated by hand
+until the CLI captures it, so silence in one is ambiguous where silence from a
+real capture is not: a call nobody logged and a call nobody made look the same,
+and every `min: 0` grader passes on both. A transcript-reading grader with no
+transcript, a `tool_used` or `tool_order` grader with no call recorded at all,
+and a `tool_use` line missing its name or carrying a sentence where its
+arguments belong are all refused rather than scored
+([#202](https://github.com/o3world/o3-sanity/issues/202)). What survives is one
+line missing from many — write a prohibition as a dataset assertion where you
+can, because a document read back from Sanity cannot be forgotten into a pass.
+
 **Write MCP tool names as the plugin declares them.** The plugin's `.mcp.json`
 registers the server as `sanity`, so a case names `mcp__sanity__query_documents`
 — that is the name under `claude plugin eval`. This repo's own `.mcp.json`

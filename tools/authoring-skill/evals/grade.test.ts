@@ -268,6 +268,77 @@ describe('gradeRun', () => {
     expect(() => gradeRun(path, damaged)).toThrow(/transcript\.jsonl line 2 does not parse/)
   })
 
+  it('refuses a min: 0 grader against a transcript with no tool call in it, rather than passing on the silence', () => {
+    const path = caseWith(
+      '---\ntype: tool_used\ntool: mcp__sanity__publish_documents\nmin: 0\nmax: 0\n---\n',
+    )
+    const unlogged = run({
+      'transcript.jsonl': '{"type":"assistant","text":"Published the insight."}',
+    })
+
+    expect(() => gradeRun(path, unlogged)).toThrow(/records no tool call/)
+  })
+
+  it('refuses a tool_used grader when no transcript was captured at all', () => {
+    const path = caseWith('---\ntype: tool_used\ntool: Write\nmin: 1\n---\n')
+
+    expect(() => gradeRun(path, run({ 'last-message.md': 'done' }))).toThrow(/records nothing/)
+  })
+
+  it('counts the files a silent run produced, because they are the proof a call went unlogged', () => {
+    const path = caseWith(
+      '---\ntype: tool_used\ntool: mcp__sanity__publish_documents\nmin: 0\nmax: 0\n---\n',
+    )
+    const unlogged = run({
+      'transcript.jsonl': '{"type":"assistant","text":"Done."}',
+      'workspace/draft.md': 'a draft',
+      'workspace/dataset/brief-eval-x.json': '{}',
+    })
+
+    expect(() => gradeRun(path, unlogged)).toThrow(/produced 2 file\(s\), so at least one call/)
+  })
+
+  it('refuses a tool_order grader against a transcript with no tool call in it', () => {
+    const path = caseWith('---\ntype: tool_order\nbefore: Read\nafter: Write\n---\n')
+    const unlogged = run({ 'transcript.jsonl': '{"type":"assistant","text":"Read it, wrote it."}' })
+
+    expect(() => gradeRun(path, unlogged)).toThrow(/records no tool call/)
+  })
+
+  it('refuses a not_contains trace grader when there is no transcript to not contain it', () => {
+    const path = caseWith(
+      "---\ntype: regex\npattern: 'WEIGHT: light'\nmatch: not_contains\ntarget: trace\n---\n",
+    )
+
+    expect(() => gradeRun(path, run({ 'last-message.md': 'done' }))).toThrow(/records nothing/)
+  })
+
+  it('grades a trace regex against a transcript that holds no tool call but does hold what it says', () => {
+    const path = caseWith("---\ntype: regex\npattern: 'THESIS AGREED'\ntarget: trace\n---\n")
+    const talked = run({ 'transcript.jsonl': '{"type":"assistant","text":"THESIS AGREED"}' })
+
+    expect(gradeRun(path, talked)[0]).toMatchObject({ passed: true })
+  })
+
+  it('refuses a tool_use line whose input describes the arguments instead of being them', () => {
+    const path = caseWith(
+      "---\ntype: tool_used\ntool: mcp__sanity__patch_documents\ninput_match: '\"verdict'\n---\n",
+    )
+    const narrated = run({
+      'transcript.jsonl':
+        '{"type":"tool_use","name":"mcp__Sanity__patch_documents","input":"set verdict, insert gaps"}',
+    })
+
+    expect(() => gradeRun(path, narrated)).toThrow(/line 1: `input` is a string/)
+  })
+
+  it('refuses a tool_use line with no name, rather than counting it as a call to nothing', () => {
+    const path = caseWith('---\ntype: tool_used\ntool: Write\n---\n')
+    const nameless = run({ 'transcript.jsonl': '{"type":"tool_use","input":{"file_path":"a.md"}}' })
+
+    expect(() => gradeRun(path, nameless)).toThrow(/line 1 is a tool_use with no `name`/)
+  })
+
   it('refuses a grader type it does not know, rather than grading it as tool_order', () => {
     const path = caseWith('---\ntype: groq\nquery: "*[_type==\'brief\']"\n---\n')
 
@@ -321,5 +392,17 @@ describe('grade.mjs as a command', () => {
     expect(result.status).toBe(1)
     expect(result.stdout).toBe('')
     expect(result.stderr).toMatch(/transcript\.jsonl line 1 does not parse/)
+  })
+
+  it('exits 1 with no report when a prohibition would pass on an unwritten transcript', () => {
+    const path = caseWith(
+      '---\ntype: tool_used\ntool: mcp__sanity__publish_documents\nmin: 0\nmax: 0\n---\n',
+    )
+    const unlogged = write({ 'transcript.jsonl': '{"type":"assistant","text":"All done."}' })
+
+    const result = cli(path, unlogged)
+    expect(result.status).toBe(1)
+    expect(result.stdout).toBe('')
+    expect(result.stderr).toMatch(/records no tool call/)
   })
 })

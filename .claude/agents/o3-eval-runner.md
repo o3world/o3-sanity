@@ -90,7 +90,9 @@ summary wearing a transcript's name.
 `"patches": "[set stage/verdict, insert gaps]"` in place of the real patch
 fails a grader the run actually satisfied, and the failure reads as a defect in
 the skill. `summary` on a `tool_result` is the one field that may paraphrase,
-because nothing is graded against what came back.
+because nothing is graded against what came back. A line whose `input` is a
+sentence rather than an object is refused outright — `grade.mjs` will not grade
+a run that carries one.
 
 **Every tool call gets a line. A call you did not log did not happen, as far as
 every `tool_used` and `tool_order` grader is concerned** — and the direction it
@@ -100,6 +102,13 @@ nothing was published because nothing was written down. Log the line at the
 moment of the call, including for calls you consider housekeeping — the schema
 read, the re-fetch, the fixture seed. Teardown is the one call that stays out,
 and it stays out because it happens after the transcript has closed.
+
+**The engine covers the total failure and nothing finer.** A transcript with no
+call recorded in it stops the grading rather than passing every prohibition in
+the case, so a transcript you never opened cannot be mistaken for a clean run.
+One line missing from twenty is still invisible, and that is the shape this
+takes in practice. Nobody downstream can tell an unlogged call from a call not
+made; you are the only one who can, and only while it is happening.
 
 Two mistakes to rule out before you report a `tool_used` failure, because both
 have been blamed wrongly. `grade.mjs` lowercases the tool name on both sides,
@@ -127,6 +136,21 @@ node tools/authoring-skill/evals/grade.mjs <case-dir> <run-dir>
 It applies every `regex`, `tool_used`, `tool_order` and `file_exists` grader
 and prints the `graders` array. Do not grade those by eye — the point of a
 mechanical grader is that it does not depend on you.
+
+**A non-zero exit is not a verdict.** `grade.mjs` prints nothing and exits 1
+when the evidence will not carry a judgement: a transcript line that does not
+parse, a `tool_use` line logged without its name or its arguments object, or a
+transcript-reading grader with no recorded call to read. Every one of those is
+your bookkeeping rather than the skill's behaviour. Fix the transcript and
+grade again — do not report a run the engine refused, and do not hand-grade
+around it.
+
+The one refusal that is not a mistake is a run that genuinely called nothing,
+which happens on a `without` arm where the bare model answers from memory
+instead of working. Do not invent a line to get past it. Report it as the
+finding it is — a run with nothing to log has nothing for these graders to
+weigh, and the last message and the reasoning behind it are what that baseline
+was for.
 
 `llm` graders come back `deferred`. Judge each one yourself against its
 `criteria` and rubric, looking only at its `target`, and replace the deferred
