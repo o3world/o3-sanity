@@ -1,0 +1,126 @@
+name: Nightly schema drift
+
+# `deploy.yml` and `promote.yml` both verify the schema they just deployed, so
+# every change that goes through them is covered. This catches the drift that
+# arrives some other way: a hand-run deploy from a laptop pointed at the wrong
+# dataset, a Studio-side change, a push to main whose deploy job was skipped or
+# cancelled.
+#
+# Drift files an issue instead of reddening the run. At 05:00 there is no author
+# and no build to blame, and a red scheduled run is a notification nobody owns.
+# The run goes red only when this workflow cannot do its own job — the check
+# failing for a reason that is not drift, or an issue it filed and could not
+# attach — because a tracking issue no one can find is worse than a red run.
+#
+# One issue, forever: found by exact title, reopened and re-commented rather
+# than filed again, and closed on the first clean night after a fix.
+#
+# `brief:check` is deliberately not here. Nothing deploys the brief corpus to
+# `production` — no workflow runs `brief:sync`, and `production` holds no
+# `brief` document — so a nightly check against it would report every
+# file-backed brief as missing, every night. A brief lives in the dataset the
+# authoring session works in; making `production` the brief of record is a
+# decision with a sync step behind it, not an assertion a schedule can make.
+
+on:
+  schedule:
+    - cron: '0 5 * * *' # 05:00 UTC daily, alongside the deployment cleanup
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    name: schema:check against production
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+      NEXT_PUBLIC_SANITY_DATASET: production
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      REPO: ${{ github.repository }}
+      # The map the tracking issue hangs off. An unattached ticket is invisible
+      # to `pnpm frontier`, so attachment is part of filing, not a follow-up.
+      MAP: '63'
+      # The identity of the one tracking issue. Changing it strands the old one.
+      TITLE: 'Nightly: the production schema has drifted from the repo'
+      RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: Check the deployed schema
+        id: check
+        env:
+          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_DEPLOY_TOKEN }}
+        run: |
+          set +e
+          pnpm schema:check > drift.log 2>&1
+          status=$?
+          set -e
+          cat drift.log
+
+          # Drift and a crash both exit 1, and only one of them is news. The
+          # report line is what tells them apart: without it, a bad token would
+          # be filed as a schema that changed under us.
+          if grep -q 'schema has drifted' drift.log; then
+            echo "drift=true" >> "$GITHUB_OUTPUT"
+          elif [ "$status" -ne 0 ]; then
+            echo "::error::schema:check failed without reporting drift — check SANITY_DEPLOY_TOKEN and the dataset"
+            exit "$status"
+          else
+            echo "drift=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: File or update the tracking issue
+        if: steps.check.outputs.drift == 'true'
+        run: |
+          set -euo pipefail
+
+          issues=$(gh issue list --repo "$REPO" --state all --limit 1000 --json number,title,state)
+          match=$(printf '%s' "$issues" | jq -c --arg t "$TITLE" '[.[] | select(.title == $t)] | first')
+          number=$(printf '%s' "$match" | jq -r '.number // empty')
+          state=$(printf '%s' "$match" | jq -r '.state // empty')
+
+          report=$(printf '%s\n\n```\n%s\n```\n' \
+            "Checked $(date -u +'%Y-%m-%d %H:%M') UTC — [run]($RUN_URL)" "$(cat drift.log)")
+
+          if [ -n "$number" ]; then
+            if [ "$state" = "CLOSED" ]; then
+              gh issue reopen --repo "$REPO" "$number"
+            fi
+            gh issue comment --repo "$REPO" "$number" --body "$report"
+            echo "updated #$number"
+            exit 0
+          fi
+
+          body=$(printf '%s\n\n%s\n\n%s\n' \
+            "The schema \`production\` serves no longer matches the repo, and no deploy job put it that way — every push to main and every promote verifies its own deploy. Something changed out of band: a hand-run \`schema:deploy\` pointed at the wrong dataset, a Studio-side edit, or a push whose deploy job was skipped or cancelled." \
+            "Fix is \`pnpm schema:deploy\` against \`production\`, then \`pnpm schema:check\` to confirm. This issue is reopened and re-commented each night the drift persists, and closed on the first clean run." \
+            "$report")
+
+          # gh prints the issue URL last; anything before it is a notice.
+          url=$(gh issue create --repo "$REPO" --title "$TITLE" --label 'wayfinder:task' --body "$body" | tail -n 1)
+          number=${url##*/}
+          echo "filed #$number"
+
+          id=$(gh api "repos/$REPO/issues/$number" --jq .id)
+          gh api -X POST "repos/$REPO/issues/$MAP/sub_issues" \
+            -F sub_issue_id="$id" -F replace_parent=true >/dev/null || {
+            echo "::error::filed #$number but could not attach it to #$MAP — an unattached ticket is invisible to \`pnpm frontier\`. Attach it by hand: gh api -X POST repos/$REPO/issues/$MAP/sub_issues -F sub_issue_id=$id -F replace_parent=true"
+            exit 1
+          }
+          echo "attached #$number to #$MAP"
+
+      - name: Close the tracking issue
+        if: steps.check.outputs.drift == 'false'
+        run: |
+          set -euo pipefail
+
+          number=$(gh issue list --repo "$REPO" --state open --limit 1000 --json number,title \
+            | jq -r --arg t "$TITLE" '[.[] | select(.title == $t)] | first | .number // empty')
+          [ -n "$number" ] || exit 0
+
+          gh issue close --repo "$REPO" "$number" \
+            --comment "The deployed schema matches the repo again — [run]($RUN_URL). Reopened automatically if it drifts."

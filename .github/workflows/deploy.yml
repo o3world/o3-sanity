@@ -64,6 +64,17 @@ jobs:
         env:
           SANITY_AUTH_TOKEN: ${{ secrets.SANITY_DEPLOY_TOKEN }}
         run: pnpm schema:deploy
+      # The deploy above can exit 0 without the schema landing, or land it
+      # against the wrong workspace or dataset, and nothing downstream notices —
+      # field descriptions are what an authoring agent reads out of the dataset,
+      # so a stale one answers confidently with the old design. This reads the
+      # deployed manifest back and fails the job if it disagrees with the repo.
+      # Same token: `schemas list` only reads what `schema deploy` just wrote.
+      - name: Verify Sanity schema
+        if: github.event_name == 'push'
+        env:
+          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_DEPLOY_TOKEN }}
+        run: pnpm schema:check
       - name: Pull Vercel environment
         run: vercel pull --yes --environment=preview --token="$VERCEL_TOKEN"
       - name: Build
