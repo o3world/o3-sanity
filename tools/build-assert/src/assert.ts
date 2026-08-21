@@ -44,7 +44,7 @@ function report(build: BuildOutput): void {
  * more, and that is only visible when the headroom is on screen.
  */
 function reportBudget(build: BuildOutput): void {
-  console.log(`\nFirst-load JavaScript, uncompressed:`)
+  console.log('\nFirst-load JavaScript, uncompressed:')
   const byLargest = [...build.routeBundles].sort(
     (a, b) => b.firstLoadUncompressedJsBytes - a.firstLoadUncompressedJsBytes,
   )

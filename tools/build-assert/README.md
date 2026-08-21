@@ -60,7 +60,7 @@ parsed and run on the visitor's phone. `defaultBytes` in [`src/policy.ts`](./src
 route may ship, and the assertion fails naming the route and both numbers:
 
 ```
-/ ships 1,433,201 bytes of first-load JavaScript and its budget is 734,000.
+/ ships 1,433,201 bytes of first-load JavaScript and its budget is 730,000.
 Every visitor downloads, parses and runs the difference.
 ```
 
@@ -93,9 +93,10 @@ proof: one path bailing out of prerendering costs the route that entry while its
 Under Cache Components a route with dynamic holes still prerenders a shell, so the same absence
 means something stronger — no shell at all — and the failure says so.
 
-`route-bundle-stats.json` is Next's own accounting and it matches the prerendered HTML: the chunks it
-lists for `/` are the `<script src>` tags in `.next/server/app/index.html`, which is how it was
-checked.
+`route-bundle-stats.json` is Next's own accounting, and it was checked against the prerendered HTML:
+the 14 chunks it lists for `/` are 14 of the 15 `<script src>` tags in `.next/server/app/index.html`.
+The fifteenth is the `nomodule` core-js polyfill, which no browser that runs the other fourteen ever
+fetches — hence outside the first-load number and outside the budget.
 
 **Middleware is invisible to this assertion.** `apps/web` has no `proxy.ts` today; adding one would
 run on every request, prerendered route or not, and this job would stay green. Cost that at the
@@ -113,4 +114,4 @@ These failure modes were proven against a real build rather than assumed:
   `/insights/[slug]` and `/work/[slug]` to dynamic, and the job failed naming all four.
 - **Budget.** Importing `useIsPresentationTool` from `next-sanity/hooks` into `ui/NavInk.tsx` — the
   regression #269 fixed, put back by hand — took every content route from 667,149 bytes to
-  1,433,201, and the job failed naming all six and both numbers.
+  1,433,201, and the job failed naming all six routes and both numbers.

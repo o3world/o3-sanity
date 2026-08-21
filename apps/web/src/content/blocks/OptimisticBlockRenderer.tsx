@@ -10,7 +10,7 @@ import { BLOCK_COMPONENTS } from './clientComponents'
 import { renderDispatchedBlocks } from './dispatchBlocks'
 import { reconcileOptimisticOrder } from './optimisticOrder'
 
-interface OptimisticBlockRendererProps {
+export interface OptimisticBlockRendererProps {
   blocks: SanityBlock[]
   documentId?: string
   documentType?: string

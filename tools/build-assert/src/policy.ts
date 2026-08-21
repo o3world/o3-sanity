@@ -42,27 +42,27 @@ export const RENDERING_POLICY: RenderingPolicy = {
  *
  * The default is the site's own measurement plus room to move: the audit in
  * #269 left every content route at 667,149 uncompressed bytes of first-load
- * JavaScript, and 734,000 is that plus 10%. The headroom is deliberately
- * smaller than any single thing the audit removed — the cheapest was comlink
- * at ~64KB — so a regression of the kind that ticket fixed cannot fit under
- * the ceiling, while a dependency bump or one more small client component
- * does not fail a build.
+ * JavaScript, and 730,000 is that plus 9.4%.
  *
- * The number to beat next is `/_not-found` at 520,264: a route with no content
- * at all, and therefore the floor Next and React charge for a page here.
+ * The headroom decides what the budget is worth, so it is set against what it
+ * has to catch rather than rounded to a nice percentage. 62,851 bytes is under
+ * the smallest chunk the audit removed — comlink and xstate, 64,190 — so a
+ * regression of the kind #269 fixed cannot fit under the ceiling, while a
+ * dependency bump or one more small client component does not fail a build.
  *
  * A route is held to the default unless it is named below, so a route added
  * next month is inside the budget without anyone remembering it exists.
  */
 export const JS_BUDGET: JsBudget = {
-  defaultBytes: 734_000,
+  defaultBytes: 730_000,
   routes: [
     {
       route: '/studio/[[...tool]]',
       bytes: 8_635_000,
-      // Measured at 7,849,537, again plus 10%. Nobody browses to the Studio by
-      // accident and no visitor pays for it; what this entry buys is a warning
-      // when the editing application doubles.
+      // Measured at 7,849,537, plus 10% — a proportion rather than a chunk
+      // size, because nothing here is trying to keep a specific library out.
+      // Nobody browses to the Studio by accident and no visitor pays for it;
+      // what this entry buys is a warning when the editor doubles.
       reason: 'an editing application, reached only by editors',
     },
   ],

@@ -2,15 +2,11 @@
 
 import dynamic from 'next/dynamic'
 
-import type { SanityBlock } from '@o3/sanity/types'
-
-interface ClientBlockRendererProps {
-  blocks: SanityBlock[]
-  documentId?: string
-  documentType?: string
-  /** The document array field hosting the blocks. Default `sections`. */
-  fieldPath?: string
-}
+// The renderer's own props, not a copy of them: the spread below is not
+// excess-property checked, so a second declaration would let a prop added
+// there go missing here and typecheck. Type-only, so it adds no import edge
+// and the chunk still splits.
+import type { OptimisticBlockRendererProps } from './OptimisticBlockRenderer'
 
 /**
  * The draft-preview renderer, behind a client-side boundary (#269).
@@ -29,6 +25,6 @@ const OptimisticBlockRenderer = dynamic(() =>
   import('./OptimisticBlockRenderer').then((m) => m.OptimisticBlockRenderer),
 )
 
-export function ClientBlockRenderer(props: ClientBlockRendererProps) {
+export function ClientBlockRenderer(props: OptimisticBlockRendererProps) {
   return <OptimisticBlockRenderer {...props} />
 }

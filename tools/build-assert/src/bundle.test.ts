@@ -21,7 +21,7 @@ const bundles: RouteBundle[] = [
 ]
 
 const budget: JsBudget = {
-  defaultBytes: 734_000,
+  defaultBytes: 730_000,
   routes: [{ route: '/studio/[[...tool]]', bytes: 8_635_000, reason: 'an editing application' }],
 }
 
@@ -36,7 +36,7 @@ describe('checkJsBudget', () => {
     )
 
     expect(checkJsBudget(grown, budget)).toEqual([
-      { kind: 'over-budget', route: '/', bytes: 900_000, budgetBytes: 734_000 },
+      { kind: 'over-budget', route: '/', bytes: 900_000, budgetBytes: 730_000 },
     ])
   })
 
@@ -86,12 +86,12 @@ describe('describeBudgetProblem', () => {
       kind: 'over-budget',
       route: '/work/[slug]',
       bytes: 900_000,
-      budgetBytes: 734_000,
+      budgetBytes: 730_000,
     })
 
     expect(message).toContain('/work/[slug]')
     expect(message).toContain('900,000')
-    expect(message).toContain('734,000')
+    expect(message).toContain('730,000')
   })
 
   it('names the route of an entry the build has outlived', () => {
@@ -104,7 +104,7 @@ describe('headroom', () => {
   // the shape a spent exception takes, and it should be visible without a
   // failure.
   it('reports what is left of a route budget', () => {
-    expect(headroom(bundles[0]!, budget)).toEqual({ budgetBytes: 734_000, leftBytes: 66_851 })
+    expect(headroom(bundles[0]!, budget)).toEqual({ budgetBytes: 730_000, leftBytes: 62_851 })
   })
 
   it('reads an entry rather than the default when the route has one', () => {
