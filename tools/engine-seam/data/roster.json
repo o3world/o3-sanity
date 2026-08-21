@@ -67,6 +67,11 @@
           "where": "src/seo.ts, src/live.ts, src/blocks/anchors.ts, src/blocks/dispatchBlocks.tsx",
           "what": "Further @o3/sanity import sites, same coupling.",
           "fix": "Same shape as above."
+        },
+        {
+          "where": "package.json (@o3/sanity dependency)",
+          "what": "The runtime dependency behind the import sites above.",
+          "fix": "Goes when the imports become parameters."
         }
       ]
     },
@@ -110,9 +115,14 @@
       ],
       "impurities": [
         {
-          "where": "src/index.ts (re-exports of @o3/content-ui/testing)",
-          "what": "The barrel re-exports classTokens, variantsOf and unprefixedHorizontalScrollUtilities, making a product package a runtime dependency of the engine barrel.",
-          "fix": "Apps import those helpers from @o3/content-ui/testing directly; the re-export goes."
+          "where": "src/index.ts (re-exports of @o3/content-ui/testing and ./fixtures)",
+          "what": "The barrel re-exports classTokens, variantsOf and unprefixedHorizontalScrollUtilities, making a product package a runtime dependency of the engine barrel — and the O3 fixture documents from the product override beside it.",
+          "fix": "Apps import those helpers from @o3/content-ui/testing and the fixtures from the subpath directly; the re-exports go."
+        },
+        {
+          "where": "package.json (@o3/content-ui and @o3/sanity dependencies)",
+          "what": "The runtime dependencies behind the barrel re-exports and the product fixtures override.",
+          "fix": "They go when the re-exports go and the fixtures move out with the override."
         }
       ]
     },
@@ -182,9 +192,24 @@
       ],
       "impurities": [
         {
+          "where": "src/index.ts (export * from './figma')",
+          "what": "The engine barrel re-exports the product override's two hardcoded Figma file keys.",
+          "fix": "Hosts take the figma helpers from their own binding; the re-export goes."
+        },
+        {
+          "where": "src/storybookConfig.ts (storyRoots)",
+          "what": "The config builder closes over the hardcoded repo story roots.",
+          "fix": "Story roots arrive as a parameter of the builder."
+        },
+        {
           "where": "src/defineKnobStories.tsx (bg-bone, text-fg-muted)",
           "what": "Brand token classes in a rendered component, with no tailwind dependency declared.",
           "fix": "Neutral inline styles, or the classes arrive as parameters."
+        },
+        {
+          "where": "src/defineVariantStories.tsx (text-fg-muted)",
+          "what": "The same brand token class in the variant grid's row labels.",
+          "fix": "Same shape: neutral inline styles, or the classes arrive as parameters."
         },
         {
           "where": "package.json (@o3/sanity dependency)",
@@ -244,6 +269,13 @@
           "why": "SurfaceProvider/useSurface, parameterized over Surface only."
         }
       ],
+      "impurities": [
+        {
+          "where": "src/components/surface-context.tsx (Surface from section-shell)",
+          "what": "The context types against the fused Surface union declared in section-shell.",
+          "fix": "The union splits out with the surfaces-as-a-parameter seam; the context types against the parameter."
+        }
+      ],
       "fused": [
         {
           "path": "src/components/section-shell.tsx",
@@ -272,11 +304,6 @@
           "why": "Scroll-driven contrast flip keyed on a DOM id."
         },
         {
-          "path": "src/sectionBackground.tsx",
-          "verdict": "engine",
-          "why": "The null-vs-element background guard."
-        },
-        {
           "path": "src/testing/responsive.ts",
           "verdict": "engine",
           "why": "classTokens/variantsOf class-string assertions, project-agnostic."
@@ -285,6 +312,13 @@
           "path": "src/testing/seedProjection.ts",
           "verdict": "engine",
           "why": "Generic ref and asset resolution over seed JSON."
+        }
+      ],
+      "impurities": [
+        {
+          "where": "src/SanityImage.tsx (@o3/sanity/image)",
+          "what": "urlForImage and its source types come from the brand-resolved image module, binding the component to this project's client config.",
+          "fix": "The url builder arrives as a parameter."
         }
       ],
       "fused": [
@@ -314,6 +348,11 @@
       "path": "tools/build-assert",
       "verdict": "product-shared",
       "why": "Generic Next-manifest mechanics asserting this product's route policy. cachedNotFound hardcodes CONTENT_ROUTES outside policy.ts, where the rest of the route table lives."
+    },
+    {
+      "path": "tools/engine-seam",
+      "verdict": "product-shared",
+      "why": "Generic roster-and-import mechanics enforcing this product's engine boundary; the roster itself is the product."
     },
     {
       "path": "tools/figma-sync",
@@ -346,6 +385,11 @@
           "where": "src/core/state.ts (ROUTABLE_TYPES, Migration type from @o3/sanity)",
           "what": "The engine core imports the product's routable-type list and generated type.",
           "fix": "Both arrive as parameters."
+        },
+        {
+          "where": "src/core/read.ts (CONVERTED_DIR, SEED_DIR, TRANSLATED_DIR from ../lib/paths)",
+          "what": "The corpus walker imports this migration's committed-tree locations.",
+          "fix": "The tree roots arrive as parameters."
         }
       ],
       "fused": [

@@ -4,9 +4,39 @@
 workspace, each labelled with what it is.
 
 Two things read it. The #284 spec takes its prose answer to "what is the
-engine" from here. The purity seam test (#287) imports it and enforces it: for
-every row labelled `engine`, no app imports, no product-model imports, and
-brand facts arrive as parameters.
+engine" from here. The purity seam test (#287, `src/purity.test.ts`, in the
+`unit` project of `pnpm test`) imports it and enforces it: for every row
+labelled `engine`, no app imports, no product-model imports, and brand facts
+arrive as parameters.
+
+## What the test checks
+
+Four scans, each derived from the roster and the repo rather than listed:
+
+- **Imports.** Every engine module's specifiers — static, re-export, dynamic,
+  `require` — resolved through the workspaces' exports maps and the roster's
+  overrides. A resolved target labelled `product-shared` or `product-brand`
+  (apps are rows too, so app imports are the same failure) fails unless a
+  ledger entry names the importing file. Type-only imports count: a type the
+  content model generates is a brand fact.
+- **Dependencies.** An engine workspace's `package.json` may not declare a
+  product workspace under `dependencies` unless a ledger entry names
+  `package.json` and the package. `devDependencies` stay out — they are the
+  test harness, not what extraction would take.
+- **Brand tokens.** The colour vocabulary both token packages declare —
+  custom properties, their utility classes, their hex values — may not appear
+  in engine code. `white`/`black` are excluded (they paint the same in any
+  host), and only colour and gradient roles are derived, so a value-shaped
+  leak outside that vocabulary (a derived tint, a type-scale class) is ledger
+  material the scanner cannot find on its own.
+- **The ledger burns down.** An entry whose files are gone, or that neither
+  permits a detected violation nor still matches its parenthetical hint in
+  the file, fails the suite until it is removed.
+
+Tests and stories are out of scope on both sides: they are not what
+extraction would take, and the suite's own fixtures import product code on
+purpose. A ledger entry permits leaks per file — the module it names, nothing
+finer — which is the same granularity the roster's rows use.
 
 The roster decides the boundary only. Moving code across it is separate work,
 and ADR 0028's trigger still governs it: extract when a second consumer
@@ -23,9 +53,9 @@ imports, not because a row says `engine`.
 ## Rules
 
 **Every workspace has a row**, and the two non-workspace `tools/` directories
-do too. A new workspace must add its row. #287 fails on a
-workspace the roster does not name. When this directory becomes a workspace, it
-adds its own row.
+do too. A new workspace must add its row: the test fails on any directory
+under `apps/`, `packages/` or `tools/` the roster does not name — this one
+included.
 
 **`engine` states intent, not the current state.** A row keeps the label while
 it still leaks, and lists each leak under `impurities`: where, what, and the

@@ -69,6 +69,7 @@ export default defineConfig({
           // so the two layers cannot collect each other's tests by accident.
           include: [
             'tools/build-assert/src/**/*.test.ts',
+            'tools/engine-seam/src/**/*.test.ts',
             'tools/figma-sync/src/**/*.test.ts',
             'tools/visual-regression/src/**/*.test.ts',
             'tools/migration/src/**/*.test.ts',
