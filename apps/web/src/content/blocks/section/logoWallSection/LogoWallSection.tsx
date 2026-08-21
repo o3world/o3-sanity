@@ -169,6 +169,10 @@ export function LogoWallSection({
                   alt={client.name ?? ''}
                   width={456}
                   className="w-full grayscale"
+                  // The artwork box is the tile less its padding: 168 − 64,
+                  // 224 − 96 at `sm`, 280 − 128 at `lg`. Without this the
+                  // browser has no slot and downloads all 456 for a 104px box.
+                  sizes="(min-width: 1024px) 152px, (min-width: 640px) 128px, 104px"
                 />
               </li>
             ))}

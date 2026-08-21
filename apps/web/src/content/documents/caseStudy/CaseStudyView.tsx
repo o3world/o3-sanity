@@ -3,6 +3,7 @@ import type { CASE_STUDY_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { Blocks } from '@/content/blocks/Blocks'
 import { SanityImage } from '@/content/SanityImage'
+import { FULL_BLEED } from '@/content/imageSizes'
 import { PortableTextBody } from '@/content/portable-text/PortableTextBody'
 
 import { NextCaseBand } from './NextCaseBand'
@@ -107,7 +108,9 @@ export function CaseStudyView(props: CaseStudyViewProps) {
             alt=""
             ratio="fill"
             width={2400}
-            sizes="100vw"
+            sizes={FULL_BLEED}
+            // The route's one priority image: the hero photograph is the
+            // band's fill and the LCP element on every case study.
             priority
           />
         }

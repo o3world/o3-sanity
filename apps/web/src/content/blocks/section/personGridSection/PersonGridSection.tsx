@@ -87,7 +87,14 @@ export function PersonGridSection({
                   alt=""
                   ratio="fill"
                   width={800}
-                  sizes="(min-width: 1024px) 395px, (min-width: 640px) 50vw, 100vw"
+                  /*
+                   * The tile is a grid cell, fluid at every width: three up
+                   * from `lg` ((column − 64) / 3, which is 395 once the column
+                   * caps at 1248), two up from `sm` ((column − 32) / 2 ≈ 42vw),
+                   * one up below that (the column itself ≈ 90vw). The column
+                   * and the 90vw stand-in are derived in `imageSizes.ts`.
+                   */
+                  sizes="(min-width: 1440px) 395px, (min-width: 1024px) 28vw, (min-width: 640px) 42vw, 90vw"
                 />
               </PortraitTile>
               <div className="flex flex-col gap-1.5">

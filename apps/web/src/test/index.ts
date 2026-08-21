@@ -15,6 +15,8 @@ export { expectNotFound, renderRoute } from './renderRoute'
 
 export { classTokens, unprefixedHorizontalScrollUtilities, variantsOf } from './responsive'
 
+export { declaredSizes, imageTags, preloadedImageTags } from './images'
+
 export {
   aCaseStudiesPage,
   aCaseStudyCard,

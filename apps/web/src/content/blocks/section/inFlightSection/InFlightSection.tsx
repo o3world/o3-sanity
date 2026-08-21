@@ -5,6 +5,7 @@ import { ArrowIcon, DisplayHeading, Eyebrow, SectionShell } from '@o3/ui'
 
 import { Mark, markProps } from '@/content/blocks/base/mark/Mark'
 import { SanityImage } from '@/content/SanityImage'
+import { CARD_THREE_UP } from '@/content/imageSizes'
 import { resolveButtonHref } from '@/content/buttonDestination'
 import { resolveSurface } from '@/content/blocks/surface'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
@@ -161,7 +162,7 @@ function EntryCard({ entry }: { entry: Entry }) {
           alt={entry.media?.alt ?? ''}
           ratio="fill"
           width={800}
-          sizes="(min-width: 1024px) 395px, 100vw"
+          sizes={CARD_THREE_UP}
           className="h-full w-full"
         />
       </div>

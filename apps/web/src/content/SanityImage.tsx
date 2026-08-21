@@ -64,7 +64,20 @@ export interface SanityImageProps {
   fit?: 'crop' | 'contain'
   /** Requested CDN width. Also the intrinsic width when `ratio` is `'original'`. */
   width?: number
+  /**
+   * How wide the image will be laid out, as a `sizes` list — what the browser
+   * picks a srcset candidate from. **Every caller declares its own slot**; the
+   * recurring ones are named in `imageSizes.ts`, which also derives them. The
+   * `'fill'` fallback below is `100vw` because that is the browser's own
+   * default, and it is right only for a band that bleeds to both edges.
+   */
   sizes?: string
+  /**
+   * Preload this image and paint it eagerly. **At most one image per route**,
+   * and only the LCP candidate: a second one splits the bandwidth the first
+   * needs. Card components take it from their container, which is the only
+   * thing that knows whether the card is above the fold.
+   */
   priority?: boolean
   /**
    * Styles the outermost element this renders: the `<img>` for an original,

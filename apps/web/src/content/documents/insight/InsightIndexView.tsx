@@ -145,9 +145,12 @@ export function InsightIndexView({
              * the 402 Blog band uses (`1814:1738`).
              */
             <ul className="grid grid-cols-1 gap-x-8 gap-y-12 lg:grid-cols-3 lg:gap-y-16">
-              {items.map((item) => (
+              {items.map((item, index) => (
                 <li key={item._id}>
-                  <InsightCard {...item} />
+                  {/* The first card sits in the first screen under the hero,
+                      the largest picture on the route. It is the only image
+                      here that is preloaded. */}
+                  <InsightCard {...item} priority={index === 0} />
                 </li>
               ))}
             </ul>

@@ -106,6 +106,40 @@ describe('SanityImage', () => {
     })
   })
 
+  /**
+   * The two attributes that decide what a visitor downloads (#268). Neither
+   * moves a pixel, which is why nothing but the markup can report on them.
+   */
+  describe('what the element declares about the download', () => {
+    it('carries the caller’s slot, at a ratio and filling its parent alike', () => {
+      const slot = '(min-width: 1440px) 1248px, 90vw'
+      for (const ratio of ['original', '16/9', 'fill'] as const) {
+        const html = renderToStaticMarkup(
+          <SanityImage source={anImage()} alt="" ratio={ratio} sizes={slot} />,
+        )
+        expect(html).toContain(`sizes="${slot}"`)
+      }
+    })
+
+    it('falls back to the full viewport only when the caller declares no slot', () => {
+      const html = renderToStaticMarkup(<SanityImage source={anImage()} alt="" ratio="fill" />)
+      expect(html).toContain('sizes="100vw"')
+    })
+
+    it('loads lazily unless it is asked to be the priority image', () => {
+      const lazy = renderToStaticMarkup(<SanityImage source={anImage()} alt="" ratio="fill" />)
+      expect(lazy).toContain('loading="lazy"')
+
+      // next/image drops `loading` from the priority image rather than setting
+      // it to `eager` — the head start is a hoisted preload, and the absent
+      // attribute is what identifies the one image that gets it.
+      const preloaded = renderToStaticMarkup(
+        <SanityImage source={anImage()} alt="" ratio="fill" priority />,
+      )
+      expect(preloaded).not.toContain('loading=')
+    })
+  })
+
   it('renders nothing for an empty or unset image field', () => {
     expect(renderToStaticMarkup(<SanityImage source={null} alt="" />)).toBe('')
     expect(renderToStaticMarkup(<SanityImage source={undefined} alt="" />)).toBe('')
