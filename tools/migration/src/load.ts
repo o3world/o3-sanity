@@ -18,6 +18,19 @@ import { getCliClient } from 'sanity/cli'
 import { ROUTABLE_TYPES } from '@o3/sanity/constants'
 
 import { isPipelineOwned, readCorpus } from './core/read'
+import {
+  LOCKED_BY_ID,
+  LOCKED_BY_TYPE,
+  LOCK_FETCH_OPTIONS,
+  ROUTABLE_SLUGS,
+  bareId,
+  describeSlugCollision,
+  isLocked,
+  lockedIds,
+  slugCollisions,
+  type LockRow,
+  type SlugRow,
+} from './core/state'
 import { isImageBuffer } from './lib/media'
 import { readManifest } from './lib/manifest'
 import { ASSET_MAP, MEDIA_CACHE, EXTRACT_DIR, MISSING_MEDIA, REPO_ROOT } from './lib/paths'
@@ -289,18 +302,8 @@ async function main() {
   const { runs } = readManifest()
 
   const ids = all.flatMap((d) => [d._id, `drafts.${d._id}`])
-  // `perspective: 'raw'` or this query cannot see a draft at all: the client
-  // defaults to the published perspective, which silently made the lock rule
-  // half a rule — a locked DRAFT read as unlocked and got overwritten — and
-  // would leave every stale draft below undetected.
-  const live = await client.fetch<{ _id: string; locked: boolean | null }[]>(
-    '*[_id in $ids]{_id, "locked": migration.locked}',
-    { ids },
-    { perspective: 'raw' },
-  )
-  const locked = new Set<string>(
-    live.filter((d) => d.locked === true).map((d) => d._id.replace(/^drafts\./, '')),
-  )
+  const live = await client.fetch<LockRow[]>(LOCKED_BY_ID, { ids }, LOCK_FETCH_OPTIONS)
+  const locked = lockedIds(live)
 
   /**
    * Retirement — the delete half of CONTEXT.md's Rebuild promise ("deletes
@@ -314,16 +317,12 @@ async function main() {
    */
   const corpusIds = new Set(all.map((d) => d._id))
   const types = [...new Set(all.map((d) => d._type as string))]
-  const owned = await client.fetch<{ _id: string; locked: boolean | null }[]>(
-    '*[_type in $types]{_id, "locked": migration.locked}',
-    { types },
-    { perspective: 'raw' },
-  )
+  const owned = await client.fetch<LockRow[]>(LOCKED_BY_TYPE, { types }, LOCK_FETCH_OPTIONS)
   const retired = new Map<string, { draft: boolean; published: boolean }>()
   for (const doc of owned) {
-    const bare = doc._id.replace(/^drafts\./, '')
+    const bare = bareId(doc._id)
     if (!isPipelineOwned(bare) || corpusIds.has(bare)) continue
-    if (doc.locked === true) locked.add(bare)
+    if (isLocked(doc)) locked.add(bare)
     const entry = retired.get(bare) ?? { draft: false, published: false }
     if (doc._id.startsWith('drafts.')) entry.draft = true
     else entry.published = true
@@ -340,6 +339,10 @@ async function main() {
    * Deleted in the same transaction that writes the published document, and
    * only for documents this run actually writes: a locked document is skipped
    * before it gets here, which is what protects an editor who took one over.
+   *
+   * A draft is only in `live` because the lock read asks for the raw
+   * perspective (`LOCK_FETCH_OPTIONS`); the published perspective cannot see
+   * one, so this set would be empty every run.
    */
   const staleDrafts = new Set<string>(
     live.filter((d) => d._id.startsWith('drafts.')).map((d) => d._id.slice('drafts.'.length)),
@@ -435,23 +438,13 @@ async function main() {
  * editorial call, not something a loader should make.
  */
 async function reportSlugCollisions() {
-  const rows = await client.fetch<{ _id: string; _type: string; slug: string | null }[]>(
-    `*[_type in $types && defined(slug.current) && !(_id in path("drafts.**"))]{_id, _type, "slug": slug.current}`,
-    { types: [...ROUTABLE_TYPES] },
-  )
-
-  const byKey = new Map<string, string[]>()
-  for (const row of rows) {
-    const key = `${row._type}:${row.slug}`
-    byKey.set(key, [...(byKey.get(key) ?? []), row._id])
-  }
-
-  const collisions = [...byKey].filter(([, ids]) => ids.length > 1)
+  const rows = await client.fetch<SlugRow[]>(ROUTABLE_SLUGS, { types: [...ROUTABLE_TYPES] })
+  const collisions = slugCollisions(rows)
   if (collisions.length === 0) return
 
   console.error(`\nSLUG COLLISIONS (${collisions.length}) — these URLs resolve unpredictably:`)
-  for (const [key, ids] of collisions) {
-    console.error(`  ${key} → ${ids.join(', ')}`)
+  for (const collision of collisions) {
+    console.error(`  ${describeSlugCollision(collision)}`)
   }
   console.error('Delete the document that is not committed under data/, then re-run.')
   process.exitCode = 1

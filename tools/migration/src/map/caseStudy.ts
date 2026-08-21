@@ -4,6 +4,7 @@ import { join } from 'node:path'
 
 import { z } from 'zod'
 
+import { migrationObject } from '../core/state'
 import { EXTRACT_DIR, RULES_DIR } from '../lib/paths'
 import { migratableImage } from './types'
 import { seoObject } from './seo'
@@ -139,6 +140,21 @@ const unmodelledSection = z
  */
 const storyMember = z.union([chapter, mediaSection, screenGridSection, unmodelledSection])
 
+/**
+ * The shared `migration` fragment, read as strictly as the translate track
+ * needs it. An agent writes these documents, so the gate refuses a lock — that
+ * flag is an editor's to set, and one arriving pre-set would exempt the
+ * document from the next load — and refuses a source that is not a WordPress
+ * work item.
+ */
+const caseStudyMigration = migrationObject
+  .refine((migration) => migration.locked === false, {
+    message: 'a translated case study must arrive unlocked',
+  })
+  .refine((migration) => /^wp:work:\d+$/.test(migration.sourceId), {
+    message: 'sourceId must name a WordPress work item (wp:work:<id>)',
+  })
+
 export const caseStudyDoc = z.object({
   _id: z.string().regex(/^caseStudy-wp-\d+$/),
   _type: z.literal('caseStudy'),
@@ -164,10 +180,7 @@ export const caseStudyDoc = z.object({
   story: z.array(storyMember).optional(),
   deliverables: z.array(z.string().min(1)).optional(),
   seo: seoObject.optional(),
-  migration: z.object({
-    locked: z.literal(false),
-    sourceId: z.string().regex(/^wp:work:\d+$/),
-  }),
+  migration: caseStudyMigration,
 })
 
 export type CaseStudyDoc = z.infer<typeof caseStudyDoc>

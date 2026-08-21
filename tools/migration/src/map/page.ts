@@ -1,5 +1,6 @@
 import { z } from 'zod'
 
+import { migrationObject } from '../core/state'
 import { convertHtml, createKeyGenerator, type ConversionIssue } from '../lib/htmlToPortableText'
 import type { WpSeo, WpSiteSeo } from '../lib/yoast'
 import { checkPathParity, wpPath } from './paths'
@@ -58,7 +59,7 @@ export const pageDoc = z.object({
   pageType: z.literal('standard'),
   sections: z.array(z.record(z.string(), z.unknown())).min(1),
   seo: seoObject.optional(),
-  migration: z.object({ locked: z.boolean(), sourceId: z.string() }),
+  migration: migrationObject,
 })
 
 export type PageDoc = z.infer<typeof pageDoc>
