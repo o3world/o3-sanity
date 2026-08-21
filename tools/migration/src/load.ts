@@ -229,10 +229,15 @@ async function main() {
   // retirement candidates. `plan` decides; this function only fetches and
   // executes.
   const ids = all.flatMap((d) => [d._id, `drafts.${d._id}`])
-  const current = await client.fetch<LockRow[]>(LOCKED_BY_ID, { ids }, LOCK_FETCH_OPTIONS)
   const types = [...new Set(all.map((d) => d._type as string))]
-  const owned = await client.fetch<LockRow[]>(LOCKED_BY_TYPE, { types }, LOCK_FETCH_OPTIONS)
-  const rows = [...new Map([...current, ...owned].map((row) => [row._id, row] as const)).values()]
+  const [current, owned] = await Promise.all([
+    client.fetch<LockRow[]>(LOCKED_BY_ID, { ids }, LOCK_FETCH_OPTIONS),
+    client.fetch<LockRow[]>(LOCKED_BY_TYPE, { types }, LOCK_FETCH_OPTIONS),
+  ])
+  // The two overlap wherever a corpus document's type is a corpus type, and
+  // plan is duplicate-tolerant; both are still load-bearing — BY_ID catches a
+  // locked live copy whose _type matches no corpus type.
+  const rows = [...current, ...owned]
 
   const loadPlan = plan(all, rows, {
     runs,

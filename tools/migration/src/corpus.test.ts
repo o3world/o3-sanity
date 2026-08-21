@@ -1,6 +1,12 @@
 import { describe, expect, it } from 'vitest'
 
-import { corpusPath, isInternalType, isPipelineOwned, readCorpus } from './core/read'
+import {
+  corpusPath,
+  corpusTypeDirs,
+  isInternalType,
+  isPipelineOwned,
+  readCorpus,
+} from './core/read'
 
 /**
  * Invariants over the whole committed corpus — converted, seed and translated
@@ -75,9 +81,11 @@ describe('the committed corpus', () => {
    * next sync, with the two tools overwriting each other every run.
    */
   it('commits no document of a type a different tool owns', () => {
-    const offenders = readCorpus()
+    // Directories, not documents: a `brief/` holding nothing but markdown
+    // yields no corpus entries, and it is still the other tool's territory.
+    const offenders = corpusTypeDirs()
       .filter(({ type }) => isInternalType(type))
-      .map(corpusPath)
+      .map(({ tree, type }) => `${tree}/${type}`)
     expect(offenders).toEqual([])
   })
 })

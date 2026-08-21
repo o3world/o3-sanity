@@ -20,6 +20,23 @@ function checkLines(result: ReturnType<typeof report>, check: string): readonly 
   return found.lines
 }
 
+describe('the checks', () => {
+  // The verify adapter prints the counts table under the first check, by
+  // position — so the order the checks come back in is part of the interface.
+  it('come back in the order verify prints them', () => {
+    expect(report([], [], []).checks.map((c) => c.check)).toEqual([
+      'every committed document is in the dataset',
+      'every reference resolves',
+      'every image field holds an image asset',
+      'every image resolved to an asset',
+      'every document validates against its schema gate',
+      'every document type is in the schema',
+      'no two documents claim the same slug',
+      'every document is committed under data/',
+    ])
+  })
+})
+
 describe('every committed document is in the dataset', () => {
   it('names a committed document the dataset does not hold', () => {
     const result = report([doc('page-wp-1')], [], [])

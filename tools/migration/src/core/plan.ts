@@ -6,7 +6,7 @@
  * fixtures instead of by a dataset with no backups.
  */
 import { isPipelineOwned, type CorpusDoc } from './read'
-import { bareId, isLocked, lockedIds, type LockRow } from './state'
+import { bareId, lockedIds, type LockRow } from './state'
 
 /** A document the corpus no longer contains, and the forms the dataset holds. */
 export interface Retirement {
@@ -56,12 +56,10 @@ export interface ProvenanceSources {
 /**
  * `migration.sourceId` prefix → the extract that produced the document.
  *
- * The committed JSON does not carry `extractedAt`: it is a fact about the
- * extract run, and storing it per-document meant every `convert` rewrote all
- * 272 converted files whether or not WordPress had changed anything. Studio
- * still shows it, because the plan stamps it from the manifest — so the field
- * an editor reads is sourced from the run that actually produced the content,
- * and the committed tree stays a pure function of that content.
+ * `extractedAt` is a fact about the extract run, not about the document, so
+ * the committed JSON does not carry it: the plan stamps it from the manifest,
+ * which keeps the committed tree a pure function of the content while Studio
+ * still shows the run that actually produced it.
  */
 const EXTRACT_OF_SOURCE: ReadonlyArray<readonly [prefix: string, extractType: string]> = [
   ['wp:post:', 'perspective'],
@@ -143,7 +141,6 @@ export function plan(
   for (const row of live) {
     const bare = bareId(row._id)
     if (!isPipelineOwned(bare) || corpusIds.has(bare)) continue
-    if (isLocked(row)) locked.add(bare)
     const entry = retiring.get(bare) ?? { draft: false, published: false }
     if (row._id.startsWith('drafts.')) entry.draft = true
     else entry.published = true

@@ -76,6 +76,15 @@ describe('slug collisions', () => {
     ).toEqual([{ key: 'page:index', ids: ['page-home', 'page-seed-index'] }])
   })
 
+  it('reports two documents claiming one empty slug', () => {
+    expect(
+      slugCollisions([
+        { _id: 'page-wp-1', _type: 'page', slug: '' },
+        { _id: 'page-wp-2', _type: 'page', slug: '' },
+      ]),
+    ).toEqual([{ key: 'page:', ids: ['page-wp-1', 'page-wp-2'] }])
+  })
+
   it('leaves one slug claimed once alone, under any number of types', () => {
     expect(
       slugCollisions([

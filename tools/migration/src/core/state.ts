@@ -128,7 +128,7 @@ export function slugRowsOf(
   for (const doc of docs) {
     if (!(ROUTABLE_TYPES as readonly string[]).includes(doc._type)) continue
     const slug = (doc.slug as { current?: string } | undefined)?.current
-    if (!slug) continue
+    if (typeof slug !== 'string') continue
     rows.push({ _id: doc._id, _type: doc._type, slug })
   }
   return rows
@@ -137,17 +137,15 @@ export function slugRowsOf(
 /**
  * Two documents claiming one URL. Routes resolve with
  * `*[_type == $type && slug.current == $slug][0]`, so the page served is a
- * coin flip: a leftover `page-home` shared the homepage seed's `index` slug
- * and won the toss about half the time, serving two sections instead of eight
- * with nothing failing.
- *
- * The type is part of the key because the routes are per-collection — an
- * insight and a page may both be `about`.
+ * coin flip. The type is part of the key because the routes are
+ * per-collection — an insight and a page may both be `about`. An empty slug
+ * is a slug for this purpose: `defined("")` is true in GROQ, so two documents
+ * carrying one are the same coin flip with a stranger URL.
  */
 export function slugCollisions(rows: readonly SlugRow[]): SlugCollision[] {
   const byKey = new Map<string, string[]>()
   for (const row of rows) {
-    if (!row.slug) continue
+    if (row.slug === null) continue
     const key = `${row._type}:${row.slug}`
     byKey.set(key, [...(byKey.get(key) ?? []), row._id])
   }

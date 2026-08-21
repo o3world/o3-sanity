@@ -7,6 +7,7 @@ import { readdirSync, readFileSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 
 import { CONVERTED_DIR, SEED_DIR, TRANSLATED_DIR } from '../lib/paths'
+import { bareId } from './state'
 
 /** The committed corpus trees, in load order, each at its root under `data/`. */
 const CORPUS_TREES = {
@@ -46,7 +47,27 @@ function directoriesIn(root: string): string[] {
     if ((error as NodeJS.ErrnoException).code === 'ENOENT') return []
     throw error
   }
-  return entries.sort().filter((entry) => statSync(join(root, entry)).isDirectory())
+  return entries.sort().filter((entry) => {
+    /* A dangling symlink or unreadable entry is not a type directory, and the
+     * reader must not take the whole load down over one. */
+    try {
+      return statSync(join(root, entry)).isDirectory()
+    } catch {
+      return false
+    }
+  })
+}
+
+/**
+ * Every type directory in the committed trees, whether or not it holds a
+ * document yet — the boundary `corpus.test.ts` checks internal types against,
+ * which a document-level read cannot see (a directory of nothing but markdown
+ * yields no entries).
+ */
+export function corpusTypeDirs(): { tree: CorpusTree; type: string }[] {
+  return Object.entries(CORPUS_TREES).flatMap(([tree, root]) =>
+    directoriesIn(root).map((type) => ({ tree: tree as CorpusTree, type })),
+  )
 }
 
 /**
@@ -138,7 +159,7 @@ export function isInternalType(type: string): boolean {
  * bare pattern would otherwise claim.
  */
 export function isPipelineOwned(id: string): boolean {
-  const bare = id.replace(/^drafts\./, '')
+  const bare = bareId(id)
   if (INTERNAL_TYPES.some((type) => bare.startsWith(`${type}-`))) return false
   return /^[a-zA-Z]+-(wp|seed)-./.test(bare)
 }
