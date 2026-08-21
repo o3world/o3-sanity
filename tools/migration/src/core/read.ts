@@ -9,7 +9,7 @@ import { join } from 'node:path'
 import { CONVERTED_DIR, SEED_DIR, TRANSLATED_DIR } from '../lib/paths'
 
 /** The committed corpus trees, in load order, each at its root under `data/`. */
-export const CORPUS_TREES = {
+const CORPUS_TREES = {
   converted: CONVERTED_DIR,
   seed: SEED_DIR,
   translated: TRANSLATED_DIR,
