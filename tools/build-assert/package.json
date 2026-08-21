@@ -1,0 +1,20 @@
+{
+  "name": "@o3/build-assert",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Assertions over the web build's own output — which routes render per request (#265).",
+  "scripts": {
+    "assert": "tsx src/assert.ts",
+    "format": "prettier --write .",
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@o3/typescript-config": "workspace:*",
+    "@types/node": "^24.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^4.1.10"
+  }
+}
