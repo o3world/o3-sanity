@@ -1,14 +1,14 @@
 import { describe, expect, it } from 'vitest'
 
 import { checkCachedNotFound } from './cachedNotFound'
-import type { BuildOutput } from './rendering'
+import type { RenderingOutput } from './rendering'
 
 /**
  * Trimmed from a real `next build` of `apps/web` (Next 16.2, 2026-08-21).
  * `fallback: null` is what the content routes carry; `/studio/[[...tool]]`
  * carries a fallback shell path, which is the case that must not be swept up.
  */
-const build: BuildOutput = {
+const build: RenderingOutput = {
   cacheComponents: true,
   appPathRoutes: {
     '/(site)/[...segments]/page': '/[...segments]',
@@ -28,7 +28,7 @@ const build: BuildOutput = {
   },
 }
 
-function withFallback(route: string, fallback: unknown): BuildOutput {
+function withFallback(route: string, fallback: unknown): RenderingOutput {
   return {
     ...build,
     prerender: {
@@ -66,7 +66,7 @@ describe('checkCachedNotFound', () => {
   })
 
   it('names a declared route the build no longer has', () => {
-    const renamed: BuildOutput = {
+    const renamed: RenderingOutput = {
       ...build,
       appPathRoutes: Object.fromEntries(
         Object.entries(build.appPathRoutes).filter(([, route]) => route !== '/work/[slug]'),
@@ -82,7 +82,7 @@ describe('checkCachedNotFound', () => {
     // No `dynamicRoutes` entry at all is the per-request regression, and
     // `checkRenderingStrategy` reports it with a better message. Two failures
     // for one cause would send the reader to the wrong file.
-    const noEntry: BuildOutput = {
+    const noEntry: RenderingOutput = {
       ...build,
       prerender: {
         routes: build.prerender.routes,

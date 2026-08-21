@@ -1,7 +1,7 @@
 # @o3/build-assert
 
-Assertions over the web build's own output. Two today: which routes the server renders on demand,
-and whether an unknown slug still converges to a cached 404.
+Assertions over the web build's own output. Three today: which routes the server renders on demand,
+whether an unknown slug still converges to a cached 404, and how much JavaScript each route ships.
 
 ```bash
 pnpm --filter @o3/web build     # the assertion reads what this leaves in .next
@@ -53,15 +53,35 @@ list rather than every entry in the manifest.
 
 The measurement it holds the build to is on #267.
 
+## The JS budget
+
+Every route ships some JavaScript before it is interactive, and every byte of it is downloaded,
+parsed and run on the visitor's phone. `defaultBytes` in [`src/policy.ts`](./src/policy.ts) is what a
+route may ship, and the assertion fails naming the route and both numbers:
+
+```
+/ ships 1,433,201 bytes of first-load JavaScript and its budget is 734,000.
+Every visitor downloads, parses and runs the difference.
+```
+
+A ceiling, not the exact set the rendering allowlist is: coming in under budget is the outcome the
+budget exists to produce. What goes stale is an ENTRY — a route excused from the default long after
+it needed to be — so the run prints every route's headroom whether it passes or not, and an entry
+with room to spare reads as spent.
+
+The one entry today is the Studio, which is an editing application rather than a page. The audit
+behind the number is on #269.
+
 ## What it reads
 
-Three files in `apps/web/.next`, and nothing else — no route-file parsing, no guessing from source:
+Four files in `apps/web/.next`, and nothing else — no route-file parsing, no guessing from source:
 
-| File                            | For                                                    |
-| ------------------------------- | ------------------------------------------------------ |
-| `app-path-routes-manifest.json` | the full route table, handlers and catch-alls included |
-| `prerender-manifest.json`       | what the build prerendered — concrete paths and routes |
-| `required-server-files.json`    | the resolved config, for `cacheComponents`             |
+| File                                  | For                                                    |
+| ------------------------------------- | ------------------------------------------------------ |
+| `app-path-routes-manifest.json`       | the full route table, handlers and catch-alls included |
+| `prerender-manifest.json`             | what the build prerendered — concrete paths and routes |
+| `required-server-files.json`          | the resolved config, for `cacheComponents`             |
+| `diagnostics/route-bundle-stats.json` | per route, the first-load chunks and their total bytes |
 
 A route absent from the prerender manifest is one the server renders on demand. That derivation
 matches the `ƒ (Dynamic)` marks in the build's own route table, which is how it was checked.
@@ -73,16 +93,24 @@ proof: one path bailing out of prerendering costs the route that entry while its
 Under Cache Components a route with dynamic holes still prerenders a shell, so the same absence
 means something stronger — no shell at all — and the failure says so.
 
+`route-bundle-stats.json` is Next's own accounting and it matches the prerendered HTML: the chunks it
+lists for `/` are the `<script src>` tags in `.next/server/app/index.html`, which is how it was
+checked.
+
 **Middleware is invisible to this assertion.** `apps/web` has no `proxy.ts` today; adding one would
 run on every request, prerendered route or not, and this job would stay green. Cost that at the
 point you add it.
 
 ## Tests
 
-`src/rendering.test.ts` and `src/cachedNotFound.test.ts`, the unit layer, against manifests trimmed
-from a real build. The reader (`build-output.ts`) is a thin adapter over `readFileSync` and is
-exercised by running the command.
+`src/rendering.test.ts`, `src/cachedNotFound.test.ts` and `src/bundle.test.ts`, the unit layer,
+against output trimmed from a real build. The reader (`build-output.ts`) is a thin adapter over
+`readFileSync` and is exercised by running the command.
 
-The failure mode was proven by reading `headers()` in the shared `(site)` layout: the build flipped
-`/`, `/[...segments]`, `/insights/[slug]` and `/work/[slug]` to dynamic and the job failed naming
-all four.
+These failure modes were proven against a real build rather than assumed:
+
+- **Rendering.** Reading `headers()` in the shared `(site)` layout flipped `/`, `/[...segments]`,
+  `/insights/[slug]` and `/work/[slug]` to dynamic, and the job failed naming all four.
+- **Budget.** Importing `useIsPresentationTool` from `next-sanity/hooks` into `ui/NavInk.tsx` — the
+  regression #269 fixed, put back by hand — took every content route from 667,149 bytes to
+  1,433,201, and the job failed naming all six and both numbers.

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { checkRenderingStrategy, describeProblem, perRequestRoutes } from './rendering'
-import type { BuildOutput, RenderingPolicy } from './rendering'
+import type { RenderingOutput, RenderingPolicy } from './rendering'
 
 /**
  * Manifests trimmed from a real `next build` of `apps/web` (Next 16.2,
@@ -9,7 +9,7 @@ import type { BuildOutput, RenderingPolicy } from './rendering'
  * The prerender entries keep their `srcRoute` back-reference to stay faithful
  * to the real file, and nothing under test reads it.
  */
-const build: BuildOutput = {
+const build: RenderingOutput = {
   cacheComponents: false,
   appPathRoutes: {
     '/(site)/[...segments]/page': '/[...segments]',
@@ -52,7 +52,7 @@ describe('perRequestRoutes', () => {
     // route its `dynamicRoutes` entry while its siblings stay in `routes`
     // under the same `srcRoute`. Next prints that route as `ƒ`, so the
     // surviving paths must not read as prerendered.
-    const bailed: BuildOutput = {
+    const bailed: RenderingOutput = {
       ...build,
       prerender: {
         routes: build.prerender.routes,
@@ -72,7 +72,7 @@ describe('checkRenderingStrategy', () => {
   it('names a route that regressed to per-request rendering', () => {
     // A route the build prerendered nothing for at all — what a dynamic API
     // read in a shared layout leaves behind.
-    const regressed: BuildOutput = {
+    const regressed: RenderingOutput = {
       ...build,
       appPathRoutes: { ...build.appPathRoutes, '/(site)/work/[slug]/page': '/work/[slug]' },
     }
@@ -126,7 +126,7 @@ describe('describeProblem', () => {
  */
 describe('checkRenderingStrategy under Cache Components', () => {
   it('stops excusing a route the allowlist only permitted until the migration', () => {
-    const migrated: BuildOutput = { ...build, cacheComponents: true }
+    const migrated: RenderingOutput = { ...build, cacheComponents: true }
 
     expect(checkRenderingStrategy(migrated, policy)).toEqual([
       { kind: 'no-shell', route: '/insights' },
@@ -136,7 +136,7 @@ describe('checkRenderingStrategy under Cache Components', () => {
   it('accepts a shell with a streamed hole in it', () => {
     // A partially static route is an ordinary prerender entry — the shell is
     // on disk, the hole streams in per request.
-    const migrated: BuildOutput = {
+    const migrated: RenderingOutput = {
       ...build,
       cacheComponents: true,
       prerender: {

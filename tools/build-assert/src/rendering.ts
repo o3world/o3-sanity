@@ -30,7 +30,8 @@ export interface PrerenderManifest {
   dynamicRoutes: Record<string, unknown>
 }
 
-export interface BuildOutput {
+/** The slice of the build output the manifest-reading assertions work from. */
+export interface RenderingOutput {
   /** `config.cacheComponents` as the build recorded it. */
   cacheComponents: boolean
   /** app path → route, from `app-path-routes-manifest.json`. */
@@ -81,7 +82,7 @@ export function describeProblem(problem: Problem): string {
 }
 
 /** Every route the build produced, deduplicated and sorted. */
-export function allRoutes(build: BuildOutput): string[] {
+export function allRoutes(build: RenderingOutput): string[] {
   return [...new Set(Object.values(build.appPathRoutes))].sort()
 }
 
@@ -99,7 +100,7 @@ function isParameterised(route: string): boolean {
  * siblings stay behind, and Next prints the route as `ƒ` — so reading the
  * siblings as proof would pass a route that bills every request.
  */
-export function perRequestRoutes(build: BuildOutput): string[] {
+export function perRequestRoutes(build: RenderingOutput): string[] {
   const paths = new Set(Object.keys(build.prerender.routes))
   const parameterised = new Set(Object.keys(build.prerender.dynamicRoutes))
 
@@ -111,7 +112,7 @@ export function perRequestRoutes(build: BuildOutput): string[] {
 /**
  * Every way the build can disagree with the policy. An empty array is a pass.
  */
-export function checkRenderingStrategy(build: BuildOutput, policy: RenderingPolicy): Problem[] {
+export function checkRenderingStrategy(build: RenderingOutput, policy: RenderingPolicy): Problem[] {
   // Cache Components prerenders a shell for every route that can have one, so
   // the only entries it still honours are the ones with nothing to prerender.
   const allowed = new Set(
