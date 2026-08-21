@@ -1,0 +1,374 @@
+{
+  "$comment": "The engine/product roster (#285). Read by the #284 spec and by the engine-purity seam test (#287). See ../README.md for the rules: verdicts, the closed-roster rule, intent + impurity ledgers, and module granularity.",
+  "verdicts": {
+    "engine": "Extractable, brand-free by intent. A future unrelated Sanity project could take it. #287 holds these rows pure: no app imports, no product-model imports, brand facts arrive as parameters. Known leaks are listed per row as impurities and burn down; new ones fail.",
+    "product-shared": "These two brands' content model and components, rendered by both sites.",
+    "product-brand": "One brand's alone."
+  },
+  "rows": [
+    {
+      "path": "apps/web",
+      "verdict": "product-brand",
+      "why": "The o3world.com site."
+    },
+    {
+      "path": "apps/o3xo",
+      "verdict": "product-brand",
+      "why": "The o3xo.ai site."
+    },
+    {
+      "path": "apps/storybook",
+      "verdict": "product-brand",
+      "why": "The O3-brand Storybook host. The reusable half is packages/story-kit."
+    },
+    {
+      "path": "apps/storybook-o3xo",
+      "verdict": "product-brand",
+      "why": "The O3XO-brand Storybook host."
+    },
+    {
+      "path": "packages/block-spec",
+      "verdict": "engine",
+      "why": "The knob and spec vocabulary. Zero runtime dependencies by policy.",
+      "impurities": [
+        {
+          "where": "src/resolveContrast.ts (BandSurface)",
+          "what": "Hardcodes the 'white' | 'bone' | 'ink' surface union — a design-system fact, declared independently in four modules across the repo.",
+          "fix": "The surface vocabulary becomes a parameter of the contrast mechanism."
+        },
+        {
+          "where": "src/surfaces.ts (SURFACE_RULES)",
+          "what": "This design system's surface rules baked into the mechanism.",
+          "fix": "Same shape: rules supplied by the product, mechanism stays generic."
+        }
+      ]
+    },
+    {
+      "path": "packages/content-runtime",
+      "verdict": "engine",
+      "why": "Route building, live client, SEO, cache tags, and the whole block-dispatch mechanism (renderDispatchedBlocks, defineBlockRender, SectionProps). The mechanics are brand-free; every leak is an @o3/sanity import.",
+      "impurities": [
+        {
+          "where": "src/blocks/sectionTypes.ts (SectionProps, PageSection)",
+          "what": "The seam type's domain is PAGE_QUERY_RESULT — a union derived from the concrete 16 blocks.",
+          "fix": "The generated union becomes a type parameter; the product supplies it."
+        },
+        {
+          "where": "src/urls.ts (COLLECTION_PREFIXES, 'caseStudy' arm)",
+          "what": "Imports one brand's URL prefixes and switches on a concrete document type.",
+          "fix": "Collection taxonomy arrives as a parameter."
+        },
+        {
+          "where": "src/siteSettings.ts",
+          "what": "Hardcoded to the siteSettings singleton and its query.",
+          "fix": "Query and type supplied by the caller."
+        },
+        {
+          "where": "src/seo.ts, src/live.ts, src/blocks/anchors.ts, src/blocks/dispatchBlocks.tsx",
+          "what": "Further @o3/sanity import sites, same coupling.",
+          "fix": "Same shape as above."
+        }
+      ]
+    },
+    {
+      "path": "packages/editor-chrome",
+      "verdict": "engine",
+      "why": "Studio plugin, on-page toolbar and canvas, draft-mode routes. Imports only block-spec and platform libraries.",
+      "impurities": [
+        {
+          "where": "src/toolbar/EditorToolbarView.tsx (#FF6A5A)",
+          "what": "A tint derived from the O3 brand red.",
+          "fix": "A neutral chrome colour, or the value arrives as a parameter."
+        },
+        {
+          "where": "src/toolbar/EditorToolbarView.tsx (bg-ink, on-ink-* classes)",
+          "what": "Tailwind classes that resolve only against @o3/tailwind-config, which no dependency declares. A different host renders the toolbar unstyled.",
+          "fix": "Self-contained styles, or a declared token contract."
+        }
+      ]
+    },
+    {
+      "path": "packages/env",
+      "verdict": "engine",
+      "why": "t3-oss env schemas. Clean."
+    },
+    {
+      "path": "packages/eslint-config",
+      "verdict": "engine",
+      "why": "Shared flat ESLint config. Clean."
+    },
+    {
+      "path": "packages/render-kit",
+      "verdict": "engine",
+      "why": "The route-to-HTML test layer: renderRoute, the vitest project factory, the module stubs.",
+      "overrides": [
+        {
+          "path": "src/fixtures.ts",
+          "verdict": "product-shared",
+          "why": "O3 documents: insight and caseStudy shapes, real names, the siteSettings fixture."
+        }
+      ],
+      "impurities": [
+        {
+          "where": "src/index.ts (re-exports of @o3/content-ui/testing)",
+          "what": "The barrel re-exports classTokens, variantsOf and unprefixedHorizontalScrollUtilities, making a product package a runtime dependency of the engine barrel.",
+          "fix": "Apps import those helpers from @o3/content-ui/testing directly; the re-export goes."
+        }
+      ]
+    },
+    {
+      "path": "packages/sanity",
+      "verdict": "product-shared",
+      "why": "The content model: schemas, queries, generated types, knob declarations, brand facts. The machinery inside it is real but fused — see the fused list; extraction is governed by ADR 0028's trigger, not by this roster.",
+      "overrides": [
+        {
+          "path": "src/knobs/decoration.ts",
+          "verdict": "engine",
+          "why": "decorationKnob takes its option tuple as a parameter; no brand values inside."
+        }
+      ],
+      "fused": [
+        {
+          "path": "src/brand.ts",
+          "split": "brandConfig()/currentBrand() and the BrandFacts shape are machinery; BRANDS, DEFAULT_BRAND and the FACTS table (project ids, domains, prefixes) are product. One module, no injection seam; BrandFacts is not even exported, so no third party can supply a brand."
+        },
+        {
+          "path": "src/schemas/blocks/registry.ts",
+          "split": "The roster mechanism (blockArraysFor, sectionBlocksFor, blockArrayMembers, BrandSectionBlockName, the private blockArrays builder) is machinery; CORE_SECTION_BLOCKS, BRAND_SECTION_BLOCKS, BASE_BLOCKS and the authored array addresses are product. The functions close over the constants and the types derive from the values, so neither half exists without the other today."
+        },
+        {
+          "path": "src/constants.ts",
+          "split": "resolveDataset/resolveProjectId/readsNeedToken are machinery; every constant table is product. The module executes brandConfig() at load, so importing the resolvers — or BLOCK_KNOBS in the browser — evaluates the brand FACTS table and reads process.env."
+        },
+        {
+          "path": "src/client.ts",
+          "split": "getClient is machinery; clientConfig is computed from brand facts at module load."
+        },
+        {
+          "path": "src/image.ts",
+          "split": "The parsing and dimension helpers are pure machinery; the module-scope builder and rawImageUrl bind to the brand-resolved clientConfig."
+        },
+        {
+          "path": "src/schemas/index.ts",
+          "split": "schemaTypesWith is a clean brand-free builder; it shares a module with thirty concrete schema imports, so the assembly function cannot be reached without the content."
+        }
+      ]
+    },
+    {
+      "path": "packages/site-auth",
+      "verdict": "engine",
+      "why": "A 23-line HTTP basic-auth check with zero imports. Clean."
+    },
+    {
+      "path": "packages/story-kit",
+      "verdict": "engine",
+      "why": "Storybook config builders and the knob-matrix story generators.",
+      "overrides": [
+        {
+          "path": "src/figma.ts",
+          "verdict": "product-shared",
+          "why": "Two hardcoded Figma file keys — external asset ids of these brands' design files."
+        },
+        {
+          "path": "src/storyRoots.ts",
+          "verdict": "product-shared",
+          "why": "Hardcoded repo paths into packages/ui and packages/content-ui."
+        },
+        {
+          "path": "src/storybookPreview.ts",
+          "verdict": "product-shared",
+          "why": "The o3/o3xo brand toolbar, the Brand type from @o3/sanity, and surface backgrounds bound to this palette's variables."
+        }
+      ],
+      "impurities": [
+        {
+          "where": "src/defineKnobStories.tsx (bg-bone, text-fg-muted)",
+          "what": "Brand token classes in a rendered component, with no tailwind dependency declared.",
+          "fix": "Neutral inline styles, or the classes arrive as parameters."
+        },
+        {
+          "where": "package.json (@o3/sanity dependency)",
+          "what": "The engine half depends on the product package for the Brand type.",
+          "fix": "The brand list becomes a parameter."
+        }
+      ]
+    },
+    {
+      "path": "packages/tailwind-config",
+      "verdict": "product-brand",
+      "why": "The O3 palette and type scale, provenance pinned to the O3 Figma file."
+    },
+    {
+      "path": "packages/tailwind-config-o3xo",
+      "verdict": "product-brand",
+      "why": "The O3XO brand layer over the base theme."
+    },
+    {
+      "path": "packages/typescript-config",
+      "verdict": "engine",
+      "why": "Shared tsconfig bases. Clean."
+    },
+    {
+      "path": "packages/ui",
+      "verdict": "product-shared",
+      "why": "The primitives, painted in the shared token vocabulary, plus the O3 glyphs and Figma-sourced artwork components.",
+      "overrides": [
+        {
+          "path": "src/lib/utils.ts",
+          "verdict": "engine",
+          "why": "cn is generic. FONT_SIZE_UTILITIES exists for a mechanism reason (tailwind-merge cannot see v4 CSS scales) but its sixteen values are this project's type scale — a fused constant inside an engine module."
+        },
+        {
+          "path": "src/components/masked-lines.tsx",
+          "verdict": "engine",
+          "why": "Pure stagger and reveal animation, no token names."
+        },
+        {
+          "path": "src/components/reveal.tsx",
+          "verdict": "engine",
+          "why": "Delay and intersection-observer wrapper, token-free."
+        },
+        {
+          "path": "src/components/logo-tile.tsx",
+          "verdict": "engine",
+          "why": "An image box with no token names."
+        },
+        {
+          "path": "src/components/thinking-orb.tsx",
+          "verdict": "engine",
+          "why": "A thin wrapper over the thinking-orbs npm package."
+        },
+        {
+          "path": "src/components/surface-context.tsx",
+          "verdict": "engine",
+          "why": "SurfaceProvider/useSurface, parameterized over Surface only."
+        }
+      ],
+      "fused": [
+        {
+          "path": "src/components/section-shell.tsx",
+          "split": "The shell — cva plumbing, gutter and rhythm, surfaceAttrs, the band-step scale — is machinery; the SURFACES union and the SURFACE_CLASS/TINT_CLASS token tables are product. The canonical example of the surfaces-as-a-parameter seam: the vocabulary is declared here and independently in three other modules."
+        }
+      ]
+    },
+    {
+      "path": "packages/content-ui",
+      "verdict": "product-shared",
+      "why": "The 16 core section renderers, the base-block renderers, chrome, cards, portable text — both brands' shared rendering.",
+      "overrides": [
+        {
+          "path": "src/buttonDestination.ts",
+          "verdict": "engine",
+          "why": "Internal/external/file/email destination discrimination; Sanity-shaped, brand-free."
+        },
+        {
+          "path": "src/SanityImage.tsx",
+          "verdict": "engine",
+          "why": "The urlFor/ratio-box image component; Sanity-generic, no token names."
+        },
+        {
+          "path": "src/chrome/NavInk.tsx",
+          "verdict": "engine",
+          "why": "Scroll-driven contrast flip keyed on a DOM id."
+        },
+        {
+          "path": "src/sectionBackground.tsx",
+          "verdict": "engine",
+          "why": "The null-vs-element background guard."
+        },
+        {
+          "path": "src/testing/responsive.ts",
+          "verdict": "engine",
+          "why": "classTokens/variantsOf class-string assertions, project-agnostic."
+        },
+        {
+          "path": "src/testing/seedProjection.ts",
+          "verdict": "engine",
+          "why": "Generic ref and asset resolution over seed JSON."
+        }
+      ],
+      "fused": [
+        {
+          "path": "src/blocks/base/baseComponents.tsx",
+          "split": "defineBlockRender/bindingsToRecord usage is machinery; the seven concrete base bindings are product. Deliberate per the barrel's note — the base tier is the inline vocabulary a section renderer draws with — and o3xo re-points it through the LayoutSection slot."
+        },
+        {
+          "path": "src/blocks/layoutSection/LayoutSection.tsx",
+          "split": "The one renderer that is a dispatcher: the baseComponents slot is machinery, its default binding to BASE_BLOCK_COMPONENTS is product."
+        },
+        {
+          "path": "src/cards/card-registry.ts",
+          "split": "getCard's registry shape is machinery; CARD_OVERRIDES is a module-private product table. The one registry in the repo with no per-app binding point — an app cannot re-point a card type without forking the file."
+        },
+        {
+          "path": "src/decoration.ts",
+          "split": "The derivation from BLOCK_KNOBS is machinery; the 'molecule' | 'orbs' union names this brand's two artworks."
+        },
+        {
+          "path": "src/surface.ts",
+          "split": "The read-the-default-off-the-knobs derivation is machinery; its parameter and return types are the concrete PageSection and Surface unions."
+        }
+      ]
+    },
+    {
+      "path": "tools/build-assert",
+      "verdict": "product-shared",
+      "why": "Generic Next-manifest mechanics asserting this product's route policy. cachedNotFound hardcodes CONTENT_ROUTES outside policy.ts, where the rest of the route table lives."
+    },
+    {
+      "path": "tools/figma-sync",
+      "verdict": "product-shared",
+      "why": "The diff, hash, normalize and probe layers are generic Figma-API work; the brand registry and the two file keys are the product."
+    },
+    {
+      "path": "tools/guidance",
+      "verdict": "product-shared",
+      "why": "Brand-clean, but coupled to @o3/sanity and the brief document type. The nearest tool to promotable."
+    },
+    {
+      "path": "tools/migration",
+      "verdict": "product-shared",
+      "why": "The WordPress and Framer pipeline for these two sites.",
+      "overrides": [
+        {
+          "path": "src/core/state.ts",
+          "verdict": "engine",
+          "why": "Lock, provisional and slug-collision vocabulary; pure zod and GROQ fragments."
+        },
+        {
+          "path": "src/core/read.ts",
+          "verdict": "engine",
+          "why": "The corpus tree walker and id-ownership contract."
+        }
+      ],
+      "impurities": [
+        {
+          "where": "src/core/state.ts (ROUTABLE_TYPES, Migration type from @o3/sanity)",
+          "what": "The engine core imports the product's routable-type list and generated type.",
+          "fix": "Both arrive as parameters."
+        }
+      ],
+      "fused": [
+        {
+          "path": "src/core/plan.ts",
+          "split": "The planner is machinery; EXTRACT_OF_SOURCE is a literal table of this migration's wp/framer source prefixes. Injectable, not yet injected."
+        }
+      ]
+    },
+    {
+      "path": "tools/visual-regression",
+      "verdict": "product-shared",
+      "why": "compare/capture/freeze/git/affected are brand-free; the brand host registry is the product."
+    },
+    {
+      "path": "tools/authoring-skill",
+      "verdict": "product-brand",
+      "why": "The O3 voice and authoring pipeline. Not a workspace. scripts/slop-lint.mjs is brand-free."
+    },
+    {
+      "path": "tools/content-backups",
+      "verdict": "product-brand",
+      "why": "Committed snapshots of published O3 content. Not a workspace; data, not code."
+    }
+  ]
+}
