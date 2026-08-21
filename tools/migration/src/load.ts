@@ -17,16 +17,14 @@ import { getCliClient } from 'sanity/cli'
 
 import { ROUTABLE_TYPES } from '@o3/sanity/constants'
 
-import { isPipelineOwned, readCorpus } from './core/read'
+import { plan } from './core/plan'
+import { readCorpus } from './core/read'
 import {
   LOCKED_BY_ID,
   LOCKED_BY_TYPE,
   LOCK_FETCH_OPTIONS,
   ROUTABLE_SLUGS,
-  bareId,
   describeSlugCollision,
-  isLocked,
-  lockedIds,
   slugCollisions,
   type LockRow,
   type SlugRow,
@@ -216,80 +214,6 @@ async function resolveAssets(node: unknown): Promise<unknown> {
 /** Sentinel for a node whose media no longer exists. */
 const DROPPED = Symbol('dropped')
 
-/**
- * `migration.sourceId` prefix → the extract that produced the document.
- *
- * The committed JSON no longer carries `extractedAt`: it is a fact about the
- * extract run, and storing it per-document meant every `convert` rewrote all
- * 272 converted files whether or not WordPress had changed anything. Studio
- * still shows it, because the loader stamps it here from the manifest — so
- * the field an editor reads is sourced from the run that actually produced
- * the content, and the committed tree stays a pure function of that content.
- */
-const EXTRACT_OF_SOURCE: ReadonlyArray<readonly [prefix: string, extractType: string]> = [
-  ['wp:post:', 'perspective'],
-  ['wp:page:', 'page'],
-  ['wp:work:', 'caseStudy'],
-  ['wp:user:', 'person'],
-  ['wp:team:', 'team'],
-  ['wp:term:', 'category'],
-  ['wp:site:chrome', 'siteChrome'],
-]
-
-/**
- * Stamp `migration.extractedAt` on documents that came from WordPress.
- * Seeded documents have no extract behind them and are left alone — an
- * invented timestamp would be worse than an absent one.
- */
-function withExtractProvenance(doc: AnyDoc, runs: Readonly<Record<string, string>>): AnyDoc {
-  const migration = doc.migration as { sourceId?: string } | undefined
-  const sourceId = migration?.sourceId
-  if (!sourceId) return doc
-  const match = EXTRACT_OF_SOURCE.find(([prefix]) => sourceId.startsWith(prefix))
-  const at = match && runs[match[1]]
-  if (!at) return doc
-  return { ...doc, migration: { ...migration, extractedAt: at } } as AnyDoc
-}
-
-/**
- * A translated document carries a `_meta` provenance header that is not part
- * of the schema (#21). Strip it, and put the **extracted source** on
- * `migration.source` instead — that is what makes the document reviewable
- * side-by-side in Studio without leaving it.
- *
- * The flags travel with it: a reviewer opening the document sees which fields
- * an agent proposed and why, in the same panel as the source it worked from.
- * That review still has to happen — publishing what WordPress publishes
- * (ADR 0016) changes when it happens, not whether.
- */
-function withTranslationProvenance(doc: AnyDoc): AnyDoc {
-  const meta = doc._meta as
-    { sourceFile?: string; flags?: unknown[]; model?: string; translatedAt?: string } | undefined
-  if (!meta?.sourceFile) return doc
-
-  const rest = Object.fromEntries(Object.entries(doc).filter(([k]) => k !== '_meta')) as AnyDoc
-  const sourcePath = join(EXTRACT_DIR, meta.sourceFile)
-  const source = existsSync(sourcePath)
-    ? JSON.stringify(
-        {
-          translation: {
-            model: meta.model,
-            translatedAt: meta.translatedAt,
-            flags: meta.flags ?? [],
-          },
-          source: JSON.parse(readFileSync(sourcePath, 'utf8')),
-        },
-        null,
-        2,
-      )
-    : undefined
-
-  return {
-    ...rest,
-    migration: { ...(rest.migration as Record<string, unknown>), ...(source ? { source } : {}) },
-  } as AnyDoc
-}
-
 async function main() {
   // All three trees, all published (ADR 0016).
   const all = readCorpus<AnyDoc>().map((entry) => entry.document)
@@ -298,55 +222,25 @@ async function main() {
     return
   }
 
-  // Read once: `withExtractProvenance` stamps every migrated document from it.
   const { runs } = readManifest()
 
+  // Both lock reads raw (`LOCK_FETCH_OPTIONS`): the documents this run writes
+  // in both their forms, and every document of the corpus's types — the
+  // retirement candidates. `plan` decides; this function only fetches and
+  // executes.
   const ids = all.flatMap((d) => [d._id, `drafts.${d._id}`])
-  const live = await client.fetch<LockRow[]>(LOCKED_BY_ID, { ids }, LOCK_FETCH_OPTIONS)
-  const locked = lockedIds(live)
-
-  /**
-   * Retirement — the delete half of CONTEXT.md's Rebuild promise ("deletes
-   * and recreates every unlocked pipeline-owned document"). A document the
-   * corpus no longer contains used to need an out-of-band
-   * `sanity documents delete` that nothing recorded (the three invented case
-   * studies went that way); now the same run that stops writing it removes
-   * it. Ownership is the deterministic id contract (`isPipelineOwned`), so a
-   * Studio-created document is never touched, and a locked one is skipped
-   * and left for `verify`'s orphan check to name.
-   */
-  const corpusIds = new Set(all.map((d) => d._id))
+  const current = await client.fetch<LockRow[]>(LOCKED_BY_ID, { ids }, LOCK_FETCH_OPTIONS)
   const types = [...new Set(all.map((d) => d._type as string))]
   const owned = await client.fetch<LockRow[]>(LOCKED_BY_TYPE, { types }, LOCK_FETCH_OPTIONS)
-  const retired = new Map<string, { draft: boolean; published: boolean }>()
-  for (const doc of owned) {
-    const bare = bareId(doc._id)
-    if (!isPipelineOwned(bare) || corpusIds.has(bare)) continue
-    if (isLocked(doc)) locked.add(bare)
-    const entry = retired.get(bare) ?? { draft: false, published: false }
-    if (doc._id.startsWith('drafts.')) entry.draft = true
-    else entry.published = true
-    retired.set(bare, entry)
-  }
+  const rows = [...new Map([...current, ...owned].map((row) => [row._id, row] as const)).values()]
 
-  /**
-   * Drafts left behind by the runs that loaded the translate track drafts-only
-   * (ADR 0016). A draft shadows its published document everywhere draft mode
-   * is on — Studio opens the draft, the preview switcher serves it — so a
-   * stale one would keep showing the previous load's content while the site
-   * served the new one, with nothing to say the two disagreed.
-   *
-   * Deleted in the same transaction that writes the published document, and
-   * only for documents this run actually writes: a locked document is skipped
-   * before it gets here, which is what protects an editor who took one over.
-   *
-   * A draft is only in `live` because the lock read asks for the raw
-   * perspective (`LOCK_FETCH_OPTIONS`); the published perspective cannot see
-   * one, so this set would be empty every run.
-   */
-  const staleDrafts = new Set<string>(
-    live.filter((d) => d._id.startsWith('drafts.')).map((d) => d._id.slice('drafts.'.length)),
-  )
+  const loadPlan = plan(all, rows, {
+    runs,
+    extractSource: (sourceFile) => {
+      const path = join(EXTRACT_DIR, sourceFile)
+      return existsSync(path) ? JSON.parse(readFileSync(path, 'utf8')) : undefined
+    },
+  })
 
   // One transaction for the whole load, for two reasons. Sanity validates a
   // strong reference against the state AFTER the transaction, so documents
@@ -361,37 +255,23 @@ async function main() {
   // re-uploading is a no-op, so a failed commit costs nothing but time.
   await preflightMedia(all)
 
+  const staleDrafts = new Set(loadPlan.staleDraftClears)
   const tx = client.transaction()
-  let loaded = 0
-  let cleared = 0
-  const skipped: string[] = []
-  for (const doc of all) {
-    if (locked.has(doc._id)) {
-      skipped.push(doc._id)
-      continue
-    }
-    const resolved = (await resolveAssets(
-      withExtractProvenance(withTranslationProvenance(doc), runs),
-    )) as AnyDoc
+  for (const doc of loadPlan.writes) {
+    const resolved = (await resolveAssets(doc)) as AnyDoc
     tx.createOrReplace(resolved)
-    if (staleDrafts.has(doc._id)) {
-      tx.delete(`drafts.${doc._id}`)
-      cleared++
-    }
+    if (staleDrafts.has(doc._id)) tx.delete(`drafts.${doc._id}`)
     console.log(`✓ ${doc._id}`)
-    loaded++
+  }
+  for (const { id, draft, published } of loadPlan.retirements) {
+    if (published) tx.delete(id)
+    if (draft) tx.delete(`drafts.${id}`)
   }
 
-  const retiredIds: string[] = []
-  for (const [bare, where] of retired) {
-    if (locked.has(bare)) {
-      skipped.push(bare)
-      continue
-    }
-    if (where.published) tx.delete(bare)
-    if (where.draft) tx.delete(`drafts.${bare}`)
-    retiredIds.push(bare)
-  }
+  const loaded = loadPlan.writes.length
+  const cleared = loadPlan.staleDraftClears.length
+  const retiredIds = loadPlan.retirements.map((r) => r.id)
+  const skipped = loadPlan.lockedSkips
 
   if (loaded > 0 || retiredIds.length > 0) await tx.commit()
 
