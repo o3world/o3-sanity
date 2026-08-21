@@ -46,9 +46,13 @@ export function resetDataset(): void {
  * Every `sanityFetch` the render recorded, in order — the seam for asserting
  * cache tags and the stega-off rule on metadata without reaching into the
  * route builder's internals.
+ *
+ * A copy, because the next `installDataset` empties the array this reads from:
+ * a test holding the live one would watch its evidence disappear when it
+ * rendered a second route.
  */
 export function fetchCalls(): readonly FetchCall[] {
-  return calls
+  return [...calls]
 }
 
 export async function sanityFetch(call: FetchCall): Promise<{ data: unknown }> {

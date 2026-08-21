@@ -81,7 +81,7 @@ jobs:
       - uses: ./.github/actions/setup
       - name: Build the site
         run: pnpm turbo run build --filter=@o3/web
-      - name: Assert the rendering strategy
+      - name: Assert the rendering strategy and cached 404s
         run: pnpm build:assert
 
   # The three test layers (ADR 0004). Deliberately its own job rather than a

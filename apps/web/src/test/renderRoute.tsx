@@ -67,18 +67,20 @@ function isNotFoundError(error: unknown): boolean {
 }
 
 /**
- * Assert a route 404s for the given input.
+ * Assert a route 404s for the given input, and hand back the reads it made on
+ * the way there — the same `calls` a successful `renderRoute` returns, for the
+ * same purpose.
  *
- *   await expectNotFound(route, { data: null, params: { slug: 'nope' } })
+ *   const calls = await expectNotFound(route, { data: null, params: { slug: 'nope' } })
  */
 export async function expectNotFound(
   route: RouteShimLike,
   options: RenderRouteOptions,
-): Promise<void> {
+): Promise<readonly FetchCall[]> {
   try {
     await renderRoute(route, options)
   } catch (error) {
-    if (isNotFoundError(error)) return
+    if (isNotFoundError(error)) return fetchCalls()
     throw error
   }
   throw new Error('Expected the route to call notFound(), but it rendered.')

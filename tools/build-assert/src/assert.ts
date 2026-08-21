@@ -2,13 +2,15 @@
  * `pnpm build:assert` — hold the build to what it claims (#265, spec #260).
  *
  * Runs after `pnpm --filter @o3/web build`, over that build's own manifests.
- * One assertion today: the set of routes the server renders on demand is
- * exactly the allowlist in `policy.ts`. The JS budget (#269) is measured
- * against the same output and belongs on the same job.
+ * Two assertions today: the set of routes the server renders on demand is
+ * exactly the allowlist in `policy.ts`, and every content route still blocks
+ * on an unknown slug so a bot probe converges to a cached 404. The JS budget
+ * (#269) is measured against the same output and belongs on the same job.
  *
  * Pass a dist directory as the first argument to check some other build.
  */
 import { readBuildOutput } from './build-output'
+import { checkCachedNotFound } from './cachedNotFound'
 import { RENDERING_POLICY } from './policy'
 import { allRoutes, checkRenderingStrategy, describeProblem, perRequestRoutes } from './rendering'
 
@@ -47,21 +49,38 @@ function main(): void {
   report(build)
 
   const problems: Problem[] = checkRenderingStrategy(build, RENDERING_POLICY)
-  if (problems.length === 0) {
-    console.log('\nRendering strategy matches the policy.')
+  const notCached: string[] = checkCachedNotFound(build)
+
+  if (problems.length === 0 && notCached.length === 0) {
+    console.log('\nRendering strategy matches the policy. Unknown slugs still cache.')
     return
   }
 
-  console.error(`\n${problems.length} problem(s) with the rendering strategy:\n`)
-  for (const problem of problems) {
-    const message = describeProblem(problem)
-    console.error(`  ${message}`)
-    annotate(message)
+  if (problems.length > 0) {
+    console.error(`\n${problems.length} problem(s) with the rendering strategy:\n`)
+    for (const problem of problems) {
+      const message = describeProblem(problem)
+      console.error(`  ${message}`)
+      annotate(message)
+    }
+    console.error(
+      '\nThe allowlist is tools/build-assert/src/policy.ts. Fix the route, or ' +
+        'change the policy and say why in the review.',
+    )
   }
-  console.error(
-    '\nThe allowlist is tools/build-assert/src/policy.ts. Fix the route, or ' +
-      'change the policy and say why in the review.',
-  )
+
+  if (notCached.length > 0) {
+    console.error(`\n${notCached.length} content route(s) no longer cache an unknown slug:\n`)
+    for (const message of notCached) {
+      console.error(`  ${message}`)
+      annotate(message)
+    }
+    console.error(
+      '\nThe routes are declared in tools/build-assert/src/cachedNotFound.ts, and #267 has ' +
+        'the measurement they hold to.',
+    )
+  }
+
   process.exitCode = 1
 }
 
