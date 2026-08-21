@@ -71,7 +71,8 @@ it('404s when nothing matches', async () => {
 ```
 
 `renderRoute` returns `{ html, metadata, calls }`. `calls` is every `sanityFetch` the render made —
-use it to assert cache tags and the stega-off rule on metadata.
+use it to assert cache tags and the stega-off rule on metadata. `expectNotFound` returns the same
+list, so a 404 is assertable on what it read rather than only on the fact that it 404'd.
 
 **Fixtures are typed against the generated query results** (`anInsight`, `aPage`,
 `aInsightsPage` in `@/test`). A query projection change breaks stale fixtures at compile time,
