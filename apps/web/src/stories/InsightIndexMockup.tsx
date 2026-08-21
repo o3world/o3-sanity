@@ -4,7 +4,7 @@ import { InsightIndexView } from '@/content/documents/insight/InsightIndexView'
 import { SiteFooter } from '@/ui/SiteFooter'
 import { SiteNav } from '@/ui/SiteNav'
 
-import { INSIGHTS, SITE_SETTINGS } from './seedContent'
+import { INSIGHTS, SITE_SETTINGS, STORY_YEAR } from './seedContent'
 
 type IndexData = NonNullable<INSIGHTS_PAGE_QUERY_RESULT>
 
@@ -58,7 +58,7 @@ export function InsightIndexMockup({
           pagination={{ page, totalPages }}
         />
       </main>
-      <SiteFooter settings={SITE_SETTINGS} />
+      <SiteFooter settings={SITE_SETTINGS} year={STORY_YEAR} />
     </div>
   )
 }

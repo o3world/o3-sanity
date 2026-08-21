@@ -1,9 +1,12 @@
 import type { NextConfig } from 'next'
+import { sanity } from 'next-sanity/live/cache-life'
 
 import { GENERATED_REDIRECTS } from './src/lib/redirects.generated'
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  cacheComponents: true,
+  cacheLife: { default: sanity },
   images: {
     // Sanity's image CDN does the resizing; Vercel's optimizer (billed per
     // transformation) is bypassed entirely. See the loader for the mechanics.

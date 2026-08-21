@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { figmaDesign } from '@o3/story-kit'
 
-import { SITE_SETTINGS } from '@/stories/seedContent'
+import { SITE_SETTINGS, STORY_YEAR } from '@/stories/seedContent'
 
 import { SiteFooter } from './SiteFooter'
 
@@ -29,7 +29,7 @@ const meta = {
     layout: 'fullscreen',
     design: figmaDesign('1680:2096'),
   },
-  args: { settings: SITE_SETTINGS },
+  args: { settings: SITE_SETTINGS, year: STORY_YEAR },
   globals: { backgrounds: { value: 'ink' } },
 } satisfies Meta<typeof SiteFooter>
 

@@ -2,30 +2,19 @@ import { PAGE_QUERY, PAGE_SLUGS_QUERY } from '@o3/sanity/queries'
 
 import { CATCH_ALL_TYPES } from '@/content/documents'
 import { buildCatchAllRoute } from '@/lib/content-routes/build'
-import { sanityFetch } from '@/sanity/live'
-
-// Known slugs are pre-rendered at build time; unknown ones render on demand
-// (ISR) and 404 if no document matches. Declared explicitly (it is the Next
-// default) so the behavior is self-documenting next to generateStaticParams.
-export const dynamicParams = true
+import { publishedSlugs } from '@/lib/content-routes/staticParams'
 
 const route = buildCatchAllRoute(CATCH_ALL_TYPES, PAGE_QUERY)
 
+/**
+ * Known slugs prerender; an unknown one renders on demand and 404s if no
+ * document matches it. The homepage is `buildSingletonRoute`'s, not this
+ * route's, so its slug is dropped here.
+ */
 export async function generateStaticParams() {
-  try {
-    const { data: slugs } = await sanityFetch({
-      query: PAGE_SLUGS_QUERY,
-      perspective: 'published',
-      stega: false,
-    })
-    return ((slugs ?? []) as Array<string | null>)
-      .filter((slug): slug is string => typeof slug === 'string' && slug !== '' && slug !== 'index')
-      .map((slug) => ({ segments: slug.split('/') }))
-  } catch {
-    // Build proceeds without pre-rendered params when the dataset is
-    // unreachable; every route still renders on demand.
-    return []
-  }
+  return (await publishedSlugs(PAGE_SLUGS_QUERY))
+    .filter((slug) => slug !== 'index')
+    .map((slug) => ({ segments: slug.split('/') }))
 }
 
 export const generateMetadata = route.generateMetadata

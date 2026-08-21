@@ -12,6 +12,10 @@ import type { RenderingPolicy } from './rendering'
  * `migrating` — should serve a static shell and does not yet. Turning on
  * Cache Components stops honouring these entries, and the entry is deleted in
  * the same change that fixes the route.
+ *
+ * Since Cache Components landed (#266) the list is route handlers and nothing
+ * else. Every page route has a shell, the Studio's client application
+ * included.
  */
 export const RENDERING_POLICY: RenderingPolicy = {
   perRequest: [
@@ -29,21 +33,6 @@ export const RENDERING_POLICY: RenderingPolicy = {
       route: '/api/revalidate',
       kind: 'inherent',
       reason: "the publish webhook's POST target",
-    },
-    {
-      route: '/studio/[[...tool]]',
-      kind: 'inherent',
-      reason: 'the Studio is a client application behind a login',
-    },
-    {
-      route: '/insights',
-      kind: 'migrating',
-      reason: 'pagination and the category facet are read from searchParams',
-    },
-    {
-      route: '/work',
-      kind: 'migrating',
-      reason: 'pagination is read from searchParams',
     },
   ],
 }
