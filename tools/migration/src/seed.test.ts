@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, readdirSync } from 'node:fs'
+import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 
 import { describe, expect, it } from 'vitest'
@@ -9,8 +9,8 @@ import { SECTION_BLOCKS } from '@o3/sanity/schemas/registry'
 
 import type { Migration } from '@o3/sanity/types/generated'
 
-import { BRIEF_ID, refsIn } from './lib/corpus'
-import { CONVERTED_DIR, REPO_ROOT, SEED_DIR, TRANSLATED_DIR } from './lib/paths'
+import { BRIEF_ID, corpusPath, readCorpus, refsIn } from './core/read'
+import { REPO_ROOT } from './lib/paths'
 
 /**
  * Invariants over the committed seed corpus (#20).
@@ -32,51 +32,24 @@ interface SeedDoc {
   readonly [key: string]: unknown
 }
 
-function readSeeds(): { file: string; doc: SeedDoc }[] {
-  if (!existsSync(SEED_DIR)) return []
-  const out: { file: string; doc: SeedDoc }[] = []
-  for (const type of readdirSync(SEED_DIR)) {
-    const dir = join(SEED_DIR, type)
-    for (const name of readdirSync(dir).filter((f) => f.endsWith('.json'))) {
-      out.push({
-        file: `${type}/${name}`,
-        doc: JSON.parse(readFileSync(join(dir, name), 'utf8')) as SeedDoc,
-      })
-    }
-  }
-  return out
-}
-
-const seeds = readSeeds()
+/** The seed tree alone, named `<type>/<file>` — the id rules read the type off it. */
+const seeds = readCorpus<SeedDoc>('seed').map((entry) => ({
+  file: `${entry.type}/${entry.file}`,
+  doc: entry.document,
+}))
 
 /**
- * Everything the loader will write — all three trees. `load.ts` publishes
- * CONVERTED + SEED and loads TRANSLATED as drafts, so leaving translated out
- * silently narrows every check below: case studies live almost entirely in
- * that tree, and without it the provenance rules would be asserting over the
- * three hand-authored seeds and nothing else.
+ * Everything the loader will write — all three trees. Leaving one out silently
+ * narrows every check below: case studies live almost entirely in the
+ * translated tree, and without it the provenance rules would be asserting over
+ * the three hand-authored seeds and nothing else.
+ *
+ * Read once — this walks the whole corpus, currently ~315 files.
  */
-const TREES = { converted: CONVERTED_DIR, seed: SEED_DIR, translated: TRANSLATED_DIR }
-
-function readAllPipelineDocs(): { file: string; doc: SeedDoc }[] {
-  const out: { file: string; doc: SeedDoc }[] = []
-  for (const [label, root] of Object.entries(TREES)) {
-    if (!existsSync(root)) continue
-    for (const type of readdirSync(root)) {
-      const dir = join(root, type)
-      for (const name of readdirSync(dir).filter((f) => f.endsWith('.json'))) {
-        out.push({
-          file: `${label}/${type}/${name}`,
-          doc: JSON.parse(readFileSync(join(dir, name), 'utf8')) as SeedDoc,
-        })
-      }
-    }
-  }
-  return out
-}
-
-/** Read once — this walks the whole corpus, currently ~315 files. */
-const allPipelineDocs = readAllPipelineDocs()
+const allPipelineDocs = readCorpus<SeedDoc>().map((entry) => ({
+  file: corpusPath(entry),
+  doc: entry.document,
+}))
 
 /**
  * Every id the loader will write, across all three trees — the set a seed's

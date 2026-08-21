@@ -16,7 +16,7 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 
-import { slugsByType } from './lib/corpus'
+import { slugsByType } from './core/read'
 import { readManifest } from './lib/manifest'
 import type { WpRedirectExport } from './lib/redirects'
 import { EXTRACT_DIR, REPO_ROOT } from './lib/paths'

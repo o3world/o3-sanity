@@ -1,9 +1,6 @@
-import { existsSync, readFileSync, readdirSync } from 'node:fs'
-import { join } from 'node:path'
-
 import { describe, expect, it } from 'vitest'
 
-import { CORPUS_DIRS, isInternalType, isPipelineOwned } from './lib/corpus'
+import { corpusPath, isInternalType, isPipelineOwned, readCorpus } from './core/read'
 
 /**
  * Invariants over the whole committed corpus — converted, seed and translated
@@ -21,18 +18,9 @@ describe('the committed corpus', () => {
    * emits index/follow — is `seoParity.render.test.tsx` in `@o3/web`.
    */
   it('carries no noIndex or noFollow anywhere', () => {
-    const offenders: string[] = []
-    for (const root of CORPUS_DIRS) {
-      if (!existsSync(root)) continue
-      for (const type of readdirSync(root)) {
-        for (const file of readdirSync(join(root, type)).filter((f) => f.endsWith('.json'))) {
-          const doc = JSON.parse(readFileSync(join(root, type, file), 'utf8')) as {
-            seo?: { noIndex?: boolean; noFollow?: boolean }
-          }
-          if (doc.seo?.noIndex || doc.seo?.noFollow) offenders.push(`${root}/${type}/${file}`)
-        }
-      }
-    }
+    const offenders = readCorpus<{ seo?: { noIndex?: boolean; noFollow?: boolean } }>()
+      .filter(({ document }) => document.seo?.noIndex || document.seo?.noFollow)
+      .map(corpusPath)
     expect(offenders).toEqual([])
   })
 
@@ -87,13 +75,9 @@ describe('the committed corpus', () => {
    * next sync, with the two tools overwriting each other every run.
    */
   it('commits no document of a type a different tool owns', () => {
-    const offenders: string[] = []
-    for (const root of CORPUS_DIRS) {
-      if (!existsSync(root)) continue
-      for (const type of readdirSync(root)) {
-        if (isInternalType(type)) offenders.push(`${root}/${type}`)
-      }
-    }
+    const offenders = readCorpus()
+      .filter(({ type }) => isInternalType(type))
+      .map(corpusPath)
     expect(offenders).toEqual([])
   })
 })

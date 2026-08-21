@@ -11,9 +11,6 @@
  * Exits non-zero on any finding, so it works as a checkpoint rather than a
  * report nobody reads.
  */
-import { existsSync, readFileSync, readdirSync } from 'node:fs'
-import { join } from 'node:path'
-
 import { getCliClient } from 'sanity/cli'
 
 import { ROUTABLE_TYPES } from '@o3/sanity/constants'
@@ -21,7 +18,7 @@ import { schemaTypes } from '@o3/sanity/schemas'
 import type { Migration } from '@o3/sanity/types/generated'
 
 import { isImageAssetId } from './lib/media'
-import { BRIEF_ID, CORPUS_DIRS, isInternalType, refsIn } from './lib/corpus'
+import { BRIEF_ID, isInternalType, readCorpus, refsIn } from './core/read'
 import { untouchedPlaceholders } from './lib/placeholders'
 import { categoryDoc } from './map/category'
 import { personDoc } from './map/person'
@@ -55,29 +52,6 @@ function report(check: string, lines: string[]) {
 }
 
 /**
- * The whole committed corpus — all three trees.
- *
- * Converted + seed only until ADR 0016: the translate track loaded drafts-only
- * and this reads PUBLISHED documents, so counting its 20 case studies as
- * "expected" would have failed check 1 on every run. Now that they publish,
- * leaving them out inverts the same mistake — every one would be reported as
- * an orphan by check 8, and the per-type line would read `caseStudy 0 → 20`.
- */
-function readCommitted(): AnyDoc[] {
-  const docs: AnyDoc[] = []
-  for (const root of CORPUS_DIRS) {
-    if (!existsSync(root)) continue
-    for (const type of readdirSync(root)) {
-      const dir = join(root, type)
-      for (const f of readdirSync(dir).filter((f) => f.endsWith('.json'))) {
-        docs.push(JSON.parse(readFileSync(join(dir, f), 'utf8')) as AnyDoc)
-      }
-    }
-  }
-  return docs
-}
-
-/**
  * Every asset ref held by an image field, with the path that reached it — so a
  * finding names the field to fix rather than just the document.
  */
@@ -102,7 +76,9 @@ function imageAssetRefs(
 }
 
 async function main() {
-  const committed = readCommitted()
+  // Every committed document, all three trees — what the dataset is checked
+  // against, so a tree left out would report its documents as orphans.
+  const committed = readCorpus<AnyDoc>().map((entry) => entry.document)
   const expectedIds = new Set(committed.map((d) => d._id))
 
   // Sanity keeps its own bookkeeping in the dataset — ACL groups, the

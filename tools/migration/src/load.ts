@@ -10,14 +10,14 @@
  *
  *   pnpm --filter @o3/migration load
  */
-import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 
 import { getCliClient } from 'sanity/cli'
 
 import { ROUTABLE_TYPES } from '@o3/sanity/constants'
 
-import { CORPUS_DIRS, isPipelineOwned } from './lib/corpus'
+import { isPipelineOwned, readCorpus } from './core/read'
 import { isImageBuffer } from './lib/media'
 import { readManifest } from './lib/manifest'
 import { ASSET_MAP, MEDIA_CACHE, EXTRACT_DIR, MISSING_MEDIA, REPO_ROOT } from './lib/paths'
@@ -25,18 +25,6 @@ import { ASSET_MAP, MEDIA_CACHE, EXTRACT_DIR, MISSING_MEDIA, REPO_ROOT } from '.
 const client = getCliClient({ apiVersion: '2026-07-01' })
 
 type AnyDoc = { _id: string; _type: string; [k: string]: unknown }
-
-function readTree(root: string): AnyDoc[] {
-  if (!existsSync(root)) return []
-  const docs: AnyDoc[] = []
-  for (const type of readdirSync(root)) {
-    const dir = join(root, type)
-    for (const f of readdirSync(dir).filter((f) => f.endsWith('.json'))) {
-      docs.push(JSON.parse(readFileSync(join(dir, f), 'utf8')))
-    }
-  }
-  return docs
-}
 
 const assetMap: Record<string, { sha256?: string; assetId: string }> = existsSync(ASSET_MAP)
   ? JSON.parse(readFileSync(ASSET_MAP, 'utf8'))
@@ -290,10 +278,8 @@ function withTranslationProvenance(doc: AnyDoc): AnyDoc {
 }
 
 async function main() {
-  // All three trees, all published. The distinction the loader used to draw
-  // between them was the draft rule; what remains is provenance, which the
-  // document carries itself.
-  const all = CORPUS_DIRS.flatMap((root) => readTree(root))
+  // All three trees, all published (ADR 0016).
+  const all = readCorpus<AnyDoc>().map((entry) => entry.document)
   if (all.length === 0) {
     console.log('nothing to load')
     return

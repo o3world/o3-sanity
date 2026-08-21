@@ -1,12 +1,12 @@
-import { readFileSync, readdirSync, existsSync } from 'node:fs'
+import { readFileSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
 
 import { describe, expect, it } from 'vitest'
 
 import { SECTION_BLOCKS } from '@o3/sanity/schemas/registry'
 
-import { CORPUS_DIRS, refsIn } from './lib/corpus'
-import { CONVERTED_DIR, EXTRACT_DIR } from './lib/paths'
+import { readCorpus, refsIn } from './core/read'
+import { EXTRACT_DIR } from './lib/paths'
 import type { WpSeo } from './lib/yoast'
 import { categoryDoc } from './map/category'
 import { checkPathParity } from './map/paths'
@@ -28,26 +28,13 @@ import { insightDoc } from './map/insight'
  * half of that review.
  */
 
-function readType<T>(type: string): { file: string; doc: T }[] {
-  const dir = join(CONVERTED_DIR, type)
-  if (!existsSync(dir)) return []
-  return readdirSync(dir)
-    .filter((f) => f.endsWith('.json'))
-    .map((file) => ({ file, doc: JSON.parse(readFileSync(join(dir, file), 'utf8')) as T }))
-}
+/** The conversion output, read once — every check below filters this. */
+const converted = readCorpus<Record<string, unknown>>('converted')
 
-/** Every committed document, in all three trees — converted, seed, translated. */
-function corpusDocs(): unknown[] {
-  const docs: unknown[] = []
-  for (const root of CORPUS_DIRS) {
-    if (!existsSync(root)) continue
-    for (const type of readdirSync(root)) {
-      for (const file of readdirSync(join(root, type)).filter((f) => f.endsWith('.json'))) {
-        docs.push(JSON.parse(readFileSync(join(root, type, file), 'utf8')))
-      }
-    }
-  }
-  return docs
+function readType<T>(type: string): { file: string; doc: T }[] {
+  return converted
+    .filter((entry) => entry.type === type)
+    .map((entry) => ({ file: entry.file, doc: entry.document as T }))
 }
 
 const insights = readType<Record<string, unknown>>('insight')
@@ -134,8 +121,8 @@ describe('committed conversion output', () => {
 
   it('commits no person document that nothing references', () => {
     const referenced = new Set(
-      corpusDocs()
-        .flatMap((doc) => refsIn(doc))
+      readCorpus()
+        .flatMap(({ document }) => refsIn(document))
         .filter((ref) => ref.startsWith('person-')),
     )
     for (const { file, doc } of persons) {

@@ -3,7 +3,7 @@ import { join } from 'node:path'
 
 import { describe, expect, it } from 'vitest'
 
-import { slugsByType } from '../lib/corpus'
+import { slugsByType } from '../core/read'
 import type { WpRedirectExport } from '../lib/redirects'
 import { EXTRACT_DIR, REPO_ROOT } from '../lib/paths'
 import { movedPath } from './paths'

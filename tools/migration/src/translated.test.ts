@@ -5,8 +5,8 @@ import { describe, expect, it } from 'vitest'
 
 import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
 
-import { refsIn } from './lib/corpus'
-import { CONVERTED_DIR, EXTRACT_DIR, SEED_DIR, TRANSLATED_DIR } from './lib/paths'
+import { readCorpus, refsIn } from './core/read'
+import { EXTRACT_DIR } from './lib/paths'
 import { checkTranslation, sha256, translatedCaseStudy } from './map/caseStudy'
 import { checkPathParity } from './map/paths'
 
@@ -36,28 +36,14 @@ interface Translated {
 }
 
 function readTranslated(): { file: string; doc: Translated }[] {
-  const dir = join(TRANSLATED_DIR, 'caseStudy')
-  if (!existsSync(dir)) return []
-  return readdirSync(dir)
-    .filter((f) => f.endsWith('.json'))
-    .map((file) => ({
-      file: `caseStudy/${file}`,
-      doc: JSON.parse(readFileSync(join(dir, file), 'utf8')) as Translated,
-    }))
+  return readCorpus<Translated>('translated')
+    .filter((entry) => entry.type === 'caseStudy')
+    .map((entry) => ({ file: `${entry.type}/${entry.file}`, doc: entry.document }))
 }
 
 /** Every committed document a translated one may reference. */
 function committedIds(): Set<string> {
-  const ids = new Set<string>()
-  for (const root of [CONVERTED_DIR, SEED_DIR]) {
-    if (!existsSync(root)) continue
-    for (const type of readdirSync(root)) {
-      for (const f of readdirSync(join(root, type)).filter((f) => f.endsWith('.json'))) {
-        ids.add((JSON.parse(readFileSync(join(root, type, f), 'utf8')) as { _id: string })._id)
-      }
-    }
-  }
-  return ids
+  return new Set(readCorpus('converted', 'seed').map(({ document }) => document._id))
 }
 
 const translated = readTranslated()
