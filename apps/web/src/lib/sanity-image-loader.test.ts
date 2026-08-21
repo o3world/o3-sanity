@@ -40,7 +40,6 @@ describe('sanityImageLoader', () => {
   })
 
   it('rounds a height that does not divide evenly', () => {
-    // 3/2 at 822 wide is 548; at 375 wide, 250.0 — at 300, 200.
     const cropped =
       'https://cdn.sanity.io/images/p/production/abc-2400x1350.jpg?auto=format&fit=crop&w=822&h=548'
     expect(query(sanityImageLoader({ src: cropped, width: 640 }))).toMatchObject({

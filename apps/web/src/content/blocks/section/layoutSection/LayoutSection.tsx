@@ -4,6 +4,7 @@ import { DisplayHeading, Eyebrow, SectionShell } from '@o3/ui'
 import { stegaClean } from '@sanity/client/stega'
 
 import { BASE_BLOCK_COMPONENTS } from '../../base/baseComponents'
+import { LAYOUT_COLUMN } from '@/content/imageSizes'
 import { DECORATED_BAND_CLASS, resolveDecoration } from '@/content/blocks/decoration'
 import { MoleculeDecoration } from '@/content/blocks/MoleculeDecoration'
 import { resolveSurface } from '@/content/blocks/surface'
@@ -17,7 +18,7 @@ const COLUMN_CLASSES: Record<number, string> = {
   3: 'grid-cols-1 md:grid-cols-3',
 }
 
-function resolveColumns(value: number | null | undefined): number {
+function resolveColumns(value: number | null | undefined): 1 | 2 | 3 {
   const clean = typeof value === 'number' ? value : Number(stegaClean(String(value ?? '')))
   return clean === 2 || clean === 3 ? clean : 1
 }
@@ -36,7 +37,8 @@ export function LayoutSection({
   items,
   surface,
 }: LayoutSectionProps) {
-  const columnClass = COLUMN_CLASSES[resolveColumns(columns)]
+  const columnCount = resolveColumns(columns)
+  const columnClass = COLUMN_CLASSES[columnCount]
   const resolved = resolveSurface(surface, 'layoutSection')
   const showMolecule = resolveDecoration(decoration, 'layoutSection') === 'molecule'
   return (
@@ -110,7 +112,11 @@ export function LayoutSection({
             if (!Component) return null
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { _type, ...props } = item
-            return <Component key={item._key} {...props} />
+            // The column's `sizes` (#268). Passed to every base block and read
+            // by the ones that render media: the count is this section's field,
+            // so a base block has no way to work its own slot out. The rest
+            // name the props they use and ignore this one.
+            return <Component key={item._key} {...props} slotSizes={LAYOUT_COLUMN[columnCount]} />
           })}
         </div>
       </div>

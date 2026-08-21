@@ -8,7 +8,7 @@ import {
   anInsightsPage,
   classTokens,
   declaredSizes,
-  eagerImageTags,
+  preloadedImageTags,
   renderRoute,
   unprefixedHorizontalScrollUtilities,
   variantsOf,
@@ -122,9 +122,9 @@ describe('insights collection index route', () => {
     )
     const { html } = await renderRoute(route, { data: anInsightsPage(illustrated, 3) })
 
-    const eager = eagerImageTags(html)
-    expect(eager).toHaveLength(1)
-    expect(eager[0]).toContain('alt="Picture 0"')
+    const preloaded = preloadedImageTags(html)
+    expect(preloaded).toHaveLength(1)
+    expect(preloaded[0]).toContain('alt="Picture 0"')
     // …and every card declares the three-up slot rather than the viewport.
     expect(declaredSizes(html)).toEqual(Array(3).fill('(min-width: 1024px) 395px, 90vw'))
   })

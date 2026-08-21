@@ -15,7 +15,7 @@ export { expectNotFound, renderRoute } from './renderRoute'
 
 export { classTokens, unprefixedHorizontalScrollUtilities, variantsOf } from './responsive'
 
-export { declaredSizes, eagerImageTags, imageTags } from './images'
+export { declaredSizes, imageTags, preloadedImageTags } from './images'
 
 export {
   aCaseStudiesPage,

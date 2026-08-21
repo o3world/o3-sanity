@@ -287,12 +287,15 @@ export function RailPanelsSection({
                     // one reads "View our Sanity work", which is 24px more
                     // row than a 402 phone has.
                     className="h-12 w-auto min-w-0 max-w-[177px] shrink object-contain object-left lg:h-[60px] lg:max-w-none lg:shrink-0"
-                    // A wordmark sized by its height: 177px is the frame's cap
-                    // below `lg`; above it the height is 60px and the width is
-                    // the artwork's own, 240px covering the widest lockup in
-                    // the corpus (800 × 220). Without this the browser has no
-                    // slot at all and downloads the full 640.
-                    sizes="(min-width: 1024px) 240px, 177px"
+                    // A wordmark sized by its height, so its width is the
+                    // artwork's business: 177px is the frame's cap below `lg`,
+                    // and above it a 60px-tall lockup is 218px at the corpus's
+                    // 3.6:1 but could be 300 at 5:1. 384 is the candidate that
+                    // covers up to 6.4:1 — one step up the ladder from the
+                    // corpus's own need, because `logo` is an editor field and
+                    // a too-small slot upscales a wordmark visibly. Without a
+                    // slot at all the browser downloads the full 640.
+                    sizes="(min-width: 1024px) 384px, 177px"
                   />
                 ) : panel.heading ? (
                   // 18/24 Medium in the row (`1814:1719`), the 48px section

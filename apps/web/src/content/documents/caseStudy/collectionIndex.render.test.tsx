@@ -5,7 +5,7 @@ import {
   aCaseStudiesPage,
   aCaseStudyCard,
   declaredSizes,
-  eagerImageTags,
+  preloadedImageTags,
   imageTags,
   renderRoute,
   unprefixedHorizontalScrollUtilities,
@@ -79,7 +79,7 @@ describe('the /work index', () => {
 
     // The card's picture is decorative (`alt=""` — the client logo beside it
     // carries the name), so document order is what identifies it.
-    expect(eagerImageTags(withPhotos)).toEqual([imageTags(withPhotos)[0]])
+    expect(preloadedImageTags(withPhotos)).toEqual([imageTags(withPhotos)[0]])
     expect(declaredSizes(withPhotos)).toEqual(Array(3).fill('(min-width: 1440px) 1248px, 90vw'))
   })
 

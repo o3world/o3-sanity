@@ -129,15 +129,14 @@ describe('SanityImage', () => {
     it('loads lazily unless it is asked to be the priority image', () => {
       const lazy = renderToStaticMarkup(<SanityImage source={anImage()} alt="" ratio="fill" />)
       expect(lazy).toContain('loading="lazy"')
-      expect(lazy).not.toContain('rel="preload"')
 
-      // A priority image is eager AND preloaded — the preload is what buys the
-      // LCP candidate its head start, and is the reason only one may have it.
-      const eager = renderToStaticMarkup(
+      // next/image drops `loading` from the priority image rather than setting
+      // it to `eager` — the head start is a hoisted preload, and the absent
+      // attribute is what identifies the one image that gets it.
+      const preloaded = renderToStaticMarkup(
         <SanityImage source={anImage()} alt="" ratio="fill" priority />,
       )
-      expect(eager).toContain('loading="eager"')
-      expect(eager).toContain('rel="preload"')
+      expect(preloaded).not.toContain('loading=')
     })
   })
 

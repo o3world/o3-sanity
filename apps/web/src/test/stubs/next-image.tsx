@@ -38,11 +38,12 @@ export default function Image({
       width={width}
       height={height}
       sizes={sizes}
-      // What next/image puts on the element for a priority image, mirrored so
-      // "exactly one image on this route loads eagerly" is assertable from the
-      // markup rather than from the prop (#268).
-      loading={priority ? 'eager' : 'lazy'}
-      fetchPriority={priority ? 'high' : undefined}
+      // next/image's own rule, mirrored so "exactly one image on this route is
+      // preloaded" is assertable from the markup rather than from the prop
+      // (#268): a lazy image carries `loading="lazy"`, and a priority image
+      // carries no `loading` at all — Next expresses its urgency as a hoisted
+      // `<link rel="preload">`, which the render layer has no DOM to receive.
+      loading={priority ? undefined : 'lazy'}
       className={className}
       style={style}
     />

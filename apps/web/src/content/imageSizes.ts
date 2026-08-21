@@ -43,6 +43,23 @@ export const CONTENT_COLUMN = '(min-width: 1440px) 1248px, 90vw'
 export const ARTICLE_COLUMN = '(min-width: 1024px) 822px, 90vw'
 
 /**
+ * A base block's slot in a `layoutSection` column, by the section's column
+ * count. The grid is `gap-10` (40px) inside the content column and switches at
+ * `md`, not `lg` — below that every count is one column.
+ *
+ * Only the section knows the count, so it passes the value down; a base block
+ * that guessed the widest case would ask for 1248px on a 604px slot, which is
+ * the 1920 candidate where 640 would do.
+ */
+export const LAYOUT_COLUMN: Record<1 | 2 | 3, string> = {
+  1: CONTENT_COLUMN,
+  // (1248 − 40) / 2 = 604 at the cap; 41.3–41.9% of the viewport between.
+  2: '(min-width: 1440px) 604px, (min-width: 768px) 42vw, 90vw',
+  // (1248 − 80) / 3 = 389 at the cap; 25.8–27.0% between.
+  3: '(min-width: 1440px) 389px, (min-width: 768px) 28vw, 90vw',
+}
+
+/**
  * A card in a three-up row — the insight card and the in-flight card, in both
  * of their containers. The carousel and in-flight tracks pin the card at
  * `lg:w-[394px]` from `lg` up while the `/insights` grid lets it flex from 276
