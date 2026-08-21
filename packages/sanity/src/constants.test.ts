@@ -54,6 +54,9 @@ describe('which datasets a tokenless read can trust', () => {
   afterEach(() => vi.unstubAllEnvs())
 
   it('reads the dataset an unconfigured checkout lands on without a token', () => {
+    // "Unconfigured" means the variable is unset — CI's test job sets it to a
+    // literal for module-level config validation, so clear it here.
+    vi.stubEnv('NEXT_PUBLIC_SANITY_DATASET', '')
     expect(readsNeedToken(resolveDataset())).toBe(false)
   })
 
