@@ -75,11 +75,14 @@ Three things, every run:
   `${CLAUDE_PLUGIN_ROOT}/references/`. The first is the grammar the draft was
   written in; the second is every mechanic for what you send. On a page,
   [`composition.md`](../../references/composition.md) as well.
-- **The schema, per type.** `get_schema` for the document type, and for **every
-  section block a label names**, before that block is built. The no-type
-  overview omits field descriptions, and the descriptions are where a field's
-  authoring guidance lives. A band composed from memory is a band composed
-  against a schema you invented.
+- **The schema, per type.** `get_schema` for the document type, for **every
+  section block a label names**, and for **every named field-level type the
+  piece writes into** — each before the thing built from it. `bodyText` is the
+  field-level one that keeps coming up: it is an array type and neither a
+  document nor a band, so the rule names it rather than leaving it to a
+  category. The no-type overview omits field descriptions, and the descriptions
+  are where a field's authoring guidance lives. A band composed from memory is a
+  band composed against a schema you invented.
 
 ## 3. Build the document
 

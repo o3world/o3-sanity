@@ -786,7 +786,7 @@ the sitemap's, recorded in `NAV` in the mapper.
 
 ### Two contract fixes this ticket needed
 
-- **`framer` is now a pipeline-owned id prefix** (`lib/corpus.ts`). It was not,
+- **`framer` is now a pipeline-owned id prefix** (`core/read.ts`). It was not,
   so every O3XO document `load` wrote was retired by nothing: deleting one from
   the corpus left it in the dataset for ever.
 - **`personDoc` admits `person-framer-<name>`**, the same widening

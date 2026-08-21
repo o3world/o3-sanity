@@ -1,4 +1,10 @@
-import { createDataAttribute } from '@sanity/visual-editing'
+// The subpath, never the package root (#269). Every block renderer reaches
+// this module, and the root export is the same barrel the Presentation overlay
+// comes out of — ~640KB of @sanity/ui, styled-components and comlink that a
+// published page has no use for. Turbopack does shake that barrel down to this
+// one function today; the subpath is the version that does not depend on it,
+// and it resolves to @sanity/visual-editing-csm, which is string building.
+import { createDataAttribute } from '@sanity/visual-editing/create-data-attribute'
 
 // A location in a Sanity document: the document identity plus a GROQ path
 // into the content tree. Passing this down the render chain lets a wrapper

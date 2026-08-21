@@ -1,9 +1,9 @@
 # Making an image
 
-Every value here is read off `packages/tailwind-config/tokens/`, the tokens the
-site renders with — which are themselves read off the canonical Figma frames.
-Where this document and a token file disagree, the token file is right and this
-one is stale.
+Every value here is read off the code that renders the site — the tokens in
+`packages/tailwind-config/tokens/`, which are themselves read off the canonical
+Figma frames, and the components that request the image widths. Where this
+document and that code disagree, the code is right and this one is stale.
 
 ## Type is never generated
 
@@ -83,6 +83,26 @@ small have to be redone. Generate square for an insight's `featuredImage`
 unless the block's schema description says otherwise, and generate large — an
 image can be cropped down and cannot be invented back up.
 
+**`generate_image` stops at 1024×1024**, and nothing in the toolchain raises
+that ceiling. The slots ask for more, and on an insight one asset fills all
+three of them, because the hero draws `featuredImage.image`
+(`apps/web/src/content/documents/insight/InsightView.tsx:121`):
+
+| Slot           | Asks for | Where                                       |
+| -------------- | -------- | ------------------------------------------- |
+| hero           | `2400`   | `InsightView.tsx:139`                       |
+| in-body figure | `1644`   | `InsightView.tsx:192`                       |
+| square card    | `800`    | `InsightCard.tsx:63`, in the same directory |
+
+A generated image covers the square card's request and none of the others: 1024
+is well under the in-body figure's 1644 and under half the hero's 2400.
+
+**Compare the number to the slot before you prompt, not after.** Where the slot
+is an insight's `featuredImage`, the hero's 2400 is the request that governs and
+no generation will meet it, so the choice is the empty field and a note — taken
+before the first prompt rather than after the third one comes back the same
+size.
+
 ## Writing the prompt
 
 Say all of these, every time:
@@ -111,3 +131,8 @@ rejects in words, and they read the same way in pictures.
 Leave the field empty and say what is needed in the handoff summary. An empty
 image slot is a task for a human; a nearly-right image is a thing that ships and
 then sits on the site looking almost like the brand. The second is worse.
+
+An image you do attach carries its alt text — `figure.alt` is
+`validation.required()` (`packages/sanity/src/schemas/objects/figure.ts`), so an
+asset attached with the field left blank leaves the document invalid until
+somebody opens Studio and finds out.

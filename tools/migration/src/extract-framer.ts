@@ -206,7 +206,7 @@ if (wantsPages) {
     const record = withAccordionAnswers(page, await accordionRows(page, html, slug))
     // A multi-segment slug is one file, not a directory: `industries/construction`
     // is committed as `industries-construction.json`, so the extract tree stays
-    // one flat directory per type the way `lib/corpus.ts` walks it.
+    // one flat directory per type the way `core/read.ts` walks it.
     writeJson(join(EXTRACT_DIR, 'page', `${slug.replaceAll('/', '-')}.json`), {
       _meta: { type: 'page' },
       ...record,

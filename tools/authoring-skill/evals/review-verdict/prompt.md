@@ -5,6 +5,7 @@ plugins: ['../..']
 runs: 1
 max_turns: 50
 timeout_seconds: 1800
+# Server name is the plugin's `sanity`; grade.mjs matches this repo's `Sanity` case-insensitively.
 allowed_tools:
   [
     Skill,
@@ -15,6 +16,7 @@ allowed_tools:
     Task,
     WebSearch,
     WebFetch,
+    mcp__sanity__get_document,
     mcp__sanity__query_documents,
     mcp__sanity__get_schema,
     mcp__sanity__create_documents,
@@ -52,7 +54,7 @@ back is `drafts.brief-eval-review-verdict-zero-violations`.
   "draft": {
     "title": "Zero violations is not a passing grade",
     "excerpt": "An automated audit cleared all 42 templates in one client design system. Keyboard testing broke 11 of them. For anyone buying accessibility as a dashboard number, this is what the dashboard cannot see.",
-    "body": "[[richText]]\nThe audit came back clean. Priya's team ran axe-core against all 42 templates in the client's design system in March and it returned zero violations. We had been hired to find the problems, and the tooling said there were none. Then we opened the first template and pressed Tab.\n\n[[heading]]\n## What a scan can decide\n\n[[richText]]\nAn automated checker rules on what a machine can settle from markup alone: an image with no alt attribute, a contrast ratio under the threshold, a form control with no label. Those are real defects and the tool finds them reliably. It found none here for a plain reason — the client's team had spent a year fixing exactly those defects, guided by the same tool. The scan was reading its own homework back.\n\n[[heading]]\n## What the keyboard found\n\n[[richText]]\nEleven of the 42 templates could not be operated without a mouse. Priya's manual pass found a modal that trapped focus outside itself, a carousel whose controls were unlabelled divs, and a filter panel that reordered its results and announced nothing. Each of the three passed the scan, because none of them is decidable from markup: whether focus went somewhere useful is a question about a sequence, and the checker sees one element at a time.\n\n[[heading]]\n## The number measured the tool\n\n[[richText]]\nThe client had been reporting the zero to their board as an accessibility score. It was never that. A zero says the checker found nothing it knows how to look for, which is a statement about coverage and not about anyone trying to use the site. The eleven templates were the measurement; the dashboard was the thing being measured.\n\n[[richText]]\nRun the scan — it is cheap and it catches real defects. Then press Tab, and report that number instead."
+    "body": "The audit came back clean. Priya's team ran axe-core against all 42 templates in the client's design system in March and it returned zero violations. We had been hired to find the problems, and the tooling said there were none. Then we opened the first template and pressed Tab.\n\n## What a scan can decide\n\nAn automated checker rules on what a machine can settle from markup alone: an image with no alt attribute, a contrast ratio under the threshold, a form control with no label. Those are real defects and the tool finds them reliably. It found none here for a plain reason — the client's team had spent a year fixing exactly those defects, guided by the same tool. The scan was reading its own homework back.\n\n## What the keyboard found\n\nEleven of the 42 templates could not be operated without a mouse. Priya's manual pass found a modal that trapped focus outside itself, a carousel whose controls were unlabelled divs, and a filter panel that reordered its results and announced nothing. Each of the three passed the scan, because none of them is decidable from markup: whether focus went somewhere useful is a question about a sequence, and the checker sees one element at a time.\n\n## The number measured the tool\n\nThe client had been reporting the zero to their board as an accessibility score. It was never that. A zero says the checker found nothing it knows how to look for, which is a statement about coverage and not about anyone trying to use the site. The eleven templates were the measurement; the dashboard was the thing being measured.\n\n(pullQuote)\n\n> The eleven templates were the measurement. The dashboard was the thing being measured.\n\nRun the scan — it is cheap and it catches real defects. Then press Tab, and report that number instead."
   },
   "links": [],
   "gaps": [],

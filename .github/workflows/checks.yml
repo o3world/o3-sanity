@@ -53,6 +53,37 @@ jobs:
             pnpm turbo run ${{ matrix.task }} ${{ matrix.filter }}
           fi
 
+  # What the build says about how it renders (#265), what a bot probe costs
+  # (#267), and how much JavaScript each route ships (#269). Its own job, after
+  # the build it reads: `needs: checks` lets the build below come back from the
+  # turbo cache the checks job filled, and builds for real when it cannot.
+  # Either way what Next left in `.next` is the assertions' ground truth.
+  #
+  # Never gated on `--affected` — a change that flips a route to per-request
+  # rendering, or adds half a megabyte to every page, can land anywhere in the
+  # graph, and the whole point is that nobody has to work out which files
+  # those are.
+  build-assert:
+    name: build assertions
+    needs: checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+      NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+      NEXT_PUBLIC_SANITY_DATASET: ${{ vars.NEXT_PUBLIC_SANITY_DATASET || 'production' }}
+      SANITY_API_READ_TOKEN: ${{ secrets.SANITY_API_READ_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: Build the site
+        run: pnpm turbo run build --filter=@o3/web
+      - name: Assert the rendering strategy, cached 404s and the JS budget
+        run: pnpm build:assert
+
   # The three test layers (ADR 0004). Deliberately its own job rather than a
   # `turbo run` task: tests are a checkpoint, not something every command
   # drags along, and this keeps the browser layer's Chromium download off the

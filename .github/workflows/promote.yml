@@ -54,6 +54,13 @@ jobs:
         env:
           SANITY_AUTH_TOKEN: ${{ secrets.SANITY_DEPLOY_TOKEN }}
         run: pnpm schema:deploy
+      # Promote runs a hand-picked SHA, which may be older than main HEAD, so it
+      # asserts the deploy landed rather than trusting the push run that built
+      # that commit. Same token: this only reads what the step above wrote.
+      - name: Verify Sanity schema (production)
+        env:
+          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_DEPLOY_TOKEN }}
+        run: pnpm schema:check
       - name: Pull Vercel environment
         run: vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
       - name: Build

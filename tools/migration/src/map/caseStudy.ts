@@ -4,6 +4,7 @@ import { join } from 'node:path'
 
 import { z } from 'zod'
 
+import { migrationObject } from '../core/state'
 import { EXTRACT_DIR, RULES_DIR } from '../lib/paths'
 import { migratableImage } from './types'
 import { seoObject } from './seo'
@@ -139,6 +140,29 @@ const unmodelledSection = z
  */
 const storyMember = z.union([chapter, mediaSection, screenGridSection, unmodelledSection])
 
+/**
+ * The shared `migration` fragment, read as strictly as both tracks need it.
+ * An agent writes these documents, so the gate refuses a lock — that flag is
+ * an editor's to set, and one arriving pre-set would exempt the document from
+ * the next load — and refuses a source that is neither a WordPress work item
+ * nor an o3xo.ai case study.
+ */
+const caseStudyMigration = migrationObject
+  .extend({
+    /* The coverage-gap marker (ADR 0007). Never set by the translate track,
+     * whose whole review mechanism is `_meta.flags`; set by the Framer mapper,
+     * where the gap is the same on all six documents and belongs on each one. */
+    provisional: z.boolean().optional(),
+    provisionalNote: z.string().min(1).optional(),
+  })
+  .refine((migration) => migration.locked === false, {
+    message: 'a case study must arrive unlocked',
+  })
+  .refine(
+    (migration) => /^(wp:work:\d+|framer:caseStudy:[A-Za-z0-9_-]+)$/.test(migration.sourceId),
+    { message: 'sourceId must name a WordPress work item or an o3xo.ai case study' },
+  )
+
 export const caseStudyDoc = z.object({
   /* `-wp-<postId>` for a WordPress `work` post, `-framer-<slug>` for one of
    * o3xo.ai's case studies (`map/framerCaseStudy.ts`). */
@@ -166,15 +190,7 @@ export const caseStudyDoc = z.object({
   story: z.array(storyMember).optional(),
   deliverables: z.array(z.string().min(1)).optional(),
   seo: seoObject.optional(),
-  migration: z.object({
-    locked: z.literal(false),
-    sourceId: z.string().regex(/^(wp:work:\d+|framer:caseStudy:[A-Za-z0-9_-]+)$/),
-    /* The coverage-gap marker (ADR 0007). Never set by the translate track,
-     * whose whole review mechanism is `_meta.flags`; set by the Framer mapper,
-     * where the gap is the same on all six documents and belongs on each one. */
-    provisional: z.boolean().optional(),
-    provisionalNote: z.string().min(1).optional(),
-  }),
+  migration: caseStudyMigration,
 })
 
 export type CaseStudyDoc = z.infer<typeof caseStudyDoc>

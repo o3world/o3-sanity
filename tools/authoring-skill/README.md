@@ -57,7 +57,7 @@ branch that needs them, as `${CLAUDE_PLUGIN_ROOT}/references/<file>`:
 
 | File                          | What it governs                                                        | Read by                |
 | ----------------------------- | ---------------------------------------------------------------------- | ---------------------- |
-| `references/argument.md`      | how one long argument holds up — claim, warrant, arc, turn, ending     | brief, draft, review   |
+| `references/argument.md`      | how one long argument holds up — claim, warrant, arc, turn, hierarchy  | brief, draft, review   |
 | `references/composition.md`   | which band follows which on a page, and which block carries which job  | draft, review, typeset |
 | `references/style.md`         | the style floor: plain sentences, sourced claims, fact conservation    | draft, review          |
 | `references/labels.md`        | the stage directions a draft body carries, and what each one means     | draft, review, typeset |
@@ -83,6 +83,15 @@ inferred.
 `gather` points at none of them. It writes nothing for the site, so it pays for
 nothing; stages 2 to 5 are where they come in.
 
+`scripts/` is the exception to all of this: it is **executed, not read**.
+[`scripts/slop-lint.mjs`](./scripts/slop-lint.mjs) counts the machine tells that
+have a fixed shape, and `review` runs it across its two revision passes as
+`${CLAUDE_PLUGIN_ROOT}/scripts/slop-lint.mjs --delta`. Its rules come from the
+repo's `docs/guidance/slop.md` and are calibrated to score zero over approved
+site copy — [`scripts/fixtures/`](./scripts/fixtures/README.md) is that
+calibration, and the six rules it deleted. The signal is the delta between a
+draft and its revision; the absolute decides nothing.
+
 ## Testing a skill
 
 The test surface is [`evals/`](./evals) — cases in `claude plugin eval`
@@ -105,30 +114,40 @@ and CI runs the same command as its own job.
 
 This directory is a Claude Code plugin. It ships the five skills and
 preconfigures the hosted Sanity MCP server (`https://mcp.sanity.io`); auth is
-per-user OAuth via `/mcp`, never distributed. Install from the repo-root
-marketplace:
+per-user OAuth via `/mcp`, never distributed.
+
+**The marketplace rides the clone.** `.claude/settings.json` at the repo root
+declares two marketplaces under `extraKnownMarketplaces` — `o3world`, which is
+this repo, and `sanity-agent-toolkit`, for the Portable Text skills this plugin
+does not carry — and enables `o3sanity@o3world` and `sanity@sanity-agent-toolkit`.
+Trust the folder and Claude Code registers both with no further prompt, so
+`/plugin marketplace add` is no longer a step anyone types. Both entries carry
+`autoUpdate`. The agent-toolkit plugin configures the same hosted Sanity MCP
+server this one does, so enabling both connects to `https://mcp.sanity.io`
+twice and pays for the tool list twice.
+
+Installing is still a step. From Claude Code v2.1.195 a plugin that only
+project settings enable, and that comes from an external source such as a
+GitHub repository, does not load until you install it — Claude Code reports it
+as not installed and prints the command:
 
 ```
-/plugin marketplace add o3world/o3-sanity
-/plugin install o3sanity@o3world
+claude plugin install o3sanity@o3world            # --scope user is the default here
+claude plugin install sanity@sanity-agent-toolkit
 ```
 
-**Install it at user scope.** A project-scoped install belongs to the directory
+**Install at user scope.** A project-scoped install belongs to the directory
 it was made in, and this repo works one ticket to one worktree — the directory
 goes away, and the next worktree has the plugin enabled in
 `.claude/settings.json` with nothing installed to serve it. What that looks
 like from inside a session is a skill that is simply absent.
 
-Update with `/plugin marketplace update o3world` (or enable auto-update in
-`/plugin` → Marketplaces). The marketplace serves `main`, so a change is only
+**Updates need no version bump.** `plugin.json` declares no `version`, so
+Claude Code identifies the plugin by the commit it was fetched at and every
+push is an update. `autoUpdate` on the marketplace entry picks it up in the
+background shortly after a session starts; `claude plugin marketplace update
+o3world` forces it now. The marketplace serves `main`, so a change is only
 installable once it is merged.
-
-The same two steps have a CLI form, which is the one an agent can run:
-
-```
-claude plugin marketplace update o3world
-claude plugin install o3sanity@o3world   # --scope user is the default here
-```
 
 **Claude Desktop installs from the same marketplace.** The plugin needs no
 separate build and no ZIP. One constraint holds for it: nothing in the plugin

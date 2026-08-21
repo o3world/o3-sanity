@@ -43,6 +43,7 @@
     "./cards": "./src/cards/index.ts",
     "./chrome": "./src/chrome/index.ts",
     "./format-date": "./src/lib/format-date.ts",
+    "./image-sizes": "./src/imageSizes.ts",
     "./portable-text": "./src/portable-text/PortableTextBody.tsx",
     "./testing": "./src/testing/index.ts",
     "./testing/seed": "./src/testing/seedContent.ts"

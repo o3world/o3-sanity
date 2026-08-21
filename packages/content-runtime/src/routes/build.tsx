@@ -1,9 +1,9 @@
-import { cache } from 'react'
+import { Suspense } from 'react'
 import type { ComponentType, JSX, ReactNode } from 'react'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { sanityFetch } from '#live'
+import { currentReadMode, sanityFetch, type ReadMode } from '#live'
 import { getSiteSettings } from '../siteSettings'
 import { clampPage, pageRange, parsePage } from './pagination'
 import { buildDocumentMetadata, type DocumentSeo, type SeoOverrides } from '../seo'
@@ -25,20 +25,59 @@ import type {
 /**
  * The four route builders (ADR 0001): each turns an entry (or entry list)
  * into a `{ generateMetadata, Page }` shim that a `page.tsx` re-exports.
- * They hide the React.cache-shared fetch (one sanityFetch per request across
- * generateMetadata + Page), the cache-tag wiring `/api/revalidate` relies on,
- * `_type` dispatch, and metadata extraction.
+ * They hide the cached fetch, the cache-tag wiring `/api/revalidate` relies
+ * on, `_type` dispatch, and metadata extraction.
+ *
+ * They are also where the rendering strategy lives (#266). Every read goes
+ * through `readContent` below, which is the routes' one `'use cache'`
+ * boundary; everything a route does outside it — awaiting `params`, reading
+ * `draftMode()` — is either known while prerendering or, in the index
+ * builder's case, deliberately fenced behind Suspense so the rest of the page
+ * can still be a static shell.
  *
  * The vtx-web original's i18n (locale param, fallbackOrNotFound,
  * buildAlternates), legacy path rewrites, and materialized-path matching are
  * deliberately not ported — o3 is single-locale and matches on `slug.current`.
  *
- * **No builder here turns stega on** (#229). next-sanity's `defineLive` gates
- * it on a server token, a `studioUrl` and draft mode; a `stega: true` at a
- * call site overrides all three and hands the invisible characters to every
- * anonymous visitor. A body fetch therefore passes no `stega` and inherits the
- * gate — `stega?: false` is the only value a caller may name. See the README.
+ * **No builder here turns stega on** (#229). Every read names its
+ * `perspective` and `stega` through `currentReadMode`, whose published mode is
+ * `stega: false` — the invisible characters reach only a draft session. See
+ * the README.
  */
+
+/**
+ * The one cached read every route shares.
+ *
+ * `sanityFetch` calls `cacheTag()` and `cacheLife()` under Cache Components,
+ * so it runs only in here. Everything the entry knows arrives as an argument
+ * rather than through a closure, for two reasons: a cache key is built from
+ * the arguments, and a closed-over entry would drag its renderer function
+ * into a place only serializable values may go.
+ *
+ * Two reads that agree on all four arguments are one cache entry, which is
+ * how `generateMetadata` and `Page` collapse into a single round-trip on a
+ * published request.
+ */
+async function readContent(
+  query: string,
+  params: Record<string, unknown>,
+  tags: string[],
+  read: ReadMode,
+): Promise<unknown> {
+  'use cache'
+  const { data } = await sanityFetch({ query, params, tags, ...read })
+  return data
+}
+
+/**
+ * The read a `generateMetadata` makes: whatever the request asked for, minus
+ * the overlay markers. stega characters are invisible in a browser but they
+ * corrupt whatever a scraper reads out of `<title>`, the description and the
+ * OG tags.
+ */
+function metadataRead(read: ReadMode): ReadMode {
+  return { ...read, stega: false }
+}
 
 export interface DetailRouteShim {
   readonly generateMetadata: (props: { params: Promise<{ slug: string }> }) => Promise<Metadata>
@@ -61,7 +100,7 @@ export interface IndexRouteShim {
   readonly generateMetadata: () => Promise<Metadata>
   readonly Page: (props: {
     searchParams: Promise<Record<string, string | string[] | undefined>>
-  }) => Promise<JSX.Element>
+  }) => JSX.Element
 }
 
 interface BaseEntryLike<Q extends string> {
@@ -135,25 +174,15 @@ function renderEntry(
 
 /** Build a detail-route shim for `<prefix>/[slug]/page.tsx`. */
 export function buildDetailRoute<Q extends string>(entry: DetailEntry<Q>): DetailRouteShim {
-  // React.cache wraps the fetcher so generateMetadata + Page share one
-  // underlying sanityFetch per request. Tags follow the per-document scheme
-  // so /api/revalidate can invalidate one doc without nuking the type.
-  const fetchDoc = cache(async (slug: string, stega?: false) => {
-    const { data } = await sanityFetch({
-      query: entry.query,
-      params: { slug },
-      tags: [docTag(entry.type, slug), typeTag(entry.type)],
-      stega,
-    })
-    return data
-  })
+  // Tags follow the per-document scheme so /api/revalidate can invalidate one
+  // doc without nuking the type.
+  const fetchDoc = (slug: string, read: ReadMode) =>
+    readContent(entry.query, { slug }, [docTag(entry.type, slug), typeTag(entry.type)], read)
 
   const generateMetadata: DetailRouteShim['generateMetadata'] = async ({ params }) => {
     const { slug: rawSlug } = await params
     const slug = decodePathParam(rawSlug)
-    // stega: false on metadata — stega characters must never leak into
-    // <title> / OG / description.
-    const doc = await fetchDoc(slug, /* stega */ false)
+    const doc = await fetchDoc(slug, metadataRead(await currentReadMode()))
     if (!doc) return {}
     return await extractMetadata(entry, doc)
   }
@@ -161,7 +190,7 @@ export function buildDetailRoute<Q extends string>(entry: DetailEntry<Q>): Detai
   const Page: DetailRouteShim['Page'] = async ({ params }) => {
     const { slug: rawSlug } = await params
     const slug = decodePathParam(rawSlug)
-    const doc = await fetchDoc(slug)
+    const doc = await fetchDoc(slug, await currentReadMode())
     if (!doc) notFound()
     return renderEntry(entry, doc, { slug })
   }
@@ -185,15 +214,13 @@ export function buildCatchAllRoute(
   const typeTags = entries.map((e) => typeTag(e.type))
   const entryByType = new Map<string, RoutableEntry>(entries.map((e) => [e.type, e]))
 
-  const fetchDoc = cache(async (slug: string, stega?: false) => {
-    const { data } = await sanityFetch({
-      query: sharedQuery,
-      params: { slug },
-      tags: [...typeTags, ...entries.map((e) => docTag(e.type, slug))],
-      stega,
-    })
-    return data
-  })
+  const fetchDoc = (slug: string, read: ReadMode) =>
+    readContent(
+      sharedQuery,
+      { slug },
+      [...typeTags, ...entries.map((e) => docTag(e.type, slug))],
+      read,
+    )
 
   function findEntryForDoc(doc: unknown): RoutableEntry | undefined {
     if (!doc || typeof doc !== 'object') return undefined
@@ -217,7 +244,7 @@ export function buildCatchAllRoute(
     const { segments } = await params
     const slug = resolveSlug(segments)
     if (!slug) return {}
-    const doc = await fetchDoc(slug, /* stega */ false)
+    const doc = await fetchDoc(slug, metadataRead(await currentReadMode()))
     if (!doc) return {}
     const entry = findEntryForDoc(doc)
     return entry ? await extractMetadata(entry, doc) : {}
@@ -227,7 +254,7 @@ export function buildCatchAllRoute(
     const { segments } = await params
     const slug = resolveSlug(segments)
     if (!slug) notFound()
-    const doc = await fetchDoc(slug)
+    const doc = await fetchDoc(slug, await currentReadMode())
     if (!doc) notFound()
     const entry = findEntryForDoc(doc)
     if (!entry) {
@@ -254,24 +281,22 @@ export function buildSingletonRoute<Q extends string>(
   const params = entry.params ?? {}
   const slug = params.slug ?? ''
 
-  const fetchDoc = cache(async (stega?: false) => {
-    const { data } = await sanityFetch({
-      query: entry.query,
+  const fetchDoc = (read: ReadMode) =>
+    readContent(
+      entry.query,
       params,
-      tags: slug ? [docTag(entry.type, slug), typeTag(entry.type)] : [typeTag(entry.type)],
-      stega,
-    })
-    return data
-  })
+      slug ? [docTag(entry.type, slug), typeTag(entry.type)] : [typeTag(entry.type)],
+      read,
+    )
 
   const generateMetadata: SingletonRouteShim['generateMetadata'] = async () => {
-    const doc = await fetchDoc(/* stega */ false)
+    const doc = await fetchDoc(metadataRead(await currentReadMode()))
     if (!doc) return {}
     return await extractMetadata(entry, doc)
   }
 
   const Page: SingletonRouteShim['Page'] = async () => {
-    const doc = await fetchDoc()
+    const doc = await fetchDoc(await currentReadMode())
     if (!doc) notFound()
     return renderEntry(entry, doc, { slug })
   }
@@ -299,14 +324,9 @@ export function buildIndexRoute<Q extends string>(entry: IndexEntry<Q>): IndexRo
   const tags = entry.itemTypes.map(typeTag)
   const facetNames = entry.facets ?? []
 
-  const fetchPage = async (page: number, facets: Facets) => {
+  const fetchPage = (page: number, facets: Facets, read: ReadMode) => {
     const { offset, end } = pageRange(page, pageSize)
-    const { data } = await sanityFetch({
-      query: entry.query,
-      params: { offset, end, ...facets },
-      tags,
-    })
-    return data
+    return readContent(entry.query, { offset, end, ...facets }, tags, read)
   }
 
   const generateMetadata: IndexRouteShim['generateMetadata'] = async () => {
@@ -314,20 +334,43 @@ export function buildIndexRoute<Q extends string>(entry: IndexEntry<Q>): IndexRo
     return buildDocumentMetadata({ doc: entry.seo, settings: await getSiteSettings() })
   }
 
-  const Page: IndexRouteShim['Page'] = async ({ searchParams }) => {
+  /**
+   * The whole of an index is downstream of `?page=` and `?category=`, so the
+   * feed is the route's dynamic hole: it reads `searchParams`, and everything
+   * above the boundary — the chrome the `(site)` layout draws — prerenders
+   * into the shell the CDN serves. The feed itself is still a cached read, so
+   * a second visitor to the same page pays no Sanity request for it.
+   */
+  const Feed = async ({
+    searchParams,
+  }: {
+    searchParams: Promise<Record<string, string | string[] | undefined>>
+  }) => {
     const params = await searchParams
     const requested = parsePage(params.page)
     const facets = readFacets(facetNames, params)
+    const read = await currentReadMode()
 
-    let data = await fetchPage(requested, facets)
+    let data = await fetchPage(requested, facets, read)
     const total = (data as { total?: unknown } | null)?.total
     const totalPages = Math.max(1, Math.ceil((typeof total === 'number' ? total : 0) / pageSize))
     const page = clampPage(requested, totalPages)
-    if (page !== requested) data = await fetchPage(page, facets)
+    if (page !== requested) data = await fetchPage(page, facets, read)
+    // Inside the boundary, so the shell has already flushed with a 200: an
+    // index whose dataset is unreadable renders the 404 body without the 404
+    // status a detail route would send. It is the accepted cost of the hole.
     if (!data) notFound()
 
     return renderEntry(entry, data, { slug: '', pagination: { page, totalPages }, facets })
   }
+
+  const Page: IndexRouteShim['Page'] = ({ searchParams }) => (
+    // No fallback to draw: the layout's `<main>` already holds the page's
+    // height open, and the feed arrives on the same response.
+    <Suspense fallback={null}>
+      <Feed searchParams={searchParams} />
+    </Suspense>
+  )
 
   return { generateMetadata, Page }
 }

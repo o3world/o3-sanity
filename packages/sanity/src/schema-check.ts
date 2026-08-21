@@ -26,11 +26,17 @@ import { deployedTypes, repoSchemaFile, repoTarget } from './schema-manifest'
 /** The studio declares exactly one workspace; `sanity.config.ts` names it. */
 const WORKSPACE = 'default'
 
+/**
+ * The CLI's stderr passes through: this runs as a blocking CI step, where a
+ * refused token and a changed schema both surface as a non-zero exit, and only
+ * the CLI's own message separates them. The cost is the experimental-command
+ * warnings both invocations print.
+ */
 function sanity(args: string[]): string {
   return execFileSync('pnpm', ['exec', 'sanity', ...args], {
     encoding: 'utf8',
     maxBuffer: 64 * 1024 * 1024,
-    stdio: ['ignore', 'pipe', 'ignore'],
+    stdio: ['ignore', 'pipe', 'inherit'],
   })
 }
 

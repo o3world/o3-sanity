@@ -76,9 +76,12 @@ once it has been swept, and not a request to keep it short. **Length is not
 weight**: a 500-word piece arguing something contestable is a standard run that
 happens to be brief.
 
-The weight is a call the run made, so it goes on `decisions` the first time it
-is announced or changed. A session resuming the piece reads it there rather than
-deciding it a second time.
+The weight is a call the run made, so it goes on `decisions` — **announced in
+the message the moment it is decided or changed, and written when the stage next
+patches the brief.** Those are two moments, not one: no stage patches ahead of
+its own gate, so a run that upgrades itself mid-stage says so in that turn and
+records it with the rest of that stage's fields. A session resuming the piece
+reads it there rather than deciding it a second time.
 
 ## Resume, don't restart
 

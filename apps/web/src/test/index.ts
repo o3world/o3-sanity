@@ -14,6 +14,8 @@
  */
 export * from '@o3/render-kit'
 
+export { declaredSizes, imageTags, preloadedImageTags } from './images'
+
 export {
   aMigratedPage,
   aMigratedInsight,

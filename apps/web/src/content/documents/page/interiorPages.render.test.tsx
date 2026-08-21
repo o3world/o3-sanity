@@ -8,6 +8,7 @@ import { CATCH_ALL_TYPES } from '@/content/documents'
 import {
   aSeededPage,
   bandPaths,
+  declaredSizes,
   renderRoute,
   siteSettings,
   subBlockPaths,
@@ -64,6 +65,32 @@ describe('the seeded About page', () => {
 
   it('renders every section in the array — none silently dropped', () => {
     expect(bandPaths(html)).toHaveLength(sections.length)
+  })
+
+  /**
+   * A figure declares the column it was placed in, not the widest column it
+   * could have been placed in (#268). About's figure sits in a two-column
+   * `layoutSection`, so its slot is (1248 − 40) / 2 = 604 at the cap — asking
+   * for the full 1248 there buys the 1920 candidate for a 604px box.
+   */
+  it('sizes a figure to its layout column, not to the whole content column', () => {
+    const slots = declaredSizes(html)
+    expect(slots).toContain('(min-width: 1440px) 604px, (min-width: 768px) 42vw, 90vw')
+    expect(slots).not.toContain('(min-width: 1440px) 1248px, 90vw')
+  })
+
+  /**
+   * The same rule one level down. The beyond-client-services band is three
+   * columns of `richText`, and each body holds its own `figure` — so those
+   * figures take the column too, not the 822px article measure the identical
+   * renderer uses on a detail page.
+   */
+  it('sizes a figure inside a column’s rich text to that column', () => {
+    const slots = declaredSizes(html)
+    expect(
+      slots.filter((slot) => slot === '(min-width: 1440px) 389px, (min-width: 768px) 28vw, 90vw'),
+    ).toHaveLength(3)
+    expect(slots).not.toContain('(min-width: 1024px) 822px, 90vw')
   })
 
   /**

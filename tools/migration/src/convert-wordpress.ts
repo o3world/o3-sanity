@@ -13,8 +13,8 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
 
 import type { ConversionIssue } from './lib/htmlToPortableText'
-import { refsIn } from './lib/corpus'
-import { CONVERTED_DIR, EXTRACT_DIR, SEED_DIR, TRANSLATED_DIR, writeJson } from './lib/paths'
+import { readCorpus, refsIn } from './core/read'
+import { CONVERTED_DIR, EXTRACT_DIR, writeJson } from './lib/paths'
 import type { WpChrome } from './lib/chrome'
 import type { WpSiteSeo } from './lib/yoast'
 import { mapCategory, type WpCategory } from './map/category'
@@ -146,15 +146,9 @@ for (const post of readDir<WpPerspective>('perspective')) {
 // load-bearing when `post_author` stopped standing in for a byline (#32): the
 // archive attributes 11 people now, and Kelly Navari (`person-wp-4`) is on the
 // About page without ever having been an ACF byline.
-for (const root of [SEED_DIR, TRANSLATED_DIR]) {
-  if (!existsSync(root)) continue
-  for (const type of readdirSync(root)) {
-    for (const file of readdirSync(join(root, type)).filter((f) => f.endsWith('.json'))) {
-      const doc = JSON.parse(readFileSync(join(root, type, file), 'utf8'))
-      for (const ref of refsIn(doc)) {
-        if (ref.startsWith('person-')) referencedPeople.add(ref)
-      }
-    }
+for (const { document } of readCorpus('seed', 'translated')) {
+  for (const ref of refsIn(document)) {
+    if (ref.startsWith('person-')) referencedPeople.add(ref)
   }
 }
 
@@ -169,26 +163,23 @@ for (const person of people.docs) {
 // convert re-checks them, because the gate is the only mechanical safeguard on
 // a document a person wrote: schema conformance, honest provenance hashes, and
 // a flag on every required-but-unsourced field.
-const translatedDir = join(TRANSLATED_DIR, 'caseStudy')
-if (existsSync(translatedDir)) {
-  for (const file of readdirSync(translatedDir).filter((f) => f.endsWith('.json'))) {
-    const slug = file.replace(/\.json$/, '')
-    const raw = JSON.parse(readFileSync(join(translatedDir, file), 'utf8'))
-    const parsed = translatedCaseStudy.safeParse(raw)
-    if (!parsed.success) {
-      failures.push({
-        slug,
-        issues: parsed.error.issues.map((i) => ({
-          element: i.path.join('.'),
-          detail: i.message,
-        })),
-      })
-      continue
-    }
-    const issues = checkTranslation(parsed.data)
-    if (issues.length > 0) failures.push({ slug, issues })
-    else checkedTranslations++
+for (const { type, file, document } of readCorpus('translated')) {
+  if (type !== 'caseStudy') continue
+  const slug = file.replace(/\.json$/, '')
+  const parsed = translatedCaseStudy.safeParse(document)
+  if (!parsed.success) {
+    failures.push({
+      slug,
+      issues: parsed.error.issues.map((i) => ({
+        element: i.path.join('.'),
+        detail: i.message,
+      })),
+    })
+    continue
   }
+  const issues = checkTranslation(parsed.data)
+  if (issues.length > 0) failures.push({ slug, issues })
+  else checkedTranslations++
 }
 
 console.log(

@@ -6,6 +6,7 @@ import type { SectionProps } from '@o3/content-runtime/blocks'
 
 import { LogoKnockout } from '../LogoKnockout'
 import { SanityImage } from '../SanityImage'
+import { CONTENT_COLUMN } from '../imageSizes'
 
 /**
  * The case-study card shape — the `CASE_STUDY_CARD` projection, pinned to
@@ -45,8 +46,18 @@ function caseEyebrow(card: Pick<CaseStudyCardData, 'industries' | 'industryDetai
  * already the anchor, and a nested control would be a second tab stop to the
  * same href.
  */
-export function CaseStudyCard(card: CaseStudyCardData) {
-  const { _type, title, slug, narrativeHeadline, headlineStat, heroMedia, client } = card
+export function CaseStudyCard(
+  card: CaseStudyCardData & {
+    /**
+     * Preload this card's photograph. Only the container knows whether the
+     * card is the route's LCP candidate — `/work` passes it for the first card
+     * and the Home showcase band does not, because that band is below the
+     * fold.
+     */
+    priority?: boolean
+  },
+) {
+  const { _type, title, slug, narrativeHeadline, headlineStat, heroMedia, client, priority } = card
   const eyebrow = caseEyebrow(card)
 
   return (
@@ -73,7 +84,10 @@ export function CaseStudyCard(card: CaseStudyCardData) {
           alt=""
           ratio="fill"
           width={1600}
-          sizes="(min-width: 1024px) 1248px, 100vw"
+          // The card is the content column at both widths — one per row in
+          // the showcase band and on /work alike.
+          sizes={CONTENT_COLUMN}
+          priority={priority}
           // Any ink laid over a photograph costs it chroma as well as
           // luminance, so the scrim reads as desaturation even where it is
           // only dimming. A tenth of saturation back is the compensation, not

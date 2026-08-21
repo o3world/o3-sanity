@@ -322,6 +322,12 @@ brand decides which module graph selects which stories, so o3xo work needs it (#
 [`tools/visual-regression/README.md`](./tools/visual-regression/README.md), and tag a story
 `vr:skip` if its pixels are genuinely non-deterministic.
 
+**`pnpm build:assert` holds the build to its rendering strategy** (#265). Run it after
+`pnpm --filter @o3/web build`. It fails, naming the route, when a route the allowlist does not permit
+is server-rendered on demand — the shape that bills a function invocation per page view. The
+allowlist is [`tools/build-assert/src/policy.ts`](./tools/build-assert/src/policy.ts); CI runs the
+assertion as its own job. See [`tools/build-assert/README.md`](./tools/build-assert/README.md).
+
 Two rules that will otherwise cost an hour:
 
 - A component with a story needs no test file — the story IS the test.

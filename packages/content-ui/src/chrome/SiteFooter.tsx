@@ -14,6 +14,8 @@ interface SiteFooterProps {
    * runs depends on its own proportions.
    */
   brandMark: ReactNode
+  /** The copyright year — the footer prints it, the layout resolves it. */
+  year: number
 }
 
 /**
@@ -25,11 +27,10 @@ interface SiteFooterProps {
  * and the frame footer this was first built from (`1680:2096`) no longer
  * exists in the file.
  *
- * Every string still comes from Site Settings (#19); the component decides only
- * the year and the arrangement.
+ * Every string still comes from Site Settings (#19); the component decides
+ * only the arrangement.
  */
-export function SiteFooter({ settings, brandMark }: SiteFooterProps) {
-  const year = new Date().getFullYear()
+export function SiteFooter({ settings, brandMark, year }: SiteFooterProps) {
   const groups = settings?.footerGroups ?? []
   const socialLinks = settings?.socialLinks ?? []
   const legalLinks = settings?.legalLinks ?? []
