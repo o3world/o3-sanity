@@ -5,8 +5,9 @@ import type { BuildOutput, RenderingPolicy } from './rendering'
 
 /**
  * Manifests trimmed from a real `next build` of `apps/web` (Next 16.2,
- * 2026-08-21): the keys, the route-group prefixes and the `srcRoute`
- * back-references are as Next writes them.
+ * 2026-08-21): the keys and the route-group prefixes are as Next writes them.
+ * The prerender entries keep their `srcRoute` back-reference to stay faithful
+ * to the real file, and nothing under test reads it.
  */
 const build: BuildOutput = {
   cacheComponents: false,
@@ -46,16 +47,20 @@ describe('perRequestRoutes', () => {
     expect(perRequestRoutes(build)).toEqual(['/api/revalidate', '/insights', '/studio/[[...tool]]'])
   })
 
-  it('reads a null srcRoute as the path standing for itself', () => {
-    const nulled: BuildOutput = {
+  it('sees through a parameterised route whose paths only partly survived', () => {
+    // One path bailing out of prerendering (`revalidate: 0`) costs the whole
+    // route its `dynamicRoutes` entry while its siblings stay in `routes`
+    // under the same `srcRoute`. Next prints that route as `ƒ`, so the
+    // surviving paths must not read as prerendered.
+    const bailed: BuildOutput = {
       ...build,
       prerender: {
-        ...build.prerender,
-        routes: { ...build.prerender.routes, '/robots.txt': { srcRoute: null } },
+        routes: build.prerender.routes,
+        dynamicRoutes: { '/[...segments]': {} },
       },
     }
 
-    expect(perRequestRoutes(nulled)).not.toContain('/robots.txt')
+    expect(perRequestRoutes(bailed)).toContain('/insights/[slug]')
   })
 })
 
@@ -65,8 +70,8 @@ describe('checkRenderingStrategy', () => {
   })
 
   it('names a route that regressed to per-request rendering', () => {
-    // `/work/[slug]` loses its prerendered slugs — a dynamic API read in a
-    // shared layout does exactly this.
+    // A route the build prerendered nothing for at all — what a dynamic API
+    // read in a shared layout leaves behind.
     const regressed: BuildOutput = {
       ...build,
       appPathRoutes: { ...build.appPathRoutes, '/(site)/work/[slug]/page': '/work/[slug]' },
@@ -129,15 +134,14 @@ describe('checkRenderingStrategy under Cache Components', () => {
   })
 
   it('accepts a shell with a streamed hole in it', () => {
+    // A partially static route is an ordinary prerender entry — the shell is
+    // on disk, the hole streams in per request.
     const migrated: BuildOutput = {
       ...build,
       cacheComponents: true,
       prerender: {
         ...build.prerender,
-        routes: {
-          ...build.prerender.routes,
-          '/insights': { srcRoute: '/insights', renderingMode: 'PARTIALLY_STATIC' },
-        },
+        routes: { ...build.prerender.routes, '/insights': { srcRoute: '/insights' } },
       },
     }
 
