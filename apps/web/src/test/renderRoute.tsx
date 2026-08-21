@@ -67,18 +67,23 @@ function isNotFoundError(error: unknown): boolean {
 }
 
 /**
- * Assert a route 404s for the given input.
+ * Assert a route 404s for the given input, and hand back the reads it made on
+ * the way there — the same `calls` a successful `renderRoute` returns.
  *
- *   await expectNotFound(route, { data: null, params: { slug: 'nope' } })
+ *   const calls = await expectNotFound(route, { data: null, params: { slug: 'nope' } })
+ *
+ * A 404 is a cached page like any other, so what it read and how that read was
+ * tagged is the thing worth asserting (#267): a not-found response that
+ * carries no tags is one no publish can ever flush.
  */
 export async function expectNotFound(
   route: RouteShimLike,
   options: RenderRouteOptions,
-): Promise<void> {
+): Promise<readonly FetchCall[]> {
   try {
     await renderRoute(route, options)
   } catch (error) {
-    if (isNotFoundError(error)) return
+    if (isNotFoundError(error)) return fetchCalls()
     throw error
   }
   throw new Error('Expected the route to call notFound(), but it rendered.')
