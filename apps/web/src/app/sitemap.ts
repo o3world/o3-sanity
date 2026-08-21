@@ -41,6 +41,23 @@ function isRedirected(path: string): boolean {
   return REDIRECTED_PATHS.has(path === '' ? '/' : path)
 }
 
+/**
+ * `sanityFetch` calls `cacheTag()` under Cache Components, so it runs inside
+ * a `'use cache'` function or not at all. Explicit type tags so
+ * `/api/revalidate` reaches this read — without them the sitemap would stay
+ * frozen at its build-time content.
+ */
+async function readSitemapRows() {
+  'use cache'
+  const { data } = await sanityFetch({
+    query: SITEMAP_QUERY,
+    perspective: 'published',
+    stega: false,
+    tags: ['page', 'insight', 'caseStudy'].map(typeTag),
+  })
+  return data
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = getBaseUrl()
   const entries: MetadataRoute.Sitemap = [
@@ -50,14 +67,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]
 
   try {
-    const { data } = await sanityFetch({
-      query: SITEMAP_QUERY,
-      perspective: 'published',
-      stega: false,
-      // Explicit type tags so /api/revalidate reaches this fetch — without
-      // them the sitemap would stay frozen at its build-time content.
-      tags: ['page', 'insight', 'caseStudy'].map(typeTag),
-    })
+    const data = await readSitemapRows()
 
     for (const row of (data?.insights ?? []) as SitemapRow[]) {
       if (!row.slug) continue

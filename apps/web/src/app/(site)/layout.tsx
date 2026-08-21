@@ -2,6 +2,7 @@ import type React from 'react'
 import { draftMode } from 'next/headers'
 import { EditorToolbar } from '@o3/editor-chrome/toolbar'
 
+import { currentYear } from '@/lib/currentYear'
 import { editorToolbarConfig } from '@/sanity/editorToolbar'
 import { SanityLive } from '@/sanity/live'
 import { getSiteSettings } from '@/sanity/siteSettings'
@@ -11,9 +12,11 @@ import { SiteNav } from '@/ui/SiteNav'
 import { UtilityNav } from '@/ui/UtilityNav'
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
-  // Shared with every route's generateMetadata via React.cache — one fetch
-  // per request, not one per consumer.
-  const [settings, { isEnabled: isDraft }] = await Promise.all([getSiteSettings(), draftMode()])
+  const [settings, { isEnabled: isDraft }, year] = await Promise.all([
+    getSiteSettings(),
+    draftMode(),
+    currentYear(),
+  ])
 
   return (
     <>
@@ -24,14 +27,14 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       <UtilityNav settings={settings} />
       <SiteNav settings={settings} />
       <main className="min-h-screen">{children}</main>
-      <SiteFooter settings={settings} />
+      <SiteFooter settings={settings} year={year} />
       {/* Draft sessions only: SanityLive is the delivery path for draft
           updates in Presentation (see live.ts). Published visitors get
           freshness from the Sanity webhook → /api/revalidate instead, so
           they hold no Live Content API connection. */}
       {isDraft ? (
         <>
-          <SanityLive />
+          <SanityLive includeDrafts />
           <VisualEditing />
         </>
       ) : null}

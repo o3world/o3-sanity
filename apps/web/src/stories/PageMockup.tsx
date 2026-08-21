@@ -12,7 +12,7 @@ import { BlockRenderer } from '@/content/blocks/BlockRenderer'
 import { SiteFooter } from '@/ui/SiteFooter'
 import { SiteNav } from '@/ui/SiteNav'
 
-import { SITE_SETTINGS, seededPage, type SeedPageName } from './seedContent'
+import { SITE_SETTINGS, STORY_YEAR, seededPage, type SeedPageName } from './seedContent'
 
 /**
  * A whole page, chrome included, from committed content — what the `Pages`
@@ -54,7 +54,7 @@ export function PageMockup({ page }: { page: SeedPageName }) {
       <main>
         <BlockRenderer blocks={doc.sections ?? []} />
       </main>
-      <SiteFooter settings={SITE_SETTINGS} />
+      <SiteFooter settings={SITE_SETTINGS} year={STORY_YEAR} />
     </div>
   )
 }

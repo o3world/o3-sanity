@@ -26,10 +26,14 @@ import {
  * No Sanity project, no token, no network, no dev server.
  */
 
-/** The shape every route builder in `@/lib/content-routes/build` returns. */
+/**
+ * The shape every route builder in `@/lib/content-routes/build` returns.
+ * `Page` may be synchronous: an index route returns a Suspense boundary and
+ * awaits nothing itself (#266).
+ */
 export interface RouteShimLike {
   generateMetadata: (props: never) => Promise<Metadata>
-  Page: (props: never) => Promise<ReactElement>
+  Page: (props: never) => ReactElement | Promise<ReactElement>
 }
 
 export interface RenderRouteOptions {
