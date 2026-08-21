@@ -21,10 +21,14 @@ import {
   LOCKED_BY_ID,
   LOCKED_BY_TYPE,
   LOCK_FETCH_OPTIONS,
+  ROUTABLE_SLUGS,
   bareId,
+  describeSlugCollision,
   isLocked,
   lockedIds,
+  slugCollisions,
   type LockRow,
+  type SlugRow,
 } from './core/state'
 import { CORPUS_DIRS, isPipelineOwned } from './lib/corpus'
 import { isImageBuffer } from './lib/media'
@@ -448,23 +452,13 @@ async function main() {
  * editorial call, not something a loader should make.
  */
 async function reportSlugCollisions() {
-  const rows = await client.fetch<{ _id: string; _type: string; slug: string | null }[]>(
-    `*[_type in $types && defined(slug.current) && !(_id in path("drafts.**"))]{_id, _type, "slug": slug.current}`,
-    { types: [...ROUTABLE_TYPES] },
-  )
-
-  const byKey = new Map<string, string[]>()
-  for (const row of rows) {
-    const key = `${row._type}:${row.slug}`
-    byKey.set(key, [...(byKey.get(key) ?? []), row._id])
-  }
-
-  const collisions = [...byKey].filter(([, ids]) => ids.length > 1)
+  const rows = await client.fetch<SlugRow[]>(ROUTABLE_SLUGS, { types: [...ROUTABLE_TYPES] })
+  const collisions = slugCollisions(rows)
   if (collisions.length === 0) return
 
   console.error(`\nSLUG COLLISIONS (${collisions.length}) — these URLs resolve unpredictably:`)
-  for (const [key, ids] of collisions) {
-    console.error(`  ${key} → ${ids.join(', ')}`)
+  for (const collision of collisions) {
+    console.error(`  ${describeSlugCollision(collision)}`)
   }
   console.error('Delete the document that is not committed under data/, then re-run.')
   process.exitCode = 1

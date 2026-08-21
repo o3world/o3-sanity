@@ -20,6 +20,7 @@ import { ROUTABLE_TYPES } from '@o3/sanity/constants'
 import { schemaTypes } from '@o3/sanity/schemas'
 import type { Migration } from '@o3/sanity/types/generated'
 
+import { describeSlugCollision, slugCollisions, slugRowsOf } from './core/state'
 import { isImageAssetId } from './lib/media'
 import { BRIEF_ID, CORPUS_DIRS, isInternalType, refsIn } from './lib/corpus'
 import { untouchedPlaceholders } from './lib/placeholders'
@@ -196,22 +197,13 @@ async function main() {
     .map((doc) => `${doc._id} has unknown _type "${doc._type}"`)
   report('every document type is in the schema', unknownTypes)
 
-  // 7. One slug, one document. Routes resolve `…[0]`, so a collision serves
-  //    a coin flip — and the offender is usually a document the pipeline
-  //    does not own, which no check over committed JSON can see.
-  const bySlug = new Map<string, string[]>()
-  for (const doc of live) {
-    if (!(ROUTABLE_TYPES as readonly string[]).includes(doc._type)) continue
-    const slug = (doc.slug as { current?: string } | undefined)?.current
-    if (!slug) continue
-    const key = `${doc._type}:${slug}`
-    bySlug.set(key, [...(bySlug.get(key) ?? []), doc._id])
-  }
+  // 7. One slug, one document. The same implementation `load` reports from,
+  //    so the two cannot disagree about whether a URL is a coin flip — and
+  //    the offender is usually a document the pipeline does not own, which no
+  //    check over committed JSON can see.
   report(
     'no two documents claim the same slug',
-    [...bySlug]
-      .filter(([, ids]) => ids.length > 1)
-      .map(([key, ids]) => `${key} → ${ids.join(', ')}`),
+    slugCollisions(slugRowsOf(live)).map(describeSlugCollision),
   )
 
   // 8. Anything the pipeline did not put there. Not a failure on its own — an

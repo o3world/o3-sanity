@@ -1,6 +1,16 @@
 import { describe, expect, it } from 'vitest'
 
-import { LOCKED_BY_ID, LOCKED_BY_TYPE, LOCK_FETCH_OPTIONS, isLocked, lockedIds } from './state'
+import {
+  LOCKED_BY_ID,
+  LOCKED_BY_TYPE,
+  LOCK_FETCH_OPTIONS,
+  ROUTABLE_SLUGS,
+  describeSlugCollision,
+  isLocked,
+  lockedIds,
+  slugCollisions,
+  slugRowsOf,
+} from './state'
 
 /**
  * The lock rule (ADR 0003) is what stops the loader deleting editor-owned
@@ -43,5 +53,64 @@ describe('the locked predicate', () => {
   it('projects the lock flag the same way whether it asks by id or by type', () => {
     expect(LOCKED_BY_ID).toBe('*[_id in $ids]{_id, "locked": migration.locked}')
     expect(LOCKED_BY_TYPE).toBe('*[_type in $types]{_id, "locked": migration.locked}')
+  })
+})
+
+/**
+ * Routes resolve a document with `…[0]`, so two documents claiming one slug
+ * make the served page a coin flip — which is how a leftover `page-home`
+ * shadowed the homepage seed and served two sections instead of eight. `load`
+ * reports collisions after it commits and `verify` checks for them; these pin
+ * the one answer both get.
+ */
+describe('slug collisions', () => {
+  it('names both documents claiming one type and slug', () => {
+    expect(
+      slugCollisions([
+        { _id: 'page-home', _type: 'page', slug: 'index' },
+        { _id: 'page-seed-index', _type: 'page', slug: 'index' },
+      ]),
+    ).toEqual([{ key: 'page:index', ids: ['page-home', 'page-seed-index'] }])
+  })
+
+  it('leaves one slug claimed once alone, under any number of types', () => {
+    expect(
+      slugCollisions([
+        { _id: 'page-seed-about', _type: 'page', slug: 'about' },
+        { _id: 'insight-wp-1', _type: 'insight', slug: 'about' },
+      ]),
+    ).toEqual([])
+  })
+
+  it('reads the collision out the same way for both entry points', () => {
+    expect(
+      describeSlugCollision({ key: 'page:index', ids: ['page-home', 'page-seed-index'] }),
+    ).toBe('page:index → page-home, page-seed-index')
+  })
+
+  it('finds the same collision in whole documents as in projected rows', () => {
+    const docs = [
+      { _id: 'page-home', _type: 'page', slug: { _type: 'slug', current: 'index' } },
+      { _id: 'page-seed-index', _type: 'page', slug: { _type: 'slug', current: 'index' } },
+    ]
+    expect(slugCollisions(slugRowsOf(docs))).toEqual([
+      { key: 'page:index', ids: ['page-home', 'page-seed-index'] },
+    ])
+  })
+
+  it('reads only routable documents that have a slug', () => {
+    expect(
+      slugRowsOf([
+        { _id: 'person-wp-1', _type: 'person', slug: { _type: 'slug', current: 'nick' } },
+        { _id: 'page-seed-index', _type: 'page' },
+        { _id: 'insight-wp-1', _type: 'insight', slug: { _type: 'slug', current: 'a-post' } },
+      ]),
+    ).toEqual([{ _id: 'insight-wp-1', _type: 'insight', slug: 'a-post' }])
+  })
+
+  it('asks the dataset for published routable slugs only', () => {
+    expect(ROUTABLE_SLUGS).toBe(
+      '*[_type in $types && defined(slug.current) && !(_id in path("drafts.**"))]{_id, _type, "slug": slug.current}',
+    )
   })
 })

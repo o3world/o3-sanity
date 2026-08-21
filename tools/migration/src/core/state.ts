@@ -6,6 +6,7 @@
  * client, no filesystem — which is what lets the destructive rules be pinned
  * by fixtures instead of by a live dataset.
  */
+import { ROUTABLE_TYPES } from '@o3/sanity/constants'
 
 /** The lock flag as the projections below return it, published or draft. */
 export interface LockRow {
@@ -50,4 +51,69 @@ export function isLocked(row: LockRow): boolean {
  */
 export function lockedIds(rows: readonly LockRow[]): Set<string> {
   return new Set(rows.filter(isLocked).map((row) => bareId(row._id)))
+}
+
+/** A routable document's slug, flattened out of `slug.current`. */
+export interface SlugRow {
+  readonly _id: string
+  readonly _type: string
+  readonly slug: string | null
+}
+
+/** One URL, more than one document claiming it. */
+export interface SlugCollision {
+  readonly key: string
+  readonly ids: readonly string[]
+}
+
+/**
+ * Every routable slug in the dataset, published copies only — a draft cannot
+ * be served, so it cannot collide.
+ */
+export const ROUTABLE_SLUGS =
+  '*[_type in $types && defined(slug.current) && !(_id in path("drafts.**"))]' +
+  '{_id, _type, "slug": slug.current}'
+
+/**
+ * The same rows out of whole documents, for the entry point that already holds
+ * the dataset in memory and has no reason to fetch them again.
+ */
+export function slugRowsOf(
+  docs: readonly { _id: string; _type: string; slug?: unknown }[],
+): SlugRow[] {
+  const rows: SlugRow[] = []
+  for (const doc of docs) {
+    if (!(ROUTABLE_TYPES as readonly string[]).includes(doc._type)) continue
+    const slug = (doc.slug as { current?: string } | undefined)?.current
+    if (!slug) continue
+    rows.push({ _id: doc._id, _type: doc._type, slug })
+  }
+  return rows
+}
+
+/**
+ * Two documents claiming one URL. Routes resolve with
+ * `*[_type == $type && slug.current == $slug][0]`, so the page served is a
+ * coin flip: a leftover `page-home` shared the homepage seed's `index` slug
+ * and won the toss about half the time, serving two sections instead of eight
+ * with nothing failing.
+ *
+ * The type is part of the key because the routes are per-collection — an
+ * insight and a page may both be `about`.
+ */
+export function slugCollisions(rows: readonly SlugRow[]): SlugCollision[] {
+  const byKey = new Map<string, string[]>()
+  for (const row of rows) {
+    if (!row.slug) continue
+    const key = `${row._type}:${row.slug}`
+    byKey.set(key, [...(byKey.get(key) ?? []), row._id])
+  }
+  return [...byKey]
+    .filter(([, ids]) => ids.length > 1)
+    .map(([key, ids]) => ({ key, ids }) satisfies SlugCollision)
+}
+
+/** The one line both entry points print for a collision. */
+export function describeSlugCollision(collision: SlugCollision): string {
+  return `${collision.key} → ${collision.ids.join(', ')}`
 }
