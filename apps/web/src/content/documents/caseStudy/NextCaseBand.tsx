@@ -4,6 +4,7 @@ import { ArrowIcon, Eyebrow } from '@o3/ui'
 import type { CASE_STUDY_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { SanityImage } from '@/content/SanityImage'
+import { CONTENT_COLUMN } from '@/content/imageSizes'
 import { hrefForDoc } from '@/content/documents/urls'
 
 type NextCase = NonNullable<NonNullable<CASE_STUDY_QUERY_RESULT>['next']>
@@ -72,7 +73,7 @@ export function NextCaseBand({ next }: { next: NextCase }) {
             alt={next.heroMedia?.alt ?? ''}
             ratio="fill"
             width={1600}
-            sizes="(min-width: 1024px) 1248px, 100vw"
+            sizes={CONTENT_COLUMN}
             className="duration-(--duration-reveal) transition-transform ease-out group-hover:scale-[1.03]"
           />
         </div>

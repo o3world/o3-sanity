@@ -106,6 +106,41 @@ describe('SanityImage', () => {
     })
   })
 
+  /**
+   * The two attributes that decide what a visitor downloads (#268). Neither
+   * moves a pixel, which is why nothing but the markup can report on them.
+   */
+  describe('what the element declares about the download', () => {
+    it('carries the caller’s slot, at a ratio and filling its parent alike', () => {
+      const slot = '(min-width: 1440px) 1248px, 90vw'
+      for (const ratio of ['original', '16/9', 'fill'] as const) {
+        const html = renderToStaticMarkup(
+          <SanityImage source={anImage()} alt="" ratio={ratio} sizes={slot} />,
+        )
+        expect(html).toContain(`sizes="${slot}"`)
+      }
+    })
+
+    it('falls back to the full viewport only when the caller declares no slot', () => {
+      const html = renderToStaticMarkup(<SanityImage source={anImage()} alt="" ratio="fill" />)
+      expect(html).toContain('sizes="100vw"')
+    })
+
+    it('loads lazily unless it is asked to be the priority image', () => {
+      const lazy = renderToStaticMarkup(<SanityImage source={anImage()} alt="" ratio="fill" />)
+      expect(lazy).toContain('loading="lazy"')
+      expect(lazy).not.toContain('rel="preload"')
+
+      // A priority image is eager AND preloaded — the preload is what buys the
+      // LCP candidate its head start, and is the reason only one may have it.
+      const eager = renderToStaticMarkup(
+        <SanityImage source={anImage()} alt="" ratio="fill" priority />,
+      )
+      expect(eager).toContain('loading="eager"')
+      expect(eager).toContain('rel="preload"')
+    })
+  })
+
   it('renders nothing for an empty or unset image field', () => {
     expect(renderToStaticMarkup(<SanityImage source={null} alt="" />)).toBe('')
     expect(renderToStaticMarkup(<SanityImage source={undefined} alt="" />)).toBe('')

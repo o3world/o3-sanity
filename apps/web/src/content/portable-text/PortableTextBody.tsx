@@ -3,6 +3,7 @@ import { PortableText, type PortableTextComponents } from 'next-sanity'
 import { cn } from '@o3/ui'
 
 import { SanityImage } from '@/content/SanityImage'
+import { ARTICLE_COLUMN } from '@/content/imageSizes'
 import { toEmbedSrc } from './embedSrc'
 
 /**
@@ -48,12 +49,9 @@ const components: PortableTextComponents = {
             alt={figure.alt}
             width={1600}
             className="rounded-card w-full"
-            // 822px is `--container-article`, the measure both detail
-            // templates wrap this renderer in — the same value
-            // `InsightView` declares for its hero. The old 720 matched no
-            // measure in the system: it made the browser pick the 750 candidate
-            // for an 822 slot and upscale every inline figure by ~10%.
-            sizes="(min-width: 1024px) 822px, 100vw"
+            // The article measure — both detail templates wrap this renderer
+            // in `max-w-article`.
+            sizes={ARTICLE_COLUMN}
           />
           {figure.caption ? (
             <figcaption className="text-fg-subtle mt-3 text-sm">{figure.caption}</figcaption>

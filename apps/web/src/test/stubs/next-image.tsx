@@ -27,6 +27,7 @@ export default function Image({
   width,
   height,
   sizes,
+  priority,
   className,
   style,
 }: StubImageProps) {
@@ -37,6 +38,11 @@ export default function Image({
       width={width}
       height={height}
       sizes={sizes}
+      // What next/image puts on the element for a priority image, mirrored so
+      // "exactly one image on this route loads eagerly" is assertable from the
+      // markup rather than from the prop (#268).
+      loading={priority ? 'eager' : 'lazy'}
+      fetchPriority={priority ? 'high' : undefined}
       className={className}
       style={style}
     />

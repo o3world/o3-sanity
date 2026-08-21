@@ -7,6 +7,8 @@ import {
   anInsight,
   anInsightsPage,
   classTokens,
+  declaredSizes,
+  eagerImageTags,
   renderRoute,
   unprefixedHorizontalScrollUtilities,
   variantsOf,
@@ -96,6 +98,35 @@ describe('insights collection index route', () => {
   it('uses the entry’s static metadata', async () => {
     const { metadata } = await renderRoute(route, { data: anInsightsPage() })
     expect(metadata.title).toBe('Insights')
+  })
+
+  /**
+   * The route's LCP element is the first card's picture — the grid opens in the
+   * first screen under the hero (#268). One image is preloaded and the rest
+   * wait: a second preload only takes bandwidth from the first.
+   */
+  it('preloads the first card’s picture and nothing else', async () => {
+    const illustrated = [0, 1, 2].map((i) =>
+      anInsight({
+        _id: `insight-${i}`,
+        slug: `insight-${i}`,
+        title: `Insight ${i}`,
+        featuredImage: {
+          image: {
+            _type: 'image',
+            asset: { _type: 'reference', _ref: `image-${String(i).repeat(40)}-1200x800-jpg` },
+          },
+          alt: `Picture ${i}`,
+        },
+      } as never),
+    )
+    const { html } = await renderRoute(route, { data: anInsightsPage(illustrated, 3) })
+
+    const eager = eagerImageTags(html)
+    expect(eager).toHaveLength(1)
+    expect(eager[0]).toContain('alt="Picture 0"')
+    // …and every card declares the three-up slot rather than the viewport.
+    expect(declaredSizes(html)).toEqual(Array(3).fill('(min-width: 1024px) 395px, 90vw'))
   })
 
   it('links each card at its own detail URL', async () => {

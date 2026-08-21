@@ -98,10 +98,24 @@ export function ScreenGridSection({ screens, surface, loc }: ScreenGridSectionPr
                     alt={screen.media?.alt}
                     width={1600}
                     className="w-full rounded-[12px] shadow-[0_0_32px_0_rgba(0,0,0,0.25)]"
+                    /*
+                     * The plate is the tile less its padding — 32px a side
+                     * below `lg`, 64px above — and this band takes the gutter
+                     * without `max-w-section`, so above 1440 the tile keeps
+                     * growing where every other band stops at 1248.
+                     *
+                     *   wide      the whole column: 90vw − 64, and
+                     *             100vw − 2×96 − 128 once the gutter pins
+                     *   standard  half of it, less half the 32px gap:
+                     *             45vw − 80, and 50vw − 240 once pinned
+                     *
+                     * At 1440 that is the frame's 1120 and 480 exactly. 90vw
+                     * as the column's stand-in is derived in `imageSizes.ts`.
+                     */
                     sizes={
                       span === 'wide'
-                        ? '(min-width: 1024px) 1120px, 100vw'
-                        : '(min-width: 1024px) 480px, 100vw'
+                        ? '(min-width: 1440px) calc(100vw - 320px), calc(90vw - 64px)'
+                        : '(min-width: 1440px) calc(50vw - 240px), (min-width: 1024px) calc(45vw - 80px), calc(90vw - 64px)'
                     }
                   />
                 </div>

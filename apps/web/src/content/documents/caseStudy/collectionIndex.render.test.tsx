@@ -4,6 +4,9 @@ import { buildIndexRoute } from '@/lib/content-routes/build'
 import {
   aCaseStudiesPage,
   aCaseStudyCard,
+  declaredSizes,
+  eagerImageTags,
+  imageTags,
   renderRoute,
   unprefixedHorizontalScrollUtilities,
   variantsOf,
@@ -48,6 +51,36 @@ describe('the /work index', () => {
   it('uses the entry’s static metadata', async () => {
     const { metadata } = await renderRoute(route, { data: aCaseStudiesPage() })
     expect(metadata.title).toBe('Work')
+  })
+
+  /**
+   * The first card's photograph is 1248 × 556 in the first screen — the
+   * route's LCP element (#268). It is preloaded and the rest of the stack is
+   * not: a second preload only takes bandwidth from the first.
+   */
+  it('preloads the first card’s photograph and nothing else', async () => {
+    const illustrated = [0, 1, 2].map((i) =>
+      aCaseStudyCard({
+        _id: `caseStudy-${i}`,
+        slug: `case-${i}`,
+        title: `Case ${i}`,
+        heroMedia: {
+          image: {
+            _type: 'image',
+            asset: { _type: 'reference', _ref: `image-${String(i).repeat(40)}-2400x1350-jpg` },
+          },
+          alt: `Photograph ${i}`,
+        },
+      } as never),
+    )
+    const { html: withPhotos } = await renderRoute(route, {
+      data: aCaseStudiesPage(illustrated, 3),
+    })
+
+    // The card's picture is decorative (`alt=""` — the client logo beside it
+    // carries the name), so document order is what identifies it.
+    expect(eagerImageTags(withPhotos)).toEqual([imageTags(withPhotos)[0]])
+    expect(declaredSizes(withPhotos)).toEqual(Array(3).fill('(min-width: 1440px) 1248px, 90vw'))
   })
 
   describe('at 402 (ADR 0006)', () => {

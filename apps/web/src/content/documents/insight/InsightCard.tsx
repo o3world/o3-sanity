@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 import { SanityImage } from '@/content/SanityImage'
+import { CARD_THREE_UP } from '@/content/imageSizes'
 import { hrefForDoc } from '@/content/documents/urls'
 import { formatNumericDate } from '@/lib/format-date'
 import type { SectionProps } from '@/content/blocks/sectionTypes'
@@ -45,7 +46,15 @@ export function InsightCard({
   publishedAt,
   featuredImage,
   readingMinutes,
-}: InsightCardData) {
+  priority,
+}: InsightCardData & {
+  /**
+   * Preload this card's picture. Only the container knows whether the card is
+   * the route's LCP candidate — the `/insights` grid passes it for the first
+   * card and nothing else does, because the carousel bands sit below the fold.
+   */
+  priority?: boolean
+}) {
   const meta = [
     readingMinutes ? `${readingMinutes} min${readingMinutes === 1 ? '' : 's'}` : null,
     formatNumericDate(publishedAt),
@@ -61,7 +70,8 @@ export function InsightCard({
           alt={featuredImage?.alt ?? ''}
           ratio="fill"
           width={800}
-          sizes="(min-width: 1024px) 395px, 80vw"
+          sizes={CARD_THREE_UP}
+          priority={priority}
           className="duration-(--duration-reveal) h-full w-full transition-transform ease-out group-hover:scale-[1.03]"
         />
         {/* The veil weights the bottom of the tile, where the frame's pattern

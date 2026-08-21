@@ -287,6 +287,12 @@ export function RailPanelsSection({
                     // one reads "View our Sanity work", which is 24px more
                     // row than a 402 phone has.
                     className="h-12 w-auto min-w-0 max-w-[177px] shrink object-contain object-left lg:h-[60px] lg:max-w-none lg:shrink-0"
+                    // A wordmark sized by its height: 177px is the frame's cap
+                    // below `lg`; above it the height is 60px and the width is
+                    // the artwork's own, 240px covering the widest lockup in
+                    // the corpus (800 × 220). Without this the browser has no
+                    // slot at all and downloads the full 640.
+                    sizes="(min-width: 1024px) 240px, 177px"
                   />
                 ) : panel.heading ? (
                   // 18/24 Medium in the row (`1814:1719`), the 48px section
@@ -340,7 +346,10 @@ export function RailPanelsSection({
                   alt={panel.media.alt}
                   ratio="1/1"
                   width={790}
-                  sizes="(min-width: 1024px) 395px, 100vw"
+                  // One value, because the square has one width: a
+                  // viewport-relative fallback could only describe the widths
+                  // where it is `display: none`. See the note below.
+                  sizes="395px"
                   // The media square is a 1440 element: neither 402 frame
                   // draws one, and a full-width photo between every row
                   // would bury the stack.
