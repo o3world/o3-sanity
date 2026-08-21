@@ -80,7 +80,7 @@ export interface ReadMode {
   readonly stega: boolean
 }
 
-export const publishedRead: ReadMode = { perspective: 'published', stega: false }
+const publishedRead: ReadMode = { perspective: 'published', stega: false }
 
 export async function currentReadMode(): Promise<ReadMode> {
   const { isEnabled } = await draftMode()

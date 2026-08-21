@@ -29,7 +29,7 @@ import type {
  * on, `_type` dispatch, and metadata extraction.
  *
  * They are also where the rendering strategy lives (#266). Every read goes
- * through `readDocument` below, which is the routes' one `'use cache'`
+ * through `readContent` below, which is the routes' one `'use cache'`
  * boundary; everything a route does outside it — awaiting `params`, reading
  * `draftMode()` — is either known while prerendering or, in the index
  * builder's case, deliberately fenced behind Suspense so the rest of the page
@@ -53,7 +53,7 @@ import type {
  * how `generateMetadata` and `Page` collapse into a single round-trip on a
  * published request.
  */
-async function readDocument(
+async function readContent(
   query: string,
   params: Record<string, unknown>,
   tags: string[],
@@ -172,7 +172,7 @@ export function buildDetailRoute<Q extends string>(entry: DetailEntry<Q>): Detai
   // Tags follow the per-document scheme so /api/revalidate can invalidate one
   // doc without nuking the type.
   const fetchDoc = (slug: string, read: ReadMode) =>
-    readDocument(entry.query, { slug }, [docTag(entry.type, slug), typeTag(entry.type)], read)
+    readContent(entry.query, { slug }, [docTag(entry.type, slug), typeTag(entry.type)], read)
 
   const generateMetadata: DetailRouteShim['generateMetadata'] = async ({ params }) => {
     const { slug: rawSlug } = await params
@@ -210,7 +210,7 @@ export function buildCatchAllRoute(
   const entryByType = new Map<string, RoutableEntry>(entries.map((e) => [e.type, e]))
 
   const fetchDoc = (slug: string, read: ReadMode) =>
-    readDocument(
+    readContent(
       sharedQuery,
       { slug },
       [...typeTags, ...entries.map((e) => docTag(e.type, slug))],
@@ -277,7 +277,7 @@ export function buildSingletonRoute<Q extends string>(
   const slug = params.slug ?? ''
 
   const fetchDoc = (read: ReadMode) =>
-    readDocument(
+    readContent(
       entry.query,
       params,
       slug ? [docTag(entry.type, slug), typeTag(entry.type)] : [typeTag(entry.type)],
@@ -321,7 +321,7 @@ export function buildIndexRoute<Q extends string>(entry: IndexEntry<Q>): IndexRo
 
   const fetchPage = (page: number, facets: Facets, read: ReadMode) => {
     const { offset, end } = pageRange(page, pageSize)
-    return readDocument(entry.query, { offset, end, ...facets }, tags, read)
+    return readContent(entry.query, { offset, end, ...facets }, tags, read)
   }
 
   const generateMetadata: IndexRouteShim['generateMetadata'] = async () => {
@@ -351,6 +351,9 @@ export function buildIndexRoute<Q extends string>(entry: IndexEntry<Q>): IndexRo
     const totalPages = Math.max(1, Math.ceil((typeof total === 'number' ? total : 0) / pageSize))
     const page = clampPage(requested, totalPages)
     if (page !== requested) data = await fetchPage(page, facets, read)
+    // Inside the boundary, so the shell has already flushed with a 200: an
+    // index whose dataset is unreadable renders the 404 body without the 404
+    // status a detail route would send. It is the accepted cost of the hole.
     if (!data) notFound()
 
     return renderEntry(entry, data, { slug: '', pagination: { page, totalPages }, facets })

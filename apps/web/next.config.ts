@@ -5,6 +5,8 @@ import { GENERATED_REDIRECTS } from './src/lib/redirects.generated'
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  // next-sanity's own profile, which pins time-based revalidation to a year:
+  // the publish webhook is what invalidates this site, not a clock.
   cacheComponents: true,
   cacheLife: { default: sanity },
   images: {

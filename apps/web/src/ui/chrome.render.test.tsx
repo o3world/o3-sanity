@@ -28,12 +28,12 @@ const settings = JSON.parse(
   ),
 ) as NonNullable<SITE_SETTINGS_QUERY_RESULT>
 
-/** The footer prints the year it is handed; the layout is what reads a clock. */
-const THIS_YEAR = 2026
+/** The footer prints the year it is handed; the layout is what resolves one. */
+const HANDED_YEAR = 2026
 
 const navHtml = renderToStaticMarkup(<SiteNav settings={settings} />)
 const utilityHtml = renderToStaticMarkup(<UtilityNav settings={settings} />)
-const footerHtml = renderToStaticMarkup(<SiteFooter settings={settings} year={THIS_YEAR} />)
+const footerHtml = renderToStaticMarkup(<SiteFooter settings={settings} year={HANDED_YEAR} />)
 
 /**
  * The O3 mark in each piece of chrome, matched on its viewBox — the tile's 64
@@ -302,7 +302,7 @@ describe('site footer', () => {
     }
     expect(footerHtml).toContain(settings.legalName as string)
     expect(footerHtml).toContain(settings.copyrightNote as string)
-    expect(footerHtml).toContain(String(THIS_YEAR))
+    expect(footerHtml).toContain(String(HANDED_YEAR))
     // The legal row is `on-utility` (#AAA69E) — the component binds the same
     // variable here as the Utility Nav links (`2050:1226`), not the cool
     // `fg-subtle` grey the row shipped with (2026-08-13 token pass).
@@ -367,7 +367,7 @@ describe('chrome degrades rather than crashing on an empty dataset', () => {
   it('renders with no settings at all', () => {
     expect(() => renderToStaticMarkup(<SiteNav settings={null} />)).not.toThrow()
     expect(() =>
-      renderToStaticMarkup(<SiteFooter settings={null} year={THIS_YEAR} />),
+      renderToStaticMarkup(<SiteFooter settings={null} year={HANDED_YEAR} />),
     ).not.toThrow()
   })
 })

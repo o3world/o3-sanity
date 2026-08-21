@@ -8,14 +8,13 @@ import type { RenderingPolicy } from './rendering'
  * view, so the set is a reviewed list in one file: changing it is a diff in a
  * pull request rather than a line on the invoice.
  *
- * `inherent` — nothing to prerender, in any mode.
- * `migrating` — should serve a static shell and does not yet. Turning on
- * Cache Components stops honouring these entries, and the entry is deleted in
- * the same change that fixes the route.
+ * The list is route handlers and nothing else: under Cache Components every
+ * page route has a shell, the Studio's client application included.
  *
- * Since Cache Components landed (#266) the list is route handlers and nothing
- * else. Every page route has a shell, the Studio's client application
- * included.
+ * `inherent` — nothing to prerender, in any mode.
+ * `migrating` — should serve a static shell and does not yet. Cache Components
+ * is what fixes such a route, and turning it on stops honouring the entry, so
+ * the change that fixes the route is the change that deletes it.
  */
 export const RENDERING_POLICY: RenderingPolicy = {
   perRequest: [

@@ -7,12 +7,7 @@ import { resolveButtonHref } from '@/content/buttonDestination'
 
 interface SiteFooterProps {
   settings: SITE_SETTINGS_QUERY_RESULT
-  /**
-   * The copyright year, handed in rather than read off the clock. Reading the
-   * current time in a prerendered component is what stops a route having a
-   * static shell — Next rejects it outright (#266) — so the layout resolves
-   * the year in a cached function and passes it down.
-   */
+  /** The copyright year — the footer prints it, the layout resolves it. */
   year: number
 }
 

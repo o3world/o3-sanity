@@ -123,11 +123,11 @@ export const sanityFetch: typeof live.sanityFetch = (options) => {
  * overlay markers ride along with it (#266).
  *
  * Under Cache Components every `sanityFetch` runs inside a `'use cache'`
- * boundary, and `draftMode()` and `cookies()` cannot be read in there. So the
- * three values `sanityFetch` used to resolve for itself are resolved out here
- * instead and handed in as arguments — which also makes them part of the
- * cache key, so a preview session's drafts can never land in the entry every
- * other visitor shares.
+ * boundary, and `draftMode()` and `cookies()` cannot be read in there — so
+ * `sanityFetch` cannot resolve these for itself. They are resolved out here
+ * and handed in as arguments, which also makes them part of the cache key, so
+ * a preview session's drafts can never land in the entry every other visitor
+ * shares.
  */
 export interface ReadMode {
   readonly perspective: LivePerspective
@@ -141,7 +141,7 @@ export interface ReadMode {
  * cached render is shared by everyone who asks for the route, so nothing
  * about it may vary by request.
  */
-export const publishedRead: ReadMode = { perspective: 'published', stega: false }
+const publishedRead: ReadMode = { perspective: 'published', stega: false }
 
 /**
  * The read mode for the request being served. Resolve it outside every

@@ -12,8 +12,6 @@ import { SiteNav } from '@/ui/SiteNav'
 import { UtilityNav } from '@/ui/UtilityNav'
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
-  // Shared with every route's generateMetadata via React.cache — one fetch
-  // per request, not one per consumer.
   const [settings, { isEnabled: isDraft }, year] = await Promise.all([
     getSiteSettings(),
     draftMode(),

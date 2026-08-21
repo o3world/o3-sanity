@@ -330,11 +330,23 @@ describe('insight detail route', () => {
     })
 
     // stega characters are invisible in the browser but corrupt <title> and
-    // OG tags if they leak — hence stega:false on the metadata fetch.
+    // OG tags if they leak — hence stega:false on the metadata fetch. Asserted
+    // on a draft render, the one mode where the page's own read has stega on
+    // and the two are therefore distinguishable.
     it('fetches metadata with stega encoding off', async () => {
-      const { calls } = await render(anInsight())
-      const metadataFetch = calls.find((call) => call.stega === false)
-      expect(metadataFetch, 'no stega-free fetch was made for metadata').toBeDefined()
+      const { calls } = await renderRoute(route, {
+        data: anInsight(),
+        params: { slug: 'an-insight' },
+        draft: true,
+      })
+      expect(
+        calls.some((call) => call.stega === true),
+        'the page read was stega-free too',
+      ).toBe(true)
+      expect(
+        calls.find((call) => call.stega === false),
+        'no stega-free fetch was made for metadata',
+      ).toBeDefined()
     })
 
     // The two sides of the revalidation contract must agree; this pins the

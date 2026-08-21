@@ -8,13 +8,19 @@ import { anInsight, anInsightsPage, renderRoute, siteSettings } from '@/test'
 import type { FetchCall } from '@/test/stubs/sanity-live'
 
 /**
- * Every read says which cut of the dataset it wants (#266).
+ * Every read a route makes says which cut of the dataset it wants (#266).
  *
  * Under Cache Components `sanityFetch` runs inside a `'use cache'` boundary,
  * where `draftMode()` and `cookies()` cannot be read — so the perspective and
  * the stega flag are arguments the route resolves per request and hands in.
  * They are also cache-key parts, which is what keeps one visitor's draft
  * preview out of the entry every other visitor shares.
+ *
+ * What this layer can see is the route builders' half of that: that every
+ * read is threaded the mode the request resolved to, and that metadata's read
+ * is forced stega-free whatever the mode. The resolver itself lives behind
+ * `@/sanity/live`, which the layer stubs wholesale — a draft render here gets
+ * the state a plain Presentation session is in.
  */
 const detail = buildDetailRoute(insight)
 const index = buildIndexRoute(insightIndex)
@@ -33,7 +39,9 @@ describe('an ordinary request', () => {
   it('reads published content with no stega on a detail route', async () => {
     const { calls } = await renderRoute(detail, { data: dataset, params: { slug: 'an-insight' } })
 
-    for (const call of reads(calls, INSIGHT_QUERY)) {
+    const page = reads(calls, INSIGHT_QUERY)
+    expect(page.length).toBeGreaterThan(0)
+    for (const call of page) {
       expect(call.perspective).toBe('published')
       expect(call.stega).toBe(false)
     }
@@ -42,7 +50,9 @@ describe('an ordinary request', () => {
   it('reads published content with no stega on an index route', async () => {
     const { calls } = await renderRoute(index, { data: dataset })
 
-    for (const call of reads(calls, INSIGHTS_PAGE_QUERY)) {
+    const feed = reads(calls, INSIGHTS_PAGE_QUERY)
+    expect(feed.length).toBeGreaterThan(0)
+    for (const call of feed) {
       expect(call.perspective).toBe('published')
       expect(call.stega).toBe(false)
     }
@@ -103,24 +113,17 @@ describe('a draft request', () => {
 })
 
 /**
- * The webhook's half of the contract is untouched by the migration: the tag
- * set a fetch declares is what `/api/revalidate` flushes on publish.
+ * An index feed carries no document tag — it lists a type rather than
+ * rendering one document — so its half of the revalidation contract has no
+ * home in a per-document test. The detail half is pinned beside the insight
+ * route.
  */
-describe('cache tags survive the read-mode split', () => {
-  it('tags a detail read by document and by type', async () => {
-    const { calls } = await renderRoute(detail, { data: dataset, params: { slug: 'an-insight' } })
-
-    for (const call of reads(calls, INSIGHT_QUERY)) {
-      expect(call.tags).toContain('sanity:insight:an-insight')
-      expect(call.tags).toContain('sanity:insight')
-    }
-  })
-
-  it('tags an index read by every type its feed lists', async () => {
+describe('an index read', () => {
+  it('is tagged by every type its feed lists', async () => {
     const { calls } = await renderRoute(index, { data: dataset })
 
-    for (const call of reads(calls, INSIGHTS_PAGE_QUERY)) {
-      expect(call.tags).toContain('sanity:insight')
-    }
+    const feed = reads(calls, INSIGHTS_PAGE_QUERY)
+    expect(feed.length).toBeGreaterThan(0)
+    for (const call of feed) expect(call.tags).toContain('sanity:insight')
   })
 })
