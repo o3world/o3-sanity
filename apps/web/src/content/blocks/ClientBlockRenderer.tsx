@@ -1,95 +1,30 @@
 'use client'
 
-import { useOptimistic } from 'next-sanity/hooks'
+import dynamic from 'next/dynamic'
 
-import type { SanityBlock } from '@o3/sanity/types'
-
-import { dataAttr, rootFieldLoc } from '@/sanity/dataAttribute'
-
-import { BLOCK_COMPONENTS } from './clientComponents'
-import { renderDispatchedBlocks } from './dispatchBlocks'
-import { reconcileOptimisticOrder } from './optimisticOrder'
-
-interface ClientBlockRendererProps {
-  blocks: SanityBlock[]
-  documentId?: string
-  documentType?: string
-  /** The document array field hosting the blocks. Default `sections`. */
-  fieldPath?: string
-}
-
-// Dev-only fallback for blocks the client registry can't render. Hoisted so
-// the JSX isn't reconstructed inside the map on every render; renders
-// nothing in production.
-function ClientUnknownBlockPlaceholder({
-  blockKey,
-  blockType,
-}: {
-  blockKey: string
-  blockType: string
-}) {
-  if (process.env.NODE_ENV !== 'development') return null
-  return (
-    <div
-      key={blockKey}
-      className="rounded-card border-line text-fg-muted border border-dashed p-4 text-sm"
-    >
-      Unknown block type: <code>{blockType}</code>
-    </div>
-  )
-}
+// The renderer's own props, not a copy of them: the spread below is not
+// excess-property checked, so a second declaration would let a prop added
+// there go missing here and typecheck. Type-only, so it adds no import edge
+// and the chunk still splits.
+import type { OptimisticBlockRendererProps } from './OptimisticBlockRenderer'
 
 /**
- * Client-side block dispatcher — the Presentation Tool draft-preview path.
- * Adds optimistic on-canvas reordering: when an editor drags a block, the
- * overlay pushes the new order here before the mutation round-trips, so the
- * preview reflects the drop instantly.
+ * The draft-preview renderer, behind a client-side boundary (#269).
+ *
+ * `Blocks` picks this over the server `BlockRenderer` in draft mode, and it is
+ * a server component doing the picking — so importing the renderer itself here
+ * would put `useOptimistic`'s comlink machinery in every published page's
+ * bundle. `@/sanity/VisualEditing` carries the full reason; the short version
+ * is that a `'use client'` module a server component imports is downloaded
+ * whether or not it renders, and only a client-side `next/dynamic` splits it.
+ *
+ * Server-rendered (no `ssr: false`): the preview's first paint has to carry
+ * the blocks, the same as the published path.
  */
-export function ClientBlockRenderer({
-  blocks,
-  documentId,
-  documentType,
-  fieldPath = 'sections',
-}: ClientBlockRendererProps) {
-  // `reconcileOptimisticOrder` re-maps the payload's `_key` ordering back
-  // onto the full block data we already hold. A no-op outside a relevant drag.
-  // The second generic is the optimistic DOCUMENT shape (the reducer's action
-  // wraps it) — the field hosting the blocks varies (sections/story),
-  // so it stays a loose record and reconcile picks `fieldPath` off it.
-  const orderedBlocks = useOptimistic<SanityBlock[], Record<string, unknown>>(
-    blocks,
-    (state, action) => reconcileOptimisticOrder(state, action, documentId, fieldPath),
-  )
+const OptimisticBlockRenderer = dynamic(() =>
+  import('./OptimisticBlockRenderer').then((m) => m.OptimisticBlockRenderer),
+)
 
-  if (!orderedBlocks?.length) return null
-
-  // The sortable array needs a real container element carrying the
-  // array-level `data-sanity` (a fragment can't) — this is what tells
-  // Presentation the children form a reorderable array. Each child stamps its
-  // own item-level `data-sanity` in the shared dispatch loop. Draft-preview-
-  // only: the published path renders through the server `BlockRenderer`
-  // fragment, so this wrapper never reaches public HTML.
-  const containerAttr =
-    documentId && documentType
-      ? dataAttr(rootFieldLoc({ id: documentId, type: documentType }, fieldPath))
-      : undefined
-
-  return (
-    <div data-sanity={containerAttr}>
-      {renderDispatchedBlocks({
-        blocks: orderedBlocks,
-        // Own-property guard mirrors the server renderer's
-        // isRegisteredBlockType — a raw index would resolve Object.prototype
-        // keys ('constructor', …) to truthy non-components.
-        lookup: (type) =>
-          Object.prototype.hasOwnProperty.call(BLOCK_COMPONENTS, type)
-            ? BLOCK_COMPONENTS[type]
-            : undefined,
-        Placeholder: ClientUnknownBlockPlaceholder,
-        documentId,
-        documentType,
-        fieldPath,
-      })}
-    </div>
-  )
+export function ClientBlockRenderer(props: OptimisticBlockRendererProps) {
+  return <OptimisticBlockRenderer {...props} />
 }

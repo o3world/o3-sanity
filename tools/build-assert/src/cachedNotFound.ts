@@ -25,7 +25,7 @@
  *     request. That is the cost regression: every probe of every made-up slug
  *     bills an invocation again.
  */
-import type { BuildOutput } from './rendering'
+import type { RenderingOutput } from './rendering'
 
 /**
  * The routes whose params are slugs out of the dataset — the ones a scanner
@@ -50,7 +50,7 @@ function fallbackOf(entry: unknown): unknown {
  * already names it. Two failures for one cause point the reader at the wrong
  * file.
  */
-export function checkCachedNotFound(build: BuildOutput): string[] {
+export function checkCachedNotFound(build: RenderingOutput): string[] {
   const routes = new Set(Object.values(build.appPathRoutes))
   const problems: string[] = []
 

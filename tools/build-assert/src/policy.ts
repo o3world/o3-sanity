@@ -1,3 +1,4 @@
+import type { JsBudget } from './bundle'
 import type { RenderingPolicy } from './rendering'
 
 /**
@@ -32,6 +33,37 @@ export const RENDERING_POLICY: RenderingPolicy = {
       route: '/api/revalidate',
       kind: 'inherent',
       reason: "the publish webhook's POST target",
+    },
+  ],
+}
+
+/**
+ * How much JavaScript a route may ship, declared (#269, spec #260).
+ *
+ * The default is the site's own measurement plus room to move: the audit in
+ * #269 left every content route at 667,149 uncompressed bytes of first-load
+ * JavaScript, and 730,000 is that plus 9.4%.
+ *
+ * The headroom decides what the budget is worth, so it is set against what it
+ * has to catch rather than rounded to a nice percentage. 62,851 bytes is under
+ * the smallest chunk the audit removed — comlink and xstate, 64,190 — so a
+ * regression of the kind #269 fixed cannot fit under the ceiling, while a
+ * dependency bump or one more small client component does not fail a build.
+ *
+ * A route is held to the default unless it is named below, so a route added
+ * next month is inside the budget without anyone remembering it exists.
+ */
+export const JS_BUDGET: JsBudget = {
+  defaultBytes: 730_000,
+  routes: [
+    {
+      route: '/studio/[[...tool]]',
+      bytes: 8_635_000,
+      // Measured at 7,849,537, plus 10% — a proportion rather than a chunk
+      // size, because nothing here is trying to keep a specific library out.
+      // Nobody browses to the Studio by accident and no visitor pays for it;
+      // what this entry buys is a warning when the editor doubles.
+      reason: 'an editing application, reached only by editors',
     },
   ],
 }

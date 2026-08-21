@@ -53,16 +53,16 @@ jobs:
             pnpm turbo run ${{ matrix.task }} ${{ matrix.filter }}
           fi
 
-  # What the build says about how it renders (#265). Its own job, after the
-  # build it reads: `needs: checks` lets the build below come back from the
+  # What the build says about how it renders (#265), what a bot probe costs
+  # (#267), and how much JavaScript each route ships (#269). Its own job, after
+  # the build it reads: `needs: checks` lets the build below come back from the
   # turbo cache the checks job filled, and builds for real when it cannot.
-  # Either way the manifests in `.next` are the assertion's ground truth.
+  # Either way what Next left in `.next` is the assertions' ground truth.
   #
   # Never gated on `--affected` — a change that flips a route to per-request
-  # rendering can land anywhere in the graph, and the whole point is that
-  # nobody has to work out which files those are.
-  #
-  # The JS budget (#269) reads the same output and belongs on this job.
+  # rendering, or adds half a megabyte to every page, can land anywhere in the
+  # graph, and the whole point is that nobody has to work out which files
+  # those are.
   build-assert:
     name: build assertions
     needs: checks
@@ -81,7 +81,7 @@ jobs:
       - uses: ./.github/actions/setup
       - name: Build the site
         run: pnpm turbo run build --filter=@o3/web
-      - name: Assert the rendering strategy and cached 404s
+      - name: Assert the rendering strategy, cached 404s and the JS budget
         run: pnpm build:assert
 
   # The three test layers (ADR 0004). Deliberately its own job rather than a

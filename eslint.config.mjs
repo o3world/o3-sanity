@@ -44,11 +44,18 @@ const draftBoundaryPatterns = [
     group: [
       '@/content/blocks/BlockRenderer',
       '@/content/blocks/ClientBlockRenderer',
+      '@/content/blocks/OptimisticBlockRenderer',
       '**/blocks/BlockRenderer',
       '**/blocks/ClientBlockRenderer',
+      '**/blocks/OptimisticBlockRenderer',
     ],
     message:
       'Render section arrays through Blocks from @/content/blocks/Blocks — it resolves draft mode and keeps the Presentation editing path (issue #15).',
+  },
+  {
+    group: ['@/sanity/PresentationOverlay', '**/sanity/PresentationOverlay'],
+    message:
+      'Mount the overlay through VisualEditing from @/sanity/VisualEditing — that is the lazy boundary, and a direct import puts the visual editing runtime back in every published page (#269).',
   },
 ]
 
