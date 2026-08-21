@@ -41,8 +41,16 @@ Three files in `apps/web/.next`, and nothing else — no route-file parsing, no 
 A route absent from the prerender manifest is one the server renders on demand. That derivation
 matches the `ƒ (Dynamic)` marks in the build's own route table, which is how it was checked.
 
+A parameterised route has to hold its own `dynamicRoutes` entry. The concrete paths under it are not
+proof: one path bailing out of prerendering costs the route that entry while its siblings stay in
+`routes`, and Next prints the route as `ƒ`.
+
 Under Cache Components a route with dynamic holes still prerenders a shell, so the same absence
 means something stronger — no shell at all — and the failure says so.
+
+**Middleware is invisible to this assertion.** `apps/web` has no `proxy.ts` today; adding one would
+run on every request, prerendered route or not, and this job would stay green. Cost that at the
+point you add it.
 
 ## Tests
 

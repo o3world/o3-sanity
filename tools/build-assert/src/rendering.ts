@@ -8,8 +8,8 @@
  *     (`"/(site)/insights/page"` → `"/insights"`), so it is the full route
  *     table including route handlers and the Studio catch-all.
  *   - `prerender-manifest.json` lists what the build actually prerendered:
- *     `routes` holds concrete paths (each naming the route it came from in
- *     `srcRoute`), `dynamicRoutes` holds the parameterised routes themselves.
+ *     `routes` holds concrete paths, `dynamicRoutes` holds the parameterised
+ *     routes themselves.
  *   - `required-server-files.json` carries the resolved config, which is where
  *     `cacheComponents` comes from.
  *
@@ -19,20 +19,15 @@
  */
 
 /**
- * Set by Next on each prerender entry once PPR is on (`cacheComponents: true`).
- * Off, the field is absent.
+ * Only the keys are read. Next fills the entries with cache-control fields,
+ * data routes and headers, and none of them says anything about whether the
+ * route serves from the CDN — the entry existing is the whole signal.
  */
-type RenderingMode = 'STATIC' | 'PARTIALLY_STATIC'
-
-interface PrerenderEntry {
-  /** The route this concrete path was generated from, or the path itself. */
-  srcRoute?: string | null
-  renderingMode?: RenderingMode
-}
-
 export interface PrerenderManifest {
-  routes: Record<string, PrerenderEntry>
-  dynamicRoutes: Record<string, PrerenderEntry>
+  /** Concrete prerendered paths: `/`, `/about`, `/insights/some-slug`. */
+  routes: Record<string, unknown>
+  /** Parameterised routes the build prerendered: `/insights/[slug]`. */
+  dynamicRoutes: Record<string, unknown>
 }
 
 export interface BuildOutput {
@@ -90,15 +85,27 @@ export function allRoutes(build: BuildOutput): string[] {
   return [...new Set(Object.values(build.appPathRoutes))].sort()
 }
 
+/** `/insights/[slug]`, `/studio/[[...tool]]` — a route that takes params. */
+function isParameterised(route: string): boolean {
+  return route.includes('[')
+}
+
 /**
  * The routes the build prerendered nothing for — server-rendered on demand.
+ *
+ * A parameterised route has to hold its own `dynamicRoutes` entry; the
+ * concrete paths sitting under it in `routes` do not stand in for one. One
+ * path bailing out of prerendering costs the whole route that entry while its
+ * siblings stay behind, and Next prints the route as `ƒ` — so reading the
+ * siblings as proof would pass a route that bills every request.
  */
 export function perRequestRoutes(build: BuildOutput): string[] {
-  const prerendered = new Set<string>(Object.keys(build.prerender.dynamicRoutes))
-  for (const [path, entry] of Object.entries(build.prerender.routes)) {
-    prerendered.add(entry.srcRoute ?? path)
-  }
-  return allRoutes(build).filter((route) => !prerendered.has(route))
+  const paths = new Set(Object.keys(build.prerender.routes))
+  const parameterised = new Set(Object.keys(build.prerender.dynamicRoutes))
+
+  return allRoutes(build).filter((route) =>
+    isParameterised(route) ? !parameterised.has(route) : !paths.has(route),
+  )
 }
 
 /**
