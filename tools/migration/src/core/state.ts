@@ -6,8 +6,22 @@
  * client, no filesystem — which is what lets the destructive rules be pinned
  * by fixtures instead of by a live dataset.
  */
+import { z } from 'zod'
+
 import { ROUTABLE_TYPES } from '@o3/sanity/constants'
 import type { Migration } from '@o3/sanity/types/generated'
+
+/**
+ * The `migration` object a pipeline-owned document carries, as its mapper's
+ * gate sees it. Both fields are required on the way in — a document with no
+ * `locked` flag is one the lock rule cannot protect, and one with no
+ * `sourceId` cannot be traced back to what produced it — while the schema
+ * keeps them optional so an editor's document is legal without them.
+ *
+ * A document type with a stricter rule refines this rather than restating it
+ * (see `caseStudyMigration` in `map/caseStudy.ts`).
+ */
+export const migrationObject = z.object({ locked: z.boolean(), sourceId: z.string() })
 
 /** The lock flag as the projections below return it, published or draft. */
 export interface LockRow {

@@ -85,3 +85,31 @@ describe('the story gate', () => {
     ).toBe(false)
   })
 })
+
+/**
+ * A case study's own stricter reading of the shared `migration` fragment. The
+ * translate track writes these, so the gate is what stops an agent's document
+ * arriving already locked — a lock is an editor's to set — or claiming a
+ * source that is not a WordPress work item.
+ */
+describe('the migration gate', () => {
+  const withMigration = (migration: unknown) =>
+    caseStudyDoc.safeParse({ ...doc([chapter]), migration }).success
+
+  it('takes a wp:work source, unlocked', () => {
+    expect(withMigration({ locked: false, sourceId: 'wp:work:12' })).toBe(true)
+  })
+
+  it('refuses a document that arrives locked', () => {
+    expect(withMigration({ locked: true, sourceId: 'wp:work:12' })).toBe(false)
+  })
+
+  it('refuses a source that is not a work item', () => {
+    expect(withMigration({ locked: false, sourceId: 'wp:post:12' })).toBe(false)
+    expect(withMigration({ locked: false, sourceId: 'wp:work:' })).toBe(false)
+  })
+
+  it('refuses a document with no migration object at all', () => {
+    expect(withMigration(undefined)).toBe(false)
+  })
+})

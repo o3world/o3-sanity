@@ -9,6 +9,7 @@ import {
   isLocked,
   isProvisional,
   lockedIds,
+  migrationObject,
   provisionalNote,
   slugCollisions,
   slugRowsOf,
@@ -137,5 +138,25 @@ describe('the provisional predicate', () => {
     ).toBe('copy pending')
     expect(provisionalNote({ migration: { provisional: true } })).toBeUndefined()
     expect(provisionalNote({})).toBeUndefined()
+  })
+})
+
+/**
+ * The `migration` object every pipeline-owned document carries. One fragment,
+ * because the six mappers that restate it are six chances for the field the
+ * lock rule reads to be optional in one of them.
+ */
+describe('the shared migration fragment', () => {
+  it('takes a stamped document', () => {
+    expect(migrationObject.safeParse({ locked: false, sourceId: 'wp:post:1' }).success).toBe(true)
+  })
+
+  it('refuses a document with no lock flag or no source', () => {
+    expect(migrationObject.safeParse({ sourceId: 'wp:post:1' }).success).toBe(false)
+    expect(migrationObject.safeParse({ locked: false }).success).toBe(false)
+  })
+
+  it("takes a locked document — the flag is an editor's to set", () => {
+    expect(migrationObject.safeParse({ locked: true, sourceId: 'wp:post:1' }).success).toBe(true)
   })
 })

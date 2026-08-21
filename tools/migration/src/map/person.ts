@@ -1,5 +1,6 @@
 import { z } from 'zod'
 
+import { migrationObject } from '../core/state'
 import { normalizeUploadUrl } from '../lib/htmlToPortableText'
 import { migratableImage, type ExtractMeta } from './types'
 
@@ -31,7 +32,7 @@ export const personDoc = z.object({
   name: z.string().min(1),
   title: z.string().min(1).optional(),
   headshot: migratableImage.optional(),
-  migration: z.object({ locked: z.boolean(), sourceId: z.string() }),
+  migration: migrationObject,
 })
 
 export type PersonDoc = z.infer<typeof personDoc>
