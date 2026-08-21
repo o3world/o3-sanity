@@ -17,6 +17,15 @@ import { getCliClient } from 'sanity/cli'
 
 import { ROUTABLE_TYPES } from '@o3/sanity/constants'
 
+import {
+  LOCKED_BY_ID,
+  LOCKED_BY_TYPE,
+  LOCK_FETCH_OPTIONS,
+  bareId,
+  isLocked,
+  lockedIds,
+  type LockRow,
+} from './core/state'
 import { CORPUS_DIRS, isPipelineOwned } from './lib/corpus'
 import { isImageBuffer } from './lib/media'
 import { readManifest } from './lib/manifest'
@@ -303,18 +312,8 @@ async function main() {
   const { runs } = readManifest()
 
   const ids = all.flatMap((d) => [d._id, `drafts.${d._id}`])
-  // `perspective: 'raw'` or this query cannot see a draft at all: the client
-  // defaults to the published perspective, which silently made the lock rule
-  // half a rule — a locked DRAFT read as unlocked and got overwritten — and
-  // would leave every stale draft below undetected.
-  const live = await client.fetch<{ _id: string; locked: boolean | null }[]>(
-    '*[_id in $ids]{_id, "locked": migration.locked}',
-    { ids },
-    { perspective: 'raw' },
-  )
-  const locked = new Set<string>(
-    live.filter((d) => d.locked === true).map((d) => d._id.replace(/^drafts\./, '')),
-  )
+  const live = await client.fetch<LockRow[]>(LOCKED_BY_ID, { ids }, LOCK_FETCH_OPTIONS)
+  const locked = lockedIds(live)
 
   /**
    * Retirement — the delete half of CONTEXT.md's Rebuild promise ("deletes
@@ -328,16 +327,12 @@ async function main() {
    */
   const corpusIds = new Set(all.map((d) => d._id))
   const types = [...new Set(all.map((d) => d._type as string))]
-  const owned = await client.fetch<{ _id: string; locked: boolean | null }[]>(
-    '*[_type in $types]{_id, "locked": migration.locked}',
-    { types },
-    { perspective: 'raw' },
-  )
+  const owned = await client.fetch<LockRow[]>(LOCKED_BY_TYPE, { types }, LOCK_FETCH_OPTIONS)
   const retired = new Map<string, { draft: boolean; published: boolean }>()
   for (const doc of owned) {
-    const bare = doc._id.replace(/^drafts\./, '')
+    const bare = bareId(doc._id)
     if (!isPipelineOwned(bare) || corpusIds.has(bare)) continue
-    if (doc.locked === true) locked.add(bare)
+    if (isLocked(doc)) locked.add(bare)
     const entry = retired.get(bare) ?? { draft: false, published: false }
     if (doc._id.startsWith('drafts.')) entry.draft = true
     else entry.published = true
@@ -354,6 +349,10 @@ async function main() {
    * Deleted in the same transaction that writes the published document, and
    * only for documents this run actually writes: a locked document is skipped
    * before it gets here, which is what protects an editor who took one over.
+   *
+   * A draft is only in `live` because the lock read asks for the raw
+   * perspective (`LOCK_FETCH_OPTIONS`); the published perspective cannot see
+   * one, so this set would be empty every run.
    */
   const staleDrafts = new Set<string>(
     live.filter((d) => d._id.startsWith('drafts.')).map((d) => d._id.slice('drafts.'.length)),
