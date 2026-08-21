@@ -22,6 +22,7 @@ export {
 } from './define'
 export { docTag, typeTag } from './cacheTags'
 export { decodePathParam } from './decodePathParam'
+export { publishedSlugs } from './staticParams'
 export { clampPage, pageRange, parsePage } from './pagination'
 export type {
   AnyCatchAllEntry,

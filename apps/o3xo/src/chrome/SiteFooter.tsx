@@ -49,8 +49,7 @@ import type { Settings } from './navItems'
  * links (the LinkedIn account in Site Settings comes from the site's
  * Organization ld+json, not from anything it renders).
  */
-export function SiteFooter({ settings }: { settings: Settings | null }) {
-  const year = new Date().getFullYear()
+export function SiteFooter({ settings, year }: { settings: Settings | null; year: number }) {
   const legalName = settings?.legalName ?? settings?.title ?? 'O3XO'
   const row = [...(settings?.utilityNavItems ?? []), ...(settings?.legalLinks ?? [])]
 

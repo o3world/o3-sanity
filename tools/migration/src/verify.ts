@@ -14,80 +14,22 @@
  * JSON is not a thing it can be asked to do.
  *
  * Exits non-zero on any finding, so it works as a checkpoint rather than a
- * report nobody reads.
+ * report nobody reads. The checks live in `core/report.ts`; this fetches,
+ * calls `report`, and prints.
  */
-import { existsSync, readFileSync, readdirSync } from 'node:fs'
-import { join } from 'node:path'
-
 import { getCliClient } from 'sanity/cli'
 
-import { ROUTABLE_TYPES } from '@o3/sanity/constants'
-import { schemaTypes } from '@o3/sanity/schemas'
-import type { Migration } from '@o3/sanity/types/generated'
-
-import { isImageAssetId } from './lib/media'
 import { brandArg } from './lib/brandArg'
-import { BRIEF_ID, CORPUS_DIRS, isInternalType, refsIn } from './lib/corpus'
-import { untouchedPlaceholders } from './lib/placeholders'
-import { categoryDoc } from './map/category'
-import { caseStudyDoc } from './map/caseStudy'
-import { clientDoc } from './map/framerCaseStudy'
-import { personDoc } from './map/person'
-import { insightDoc } from './map/insight'
-import { siteSettingsDoc } from './map/siteSettings'
+import { readCorpus } from './core/read'
+import { report, type CheckResult } from './core/report'
+import { LOCKED_BY_ID, LOCK_FETCH_OPTIONS, type LockRow } from './core/state'
 
 const client = getCliClient({ apiVersion: '2026-07-01' })
 
 type AnyDoc = { _id: string; _type: string; [k: string]: unknown }
 
-/**
- * Zod gates by type. A type without one is only checked structurally.
- *
- * A gate describes what a mapper produces, so `only` is how one that describes
- * a single source says so. `siteSettingsDoc` is the shape of the **WordPress
- * chrome extract** — nav menus plus the ACF options page, which is where its
- * required socials, legal links and legal name come from. O3XO has no chrome
- * extract yet, so its singleton is a hand-seeded bootstrap with those fields
- * genuinely absent (#215), and holding it to o3's gate would fail `verify` over
- * facts about the O3XO entity that nothing has extracted. Its shape is asserted
- * in `o3xo.test.ts` against what the chrome actually renders.
- */
-type Gate = {
-  readonly schema: { safeParse: (v: unknown) => { success: boolean } }
-  readonly only?: (doc: AnyDoc) => boolean
-}
-
-const GATES: Record<string, Gate> = {
-  insight: { schema: insightDoc },
-  category: { schema: categoryDoc },
-  person: { schema: personDoc },
-  /**
-   * `caseStudyDoc` describes both sources, but only the Framer half is checked
-   * here. o3's twenty are the translate track's, and the gate they were written
-   * against is applied by `checkTranslation` over the committed file with its
-   * `_meta` header — a document that has been through `load` no longer carries
-   * one, and the flags that make an agent-written field legitimate live in it.
-   */
-  caseStudy: {
-    schema: caseStudyDoc,
-    only: (doc) =>
-      ((doc.migration as { sourceId?: string } | undefined)?.sourceId ?? '').startsWith('framer:'),
-  },
-  client: {
-    schema: clientDoc,
-    only: (doc) => doc._id.startsWith('client-framer-'),
-  },
-  siteSettings: {
-    schema: siteSettingsDoc,
-    only: (doc) =>
-      ((doc.migration as { sourceId?: string } | undefined)?.sourceId ?? '').startsWith('wp:'),
-  },
-}
-
-const SCHEMA_TYPE_NAMES = new Set(schemaTypes.map((t) => t.name))
-
 const findings: string[] = []
-function report(check: string, lines: string[]) {
+function printCheck({ check, lines }: CheckResult) {
   if (lines.length === 0) {
     console.log(`✓ ${check}`)
     return
@@ -98,56 +40,10 @@ function report(check: string, lines: string[]) {
   findings.push(`${check}: ${lines.length}`)
 }
 
-/**
- * The whole committed corpus — all three trees.
- *
- * Converted + seed only until ADR 0016: the translate track loaded drafts-only
- * and this reads PUBLISHED documents, so counting its 20 case studies as
- * "expected" would have failed check 1 on every run. Now that they publish,
- * leaving them out inverts the same mistake — every one would be reported as
- * an orphan by check 8, and the per-type line would read `caseStudy 0 → 20`.
- */
-function readCommitted(): AnyDoc[] {
-  const docs: AnyDoc[] = []
-  for (const root of CORPUS_DIRS) {
-    if (!existsSync(root)) continue
-    for (const type of readdirSync(root)) {
-      const dir = join(root, type)
-      for (const f of readdirSync(dir).filter((f) => f.endsWith('.json'))) {
-        docs.push(JSON.parse(readFileSync(join(dir, f), 'utf8')) as AnyDoc)
-      }
-    }
-  }
-  return docs
-}
-
-/**
- * Every asset ref held by an image field, with the path that reached it — so a
- * finding names the field to fix rather than just the document.
- */
-function imageAssetRefs(
-  node: unknown,
-  path = '',
-  found: { path: string; ref: string }[] = [],
-): { path: string; ref: string }[] {
-  if (Array.isArray(node)) {
-    node.forEach((item, i) => imageAssetRefs(item, `${path}[${i}]`, found))
-  } else if (node && typeof node === 'object') {
-    const obj = node as Record<string, unknown>
-    if (obj._type === 'image') {
-      const ref = (obj.asset as { _ref?: unknown } | undefined)?._ref
-      if (typeof ref === 'string') found.push({ path: path || '(root)', ref })
-    }
-    for (const [key, value] of Object.entries(obj)) {
-      imageAssetRefs(value, path ? `${path}.${key}` : key, found)
-    }
-  }
-  return found
-}
-
 async function main() {
-  const committed = readCommitted()
-  const expectedIds = new Set(committed.map((d) => d._id))
+  // The whole committed corpus — all three trees, or a tree's documents
+  // report as orphans.
+  const committed = readCorpus<AnyDoc>().map((entry) => entry.document)
 
   // Sanity keeps its own bookkeeping in the dataset — ACL groups, the
   // deployed schema, retention config — under `_.`-prefixed ids. They are not
@@ -155,7 +51,14 @@ async function main() {
   const live = await client.fetch<AnyDoc[]>(
     '*[!(_id in path("drafts.**")) && !(_id in path("_.**")) && !(_type match "sanity.*") && !(_type match "system.*")]',
   )
-  const liveById = new Map(live.map((d) => [d._id, d]))
+
+  // The lock flag for every live document in both its forms, read raw
+  // (`LOCK_FETCH_OPTIONS`) — a lock on a draft is invisible to the published
+  // perspective, and the orphan check has to see it the way `load` does.
+  const ids = live.flatMap((d) => [d._id, `drafts.${d._id}`])
+  const locks = await client.fetch<LockRow[]>(LOCKED_BY_ID, { ids }, LOCK_FETCH_OPTIONS)
+
+  const result = report(committed, live, locks)
 
   console.log(
     `brand ${brandArg()} · committed: ${committed.length} documents · ` +
@@ -163,154 +66,29 @@ async function main() {
       `${client.config().projectId}/${client.config().dataset}\n`,
   )
 
-  // 1. Everything committed is actually in the dataset. The count is the
-  //    headline check the ticket asks for (272 insights vs the WP
-  //    inventory), stated per type so a shortfall names itself.
-  const missing = committed.filter((d) => !liveById.has(d._id)).map((d) => `${d._id} not loaded`)
-  report('every committed document is in the dataset', missing)
+  const [inDataset, ...others] = result.checks
+  printCheck(inDataset!)
 
-  const countsByType = new Map<string, { committed: number; live: number }>()
-  for (const d of committed) {
-    const entry = countsByType.get(d._type) ?? { committed: 0, live: 0 }
-    countsByType.set(d._type, { ...entry, committed: entry.committed + 1 })
-  }
-  for (const d of live) {
-    const entry = countsByType.get(d._type) ?? { committed: 0, live: 0 }
-    countsByType.set(d._type, { ...entry, live: entry.live + 1 })
-  }
   console.log('  per type (committed → dataset):')
-  for (const [type, { committed: c, live: l }] of [...countsByType].sort()) {
+  for (const [type, { committed: c, live: l }] of result.counts) {
     console.log(`    ${type.padEnd(16)} ${String(c).padStart(4)} → ${String(l).padStart(4)}`)
   }
   console.log()
 
-  // 2. Every reference in the dataset resolves. A dangling reference renders
-  //    as a hole rather than an error, so nothing else surfaces it.
-  const dangling: string[] = []
-  for (const doc of live) {
-    for (const ref of new Set(refsIn(doc))) {
-      // Asset refs point at uploads rather than documents, so they are never in
-      // `live` and cannot be checked here. That they are the *right kind* of
-      // asset for the field holding them is check 3.
-      //
-      // A `briefs` entry is weak and points at a document this pipeline does
-      // not sync, so an absent brief is a state ADR 0027 accepts rather than a
-      // finding: nothing renders a brief, and a dataset-born one that survived
-      // no rebuild is exactly the standing bet that ADR took.
-      if (BRIEF_ID.test(ref)) continue
-      if (!liveById.has(ref) && !ref.startsWith('image-') && !ref.startsWith('file-')) {
-        dangling.push(`${doc._id} → ${ref}`)
-      }
-    }
-  }
-  report('every reference resolves', dangling)
+  for (const check of others) printCheck(check)
 
-  // 3. Every image field holds an image asset. A non-image upload in an image
-  //    field is the one shape that loads cleanly, passes check 2, and then
-  //    throws `Malformed asset _ref` during prerender — failing the entire
-  //    production build rather than dropping one image (#32). The renderer now
-  //    degrades instead, which makes this the only thing that reports it.
-  const wrongAssetKind: string[] = []
-  for (const doc of live) {
-    for (const { path, ref } of imageAssetRefs(doc)) {
-      if (!isImageAssetId(ref)) wrongAssetKind.push(`${doc._id} → ${path} = ${ref}`)
-    }
-  }
-  report('every image field holds an image asset', wrongAssetKind)
-
-  // 4. No image marker survived the load. A source marker left in the dataset
-  //    means the upload was skipped and the image is invisible. All three, by
-  //    the table in `load.ts`: a new source whose marker is missing here would
-  //    load its images as nothing and pass this check.
-  const unresolvedMedia = live
-    .filter((doc) => /"_(wpSrc|srcUrl|localSrc)":/.test(JSON.stringify(doc)))
-    .map((doc) => `${doc._id} still carries an unresolved image marker`)
-  report('every image resolved to an asset', unresolvedMedia)
-
-  // 5. Every document validates against its mapper's gate — the same gate
-  //    convert applied, re-run against what actually landed.
-  const invalid: string[] = []
-  for (const doc of live) {
-    const gate = GATES[doc._type]
-    if (!gate || (gate.only && !gate.only(doc))) continue
-    if (!gate.schema.safeParse(doc).success) invalid.push(`${doc._id} fails the ${doc._type} gate`)
-  }
-  report('every document validates against its schema gate', invalid)
-
-  // 6. Nothing in the dataset has a type the Studio schema does not define —
-  //    that document is invisible in Studio and unrenderable.
-  const unknownTypes = live
-    .filter((doc) => !SCHEMA_TYPE_NAMES.has(doc._type))
-    .map((doc) => `${doc._id} has unknown _type "${doc._type}"`)
-  report('every document type is in the schema', unknownTypes)
-
-  // 7. One slug, one document. Routes resolve `…[0]`, so a collision serves
-  //    a coin flip — and the offender is usually a document the pipeline
-  //    does not own, which no check over committed JSON can see.
-  const bySlug = new Map<string, string[]>()
-  for (const doc of live) {
-    if (!(ROUTABLE_TYPES as readonly string[]).includes(doc._type)) continue
-    const slug = (doc.slug as { current?: string } | undefined)?.current
-    if (!slug) continue
-    const key = `${doc._type}:${slug}`
-    bySlug.set(key, [...(bySlug.get(key) ?? []), doc._id])
-  }
-  report(
-    'no two documents claim the same slug',
-    [...bySlug]
-      .filter(([, ids]) => ids.length > 1)
-      .map(([key, ids]) => `${key} → ${ids.join(', ')}`),
-  )
-
-  // 8. Anything the pipeline did not put there. Not a failure on its own — an
-  //    editor may have created it — but during build-out it is usually
-  //    leftover scaffolding, and a routable one shadows a seed.
-  //    `brief` documents are owned by a different tool on purpose, and
-  //    `guidance` documents are a retired type production still holds
-  //    (`INTERNAL_TYPES`), so neither counts as an orphan.
-  const orphans = live
-    .filter((doc) => !isInternalType(doc._type))
-    .filter((doc) => !expectedIds.has(doc._id))
-    .map(
-      (doc) =>
-        `${doc._id} (${doc._type})${(ROUTABLE_TYPES as readonly string[]).includes(doc._type) ? ' — routable, so it can shadow a seed' : ''}`,
-    )
-  report('every document is committed under data/', orphans)
-
-  // 9. Provisional content (#40, ADR 0007). NOT a finding — placeholders are
-  //    how a route resolves before its real content exists, and failing on
-  //    them would make `verify` red for the whole build-out. But they are the
-  //    one class of document that must not survive to launch, so they get
-  //    counted out loud every run rather than discovered at the end.
-  const provisional = live
-    .map((doc) => ({ doc, migration: (doc.migration ?? {}) as Partial<Migration> }))
-    .filter(({ migration }) => migration.provisional === true)
-    .map(
-      ({ doc, migration }) =>
-        `${doc._id}${migration.provisionalNote ? ` — ${migration.provisionalNote}` : ''}`,
-    )
-  if (provisional.length > 0) {
+  if (result.provisional.length > 0) {
     console.log(
-      `\n⚠ provisional content (${provisional.length}) — not authoritative, clear before launch`,
+      `\n⚠ provisional content (${result.provisional.length}) — not authoritative, clear before launch`,
     )
-    for (const line of provisional) console.log(`    ${line}`)
+    for (const line of result.provisional) console.log(`    ${line}`)
   }
 
-  // 10. Sections added from the canvas that nobody has written yet (#112).
-  //     Reported here, under the same heading and by the same rule as the
-  //     documents above, because they are the same thing one tier down: content
-  //     that exists so the page has a shape, not because anyone meant it.
-  //
-  //     Also NOT a finding, and for a second reason. A placeholder is how a
-  //     block gets onto a page, so an editor mid-edit will always have one; the
-  //     failure this prevents is a placeholder nobody came back to reaching a
-  //     reader, and counting them out loud every run is what catches that.
-  const placeholders = untouchedPlaceholders(live)
-  if (placeholders.length > 0) {
+  if (result.placeholders.length > 0) {
     console.log(
-      `\n⚠ placeholder sections (${placeholders.length}) — inserted from the canvas and not yet written`,
+      `\n⚠ placeholder sections (${result.placeholders.length}) — inserted from the canvas and not yet written`,
     )
-    for (const line of placeholders) console.log(`    ${line}`)
+    for (const line of result.placeholders) console.log(`    ${line}`)
     // ⚠️ THE THING THAT SURPRISES PEOPLE, said where they will read it. The
     // committed JSON under `data/` is the source of truth during build-out
     // (ADR 0003), and `load` recreates every unlocked pipeline-owned document

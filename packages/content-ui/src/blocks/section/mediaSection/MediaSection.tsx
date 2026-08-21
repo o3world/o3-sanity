@@ -3,6 +3,7 @@ import type { SectionProps } from '@o3/content-runtime/blocks'
 import { stegaClean } from '@sanity/client/stega'
 
 import { SanityImage } from '../../../SanityImage'
+import { ARTICLE_COLUMN, FULL_BLEED } from '../../../imageSizes'
 import { resolveSurface } from '../../surface'
 
 type MediaSectionProps = SectionProps<'mediaSection'>
@@ -63,7 +64,7 @@ export function MediaSection({ media, variant, width, surface }: MediaSectionPro
                   alt={media.alt}
                   width={1650}
                   className="w-full rounded-[12px] shadow-[0_0_32px_0_rgba(0,0,0,0.4)]"
-                  sizes="(min-width: 1024px) 822px, 100vw"
+                  sizes={ARTICLE_COLUMN}
                 />
               </div>
             </div>
@@ -89,7 +90,7 @@ export function MediaSection({ media, variant, width, surface }: MediaSectionPro
                 alt={media.alt}
                 ratio="fill"
                 width={2400}
-                sizes="100vw"
+                sizes={FULL_BLEED}
               />
             </div>
             {media.caption ? (
@@ -112,7 +113,7 @@ export function MediaSection({ media, variant, width, surface }: MediaSectionPro
             alt={media.alt}
             width={1650}
             className="w-full shadow-[0_0_64px_0_rgba(0,0,0,0.1)]"
-            sizes="(min-width: 1024px) 822px, 100vw"
+            sizes={ARTICLE_COLUMN}
           />
           {media.caption ? (
             <figcaption className="text-fg-subtle mt-4 text-sm">{media.caption}</figcaption>

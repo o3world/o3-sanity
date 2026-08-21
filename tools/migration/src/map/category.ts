@@ -1,5 +1,6 @@
 import { z } from 'zod'
 
+import { migrationObject } from '../core/state'
 import { ok, type ExtractMeta, type Mapped } from './types'
 
 export interface WpCategory {
@@ -17,7 +18,7 @@ export const categoryDoc = z.object({
   _type: z.literal('category'),
   title: z.string().min(1),
   slug: z.object({ _type: z.literal('slug'), current: z.string().min(1) }),
-  migration: z.object({ locked: z.boolean(), sourceId: z.string() }),
+  migration: migrationObject,
 })
 
 export type CategoryDoc = z.infer<typeof categoryDoc>

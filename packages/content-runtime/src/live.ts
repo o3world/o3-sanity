@@ -1,5 +1,11 @@
+import { cookies, draftMode } from 'next/headers'
 import { createClient } from 'next-sanity'
-import { defineLive } from 'next-sanity/live'
+import {
+  defineLive,
+  resolvePerspectiveFromCookies,
+  resolveVariantFromCookies,
+  type LivePerspective,
+} from 'next-sanity/live'
 
 import { clientConfig } from '@o3/sanity/client'
 import { readsNeedToken } from '@o3/sanity/constants'
@@ -10,8 +16,12 @@ import { readsNeedToken } from '@o3/sanity/constants'
  * - `sanityFetch`: use in server components instead of `client.fetch`.
  *   Automatically switches to the draft insight when `draftMode()` is
  *   enabled (Presentation tool / preview links).
- * - `SanityLive`: rendered once in `(site)/layout.tsx`. Subscribes to
- *   Sanity's Live Content API and triggers revalidation when content changes.
+ * - `SanityLive`: rendered by `(site)/layout.tsx` only when draft mode is
+ *   enabled. It subscribes to Sanity's Live Content API and is what delivers
+ *   draft updates to Presentation. Published visitors deliberately don't get
+ *   it — each one would hold a Live connection and fire a server action per
+ *   publish; the Sanity webhook → `/api/revalidate` invalidates their cache
+ *   instead.
  *
  * The client is created here (not in `@o3/sanity`) with next-sanity's
  * `createClient` so stega encoding is available for Presentation overlays;
@@ -59,10 +69,23 @@ if (process.env.NODE_ENV === 'development' && !browserToken) {
   )
 }
 
+/**
+ * `strict: true` is the Cache Components contract (#266).
+ *
+ * Under `cacheComponents` next-sanity swaps in an implementation that calls
+ * `cacheTag()` and `cacheLife()`, so `sanityFetch` runs only inside a
+ * `'use cache'` function — where `draftMode()` and `cookies()` are
+ * unreadable. Strict mode makes that explicit rather than silent: every fetch
+ * must name its own `perspective` and `stega` (`currentReadMode` below), and
+ * `<SanityLive>` must name its own `includeDrafts`. Left to its defaults that
+ * last one is `false`, which is a preview that never updates and nothing in a
+ * log to say why.
+ */
 const live = defineLive({
   client,
   serverToken: readToken,
   browserToken: browserToken ?? false,
+  strict: true,
 })
 
 export const SanityLive = live.SanityLive
@@ -93,4 +116,50 @@ export const sanityFetch: typeof live.sanityFetch = (options) => {
     )
   }
   return live.sanityFetch(options)
+}
+
+/**
+ * Which cut of the dataset a request reads, and whether Presentation's
+ * overlay markers ride along with it (#266).
+ *
+ * Under Cache Components every `sanityFetch` runs inside a `'use cache'`
+ * boundary, and `draftMode()` and `cookies()` cannot be read in there — so
+ * `sanityFetch` cannot resolve these for itself. They are resolved out here
+ * and handed in as arguments, which also makes them part of the cache key, so
+ * a preview session's drafts can never land in the entry every other visitor
+ * shares.
+ */
+export interface ReadMode {
+  readonly perspective: LivePerspective
+  /** A Sanity editing variant id, when the preview session names one. */
+  readonly variant?: string
+  readonly stega: boolean
+}
+
+/**
+ * What an ordinary visitor gets. It is a constant because it has to be: a
+ * cached render is shared by everyone who asks for the route, so nothing
+ * about it may vary by request.
+ */
+const publishedRead: ReadMode = { perspective: 'published', stega: false }
+
+/**
+ * The read mode for the request being served. Resolve it outside every
+ * cached function and pass the result in.
+ *
+ * `draftMode()` is safe to read while prerendering — it answers `false` and
+ * marks nothing dynamic — so the published branch is what a static shell is
+ * built from. `cookies()` is only reached once draft mode says a Presentation
+ * session is on the other end, which never happens at build time.
+ */
+export async function currentReadMode(): Promise<ReadMode> {
+  const { isEnabled } = await draftMode()
+  if (!isEnabled) return publishedRead
+
+  const jar = await cookies()
+  return {
+    perspective: await resolvePerspectiveFromCookies({ cookies: jar }),
+    variant: await resolveVariantFromCookies({ cookies: jar }),
+    stega: true,
+  }
 }

@@ -36,10 +36,13 @@ const settings = JSON.parse(
 const O3_NAV_MARK = <BrandMark size={64} />
 const O3_FOOTER_MARK = <BrandMark trim size={128} className="lg:size-[148px]" />
 
+/** The footer prints the year it is handed; the layout is what resolves one. */
+const HANDED_YEAR = 2026
+
 const navHtml = renderToStaticMarkup(<SiteNav settings={settings} brandMark={O3_NAV_MARK} />)
 const utilityHtml = renderToStaticMarkup(<UtilityNav settings={settings} />)
 const footerHtml = renderToStaticMarkup(
-  <SiteFooter settings={settings} brandMark={O3_FOOTER_MARK} />,
+  <SiteFooter settings={settings} brandMark={O3_FOOTER_MARK} year={HANDED_YEAR} />,
 )
 
 /**
@@ -309,7 +312,7 @@ describe('site footer', () => {
     }
     expect(footerHtml).toContain(settings.legalName as string)
     expect(footerHtml).toContain(settings.copyrightNote as string)
-    expect(footerHtml).toContain(String(new Date().getFullYear()))
+    expect(footerHtml).toContain(String(HANDED_YEAR))
     // The legal row is `on-utility` (#AAA69E) — the component binds the same
     // variable here as the Utility Nav links (`2050:1226`), not the cool
     // `fg-subtle` grey the row shipped with (2026-08-13 token pass).
@@ -384,7 +387,9 @@ describe('every chrome destination is a route the build-out lands (#48)', () => 
 describe('the mark comes from the app, not the chrome', () => {
   const probe = <svg data-mark="probe" viewBox="0 0 1 1" />
   const probeNav = renderToStaticMarkup(<SiteNav settings={settings} brandMark={probe} />)
-  const probeFooter = renderToStaticMarkup(<SiteFooter settings={settings} brandMark={probe} />)
+  const probeFooter = renderToStaticMarkup(
+    <SiteFooter settings={settings} brandMark={probe} year={HANDED_YEAR} />,
+  )
 
   it.each([
     ['nav', probeNav],
@@ -415,7 +420,9 @@ describe('chrome degrades rather than crashing on an empty dataset', () => {
       renderToStaticMarkup(<SiteNav settings={null} brandMark={O3_NAV_MARK} />),
     ).not.toThrow()
     expect(() =>
-      renderToStaticMarkup(<SiteFooter settings={null} brandMark={O3_FOOTER_MARK} />),
+      renderToStaticMarkup(
+        <SiteFooter settings={null} brandMark={O3_FOOTER_MARK} year={HANDED_YEAR} />,
+      ),
     ).not.toThrow()
   })
 })

@@ -167,6 +167,40 @@ say so, name what would have to go, and let the human decide.
 **Two passes, and report the count.** A third pass is a rewrite chasing its own
 tail, and convergence is the reason for the cap rather than a budget.
 
+### The linter runs across the passes
+
+`${CLAUDE_PLUGIN_ROOT}/scripts/slop-lint.mjs` counts the machine tells that have
+a fixed shape — the throat-clearing opener, the weasel attribution, the trailing
+`-ing` clause, the recap ending. It is executed, not read. Write the body out
+before the first pass and again after the last, and compare the two:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/scripts/slop-lint.mjs" --delta before.md after.md
+```
+
+Add `--short` for a title, an excerpt, or a band's heading. The surfaces differ
+in one rule: short copy takes no em dash at all, body prose takes a pair where
+they beat the alternatives.
+
+**Read the delta, not the number.** The tool exits non-zero on one condition:
+the revision is denser than the draft, which means the passes moved tells around
+instead of removing them. An absolute count decides nothing. Approved O3 copy
+scores zero because every rule was calibrated against it (`scripts/fixtures/`),
+so a draft at zero has cleared a floor rather than earned a verdict.
+
+A **tell** is a defect — fix it inside the two passes. A **candidate** is a
+count, not a finding: the phrase is on a list slop.md marks conditional, so read
+the line and decide. Neither number moves on its own, and a rule that fires
+twice in one paragraph is usually one edit rather than two.
+
+Report the two densities and the rules that moved as part of this gate's note.
+
+**It does not decide gate 4, and it does not replace it.** The linter carries
+only the rules a regex can settle. Whether both halves of a contrast carry
+information, whether a closing line holds a fact or a mood, whether an adverb is
+doing work, whether the piece is symmetrical enough to read as generated — none
+of that is in it, and a clean run is not evidence about any of them.
+
 ## 4. `slop`
 
 The shapes a sentence-level pass does not catch: a paragraph that restates the
@@ -182,6 +216,10 @@ that treats them as one launders a style opinion into an edit:
 - a short paragraph, or a short sentence
 
 A tell is a pattern across the piece. One character is not.
+
+This gate is judgement by definition — everything mechanical was counted by the
+linter one gate earlier. A finding here cites what it saw in the piece, never a
+linter line.
 
 ## 5. `reader test`
 

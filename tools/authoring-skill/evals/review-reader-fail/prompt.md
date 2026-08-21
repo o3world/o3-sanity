@@ -5,6 +5,7 @@ plugins: ['../..']
 runs: 1
 max_turns: 50
 timeout_seconds: 1800
+# Server name is the plugin's `sanity`; grade.mjs matches this repo's `Sanity` case-insensitively.
 allowed_tools:
   [
     Skill,
@@ -15,6 +16,7 @@ allowed_tools:
     Task,
     WebSearch,
     WebFetch,
+    mcp__sanity__get_document,
     mcp__sanity__query_documents,
     mcp__sanity__get_schema,
     mcp__sanity__create_documents,
@@ -53,7 +55,7 @@ for character. It is a draft document, so what comes back is
   "draft": {
     "title": "Zero violations is not a passing grade",
     "excerpt": "An automated audit cleared all 42 templates in one client design system. Keyboard testing broke 11 of them. For anyone buying accessibility as a dashboard number, this is what the dashboard cannot see.",
-    "body": "[[richText]]\nThe audit came back clean. Priya's team ran axe-core against all 42 templates in the client's design system in March and it returned zero violations. We had been hired to find the problems, and the tooling said there were none. Then we opened the first template and pressed Tab.\n\n[[heading]]\n## What the keyboard found\n\n[[richText]]\nEleven of the 42 templates could not be operated without a mouse. Priya's manual pass found a modal that trapped focus outside itself, a carousel whose controls were unlabelled divs, and a filter panel that reordered its results and announced nothing. Each of the three had passed the scan an hour earlier.\n\n[[richText]]\nThe pattern in the eleven is worth sitting with. None of them is a property of a single element: whether focus lands somewhere useful is a question about a sequence, and whether a silent update reaches anyone is a question about time. The client's team had spent a year clearing findings from the same tool, and every fix had been a property of a single element.\n\n[[heading]]\n## The number measured the tool\n\n[[richText]]\nThe client had been reporting the zero to their board as an accessibility score. It was never that. A zero says the checker found nothing it knows how to look for, which is a statement about coverage and not about anyone trying to use the site. The eleven templates were the measurement; the dashboard was the thing being measured.\n\n[[richText]]\nRun the scan — it is cheap and it catches real defects. Then press Tab, and report that number instead."
+    "body": "The audit came back clean. Priya's team ran axe-core against all 42 templates in the client's design system in March and it returned zero violations. We had been hired to find the problems, and the tooling said there were none. Then we opened the first template and pressed Tab.\n\n## What the keyboard found\n\nEleven of the 42 templates could not be operated without a mouse. Priya's manual pass found a modal that trapped focus outside itself, a carousel whose controls were unlabelled divs, and a filter panel that reordered its results and announced nothing. Each of the three had passed the scan an hour earlier.\n\nThe pattern in the eleven is worth sitting with. None of them is a property of a single element: whether focus lands somewhere useful is a question about a sequence, and whether a silent update reaches anyone is a question about time. The client's team had spent a year clearing findings from the same tool, and every fix had been a property of a single element.\n\n## The number measured the tool\n\nThe client had been reporting the zero to their board as an accessibility score. It was never that. A zero says the checker found nothing it knows how to look for, which is a statement about coverage and not about anyone trying to use the site. The eleven templates were the measurement; the dashboard was the thing being measured.\n\n(pullQuote)\n\n> The eleven templates were the measurement. The dashboard was the thing being measured.\n\nRun the scan — it is cheap and it catches real defects. Then press Tab, and report that number instead."
   },
   "links": [],
   "gaps": [],

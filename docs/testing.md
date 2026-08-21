@@ -76,7 +76,8 @@ it('404s when nothing matches', async () => {
 ```
 
 `renderRoute` returns `{ html, metadata, calls }`. `calls` is every `sanityFetch` the render made —
-use it to assert cache tags and the stega-off rule on metadata.
+use it to assert cache tags and the stega-off rule on metadata. `expectNotFound` returns the same
+list, so a 404 is assertable on what it read rather than only on the fact that it 404'd.
 
 **Fixtures are typed against the generated query results** (`anInsight`, `aCaseStudy`,
 `anInsightsPage` in `@/test`). A query projection change breaks stale fixtures at compile time,
@@ -161,6 +162,17 @@ actually loads the picture, so a fabricated id would be a mockup of empty boxes.
 
 `seededSectionArgs(page, type)` gives a section block its "as seeded" story from the same source, so
 a block story cannot drift from the content the site ships.
+
+## The build's own output
+
+Rendering strategy is asserted one level above all three layers, against the build itself.
+`pnpm build:assert` reads `apps/web/.next` and fails when a route the allowlist does not permit
+is server-rendered on demand, naming the route. The allowlist is
+[`tools/build-assert/src/policy.ts`](../tools/build-assert/src/policy.ts), and CI runs the assertion
+as its own job. See [the tool's README](../tools/build-assert/README.md).
+
+This is why no route needs its own "is it static?" test: staticness is checked once, for every route
+there is.
 
 ## What is deliberately not here
 

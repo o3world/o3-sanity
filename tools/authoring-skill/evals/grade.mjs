@@ -12,6 +12,18 @@
 //   node grade.mjs <case-dir> <run-dir>   grade one run, print JSON
 //   node grade.mjs --validate <case-dir>  check the case format, exit 1 on error
 //
+// Evidence this engine cannot read is an error rather than a verdict: a
+// transcript line that does not parse, a tool call logged without its name or
+// its arguments, a transcript-reading grader with no transcript to read, or a
+// grader type outside the table. Each exits 1 with nothing on stdout.
+// Graded-anyway is the dangerous outcome, since the runner copies `passed` into
+// `aggregate-result.json` and leaves `detail` behind.
+//
+// The transcript is written by hand until `claude plugin eval` captures it, so
+// silence in it is ambiguous in a way silence from a real capture is not: a
+// call nobody logged and a call nobody made look identical, and a `min: 0`
+// grader passes on either. That ambiguity is refused rather than scored.
+//
 // A run directory holds what the runner captured:
 //   last-message.md   the run's final message
 //   transcript.jsonl  one JSON object per line, tool_use entries included
@@ -20,6 +32,8 @@ import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import { basename, join, relative, sep } from 'node:path'
 import { argv, exit } from 'node:process'
 import { pathToFileURL } from 'node:url'
+
+import { readRunId, unscope } from './fixtures.mjs'
 
 /** Grader types this engine decides. Anything else is deferred or invalid. */
 const MECHANICAL = ['regex', 'tool_used', 'tool_order', 'file_exists']
@@ -281,16 +295,40 @@ function globToRegExp(pattern) {
   return new RegExp(`^${source}$`)
 }
 
-/** What a grader looks at. Unreadable targets fail the grader, never throw. */
-function readTarget(runDir, target) {
-  const resolved = target ?? 'last_message'
+/**
+ * A run nobody settled still carries its tag on every id it wrote, so a grader
+ * naming the id the case names finds nothing produced. The tag is still on the
+ * file names, which makes this a detection rather than a guess.
+ */
+function stillTagged(runDir) {
+  const runId = readRunId(runDir)
+  if (!runId) return false
+  return workspaceFiles(runDir).some((file) => unscope(file, runId) !== file)
+}
+
+const SETTLE_HINT = ' — the run still carries its run-id tag; `fixtures.mjs settle <run-dir>` first'
+
+/**
+ * What a grader looks at. A missing produced file fails the grader; a missing
+ * transcript stops the grading, because that one is the harness's own capture
+ * rather than the run's output.
+ */
+function readTarget(runDir, grader) {
+  const resolved = grader.target ?? 'last_message'
   if (typeof resolved === 'object' && resolved.source === 'file') {
     const path = join(runDir, 'workspace', String(resolved.path))
     return existsSync(path)
       ? { text: readFileSync(path, 'utf8'), label: `file ${resolved.path}` }
-      : { text: null, label: `file ${resolved.path} (not produced)` }
+      : {
+          text: null,
+          label: `file ${resolved.path} (not produced)`,
+          hint: stillTagged(runDir) ? SETTLE_HINT : '',
+        }
   }
-  if (resolved === 'trace') return { text: readTranscript(runDir).raw, label: 'trace' }
+  if (resolved === 'trace') {
+    requireTranscript(runDir, grader, false)
+    return { text: readTranscript(runDir), label: 'trace' }
+  }
   if (resolved === 'files')
     return { text: workspaceFiles(runDir).join('\n'), label: 'produced file paths' }
   const path = join(runDir, 'last-message.md')
@@ -299,21 +337,107 @@ function readTarget(runDir, target) {
     : { text: null, label: 'last_message (not captured)' }
 }
 
+const TRANSCRIPT = 'transcript.jsonl'
+
+/** The transcript as text. Nothing is dropped, so a `trace` target sees it all. */
 function readTranscript(runDir) {
-  const path = join(runDir, 'transcript.jsonl')
-  if (!existsSync(path)) return { raw: '', entries: [] }
-  const raw = readFileSync(path, 'utf8')
-  const entries = raw
-    .split(/\r?\n/)
-    .filter((line) => line.trim())
-    .flatMap((line) => {
-      try {
-        return [JSON.parse(line)]
-      } catch {
-        return []
-      }
-    })
-  return { raw, entries }
+  const path = join(runDir, TRANSCRIPT)
+  return existsSync(path) ? readFileSync(path, 'utf8') : ''
+}
+
+/** What a bad `input` is, named the way the line reads rather than by typeof. */
+function describeInput(input) {
+  if (input === undefined) return 'missing'
+  if (input === null) return 'null'
+  return Array.isArray(input) ? 'an array' : `a ${typeof input}`
+}
+
+/**
+ * A `tool_use` line carries the call's name and the arguments object as sent.
+ * A line missing either is a call no grader can count: names are what
+ * `tool_used` matches on, and `input_match` tests its regex against those
+ * arguments serialised, so a sentence describing them counts the same as no
+ * call at all — and the grader it fails reads as a defect in the skill.
+ */
+function checkCall(entry, where) {
+  if (!entry.name)
+    throw new Error(
+      `${where} is a tool_use with no \`name\` — every grader that counts calls counts by name, ` +
+        'so a nameless line is a call that happened and cannot be seen. ' +
+        'Write the tool as you called it.',
+    )
+  if (typeof entry.input !== 'object' || entry.input === null || Array.isArray(entry.input))
+    throw new Error(
+      `${where}: \`input\` is ${describeInput(entry.input)}, not the arguments object — ` +
+        '`input_match` runs its regex over those arguments serialised, so a summary in their ' +
+        'place matches nothing and the call reads as never made. ' +
+        'Log the arguments you sent, verbatim; `summary` on a tool_result is the field that may ' +
+        'paraphrase.',
+    )
+}
+
+/**
+ * What a transcript-reading grader needs before its verdict means anything: a
+ * transcript, and — for the graders that count calls — at least one call in it.
+ * Absence is evidence only where the capture is mechanical. Here it is written
+ * by hand, so a run nobody logged is indistinguishable from a run that touched
+ * nothing, and the two settle the same way: `min: 0` passes on the silence and
+ * the report says the prohibition held.
+ */
+function requireTranscript(runDir, grader, needsCalls) {
+  const entries = transcriptEntries(runDir)
+  const silence =
+    entries.length === 0
+      ? 'records nothing'
+      : needsCalls && toolCalls(entries).length === 0
+        ? 'records no tool call'
+        : null
+  if (silence === null) return entries
+
+  const produced = workspaceFiles(runDir).length
+  throw new Error(
+    `${join(runDir, TRANSCRIPT)} ${silence}, and grader \`${grader.name}\` reads it. ` +
+      'A call nobody logged and a call nobody made are the same silence here, and a `min: 0` ' +
+      'grader passes on it — so the run is not graded rather than credited with a prohibition ' +
+      'nothing recorded. ' +
+      (produced > 0
+        ? `This run produced ${produced} file(s), so at least one call went unlogged. `
+        : '') +
+      'Write each line at the moment of the call, housekeeping and fixture seeds included, ' +
+      'and grade again.',
+  )
+}
+
+/**
+ * The transcript's lines as objects. A line that does not parse is evidence
+ * this engine cannot read, and dropping it is what turns a run into a verdict
+ * it did not earn: a `tool_used` grader counts one call short and reports FAIL,
+ * or counts zero against `max: 0` and reports PASS. Neither survives
+ * downstream — the runner copies `passed` into `aggregate-result.json` and
+ * `detail` does not travel with it — so a bad line ends the grading instead of
+ * colouring it.
+ */
+function transcriptEntries(runDir) {
+  const entries = []
+  const lines = readTranscript(runDir).split(/\r?\n/)
+  for (const [index, line] of lines.entries()) {
+    if (!line.trim()) continue
+    const where = `${join(runDir, TRANSCRIPT)} line ${index + 1}`
+    let entry
+    try {
+      entry = JSON.parse(line)
+    } catch (error) {
+      throw new Error(
+        `${where} does not parse — ${error.message}\n` +
+          `  ${line.length > 120 ? `${line.slice(0, 120)}…` : line}\n` +
+          'A line this engine cannot read is a tool call no grader can count, so nothing is graded. ' +
+          'One JSON object per line, written as the call happened — fix the line and grade again.',
+      )
+    }
+    if (entry?.type === 'tool_use') checkCall(entry, where)
+    entries.push(entry)
+  }
+  return entries
 }
 
 /**
@@ -340,8 +464,9 @@ function grade(grader, runDir) {
     }
 
   if (grader.type === 'regex') {
-    const { text, label } = readTarget(runDir, grader.target)
-    if (text === null) return { passed: false, score: 0, detail: `no ${label} to match against` }
+    const { text, label, hint } = readTarget(runDir, grader)
+    if (text === null)
+      return { passed: false, score: 0, detail: `no ${label} to match against${hint ?? ''}` }
     const flags = grader.flags ? String(grader.flags) : ''
     const expression = new RegExp(grader.pattern, flags.includes('g') ? flags : `${flags}g`)
     const count = [...text.matchAll(expression)].length
@@ -370,14 +495,16 @@ function grade(grader, runDir) {
       passed: hits.length > 0,
       score: hits.length > 0 ? 1 : 0,
       detail:
-        hits.length > 0 ? `matched ${hits.join(', ')}` : `nothing produced matches ${grader.path}`,
+        hits.length > 0
+          ? `matched ${hits.join(', ')}`
+          : `nothing produced matches ${grader.path}${stillTagged(runDir) ? SETTLE_HINT : ''}`,
     }
   }
 
   if (grader.type === 'tool_used') {
     const wanted = String(grader.tool).toLowerCase()
     const input = grader.input_match ? new RegExp(String(grader.input_match)) : null
-    const calls = toolCalls(readTranscript(runDir).entries).filter(
+    const calls = toolCalls(requireTranscript(runDir, grader, true)).filter(
       (call) => call.name === wanted && (!input || input.test(call.input)),
     )
     const min = grader.min === undefined ? 1 : Number(grader.min)
@@ -386,15 +513,23 @@ function grade(grader, runDir) {
     return { passed, score: passed ? 1 : 0, detail: `${calls.length} call(s) to ${grader.tool}` }
   }
 
-  const calls = toolCalls(readTranscript(runDir).entries).map((call) => call.name)
-  const before = calls.indexOf(String(grader.before).toLowerCase())
-  const after = calls.lastIndexOf(String(grader.after).toLowerCase())
-  const passed = before !== -1 && after !== -1 && before < after
-  return {
-    passed,
-    score: passed ? 1 : 0,
-    detail: `${grader.before} at ${before}, ${grader.after} at ${after}`,
+  if (grader.type === 'tool_order') {
+    const calls = toolCalls(requireTranscript(runDir, grader, true)).map((call) => call.name)
+    const before = calls.indexOf(String(grader.before).toLowerCase())
+    const after = calls.lastIndexOf(String(grader.after).toLowerCase())
+    const passed = before !== -1 && after !== -1 && before < after
+    return {
+      passed,
+      score: passed ? 1 : 0,
+      detail: `${grader.before} at ${before}, ${grader.after} at ${after}`,
+    }
   }
+
+  throw new Error(
+    `grader \`${grader.name}\`: unknown type \`${grader.type ?? 'none'}\` — ` +
+      `this engine decides ${MECHANICAL.join(', ')} and defers ${DEFERRED.join(', ')}. ` +
+      'Run `grade.mjs --validate <case-dir>` for the rest of what the case format rejects.',
+  )
 }
 
 /** Grade one finished run against one case. */
@@ -419,6 +554,13 @@ if (argv[1] && import.meta.url === pathToFileURL(argv[1]).href) {
     console.error('usage: grade.mjs <case-dir> <run-dir> | grade.mjs --validate <case-dir>')
     exit(1)
   } else {
-    console.log(JSON.stringify({ graders: gradeRun(args[0], args[1]) }, null, 2))
+    // Every grader is decided before a byte is printed, so a run this engine
+    // cannot read produces no JSON at all rather than a partial report.
+    try {
+      console.log(JSON.stringify({ graders: gradeRun(args[0], args[1]) }, null, 2))
+    } catch (error) {
+      console.error(error.message)
+      exit(1)
+    }
   }
 }

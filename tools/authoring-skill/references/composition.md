@@ -5,8 +5,9 @@ they paint, and which block carries which job. Read this with the schema — the
 per-block descriptions in `get_schema` say what one block is for, and this says
 how blocks sit next to each other.
 
-The prose inside one body is a different job. How a claim opens, turns and ends
-is `argument.md`.
+The prose inside one body is a different job. How a claim opens, turns and ends —
+and which subhead, pull quote, figure or stat gets lifted out of it — is
+`argument.md`.
 
 **A canonical Figma frame outranks everything here.** These are the conventions
 for assembling a page nobody has drawn yet. When a frame exists for the page,

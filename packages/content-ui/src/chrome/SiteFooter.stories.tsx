@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { figmaDesign } from '@o3/story-kit'
 import { BrandMark } from '@o3/ui'
 
-import { SITE_SETTINGS } from '../testing/seedContent'
+import { SITE_SETTINGS, STORY_YEAR } from '../testing/seedContent'
 
 import { SiteFooter } from './SiteFooter'
 
@@ -35,6 +35,7 @@ const meta = {
   args: {
     settings: SITE_SETTINGS,
     brandMark: <BrandMark trim size={128} className="lg:size-[148px]" />,
+    year: STORY_YEAR,
   },
   globals: { backgrounds: { value: 'ink' } },
 } satisfies Meta<typeof SiteFooter>

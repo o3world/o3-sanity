@@ -13,6 +13,14 @@ import { docTag, typeTag } from '@o3/content-runtime/routes'
  *                                 layout's siteSettings fetch subscribes to)
  *   - `sanity:<_type>:<slug>`   — exact doc invalidation
  *
+ * Every event ALSO flushes the routed content types wholesale. The queries
+ * dereference freely across documents — an insight embeds its author and
+ * categories, a page embeds case-study and insight cards, the nav derefs page
+ * titles — and a webhook payload cannot know which pages embed the changed
+ * doc. Publishes are rare and ISR regeneration is lazy (a page re-renders
+ * only when next requested), so flushing wide is cheap; serving a stale
+ * author bio forever is not.
+ *
  * Configure the webhook with a projection of `{_type, "slug": slug.current}`
  * and the shared secret in `SANITY_REVALIDATE_SECRET`.
  *
@@ -21,6 +29,11 @@ import { docTag, typeTag } from '@o3/content-runtime/routes'
  * development mode AND no configured secret — a set secret means the
  * operator opted into signature checks everywhere.
  */
+/** The types whose fetches routes subscribe to — every routed page carries at
+ * least one of these tags, so flushing them reaches every page that can embed
+ * the changed document. */
+const CONTENT_TYPES = ['page', 'insight', 'caseStudy', 'siteSettings'] as const
+
 type RevalidatePayload = {
   _type?: string
   _id?: string
@@ -53,12 +66,13 @@ export async function POST(req: NextRequest) {
       return new NextResponse('Bad request', { status: 400 })
     }
 
-    const tagsRevalidated: string[] = [typeTag(body._type)]
+    const tags = new Set<string>([typeTag(body._type), ...CONTENT_TYPES.map(typeTag)])
 
     const slug = resolveSlug(body.slug)
     if (slug) {
-      tagsRevalidated.push(docTag(body._type, slug))
+      tags.add(docTag(body._type, slug))
     }
+    const tagsRevalidated = [...tags]
 
     for (const tag of tagsRevalidated) {
       revalidateTag(tag, { expire: 0 })

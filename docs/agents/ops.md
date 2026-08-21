@@ -96,7 +96,7 @@ pnpm brief:sync               # brief markdown → brief documents
 pnpm brief:check              # fails if a file-backed brief drifted
 pnpm brief:export             # a dataset-born brief becomes a file in the repo
 pnpm schema:deploy            # deploy the schema so get_schema sees it
-pnpm schema:check             # fails if the deployed schema drifted from the repo
+pnpm schema:check             # fails if the deployed schema drifted (a CI gate — see below)
 pnpm figma:sync               # what changed in the design file since last sync
 pnpm skill:lint               # validate the o3sanity plugin's five skill files
 pnpm env:pull                 # restore apps/web/.env.local from Vercel
@@ -159,6 +159,27 @@ Two things to know before touching either project:
   project skipping. It still works, and it is what the two gates share; moving
   `xo-sanity-web` to the built-in mechanism would leave the CI-driven `o3` gate
   as the odd one out, so both stay on turbo until someone decides otherwise.
+
+## `schema:check` is a gate, not a chore
+
+Production keeps itself honest. Every push to main deploys the schema and then
+runs `pnpm schema:check` against `production`, and the deploy job fails if the
+two disagree — a `schema:deploy` can exit 0 without landing, or land against
+the wrong workspace. `promote.yml` asserts the same thing for the SHA it
+promotes, because that SHA is hand-picked and may be older than main. A
+scheduled run at 05:00 UTC (`nightly-schema-drift.yml`) catches what neither
+sees: a hand-run deploy pointed at the wrong dataset, a Studio-side edit, a
+push whose deploy job was cancelled. It files one tracking issue against map
+#63, re-comments on it each night the drift lasts, and closes it on the first
+clean run.
+
+So typing `pnpm schema:check` at a production checkout proves only what the
+last deploy job already proved. Where it is worth typing is a **local dataset**:
+nothing deploys a schema to `development` and nothing checks it, so that drift
+is yours to see, and yours after `pnpm dataset development` and a schema edit.
+
+No PR is gated on the state of a dataset. A branch that edits a schema is meant
+to be ahead of the deployed one until it merges.
 
 ## When a build fails on a missing dataset
 

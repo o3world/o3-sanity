@@ -12,7 +12,12 @@ import { BlockRenderer } from '@/content/blocks/BlockRenderer'
 import { FOOTER_MARK, NAV_MARK } from '@/brand/chromeMarks'
 import { SiteFooter, SiteNav } from '@o3/content-ui/chrome'
 
-import { SITE_SETTINGS, seededPage, type SeedPageName } from '@o3/content-ui/testing/seed'
+import {
+  SITE_SETTINGS,
+  STORY_YEAR,
+  seededPage,
+  type SeedPageName,
+} from '@o3/content-ui/testing/seed'
 
 /**
  * A whole page, chrome included, from committed content — what the `Pages`
@@ -54,7 +59,7 @@ export function PageMockup({ page }: { page: SeedPageName }) {
       <main>
         <BlockRenderer blocks={doc.sections ?? []} />
       </main>
-      <SiteFooter settings={SITE_SETTINGS} brandMark={FOOTER_MARK} />
+      <SiteFooter settings={SITE_SETTINGS} brandMark={FOOTER_MARK} year={STORY_YEAR} />
     </div>
   )
 }

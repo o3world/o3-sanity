@@ -31,28 +31,38 @@ const boom = new Error('the dataset said no')
 /**
  * Fails the render fetch and only the render fetch.
  *
- * `generateMetadata` and site settings read with `stega: false`, and
- * `renderRoute` runs metadata first — so a resolver that throws at every call
- * never reaches `Page`, which is where `notFound()` actually lives. Answering
- * the stega-free reads puts the throw exactly where the 404 would be.
+ * `renderRoute` runs `generateMetadata` first, and a resolver that throws at
+ * every call never reaches `Page` — which is where `notFound()` actually
+ * lives. So the reads `generateMetadata` makes are answered with a miss, which
+ * it gives up on quietly, and everything after them throws.
+ *
+ * The count is a parameter because it is a property of the route under test:
+ * three of the four builders read the document again for its metadata, and a
+ * collection index reads nothing because its SEO is static on the entry.
+ * Counting rather than reading the stega flag, because on a published request
+ * every read is stega-free and the two are indistinguishable.
  */
-function renderFetchThrows(call: { query: string; stega?: boolean }): unknown {
-  if (call.query === SITE_SETTINGS_QUERY) return siteSettings()
-  if (call.stega === false) return null
-  throw boom
+function throwsAfterMetadata(metadataReads: number): (call: { query: string }) => unknown {
+  let seen = 0
+  return (call) => {
+    if (call.query === SITE_SETTINGS_QUERY) return siteSettings()
+    seen += 1
+    if (seen <= metadataReads) return null
+    throw boom
+  }
 }
 
 describe('a fetch that throws', () => {
   it('surfaces from the singleton route as the error it is', async () => {
     await expect(
-      renderRoute(buildSingletonRoute(home), { data: renderFetchThrows }),
+      renderRoute(buildSingletonRoute(home), { data: throwsAfterMetadata(1) }),
     ).rejects.toThrow(boom)
   })
 
   it('surfaces from the catch-all route as the error it is', async () => {
     await expect(
       renderRoute(buildCatchAllRoute(CATCH_ALL_TYPES, PAGE_QUERY), {
-        data: renderFetchThrows,
+        data: throwsAfterMetadata(1),
         params: { segments: ['about'] },
       }),
     ).rejects.toThrow(boom)
@@ -61,7 +71,7 @@ describe('a fetch that throws', () => {
   it('surfaces from the detail route as the error it is', async () => {
     await expect(
       renderRoute(buildDetailRoute(insight), {
-        data: renderFetchThrows,
+        data: throwsAfterMetadata(1),
         params: { slug: 'anything' },
       }),
     ).rejects.toThrow(boom)
@@ -69,7 +79,7 @@ describe('a fetch that throws', () => {
 
   it('surfaces from a collection index rather than rendering an empty one', async () => {
     await expect(
-      renderRoute(buildIndexRoute(insightIndex), { data: renderFetchThrows }),
+      renderRoute(buildIndexRoute(insightIndex), { data: throwsAfterMetadata(0) }),
     ).rejects.toThrow(boom)
   })
 })

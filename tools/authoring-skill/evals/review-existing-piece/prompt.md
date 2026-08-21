@@ -5,6 +5,7 @@ plugins: ['../..']
 runs: 1
 max_turns: 50
 timeout_seconds: 1800
+# Server name is the plugin's `sanity`; grade.mjs matches this repo's `Sanity` case-insensitively.
 allowed_tools:
   [
     Skill,
@@ -15,6 +16,7 @@ allowed_tools:
     Task,
     WebSearch,
     WebFetch,
+    mcp__sanity__get_document,
     mcp__sanity__query_documents,
     mcp__sanity__get_schema,
     mcp__sanity__create_documents,
@@ -60,7 +62,9 @@ text character for character. It is a draft document, so what comes back is
       "_type": "block",
       "_key": "b2",
       "style": "h2",
-      "children": [{ "_type": "span", "_key": "b2s1", "text": "What the keyboard found", "marks": [] }]
+      "children": [
+        { "_type": "span", "_key": "b2s1", "text": "What the keyboard found", "marks": [] }
+      ]
     },
     {
       "_type": "block",

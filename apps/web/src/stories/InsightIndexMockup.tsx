@@ -4,7 +4,7 @@ import { InsightIndexView } from '@/content/documents/insight/InsightIndexView'
 import { FOOTER_MARK, NAV_MARK } from '@/brand/chromeMarks'
 import { SiteFooter, SiteNav } from '@o3/content-ui/chrome'
 
-import { INSIGHTS, SITE_SETTINGS } from '@o3/content-ui/testing/seed'
+import { INSIGHTS, SITE_SETTINGS, STORY_YEAR } from '@o3/content-ui/testing/seed'
 
 type IndexData = NonNullable<INSIGHTS_PAGE_QUERY_RESULT>
 
@@ -58,7 +58,7 @@ export function InsightIndexMockup({
           pagination={{ page, totalPages }}
         />
       </main>
-      <SiteFooter settings={SITE_SETTINGS} brandMark={FOOTER_MARK} />
+      <SiteFooter settings={SITE_SETTINGS} brandMark={FOOTER_MARK} year={STORY_YEAR} />
     </div>
   )
 }

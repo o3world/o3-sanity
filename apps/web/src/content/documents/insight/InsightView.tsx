@@ -2,6 +2,7 @@ import { ArticleByline, Eyebrow, ReadingProgress, SectionShell } from '@o3/ui'
 import type { INSIGHT_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { CarouselTrack, SanityImage } from '@o3/content-ui'
+import { ARTICLE_COLUMN, FULL_BLEED } from '@o3/content-ui/image-sizes'
 import { PortableTextBody } from '@o3/content-ui/portable-text'
 import { getCard } from '@o3/content-ui/cards'
 import { formatMonthYear } from '@o3/content-ui/format-date'
@@ -136,7 +137,10 @@ export function InsightView({
                 alt=""
                 ratio="fill"
                 width={2400}
-                sizes="100vw"
+                sizes={FULL_BLEED}
+                // The route's one priority image: the hero photograph fills
+                // the opening band, so it is the LCP element on every insight
+                // that has one.
                 priority
               />
             </div>
@@ -190,7 +194,7 @@ export function InsightView({
                 alt={featuredImage.alt ?? ''}
                 width={1644}
                 className="rounded-card w-full"
-                sizes="(min-width: 1024px) 822px, 100vw"
+                sizes={ARTICLE_COLUMN}
                 // Not `priority`: since #90 the same asset fills the hero,
                 // which is the LCP element and holds the preload. Two
                 // priority images of one picture only fight each other.

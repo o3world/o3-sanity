@@ -1,5 +1,6 @@
 import { z } from 'zod'
 
+import { migrationObject } from '../core/state'
 import type { WpChrome, WpMenuItem } from '../lib/chrome'
 import type { ConversionIssue } from '../lib/htmlToPortableText'
 import type { WpSiteSeo } from '../lib/yoast'
@@ -179,7 +180,7 @@ export const siteSettingsDoc = z.object({
   legalName: z.string().min(1),
   copyrightNote: z.string().optional(),
   defaultSeo: seoObject.optional(),
-  migration: z.object({ locked: z.boolean(), sourceId: z.string() }),
+  migration: migrationObject,
 })
 
 export type SiteSettingsDoc = z.infer<typeof siteSettingsDoc>

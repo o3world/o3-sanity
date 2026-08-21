@@ -68,6 +68,7 @@ export default defineConfig({
           // `.test.ts` only — the render layer's files are `.render.test.tsx`,
           // so the two layers cannot collect each other's tests by accident.
           include: [
+            'tools/build-assert/src/**/*.test.ts',
             'tools/figma-sync/src/**/*.test.ts',
             'tools/visual-regression/src/**/*.test.ts',
             'tools/migration/src/**/*.test.ts',
@@ -75,6 +76,9 @@ export default defineConfig({
             // The plugin's eval cases are data, and the grader engine that
             // reads them is the one part of the harness a machine can check.
             'tools/authoring-skill/evals/*.test.ts',
+            // The slop linter's own tests, including the calibration that
+            // pins it at zero hits over approved site copy.
+            'tools/authoring-skill/scripts/*.test.ts',
             'apps/web/src/**/*.test.ts',
             'apps/o3xo/src/**/*.test.ts',
             'packages/*/src/**/*.test.ts',

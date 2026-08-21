@@ -57,15 +57,20 @@ you talk yourself out of a step with is what the skill will be written against.
 One run directory per run, under
 `tools/authoring-skill/evals/results/<YYYY-MM-DDTHH-MM-SS>/<case>/<arm>-<n>/`:
 
-| Path               | What goes in it                                                   |
-| ------------------ | ----------------------------------------------------------------- |
-| `last-message.md`  | your final message, verbatim                                      |
-| `transcript.jsonl` | one JSON object per line, in order                                |
-| `workspace/`       | every file the run produced — this is the run's working directory |
-| `notes.md`         | where the prompt was ambiguous, and what you had to decide alone  |
+| Path               | What goes in it                                                        |
+| ------------------ | ---------------------------------------------------------------------- |
+| `last-message.md`  | your final message, verbatim                                           |
+| `transcript.jsonl` | one JSON object per line, in order                                     |
+| `workspace/`       | every file the run produced — this is the run's working directory      |
+| `notes.md`         | where the prompt was ambiguous, and what you had to decide alone       |
+| `run-id.txt`       | this run's tag, minted before anything is written to the dataset       |
+| `created-ids.txt`  | every document id the run brought into being, teardown's shopping list |
 
-Make the run directory first and work inside `workspace/`, so a grader that
-looks at produced files sees the run's output and nothing else.
+Make the run directory first, mint the tag into it, and work inside
+`workspace/`, so a grader that looks at produced files sees the run's output and
+nothing else. `run-id.txt` and `created-ids.txt` sit beside `workspace/` rather
+than in it, for the same reason `notes.md` does: they are the harness's, and
+nothing grades them.
 
 **Nothing about you goes in a workspace file.** Graders read those files as the
 run's output, so an aside about which tools you had available, or why you took
@@ -85,7 +90,9 @@ summary wearing a transcript's name.
 `"patches": "[set stage/verdict, insert gaps]"` in place of the real patch
 fails a grader the run actually satisfied, and the failure reads as a defect in
 the skill. `summary` on a `tool_result` is the one field that may paraphrase,
-because nothing is graded against what came back.
+because nothing is graded against what came back. A line whose `input` is a
+sentence rather than an object is refused outright — `grade.mjs` will not grade
+a run that carries one.
 
 **Every tool call gets a line. A call you did not log did not happen, as far as
 every `tool_used` and `tool_order` grader is concerned** — and the direction it
@@ -93,7 +100,15 @@ fails in is the dangerous one. `no-publish` asserts `min: 0, max: 0`, so an
 omitted call does not fail it: it passes, vacuously, and the suite reports that
 nothing was published because nothing was written down. Log the line at the
 moment of the call, including for calls you consider housekeeping — the schema
-read, the re-fetch, the teardown discard.
+read, the re-fetch, the fixture seed. Teardown is the one call that stays out,
+and it stays out because it happens after the transcript has closed.
+
+**The engine covers the total failure and nothing finer.** A transcript with no
+call recorded in it stops the grading rather than passing every prohibition in
+the case, so a transcript you never opened cannot be mistaken for a clean run.
+One line missing from twenty is still invisible, and that is the shape this
+takes in practice. Nobody downstream can tell an unlogged call from a call not
+made; you are the only one who can, and only while it is happening.
 
 Two mistakes to rule out before you report a `tool_used` failure, because both
 have been blamed wrongly. `grade.mjs` lowercases the tool name on both sides,
@@ -105,17 +120,37 @@ the run's behaviour.
 document it touched to `workspace/dataset/<document-id>.json`, fetched back
 from the dataset rather than copied from what you sent. That is what lets a
 dataset assertion be an ordinary `regex` grader over a produced file, and it is
-why cases need no Sanity-specific grader type.
+why cases need no Sanity-specific grader type. Name the file for the id you
+actually wrote, tag and all — `settle` renames it to the id the case names.
 
 ## What you grade with
 
+Settle the run first — an unsettled run still carries the tag, and every grader
+that names a fixture id fails against it:
+
 ```
+node tools/authoring-skill/evals/fixtures.mjs settle <run-dir>
 node tools/authoring-skill/evals/grade.mjs <case-dir> <run-dir>
 ```
 
 It applies every `regex`, `tool_used`, `tool_order` and `file_exists` grader
 and prints the `graders` array. Do not grade those by eye — the point of a
 mechanical grader is that it does not depend on you.
+
+**A non-zero exit is not a verdict.** `grade.mjs` prints nothing and exits 1
+when the evidence will not carry a judgement: a transcript line that does not
+parse, a `tool_use` line logged without its name or its arguments object, or a
+transcript-reading grader with no recorded call to read. Every one of those is
+your bookkeeping rather than the skill's behaviour. Fix the transcript and
+grade again — do not report a run the engine refused, and do not hand-grade
+around it.
+
+The one refusal that is not a mistake is a run that genuinely called nothing,
+which happens on a `without` arm where the bare model answers from memory
+instead of working. Do not invent a line to get past it. Report it as the
+finding it is — a run with nothing to log has nothing for these graders to
+weigh, and the last message and the reasoning behind it are what that baseline
+was for.
 
 `llm` graders come back `deferred`. Judge each one yourself against its
 `criteria` and rubric, looking only at its `target`, and replace the deferred
@@ -165,10 +200,60 @@ judge is a failure of the run, not a zero. Report it as one.
 ## What a run may touch
 
 The `development` dataset, drafts only. Never publish, never address
-`production`, never delete a document the run did not create. Documents a run
-creates are named `eval-<case>-<slug>` so a sweep can find them, and the run
-deletes them at the end unless the case says to keep them — in which case say
-in the report what was left behind and where.
+`production`, never delete a document the run did not create.
+
+Every run shares that dataset, so a case's fixture ids are the case's and the
+documents are one run's. Four steps, all of them
+`tools/authoring-skill/evals/fixtures.mjs`:
+
+**Mint the tag first**, before a single document exists:
+
+```
+node tools/authoring-skill/evals/fixtures.mjs new <run-dir>
+```
+
+**Tag every id the case names.** The fixture the prompt tells you to create, and
+every later mention of it — the read-back, the reference, the id you quote to
+the persona — goes into the dataset scoped. `scope` also writes the id to the
+ledger; `tag` is for the `key` or `slug` that pairs with a fixture id, which is
+a field rather than a document:
+
+```
+node …/fixtures.mjs scope <run-dir> brief-eval-typeset-insight
+node …/fixtures.mjs tag   <run-dir> eval-typeset-insight
+```
+
+**Record what the skill creates.** A piece document takes the id typeset derives
+from the slug, and no tag can reach it — that id shape is what the typeset cases
+check. Write it down at the moment of the create call, the same way a transcript
+line is written:
+
+```
+node …/fixtures.mjs record <run-dir> drafts.insight-a-library-hands-over-files
+```
+
+**Settle before you grade.** `settle` strips the tag out of `last-message.md`,
+`transcript.jsonl` and everything under `workspace/`, contents and file names
+both, so a grader written against `brief-eval-typeset-insight` matches the run
+that wrote `brief-eval-typeset-insight--k3f9q2`. Grading an unsettled run fails
+every id-bearing grader for a reason that has nothing to do with the skill:
+
+```
+node …/fixtures.mjs settle <run-dir>
+```
+
+Then tear down. `node …/fixtures.mjs teardown <run-dir>` prints the ids to
+discard, published and draft, and a `sweep` query that catches anything the
+ledger missed. Run the sweep, pass what both name to
+`mcp__sanity__discard_drafts`, and say in the report what you deleted — or, if
+the case says to keep its documents, what you left and where.
+
+**Teardown is yours, not the run's.** `CORE.md` gives discarding a draft to a
+human in Studio and every case prompt repeats it, so the agent following the
+skill must never delete anything. You are the harness: you delete after the last
+message is captured, outside the case's `allowed_tools`, and the calls are not
+transcript lines. A teardown logged as a transcript line reads to a grader as
+the skill discarding a draft.
 
 ## The report
 

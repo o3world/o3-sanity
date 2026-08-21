@@ -272,6 +272,13 @@ function curatedInsight(ref: unknown): InsightCard | null {
 /** Site Settings as `SITE_SETTINGS_QUERY` returns them — the real committed document. */
 export const SITE_SETTINGS = settingsDoc as unknown as SITE_SETTINGS_QUERY_RESULT
 
+/**
+ * The year the footer prints in a story. Fixed rather than read off the
+ * clock, so a screenshot taken on 31 December matches one taken the next
+ * morning.
+ */
+export const STORY_YEAR = 2026
+
 const SEED_PAGES = {
   index: pageIndex,
   about: pageAbout,

@@ -123,12 +123,32 @@ Question five asks for what it missed.
 something you can settle from what gathering found — settle it — or a gap, and a
 gap is recorded rather than asked twice.
 
+**One bounded clarifying question is round two finishing, not a third round.**
+An answer that could mean two things is not evidence yet, and the commonest case
+is a number with no denominator: "1,400 green runs — per step, or across the
+whole pipeline?" Ask it where it names the answer it is disambiguating and can
+be answered in a word, in the same exchange, never as a batch and never under a
+round heading. A question reaching for material they have not given you is not a
+clarification — that is a gap, and a gap is recorded.
+
 ## 4. The agreed thesis
 
 One sentence, put to them as a sentence rather than as a summary of the
 interview. Where they give you wording, the wording is theirs: this field is
 what every later stage is written to, so a tidied paraphrase is a piece written
 against something nobody agreed to.
+
+**One instance is a narrower thesis, or a gap they close.** Run what you hold
+past `argument.md`'s evidence bar before you put a sentence to them — its
+one-case line is the one that catches a brief, and no named instance at all
+fails it one step further down. Where a single instance is the whole of the
+evidence, the sentence you recommend is the narrower claim that instance
+carries. The general claim stands only where the brief says what it is waiting
+on: **a second instance**, on `gaps`, naming the claim it would have to carry
+and who could supply it. A human who wants the general sentence anyway gets it,
+with that line recorded — what is not available is committing to it silently,
+because the next stage takes the thesis as settled and narrowing it there costs
+stage 3 twice.
 
 Confirmed means they said yes to that sentence. Answering the questions is not
 confirmation, and neither is enthusiasm about the subject.

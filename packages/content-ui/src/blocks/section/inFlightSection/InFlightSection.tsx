@@ -7,6 +7,7 @@ import { fieldAttr } from '@o3/content-runtime/data-attribute'
 
 import { Mark, markProps } from '../../base/mark/Mark'
 import { SanityImage } from '../../../SanityImage'
+import { CARD_THREE_UP } from '../../../imageSizes'
 import { resolveButtonHref } from '../../../buttonDestination'
 import { resolveSurface } from '../../surface'
 
@@ -161,7 +162,7 @@ function EntryCard({ entry }: { entry: Entry }) {
           alt={entry.media?.alt ?? ''}
           ratio="fill"
           width={800}
-          sizes="(min-width: 1024px) 395px, 100vw"
+          sizes={CARD_THREE_UP}
           className="h-full w-full"
         />
       </div>

@@ -22,16 +22,15 @@ import {
 /**
  * No route builder may turn stega encoding on (#229).
  *
- * Stega is what makes Presentation's click-to-edit work, and next-sanity
- * already decides when it belongs: `defineLive`'s `sanityFetch` encodes only
- * when the server has a token, the client has a `studioUrl`, and the request
- * is in draft mode. A builder that passes `stega: true` overrides all three,
- * so every anonymous visitor gets the invisible characters too — which is what
- * shipped to both deployments until this file existed.
+ * Stega is what makes Presentation's click-to-edit work, and it belongs to
+ * draft sessions only. Every read a builder makes takes its `stega` flag from
+ * `currentReadMode`, whose published mode is stega-free — a builder that named
+ * `stega: true` itself would hand the invisible characters to every anonymous
+ * visitor, which is what shipped to both deployments until this file existed.
  *
- * The rule is therefore a negative: a body fetch says nothing about stega and
- * lets next-sanity gate it; a metadata fetch says `stega: false`, because
- * `<title>` and OG tags are text no browser renders and no gate should reach.
+ * `readMode.render.test.tsx` pins the mode threading on the detail and index
+ * builders; this file pins the negative — no builder, singleton and catch-all
+ * included, ever turns stega on for a published render.
  *
  * The stub behind `renderRoute` stands in for next-sanity, so what these pin
  * is the argument the builder passes, not the gate's own verdict.

@@ -1,26 +1,12 @@
 import { CASE_STUDY_SLUGS_QUERY } from '@o3/sanity/queries'
-import { buildDetailRoute } from '@o3/content-runtime/routes'
-import { sanityFetch } from '@o3/content-runtime/live'
+import { buildDetailRoute, publishedSlugs } from '@o3/content-runtime/routes'
 
 import { caseStudy } from '@/content/documents'
-
-export const dynamicParams = true
 
 const route = buildDetailRoute(caseStudy)
 
 export async function generateStaticParams() {
-  try {
-    const { data: slugs } = await sanityFetch({
-      query: CASE_STUDY_SLUGS_QUERY,
-      perspective: 'published',
-      stega: false,
-    })
-    return ((slugs ?? []) as Array<string | null>)
-      .filter((slug): slug is string => typeof slug === 'string' && slug !== '')
-      .map((slug) => ({ slug }))
-  } catch {
-    return []
-  }
+  return (await publishedSlugs(CASE_STUDY_SLUGS_QUERY)).map((slug) => ({ slug }))
 }
 
 export const generateMetadata = route.generateMetadata

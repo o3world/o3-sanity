@@ -1,16 +1,19 @@
 import type { NextConfig } from 'next'
+import { sanity } from 'next-sanity/live/cache-life'
 
 import { BRAND } from './brand'
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  // next-sanity's own profile, which pins time-based revalidation to a year:
+  // the publish webhook is what invalidates this site, not a clock.
+  cacheComponents: true,
+  cacheLife: { default: sanity },
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'cdn.sanity.io',
-      },
-    ],
+    // Sanity's image CDN does the resizing; Vercel's optimizer (billed per
+    // transformation) is bypassed entirely. See the loader for the mechanics.
+    loader: 'custom',
+    loaderFile: './src/lib/sanity-image-loader.ts',
   },
   /**
    * Which brand every module in this app resolves as (ADR 0028). `@o3/sanity`

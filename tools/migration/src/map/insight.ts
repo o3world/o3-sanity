@@ -8,6 +8,7 @@ import {
   normalizeUploadUrl,
   type ConversionIssue,
 } from '../lib/htmlToPortableText'
+import { migrationObject } from '../core/state'
 import type { WpSeo, WpSiteSeo } from '../lib/yoast'
 import { checkPathParity } from './paths'
 import type { PersonDirectory } from './person'
@@ -59,7 +60,7 @@ export const insightDoc = z.object({
   featuredImage: z.unknown().optional(),
   body: z.array(z.record(z.string(), z.unknown())).min(1),
   seo: seoObject.optional(),
-  migration: z.object({ locked: z.boolean(), sourceId: z.string() }).loose(),
+  migration: migrationObject.loose(),
 })
 
 export type InsightDoc = z.infer<typeof insightDoc>

@@ -6,7 +6,7 @@ import { describe, expect, it } from 'vitest'
 import { brandConfig } from '@o3/sanity/brand'
 import { SECTION_BLOCKS } from '@o3/sanity/schemas/registry'
 
-import { refsIn } from './lib/corpus'
+import { refsIn } from './core/read'
 import { dataRoot } from './lib/paths'
 import { categoryDoc } from './map/category'
 import { caseStudyDoc } from './map/caseStudy'
