@@ -130,6 +130,17 @@ actually loads the picture, so a fabricated id would be a mockup of empty boxes.
 `seededSectionArgs(page, type)` gives a section block its "as seeded" story from the same source, so
 a block story cannot drift from the content the site ships.
 
+## The build's own output
+
+Rendering strategy is asserted one level above all three layers, against the build itself.
+`pnpm build:assert` reads `apps/web/.next` and fails when a route the allowlist does not permit
+is server-rendered on demand, naming the route. The allowlist is
+[`tools/build-assert/src/policy.ts`](../tools/build-assert/src/policy.ts), and CI runs the assertion
+as its own job. See [the tool's README](../tools/build-assert/README.md).
+
+This is why no route needs its own "is it static?" test: staticness is checked once, for every route
+there is.
+
 ## What is deliberately not here
 
 - **No pixel-diff visual regression.** Baselines churn during an active redesign and drift across

@@ -46,6 +46,9 @@
     "tools/guidance": {
       "entry": ["src/brief-{sync,check,export}.ts", "sanity.cli.ts", "src/**/*.test.ts"]
     },
+    "tools/build-assert": {
+      "entry": ["src/assert.ts", "src/**/*.test.ts"]
+    },
     "tools/figma-sync": {
       "entry": ["src/sync.ts", "src/**/*.test.ts"]
     },
