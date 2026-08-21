@@ -307,10 +307,10 @@ no baselines are committed and nothing is uploaded. See
 `vr:skip` if its pixels are genuinely non-deterministic.
 
 **`pnpm build:assert` holds the build to its rendering strategy** (#265). Run it after
-`pnpm --filter @o3/web build`: it fails, naming the route, when a route the allowlist does not permit
+`pnpm --filter @o3/web build`. It fails, naming the route, when a route the allowlist does not permit
 is server-rendered on demand — the shape that bills a function invocation per page view. The
-allowlist is [`tools/build-assert/src/policy.ts`](./tools/build-assert/src/policy.ts) and changing it
-is a reviewed diff. CI runs it as its own job, so no route needs a test of its own for staticness.
+allowlist is [`tools/build-assert/src/policy.ts`](./tools/build-assert/src/policy.ts); CI runs the
+assertion as its own job. See [`tools/build-assert/README.md`](./tools/build-assert/README.md).
 
 Two rules that will otherwise cost an hour:
 

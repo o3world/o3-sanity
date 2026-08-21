@@ -1,8 +1,8 @@
 /**
  * What the build says about how each route renders (#265, spec #260).
  *
- * The ground truth is two manifests Next writes into `.next`, and nothing
- * else — no route-file parsing, no guessing from source:
+ * The ground truth is what Next writes into `.next` — no route-file parsing,
+ * no guessing from source:
  *
  *   - `app-path-routes-manifest.json` maps every app path to its route
  *     (`"/(site)/insights/page"` → `"/insights"`), so it is the full route
@@ -10,9 +10,11 @@
  *   - `prerender-manifest.json` lists what the build actually prerendered:
  *     `routes` holds concrete paths (each naming the route it came from in
  *     `srcRoute`), `dynamicRoutes` holds the parameterised routes themselves.
+ *   - `required-server-files.json` carries the resolved config, which is where
+ *     `cacheComponents` comes from.
  *
- * A route with no entry in either is one the server renders on demand for
- * every request — the shape that bills a function invocation per page view.
+ * A route the prerender manifest never mentions is one the server renders on
+ * demand for every request — the shape that bills a function invocation per page view.
  * That is the same set the build's own route table marks `ƒ (Dynamic)`.
  */
 
@@ -20,9 +22,9 @@
  * Set by Next on each prerender entry once PPR is on (`cacheComponents: true`).
  * Off, the field is absent.
  */
-export type RenderingMode = 'STATIC' | 'PARTIALLY_STATIC'
+type RenderingMode = 'STATIC' | 'PARTIALLY_STATIC'
 
-export interface PrerenderEntry {
+interface PrerenderEntry {
   /** The route this concrete path was generated from, or the path itself. */
   srcRoute?: string | null
   renderingMode?: RenderingMode
@@ -49,7 +51,7 @@ export interface BuildOutput {
  * shell and does not yet; Cache Components is what fixes it, and turning that
  * mode on stops honouring these entries.
  */
-export interface AllowedRoute {
+interface AllowedRoute {
   route: string
   kind: 'inherent' | 'migrating'
   reason: string

@@ -7,7 +7,7 @@ import type { BuildOutput, PrerenderManifest } from './rendering'
 const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..')
 
 /** Where `pnpm --filter @o3/web build` leaves its output. */
-export const WEB_DIST_DIR = join(REPO_ROOT, 'apps', 'web', '.next')
+const WEB_DIST_DIR = join(REPO_ROOT, 'apps', 'web', '.next')
 
 function readJson<T>(path: string): T {
   return JSON.parse(readFileSync(path, 'utf8')) as T
@@ -21,18 +21,20 @@ function readJson<T>(path: string): T {
  * the config or being told.
  */
 export function readBuildOutput(distDir: string = WEB_DIST_DIR): BuildOutput {
-  const prerenderManifest = join(distDir, 'prerender-manifest.json')
-  if (!existsSync(prerenderManifest)) {
-    throw new Error(`No build output at ${distDir} — run \`pnpm --filter @o3/web build\` first.`)
+  const appPathRoutes = join(distDir, 'app-path-routes-manifest.json')
+  const prerender = join(distDir, 'prerender-manifest.json')
+  const requiredServerFiles = join(distDir, 'required-server-files.json')
+
+  for (const file of [appPathRoutes, prerender, requiredServerFiles]) {
+    if (existsSync(file)) continue
+    throw new Error(`${file} is missing — run \`pnpm --filter @o3/web build\` first.`)
   }
 
-  const config = readJson<{ config: { cacheComponents?: boolean } }>(
-    join(distDir, 'required-server-files.json'),
-  ).config
+  const { config } = readJson<{ config: { cacheComponents?: boolean } }>(requiredServerFiles)
 
   return {
     cacheComponents: config.cacheComponents === true,
-    appPathRoutes: readJson<Record<string, string>>(join(distDir, 'app-path-routes-manifest.json')),
-    prerender: readJson<PrerenderManifest>(prerenderManifest),
+    appPathRoutes: readJson<Record<string, string>>(appPathRoutes),
+    prerender: readJson<PrerenderManifest>(prerender),
   }
 }

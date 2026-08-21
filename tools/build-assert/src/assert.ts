@@ -3,8 +3,8 @@
  *
  * Runs after `pnpm --filter @o3/web build`, over that build's own manifests.
  * One assertion today: the set of routes the server renders on demand is
- * exactly the allowlist in `policy.ts`. The JS budget from the bundle ticket
- * joins it here, on the same output and the same job.
+ * exactly the allowlist in `policy.ts`. The JS budget (#269) is measured
+ * against the same output and belongs on the same job.
  *
  * Pass a dist directory as the first argument to check some other build.
  */
@@ -19,16 +19,32 @@ function annotate(message: string): void {
   if (process.env.GITHUB_ACTIONS) console.log(`::error::${message}`)
 }
 
-function main(): void {
-  const build = readBuildOutput(process.argv[2])
+function report(build: ReturnType<typeof readBuildOutput>): void {
   const routes = allRoutes(build)
   const perRequest = perRequestRoutes(build)
+  const reasons = new Map(RENDERING_POLICY.perRequest.map((entry) => [entry.route, entry.reason]))
 
   console.log(
     `${routes.length} routes, ${perRequest.length} server-rendered on demand` +
       `${build.cacheComponents ? ', Cache Components on' : ''}`,
   )
-  for (const route of perRequest) console.log(`  ƒ ${route}`)
+  for (const route of perRequest) {
+    const reason = reasons.get(route)
+    console.log(`  ƒ ${route}${reason ? ` — ${reason}` : ''}`)
+  }
+}
+
+function main(): void {
+  let build
+  try {
+    build = readBuildOutput(process.argv[2])
+  } catch (error) {
+    console.error(error instanceof Error ? error.message : error)
+    process.exitCode = 1
+    return
+  }
+
+  report(build)
 
   const problems: Problem[] = checkRenderingStrategy(build, RENDERING_POLICY)
   if (problems.length === 0) {

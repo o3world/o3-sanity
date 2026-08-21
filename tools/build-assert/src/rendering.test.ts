@@ -45,6 +45,18 @@ describe('perRequestRoutes', () => {
   it('names the routes the build prerendered nothing for', () => {
     expect(perRequestRoutes(build)).toEqual(['/api/revalidate', '/insights', '/studio/[[...tool]]'])
   })
+
+  it('reads a null srcRoute as the path standing for itself', () => {
+    const nulled: BuildOutput = {
+      ...build,
+      prerender: {
+        ...build.prerender,
+        routes: { ...build.prerender.routes, '/robots.txt': { srcRoute: null } },
+      },
+    }
+
+    expect(perRequestRoutes(nulled)).not.toContain('/robots.txt')
+  })
 })
 
 describe('checkRenderingStrategy', () => {

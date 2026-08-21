@@ -54,13 +54,15 @@ jobs:
           fi
 
   # What the build says about how it renders (#265). Its own job, after the
-  # build: `needs: checks` means the `--filter=@o3/web build` below is a turbo
-  # cache restore rather than a second build, and the manifests it restores are
-  # the assertion's ground truth. Never gated on `--affected` — a change that
-  # flips a route dynamic can land anywhere in the graph, and the whole point
-  # is that nobody has to think about which files those are.
+  # build it reads: `needs: checks` lets the build below come back from the
+  # turbo cache the checks job filled, and builds for real when it cannot.
+  # Either way the manifests in `.next` are the assertion's ground truth.
   #
-  # The JS budget from the bundle ticket rides on this job.
+  # Never gated on `--affected` — a change that flips a route to per-request
+  # rendering can land anywhere in the graph, and the whole point is that
+  # nobody has to work out which files those are.
+  #
+  # The JS budget (#269) reads the same output and belongs on this job.
   build-assert:
     name: build assertions
     needs: checks
