@@ -10,8 +10,12 @@ import { readsNeedToken } from '@o3/sanity/constants'
  * - `sanityFetch`: use in server components instead of `client.fetch`.
  *   Automatically switches to the draft insight when `draftMode()` is
  *   enabled (Presentation tool / preview links).
- * - `SanityLive`: rendered once in `(site)/layout.tsx`. Subscribes to
- *   Sanity's Live Content API and triggers revalidation when content changes.
+ * - `SanityLive`: rendered by `(site)/layout.tsx` only when draft mode is
+ *   enabled. It subscribes to Sanity's Live Content API and is what delivers
+ *   draft updates to Presentation. Published visitors deliberately don't get
+ *   it — each one would hold a Live connection and fire a server action per
+ *   publish; the Sanity webhook → `/api/revalidate` invalidates their cache
+ *   instead.
  *
  * The client is created here (not in `@o3/sanity`) with next-sanity's
  * `createClient` so stega encoding is available for Presentation overlays;

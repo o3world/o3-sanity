@@ -5,12 +5,10 @@ import { GENERATED_REDIRECTS } from './src/lib/redirects.generated'
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'cdn.sanity.io',
-      },
-    ],
+    // Sanity's image CDN does the resizing; Vercel's optimizer (billed per
+    // transformation) is bypassed entirely. See the loader for the mechanics.
+    loader: 'custom',
+    loaderFile: './src/lib/sanity-image-loader.ts',
   },
   /**
    * The WordPress redirect map, resolved to terminals (#24).
