@@ -18,9 +18,14 @@ import { getCliClient } from 'sanity/cli'
 
 import { ROUTABLE_TYPES } from '@o3/sanity/constants'
 import { schemaTypes } from '@o3/sanity/schemas'
-import type { Migration } from '@o3/sanity/types/generated'
 
-import { describeSlugCollision, slugCollisions, slugRowsOf } from './core/state'
+import {
+  describeSlugCollision,
+  isProvisional,
+  provisionalNote,
+  slugCollisions,
+  slugRowsOf,
+} from './core/state'
 import { isImageAssetId } from './lib/media'
 import { BRIEF_ID, CORPUS_DIRS, isInternalType, refsIn } from './lib/corpus'
 import { untouchedPlaceholders } from './lib/placeholders'
@@ -226,13 +231,10 @@ async function main() {
   //    them would make `verify` red for the whole build-out. But they are the
   //    one class of document that must not survive to launch, so they get
   //    counted out loud every run rather than discovered at the end.
-  const provisional = live
-    .map((doc) => ({ doc, migration: (doc.migration ?? {}) as Partial<Migration> }))
-    .filter(({ migration }) => migration.provisional === true)
-    .map(
-      ({ doc, migration }) =>
-        `${doc._id}${migration.provisionalNote ? ` — ${migration.provisionalNote}` : ''}`,
-    )
+  const provisional = live.filter(isProvisional).map((doc) => {
+    const note = provisionalNote(doc)
+    return `${doc._id}${note ? ` — ${note}` : ''}`
+  })
   if (provisional.length > 0) {
     console.log(
       `\n⚠ provisional content (${provisional.length}) — not authoritative, clear before launch`,

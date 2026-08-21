@@ -7,7 +7,9 @@ import {
   ROUTABLE_SLUGS,
   describeSlugCollision,
   isLocked,
+  isProvisional,
   lockedIds,
+  provisionalNote,
   slugCollisions,
   slugRowsOf,
 } from './state'
@@ -112,5 +114,28 @@ describe('slug collisions', () => {
     expect(ROUTABLE_SLUGS).toBe(
       '*[_type in $types && defined(slug.current) && !(_id in path("drafts.**"))]{_id, _type, "slug": slug.current}',
     )
+  })
+})
+
+/**
+ * Provisional content (#40, ADR 0007) is how a route resolves before its real
+ * content exists. Never a finding — it is a count `verify` says out loud every
+ * run, because the failure it prevents is a placeholder nobody came back to
+ * reaching a reader.
+ */
+describe('the provisional predicate', () => {
+  it('is true only for a document stamped provisional', () => {
+    expect(isProvisional({ migration: { provisional: true } })).toBe(true)
+    expect(isProvisional({ migration: { provisional: false } })).toBe(false)
+    expect(isProvisional({ migration: { locked: false, sourceId: 'wp:post:1' } })).toBe(false)
+    expect(isProvisional({})).toBe(false)
+  })
+
+  it('reads the note that says what is still missing', () => {
+    expect(
+      provisionalNote({ migration: { provisional: true, provisionalNote: 'copy pending' } }),
+    ).toBe('copy pending')
+    expect(provisionalNote({ migration: { provisional: true } })).toBeUndefined()
+    expect(provisionalNote({})).toBeUndefined()
   })
 })

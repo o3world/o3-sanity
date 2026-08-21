@@ -7,6 +7,7 @@
  * by fixtures instead of by a live dataset.
  */
 import { ROUTABLE_TYPES } from '@o3/sanity/constants'
+import type { Migration } from '@o3/sanity/types/generated'
 
 /** The lock flag as the projections below return it, published or draft. */
 export interface LockRow {
@@ -51,6 +52,34 @@ export function isLocked(row: LockRow): boolean {
  */
 export function lockedIds(rows: readonly LockRow[]): Set<string> {
   return new Set(rows.filter(isLocked).map((row) => bareId(row._id)))
+}
+
+/**
+ * Content that exists so a route resolves, not because anyone meant it
+ * (#40, ADR 0007). Never a finding — `verify` counts it out loud so the class
+ * of document that must not survive to launch is visible every run rather
+ * than discovered at the end.
+ */
+export function isProvisional(doc: WithMigration): boolean {
+  return migrationOf(doc).provisional === true
+}
+
+/** What a provisional document says is still missing, if it says. */
+export function provisionalNote(doc: WithMigration): string | undefined {
+  return migrationOf(doc).provisionalNote
+}
+
+/**
+ * Any document, read for its `migration` object only. The index signature is
+ * what lets a whole dataset row satisfy it without a cast.
+ */
+interface WithMigration {
+  readonly migration?: unknown
+  readonly [key: string]: unknown
+}
+
+function migrationOf(doc: WithMigration): Partial<Migration> {
+  return (doc.migration ?? {}) as Partial<Migration>
 }
 
 /** A routable document's slug, flattened out of `slug.current`. */
