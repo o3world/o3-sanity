@@ -29,7 +29,7 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  args: { settings: chromeSettings },
+  args: { settings: chromeSettings, year: 2026 },
 }
 
 /**
@@ -39,5 +39,6 @@ export const Default: Story = {
 export const NoLinkRow: Story = {
   args: {
     settings: { ...chromeSettings, utilityNavItems: [], legalLinks: [] } as unknown as Settings,
+    year: 2026,
   },
 }

@@ -4,6 +4,7 @@ import { SITEMAP_QUERY } from '@o3/sanity/queries'
 import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
 import { getBaseUrl } from '@o3/content-runtime/base-url'
 import { sanityFetch } from '@o3/content-runtime/live'
+import { typeTag } from '@o3/content-runtime/routes'
 
 interface SitemapRow {
   slug: string | null
@@ -31,6 +32,23 @@ function entry(
  * map there is nothing to exclude. When it does, the exclusion belongs here in
  * the same shape.
  */
+/**
+ * `sanityFetch` calls `cacheTag()` under Cache Components, so it runs inside
+ * a `'use cache'` function or not at all. Explicit type tags so
+ * `/api/revalidate` reaches this read — without them the sitemap would stay
+ * frozen at its build-time content.
+ */
+async function readSitemapRows() {
+  'use cache'
+  const { data } = await sanityFetch({
+    query: SITEMAP_QUERY,
+    perspective: 'published',
+    stega: false,
+    tags: ['page', 'insight', 'caseStudy'].map(typeTag),
+  })
+  return data
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = getBaseUrl()
   const entries: MetadataRoute.Sitemap = [
@@ -40,11 +58,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]
 
   try {
-    const { data } = await sanityFetch({
-      query: SITEMAP_QUERY,
-      perspective: 'published',
-      stega: false,
-    })
+    const data = await readSitemapRows()
 
     for (const row of (data?.insights ?? []) as SitemapRow[]) {
       if (!row.slug) continue

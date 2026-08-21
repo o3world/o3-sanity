@@ -33,7 +33,10 @@ const settings = JSON.parse(
 ) as Settings
 
 const navHtml = renderToStaticMarkup(<SiteNav settings={settings} />)
-const footerHtml = renderToStaticMarkup(<SiteFooter settings={settings} />)
+/** The footer prints the year it is handed; the layout is what resolves one. */
+const HANDED_YEAR = 2026
+
+const footerHtml = renderToStaticMarkup(<SiteFooter settings={settings} year={HANDED_YEAR} />)
 
 const groups = (settings.navItems ?? []).filter(
   (item): item is NavGroup => item._type === 'navGroup',
