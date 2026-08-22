@@ -7,9 +7,9 @@
     "format": "prettier --write .",
     "lint": "eslint src/",
     "schema:check": "tsx src/schema-check.ts",
-    "schema:deploy": "sanity schema deploy",
+    "schema:deploy": "tsx src/schema-deploy.ts",
     "typecheck": "tsc --noEmit",
-    "typegen": "sanity schema extract --force --path=schema.json && sanity typegen generate"
+    "typegen": "sanity schema extract --workspace model --force --path=schema.json && sanity typegen generate"
   },
   "dependencies": {
     "@o3/block-spec": "workspace:*",

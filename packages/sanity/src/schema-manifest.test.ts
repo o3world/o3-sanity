@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { deployedTypes, repoSchemaFile, repoTarget } from './schema-manifest'
+import { deployedTypes, repoSchemaFile, repoTarget, straySchemaDocs } from './schema-manifest'
 
 describe('repoSchemaFile', () => {
   /* `sanity manifest extract` writes one hash-named schema file per workspace
@@ -57,5 +57,34 @@ describe('deployedTypes', () => {
    * the dataset is emptiest. */
   it('throws when the workspace has no deployed schema, rather than comparing against nothing', () => {
     expect(() => deployedTypes([], 'default')).toThrow(/default/)
+  })
+})
+
+describe('straySchemaDocs', () => {
+  /* A dataset keeps every schema document ever deployed to it: switching the
+   * deploy to brand-named workspaces leaves the old whole-model
+   * `_.schemas.default` behind, still declaring `faqSection` to every
+   * schema-driven writer that reads the project (#252). Comparing only the
+   * expected workspace would pass right over it. The ids come from a GROQ
+   * query against the one dataset under check — `sanity schemas list` walks
+   * every workspace in the config, so it cannot say which dataset a document
+   * actually lives in. */
+  it('names every deployed schema the brand workspace does not account for', () => {
+    const ids = [{ _id: '_.schemas.o3' }, { _id: '_.schemas.default' }]
+
+    expect(straySchemaDocs(ids, 'o3')).toEqual(['_.schemas.default'])
+  })
+
+  it('answers empty when the only deployed schema is the expected one', () => {
+    expect(straySchemaDocs([{ _id: '_.schemas.o3xo' }], 'o3xo')).toEqual([])
+  })
+
+  /* `--tag` deploys write `_.schemas.<workspace>.tag.<tag>` — a different
+   * schema surface for the same project, which nothing in this repo does on
+   * purpose. */
+  it('treats a tagged deploy of the same workspace as a stray', () => {
+    const ids = [{ _id: '_.schemas.o3' }, { _id: '_.schemas.o3.tag.experiment' }]
+
+    expect(straySchemaDocs(ids, 'o3')).toEqual(['_.schemas.o3.tag.experiment'])
   })
 })

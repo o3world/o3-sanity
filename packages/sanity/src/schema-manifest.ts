@@ -57,6 +57,31 @@ interface DeployedSchemaDocument {
   readonly schema?: string
 }
 
+/**
+ * Every deployed schema in one dataset that the expected workspace does not
+ * account for.
+ *
+ * A dataset keeps each workspace's schema as its own document and a deploy
+ * only ever upserts its own, so a workspace that stops being deployed — or was
+ * deployed by hand under another name — stays behind, declaring types the
+ * brand's roster does not. Whatever reads the project trusts any schema it
+ * finds there, so the check has to fail on the document's existence, not just
+ * diff the expected one.
+ *
+ * The ids must come from a query against the dataset under check
+ * (`*[_id in path("_.schemas.**")]`): `sanity schemas list` aggregates every
+ * workspace in the config, so its rows cannot say which dataset a document
+ * lives in.
+ */
+export function straySchemaDocs(
+  ids: readonly { readonly _id?: string }[],
+  workspaceName: string,
+): string[] {
+  return ids
+    .map((entry) => entry._id ?? '(unidentified schema document)')
+    .filter((id) => id !== `_.schemas.${workspaceName}`)
+}
+
 /** The deployed types for one workspace, parsed out of the stored document. */
 export function deployedTypes(
   payload: readonly DeployedSchemaDocument[],

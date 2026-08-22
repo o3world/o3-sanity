@@ -95,7 +95,7 @@ pnpm typegen                  # schema.json + generated types, after a schema ed
 pnpm brief:sync               # brief markdown → brief documents
 pnpm brief:check              # fails if a file-backed brief drifted
 pnpm brief:export             # a dataset-born brief becomes a file in the repo
-pnpm schema:deploy            # deploy the schema so get_schema sees it
+pnpm schema:deploy            # deploy this brand's roster so get_schema sees it
 pnpm schema:check             # fails if the deployed schema drifted (a CI gate — see below)
 pnpm figma:sync               # what changed in the design file since last sync
 pnpm skill:lint               # validate the o3sanity plugin's five skill files
@@ -166,7 +166,16 @@ Production keeps itself honest. Every push to main deploys the schema and then
 runs `pnpm schema:check` against `production`, and the deploy job fails if the
 two disagree — a `schema:deploy` can exit 0 without landing, or land against
 the wrong workspace. `promote.yml` asserts the same thing for the SHA it
-promotes, because that SHA is hand-picked and may be older than main. A
+promotes, because that SHA is hand-picked and may be older than main. Pushes
+to `integration/o3xo` do the same for O3XO's project (`deploy-xo-web.yml`),
+ahead of kicking the site build.
+
+What a deploy publishes is **this brand's roster**, not the whole model
+(#252): `NEXT_PUBLIC_BRAND` picks the project and the blocks its schema
+declares, so a schema-driven writer — `get_schema`, the typeset skill — is
+never offered a band the brand's app cannot render. The check fails on any
+schema document in the dataset that the deploy did not write, so a whole-model
+deploy from an old checkout cannot sit beside the brand's quietly. A
 scheduled run at 05:00 UTC (`nightly-schema-drift.yml`) catches what neither
 sees: a hand-run deploy pointed at the wrong dataset, a Studio-side edit, a
 push whose deploy job was cancelled. It files one tracking issue against map
