@@ -78,7 +78,14 @@ export function straySchemaDocs(
   workspaceName: string,
 ): string[] {
   return ids
-    .map((entry) => entry._id ?? '(unidentified schema document)')
+    .map((entry) => {
+      if (!entry._id) {
+        throw new Error(
+          'a schema document came back without an `_id` — the query shape has shifted',
+        )
+      }
+      return entry._id
+    })
     .filter((id) => id !== `_.schemas.${workspaceName}`)
 }
 

@@ -48,6 +48,9 @@ function sanity(args: string[]): string {
 
 function describe(drift: Drift): string {
   if (drift.kind === 'field-missing') return `${drift.path} is not in the deployed schema`
+  if (drift.kind === 'deployed-extra') {
+    return `${drift.path} is deployed but not in this brand's roster — a stale or whole-model deploy wrote it`
+  }
   return [
     `${drift.path} describes itself differently`,
     `        repo: ${drift.repo ?? '(none)'}`,
