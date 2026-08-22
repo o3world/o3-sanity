@@ -1,0 +1,13 @@
+{
+  "_id": "category-framer-technology",
+  "_type": "category",
+  "title": "Technology",
+  "slug": {
+    "_type": "slug",
+    "current": "technology"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:category:technology"
+  }
+}

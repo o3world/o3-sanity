@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import { PAGE_QUERY } from '@o3/sanity/queries'
 
-import { buildCatchAllRoute } from '@/lib/content-routes/build'
+import { buildCatchAllRoute } from '@o3/content-runtime/routes'
 import { CATCH_ALL_TYPES } from '@/content/documents'
 import { aMigratedPage, renderRoute, siteSettings, withSettings } from '@/test'
 

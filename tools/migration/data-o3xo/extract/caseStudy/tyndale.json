@@ -1,0 +1,56 @@
+{
+  "_meta": {
+    "type": "caseStudy"
+  },
+  "slug": "tyndale",
+  "path": "/case-studies/tyndale",
+  "collectionItemId": "GTabpMUP_",
+  "title": "Transforming safety expertise into lead generation",
+  "titleRendered": "Case Study: AI-Driven Product Insights | O3XO",
+  "deck": "Tyndale's extensive library of safety knowledge wasn't reaching the people who needed it most. Here's how we helped them bridge that gap.",
+  "heroImage": {
+    "url": "https://framerusercontent.com/images/jNInp4nFBXq0w8VYfj0vKbPzU.webp",
+    "alt": "Field engineer reviewing project plans, representing AI-driven content insight and product intelligence"
+  },
+  "chapters": [
+    {
+      "kicker": "Opportunity",
+      "title": "The hidden value in expert content",
+      "bodyHtml": "<p dir=\"auto\" class=\"framer-text framer-styles-preset-jswlfd\">Tyndale USA has built a reputation as a leading provider of flame-resistant and arc flash protective clothing, backed by years of safety expertise captured in videos, blog posts, and technical guidance. But like many B2B companies, they faced a challenge: electricians, oil and gas workers, and contractors often didn't fully understand the safety risks associated with their safety apparel, leading them to choose potentially dangerous alternatives.</p><p dir=\"auto\" class=\"framer-text framer-styles-preset-jswlfd\">Meanwhile, Tyndale's extensive content library - while highly valuable and comprehensive - was not easily navigable or intuitive to locate, making it difficult to surface during critical decision-making moments. With a goal to improve Tyndale's ability to identify, reach and connect with a wider audience, and a wealth of existing content to work with, Tyndale was ready to explore how AI could transform their safety knowledge into a more accessible resource that would educate prospects while demonstrating Tyndale's expertise and value.</p>"
+    },
+    {
+      "kicker": "Solution",
+      "title": "From scattered content to centralized guidance",
+      "bodyHtml": "<p dir=\"auto\" class=\"framer-text framer-styles-preset-jswlfd\">O3XO led Tyndale through our comprehensive AI strategy workshop, mapping their customer journey to identify key pain points where prospects struggled with safety knowledge and appropriate product selection. The solution we developed is called FRCoach. It consolidates Tyndale's entire content library and product database into an intelligent chat interface that provides instant, personalized safety guidance.</p><p dir=\"auto\" class=\"framer-text framer-styles-preset-jswlfd\">Rather than requiring prospects to search through extensive blog archives or commit to watching full video content, FRCoach delivers quick, specific answers to safety questions while naturally introducing relevant Tyndale expertise and solutions. The system integrates video transcripts, blog content, safety guidelines, and product data into a unified knowledge base that addresses everything from NFPA 70E requirements to product details.</p>"
+    }
+  ],
+  "stats": [
+    {
+      "value": "20+ new contacts",
+      "label": "Created on average per week"
+    }
+  ],
+  "quote": {
+    "text": "\"FRCoach is a game changer. While we developed it to answer technical questions and provide product recommendations for our customers and prospects, a side benefit is that our team members use it as a resource as well. O3XO was an excellent partner throughout the development process.\"",
+    "attribution": "Barbara Fitzgeorge, VP of Marketing, Tyndale USA"
+  },
+  "card": {
+    "slug": "tyndale",
+    "client": "Tyndale",
+    "subject": "AI-driven product insight",
+    "headline": "See how we turned years of expert content into new client connections",
+    "stat": {
+      "value": "20+ new contacts",
+      "label": "Created on average per week"
+    },
+    "image": {
+      "url": "https://framerusercontent.com/images/jNInp4nFBXq0w8VYfj0vKbPzU.webp",
+      "alt": "Field engineer reviewing project plans, representing AI-driven content insight and product intelligence"
+    }
+  },
+  "seo": {
+    "canonicalRendered": "https://www.o3xo.ai/case-studies/tyndale",
+    "descriptionOverride": "See how Tyndale transformed expert content into new client connections with AI-powered product insight, generating 20+ new contacts per week on average.",
+    "ogImage": "https://framerusercontent.com/images/jNInp4nFBXq0w8VYfj0vKbPzU.webp?width=394&height=250"
+  }
+}

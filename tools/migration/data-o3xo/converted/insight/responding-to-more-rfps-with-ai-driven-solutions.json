@@ -1,0 +1,349 @@
+{
+  "_id": "insight-framer-responding-to-more-rfps-with-ai-driven-solutions",
+  "_type": "insight",
+  "title": "RFP automation case study",
+  "slug": {
+    "_type": "slug",
+    "current": "responding-to-more-rfps-with-ai-driven-solutions"
+  },
+  "excerpt": "How AI can help reduce time responding to RFPs and boost sales success",
+  "publishedAt": "2026-02-20T12:00:00Z",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-framer-functions",
+      "_key": "cat-functions"
+    }
+  ],
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_srcUrl": "https://framerusercontent.com/images/gaC9AGJgGweo7rKtJxOJS21LC4.png"
+    },
+    "alt": "Man reviewing documents at desk with laptop"
+  },
+  "body": [
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Handling Requests for Proposals (RFPs) is a demanding and time-intensive task for sales and marketing teams, especially in large organizations managing hundreds of proposals annually. RFP responses often require pulling together content from vast data repositories, referencing previous proposals, and ensuring accuracy and consistency—all while under tight deadlines. This manual process places significant strain on internal resources, diverting staff from core strategic initiatives and improving their ability to grow revenue.",
+          "_key": "k0003"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "O3 recently partnered with a global technology firm",
+          "_key": "k0005"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " that faced these exact challenges. With a high volume of RFPs to manage, their team was overwhelmed by the repetitive, manual nature of the process, which consumed valuable time and effort. Our goal was to reimagine how they could approach RFPs using AI-driven automation.",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.o3world.com/work/rfp-automation/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our approach: Streamlining the RFP process with AI",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We began with a collaborative workshop to map the firm’s current RFP response journey and identify areas where AI could make a meaningful impact. The vision was clear: a solution that could break down RFPs, automate repetitive tasks like searching through old proposals, and empower sales teams by getting them 80% of the way toward a completed response, while maintaining control and accuracy. For companies that offer complex and unique products and solutions, no off-the-shelf proposal tool is going to fit the bill. We needed to create something simple yet uniquely catered to our clients process to address the issue.",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The solution: Generative AI-powered RFP automation",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Our team developed a Generative AI solution designed to support their sales team by simplifying the entire process. Key features of the digital experience included:",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Content normalization",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The AI-engine ingested hundreds of historical RFP responses and structured the data for consistent and accurate reuse, enabling the tool to pull from past content",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Automation for repetitive tasks",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The system can automatically pull relevant content, including repetitive Q&A, reducing the need for manual copying and pasting.",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Speed and accuracy",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The product prioritized generating content quickly while ensuring alignment with the firm’s standards and messaging. By building a system on top of their companies data, the AI-driven database responds only with their unique information, and in their companies brand voice and tone.",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Feedback loop",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A continuous feedback mechanism updated the dataset with new information, keeping responses current and up to date. This mechanism allows them to tweak the product and improve the results over time.",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The Results: Saving time and money",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The typical time to respond to a 100-question RFP decreased from 11 hours to just 6 hours—a 40% reduction in effort. This significant time savings allows the RFP team to focus more on strategic messaging and the quality of the responses, leading to higher throughput and a better use of staff resources.",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Additionally, we were able to make the case to completely replace expensive, existing software in order to leverage the AI solution in its place. This not only equates to significant dollars saved in the coming years, but also, by leaning into the data-set we created for other use cases like managing technical support documentation, the organization can avoid additional costs and actually create new revenue opportunities.",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Rethinking RFP management: A new vision for sales teams",
+          "_key": "k0038"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0039",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Imagine a future where your AI-driven proposal tool becomes a true productivity partner—automatically breaking down complex RFPs, suggesting optimized responses, and freeing your sales team to focus on what they do best: building relationships and closing deals. O3’s AI-driven RFP automation solution transforms how organizations approach proposal management, reducing stress while driving greater efficiency.",
+          "_key": "k0040"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0041",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If you’re ready to explore how AI can transform your critical business processes, ",
+          "_key": "k0042"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "let’s connect",
+          "_key": "k0043"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". Together, we can build solutions that empower your teams and drive measurable results.",
+          "_key": "k0044"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "../contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "Discover how O3 helped a global tech firm reduce RFP response time by 40% using AI-driven automation. Learn how to streamline your sales process today."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:insight:moHdkSZcl"
+  }
+}

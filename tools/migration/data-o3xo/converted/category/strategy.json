@@ -1,0 +1,13 @@
+{
+  "_id": "category-framer-strategy",
+  "_type": "category",
+  "title": "Strategy",
+  "slug": {
+    "_type": "slug",
+    "current": "strategy"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:category:strategy"
+  }
+}

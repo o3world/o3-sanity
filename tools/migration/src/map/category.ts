@@ -12,7 +12,9 @@ export interface WpCategory {
 }
 
 export const categoryDoc = z.object({
-  _id: z.string().regex(/^category-wp-\d+$/),
+  /* `-wp-<termId>` for a WordPress category, `-framer-<slug>` for one of the
+   * eyebrows o3xo.ai authors as free text (`map/framer.ts`). */
+  _id: z.string().regex(/^category-(wp-\d+|framer-[a-z0-9-]+)$/),
   _type: z.literal('category'),
   title: z.string().min(1),
   slug: z.object({ _type: z.literal('slug'), current: z.string().min(1) }),

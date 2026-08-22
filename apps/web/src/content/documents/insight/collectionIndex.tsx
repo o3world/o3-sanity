@@ -2,9 +2,9 @@ import { INSIGHTS_PAGE_QUERY } from '@o3/sanity/queries'
 import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
 import type { INSIGHTS_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 
+import { defineIndexType, type IndexRendererProps } from '@o3/content-runtime/routes'
+
 import { InsightIndexView } from './InsightIndexView'
-import { defineIndexType } from '@/lib/content-routes/define'
-import type { IndexRendererProps } from '@/lib/content-routes/types'
 
 type Props = IndexRendererProps<typeof INSIGHTS_PAGE_QUERY>
 

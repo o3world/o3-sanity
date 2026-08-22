@@ -1,0 +1,13 @@
+{
+  "_id": "category-framer-industries",
+  "_type": "category",
+  "title": "Industries",
+  "slug": {
+    "_type": "slug",
+    "current": "industries"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:category:industries"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "_meta": {
+    "type": "caseStudy"
+  },
+  "slug": "buffalo-construction",
+  "path": "/case-studies/buffalo-construction",
+  "collectionItemId": "CGj9neZAD",
+  "title": "From “where do we start?” to AI across the project lifecycle in under six months",
+  "titleRendered": "Buffalo Construction Case Study: AI-powered construction operations | O3XO",
+  "deck": "Buffalo Construction had the ambition and the executive support, but no clear path to AI adoption. Here’s how we helped them go from a workshop to three working AI solutions spanning estimating, closeout, and proposals.",
+  "heroImage": {
+    "url": "https://framerusercontent.com/images/XZAaYCnfLhIbvoeDAaPx4EOwxvQ.webp",
+    "alt": "Construction team reviewing architectural blueprints, representing AI-powered project closeout automation"
+  },
+  "chapters": [
+    {
+      "kicker": "Opportunity",
+      "title": "Strong ambition, no clear starting point",
+      "bodyHtml": "<p dir=\"auto\" class=\"framer-text framer-styles-preset-jswlfd\">Buffalo Construction has built a solid reputation delivering quality projects across the country, backed by almost three decades of project data and a tech stack spanning Procore, Sage, and SharePoint. Leadership was enthusiastic about AI’s potential to improve how they estimate, close out projects, and win new work. But like many construction companies, that enthusiasm was running ahead of a plan.</p><p dir=\"auto\" class=\"framer-text framer-styles-preset-jswlfd\">Teams across estimating, project management, and marketing each saw AI opportunities, but without a shared framework for evaluating them, the question was always the same: where do we start? Varying levels of AI fluency, siloed data, and uncertainty around ROI were holding the organization back. Buffalo didn’t just need a roadmap. They needed working tools their teams would actually adopt.</p>"
+    },
+    {
+      "kicker": "Solution",
+      "title": "Three AI solutions built on the systems Buffalo already uses, with more on the way",
+      "bodyHtml": "<p dir=\"auto\" class=\"framer-text framer-styles-preset-jswlfd\">O3XO built three distinct AI tools, each targeting a specific workflow. An estimator assistant that interprets detailed Spec Documents and packages to surface key requirements directly from Procore. A closeout automation system that tracks vendor documents, detects billing readiness, and automates follow-ups across ~80 projects per year. And an RFP content engine that reuses core proposal content, summarizes past project experience, and organizes case studies and team bios to cut proposal effort in half. Each tool integrates with Buffalo’s existing Procore and Sage environment so adoption happens within existing workflows.</p><p dir=\"auto\" class=\"framer-text framer-styles-preset-jswlfd\">O3XO led Buffalo through a structured AI strategy workshop with 12 stakeholders across estimating, accounting, project controls, and operations. Two cross-functional teams mapped the full project lifecycle, surfaced friction points, and co-created use case concepts with clear success criteria. From there, the team prioritized two POCs, moved directly into build, and expanded to a third. Now the work is evolving toward connecting these individual solutions into an interconnected system spanning the full project lifecycle, with smart human-in-the-loop checkpoints at every stage.</p>"
+    }
+  ],
+  "stats": [
+    {
+      "value": "2X",
+      "label": "Revenue capacity from 3 AI solutions in < 6 months"
+    }
+  ],
+  "quote": {
+    "text": "“I was expecting the ROI for our project next year, but we are going to immediately see that value now.”",
+    "attribution": "Brett Norton, President, Buffalo Construction, Inc"
+  },
+  "card": {
+    "slug": "buffalo-construction",
+    "client": "Buffalo Construction",
+    "subject": "AI-powered construction operations",
+    "headline": "From “where do we start?” to AI across the project lifecycle in under six months",
+    "stat": {
+      "value": "2X",
+      "label": "Revenue capacity from 3 AI solutions"
+    },
+    "image": {
+      "url": "https://framerusercontent.com/images/XZAaYCnfLhIbvoeDAaPx4EOwxvQ.webp",
+      "alt": "Construction team reviewing architectural blueprints, representing AI-powered project closeout automation"
+    }
+  },
+  "seo": {
+    "canonicalRendered": "https://www.o3xo.ai/case-studies/buffalo-construction",
+    "descriptionOverride": "See how Buffalo Construction went from AI ambition to three working solutions across estimating, closeout, and proposals in under six months",
+    "ogImage": "https://framerusercontent.com/images/XZAaYCnfLhIbvoeDAaPx4EOwxvQ.webp?width=394&height=250"
+  }
+}

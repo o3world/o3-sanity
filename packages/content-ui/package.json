@@ -1,0 +1,51 @@
+{
+  "name": "@o3/content-ui",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "format": "prettier --write .",
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@o3/block-spec": "workspace:*",
+    "@o3/content-runtime": "workspace:*",
+    "@o3/sanity": "workspace:*",
+    "@o3/ui": "workspace:*"
+  },
+  "devDependencies": {
+    "@o3/story-kit": "workspace:*",
+    "@o3/tailwind-config": "workspace:*",
+    "@o3/typescript-config": "workspace:*",
+    "@sanity/client": "^7.26.0",
+    "@storybook/nextjs-vite": "^10.4.1",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "next": "^16.2.4",
+    "next-sanity": "^13.2.3",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "storybook": "^10.4.1",
+    "tailwindcss": "^4.2.4",
+    "typescript": "^5.7.0",
+    "vitest": "^4.1.10"
+  },
+  "peerDependencies": {
+    "@sanity/client": "^7",
+    "next": "^16",
+    "next-sanity": "^13",
+    "react": "^19"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./cards": "./src/cards/index.ts",
+    "./chrome": "./src/chrome/index.ts",
+    "./format-date": "./src/lib/format-date.ts",
+    "./image-sizes": "./src/imageSizes.ts",
+    "./portable-text": "./src/portable-text/PortableTextBody.tsx",
+    "./testing": "./src/testing/index.ts",
+    "./testing/seed": "./src/testing/seedContent.ts"
+  }
+}

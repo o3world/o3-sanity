@@ -1,0 +1,105 @@
+{
+  "_id": "page-framer-contact",
+  "_type": "page",
+  "title": "Ready to move from AI potential to performance?",
+  "slug": {
+    "_type": "slug",
+    "current": "contact"
+  },
+  "pageType": "standard",
+  "sections": [
+    {
+      "_type": "heroSection",
+      "_key": "hero",
+      "variant": "band",
+      "headlineLines": [
+        "Ready to move from AI potential to performance?"
+      ],
+      "subheading": "Let’s discuss how O3XO can help you identify high-impact AI use cases and deliver measurable results quickly.",
+      "decoration": "none"
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "routes",
+      "surface": "bone",
+      "layout": "rail",
+      "rail": "label",
+      "heading": "Start the conversation",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "have-specific-questions",
+          "railLabel": "Have specific questions?",
+          "heading": "Have specific questions?",
+          "body": "Discuss your AI goals and challenges with our team to determine the best path forward.",
+          "button": {
+            "_type": "button",
+            "label": "Schedule a strategy call",
+            "href": "https://calendly.com/milos-o3world/o3xo-meeting"
+          }
+        },
+        {
+          "_type": "panel",
+          "_key": "ready-to-get-started",
+          "railLabel": "Ready to get started?",
+          "heading": "Ready to get started?",
+          "body": "Get personalized insights into the AI opportunities that matter most for your business in under 10 minutes.",
+          "button": {
+            "_type": "button",
+            "label": "Take the AI assessment",
+            "href": "http://assessment.o3world.com/"
+          }
+        },
+        {
+          "_type": "panel",
+          "_key": "need-to-reach-us-directly",
+          "railLabel": "Need to reach us directly?",
+          "heading": "Need to reach us directly?",
+          "body": "info@o3world.com",
+          "button": {
+            "_type": "button",
+            "label": "Email us",
+            "href": "mailto:info@o3world.com"
+          }
+        }
+      ]
+    },
+    {
+      "_type": "featureGridSection",
+      "_key": "what-to-expect",
+      "surface": "white",
+      "layout": "grid",
+      "decoration": "none",
+      "heading": "What to expect",
+      "features": [
+        {
+          "_type": "feature",
+          "_key": "discovery-conversation",
+          "heading": "Discovery conversation",
+          "body": "We'll discuss your business priorities, current challenges, and AI readiness to determine if there's a good fit."
+        },
+        {
+          "_type": "feature",
+          "_key": "ai-assessment-workshop",
+          "heading": "AI assessment workshop",
+          "body": "For qualified opportunities, we'll work together to facilitate a collaborative session to identify your highest-impact AI use cases."
+        },
+        {
+          "_type": "feature",
+          "_key": "activation-roadmap",
+          "heading": "Activation roadmap",
+          "body": "Following the workshop, receive a detailed proposal with prioritized initiatives, timeline, and expected ROI for your AI activation plan."
+        }
+      ]
+    }
+  ],
+  "seo": {
+    "description": "Ready to activate AI advantage? Contact O3XO to discuss your AI strategy, implementation roadmap, and how we can help drive measurable results for your organization."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:page:contact",
+    "provisional": true,
+    "provisionalNote": "Migrated from o3xo.ai band by band into O3’s block roster (#220). Provisional because the composition is a translation rather than a design: the hero carries no background photograph, curated case-study and insight cards are left to be derived, and anything the source does not serve is absent rather than invented. Cleared when the adaptation delta is reviewed and the page is composed against O3XO’s own design."
+  }
+}

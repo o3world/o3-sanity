@@ -142,6 +142,34 @@ jobs:
             exit 1
           fi
 
+  # A mapper and its committed corpus can disagree without anything going red:
+  # `convert` only ever runs by hand, so a mapping change nobody regenerated
+  # sits in the tree until someone runs the pipeline and reads the diff. On the
+  # typegen-drift shape, for both brands.
+  #
+  # No Sanity token and no network: `convert` reads the brand's extract tree and
+  # writes its converted tree. The brand is a flag, so nothing here depends on
+  # NEXT_PUBLIC_BRAND. `--intent-to-add` is what makes a mapper that starts
+  # emitting a *new* file fail too — `git diff` alone ignores untracked files.
+  convert-drift:
+    name: convert drift
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: Convert o3
+        run: pnpm --filter @o3/migration convert
+      - name: Convert O3XO
+        run: pnpm --filter @o3/migration convert -- --brand o3xo
+      - name: Fail on drift
+        run: |
+          git add --intent-to-add -- tools/migration/data tools/migration/data-o3xo
+          if ! git diff --exit-code -- tools/migration/data tools/migration/data-o3xo; then
+            echo "::error::A converted corpus is stale — run 'convert' for both brands and commit the result."
+            exit 1
+          fi
+
   # The o3sanity plugin is not a workspace package, so `turbo run lint` never
   # visits it. Its own job, on the typegen-drift shape.
   skill-lint:

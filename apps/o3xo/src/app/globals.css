@@ -1,0 +1,19 @@
+@import 'tailwindcss';
+@import '@o3/tailwind-config/theme.css';
+@import '@o3/tailwind-config-o3xo/theme.css';
+
+/*
+ * The order above is load-bearing: the O3XO package is a brand LAYER, not a
+ * standalone theme — it re-points the base theme's custom properties under
+ * `:root[data-brand='o3xo']` and declares nothing the base theme has not
+ * already declared. Imported alone it paints nothing.
+ *
+ * Tailwind v4 auto-discovers sources from the importing project's file tree,
+ * but doesn't follow into sibling workspace packages by default. Declare them
+ * explicitly or the utilities used inside the shared components are never
+ * emitted — and a missing @source reads as a broken component rather than a
+ * missing line here.
+ */
+@source '../../../../packages/ui/src/**/*.{ts,tsx}';
+@source '../../../../packages/content-ui/src/**/*.{ts,tsx}';
+@source '../../../../packages/editor-chrome/src/**/*.{ts,tsx}';

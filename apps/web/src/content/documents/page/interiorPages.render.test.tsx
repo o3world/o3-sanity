@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { PAGE_QUERY } from '@o3/sanity/queries'
 import type { RailPanelsSection } from '@o3/sanity/types/generated'
 
-import { buildCatchAllRoute } from '@/lib/content-routes/build'
+import { buildCatchAllRoute } from '@o3/content-runtime/routes'
 import { CATCH_ALL_TYPES } from '@/content/documents'
 import {
   aSeededPage,

@@ -82,7 +82,8 @@ pnpm frontier                 # READY / BLOCKED / CLAIMED across every open map
 pnpm frontier 63              # one map
 pnpm wt new <n>               # claim a ticket, branch it, worktree it, install
 
-pnpm dev:web                  # the site
+pnpm dev:web                  # the o3 site
+pnpm dev:o3xo                 # the o3xo site (its own port pool, its own project)
 pnpm storybook                # the component library
 pnpm down                     # stop what dev started
 
@@ -94,12 +95,70 @@ pnpm typegen                  # schema.json + generated types, after a schema ed
 pnpm brief:sync               # brief markdown → brief documents
 pnpm brief:check              # fails if a file-backed brief drifted
 pnpm brief:export             # a dataset-born brief becomes a file in the repo
-pnpm schema:deploy            # deploy the schema so get_schema sees it
+pnpm schema:deploy            # deploy this brand's roster so get_schema sees it
 pnpm schema:check             # fails if the deployed schema drifted (a CI gate — see below)
 pnpm figma:sync               # what changed in the design file since last sync
 pnpm skill:lint               # validate the o3sanity plugin's five skill files
 pnpm env:pull                 # restore apps/web/.env.local from Vercel
 ```
+
+## Deployments: two apps, two Vercel projects, one repo
+
+Both brands deploy from this repository, each from its own Vercel project on the
+`o3-world` team, so an O3XO deploy never costs an O3 build (#216, spec #209).
+
+| Project               | Root directory | Branch that is production | What triggers a build                            | What gates it                                                          |
+| --------------------- | -------------- | ------------------------- | ------------------------------------------------ | ---------------------------------------------------------------------- |
+| `o3-sanity-web`       | `apps/web`     | `main`                    | `deploy.yml` / `promote.yml` — no Git connection | the `affected` job: `turbo run build --filter=@o3/web... --affected`   |
+| `xo-sanity-web`       | `apps/o3xo`    | `integration/o3xo`        | Vercel's GitHub integration, on every push       | Ignored Build Step: `pnpm dlx turbo-ignore @o3/o3xo --fallback=HEAD^1` |
+| `o3-sanity-storybook` | repo root      | `main`                    | `deploy-storybook.yml`                           | —                                                                      |
+
+The repo-root `vercel.json` turns Git deployments off. It is the configuration
+file for whatever is rooted at the repo root — the Storybook project — and not
+for either app project, because Vercel reads a project's `vercel.json` from its
+root directory.
+
+The two gates are the same question asked by the same engine — is this app's
+dependency graph in the diff — so the matrix holds in both directions:
+
+| The change                     | `xo-sanity-web` | `o3-sanity-web` |
+| ------------------------------ | --------------- | --------------- |
+| `apps/o3xo` only               | builds          | skipped         |
+| `apps/web` only                | skipped         | builds          |
+| a shared package (`@o3/ui`, …) | builds          | builds          |
+
+`xo-sanity-web` holds **no environment variables**, deliberately. O3XO's brand
+facts are committed (`@o3/sanity/brand`: project `tunpgire`, dataset
+`production`), and that dataset answers an unauthenticated read, so published
+content renders with nothing configured. A `SANITY_API_READ_TOKEN` buys draft
+preview and Presentation, and a `SANITY_REVALIDATE_SECRET` buys the Sanity
+webhook — neither exists yet, and the revalidate route answers 401 without the
+secret rather than trusting an unsigned POST.
+
+Its deployment origins are CORS-allowed on `tunpgire` with credentials —
+`https://xo-sanity-web.vercel.app`, `https://xo-sanity-web-*.vercel.app` for the
+team and branch aliases, and `https://*o3-world.vercel.app` for per-deployment
+URLs. Without them the embedded Studio and every draft read fail on the
+deployment while working perfectly in dev. Add an origin from `apps/o3xo/`,
+where the CLI config points at O3XO's project:
+
+```bash
+pnpm sanity cors add https://<host> --credentials
+```
+
+Two things to know before touching either project:
+
+- **A push to `main` cannot build `xo-sanity-web`.** `apps/o3xo` does not exist
+  on `main` — this map integrates on `integration/o3xo` — so a build from `main`
+  fails at "the specified Root Directory does not exist" before the Ignored
+  Build Step runs. Vercel's own affected-projects skipping is on for the project
+  and may skip the push before it gets that far; if failed `main` deployments
+  show up in the dashboard, turn the project's Git deployments off until
+  `apps/o3xo` lands on `main`.
+- **`turbo-ignore` prints a deprecation notice** pointing at Vercel's built-in
+  project skipping. It still works, and it is what the two gates share; moving
+  `xo-sanity-web` to the built-in mechanism would leave the CI-driven `o3` gate
+  as the odd one out, so both stay on turbo until someone decides otherwise.
 
 ## `schema:check` is a gate, not a chore
 
@@ -107,7 +166,16 @@ Production keeps itself honest. Every push to main deploys the schema and then
 runs `pnpm schema:check` against `production`, and the deploy job fails if the
 two disagree — a `schema:deploy` can exit 0 without landing, or land against
 the wrong workspace. `promote.yml` asserts the same thing for the SHA it
-promotes, because that SHA is hand-picked and may be older than main. A
+promotes, because that SHA is hand-picked and may be older than main. Pushes
+to `integration/o3xo` do the same for O3XO's project (`deploy-xo-web.yml`),
+ahead of kicking the site build.
+
+What a deploy publishes is **this brand's roster**, not the whole model
+(#252): `NEXT_PUBLIC_BRAND` picks the project and the blocks its schema
+declares, so a schema-driven writer — `get_schema`, the typeset skill — is
+never offered a band the brand's app cannot render. The check fails on any
+schema document in the dataset that the deploy did not write, so a whole-model
+deploy from an old checkout cannot sit beside the brand's quietly. A
 scheduled run at 05:00 UTC (`nightly-schema-drift.yml`) catches what neither
 sees: a hand-run deploy pointed at the wrong dataset, a Studio-side edit, a
 push whose deploy job was cancelled. It files one tracking issue against map

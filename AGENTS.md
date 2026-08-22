@@ -129,7 +129,10 @@ already:
 
 ### Content naming
 
-Naming and wiring rules for schemas, fields, blocks, and renderers. Vocabulary lives in `CONTEXT.md` → Naming; the procedure is the `content-naming` skill (`.claude/skills/content-naming/`). Read both before touching `packages/sanity/src/schemas/` or `apps/web/src/content/`.
+Naming and wiring rules for schemas, fields, blocks, and renderers. Vocabulary lives in `CONTEXT.md` → Naming; the procedure is the `content-naming` skill (`.claude/skills/content-naming/`). Read both before touching `packages/sanity/src/schemas/`, `packages/content-ui/src/` or
+either app's `src/content/`. A block's renderer lives in the shared package and is **bound per
+app**, so adding or renaming one is two bindings — `apps/web` and `apps/o3xo` — and the `satisfies`
+check in each registry is what fails when you do only one.
 
 ### Design source of record
 
@@ -152,6 +155,12 @@ too, so `figma:sync` names the set that changed and the code it routes to; the s
 any frame in the Design Concept section nobody has triaged yet. One Figma variant axis → one `cva`
 variants key; `State=Hover` is never a variant. Icons are inline SVG, not a font (ADR 0009).
 
+**o3xo answers to a different file**, the _O3XO: UI kit_ (ADR 0028's second addendum). Its map is
+[`docs/figma-components-o3xo.md`](./docs/figma-components-o3xo.md) and its watcher is
+`pnpm figma:sync --brand o3xo` (#242) — cite a frame and a node id from that document when you build
+an o3xo component, and edit it in the same breath as
+[`tools/figma-sync/data/tracked-nodes-o3xo.json`](./tools/figma-sync/data/tracked-nodes-o3xo.json).
+
 ### Captured prototypes
 
 Answered visual prototypes are committed to `apps/storybook/prototypes/` and served by Storybook as
@@ -171,6 +180,12 @@ one.
 
 One Figma variant axis → one `cva` variants key. That rule is what makes the
 component map in #38 mechanical rather than ad hoc.
+
+Both brands render `packages/ui` and `packages/content-ui`, so a component there
+may only name a token role **every** brand's package defines. `bg-accent` is
+O3XO's alone and Tailwind bakes the value in as the utility's fallback, so it
+paints yellow on an O3 page; `brand-token-seam.test.ts` derives the shared
+vocabulary from the token packages and fails the suite on a brand-only role.
 
 ### Domain docs
 
@@ -302,7 +317,8 @@ There is no git hook; `pnpm verify` does not run tests. CI runs the suite as its
 **`pnpm vr` answers a different question than the suite does** — not "did it break?" but "what does
 it look like now?". It builds Storybook for your working tree and for the merge base with `main`,
 screenshots the stories your change can reach at two viewports, and opens a pixel diff. Local only:
-no baselines are committed and nothing is uploaded. See
+no baselines are committed and nothing is uploaded. `--brand o3xo` runs the o3xo host instead; the
+brand decides which module graph selects which stories, so o3xo work needs it (#242). See
 [`tools/visual-regression/README.md`](./tools/visual-regression/README.md), and tag a story
 `vr:skip` if its pixels are genuinely non-deterministic.
 

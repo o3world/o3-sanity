@@ -126,14 +126,22 @@ export {
 
 // SectionShell — the three-surface organism every section block renders inside
 export {
+  SectionBackground,
   SectionShell,
   sectionShellVariants,
   SECTION_WIDTH_CLASS,
   SURFACE_CLASS,
   SURFACES,
+  TINTS,
   surfaceAttrs,
 } from './components/section-shell'
-export type { BandStep, SectionShellProps, SectionWidth, Surface } from './components/section-shell'
+export type {
+  BandStep,
+  SectionShellProps,
+  SectionWidth,
+  Surface,
+  Tint,
+} from './components/section-shell'
 // The band's surface, readable from inside it. `SectionShell` and
 // `CollectionHero` declare their own; a bespoke band or a piece of chrome
 // declares its own with this (#147, ADR 0026).

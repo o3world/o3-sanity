@@ -1,0 +1,416 @@
+{
+  "_id": "insight-framer-accountability-gap-agentic-ai",
+  "_type": "insight",
+  "title": "The accountability gap in agentic AI (and why architecture is the only fix)",
+  "slug": {
+    "_type": "slug",
+    "current": "accountability-gap-agentic-ai"
+  },
+  "excerpt": "A practical framework for building agentic systems that can be traced, evaluated, and trusted in production.",
+  "publishedAt": "2026-05-30T12:00:00Z",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-framer-technology",
+      "_key": "cat-technology"
+    }
+  ],
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_srcUrl": "https://framerusercontent.com/images/oRhnXpLSE153zIt7igHjEy8kQGo.png"
+    },
+    "alt": "Architectural image of steps"
+  },
+  "body": [
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Everyone is talking about agents. The pitch is simple: plug an LLM into your workflows, let it run, watch productivity soar. The reality is not that simple.",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Every architectural decision you make during the design of an agentic system determines whether that system is accountable or a black box. When an agent makes a bad call, can you trace why? Can you prove what it had access to and what it didn't? If you didn't design for those questions up front, the answer is no. That's the accountability gap. It doesn't get solved with policy documents or guardrails after the fact. It gets solved in how you architect the system from day one.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The stakes are real.",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": " Forty percent of agentic AI projects were canceled or paused as of February 2026",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". The common explanation is that organizations aren't ready. The better explanation is that these systems were never designed to be accountable in the first place.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.roborhythms.com/why-ai-agents-keep-failing-2026/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Workflow extraction is step zero",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Before you write a single line of agent code, map the entire workflow, including edge conditions. Sit with your domain experts and extract the actual logic, conditions, and edge cases they handle intuitively but have never documented. That workflow becomes the thing you evaluate against. Without it, you never defined what correct behavior looks like.",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Evals and orchestration are the same problem",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The way you structure tool calls, branching logic, and decision points determines whether you can reconstruct what happened after the fact. Break your agent into discrete nodes with clear inputs, outputs, and decision criteria. Then run structured evaluation at each node covering tool selection, retrieval quality, reasoning fidelity, and hallucination detection.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "When an agent achieves 85% accuracy on each individual step, a 10-step workflow succeeds roughly 20% of the time",
+          "_key": "k0023"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". If your orchestration doesn't support reconstruction, you can't pinpoint which node is failing. And if you can't pinpoint the failure, you can't fix it.",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://www.roborhythms.com/why-ai-agents-keep-failing-2026/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Human in the loop is an architecture decision, not a toggle",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\"Human in the loop\" is not \"does a human approve or not.\" It's a deliberate choice about where in the workflow a human needs to intervene, review, or override. Some nodes are fully autonomous. Some require approval before proceeding. Some just surface a flag for async review. You design that into the orchestration based on risk and complexity at each step.",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Forty-two percent of regulated enterprises plan to introduce approval and review controls for their agents, compared to only 16% of unregulated enterprises",
+          "_key": "k0030"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". The regulated industries are ahead here because they've been forced to think about accountability. Everyone else should be too.",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://cleanlab.ai/ai-agents-in-production-2025/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Eval drift and feedback loops",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "An agent that passes evals at launch can silently degrade over time. Models get updated. Data sources change. Tool APIs shift. If your evals only ran during development, you have no idea whether the agent is still performing the way it was designed to. Evals need to run continuously in production, not as a gate you pass once.",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The same logic applies to guardrails. Without continuous feedback, both active (user ratings, explicit corrections) and passive (task completion rates, session abandonment, retry patterns), your guardrails are rules you wrote once with no mechanism to adapt.",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Agent identity is a security architecture problem",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This is the one that gets underestimated the most. An agent shouldn't inherit a user's full access just because it's acting on their behalf. Each agent should have its own auth credentials scoped to what it needs at each node, time-bound and revocable. Without this, a customer service agent running under a sales rep's identity has access to everything that rep does.",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0042",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Only about 22% of teams treat AI agents as independent, identity-bearing entities",
+          "_key": "k0043"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0044"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": " Meanwhile, 88% of organizations reported confirmed or suspected AI agent security incidents in the last year",
+          "_key": "k0045"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". Those two numbers are directly related.",
+          "_key": "k0046"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://www.gravitee.io/blog/state-of-ai-agent-security-2026-report-when-adoption-outpaces-control"
+        },
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.gravitee.io/blog/state-of-ai-agent-security-2026-report-when-adoption-outpaces-control"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0047",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The accountability gap is a design problem",
+          "_key": "k0048"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0049",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "None of this is about slowing down your agent rollout. It's about building the system right so you can trust it, debug it, and improve it over time. Workflow extraction, eval design, human-in-the-loop orchestration, continuous monitoring, feedback loops, and scoped agent identity. These aren't optional extras. They're the foundation.",
+          "_key": "k0050"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0051",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If you're planning an agentic system and want to talk through how to build accountability into the architecture,",
+          "_key": "k0052"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": " reach out to our team",
+          "_key": "k0053"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". This is the work we do every day.",
+          "_key": "k0054"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "../contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "Agentic AI systems fail when accountability isn't designed into the solution from day one. Learn the architecture decisions that close the gap."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:insight:fojV_hEyF"
+  }
+}

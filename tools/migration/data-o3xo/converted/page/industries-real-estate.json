@@ -1,0 +1,157 @@
+{
+  "_id": "page-framer-industries-real-estate",
+  "_type": "page",
+  "title": "AI solutions transforming real estate operations",
+  "slug": {
+    "_type": "slug",
+    "current": "industries/real-estate"
+  },
+  "pageType": "standard",
+  "sections": [
+    {
+      "_type": "heroSection",
+      "_key": "hero",
+      "variant": "band",
+      "headlineLines": [
+        "AI solutions transforming real estate operations"
+      ],
+      "subheading": "Vacant properties and rising operational costs eat into real estate profits while tenant expectations continue to climb. Our AI solutions transform leasing velocity, automate property operations, and elevate tenant experiences by helping you drive revenue growth and operational efficiency.",
+      "decoration": "none"
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "pain-points",
+      "surface": "bone",
+      "layout": "cards",
+      "heading": "Operational inefficiencies are limiting portfolio growth",
+      "intro": "AI can solve these portfolio challenges and deliver measurable performance gains across all your properties.",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "slow-tenant-identification-qualification",
+          "railLabel": "Slow tenant identification + qualification",
+          "heading": "Slow tenant identification + qualification",
+          "body": "Your leasing teams spend weeks screening potential tenants, often missing qualified prospects. Automated qualification systems identify high-quality prospects in days while predicting lease conversion probability."
+        },
+        {
+          "_type": "panel",
+          "_key": "inconsistent-tenant-experience-delivery",
+          "railLabel": "Inconsistent tenant experience delivery",
+          "heading": "Inconsistent tenant experience delivery",
+          "body": "Maintenance requests get lost, communication gaps frustrate residents, and service quality varies across properties. Intelligent tenant portals and predictive maintenance systems ensure consistent, proactive service delivery while improving satisfaction scores."
+        },
+        {
+          "_type": "panel",
+          "_key": "manual-cash-application-reconciliation",
+          "railLabel": "Manual cash application + reconciliation",
+          "heading": "Manual cash application + reconciliation",
+          "body": "Accounting teams struggle with time-intensive rent collection and payment processing across multiple properties and payment methods. AI-powered cash application automatically matches payments to leases and flags discrepancies, reducing processing time substantially."
+        },
+        {
+          "_type": "panel",
+          "_key": "complex-lease-management-tracking",
+          "railLabel": "Complex lease management tracking",
+          "heading": "Complex lease management tracking",
+          "body": "Critical lease terms and renewal dates slip through manual tracking systems, creating revenue loss and compliance risks. Automated lease intelligence extracts key terms, tracks important dates, and provides early alerts for renewals and compliance requirements."
+        }
+      ]
+    },
+    {
+      "_type": "railPanelsSection",
+      "_key": "process",
+      "surface": "white",
+      "layout": "rows",
+      "heading": "From strategy to portfolio growth",
+      "intro": "From strategy to execution, we partner with property management and investment teams to deliver AI solutions that enhance real estate operations and create competitive advantage.",
+      "panels": [
+        {
+          "_type": "panel",
+          "_key": "educate-explore",
+          "railLabel": "Educate → Explore",
+          "heading": "AI strategy process for real estate",
+          "body": "Up front AI education to align team members and comprehensive assessment to identify where AI can accelerate leasing cycles, automate accounting workflows, and elevate tenant experiences.",
+          "details": [
+            {
+              "_type": "detail",
+              "_key": "educate-align",
+              "label": "Educate + Align",
+              "items": [
+                "Align team members on AI's potential and identify opportunities from tenant qualification to lease management; assess current technical stack including CRM, property management and accounting systems."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "evaluate-plan",
+              "label": "Evaluate + Plan",
+              "items": [
+                "Prioritize workshop initiatives based on ROI potential and develop phased implementation roadmap aligned with your portfolio priorities."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "launch-learn",
+              "label": "Launch + Learn",
+              "items": [
+                "Develop and deploy custom AI solutions for pilot projects, gather feedback from leasing and operations teams, refine based on real-world tenant and property challenges."
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "panel",
+          "_key": "execute-adopt",
+          "railLabel": "Execute → Adopt",
+          "heading": "AI activation services to build, learn + scale",
+          "body": "Rapid pilot preparation, development and iteration that proves value across real properties, then scales winning solutions across your entire portfolio.",
+          "details": [
+            {
+              "_type": "detail",
+              "_key": "ideate-explore",
+              "label": "Ideate + Explore",
+              "items": [
+                "Workshop with leadership group, property managers, leasing teams, and operations staff to generate use cases that drive occupancy and reduce operational overhead."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "design-prepare",
+              "label": "Design + Prepare",
+              "items": [
+                "Design core AI architecture and integrate with key technologies from your CRM and property management platform to your accounting systems; prepare data for pilot projects."
+              ]
+            },
+            {
+              "_type": "detail",
+              "_key": "scale-embed",
+              "label": "Scale + Embed",
+              "items": [
+                "Roll out across the entire organization and property portfolio; train leadership operations, property management and leasing teams; establish best practices, and build internal champions."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_type": "ctaSection",
+      "_key": "closer",
+      "heading": "Stop guessing, start discovering",
+      "body": "Identify the AI use cases that matter most for your business.",
+      "button": {
+        "_type": "button",
+        "label": "Get started: Schedule a consultation",
+        "href": "/contact"
+      },
+      "decoration": "none"
+    }
+  ],
+  "seo": {
+    "description": "Accelerate leasing cycles, automate cash application, and elevate tenant experiences with AI solutions designed for property managers and investors."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:page:industries/real-estate",
+    "provisional": true,
+    "provisionalNote": "Migrated from o3xo.ai band by band into O3’s block roster (#220). Provisional because the composition is a translation rather than a design: the hero carries no background photograph, curated case-study and insight cards are left to be derived, and anything the source does not serve is absent rather than invented. Cleared when the adaptation delta is reviewed and the page is composed against O3XO’s own design."
+  }
+}

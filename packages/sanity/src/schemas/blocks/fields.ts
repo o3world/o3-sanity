@@ -81,7 +81,7 @@ export function validateAnchorName(value: string | undefined): true | string {
  * shared — and does it silently, on a page nobody was editing.
  *
  * The value reaches the page as an `id` on the band's own wrapper
- * (`apps/web/src/content/blocks/anchors.ts`), which is also where two bands
+ * (`packages/content-runtime/src/blocks/anchors.ts`), which is also where two bands
  * claiming one name are resolved.
  */
 export function anchorField() {
@@ -92,6 +92,34 @@ export function anchorField() {
     description:
       'A name for this band, so a button can jump to it. Written without the #. Keep it once people are sharing the link — changing it breaks every link already sent. Two bands with the same name resolve to the first.',
     validation: (rule) => rule.custom((value: string | undefined) => validateAnchorName(value)),
+  })
+}
+
+/**
+ * THE PICTURE EVERY SECTION BLOCK MAY SIT ON — injected by
+ * `defineSectionBlock`, between the knobs' generated fields and the anchor
+ * (#239).
+ *
+ * **Every band, not the seven that need one.** Which bands sit on a picture is
+ * a fact about a design, and the O3XO kit puts a picture under five of its
+ * thirteen while O3's frames put one under none. A per-block opt-in would make
+ * that a schema edit each time a design moved; the field costs an unfilled row
+ * in the form on a band nobody wants one on.
+ *
+ * **Optional, and it stays optional.** The renderer draws the band's surface
+ * colour when nothing is set, which is what every document written before this
+ * field existed holds.
+ *
+ * A plain field rather than a knob: an editor uploads a picture, they do not
+ * pick one from a closed set. The one design option over it — how far the
+ * picture is tinted — is a knob, and it is declared against the object it
+ * belongs to (`knobs/backgroundMedia.ts`, ADR 0023).
+ */
+export function backgroundMediaField() {
+  return defineField({
+    name: 'backgroundMedia',
+    title: 'Background',
+    type: 'backgroundMedia',
   })
 }
 

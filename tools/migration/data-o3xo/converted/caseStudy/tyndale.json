@@ -1,0 +1,121 @@
+{
+  "_id": "caseStudy-framer-tyndale",
+  "_type": "caseStudy",
+  "title": "Transforming safety expertise into lead generation",
+  "slug": {
+    "_type": "slug",
+    "current": "tyndale"
+  },
+  "client": {
+    "_type": "reference",
+    "_ref": "client-framer-tyndale"
+  },
+  "narrativeHeadline": "Tyndale's extensive library of safety knowledge wasn't reaching the people who needed it most. Here's how we helped them bridge that gap.",
+  "stats": [
+    {
+      "_type": "stat",
+      "_key": "k0011",
+      "value": "20+ new contacts",
+      "label": "Created on average per week"
+    }
+  ],
+  "heroMedia": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_srcUrl": "https://framerusercontent.com/images/jNInp4nFBXq0w8VYfj0vKbPzU.webp"
+    },
+    "alt": "Field engineer reviewing project plans, representing AI-driven content insight and product intelligence"
+  },
+  "story": [
+    {
+      "_type": "chapter",
+      "_key": "k0004",
+      "kicker": "Opportunity",
+      "title": "The hidden value in expert content",
+      "body": [
+        {
+          "_key": "k0000",
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Tyndale USA has built a reputation as a leading provider of flame-resistant and arc flash protective clothing, backed by years of safety expertise captured in videos, blog posts, and technical guidance. But like many B2B companies, they faced a challenge: electricians, oil and gas workers, and contractors often didn't fully understand the safety risks associated with their safety apparel, leading them to choose potentially dangerous alternatives.",
+              "_key": "k0001"
+            }
+          ],
+          "markDefs": [],
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "_key": "k0002",
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Meanwhile, Tyndale's extensive content library - while highly valuable and comprehensive - was not easily navigable or intuitive to locate, making it difficult to surface during critical decision-making moments. With a goal to improve Tyndale's ability to identify, reach and connect with a wider audience, and a wealth of existing content to work with, Tyndale was ready to explore how AI could transform their safety knowledge into a more accessible resource that would educate prospects while demonstrating Tyndale's expertise and value.",
+              "_key": "k0003"
+            }
+          ],
+          "markDefs": [],
+          "_type": "block",
+          "style": "normal"
+        }
+      ]
+    },
+    {
+      "_type": "chapter",
+      "_key": "k0009",
+      "kicker": "Solution",
+      "title": "From scattered content to centralized guidance",
+      "body": [
+        {
+          "_key": "k0005",
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "O3XO led Tyndale through our comprehensive AI strategy workshop, mapping their customer journey to identify key pain points where prospects struggled with safety knowledge and appropriate product selection. The solution we developed is called FRCoach. It consolidates Tyndale's entire content library and product database into an intelligent chat interface that provides instant, personalized safety guidance.",
+              "_key": "k0006"
+            }
+          ],
+          "markDefs": [],
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "_key": "k0007",
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Rather than requiring prospects to search through extensive blog archives or commit to watching full video content, FRCoach delivers quick, specific answers to safety questions while naturally introducing relevant Tyndale expertise and solutions. The system integrates video transcripts, blog content, safety guidelines, and product data into a unified knowledge base that addresses everything from NFPA 70E requirements to product details.",
+              "_key": "k0008"
+            }
+          ],
+          "markDefs": [],
+          "_type": "block",
+          "style": "normal"
+        }
+      ]
+    },
+    {
+      "_type": "quoteSection",
+      "_key": "k0010",
+      "surface": "bone",
+      "decoration": "molecule",
+      "quote": "FRCoach is a game changer. While we developed it to answer technical questions and provide product recommendations for our customers and prospects, a side benefit is that our team members use it as a resource as well. O3XO was an excellent partner throughout the development process.",
+      "attribution": "Barbara Fitzgeorge, VP of Marketing, Tyndale USA"
+    }
+  ],
+  "seo": {
+    "description": "See how Tyndale transformed expert content into new client connections with AI-powered product insight, generating 20+ new contacts per week on average."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:caseStudy:GTabpMUP_",
+    "provisional": true,
+    "provisionalNote": "Migrated from o3xo.ai with three authored card fields this model has no home for — the subject label, the card sentence and the card photograph — and with a client that has no logo, which Studio requires. All four are recoverable from the committed extract. Cleared by giving them fields or by recording the drop as permanent, and by supplying the client mark."
+  }
+}

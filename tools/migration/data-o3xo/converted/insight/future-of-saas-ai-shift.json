@@ -1,0 +1,381 @@
+{
+  "_id": "insight-framer-future-of-saas-ai-shift",
+  "_type": "insight",
+  "title": "The future of SaaS: what survives the AI shift, what doesn't and why",
+  "slug": {
+    "_type": "slug",
+    "current": "future-of-saas-ai-shift"
+  },
+  "excerpt": "AI has changed the economics of building software. The businesses pulling ahead are building solutions that solve real problems completely, and seeing the adoption to prove it.",
+  "publishedAt": "2026-05-03T12:00:00Z",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-framer-strategy",
+      "_key": "cat-strategy"
+    }
+  ],
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_srcUrl": "https://framerusercontent.com/images/jngD0BMuXiGQr6gu797yUl0NTf4.png"
+    },
+    "alt": "Abstract winding path through geometric blocks, representing the evolving future of SaaS."
+  },
+  "body": [
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Most companies pay for software their teams barely use.",
+          "_key": "k0005"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": " Zylo's 2026 SaaS Management Index",
+          "_key": "k0006"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " puts enterprise license utilization at 54%, and that is after a year of improvement. The average mid-market organization runs between 96 and 131 SaaS applications, roughly half of which are shadow IT (tools that employees become reliant on for professional use but are not technically approved by their organization).",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://zylo.com/reports/2026-saas-management-index/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Additionally, most software investments were never evaluated against business outcomes in the first place. AI is forcing a more honest reckoning, and the leaders who treat it as a strategy question rather than a technology refresh will come out ahead.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What has changed",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "For years, off-the-shelf SaaS won by default. Building something custom meant months of development, significant budget, and real risk. That math is now drastically different.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Vibe coding tools like Lovable and Claude Code let small teams go from idea to working app in hours or even minutes. Or, simple combinations of Claude or ChatGPT with a few smart integrations can now replace entire workflows that previously required dedicated software. The cost to build or replicate functionality has dropped fast enough that it changes what \"buy vs. build\" even means.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We are living this at O3XO. We are replacing a messy combination of spreadsheets and Google Docs, along with a few expensive platforms whose value is questionable with purpose-built Lovable apps. The savings are real, but the bigger point is fit: the software reflects how we actually work. We are seeing clients reach the same conclusion, leaning toward building because it delivers more value and drives the adoption that off-the-shelf rarely does.",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What does not survive the ROI test",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The most vulnerable investments share a few traits: narrow workflow, low adoption, and an interface rather than data or process intelligence as the primary source of value. Point solutions that patch a specific gap are at the highest risk. They were tolerated, not embraced. Now there is a faster, cheaper, and better-fitting alternative.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Also, when your team has a hand in shaping the solution, buy-in follows. That translates directly to utilization, and utilization is what actually drives ROI. That is something a vendor's roadmap cannot necessarily give you.",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The bigger opportunity: end-to-end efficiency",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Replacing a single underperforming tool is a cost decision. Rethinking how work flows across your operation is a strategic decision. The difference in outcome is significant.",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The organizations getting the most from AI are not the ones that swapped a few applications. They are the ones that asked where friction actually lives, from how leads move through a sales process to how field teams communicate with back-office functions. The bottlenecks are rarely inside a single tool. They are in the handoffs between tools, and in the manual steps people invented to bridge systems that were never designed to work together. Eliminating that friction creates capacity, speed, and operational consistency. That is real competitive advantage.",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What survives",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The tools that hold their ground own something AI cannot easily replicate: proprietary data, embedded compliance, and workflow depth that makes switching genuinely painful. Vertical SaaS, built for a single industry, is the clearest example. These platforms go so deep into one domain that they become infrastructure.",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "AI works on top of the data layer, not in place of it. Systems of record are not easily displaced. The bloated horizontal platforms with low adoption are the ones to watch.",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The right questions to ask now",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Audit the stack through a business lens. As of January 2025,",
+          "_key": "k0039"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": " average SaaS spend runs $4,830 per employee per year",
+          "_key": "k0040"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". Before asking whether a tool should be replaced or rebuilt, ask what business outcome it was purchased to drive and whether it is actually driving it.",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://zylo.com/news/2025-saas-management-index/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0042",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "At O3XO, we start every strategic engagement with an",
+          "_key": "k0043"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": " AI assessment",
+          "_key": "k0044"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " that begins with a thorough understanding of your tech stack and data. We align that with your overall business objectives and the areas where real friction exists in either the customer or employee experience. From there, we weight effort and impact to drive prioritization of AI initiatives.",
+          "_key": "k0045"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "../contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0046",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The companies pulling ahead are not doing this as a software exercise. They are doing it as an operational strategy review, and the technology decisions are following from that. Start with where you want the business to be and what is getting in the way. ",
+          "_key": "k0047"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "The build vs. buy question",
+          "_key": "k0048"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " answers itself from there.",
+          "_key": "k0049"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "./the-build-vs-buy-dilemma-making-smart-ai-investment-choices"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "AI has changed the build vs. buy calculus. Here is what survives the shift, what doesn't, and how purpose-built solutions drive more value and real adoption."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:insight:ulIRBRqYO"
+  }
+}

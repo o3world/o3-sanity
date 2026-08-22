@@ -1,75 +1,58 @@
-export const PROJECT_ID = 'naorcr6k'
-export const DATASETS = ['production', 'development'] as const
-export type Dataset = (typeof DATASETS)[number]
-
-/**
- * Where an unconfigured checkout points: **`development`**, not `production`.
- *
- * The fallback used to be `production` in seven separate places, and one of
- * them was `tools/migration/sanity.cli.ts` reading a `SANITY_DATASET` variable
- * that nothing ever set — so `pnpm --filter migration load`, which deletes and
- * rewrites documents, always wrote to the live dataset no matter what
- * `apps/web/.env.local` said. A missing variable now means the scratch
- * dataset, and production is something you ask for out loud
- * (`pnpm dataset production`, or an explicit value in CI).
- *
- * Deploys are unaffected: `.github/workflows/deploy.yml` and `promote.yml`
- * set the dataset explicitly, so they never reach this default.
- */
-export const DEFAULT_DATASET: Dataset = 'development'
+import { brandConfig, type CollectionType } from './brand'
 
 /**
  * The one place the dataset is resolved. Every Sanity entry point — the web
  * app's Studio, the CLI configs, the shared client, the migration and
  * guidance tools — calls this, so they cannot disagree about which dataset
- * they are talking to.
+ * they are talking to. Which brand's dataset is brand config's answer.
  */
 export function resolveDataset(): string {
-  return process.env.NEXT_PUBLIC_SANITY_DATASET || DEFAULT_DATASET
+  return brandConfig().dataset
 }
 
 /** Same for the project, which was hardcoded in two configs and imported in two others. */
 export function resolveProjectId(): string {
-  return process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || PROJECT_ID
+  return brandConfig().projectId
 }
-
-/**
- * The datasets that answer an **unauthenticated** read.
- *
- * `production` and `development` both are. The list still has to exist because
- * Content Lake answers a private dataset's anonymous query with
- * `200 {"result": null}` rather than a 401, so nothing in the response tells
- * "no such document" apart from "you may not see it" (#100). A checkout with no
- * `SANITY_API_READ_TOKEN` pointed at a dataset missing from this list reads
- * back silently empty: the homepage and the catch-all 404, the collection
- * indexes render themselves empty, and the server log says nothing at all.
- *
- * Naming the public datasets is the only way to see that coming, so this list
- * is an ACL fact and has to be kept true — a dataset missing from it is treated
- * as needing a token. An anonymous query is the check, and the only one that
- * settles it; sanity.io/manage agreeing is not the same evidence:
- *
- *     curl "https://naorcr6k.api.sanity.io/v2021-06-07/data/query/<dataset>?query=count(*)"
- */
-export const PUBLIC_DATASETS: readonly string[] = ['production', 'development']
 
 /**
  * True when reading `dataset` anonymously would come back silently empty.
  * `apps/web/src/sanity/live.ts` turns that into a thrown error at the fetch.
+ *
+ * The check exists because Content Lake answers a private dataset's anonymous
+ * query with `200 {"result": null}` rather than a 401, so nothing in the
+ * response tells "no such document" apart from "you may not see it" (#100). A
+ * checkout with no `SANITY_API_READ_TOKEN` pointed at a private dataset reads
+ * back silently empty: the homepage and the catch-all 404, the collection
+ * indexes render themselves empty, and the server log says nothing at all.
+ *
+ * Which datasets read publicly is a fact about one Sanity project, so each
+ * brand declares its own (`publicDatasets` in `brand.ts`). A dataset missing
+ * from that list is treated as needing a token — an anonymous query is the
+ * only evidence that settles it.
  */
 export function readsNeedToken(dataset: string): boolean {
-  return !PUBLIC_DATASETS.includes(dataset)
+  return !brandConfig().publicDatasets.includes(dataset)
 }
 
 /** Document types the web app routes (ADR 0001: every one carries a required slug). */
 export const ROUTABLE_TYPES = ['insight', 'caseStudy', 'page'] as const
 export type RoutableType = (typeof ROUTABLE_TYPES)[number]
 
-/** URL prefixes per collection; `page` slugs are multi-segment and carry their own prefix. */
-export const COLLECTION_PREFIXES = {
-  insight: '/insights',
-  caseStudy: '/work',
-} as const
+/**
+ * URL prefixes per collection, for the brand this process runs as; `page`
+ * slugs are multi-segment and carry their own prefix.
+ *
+ * The table itself is a brand fact (ADR 0028) and lives in `brand.ts` —
+ * `o3xo` serves case studies at `/case-studies` where `o3` serves `/work`.
+ * This is the flattened view of it that routes, the sitemap and the redirect
+ * map read.
+ */
+const { collections } = brandConfig()
+export const COLLECTION_PREFIXES: Readonly<Record<CollectionType, string>> = {
+  insight: collections.insight.prefix,
+  caseStudy: collections.caseStudy.prefix,
+}
 
 /**
  * Where WordPress serves a collection, when this redesign moved it (ADR 0017).

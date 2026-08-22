@@ -11,6 +11,7 @@
  * the two block barrels — a shared object is found by the name its declaration
  * answers to, and adding one costs the guard nothing.
  */
+export { backgroundMedia } from './backgroundMedia'
 export { bodyText } from './bodyText'
 export { button } from './button'
 export { buttonGroup } from './buttonGroup'

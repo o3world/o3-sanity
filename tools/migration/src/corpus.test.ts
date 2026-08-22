@@ -38,6 +38,8 @@ describe('the committed corpus', () => {
   it('recognizes pipeline-owned ids and nothing else', () => {
     expect(isPipelineOwned('caseStudy-wp-10028')).toBe(true)
     expect(isPipelineOwned('page-seed-contact')).toBe(true)
+    // The second source. Without it O3XO's whole corpus loaded and never retired.
+    expect(isPipelineOwned('page-framer-industries-construction')).toBe(true)
     expect(isPipelineOwned('drafts.insight-wp-123')).toBe(true)
     expect(isPipelineOwned('siteSettings')).toBe(false)
     expect(isPipelineOwned('64cd37cf-1a2b-4c3d-8e9f-000000000000')).toBe(false)

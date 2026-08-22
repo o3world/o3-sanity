@@ -1,0 +1,53 @@
+{
+  "_meta": {
+    "type": "caseStudy"
+  },
+  "slug": "fortune-500-insurance-provider",
+  "path": "/case-studies/fortune-500-insurance-provider",
+  "collectionItemId": "IgUv9Ozgz",
+  "title": "Accelerating legal document review with intelligent compliance checking",
+  "titleRendered": "Fortune 500 Insurance: Legal Document Intelligence | O3XO",
+  "deck": "This innovation studio partnership needed to ensure legal documents met regulatory standards without constant legal consultation. O3XO's generative AI solution turned hours of manual analysis into minutes of intelligent compliance verification.",
+  "heroImage": {
+    "url": "https://framerusercontent.com/images/6pP4JXqlOs921psuipipVE2Wg.png",
+    "alt": "Legal professional reviewing and signing documents, representing AI-powered legal document analysis"
+  },
+  "chapters": [
+    {
+      "kicker": "Opportunity",
+      "title": "Navigating legal complexity without legal expertise",
+      "bodyHtml": "<p dir=\"auto\" class=\"framer-text framer-styles-preset-jswlfd\">Managing legal documents presents a significant challenge for organizations where team members wear multiple hats and lack specialized legal training. With hundreds of contracts and legal documents requiring regular review against ever-changing federal, state, and municipal guidelines, organizations often find themselves operating in uncertainty. Standard contracts frequently become outdated or missing critical content, while examining each passage for compliance requires tedious line-by-line analysis that's both time-intensive and prone to human error.</p><p dir=\"auto\" class=\"framer-text framer-styles-preset-jswlfd\">The challenge was finding a reliable, affordable way to ensure legal documents remain current and compliant without requiring constant legal consultation or risking oversight of critical regulatory changes.</p>"
+    },
+    {
+      "kicker": "Solution",
+      "title": "Intelligent document comparison that democratizes legal expertise",
+      "bodyHtml": "<p dir=\"auto\" class=\"framer-text framer-styles-preset-jswlfd\">Through our partnership with this prominent innovation studio, O3XO developed a generative AI solution that quickly breaks down complex legal documents and compares them against \"gold standard\" templates and current regulatory requirements. The system provides precise guidance on specific passages that need attention, flagging outdated clauses, missing provisions, and potential compliance gaps.</p><p dir=\"auto\" class=\"framer-text framer-styles-preset-jswlfd\">Rather than replacing legal expertise, the solution empowers non-legal professionals to identify issues that require professional review, dramatically reducing the scope and cost of legal consultation. The AI processes multi-page documents in minutes, highlighting discrepancies and providing contextual recommendations that save hours of manual review while mitigating compliance risk.</p>"
+    }
+  ],
+  "stats": [
+    {
+      "value": "30-60 sec",
+      "label": "Time to process 10+ page legal document"
+    }
+  ],
+  "quote": null,
+  "card": {
+    "slug": "fortune-500-insurance-provider",
+    "client": "Fortune 500 insurance provider",
+    "subject": "Legal document intelligence",
+    "headline": "See how AI transformed complex lease analysis for faster decisions",
+    "stat": {
+      "value": "30–60 seconds",
+      "label": "Time to process 10+ page legal document"
+    },
+    "image": {
+      "url": "https://framerusercontent.com/images/IJRLH71KvFB5YJsP7K0d2GLg.webp",
+      "alt": "Legal professional reviewing and signing documents, representing AI-powered legal document analysis"
+    }
+  },
+  "seo": {
+    "canonicalRendered": "https://www.o3xo.ai/case-studies/fortune-500-insurance-provider",
+    "descriptionOverride": "See how a Fortune 500 insurance provider reduced legal document review from hours to 30-60 seconds with AI-powered compliance checking and intelligent analysis.",
+    "ogImage": "https://framerusercontent.com/images/6pP4JXqlOs921psuipipVE2Wg.png?width=788&height=500"
+  }
+}

@@ -34,9 +34,14 @@ Node, no React, no filesystem beyond the committed migration JSON.
 
 Two kinds live here:
 
-- **Mappers and helpers.** `tools/migration/src/map/*.test.ts`, `apps/web/src/lib/**`. Migration
+- **Mappers and helpers.** `tools/migration/src/map/*.test.ts`, `packages/content-runtime/src/**`. Migration
   mappers are pure `WpThing → Mapped<Doc>` functions, so a new ACF module type means one arm in the
   mapper and one case in its test.
+- **Wiring a compiler cannot see.** `apps/o3xo/src/brandBinding.test.ts` reads the app's own files
+  and asserts the four things that would otherwise fail silently in a browser: the brand reaching
+  the bundles, the token layer's import order, `data-brand` on `<html>`, and a route directory per
+  collection prefix. Same shape as `packages/ui/src/components/ui/shadcn-seam.test.ts` — a
+  filesystem lint, in the layer that needs no React.
 - **Corpus invariants.** `tools/migration/src/converted.test.ts` runs over everything actually
   committed under `data/converted/` — every document validates against its zod gate, every author
   and category reference resolves, no body block type the schema doesn't allow, no WP thumbnail
@@ -48,7 +53,7 @@ Two kinds live here:
 Renders a real route through the real route builder, with fixture documents instead of Sanity.
 
 ```tsx
-import { buildDetailRoute } from '@/lib/content-routes/build'
+import { buildDetailRoute } from '@o3/content-runtime/routes'
 import { anInsight, renderRoute, expectNotFound } from '@/test'
 
 import { insight } from './entry'
@@ -74,41 +79,68 @@ it('404s when nothing matches', async () => {
 use it to assert cache tags and the stega-off rule on metadata. `expectNotFound` returns the same
 list, so a 404 is assertable on what it read rather than only on the fact that it 404'd.
 
-**Fixtures are typed against the generated query results** (`anInsight`, `aPage`,
-`aInsightsPage` in `@/test`). A query projection change breaks stale fixtures at compile time,
+**Fixtures are typed against the generated query results** (`anInsight`, `aCaseStudy`,
+`anInsightsPage` in `@/test`). A query projection change breaks stale fixtures at compile time,
 the same guardrail the block registry uses. Pass only the field your assertion is about.
 
 **`aMigratedInsight(slug)` loads a real converted document** and shapes it into what the query
 returns. That is the migration → render bridge: a mapper change producing something the renderer
-can't display fails here rather than in Studio. `migratedInsightSlugs()` sweeps all of them.
+can't display fails here rather than in Studio. `migratedInsightSlugs()` sweeps all of them. It is
+`apps/web`'s, like every fixture that reads a tree off disk; `apps/o3xo`'s `aSeededPage()` reads
+that app's bootstrap documents instead.
 
-**The 402 half of ADR 0006 is assertable** via `@/test`'s responsive helpers (`responsive.ts`):
+**The 402 half of ADR 0006 is assertable** via the responsive helpers, exported from `@/test` in the
+app and from `@o3/content-ui/testing` in the package that now holds the renderers:
 `unprefixedHorizontalScrollUtilities(html)` must come back empty — a bare `overflow-x-auto`/`snap-x`
 is a phone getting a scroll region where the frame draws a stack — and `variantsOf(html, 'gap-12')`
 pins a utility to the widths that emitted it when the two frames disagree on a value.
 
-Four modules are stubbed (see `vitest.config.mts` for why each): `@/sanity/live` is the network
-seam, `next/image` renders a plain `<img>`, `next/headers` lets a test pick the draft or published
-path, and `next/dynamic` becomes `React.lazy` — without that last one every registered View renders
-blank, silently.
+**The layer is `@o3/render-kit`, and each app instantiates it** (#227). A vitest project resolves
+one `@/` alias and carries one environment, so the two brand apps are two projects — `render` and
+`render:o3xo` — built by one `renderProject()` call each in `vitest.config.mts`. Run both with
+`pnpm test --project 'render*'`.
+
+The `render` project also collects `packages/*/src/**`: the renderers moved to `@o3/content-ui`
+(#212) and their render tests moved with them, while an app keeps the route- and view-level ones.
+Those components take a brand's tokens from CSS this layer never loads, so one run of them covers
+both apps. A moved test reaches its helpers by package subpath; only app tests get the `@/` alias.
+
+**The brand is pinned per project, beside the port** — `NEXT_PUBLIC_BRAND: 'o3xo'` on the second
+one. `next.config.ts` is what supplies it to the running app and vitest never loads that file, so
+an unpinned project gets `brandConfig()`'s fallback of `o3`: every URL the second app builds would
+canonicalise to o3world.com and link case studies at `/work`, and the assertions would agree with
+it. Seven of `apps/o3xo`'s render tests fail the moment the pin is removed, which is what it is for.
+
+Four modules are stubbed (see `@o3/render-kit`'s `project.ts` for why each):
+`@o3/content-runtime/live` is the network seam, `next/image` renders a plain `<img>`, `next/headers`
+lets a test pick the draft or published path, and `next/dynamic` becomes `React.lazy` — without that
+last one every registered View renders blank, silently. The live stub is aliased twice, once per
+specifier: the app imports the package subpath, the route builders inside the package import
+`#live`.
 
 ## `stories` — components in a real browser
 
-Every story under `packages/ui/src` and `apps/web/src` is mounted in headless Chromium with real CSS
-and scanned by axe. **Writing the story is writing the test** — there is no second file, which is
-why the wireframe build-out gets its safety net for free.
+Every story is mounted in headless Chromium with real CSS and scanned by axe. **Writing the story
+is writing the test** — there is no second file, which is why the wireframe build-out gets its
+safety net for free.
+
+One project per Storybook host, because a host carries one brand's tokens. `stories` is the O3
+host: the shared roots `packages/story-kit`'s `SHARED_STORY_ROOTS` names — `packages/ui/src` and
+`packages/content-ui/src` — plus `apps/web/src` and the captured prototypes, under O3's paint.
+`stories:o3xo` is the O3XO host, cut back to `apps/o3xo/src`: the shared packages are already
+covered, and what is left is the components whose token roles only O3XO's package declares.
 
 `HeroSection.stories.tsx` is the pattern for section blocks: a story per state the prototype shows.
 
 Structural a11y (roles, labels, alt text, heading order) fails the run. `color-contrast` is held
 back — the 12 current violations are all muted-foreground tokens, which is a palette decision, not a
-component defect. See the note in `.storybook/preview.ts`.
+component defect. See the note in `defineStorybookPreview`.
 
 > **Import `stegaClean` from `@sanity/client/stega`, never the `next-sanity` barrel.** The barrel is
 > heavy and the lint rule enforcing this stays. The old reason — that `@portabletext/react`'s
 > `react/compiler-runtime` import could not resolve under Storybook's Next preset — is fixed:
-> `.storybook/main.ts` now pins that entry for the dependency pre-bundle as well as the module
-> graph. Portable text renders in Storybook.
+> `defineStorybookConfig` now pins that entry for the dependency pre-bundle as well as the module
+> graph, on both hosts. Portable text renders in Storybook.
 
 ### `Pages` — whole pages, from the committed seeds
 
@@ -123,8 +155,8 @@ against real content. It found three defects on its first run — a skipped head
 `/solutions`, a `<dl>` full of `<p>`s in `statGroup`, and a keyboard-unreachable scroller on
 `/live`.
 
-Fixtures come from `src/stories/seedContent.ts`, which shares its projection with the render layer
-(`src/test/seedProjection.ts`) and differs only in loading JSON by static import rather than
+Fixtures come from `@o3/content-ui/testing/seed`, which shares its projection with the render layer
+(`@o3/content-ui/testing`) and differs only in loading JSON by static import rather than
 `node:fs`, and in resolving **real** asset ids out of the committed `data/assets.json` — a browser
 actually loads the picture, so a fabricated id would be a mockup of empty boxes.
 

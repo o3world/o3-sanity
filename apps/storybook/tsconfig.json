@@ -4,7 +4,8 @@
     "baseUrl": ".",
     "paths": {
       "@o3/story-kit": ["../../packages/story-kit/src/index.ts"],
-      "@o3/story-kit/story-roots": ["../../packages/story-kit/src/storyRoots.ts"],
+      "@o3/story-kit/storybook-config": ["../../packages/story-kit/src/storybookConfig.ts"],
+      "@o3/story-kit/storybook-preview": ["../../packages/story-kit/src/storybookPreview.ts"],
       "@o3/story-kit/*": ["../../packages/story-kit/src/*"],
       "@o3/ui": ["../../packages/ui/src/index.ts"],
       "@o3/ui/*": ["../../packages/ui/src/*"]

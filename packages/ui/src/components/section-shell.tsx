@@ -1,4 +1,4 @@
-import type { HTMLAttributes } from 'react'
+import type { HTMLAttributes, ReactNode } from 'react'
 import { cva } from 'class-variance-authority'
 
 import { cn } from '../lib/utils'
@@ -27,6 +27,12 @@ export const SURFACE_CLASS: Record<Surface, string> = {
  * on-ink alphas (tokens/color.css), so a renderer's `text-fg-muted` means
  * "muted against THIS band" rather than a fixed grey.
  *
+ * IT WORKS NESTED, and only because a light surface declares itself too: the
+ * roles inherit, so a light card inside an ink band keeps the band's white
+ * alphas until `data-surface="white"` (or `bone`) on the card points them back
+ * at the light values. A plate that is neither — O3XO's yellow accent card —
+ * declares no surface and names `ink`, the role no band re-points.
+ *
  * Its React half is `SurfaceProvider`, and they are one act: this shell does
  * both, and a band that builds its own `<section>` reaches for this beside
  * `SURFACE_CLASS`. Declaring only the provider leaves a button readable and
@@ -34,6 +40,69 @@ export const SURFACE_CLASS: Record<Surface, string> = {
  */
 export function surfaceAttrs(surface: Surface) {
   return { 'data-surface': surface } as const
+}
+
+/** How far a picture behind a band is muted so the band's copy stays legible. */
+export const TINTS = ['dim', 'none'] as const
+export type Tint = (typeof TINTS)[number]
+
+/**
+ * Surface → the wash laid over the picture, so a band's copy keeps the
+ * contrast its surface promised it. The wash is the band's OWN colour: an ink
+ * band darkens toward the white it writes in, a white band lightens toward the
+ * ink it writes in, and neither names a colour outside the three roles every
+ * brand's token package paints (ADR 0028).
+ *
+ * `bg-ink/40` is the kit's Banner Tint (`4406:6598`). The light surfaces carry
+ * dark copy and need more of their own colour to do it; the kit draws no light
+ * photographic band to measure one from.
+ */
+const TINT_CLASS: Record<Surface, string> = {
+  white: 'bg-white/70',
+  bone: 'bg-bone/70',
+  ink: 'bg-ink/40',
+}
+
+/**
+ * THE PICTURE A BAND SITS ON — the media layer plus its tint, laid full-bleed
+ * behind everything the band draws.
+ *
+ * The media arrives as children rather than as a source, because this package
+ * knows nothing about Sanity and because the layer outlives the format: a
+ * still today, the kit's opener video (`4406:6597`) later, through the same
+ * box. Whatever is passed is stretched to the layer, so hand it something that
+ * fills its parent.
+ *
+ * `SectionShell` takes one of these as `background` and does the positioning
+ * half. A band that builds its own `<section>` — anything bleeding past the
+ * gutter or painting a gradient — renders one directly, the same way it
+ * reaches for `SURFACE_CLASS` and `surfaceAttrs`, and adds `relative isolate`
+ * to its own band element so the negative z-index lands under the copy and no
+ * further.
+ *
+ * The band's surface still paints under all of this: a picture that fails to
+ * load leaves the colour the band declared rather than nothing.
+ */
+export function SectionBackground({
+  surface,
+  tint = 'dim',
+  children,
+}: {
+  /** The band's surface, which decides what colour the tint is. */
+  surface: Surface
+  /** How far the picture is muted. Defaults to `dim`. */
+  tint?: Tint
+  /** The media element — anything that fills its parent. */
+  children: ReactNode
+}) {
+  return (
+    <div aria-hidden className="absolute inset-0 -z-10 overflow-hidden">
+      <div className="absolute inset-0 [&>*]:h-full [&>*]:w-full [&>*]:object-cover">
+        {children}
+      </div>
+      {tint === 'none' ? null : <div className={cn('absolute inset-0', TINT_CLASS[surface])} />}
+    </div>
+  )
 }
 
 /** The container measures the frames use (tokens/layout.css). */
@@ -90,6 +159,12 @@ export interface SectionShellProps extends HTMLAttributes<HTMLElement> {
   width?: SectionWidth
   /** Extra classes for the inner container (the outer band takes className). */
   contentClassName?: string
+  /**
+   * The picture the band sits on — a `SectionBackground`. The band's surface
+   * still paints under it and still decides what colour the copy is, so a band
+   * with a picture declares the same surface it would without one.
+   */
+  background?: ReactNode
 }
 
 /**
@@ -113,6 +188,7 @@ export function SectionShell({
   width = 'section',
   className,
   contentClassName,
+  background,
   children,
   ...rest
 }: SectionShellProps) {
@@ -123,9 +199,18 @@ export function SectionShell({
     <SurfaceProvider surface={surface ?? 'white'}>
       <section
         {...surfaceAttrs(surface ?? 'white')}
-        className={cn(sectionShellVariants({ surface, top, bottom }), className)}
+        className={cn(
+          sectionShellVariants({ surface, top, bottom }),
+          // Only when there is something to position. A band with no picture
+          // renders the markup it always did — `isolate` on every band would
+          // be a new stacking context under every decoration that bleeds out
+          // of one.
+          background ? 'relative isolate' : undefined,
+          className,
+        )}
         {...rest}
       >
+        {background}
         <div className={cn('mx-auto w-full', SECTION_WIDTH_CLASS[width], contentClassName)}>
           {children}
         </div>

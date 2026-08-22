@@ -1,0 +1,15 @@
+{
+  "_id": "person-framer-diego-morales",
+  "_type": "person",
+  "name": "Diego Morales",
+  "title": "VP of AI Solutions",
+  "bio": "Technical strategist focused on translating AI capabilities into practical business applications that enhance human expertise and deliver measurable ROI.",
+  "headshot": {
+    "_type": "image",
+    "_srcUrl": "https://framerusercontent.com/images/PpmSrcBVSG6W6FYm3xINSZPgmys.png"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:person:diego-morales"
+  }
+}

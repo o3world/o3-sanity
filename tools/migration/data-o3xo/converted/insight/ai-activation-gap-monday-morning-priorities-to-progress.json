@@ -1,0 +1,601 @@
+{
+  "_id": "insight-framer-ai-activation-gap-monday-morning-priorities-to-progress",
+  "_type": "insight",
+  "title": "The AI activation gap: what to do Monday morning to turn priorities into progress",
+  "slug": {
+    "_type": "slug",
+    "current": "ai-activation-gap-monday-morning-priorities-to-progress"
+  },
+  "excerpt": "Learn how the O3XO AI Activation Canvas turns a clear business priority into a concrete first step in 30 to 60 days.",
+  "publishedAt": "2026-04-24T12:00:00Z",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-framer-strategy",
+      "_key": "cat-strategy"
+    }
+  ],
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_srcUrl": "https://framerusercontent.com/images/BOzRzm3XEwVROMR0mpe5GYwg.png"
+    },
+    "alt": "Illustration of steps going up"
+  },
+  "body": [
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Most executives we talk to are not stuck on whether to invest in AI. They've done that thinking. They know their priorities. The problem is the next step.",
+          "_key": "k0003"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "While around 70% of organizations are using AI in at least one function, less than 25% report material enterprise-wide impact and more than 60% say ROI hasn't met expectations. That gap is not a technology problem. McKinsey has been saying for years that 70% of digital transformations fail because of people and process, not the tools.",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "AI is not a project. It's an enablement layer. And closing the activation gap requires treating it that way.",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Two leaders. Two starting points.",
+          "_key": "k0009"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0010",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Some leaders want broad activation: get AI working across the whole organization, drive productivity, and build momentum team by team. Others have a sharper focus: one workflow to fix, one metric to move, one team to enable.",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Both are valid. Both require the same thing: a way to turn a clear priority into a concrete first action.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "We work with both types regularly:",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A mid-market, national construction company needed to increase productivity without adding headcount.",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A global life sciences company needed to improve lead quality and help sales engage earlier with tailored insights",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Different scale, different scope, different industries. Same activation challenge.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The AI Activation Canvas",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This is the model we use at O3XO to move from priority to execution. Three sections. Each one forces the right conversation before anyone buys a tool or starts a pilot.",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\n",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_srcUrl": "https://framerusercontent.com/images/KQDS3wVMHo2d4Po4DgMM2V9BWM.jpg"
+      },
+      "alt": "",
+      "_key": "k0028"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Mandate and shift. ",
+          "_key": "k0030"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What must happen in the next 6 to 12 months, and what changes if it works? For the construction company, the mandate was productivity without headcount growth, measured in hours saved per employee per week. For life sciences, it was faster and quality targets in their pipeline, measured in MQL to SQL speed and conversion rate. Getting this written down in plain language is not a small thing. Teams that can't answer it clearly are not ready to execute.",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\n",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_srcUrl": "https://framerusercontent.com/images/gNbDDgktXdFL7KEP1JNPW9Oc.jpg"
+      },
+      "alt": "",
+      "_key": "k0034"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Advantage. ",
+          "_key": "k0036"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Where specifically in the workflow can AI create meaningful change? The construction company landed on proposal drafting, emails, reports, and meeting summaries. Too much time writing and reworking content, inconsistent quality across teams. The life sciences company focused on identifying high-intent accounts and drafting personalized first outreach. Manual research was slowing reps down and leads were based mostly on marketing activity. Specificity here is everything. \"AI can help with productivity\" is not a use case. A named workflow with a named problem is.",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\n",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_srcUrl": "https://framerusercontent.com/images/685wx2CAkrWbcnwmywWTY7PhxQ.jpg"
+      },
+      "alt": "",
+      "_key": "k0040"
+    },
+    {
+      "_key": "k0041",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Readiness and commitment. ",
+          "_key": "k0042"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Are you set up to make this work, and what are you actually going to do? Readiness means an honest look at data, process, ownership, and guardrails. The construction company had partial content, a named AI council, incomplete processes, and no usage guidelines yet. That is not a blocker. That is a to-do list. The commitment was to roll out ChatGPT company-wide, assign one use case per department, and track time saved weekly.",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0044",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "For life sciences, data was partial, ownership was named, and the commitment was to deliver signal-driven leads and insight generation to reps while defining clearer criteria for outreach.",
+          "_key": "k0045"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0046",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In both cases, the canvas can turn a strategic priority into a 30 to 60 day test with a clear owner and a measurable outcome.",
+          "_key": "k0047"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0048",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What happened",
+          "_key": "k0049"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0050",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The construction company hit an 80%+ adoption rate across the organization. Real usage, real time savings, and a foundation to build from.",
+          "_key": "k0051"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0052",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The life sciences company moved first contact outreach from weeks to 5 to 10 minutes, with personalized insights ready before the rep made the call.",
+          "_key": "k0053"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0054",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "These are not transformation stories. They're activation stories. That is the point.",
+          "_key": "k0055"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0056",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Three things that determine whether this works",
+          "_key": "k0057"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0058",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Start with the outcome, not the tool.",
+          "_key": "k0059"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " The most successful AI initiatives begin with a business priority that already has executive attention. The tool decision comes later.",
+          "_key": "k0060"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0061",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Specificity creates momentum. ",
+          "_key": "k0062"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Organizations that identify the exact step in a workflow where AI removes friction see faster adoption and better results than those operating at a category level.",
+          "_key": "k0063"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0064",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Readiness leads to clear commitments. ",
+          "_key": "k0065"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Once leaders understand their actual constraints, they can commit to a focused first action and build from there.",
+          "_key": "k0066"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0067",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "You've already done the hard thinking. You know whether you need broad activation or a focused wedge. The canvas works for both.",
+          "_key": "k0068"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0069",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The only question left is what you're doing Monday morning.",
+          "_key": "k0070"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0071",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Ready to put this to work?",
+          "_key": "k0072"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " ",
+          "_key": "k0073"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "Download the AI Activation Canvas",
+          "_key": "k0074"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " and map your first activation in minutes, or ",
+          "_key": "k0075"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "reach out",
+          "_key": "k0076"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " to run a guided session with your leadership team.",
+          "_key": "k0077"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://o3xo-ai-canvas.lovable.app/"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "../contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "Most leaders know their AI priorities. The gap is activation. See how the O3XO AI Activation Canvas turns strategy into action in 30 to 60 days. Primary keyword: AI activation framework Secondary keywords: enterprise AI adoption, AI implementation strategy, AI ROI gap, AI pilot execution, AI enablement layer."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:insight:Mh5G0k3fp"
+  }
+}

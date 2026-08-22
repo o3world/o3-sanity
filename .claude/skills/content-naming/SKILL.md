@@ -1,6 +1,6 @@
 ---
 name: content-naming
-description: Naming and wiring rules for Sanity content in this repo. Use when adding, renaming, or removing a section block, base block, shared object, document type, schema field, or block renderer — anything under packages/sanity/src/schemas/ or apps/web/src/content/. Also use when reviewing a diff that touches those paths.
+description: Naming and wiring rules for Sanity content in this repo. Use when adding, renaming, or removing a section block, base block, shared object, document type, schema field, or block renderer — anything under packages/sanity/src/schemas/, packages/content-ui/src/ or either app's src/content/. Also use when reviewing a diff that touches those paths.
 ---
 
 # Content naming
@@ -30,14 +30,14 @@ Ask in this order — each "yes" stops you from adding a type that shouldn't exi
 
 Name it `<thing>Section`. Never `<thing>Block`.
 
-1. `packages/sanity/src/schemas/blocks/registry.ts` — add to `SECTION_BLOCKS`. The factory throws until you do.
+1. `packages/sanity/src/schemas/blocks/registry.ts` — add to `CORE_SECTION_BLOCKS` if both brands draw it, or to `BRAND_SECTION_BLOCKS.<brand>` if one does; `SECTION_BLOCKS` derives from those. The factory throws until you do.
 2. `packages/sanity/src/knobs/<name>Section.ts` — the block's design options, at minimum `surfaceKnob({ initialValue: … })`; export it from `knobs/index.ts` and add it to `BLOCK_KNOBS`. Required, not optional (ADR 0020). Add a `placeholder` in the same file, typed `satisfies <Name>Section` — it is what the canvas insert menu writes, and `knobs/placeholder.test.ts` fails without one. It must be **commit-safe**: fill every required field, never reference a document, and leave design options to the knobs (CONTEXT.md → Placeholder).
 3. `packages/sanity/src/schemas/blocks/section.ts` — `defineSectionBlock({ name, title, description, knobs, fields, preview })`. Don't add a `surface` field; the factory generates it from the knob. `description` is required and has a standard (below).
-4. `packages/sanity/src/schemas/index.ts` — import and add to `schemaTypes`, in the section-blocks group.
+4. `packages/sanity/src/schemas/index.ts` — import and add to the keyed `SECTION_SCHEMAS` record; the roster (step 1) decides which brands' Studios load it.
 5. `packages/sanity/src/queries.ts` — add a `_type == "<name>Section" => { … }` arm to `SECTION_FIELDS` **only if** the block needs query-time expansion (dereferenced `button` targets, reference→card projections, a subquery). Renderers must stay pure components: resolve data here, not in the component.
-6. `apps/web/src/content/blocks/section/<name>Section/<Name>Section.tsx` — folder name === schema name exactly. Type props with `SectionProps<'<name>Section'>` from `sectionTypes.ts`; never hand-write the prop shape.
-7. `apps/web/src/content/blocks/clientComponents.ts` — add a `defineBlockRender('<name>Section', { component: … })` entry to `CLIENT_SECTION_BINDINGS`.
-8. `pnpm typegen`, then `pnpm typecheck`. The `satisfies` clause in `apps/web/src/content/blocks/registry.ts` is what catches a renderer whose props drifted from the generated shape.
+6. `packages/content-ui/src/blocks/section/<name>Section/<Name>Section.tsx` — folder name === schema name exactly. Type props with `SectionProps<'<name>Section'>` from `@o3/content-runtime/blocks`; never hand-write the prop shape.
+7. Export it from `packages/content-ui/src/index.ts`, then add a `defineBlockRender('<name>Section', { component: … })` entry to `CLIENT_SECTION_BINDINGS` in **each app's** `src/content/blocks/clientComponents.ts` — the binding is per-app (ADR 0028).
+8. `pnpm typegen`, then `pnpm typecheck`. The `satisfies` clause in each app's `src/content/blocks/registry.ts` is what catches a renderer whose props drifted from the generated shape.
 
 ## Writing a block description
 
@@ -65,7 +65,7 @@ Same shape, three differences: add to `BASE_BLOCKS`; define with `defineBaseBloc
 
 1. `CONTEXT.md` first — a new document type is new ubiquitous language. If you can't write its one-line definition, you don't have the type yet.
 2. Schema in `packages/sanity/src/schemas/documents/`. Every document ends with `seo` then `migration`. Routable types carry a required `slug` (ADR 0001).
-3. Routable? Add to `ROUTABLE_TYPES` and `COLLECTION_PREFIXES` in `constants.ts`, then one folder under `apps/web/src/content/documents/<type>/` with `entry.tsx` + registry line.
+3. Routable? Add to `ROUTABLE_TYPES` in `constants.ts`; a collection also needs its prefix and title in every brand's `collections` in `brand.ts`. Then one folder under `src/content/documents/<type>/` with `entry.tsx` + registry line, in **each** app that routes it (`apps/web`, `apps/o3xo`) — a route entry is per-app binding, and its prefix comes from `COLLECTION_PREFIXES`, never a literal.
 4. Card projection goes in `queries.ts` next to `INSIGHT_CARD` / `CASE_STUDY_CARD`, shared by every consumer — never duplicated inline.
 
 ## Renaming

@@ -10,14 +10,28 @@
         "src/**/*.stories.tsx",
         "src/**/*.test.ts",
         "src/**/*.render.test.tsx",
-        "src/test/index.ts",
-        "src/test/setup.ts",
-        "src/test/stubs/*.{ts,tsx}"
+        "src/test/index.ts"
+      ]
+    },
+    "apps/o3xo": {
+      "entry": [
+        "src/app/**/{page,layout,route,not-found,error,loading}.tsx",
+        "src/app/**/route.ts",
+        "next.config.ts",
+        "sanity.cli.ts",
+        "seed/load.ts",
+        "src/**/*.stories.tsx",
+        "src/**/*.test.ts",
+        "src/**/*.render.test.tsx",
+        "src/test/index.ts"
       ]
     },
     "apps/storybook": {
       "entry": [".storybook/{main,preview}.ts", "prototypes/**/*.stories.tsx"],
       "ignore": ["prototypes/*/**"]
+    },
+    "apps/storybook-o3xo": {
+      "entry": [".storybook/{main,preview}.ts"]
     },
     "packages/*": {
       "entry": ["src/index.ts", "src/**/*.stories.tsx", "sanity.cli.ts"]
@@ -30,6 +44,36 @@
         "src/knobs/index.ts",
         "src/**/*.test.ts"
       ]
+    },
+    "packages/content-ui": {
+      "entry": [
+        "src/index.ts",
+        "src/cards/index.ts",
+        "src/chrome/index.ts",
+        "src/lib/format-date.ts",
+        "src/portable-text/PortableTextBody.tsx",
+        "src/testing/index.ts",
+        "src/testing/seedContent.ts",
+        "src/**/*.stories.tsx",
+        "src/**/*.test.ts",
+        "src/**/*.render.test.tsx"
+      ]
+    },
+    "packages/content-runtime": {
+      "entry": [
+        "src/base-url.ts",
+        "src/blocks/index.ts",
+        "src/dataAttribute.ts",
+        "src/live.ts",
+        "src/routes/index.ts",
+        "src/seo.ts",
+        "src/siteSettings.ts",
+        "src/urls.ts",
+        "src/**/*.test.ts"
+      ]
+    },
+    "packages/render-kit": {
+      "entry": ["src/index.ts", "src/project.ts", "src/setup.ts", "src/stubs/*.{ts,tsx}"]
     },
     "packages/editor-chrome": {
       "entry": [

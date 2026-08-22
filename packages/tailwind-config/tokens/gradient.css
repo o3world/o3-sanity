@@ -125,6 +125,32 @@
     radial-gradient(circle at 115% 24%, rgba(235, 16, 0, 0.5) 0%, rgba(3, 3, 3, 0) 100%),
     radial-gradient(circle at 0% 0%, rgba(114, 8, 0, 1) 0%, rgba(3, 3, 3, 1) 65%);
 
+  /*
+   * The orbital sphere's bloom — the warm falloff around its lit limb, drawn
+   * behind the wireframe in the hero (`1810:1616`) and the CTA band
+   * (`1799:1470`). Sampled down the hero raster's centre column (`1810:1588`),
+   * where the band sits at #121010, the limb peaks at #5D221A over about 40px,
+   * and 100px inside the limb it is back to #190E0E: a RIM, not a filled disc.
+   *
+   * `closest-side` holds the stops circular whatever box the call site gives
+   * it, and the limb lands at 88.5% because that box overhangs the sphere by
+   * 6.5% — the glow falls off outside the limb as well as inside. See
+   * `OrbitalSphere` for the geometry that reads those two numbers.
+   *
+   * A token under (c): used once, so the recurrence rule alone would leave it a
+   * call-site literal, but it carries the brand red and a custom property is
+   * the only thing a second brand can re-point.
+   */
+  --gradient-sphere-bloom: radial-gradient(
+    closest-side circle at 50% 50%,
+    rgba(120, 22, 14, 0) 0%,
+    rgba(120, 22, 14, 0.16) 60%,
+    rgba(150, 45, 30, 0.5) 82%,
+    rgba(166, 52, 34, 0.62) 88.5%,
+    rgba(140, 34, 22, 0.25) 94%,
+    rgba(140, 34, 22, 0) 100%
+  );
+
   /* ── Surface washes ────────────────────────────────────────────────────── */
   /*
    * The light bands are not flat in the exploration — they wash between white

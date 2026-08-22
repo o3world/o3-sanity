@@ -8,4 +8,5 @@
  * actually emitted into the bundle.
  */
 @source '../../../../packages/ui/src/**/*.{ts,tsx}';
+@source '../../../../packages/content-ui/src/**/*.{ts,tsx}';
 @source '../../../../packages/editor-chrome/src/**/*.{ts,tsx}';

@@ -62,6 +62,14 @@ export interface ProvenanceSources {
  * still shows the run that actually produced it.
  */
 const EXTRACT_OF_SOURCE: ReadonlyArray<readonly [prefix: string, extractType: string]> = [
+  // o3xo.ai has one extract type: a category document is derived from the
+  // insight that files itself under it, so it is dated by the same run.
+  ['framer:insight:', 'insight'],
+  ['framer:category:', 'insight'],
+  ['framer:caseStudy:', 'caseStudy'],
+  // A client is derived from the case study whose card names it, so it is
+  // dated by the same run — the rule the category arm above already states.
+  ['framer:client:', 'caseStudy'],
   ['wp:post:', 'perspective'],
   ['wp:page:', 'page'],
   ['wp:work:', 'caseStudy'],

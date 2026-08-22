@@ -1,0 +1,121 @@
+{
+  "_id": "caseStudy-framer-healthcare-tech-leader",
+  "_type": "caseStudy",
+  "title": "Activating strategic AI roadmaps for enterprise growth",
+  "slug": {
+    "_type": "slug",
+    "current": "healthcare-tech-leader"
+  },
+  "client": {
+    "_type": "reference",
+    "_ref": "client-framer-healthcare-tech-leader"
+  },
+  "narrativeHeadline": "A leading healthcare data and analytics organization needed to move beyond AI experimentation to strategic implementation. O3XO’s structured approach delivered a clear path from vision to execution in record time.",
+  "stats": [
+    {
+      "_type": "stat",
+      "_key": "k0011",
+      "value": "<3 weeks",
+      "label": "From strategy to prioritized AI roadmap"
+    }
+  ],
+  "heroMedia": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_srcUrl": "https://framerusercontent.com/images/Eu53pUciWVGB1nczd02JgCg.webp"
+    },
+    "alt": "Healthcare professional using a tablet, representing AI strategy acceleration and digital health transformation"
+  },
+  "story": [
+    {
+      "_type": "chapter",
+      "_key": "k0004",
+      "kicker": "Opportunity",
+      "title": "Strategic clarity in a fragmented AI landscape",
+      "body": [
+        {
+          "_key": "k0000",
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "As a high-growth business inside one of the world’s largest healthcare distribution enterprises, this client was uniquely positioned to demonstrate how artificial intelligence could deliver measurable impact across lead generation, operations, and customer engagement. While enthusiasm for AI was high, early initiatives were fragmented and created experimentation fatigue rather than business value.",
+              "_key": "k0001"
+            }
+          ],
+          "markDefs": [],
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "_key": "k0002",
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "The challenge was to transform scattered efforts into a cohesive strategy that aligned leadership, prioritized high-impact use cases, and positioned the organization as an innovation leader within the broader enterprise. This required moving beyond proof-of-concept thinking to develop a practical activation roadmap grounded in business priorities and organizational readiness.",
+              "_key": "k0003"
+            }
+          ],
+          "markDefs": [],
+          "_type": "block",
+          "style": "normal"
+        }
+      ]
+    },
+    {
+      "_type": "chapter",
+      "_key": "k0009",
+      "kicker": "Solution",
+      "title": "Proven methodology for strategic AI activation",
+      "body": [
+        {
+          "_key": "k0005",
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "O3XO led a collaborative engagement using a structured AI strategy and prioritization framework. Through executive interviews, readiness assessments, and strategy workshops, key insights emerged: AI interest was strong but unfocused, sales and growth goals provided the most leverage, and AI fluency varied widely across teams. Working closely with the client’s leadership, O3XO helped define five strategic priorities for AI activation, anchored by a practical three-phase roadmap.",
+              "_key": "k0006"
+            }
+          ],
+          "markDefs": [],
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "_key": "k0007",
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "The approach prioritized revenue-driving use cases such as AI-powered lead prioritization and automated sales content personalization, while also establishing governance guardrails and team enablement frameworks. Technical feasibility was validated, integration pathways with tools like HubSpot were mapped, and a detailed 90-day execution plan was created to demonstrate early wins while building toward long-term AI maturity.",
+              "_key": "k0008"
+            }
+          ],
+          "markDefs": [],
+          "_type": "block",
+          "style": "normal"
+        }
+      ]
+    },
+    {
+      "_type": "quoteSection",
+      "_key": "k0010",
+      "surface": "bone",
+      "decoration": "molecule",
+      "quote": "The O3XO team brought clarity and momentum to our AI go-to-market journey. Their hands-on, collaborative approach helped us plan and soon execute a project that will transform how we drive growth.",
+      "attribution": "Head of Product, Leading Healthcare Tech Organization"
+    }
+  ],
+  "seo": {
+    "description": "See how a healthcare technology leader identified dozens of high-impact AI use cases and built a prioritized roadmap in under 3 weeks through our rapid workshop process."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:caseStudy:OGTOGaOky",
+    "provisional": true,
+    "provisionalNote": "Migrated from o3xo.ai with three authored card fields this model has no home for — the subject label, the card sentence and the card photograph — and with a client that has no logo, which Studio requires. All four are recoverable from the committed extract. Cleared by giving them fields or by recording the drop as permanent, and by supplying the client mark."
+  }
+}

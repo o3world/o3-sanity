@@ -1,0 +1,48 @@
+/*
+ * Layout — the O3XO UI kit's breakpoints.
+ *
+ * ── PROVENANCE ─────────────────────────────────────────────────────────────
+ *
+ * The Grids canvas (`4214:3643`) draws six artboards and states the contract
+ * on the frame itself: "Following the Radix framework, each breakpoint
+ * matches a fixed screen width. Values are min-width based and apply when the
+ * screen width is equal or greater."
+ *
+ *   Kit band                   min-width   columns  gutter  page margin
+ *   Phones (portrait)                  0         4      16           16
+ *   Phones (landscape)               520         8      16           16
+ *   Tablets (portrait)               768         8      24           16
+ *   Tablets (landscape)             1024        12      24           96
+ *   Laptops                         1280        12      24           96
+ *   Desktops                        1640        12      24     centered
+ *
+ * The kit's first band is the unprefixed base, so the five prefixes below
+ * carry the five thresholds above it. Three of them — 768, 1024, 1280 — are
+ * already where Tailwind puts `md`, `lg` and `xl`; they are named anyway so
+ * the scale reads as one list and the compiled media queries are the kit's
+ * own numbers rather than a rem conversion of them.
+ *
+ * ── THIS BLOCK IS `@theme`, NOT THE BRAND BLOCK ────────────────────────────
+ *
+ * Every other token this package moves rides `:root[data-brand='o3xo']`.
+ * A breakpoint cannot: Tailwind compiles `lg:` to a literal media query, and
+ * no media query can read a custom property. So these are build-time, and
+ * they reach whichever stylesheet imports this file — `apps/o3xo`, and
+ * Storybook, which loads both brands.
+ * `packages/ui/src/brand-ramp-seam.test.ts` is the guard.
+ *
+ * ── WHAT THIS FILE DOES NOT CARRY ──────────────────────────────────────────
+ *
+ * Page gutter, band rhythm and containers. The kit's grid draws a 16 → 96
+ * margin and a 1248px desktop container, which is what the base theme's
+ * `--spacing-gutter` and `--container-section` already resolve to at each
+ * end; the rhythm between bands is composition, and belongs with the bands.
+ */
+
+@theme {
+  --breakpoint-sm: 520px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1640px;
+}

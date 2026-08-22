@@ -1,0 +1,113 @@
+{
+  "_id": "caseStudy-framer-fortune-500-insurance-provider",
+  "_type": "caseStudy",
+  "title": "Accelerating legal document review with intelligent compliance checking",
+  "slug": {
+    "_type": "slug",
+    "current": "fortune-500-insurance-provider"
+  },
+  "client": {
+    "_type": "reference",
+    "_ref": "client-framer-fortune-500-insurance-provider"
+  },
+  "narrativeHeadline": "This innovation studio partnership needed to ensure legal documents met regulatory standards without constant legal consultation. O3XO's generative AI solution turned hours of manual analysis into minutes of intelligent compliance verification.",
+  "stats": [
+    {
+      "_type": "stat",
+      "_key": "k0010",
+      "value": "30-60 sec",
+      "label": "Time to process 10+ page legal document"
+    }
+  ],
+  "heroMedia": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_srcUrl": "https://framerusercontent.com/images/6pP4JXqlOs921psuipipVE2Wg.png"
+    },
+    "alt": "Legal professional reviewing and signing documents, representing AI-powered legal document analysis"
+  },
+  "story": [
+    {
+      "_type": "chapter",
+      "_key": "k0004",
+      "kicker": "Opportunity",
+      "title": "Navigating legal complexity without legal expertise",
+      "body": [
+        {
+          "_key": "k0000",
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Managing legal documents presents a significant challenge for organizations where team members wear multiple hats and lack specialized legal training. With hundreds of contracts and legal documents requiring regular review against ever-changing federal, state, and municipal guidelines, organizations often find themselves operating in uncertainty. Standard contracts frequently become outdated or missing critical content, while examining each passage for compliance requires tedious line-by-line analysis that's both time-intensive and prone to human error.",
+              "_key": "k0001"
+            }
+          ],
+          "markDefs": [],
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "_key": "k0002",
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "The challenge was finding a reliable, affordable way to ensure legal documents remain current and compliant without requiring constant legal consultation or risking oversight of critical regulatory changes.",
+              "_key": "k0003"
+            }
+          ],
+          "markDefs": [],
+          "_type": "block",
+          "style": "normal"
+        }
+      ]
+    },
+    {
+      "_type": "chapter",
+      "_key": "k0009",
+      "kicker": "Solution",
+      "title": "Intelligent document comparison that democratizes legal expertise",
+      "body": [
+        {
+          "_key": "k0005",
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Through our partnership with this prominent innovation studio, O3XO developed a generative AI solution that quickly breaks down complex legal documents and compares them against \"gold standard\" templates and current regulatory requirements. The system provides precise guidance on specific passages that need attention, flagging outdated clauses, missing provisions, and potential compliance gaps.",
+              "_key": "k0006"
+            }
+          ],
+          "markDefs": [],
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "_key": "k0007",
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Rather than replacing legal expertise, the solution empowers non-legal professionals to identify issues that require professional review, dramatically reducing the scope and cost of legal consultation. The AI processes multi-page documents in minutes, highlighting discrepancies and providing contextual recommendations that save hours of manual review while mitigating compliance risk.",
+              "_key": "k0008"
+            }
+          ],
+          "markDefs": [],
+          "_type": "block",
+          "style": "normal"
+        }
+      ]
+    }
+  ],
+  "seo": {
+    "description": "See how a Fortune 500 insurance provider reduced legal document review from hours to 30-60 seconds with AI-powered compliance checking and intelligent analysis."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:caseStudy:IgUv9Ozgz",
+    "provisional": true,
+    "provisionalNote": "Migrated from o3xo.ai with three authored card fields this model has no home for — the subject label, the card sentence and the card photograph — and with a client that has no logo, which Studio requires. All four are recoverable from the committed extract. Cleared by giving them fields or by recording the drop as permanent, and by supplying the client mark."
+  }
+}

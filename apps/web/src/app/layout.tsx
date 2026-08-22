@@ -2,10 +2,11 @@ import type { Metadata, Viewport } from 'next'
 import type React from 'react'
 import { Figtree } from 'next/font/google'
 
+import { getBaseUrl } from '@o3/content-runtime/base-url'
+
 import '@/app/globals.css'
 // Side-effect import: validates env vars at build/boot (see src/env.ts).
 import '@/env'
-import { getBaseUrl } from '@/lib/base-url'
 
 // Figtree is both the display and body face (tokens/typography.css reads
 // `--font-figtree` first in every stack).

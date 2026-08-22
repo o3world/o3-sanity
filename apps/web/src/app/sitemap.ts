@@ -2,11 +2,11 @@ import type { MetadataRoute } from 'next'
 
 import { SITEMAP_QUERY } from '@o3/sanity/queries'
 import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
+import { getBaseUrl } from '@o3/content-runtime/base-url'
+import { sanityFetch } from '@o3/content-runtime/live'
+import { typeTag } from '@o3/content-runtime/routes'
 
-import { typeTag } from '@/lib/content-routes/cacheTags'
-import { getBaseUrl } from '@/lib/base-url'
 import { REDIRECTED_PATHS } from '@/lib/redirects.generated'
-import { sanityFetch } from '@/sanity/live'
 
 interface SitemapRow {
   slug: string | null

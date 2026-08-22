@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { affectedStoryFiles, entryPath, removedStories, storiesFor } from './affected'
-import type { StatsModule, StoryEntry } from './storybook'
+import { hostDir, type StatsModule, type StoryEntry } from './storybook'
 
 /**
  * Module ids as Storybook writes them: relative to `apps/storybook`, with
@@ -72,6 +72,95 @@ describe('affectedStoryFiles', () => {
       everything: false,
     })
     expect(affectedStoryFiles(modules, ['packages/ui/src/lib/unused.ts']).storyFiles).toEqual([])
+  })
+
+  it('reaches every story from the builder the host’s preview shells over', () => {
+    // Both hosts are ~15-line shells over `@o3/story-kit` (#240). The builder
+    // is a plain import of `preview.ts`, so the climb reaches a global module
+    // the way an inline edit to `preview.ts` used to.
+    const shell: StatsModule[] = [
+      ...modules,
+      {
+        id: './../../packages/story-kit/src/storybookPreview.ts',
+        reasons: [{ moduleName: './.storybook/preview.ts' }],
+      },
+    ]
+    expect(
+      affectedStoryFiles(shell, ['packages/story-kit/src/storybookPreview.ts']).everything,
+    ).toBe(true)
+  })
+})
+
+/**
+ * The second host (#242). Storybook writes module ids relative to the host
+ * that built them, so the same `./globals.css` means a different file on each
+ * — and a brand's run must read its own.
+ */
+describe('affectedStoryFiles, against the o3xo host', () => {
+  const O3XO = hostDir('o3xo')
+  const MARK_STORY = 'apps/o3xo/src/brand/O3xoMark.stories.tsx'
+
+  const o3xoModules: StatsModule[] = [
+    { id: './globals.css', reasons: [{ moduleName: './.storybook/preview.ts' }] },
+    {
+      id: './.storybook/preview.ts',
+      reasons: [{ moduleName: '/virtual:/@storybook/builder-vite/storybook-config-entry.js' }],
+    },
+    {
+      id: './../../apps/o3xo/src/brand/O3xoMark.tsx',
+      reasons: [{ moduleName: `./../../${MARK_STORY}` }],
+    },
+    {
+      id: `./../../${MARK_STORY}`,
+      reasons: [{ moduleName: '/virtual:/@storybook/builder-vite/storybook-stories.js' }],
+    },
+  ]
+
+  it('climbs to a story the o3xo app owns', () => {
+    expect(affectedStoryFiles(o3xoModules, ['apps/o3xo/src/brand/O3xoMark.tsx'], O3XO)).toEqual({
+      storyFiles: [MARK_STORY],
+      everything: false,
+    })
+  })
+
+  it('reads this host’s globals as global', () => {
+    expect(affectedStoryFiles(o3xoModules, [`${O3XO}/globals.css`], O3XO).everything).toBe(true)
+    expect(
+      affectedStoryFiles(o3xoModules, [`${O3XO}/.storybook/preview.ts`], O3XO).everything,
+    ).toBe(true)
+  })
+
+  it('leaves the other host’s globals to the other host', () => {
+    expect(affectedStoryFiles(o3xoModules, ['apps/storybook/globals.css'], O3XO)).toEqual({
+      storyFiles: [],
+      everything: false,
+    })
+  })
+
+  it('resolves an index entry against the host that indexed it', () => {
+    const entry: StoryEntry = {
+      id: 'brand-o3xomark--default',
+      name: 'Default',
+      title: 'Brand/O3xoMark',
+      importPath: '../../apps/o3xo/src/brand/O3xoMark.stories.tsx',
+      type: 'story',
+    }
+    expect(entryPath(entry, O3XO)).toBe(MARK_STORY)
+    expect(storiesFor([entry], { storyFiles: [MARK_STORY], everything: false }, O3XO)).toHaveLength(
+      1,
+    )
+    expect(
+      removedStories(
+        [entry],
+        new Set(),
+        new Set([MARK_STORY]),
+        {
+          storyFiles: [MARK_STORY],
+          everything: false,
+        },
+        O3XO,
+      ),
+    ).toHaveLength(1)
   })
 })
 

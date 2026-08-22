@@ -1,0 +1,11 @@
+{
+  "_id": "client-framer-tyndale",
+  "_type": "client",
+  "name": "Tyndale",
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:client:tyndale",
+    "provisional": true,
+    "provisionalNote": "Migrated from o3xo.ai with no logo: the site publishes no client mark, on the case-study cards or anywhere else, and `client.logo` is required in Studio. Cleared by supplying the mark."
+  }
+}

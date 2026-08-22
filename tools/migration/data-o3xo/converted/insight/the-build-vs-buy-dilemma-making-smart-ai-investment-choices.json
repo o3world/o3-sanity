@@ -1,0 +1,563 @@
+{
+  "_id": "insight-framer-the-build-vs-buy-dilemma-making-smart-ai-investment-choices",
+  "_type": "insight",
+  "title": "The build vs. buy dilemma: making smart AI investment choices",
+  "slug": {
+    "_type": "slug",
+    "current": "the-build-vs-buy-dilemma-making-smart-ai-investment-choices"
+  },
+  "excerpt": "The build versus buy debate isn't new, but AI has completely rewritten the rules. What used to require armies of developers and months of work can now be prototyped in days, and the question isn't just about technology anymore, it's about value.",
+  "publishedAt": "2026-03-28T12:00:00Z",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-framer-strategy",
+      "_key": "cat-strategy"
+    }
+  ],
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_srcUrl": "https://framerusercontent.com/images/Hq5VI1mypl8JTYp2YSSbeSiqCI.webp"
+    },
+    "alt": "Abstract white star shape over dark space background"
+  },
+  "body": [
+    {
+      "_key": "k0000",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The build versus buy question has haunted technology leaders for decades. In the AI era, this isn’t really about technology at all, it’s about value creation and organizational impact.",
+          "_key": "k0001"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0002",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "At its core, the decision comes down to one fundamental question: what investment will create the most value for your organization? Not what’s trendy, not what your competitors are doing, but what will actually move the needle for your business.",
+          "_key": "k0003"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0004",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Understanding the trade-offs",
+          "_key": "k0005"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Let’s examine what each path offers.",
+          "_key": "k0007"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0008",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Building",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " gives you precision. You’re creating something that solves your specific problem in your specific way. It fits like a glove because it was tailored to your hand. But you’re also taking on the responsibility of maintaining it, supporting it, and evolving it as needs change.",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Buying",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " typically offers easier support and maintenance because someone else is on the hook for keeping the lights on. But adoption can be tricky. Off-the-shelf solutions rarely map perfectly to how your team actually works, which means you’re either changing the tool or changing the way people work. Neither is trivial.",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The AI twist: Building isn’t what it used to be",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Here’s where things get interesting. Building solutions in the AI age isn’t like traditional software development anymore. Low-code and no-code tools like Lovable have fundamentally changed the game, making it easier than ever to spin up solutions to workflow issues that would have taken months and six-figure budgets just a few years ago.",
+          "_key": "k0017"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0018",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Take our own story. We built an estimation tool that allowed us to ditch a lengthy, cumbersome process that relied on spreadsheets and a whole lot of subject matter expertise. Now we have something that meets our workflow requirements, gives us historical data that’s driving business insights, and we can continue to refine it over and over.",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "But here’s the best part: it wasn’t created by an engineer or a strategist. It was built by our own Justin Handler, who runs growth, business development, and our client services team. His understanding of the problem and insight into our needs helped drive a solution that we all use now.",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The power of modern AI-enabled development tools is that they democratize solution-building in ways that were simply impossible before.",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Building bridges, not empires",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "There’s another way to think about the build approach that doesn’t involve creating whole new pieces of software. We like to think of it as “building bridges” between critical components of your operational arsenal. A key component of the client work we’re doing these days starts with breaking down existing workflows, mapping out journeys, and identifying the key roadblocks. Instead of looking to replace the whole journey, we’re finding spots where AI can solve specific issues. That could be quicker search, workflow automation via an AI agent, or aggregating data to provide quick insights to act upon.",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This approach ensures adoption because we’re not breaking the workflow, just enhancing it. People don’t have to learn entirely new systems or abandon tools they’re comfortable with. The AI layers in seamlessly, making their existing processes better.",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Critically, we always design solutions with humans deliberately in the loop. This creates engagement and trust. AI handles the grunt work, the repetitive tasks, the data synthesis, but humans make the decisions, provide the context, and maintain control.",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "When buying makes more sense",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Now, let’s say your problem is less “bridgeable” or is, frankly, too big to build something for. A buy scenario may make more sense.",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "There are literally thousands of AI tools out there solving very specific issues. The key is making sure the investment makes sense. ROI is the critical lever and the cost to change is worth the investment.",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Additionally, many mission-critical tools you’re already using like CRM platforms, marketing automation systems, or productivity suites now have solid AI capabilities baked in. These aren’t bolt-on features anymore; they’re becoming core to how these platforms work.",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The challenge? You’ll likely have to train the team and connect the dots across the organization. But this is no different than traditional digital transformation efforts. It requires the same attention to change management, the same focus on adoption, and the same commitment to making it stick.",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0042",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A simple starting point",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0044",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "A good, straightforward example of a smart buy scenario is launching an enterprise-wide AI platform like ChatGPT or Claude. These tools can create a single resource for everyone to share and learn from. They can become a common foundation for exploring what AI can do for your organization.",
+          "_key": "k0045"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0046",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "But, they need to come with proper rollout plans, training, and governance to be well supported. Just turning on access and hoping people figure it out won’t cut it.",
+          "_key": "k0047"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0048",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Making the right choice",
+          "_key": "k0049"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0050",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "So how do you actually decide?",
+          "_key": "k0051"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0052",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Start by asking these questions:",
+          "_key": "k0053"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0054",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "What problem are we really trying to solve?",
+          "_key": "k0055"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " Be specific. “We need AI” isn’t a problem statement.",
+          "_key": "k0056"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0057",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Who will use this, and how will it fit into their workflow",
+          "_key": "k0058"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "? If the answer requires people to completely change how they work, proceed with caution.",
+          "_key": "k0059"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0060",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "What’s the true cost of ownership?",
+          "_key": "k0061"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " For builds, factor in maintenance and evolution. For buys, consider training, integration, and ongoing subscription costs.",
+          "_key": "k0062"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0063",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Can we start small and prove value before going big?",
+          "_key": "k0064"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " Pilot programs aren’t just for risk mitigation. They’re windows into critical insight about what works, what does not and where you should invest.",
+          "_key": "k0065"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0066",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Are we creating vendor lock-in or technical debt we can’t afford?",
+          "_key": "k0067"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " Both build and buy have ongoing investment implications, if you’re not careful.",
+          "_key": "k0068"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0069",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The reality is that most organizations will need a mix of both. Some problems are perfectly suited to off-the-shelf solutions. Others demand custom builds. Increasingly, the smartest approach is finding ways to enhance what you already have rather than ripping and replacing.",
+          "_key": "k0070"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0071",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The AI age hasn’t eliminated the build versus buy dilemma, it’s just changed the variables. The fundamentals remain the same: understand your problem, know your constraints, focus on value creation, and always keep the humans in the loop. At the end of the day, the best AI investment isn’t the one that’s most technically impressive. It’s the one that actually makes your organization more effective at doing what it does best.",
+          "_key": "k0072"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "How organizations should approach the build-vs-buy decision for AI systems, balancing cost, speed, control, and long-term strategic advantage."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:insight:sTZE2hQWw"
+  }
+}

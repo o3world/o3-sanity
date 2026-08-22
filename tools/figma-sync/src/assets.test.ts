@@ -210,7 +210,8 @@ async function run(
     current,
     {
       fileKey: FILE_KEY,
-      client: createFigmaClient('token', fetchImpl),
+      // No retries: the 429 case below asserts the throw, not the patience.
+      client: createFigmaClient('token', { fetchImpl, retries: 0 }),
       documents: new Map(documents),
       writeAsset: (path, bytes) => written.push({ path, bytes }),
     },

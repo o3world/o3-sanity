@@ -27,10 +27,16 @@ export interface WpTeamMember {
 }
 
 export const personDoc = z.object({
-  _id: z.string().regex(/^person-wp-\d+$/),
+  /* `-wp-<id>` for a WordPress user or team post, `-framer-<name>` for someone
+   * o3xo.ai's About page names (`map/framerPage.ts`) — that site has no
+   * per-person record to key on, so the name is the identity. */
+  _id: z.string().regex(/^person-(wp-\d+|framer-[a-z0-9-]+)$/),
   _type: z.literal('person'),
   name: z.string().min(1),
   title: z.string().min(1).optional(),
+  /* o3xo.ai prints one under every name; WordPress's team posts carry one too
+   * and o3 draws none, so the WordPress side leaves it unmapped. */
+  bio: z.string().min(1).optional(),
   headshot: migratableImage.optional(),
   migration: migrationObject,
 })

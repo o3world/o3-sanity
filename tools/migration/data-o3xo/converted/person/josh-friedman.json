@@ -1,0 +1,15 @@
+{
+  "_id": "person-framer-josh-friedman",
+  "_type": "person",
+  "name": "Josh Friedman",
+  "title": "AI Solutions Architect",
+  "bio": "Technical architect who designs and implements AI solutions that integrate seamlessly with existing systems and scale responsibly across organizations.",
+  "headshot": {
+    "_type": "image",
+    "_srcUrl": "https://framerusercontent.com/images/T0QpHcL3JXPNlReUru43SYucak.png"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:person:josh-friedman"
+  }
+}

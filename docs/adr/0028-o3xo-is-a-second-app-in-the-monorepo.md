@@ -1,6 +1,6 @@
 # 0028. O3XO is a second app in the monorepo
 
-- **Status:** Accepted; first-step sequencing amended 2026-08-19 (see Addendum)
+- **Status:** Accepted; first-step sequencing amended 2026-08-19 (see Addendum); the experiment superseded by kit parity later the same day (see second Addendum); the one-model-one-home clause superseded by ADR 0029 (2026-08-21)
 - **Date:** 2026-08-19
 - **Deciders:** NickO3 + Claude
 - **Related:** [ADR 0008](./0008-shadcn-anatomy-not-theme.md), `CONTEXT.md` → Brands,
@@ -96,3 +96,31 @@ chrome divergence are deferred, and each UI-kit component must earn its
 way in against the delta the experiment shows. The near-clone imports
 the shared machinery rather than copying it — a copied route builder is
 the fork this ADR rejected, one directory closer.
+
+## Second addendum (2026-08-19): kit parity supersedes the experiment
+
+The near-clone shipped, o3xo.ai's content migrated into it, and the
+result was reviewed. The hypothesis is rejected: O3XO is a
+different-looking site, and its goal is **parity with the O3XO UI kit's
+design** — composition included, not just brand values.
+
+- **The kit is o3xo's design source of record.** Where it contradicts
+  itself or is silent — much of it is an HTML import of the live Framer
+  site, and no interaction states are drawn anywhere — the live
+  o3xo.ai rendering wins, kit corrections go to Nick, and interaction
+  states are invented from O3XO's tokens.
+- **#224 narrows** from a gate each kit component must earn its way
+  through to a page-by-page parity audit that produces the build list.
+- **New o3xo components land app-first** in `apps/o3xo/src`. Promotion
+  into `packages/{ui,content-ui}` happens when o3 becomes a second
+  consumer — the rule this ADR already applies to machinery. An
+  app-local component may use brand-only token roles (`accent`); the
+  seam tests keep guarding whatever stays shared.
+- **The site chrome forks per app** when the o3xo nav/footer work is
+  picked up, not preemptively. The `brandMark` slot (#228) remains the
+  shared chrome's contract for as long as a brand uses it.
+- **The content model does not move.** Documents, shared objects, the
+  knob system, and routing stay one model with one typegen — the core
+  decision above. Section-block sharing is aspirational; content-model
+  sharing is required. A fork of the model itself is this ADR's exit
+  ramp (a separate repo), never an in-repo state.

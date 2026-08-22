@@ -1,5 +1,5 @@
 /**
- * Verify → is the dataset actually what the committed JSON says it is?
+ * Verify → is the brand's dataset actually what its committed JSON says it is?
  *
  * Runs after every load (#17, reused by #24 for parity checks). The tests
  * check the committed corpus; this checks the thing the corpus was supposed
@@ -7,6 +7,11 @@
  * disk and missing, half-loaded, or shadowed in the dataset.
  *
  *   pnpm --filter @o3/migration verify
+ *   pnpm --filter @o3/migration verify -- --brand o3xo
+ *
+ * The brand picks both sides of the comparison — the corpus tree and the
+ * dataset — so pointing it at one brand's dataset while holding the other's
+ * JSON is not a thing it can be asked to do.
  *
  * Exits non-zero on any finding, so it works as a checkpoint rather than a
  * report nobody reads. The checks live in `core/report.ts`; this fetches,
@@ -14,6 +19,7 @@
  */
 import { getCliClient } from 'sanity/cli'
 
+import { brandArg } from './lib/brandArg'
 import { readCorpus } from './core/read'
 import { report, type CheckResult } from './core/report'
 import { LOCKED_BY_ID, LOCK_FETCH_OPTIONS, type LockRow } from './core/state'
@@ -55,7 +61,8 @@ async function main() {
   const result = report(committed, live, locks)
 
   console.log(
-    `committed: ${committed.length} documents · dataset: ${live.length} documents · ` +
+    `brand ${brandArg()} · committed: ${committed.length} documents · ` +
+      `dataset: ${live.length} documents · ` +
       `${client.config().projectId}/${client.config().dataset}\n`,
   )
 

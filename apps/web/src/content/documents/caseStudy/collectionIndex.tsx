@@ -2,9 +2,9 @@ import { CASE_STUDIES_PAGE_QUERY } from '@o3/sanity/queries'
 import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
 import type { CASE_STUDIES_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 
+import { defineIndexType, type IndexRendererProps } from '@o3/content-runtime/routes'
+
 import { CaseStudyIndexView } from './CaseStudyIndexView'
-import { defineIndexType } from '@/lib/content-routes/define'
-import type { IndexRendererProps } from '@/lib/content-routes/types'
 
 type Props = IndexRendererProps<typeof CASE_STUDIES_PAGE_QUERY>
 

@@ -26,12 +26,16 @@ this package — the file has traps that have already cost two tickets.
 
 ## What earns a token
 
-A Figma value becomes a token when **either**:
+A Figma value becomes a token when **any** of:
 
 - **(a)** it is bound to a named Figma variable (`text/tertiary`,
-  `Layout/Layout 128`, `Gradient/Red/1`), **or**
+  `Layout/Layout 128`, `Gradient/Red/1`),
 - **(b)** it recurs — the same value doing the same job in two or more places
-  across the canonical frames.
+  across the canonical frames, or
+- **(c)** it carries a brand colour in a component both brands render. A custom
+  property is the only thing `@o3/tailwind-config-o3xo` can re-point, so a
+  brand-carrying value has to be one however few call sites it has —
+  `--gradient-sphere-bloom` is here on (c) alone.
 
 Everything else stays a **literal at the call site**, with its node ID in a
 comment. A value that appears exactly once is composition, not vocabulary — the
