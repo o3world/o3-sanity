@@ -9,7 +9,7 @@
  */
 // eslint-disable-next-line no-restricted-imports -- story fixture, not a view; see above
 import { BlockRenderer } from '@/content/blocks/BlockRenderer'
-import { FOOTER_MARK, NAV_MARK } from '@/brand/chromeMarks'
+import { FOOTER_MARK, NAV_MARK } from '@/components/brand/chromeMarks'
 import { SiteFooter, SiteNav } from '@o3/content-ui/chrome'
 
 import {

@@ -7,7 +7,7 @@ import { getSiteSettings } from '@o3/content-runtime/site-settings'
 import { currentYear } from '@/lib/currentYear'
 import { editorToolbarConfig } from '@/sanity/editorToolbar'
 import { VisualEditing } from '@/sanity/VisualEditing'
-import { FOOTER_MARK, NAV_MARK } from '@/brand/chromeMarks'
+import { FOOTER_MARK, NAV_MARK } from '@/components/brand/chromeMarks'
 import { SiteFooter, SiteNav, UtilityNav } from '@o3/content-ui/chrome'
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {

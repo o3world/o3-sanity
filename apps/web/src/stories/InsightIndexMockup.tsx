@@ -1,7 +1,7 @@
 import type { INSIGHTS_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { InsightIndexView } from '@/content/documents/insight/InsightIndexView'
-import { FOOTER_MARK, NAV_MARK } from '@/brand/chromeMarks'
+import { FOOTER_MARK, NAV_MARK } from '@/components/brand/chromeMarks'
 import { SiteFooter, SiteNav } from '@o3/content-ui/chrome'
 
 import { INSIGHTS, SITE_SETTINGS, STORY_YEAR } from '@o3/content-ui/testing/seed'
