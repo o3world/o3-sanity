@@ -1,6 +1,6 @@
 import { defineCliConfig } from 'sanity/cli'
 
-import { resolveDataset, resolveProjectId } from './src/constants'
+import { resolveDataset, resolveProjectId } from './src/brand'
 
 export default defineCliConfig({
   api: {

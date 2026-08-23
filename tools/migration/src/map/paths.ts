@@ -1,4 +1,5 @@
-import { COLLECTION_PREFIXES, WORDPRESS_PREFIXES } from '@o3/sanity/constants'
+import { collectionPrefixes } from '@o3/sanity/brand'
+import { WORDPRESS_PREFIXES } from '@o3/sanity/constants'
 
 import type { ConversionIssue } from '../lib/htmlToPortableText'
 
@@ -57,7 +58,7 @@ export const PATH_EXCEPTIONS: readonly PathException[] = []
 export const PATH_PREFIX_EXCEPTIONS: readonly PathPrefixException[] = [
   {
     fromPrefix: WORDPRESS_PREFIXES.insight!,
-    toPrefix: COLLECTION_PREFIXES.insight,
+    toPrefix: collectionPrefixes().insight,
     reason:
       'ADR 0017: the collection is an Insight. The nav has read "Insights" since the ' +
       'first mockup and the sibling brand already publishes at /insights, so the code ' +

@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
+import { collectionPrefixes } from '@o3/sanity/brand'
 
 import {
   convertHtml,
@@ -186,7 +186,7 @@ export function mapInsight(
   // that would move off the URL WordPress serves it at stops the run.
   const parity = checkPathParity(
     post.seo?.canonicalRendered ?? '',
-    `${COLLECTION_PREFIXES.insight}/${post.slug}`,
+    `${collectionPrefixes().insight}/${post.slug}`,
   )
   if (parity) issues.push(parity)
 

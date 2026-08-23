@@ -1,6 +1,5 @@
 import { CollectionHero } from '@o3/ui'
 import { brandConfig } from '@o3/sanity/brand'
-import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
 import type { CASE_STUDIES_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 import type { Pagination } from '@o3/content-runtime/routes'
 
@@ -8,8 +7,7 @@ import { Pager } from '@o3/content-ui'
 
 import { CaseStudyCard } from './CaseStudyCard'
 
-const { title: collectionTitle } = brandConfig().collections.caseStudy
-const prefix = COLLECTION_PREFIXES.caseStudy
+const { title: collectionTitle, prefix } = brandConfig().collections.caseStudy
 
 interface CaseStudyIndexViewProps {
   readonly items: NonNullable<CASE_STUDIES_PAGE_QUERY_RESULT>['items']

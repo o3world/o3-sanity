@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 import { ArrowIcon } from '@o3/ui'
-import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
+import { collectionPrefixes } from '@o3/sanity/brand'
 
 /**
  * "← All Insights" — the article's way back to its index (precursor
@@ -18,7 +18,7 @@ import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
 export function BackToInsights() {
   return (
     <Link
-      href={COLLECTION_PREFIXES.insight}
+      href={collectionPrefixes().insight}
       className="duration-(--duration-hover) inline-flex w-fit items-center gap-2 text-[15px] text-white/60 transition-colors ease-out hover:text-white"
     >
       <ArrowIcon className="rotate-180" />

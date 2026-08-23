@@ -1,4 +1,4 @@
-import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
+import { collectionPrefixes } from '@o3/sanity/brand'
 
 import type { WpRedirectExport } from '../lib/redirects'
 import { movedPath, PATH_EXCEPTIONS, PATH_PREFIX_EXCEPTIONS } from './paths'
@@ -355,10 +355,11 @@ export function sitePaths(input: {
   readonly insightSlugs: readonly string[]
   readonly caseStudySlugs: readonly string[]
 }): Set<string> {
-  const paths = new Set(['/', COLLECTION_PREFIXES.caseStudy, COLLECTION_PREFIXES.insight])
+  const prefixes = collectionPrefixes()
+  const paths = new Set(['/', prefixes.caseStudy, prefixes.insight])
   for (const slug of input.pageSlugs) paths.add(slug === 'index' ? '/' : `/${slug}`)
-  for (const slug of input.insightSlugs) paths.add(`${COLLECTION_PREFIXES.insight}/${slug}`)
-  for (const slug of input.caseStudySlugs) paths.add(`${COLLECTION_PREFIXES.caseStudy}/${slug}`)
+  for (const slug of input.insightSlugs) paths.add(`${prefixes.insight}/${slug}`)
+  for (const slug of input.caseStudySlugs) paths.add(`${prefixes.caseStudy}/${slug}`)
   return paths
 }
 
@@ -374,7 +375,7 @@ export function sitePaths(input: {
  * generated report, like every other row this file discards.
  */
 const SELF_REDIRECT_EXCEPTIONS: Readonly<Record<string, string>> = {
-  [COLLECTION_PREFIXES.insight]:
+  [collectionPrefixes().insight]:
     'WordPress redirected /insights → /perspectives; ADR 0017 moved /perspectives to ' +
     '/insights, so the row now names its own source. The app serves this path.',
 }

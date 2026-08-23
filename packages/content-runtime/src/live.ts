@@ -8,7 +8,7 @@ import {
 } from 'next-sanity/live'
 
 import { clientConfig } from '@o3/sanity/client'
-import { readsNeedToken } from '@o3/sanity/constants'
+import { readsNeedToken } from '@o3/sanity/brand'
 
 /**
  * Draft-aware data fetching and live revalidation.

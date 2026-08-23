@@ -3,7 +3,7 @@ import { join } from 'node:path'
 
 import { describe, expect, it } from 'vitest'
 
-import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
+import { collectionPrefixes } from '@o3/sanity/brand'
 import { BLOCK_KNOBS } from '@o3/sanity/knobs'
 import { SECTION_BLOCKS } from '@o3/sanity/schemas/registry'
 
@@ -565,7 +565,7 @@ describe('committed seed content', () => {
    * uptime.
    */
   describe('internal links', () => {
-    const CODE_ROUTES = new Set(['/', ...Object.values(COLLECTION_PREFIXES)])
+    const CODE_ROUTES = new Set(['/', ...Object.values(collectionPrefixes())])
 
     /** Every `button.href` in a document, with the path that reached it. */
     function buttonHrefsIn(
@@ -613,7 +613,7 @@ describe('committed seed content', () => {
         if (CODE_ROUTES.has(target)) continue
 
         const where = `${file} → ${path}: "${href}"`
-        const collection = Object.entries(COLLECTION_PREFIXES).find(([, prefix]) =>
+        const collection = Object.entries(collectionPrefixes()).find(([, prefix]) =>
           target.startsWith(`${prefix}/`),
         )
         if (collection) {

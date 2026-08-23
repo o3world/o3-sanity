@@ -1,5 +1,5 @@
 import { CASE_STUDIES_PAGE_QUERY } from '@o3/sanity/queries'
-import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
+import { collectionPrefixes } from '@o3/sanity/brand'
 import type { CASE_STUDIES_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { defineIndexType, type IndexRendererProps } from '@o3/content-runtime/routes'
@@ -33,7 +33,7 @@ export const caseStudyIndex = defineIndexType({
     description:
       'The work, framed around the second problem — the deeper one we found, not the deliverable.',
     // Paginated pages canonicalize to the unpaginated index.
-    path: COLLECTION_PREFIXES.caseStudy,
+    path: collectionPrefixes().caseStudy,
   },
   // The Work frame — hero `1634:1181`, grid `1634:1186`, mobile `1906:851`.
   // Recorded here so the two collection indexes state their provenance the

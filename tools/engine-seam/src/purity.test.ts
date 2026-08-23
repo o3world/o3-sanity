@@ -9,8 +9,10 @@ import {
   dependencyViolations,
   importViolations,
   missingPaths,
+  moduleClosure,
   parseImports,
   partitionPermitted,
+  readsProcessEnv,
   resolveSpecifier,
   staleImpurities,
   tokenOffences,
@@ -288,6 +290,52 @@ describe('engine purity over the import graph', () => {
   })
 })
 
+describe('the module closure of an entry', () => {
+  const packages: WorkspacePackage[] = [
+    {
+      name: '@o3/machine',
+      dir: 'packages/machine',
+      exports: { '.': './src/index.ts' },
+      dependencies: [],
+    },
+  ]
+
+  it('walks static imports transitively, relative and workspace alike', () => {
+    const closure = moduleClosure(
+      'packages/model/src/entry.ts',
+      new Map([
+        ['packages/model/src/entry.ts', "import { a } from './a'\nimport { m } from '@o3/machine'"],
+        ['packages/model/src/a.ts', "import { b } from './deep/b'"],
+        ['packages/model/src/deep/b.ts', "import { a } from '../a'"],
+        ['packages/machine/src/index.ts', ''],
+        ['packages/model/src/unrelated.ts', "import { a } from './a'"],
+      ]),
+      packages,
+    )
+    expect(closure).toEqual([
+      'packages/machine/src/index.ts',
+      'packages/model/src/a.ts',
+      'packages/model/src/deep/b.ts',
+      'packages/model/src/entry.ts',
+    ])
+  })
+
+  it('ends the walk at npm and node builtins', () => {
+    const closure = moduleClosure(
+      'packages/model/src/entry.ts',
+      new Map([['packages/model/src/entry.ts', "import { z } from 'zod'\nimport 'node:fs'"]]),
+      packages,
+    )
+    expect(closure).toEqual(['packages/model/src/entry.ts'])
+  })
+
+  it('sees a read of the environment through neither a comment nor prose', () => {
+    expect(readsProcessEnv('const d = process.env.DATASET')).toBe(true)
+    expect(readsProcessEnv('// process.env is not read here')).toBe(false)
+    expect(readsProcessEnv('/** process.env stays out of this module */')).toBe(false)
+  })
+})
+
 const NOT_SOURCE = new Set(['node_modules', 'dist', '.next', 'storybook-static', '.turbo'])
 
 /**
@@ -447,6 +495,33 @@ describe('engine purity against the repo', () => {
       stale,
       `A fixed leak must leave the ledger, or the allowance outlives the debt:\n  ${stale.join('\n  ')}`,
     ).toEqual([])
+  })
+})
+
+describe('the browser knob entry against the repo', () => {
+  /**
+   * `@o3/sanity/knobs` is consumed in the site bundle — PresentationOverlay
+   * and optimisticOrder in both apps read `BLOCK_KNOBS` in the browser — so
+   * every module the entry reaches ships to the client (#288). The brand
+   * FACTS table (both brands' project ids, domains, prefixes) may not be in
+   * that set, and neither may a `process.env` read: importing the knob
+   * vocabulary stays side-effect-free, and brand facts are resolved only
+   * where something asks for them.
+   */
+  const sources = repoSources()
+  const closure = moduleClosure('packages/sanity/src/knobs/index.ts', sources, workspacePackages())
+
+  it('collects the knob modules at all', () => {
+    expect(closure).toContain('packages/sanity/src/knobs/surface.ts')
+  })
+
+  it('never reaches the brand facts table', () => {
+    expect(closure).not.toContain('packages/sanity/src/brand.ts')
+  })
+
+  it('reaches no module that reads process.env', () => {
+    const readers = closure.filter((file) => readsProcessEnv(sources.get(file) ?? ''))
+    expect(readers).toEqual([])
   })
 })
 

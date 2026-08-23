@@ -3,7 +3,7 @@ import { join } from 'node:path'
 
 import { describe, expect, it } from 'vitest'
 
-import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
+import { collectionPrefixes } from '@o3/sanity/brand'
 
 import { readCorpus, refsIn } from './core/read'
 import { EXTRACT_DIR } from './lib/paths'
@@ -170,7 +170,7 @@ describe('the translated case-study archive', () => {
       const source = sourceOf(doc)
       expect(source, `${file} has no matching extract`).toBeDefined()
       const slug = (doc.slug as { current: string }).current
-      const newPath = `${COLLECTION_PREFIXES.caseStudy}/${slug}`
+      const newPath = `${collectionPrefixes().caseStudy}/${slug}`
       expect(checkPathParity(source!.seo.canonicalRendered, newPath), file).toBeNull()
     }
   })

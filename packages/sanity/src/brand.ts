@@ -171,3 +171,58 @@ export function brandConfig(brand: Brand = currentBrand()): BrandConfig {
     showsPublishDates: facts.showsPublishDates,
   }
 }
+
+/**
+ * The one place the dataset is resolved. Every Sanity entry point — the web
+ * app's Studio, the CLI configs, the shared client, the migration and
+ * guidance tools — calls this, so they cannot disagree about which dataset
+ * they are talking to. Which brand's dataset is brand config's answer.
+ */
+export function resolveDataset(): string {
+  return brandConfig().dataset
+}
+
+/** Same for the project, which was hardcoded in two configs and imported in two others. */
+export function resolveProjectId(): string {
+  return brandConfig().projectId
+}
+
+/**
+ * True when reading `dataset` anonymously would come back silently empty.
+ * `apps/web/src/sanity/live.ts` turns that into a thrown error at the fetch.
+ *
+ * The check exists because Content Lake answers a private dataset's anonymous
+ * query with `200 {"result": null}` rather than a 401, so nothing in the
+ * response tells "no such document" apart from "you may not see it" (#100). A
+ * checkout with no `SANITY_API_READ_TOKEN` pointed at a private dataset reads
+ * back silently empty: the homepage and the catch-all 404, the collection
+ * indexes render themselves empty, and the server log says nothing at all.
+ *
+ * Which datasets read publicly is a fact about one Sanity project, so each
+ * brand declares its own (`publicDatasets` above). A dataset missing from
+ * that list is treated as needing a token — an anonymous query is the only
+ * evidence that settles it.
+ */
+export function readsNeedToken(dataset: string): boolean {
+  return !brandConfig().publicDatasets.includes(dataset)
+}
+
+/**
+ * URL prefixes per collection, for the brand this process runs as; `page`
+ * slugs are multi-segment and carry their own prefix.
+ *
+ * The table itself is a brand fact (ADR 0028) — `o3xo` serves case studies at
+ * `/case-studies` where `o3` serves `/work` — and this is the flattened view
+ * of it that routes, the sitemap and the redirect map read. A function rather
+ * than a module constant: `@o3/sanity/knobs` is bundled into the browser, and
+ * a constant here would resolve the brand — the whole FACTS table, plus a
+ * `process.env` read — at import time, in every module graph that can reach
+ * it.
+ */
+export function collectionPrefixes(brand?: Brand): Readonly<Record<CollectionType, string>> {
+  const { collections } = brandConfig(brand)
+  return {
+    insight: collections.insight.prefix,
+    caseStudy: collections.caseStudy.prefix,
+  }
+}

@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next'
 
 import { SITEMAP_QUERY } from '@o3/sanity/queries'
-import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
+import { collectionPrefixes } from '@o3/sanity/brand'
 import { getBaseUrl } from '@o3/content-runtime/base-url'
 import { sanityFetch } from '@o3/content-runtime/live'
 import { typeTag } from '@o3/content-runtime/routes'
@@ -51,10 +51,11 @@ async function readSitemapRows() {
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = getBaseUrl()
+  const prefixes = collectionPrefixes()
   const entries: MetadataRoute.Sitemap = [
     entry(base, '', undefined, 1.0),
-    entry(base, COLLECTION_PREFIXES.insight, undefined, 0.8),
-    entry(base, COLLECTION_PREFIXES.caseStudy, undefined, 0.8),
+    entry(base, prefixes.insight, undefined, 0.8),
+    entry(base, prefixes.caseStudy, undefined, 0.8),
   ]
 
   try {
@@ -62,11 +63,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     for (const row of (data?.insights ?? []) as SitemapRow[]) {
       if (!row.slug) continue
-      entries.push(entry(base, `${COLLECTION_PREFIXES.insight}/${row.slug}`, row._updatedAt))
+      entries.push(entry(base, `${prefixes.insight}/${row.slug}`, row._updatedAt))
     }
     for (const row of (data?.caseStudies ?? []) as SitemapRow[]) {
       if (!row.slug) continue
-      entries.push(entry(base, `${COLLECTION_PREFIXES.caseStudy}/${row.slug}`, row._updatedAt))
+      entries.push(entry(base, `${prefixes.caseStudy}/${row.slug}`, row._updatedAt))
     }
     for (const row of (data?.pages ?? []) as SitemapRow[]) {
       if (!row.slug) continue

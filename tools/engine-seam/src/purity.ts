@@ -126,6 +126,39 @@ export function resolveSpecifier(
   return guessFile(normalize(`${pkg.dir}/src/${sub}`), files) ?? pkg.dir
 }
 
+/**
+ * Every repo source file reachable from an entry by following its imports —
+ * the module set a bundler pulls in when the entry lands in a client bundle.
+ * External specifiers (npm, node builtins) end the walk; the entry itself is
+ * included. Sorted for stable failure output.
+ */
+export function moduleClosure(
+  entry: string,
+  sources: ReadonlyMap<string, string>,
+  packages: WorkspacePackage[],
+): string[] {
+  const files = new Set(sources.keys())
+  const reached = new Set([entry])
+  const queue = [entry]
+  while (queue.length > 0) {
+    const file = queue.pop() as string
+    const source = sources.get(file)
+    if (source === undefined) continue
+    for (const specifier of parseImports(source)) {
+      const target = resolveSpecifier(file, specifier, packages, files)
+      if (target === null || reached.has(target)) continue
+      reached.add(target)
+      queue.push(target)
+    }
+  }
+  return [...reached].sort()
+}
+
+/** True when a source reads the process environment; comments do not count. */
+export function readsProcessEnv(source: string): boolean {
+  return /\bprocess\.env\b/.test(stripComments(source))
+}
+
 function isUnder(path: string, prefix: string): boolean {
   return path === prefix || path.startsWith(`${prefix}/`)
 }

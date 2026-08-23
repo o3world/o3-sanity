@@ -2,15 +2,13 @@ import Link from 'next/link'
 
 import { CollectionHero, FilterChip } from '@o3/ui'
 import { brandConfig } from '@o3/sanity/brand'
-import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
 import type { INSIGHTS_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 import type { Pagination } from '@o3/content-runtime/routes'
 
 import { InsightCard } from '@o3/content-ui/cards'
 import { Pager } from '@o3/content-ui'
 
-const { title: collectionTitle } = brandConfig().collections.insight
-const prefix = COLLECTION_PREFIXES.insight
+const { title: collectionTitle, prefix } = brandConfig().collections.insight
 
 type IndexData = NonNullable<INSIGHTS_PAGE_QUERY_RESULT>
 

@@ -1,5 +1,5 @@
 import type { EditorToolbarConfig } from '@o3/editor-chrome/toolbar'
-import { resolveProjectId } from '@o3/sanity/constants'
+import { resolveProjectId } from '@o3/sanity/brand'
 
 /**
  * Everything `@o3/editor-chrome` cannot know about this app: which Sanity

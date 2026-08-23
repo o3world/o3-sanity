@@ -1,6 +1,5 @@
 import { INSIGHTS_PAGE_QUERY } from '@o3/sanity/queries'
 import { brandConfig } from '@o3/sanity/brand'
-import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
 import type { INSIGHTS_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { defineIndexType, type IndexRendererProps } from '@o3/content-runtime/routes'
@@ -44,7 +43,7 @@ export const insightIndex = defineIndexType({
     // Paginated and filtered pages canonicalize to the unpaginated index:
     // `?page=2` and `?category=design` are the same collection, not further
     // documents.
-    path: COLLECTION_PREFIXES.insight,
+    path: brandConfig().collections.insight.prefix,
   },
   // O3's canonical Insights frame, borrowed deliberately (ADR 0028 addendum) —
   // this brand has no frame of its own and the adaptation experiment is the

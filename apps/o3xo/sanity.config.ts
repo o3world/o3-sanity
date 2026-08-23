@@ -12,13 +12,8 @@ import {
   DEFAULT_PRESENTATION_TOOL_NAME,
   editorChrome,
 } from '@o3/editor-chrome/studio'
-import { brandConfig } from '@o3/sanity/brand'
-import {
-  COLLECTION_PREFIXES,
-  ROUTABLE_TYPES,
-  resolveDataset,
-  resolveProjectId,
-} from '@o3/sanity/constants'
+import { brandConfig, resolveDataset, resolveProjectId } from '@o3/sanity/brand'
+import { ROUTABLE_TYPES } from '@o3/sanity/constants'
 import { schemaTypesFor } from '@o3/sanity/schemas'
 
 import { previewPathForDoc } from '@o3/content-runtime/urls'
@@ -87,7 +82,7 @@ const resolve: PresentationPluginOptions['resolve'] = {
         locations: [
           {
             title: doc?.title || 'Untitled',
-            href: `${COLLECTION_PREFIXES.caseStudy}/${doc?.slug ?? ''}`,
+            href: `${collections.caseStudy.prefix}/${doc?.slug ?? ''}`,
           },
         ],
       }),
@@ -98,9 +93,9 @@ const resolve: PresentationPluginOptions['resolve'] = {
         locations: [
           {
             title: doc?.title || 'Untitled',
-            href: `${COLLECTION_PREFIXES.insight}/${doc?.slug ?? ''}`,
+            href: `${collections.insight.prefix}/${doc?.slug ?? ''}`,
           },
-          { title: 'All insights', href: COLLECTION_PREFIXES.insight },
+          { title: 'All insights', href: collections.insight.prefix },
         ],
       }),
     }),

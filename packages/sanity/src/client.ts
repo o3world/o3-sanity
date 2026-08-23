@@ -1,5 +1,5 @@
 import { createClient, type ClientConfig } from '@sanity/client'
-import { resolveDataset, resolveProjectId } from './constants'
+import { resolveDataset, resolveProjectId } from './brand'
 
 export const clientConfig = {
   projectId: resolveProjectId(),

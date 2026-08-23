@@ -1,5 +1,5 @@
 import { INSIGHT_QUERY } from '@o3/sanity/queries'
-import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
+import { collectionPrefixes } from '@o3/sanity/brand'
 import type { INSIGHT_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { defineDetailType, type RendererProps } from '@o3/content-runtime/routes'
@@ -19,7 +19,7 @@ function InsightRenderer({ slug: _slug, ...rest }: InsightRendererProps) {
 
 export const insight = defineDetailType({
   type: 'insight',
-  urlPrefix: COLLECTION_PREFIXES.insight,
+  urlPrefix: collectionPrefixes().insight,
   query: INSIGHT_QUERY,
   renderer: InsightRenderer,
   // Only the document-shaped half — the override chain, canonical, robots
@@ -31,7 +31,7 @@ export const insight = defineDetailType({
       description: p.excerpt,
       // CONTEXT.md → Known drift: this field should be `heroMedia`.
       image: p.featuredImage,
-      path: `${COLLECTION_PREFIXES.insight}/${p.slug}`,
+      path: `${collectionPrefixes().insight}/${p.slug}`,
       ogType: 'article',
       publishedTime: p.publishedAt,
     }

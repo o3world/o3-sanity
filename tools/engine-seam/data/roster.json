@@ -54,7 +54,7 @@
           "fix": "The generated union becomes a type parameter; the product supplies it."
         },
         {
-          "where": "src/urls.ts (COLLECTION_PREFIXES, 'caseStudy' arm)",
+          "where": "src/urls.ts (collectionPrefixes, 'caseStudy' arm)",
           "what": "Imports one brand's URL prefixes and switches on a concrete document type.",
           "fix": "Collection taxonomy arrives as a parameter."
         },
@@ -140,15 +140,11 @@
       "fused": [
         {
           "path": "src/brand.ts",
-          "split": "brandConfig()/currentBrand() and the BrandFacts shape are machinery; BRANDS, DEFAULT_BRAND and the FACTS table (project ids, domains, prefixes) are product. One module, no injection seam; BrandFacts is not even exported, so no third party can supply a brand."
+          "split": "brandConfig()/currentBrand(), the resolvers (resolveDataset/resolveProjectId/readsNeedToken/collectionPrefixes) and the BrandFacts shape are machinery; BRANDS, DEFAULT_BRAND and the FACTS table (project ids, domains, prefixes) are product. One module, no injection seam; BrandFacts is not even exported, so no third party can supply a brand. Import-side-effect-free: nothing resolves a brand or reads process.env until asked, and the knob-entry closure check in the purity suite holds the browser graph out of here."
         },
         {
           "path": "src/schemas/blocks/registry.ts",
           "split": "The roster mechanism (blockArraysFor, sectionBlocksFor, blockArrayMembers, BrandSectionBlockName, the private blockArrays builder) is machinery; CORE_SECTION_BLOCKS, BRAND_SECTION_BLOCKS, BASE_BLOCKS and the authored array addresses are product. The functions close over the constants and the types derive from the values, so neither half exists without the other today."
-        },
-        {
-          "path": "src/constants.ts",
-          "split": "resolveDataset/resolveProjectId/readsNeedToken are machinery; every constant table is product. The module executes brandConfig() at load, so importing the resolvers — or BLOCK_KNOBS in the browser — evaluates the brand FACTS table and reads process.env."
         },
         {
           "path": "src/client.ts",

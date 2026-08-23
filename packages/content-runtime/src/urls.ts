@@ -1,4 +1,4 @@
-import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
+import { collectionPrefixes } from '@o3/sanity/brand'
 
 /**
  * URL construction for routable documents (ADR 0001's flat URL space):
@@ -9,9 +9,9 @@ export function hrefForDoc(doc: { _type: string; slug?: string | null }): string
   const slug = doc.slug ?? ''
   switch (doc._type) {
     case 'insight':
-      return `${COLLECTION_PREFIXES.insight}/${slug}`
+      return `${collectionPrefixes().insight}/${slug}`
     case 'caseStudy':
-      return `${COLLECTION_PREFIXES.caseStudy}/${slug}`
+      return `${collectionPrefixes().caseStudy}/${slug}`
     case 'page':
       return slug === 'index' || slug === '' ? '/' : `/${slug}`
     default:

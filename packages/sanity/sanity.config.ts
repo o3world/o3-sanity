@@ -1,7 +1,7 @@
 import { defineConfig } from 'sanity'
 
 import { currentBrand } from './src/brand'
-import { resolveDataset, resolveProjectId } from './src/constants'
+import { resolveDataset, resolveProjectId } from './src/brand'
 import { schemaTypes, schemaTypesFor } from './src/schemas'
 
 /**

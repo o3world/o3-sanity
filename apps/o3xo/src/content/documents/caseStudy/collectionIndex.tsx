@@ -1,6 +1,5 @@
 import { CASE_STUDIES_PAGE_QUERY } from '@o3/sanity/queries'
 import { brandConfig } from '@o3/sanity/brand'
-import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
 import type { CASE_STUDIES_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { defineIndexType, type IndexRendererProps } from '@o3/content-runtime/routes'
@@ -32,7 +31,7 @@ export const caseStudyIndex = defineIndexType({
   seo: {
     title: brandConfig().collections.caseStudy.title,
     // Paginated pages canonicalize to the unpaginated index.
-    path: COLLECTION_PREFIXES.caseStudy,
+    path: brandConfig().collections.caseStudy.prefix,
   },
   migration: {
     provisional: true,

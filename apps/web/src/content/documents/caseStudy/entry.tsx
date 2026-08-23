@@ -1,5 +1,5 @@
 import { CASE_STUDY_QUERY } from '@o3/sanity/queries'
-import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
+import { collectionPrefixes } from '@o3/sanity/brand'
 import type { CASE_STUDY_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { defineDetailType, type RendererProps } from '@o3/content-runtime/routes'
@@ -17,7 +17,7 @@ function CaseStudyRenderer({ slug: _slug, ...rest }: CaseStudyRendererProps) {
 
 export const caseStudy = defineDetailType({
   type: 'caseStudy',
-  urlPrefix: COLLECTION_PREFIXES.caseStudy,
+  urlPrefix: collectionPrefixes().caseStudy,
   query: CASE_STUDY_QUERY,
   renderer: CaseStudyRenderer,
   seo: (doc): DocumentSeo => {
@@ -26,7 +26,7 @@ export const caseStudy = defineDetailType({
       title: cs.title,
       description: cs.narrativeHeadline,
       image: cs.heroMedia,
-      path: `${COLLECTION_PREFIXES.caseStudy}/${cs.slug}`,
+      path: `${collectionPrefixes().caseStudy}/${cs.slug}`,
     }
   },
 })

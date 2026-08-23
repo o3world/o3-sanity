@@ -1,6 +1,6 @@
 import type { DocumentResolver } from 'sanity/presentation'
 
-import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
+import { collectionPrefixes } from '@o3/sanity/brand'
 
 /**
  * Presentation's route <-> document wiring, lifted out of `sanity.config.ts`
@@ -24,11 +24,11 @@ export const mainDocumentRoutes: DocumentResolver[] = [
     filter: `_type == "page" && slug.current == "index"`,
   },
   {
-    route: `${COLLECTION_PREFIXES.caseStudy}/:slug`,
+    route: `${collectionPrefixes().caseStudy}/:slug`,
     filter: `_type == "caseStudy" && slug.current == $slug`,
   },
   {
-    route: `${COLLECTION_PREFIXES.insight}/:slug`,
+    route: `${collectionPrefixes().insight}/:slug`,
     filter: `_type == "insight" && slug.current == $slug`,
   },
   {
