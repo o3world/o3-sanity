@@ -133,15 +133,16 @@ not an agent's to resolve (#237).
 
 ### Navigation (`4404:3961`)
 
-| Figma node     | Node        | Code target                             | Status                                                                                 |
-| -------------- | ----------- | --------------------------------------- | -------------------------------------------------------------------------------------- |
-| `Navigation`   | `4404:4146` | `SiteNav` (`content-ui/src/chrome/`)    | ⚠️ **Diverges structurally** (#224) — the kit's nav has dropdowns, the pill does not   |
-| `Footer`       | `4404:4148` | `SiteFooter` (`content-ui/src/chrome/`) | ⚠️ **Diverges structurally** (#224)                                                    |
-| `Footer CTA`   | `4404:4147` | `CtaSection`                            | The kit draws the closing CTA into the footer; the content model composes it as a band |
-| `Footer Block` | `4404:4188` | `SiteFooter`                            | CTA and footer stacked — the whole end of the page                                     |
+| Figma node     | Node        | Code target                            | Status                                                                                 |
+| -------------- | ----------- | -------------------------------------- | -------------------------------------------------------------------------------------- |
+| `Navigation`   | `4404:4146` | `SiteNav` (`apps/o3xo/src/chrome/`)    | ✅ #243 — forked app-local: the kit's dropdown nav; the shared pill stays O3's         |
+| `Footer`       | `4404:4148` | `SiteFooter` (`apps/o3xo/src/chrome/`) | ✅ #243 — forked app-local                                                             |
+| `Footer CTA`   | `4404:4147` | `CtaSection`                           | The kit draws the closing CTA into the footer; the content model composes it as a band |
+| `Footer Block` | `4404:4188` | `SiteFooter`                           | CTA and footer stacked — the whole end of the page                                     |
 
-Chrome forks per app when this work is picked up, not preemptively. The `brandMark` slot (#228) is
-the shared chrome's contract for as long as a brand uses it.
+The chrome forked per app with #243; the shared chrome stays O3's, single consumer, per ADR 0028's
+second addendum. The `brandMark` slot (#228) is the shared chrome's contract for as long as a brand
+uses it.
 
 ### People (`4404:5648`), Quotes (`4404:4189`), Accordion (`310:1977`)
 
@@ -172,21 +173,21 @@ one tracked.
 The kit's composition, one frame per band. **Seven sit on a full-bleed photograph** (#224), which
 was the single missing affordance blocking six of them; `backgroundMedia` landed with #239.
 
-| Figma frame              | Node         | Code target           | Status                                                                                |
-| ------------------------ | ------------ | --------------------- | ------------------------------------------------------------------------------------- |
-| `Hero`                   | `4406:6595`  | `HeroSection`         | Photograph under a tint. Background media landed (#239); video is #237's              |
-| `AI Strategy + Partner`  | `4406:6642`  | **None**              | Two-column text. The parity audit assigns it                                          |
-| `AI Expertise`           | `4406:6755`  | **None**              | Icon cards on a photograph. Candidate: `FeatureGridSection` + `backgroundMedia`       |
-| `Quote`                  | `4406:6954`  | `QuoteSection`        | Wants the header pill as its eyebrow (#237)                                           |
-| `Text Cards`             | `4406:7179`  | **None**              | Blocked on the Yellow Text Card                                                       |
-| `People`                 | `4406:7226`  | `PersonGridSection`   | Wants `person.bio`                                                                    |
-| `FAQ`                    | `4406:7288`  | `FaqSection` (o3xo)   | Built (#248) — the accordion on its photograph, through `backgroundMedia`             |
-| `Action Cards`           | `4406:7491`  | **None**              | Action icon cards on a cityscape. Candidate: `FeatureGridSection` + `backgroundMedia` |
-| `3 Cards`                | `4406:7560`  | **None**              | Three icon cards, flat. Candidate: `FeatureGridSection`                               |
-| `Insight Gallery`        | `4406:7594`  | `ListingSection`      | Built                                                                                 |
-| `Case Studies`           | `4407:7758`  | `CaseShowcaseSection` | Built                                                                                 |
-| `Section` (824h, 1920w)  | `4432:11535` | **None**              | Untriaged. Two frames here are drawn at 1920 rather than 1440                         |
-| `Section` (1090h, 1920w) | `4432:11487` | **None**              | Untriaged, with the other                                                             |
+| Figma frame              | Node         | Code target           | Status                                                                                                                                        |
+| ------------------------ | ------------ | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Hero`                   | `4406:6595`  | `HeroSection`         | Photograph under a tint. Background media landed (#239); video is #237's                                                                      |
+| `AI Strategy + Partner`  | `4406:6642`  | **None**              | Two-column text. The parity audit assigns it                                                                                                  |
+| `AI Expertise`           | `4406:6755`  | **None**              | Icon cards on a photograph. Candidate: `FeatureGridSection` + `backgroundMedia`                                                               |
+| `Quote`                  | `4406:6954`  | `QuoteSection`        | Wants the header pill as its eyebrow (#237)                                                                                                   |
+| `Text Cards`             | `4406:7179`  | **None**              | Blocked on the Yellow Text Card                                                                                                               |
+| `People`                 | `4406:7226`  | `PersonGridSection`   | ⚠️ **Diverges structurally** (#286) — kit draws 2-up circular portraits on black, ours is 3-up square; demotes when built. Wants `person.bio` |
+| `FAQ`                    | `4406:7288`  | `FaqSection` (o3xo)   | Built (#248) — the accordion on its photograph, through `backgroundMedia`                                                                     |
+| `Action Cards`           | `4406:7491`  | **None**              | Action icon cards on a cityscape. Candidate: `FeatureGridSection` + `backgroundMedia`                                                         |
+| `3 Cards`                | `4406:7560`  | **None**              | Three icon cards, flat. Candidate: `FeatureGridSection`                                                                                       |
+| `Insight Gallery`        | `4406:7594`  | `ListingSection`      | Built                                                                                                                                         |
+| `Case Studies`           | `4407:7758`  | `CaseShowcaseSection` | Built                                                                                                                                         |
+| `Section` (824h, 1920w)  | `4432:11535` | **None**              | Untriaged. Two frames here are drawn at 1920 rather than 1440                                                                                 |
+| `Section` (1090h, 1920w) | `4432:11487` | **None**              | Untriaged, with the other                                                                                                                     |
 
 A "candidate" is an inference from the band's contents, not a recorded decision — the component
 ticket confirms or replaces it.

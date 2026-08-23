@@ -98,8 +98,10 @@ Differences from `apps/web` beyond project and tokens, each one deliberate:
   view, and O3's lines describe O3's practice. The insights index also leaves out
   the closing CTA band: its copy and its `/contact` destination are O3 facts, and
   this app has neither yet.
-- **No stories.** Storybook stays a single host with the Brand toolbar as the
-  paint-leak test until O3XO has a genuinely divergent component.
+- **Stories are app-local and brand-pinned.** The second Storybook host (#240)
+  globs this app's stories; each pins `globals: { brand: 'o3xo' }`, which
+  disables the Brand toolbar for itself — the toolbar stays live only on
+  shared-package stories, where it is the paint-leak test.
 
 ## The content
 

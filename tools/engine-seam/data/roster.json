@@ -282,7 +282,7 @@
     {
       "path": "packages/content-ui",
       "verdict": "product-shared",
-      "why": "The 16 core section renderers, the base-block renderers, chrome, cards, portable text — both brands' shared rendering.",
+      "why": "The 16 core section renderers, the base-block renderers, cards, portable text — both brands' shared rendering. The chrome components are the exception: O3's alone since the #243 fork, overridden below (NavInk stays engine).",
       "overrides": [
         {
           "path": "src/buttonDestination.ts",
@@ -298,6 +298,56 @@
           "path": "src/chrome/NavInk.tsx",
           "verdict": "engine",
           "why": "Scroll-driven contrast flip keyed on a DOM id."
+        },
+        {
+          "path": "src/chrome/index.ts",
+          "verdict": "product-brand",
+          "why": "O3's alone: o3xo mounts app-local chrome (#243); stays while a brand uses it (ADR 0028)."
+        },
+        {
+          "path": "src/chrome/SiteNav.tsx",
+          "verdict": "product-brand",
+          "why": "O3's alone since the #243 chrome fork."
+        },
+        {
+          "path": "src/chrome/SiteFooter.tsx",
+          "verdict": "product-brand",
+          "why": "O3's alone since the #243 chrome fork."
+        },
+        {
+          "path": "src/chrome/UtilityNav.tsx",
+          "verdict": "product-brand",
+          "why": "O3's alone since the #243 chrome fork."
+        },
+        {
+          "path": "src/chrome/MobileNavMenu.tsx",
+          "verdict": "product-brand",
+          "why": "O3's alone since the #243 chrome fork."
+        },
+        {
+          "path": "src/chrome/SiteNav.stories.tsx",
+          "verdict": "product-brand",
+          "why": "O3's alone since the #243 chrome fork."
+        },
+        {
+          "path": "src/chrome/SiteFooter.stories.tsx",
+          "verdict": "product-brand",
+          "why": "O3's alone since the #243 chrome fork."
+        },
+        {
+          "path": "src/chrome/UtilityNav.stories.tsx",
+          "verdict": "product-brand",
+          "why": "O3's alone since the #243 chrome fork."
+        },
+        {
+          "path": "src/chrome/MobileNavMenu.stories.tsx",
+          "verdict": "product-brand",
+          "why": "O3's alone since the #243 chrome fork."
+        },
+        {
+          "path": "src/chrome/chrome.render.test.tsx",
+          "verdict": "product-brand",
+          "why": "O3's alone since the #243 chrome fork."
         },
         {
           "path": "src/testing/responsive.ts",
