@@ -111,7 +111,7 @@
       "kind": "componentSet",
       "name": "Mark glyph",
       "figmaName": "X Icons",
-      "codeComponent": "apps/o3xo/src/brand/O3xoMark.tsx#O3xoMark",
+      "codeComponent": "apps/o3xo/src/components/brand/O3xoMark.tsx#O3xoMark",
       "note": "The mark's X on its own, black and white. Drawn by the same component as the wordmark (#228)."
     },
     {
@@ -249,7 +249,7 @@
       "kind": "componentSet",
       "name": "O3XO mark",
       "figmaName": "O3XO",
-      "codeComponent": "apps/o3xo/src/brand/O3xoMark.tsx#O3xoMark",
+      "codeComponent": "apps/o3xo/src/components/brand/O3xoMark.tsx#O3xoMark",
       "note": "Built — #228. Three axes: Color (2 color | White | Black), Layout (Horizontal | Stacked), Background (Yes | No). The kit contradicts itself on the 2-colour XO fill; the plated reading won and the contradiction is Nick's to settle."
     },
     {

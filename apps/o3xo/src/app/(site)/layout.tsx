@@ -7,7 +7,7 @@ import { getSiteSettings } from '@o3/content-runtime/site-settings'
 import { currentYear } from '@/lib/currentYear'
 import { editorToolbarConfig } from '@/sanity/editorToolbar'
 import { VisualEditing } from '@/sanity/VisualEditing'
-import { SiteFooter, SiteNav } from '@/chrome'
+import { SiteFooter, SiteNav } from '@/components/chrome'
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
   const [settings, { isEnabled: isDraft }, year] = await Promise.all([

@@ -26,7 +26,7 @@ const settings = JSON.parse(
   readFileSync(
     join(
       dirname(fileURLToPath(import.meta.url)),
-      '../../../../tools/migration/data-o3xo/converted/siteSettings/settings.json',
+      '../../../../../tools/migration/data-o3xo/converted/siteSettings/settings.json',
     ),
     'utf8',
   ),

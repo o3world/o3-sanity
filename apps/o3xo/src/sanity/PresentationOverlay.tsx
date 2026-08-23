@@ -9,7 +9,7 @@ import { BLOCK_KNOBS, OBJECT_KNOBS } from '@o3/sanity/knobs'
 import { blockArraysFor } from '@o3/sanity/schemas/registry'
 import { BUTTON_ICONS } from '@o3/ui'
 
-import { ICONS } from '@/icons/Icon'
+import { ICONS } from '@/components/icons/Icon'
 
 import { BRAND } from '../../brand'
 

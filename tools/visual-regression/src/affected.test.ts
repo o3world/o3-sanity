@@ -98,7 +98,7 @@ describe('affectedStoryFiles', () => {
  */
 describe('affectedStoryFiles, against the o3xo host', () => {
   const O3XO = hostDir('o3xo')
-  const MARK_STORY = 'apps/o3xo/src/brand/O3xoMark.stories.tsx'
+  const MARK_STORY = 'apps/o3xo/src/components/brand/O3xoMark.stories.tsx'
 
   const o3xoModules: StatsModule[] = [
     { id: './globals.css', reasons: [{ moduleName: './.storybook/preview.ts' }] },
@@ -107,7 +107,7 @@ describe('affectedStoryFiles, against the o3xo host', () => {
       reasons: [{ moduleName: '/virtual:/@storybook/builder-vite/storybook-config-entry.js' }],
     },
     {
-      id: './../../apps/o3xo/src/brand/O3xoMark.tsx',
+      id: './../../apps/o3xo/src/components/brand/O3xoMark.tsx',
       reasons: [{ moduleName: `./../../${MARK_STORY}` }],
     },
     {
@@ -117,7 +117,9 @@ describe('affectedStoryFiles, against the o3xo host', () => {
   ]
 
   it('climbs to a story the o3xo app owns', () => {
-    expect(affectedStoryFiles(o3xoModules, ['apps/o3xo/src/brand/O3xoMark.tsx'], O3XO)).toEqual({
+    expect(
+      affectedStoryFiles(o3xoModules, ['apps/o3xo/src/components/brand/O3xoMark.tsx'], O3XO),
+    ).toEqual({
       storyFiles: [MARK_STORY],
       everything: false,
     })
@@ -142,7 +144,7 @@ describe('affectedStoryFiles, against the o3xo host', () => {
       id: 'brand-o3xomark--default',
       name: 'Default',
       title: 'Brand/O3xoMark',
-      importPath: '../../apps/o3xo/src/brand/O3xoMark.stories.tsx',
+      importPath: '../../apps/o3xo/src/components/brand/O3xoMark.stories.tsx',
       type: 'story',
     }
     expect(entryPath(entry, O3XO)).toBe(MARK_STORY)

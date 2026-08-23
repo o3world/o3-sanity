@@ -98,7 +98,7 @@
       "name": "Mark glyph",
       "route": null,
       "variant": null,
-      "codeComponent": "apps/o3xo/src/brand/O3xoMark.tsx#O3xoMark",
+      "codeComponent": "apps/o3xo/src/components/brand/O3xoMark.tsx#O3xoMark",
       "change": "added"
     },
     {
@@ -242,7 +242,7 @@
       "name": "O3XO mark",
       "route": null,
       "variant": null,
-      "codeComponent": "apps/o3xo/src/brand/O3xoMark.tsx#O3xoMark",
+      "codeComponent": "apps/o3xo/src/components/brand/O3xoMark.tsx#O3xoMark",
       "change": "added"
     },
     {

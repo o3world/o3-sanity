@@ -17,7 +17,7 @@
 - **Button icons** → `packages/ui/src/components/button-icons.tsx#BUTTON_ICONS` — added `4405:6391`
 - **Phosphor icons** → no code target — added `4404:5589`
 - **Card icon** → no code target — added `4404:5590`
-- **Mark glyph** → `apps/o3xo/src/brand/O3xoMark.tsx#O3xoMark` — added `4404:5593`
+- **Mark glyph** → `apps/o3xo/src/components/brand/O3xoMark.tsx#O3xoMark` — added `4404:5593`
 - **Icon slot** → no code target — added `957:1166`
 - **Insight card** → `packages/content-ui/src/cards/InsightCard.tsx#InsightCard` — added `4404:3708`
 - **Insight card row** → `packages/content-ui/src/blocks/section/listingSection/ListingSection.tsx#ListingSection` — added `4404:3773`
@@ -35,7 +35,7 @@
 - **Strategy card stack** → no code target — added `4404:4593`
 - **Insight image** → no code target — added `4404:3706`
 - **Insight image layout** → no code target — added `4426:10608`
-- **O3XO mark** → `apps/o3xo/src/brand/O3xoMark.tsx#O3xoMark` — added `4212:374`
+- **O3XO mark** → `apps/o3xo/src/components/brand/O3xoMark.tsx#O3xoMark` — added `4212:374`
 - **Site nav** → `packages/content-ui/src/chrome/SiteNav.tsx#SiteNav` — added `4404:4146`
 - **Site footer** → `packages/content-ui/src/chrome/SiteFooter.tsx#SiteFooter` — added `4404:4148`
 - **Footer CTA** → `packages/content-ui/src/blocks/section/ctaSection/CtaSection.tsx#CtaSection` — added `4404:4147`

@@ -84,12 +84,12 @@ background media on section blocks (landed, #239), `feature.icon`, `person.bio`,
 
 ### Icons (`345:2833`)
 
-| Figma node                  | Node        | Variant axes             | Code target                                     | Status                                                 |
-| --------------------------- | ----------- | ------------------------ | ----------------------------------------------- | ------------------------------------------------------ |
-| `Phosphor Icons`            | `4404:5589` | 18 named Phosphor glyphs | **None**                                        | ❌ Missing — one of #224's six. #237 story 6           |
-| `Card Icon`                 | `4404:5590` | —                        | **None**                                        | ❌ Missing — the plated 48px icon the icon cards carry |
-| `X Icons`                   | `4404:5593` | Logo Black \| Logo White | `O3xoMark` (`apps/o3xo/src/brand/O3xoMark.tsx`) | ✅ #228 — the same component draws the wordmark        |
-| `.building block Icon_text` | `957:1166`  | prop: Material Symbols   | **None**                                        | The same placeholder O3's file carries. ADR 0009       |
+| Figma node                  | Node        | Variant axes             | Code target                                                | Status                                                 |
+| --------------------------- | ----------- | ------------------------ | ---------------------------------------------------------- | ------------------------------------------------------ |
+| `Phosphor Icons`            | `4404:5589` | 18 named Phosphor glyphs | **None**                                                   | ❌ Missing — one of #224's six. #237 story 6           |
+| `Card Icon`                 | `4404:5590` | —                        | **None**                                                   | ❌ Missing — the plated 48px icon the icon cards carry |
+| `X Icons`                   | `4404:5593` | Logo Black \| Logo White | `O3xoMark` (`apps/o3xo/src/components/brand/O3xoMark.tsx`) | ✅ #228 — the same component draws the wordmark        |
+| `.building block Icon_text` | `957:1166`  | prop: Material Symbols   | **None**                                                   | The same placeholder O3's file carries. ADR 0009       |
 
 Two swatch boards sit beside these — `Light` (`4404:5646`) and `Dark` (`4432:10748`) — plus Figma's
 own `Get started` onboarding frame (`2222:1539`). All three are on the manifest's ignore list.
@@ -123,9 +123,9 @@ Not tracked, on the ignore list with their reasons: `Galaxy Background 2` (`4485
 
 ### Logos (`4212:229`)
 
-| Figma set | Node       | Variant axes                                                                              | Code target                                     | Status                                |
-| --------- | ---------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------- | ------------------------------------- |
-| `O3XO`    | `4212:374` | Color = 2 color \| White \| Black; Layout = Horizontal \| Stacked; Background = Yes \| No | `O3xoMark` (`apps/o3xo/src/brand/O3xoMark.tsx`) | ✅ #228 — the mark comes from the app |
+| Figma set | Node       | Variant axes                                                                              | Code target                                                | Status                                |
+| --------- | ---------- | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------- | ------------------------------------- |
+| `O3XO`    | `4212:374` | Color = 2 color \| White \| Black; Layout = Horizontal \| Stacked; Background = Yes \| No | `O3xoMark` (`apps/o3xo/src/components/brand/O3xoMark.tsx`) | ✅ #228 — the mark comes from the app |
 
 **The kit contradicts itself on the 2-colour mark**: unplated variants fill the XO near-black, the
 plated one fills it `accent`. #228 built the plated reading. The contradiction is Nick's to settle,
@@ -133,12 +133,12 @@ not an agent's to resolve (#237).
 
 ### Navigation (`4404:3961`)
 
-| Figma node     | Node        | Code target                            | Status                                                                                 |
-| -------------- | ----------- | -------------------------------------- | -------------------------------------------------------------------------------------- |
-| `Navigation`   | `4404:4146` | `SiteNav` (`apps/o3xo/src/chrome/`)    | ✅ #243 — forked app-local: the kit's dropdown nav; the shared pill stays O3's         |
-| `Footer`       | `4404:4148` | `SiteFooter` (`apps/o3xo/src/chrome/`) | ✅ #243 — forked app-local                                                             |
-| `Footer CTA`   | `4404:4147` | `CtaSection`                           | The kit draws the closing CTA into the footer; the content model composes it as a band |
-| `Footer Block` | `4404:4188` | `SiteFooter`                           | CTA and footer stacked — the whole end of the page                                     |
+| Figma node     | Node        | Code target                                       | Status                                                                                 |
+| -------------- | ----------- | ------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `Navigation`   | `4404:4146` | `SiteNav` (`apps/o3xo/src/components/chrome/`)    | ✅ #243 — forked app-local: the kit's dropdown nav; the shared pill stays O3's         |
+| `Footer`       | `4404:4148` | `SiteFooter` (`apps/o3xo/src/components/chrome/`) | ✅ #243 — forked app-local                                                             |
+| `Footer CTA`   | `4404:4147` | `CtaSection`                                      | The kit draws the closing CTA into the footer; the content model composes it as a band |
+| `Footer Block` | `4404:4188` | `SiteFooter`                                      | CTA and footer stacked — the whole end of the page                                     |
 
 The chrome forked per app with #243; the shared chrome stays O3's, single consumer, per ADR 0028's
 second addendum. The `brandMark` slot (#228) is the shared chrome's contract for as long as a brand

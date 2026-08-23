@@ -17,12 +17,12 @@ import {
 } from '@o3/content-runtime/blocks'
 import { fieldAttr } from '@o3/content-runtime/data-attribute'
 
-import { O3xoMark } from '@/brand/O3xoMark'
+import { O3xoMark } from '@/components/brand/O3xoMark'
 import { FaqSection } from './faqSection/FaqSection'
-import { KeyMetricCards } from '@/cards/KeyMetricCard'
-import { YellowTextCards } from '@/cards/YellowTextCard'
+import { KeyMetricCards } from '@/components/cards/KeyMetricCard'
+import { YellowTextCards } from '@/components/cards/YellowTextCard'
 import { HeaderPill } from '@/components/HeaderPill'
-import { ICONS } from '@/icons/Icon'
+import { ICONS } from '@/components/icons/Icon'
 
 // The renderers themselves are shared (@o3/content-ui); the binding below is
 // this app's. Re-pointing one line here is what "O3XO adapts a block" costs.

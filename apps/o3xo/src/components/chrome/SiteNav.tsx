@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { SurfaceProvider } from '@o3/ui'
 
-import { O3xoMark } from '@/brand/O3xoMark'
+import { O3xoMark } from '@/components/brand/O3xoMark'
 
 import { MobileNav } from './MobileNav'
 import { NavRow } from './NavRow'
