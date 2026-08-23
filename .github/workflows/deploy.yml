@@ -8,7 +8,10 @@ on:
 
 concurrency:
   group: deploy-web-${{ github.ref }}
-  cancel-in-progress: true
+  # Pushes queue rather than cancel: each push gates on its own before..head
+  # range, so cancelling push A when push B arrives would let B's narrower
+  # range gate A's changes out of ever deploying.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   affected:
@@ -17,25 +20,19 @@ jobs:
     timeout-minutes: 10
     outputs:
       deploy: ${{ steps.gate.outputs.deploy }}
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: ./.github/actions/setup
-        if: github.event_name == 'pull_request'
       - name: Decide
         id: gate
-        env:
-          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-          TURBO_TEAM: ${{ vars.TURBO_TEAM }}
-        run: |
-          if [ "${{ github.event_name }}" = "push" ]; then
-            echo "deploy=true" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          COUNT=$(TURBO_SCM_BASE="origin/${{ github.base_ref }}" pnpm turbo run build --filter=@o3/web... --affected --dry=json | jq '.tasks | length')
-          echo "Affected tasks: $COUNT"
-          if [ "$COUNT" -gt 0 ]; then echo "deploy=true" >> "$GITHUB_OUTPUT"; else echo "deploy=false" >> "$GITHUB_OUTPUT"; fi
+        uses: ./.github/actions/affected-gate
+        with:
+          filter: '@o3/web'
 
   deploy:
     name: Vercel deploy

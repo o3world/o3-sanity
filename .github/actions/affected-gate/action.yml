@@ -1,0 +1,65 @@
+name: Affected gate
+description: >
+  One deploy gate for every deployable: the workspace graph decides. Counts the
+  affected tasks in the workspace's build closure since the event's base and
+  answers deploy=true or deploy=false, with the count on the job summary so a
+  skip is never silent. Caller must run actions/checkout with fetch-depth: 0
+  (the push base is an arbitrary commit, not a ref) and ./.github/actions/setup
+  first, and supply TURBO_TOKEN/TURBO_TEAM in the job env for remote cache.
+
+inputs:
+  filter:
+    description: Workspace whose build closure decides, e.g. "@o3/web".
+    required: true
+
+outputs:
+  deploy:
+    description: '"true" when the deployable must deploy.'
+    value: ${{ steps.decide.outputs.deploy }}
+  count:
+    description: Affected build tasks in the filter's closure ("" when the gate did not run turbo).
+    value: ${{ steps.decide.outputs.count }}
+
+runs:
+  using: composite
+  steps:
+    - name: Decide
+      id: decide
+      shell: bash
+      env:
+        FILTER: ${{ inputs.filter }}
+        EVENT: ${{ github.event_name }}
+        BASE_REF: ${{ github.base_ref }}
+        BEFORE: ${{ github.event.before }}
+      run: |
+        decide() {
+          echo "deploy=$1" >> "$GITHUB_OUTPUT"
+          echo "count=$2" >> "$GITHUB_OUTPUT"
+          echo "${FILTER}: deploy=$1 — $3" | tee -a "$GITHUB_STEP_SUMMARY"
+        }
+        case "$EVENT" in
+          pull_request)
+            BASE="origin/${BASE_REF}"
+            ;;
+          push)
+            # An unreachable base — zero SHA on a first push, a discarded one
+            # after a force-push — makes the range unknowable: deploy in full
+            # rather than guess.
+            ZERO="0000000000000000000000000000000000000000"
+            if [ -z "$BEFORE" ] || [ "$BEFORE" = "$ZERO" ] || ! git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then
+              decide true "" "no reachable base ('${BEFORE}'); full deploy"
+              exit 0
+            fi
+            BASE="$BEFORE"
+            ;;
+          *)
+            decide true "" "${EVENT} event; the gate only reasons about pushes and PRs"
+            exit 0
+            ;;
+        esac
+        COUNT=$(TURBO_SCM_BASE="$BASE" pnpm turbo run build --filter="${FILTER}..." --affected --dry=json | jq '.tasks | length')
+        if [ "$COUNT" -gt 0 ]; then
+          decide true "$COUNT" "$COUNT affected build task(s) since $BASE"
+        else
+          decide false 0 "0 affected build tasks since $BASE"
+        fi

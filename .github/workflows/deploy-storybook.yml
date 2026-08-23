@@ -1,33 +1,49 @@
 name: Deploy Storybook
 
+# The affected gate replaces the hand-listed path filters this workflow used
+# to carry — they had already drifted (packages/content-ui serves stories but
+# was not listed). The graph knows what the host builds; the filter list
+# never did. A change to this workflow file alone no longer triggers a
+# deploy — workflow_dispatch is the lever for that.
+
 on:
   pull_request:
     branches: [main]
-    paths:
-      - 'apps/storybook/**'
-      - 'packages/ui/**'
-      - 'packages/story-kit/**'
-      - 'packages/tailwind-config/**'
-      - 'pnpm-lock.yaml'
-      - '.github/workflows/deploy-storybook.yml'
   push:
     branches: [main]
-    paths:
-      - 'apps/storybook/**'
-      - 'packages/ui/**'
-      - 'packages/story-kit/**'
-      - 'packages/tailwind-config/**'
-      - 'pnpm-lock.yaml'
-      - '.github/workflows/deploy-storybook.yml'
   workflow_dispatch:
 
 concurrency:
   group: deploy-storybook-${{ github.ref }}
-  cancel-in-progress: true
+  # Pushes queue rather than cancel: each push gates on its own before..head
+  # range, so cancelling push A when push B arrives would let B's narrower
+  # range gate A's changes out of ever deploying.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
+  affected:
+    name: Gate on affected
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      deploy: ${{ steps.gate.outputs.deploy }}
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+      - name: Decide
+        id: gate
+        uses: ./.github/actions/affected-gate
+        with:
+          filter: '@o3/storybook'
+
   deploy:
-    if: github.actor != 'dependabot[bot]'
+    needs: affected
+    if: needs.affected.outputs.deploy == 'true' && github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
