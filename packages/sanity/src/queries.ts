@@ -234,7 +234,12 @@ export const CASE_STUDY_QUERY = defineQuery(`*[_type == "caseStudy" && slug.curr
   }
   "story": story[]{${SECTION_FIELDS}},
   seo,
-  "next": *[_type == "caseStudy" && _id != ^._id] | order(_createdAt desc) [0]{title, "slug": slug.current, heroMedia, "client": client->{name}}
+  ${
+    /* The next-project band draws a whole Case Study Card at 1440
+      (`2250:1564`), so the neighbour it fetches is the card projection —
+      logo, eyebrow, narrative line and stat included. */ ''
+  }
+  "next": *[_type == "caseStudy" && _id != ^._id] | order(_createdAt desc) [0]{${CASE_STUDY_CARD}}
 }`)
 
 export const CASE_STUDY_SLUGS_QUERY = defineQuery(
