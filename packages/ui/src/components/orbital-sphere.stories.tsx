@@ -30,8 +30,8 @@ type Story = StoryObj<typeof meta>
 
 /**
  * The Home hero (`1810:1616`) — 95.5% of the frame width, hung so only the cap
- * shows, with the bone dome closing the band. `motion="orbit"`, which is what
- * the hero asks for.
+ * shows, and the band closing on a hard edge the way `2089:4316` draws it.
+ * `motion="orbit"`, which is what the hero asks for.
  */
 export const HeroCap: Story = {
   args: { motion: 'orbit' },
@@ -42,9 +42,6 @@ export const HeroCap: Story = {
         {...args}
         className="bottom-[-124vw] left-1/2 w-[165vw] -translate-x-1/2 lg:bottom-[-77.1vw] lg:w-[95.5vw]"
       />
-      <div className="absolute inset-x-0 bottom-0 z-0 h-[54px] overflow-hidden lg:h-[108px]">
-        <div className="bg-bone absolute left-1/2 top-0 aspect-[2182/863] w-[151.5%] -translate-x-1/2 rounded-[50%]" />
-      </div>
     </div>
   ),
 }

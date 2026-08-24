@@ -11,11 +11,10 @@ import { PageMockup } from '../PageMockup'
  * rail-panel bands, the insights carousel and the closing CTA.
  *
  * The **surface sequence** is the thing this story shows that no block story
- * can: ink → warm wash → wash → bone → white → white → bone → ink. The hero's
- * curve is `bone-soft` because that is where the partners band's wash starts,
- * and the CTA band's fade strip only works because the footer under it is
- * black. Both are page properties; change one band's surface and this is where
- * it shows.
+ * can: ink → warm wash → wash → bone → white → white → bone → ink. Every step
+ * in it is a hard edge, the way both frames draw them, and the CTA band's fade
+ * strip only works because the footer under it is black. Those are page
+ * properties; change one band's surface and this is where it shows.
  */
 const meta = {
   title: 'Pages/Home',

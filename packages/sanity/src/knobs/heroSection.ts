@@ -38,10 +38,10 @@ export const heroSectionKnobs = defineBlockKnobs({
      * Ink or white, and only on the band composition (#311).
      *
      * The orbital opener paints ink whatever a document stores, and it has to:
-     * the sphere, the bone-soft curve at its foot and the white copy over both
-     * are one composition drawn on that colour. So the control is gated rather
-     * than offered and ignored — a knob that turns and repaints nothing is the
-     * failure ADR 0020's guard exists to remove.
+     * the sphere and the white copy over it are one composition drawn on that
+     * colour. So the control is gated rather than offered and ignored — a knob
+     * that turns and repaints nothing is the failure ADR 0020's guard exists
+     * to remove.
      *
      * Two of the three surfaces for the same reason. The `Interior Hero` set
      * is instanced on ink everywhere but About, which draws "Interior Hero –

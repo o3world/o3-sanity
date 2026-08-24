@@ -45,7 +45,6 @@ type HeroSectionProps = SectionProps<'heroSection'> & {
  * | 2nd line   | white at 50%                          | white at 60%             |
  * | Subheading | centred, 24/34, **724** wide, 50%     | **absent**               |
  * | CTA        | white fill, radius 5 (`2205:1298`)    | `Button / Solid` Base    |
- * | Curve      | 1440 × **108**, `#F7F7F6`             | ellipse, **34** visible  |
  * | Rhythm     | 288 above, 41, 33, 470 below          | 276 above, 39, 353 below |
  *
  * The band is padding, not a `min-h` with the content centred inside it: both
@@ -59,12 +58,10 @@ type HeroSectionProps = SectionProps<'heroSection'> & {
  * removing it is a composition change and this pass was a measurement one —
  * #89 carries the finding.
  *
- * The curve belongs to the hero rather than to the section beneath it because
- * the frame draws it inside this band and lets it overlap — it is what turns
- * a hard band boundary into the shape the partners band rises through. Its
- * fill is `bone-soft` (#F7F7F6), which is also where the partners band's warm
- * wash starts, so the two meet with no seam. A hero followed by a band that
- * does not open on #F7F7F6 would show one.
+ * **The band's foot is a hard edge.** Neither frame draws a curve into the
+ * section below: `2089:4316`'s children are the headline, the standfirst, the
+ * button and the graphic, and `1814:1619` is the same with `clipsContent` on.
+ * The partners band opens flush against this one at y 990.
  */
 export function HeroSection({
   variant,
@@ -175,11 +172,11 @@ export function HeroSection({
   }
 
   return (
-    // The orbital band always paints ink — the sphere, the bone-soft curve at
-    // its foot and the white copy over both are drawn on that colour, which is
-    // why the block offers no `surface` to override it. Declaring it here is
-    // what gives the button below a readable fill without anyone forcing one,
-    // and what inverts the text roles inside (tokens/color.css).
+    // The orbital band always paints ink — the sphere and the white copy over
+    // it are drawn on that colour, which is why the block offers no `surface`
+    // to override it. Declaring it here is what gives the button below a
+    // readable fill without anyone forcing one, and what inverts the text
+    // roles inside (tokens/color.css).
     <SurfaceProvider surface="ink">
       <section
         {...surfaceAttrs('ink')}
@@ -254,23 +251,6 @@ export function HeroSection({
               <ButtonLink button={button} />
             </Reveal>
           ) : null}
-        </div>
-
-        {/*
-         * The curve. Both frames draw the same shape and neither draws it the
-         * same way twice: 1440 is now an explicit `Curve` vector (`2089:4309`,
-         * 1440 × 108 at the band's foot, filled #F7F7F6 — the redesign replaced
-         * the 2182 × 863 ellipse the #42 build read); 402 is still an ellipse
-         * (`1864:2410`, 715.53 × 283 at y 840 on an 874-tall band, i.e. 178% of
-         * the band's width showing its top 34px).
-         *
-         * Reproduced as one masked ellipse at both widths, because the two
-         * shapes have the same proportion to a tenth of a percent (2182/863 =
-         * 2.528, 715.53/283 = 2.529) — what differs is how much of it shows.
-         * Getting that wrong is the obvious failure: a shorter, rounder dome.
-         */}
-        <div className="absolute inset-x-0 bottom-0 z-0 h-[34px] overflow-hidden lg:h-[108px]">
-          <div className="bg-bone-soft absolute left-1/2 top-0 aspect-[2182/863] w-[178%] -translate-x-1/2 rounded-[50%] lg:w-[151.5%]" />
         </div>
       </section>
     </SurfaceProvider>
