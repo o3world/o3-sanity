@@ -19,7 +19,11 @@ import { CARD_COMPONENTS } from './clientComponents'
  * The content is the same seeded band `apps/web`'s story draws, so the two
  * hosts differ by the card and the tokens and nothing else.
  *
- * The band offers no `surface`, so there is no ink story here.
+ * The band offers no `surface`: it paints a flat `neutral/black` fill, read off
+ * O3's Home frame (`1683:2656`). The kit's own `Case Studies` band
+ * (`4407:7758`) is #F9FAFB with three cards ACROSS, so this story is where the
+ * two designs are furthest apart — a demotion candidate the component map has
+ * not yet classified (#324).
  */
 const meta = {
   title: 'Content/Blocks/Section/CaseShowcaseSection',
@@ -43,7 +47,7 @@ export const Mobile: Story = {
   globals: { viewport: { value: 'mobile' } },
 }
 
-/** One card — the wash bands still have to hold their proportions. */
+/** One card — the band still has to hold its 64px top and bottom. */
 export const SingleCase: Story = {
   args: {
     ...seededSectionArgs('index', 'caseShowcaseSection'),

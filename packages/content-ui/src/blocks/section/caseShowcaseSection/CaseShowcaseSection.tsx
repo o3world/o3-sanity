@@ -16,23 +16,21 @@ import { getCard, type CardSlot } from '../../../cards/card-registry'
 type CaseShowcaseSectionProps = SectionProps<'caseShowcaseSection'> & CardSlot<'caseStudy'>
 
 /**
- * Section block: the case-study showcase, built to the Home frame's "Case
- * Studies" band (`1683:2656`) — #42.
+ * Section block: the case-study showcase, built to the Home frame's
+ * `Section - Case Studies` band (`1683:2656`) — #324.
  *
- * Two stacked bands, each with **its own gradient**, which is why this builds
- * its own `<section>` rather than using `SectionShell`:
+ * ONE INK BAND: 1440 × 2014, a vertical stack padded `64px 96px`, gap 64,
+ * over a flat `neutral/black` fill. The heading row (`1683:2657`) and the card
+ * stack (`1683:2661`) carry no fill of their own.
  *
- * | Band                   | Frame       | Fill                             |
- * | ---------------------- | ----------- | -------------------------------- |
- * | Heading, `96px 96px 0` | `1683:2657` | `--gradient-surface-wash`        |
- * | Cards, `96px`, gap 48  | `1683:2661` | `--gradient-surface-wash-angled` |
+ * It builds its own `<section>` rather than using `SectionShell` because both
+ * of the shell's answers are a step off this band: `BandStep` has no 64 and
+ * `SURFACE_CLASS.ink` paints `--color-ink` (#0A0A0B), where the frame binds a
+ * pure `#000000`. `SiteFooter` is the same shape for the same reason — black
+ * paint, `ink` declared — so the surface roles resolve against the band.
  *
- * The heading row is `space-between` aligned to **flex-end**, so the 48px
- * headline in its 571px measure and the Size=Large button share a baseline.
- *
- * The block offers no `surface`: the frame paints this band with the two
- * washes, and a flat fill behind them would show through both. A dark
- * treatment, if a page ever wants one, is a second `variant` — not a surface.
+ * The heading row is `space-between` aligned to **flex-end**, so the headline
+ * in its 571px measure and the Size=Large button share a baseline.
  */
 export function CaseShowcaseSection({
   heading,
@@ -44,27 +42,22 @@ export function CaseShowcaseSection({
   const items = caseStudies ?? []
 
   return (
-    // Both washes are light and the band takes `text-fg`, so it declares
-    // `white` — the surface a reader sees, spelled here because the block has
-    // no field to read it from.
-    <SurfaceProvider surface="white">
-      <section {...surfaceAttrs('white')} className="text-fg">
-        <div className="bg-(image:--gradient-surface-wash) px-gutter pt-band-sm">
-          <div className="max-w-section mx-auto flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
+    <SurfaceProvider surface="ink">
+      <section {...surfaceAttrs('ink')} className="px-gutter bg-black py-16 text-white">
+        <div className="max-w-section mx-auto flex flex-col gap-16">
+          <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
             {heading ? (
               <h2 className="text-display-xl font-display max-w-[571px] text-balance">{heading}</h2>
             ) : null}
             {button ? <ButtonLink button={button} size="large" /> : null}
           </div>
-        </div>
 
-        <div className="bg-(image:--gradient-surface-wash-angled) px-gutter py-band-sm">
           {/*
            * Gap 24 at 402 (`1889:3620`), 48 at 1440 (`1683:2661`). ADR 0006
            * lists this band precisely because it is *not* a composition
            * divergence — both frames stack the cards, and only the gap moves.
            */}
-          <div className="max-w-section mx-auto flex flex-col gap-6 lg:gap-12">
+          <div className="flex flex-col gap-6 lg:gap-12">
             {items.map((caseStudy) => (
               <Card key={caseStudy._id} {...caseStudy} />
             ))}

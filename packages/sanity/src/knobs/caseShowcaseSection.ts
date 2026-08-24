@@ -9,12 +9,11 @@ import type { CaseShowcaseSection } from '../types/generated'
  * at. Nothing about that is a pick: what the band shows follows from the
  * documents in `caseStudies`.
  *
- * Nor is its surface. The frame paints two gradient washes across the band
- * (`1683:2657` and `1683:2661`) and the renderer draws them; the `surface`
- * knob that used to sit here named a colour no reader ever saw. An empty
- * `knobs` array is the honest answer — ADR 0020's guard reads it both ways, so
- * a block with no controls and a block with no design fields agree by
- * construction.
+ * Nor is its surface. The frame fills the band flat with `neutral/black`
+ * (`1683:2656`), and the cards composite their own scrim over photography, so
+ * a lighter band would leave them floating on nothing. An empty `knobs` array
+ * is the honest answer — ADR 0020's guard reads it both ways, so a block with
+ * no controls and a block with no design fields agree by construction.
  */
 export const caseShowcaseSectionKnobs = defineBlockKnobs({
   type: 'caseShowcaseSection',
@@ -22,7 +21,8 @@ export const caseShowcaseSectionKnobs = defineBlockKnobs({
   tier: 'section',
   knobs: [],
   // Two gradient washes, both light, and the copy over them takes `text-fg`.
-  paintsOwnSurface: 'white',
+  // A flat `neutral/black` fill with white copy over it.
+  paintsOwnSurface: 'ink',
   /** `caseStudies` stays empty — a placeholder never references a document. */
   placeholder: {
     _type: 'caseShowcaseSection',
