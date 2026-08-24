@@ -46,6 +46,12 @@ type HeroSectionProps = SectionProps<'heroSection'> & {
  * | Standfirst | centred, 24/34, **724** wide, solid   | centred, 24/34, 362 wide   |
  * | CTA        | white fill, radius 5 (`2205:1298`)    | the same set (`2975:8417`) |
  * | Rhythm     | 288 above, 0, 41, 33, 310 below       | 173 above, 16, 39, 39, 247 |
+ * | Graphic    | 1926 × 400 on the foot (`1866:2412`)  | same fill (`1814:1927`)    |
+ *
+ * The `Graphic` row is a raster of this site's own orbital sphere, seated on
+ * the band's foot under a 50% scrim that hides its top edge — a stand-in for
+ * the animation, which `OrbitalSphere` is the implementation of. Its geometry
+ * is what the sphere is seated to (see the call site); its pixels are not.
  *
  * Both widths draw the same composition — a centred column with a standfirst.
  * What splits is the step, the measure and the rhythm.
@@ -54,12 +60,6 @@ type HeroSectionProps = SectionProps<'heroSection'> & {
  * frames place the headline at a measured distance from the top of the band
  * and let the sphere have the rest, so the two paddings are read values and
  * the height between them is whatever the copy needs.
- *
- * ⚠️ **The orbital sphere is not on the redesigned frame.** `2089:4316` draws
- * a blurred 1926 × 400 photographic graphic under a 50% scrim where the sphere
- * used to be, and the 402 frame does the same. The sphere stays here because
- * removing it is a composition change and this pass was a measurement one —
- * #89 carries the finding.
  *
  * **The band's foot is a hard edge.** Neither frame draws a curve into the
  * section below: `2089:4316`'s children are the headline, the standfirst, the
@@ -187,11 +187,13 @@ export function HeroSection({
       >
         {showOrbs ? (
           /*
-           * Only the sphere's cap is ever visible. Solving the frame's limb
-           * (see OrbitalSphere) gives r ≈ 581 centred 339px below the band's
-           * foot — 80.7% of the frame width, apex 242px up from the foot. Held
-           * in `vw` so the ratio survives any viewport, and anchored to the
-           * foot so the copy can grow above it.
+           * Only the sphere's cap is ever visible, and the `Graphic`
+           * (`1866:2412`) is where the frame draws it. Tracing the lit limb
+           * down that raster gives r ≈ 963 centred 640px below the band's foot
+           * — a sphere **133.75%** of the frame width, apex 323px up from the
+           * foot, which is where the button's own foot sits. Held in `vw` so
+           * the ratio survives any viewport, and anchored to the foot so the
+           * copy can grow above it.
            *
            * The ratio does NOT carry to 402: the band is barely a third the
            * width but only a fourteenth shorter (874 against 940), so 80.7vw
@@ -201,7 +203,7 @@ export function HeroSection({
            */
           <OrbitalSphere
             motion="orbit"
-            className="bottom-[-124vw] left-1/2 w-[165vw] -translate-x-1/2 lg:bottom-[-77.1vw] lg:w-[95.5vw]"
+            className="bottom-[-124vw] left-1/2 w-[165vw] -translate-x-1/2 lg:bottom-[-111.3vw] lg:w-[133.75vw]"
           />
         ) : null}
 

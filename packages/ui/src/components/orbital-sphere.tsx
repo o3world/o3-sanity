@@ -4,12 +4,12 @@ import { cn } from '../lib/utils'
 
 /**
  * The orbital sphere — the wireframe globe with a brand-red lit limb that
- * rises into the Home hero (`1810:1616`) and sits behind the closing CTA band
+ * rises into the Home hero (`2089:4316`) and sits behind the closing CTA band
  * (`1799:1470`).
  *
  * **Why this is drawn rather than exported.** Both frames carry it as a
- * flattened raster: the hero's (`1810:1588`) has the NavBar and the entire
- * headline baked into the pixels, and the CTA band's (`1680:2085`) is a video
+ * flattened raster: the hero's (`1866:2412`) is a blurred crop under a scrim,
+ * standing in for an animation, and the CTA band's (`1680:2085`) is a video
  * capture with a **mouse cursor** in the middle of it. Neither is shippable,
  * and neither scales past its capture width. So the geometry is rebuilt here
  * from the frames — a limb, four great circles, and node dots on the paths —
@@ -24,20 +24,16 @@ import { cn } from '../lib/utils'
  * that ramps from the centre — the obvious first draft — floods the hero red
  * and buries the headline.
  *
- * Geometry is read the same way — off `.figma/frames/hero-image.png`, which is
- * the hero at 1440 × 892 exported at 1.7014× (2450 / 1440, and 1518 / 1.7014 =
- * 892.2). Tracing the topmost lit pixel down three columns of that frame gives
- * (490, 1342), (1225, 1068) and (1959, 1313); the circle through them is
- * **r ≈ 1170 centred (1242, 2238)** in frame pixels, which converts to
- * **r ≈ 688 centred (730, 1315)** on the band — a sphere **95.5% of the frame
- * width**, hung so only its cap shows, with its centre 423px below the band's
- * floor. Sized in `vw` at the call site so that ratio holds at any viewport.
+ * Geometry is read the same way, off the redesigned Home hero's `Graphic`
+ * (`1866:2412`) — the raster that stands in for this component there, 1926 ×
+ * 400 seated on the band's foot. Tracing the crest of its lit limb across the
+ * band gives **r ≈ 963 centred 640px below the foot**: a sphere **133.75% of
+ * the frame width**, hung so only its cap shows, apex 323px up from the foot.
+ * Sized in `vw` at the call site so that ratio holds at any viewport.
  *
- * An earlier pass read this as r ≈ 581 / 80.7%, which is the same sphere drawn
- * about a sixth too small: its arcs pulled up and away from the white curve
- * below instead of running nearly parallel to it, which is the proportion this
- * band is actually composed around. Check that relationship, not the numbers,
- * if it ever looks wrong again.
+ * The proportion to check, if it ever looks wrong, is the arc against the copy
+ * above it: the frame's apex passes just under the CTA's foot, so the limb
+ * runs nearly flat across the band rather than doming up into the headline.
  *
  * The colour vocabulary is read, not invented: the coloured arcs and node dots
  * are `--color-brand`, the bloom is `--gradient-sphere-bloom` (the sampled
@@ -92,11 +88,10 @@ export function OrbitalSphere({
       {...rest}
     >
       {/*
-       * The bloom. Its box overhangs the sphere so the glow can fall off
-       * OUTSIDE the limb as well as inside it — the raster carries about 75px
-       * of warm falloff above the apex, which on r ≈ 581 is the 6.5% inset
-       * below and puts the limb itself at 88.5% of the bloom's radius, which is
-       * where `--gradient-sphere-bloom` sets its brightest stop.
+       * The bloom. Its box overhangs the sphere by 6.5% so the glow can fall
+       * off OUTSIDE the limb as well as inside it, the way the raster's does.
+       * That inset is also what puts the limb at 88.5% of the bloom's radius,
+       * which is where `--gradient-sphere-bloom` sets its brightest stop.
        */}
       {light ? null : (
         <div
