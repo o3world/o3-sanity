@@ -38,10 +38,10 @@ export interface PanelRowsProps {
  * editor typed. The chip is a circle here where the rail draws a 48×68 square;
  * that is the composition differing, not the numbering.
  *
- * **The last detail is the promise, and takes brand red** (`2334:2166` against
- * `2334:2165`). The frame draws the breakdown in ink and the outcome in
- * `#EB1000`, and every canonical service row is breakdown-then-outcome — so
- * the accent follows position rather than a field. A band that one day wants
+ * **The last detail is the promise, and takes brand red.** The frame draws the
+ * breakdown label in ink and the outcome's — "what you get:" — in `#EB1000`,
+ * and every canonical service row is breakdown-then-outcome, so the accent
+ * follows position rather than a field. A band that one day wants
  * three neutral details and a red one in the middle is where this becomes a
  * knob; nothing draws that today, and a boolean per detail would be a design
  * option hiding in an editorial field.
