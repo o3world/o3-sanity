@@ -21,11 +21,11 @@ type InsightsCarouselSectionProps = SectionProps<'insightsCarouselSection'> & Ca
 
 /**
  * Section block: curated-or-latest insights, built to the Home frame's
- * "Blog" band (`1683:2467`) — #42.
+ * "Blog" band (`2134:1352`, an instance of the Blog set `2205:1146`) — #42.
  *
  * ```
- * 96px 0, gap 48, bone            ← no horizontal padding; the row bleeds
- *   header  0 96px, space-between   48px heading | two Icon / Surface controls
+ * 1440 × 749, padding 128 0, gap 48, bone   ← no horizontal padding; row bleeds
+ *   header  0 96px, space-between            48px heading | two Icon / Surface controls
  *   row     height 526, starts on the 96px gutter, gap 32, runs off the edge
  * ```
  *
@@ -51,7 +51,7 @@ export function InsightsCarouselSection({
   const Card = getCard('insight', cardComponents)
 
   return (
-    <SectionShell surface={resolveSurface(surface, 'insightsCarouselSection')} top="sm" bottom="sm">
+    <SectionShell surface={resolveSurface(surface, 'insightsCarouselSection')} top="md" bottom="md">
       <CarouselTrack
         heading={heading}
         headingAttr={fieldAttr(loc, 'heading')}
