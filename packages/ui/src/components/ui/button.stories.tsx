@@ -62,6 +62,58 @@ export const DownIcon: Story = {
   args: { children: 'How we work', icon: <ChevronDownIcon /> },
 }
 
+/** `#D6D3CC` under a `#76746F` label (`2134:1810`). */
 export const Disabled: Story = {
   args: { children: 'Disabled', disabled: true },
+}
+
+/**
+ * The states the `Button` set draws, on both themes it draws them for.
+ *
+ * Hover, focus and press are PAINTED here rather than triggered: a screenshot
+ * cannot hold a pseudo-class, so each cell names the same token its variant in
+ * `SET_STATES` names, and this story is where the two are held together by eye.
+ * `disabled` needs no such help and is the attribute.
+ *
+ * The `light` column is a real ink band, so it is also where a state token that
+ * inverts on dark shows itself: that is what `btn-disabled-fg` exists for.
+ */
+export const States: Story = {
+  render: () => {
+    const painted = [
+      ['Default', ''],
+      ['Hover', 'bg-brand text-white'],
+      ['Focus', 'bg-btn-focus text-white'],
+      ['Press', 'bg-btn-press text-ink'],
+    ] as const
+
+    return (
+      <div className="bg-line grid gap-px md:grid-cols-2">
+        {(['dark', 'light'] as const).map((variant) => (
+          <div
+            key={variant}
+            data-surface={variant === 'light' ? 'ink' : 'white'}
+            className={`flex flex-col items-start gap-6 p-10 ${variant === 'light' ? 'bg-ink' : 'bg-white'}`}
+          >
+            {painted.map(([state, paint]) => (
+              <div key={state} className="flex flex-col items-start gap-2">
+                <span className="eyebrow text-fg-muted">
+                  {variant} · {state}
+                </span>
+                <Button variant={variant} className={paint} icon={<ArrowIcon />}>
+                  View our work
+                </Button>
+              </div>
+            ))}
+            <div className="flex flex-col items-start gap-2">
+              <span className="eyebrow text-fg-muted">{variant} · Disabled</span>
+              <Button variant={variant} disabled icon={<ArrowIcon />}>
+                View our work
+              </Button>
+            </div>
+          </div>
+        ))}
+      </div>
+    )
+  },
 }

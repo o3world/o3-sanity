@@ -66,6 +66,11 @@ const THEME_DERIVED = [
   'border-on-ink-line',
   'border-line',
   'border-line-soft',
+  // Button states.
+  'bg-btn-focus',
+  'bg-btn-press',
+  'bg-btn-disabled',
+  'text-btn-disabled-fg',
   // Type.
   'font-sans',
   'font-display',

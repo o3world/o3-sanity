@@ -85,22 +85,26 @@ are in each token's comment in `tokens/color.css`.
 
 ## Colors (`--color-*`)
 
-| Token           | Value                   | Role                                                                 |
-| --------------- | ----------------------- | -------------------------------------------------------------------- |
-| `brand`         | `#EB1000`               | Flat **once** on Home — the footer link headers. Else the glow.      |
-| `fg`            | `#232323`               | Body copy and card titles on light bands (`text/default`)            |
-| `fg-muted`      | `#76746F`               | The **neutral** eyebrow and card meta (was `#636363`)                |
-| `fg-body`       | `#55524E`               | `Body/Default` on the redesigned frames — partners, Solutions        |
-| `fg-subtle`     | `#A3A3A3`               | ⚠️ No canonical anchor — legal row moved to `on-utility`, #38        |
-| `fg-quiet`      | `rgba(10,10,10,.5)`     | Pull-quote attribution — tinted ink, not a grey                      |
-| `on-ink`        | `rgba(255,255,255,.92)` | CTA band headline (`color/white/ 92%`)                               |
-| `on-ink-muted`  | `rgba(255,255,255,.65)` | Stat labels beside the 48px figure                                   |
-| `on-ink-subtle` | `rgba(255,255,255,.6)`  | CTA band subhead (`color/white/ 60%`)                                |
-| `on-ink-line`   | `rgba(255,255,255,.2)`  | The orbital arc behind the footer; hairlines on dark                 |
-| `scrim`         | `rgba(3,3,3,.2)`        | The floating pill NavBar fill                                        |
-| `surface-muted` | `#D3D3D3`               | Carousel controls (`bg/button/secondary`)                            |
-| `line`          | `#D6D3CC`               | The logo-plate hairline (`1864:2395`) — the one rule the frames draw |
-| `line-soft`     | `#ECECEA`               | ⚠️ No canonical anchor — the frames separate with washes             |
+| Token             | Value                   | Role                                                                 |
+| ----------------- | ----------------------- | -------------------------------------------------------------------- |
+| `brand`           | `#EB1000`               | Flat **once** on Home — the footer link headers. Else the glow.      |
+| `fg`              | `#232323`               | Body copy and card titles on light bands (`text/default`)            |
+| `fg-muted`        | `#76746F`               | The **neutral** eyebrow and card meta (was `#636363`)                |
+| `fg-body`         | `#55524E`               | `Body/Default` on the redesigned frames — partners, Solutions        |
+| `fg-subtle`       | `#A3A3A3`               | ⚠️ No canonical anchor — legal row moved to `on-utility`, #38        |
+| `fg-quiet`        | `rgba(10,10,10,.5)`     | Pull-quote attribution — tinted ink, not a grey                      |
+| `on-ink`          | `rgba(255,255,255,.92)` | CTA band headline (`color/white/ 92%`)                               |
+| `on-ink-muted`    | `rgba(255,255,255,.65)` | Stat labels beside the 48px figure                                   |
+| `on-ink-subtle`   | `rgba(255,255,255,.6)`  | CTA band subhead (`color/white/ 60%`)                                |
+| `on-ink-line`     | `rgba(255,255,255,.2)`  | The orbital arc behind the footer; hairlines on dark                 |
+| `scrim`           | `rgba(3,3,3,.2)`        | The floating pill NavBar fill                                        |
+| `surface-muted`   | `#D3D3D3`               | Carousel controls (`bg/button/secondary`)                            |
+| `line`            | `#D6D3CC`               | The logo-plate hairline (`1864:2395`) — the one rule the frames draw |
+| `line-soft`       | `#ECECEA`               | ⚠️ No canonical anchor — the frames separate with washes             |
+| `btn-focus`       | `#242321`               | `Button` focus, every theme (`2134:1804`)                            |
+| `btn-press`       | `#E5E3DE`               | `Button` press, every theme (`2205:1310`)                            |
+| `btn-disabled`    | `#D6D3CC`               | `Button` disabled fill, every theme (`2134:1810`)                    |
+| `btn-disabled-fg` | `#76746F`               | The label on that fill — fixed, where `fg-muted` inverts on dark     |
 
 **Copy on dark is white at an alpha, never a solid grey** — it has to
 composite over the photography behind it. `fg-inverse-muted` and `ink-soft`
@@ -189,12 +193,13 @@ take a per-band rhythm is #41.
 
 ## Radii
 
-The canonical design is **square**. The tokens stay so a future decision is one
-edit here rather than a 25-call-site sweep.
+The canonical design is **all but square**: cards and media frames carry no
+radius, and the `Button` set (`2134:1785`) carries 5px. The tokens stay so a
+future decision is one edit here rather than a 25-call-site sweep.
 
 | Token           | Value | Utility        |
 | --------------- | ----- | -------------- |
-| `--radius-btn`  | `0`   | `rounded-btn`  |
+| `--radius-btn`  | `5px` | `rounded-btn`  |
 | `--radius-card` | `0`   | `rounded-card` |
 
 (The pill NavBar is `border-radius: 900px` — that's `rounded-full`, no token.)

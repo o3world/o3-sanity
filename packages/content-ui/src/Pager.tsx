@@ -22,7 +22,7 @@ import { cn } from '@o3/ui'
  * geometry, and three of its values are read as the design system's rather
  * than transcribed:
  *
- * - **Radius is `--radius-btn`**, the 2px every button in this repo carries,
+ * - **Radius is `--radius-btn`**, the 5px every button in this repo carries,
  *   not the import's 12. A pill is a button and the repo's rule is that a
  *   value with a token is never picked by eye (`@o3/tailwind-config`).
  * - **Type is `--text-button`**, the step every other control uses, against the

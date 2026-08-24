@@ -148,7 +148,7 @@
       "name": "Button (2026-08 rebuild)",
       "figmaName": "Button",
       "codeComponent": "packages/ui/src/components/ui/button.tsx#Button",
-      "note": "The redesign's button — Theme = Black | White | Red, radius 2, 12x16 padding, 12px gap — which every redesigned frame instances. `Button` carries its geometry (#150) and `FilterChip` (packages/ui/src/components/filter-chip.tsx) is drawn from it too, so a change here routes to both. The set has no size axis; `Button`'s base | large is authored."
+      "note": "The redesign's button — Theme = Black | White | Red, radius 5, 12x16 padding, 12px gap — which every redesigned frame instances. `Button` carries its geometry (#150) and `FilterChip` (packages/ui/src/components/filter-chip.tsx) is drawn from it too, so a change here routes to both. The set has no size axis; `Button`'s base | large is authored."
     },
     {
       "nodeId": "2177:1556",

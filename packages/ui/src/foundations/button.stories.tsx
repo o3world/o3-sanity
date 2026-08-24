@@ -145,7 +145,7 @@ export const ButtonSpec: Story = {
           <strong>These are two generations of the same button.</strong> This page reads{' '}
           <Mono>Button / Solid</Mono>; the shipped component is built to the redesign&apos;s{' '}
           <Mono>Button</Mono> set (<Mono>2134:1785</Mono>) — <Mono>12px 16px</Mono> padding, a 12px
-          gap and a 2px corner, against the <Mono>8px 20px</Mono>, 8px gap and square corner on the
+          gap and a 5px corner, against the <Mono>8px 20px</Mono>, 8px gap and square corner on the
           left. The label is the same <Mono>--text-button</Mono> in both, and so is the 20px glyph
           box. The glyph itself is the house <Mono>ArrowIcon</Mono>, stroked at 2, where Figma sets
           Material Symbols&apos; <Mono>arrow_forward</Mono>; ADR 0009 says a glyph is an inline SVG

@@ -2,9 +2,10 @@
  * Radius — the canonical design is all but square.
  *
  * Case-study cards, insights cards and media frames carry radius 0 in the
- * frames, against the prototype's 16px cards. Buttons carry 2px (`Button`,
- * 2134:1785), against the prototype's 6px. The tokens are named for what
- * consumes them, so a future decision is one edit here rather than a sweep.
+ * frames, against the prototype's 16px cards. Buttons carry 5px, a hard literal
+ * on every component in the `Button` set (2134:1785). The tokens are named for
+ * what consumes them, so a future decision is one edit here rather than a
+ * sweep.
  *
  * The other curves on the canonical Home frame are shapes rather than a corner
  * style: the 5.8px inner chip of the 58px carousel control, and a 787.77px
@@ -16,7 +17,7 @@
 
 @theme {
   /* Buttons, both sizes and all three fills. */
-  --radius-btn: 2px;
+  --radius-btn: 5px;
   /* Case-study cards, insights cards, media frames. */
   --radius-card: 0px;
   /* Figma declares a `radius-small` variable at 4px but the canonical Home

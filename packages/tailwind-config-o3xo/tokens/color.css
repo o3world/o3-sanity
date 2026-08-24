@@ -27,6 +27,13 @@
  * declaration beats one inherited from <html>, so a dark band inside an O3XO
  * page still gets the inverted roles.
  *
+ * NOT OVERRIDDEN, and not brand-neutral: `btn-focus` / `btn-press` /
+ * `btn-disabled` / `btn-disabled-fg`, the fills and label the shared `Button`
+ * paints its focus, press and disabled states in. They are read off O3's Figma
+ * set, and the O3XO UI kit draws no button states at all, so there is nothing
+ * to read the O3XO values off. Until the kit answers, an O3XO button wears O3's
+ * warm greys in those three states — #315.
+ *
  * OVERRIDDEN, and easy to miss: the base theme's light-surface block at the
  * foot of this file's counterpart. It carries O3's greys, and it matches the
  * band ELEMENT — so unlike everything above, `:root[data-brand='o3xo']` is not

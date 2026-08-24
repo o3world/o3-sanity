@@ -9,24 +9,22 @@ import { cn } from '../lib/utils'
  * Insights index instances it (`2337:4542` selected, `2337:4551` not) — #61.
  *
  * ```
- * 12px 16px, gap 12, radius 2, label 18/24 Figtree Medium
+ * 12px 16px, gap 12, radius 5 (`--radius-btn`), label 18/24 Figtree Medium
  *   selected   #0A0A0B fill, white label          Theme=Black
  *   default    white fill, 1px #76746F, #55524E   Theme=White
  * ```
  *
  * ## Why this is not `Button`
  *
- * It is drawn from the same set, and the shipped `Button` is not that set: it
- * was built to `Button / Solid` (`136:754`) and carries radius 0 with 20px
- * side padding, while the 2026-08 redesign draws every button at radius 2 with
- * 16px. Realigning `Button` moves every CTA on the site and belongs to #55; a
- * chip built on today's `Button` would inherit the old geometry and quietly
- * miss the frame.
+ * Not geometry: `Button` is built to this same set and draws the same
+ * `--radius-btn` at the same 12px 16px. What separates them is behaviour.
  *
- * The two also differ where it matters for a11y. A chip is a **link** with a
- * selected state — it navigates, and the selected one is the page you are on —
- * so it takes `aria-current` rather than a `disabled`, and its selected state
- * is a fact about the URL rather than a variant an author picks.
+ * A chip is a **link** with a selected state — it navigates, and the selected
+ * one is the page you are on — so it takes `aria-current` rather than a
+ * `disabled`, and its selected state is a fact about the URL rather than a
+ * variant an author picks. Its states follow from that: the chip hovers to ink,
+ * where the set's buttons hover to brand red, because a filter that has to be
+ * read as a row of options cannot flare red under the pointer.
  *
  * `Theme=Black | White` is the Figma axis and `selected` is the cva key: one
  * axis, one key. The name follows the job, because both themes appear here as
@@ -39,7 +37,7 @@ import { cn } from '../lib/utils'
  * ```
  */
 const filterChipVariants = cva(
-  'inline-flex items-center justify-center gap-3 whitespace-nowrap rounded-[2px] text-button transition-colors duration-(--duration-hover) ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 px-4 py-3',
+  'inline-flex items-center justify-center gap-3 whitespace-nowrap rounded-btn text-button transition-colors duration-(--duration-hover) ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 px-4 py-3',
   {
     variants: {
       selected: {

@@ -51,7 +51,7 @@ Verified by direct reads of the canonical frames, or recorded in
 
 | Figma set                       | Node        | Variant axes                                   | Code target                                                          | Status                                                                                            |
 | ------------------------------- | ----------- | ---------------------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `Button` (the 2026-08 rebuild)  | `2134:1785` | Theme = Black \| White \| Red; State ×5        | `Button` (`ui/button.tsx`), `FilterChip` (`filter-chip.tsx`)         | ✅ #150 — geometry below                                                                          |
+| `Button` (the 2026-08 rebuild)  | `2134:1785` | Theme = Black \| White \| Red; State ×5        | `Button` (`ui/button.tsx`), `FilterChip` (`filter-chip.tsx`)         | ✅ #150, #299 — geometry and states below                                                         |
 | `Button / Ghost`                | `264:260`   | Size = Base; State = Default                   | `Button variant="ghost"`                                             | The one fill the 2026-08 set does not draw                                                        |
 | `Button / Solid`                | `136:754`   | Size = Base \| Large; State = Default \| Hover | **Superseded** by `2134:1785`                                        | Nothing follows it                                                                                |
 | `Brand / Logo`                  | `264:50`    | Color = Black \| Red \| White                  | `BrandLogo` (`brand-logo.tsx`)                                       | ✅ #41 — `White` unbuilt, below                                                                   |
@@ -155,7 +155,7 @@ ink, which is what lets `SiteNav` flip it by inheritance alone.
 ### `Button` carries the 2026-08 geometry
 
 `2134:1785` draws one button at both frame widths — **12×16 padding, a 12px
-gap, radius 2, an 18/24 Figtree Medium label** — and every redesigned frame
+gap, radius 5, an 18/24 Figtree Medium label** — and every redesigned frame
 instances it, including the CTA band (`2336:4351`) and the nav pill
 (`2225:2877`). `Button` and `FilterChip` are both built to it.
 
@@ -163,12 +163,16 @@ The set has **no size axis**. `Button`'s `base | large` is this repo's own
 decision — `base` is the set's geometry, `large` adds 4px of vertical padding
 for a section-level CTA — and it is declared as authored rather than read.
 
-The set's `Theme=Red` is not built, and neither is the red hover the Black and
-White themes draw. The fill vocabulary is a **knob** (`button.contrast`, stored
-in committed seed JSON and regenerated into types), so it moves with the content
-model rather than with the component. Its default, `auto`, is not a fill at all:
-it reads the surface the instance stands on and picks between `Theme=Black` and
-`Theme=White` — ADR 0026.
+The set's `Theme=Red` is not built. Its four **states** are, as of #299: both
+themes hover to brand red, and they share one focus, press and disabled fill.
+That is why the states are one string in `button.tsx` rather than a line in each
+theme's variant.
+
+The fill vocabulary is a **knob** (`button.contrast`, stored in committed seed
+JSON and regenerated into types), so it moves with the content model rather than
+with the component. Its default, `auto`, is not a fill at all: it reads the
+surface the instance stands on and picks between `Theme=Black` and `Theme=White`
+— ADR 0026.
 
 ### The `Footer` component became canonical (2026-08)
 

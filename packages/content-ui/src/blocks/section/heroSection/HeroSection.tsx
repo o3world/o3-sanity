@@ -39,7 +39,7 @@ type HeroSectionProps = SectionProps<'heroSection'> & {
  * | Headline   | centred, `Heading/h1` 64/76 **Light** | flush left, 36/40        |
  * | 2nd line   | white at 50%                          | white at 60%             |
  * | Subheading | centred, 24/34, **724** wide, 50%     | **absent**               |
- * | CTA        | white fill, radius 2 (`2205:1298`)    | `Button / Solid` Base    |
+ * | CTA        | white fill, radius 5 (`2205:1298`)    | `Button / Solid` Base    |
  * | Curve      | 1440 × **108**, `#F7F7F6`             | ellipse, **34** visible  |
  * | Rhythm     | 288 above, 41, 33, 470 below          | 276 above, 39, 353 below |
  *

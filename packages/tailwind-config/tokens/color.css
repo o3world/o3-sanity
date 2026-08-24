@@ -181,6 +181,26 @@
    * with was a misread of the same swatch, corrected 2026-08-13. */
   --color-on-utility-line: #242321;
 
+  /* ── Button states ─────────────────────────────────────────────────────── */
+  /* The `Button` set (2134:1785) draws four states and paints each one the same
+   * on every theme, so the state fills are the button's own roles rather than
+   * per-fill values. Hover is --color-brand (variable `2050:1200`) and needs no
+   * token; the other three do. They are named for what consumes them, which is
+   * why #242321 and #D6D3CC appear here as well as under Chrome and Borders —
+   * a button state and a hairline are two roles that happen to share a swatch,
+   * and each brand answers them separately. */
+  /* #242321 — Focus (2134:1804). */
+  --color-btn-focus: #242321;
+  /* #E5E3DE — Press (2205:1310). The set's own value; no other role reads it. */
+  --color-btn-press: #e5e3de;
+  /* #D6D3CC — Disabled (2134:1810, 2134:2038, 2205:1322). */
+  --color-btn-disabled: #d6d3cc;
+  /* #76746F — the label over that fill (2205:1322). Its own role rather than
+   * --color-fg-muted, which carries the same value but INVERTS on a dark band:
+   * the fill above does not, so the pair has to move together or a disabled
+   * button on the CTA band wears white at 65% on light grey. */
+  --color-btn-disabled-fg: #76746f;
+
   /* ── Borders / placeholders ────────────────────────────────────────────── */
   /* #D6D3CC — the hairline, and since the 2026-08 partners restructure it
    * finally has an anchor: the `Logo` tile on the redesigned partners band

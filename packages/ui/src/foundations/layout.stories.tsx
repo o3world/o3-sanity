@@ -122,7 +122,7 @@ export const Layout: Story = {
 
       <Section
         title="Corners"
-        note="Buttons, case-study cards, insights cards and media frames all carry radius 0."
+        note="Case-study cards, insights cards and media frames all carry radius 0 on the Home frame this page reads, and so does its button."
       >
         <div className="flex flex-wrap items-end gap-8">
           <div className="flex flex-col items-center gap-3">
@@ -139,10 +139,12 @@ export const Layout: Story = {
           </div>
         </div>
         <Callout>
-          <Mono>--radius-btn</Mono> and <Mono>--radius-card</Mono> were <Mono>6px</Mono> and{' '}
-          <Mono>16px</Mono>; both are <Mono>0</Mono> now. The token names stay so a future reversal
-          is one edit rather than a sweep of 25 call sites. Figma also declares a{' '}
-          <Mono>radius-small: 4</Mono> variable that the Home frame never applies.
+          <Mono>--radius-card</Mono> is <Mono>0</Mono>; <Mono>--radius-btn</Mono> is{' '}
+          <Mono>5px</Mono>, which is the corner the 2026-08 <Mono>Button</Mono> set (
+          <Mono>2134:1785</Mono>) draws and the swatch above — read off the older Home frame — does
+          not. The token names stay so a future reversal is one edit rather than a sweep of 25 call
+          sites. Figma also declares a <Mono>radius-small: 4</Mono> variable that the Home frame
+          never applies.
         </Callout>
       </Section>
     </Page>

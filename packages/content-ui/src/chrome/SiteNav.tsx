@@ -112,9 +112,12 @@ interface SiteNavProps {
  * SSR sees — with no JS there is no attribute, so every server, no-JS and jsdom
  * render draws the frame's skin, and only a browser that has actually measured
  * a light band underneath draws the other one.
+ *
+ * Only the RESTING fill flips. The set paints every state the same on both
+ * themes (`Button`'s `SET_STATES`), so a hover override here would be brand red
+ * overriding brand red.
  */
-const NAV_BUTTON_INK =
-  'group-data-[ink=dark]:bg-ink group-data-[ink=dark]:text-white group-data-[ink=dark]:hover:bg-ink/85'
+const NAV_BUTTON_INK = 'group-data-[ink=dark]:bg-ink group-data-[ink=dark]:text-white'
 
 export function SiteNav({ settings, brandMark }: SiteNavProps) {
   const navItems = settings?.navItems ?? []
