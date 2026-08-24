@@ -179,7 +179,7 @@
       "kind": "componentSet",
       "name": "Key metric card row",
       "figmaName": "Key Metric Card Group",
-      "codeComponent": "packages/content-ui/src/blocks/base/statGroup/StatGroup.tsx#StatGroup"
+      "codeComponent": "apps/o3xo/src/components/blocks/StatGroup.tsx#StatGroup"
     },
     {
       "nodeId": "4404:3934",

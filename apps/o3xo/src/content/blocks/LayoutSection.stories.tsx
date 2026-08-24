@@ -1,27 +1,36 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { figmaDesign } from '@o3/story-kit'
 
-import { seededSectionArgs } from '../../../testing/seedContent'
+import { LayoutSection } from '@o3/content-ui'
+import { seededSectionArgs } from '@o3/content-ui/testing/seed'
 
-import { LayoutSection } from './LayoutSection'
+import { BASE_CLIENT_COMPONENTS } from './clientComponents'
 
 /**
  * The one true two-tier block (ADR 0001): 1–3 columns of **base-tier** blocks,
- * dispatched through the base registry. It is the band an editor reaches for
- * when no bespoke block fits, so what it does with an awkward mix is more
+ * dispatched through this app's base roster. It is the band an editor reaches
+ * for when no bespoke block fits, so what it does with an awkward mix is more
  * interesting than what it does with a tidy one.
  *
- * Its header follows the About frame's interior bands (`1924:5344`): a neutral
- * eyebrow, the 48px heading, and a set-back subheading.
+ * **The brand is pinned**, and the story is this app's rather than the shared
+ * package's, because `statGroup` is app-first (`APP_FIRST_RENDERERS`): the
+ * band's `baseComponents` slot only has an answer inside an app. The band
+ * itself is still shared, so each host draws it through its own roster, and
+ * this story is O3XO's side of that — the columns holding key metric cards
+ * where O3's hold bare figures.
+ *
+ * The content is the same seeded bands `apps/web`'s story draws, so the two
+ * hosts differ by the base roster and the tokens and nothing else.
  *
  * The base tier never contains sections, so nothing here can nest — the
- * columns hold `richText`, `figure`, `embed`, `button` and `statGroup`, and that
- * is the whole vocabulary. Each of those has its own story under
- * `Content/Blocks/Base`.
+ * columns hold `richText`, `figure`, `embed`, `button` and `statGroup`, and
+ * that is the whole vocabulary.
  */
 const meta = {
   title: 'Content/Blocks/Section/LayoutSection',
   component: LayoutSection,
+  globals: { brand: 'o3xo' },
+  args: { baseComponents: BASE_CLIENT_COMPONENTS },
   parameters: { layout: 'fullscreen' },
 } satisfies Meta<typeof LayoutSection>
 

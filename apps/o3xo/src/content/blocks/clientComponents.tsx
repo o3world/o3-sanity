@@ -11,7 +11,6 @@ import type { BaseBlockName, BrandSectionBlockName } from '@o3/sanity/schemas/re
 import {
   bindingsToRecord,
   defineBlockRender,
-  type BaseProps,
   type ClientBlockRenderBinding,
   type SectionProps,
 } from '@o3/content-runtime/blocks'
@@ -23,10 +22,10 @@ import {
   type CardRenderBinding,
 } from '@o3/content-ui/cards'
 
+import { StatGroup } from '@/components/blocks/StatGroup'
 import { O3xoMark } from '@/components/brand/O3xoMark'
 import { CaseStudyCard } from '@/content/documents/caseStudy/CaseStudyCard'
 import { FaqSection } from './faqSection/FaqSection'
-import { KeyMetricCards } from '@/components/cards/KeyMetricCard'
 import { YellowTextCards } from '@/components/cards/YellowTextCard'
 import { HeaderPill } from '@/components/HeaderPill'
 import { ICONS } from '@/components/icons/Icon'
@@ -92,43 +91,30 @@ function RailPanelsSectionWithYellowCards(props: SectionProps<'railPanelsSection
 }
 
 /**
- * The stat row, as the kit's `Key Metric Card Group` (#244) — a yellow plate
- * per figure where O3 sets the same numbers bare.
- */
-function StatGroupAsKeyMetrics({ stats }: BaseProps<'statGroup'>) {
-  return (
-    <KeyMetricCards
-      items={(stats ?? []).map((stat, index) => ({
-        key: stat._key ?? String(index),
-        value: stat.value ?? '',
-        label: stat.label ?? '',
-      }))}
-    />
-  )
-}
-
-/**
- * This app's BASE-tier roster — the shared one with `statGroup` re-pointed.
+ * This app's BASE-tier roster — the shared one plus this app's own `StatGroup`.
  *
- * Base bindings ship with the renderers rather than per app, because the base
- * tier is the vocabulary a section renderer draws with. Re-pointing one here
- * is the same act the section bindings below perform, and it has to be spelled
- * once and read three times: by the two dispatchers in this file, and by
- * `LayoutSection`, which is the one band that renders a base block itself.
+ * The shared table is the roster MINUS the app-first blocks, so
+ * `satisfies Record<BaseBlockName, …>` is the record biting: `statGroup` is
+ * listed in `APP_FIRST_RENDERERS`, and this app does not compile until it
+ * names its own drawing of it.
+ *
+ * Spelled once and read three times: by the two dispatchers in this file, and
+ * by `LayoutSection`, which is the one band that renders a base block itself.
  */
 export const BASE_CLIENT_COMPONENTS = {
   ...BASE_BLOCK_COMPONENTS,
-  statGroup: StatGroupAsKeyMetrics,
+  statGroup: StatGroup,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 } satisfies Record<BaseBlockName, ComponentType<any>>
 
 /**
- * The layout band, dispatching its columns through this app's base roster
- * (#244) — a `statGroup` in a column is where the homepage's key metrics
- * actually sit, and the band is the only place a base block renders outside
- * this app's own registry.
+ * The layout band, dispatching its columns through this app's base roster — a
+ * `statGroup` in a column is where the homepage's key metrics actually sit,
+ * and the band is the only place a base block renders outside this app's own
+ * registry. The slot is required: `statGroup` is app-first, so nothing draws a
+ * column holding one until an app says what it is.
  */
-function LayoutSectionWithAccentCards(props: SectionProps<'layoutSection'>) {
+function LayoutSectionWithBaseRoster(props: SectionProps<'layoutSection'>) {
   return <LayoutSection {...props} baseComponents={BASE_CLIENT_COMPONENTS} />
 }
 
@@ -219,7 +205,7 @@ export const CLIENT_SECTION_BINDINGS = [
   defineBlockRender('roleListSection', { component: RoleListSection }),
   defineBlockRender('inFlightSection', { component: InFlightSection }),
   defineBlockRender('formSection', { component: FormSection }),
-  defineBlockRender('layoutSection', { component: LayoutSectionWithAccentCards }),
+  defineBlockRender('layoutSection', { component: LayoutSectionWithBaseRoster }),
   defineBlockRender('mediaSection', { component: MediaSection }),
   defineBlockRender('screenGridSection', { component: ScreenGridSection }),
   defineBlockRender('listingSection', { component: ListingSection }),

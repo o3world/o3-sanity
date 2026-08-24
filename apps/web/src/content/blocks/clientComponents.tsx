@@ -22,6 +22,7 @@ import {
   type CardRenderBinding,
 } from '@o3/content-ui/cards'
 
+import { StatGroup } from '@/components/blocks/StatGroup'
 import { CaseStudyCard } from '@/components/cards/CaseStudyCard'
 
 // The renderers themselves are shared (@o3/content-ui); the binding below is
@@ -67,6 +68,33 @@ type O3SectionBlockName = BrandSectionBlockName<'o3'>
  */
 function HeroSectionWithMark(props: SectionProps<'heroSection'>) {
   return <HeroSection {...props} brandMark={<BrandLogo color="red" size={71} />} />
+}
+
+/**
+ * This app's BASE-tier roster — the shared one plus O3's own `StatGroup`.
+ *
+ * The shared table is the roster MINUS the app-first blocks, so
+ * `satisfies Record<BaseBlockName, …>` is the record biting: `statGroup` is
+ * listed in `APP_FIRST_RENDERERS`, and this app does not compile until it
+ * names its own drawing of it.
+ *
+ * Spelled once and read three times: by the two dispatchers in this file, and
+ * by `LayoutSection`, which is the one band that renders a base block itself.
+ */
+export const BASE_CLIENT_COMPONENTS = {
+  ...BASE_BLOCK_COMPONENTS,
+  statGroup: StatGroup,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+} satisfies Record<BaseBlockName, ComponentType<any>>
+
+/**
+ * The layout band, dispatching its columns through this app's base roster. The
+ * band is the only place a base block renders outside this app's own registry,
+ * and the slot is required: `statGroup` is app-first, so nothing draws a column
+ * holding one until an app says what it is.
+ */
+function LayoutSectionWithBaseRoster(props: SectionProps<'layoutSection'>) {
+  return <LayoutSection {...props} baseComponents={BASE_CLIENT_COMPONENTS} />
 }
 
 /**
@@ -117,7 +145,7 @@ export const CLIENT_SECTION_BINDINGS = [
   defineBlockRender('roleListSection', { component: RoleListSection }),
   defineBlockRender('inFlightSection', { component: InFlightSection }),
   defineBlockRender('formSection', { component: FormSection }),
-  defineBlockRender('layoutSection', { component: LayoutSection }),
+  defineBlockRender('layoutSection', { component: LayoutSectionWithBaseRoster }),
   defineBlockRender('mediaSection', { component: MediaSection }),
   defineBlockRender('screenGridSection', { component: ScreenGridSection }),
   defineBlockRender('listingSection', { component: ListingSection }),
@@ -139,7 +167,7 @@ export const SECTION_CLIENT_COMPONENTS = bindingsToRecord(
  * registry.ts).
  */
 const CLIENT_BLOCK_COMPONENTS = {
-  ...BASE_BLOCK_COMPONENTS,
+  ...BASE_CLIENT_COMPONENTS,
   ...SECTION_CLIENT_COMPONENTS,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 } satisfies Record<BaseBlockName | O3SectionBlockName, ComponentType<any>>

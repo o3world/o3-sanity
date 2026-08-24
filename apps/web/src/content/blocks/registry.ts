@@ -3,9 +3,7 @@ import type { ComponentType } from 'react'
 import { bindingsToRecord, type LayoutItem, type PageSection } from '@o3/content-runtime/blocks'
 import type { BrandSectionBlockName } from '@o3/sanity/schemas/registry'
 
-import { BASE_BLOCK_COMPONENTS } from '@o3/content-ui'
-
-import { CLIENT_SECTION_BINDINGS } from './clientComponents'
+import { BASE_CLIENT_COMPONENTS, CLIENT_SECTION_BINDINGS } from './clientComponents'
 
 /**
  * Union of every block the renderer can dispatch — base + section, sourced
@@ -32,10 +30,11 @@ type BlockComponentSlot<K extends DispatchedBlockType> = ComponentType<
 >
 
 const BLOCK_MAP = {
-  // Base blocks — widening BaseBlockName forces a typecheck error in
-  // baseComponents.ts if a renderer is missing; this satisfies clause then
-  // checks each component's props against the generated block shape.
-  ...BASE_BLOCK_COMPONENTS,
+  // Base blocks — this app's roster: the shared table plus the app-first
+  // renderers it binds itself. Widening BaseBlockName forces a typecheck error
+  // there if one is missing; this satisfies clause then checks each
+  // component's props against the generated block shape.
+  ...BASE_CLIENT_COMPONENTS,
   // Section blocks — shared with ClientBlockRenderer's BLOCK_COMPONENTS
   // (clientComponents.ts). Server-only overrides would spread after this
   // (later keys win); none exist today.

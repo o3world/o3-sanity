@@ -6,10 +6,17 @@
  */
 
 // ── Base tier ──────────────────────────────────────────────────────────────
-// The base bindings ship with the renderers because `LayoutSection`
-// dispatches through them directly: the base tier is the inline vocabulary a
-// section renderer draws with, not a per-app roster.
+// The base tier is the inline vocabulary a section renderer draws with, so the
+// bindings ship with the renderers rather than per app. What each app adds is
+// the app-first blocks (`APP_FIRST_RENDERERS`), which the shared table
+// subtracts and `BaseComponentsSlot` makes it supply.
 export { BASE_BLOCK_BINDINGS, BASE_BLOCK_COMPONENTS } from './blocks/base/baseComponents'
+export type {
+  AppFirstBaseComponents,
+  AppFirstBaseName,
+  BaseComponents,
+  BaseComponentsSlot,
+} from './blocks/base/baseComponents'
 export { Button } from './blocks/base/button/Button'
 export { ButtonGroup } from './blocks/base/buttonGroup/ButtonGroup'
 export { Embed } from './blocks/base/embed/Embed'
@@ -17,7 +24,6 @@ export { Figure } from './blocks/base/figure/Figure'
 export { Mark, markProps } from './blocks/base/mark/Mark'
 export type { MarkProps } from './blocks/base/mark/Mark'
 export { RichText } from './blocks/base/richText/RichText'
-export { StatGroup } from './blocks/base/statGroup/StatGroup'
 
 // ── Section tier ───────────────────────────────────────────────────────────
 export { CaseShowcaseSection } from './blocks/section/caseShowcaseSection/CaseShowcaseSection'

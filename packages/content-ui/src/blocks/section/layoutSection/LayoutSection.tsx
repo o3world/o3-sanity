@@ -4,26 +4,24 @@ import { DisplayHeading, Eyebrow, SectionShell } from '@o3/ui'
 import type { SectionProps } from '@o3/content-runtime/blocks'
 import { stegaClean } from '@sanity/client/stega'
 
-import { BASE_BLOCK_COMPONENTS } from '../../base/baseComponents'
+import { BASE_BLOCK_COMPONENTS, type BaseComponentsSlot } from '../../base/baseComponents'
 import { LAYOUT_COLUMN } from '../../../imageSizes'
 import { DECORATED_BAND_CLASS, resolveDecoration } from '../../decoration'
 import { MoleculeDecoration } from '../../MoleculeDecoration'
 import { resolveSurface } from '../../surface'
 
-type LayoutSectionProps = SectionProps<'layoutSection'> & {
-  /**
-   * The base-tier roster the columns dispatch through, so an app can swap one
-   * base block's renderer without forking the band (ADR 0028). O3XO swaps
-   * `statGroup` for the kit's key metric cards, whose plate is a token role
-   * only its own package declares (#244).
-   *
-   * This band is the only place a base block is rendered outside an app's own
-   * registry, which is why the seam is here: an app's base binding cannot
-   * reach a layout column any other way.
-   */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  baseComponents?: Record<string, ComponentType<any>>
-}
+/**
+ * The band takes the app's base roster through `baseComponents`
+ * (`BaseComponentsSlot`), so an app can swap one base block's renderer without
+ * forking the band (ADR 0028). This is the only place a base block is rendered
+ * outside an app's own registry, so it is the only way an app's base binding
+ * reaches a layout column.
+ *
+ * The slot is required while any base block is app-first: `statGroup` is, so
+ * there is no shared renderer behind it to fall back to. Whatever the app does
+ * not name still comes from `BASE_BLOCK_COMPONENTS`.
+ */
+type LayoutSectionProps = SectionProps<'layoutSection'> & BaseComponentsSlot
 
 const COLUMN_CLASSES: Record<number, string> = {
   1: 'grid-cols-1',
@@ -49,8 +47,13 @@ export function LayoutSection({
   decoration,
   items,
   surface,
-  baseComponents = BASE_BLOCK_COMPONENTS,
+  baseComponents,
 }: LayoutSectionProps) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const components: Record<string, ComponentType<any>> = {
+    ...BASE_BLOCK_COMPONENTS,
+    ...baseComponents,
+  }
   const columnCount = resolveColumns(columns)
   const columnClass = COLUMN_CLASSES[columnCount]
   const resolved = resolveSurface(surface, 'layoutSection')
@@ -116,8 +119,8 @@ export function LayoutSection({
          */}
         <div className={`grid items-start gap-10 ${columnClass}`}>
           {(items ?? []).map((item) => {
-            const Component = Object.prototype.hasOwnProperty.call(baseComponents, item._type)
-              ? baseComponents[item._type]
+            const Component = Object.prototype.hasOwnProperty.call(components, item._type)
+              ? components[item._type]
               : undefined
             if (!Component) return null
             // eslint-disable-next-line @typescript-eslint/no-unused-vars

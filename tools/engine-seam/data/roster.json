@@ -370,11 +370,11 @@
       "fused": [
         {
           "path": "src/blocks/base/baseComponents.tsx",
-          "split": "defineBlockRender/bindingsToRecord usage is machinery; the seven concrete base bindings are product. Deliberate per the barrel's note — the base tier is the inline vocabulary a section renderer draws with — and o3xo re-points it through the LayoutSection slot."
+          "split": "defineBlockRender/bindingsToRecord usage and the AppFirstBaseName subtraction are machinery; the six concrete base bindings are product. Deliberate per the barrel's note — the base tier is the inline vocabulary a section renderer draws with — and each app supplies its app-first blocks through the LayoutSection slot."
         },
         {
           "path": "src/blocks/section/layoutSection/LayoutSection.tsx",
-          "split": "The one renderer that is a dispatcher: the baseComponents slot is machinery, its default binding to BASE_BLOCK_COMPONENTS is product."
+          "split": "The one renderer that is a dispatcher: the baseComponents slot is machinery, the BASE_BLOCK_COMPONENTS it merges the app roster over is product."
         },
         {
           "path": "src/cards/card-registry.ts",

@@ -87,6 +87,12 @@ export const APP_FIRST_RENDERERS = [
     why: 'The kit\'s `Case Study Cards` set (`4404:3072`) is classified "Diverges structurally" in docs/figma-components-o3xo.md: O3 composites the copy over the photograph behind a scrim, the kit stacks a white panel under a 7:5 image band, and no axis of the shared card reaches from one composition to the other.',
     ticket: 295,
   },
+  {
+    type: 'statGroup',
+    tier: 'base',
+    why: 'The kit\'s `Key Metric Card` (`4404:3916`) is classified "Diverges structurally" in docs/figma-components-o3xo.md: O3 sets the figure bare over a rule, the kit plates each one on `accent` — a token role only O3XO\'s package declares, so no shared component may name it.',
+    ticket: 296,
+  },
 ] as const satisfies readonly AppFirstRenderer[]
 
 /**
