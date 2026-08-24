@@ -599,10 +599,12 @@ describe('the seeded 1682 conference page', () => {
  * strip. 1682 has no frame at all, so it takes the same generation.
  *
  * About (`2975:8826`), Solutions (`2975:8839`) and Live (`2975:8763`) close on
- * a pasted copy of Home's bespoke band instead — a raster over a photo slot
- * the schema has no field for, which is #303's variant. Until it lands their
- * seeds keep the molecule, and these assertions hold for that reason rather
- * than because their frames still draw it.
+ * a pasted copy of Home's bespoke band instead. #303 read the paste's raster:
+ * it is Home's own `orbs` band (cursor pixels included), not a photograph, so
+ * a repaint means `decoration: "orbs"` in their seeds — not `backgroundMedia`,
+ * which `ctaSection` now supports but no seed uses. Their seeds keep the
+ * molecule until that repaint is ruled, and these assertions hold for that
+ * reason rather than because their frames still draw it.
  *
  * Home is tested where it lives: its seed pins `orbs`, and its closer fades
  * into the footer.

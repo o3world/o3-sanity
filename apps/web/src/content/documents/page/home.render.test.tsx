@@ -358,8 +358,9 @@ describe('the homepage at 402 (ADR 0006)', () => {
  * limb into the footer. It is why `orbs` is on the knob, and its seed pins the
  * value rather than reading the default.
  *
- * Five other frames now carry a copy of that band, raster and all; what they
- * ask for is a photo background (#303), not this decoration.
+ * Five other frames now carry a copy of that band, raster and all; #303 read
+ * the raster as this band pasted (not a photo), so what they ask for is this
+ * decoration in their seeds, when that repaint is ruled.
  *
  * If Home's frame is ever redrawn to instance the `CTA` component, this is the
  * test that should fail.

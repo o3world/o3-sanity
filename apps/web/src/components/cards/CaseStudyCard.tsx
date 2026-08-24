@@ -164,7 +164,7 @@ export function CaseStudyCard(
         ) : null}
 
         <span className={buttonVariants({ variant: 'light', size: 'base' })}>
-          View our work
+          View the work
           <ArrowIcon />
         </span>
       </div>
