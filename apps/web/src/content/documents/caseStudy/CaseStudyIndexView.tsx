@@ -2,8 +2,9 @@ import { CollectionHero } from '@o3/ui'
 import type { CASE_STUDIES_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 import type { Pagination } from '@o3/content-runtime/routes'
 
-import { CaseStudyCard } from '@o3/content-ui/cards'
 import { Pager } from '@o3/content-ui'
+
+import { CaseStudyCard } from '@/components/cards/CaseStudyCard'
 
 interface CaseStudyIndexViewProps {
   readonly items: NonNullable<CASE_STUDIES_PAGE_QUERY_RESULT>['items']
@@ -22,9 +23,10 @@ function pageHref(page: number): string {
  * grid    1634:1186   white, 96px vertical, 64px gap, 1248 × 556 cards
  * ```
  *
- * The cards are the **same component** the homepage showcase renders — the
- * frame draws identical geometry in both places (`1925:5642` against
- * `1883:3555`), so a second card here would be a copy waiting to drift.
+ * The cards are the **same component** the homepage showcase renders, bound
+ * there through this app's card table — the frame draws identical geometry in
+ * both places (`1925:5642` against `1883:3555`), so a second card here would
+ * be a copy waiting to drift.
  *
  * ## Why a route and not a page document
  *

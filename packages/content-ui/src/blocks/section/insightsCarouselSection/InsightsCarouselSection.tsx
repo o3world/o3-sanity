@@ -2,23 +2,22 @@ import { SectionShell } from '@o3/ui'
 import type { SectionProps } from '@o3/content-runtime/blocks'
 import { fieldAttr } from '@o3/content-runtime/data-attribute'
 
-import { getCard, type CardComponents } from '../../../cards/card-registry'
+import { getCard, type CardSlot } from '../../../cards/card-registry'
 import { resolveSurface } from '../../surface'
 
 import { CarouselTrack } from './CarouselTrack'
 
-type InsightsCarouselSectionProps = SectionProps<'insightsCarouselSection'> & {
-  /**
-   * The card table this band draws through, so an app can re-point one card
-   * type without forking the band (ADR 0028). An unbound type falls back to
-   * the shared card.
-   *
-   * The same channel `LayoutSection`'s `baseComponents` opens for the base
-   * tier: this band is a server component on the published path, so an app's
-   * card cannot reach it any other way.
-   */
-  cardComponents?: CardComponents
-}
+/**
+ * The card slot: how an app re-points this band's card without forking the
+ * band (ADR 0028). Optional while `insight` has a shared card, and required
+ * the moment `APP_FIRST_RENDERERS` demotes it — there would be nothing left to
+ * fall back to.
+ *
+ * The same channel `LayoutSection`'s `baseComponents` opens for the base tier:
+ * this band is a server component on the published path, so an app's card
+ * cannot reach it any other way.
+ */
+type InsightsCarouselSectionProps = SectionProps<'insightsCarouselSection'> & CardSlot<'insight'>
 
 /**
  * Section block: curated-or-latest insights, built to the Home frame's

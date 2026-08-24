@@ -6,9 +6,17 @@ function KitCaseStudyCard() {
   return null
 }
 
+function AppPageCard() {
+  return null
+}
+
 /**
  * The card tier's binding point: an app hands a section its own card table and
  * everything it does not bind keeps the shared card.
+ *
+ * `caseStudy` has no shared card to keep — it is app-first
+ * (`APP_FIRST_RENDERERS`), so its binding is required rather than a re-point,
+ * and calling `getCard('caseStudy')` with nothing bound does not compile.
  */
 describe('getCard', () => {
   const cards = { caseStudy: KitCaseStudyCard }
@@ -22,8 +30,8 @@ describe('getCard', () => {
     expect(getCard('page', cards)).toBe(getCard('page'))
   })
 
-  it('draws the shared card when an app binds nothing at all', () => {
-    expect(getCard('caseStudy')).toBe(getCard('caseStudy', {}))
+  it('draws the app’s card for a shared type it re-points', () => {
+    expect(getCard('page', { page: AppPageCard })).toBe(AppPageCard)
   })
 })
 

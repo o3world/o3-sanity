@@ -5,12 +5,17 @@
  */
 export {
   CARD_PROJECTIONS,
+  CARD_TYPES,
   defineCardRender,
   getCard,
+  type AppFirstCardComponents,
+  type AppFirstCardName,
   type CardComponents,
+  type CardComponentsFor,
   type CardRenderBinding,
+  type CardSlot,
   type CardTypeName,
 } from './card-registry'
-export { CaseStudyCard, type CaseStudyCardData } from './CaseStudyCard'
+export { type CaseStudyCardData } from './cardData'
 export { InsightCard, type InsightCardData } from './InsightCard'
 export { PageCard, type PageCardData } from './PageCard'

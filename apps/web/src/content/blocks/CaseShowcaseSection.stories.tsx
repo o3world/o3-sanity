@@ -1,12 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { figmaDesign } from '@o3/story-kit'
 
-import { seededSectionArgs } from '../../../testing/seedContent'
+import { CaseShowcaseSection } from '@o3/content-ui'
+import { seededSectionArgs } from '@o3/content-ui/testing/seed'
 
-import { CaseShowcaseSection } from './CaseShowcaseSection'
+import { CARD_COMPONENTS } from './clientComponents'
 
 /**
- * The Home frame's "Case Studies" band (`1683:2656`).
+ * The Home frame's "Case Studies" band (`1683:2656`), drawing O3's card.
+ *
+ * **The brand is pinned**, and the story is this app's rather than the shared
+ * package's, for the same reason: `caseStudy` is app-first
+ * (`APP_FIRST_RENDERERS`), so the band's cards slot only has an answer inside
+ * an app. O3XO's own composition is covered by its card's story and the
+ * showcase render test in `apps/o3xo`.
  *
  * The band is two stacked `<div>`s with **different gradients** — that is why
  * it builds its own `<section>` instead of using `SectionShell`, and it is the
@@ -20,6 +27,8 @@ import { CaseShowcaseSection } from './CaseShowcaseSection'
 const meta = {
   title: 'Content/Blocks/Section/CaseShowcaseSection',
   component: CaseShowcaseSection,
+  globals: { brand: 'o3' },
+  args: { cardComponents: CARD_COMPONENTS },
   parameters: {
     layout: 'fullscreen',
     design: figmaDesign('1683:2656'),

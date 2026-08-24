@@ -2,19 +2,9 @@ import Link from 'next/link'
 
 import { ArrowIcon, buttonVariants, Eyebrow } from '@o3/ui'
 import { hrefForDoc } from '@o3/content-runtime/urls'
-import type { SectionProps } from '@o3/content-runtime/blocks'
-
-import { LogoKnockout } from '../LogoKnockout'
-import { SanityImage } from '../SanityImage'
-import { CONTENT_COLUMN } from '../imageSizes'
-
-/**
- * The case-study card shape — the `CASE_STUDY_CARD` projection, pinned to
- * the caseShowcaseSection's dereferenced references.
- */
-export type CaseStudyCardData = NonNullable<
-  SectionProps<'caseShowcaseSection'>['caseStudies']
->[number]
+import { LogoKnockout, SanityImage } from '@o3/content-ui'
+import type { CaseStudyCardData } from '@o3/content-ui/cards'
+import { CONTENT_COLUMN } from '@o3/content-ui/image-sizes'
 
 /** Eyebrow first half: industry titles; second half: the industryDetail string. */
 function caseEyebrow(card: Pick<CaseStudyCardData, 'industries' | 'industryDetail'>): string {
@@ -23,9 +13,13 @@ function caseEyebrow(card: Pick<CaseStudyCardData, 'industries' | 'industryDetai
 }
 
 /**
- * The case-study card, built to the Home frame's card (`1883:3555`) — #42.
+ * O3's case-study card, built to the Home frame's card (`1883:3555`) — #42.
  * The **same geometry** carries the Work index grid (#43), which is why it
  * lives on the card rather than inside either section.
+ *
+ * App-local rather than shared: the kit's `Case Study Cards` set (`4404:3072`)
+ * is a different composition, not a variant of this one, so each app draws its
+ * own over the shared `CaseStudyCardData` (`APP_FIRST_RENDERERS`).
  *
  * ```
  * 1248 × 556        padding 72px 72px 88px, content pinned via space-between

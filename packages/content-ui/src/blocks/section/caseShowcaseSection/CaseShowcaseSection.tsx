@@ -2,20 +2,18 @@ import { SurfaceProvider, surfaceAttrs } from '@o3/ui'
 import type { SectionProps } from '@o3/content-runtime/blocks'
 
 import { ButtonLink } from '../../../ButtonLink'
-import { getCard, type CardComponents } from '../../../cards/card-registry'
+import { getCard, type CardSlot } from '../../../cards/card-registry'
 
-type CaseShowcaseSectionProps = SectionProps<'caseShowcaseSection'> & {
-  /**
-   * The card table this band draws through, so an app can re-point one card
-   * type without forking the band (ADR 0028). An unbound type falls back to
-   * the shared card.
-   *
-   * The same channel `LayoutSection`'s `baseComponents` opens for the base
-   * tier: this band is a server component on the published path, so an app's
-   * card cannot reach it any other way.
-   */
-  cardComponents?: CardComponents
-}
+/**
+ * The card slot, REQUIRED here: `caseStudy` is app-first
+ * (`APP_FIRST_RENDERERS`), so each app hands the band its own card and there
+ * is no shared one behind it (ADR 0028).
+ *
+ * The same channel `LayoutSection`'s `baseComponents` opens for the base tier:
+ * this band is a server component on the published path, so an app's card
+ * cannot reach it any other way.
+ */
+type CaseShowcaseSectionProps = SectionProps<'caseShowcaseSection'> & CardSlot<'caseStudy'>
 
 /**
  * Section block: the case-study showcase, built to the Home frame's "Case

@@ -202,7 +202,7 @@
       "kind": "componentSet",
       "name": "Case study card",
       "figmaName": "Case Study Cards",
-      "codeComponent": "packages/content-ui/src/cards/CaseStudyCard.tsx#CaseStudyCard",
+      "codeComponent": "apps/o3xo/src/content/documents/caseStudy/CaseStudyCard.tsx#CaseStudyCard",
       "note": "One of #224's four structural divergences. The axis is six named clients rather than a shape, so the set records six instances of one anatomy."
     },
     {

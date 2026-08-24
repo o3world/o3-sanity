@@ -16,6 +16,14 @@ import {
 } from '@o3/content-runtime/blocks'
 import { BrandLogo } from '@o3/ui'
 
+import {
+  defineCardRender,
+  type AppFirstCardComponents,
+  type CardRenderBinding,
+} from '@o3/content-ui/cards'
+
+import { CaseStudyCard } from '@/components/cards/CaseStudyCard'
+
 // The renderers themselves are shared (@o3/content-ui); the binding below is
 // this app's. Re-pointing one line here is what "O3XO adapts a block" costs.
 import {
@@ -62,6 +70,30 @@ function HeroSectionWithMark(props: SectionProps<'heroSection'>) {
 }
 
 /**
+ * This app's CARD-tier bindings — O3's own case-study card
+ * (`apps/web/src/components/cards/`), which the kit's `Case Study Cards` set
+ * (`4404:3072`) diverges structurally from.
+ *
+ * `satisfies AppFirstCardComponents` is the record biting: a card type listed
+ * in `APP_FIRST_RENDERERS` has no shared card, so this app does not compile
+ * until it binds one of its own.
+ */
+export const CARD_BINDINGS = [
+  defineCardRender('caseStudy', { component: CaseStudyCard }),
+] satisfies ReadonlyArray<CardRenderBinding>
+
+/** This app's card table, derived from `CARD_BINDINGS`. */
+export const CARD_COMPONENTS = bindingsToRecord(CARD_BINDINGS) satisfies AppFirstCardComponents
+
+/**
+ * The showcase band, drawing this app's case-study card. The band's shell,
+ * heading row and washes are the shared renderer's; only the card is O3's.
+ */
+function CaseShowcaseSectionWithCard(props: SectionProps<'caseShowcaseSection'>) {
+  return <CaseShowcaseSection {...props} cardComponents={CARD_COMPONENTS} />
+}
+
+/**
  * Render bindings for every client-safe SECTION block — the single authoring
  * point `SECTION_CLIENT_COMPONENTS` derives from.
  *
@@ -75,7 +107,7 @@ function HeroSectionWithMark(props: SectionProps<'heroSection'>) {
 export const CLIENT_SECTION_BINDINGS = [
   defineBlockRender('heroSection', { component: HeroSectionWithMark }),
   defineBlockRender('logoWallSection', { component: LogoWallSection }),
-  defineBlockRender('caseShowcaseSection', { component: CaseShowcaseSection }),
+  defineBlockRender('caseShowcaseSection', { component: CaseShowcaseSectionWithCard }),
   defineBlockRender('railPanelsSection', { component: RailPanelsSection }),
   defineBlockRender('quoteSection', { component: QuoteSection }),
   defineBlockRender('insightsCarouselSection', { component: InsightsCarouselSection }),

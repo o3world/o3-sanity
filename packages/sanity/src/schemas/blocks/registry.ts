@@ -45,6 +45,61 @@ export const BRAND_SECTION_BLOCKS = {
 } as const satisfies Readonly<Record<Brand, readonly string[]>>
 
 /**
+ * The renderer tiers a shared shape can be drawn at. Every one of them is in
+ * scope for a demotion (#286); chrome is not, because it has no schema, no
+ * knobs and no bindings.
+ */
+export type RendererTier = 'card' | 'base' | 'section'
+
+/** One type whose drawing left the shared library, and the case for it. */
+export type AppFirstRenderer = {
+  /** The block or document type, as the tier's roster names it. */
+  readonly type: string
+  readonly tier: RendererTier
+  /** Why the two brands' drawings are not one component: the kit frame and its classification. */
+  readonly why: string
+  /** The ticket that moved the renderer out. */
+  readonly ticket: number
+}
+
+/**
+ * The types drawn APP-FIRST: no renderer in `@o3/content-ui`, one per app over
+ * the shared schema or data shape (#286).
+ *
+ * The trigger is mechanical — a set the component map classifies "Diverges
+ * structurally" demotes, and nothing else does. Token values, `cva` values and
+ * anything a prop, slot or variant can express stay one shared component.
+ *
+ * A demotion is **symmetric**: a shared renderer with one consumer is a
+ * misfiled app-first renderer, so listing a type here obliges every app to
+ * bind its own. The type stays core and the schema stays shared — two honest
+ * drawings of one shape, never a schema fork. Re-promotion is this list in
+ * reverse, on the map reclassifying the set as aligned.
+ *
+ * `app-first-seam.test.ts` in `@o3/content-ui` reads this both ways, and each
+ * tier's shared table is typed as the roster MINUS this list, so half a
+ * demotion does not compile.
+ */
+export const APP_FIRST_RENDERERS = [
+  {
+    type: 'caseStudy',
+    tier: 'card',
+    why: 'The kit\'s `Case Study Cards` set (`4404:3072`) is classified "Diverges structurally" in docs/figma-components-o3xo.md: O3 composites the copy over the photograph behind a scrim, the kit stacks a white panel under a 7:5 image band, and no axis of the shared card reaches from one composition to the other.',
+    ticket: 295,
+  },
+] as const satisfies readonly AppFirstRenderer[]
+
+/**
+ * The demoted types in one tier, as a union — `never` for a tier with none,
+ * which is what lets a tier's shared table subtract this list before any
+ * demotion has happened in it.
+ */
+export type AppFirstRendererName<T extends RendererTier> = Extract<
+  (typeof APP_FIRST_RENDERERS)[number],
+  { tier: T }
+>['type']
+
+/**
  * Every section block in the content model, core and brand alike.
  *
  * This is the list the factories check, the schema registers and typegen

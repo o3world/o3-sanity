@@ -17,7 +17,11 @@ import {
 } from '@o3/content-runtime/blocks'
 import { fieldAttr } from '@o3/content-runtime/data-attribute'
 
-import { defineCardRender, type CardRenderBinding } from '@o3/content-ui/cards'
+import {
+  defineCardRender,
+  type AppFirstCardComponents,
+  type CardRenderBinding,
+} from '@o3/content-ui/cards'
 
 import { O3xoMark } from '@/components/brand/O3xoMark'
 import { CaseStudyCard } from '@/content/documents/caseStudy/CaseStudyCard'
@@ -129,28 +133,31 @@ function LayoutSectionWithAccentCards(props: SectionProps<'layoutSection'>) {
 }
 
 /**
- * This app's CARD-tier bindings — the shared table with `caseStudy`
- * re-pointed at the kit's `Case Study Cards` set (`4404:3072`), which the
- * component map classifies as structurally divergent from O3's scrim card.
+ * This app's CARD-tier bindings — the kit's `Case Study Cards` set
+ * (`4404:3072`), which the component map classifies as structurally divergent
+ * from O3's scrim card.
  *
  * A card type nobody binds here keeps the shared card, and binding a type the
  * registry does not know is a compile error at `defineCardRender`.
+ *
+ * `satisfies AppFirstCardComponents` is the record biting: a card type listed
+ * in `APP_FIRST_RENDERERS` has no shared card, so this app does not compile
+ * until it binds one of its own.
  */
 export const CARD_BINDINGS = [
   defineCardRender('caseStudy', { component: CaseStudyCard }),
 ] satisfies ReadonlyArray<CardRenderBinding>
 
 /** This app's card table, derived from `CARD_BINDINGS`. */
-export const CARD_COMPONENTS = bindingsToRecord(CARD_BINDINGS)
+export const CARD_COMPONENTS = bindingsToRecord(CARD_BINDINGS) satisfies AppFirstCardComponents
 
 /**
  * The showcase band, drawing this app's case-study card.
  *
  * The card is the only thing this brand changes about the band — its shell,
  * heading row and washes are the shared renderer's — so it fills the cards
- * slot rather than forking it. Without the binding the band draws O3's card
- * while `/case-studies` draws the kit's, which is the same document in two
- * compositions on one site.
+ * slot rather than forking it. The slot is required: `caseStudy` is app-first,
+ * so nothing draws the band's cards until an app says what they are.
  */
 function CaseShowcaseSectionWithKitCards(props: SectionProps<'caseShowcaseSection'>) {
   return <CaseShowcaseSection {...props} cardComponents={CARD_COMPONENTS} />
