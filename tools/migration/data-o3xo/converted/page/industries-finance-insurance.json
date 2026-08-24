@@ -16,7 +16,8 @@
         "AI solutions making finance + insurance more accessible"
       ],
       "subheading": "Financial and insurance institutions must navigate complex regulations while delivering faster, personalized customer experiences. Our AI solutions help you accelerate growth and manage risk by automating underwriting, enhancing operations, and ensuring compliance.",
-      "decoration": "none"
+      "decoration": "none",
+      "surface": "ink"
     },
     {
       "_type": "railPanelsSection",

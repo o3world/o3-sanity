@@ -155,16 +155,26 @@ describe('what the hero offers on the bar', () => {
       nested,
     })
 
-  it('shows Composition, and leaves Decoration to the menu', () => {
+  it('shows Surface and Composition, and leaves Decoration to the menu', () => {
     // Not a table in the app: `bar: true` on the declaration is the whole rule
     // (ADR 0020), and `decoration` does not declare it.
-    //
-    // No Surface either, and that is the second half of the same rule: the
-    // orbital band paints its own ink, so the hero declares
-    // `paintsOwnSurface` and offers no knob for a control to draw.
+    // Band-surface knobs come before block-surface ones, so Surface leads.
     expect(heroKnobs({ variant: 'band' }).map((resolved) => resolved.knob.title)).toEqual([
+      'Surface',
       'Composition',
     ])
+  })
+
+  it('drops Surface on the orbital opener, which paints its own ink', () => {
+    // The second half of the same rule, and what the knob's gate is for: the
+    // sphere band is one composition drawn on that colour, so there is nothing
+    // for a control to turn.
+    expect(heroKnobs({ variant: 'orbital' }).map((resolved) => resolved.knob.title)).toEqual([
+      'Composition',
+    ])
+    // An unset `variant` is the orbital opener too — the gate names no
+    // `emptyMatches`, so it stays closed.
+    expect(heroKnobs({}).map((resolved) => resolved.knob.title)).toEqual(['Composition'])
   })
 
   it('names the stored option, and the default’s own title when nothing is stored', () => {
@@ -181,12 +191,12 @@ describe('what the hero offers on the bar', () => {
     const html = renderToStaticMarkup(
       <CanvasToolbarView componentName="Hero section" knobs={heroKnobs({ variant: 'band' })} />,
     )
-    expect(html.match(/data-testid="canvas-knob"/g)).toHaveLength(1)
+    expect(html.match(/data-testid="canvas-knob"/g)).toHaveLength(2)
     expect(html).toContain('Hero section')
     expect(html).toContain('Composition')
     expect(html).toContain('Band')
+    expect(html).toContain('Surface')
     expect(html).not.toContain('Decoration')
-    expect(html).not.toContain('Surface')
   })
 
   it('marks an inherited value on the trigger rather than hiding it', () => {
@@ -347,7 +357,7 @@ describe('what the knob menu carries that the bar does not', () => {
       read: blockKnobReader(snapshot('heroSection', { variant: 'band' }), blockPath),
       nested: false,
     }).map((resolved) => resolved.knob.title)
-    expect(bar).toEqual(['Composition'])
+    expect(bar).toEqual(['Surface', 'Composition'])
 
     const html = render(
       menuFor(
@@ -359,8 +369,6 @@ describe('what the knob menu carries that the bar does not', () => {
     )
     expect(html).toContain('Decoration')
     expect(html).toContain('Composition')
-    // And nothing for a surface the block does not offer.
-    expect(html).not.toContain('Surface')
   })
 
   it('offers every option of every knob the hero declares, and nothing else', () => {
@@ -372,7 +380,7 @@ describe('what the knob menu carries that the bar does not', () => {
         'Hero section',
       ),
     )
-    // orbital|band + orbs|none + white|bone|ink.
+    // orbital|band + orbs|none + ink|white.
     const declared = heroSectionKnobs.knobs.reduce((n, knob) => n + knob.options.length, 0)
     expect(rolesIn(html, 'menuitemradio')).toHaveLength(declared)
     // One resolution per knob, so exactly one row per knob is checked.

@@ -16,7 +16,8 @@
       "headlineLines": [
         "We don't sell services. We sell the move, and the team that makes it real."
       ],
-      "decoration": "none"
+      "decoration": "none",
+      "surface": "ink"
     },
     {
       "_type": "featureGridSection",

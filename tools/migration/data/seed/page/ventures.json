@@ -14,7 +14,8 @@
       "variant": "band",
       "eyebrow": "Ventures",
       "headlineLines": ["Investing in exceptional people, products + experiences"],
-      "decoration": "orbs"
+      "decoration": "orbs",
+      "surface": "ink"
     },
     {
       "_type": "layoutSection",

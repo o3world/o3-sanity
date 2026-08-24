@@ -16,7 +16,8 @@
       "headlineLines": [
         "Transforming data into opportunity"
       ],
-      "decoration": "orbs"
+      "decoration": "orbs",
+      "surface": "ink"
     },
     {
       "_type": "mediaSection",

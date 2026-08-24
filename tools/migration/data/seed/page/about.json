@@ -16,7 +16,8 @@
       "headlineLines": [
         "The model is the story."
       ],
-      "decoration": "orbs"
+      "decoration": "orbs",
+      "surface": "white"
     },
     {
       "_type": "layoutSection",

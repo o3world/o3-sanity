@@ -36,7 +36,8 @@
           ]
         }
       ],
-      "decoration": "none"
+      "decoration": "none",
+      "surface": "ink"
     },
     {
       "_type": "railPanelsSection",

@@ -29,11 +29,10 @@ import { HeroSection } from './HeroSection'
  * through `defineKnobStories`, so a schema change that alters the block's shape
  * still breaks this file at compile time.
  *
- * There is **no bone-surface story**, and no `surface` control to draw one
- * with. Since #42 the hero always paints its own ink band under the orbital
- * field (`1810:1616`) — a light hero would be a different block, not this one
- * on a light surface — so the block declares `paintsOwnSurface: 'ink'` and
- * offers no knob at all.
+ * There is **no bone-surface story**, and no control to draw one with. The
+ * hero's `surface` knob offers ink and white, gated to the band composition:
+ * the orbital opener paints its own ink under the sphere field (`1810:1616`),
+ * and no instance of the `Interior Hero` set draws bone.
  */
 const fixture: SectionProps<'heroSection'> & { brandMark: ReactNode } = {
   // The mark reaches the hero from the app's binding, not from Sanity (#228),

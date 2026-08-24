@@ -179,7 +179,8 @@ function expectLines(
  * `variant: 'band'` on every page including the homepage. The orbital
  * composition is O3's sphere band, drawn from O3's frames; nothing on o3xo.ai
  * corresponds to it, and picking it here would be composing a design rather
- * than migrating a page. `decoration: 'none'` for the same reason.
+ * than migrating a page. `decoration: 'none'` for the same reason, and
+ * `surface: 'ink'` because o3xo.ai opens every page on a dark band.
  */
 function hero(band: FramerBand, key: (name: string) => string): Record<string, unknown> {
   return {
@@ -189,6 +190,7 @@ function hero(band: FramerBand, key: (name: string) => string): Record<string, u
     headlineLines: [band.lines[0]!.text],
     ...(band.lines[1] ? { subheading: band.lines[1].text } : {}),
     decoration: 'none',
+    surface: 'ink',
   }
 }
 

@@ -8,10 +8,8 @@ import { PageMockup } from '../PageMockup'
  * `data/seed/page/solutions.json`. ADR 0013 is why this page exists at all
  * rather than a Services tree.
  *
- * Two things only this page draws:
+ * One thing only this page draws:
  *
- * - the **centred** `CollectionHero` (`1925:6141`), which takes the headline
- *   to 60px — the only place that size appears;
  * - `featureGridSection` in its `orbital` layout (`1928:6524`), the dotted
  *   tetrahedron. That composition is `lg` and up and falls back to the grid
  *   below it (ADR 0006), so this story at desktop and the same story at mobile

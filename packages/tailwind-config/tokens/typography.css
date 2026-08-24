@@ -31,6 +31,7 @@
  *   hero            36  →  64
  *   quote           30  →  48   (2026-08: desktop dropped 64 → 48)
  *   cta             36  →  64   (2026-08: rides the hero variable now)
+ *   interior-hero   40  →  64
  *   display-xl      40  →  48
  *   display-lg      18  →  36
  *   display-sm      20  →  24
@@ -131,6 +132,25 @@
   --text-cta--line-height: clamp(44px, calc(3.083vw + 31.61px), 76px);
   --text-cta--letter-spacing: -1px;
   --text-cta--font-weight: 400;
+
+  /* interior-hero — 64px. The `Interior Hero` component's headline
+   * (`2107:1051`), which every interior page opens on: 64/76 Light at -1px of
+   * tracking at 1440, 40/48 Light at 0 at 402 — both read off the set's two
+   * device variants.
+   *
+   * A third 64px step rather than `hero` or `cta`, and the floor is why: those
+   * two land on 36/44 at 402 and this set draws 40/48, which is `display-xl`'s
+   * floor under `hero`'s ceiling. Same argument the file makes for `hero`
+   * against `quote` — the frames split at one end and not the other.
+   *
+   * The tracking is the one clamp on the ramp that CLOSES rather than opens,
+   * and it is read that way: the Mobile variant sets 0 where Desktop sets -1.
+   * `hero` and `cta` ship -1px flat because their 402 nodes are un-migrated
+   * stragglers; this set's is not. */
+  --text-interior-hero: clamp(40px, calc(2.312vw + 30.7px), 64px);
+  --text-interior-hero--line-height: clamp(48px, calc(2.697vw + 37.16px), 76px);
+  --text-interior-hero--letter-spacing: clamp(-1px, calc(0.3875px - 0.0964vw), 0px);
+  --text-interior-hero--font-weight: 300;
 
   /* display-xl — 48px. THE WORKHORSE: every section headline on every frame
    * ("The platforms we go deep on", 1683:2659), the Work hero headline

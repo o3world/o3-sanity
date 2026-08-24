@@ -90,6 +90,14 @@
   --text-cta--letter-spacing: 0;
   --text-cta--font-weight: 400;
 
+  /* interior-hero — H1. The kit draws no Interior Hero set, and the step a
+   * page opener takes here is the same one the Hero band takes, so this rides
+   * the kit's H1 (`4406:6595`) rather than O3's 64/40 Light. */
+  --text-interior-hero: clamp(48px, calc(1.188vw + 42.89px), 60px);
+  --text-interior-hero--line-height: 1.2;
+  --text-interior-hero--letter-spacing: 0;
+  --text-interior-hero--font-weight: 400;
+
   /* display-xl — H2. Every section headline on the Layouts canvas. */
   --text-display-xl: clamp(36px, calc(1.188vw + 30.89px), 48px);
   --text-display-xl--line-height: 1.2;

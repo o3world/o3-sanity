@@ -16,7 +16,8 @@
         "Ready to move from AI potential to performance?"
       ],
       "subheading": "Let’s discuss how O3XO can help you identify high-impact AI use cases and deliver measurable results quickly.",
-      "decoration": "none"
+      "decoration": "none",
+      "surface": "ink"
     },
     {
       "_type": "railPanelsSection",

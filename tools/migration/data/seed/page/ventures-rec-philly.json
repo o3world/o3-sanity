@@ -16,7 +16,8 @@
       "headlineLines": [
         "Empowering creative entrepreneurs"
       ],
-      "decoration": "orbs"
+      "decoration": "orbs",
+      "surface": "ink"
     },
     {
       "_type": "mediaSection",

@@ -16,7 +16,8 @@
         "AI solutions built for your industry"
       ],
       "subheading": "Generic AI tools fail because they ignore your industry's workflows, compliance requirements, and operational realities. We've spent over two decades learning what actually works for your industry. Our industry-focused approach identifies use cases that drive real impact and integrates AI into your existing systems through proven, sector-tested strategies.",
-      "decoration": "none"
+      "decoration": "none",
+      "surface": "ink"
     },
     {
       "_type": "railPanelsSection",

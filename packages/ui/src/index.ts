@@ -33,9 +33,9 @@ export type { ButtonIconProps } from './components/button-icons'
 export { FilterChip, filterChipVariants } from './components/filter-chip'
 export type { FilterChipProps } from './components/filter-chip'
 
-// CollectionHero — the Work frame's index hero (1634:1181)
+// CollectionHero — the interior-page opener (2107:1051)
 export { CollectionHero } from './components/collection-hero'
-export type { CollectionHeroProps } from './components/collection-hero'
+export type { CollectionHeroProps, CollectionHeroSurface } from './components/collection-hero'
 
 // CaseStudyHero — the Case Study detail opener (1710:2301)
 export { CaseStudyHero } from './components/case-study-hero'

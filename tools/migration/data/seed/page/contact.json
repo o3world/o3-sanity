@@ -15,7 +15,8 @@
       "eyebrow": "Contact",
       "headlineLines": ["Let’s make exceptional experiences together."],
       "subheading": "Looking for guidance with your customer experience? Tell us what your business needs.",
-      "decoration": "orbs"
+      "decoration": "orbs",
+      "surface": "ink"
     },
     {
       "_type": "formSection",

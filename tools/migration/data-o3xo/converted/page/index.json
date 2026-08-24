@@ -16,7 +16,8 @@
         "Activate AI advantage"
       ],
       "subheading": "We guide executive teams from education to execution. We design and develop AI initiatives that teams adopt, trust, and use to drive competitive advantage.",
-      "decoration": "none"
+      "decoration": "none",
+      "surface": "ink"
     },
     {
       "_type": "layoutSection",

@@ -16,7 +16,8 @@
         "AI solutions transforming real estate operations"
       ],
       "subheading": "Vacant properties and rising operational costs eat into real estate profits while tenant expectations continue to climb. Our AI solutions transform leasing velocity, automate property operations, and elevate tenant experiences by helping you drive revenue growth and operational efficiency.",
-      "decoration": "none"
+      "decoration": "none",
+      "surface": "ink"
     },
     {
       "_type": "railPanelsSection",

@@ -4,7 +4,7 @@ import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 
 import { collectionPrefixes } from '@o3/sanity/brand'
-import { BLOCK_KNOBS } from '@o3/sanity/knobs'
+import { offersSurface } from './lib/surfaceContract'
 import { SECTION_BLOCKS } from '@o3/sanity/schemas/registry'
 
 import type { Migration } from '@o3/sanity/types/generated'
@@ -427,15 +427,14 @@ describe('committed seed content', () => {
     // runs in Studio — a loaded document has to carry it explicitly or every
     // section renders on the default surface.
     //
-    // A block declaring `paintsOwnSurface` has no such field, and storing one
-    // would be content nothing reads: the band's composition fixes its colour.
-    // Asked of the declaration rather than a list of block names, so the day a
-    // fourth band stops offering the choice this test already knows.
+    // A section whose surface control the composition hides has no such field,
+    // and storing one would be content nothing reads. `offersSurface` asks the
+    // declaration section by section, so the day another band fixes its colour
+    // — or gates the control — this test already knows.
     it('sets an explicit surface on every section that offers one', () => {
       for (const { file, doc } of pages) {
         for (const s of sectionsOf(doc)) {
-          const spec = BLOCK_KNOBS[String(s._type) as keyof typeof BLOCK_KNOBS]
-          if (spec?.paintsOwnSurface !== undefined) {
+          if (!offersSurface(s)) {
             expect(s.surface, `${file}: ${String(s._type)} paints its own surface`).toBeUndefined()
             continue
           }

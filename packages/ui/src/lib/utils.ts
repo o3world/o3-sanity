@@ -23,6 +23,7 @@ export const FONT_SIZE_UTILITIES = [
   'text-hero',
   'text-quote',
   'text-cta',
+  'text-interior-hero',
   'text-display-xl',
   'text-display-lg',
   'text-display-md',

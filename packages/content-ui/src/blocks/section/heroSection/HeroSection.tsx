@@ -13,8 +13,13 @@ import {
 } from '@o3/ui'
 import type { SectionProps } from '@o3/content-runtime/blocks'
 
+import { cn } from '@o3/ui/lib/utils'
+
 import { ButtonLink } from '../../../ButtonLink'
 import { LogoKnockout } from '../../../LogoKnockout'
+import { SanityImage } from '../../../SanityImage'
+import { sectionBackground } from '../../sectionBackground'
+import { resolveSurface } from '../../surface'
 
 type HeroSectionProps = SectionProps<'heroSection'> & {
   /**
@@ -70,30 +75,46 @@ export function HeroSection({
   details,
   button,
   decoration,
+  surface,
+  backgroundMedia,
   brandMark,
 }: HeroSectionProps) {
   const lines = headlineLines ?? []
   const showOrbs = stegaClean(decoration) !== 'none'
 
-  // The interior-page hero: a shallow ink-warm strip, not the full orbital
-  // band. Work (`1634:1181`), About (`1924:5344`) and Solutions (`1925:6141`)
-  // all draw it, so it is `CollectionHero` — the same component the /work and
-  // /insights routes render, which is what stops a page-authored hero and
-  // a route-owned hero drifting apart.
+  // The interior-page hero: a shallow strip, not the full orbital band. It is
+  // `CollectionHero` — the same component the /work and /insights routes
+  // render, which is what stops a page-authored hero and a route-owned hero
+  // drifting apart — drawn as the `Interior Hero` set (`2107:1051`), which
+  // #308 ruled canonical for every route that opens on this band.
   if (stegaClean(variant) === 'band') {
     const detailGroups = details ?? []
+    // Ink or white — the knob's own roster. Anything else a client could write
+    // past the form falls back to the colour the set is instanced on.
+    const band = resolveSurface(surface, 'heroSection') === 'white' ? 'white' : 'ink'
     /*
      * The partner lockup (`2479:2205`): the brand's own mark, a 12px ×, and
-     * the partner's mark as a white knockout — the same "Mask group" treatment
-     * the case-study cards give a client logo, which is what the frame draws
-     * here too. Only the partner half is content; the × is the lockup's own
-     * chrome and the first half comes from the app.
+     * the partner's mark. Only the partner half is content; the × is the
+     * lockup's own chrome and the first half comes from the app.
+     *
+     * The knockout is the ink band's treatment — the same "Mask group" the
+     * case-study cards give a client logo, a white silhouette so a full-colour
+     * mark does not read as a foreign object on the dark. A light band has no
+     * dark to knock out of, and a white silhouette on it is invisible, so the
+     * partner's own artwork stands there instead.
      */
     const lockup = logo ? (
       <div className="flex items-center gap-6">
         {brandMark}
-        <CloseIcon className="size-3 text-white" aria-hidden="true" />
-        <LogoKnockout source={logo} alt="" width={257} className="h-[70px]" />
+        <CloseIcon
+          className={cn('size-3', band === 'ink' ? 'text-white' : 'text-fg')}
+          aria-hidden="true"
+        />
+        {band === 'ink' ? (
+          <LogoKnockout source={logo} alt="" width={257} className="h-[70px]" />
+        ) : (
+          <SanityImage source={logo} alt="" width={257} sizes="257px" className="h-[70px] w-auto" />
+        )}
       </div>
     ) : null
 
@@ -107,7 +128,7 @@ export function HeroSection({
         {detailGroups.map((detail, index) => (
           <div key={detail._key ?? index} className="flex flex-col gap-3">
             {detail.label ? (
-              <Eyebrow size="lg" tone="inverse">
+              <Eyebrow size="lg" tone={band === 'ink' ? 'inverse' : 'brand'}>
                 {detail.label}
               </Eyebrow>
             ) : null}
@@ -121,10 +142,6 @@ export function HeroSection({
       </div>
     ) : null
 
-    // Centred is the Solutions shape, and it is only reachable when the band
-    // has nothing to put in its right column at all.
-    const centred = !subheading && !aside
-
     return (
       <CollectionHero
         eyebrow={eyebrow}
@@ -132,21 +149,25 @@ export function HeroSection({
         subheading={subheading}
         lockup={lockup}
         aside={aside}
-        align={centred ? 'center' : 'start'}
+        surface={band}
+        background={sectionBackground(backgroundMedia, band)}
         /*
-         * A hero carrying either 2026-08 field is by definition drawn against
-         * the redesigned `Interior Hero` (`2107:1051`) rather than the Work
-         * band it predates — ink instead of ink-warm, 192px of pill clearance
-         * instead of 164, and the two columns on a shared baseline. `/work`,
-         * `/about`, `/solutions` and `/live` carry neither and keep the older
-         * generation until their frames are redrawn (#55).
+         * The redesigned set, and no `align`. Both of its instances put the
+         * copy against the left gutter with the globe on the right
+         * (`2107:1051`, `2960:6876`) — there is no centred composition in it to
+         * reach for.
          */
-        variant={lockup || aside ? 'interior' : 'band'}
+        variant="interior"
         decoration={
           showOrbs ? (
             // About hangs the sphere off the right edge of the band
-            // (`1924:5344`), where the standfirst would otherwise sit.
-            <OrbitalSphere className="-z-10 hidden lg:bottom-[-30%] lg:right-[-14%] lg:block lg:w-[720px]" />
+            // (`1924:5344`), where the standfirst would otherwise sit. On a
+            // light band it is the hairline drawing rather than the lit rim —
+            // the glow belongs to the dark bands (see `OrbitalSphere`).
+            <OrbitalSphere
+              tone={band === 'ink' ? 'ink' : 'light'}
+              className="-z-10 hidden lg:bottom-[-30%] lg:right-[-14%] lg:block lg:w-[720px]"
+            />
           ) : null
         }
       />

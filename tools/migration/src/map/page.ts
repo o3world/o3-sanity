@@ -79,9 +79,9 @@ export function slugFromPath(path: string, fallback: string): string {
  * with orbiting atoms is not what anyone means by "the design source of
  * truth".
  *
- * No `surface`. The hero declares `paintsOwnSurface: 'ink'`, so the band draws
- * its own colour and the block has no field to hold one; a stored surface is
- * content nothing reads.
+ * No `variant`, so this is the orbital opener — the composition that paints
+ * its own ink and behind whose gate the surface knob stays closed. A stored
+ * surface here would be content nothing reads.
  */
 function headerSection(
   header: Record<string, unknown> | undefined,

@@ -16,7 +16,8 @@
         "AI solutions accelerating technology innovation"
       ],
       "subheading": "Tech companies must differentiate products and scale rapidly while delivering exceptional customer experiences. Our AI solutions enhance product capabilities, automate customer acquisition, and optimize support operations by helping you build competitive advantage and capture market share.",
-      "decoration": "none"
+      "decoration": "none",
+      "surface": "ink"
     },
     {
       "_type": "railPanelsSection",

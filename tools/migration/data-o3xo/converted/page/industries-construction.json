@@ -16,7 +16,8 @@
         "AI solutions built for construction"
       ],
       "subheading": "Construction projects demand precision, speed, and accountability. Our AI solutions integrate with your existing workflows to reduce manual effort, protect margins, and accelerate project delivery, helping you win more work and complete it profitably.",
-      "decoration": "none"
+      "decoration": "none",
+      "surface": "ink"
     },
     {
       "_type": "railPanelsSection",

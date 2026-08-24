@@ -2,15 +2,26 @@ import type { ReactNode } from 'react'
 
 import { cn } from '../lib/utils'
 import { Eyebrow } from './eyebrow'
-import { surfaceAttrs } from './section-shell'
+import { SURFACE_CLASS, surfaceAttrs } from './section-shell'
 import { SurfaceProvider } from './surface-context'
 
+/**
+ * The two colours the `Interior Hero` set is drawn on — ink on every route but
+ * one, white on About (`2960:6876`). Bone is left out because no instance of
+ * the set draws it, and an option nothing draws is a control that turns and
+ * repaints nothing.
+ */
+export type CollectionHeroSurface = 'ink' | 'white'
+
 export interface CollectionHeroProps {
-  /** The 16px uppercase kicker — "WORK". */
+  /** The uppercase kicker — "WORK". 18px at `interior`, 16px at `band`. */
   eyebrow?: string | null
-  /** The headline. 48px flush left, 60px when centred — see `align`. */
+  /** The headline. 64px at `interior`; at `band`, 48px flush left and 64px centred. */
   heading: ReactNode
-  /** The 24px standfirst pinned right, in a 395px measure. Left-aligned only. */
+  /**
+   * The 24px standfirst. At `band` it is pinned right in a 395px measure; at
+   * `interior` it always stacks under the headline. Left-aligned only.
+   */
   subheading?: ReactNode
   /**
    * The lockup between the eyebrow and the headline — the partner page sets
@@ -18,9 +29,13 @@ export interface CollectionHeroProps {
    */
   lockup?: ReactNode
   /**
-   * What stands in the right column INSTEAD of the standfirst — the partner
-   * page's "O3 EXPERTISE:" list (`2401:3196`). The frame draws one 394px
-   * column and only ever fills it once, so this wins where both are given.
+   * THE RIGHT RAIL, and it is optional. The partner page's "O3 EXPERTISE:"
+   * list (`2401:3196`) fills it; the base set (`2107:1051`) draws no rail at
+   * all and stacks the standfirst under the headline instead.
+   *
+   * At `band` the rail and the standfirst share one 394px column, so this wins
+   * where both are given. At `interior` they no longer compete: the standfirst
+   * is always under the headline and this column is the rail's alone.
    */
   aside?: ReactNode
   /**
@@ -38,16 +53,34 @@ export interface CollectionHeroProps {
    * Which generation of the band to draw. `band` is the original Work/Live
    * hero (`1634:1181`) — `ink-warm`, 164px of pill clearance, the two columns
    * centred on each other. `interior` is the 2026-08 `Interior Hero` component
-   * (`2107:1051` / `2101:828`), which the redesigned frames instance: `ink`,
-   * 192px of clearance, and the two columns sitting on a shared baseline.
+   * (`2107:1051` / `2101:828`), which the redesigned frames instance: 192px of
+   * clearance, a 608 copy column, a Light headline over an 18px kicker, an
+   * optional rail, and a surface axis.
    *
-   * Two values rather than a rewrite because the older frames have not been
-   * redrawn: `/work` and `/live` are still canonical at `band`, and flipping
-   * the default would silently repaint two pages against frames that say
-   * otherwise. Expect these to collapse into one when those frames land — the
-   * component-realignment work on #55.
+   * Two values rather than a rewrite because O3XO answers to its own kit and
+   * its collection indexes are still canonical at `band`; flipping the default
+   * would repaint them against a file that says otherwise. Every O3 caller
+   * draws `interior`. Expect these to collapse into one when the o3xo kit
+   * grows its own opener — the component-realignment work on #55.
    */
   variant?: 'band' | 'interior'
+  /**
+   * Which colour the band is painted, at `interior` only — the `band`
+   * generation has one drawn colour and ignores this.
+   *
+   * Defaults to `ink`, which is what every route but About draws.
+   */
+  surface?: CollectionHeroSurface
+  /**
+   * THE PICTURE THE BAND SITS ON — a `SectionBackground`, laid full-bleed
+   * behind everything the band draws (`2846:4465`).
+   *
+   * A slot rather than a source, for the reason `SectionShell`'s is: this
+   * package knows nothing about Sanity, and a still today is a video later
+   * through the same box. The surface still paints under it, so a picture that
+   * fails to load leaves the colour the band declared.
+   */
+  background?: ReactNode
   /** Slot for the band's decoration — About hangs an orbital off the right. */
   decoration?: ReactNode
   className?: string
@@ -70,6 +103,11 @@ export interface CollectionHeroProps {
  * The 164px top padding is the floating pill's clearance, the same figure the
  * Home hero uses.
  *
+ * `variant="interior"` draws the 2026-08 `Interior Hero` set instead
+ * (`2107:1051`) — see that prop. It carries the two slots this band did not
+ * have: a full-bleed picture under everything, and a right rail that is
+ * genuinely optional.
+ *
  * Generic and presentational, so it lives in `packages/ui` with a kebab-case
  * filename and takes no schema binding — `/work` and `/insights` both
  * render it, and neither has a document behind its composition.
@@ -82,26 +120,33 @@ export function CollectionHero({
   aside,
   align = 'start',
   variant = 'band',
+  surface = 'ink',
+  background,
   decoration,
   className,
 }: CollectionHeroProps) {
   const centred = align === 'center'
   const interior = variant === 'interior'
+  // The `band` generation is drawn on `ink-warm` and on nothing else, so it
+  // answers `ink` whatever the caller asked for. Only the redesigned set has a
+  // surface axis.
+  const painted: CollectionHeroSurface = interior ? surface : 'ink'
 
   return (
-    // Both generations paint a dark band — `ink-warm` at `band`, `ink` at
-    // `interior` — so the band declares `ink` either way. The block's own
-    // `surface` field never reaches this component and could not change it.
-    <SurfaceProvider surface="ink">
+    <SurfaceProvider surface={painted}>
       <section
-        {...surfaceAttrs('ink')}
+        {...surfaceAttrs(painted)}
         className={cn(
-          'px-gutter pb-band-sm relative isolate overflow-hidden text-white lg:pb-16',
-          // `2101:789`: the Interior Hero's container is 192px 0 64px on #0A0A0B.
-          interior ? 'bg-ink pt-[192px]' : 'bg-ink-warm pt-[164px]',
+          'px-gutter pb-band-sm relative isolate overflow-hidden lg:pb-16',
+          // `2101:789`: the Interior Hero's container is 192px 0 64px, on
+          // #0A0A0B at every route but About, which draws it white
+          // (`2960:6876`). The older band is `ink-warm` at 164px of pill
+          // clearance and has no second colour.
+          interior ? cn(SURFACE_CLASS[painted], 'pt-[192px]') : 'bg-ink-warm pt-[164px] text-white',
           className,
         )}
       >
+        {background}
         {decoration}
         <div
           className={cn(
@@ -116,37 +161,77 @@ export function CollectionHero({
           <div
             className={cn(
               'flex flex-col gap-4',
-              centred ? 'items-center' : 'lg:w-[588px]',
-              // `2401:3187` — 608 wide, and 24px between the eyebrow, the
-              // lockup, the headline and the standfirst where the older band
-              // sets 588 and 16. Both are read values, so the lockup carries
-              // its own rather than one of them being made to win.
+              // The copy column is 588 on the older band and 608 on the
+              // redesigned set, whose `Left` frame reads 608 in every instance.
+              centred ? 'items-center' : interior ? 'lg:w-[608px]' : 'lg:w-[588px]',
+              // 24px between the parts where a lockup is one of them
+              // (`2401:3185`), against the 16 every other instance sets.
               !centred && lockup && 'gap-6 lg:w-[608px]',
             )}
           >
-            {eyebrow ? <Eyebrow tone="inverse">{eyebrow}</Eyebrow> : null}
+            {eyebrow ? (
+              // The redesigned set steps the kicker to 18px (`eyebrow-lg`).
+              // White on ink; brand red on the light band, sampled #EB1000 off
+              // "ABOUT US" on `2960:6876` — one of the two places on the site
+              // where the red is a flat fill.
+              <Eyebrow
+                size={interior ? 'lg' : 'base'}
+                tone={painted === 'ink' ? 'inverse' : 'brand'}
+              >
+                {eyebrow}
+              </Eyebrow>
+            ) : null}
             {!centred && lockup ? lockup : null}
             <h1
               className={cn(
                 'font-display text-balance',
-                centred ? 'text-cta text-on-ink max-w-[650px]' : 'text-display-xl',
+                centred && 'text-cta max-w-[650px]',
+                centred && painted === 'ink' && 'text-on-ink',
+                // THE HEADLINE STEPS DOWN WHERE THERE IS A RAIL. `2107:1051`
+                // and `2960:6876` draw 64/76 Light at -1px across the whole
+                // column; `2401:3185`, which gives the right column to the
+                // rail, draws 48/58 Light at 0. Both are read values and the
+                // rail is what tells them apart.
+                !centred &&
+                  (interior
+                    ? aside
+                      ? 'text-display-xl font-light'
+                      : 'text-interior-hero'
+                    : 'text-display-xl'),
               )}
             >
               {heading}
             </h1>
             {/*
-             * The standfirst moves UNDER the headline when the right column is
-             * already spoken for. `2401:3191` is the partner hero's — 24/34
-             * white, in the left column, where the Work band pins its own to
-             * the right (`1634:1181`).
+             * WHERE THE STANDFIRST SITS is what the two generations disagree
+             * about. The older band pins it to the right column (`1634:1181`)
+             * and moves it under the headline only when the rail has taken
+             * that column (`2401:3191`). The redesigned set stacks it under the
+             * headline always, which is what makes the rail optional rather
+             * than the thing the standfirst is competing with.
+             *
+             * Its measure narrows to 395 with no rail (`2107:1051`) and fills
+             * the 608 column with one (`2401:3185`) — the rail is what the
+             * column above it is being read against.
+             *
+             * On the light band it is `#AAA69E` rather than the headline's ink
+             * (`2960:6876`), so it takes the muted role; on ink both are white.
              */}
-            {subheading && !centred && aside ? (
-              <p className="text-lead leading-[1.2]">{subheading}</p>
+            {subheading && !centred && (interior || aside) ? (
+              <p
+                className={cn(
+                  'text-lead',
+                  interior ? (aside ? undefined : 'lg:w-[395px]') : 'leading-[1.2]',
+                  interior && painted === 'white' && 'text-fg-muted',
+                )}
+              >
+                {subheading}
+              </p>
             ) : null}
           </div>
           {!centred && aside ? (
             <div className="lg:w-[394px] lg:shrink-0">{aside}</div>
-          ) : subheading && !centred ? (
+          ) : subheading && !centred && !interior ? (
             <p className="text-lead leading-[1.2] lg:w-[395px]">{subheading}</p>
           ) : null}
         </div>

@@ -19,7 +19,7 @@ function pageHref(page: number): string {
  * The /work index, built to the Work frame (`1634:1167`) — #43.
  *
  * ```
- * hero    1634:1181   ink-warm band, eyebrow + 48px headline + 24px standfirst
+ * hero    2107:1051   Interior Hero — eyebrow, 64px headline, standfirst under
  * grid    1634:1186   white, 96px vertical, 48px gap, 1248 × 550 cards
  * ```
  *
@@ -53,7 +53,9 @@ export function CaseStudyIndexView({ items, pagination }: CaseStudyIndexViewProp
 
   return (
     <>
+      {/* `2107:1051` is canonical for this route (#308 q1). */}
       <CollectionHero
+        variant="interior"
         eyebrow="Work"
         heading="The work, framed around the second problem."
         subheading="We lead with the deeper problem we found — not the deliverable. Here's what that looks like across the work."

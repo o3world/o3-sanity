@@ -534,6 +534,7 @@ export type HeroSection = {
   }>
   button?: Button
   decoration?: 'orbs' | 'none'
+  surface?: 'ink' | 'white'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -1766,6 +1767,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'none' | 'orbs'
+        surface?: 'ink' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -2541,6 +2543,7 @@ export type PAGE_QUERY_RESULT = {
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'none' | 'orbs'
+        surface?: 'ink' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }

@@ -14,7 +14,8 @@
       "variant": "band",
       "eyebrow": "1682",
       "headlineLines": ["The business of innovation conference"],
-      "decoration": "orbs"
+      "decoration": "orbs",
+      "surface": "ink"
     },
     {
       "_type": "layoutSection",

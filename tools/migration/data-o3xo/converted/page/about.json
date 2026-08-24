@@ -16,7 +16,8 @@
         "Built from 20 years of digital transformation expertise"
       ],
       "subheading": "O3XO was created when we saw organizations making the same AI mistakes we've spent decades helping clients avoid: chasing hype, building unused tools, investing without ROI. We bring proven methodology to cut through the noise and activate measurable advantage.",
-      "decoration": "none"
+      "decoration": "none",
+      "surface": "ink"
     },
     {
       "_type": "layoutSection",

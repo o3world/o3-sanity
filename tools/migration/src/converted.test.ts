@@ -3,7 +3,7 @@ import { join } from 'node:path'
 
 import { describe, expect, it } from 'vitest'
 
-import { BLOCK_KNOBS } from '@o3/sanity/knobs'
+import { offersSurface } from './lib/surfaceContract'
 import { SECTION_BLOCKS } from '@o3/sanity/schemas/registry'
 
 import { readCorpus, refsIn } from './core/read'
@@ -83,18 +83,17 @@ describe('committed conversion output', () => {
 
   /**
    * The committed half of the surface contract the mapper tests hold at the
-   * other end (`map/page.test.ts`). A section block either offers the choice
-   * with a `surface` knob or fixes it with `paintsOwnSurface`, and a document
-   * that stores a surface for the second kind stores content nothing reads.
-   * Asked of the declaration, so the day a fourth band stops offering the
-   * choice this test already knows.
+   * other end (`map/page.test.ts`). A section either offers the choice or has
+   * its colour fixed by its composition, and a document that stores a surface
+   * for the second kind stores content nothing reads. Asked of the
+   * declaration, so the day another band stops offering the choice this test
+   * already knows.
    */
   it('stores a surface only on sections that offer the choice', () => {
     for (const { file, doc } of pages) {
       for (const section of doc.sections as Record<string, unknown>[]) {
         const type = String(section._type)
-        const spec = BLOCK_KNOBS[type as keyof typeof BLOCK_KNOBS]
-        if (spec?.paintsOwnSurface !== undefined) {
+        if (!offersSurface(section)) {
           expect(section.surface, `${file}: ${type} paints its own surface`).toBeUndefined()
           continue
         }

@@ -1,5 +1,6 @@
 import { defineBlockKnobs, knob } from '@o3/block-spec'
 import { decorationKnob } from './decoration'
+import { surfaceKnob } from './surface'
 import type { HeroSection } from '../types/generated'
 
 /**
@@ -18,7 +19,7 @@ export const heroSectionKnobs = defineBlockKnobs({
       name: 'variant',
       title: 'Composition',
       description:
-        'Orbital is the Home opener — the full sphere band with the bone dome. Band is the interior-page hero: a shallow ink-warm strip with an eyebrow.',
+        'Orbital is the Home opener — the full sphere band with the bone dome. Band is the interior-page hero: a shallow strip with an eyebrow over the headline, on ink or white.',
       // Home (1810:1616) against Work (1634:1181) / About (1924:5344) /
       // Solutions (1925:6141). Same block, two compositions — added in #42
       // as a field on the existing block rather than a second block type.
@@ -33,15 +34,28 @@ export const heroSectionKnobs = defineBlockKnobs({
     // two; #120 converted them, so the shared meaning moved to the pure side
     // and the factory that generated a field directly is gone.
     decorationKnob(['orbs', 'none']),
-    // NO `surface`. The orbital band paints ink itself, whatever a document
-    // stores, and it has to: the sphere, the bone-soft curve at its foot and
-    // the white copy over both are one composition drawn on that colour. A
-    // knob that turned and repainted nothing was the state of it before, and
-    // that is the failure ADR 0020's guard exists to remove — a control exists
-    // exactly when it does something.
+    /*
+     * Ink or white, and only on the band composition (#311).
+     *
+     * The orbital opener paints ink whatever a document stores, and it has to:
+     * the sphere, the bone-soft curve at its foot and the white copy over both
+     * are one composition drawn on that colour. So the control is gated rather
+     * than offered and ignored — a knob that turns and repaints nothing is the
+     * failure ADR 0020's guard exists to remove.
+     *
+     * Two of the three surfaces for the same reason. The `Interior Hero` set
+     * is instanced on ink everywhere but About, which draws "Interior Hero –
+     * White" (`2960:6876`); no instance of it draws bone.
+     *
+     * `emptyMatches` is not set: `variant` defaults to `orbital`, so an unset
+     * value is the composition this gate is closed for.
+     */
+    surfaceKnob({
+      options: ['ink', 'white'],
+      initialValue: 'ink',
+      showWhen: { at: 'variant', mode: 'oneOf', values: ['band'] },
+    }),
   ],
-  // The band paints ink itself — see the note beside the missing surface knob.
-  paintsOwnSurface: 'ink',
   /**
    * A hero with one line in it and nothing to correct. `variant` is not spelled
    * here — the knob's own `initialValue` supplies it (`placeholder.ts`), so an

@@ -16,7 +16,8 @@
         "AI solutions engineered for industrial services"
       ],
       "subheading": "Manufacturing, utilities, and heavy industry face constant pressure to optimize costs, ensure safety, and share product-specific knowledge. Our AI solutions help you reduce risk and maximize performance by integrating with your existing workflows to automate critical processes, share knowledge and streamline operations.",
-      "decoration": "none"
+      "decoration": "none",
+      "surface": "ink"
     },
     {
       "_type": "railPanelsSection",

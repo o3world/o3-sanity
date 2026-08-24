@@ -16,7 +16,8 @@
         "AI solutions accelerating life sciences innovation"
       ],
       "subheading": "Life sciences companies lose millions when teams can't identify the right targets, regulatory submissions drag on, and critical insights disappear between departments. Our AI solutions eliminate these bottlenecks by accelerating market access, streamlining compliance, and connecting research to commercial success.",
-      "decoration": "none"
+      "decoration": "none",
+      "surface": "ink"
     },
     {
       "_type": "railPanelsSection",
