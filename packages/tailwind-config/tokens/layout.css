@@ -12,8 +12,8 @@
  *   Partners           128px 96px        gap 128   (1864:2390, restructured
  *                                                   2026-08; was 96/96/128
  *                                                   with a 96 gap)
- *   Case studies head  96px 96px 0       gap 64    (1683:2657)
- *   Case study cards   96px              gap 48    (1683:2661)
+ *   Case studies       64px 64px         gap 64    (1683:2656, one ink band;
+ *                                                   cards gap 48, 1683:2661)
  *   Pull quote         192px 96px        gap 128   (1683:2137)
  *   Platforms          128px 96px 192px  gap 128   (1762:2149)
  *   Insights       96px 0            gap 48    (1683:2467)

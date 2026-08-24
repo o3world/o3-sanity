@@ -15,14 +15,13 @@ import { CARD_COMPONENTS } from './clientComponents'
  * an app. O3XO's own composition is covered by its card's story and the
  * showcase render test in `apps/o3xo`.
  *
- * The band is two stacked `<div>`s with **different gradients** — that is why
- * it builds its own `<section>` instead of using `SectionShell`, and it is the
- * thing to look at first: the join between `--gradient-surface-wash` and
- * `--gradient-surface-wash-angled` should not read as a seam.
+ * The band is one flat `neutral/black` band padded `64px 96px`, and that is
+ * the thing to look at first: the cards are photographs behind their own
+ * scrim, so the join between a card's floor and the band around it should read
+ * as one dark field rather than two.
  *
- * The block offers no `surface` (see the component), so there is no ink story
- * here — a dark treatment would be a second `variant`, not this band on a dark
- * surface.
+ * The block offers no `surface` (see the component) — the band is ink on every
+ * page it appears on, so there is no white story here.
  */
 const meta = {
   title: 'Content/Blocks/Section/CaseShowcaseSection',
@@ -58,7 +57,7 @@ export const NoButton: Story = {
   args: { ...seededSectionArgs('index', 'caseShowcaseSection'), button: null },
 }
 
-/** One card — the wash bands still have to hold their proportions. */
+/** One card — the band still has to hold its 64px top and bottom. */
 export const SingleCase: Story = {
   args: {
     ...seededSectionArgs('index', 'caseShowcaseSection'),
