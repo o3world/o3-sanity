@@ -23,13 +23,13 @@
     },
     {
       "path": "tools/migration/data/seed/assets/about-beyond-o3xo.png",
-      "nodeId": "1928:6511",
+      "nodeId": "2960:7142",
       "figmaName": "image 21",
       "format": "png",
       "scale": 1,
       "export": "imageFill",
       "locked": false,
-      "note": "About `1924:5344` → Blog `1924:5388` → Frame 2611307. Exact: committed bytes hash to `7f7e041e6b7b902f4111fa8111d1dbb16cb484d4`, the node's `imageRef`. The O3XO mark under O3 Ventures copy — named for what it depicts, per #46."
+      "note": "About `1924:5344` → Blog `1924:5388` → Frame 2611305 `2960:7128`, the card now titled \"Ventures\" (remapped 2026-08-24; identical bytes). Exact: committed bytes hash to `7f7e041e6b7b902f4111fa8111d1dbb16cb484d4`, the node's `imageRef`. The O3XO mark under O3 Ventures copy — named for what it depicts, per #46."
     },
     {
       "path": "tools/migration/data/seed/assets/about-culture-team.png",
@@ -180,7 +180,7 @@
       "scale": 1,
       "export": "imageFill",
       "locked": true,
-      "note": "Replaces the prototype-derived wordmark with the fill original from the partners strip (`1883:3429`) - a different lockup, carrying the \"Transformational Care\" line the old file did not. Alpha-trimmed. Locked because of that."
+      "note": "Replaces the prototype-derived wordmark with the fill original from the partners strip (`1883:3429`) - a different lockup, carrying the \"Transformational Care\" line the old file did not. Alpha-trimmed. Locked because of that. Baseline-seeding conflict closed 2026-08-24: the hand-derived copy was produced from this node on 2026-08-13 and the node has not moved since; nothing to re-derive."
     },
     {
       "path": "tools/migration/data/seed/assets/partner-chop.png",
@@ -197,7 +197,7 @@
       "scale": 1,
       "export": "imageFill",
       "locked": true,
-      "note": "New partner with the 2026-08 restructure (#89). Fill original from the partners strip (`1875:3331`), alpha-trimmed. Locked because of the trim."
+      "note": "New partner with the 2026-08 restructure (#89). Fill original from the partners strip (`1875:3331`), alpha-trimmed. Locked because of the trim. Baseline-seeding conflict closed 2026-08-24: the hand-derived copy was produced from this node on 2026-08-13 and the node has not moved since; nothing to re-derive."
     },
     {
       "path": "tools/migration/data/seed/assets/partner-ironman.png",
@@ -207,7 +207,7 @@
       "scale": 1,
       "export": "imageFill",
       "locked": true,
-      "note": "Replaces the prototype-derived 600x240 raster with the fill original from the partners strip (`1875:3334`). The uploaded file is a 3840x2160 canvas that is mostly transparent margin, which Figma cover-crops into the tile; the committed copy is alpha-trimmed and downscaled to 1200px instead, so `object-fit` never has to. Locked because of that edit."
+      "note": "Replaces the prototype-derived 600x240 raster with the fill original from the partners strip (`1875:3334`). The uploaded file is a 3840x2160 canvas that is mostly transparent margin, which Figma cover-crops into the tile; the committed copy is alpha-trimmed and downscaled to 1200px instead, so `object-fit` never has to. Locked because of that edit. Baseline-seeding conflict closed 2026-08-24: the hand-derived copy was produced from this node on 2026-08-13 and the node has not moved since; nothing to re-derive."
     },
     {
       "path": "tools/migration/data/seed/assets/partner-lacolombe.png",
@@ -217,7 +217,7 @@
       "scale": 1,
       "export": "imageFill",
       "locked": true,
-      "note": "Replaces the prototype-derived navy raster with the fill original from the partners strip (`2082:3954`), which the frame draws in black. Alpha-trimmed; already small (512x99), so not downscaled. Locked because of the trim."
+      "note": "Replaces the prototype-derived navy raster with the fill original from the partners strip (`2082:3954`), which the frame draws in black. Alpha-trimmed; already small (512x99), so not downscaled. Locked because of the trim. Baseline-seeding conflict closed 2026-08-24: the hand-derived copy was produced from this node on 2026-08-13 and the node has not moved since; nothing to re-derive."
     },
     {
       "path": "tools/migration/data/seed/assets/partner-vertex.png",
@@ -227,7 +227,7 @@
       "scale": 1,
       "export": "imageFill",
       "locked": true,
-      "note": "Downloaded fill original from the partners strip (`1864:2390` -> `1864:2395`), then ALPHA-TRIMMED to its bounding box and downscaled to 1200px wide, hence locked. The frame gives every mark a 152px box and lets its natural height fall out at 28-42px, which only works if the file carries no margin of its own."
+      "note": "Downloaded fill original from the partners strip (`1864:2390` -> `1864:2395`), then ALPHA-TRIMMED to its bounding box and downscaled to 1200px wide, hence locked. The frame gives every mark a 152px box and lets its natural height fall out at 28-42px, which only works if the file carries no margin of its own. Baseline-seeding conflict closed 2026-08-24: the hand-derived copy was produced from this node on 2026-08-13 and the node has not moved since; nothing to re-derive."
     },
     {
       "path": "tools/migration/data/seed/assets/plat-lovable-logo.png",
@@ -300,7 +300,7 @@
       "scale": 1.5,
       "export": "render",
       "locked": true,
-      "note": "Software-engineering service page `2360:2879` → Intro section `2360:2861` → the photo rectangle `2360:2871` (imageRef `594350a88ec7874bdc8ad4c2a8f36e3c35f2b60b`). Not exact, and LOCKED so a re-export cannot clobber the hand work: the API render comes back 4:3, so the committed file is the 1.5× render trimmed to the rectangle's own 3:2 and resampled to 1600×1066 — the width `Figure` actually requests. A fresh export would need the same trim and resample."
+      "note": "Software-engineering service page `2360:2879` → Intro section `2360:2861` → the photo rectangle `2360:2871` (imageRef `594350a88ec7874bdc8ad4c2a8f36e3c35f2b60b`). Not exact, and LOCKED so a re-export cannot clobber the hand work: the API render comes back 4:3, so the committed file is the 1.5× render trimmed to the rectangle's own 3:2 and resampled to 1600×1066 — the width `Figure` actually requests. A fresh export would need the same trim and resample. Baseline-seeding conflict closed 2026-08-24: imageRef 594350a8 verified unchanged in the file; the hand-trimmed committed copy stands."
     }
   ]
 }

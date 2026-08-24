@@ -1,29 +1,69 @@
 {
   "schemaVersion": 1,
-  "ranAt": "2026-08-13T21:59:04.740Z",
-  "fileVersion": "2386937043801380426",
+  "ranAt": "2026-08-24T14:38:46.091Z",
+  "fileVersion": "2391303393400685627",
   "shortCircuited": false,
-  "changedFrames": [],
-  "changedComponentSets": [
+  "changedFrames": [
     {
-      "nodeId": "2134:1785",
-      "name": "Button (2026-08 rebuild)",
-      "route": null,
-      "variant": null,
-      "codeComponent": "packages/ui/src/components/filter-chip.tsx#FilterChip",
-      "change": "added"
+      "nodeId": "1814:1618",
+      "name": "Home",
+      "route": "/",
+      "variant": "mobile",
+      "change": "modified"
+    },
+    {
+      "nodeId": "1906:851",
+      "name": "Work index",
+      "route": "/work",
+      "variant": "mobile",
+      "change": "modified"
     }
   ],
-  "untrackedFrames": [],
+  "changedComponentSets": [],
+  "untrackedFrames": [
+    {
+      "nodeId": "2975:8499",
+      "name": "Insights - Mobile",
+      "width": 402
+    },
+    {
+      "nodeId": "2975:10037",
+      "name": "Insights - Mobile",
+      "width": 402
+    },
+    {
+      "nodeId": "2975:9343",
+      "name": "Insights - Mobile",
+      "width": 402
+    },
+    {
+      "nodeId": "2975:8865",
+      "name": "About  - Mobile",
+      "width": 402
+    },
+    {
+      "nodeId": "2960:7557",
+      "name": "Contact",
+      "width": 1440
+    }
+  ],
   "assets": {
     "regenerated": [],
     "lockedConflicts": [
+      {
+        "path": "tools/migration/data/seed/assets/solutions-overview-1682.png",
+        "nodeId": "2360:2871",
+        "reason": "new-to-baseline",
+        "note": "Software-engineering service page `2360:2879` → Intro section `2360:2861` → the photo rectangle `2360:2871` (imageRef `594350a88ec7874bdc8ad4c2a8f36e3c35f2b60b`). Not exact, and LOCKED so a re-export cannot clobber the hand work: the API render comes back 4:3, so the committed file is the 1.5× render trimmed to the rectangle's own 3:2 and resampled to 1600×1066 — the width `Figure` actually requests. A fresh export would need the same trim and resample.",
+        "state": "stillOpen",
+        "firstSeenAt": "2026-08-24T14:37:08.523Z"
+      },
       {
         "path": "tools/migration/data/seed/assets/partner-caron.png",
         "nodeId": "1883:3430",
         "reason": "new-to-baseline",
         "note": "Replaces the prototype-derived wordmark with the fill original from the partners strip (`1883:3429`) - a different lockup, carrying the \"Transformational Care\" line the old file did not. Alpha-trimmed. Locked because of that.",
-        "state": "firstSeen",
+        "state": "stillOpen",
         "firstSeenAt": "2026-08-13T21:59:04.740Z"
       },
       {
@@ -31,7 +71,7 @@
         "nodeId": "1875:3332",
         "reason": "new-to-baseline",
         "note": "New partner with the 2026-08 restructure (#89). Fill original from the partners strip (`1875:3331`), alpha-trimmed. Locked because of the trim.",
-        "state": "firstSeen",
+        "state": "stillOpen",
         "firstSeenAt": "2026-08-13T21:59:04.740Z"
       },
       {
@@ -39,7 +79,7 @@
         "nodeId": "1875:3335",
         "reason": "new-to-baseline",
         "note": "Replaces the prototype-derived 600x240 raster with the fill original from the partners strip (`1875:3334`). The uploaded file is a 3840x2160 canvas that is mostly transparent margin, which Figma cover-crops into the tile; the committed copy is alpha-trimmed and downscaled to 1200px instead, so `object-fit` never has to. Locked because of that edit.",
-        "state": "firstSeen",
+        "state": "stillOpen",
         "firstSeenAt": "2026-08-13T21:59:04.740Z"
       },
       {
@@ -47,7 +87,7 @@
         "nodeId": "2250:1484",
         "reason": "new-to-baseline",
         "note": "Replaces the prototype-derived navy raster with the fill original from the partners strip (`2082:3954`), which the frame draws in black. Alpha-trimmed; already small (512x99), so not downscaled. Locked because of the trim.",
-        "state": "firstSeen",
+        "state": "stillOpen",
         "firstSeenAt": "2026-08-13T21:59:04.740Z"
       },
       {
@@ -55,11 +95,27 @@
         "nodeId": "1864:2396",
         "reason": "new-to-baseline",
         "note": "Downloaded fill original from the partners strip (`1864:2390` -> `1864:2395`), then ALPHA-TRIMMED to its bounding box and downscaled to 1200px wide, hence locked. The frame gives every mark a 152px box and lets its natural height fall out at 28-42px, which only works if the file carries no margin of its own.",
-        "state": "firstSeen",
+        "state": "stillOpen",
         "firstSeenAt": "2026-08-13T21:59:04.740Z"
       }
     ],
-    "failures": []
+    "failures": [
+      {
+        "path": "tools/migration/data/seed/assets/about-beyond-community.png",
+        "nodeId": "1928:6505",
+        "error": "source node 1928:6505 (image 21) not found in the file"
+      },
+      {
+        "path": "tools/migration/data/seed/assets/about-beyond-o3xo.png",
+        "nodeId": "1928:6511",
+        "error": "source node 1928:6511 (image 21) not found in the file"
+      },
+      {
+        "path": "tools/migration/data/seed/assets/about-culture-team.png",
+        "nodeId": "1927:6432",
+        "error": "source node 1927:6432 (Frame 2611349) not found in the file"
+      }
+    ]
   },
   "errors": []
 }

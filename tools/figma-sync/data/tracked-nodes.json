@@ -223,44 +223,12 @@
       "note": "Generation-1, one of three competing sets. Canonical Home draws its cards as frames (`1683:2661`), not instances."
     },
     {
-      "nodeId": "466:570",
-      "kind": "componentSet",
-      "name": "Case study cards",
-      "figmaName": "Case study cards",
-      "codeComponent": null,
-      "note": "Generation-1, one of three competing sets. No canonical frame instances it."
-    },
-    {
       "nodeId": "1393:3025",
       "kind": "componentSet",
       "name": "Case study cards",
       "figmaName": "Case study cards",
       "codeComponent": null,
       "note": "The one non-canonical set a canonical frame instances — Solutions' three engagement cards (`1925:6113`–`6115`, #47). Nothing case-study about the content, so `PanelCards` composes it locally and the set stays non-canonical."
-    },
-    {
-      "nodeId": "172:140",
-      "kind": "componentSet",
-      "name": "Buttons",
-      "figmaName": "Buttons",
-      "codeComponent": null,
-      "note": "Unnamed axes (`Property 1/2/3`) — an imported set, superseded by `Button / *`."
-    },
-    {
-      "nodeId": "778:1447",
-      "kind": "componentSet",
-      "name": "Button / Outline",
-      "figmaName": "Button / Outline",
-      "codeComponent": null,
-      "note": "No canonical frame uses an outline button."
-    },
-    {
-      "nodeId": "356:639",
-      "kind": "componentSet",
-      "name": "Button / Surface",
-      "figmaName": "Button / Surface",
-      "codeComponent": null,
-      "note": "No canonical frame uses a surface button."
     },
     {
       "nodeId": "242:310",
@@ -271,44 +239,12 @@
       "note": "Superseded by `Icon / Surface`."
     },
     {
-      "nodeId": "270:819",
-      "kind": "componentSet",
-      "name": "Icon",
-      "figmaName": "Icon",
-      "codeComponent": null,
-      "note": "Duplicate of the `Icon / *` family."
-    },
-    {
       "nodeId": "270:748",
       "kind": "componentSet",
       "name": "Badge",
       "figmaName": "Badge",
       "codeComponent": null,
       "note": "No canonical use."
-    },
-    {
-      "nodeId": "172:54",
-      "kind": "componentSet",
-      "name": "Social links",
-      "figmaName": "Social links",
-      "codeComponent": null,
-      "note": "Revisited in #41 and still no: the frame's footer draws Socials as a plain `Link Group` (`1680:2110`), not an instance."
-    },
-    {
-      "nodeId": "734:1073",
-      "kind": "componentSet",
-      "name": "Shapes",
-      "figmaName": "Shapes",
-      "codeComponent": null,
-      "note": "Decorative quarter-circles — a background treatment, not a component."
-    },
-    {
-      "nodeId": "400:2219",
-      "kind": "componentSet",
-      "name": "close",
-      "figmaName": "close",
-      "codeComponent": null,
-      "note": "Glyph, not a component (ADR 0009) — `CloseIcon` draws it inline."
     },
     {
       "nodeId": "1261:4877",
@@ -325,14 +261,6 @@
       "figmaName": "Go birds.",
       "codeComponent": "packages/content-ui/src/chrome/SiteFooter.tsx#SiteFooter",
       "note": "Easter egg, instanced beside the Footer's copyright line. Not a component in code: the string is Site Settings' `copyrightNote` and the set's `State=Hover` is a `hover:` utility on it (#87). The set's eagle vector draws nothing in that instance and is not exported."
-    },
-    {
-      "nodeId": "270:814",
-      "kind": "componentSet",
-      "name": ".building block Icon_text",
-      "figmaName": ".building block Icon_text",
-      "codeComponent": null,
-      "note": "Duplicate of `136:14`."
     },
     {
       "nodeId": "2177:1354",
