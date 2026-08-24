@@ -1,6 +1,6 @@
 {
   "fileKey": "RvraLJaZ0zWm8UaD5AJf43",
-  "sectionNodeId": "1632:1510",
+  "sectionNodeIds": ["1632:1510"],
   "entries": [
     {
       "nodeId": "1680:2134",
@@ -195,7 +195,7 @@
       "kind": "componentSet",
       "name": "NavBar",
       "figmaName": "NavBar",
-      "codeComponent": "apps/web/src/ui/SiteNav.tsx#SiteNav",
+      "codeComponent": "packages/content-ui/src/chrome/SiteNav.tsx#SiteNav",
       "note": "A component, not a set. Rebuilt 2026-08: the old NavBar (`1710:2271`) was emptied to a bare pill and canonical frames now instance this node — same labels (Work · Live · Insights · Solutions · About + \"Let's talk\"). Source of record for the nav's display labels."
     },
     {
@@ -203,7 +203,7 @@
       "kind": "componentSet",
       "name": "Utility Nav",
       "figmaName": "Utility Nav",
-      "codeComponent": "apps/web/src/ui/UtilityNav.tsx#UtilityNav",
+      "codeComponent": "packages/content-ui/src/chrome/UtilityNav.tsx#UtilityNav",
       "note": "New 2026-08 brand-property bar above the NavBar (O3 World · 1682 Conference · O3XO), instanced by canonical frames. Built in #88: in flow at the top of the document (the frame marks it `SCROLLS` where the NavBar is `FIXED`), desktop only, links from `siteSettings.utilityNavItems`."
     },
     {
@@ -211,7 +211,7 @@
       "kind": "componentSet",
       "name": "Footer",
       "figmaName": "Footer",
-      "codeComponent": "apps/web/src/ui/SiteFooter.tsx#SiteFooter",
+      "codeComponent": "packages/content-ui/src/chrome/SiteFooter.tsx#SiteFooter",
       "note": "Became canonical 2026-08: the Home frame's footer (`2435:1840`) is now an override-free instance of this component — the old frame footer `1680:2096` is gone, superseding #41's from-the-frame decision. `SiteFooter` was realigned to it in #87 — black band, 64px 96px, the plate-less white mark (`1280:1856`), \"Go birds.\" on hover. Two open deltas: the ring is a filled `#0A0A0B` donut (`1320:117`) where code strokes the dead frame's, and the legal row is `#AAA69E` against `--color-fg-subtle`."
     },
     {
@@ -323,7 +323,7 @@
       "kind": "componentSet",
       "name": "Go birds.",
       "figmaName": "Go birds.",
-      "codeComponent": "apps/web/src/ui/SiteFooter.tsx#SiteFooter",
+      "codeComponent": "packages/content-ui/src/chrome/SiteFooter.tsx#SiteFooter",
       "note": "Easter egg, instanced beside the Footer's copyright line. Not a component in code: the string is Site Settings' `copyrightNote` and the set's `State=Hover` is a `hover:` utility on it (#87). The set's eagle vector draws nothing in that instance and is not exported."
     },
     {
@@ -339,7 +339,7 @@
       "kind": "componentSet",
       "name": "CTA",
       "figmaName": "CTA",
-      "codeComponent": "apps/web/src/content/blocks/section/ctaSection/CtaSection.tsx#CtaSection",
+      "codeComponent": "packages/content-ui/src/blocks/section/ctaSection/CtaSection.tsx#CtaSection",
       "note": "The closing band every canonical page frame but Home instances override-free: Device = Desktop (`2124:72`) | Mobile (`2177:1353`), 1440/402, black, one decoration — the molecule at 775.9 square, 15%, centred. Tracked from 2026-08-16: #163 found the band a generation behind (it drew the pre-redesign sphere of `1680:2132`) and nothing reported the drift, because the set the band is built to was not watched. Home's closer is still the bespoke `1680:2132` and does not instance this."
     },
     {
@@ -355,7 +355,7 @@
       "kind": "componentSet",
       "name": "Blog",
       "figmaName": "Blog",
-      "codeComponent": "apps/web/src/content/blocks/section/insightsCarouselSection/InsightsCarouselSection.tsx#InsightsCarouselSection",
+      "codeComponent": "packages/content-ui/src/blocks/section/insightsCarouselSection/InsightsCarouselSection.tsx#InsightsCarouselSection",
       "note": "The insight band on Home and the insight index: Property 1 = Default (`2134:1302`, 1440×866) | Mobile (`2204:1145`, 402×1372), bone, 48px gap. Its axis is the unnamed `Property 1` where the other two page sets use `Device`; the values still read Desktop/Mobile, so it is one axis, not a second vocabulary. `CarouselTrack` already reads the mobile variant. Tracked from 2026-08-16."
     }
   ],

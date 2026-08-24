@@ -1,12 +1,12 @@
 import type { MetadataRoute } from 'next'
 
 import { SITEMAP_QUERY } from '@o3/sanity/queries'
-import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
+import { collectionPrefixes } from '@o3/sanity/brand'
+import { getBaseUrl } from '@o3/content-runtime/base-url'
+import { sanityFetch } from '@o3/content-runtime/live'
+import { typeTag } from '@o3/content-runtime/routes'
 
-import { typeTag } from '@/lib/content-routes/cacheTags'
-import { getBaseUrl } from '@/lib/base-url'
 import { REDIRECTED_PATHS } from '@/lib/redirects.generated'
-import { sanityFetch } from '@/sanity/live'
 
 interface SitemapRow {
   slug: string | null
@@ -60,6 +60,7 @@ async function readSitemapRows() {
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = getBaseUrl()
+  const prefixes = collectionPrefixes()
   const entries: MetadataRoute.Sitemap = [
     entry(base, '', undefined, 1.0),
     entry(base, '/insights', undefined, 0.8),
@@ -71,13 +72,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     for (const row of (data?.insights ?? []) as SitemapRow[]) {
       if (!row.slug) continue
-      const path = `${COLLECTION_PREFIXES.insight}/${row.slug}`
+      const path = `${prefixes.insight}/${row.slug}`
       if (isRedirected(path)) continue
       entries.push(entry(base, path, row._updatedAt))
     }
     for (const row of (data?.caseStudies ?? []) as SitemapRow[]) {
       if (!row.slug) continue
-      const path = `${COLLECTION_PREFIXES.caseStudy}/${row.slug}`
+      const path = `${prefixes.caseStudy}/${row.slug}`
       if (isRedirected(path)) continue
       entries.push(entry(base, path, row._updatedAt))
     }

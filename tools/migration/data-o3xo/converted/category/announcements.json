@@ -1,0 +1,13 @@
+{
+  "_id": "category-framer-announcements",
+  "_type": "category",
+  "title": "Announcements",
+  "slug": {
+    "_type": "slug",
+    "current": "announcements"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:category:announcements"
+  }
+}

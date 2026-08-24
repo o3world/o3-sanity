@@ -149,10 +149,16 @@ export function isInternalType(type: string): boolean {
 
 /**
  * Pipeline ownership is the deterministic id contract (CONTEXT.md →
- * Rebuild): `<type>-wp-<id>` for migrated documents, `<type>-seed-<slug>`
- * for greenfield ones. Everything else in the dataset — Studio-created
- * documents, uuid drafts, `siteSettings` — is outside the pipeline's
- * authority and is never retired by `load`.
+ * Rebuild): `<type>-wp-<id>` for a WordPress document, `<type>-framer-<key>`
+ * for one migrated from o3xo.ai, `<type>-seed-<slug>` for a greenfield one.
+ * Everything else in the dataset — Studio-created documents, uuid drafts,
+ * `siteSettings` — is outside the pipeline's authority and is never retired
+ * by `load`.
+ *
+ * The source token is what makes the delete half of the rebuild promise true:
+ * a document whose id this does not match is written on every load and removed
+ * by none, so a renamed slug leaves the old document serving its old URL
+ * forever.
  *
  * An internal type's documents are excluded by name, not by shape: a corpus
  * key is any kebab string, so `brief-wp-notes` is a legal brief id that the
@@ -161,7 +167,7 @@ export function isInternalType(type: string): boolean {
 export function isPipelineOwned(id: string): boolean {
   const bare = bareId(id)
   if (INTERNAL_TYPES.some((type) => bare.startsWith(`${type}-`))) return false
-  return /^[a-zA-Z]+-(wp|seed)-./.test(bare)
+  return /^[a-zA-Z]+-(wp|framer|seed)-./.test(bare)
 }
 
 /**

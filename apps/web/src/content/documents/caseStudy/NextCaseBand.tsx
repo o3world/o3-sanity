@@ -2,10 +2,10 @@ import Link from 'next/link'
 
 import { ArrowIcon, Eyebrow } from '@o3/ui'
 import type { CASE_STUDY_QUERY_RESULT } from '@o3/sanity/types/generated'
+import { hrefForDoc } from '@o3/content-runtime/urls'
 
-import { SanityImage } from '@/content/SanityImage'
-import { CONTENT_COLUMN } from '@/content/imageSizes'
-import { hrefForDoc } from '@/content/documents/urls'
+import { SanityImage } from '@o3/content-ui'
+import { CONTENT_COLUMN } from '@o3/content-ui/image-sizes'
 
 type NextCase = NonNullable<NonNullable<CASE_STUDY_QUERY_RESULT>['next']>
 

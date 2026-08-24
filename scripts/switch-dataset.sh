@@ -38,7 +38,8 @@ TARGETS=(
   "tools/guidance/.env.local|brief sync + check"
 )
 
-# The datasets DATASETS in @o3/sanity/constants declares. Kept in step by
+# The datasets o3's brand config declares (@o3/sanity/brand). This script
+# switches o3's dataset — it writes o3's variable. Kept in step by
 # constants.test.ts rather than by memory.
 KNOWN=(development production)
 
@@ -101,7 +102,7 @@ cmd_set() {
   if [ "$known" -eq 0 ]; then
     echo "Unknown dataset: $target" >&2
     echo "Known datasets: ${KNOWN[*]}" >&2
-    echo "(Add it to DATASETS in packages/sanity/src/constants.ts first.)" >&2
+    echo "(Add it to o3's datasets in packages/sanity/src/brand.ts first.)" >&2
     exit 1
   fi
 

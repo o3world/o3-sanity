@@ -1,0 +1,135 @@
+{
+  "_id": "caseStudy-framer-global-tech-firm",
+  "_type": "caseStudy",
+  "title": "Streamlining enterprise RFP responses with intelligent automation",
+  "slug": {
+    "_type": "slug",
+    "current": "global-tech-firm"
+  },
+  "client": {
+    "_type": "reference",
+    "_ref": "client-framer-global-tech-firm"
+  },
+  "narrativeHeadline": "This global technology firm needed to respond to hundreds of RFPs annually while maintaining quality. O3XO's generative AI solution dramatically accelerated response times while preserving expertise.",
+  "stats": [
+    {
+      "_type": "stat",
+      "_key": "k0013",
+      "value": "40%",
+      "label": "Time saved on RFP responses"
+    }
+  ],
+  "heroMedia": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_srcUrl": "https://framerusercontent.com/images/RVgabRp6Vu4urClUHRVZAMnos.webp"
+    },
+    "alt": "Business professional typing on laptop, representing AI-driven RFP automation and workflow efficiency"
+  },
+  "story": [
+    {
+      "_type": "chapter",
+      "_key": "k0006",
+      "kicker": "Opportunity",
+      "title": "Managing hundreds of high-stakes proposals with precision",
+      "body": [
+        {
+          "_key": "k0000",
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "A global technology firm faced mounting pressure from the sheer volume of Request for Proposals (RFPs) flooding their business development pipeline, hundreds per year across diverse markets and solutions. Each RFP response required extensive manual effort: referencing previous proposals, mining vast databases of technical content, copying and pasting information from disparate sources, and ensuring consistency across complex multi-section documents.",
+              "_key": "k0001"
+            }
+          ],
+          "markDefs": [],
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "_key": "k0002",
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "This labor-intensive process created bottlenecks that delayed responses, strained specialist resources, and risked missing critical opportunities in competitive markets.",
+              "_key": "k0003"
+            }
+          ],
+          "markDefs": [],
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "_key": "k0004",
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "The challenge lay in accelerating RFP turnaround times while maintaining the precision, customization, and strategic positioning that wins enterprise deals.",
+              "_key": "k0005"
+            }
+          ],
+          "markDefs": [],
+          "_type": "block",
+          "style": "normal"
+        }
+      ]
+    },
+    {
+      "_type": "chapter",
+      "_key": "k0011",
+      "kicker": "Solution",
+      "title": "Intelligent content orchestration that amplifies specialist expertise",
+      "body": [
+        {
+          "_key": "k0007",
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "O3XO began with a comprehensive workshop to map the firm's RFP response journey and identify optimal intervention points for AI enhancement. We developed a generative AI solution that augmented rather than replaced the work of RFP specialists, focusing on eliminating repetitive tasks while preserving strategic oversight. The system ingested and normalized content from the company's extensive library of past RFP responses, creating an intelligent knowledge base that could instantly surface relevant sections, technical specifications, and proven messaging.",
+              "_key": "k0008"
+            }
+          ],
+          "markDefs": [],
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "_key": "k0009",
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "We built a user experience prioritizing speed, accuracy, and control, allowing specialists to query the system in natural language, receive contextually appropriate content suggestions, and maintain editorial control over final responses.",
+              "_key": "k0010"
+            }
+          ],
+          "markDefs": [],
+          "_type": "block",
+          "style": "normal"
+        }
+      ]
+    },
+    {
+      "_type": "quoteSection",
+      "_key": "k0012",
+      "surface": "bone",
+      "decoration": "molecule",
+      "quote": "We've taken huge steps. I'm feeling good because of the journey we've been on: better responses, better structure, and more efficient outcomes.",
+      "attribution": "RFP Specialist, Global Technology Firm"
+    }
+  ],
+  "seo": {
+    "description": "See how a global technology firm reduced RFP response time by 40% with AI-powered automation, accelerating hundreds of enterprise proposals annually."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:caseStudy:hHAJRRkxA",
+    "provisional": true,
+    "provisionalNote": "Migrated from o3xo.ai with three authored card fields this model has no home for — the subject label, the card sentence and the card photograph — and with a client that has no logo, which Studio requires. All four are recoverable from the committed extract. Cleared by giving them fields or by recording the drop as permanent, and by supplying the client mark."
+  }
+}

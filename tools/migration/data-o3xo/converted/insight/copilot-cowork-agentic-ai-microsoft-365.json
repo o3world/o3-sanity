@@ -1,0 +1,512 @@
+{
+  "_id": "insight-framer-copilot-cowork-agentic-ai-microsoft-365",
+  "_type": "insight",
+  "title": "Copilot Cowork is the first time embedded AI in Microsoft 365 feels agentic rather than assistive",
+  "slug": {
+    "_type": "slug",
+    "current": "copilot-cowork-agentic-ai-microsoft-365"
+  },
+  "excerpt": "A technical breakdown of what Microsoft and Anthropic built with Copilot Cowork, why the architecture matters, and what it means for enterprise teams already inside the M365 ecosystem.",
+  "publishedAt": "2026-05-12T12:00:00Z",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-framer-technology",
+      "_key": "cat-technology"
+    }
+  ],
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_srcUrl": "https://framerusercontent.com/images/G19RzkSgijJyuOS0a7KBOt7bOs.png"
+    },
+    "alt": "image showcasing cowork"
+  },
+  "body": [
+    {
+      "_key": "k0006",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "For two years, most of our clients have responded to Copilot with some version of the same sigh. ",
+          "_key": "k0007"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "em"
+          ],
+          "text": "\"We have to use Copilot.",
+          "_key": "k0008"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\" Not excitement, but obligation. But with the launch of",
+          "_key": "k0009"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": " Copilot Cowork on March 9, 2026",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", the technical architecture underneath Copilot changed in a way that deserves attention. This is the first time the embedded AI in the Microsoft 365 suite feels agentic rather than assistive. And that distinction matters more than a product name.",
+          "_key": "k0011"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://www.microsoft.com/en-us/microsoft-365/blog/2026/03/09/copilot-cowork-a-new-way-of-getting-work-done/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0012",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What changed under the hood",
+          "_key": "k0013"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0014",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Previously, Copilot was built around a prompt-and-response model. You prompted a request, you got a response. Maybe it drafted a paragraph in Word or summarized a meeting in Teams. Useful, but never proactive. It could answer, but it could not act.",
+          "_key": "k0015"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0016",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Cowork breaks that pattern. Built in close collaboration with Anthropic, it uses Claude's agentic reasoning model to handle long-running, multi-step tasks. You describe an outcome. Cowork builds a plan, executes steps across Outlook, Teams, Excel, and Word, and checks in at clear approval points along the way. Tasks run in the background for minutes or hours, producing real outputs as they go. This is not a chatbot that drafts things. This is a task execution layer inside the productivity suite that",
+          "_key": "k0017"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": " 446 million paid seats",
+          "_key": "k0018"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " already use. In short, Cowork is designed to shift your AI from drafting content to autonomously executing work across your systems.",
+          "_key": "k0019"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://medhacloud.com/blog/microsoft-365-statistics-2026"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0020",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Four architectural decisions make it worth paying attention to:",
+          "_key": "k0021"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "It runs cloud-side inside your M365 tenant.",
+          "_key": "k0023"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " Unlike Anthropic's own Claude Cowork (which runs locally on a user's device), Microsoft's implementation runs in the cloud within the customer's existing tenant. That means it inherits your full security, identity, and compliance infrastructure: Entra ID, Defender, Intune, Purview. No new security review. No new procurement. No new data residency questions.",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "It uses Work IQ for full context grounding. ",
+          "_key": "k0026"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Previous AI tools that connect to M365 data grab fragments. Cowork is grounded through Work IQ, which pulls context from across your emails, meetings, messages, files, and collaboration patterns. The AI does not just see a file. It sees the work context around it.",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "It is model-diverse by design. ",
+          "_key": "k0029"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Cowork uses Claude as its reasoning engine, but the broader Copilot system now supports multiple model providers. This signals where Microsoft sees the value accruing: not in any single model, but in the context layer and enterprise trust infrastructure wrapped around those models.",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "It is building toward multi-model research tools",
+          "_key": "k0032"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". An upcoming feature called “Critique” will have one model draft (Claude, etc) and a second model review (OpenAI GPT) for accuracy before the user sees anything. A separate “Council” mode will run multiple models on the same question and surface where they agree and disagree. Microsoft is not just offering model choice from the industry providers, it is building verification into the default workflow.",
+          "_key": "k0033"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0034",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Why the sigh might flip",
+          "_key": "k0035"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0036",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The frustration with Copilot was never about the brand. It was about the gap between what AI promised and what it delivered inside the tools people use every day. ",
+          "_key": "k0037"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "We’ve written about this previously",
+          "_key": "k0038"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", but the focus on AI to streamline systems is important for company wide adoption. A meeting summary is nice. A better email draft is fine. But those are not where people lose hours.",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "./future-of-saas-ai-shift"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The hours disappear in multi-step, cross-app coordination. Prepping a launch across five apps. Triaging a packed calendar against shifting priorities. Pulling a competitive comparison into Excel, distilling it into a value prop doc, generating a pitch deck. That work has always required a human to play project coordinator across tools. Cowork is designed to handle exactly that layer.",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0042",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "And the adoption math is straightforward.",
+          "_key": "k0043"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": " 90% of the Fortune 500 already use Copilot",
+          "_key": "k0044"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " in some form. The new E7 bundle, which includes Copilot, Agent 365, and the full security stack,",
+          "_key": "k0045"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": " goes GA on May 1 at $99 per user per month",
+          "_key": "k0046"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". Every other agentic AI product on the market requires organizations to stand up something new: new app, new security review, new data pipeline, new training. Cowork lowers that barrier to nearly zero for the M365 enterprise.",
+          "_key": "k0047"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://blogs.microsoft.com/blog/2026/03/09/introducing-the-first-frontier-suite-built-on-intelligence-trust/"
+        },
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.microsoft.com/en-us/microsoft-365/blog/2026/03/09/powering-frontier-transformation-with-copilot-and-agents/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0048",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What to do about it now",
+          "_key": "k0049"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0050",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Cowork is in Research Preview today, with broader Frontier program access rolling out this month. It is not something you deploy at scale tomorrow. But there are three things worth starting now.",
+          "_key": "k0051"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0052",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Identify the right workflows.",
+          "_key": "k0053"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " The bottleneck is no longer finding the right AI product. For M365 shops, the product is in your stack. The question is which multi-step workflows to hand to Cowork and how to measure whether agentic delegation actually saves time versus creates new overhead.",
+          "_key": "k0054"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0055",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Get governance right before rollout.",
+          "_key": "k0056"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " Cowork inherits existing authorization rules, which is great. But agentic AI that takes real actions across your calendar, email, and documents introduces new governance surface area. What can it schedule without approval? Who can it email on your behalf? Those answers need to be defined before rollout, not after.",
+          "_key": "k0057"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0058",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Clean up your M365 environment.",
+          "_key": "k0059"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " An agentic system that reasons across apps and executes over time will surface every gap in your data hygiene, permission structure, and process documentation. The organizations that have already done this work will get value from Cowork quickly. The ones that have not will need to start there.",
+          "_key": "k0060"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0061",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The sigh is about to turn into something very different.",
+          "_key": "k0062"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0063",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If your organization is on Microsoft 365 and you want to get ahead of what Cowork makes possible, ",
+          "_key": "k0064"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "let's talk",
+          "_key": "k0065"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". O3XO helps enterprise teams identify the right workflows, set up governance, and activate agentic AI where it actually moves the needle.\n\n",
+          "_key": "k0066"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "../contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "Microsoft's Copilot Cowork brings real agentic AI into M365 with Anthropic's reasoning engine and enterprise-grade controls. Here's what it means for your team."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:insight:KkKYmjKgd"
+  }
+}

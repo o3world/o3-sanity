@@ -2,8 +2,10 @@
 # JSON.stringify(…, null, 2); prettier formats short arrays differently, so
 # letting it reformat them on commit means every subsequent `pnpm convert`
 # re-dirties the tree and the committed JSON stops being byte-reproducible.
-# The pipeline owns this directory (ADR 0003) — prettier does not.
+# The pipeline owns these directories (ADR 0003) — prettier does not. One
+# per brand: o3's corpus and O3XO's (`lib/paths.ts`).
 tools/migration/data/
+tools/migration/data-o3xo/
 
 # Machine-written figma-sync output, for the same reason (#78). `tracked-nodes.json`
 # is hand-maintained and stays formatted; these three are overwritten by every run.
@@ -30,6 +32,7 @@ apps/web/src/lib/redirects.generated.ts
 # next `dev` writes it back — a dirty tree on every run. The file says it
 # should not be edited; this is how we stop editing it.
 apps/web/next-env.d.ts
+apps/o3xo/next-env.d.ts
 
 # Build output
 **/.next/

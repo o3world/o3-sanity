@@ -1,0 +1,62 @@
+# Figma sync
+
+- Ran: 2026-08-19T22:22:43.111Z
+- File version: 2389158081962590922
+- Short-circuited: no
+
+## Changed component sets
+
+- **Type ramp** → `packages/tailwind-config-o3xo/tokens/typography.css` — added `727:1108`
+- **Color** → `packages/tailwind-config-o3xo/tokens/color.css` — added `4214:2933`
+- **Spacing scale** → `packages/tailwind-config-o3xo/tokens/layout.css` — added `4214:3419`
+- **Breakpoints** → `packages/tailwind-config-o3xo/tokens/layout.css` — added `4214:3605`
+- **Grids** → `packages/tailwind-config-o3xo/tokens/layout.css` — added `4214:3643`
+- **Effects** → no code target — added `4214:3911`
+- **Button** → `packages/ui/src/components/ui/button.tsx#Button` — added `4405:6386`
+- **Button, white CTA** → `packages/ui/src/components/ui/button.tsx#Button` — added `4405:6387`
+- **Button icons** → `packages/ui/src/components/button-icons.tsx#BUTTON_ICONS` — added `4405:6391`
+- **Phosphor icons** → no code target — added `4404:5589`
+- **Card icon** → no code target — added `4404:5590`
+- **Mark glyph** → `apps/o3xo/src/components/brand/O3xoMark.tsx#O3xoMark` — added `4404:5593`
+- **Icon slot** → no code target — added `957:1166`
+- **Insight card** → `packages/content-ui/src/cards/InsightCard.tsx#InsightCard` — added `4404:3708`
+- **Insight card row** → `packages/content-ui/src/blocks/section/listingSection/ListingSection.tsx#ListingSection` — added `4404:3773`
+- **Icon card** → `packages/content-ui/src/blocks/section/featureGridSection/FeatureGridSection.tsx#FeatureGridSection` — added `4404:3810`
+- **Icon card row** → `packages/content-ui/src/blocks/section/featureGridSection/FeatureGridSection.tsx#FeatureGridSection` — added `4404:3907`
+- **Action icon card** → `packages/content-ui/src/blocks/section/featureGridSection/FeatureGridSection.tsx#FeatureGridSection` — added `4404:3811`
+- **Action icon card row** → `packages/content-ui/src/blocks/section/featureGridSection/FeatureGridSection.tsx#FeatureGridSection` — added `4404:3873`
+- **Key metric card** → `packages/ui/src/components/stat.tsx#Stat` — added `4404:3916`
+- **Key metric card row** → `packages/content-ui/src/blocks/base/statGroup/StatGroup.tsx#StatGroup` — added `4404:3960`
+- **Yellow text card** → no code target — added `4404:3934`
+- **Yellow text card row** → no code target — added `4404:4611`
+- **Case study card** → `packages/content-ui/src/cards/CaseStudyCard.tsx#CaseStudyCard` — added `4404:3072`
+- **Case study row** → `packages/content-ui/src/blocks/section/caseShowcaseSection/CaseShowcaseSection.tsx#CaseShowcaseSection` — added `4404:3398`
+- **Strategy card** → no code target — added `4404:4555`
+- **Strategy card stack** → no code target — added `4404:4593`
+- **Insight image** → no code target — added `4404:3706`
+- **Insight image layout** → no code target — added `4426:10608`
+- **O3XO mark** → `apps/o3xo/src/components/brand/O3xoMark.tsx#O3xoMark` — added `4212:374`
+- **Site nav** → `packages/content-ui/src/chrome/SiteNav.tsx#SiteNav` — added `4404:4146`
+- **Site footer** → `packages/content-ui/src/chrome/SiteFooter.tsx#SiteFooter` — added `4404:4148`
+- **Footer CTA** → `packages/content-ui/src/blocks/section/ctaSection/CtaSection.tsx#CtaSection` — added `4404:4147`
+- **Footer block** → `packages/content-ui/src/chrome/SiteFooter.tsx#SiteFooter` — added `4404:4188`
+- **Person card** → `packages/content-ui/src/blocks/section/personGridSection/PersonGridSection.tsx#PersonGridSection` — added `4404:5726`
+- **Quote block** → `packages/content-ui/src/blocks/section/quoteSection/QuoteSection.tsx#QuoteSection` — added `4404:4920`
+- **Header pill** → no code target — added `4414:8100`
+- **Slide quote** → no code target — added `4438:12259`
+- **FAQ accordion** → no code target — added `4404:4919`
+- **Event band** → no code target — added `4404:4613`
+- **Pager** → `packages/content-ui/src/Pager.tsx#Pager` — added `4404:1821`
+- **Hero band** → `packages/content-ui/src/blocks/section/heroSection/HeroSection.tsx#HeroSection` — added `4406:6595`
+- **Strategy band** → no code target — added `4406:6642`
+- **Expertise band** → no code target — added `4406:6755`
+- **Quote band** → `packages/content-ui/src/blocks/section/quoteSection/QuoteSection.tsx#QuoteSection` — added `4406:6954`
+- **Text card band** → no code target — added `4406:7179`
+- **People band** → `packages/content-ui/src/blocks/section/personGridSection/PersonGridSection.tsx#PersonGridSection` — added `4406:7226`
+- **FAQ band** → no code target — added `4406:7288`
+- **Action card band** → no code target — added `4406:7491`
+- **Three card band** → no code target — added `4406:7560`
+- **Insight gallery band** → `packages/content-ui/src/blocks/section/listingSection/ListingSection.tsx#ListingSection` — added `4406:7594`
+- **Case study band** → `packages/content-ui/src/blocks/section/caseShowcaseSection/CaseShowcaseSection.tsx#CaseShowcaseSection` — added `4407:7758`
+- **Wide band, 1920 (824h)** → no code target — added `4432:11535`
+- **Wide band, 1920 (1090h)** → no code target — added `4432:11487`

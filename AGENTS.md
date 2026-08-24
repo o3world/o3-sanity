@@ -129,7 +129,45 @@ already:
 
 ### Content naming
 
-Naming and wiring rules for schemas, fields, blocks, and renderers. Vocabulary lives in `CONTEXT.md` → Naming; the procedure is the `content-naming` skill (`.claude/skills/content-naming/`). Read both before touching `packages/sanity/src/schemas/` or `apps/web/src/content/`.
+Naming and wiring rules for schemas, fields, blocks, and renderers. Vocabulary lives in `CONTEXT.md` → Naming; the procedure is the `content-naming` skill (`.claude/skills/content-naming/`). Read both before touching `packages/sanity/src/schemas/`, `packages/content-ui/src/` or
+either app's `src/content/`. A block's renderer is **bound per app** wherever it lives, so adding or
+renaming one is two bindings — `apps/web` and `apps/o3xo` — and the `satisfies` check in each
+registry is what fails when you do only one. Where the renderer itself belongs is the table below.
+
+### Where a component lives
+
+Four homes. Find the row, and the row answers the placement question without a ruling.
+
+| What it is                                               | Where it lives                                                                                 | What says so                                                                      |
+| -------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| **Engine** — brand-free machinery                        | `packages/`, importing no app and reading no brand fact inside; a brand arrives as a parameter | that workspace's verdict in [`roster.json`](./tools/engine-seam/data/roster.json) |
+| **Shared, one design** — both brands draw the same thing | schema in `packages/sanity`, renderer in `packages/content-ui`                                 | `CORE_SECTION_BLOCKS` and `BASE_BLOCKS`                                           |
+| **Demoted, two designs** — one schema, a renderer each   | schema stays in `packages/sanity`; each app holds its own renderer and story                   | `APP_FIRST_RENDERERS`                                                             |
+| **Brand-only** — one brand draws it at all               | whole in that app: schema, knobs, renderer, story, one directory                               | `BRAND_SECTION_BLOCKS`                                                            |
+
+The last three rosters all sit in the block registry,
+[`packages/sanity/src/schemas/blocks/registry.ts`](./packages/sanity/src/schemas/blocks/registry.ts).
+Two seam tests hold the rows apart: `purity.test.ts` fails on an engine leak, and
+`app-first-seam.test.ts` fails when a recorded renderer is still in the shared library, when an app
+is missing its own, or when a fork nobody recorded appears.
+
+Two rules move a component between rows, and both read off something mechanical rather than a
+judgement made in the moment.
+
+**Promotion** is
+[ADR 0029](./docs/adr/0029-a-brand-only-block-lives-app-first-schema-included.md): a block joins the
+core list the moment the second brand draws it, and until then it lives app-first, schema included.
+ADR 0028 is where the same motion was first set for components.
+
+**Demotion** is #286, and the trigger is the component map's classification. "Diverges structurally"
+in [`docs/figma-components-o3xo.md`](./docs/figma-components-o3xo.md) demotes. "Needs variant or
+field work" never does, and neither does a token or `cva`-value difference. Cite the kit frame and
+node id when you apply it. A demoted block keeps its shared schema and stays core — two honest
+designs over one shape, not a re-merged compromise — and the record entry carries the why and the
+ticket. Adding one is a compile error in both apps until each binds its own renderer, which is what
+makes the record bite before the test runs. Demotion is reversible on the same trigger read
+backwards. A field changing meaning or becoming required for one brand is a schema fork instead,
+which is outside the rule and stops the session (`awaiting:nick`).
 
 ### Design source of record
 
@@ -152,6 +190,12 @@ too, so `figma:sync` names the set that changed and the code it routes to; the s
 any frame in the Design Concept section nobody has triaged yet. One Figma variant axis → one `cva`
 variants key; `State=Hover` is never a variant. Icons are inline SVG, not a font (ADR 0009).
 
+**o3xo answers to a different file**, the _O3XO: UI kit_ (ADR 0028's second addendum). Its map is
+[`docs/figma-components-o3xo.md`](./docs/figma-components-o3xo.md) and its watcher is
+`pnpm figma:sync --brand o3xo` (#242) — cite a frame and a node id from that document when you build
+an o3xo component, and edit it in the same breath as
+[`tools/figma-sync/data/tracked-nodes-o3xo.json`](./tools/figma-sync/data/tracked-nodes-o3xo.json).
+
 ### Captured prototypes
 
 Answered visual prototypes are committed to `apps/storybook/prototypes/` and served by Storybook as
@@ -171,6 +215,12 @@ one.
 
 One Figma variant axis → one `cva` variants key. That rule is what makes the
 component map in #38 mechanical rather than ad hoc.
+
+Both brands render `packages/ui` and `packages/content-ui`, so a component there
+may only name a token role **every** brand's package defines. `bg-accent` is
+O3XO's alone and Tailwind bakes the value in as the utility's fallback, so it
+paints yellow on an O3 page; `brand-token-seam.test.ts` derives the shared
+vocabulary from the token packages and fails the suite on a brand-only role.
 
 ### Domain docs
 
@@ -302,7 +352,8 @@ There is no git hook; `pnpm verify` does not run tests. CI runs the suite as its
 **`pnpm vr` answers a different question than the suite does** — not "did it break?" but "what does
 it look like now?". It builds Storybook for your working tree and for the merge base with `main`,
 screenshots the stories your change can reach at two viewports, and opens a pixel diff. Local only:
-no baselines are committed and nothing is uploaded. See
+no baselines are committed and nothing is uploaded. `--brand o3xo` runs the o3xo host instead; the
+brand decides which module graph selects which stories, so o3xo work needs it (#242). See
 [`tools/visual-regression/README.md`](./tools/visual-regression/README.md), and tag a story
 `vr:skip` if its pixels are genuinely non-deterministic.
 

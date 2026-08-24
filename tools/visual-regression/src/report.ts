@@ -12,6 +12,8 @@ import path from 'node:path'
 import type { Comparison, Verdict } from './compare'
 
 export interface ReportMeta {
+  /** Which Storybook host these pixels came from (#242). */
+  brand: string
   baseRef: string
   baseSha: string
   head: string
@@ -158,7 +160,7 @@ function page(data: unknown[], counts: Record<string, number>, meta: ReportMeta)
 <body>
 <header>
   <div>
-    <h1>Visual regression</h1>
+    <h1>Visual regression — ${escapeHtml(meta.brand)}</h1>
     <div class="meta">${escapeHtml(meta.head)} vs ${escapeHtml(meta.baseRef)} <code>${escapeHtml(meta.baseSha)}</code>
       · ${meta.storyCount} ${meta.everything ? 'stories (global change)' : 'changed stories'}
       · ${escapeHtml(meta.viewports.join(', '))} · ${escapeHtml(meta.generatedAt)}</div>

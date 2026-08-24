@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { buildIndexRoute } from '@/lib/content-routes/build'
+import { buildIndexRoute } from '@o3/content-runtime/routes'
 import {
   aCaseStudiesPage,
   aCaseStudyCard,
@@ -116,5 +116,18 @@ describe('the /work index', () => {
       // black-and-white. Both tokens are washes now — see `drift`.
       expect(html).not.toContain('bg-[rgba(3,3,3,0.6)]')
     })
+  })
+
+  it('says where you are by marking the page you are on', async () => {
+    // The pager is numbered (#241), so "where you are" is `aria-current` on
+    // one of the four numbers rather than a sentence beside two arrows.
+    const paged = await renderRoute(route, {
+      data: aCaseStudiesPage(cards, 30),
+      searchParams: { page: '2' },
+    })
+
+    const current = paged.html.match(/<a[^>]*aria-current="page"[^>]*>/)?.[0] ?? ''
+    expect(current).toContain('href="/work?page=2"')
+    expect([...paged.html.matchAll(/aria-current="page"/g)]).toHaveLength(1)
   })
 })

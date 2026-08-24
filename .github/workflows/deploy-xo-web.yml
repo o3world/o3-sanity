@@ -1,0 +1,73 @@
+name: Deploy o3xo web
+
+# The Vercel GitHub integration delivers deploys for this branch unreliably
+# (2026-08-19: one build out of twelve pushes). This kicks the project's
+# deploy hook instead, when the affected gate says the push reaches
+# @o3/o3xo's build closure; the hook build still runs the project's ignore
+# step (turbo-ignore @o3/o3xo) as belt-and-suspenders.
+
+on:
+  push:
+    branches: [integration/o3xo]
+
+concurrency:
+  group: deploy-xo-web-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  affected:
+    name: Gate on affected
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      deploy: ${{ steps.gate.outputs.deploy }}
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+      - name: Decide
+        id: gate
+        uses: ./.github/actions/affected-gate
+        with:
+          filter: '@o3/o3xo'
+
+  # Schema first, site second — the same order deploy.yml uses for o3. The
+  # deploy publishes the o3xo roster (`schemaTypesFor('o3xo')`) as the
+  # project's `default` workspace, so schema-driven writers never see a block
+  # apps/o3xo cannot render (#252); the check reads it back and fails the job
+  # if the dataset serves anything else. It rides the app's gate:
+  # packages/sanity and the app's schemas are inputs to the app's build, so
+  # an affected schema is an affected app. The nightly drift check backstops
+  # a deploy the gate wrongly skips.
+  schema:
+    name: Deploy Sanity schema (o3xo)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: affected
+    if: needs.affected.outputs.deploy == 'true'
+    env:
+      NEXT_PUBLIC_BRAND: o3xo
+      SANITY_AUTH_TOKEN: ${{ secrets.SANITY_XO_DEPLOY_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: Deploy Sanity schema
+        run: pnpm schema:deploy
+      - name: Verify Sanity schema
+        run: pnpm schema:check
+  kick:
+    name: Kick Vercel deploy hook
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    needs: [affected, schema]
+    if: needs.affected.outputs.deploy == 'true'
+    steps:
+      - name: Trigger xo-sanity-web production build
+        run: |
+          curl --fail --silent --show-error -X POST "$DEPLOY_HOOK" | head -c 200
+        env:
+          DEPLOY_HOOK: ${{ secrets.VERCEL_XO_DEPLOY_HOOK }}

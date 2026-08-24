@@ -1,0 +1,574 @@
+{
+  "_id": "insight-framer-expert-knowledge-ai-workflows-buffalo-construction",
+  "_type": "insight",
+  "title": "How we turned a subject matter expert bottleneck into a company-wide advantage",
+  "slug": {
+    "_type": "slug",
+    "current": "expert-knowledge-ai-workflows-buffalo-construction"
+  },
+  "excerpt": "A look at how mirroring an experienced estimator's thinking into a custom AI workflow opened up insight across the organization and doubled capacity at Buffalo Construction.",
+  "publishedAt": "2026-06-26T12:00:00Z",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-framer-strategy",
+      "_key": "cat-strategy"
+    }
+  ],
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_srcUrl": "https://framerusercontent.com/images/Ssd0MNXIioPUJl0nDh623NIyaU.png"
+    },
+    "alt": "Image of blueprint"
+  },
+  "body": [
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Every company has one. The person who has been doing the job for 20 years and carries an entire department's worth of knowledge in their head. The one everyone goes to with questions. The one who, if they left tomorrow, would take half the institutional memory with them.",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "That is not a talent problem. That is a business risk.",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In construction, the role is often an estimator. The person who can take a massive spec package and know within hours which sections matter, which vendors to call, and where the risk sits. They have pattern recognition that took decades to build. They are incredibly valuable. And they are almost always a bottleneck.",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This is not unique to construction. It shows up in underwriting, in procurement, in engineering, in legal review. Anywhere a business depends heavily on one or two people who just know things that nobody else does.",
+          "_key": "k0010"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Feeding documents into a chatbot is not knowledge transfer",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The first instinct most companies have is to dump everything into a chatbot. Feed the documents into Claude or ChatGPT and let people ask questions. That sounds reasonable and useful, but it does not actually address the real opportunity.",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "An expert's value is not just what they know. It is how they think. The order they work through a problem. The things they check first. The patterns they recognize that tell them something is off before they can even articulate why. A generic AI tool with access to documents does not capture any of that.",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What actually works is sitting down with the expert, mapping their decision-making process in detail, and designing a custom workflow that streamlines and, often, completely reconsiders how they approach the work and reduces key friction points. Not a chatbot. A guided experience that walks someone through the same logic the expert would use, in a similar sequence, with the same checkpoints.",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Designing around how the expert thinks",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Buffalo Construction's most experienced estimators had what Brett Norton, President of Buffalo Construction, called \"cardinal knowledge.\" The accumulated judgment that lets a seasoned estimator look at a project and immediately understand how to approach it, which trades to prioritize, where the complexity sits, and what questions to ask before anyone else thinks to.",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Rather than trying to extract that knowledge into a document or a database, we spent time understanding the estimator's actual workflow:",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "How do they receive a spec package, what do they look at first?",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What questions do they start with, and what are the key items they look for?",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "How do they segment the scope and assign vendors?",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What questions typically come up as the estimation process commences?",
+          "_key": "k0032"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0033",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What are the nuances and edge cases to be prepared for?",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "bullet"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This all comes down to understanding ",
+          "_key": "k0036"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "where they spend the most time, and where the bottlenecks pile up?",
+          "_key": "k0037"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0038",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The result is an AI-powered assistant that parses 2,100+ page CSI spec documents into searchable, structured deliverables for each estimator. It interprets requirements, surfaces key details, and guides the user through the key decision points the experienced estimator would hit. All running inside Procore and Buffalo's existing document system, so estimators get answers without having to reinvent their workflow.",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "This is not a build-once project. The workflow gets refined continuously as the team uses it, surfaces edge cases, and identifies new applications. That ongoing iteration is what separates a tool people actually adopt from a demo that collects dust.",
+          "_key": "k0041"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0042",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What this actually derisks",
+          "_key": "k0043"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0044",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "When one person holds the knowledge, the business is exposed in ways that go beyond productivity. If that person is out for a week, projects slow down. If they leave, it takes years to rebuild what they knew. If the company wants to grow, they cannot scale past that person's capacity.",
+          "_key": "k0045"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0046",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Mirroring that expertise into a workflow changes the math. The knowledge is no longer locked in one head. It is embedded in a system that anyone on the team can access. Newer estimators start functioning at a much higher level much faster because the solution guides them through the same logic the expert would use.",
+          "_key": "k0047"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0048",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The outcomes nobody planned for",
+          "_key": "k0049"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0050",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The numbers on the estimating workflow alone tell the story. Across 9 estimators, the tool saves hundreds of hours per year. That translates to doubling the number the estimates for Buffalo and at their win rate, that's a substantial increase in the number of project wins without adding headcount.",
+          "_key": "k0051"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0052",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "But the bigger surprise was who else started using the tool.",
+          "_key": "k0053"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0054",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Project managers started querying it for context on active projects. Superintendents in the field started using it to understand estimates, scope details, and vendor decisions without having to call an estimator. People who previously had to wait in line for the expert's time were suddenly able to get the insight they needed on their own.",
+          "_key": "k0055"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0056",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "That was never part of the original scope. It happened because when you build a tool that mirrors how an expert thinks, the value extends far beyond the expert's own team. The bottleneck disappears. And the expert is freed up to do the deep, high-value work that only they can do.",
+          "_key": "k0057"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0058",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Buffalo's estimators are not doing less. They are doing better work. Deeper dives into the estimates themselves. More creative approaches to how they structure bids. More time thinking strategically about which projects to pursue and how to win them.",
+          "_key": "k0059"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0060",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The real question",
+          "_key": "k0061"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0062",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Most companies know they have a knowledge bottleneck somewhere. The question is not whether AI can help. It is whether you are willing to invest the time upfront to understand how your best people actually think before you try to build anything.",
+          "_key": "k0063"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0064",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Start there. Map the process. Design around the expert. Build it into the tools people already use. Then watch what happens when that knowledge is no longer locked in one person's head.",
+          "_key": "k0065"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0066",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "To see the full story of how this played out at Buffalo Construction,",
+          "_key": "k0067"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": " read the case study",
+          "_key": "k0068"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ". To hear Brett and Mike talk through it in detail,",
+          "_key": "k0069"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": " listen to Episode 253 of the Innovation Storytellers Show",
+          "_key": "k0070"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0071"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "../case-studies/buffalo-construction"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://innovationstorytellers.com/podcasts/o3xo-and-buffalo-construction/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0072",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If your organization has expertise trapped in too few heads,",
+          "_key": "k0073"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": " let's talk",
+          "_key": "k0074"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0075"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "../contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "How O3XO mirrored an estimator's expertise into a custom AI workflow at Buffalo Construction, removing a bottleneck and unlocking insight across the entire organization."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:insight:SssC_cnKK"
+  }
+}

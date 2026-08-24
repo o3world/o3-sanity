@@ -8,6 +8,13 @@ export const person = defineType({
     defineField({ name: 'name', type: 'string', validation: (rule) => rule.required() }),
     defineField({ name: 'title', title: 'Role', type: 'string' }),
     defineField({ name: 'headshot', type: 'image', options: { hotspot: true } }),
+    defineField({
+      name: 'bio',
+      type: 'text',
+      rows: 3,
+      description:
+        'Two or three lines on what this person does — written for a card, not a profile page. A grid that draws bios draws them all at one height, so keep them the same length.',
+    }),
     defineField({ name: 'migration', type: 'migration' }),
   ],
   preview: { select: { title: 'name', subtitle: 'title', media: 'headshot' } },
@@ -59,6 +66,70 @@ export const industry = defineType({
   preview: { select: { title: 'title' } },
 })
 
+/**
+ * A nav item that opens a panel instead of going somewhere — the dropdown the
+ * O3XO kit's `Navigation` (`4404:4146`) draws on three of its five items.
+ *
+ * Inline in `navItems` rather than a registered shared object, the way
+ * `footerGroup` and `socialLink` below are inline in theirs: it has no
+ * identity outside this array and no design options to declare, so it is an
+ * item (CONTEXT.md → Component, instance, slot).
+ *
+ * Each entry is a `button` — the panel's cards are links, and where a link
+ * goes is already a solved field — with the two lines the design draws around
+ * it. The group's own `button` is the panel's last row, the "View all
+ * industries →" that the trigger itself cannot be, because a trigger that also
+ * navigates is a control with two jobs.
+ */
+const navGroup = {
+  type: 'object' as const,
+  name: 'navGroup',
+  title: 'Nav dropdown',
+  fields: [
+    defineField({
+      name: 'label',
+      type: 'string',
+      description: 'The word on the bar. It opens the panel; it goes nowhere.',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'items',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'navGroupItem',
+          fields: [
+            defineField({
+              name: 'button',
+              type: 'button',
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: 'eyebrow',
+              type: 'string',
+              description: 'A small label over the title. Set in caps by the renderer.',
+            }),
+            defineField({
+              name: 'excerpt',
+              type: 'string',
+              description: 'The one line under the title saying what is there.',
+            }),
+          ],
+          preview: { select: { title: 'button.label', subtitle: 'excerpt' } },
+        }),
+      ],
+    }),
+    defineField({
+      name: 'button',
+      title: 'Panel link',
+      type: 'button',
+      description: 'The row that closes the panel — "View all industries", and the like.',
+    }),
+  ],
+  preview: { select: { title: 'label' } },
+}
+
 export const siteSettings = defineType({
   name: 'siteSettings',
   title: 'Site Settings',
@@ -83,7 +154,20 @@ export const siteSettings = defineType({
       of: [defineArrayMember({ type: 'button' })],
       description: 'The brand-property strip above the nav. Desktop only.',
     }),
-    defineField({ name: 'navItems', type: 'array', of: [defineArrayMember({ type: 'button' })] }),
+    /**
+     * The nav's own row. A member is either a plain link or a `navGroup` — a
+     * label that opens a panel of links instead of going anywhere itself.
+     *
+     * The group exists because O3XO's nav has dropdowns and O3's does not
+     * (`Navigation`, `4404:4146` of the _O3XO: UI kit_). It is additive on
+     * purpose: an array that already holds buttons keeps holding them, and a
+     * brand whose nav is five flat links authors no group.
+     */
+    defineField({
+      name: 'navItems',
+      type: 'array',
+      of: [defineArrayMember({ type: 'button' }), defineArrayMember(navGroup)],
+    }),
     defineField({
       name: 'primaryButton',
       type: 'button',

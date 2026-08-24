@@ -1,0 +1,15 @@
+{
+  "_id": "person-framer-brady-halligan",
+  "_type": "person",
+  "name": "Brady Halligan",
+  "title": "Senior AI Strategist",
+  "bio": "Industry specialist who helps organizations identify high-impact AI use cases and navigate the human elements of successful AI adoption.",
+  "headshot": {
+    "_type": "image",
+    "_srcUrl": "https://framerusercontent.com/images/mfF18EJnlhKvdD1QtFxAVYErqHc.png"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:person:brady-halligan"
+  }
+}

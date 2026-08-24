@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@o3/block-spec": "workspace:*",
+    "@o3/content-runtime": "workspace:*",
+    "@o3/content-ui": "workspace:*",
     "@o3/editor-chrome": "workspace:*",
     "@o3/env": "workspace:*",
     "@o3/sanity": "workspace:*",
@@ -28,6 +30,7 @@
     "styled-components": "^6.1.0"
   },
   "devDependencies": {
+    "@o3/render-kit": "workspace:*",
     "@o3/story-kit": "workspace:*",
     "@o3/tailwind-config": "workspace:*",
     "@o3/typescript-config": "workspace:*",

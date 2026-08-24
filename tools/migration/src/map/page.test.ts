@@ -3,6 +3,8 @@ import { join } from 'node:path'
 
 import { describe, expect, it } from 'vitest'
 
+import { BLOCK_KNOBS } from '@o3/sanity/knobs'
+
 import { EXTRACT_DIR } from '../lib/paths'
 import type { WpSiteSeo } from '../lib/yoast'
 import { KEEPER_SLUGS, mapPage, slugFromPath, type WpPage } from './page'
@@ -95,6 +97,26 @@ describe('mapPage', () => {
       headlineLines: ['Privacy Policy'],
       decoration: 'none',
     })
+  })
+
+  // Two ways a section block answers "what colour is this band?", and exactly
+  // one per block: the `surface` knob, or `paintsOwnSurface` where the
+  // composition fixes it and there is no field to store. A mapper that writes
+  // `surface` onto the second kind writes content nothing reads — and the next
+  // convert puts it back after anyone edits it out. Asked of the declaration
+  // rather than a list of block names, so the day a fourth band stops offering
+  // the choice this test already knows.
+  it('emits a surface only on the sections that offer the choice', () => {
+    const doc = expectOk(mapPage(wpPage(), SITE))
+    for (const section of doc.sections) {
+      const type = String(section._type)
+      const spec = BLOCK_KNOBS[type as keyof typeof BLOCK_KNOBS]
+      if (spec?.paintsOwnSurface !== undefined) {
+        expect(section.surface, `${type} paints its own surface`).toBeUndefined()
+        continue
+      }
+      expect(['white', 'bone', 'ink'], `${type} has no surface`).toContain(section.surface)
+    }
   })
 
   it('prefers the document title when the header only differs by case', () => {

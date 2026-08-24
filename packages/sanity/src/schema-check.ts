@@ -21,9 +21,15 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
 import { diffSchemas, type Drift } from './schema-diff'
-import { deployedTypes, repoSchemaFile, repoTarget } from './schema-manifest'
+import { deployedTypes, repoSchemaFile, repoTarget, straySchemaDocs } from './schema-manifest'
 
-/** The studio declares exactly one workspace; `sanity.config.ts` names it. */
+/**
+ * The workspace under check is the one `schema:deploy` publishes — the
+ * brand-filtered roster of whichever brand the env names. `sanity.config.ts`
+ * also declares `model`, the whole-model workspace typegen extracts; comparing
+ * that against a deployed brand schema would report the other brand's blocks
+ * as drift.
+ */
 const WORKSPACE = 'default'
 
 /**
@@ -42,6 +48,9 @@ function sanity(args: string[]): string {
 
 function describe(drift: Drift): string {
   if (drift.kind === 'field-missing') return `${drift.path} is not in the deployed schema`
+  if (drift.kind === 'deployed-extra') {
+    return `${drift.path} is deployed but not in this brand's roster — a stale or whole-model deploy wrote it`
+  }
   return [
     `${drift.path} describes itself differently`,
     `        repo: ${drift.repo ?? '(none)'}`,
@@ -62,18 +71,43 @@ function main(): void {
 
     const target = repoTarget(index, WORKSPACE)
     console.log(
-      `repo: ${repo.length} type(s) · dataset: ${deployed.length} · ` +
+      `repo (${WORKSPACE}): ${repo.length} type(s) · dataset: ${deployed.length} · ` +
         `${target.projectId}/${target.dataset}\n`,
     )
 
+    // A schema document from another workspace declares its own roster to
+    // every schema-driven writer, however well this brand's matches. Queried
+    // against the one dataset under check — `schemas list` walks every
+    // workspace in the config, so it cannot place a document in a dataset.
+    const strays = straySchemaDocs(
+      JSON.parse(
+        sanity([
+          'documents',
+          'query',
+          '*[_id in path("_.schemas.**")]{_id}',
+          '--api-version',
+          'v2025-05-01',
+        ]),
+      ),
+      WORKSPACE,
+    )
+
     const drift = diffSchemas(repo, deployed)
-    if (drift.length === 0) {
+    if (drift.length === 0 && strays.length === 0) {
       console.log('the deployed schema matches the repo')
       return
     }
 
-    console.error(`✗ schema has drifted (${drift.length}) — run \`pnpm schema:deploy\`:`)
-    for (const entry of drift) console.error(`    ${describe(entry)}`)
+    if (drift.length > 0) {
+      console.error(`✗ schema has drifted (${drift.length}) — run \`pnpm schema:deploy\`:`)
+      for (const entry of drift) console.error(`    ${describe(entry)}`)
+    }
+    for (const id of strays) {
+      console.error(
+        `✗ schema has drifted: the dataset also serves \`${id}\`, which no deploy of ` +
+          `workspace "${WORKSPACE}" wrote — delete it with \`sanity schemas delete --ids ${id}\``,
+      )
+    }
     process.exitCode = 1
   } finally {
     rmSync(scratch, { recursive: true, force: true })

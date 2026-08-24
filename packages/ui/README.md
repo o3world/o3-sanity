@@ -66,3 +66,13 @@ drift. Add a type step to the theme, add it there too; the test will tell you.
 Every colour, size and spacing value comes from `@o3/tailwind-config`, which is
 read off the canonical Figma frames. Never pick a value by eye — see that
 package's README for the rule on what earns a token.
+
+Both brands render these components, so a component may only name a role
+**every** brand's token package defines (ADR 0028). `bg-ink` is fine — the role
+is shared and each brand paints it its own colour. `bg-accent` is not: `accent`
+is O3XO's alone, and Tailwind bakes the declared value in as the utility's
+fallback, so it paints O3XO's yellow on an O3 page rather than nothing at all.
+
+`brand-token-seam.test.ts` derives both sets from the token packages and walks
+`packages/ui/src` and `packages/content-ui/src`. It catches the utility class,
+a `var(--color-accent)` reference, and the raw hex; comments are exempt.

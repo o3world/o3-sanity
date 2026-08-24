@@ -9,10 +9,15 @@
  */
 // eslint-disable-next-line no-restricted-imports -- story fixture, not a view; see above
 import { BlockRenderer } from '@/content/blocks/BlockRenderer'
-import { SiteFooter } from '@/ui/SiteFooter'
-import { SiteNav } from '@/ui/SiteNav'
+import { FOOTER_MARK, NAV_MARK } from '@/components/brand/chromeMarks'
+import { SiteFooter, SiteNav } from '@o3/content-ui/chrome'
 
-import { SITE_SETTINGS, STORY_YEAR, seededPage, type SeedPageName } from './seedContent'
+import {
+  SITE_SETTINGS,
+  STORY_YEAR,
+  seededPage,
+  type SeedPageName,
+} from '@o3/content-ui/testing/seed'
 
 /**
  * A whole page, chrome included, from committed content — what the `Pages`
@@ -50,11 +55,11 @@ export function PageMockup({ page }: { page: SeedPageName }) {
 
   return (
     <div className="bg-white">
-      <SiteNav settings={SITE_SETTINGS} />
+      <SiteNav settings={SITE_SETTINGS} brandMark={NAV_MARK} />
       <main>
         <BlockRenderer blocks={doc.sections ?? []} />
       </main>
-      <SiteFooter settings={SITE_SETTINGS} year={STORY_YEAR} />
+      <SiteFooter settings={SITE_SETTINGS} brandMark={FOOTER_MARK} year={STORY_YEAR} />
     </div>
   )
 }

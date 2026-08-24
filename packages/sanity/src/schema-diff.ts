@@ -40,6 +40,17 @@ export type Drift =
       readonly repo?: string
       readonly deployed?: string
     }
+  | {
+      /**
+       * Deployed but not declared — the dataset offers what the roster does
+       * not. A whole-model deploy from a pre-#252 checkout lands under the
+       * same workspace name as the brand's, so this diff is the only net that
+       * catches it: the deployed side is a superset, and every node the repo
+       * does declare matches clean.
+       */
+      readonly kind: 'deployed-extra'
+      readonly path: string
+    }
 
 /** Every way the deployed schema disagrees with the repo's. */
 export function diffSchemas(repo: readonly SchemaNode[], deployed: readonly SchemaNode[]): Drift[] {
@@ -93,5 +104,13 @@ function compare(
 
     compare(node.fields ?? [], actual.fields ?? [], path, drift)
     compare(node.of ?? [], actual.of ?? [], path, drift)
+  }
+
+  const declared = new Set(repo.map(identify))
+  for (const node of deployed) {
+    const id = identify(node)
+    if (!declared.has(id)) {
+      drift.push({ kind: 'deployed-extra', path: prefix ? `${prefix}.${id}` : id })
+    }
   }
 }

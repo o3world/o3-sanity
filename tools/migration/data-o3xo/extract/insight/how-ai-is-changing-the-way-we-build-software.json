@@ -1,0 +1,24 @@
+{
+  "_meta": {
+    "type": "insight"
+  },
+  "sitemapPosition": 18,
+  "sitemapCount": 40,
+  "slug": "how-ai-is-changing-the-way-we-build-software",
+  "path": "/insights/how-ai-is-changing-the-way-we-build-software",
+  "collectionItemId": "nyB_S3TKQ",
+  "title": "How AI is changing the way we build software",
+  "titleRendered": "How AI is changing the way we build software | O3XO",
+  "category": "Technology",
+  "deck": "AI is helping us learn faster, code smarter, and rethink old projects—but staying in control of the process is more important than ever.",
+  "heroImage": {
+    "url": "https://framerusercontent.com/images/J8CZbTQGggcbIOwzaclQXAuyaF4.png",
+    "alt": "Image of person trying software"
+  },
+  "bodyHtml": "<p dir=\"auto\" class=\"framer-text framer-styles-preset-x838ly\">AI is becoming a bigger part of software development, helping engineers work more efficiently, troubleshoot faster, and even rethink old projects. But as much as AI can boost productivity, it’s important to use it as a tool, not a crutch. Developers still need to stay in control, review AI-generated code, and ensure it aligns with project needs—because, let’s be clear, AI can and will write bad code if left unchecked.</p><h3 dir=\"auto\" class=\"framer-text framer-styles-preset-4rgcfm\">Faster onboarding &amp; learning by doing</h3><p dir=\"auto\" class=\"framer-text framer-styles-preset-x838ly\">Jumping into a new language or framework used to mean weeks of reading documentation, tutorials, and trial-and-error coding. Now, AI accelerates that process by offering real-time suggestions and explanations. Developers can learn while they build, gaining hands-on experience without getting stuck in endless research rabbit holes.</p><p dir=\"auto\" class=\"framer-text framer-styles-preset-x838ly\">That said, there’s a risk: if you rely too much on AI, you might end up writing code in a language you don’t fully understand. That’s fine—until something breaks. If you don’t know the underlying logic, debugging can turn into a nightmare. AI can guide you, but true expertise comes from understanding the code, not just writing it.</p><h3 dir=\"auto\" class=\"framer-text framer-styles-preset-4rgcfm\">AI as a thought partner</h3><p dir=\"auto\" class=\"framer-text framer-styles-preset-x838ly\">One of AI’s most underrated benefits is that it acts as a mirror for ideas. Sometimes, you just need a second opinion—whether it’s brainstorming an approach, tweaking an algorithm, or figuring out the best way to structure a component. AI can give instant feedback, alternative solutions, and even edge cases you hadn’t considered. It’s not a replacement for human collaboration, but it’s an extra set of (virtual) eyes to help refine your thinking.</p><h3 dir=\"auto\" class=\"framer-text framer-styles-preset-4rgcfm\">Improving old code with fresh insights</h3><p dir=\"auto\" class=\"framer-text framer-styles-preset-x838ly\">Refactoring old projects can be tedious, but AI can spot patterns, suggest optimizations, and highlight areas for improvement that might not have been obvious before. It’s like having an extra teammate who’s great at code reviews but doesn’t get bored looking at legacy code. Whether it’s modernizing an old app or improving efficiency, AI can breathe new life into existing projects.</p><h3 dir=\"auto\" class=\"framer-text framer-styles-preset-4rgcfm\">More autonomy, fewer bottlenecks</h3><p dir=\"auto\" class=\"framer-text framer-styles-preset-x838ly\">AI-powered coding assistants help developers work more independently, reducing the need to constantly check in with teammates for minor issues. This doesn’t replace human pair programming, but it supplements it—cleaning up communication bottlenecks and freeing up senior devs to focus on more complex problems.</p><h3 dir=\"auto\" class=\"framer-text framer-styles-preset-4rgcfm\">Final thought: AI Is a tool, not a shortcut</h3><p dir=\"auto\" class=\"framer-text framer-styles-preset-x838ly\">AI can make development faster, smarter, and more efficient, but it’s not magic. Developers still need to review, understand, and refine AI-generated code—because at the end of the day, you’re responsible for what ships, not the AI. The best use of AI isn’t to replace human expertise, but to amplify it.</p><p dir=\"auto\" class=\"framer-text framer-styles-preset-x838ly\">Want to explore how AI can enhance your development workflow? <!--$--><a class=\"framer-text framer-styles-preset-1eq25ab\" href=\"../contact/\" target=\"_blank\">Let’s talk.</a><!--/$--></p>",
+  "seo": {
+    "canonicalRendered": "https://www.o3xo.ai/insights/how-ai-is-changing-the-way-we-build-software",
+    "descriptionOverride": "Explore how AI in software development is transforming code practices and enhancing productivity for engineers today.",
+    "ogImage": "https://framerusercontent.com/images/J8CZbTQGggcbIOwzaclQXAuyaF4.png?width=1080&height=1080"
+  }
+}

@@ -1,10 +1,10 @@
-import Link from 'next/link'
-
 import { CollectionHero } from '@o3/ui'
 import type { CASE_STUDIES_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
+import type { Pagination } from '@o3/content-runtime/routes'
 
-import { CaseStudyCard } from './CaseStudyCard'
-import type { Pagination } from '@/lib/content-routes/types'
+import { Pager } from '@o3/content-ui'
+
+import { CaseStudyCard } from '@/components/cards/CaseStudyCard'
 
 interface CaseStudyIndexViewProps {
   readonly items: NonNullable<CASE_STUDIES_PAGE_QUERY_RESULT>['items']
@@ -23,9 +23,10 @@ function pageHref(page: number): string {
  * grid    1634:1186   white, 96px vertical, 64px gap, 1248 × 556 cards
  * ```
  *
- * The cards are the **same component** the homepage showcase renders — the
- * frame draws identical geometry in both places (`1925:5642` against
- * `1883:3555`), so a second card here would be a copy waiting to drift.
+ * The cards are the **same component** the homepage showcase renders, bound
+ * there through this app's card table — the frame draws identical geometry in
+ * both places (`1925:5642` against `1883:3555`), so a second card here would
+ * be a copy waiting to drift.
  *
  * ## Why a route and not a page document
  *
@@ -70,26 +71,12 @@ export function CaseStudyIndexView({ items, pagination }: CaseStudyIndexViewProp
           ))}
         </ul>
 
-        {totalPages > 1 ? (
-          <nav
-            aria-label="Pagination"
-            className="max-w-section mx-auto mt-16 flex items-center justify-center gap-6"
-          >
-            {page > 1 ? (
-              <Link href={pageHref(page - 1)} className="text-fg hover:text-brand text-button">
-                ← Previous
-              </Link>
-            ) : null}
-            <p className="text-fg-muted text-button">
-              Page {page} of {totalPages}
-            </p>
-            {page < totalPages ? (
-              <Link href={pageHref(page + 1)} className="text-fg hover:text-brand text-button">
-                Next →
-              </Link>
-            ) : null}
-          </nav>
-        ) : null}
+        <Pager
+          page={page}
+          totalPages={totalPages}
+          href={pageHref}
+          className="max-w-section mx-auto mt-16"
+        />
       </div>
     </>
   )

@@ -217,13 +217,21 @@
  * SurfaceProvider already states for the React half, and the same act:
  * `SectionShell` does both, and a band building its own `<section>` reaches
  * for `surfaceAttrs()` beside `SURFACE_CLASS`. A light card sitting on an ink
- * band declares `white` and gets the light roles back.
+ * band declares `white` (or `bone`) and gets the light roles back.
  *
- * White and bone share one set, so `ink` is the only scope here.
+ * THAT LAST SENTENCE TAKES A SECOND BLOCK, because custom properties inherit:
+ * a card inside an ink band reads the band's white alphas unless something
+ * re-points them on the card itself. So the light surfaces re-declare the
+ * roles the dark one moves — white and bone with one selector, since they
+ * share one set of values.
  *
  * The values are the `on-ink-*` alphas above, not solid greys, for the reason
  * that set exists: copy on dark has to composite over the photography behind
  * it.
+ *
+ * Both blocks are held to the `:root` values by the `LightCardOnInk` story
+ * (section-shell.stories.tsx), which reads what a role paints inside the card
+ * and what the same role paints on a white band, and fails when they differ.
  */
 [data-surface='ink'] {
   /* --color-fg (#232323) and --color-fg-body (#55524E) both mean "body copy"
@@ -240,4 +248,16 @@
    * what the on-ink set exists to avoid. Same step as fg-muted; the design
    * draws no quieter caption on dark. */
   --color-fg-subtle: rgba(255, 255, 255, 0.65);
+}
+
+/* The way back. Every role the block above moves, at the value `@theme`
+ * declares it — so a light surface anywhere under a dark one carries the light
+ * roles, and one at the top of the page re-declares what it already had. */
+[data-surface='white'],
+[data-surface='bone'] {
+  --color-fg: #232323;
+  --color-fg-body: #55524e;
+  --color-fg-muted: #76746f;
+  --color-fg-quiet: rgba(10, 10, 10, 0.5);
+  --color-fg-subtle: #a3a3a3;
 }

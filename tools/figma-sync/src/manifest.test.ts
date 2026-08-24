@@ -24,7 +24,9 @@ describe('tracked-nodes.json', () => {
   it('points at the design source of record', () => {
     expect(manifest.fileKey).toBe('RvraLJaZ0zWm8UaD5AJf43')
     // The Design Concept section — canonical frames live inside it (#34).
-    expect(manifest.sectionNodeId).toBe('1632:1510')
+    // One section, and the probe reads frames: this file is a site, not a kit.
+    expect(manifest.sectionNodeIds).toEqual(['1632:1510'])
+    expect(manifest.probeNodeTypes).toBeUndefined()
   })
 
   it('tracks at least the ten canonical page layers', () => {

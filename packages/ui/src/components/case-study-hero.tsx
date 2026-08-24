@@ -64,8 +64,13 @@ export function CaseStudyHero({
        * `1710:2302` — ink-deep to transparent, opaque up to 15% of the band.
        * The 402 frame (`1906:923`) runs the same stop to 34% because the copy
        * stacks and reaches higher up the photograph.
+       *
+       * Two arbitrary gradients rather than one `--gradient-*` token: the two
+       * frames differ only in that stop, and a gradient custom property cannot
+       * take a stop from the call site. The COLOUR still comes from the token,
+       * so the wash is each brand's own darkest ink.
        */}
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,rgba(3,3,3,1)_34%,rgba(3,3,3,0)_100%)] lg:bg-[linear-gradient(0deg,rgba(3,3,3,1)_15%,rgba(3,3,3,0)_100%)]" />
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,var(--color-ink-deep)_34%,transparent_100%)] lg:bg-[linear-gradient(0deg,var(--color-ink-deep)_15%,transparent_100%)]" />
 
       <div className="max-w-section relative mx-auto flex w-full flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
         <div className="flex flex-col justify-center gap-4 lg:w-[588px]">

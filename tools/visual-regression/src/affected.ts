@@ -7,28 +7,32 @@
  * never mention it by name — and editing a file no story imports selects
  * nothing, which is what keeps a run down to seconds.
  *
- * Module ids in the stats file are relative to `apps/storybook` (the Storybook
- * config's root): `./globals.css`, `./../../packages/ui/src/components/stat.tsx`.
- * Everything below normalises them to repo-relative paths so they can be
- * compared against `git diff` output.
+ * Module ids in the stats file are relative to the **host that built them** (the
+ * Storybook config's root): `./globals.css`,
+ * `./../../packages/ui/src/components/stat.tsx`. Everything below normalises
+ * them to repo-relative paths so they can be compared against `git diff`
+ * output — which is why every entry point takes the host directory. The same
+ * `./globals.css` is a different file on each of the two hosts (#242).
  */
 import path from 'node:path'
 
-import type { StatsModule, StoryEntry } from './storybook'
+import { DEFAULT_BRAND, hostDir, type StatsModule, type StoryEntry } from './storybook'
 
-const STORYBOOK_DIR = 'apps/storybook'
+const O3_HOST = hostDir(DEFAULT_BRAND)
 
 /**
- * Modules that sit above every story. A change that reaches one of these has
- * no story-shaped blast radius — it has all of them.
+ * Modules that sit above every story of one host. A change that reaches one of
+ * these has no story-shaped blast radius — it has all of them.
  */
-const GLOBAL_MODULES = [`${STORYBOOK_DIR}/.storybook/preview.ts`, `${STORYBOOK_DIR}/globals.css`]
+function globalModules(storybookDir: string): string[] {
+  return [`${storybookDir}/.storybook/preview.ts`, `${storybookDir}/globals.css`]
+}
 
-function toRepoPath(moduleId: string): string | null {
+function toRepoPath(moduleId: string, storybookDir: string): string | null {
   // Virtual modules (`virtual:/@storybook/...`), rollup's `\0`-prefixed ids and
   // anything inside a package directory are not files anyone edits.
   if (!moduleId.startsWith('./') || moduleId.includes('\0')) return null
-  const resolved = path.normalize(path.join(STORYBOOK_DIR, moduleId.slice(2)))
+  const resolved = path.normalize(path.join(storybookDir, moduleId.slice(2)))
   return resolved.includes('node_modules') ? null : resolved
 }
 
@@ -43,20 +47,25 @@ export interface Affected {
   everything: boolean
 }
 
-export function affectedStoryFiles(modules: StatsModule[], changed: string[]): Affected {
+export function affectedStoryFiles(
+  modules: StatsModule[],
+  changed: string[],
+  storybookDir: string = O3_HOST,
+): Affected {
   // moduleId → the modules that import it, both sides normalised.
   const importers = new Map<string, Set<string>>()
   for (const module of modules) {
-    const self = toRepoPath(module.id)
+    const self = toRepoPath(module.id, storybookDir)
     if (!self) continue
     const parents = importers.get(self) ?? new Set<string>()
     for (const reason of module.reasons ?? []) {
-      const parent = reason.moduleName ? toRepoPath(reason.moduleName) : null
+      const parent = reason.moduleName ? toRepoPath(reason.moduleName, storybookDir) : null
       if (parent && parent !== self) parents.add(parent)
     }
     importers.set(self, parents)
   }
 
+  const globals = globalModules(storybookDir)
   const changedSet = new Set(changed)
   const storyFiles = new Set<string>()
   const seen = new Set<string>()
@@ -69,7 +78,7 @@ export function affectedStoryFiles(modules: StatsModule[], changed: string[]): A
     const current = queue.shift() as string
     if (seen.has(current)) continue
     seen.add(current)
-    if (GLOBAL_MODULES.includes(current)) return { storyFiles: [], everything: true }
+    if (globals.includes(current)) return { storyFiles: [], everything: true }
     if (isStoryFile(current)) {
       storyFiles.add(current)
       // A story file imports no other story file; stop climbing here rather
@@ -87,15 +96,19 @@ export function affectedStoryFiles(modules: StatsModule[], changed: string[]): A
 }
 
 /** Story entries whose file is in `storyFiles` (or all of them). */
-export function storiesFor(index: StoryEntry[], affected: Affected): StoryEntry[] {
+export function storiesFor(
+  index: StoryEntry[],
+  affected: Affected,
+  storybookDir: string = O3_HOST,
+): StoryEntry[] {
   if (affected.everything) return index
   const wanted = new Set(affected.storyFiles)
-  return index.filter((entry) => wanted.has(entryPath(entry)))
+  return index.filter((entry) => wanted.has(entryPath(entry, storybookDir)))
 }
 
 /** `../../packages/ui/src/x.stories.tsx` → `packages/ui/src/x.stories.tsx`. */
-export function entryPath(entry: StoryEntry): string {
-  return path.normalize(path.join(STORYBOOK_DIR, entry.importPath))
+export function entryPath(entry: StoryEntry, storybookDir: string = O3_HOST): string {
+  return path.normalize(path.join(storybookDir, entry.importPath))
 }
 
 /**
@@ -116,8 +129,11 @@ export function removedStories(
   currentIds: Set<string>,
   touched: Set<string>,
   affected: Affected,
+  storybookDir: string = O3_HOST,
 ): StoryEntry[] {
   return baselineIndex.filter(
-    (entry) => !currentIds.has(entry.id) && (affected.everything || touched.has(entryPath(entry))),
+    (entry) =>
+      !currentIds.has(entry.id) &&
+      (affected.everything || touched.has(entryPath(entry, storybookDir))),
   )
 }

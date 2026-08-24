@@ -78,6 +78,10 @@ export function slugFromPath(path: string, fallback: string): string {
  * the orbital motion vocabulary belongs on marketing pages — a privacy policy
  * with orbiting atoms is not what anyone means by "the design source of
  * truth".
+ *
+ * No `surface`. The hero declares `paintsOwnSurface: 'ink'`, so the band draws
+ * its own colour and the block has no field to hold one; a stored surface is
+ * content nothing reads.
  */
 function headerSection(
   header: Record<string, unknown> | undefined,
@@ -105,7 +109,6 @@ function headerSection(
   return {
     _type: 'heroSection',
     _key: key,
-    surface: 'ink',
     headlineLines: [title],
     ...(description ? { subheading: description } : {}),
     decoration: 'none',

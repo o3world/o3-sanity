@@ -6,7 +6,7 @@ Resolves wayfinder ticket #6. Inputs: the content model (ticket #5, `CONTEXT.md`
 
 - `defineBlock` / `defineSectionBlock` factories with the two-tier registry (base tier inside section tier).
 - GROQ queries colocated in the schema package; `sanity typegen` runs in the studio app — the generated types are the compile-time contract: entry registries and `BLOCK_REGISTRY` are `satisfies`-checked against them (ADR 0001).
-- Schema-symmetric folders: schema name === folder name in `apps/web/src/content/{documents,blocks/{base,section}}`. Enforced by convention (optionally a small lint script later — never a test suite).
+- Schema-symmetric folders: schema name === folder name in `packages/content-ui/src/blocks/{base,section}` and `apps/web/src/content/documents`. Enforced by convention (optionally a small lint script later — never a test suite).
 - Every routable type has a required `slug`; `page` slugs may be multi-segment and carry their URL prefix (`services/ux-audit`).
 
 ## Document types (8)
@@ -19,7 +19,7 @@ Resolves wayfinder ticket #6. Inputs: the content model (ticket #5, `CONTEXT.md`
 
 ### Supporting
 
-- **`person`** — name, title, headshot.
+- **`person`** — name, title, headshot, bio (the few lines a card says about them; the O3XO kit's People card draws one, O3's frame does not).
 - **`client`** — name, logo.
 - **`category`** — title, slug.
 - **`industry`** — title, slug. (Deliberately minimal.)
@@ -43,7 +43,7 @@ Standard marks + closed inline-object set: **`figure`, `embed`, `pullQuote`**. A
 
 ### Section tier — bespoke (from the `prototype/` design)
 
-`heroSection`, `logoWallSection` (eyebrow, heading, body, `layout` (`plates | bar`), client refs, button — `plates` is Home's hairlined 280px squares (`1864:2390`), `bar` the partner page's short unplated strip (`2332:1708`)), `caseShowcaseSection` (caseStudy refs; projects narrativeHeadline + first stat), `railPanelsSection` (heading, intro, `layout` (`rail | cards | rows | grid`), `rail` (`label | number`), panels {railLabel, heading, logo, body, note, button, media, mark, details} — serves Home's "platforms" and "how we work" bands as `rail`, a row of ink engagement cards (`1925:6108`) as `cards`, the partner page's numbered services (`2334:2170`) as `rows`, where a panel's `details` draw the labelled breakdowns under its prose, and the software-engineering service page's grid (`2358:2788`) as `grid` — up to three panels as columns, details stacked under each heading), `quoteSection` (inline quote + attribution — no testimonial type; `decoration` is `orbs | molecule | none`, where `molecule` is the 2026-08 case-study band `2250:1525`), `insightsCarouselSection` (curated refs or latest-N by category), `ctaSection`.
+`heroSection`, `logoWallSection` (eyebrow, heading, body, `layout` (`plates | bar`), client refs, button — `plates` is Home's hairlined 280px squares (`1864:2390`), `bar` the partner page's short unplated strip (`2332:1708`)), `caseShowcaseSection` (caseStudy refs; projects narrativeHeadline + first stat), `railPanelsSection` (heading, intro, `layout` (`rail | cards | rows | grid`), `rail` (`label | number`), panels {railLabel, heading, logo, body, note, button, media, mark, details} — serves Home's "platforms" and "how we work" bands as `rail`, a row of ink engagement cards (`1925:6108`) as `cards`, the partner page's numbered services (`2334:2170`) as `rows`, where a panel's `details` draw the labelled breakdowns under its prose, and the software-engineering service page's grid (`2358:2788`) as `grid` — up to three panels as columns, details stacked under each heading), `quoteSection` (eyebrow, inline quote + attribution — no testimonial type; the eyebrow is a slot the app draws, and only O3XO fills it, with the kit's header pill (`4414:8100`); `decoration` is `orbs | molecule | none`, where `molecule` is the 2026-08 case-study band `2250:1525`), `insightsCarouselSection` (curated refs or latest-N by category), `ctaSection`.
 
 ### Section tier — from the canonical Figma frames (#56)
 
@@ -63,7 +63,7 @@ Surfaced by #46/#47 and built against the About (`1924:5344`) and Solutions (`19
 
 - **`formSection`** — eyebrow, `heading` (req), `note`, `reasons[]` (req), `consentLabel`, `button`. The inquiry band on `/contact` (#58). Its submit is an ordinary `button` instance, so it offers everything any other button does; an empty destination is what keeps it a control. **Its input set is code, not schema** — the six fields are transcribed from the Gravity Form 1 the live site serves, and `reasons` is the only part an editor owns ([ADR 0014](../adr/0014-form-fields-are-code-form-copy-is-content.md)). ⚠️ **No submission handler and no destination exist**, so the renderer disables its submit and says so on the page; #58 stays open for both.
 
-No FAQ/accordion/tabs until a designed page needs them.
+No tabs until a designed page needs them. **`faqSection`** is the exception the rule anticipated: the O3XO kit draws an FAQ accordion on a photograph (`4406:7288`) and `/about/approach` carries one, so the block exists on **that brand's roster only** (#248, ADR 0028) — heading, subheading, `questions[]` ({`heading` (req), `body` (req)}).
 
 ### Base tier
 

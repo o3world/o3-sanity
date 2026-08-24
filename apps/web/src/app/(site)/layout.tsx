@@ -1,15 +1,14 @@
 import type React from 'react'
 import { draftMode } from 'next/headers'
 import { EditorToolbar } from '@o3/editor-chrome/toolbar'
+import { SanityLive } from '@o3/content-runtime/live'
+import { getSiteSettings } from '@o3/content-runtime/site-settings'
 
 import { currentYear } from '@/lib/currentYear'
 import { editorToolbarConfig } from '@/sanity/editorToolbar'
-import { SanityLive } from '@/sanity/live'
-import { getSiteSettings } from '@/sanity/siteSettings'
 import { VisualEditing } from '@/sanity/VisualEditing'
-import { SiteFooter } from '@/ui/SiteFooter'
-import { SiteNav } from '@/ui/SiteNav'
-import { UtilityNav } from '@/ui/UtilityNav'
+import { FOOTER_MARK, NAV_MARK } from '@/components/brand/chromeMarks'
+import { SiteFooter, SiteNav, UtilityNav } from '@o3/content-ui/chrome'
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
   const [settings, { isEnabled: isDraft }, year] = await Promise.all([
@@ -25,9 +24,10 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
           frame); the pill below it is fixed. That difference is why the two are
           siblings here rather than one component. */}
       <UtilityNav settings={settings} />
-      <SiteNav settings={settings} />
+      {/* The chrome draws no mark of its own (#228); these are this app's. */}
+      <SiteNav settings={settings} brandMark={NAV_MARK} />
       <main className="min-h-screen">{children}</main>
-      <SiteFooter settings={settings} year={year} />
+      <SiteFooter settings={settings} brandMark={FOOTER_MARK} year={year} />
       {/* Draft sessions only: SanityLive is the delivery path for draft
           updates in Presentation (see live.ts). Published visitors get
           freshness from the Sanity webhook → /api/revalidate instead, so

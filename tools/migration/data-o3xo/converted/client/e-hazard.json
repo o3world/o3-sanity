@@ -1,0 +1,11 @@
+{
+  "_id": "client-framer-e-hazard",
+  "_type": "client",
+  "name": "e-Hazard",
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:client:e-hazard",
+    "provisional": true,
+    "provisionalNote": "Migrated from o3xo.ai with no logo: the site publishes no client mark, on the case-study cards or anywhere else, and `client.logo` is required in Studio. Cleared by supplying the mark."
+  }
+}

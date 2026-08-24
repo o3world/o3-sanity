@@ -104,7 +104,7 @@ const SECTION_FIELDS = /* groq */ `
         thing an editor reorders or removes here is the slot, not the
         `person` document behind it. */ ''
     }
-    "people": people[]{_key, ...@->{_id, name, title, headshot}}
+    "people": people[]{_key, ...@->{_id, name, title, bio, headshot}}
   },
   _type == "roleListSection" => {
     roles[]{..., button{..., ${BUTTON_TARGET}}}
@@ -127,7 +127,14 @@ const SECTION_FIELDS = /* groq */ `
 export const SITE_SETTINGS_QUERY = defineQuery(`*[_type == "siteSettings"][0]{
   title,
   utilityNavItems[]{..., ${BUTTON_TARGET}},
-  navItems[]{..., ${BUTTON_TARGET}},
+  navItems[]{
+    ...,
+    _type == "button" => {${BUTTON_TARGET}},
+    _type == "navGroup" => {
+      items[]{..., button{..., ${BUTTON_TARGET}}},
+      button{..., ${BUTTON_TARGET}}
+    }
+  },
   primaryButton{..., ${BUTTON_TARGET}},
   footerTagline,
   footerGroups[]{..., links[]{..., ${BUTTON_TARGET}}},

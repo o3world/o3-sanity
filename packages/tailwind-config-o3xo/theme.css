@@ -1,0 +1,67 @@
+/*
+ * The O3XO design tokens — the second brand's paint (CONTEXT.md → Brands).
+ *
+ * A consumer imports the base theme first and this one second, then sets
+ * `data-brand="o3xo"` on <html>:
+ *
+ *     @import '@o3/tailwind-config/theme.css';
+ *     @import '@o3/tailwind-config-o3xo/theme.css';
+ *
+ * That order is load-bearing and the attribute is the whole mechanism. The
+ * base theme declares its colors in a plain `@theme` block (not `inline`), so
+ * every utility it generates compiles to `var(--color-*)`; re-pointing those
+ * custom properties under `:root[data-brand='o3xo']` reskins every
+ * token-reading component without touching one. The Storybook probe that
+ * proved this is what settled ADR 0028.
+ *
+ * This file is an index and nothing else. Each concern lives in its own file
+ * under tokens/, in the order below:
+ *
+ *   color.css       surfaces, text, chrome, borders — and the `accent` role
+ *   typography.css  the kit's type ramp
+ *   layout.css      the kit's breakpoints
+ *   gradient.css    the fills that carry the brand color
+ *
+ * ── PROVENANCE ─────────────────────────────────────────────────────────────
+ *
+ * EVERY VALUE HERE IS READ OFF THE "O3XO: UI kit" FILE
+ * (G6M2gu5qKFvhGxwj3W365b), the "↳ Color" canvas (4214:2932). The swatch
+ * names in each token's comment are the kit's own. The action red is
+ * confirmed against the Button set (4405:6386), where every solid variant
+ * fills it. Two values are not read off a frame — `bone-soft`, interpolated,
+ * and `--gradient-sphere-bloom`, derived from O3's because the kit draws no
+ * sphere — and each says so where it is declared.
+ *
+ * Only the Website Components canvases, the Layouts canvas and the Styles
+ * canvases are trustworthy in that file; `Templates (Old)` and `Asset Dump`
+ * are working material. Read docs/agents/figma.md before adding to this
+ * package — use the `figma_rest` MCP server, and confirm you are on the frame
+ * rather than a child node.
+ *
+ * ── WHAT THIS PACKAGE DOES NOT CARRY ───────────────────────────────────────
+ *
+ * Band rhythm, radii and motion. Roles the kit paints the way O3 does are left
+ * out rather than restated; a restated value is one more place to drift. Each
+ * file names the ones it skipped and why.
+ *
+ * ── ONE FILE IS NOT A BRAND BLOCK ──────────────────────────────────────────
+ *
+ * layout.css declares Tailwind's breakpoints in `@theme`, because a media
+ * query cannot read a custom property. Those five are build-time and reach
+ * every stylesheet that imports this one. Everything else rides the
+ * attribute.
+ *
+ * ── ROLE NAMES ARE SHARED, VOCABULARIES MAY DIVERGE ────────────────────────
+ *
+ * `white | bone | ink` are ROLES, not colors — the two packages paint them
+ * differently and neither renames them. Where the vocabularies diverge, the
+ * brand-only role lives here alone: `accent` (color.css) is O3XO's and O3 has
+ * no equivalent. A component in packages/ui may only reach for roles BOTH
+ * packages define; `packages/ui/src/brand-token-seam.test.ts` derives that
+ * vocabulary from these files and fails on shared code reaching for `accent`.
+ */
+
+@import './tokens/color.css';
+@import './tokens/typography.css';
+@import './tokens/layout.css';
+@import './tokens/gradient.css';

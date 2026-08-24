@@ -1,0 +1,56 @@
+{
+  "_meta": {
+    "type": "caseStudy"
+  },
+  "slug": "healthcare-tech-leader",
+  "path": "/case-studies/healthcare-tech-leader",
+  "collectionItemId": "OGTOGaOky",
+  "title": "Activating strategic AI roadmaps for enterprise growth",
+  "titleRendered": "Healthcare Tech Leader Case Study: AI Strategy Workshop | O3XO",
+  "deck": "A leading healthcare data and analytics organization needed to move beyond AI experimentation to strategic implementation. O3XO’s structured approach delivered a clear path from vision to execution in record time.",
+  "heroImage": {
+    "url": "https://framerusercontent.com/images/Eu53pUciWVGB1nczd02JgCg.webp",
+    "alt": "Healthcare professional using a tablet, representing AI strategy acceleration and digital health transformation"
+  },
+  "chapters": [
+    {
+      "kicker": "Opportunity",
+      "title": "Strategic clarity in a fragmented AI landscape",
+      "bodyHtml": "<p dir=\"auto\" class=\"framer-text framer-styles-preset-jswlfd\">As a high-growth business inside one of the world’s largest healthcare distribution enterprises, this client was uniquely positioned to demonstrate how artificial intelligence could deliver measurable impact across lead generation, operations, and customer engagement. While enthusiasm for AI was high, early initiatives were fragmented and created experimentation fatigue rather than business value.</p><p dir=\"auto\" class=\"framer-text framer-styles-preset-jswlfd\">The challenge was to transform scattered efforts into a cohesive strategy that aligned leadership, prioritized high-impact use cases, and positioned the organization as an innovation leader within the broader enterprise. This required moving beyond proof-of-concept thinking to develop a practical activation roadmap grounded in business priorities and organizational readiness.</p>"
+    },
+    {
+      "kicker": "Solution",
+      "title": "Proven methodology for strategic AI activation",
+      "bodyHtml": "<p dir=\"auto\" class=\"framer-text framer-styles-preset-jswlfd\">O3XO led a collaborative engagement using a structured AI strategy and prioritization framework. Through executive interviews, readiness assessments, and strategy workshops, key insights emerged: AI interest was strong but unfocused, sales and growth goals provided the most leverage, and AI fluency varied widely across teams. Working closely with the client’s leadership, O3XO helped define five strategic priorities for AI activation, anchored by a practical three-phase roadmap.</p><p dir=\"auto\" class=\"framer-text framer-styles-preset-jswlfd\">The approach prioritized revenue-driving use cases such as AI-powered lead prioritization and automated sales content personalization, while also establishing governance guardrails and team enablement frameworks. Technical feasibility was validated, integration pathways with tools like HubSpot were mapped, and a detailed 90-day execution plan was created to demonstrate early wins while building toward long-term AI maturity.</p>"
+    }
+  ],
+  "stats": [
+    {
+      "value": "<3 weeks",
+      "label": "From strategy to prioritized AI roadmap"
+    }
+  ],
+  "quote": {
+    "text": "\"The O3XO team brought clarity and momentum to our AI go-to-market journey. Their hands-on, collaborative approach helped us plan and soon execute a project that will transform how we drive growth.\"",
+    "attribution": "Head of Product, Leading Healthcare Tech Organization"
+  },
+  "card": {
+    "slug": "healthcare-tech-leader",
+    "client": "Healthcare tech leader",
+    "subject": "AI strategy acceleration",
+    "headline": "See how we identified dozens of use cases in our rapid workshop process",
+    "stat": {
+      "value": "<3 weeks",
+      "label": "From strategy to prioritized AI roadmap"
+    },
+    "image": {
+      "url": "https://framerusercontent.com/images/Eu53pUciWVGB1nczd02JgCg.webp",
+      "alt": "Healthcare professional using a tablet, representing AI strategy acceleration and digital health transformation"
+    }
+  },
+  "seo": {
+    "canonicalRendered": "https://www.o3xo.ai/case-studies/healthcare-tech-leader",
+    "descriptionOverride": "See how a healthcare technology leader identified dozens of high-impact AI use cases and built a prioritized roadmap in under 3 weeks through our rapid workshop process.",
+    "ogImage": "https://framerusercontent.com/images/Eu53pUciWVGB1nczd02JgCg.webp?width=394&height=250"
+  }
+}

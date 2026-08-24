@@ -1,0 +1,15 @@
+{
+  "_id": "person-framer-mike-gadsby",
+  "_type": "person",
+  "name": "Mike Gadsby",
+  "title": "Co-Founder / Chief Innovation Officer",
+  "bio": "Strategic leader with 25+ years driving digital transformation across industries, specializing in turning complex business challenges into actionable AI strategies.",
+  "headshot": {
+    "_type": "image",
+    "_srcUrl": "https://framerusercontent.com/images/rLsD9tJfwXOgOH3VPeqlwqDAoQ.png"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:person:mike-gadsby"
+  }
+}

@@ -1,13 +1,13 @@
 import type { ComponentType } from 'react'
 
-import { BASE_BLOCK_COMPONENTS } from './base/baseComponents'
-import { CLIENT_SECTION_BINDINGS } from './clientComponents'
-import { bindingsToRecord } from './defineBlockRender'
-import type { LayoutItem, PageSection } from './sectionTypes'
+import { bindingsToRecord, type LayoutItem, type PageSection } from '@o3/content-runtime/blocks'
+import type { BrandSectionBlockName } from '@o3/sanity/schemas/registry'
+
+import { BASE_CLIENT_COMPONENTS, CLIENT_SECTION_BINDINGS } from './clientComponents'
 
 /**
  * Union of every block the renderer can dispatch — base + section, sourced
- * from the GENERATED query-result types (sectionTypes.ts). This is the
+ * from the GENERATED query-result types (@o3/content-runtime/blocks). This is the
  * guardrail ADR 0001 keeps in place of schema-parity test suites: a schema
  * block without a renderer (or a renderer whose props drift from the
  * generated shape) is a compile error at the `satisfies` clause below.
@@ -15,7 +15,14 @@ import type { LayoutItem, PageSection } from './sectionTypes'
  * The renderer is context-agnostic; placement constraints (which tier goes
  * where) are enforced at the schema layer.
  */
-export type DispatchedBlock = PageSection | LayoutItem
+/**
+ * The generated section union NARROWED TO THIS BRAND'S ROSTER (ADR 0028).
+ * Typegen is one file over the whole content model, so `PageSection` holds
+ * every brand's blocks; the roster is what says which of them this app has to
+ * render, and the `satisfies` clause below is where the answer is checked.
+ */
+export type DispatchedBlock =
+  Extract<PageSection, { _type: BrandSectionBlockName<'o3'> }> | LayoutItem
 export type DispatchedBlockType = DispatchedBlock['_type']
 
 type BlockComponentSlot<K extends DispatchedBlockType> = ComponentType<
@@ -23,10 +30,11 @@ type BlockComponentSlot<K extends DispatchedBlockType> = ComponentType<
 >
 
 const BLOCK_MAP = {
-  // Base blocks — widening BaseBlockName forces a typecheck error in
-  // baseComponents.ts if a renderer is missing; this satisfies clause then
-  // checks each component's props against the generated block shape.
-  ...BASE_BLOCK_COMPONENTS,
+  // Base blocks — this app's roster: the shared table plus the app-first
+  // renderers it binds itself. Widening BaseBlockName forces a typecheck error
+  // there if one is missing; this satisfies clause then checks each
+  // component's props against the generated block shape.
+  ...BASE_CLIENT_COMPONENTS,
   // Section blocks — shared with ClientBlockRenderer's BLOCK_COMPONENTS
   // (clientComponents.ts). Server-only overrides would spread after this
   // (later keys win); none exist today.

@@ -101,4 +101,35 @@ describe('diffSchemas', () => {
       },
     ])
   })
+
+  /* A whole-model deploy from a pre-#252 checkout lands under the same
+   * workspace name as the brand's roster, so the stray-document net exempts
+   * it, and every node the repo declares matches its deployed twin clean. The
+   * deployed side being a *superset* is the only trace — a one-directional
+   * walk reports the o3 dataset offering `faqSection` as no drift at all. */
+  it('reports a deployed type the roster does not declare', () => {
+    const repo = [{ name: 'page', type: 'document' }]
+    const deployed = [
+      { name: 'page', type: 'document' },
+      { name: 'faqSection', type: 'object' },
+    ]
+
+    expect(diffSchemas(repo, deployed)).toEqual([{ kind: 'deployed-extra', path: 'faqSection' }])
+  })
+
+  it('reports a deployed array member the roster does not declare', () => {
+    const sections = (of: { type: string }[]) => ({ name: 'sections', type: 'array', of })
+    const repo = [{ name: 'page', type: 'document', fields: [sections([{ type: 'heroSection' }])] }]
+    const deployed = [
+      {
+        name: 'page',
+        type: 'document',
+        fields: [sections([{ type: 'heroSection' }, { type: 'faqSection' }])],
+      },
+    ]
+
+    expect(diffSchemas(repo, deployed)).toEqual([
+      { kind: 'deployed-extra', path: 'page.sections.faqSection' },
+    ])
+  })
 })

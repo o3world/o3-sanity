@@ -1,4 +1,4 @@
-import type { AnyCatchAllEntry } from '@/lib/content-routes/types'
+import type { AnyCatchAllEntry } from '@o3/content-runtime/routes'
 
 import { caseStudy } from './caseStudy/entry'
 import { caseStudyIndex } from './caseStudy/collectionIndex'
@@ -15,7 +15,7 @@ import { insightIndex } from './insight/collectionIndex'
  * Annotated with the erased entry shape (not `as const`): entries carry
  * literal query types, and `BaseEntry<Q>` is invariant in `Q`, so a
  * heterogeneous tuple's element union would defeat the route builders'
- * generics. See the Erased design note in content-routes/types.ts.
+ * generics. See the Erased design note in `@o3/content-runtime/routes`.
  */
 export const CATCH_ALL_TYPES: readonly AnyCatchAllEntry[] = [page]
 

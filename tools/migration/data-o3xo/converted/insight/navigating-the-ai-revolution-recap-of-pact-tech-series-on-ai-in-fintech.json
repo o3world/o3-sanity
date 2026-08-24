@@ -1,0 +1,566 @@
+{
+  "_id": "insight-framer-navigating-the-ai-revolution-recap-of-pact-tech-series-on-ai-in-fintech",
+  "_type": "insight",
+  "title": "Navigating the AI revolution: recap of PACT tech series on AI in fintech",
+  "slug": {
+    "_type": "slug",
+    "current": "navigating-the-ai-revolution-recap-of-pact-tech-series-on-ai-in-fintech"
+  },
+  "excerpt": "Dive into the transformative power of AI in the financial sector as experts explore its responsible applications and ethical considerations in this insightful recap of the PACT Tech Series panel.",
+  "publishedAt": "2025-09-02T12:00:00Z",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-framer-industries",
+      "_key": "cat-industries"
+    }
+  ],
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_srcUrl": "https://framerusercontent.com/images/dL0oYE0d2kmqpWMGz8mS73OfA6w.png"
+    },
+    "alt": "Portrait of Mike Gadsby"
+  },
+  "body": [
+    {
+      "_key": "k0009",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "In the ever-evolving world of financial technology, the integration of artificial intelligence (AI) has become a major point of discussion. A panel discussion at the ",
+          "_key": "k0010"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": "PACT",
+          "_key": "k0011"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " Tech Series: ",
+          "_key": "k0012"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": "Powered by Phorumpanel",
+          "_key": "k0013"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", held on October 16, 2023, brought together a group of esteemed experts to delve into the exciting possibilities and responsible applications of AI in the FinTech sector. The event was held in Vanguard, Malvern, PA, and was an enlightening morning filled with invaluable insights.",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "https://philadelphiapact.com/"
+        },
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://philadelphiapact.com/phorum/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The panel was moderated by ",
+          "_key": "k0016"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": "Mike Gadsby",
+          "_key": "k0017"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", O3XO’s Co-Founder and Chief Innovation Officer. With over two decades of experience advising startups and Fortune 500 brands, Mike’s deep understanding of AI and its applications in CX sparked conversations in a pivotal time of generative AI developments. As a graduate of the University of Pennsylvania, Mike has consistently shared his expertise through guest lectures, curriculum design, and speaking engagements at events across the nation, covering topics ranging from AI strategy to the future of customer experience.",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/michaelgadsby/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\n",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_srcUrl": "https://framerusercontent.com/images/qIdHKzmnqJYQ6v16lRg4ujILo.png"
+      },
+      "alt": "A recap of PACT tech series on AI in fintech",
+      "_key": "k0021"
+    },
+    {
+      "_key": "k0022",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The conversation",
+          "_key": "k0023"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0024",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The panel discussion illuminated the critical need for prioritizing Gen AI for financial experiences. Gen AI, short for “Generative AI,” refers to the next evolutionary stage of artificial intelligence. It represents AI systems that are not only highly advanced in their capabilities but also capable of self-learning and adaptation, akin to human intelligence. Gen AI is characterized by its potential to revolutionize various industries, offering advanced problem-solving, personalized experiences, and the ability to work in dynamic, unstructured environments.The central theme of the conversation was the need to prioritize Gen AI, which represents the responsible integration of AI technologies.",
+          "_key": "k0025"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0026",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The panelists recognized that the impact of AI on the financial sector extends far beyond mere automation and efficiency improvements, delving into the profound implications of responsible AI integration.",
+          "_key": "k0027"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0028",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "These key aspects emerged from the discussion:",
+          "_key": "k0029"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0030",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\n",
+          "_key": "k0031"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0032",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Establishment of robust guardrails:",
+          "_key": "k0033"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " The panel emphasized the importance of creating robust ethical and regulatory frameworks to guide the use of AI in finance. As AI matures, it’s crucial to establish guardrails that ensure the technology is used responsibly and ethically. Guardrails in the context of AI refer to the predefined limits and constraints put on the behavior, decision-making, and actions of AI systems. This includes addressing issues such as bias, fairness, and transparency in AI algorithms to prevent potential harm to customers and the industry as a whole.",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Judicious handling of company data:",
+          "_key": "k0036"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " The responsible handling of company data when incorporated into AI systems. As financial institutions increasingly rely on AI to analyze and leverage data, it’s vital to ensure that data privacy and security are maintained at the highest standards. The panel highlighted the importance of developing protocols and best practices for handling sensitive customer information. We’ve seen ",
+          "_key": "k0037"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0003"
+          ],
+          "text": "Microsoft Azure",
+          "_key": "k0038"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " release more on this.",
+          "_key": "k0039"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0003",
+          "_type": "link",
+          "href": "https://azure.microsoft.com/en-us/solutions/databases/?&ef_id=_k_Cj0KCQjwhL6pBhDjARIsAGx8D5_AyX3KBcMoV012BK-5B6YfW8kW0GT2sMvpyfXkaufd3NFoW1x7-ZkaAhhwEALw_wcB_k_&OCID=AIDcmm5edswduu_SEM__k_Cj0KCQjwhL6pBhDjARIsAGx8D5_AyX3KBcMoV012BK-5B6YfW8kW0GT2sMvpyfXkaufd3NFoW1x7-ZkaAhhwEALw_wcB_k_&gad_source=1&gclid=Cj0KCQjwhL6pBhDjARIsAGx8D5_AyX3KBcMoV012BK-5B6YfW8kW0GT2sMvpyfXkaufd3NFoW1x7-ZkaAhhwEALw_wcB"
+        }
+      ],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0040",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Educating the workforce:",
+          "_key": "k0041"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " The discussion stressed the need to educate the workforce about AI technologies and their responsible use. With the integration of AI in various aspects of financial operations, organizations should invest in training and development programs to equip their employees with the skills and knowledge necessary to work effectively alongside AI tools. Simultaneously, comprehensive data privacy guidelines should be crafted to govern the responsible use of AI in the industry.",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0043",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Key use cases and the future of AI in fintech:",
+          "_key": "k0044"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " The panel explored key use cases of AI in the financial sector and discussed the future of AI in FinTech. Revealing that AI has the potential to transform various aspects of financial services, including risk assessment, customer service, and investment strategies. The panelists also examined how AI will shape the future of FinTech, predicting that AI will continue to play a pivotal role in enhancing customer experiences, automating tasks, and enabling new, data-driven innovations.",
+          "_key": "k0045"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal",
+      "level": 1,
+      "listItem": "number"
+    },
+    {
+      "_key": "k0046",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "These key takeaways underscore the significance of Gen AI at a juncture in the financial industry and beyond. The responsible application of this technology is vital for shaping a future that promises extraordinary customer experiences, innovative advancements, and the ethical safeguarding of data—a commitment that couldn’t be timelier.",
+          "_key": "k0047"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0048",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Meet the speakers",
+          "_key": "k0049"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0050",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0004"
+          ],
+          "text": "Russ Kliman",
+          "_key": "k0051"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", ",
+          "_key": "k0052"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "SEI",
+          "_key": "k0053"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\nRuss Kliman is a forward-thinking leader with over two decades of experience in technology, product strategy, and innovation. He currently serves as the global executive leader for SEI Ventures, focusing on driving growth through emerging technologies and strategic opportunities while also contributing to academia and the startup ecosystem.",
+          "_key": "k0054"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0004",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/russkliman/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0055",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0005"
+          ],
+          "text": "James Smedley",
+          "_key": "k0056"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", ",
+          "_key": "k0057"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "McCarter & English, LLP",
+          "_key": "k0058"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\nJames Smedley is an experienced attorney specializing in intellectual property rights for companies of all sizes. He combines a background in software development with extensive patent prosecution, providing counsel in securing rights, building patent portfolios, and handling complex IP matters while also representing eSports players and organizations.",
+          "_key": "k0059"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0005",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/james-smedley/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0060",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [
+            "k0006"
+          ],
+          "text": "Nigel Rughani",
+          "_key": "k0061"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", ",
+          "_key": "k0062"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "Vertex",
+          "_key": "k0063"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\nNigel Rughani, Vice President of Corporate Development at Vertex, specializes in identifying and executing global growth opportunities through partnerships, acquisitions, and strategic investments. With a background in M&A and a career that includes roles at AmeriHealth and Jefferies, he brings a wealth of experience to his role at Vertex.",
+          "_key": "k0064"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0006",
+          "_type": "link",
+          "href": "https://www.linkedin.com/in/nigel-r-44107847/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0065",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "What O3XO is doing in the space",
+          "_key": "k0066"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0067",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "O3XO is at the forefront of harnessing the potential of AI to create exceptional customer experiences and drive innovation in the financial industry. ",
+          "_key": "k0068"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0007"
+          ],
+          "text": "By leveraging AI solutions",
+          "_key": "k0069"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ", O3XO empowers businesses to personalize customer journeys, predict customer needs, enable conversational interfaces, and streamline processes through automation. Our expertise ensures that even organizations with limited AI experience can benefit from these cutting-edge technologies. O3XO’s track record of success in projects utilizing services like ",
+          "_key": "k0070"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0008"
+          ],
+          "text": "Microsoft’s Azure OpenAI",
+          "_key": "k0071"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " service exemplifies their ability to swiftly and effectively bring AI solutions to market, helping both startups and enterprises to transform their experience and enhance their customer interactions.",
+          "_key": "k0072"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0007",
+          "_type": "link",
+          "href": "https://www.o3world.com/transcend/"
+        },
+        {
+          "_key": "k0008",
+          "_type": "link",
+          "href": "https://azure.microsoft.com/en-us/products/ai-services/openai-service/?ef_id=_k_Cj0KCQjw4bipBhCyARIsAFsieCweBxj06i_qP4SNOfxwoD3UMgVDliPl0owFwfuDSJXxeGTHwUs6srYaAuzDEALw_wcB_k_&OCID=AIDcmm5edswduu_SEM__k_Cj0KCQjw4bipBhCyARIsAFsieCweBxj06i_qP4SNOfxwoD3UMgVDliPl0owFwfuDSJXxeGTHwUs6srYaAuzDEALw_wcB_k_&gad=1&gclid=Cj0KCQjw4bipBhCyARIsAFsieCweBxj06i_qP4SNOfxwoD3UMgVDliPl0owFwfuDSJXxeGTHwUs6srYaAuzDEALw_wcB"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0073",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The PACT Tech Series panel on “Understanding AI in FinTech” offered an enriching glimpse into the potential of AI in reshaping the financial technology landscape. With Mike Gadsby’s moderation and insights from our esteemed speakers, the event provided a platform for exploring responsible AI applications in the financial industry, promising exceptional customer experiences and innovation. As the FinTech world continues to evolve, these discussions are invaluable in paving the way for a brighter, more efficient future.",
+          "_key": "k0074"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "Explore the power of AI in the financial sector as experts delve into applications and ethical considerations in this recap of the panel."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:insight:wo5zYUY7f"
+  }
+}

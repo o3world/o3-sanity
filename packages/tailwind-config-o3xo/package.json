@@ -1,0 +1,17 @@
+{
+  "name": "@o3/tailwind-config-o3xo",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./theme.css",
+  "exports": {
+    ".": "./theme.css",
+    "./theme.css": "./theme.css"
+  },
+  "scripts": {
+    "lint": "echo 'No lintable files'",
+    "format": "prettier --write ."
+  },
+  "peerDependencies": {
+    "@o3/tailwind-config": "workspace:*"
+  }
+}

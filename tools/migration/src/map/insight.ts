@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-import { COLLECTION_PREFIXES } from '@o3/sanity/constants'
+import { collectionPrefixes } from '@o3/sanity/brand'
 
 import {
   convertHtml,
@@ -36,11 +36,12 @@ export interface WpPerspective {
 }
 
 export const insightDoc = z.object({
-  /* Both deterministic id forms (README → Rules of the road): `-wp-<id>` for a
-   * migrated post, `-seed-<slug>` for one written here. `verify` re-runs this
-   * gate over the whole dataset, so a seeded insight has to satisfy the
-   * same shape a converted one does — which is the point, not a loophole. */
-  _id: z.string().regex(/^insight-(wp-\d+|seed-[a-z0-9-]+)$/),
+  /* Every deterministic id form (README → Rules of the road): `-wp-<id>` for a
+   * post migrated from WordPress, `-framer-<key>` for one migrated from
+   * o3xo.ai, `-seed-<slug>` for one written here. `verify` re-runs this gate
+   * over the whole dataset — both brands' — so a seeded insight has to satisfy
+   * the same shape a converted one does. That is the point, not a loophole. */
+  _id: z.string().regex(/^insight-(wp-\d+|framer-[a-z0-9-]+|seed-[a-z0-9-]+)$/),
   _type: z.literal('insight'),
   title: z.string().min(1),
   slug: z.object({ _type: z.literal('slug'), current: z.string().min(1) }),
@@ -50,11 +51,16 @@ export const insightDoc = z.object({
   categories: z.array(
     z.object({ _type: z.literal('reference'), _ref: z.string(), _key: z.string() }),
   ),
+  /* Required of every source. o3xo.ai publishes no date and used to be exempt;
+   * #218 gave it a synthetic one derived from its sitemap position, so the
+   * exemption is gone and an insight with no date is a failure in both brands
+   * — which is what keeps a WordPress insight from silently losing its date
+   * and its ordering. */
   publishedAt: z.string().datetime(),
   featuredImage: z.unknown().optional(),
   body: z.array(z.record(z.string(), z.unknown())).min(1),
   seo: seoObject.optional(),
-  migration: migrationObject,
+  migration: migrationObject.loose(),
 })
 
 export type InsightDoc = z.infer<typeof insightDoc>
@@ -180,7 +186,7 @@ export function mapInsight(
   // that would move off the URL WordPress serves it at stops the run.
   const parity = checkPathParity(
     post.seo?.canonicalRendered ?? '',
-    `${COLLECTION_PREFIXES.insight}/${post.slug}`,
+    `${collectionPrefixes().insight}/${post.slug}`,
   )
   if (parity) issues.push(parity)
 

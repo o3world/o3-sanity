@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest'
 
+import type { RouteProvenance } from '@o3/content-runtime/routes'
+
 import { caseStudyIndex, insightIndex } from '@/content/documents'
-import type { RouteProvenance } from '@/lib/content-routes/types'
 
 /**
  * The route half of the #40 provisional mechanism (ADR 0007).
@@ -19,7 +20,7 @@ import type { RouteProvenance } from '@/lib/content-routes/types'
  */
 /**
  * Only the provenance, not the whole entry: `IndexEntry<Q>` is invariant in
- * `Q` (see the design note in `content-routes/types.ts`), so a heterogeneous
+ * `Q` (see the design note in `@o3/content-runtime/routes`), so a heterogeneous
  * tuple of concrete entries will not widen to `IndexEntry<string>`.
  */
 const INDEX_ROUTES: readonly [name: string, migration: RouteProvenance | undefined][] = [

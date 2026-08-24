@@ -153,7 +153,7 @@ function withFreshKeys<T>(value: T, newKey: () => string): T {
  * answer every builder in this feature gives when it has nothing to do: the
  * caller offers no row rather than an insert that produces an empty object.
  * Nothing reaches that branch today (`placeholder.test.ts` in `@o3/sanity`
- * asserts all sixteen section blocks declare one) and it is not an error state
+ * asserts every section block declares one) and it is not an error state
  * — a block declared outside this repo may well have none.
  *
  * The knob defaults go UNDER the placeholder, so a block whose starting look is
@@ -205,7 +205,7 @@ export function newBlockContent({
  * a second one: `verify` lists what this matches under the same "not
  * authoritative, clear before launch" heading it lists provisional documents
  * under. A marker field was the alternative and it would have meant a schema
- * change on all sixteen blocks — a field in the form, in `generated.ts` and in
+ * change on every block — a field in the form, in `generated.ts` and in
  * every renderer's props, to say something the content itself already says.
  *
  * **A SUBSET MATCH, and keys are ignored.** Subset, so an editor who picks a

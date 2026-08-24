@@ -3,11 +3,12 @@ import { defineArrayItem } from './defineArrayItem'
 import { defineSectionBlock } from './defineBlocks'
 import { detailsField } from './fields'
 import { hiddenUnless } from './knobFields'
-import { blockArrayMembers } from './registry'
+import { blockArrayMembers, BLOCK_ARRAYS } from './registry'
 import { PAGE_TYPES } from '../../constants'
 import { caseShowcaseSectionKnobs } from '../../knobs/caseShowcaseSection'
 import { ctaSectionKnobs } from '../../knobs/ctaSection'
-import { featureGridSectionKnobs } from '../../knobs/featureGridSection'
+import { faqSectionKnobs } from '../../knobs/faqSection'
+import { featureGridSectionKnobs, featureKnobs } from '../../knobs/featureGridSection'
 import { formSectionKnobs } from '../../knobs/formSection'
 import { heroSectionKnobs } from '../../knobs/heroSection'
 import { inFlightSectionKnobs } from '../../knobs/inFlightSection'
@@ -259,6 +260,12 @@ export const quoteSection = defineSectionBlock({
   title: 'Quote',
   knobs: quoteSectionKnobs,
   fields: [
+    defineField({
+      name: 'eyebrow',
+      type: 'string',
+      description:
+        'The label over the quote — "Trusted by leading organizations". O3XO draws it as the kit’s pill (`4414:8100`); O3’s band draws no label above a quote and leaves this empty.',
+    }),
     defineField({ name: 'quote', type: 'text', rows: 4, validation: (rule) => rule.required() }),
     defineField({
       name: 'attribution',
@@ -322,9 +329,11 @@ export const ctaSection = defineSectionBlock({
 
 /**
  * `layout`, `decoration` and `surface` are declared in
- * `src/knobs/featureGridSection.ts` (ADR 0020). The `features` length rule
- * still reads `layout` from the form value, because what a choice requires of
- * the rest of the document is validation rather than a knob.
+ * `src/knobs/featureGridSection.ts` (ADR 0020), and so is `icon` — a feature's
+ * own design option, declared against the member because an array member is its
+ * own knob root (ADR 0021). The `features` length rule still reads `layout`
+ * from the form value, because what a choice requires of the rest of the
+ * document is validation rather than a knob.
  *
  * **Named for the composition, not for the first page that used it.** It was
  * `disciplineGridSection` while About's four disciplines were its only caller;
@@ -362,9 +371,8 @@ export const featureGridSection = defineSectionBlock({
               : 'The orbital layout places exactly four features.'
           }),
       of: [
-        defineArrayMember({
-          type: 'object',
-          name: 'feature',
+        defineArrayItem({
+          knobs: featureKnobs,
           fields: [
             defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
             defineField({
@@ -380,6 +388,9 @@ export const featureGridSection = defineSectionBlock({
               description:
                 'The dotted circle the frame sets with the copy — an orb unless set to disc. Drawn by every layout except orbital, which places its own nodes.',
             }),
+            // Beside `mark`, because the two fill one position: a feature that
+            // names an icon has the glyph where the disc would have been.
+            'icon',
           ],
           preview: { select: { title: 'heading', subtitle: 'body' } },
         }),
@@ -667,7 +678,12 @@ export const layoutSection = defineSectionBlock({
       // spent three files finding out about. `mark` arrives through it, which
       // is why the column's picker says "Mark" rather than "Orb": a member
       // title here would be the one hand-kept fact in a derived list.
-      of: blockArrayMembers('layoutSection.items').map((member) => defineArrayMember(member)),
+      //
+      // The model's own arrays, and not a brand's: the base tier is one list
+      // for both brands, so every roster answers this key identically.
+      of: blockArrayMembers('layoutSection.items', BLOCK_ARRAYS).map((member) =>
+        defineArrayMember(member),
+      ),
       validation: (rule) => rule.required().min(1),
     }),
   ],
@@ -785,4 +801,60 @@ export const listingSection = defineSectionBlock({
     }),
   ],
   preview: { select: { title: 'heading', subtitle: 'pageType' } },
+})
+
+/**
+ * O3XO's alone (ADR 0028): the kit draws an FAQ accordion (`4406:7288`) and
+ * O3's design file has no band like it. `surface` is declared in
+ * `src/knobs/faqSection.ts`; everything here is editorial.
+ *
+ * A row is `heading` + `body`, the pair `panel` and `feature` already use for
+ * "the item's own title, and the prose under it" — a question is a heading that
+ * happens to end in a question mark, and inventing `question` / `answer` fields
+ * would put two more synonyms in the lexicon for concepts it already names.
+ */
+export const faqSection = defineSectionBlock({
+  name: 'faqSection',
+  description:
+    'The objections a reader is holding, answered in their own words — one heading, a standfirst, and a column of questions that open. Reach for it late on a page that has already made its case, where the remaining obstacle is doubt rather than ignorance. Every row starts closed, so nothing here can be the first time a reader meets an idea.',
+  title: 'FAQ',
+  knobs: faqSectionKnobs,
+  fields: [
+    defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
+    defineField({
+      name: 'subheading',
+      type: 'text',
+      rows: 2,
+      description: 'The standfirst under the heading — what this set of questions is about.',
+    }),
+    defineField({
+      name: 'questions',
+      type: 'array',
+      validation: (rule) => rule.required().min(1),
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'question',
+          fields: [
+            defineField({
+              name: 'heading',
+              type: 'string',
+              description: 'The question, as a reader would ask it.',
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: 'body',
+              type: 'text',
+              rows: 4,
+              description:
+                'The answer. One paragraph — a row that opens onto an essay is one nobody reads.',
+              validation: (rule) => rule.required(),
+            }),
+          ],
+          preview: { select: { title: 'heading', subtitle: 'body' } },
+        }),
+      ],
+    }),
+  ],
+  preview: { select: { title: 'heading' } },
 })

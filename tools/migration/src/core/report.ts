@@ -22,6 +22,8 @@ import {
 import { isImageAssetId } from '../lib/media'
 import { untouchedPlaceholders } from '../lib/placeholders'
 import { categoryDoc } from '../map/category'
+import { caseStudyDoc } from '../map/caseStudy'
+import { clientDoc } from '../map/framerCaseStudy'
 import { personDoc } from '../map/person'
 import { insightDoc } from '../map/insight'
 import { siteSettingsDoc } from '../map/siteSettings'
@@ -43,12 +45,50 @@ export interface VerifyReport {
   readonly placeholders: readonly string[]
 }
 
-/** Zod gates by type. A type without one is only checked structurally. */
-const GATES: Record<string, { safeParse: (v: unknown) => { success: boolean } }> = {
-  insight: insightDoc,
-  category: categoryDoc,
-  person: personDoc,
-  siteSettings: siteSettingsDoc,
+/**
+ * Zod gates by type. A type without one is only checked structurally.
+ *
+ * A gate describes what a mapper produces, so `only` is how one that describes
+ * a single source says so. `siteSettingsDoc` is the shape of the **WordPress
+ * chrome extract** — nav menus plus the ACF options page, which is where its
+ * required socials, legal links and legal name come from. O3XO has no chrome
+ * extract yet, so its singleton is a hand-seeded bootstrap with those fields
+ * genuinely absent (#215), and holding it to o3's gate would fail `verify` over
+ * facts about the O3XO entity that nothing has extracted. Its shape is asserted
+ * in `o3xo.test.ts` against what the chrome actually renders.
+ */
+type Gate = {
+  readonly schema: { safeParse: (v: unknown) => { success: boolean } }
+  readonly only?: (doc: CorpusDoc) => boolean
+}
+
+function sourceIdOf(doc: CorpusDoc): string {
+  return (doc.migration as { sourceId?: string } | undefined)?.sourceId ?? ''
+}
+
+const GATES: Record<string, Gate> = {
+  insight: { schema: insightDoc },
+  category: { schema: categoryDoc },
+  person: { schema: personDoc },
+  /**
+   * `caseStudyDoc` describes both sources, but only the Framer half is checked
+   * here. o3's twenty are the translate track's, and the gate they were written
+   * against is applied by `checkTranslation` over the committed file with its
+   * `_meta` header — a document that has been through `load` no longer carries
+   * one, and the flags that make an agent-written field legitimate live in it.
+   */
+  caseStudy: {
+    schema: caseStudyDoc,
+    only: (doc) => sourceIdOf(doc).startsWith('framer:'),
+  },
+  client: {
+    schema: clientDoc,
+    only: (doc) => doc._id.startsWith('client-framer-'),
+  },
+  siteSettings: {
+    schema: siteSettingsDoc,
+    only: (doc) => sourceIdOf(doc).startsWith('wp:'),
+  },
 }
 
 const SCHEMA_TYPE_NAMES = new Set(schemaTypes.map((t) => t.name))
@@ -145,12 +185,14 @@ export function report(
   }
   checks.push({ check: 'every image field holds an image asset', lines: wrongAssetKind })
 
-  // 4. No image marker survived the load. A `_wpSrc` or `_localSrc` left in
-  //    the dataset means the upload was skipped and the image is invisible.
+  // 4. No image marker survived the load. A source marker left in the dataset
+  //    means the upload was skipped and the image is invisible. All three, by
+  //    the table in `load.ts`: a new source whose marker is missing here would
+  //    load its images as nothing and pass this check.
   checks.push({
     check: 'every image resolved to an asset',
     lines: live
-      .filter((doc) => /"_(wpSrc|localSrc)":/.test(JSON.stringify(doc)))
+      .filter((doc) => /"_(wpSrc|srcUrl|localSrc)":/.test(JSON.stringify(doc)))
       .map((doc) => `${doc._id} still carries an unresolved image marker`),
   })
 
@@ -159,7 +201,8 @@ export function report(
   const invalid: string[] = []
   for (const doc of live) {
     const gate = GATES[doc._type]
-    if (gate && !gate.safeParse(doc).success) invalid.push(`${doc._id} fails the ${doc._type} gate`)
+    if (!gate || (gate.only && !gate.only(doc))) continue
+    if (!gate.schema.safeParse(doc).success) invalid.push(`${doc._id} fails the ${doc._type} gate`)
   }
   checks.push({ check: 'every document validates against its schema gate', lines: invalid })
 

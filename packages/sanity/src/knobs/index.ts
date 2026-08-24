@@ -8,17 +8,19 @@
  * the impure one. The adapter that turns a knob into a `defineField` lives on
  * the other side of that line, in `schemas/blocks/knobFields.ts`.
  *
- * One file per component, named for it — the sixteen section blocks, and the
- * shared objects that declare their own (ADR 0023). Their own directory rather
- * than beside their schema, because all sixteen section blocks share a single
+ * One file per component, named for it — the section blocks, and the shared
+ * objects that declare their own (ADR 0023). Their own directory rather than
+ * beside their schema, because every section block shares a single
  * `schemas/blocks/section.ts` and there is no "beside".
  */
 
 import type { BlockKnobs, ObjectKnobs } from '@o3/block-spec'
+import { backgroundMediaKnobs } from './backgroundMedia'
 import { buttonKnobs } from './button'
 import { buttonGroupKnobs } from './buttonGroup'
 import { caseShowcaseSectionKnobs } from './caseShowcaseSection'
 import { ctaSectionKnobs } from './ctaSection'
+import { faqSectionKnobs } from './faqSection'
 import { featureGridSectionKnobs } from './featureGridSection'
 import { formSectionKnobs } from './formSection'
 import { heroSectionKnobs } from './heroSection'
@@ -35,11 +37,13 @@ import { railPanelsSectionKnobs } from './railPanelsSection'
 import { roleListSectionKnobs } from './roleListSection'
 import { screenGridSectionKnobs } from './screenGridSection'
 
+export { backgroundMediaKnobs } from './backgroundMedia'
 export { buttonKnobs } from './button'
 export { buttonGroupKnobs } from './buttonGroup'
 export { caseShowcaseSectionKnobs } from './caseShowcaseSection'
 export { ctaSectionKnobs } from './ctaSection'
 export { decorationKnob } from './decoration'
+export { faqSectionKnobs } from './faqSection'
 export { featureGridSectionKnobs } from './featureGridSection'
 export { formSectionKnobs } from './formSection'
 export { heroSectionKnobs } from './heroSection'
@@ -61,7 +65,7 @@ export { surfaceKnob } from './surface'
  * Every block, keyed by its Sanity `_type` — what a consumer reads when it has
  * a document and needs the knobs behind it (#106's canvas toolbar).
  *
- * **Complete since #113.** Every one of the sixteen section blocks declares its
+ * **Complete since #113.** Every section block declares its
  * design options here, so a miss is now a block that does not exist rather than
  * a block nobody has converted yet, and `defineSectionBlock` requires the
  * declaration — there is no longer a way for a block to reach the form with
@@ -88,6 +92,7 @@ export const BLOCK_KNOBS: Readonly<Record<string, BlockKnobs>> = {
   [mediaSectionKnobs.type]: mediaSectionKnobs,
   [screenGridSectionKnobs.type]: screenGridSectionKnobs,
   [listingSectionKnobs.type]: listingSectionKnobs,
+  [faqSectionKnobs.type]: faqSectionKnobs,
 }
 
 /**
@@ -113,6 +118,7 @@ export const BLOCK_KNOBS: Readonly<Record<string, BlockKnobs>> = {
  */
 export const OBJECT_KNOBS: Readonly<Record<string, ObjectKnobs>> = {
   [markKnobs.type]: markKnobs,
+  [backgroundMediaKnobs.type]: backgroundMediaKnobs,
   [buttonKnobs.type]: buttonKnobs,
   [buttonGroupKnobs.type]: buttonGroupKnobs,
 }

@@ -1,0 +1,121 @@
+{
+  "_id": "caseStudy-framer-e-hazard",
+  "_type": "caseStudy",
+  "title": "Automating electrical safety training operations",
+  "slug": {
+    "_type": "slug",
+    "current": "e-hazard"
+  },
+  "client": {
+    "_type": "reference",
+    "_ref": "client-framer-e-hazard"
+  },
+  "narrativeHeadline": "When industry leaders need to modernize operations while staying focused on their core mission, AI can bridge the gap between legacy processes and future efficiency. For e-Hazard, thoughtful AI implementation delivered real impact without disrupting what already works well.",
+  "stats": [
+    {
+      "_type": "stat",
+      "_key": "k0011",
+      "value": "70%",
+      "label": "Reduction in hours spent per week"
+    }
+  ],
+  "heroMedia": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_srcUrl": "https://framerusercontent.com/images/UICB1h7KSeR5QWIPhevRezsChaY.webp"
+    },
+    "alt": "Industrial safety professional reviewing equipment data on a tablet, representing AI-powered certificate automation"
+  },
+  "story": [
+    {
+      "_type": "chapter",
+      "_key": "k0004",
+      "kicker": "Opportunity",
+      "title": "AI with purpose and ROI",
+      "body": [
+        {
+          "_key": "k0000",
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "As a leading national provider of electrical safety training, arc flash studies, and consulting services, e-Hazard delivers critical instruction and guidance based on NFPA 70E, NEC, and OSHA standards to help organizations improve workplace safety and maintain compliance. Like many forward-thinking organizations, e-Hazard was eager to explore how AI could drive operational efficiency and create meaningful impact.",
+              "_key": "k0001"
+            }
+          ],
+          "markDefs": [],
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "_key": "k0002",
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Their goal was to identify AI use cases that would not only streamline internal workflows but also enhance the value of their core service offerings, including training programs, risk assessments, and safety consulting. The challenge lay in finding the right applications where AI could deliver measurable ROI and sustainable improvements across the business.",
+              "_key": "k0003"
+            }
+          ],
+          "markDefs": [],
+          "_type": "block",
+          "style": "normal"
+        }
+      ]
+    },
+    {
+      "_type": "chapter",
+      "_key": "k0009",
+      "kicker": "Solution",
+      "title": "From manual follow-up to automated workflows",
+      "body": [
+        {
+          "_key": "k0005",
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "To unlock the value of AI within e-Hazard's operations, O3 led a collaborative engagement using our proven AI workshop and prioritization methodology. Together with e-Hazard's leadership, we assessed a range of opportunities and identified a clear area for impact: modernizing their manual, paper-based certificate management process. We mapped the workflow end-to-end and evaluated AI solutions capable of ingesting student lists, reading scanned data, and generating CSV files for seamless integration into their certificate management system.",
+              "_key": "k0006"
+            }
+          ],
+          "markDefs": [],
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "_key": "k0007",
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Working closely with the e-Hazard team, we developed a solution that prioritized accuracy in document ingestion and data formatting. The approach was validated through stakeholder feedback and iterative refinement, ultimately resulting in a faster, more reliable, and cost-effective way to manage student certificates.",
+              "_key": "k0008"
+            }
+          ],
+          "markDefs": [],
+          "_type": "block",
+          "style": "normal"
+        }
+      ]
+    },
+    {
+      "_type": "quoteSection",
+      "_key": "k0010",
+      "surface": "bone",
+      "decoration": "molecule",
+      "quote": "I am over here doing a happy dance in my tears of joy at how amazing this AI program is. Don't mind me, just living my best life!",
+      "attribution": "Business Process Owner, e-Hazard"
+    }
+  ],
+  "seo": {
+    "description": "See how e-Hazard reduced manual certificate management time by 70% with AI-powered automation, modernizing their electrical safety training operations."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:caseStudy:xelB1DQef",
+    "provisional": true,
+    "provisionalNote": "Migrated from o3xo.ai with three authored card fields this model has no home for — the subject label, the card sentence and the card photograph — and with a client that has no logo, which Studio requires. All four are recoverable from the committed extract. Cleared by giving them fields or by recording the drop as permanent, and by supplying the client mark."
+  }
+}

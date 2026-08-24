@@ -1,34 +1,20 @@
 /**
- * Single source of truth for the repo dirs Storybook globs for stories.
+ * The repo dirs every Storybook host globs for stories.
  *
- * Consumed by:
- *  - apps/storybook/.storybook/main.ts  (as glob patterns)
+ * These are the shared component packages — they name only token roles both
+ * brands paint, so the same story renders in either host and the Brand
+ * toolbar over it is the standing paint-leak test (ADR 0028).
  *
- * Add/remove a story root HERE only — consumers derive from this.
- *
- * `apps/web/src` is declared ahead of the web app's scaffold step; the
- * Storybook config filters to roots that exist on disk until it lands.
+ * A host's own app roots are not here: they belong to that host, and it
+ * passes them to `defineStorybookConfig` as `appStoryRoots`.
  */
-export const STORY_ROOTS = [
-  'packages/ui/src',
-  'apps/web/src',
-  // Captured prototypes — stories that frame a static HTML artifact rather
-  // than a component. See apps/storybook/prototypes/README.md.
-  'apps/storybook/prototypes',
-] as const
+export const SHARED_STORY_ROOTS = ['packages/ui/src', 'packages/content-ui/src'] as const
 
-/** The story-file extension glob (shared with main.ts). */
+/** The story-file extension glob. */
 export const STORY_GLOB_SUFFIX = '**/*.stories.@(js|jsx|mjs|ts|tsx)'
 
-/** The prefix apps/storybook's .storybook/main.ts passes to storyGlobs()
- *  (repo root relative to the .storybook dir). Exported so consumers agree
- *  on one value. */
-export const STORYBOOK_CONFIG_PREFIX = '../../..'
-
 /**
- * Build `main.ts`'s `stories` globs from a path prefix relative to the
- * `.storybook` directory (e.g. `'../../..'` → repo root).
+ * Repo root, expressed the way a `.storybook` config has to name it: as a
+ * relative path from the config dir. Every host sits at `apps/<host>/.storybook`.
  */
-export function storyGlobs(prefix: string): string[] {
-  return STORY_ROOTS.map((root) => `${prefix}/${root}/${STORY_GLOB_SUFFIX}`)
-}
+export const REPO_ROOT_PREFIX = '../../..'

@@ -17,9 +17,9 @@ import {
   railPanelsSectionKnobs,
 } from '@o3/sanity/knobs'
 import { BUTTON_ICONS } from '@o3/ui'
-import { BLOCK_ARRAYS, SECTION_BLOCKS } from '@o3/sanity/schemas/registry'
+import { blockArraysFor, sectionBlocksFor } from '@o3/sanity/schemas/registry'
 
-import { buildSingletonRoute } from '@/lib/content-routes/build'
+import { buildSingletonRoute } from '@o3/content-runtime/routes'
 import { home } from '@/content/documents/page/entry'
 import {
   aSeededPage,
@@ -49,10 +49,13 @@ import {
 
 const route = buildSingletonRoute(home)
 
+/** This app's roster, taken the way `VisualEditing.tsx` takes it. */
+const blockArrays = blockArraysFor('o3')
+
 /** The site's own resolver, wired the way `VisualEditing.tsx` wires it. */
 const canvasComponents = createCanvasComponents({
   blockKnobs: BLOCK_KNOBS,
-  blockArrays: BLOCK_ARRAYS,
+  blockArrays,
 })
 
 const rendered = await renderRoute(route, {
@@ -131,8 +134,11 @@ describe('what the resolver attaches, and where', () => {
     const resolved = canvasComponents({ node: { path: 'sections[_key=="a"]' } } as never) as {
       props: { blockArrays: Record<string, readonly string[]> }
     }
-    expect(resolved.props.blockArrays).toBe(BLOCK_ARRAYS)
-    expect(resolved.props.blockArrays['page.sections']).toEqual([...SECTION_BLOCKS])
+    expect(resolved.props.blockArrays).toBe(blockArrays)
+    // O3'S ROSTER, not every registered block. The section tier is a core list
+    // plus per-brand extensions (ADR 0028), and this app's canvas offers the
+    // blocks this app can render — o3xo's `faqSection` is not among them.
+    expect(resolved.props.blockArrays['page.sections']).toEqual([...sectionBlocksFor('o3')])
   })
 })
 
@@ -602,8 +608,8 @@ describe('at most one menu open, and none until asked', () => {
  * THE INSERT MENU (#112) — "add a section above this one", against the real
  * schema's real member list.
  *
- * The claim under test is the derived one. `BLOCK_ARRAYS['page.sections']` is
- * `SECTION_BLOCKS`, the schema's own `of:` is built from the same entry, and
+ * The claim under test is the derived one. `blockArrays['page.sections']` is
+ * this brand's roster, the schema's own `of:` is built from the same entry, and
  * every block declares a placeholder — so the rows the menu draws and the
  * members the form offers are the same set by construction, and the assertions
  * below compare the menu against the registry rather than against a list
@@ -640,7 +646,7 @@ describe('what the knob menu can add beside the subject', () => {
       />,
     )
 
-  const hero = () => render('sections[_key=="h"]', BLOCK_ARRAYS['page.sections'])
+  const hero = () => render('sections[_key=="h"]', blockArrays['page.sections'])
 
   it('offers every section block the page array accepts, above and below', () => {
     const html = hero()
@@ -651,12 +657,12 @@ describe('what the knob menu can add beside the subject', () => {
     // The four beside them are what this hero already had — duplicate, remove,
     // and the two moves a first-of-two section can make.
     const rows = html.match(/data-testid="canvas-menu-item-action"/g) ?? []
-    expect(rows).toHaveLength(SECTION_BLOCKS.length * 2 + 4)
+    expect(rows).toHaveLength(sectionBlocksFor('o3').length * 2 + 4)
   })
 
   it('names each row with the block’s own title, not its type', () => {
     const html = hero()
-    for (const type of SECTION_BLOCKS) {
+    for (const type of sectionBlocksFor('o3')) {
       expect(html, type).toContain(`>${BLOCK_KNOBS[type]!.title}</button>`)
     }
     expect(html).not.toContain('heroSection<')
@@ -680,7 +686,7 @@ describe('what the knob menu can add beside the subject', () => {
     // The definition of done, asserted on the patch the row carries: adding a
     // section above the hero writes a `quoteSection` with the quote its
     // declaration says a new one starts with, and the surface its knob says.
-    const groups = model('sections[_key=="h"]', BLOCK_ARRAYS['page.sections']).insertActions
+    const groups = model('sections[_key=="h"]', blockArrays['page.sections']).insertActions
     const above = groups.find((group) => group.id === 'insert-before')!
     const quote = above.actions.find((action) => action.id === 'insert-before-quoteSection')!
     const op = quote.patches[0]!.op as { position: string; items: Record<string, unknown>[] }

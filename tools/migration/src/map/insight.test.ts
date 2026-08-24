@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import type { WpSeo, WpSiteSeo } from '../lib/yoast'
 import { buildPersonDirectory } from './person'
-import { mapInsight, type WpPerspective } from './insight'
+import { insightDoc, mapInsight, type WpPerspective } from './insight'
 
 const SITE: WpSiteSeo = {
   siteName: 'O3',
@@ -383,5 +383,47 @@ describe('mapInsight', () => {
       expect(result.ok).toBe(false)
       expect(result).not.toHaveProperty('doc')
     })
+  })
+})
+
+/**
+ * The gate both sources pass, and `verify` re-runs over the whole dataset.
+ *
+ * `publishedAt` is required of every insight, whatever produced it. o3xo.ai was
+ * the one source with nothing to give it — the field used to be exempt for a
+ * `framer:` document — and #218 closed that: its dates are synthesised from the
+ * sitemap position, so no source is exempt and an insight with no date is a
+ * failure again rather than a shape the gate has a hole for.
+ */
+describe('insightDoc', () => {
+  const doc = {
+    _id: 'insight-framer-a-migrated-article',
+    _type: 'insight' as const,
+    title: 'A migrated article',
+    slug: { _type: 'slug' as const, current: 'a-migrated-article' },
+    excerpt: 'Why this matters.',
+    categories: [],
+    publishedAt: '2026-08-01T12:00:00Z',
+    body: [{ _type: 'block' }],
+    migration: { locked: false, sourceId: 'framer:insight:KkV56cgmc' },
+  }
+
+  it('accepts a document from either source', () => {
+    expect(insightDoc.safeParse(doc).success).toBe(true)
+    expect(
+      insightDoc.safeParse({
+        ...doc,
+        _id: 'insight-wp-101',
+        migration: { locked: false, sourceId: 'wp:post:101' },
+      }).success,
+    ).toBe(true)
+  })
+
+  it('requires a date of an o3xo.ai insight too, now that it has one', () => {
+    const dateless: Record<string, unknown> = { ...doc }
+    delete dateless.publishedAt
+    const parsed = insightDoc.safeParse(dateless)
+    expect(parsed.success).toBe(false)
+    expect(JSON.stringify(parsed.error?.issues)).toContain('publishedAt')
   })
 })

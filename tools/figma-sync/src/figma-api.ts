@@ -59,14 +59,42 @@ export interface FigmaClient {
 
 type FetchLike = (url: string, init?: { headers?: Record<string, string> }) => Promise<Response>
 
-export function createFigmaClient(token: string, fetchImpl: FetchLike = fetch): FigmaClient {
+export interface FigmaClientOptions {
+  readonly fetchImpl?: FetchLike
+  /**
+   * How many times a 429 is re-asked before it becomes an error, and how long
+   * the first wait is (doubling after that). A brand whose manifest spreads
+   * over sixteen canvases makes sixteen probe calls back to back where O3's
+   * makes one, and Figma answers the tail of that burst with a rate limit
+   * rather than a failure (#242). Zero in tests: a retry there would only
+   * spend the wall clock proving the same throw.
+   */
+  readonly retries?: number
+  readonly retryDelayMs?: number
+}
+
+const wait = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms))
+
+export function createFigmaClient(
+  token: string,
+  { fetchImpl = fetch, retries = 4, retryDelayMs = 5_000 }: FigmaClientOptions = {},
+): FigmaClient {
   async function get<T>(path: string): Promise<T> {
-    const response = await fetchImpl(`${API_ROOT}${path}`, { headers: { 'X-Figma-Token': token } })
-    if (!response.ok) {
-      const body = (await response.text()).slice(0, 400)
-      throw new Error(`Figma API ${response.status} ${response.statusText} for ${path}\n${body}`)
+    for (let attempt = 0; ; attempt++) {
+      const response = await fetchImpl(`${API_ROOT}${path}`, {
+        headers: { 'X-Figma-Token': token },
+      })
+      if (response.ok) return (await response.json()) as T
+      // Only the rate limit is retried. Every other status is a fact about
+      // the request — a dead node, an expired token — and asking again just
+      // spends the wall clock on it.
+      if (response.status !== 429 || attempt >= retries) {
+        const body = (await response.text()).slice(0, 400)
+        throw new Error(`Figma API ${response.status} ${response.statusText} for ${path}\n${body}`)
+      }
+      const after = Number(response.headers.get('retry-after'))
+      await wait(Number.isFinite(after) && after > 0 ? after * 1000 : retryDelayMs * 2 ** attempt)
     }
-    return (await response.json()) as T
   }
 
   return {

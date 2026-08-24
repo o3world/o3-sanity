@@ -1,0 +1,503 @@
+{
+  "_id": "insight-framer-buffalo-construction-innovation-storytellers-podcast",
+  "_type": "insight",
+  "title": "How Buffalo Construction and O3XO are building better with AI: Innovation Storytellers Show recap",
+  "slug": {
+    "_type": "slug",
+    "current": "buffalo-construction-innovation-storytellers-podcast"
+  },
+  "excerpt": "A podcast recap covering practical AI adoption, cultural readiness, and what it actually takes to move from curiosity to working solutions in construction.",
+  "publishedAt": "2026-06-08T12:00:00Z",
+  "categories": [
+    {
+      "_type": "reference",
+      "_ref": "category-framer-perspectives",
+      "_key": "cat-perspectives"
+    }
+  ],
+  "featuredImage": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_srcUrl": "https://framerusercontent.com/images/dPGjtwAOhCSau4telzt0FtQMM4.png"
+    },
+    "alt": "Image of O3XO and Buffalo Construction and Innovation Storytellers Podcast"
+  },
+  "body": [
+    {
+      "_key": "k0003",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Most companies say they want to do something with AI. Very few can tell you what they actually did, what worked, and what they'd do differently.",
+          "_key": "k0004"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0005",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Mike Gadsby, Co-Founder and Chief Innovation Officer at O3XO, recently sat down with Brett Norton, President of Buffalo Construction, on Episode 253 of the Innovation Storytellers Show. Thanks to host Susan Lindner for creating the space for an honest discussion about what AI adoption actually looks like on the ground.",
+          "_key": "k0006"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0007",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "\n",
+          "_key": "k0008"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_type": "figure",
+      "image": {
+        "_type": "image",
+        "_srcUrl": "https://i.ytimg.com/vi_webp/HEB9rviCm0o/sddefault.webp"
+      },
+      "alt": "",
+      "_key": "k0009"
+    },
+    {
+      "_type": "embed",
+      "url": "https://www.youtube.com/embed/HEB9rviCm0o?si=R9O-HfkYxGs75xx5&iv_load_policy=3&rel=0&modestbranding=1&playsinline=1&autoplay=0",
+      "_key": "k0010"
+    },
+    {
+      "_key": "k0011",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The full conversation is worth a listen. Here are the themes that stood out most.",
+          "_key": "k0012"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0013",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "AI curious is not the same as AI ready",
+          "_key": "k0014"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0015",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Brett said it best. People were writing poems and teammate recognition notes. They were AI curious, but not fully AI aware. They were not in a position to connect the tools to solve actual business problems. And, sometimes they could not even define the problem clearly enough to know where AI would help.",
+          "_key": "k0016"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0017",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "That gap between curiosity and readiness is where most companies get stuck. Not because they lack enthusiasm, but because they lack a framework for deciding what to do first.",
+          "_key": "k0018"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0019",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Start with the people, not the technology",
+          "_key": "k0020"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0021",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Before anyone touched any tools, O3XO brought several stakeholders into a room. Not just senior leadership, but the people closest to the problems.",
+          "_key": "k0022"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0023",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Some walked in skeptical. Brett was honest about that. Some felt like they already knew how to do their job and didn't need anyone telling them otherwise. That honesty gave the team real friction points instead of polished ones.",
+          "_key": "k0024"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0025",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The workshop mapped the full project lifecycle, surfaced where work was breaking down, and co-created use case concepts with clear success criteria. The team prioritized together and owned the problems and solutions from the start, which is why adoption stuck later.",
+          "_key": "k0026"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0027",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Three solutions, real results",
+          "_key": "k0028"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0029",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "From that workshop, O3XO moved into proof of concepts and expanded from two to three working solutions: an estimator assistant that surfaces key requirements directly from Procore, a closeout automation system that tracks vendor documents and automates follow-ups, and an RFP content engine that cuts proposal effort in half.",
+          "_key": "k0030"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0031",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "All three run inside the tools Buffalo already uses. No new platforms. No new logins. The",
+          "_key": "k0032"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0000"
+          ],
+          "text": " full case study",
+          "_key": "k0033"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": " breaks down each solution and the results in detail.",
+          "_key": "k0034"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0000",
+          "_type": "link",
+          "href": "../case-studies/buffalo-construction"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0035",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Brett's take on the ROI was direct: \"I was expecting the ROI for our project next year, but we are going to immediately see that value now.\" Over all three projects, the team is seeing 2X improvement in additional revenue capacity. Not by adding headcount. By removing the friction that was slowing down the work people were already doing.",
+          "_key": "k0036"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0037",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Culture is the real differentiator",
+          "_key": "k0038"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0039",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Buffalo has continuous improvement as a core value. Within the first week of building proof of concepts, the internal leads assigned to each project were coming into the office fired up. That does not happen by accident. It happens when leadership makes it safe to challenge existing workflows and when people are part of the solution instead of having it handed to them.",
+          "_key": "k0040"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0041",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Cardinal knowledge is a multiplier",
+          "_key": "k0042"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0043",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "One of the most interesting outcomes Brett shared was how AI helped transfer what he called \"cardinal knowledge,\" the deep expertise that experienced professionals like their estimators carry around in their heads. By building that knowledge into the tools, newer teammates started functioning at a much higher level much faster. That is the democratization of knowledge in practice.",
+          "_key": "k0044"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0045",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The bigger picture",
+          "_key": "k0046"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0047",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Susan asked both guests: ",
+          "_key": "k0048"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "strong"
+          ],
+          "text": "what is the greatest innovation of all time?",
+          "_key": "k0049"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0050",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Brett went with fire. Not because of fire itself, but because of how it has been iterated on for 400,000 years, from the first lightning strike to plausible Mars travel.",
+          "_key": "k0051"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0052",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Mike went with the printing press. The moment knowledge could be shared at scale, everything changed. That is the parallel he sees with AI right now. Anyone with a ChatGPT or Claude account can access knowledge that used to be gated behind expensive degrees and exclusive networks. There are real risks around regulation, accuracy, and misuse. But the democratization of access is remarkable.",
+          "_key": "k0053"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0054",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Brett closed with something that stuck: a return to community and relationship. Connection equals productivity. Connection equals production. The best use of these tools is to bring people together, whether in business or in life.",
+          "_key": "k0055"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0056",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "That is the kind of thinking that makes this partnership work.",
+          "_key": "k0057"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0058",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "Listen to the full episode",
+          "_key": "k0059"
+        }
+      ],
+      "markDefs": [],
+      "_type": "block",
+      "style": "h3"
+    },
+    {
+      "_key": "k0060",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "The conversation covers more than fits here, including how Buffalo tells its AI story to clients, advice for companies just getting started, and why Brett believes every innovation starts in a garage.",
+          "_key": "k0061"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0001"
+          ],
+          "text": " Listen to Episode 253 of the Innovation Storytellers Show.",
+          "_key": "k0062"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0001",
+          "_type": "link",
+          "href": "https://innovationstorytellers.com/podcasts/o3xo-and-buffalo-construction/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    },
+    {
+      "_key": "k0063",
+      "children": [
+        {
+          "_type": "span",
+          "marks": [],
+          "text": "If your organization is sitting in that gap between AI curiosity and real adoption,",
+          "_key": "k0064"
+        },
+        {
+          "_type": "span",
+          "marks": [
+            "k0002"
+          ],
+          "text": " let's talk",
+          "_key": "k0065"
+        },
+        {
+          "_type": "span",
+          "marks": [],
+          "text": ".",
+          "_key": "k0066"
+        }
+      ],
+      "markDefs": [
+        {
+          "_key": "k0002",
+          "_type": "link",
+          "href": "../contact/"
+        }
+      ],
+      "_type": "block",
+      "style": "normal"
+    }
+  ],
+  "seo": {
+    "description": "A podcast recap covering how Buffalo Construction went from AI curious to three working solutions in under six months, with lessons for any company starting their AI journey"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:insight:DEI42br7p"
+  }
+}

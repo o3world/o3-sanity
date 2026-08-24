@@ -1,0 +1,121 @@
+{
+  "_id": "caseStudy-framer-buffalo-construction",
+  "_type": "caseStudy",
+  "title": "From “where do we start?” to AI across the project lifecycle in under six months",
+  "slug": {
+    "_type": "slug",
+    "current": "buffalo-construction"
+  },
+  "client": {
+    "_type": "reference",
+    "_ref": "client-framer-buffalo-construction"
+  },
+  "narrativeHeadline": "Buffalo Construction had the ambition and the executive support, but no clear path to AI adoption. Here’s how we helped them go from a workshop to three working AI solutions spanning estimating, closeout, and proposals.",
+  "stats": [
+    {
+      "_type": "stat",
+      "_key": "k0011",
+      "value": "2X",
+      "label": "Revenue capacity from 3 AI solutions in < 6 months"
+    }
+  ],
+  "heroMedia": {
+    "_type": "figure",
+    "image": {
+      "_type": "image",
+      "_srcUrl": "https://framerusercontent.com/images/XZAaYCnfLhIbvoeDAaPx4EOwxvQ.webp"
+    },
+    "alt": "Construction team reviewing architectural blueprints, representing AI-powered project closeout automation"
+  },
+  "story": [
+    {
+      "_type": "chapter",
+      "_key": "k0004",
+      "kicker": "Opportunity",
+      "title": "Strong ambition, no clear starting point",
+      "body": [
+        {
+          "_key": "k0000",
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Buffalo Construction has built a solid reputation delivering quality projects across the country, backed by almost three decades of project data and a tech stack spanning Procore, Sage, and SharePoint. Leadership was enthusiastic about AI’s potential to improve how they estimate, close out projects, and win new work. But like many construction companies, that enthusiasm was running ahead of a plan.",
+              "_key": "k0001"
+            }
+          ],
+          "markDefs": [],
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "_key": "k0002",
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "Teams across estimating, project management, and marketing each saw AI opportunities, but without a shared framework for evaluating them, the question was always the same: where do we start? Varying levels of AI fluency, siloed data, and uncertainty around ROI were holding the organization back. Buffalo didn’t just need a roadmap. They needed working tools their teams would actually adopt.",
+              "_key": "k0003"
+            }
+          ],
+          "markDefs": [],
+          "_type": "block",
+          "style": "normal"
+        }
+      ]
+    },
+    {
+      "_type": "chapter",
+      "_key": "k0009",
+      "kicker": "Solution",
+      "title": "Three AI solutions built on the systems Buffalo already uses, with more on the way",
+      "body": [
+        {
+          "_key": "k0005",
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "O3XO built three distinct AI tools, each targeting a specific workflow. An estimator assistant that interprets detailed Spec Documents and packages to surface key requirements directly from Procore. A closeout automation system that tracks vendor documents, detects billing readiness, and automates follow-ups across ~80 projects per year. And an RFP content engine that reuses core proposal content, summarizes past project experience, and organizes case studies and team bios to cut proposal effort in half. Each tool integrates with Buffalo’s existing Procore and Sage environment so adoption happens within existing workflows.",
+              "_key": "k0006"
+            }
+          ],
+          "markDefs": [],
+          "_type": "block",
+          "style": "normal"
+        },
+        {
+          "_key": "k0007",
+          "children": [
+            {
+              "_type": "span",
+              "marks": [],
+              "text": "O3XO led Buffalo through a structured AI strategy workshop with 12 stakeholders across estimating, accounting, project controls, and operations. Two cross-functional teams mapped the full project lifecycle, surfaced friction points, and co-created use case concepts with clear success criteria. From there, the team prioritized two POCs, moved directly into build, and expanded to a third. Now the work is evolving toward connecting these individual solutions into an interconnected system spanning the full project lifecycle, with smart human-in-the-loop checkpoints at every stage.",
+              "_key": "k0008"
+            }
+          ],
+          "markDefs": [],
+          "_type": "block",
+          "style": "normal"
+        }
+      ]
+    },
+    {
+      "_type": "quoteSection",
+      "_key": "k0010",
+      "surface": "bone",
+      "decoration": "molecule",
+      "quote": "I was expecting the ROI for our project next year, but we are going to immediately see that value now.",
+      "attribution": "Brett Norton, President, Buffalo Construction, Inc"
+    }
+  ],
+  "seo": {
+    "description": "See how Buffalo Construction went from AI ambition to three working solutions across estimating, closeout, and proposals in under six months"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:caseStudy:CGj9neZAD",
+    "provisional": true,
+    "provisionalNote": "Migrated from o3xo.ai with three authored card fields this model has no home for — the subject label, the card sentence and the card photograph — and with a client that has no logo, which Studio requires. All four are recoverable from the committed extract. Cleared by giving them fields or by recording the drop as permanent, and by supplying the client mark."
+  }
+}

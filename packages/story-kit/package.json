@@ -10,7 +10,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@o3/block-spec": "workspace:*"
+    "@o3/block-spec": "workspace:*",
+    "@o3/sanity": "workspace:*",
+    "vite-tsconfig-paths": "^6.1.1"
   },
   "devDependencies": {
     "@o3/typescript-config": "workspace:*",
@@ -19,7 +21,8 @@
     "@types/react": "^19.0.0",
     "react": "^19.2.7",
     "storybook": "^10.4.1",
-    "typescript": "^5.7.0"
+    "typescript": "^5.7.0",
+    "vite": "^7.0.0"
   },
   "peerDependencies": {
     "@storybook/nextjs-vite": "^10.0.0",
@@ -27,6 +30,8 @@
   },
   "exports": {
     ".": "./src/index.ts",
-    "./story-roots": "./src/storyRoots.ts"
+    "./story-roots": "./src/storyRoots.ts",
+    "./storybook-config": "./src/storybookConfig.ts",
+    "./storybook-preview": "./src/storybookPreview.ts"
   }
 }

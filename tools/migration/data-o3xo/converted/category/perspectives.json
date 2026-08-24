@@ -1,0 +1,13 @@
+{
+  "_id": "category-framer-perspectives",
+  "_type": "category",
+  "title": "Perspectives",
+  "slug": {
+    "_type": "slug",
+    "current": "perspectives"
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:category:perspectives"
+  }
+}

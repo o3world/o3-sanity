@@ -1,0 +1,229 @@
+{
+  "_meta": {
+    "type": "page"
+  },
+  "slug": "industries",
+  "path": "/industries",
+  "title": "AI solutions built for your industry",
+  "titleRendered": "Industry-Specific AI Strategy + Activation | O3XO",
+  "bands": [
+    {
+      "name": "Section1",
+      "lines": [
+        {
+          "tag": "h1",
+          "text": "AI solutions built for your industry",
+          "parts": [
+            "AI solutions built for your industry"
+          ]
+        },
+        {
+          "tag": "p",
+          "text": "Generic AI tools fail because they ignore your industry's workflows, compliance requirements, and operational realities. We've spent over two decades learning what actually works for your industry. Our industry-focused approach identifies use cases that drive real impact and integrates AI into your existing systems through proven, sector-tested strategies.",
+          "parts": [
+            "Generic AI tools fail because they ignore your industry's workflows, compliance requirements, and operational realities. We've spent over two decades learning what actually works for your industry. Our industry-focused approach identifies use cases that drive real impact and integrates AI into your existing systems through proven, sector-tested strategies."
+          ]
+        }
+      ],
+      "links": [],
+      "images": [
+        {
+          "url": "https://framerusercontent.com/images/ci8l47YZFE0MddhmnJ98lSNxs.png",
+          "alt": "",
+          "near": ""
+        }
+      ]
+    },
+    {
+      "name": "Section2",
+      "lines": [
+        {
+          "tag": "h2",
+          "text": "AI built for your business context",
+          "parts": [
+            "AI built for your business context"
+          ]
+        },
+        {
+          "tag": "p",
+          "text": "Construction",
+          "parts": [
+            "Construction"
+          ]
+        },
+        {
+          "tag": "p",
+          "text": "Win more profitable bids through intelligent estimating, eliminate cash flow bottlenecks with automated closeout workflows, and accelerate project delivery while reducing manual effort. Our solutions integrate seamlessly with Procore, Sage, and your existing project management systems to deliver value quickly.",
+          "parts": [
+            "Win more profitable bids through intelligent estimating, eliminate cash flow bottlenecks with automated closeout workflows, and accelerate project delivery while reducing manual effort. Our solutions integrate seamlessly with Procore, Sage, and your existing project management systems to deliver value quickly."
+          ]
+        },
+        {
+          "tag": "p",
+          "text": "Industrial Services",
+          "parts": [
+            "Industrial Services"
+          ]
+        },
+        {
+          "tag": "p",
+          "text": "Cut proposal response time by 60% with automated generation, preserve institutional knowledge through AI-powered training systems, and scale expertise across your operations. Our solutions integrate with your existing ERP, procurement, and operations systems, optimizing costs and ensuring safety without disrupting proven workflows.",
+          "parts": [
+            "Cut proposal response time by 60% with automated generation, preserve institutional knowledge through AI-powered training systems, and scale expertise across your operations. Our solutions integrate with your existing ERP, procurement, and operations systems, optimizing costs and ensuring safety without disrupting proven workflows."
+          ]
+        },
+        {
+          "tag": "p",
+          "text": "Life sciences",
+          "parts": [
+            "Life sciences"
+          ]
+        },
+        {
+          "tag": "p",
+          "text": "Identify high-converting prospects through predictive analytics, accelerate submissions with automated regulatory intelligence, and connect research to commercial success faster. Our solutions integrate with your CRM, trial management, and regulatory systems, compressing timelines and creating positive, measurable outcomes.",
+          "parts": [
+            "Identify high-converting prospects through predictive analytics, accelerate submissions with automated regulatory intelligence, and connect research to commercial success faster. Our solutions integrate with your CRM, trial management, and regulatory systems, compressing timelines and creating positive, measurable outcomes."
+          ]
+        },
+        {
+          "tag": "p",
+          "text": "Real estate",
+          "parts": [
+            "Real estate"
+          ]
+        },
+        {
+          "tag": "p",
+          "text": "Reduce leasing cycles with automated tenant qualification, eliminate manual reconciliation through intelligent cash application, and drive revenue growth while cutting operational overhead. Our solutions integrate with your property, tenant and accounting systems, delivering efficiency and improving lead generation.",
+          "parts": [
+            "Reduce leasing cycles with automated tenant qualification, eliminate manual reconciliation through intelligent cash application, and drive revenue growth while cutting operational overhead. Our solutions integrate with your property, tenant and accounting systems, delivering efficiency and improving lead generation."
+          ]
+        },
+        {
+          "tag": "p",
+          "text": "Finance + insurance",
+          "parts": [
+            "Finance + insurance"
+          ]
+        },
+        {
+          "tag": "p",
+          "text": "Process applications in minutes with automated underwriting, anticipate client needs through proactive insight generation, and accelerate growth while managing risk. Our solutions integrate with your core banking, claims, and CRM systems, improving customer experience without replacing proven processes.",
+          "parts": [
+            "Process applications in minutes with automated underwriting, anticipate client needs through proactive insight generation, and accelerate growth while managing risk. Our solutions integrate with your core banking, claims, and CRM systems, improving customer experience without replacing proven processes."
+          ]
+        },
+        {
+          "tag": "p",
+          "text": "Technology",
+          "parts": [
+            "Technology"
+          ]
+        },
+        {
+          "tag": "p",
+          "text": "Accelerate feature development with AI-powered code generation, identify ready-to-buy prospects through predictive lead scoring, and differentiate your products while scaling rapidly. Our solutions enhance your product capabilities and sales and marketing effectiveness, creating competitive advantages that capture market share.",
+          "parts": [
+            "Accelerate feature development with AI-powered code generation, identify ready-to-buy prospects through predictive lead scoring, and differentiate your products while scaling rapidly. Our solutions enhance your product capabilities and sales and marketing effectiveness, creating competitive advantages that capture market share."
+          ]
+        }
+      ],
+      "links": [
+        {
+          "label": "ConstructionWin more profitable bids through intelligent estimating, eliminate cash flow bottlenecks with automated closeout workflows, and accelerate project delivery while reducing manual effort. Our solutions integrate seamlessly with Procore, Sage, and your existing project management systems to deliver value quickly.",
+          "href": "/industries/construction"
+        },
+        {
+          "label": "Industrial ServicesCut proposal response time by 60% with automated generation, preserve institutional knowledge through AI-powered training systems, and scale expertise across your operations. Our solutions integrate with your existing ERP, procurement, and operations systems, optimizing costs and ensuring safety without disrupting proven workflows.",
+          "href": "/industries/industrial-services"
+        },
+        {
+          "label": "Life sciencesIdentify high-converting prospects through predictive analytics, accelerate submissions with automated regulatory intelligence, and connect research to commercial success faster. Our solutions integrate with your CRM, trial management, and regulatory systems, compressing timelines and creating positive, measurable outcomes.",
+          "href": "/industries/life-sciences"
+        },
+        {
+          "label": "Real estateReduce leasing cycles with automated tenant qualification, eliminate manual reconciliation through intelligent cash application, and drive revenue growth while cutting operational overhead. Our solutions integrate with your property, tenant and accounting systems, delivering efficiency and improving lead generation.",
+          "href": "/industries/technology"
+        },
+        {
+          "label": "Finance + insuranceProcess applications in minutes with automated underwriting, anticipate client needs through proactive insight generation, and accelerate growth while managing risk. Our solutions integrate with your core banking, claims, and CRM systems, improving customer experience without replacing proven processes.",
+          "href": "/industries/finance-insurance"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://framerusercontent.com/images/fpVXZr6ZISl6su4svDZl7S1Mk.jpg",
+          "alt": "Construction worker operating industrial equipment, representing AI-powered project management and workflow automation",
+          "near": "Construction"
+        },
+        {
+          "url": "https://framerusercontent.com/images/QiJBxxLNzYIYF0aKfvPrB0vfEcY.png",
+          "alt": "",
+          "near": "Industrial Services"
+        },
+        {
+          "url": "https://framerusercontent.com/images/zzV9hvqkyaMQnZNecWWJJlePZGA.jpg",
+          "alt": "Scientist analyzing samples under a microscope, representing AI-powered research and regulatory intelligence",
+          "near": "Life sciences"
+        },
+        {
+          "url": "https://framerusercontent.com/images/P03AgaQQvy0wo05eFIMAWj1whmc.jpg",
+          "alt": "Real estate professionals reviewing architectural model, representing AI-driven leasing and portfolio optimization",
+          "near": "Real estate"
+        },
+        {
+          "url": "https://framerusercontent.com/images/PJ287gXaNBwzCa2qa9t6n5I18rg.jpg",
+          "alt": "Financial professional reviewing documents, representing AI-powered underwriting and risk analysis",
+          "near": "Finance + insurance"
+        },
+        {
+          "url": "https://framerusercontent.com/images/MeplhX7zFPEhH4aoDLJA7IAJLk.jpg",
+          "alt": "Technology professional working on laptop, representing AI-driven product development and automation",
+          "near": "Technology"
+        }
+      ]
+    }
+  ],
+  "chrome": {
+    "title": "O3XO",
+    "footerTagline": "Transforming businesses through intelligent AI implementation.",
+    "legalName": "O3 World, LLC",
+    "copyrightNote": "",
+    "footerLinks": [
+      {
+        "label": "O3 World",
+        "href": "https://www.o3world.com/"
+      },
+      {
+        "label": "1682",
+        "href": "https://www.1682conference.com/"
+      }
+    ],
+    "legalLinks": [
+      {
+        "label": "Privacy policy",
+        "href": "https://www.o3world.com/privacy-policy/"
+      }
+    ],
+    "socialLinks": [
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/company/o3xo"
+      }
+    ],
+    "cta": {
+      "heading": "Stop guessing, start discovering",
+      "body": "Identify the AI use cases that matter most for your business.",
+      "button": {
+        "label": "Get started: Schedule a consultation",
+        "href": "/contact"
+      }
+    }
+  },
+  "seo": {
+    "canonicalRendered": "https://www.o3xo.ai/industries/",
+    "descriptionOverride": "AI solutions built for your industry. We deliver focused AI implementation for construction, industrial services, life sciences, real estate, finance, and technology.",
+    "ogImage": "https://framerusercontent.com/assets/GNEb9AoIISnSN2rREA1AbhZBGk.png"
+  }
+}

@@ -20,11 +20,21 @@ import {
   storiesFor,
   type Affected,
 } from './affected'
+import { forgetErrorResponses, forgetUnreachable, type AssetCache } from './assets'
 import { captureAll, captureKey, type Shot, type Viewport } from './capture'
 import { compare, type Comparison } from './compare'
 import { changedFiles, ensureBaseCheckout, git, repoRoot, resolveBase, shortSha } from './git'
 import { writeReport } from './report'
-import { buildStorybook, readIndex, readStats, serve, type StoryEntry } from './storybook'
+import {
+  BRANDS,
+  buildStorybook,
+  hostDir,
+  isBrand,
+  readIndex,
+  readStats,
+  serve,
+  type StoryEntry,
+} from './storybook'
 
 /** A story tagged this way is never captured. For canvas, video, and anything
  *  else whose pixels are its own business. */
@@ -39,12 +49,14 @@ const HELP = `
 pnpm vr — visual regression for the stories your change touches
 
   pnpm vr                          compare against the merge base with main
+  pnpm vr --brand o3xo             the o3xo Storybook host, not o3's
   pnpm vr --base NickO3/toolbar    compare against another ref
   pnpm vr --all                    every story, not just the affected ones
   pnpm vr --story hero             these stories, whatever the diff says (repeatable)
   pnpm vr --list                   print what would be compared, then stop
 
 Options
+  --brand <o3|o3xo>     which Storybook host to build and capture (default: o3)
   --base <ref>          baseline ref (default: main)
   --all                 ignore the change graph, take every story
   --story <substring>   compare stories matching id or title, repeatable; implies --all scope
@@ -95,6 +107,7 @@ async function withServer<T>(dir: string, run: (url: string) => Promise<T>): Pro
 async function main(): Promise<void> {
   const { values } = parseArgs({
     options: {
+      brand: { type: 'string', default: 'o3' },
       base: { type: 'string', default: 'main' },
       all: { type: 'boolean', default: false },
       story: { type: 'string', multiple: true, default: [] },
@@ -119,21 +132,30 @@ async function main(): Promise<void> {
     return
   }
 
+  if (!isBrand(values.brand)) {
+    throw new Error(`unknown brand ${values.brand} — expected one of ${BRANDS.join(', ')}`)
+  }
+  const brand = values.brand
+  const host = hostDir(brand)
+
   const root = repoRoot()
-  const cache = path.join(root, '.vr')
+  // Per brand, because a run of one host must not read the other's build,
+  // screenshots or report. `assets/` and `base/` stay above it: remote bytes
+  // and the baseline checkout are the same whichever host renders them.
+  const cache = path.join(root, '.vr', brand)
   const viewports = values.viewports ? parseViewports(values.viewports) : DEFAULT_VIEWPORTS
   const base = resolveBase(root, values.base)
   const baseShort = shortSha(root, base.sha)
   const head = git(['rev-parse', '--abbrev-ref', 'HEAD'], root)
 
-  log(`\nvisual regression — ${head} vs ${base.ref} (${baseShort})`)
+  log(`\nvisual regression — ${brand} — ${head} vs ${base.ref} (${baseShort})`)
 
   // ── this checkout ─────────────────────────────────────────────────────────
   // Built first, and unconditionally: it is both the thing under test and the
   // module graph that decides which stories are worth comparing.
   const currentBuild = path.join(cache, 'build', 'current')
-  log('  building Storybook for the working tree')
-  await buildStorybook(root, currentBuild, values.verbose)
+  log(`  building ${host} for the working tree`)
+  await buildStorybook(root, brand, currentBuild, values.verbose)
 
   const index = readIndex(currentBuild)
   // Naming stories explicitly is its own scope: `--story hero` means "compare
@@ -141,7 +163,7 @@ async function main(): Promise<void> {
   const affected: Affected =
     values.all || values.story.length > 0
       ? { storyFiles: [], everything: true }
-      : affectedStoryFiles(readStats(currentBuild), changedFiles(root, base.sha))
+      : affectedStoryFiles(readStats(currentBuild), changedFiles(root, base.sha), host)
 
   // Applied to the current index and to the baseline's deleted stories alike,
   // so `--story hero` cannot come back with someone else's removed carousel.
@@ -154,7 +176,7 @@ async function main(): Promise<void> {
           entry.id.toLowerCase().includes(needle) || entry.title.toLowerCase().includes(needle),
       ))
 
-  const stories = storiesFor(index, affected).filter(wanted)
+  const stories = storiesFor(index, affected, host).filter(wanted)
 
   if (stories.length === 0) {
     log(
@@ -172,7 +194,7 @@ async function main(): Promise<void> {
   )
   if (values.list) {
     for (const entry of [...stories].sort((a, b) => a.id.localeCompare(b.id))) {
-      log(`    ${entry.id}  ${path.relative(root, path.join(root, entryPath(entry)))}`)
+      log(`    ${entry.id}  ${path.relative(root, path.join(root, entryPath(entry, host)))}`)
     }
     return
   }
@@ -180,16 +202,22 @@ async function main(): Promise<void> {
   // ── the baseline ──────────────────────────────────────────────────────────
   // A second checkout, kept and reused. Screenshots are cached per commit, so
   // the expensive part happens once per baseline rather than once per run.
-  const baseDir = path.join(cache, 'base')
+  const baseDir = path.join(root, '.vr', 'base')
   ensureBaseCheckout(root, base.sha, baseDir, (message) => log(`  ${message}`))
 
+  // A host younger than the baseline commit has nothing to render there, and
+  // `storybook build` in a directory that does not exist is an obscure failure
+  // rather than a finding. An empty baseline index says the honest thing: every
+  // story on this host is `added`.
   const baseBuild = path.join(cache, 'build', `base-${baseShort}`)
-  if (!fs.existsSync(path.join(baseBuild, 'index.json'))) {
-    log(`  building Storybook for ${baseShort}`)
-    await buildStorybook(baseDir, baseBuild, values.verbose)
+  const baseHasHost = fs.existsSync(path.join(baseDir, host))
+  if (baseHasHost && !fs.existsSync(path.join(baseBuild, 'index.json'))) {
+    log(`  building ${host} for ${baseShort}`)
+    await buildStorybook(baseDir, brand, baseBuild, values.verbose)
   }
+  if (!baseHasHost) log(`  ${baseShort} has no ${host} — every story reads as added`)
 
-  const baselineIndex = readIndex(baseBuild)
+  const baselineIndex = baseHasHost ? readIndex(baseBuild) : []
   const baselineIds = new Set(baselineIndex.map((entry) => entry.id))
   // Stories the baseline does not have are new; asking its Storybook for them
   // would only produce a "story not found" error display to screenshot.
@@ -208,6 +236,7 @@ async function main(): Promise<void> {
     new Set(index.map((entry) => entry.id)),
     touched,
     affected,
+    host,
   ).filter(wanted)
 
   // Keyed by capture settings as well as by commit — see `captureKey`.
@@ -218,6 +247,17 @@ async function main(): Promise<void> {
   )
   if (values.refresh) fs.rmSync(shotsDir, { recursive: true, force: true })
 
+  // Both sides replay their remote assets out of one cache, which is what makes
+  // "the photograph loaded on one side only" impossible (#226).
+  const assetDir = path.join(root, '.vr', 'assets')
+  // A refusal the server gave us is re-asked every run: it costs one
+  // round-trip, and a URL fixed since yesterday should not need a flag to be
+  // noticed. A timeout costs a minute of attempts to rediscover, so it waits
+  // for `--refresh`.
+  forgetErrorResponses(assetDir)
+  if (values.refresh) forgetUnreachable(assetDir)
+  const assetCache: AssetCache = { unreachable: new Set(), fetched: 0 }
+
   const baselineShots = await withServer(baseBuild, (url) =>
     captureAll({
       baseUrl: url,
@@ -227,6 +267,8 @@ async function main(): Promise<void> {
       settleMs: Number(values.settle),
       concurrency: Number(values.concurrency),
       reuseExisting: true,
+      assetDir,
+      assetCache,
       onProgress: progress(`baseline ${baseShort}`),
     }),
   )
@@ -243,6 +285,8 @@ async function main(): Promise<void> {
       settleMs: Number(values.settle),
       concurrency: Number(values.concurrency),
       reuseExisting: false,
+      assetDir,
+      assetCache,
       onProgress: progress('current  '),
     }),
   )
@@ -271,6 +315,7 @@ async function main(): Promise<void> {
 
   const reportDir = path.join(cache, 'report')
   const report = writeReport(reportDir, comparisons, {
+    brand,
     baseRef: base.ref,
     baseSha: baseShort,
     head,
@@ -284,6 +329,15 @@ async function main(): Promise<void> {
     .map((verdict) => `${count(verdict)} ${verdict}`)
     .join(' · ')
   log(`\n  ${summary}`)
+  if (assetCache.unreachable.size > 0) {
+    // Both sides served the same failure, so this is not a false diff — but a
+    // story whose photograph is missing on both sides is still worth saying out
+    // loud, because the report will not look like the site.
+    log(
+      `  ${assetCache.unreachable.size} remote assets could not be fetched; served as failed. ` +
+        `The next run re-asks the ones a server refused; --refresh retries the ones that timed out.`,
+    )
+  }
   log(`  ${path.relative(root, report)}\n`)
 
   if (values.open && (count('changed') > 0 || count('added') > 0 || count('error') > 0)) {

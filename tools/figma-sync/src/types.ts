@@ -42,8 +42,17 @@ export interface IgnoredNode {
 
 export interface TrackedManifest {
   readonly fileKey: string
-  /** The Design Concept section — what the untracked-frame probe reads (#79). */
-  readonly sectionNodeId: string
+  /**
+   * The nodes the untracked-node probe lists the direct children of (#79) —
+   * O3's Design Concept section, or the O3XO kit's watched canvases (#242).
+   */
+  readonly sectionNodeIds: readonly string[]
+  /**
+   * Child node types the probe reports. A site file's sections hold page
+   * frames; a UI kit's canvases hold library nodes and the frames beside them
+   * are spec sheets. Defaults to `["FRAME"]`.
+   */
+  readonly probeNodeTypes?: readonly string[]
   readonly entries: readonly TrackedNode[]
   /** Section residents that are neither canonical nor news. See `probe.ts`. */
   readonly ignoredNodeIds?: readonly IgnoredNode[]

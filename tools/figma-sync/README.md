@@ -1,9 +1,10 @@
 # @o3/figma-sync
 
-Change detection against the design source of record (#78, #79, #81). One command:
+Change detection against the design source of record (#78, #79, #81). One command, one brand:
 
 ```sh
-pnpm figma:sync
+pnpm figma:sync                # O3DX: Visual exploration — o3world.com's design
+pnpm figma:sync --brand o3xo   # O3XO: UI kit — o3xo.ai's
 ```
 
 It answers three questions — **which canonical page frames changed since the last sync, which
@@ -33,6 +34,30 @@ this account (`docs/agents/figma.md`).
 
 **A sync is a commit.** `data/baseline.json` is what makes the next run's short-circuit possible, so
 commit it along with the report; git carries the history, the files only ever describe the last run.
+
+## Two brands, one pipeline (#242)
+
+A brand is a set of committed files and nothing else — `brands.ts` is the whole of it. Everything
+above happens the same way whichever set the run was asked for.
+
+| Brand  | Watches                  | Files                                                                            |
+| ------ | ------------------------ | -------------------------------------------------------------------------------- |
+| `o3`   | `RvraLJaZ0zWm8UaD5AJf43` | `tracked-nodes.json`, `asset-manifest.json`, `baseline.json`, `report.{json,md}` |
+| `o3xo` | `G6M2gu5qKFvhGxwj3W365b` | `tracked-nodes-o3xo.json`, `baseline-o3xo.json`, `report-o3xo.{json,md}`         |
+
+The default brand keeps the unsuffixed filenames it has always had, so an `o3` run's diff is the
+same three paths it was before a second brand existed.
+
+**Only O3 has an asset manifest.** `tools/migration/data/seed/assets/` is O3's seed content (#80),
+so an O3XO run has no assets to re-export: the asset stage plans nothing, calls nothing and writes
+nothing, which is the same path an O3 run takes when no source node moved. There is no second
+manifest of nothing to keep in step.
+
+**The 429 is retried; nothing else is.** O3's manifest probes one section, so its run makes one
+`depth=1` call. The O3XO kit spreads its work over sixteen canvases and makes sixteen back to back,
+and Figma answers the tail of that burst with a rate limit rather than a failure. `figma-api.ts`
+waits and re-asks, honouring `Retry-After`. Every other status is a fact about the request — a dead
+node, an expired token — and asking again would only spend the wall clock on it.
 
 **A short-circuited run writes nothing at all** — not the report, not the baseline, not a fresh
 `ranAt`. There is nothing to commit because nothing was learned, and rewriting the report with a new
@@ -66,7 +91,8 @@ machine-readable half.
 | Field              | Meaning                                                                       |
 | ------------------ | ----------------------------------------------------------------------------- |
 | `fileKey`          | `RvraLJaZ0zWm8UaD5AJf43` — _O3DX: Visual exploration_                         |
-| `sectionNodeId`    | `1632:1510`, the Design Concept section — what the new-frame probe reads      |
+| `sectionNodeIds`   | `["1632:1510"]`, the Design Concept section — what the probe reads            |
+| `probeNodeTypes`   | Optional; what counts as news in this file. Defaults to `["FRAME"]`           |
 | `entries[]`        | `{ nodeId, kind, name, figmaName?, route?, variant?, codeComponent?, note? }` |
 | `ignoredNodeIds[]` | `{ nodeId, name?, note }` — section residents the probe must stay quiet about |
 
@@ -97,6 +123,32 @@ every page frame that instances it.
   uses it — shows up at all.
 - Two entries are bare `COMPONENT`s, not sets (`NavBar` `1710:2271`, `Footer` `1280:1885`). They
   ride in the same lane: `kind: "componentSet"` means "a library node, not a page".
+
+## `data/tracked-nodes-o3xo.json` — the O3XO kit (#242)
+
+Same file, same rules, one file key on: `G6M2gu5qKFvhGxwj3W365b`, _O3XO: UI kit_. It is the
+machine-readable half of [`docs/figma-components-o3xo.md`](../../docs/figma-components-o3xo.md), and
+`manifest-o3xo.test.ts` enforces the same invariants over it — a `:`-separated id, a
+`codeComponent` stated out loud for every node including the `null` ones, a file that exists behind
+every path, a note behind every `null`, and a reason behind every ignored id.
+
+Three things differ, and all three follow from the file being a **kit** rather than a site.
+
+- **No page frames.** Every entry is `kind: "componentSet"`, band layouts included, because that
+  lane means "a library node, not a page" and this file designs no pages. An O3XO report's
+  `changedFrames` is therefore always empty and everything lands in `changedComponentSets`.
+- **Sixteen sections, not one.** The kit spreads its work over eleven Website Components canvases,
+  four Styles canvases and the Layouts canvas that carries the thirteen page bands. `sectionNodeIds`
+  lists all sixteen and the probe reads each one.
+- **The probe watches library nodes.** `probeNodeTypes` is
+  `["FRAME", "COMPONENT", "COMPONENT_SET", "SECTION"]`, because a new component is a kit's news the
+  way a new page frame is a site's — and the frames beside them are spec sheets and bands, which are
+  worth triaging too.
+
+Two nodes are cited by the component map and deliberately **not** hashed, both on the ignore list
+with their reason: `Slide Card Components` (`4438:12632`) and `Imagery` (`4405:6311`) are sections
+of several thousand pixels a side holding deck slides and the pattern-raster library, neither of
+which any site renders.
 
 ## `data/asset-manifest.json` — where every seed asset came from
 
@@ -368,8 +420,9 @@ reconciled yet). Neither participates in the short-circuit check.
 
 Hashing answers "did anything we watch change?". It cannot answer "is there design work we are not
 watching at all?", and that gap is how a brand-new page frame sits in the file for a month with
-nobody noticing. So every non-short-circuited run lists the **direct children** of the Design
-Concept section (one `depth=1` call) and reports the `FRAME`s the manifest has never heard of.
+nobody noticing. So every non-short-circuited run lists the **direct children** of each watched
+section (one `depth=1` call apiece) and reports the nodes the manifest has never heard of — `FRAME`s
+in O3's file, library nodes as well in the O3XO kit's (`probeNodeTypes`).
 
 **It surfaces; it never promotes.** The file holds two generations of the same site
 (`docs/agents/figma.md`), so "a frame exists in the section" and "a frame is canonical" are
@@ -387,9 +440,9 @@ Leaving it open is also a position — the report simply keeps asking. That is t
 work in progress that nobody has ruled on yet.
 
 Two rules keep the list honest: an ignored id may never also be a tracked id, and every ignored id
-carries its reason (`manifest.test.ts` enforces both). Non-`FRAME` children are skipped by type —
-the canonical `NavBar` component sits loose in that section — and so are nested frames: only direct
-children are considered, or every hero in the file would read as new.
+carries its reason (`manifest.test.ts` enforces both). Children of a type the manifest did not ask
+for are skipped — O3's section holds the canonical `NavBar` component loose in it — and so are
+nested frames: only direct children are considered, or every hero in the file would read as new.
 
 ## Normalization — the correctness-critical seam
 

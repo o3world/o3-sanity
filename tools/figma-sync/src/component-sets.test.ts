@@ -30,7 +30,7 @@ const FRAME = '1680:2134'
 
 const manifest: TrackedManifest = {
   fileKey: 'RvraLJaZ0zWm8UaD5AJf43',
-  sectionNodeId: '1632:1510',
+  sectionNodeIds: ['1632:1510'],
   entries: [
     {
       nodeId: FRAME,

@@ -110,20 +110,37 @@ export function createKeyGenerator(): () => string {
 
 /**
  * Deterministic HTML → bodyText Portable Text (ADR 0002). Images become
- * `figure` blocks carrying a `_wpSrc` marker the loader resolves to an asset
- * ref at upload time; iframes become `embed`. Unknown embeds/shortcodes are
- * reported as issues so nothing is silently dropped.
+ * `figure` blocks carrying a URL marker the loader resolves to an asset ref at
+ * upload time; iframes become `embed`. Unknown embeds/shortcodes are reported
+ * as issues so nothing is silently dropped.
+ *
+ * `source` carries the two things that differ per extract source: the image
+ * marker (`map/types.ts`) and how a URL on that host is reduced to the identity
+ * of its full-size original. Everything else is shared, because the body of an
+ * article is HTML wherever it was authored and a second copy of this
+ * deserializer is how the two sources would drift.
  */
+export interface HtmlImageSource {
+  readonly marker: '_wpSrc' | '_srcUrl'
+  readonly normalizeUrl: (url: string) => string
+}
+
+const WORDPRESS_IMAGES: HtmlImageSource = {
+  marker: '_wpSrc',
+  normalizeUrl: normalizeUploadUrl,
+}
+
 export function convertHtml(
   html: string,
   issues: ConversionIssue[],
   keyGenerator: () => string = createKeyGenerator(),
   notes: ConversionIssue[] = [],
+  source: HtmlImageSource = WORDPRESS_IMAGES,
 ) {
-  const source = stripDeadShortcodes(stripEmbeddedForms(html, notes), notes)
-  const shortcode = source.match(SHORTCODE)
+  const cleaned = stripDeadShortcodes(stripEmbeddedForms(html, notes), notes)
+  const shortcode = cleaned.match(SHORTCODE)
   if (shortcode) issues.push({ element: 'shortcode', detail: shortcode[0] })
-  return htmlToBlocks(source, bodyTextType, {
+  return htmlToBlocks(cleaned, bodyTextType, {
     keyGenerator,
     parseHtml: (h) => new JSDOM(h).window.document,
     rules: [
@@ -135,7 +152,7 @@ export function convertHtml(
             if (!src) return undefined
             return block({
               _type: 'figure',
-              image: { _type: 'image', _wpSrc: normalizeUploadUrl(src) },
+              image: { _type: 'image', [source.marker]: source.normalizeUrl(src) },
               alt: node.getAttribute('alt') ?? '',
             })
           }

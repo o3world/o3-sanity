@@ -1,0 +1,11 @@
+{
+  "_id": "client-framer-fortune-500-insurance-provider",
+  "_type": "client",
+  "name": "Fortune 500 insurance provider",
+  "migration": {
+    "locked": false,
+    "sourceId": "framer:client:fortune-500-insurance-provider",
+    "provisional": true,
+    "provisionalNote": "Migrated from o3xo.ai with no logo: the site publishes no client mark, on the case-study cards or anywhere else, and `client.logo` is required in Studio. Cleared by supplying the mark."
+  }
+}

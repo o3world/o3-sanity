@@ -1,0 +1,12 @@
+{
+  "extends": "@o3/typescript-config/base.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "types": ["node"],
+    "resolveJsonModule": true,
+    "noEmit": true
+  },
+  "include": ["src", "data"],
+  "exclude": ["node_modules"]
+}
