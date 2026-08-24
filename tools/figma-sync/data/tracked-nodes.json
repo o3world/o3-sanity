@@ -287,6 +287,14 @@
       "note": "The insight band on Home and the insight index: Property 1 = Default (`2134:1302`, 1440×866) | Mobile (`2204:1145`, 402×1372), bone, 48px gap. Its axis is the unnamed `Property 1` where the other two page sets use `Device`; the values still read Desktop/Mobile, so it is one axis, not a second vocabulary. `CarouselTrack` already reads the mobile variant. Tracked from 2026-08-16."
     },
     {
+      "nodeId": "2089:4169",
+      "kind": "componentSet",
+      "name": "Case Study Card",
+      "figmaName": "Case Study Card",
+      "codeComponent": "apps/web/src/components/cards/CaseStudyCard.tsx#CaseStudyCard",
+      "note": "The case-study card as a set at last: 1248 × 550, padding 64, a 560 text column beside 560 of deadspace, a 180 × 80 logo holder, stat row and white button. The /work index instances it three times (`2107:1094`–`1096`) and the case-study detail's next-project band once (`2250:1564`). Its axis — Ironman | Vertex | Caron — is which client the demo shows, so it maps to no `cva` key. The gen-1 sets `264:573` / `1393:3025` never became canonical; this one did. Tracked from 2026-08-24 (#302); internals read from renders and geometry while the node-tree endpoints were rate-limited — #314 owns the re-read that confirms them, and the baseline hash this set does not yet have."
+    },
+    {
       "nodeId": "2960:7557",
       "kind": "pageFrame",
       "name": "Contact",

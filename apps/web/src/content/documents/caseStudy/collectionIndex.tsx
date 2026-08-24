@@ -19,7 +19,7 @@ function CaseStudyIndexRenderer({ pagination, ...rest }: Props) {
  * The /work index — #43. Same shape as `insightIndex`: no backing
  * document, `{items, total}` from the query, static metadata.
  *
- * **Nine per page**, not twelve. The cards are full-width 1248 × 556 bands
+ * **Nine per page**, not twelve. The cards are full-width 1248 × 550 bands
  * rather than a three-up grid, so a page of twelve is roughly 7000px of
  * scrolling. Nine is three screens' worth at the frame's card height.
  */

@@ -20,13 +20,14 @@ function pageHref(page: number): string {
  *
  * ```
  * hero    1634:1181   ink-warm band, eyebrow + 48px headline + 24px standfirst
- * grid    1634:1186   white, 96px vertical, 64px gap, 1248 × 556 cards
+ * grid    1634:1186   white, 96px vertical, 48px gap, 1248 × 550 cards
  * ```
  *
- * The cards are the **same component** the homepage showcase renders, bound
- * there through this app's card table — the frame draws identical geometry in
- * both places (`1925:5642` against `1883:3555`), so a second card here would
- * be a copy waiting to drift.
+ * The grid instances the `Case Study Card` set (`2107:1094`–`1096`), and the
+ * card follows the set. The homepage showcase renders the **same component**,
+ * bound through this app's card table; its own band still draws cards as
+ * frames (`1683:2661`), so it inherits the set's geometry until those frames
+ * are read.
  *
  * ## Why a route and not a page document
  *
@@ -59,11 +60,11 @@ export function CaseStudyIndexView({ items, pagination }: CaseStudyIndexViewProp
       />
 
       <div className="px-gutter py-band-sm bg-white">
-        {/* Gap 24 at 402 (`1925:5733`), 64 at 1440 (`1634:1186`). */}
-        <ul className="max-w-section mx-auto flex flex-col gap-6 lg:gap-16">
+        {/* Gap 48 at both widths — `2107:1094`–`1096`, and `2975:8428` at 402. */}
+        <ul className="max-w-section mx-auto flex flex-col gap-12">
           {(items ?? []).map((item, index) => (
             <li key={item._id}>
-              {/* The first card's photograph is 1248 × 556 in the first screen
+              {/* The first card's photograph is 1248 × 550 in the first screen
                   of the index — the route's LCP element, and the only image on
                   it that is preloaded. */}
               <CaseStudyCard {...item} priority={index === 0} />

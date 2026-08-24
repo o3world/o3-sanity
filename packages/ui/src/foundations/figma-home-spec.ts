@@ -237,8 +237,8 @@ export const gradients: readonly GradientSpec[] = [
     token: '--gradient-card-scrim-stacked',
     value:
       'linear-gradient(180deg, rgba(3, 3, 3, 0.7) 0px, rgba(3, 3, 3, 0.3) 110px, rgba(3, 3, 3, 0.3) calc(100% - 340px), rgba(3, 3, 3, 0.72) calc(100% - 150px), rgba(3, 3, 3, 0.88) 100%)',
-    role: 'The same scrim on the stacked card, where the copy spans the width. Weighted to the logo and the floor rather than flat, and stopped in px because the card is a 362 floor that grows.',
-    nodeId: '1925:5734',
+    role: 'The same scrim on the stacked card, where the copy spans the width. Weighted to the logo and the floor rather than flat, and stopped in px because the card is a 550 floor that grows.',
+    nodeId: '2975:8428',
   },
   {
     name: 'card-veil',

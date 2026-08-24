@@ -13,20 +13,22 @@ function caseEyebrow(card: Pick<CaseStudyCardData, 'industries' | 'industryDetai
 }
 
 /**
- * O3's case-study card, built to the Home frame's card (`1883:3555`) — #42.
- * The **same geometry** carries the Work index grid (#43), which is why it
- * lives on the card rather than inside either section.
+ * O3's case-study card, built to the `Case Study Card` set (`2089:4169`) — the
+ * one the /work index (`2107:1094`–`1096`) and the next-project band
+ * (`2250:1564`) both instance. Its variant axis is which client the demo shows,
+ * so it maps to no `cva` key.
  *
  * App-local rather than shared: the kit's `Case Study Cards` set (`4404:3072`)
  * is a different composition, not a variant of this one, so each app draws its
  * own over the shared `CaseStudyCardData` (`APP_FIRST_RENDERERS`).
  *
  * ```
- * 1248 × 556        padding 72px 72px 88px, content pinned via space-between
+ * 1248 × 550        padding 64, content pinned via space-between
  *   background      the hero image, cover
  *   scrim           --gradient-card-scrim — 90deg, 0.8 ink → 0 by 84%
- *   top             the client logo, 185px wide, knocked out WHITE (1883:3556)
- *   bottom  gap 24  eyebrow 16px + narrative 28px in a 472px measure
+ *   top             the client logo in a 180 × 80 holder, knocked out WHITE
+ *   bottom  gap 24  eyebrow 16px + narrative 28px in a 560px measure — the
+ *                   content row is 560 text beside 560 of deadspace
  *                   stat 48px beside its label at 65% white, 24px apart
  *                   Button / Solid Size=Base, white fill
  * ```
@@ -56,11 +58,10 @@ export function CaseStudyCard(
   return (
     <Link
       href={hrefForDoc({ _type, slug })}
-      // 362 square at 402 with 32px padding (`1925:5734`); 1248 × 556 with
-      // `72px 72px 88px` at 1440 (`1883:3555`). Both are FLOORS, not fixed
-      // heights: the frame's demo narrative is two lines and a real one runs
-      // to five, and a hard 362 clips the client logo off the top rather than
-      // letting the card grow.
+      // 550 tall at both widths — 1248 wide at 1440, 362 at 402 with 32px
+      // padding (`2975:8428`). A FLOOR, not a fixed height: the set's demo
+      // narrative is three lines and a real one runs to five, and the /work
+      // index's own first instance is already 592 for that reason.
       //
       // `gap-6` is the floor `justify-between` doesn't give you. Once the copy
       // fills the card there is no free space left to distribute, and the
@@ -69,7 +70,7 @@ export function CaseStudyCard(
       // gap costs nothing on a card that still has slack (space-between hands
       // out the surplus either way) and holds the two groups apart on one that
       // doesn't.
-      className="rounded-card group relative isolate flex min-h-[362px] flex-col justify-between gap-6 overflow-hidden p-8 text-white lg:min-h-[556px] lg:p-[72px] lg:pb-[88px]"
+      className="rounded-card group relative isolate flex min-h-[550px] flex-col justify-between gap-6 overflow-hidden p-8 text-white lg:p-16"
     >
       <div className="absolute inset-0 -z-20">
         <SanityImage
@@ -91,11 +92,11 @@ export function CaseStudyCard(
       </div>
       {/*
        * Two different treatments, both read rather than derived. At 1440 the
-       * card is 1248 × 556 and the copy occupies a left column, so the frame
-       * holds it legible with the 90° `--gradient-card-scrim` (`1883:3555`).
-       * At 402 the card is a **362 square** and the copy spans it, so a
-       * horizontal scrim would leave the end of every line on open
-       * photograph — `1925:5734` answers that with a flat wash over the image.
+       * card is 1248 × 550 and the copy occupies the left 560 of it, so the
+       * set holds it legible with the 90° `--gradient-card-scrim`
+       * (`2089:4169`). At 402 the card is 362 × 550 and the copy spans it, so
+       * a horizontal scrim would leave the end of every line on open
+       * photograph — `2975:8428` answers that with a flat wash over the image.
        *
        * This is the responsive contract working as ADR 0006 describes it: the
        * frames are endpoints, and here they differ in kind, not in degree.
@@ -119,8 +120,8 @@ export function CaseStudyCard(
         <LogoKnockout
           source={client.logo}
           alt={client.name}
-          width={185}
-          height={40}
+          width={180}
+          height={80}
           className="drop-shadow-[0_1px_10px_rgba(3,3,3,0.55)]"
         />
       ) : (
@@ -129,7 +130,13 @@ export function CaseStudyCard(
         </span>
       )}
 
-      <div className="flex flex-col items-start gap-6">
+      {/*
+       * The set's Content row is 560 of text beside 560 of deadspace
+       * (`2089:4169`), so the measure belongs to the whole column — eyebrow,
+       * narrative and stat line up on it. Below 1120 + padding the column is
+       * simply the card's width.
+       */}
+      <div className="flex max-w-[560px] flex-col items-start gap-6">
         {/*
          * Targeted insurance in place of blanket ink. The scrim is sized for
          * the photography these cards actually carry; this shadow is what
@@ -140,7 +147,7 @@ export function CaseStudyCard(
          */}
         <div className="flex flex-col gap-3 [text-shadow:0_1px_12px_rgba(3,3,3,0.5)]">
           {eyebrow ? <Eyebrow tone="inverse">{eyebrow}</Eyebrow> : null}
-          <h3 className="text-display-md font-display max-w-[472px] text-balance">
+          <h3 className="text-display-md font-display text-balance">
             {narrativeHeadline ?? title}
           </h3>
         </div>

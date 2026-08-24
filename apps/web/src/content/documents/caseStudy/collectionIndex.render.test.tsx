@@ -15,12 +15,17 @@ import {
 import { caseStudyIndex } from './collectionIndex'
 
 /**
- * The /work index — the frames `1634:1167` (1440) and `1906:851` (402).
+ * The /work index — the frame `1634:1167` at 1440. At 402 the card values below
+ * come from `2975:8428`, the redesigned mobile frame; the manifest still tracks
+ * `1906:851` for this route, which #303 settles when it reads the redesign.
  *
  * #43 shipped with "mobile not yet checked" against its own acceptance
  * criteria, so the 402 assertions below are the ones that were missing, not
- * decoration: the frame stacks the cards 24px apart (`1925:5733`) where the
- * desktop grid uses 64 (`1634:1186`).
+ * decoration.
+ *
+ * The card is the `Case Study Card` set (`2089:4169`), instanced three times
+ * here (`2107:1094`–`1096`) and once per breakpoint, so the stack gap is 48 at
+ * both widths — `2975:8428` at 402 (#302).
  */
 const route = buildIndexRoute(caseStudyIndex)
 
@@ -54,7 +59,7 @@ describe('the /work index', () => {
   })
 
   /**
-   * The first card's photograph is 1248 × 556 in the first screen — the
+   * The first card's photograph is 1248 × 550 in the first screen — the
    * route's LCP element (#268). It is preloaded and the rest of the stack is
    * not: a second preload only takes bandwidth from the first.
    */
@@ -83,27 +88,35 @@ describe('the /work index', () => {
     expect(declaredSizes(withPhotos)).toEqual(Array(3).fill('(min-width: 1440px) 1248px, 90vw'))
   })
 
+  it('pads the card 64 all round at lg', () => {
+    // `2089:4169` pads uniformly; the 402 card keeps its own 32.
+    expect(html).toContain('lg:p-16')
+    expect(variantsOf(html, 'pb-[88px]')).toEqual([])
+  })
+
   describe('at 402 (ADR 0006)', () => {
     it('has no horizontally-scrolling band', () => {
       expect(unprefixedHorizontalScrollUtilities(html)).toEqual([])
     })
 
-    it('holds the card gap at 24 until lg', () => {
-      // `1925:5733` is gap 24; `1634:1186` is gap 64. The desktop value must
-      // never be the unprefixed one.
-      expect(variantsOf(html, 'gap-16')).toEqual(['lg:gap-16'])
-      expect(variantsOf(html, 'gap-6')).toContain('gap-6')
+    it('stacks the cards 48 apart at both widths', () => {
+      // One value now, not a pair: `2107:1094`–`1096` sit 48 apart and so do
+      // the mobile instances (`2975:8428`). A breakpoint variant here would be
+      // a divergence the frames no longer draw.
+      expect(variantsOf(html, 'gap-12')).toContain('gap-12')
+      expect(variantsOf(html, 'gap-16')).toEqual([])
     })
 
-    it('lets the card grow past the frame’s 362 square rather than clipping', () => {
-      // Both frames give a fixed card height; a real narrative headline is
-      // five lines where the frame's demo is two, so the height is a floor.
-      expect(html).toContain('min-h-[362px]')
-      expect(html).toContain('lg:min-h-[556px]')
+    it('lets the card grow past the set’s 550 rather than clipping', () => {
+      // The set fixes the card at 550 tall; a real narrative headline is five
+      // lines where the demo is three, so the height is a floor. The /work
+      // index's own first instance is already 592 for that reason.
+      expect(html).toContain('min-h-[550px]')
+      expect(variantsOf(html, 'min-h-[362px]')).toEqual([])
     })
 
     it('scrims the card top-to-bottom, keeping the 90° gradient for lg', () => {
-      // `1925:5734` washes the photograph vertically — the copy spans the
+      // `2975:8428` washes the photograph vertically — the copy spans the
       // stacked card, so there is no clear side to keep legible. The
       // left-to-right scrim only makes sense on the 1248-wide card.
       expect(html).toContain('bg-(image:--gradient-card-scrim-stacked)')

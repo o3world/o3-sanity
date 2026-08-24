@@ -6,7 +6,7 @@ The component half of map #33's committed mapping. Frames are
 
 Read [`docs/agents/figma.md`](./agents/figma.md) before opening the file.
 
-Every node id below is also carried, verified, in
+Every node id below that the file still holds is also carried, verified, in
 [`tools/figma-sync/data/tracked-nodes.json`](../tools/figma-sync/data/tracked-nodes.json) — the
 machine-readable half of this document (#79). `pnpm figma:sync` hashes each set and tells you which
 one changed and what code it routes to. **Edit both halves together**: a row added here without a
@@ -65,6 +65,7 @@ Verified by direct reads of the canonical frames, or recorded in
 | `CTA`                           | `2177:1354` | Device = Desktop \| Mobile                     | `CtaSection` (`blocks/section/ctaSection`)                           | ✅ #163 — the band-level sets, below                                                              |
 | `Interior Hero`                 | `2107:1051` | Device = Desktop \| Mobile                     | `CollectionHero variant="interior"` (`ui/collection-hero.tsx`)       | ✅ #163                                                                                           |
 | `Blog`                          | `2205:1146` | Property 1 = Default \| Mobile                 | `InsightsCarouselSection` (`blocks/section/insightsCarouselSection`) | ✅ #163                                                                                           |
+| `Case Study Card`               | `2089:4169` | Client = Ironman \| Vertex \| Caron            | `CaseStudyCard` (`apps/web/src/components/cards`)                    | ✅ #302 — the axis is **content, not design**: no `cva` key, below                                |
 
 `BrandLogo` ships `Color=Black` and `Color=Red` only. No canonical Design
 Concept frame instances `Color=White`, so its knockout colour would be a guess;
@@ -102,6 +103,34 @@ than a second vocabulary — one `cva` key under the rule above, not two.
 **Home does not instance `CTA`.** Its frame `1680:2134` still holds the bespoke
 closer, which is why `ctaSection`'s `decoration` knob keeps `orbs` alongside the
 molecule it now defaults to.
+
+### `Case Study Card` is a set whose axis is not a variant
+
+The case-study card is a component set as of the 2026-08 pass. The /work index
+instances it three times (`2107:1094`–`1096`, and once more per breakpoint) and
+the case-study detail's next-project band once (`2250:1564`), so the card is now
+one node to watch rather than geometry re-drawn per frame.
+
+Its axis is `Ironman | Vertex | Caron` — **which client the demo shows**, not how
+the card is drawn. All three variants are the same box with different content, so
+it maps to no `cva` key: the client's logo, eyebrow, narrative, stat and CTA are
+props the content layer fills from a `caseStudy`. The rule at the top of this
+document is one Figma axis → one `cva` key; this is the case that rule does not
+reach, because a content axis is a fixture, not an appearance.
+
+```
+1248 × 550     padding 64, content pinned via space-between
+  top          the client logo in a 180 × 80 holder, knocked out white
+  content row  560 text beside 560 of deadspace
+  bottom       eyebrow, narrative, a stat row ("89% → 114%" / NRR)
+               and a Button / Solid Size=Base in white
+```
+
+At 402 the card is 362 × 550 and the stack sits 48 apart (`2975:8428`); the
+/work index's first card is 592, which is content, not a second size. #302
+reconciled `apps/web`'s renderer to these values. **The internals were read from
+renders and geometry** while Figma's node-tree endpoints were rate-limited. #314
+owns the re-read that confirms them, and the baseline hash that goes with it.
 
 ### `BrandMark` has no component set
 
@@ -183,24 +212,30 @@ treatment. A frame can overrule it at any time.
 
 ## Non-canonical — no code target
 
-Present in the file, not used by any Design Concept frame. Listed so the next
-person does not have to re-derive that.
+Not used by any Design Concept frame. Listed so the next person does not have to
+re-derive that.
 
-| Figma set                   | Node                              | Why not                                                                                                                                                                                                                                                                                                    |
-| --------------------------- | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Case study cards`          | `264:573`, `466:570`, `1393:3025` | **Three** competing sets. Canonical Home draws its cards as frames (`1683:2661`), not instances — these are generation-1. ⚠️ `1393:3025` is the exception: the **Solutions** frame instances it three times for the engagement cards (`1925:6112`, #47). Nothing case-study about the content — see below. |
-| `Buttons`                   | `172:140`                         | Unnamed axes (`Property 1/2/3`) — an imported set, superseded by `Button / *`                                                                                                                                                                                                                              |
-| `Button / Outline`          | `778:1447`                        | No canonical frame uses an outline button                                                                                                                                                                                                                                                                  |
-| `Button / Surface`          | `356:639`                         | ”                                                                                                                                                                                                                                                                                                          |
-| `Icon / Solid`              | `242:310`                         | Superseded by `Icon / Surface`                                                                                                                                                                                                                                                                             |
-| `Icon`                      | `270:819`                         | Duplicate of the `Icon / *` family                                                                                                                                                                                                                                                                         |
-| `Badge`                     | `270:748`                         | No canonical use                                                                                                                                                                                                                                                                                           |
-| `Social links`              | `172:54`                          | **Revisited in #41 and still no.** The frame's footer draws Socials as a plain `Link Group` (`1680:2110`) — no instance                                                                                                                                                                                    |
-| `Shapes`                    | `734:1073`                        | Decorative quarter-circles — a background treatment, not a component                                                                                                                                                                                                                                       |
-| `close`                     | `400:2219`                        | Glyph, not a component (ADR 0009)                                                                                                                                                                                                                                                                          |
-| `Pro-series`                | `1261:4877`                       | AB WIP canvas                                                                                                                                                                                                                                                                                              |
-| `Go birds.`                 | `1275:1631`                       | Easter egg. Not a site component.                                                                                                                                                                                                                                                                          |
-| `.building block Icon_text` | `270:814`                         | Duplicate of `136:14`                                                                                                                                                                                                                                                                                      |
+⚠️ **Nine of these no longer exist**, deleted from the file in the 2026-08 pass:
+`466:570`, `172:140`, `778:1447`, `356:639`, `270:819`, `172:54`, `734:1073`,
+`400:2219` and `270:814`. The rows stay as the record of a call already made;
+the manifest carries none of them, which is why it holds fewer sets than this
+table has rows.
+
+| Figma set                   | Node                              | Why not                                                                                                                                                                                                                                                                                                                          |
+| --------------------------- | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Case study cards`          | `264:573`, `466:570`, `1393:3025` | **Three** competing generation-1 sets, superseded by `Case Study Card` (`2089:4169`) above. Home still draws its cards as frames (`1683:2661`). ⚠️ `1393:3025` is the exception: the **Solutions** frame instances it three times for the engagement cards (`1925:6112`, #47). Nothing case-study about the content — see below. |
+| `Buttons`                   | `172:140`                         | Unnamed axes (`Property 1/2/3`) — an imported set, superseded by `Button / *`                                                                                                                                                                                                                                                    |
+| `Button / Outline`          | `778:1447`                        | No canonical frame uses an outline button                                                                                                                                                                                                                                                                                        |
+| `Button / Surface`          | `356:639`                         | ”                                                                                                                                                                                                                                                                                                                                |
+| `Icon / Solid`              | `242:310`                         | Superseded by `Icon / Surface`                                                                                                                                                                                                                                                                                                   |
+| `Icon`                      | `270:819`                         | Duplicate of the `Icon / *` family                                                                                                                                                                                                                                                                                               |
+| `Badge`                     | `270:748`                         | No canonical use                                                                                                                                                                                                                                                                                                                 |
+| `Social links`              | `172:54`                          | **Revisited in #41 and still no.** The frame's footer draws Socials as a plain `Link Group` (`1680:2110`) — no instance                                                                                                                                                                                                          |
+| `Shapes`                    | `734:1073`                        | Decorative quarter-circles — a background treatment, not a component                                                                                                                                                                                                                                                             |
+| `close`                     | `400:2219`                        | Glyph, not a component (ADR 0009)                                                                                                                                                                                                                                                                                                |
+| `Pro-series`                | `1261:4877`                       | AB WIP canvas                                                                                                                                                                                                                                                                                                                    |
+| `Go birds.`                 | `1275:1631`                       | Easter egg. Not a site component.                                                                                                                                                                                                                                                                                                |
+| `.building block Icon_text` | `270:814`                         | Duplicate of `136:14`                                                                                                                                                                                                                                                                                                            |
 
 ## Existing `packages/ui` components, classified
 
@@ -215,7 +250,7 @@ Every component in the package, against the Figma library.
 | `MenuIcon`       | **Has counterpart** — `1814:1636` (drawn, not a set) | Added #41. Two bars, per the frame                                                                                                                                           |
 | `CloseIcon`      | **Has counterpart** — `close` glyph                  | Added #41 (ADR 0009)                                                                                                                                                         |
 | `Sheet`          | **Code-only** — shadcn                               | Added #41 for the 402 nav; the panel has no frame (ADR 0006)                                                                                                                 |
-| `Card`           | **Code-only**                                        | Canonical case-study cards are frames, not a component set                                                                                                                   |
+| `Card`           | **Code-only**                                        | shadcn's box. The case-study card is its own set (`2089:4169`) and each brand draws its own renderer for it                                                                  |
 | `SectionShell`   | **Code-only**                                        | The three-surface organism; ADR 0008 — shadcn cannot model it                                                                                                                |
 | `ArrowIcon`      | **Has counterpart** — `.building block Icon_text`    | Glyph becomes a component, not a string prop (ADR 0009)                                                                                                                      |
 | `ArrowLink`      | **Retired** in #55                                   | No Figma equivalent; the frames use `Button / Ghost` for this job, and #42 built every text CTA that way — so it ended with no call site and was deleted                     |
@@ -227,7 +262,7 @@ Every component in the package, against the Figma library.
 | `MaskedLines`    | **Code-only**                                        | Motion, which the static frames cannot express (#33)                                                                                                                         |
 | `Reveal`         | **Code-only**                                        | ”                                                                                                                                                                            |
 | `LogoTile`       | **Code-only** — superseded                           | ⚠️ Unused since #89: the partners plate is a 280 × 280 hairlined frame (`1864:2395`) that `LogoWallSection` draws inline. This 110px row is prototype-era — retire it in #38 |
-| `Stat`           | **Code-only**                                        | Case-study stats are drawn inline (`1883:3564`)                                                                                                                              |
+| `Stat`           | **Code-only**                                        | The card's stat row is drawn inside the card, not instanced — the `Data` row of `2089:4169`                                                                                  |
 
 **Nothing is to-be-replaced.** `ArrowLink` was the one open question, and #55
 answered it: #42 reached for `Button variant="ghost"` at every text CTA the

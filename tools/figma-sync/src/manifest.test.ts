@@ -34,6 +34,7 @@ describe('tracked-nodes.json', () => {
     expect([...names].sort()).toEqual([
       'About',
       'Case Study detail',
+      'Contact',
       'Home',
       'Insight detail',
       'Insight index',
@@ -69,10 +70,11 @@ describe('tracked-nodes.json', () => {
   })
 
   it('uses this project’s language for names, not Figma’s', () => {
-    // Four frames are *named* "Insights" in Figma and only one is the
-    // Insight index (`2336:4310`, tracked 2026-08-13) — one of them is About,
-    // which is simply mislabelled in the file. That is the failure this
-    // guards, and it is unchanged by ADR 0017.
+    // Seven frames are *named* "Insights" in Figma and two of them are the
+    // Insight index — the rest are About, Contact, /partners/sanity and the
+    // two insight details, mislabelled because they were duplicated from the
+    // Insights frame and never renamed. That is the failure this guards, and
+    // it is unchanged by ADR 0017.
     //
     // Most now agree with `name` because the project adopted the word Figma
     // was already using. That coincidence is a decision, not a reason to
@@ -81,9 +83,12 @@ describe('tracked-nodes.json', () => {
     const insights = entries.filter((entry) => entry.figmaName?.startsWith('Insights'))
     expect(insights.map((entry) => entry.name).sort()).toEqual([
       'About',
+      'Contact',
       'Insight detail',
       'Insight detail',
       'Insight index',
+      'Insight index',
+      'Sanity partnership',
     ])
   })
 
@@ -101,16 +106,14 @@ describe('tracked-nodes.json', () => {
  */
 describe('tracked component sets', () => {
   it('carries the whole component→code map, canonical and not', () => {
-    // docs/figma-components.md: 14 canonical rows and 13 non-canonical ones —
-    // 29 nodes, because `Case study cards` is three competing sets.
-    // (`Cover status` 134:343 was deleted from the file, and `Utility Nav`
-    // 2250:1445 arrived with the 2026-08 nav rebuild — both seen 2026-08-13.
-    // The eleventh canonical row is the redesign's `Icon` set 2177:1556, whose
-    // curated three fill the button's icon slot — tracked with #151. The last
-    // three are the band-level sets `CTA`, `Interior Hero` and `Blog`, which a
-    // page frame instances WHOLE — so nothing in a frame diff pointed at them
-    // and the CTA band sat a generation behind unreported until #163.)
-    expect(componentSets.length).toBe(29)
+    // Every set `docs/figma-components.md` maps, canonical and not, that the
+    // Figma file still holds. The 2026-08 design pass deleted nine gen-1 sets
+    // outright (466:570, 172:140, 778:1447, 356:639, 270:819, 172:54, 734:1073,
+    // 400:2219, 270:814), all of them `codeComponent: null`; the document still
+    // lists them as non-canonical, which is why its row count is the larger
+    // number. `Case Study Card` 2089:4169 is the newest — the set the /work
+    // index and the next-project band instance (#302).
+    expect(componentSets.length).toBe(21)
   })
 
   it('states a code target for every set, `null` included', () => {
