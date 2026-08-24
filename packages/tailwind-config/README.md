@@ -197,12 +197,13 @@ The canonical design is **all but square**: cards and media frames carry no
 radius, and the `Button` set (`2134:1785`) carries 5px. The tokens stay so a
 future decision is one edit here rather than a 25-call-site sweep.
 
-| Token           | Value | Utility        |
-| --------------- | ----- | -------------- |
-| `--radius-btn`  | `5px` | `rounded-btn`  |
-| `--radius-card` | `0`   | `rounded-card` |
+| Token           | Value  | Utility        |
+| --------------- | ------ | -------------- |
+| `--radius-btn`  | `5px`  | `rounded-btn`  |
+| `--radius-card` | `0`    | `rounded-card` |
+| `--radius-nav`  | `12px` | `rounded-nav`  |
 
-(The pill NavBar is `border-radius: 900px` — that's `rounded-full`, no token.)
+(The NavBar's corner is 1440's only: at 402 the bar is full-width and square.)
 
 ## Motion
 

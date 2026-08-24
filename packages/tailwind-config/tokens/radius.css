@@ -11,13 +11,17 @@
  * style: the 5.8px inner chip of the 58px carousel control, and a 787.77px
  * lozenge masking a card pattern. Both are call-site literals.
  *
- * The floating pill NavBar is `border-radius: 900px` (1710:2271) — that is
- * `rounded-full` in practice, already a Tailwind built-in, so no token.
+ * The floating NavBar carries a 12px corner at 1440 (2225:2920) and none at
+ * all at 402, where it is a full-width square bar (1814:1630). It is the one
+ * corner in the design that is neither square nor a button's, so it is its own
+ * token.
  */
 
 @theme {
   /* Buttons, both sizes and all three fills. */
   --radius-btn: 5px;
+  /* The floating nav bar, at 1440 only. */
+  --radius-nav: 12px;
   /* Case-study cards, insights cards, media frames. */
   --radius-card: 0px;
   /* Figma declares a `radius-small` variable at 4px but the canonical Home

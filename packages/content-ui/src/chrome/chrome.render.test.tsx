@@ -33,7 +33,7 @@ const settings = JSON.parse(
   ),
 ) as NonNullable<SITE_SETTINGS_QUERY_RESULT>
 
-const O3_NAV_MARK = <BrandMark size={64} />
+const O3_NAV_MARK = <BrandMark size={64} className="lg:size-12" />
 const O3_FOOTER_MARK = <BrandMark trim size={128} className="lg:size-[148px]" />
 
 /** The footer prints the year it is handed; the layout is what resolves one. */
@@ -75,7 +75,7 @@ describe('site nav', () => {
   })
 
   it('reads as the Figma NavBar component does, in its order (#41)', () => {
-    // `1710:2271` — Work · Live · Insights · Solutions · About.
+    // `2225:2920` — Work · Live · Insights · Solutions · About.
     expect(settings.navItems?.map((i) => i.label)).toEqual([
       'Work',
       'Live',
@@ -108,6 +108,27 @@ describe('the nav bar’s pinned, dark-ink default', () => {
     // c1ee258's `lg:absolute` is what the ink flip needs gone.
     expect(navHtml).toContain('fixed')
     expect(navHtml).not.toContain('lg:absolute')
+  })
+
+  it('draws the corner, the padding and the row the frames draw (#152)', () => {
+    // 1440 (`2225:2920`): 900 × 80, radius 12, 16px all round, a 48px gap
+    // down the link row. 402 (`1814:1630`): a full-width square bar at
+    // `8px 20px`. The corner and the padding are both `lg:` for that reason,
+    // and the corner is a token because 12px is a value the design draws.
+    expect(navHtml).toContain('lg:rounded-nav')
+    expect(navHtml).not.toContain('rounded-full')
+    expect(navHtml).toContain('px-5')
+    expect(navHtml).toContain('py-2')
+    expect(navHtml).toContain('lg:px-4')
+    expect(navHtml).toContain('lg:py-4')
+    expect(navHtml).toContain('lg:gap-12')
+    // The fill is the same alpha at both widths, and the same one the frames
+    // carry — `--color-scrim` IS `rgba(3, 3, 3, 0.2)`.
+    expect(navHtml).toContain('bg-scrim')
+    // 16px of padding only lands an 80px bar over a 48px mark. The mark is the
+    // app's (#228), so this is the mark `apps/web` hands in.
+    expect(navMark).toContain('lg:size-12')
+    expect(navMark).toContain('width="64"')
   })
 
   it('blurs whatever it is floating over', () => {
