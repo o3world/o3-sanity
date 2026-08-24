@@ -263,9 +263,9 @@
   /* eyebrow-lg — 18px. The section-level kicker ("OUR PARTNERS", 1864:2392),
    * set in NEUTRAL fg-muted (#76746F since the 2026-08 warm shift) rather
    * than brand red. Size and leading are bound (`2050:1307` / `2050:1317` —
-   * 18/22 read at 1440; small UI text does not scale). */
+   * 18/24 read at 1440; small UI text does not scale). */
   --text-eyebrow-lg: 18px;
-  --text-eyebrow-lg--line-height: 1.222; /* 22px / 18px, the bound pair */
+  --text-eyebrow-lg--line-height: 1.333; /* 24px / 18px, the bound pair */
   --text-eyebrow-lg--letter-spacing: 0.1em;
   --text-eyebrow-lg--font-weight: 700;
 

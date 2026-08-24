@@ -33,10 +33,17 @@
    * see --gradient-brand-glow in gradient.css. Reach for the gradient first;
    * a flat red area is almost always wrong in this design. */
   --color-brand: #eb1000;
-  /* There is deliberately no lifted red for dark surfaces: the design's one
-   * red on ink is the Utility Nav hover, and it is this flat brand red
-   * (`2225:2893`). Everywhere else, red on ink reaches the page as the brand
-   * glow — don't add a tint token without a frame that anchors it. */
+  /* #C90E00 — the design's second red, a distinct variable (`2050:1205`; the
+   * name is unreadable on this seat) from the one --color-brand carries
+   * (`2050:1200`). Three component sets bind it and every one of them draws
+   * red on a dark ground: the Case Study Card's eyebrow (`2089:3963`), the
+   * `Button` set's Theme=Red fill (`2134:2014`), and the icon set's
+   * Color=Red variant (`2177:133`). */
+  --color-brand-deep: #c90e00;
+  /* There is deliberately no LIFTED red for dark surfaces — where the design
+   * puts a flat red on ink it goes deeper, not brighter. The exception is the
+   * Utility Nav hover, which is the flat brand red (`2225:2893`); everywhere
+   * else red on ink reaches the page as the brand glow. */
 
   /* ── Surfaces ──────────────────────────────────────────────────────────── */
   /* #0A0A0B — the dominant dark. Every section headline on a light band, the

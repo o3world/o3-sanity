@@ -415,7 +415,7 @@ export const typeScale: readonly TypeSpec[] = [
   {
     name: 'eyebrow-lg',
     size: 18,
-    lineHeight: '1.2em',
+    lineHeight: '24px',
     letterSpacing: '0.1em',
     weight: 700,
     style: 'Bold',

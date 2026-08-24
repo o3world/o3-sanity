@@ -164,9 +164,10 @@ They are otherwise plain instances — the set's own gradient comes with them, a
 
 Read from the node tree at file version `2391349966960467923` (2026-08-24, #314),
 which corrected the #302 entry written from renders: 1246 not 1248, 559 not 560,
-and the mobile padding is not uniform. Three values the shipped renderer does not
-draw — the eyebrow's size and red, the narrative's step, and that mobile padding
-— are #319.
+and the mobile padding is not uniform. The renderer draws all of it since #319 —
+the eyebrow at `eyebrow-lg` in `--color-brand-deep` (`#C90E00`, variable
+`2050:1205`, a different red from `--color-brand`), the narrative at
+`display-sm`, and the padding as `px-6 py-16 lg:px-16`.
 
 ### `Interior Hero` carries three axes, and two of them are slots
 

@@ -21,8 +21,11 @@ const eyebrowVariants = cva('block', {
       // every section eyebrow on the canonical frames is this grey.
       muted: 'text-fg-muted',
       // inverse — plain white, for an eyebrow on an ink band or over a card
-      // scrim (`1883:3561`, `1634:1183`). THE dark-surface treatment: no
-      // canonical frame places a red accent on ink.
+      // scrim (`1883:3561`, `1634:1183`). The commonest dark-surface
+      // treatment, but not the only one: the Case Study Card set
+      // (`2089:3963`) sets its eyebrow in the deeper red, which that card
+      // names as a class rather than a tone here — `--color-brand-deep` is
+      // O3's token alone and this component is shared.
       inverse: 'text-white',
       // brand — the red kicker. Brand red is a flat fill exactly ONCE on the
       // canonical Home frame (the footer link-group headers), so this is the

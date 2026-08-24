@@ -27,15 +27,12 @@ function caseEyebrow(card: Pick<CaseStudyCardData, 'industries' | 'industryDetai
  *   background      the hero image, cover
  *   scrim           --gradient-card-scrim — 90deg, 0.8 ink → 0 by 84%
  *   top             the client logo in a 180 × 80 holder, knocked out WHITE
- *   bottom  gap 24  eyebrow + narrative in a 559px measure — the content
- *                   row is 559 text beside 559 of deadspace
+ *   bottom  gap 24  eyebrow 18/24 bold in --color-brand-deep, over a
+ *                   narrative at 24/34 regular, in a 559px measure — the
+ *                   content row is 559 text beside 559 of deadspace
  *                   stat 48px beside its label at 65% white, 24px apart
  *                   Button / Solid Theme=White, "View the work"
  * ```
- *
- * Three of the set's values this does NOT draw — the eyebrow's 18px red, the
- * narrative's 24/34 step, and the 24/64 padding the 402 instances override to
- * — are #319.
  *
  * Nothing here is a text-beside-thumbnail card: the photograph **is** the
  * card, the scrim holds the left column legible, and the copy sits on the
@@ -62,7 +59,8 @@ export function CaseStudyCard(
   return (
     <Link
       href={hrefForDoc({ _type, slug })}
-      // 550 tall at both widths — 1246 wide at 1440, 362 at 402 (`2975:8428`).
+      // 550 tall at both widths — 1246 wide at 1440, 362 at 402
+      // (`2975:8429`–`8431`).
       // A FLOOR, not a fixed height: the set's demo
       // narrative is three lines and a real one runs to five, and the /work
       // index's own first instance is already 592 for that reason.
@@ -74,7 +72,11 @@ export function CaseStudyCard(
       // gap costs nothing on a card that still has slack (space-between hands
       // out the surplus either way) and holds the two groups apart on one that
       // doesn't.
-      className="rounded-card group relative isolate flex min-h-[550px] flex-col justify-between gap-6 overflow-hidden p-8 text-white lg:p-16"
+      //
+      // Padding is 64 uniform in the set and only the sides step down at 402,
+      // where the 362-wide instances (`2975:8429`–`8431`) override to 24 and
+      // leave 64 top and bottom.
+      className="rounded-card group relative isolate flex min-h-[550px] flex-col justify-between gap-6 overflow-hidden px-6 py-16 text-white lg:px-16"
     >
       <div className="absolute inset-0 -z-20">
         <SanityImage
@@ -100,10 +102,12 @@ export function CaseStudyCard(
        * `--gradient-card-scrim` (`2089:4169`).
        *
        * At 402 the copy spans the card, where a horizontal scrim would leave
-       * the end of every line on open photograph. The set answers nothing
-       * here — its 402 instances (`2975:8429`–`8431`) carry the same gradient
-       * unchanged — so the stacked wash is a code decision, taken from the
-       * gen-1 stacked card `1925:5734` and reasoned at the token.
+       * the end of every line on open photograph. The file answers nothing
+       * here: the 402 instances (`2975:8429`–`8431`) carry the set's own
+       * gradient unchanged, and no separate mobile scrim is drawn anywhere.
+       * The stacked wash is therefore a CODE DECISION, not a read — its shape
+       * is taken from the gen-1 stacked card `1925:5734` and reasoned at the
+       * token.
        *
        * Both tokens are retuned away from the frame's literal values, which
        * are heavy enough to read as a black-and-white treatment on real hero
@@ -137,8 +141,9 @@ export function CaseStudyCard(
       {/*
        * The set's Content row is 559 of text beside 559 of deadspace
        * (`2089:4169`), so the measure belongs to the whole column — eyebrow,
-       * narrative and stat line up on it. Below 1120 + padding the column is
-       * simply the card's width.
+       * narrative and stat line up on it. 560 rounds the read to the scale;
+       * the extra pixel changes no line break. Below 1120 + padding the
+       * column is simply the card's width.
        */}
       <div className="flex max-w-[560px] flex-col items-start gap-6">
         {/*
@@ -150,8 +155,17 @@ export function CaseStudyCard(
          * the CTA, whose dark label sits on a white plate.
          */}
         <div className="flex flex-col gap-3 [text-shadow:0_1px_12px_rgba(3,3,3,0.5)]">
-          {eyebrow ? <Eyebrow tone="inverse">{eyebrow}</Eyebrow> : null}
-          <h3 className="text-display-md font-display text-balance">
+          {/*
+           * The red is a class, not a `tone`: `--color-brand-deep` is O3's
+           * token alone and `Eyebrow` is shared with O3XO, so a tone naming
+           * it would fail the brand-token seam.
+           */}
+          {eyebrow ? (
+            <Eyebrow size="lg" className="text-brand-deep">
+              {eyebrow}
+            </Eyebrow>
+          ) : null}
+          <h3 className="text-display-sm font-display text-balance">
             {narrativeHeadline ?? title}
           </h3>
         </div>
