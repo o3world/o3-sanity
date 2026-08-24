@@ -18,6 +18,11 @@ type CtaSectionProps = SectionProps<'ctaSection'>
  *     92% white, centred
  *     body    24px at 60% white in a 524px measure
  *   button    20 under the copy, Button Theme=White
+ *
+ * 402 × 616 — `1814:1775`, filed in the frame under "ClaudeTest"
+ *   128 top and bottom, the copy column the full 362, gap 53 to the button
+ *     heading 36/44 — `--text-cta`'s own floor
+ *     body    18/22 at −0.8 tracking, a step under `--text-lead`'s floor
  * ```
  *
  * **Only the decoration is the `CTA` component's.** The component (`2124:72`,
@@ -107,8 +112,9 @@ export function CtaSection({
               motion="orbit"
               className="bottom-[4%] left-1/2 w-[150vw] -translate-x-1/2 lg:w-[90vw]"
             />
-            {/* `1928:6596` — 172px of --gradient-ink-fade, transparent at the top. */}
-            <div className="bg-(image:--gradient-ink-fade) pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[172px]" />
+            {/* --gradient-ink-fade, transparent at the top: 172px at 1440
+             * (`1928:6596`), 64 at 402 (`1928:6595`). */}
+            <div className="bg-(image:--gradient-ink-fade) pointer-events-none absolute inset-x-0 bottom-0 z-10 h-16 lg:h-[172px]" />
           </>
         ) : null}
 
@@ -150,16 +156,21 @@ export function CtaSection({
          * Two nested columns, because the frame gaps them differently: 18
          * inside the copy block (`1680:2087`) and 20 between that block and
          * the button (`1680:2090`). One flat column would gap the button like
-         * a third line of copy.
+         * a third line of copy. At 402 the copy block keeps its 18 and the
+         * button falls 53 clear of it (`1814:1775`).
          */}
-        <div className="py-band-lg relative z-10 mx-auto flex max-w-[600px] flex-col items-center gap-5 text-center">
+        <div className="py-band-lg relative z-10 mx-auto flex max-w-[600px] flex-col items-center gap-[53px] text-center lg:gap-5">
           {heading || body ? (
             <div className="flex flex-col items-center gap-[18px]">
               {heading ? (
                 <h2 className="text-cta font-display text-on-ink text-balance">{heading}</h2>
               ) : null}
               {body ? (
-                <p className="text-lead text-on-ink-subtle max-w-[524px] text-balance">{body}</p>
+                // 18/22 at −0.8 tracking at 402 (`1814:1778`) — a step under
+                // `text-lead`'s 20px floor, so the band names it.
+                <p className="text-lead text-on-ink-subtle max-w-[524px] text-balance max-lg:text-[18px] max-lg:leading-[22px] max-lg:tracking-[-0.8px]">
+                  {body}
+                </p>
               ) : null}
             </div>
           ) : null}

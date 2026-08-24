@@ -184,9 +184,19 @@ export function RailPanelsSection({
 
   if (isTrack) {
     return (
-      // `2846:5480` — 128 above and below. The rule the track hangs from sits
-      // 18 under the header row, which is `PanelTrack`'s own top edge.
-      <SectionShell surface={resolved} top="md" bottom="md" background={background}>
+      // 128 above and below at 1440 (`2846:5481`), 48 at 402 (`2975:8356`) —
+      // the one band on this page whose vertical rhythm steps down. The rule
+      // the track hangs from sits 18 under the header row, which is
+      // `PanelTrack`'s own top edge.
+      <SectionShell
+        surface={resolved}
+        top="md"
+        bottom="md"
+        background={background}
+        // Same property as the shell's own step, so the variant wins the
+        // cascade rather than racing a `py-*` shorthand against it.
+        className="max-lg:pb-12 max-lg:pt-12"
+      >
         <div className="flex flex-col gap-[18px]">
           {header}
           <PanelTrack

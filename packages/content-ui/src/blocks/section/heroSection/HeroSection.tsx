@@ -38,17 +38,18 @@ type HeroSectionProps = SectionProps<'heroSection'> & {
  * The band's live nodes now carry every dimension — the raster the #42 build
  * had to read off pixels is gone:
  *
- * | Part       | 1440 (`2089:4316`)                    | 402 (`1814:1619`)        |
- * | ---------- | ------------------------------------- | ------------------------ |
- * | Band       | 1440 × **940** of `#0A0A0B`           | 402 × 874 of `#030303`   |
- * | Headline   | centred, `Heading/h1` 64/76 **Light** | flush left, 36/40        |
- * | 2nd line   | white at 50% (`2089:4318`)            | white at 60%             |
- * | Standfirst | centred, 24/34, **724** wide, solid   | **absent**               |
- * | CTA        | white fill, radius 5 (`2205:1298`)    | `Button / Solid` Base    |
- * | Rhythm     | 288 above, 41, 33, 310 below          | 276 above, 39, 353 below |
+ * | Part       | 1440 (`2089:4316`)                    | 402 (`1814:1619`)          |
+ * | ---------- | ------------------------------------- | -------------------------- |
+ * | Band       | 1440 × **940** of `#0A0A0B`           | 402 × 874 of `#030303`     |
+ * | Headline   | centred, `Heading/h1` 64/76 **Light** | centred, 36/44 Light       |
+ * | 2nd line   | white at 50% (`2089:4318`)            | white at 50% (`2975:8419`) |
+ * | Standfirst | centred, 24/34, **724** wide, solid   | centred, 24/34, 362 wide   |
+ * | CTA        | white fill, radius 5 (`2205:1298`)    | the same set (`2975:8417`) |
+ * | Rhythm     | 288 above, 0, 41, 33, 310 below       | 173 above, 16, 39, 39, 247 |
  *
- * The 402 column reads the frame as it stood before its 2026-08 rebuild; the
- * rebuilt `1814:1619` — centred, with a standfirst — is #322's to land.
+ * Both widths draw the same composition now — the 402 frame's 2026-08 rebuild
+ * centred its column and gave it the standfirst it had been missing (#322).
+ * What still splits is the step, the measure and the rhythm.
  *
  * The band is padding, not a `min-h` with the content centred inside it: both
  * frames place the headline at a measured distance from the top of the band
@@ -63,8 +64,8 @@ type HeroSectionProps = SectionProps<'heroSection'> & {
  *
  * **The band's foot is a hard edge.** Neither frame draws a curve into the
  * section below: `2089:4316`'s children are the headline, the standfirst, the
- * button and the graphic, and `1814:1619` is the same with `clipsContent` on.
- * The partners band opens flush against this one at y 990.
+ * button and the graphic, and `1814:1619` is the same with `clipsContent` on
+ * plus its own `Links` bar. The partners band opens flush against this one.
  */
 export function HeroSection({
   variant,
@@ -194,10 +195,10 @@ export function HeroSection({
            * foot so the copy can grow above it.
            *
            * The ratio does NOT carry to 402: the band is barely a third the
-           * width but only a quarter shorter, so 80.7vw leaves a 67px sliver of
-           * sphere under a 660px band. The proportion the eye reads is
-           * apex-height against band-height, so at 402 the sphere doubles and
-           * hangs lower to hold roughly the frame's quarter-of-the-band cap.
+           * width but only a fourteenth shorter (874 against 940), so 80.7vw
+           * leaves a sliver. The proportion the eye reads is apex-height
+           * against band-height, so at 402 the sphere doubles and hangs lower
+           * to hold roughly the frame's quarter-of-the-band cap.
            */
           <OrbitalSphere
             motion="orbit"
@@ -208,17 +209,20 @@ export function HeroSection({
         {/*
          * The band's rhythm, read off both frames rather than centred inside a
          * `min-h`: the headline starts 288px down at 1440 (`2089:4313`) and
-         * 276px down at 402 (`1814:1622`), and the sphere gets the 310 / 353
+         * 173px down at 402 (`1814:1622`), and the graphic gets the 310 / 247
          * underneath. Together with the copy that resolves to the frames'
          * 940 / 874 band heights.
          *
-         * **Alignment switches at `lg`.** The 1440 frame centres the whole
-         * block; the 402 frame sets it as a 362px column flush to the 20px
-         * gutter, headline and button both left. That is composition, so it
-         * lives here rather than in a token (ADR 0006).
+         * The column is centred at both widths — `1814:1622` centres on its
+         * cross axis and every text node in it is centre-set.
          */}
-        <div className="max-w-content relative z-10 mx-auto flex flex-col items-start pb-[353px] pt-[276px] text-left lg:items-center lg:pb-[310px] lg:pt-[288px] lg:text-center">
-          <h1 className="text-hero font-display text-balance">
+        <div className="max-w-content relative z-10 mx-auto flex flex-col items-center pb-[247px] pt-[173px] text-center lg:pb-[310px] lg:pt-[288px]">
+          {/*
+           * 16 between the two headline blocks at 402 (`2975:8420` over
+           * `2975:8419`); at 1440 they are set solid, one 76px step apart with
+           * nothing added (`2089:4313` → `2089:4318`).
+           */}
+          <h1 className="text-hero font-display space-y-4 text-balance lg:space-y-0">
             <MaskedLines
               lines={lines.map((line, index) => (
                 // The frame steps the value between lines rather than fading the
@@ -238,18 +242,22 @@ export function HeroSection({
           </h1>
 
           {subheading ? (
-            // 724px and solid white (`2089:4315`). The 50% belongs to the
-            // headline's closing line alone; the standfirst carries no alpha.
+            // 724px and solid white (`2089:4315`); the whole 362 column at 402
+            // (`2975:8418`), where 24/34 holds rather than stepping down. The
+            // 50% belongs to the headline's closing line alone — the standfirst
+            // carries no alpha at either width.
             <Reveal delay={120} className="mt-10">
-              <p className="text-lead mx-auto max-w-[724px] text-balance text-white">
+              {/* 24/34 on both frames — flat, so `text-lead`'s 20px floor
+               * would undersize it at 402. */}
+              <p className="mx-auto max-w-[724px] text-balance text-[24px] leading-[34px] text-white">
                 {subheading}
               </p>
             </Reveal>
           ) : null}
 
           {button ? (
-            // 33 below the standfirst at 1440, 39 below the headline at 402
-            // (`1814:1622`'s column gap, where there is no standfirst at all).
+            // 33 below the standfirst at 1440, 39 at 402 (`1814:1622`'s
+            // column gap, which is the same 39 above the standfirst).
             <Reveal delay={220} className="mt-10 lg:mt-8">
               <ButtonLink button={button} />
             </Reveal>
