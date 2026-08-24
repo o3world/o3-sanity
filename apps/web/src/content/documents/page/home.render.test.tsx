@@ -242,24 +242,28 @@ describe('the homepage at 402 (ADR 0006)', () => {
     expect(variantsOf(html, 'snap-x')).toEqual(['snap-x'])
   })
 
-  it('wraps the partner strip instead of clipping it at 402', () => {
-    // The strip is one row of six 280px plates at 1440 (`1864:2394`) — 1680px
-    // wide, clipped by the viewport on purpose. At 402 that would show one
-    // plate and a half, so it wraps: `flex-nowrap` is the thing that has to
-    // carry the `lg:`. The clip itself must stay `overflow-hidden`; the moment
-    // it becomes a scroll region the test above fails instead.
-    expect(variantsOf(html, 'flex-nowrap')).toEqual(['lg:flex-nowrap'])
+  it('clips the partner strip at 402 rather than wrapping it', () => {
+    // One row at both widths. `2975:8088` is the same 1680px six-tile row the
+    // 1440 frame draws, sitting at x −639 inside a 402 clipping frame — the
+    // clip is symmetric, so a phone sees the middle of the row rather than all
+    // six marks stacked. Matched on the row's own class attribute, because the
+    // platforms tab row (`PanelRail`) legitimately wraps below `lg` and would
+    // answer for this one in a document-wide probe.
+    const row = html.match(/<ul class="([^"]*ml-px[^"]*)"/)?.[1] ?? ''
+    expect(row, 'the partner strip was not rendered').not.toBe('')
+    expect(row).toContain('flex-nowrap')
+    expect(row).not.toContain('flex-wrap ')
     expect(html).not.toContain('animate-marquee')
     expect(html).not.toContain('lg:w-max')
   })
 
-  it('sizes the partner plates from each frame’s own read', () => {
-    // 280 square at 1440; 168 at 402, which is the largest square that still
-    // fits two inside a 362px column. The plates are what the restructure
-    // added — before #89 the marks floated in a grid cell with no rule.
-    const plate = html.match(/<li class="([^"]*lg:size-\[280px\][^"]*)"/)?.[1] ?? ''
+  it('sizes the partner plates from the row both frames draw', () => {
+    // 280 square with 64px of side padding at both widths — `2975:8089` at 402
+    // is `1864:2395` unchanged. The tile is not a responsive measure: the row
+    // is fixed and the viewport is what crops it.
+    const plate = html.match(/<li class="([^"]*size-\[280px\][^"]*)"/)?.[1] ?? ''
     expect(plate, 'no partner plate was rendered').not.toBe('')
-    expect(plate).toContain('size-[168px]')
+    expect(plate).not.toContain('lg:size-')
     expect(plate).toContain('border-line')
   })
 
@@ -270,25 +274,26 @@ describe('the homepage at 402 (ADR 0006)', () => {
     expect(logo, 'no partner logo image was rendered').not.toBe('')
   })
 
-  it('sets the hero flush to the gutter, centring it only at lg', () => {
-    // `1814:1622` is a 362px column at x=20; `2089:4316` centres its column.
-    // Matched on the hero's own class attribute — `items-start` alone is on
+  it('centres the hero column at both widths', () => {
+    // `1814:1622` sets `counterAxisAlignItems: CENTER` and every text node in
+    // it is `textAlignHorizontal: CENTER`; `2089:4316` centres its column too.
+    // Matched on the hero's own class attribute — `items-center` alone is on
     // half the cards on the page and would pass without the hero.
-    const heroClasses = html.match(/class="([^"]*pt-\[276px\][^"]*)"/)?.[1] ?? ''
+    const heroClasses = html.match(/class="([^"]*pt-\[173px\][^"]*)"/)?.[1] ?? ''
     expect(heroClasses, 'the hero band was not found at all').not.toBe('')
-    expect(heroClasses).toContain('items-start')
-    expect(heroClasses).toContain('text-left')
-    expect(heroClasses).toContain('lg:items-center')
-    expect(heroClasses).toContain('lg:text-center')
+    expect(heroClasses).toContain('items-center')
+    expect(heroClasses).toContain('text-center')
+    expect(heroClasses).not.toContain('items-start')
+    expect(heroClasses).not.toContain('text-left')
   })
 
   it('gives the hero band each frame’s own vertical rhythm', () => {
-    // 276 above / 353 below at 402 (`1814:1622` at y 276 in an 874 band);
-    // 288 / 310 at 1440 (`2089:4313` at y 288, `2209:2223` ending at y 630 in
-    // a 940 band). Read values at both ends, so the band's height is the
-    // frames' rather than a `min-h` someone picked.
-    const heroClasses = html.match(/class="([^"]*pt-\[276px\][^"]*)"/)?.[1] ?? ''
-    expect(heroClasses).toContain('pb-[353px]')
+    // 173 above / 247 below at 402 (`1814:1622` at y 173, 454 tall, in an 874
+    // band); 288 / 310 at 1440 (`2089:4313` at y 288, `2209:2223` ending at
+    // y 630 in a 940 band). Read values at both ends, so the band's height is
+    // the frames' rather than a `min-h` someone picked.
+    const heroClasses = html.match(/class="([^"]*pt-\[173px\][^"]*)"/)?.[1] ?? ''
+    expect(heroClasses).toContain('pb-[247px]')
     expect(heroClasses).toContain('lg:pt-[288px]')
     expect(heroClasses).toContain('lg:pb-[310px]')
   })
@@ -321,9 +326,13 @@ describe('the homepage at 402 (ADR 0006)', () => {
     // 36 at 402 → 64 at 1440.
     expect(heroHeadline).toContain('text-hero')
 
-    // 40 at 402 → 48 at 1440, Light — the workhorse section-headline step.
+    // 48/58 Light at 1440 — the workhorse section-headline step — stepped down
+    // to the 36/44 `2975:8086` reads at 402, which the token's 40px floor is a
+    // width short of.
     expect(partnersHeading).toContain('text-display-xl')
     expect(partnersHeading).toContain('font-light')
+    expect(partnersHeading).toContain('max-lg:text-[36px]')
+    expect(partnersHeading).toContain('max-lg:leading-[44px]')
     expect(partnersHeading).not.toContain('text-hero')
 
     // 36 at 402 → 64 at 1440 (`2748:4839` / `2748:4715`). It carries the
@@ -341,6 +350,30 @@ describe('the homepage at 402 (ADR 0006)', () => {
     // this page and the document-wide probe stopped measuring this band.
     expect(html).toContain('gap-6 lg:gap-12')
     expect(variantsOf(html, 'gap-12')).toContain('lg:gap-12')
+  })
+
+  it('holds the partners band to `2975:8083`’s own rhythm', () => {
+    // 128 above and below at both widths, and 24 between the band's three
+    // parts at 402 against the 1440 frame's 128. The text block's own 32 is
+    // flat — `2975:8084` and `1864:2391` gap the same.
+    const partners = html.match(/<section[^>]*class="([^"]*surface-wash-warm[^"]*)"/)?.[1] ?? ''
+    expect(partners, 'the partners band was not found at all').not.toBe('')
+    expect(partners).toContain('py-band-md')
+    expect(partners).toContain('gap-6')
+    expect(partners).toContain('lg:gap-band-md')
+    expect(partners).not.toContain('pt-band-sm')
+  })
+
+  it('steps the closer’s standfirst down at 402', () => {
+    // 18/22 at −0.8 tracking (`1814:1778`) against the 24px the 1440 band
+    // draws — `text-lead`'s 20px floor is a step too big for it. The ink fade
+    // that dissolves the sphere into the footer steps with it: 64 at 402
+    // (`1928:6595`), 172 at 1440 (`1928:6596`).
+    const closer = html.match(/<p class="([^"]*text-on-ink-subtle[^"]*)"/)?.[1] ?? ''
+    expect(closer, 'the closer standfirst was not found at all').not.toBe('')
+    expect(closer).toContain('max-lg:text-[18px]')
+    expect(closer).toContain('max-lg:leading-[22px]')
+    expect(html).toContain('h-16 lg:h-[172px]')
   })
 
   it('numbers each how-we-work column once, at both widths', () => {

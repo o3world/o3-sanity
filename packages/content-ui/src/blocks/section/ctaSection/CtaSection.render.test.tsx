@@ -81,12 +81,14 @@ describe('the CTA band’s molecule decoration', () => {
 
   /**
    * `1680:2087` — a 600 column holding a 524 body box, gapped 18 inside and
-   * 20 above the button. The two gaps are why the copy is its own column: a
-   * flat one would space the button like a third line of copy.
+   * 20 above the button; 53 above the button at 402 (`1814:1775`). The two
+   * gaps are why the copy is its own column: a flat one would space the button
+   * like a third line of copy.
    */
   it('measures the copy column the way the band it is drawn from does', () => {
     expect(html).toContain('max-w-[524px]')
-    expect(html).toContain('max-w-[600px] flex-col items-center gap-5')
+    expect(html).toContain('max-w-[600px] flex-col items-center gap-[53px]')
+    expect(html).toContain('lg:gap-5')
     expect(html).toContain('flex flex-col items-center gap-[18px]')
   })
 })
@@ -140,7 +142,7 @@ describe('the CTA band on a picture', () => {
   })
 
   it('leaves the copy column exactly where every other band puts it', () => {
-    expect(html).toContain('max-w-[600px] flex-col items-center gap-5')
+    expect(html).toContain('max-w-[600px] flex-col items-center gap-[53px]')
     expect(html).toContain('Get in touch')
   })
 
