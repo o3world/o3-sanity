@@ -21,27 +21,28 @@ interface SiteNavProps {
 }
 
 /**
- * The site nav, built to Figma's `NavBar` component — #41. The 2026-08 pass
- * rebuilt that component as `2225:2920` and emptied the node the measurements
- * below were read from (`1710:2271`); the labels and the composition are
- * unchanged, so the node ids in this file are kept as the provenance of each
- * value rather than rewritten to a frame they were not read from.
+ * The site nav, built to Figma's `NavBar` component — #41. Desktop is read
+ * from `2225:2920`, mobile from the 402 frame's own bar (`1814:1630`).
  *
  * The two widths are **structurally** different, which makes this a
  * composition switch at `lg` rather than a resize (ADR 0006):
  *
- * |        | 402 (`1814:1630`)                 | 1440 (`1710:2271`)                    |
- * | ------ | --------------------------------- | ------------------------------------- |
- * | Shape  | full-width square bar, `8px 20px` | 900px pill, radius 900px, `8px 32px`  |
- * | Links  | behind "Open menu"                | five inline, in a 589px space-between |
- * | Button | inline, beside the hamburger      | inline, ending the row                |
+ * |        | 402 (`1814:1630`)                 | 1440 (`2225:2920`)                |
+ * | ------ | --------------------------------- | --------------------------------- |
+ * | Shape  | full-width square bar, `8px 20px` | 900 × 80 bar, radius 12, `16px`   |
+ * | Mark   | 64 (`1814:1631`)                  | 48 (`2225:2915`)                  |
+ * | Links  | behind "Open menu"                | five inline, in a 643px row       |
+ * | Button | inline, beside the hamburger      | inline, ending the row            |
+ *
+ * The 16px padding and the 48px mark are one measurement, not two: together
+ * they are what makes the desktop bar 80px tall.
  *
  * Both fills are `rgba(3,3,3,0.2)` — `bg-scrim`. It stays an alpha because it
- * sits over whatever the hero is showing. The frames put no blur on it, but
- * the pill carries the prototype's `blur(14px)` anyway: a bar that never
- * leaves crosses photography, headlines and body copy all the way down the
- * page, and a 20% scrim laid straight over a paragraph is unreadable. The
- * carry is deliberate, asked for outright — not a hunch.
+ * sits over whatever the hero is showing, and both frames put a `GLASS` effect
+ * over it. `blur(14px)` is the prototype's value for that glass, and it is
+ * what the bar needs to earn: a bar that never leaves crosses photography,
+ * headlines and body copy all the way down the page, and a 20% scrim laid
+ * straight over a paragraph is unreadable.
  *
  * Figma places the desktop bar over a hero with 164px of top padding — over
  * the page, not in flow. That reads as `lg:absolute`, but the bar is `fixed`
@@ -65,11 +66,6 @@ interface SiteNavProps {
  * one frame, not a second width.) The pill runs narrower than the Home hero's
  * heading and subheading boxes — 978 and 962 (`2089:4313`, `2089:4318`) — so a
  * bar under its headline is the frame's composition, not a defect to fix.
- *
- * **The skin deliberately does not follow `2225:2920`**, which draws a 12px
- * radius over an opaque `#030303` fill, 16px side padding and a 643px link
- * row, where this ships a full round over `bg-scrim` at 32px and 589px.
- * Reconciling that skin is its own read against the rebuilt component (#91).
  *
  * ── INK FLIP ───────────────────────────────────────────────────────────────
  *
@@ -150,7 +146,7 @@ export function SiteNav({ settings, brandMark }: SiteNavProps) {
           // this element carries the whole bar — the links, the hamburger's
           // `currentColor` bars and anything else added to the row inherit the
           // value mid-interpolation, and each keeps its own hover timing.
-          className="bg-scrim lg:border-on-ink-line group-data-[ink=dark]:bg-scrim-light lg:group-data-[ink=dark]:border-on-light-line group-data-[ink=dark]:text-fg duration-(--duration-ink) flex items-center justify-between px-5 py-2 text-white backdrop-blur-[14px] transition-[background-color,border-color,color] ease-out lg:mx-auto lg:w-full lg:max-w-[900px] lg:rounded-full lg:border lg:px-8"
+          className="bg-scrim lg:border-on-ink-line group-data-[ink=dark]:bg-scrim-light lg:group-data-[ink=dark]:border-on-light-line group-data-[ink=dark]:text-fg lg:rounded-nav duration-(--duration-ink) flex items-center justify-between px-5 py-2 text-white backdrop-blur-[14px] transition-[background-color,border-color,color] ease-out lg:mx-auto lg:w-full lg:max-w-[900px] lg:border lg:px-4 lg:py-4"
         >
           <Link
             href="/"
@@ -165,10 +161,11 @@ export function SiteNav({ settings, brandMark }: SiteNavProps) {
             {brandMark}
           </Link>
 
-          {/* 1440: the 589px row (`1710:2245`). `contents` promotes the list
-            items to flex children, so space-between spreads links and the
-            button. */}
-          <div className="hidden items-center justify-between lg:flex lg:w-[589px]">
+          {/* 1440: the 643px row (`2225:2740`), five links and the button at a
+            48px gap. `contents` promotes the list items to flex children, so
+            the gap falls between links and button alike and the row runs to
+            its own width rather than a declared one. */}
+          <div className="hidden items-center lg:flex lg:gap-12">
             <ul className="contents">
               {navItems.map((item, i) => (
                 <li key={item._key ?? `nav-${i}`}>

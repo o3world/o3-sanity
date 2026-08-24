@@ -139,56 +139,96 @@ function backgroundOf(element: Element) {
  * The flip is a colour state, not motion — it is not gated on
  * `prefers-reduced-motion`, and the SSR/no-JS output is simply the default dark
  * skin, which is correct wherever the page starts.
+ *
+ * ── WHEN IT ASKS ───────────────────────────────────────────────────────────
+ *
+ * Scrolling is not the only way the surface under a fixed bar changes, and a
+ * sample taken once at mount is stale the moment anything else moves (#318).
+ * Every trigger below is a way the page can change underneath a bar whose
+ * scroll position never moved and whose viewport never resized:
+ *
+ * - **The frame after mount.** The mount sample runs in the hydration commit,
+ *   which is before the browser has laid the hydrated document out and painted
+ *   it. Asking again one frame later costs one hit-test and is the answer that
+ *   ships.
+ * - **A reflow.** Fonts swapping in, images arriving, content streaming in,
+ *   a section revealing — each changes where the bands are, and the document
+ *   element's own box changes with them. `ResizeObserver` sees all of it.
+ * - **Content swapped in place.** A client-side route change replaces the page
+ *   under a layout that never unmounts, so `NavInk` keeps running with the
+ *   previous page's answer; navigating at the top of the document produces
+ *   neither a scroll nor a resize. `MutationObserver` sees the swap.
+ * - **A restore from the back/forward cache.** The page comes back with its
+ *   effects never re-run, so `pageshow` is the only signal there is.
+ *
+ * Everything funnels through `schedule`, so however many of them fire at once
+ * the bar is still sampled at most once per frame.
  */
+export function watchNavInk(header: HTMLElement): () => void {
+  let frame = 0
+
+  const isOverLight = () => {
+    const bar = header.getBoundingClientRect()
+    const midpoint = bar.bottom - bar.height / 2
+    for (const element of document.elementsFromPoint(window.innerWidth / 2, midpoint)) {
+      if (header.contains(element)) continue
+      const background = backgroundOf(element)
+      if (!background || background.alpha < OPAQUE_ALPHA) continue
+      // Only measure the handful of elements that got this far, never the
+      // whole stack. `<body>` and `<html>` span everything, so the walk
+      // always terminates somewhere.
+      const box = element.getBoundingClientRect()
+      if (box.left > bar.left + SPAN_TOLERANCE || box.right < bar.right - SPAN_TOLERANCE) continue
+      return background.luminance > LIGHT_LUMINANCE
+    }
+    // Nothing opaque under the bar, `<html>` included: the default canvas.
+    return true
+  }
+
+  const sample = () => {
+    frame = 0
+    if (isOverLight()) header.dataset.ink = 'dark'
+    else delete header.dataset.ink
+  }
+
+  // Scroll fires far faster than the compositor paints, and a reflow can fire
+  // several of the triggers below at once. One sample per frame is all that
+  // can show up on screen either way.
+  const schedule = () => {
+    if (frame) return
+    frame = requestAnimationFrame(sample)
+  }
+
+  sample()
+  schedule()
+
+  window.addEventListener('scroll', schedule, { passive: true })
+  window.addEventListener('resize', schedule, { passive: true })
+  window.addEventListener('pageshow', schedule)
+
+  const reflow = new ResizeObserver(schedule)
+  reflow.observe(document.documentElement)
+
+  // Attributes are deliberately not watched: `sample` writes one to this very
+  // header, and the whole ink flip is styled off it.
+  const swap = new MutationObserver(schedule)
+  swap.observe(document.body, { childList: true, subtree: true })
+
+  return () => {
+    if (frame) cancelAnimationFrame(frame)
+    window.removeEventListener('scroll', schedule)
+    window.removeEventListener('resize', schedule)
+    window.removeEventListener('pageshow', schedule)
+    reflow.disconnect()
+    swap.disconnect()
+  }
+}
+
 export function NavInk({ targetId = NAV_INK_TARGET }: { targetId?: string }) {
   useEffect(() => {
     const header = document.getElementById(targetId)
     if (!header) return
-
-    let frame = 0
-
-    const isOverLight = () => {
-      const bar = header.getBoundingClientRect()
-      const midpoint = bar.bottom - bar.height / 2
-      for (const element of document.elementsFromPoint(window.innerWidth / 2, midpoint)) {
-        if (header.contains(element)) continue
-        const background = backgroundOf(element)
-        if (!background || background.alpha < OPAQUE_ALPHA) continue
-        // Only measure the handful of elements that got this far, never the
-        // whole stack. `<body>` and `<html>` span everything, so the walk
-        // always terminates somewhere.
-        const box = element.getBoundingClientRect()
-        if (box.left > bar.left + SPAN_TOLERANCE || box.right < bar.right - SPAN_TOLERANCE) continue
-        return background.luminance > LIGHT_LUMINANCE
-      }
-      // Nothing opaque under the bar, `<html>` included: the default canvas.
-      return true
-    }
-
-    const sample = () => {
-      frame = 0
-      if (isOverLight()) header.dataset.ink = 'dark'
-      else delete header.dataset.ink
-    }
-
-    // Scroll fires far faster than the compositor paints. One sample per frame
-    // is all that can show up on screen.
-    const schedule = () => {
-      if (frame) return
-      frame = requestAnimationFrame(sample)
-    }
-
-    sample()
-    window.addEventListener('scroll', schedule, { passive: true })
-    // A resize reflows the bands under a bar whose scroll position has not
-    // changed, so the answer can go stale without a single scroll event.
-    window.addEventListener('resize', schedule, { passive: true })
-
-    return () => {
-      if (frame) cancelAnimationFrame(frame)
-      window.removeEventListener('scroll', schedule)
-      window.removeEventListener('resize', schedule)
-    }
+    return watchNavInk(header)
   }, [targetId])
 
   return null

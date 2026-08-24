@@ -147,8 +147,9 @@
   --color-fg-inverse-muted: rgba(255, 255, 255, 0.65);
 
   /* ── Chrome ────────────────────────────────────────────────────────────── */
-  /* rgba(3,3,3,0.2) — the floating pill NavBar's fill (1710:2271 / 1636:1288).
-   * Sits over whatever the hero is showing, so it must stay an alpha. */
+  /* rgba(3,3,3,0.2) — the floating NavBar's fill, at both widths
+   * (2225:2920 / 1814:1630). Sits over whatever the hero is showing, so it
+   * must stay an alpha. */
   --color-scrim: rgba(3, 3, 3, 0.2);
   /* rgba(255,255,255,0.55) — the same pill once it floats over a LIGHT band.
    * NO CANONICAL ANCHOR: the frames draw the bar over the hero and nowhere

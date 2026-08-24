@@ -7,7 +7,7 @@ import { SITE_SETTINGS } from '../testing/seedContent'
 import { SiteNav } from './SiteNav'
 
 /**
- * Figma's `NavBar` (`1710:2271`), rendered from the **real committed Site
+ * Figma's `NavBar` (`2225:2920`), rendered from the **real committed Site
  * Settings document** rather than a fixture — the chrome is authored entirely
  * in data, so a fixture here would be testing the fixture.
  *
@@ -24,8 +24,9 @@ import { SiteNav } from './SiteNav'
  * white copy. `ScrollsOverBands` is the story that actually shows the flip;
  * scroll it.
  *
- * Two widths, structurally different (ADR 0006): a 900px pill at 1440, a
- * full-width square bar at 402 with the links behind "Open menu".
+ * Two widths, structurally different (ADR 0006): a 900 × 80 bar at 1440 with a
+ * 12px corner, a full-width square bar at 402 with the links behind
+ * "Open menu".
  *
  * The button is **`Theme=White` on both skins** and is the one thing on the bar
  * that does not move. The bar declares itself an `ink` surface and the button's
@@ -38,12 +39,12 @@ const meta = {
   component: SiteNav,
   parameters: {
     layout: 'fullscreen',
-    design: figmaDesign('1710:2271'),
+    design: figmaDesign('2225:2920'),
   },
   // The mark comes from the app (#228). These stories are the O3 chrome —
   // their frames are O3's — so they render what `apps/web` hands the bar, and
   // it is `currentColor`, which is what makes the flip below carry it.
-  args: { settings: SITE_SETTINGS, brandMark: <BrandMark size={64} /> },
+  args: { settings: SITE_SETTINGS, brandMark: <BrandMark size={64} className="lg:size-12" /> },
 } satisfies Meta<typeof SiteNav>
 
 export default meta
