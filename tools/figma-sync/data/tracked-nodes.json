@@ -285,6 +285,51 @@
       "figmaName": "Blog",
       "codeComponent": "packages/content-ui/src/blocks/section/insightsCarouselSection/InsightsCarouselSection.tsx#InsightsCarouselSection",
       "note": "The insight band on Home and the insight index: Property 1 = Default (`2134:1302`, 1440×866) | Mobile (`2204:1145`, 402×1372), bone, 48px gap. Its axis is the unnamed `Property 1` where the other two page sets use `Device`; the values still read Desktop/Mobile, so it is one axis, not a second vocabulary. `CarouselTrack` already reads the mobile variant. Tracked from 2026-08-16."
+    },
+    {
+      "nodeId": "2960:7557",
+      "kind": "pageFrame",
+      "name": "Contact",
+      "figmaName": "Contact",
+      "route": "/contact",
+      "variant": "desktop",
+      "note": "A full /contact page: Interior Hero, form card with quote/portrait/address in the right column. Ruled canonical 2026-08-24 (the 2026-08 design pass; updates are canonical per #308)."
+    },
+    {
+      "nodeId": "2975:10037",
+      "kind": "pageFrame",
+      "name": "Contact",
+      "figmaName": "Insights - Mobile",
+      "route": "/contact",
+      "variant": "mobile",
+      "note": "Duplicated from the Insights mobile frame and never renamed; content is the Contact page at 402. Ruled canonical 2026-08-24 (the 2026-08 design pass; updates are canonical per #308)."
+    },
+    {
+      "nodeId": "2975:8499",
+      "kind": "pageFrame",
+      "name": "Insight index",
+      "figmaName": "Insights - Mobile",
+      "route": "/insights",
+      "variant": "mobile",
+      "note": "The /insights index at 402 - the mobile companion the desktop frame never had. Ruled canonical 2026-08-24 (the 2026-08 design pass; updates are canonical per #308)."
+    },
+    {
+      "nodeId": "2975:9343",
+      "kind": "pageFrame",
+      "name": "Sanity partnership",
+      "figmaName": "Insights - Mobile",
+      "route": "/partners/sanity",
+      "variant": "mobile",
+      "note": "Duplicated from the Insights mobile frame and never renamed; content is /partners/sanity at 402, closing the gap the desktop entry notes. Ruled canonical 2026-08-24 (the 2026-08 design pass; updates are canonical per #308)."
+    },
+    {
+      "nodeId": "2975:8865",
+      "kind": "pageFrame",
+      "name": "About",
+      "figmaName": "About  - Mobile",
+      "route": "/about",
+      "variant": "mobile",
+      "note": "Band-for-band companion to the About desktop redesign. Carries scratch tells (a CTA band named ClaudeTest, raw chrome, divergent CTA copy) - flagged to design, tracked anyway per #308. Ruled canonical 2026-08-24 (the 2026-08 design pass; updates are canonical per #308)."
     }
   ],
   "ignoredNodeIds": [
