@@ -303,6 +303,14 @@
       "note": "The case-study card as a set at last: 1246 × 550 filling a 1248 column, radius 32, padding 64 uniform, space-between over a gap floor of 66 — a 180 × 80 logo holder above a 1118 content row that is 559 of text beside 559 of deadspace, holding an eyebrow (18/24 bold, red #C90E00), a 24/34 narrative, a stat row and a white `Button / Solid`. The /work index instances it three times (`2107:1094`–`1096`) and the case-study detail's next-project band once (`2250:1564`); at 402 the stack `2975:8428` overrides the padding to 24 side / 64 top-and-bottom. Its axis — the `Variant` property, Caron | Ironman | Vertex — is which client the demo shows, so it maps to no `cva` key. The gen-1 sets `264:573` / `1393:3025` never became canonical; this one did. Tracked from 2026-08-24 (#302), internals read from the node tree at file version 2391349966960467923 (#314); the three values the renderer still draws differently are #319."
     },
     {
+      "nodeId": "2748:4672",
+      "kind": "componentSet",
+      "name": "Quote",
+      "figmaName": "Quote",
+      "codeComponent": "packages/content-ui/src/blocks/section/quoteSection/QuoteSection.tsx#QuoteSection",
+      "note": "The pull quote as a band-level set — Device = Device3 | Mobile, where `Device3` is the desktop value under a default name. Bone #F1F0EC, 96 of side padding at 1440 (`2748:4829`) and 16 at 402 (`2748:4686`), a centred 1034 column at 192 of vertical padding (128 at 402), 48 between the quote and the attribution (24 at 402); the quote is 64/76 Light at -1px of tracking in #232323 (36/44 at 402), the attribution 18/24 bold uppercase at 0.1em in fg-muted #76746F (16/20 at 402). Home instances it twice — `2748:4767` at 1440 × 1012 and `2748:4804` at 402 × 804 — both hanging the 776px molecule off the bottom-left corner at 10%. The case-study detail's loose `Section - Quote` (`2250:1525`) is the same block drawn a generation earlier and still disagrees with the set on alignment, type step and a gradient fill; that is #323's open question. Tracked from 2026-08-24 (#323)."
+    },
+    {
       "nodeId": "2960:7557",
       "kind": "pageFrame",
       "name": "Contact",

@@ -130,10 +130,10 @@ both ends are read values (ADR 0006).
 | Utility             | 402    | 1440   | Tracking  | Role                                                |
 | ------------------- | ------ | ------ | --------- | --------------------------------------------------- |
 | `text-hero`         | `36px` | `64px` | -1px      | Home hero headline (`Heading/h1`, **Light 300**)    |
-| `text-quote`        | `30px` | `48px` | 0         | The pull quote (desktop dropped 64 → 48, 2026-08)   |
+| `text-quote`        | `36px` | `64px` | -1px      | The pull quote (`Quote` set, **Light 300**)         |
 | `text-cta`          | `36px` | `64px` | -1px      | The CTA band headline — rides the hero variable     |
 | `text-display-xl`   | `40px` | `48px` | 0         | **Every** section headline; the Work hero; partners |
-| `text-display-lg`   | `18px` | `36px` | 0         | Pull-quote attribution, rail numerals               |
+| `text-display-lg`   | `18px` | `36px` | 0         | Rail numerals; `DisplayHeading` size `lg`           |
 | `text-display-md`   | `22px` | `28px` | -0.0286em | Case-study problem statement ⚠️ floor interpolated  |
 | `text-lead`         | `20px` | `24px` | 0         | Standfirst beside a headline; CTA subhead           |
 | `text-body`         | `16px` | `20px` | 0, lh 1.6 | Long-form prose — every `bodyText` field            |

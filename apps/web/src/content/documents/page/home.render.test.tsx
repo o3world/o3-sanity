@@ -326,7 +326,8 @@ describe('the homepage at 402 (ADR 0006)', () => {
     expect(partnersHeading).toContain('font-light')
     expect(partnersHeading).not.toContain('text-hero')
 
-    // 30 at 402 → 64 at 1440 — its own step, or the hero follows it down.
+    // 36 at 402 → 64 at 1440 (`2748:4839` / `2748:4715`). It carries the
+    // hero's numbers on this brand but keeps its own name — see the token.
     expect(pullQuote).toContain('text-quote')
     expect(pullQuote).not.toContain('text-hero')
   })

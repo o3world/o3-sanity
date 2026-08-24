@@ -6,9 +6,10 @@ import type { SectionProps } from '@o3/content-runtime/blocks'
 import { QuoteSection } from './QuoteSection'
 
 /**
- * The pull quote's three decorations. `orbs` is the Home band (`1683:2137`),
- * `molecule` the 2026-08 case-study band (`2250:1525`, #97), `none` the opt
- * out — and the quote itself must read identically under all three.
+ * The pull quote's three decorations. `molecule` is what the `Quote` set draws
+ * (`2748:4672`, instanced on Home at `2748:4767` / `2748:4804`), `orbs` the
+ * pre-redesign band, `none` the opt out — and the quote itself must read
+ * identically under all three.
  */
 function render(decoration: string | null, surface = 'bone') {
   return renderToStaticMarkup(
@@ -58,6 +59,21 @@ describe('the quote band’s molecule decoration', () => {
     expect(html).toContain('text-quote')
     expect(html).toContain('Simply the best.')
     expect(html).toContain('Business Leader, Global Health Brand')
+  })
+
+  it('centres the column the way the set does, and opens the gap at 1440', () => {
+    // `2748:4839` / `2748:4840` are both centred; the column gap is 24 at 402
+    // (`2748:4689`) and 48 at 1440 (`2748:4838`).
+    expect(html).toContain('text-center')
+    expect(html).toMatch(/gap-6[^"]*lg:gap-12/)
+  })
+
+  it('sets the attribution as the eyebrow the set draws', () => {
+    // 18/24 bold uppercase at 0.1em in fg-muted #76746F (`2748:4840`),
+    // 16/20 at 402 (`2748:4717`) — not a 36px line at half-strength ink.
+    expect(html).toMatch(/eyebrow-lg[^"]*text-fg-muted/)
+    expect(html).not.toContain('text-display-lg')
+    expect(html).not.toContain('max-w-article')
   })
 
   it('is not announced to a reader', () => {
