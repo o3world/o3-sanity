@@ -11,6 +11,8 @@ export interface PanelPlateProps {
   /** The wordmark the platform panels lead with; it wins the heading's slot. */
   logo?: ImageSource
   heading?: string | null
+  /** The rail's own word for this panel — what names a wordmark that has no heading. */
+  railLabel?: string | null
   body?: string | null
   /** The quieter line under the body, where a panel carries one. */
   note?: string | null
@@ -47,6 +49,7 @@ export function PanelPlate({
   id,
   logo,
   heading,
+  railLabel,
   body,
   note,
   button,
@@ -70,7 +73,9 @@ export function PanelPlate({
           {logo ? (
             <SanityImage
               source={logo}
-              alt={heading ?? ''}
+              // The panels that carry a wordmark carry no heading, so the
+              // rail's word for the panel is the only name it has.
+              alt={heading ?? railLabel ?? ''}
               width={640}
               // The frame's slot is 257 × 70 with the artwork contained inside
               // it, so height is what a wordmark is sized by and width is the

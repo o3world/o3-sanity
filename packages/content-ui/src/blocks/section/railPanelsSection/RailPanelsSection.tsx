@@ -284,6 +284,7 @@ export function RailPanelsSection({
           panelIds={items.map((panel, index) => panelId(panel._key, index))}
           railItems={items.map((panel, index) => ({
             key: panel._key ?? String(index),
+            panelId: panelId(panel._key, index),
             label:
               mode === 'number'
                 ? String(index + 1).padStart(2, '0')
@@ -297,6 +298,7 @@ export function RailPanelsSection({
                   id={panelId(panel._key, index)}
                   logo={panel.logo}
                   heading={panel.heading}
+                  railLabel={panel.railLabel}
                   body={panel.body}
                   note={panel.note}
                   button={panel.button}
@@ -317,7 +319,7 @@ export function RailPanelsSection({
                   // the title stacked over its note. At `lg` it becomes the
                   // full panel, a 500px copy column beside a 395px media
                   // square, with the numbering handed back to `PanelRail`.
-                  className="bg-ink flex items-center gap-3 py-4 pl-4 pr-8 text-white lg:flex-row lg:items-center lg:gap-[33px] lg:bg-transparent lg:p-0 lg:text-inherit"
+                  className="bg-ink flex items-center gap-3 py-4 pl-4 pr-8 text-white lg:gap-[33px] lg:bg-transparent lg:p-0 lg:text-inherit"
                 >
                   {/*
                    * The rail numeral, inlined. `PanelRail` is the 1440
@@ -332,8 +334,19 @@ export function RailPanelsSection({
                     {String(index + 1).padStart(2, '0')}
                   </span>
 
-                  <div className="flex min-w-0 flex-1 flex-col lg:flex lg:w-[500px] lg:flex-col lg:gap-12">
-                    {panel.heading ? (
+                  <div className="flex min-w-0 flex-1 flex-col lg:w-[500px] lg:gap-12">
+                    {/* A wordmark wins the heading's slot here too — the knob
+                        is what picks the rail, and either rail can be turned
+                        on a band whose panels lead with a logo. */}
+                    {panel.logo ? (
+                      <SanityImage
+                        source={panel.logo}
+                        alt={panel.heading ?? panel.railLabel ?? ''}
+                        width={640}
+                        className="h-12 w-auto min-w-0 max-w-[177px] shrink object-contain object-left lg:h-[70px] lg:max-w-[257px] lg:shrink-0"
+                        sizes="(min-width: 1024px) 257px, 177px"
+                      />
+                    ) : panel.heading ? (
                       // 18/24 Medium in the row (`1814:1719`), the 48px
                       // section step in the panel. `max-lg:` rather than a
                       // `lg:` pair so the desktop step keeps the token's own

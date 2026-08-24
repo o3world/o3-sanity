@@ -36,9 +36,10 @@ band against Home desktop:
 **Same bands, same order, nothing present on one and absent from the other.**
 The divergence is entirely in how each band lays out internally.
 
-⚠️ Both rail rows carry **superseded** frame ids. The bands were redrawn on
-2026-08-24 and the comparison survived the redraw — see the
-[amendment](#amendment-2026-08-24) for the frames that replace them.
+⚠️ Both rail rows carry **superseded** frame ids, and the table's order is
+superseded with them: the 2026-08-24 pass moved the pull quote below the
+platforms band on both frames. The comparison survived the redraw — see the
+[amendment](#amendment-2026-08-24).
 
 ## Decision
 

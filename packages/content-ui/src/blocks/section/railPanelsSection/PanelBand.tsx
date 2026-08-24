@@ -4,11 +4,11 @@ import { useEffect, useState, type ReactNode } from 'react'
 
 import { cn } from '@o3/ui/lib/utils'
 
-import { PanelRail } from './PanelRail'
+import { PanelRail, type PanelRailItem } from './PanelRail'
 
 export interface PanelBandProps {
   /** Rail entries, already resolved to what the rail should show. */
-  railItems: readonly { key: string; label: string }[]
+  railItems: readonly PanelRailItem[]
   /** DOM ids of the panels, in children order — what the band observes. */
   panelIds: readonly string[]
   /** `number` draws the active rail item as a reversed ink chip (`1744:1786`). */

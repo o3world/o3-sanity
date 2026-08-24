@@ -46,10 +46,7 @@ type QuoteSectionProps = SectionProps<'quoteSection'> & {
  * **`decoration: 'molecule'`** is the same column and the same gradient fill
  * with the molecule mark instead of the two spheres — 776px at 10%, hung off
  * the band's bottom-left corner and clipped by its `overflow-hidden`. The
- * offsets are Home's (`2748:4767` at 1440, `2748:4804` at 402), which is the
- * newer of the two frames that instance it; the case-study band (`2250:1525`)
- * still draws the same glyph off its right edge, and follows this one until it
- * is redrawn.
+ * offsets are Home's — `2748:4767` at 1440, `2748:4804` at 402.
  *
  * It is the one decoration on this band that survives 402: the mobile frame
  * hangs the full 776px off the corner and lets the gutter clip it, where the
