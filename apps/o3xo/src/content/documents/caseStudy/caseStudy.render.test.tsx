@@ -47,7 +47,18 @@ describe('the case-study detail route', () => {
   it('links the next project at this brand’s prefix', async () => {
     const { html } = await render(
       aCaseStudy({
-        next: { title: 'The one after', slug: 'the-one-after', heroMedia: null, client: null },
+        next: {
+          _id: 'caseStudy-the-one-after',
+          _type: 'caseStudy',
+          title: 'The one after',
+          slug: 'the-one-after',
+          narrativeHeadline: null,
+          headlineStat: null,
+          heroMedia: null,
+          client: null,
+          industries: null,
+          industryDetail: null,
+        },
       }),
     )
 
