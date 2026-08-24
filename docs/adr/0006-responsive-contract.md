@@ -27,14 +27,18 @@ band against Home desktop:
 | Partners / intro      | `1864:2390`              | `1814:1639`              |
 | Case studies          | `1683:2656`              | `1814:1653`              |
 | Pull quote            | `1683:2137`              | `1814:1679`              |
-| Platforms             | `1762:2149`              | `1814:1686`              |
-| Ways to work          | `1762:2168`              | `1814:1709`              |
+| Platforms ⚠️          | `1762:2149`              | `1814:1686`              |
+| Ways to work ⚠️       | `1762:2168`              | `1814:1709`              |
 | Perspectives ("Blog") | `1683:2467`              | `1814:1738`              |
 | CTA band              | `1680:2132`              | `1814:1775`              |
 | Footer                | `1680:2096`              | `1814:1784`              |
 
 **Same bands, same order, nothing present on one and absent from the other.**
 The divergence is entirely in how each band lays out internally.
+
+⚠️ Both rail rows carry **superseded** frame ids. The bands were redrawn on
+2026-08-24 and the comparison survived the redraw — see the
+[amendment](#amendment-2026-08-24) for the frames that replace them.
 
 ## Decision
 
@@ -302,3 +306,68 @@ Two smaller reads recorded but not acted on:
 - **The controls are 48px in both variants**, against `CarouselControl`'s
   58px, read from `Icon / Surface` `778:1862`. That gap is the same at 1440,
   so it is not a mobile divergence and not this amendment's to close.
+
+---
+
+## Amendment 2026-08-24
+
+**Home's two rail bands were redrawn, and one of them stops being a
+composition switch.** Everything above stands. This records the new frames the
+bands answer to, and takes the platforms rail out of the `lg` switch it was
+built with.
+
+### What changed in the file
+
+`pnpm figma:sync` (file version `2391294223089469247`,
+[issue #309](https://github.com/o3world/o3-sanity/issues/309) and
+[issue #310](https://github.com/o3world/o3-sanity/issues/310)) found both bands
+redrawn at both widths:
+
+| Band         | Was                       | Is                        |
+| ------------ | ------------------------- | ------------------------- |
+| Platforms    | `1762:2149` / `1814:1686` | `2747:4486` / `2975:8188` |
+| Ways to work | `1762:2168` / `1814:1709` | `2846:5480` / `2975:8355` |
+
+The Context table above names the superseded pair on both rows. The comparison
+it draws still holds: the redrawn Home frames run the same bands in the same
+order at 402 as at 1440, including the reorder that came with this pass — case
+studies, platforms, quote, services.
+
+"Ways to work" is now titled "How we work" and is a horizontal snap-scroller at
+both widths, one column per view at 402 (#309). It joins Perspectives as a
+track that scrolls at every width rather than only above `lg`.
+
+### The decision this amends
+
+**The platforms rail is no longer a structural divergence.** The old 402 frame
+dropped the rail column, the media plate and the panel prose, and collapsed
+each panel to a single row — a composition switch, and the section renderer
+was built as one.
+
+`2975:8188` keeps every part the 1440 frame has and re-lays them: the rail
+becomes a tab row over the panels instead of a sticky column beside them, and
+each panel stacks its plate under its copy. That is a reflow, which this ADR
+already calls a renderer detail, so the band drops out of the `lg` switch.
+
+Two marks for one state follow from the same read. The active rail stop takes a
+3 × 20 red bar at its left edge in the column, and a 2px red rule under the word
+in the row. Both are the brand red, and which one is drawn follows the measure,
+not a second field.
+
+The rail's `number` mode keeps its switch. Its 402 composition is still the ink
+row with the numeral inlined (`1814:1714`), which no redrawn frame supersedes,
+so the renderer holds both drawings and the `rail` knob picks between them.
+
+### What this deliberately does not follow
+
+The desktop frame's media plate is 491 wide and overruns the panel column by
+the 96px page gutter, ending flush with the viewport edge. The renderer gives
+the plate the 395 the band's own sum leaves for it (82 + 238 + 500 + 33 + 395 =
+1248). The three mobile plates are drawn at three heights — 286, 396 and 280 —
+against one Left column of 396, so the overrun reads as a resize in progress
+rather than a bleed to specify.
+
+The plates are also empty grey on every panel at both widths. The renderer
+holds that space at 1440, where the row would otherwise collapse onto the copy
+column, and draws nothing at 402, where there is no row to hold open. A panel
+whose picture the seed already carries draws it at both widths.

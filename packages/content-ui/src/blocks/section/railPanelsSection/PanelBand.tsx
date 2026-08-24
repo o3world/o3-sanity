@@ -1,6 +1,6 @@
 'use client'
 
-import { Children, useEffect, useState, type ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 
 import { cn } from '@o3/ui/lib/utils'
 
@@ -18,25 +18,22 @@ export interface PanelBandProps {
 }
 
 /**
- * The rail-layout body band (`1762:2148`) — the sticky rail beside the panel
- * stack, and the section's one client boundary.
+ * The rail-layout body band — the `Container` on `2747:4490`, and the
+ * section's one client boundary.
  *
- * The frame draws the interaction it cannot animate: the band appears twice,
- * the second copy at 20% opacity (`1899:4345`). That duplicate is not a second
- * panel — it is the mid-scroll state, the next plate waiting dimmed under the
- * active one. So the band owns a single scroll-linked active index and hands
- * it both ways: the rail marks the active item, every other plate sets back
- * to 20%.
+ * ```
+ * 1440   row, gap 238    rail 82px sticky    |  panels, 128 apart
+ *  402   column, gap 64  rail as a tab row   |  panels, 128 apart
+ * ```
  *
- * One index, one observer — the observer sat in `PanelRail` before this, and
- * a second one on the plates could disagree with it in the gaps between
- * panels. A rail marking plate 2 while plate 2 dims would be worse than no
- * interaction at all, which is why the state was lifted here instead.
+ * What it owns is the one thing the frames cannot draw (#33): which panel the
+ * viewport is looking at. The rail marks that panel and nothing else does, so
+ * there is a single scroll-linked index here rather than an observer per
+ * consumer — two could disagree in the gaps between panels, and a rail marking
+ * a stop the reader has left is worse than a rail that never moves.
  *
- * Until the observer first fires — no JS, jsdom, print — `active` is `null`:
- * the rail falls back to marking the first item (matching the frame) and no
- * plate dims, so a render the observer never reaches keeps every plate
- * readable instead of stranding four fifths of the section at 20%.
+ * Until the observer first fires — no JS, jsdom, print — `active` is `null`
+ * and the rail marks the first stop, which is what both frames draw.
  */
 export function PanelBand({ railItems, panelIds, mode, children }: PanelBandProps) {
   const [active, setActive] = useState<number | null>(null)
@@ -65,22 +62,18 @@ export function PanelBand({ railItems, panelIds, mode, children }: PanelBandProp
   }, [panelIds])
 
   return (
-    <div className="flex w-full gap-8 lg:gap-[238px]">
+    <div className="flex w-full flex-col gap-16 lg:flex-row lg:gap-[238px]">
       <PanelRail mode={mode} items={railItems} active={active ?? 0} />
 
-      <div className="flex min-w-0 flex-1 flex-col gap-6 lg:gap-[164px]">
-        {Children.map(children, (child, index) => (
-          <div
-            className={cn(
-              // The fade is a 1440 element like the rail it answers to:
-              // neither 402 frame dims its compact rows.
-              'duration-(--duration-ink) transition-opacity ease-out motion-reduce:transition-none',
-              active !== null && active !== index && 'lg:opacity-20',
-            )}
-          >
-            {child}
-          </div>
-        ))}
+      <div
+        className={cn(
+          'flex min-w-0 flex-1 flex-col',
+          // 128 between panels at both widths (`2747:4501`, `2975:8203`).
+          // The number rail keeps the 24 its own 402 rows sit at.
+          mode === 'number' ? 'gap-6 lg:gap-32' : 'gap-32',
+        )}
+      >
+        {children}
       </div>
     </div>
   )

@@ -2,6 +2,10 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 
+import { cn } from '@o3/ui/lib/utils'
+
+import { STATEMENT_STEP } from './statementStep'
+
 export interface PanelTrackItem {
   key: string
   heading?: string | null
@@ -145,12 +149,9 @@ export function PanelTrack({ items, label }: PanelTrackProps) {
             </span>
 
             {panel.heading ? (
-              // 48/58 at 402 and 64/76 at 1440, solved across the two frames
-              // the way the ramp's own clamps are (ADR 0006). No token spans
-              // that pair: `hero` floors at 36 and `display-xl` caps at 48.
-              <h3 className="font-display text-balance text-[clamp(48px,calc(1.541vw_+_41.8px),64px)] font-light leading-[clamp(58px,calc(1.734vw_+_51.03px),76px)] tracking-[clamp(-1px,calc(0.387px_-_0.096vw),0px)]">
-                {panel.heading}
-              </h3>
+              // 48/58 at 402 and 64/76 at 1440 — the step the rail header
+              // sets too, so it is shared rather than written twice.
+              <h3 className={cn('font-display text-balance', STATEMENT_STEP)}>{panel.heading}</h3>
             ) : null}
 
             {/* 24/34 on BOTH frames, so the solved clamp is flat — the one

@@ -47,6 +47,25 @@ describe('the seeded homepage', () => {
   })
 
   /**
+   * The frame's band sequence (`2747:4486`'s parent `1680:2134`, and
+   * `1814:1618` at 402 — both widths run the same order). The platforms band
+   * comes before the quote, and the how-we-work track after it.
+   */
+  it('follows the frame’s band sequence', () => {
+    const sections = (aSeededPage('index').sections ?? []) as { _type: string; _key: string }[]
+    expect(sections.map((section) => section._key)).toEqual([
+      'hero',
+      'partners',
+      'work',
+      'platforms',
+      'quote',
+      'engagements',
+      'insights',
+      'cta',
+    ])
+  })
+
+  /**
    * Sub-block attribution (#107) — the elements the canvas toolbar attaches
    * to. A toolbar whose surfaces are *section / header / item* needs three
    * attributed elements; before this the band was the only one, so every
@@ -84,7 +103,7 @@ describe('the seeded homepage', () => {
     ['a case study’s narrative headline', 'CMS was heading for end of life'],
     ['quote', 'positioned our company as the leader and shaper'],
     ['platform rail', 'The platforms we go deep on'],
-    ['platform standfirst', 'We don&#x27;t dabble across every tool'],
+    ['platform standfirst', 'certified depth in modern platforms that are scaling the internet'],
     ['engagement heading', 'How we work'],
     ['engagement panel', 'Embedded Team'],
     ['engagement note', 'Best when you trust the direction and need the horsepower.'],
@@ -102,6 +121,24 @@ describe('the seeded homepage', () => {
     expect(html).toContain('>.01<')
     expect(html).toContain('>.02<')
     expect(html).toContain('>.03<')
+  })
+
+  /**
+   * The quote band's decoration (`2748:4767`, `2748:4804` at 402): the
+   * molecule at 10%, hung off the band's bottom-left corner. The two spheres
+   * belong to the closer, which draws its own — see the last describe.
+   */
+  it('hangs the molecule behind the quote, not the spheres', () => {
+    const sections = (aSeededPage('index').sections ?? []) as {
+      _type: string
+      decoration?: string
+    }[]
+    expect(sections.find((section) => section._type === 'quoteSection')?.decoration).toBe(
+      'molecule',
+    )
+    // The mark's own viewBox. Home's closer draws `orbs`, so the glyph
+    // appearing at all is this band's.
+    expect(html).toContain('viewBox="0 0 699 699"')
   })
 
   it('renders the client logos the partners strip references', () => {
@@ -180,6 +217,20 @@ describe('the homepage at 402 (ADR 0006)', () => {
     const track = html.match(/<ol[^>]*class="([^"]*snap-mandatory[^"]*)"/)?.[1] ?? ''
     expect(track, 'the track is not a scroll region').toContain('overflow-x-auto')
     expect(track).toContain('snap-x')
+  })
+
+  /**
+   * The platforms rail at 402 (`2975:8193`): the same three stops, laid as a
+   * tab row over the panels instead of a sticky column beside them. The
+   * column measure is what carries the `lg:`, and the row must not scroll —
+   * the three labels fit the 354px column.
+   */
+  it('lays the platforms rail as a tab row until lg', () => {
+    expect(variantsOf(html, 'w-[82px]')).toEqual(['lg:w-[82px]'])
+    expect(variantsOf(html, 'flex-col')).toContain('lg:flex-col')
+    // The active stop is underlined in brand red at 402 and marked by the
+    // 3 × 20 indicator at 1440 — two drawings of one state.
+    expect(html).toContain('border-brand')
   })
 
   it('gives the insights carousel one card per view until lg', () => {

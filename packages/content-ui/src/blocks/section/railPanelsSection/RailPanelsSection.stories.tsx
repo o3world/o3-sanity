@@ -8,7 +8,7 @@ import { RailPanelsSection } from './RailPanelsSection'
 /**
  * Rail + panels — an ordered set of parallel things, in five arrangements.
  *
- * `layout` is the axis: `rail` is Home's platforms band (`1762:2149`); `cards`
+ * `layout` is the axis: `rail` is Home's platforms band (`2747:4486`); `cards`
  * is the Solutions engagement band (`1925:6113`–`6115`, #47); `rows` is the
  * partner page's services (`2749:6863`); `grid` is the software-engineering
  * service page's grid (`2358:2788`, #93); `track` is Home's "How we work"
@@ -26,7 +26,7 @@ const meta = {
   component: RailPanelsSection,
   parameters: {
     layout: 'fullscreen',
-    design: figmaDesign('1762:2149'),
+    design: figmaDesign('2747:4486'),
   },
 } satisfies Meta<typeof RailPanelsSection>
 
@@ -41,6 +41,7 @@ export const RailByLabel: Story = {
 /**
  * The same rail counting **numbers** off array order (`1744:1786`) — a reversed
  * ink chip on the active stop, and the numeral inlined into the row at 402.
+ * The one arrangement that still switches composition at `lg`.
  *
  * The knob is set here rather than seeded: no page picks this value since Home
  * moved its ways-to-work band to the track (#309), and an option an editor can
@@ -74,12 +75,14 @@ export const Cards: Story = {
 }
 
 /**
- * At 402 the mobile frames compose this band differently enough that it is a
- * composition switch rather than a reflow — both layouts, on a phone.
+ * The rail at 402 (`2975:8188`): the rail is a tab row over the panels, each
+ * panel stacks its plate under its copy, and the underline replaces the 3 × 20
+ * indicator on the active stop.
  */
 export const RailMobile: Story = {
   args: seededSectionArgs('index', 'railPanelsSection', 0),
   globals: { viewport: { value: 'mobile' } },
+  parameters: { design: figmaDesign('2975:8188') },
 }
 
 export const CardsMobile: Story = {

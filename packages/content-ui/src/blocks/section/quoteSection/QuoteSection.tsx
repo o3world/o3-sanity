@@ -43,12 +43,17 @@ type QuoteSectionProps = SectionProps<'quoteSection'> & {
  * rather than stored: an editor should not have to remember to type the
  * glyphs, and a typed `"` would render as a straight quote.
  *
- * **`decoration: 'molecule'`** is the 2026-08 case-study band (`2250:1525`,
- * #97): the same column and the same gradient fill, with the molecule mark
- * instead of the two spheres — 699px at 10%, hung off the band's right edge at
- * the frame's own offsets (x 944 against a 1440 frame, y 181) and clipped by
- * the band's `overflow-hidden`. Hidden below `lg` for the same reason the
- * spheres are: a 699px decoration on a 402px frame is not a decoration.
+ * **`decoration: 'molecule'`** is the same column and the same gradient fill
+ * with the molecule mark instead of the two spheres — 776px at 10%, hung off
+ * the band's bottom-left corner and clipped by its `overflow-hidden`. The
+ * offsets are Home's (`2748:4767` at 1440, `2748:4804` at 402), which is the
+ * newer of the two frames that instance it; the case-study band (`2250:1525`)
+ * still draws the same glyph off its right edge, and follows this one until it
+ * is redrawn.
+ *
+ * It is the one decoration on this band that survives 402: the mobile frame
+ * hangs the full 776px off the corner and lets the gutter clip it, where the
+ * spheres would fill the band instead of sitting behind it.
  */
 export function QuoteSection({
   quote,
@@ -72,7 +77,10 @@ export function QuoteSection({
           decoration={decoration}
           block="quoteSection"
           surface={resolved}
-          className="opacity-10 lg:right-[-203px] lg:top-[181px] lg:w-[699px]"
+          // 167 past the gutter and 546 below the band at 402; 128 and 374 at
+          // 1440, where the band is taller and the glyph rides higher in it.
+          className="bottom-[-546px] left-[-167px] w-[776px] opacity-10 lg:bottom-[-374px] lg:left-[-128px]"
+          visibleFrom="base"
         />
 
         {showOrbs ? (

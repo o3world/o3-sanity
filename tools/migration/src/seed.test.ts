@@ -639,16 +639,16 @@ describe('committed seed content', () => {
       expect((home?.slug as { current: string })?.current).toBe('index')
     })
 
-    // Was the prototype's sequence until #42. The frame puts the pull quote
-    // straight after the case studies and both rail bands after it; Figma is
-    // the source of record (map #33), so the seed moved and this moved with it.
+    // The frame's order at both widths (`1680:2134`, `1814:1618`): the case
+    // studies, the platforms rail, the pull quote, then the how-we-work track.
+    // Figma is the source of record (map #33), so the seed follows it.
     it('follows the canonical Home frame’s section sequence', () => {
       expect(((home?.sections ?? []) as { _type: string }[]).map((s) => s._type)).toEqual([
         'heroSection',
         'logoWallSection',
         'caseShowcaseSection',
-        'quoteSection',
         'railPanelsSection',
+        'quoteSection',
         'railPanelsSection',
         'insightsCarouselSection',
         'ctaSection',

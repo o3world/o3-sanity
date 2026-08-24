@@ -85,7 +85,6 @@ Trusted by organizations shaping what's next.
 See all partners
 Most firms can ship what you ask for. We solve what was actually in the way.
 View our work
-Business Leader, Global Health Brand
 The platforms we go deep on
 Sanity
 View our Sanity work
@@ -93,6 +92,7 @@ Vercel
 View our Vercel work
 Lovable
 View our Lovable work
+Business Leader, Global Health Brand
 How we work
 Embedded Team
 Embedded Team

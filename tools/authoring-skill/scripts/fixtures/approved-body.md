@@ -230,9 +230,7 @@ Strategy, design, engineering, and AI under one roof. The senior team that finds
 
 From Fortune 500 enterprises to high-growth organizations, we've helped teams launch products, modernize platforms, and improve digital performance.
 
-We were very happy with the outcome and so was top management. I believe we positioned our company as the leader and shaper we want to be seen as. Thank you for all your help, on a tight deadline and always with a smile.
-
-We don't dabble across every tool. We build real, certified depth in a few platforms — so the recommendation and the implementation come from the same people.
+We build real, certified depth in modern platforms that are scaling the internet.
 
 Structured content and real-time editing, wired into the systems your team already runs — not bolted on beside them.
 
@@ -245,6 +243,8 @@ The Vercel mark, a white triangle centered on a black square.
 AI-native product building — from prompt to production, shipping working software at the speed of the idea.
 
 The Lovable mark, a rounded heart filled with a gradient running from orange through pink to blue.
+
+We were very happy with the outcome and so was top management. I believe we positioned our company as the leader and shaper we want to be seen as. Thank you for all your help, on a tight deadline and always with a smile.
 
 From senior hands inside your team to owning the whole outcome.
 

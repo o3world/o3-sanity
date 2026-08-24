@@ -14,15 +14,20 @@ import { resolveSurface } from '../../surface'
 import { PanelBand } from './PanelBand'
 import { PanelCards, type PanelCard } from './PanelCards'
 import { PanelGrid } from './PanelGrid'
+import { PanelPlate } from './PanelPlate'
 import { PanelRows } from './PanelRows'
 import { PanelTrack } from './PanelTrack'
+import { STATEMENT_STEP } from './statementStep'
 
 /**
- * The three measures the band's header comes in. Every layout draws the same
- * heading and standfirst; what differs is the column each gets, and that is
- * read off the frame the layout answers to.
+ * The four measures the band's header comes in. Every layout draws the same
+ * heading and standfirst; what differs is the step and the column each gets,
+ * and both are read off the frame the layout answers to.
  *
- * - `measured` — the rail bands: a 928px header, heading over 500 and
+ * - `spread` — the rail band: the full column, heading over 571 and standfirst
+ *   over 385, pushed apart and centred against each other (`2747:4487`). The
+ *   one header on the 48 → 64 statement step rather than `display-xl`.
+ * - `measured` — the rows and grid bands: a 928px header, heading over 500 and
  *   standfirst over 385 (`1762:2149`).
  * - `wide` — the Solutions cards band: the full column, 571 and 607, baselines
  *   aligned at the foot (`1925:6108`).
@@ -30,14 +35,22 @@ import { PanelTrack } from './PanelTrack'
  *   the standfirst holding the far edge in 340 (`2846:5480`).
  */
 const HEADER_SHAPE = {
+  spread: {
+    // 24 between the two at 402 (`2975:8189`), 64 apart across the row at 1440.
+    wrapper: 'gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-16',
+    heading: `${STATEMENT_STEP} lg:w-[571px]`,
+    // 24/34 on both frames — flat, so `text-lead`'s 20px floor would undersize
+    // it at 402.
+    intro: 'text-[24px] leading-[34px] lg:w-[385px]',
+  },
   measured: {
     wrapper: 'gap-6 lg:w-[928px] lg:flex-row lg:items-center lg:gap-8',
-    heading: 'lg:w-[500px]',
+    heading: 'text-display-xl lg:w-[500px]',
     intro: 'text-lead leading-[1.2] lg:w-[385px]',
   },
   wide: {
     wrapper: 'gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-8',
-    heading: 'lg:w-[571px]',
+    heading: 'text-display-xl lg:w-[571px]',
     // 30px against the 24px step on the Solutions band — 1.25 rather than
     // 1.2, and the only value the three headers disagree on.
     intro: 'text-lead leading-[1.2] lg:w-[607px] lg:leading-[1.25]',
@@ -46,7 +59,7 @@ const HEADER_SHAPE = {
     // 18 between the heading and the standfirst at 402 (`2975:8355`), where
     // every other band takes 24.
     wrapper: 'gap-[18px] lg:flex-row lg:items-start lg:justify-between lg:gap-8',
-    heading: undefined,
+    heading: 'text-display-xl',
     // 20/32 on both of the track's frames — flat, so `text-body`'s 16px floor
     // would undersize it at 402.
     intro: 'text-[20px] leading-8 lg:w-[340px]',
@@ -66,42 +79,36 @@ type RailPanelsSectionProps = SectionProps<'railPanelsSection'> & {
 /**
  * Section block: rail + panels — an ordered set of parallel things, in five
  * arrangements. The rail composition below is Home's "The platforms we go deep
- * on" (`1762:2149`), #42.
+ * on" (`2747:4486` at 1440, `2975:8188` at 402), #310.
  *
  * ```
- * 128px 96px 192px, contents flex-END, 128px between header and body
- *   header  928px wide      48px heading in 500px  |  24px standfirst in 385px
- *   body    row, gap 238    rail 82px              |  panels
- *     panel row, gap 33     copy 500 × 396         |  media 395 × 396
+ * 128px 96px 128px, 128 between header and body
+ *   header  full column      64px heading in 571  |  24px standfirst in 385
+ *   body    row, gap 238     rail 82px            |  panels, 128 apart
+ *     panel row, gap 33      copy 500             |  plate 395 × 396
  * ```
  *
  * 82 + 238 + 500 + 33 + 395 = 1248 — the whole band is the standard content
- * column, right-aligned inside it. The scaffold had the rail as a label list
- * above a stack of bordered articles, which is a different layout entirely.
+ * column. If it ever stops adding up, that sum is where to start.
  *
  * What the rail counts off is the `rail` field, not a second block type. Panel
  * numbering derives from array order (CONTEXT.md), so `01` is a position
  * rather than a string someone typed.
  *
- * The body row is `PanelBand`, the section's one client boundary: the frame
- * shows the band twice with the second copy at 20% opacity (`1899:4345`),
- * which is a scroll state rather than a second panel, and the band owns the
- * single active index that drives both the rail highlight and the plate fade.
+ * The body row is `PanelBand`, the section's one client boundary: it owns the
+ * scroll-linked index that tells the rail which stop is in view.
  *
  * ## At 402
  *
- * The mobile frames compose this band differently enough that it belongs
- * beside ADR 0006's three named divergences rather than under them. There is
- * no rail column, no media square and no prose: each panel collapses to a
- * single `ContentPlatform - Mobile` row, 24px apart.
+ * The label rail keeps every part it has at 1440 and re-lays them: the rail
+ * becomes a tab row over the panels (`PanelRail`) and each panel stacks its
+ * plate under its copy (`PanelPlate`). That is a reflow, not a second
+ * composition — see ADR 0006's 2026-08-24 amendment.
  *
- * | Band      | Frame       | Row                                          |
- * | --------- | ----------- | -------------------------------------------- |
- * | Platforms | `1814:1691` | wordmark left, ghost "View work →" right     |
- * | Numbered  | `1814:1714` | ink block: numeral, then title over its note |
- *
- * The rail numeral moves **into** the row, because a sticky 82px column has
- * nowhere to stand at 402.
+ * The number rail is the one that still switches: no rail column, no media
+ * square and no prose, each panel collapsing to a single ink row 24px from
+ * the next (`1814:1714`), with the numeral moved into the row because a
+ * sticky 82px column has nowhere to stand.
  *
  * ## `layout: cards` — the Solutions band (`1925:6108`), #47
  *
@@ -156,7 +163,8 @@ export function RailPanelsSection({
   // (SectionProps strips `_key` from the section itself).
   const panelId = (key: string | undefined, index: number) => `rail-panel-${key ?? index}`
 
-  const shape = isCards ? 'wide' : isTrack ? 'split' : 'measured'
+  const isRail = !isCards && !isRows && !isGrid && !isTrack
+  const shape = isCards ? 'wide' : isTrack ? 'split' : isRail ? 'spread' : 'measured'
 
   const header = (
     <div
@@ -168,11 +176,7 @@ export function RailPanelsSection({
       className={cn('flex w-full flex-col', HEADER_SHAPE[shape].wrapper)}
     >
       {heading ? (
-        <h2
-          className={cn('text-display-xl font-display text-balance', HEADER_SHAPE[shape].heading)}
-        >
-          {heading}
-        </h2>
+        <h2 className={cn('font-display text-balance', HEADER_SHAPE[shape].heading)}>{heading}</h2>
       ) : null}
       {intro ? <p className={HEADER_SHAPE[shape].intro}>{intro}</p> : null}
     </div>
@@ -269,8 +273,10 @@ export function RailPanelsSection({
   }
 
   return (
-    <SectionShell surface={resolved} top="md" bottom="lg" background={background}>
-      <div className="flex flex-col items-end gap-16 lg:gap-32">
+    // `2747:4486` — 128 above and below, and 128 between the header and the
+    // band, at both widths.
+    <SectionShell surface={resolved} top="md" bottom="md" background={background}>
+      <div className="flex flex-col gap-32">
         {header}
 
         <PanelBand
@@ -284,155 +290,102 @@ export function RailPanelsSection({
                 : (panel.railLabel ?? panel.heading ?? ''),
           }))}
         >
-          {items.map((panel, index) => (
-            <article
-              key={panel._key}
-              id={panelId(panel._key, index)}
-              // The panel's own path — `sections[_key=="…"].panels[_key=="…"]`.
-              // `panels` has exactly one member type, so it serialises as an
-              // `arrayItem` and resolves natively at this depth (#104).
-              data-sanity={itemAttr(loc, 'panels', panel._key)}
-              className={cn(
-                // At 402 a panel is one compact ROW — `ContentPlatform -
-                // Mobile`, drawn twice: `1814:1691` for platforms (a bare
-                // row, wordmark left and the link right) and `1814:1714`
-                // for ways-to-work (an ink block, numeral left and the
-                // title stacked over its note). 24px apart either way.
-                //
-                // At `lg` both become the full panel: a 500px copy column
-                // beside a 395px media square, with the numbering handed
-                // back to `PanelRail`.
-                'flex items-center lg:flex-row lg:items-center lg:gap-[33px] lg:bg-transparent lg:p-0 lg:text-inherit',
-                mode === 'number'
-                  ? 'bg-ink gap-3 py-4 pl-4 pr-8 text-white'
-                  : 'justify-between gap-4 py-2',
-              )}
-            >
-              {/*
-               * The rail numeral, inlined. `PanelRail` is the 1440
-               * treatment — a sticky 82px column beside the stack — and it
-               * has nowhere to stand at 402, so the mobile row carries its
-               * own 68 × 48 numeral box (`1814:1930`).
-               */}
-              {mode === 'number' ? (
-                <span
-                  aria-hidden="true"
-                  className="flex h-12 w-[68px] shrink-0 items-center justify-center text-[36px] leading-none tracking-[-0.0262em] lg:hidden"
-                >
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-              ) : null}
-
-              {/*
-               * `contents` on the platforms row so the wordmark and the
-               * link become direct children of the row's `justify-between`
-               * — the frame puts them at opposite ends, and the alternative
-               * is rendering the same panel twice in the DOM. The column
-               * re-forms at `lg`.
-               */}
-              <div
-                className={cn(
-                  'min-w-0 lg:flex lg:w-[500px] lg:flex-col lg:gap-12',
-                  // 208 in the frame; `flex-1` here, because the frame's
-                  // demo note is one line and a real one is three.
-                  mode === 'number' ? 'flex flex-1 flex-col' : 'contents',
-                )}
-              >
-                {/*
-                 * The platforms band leads with a wordmark, the ways-to-work
-                 * band with a 48px heading. They occupy the same slot, which
-                 * is why `logo` wins when present rather than sitting above
-                 * the heading.
-                 */}
-                {panel.logo ? (
-                  <SanityImage
-                    source={panel.logo}
-                    alt={panel.heading ?? panel.railLabel ?? ''}
-                    width={640}
-                    // 177 × 48 in the frame (`1864:2364`), but allowed to
-                    // shrink: the frame's link reads "View work" and a real
-                    // one reads "View our Sanity work", which is 24px more
-                    // row than a 402 phone has.
-                    className="h-12 w-auto min-w-0 max-w-[177px] shrink object-contain object-left lg:h-[60px] lg:max-w-none lg:shrink-0"
-                    // A wordmark sized by its height, so its width is the
-                    // artwork's business: 177px is the frame's cap below `lg`,
-                    // and above it a 60px-tall lockup is 218px at the corpus's
-                    // 3.6:1 but could be 300 at 5:1. 384 is the candidate that
-                    // covers up to 6.4:1 — one step up the ladder from the
-                    // corpus's own need, because `logo` is an editor field and
-                    // a too-small slot upscales a wordmark visibly. Without a
-                    // slot at all the browser downloads the full 640.
-                    sizes="(min-width: 1024px) 384px, 177px"
-                  />
-                ) : panel.heading ? (
-                  // 18/24 Medium in the row (`1814:1719`), the 48px section
-                  // step in the panel. `max-lg:` rather than a `lg:` pair
-                  // so the desktop step keeps the token's own line-height.
-                  <h3 className="text-display-xl font-display text-balance max-lg:text-[18px] max-lg:font-medium max-lg:leading-6">
-                    {panel.heading}
-                  </h3>
-                ) : null}
-
-                {/*
-                 * Neither mobile row carries the panel's prose — the frame
-                 * drops it at 402 and keeps the note as the one-line gloss.
-                 * The only place on either page where the mobile frame
-                 * holds LESS content than the desktop one.
-                 */}
-                {panel.body ? (
-                  <p className="text-lead hidden leading-[1.2] lg:block">{panel.body}</p>
-                ) : null}
-                {panel.note ? (
-                  <p
-                    className={cn(
-                      // 14/24 Medium `#D3D3D3` in the ink row (`1814:1721`).
-                      'text-lead text-fg-muted leading-[1.2] max-lg:text-[14px] max-lg:font-medium max-lg:leading-6',
-                      mode === 'number' ? 'max-lg:text-on-ink-muted' : 'hidden lg:block',
-                    )}
-                  >
-                    {panel.note}
-                  </p>
-                ) : null}
-
-                {panel.button ? (
-                  // The ways-to-work rows have no button at 402 (`1814:1714`);
-                  // the platforms rows put theirs at the far end of the row.
-                  <div className={mode === 'number' ? 'hidden lg:block' : 'shrink-0'}>
-                    <ButtonLink
-                      button={panel.button}
-                      // `Button / Ghost` at 402 (`1814:1694` — an 18/24
-                      // label and an arrow, no fill), the resolved fill from
-                      // `lg` up. One element, so the switch has to be a class
-                      // rather than a second variant.
-                      className="max-lg:bg-transparent max-lg:px-0 max-lg:text-current"
-                    />
-                  </div>
-                ) : null}
-              </div>
-
-              {panel.media ? (
-                <SanityImage
-                  source={panel.media.image}
-                  alt={panel.media.alt}
-                  ratio="1/1"
-                  width={790}
-                  // One value, because the square has one width: a
-                  // viewport-relative fallback could only describe the widths
-                  // where it is `display: none`. See the note below.
-                  sizes="395px"
-                  // The media square is a 1440 element: neither 402 frame
-                  // draws one, and a full-width photo between every row
-                  // would bury the stack.
-                  className="hidden lg:block lg:h-[396px] lg:w-[395px] lg:shrink-0"
+          {mode === 'label'
+            ? items.map((panel, index) => (
+                <PanelPlate
+                  key={panel._key}
+                  id={panelId(panel._key, index)}
+                  logo={panel.logo}
+                  heading={panel.heading}
+                  body={panel.body}
+                  note={panel.note}
+                  button={panel.button}
+                  media={panel.media}
+                  dataSanity={itemAttr(loc, 'panels', panel._key)}
                 />
-              ) : (
-                // The frame's media slot is a flat #F0F0F0 rectangle on the
-                // panels whose image is not chosen yet; holding the space
-                // stops the 928px row collapsing onto the copy column.
-                <div className="bg-bone hidden lg:block lg:h-[396px] lg:w-[395px] lg:shrink-0" />
-              )}
-            </article>
-          ))}
+              ))
+            : items.map((panel, index) => (
+                <article
+                  key={panel._key}
+                  id={panelId(panel._key, index)}
+                  // The panel's own path — `sections[_key=="…"].panels[_key=="…"]`.
+                  // `panels` has exactly one member type, so it serialises as
+                  // an `arrayItem` and resolves natively at this depth (#104).
+                  data-sanity={itemAttr(loc, 'panels', panel._key)}
+                  // At 402 a numbered panel is one compact ink ROW —
+                  // `ContentPlatform - Mobile` `1814:1714`: the numeral left,
+                  // the title stacked over its note. At `lg` it becomes the
+                  // full panel, a 500px copy column beside a 395px media
+                  // square, with the numbering handed back to `PanelRail`.
+                  className="bg-ink flex items-center gap-3 py-4 pl-4 pr-8 text-white lg:flex-row lg:items-center lg:gap-[33px] lg:bg-transparent lg:p-0 lg:text-inherit"
+                >
+                  {/*
+                   * The rail numeral, inlined. `PanelRail` is the 1440
+                   * treatment — a sticky 82px column beside the stack — and it
+                   * has nowhere to stand at 402, so the mobile row carries its
+                   * own 68 × 48 numeral box (`1814:1930`).
+                   */}
+                  <span
+                    aria-hidden="true"
+                    className="flex h-12 w-[68px] shrink-0 items-center justify-center text-[36px] leading-none tracking-[-0.0262em] lg:hidden"
+                  >
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+
+                  <div className="flex min-w-0 flex-1 flex-col lg:flex lg:w-[500px] lg:flex-col lg:gap-12">
+                    {panel.heading ? (
+                      // 18/24 Medium in the row (`1814:1719`), the 48px
+                      // section step in the panel. `max-lg:` rather than a
+                      // `lg:` pair so the desktop step keeps the token's own
+                      // line-height.
+                      <h3 className="text-display-xl font-display text-balance max-lg:text-[18px] max-lg:font-medium max-lg:leading-6">
+                        {panel.heading}
+                      </h3>
+                    ) : null}
+
+                    {/* The row carries no prose — the frame drops it at 402
+                        and keeps the note as the one-line gloss. */}
+                    {panel.body ? (
+                      <p className="text-lead hidden leading-[1.2] lg:block">{panel.body}</p>
+                    ) : null}
+                    {panel.note ? (
+                      // 14/24 Medium `#D3D3D3` in the ink row (`1814:1721`).
+                      <p className="text-lead text-fg-muted max-lg:text-on-ink-muted leading-[1.2] max-lg:text-[14px] max-lg:font-medium max-lg:leading-6">
+                        {panel.note}
+                      </p>
+                    ) : null}
+
+                    {/* No button on the row at 402 (`1814:1714`). */}
+                    {panel.button ? (
+                      <div className="hidden lg:block">
+                        <ButtonLink button={panel.button} />
+                      </div>
+                    ) : null}
+                  </div>
+
+                  {panel.media ? (
+                    <SanityImage
+                      source={panel.media.image}
+                      alt={panel.media.alt}
+                      ratio="1/1"
+                      width={790}
+                      // One value, because the square has one width: a
+                      // viewport-relative fallback could only describe the
+                      // widths where it is `display: none`.
+                      sizes="395px"
+                      // A 1440 element: the 402 row has no room for a square,
+                      // and a full-width photo between every row would bury
+                      // the stack.
+                      className="hidden lg:block lg:h-[396px] lg:w-[395px] lg:shrink-0"
+                    />
+                  ) : (
+                    // The frame's media slot is a flat rectangle on the panels
+                    // whose image is not chosen yet; holding the space stops
+                    // the row collapsing onto the copy column.
+                    <div className="bg-bone hidden lg:block lg:h-[396px] lg:w-[395px] lg:shrink-0" />
+                  )}
+                </article>
+              ))}
         </PanelBand>
       </div>
     </SectionShell>

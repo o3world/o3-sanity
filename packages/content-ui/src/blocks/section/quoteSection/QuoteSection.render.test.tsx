@@ -28,17 +28,26 @@ describe('the quote band’s molecule decoration', () => {
 
   it('renders the mark, and not the spheres', () => {
     expect(html).toContain('viewBox="0 0 699 699"')
-    expect(html).toContain('lg:w-[699px]')
+    expect(html).toContain('w-[776px]')
     expect(html).toContain('opacity-10')
     // OrbitalSphere's own markup — the two are alternatives, never both.
     expect(html).not.toContain('lg:w-[1155px]')
   })
 
-  it('hangs the mark off the band’s right edge and lets the band clip it', () => {
-    // 699 wide at x 944 in a 1440 frame — 203px past the edge.
-    expect(html).toContain('lg:right-[-203px]')
+  it('hangs the mark off the band’s bottom-left corner and lets the band clip it', () => {
+    // 776 wide, 128 past the left edge and 374 below the band at 1440
+    // (`2748:4767`); further out at 402, where the band is shorter.
+    expect(html).toContain('lg:left-[-128px]')
+    expect(html).toContain('lg:bottom-[-374px]')
     expect(html).toContain('overflow-hidden')
     expect(html).not.toContain('overflow-x-')
+  })
+
+  it('is the one decoration this band keeps at 402', () => {
+    // `2748:4804` hangs the same 776px glyph off the corner and lets the
+    // gutter clip it. The spheres are `lg:` — they would fill the band.
+    expect(html).toContain('left-[-167px]')
+    expect(html).not.toContain('hidden lg:block')
   })
 
   it('leaves the copy exactly where the other decorations put it', () => {

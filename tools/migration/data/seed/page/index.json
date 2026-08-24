@@ -99,20 +99,12 @@
       ]
     },
     {
-      "_type": "quoteSection",
-      "_key": "quote",
-      "surface": "bone",
-      "quote": "We were very happy with the outcome and so was top management. I believe we positioned our company as the leader and shaper we want to be seen as. Thank you for all your help, on a tight deadline and always with a smile.",
-      "attribution": "Business Leader, Global Health Brand",
-      "decoration": "orbs"
-    },
-    {
       "_type": "railPanelsSection",
       "_key": "platforms",
       "surface": "white",
       "layout": "rail",
       "heading": "The platforms we go deep on",
-      "intro": "We don't dabble across every tool. We build real, certified depth in a few platforms — so the recommendation and the implementation come from the same people.",
+      "intro": "We build real, certified depth in modern platforms that are scaling the internet.",
       "panels": [
         {
           "_type": "panel",
@@ -127,7 +119,7 @@
             "_type": "button",
             "label": "View our Sanity work",
             "href": "/partners/sanity",
-            "contrast": "dark"
+            "contrast": "ghost"
           },
           "media": {
             "_type": "figure",
@@ -151,7 +143,7 @@
             "_type": "button",
             "label": "View our Vercel work",
             "href": "/partners/vercel",
-            "contrast": "dark"
+            "contrast": "ghost"
           },
           "media": {
             "_type": "figure",
@@ -175,7 +167,7 @@
             "_type": "button",
             "label": "View our Lovable work",
             "href": "/partners/lovable",
-            "contrast": "dark"
+            "contrast": "ghost"
           },
           "media": {
             "_type": "figure",
@@ -188,6 +180,14 @@
         }
       ],
       "rail": "label"
+    },
+    {
+      "_type": "quoteSection",
+      "_key": "quote",
+      "surface": "bone",
+      "quote": "We were very happy with the outcome and so was top management. I believe we positioned our company as the leader and shaper we want to be seen as. Thank you for all your help, on a tight deadline and always with a smile.",
+      "attribution": "Business Leader, Global Health Brand",
+      "decoration": "molecule"
     },
     {
       "_type": "railPanelsSection",
