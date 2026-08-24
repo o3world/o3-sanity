@@ -116,8 +116,8 @@
       "body": "We partner with businesses like yours to build experiences that matter. If you’re ready, we’re ready.",
       "button": {
         "_type": "button",
-        "label": "Get in touch",
-        "href": "/contact",
+        "label": "View our work",
+        "href": "/work",
         "contrast": "light"
       },
       "decoration": "molecule"

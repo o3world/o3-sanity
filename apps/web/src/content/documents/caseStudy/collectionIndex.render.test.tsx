@@ -15,9 +15,8 @@ import {
 import { caseStudyIndex } from './collectionIndex'
 
 /**
- * The /work index — the frame `1634:1167` at 1440. At 402 the card values below
- * come from `2975:8428`, the redesigned mobile frame; the manifest still tracks
- * `1906:851` for this route, which #303 settles when it reads the redesign.
+ * The /work index — the frame `1634:1167` at 1440 and `1906:851` at 402. The
+ * card values below come from `2975:8428`, the 402 frame's own card stack.
  *
  * #43 shipped with "mobile not yet checked" against its own acceptance
  * criteria, so the 402 assertions below are the ones that were missing, not
@@ -43,8 +42,23 @@ const { html } = await renderRoute(route, { data: aCaseStudiesPage(cards, 2) })
 
 describe('the /work index', () => {
   it('renders the hero copy the route owns', async () => {
-    expect(html).toContain('The work, framed around the second problem.')
-    expect(html).toContain('We lead with the deeper problem we found')
+    // `2101:861` and `2107:1086` carry the same three strings (#303).
+    expect(html).toContain('Our work')
+    expect(html).toContain('Strategy, Design and Technology working together.')
+    expect(html).toContain('Not the deliverable.')
+  })
+
+  /**
+   * The closer both frames draw (`2975:8738`, `2975:8751`) — route-owned,
+   * because /work has no document to seed one on. Its raster is a capture of
+   * the sphere over a native fade strip, so it is `orbs` rather than a
+   * photograph, and the button leaves the page it closes.
+   */
+  it('closes on the shared CTA band', () => {
+    expect(html).toContain('Let’s get started on your next big thing.')
+    expect(html).toContain('We partner with businesses like yours')
+    expect(html).toContain('href="/contact"')
+    expect(html).toContain('--gradient-ink-fade')
   })
 
   it('renders a card per case study, linked to its detail route', () => {

@@ -18,7 +18,7 @@ import { CtaSection } from './CtaSection'
  * `decoration` unset draws the molecule too, so the fallback and the knob's
  * initial value say the same thing.
  */
-function render(decoration: string | null | undefined) {
+function render(decoration: string | null | undefined, backgroundMedia?: unknown) {
   return renderToStaticMarkup(
     <CtaSection
       {...({
@@ -27,9 +27,16 @@ function render(decoration: string | null | undefined) {
         button: { _type: 'button', label: 'Get in touch', href: '/contact', target: null },
         decoration,
         surface: 'ink',
+        backgroundMedia,
       } as unknown as SectionProps<'ctaSection'>)}
     />,
   )
+}
+
+/** A stored picture, the shape `sectionBackground` reads. */
+const PICTURE = {
+  _type: 'backgroundMedia',
+  image: { _type: 'image', asset: { _type: 'reference', _ref: 'image-abc-1440x790-png' } },
 }
 
 /** OrbitalSphere's own viewBox, which nothing else in this band draws. */
@@ -108,5 +115,36 @@ describe('the CTA band’s other decorations', () => {
     expect(html).not.toContain(MOLECULE)
     expect(html).not.toContain(FADE_STRIP)
     expect(html).toContain('Let’s get started on your next big thing.')
+  })
+})
+
+/**
+ * THE BAND ON A PICTURE (#303). `backgroundMedia` is a field every section
+ * carries and this one ignored, so a closer drawn over a photograph had no
+ * mechanism at all. The picture is the field, not a fourth decoration: a band
+ * either sits on an image or hangs a glyph in front of its own ink, and the
+ * two compositions cannot both be the background.
+ */
+describe('the CTA band on a picture', () => {
+  const html = render('molecule', PICTURE)
+
+  it('lays the picture behind the band, tinted for the ink surface', () => {
+    expect(html).toMatch(/<img[^>]*alt=""/)
+    expect(html).toContain('bg-ink/40')
+  })
+
+  it('hangs no decoration in front of it', () => {
+    expect(html).not.toContain(MOLECULE)
+    expect(html).not.toContain(SPHERE)
+    expect(html).not.toContain(FADE_STRIP)
+  })
+
+  it('leaves the copy column exactly where every other band puts it', () => {
+    expect(html).toContain('max-w-[600px] flex-col items-center gap-5')
+    expect(html).toContain('Get in touch')
+  })
+
+  it('draws no picture from an empty object an editor opened and left', () => {
+    expect(render('molecule', { _type: 'backgroundMedia' })).toContain(MOLECULE)
   })
 })
