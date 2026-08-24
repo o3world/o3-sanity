@@ -1,24 +1,24 @@
 {
   "fileKey": "RvraLJaZ0zWm8UaD5AJf43",
-  "version": "2391303393400685627",
-  "lastModified": "2026-08-24T14:38:47Z",
-  "syncedAt": "2026-08-24T14:38:46.091Z",
+  "version": "2391349966960467923",
+  "lastModified": "2026-08-24T17:51:03Z",
+  "syncedAt": "2026-08-24T19:52:30.896Z",
   "hashes": {
     "1680:2134": "1e2f9f533105b10689d7a91395c4e65a13daf53dd2720d2161db085f6c1fa9ef",
     "1814:1618": "c1168240eca6834f2400dda26862109ff3c24e1d811f5e0bf74dbb5265854a93",
-    "1634:1167": "86ae111dca9285135dca085f04044666514617ecab5b6b79e282cc61e39048fc",
-    "1906:851": "c297782683c66d7dd83eeacecc88645541f142471ab4575e807c6f9ba236b170",
-    "1710:2300": "f8c349f8b616345c986b0c780056e6e78f39455e02b1d52bd7befa4750c108ca",
-    "1906:928": "2e90ef713765b149b45f4507d5a8141f105ed4f1711d40ff409d2f93af212594",
-    "1710:2823": "49b8c01eebda3b317b2659f6b2971c090c54b9e29d534e34439f2ae32f613cf5",
-    "1906:1046": "a36cfc7a77e9cec634d1bd0a8a1cbb9a3f2842c6a0b720f91e964f76bc8d6f6c",
+    "1634:1167": "474dcb5de71806b325977713c3b3567363ffe108ba4b322b4063633f2fb50999",
+    "1906:851": "8b14bc49a551d054c8432d1c0d177be61e755908ebfe3c10ad36739aec4ab9f2",
+    "1710:2300": "9928795af9aea6299368bc540e7b72c1e158686f04ddeea79265863927930bb7",
+    "1906:928": "81d18e19df114092579c53cfae33af1c8b603659bb4e73c33f7aff81f8fc95b4",
+    "1710:2823": "cd8ad1adb6da9db6b627141faf9d05e2b2872717229c7b4c8969e51ba7e8a3f1",
+    "1906:1046": "af80651605b44521462fcb7c67779d774c4113416945541d92c5941f93869ee2",
     "1924:5344": "eb5dc078ab5b006f3a1d17c99360073526cd5243046a8bebce1b3a99a536c980",
     "1925:6138": "86b9e084336ff159542772d6fb13d3733e7efac452bc88449c28ff24a021783a",
     "2360:2879": "85a54ebea65111f3367c144825542dbd50ff006a81ef23f87dc436f09b3cac10",
-    "2336:4310": "6316c04828bab0bab91c834c4009373bd244d70aa1c7b684f0fd7ed64a5b1e13",
-    "2354:2446": "c5bd3c9ddb68b0d739ff35229c65929319319fde333c99491d62f9a4d0f47fce",
-    "1644:1889": "ad9521e0bbdfd50791ddbd8929fb8fd4ba007b2f6e0d34a51d03f9a4cf35b973",
-    "1906:334": "6a1f45343026465e59e573cef2dcf652174cbbf679804b5e119c631bdfa2998b",
+    "2336:4310": "effad1578e6cb97eb86bda1d6532d7664493d7219b029b0258e3d92621ec44a3",
+    "2354:2446": "a721e522eae6d9541eb07c0b8c6cd02b85d2bc0ae3f3dfc3cccfc74c9027d92f",
+    "1644:1889": "be84425c3e76f578ae52919a0151a4c31c0db96968d666ab0c63661f8ad5ade0",
+    "1906:334": "5480ee96b95b5ed286f6fc03531ed0597d8970243ff0f3c278ec1283cab8ed60",
     "136:754": "b1ae9d97da5fd827b8d53328715c9475482440d0d2deab50dbcec2c08649ed76",
     "264:260": "11e1d53acbe6d5825e16f69b26b85b39ef42e1f1beb8546da4240cccea8c1b62",
     "2134:1785": "62908d0975f7c7d61c004d22ec00226f44864d9a109f363f5d0b55379f927ad8",
@@ -38,7 +38,14 @@
     "1275:1631": "e7df2cb62bce85cbf581b87bfd1375bca928dcdfe1ad32d9d24cd88fec4b0473",
     "2177:1354": "af78d0acc3441c1bde84997f58da32cbed54dd293856d877b8306fb37c015482",
     "2107:1051": "571d83a32000941a9b4765d121f62e3cbff02084a9717f64432d2b7840a03a3a",
-    "2205:1146": "dccaf1cced11be6b1e33e417b380ef4d870805d9282366777a3d20e83f8ec906"
+    "2205:1146": "dccaf1cced11be6b1e33e417b380ef4d870805d9282366777a3d20e83f8ec906",
+    "2846:5637": "32836c853fbd5b420c237d493a65e5fea5834b342aedd6e7b94d820ed0df0a5a",
+    "2089:4169": "34a65cb4bc979c5fff5156245b902d8482b859f508e3f6931eec3ca245ab8220",
+    "2960:7557": "8b0eec0ecb32ace5d2dedbc968903abf624e20c38c51d17e56a4f37794a872a8",
+    "2975:10037": "d082b227a15dccc7a7eb9a1f1dea0fb47161b3ed1eba5db0c52e5e81d0256746",
+    "2975:8499": "a6ca18213cef5b5a020cd8b9f3318ddaf615b252184af162484f48c1c9846685",
+    "2975:9343": "5b10bc75bc0d117c119aee87ee8c63a96015504b2da5981374188f716587f860",
+    "2975:8865": "0ec67923b7db98c3aa088b958f2e9abfdd82e90c2799fda793ce06a79c897676"
   },
   "kinds": {
     "1680:2134": "pageFrame",
@@ -75,10 +82,19 @@
     "1275:1631": "componentSet",
     "2177:1354": "componentSet",
     "2107:1051": "componentSet",
-    "2205:1146": "componentSet"
+    "2205:1146": "componentSet",
+    "2846:5637": "componentSet",
+    "2089:4169": "componentSet",
+    "2960:7557": "pageFrame",
+    "2975:10037": "pageFrame",
+    "2975:8499": "pageFrame",
+    "2975:9343": "pageFrame",
+    "2975:8865": "pageFrame"
   },
   "assetHashes": {
     "1928:6501": "893f118fa20b264be088498074fad55859114005b40c4d9aa9f33a00576b00a9",
+    "2960:7144": "e77e16c98b30618385eb2da769dd8236a1eb04cc43532373579e9015b1e0024a",
+    "2960:7142": "407506796763177a3aff3ff360d75432fd4a782fe28ed4e5cc9d18335a556e24",
     "2032:577": "21cf85cd881115dde9cdf3b3edf09deff54fbfe86c3ea885cc0a49d53e676c1b",
     "1751:2003": "38707cf5ffbd007a0c2455ebca245e67390b111a607c752530449be36ddc8b2c",
     "1751:2010": "b232a03da2bf33391833937e08791ce82f385c5d7540f37d90ed1bc11fcbe29e",
@@ -90,60 +106,5 @@
     "1864:2396": "d6d0cd6a725ddeb3ccb1b5784896a70b86a485cce8107543430a3d277bc6fd29",
     "2360:2871": "8e50ffffeaba5df7ee3d79f1aa22268433f74135724761b35022f0d93a4fc4d0"
   },
-  "openAssetConflicts": [
-    {
-      "path": "tools/migration/data/seed/assets/solutions-overview-1682.png",
-      "nodeId": "2360:2871",
-      "conflictHash": "8e50ffffeaba5df7ee3d79f1aa22268433f74135724761b35022f0d93a4fc4d0",
-      "entryFingerprint": "3450c90f48aa6c20279db56509b6ead546f0668be3fa2f316e17b1c684bf33f5",
-      "firstSeenAt": "2026-08-24T14:37:08.523Z",
-      "reason": "new-to-baseline",
-      "note": "Software-engineering service page `2360:2879` → Intro section `2360:2861` → the photo rectangle `2360:2871` (imageRef `594350a88ec7874bdc8ad4c2a8f36e3c35f2b60b`). Not exact, and LOCKED so a re-export cannot clobber the hand work: the API render comes back 4:3, so the committed file is the 1.5× render trimmed to the rectangle's own 3:2 and resampled to 1600×1066 — the width `Figure` actually requests. A fresh export would need the same trim and resample."
-    },
-    {
-      "path": "tools/migration/data/seed/assets/partner-caron.png",
-      "nodeId": "1883:3430",
-      "conflictHash": "8e7d86a2ac288ef5c40ac577a48ac094ad292e8c9fb7c0feae1f966ab752f2dd",
-      "entryFingerprint": "e9c447216e4a35e4f6e24a6173c4609dae47b866f5b9488f1ec63c595d20c451",
-      "firstSeenAt": "2026-08-13T21:59:04.740Z",
-      "reason": "new-to-baseline",
-      "note": "Replaces the prototype-derived wordmark with the fill original from the partners strip (`1883:3429`) - a different lockup, carrying the \"Transformational Care\" line the old file did not. Alpha-trimmed. Locked because of that."
-    },
-    {
-      "path": "tools/migration/data/seed/assets/partner-hireheroes.png",
-      "nodeId": "1875:3332",
-      "conflictHash": "ab8a1c42eda8c3893f3f1940868ddb65ec5a55970525314f14c3eb7c279f7055",
-      "entryFingerprint": "51896d134eaddeb5536e9037df2e7417196637c38b14f08d6212e3448cc905a7",
-      "firstSeenAt": "2026-08-13T21:59:04.740Z",
-      "reason": "new-to-baseline",
-      "note": "New partner with the 2026-08 restructure (#89). Fill original from the partners strip (`1875:3331`), alpha-trimmed. Locked because of the trim."
-    },
-    {
-      "path": "tools/migration/data/seed/assets/partner-ironman.png",
-      "nodeId": "1875:3335",
-      "conflictHash": "af38a161b057867d78a4260f4d06d54c5d30d31c4d7f461d351374ac98a0ab82",
-      "entryFingerprint": "6c8c67c0b4aafad58abd53149a0c8758dcb6ee2affc251c26d4d83272b82ad09",
-      "firstSeenAt": "2026-08-13T21:59:04.740Z",
-      "reason": "new-to-baseline",
-      "note": "Replaces the prototype-derived 600x240 raster with the fill original from the partners strip (`1875:3334`). The uploaded file is a 3840x2160 canvas that is mostly transparent margin, which Figma cover-crops into the tile; the committed copy is alpha-trimmed and downscaled to 1200px instead, so `object-fit` never has to. Locked because of that edit."
-    },
-    {
-      "path": "tools/migration/data/seed/assets/partner-lacolombe.png",
-      "nodeId": "2250:1484",
-      "conflictHash": "e51f2e585d069b1917634200d7cc37d5a10bcfc46f97bf11a58675996052dd74",
-      "entryFingerprint": "30fd3a4d53660afb7242cf26bb9e3f1f3e3d8c9dd8ac1a5a2b8576f132516092",
-      "firstSeenAt": "2026-08-13T21:59:04.740Z",
-      "reason": "new-to-baseline",
-      "note": "Replaces the prototype-derived navy raster with the fill original from the partners strip (`2082:3954`), which the frame draws in black. Alpha-trimmed; already small (512x99), so not downscaled. Locked because of the trim."
-    },
-    {
-      "path": "tools/migration/data/seed/assets/partner-vertex.png",
-      "nodeId": "1864:2396",
-      "conflictHash": "d6d0cd6a725ddeb3ccb1b5784896a70b86a485cce8107543430a3d277bc6fd29",
-      "entryFingerprint": "0410fc66959df1da1bae26849622aa2fe9f17504727eaf81b88ef39f0c01505b",
-      "firstSeenAt": "2026-08-13T21:59:04.740Z",
-      "reason": "new-to-baseline",
-      "note": "Downloaded fill original from the partners strip (`1864:2390` -> `1864:2395`), then ALPHA-TRIMMED to its bounding box and downscaled to 1200px wide, hence locked. The frame gives every mark a 152px box and lets its natural height fall out at 28-42px, which only works if the file carries no margin of its own."
-    }
-  ]
+  "openAssetConflicts": []
 }

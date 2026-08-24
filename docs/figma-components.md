@@ -65,7 +65,7 @@ Verified by direct reads of the canonical frames, or recorded in
 | `CTA`                             | `2177:1354` | Device = Desktop \| Mobile                         | `CtaSection` (`blocks/section/ctaSection`)                           | ✅ #163 — the band-level sets, below                                                              |
 | `Interior Hero`                   | `2107:1051` | Device = Desktop \| Mobile; Surface = Ink \| White | `CollectionHero variant="interior"` (`ui/collection-hero.tsx`)       | ✅ #311 — surface axis, optional rail, picture slot; below                                        |
 | `Blog`                            | `2205:1146` | Property 1 = Default \| Mobile                     | `InsightsCarouselSection` (`blocks/section/insightsCarouselSection`) | ✅ #163                                                                                           |
-| `Case Study Card`                 | `2089:4169` | Client = Ironman \| Vertex \| Caron                | `CaseStudyCard` (`apps/web/src/components/cards`)                    | ✅ #302 — the axis is **content, not design**: no `cva` key, below                                |
+| `Case Study Card`                 | `2089:4169` | Variant = Caron \| Ironman \| Vertex               | `CaseStudyCard` (`apps/web/src/components/cards`)                    | ✅ #302, tree confirmed #314 — the axis is **content, not design**: no `cva` key, below           |
 | `Services` (component, not a set) | `2846:5637` | —                                                  | `PanelTrack` (`blocks/section/railPanelsSection`)                    | ✅ #305 — one column of the sideways track; two bands instance it, below                          |
 
 `BrandLogo` ships `Color=Black` and `Color=Red` only. No canonical Design
@@ -129,26 +129,44 @@ instances it three times (`2107:1094`–`1096`, and once more per breakpoint) an
 the case-study detail's next-project band once (`2250:1564`), so the card is now
 one node to watch rather than geometry re-drawn per frame.
 
-Its axis is `Ironman | Vertex | Caron` — **which client the demo shows**, not how
-the card is drawn. All three variants are the same box with different content, so
-it maps to no `cva` key: the client's logo, eyebrow, narrative, stat and CTA are
-props the content layer fills from a `caseStudy`. The rule at the top of this
-document is one Figma axis → one `cva` key; this is the case that rule does not
-reach, because a content axis is a fixture, not an appearance.
+The set declares one property, `Variant`, whose values are `Caron | Ironman |
+Vertex` — **which client the demo shows**, not how the card is drawn. The three
+components are byte-for-byte the same box down to the placeholder copy; only the
+logo differs. So it maps to no `cva` key: the client's logo, eyebrow, narrative,
+stat and CTA are props the content layer fills from a `caseStudy`. The rule at
+the top of this document is one Figma axis → one `cva` key; this is the case that
+rule does not reach, because a content axis is a fixture, not an appearance.
 
 ```
-1248 × 550     padding 64, content pinned via space-between
-  top          the client logo in a 180 × 80 holder, knocked out white
-  content row  560 text beside 560 of deadspace
-  bottom       eyebrow, narrative, a stat row ("89% → 114%" / NRR)
-               and a Button / Solid Size=Base in white
+1246 × 550     radius 32, padding 64 uniform, vertical, space-between,
+               gap floor 66. The card FILLS its column, and the /work
+               column (`2107:1093`) is 1248 wide.
+  top          the client logo in a 180 × 80 holder (Caron's is 185)
+  content row  1118 wide: 559 of text beside 559 of deadspace, no gap
+  text area    gap 24 — copy, stat row, button
+    copy       gap 12: eyebrow 18/24 bold, 0.1em, RED #C90E00, over a
+               narrative at 24/34 regular, tracking 0, white
+    stat       gap 24: 48/57.6 tracking -1 white, beside a 16/19.2 label
+               at 65% white
+    button     an instance of `Button / Solid` (`2205:1298`) —
+               Theme=White, State=Default, trailing icon on, leading off,
+               label "View the work"
+  ground       the hero photograph, plus a near-horizontal linear gradient
+               (tilted ~10°) black 0.95 → 0.70 at 50% → 0
 ```
 
-At 402 the card is 362 × 550 and the stack sits 48 apart (`2975:8428`); the
-/work index's first card is 592, which is content, not a second size. #302
-reconciled `apps/web`'s renderer to these values. **The internals were read from
-renders and geometry** while Figma's node-tree endpoints were rate-limited. #314
-owns the re-read that confirms them, and the baseline hash that goes with it.
+At 402 the /work stack (`2975:8428`) is 362 wide and sits its three instances 48
+apart. The instances (`2975:8429`–`8431`) override the padding to **24 side / 64
+top and bottom** and the gap to 24; the Content row collapses to one 314-wide
+text column. The first card is 592 tall, which is content, not a second size.
+They are otherwise plain instances — the set's own gradient comes with them, and
+**the file draws no separate mobile scrim**.
+
+Read from the node tree at file version `2391349966960467923` (2026-08-24, #314),
+which corrected the #302 entry written from renders: 1246 not 1248, 559 not 560,
+and the mobile padding is not uniform. Three values the shipped renderer does not
+draw — the eyebrow's size and red, the narrative's step, and that mobile padding
+— are #319.
 
 ### `Interior Hero` carries three axes, and two of them are slots
 
