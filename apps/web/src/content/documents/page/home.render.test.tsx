@@ -359,8 +359,8 @@ describe('the homepage at 402 (ADR 0006)', () => {
  * value rather than reading the default.
  *
  * Five other frames now carry a copy of that band, raster and all; #303 read
- * the raster as this band pasted (not a photo), so what they ask for is this
- * decoration in their seeds, when that repaint is ruled.
+ * the raster as this band pasted (not a photo), and #317 pinned `orbs` in
+ * those pages' seeds accordingly.
  *
  * If Home's frame is ever redrawn to instance the `CTA` component, this is the
  * test that should fail.

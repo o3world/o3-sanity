@@ -15,6 +15,7 @@
  * resolves the tree from it and `sanity.cli.ts` resolves the project from it,
  * so a run cannot read one brand's JSON into the other brand's project.
  */
+import { createHash } from 'node:crypto'
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { basename, dirname, join } from 'node:path'
 
@@ -118,14 +119,21 @@ async function uploadAsset(url: string): Promise<string> {
  */
 async function uploadLocalAsset(relativePath: string): Promise<string> {
   const key = `file:${relativePath}`
-  const known = assetMap[key]
-  if (known && (await existsInDataset(known.assetId))) return known.assetId
   if (relativePath.startsWith('/') || relativePath.includes('..')) {
     throw new Error(`_localSrc must be a repo-relative path without "..": ${relativePath}`)
   }
   const absolute = join(REPO_ROOT, relativePath)
   if (!existsSync(absolute)) throw new Error(`_localSrc file not found: ${relativePath}`)
-  return upload(key, relativePath.split('/').pop() ?? 'asset', readFileSync(absolute))
+  const buf = readFileSync(absolute)
+  const known = assetMap[key]
+  // A repo file can be re-exported in place under the same path (#316), so a
+  // ledger entry alone is not proof the dataset holds these bytes — the
+  // recorded hash is. On mismatch the file is uploaded again.
+  const unchanged = known?.sha256
+    ? known.sha256 === createHash('sha1').update(buf).digest('hex')
+    : Boolean(known)
+  if (known && unchanged && (await existsInDataset(known.assetId))) return known.assetId
+  return upload(key, relativePath.split('/').pop() ?? 'asset', buf)
 }
 
 /**

@@ -329,7 +329,7 @@
         "href": "/contact",
         "contrast": "light"
       },
-      "decoration": "molecule"
+      "decoration": "orbs"
     }
   ],
   "migration": {

@@ -599,12 +599,10 @@ describe('the seeded 1682 conference page', () => {
  * strip. 1682 has no frame at all, so it takes the same generation.
  *
  * About (`2975:8826`), Solutions (`2975:8839`) and Live (`2975:8763`) close on
- * a pasted copy of Home's bespoke band instead. #303 read the paste's raster:
- * it is Home's own `orbs` band (cursor pixels included), not a photograph, so
- * a repaint means `decoration: "orbs"` in their seeds — not `backgroundMedia`,
- * which `ctaSection` now supports but no seed uses. Their seeds keep the
- * molecule until that repaint is ruled, and these assertions hold for that
- * reason rather than because their frames still draw it.
+ * a copy of Home's bespoke band. #303 read the raster: it is Home's own `orbs`
+ * band (cursor pixels included), not a photograph, so their seeds pin `orbs`
+ * (#317) — not `backgroundMedia`, which `ctaSection` supports but no seed
+ * uses. Live's button is the frame's "View our work" (#308 q9).
  *
  * Home is tested where it lives: its seed pins `orbs`, and its closer fades
  * into the footer.
@@ -614,6 +612,15 @@ describe('the closing CTA band', () => {
     ['About', about.html, 'about'],
     ['Solutions', solutions.html, 'solutions'],
     ['Live', live.html, 'live'],
+  ])('closes %s on the sphere band Home originated', (_label, html, slug) => {
+    const sections = (aSeededPage(slug).sections ?? []) as { _type: string; decoration?: string }[]
+    expect(sections.find((s) => s._type === 'ctaSection')?.decoration).toBe('orbs')
+    // The sphere's fade into the footer, and no molecule.
+    expect(html).toContain('--gradient-ink-fade')
+    expect(html).not.toContain('w-[54%]')
+  })
+
+  it.each([
     ['Software Engineering', softwareEngineering.html, 'solutions-software-engineering'],
     ['1682', conference.html, '1682-conference-ai-innovation'],
   ])('closes %s on the molecule the component hangs', (_label, html, slug) => {

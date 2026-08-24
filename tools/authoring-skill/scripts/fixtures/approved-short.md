@@ -128,7 +128,7 @@ Healthcare
 Where AI earns its keep — and where it just adds latency
 Read the thinking
 Let’s get started on your next big thing.
-Get in touch
+View our work
 Lovable Development Partner
 Lovable
 Technology partners
