@@ -14,9 +14,10 @@ export interface ButtonIconProps extends SVGProps<SVGSVGElement> {
  *
  * Inline SVG rather than a font, and vendored rather than installed (ADR 0009).
  * The paths are traced from **Lucide** (ISC), which is what Figma's `Icon` set
- * (`2177:1556`) draws — same 24-unit geometry, same round caps — but nothing is
- * imported: the shipped artifact is ours, and a design-system package that
- * pulls an icon library in for three glyphs pays for the whole library.
+ * (`2177:1556`) draws — same 24-unit geometry, same square caps at weight 2 —
+ * but nothing is imported: the shipped artifact is ours, and a design-system
+ * package that pulls an icon library in for three glyphs pays for the whole
+ * library.
  */
 function Glyph({ size = 20, children, ...rest }: ButtonIconProps & { children: ReactNode }) {
   return (
@@ -26,8 +27,8 @@ function Glyph({ size = 20, children, ...rest }: ButtonIconProps & { children: R
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth={2.2}
-      strokeLinecap="round"
+      strokeWidth={2}
+      strokeLinecap="square"
       strokeLinejoin="round"
       aria-hidden="true"
       {...rest}

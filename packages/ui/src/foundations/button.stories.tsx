@@ -147,10 +147,9 @@ export const ButtonSpec: Story = {
           <Mono>Button</Mono> set (<Mono>2134:1785</Mono>) — <Mono>12px 16px</Mono> padding, a 12px
           gap and a 2px corner, against the <Mono>8px 20px</Mono>, 8px gap and square corner on the
           left. The label is the same <Mono>--text-button</Mono> in both, and so is the 20px glyph
-          box. The glyph itself is the house <Mono>ArrowIcon</Mono>, stroked at 2.2, where Figma
-          sets Material Symbols&apos; <Mono>arrow_forward</Mono>; ADR 0009 says a glyph is an inline
-          SVG of the Material path, so that is a redraw whenever someone wants it, not a contract
-          gap.
+          box. The glyph itself is the house <Mono>ArrowIcon</Mono>, stroked at 2, where Figma sets
+          Material Symbols&apos; <Mono>arrow_forward</Mono>; ADR 0009 says a glyph is an inline SVG
+          of the Material path, so that is a redraw whenever someone wants it, not a contract gap.
         </Callout>
       </Section>
     </Page>

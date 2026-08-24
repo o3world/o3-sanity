@@ -156,7 +156,7 @@
       "name": "Icon (2026-08 set)",
       "figmaName": "Icon",
       "codeComponent": "packages/ui/src/components/button-icons.tsx#BUTTON_ICONS",
-      "note": "Twenty-nine Lucide glyphs in a 20x20 frame, one variant axis (`Icon`). Three of them are the curated set a button's `icon` knob picks from (#151) — arrow-right (2177:1559), external-link (2177:1585), chevron-down (2177:1567) — vendored as inline SVG rather than installed (ADR 0009). A change to one of those three routes to `button-icons.tsx`; a change to the other twenty-six routes nowhere yet."
+      "note": "Twenty-nine glyphs in a 20x20 frame, one variant axis (`Icon`) — Lucide-traced strokes, plus four filled social brand marks (`2177:1603`, `2177:1605`, `2177:1607`, `2177:1609`) that route nowhere. Three of the strokes are the curated set a button's `icon` knob picks from (#151) — arrow-right (2177:1559), external-link (2177:1585), chevron-down (2177:1567) — vendored as inline SVG rather than installed (ADR 0009). A change to one of those three routes to `button-icons.tsx`; a change to the other twenty-six routes nowhere yet."
     },
     {
       "nodeId": "264:50",
