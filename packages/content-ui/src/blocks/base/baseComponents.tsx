@@ -15,6 +15,7 @@ import { ButtonGroup } from './buttonGroup/ButtonGroup'
 import { Embed } from './embed/Embed'
 import { Figure } from './figure/Figure'
 import { Mark } from './mark/Mark'
+import { MediaCard } from './mediaCard/MediaCard'
 import { RichText } from './richText/RichText'
 
 /**
@@ -31,6 +32,7 @@ type SharedBaseBlockName = Exclude<BaseBlockName, AppFirstBaseName>
 export const BASE_BLOCK_BINDINGS = [
   defineBlockRender('richText', { component: RichText }),
   defineBlockRender('figure', { component: Figure }),
+  defineBlockRender('mediaCard', { component: MediaCard }),
   defineBlockRender('embed', { component: Embed }),
   defineBlockRender('button', { component: Button }),
   defineBlockRender('buttonGroup', { component: ButtonGroup }),

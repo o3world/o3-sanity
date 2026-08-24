@@ -22,8 +22,8 @@ import { BASE_CLIENT_COMPONENTS } from './clientComponents'
  * eyebrow, the 48px heading, and a set-back subheading.
  *
  * The base tier never contains sections, so nothing here can nest — the
- * columns hold `richText`, `figure`, `embed`, `button` and `statGroup`, and
- * that is the whole vocabulary.
+ * columns hold `richText`, `figure`, `mediaCard`, `embed`, `button` and
+ * `statGroup`, and that is the whole vocabulary.
  */
 const meta = {
   title: 'Content/Blocks/Section/LayoutSection',
@@ -41,9 +41,13 @@ export const AsSeeded: Story = {
   args: seededSectionArgs('about', 'layoutSection', 0),
 }
 
-/** A second real instance, with a different column count and item mix. */
+/**
+ * About's "Beyond O3 World" band (`1924:5388`): three `mediaCard` columns on
+ * ink, each a picture over a name, a line and the link out.
+ */
 export const AboutSecondBand: Story = {
   args: seededSectionArgs('about', 'layoutSection', 1),
+  globals: { backgrounds: { value: 'ink' } },
 }
 
 /** The 1682 page's bands — the block carrying figures rather than prose. */

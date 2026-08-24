@@ -13,13 +13,13 @@
     },
     {
       "path": "tools/migration/data/seed/assets/about-beyond-community.png",
-      "nodeId": "1928:6505",
-      "figmaName": "image 21",
+      "nodeId": "2960:7144",
+      "figmaName": "image 22",
       "format": "png",
-      "scale": 3,
-      "export": "render",
+      "scale": 1,
+      "export": "imageFill",
       "locked": false,
-      "note": "About `1924:5344` → Blog `1924:5388` → Frame 2611306. Exact: a fresh `/v1/images` render at `scale=3` is 1184×1172 — the node is 394.667×390.647 — and every pixel matches (mean absolute difference 0.0). The fill original behind it is a different, larger raster, so this one was rendered, not downloaded."
+      "note": "About `1924:5344` → Blog `1924:5388` → Frame 2611306 `2960:7135`, the Community card (remapped 2026-08-24: the card now carries the team photograph the retired Culture band drew). Exact: committed bytes hash to `2f07b310eca2ced2e83b6c01899fc0afd786cc21`, the node's `imageRef` — Figma keys an image fill by the SHA-1 of its bytes, so the file is the fill original, downloaded rather than rendered."
     },
     {
       "path": "tools/migration/data/seed/assets/about-beyond-o3xo.png",
@@ -30,16 +30,6 @@
       "export": "imageFill",
       "locked": false,
       "note": "About `1924:5344` → Blog `1924:5388` → Frame 2611305 `2960:7128`, the card now titled \"Ventures\" (remapped 2026-08-24; identical bytes). Exact: committed bytes hash to `7f7e041e6b7b902f4111fa8111d1dbb16cb484d4`, the node's `imageRef`. The O3XO mark under O3 Ventures copy — named for what it depicts, per #46."
-    },
-    {
-      "path": "tools/migration/data/seed/assets/about-culture-team.png",
-      "nodeId": "1927:6432",
-      "figmaName": "Frame 2611349",
-      "format": "png",
-      "scale": 1.5,
-      "export": "render",
-      "locked": false,
-      "note": "About `1924:5344` → the Culture band `1924:5547`. Exact: the frame is 1392×712 and the committed file is 2088×1068 — 1.5× on both axes — and a fresh render at `scale=1.5` matches pixel for pixel (0.0). The frame, not its `O3_1682Conference…` rectangle `1927:6430`: that child renders 1896×1263, a different crop."
     },
     {
       "path": "tools/migration/data/seed/assets/about-portrait-gadsby.png",

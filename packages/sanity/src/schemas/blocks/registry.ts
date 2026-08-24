@@ -121,6 +121,7 @@ export const SECTION_BLOCKS = [
 
 export const BASE_BLOCKS = [
   'richText',
+  'mediaCard',
   'figure',
   'embed',
   'button',

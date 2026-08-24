@@ -116,7 +116,8 @@ const SECTION_FIELDS = /* groq */ `
     items[]{
       ...,
       _type == "button" => {${BUTTON_TARGET}},
-      _type == "buttonGroup" => {buttons[]{..., ${BUTTON_TARGET}}}
+      _type == "buttonGroup" => {buttons[]{..., ${BUTTON_TARGET}}},
+      _type == "mediaCard" => {button{..., ${BUTTON_TARGET}}}
     }
   },
   _type == "listingSection" => {

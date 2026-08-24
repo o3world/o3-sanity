@@ -33,16 +33,22 @@ About
 About O3
 The model is the story.
 Why O3
-4 disciplines. One team.
-Strategy
-Design
-Engineering
-AI
-Our team
+What we optimize for.
+Strategy + execution
+Strategy + execution
+Balance
+Balance
+Quality over scale
+Quality over scale
+Leadership team
 The people who find it and build it.
-Culture
-Buttoned up, with a little edge.
+Beyond O3 World
 The work doesn't stop at client services.
+1682
+See the conference
+Ventures
+See the portfolio
+Community
 Careers
 Work with us.
 Remote · Philadelphia

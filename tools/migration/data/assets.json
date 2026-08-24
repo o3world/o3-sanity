@@ -1295,14 +1295,6 @@
     "sha256": "7f7e041e6b7b902f4111fa8111d1dbb16cb484d4",
     "assetId": "image-7f7e041e6b7b902f4111fa8111d1dbb16cb484d4-2160x2138-png"
   },
-  "file:tools/migration/data/seed/assets/about-beyond-community.png": {
-    "sha256": "8667c1f1046e8ab72efa7bdfe8b2c32bd82eedc2",
-    "assetId": "image-8667c1f1046e8ab72efa7bdfe8b2c32bd82eedc2-1184x1172-png"
-  },
-  "file:tools/migration/data/seed/assets/about-culture-team.png": {
-    "sha256": "03ee51d7fc696f90827fdae6e76ad76da08290f8",
-    "assetId": "image-03ee51d7fc696f90827fdae6e76ad76da08290f8-2088x1068-png"
-  },
   "https://www.o3world.com/wp-content/uploads/2025/04/Allied-cover-1.jpg": {
     "sha256": "c6e4599f5ebef58cf460719a6152b3f64f5282e8",
     "assetId": "image-c6e4599f5ebef58cf460719a6152b3f64f5282e8-1667x1667-jpg"
@@ -1698,5 +1690,9 @@
   "file:tools/migration/data/seed/assets/plat-sanity-mark.png": {
     "sha256": "bc47376c3d341b95daac21cece78c2a18aa4db45",
     "assetId": "image-bc47376c3d341b95daac21cece78c2a18aa4db45-460x460-png"
+  },
+  "file:tools/migration/data/seed/assets/about-beyond-community.png": {
+    "sha256": "2f07b310eca2ced2e83b6c01899fc0afd786cc21",
+    "assetId": "image-2f07b310eca2ced2e83b6c01899fc0afd786cc21-1836x1424-png"
   }
 }

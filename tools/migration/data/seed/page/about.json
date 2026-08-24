@@ -78,67 +78,33 @@
       ]
     },
     {
-      "_type": "featureGridSection",
-      "_key": "features",
+      "_type": "railPanelsSection",
+      "_key": "optimize",
       "surface": "white",
-      "layout": "grid",
-      "heading": "4 disciplines. One team.",
-      "features": [
+      "layout": "track",
+      "heading": "What we optimize for.",
+      "intro": "Not a menu of services. One senior team that carries a problem from the first question to the shipped thing.",
+      "panels": [
         {
-          "_type": "feature",
-          "_key": "d-strategy",
-          "heading": "Strategy",
-          "body": "Finds the real problem and the move worth making, before a line of code is written.",
-          "mark": {
-            "_type": "mark",
-            "kind": "orb",
-            "state": "solving",
-            "size": 64,
-            "speed": 1,
-            "paused": false
-          }
+          "_type": "panel",
+          "_key": "opt-strategy-execution",
+          "railLabel": "Strategy + execution",
+          "heading": "Strategy + execution",
+          "body": "The people who find the move are the people who build it. We stay on the problem from the first question through launch, so the thinking survives contact with the code."
         },
         {
-          "_type": "feature",
-          "_key": "d-design",
-          "heading": "Design",
-          "body": "Product-grade design that gives the move a form people actually want to use.",
-          "mark": {
-            "_type": "mark",
-            "kind": "orb",
-            "state": "shaping",
-            "size": 64,
-            "speed": 1,
-            "paused": false
-          }
+          "_type": "panel",
+          "_key": "opt-balance",
+          "railLabel": "Balance",
+          "heading": "Balance",
+          "body": "Experience design and software engineering in the same team, so the design can be built and the build knows what it is for."
         },
         {
-          "_type": "feature",
-          "_key": "d-engineering",
-          "heading": "Engineering",
-          "body": "Senior engineers who build it to last and to scale — the fix that ships, not a prototype to hand off.",
-          "mark": {
-            "_type": "mark",
-            "kind": "orb",
-            "state": "weaving",
-            "size": 64,
-            "speed": 1,
-            "paused": false
-          }
-        },
-        {
-          "_type": "feature",
-          "_key": "d-ai",
-          "heading": "AI",
-          "body": "Applied where it compounds the work, not where it decorates it — our O3XO practice, embedded where it earns its keep.",
-          "mark": {
-            "_type": "mark",
-            "kind": "orb",
-            "state": "connecting",
-            "size": 64,
-            "speed": 1,
-            "paused": false
-          }
+          "_type": "panel",
+          "_key": "opt-quality",
+          "railLabel": "Quality over scale",
+          "heading": "Quality over scale",
+          "body": "A deliberately senior team and a deliberately short client list. We take on the work we can be genuinely invested in, and we grow slower for it."
         }
       ]
     },
@@ -146,7 +112,7 @@
       "_type": "personGridSection",
       "_key": "team",
       "surface": "white",
-      "eyebrow": "Our team",
+      "eyebrow": "Leadership team",
       "heading": "The people who find it and build it.",
       "people": [
         {
@@ -198,178 +164,67 @@
     },
     {
       "_type": "layoutSection",
-      "_key": "culture",
-      "surface": "white",
-      "columns": 2,
-      "eyebrow": "Culture",
-      "heading": "Buttoned up, with a little edge.",
-      "items": [
-        {
-          "_type": "richText",
-          "_key": "culture-body",
-          "body": [
-            {
-              "_type": "block",
-              "_key": "p0",
-              "style": "normal",
-              "markDefs": [],
-              "children": [
-                {
-                  "_type": "span",
-                  "_key": "p0s",
-                  "text": "Rigorous where it counts, sharp where it matters. We take the work seriously and ourselves a little less so. The same people who define the strategy are the ones who build it — start to finish — which means everyone here owns outcomes, not tasks.",
-                  "marks": []
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "_type": "figure",
-          "_key": "culture-photo",
-          "image": {
-            "_type": "image",
-            "_localSrc": "tools/migration/data/seed/assets/about-culture-team.png"
-          },
-          "alt": "The O3 team in black and white, gathered for a group portrait on the benches of a stone-walled hall at the 1682 conference."
-        }
-      ]
-    },
-    {
-      "_type": "layoutSection",
       "_key": "beyond",
-      "surface": "bone",
+      "surface": "ink",
       "columns": 3,
+      "eyebrow": "Beyond O3 World",
       "heading": "The work doesn't stop at client services.",
       "items": [
         {
-          "_type": "richText",
+          "_type": "mediaCard",
           "_key": "b-1682",
-          "body": [
-            {
-              "_type": "figure",
-              "_key": "b-1682-image",
-              "image": {
-                "_type": "image",
-                "_localSrc": "tools/migration/data/seed/assets/about-beyond-1682.png"
-              },
-              "alt": "The 1682 conference wordmark on black: four digits built from Bauhaus quarter-circles and squares in red, blue, amber and white, with the O3 mark set into a red tile at the end."
+          "media": {
+            "_type": "figure",
+            "image": {
+              "_type": "image",
+              "_localSrc": "tools/migration/data/seed/assets/about-beyond-1682.png"
             },
-            {
-              "_type": "block",
-              "_key": "p0",
-              "style": "normal",
-              "markDefs": [],
-              "children": [
-                {
-                  "_type": "span",
-                  "_key": "p0s",
-                  "text": "1682",
-                  "marks": []
-                }
-              ]
-            },
-            {
-              "_type": "block",
-              "_key": "p1",
-              "style": "normal",
-              "markDefs": [],
-              "children": [
-                {
-                  "_type": "span",
-                  "_key": "p1s",
-                  "text": "Our conference on AI and innovation — the room where the people doing this work compare notes.",
-                  "marks": []
-                }
-              ]
-            }
-          ]
+            "alt": "The 1682 conference wordmark on black: four digits built from Bauhaus quarter-circles and squares in red, blue, amber and white, with the O3 mark set into a red tile at the end."
+          },
+          "heading": "1682",
+          "body": "Our annual conference on AI and innovation — the room where the people doing this work compare notes.",
+          "button": {
+            "_type": "button",
+            "label": "See the conference",
+            "href": "/1682-conference-ai-innovation",
+            "contrast": "ghost",
+            "icon": "none"
+          }
         },
         {
-          "_type": "richText",
+          "_type": "mediaCard",
           "_key": "b-ventures",
-          "body": [
-            {
-              "_type": "figure",
-              "_key": "b-ventures-image",
-              "image": {
-                "_type": "image",
-                "_localSrc": "tools/migration/data/seed/assets/about-beyond-o3xo.png"
-              },
-              "alt": "The O3XO mark on black: O3 set in white above XO in amber, the X drawn as a four-pointed star."
+          "media": {
+            "_type": "figure",
+            "image": {
+              "_type": "image",
+              "_localSrc": "tools/migration/data/seed/assets/about-beyond-o3xo.png"
             },
-            {
-              "_type": "block",
-              "_key": "p0",
-              "style": "normal",
-              "markDefs": [],
-              "children": [
-                {
-                  "_type": "span",
-                  "_key": "p0s",
-                  "text": "O3 Ventures",
-                  "marks": []
-                }
-              ]
-            },
-            {
-              "_type": "block",
-              "_key": "p1",
-              "style": "normal",
-              "markDefs": [],
-              "children": [
-                {
-                  "_type": "span",
-                  "_key": "p1s",
-                  "text": "Our investment arm, backing early-stage AI and digital product companies whose values and ambitions match ours.",
-                  "marks": []
-                }
-              ]
-            }
-          ]
+            "alt": "The O3XO mark on black: O3 set in white above XO in amber, the X drawn as a four-pointed star."
+          },
+          "heading": "Ventures",
+          "body": "Our investment arm, backing early-stage AI and digital product companies whose values and ambitions match ours.",
+          "button": {
+            "_type": "button",
+            "label": "See the portfolio",
+            "href": "/ventures",
+            "contrast": "ghost",
+            "icon": "none"
+          }
         },
         {
-          "_type": "richText",
+          "_type": "mediaCard",
           "_key": "b-community",
-          "body": [
-            {
-              "_type": "figure",
-              "_key": "b-community-image",
-              "image": {
-                "_type": "image",
-                "_localSrc": "tools/migration/data/seed/assets/about-beyond-community.png"
-              },
-              "alt": "The O3 team in black and white, twenty people in branded tees gathered on a bench in a stone-walled hall."
+          "media": {
+            "_type": "figure",
+            "image": {
+              "_type": "image",
+              "_localSrc": "tools/migration/data/seed/assets/about-beyond-community.png"
             },
-            {
-              "_type": "block",
-              "_key": "p0",
-              "style": "normal",
-              "markDefs": [],
-              "children": [
-                {
-                  "_type": "span",
-                  "_key": "p0s",
-                  "text": "Community",
-                  "marks": []
-                }
-              ]
-            },
-            {
-              "_type": "block",
-              "_key": "p1",
-              "style": "normal",
-              "markDefs": [],
-              "children": [
-                {
-                  "_type": "span",
-                  "_key": "p1s",
-                  "text": "Philadelphia is home. We show up for the design and engineering community that made us.",
-                  "marks": []
-                }
-              ]
-            }
-          ]
+            "alt": "The O3 team in black and white: twenty people in 1682 conference tees, standing and seated on benches in a stone-walled hall."
+          },
+          "heading": "Community",
+          "body": "Philadelphia is home. We show up for the design and engineering community that made us."
         }
       ]
     },

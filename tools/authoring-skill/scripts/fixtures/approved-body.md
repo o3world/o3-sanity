@@ -172,33 +172,23 @@ We built O3 to close that gap. Strategy and execution under one roof, so the peo
 
 We're founder-led, and we've chosen quality over scale every year we've been in business: a deliberately senior team and a deliberately short client list, partners whose outcomes we're genuinely invested in. It's a slower way to grow. It's the only way to do work this deep.
 
-Finds the real problem and the move worth making, before a line of code is written.
+Not a menu of services. One senior team that carries a problem from the first question to the shipped thing.
 
-Product-grade design that gives the move a form people actually want to use.
+The people who find the move are the people who build it. We stay on the problem from the first question through launch, so the thinking survives contact with the code.
 
-Senior engineers who build it to last and to scale — the fix that ships, not a prototype to hand off.
+Experience design and software engineering in the same team, so the design can be built and the build knows what it is for.
 
-Applied where it compounds the work, not where it decorates it — our O3XO practice, embedded where it earns its keep.
-
-Rigorous where it counts, sharp where it matters. We take the work seriously and ourselves a little less so. The same people who define the strategy are the ones who build it — start to finish — which means everyone here owns outcomes, not tasks.
-
-The O3 team in black and white, gathered for a group portrait on the benches of a stone-walled hall at the 1682 conference.
+A deliberately senior team and a deliberately short client list. We take on the work we can be genuinely invested in, and we grow slower for it.
 
 The 1682 conference wordmark on black: four digits built from Bauhaus quarter-circles and squares in red, blue, amber and white, with the O3 mark set into a red tile at the end.
 
-1682
-
-Our conference on AI and innovation — the room where the people doing this work compare notes.
+Our annual conference on AI and innovation — the room where the people doing this work compare notes.
 
 The O3XO mark on black: O3 set in white above XO in amber, the X drawn as a four-pointed star.
 
-O3 Ventures
-
 Our investment arm, backing early-stage AI and digital product companies whose values and ambitions match ours.
 
-The O3 team in black and white, twenty people in branded tees gathered on a bench in a stone-walled hall.
-
-Community
+The O3 team in black and white: twenty people in 1682 conference tees, standing and seated on benches in a stone-walled hall.
 
 Philadelphia is home. We show up for the design and engineering community that made us.
 

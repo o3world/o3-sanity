@@ -287,6 +287,14 @@
       "note": "The insight band on Home and the insight index: Property 1 = Default (`2134:1302`, 1440×866) | Mobile (`2204:1145`, 402×1372), bone, 48px gap. Its axis is the unnamed `Property 1` where the other two page sets use `Device`; the values still read Desktop/Mobile, so it is one axis, not a second vocabulary. `CarouselTrack` already reads the mobile variant. Tracked from 2026-08-16."
     },
     {
+      "nodeId": "2846:5637",
+      "kind": "componentSet",
+      "name": "Services",
+      "figmaName": "Services",
+      "codeComponent": "packages/content-ui/src/blocks/section/railPanelsSection/PanelTrack.tsx#PanelTrack",
+      "note": "One column of the sideways track — index, 64/76 heading, 24/34 body, a quieter \"Best when…\" line and a text link — instanced three times by Home's \"How we work\" (`2846:5480`, #309) and three times again by About's \"What we optimize for.\" (`2960:7022`, #305). A component, not a set: no variant axis, so a change to it is a change to every column on both bands. The link the component draws is its own default on all six instances and neither band builds it. Tracked from 2026-08-24."
+    },
+    {
       "nodeId": "2089:4169",
       "kind": "componentSet",
       "name": "Case Study Card",
