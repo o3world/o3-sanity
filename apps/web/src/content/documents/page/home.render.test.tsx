@@ -284,13 +284,13 @@ describe('the homepage at 402 (ADR 0006)', () => {
 
   it('gives the hero band each frame’s own vertical rhythm', () => {
     // 276 above / 353 below at 402 (`1814:1622` at y 276 in an 874 band);
-    // 288 / 470 at 1440 (`2089:4313` at y 288 in an 1100 band). Read values
-    // at both ends, so the band's height is the frames' rather than a
-    // `min-h` someone picked.
+    // 288 / 310 at 1440 (`2089:4313` at y 288, `2209:2223` ending at y 630 in
+    // a 940 band). Read values at both ends, so the band's height is the
+    // frames' rather than a `min-h` someone picked.
     const heroClasses = html.match(/class="([^"]*pt-\[276px\][^"]*)"/)?.[1] ?? ''
     expect(heroClasses).toContain('pb-[353px]')
     expect(heroClasses).toContain('lg:pt-[288px]')
-    expect(heroClasses).toContain('lg:pb-[470px]')
+    expect(heroClasses).toContain('lg:pb-[310px]')
   })
 
   it('sizes the three statements from the step its own frame reads', () => {

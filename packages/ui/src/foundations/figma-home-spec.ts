@@ -51,7 +51,7 @@
  *   type step and the gradient's co-anchor — survives only on the pull quote.
  * - **Hero** (`1810:1616`) — the photographic raster with no live text, which
  *   is the whole reason this file says there is no hero type step. `2089:4316`
- *   replaces it with a 1100px ink band carrying live `Heading/h1` copy at
+ *   replaces it with a 940px ink band carrying live `Heading/h1` copy at
  *   64/76 Light, and the orbital sphere is gone from the frame entirely.
  *
  * Neither is re-extracted here. The next pass over this file should decide

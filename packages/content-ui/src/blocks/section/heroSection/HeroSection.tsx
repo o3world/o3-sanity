@@ -40,12 +40,15 @@ type HeroSectionProps = SectionProps<'heroSection'> & {
  *
  * | Part       | 1440 (`2089:4316`)                    | 402 (`1814:1619`)        |
  * | ---------- | ------------------------------------- | ------------------------ |
- * | Band       | 1440 × **1100** of `#0A0A0B`          | 402 × 874 of `#030303`   |
+ * | Band       | 1440 × **940** of `#0A0A0B`           | 402 × 874 of `#030303`   |
  * | Headline   | centred, `Heading/h1` 64/76 **Light** | flush left, 36/40        |
- * | 2nd line   | white at 50%                          | white at 60%             |
- * | Subheading | centred, 24/34, **724** wide, 50%     | **absent**               |
+ * | 2nd line   | white at 50% (`2089:4318`)            | white at 60%             |
+ * | Standfirst | centred, 24/34, **724** wide, solid   | **absent**               |
  * | CTA        | white fill, radius 5 (`2205:1298`)    | `Button / Solid` Base    |
- * | Rhythm     | 288 above, 41, 33, 470 below          | 276 above, 39, 353 below |
+ * | Rhythm     | 288 above, 41, 33, 310 below          | 276 above, 39, 353 below |
+ *
+ * The 402 column reads the frame as it stood before its 2026-08 rebuild; the
+ * rebuilt `1814:1619` — centred, with a standfirst — is #322's to land.
  *
  * The band is padding, not a `min-h` with the content centred inside it: both
  * frames place the headline at a measured distance from the top of the band
@@ -205,16 +208,16 @@ export function HeroSection({
         {/*
          * The band's rhythm, read off both frames rather than centred inside a
          * `min-h`: the headline starts 288px down at 1440 (`2089:4313`) and
-         * 276px down at 402 (`1814:1622`), and the sphere gets the 470 / 353
+         * 276px down at 402 (`1814:1622`), and the sphere gets the 310 / 353
          * underneath. Together with the copy that resolves to the frames'
-         * 1100 / 874 band heights.
+         * 940 / 874 band heights.
          *
          * **Alignment switches at `lg`.** The 1440 frame centres the whole
          * block; the 402 frame sets it as a 362px column flush to the 20px
          * gutter, headline and button both left. That is composition, so it
          * lives here rather than in a token (ADR 0006).
          */}
-        <div className="max-w-content relative z-10 mx-auto flex flex-col items-start pb-[353px] pt-[276px] text-left lg:items-center lg:pb-[470px] lg:pt-[288px] lg:text-center">
+        <div className="max-w-content relative z-10 mx-auto flex flex-col items-start pb-[353px] pt-[276px] text-left lg:items-center lg:pb-[310px] lg:pt-[288px] lg:text-center">
           <h1 className="text-hero font-display text-balance">
             <MaskedLines
               lines={lines.map((line, index) => (
@@ -235,10 +238,10 @@ export function HeroSection({
           </h1>
 
           {subheading ? (
-            // 724px and white at 50% (`2089:4315`) — the same alpha as the
-            // headline's closing line, not the CTA band's 60% subhead.
+            // 724px and solid white (`2089:4315`). The 50% belongs to the
+            // headline's closing line alone; the standfirst carries no alpha.
             <Reveal delay={120} className="mt-10">
-              <p className="text-lead mx-auto max-w-[724px] text-balance text-white/50">
+              <p className="text-lead mx-auto max-w-[724px] text-balance text-white">
                 {subheading}
               </p>
             </Reveal>
