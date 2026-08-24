@@ -89,8 +89,7 @@ export type CardSlot<K extends CardTypeName> = [Extract<K, AppFirstCardName>] ex
 
 /**
  * The shared cards, lazily imported so a section block pulls in only the card
- * it draws. View + Card are the only view modes o3 carries (the vtx Teaser
- * mode was not ported).
+ * it draws. View and Card are the only view modes o3 carries.
  */
 const SHARED_CARDS = {
   insight: dynamic(() => import('./InsightCard').then((m) => m.InsightCard)),

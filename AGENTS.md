@@ -154,9 +154,10 @@ is missing its own, or when a fork nobody recorded appears.
 Two rules move a component between rows, and both read off something mechanical rather than a
 judgement made in the moment.
 
-**Promotion** is [ADR 0028](./docs/adr/0028-o3xo-is-a-second-app-in-the-monorepo.md): a block joins
-the core list the moment both brands draw it. Until then it lives app-first, schema included, which
-is [ADR 0029](./docs/adr/0029-a-brand-only-block-lives-app-first-schema-included.md).
+**Promotion** is
+[ADR 0029](./docs/adr/0029-a-brand-only-block-lives-app-first-schema-included.md): a block joins the
+core list the moment the second brand draws it, and until then it lives app-first, schema included.
+ADR 0028 is where the same motion was first set for components.
 
 **Demotion** is #286, and the trigger is the component map's classification. "Diverges structurally"
 in [`docs/figma-components-o3xo.md`](./docs/figma-components-o3xo.md) demotes. "Needs variant or

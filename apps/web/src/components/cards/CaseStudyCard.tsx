@@ -33,8 +33,7 @@ function caseEyebrow(card: Pick<CaseStudyCardData, 'industries' | 'industryDetai
  *
  * Nothing here is a text-beside-thumbnail card: the photograph **is** the
  * card, the scrim holds the left column legible, and the copy sits on the
- * floor. The pre-#42 version split it into a copy column and an image panel,
- * which is a different composition entirely.
+ * floor.
  *
  * The trailing CTA is a styled `<span>`, not a `Button` — the whole card is
  * already the anchor, and a nested control would be a second tab stop to the

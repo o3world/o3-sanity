@@ -13,15 +13,15 @@ builders and the dispatch loop that call into these.
 
 ## Exports
 
-| Subpath           | What it is                                                                                                  |
-| ----------------- | ----------------------------------------------------------------------------------------------------------- |
-| `.`               | every section and base renderer, the base bindings, and the renderer support layer                          |
-| `./chrome`        | `SiteNav`, `UtilityNav`, `SiteFooter`, `MobileNavMenu`, `NavInk` — authored entirely in Site Settings       |
-| `./cards`         | `getCard`, `CARD_PROJECTIONS`, and the four card components; client-safe, because section blocks render one |
-| `./portable-text` | `PortableTextBody` — a separate entry because it pulls `@portabletext/react`                                |
-| `./format-date`   | the two date formats an insight shows                                                                       |
-| `./testing`       | `classTokens` and the 402 assertions (ADR 0006), plus the seed projections the render layer shares          |
-| `./testing/seed`  | the committed seed tree projected for the browser — what the block stories and the page mockups render      |
+| Subpath           | What it is                                                                                                             |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `.`               | every section and base renderer, the base bindings, and the renderer support layer                                     |
+| `./chrome`        | `SiteNav`, `UtilityNav`, `SiteFooter`, `MobileNavMenu`, `NavInk` — authored entirely in Site Settings                  |
+| `./cards`         | `getCard`, `CARD_PROJECTIONS`, the card bindings, and the shared cards; client-safe, because section blocks render one |
+| `./portable-text` | `PortableTextBody` — a separate entry because it pulls `@portabletext/react`                                           |
+| `./format-date`   | the two date formats an insight shows                                                                                  |
+| `./testing`       | `classTokens` and the 402 assertions (ADR 0006), plus the seed projections the render layer shares                     |
+| `./testing/seed`  | the committed seed tree projected for the browser — what the block stories and the page mockups render                 |
 
 ## The app owns the binding
 
@@ -31,9 +31,11 @@ the `satisfies` clause that checks the app's own roster. That is deliberate:
 a block type this app does not have must not force a renderer into it, and a
 renderer this app draws differently is one changed line in its bindings list.
 
-The **base** bindings are the exception and ship from here. `LayoutSection`
-dispatches base blocks itself, so the base tier is the inline vocabulary a
-section renderer draws with rather than a per-app roster.
+The **base** bindings ship from here for the blocks both brands draw the same
+way. `LayoutSection` dispatches base blocks itself, so it takes the app's roster
+through its `baseComponents` slot and falls back to the shared table for
+whatever the app does not name. A base block whose brands draw different
+designs is app-first instead, which is the placement table in `AGENTS.md`.
 
 ## Two boundaries this package carries
 

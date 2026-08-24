@@ -83,10 +83,20 @@ function sourceFiles(dir: string): string[] {
   })
 }
 
-/** The files under `root` that export a component of this name. */
+/**
+ * The files under `root` that export a component of this name.
+ *
+ * Two forms count: the declaration exported in place, and a local declaration
+ * listed in an `export { … }`. A re-export carries `from` and does not, so a
+ * barrel cannot stand in for the renderer it points at.
+ */
 function filesExporting(root: string, name: string): string[] {
-  const declared = new RegExp(`^export (?:default )?(?:function|const) ${name}\\b`, 'm')
-  return sourceFiles(root).filter((path) => declared.test(readFileSync(join(REPO, path), 'utf8')))
+  const declared = new RegExp(`^export (?:default )?(?:function|const|class) ${name}\\b`, 'm')
+  const listed = new RegExp(`^export \\{[^}]*\\b${name}\\b[^}]*\\}(?!\\s*from)`, 'm')
+  return sourceFiles(root).filter((path) => {
+    const source = readFileSync(join(REPO, path), 'utf8')
+    return declared.test(source) || listed.test(source)
+  })
 }
 
 type Renderer = { tier: RendererTier; type: string; name: string }
