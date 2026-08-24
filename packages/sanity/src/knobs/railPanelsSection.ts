@@ -4,7 +4,7 @@ import type { RailPanelsSection } from '../types/generated'
 
 /**
  * The rail band's design options — the block with two axes, where the second
- * one only applies under half of the first.
+ * one applies under exactly one value of the first.
  *
  * Read this file to know what the band offers. The Sanity fields, and the
  * canvas toolbar's controls, are generated from it, so neither can offer a
@@ -19,11 +19,11 @@ export const railPanelsSectionKnobs = defineBlockKnobs({
       name: 'layout',
       title: 'Layout',
       description:
-        'How the panels are arranged: a numbered/labelled rail beside tall panels, a row of ink cards, hairlined numbered rows, or side-by-side columns of details.',
-      // The Solutions frame (1925:6108) carries the SAME band as Home's
-      // ways-to-work (1762:2168) — same heading, same standfirst, same three
-      // engagements — in a different arrangement: no rail, no media square,
-      // three 394×526 ink cards each holding a halftone disc. Identical
+        'How the panels are arranged: a numbered/labelled rail beside tall panels, a row of ink cards, hairlined numbered rows, side-by-side columns of details, or a track of numbered columns that scrolls sideways.',
+      // The Solutions frame (1925:6108) carries the same three engagements
+      // Home's band does — same heading, same standfirst — in a different
+      // arrangement: no rail, no media square, three 394×526 ink cards each
+      // holding a halftone disc. Identical
       // content, different shape, so it is a layout axis rather than a second
       // block — the test featureGridSection's `grid | orbital` and
       // inFlightSection's `cards | rows` already passed (#47, #56, #50).
@@ -35,18 +35,23 @@ export const railPanelsSectionKnobs = defineBlockKnobs({
       // `grid` is the redesigned Solutions frame's service grid (`2358:2788`,
       // #93): the panels side by side as columns, each one's details stacked
       // under its heading — no rail, no numerals, no media square.
-      options: ['rail', 'cards', 'rows', 'grid'],
+      // `track` is Home's redesigned ways-to-work band (`2846:5480`, #309):
+      // the same three engagements again, as columns on a rule that scrolls
+      // sideways. It replaces the rail-with-numbers composition rather than
+      // varying it — there is no rail to count anything off — which is why it
+      // is a fifth arrangement and not a second `rail` value.
+      options: ['rail', 'cards', 'rows', 'grid', 'track'],
       initialValue: 'rail',
     }),
     knob({
       name: 'rail',
       title: 'Rail',
       description:
-        'Rail layout only — what the rail counts off: each panel’s label (the platforms band) or its position (the ways-to-work band, where the frame numbers 01/02/03). The rows layout always numbers, so it does not ask.',
-      // Both canonical bands (1762:2149 and 1762:2168) share one composition
-      // and differ only here, so this is a variant of the block rather than a
-      // second block — #42. Numbers derive from order, the same rule
-      // caseStudy.story’s chapters already follow (CONTEXT.md).
+        'Rail layout only — what the rail counts off: each panel’s label (the platforms band) or its position, numbered 01/02/03. No other layout has a rail, so none of them asks.',
+      // A variant of the block rather than a second block — #42: the rail
+      // composition is one thing and this is the only value that moves inside
+      // it. Numbers derive from order, the same rule caseStudy.story’s
+      // chapters already follow (CONTEXT.md).
       options: ['label', 'number'],
       initialValue: 'label',
       // The gate lives on the knob rather than on a `hiddenUnless` wrapper,

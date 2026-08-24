@@ -6,18 +6,16 @@ import { seedImage, seededSectionArgs } from '../../../testing/seedContent'
 import { RailPanelsSection } from './RailPanelsSection'
 
 /**
- * Rail + panels — the Home frame's two matching bands, "The platforms we go
- * deep on" (`1762:2149`) and "Three ways in" (`1762:2168`).
+ * Rail + panels — an ordered set of parallel things, in five arrangements.
  *
- * The two bands **differ in exactly one thing**: what the rail counts off.
- * That is the `rail` field (`label` | `number`), not a second block type, and
- * the pair of stories below is the argument for that decision — flip between
- * them and everything but the rail is identical.
+ * `layout` is the axis: `rail` is Home's platforms band (`1762:2149`); `cards`
+ * is the Solutions engagement band (`1925:6113`–`6115`, #47); `rows` is the
+ * partner page's services (`2749:6863`); `grid` is the software-engineering
+ * service page's grid (`2358:2788`, #93); `track` is Home's "How we work"
+ * (`2846:5480`, #309).
  *
- * `layout` is the other axis: `rail` is the Home composition; `cards` is the
- * Solutions engagement band (`1925:6113`–`6115`, #47); `rows` is the partner
- * page's services (`2749:6863`); `grid` is the software-engineering service
- * page's grid (`2358:2788`, #93).
+ * `rail` is the second axis and applies to the rail layout alone — what the
+ * rail counts off, each panel's label or its position.
  *
  * 82 + 238 + 500 + 33 + 395 = 1248 — the whole band is the standard content
  * column, right-aligned inside it. If it ever stops adding up, that sum is
@@ -40,10 +38,33 @@ export const RailByLabel: Story = {
   args: seededSectionArgs('index', 'railPanelsSection', 0),
 }
 
-/** "Three ways in" — the same band, rail counting **numbers** off array order. */
+/**
+ * The same rail counting **numbers** off array order (`1744:1786`) — a reversed
+ * ink chip on the active stop, and the numeral inlined into the row at 402.
+ *
+ * The knob is set here rather than seeded: no page picks this value since Home
+ * moved its ways-to-work band to the track (#309), and an option an editor can
+ * still turn needs somewhere to be looked at.
+ */
 export const RailByNumber: Story = {
+  args: { ...seededSectionArgs('index', 'railPanelsSection', 0), rail: 'number' },
+}
+
+/**
+ * `layout: track` — Home's "How we work" (`2846:5480`): the engagements as
+ * hairline-separated columns on a rule that scrolls sideways, the ink third of
+ * the rule tracking which column is in view.
+ */
+export const Track: Story = {
   args: seededSectionArgs('index', 'railPanelsSection', 1),
-  parameters: { design: figmaDesign('1762:2168') },
+  parameters: { design: figmaDesign('2846:5480') },
+}
+
+/** The track at 402 (`2975:8355`) — one column per view, no hairline in sight. */
+export const TrackMobile: Story = {
+  args: seededSectionArgs('index', 'railPanelsSection', 1),
+  globals: { viewport: { value: 'mobile' } },
+  parameters: { design: figmaDesign('2975:8355') },
 }
 
 /** The Solutions composition: `layout: cards`, three engagement cards. */

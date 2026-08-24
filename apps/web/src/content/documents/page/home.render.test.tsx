@@ -85,9 +85,9 @@ describe('the seeded homepage', () => {
     ['quote', 'positioned our company as the leader and shaper'],
     ['platform rail', 'The platforms we go deep on'],
     ['platform standfirst', 'We don&#x27;t dabble across every tool'],
-    ['engagement heading', 'Three ways in. You decide how much of the problem to give.'],
-    ['engagement panel', 'Embedded Team Member'],
-    ['engagement body', 'Best when you trust the direction and need the horsepower.'],
+    ['engagement heading', 'How we work'],
+    ['engagement panel', 'Embedded Team'],
+    ['engagement note', 'Best when you trust the direction and need the horsepower.'],
     ['insights carousel', 'The thinking behind the work.'],
     ['closing CTA', 'The best partnerships don’t have an end date.'],
     ['closing CTA body', 'We stay and build it. That&#x27;s the whole offer.'],
@@ -95,11 +95,13 @@ describe('the seeded homepage', () => {
     expect(html).toContain(copy)
   })
 
-  it('numbers the ways-to-work rail from array order, not authored strings', () => {
-    // `rail: 'number'` on the second railPanelsSection (1762:2168) — the one
-    // field that distinguishes it from the platforms band.
-    expect(html).toContain('>01<')
-    expect(html).toContain('>03<')
+  it('numbers the how-we-work track from array order, not authored strings', () => {
+    // Both visible columns on `2846:5480` read `.03` — the component's
+    // default, overridden on neither instance. The band counts its own array
+    // instead (#309).
+    expect(html).toContain('>.01<')
+    expect(html).toContain('>.02<')
+    expect(html).toContain('>.03<')
   })
 
   it('renders the client logos the partners strip references', () => {
@@ -151,13 +153,33 @@ describe('the seeded homepage', () => {
  * than empty for that reason.
  */
 describe('the homepage at 402 (ADR 0006)', () => {
-  it('scrolls sideways nowhere but the insights carousel', () => {
-    // Since the 2026-08-13 amendment (#90) the carousel is a snap-scroller at
-    // every width, so its own `overflow-x-auto` + `snap-x` are expected here.
-    // The assertion is exact, not empty: a band that starts sizing itself
-    // `w-max` or `w-screen`, or a second `overflow-scroll` region, still fails
-    // — which is the 402 regression this was written for.
+  it('scrolls sideways only where a 402 frame draws a track', () => {
+    // Two bands do, and both are read rather than inherited: the insights
+    // carousel since the 2026-08-13 amendment (#90), and the how-we-work
+    // track, whose 402 frame (`2975:8355`) draws one column with the rest off
+    // canvas. The assertion is exact, not empty: a band that starts sizing
+    // itself `w-max` or `w-screen`, or an `overflow-scroll` region, still
+    // fails — which is the 402 regression this was written for.
     expect(unprefixedHorizontalScrollUtilities(html)).toEqual(['overflow-x-auto', 'snap-x'])
+  })
+
+  it('gives the how-we-work track one column per view until lg', () => {
+    // Matched on the band's OWN class attribute, not on the document: the
+    // utilities probe above de-duplicates, so the carousel would answer for
+    // this band and the assertion would pass with the track gone.
+    const column = html.match(/<li[^>]*class="([^"]*lg:w-\[531px\][^"]*)"/)?.[1] ?? ''
+    expect(column, 'no track column was rendered').not.toBe('')
+    // 531 at 1440 (`2846:5480`), the full content column at 402 — where the
+    // frame's own column overruns the gutter by its right padding alone.
+    expect(column).toContain('w-full')
+    // The hairline between columns is the one part that is `lg:` only: at 402
+    // it falls outside the gutter, so it is drawn nowhere rather than at the
+    // wrong place.
+    expect(variantsOf(html, 'border-r')).toEqual(['lg:border-r'])
+
+    const track = html.match(/<ol[^>]*class="([^"]*snap-mandatory[^"]*)"/)?.[1] ?? ''
+    expect(track, 'the track is not a scroll region').toContain('overflow-x-auto')
+    expect(track).toContain('snap-x')
   })
 
   it('gives the insights carousel one card per view until lg', () => {
@@ -269,11 +291,11 @@ describe('the homepage at 402 (ADR 0006)', () => {
     expect(variantsOf(html, 'gap-12')).toContain('lg:gap-12')
   })
 
-  it('carries the ways-to-work numbering into the row when the rail cannot', () => {
-    // `PanelRail` is `hidden … lg:flex`, so at 402 the numeral has to come
-    // from the row itself (`1814:1930`) or the panels lose their order.
-    const numerals = html.match(/>01</g) ?? []
-    expect(numerals.length).toBeGreaterThanOrEqual(2)
+  it('numbers each how-we-work column once, at both widths', () => {
+    // The track's numeral sits inside the column, so it survives 402 without
+    // a second copy — the shape the rail composition needed and this one does
+    // not. Two would mean a hidden desktop numeral had come back.
+    expect((html.match(/>\.01</g) ?? []).length).toBe(1)
   })
 })
 

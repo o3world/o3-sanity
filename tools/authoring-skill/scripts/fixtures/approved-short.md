@@ -93,16 +93,13 @@ Vercel
 View our Vercel work
 Lovable
 View our Lovable work
-Three ways in. You decide how much of the problem to give.
-Embedded
-Embedded Team Member
-View our work
+How we work
+Embedded Team
+Embedded Team
 Product Squad
 Product Squad
-View our work
 Full Ownership
 Full Ownership
-View our work
 The thinking behind the work.
 The best partnerships don’t have an end date.
 View our work

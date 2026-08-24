@@ -158,7 +158,7 @@ export const caseShowcaseSection = defineSectionBlock({
 export const railPanelsSection = defineSectionBlock({
   name: 'railPanelsSection',
   description:
-    'An ordered set of parallel things — offers, platforms, ways of working — as a labelled rail, a row of cards, numbered rows, or side-by-side columns of details. Reach for it when several options differ in kind rather than degree and each needs its own short pitch and a quieter “Best when…” line. Two panels minimum; a rail panel can carry a CTA and media, a card carries a mark and one line of body.',
+    'An ordered set of parallel things — offers, platforms, ways of working — as a labelled rail, a row of cards, numbered rows, side-by-side columns of details, or a track of numbered columns that scrolls sideways. Reach for it when several options differ in kind rather than degree and each needs its own short pitch and a quieter “Best when…” line. Two panels minimum; a rail panel can carry a CTA and media, a card carries a mark and one line of body, and a track column carries neither.',
   title: 'Rail + panels',
   knobs: railPanelsSectionKnobs,
   fields: [

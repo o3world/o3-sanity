@@ -237,7 +237,7 @@ describe('the seeded Solutions page', () => {
   })
 
   /**
-   * The band is Home's ways-to-work band (`1762:2168`) in the Solutions
+   * The band is the same three engagements Home carries, in the Solutions
    * frame's arrangement (`1925:6108`) — three ink cards, no rail, no media
    * square, no button. `layout` is what says so; the numerals, the 395px
    * media slot and the panel CTAs are all rail-layout elements, so their

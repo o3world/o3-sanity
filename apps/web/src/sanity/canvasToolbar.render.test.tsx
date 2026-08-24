@@ -417,8 +417,8 @@ describe('what the knob menu carries that the bar does not', () => {
   })
 
   it('drops a gated knob exactly where the form drops it', () => {
-    // `rail` is `notOneOf: ['cards', 'rows', 'grid']` — the layouts that draw
-    // no rail. The menu asks `visibleKnobs`, which is the same declaration the
+    // `rail` is offered on the rail layout alone — every other one draws no
+    // rail. The menu asks `visibleKnobs`, which is the same declaration the
     // Studio field's predicate is generated from.
     const at = (layout: string) =>
       render(
@@ -429,13 +429,14 @@ describe('what the knob menu carries that the bar does not', () => {
           'Rail panels section',
         ),
       )
-    // Surface (3) + Layout (4) + Rail (2) on the rail layout; Rail's two rows
-    // are gone on the other three. Counted by role rather than matched by
+    // Surface (3) + Layout (5) + Rail (2) on the rail layout; Rail's two rows
+    // are gone on the other four. Counted by role rather than matched by
     // label, because "Rail" is also one of Layout's own option titles.
-    expect(rolesIn(at('rail'), 'menuitemradio')).toHaveLength(9)
-    expect(rolesIn(at('cards'), 'menuitemradio')).toHaveLength(7)
-    expect(rolesIn(at('rows'), 'menuitemradio')).toHaveLength(7)
-    expect(rolesIn(at('grid'), 'menuitemradio')).toHaveLength(7)
+    expect(rolesIn(at('rail'), 'menuitemradio')).toHaveLength(10)
+    expect(rolesIn(at('cards'), 'menuitemradio')).toHaveLength(8)
+    expect(rolesIn(at('rows'), 'menuitemradio')).toHaveLength(8)
+    expect(rolesIn(at('grid'), 'menuitemradio')).toHaveLength(8)
+    expect(rolesIn(at('track'), 'menuitemradio')).toHaveLength(8)
   })
 
   it('marks the inherited value for a screen reader, not only for an eye', () => {

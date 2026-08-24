@@ -193,30 +193,17 @@
       "_type": "railPanelsSection",
       "_key": "engagements",
       "surface": "white",
-      "layout": "rail",
-      "heading": "Three ways in. You decide how much of the problem to give.",
-      "intro": "From senior hands inside your team to owning the whole outcome — the right engagement depends on how much of the problem is yours to keep.",
+      "layout": "track",
+      "heading": "How we work",
+      "intro": "From senior hands inside your team to owning the whole outcome.",
       "panels": [
         {
           "_type": "panel",
           "_key": "eng-embedded",
-          "railLabel": "Embedded",
-          "heading": "Embedded Team Member",
-          "body": "Senior hands, inside your team. Best when you trust the direction and need the horsepower.",
-          "media": {
-            "_type": "figure",
-            "image": {
-              "_type": "image",
-              "_localSrc": "tools/migration/data/seed/assets/eng-embedded.svg"
-            },
-            "alt": "Nine nodes in a three-by-three grid joined by thin grey lines. The centre node is filled brand red; the other eight are grey."
-          },
-          "button": {
-            "_type": "button",
-            "label": "View our work",
-            "href": "/work",
-            "contrast": "dark"
-          }
+          "railLabel": "Embedded Team",
+          "heading": "Embedded Team",
+          "body": "Senior designers and engineers who join your team, your standup, and your codebase. No handoffs and no translation layer, so the horsepower goes straight at the problem.",
+          "note": "Best when you trust the direction and need the horsepower."
         },
         {
           "_type": "panel",
@@ -224,21 +211,7 @@
           "railLabel": "Product Squad",
           "heading": "Product Squad",
           "body": "A cross-functional pod — strategy, design, engineering — that takes a problem and runs. We own delivery; you own the decisions that matter.",
-          "note": "Best when you need momentum and a team that owns delivery.",
-          "media": {
-            "_type": "figure",
-            "image": {
-              "_type": "image",
-              "_localSrc": "tools/migration/data/seed/assets/eng-squad.svg"
-            },
-            "alt": "Six nodes spaced evenly around a thin grey ring, each joined by a spoke to the centre. The node at the top is filled brand red."
-          },
-          "button": {
-            "_type": "button",
-            "label": "View our work",
-            "href": "/work",
-            "contrast": "dark"
-          }
+          "note": "Best when you need momentum and a team that owns delivery."
         },
         {
           "_type": "panel",
@@ -246,24 +219,9 @@
           "railLabel": "Full Ownership",
           "heading": "Full Ownership",
           "body": "Hand us the outcome, not the tasks. We take it from ambiguous brief to shipped product — strategy, build, launch, and the accountability in between.",
-          "note": "Best when the goal is clear and you want a single point of accountability.",
-          "media": {
-            "_type": "figure",
-            "image": {
-              "_type": "image",
-              "_localSrc": "tools/migration/data/seed/assets/eng-ownership.svg"
-            },
-            "alt": "Three concentric orbit rings carrying grey nodes of decreasing size around a brand-red core."
-          },
-          "button": {
-            "_type": "button",
-            "label": "View our work",
-            "href": "/work",
-            "contrast": "dark"
-          }
+          "note": "Best when the goal is clear and you want a single point of accountability."
         }
-      ],
-      "rail": "number"
+      ]
     },
     {
       "_type": "insightsCarouselSection",

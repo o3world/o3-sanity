@@ -246,23 +246,19 @@ AI-native product building — from prompt to production, shipping working softw
 
 The Lovable mark, a rounded heart filled with a gradient running from orange through pink to blue.
 
-From senior hands inside your team to owning the whole outcome — the right engagement depends on how much of the problem is yours to keep.
+From senior hands inside your team to owning the whole outcome.
 
-Senior hands, inside your team. Best when you trust the direction and need the horsepower.
+Senior designers and engineers who join your team, your standup, and your codebase. No handoffs and no translation layer, so the horsepower goes straight at the problem.
 
-Nine nodes in a three-by-three grid joined by thin grey lines. The centre node is filled brand red; the other eight are grey.
+Best when you trust the direction and need the horsepower.
 
 A cross-functional pod — strategy, design, engineering — that takes a problem and runs. We own delivery; you own the decisions that matter.
 
 Best when you need momentum and a team that owns delivery.
 
-Six nodes spaced evenly around a thin grey ring, each joined by a spoke to the centre. The node at the top is filled brand red.
-
 Hand us the outcome, not the tasks. We take it from ambiguous brief to shipped product — strategy, build, launch, and the accountability in between.
 
 Best when the goal is clear and you want a single point of accountability.
-
-Three concentric orbit rings carrying grey nodes of decreasing size around a brand-red core.
 
 Most firms hand you the strategy and leave. We stay and build it. That's the whole offer.
 

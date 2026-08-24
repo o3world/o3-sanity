@@ -56,21 +56,21 @@
       "format": "svg",
       "locked": true,
       "unresolved": true,
-      "note": "Hand-authored, never in Figma. Carried over from `prototype/O3 Homepage v2.dc.html` as animated SVG (#727b371), which the retired prototype drew inline: 4 `@keyframes`, 5 `animation:` declarations, a `prefers-reduced-motion` freeze, and `#EB1000` inlined because an SVG in an `<img>` cannot see the page stylesheet. No `imageRef` in the file matches its bytes and no node carries its geometry. Figma exports none of that — regenerating this from any node would destroy it."
+      "note": "Hand-authored, never in Figma. Carried over from `prototype/O3 Homepage v2.dc.html` as animated SVG (#727b371), which the retired prototype drew inline: 4 `@keyframes`, 5 `animation:` declarations, a `prefers-reduced-motion` freeze, and `#EB1000` inlined because an SVG in an `<img>` cannot see the page stylesheet. No `imageRef` in the file matches its bytes and no node carries its geometry. Figma exports none of that — regenerating this from any node would destroy it. Committed unwired since #309: the how-we-work track draws no media, and a drawing nothing can re-export is parked rather than deleted."
     },
     {
       "path": "tools/migration/data/seed/assets/eng-ownership.svg",
       "format": "svg",
       "locked": true,
       "unresolved": true,
-      "note": "Hand-authored, never in Figma. 5 `@keyframes`, 6 `animation:` declarations, `prefers-reduced-motion`, inlined `#EB1000`; three concentric rings breathing out of phase around a brand-red core. Same house pattern and the same lock as the other diagrams."
+      "note": "Hand-authored, never in Figma. 5 `@keyframes`, 6 `animation:` declarations, `prefers-reduced-motion`, inlined `#EB1000`; three concentric rings breathing out of phase around a brand-red core. Same house pattern and the same lock as the other diagrams, and unwired with them at #309."
     },
     {
       "path": "tools/migration/data/seed/assets/eng-squad.svg",
       "format": "svg",
       "locked": true,
       "unresolved": true,
-      "note": "Hand-authored, never in Figma. 4 `@keyframes`, 5 `animation:` declarations, `prefers-reduced-motion`, inlined `#EB1000`. Its commit also corrected the node count the seed's alt text claimed — six on the ring, not seven — which is editorial work no export carries."
+      "note": "Hand-authored, never in Figma. 4 `@keyframes`, 5 `animation:` declarations, `prefers-reduced-motion`, inlined `#EB1000`. Its commit also corrected the node count the seed's alt text claimed — six on the ring, not seven — which is editorial work no export carries. Unwired with the other two diagrams at #309."
     },
     {
       "path": "tools/migration/data/seed/assets/insight-process-frontier.svg",

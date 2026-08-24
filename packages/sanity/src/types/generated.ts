@@ -451,7 +451,7 @@ export type RailPanelsSection = {
   _type: 'railPanelsSection'
   heading?: string
   intro?: string
-  layout?: 'rail' | 'cards' | 'rows' | 'grid'
+  layout?: 'rail' | 'cards' | 'rows' | 'grid' | 'track'
   rail?: 'label' | 'number'
   panels?: Array<{
     railLabel?: string
@@ -2123,7 +2123,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         _type: 'railPanelsSection'
         heading?: string
         intro?: string
-        layout?: 'cards' | 'grid' | 'rail' | 'rows'
+        layout?: 'cards' | 'grid' | 'rail' | 'rows' | 'track'
         rail?: 'label' | 'number'
         panels: Array<{
           railLabel?: string
@@ -2899,7 +2899,7 @@ export type PAGE_QUERY_RESULT = {
         _type: 'railPanelsSection'
         heading?: string
         intro?: string
-        layout?: 'cards' | 'grid' | 'rail' | 'rows'
+        layout?: 'cards' | 'grid' | 'rail' | 'rows' | 'track'
         rail?: 'label' | 'number'
         panels: Array<{
           railLabel?: string
