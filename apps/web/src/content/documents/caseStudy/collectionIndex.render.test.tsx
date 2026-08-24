@@ -103,7 +103,8 @@ describe('the /work index', () => {
   })
 
   it('pads the card 64 all round at lg', () => {
-    // `2089:4169` pads uniformly; the 402 card keeps its own 32.
+    // `2089:4169` pads 64 uniformly. The 402 instances override that to 24
+    // side / 64 top-and-bottom, where the card here keeps a uniform 32 — #319.
     expect(html).toContain('lg:p-16')
     expect(variantsOf(html, 'pb-[88px]')).toEqual([])
   })
