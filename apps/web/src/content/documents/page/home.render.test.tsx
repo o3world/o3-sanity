@@ -242,28 +242,27 @@ describe('the homepage at 402 (ADR 0006)', () => {
     expect(variantsOf(html, 'snap-x')).toEqual(['snap-x'])
   })
 
-  it('clips the partner strip at 402 rather than wrapping it', () => {
-    // One row at both widths. `2975:8088` is the same 1680px six-tile row the
-    // 1440 frame draws, sitting at x −639 inside a 402 clipping frame — the
-    // clip is symmetric, so a phone sees the middle of the row rather than all
-    // six marks stacked. Matched on the row's own class attribute, because the
-    // platforms tab row (`PanelRail`) legitimately wraps below `lg` and would
-    // answer for this one in a document-wide probe.
+  it('clips the partner strip at 1440 and wraps it below lg', () => {
+    // The 1440 row clips symmetrically; the 402 frame's `2975:8088` is the
+    // desktop row pasted at x −639, not a mobile treatment, so below `lg` the
+    // wrap is a renderer decision under ADR 0006 — a phone sees all six marks.
+    // Matched on the row's own class attribute, because the platforms tab row
+    // (`PanelRail`) also wraps below `lg` and would answer for this one in a
+    // document-wide probe.
     const row = html.match(/<ul class="([^"]*ml-px[^"]*)"/)?.[1] ?? ''
     expect(row, 'the partner strip was not rendered').not.toBe('')
-    expect(row).toContain('flex-nowrap')
-    expect(row).not.toContain('flex-wrap ')
+    expect(row).toContain('lg:flex-nowrap')
+    expect(row).toContain('flex-wrap')
     expect(html).not.toContain('animate-marquee')
     expect(html).not.toContain('lg:w-max')
   })
 
-  it('sizes the partner plates from the row both frames draw', () => {
-    // 280 square with 64px of side padding at both widths — `2975:8089` at 402
-    // is `1864:2395` unchanged. The tile is not a responsive measure: the row
-    // is fixed and the viewport is what crops it.
-    const plate = html.match(/<li class="([^"]*size-\[280px\][^"]*)"/)?.[1] ?? ''
+  it('sizes the partner plates from the 1440 row, stepping down with the wrap', () => {
+    // 280 square with 64px of side padding at 1440 (`1864:2395`); the smaller
+    // steps below `lg` follow the wrap, not a frame.
+    const plate = html.match(/<li class="([^"]*lg:size-\[280px\][^"]*)"/)?.[1] ?? ''
     expect(plate, 'no partner plate was rendered').not.toBe('')
-    expect(plate).not.toContain('lg:size-')
+    expect(plate).toContain('size-[168px]')
     expect(plate).toContain('border-line')
   })
 

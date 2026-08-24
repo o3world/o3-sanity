@@ -77,21 +77,22 @@ describe('the partners band', () => {
     // point of the restructure, so a surviving grid is a failed rebuild.
     expect(html).not.toContain('grid-cols-2')
     expect(html).not.toContain('lg:grid-cols-3')
-    // One row at every width since `2975:8088` — the 402 frame draws the same
-    // 1680px row, clipped rather than wrapped.
-    expect(html).toContain('flex-nowrap')
-    expect(html).not.toContain('flex-wrap')
+    // One clipped row at `lg` (`1864:2390`); below it the row wraps — the 402
+    // frame's `2975:8088` is the desktop row pasted, not a mobile treatment,
+    // so the wrap is a renderer decision under ADR 0006.
+    expect(html).toContain('lg:flex-nowrap')
+    expect(html).toContain('flex-wrap')
   })
 
   it('gives every tile the frame’s square plate and one shared hairline', () => {
-    // 280 × 280 with 64px side padding at both widths, hairlined `border-line`
-    // (#D6D3CC since this band anchored the token). `-ml-px` / `-mt-px` is
-    // what collapses two adjacent 1px borders into the single rule Figma's
-    // centred stroke draws.
+    // 280 × 280 with 64px side padding at 1440, hairlined `border-line`
+    // (#D6D3CC since this band anchored the token); the smaller steps below
+    // `lg` follow the wrap. `-ml-px` / `-mt-px` is what collapses two adjacent
+    // 1px borders into the single rule Figma's centred stroke draws.
     for (const tile of tiles) {
-      expect(tile).toContain('size-[280px]')
-      expect(tile).toContain('px-16')
-      expect(tile).not.toContain('lg:size-')
+      expect(tile).toContain('lg:size-[280px]')
+      expect(tile).toContain('size-[168px]')
+      expect(tile).toContain('lg:px-16')
       expect(tile).toContain('border-line')
       expect(tile).toContain('-ml-px')
       expect(tile).toContain('-mt-px')

@@ -23,7 +23,7 @@ type LogoWallSectionProps = SectionProps<'logoWallSection'>
  * | Eyebrow  | 18/22 (`Eyebrow size="lg"`), `fg-muted` | the same           |
  * | Heading  | `Heading/h2` — 48/58 Light, ink, 1026px | 36/44 Light        |
  * | Body     | 24/34 (`--text-lead`), `fg-body`, 724px | 20/**32**          |
- * | Logo bar | one centred row of six 280 × 280 tiles  | the same row       |
+ * | Logo bar | one centred row of six 280 × 280 tiles  | wraps — see below  |
  * | CTA      | solid ink, "See all partners", arrow    | the same           |
  *
  * The text block's own 32px gap is flat (`1864:2391`, `2975:8084`).
@@ -139,10 +139,15 @@ export function LogoWallSection({
         {/*
          * The strip bleeds: `-mx-gutter` gives the row the full viewport, and
          * `justify-center` + `overflow-hidden` clip it symmetrically, which is
-         * the frame's own composition — 120px off each end at 1440, 639 at 402,
-         * where `2975:8088` is the same 1680px row sitting at x −639 inside a
-         * 402 clipping frame. One row at every width: the tile is a fixed
-         * measure and the viewport is what crops it.
+         * the frame's own composition at 1440 (120px off each end).
+         *
+         * Below `lg` it wraps instead of clipping — three across at `sm`, two
+         * on a phone. The 402 frame's `2975:8088` is the desktop's 1680px row
+         * pasted at x −639 — the same un-adapted-capture tell as the services
+         * band — and rendering it as drawn shows one whole mark and two halves,
+         * so the wrap is a renderer decision under ADR 0006 until the file
+         * carries a real mobile treatment (Nick's call, 2026-08-24). What it
+         * protects is that a phone sees all six partners.
          *
          * The clip must stay `overflow-hidden`; the moment it becomes a scroll
          * region `home.render.test`'s sideways-scroll guard fails.
@@ -151,18 +156,14 @@ export function LogoWallSection({
           {/* The px compensates the tiles' negative margins so the outer edge
            * keeps its hairline; without it the top and left rules are clipped. */}
           <ul
-            className={cn(
-              'flex justify-center',
-              // The partner page's bar band has no 402 frame, so its row is
-              // still a renderer decision under ADR 0006 and still wraps.
-              isBar ? 'flex-wrap lg:flex-nowrap' : 'ml-px mt-px flex-nowrap',
-            )}
+            className={cn('flex flex-wrap justify-center lg:flex-nowrap', !isBar && 'ml-px mt-px')}
           >
             {(clients ?? []).map((client) => (
-              // `plates` — 280 × 280 with 64px of side padding at both widths,
-              // so the artwork gets a 152px box (`1864:2395`, `2975:8089`).
-              // Adjacent tiles share one hairline — Figma centres the stroke,
-              // so the seams collapse; `-ml-px` `-mt-px` is the CSS equivalent.
+              // `plates` — 280 × 280 with 64px of side padding at 1440, so the
+              // artwork gets a 152px box (`1864:2395`); the smaller steps
+              // below `lg` follow the wrap, not a frame. Adjacent tiles share
+              // one hairline — Figma centres the stroke, so the seams
+              // collapse; `-ml-px` `-mt-px` is the CSS equivalent.
               //
               // `bar` — the same 280 width and the same 64px padding, at 100
               // tall and with no stroke at all (`2471:2112`). Dropping the
@@ -174,7 +175,7 @@ export function LogoWallSection({
                   'flex shrink-0 items-center justify-center',
                   isBar
                     ? 'h-[100px] w-[168px] px-8 sm:w-[224px] sm:px-12 lg:w-[280px] lg:px-16'
-                    : 'border-line -ml-px -mt-px size-[280px] border px-16',
+                    : 'border-line -ml-px -mt-px size-[168px] border px-8 sm:size-[224px] sm:px-12 lg:size-[280px] lg:px-16',
                 )}
               >
                 {/*
@@ -188,13 +189,10 @@ export function LogoWallSection({
                   alt={client.name ?? ''}
                   width={456}
                   className="w-full grayscale"
-                  // The artwork box is the tile less its padding — 280 − 128 at
-                  // every width on `plates`, and the bar band's narrower tiles
-                  // below `lg`. Without this the browser has no slot and
-                  // downloads all 456 for a 152px box.
-                  sizes={
-                    isBar ? '(min-width: 1024px) 152px, (min-width: 640px) 128px, 104px' : '152px'
-                  }
+                  // The artwork box is the tile less its padding at each step.
+                  // Without this the browser has no slot and downloads all 456
+                  // for a 152px box.
+                  sizes="(min-width: 1024px) 152px, (min-width: 640px) 128px, 104px"
                 />
               </li>
             ))}
