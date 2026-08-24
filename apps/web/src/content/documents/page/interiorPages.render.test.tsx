@@ -68,28 +68,18 @@ describe('the seeded About page', () => {
   })
 
   /**
-   * A figure declares the column it was placed in, not the widest column it
-   * could have been placed in (#268). About's figure sits in a two-column
-   * `layoutSection`, so its slot is (1248 − 40) / 2 = 604 at the cap — asking
-   * for the full 1248 there buys the 1920 candidate for a 604px box.
+   * A picture declares the column it was placed in, not the widest column it
+   * could have been placed in (#268). Every image on the page is a `mediaCard`
+   * in the three-column beyond band, so each asks for (1248 − 80) / 3 = 389 at
+   * the cap — the full 1248 would buy the 1920 candidate for a 389px box, and
+   * the 822px article measure belongs to a detail page.
    */
-  it('sizes a figure to its layout column, not to the whole content column', () => {
-    const slots = declaredSizes(html)
-    expect(slots).toContain('(min-width: 1440px) 604px, (min-width: 768px) 42vw, 90vw')
-    expect(slots).not.toContain('(min-width: 1440px) 1248px, 90vw')
-  })
-
-  /**
-   * The same rule one level down. The beyond-client-services band is three
-   * columns of `richText`, and each body holds its own `figure` — so those
-   * figures take the column too, not the 822px article measure the identical
-   * renderer uses on a detail page.
-   */
-  it('sizes a figure inside a column’s rich text to that column', () => {
+  it('sizes a card’s picture to its layout column, not to the whole content column', () => {
     const slots = declaredSizes(html)
     expect(
       slots.filter((slot) => slot === '(min-width: 1440px) 389px, (min-width: 768px) 28vw, 90vw'),
     ).toHaveLength(3)
+    expect(slots).not.toContain('(min-width: 1440px) 1248px, 90vw')
     expect(slots).not.toContain('(min-width: 1024px) 822px, 90vw')
   })
 
@@ -115,24 +105,24 @@ describe('the seeded About page', () => {
    * polymorphic array at depth ≥ 2 in the repo, and the Presentation overlay
    * cannot attach a component inside it at `sanity@6.8.0` — **silently**
    * (#104: the resolver context comes back undefined and the resolver is
-   * never called, with no console warning). About carries three of them, so
+   * never called, with no console warning). About carries two of them, so
    * this is the page that proves nothing leaked in: a path under a column
    * would look correct in the HTML and do nothing on the canvas.
    */
   it('attributes nothing inside a layoutSection column', () => {
-    expect(sections.filter((s) => s._type === 'layoutSection')).toHaveLength(3)
+    expect(sections.filter((s) => s._type === 'layoutSection')).toHaveLength(2)
     expect(subBlockPaths(html).filter((path) => path.includes('.items'))).toEqual([])
   })
 
-  // The frame's band order (`1924:5344`): hero, Why O3, the feature grid,
-  // the team, Culture, the beyond-client-services row, Careers, CTA.
-  it('follows the frame’s band sequence, with the team band restored', () => {
+  // The frame's band order (`1924:5344`): hero, Why O3, the optimize-for
+  // track, the team, the beyond-client-services row, Careers, CTA. The
+  // Culture band went with the redesign (#308 ruling 4).
+  it('follows the frame’s band sequence', () => {
     expect(sections.map((s) => s._type)).toEqual([
       'heroSection',
       'layoutSection',
-      'featureGridSection',
+      'railPanelsSection',
       'personGridSection',
-      'layoutSection',
       'layoutSection',
       'roleListSection',
       'ctaSection',
@@ -140,9 +130,10 @@ describe('the seeded About page', () => {
   })
 
   it.each([
-    ['feature-grid heading', '4 disciplines. One team.'],
-    ['a feature body', 'before a line of code is written'],
-    ['team eyebrow', 'Our team'],
+    ['track heading', 'What we optimize for.'],
+    ['track standfirst', 'One senior team that carries a problem'],
+    ['a track panel', 'Quality over scale'],
+    ['team eyebrow', 'Leadership team'],
     ['team heading', 'The people who find it and build it.'],
     ['careers eyebrow', 'Careers'],
     ['a role', 'Senior Product Strategist'],
@@ -170,22 +161,14 @@ describe('the seeded About page', () => {
   })
 
   /**
-   * The band's three 394×390 images (`1924:5388`) and the Culture band's
-   * group portrait (`1927:6432`) — the imagery #56 left behind when it
-   * replaced the other approximations.
-   *
-   * Each beyond-band image rides **inside** its column's `richText` body
-   * rather than as a sibling `figure` item. `layoutSection` puts one item per
-   * grid cell, so three figures plus three passages would read image-image-
-   * image / text-text-text at three columns and fall apart entirely at one.
-   * `bodyText` already admits `figure`, so one item per column keeps each
-   * image with its own caption at every width, with no schema change.
+   * The band's three 395×391 pictures (`1924:5388`). Each is its column's
+   * `mediaCard` — one item per grid cell, so the picture, the name, the line
+   * and the link stay together at every column count.
    */
   it.each([
     ['the 1682 mark', 'The 1682 conference wordmark on black'],
     ['the O3XO mark', 'The O3XO mark on black'],
-    ['the community photo', 'twenty people in branded tees'],
-    ['the Culture band portrait', 'gathered for a group portrait'],
+    ['the community photo', 'twenty people in 1682 conference tees'],
   ])('draws %s from the frame', (_label, alt) => {
     expect(html).toContain(alt)
   })

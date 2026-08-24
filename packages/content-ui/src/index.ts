@@ -22,6 +22,7 @@ export { ButtonGroup } from './blocks/base/buttonGroup/ButtonGroup'
 export { Embed } from './blocks/base/embed/Embed'
 export { Figure } from './blocks/base/figure/Figure'
 export { Mark, markProps } from './blocks/base/mark/Mark'
+export { MediaCard } from './blocks/base/mediaCard/MediaCard'
 export type { MarkProps } from './blocks/base/mark/Mark'
 export { RichText } from './blocks/base/richText/RichText'
 

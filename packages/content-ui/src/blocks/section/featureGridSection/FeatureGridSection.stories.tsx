@@ -11,7 +11,7 @@ import { FeatureGridSection } from './FeatureGridSection'
  *
  * | `layout`  | Frame       | Page                                              |
  * | --------- | ----------- | ------------------------------------------------- |
- * | `grid`    | `1925:5915` | `/about`                                          |
+ * | `grid`    | —           | o3xo's `/contact`; no o3 page draws it since #305 |
  * | `stack`   | `2354:2530` | `/partners/sanity`                                |
  * | `rows`    | `2341:2250` | `/partners/sanity`, `/solutions/software-engineering` |
  * | `orbital` | `1928:6524` | `/solutions`                                      |
@@ -26,6 +26,12 @@ import { FeatureGridSection } from './FeatureGridSection'
  * under the band's `h2`, and an `h2` when the band carries no heading — which
  * the Solutions frame does not. `NoHeading` is that case.
  *
+ * **The grid has no o3 caller.** About's "4 disciplines" band was what drew it,
+ * and the redesigned frame replaced that band with the sideways track (#305).
+ * O3XO's contact page still draws the layout, so the arrangement ships — the
+ * grid stories below build it from the Sanity partner band rather than from a
+ * seed nobody has.
+ *
  * **The mark is per feature.** Each row's `mark` draws the animated orb —
  * the default, including when the field is empty — or the frame's halftone
  * disc when an editor picks it. `Grid` is the orb arm and `GridDiscs` is the
@@ -36,7 +42,7 @@ const meta = {
   component: FeatureGridSection,
   parameters: {
     layout: 'fullscreen',
-    design: figmaDesign('1925:5915'),
+    design: figmaDesign('2354:2530'),
   },
 } satisfies Meta<typeof FeatureGridSection>
 
@@ -54,14 +60,14 @@ const asDiscs = (args: Args): Args => ({
   })),
 })
 
-/** `/about` — the grid, with the band's own heading above it. */
+/** The grid, with the band's own heading above it. */
 export const Grid: Story = {
-  args: seededSectionArgs('about', 'featureGridSection'),
+  args: { ...seededSectionArgs('partners-sanity', 'featureGridSection'), layout: 'grid' },
 }
 
 /** The same band with every mark set to disc: the frame's original. */
 export const GridDiscs: Story = {
-  args: asDiscs(seededSectionArgs('about', 'featureGridSection')),
+  args: asDiscs({ ...seededSectionArgs('partners-sanity', 'featureGridSection'), layout: 'grid' }),
 }
 
 /** `/solutions` — the dotted tetrahedron, at `lg` and up. */
@@ -81,13 +87,17 @@ export const OrbitalMobile: Story = {
 }
 
 export const GridMobile: Story = {
-  args: seededSectionArgs('about', 'featureGridSection'),
+  args: { ...seededSectionArgs('partners-sanity', 'featureGridSection'), layout: 'grid' },
   globals: { viewport: { value: 'mobile' } },
 }
 
 /** No band heading — the feature headings take `h2` so nothing is skipped. */
 export const NoHeading: Story = {
-  args: { ...seededSectionArgs('about', 'featureGridSection'), heading: undefined },
+  args: {
+    ...seededSectionArgs('partners-sanity', 'featureGridSection'),
+    layout: 'grid',
+    heading: undefined,
+  },
 }
 
 /**
@@ -96,7 +106,11 @@ export const NoHeading: Story = {
  * because the schema lets an editor reach it.
  */
 export const OnInk: Story = {
-  args: { ...seededSectionArgs('about', 'featureGridSection'), surface: 'ink' },
+  args: {
+    ...seededSectionArgs('partners-sanity', 'featureGridSection'),
+    layout: 'grid',
+    surface: 'ink',
+  },
   globals: { backgrounds: { value: 'ink' } },
 }
 

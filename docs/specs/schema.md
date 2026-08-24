@@ -67,7 +67,9 @@ No tabs until a designed page needs them. **`faqSection`** is the exception the 
 
 ### Base tier
 
-`richText`, `figure`, `video`, `button`, `statGroup`, `mark`.
+`richText`, `figure`, `mediaCard`, `video`, `button`, `statGroup`, `mark`.
+
+`mediaCard` is a picture over a name, a line about it, and the link out — `media` (req), `heading` (req), `body`, `button`. The About frame's "Beyond O3 World" columns (`1924:5388`, #305): the band around it is an ordinary `layoutSection`, which already owns the eyebrow, the heading, the black surface and the column count, so what the frame added is the card and the card composes.
 
 `mark` is the dotted circle an item draws beside its copy — `kind` (`orb | disc`), plus the orb's knobs: `state` (nine tuned animations from `thinking-orbs`, MIT, orbs.jakubantalik.com), `size` (64 | 20 — two tuned drawings rather than one scaled, and beside copy it sets texture, not diameter), `speed`, `paused`. **The orb is the default**, including when the field is absent; `disc` is the deliberate step back to the frame's halftone. Like `figure`, `embed` and `button` it is a **shared object that doubles as a base block** (titled "Orb" in a `layoutSection` column), and it is the `mark` field on `featureGridSection`, `railPanelsSection`, `roleListSection` and `inFlightSection`. One renderer draws it everywhere: `blocks/base/mark/Mark.tsx`.
 

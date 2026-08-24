@@ -12,7 +12,7 @@ import {
   seo,
   stat,
 } from './objects'
-import { richText, statGroup } from './blocks/base'
+import { mediaCard, richText, statGroup } from './blocks/base'
 import type { Brand } from '../brand'
 import {
   BLOCK_ARRAYS,
@@ -98,6 +98,7 @@ const schemaTypesWith = (arrays: BlockArrays) => [
   backgroundMedia,
   // base blocks
   richText,
+  mediaCard,
   statGroup,
   // section blocks — this roster's, in registry order
   ...arrays['page.sections'].map((name) => SECTION_SCHEMAS[name]),
