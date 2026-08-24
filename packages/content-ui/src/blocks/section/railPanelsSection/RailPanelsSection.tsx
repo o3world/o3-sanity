@@ -152,7 +152,7 @@ export function RailPanelsSection({
 
   if (isRows) {
     return (
-      // `2334:2170` — 128px above, 64px below, and the header is the heading
+      // `2749:6863` — 128px above, 64px below, and the header is the heading
       // alone: the frame writes no standfirst over the services. `intro` still
       // renders if a band carries one, in the rail header's measure.
       <SectionShell surface={resolved} top="md" bottom="sm" background={background}>

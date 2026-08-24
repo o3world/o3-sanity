@@ -27,7 +27,7 @@ export const railPanelsSectionKnobs = defineBlockKnobs({
       // content, different shape, so it is a layout axis rather than a second
       // block — the test featureGridSection's `grid | orbital` and
       // inFlightSection's `cards | rows` already passed (#47, #56, #50).
-      // `rows` is the partner page's "Three Core Services" (`2334:2170`, #92):
+      // `rows` is the partner page's "Three Core Services" (`2749:6863`):
       // the same ordered set of offers again, as full-width hairlined rows
       // with the numeral inline in an ink circle instead of in a sticky rail.
       // Third arrangement, same content, so it joins the axis rather than

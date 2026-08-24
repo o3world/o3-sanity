@@ -22,10 +22,10 @@ export interface PanelRowsProps {
 }
 
 /**
- * `layout: rows` — the partner page's "Three Core Services" (`2334:2170`), #92.
+ * `layout: rows` — the partner page's "Three Core Services" (`2749:6863`).
  *
  * ```
- * row  gap 36, pb 64, 1px #76746F under          numeral 75 ink circle
+ * row  py 64, 1px #76746F under            numeral 75 ink circle, 36 to the copy
  *   content  row, gap 140, 1142 wide
  *     left   394        h3 36/44  |  note 24/34 #55524E
  *     right  fill, gap 63
@@ -46,9 +46,9 @@ export interface PanelRowsProps {
  * knob; nothing draws that today, and a boolean per detail would be a design
  * option hiding in an editorial field.
  *
- * At 402 the two columns stack and the numeral leads the heading: a 394px
- * column beside a 608px one has no honest form there, and the frame has no 402
- * to copy (ADR 0006 — the renderer decides).
+ * At 402 (`2975:9343`) the badge keeps its 75px circle and moves onto its own
+ * line above the copy, and the 394px and 608px columns stack under it: the
+ * circle plus a 394px column does not fit beside a phone's measure.
  */
 export function PanelRows({ items }: PanelRowsProps) {
   return (
@@ -57,12 +57,12 @@ export function PanelRows({ items }: PanelRowsProps) {
         <li
           key={panel.key}
           data-sanity={panel.dataSanity}
-          className="border-fg-muted flex gap-6 border-b pb-10 pt-10 first:pt-0 lg:gap-9 lg:pb-16"
+          className="border-fg-muted flex flex-col gap-9 border-b py-16 first:pt-0 lg:flex-row"
         >
           {/* 75px ink circle, the numeral in the 28px step at white. */}
           <span
             aria-hidden="true"
-            className="bg-ink text-display-md flex size-12 shrink-0 items-center justify-center rounded-full leading-none text-white lg:size-[75px]"
+            className="bg-ink text-display-md flex size-[75px] shrink-0 items-center justify-center rounded-full leading-none text-white"
           >
             {String(index + 1).padStart(2, '0')}
           </span>

@@ -16,7 +16,7 @@ import { RailPanelsSection } from './RailPanelsSection'
  *
  * `layout` is the other axis: `rail` is the Home composition; `cards` is the
  * Solutions engagement band (`1925:6113`–`6115`, #47); `rows` is the partner
- * page's services (`2334:2170`); `grid` is the software-engineering service
+ * page's services (`2749:6863`); `grid` is the software-engineering service
  * page's grid (`2358:2788`, #93).
  *
  * 82 + 238 + 500 + 33 + 395 = 1248 — the whole band is the standard content
@@ -84,17 +84,20 @@ export const SinglePanel: Story = {
 }
 
 /**
- * `layout: rows` — the partner page's "Three Core Services" (`2334:2170`),
- * #92. The numeral moves out of the sticky rail into an ink circle on the row,
+ * `layout: rows` — the partner page's "Three Core Services" (`2749:6863`).
+ * The numeral moves out of the sticky rail into a 75px ink circle on the row,
  * and each panel's `details` draw under its body: the breakdowns in ink, the
  * last one — the promise — in brand red.
  */
 export const Rows: Story = {
   args: seededSectionArgs('partners-sanity', 'railPanelsSection'),
-  parameters: { design: figmaDesign('2334:2170') },
+  parameters: { design: figmaDesign('2749:6863') },
 }
 
-/** The rows layout below `lg`: the 394 and 608 columns stack under the numeral. */
+/**
+ * The rows layout below `lg` (`2975:9343`): the circle takes its own line and
+ * the 394 and 608 columns stack under it.
+ */
 export const RowsMobile: Story = {
   args: seededSectionArgs('partners-sanity', 'railPanelsSection'),
   globals: { viewport: { value: 'mobile' } },
