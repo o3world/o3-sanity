@@ -47,9 +47,8 @@ type HeroSectionProps = SectionProps<'heroSection'> & {
  * | CTA        | white fill, radius 5 (`2205:1298`)    | the same set (`2975:8417`) |
  * | Rhythm     | 288 above, 0, 41, 33, 310 below       | 173 above, 16, 39, 39, 247 |
  *
- * Both widths draw the same composition now — the 402 frame's 2026-08 rebuild
- * centred its column and gave it the standfirst it had been missing (#322).
- * What still splits is the step, the measure and the rhythm.
+ * Both widths draw the same composition — a centred column with a standfirst.
+ * What splits is the step, the measure and the rhythm.
  *
  * The band is padding, not a `min-h` with the content centred inside it: both
  * frames place the headline at a measured distance from the top of the band

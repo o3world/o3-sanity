@@ -20,7 +20,6 @@ export const caseShowcaseSectionKnobs = defineBlockKnobs({
   title: 'Case study showcase',
   tier: 'section',
   knobs: [],
-  // Two gradient washes, both light, and the copy over them takes `text-fg`.
   // A flat `neutral/black` fill with white copy over it.
   paintsOwnSurface: 'ink',
   /** `caseStudies` stays empty — a placeholder never references a document. */

@@ -28,7 +28,7 @@ type QuoteSectionProps = SectionProps<'quoteSection'> & {
  * parts, 24px at 402 (`2748:4689`):
  *
  * - **Quote** — `--text-quote`: 64/76 Light at -1px of tracking, 36/44 at 402.
- * - **Attribution** — an eyebrow, at last: 18/24 bold uppercase on 0.1em of
+ * - **Attribution** — an eyebrow: 18/24 bold uppercase on 0.1em of
  *   tracking in `--color-fg-muted` (#76746F, variable `2083:1073`), 16/20 at
  *   402. `eyebrow-lg`, the same step "OUR PARTNERS" rides.
  *

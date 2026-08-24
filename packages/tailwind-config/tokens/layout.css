@@ -9,14 +9,12 @@
  * clamp(120px, 14vw, 200px) on every band; the frames hand-tune it per band
  * from a three-step scale, and the top and bottom of a band often differ:
  *
- *   Partners           128px 96px        gap 128   (1864:2390, restructured
- *                                                   2026-08; was 96/96/128
- *                                                   with a 96 gap)
+ *   Partners           128px 96px        gap 128   (1864:2390)
  *   Case studies       64px 64px         gap 64    (1683:2656, one ink band;
  *                                                   cards gap 48, 1683:2661)
- *   Pull quote         192px 96px        gap 128   (1683:2137)
+ *   Pull quote         192px 96px        gap 48    (2748:4672)
  *   Platforms          128px 96px 192px  gap 128   (1762:2149)
- *   Insights       96px 0            gap 48    (1683:2467)
+ *   Insights           128px 0           gap 48    (2134:1352)
  *   Work hero          164px 96px 64px   —         (1634:1181)
  *   Footer             64px 96px         gap 128   (1280:1885)
  *
