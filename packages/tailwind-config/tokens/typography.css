@@ -59,9 +59,10 @@
  * every section headline. `--text-hero` is therefore the 64px statement, and
  * the Home headline rides it.
  *
- * `hero` and `quote` are the same size at 1440 and split only at 402 (36 vs
- * 30). That is the frames talking, not two names for one step — see the
- * tokens, and ADR 0006's 2026-08-02 amendment.
+ * `hero` and `quote` carry the same numbers on this brand — the `Quote` set
+ * binds the hero's variable pair at both ends. `quote` survives as its own
+ * name because the type-scale enum names it and because O3XO sizes the role
+ * differently (24 → 36 Light); see the tokens.
  */
 
 @theme {
@@ -103,20 +104,16 @@
    * probably moved off 400. That is a token pass, not a page layer's call. */
   --text-hero--font-weight: 300;
 
-  /* quote — 48px. The pull quote, and only the pull quote (`1683:2143` at
-   * 1440, `1814:1684` at 402). Gradient-filled; pair with `text-gradient`.
-   *
-   * THE 2026-08 PASS PULLED THE DESKTOP QUOTE DOWN FROM 64 TO 48: `1683:2143`
-   * now binds the display-xl-sized variable pair (`2050:1311` / `2050:1319`,
-   * 48/58 in desktop mode). It keeps its own token because the mobile end
-   * still splits from display-xl — the 402 node is un-migrated at a raw
-   * 30/36 against display-xl's 40 — so the two steps share a ceiling but not
-   * a floor. Line-height stays 1.2 (36/30 exactly; 57.6 against the bound
-   * 58 at 1440 — under half a pixel, not worth a second clamp). */
-  --text-quote: clamp(30px, calc(1.734vw + 23.03px), 48px);
-  --text-quote--line-height: 1.2;
-  --text-quote--letter-spacing: 0;
-  --text-quote--font-weight: 400;
+  /* quote — 64px. The pull quote, and only the pull quote. The `Quote` set
+   * (`2748:4672`) draws it Light on the hero's variable pair — 64/76 at 1440
+   * (`2748:4839`), 36/44 at 402 (`2748:4715`) — with -1px of tracking read
+   * absolute at both ends, the same shape `hero` and `cta` ship. Numerically
+   * identical to `hero` on this brand; kept as its own name because the
+   * type-scale enum has it and O3XO sizes the role at 24 → 36. */
+  --text-quote: clamp(36px, calc(2.7vw + 25.15px), 64px);
+  --text-quote--line-height: clamp(44px, calc(3.083vw + 31.61px), 76px);
+  --text-quote--letter-spacing: -1px;
+  --text-quote--font-weight: 300;
 
   /* cta — 64px. The CTA band headline. THE 60px STEP IS GONE: the 2026-08
    * shared CTA component (`2112:1165`, instanced on seven frames) binds the
@@ -163,9 +160,8 @@
   --text-display-xl--letter-spacing: 0;
   --text-display-xl--font-weight: 400;
 
-  /* display-lg — 36px. The pull-quote attribution (1683:2144) and the
-   * 01/02/03 rail numerals. (The attribution's 1.5em line-height is a call-
-   * site literal — it occurs once, so it does not earn a token.) */
+  /* display-lg — 36px. The 01/02/03 rail numerals and `DisplayHeading`'s `lg`
+   * step. */
   --text-display-lg: clamp(18px, calc(1.73vw + 11px), 36px);
   --text-display-lg--line-height: 1.2;
   --text-display-lg--letter-spacing: 0;

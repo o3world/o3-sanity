@@ -19,34 +19,33 @@ type QuoteSectionProps = SectionProps<'quoteSection'> & {
 }
 
 /**
- * Section block: the pull quote, built to the Home frame's second "Intro
- * section" (`1683:2137`) — #42.
+ * Section block: the pull quote, built to the `Quote` set (`2748:4672`), which
+ * Home instances at both widths — `2748:4767` at 1440 × 1012, `2748:4804` at
+ * 402 × 804.
  *
- * `192px 96px`, and inside it a **1034px** column (`--container-content`,
- * node `1756:2085`) with 24px between the two parts:
+ * `192px 96px` at 1440 and `128px 16px` at 402, and inside it a **1034px**
+ * column (`--container-content`, node `2748:4838`) with 48px between the two
+ * parts, 24px at 402 (`2748:4689`):
  *
- * - **Quote** — 64px filled with `--gradient-statement`, so it starts at ink
- *   and finishes at 40%. On an eight-line quote that fade is the whole effect.
- *   Its step is `--text-quote`, not `--text-hero`: at 402 the frame sets this
- *   node 30px (`1814:1684`) against the hero headline's and the partners
- *   statement's 36, and the three only converge again at 64 (ADR 0006
- *   amendment 2026-08-02). This node is where the old shared floor was
- *   measured from, so it is the one call site the change does not move.
- * - **Attribution** — 36px at `rgba(10,10,10,0.5)` (`--color-fg-quiet`) on a
- *   1.5em line, in an 822px measure. **Not an eyebrow**: the scaffold set it
- *   as a red uppercase kicker, which is neither the size, the case, nor the
- *   colour the frame uses.
+ * - **Quote** — `--text-quote`: 64/76 Light at -1px of tracking, 36/44 at 402.
+ * - **Attribution** — an eyebrow, at last: 18/24 bold uppercase on 0.1em of
+ *   tracking in `--color-fg-muted` (#76746F, variable `2083:1073`), 16/20 at
+ *   402. `eyebrow-lg`, the same step "OUR PARTNERS" rides.
  *
- * Both are flush **left** in a centred column — not centred text.
+ * Both are **centred**, on a centred column (`2748:4839`, `2748:4840`).
  *
  * The quotation marks belong to the frame's string, so they are added here
  * rather than stored: an editor should not have to remember to type the
  * glyphs, and a typed `"` would render as a straight quote.
  *
- * **`decoration: 'molecule'`** is the same column and the same gradient fill
- * with the molecule mark instead of the two spheres — 776px at 10%, hung off
- * the band's bottom-left corner and clipped by its `overflow-hidden`. The
- * offsets are Home's — `2748:4767` at 1440, `2748:4804` at 402.
+ * The quote is filled with `--gradient-statement` — ink to 40% — which the
+ * case-study detail's band (`2250:1527`) draws and the `Quote` set does not:
+ * the set fills #232323 solid. The gradient stays until that disagreement is
+ * settled, because the same fill is the partners intro's.
+ *
+ * **`decoration: 'molecule'`** swaps the two spheres for the molecule mark —
+ * 776px at 10%, hung off the band's bottom-left corner and clipped by its
+ * `overflow-hidden`. The offsets are read off the two Home instances.
  *
  * It is the one decoration on this band that survives 402: the mobile frame
  * hangs the full 776px off the corner and lets the gutter clip it, where the
@@ -106,15 +105,11 @@ export function QuoteSection({
           <div className="max-w-content relative mx-auto mb-8">{eyebrowSlot}</div>
         ) : null}
 
-        <blockquote className="max-w-content relative mx-auto flex flex-col gap-6">
+        <blockquote className="max-w-content relative mx-auto flex flex-col gap-6 text-center lg:gap-12">
           <p className="text-quote font-display text-gradient text-balance">
             &ldquo;{quote}&rdquo;
           </p>
-          {attribution ? (
-            <footer className="text-display-lg text-fg-quiet max-w-article leading-[1.5em]">
-              {attribution}
-            </footer>
-          ) : null}
+          {attribution ? <footer className="eyebrow-lg text-fg-muted">{attribution}</footer> : null}
         </blockquote>
       </section>
     </SurfaceProvider>

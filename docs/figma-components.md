@@ -67,6 +67,7 @@ Verified by direct reads of the canonical frames, or recorded in
 | `Blog`                            | `2205:1146` | Property 1 = Default \| Mobile                     | `InsightsCarouselSection` (`blocks/section/insightsCarouselSection`) | ✅ #163                                                                                           |
 | `Case Study Card`                 | `2089:4169` | Variant = Caron \| Ironman \| Vertex               | `CaseStudyCard` (`apps/web/src/components/cards`)                    | ✅ #302, tree confirmed #314 — the axis is **content, not design**: no `cva` key, below           |
 | `Services` (component, not a set) | `2846:5637` | —                                                  | `PanelTrack` (`blocks/section/railPanelsSection`)                    | ✅ #305 — one column of the sideways track; two bands instance it, below                          |
+| `Quote`                           | `2748:4672` | Device = Device3 \| Mobile                         | `QuoteSection` (`blocks/section/quoteSection`)                       | ✅ #323 — a fourth band-level set; `Device3` is the desktop value under a default name, below     |
 
 `BrandLogo` ships `Color=Black` and `Color=Red` only. No canonical Design
 Concept frame instances `Color=White`, so its knockout colour would be a guess;
@@ -121,6 +122,39 @@ on every one of them — the component's default, overridden nowhere — so the
 numeral derives from array order rather than from a field. And the link is the
 default too, on all six, which is why neither band builds one: a label nobody
 has written is not a destination.
+
+### `Quote` is the fourth band-level set, and it centres
+
+The pull quote joined `CTA`, `Interior Hero` and `Blog` as a band instanced
+whole rather than drawn per frame. Home holds both instances — `2748:4767` at
+1440 × 1012 and `2748:4804` at 402 × 804 — and the old loose "Intro section"
+(`1683:2137`) the renderer was built to is gone from that frame.
+
+```
+Device=Device3 (`2748:4829`)     1440, bone #F1F0EC, side padding 96
+Device=Mobile  (`2748:4686`)      402, bone #F1F0EC, side padding 16
+  column       1034 at 1440, centred, vertical padding 192 (128 at 402)
+  gap          48 between quote and attribution (24 at 402)
+  quote        64/76 Light, tracking -1px, #232323, CENTRED
+               (36/44 at 402; the 402 node fills #000000)
+  attribution  18/24 bold, 0.1em, UPPER, fg-muted #76746F, centred
+               (16/20 at 402)
+  molecule     776px at 10%, rotated -30°, absolutely positioned off the
+               bottom-left corner: -128/-374 at 1440, -167/-546 at 402
+```
+
+`Device3` is Figma's default name for a third device value that was never
+renamed; it is the desktop end of the one axis, so it is one `cva` key's worth
+of axis and the renderer spends it on breakpoints, not on a variant prop.
+
+**The set and the case-study band disagree.** The case-study detail draws this
+block as a loose frame (`Section - Quote`, `2250:1525`) from the generation
+before the set: 48/58 flush left, a 32 gap, an 822 measure on the attribution,
+and the quote filled with `--gradient-statement` rather than solid ink. The set
+is the newer read and `QuoteSection` follows it on alignment, type step and
+attribution; the gradient is the one value left alone, because
+`--gradient-statement` is also the partners intro's fill and dropping it here
+is a call about both bands.
 
 ### `Case Study Card` is a set whose axis is not a variant
 

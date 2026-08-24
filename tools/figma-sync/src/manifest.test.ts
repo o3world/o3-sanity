@@ -111,9 +111,9 @@ describe('tracked component sets', () => {
     // outright (466:570, 172:140, 778:1447, 356:639, 270:819, 172:54, 734:1073,
     // 400:2219, 270:814), all of them `codeComponent: null`; the document still
     // lists them as non-canonical, which is why its row count is the larger
-    // number. `Services` 2846:5637 is the newest — the track column both
-    // Home's "How we work" and About's "What we optimize for." instance (#305).
-    expect(componentSets.length).toBe(22)
+    // number. `Quote` 2748:4672 is the newest — the pull-quote band Home
+    // instances at both widths (#323).
+    expect(componentSets.length).toBe(23)
   })
 
   it('states a code target for every set, `null` included', () => {
