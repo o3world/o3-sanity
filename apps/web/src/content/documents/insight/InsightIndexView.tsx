@@ -36,7 +36,8 @@ function insightsHref({
 }
 
 /**
- * The /insights index, built to the frame #61 commissioned (`2336:4310`).
+ * The /insights index, built to the frame #61 commissioned (`2336:4310`) and
+ * its 402 companion (`2975:8499`).
  *
  * ```
  * hero      2336:4477   Interior Hero, ink, 192/64, eyebrow + h2 + standfirst
@@ -44,13 +45,15 @@ function insightsHref({
  *   filters 2337:4486   chip row, gap 10, All + one per category
  *   grid    2337:4492   1249 wide, wrap, gap 64 × 32 — three 395px cards
  *   card    2337:4493   the same InsightCard the Home row draws
- * cta       2336:4351   the shared CTA band, its own default copy
+ * cta       2336:4351   the shared CTA band, its own copy, "View our work"
  * ```
  *
- * The route was **provisional** until this frame: it borrowed the Work hero
- * and the Home Blog band, and three elements traced to nothing. All three are
- * now drawn — the hero standfirst is the frame's own copy, the desktop row gap
- * is its 64, and the pager is `Pager`.
+ * At 402 the same bands stack: the chip row scrolls sideways (`2975:8656`)
+ * and the grid is one 370px column 64 apart (`2975:8663`).
+ *
+ * The hero's headline is the frame's. Its standfirst is **not**: what the
+ * frame shows there ("Not the deliverable…") is the Interior Hero set's
+ * placeholder default, so the route's own line stays.
  *
  * ## The filter is the point of the frame
  *
@@ -68,7 +71,8 @@ function insightsHref({
  *
  * 1. **The frame draws five chips; this draws every category that has an
  *    article.** A curated subset would need a field marking a category as
- *    featured, and no schema says that. The bar wraps instead.
+ *    featured, and no schema says that. The bar wraps at 1440 and scrolls at
+ *    402, so a sixth category costs the layout nothing at either width.
  * 2. **The frame has no pager**, because nine cards fit its canvas. 273
  *    articles do not, so the pager stays, at the same 12 a page. The drawing
  *    it follows is the O3XO kit's — the one file either brand has that draws
@@ -95,14 +99,13 @@ export function InsightIndexView({
       <CollectionHero
         variant="interior"
         eyebrow="Insights"
-        heading="News of the world"
+        heading="Learn about what drives our experiences."
         subheading="Looking for some firsthand knowledge from our world? Check out our in-depth thoughts about the industry today, our culture at O3, the future of AI and digital experiences, and other relevant topics."
       />
 
       {/* `2337:4485` — bone, 128px 96px, 48px between the filter bar and the
-          grid. Unlike the Home and About Blog rows this one does not bleed
-          past the right edge: there is nothing to scroll to, so the overhang
-          would promise a gesture the page cannot honour. */}
+          grid. Unlike the Home and About Blog rows the cards do not bleed past
+          the right edge: the grid has nothing to scroll to at either width. */}
       <div className="px-gutter py-band-md bg-bone">
         <div className="max-w-section mx-auto flex flex-col gap-12">
           {/*
@@ -117,15 +120,38 @@ export function InsightIndexView({
           <h2 className="sr-only">{activeTitle ? `${activeTitle} insights` : 'All insights'}</h2>
 
           {categories.length > 0 ? (
-            /* `2337:4486`: a row 10px apart. It wraps because the number of
-               chips is the collection's business, not the frame's. */
-            <nav aria-label="Filter by category" className="flex flex-wrap items-center gap-2.5">
-              <FilterChip asChild selected={!category}>
+            /*
+             * A row 10px apart at both widths, composed two ways — the one
+             * divergence ADR 0006 asks for here.
+             *
+             * At 402 (`2975:8656`) the six chips run to 657px in one
+             * unwrapped row, past the frame's right edge: the bar scrolls
+             * sideways. At 1440 (`2337:4486`) they fit, and the row wraps
+             * because the number of chips is the collection's business, not
+             * the frame's — the bar has to survive a category the frame never
+             * drew.
+             *
+             * The scroll clips at the 1248 column rather than bleeding past
+             * the gutter, which is where `CarouselTrack` and the "Keep
+             * reading" row already put the same edge. No `tabIndex` either:
+             * unlike those tracks this one is made of links, so tabbing
+             * through the chips scrolls them into view by itself.
+             */
+            <nav
+              aria-label="Filter by category"
+              className="flex items-center gap-2.5 overflow-x-auto [scrollbar-width:none] lg:flex-wrap lg:overflow-x-visible [&::-webkit-scrollbar]:hidden"
+            >
+              <FilterChip asChild selected={!category} className="shrink-0">
                 <Link href={insightsHref()}>All</Link>
               </FilterChip>
               {categories.map((option) =>
                 option.slug ? (
-                  <FilterChip key={option.slug} asChild selected={category === option.slug}>
+                  <FilterChip
+                    key={option.slug}
+                    asChild
+                    selected={category === option.slug}
+                    className="shrink-0"
+                  >
                     <Link href={insightsHref({ category: option.slug })}>{option.title}</Link>
                   </FilterChip>
                 ) : null,
@@ -141,11 +167,11 @@ export function InsightIndexView({
              * composition no frame draws.
              *
              * 3 × 395 + 2 × 32 = 1249, which is the frame's own row width and
-             * `max-w-section` to the pixel. The 64px row gap is read at 1440
-             * (`2337:4492`); below `lg` the cards stack 48 apart, the value
-             * the 402 Blog band uses (`1814:1738`).
+             * `max-w-section` to the pixel. The 64px row gap is flat: both
+             * frames set it, wrapped at 1440 (`2337:4492`) and stacked at 402
+             * (`2975:8663`).
              */
-            <ul className="grid grid-cols-1 gap-x-8 gap-y-12 lg:grid-cols-3 lg:gap-y-16">
+            <ul className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-3">
               {items.map((item, index) => (
                 <li key={item._id}>
                   {/* The first card sits in the first screen under the hero,
@@ -177,9 +203,10 @@ export function InsightIndexView({
        * here is authored for this route; a collection index has no document to
        * hold it, the same reason the hero copy is in this file.
        *
-       * The frame's closer is `2975:8788`, a copy of Home's band pasted over
-       * the instance this route was built against. What it draws is a photo
-       * background (#303); what it says is #307's.
+       * The frame's closer is `2975:8788` (`2975:8801` at 402), and its
+       * button is the one authored thing on it: "View our work" → /work, the
+       * next move a reader who has just finished the feed can make. Both
+       * frames draw it, so the route no longer sends them to /contact.
        */}
       <CtaSection
         heading="Let’s get started on your next big thing."
@@ -188,8 +215,8 @@ export function InsightIndexView({
         // route-owned button carries the same fill an authored one would.
         button={{
           _type: 'button',
-          label: 'Get in touch',
-          href: '/contact',
+          label: 'View our work',
+          href: '/work',
           target: null,
         }}
         decoration="molecule"

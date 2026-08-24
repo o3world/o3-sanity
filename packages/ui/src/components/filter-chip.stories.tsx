@@ -24,22 +24,46 @@ export const Selected: Story = {
   args: { children: 'All', selected: true },
 }
 
-/**
- * The bar as the Insights frame draws it (`2337:4486`): All selected, the
- * categories beside it, 10px apart.
- */
-export const Bar: Story = {
-  args: { children: 'All' },
-  render: () => (
-    <div className="flex flex-wrap items-center gap-2.5">
-      <FilterChip href="#" selected>
+const CATEGORIES = ['AI', 'Design', 'Technology', '1682 Conference', 'Life at O3']
+
+/** The row `InsightIndexView` builds: scrolling at 402, wrapping at 1440. */
+function Row() {
+  return (
+    <nav
+      aria-label="Filter by category"
+      className="flex items-center gap-2.5 overflow-x-auto [scrollbar-width:none] lg:flex-wrap lg:overflow-x-visible [&::-webkit-scrollbar]:hidden"
+    >
+      <FilterChip href="#" selected className="shrink-0">
         All
       </FilterChip>
-      {['AI', 'Design', 'Technology', '1682 Conference', 'Life at O3'].map((label) => (
-        <FilterChip key={label} href="#">
+      {CATEGORIES.map((label) => (
+        <FilterChip key={label} href="#" className="shrink-0">
           {label}
         </FilterChip>
       ))}
-    </div>
-  ),
+    </nav>
+  )
+}
+
+/**
+ * The bar as the Insights frame draws it (`2337:4486`): All selected, the
+ * categories beside it, 10px apart, wrapping when the collection outgrows the
+ * row.
+ */
+export const Bar: Story = {
+  args: { children: 'All' },
+  render: () => <Row />,
+}
+
+/**
+ * The same bar at 402 (`2975:8656`). The six chips measure 657px against a
+ * 370px column, so the row does not wrap — it scrolls sideways, and the chip
+ * cut by the right edge is the affordance saying so. Drag it to see the rest.
+ * Every chip is a link, so a keyboard reaches them by tabbing and the browser
+ * scrolls each into view; the row needs no `tabIndex` of its own.
+ */
+export const BarScrolling: Story = {
+  args: { children: 'All' },
+  globals: { backgrounds: { value: 'bone' }, viewport: { value: 'mobile' } },
+  render: () => <Row />,
 }

@@ -273,11 +273,13 @@ const page = await renderRoute(route, {
 
 describe('insights index composition', () => {
   it('opens on the Interior Hero, in the frame’s own words', () => {
-    // `2336:4477` — the hero the frame writes, standfirst included. That line
-    // is the one this route used to carry as unsourced copy.
-    expect(page.html).toContain('News of the world')
+    // `2336:4477` — the headline and eyebrow the frame writes. The standfirst
+    // beside them is the Interior Hero set's lorem default ("Not the
+    // deliverable…"), so the route's own line stays.
+    expect(page.html).toContain('Learn about what drives our experiences.')
     expect(page.html).toContain('Looking for some firsthand knowledge from our world?')
     expect(page.html).toContain('Insights')
+    expect(page.html).not.toContain('Not the deliverable')
   })
 
   it('paints the hero ink rather than the Work band’s warm black', () => {
@@ -311,23 +313,32 @@ describe('insights index composition', () => {
     expect(tokens.filter((t) => t.startsWith('md:grid-cols'))).toEqual([])
   })
 
-  it('opens the rows to 64px where the frame says so, and 48 below it', () => {
-    // `2337:4492` wraps its rows 64px apart at 1440. No frame stacks this card
-    // at 402, so the mobile value is still the Blog band's 48 (`1814:1738`).
-    expect(variantsOf(page.html, 'gap-y-12')).toEqual(['gap-y-12'])
-    expect(variantsOf(page.html, 'gap-y-16')).toEqual(['lg:gap-y-16'])
+  it('opens the rows to 64px at both widths', () => {
+    // `2337:4492` wraps its rows 64px apart at 1440 and `2975:8663` stacks
+    // them 64 apart at 402, so the row gap is flat.
+    expect(variantsOf(page.html, 'gap-y-16')).toEqual(['gap-y-16'])
+    expect(variantsOf(page.html, 'gap-y-12')).toEqual([])
   })
 
-  it('closes on the shared CTA band', () => {
-    // `2336:4351` — the component's own copy, which five seed pages carry too.
+  it('closes on the shared CTA band, pointed at the work', () => {
+    // `2975:8806` — the band's copy is the component's own, its button is the
+    // frame's: "View our work", not the route's old "Get in touch".
     expect(page.html).toContain('Let’s get started on your next big thing.')
-    expect(page.html).toContain('href="/contact"')
+    expect(page.html).toContain('View our work')
+    expect(page.html).toContain('href="/work"')
   })
 
-  it('gives a phone no hidden scroll region', () => {
-    // The Home and About Blog rows bleed past the right edge; this one does
-    // not, because there is nothing to scroll to.
-    expect(unprefixedHorizontalScrollUtilities(page.html)).toEqual([])
+  it('scrolls the chip row on a phone and nothing else', () => {
+    // `2975:8656` is one unwrapped row 10px apart, running past the frame's
+    // right edge — the only scroll region the 402 frame draws. The card grid
+    // stacks, so `snap-x` never appears.
+    expect(unprefixedHorizontalScrollUtilities(page.html)).toEqual(['overflow-x-auto'])
+
+    // Scoped to the bar: the pager's own row wraps unconditionally.
+    const bar = page.html.match(/<nav aria-label="Filter by category"[^>]*>/)?.[0] ?? ''
+    expect(classTokens(bar)).toContain('overflow-x-auto')
+    expect(classTokens(bar)).toContain('lg:flex-wrap')
+    expect(classTokens(bar)).not.toContain('flex-wrap')
   })
 })
 

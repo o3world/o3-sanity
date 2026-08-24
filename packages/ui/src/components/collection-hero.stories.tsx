@@ -74,7 +74,7 @@ export const Interior: Story = {
   args: {
     variant: 'interior',
     eyebrow: 'Insights',
-    heading: 'News of the world',
+    heading: 'Learn about what drives our experiences.',
     subheading:
       'Looking for some firsthand knowledge from our world? Check out our in-depth thoughts about the industry today, our culture at O3, the future of AI and digital experiences, and other relevant topics.',
   },
