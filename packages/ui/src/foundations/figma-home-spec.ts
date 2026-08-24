@@ -273,7 +273,7 @@ export const gradients: readonly GradientSpec[] = [
     name: 'ink-fade',
     token: '--gradient-ink-fade',
     value: 'linear-gradient(0deg, rgba(3, 3, 3, 1) 0%, rgba(3, 3, 3, 0) 100%)',
-    role: 'An 87px bleed strip fading the CTA band into the ink footer.',
+    role: 'A 172px bleed strip fading the CTA band into the ink footer.',
     nodeId: '1928:6596',
   },
 ]

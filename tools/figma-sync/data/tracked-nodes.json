@@ -268,7 +268,7 @@
       "name": "CTA",
       "figmaName": "CTA",
       "codeComponent": "packages/content-ui/src/blocks/section/ctaSection/CtaSection.tsx#CtaSection",
-      "note": "The closing band every canonical page frame but Home instances override-free: Device = Desktop (`2124:72`) | Mobile (`2177:1353`), 1440/402, black, one decoration — the molecule at 775.9 square, 15%, centred. Tracked from 2026-08-16: #163 found the band a generation behind (it drew the pre-redesign sphere of `1680:2132`) and nothing reported the drift, because the set the band is built to was not watched. Home's closer is still the bespoke `1680:2132` and does not instance this."
+      "note": "The closing band: Device = Desktop (`2124:72`) | Mobile (`2177:1353`), 1440/402, black, one decoration — the molecule at 775.9 square, 15%, centred, over a \"Get in touch\" button. The software-engineering (`2354:2640`) and Sanity partner (`2478:2134`) frames instance it override-free; the rest close on a copy of Home's bespoke `1680:2132` instead, which is #303's photo-background variant rather than anything this set draws. Tracked from 2026-08-16: #163 found the band a generation behind and nothing reported the drift, because the set the band is built to was not watched."
     },
     {
       "nodeId": "2107:1051",

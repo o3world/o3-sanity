@@ -10,12 +10,13 @@ import { CtaSection } from './CtaSection'
  *
  * It draws one of two generations, and they are not variations on a theme:
  *
- * - **`molecule`** is the canonical `CTA` component (`2124:72`), which every
- *   page frame but Home now instances override-free. The mark sits centred at
- *   53.9% of the band and 15% opacity, and the band closes flush.
+ * - **`molecule`** is the canonical `CTA` component (`2124:72`), which the
+ *   frames still instancing it draw override-free (`ctaSectionKnobs` says
+ *   which). The mark sits centred at 53.9% of the band and 15% opacity, and
+ *   the band closes flush.
  * - **`orbs`** is the bespoke Home band (`1680:2132`): the sphere run `soft`
  *   and centred, so the band shows its underside where the hero shows only the
- *   cap, plus the 87px fade strip (`1928:6596`) that melts its lower limb into
+ *   cap, plus the 172px fade strip (`1928:6596`) that melts its lower limb into
  *   the `#030303` footer. In a story there is no footer under it, so the strip
  *   reads as a band of its own — that is the story's limitation, not the
  *   component's. `Pages/Home` is where the join is actually visible.

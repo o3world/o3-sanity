@@ -48,7 +48,7 @@ export const Overview: Story = {
         <p className="text-fg-muted max-w-[72ch] text-[15px] leading-[1.7]">
           Everything else stays a <strong>literal at the call site</strong>, with its node ID in a
           comment. A value that appears exactly once is composition, not vocabulary: the pull-quote
-          attribution’s <Mono>1.5em</Mono> line-height, the 5.8px carousel chip, the 87px CTA bleed
+          attribution’s <Mono>1.5em</Mono> line-height, the 5.8px carousel chip, the 172px CTA bleed
           strip, the 1026px partners measure. Promoting those would grow the token surface without
           giving a second call site anything to reach for.
         </p>

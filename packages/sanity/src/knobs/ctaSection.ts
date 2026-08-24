@@ -11,14 +11,23 @@ import type { CtaSection } from '../types/generated'
  *
  * **`molecule` is the default, because it is what the canonical component
  * draws.** The `CTA` component set (`2177:1354`) hangs one decoration: the
- * molecule, 775.9px at 15%, centred behind the copy. Every redesigned frame
- * instances it override-free — About (`2124:1120`), Solutions (`2124:1160`),
- * Live (`2124:1084`), Work (`2124:1066`), the insight index (`2336:4351`) and
- * the partner pages differ only in their words.
+ * molecule, 775.9px at 15%, centred behind the copy, over the button the set
+ * labels "Get in touch". The software-engineering page (`2354:2640`) and the
+ * Sanity partner page (`2478:2134`) instance it override-free.
  *
- * `orbs` (`1680:2132`) stays on the list for the one frame that has not moved:
- * the Home closer, which is still a bespoke band with the sphere and its bleed
- * strip rather than an instance of the component. Its seed pins the value.
+ * `orbs` (`1680:2132`) is the Home closer: a bespoke band with the sphere and
+ * its bleed strip rather than an instance of the component. Its seed pins the
+ * value, and so does every other seed — the knob's default only reaches a band
+ * an editor inserts.
+ *
+ * **The default stays `molecule` although six page frames now close on a copy
+ * of Home's band** — /work `2975:8738`, /about `2975:8826`, /solutions
+ * `2975:8839`, /live `2975:8763`, /insights `2975:8788` and the insight detail
+ * `2975:8813`, each a paste carrying Home's raster (imageRef `51458151…`),
+ * Home's strip and Home's words. What those frames draw is a photo background,
+ * which is #303's variant and no decoration this knob offers; and the set this
+ * default is read off has not moved. Reopen this when the variant lands, not
+ * because a frame was pasted over.
  */
 export const ctaSectionKnobs = defineBlockKnobs({
   type: 'ctaSection',

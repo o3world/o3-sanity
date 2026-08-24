@@ -48,7 +48,8 @@ describe('the CTA band’s molecule decoration', () => {
   })
 
   it('centres the mark on the band and lifts it clear of the top edge', () => {
-    // `2124:72` hangs 775.9 square at x 332.05, y -63.95 on a 1440 band.
+    // `2114:1195` hangs 775.9 square at x 332.05, y -63.95 on the set's
+    // 1440 × 648 band, centred on it rather than rising out of the top.
     // Width  775.9 / 1440         = 53.9%.
     // Centre 332.05 + 387.95      = 720.0, the middle of 1440.
     // Rise   -63.95 / 775.9       = 8.24% of the mark's OWN height, which is
@@ -70,6 +71,17 @@ describe('the CTA band’s molecule decoration', () => {
     expect(html).toContain('Let’s get started on your next big thing.')
     expect(html).toContain('Get in touch')
   })
+
+  /**
+   * `1680:2087` — a 600 column holding a 524 body box, gapped 18 inside and
+   * 20 above the button. The two gaps are why the copy is its own column: a
+   * flat one would space the button like a third line of copy.
+   */
+  it('measures the copy column the way the band it is drawn from does', () => {
+    expect(html).toContain('max-w-[524px]')
+    expect(html).toContain('max-w-[600px] flex-col items-center gap-5')
+    expect(html).toContain('flex flex-col items-center gap-[18px]')
+  })
 })
 
 describe('the CTA band’s other decorations', () => {
@@ -85,6 +97,8 @@ describe('the CTA band’s other decorations', () => {
     const html = render('orbs')
     expect(html).toContain(SPHERE)
     expect(html).toContain(FADE_STRIP)
+    // `1928:6596` is 172 tall, the last 18 of it past the band's floor.
+    expect(html).toContain('h-[172px]')
     expect(html).not.toContain(MOLECULE)
   })
 

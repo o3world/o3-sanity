@@ -611,15 +611,18 @@ describe('the seeded 1682 conference page', () => {
 /**
  * WHICH GENERATION EACH CLOSER DRAWS (#163).
  *
- * Every canonical frame in this file instances the `CTA` component
- * (`2124:72`) override-free — About `2124:1120`, Solutions `2124:1160`, Live
- * `2124:1084`, Software Engineering inside `2360:2879` — and that component
- * hangs the molecule and no bleed strip. 1682 has no frame at all, so it takes
- * the current generation with them.
+ * Software Engineering instances the `CTA` component (`2124:72`) override-free
+ * inside `2360:2879`, and that component hangs the molecule and no bleed
+ * strip. 1682 has no frame at all, so it takes the same generation.
  *
- * Home is the exception and is tested where it lives: its frame keeps the
- * bespoke sphere band, so its seed pins `orbs` and its closer still fades into
- * the footer.
+ * About (`2975:8826`), Solutions (`2975:8839`) and Live (`2975:8763`) close on
+ * a pasted copy of Home's bespoke band instead — a raster over a photo slot
+ * the schema has no field for, which is #303's variant. Until it lands their
+ * seeds keep the molecule, and these assertions hold for that reason rather
+ * than because their frames still draw it.
+ *
+ * Home is tested where it lives: its seed pins `orbs`, and its closer fades
+ * into the footer.
  */
 describe('the closing CTA band', () => {
   it.each([

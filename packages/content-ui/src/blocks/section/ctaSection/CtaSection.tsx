@@ -11,32 +11,34 @@ type CtaSectionProps = SectionProps<'ctaSection'>
  * Section block: the closing CTA band.
  *
  * ```
- * 1440 × 790, the decoration behind it
+ * 1440 × 790, the decoration behind it — `1680:2132`
  *   copy      600px column centred, gap 18
  *     heading 64px (--text-cta, the 2026-08 shared CTA component's step) at
  *     92% white, centred
- *     body    24px at 60% white in a 446px measure
- *   button    Button Theme=White
+ *     body    24px at 60% white in a 524px measure
+ *   button    20 under the copy, Button Theme=White
  * ```
  *
- * **Only the decoration is the `CTA` component's.** Those measurements are
- * `1680:2132`'s, and the component (`2124:72`, set `2177:1354`) does not agree
- * with them: it gaps the copy 24 and the button 48, measures the body at 580,
- * and stretches the column to the 96px gutter instead of pinning it at 600.
- * Reconciling that is a repaint of every closer's typography and is nobody's
- * ticket yet — read the numbers above as this band's, not as the component's.
+ * **Only the decoration is the `CTA` component's.** The component (`2124:72`,
+ * set `2177:1354`) measures its own band differently: 1248 across to the 96px
+ * gutter rather than a 600 column, the body fixed at 580, the copy gapped 24
+ * and the button 48, all inside 192 of vertical padding. Taking those numbers
+ * repaints every closer's typography, and the design is walking the other way
+ * — most page frames now draw a copy of `1680:2132` rather than instance the
+ * component, a census `ctaSectionKnobs` keeps — so this band stays measured
+ * from the band above.
  *
  * **`orbs` is the pre-redesign band (`1680:2132`), and it is a pair.** The
- * sphere and the 87px `--gradient-ink-fade` strip along the foot (`1928:6596`)
- * are one composition: the strip dissolves the sphere's lower limb into the
- * `#030303` footer, so the two dark areas read as one field rather than two
- * bands that happen to touch. The component draws neither, so neither the
- * molecule nor `none` carries a strip — there is no limb to hide and no colour
- * step to soften.
+ * sphere and the 172px `--gradient-ink-fade` strip along the foot
+ * (`1928:6596`) are one composition: the strip dissolves the sphere's lower
+ * limb into the `#030303` footer, so the two dark areas read as one field
+ * rather than two bands that happen to touch. The component draws neither, so
+ * neither the molecule nor `none` carries a strip — there is no limb to hide
+ * and no colour step to soften.
  *
- * Home is the one page still on it (#163): its frame keeps the bespoke closer
- * where About, Solutions, Live and the two collection indexes moved to the
- * component.
+ * Home is the one page whose seed pins it (#163). The frames that pasted
+ * Home's closer over their own carry it as a raster over a photo slot the
+ * schema has no field for; that band is #303's variant, not this decoration.
  */
 export function CtaSection({ heading, body, button, decoration }: CtaSectionProps) {
   // The sphere and the molecule are alternatives: the band draws one or neither.
@@ -90,19 +92,24 @@ export function CtaSection({ heading, body, button, decoration }: CtaSectionProp
               motion="orbit"
               className="bottom-[4%] left-1/2 w-[150vw] -translate-x-1/2 lg:w-[90vw]"
             />
-            {/* `1928:6596` — 87px of --gradient-ink-fade, transparent at the top. */}
-            <div className="bg-(image:--gradient-ink-fade) pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[87px]" />
+            {/* `1928:6596` — 172px of --gradient-ink-fade, transparent at the top. */}
+            <div className="bg-(image:--gradient-ink-fade) pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[172px]" />
           </>
         ) : null}
 
         {/*
          * What the canonical `CTA` component actually hangs (`2124:72`) — the
-         * molecule, not the sphere. 775.9 square at x 332.05, y -63.95 on a
-         * 1440 band, at 15%:
+         * molecule, not the sphere. `2114:1195`, 775.9 square at x 332.05,
+         * y -63.95 on the set's 1440 × 648 band, at 15%:
          *
          *   width   775.9 / 1440    = 53.9%
          *   centre  332.05 + 387.95 = 720.0, the middle of 1440
          *   rise    -63.95 / 775.9  = 8.24%
+         *
+         * On the set's 648 the mark is taller than the band it hangs in, so
+         * it overhangs top and floor by the same 63.95 and the band clips
+         * both. Here the band is `py-band-lg` around the copy, so how much
+         * of the mark shows moves with the copy's height.
          *
          * The rise is a fraction of the MARK, not the band — that is what a
          * percentage translate resolves against — so it holds at every width
@@ -124,18 +131,24 @@ export function CtaSection({ heading, body, button, decoration }: CtaSectionProp
           className="left-1/2 top-0 w-[54%] min-w-[420px] -translate-x-1/2 -translate-y-[8.24%] opacity-15"
         />
 
-        <div className="py-band-lg relative z-10 mx-auto flex max-w-[600px] flex-col items-center gap-[18px] text-center">
-          {heading ? (
-            <h2 className="text-cta font-display text-on-ink text-balance">{heading}</h2>
-          ) : null}
-          {body ? (
-            <p className="text-lead text-on-ink-subtle max-w-[446px] text-balance">{body}</p>
-          ) : null}
-          {button ? (
-            <div className="mt-6">
-              <ButtonLink button={button} />
+        {/*
+         * Two nested columns, because the frame gaps them differently: 18
+         * inside the copy block (`1680:2087`) and 20 between that block and
+         * the button (`1680:2090`). One flat column would gap the button like
+         * a third line of copy.
+         */}
+        <div className="py-band-lg relative z-10 mx-auto flex max-w-[600px] flex-col items-center gap-5 text-center">
+          {heading || body ? (
+            <div className="flex flex-col items-center gap-[18px]">
+              {heading ? (
+                <h2 className="text-cta font-display text-on-ink text-balance">{heading}</h2>
+              ) : null}
+              {body ? (
+                <p className="text-lead text-on-ink-subtle max-w-[524px] text-balance">{body}</p>
+              ) : null}
             </div>
           ) : null}
+          {button ? <ButtonLink button={button} /> : null}
         </div>
       </section>
     </SurfaceProvider>

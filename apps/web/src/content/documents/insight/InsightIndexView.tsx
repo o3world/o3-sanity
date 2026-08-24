@@ -172,11 +172,14 @@ export function InsightIndexView({
       </div>
 
       {/*
-       * `2336:4351` — the shared CTA band closes this page as it closes the
-       * other six frames that instance it. The copy is the component's own
-       * default, which is also the line five seed pages already carry, so
-       * nothing here is authored for this route; a collection index has no
-       * document to hold it, the same reason the hero copy is in this file.
+       * The shared CTA band closes this page. The words are the component's
+       * own default, which is also the line five seed pages carry, so nothing
+       * here is authored for this route; a collection index has no document to
+       * hold it, the same reason the hero copy is in this file.
+       *
+       * The frame's closer is `2975:8788`, a copy of Home's band pasted over
+       * the instance this route was built against. What it draws is a photo
+       * background (#303); what it says is #307's.
        */}
       <CtaSection
         heading="Let’s get started on your next big thing."
