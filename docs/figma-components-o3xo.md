@@ -51,6 +51,10 @@ Three canvases are **not** watched and are not in this document: `Templates (Old
 Study Cards, Navigation, Footer), **6 are missing** (the Phosphor glyphs and Card Icon, Yellow Text
 Card, Header Pill, FAQ Accordion, the pattern rasters), **10 are out of scope**.
 
+Four of those six have since been built: the Phosphor glyphs (#246), Yellow Text Card (#244),
+Header Pill (#247) and the FAQ Accordion (#248). `Card Icon` (`4404:5590`) and the pattern rasters
+(`4405:6311`) are what is left of the group.
+
 The four structural divergences, the six missing and the out-of-scope group are named on that ticket
 and are named in the Status column below. **The per-set split between "aligns" and "needs variant or
 field work" is not on the ticket** — the comment preserved the counts, not the assignments. Rather
@@ -84,12 +88,12 @@ background media on section blocks (landed, #239), `feature.icon`, `person.bio`,
 
 ### Icons (`345:2833`)
 
-| Figma node                  | Node        | Variant axes             | Code target                                                | Status                                                 |
-| --------------------------- | ----------- | ------------------------ | ---------------------------------------------------------- | ------------------------------------------------------ |
-| `Phosphor Icons`            | `4404:5589` | 18 named Phosphor glyphs | **None**                                                   | ❌ Missing — one of #224's six. #237 story 6           |
-| `Card Icon`                 | `4404:5590` | —                        | **None**                                                   | ❌ Missing — the plated 48px icon the icon cards carry |
-| `X Icons`                   | `4404:5593` | Logo Black \| Logo White | `O3xoMark` (`apps/o3xo/src/components/brand/O3xoMark.tsx`) | ✅ #228 — the same component draws the wordmark        |
-| `.building block Icon_text` | `957:1166`  | prop: Material Symbols   | **None**                                                   | The same placeholder O3's file carries. ADR 0009       |
+| Figma node                  | Node        | Variant axes             | Code target                                                | Status                                                                                                          |
+| --------------------------- | ----------- | ------------------------ | ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `Phosphor Icons`            | `4404:5589` | 18 named Phosphor glyphs | `Icon` / `ICONS` (`apps/o3xo/src/components/icons/`)       | Built (#246). All 18 app-local, stock Phosphor Regular; `feature.icon` is a knob on the array member (ADR 0021) |
+| `Card Icon`                 | `4404:5590` | —                        | **None**                                                   | ❌ Missing — the plated 48px icon the icon cards carry                                                          |
+| `X Icons`                   | `4404:5593` | Logo Black \| Logo White | `O3xoMark` (`apps/o3xo/src/components/brand/O3xoMark.tsx`) | ✅ #228 — the same component draws the wordmark                                                                 |
+| `.building block Icon_text` | `957:1166`  | prop: Material Symbols   | **None**                                                   | The same placeholder O3's file carries. ADR 0009                                                                |
 
 Two swatch boards sit beside these — `Light` (`4404:5646`) and `Dark` (`4432:10748`) — plus Figma's
 own `Get started` onboarding frame (`2222:1539`). All three are on the manifest's ignore list.
@@ -108,8 +112,8 @@ The densest canvas in the kit, and where three of #237's card stories live.
 | `Action Icon Card Group` | `4404:3873`  | —                        | `FeatureGridSection`                                           | With its card                                                                                                                                                                                                                                                                                                                                    |
 | `Key Metric Card`        | `4404:3916`  | —                        | `KeyMetricCard` (`apps/o3xo/src/components/cards/`)            | ⚠️ **Diverges structurally** (#224). Yellow plate vs rule-and-number; `accent` is a brand-only role the shared package may not name. `Stat` (`ui/src/components/stat.tsx`) is what O3 draws instead, and stays shared                                                                                                                            |
 | `Key Metric Card Group`  | `4404:3960`  | —                        | `StatGroup` (one per app, `src/components/blocks/`)            | With its card — the demotion `APP_FIRST_RENDERERS` records (#296), so each app owns a row renderer and the shared library owns none. `LayoutSection` draws it through the app's base roster. Stories: `StatGroup.stories.tsx` beside each app's renderer, and each app's `LayoutSection.stories.tsx`                                             |
-| `Yellow Text Card`       | `4404:3934`  | —                        | **None**                                                       | ❌ Missing — one of #224's six                                                                                                                                                                                                                                                                                                                   |
-| `Yellow Text Card Group` | `4404:4611`  | —                        | **None**                                                       | Missing with its card                                                                                                                                                                                                                                                                                                                            |
+| `Yellow Text Card`       | `4404:3934`  | —                        | `YellowTextCard` (`apps/o3xo/src/components/cards/`)           | Built (#244). App-local: the plate is `bg-accent`, a role only O3XO's package declares. No variant axes, so no `cva` keys, and the card links nowhere so no states are invented                                                                                                                                                                  |
+| `Yellow Text Card Group` | `4404:4611`  | —                        | `YellowTextCards` (`apps/o3xo/src/components/cards/`)          | Built with its card (#244). Reaches `RailPanelsSection` through its `panelCards` slot                                                                                                                                                                                                                                                            |
 | `Case Study Cards`       | `4404:3072`  | 6 client names (content) | `CaseStudyCard` (`apps/o3xo/src/content/documents/caseStudy/`) | ⚠️ **Diverges structurally** (#224) — the demotion `APP_FIRST_RENDERERS` records (#295), so each app owns a card and the shared library owns none. The showcase band draws it through the card registry's per-app binding (#294). Stories: o3xo's `CaseStudyCard.stories.tsx` beside its card, O3's band story in `apps/web/src/content/blocks/` |
 | `Case Study Group`       | `4404:3398`  | —                        | `CaseShowcaseSection`                                          | Built                                                                                                                                                                                                                                                                                                                                            |
 | `Strategy Card`          | `4404:4555`  | —                        | **None**                                                       | A full-width copy row. #224's parity audit says whether it earns a block                                                                                                                                                                                                                                                                         |
@@ -146,13 +150,13 @@ uses it.
 
 ### People (`4404:5648`), Quotes (`4404:4189`), Accordion (`310:1977`)
 
-| Figma node                        | Node         | Variant axes       | Code target         | Status                                                                  |
-| --------------------------------- | ------------ | ------------------ | ------------------- | ----------------------------------------------------------------------- |
-| `People Cards`                    | `4404:5726`  | 4 people (content) | `PersonGridSection` | Needs `person.bio` (#237)                                               |
-| `Quote Block`                     | `4404:4920`  | —                  | `QuoteSection`      | Built                                                                   |
-| `Header Pill`                     | `4414:8100`  | —                  | **None**            | ❌ Missing — one of #224's six. #237 story 7                            |
-| `Slide Quote`                     | `4438:12259` | —                  | **None**            | A deck slide component. Out of scope (#224)                             |
-| `AI Implementation FAQ Accordion` | `4404:4919`  | —                  | `FaqSection` (o3xo) | Built (#248). Drawn closed only; the open state is invented from tokens |
+| Figma node                        | Node         | Variant axes       | Code target                                | Status                                                                  |
+| --------------------------------- | ------------ | ------------------ | ------------------------------------------ | ----------------------------------------------------------------------- |
+| `People Cards`                    | `4404:5726`  | 4 people (content) | `PersonGridSection`                        | Needs `person.bio` (#237)                                               |
+| `Quote Block`                     | `4404:4920`  | —                  | `QuoteSection`                             | Built                                                                   |
+| `Header Pill`                     | `4414:8100`  | —                  | `HeaderPill` (`apps/o3xo/src/components/`) | Built (#247), bound into the shared quote band as its eyebrow           |
+| `Slide Quote`                     | `4438:12259` | —                  | **None**                                   | A deck slide component. Out of scope (#224)                             |
+| `AI Implementation FAQ Accordion` | `4404:4919`  | —                  | `FaqSection` (o3xo)                        | Built (#248). Drawn closed only; the open state is invented from tokens |
 
 `Quote Section` (`4404:5107`) is the quote band drawn twice; the Layouts copy (`4406:6954`) is the
 one tracked.
