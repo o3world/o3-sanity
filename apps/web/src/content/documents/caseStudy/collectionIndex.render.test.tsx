@@ -102,10 +102,12 @@ describe('the /work index', () => {
     expect(declaredSizes(withPhotos)).toEqual(Array(3).fill('(min-width: 1440px) 1248px, 90vw'))
   })
 
-  it('pads the card 64 all round at lg', () => {
-    // `2089:4169` pads 64 uniformly. The 402 instances override that to 24
-    // side / 64 top-and-bottom, where the card here keeps a uniform 32 — #319.
-    expect(html).toContain('lg:p-16')
+  it('pads the card 64 all round at lg and 24 at the sides below it', () => {
+    // `2089:4169` pads 64 uniformly; the 402 instances (`2975:8429`–`8431`)
+    // override the sides to 24 and leave 64 top and bottom.
+    expect(html).toContain('py-16')
+    expect(html).toContain('px-6')
+    expect(html).toContain('lg:px-16')
     expect(variantsOf(html, 'pb-[88px]')).toEqual([])
   })
 
