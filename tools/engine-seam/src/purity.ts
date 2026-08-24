@@ -437,6 +437,7 @@ export function missingPaths(roster: Roster, exists: (path: string) => boolean):
     .flatMap((row) => [
       row.path,
       ...(row.overrides ?? []).map((override) => `${row.path}/${override.path}`),
+      ...(row.fused ?? []).map((fused) => `${row.path}/${fused.path}`),
     ])
     .filter((path) => !exists(path))
     .sort()

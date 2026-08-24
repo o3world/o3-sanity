@@ -373,19 +373,19 @@
           "split": "defineBlockRender/bindingsToRecord usage is machinery; the seven concrete base bindings are product. Deliberate per the barrel's note — the base tier is the inline vocabulary a section renderer draws with — and o3xo re-points it through the LayoutSection slot."
         },
         {
-          "path": "src/blocks/layoutSection/LayoutSection.tsx",
+          "path": "src/blocks/section/layoutSection/LayoutSection.tsx",
           "split": "The one renderer that is a dispatcher: the baseComponents slot is machinery, its default binding to BASE_BLOCK_COMPONENTS is product."
         },
         {
           "path": "src/cards/card-registry.ts",
-          "split": "getCard's registry shape is machinery; CARD_OVERRIDES is a module-private product table. The one registry in the repo with no per-app binding point — an app cannot re-point a card type without forking the file."
+          "split": "defineCardRender, the CardTypeName union and getCard's override lookup are machinery; the three cards SHARED_CARDS binds are product. An app re-points a card type through the cardComponents slot the three card-drawing sections carry, which is how o3xo binds its own case-study card."
         },
         {
-          "path": "src/decoration.ts",
+          "path": "src/blocks/decoration.ts",
           "split": "The derivation from BLOCK_KNOBS is machinery; the 'molecule' | 'orbs' union names this brand's two artworks."
         },
         {
-          "path": "src/surface.ts",
+          "path": "src/blocks/surface.ts",
           "split": "The read-the-default-off-the-knobs derivation is machinery; its parameter and return types are the concrete PageSection and Surface unions."
         }
       ]

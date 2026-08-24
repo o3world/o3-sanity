@@ -2,9 +2,20 @@ import { SurfaceProvider, surfaceAttrs } from '@o3/ui'
 import type { SectionProps } from '@o3/content-runtime/blocks'
 
 import { ButtonLink } from '../../../ButtonLink'
-import { getCard } from '../../../cards/card-registry'
+import { getCard, type CardComponents } from '../../../cards/card-registry'
 
-type CaseShowcaseSectionProps = SectionProps<'caseShowcaseSection'>
+type CaseShowcaseSectionProps = SectionProps<'caseShowcaseSection'> & {
+  /**
+   * The card table this band draws through, so an app can re-point one card
+   * type without forking the band (ADR 0028). An unbound type falls back to
+   * the shared card.
+   *
+   * The same channel `LayoutSection`'s `baseComponents` opens for the base
+   * tier: this band is a server component on the published path, so an app's
+   * card cannot reach it any other way.
+   */
+  cardComponents?: CardComponents
+}
 
 /**
  * Section block: the case-study showcase, built to the Home frame's "Case
@@ -25,8 +36,13 @@ type CaseShowcaseSectionProps = SectionProps<'caseShowcaseSection'>
  * washes, and a flat fill behind them would show through both. A dark
  * treatment, if a page ever wants one, is a second `variant` — not a surface.
  */
-export function CaseShowcaseSection({ heading, button, caseStudies }: CaseShowcaseSectionProps) {
-  const Card = getCard('caseStudy')
+export function CaseShowcaseSection({
+  heading,
+  button,
+  caseStudies,
+  cardComponents,
+}: CaseShowcaseSectionProps) {
+  const Card = getCard('caseStudy', cardComponents)
   const items = caseStudies ?? []
 
   return (

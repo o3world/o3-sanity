@@ -17,7 +17,10 @@ import {
 } from '@o3/content-runtime/blocks'
 import { fieldAttr } from '@o3/content-runtime/data-attribute'
 
+import { defineCardRender, type CardRenderBinding } from '@o3/content-ui/cards'
+
 import { O3xoMark } from '@/components/brand/O3xoMark'
+import { CaseStudyCard } from '@/content/documents/caseStudy/CaseStudyCard'
 import { FaqSection } from './faqSection/FaqSection'
 import { KeyMetricCards } from '@/components/cards/KeyMetricCard'
 import { YellowTextCards } from '@/components/cards/YellowTextCard'
@@ -126,6 +129,34 @@ function LayoutSectionWithAccentCards(props: SectionProps<'layoutSection'>) {
 }
 
 /**
+ * This app's CARD-tier bindings — the shared table with `caseStudy`
+ * re-pointed at the kit's `Case Study Cards` set (`4404:3072`), which the
+ * component map classifies as structurally divergent from O3's scrim card.
+ *
+ * A card type nobody binds here keeps the shared card, and binding a type the
+ * registry does not know is a compile error at `defineCardRender`.
+ */
+export const CARD_BINDINGS = [
+  defineCardRender('caseStudy', { component: CaseStudyCard }),
+] satisfies ReadonlyArray<CardRenderBinding>
+
+/** This app's card table, derived from `CARD_BINDINGS`. */
+export const CARD_COMPONENTS = bindingsToRecord(CARD_BINDINGS)
+
+/**
+ * The showcase band, drawing this app's case-study card.
+ *
+ * The card is the only thing this brand changes about the band — its shell,
+ * heading row and washes are the shared renderer's — so it fills the cards
+ * slot rather than forking it. Without the binding the band draws O3's card
+ * while `/case-studies` draws the kit's, which is the same document in two
+ * compositions on one site.
+ */
+function CaseShowcaseSectionWithKitCards(props: SectionProps<'caseShowcaseSection'>) {
+  return <CaseShowcaseSection {...props} cardComponents={CARD_COMPONENTS} />
+}
+
+/**
  * The feature band, with this app's icon set bound into it (#246).
  *
  * The same channel as the mark above, for the same reason: the eighteen glyphs
@@ -171,7 +202,7 @@ function QuoteSectionWithPill({ eyebrow, loc, ...props }: SectionProps<'quoteSec
 export const CLIENT_SECTION_BINDINGS = [
   defineBlockRender('heroSection', { component: HeroSectionWithMark }),
   defineBlockRender('logoWallSection', { component: LogoWallSection }),
-  defineBlockRender('caseShowcaseSection', { component: CaseShowcaseSection }),
+  defineBlockRender('caseShowcaseSection', { component: CaseShowcaseSectionWithKitCards }),
   defineBlockRender('railPanelsSection', { component: RailPanelsSectionWithYellowCards }),
   defineBlockRender('quoteSection', { component: QuoteSectionWithPill }),
   defineBlockRender('insightsCarouselSection', { component: InsightsCarouselSection }),
