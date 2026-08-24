@@ -3,6 +3,7 @@ import type { SectionProps } from '@o3/content-runtime/blocks'
 
 import { DECORATED_BAND_CLASS, resolveDecoration } from '../../decoration'
 import { MoleculeDecoration } from '../../MoleculeDecoration'
+import { sectionBackground } from '../../sectionBackground'
 import { ButtonLink } from '../../../ButtonLink'
 
 type CtaSectionProps = SectionProps<'ctaSection'>
@@ -36,15 +37,28 @@ type CtaSectionProps = SectionProps<'ctaSection'>
  * neither the molecule nor `none` carries a strip — there is no limb to hide
  * and no colour step to soften.
  *
- * Home is the one page whose seed pins it (#163). The frames that pasted
- * Home's closer over their own carry it as a raster over a photo slot the
- * schema has no field for; that band is #303's variant, not this decoration.
+ * Home is the one page whose seed pins it (#163).
+ *
+ * **A picture is the third composition, and it is `backgroundMedia`** (#303) —
+ * the field every section already carries, laid full-bleed the way the hero
+ * and the rail band lay theirs. It is not a fourth decoration: a band either
+ * sits on an image or hangs a glyph in front of its own ink, and both cannot
+ * be the background at once, so a picture silences whatever the knob says.
  */
-export function CtaSection({ heading, body, button, decoration }: CtaSectionProps) {
+export function CtaSection({
+  heading,
+  body,
+  button,
+  decoration,
+  backgroundMedia,
+}: CtaSectionProps) {
+  // `null` on every band that carries no picture — the same question
+  // `SectionShell` asks its `background` prop.
+  const picture = sectionBackground(backgroundMedia, 'ink')
   // The sphere and the molecule are alternatives: the band draws one or neither.
   // Unset resolves to this block's declared `initialValue`, which is the
   // molecule — so the renderer and the knob cannot disagree.
-  const showOrbs = resolveDecoration(decoration, 'ctaSection') === 'orbs'
+  const showOrbs = !picture && resolveDecoration(decoration, 'ctaSection') === 'orbs'
 
   return (
     // The band always paints its own ink field, so it declares one: `ink-deep`
@@ -55,6 +69,7 @@ export function CtaSection({ heading, body, button, decoration }: CtaSectionProp
         {...surfaceAttrs('ink')}
         className={`bg-ink-deep px-gutter text-white ${DECORATED_BAND_CLASS}`}
       >
+        {picture}
         {/*
          * **The globe's bottom, at the hero's scale.** `95.5vw` is the hero's
          * own width, so the two spheres read as the same object seen twice; the
@@ -124,7 +139,7 @@ export function CtaSection({ heading, body, button, decoration }: CtaSectionProp
          * so it has an honest 402 form where the other three bands' do not.
          */}
         <MoleculeDecoration
-          decoration={decoration}
+          decoration={picture ? 'none' : decoration}
           block="ctaSection"
           surface="ink"
           visibleFrom="base"

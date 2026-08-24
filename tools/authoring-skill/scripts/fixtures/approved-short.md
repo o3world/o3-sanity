@@ -337,7 +337,7 @@ Product Squad
 Full Ownership
 Full Ownership
 Let’s get started on your next big thing.
-Get in touch
+View our work
 REC Philly
 Ventures
 Empowering creative entrepreneurs

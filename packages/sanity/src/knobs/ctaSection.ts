@@ -23,11 +23,14 @@ import type { CtaSection } from '../types/generated'
  * **The default stays `molecule` although six page frames now close on a copy
  * of Home's band** — /work `2975:8738`, /about `2975:8826`, /solutions
  * `2975:8839`, /live `2975:8763`, /insights `2975:8788` and the insight detail
- * `2975:8813`, each a paste carrying Home's raster (imageRef `51458151…`),
- * Home's strip and Home's words. What those frames draw is a photo background,
- * which is #303's variant and no decoration this knob offers; and the set this
- * default is read off has not moved. Reopen this when the variant lands, not
- * because a frame was pasted over.
+ * `2975:8813`. Each is a paste of Home's closer, and its raster (imageRef
+ * `51458151…`) is a video capture of our own sphere with a mouse cursor in the
+ * pixels — so those frames draw `orbs`, not a photograph, and the set this
+ * default is read off has not moved.
+ *
+ * **A picture is not a decoration.** A closer over a photograph is
+ * `backgroundMedia`, the field every section carries, which the renderer lays
+ * full-bleed and which silences whatever this knob says (#303).
  */
 export const ctaSectionKnobs = defineBlockKnobs({
   type: 'ctaSection',

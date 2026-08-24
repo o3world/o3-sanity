@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { figmaDesign } from '@o3/story-kit'
 
-import { seededSectionArgs } from '../../../testing/seedContent'
+import { seedImage, seededSectionArgs } from '../../../testing/seedContent'
 
 import { CtaSection } from './CtaSection'
 
@@ -72,4 +72,22 @@ export const NoDecoration: Story = {
 export const MoleculeMobile: Story = {
   args: seededSectionArgs('about', 'ctaSection'),
   globals: { backgrounds: { value: 'ink' }, viewport: { value: 'mobile' } },
+}
+
+/**
+ * The band on a picture (#303) — `backgroundMedia`, laid full-bleed under the
+ * copy and tinted `bg-ink/40` so the 92% white heading keeps its contrast.
+ *
+ * The picture silences the decoration: the args still say `molecule`, and no
+ * mark is drawn. Nothing can be both the background and the thing in front of
+ * it.
+ */
+export const OnPhotograph: Story = {
+  args: {
+    ...seededSectionArgs('about', 'ctaSection'),
+    backgroundMedia: {
+      _type: 'backgroundMedia',
+      image: seedImage('tools/migration/data/seed/assets/work-city.png'),
+    },
+  },
 }
