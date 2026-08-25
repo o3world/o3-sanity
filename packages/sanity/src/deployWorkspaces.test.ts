@@ -53,7 +53,14 @@ afterEach(() => {
   vi.unstubAllEnvs()
 })
 
-describe('the schema each project deploys', () => {
+/**
+ * Every case here resets the module registry and re-imports `sanity.config`,
+ * so each one builds both brands' whole schema from cold — the config resolves
+ * its brand at import, and that is the seam under test. Five cold builds is
+ * seconds of real work, and vitest's 5s default is measured against a machine
+ * running this file alone. The budget is the suite's, not this file's.
+ */
+describe('the schema each project deploys', { timeout: 30_000 }, () => {
   it.each(BRANDS)(
     'deploys %s its own roster to its own project, as the workspace every reader resolves unnamed',
     async (brand) => {
