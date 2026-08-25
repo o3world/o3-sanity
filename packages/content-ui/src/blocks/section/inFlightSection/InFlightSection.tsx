@@ -152,7 +152,11 @@ function Header({
   )
 }
 
-/** The studio band's card — the Blog card's composition, with a kicker in place of the meta row. */
+/**
+ * The studio band's card — the Blog card's composition, with a kicker in place
+ * of the meta row. Its media is desaturated: the Live frame's card fills carry
+ * `saturation: -1` (`1751:2003`, `1751:2010`, `1899:4421`).
+ */
 function EntryCard({ entry }: { entry: Entry }) {
   return (
     <div className="flex h-full flex-col gap-6">
@@ -163,7 +167,7 @@ function EntryCard({ entry }: { entry: Entry }) {
           ratio="fill"
           width={800}
           sizes={CARD_THREE_UP}
-          className="h-full w-full"
+          className="h-full w-full grayscale"
         />
       </div>
       <div className="flex flex-col gap-1.5">
