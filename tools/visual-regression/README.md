@@ -141,13 +141,15 @@ shows up as the difference it is instead of being cropped away. The header notes
 
 ## The Figma baseline
 
-`pnpm vr --figma` compares against the design file instead of the merge base (spec #326). The first
-half of it is here: `pnpm vr --figma --list` prints the **pairing inventory** — every story that
-names a Figma node, joined to the tracked-nodes manifest that watches the file it named.
+`pnpm vr --figma` compares against the design file instead of the merge base (spec #326). Two parts
+of it are here. `--list` prints the **pairing inventory** — every story that names a Figma node,
+joined to the tracked-nodes manifest that watches the file it named — and stops. Without `--list`
+the run also brings the **frame export cache** up to date.
 
 ```
-pnpm vr --figma --list             both hosts
-pnpm vr --figma --list --brand o3xo   one host and its manifest
+pnpm vr --figma --list                 the inventory, read-only: no token, no network
+pnpm vr --figma --list --brand o3xo    one host and its manifest
+pnpm vr --figma                        …and fetch whatever export the cache is missing
 ```
 
 Three sections, plus a coverage count:
@@ -171,14 +173,44 @@ A story inherits its meta's `design` unless it sets its own, the way Storybook's
 resolve. `figmaDesign`'s second argument picks the design file, so an O3XO pairing joins against
 `tracked-nodes-o3xo.json` even when the story sits in a package both hosts serve.
 
+### Frame exports
+
+Each paired node is drawn once through Figma's images API and cached under
+`.vr/figma/png-x1/<brand>/<node>@<hash>.png`. The hash is the node's own `figma:sync` baseline hash,
+so the filename **is** the cache key: an unchanged node is a hit, a node the sync re-hashed misses
+and re-fetches, and nothing else in the directory moves. Steady state is zero API calls, and the
+token is read only when there is something to fetch — a warm run needs no key at all.
+
+Scale 1: `vr` captures at `deviceScaleFactor: 1` with `scale: 'css'`, and the paired frames are
+drawn at the capture widths (390 and 1440), so one design pixel is one capture pixel. Format and
+scale name the directory rather than the key, the way `captureKey` names the screenshot cache, so
+changing either cannot be served out of the old one.
+
+The run reports three numbers and lists the last two:
+
+- **fetched / cache hits** — what it drew, and what was already there.
+- **unknown to the baseline** — the node is paired but `figma:sync` does not track it, so nothing
+  says when it changed. Reported by name, never guessed at.
+- **missing from the Figma file** — the images API would not draw it. The design deleted the node,
+  or the story cites a stale id. #339 turns this into a verdict; here it is a named list.
+
+A quota error fails the run with the node named. Exports are written one at a time, so a run that
+dies partway keeps what it got and the next one asks only for the rest. `--refresh` empties the
+directory.
+
+`export-cache.ts` is the whole keying model — pairings, baselines and the directory listing in, a
+plan out — and it is tested on fixtures with no network. `figma-exports.ts` reads, calls and
+writes, reusing `@o3/figma-sync`'s client so there is one Figma token, one 429 retry, and one place
+that knows `/images` answers `null` rather than failing.
+
 ## Tuning
 
 `--threshold` (default `0.1`) is per-pixel colour tolerance — lower is stricter. `--max-diff`
 (default `0`) is the fraction of pixels that still counts as unchanged; raise it to `0.0005` or so if
 a font-rendering wobble is producing noise you have decided to live with. `--settle` (default 200ms)
 is the pause between "rendered" and the shutter — raise it for a story that loads something after
-mount. `--refresh` throws away the cached baseline screenshots and retakes them, and retries the
-assets an earlier run timed out on.
+mount. `--refresh` throws away the cached baseline screenshots and retakes them, retries the assets
+an earlier run timed out on, and — under `--figma` — empties the frame export cache.
 
 ## Layout of `.vr/`
 
@@ -186,6 +218,7 @@ assets an earlier run timed out on.
 .vr/
   assets/                  remote images and fonts, fetched once and replayed
   base/                    detached worktree at the baseline commit
+  figma/png-x1/<brand>/    frame exports, keyed by node id and sync baseline hash
   <brand>/
     build/current/         Storybook build of the working tree
     build/base-<sha>/      Storybook build of the baseline, cached per commit
@@ -196,7 +229,7 @@ assets an earlier run timed out on.
 ```
 
 Everything that renders is under the brand, so running one host does not overwrite the other's
-report or serve it the other's build. The two things above it are brand-independent by nature: the
+report or serve it the other's build. `assets/` and `base/` are brand-independent by nature: the
 baseline checkout is one commit whichever host renders it, and a photograph off `cdn.sanity.io` is
 the same bytes under either set of tokens — which is also what keeps the second brand's first run
 from re-fetching 256 images.
