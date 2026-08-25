@@ -8,16 +8,14 @@ import { planCorpus } from './corpus/plan'
 import { REPO_ROOT } from './repo'
 
 /**
- * The committed corpus, not a fixture: what `brief:sync` would push from this
- * checkout. Registration is frontmatter alone, so the failures worth catching
- * are a file that registers nothing and a document that arrives empty — both of
- * which sync happily and leave an agent reading a blank brief.
+ * Two corpora under test. The committed one carries the invariants that must
+ * hold of whatever is on disk — a file that registers nothing and a document
+ * that arrives empty both sync happily and leave an agent reading a blank
+ * brief. The planning shape is asserted on a fixture instead, because it is a
+ * fact about the engine rather than about today's contents: the corpus is
+ * legitimately empty whenever no piece is mid-flight.
  */
 describe('the brief corpus', () => {
-  it('registers the brief the insight corpus points at', () => {
-    expect(briefCorpus().sources.map((source) => source.key)).toContain('figma-sync-pipeline')
-  })
-
   it('reads a background for every brief, with no frontmatter in it', () => {
     for (const source of briefCorpus().sources) {
       expect(source.body.length, source.sourcePath).toBeGreaterThan(200)
@@ -29,12 +27,22 @@ describe('the brief corpus', () => {
   // `brief-<key>` is the id seed JSON writes by hand, so the corpus has to plan
   // exactly that shape or every committed reference points at nothing.
   it('plans a brief-<key> document with the markdown in `background`', () => {
-    const plan = planCorpus(briefCorpus(), [])
-    const entry = plan.entries.find(({ document }) => document.key === 'figma-sync-pipeline')
+    const corpus = {
+      ...briefCorpus(),
+      sources: [
+        {
+          key: 'a-piece',
+          title: 'A piece',
+          body: 'The background the piece was written from.',
+          sourcePath: 'tools/guidance/briefs/a-piece.md',
+        },
+      ],
+    }
+    const [entry] = planCorpus(corpus, []).entries
 
-    expect(entry?.document._id).toBe('brief-figma-sync-pipeline')
-    expect(entry?.document.background).toContain('pnpm figma:sync')
-    expect(entry?.document.sourcePath).toBe('tools/guidance/briefs/figma-sync-pipeline.md')
+    expect(entry?.document._id).toBe('brief-a-piece')
+    expect(entry?.document.background).toBe('The background the piece was written from.')
+    expect(entry?.document.sourcePath).toBe('tools/guidance/briefs/a-piece.md')
     expect(entry?.document.body).toBeUndefined()
   })
 })
@@ -86,10 +94,6 @@ function committedBriefRefs(): { file: string; ref: string }[] {
  */
 describe('the briefs committed content points at', () => {
   const committed = committedBriefRefs()
-
-  it('has references to resolve', () => {
-    expect(committed.length).toBeGreaterThan(0)
-  })
 
   it('registers a key for every one of them', () => {
     const keys = new Set(briefCorpus().sources.map((source) => source.key))
