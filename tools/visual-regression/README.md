@@ -7,6 +7,7 @@ pnpm vr --base NickO3/toolbar # vs another ref
 pnpm vr --story hero          # these stories, whatever the diff says
 pnpm vr --all                 # every story
 pnpm vr --list                # what would be compared, without comparing it
+pnpm vr --figma --list        # the pairing inventory: every story that names a Figma node
 pnpm vr --help
 ```
 
@@ -137,6 +138,38 @@ Cards are grouped by verdict, worst first.
 
 A story that got taller is diffed against the union of both sizes rather than the overlap, so growth
 shows up as the difference it is instead of being cropped away. The header notes the size change.
+
+## The Figma baseline
+
+`pnpm vr --figma` compares against the design file instead of the merge base (spec #326). The first
+half of it is here: `pnpm vr --figma --list` prints the **pairing inventory** — every story that
+names a Figma node, joined to the tracked-nodes manifest that watches the file it named.
+
+```
+pnpm vr --figma --list             both hosts
+pnpm vr --figma --list --brand o3xo   one host and its manifest
+```
+
+Three sections, plus a coverage count:
+
+- **Pairings** — story id, node id, the hosts that serve the story, the design file it named, and
+  what the manifest calls the node. `untracked` means the manifest does not watch that node, which
+  is the ordinary case for a component-level pairing: the manifest tracks page frames and the
+  component sets `docs/figma-components.md` maps, not every band in the file.
+- **Page-level pairings** — the story cites a whole page frame. Fine for a page mockup story, a
+  target for anything smaller: the tighter the node, the more a comparison means.
+- **Uncovered component sets** — tracked in the manifest, paired by no story. Printed whole, never
+  capped. Coverage is reported, never gated, so a missing pairing is a row and not a failure.
+
+It needs no Storybook build and no browser. A pairing is declared by
+`parameters: { design: figmaDesign('1710:2609') }`, and the node id is a string literal in every
+call, so the run reads the story files as source rather than importing them. `pairing.ts` is the
+whole model — source text and manifests in, inventory out — and `figma-inventory.ts` is the only
+part that touches disk.
+
+A story inherits its meta's `design` unless it sets its own, the way Storybook's parameters already
+resolve. `figmaDesign`'s second argument picks the design file, so an O3XO pairing joins against
+`tracked-nodes-o3xo.json` even when the story sits in a package both hosts serve.
 
 ## Tuning
 

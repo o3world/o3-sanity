@@ -23,7 +23,9 @@ import {
 import { forgetErrorResponses, forgetUnreachable, type AssetCache } from './assets'
 import { captureAll, captureKey, type Shot, type Viewport } from './capture'
 import { compare, type Comparison } from './compare'
+import { readInventory } from './figma-inventory'
 import { changedFiles, ensureBaseCheckout, git, repoRoot, resolveBase, shortSha } from './git'
+import { formatInventory } from './pairing'
 import { writeReport } from './report'
 import {
   BRANDS,
@@ -54,9 +56,11 @@ pnpm vr — visual regression for the stories your change touches
   pnpm vr --all                    every story, not just the affected ones
   pnpm vr --story hero             these stories, whatever the diff says (repeatable)
   pnpm vr --list                   print what would be compared, then stop
+  pnpm vr --figma --list           the pairing inventory: every story that names a Figma node
 
 Options
   --brand <o3|o3xo>     which Storybook host to build and capture (default: o3)
+  --figma               compare against Figma rather than the merge base (#326)
   --base <ref>          baseline ref (default: main)
   --all                 ignore the change graph, take every story
   --story <substring>   compare stories matching id or title, repeatable; implies --all scope
@@ -107,7 +111,10 @@ async function withServer<T>(dir: string, run: (url: string) => Promise<T>): Pro
 async function main(): Promise<void> {
   const { values } = parseArgs({
     options: {
-      brand: { type: 'string', default: 'o3' },
+      // No default: `--figma` reads every host unless a brand is named, and
+      // the pixel run below falls back to o3 the way it always has.
+      brand: { type: 'string' },
+      figma: { type: 'boolean', default: false },
       base: { type: 'string', default: 'main' },
       all: { type: 'boolean', default: false },
       story: { type: 'string', multiple: true, default: [] },
@@ -132,10 +139,24 @@ async function main(): Promise<void> {
     return
   }
 
-  if (!isBrand(values.brand)) {
+  if (values.brand !== undefined && !isBrand(values.brand)) {
     throw new Error(`unknown brand ${values.brand} — expected one of ${BRANDS.join(', ')}`)
   }
-  const brand = values.brand
+
+  // The Figma baseline (#326). Only the inventory exists so far (#336): it
+  // needs neither a build nor a browser, so it answers before anything below
+  // spends twelve seconds on Storybook.
+  if (values.figma) {
+    const brands = values.brand ? [values.brand] : BRANDS
+    log(`\nfigma pairings — ${brands.join(', ')}\n`)
+    log(formatInventory(readInventory(brands)))
+    if (!values.list) {
+      log('\n  --figma is listing only for now; the scored comparison lands with #338.')
+    }
+    return
+  }
+
+  const brand = values.brand ?? 'o3'
   const host = hostDir(brand)
 
   const root = repoRoot()

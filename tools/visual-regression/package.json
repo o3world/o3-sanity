@@ -12,12 +12,14 @@
     "format": "prettier --write ."
   },
   "devDependencies": {
+    "@o3/story-kit": "workspace:*",
     "@o3/typescript-config": "workspace:*",
     "@types/node": "^24.0.0",
     "@types/pngjs": "^6.0.5",
     "pixelmatch": "^7.2.0",
     "playwright": "^1.62.1",
     "pngjs": "^7.0.0",
+    "storybook": "^10.4.1",
     "tsx": "^4.19.0",
     "typescript": "^5.7.0"
   }
