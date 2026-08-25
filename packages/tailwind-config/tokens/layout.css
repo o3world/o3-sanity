@@ -15,6 +15,9 @@
  *   Pull quote         192px 96px        gap 48    (2748:4672)
  *   Platforms          128px 96px 192px  gap 128   (1762:2149)
  *   Insights           128px 0           gap 48    (2134:1352)
+ *   Insight detail     128px 96px        —         (1710:2835, 2252:3675;
+ *                                                   both bands drop to 64 at
+ *                                                   402 — 2262:3818/2262:3905)
  *   Work hero          164px 96px 64px   —         (1634:1181)
  *   Footer             64px 96px         gap 128   (1280:1885)
  *
@@ -25,10 +28,11 @@
  * WHAT CHANGES BETWEEN THE TWO FRAME WIDTHS (ADR 0006). Reading the 402 Home
  * frame against the 1440 one, only two of these move:
  *
- *   gutter     20px → 96px
- *   band-lg   128px → 192px   (the 192 bands compress; 1814:1679)
- *   band-sm    96px → 96px    unchanged
- *   band-md   128px → 128px   unchanged
+ *   gutter        20px → 96px
+ *   band-lg      128px → 192px   (the 192 bands compress; 1814:1679)
+ *   band-detail   64px → 128px   (the insight detail page; 2262:3818)
+ *   band-sm       96px → 96px    unchanged
+ *   band-md      128px → 128px   unchanged
  *
  * The two that move are solved to hit each frame's value at its own width,
  * the same way the type ramp is.
@@ -45,7 +49,8 @@
   /* ── Section rhythm ────────────────────────────────────────────────────── */
   /* The three vertical steps the frames actually use. 128 is bound to the
    * Figma variable `Layout/Layout 128`. sm and md are the same at both frame
-   * widths; only lg compresses on mobile. */
+   * widths; lg compresses on mobile, and so does the named `detail` step
+   * below. */
   --spacing-band-sm: 96px;
   --spacing-band-md: 128px;
   --spacing-band-lg: clamp(128px, calc(6.17vw + 103.2px), 192px);
@@ -56,6 +61,14 @@
    * Earned token status by recurring across CaseChapter, MediaSection and
    * the deliverables band. */
   --spacing-band-article: clamp(96px, calc(6.55vw + 69.7px), 164px);
+
+  /* detail — the insight detail page's rhythm (`/insights/{slug}`, #45): 128px
+   * at 1440 on both the body band (`1710:2835`) and "Keep reading"
+   * (`2252:3675`), halving to 64px at 402 (`2262:3818`, `2262:3905`). It lands
+   * on band-md at the design width, but md is flat at both widths and this
+   * step is the only one the frames compress DOWNWARD from it, so it is its
+   * own name rather than a second reading of md. */
+  --spacing-band-detail: clamp(64px, calc(6.166vw + 39.21px), 128px);
 
   /* The default band padding, for a section with no frame to copy: the widest
    * span the frames use, 96 at 402 through 192 at 1440. A band that HAS a

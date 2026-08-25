@@ -22,12 +22,14 @@ type InsightViewProps = NonNullable<INSIGHT_QUERY_RESULT>
  * ────────────────────────────────────────────────────────────────────────
  * hero          2252:3554    2262:3859    <header>, photograph + scrim, 164/gutter/64
  *   back-link   —            —            <BackToInsights> (precursor 1379:2186)
- *   eyebrow     2252:3558    2262:3862    <Eyebrow tone="inverse"> — the category
- *   h1          2252:3559    2262:3863    text-display-xl (48 / 40)
+ *   eyebrow     2252:3558    2262:3862    <Eyebrow size="lg" tone="brand"> — the category
+ *   h1          2252:3559    2262:3863    text-detail-hero (48/58 and 40/48, Light)
  *   deck        2252:3560    2262:3864    text-lead, the document's excerpt
  *   byline      2252:3561    2262:3865    <ArticleByline>
  * body          1710:2836    1906:1053    white band, 822px measure, <PortableTextBody>
  * keep reading  2252:3675    2262:3905    bone band, the Home Blog row's carousel
+ *
+ * Both bands below the hero run band-detail — 128 at 1440, 64 at 402.
  * ```
  *
  * ## The hero is photographic (#90)
@@ -159,8 +161,16 @@ export function InsightView({
           <BackToInsights />
 
           <div className="flex flex-col gap-4">
-            {category ? <Eyebrow tone="inverse">{category}</Eyebrow> : null}
-            <h1 className="text-display-xl font-display text-balance lg:w-[588px]">{title}</h1>
+            {/* `2252:3558` — the kicker steps to `eyebrow-lg` and is filled
+                #EB1000 (`2457:1856`), the same brand red the two hero sets
+                draw. */}
+            {category ? (
+              <Eyebrow size="lg" tone="brand">
+                {category}
+              </Eyebrow>
+            ) : null}
+            {/* `2252:3559` / `2262:3863` — 48/58 and 40/48, both Light. */}
+            <h1 className="text-detail-hero font-display text-balance lg:w-[588px]">{title}</h1>
           </div>
 
           {excerpt ? <p className="text-lead lg:w-[588px]">{excerpt}</p> : null}
@@ -180,7 +190,9 @@ export function InsightView({
         </div>
       </header>
 
-      <div className="px-gutter py-band-sm lg:py-band-md bg-white">
+      {/* `1710:2835` pads 128 and `2262:3818` pads 64 — the detail page's own
+          step, which compresses where band-md does not. */}
+      <div className="px-gutter py-band-detail bg-white">
         {/* `1894:3908` — the body sits in an 822px column, centred. The
             featured image shares that measure: it has no band in either frame
             (see the note above), so putting it anywhere wider would be
@@ -214,7 +226,7 @@ export function InsightView({
       </div>
 
       {keepReading.length ? (
-        <SectionShell surface="bone" top="sm" bottom="sm">
+        <SectionShell surface="bone" top="detail" bottom="detail">
           {/* `1751:1949` — the frame's own copy for this band. The mobile
               frame heads it "The thinking behind the work.", which is the
               /insights index's line; the desktop detail frame is the

@@ -132,6 +132,7 @@ both ends are read values (ADR 0006).
 | `text-hero`         | `36px` | `64px` | -1px      | Home and case-study heroes (`Heading/h1`, Light 300) |
 | `text-quote`        | `36px` | `64px` | -1px      | The pull quote (`Quote` set, **Light 300**)          |
 | `text-cta`          | `36px` | `64px` | -1px      | The CTA band headline — rides the hero variable      |
+| `text-detail-hero`  | `40px` | `48px` | 0, wt 300 | The insight detail h1 (`2252:3559`) — Light          |
 | `text-display-xl`   | `40px` | `48px` | 0         | **Every** section headline; the Work hero; partners  |
 | `text-display-lg`   | `18px` | `36px` | 0         | Rail numerals; `DisplayHeading` size `lg`            |
 | `text-display-md`   | `22px` | `28px` | -0.0286em | Case-study problem statement ⚠️ floor interpolated   |
@@ -183,15 +184,16 @@ three-step scale, and top and bottom often differ (`96px 96px 128px`,
 `128px 96px 192px`). This package ships the steps; teaching `SectionShell` to
 take a per-band rhythm is #41.
 
-| Token                 | 402     | 1440                 | Utility         | Role                             |
-| --------------------- | ------- | -------------------- | --------------- | -------------------------------- |
-| `--spacing-gutter`    | `20px`  | `96px`               | `px-gutter`     | Horizontal padding on every band |
-| `--spacing-band-sm`   | `96px`  | `96px`               | `py-band-sm`    | The rhythm steps the frames use  |
-| `--spacing-band-md`   | `128px` | `128px`              | `py-band-md`    | (`Layout/Layout 128`)            |
-| `--spacing-band-lg`   | `128px` | `192px`              | `py-band-lg`    | The only step that compresses    |
-| `--spacing-section-y` | `96px`  | `192px`              | `py-section-y`  | Default for a band with no frame |
-| `--container-section` | —       | `78rem` (1248px)     | `max-w-section` | 1440 less two 96px gutters       |
-| `--container-content` | —       | `64.625rem` (1034px) | `max-w-content` | Centered statements              |
+| Token                   | 402     | 1440                 | Utility          | Role                             |
+| ----------------------- | ------- | -------------------- | ---------------- | -------------------------------- |
+| `--spacing-gutter`      | `20px`  | `96px`               | `px-gutter`      | Horizontal padding on every band |
+| `--spacing-band-sm`     | `96px`  | `96px`               | `py-band-sm`     | The rhythm steps the frames use  |
+| `--spacing-band-md`     | `128px` | `128px`              | `py-band-md`     | (`Layout/Layout 128`)            |
+| `--spacing-band-lg`     | `128px` | `192px`              | `py-band-lg`     | Compresses on mobile             |
+| `--spacing-band-detail` | `64px`  | `128px`              | `py-band-detail` | The insight detail page's bands  |
+| `--spacing-section-y`   | `96px`  | `192px`              | `py-section-y`   | Default for a band with no frame |
+| `--container-section`   | —       | `78rem` (1248px)     | `max-w-section`  | 1440 less two 96px gutters       |
+| `--container-content`   | —       | `64.625rem` (1034px) | `max-w-content`  | Centered statements              |
 
 ## Radii
 

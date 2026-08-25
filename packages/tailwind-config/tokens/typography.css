@@ -153,6 +153,19 @@
   --text-interior-hero--letter-spacing: clamp(-1px, calc(0.3875px - 0.0964vw), 0px);
   --text-interior-hero--font-weight: 300;
 
+  /* detail-hero — 48px LIGHT. The insight detail page's h1 (`2252:3559` at
+   * 1440, `2262:3863` at 402), whose size and leading land on display-xl's
+   * endpoints but whose weight is 300, not 400. Its own name for the reason
+   * `interior-hero` has one (#311): display-xl is the workhorse section
+   * headline across frames the redesign has not reached, and flipping its
+   * weight to serve one opener would repaint all of them.
+   *
+   * Line height is the read pair — 58 at 1440, 48 at 402. */
+  --text-detail-hero: clamp(40px, calc(0.771vw + 36.9px), 48px);
+  --text-detail-hero--line-height: clamp(48px, calc(0.963vw + 44.13px), 58px);
+  --text-detail-hero--letter-spacing: 0;
+  --text-detail-hero--font-weight: 300;
+
   /* display-xl — 48px. THE WORKHORSE: every section headline on every frame
    * ("The platforms we go deep on", 1683:2659), the Work hero headline
    * (1634:1184), and the case-study stat figure. The 2026-08 variables
