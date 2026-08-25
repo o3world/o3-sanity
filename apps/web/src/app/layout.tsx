@@ -29,7 +29,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={figtree.variable}>
+    /*
+     * `data-scroll-behavior` is how Next is told the document scrolls
+     * smoothly (tokens/base.css sets it for anchor links). Without the
+     * attribute the router leaves the CSS alone during a route change, its
+     * scroll-to-top is animated rather than instant, and the browser drops it
+     * — so a click on Work from halfway down another page arrives halfway
+     * down that one. With it, Next flips the property to `auto` for the one
+     * frame it needs and the anchors keep their glide.
+     */
+    <html lang="en" data-scroll-behavior="smooth" className={figtree.variable}>
       <body className="text-fg bg-white font-sans antialiased">{children}</body>
     </html>
   )
