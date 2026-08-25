@@ -113,7 +113,7 @@
       "_key": "team",
       "surface": "white",
       "eyebrow": "Leadership team",
-      "heading": "The people who find it and build it.",
+      "heading": "Meet the team",
       "people": [
         {
           "_type": "reference",
@@ -337,6 +337,7 @@
     "sourceId": "seed:about",
     "extractedAt": "2026-08-01T00:00:00Z",
     "figmaNode": "1924:5344",
-    "provisional": false
+    "provisional": true,
+    "provisionalNote": "Three things to settle before launch. (1) THE RAIL'S THIRD PANEL HAS NO SOURCE. The \"What we optimize for\" rail instances the Services component three times (`2960:7022` at 1440, `2975:9051` at 402) and the third instance carries no text override at all (`I2960:7035;2846:5581`), so it draws the component default \u2014 the heading \"Embedded Team\" over Home's \"Full Ownership\" body. `opt-quality` (\"Quality over scale\") is written here in the O3 voice to fill it and is unreviewed. (2) The second panel is authored twice and differently: 1440 writes \"Balance\" (`I2960:7033;2846:5581`), 402 writes Home's engagement model \"Product Squad\" (`I2975:9063;2846:5581`). The desktop string is taken as the authored one and the 402 override reads as the same paste the third panel's default is. (3) Both authored panel bodies are rewritten against the voice guide rather than transcribed, which is the ADR 0007 conflict the Sanity partner page also records; they stand rewritten under the ruling on #308 \u2014 imported copy gets the voice, the design gets the structure. Either the frame changes or the exception is recorded. No panel carries a `note`: all three of the frame's \"Best when\u2026\" lines are Home's rail verbatim and in Home's order, so none of them was written for this page. Cleared by a frame that authors three panels for About, or by an owner confirming the three the seed writes."
   }
 }
