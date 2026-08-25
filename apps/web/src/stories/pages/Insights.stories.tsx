@@ -17,10 +17,10 @@ import { InsightIndexMockup } from '../InsightIndexMockup'
  * grid: 48px, close enough that the chips read as a control on the cards
  * rather than as a second band. The frame is emphatic about that gap.
  *
- * There is no 402 frame for any collection index (`docs/agents/figma.md`), so
- * the mobile story is a renderer decision (ADR 0006) rather than a
- * transcription: one column, the chips wrapping, the same 48px stack the Blog
- * band uses at 402.
+ * The index gained its 402 companion in the 2026-08 design pass
+ * (`2975:8499`), so the mobile story transcribes a frame rather than deciding
+ * one: one column, the chips wrapping, the same 48px stack the Blog band uses
+ * at 402.
  */
 const meta = {
   title: 'Pages/Insights',
@@ -56,8 +56,9 @@ export const Filtered: Story = {
   globals: { viewport: { value: 'desktop' } },
 }
 
-/** One column, and the chip bar wrapping — no frame, ADR 0006. */
+/** One column, and the chip bar wrapping — the 402 index frame (`2975:8499`). */
 export const Mobile: Story = {
   args: { category: null },
   globals: { viewport: { value: 'mobile' } },
+  parameters: { design: figmaDesign('2975:8499') },
 }
