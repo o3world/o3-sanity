@@ -6,12 +6,6 @@ Financial Services
 Healthcare
 Sports
 Technology
-How We Redesigned Our Website in a Single Weekend (and Made It Good)
-Two maps over one page. The overlap is settled; the slivers are the work.
-One ticket, one copy of the repository. They only meet at review.
-Redesigning our website in a single weekend
-The design team moved the file. The repo filed the tickets.
-The design team moved the file. The repo filed the tickets.
 1682: the business of innovation conference
 1682
 The business of innovation conference
@@ -41,7 +35,7 @@ Balance
 Quality over scale
 Quality over scale
 Leadership team
-The people who find it and build it.
+Meet the team
 Beyond O3 World
 The work doesn't stop at client services.
 1682
@@ -67,9 +61,8 @@ Let’s get started on your next big thing.
 Get in touch
 Contact
 Contact
-Let’s make exceptional experiences together.
-Start here
-Tell us what’s in the way.
+Let’s make exceptional
+experiences together
 New business inquiry
 1682 inquiries
 Ventures request
@@ -79,9 +72,14 @@ Tech consultation
 Other
 Sign up for our newsletter
 Send message
-Get in touch
-Email us
-Justin Handler, Senior Vice President, Growth + Development
+Justin Handler
+Senior Vice President, Growth + Development
+Visit us
+1339 Frankford Ave, Suite 3
+Philadelphia, PA 19125
+Reach us
+(215) 592-4739
+hello@o3world.com
 O3 World
 You see the problem in front of you.
 We’re working on the one behind it.
@@ -107,7 +105,7 @@ Product Squad
 Full Ownership
 Full Ownership
 The thinking behind the work.
-The best partnerships don’t have an end date.
+Let’s get started on your next big thing.
 View our work
 Live
 Live
