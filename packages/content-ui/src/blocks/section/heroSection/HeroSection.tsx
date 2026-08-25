@@ -160,13 +160,40 @@ export function HeroSection({
         variant="interior"
         decoration={
           showOrbs ? (
-            // About hangs the sphere off the right edge of the band
-            // (`1924:5344`), where the standfirst would otherwise sit. On a
-            // light band it is the hairline drawing rather than the lit rim —
-            // the glow belongs to the dark bands (see `OrbitalSphere`).
+            /*
+             * THE TWO SURFACES HANG DIFFERENT SPHERES, and the geometry is
+             * read per surface rather than shared.
+             *
+             * On INK the art rides in the set's own frame — a flattened
+             * capture (`I2101:861;2846:4466` on Work, the same node on
+             * Insights and on Software Engineering `I2354:2583;2846:4466`),
+             * so its 1577 box is the capture's bounds and not the sphere's.
+             * The sphere inside it is what this is seated to: tracing the lit
+             * limb across the three exports gives **d ≈ 918, top edge 184px
+             * below the band's top** at BOTH widths, moving only sideways —
+             * left edge 639 on the 1440 frames and 205 on the 402 one
+             * (`I2107:1086;2960:6869`, the same capture slid 434 left). So the
+             * size is a literal, `lg` anchors to the right edge it overhangs
+             * by 117, and it is drawn at both widths.
+             *
+             * On WHITE it is the About band's own art (`I2960:6876;2960:6862`)
+             * — 782 wide off the right edge, where the standfirst would
+             * otherwise sit — and the hairline drawing rather than the lit
+             * rim, because the glow belongs to the dark bands (see
+             * `OrbitalSphere`).
+             */
             <OrbitalSphere
               tone={band === 'ink' ? 'ink' : 'light'}
-              className="-z-10 hidden lg:bottom-[-30%] lg:right-[-14%] lg:block lg:w-[720px]"
+              /* The interior band runs the field quieter than the Home opener:
+                 the limb peaks around 40 points of red over its neighbours in
+                 the ink exports, against the 120 a full-intensity draw puts
+                 there. */
+              intensity={band === 'ink' ? 'soft' : 'full'}
+              className={
+                band === 'ink'
+                  ? 'left-[205px] top-[184px] -z-10 w-[918px] lg:left-auto lg:right-[-117px]'
+                  : '-z-10 hidden lg:bottom-[-30%] lg:right-[-14%] lg:block lg:w-[720px]'
+              }
             />
           ) : null
         }

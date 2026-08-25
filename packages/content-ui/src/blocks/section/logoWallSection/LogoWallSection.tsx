@@ -151,8 +151,16 @@ export function LogoWallSection({
          *
          * The clip must stay `overflow-hidden`; the moment it becomes a scroll
          * region `home.render.test`'s sideways-scroll guard fails.
+         *
+         * `self-stretch` is what holds the clip to the viewport. The band is a
+         * column flex container, so this row is a flex item whose width is
+         * cross-axis and therefore content-derived: left to `auto` it takes
+         * the 1680px row's max-content and the clip never bites, which is the
+         * 118px the whole document scrolled sideways at 1440 (#341). Stretched,
+         * the box is the content column plus the two negative gutters — the
+         * viewport exactly — and the end tiles clip against it.
          */}
-        <div className="-mx-gutter flex justify-center overflow-hidden">
+        <div className="-mx-gutter flex justify-center self-stretch overflow-hidden">
           {/* The px compensates the tiles' negative margins so the outer edge
            * keeps its hairline; without it the top and left rules are clipped. */}
           <ul

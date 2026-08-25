@@ -1,9 +1,30 @@
 {
   "pairs": {
     "o3/pages-home--desktop/o3/1680:2134/frame-1440": {
-      "score": 0.25743,
+      "score": 0.21845,
       "tolerance": 0.005,
       "nodeHash": "1e2f9f533105b10689d7a91395c4e65a13daf53dd2720d2161db085f6c1fa9ef",
+      "fileVersion": "2391349966960467923",
+      "acceptedAt": "2026-08-25"
+    },
+    "o3/pages-software-engineering--desktop/o3/2360:2879/frame-1440": {
+      "score": 0.1704,
+      "tolerance": 0.005,
+      "nodeHash": "85a54ebea65111f3367c144825542dbd50ff006a81ef23f87dc436f09b3cac10",
+      "fileVersion": "2391349966960467923",
+      "acceptedAt": "2026-08-25"
+    },
+    "o3/pages-work--desktop/o3/1634:1167/frame-1440": {
+      "score": 0.245,
+      "tolerance": 0.005,
+      "nodeHash": "474dcb5de71806b325977713c3b3567363ffe108ba4b322b4063633f2fb50999",
+      "fileVersion": "2391349966960467923",
+      "acceptedAt": "2026-08-25"
+    },
+    "o3/pages-work--mobile/o3/1906:851/frame-402": {
+      "score": 0.38108,
+      "tolerance": 0.005,
+      "nodeHash": "8b14bc49a551d054c8432d1c0d177be61e755908ebfe3c10ad36739aec4ab9f2",
       "fileVersion": "2391349966960467923",
       "acceptedAt": "2026-08-25"
     }

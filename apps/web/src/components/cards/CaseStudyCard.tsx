@@ -23,7 +23,7 @@ function caseEyebrow(card: Pick<CaseStudyCardData, 'industries' | 'industryDetai
  * own over the shared `CaseStudyCardData` (`APP_FIRST_RENDERERS`).
  *
  * ```
- * 1246 × 550        padding 64, content pinned via space-between
+ * 1246 × 550        radius 32, padding 64, content pinned via space-between
  *   background      the hero image, cover
  *   scrim           --gradient-card-scrim — 90deg, 0.8 ink → 0 by 84%
  *   top             the client logo in a 180 × 80 holder, knocked out WHITE
@@ -76,7 +76,7 @@ export function CaseStudyCard(
       // Padding is 64 uniform in the set and only the sides step down at 402,
       // where the 362-wide instances (`2975:8429`–`8431`) override to 24 and
       // leave 64 top and bottom.
-      className="rounded-card group relative isolate flex min-h-[550px] flex-col justify-between gap-6 overflow-hidden px-6 py-16 text-white lg:px-16"
+      className="rounded-case-card group relative isolate flex min-h-[550px] flex-col justify-between gap-6 overflow-hidden px-6 py-16 text-white lg:px-16"
     >
       <div className="absolute inset-0 -z-20">
         <SanityImage
