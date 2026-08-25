@@ -60,9 +60,13 @@
  * `2050:1311` h2 48/58 → 40/48, `2050:1312` h3 36/44 → 32/38,
  * `2050:1307` 18/24 → 16/20, `2050:1308` 24/34 → 20/26.
  *
- * SMALL UI TEXT DOES NOT SCALE. button, eyebrow, eyebrow-lg, meta, nav and
- * legal are identical at both widths — read, not assumed (`1814:1656` against
- * `1868:3262`). Only display type and rhythm interpolate.
+ * MOST SMALL UI TEXT DOES NOT SCALE. button, eyebrow, meta, nav and legal are
+ * identical at both widths — read, not assumed (`1814:1656` against
+ * `1868:3262`). `eyebrow-lg` is the one exception: its bound pair
+ * (`2050:1307` / `2050:1317`) carries a mobile mode of 16/20 against the
+ * desktop 18/24, read on the Interior Hero at both widths (`I2101:861;2101:791`
+ * against `I2107:1086;2107:1039`) and on the case-study hero (`1710:2304`
+ * against `1906:925`). It interpolates like the display steps do.
  *
  * Nothing here steps at a breakpoint. Composition switches at `lg`; size
  * interpolates. See ADR 0006 for why the frames are endpoints, not
@@ -115,8 +119,10 @@
   --text-hero--letter-spacing: -1px;
   /* 300. `Heading/h1` is Figtree LIGHT on the redesigned frames, and every
    * band bound to it draws it that way, so no consumer sets the weight
-   * itself. The wider question the same reading raises is in this file's
-   * header note: `Heading/h2` (48/58) and
+   * itself: the Home hero headline, the case-showcase heading, and the
+   * case-study opener's title (`1710:2305` / `1906:926`). The wider question
+   * the same reading raises is in this file's header note: `Heading/h2`
+   * (48/58) and
    * `Heading/h3` (36/44) are Light too, so the whole display ramp has
    * probably moved off 400. That is a token pass, not a page layer's call. */
   --text-hero--font-weight: 300;
@@ -165,6 +171,19 @@
   --text-interior-hero--line-height: clamp(48px, calc(2.697vw + 37.16px), 76px);
   --text-interior-hero--letter-spacing: clamp(-1px, calc(0.3875px - 0.0964vw), 0px);
   --text-interior-hero--font-weight: 300;
+
+  /* detail-hero — 48px LIGHT. The insight detail page's h1 (`2252:3559` at
+   * 1440, `2262:3863` at 402), whose size and leading land on display-xl's
+   * endpoints but whose weight is 300, not 400. Its own name for the reason
+   * `interior-hero` has one (#311): display-xl is the workhorse section
+   * headline across frames the redesign has not reached, and flipping its
+   * weight to serve one opener would repaint all of them.
+   *
+   * Line height is the read pair — 58 at 1440, 48 at 402. */
+  --text-detail-hero: clamp(40px, calc(0.771vw + 36.9px), 48px);
+  --text-detail-hero--line-height: clamp(48px, calc(0.963vw + 44.13px), 58px);
+  --text-detail-hero--letter-spacing: 0;
+  --text-detail-hero--font-weight: 300;
 
   /* display-xl — 48px. THE WORKHORSE SECTION HEADLINE: Figma's `Heading/h2`,
    * anchored on the partners wall (`1864:2393`), which binds the pair
@@ -285,10 +304,15 @@
 
   /* eyebrow-lg — 18px. The section-level kicker ("OUR PARTNERS", 1864:2392),
    * set in NEUTRAL fg-muted (#76746F since the 2026-08 warm shift) rather
-   * than brand red. Size and leading are bound (`2050:1307` / `2050:1317` —
-   * 18/24 read at 1440; small UI text does not scale). */
-  --text-eyebrow-lg: 18px;
-  --text-eyebrow-lg--line-height: 1.333; /* 24px / 18px, the bound pair */
+   * than brand red — except on the two hero sets, which draw it brand red.
+   *
+   * THE ONE SMALL STEP THAT INTERPOLATES. Its bound pair (`2050:1307` /
+   * `2050:1317`) carries both modes — 18/24 desktop, 16/20 mobile — read on
+   * the Interior Hero at each width (`I2101:861;2101:791` against
+   * `I2107:1086;2107:1039`). Both clamps are solved to ADR 0006's endpoints
+   * the way the display steps are. */
+  --text-eyebrow-lg: clamp(16px, calc(0.193vw + 15.22px), 18px);
+  --text-eyebrow-lg--line-height: clamp(20px, calc(0.385vw + 18.45px), 24px);
   --text-eyebrow-lg--letter-spacing: 0.1em;
   --text-eyebrow-lg--font-weight: 700;
 
@@ -320,7 +344,8 @@
  * The full eyebrow style in one class, because text-transform has no @theme
  * namespace. COLOR IS THE CALL SITE'S JOB, and the canonical default is
  * neutral `text-fg-muted` (#76746F since the 2026-08 warm shift) — not brand
- * red. On dark bands the frames use plain white.
+ * red. On dark bands the frames use plain white, except the two 2026-08 hero
+ * sets, which draw brand red on ink and on light alike (`2457:1854`).
  */
 @utility eyebrow {
   font-size: var(--text-eyebrow);

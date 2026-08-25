@@ -67,8 +67,8 @@ export const AboutWithSphere: Story = {
  * (`2107:1051`), which the redesigned frames instance, in its base shape: no
  * rail, so the standfirst stacks under the headline. Against `Work` above,
  * every difference the set carries is visible at once — `ink` rather than
- * `ink-warm`, 192px of clearance rather than 164, an 18px kicker, and a 64/76
- * Light headline where the older band draws the 48px section step.
+ * `ink-warm`, 192px of clearance rather than 164, a brand-red 18px kicker, and
+ * a 64/76 Light headline where the older band draws the 48px section step.
  */
 export const Interior: Story = {
   args: {
@@ -112,8 +112,9 @@ export const InteriorWithRail: Story = {
 
 /**
  * `/about` (`2960:6876`) — "Interior Hero – White", the one instance of the
- * set drawn on a light band. The copy goes to ink and the kicker to brand red
- * (#EB1000, sampled off "ABOUT US"); nothing else about the composition moves.
+ * set drawn on a light band. The headline goes to ink; the kicker stays brand
+ * red and the standfirst stays #AAA69E, the same two fills the ink instances
+ * carry. Nothing else about the composition moves.
  */
 export const InteriorWhite: Story = {
   args: {

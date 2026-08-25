@@ -13,7 +13,7 @@ const eyebrowVariants = cva('block', {
     size: {
       /** 16px — the card-level kicker ("HEALTHCARE", `1883:3561`). */
       base: 'eyebrow',
-      /** 18px — the section-level kicker ("OUR PARTNERS", `1864:2392`). */
+      /** 16 → 18px — the section-level kicker ("OUR PARTNERS", `1864:2392`). */
       lg: 'eyebrow-lg',
     },
     tone: {
@@ -21,15 +21,17 @@ const eyebrowVariants = cva('block', {
       // every section eyebrow on the canonical frames is this grey.
       muted: 'text-fg-muted',
       // inverse — plain white, for an eyebrow on an ink band or over a card
-      // scrim (`1883:3561`, `1634:1183`). The commonest dark-surface
-      // treatment, but not the only one: the Case Study Card set
-      // (`2089:3963`) sets its eyebrow in the deeper red, which that card
-      // names as a class rather than a tone here — `--color-brand-deep` is
-      // O3's token alone and this component is shared.
+      // scrim (`1883:3561`, `1634:1183`). One of two dark-surface treatments,
+      // not the only one — see `brand`. The Case Study Card set (`2089:3963`)
+      // is a third, in the deeper red, which that card names as a class rather
+      // than a tone here: `--color-brand-deep` is O3's token alone and this
+      // component is shared.
       inverse: 'text-white',
-      // brand — the red kicker. Brand red is a flat fill exactly ONCE on the
-      // canonical Home frame (the footer link-group headers), so this is the
-      // exception rather than the default it used to be.
+      // brand — the red kicker, #EB1000 (`2457:1854`). The 2026-08 hero sets
+      // draw it on ink as well as on light: `Interior Hero`
+      // (`I2101:861;2101:791`) and the case-study hero (`1710:2304`) both.
+      // Still not the default — the section eyebrows on the canonical frames
+      // are neutral grey.
       brand: 'text-brand',
     },
   },

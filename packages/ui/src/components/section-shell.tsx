@@ -127,12 +127,15 @@ const PAD_TOP = {
   sm: 'pt-band-sm',
   md: 'pt-band-md',
   lg: 'pt-band-lg',
+  /** 128 at 1440, 64 at 402 — the insight detail page's bands (`2252:3675`). */
+  detail: 'pt-band-detail',
 } as const
 const PAD_BOTTOM = {
   none: 'pb-0',
   sm: 'pb-band-sm',
   md: 'pb-band-md',
   lg: 'pb-band-lg',
+  detail: 'pb-band-detail',
 } as const
 export type BandStep = keyof typeof PAD_TOP
 
