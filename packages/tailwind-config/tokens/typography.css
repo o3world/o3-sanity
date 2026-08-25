@@ -100,9 +100,9 @@
    * the mobile end is a straggler rather than a second value. Was 0, which
    * came from the pre-redesign hero raster having no live text to read. */
   --text-hero--letter-spacing: -1px;
-  /* 300. `Heading/h1` is Figtree LIGHT on the redesigned frames, and this
-   * token now has exactly one consumer — the Home hero headline — since the
-   * partners band moved to `display-xl` (#89). The wider question the same
+  /* 300. `Heading/h1` is Figtree LIGHT on the redesigned frames. Two
+   * consumers draw the step: the Home hero headline and the case-study
+   * opener's title (`1710:2305` / `1906:926`). The wider question the same
    * reading raises is in this file's header note: `Heading/h2` (48/58) and
    * `Heading/h3` (36/44) are Light too, so the whole display ramp has
    * probably moved off 400. That is a token pass, not a page layer's call. */

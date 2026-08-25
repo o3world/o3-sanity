@@ -2,6 +2,12 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
 import { CaseStudyHero } from './case-study-hero'
 
+/**
+ * The case-study opener, `1710:2301` at 1440 and `1906:923` at 402. At 1440 the
+ * copy sits on a hard-edged black band running the width of the row
+ * (`2846:4538`); at 402 there is none and the scrim carries the legibility on
+ * its own. The kicker is brand red at both widths.
+ */
 const meta = {
   title: 'Case Study/CaseStudyHero',
   component: CaseStudyHero,
@@ -19,6 +25,7 @@ const photograph = (
   <div className="h-full w-full bg-[radial-gradient(circle_at_30%_20%,#5a5a5a_0%,#141414_70%)]" />
 )
 
+/** The frames' own copy: a red kicker, the 64px Light title, the standfirst. */
 export const Default: Story = {
   args: {
     eyebrow: 'IRONMAN',
