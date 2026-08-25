@@ -130,16 +130,24 @@ describe('the seeded About page', () => {
     ])
   })
 
+  /**
+   * The frame's own strings, sentence-cased where it shouts — the team band's
+   * heading is `1927:6434` / `2975:9117` and its eyebrow `1924:5344`'s
+   * "LEADERSHIP TEAM". "Quality over scale" is the one line here the frame
+   * does not author: its third rail panel (`I2960:7035;2846:5581`) carries no
+   * override, so the seed fills it in the O3 voice and says so in
+   * `migration.provisionalNote`.
+   */
   it.each([
     ['track heading', 'What we optimize for.'],
     ['track standfirst', 'One senior team that carries a problem'],
     ['a track panel', 'Quality over scale'],
     ['team eyebrow', 'Leadership team'],
-    ['team heading', 'The people who find it and build it.'],
+    ['team heading', 'Meet the team'],
     ['careers eyebrow', 'Careers'],
     ['a role', 'Senior Product Strategist'],
     ['a role location', 'Remote · Philadelphia'],
-  ])('shows the frame’s %s', (_label, copy) => {
+  ])('shows the About page’s %s', (_label, copy) => {
     expect(html).toContain(copy)
   })
 
