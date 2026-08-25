@@ -136,16 +136,18 @@ as the 402 half of a breakpoint pair; it is a `SECTION` holding two frames calle
 
 ### Not every page layer has both
 
-The Design Concept section holds **five** mobile frames — Home `1814:1618`, Work `1906:851`,
-Case Study `1906:928`, Insights (= Insight detail) `1906:1046`, Live `1906:334`. **About
-(`1924:5344`) and Solutions (`1925:6138`) have no 402 frame at all**, and neither does any
-collection index. That is a coverage gap, not a missing read: ADR 0006 already makes responsive a
-renderer concern, so the mobile composition on those pages is a code decision, and it should say so
-at the call site.
+The manifest's mobile roster (`tracked-nodes.json`, `variant: mobile`) is the current list — Home,
+Work, Case Study, Insight detail, Live, plus the 2026-08 pass's ruled-canonical companions:
+Contact `2975:10037`, the /insights index `2975:8499`, /partners/sanity `2975:9343`, About
+`2975:8865`. **Solutions (`1925:6138`) and Software Engineering (`2360:2879`) still have no 402
+frame.** That is a coverage gap, not a missing read: ADR 0006 already makes responsive a renderer
+concern, so the mobile composition on those pages is a code decision, and it should say so at the
+call site.
 
 ### Two frames named "Insights"
 
-Neither is the `/insights` index (which has **no** canonical frame — #49):
+Neither is the `/insights` index (whose canonical frames are `2336:4310` at 1440 and
+`2975:8499` at 402, per the manifest):
 
 - `1710:2823` → **Insight detail**, `/insights/{slug}` (#45)
 - `1924:5344` → **About**, `/about` (#46)
