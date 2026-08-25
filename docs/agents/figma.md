@@ -67,9 +67,8 @@ Lifting this needs a paid seat. Code Connect publishing (#38) is blocked on the 
 
 `scripts/figma-mcp.sh` launches `figma-developer-mcp` over the REST API. It reads `FIGMA_API_KEY`
 from `apps/web/.env.local`, which `pnpm env:pull` populates from the Vercel development environment.
-The file outranks an exported `FIGMA_API_KEY`, and the script prints which source it used: a key
-exported by some other project is not this repo's, and a stale one used to shadow the good key
-silently (#334).
+The file outranks an exported `FIGMA_API_KEY`, and the script prints which source it used — a key
+exported by some other project is not this repo's.
 
 ```bash
 pnpm env:pull   # if the server fails with "FIGMA_API_KEY not found"

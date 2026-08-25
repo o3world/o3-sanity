@@ -35,7 +35,7 @@ Balance
 Quality over scale
 Quality over scale
 Leadership team
-Meet the team
+Meet the Team
 Beyond O3 World
 The work doesn't stop at client services.
 1682

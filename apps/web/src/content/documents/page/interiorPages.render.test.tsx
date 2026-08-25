@@ -143,7 +143,7 @@ describe('the seeded About page', () => {
     ['track standfirst', 'One senior team that carries a problem'],
     ['a track panel', 'Quality over scale'],
     ['team eyebrow', 'Leadership team'],
-    ['team heading', 'Meet the team'],
+    ['team heading', 'Meet the Team'],
     ['careers eyebrow', 'Careers'],
     ['a role', 'Senior Product Strategist'],
     ['a role location', 'Remote · Philadelphia'],

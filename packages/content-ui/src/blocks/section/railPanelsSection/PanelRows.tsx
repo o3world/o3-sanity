@@ -88,11 +88,7 @@ export function PanelRows({ items }: PanelRowsProps) {
                 return (
                   <div key={detail._key ?? detailIndex} className="flex flex-col gap-3">
                     {detail.label ? (
-                      <Eyebrow
-                        size="lg"
-                        tone={isPromise ? 'brand' : 'muted'}
-                        className={isPromise ? undefined : 'text-ink'}
-                      >
+                      <Eyebrow size="lg" tone={isPromise ? 'brand' : 'ink'}>
                         {detail.label}
                       </Eyebrow>
                     ) : null}

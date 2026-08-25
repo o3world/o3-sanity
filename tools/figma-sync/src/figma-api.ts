@@ -72,10 +72,8 @@ export interface FigmaClientOptions {
    */
   readonly retries?: number
   readonly retryDelayMs?: number
-  /**
-   * Where the token came from, named in a 401/403 so the reader fixes the
-   * right file instead of the one they assume (#334).
-   */
+  /** Where the token came from, named in a 401/403 so the reader fixes the
+   * file the key actually came from. */
   readonly tokenSource?: string
 }
 

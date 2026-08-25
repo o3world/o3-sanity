@@ -33,6 +33,10 @@ const eyebrowVariants = cva('block', {
       // Still not the default — the section eyebrows on the canonical frames
       // are neutral grey.
       brand: 'text-brand',
+      // ink — the near-black kicker (`2975:9554`). The rail's breakdown label
+      // takes it where the same row's promise label takes `brand`, so the two
+      // labels read as a pair rather than as text and heading.
+      ink: 'text-ink',
     },
   },
   // Flipped from `brand` in #42, the page layer that rebuilt the sections

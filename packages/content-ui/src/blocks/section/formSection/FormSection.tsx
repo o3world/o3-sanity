@@ -1,4 +1,4 @@
-import { DisplayHeading, Eyebrow, SectionShell } from '@o3/ui'
+import { DisplayHeading, Eyebrow, SectionShell, surfaceAttrs } from '@o3/ui'
 import type { SectionProps } from '@o3/content-runtime/blocks'
 import { fieldAttr } from '@o3/content-runtime/data-attribute'
 
@@ -57,8 +57,10 @@ export function FormSection({
       surface={resolved}
       top="none"
       bottom="none"
-      // 140px at 1440, 48px at 402 (`2960:7792` / `2975:10195`).
-      className="py-[clamp(48px,calc(8.863vw+12.37px),140px)]"
+      // 140/48 vertical and a 16px mobile gutter (`2960:7792` / `2975:10195`);
+      // the band draws its own gutter for the same reason the interior hero
+      // does.
+      className="px-gutter-tight py-[clamp(48px,calc(8.863vw+12.37px),140px)]"
     >
       <div className="flex flex-col gap-10 lg:gap-16">
         {eyebrow || heading || note ? (
@@ -78,7 +80,7 @@ export function FormSection({
             until it says otherwise (tokens/color.css).
           */}
           <div
-            data-surface="white"
+            {...surfaceAttrs('white')}
             className="text-fg flex flex-col gap-5 rounded-2xl bg-white p-11"
           >
             {/* The submit's fill is not passed down: the submit is an ordinary
@@ -118,11 +120,11 @@ export function FormSection({
               ) : null}
 
               {details?.length ? (
-                // 32px under a hairline, 14 between a kicker and its lines and
-                // 22 between the groups (`2960:7834`).
+                // One flat 14px rhythm under a 32px hairline: `2960:7834` is a
+                // single stack of kicker, lines, kicker, lines at gap 14.
                 <div
                   data-sanity={fieldAttr(loc, 'details')}
-                  className="border-line flex flex-col gap-[22px] border-t pt-8"
+                  className="border-line flex flex-col gap-[14px] border-t pt-8"
                 >
                   {details.map((detail) => (
                     <div key={detail._key} className="flex flex-col gap-[14px]">

@@ -28,8 +28,8 @@ imply: **re-exports the committed seed assets whose source node moved**.
 
 Authentication is the standard `FIGMA_API_KEY` from the dev environment — the same sourcing as
 `scripts/figma-mcp.sh` (`apps/web/.env.local`, else `process.env`). If it is missing, run
-`pnpm env:pull`. A 401/403 names the source the token came from, because an ambient key from
-another project outranking the provisioned one is how #334 cost three sessions. This calls the REST API directly rather than going through MCP: it has to be
+`pnpm env:pull`. A 401/403 names the source the token came from, so the reader fixes the file the
+key actually came from. This calls the REST API directly rather than going through MCP: it has to be
 deterministic and runnable unattended, and the official MCP server is rate-limited to uselessness on
 this account (`docs/agents/figma.md`).
 

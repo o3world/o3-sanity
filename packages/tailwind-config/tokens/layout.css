@@ -49,9 +49,10 @@
   /* gutter-tight — 16px at 402, the same 96 at 1440. The 2026-08 `Interior
    * Hero` set draws its band at 16 on every 402 frame that instances it —
    * /work `2107:1086`, /insights `2975:8500`, /about `2975:9022`,
-   * /partners/sanity `2975:9501`, /contact `2975:10038` — where the older
-   * bands beside it on the same frames still read 20. Two values because the
-   * frames draw two, not because one of them is stale. */
+   * /partners/sanity `2975:9501`, /contact `2975:10038` — as does the contact
+   * form band (`2975:10195`), where the older bands beside them on the same
+   * frames still read 20. Two values because the frames draw two, not because
+   * one of them is stale. */
   --spacing-gutter-tight: clamp(16px, calc(7.707vw - 14.98px), 96px);
 
   /* ── Section rhythm ────────────────────────────────────────────────────── */

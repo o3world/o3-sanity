@@ -2,8 +2,7 @@
 # Launch the token-based Figma MCP server (figma-developer-mcp) with FIGMA_API_KEY
 # from apps/web/.env.local (populated by `pnpm env:pull`; the token lives in
 # Vercel as a development env var). The file wins over an exported key: an
-# ambient FIGMA_API_KEY belongs to whichever project exported it, and a stale
-# one silently shadows the good key (#334).
+# ambient FIGMA_API_KEY belongs to whichever project exported it.
 set -e
 cd "$(dirname "$0")/.."
 

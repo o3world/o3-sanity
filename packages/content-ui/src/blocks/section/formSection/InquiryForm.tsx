@@ -187,7 +187,9 @@ export function InquiryForm({ reasons, consentLabel, button }: InquiryFormProps)
             {...control}
             // 32px of right padding for the native chevron (`2960:7811`),
             // against the 20 every other control keeps.
-            className={cn(FIELD_CONTROL_CLASS, 'pr-8')}
+            // 48 tall against the input's 46, and 32 of right pad for the
+            // chevron (`2960:7811`).
+            className={cn(FIELD_CONTROL_CLASS, 'h-12 pr-8')}
             value={values.reason}
             onChange={handleChange('reason')}
             onBlur={handleBlur('reason')}

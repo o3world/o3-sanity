@@ -13,8 +13,8 @@ export interface FigmaToken {
 /**
  * `apps/web/.env.local` wins over an exported `FIGMA_API_KEY`. The file is the
  * one this repo provisions (`pnpm env:pull`); an ambient variable belongs to
- * whichever project exported it, and when it goes stale it silently shadows a
- * good key — which is what #334 cost three sessions.
+ * whichever project exported it, so it is the weaker claim on which token this
+ * repo means.
  */
 export function readFigmaTokenWithSource(): FigmaToken {
   if (existsSync(WEB_ENV_LOCAL)) {
