@@ -18,7 +18,7 @@
  *      they carry every section headline on frames the redesign has not
  *      reached, which still read 400, so the two bands built against the new
  *      styles set `font-light` at the call site and the ramp-wide flip is a
- *      token pass of its own (#89 reports it).
+ *      token pass of its own (#350 holds the reading and the stragglers).
  *   2. LINE HEIGHT IS 1.2 nearly everywhere, replacing the prototype's
  *      1.05 → 1.3 spread.
  *
@@ -29,7 +29,7 @@
  *
  *   token           402    1440
  *   hero            36  →  64
- *   quote           30  →  48   (2026-08: desktop dropped 64 → 48)
+ *   quote           36  →  64   (rides the hero variable pair)
  *   cta             36  →  64   (2026-08: rides the hero variable now)
  *   interior-hero   40  →  64
  *   display-xl      40  →  48
@@ -44,7 +44,21 @@
  * the modes land exactly on ADR 0006's two endpoint widths — the variables
  * confirm the clamp scheme rather than replacing it. What they moved:
  * display-size LINE HEIGHTS are now read px pairs rather than a flat 1.2
- * (hero/cta 44 → 76, lead/display-sm 26 → 34), and lead's tracking went to 0.
+ * (hero/cta 44 → 76, display-xl 48 → 58, lead/display-sm 26 → 34), and lead's
+ * tracking went to 0.
+ *
+ * ⚠️ READ THE BINDING, NOT THE RESOLVED SIZE. A 402 frame does not put every
+ * node in the mobile mode — the mode is set per node, so a bound node the
+ * designer never switched renders the DESKTOP number on a 402 frame. Both
+ * modes of one variable therefore appear side by side on the same frame:
+ * `2050:1311` resolves 40 on `2262:3931` and 48 on `2975:8190`, four bands
+ * apart on `1814:1618`. Where a node carries a `boundVariables.fontSize`, the
+ * variable's mobile mode is the 402 endpoint; a raw size is only a read when
+ * nothing is bound.
+ *
+ * The mode pairs, desktop → mobile: `2050:1306` h1 64/76 → 36/44,
+ * `2050:1311` h2 48/58 → 40/48, `2050:1312` h3 36/44 → 32/38,
+ * `2050:1307` 18/24 → 16/20, `2050:1308` 24/34 → 20/26.
  *
  * SMALL UI TEXT DOES NOT SCALE. button, eyebrow, eyebrow-lg, meta, nav and
  * legal are identical at both widths — read, not assumed (`1814:1656` against
@@ -54,10 +68,13 @@
  * interpolates. See ADR 0006 for why the frames are endpoints, not
  * breakpoints.
  *
- * There is NO distinct hero step. The 1440 Home hero bakes its headline into
- * a raster (1810:1616), and the Work hero headline is 48px — the same step as
- * every section headline. `--text-hero` is therefore the 64px statement, and
- * the Home headline rides it.
+ * `hero` AND `display-xl` ARE TWO STEPS, and Figma's own heading styles are
+ * the line between them: `Heading/h1` (`2050:1306`) is the 64/76 statement and
+ * `Heading/h2` (`2050:1311`) is the 48/58 section headline under it. A band
+ * belongs to whichever style its heading binds, not to whichever it used to
+ * draw — the Home hero (`2089:4313`), the platforms rail (`2747:4488`) and the
+ * case-study showcase (`1683:2659`) all bind h1; the partners wall
+ * (`1864:2393`) and the services track (`2846:5485`) bind h2.
  *
  * `hero` and `quote` carry the same numbers on this brand — the `Quote` set
  * binds the hero's variable pair at both ends. `quote` survives as its own
@@ -74,10 +91,10 @@
   --font-display: var(--font-figtree, Figtree), 'Helvetica Neue', Arial, sans-serif;
 
   /* ── Display scale ─────────────────────────────────────────────────────── */
-  /* hero — 64px. The biggest thing in its band: the Home hero headline
-   * (`1814:1624` at 402; baked into the 1440 raster) and the partners intro
-   * (`1864:2393` / `1814:1894`). The intro is filled with
-   * --gradient-statement rather than a solid ink; pair with `text-gradient`.
+  /* hero — 64px. The 64/76 statement step, Figma's `Heading/h1`: the Home
+   * hero headline pair (`2089:4313` / `2089:4318`) and every other band that
+   * binds `2050:1306` — the platforms rail (`2747:4488`) and the case-study
+   * showcase (`1683:2659` at 1440, `2975:8110` at 402).
    *
    * FLOOR IS 36, NOT 30 — both 402 nodes read 36 (ADR 0006 amendment
    * 2026-08-02). The 30 this token shipped with was read off `1814:1684`,
@@ -96,10 +113,10 @@
    * the mobile end is a straggler rather than a second value. Was 0, which
    * came from the pre-redesign hero raster having no live text to read. */
   --text-hero--letter-spacing: -1px;
-  /* 300. `Heading/h1` is Figtree LIGHT on the redesigned frames, and this
-   * token now has exactly one consumer — the Home hero headline — since the
-   * partners band moved to `display-xl` (#89). The wider question the same
-   * reading raises is in this file's header note: `Heading/h2` (48/58) and
+  /* 300. `Heading/h1` is Figtree LIGHT on the redesigned frames, and every
+   * band bound to it draws it that way, so no consumer sets the weight
+   * itself. The wider question the same reading raises is in this file's
+   * header note: `Heading/h2` (48/58) and
    * `Heading/h3` (36/44) are Light too, so the whole display ramp has
    * probably moved off 400. That is a token pass, not a page layer's call. */
   --text-hero--font-weight: 300;
@@ -149,14 +166,24 @@
   --text-interior-hero--letter-spacing: clamp(-1px, calc(0.3875px - 0.0964vw), 0px);
   --text-interior-hero--font-weight: 300;
 
-  /* display-xl — 48px. THE WORKHORSE: every section headline on every frame
-   * ("The platforms we go deep on", 1683:2659), the Work hero headline
-   * (1634:1184), and the case-study stat figure. The 2026-08 variables
-   * (`2050:1311` / `2050:1319` — 48/58 desktop, 40/48 mobile) land exactly on
-   * this clamp's endpoints; line-height 1.2 gives 57.6/48 against the bound
-   * 58/48. */
+  /* display-xl — 48px. THE WORKHORSE SECTION HEADLINE: Figma's `Heading/h2`,
+   * anchored on the partners wall (`1864:2393`), which binds the pair
+   * `2050:1311` / `2050:1319` — 48/58 desktop, 40/48 mobile, tracking 0. Both
+   * ends of both clamps are the variable's two modes, so the floor is read
+   * rather than interpolated; the 40 is on `2262:3931` and `2435:1939`, the
+   * two bands on `1814:1618` switched to the mobile mode.
+   *
+   * A 402 NODE READING 48/58 IS THE DESKTOP MODE, not a second floor.
+   * `2975:8190` and `2975:8360` bind this same pair and were never switched —
+   * the file header has the rule.
+   *
+   * WEIGHT IS 400 while the step is still drawn unbound at 400/57.6 on the
+   * frames the redesign has not reached (Live `1751:2042`, About `1927:6434`,
+   * Solutions `1925:6110`) and on the case-study stat figure (`2089:3966`),
+   * which takes -1px of its own on top. `Heading/h2` is Light, so the bands
+   * built against it set `font-light` at the call site; #350 owns the flip. */
   --text-display-xl: clamp(40px, calc(0.77vw + 36.9px), 48px);
-  --text-display-xl--line-height: 1.2;
+  --text-display-xl--line-height: clamp(48px, calc(0.963vw + 44.13px), 58px);
   --text-display-xl--letter-spacing: 0;
   --text-display-xl--font-weight: 400;
 

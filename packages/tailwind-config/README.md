@@ -127,23 +127,23 @@ Figma specifies a **fixed px ramp at each frame width**. Every clamp is
 **solved** to hit the 402 frame's value at 402 and the 1440 frame's at 1440 —
 both ends are read values (ADR 0006).
 
-| Utility             | 402    | 1440   | Tracking  | Role                                                |
-| ------------------- | ------ | ------ | --------- | --------------------------------------------------- |
-| `text-hero`         | `36px` | `64px` | -1px      | Home hero headline (`Heading/h1`, **Light 300**)    |
-| `text-quote`        | `36px` | `64px` | -1px      | The pull quote (`Quote` set, **Light 300**)         |
-| `text-cta`          | `36px` | `64px` | -1px      | The CTA band headline — rides the hero variable     |
-| `text-display-xl`   | `40px` | `48px` | 0         | **Every** section headline; the Work hero; partners |
-| `text-display-lg`   | `18px` | `36px` | 0         | Rail numerals; `DisplayHeading` size `lg`           |
-| `text-display-md`   | `22px` | `28px` | -0.0286em | Case-study problem statement ⚠️ floor interpolated  |
-| `text-lead`         | `20px` | `24px` | 0         | Standfirst beside a headline; CTA subhead           |
-| `text-body`         | `16px` | `20px` | 0, lh 1.6 | Long-form prose — every `bodyText` field            |
-| `text-body-heading` | `40px` | `36px` | 0         | An h2 inside a body ⚠️ descends — both ends read    |
-| `text-button`       | `18px` | `18px` | 0, wt 500 | Every button label                                  |
-| `text-eyebrow-lg`   | `18px` | `18px` | 0.1em     | Section kicker ("OUR PARTNERS")                     |
-| `text-eyebrow`      | `16px` | `16px` | 0.1em     | Card kicker ("HEALTHCARE"), Work hero kicker        |
-| `text-nav`          | `14px` | `14px` | 0         | Footer navigation links                             |
-| `text-meta`         | `13px` | `13px` | 0.1em     | Insights-card meta row                              |
-| `text-legal`        | `12px` | `12px` | 0         | Footer legal row                                    |
+| Utility             | 402    | 1440   | Tracking  | Role                                                 |
+| ------------------- | ------ | ------ | --------- | ---------------------------------------------------- |
+| `text-hero`         | `36px` | `64px` | -1px      | Home hero headline (`Heading/h1`, **Light 300**)     |
+| `text-quote`        | `36px` | `64px` | -1px      | The pull quote (`Quote` set, **Light 300**)          |
+| `text-cta`          | `36px` | `64px` | -1px      | The CTA band headline — rides the hero variable      |
+| `text-display-xl`   | `40px` | `48px` | 0         | `Heading/h2` — the section headline; the stat figure |
+| `text-display-lg`   | `18px` | `36px` | 0         | Rail numerals; `DisplayHeading` size `lg`            |
+| `text-display-md`   | `22px` | `28px` | -0.0286em | Case-study problem statement ⚠️ floor interpolated   |
+| `text-lead`         | `20px` | `24px` | 0         | Standfirst beside a headline; CTA subhead            |
+| `text-body`         | `16px` | `20px` | 0, lh 1.6 | Long-form prose — every `bodyText` field             |
+| `text-body-heading` | `40px` | `36px` | 0         | An h2 inside a body ⚠️ descends — both ends read     |
+| `text-button`       | `18px` | `18px` | 0, wt 500 | Every button label                                   |
+| `text-eyebrow-lg`   | `18px` | `18px` | 0.1em     | Section kicker ("OUR PARTNERS")                      |
+| `text-eyebrow`      | `16px` | `16px` | 0.1em     | Card kicker ("HEALTHCARE"), Work hero kicker         |
+| `text-nav`          | `14px` | `14px` | 0         | Footer navigation links                              |
+| `text-meta`         | `13px` | `13px` | 0.1em     | Insights-card meta row                               |
+| `text-legal`        | `12px` | `12px` | 0         | Footer legal row                                     |
 
 **Small UI text does not scale** — button, eyebrow, meta, nav and legal are
 identical at both widths, read rather than assumed. Only display type and
@@ -152,12 +152,17 @@ so it is interpolated from the ramp and says so in the file.
 
 The 2026-08 Figma token pass bound the display ramp to variables with a
 desktop and a mobile mode, landing exactly on ADR 0006's two endpoint widths.
-It also moved three steps: the desktop quote dropped from 64 to 48
-(display-xl's ceiling, but the un-migrated 402 node keeps the 30 floor), the
-60px CTA step was retired for the hero's 36 → 64 with -1px tracking (the
-shared CTA component on seven frames), and `lead` now shares one variable
-pair with `display-sm` (24/34 desktop, 20/26 mobile) — display line heights
-are read px pairs now, not a flat 1.2. Details on each token.
+It also moved three steps: `quote` rides the hero's own pair at both ends
+(36 → 64, -1px), the 60px CTA step was retired for the same pair (the shared
+CTA component on seven frames), and `lead` now shares one variable pair with
+`display-sm` (24/34 desktop, 20/26 mobile) — display line heights are read px
+pairs now, not a flat 1.2. Details on each token.
+
+**Read the binding, not the resolved size.** The mode is set per node, so a
+402 frame carries both modes at once: a bound node the designer never switched
+renders the desktop number on a mobile frame. `2050:1311` resolves 40 on one
+band of `1814:1618` and 48 on another. Where a node binds a size variable, that
+variable's mobile mode is the 402 endpoint.
 
 `body-heading` is the one step whose clamp **descends**: the Insights frames
 read 40px at 402 and 36px at 1440, and solving the clamp to both ends the way
@@ -165,9 +170,9 @@ ADR 0006 requires means shrinking 4px across the range. The alternatives
 (`display-lg`'s 18px floor; a step at `lg`) both looked worse than a ramp
 nobody can see — the full reasoning is on the token.
 
-There is **no distinct hero step**: the Home hero is photographic with no live
-text, and the Work hero headline is 48px — the same step as every section
-headline.
+`hero` and `display-xl` are **two steps**, and Figma's heading styles are the
+line between them: `Heading/h1` is the 64/76 statement, `Heading/h2` the 48/58
+section headline under it. A band belongs to whichever style its heading binds.
 
 The `eyebrow` and `eyebrow-lg` utility classes bundle the full kicker style
 **including** `text-transform: uppercase` (no theme namespace). The canonical

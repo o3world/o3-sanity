@@ -46,8 +46,14 @@ export function CaseShowcaseSection({
       <section {...surfaceAttrs('ink')} className="px-gutter bg-black py-16 text-white">
         <div className="max-w-section mx-auto flex flex-col gap-16">
           <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
+            {/*
+             * The 64px statement step, not the section-headline one: the
+             * heading binds `Heading/h1` on both frames (`1683:2659` at 1440,
+             * `2975:8110` at 402), which is what `text-hero` carries. It is
+             * Light there, and `hero`'s own weight is already 300.
+             */}
             {heading ? (
-              <h2 className="text-display-xl font-display max-w-[571px] text-balance">{heading}</h2>
+              <h2 className="text-hero font-display max-w-[571px] text-balance">{heading}</h2>
             ) : null}
             {button ? <ButtonLink button={button} size="large" /> : null}
           </div>

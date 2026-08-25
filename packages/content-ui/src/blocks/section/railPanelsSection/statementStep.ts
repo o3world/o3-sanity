@@ -3,9 +3,9 @@
  * the ramp's own clamps are (ADR 0006).
  *
  * No token spans that pair: `display-xl` caps at 48 and `hero` floors at 36.
- * Both of this band's redrawn compositions set it — the rail header
- * (`2975:8190` → `2747:4488`) and the track's column heading (`2975:8355` →
- * `2846:5480`) — so it is one string rather than two that have to agree.
+ * The rail header is the one composition that sets it (`2975:8190` →
+ * `2747:4488`); the track's column heading binds `Heading/h2` at both widths
+ * (`2975:8360` → `2846:5485`) and takes `display-xl` instead.
  *
  * Tracking rides along: 0 at 402, −1px at 1440.
  */
