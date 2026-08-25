@@ -139,14 +139,16 @@ both ends are read values (ADR 0006).
 | `text-body`         | `16px` | `20px` | 0, lh 1.6 | Long-form prose — every `bodyText` field            |
 | `text-body-heading` | `40px` | `36px` | 0         | An h2 inside a body ⚠️ descends — both ends read    |
 | `text-button`       | `18px` | `18px` | 0, wt 500 | Every button label                                  |
-| `text-eyebrow-lg`   | `18px` | `18px` | 0.1em     | Section kicker ("OUR PARTNERS")                     |
+| `text-eyebrow-lg`   | `16px` | `18px` | 0.1em     | Section kicker ("OUR PARTNERS"); both hero eyebrows |
 | `text-eyebrow`      | `16px` | `16px` | 0.1em     | Card kicker ("HEALTHCARE"), Work hero kicker        |
 | `text-nav`          | `14px` | `14px` | 0         | Footer navigation links                             |
 | `text-meta`         | `13px` | `13px` | 0.1em     | Insights-card meta row                              |
 | `text-legal`        | `12px` | `12px` | 0         | Footer legal row                                    |
 
-**Small UI text does not scale** — button, eyebrow, meta, nav and legal are
-identical at both widths, read rather than assumed. Only display type and
+**Most small UI text does not scale** — button, eyebrow, meta, nav and legal
+are identical at both widths, read rather than assumed. `eyebrow-lg` is the
+exception: its bound pair `2050:1307` carries 18/24 desktop and 16/20 mobile,
+so it interpolates like the display steps. Otherwise only display type and
 rhythm interpolate. `display-md` is the one floor with no 402 example to read,
 so it is interpolated from the ramp and says so in the file.
 

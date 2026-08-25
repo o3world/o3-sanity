@@ -14,7 +14,10 @@ import { SurfaceProvider } from './surface-context'
 export type CollectionHeroSurface = 'ink' | 'white'
 
 export interface CollectionHeroProps {
-  /** The uppercase kicker — "WORK". 18px at `interior`, 16px at `band`. */
+  /**
+   * The uppercase kicker — "WORK". Brand red and 16 → 18px at `interior`,
+   * flat 16px white at `band`.
+   */
   eyebrow?: string | null
   /** The headline. 64px at `interior`; at `band`, 48px flush left and 64px centred. */
   heading: ReactNode
@@ -170,14 +173,12 @@ export function CollectionHero({
             )}
           >
             {eyebrow ? (
-              // The redesigned set steps the kicker to 18px (`eyebrow-lg`).
-              // White on ink; brand red on the light band, sampled #EB1000 off
-              // "ABOUT US" on `2960:6876` — one of the two places on the site
-              // where the red is a flat fill.
-              <Eyebrow
-                size={interior ? 'lg' : 'base'}
-                tone={painted === 'ink' ? 'inverse' : 'brand'}
-              >
+              // The redesigned set steps the kicker to `eyebrow-lg` and draws
+              // it BRAND RED on both surfaces — #EB1000 bound to `2457:1854`,
+              // read on ink at `I2101:861;2101:791` and on the light band at
+              // `I2960:6876;2960:6852`. The older band keeps the white kicker
+              // its own frame draws (`1634:1183`).
+              <Eyebrow size={interior ? 'lg' : 'base'} tone={interior ? 'brand' : 'inverse'}>
                 {eyebrow}
               </Eyebrow>
             ) : null}
@@ -214,15 +215,18 @@ export function CollectionHero({
              * the 608 column with one (`2401:3185`) — the rail is what the
              * column above it is being read against.
              *
-             * On the light band it is `#AAA69E` rather than the headline's ink
-             * (`2960:6876`), so it takes the muted role; on ink both are white.
+             * Its colour is `#AAA69E` on BOTH surfaces — one variable
+             * (`2050:1226`, which the palette names `on-utility`) bound on the
+             * ink instance `I2101:861;2846:4458` and the white one
+             * `I2960:6876;2960:6854` alike. It is a warm solid rather than
+             * `fg-muted`, which inverts to a colder white alpha on ink.
              */}
             {subheading && !centred && (interior || aside) ? (
               <p
                 className={cn(
                   'text-lead',
                   interior ? (aside ? undefined : 'lg:w-[395px]') : 'leading-[1.2]',
-                  interior && painted === 'white' && 'text-fg-muted',
+                  interior && 'text-on-utility',
                 )}
               >
                 {subheading}

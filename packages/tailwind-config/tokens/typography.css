@@ -46,9 +46,13 @@
  * display-size LINE HEIGHTS are now read px pairs rather than a flat 1.2
  * (hero/cta 44 → 76, lead/display-sm 26 → 34), and lead's tracking went to 0.
  *
- * SMALL UI TEXT DOES NOT SCALE. button, eyebrow, eyebrow-lg, meta, nav and
- * legal are identical at both widths — read, not assumed (`1814:1656` against
- * `1868:3262`). Only display type and rhythm interpolate.
+ * MOST SMALL UI TEXT DOES NOT SCALE. button, eyebrow, meta, nav and legal are
+ * identical at both widths — read, not assumed (`1814:1656` against
+ * `1868:3262`). `eyebrow-lg` is the one exception: its bound pair
+ * (`2050:1307` / `2050:1317`) carries a mobile mode of 16/20 against the
+ * desktop 18/24, read on the Interior Hero at both widths (`I2101:861;2101:791`
+ * against `I2107:1086;2107:1039`) and on the case-study hero (`1710:2304`
+ * against `1906:925`). It interpolates like the display steps do.
  *
  * Nothing here steps at a breakpoint. Composition switches at `lg`; size
  * interpolates. See ADR 0006 for why the frames are endpoints, not
@@ -258,10 +262,15 @@
 
   /* eyebrow-lg — 18px. The section-level kicker ("OUR PARTNERS", 1864:2392),
    * set in NEUTRAL fg-muted (#76746F since the 2026-08 warm shift) rather
-   * than brand red. Size and leading are bound (`2050:1307` / `2050:1317` —
-   * 18/24 read at 1440; small UI text does not scale). */
-  --text-eyebrow-lg: 18px;
-  --text-eyebrow-lg--line-height: 1.333; /* 24px / 18px, the bound pair */
+   * than brand red — except on the two hero sets, which draw it brand red.
+   *
+   * THE ONE SMALL STEP THAT INTERPOLATES. Its bound pair (`2050:1307` /
+   * `2050:1317`) carries both modes — 18/24 desktop, 16/20 mobile — read on
+   * the Interior Hero at each width (`I2101:861;2101:791` against
+   * `I2107:1086;2107:1039`). Both clamps are solved to ADR 0006's endpoints
+   * the way the display steps are. */
+  --text-eyebrow-lg: clamp(16px, calc(0.193vw + 15.22px), 18px);
+  --text-eyebrow-lg--line-height: clamp(20px, calc(0.385vw + 18.45px), 24px);
   --text-eyebrow-lg--letter-spacing: 0.1em;
   --text-eyebrow-lg--font-weight: 700;
 
@@ -293,7 +302,8 @@
  * The full eyebrow style in one class, because text-transform has no @theme
  * namespace. COLOR IS THE CALL SITE'S JOB, and the canonical default is
  * neutral `text-fg-muted` (#76746F since the 2026-08 warm shift) — not brand
- * red. On dark bands the frames use plain white.
+ * red. On dark bands the frames use plain white, except the two 2026-08 hero
+ * sets, which draw brand red on ink and on light alike (`2457:1854`).
  */
 @utility eyebrow {
   font-size: var(--text-eyebrow);
