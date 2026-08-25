@@ -96,6 +96,35 @@ does four things:
 It is safe to re-run and will not overwrite an env file, a symlink, or a `.env`
 that is already there.
 
+### It runs itself, so no worktree depends on being created the right way
+
+Provisioning used to happen only if the thing that made the checkout called it
+— `pnpm wt new` did, and Orca did only where its repo settings point at
+`orca.yaml`. On 2026-08-25 four live worktrees were in three different states:
+one fully provisioned, two with the env files but **no `.env`**, one with
+neither. A worktree with no `.env` has no ports, so every server in it boots on
+the 3000/6006 defaults and takes down whatever is already there — and a
+worktree with no `apps/web/.env.local` has no read token, so
+`/api/draft-mode/enable` 500s and Presentation is dead on arrival for every
+route in it.
+
+So it is no longer anyone's job to remember. Two hooks call it, both with
+`--no-install`, which does everything but step 4:
+
+- **`prepare`** (`package.json`) — pnpm runs it at the end of every install, so
+  any checkout that has dependencies has been provisioned, however it was made.
+  This is the one that matters; a worktree nobody installed is not a worktree
+  anyone is working in.
+- **`scripts/dev.sh`** — provisions when `.env` is missing, before it reads the
+  ports. This covers the checkouts installed before the `prepare` hook existed,
+  without their owners having to know it changed.
+
+Both paths are cheap on the common case: the script writes nothing it does not
+have to, so a provisioned worktree costs four "keep" lines.
+
+`--no-install` is not an optimisation. `prepare` runs at the END of an install,
+so a provisioner that installed would re-enter it.
+
 **The web port pools are bounded by Sanity CORS, one pool per brand.** Every
 port a browser hits needs a matching origin, and an origin belongs to one Sanity
 project — so 3600-3609 are registered on o3's and 3700-3709 on o3xo's (ADR 0028).

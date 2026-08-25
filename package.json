@@ -26,7 +26,7 @@
     "frontier": "./scripts/frontier.sh",
     "knip": "knip --no-config-hints",
     "lint": "turbo run lint",
-    "prepare": "[ -n \"$VERCEL\" ] || [ -n \"$CI\" ] || lefthook install",
+    "prepare": "[ -n \"$VERCEL\" ] || [ -n \"$CI\" ] || { lefthook install; bash scripts/worktree-provision.sh --no-install || true; }",
     "schema:check": "pnpm --filter @o3/sanity schema:check",
     "schema:deploy": "pnpm --filter @o3/sanity schema:deploy",
     "skill:lint": "./scripts/skill-lint.sh",

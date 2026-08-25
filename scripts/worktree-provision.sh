@@ -16,9 +16,15 @@
 # Callers: `pnpm wt new` (scripts/worktree.sh) and Orca's setup hook
 # (scripts/orca-hooks.sh). Both paths land here so they cannot drift.
 #
-#   bash scripts/worktree-provision.sh [worktree-path]   # default: $PWD
+#   bash scripts/worktree-provision.sh [worktree-path] [--no-install]
 #
-# Safe to re-run: existing env files, symlinks, and `.env` are left alone.
+# `--no-install` does everything but step 4. It is what `prepare` uses: pnpm
+# runs `prepare` at the END of an install, so re-entering install from inside
+# it would recurse.
+#
+# Safe to re-run, and re-run often: existing env files, symlinks, and `.env`
+# are left alone, so the common case is four "keep" lines and no writes. That
+# is what lets `prepare` and `dev.sh` both call it unconditionally.
 
 set -uo pipefail
 
@@ -51,8 +57,26 @@ CARRY_FILES=(.env.local apps/web/.env.local .vercel/project.json)
 CARRY_OPTIONAL=(apps/o3xo/.env.local)
 CARRY_DIRS=(prototype)
 
-WT="$(cd "${1:-$PWD}" 2>/dev/null && pwd)" || {
-  echo "provision: no such directory: ${1:-$PWD}" >&2
+NO_INSTALL=0
+WT_ARG=""
+for arg in "$@"; do
+  case "$arg" in
+    --no-install) NO_INSTALL=1 ;;
+    -*)
+      echo "provision: unknown option: $arg" >&2
+      exit 64
+      ;;
+    *) WT_ARG="$arg" ;;
+  esac
+done
+
+# `pwd -P`, not `pwd`: git reports the common dir as a PHYSICAL path, and on
+# macOS `/var` is a symlink to `/private/var`. Comparing a logical path to a
+# physical one made the "this IS the main checkout" guard below miss, so the
+# script would carry files into the main checkout and write it a worktree's
+# ports — which `prepare` now runs on every install.
+WT="$(cd "${WT_ARG:-$PWD}" 2>/dev/null && pwd -P)" || {
+  echo "provision: no such directory: ${WT_ARG:-$PWD}" >&2
   exit 1
 }
 
@@ -161,6 +185,11 @@ EOF
 fi
 
 # --- 4. dependencies -------------------------------------------------------
+
+if [[ $NO_INSTALL == 1 ]]; then
+  echo "provision: done (--no-install)."
+  exit 0
+fi
 
 echo "  pnpm install…"
 if ! (cd "$WT" && pnpm install --reporter=silent); then

@@ -16,6 +16,18 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 app="${1:?usage: dev.sh web|o3xo|storybook|storybook-o3xo}"
 
+# A worktree with no `.env` has no ports of its own, so every server in it
+# boots on the 3000/6006 defaults and collides with whatever is already there.
+# That is the state a worktree is left in when nothing ran the provisioner —
+# `prepare` covers every checkout installed since it was wired up, and this
+# covers the ones installed before, without anyone having to know that.
+#
+# Cheap and quiet when there is nothing to do: the provisioner writes nothing
+# it does not have to, and is skipped entirely once `.env` exists.
+if [ ! -f "$ROOT/.env" ]; then
+  bash "$ROOT/scripts/worktree-provision.sh" --no-install || true
+fi
+
 if [ -f "$ROOT/.env" ]; then
   set -a
   # shellcheck source=/dev/null
