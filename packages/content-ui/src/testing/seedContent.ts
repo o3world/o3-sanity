@@ -42,6 +42,7 @@ import type {
 
 import type { PageSection, SectionBlockData, SectionProps } from '@o3/content-runtime/blocks'
 import {
+  projectCard,
   projectSeedPage,
   resolveAssetMarkers,
   type SeedDoc,
@@ -254,6 +255,20 @@ export const INSIGHTS: readonly InsightCard[] = [
   insightCms,
   insightConversion,
 ].map((doc) => projectInsight(doc as SeedDoc))
+
+/**
+ * The case-study feed the /work index draws, newest first — the three
+ * translated case studies the homepage showcase already references (ADR 0016
+ * retired the invented seeds it used to hold).
+ *
+ * Card projections, because that is what `CASE_STUDIES_PAGE_QUERY` returns:
+ * `slug` flattened, `headlineStat` lifted off `stats[0]`, client and
+ * industries dereferenced. `projectCard` is the same helper the showcase band
+ * goes through, so the index and the homepage draw one shape.
+ */
+export const CASE_STUDIES: readonly SeedDoc[] = [caseCaron, caseIronman, caseVertex]
+  .map((doc) => projectCard(BY_ID.get((doc as SeedDoc)._id as string) ?? null, resolve))
+  .filter((card): card is SeedDoc => Boolean(card))
 
 /**
  * Every insight a seed page names outright, by `_id` — the curated arm of

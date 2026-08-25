@@ -62,6 +62,20 @@ export function CaseStudyIndexView({ items, pagination, above, below }: CaseStud
       {above}
 
       <div className="px-gutter py-band-sm lg:py-band-md bg-white">
+        {/*
+         * The band the frame draws has no heading — the hero's job, and the
+         * hero is an authored band now. But each card's narrative line is an
+         * `h3` under that hero's `h1`, and a page that skips a level fails an
+         * axe heading-order scan for a real reason: a screen reader's heading
+         * list would offer no way into the stack at all. So the level exists
+         * and is only unseen, exactly as it is on /insights.
+         *
+         * Found by the page story #348 added — the route had this gap before
+         * the hero moved into a document, and nothing drew the whole page in
+         * one place to catch it.
+         */}
+        <h2 className="sr-only">Case studies</h2>
+
         {/* Gap 48 at both widths — `2107:1094`–`1096`, and `2975:8428` at 402. */}
         <ul className="max-w-section mx-auto flex flex-col gap-12">
           {(items ?? []).map((item, index) => (
