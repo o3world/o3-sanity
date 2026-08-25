@@ -8,7 +8,6 @@
  * a slot — a mark is a drawing rather than a colour, so the nav and the
  * footer take one as a required prop and draw it (#228).
  */
-export { HomeOnly } from './HomeOnly'
 export { MobileNavMenu } from './MobileNavMenu'
 export { NavLink, isCurrentSection } from './NavLink'
 export { NavInk, NAV_INK_TARGET } from './NavInk'

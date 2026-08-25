@@ -8,9 +8,16 @@ import { currentYear } from '@/lib/currentYear'
 import { editorToolbarConfig } from '@/sanity/editorToolbar'
 import { VisualEditing } from '@/sanity/VisualEditing'
 import { FOOTER_MARK, NAV_MARK } from '@/components/brand/chromeMarks'
-import { HomeOnly, SiteFooter, SiteNav, UtilityNav } from '@o3/content-ui/chrome'
+import { SiteFooter, SiteNav } from '@o3/content-ui/chrome'
 
-export default async function SiteLayout({ children }: { children: React.ReactNode }) {
+export default async function SiteLayout({
+  children,
+  utility,
+}: {
+  children: React.ReactNode
+  /** The brand-property strip's slot — `@utility`, home only. */
+  utility: React.ReactNode
+}) {
   const [settings, { isEnabled: isDraft }, year] = await Promise.all([
     getSiteSettings(),
     draftMode(),
@@ -24,11 +31,10 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
           frame); the pill below it is fixed. That difference is why the two are
           siblings here rather than one component.
 
-          Home draws it and no interior frame does, so `HomeOnly` is what keeps
-          it a front-door element rather than site-wide chrome. */}
-      <HomeOnly>
-        <UtilityNav settings={settings} />
-      </HomeOnly>
+          Home draws it and no interior frame does, so it arrives through the
+          `@utility` slot: the router decides which route fills it, which is
+          the only gate that survives a prerender. */}
+      {utility}
       {/* The chrome draws no mark of its own (#228); these are this app's. */}
       <SiteNav settings={settings} brandMark={NAV_MARK} />
       <main className="min-h-screen">{children}</main>
