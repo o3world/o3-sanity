@@ -105,7 +105,14 @@ export function InsightIndexView({
 
       {/* `2337:4485` — bone, 128px 96px, 48px between the filter bar and the
           grid. Unlike the Home and About Blog rows the cards do not bleed past
-          the right edge: the grid has nothing to scroll to at either width. */}
+          the right edge: the grid has nothing to scroll to at either width.
+
+          128 is flat, and the 402 band is deliberately not followed. `2975:8655`
+          pads 24 top and bottom inside a 16px gutter, where every other band on
+          that frame pads 96 or 128 inside the 20px gutter the token defines —
+          it is off-system on both axes at once, which is the signature of a
+          nudged layer rather than a rhythm. band-md is 128 at both widths by
+          design (layout.css), so the band keeps it. */}
       <div className="px-gutter py-band-md bg-bone">
         <div className="max-w-section mx-auto flex flex-col gap-12">
           {/*
@@ -207,6 +214,14 @@ export function InsightIndexView({
        * button is the one authored thing on it: "View our work" → /work, the
        * next move a reader who has just finished the feed can make. Both
        * frames draw it, so the route no longer sends them to /contact.
+       *
+       * **`orbs`, and the frame is why.** Both closers are a full-bleed raster
+       * (`imageRef 51458151e760cc2e868b5f9aa7f2e939609a9a6c`) over a native
+       * 172/64px `--gradient-ink-fade` strip (`2975:8795`, `2975:8807`). That
+       * strip belongs to the sphere's composition, and the same imageRef sits
+       * on Home's own orbs band and on the About, Live and insight-detail
+       * closers — so this is Home's band pasted, not a photograph, and it is
+       * drawn rather than exported for the reason `CtaSection` gives.
        */}
       <CtaSection
         heading="Let’s get started on your next big thing."
@@ -219,7 +234,7 @@ export function InsightIndexView({
           href: '/work',
           target: null,
         }}
-        decoration="molecule"
+        decoration="orbs"
       />
     </>
   )

@@ -328,6 +328,19 @@ describe('insights index composition', () => {
     expect(page.html).toContain('href="/work"')
   })
 
+  /**
+   * The closer is the sphere, not the molecule. Both closer frames
+   * (`2975:8788` at 1440, `2975:8801` at 402) are a full-bleed raster
+   * `imageRef 51458151e760cc2e868b5f9aa7f2e939609a9a6c` over a native
+   * `--gradient-ink-fade` strip (`2975:8795` / `2975:8807`) — the same
+   * construction #317 ruled on, and the same imageRef Home's own orbs band
+   * carries. So it is Home's band pasted, and the route draws `orbs`.
+   */
+  it('closes on the sphere band Home originated', () => {
+    expect(page.html).toContain('--gradient-ink-fade')
+    expect(page.html).not.toContain('w-[54%]')
+  })
+
   it('scrolls the chip row on a phone and nothing else', () => {
     // `2975:8656` is one unwrapped row 10px apart, running past the frame's
     // right edge — the only scroll region the 402 frame draws. The card grid
