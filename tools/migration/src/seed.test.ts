@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest'
 
 import { collectionPrefixes } from '@o3/sanity/brand'
 import { offersSurface } from './lib/surfaceContract'
-import { SECTION_BLOCKS } from '@o3/sanity/schemas/registry'
+import { BLOCK_ARRAYS, SECTION_BLOCKS } from '@o3/sanity/schemas/registry'
 
 import type { Migration } from '@o3/sanity/types/generated'
 
@@ -395,18 +395,82 @@ describe('committed seed content', () => {
    * only checks the first one is a rule the next page silently skips. Nothing
    * here is homepage-specific, so nothing here should be homepage-only.
    */
-  describe('every seeded page', () => {
-    const pages = seeds.filter(({ doc }) => doc._type === 'page')
-    const sectionsOf = (doc: SeedDoc) => (doc.sections ?? []) as Record<string, unknown>[]
+  describe('every seeded composition', () => {
+    /**
+     * WHICH DOCUMENT ARRAYS THESE RULES APPLY TO.
+     *
+     * Was `page.sections` alone, which meant the three rules below silently
+     * skipped `collectionIndex`'s two arrays the day they existed (#347/#348):
+     * a band there could name an unregistered `_type`, repeat a `_key`, or
+     * omit the `surface` a `heroSection` at `variant: 'band'` really reads,
+     * and nothing failed.
+     *
+     * `mayBeEmpty` is the one difference between them. A page with no sections
+     * is a blank page and always a mistake; a collection index with an empty
+     * `sectionsBelow` is an index that closes on its feed, which is a
+     * composition someone may legitimately choose.
+     *
+     * The list is authored, and `covers every block-bearing document array`
+     * below is what stops it drifting from the registry.
+     */
+    const COMPOSITIONS = [
+      { type: 'page', field: 'sections', mayBeEmpty: false },
+      { type: 'collectionIndex', field: 'sectionsAbove', mayBeEmpty: true },
+      { type: 'collectionIndex', field: 'sectionsBelow', mayBeEmpty: true },
+    ] as const
 
-    it('has pages to check', () => {
+    /**
+     * `caseStudy.story` is block-bearing and deliberately not here: it
+     * interleaves section blocks with `chapter`, a shared object (ADR 0018),
+     * so "only registered section blocks" is false of it by design. There are
+     * no seeded case studies today — they are translated, not seeded — so the
+     * exclusion costs no coverage.
+     */
+    const NOT_A_COMPOSITION = new Set(['caseStudy.story'])
+
+    /** Every seeded array these rules cover, flattened, each with its address. */
+    const compositions = seeds.flatMap(({ file, doc }) =>
+      COMPOSITIONS.filter((entry) => entry.type === doc._type).map((entry) => ({
+        file: `${file} → ${entry.field}`,
+        mayBeEmpty: entry.mayBeEmpty,
+        sections: (doc[entry.field] ?? []) as Record<string, unknown>[],
+      })),
+    )
+
+    /**
+     * Still page-only, and correctly so: the slug rule below is about a
+     * routable document's URL, and a collection index deliberately has none —
+     * the route owns its URL and finds the document by `collection`.
+     */
+    const pages = seeds.filter(({ doc }) => doc._type === 'page')
+
+    it('has compositions to check', () => {
+      expect(compositions.length).toBeGreaterThan(0)
       expect(pages.length).toBeGreaterThan(0)
     })
 
+    /**
+     * The registry is the source; this list is the mirror, so the mirror is
+     * checked. A new block-bearing array on a DOCUMENT either joins
+     * `COMPOSITIONS` or says why it cannot — otherwise it inherits the
+     * silence this whole block was widened to remove.
+     */
+    it('covers every block-bearing document array in the registry', () => {
+      const documentTypes = new Set(seeds.map(({ doc }) => doc._type as string))
+      const declared = new Set(COMPOSITIONS.map((entry) => `${entry.type}.${entry.field}`))
+      const hosted = Object.keys(BLOCK_ARRAYS).filter((key) =>
+        documentTypes.has(key.split('.')[0]!),
+      )
+
+      for (const key of hosted) {
+        if (NOT_A_COMPOSITION.has(key)) continue
+        expect(declared, `${key} holds blocks and no seed rule covers it`).toContain(key)
+      }
+    })
+
     it('composes only registered section blocks — no bespoke types', () => {
-      for (const { file, doc } of pages) {
-        const sections = sectionsOf(doc)
-        expect(sections.length, `${file} has no sections`).toBeGreaterThan(0)
+      for (const { file, sections, mayBeEmpty } of compositions) {
+        if (!mayBeEmpty) expect(sections.length, `${file} is empty`).toBeGreaterThan(0)
         for (const s of sections) {
           expect(
             SECTION_BLOCKS as readonly string[],
@@ -416,9 +480,9 @@ describe('committed seed content', () => {
       }
     })
 
-    it('gives every section a _key unique within the page', () => {
-      for (const { file, doc } of pages) {
-        const keys = sectionsOf(doc).map((s) => s._key)
+    it('gives every section a _key unique within its array', () => {
+      for (const { file, sections } of compositions) {
+        const keys = sections.map((s) => s._key)
         expect(keys.every(Boolean), `${file} has a section with no _key`).toBe(true)
         expect(new Set(keys).size, `${file} repeats a section _key`).toBe(keys.length)
       }
@@ -433,8 +497,8 @@ describe('committed seed content', () => {
     // declaration section by section, so the day another band fixes its colour
     // — or gates the control — this test already knows.
     it('sets an explicit surface on every section that offers one', () => {
-      for (const { file, doc } of pages) {
-        for (const s of sectionsOf(doc)) {
+      for (const { file, sections } of compositions) {
+        for (const s of sections) {
           if (!offersSurface(s)) {
             expect(s.surface, `${file}: ${String(s._type)} paints its own surface`).toBeUndefined()
             continue

@@ -223,7 +223,7 @@ describe('work index authored bands', () => {
 
     const read = calls.find((call) => call.query === COLLECTION_INDEX_QUERY)
     expect(read?.params).toMatchObject({ collection: 'caseStudy' })
-    expect(read?.tags).toContain('sanity:collectionIndex:caseStudy')
+    expect(read?.tags).toEqual(['sanity:collectionIndex'])
   })
 
   /**

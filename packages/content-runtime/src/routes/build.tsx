@@ -332,18 +332,18 @@ export function buildIndexRoute<Q extends string>(entry: IndexEntry<Q>): IndexRo
   /**
    * The authored chrome, or `null` where the entry declares none.
    *
-   * Tagged per document as well as per type: the params identify exactly one
-   * document (`{collection: 'insight'}`), so its tag can name it and a publish
-   * of the OTHER collection's chrome need not flush this page. The values are
-   * joined rather than assumed to be a slug — this document has none.
+   * TYPE-TAGGED ONLY, and that is the whole of it. The webhook builds a
+   * per-document tag from `slug.current` and this document deliberately has no
+   * slug, so a `sanity:<type>:<key>` tag registered here could never be
+   * revalidated by anything — it would read as a narrower invalidation than
+   * the route actually has. One collection's chrome publishing therefore
+   * flushes both indexes, which is a wasted regeneration of one page and not a
+   * correctness problem.
    */
   const fetchDocument = async (read: ReadMode): Promise<unknown> => {
     const doc = entry.document
     if (!doc) return null
-    const params = doc.params ?? {}
-    const key = Object.values(params).join(':')
-    const docTags = key ? [docTag(doc.type, key), typeTag(doc.type)] : [typeTag(doc.type)]
-    return (await readContent(doc.query, params, docTags, read)) ?? null
+    return (await readContent(doc.query, doc.params ?? {}, [typeTag(doc.type)], read)) ?? null
   }
 
   /**
@@ -360,7 +360,17 @@ export function buildIndexRoute<Q extends string>(entry: IndexEntry<Q>): IndexRo
     const read = metadataRead(await currentReadMode())
     const doc = await fetchDocument(read)
     const authored = (doc as { seo?: SeoOverrides | null } | null)?.seo
-    if (!entry.seo && !authored) return {}
+
+    /**
+     * No static SEO means no `path`, and `path` is the only thing a canonical
+     * can be built from here — an empty one resolves to the bare origin, so
+     * every page of the index would claim the homepage as its canonical.
+     * Emitting nothing is strictly better than emitting that.
+     *
+     * `defineIndexType` makes this unreachable for an entry with a `document`.
+     * It stays because the type only guards the construction site.
+     */
+    if (!entry.seo) return {}
 
     /**
      * Every override an index honours EXCEPT `canonical`.
@@ -380,9 +390,7 @@ export function buildIndexRoute<Q extends string>(entry: IndexEntry<Q>): IndexRo
 
     return buildDocumentMetadata({
       seo,
-      // An entry that declares a `document` must declare `seo` too — it is
-      // what supplies `path`, and the canonical is built from it.
-      doc: entry.seo ?? { title: null, description: null, image: null, path: '' },
+      doc: entry.seo,
       settings: await getSiteSettings(),
     })
   }

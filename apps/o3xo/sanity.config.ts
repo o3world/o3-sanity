@@ -47,6 +47,14 @@ const structure: StructureResolver = (S) =>
       S.documentTypeListItem('page').title('Pages'),
       S.documentTypeListItem('caseStudy').title(collections.caseStudy.title),
       S.documentTypeListItem('insight').title(collections.insight.title),
+      /*
+       * NO collection-index entry, deliberately. The `collectionIndex` schema
+       * is registered for both brands because the content model is one model
+       * (ADR 0028), but only `apps/web`'s index routes read it — o3xo's two
+       * indexes still carry their copy in their views. Offering the document
+       * here would let an editor compose bands nothing draws. The entry
+       * arrives with the o3xo half of #347, on that brand's own branch.
+       */
       S.divider(),
       S.documentTypeListItem('person').title('People'),
       S.documentTypeListItem('client').title('Clients'),

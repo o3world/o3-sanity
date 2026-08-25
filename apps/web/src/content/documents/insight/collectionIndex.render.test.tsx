@@ -478,7 +478,10 @@ describe('insights index authored bands', () => {
     const read = calls.find((call) => call.query === COLLECTION_INDEX_QUERY)
     expect(read?.params).toMatchObject({ collection: 'insight' })
     expect(read?.tags).toContain('sanity:collectionIndex')
-    expect(read?.tags).toContain('sanity:collectionIndex:insight')
+    // And NOTHING narrower. The webhook builds a per-document tag from
+    // `slug.current`; this document has no slug, so a per-document tag here
+    // would be one nothing can ever revalidate.
+    expect(read?.tags).toEqual(['sanity:collectionIndex'])
   })
 
   /**
@@ -553,12 +556,6 @@ describe('insights index metadata', () => {
   })
 
   /**
-   * The one override an index does NOT honour. A collection index's URL is the
-   * route's, and the route canonicalizes every paginated and filtered page
-   * back to it — an editor-typed canonical would break that rule for the whole
-   * collection at once, so the field is ignored here rather than obeyed.
-   */
-  /**
    * The seed's own SEO, carried from the origin site's /perspectives archive
    * page with the one word ADR 0017 retired swapped for the one that replaced
    * it — the collection is Insights now, so the title cannot advertise
@@ -574,6 +571,12 @@ describe('insights index metadata', () => {
     expect(String(metadata.title)).not.toContain('Perspectives')
   })
 
+  /**
+   * The one override an index does NOT honour. A collection index's URL is the
+   * route's, and the route canonicalizes every paginated and filtered page
+   * back to it — an editor-typed canonical would break that rule for the whole
+   * collection at once, so the field is ignored here rather than obeyed.
+   */
   it('ignores a canonical typed onto the document', async () => {
     const { metadata } = await renderRoute(route, {
       data: withIndexChrome(

@@ -225,9 +225,16 @@ export const CASE_STUDIES_PAGE_QUERY = defineQuery(`{
  *
  * Matched on `collection` rather than a slug: this document has no URL of its
  * own, and the route it belongs to is the fact that identifies it.
+ *
+ * Ordered before the slice even though `collection` is validated unique. The
+ * uniqueness rule runs in Studio, and a document can reach a dataset without
+ * passing through one — a migration load, an import, an API write. Ordering
+ * costs nothing here and turns "whichever came back first" into a stable
+ * answer, so a duplicate shows up as one index consistently winning rather
+ * than as a page that changes between requests.
  */
 export const COLLECTION_INDEX_QUERY =
-  defineQuery(`*[_type == "collectionIndex" && collection == $collection][0]{
+  defineQuery(`*[_type == "collectionIndex" && collection == $collection] | order(_id)[0]{
   _id,
   _type,
   title,

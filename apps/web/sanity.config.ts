@@ -42,6 +42,35 @@ const structure: StructureResolver = (S) =>
       S.documentTypeListItem('caseStudy').title('Work'),
       S.documentTypeListItem('insight').title('Insights'),
       S.divider(),
+      /*
+       * The two collection indexes, pinned the way Site Settings is rather
+       * than listed as a type (#347, #348).
+       *
+       * There is exactly one of each and the route finds it by `collection`,
+       * so a type list would offer a "create" button whose only use is to make
+       * a second document one of the two routes might then pick instead. Two
+       * fixed doors, and the ids are the seeds' — deterministic by the
+       * migration contract, which is what makes pinning them safe.
+       */
+      S.listItem()
+        .title('Insights index')
+        .id('collectionIndex-insights')
+        .child(
+          S.document()
+            .schemaType('collectionIndex')
+            .documentId('collectionIndex-seed-insights')
+            .title('Insights index'),
+        ),
+      S.listItem()
+        .title('Work index')
+        .id('collectionIndex-work')
+        .child(
+          S.document()
+            .schemaType('collectionIndex')
+            .documentId('collectionIndex-seed-work')
+            .title('Work index'),
+        ),
+      S.divider(),
       S.documentTypeListItem('person').title('People'),
       S.documentTypeListItem('client').title('Clients'),
       S.documentTypeListItem('category').title('Categories'),

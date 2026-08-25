@@ -44,7 +44,30 @@ export const collectionIndex = (arrays: BlockArrays) =>
         type: 'string',
         options: { list: [...COLLECTION_TYPES] },
         initialValue: 'insight',
-        validation: (rule) => rule.required(),
+        /**
+         * Required AND unique. The route matches on this value and takes the
+         * first document that answers, so a second index claiming the same
+         * collection would decide the page by whichever the dataset returned
+         * first — the seeded hero and closer disappearing with no error and no
+         * way to tell why.
+         *
+         * `reportSlugCollisions` is what catches this shape for routable types
+         * and cannot cover this one: it keys on `slug.current`, and this
+         * document deliberately has none. So the check is here, where the
+         * value that identifies the document actually is.
+         */
+        validation: (rule) =>
+          rule.required().custom(async (value, context) => {
+            if (!value) return true
+            const id = context.document?._id?.replace(/^drafts\./, '')
+            const taken = await context
+              .getClient({ apiVersion: '2024-10-01' })
+              .fetch<boolean>(
+                `defined(*[_type == "collectionIndex" && collection == $value && !(_id in $ids)][0]._id)`,
+                { value, ids: [id, `drafts.${id}`] },
+              )
+            return taken ? `Another collection index already covers "${value}".` : true
+          }),
       }),
       defineField({
         name: 'sectionsAbove',
