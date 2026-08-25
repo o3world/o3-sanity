@@ -140,12 +140,18 @@ export function CollectionHero({
       <section
         {...surfaceAttrs(painted)}
         className={cn(
-          'px-gutter pb-band-sm relative isolate overflow-hidden lg:pb-16',
+          'pb-band-sm relative isolate overflow-hidden lg:pb-16',
           // `2101:789`: the Interior Hero's container is 192px 0 64px, on
           // #0A0A0B at every route but About, which draws it white
           // (`2960:6876`). The older band is `ink-warm` at 164px of pill
           // clearance and has no second colour.
-          interior ? cn(SURFACE_CLASS[painted], 'pt-[192px]') : 'bg-ink-warm pt-[164px] text-white',
+          //
+          // The redesigned set also draws a TIGHTER MOBILE GUTTER — 16px on
+          // all five 402 instances of it against the 20 the older bands on the
+          // same frames keep (see `--spacing-gutter-tight`).
+          interior
+            ? cn(SURFACE_CLASS[painted], 'px-gutter-tight pt-[192px]')
+            : 'px-gutter bg-ink-warm pt-[164px] text-white',
           className,
         )}
       >

@@ -184,16 +184,17 @@ three-step scale, and top and bottom often differ (`96px 96px 128px`,
 `128px 96px 192px`). This package ships the steps; teaching `SectionShell` to
 take a per-band rhythm is #41.
 
-| Token                   | 402     | 1440                 | Utility          | Role                             |
-| ----------------------- | ------- | -------------------- | ---------------- | -------------------------------- |
-| `--spacing-gutter`      | `20px`  | `96px`               | `px-gutter`      | Horizontal padding on every band |
-| `--spacing-band-sm`     | `96px`  | `96px`               | `py-band-sm`     | The rhythm steps the frames use  |
-| `--spacing-band-md`     | `128px` | `128px`              | `py-band-md`     | (`Layout/Layout 128`)            |
-| `--spacing-band-lg`     | `128px` | `192px`              | `py-band-lg`     | Compresses on mobile             |
-| `--spacing-band-detail` | `64px`  | `128px`              | `py-band-detail` | The insight detail page's bands  |
-| `--spacing-section-y`   | `96px`  | `192px`              | `py-section-y`   | Default for a band with no frame |
-| `--container-section`   | —       | `78rem` (1248px)     | `max-w-section`  | 1440 less two 96px gutters       |
-| `--container-content`   | —       | `64.625rem` (1034px) | `max-w-content`  | Centered statements              |
+| Token                    | 402     | 1440                 | Utility           | Role                             |
+| ------------------------ | ------- | -------------------- | ----------------- | -------------------------------- |
+| `--spacing-gutter`       | `20px`  | `96px`               | `px-gutter`       | Horizontal padding on every band |
+| `--spacing-gutter-tight` | `16px`  | `96px`               | `px-gutter-tight` | The `Interior Hero` band's own   |
+| `--spacing-band-sm`      | `96px`  | `96px`               | `py-band-sm`      | The rhythm steps the frames use  |
+| `--spacing-band-md`      | `128px` | `128px`              | `py-band-md`      | (`Layout/Layout 128`)            |
+| `--spacing-band-lg`      | `128px` | `192px`              | `py-band-lg`      | Compresses on mobile             |
+| `--spacing-band-detail`  | `64px`  | `128px`              | `py-band-detail`  | The insight detail page's bands  |
+| `--spacing-section-y`    | `96px`  | `192px`              | `py-section-y`    | Default for a band with no frame |
+| `--container-section`    | —       | `78rem` (1248px)     | `max-w-section`   | 1440 less two 96px gutters       |
+| `--container-content`    | —       | `64.625rem` (1034px) | `max-w-content`   | Centered statements              |
 
 ## Radii
 
