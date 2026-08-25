@@ -32,6 +32,7 @@
     "./base-url": "./src/base-url.ts",
     "./blocks": "./src/blocks/index.ts",
     "./data-attribute": "./src/dataAttribute.ts",
+    "./dev-revalidate": "./src/devRevalidate.ts",
     "./live": "./src/live.ts",
     "./routes": "./src/routes/index.ts",
     "./seo": "./src/seo.ts",

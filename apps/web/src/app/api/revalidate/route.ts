@@ -24,10 +24,18 @@ import { docTag, typeTag } from '@o3/content-runtime/routes'
  * Configure the webhook with a projection of `{_type, "slug": slug.current}`
  * and the shared secret in `SANITY_REVALIDATE_SECRET`.
  *
- * DEV-ONLY unsigned path: in local dev there is no revalidation webhook; a
- * local script may POST here after writing docs. The bypass requires BOTH
- * development mode AND no configured secret — a set secret means the
- * operator opted into signature checks everywhere.
+ * DEV-ONLY unsigned path: Sanity posts to a public URL, and `localhost` is not
+ * one, so no webhook reaches this route in local dev. The bypass requires BOTH
+ * development mode AND no configured secret — a set secret means the operator
+ * opted into signature checks everywhere.
+ *
+ * **Nobody has to POST here by hand.** The dev server listens to the dataset
+ * and calls this route itself — `startDevRevalidate`, wired up in
+ * `src/instrumentation.ts`. It sends the same payload the webhook does, so
+ * local revalidation exercises this handler rather than approximating it, and
+ * a bug in the tag scheme surfaces here instead of after a deploy. Set a
+ * secret locally and the listener's POSTs start failing signature checks
+ * along with everything else.
  */
 /** The types whose fetches routes subscribe to — every routed page carries at
  * least one of these tags, so flushing them reaches every page that can embed

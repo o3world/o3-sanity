@@ -96,6 +96,22 @@ does four things:
 It is safe to re-run and will not overwrite an env file, a symlink, or a `.env`
 that is already there.
 
+### Published edits refresh without a webhook
+
+Sanity's publish webhook cannot reach `localhost`, so a published change used
+to sit behind a cached read until someone knew to `curl /api/revalidate`.
+Presentation hid that from anyone who happened to be in it — it reads drafts
+live — and left it for everyone else.
+
+The dev server now listens to the dataset and calls its own revalidate route
+(`startDevRevalidate`, wired up in `apps/web/src/instrumentation.ts`). Same
+route, same payload as the real webhook, so local revalidation exercises the
+tag scheme rather than approximating it. Published documents only: draft
+mutations fire on every keystroke and the draft path is already live.
+
+It needs `SANITY_API_READ_TOKEN`, which provisioning carries across — without
+one it says so on boot and does nothing.
+
 ### It runs itself, so no worktree depends on being created the right way
 
 Provisioning used to happen only if the thing that made the checkout called it
