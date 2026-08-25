@@ -32,10 +32,11 @@ import {
  * tests carry a second job: they are the only place that says what the route
  * `/live` resolves to.
  *
- * Contact and 1682 (#48) have no canonical frame at all — their copy is
- * WordPress's, their composition assembled from existing blocks, and both are
- * provisional. #48's gate is "every top-level link resolves", so like Live,
- * these tests are the durable proof the two routes resolve to their bands.
+ * Contact reads off `2960:7557` / `2975:10037` (#331) and stays provisional
+ * only because the form cannot send. 1682 (#48) has no canonical frame at all
+ * — its copy is WordPress's and its composition assembled from existing
+ * blocks. #48's gate is "every top-level link resolves", so like Live, these
+ * tests are the durable proof the two routes resolve to their bands.
  */
 const route = buildCatchAllRoute(CATCH_ALL_TYPES, PAGE_QUERY)
 
@@ -433,34 +434,31 @@ describe('the seeded Contact page', () => {
     expect(bandPaths(html)).toHaveLength(sections.length)
   })
 
-  // No frame authored this order — it is the seed's own: hero, the inquiry
-  // form (#58), the ways to reach the studio, the Handler pull quote.
-  it('resolves to its four bands', () => {
-    expect(sections.map((s) => s._type)).toEqual([
-      'heroSection',
-      'formSection',
-      'layoutSection',
-      'quoteSection',
-    ])
+  // `2960:7557` draws two bands, and the second one holds everything the
+  // portrait, the quote and the address used to have bands of their own for.
+  it('resolves to its two bands', () => {
+    expect(sections.map((s) => s._type)).toEqual(['heroSection', 'formSection'])
   })
 
   it.each([
-    ['hero headline', 'Let’s make exceptional experiences together.'],
-    ['reach eyebrow', 'Get in touch'],
+    ['hero headline', 'experiences together'],
+    ['the visit kicker', 'Visit us'],
+    ['the reach kicker', 'Reach us'],
     ['the studio email', 'hello@o3world.com'],
     ['the studio phone', '(215) 592-4739'],
     ['the mailing address', 'Philadelphia, PA 19125'],
     ['the Handler portrait alt', 'Black and white photo of Justin Handler'],
     ['the Handler quote', 'complex business challenges'],
-  ])('carries WordPress’s %s', (_label, copy) => {
+  ])('folds %s into the form band', (_label, copy) => {
     expect(html).toContain(copy)
   })
 
-  // The mailto CTA stood in for the form in #48 and still does — #58 built
-  // the fields without a handler, so this remains the page's only WORKING
-  // conversion path rather than a leftover.
-  it('keeps the mailto CTA as the one path that actually reaches someone', () => {
+  // The form still cannot send (#58), so the rail's email and phone are the
+  // page's only WORKING conversion path — which is why they are links and not
+  // the flat text the frame draws.
+  it('keeps the email and phone reachable, not printed', () => {
     expect(html).toContain('href="mailto:hello@o3world.com"')
+    expect(html).toContain('href="tel:2155924739"')
   })
 
   it('gives the page a single h1', () => {
@@ -540,19 +538,16 @@ describe('the seeded Contact page', () => {
     })
 
     /**
-     * ADR 0006 — no 402 frame exists for this page either, so the stack is a
-     * renderer decision and the rule is only that nothing escapes sideways.
-     *
-     * `variantsOf` is page-wide, and the reach band below already emits
-     * `md:grid-cols-2`, so this asserts the form's own variant is present and
-     * that **no bare `grid-cols-2`** exists anywhere — an unprefixed one
-     * would put two inputs side by side on a 402 phone.
+     * `2975:10198` keeps the two names SIDE BY SIDE at 402 — a horizontal row
+     * of two 131-wide fields inside a 282 card — so the pair is unprefixed and
+     * a `sm:` variant on it would be the bug. Only the mobile frame proves
+     * this, which is why it is asserted rather than left to the renderer.
      */
-    it('is a stack at 402, the two names pairing only from sm', () => {
+    it('keeps the two names paired at 402, with nothing escaping sideways', () => {
       expect(unprefixedHorizontalScrollUtilities(html)).toEqual([])
       const variants = variantsOf(html, 'grid-cols-2')
-      expect(variants).toContain('sm:grid-cols-2')
-      expect(variants).not.toContain('grid-cols-2')
+      expect(variants).toContain('grid-cols-2')
+      expect(variants).not.toContain('sm:grid-cols-2')
     })
   })
 })

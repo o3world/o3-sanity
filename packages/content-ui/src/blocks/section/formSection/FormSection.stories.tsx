@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
+import { figmaDesign } from '@o3/story-kit'
+
 import { seededSectionArgs } from '../../../testing/seedContent'
 
 import { FormSection } from './FormSection'
@@ -7,10 +9,9 @@ import { FormSection } from './FormSection'
 /**
  * The inquiry form band — `/contact`'s conversion path (#58).
  *
- * ⚠️ **No canonical Figma frame** (`docs/content-sourcing.md`), so this file
- * carries no Design tab and nothing here is transcribed. The band is assembled
- * from parts other frames authored; when a contact frame is commissioned, this
- * is the band it replaces.
+ * A form card beside a rail: `2960:7792` at 1440, `2975:10195` at 402. The
+ * rail carries the portrait, the quote, the attribution and the studio's
+ * address — the two bands that used to follow this one.
  *
  * ⚠️ **The submit path is stubbed.** `onSubmit` calls `preventDefault()`
  * unconditionally, the button is `aria-disabled` (focusable, so its notice is
@@ -19,9 +20,9 @@ import { FormSection } from './FormSection'
  * is worse than no form, and "tidy up that disabled button" is an easy thing
  * for a future pass to do by accident.
  *
- * The fields are **code**, not content (ADR 0014). Only the heading, the note,
- * the dropdown's options and the submit's words come from the document, which
- * is why the stories vary those and nothing else.
+ * The fields are **code**, not content (ADR 0014). The dropdown's options, the
+ * submit's words and everything in the rail come from the document, which is
+ * why the stories vary those and nothing else.
  */
 const meta = {
   title: 'Content/Blocks/Section/FormSection',
@@ -36,12 +37,14 @@ type Story = StoryObj<typeof meta>
 export const AsSeeded: Story = {
   args: seededSectionArgs('contact', 'formSection'),
   globals: { backgrounds: { value: 'bone' } },
+  parameters: { design: figmaDesign('2960:7792') },
 }
 
-/** The two name fields share a row from `sm`, so they stack here. */
+/** The columns stack, and the two name fields still share a row (`2975:10198`). */
 export const Mobile: Story = {
   args: seededSectionArgs('contact', 'formSection'),
   globals: { backgrounds: { value: 'bone' }, viewport: { value: 'mobile' } },
+  parameters: { design: figmaDesign('2975:10195') },
 }
 
 /**
@@ -60,21 +63,36 @@ export const WithoutConsent: Story = {
   globals: { backgrounds: { value: 'bone' } },
 }
 
-/** Header dropped: the form alone, for a page that introduces it some other way. */
+/** The rail dropped: the card alone, on the full measure. */
 export const FormOnly: Story = {
   args: {
     ...seededSectionArgs('contact', 'formSection'),
-    eyebrow: undefined,
-    heading: undefined,
-    note: undefined,
+    media: undefined,
+    quote: undefined,
+    attribution: undefined,
+    details: undefined,
   },
   globals: { backgrounds: { value: 'bone' } },
 }
 
 /**
- * On ink. The submit's fill follows the band's surface rather than the
- * editor's choice — `Button`'s `dark` variant is ink-on-white and would
- * disappear here — so this is where that rule is visible.
+ * With a header. The frame draws none — the card opens at the first name field
+ * — so this is the shape a page that introduces the form some other way gets.
+ */
+export const WithHeader: Story = {
+  args: {
+    ...seededSectionArgs('contact', 'formSection'),
+    eyebrow: 'Start here',
+    heading: 'Tell us what’s in the way.',
+    note: 'The more specific you are about the problem, the more useful our first reply will be.',
+  },
+  globals: { backgrounds: { value: 'bone' } },
+}
+
+/**
+ * On ink. The card declares `white` and the rail does not, so this is where
+ * the split shows: the fields keep their light roles inside the card while the
+ * quote and the address take the band's on-ink alphas (tokens/color.css).
  */
 export const OnInk: Story = {
   args: { ...seededSectionArgs('contact', 'formSection'), surface: 'ink' },

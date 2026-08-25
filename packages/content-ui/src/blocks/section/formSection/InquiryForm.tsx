@@ -6,6 +6,7 @@ import { useState, type ChangeEvent, type FocusEvent, type FormEvent } from 'rea
 import { stegaClean } from '@sanity/client/stega'
 
 import { FIELD_CONTROL_CLASS, FormField } from '@o3/ui'
+import { cn } from '@o3/ui/lib/utils'
 
 import { ButtonLink } from '../../../ButtonLink'
 import type { ButtonLinkData } from '../../../buttonDestination'
@@ -129,16 +130,17 @@ export function InquiryForm({ reasons, consentLabel, button }: InquiryFormProps)
   }
 
   return (
-    <form className="flex flex-col gap-6" noValidate onSubmit={handleSubmit}>
-      {/* `gfield--width-half` on the live form: the two names share a row. */}
-      <div className="grid gap-6 sm:grid-cols-2">
+    <form className="flex flex-col gap-5" noValidate onSubmit={handleSubmit}>
+      {/* The two names share a row at BOTH frame widths — `2975:10198` is a
+          horizontal row of two 131-wide fields inside a 282 card at 402, so
+          this never stacks. */}
+      <div className="grid grid-cols-2 gap-5">
         <FormField name="firstName" label="First name" required error={errors.firstName}>
           {(control) => (
             <input
               {...control}
               type="text"
               autoComplete="given-name"
-              placeholder="Jane"
               className={FIELD_CONTROL_CLASS}
               value={values.firstName}
               onChange={handleChange('firstName')}
@@ -153,7 +155,6 @@ export function InquiryForm({ reasons, consentLabel, button }: InquiryFormProps)
               {...control}
               type="text"
               autoComplete="family-name"
-              placeholder="Smith"
               className={FIELD_CONTROL_CLASS}
               value={values.lastName}
               onChange={handleChange('lastName')}
@@ -169,7 +170,6 @@ export function InquiryForm({ reasons, consentLabel, button }: InquiryFormProps)
             {...control}
             type="email"
             autoComplete="email"
-            placeholder="jsmith@email.com"
             className={FIELD_CONTROL_CLASS}
             value={values.email}
             onChange={handleChange('email')}
@@ -185,7 +185,9 @@ export function InquiryForm({ reasons, consentLabel, button }: InquiryFormProps)
           // platform already does it better: a phone draws its own picker.
           <select
             {...control}
-            className={FIELD_CONTROL_CLASS}
+            // 32px of right padding for the native chevron (`2960:7811`),
+            // against the 20 every other control keeps.
+            className={cn(FIELD_CONTROL_CLASS, 'pr-8')}
             value={values.reason}
             onChange={handleChange('reason')}
             onBlur={handleBlur('reason')}
@@ -213,8 +215,9 @@ export function InquiryForm({ reasons, consentLabel, button }: InquiryFormProps)
         {(control) => (
           <textarea
             {...control}
-            rows={6}
-            className={FIELD_CONTROL_CLASS}
+            // 136px, not a row count — `textarea#c-msg` (`2960:7817`) is the
+            // same height at both frame widths.
+            className={cn(FIELD_CONTROL_CLASS, 'h-[136px] resize-y')}
             value={values.message}
             onChange={handleChange('message')}
             onBlur={handleBlur('message')}
@@ -223,16 +226,17 @@ export function InquiryForm({ reasons, consentLabel, button }: InquiryFormProps)
       </FormField>
 
       {consentLabel ? (
-        <div className="flex items-start gap-3">
+        // `2960:7818`: a 16px box with a 2.5 radius, 13px from its label.
+        <div className="flex items-start gap-[13px]">
           <input
             id="field-consent"
             name="consent"
             type="checkbox"
             checked={consent}
             onChange={(event) => setConsent(event.target.checked)}
-            className="accent-brand mt-1 size-4 shrink-0"
+            className="accent-brand border-fg-muted mt-0.5 size-4 shrink-0 rounded-[2.5px] border"
           />
-          <label htmlFor="field-consent" className="text-nav text-current/70">
+          <label htmlFor="field-consent" className="text-fg-body text-[14px]/[16.8px]">
             {consentLabel}
           </label>
         </div>
