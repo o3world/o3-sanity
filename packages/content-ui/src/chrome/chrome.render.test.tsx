@@ -33,7 +33,7 @@ const settings = JSON.parse(
   ),
 ) as NonNullable<SITE_SETTINGS_QUERY_RESULT>
 
-const O3_NAV_MARK = <BrandMark size={64} className="lg:size-12" />
+const O3_NAV_MARK = <BrandMark size={64} className="lg:-m-2" />
 const O3_FOOTER_MARK = <BrandMark trim size={128} className="lg:size-[148px]" />
 
 /** The footer prints the year it is handed; the layout is what resolves one. */
@@ -125,9 +125,12 @@ describe('the nav bar’s pinned, dark-ink default', () => {
     // The fill is the same alpha at both widths, and the same one the frames
     // carry — `--color-scrim` IS `rgba(3, 3, 3, 0.2)`.
     expect(navHtml).toContain('bg-scrim')
-    // 16px of padding only lands an 80px bar over a 48px mark. The mark is the
-    // app's (#228), so this is the mark `apps/web` hands in.
-    expect(navMark).toContain('lg:size-12')
+    // 16px of padding only lands an 80px bar over a 48px box. The mark is the
+    // app's (#228), so this is the mark `apps/web` hands in: a 64 box cropped
+    // 8px a side, not a 64 drawing scaled down — `2225:2915` holds the same
+    // vector at the same scale the 402 bar's does.
+    expect(navMark).toContain('lg:-m-2')
+    expect(navMark).not.toContain('lg:size-12')
     expect(navMark).toContain('width="64"')
   })
 

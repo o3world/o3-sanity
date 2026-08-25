@@ -1,3 +1,5 @@
+import type { CSSProperties } from 'react'
+
 import { Eyebrow, SURFACE_CLASS, SurfaceProvider, surfaceAttrs } from '@o3/ui'
 import { cn } from '@o3/ui/lib/utils'
 import type { SectionProps } from '@o3/content-runtime/blocks'
@@ -8,6 +10,35 @@ import { SanityImage } from '../../../SanityImage'
 import { resolveSurface } from '../../surface'
 
 type LogoWallSectionProps = SectionProps<'logoWallSection'>
+
+/**
+ * The widest tile the strip ever draws — the 1440 plate (`1864:2395`). Copies
+ * are counted off this rather than off the phone's 168, because a track sized
+ * for the small tile would run out of marks on a desktop.
+ */
+const TILE_WIDTH = 280
+
+/**
+ * How wide the track has to be before it can loop without showing its end.
+ *
+ * The loop shifts by exactly one copy, so what has to cover the viewport is
+ * everything BUT that copy. 4800 leaves a shy 4000 behind a one-copy shift,
+ * which clears the widest display anyone opens this on with room to spare.
+ */
+const TRACK_MIN_WIDTH = 4800
+
+/**
+ * How many times the marks are laid down.
+ *
+ * At least two — one copy cannot loop into itself — and then as many as it
+ * takes to reach `TRACK_MIN_WIDTH`, so a band with three partners marches at
+ * the same speed and with the same continuity as one with six. Six plates make
+ * three copies; three make six.
+ */
+function marqueeCopies(count: number) {
+  if (count < 1) return 1
+  return Math.max(2, Math.ceil(TRACK_MIN_WIDTH / (count * TILE_WIDTH)))
+}
 
 /**
  * Section block: the partners band, rebuilt to the 2026-08 frame
@@ -23,7 +54,7 @@ type LogoWallSectionProps = SectionProps<'logoWallSection'>
  * | Eyebrow  | 18/22 (`Eyebrow size="lg"`), `fg-muted` | the same           |
  * | Heading  | `Heading/h2` — 48/58 Light, ink, 1026px | 36/44 Light        |
  * | Body     | 24/34 (`--text-lead`), `fg-body`, 724px | 20/**32**          |
- * | Logo bar | one centred row of six 280 × 280 tiles  | wraps — see below  |
+ * | Logo bar | one centred row of six 280 × 280 tiles  | the same, smaller |
  * | CTA      | solid ink, "See all partners", arrow    | the same           |
  *
  * The text block's own 32px gap is flat (`1864:2391`, `2975:8084`).
@@ -45,6 +76,27 @@ type LogoWallSectionProps = SectionProps<'logoWallSection'>
  *   6 × 280 = 1680 against a 1248 content column, centred, so the two end
  *   tiles are clipped by the viewport. That is what the frame draws (see the
  *   export of `1864:2390`), and it is why this band bleeds past the gutter.
+ *
+ * ── THE STRIP MOVES ────────────────────────────────────────────────────────
+ *
+ * A row clipped at BOTH ends is a still of something travelling, and Nick
+ * settled it as one (2026-08-25): the marks crawl left on `--animate-marquee`,
+ * a lap per copy, pausing under a pointer and holding still under
+ * `prefers-reduced-motion`. Figma cannot say this either way — it draws stills
+ * — so the period comes from the prototype's client row and the decision from
+ * the ruling, not from the frame.
+ *
+ * The marks are laid down `marqueeCopies` times and the track shifts by
+ * exactly one copy, which is why the loop has no seam: at the end of a lap the
+ * next copy is already where the last one started. Every copy after the first
+ * is `aria-hidden` — a reader hears the six partners once.
+ *
+ * It also settles 402, where the row used to wrap. The 402 frame's `2975:8088`
+ * is the desktop's 1680px row pasted at x −639 — the same un-adapted-capture
+ * tell as the services band — so there was never a mobile treatment to read,
+ * and the wrap existed only so a phone could see all six marks. A moving strip
+ * does that without a second composition, so the wrap is gone and ADR 0006's
+ * switch with it.
  *
  * ── `layout: bar` — the partner page's band (`2332:1708`), #92 ─────────────
  *
@@ -85,6 +137,11 @@ export function LogoWallSection({
 }: LogoWallSectionProps) {
   const resolved = resolveSurface(surface, 'logoWallSection')
   const isBar = stegaClean(layout) === 'bar'
+  const marks = clients ?? []
+  const copies = marqueeCopies(marks.length)
+  const track = Array.from({ length: copies }, (_, copy) =>
+    marks.map((client) => ({ client, copy })),
+  ).flat()
 
   return (
     <SurfaceProvider surface={resolved}>
@@ -141,16 +198,10 @@ export function LogoWallSection({
          * `justify-center` + `overflow-hidden` clip it symmetrically, which is
          * the frame's own composition at 1440 (120px off each end).
          *
-         * Below `lg` it wraps instead of clipping — three across at `sm`, two
-         * on a phone. The 402 frame's `2975:8088` is the desktop's 1680px row
-         * pasted at x −639 — the same un-adapted-capture tell as the services
-         * band — and rendering it as drawn shows one whole mark and two halves,
-         * so the wrap is a renderer decision under ADR 0006 until the file
-         * carries a real mobile treatment (Nick's call, 2026-08-24). What it
-         * protects is that a phone sees all six partners.
-         *
          * The clip must stay `overflow-hidden`; the moment it becomes a scroll
-         * region `home.render.test`'s sideways-scroll guard fails.
+         * region `home.render.test`'s sideways-scroll guard fails. The marquee
+         * is what makes that acceptable at 402 as well as 1440 — a clipped row
+         * nobody can scroll would hide four of the six marks on a phone.
          *
          * `self-stretch` is what holds the clip to the viewport. The band is a
          * column flex container, so this row is a flex item whose width is
@@ -161,24 +212,47 @@ export function LogoWallSection({
          * viewport exactly — and the end tiles clip against it.
          */}
         <div className="-mx-gutter flex justify-center self-stretch overflow-hidden">
-          {/* The px compensates the tiles' negative margins so the outer edge
-           * keeps its hairline; without it the top and left rules are clipped. */}
+          {/*
+           * The track. `shrink-0` is load-bearing twice over: it lets the row
+           * take its content width against a container narrower than it, and
+           * it makes the border box the whole track, which is what
+           * `--marquee-shift` is a percentage OF. Clamped to the container the
+           * shift would resolve against the viewport and the loop would tear.
+           *
+           * The px compensates the tiles' negative margins so the outer edge
+           * keeps its hairline; without it the top and left rules are clipped.
+           * It is margin, so it moves the track without joining its width —
+           * every copy stays exactly one `copies`-th of the box.
+           */}
           <ul
-            className={cn('flex flex-wrap justify-center lg:flex-nowrap', !isBar && 'ml-px mt-px')}
+            style={{ '--marquee-shift': `-${(100 / copies).toFixed(4)}%` } as CSSProperties}
+            className={cn(
+              'animate-marquee flex shrink-0 flex-nowrap',
+              // A pointer on the strip is someone reading it, so the strip
+              // waits. Reduced motion stops it outright: the copies are
+              // identical and the track is centred, so a still marquee is the
+              // frame's own composition and nothing is lost.
+              'hover:[animation-play-state:paused] motion-reduce:animate-none',
+              !isBar && 'ml-px mt-px',
+            )}
           >
-            {(clients ?? []).map((client) => (
+            {track.map(({ client, copy }) => (
               // `plates` — 280 × 280 with 64px of side padding at 1440, so the
               // artwork gets a 152px box (`1864:2395`); the smaller steps
-              // below `lg` follow the wrap, not a frame. Adjacent tiles share
+              // below `lg` are the phone's, not a frame's. Adjacent tiles share
               // one hairline — Figma centres the stroke, so the seams
-              // collapse; `-ml-px` `-mt-px` is the CSS equivalent.
+              // collapse; `-ml-px` `-mt-px` is the CSS equivalent, and it
+              // collapses the seam between two copies as readily as within one.
               //
               // `bar` — the same 280 width and the same 64px padding, at 100
               // tall and with no stroke at all (`2471:2112`). Dropping the
               // plate is what the variant IS, so the negative margins that
               // collapse the seams go with it.
               <li
-                key={client._id}
+                key={`${copy}-${client._id}`}
+                // Every copy after the first is the same six marks again. A
+                // reader hears the partners once.
+                aria-hidden={copy > 0 || undefined}
                 className={cn(
                   'flex shrink-0 items-center justify-center',
                   isBar

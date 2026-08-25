@@ -58,14 +58,38 @@
 }
 
 /*
- * There is no marquee. The client logo row used to crawl one copy left every
- * 26s (`--duration-marquee`, `@keyframes o3marquee`, `--animate-marquee`); the
- * wall is a still 4 × 2 grid now, and the tokens went with the lap. Nothing
- * else in the system keyframes a loop — if something needs one again, it wants
- * its own period next to the durations above, not this one revived.
+ * The partners strip's lap — `LogoWallSection`.
  *
- * The orbital sphere is the something. It took its own periods, below.
+ * No Figma anchor, and there cannot be one: `1864:2390` draws the row 1680
+ * wide against a 1248 column, clipped at both ends, which is a still of a
+ * moving strip and says nothing about the movement. The prototype's client row
+ * crawled one copy left every 26s and that is the period here — sequence and
+ * intent from the prototype is the sanctioned use of one, and Nick confirmed
+ * the strip moves (2026-08-25).
+ *
+ * The period is PER COPY, not per lap of the whole track: the block lays down
+ * several identical copies and hands the keyframe its own shift in
+ * `--marquee-shift`, so adding a copy widens the track without changing how
+ * fast the marks travel. Speed therefore falls out of the tile size — a phone
+ * crawls slower than a desktop because its copy is narrower, which is what
+ * keeps a small strip from looking frantic.
  */
+:root {
+  --duration-marquee: 26s;
+}
+
+@theme {
+  --animate-marquee: marquee var(--duration-marquee) linear infinite;
+
+  /* The shift is the element's, because only the element knows how many copies
+   * it drew. A track with no `--marquee-shift` set holds still rather than
+   * jumping to a guessed offset. */
+  @keyframes marquee {
+    to {
+      transform: translateX(var(--marquee-shift, 0));
+    }
+  }
+}
 
 /*
  * The orbital sphere's turn — `OrbitalSphere motion="orbit"`.

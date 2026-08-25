@@ -33,14 +33,19 @@ type Story = StoryObj<typeof meta>
  *
  * The row is 1680px wide against a 1248px column, so the first and last plates
  * are clipped by the viewport. That is the frame's own composition, not a
- * layout bug: compare the export of `1864:2390`.
+ * layout bug: compare the export of `1864:2390` — and it is a still of a strip
+ * that travels, so in a browser the marks crawl left. Hover to stop them.
  */
 export const AsSeeded: Story = {
   args: seededSectionArgs('index', 'logoWallSection'),
   globals: { backgrounds: { value: 'bone' } },
 }
 
-/** Two plates across, wrapped to three rows — the band's only composition switch. */
+/**
+ * The band on a phone. One row still, crawling — the wrap this story used to
+ * show is gone, because a moving strip shows all six marks at 402 without a
+ * second composition.
+ */
 export const Mobile: Story = {
   args: seededSectionArgs('index', 'logoWallSection'),
   globals: { backgrounds: { value: 'bone' }, viewport: { value: 'mobile' } },
@@ -67,7 +72,8 @@ export const NoBody: Story = {
 
 /**
  * A partial strip. Six is what the frame draws and what the seed carries, but
- * the count is the editor's — three must stay centred rather than stretching.
+ * the count is the editor's — three must fill the row and travel at the same
+ * speed six do, which is what the copy count exists to hold.
  */
 export const ThreeClients: Story = {
   args: {
@@ -103,7 +109,7 @@ export const Bar: Story = {
   globals: { backgrounds: { value: 'bone' } },
 }
 
-/** The bar below `lg`, where the row wraps instead of clipping. */
+/** The bar on a phone — clipped and crawling, like the plates band. */
 export const BarMobile: Story = {
   args: seededSectionArgs('partners-sanity', 'logoWallSection'),
   globals: { viewport: { value: 'mobile' }, backgrounds: { value: 'bone' } },

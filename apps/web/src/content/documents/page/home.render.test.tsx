@@ -242,19 +242,27 @@ describe('the homepage at 402 (ADR 0006)', () => {
     expect(variantsOf(html, 'snap-x')).toEqual(['snap-x'])
   })
 
-  it('clips the partner strip at 1440 and wraps it below lg', () => {
-    // The 1440 row clips symmetrically; the 402 frame's `2975:8088` is the
-    // desktop row pasted at x −639, not a mobile treatment, so below `lg` the
-    // wrap is a renderer decision under ADR 0006 — a phone sees all six marks.
+  it('clips the partner strip at every width and crawls it instead of wrapping', () => {
+    // The 1440 row clips symmetrically, and so does the 402 one: the frame's
+    // `2975:8088` is the desktop row pasted at x −639, not a mobile treatment,
+    // so there was never a second composition to read. The row used to wrap
+    // below `lg` so a phone could see all six marks; the marquee does that at
+    // both widths (Nick, 2026-08-25), which is why the wrap is gone rather
+    // than sitting alongside it.
+    //
     // Matched on the row's own class attribute, because the platforms tab row
     // (`PanelRail`) also wraps below `lg` and would answer for this one in a
     // document-wide probe.
-    const row = html.match(/<ul class="([^"]*ml-px[^"]*)"/)?.[1] ?? ''
+    const row = html.match(/<ul[^>]*class="([^"]*ml-px[^"]*)"/)?.[1] ?? ''
     expect(row, 'the partner strip was not rendered').not.toBe('')
-    expect(row).toContain('lg:flex-nowrap')
-    expect(row).toContain('flex-wrap')
-    expect(html).not.toContain('animate-marquee')
-    expect(html).not.toContain('lg:w-max')
+    expect(row).toContain('flex-nowrap')
+    expect(row).not.toContain('flex-wrap')
+    expect(row).toContain('animate-marquee')
+    expect(row).toContain('motion-reduce:animate-none')
+    // The track sizes itself off `shrink-0`, so the 402 probe above stays
+    // exact: `w-max` at any width would fail it, prefixed or not.
+    expect(row).toContain('shrink-0')
+    expect(html).not.toContain('w-max')
   })
 
   it('sizes the partner plates from the 1440 row, stepping down with the wrap', () => {

@@ -171,11 +171,14 @@ export function SiteNav({ settings, brandMark }: SiteNavProps) {
                 <li key={item._key ?? `nav-${i}`}>
                   <Link
                     href={resolveButtonHref(item)}
-                    // `Button / Ghost` ships no Hover variant, so this hover is a
-                    // code decision rather than a read one (#38's State rule).
-                    // No `text-*` here: the ink is the bar's, inherited, so the
-                    // flip needs no second rule per link.
-                    className="text-button focus-visible:ring-brand duration-(--duration-hover) transition-opacity ease-out hover:opacity-70 focus-visible:outline-none focus-visible:ring-2"
+                    // The bar's own `Link` set (`2225:2894`) ships the hover:
+                    // `State=Hover` is `#EB1000` — `--color-brand` — against
+                    // the default's white. It is a colour, not a variant, so it
+                    // lands as a `hover:` rule (#38's State rule) and it is the
+                    // same red on both skins, which is why the flip needs no
+                    // second rule. No resting `text-*` here: that ink is the
+                    // bar's, inherited.
+                    className="text-button hover:text-brand focus-visible:ring-brand duration-(--duration-hover) transition-colors ease-out focus-visible:outline-none focus-visible:ring-2"
                   >
                     {item.label}
                   </Link>

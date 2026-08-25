@@ -39,6 +39,8 @@ const html = renderToStaticMarkup(
 )
 
 const tiles = html.match(/<li[^>]*>/g) ?? []
+/** The marks a reader is offered — the marquee's copies are all `aria-hidden`. */
+const spoken = tiles.filter((tile) => !tile.includes('aria-hidden'))
 
 describe('the partners band', () => {
   it('renders the eyebrow, the heading and the standfirst as three parts', () => {
@@ -67,9 +69,13 @@ describe('the partners band', () => {
     expect(html).toContain('text-lead')
   })
 
-  it('renders each client exactly once', () => {
-    expect(tiles).toHaveLength(CLIENTS.length)
-    expect(html).not.toContain('aria-hidden="true"')
+  it('offers each client to a reader exactly once, however many copies it draws', () => {
+    // The marquee lays the six marks down several times so the loop has
+    // somewhere to travel; only the first copy is real. A duplicate that
+    // forgot its `aria-hidden` reads the partner list out three times over.
+    expect(spoken).toHaveLength(CLIENTS.length)
+    expect(tiles.length).toBeGreaterThan(CLIENTS.length)
+    expect(tiles.length % CLIENTS.length).toBe(0)
   })
 
   it('lays the tiles out as one row, not a grid', () => {
@@ -77,18 +83,20 @@ describe('the partners band', () => {
     // point of the restructure, so a surviving grid is a failed rebuild.
     expect(html).not.toContain('grid-cols-2')
     expect(html).not.toContain('lg:grid-cols-3')
-    // One clipped row at `lg` (`1864:2390`); below it the row wraps — the 402
-    // frame's `2975:8088` is the desktop row pasted, not a mobile treatment,
-    // so the wrap is a renderer decision under ADR 0006.
-    expect(html).toContain('lg:flex-nowrap')
-    expect(html).toContain('flex-wrap')
+    // One clipped row at every width. The wrap that used to carry 402 is gone
+    // with the marquee: a moving strip shows a phone all six marks without a
+    // second composition, so there is no `lg:` switch left to make.
+    expect(html).toContain('flex-nowrap')
+    expect(html).not.toContain('flex-wrap')
+    expect(html).not.toContain('lg:flex-nowrap')
   })
 
   it('gives every tile the frame’s square plate and one shared hairline', () => {
     // 280 × 280 with 64px side padding at 1440, hairlined `border-line`
     // (#D6D3CC since this band anchored the token); the smaller steps below
-    // `lg` follow the wrap. `-ml-px` / `-mt-px` is what collapses two adjacent
-    // 1px borders into the single rule Figma's centred stroke draws.
+    // `lg` are the phone's. `-ml-px` / `-mt-px` is what collapses two adjacent
+    // 1px borders into the single rule Figma's centred stroke draws — between
+    // two copies of the marquee as readily as within one.
     for (const tile of tiles) {
       expect(tile).toContain('lg:size-[280px]')
       expect(tile).toContain('size-[168px]')
@@ -106,6 +114,9 @@ describe('the partners band', () => {
     expect(html).toContain('-mx-gutter')
     expect(html).toContain('overflow-hidden')
     expect(html).not.toContain('overflow-x-')
+    // The track takes its content width from `shrink-0`, never from `w-max`:
+    // `w-max` is one of the utilities ADR 0006's 402 probe counts as a bug on
+    // sight, and the clip is what makes the width safe either way.
     expect(html).not.toContain('w-max')
   })
 
@@ -114,6 +125,19 @@ describe('the partners band', () => {
   // (visible in the export of `1864:2390`, absent from the REST payload).
   // Asserted in `home.render.test`, not here: `SanityImage` renders nothing
   // for the `logo: null` fixtures above, so there is no `<img>` to check.
+
+  it('crawls the strip, pausing under a pointer and stopping for reduced motion', () => {
+    // A row clipped at both ends is a still of something travelling (Nick,
+    // 2026-08-25). The two escapes are the part worth guarding: a marquee
+    // nobody can pause is unreadable, and one that ignores the setting is an
+    // accessibility defect rather than a taste question.
+    expect(html).toContain('animate-marquee')
+    expect(html).toContain('motion-reduce:animate-none')
+    expect(html).toContain('hover:[animation-play-state:paused]')
+    // The shift is one copy of however many were drawn — the element's, since
+    // only it knows the count. Without it the keyframe holds still.
+    expect(html).toMatch(/--marquee-shift:\s*-[\d.]+%/)
+  })
 
   it('paints the warm wash rather than a flat bone', () => {
     expect(html).toContain('--gradient-surface-wash-warm')
