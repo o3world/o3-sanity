@@ -534,25 +534,19 @@ export const inFlightSection = defineSectionBlock({
             defineField({
               name: 'media',
               type: 'figure',
-              description: 'The card image. Ignored by the rows layout, which draws a disc.',
+              description: 'The card image. Ignored by the rows layout, which draws no media.',
             }),
             defineField({
               name: 'date',
               type: 'date',
               description:
-                'When it happens — the rows layout draws it as the red MON / DD marker. Leave empty and the row leads with its mark instead.',
+                'When it happens — the rows layout draws it as the red MON / DD marker. Leave it empty and the row leads with its copy.',
             }),
             defineField({
               name: 'button',
               type: 'button',
               description:
                 'Where the row goes. The label is never drawn — it names the arrow control for a screen reader.',
-            }),
-            defineField({
-              name: 'mark',
-              type: 'mark',
-              description:
-                'The circle a dateless row leads with — an orb unless set to disc. A row with a date draws the date marker instead.',
             }),
           ],
           preview: { select: { title: 'heading', subtitle: 'eyebrow', media: 'media.image' } },

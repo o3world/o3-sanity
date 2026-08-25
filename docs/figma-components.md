@@ -398,13 +398,12 @@ Honest limits on the above:
   complete, the usage column is not.
   - **Live is now opened** (#50, `1644:1889` / `1906:334`) and adds nothing to
     the registry. It instances `NavBar`, `Brand / Logo`, `Button / Solid` and
-    `Icon / Surface`, and draws the same `HalftoneDisc` halftone the About
-    careers band uses at a 113px diameter. One usage note: its `Icon / Surface`
+    `Icon / Surface`. One usage note: its `Icon / Surface`
     instances are **links**, not carousel controls, so `InFlightSection` inlines
     the circle rather than reaching for `CarouselControl` (a `<button>` with
     prev/next semantics). If a third use appears, lift the circle out of both.
     The same wait governs the wider **ledger row** (`InFlightSection.EntryRow`
-    and `RoleListSection`'s row share the hairline shell and disc/eyebrow/
+    and `RoleListSection`'s row share the hairline shell and eyebrow/
     heading arrangement, but diverge in lead, control, and responsive
     composition — a shared module's interface would be as wide as the two
     implementations) and the **snap track** (`InFlightSection`'s cards row

@@ -399,6 +399,18 @@ describe('the seeded Live page', () => {
   })
 
   /**
+   * The ideas rows are lead-less. `1732:1416` holds one child — the kicker and
+   * heading stack `1899:4281`, which takes the full 684 the row already
+   * measured for two. Only the appearances band has a lead, and it is the
+   * date column.
+   */
+  it('draws no mark beside an idea', () => {
+    expect(html).not.toContain('w-[113px]')
+    // The date lead survives on the appearances rows above it.
+    expect(html).toContain('size-[9px]')
+  })
+
+  /**
    * The frame's rows end in an icon-only control, so its accessible name has
    * to come from the button label — that is the label's whole job here (nothing
    * draws it).

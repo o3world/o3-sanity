@@ -313,7 +313,6 @@ export type InFlightSection = {
     media?: Figure
     date?: string
     button?: Button
-    mark?: Mark
     _type: 'entry'
     _key: string
   }>
@@ -1819,7 +1818,6 @@ export type CASE_STUDY_QUERY_RESULT = {
             contrast?: 'auto' | 'dark' | 'ghost' | 'light'
             icon?: 'arrow' | 'down' | 'external' | 'none'
           } | null
-          mark?: Mark
           _type: 'entry'
           _key: string
         }> | null
@@ -2646,7 +2644,6 @@ export type PAGE_QUERY_RESULT = {
             contrast?: 'auto' | 'dark' | 'ghost' | 'light'
             icon?: 'arrow' | 'down' | 'external' | 'none'
           } | null
-          mark?: Mark
           _type: 'entry'
           _key: string
         }> | null
