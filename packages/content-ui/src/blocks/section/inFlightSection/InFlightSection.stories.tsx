@@ -59,12 +59,14 @@ export const DiscRows: Story = {
 export const RowsMobile: Story = {
   args: seededSectionArgs('live', 'inFlightSection', 1),
   globals: { viewport: { value: 'mobile' } },
-  parameters: { design: figmaDesign('1906:334') },
+  parameters: { design: figmaDesign('1906:579') },
 }
 
+/** "The work in the studio" at 402 (`1906:342`). */
 export const CardsMobile: Story = {
   args: seededSectionArgs('live', 'inFlightSection', 0),
   globals: { viewport: { value: 'mobile' } },
+  parameters: { design: figmaDesign('1906:342') },
 }
 
 /** Header dropped — the band is entries only. */
@@ -74,6 +76,7 @@ export const NoHeader: Story = {
     heading: undefined,
     subheading: undefined,
   },
+  parameters: { design: figmaDesign('1710:1800') },
 }
 
 /** A card with no media: the square must not leave a hole in the row. */
@@ -84,4 +87,5 @@ export const CardWithoutMedia: Story = {
       i === 1 ? { ...entry, media: undefined } : entry,
     ),
   },
+  parameters: { design: figmaDesign('1751:1994') },
 }

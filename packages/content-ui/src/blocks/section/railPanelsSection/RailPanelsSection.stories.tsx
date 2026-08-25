@@ -68,10 +68,10 @@ export const TrackMobile: Story = {
   parameters: { design: figmaDesign('2975:8355') },
 }
 
-/** The Solutions composition: `layout: cards`, three engagement cards. */
+/** The Solutions composition (`1925:6108`): `layout: cards`, three engagement cards. */
 export const Cards: Story = {
   args: seededSectionArgs('solutions', 'railPanelsSection'),
-  parameters: { design: figmaDesign('1925:6138') },
+  parameters: { design: figmaDesign('1925:6108') },
 }
 
 /**
