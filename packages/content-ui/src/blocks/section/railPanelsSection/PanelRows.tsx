@@ -39,9 +39,12 @@ export interface PanelRowsProps {
  * that is the composition differing, not the numbering.
  *
  * **The last detail is the promise, and takes brand red.** The frame draws the
- * breakdown label in ink and the outcome's — "what you get:" — in `#EB1000`,
- * and every canonical service row is breakdown-then-outcome, so the accent
- * follows position rather than a field. A band that one day wants
+ * breakdown label in ink (`2975:9554`, `#0A0A0B`) and the outcome's — "what you
+ * get:" — in `#EB1000` (`2975:9560`), and every canonical service row is
+ * breakdown-then-outcome, so the accent follows position rather than a field.
+ * `Eyebrow` has no ink tone — its three are the shared vocabulary — so the ink
+ * one is named as a class here, the same escape the Case Study Card set takes
+ * for its deeper red. A band that one day wants
  * three neutral details and a red one in the middle is where this becomes a
  * knob; nothing draws that today, and a boolean per detail would be a design
  * option hiding in an editorial field.
@@ -85,7 +88,11 @@ export function PanelRows({ items }: PanelRowsProps) {
                 return (
                   <div key={detail._key ?? detailIndex} className="flex flex-col gap-3">
                     {detail.label ? (
-                      <Eyebrow size="lg" tone={isPromise ? 'brand' : 'muted'}>
+                      <Eyebrow
+                        size="lg"
+                        tone={isPromise ? 'brand' : 'muted'}
+                        className={isPromise ? undefined : 'text-ink'}
+                      >
                         {detail.label}
                       </Eyebrow>
                     ) : null}
