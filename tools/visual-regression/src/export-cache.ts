@@ -185,6 +185,21 @@ export function planExports(
   }
 }
 
+/**
+ * Why each unexportable node has no export, keyed `<brand>/<node>` — what the
+ * scoring plan prints beside an unkeyed pairing (#338), in this module's own
+ * words rather than a second set invented downstream.
+ */
+export function exportReasons(plan: ExportPlan, outcome: ExportOutcome): Map<string, string> {
+  const reasons = new Map<string, string>()
+  for (const node of plan.unknown)
+    reasons.set(`${node.brand ?? '?'}/${node.nodeId}`, REASON[node.reason])
+  for (const node of outcome.missing) {
+    reasons.set(`${node.brand}/${node.nodeId}`, 'the Figma file would not draw it')
+  }
+  return reasons
+}
+
 function pad(value: string, width: number): string {
   return value.length >= width ? value : value + ' '.repeat(width - value.length)
 }

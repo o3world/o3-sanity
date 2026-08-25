@@ -15,13 +15,24 @@ export interface ReportMeta {
   /** Which Storybook host these pixels came from (#242). */
   brand: string
   baseRef: string
+  /** Blank when the baseline is not a commit — a `--figma` run's is not. */
   baseSha: string
   head: string
   storyCount: number
   viewports: string[]
   everything: boolean
   generatedAt: string
+  /**
+   * What the two sides are called. The viewer is the same one either way; a
+   * `--figma` run stands a frame export where the merge-base build stood, and
+   * a card captioned "baseline" would be lying about which is which (#338).
+   */
+  sides?: { baseline: string; current: string }
+  /** Ditto for the verdict tag: a scored pair is not a regression. */
+  verdictLabels?: Partial<Record<Verdict, string>>
 }
+
+const SIDES = { baseline: 'baseline', current: 'current' }
 
 const ORDER: Verdict[] = ['changed', 'error', 'added', 'removed', 'unchanged']
 
@@ -161,7 +172,7 @@ function page(data: unknown[], counts: Record<string, number>, meta: ReportMeta)
 <header>
   <div>
     <h1>Visual regression — ${escapeHtml(meta.brand)}</h1>
-    <div class="meta">${escapeHtml(meta.head)} vs ${escapeHtml(meta.baseRef)} <code>${escapeHtml(meta.baseSha)}</code>
+    <div class="meta">${escapeHtml(meta.head)} vs ${escapeHtml(meta.baseRef)}${meta.baseSha ? ` <code>${escapeHtml(meta.baseSha)}</code>` : ''}
       · ${meta.storyCount} ${meta.everything ? 'stories (global change)' : 'changed stories'}
       · ${escapeHtml(meta.viewports.join(', '))} · ${escapeHtml(meta.generatedAt)}</div>
   </div>
@@ -171,6 +182,9 @@ function page(data: unknown[], counts: Record<string, number>, meta: ReportMeta)
 <script>
 const DATA = ${embedJson(data)};
 const COUNTS = ${embedJson(counts)};
+const SIDES = ${embedJson(meta.sides ?? SIDES)};
+const VERDICTS = ${embedJson(meta.verdictLabels ?? {})};
+const verdictName = (verdict) => VERDICTS[verdict] || verdict;
 // Everything below builds markup by concatenation, so anything that came from a
 // story — its label, its viewport, and above all a render error quoting the
 // component that threw — goes through here first.
@@ -187,7 +201,7 @@ for (const [verdict, count] of Object.entries(COUNTS)) {
   const button = document.createElement('button');
   button.className = 'pill';
   button.setAttribute('aria-pressed', String(active.has(verdict)));
-  button.innerHTML = '<span class="dot" style="background:' + COLOURS[verdict] + '"></span>' + verdict + ' ' + count;
+  button.innerHTML = '<span class="dot" style="background:' + COLOURS[verdict] + '"></span>' + esc(verdictName(verdict)) + ' ' + count;
   button.onclick = () => {
     active.has(verdict) ? active.delete(verdict) : active.add(verdict);
     button.setAttribute('aria-pressed', String(active.has(verdict)));
@@ -203,18 +217,19 @@ function stage(item, mode) {
   if (item.verdict === 'error') return '<div class="empty error">' + esc(item.error || 'render failed') + '</div>';
   if (mode === 'diff' && item.diff) return framed('<img src="' + item.diff + '" alt="diff">');
   if (mode === 'slider' && item.baseline && item.current)
-    return framed('<div class="slider"><img class="under" src="' + item.current + '" alt="current">' +
-      '<div class="top"><img src="' + item.baseline + '" alt="baseline"></div>' +
+    return framed('<div class="slider"><img class="under" src="' + item.current + '" alt="' + esc(SIDES.current) + '">' +
+      '<div class="top"><img src="' + item.baseline + '" alt="' + esc(SIDES.baseline) + '"></div>' +
       '<div class="handle"></div></div>');
   if (mode === 'onion' && item.baseline && item.current)
-    return framed('<div class="onion"><img src="' + item.current + '" alt="current">' +
-      '<img class="over" src="' + item.baseline + '" alt="baseline"></div>');
+    return framed('<div class="onion"><img src="' + item.current + '" alt="' + esc(SIDES.current) + '">' +
+      '<img class="over" src="' + item.baseline + '" alt="' + esc(SIDES.baseline) + '"></div>');
+  const caption = (side) => '<figcaption>' + esc(side) + '</figcaption>';
   const before = item.baseline
-    ? '<figure><figcaption>baseline</figcaption><img src="' + item.baseline + '" alt="baseline"></figure>'
-    : '<figure><figcaption>baseline</figcaption><div class="empty">new story</div></figure>';
+    ? '<figure>' + caption(SIDES.baseline) + '<img src="' + item.baseline + '" alt="' + esc(SIDES.baseline) + '"></figure>'
+    : '<figure>' + caption(SIDES.baseline) + '<div class="empty">new story</div></figure>';
   const after = item.current
-    ? '<figure><figcaption>current</figcaption><img src="' + item.current + '" alt="current"></figure>'
-    : '<figure><figcaption>current</figcaption><div class="empty">gone</div></figure>';
+    ? '<figure>' + caption(SIDES.current) + '<img src="' + item.current + '" alt="' + esc(SIDES.current) + '"></figure>'
+    : '<figure>' + caption(SIDES.current) + '<div class="empty">gone</div></figure>';
   return '<div class="pair">' + before + after + '</div>';
 }
 
@@ -256,7 +271,7 @@ function render() {
         item.currentSize.width + '×' + item.currentSize.height
       : '';
     card.innerHTML =
-      '<div class="head"><span class="tag ' + item.verdict + '">' + item.verdict + '</span>' +
+      '<div class="head"><span class="tag ' + item.verdict + '">' + esc(verdictName(item.verdict)) + '</span>' +
       '<h2>' + esc(item.label) + '</h2>' +
       '<code>' + esc(item.viewport) +
         (item.verdict === 'changed' ? ' · ' + percent(item.ratio) + ' of pixels' : '') + size + '</code>' +

@@ -23,11 +23,18 @@ import {
 import { forgetErrorResponses, forgetUnreachable, type AssetCache } from './assets'
 import { captureAll, captureKey, type Shot, type Viewport } from './capture'
 import { compare, type Comparison } from './compare'
-import { formatExportReport } from './export-cache'
-import { ensureExports, exportDir, planFrameExports } from './figma-exports'
+import { exportReasons, formatExportReport } from './export-cache'
+import { ensureExports, exportDir, planFrameExports, readFrameExports } from './figma-exports'
 import { readInventory } from './figma-inventory'
+import {
+  formatScoring,
+  planFrameScoring,
+  scoreFrame,
+  type FrameExport,
+  type FrameScore,
+} from './frame-score'
 import { changedFiles, ensureBaseCheckout, git, repoRoot, resolveBase, shortSha } from './git'
-import { formatInventory } from './pairing'
+import { formatInventory, type PairingRow } from './pairing'
 import { writeReport } from './report'
 import {
   BRANDS,
@@ -37,6 +44,7 @@ import {
   readIndex,
   readStats,
   serve,
+  type Brand,
   type StoryEntry,
 } from './storybook'
 
@@ -59,7 +67,8 @@ pnpm vr — visual regression for the stories your change touches
   pnpm vr --story hero             these stories, whatever the diff says (repeatable)
   pnpm vr --list                   print what would be compared, then stop
   pnpm vr --figma --list           the pairing inventory: every story that names a Figma node
-  pnpm vr --figma                  …and the frame exports for it, cached against the sync baseline
+  pnpm vr --figma                  score every paired story against its cached frame export
+  pnpm vr --figma --story hero     score these stories against theirs
 
 Options
   --brand <o3|o3xo>     which Storybook host to build and capture (default: o3)
@@ -111,6 +120,157 @@ async function withServer<T>(dir: string, run: (url: string) => Promise<T>): Pro
   }
 }
 
+/**
+ * The scored run (#338): build this checkout's Storybook, capture each paired
+ * story at its frame's own width, diff it against the cached export, and open
+ * the report `vr` already opens with the frame standing where the merge-base
+ * build stood.
+ *
+ * The only thing here that is not `vr`'s existing pixel path is which image
+ * goes in the baseline slot. The build, the freeze, the shutter, the asset
+ * replay and the viewer are all the ones the tool already had — which is what
+ * the spec's "a mode, not a new tool" means, and why an animation-bearing
+ * story is frozen here without this file mentioning animation.
+ *
+ * There are no verdicts. Every pair is scored and shown; deciding whether a
+ * score is acceptable is the ledger's job (#339).
+ */
+async function scoreAgainstFigma(options: {
+  brand: Brand
+  brands: readonly Brand[]
+  pairings: readonly PairingRow[]
+  exportsDir: string
+  exports: Map<string, FrameExport>
+  reasons: Map<string, string>
+  wanted: (entry: StoryEntry) => boolean
+  /** Whether `--story` narrowed the run — it decides what "unpaired" means. */
+  scoped: boolean
+  settleMs: number
+  concurrency: number
+  threshold: number
+  verbose: boolean
+  open: boolean
+}): Promise<void> {
+  const { brand } = options
+  const root = repoRoot()
+  const host = hostDir(brand)
+  const cache = path.join(root, '.vr', brand)
+
+  if (options.brands.length > 1) {
+    log(`\n  scoring the ${host} stories — \`--brand o3xo\` scores that host's`)
+  }
+
+  log(`  building ${host} for the working tree`)
+  const build = path.join(cache, 'build', 'current')
+  await buildStorybook(root, brand, build, options.verbose)
+  const index = readIndex(build)
+
+  // Without `--story`, the run is "every pairing that has a fresh export", so
+  // the scope is the paired stories and the unpaired list is empty by
+  // construction. With one, the scope is what was asked for — and a story that
+  // turns out to name no frame is a row on the report rather than a silence.
+  const paired = new Set(options.pairings.map((row) => row.storyId).filter(Boolean) as string[])
+  const stories = index
+    .filter(options.wanted)
+    .filter((entry) => options.scoped || paired.has(entry.id))
+
+  const plan = planFrameScoring({
+    stories,
+    pairings: options.pairings,
+    exports: options.exports,
+    reasons: options.reasons,
+  })
+
+  if (plan.targets.length === 0) {
+    log(`\n${formatScoring(plan, [])}\n`)
+    log('  nothing to score: no story in scope has a frame export keyed to it.\n')
+    return
+  }
+
+  const widths = [...new Set(plan.targets.map((target) => target.viewport.width))].sort(
+    (a, b) => a - b,
+  )
+  log(
+    `  ${plan.targets.length} ${plan.targets.length === 1 ? 'pair' : 'pairs'} · ` +
+      `captured at ${widths.map((width) => `${width}px`).join(', ')} — each frame's own width`,
+  )
+
+  // One capture per (story, width): two stories citing one frame each get
+  // their own, and a story citing two frames of different widths is captured
+  // at both.
+  const groups = new Map<string, { viewport: Viewport; stories: StoryEntry[] }>()
+  for (const target of plan.targets) {
+    const group = groups.get(target.viewport.name) ?? { viewport: target.viewport, stories: [] }
+    if (!group.stories.some((entry) => entry.id === target.story.id)) {
+      group.stories.push(target.story)
+    }
+    groups.set(target.viewport.name, group)
+  }
+
+  const shotsDir = path.join(cache, 'shots', 'figma')
+  fs.rmSync(shotsDir, { recursive: true, force: true })
+  const assetDir = path.join(root, '.vr', 'assets')
+  forgetErrorResponses(assetDir)
+  const assetCache: AssetCache = { unreachable: new Set(), fetched: 0 }
+
+  const shots = new Map<string, Shot>()
+  await withServer(build, async (url) => {
+    for (const group of groups.values()) {
+      const captured = await captureAll({
+        baseUrl: url,
+        stories: group.stories,
+        viewports: [group.viewport],
+        dir: shotsDir,
+        settleMs: options.settleMs,
+        concurrency: options.concurrency,
+        reuseExisting: false,
+        assetDir,
+        assetCache,
+        onProgress: progress(`capturing ${group.viewport.name}`),
+      })
+      for (const shot of captured) shots.set(`${shot.storyId}--${shot.viewport}`, shot)
+    }
+  })
+
+  const diffDir = path.join(cache, 'shots', 'figma-diff')
+  fs.rmSync(diffDir, { recursive: true, force: true })
+  const scores: FrameScore[] = plan.targets.flatMap((target) => {
+    const capture = shots.get(`${target.story.id}--${target.viewport.name}`)
+    if (!capture) return []
+    return [
+      scoreFrame({
+        capture,
+        frame: target.frame,
+        nodeId: target.nodeId,
+        brand: target.brand,
+        diffDir,
+        threshold: options.threshold,
+      }),
+    ]
+  })
+
+  log(`\n${formatScoring(plan, scores)}`)
+
+  const report = writeReport(
+    path.join(cache, 'report-figma'),
+    scores.map((score) => score.comparison),
+    {
+      brand,
+      baseRef: 'its Figma frames',
+      baseSha: '',
+      head: git(['rev-parse', '--abbrev-ref', 'HEAD'], root),
+      storyCount: new Set(plan.targets.map((target) => target.story.id)).size,
+      viewports: widths.map((width) => `frame ${width}px`),
+      everything: false,
+      generatedAt: new Date().toISOString().replace('T', ' ').slice(0, 16),
+      sides: { baseline: 'figma frame', current: 'capture' },
+      verdictLabels: { changed: 'scored' },
+    },
+  )
+  log(`\n  ${path.relative(root, report)}\n`)
+  if (options.open) openReport(report)
+}
+
 async function main(): Promise<void> {
   const { values } = parseArgs({
     options: {
@@ -146,6 +306,17 @@ async function main(): Promise<void> {
     throw new Error(`unknown brand ${values.brand} — expected one of ${BRANDS.join(', ')}`)
   }
 
+  // Applied to the current index and to the baseline's deleted stories alike,
+  // so `--story hero` cannot come back with someone else's removed carousel.
+  const needles = values.story.map((needle) => needle.toLowerCase())
+  const wanted = (entry: StoryEntry): boolean =>
+    !(entry.tags ?? []).includes(SKIP_TAG) &&
+    (needles.length === 0 ||
+      needles.some(
+        (needle) =>
+          entry.id.toLowerCase().includes(needle) || entry.title.toLowerCase().includes(needle),
+      ))
+
   // The Figma baseline (#326). The inventory (#336) and the frame exports it
   // feeds (#337) need neither a build nor a browser, so they answer before
   // anything below spends twelve seconds on Storybook.
@@ -168,7 +339,22 @@ async function main(): Promise<void> {
     const outcome = await ensureExports({ dir, plan, onProgress: progress('  exporting') })
     log(`\n${formatExportReport(plan, outcome)}`)
     log(`\n  ${path.relative(repoRoot(), dir)}`)
-    log('\n  The scored comparison against these exports lands with #338.')
+
+    await scoreAgainstFigma({
+      brand: values.brand ?? 'o3',
+      brands,
+      pairings: inventory.pairings,
+      exportsDir: dir,
+      reasons: exportReasons(plan, outcome),
+      exports: readFrameExports(dir, plan, outcome, values.brand ?? 'o3'),
+      wanted,
+      scoped: needles.length > 0,
+      settleMs: Number(values.settle),
+      concurrency: Number(values.concurrency),
+      threshold: Number(values.threshold),
+      verbose: values.verbose,
+      open: values.open,
+    })
     return
   }
 
@@ -201,17 +387,6 @@ async function main(): Promise<void> {
     values.all || values.story.length > 0
       ? { storyFiles: [], everything: true }
       : affectedStoryFiles(readStats(currentBuild), changedFiles(root, base.sha), host)
-
-  // Applied to the current index and to the baseline's deleted stories alike,
-  // so `--story hero` cannot come back with someone else's removed carousel.
-  const needles = values.story.map((needle) => needle.toLowerCase())
-  const wanted = (entry: StoryEntry): boolean =>
-    !(entry.tags ?? []).includes(SKIP_TAG) &&
-    (needles.length === 0 ||
-      needles.some(
-        (needle) =>
-          entry.id.toLowerCase().includes(needle) || entry.title.toLowerCase().includes(needle),
-      ))
 
   const stories = storiesFor(index, affected, host).filter(wanted)
 

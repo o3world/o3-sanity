@@ -18,6 +18,7 @@ import path from 'node:path'
 
 import { readFigmaToken } from '@o3/figma-sync/env'
 import { createFigmaClient, type FigmaClient } from '@o3/figma-sync/figma-api'
+import { PNG } from 'pngjs'
 
 import {
   exportFile,
@@ -31,6 +32,7 @@ import {
   type MissingNode,
 } from './export-cache'
 import { REPO_ROOT } from './figma-inventory'
+import { frameKey, type FrameExport } from './frame-score'
 import type { PairingRow } from './pairing'
 import { BRANDS, type Brand } from './storybook'
 
@@ -92,6 +94,39 @@ export function readCachedExports(dir: string, brands: readonly Brand[] = BRANDS
     }
   }
   return cached
+}
+
+/**
+ * The exports this run actually has, sized off the PNG headers — the input the
+ * scoring plan takes its capture widths from (#338).
+ *
+ * Fresh and just-fetched alike, minus whatever the file would not draw. The
+ * size is read rather than assumed: the export is the authority on the width
+ * the story is captured at, and only the file says what that is.
+ */
+export function readFrameExports(
+  dir: string,
+  plan: ExportPlan,
+  outcome: ExportOutcome,
+  brand: Brand,
+): Map<string, FrameExport> {
+  const missing = new Set(outcome.missing.map((node) => `${node.brand}/${node.nodeId}`))
+  const exports = new Map<string, FrameExport>()
+  for (const request of [...plan.fresh, ...plan.fetch]) {
+    if (request.brand !== brand) continue
+    if (missing.has(`${request.brand}/${request.nodeId}`)) continue
+    const file = path.join(dir, request.file)
+    if (!fs.existsSync(file)) continue
+    const image = PNG.sync.read(fs.readFileSync(file))
+    exports.set(frameKey(request.brand, request.nodeId), {
+      brand: request.brand,
+      nodeId: request.nodeId,
+      file,
+      width: image.width,
+      height: image.height,
+    })
+  }
+  return exports
 }
 
 export function planFrameExports(

@@ -8,6 +8,7 @@ pnpm vr --story hero          # these stories, whatever the diff says
 pnpm vr --all                 # every story
 pnpm vr --list                # what would be compared, without comparing it
 pnpm vr --figma --list        # the pairing inventory: every story that names a Figma node
+pnpm vr --figma               # score every paired story against its cached frame export
 pnpm vr --help
 ```
 
@@ -141,15 +142,16 @@ shows up as the difference it is instead of being cropped away. The header notes
 
 ## The Figma baseline
 
-`pnpm vr --figma` compares against the design file instead of the merge base (spec #326). Two parts
-of it are here. `--list` prints the **pairing inventory** — every story that names a Figma node,
-joined to the tracked-nodes manifest that watches the file it named — and stops. Without `--list`
-the run also brings the **frame export cache** up to date.
+`pnpm vr --figma` compares against the design file instead of the merge base (spec #326). `--list`
+prints the **pairing inventory** — every story that names a Figma node, joined to the tracked-nodes
+manifest that watches the file it named — and stops. Without `--list` the run brings the **frame
+export cache** up to date, then captures each paired story and **scores** it against its frame.
 
 ```
 pnpm vr --figma --list                 the inventory, read-only: no token, no network
 pnpm vr --figma --list --brand o3xo    one host and its manifest
-pnpm vr --figma                        …and fetch whatever export the cache is missing
+pnpm vr --figma                        …fetch what the cache is missing, then score every pairing
+pnpm vr --figma --story pages-home     score these stories against their frames
 ```
 
 Three sections, plus a coverage count:
@@ -181,10 +183,9 @@ so the filename **is** the cache key: an unchanged node is a hit, a node the syn
 and re-fetches, and nothing else in the directory moves. Steady state is zero API calls, and the
 token is read only when there is something to fetch — a warm run needs no key at all.
 
-Scale 1: `vr` captures at `deviceScaleFactor: 1` with `scale: 'css'`, and the paired frames are
-drawn at the capture widths (390 and 1440), so one design pixel is one capture pixel. Format and
-scale name the directory rather than the key, the way `captureKey` names the screenshot cache, so
-changing either cannot be served out of the old one.
+Scale 1: `vr` captures at `deviceScaleFactor: 1` with `scale: 'css'`, so one design pixel is one
+capture pixel. Format and scale name the directory rather than the key, the way `captureKey` names
+the screenshot cache, so changing either cannot be served out of the old one.
 
 The run reports three numbers and lists the last two:
 
@@ -202,6 +203,54 @@ directory.
 plan out — and it is tested on fixtures with no network. `figma-exports.ts` reads, calls and
 writes, reusing `@o3/figma-sync`'s client so there is one Figma token, one 429 retry, and one place
 that knows `/images` answers `null` rather than failing.
+
+### The score
+
+Each pairing is captured and diffed against its frame, and the report is the same viewer — side by
+side, slider, onion, diff — with the frame standing where the merge-base build stands.
+
+```
+story                                node       viewport    score   diff px  height Δ  width Δ
+pages-home--desktop                  1680:2134  frame-1440  25.74%  4160422  +57px     +118px
+pages-software-engineering--desktop  2360:2879  frame-1440  17.21%  1395102  +136px    —
+```
+
+Three decisions make that number mean something, and `frame-score.ts` states each one where it is
+taken.
+
+**The capture takes the frame's width; the frame is never resampled.** Frames are drawn at whatever
+width the designer used — 1440, 402, 776 — and scaling one side to meet the other blurs every glyph
+and puts a floor under every score that has nothing to do with the code. So the export is the
+authority and the browser is told to match it. The floor is 320px, the narrowest width the layout
+answers for: an icon set exports at 24px, and a 24px-wide browser renders a story no design ever
+described.
+
+**The score is the diff-pixel ratio over the comparison canvas**, through `compare.ts` unchanged —
+same pixelmatch, same `--threshold`, same union canvas. Pixel identity is unreachable across two
+renderers, so the number is relative: stable run to run under the existing freeze, and therefore
+comparable against its own earlier self. That is all the ledger in #339 asks of it. Nothing here
+decides whether a score is good. **A `--figma` run has no verdicts and always exits 0.**
+
+**The canvas is the union of the two sizes, and the deltas are reported beside the score.** A band
+200px shorter than its frame is the drift, not an obstacle to measuring it, so the shorter image is
+padded transparent and those pixels count. `height Δ` and `width Δ` carry the difference out
+separately — and because the shutter is full-page, a `width Δ` on a page frame means the story is
+overflowing sideways past its own viewport.
+
+Two lists follow the scores, both uncapped:
+
+- **unkeyed** — the story names a node, but no export is keyed to it (usually: `figma:sync` does not
+  track that node). Listed, not failed.
+- **unpaired** — the story names no node at all. Only `--story` runs can produce these; an
+  unqualified `--figma` scopes itself to the paired stories.
+
+A pairing is only as good as the node it cites. A page-mockup story against a page frame is the
+comparison this was built for; a full-page story capture against a small component frame scores near
+100% and says nothing, which is what the inventory's page-level and coverage sections are for.
+
+`frame-score.ts` is the model — index, pairings and exports in, a plan and scores out, tested on
+committed 320px crops in `src/__fixtures__/frame-score/`. The CLI does the build, the captures and
+the writes.
 
 ## Tuning
 
@@ -225,7 +274,10 @@ an earlier run timed out on, and — under `--figma` — empties the frame expor
     shots/<sha>/           baseline screenshots, cached per commit
     shots/current/         this run's screenshots
     shots/diff/            this run's diffs
+    shots/figma/           captures taken at their frames' widths
+    shots/figma-diff/      their diffs, one directory per node
     report/index.html      the report
+    report-figma/index.html  the scored report
 ```
 
 Everything that renders is under the brand, so running one host does not overwrite the other's
