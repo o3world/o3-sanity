@@ -7,8 +7,8 @@
  * retry, same `/images` semantics, including the one that matters here: Figma
  * answers `null` for a node it will not export rather than failing the call,
  * so a deleted frame arrives as a named absence and is reported (spec #326 →
- * the gate fails on a node missing from the file; #339 turns that into a
- * verdict).
+ * the gate fails on a node missing from the file, which `ledger.ts` reads as
+ * the `orphaned` red).
  *
  * The token is read only when there is something to fetch, so a run with no
  * design change needs neither a key nor a network.
@@ -69,6 +69,7 @@ export function exportDir(root: string): string {
 
 interface BaselineFile {
   readonly fileKey: string
+  readonly version: string
   readonly hashes: Readonly<Record<string, string>>
 }
 
@@ -76,9 +77,14 @@ interface BaselineFile {
 export function readBaselines(brands: readonly Brand[] = BRANDS): BrandBaseline[] {
   return brands.map((brand) => {
     const file = path.join(REPO_ROOT, BASELINE[brand])
-    if (!fs.existsSync(file)) return { brand, fileKey: '', hashes: null }
+    if (!fs.existsSync(file)) return { brand, fileKey: '', version: '', hashes: null }
     const baseline = JSON.parse(fs.readFileSync(file, 'utf8')) as BaselineFile
-    return { brand, fileKey: baseline.fileKey, hashes: baseline.hashes }
+    return {
+      brand,
+      fileKey: baseline.fileKey,
+      version: baseline.version,
+      hashes: baseline.hashes,
+    }
   })
 }
 

@@ -29,6 +29,9 @@ const FILE = /^(\d+-\d+)@([0-9a-f]+)\.png$/
 export interface BrandBaseline {
   readonly brand: Brand
   readonly fileKey: string
+  /** The design file's version at the last sync — what the ledger records at
+   *  acceptance (#339). Empty when that brand has never been synced. */
+  readonly version: string
   /** `null` when that brand has never been synced — every node is unplaceable. */
   readonly hashes: Readonly<Record<string, string>> | null
 }

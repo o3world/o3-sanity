@@ -23,17 +23,31 @@ import {
 import { forgetErrorResponses, forgetUnreachable, type AssetCache } from './assets'
 import { captureAll, captureKey, type Shot, type Viewport } from './capture'
 import { compare, type Comparison } from './compare'
-import { exportReasons, formatExportReport } from './export-cache'
-import { ensureExports, exportDir, planFrameExports, readFrameExports } from './figma-exports'
+import {
+  exportReasons,
+  formatExportReport,
+  type BrandBaseline,
+  type MissingNode,
+} from './export-cache'
+import {
+  ensureExports,
+  exportDir,
+  planFrameExports,
+  readBaselines,
+  readFrameExports,
+} from './figma-exports'
 import { readInventory } from './figma-inventory'
 import {
   formatScoring,
+  frameKey,
   planFrameScoring,
   scoreFrame,
   type FrameExport,
   type FrameScore,
 } from './frame-score'
 import { changedFiles, ensureBaseCheckout, git, repoRoot, resolveBase, shortSha } from './git'
+import { acceptScores, formatVerdicts, isFailing, ledgerKey, planVerdicts } from './ledger'
+import { LEDGER_FILE, readLedger, writeLedger } from './ledger-file'
 import { formatInventory, type PairingRow } from './pairing'
 import { writeReport } from './report'
 import {
@@ -69,10 +83,13 @@ pnpm vr — visual regression for the stories your change touches
   pnpm vr --figma --list           the pairing inventory: every story that names a Figma node
   pnpm vr --figma                  score every paired story against its cached frame export
   pnpm vr --figma --story hero     score these stories against theirs
+  pnpm vr --figma --accept         record this run's scores in the drift ledger
 
 Options
   --brand <o3|o3xo>     which Storybook host to build and capture (default: o3)
   --figma               compare against Figma rather than the merge base (#326)
+  --accept              write this run's scores into the ledger (#339); with --story, only those
+  --strict              also fail on a pairing nobody has accepted — what CI runs
   --base <ref>          baseline ref (default: main)
   --all                 ignore the change graph, take every story
   --story <substring>   compare stories matching id or title, repeatable; implies --all scope
@@ -132,8 +149,9 @@ async function withServer<T>(dir: string, run: (url: string) => Promise<T>): Pro
  * the spec's "a mode, not a new tool" means, and why an animation-bearing
  * story is frozen here without this file mentioning animation.
  *
- * There are no verdicts. Every pair is scored and shown; deciding whether a
- * score is acceptable is the ledger's job (#339).
+ * The scores become verdicts through the ledger (#339): what worsened, what
+ * changed without re-acceptance, what is orphaned, what could not be exported.
+ * The engine decides all of it; this function does the IO and the exit code.
  */
 async function scoreAgainstFigma(options: {
   brand: Brand
@@ -142,6 +160,9 @@ async function scoreAgainstFigma(options: {
   exportsDir: string
   exports: Map<string, FrameExport>
   reasons: Map<string, string>
+  /** Nodes the images API would not draw — orphan verdicts come from here. */
+  missing: readonly MissingNode[]
+  baselines: readonly BrandBaseline[]
   wanted: (entry: StoryEntry) => boolean
   /** Whether `--story` narrowed the run — it decides what "unpaired" means. */
   scoped: boolean
@@ -150,6 +171,8 @@ async function scoreAgainstFigma(options: {
   threshold: number
   verbose: boolean
   open: boolean
+  accept: boolean
+  strict: boolean
 }): Promise<void> {
   const { brand } = options
   const root = repoRoot()
@@ -174,16 +197,40 @@ async function scoreAgainstFigma(options: {
     .filter(options.wanted)
     .filter((entry) => options.scoped || paired.has(entry.id))
 
-  const plan = planFrameScoring({
+  let ledger = readLedger()
+  const scored = planFrameScoring({
     stories,
     pairings: options.pairings,
     exports: options.exports,
     reasons: options.reasons,
   })
 
+  // A node marked `unpairable` is never captured, never diffed and never
+  // scored — spec #326 → ruling-9 debris must not become a baseline. It is
+  // still listed, by the verdict engine, off the marker itself.
+  const plan = {
+    ...scored,
+    targets: scored.targets.filter(
+      (target) => !ledger.unpairable[frameKey(target.brand, target.nodeId)],
+    ),
+  }
+
+  const verdictsOf = (scores: readonly FrameScore[]) =>
+    planVerdicts({
+      host: options.brand,
+      ledger,
+      baselines: options.baselines,
+      scores,
+      unkeyed: plan.unkeyed,
+      missing: options.missing,
+      unpaired: plan.unpaired,
+    })
+
   if (plan.targets.length === 0) {
-    log(`\n${formatScoring(plan, [])}\n`)
-    log('  nothing to score: no story in scope has a frame export keyed to it.\n')
+    log(`\n${formatScoring(plan, [])}`)
+    const verdicts = verdictsOf([])
+    log(`\n${formatVerdicts(verdicts, { strict: options.strict })}\n`)
+    if (isFailing(verdicts, { strict: options.strict })) process.exitCode = 1
     return
   }
 
@@ -251,9 +298,54 @@ async function scoreAgainstFigma(options: {
 
   log(`\n${formatScoring(plan, scores)}`)
 
+  // `--accept` runs before the verdict, so what the run reports is the state it
+  // leaves behind: accepting a worsened pair is a decision, not a red you then
+  // have to read past.
+  if (options.accept) {
+    const result = acceptScores({
+      ledger,
+      host: options.brand,
+      scores,
+      baselines: options.baselines,
+      at: new Date().toISOString().slice(0, 10),
+    })
+    const wrote = writeLedger(result.ledger)
+    log(
+      `\nLedger (${path.relative(root, LEDGER_FILE)})\n\n` +
+        `  ${result.added.length} added · ${result.updated.length} re-accepted · ` +
+        `${result.unchanged.length} already accepted` +
+        (wrote ? '' : '\n  the file did not change — nothing to review'),
+    )
+    for (const key of [...result.added, ...result.updated]) log(`    ${key}`)
+    ledger = result.ledger
+  }
+
+  const verdicts = verdictsOf(scores)
+  log(`\n${formatVerdicts(verdicts, { strict: options.strict })}`)
+
+  // The card carries its own verdict, so a reader who opened the report for one
+  // pair does not have to go back to the terminal to find out what it meant.
+  const notes = new Map(
+    [
+      ...verdicts.red.map((row) => [row, 'red · '] as const),
+      ...[...verdicts.passed, ...verdicts.listed].map((row) => [row, ''] as const),
+    ].map(([row, mark]) => [row.key, `${mark}${row.kind} — ${row.detail}`] as const),
+  )
+
   const report = writeReport(
     path.join(cache, 'report-figma'),
-    scores.map((score) => score.comparison),
+    scores.map((score) => ({
+      ...score.comparison,
+      note: notes.get(
+        ledgerKey({
+          host: options.brand,
+          storyId: score.storyId,
+          designBrand: score.brand,
+          nodeId: score.nodeId,
+          viewport: score.viewport,
+        }),
+      ),
+    })),
     {
       brand,
       baseRef: 'its Figma frames',
@@ -269,6 +361,10 @@ async function scoreAgainstFigma(options: {
   )
   log(`\n  ${path.relative(root, report)}\n`)
   if (options.open) openReport(report)
+
+  // The gate. A red exits non-zero; everything else — coverage, a new pairing,
+  // debris — is a list, and a list is not a failure (spec #326).
+  if (isFailing(verdicts, { strict: options.strict })) process.exitCode = 1
 }
 
 async function main(): Promise<void> {
@@ -278,6 +374,8 @@ async function main(): Promise<void> {
       // the pixel run below falls back to o3 the way it always has.
       brand: { type: 'string' },
       figma: { type: 'boolean', default: false },
+      accept: { type: 'boolean', default: false },
+      strict: { type: 'boolean', default: false },
       base: { type: 'string', default: 'main' },
       all: { type: 'boolean', default: false },
       story: { type: 'string', multiple: true, default: [] },
@@ -347,6 +445,8 @@ async function main(): Promise<void> {
       exportsDir: dir,
       reasons: exportReasons(plan, outcome),
       exports: readFrameExports(dir, plan, outcome, values.brand ?? 'o3'),
+      missing: outcome.missing,
+      baselines: readBaselines(brands),
       wanted,
       scoped: needles.length > 0,
       settleMs: Number(values.settle),
@@ -354,6 +454,8 @@ async function main(): Promise<void> {
       threshold: Number(values.threshold),
       verbose: values.verbose,
       open: values.open,
+      accept: values.accept,
+      strict: values.strict,
     })
     return
   }

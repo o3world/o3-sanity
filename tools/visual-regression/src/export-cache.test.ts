@@ -35,6 +35,7 @@ function pairing(overrides: Partial<PairingRow> & { nodeId: string }): PairingRo
 const o3: BrandBaseline = {
   brand: 'o3',
   fileKey: 'RvraLJaZ',
+  version: '2391349966960467923',
   hashes: { '1:1': 'aaaa000000001111', '2:2': 'bbbb000000002222' },
 }
 
@@ -127,7 +128,7 @@ describe('planExports', () => {
   })
 
   it('names every node of a brand that has never been synced', () => {
-    const unsynced: BrandBaseline = { brand: 'o3', fileKey: 'RvraLJaZ', hashes: null }
+    const unsynced: BrandBaseline = { brand: 'o3', fileKey: 'RvraLJaZ', version: '', hashes: null }
     const plan = planExports([pairing({ nodeId: '1:1' })], [unsynced], [])
     expect(plan.fetch).toEqual([])
     expect(plan.unknown.map((node) => node.reason)).toEqual(['no-baseline'])

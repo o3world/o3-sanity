@@ -68,6 +68,7 @@ const pairings = [pairing('1:1', 'thing--one'), pairing('2:2', 'thing--two')]
 const baseline: BrandBaseline = {
   brand: 'o3',
   fileKey: 'FILEKEY',
+  version: '1',
   hashes: { '1:1': 'a'.repeat(64), '2:2': 'b'.repeat(64) },
 }
 

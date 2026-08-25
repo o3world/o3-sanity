@@ -30,6 +30,9 @@ export interface Comparison {
   baselineSize?: { width: number; height: number }
   currentSize?: { width: number; height: number }
   error?: string
+  /** One line the card carries beside the score — a `--figma` run's verdict
+   *  and its reason (#339). Nothing sets it on a merge-base run. */
+  note?: string
   files: { baseline?: string; current?: string; diff?: string }
 }
 

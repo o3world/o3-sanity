@@ -21,7 +21,7 @@
  * pixelmatch, same per-pixel threshold, same union canvas. Pixel identity is
  * unreachable across two renderers (spec #326 → Gate semantics), so the number
  * is a relative one — stable run to run under the existing freeze, and
- * therefore comparable against its own earlier self, which is all #339's
+ * therefore comparable against its own earlier self, which is all the
  * ledger asks of it. Nothing here decides whether a score is good; there are
  * no verdicts in this file.
  *
@@ -194,7 +194,7 @@ export interface FrameScore {
   readonly nodeId: string
   readonly brand: Brand
   readonly viewport: string
-  /** Diff pixels over the union canvas, 0–1. The scalar #339 records. */
+  /** Diff pixels over the union canvas, 0–1. The scalar the ledger records. */
   readonly ratio: number
   readonly changedPixels: number
   /** Capture height minus frame height, in pixels. Signal, not noise. */

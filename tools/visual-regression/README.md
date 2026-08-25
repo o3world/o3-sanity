@@ -9,6 +9,7 @@ pnpm vr --all                 # every story
 pnpm vr --list                # what would be compared, without comparing it
 pnpm vr --figma --list        # the pairing inventory: every story that names a Figma node
 pnpm vr --figma               # score every paired story against its cached frame export
+pnpm vr --figma --accept      # record this run's scores in the drift ledger
 pnpm vr --help
 ```
 
@@ -193,7 +194,7 @@ The run reports three numbers and lists the last two:
 - **unknown to the baseline** — the node is paired but `figma:sync` does not track it, so nothing
   says when it changed. Reported by name, never guessed at.
 - **missing from the Figma file** — the images API would not draw it. The design deleted the node,
-  or the story cites a stale id. #339 turns this into a verdict; here it is a named list.
+  or the story cites a stale id. The ledger turns this into an `orphaned` red; here it is a named list.
 
 A quota error fails the run with the node named. Exports are written one at a time, so a run that
 dies partway keeps what it got and the next one asks only for the rest. `--refresh` empties the
@@ -228,8 +229,8 @@ described.
 **The score is the diff-pixel ratio over the comparison canvas**, through `compare.ts` unchanged —
 same pixelmatch, same `--threshold`, same union canvas. Pixel identity is unreachable across two
 renderers, so the number is relative: stable run to run under the existing freeze, and therefore
-comparable against its own earlier self. That is all the ledger in #339 asks of it. Nothing here
-decides whether a score is good. **A `--figma` run has no verdicts and always exits 0.**
+comparable against its own earlier self. That is all the ledger asks of it. Nothing in `frame-score`
+decides whether a score is good; the ledger below does.
 
 **The canvas is the union of the two sizes, and the deltas are reported beside the score.** A band
 200px shorter than its frame is the drift, not an obstacle to measuring it, so the shorter image is
@@ -251,6 +252,80 @@ comparison this was built for; a full-page story capture against a small compone
 `frame-score.ts` is the model — index, pairings and exports in, a plan and scores out, tested on
 committed 320px crops in `src/__fixtures__/frame-score/`. The CLI does the build, the captures and
 the writes.
+
+### The ledger and the four reds
+
+A score on its own is a number. `data/figma-ledger.json` is what gives it consequence: one entry per
+pairing, holding the score it was accepted at, the tolerance around that score, the node's
+`figma:sync` hash and the design file's version at acceptance, and an optional one-line reason.
+
+```json
+"o3/pages-home--desktop/o3/1680:2134/frame-1440": {
+  "score": 0.25743,
+  "tolerance": 0.005,
+  "nodeHash": "1e2f9f533105b10689d7a91395c4e65a13daf53dd2720d2161db085f6c1fa9ef",
+  "fileVersion": "2391349966960467923",
+  "acceptedAt": "2026-08-25"
+}
+```
+
+It is committed, sorted-key JSON — the philosophy `tools/migration/data/assets.json` and the sync
+baselines already use. Acceptance is a decision reviewed in a diff, never a prompt and never a run
+that quietly moves the bar. The key is `<host>/<story>/<design brand>/<node>/<viewport>`: both
+Storybook hosts serve the shared packages and give a shared story the same id, so the host is part
+of the pairing's identity and not a detail of the run.
+
+`unpairable` is the second map, keyed `<design brand>/<node>`. A node listed there — a pasted
+capture with cursor pixels, a `ClaudeTest` frame, #308-ruling-9 material generally — is never
+captured, never scored and never red. It is listed, with the reason the ledger gives.
+
+**A run fails for exactly four reasons.**
+
+| red                 | means                                                                    |
+| ------------------- | ------------------------------------------------------------------------ |
+| `worsened`          | the score is past its accepted score plus its tolerance                  |
+| `unaccepted-change` | `figma:sync` re-hashed the node since acceptance and nobody re-accepted  |
+| `orphaned`          | the Figma file will not draw the node any more — deleted, or a stale id  |
+| `no-export`         | the node changed and no export could be obtained, so nothing can be said |
+
+`unaccepted-change` is red even when the score passes: a score measured against a frame the design
+has since replaced is not evidence about anything. Everything else is a row on a list — a pairing
+nobody has accepted, a node `figma:sync` does not track, a story naming no node, a node marked
+unpairable. Coverage is reported, never gated.
+
+**A pairing with no ledger entry is listed as `new`, not red.** There is no accepted score for it to
+have worsened past, and calling it drift would report a measurement nobody made. It is never silent:
+`--strict` reds the `new` list, which is what a branch gate should run, while a local run stays
+green so a first pairing can be looked at before it is judged.
+
+`pnpm vr --figma` exits non-zero when any red exists and zero otherwise. `--list` is read-only and
+always exits 0.
+
+### Accepting
+
+```bash
+pnpm vr --figma --story pages-home--desktop --accept   # these pairings, at what they score today
+pnpm vr --figma --accept                               # every pairing this run scored
+```
+
+`--accept` writes the run's scores into the ledger and prints what it added and re-accepted. It
+never prompts and never tunes: the tolerance defaults to `0.005` and is yours to edit in the JSON,
+and so is the one-line `reason` a deliberate departure deserves. Both survive a re-acceptance — the
+score is the only thing a run knows better than the file.
+
+The default tolerance is read off the scoring fixtures: a pair that matches scores 0.00% across the
+two renderers, and the smallest drift those fixtures call real — the #325 padding miss — scores
+5.80%. Half a point sits an order of magnitude under the drift and above the zero the capture freeze
+produces run to run.
+
+The writer is byte-stable — sorted keys, a fixed field order, a trailing newline — so two agents
+accepting different pairings produce diffs that merge, and re-accepting a pairing nothing changed
+about writes no diff at all.
+
+`ledger.ts` is the whole model: the ledger shape, the acceptance, and one pure function from
+(scores, ledger, sync baseline) to a verdict plan. It is tested on fixtures with no browser, no
+network and no Figma token, which is what makes "is this run red?" answerable without asking anyone.
+`ledger-file.ts` reads and writes the JSON and does nothing else.
 
 ## Tuning
 

@@ -1,0 +1,12 @@
+{
+  "pairs": {
+    "o3/pages-home--desktop/o3/1680:2134/frame-1440": {
+      "score": 0.25743,
+      "tolerance": 0.005,
+      "nodeHash": "1e2f9f533105b10689d7a91395c4e65a13daf53dd2720d2161db085f6c1fa9ef",
+      "fileVersion": "2391349966960467923",
+      "acceptedAt": "2026-08-25"
+    }
+  },
+  "unpairable": {}
+}

@@ -89,6 +89,7 @@ export function writeReport(
     baselineSize: comparison.baselineSize,
     currentSize: comparison.currentSize,
     error: comparison.error,
+    note: comparison.note,
     baseline: relative(reportDir, comparison.files.baseline),
     current: relative(reportDir, comparison.files.current),
     diff: relative(reportDir, comparison.files.diff),
@@ -275,6 +276,7 @@ function render() {
       '<h2>' + esc(item.label) + '</h2>' +
       '<code>' + esc(item.viewport) +
         (item.verdict === 'changed' ? ' · ' + percent(item.ratio) + ' of pixels' : '') + size + '</code>' +
+      (item.note ? '<code class="' + (item.note.startsWith('red') ? 'changed' : '') + '">' + esc(item.note) + '</code>' : '') +
       '<div class="modes"></div></div><div class="stage"></div>';
     const modes = card.querySelector('.modes');
     const body = card.querySelector('.stage');
