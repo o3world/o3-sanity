@@ -38,7 +38,8 @@ pnpm figma:sync
 ```
 
 If it dies on a missing token, run `pnpm env:pull` — `tools/figma-sync/src/env.ts` reads
-`FIGMA_API_KEY` from the environment first, then `apps/web/.env.local`.
+`FIGMA_API_KEY` from `apps/web/.env.local` first, then the environment. An auth failure names
+which of the two the token came from.
 
 Read `tools/figma-sync/data/report.json`. Read the two manifests alongside it: they are
 what turn a node id into a route or a code path.

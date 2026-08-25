@@ -16,8 +16,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 
-import { readFigmaToken } from '@o3/figma-sync/env'
-import { createFigmaClient, type FigmaClient } from '@o3/figma-sync/figma-api'
+import { createFigmaClientFromEnv, type FigmaClient } from '@o3/figma-sync/figma-api'
 import { PNG } from 'pngjs'
 
 import {
@@ -205,7 +204,7 @@ export async function ensureExports({
   }
   if (plan.fetch.length === 0) return { fetched: 0, missing: [] }
 
-  const figma = client ?? createFigmaClient(readFigmaToken())
+  const figma = client ?? createFigmaClientFromEnv()
   const missing: MissingNode[] = []
   let fetched = 0
 

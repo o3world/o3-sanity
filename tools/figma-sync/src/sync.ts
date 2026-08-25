@@ -39,8 +39,7 @@ import {
 } from './assets'
 import { BRANDS, DEFAULT_BRAND, isBrand } from './brands'
 import { diffHashes, isBaselineFresh } from './diff'
-import { readFigmaToken } from './env'
-import { createFigmaClient } from './figma-api'
+import { createFigmaClientFromEnv } from './figma-api'
 import { hashSubtree } from './hash'
 import {
   dataPaths,
@@ -82,7 +81,7 @@ async function main() {
     )
   }
   const baseline = readBaseline(brand)
-  const client = createFigmaClient(readFigmaToken())
+  const client = createFigmaClientFromEnv()
   const ranAt = new Date().toISOString()
 
   const meta = await client.getFileMeta(manifest.fileKey)

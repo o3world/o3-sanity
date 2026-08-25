@@ -8,6 +8,7 @@
  * account (`docs/agents/figma.md`).
  */
 
+import { readFigmaTokenWithSource } from './env'
 import type { SectionChild } from './probe'
 import type { AssetFormat } from './types'
 
@@ -71,13 +72,18 @@ export interface FigmaClientOptions {
    */
   readonly retries?: number
   readonly retryDelayMs?: number
+  /**
+   * Where the token came from, named in a 401/403 so the reader fixes the
+   * right file instead of the one they assume (#334).
+   */
+  readonly tokenSource?: string
 }
 
 const wait = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms))
 
 export function createFigmaClient(
   token: string,
-  { fetchImpl = fetch, retries = 4, retryDelayMs = 5_000 }: FigmaClientOptions = {},
+  { fetchImpl = fetch, retries = 4, retryDelayMs = 5_000, tokenSource }: FigmaClientOptions = {},
 ): FigmaClient {
   async function get<T>(path: string): Promise<T> {
     for (let attempt = 0; ; attempt++) {
@@ -90,7 +96,13 @@ export function createFigmaClient(
       // spends the wall clock on it.
       if (response.status !== 429 || attempt >= retries) {
         const body = (await response.text()).slice(0, 400)
-        throw new Error(`Figma API ${response.status} ${response.statusText} for ${path}\n${body}`)
+        const provenance =
+          tokenSource && (response.status === 401 || response.status === 403)
+            ? `\nToken came from ${tokenSource}.`
+            : ''
+        throw new Error(
+          `Figma API ${response.status} ${response.statusText} for ${path}\n${body}${provenance}`,
+        )
       }
       const after = Number(response.headers.get('retry-after'))
       await wait(Number.isFinite(after) && after > 0 ? after * 1000 : retryDelayMs * 2 ** attempt)
@@ -154,4 +166,13 @@ export function createFigmaClient(
       return new Uint8Array(await response.arrayBuffer())
     },
   }
+}
+
+/**
+ * The everyday constructor: the repo-provisioned token, with its source
+ * carried into any auth failure it raises.
+ */
+export function createFigmaClientFromEnv(options: FigmaClientOptions = {}): FigmaClient {
+  const token = readFigmaTokenWithSource()
+  return createFigmaClient(token.value, { ...options, tokenSource: token.source })
 }
