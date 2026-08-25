@@ -247,10 +247,11 @@ describe('committed seed content', () => {
      * lives. Checking it here meant re-implementing frontmatter parsing, and
      * the copy disagreed with the reader about quoted values and where a fence
      * ends.
+     *
+     * No committed seed carries a `briefs` entry right now — the one that did
+     * was a test post, deleted 2026-08-25 — so the corpus-wide assertions
+     * above run against an empty set until an authored piece is committed.
      */
-    it('has committed brief references at all', () => {
-      expect(allPipelineDocs.flatMap(({ doc }) => briefEntriesIn(doc)).length).toBeGreaterThan(0)
-    })
   })
 
   // `_localSrc` is only resolved at load time, so a typo would otherwise

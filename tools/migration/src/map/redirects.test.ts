@@ -379,8 +379,6 @@ describe('the committed redirect map', () => {
       const liveSet = new Set(live.map((url) => movedPath(url) ?? url))
       const added = [...paths].filter((p) => !liveSet.has(p)).sort()
       expect(added).toEqual([
-        '/insights/how-we-redesigned-our-website-in-a-single-weekend',
-        '/insights/the-design-team-moved-the-file',
         '/live',
         // The partner landing pages (#92). Sanity has the canonical frame
         // (`2354:2446`); Vercel and Lovable follow its composition. WordPress

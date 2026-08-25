@@ -115,7 +115,6 @@ import categoryResearch from '../../../../tools/migration/data/converted/categor
 import categoryTechnology from '../../../../tools/migration/data/converted/category/technology.json'
 
 // ── The insights feed the carousels fall back to ───────────────────────
-import insightWeekend from '../../../../tools/migration/data/seed/insight/how-we-redesigned-our-website-in-a-single-weekend.json'
 import insightSaas from '../../../../tools/migration/data/converted/insight/we-replaced-a-35000-saas-tool-in-527-prompts.json'
 import insightGeo from '../../../../tools/migration/data/converted/insight/google-weighs-in-on-geo-what-just-changed-for-your-ai-search-strategy.json'
 import insightCms from '../../../../tools/migration/data/converted/insight/what-a-marketing-director-actually-gets-out-of-an-ai-connected-cms.json'
@@ -239,13 +238,12 @@ function projectInsight(raw: SeedDoc): InsightCard {
 }
 
 /**
- * The insights feed, newest first — the seeded weekend piece plus four
- * migrated articles that carry a hero image, a byline and an excerpt (most of
- * the 272 carry none of the three, so an unfiltered feed would draw four blank
- * cards and say nothing about the composition).
+ * The insights feed, newest first — four migrated articles that carry a hero
+ * image, a byline and an excerpt (most of the 272 carry none of the three, so
+ * an unfiltered feed would draw blank cards and say nothing about the
+ * composition).
  */
 export const INSIGHTS: readonly InsightCard[] = [
-  insightWeekend,
   insightSaas,
   insightGeo,
   insightCms,
