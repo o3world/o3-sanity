@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
 
 import {
   MenuIcon,
@@ -17,6 +16,8 @@ import type { SITE_SETTINGS_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { ButtonLink } from '../ButtonLink'
 import { resolveButtonHref } from '../buttonDestination'
+
+import { NavLink } from './NavLink'
 
 type Settings = NonNullable<SITE_SETTINGS_QUERY_RESULT>
 
@@ -67,9 +68,9 @@ export function MobileNavMenu({ items, button }: MobileNavMenuProps) {
               // Closing on navigation is manual: a client-side route change does
               // not unmount the portal, so the panel would survive the link.
               <SheetClose asChild key={item._key ?? `nav-${i}`}>
-                <Link href={resolveButtonHref(item)} className="text-button text-white">
+                <NavLink href={resolveButtonHref(item)} className="text-button text-white">
                   {item.label}
-                </Link>
+                </NavLink>
               </SheetClose>
             ))}
             {button ? (

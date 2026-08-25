@@ -195,6 +195,11 @@ export function HeroSection({
              * dark bands (see `OrbitalSphere`).
              */
             <OrbitalSphere
+              /* It turns here as it does in the Home opener — the captures
+                 these are seated to stand in for the animation, so a still
+                 sphere is the stand-in rather than the thing. `motion-reduce`
+                 stops it. */
+              motion="orbit"
               tone={band === 'ink' ? 'ink' : 'light'}
               /* The interior band runs the field quieter than the Home opener:
                  the limb peaks around 40 points of red over its neighbours in

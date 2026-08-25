@@ -8,6 +8,7 @@ import { ButtonLink } from '../ButtonLink'
 import { resolveButtonHref } from '../buttonDestination'
 
 import { MobileNavMenu } from './MobileNavMenu'
+import { NavLink } from './NavLink'
 import { NAV_INK_TARGET, NavInk } from './NavInk'
 
 interface SiteNavProps {
@@ -169,7 +170,7 @@ export function SiteNav({ settings, brandMark }: SiteNavProps) {
             <ul className="contents">
               {navItems.map((item, i) => (
                 <li key={item._key ?? `nav-${i}`}>
-                  <Link
+                  <NavLink
                     href={resolveButtonHref(item)}
                     // The bar's own `Link` set (`2225:2894`) ships the hover:
                     // `State=Hover` is `#EB1000` — `--color-brand` — against
@@ -177,11 +178,12 @@ export function SiteNav({ settings, brandMark }: SiteNavProps) {
                     // lands as a `hover:` rule (#38's State rule) and it is the
                     // same red on both skins, which is why the flip needs no
                     // second rule. No resting `text-*` here: that ink is the
-                    // bar's, inherited.
+                    // bar's, inherited. The current section takes that same
+                    // red at rest — see `NavLink`.
                     className="text-button hover:text-brand focus-visible:ring-brand duration-(--duration-hover) transition-colors ease-out focus-visible:outline-none focus-visible:ring-2"
                   >
                     {item.label}
-                  </Link>
+                  </NavLink>
                 </li>
               ))}
             </ul>
