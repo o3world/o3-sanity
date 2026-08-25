@@ -108,8 +108,8 @@ describe('the seeded homepage', () => {
     ['engagement panel', 'Embedded Team'],
     ['engagement note', 'Best when you trust the direction and need the horsepower.'],
     ['insights carousel', 'The thinking behind the work.'],
-    ['closing CTA', 'The best partnerships don’t have an end date.'],
-    ['closing CTA body', 'We stay and build it. That&#x27;s the whole offer.'],
+    ['closing CTA', 'Let’s get started on your next big thing.'],
+    ['closing CTA body', 'If you’re ready, we’re ready.'],
   ])('shows the frame’s %s', (_label, copy) => {
     expect(html).toContain(copy)
   })

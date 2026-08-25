@@ -17,7 +17,7 @@ type Story = StoryObj<typeof meta>
 /** Sample copy per step, taken from the frame itself wherever it fits. */
 const SAMPLE: Record<string, string> = {
   statement: 'We work with B2B and enterprise teams where the stakes are real.',
-  cta: 'The best partnerships don’t have an end date.',
+  cta: 'Let’s get started on your next big thing.',
   headline: 'Most firms ship what you asked for.',
   stat: '89% → 114%',
   attribution: 'Business Leader, Global Health Brand',

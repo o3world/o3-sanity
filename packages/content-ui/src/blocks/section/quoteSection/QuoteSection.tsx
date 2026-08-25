@@ -38,10 +38,11 @@ type QuoteSectionProps = SectionProps<'quoteSection'> & {
  * rather than stored: an editor should not have to remember to type the
  * glyphs, and a typed `"` would render as a straight quote.
  *
- * The quote is filled with `--gradient-statement` — ink to 40% — which the
- * case-study detail's band (`2250:1527`) draws and the `Quote` set does not:
- * the set fills #232323 solid. The gradient stays until that disagreement is
- * settled, because the same fill is the partners intro's.
+ * The quote is solid `text-fg` — the set fills it #232323, Figma's
+ * `text/default` (`2748:4839`). The case-study detail's loose band
+ * (`2250:1527`) still draws `--gradient-statement`; that band is a generation
+ * behind this set and the set wins (Nick, 2026-08-25). The gradient token
+ * survives on the partners intro.
  *
  * **`decoration: 'molecule'`** swaps the two spheres for the molecule mark —
  * 776px at 10%, hung off the band's bottom-left corner and clipped by its
@@ -106,9 +107,7 @@ export function QuoteSection({
         ) : null}
 
         <blockquote className="max-w-content relative mx-auto flex flex-col gap-6 text-center lg:gap-12">
-          <p className="text-quote font-display text-gradient text-balance">
-            &ldquo;{quote}&rdquo;
-          </p>
+          <p className="text-quote font-display text-fg text-balance">&ldquo;{quote}&rdquo;</p>
           {attribution ? <footer className="eyebrow-lg text-fg-muted">{attribution}</footer> : null}
         </blockquote>
       </section>

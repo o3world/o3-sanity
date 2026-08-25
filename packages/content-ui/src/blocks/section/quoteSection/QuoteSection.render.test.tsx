@@ -52,10 +52,11 @@ describe('the quote band’s molecule decoration', () => {
   })
 
   it('leaves the copy exactly where the other decorations put it', () => {
-    // A decoration must not move the quote. Same column, same gradient fill
-    // (`2250:1527` is #030303 → 40%, which is --gradient-statement).
+    // A decoration must not move the quote. Same column, same solid `text-fg`
+    // fill — the set's #232323 (`2748:4839`), not the retired gradient.
     expect(html).toContain('max-w-content')
-    expect(html).toContain('text-gradient')
+    expect(html).not.toContain('text-gradient')
+    expect(html).toContain('text-fg')
     expect(html).toContain('text-quote')
     expect(html).toContain('Simply the best.')
     expect(html).toContain('Business Leader, Global Health Brand')
