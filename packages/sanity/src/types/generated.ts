@@ -331,7 +331,7 @@ export type FaqSection = {
     _type: 'question'
     _key: string
   }>
-  surface?: 'white' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -340,7 +340,7 @@ export type ListingSection = {
   _type: 'listingSection'
   heading?: string
   pageType?: 'standard' | 'service' | 'partner'
-  surface?: 'white' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -354,7 +354,7 @@ export type ScreenGridSection = {
     _type: 'screen'
     _key: string
   }>
-  surface?: 'white' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -364,7 +364,7 @@ export type MediaSection = {
   media?: Figure
   variant?: 'plain' | 'capture'
   width?: 'contained' | 'full-bleed'
-  surface?: 'white' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -404,7 +404,7 @@ export type LayoutSection = {
   >
   bleed?: 'none' | 'end'
   width?: 'section' | 'article'
-  surface?: 'white' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -426,7 +426,7 @@ export type FormSection = {
     _type: 'detail'
     _key: string
   }>
-  surface?: 'white' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -445,7 +445,7 @@ export type InFlightSection = {
     _type: 'entry'
     _key: string
   }>
-  surface?: 'white' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -462,7 +462,7 @@ export type RoleListSection = {
     _type: 'role'
     _key: string
   }>
-  surface?: 'white' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -483,7 +483,7 @@ export type PersonGridSection = {
       _key: string
     } & PersonReference
   >
-  surface?: 'white' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -520,7 +520,7 @@ export type FeatureGridSection = {
     _key: string
   }>
   decoration?: 'none' | 'molecule'
-  surface?: 'white' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -551,7 +551,7 @@ export type InsightsCarouselSection = {
     } & InsightReference
   >
   category?: CategoryReference
-  surface?: 'white' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -573,7 +573,7 @@ export type QuoteSection = {
   quote?: string
   attribution?: string
   decoration?: 'orbs' | 'molecule' | 'none'
-  surface?: 'white' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -602,7 +602,7 @@ export type RailPanelsSection = {
     _type: 'panel'
     _key: string
   }>
-  surface?: 'white' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -639,7 +639,7 @@ export type LogoWallSection = {
     } & ClientReference
   >
   button?: Button
-  surface?: 'white' | 'bone' | 'ink'
+  surface?: 'white' | 'paper' | 'bone' | 'ink'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -666,7 +666,7 @@ export type HeroSection = {
   button?: Button
   decoration?: 'orbs' | 'none'
   alignment?: 'start' | 'center'
-  surface?: 'ink' | 'white' | 'bone'
+  surface?: 'ink' | 'white' | 'paper'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -1716,7 +1716,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _type: 'question'
           _key: string
         }>
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -1753,7 +1753,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _key: string
         }>
         decoration?: 'molecule' | 'none'
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -1799,7 +1799,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _type: 'detail'
           _key: string
         }>
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -1850,7 +1850,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         } | null
         decoration?: 'none' | 'orbs'
         alignment?: 'center' | 'start'
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -1893,7 +1893,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _type: 'entry'
           _key: string
         }> | null
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -1907,7 +1907,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           } & InsightReference
         >
         category?: CategoryReference
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
         curated: Array<{
@@ -2113,7 +2113,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         > | null
         bleed?: 'end' | 'none'
         width?: 'article' | 'section'
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -2122,7 +2122,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         _type: 'listingSection'
         heading?: string
         pageType?: 'partner' | 'service' | 'standard'
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
         pages: Array<{
@@ -2186,7 +2186,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           contrast?: 'auto' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -2196,7 +2196,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         media?: Figure
         variant?: 'capture' | 'plain'
         width?: 'contained' | 'full-bleed'
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -2219,7 +2219,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
             _type: 'image'
           } | null
         }> | null
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -2230,7 +2230,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         quote?: string
         attribution?: string
         decoration?: 'molecule' | 'none' | 'orbs'
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -2283,7 +2283,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _type: 'panel'
           _key: string
         }> | null
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -2324,7 +2324,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _type: 'role'
           _key: string
         }> | null
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -2338,7 +2338,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _type: 'screen'
           _key: string
         }>
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -2448,7 +2448,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _type: 'question'
           _key: string
         }>
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -2485,7 +2485,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _key: string
         }>
         decoration?: 'molecule' | 'none'
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -2531,7 +2531,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _type: 'detail'
           _key: string
         }>
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -2582,7 +2582,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         } | null
         decoration?: 'none' | 'orbs'
         alignment?: 'center' | 'start'
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -2625,7 +2625,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _type: 'entry'
           _key: string
         }> | null
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -2639,7 +2639,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           } & InsightReference
         >
         category?: CategoryReference
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
         curated: Array<{
@@ -2845,7 +2845,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         > | null
         bleed?: 'end' | 'none'
         width?: 'article' | 'section'
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -2854,7 +2854,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         _type: 'listingSection'
         heading?: string
         pageType?: 'partner' | 'service' | 'standard'
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
         pages: Array<{
@@ -2918,7 +2918,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           contrast?: 'auto' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -2928,7 +2928,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         media?: Figure
         variant?: 'capture' | 'plain'
         width?: 'contained' | 'full-bleed'
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -2951,7 +2951,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
             _type: 'image'
           } | null
         }> | null
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -2962,7 +2962,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         quote?: string
         attribution?: string
         decoration?: 'molecule' | 'none' | 'orbs'
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -3015,7 +3015,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _type: 'panel'
           _key: string
         }> | null
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -3056,7 +3056,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _type: 'role'
           _key: string
         }> | null
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -3070,7 +3070,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           _type: 'screen'
           _key: string
         }>
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -3260,7 +3260,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           _type: 'question'
           _key: string
         }>
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -3297,7 +3297,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           _key: string
         }>
         decoration?: 'molecule' | 'none'
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -3343,7 +3343,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           _type: 'detail'
           _key: string
         }>
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -3394,7 +3394,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         } | null
         decoration?: 'none' | 'orbs'
         alignment?: 'center' | 'start'
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -3437,7 +3437,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           _type: 'entry'
           _key: string
         }> | null
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -3451,7 +3451,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           } & InsightReference
         >
         category?: CategoryReference
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
         curated: Array<{
@@ -3657,7 +3657,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         > | null
         bleed?: 'end' | 'none'
         width?: 'article' | 'section'
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -3666,7 +3666,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         _type: 'listingSection'
         heading?: string
         pageType?: 'partner' | 'service' | 'standard'
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
         pages: Array<{
@@ -3730,7 +3730,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           contrast?: 'auto' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -3740,7 +3740,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         media?: Figure
         variant?: 'capture' | 'plain'
         width?: 'contained' | 'full-bleed'
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -3763,7 +3763,7 @@ export type CASE_STUDY_QUERY_RESULT = {
             _type: 'image'
           } | null
         }> | null
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -3774,7 +3774,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         quote?: string
         attribution?: string
         decoration?: 'molecule' | 'none' | 'orbs'
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -3827,7 +3827,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           _type: 'panel'
           _key: string
         }> | null
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -3868,7 +3868,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           _type: 'role'
           _key: string
         }> | null
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -3882,7 +3882,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           _type: 'screen'
           _key: string
         }>
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -4098,7 +4098,7 @@ export type PAGE_QUERY_RESULT = {
           _type: 'question'
           _key: string
         }>
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -4135,7 +4135,7 @@ export type PAGE_QUERY_RESULT = {
           _key: string
         }>
         decoration?: 'molecule' | 'none'
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -4181,7 +4181,7 @@ export type PAGE_QUERY_RESULT = {
           _type: 'detail'
           _key: string
         }>
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -4232,7 +4232,7 @@ export type PAGE_QUERY_RESULT = {
         } | null
         decoration?: 'none' | 'orbs'
         alignment?: 'center' | 'start'
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -4275,7 +4275,7 @@ export type PAGE_QUERY_RESULT = {
           _type: 'entry'
           _key: string
         }> | null
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -4289,7 +4289,7 @@ export type PAGE_QUERY_RESULT = {
           } & InsightReference
         >
         category?: CategoryReference
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
         curated: Array<{
@@ -4495,7 +4495,7 @@ export type PAGE_QUERY_RESULT = {
         > | null
         bleed?: 'end' | 'none'
         width?: 'article' | 'section'
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -4504,7 +4504,7 @@ export type PAGE_QUERY_RESULT = {
         _type: 'listingSection'
         heading?: string
         pageType?: 'partner' | 'service' | 'standard'
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
         pages: Array<{
@@ -4568,7 +4568,7 @@ export type PAGE_QUERY_RESULT = {
           contrast?: 'auto' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -4578,7 +4578,7 @@ export type PAGE_QUERY_RESULT = {
         media?: Figure
         variant?: 'capture' | 'plain'
         width?: 'contained' | 'full-bleed'
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -4601,7 +4601,7 @@ export type PAGE_QUERY_RESULT = {
             _type: 'image'
           } | null
         }> | null
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -4612,7 +4612,7 @@ export type PAGE_QUERY_RESULT = {
         quote?: string
         attribution?: string
         decoration?: 'molecule' | 'none' | 'orbs'
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -4665,7 +4665,7 @@ export type PAGE_QUERY_RESULT = {
           _type: 'panel'
           _key: string
         }> | null
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -4706,7 +4706,7 @@ export type PAGE_QUERY_RESULT = {
           _type: 'role'
           _key: string
         }> | null
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -4720,7 +4720,7 @@ export type PAGE_QUERY_RESULT = {
           _type: 'screen'
           _key: string
         }>
-        surface?: 'bone' | 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'paper' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }

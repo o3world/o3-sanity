@@ -62,7 +62,7 @@ export const heroSectionKnobs = defineBlockKnobs({
       showWhen: { at: 'alignment', mode: 'oneOf', values: ['start'], emptyMatches: true },
     },
     /*
-     * Ink or white, and only on the band composition (#311).
+     * Ink or a light band, and only on the band composition (#311).
      *
      * The orbital opener paints ink whatever a document stores, and it has to:
      * the sphere and the white copy over it are one composition drawn on that
@@ -70,16 +70,16 @@ export const heroSectionKnobs = defineBlockKnobs({
      * that turns and repaints nothing is the failure ADR 0020's guard exists
      * to remove.
      *
-     * All three surfaces. The `Interior Hero` set is instanced on ink
-     * everywhere but About, which draws "Interior Hero – White"
-     * (`2960:6876`) — and that set's fill is **#F5F4F1**, the warm off-white
-     * rather than `#FFFFFF`, so bone is the option that band reaches for.
+     * The `Interior Hero` set is instanced on ink everywhere but About, which
+     * draws "Interior Hero – White" (`2960:6876`, and `2975:9022` at 402) —
+     * a set whose fill is **#F5F4F1** despite the name, which is `paper`.
+     * White stays on the roster for a band that wants the plain one.
      *
      * `emptyMatches` is not set: `variant` defaults to `orbital`, so an unset
      * value is the composition this gate is closed for.
      */
     surfaceKnob({
-      options: ['ink', 'white', 'bone'],
+      options: ['ink', 'white', 'paper'],
       initialValue: 'ink',
       showWhen: { at: 'variant', mode: 'oneOf', values: ['band'] },
     }),

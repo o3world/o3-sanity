@@ -1,16 +1,16 @@
 import { optionKey } from './optionValue'
 
 /**
- * The three surfaces a band is painted on, as this package is able to say
- * them. `@o3/sanity/constants` and `@o3/ui`'s section shell each publish the
- * same three literals against their own runtimes; the unions are structurally
- * identical, so passing either one in is a compile-time check that the three
- * lists still agree.
+ * The surfaces a band is painted on, as this package is able to say them.
+ * `@o3/sanity/constants` and `@o3/ui`'s section shell each publish the same
+ * literals against their own runtimes; the unions are structurally identical,
+ * so passing either one in is a compile-time check that the lists still
+ * agree.
  *
  * **Not `KnobSurface`.** That is the chrome a knob is delivered on
  * (`band | block | item | instance`, `surfaces.ts`); this is paint.
  */
-export type BandSurface = 'white' | 'bone' | 'ink'
+export type BandSurface = 'white' | 'paper' | 'bone' | 'ink'
 
 /** What the presentational button actually draws. `auto` is never one of these. */
 export type ButtonFill = 'dark' | 'light' | 'ghost'
@@ -18,12 +18,13 @@ export type ButtonFill = 'dark' | 'light' | 'ghost'
 /**
  * The readable fill on each surface — the whole of Auto, as a table.
  *
- * Both light surfaces take the ink fill and ink takes the white one, which is
- * the pairing `Button`'s own variants are drawn for: `Theme=Black`
- * (`2134:1786`) on white and bone, `Theme=White` (`2205:1298`) on ink.
+ * Every light surface takes the ink fill and ink takes the white one, which
+ * is the pairing `Button`'s own variants are drawn for: `Theme=Black`
+ * (`2134:1786`) on the light bands, `Theme=White` (`2205:1298`) on ink.
  */
 const READABLE_ON: Record<BandSurface, ButtonFill> = {
   white: 'dark',
+  paper: 'dark',
   bone: 'dark',
   ink: 'light',
 }

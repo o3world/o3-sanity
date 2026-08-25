@@ -4,8 +4,12 @@ import { cva } from 'class-variance-authority'
 import { cn } from '../lib/utils'
 import { SurfaceProvider } from './surface-context'
 
-/** The three-surface system every section block renders on (docs/specs/schema.md). */
-export const SURFACES = ['white', 'bone', 'ink'] as const
+/**
+ * The surface system every section block renders on (docs/specs/schema.md).
+ * Three bands plus `paper`, the light step between white and bone that the
+ * `Interior Hero – White` set is painted on (`2960:6876`).
+ */
+export const SURFACES = ['white', 'paper', 'bone', 'ink'] as const
 export type Surface = (typeof SURFACES)[number]
 
 /**
@@ -17,6 +21,7 @@ export type Surface = (typeof SURFACES)[number]
  */
 export const SURFACE_CLASS: Record<Surface, string> = {
   white: 'bg-white text-fg',
+  paper: 'bg-paper text-fg',
   bone: 'bg-bone text-fg',
   ink: 'bg-ink text-white',
 }
@@ -59,6 +64,7 @@ export type Tint = (typeof TINTS)[number]
  */
 const TINT_CLASS: Record<Surface, string> = {
   white: 'bg-white/70',
+  paper: 'bg-paper/70',
   bone: 'bg-bone/70',
   ink: 'bg-ink/40',
 }

@@ -5,6 +5,7 @@ import { describe, expect, it } from 'vitest'
 
 import { offersSurface } from './lib/surfaceContract'
 import { SECTION_BLOCKS } from '@o3/sanity/schemas/registry'
+import { SURFACES } from '@o3/sanity/constants'
 
 import { readCorpus, refsIn } from './core/read'
 import { EXTRACT_DIR } from './lib/paths'
@@ -97,9 +98,7 @@ describe('committed conversion output', () => {
           expect(section.surface, `${file}: ${type} paints its own surface`).toBeUndefined()
           continue
         }
-        expect(['white', 'bone', 'ink'], `${file}: ${type} has no surface`).toContain(
-          section.surface,
-        )
+        expect([...SURFACES], `${file}: ${type} has no surface`).toContain(section.surface)
       }
     }
   })

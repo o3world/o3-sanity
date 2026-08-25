@@ -4,6 +4,7 @@ import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 
 import { collectionPrefixes } from '@o3/sanity/brand'
+import { SURFACES } from '@o3/sanity/constants'
 import { offersSurface } from './lib/surfaceContract'
 import { BLOCK_ARRAYS, SECTION_BLOCKS } from '@o3/sanity/schemas/registry'
 
@@ -503,9 +504,7 @@ describe('committed seed content', () => {
             expect(s.surface, `${file}: ${String(s._type)} paints its own surface`).toBeUndefined()
             continue
           }
-          expect(['white', 'bone', 'ink'], `${file}: ${String(s._type)} has no surface`).toContain(
-            s.surface,
-          )
+          expect([...SURFACES], `${file}: ${String(s._type)} has no surface`).toContain(s.surface)
         }
       }
     })

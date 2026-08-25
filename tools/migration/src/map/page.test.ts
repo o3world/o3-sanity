@@ -3,6 +3,8 @@ import { join } from 'node:path'
 
 import { describe, expect, it } from 'vitest'
 
+import { SURFACES } from '@o3/sanity/constants'
+
 import { offersSurface } from '../lib/surfaceContract'
 
 import { EXTRACT_DIR } from '../lib/paths'
@@ -114,7 +116,7 @@ describe('mapPage', () => {
         expect(section.surface, `${type} paints its own surface`).toBeUndefined()
         continue
       }
-      expect(['white', 'bone', 'ink'], `${type} has no surface`).toContain(section.surface)
+      expect([...SURFACES], `${type} has no surface`).toContain(section.surface)
     }
   })
 

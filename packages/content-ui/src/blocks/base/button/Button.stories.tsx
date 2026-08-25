@@ -53,7 +53,9 @@ const on = (surface: Surface): Decorator => {
   const Band: Decorator = (Story) => (
     <SurfaceProvider surface={surface}>
       <div
-        className={{ white: 'bg-white', bone: 'bg-bone', ink: 'bg-ink' }[surface] + ' p-8'}
+        className={
+          { white: 'bg-white', paper: 'bg-paper', bone: 'bg-bone', ink: 'bg-ink' }[surface] + ' p-8'
+        }
         data-surface={surface}
       >
         <Story />

@@ -429,14 +429,14 @@ describe('what the knob menu carries that the bar does not', () => {
           'Rail panels section',
         ),
       )
-    // Surface (3) + Layout (5) + Rail (2) on the rail layout; Rail's two rows
+    // Surface (4) + Layout (5) + Rail (2) on the rail layout; Rail's two rows
     // are gone on the other four. Counted by role rather than matched by
     // label, because "Rail" is also one of Layout's own option titles.
-    expect(rolesIn(at('rail'), 'menuitemradio')).toHaveLength(10)
-    expect(rolesIn(at('cards'), 'menuitemradio')).toHaveLength(8)
-    expect(rolesIn(at('rows'), 'menuitemradio')).toHaveLength(8)
-    expect(rolesIn(at('grid'), 'menuitemradio')).toHaveLength(8)
-    expect(rolesIn(at('track'), 'menuitemradio')).toHaveLength(8)
+    expect(rolesIn(at('rail'), 'menuitemradio')).toHaveLength(11)
+    expect(rolesIn(at('cards'), 'menuitemradio')).toHaveLength(9)
+    expect(rolesIn(at('rows'), 'menuitemradio')).toHaveLength(9)
+    expect(rolesIn(at('grid'), 'menuitemradio')).toHaveLength(9)
+    expect(rolesIn(at('track'), 'menuitemradio')).toHaveLength(9)
   })
 
   it('marks the inherited value for a screen reader, not only for an eye', () => {

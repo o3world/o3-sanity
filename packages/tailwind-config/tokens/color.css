@@ -11,6 +11,7 @@
  * but the darks split three ways in the canonical frames:
  *
  *   white      #FFFFFF  platforms, ways-to-work
+ *   paper      #F5F4F1  the interior hero on light (2026-08)
  *   bone       #F1F0EC  partners, pull quote, insights (warmed 2026-08)
  *   ink        #0A0A0B  the dominant dark — headlines, dark buttons, cards
  *   ink-warm   #0F100B  the Work / Live hero band only
@@ -77,6 +78,12 @@
    * always named, including its original anchors. Raw #F0F0F0 survives only
    * on un-migrated frames (Live, About's blog row, the mobile set). */
   --color-bone: #f1f0ec;
+  /* #F5F4F1 — the light band a step lighter than bone, and the one the
+   * `Interior Hero – White` set is painted on at both widths (`2960:6876`,
+   * `2975:9022`). It sits against bone rather than replacing it: About draws
+   * this hero over the #F1F0EC "Why O3" band (`2960:6885`), and the step
+   * between the two is the composition. */
+  --color-paper: #f5f4f1;
   /* #F7F7F6 — bone's lighter end: the near-white the warm wash rises to on
    * the partners band (1864:2390), the hero's Curve vector (2089:4309), and
    * the Sanity client-partners section (2332:1708). Bound to variable
@@ -283,6 +290,7 @@
  * declares it — so a light surface anywhere under a dark one carries the light
  * roles, and one at the top of the page re-declares what it already had. */
 [data-surface='white'],
+[data-surface='paper'],
 [data-surface='bone'] {
   --color-fg: #232323;
   --color-fg-body: #55524e;

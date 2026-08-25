@@ -8,11 +8,10 @@ import { SurfaceProvider } from './surface-context'
 /**
  * The colours the `Interior Hero` set is drawn on — ink on every route but
  * About, which instances "Interior Hero – White" (`2960:6876`) on **#F5F4F1**.
- * That is the warm off-white, not `#FFFFFF`, so the light option here is
- * `bone`: the frame's fill is a raw hex no Figma variable binds, and bone is
- * the only light surface the token packages give every brand.
+ * That is the warm off-white, not `#FFFFFF`, and it is `paper` — the light
+ * band between white and bone that the set is painted on at both widths.
  */
-export type CollectionHeroSurface = 'ink' | 'white' | 'bone'
+export type CollectionHeroSurface = 'ink' | 'white' | 'paper' | 'bone'
 
 export interface CollectionHeroProps {
   /**

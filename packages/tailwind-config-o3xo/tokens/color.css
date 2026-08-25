@@ -93,6 +93,12 @@
    * `white/solid`, and bone-soft is the near-white the closed surface wash
    * rises to. The one value in this package not read off a frame. */
   --color-bone-soft: #f9f9f9;
+  /* #F7F7F7 — INTERPOLATED, for the same reason bone-soft is: the shared
+   * surface roster names a light band between `grey/95` and white (O3 reads
+   * #F5F4F1 off its interior hero) and this kit draws none, so this holds the
+   * same distance from bone that O3's does. A kit frame that paints one
+   * replaces it. */
+  --color-paper: #f7f7f7;
 
   /* ── Text on light surfaces (white / bone) ─────────────────────────────── */
   /* #111827 — `azure/11`. Body copy and card titles; the kit's White CTA
@@ -147,6 +153,7 @@
  * they drift.
  */
 :root[data-brand='o3xo'] [data-surface='white'],
+:root[data-brand='o3xo'] [data-surface='paper'],
 :root[data-brand='o3xo'] [data-surface='bone'] {
   --color-fg: #111827;
   --color-fg-body: #4b5563;

@@ -47,7 +47,7 @@ export type PageType = (typeof PAGE_TYPES)[number]
 export const COLLECTION_TYPES = ['insight', 'caseStudy'] as const
 export type CollectionType = (typeof COLLECTION_TYPES)[number]
 
-export const SURFACES = ['white', 'bone', 'ink'] as const
+export const SURFACES = ['white', 'paper', 'bone', 'ink'] as const
 export type Surface = (typeof SURFACES)[number]
 
 /**

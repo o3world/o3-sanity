@@ -97,7 +97,7 @@ export function HeroSection({
     // The knob's own roster, all three. Anything else a client could write past
     // the form falls back to the colour the set is instanced on.
     const resolvedBand = resolveSurface(surface, 'heroSection')
-    const band = resolvedBand === 'white' || resolvedBand === 'bone' ? resolvedBand : 'ink'
+    const band = resolvedBand === 'white' || resolvedBand === 'paper' ? resolvedBand : 'ink'
     /*
      * The partner lockup (`2479:2205`): the brand's own mark, a 12px ×, and
      * the partner's mark. Only the partner half is content; the × is the
@@ -185,14 +185,21 @@ export function HeroSection({
              * by 117, and it is drawn at both widths.
              *
              * On LIGHT it is the About band's own art
-             * (`I2960:6876;2960:6862`) — a 782 × 823 capture box whose 1284px
-             * source traces a sphere of **d ≈ 720, left edge 867, top edge
-             * 98** once scaled into the 1440 frame. So it is anchored to the
-             * band's TOP and overhangs the right edge by 147, the same
-             * top-and-right idiom the ink arm uses rather than the
-             * bottom-anchored percentages this carried before. The hairline
-             * drawing rather than the lit rim, because the glow belongs to the
-             * dark bands (see `OrbitalSphere`).
+             * (`I2960:6876;2960:6862`) — a 782 × 823 capture box, seated at
+             * x 743 of the 1440 frame, whose source traces a sphere of
+             * **d ≈ 720** at (124, 98) inside that box. So on 1440 it anchors
+             * to the band's TOP and overhangs the right edge by 147, the same
+             * top-and-right idiom the ink arm uses.
+             *
+             * **It is drawn at 402 too**, where the mobile frame slides the
+             * same capture rather than dropping it: the wrapper sits at x -46,
+             * y 40 and the capture at (93, 40) inside it (`I2975:9022;
+             * 2960:6866`), which puts the same 720 sphere at left 171, top 178
+             * — most of it past the right edge, with the lit arc crossing the
+             * copy's right shoulder.
+             *
+             * The hairline drawing rather than the lit rim, because the glow
+             * belongs to the dark bands (see `OrbitalSphere`).
              */
             <OrbitalSphere
               /* It turns here as it does in the Home opener — the captures
@@ -209,7 +216,7 @@ export function HeroSection({
               className={
                 band === 'ink'
                   ? 'left-[205px] top-[184px] -z-10 w-[918px] lg:left-auto lg:right-[-117px]'
-                  : '-z-10 hidden lg:right-[-147px] lg:top-[98px] lg:block lg:w-[720px]'
+                  : 'left-[171px] top-[178px] -z-10 w-[720px] lg:left-auto lg:right-[-147px] lg:top-[98px]'
               }
             />
           ) : null
