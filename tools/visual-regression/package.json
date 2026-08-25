@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Local visual regression for changed stories — renders them on both sides of a git ref and diffs the pixels (#122).",
+  "description": "Local visual regression for changed stories \u2014 renders them on both sides of a git ref and diffs the pixels (#122).",
   "scripts": {
     "vr": "tsx src/cli.ts",
     "lint": "eslint src/",
@@ -12,6 +12,7 @@
     "format": "prettier --write ."
   },
   "devDependencies": {
+    "@o3/figma-sync": "workspace:*",
     "@o3/story-kit": "workspace:*",
     "@o3/typescript-config": "workspace:*",
     "@types/node": "^24.0.0",

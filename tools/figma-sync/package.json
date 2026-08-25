@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Figma change detection — which canonical page frames moved since the last sync (#78).",
+  "description": "Figma change detection \u2014 which canonical page frames moved since the last sync (#78).",
   "scripts": {
     "lint": "eslint src/",
     "sync": "tsx src/sync.ts",
@@ -15,5 +15,9 @@
     "tsx": "^4.19.0",
     "typescript": "^5.7.0",
     "vitest": "^4.1.10"
+  },
+  "exports": {
+    "./figma-api": "./src/figma-api.ts",
+    "./env": "./src/env.ts"
   }
 }

@@ -23,6 +23,8 @@ import {
 import { forgetErrorResponses, forgetUnreachable, type AssetCache } from './assets'
 import { captureAll, captureKey, type Shot, type Viewport } from './capture'
 import { compare, type Comparison } from './compare'
+import { formatExportReport } from './export-cache'
+import { ensureExports, exportDir, planFrameExports } from './figma-exports'
 import { readInventory } from './figma-inventory'
 import { changedFiles, ensureBaseCheckout, git, repoRoot, resolveBase, shortSha } from './git'
 import { formatInventory } from './pairing'
@@ -57,6 +59,7 @@ pnpm vr — visual regression for the stories your change touches
   pnpm vr --story hero             these stories, whatever the diff says (repeatable)
   pnpm vr --list                   print what would be compared, then stop
   pnpm vr --figma --list           the pairing inventory: every story that names a Figma node
+  pnpm vr --figma                  …and the frame exports for it, cached against the sync baseline
 
 Options
   --brand <o3|o3xo>     which Storybook host to build and capture (default: o3)
@@ -143,16 +146,29 @@ async function main(): Promise<void> {
     throw new Error(`unknown brand ${values.brand} — expected one of ${BRANDS.join(', ')}`)
   }
 
-  // The Figma baseline (#326). Only the inventory exists so far (#336): it
-  // needs neither a build nor a browser, so it answers before anything below
-  // spends twelve seconds on Storybook.
+  // The Figma baseline (#326). The inventory (#336) and the frame exports it
+  // feeds (#337) need neither a build nor a browser, so they answer before
+  // anything below spends twelve seconds on Storybook.
   if (values.figma) {
     const brands = values.brand ? [values.brand] : BRANDS
+    const inventory = readInventory(brands)
     log(`\nfigma pairings — ${brands.join(', ')}\n`)
-    log(formatInventory(readInventory(brands)))
-    if (!values.list) {
-      log('\n  --figma is listing only for now; the scored comparison lands with #338.')
-    }
+    log(formatInventory(inventory))
+    // `--list` is read-only: it says what the run is about and touches
+    // nothing, so it stays answerable with no token and no network.
+    if (values.list) return
+
+    const dir = exportDir(repoRoot())
+    if (values.refresh) fs.rmSync(dir, { recursive: true, force: true })
+    const plan = planFrameExports(inventory.pairings, brands, dir)
+    log(
+      `\n  ${plan.fetch.length} to fetch · ${plan.fresh.length} cached · ` +
+        `${plan.unknown.length} unplaceable`,
+    )
+    const outcome = await ensureExports({ dir, plan, onProgress: progress('  exporting') })
+    log(`\n${formatExportReport(plan, outcome)}`)
+    log(`\n  ${path.relative(repoRoot(), dir)}`)
+    log('\n  The scored comparison against these exports lands with #338.')
     return
   }
 
