@@ -39,20 +39,24 @@ export interface FormFieldProps {
 }
 
 /**
- * The shared control skin: an underline that thickens on focus, no fill.
+ * The shared control skin: a white box with a hairline round it, radius 6.
+ *
+ * Read off `input#c-first` (`2960:7799`) and its siblings — 1px stroke, white
+ * fill, 20px of horizontal padding, a 15/17 label inside. `border-line` is the
+ * design's hairline role; the frame's own #D8D8D6 is two steps cooler than it
+ * and this band has no bound variable to promote.
  *
  * Exported because the three controls a form draws (`input`, `textarea`,
  * `select`) are native elements, not components — there is nothing to wrap
  * them in that would earn its own file, and native is the accessible default
  * on a phone.
  *
- * `border-current` rather than a named line token, deliberately: a section
- * block can be placed on any of the three surfaces, and `currentColor`
- * already resolves to `text-fg` on white/bone and `text-white` on ink. A
- * fixed `border-line` would vanish on the ink band.
+ * The colours are fixed rather than `currentColor`: `2960:7794` puts every
+ * control inside a white card, so there is no dark ground for the roles to
+ * invert against.
  */
 export const FIELD_CONTROL_CLASS =
-  'w-full rounded-none border-0 border-b border-current/25 bg-transparent px-0 py-3 text-body text-current transition-colors duration-(--duration-hover) ease-out placeholder:text-current/40 hover:border-current/50 focus:border-current focus:outline-none focus-visible:outline-none aria-[invalid=true]:border-brand'
+  'w-full rounded-[6px] border border-line bg-white px-5 py-[13.5px] text-[15px]/[17px] text-fg transition-colors duration-(--duration-hover) ease-out placeholder:text-fg-muted hover:border-fg-muted focus:border-fg focus:outline-none focus-visible:outline-none aria-[invalid=true]:border-brand'
 
 /**
  * One labelled control: label, optional note, the control itself, and the
@@ -85,7 +89,9 @@ export function FormField({
 
   return (
     <div className={cn('flex flex-col gap-2', className)}>
-      <label htmlFor={id} className="text-nav font-medium text-current">
+      {/* `label.c-label` (`2960:7797`): Figtree 600 13/15.6, 8px above the
+          control — which is this wrapper's own `gap-2`. */}
+      <label htmlFor={id} className="text-fg text-[13px]/[15.6px] font-semibold">
         {label}
         {required ? (
           <>

@@ -297,6 +297,15 @@ export type FormSection = {
   reasons?: Array<string>
   consentLabel?: string
   button?: Button
+  media?: Figure
+  quote?: string
+  attribution?: string
+  details?: Array<{
+    label?: string
+    items?: Array<string>
+    _type: 'detail'
+    _key: string
+  }>
   surface?: 'white' | 'bone' | 'ink'
   backgroundMedia?: BackgroundMedia
   anchor?: string
@@ -1729,6 +1738,15 @@ export type CASE_STUDY_QUERY_RESULT = {
           contrast?: 'auto' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
+        media?: Figure
+        quote?: string
+        attribution?: string
+        details?: Array<{
+          label?: string
+          items?: Array<string>
+          _type: 'detail'
+          _key: string
+        }>
         surface?: 'bone' | 'ink' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
@@ -2556,6 +2574,15 @@ export type PAGE_QUERY_RESULT = {
           contrast?: 'auto' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
+        media?: Figure
+        quote?: string
+        attribution?: string
+        details?: Array<{
+          label?: string
+          items?: Array<string>
+          _type: 'detail'
+          _key: string
+        }>
         surface?: 'bone' | 'ink' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string

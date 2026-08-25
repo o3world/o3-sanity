@@ -503,15 +503,6 @@ describe('committed seed content', () => {
         ).toBe(true)
       }
     })
-
-    it('gives every form a heading', () => {
-      for (const { file, section } of forms) {
-        expect(
-          typeof section.heading === 'string' && section.heading.trim().length > 0,
-          `${file}: formSection has no heading`,
-        ).toBe(true)
-      }
-    })
   })
 
   /**

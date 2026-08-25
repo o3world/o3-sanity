@@ -13,8 +13,8 @@
       "_key": "hero",
       "variant": "band",
       "eyebrow": "Contact",
-      "headlineLines": ["Let’s make exceptional experiences together."],
-      "subheading": "Looking for guidance with your customer experience? Tell us what your business needs.",
+      "headlineLines": ["Let’s make exceptional", "experiences together"],
+      "subheading": "Tell us what you’re working on, or what’s in the way of it. We read everything that comes in, and a person writes back.",
       "decoration": "orbs",
       "surface": "ink"
     },
@@ -22,9 +22,6 @@
       "_type": "formSection",
       "_key": "inquiry",
       "surface": "bone",
-      "eyebrow": "Start here",
-      "heading": "Tell us what’s in the way.",
-      "note": "The more specific you are about the problem, the more useful our first reply will be.",
       "reasons": [
         "New business inquiry",
         "1682 inquiries",
@@ -35,113 +32,31 @@
         "Other"
       ],
       "consentLabel": "Sign up for our newsletter",
-      "button": { "_type": "button", "label": "Send message", "icon": "none" }
-    },
-    {
-      "_type": "layoutSection",
-      "_key": "reach",
-      "surface": "white",
-      "columns": 2,
-      "eyebrow": "Get in touch",
-      "items": [
+      "button": { "_type": "button", "label": "Send message", "icon": "arrow" },
+      "media": {
+        "_type": "figure",
+        "alt": "Black and white photo of Justin Handler with red semi circles in the background",
+        "image": {
+          "_type": "image",
+          "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/02/Handler.jpg"
+        }
+      },
+      "quote": "It’s a pleasure helping our clients solve their complex business challenges with our suite of experience-centric solutions and our creative, collaborative team.",
+      "attribution": "Justin Handler\nSenior Vice President, Growth + Development",
+      "details": [
         {
-          "_type": "richText",
-          "_key": "reach-details",
-          "body": [
-            {
-              "_type": "block",
-              "_key": "b-email",
-              "style": "normal",
-              "markDefs": [
-                {
-                  "_key": "m-email",
-                  "_type": "link",
-                  "href": "mailto:hello@o3world.com"
-                }
-              ],
-              "children": [
-                {
-                  "_type": "span",
-                  "_key": "b-email-0",
-                  "text": "Email: ",
-                  "marks": []
-                },
-                {
-                  "_type": "span",
-                  "_key": "b-email-1",
-                  "text": "hello@o3world.com",
-                  "marks": ["m-email"]
-                }
-              ]
-            },
-            {
-              "_type": "block",
-              "_key": "b-phone",
-              "style": "normal",
-              "markDefs": [
-                {
-                  "_key": "m-phone",
-                  "_type": "link",
-                  "href": "tel:+12155924739"
-                }
-              ],
-              "children": [
-                {
-                  "_type": "span",
-                  "_key": "b-phone-0",
-                  "text": "Phone: ",
-                  "marks": []
-                },
-                {
-                  "_type": "span",
-                  "_key": "b-phone-1",
-                  "text": "(215) 592-4739",
-                  "marks": ["m-phone"]
-                }
-              ]
-            },
-            {
-              "_type": "block",
-              "_key": "b-address",
-              "style": "normal",
-              "markDefs": [],
-              "children": [
-                {
-                  "_type": "span",
-                  "_key": "b-address-0",
-                  "text": "Mailing address:\n1339 Frankford Ave, Suite 3\nPhiladelphia, PA 19125",
-                  "marks": []
-                }
-              ]
-            }
-          ]
+          "_type": "detail",
+          "_key": "visit",
+          "label": "Visit us",
+          "items": ["1339 Frankford Ave, Suite 3\nPhiladelphia, PA 19125"]
         },
         {
-          "_type": "figure",
-          "_key": "reach-portrait",
-          "alt": "Black and white photo of Justin Handler with red semi circles in the background",
-          "image": {
-            "_type": "image",
-            "_wpSrc": "https://www.o3world.com/wp-content/uploads/2025/02/Handler.jpg"
-          }
-        },
-        {
-          "_type": "button",
-          "_key": "reach-cta",
-          "label": "Email us",
-          "href": "mailto:hello@o3world.com",
-          "contrast": "dark",
-          "icon": "none"
+          "_type": "detail",
+          "_key": "reach",
+          "label": "Reach us",
+          "items": ["(215) 592-4739", "hello@o3world.com"]
         }
       ]
-    },
-    {
-      "_type": "quoteSection",
-      "_key": "quote",
-      "surface": "bone",
-      "quote": "It’s a pleasure helping our clients solve their complex business challenges with our suite of experience-centric solutions and our creative, collaborative team.",
-      "attribution": "Justin Handler, Senior Vice President, Growth + Development",
-      "decoration": "orbs"
     }
   ],
   "seo": {
@@ -152,7 +67,8 @@
     "locked": false,
     "sourceId": "seed:contact",
     "extractedAt": "2026-08-01T02:52:53.395Z",
+    "figmaNode": "2960:7557",
     "provisional": true,
-    "provisionalNote": "Two halves, both still open. (1) FORM: the page now draws a real form (#58) — formSection, carrying Gravity Form 1's actual field set — but IT CANNOT SEND. #58 built the fields only; no submission mechanism and no destination have been decided, so the submit button is disabled and the form says so on the page. The mailto CTA in the reach band is still the only working conversion path. Cleared by #58's remaining halves: a handler (with a spam story) and somewhere for a submission to land. (2) COMPOSITION: no canonical Figma frame exists for /contact, so the section order and the form band's layout are assembled from existing parts rather than transcribed, and carry no figmaNode. The copy is the WordPress page's (wpId 158) plus the studio's published email, phone and address from the site chrome extract. Cleared by a commissioned contact frame."
+    "provisionalNote": "THE FORM CANNOT SEND. #58 built the fields only; no submission mechanism and no destination have been decided, so the submit is disabled and the form says so on the page. The email and phone in the rail are the only working conversion path. Cleared by #58's remaining halves: a handler (with a spam story) and somewhere for a submission to land."
   }
 }

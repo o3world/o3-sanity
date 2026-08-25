@@ -589,6 +589,12 @@ export const inFlightSection = defineSectionBlock({
  * by its component, and a form button that re-declared its own words would be
  * a second declaration of one (ADR 0023).
  *
+ * **The band is a card beside a rail** (`2960:7792`). The form is the left
+ * column; `media`, `quote`, `attribution` and `details` are the right one — a
+ * portrait over a caption-sized pull quote, then the studio's address and the
+ * two ways to reach it under red micro-kickers. Every one of them is optional,
+ * and a band with none draws the card alone.
+ *
  * ⚠️ **There is no submission handler and no destination.** #58's other two
  * halves are open, so the renderer disables its submit and says so on the
  * page. This block is honest scaffolding, not a working form.
@@ -596,12 +602,14 @@ export const inFlightSection = defineSectionBlock({
 export const formSection = defineSectionBlock({
   name: 'formSection',
   description:
-    'The inquiry band: the contact form, with the words around it editable and the input set fixed in code. Reach for it on a page whose purpose is to start a conversation. The reasons list is the only part of the form’s shape an editor owns — and no submission handler exists yet, so the renderer disables the submit and says so on the page.',
+    'The inquiry band: a form card beside a rail carrying a portrait, a short quote and the ways to reach the studio. Reach for it on a page whose purpose is to start a conversation. The reasons list is the only part of the form’s shape an editor owns — and no submission handler exists yet, so the renderer disables the submit and says so on the page.',
   title: 'Form',
   knobs: formSectionKnobs,
   fields: [
     defineField({ name: 'eyebrow', type: 'string' }),
-    defineField({ name: 'heading', type: 'string', validation: (rule) => rule.required() }),
+    // Optional: `2960:7792` opens the card at the first name field, so the
+    // whole header is absent on the band the frame draws.
+    defineField({ name: 'heading', type: 'string' }),
     defineField({
       name: 'note',
       type: 'text',
@@ -631,6 +639,29 @@ export const formSection = defineSectionBlock({
       // 'Send message' fallback, so a missing value costs nothing (skill rule:
       // fields the renderer can absorb stay optional).
       initialValue: { _type: 'button', label: 'Send message' },
+    }),
+    defineField({
+      name: 'media',
+      type: 'figure',
+      title: 'Portrait',
+      description:
+        'The face at the top of the rail, drawn as a 120px circle. Leave it empty and the quote starts the rail.',
+    }),
+    defineField({
+      name: 'quote',
+      type: 'text',
+      rows: 3,
+      description:
+        'A short quote in the rail beside the form, set at caption size. Keep it to a couple of sentences — this is a note beside the form, not the page’s statement.',
+    }),
+    defineField({
+      name: 'attribution',
+      type: 'string',
+      description: 'Who said the quote. A line break separates their name from their role.',
+    }),
+    detailsField({
+      description:
+        'The rail’s lower half: a red kicker over the lines under it. “Visit us” over the address, “Reach us” over the phone and email. An email or a phone number becomes a link.',
     }),
   ],
   preview: { select: { title: 'heading', subtitle: 'eyebrow' } },
