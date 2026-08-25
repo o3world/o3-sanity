@@ -23,6 +23,29 @@ export const mainDocumentRoutes: DocumentResolver[] = [
     route: '/',
     filter: `_type == "page" && slug.current == "index"`,
   },
+  /*
+   * THE TWO COLLECTION INDEXES, above their own detail routes and well above
+   * the catch-all (#347, #348).
+   *
+   * They need patterns of their own because they are the one route kind whose
+   * URL is not a document's slug: the route owns `/insights`, and the document
+   * that fills it is found by `collection`. Without these the catch-all
+   * matched and asked for a `page` whose slug is "insights" — no document, so
+   * Presentation showed the two routes an editor is meant to compose as
+   * having nothing to edit, and offered to create the page instead.
+   *
+   * Order is load-bearing twice over: before `/*slug`, which matches anything;
+   * and harmlessly beside `<prefix>/:slug`, which needs a segment these do not
+   * have. `presentationRoutes.test.ts` pins both directions.
+   */
+  {
+    route: collectionPrefixes().insight,
+    filter: `_type == "collectionIndex" && collection == "insight"`,
+  },
+  {
+    route: collectionPrefixes().caseStudy,
+    filter: `_type == "collectionIndex" && collection == "caseStudy"`,
+  },
   {
     route: `${collectionPrefixes().caseStudy}/:slug`,
     filter: `_type == "caseStudy" && slug.current == $slug`,

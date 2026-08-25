@@ -122,6 +122,19 @@ const resolve: PresentationPluginOptions['resolve'] = {
         ],
       }),
     }),
+    /*
+     * The index a collection index composes, and only that. Its `href` comes
+     * from `collection` through the brand's prefix table rather than from a
+     * slug, because the document has none — the route owns the URL, which is
+     * the whole shape of this type.
+     */
+    collectionIndex: defineLocations({
+      select: { title: 'title', collection: 'collection' },
+      resolve: (doc) => {
+        const href = doc?.collection === 'caseStudy' ? prefixes.caseStudy : prefixes.insight
+        return { locations: [{ title: doc?.title || 'Collection index', href }] }
+      },
+    }),
     siteSettings: defineLocations({
       message: 'Site settings are used on every page',
       tone: 'caution',

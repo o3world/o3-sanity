@@ -66,6 +66,12 @@ describe('Presentation main-document routes', () => {
     ['/', '/'],
     ['/work/acme-rebrand', '/work/:slug'],
     ['/insights/hello-world', '/insights/:slug'],
+    // The two collection indexes. Without their own patterns the catch-all
+    // swallows them and asks for a `page` whose slug is "insights", which no
+    // dataset has — so Presentation resolved no document on the two routes
+    // #347 and #348 exist to make editable.
+    ['/insights', '/insights'],
+    ['/work', '/work'],
     ['/about', '/*slug'],
     ['/services/ux-audit', '/*slug'],
   ])('resolves %s through %s', (url, expected) => {
@@ -92,5 +98,34 @@ describe('Presentation main-document routes', () => {
         : undefined
 
     expect(resolved).toMatchObject({ params: { slug: 'services/ux-audit' } })
+  })
+})
+
+/**
+ * An index route must reach its `collectionIndex`, and a detail route must
+ * still reach its article — the two live one path segment apart, so the
+ * patterns are checked against each other rather than alone.
+ */
+describe('the collection indexes in Presentation', () => {
+  const filterFor = (url: string) => {
+    const hit = mainDocumentRoutes.find((resolver) =>
+      match(String(resolver.route), { decode: decodeURIComponent })(url),
+    )
+    return hit && 'filter' in hit ? hit.filter : undefined
+  }
+
+  it('resolves /insights to the insight collection index', () => {
+    expect(filterFor('/insights')).toContain('_type == "collectionIndex"')
+    expect(filterFor('/insights')).toContain('"insight"')
+  })
+
+  it('resolves /work to the caseStudy collection index', () => {
+    expect(filterFor('/work')).toContain('_type == "collectionIndex"')
+    expect(filterFor('/work')).toContain('"caseStudy"')
+  })
+
+  it('still resolves a detail URL to its own document, not the index', () => {
+    expect(filterFor('/insights/hello-world')).toContain('_type == "insight"')
+    expect(filterFor('/work/acme-rebrand')).toContain('_type == "caseStudy"')
   })
 })
