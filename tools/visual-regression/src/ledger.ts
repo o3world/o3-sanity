@@ -478,9 +478,13 @@ export function formatVerdicts(plan: VerdictPlan, options: { readonly strict: bo
   }
 
   if (plan.listed.length > 0) {
-    const strictly = options.strict
-      ? ''
-      : ' — `--strict` reds the `new` ones, which is what CI runs'
+    const unaccepted = plan.listed.filter((row) => row.kind === 'new').length
+    const strictly =
+      options.strict && unaccepted > 0
+        ? ` — except the ${unaccepted} \`new\`, which \`--strict\` fails the run for`
+        : options.strict
+          ? ''
+          : ' — `--strict` reds the `new` ones, which is what a branch gate runs'
     sections.push(
       `Listed (${plan.listed.length})\n` +
         `  Reported, not failed${strictly}.\n\n` +

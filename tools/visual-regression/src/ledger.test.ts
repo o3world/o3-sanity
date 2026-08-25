@@ -400,6 +400,10 @@ describe('formatVerdicts', () => {
     expect(text).toContain('worsened')
     expect(text).toContain('new')
     expect(text).toContain('e--f')
+    // Under --strict the same list is not "reported, not failed" any more.
+    expect(formatVerdicts(verdicts, { strict: true })).toContain(
+      'except the 1 `new`, which `--strict` fails the run for',
+    )
   })
 
   it('says the run is green when it is', () => {
