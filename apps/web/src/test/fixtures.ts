@@ -286,6 +286,42 @@ export function aSeededPage(name: string): Record<string, unknown> {
   })
 }
 
+/**
+ * A collection index's chrome, read off its committed seed and projected the
+ * way the route's query returns it (#347).
+ *
+ * Reading the seed rather than inventing a fixture is the point: it makes the
+ * composition assertions a claim about **what the loaded dataset actually
+ * renders**, so a seed that drifts from the frame fails here rather than in a
+ * browser nobody opened. Both arrays go through the same projection a page's
+ * `sections` does, so a band an editor adds later that needs dereferencing
+ * resolves like it would anywhere else.
+ */
+export function aSeededCollectionIndex(name: string): Record<string, unknown> {
+  const doc = readSeed('collectionIndex', name)
+  const byId = new Map(
+    ['client', 'industry'].flatMap((type) =>
+      seedsOfType(type).map((seed) => [seed._id as string, seed] as const),
+    ),
+  )
+  const resolve = (ref: unknown): SeedDoc | null => {
+    const id = (ref as { _ref?: string } | null)?._ref
+    return id ? (byId.get(id) ?? null) : null
+  }
+  const project = (sections: unknown) =>
+    projectSeedPage({
+      page: { sections: (sections ?? []) as SeedDoc[] },
+      resolve,
+      latestInsights: [anInsight()],
+    }).sections
+
+  return {
+    ...doc,
+    sectionsAbove: project(doc.sectionsAbove),
+    sectionsBelow: project(doc.sectionsBelow),
+  }
+}
+
 /** Every converted insight slug on disk — for `it.each` sweeps. */
 export function migratedInsightSlugs(): string[] {
   const dir = join(

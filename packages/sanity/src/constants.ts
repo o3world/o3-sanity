@@ -37,6 +37,16 @@ export const WORDPRESS_PREFIXES: Readonly<Partial<Record<RoutableType, string>>>
 export const PAGE_TYPES = ['standard', 'service', 'partner'] as const
 export type PageType = (typeof PAGE_TYPES)[number]
 
+/**
+ * The document types that have a URL prefix and a collection index behind it
+ * (`CONTEXT.md` → Routing). Where each one serves, and what a brand calls it,
+ * is a brand fact and lives in `brand.ts`; this is the closed set those
+ * records are keyed by, and the value list `collectionIndex.collection` picks
+ * from.
+ */
+export const COLLECTION_TYPES = ['insight', 'caseStudy'] as const
+export type CollectionType = (typeof COLLECTION_TYPES)[number]
+
 export const SURFACES = ['white', 'bone', 'ink'] as const
 export type Surface = (typeof SURFACES)[number]
 

@@ -329,9 +329,43 @@ export function buildIndexRoute<Q extends string>(entry: IndexEntry<Q>): IndexRo
     return readContent(entry.query, { offset, end, ...facets }, tags, read)
   }
 
+  /**
+   * The authored chrome, or `null` where the entry declares none.
+   *
+   * Tagged per document as well as per type: the params identify exactly one
+   * document (`{collection: 'insight'}`), so its tag can name it and a publish
+   * of the OTHER collection's chrome need not flush this page. The values are
+   * joined rather than assumed to be a slug — this document has none.
+   */
+  const fetchDocument = async (read: ReadMode): Promise<unknown> => {
+    const doc = entry.document
+    if (!doc) return null
+    const params = doc.params ?? {}
+    const key = Object.values(params).join(':')
+    const docTags = key ? [docTag(doc.type, key), typeTag(doc.type)] : [typeTag(doc.type)]
+    return (await readContent(doc.query, params, docTags, read)) ?? null
+  }
+
+  /**
+   * Three tiers (#26, #349): the document's own `seo` overrides win, the
+   * entry's static SEO is the fallback, and Site Settings is the floor.
+   *
+   * `path` is the ENTRY's throughout, never the document's — the route owns
+   * the URL, so the canonical is the route's fact. It is what keeps `?page=2`
+   * and `?category=design` canonicalizing to the unpaginated index rather than
+   * being indexed as documents of their own, and it means no value an editor
+   * can type moves the page.
+   */
   const generateMetadata: IndexRouteShim['generateMetadata'] = async () => {
-    if (!entry.seo) return {}
-    return buildDocumentMetadata({ doc: entry.seo, settings: await getSiteSettings() })
+    const read = metadataRead(await currentReadMode())
+    const doc = await fetchDocument(read)
+    const seo = (doc as { seo?: SeoOverrides | null } | null)?.seo
+    if (!entry.seo && !seo) return {}
+    return buildDocumentMetadata({
+      seo,
+      doc: entry.seo ?? { title: null, description: null, image: null, path: '' },
+      settings: await getSiteSettings(),
+    })
   }
 
   /**
@@ -351,7 +385,11 @@ export function buildIndexRoute<Q extends string>(entry: IndexEntry<Q>): IndexRo
     const facets = readFacets(facetNames, params)
     const read = await currentReadMode()
 
-    let data = await fetchPage(requested, facets, read)
+    const [initial, document] = await Promise.all([
+      fetchPage(requested, facets, read),
+      fetchDocument(read),
+    ])
+    let data = initial
     const total = (data as { total?: unknown } | null)?.total
     const totalPages = Math.max(1, Math.ceil((typeof total === 'number' ? total : 0) / pageSize))
     const page = clampPage(requested, totalPages)
@@ -361,7 +399,12 @@ export function buildIndexRoute<Q extends string>(entry: IndexEntry<Q>): IndexRo
     // status a detail route would send. It is the accepted cost of the hole.
     if (!data) notFound()
 
-    return renderEntry(entry, data, { slug: '', pagination: { page, totalPages }, facets })
+    return renderEntry(entry, data, {
+      slug: '',
+      pagination: { page, totalPages },
+      facets,
+      document,
+    })
   }
 
   const Page: IndexRouteShim['Page'] = ({ searchParams }) => (

@@ -1,6 +1,7 @@
-import { SITE_SETTINGS_QUERY } from '@o3/sanity/queries'
+import { COLLECTION_INDEX_QUERY, SITE_SETTINGS_QUERY } from '@o3/sanity/queries'
 import type {
   CASE_STUDIES_PAGE_QUERY_RESULT,
+  COLLECTION_INDEX_QUERY_RESULT,
   CASE_STUDY_QUERY_RESULT,
   INSIGHT_QUERY_RESULT,
   INSIGHTS_PAGE_QUERY_RESULT,
@@ -138,6 +139,45 @@ export function aCaseStudiesPage(
   return { items, total } as CASE_STUDIES_PAGE_QUERY_RESULT
 }
 
+export type CollectionIndex = NonNullable<COLLECTION_INDEX_QUERY_RESULT>
+export type IndexSection = NonNullable<CollectionIndex['sectionsAbove']>[number]
+
+/**
+ * The chrome around a collection's feed (#347), both arrays empty by default —
+ * so a test about one band renders only that band, the way `aCaseStudy` leaves
+ * `story` empty.
+ */
+export function aCollectionIndex(overrides: Partial<CollectionIndex> = {}): CollectionIndex {
+  return {
+    _id: 'collectionIndex-insight',
+    _type: 'collectionIndex',
+    title: 'Insights index',
+    collection: 'insight',
+    sectionsAbove: [],
+    sectionsBelow: [],
+    seo: null,
+    ...overrides,
+  } as CollectionIndex
+}
+
+/**
+ * A CTA band, the cheapest section to author in a fixture: two strings and no
+ * reference to dereference, so an assertion about WHERE a band rendered is not
+ * also an assertion about what it needed to render at all.
+ */
+export function aCtaBand(heading: string, key = 'band0'): IndexSection {
+  return {
+    _type: 'ctaSection',
+    _key: key,
+    heading,
+    body: null,
+    button: null,
+    decoration: 'none',
+    surface: null,
+    backgroundMedia: null,
+  } as unknown as IndexSection
+}
+
 /**
  * Site Settings as `SITE_SETTINGS_QUERY` returns them — the defaults tier of
  * the SEO chain (#26) and the source of the nav/footer chrome.
@@ -172,4 +212,24 @@ export function withSettings(
   settings: SITE_SETTINGS_QUERY_RESULT = siteSettings(),
 ): (call: { query: string }) => unknown {
   return (call) => (call.query === SITE_SETTINGS_QUERY ? settings : doc)
+}
+
+/**
+ * A dataset resolver for a collection index, which reads three ways: the feed,
+ * the chrome document around it, and Site Settings (#347).
+ *
+ * `document` defaults to `null` — the state an index is in before anyone has
+ * authored its bands, and the one the route must render the feed through
+ * rather than 404 on.
+ */
+export function withIndexChrome(
+  feed: unknown,
+  document: unknown = null,
+  settings: SITE_SETTINGS_QUERY_RESULT = siteSettings(),
+): (call: { query: string }) => unknown {
+  return (call) => {
+    if (call.query === SITE_SETTINGS_QUERY) return settings
+    if (call.query === COLLECTION_INDEX_QUERY) return document
+    return feed
+  }
 }

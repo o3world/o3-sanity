@@ -119,9 +119,35 @@ export interface Pagination {
  */
 export type Facets = Readonly<Record<string, string | null>>
 
+/**
+ * A document fetched alongside an index's feed — the bands an editor composes
+ * around a listing the route keeps for itself (#347).
+ *
+ * The query is `string` rather than a second generic parameter, and the result
+ * reaches the renderer as `unknown`. `QueryResult` collapses a widened `Q` to
+ * `never` (see the design note above), so a second literal-typed query would
+ * make every entry that declares one unassignable to the erased shapes — and
+ * every index renderer already casts its feed back to the generated type for
+ * exactly that reason. One cast per renderer, in the place the other one
+ * already is.
+ */
+export interface IndexDocument {
+  /** The document's `_type`, for the fetch's cache tags. */
+  readonly type: string
+  readonly query: string
+  /** Fixed GROQ params — `{ collection: 'insight' }` for a collection index. */
+  readonly params?: Readonly<Record<string, string>>
+}
+
 export type IndexRendererProps<Q extends string> = NonNullable<QueryResult<Q>> & {
   readonly pagination: Pagination
   readonly facets: Facets
+  /**
+   * The entry's `document`, or `null` where the entry declares none or the
+   * dataset holds none. **Absence is never a 404**: an index whose chrome is
+   * unpublished is a plain listing, not a broken route.
+   */
+  readonly document: unknown
 }
 
 /**
@@ -186,9 +212,17 @@ export interface IndexEntry<Q extends string = string> {
    * the query does not already answer by returning an empty feed.
    */
   readonly facets?: readonly string[]
+  /**
+   * A document to fetch alongside the feed, if this index has authored chrome
+   * around it. Optional: an index without one renders the feed alone, which is
+   * every index before #347.
+   */
+  readonly document?: IndexDocument
   readonly renderer: (props: IndexRendererProps<Q>) => ReactNode
   /**
-   * Static — there is no document to derive from — but it goes through the
+   * The entry's own fallback tier — static, because the feed has no document
+   * to derive from. A `document`'s `seo` overrides beat it, and Site Settings
+   * is the floor beneath both (#26). It goes through the
    * same chain as every other route so an index gets its canonical, robots,
    * and social tags rather than a bare title (#26).
    */

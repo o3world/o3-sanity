@@ -11,14 +11,21 @@
  * and it is read through the per-brand closures below.
  */
 
+import type { CollectionType } from './constants'
+
 export const BRANDS = ['o3', 'o3xo'] as const
 export type Brand = (typeof BRANDS)[number]
 
 /** Where an unconfigured checkout points, and what every entry point resolved before brands. */
 const DEFAULT_BRAND: Brand = 'o3'
 
-/** A document type with a URL prefix and a collection index (`CONTEXT.md` → Routing). */
-export type CollectionType = 'insight' | 'caseStudy'
+/**
+ * A document type with a URL prefix and a collection index (`CONTEXT.md` →
+ * Routing). The set is `COLLECTION_TYPES` in `constants.ts` — a vocabulary
+ * table rather than a brand fact, because which collections exist is the
+ * model's business and only where they serve is a brand's.
+ */
+export type { CollectionType }
 
 /** Where a collection serves, and what this brand calls it. */
 export type CollectionFacts = {

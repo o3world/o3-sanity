@@ -1,11 +1,12 @@
+import type { ReactNode } from 'react'
 import Link from 'next/link'
 
-import { CollectionHero, FilterChip } from '@o3/ui'
+import { FilterChip } from '@o3/ui'
 import type { INSIGHTS_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 import type { Pagination } from '@o3/content-runtime/routes'
 
 import { InsightCard } from '@o3/content-ui/cards'
-import { CtaSection, Pager } from '@o3/content-ui'
+import { Pager } from '@o3/content-ui'
 
 type IndexData = NonNullable<INSIGHTS_PAGE_QUERY_RESULT>
 
@@ -16,6 +17,19 @@ interface InsightIndexViewProps {
   /** The category slug the URL asked for, or null on the unfiltered index. */
   readonly category: string | null
   readonly pagination: Pagination
+  /**
+   * THE TWO SLOTS the chrome document fills — the rendered `sectionsAbove` and
+   * `sectionsBelow`, in the Web Components sense the naming rules mean by the
+   * word: a rendered area this component's parent fills.
+   *
+   * Rendered nodes rather than raw blocks so this stays a pure component with
+   * no draft-mode read in it. The route fills them with `Blocks`, which
+   * resolves draft mode and keeps the Presentation path; the Storybook mockup
+   * fills them with the server renderer, which is the only way a story can
+   * draw a band at all.
+   */
+  readonly above?: ReactNode
+  readonly below?: ReactNode
 }
 
 /**
@@ -36,24 +50,27 @@ function insightsHref({
 }
 
 /**
- * The /insights index, built to the frame #61 commissioned (`2336:4310`) and
- * its 402 companion (`2975:8499`).
+ * The /insights index: authored bands, the feed, authored bands (#347).
+ *
+ * **What this file still owns is the feed and only the feed** — the filter
+ * bar, the card grid and the pager, drawn to the frame #61 commissioned
+ * (`2336:4310`) and its 402 companion (`2975:8499`):
  *
  * ```
- * hero      2336:4477   Interior Hero, ink, 192/64, eyebrow + h2 + standfirst
  * band      2337:4485   bone #F1F0EC, 128px 96px, gap 48
  *   filters 2337:4486   chip row, gap 10, All + one per category
  *   grid    2337:4492   1249 wide, wrap, gap 64 × 32 — three 395px cards
  *   card    2337:4493   the same InsightCard the Home row draws
- * cta       2336:4351   the shared CTA band, its own copy, "View our work"
  * ```
  *
- * At 402 the same bands stack: the chip row scrolls sideways (`2975:8656`)
- * and the grid is one 370px column 64 apart (`2975:8663`).
+ * At 402 the chip row scrolls sideways (`2975:8656`) and the grid is one
+ * 370px column 64 apart (`2975:8663`).
  *
- * The hero's headline is the frame's. Its standfirst is **not**: what the
- * frame shows there ("Not the deliverable…") is the Interior Hero set's
- * placeholder default, so the route's own line stays.
+ * The hero (`2336:4477`) and the closer (`2336:4351`) are **no longer here**.
+ * They are `heroSection` and `ctaSection` blocks on the `collectionIndex`
+ * document, which is what makes them an editor's to change — and the hero the
+ * block draws at `variant: 'band'` is the same `CollectionHero` this file used
+ * to call directly, so nothing about the drawing moved with the copy.
  *
  * ## The filter is the point of the frame
  *
@@ -90,18 +107,15 @@ export function InsightIndexView({
   categories,
   category,
   pagination,
+  above,
+  below,
 }: InsightIndexViewProps) {
   const { page, totalPages } = pagination
   const activeTitle = categories.find((option) => option.slug === category)?.title
 
   return (
     <>
-      <CollectionHero
-        variant="interior"
-        eyebrow="Insights"
-        heading="Learn about what drives our experiences."
-        subheading="Looking for some firsthand knowledge from our world? Check out our in-depth thoughts about the industry today, our culture at O3, the future of AI and digital experiences, and other relevant topics."
-      />
+      {above}
 
       {/* `2337:4485` — bone, 128px 96px, 48px between the filter bar and the
           grid. Unlike the Home and About Blog rows the cards do not bleed past
@@ -116,13 +130,13 @@ export function InsightIndexView({
       <div className="px-gutter py-band-md bg-bone">
         <div className="max-w-section mx-auto flex flex-col gap-12">
           {/*
-           * The band the frame draws has no heading — the Home Blog row's
-           * "The thinking behind the work." is the hero's job here. But the
-           * cards are `h3`s under the hero's `h1`, and a page that skips a
-           * level fails an axe heading-order scan for real reasons: a screen
-           * reader's heading list would offer no way into the grid, and no way
-           * to tell a filtered grid from the whole collection. So the level
-           * exists and is only unseen, and it says which cut is on screen.
+           * The band the frame draws has no heading — the hero's job, and the
+           * hero is an authored band now. But the cards are `h3`s under it, and
+           * a page that skips a level fails an axe heading-order scan for real
+           * reasons: a screen reader's heading list would offer no way into the
+           * grid, and no way to tell a filtered grid from the whole collection.
+           * So the level exists and is only unseen, and it says which cut is on
+           * screen.
            */}
           <h2 className="sr-only">{activeTitle ? `${activeTitle} insights` : 'All insights'}</h2>
 
@@ -204,38 +218,7 @@ export function InsightIndexView({
         </div>
       </div>
 
-      {/*
-       * The shared CTA band closes this page. The words are the component's
-       * own default, which is also the line five seed pages carry, so nothing
-       * here is authored for this route; a collection index has no document to
-       * hold it, the same reason the hero copy is in this file.
-       *
-       * The frame's closer is `2975:8788` (`2975:8801` at 402), and its
-       * button is the one authored thing on it: "View our work" → /work, the
-       * next move a reader who has just finished the feed can make. Both
-       * frames draw it, so the route no longer sends them to /contact.
-       *
-       * **`orbs`, and the frame is why.** Both closers are a full-bleed raster
-       * (`imageRef 51458151e760cc2e868b5f9aa7f2e939609a9a6c`) over a native
-       * 172/64px `--gradient-ink-fade` strip (`2975:8795`, `2975:8807`). That
-       * strip belongs to the sphere's composition, and the same imageRef sits
-       * on Home's own orbs band and on the About, Live and insight-detail
-       * closers — so this is Home's band pasted, not a photograph, and it is
-       * drawn rather than exported for the reason `CtaSection` gives.
-       */}
-      <CtaSection
-        heading="Let’s get started on your next big thing."
-        body="We partner with businesses like yours to build experiences that matter. If you’re ready, we’re ready."
-        // No contrast: the band declares ink and Auto reads it, so this
-        // route-owned button carries the same fill an authored one would.
-        button={{
-          _type: 'button',
-          label: 'View our work',
-          href: '/work',
-          target: null,
-        }}
-        decoration="orbs"
-      />
+      {below}
     </>
   )
 }

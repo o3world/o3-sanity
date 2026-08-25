@@ -19,6 +19,7 @@ export { declaredSizes, imageTags, preloadedImageTags } from './images'
 export {
   aMigratedPage,
   aMigratedInsight,
+  aSeededCollectionIndex,
   aSeededPage,
   aTranslatedCaseStudy,
   migratedPageSlugs,

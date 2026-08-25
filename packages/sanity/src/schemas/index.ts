@@ -42,6 +42,7 @@ import {
 import { insight } from './documents/insight'
 import { caseStudy } from './documents/caseStudy'
 import { page } from './documents/page'
+import { collectionIndex } from './documents/collectionIndex'
 import { person, client, category, industry, siteSettings } from './documents/supporting'
 import { brief } from './documents/brief'
 
@@ -106,6 +107,7 @@ const schemaTypesWith = (arrays: BlockArrays) => [
   insight,
   caseStudy(arrays),
   page(arrays),
+  collectionIndex(arrays),
   person,
   client,
   category,

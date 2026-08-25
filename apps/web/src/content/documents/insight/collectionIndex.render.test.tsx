@@ -1,9 +1,11 @@
 import { describe, expect, it } from 'vitest'
 
-import { INSIGHTS_PAGE_QUERY } from '@o3/sanity/queries'
+import { COLLECTION_INDEX_QUERY, INSIGHTS_PAGE_QUERY } from '@o3/sanity/queries'
 
 import { buildIndexRoute } from '@o3/content-runtime/routes'
 import {
+  aCollectionIndex,
+  aCtaBand,
   anInsight,
   anInsightsPage,
   classTokens,
@@ -11,7 +13,9 @@ import {
   preloadedImageTags,
   renderRoute,
   unprefixedHorizontalScrollUtilities,
+  aSeededCollectionIndex,
   variantsOf,
+  withIndexChrome,
   type FetchCall,
 } from '@/test'
 
@@ -267,7 +271,13 @@ describe('insights index category filter', () => {
  * provisional (#49).
  */
 const page = await renderRoute(route, {
-  data: anInsightsPage(manyInsights(12), 40, CATEGORIES),
+  // The SEEDED chrome, not an invented one: these assertions are about what
+  // the loaded dataset renders, so a seed that drifts from the frame fails
+  // here rather than in a browser nobody opened.
+  data: withIndexChrome(
+    anInsightsPage(manyInsights(12), 40, CATEGORIES),
+    aSeededCollectionIndex('insights'),
+  ),
   searchParams: { page: '2' },
 })
 
@@ -275,7 +285,12 @@ describe('insights index composition', () => {
   it('opens on the Interior Hero, in the frame’s own words', () => {
     // `2336:4477` — the headline and eyebrow the frame writes. The standfirst
     // beside them is the Interior Hero set's lorem default ("Not the
-    // deliverable…"), so the route's own line stays.
+    // deliverable…"), so the seed's own line stays.
+    //
+    // Authored since #347: the words are the seed's `heroSection`, drawn
+    // through the block at `variant: 'band'` — which is the same
+    // `CollectionHero` this route used to call directly, so the frame is
+    // unmoved and only the source of the copy changed.
     expect(page.html).toContain('Learn about what drives our experiences.')
     expect(page.html).toContain('Looking for some firsthand knowledge from our world?')
     expect(page.html).toContain('Insights')
@@ -323,6 +338,7 @@ describe('insights index composition', () => {
   it('closes on the shared CTA band, pointed at the work', () => {
     // `2975:8806` — the band's copy is the component's own, its button is the
     // frame's: "View our work", not the route's old "Get in touch".
+    // Authored since #347: the seed's `ctaSection` in `sectionsBelow`.
     expect(page.html).toContain('Let’s get started on your next big thing.')
     expect(page.html).toContain('View our work')
     expect(page.html).toContain('href="/work"')
@@ -391,5 +407,89 @@ describe('insights index pager', () => {
   it('marks the two links up as prev/next for a crawler', () => {
     expect(page.html).toContain('rel="prev"')
     expect(page.html).toContain('rel="next"')
+  })
+})
+
+/**
+ * THE AUTHORED BANDS (#347) — the half of this page an editor owns.
+ *
+ * The feed stays the route's: `?page=` is one parameter per document, so a
+ * paginated listing cannot be a block someone drops twice. Everything around
+ * it is a `collectionIndex` document, and these assertions are about where its
+ * bands land and what happens when it is not there.
+ */
+describe('insights index authored bands', () => {
+  const feed = () => anInsightsPage(manyInsights(3), 3)
+
+  it('renders a band from sectionsAbove above the first card', async () => {
+    const { html } = await renderRoute(route, {
+      data: withIndexChrome(
+        feed(),
+        aCollectionIndex({ sectionsAbove: [aCtaBand('Above the feed')] }),
+      ),
+    })
+
+    expect(html).toContain('Above the feed')
+    expect(html.indexOf('Above the feed')).toBeLessThan(html.indexOf('Insight 0'))
+  })
+
+  it('renders a band from sectionsBelow after the last card', async () => {
+    const { html } = await renderRoute(route, {
+      data: withIndexChrome(
+        feed(),
+        aCollectionIndex({ sectionsBelow: [aCtaBand('Below the feed')] }),
+      ),
+    })
+
+    expect(html).toContain('Below the feed')
+    expect(html.indexOf('Insight 2')).toBeLessThan(html.indexOf('Below the feed'))
+  })
+
+  it('draws the bands in the order the array holds them', async () => {
+    const { html } = await renderRoute(route, {
+      data: withIndexChrome(
+        feed(),
+        aCollectionIndex({
+          sectionsAbove: [aCtaBand('First band', 'b1'), aCtaBand('Second band', 'b2')],
+        }),
+      ),
+    })
+
+    expect(html.indexOf('First band')).toBeLessThan(html.indexOf('Second band'))
+  })
+
+  /**
+   * The one behaviour that must not regress. An unseeded dataset, or a preview
+   * environment nobody has authored yet, is a plain listing — not a 404 and
+   * not a blank page.
+   */
+  it('renders the feed with no chrome document at all', async () => {
+    const { html } = await renderRoute(route, { data: withIndexChrome(feed(), null) })
+
+    expect(html).toContain('Insight 0')
+    expect(html).toContain('Insight 2')
+  })
+
+  it('reads the chrome document for this collection, tagged so a publish reaches it', async () => {
+    const { calls } = await renderRoute(route, {
+      data: withIndexChrome(feed(), aCollectionIndex()),
+    })
+
+    const read = calls.find((call) => call.query === COLLECTION_INDEX_QUERY)
+    expect(read?.params).toMatchObject({ collection: 'insight' })
+    expect(read?.tags).toContain('sanity:collectionIndex')
+    expect(read?.tags).toContain('sanity:collectionIndex:insight')
+  })
+
+  /**
+   * The copy that used to be hardcoded here is the document's now. Pinned as
+   * an absence rather than a presence: the failure this catches is a fallback
+   * quietly surviving in the view, which no positive assertion would see.
+   */
+  it('carries no hardcoded hero or closing copy of its own', async () => {
+    const { html } = await renderRoute(route, { data: withIndexChrome(feed(), null) })
+
+    expect(html).not.toContain('Learn about what drives our experiences.')
+    expect(html).not.toContain('Let’s get started on your next big thing.')
   })
 })

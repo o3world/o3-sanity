@@ -33,10 +33,13 @@ export {
   aCaseStudiesPage,
   aCaseStudy,
   aCaseStudyCard,
+  aCollectionIndex,
+  aCtaBand,
   anInsight,
   anInsightsPage,
   paragraph,
   siteSettings,
+  withIndexChrome,
   withSettings,
 } from './fixtures'
-export type { CaseStudy, CaseStudyCard, Insight } from './fixtures'
+export type { CaseStudy, CaseStudyCard, CollectionIndex, IndexSection, Insight } from './fixtures'

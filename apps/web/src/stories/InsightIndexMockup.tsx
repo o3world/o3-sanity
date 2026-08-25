@@ -4,7 +4,21 @@ import { InsightIndexView } from '@/content/documents/insight/InsightIndexView'
 import { FOOTER_MARK, NAV_MARK } from '@/components/brand/chromeMarks'
 import { SiteFooter, SiteNav } from '@o3/content-ui/chrome'
 
-import { INSIGHTS, SITE_SETTINGS, STORY_YEAR } from '@o3/content-ui/testing/seed'
+import {
+  INSIGHTS,
+  SITE_SETTINGS,
+  STORY_YEAR,
+  seededCollectionIndex,
+} from '@o3/content-ui/testing/seed'
+
+/*
+ * The story's own way into a section array. A view may only render blocks
+ * through `Blocks`, which reads draft mode off `next/headers` and so cannot
+ * run in a browser; a mockup is a story fixture rather than a view, which is
+ * the same exemption `PageMockup` takes and for the same reason.
+ */
+// eslint-disable-next-line no-restricted-imports -- story fixture, not a view; see above
+import { BlockRenderer } from '@/content/blocks/BlockRenderer'
 
 type IndexData = NonNullable<INSIGHTS_PAGE_QUERY_RESULT>
 
@@ -14,11 +28,11 @@ const PAGE_SIZE = 12
  * `/insights` as a whole page, chrome included — the collection-index answer
  * to `PageMockup` (#61).
  *
- * A collection index has no document (CONTEXT.md), so `PageMockup`'s route —
- * seed page → `BlockRenderer` — cannot reach it. What it stands on instead is
- * the same committed content: `INSIGHTS` is the projected seed/converted feed
- * the block stories already render, so nothing on this mockup is authored for
- * it either.
+ * Everything here is committed content. The feed is `INSIGHTS`, the projected
+ * seed/converted articles the block stories already render; the bands above
+ * and below it are the collection index's own seed (#347), drawn through the
+ * same block renderer `PageMockup` uses. So nothing on this mockup is authored
+ * for it, and a seed that drifts from its frame shows up here.
  *
  * **The filter is really running.** The two steps below are the GROQ query's
  * two filters ported (`INSIGHTS_PAGE_QUERY`) — match on the category slug,
@@ -42,6 +56,7 @@ export function InsightIndexMockup({
     : INSIGHTS
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))
   const items = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
+  const chrome = seededCollectionIndex('insights')
 
   return (
     <div className="bg-white">
@@ -56,6 +71,8 @@ export function InsightIndexMockup({
           categories={categoriesOf()}
           category={category}
           pagination={{ page, totalPages }}
+          above={<BlockRenderer blocks={chrome.sectionsAbove} />}
+          below={<BlockRenderer blocks={chrome.sectionsBelow} />}
         />
       </main>
       <SiteFooter settings={SITE_SETTINGS} brandMark={FOOTER_MARK} year={STORY_YEAR} />

@@ -31,6 +31,7 @@ export type {
   CatchAllEntry,
   DetailEntry,
   Facets,
+  IndexDocument,
   IndexEntry,
   IndexRendererProps,
   Pagination,

@@ -219,6 +219,24 @@ export const CASE_STUDIES_PAGE_QUERY = defineQuery(`{
   "total": count(*[_type == "caseStudy"])
 }`)
 
+/**
+ * The chrome around a collection's feed (#347) — the bands an editor composes
+ * above and below a listing the route keeps for itself.
+ *
+ * Matched on `collection` rather than a slug: this document has no URL of its
+ * own, and the route it belongs to is the fact that identifies it.
+ */
+export const COLLECTION_INDEX_QUERY =
+  defineQuery(`*[_type == "collectionIndex" && collection == $collection][0]{
+  _id,
+  _type,
+  title,
+  collection,
+  "sectionsAbove": sectionsAbove[]{${SECTION_FIELDS}},
+  "sectionsBelow": sectionsBelow[]{${SECTION_FIELDS}},
+  seo
+}`)
+
 export const LATEST_INSIGHTS_QUERY = defineQuery(
   `*[_type == "insight" && ($categoryId == null || $categoryId in categories[]._ref)] | order(publishedAt desc) [0...$limit]{${INSIGHT_CARD}}`,
 )

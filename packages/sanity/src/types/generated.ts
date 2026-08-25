@@ -203,6 +203,124 @@ export type Slug = {
   source?: string
 }
 
+export type CollectionIndex = {
+  _id: string
+  _type: 'collectionIndex'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  collection?: 'insight' | 'caseStudy'
+  sectionsAbove?: Array<
+    | ({
+        _key: string
+      } & HeroSection)
+    | ({
+        _key: string
+      } & LogoWallSection)
+    | ({
+        _key: string
+      } & CaseShowcaseSection)
+    | ({
+        _key: string
+      } & RailPanelsSection)
+    | ({
+        _key: string
+      } & QuoteSection)
+    | ({
+        _key: string
+      } & InsightsCarouselSection)
+    | ({
+        _key: string
+      } & CtaSection)
+    | ({
+        _key: string
+      } & FeatureGridSection)
+    | ({
+        _key: string
+      } & PersonGridSection)
+    | ({
+        _key: string
+      } & RoleListSection)
+    | ({
+        _key: string
+      } & InFlightSection)
+    | ({
+        _key: string
+      } & FormSection)
+    | ({
+        _key: string
+      } & LayoutSection)
+    | ({
+        _key: string
+      } & MediaSection)
+    | ({
+        _key: string
+      } & ScreenGridSection)
+    | ({
+        _key: string
+      } & ListingSection)
+    | ({
+        _key: string
+      } & FaqSection)
+  >
+  sectionsBelow?: Array<
+    | ({
+        _key: string
+      } & HeroSection)
+    | ({
+        _key: string
+      } & LogoWallSection)
+    | ({
+        _key: string
+      } & CaseShowcaseSection)
+    | ({
+        _key: string
+      } & RailPanelsSection)
+    | ({
+        _key: string
+      } & QuoteSection)
+    | ({
+        _key: string
+      } & InsightsCarouselSection)
+    | ({
+        _key: string
+      } & CtaSection)
+    | ({
+        _key: string
+      } & FeatureGridSection)
+    | ({
+        _key: string
+      } & PersonGridSection)
+    | ({
+        _key: string
+      } & RoleListSection)
+    | ({
+        _key: string
+      } & InFlightSection)
+    | ({
+        _key: string
+      } & FormSection)
+    | ({
+        _key: string
+      } & LayoutSection)
+    | ({
+        _key: string
+      } & MediaSection)
+    | ({
+        _key: string
+      } & ScreenGridSection)
+    | ({
+        _key: string
+      } & ListingSection)
+    | ({
+        _key: string
+      } & FaqSection)
+  >
+  seo?: Seo
+  migration?: Migration
+}
+
 export type FaqSection = {
   _type: 'faqSection'
   heading?: string
@@ -1059,6 +1177,7 @@ export type AllSanitySchemaTypes =
   | Button
   | Industry
   | Slug
+  | CollectionIndex
   | FaqSection
   | ListingSection
   | ScreenGridSection
@@ -1480,6 +1599,1459 @@ export type CASE_STUDIES_PAGE_QUERY_RESULT = {
   }>
   total: number
 }
+
+// Source: src/queries.ts
+// Variable: COLLECTION_INDEX_QUERY
+// Query: *[_type == "collectionIndex" && collection == $collection][0]{  _id,  _type,  title,  collection,  "sectionsAbove": sectionsAbove[]{  ...,  _type == "heroSection" => {    button{..., "target": target->{_type, title, "slug": slug.current}}  },  _type == "logoWallSection" => {    "clients": clients[]->{_id, name, logo},    button{..., "target": target->{_type, title, "slug": slug.current}}  },  _type == "caseShowcaseSection" => {    "caseStudies": caseStudies[]->{  _id,  _type,  title,  "slug": slug.current,  narrativeHeadline,  "headlineStat": stats[0],  heroMedia,  "client": client->{name, logo},  "industries": industries[]->{title},  industryDetail},    button{..., "target": target->{_type, title, "slug": slug.current}}  },  _type == "railPanelsSection" => {    panels[]{..., button{..., "target": target->{_type, title, "slug": slug.current}}}  },  _type == "insightsCarouselSection" => {    "curated": insights[]->{  _id,  _type,  title,  "slug": slug.current,  excerpt,  publishedAt,  featuredImage,    "author": author->{name, title, headshot},  "categories": categories[]->{title, "slug": slug.current},    "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])},    "latest": *[_type == "insight" && (!defined(^.category) || ^.category._ref in categories[]._ref)] | order(publishedAt desc)[0...8]{  _id,  _type,  title,  "slug": slug.current,  excerpt,  publishedAt,  featuredImage,    "author": author->{name, title, headshot},  "categories": categories[]->{title, "slug": slug.current},    "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])}  },  _type == "ctaSection" => {    button{..., "target": target->{_type, title, "slug": slug.current}}  },  _type == "formSection" => {    button{..., "target": target->{_type, title, "slug": slug.current}}  },  _type == "personGridSection" => {        "people": people[]{_key, ...@->{_id, name, title, bio, headshot}}  },  _type == "roleListSection" => {    roles[]{..., button{..., "target": target->{_type, title, "slug": slug.current}}}  },  _type == "inFlightSection" => {    entries[]{..., button{..., "target": target->{_type, title, "slug": slug.current}}}  },  _type == "layoutSection" => {    items[]{      ...,      _type == "button" => {"target": target->{_type, title, "slug": slug.current}},      _type == "buttonGroup" => {buttons[]{..., "target": target->{_type, title, "slug": slug.current}}},      _type == "mediaCard" => {button{..., "target": target->{_type, title, "slug": slug.current}}}    }  },  _type == "listingSection" => {    "pages": *[_type == "page" && pageType == ^.pageType && slug.current != "index"] | order(title asc){_id, _type, title, "slug": slug.current, card}  }},  "sectionsBelow": sectionsBelow[]{  ...,  _type == "heroSection" => {    button{..., "target": target->{_type, title, "slug": slug.current}}  },  _type == "logoWallSection" => {    "clients": clients[]->{_id, name, logo},    button{..., "target": target->{_type, title, "slug": slug.current}}  },  _type == "caseShowcaseSection" => {    "caseStudies": caseStudies[]->{  _id,  _type,  title,  "slug": slug.current,  narrativeHeadline,  "headlineStat": stats[0],  heroMedia,  "client": client->{name, logo},  "industries": industries[]->{title},  industryDetail},    button{..., "target": target->{_type, title, "slug": slug.current}}  },  _type == "railPanelsSection" => {    panels[]{..., button{..., "target": target->{_type, title, "slug": slug.current}}}  },  _type == "insightsCarouselSection" => {    "curated": insights[]->{  _id,  _type,  title,  "slug": slug.current,  excerpt,  publishedAt,  featuredImage,    "author": author->{name, title, headshot},  "categories": categories[]->{title, "slug": slug.current},    "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])},    "latest": *[_type == "insight" && (!defined(^.category) || ^.category._ref in categories[]._ref)] | order(publishedAt desc)[0...8]{  _id,  _type,  title,  "slug": slug.current,  excerpt,  publishedAt,  featuredImage,    "author": author->{name, title, headshot},  "categories": categories[]->{title, "slug": slug.current},    "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])}  },  _type == "ctaSection" => {    button{..., "target": target->{_type, title, "slug": slug.current}}  },  _type == "formSection" => {    button{..., "target": target->{_type, title, "slug": slug.current}}  },  _type == "personGridSection" => {        "people": people[]{_key, ...@->{_id, name, title, bio, headshot}}  },  _type == "roleListSection" => {    roles[]{..., button{..., "target": target->{_type, title, "slug": slug.current}}}  },  _type == "inFlightSection" => {    entries[]{..., button{..., "target": target->{_type, title, "slug": slug.current}}}  },  _type == "layoutSection" => {    items[]{      ...,      _type == "button" => {"target": target->{_type, title, "slug": slug.current}},      _type == "buttonGroup" => {buttons[]{..., "target": target->{_type, title, "slug": slug.current}}},      _type == "mediaCard" => {button{..., "target": target->{_type, title, "slug": slug.current}}}    }  },  _type == "listingSection" => {    "pages": *[_type == "page" && pageType == ^.pageType && slug.current != "index"] | order(title asc){_id, _type, title, "slug": slug.current, card}  }},  seo}
+export type COLLECTION_INDEX_QUERY_RESULT = {
+  _id: string
+  _type: 'collectionIndex'
+  title: string | null
+  collection: 'caseStudy' | 'insight' | null
+  sectionsAbove: Array<
+    | {
+        _key: string
+        _type: 'caseShowcaseSection'
+        heading?: string
+        button: {
+          _type: 'button'
+          label?: string
+          target:
+            | {
+                _type: 'caseStudy'
+                title: string | null
+                slug: string | null
+              }
+            | {
+                _type: 'insight'
+                title: string | null
+                slug: string | null
+              }
+            | {
+                _type: 'page'
+                title: string | null
+                slug: string | null
+              }
+            | null
+          href?: string
+          anchor?: string
+          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          icon?: 'arrow' | 'down' | 'external' | 'none'
+        } | null
+        caseStudies: Array<{
+          _id: string
+          _type: 'caseStudy'
+          title: string | null
+          slug: string | null
+          narrativeHeadline: string | null
+          headlineStat:
+            | ({
+                _key: string
+              } & Stat)
+            | null
+          heroMedia: Figure | null
+          client: {
+            name: string | null
+            logo: {
+              asset?: SanityImageAssetReference
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              _type: 'image'
+            } | null
+          } | null
+          industries: Array<{
+            title: string | null
+          }> | null
+          industryDetail: string | null
+        }> | null
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'ctaSection'
+        heading?: string
+        body?: string
+        button: {
+          _type: 'button'
+          label?: string
+          target:
+            | {
+                _type: 'caseStudy'
+                title: string | null
+                slug: string | null
+              }
+            | {
+                _type: 'insight'
+                title: string | null
+                slug: string | null
+              }
+            | {
+                _type: 'page'
+                title: string | null
+                slug: string | null
+              }
+            | null
+          href?: string
+          anchor?: string
+          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          icon?: 'arrow' | 'down' | 'external' | 'none'
+        } | null
+        decoration?: 'molecule' | 'none' | 'orbs'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'faqSection'
+        heading?: string
+        subheading?: string
+        questions?: Array<{
+          heading?: string
+          body?: string
+          _type: 'question'
+          _key: string
+        }>
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'featureGridSection'
+        heading?: string
+        layout?: 'grid' | 'orbital' | 'rows' | 'stack'
+        features?: Array<{
+          heading?: string
+          body?: string
+          mark?: Mark
+          icon?:
+            | 'arrow-circle-right'
+            | 'chart-line-up'
+            | 'crosshair'
+            | 'file-magnifying-glass'
+            | 'gear'
+            | 'handshake'
+            | 'hard-drives'
+            | 'lightbulb-filament'
+            | 'line-segments'
+            | 'link'
+            | 'map-trifold'
+            | 'none'
+            | 'path'
+            | 'share-network'
+            | 'sparkle'
+            | 'sun-horizon'
+            | 'swap'
+            | 'user-gear'
+            | 'users'
+          _type: 'feature'
+          _key: string
+        }>
+        decoration?: 'molecule' | 'none'
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'formSection'
+        eyebrow?: string
+        heading?: string
+        note?: string
+        reasons?: Array<string>
+        consentLabel?: string
+        button: {
+          _type: 'button'
+          label?: string
+          target:
+            | {
+                _type: 'caseStudy'
+                title: string | null
+                slug: string | null
+              }
+            | {
+                _type: 'insight'
+                title: string | null
+                slug: string | null
+              }
+            | {
+                _type: 'page'
+                title: string | null
+                slug: string | null
+              }
+            | null
+          href?: string
+          anchor?: string
+          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          icon?: 'arrow' | 'down' | 'external' | 'none'
+        } | null
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'heroSection'
+        variant?: 'band' | 'orbital'
+        eyebrow?: string
+        logo?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
+        headlineLines?: Array<string>
+        subheading?: string
+        details?: Array<{
+          label?: string
+          items?: Array<string>
+          _type: 'detail'
+          _key: string
+        }>
+        button: {
+          _type: 'button'
+          label?: string
+          target:
+            | {
+                _type: 'caseStudy'
+                title: string | null
+                slug: string | null
+              }
+            | {
+                _type: 'insight'
+                title: string | null
+                slug: string | null
+              }
+            | {
+                _type: 'page'
+                title: string | null
+                slug: string | null
+              }
+            | null
+          href?: string
+          anchor?: string
+          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          icon?: 'arrow' | 'down' | 'external' | 'none'
+        } | null
+        decoration?: 'none' | 'orbs'
+        surface?: 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'inFlightSection'
+        heading?: string
+        subheading?: string
+        layout?: 'cards' | 'rows'
+        entries: Array<{
+          heading?: string
+          eyebrow?: string
+          media?: Figure
+          date?: string
+          button: {
+            _type: 'button'
+            label?: string
+            target:
+              | {
+                  _type: 'caseStudy'
+                  title: string | null
+                  slug: string | null
+                }
+              | {
+                  _type: 'insight'
+                  title: string | null
+                  slug: string | null
+                }
+              | {
+                  _type: 'page'
+                  title: string | null
+                  slug: string | null
+                }
+              | null
+            href?: string
+            anchor?: string
+            contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+            icon?: 'arrow' | 'down' | 'external' | 'none'
+          } | null
+          mark?: Mark
+          _type: 'entry'
+          _key: string
+        }> | null
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'insightsCarouselSection'
+        heading?: string
+        insights?: Array<
+          {
+            _key: string
+          } & InsightReference
+        >
+        category?: CategoryReference
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+        curated: Array<{
+          _id: string
+          _type: 'insight'
+          title: string | null
+          slug: string | null
+          excerpt: string | null
+          publishedAt: string | null
+          featuredImage: Figure | null
+          author: {
+            name: string | null
+            title: string | null
+            headshot: {
+              asset?: SanityImageAssetReference
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              _type: 'image'
+            } | null
+          } | null
+          categories: Array<{
+            title: string | null
+            slug: string | null
+          }> | null
+          readingMinutes: number | 1
+        }> | null
+        latest: Array<{
+          _id: string
+          _type: 'insight'
+          title: string | null
+          slug: string | null
+          excerpt: string | null
+          publishedAt: string | null
+          featuredImage: Figure | null
+          author: {
+            name: string | null
+            title: string | null
+            headshot: {
+              asset?: SanityImageAssetReference
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              _type: 'image'
+            } | null
+          } | null
+          categories: Array<{
+            title: string | null
+            slug: string | null
+          }> | null
+          readingMinutes: number | 1
+        }>
+      }
+    | {
+        _key: string
+        _type: 'layoutSection'
+        eyebrow?: string
+        heading?: string
+        subheading?: string
+        columns?: 1 | 2 | 3
+        decoration?: 'molecule' | 'none'
+        items: Array<
+          | {
+              _key: string
+              _type: 'button'
+              label?: string
+              target:
+                | {
+                    _type: 'caseStudy'
+                    title: string | null
+                    slug: string | null
+                  }
+                | {
+                    _type: 'insight'
+                    title: string | null
+                    slug: string | null
+                  }
+                | {
+                    _type: 'page'
+                    title: string | null
+                    slug: string | null
+                  }
+                | null
+              href?: string
+              anchor?: string
+              contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+              icon?: 'arrow' | 'down' | 'external' | 'none'
+            }
+          | {
+              _key: string
+              _type: 'buttonGroup'
+              buttons: Array<{
+                _key: string
+                _type: 'button'
+                label?: string
+                target:
+                  | {
+                      _type: 'caseStudy'
+                      title: string | null
+                      slug: string | null
+                    }
+                  | {
+                      _type: 'insight'
+                      title: string | null
+                      slug: string | null
+                    }
+                  | {
+                      _type: 'page'
+                      title: string | null
+                      slug: string | null
+                    }
+                  | null
+                href?: string
+                anchor?: string
+                contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+                icon?: 'arrow' | 'down' | 'external' | 'none'
+              }> | null
+              alignment?: 'center' | 'end' | 'start'
+            }
+          | {
+              _key: string
+              _type: 'embed'
+              url?: string
+              caption?: string
+            }
+          | {
+              _key: string
+              _type: 'figure'
+              image?: {
+                asset?: SanityImageAssetReference
+                media?: unknown
+                hotspot?: SanityImageHotspot
+                crop?: SanityImageCrop
+                _type: 'image'
+              }
+              alt?: string
+              caption?: string
+            }
+          | {
+              _key: string
+              _type: 'mark'
+              kind?: 'disc' | 'orb'
+              state?:
+                | 'breathing'
+                | 'composing'
+                | 'connecting'
+                | 'listening'
+                | 'searching'
+                | 'shaping'
+                | 'solving'
+                | 'weaving'
+                | 'working'
+              size?: 20 | 64
+              speed?: number
+              paused?: boolean
+            }
+          | {
+              _key: string
+              _type: 'mediaCard'
+              media?: Figure
+              heading?: string
+              body?: string
+              button: {
+                _type: 'button'
+                label?: string
+                target:
+                  | {
+                      _type: 'caseStudy'
+                      title: string | null
+                      slug: string | null
+                    }
+                  | {
+                      _type: 'insight'
+                      title: string | null
+                      slug: string | null
+                    }
+                  | {
+                      _type: 'page'
+                      title: string | null
+                      slug: string | null
+                    }
+                  | null
+                href?: string
+                anchor?: string
+                contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+                icon?: 'arrow' | 'down' | 'external' | 'none'
+              } | null
+            }
+          | {
+              _key: string
+              _type: 'richText'
+              body?: BodyText
+            }
+          | {
+              _key: string
+              _type: 'statGroup'
+              stats?: Array<
+                {
+                  _key: string
+                } & Stat
+              >
+            }
+        > | null
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'listingSection'
+        heading?: string
+        pageType?: 'partner' | 'service' | 'standard'
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+        pages: Array<{
+          _id: string
+          _type: 'page'
+          title: string | null
+          slug: string | null
+          card: {
+            shortTitle?: string
+            excerpt?: string
+            icon?: {
+              asset?: SanityImageAssetReference
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              _type: 'image'
+            }
+          } | null
+        }>
+      }
+    | {
+        _key: string
+        _type: 'logoWallSection'
+        eyebrow?: string
+        layout?: 'bar' | 'plates'
+        heading?: string
+        body?: string
+        clients: Array<{
+          _id: string
+          name: string | null
+          logo: {
+            asset?: SanityImageAssetReference
+            media?: unknown
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            _type: 'image'
+          } | null
+        }> | null
+        button: {
+          _type: 'button'
+          label?: string
+          target:
+            | {
+                _type: 'caseStudy'
+                title: string | null
+                slug: string | null
+              }
+            | {
+                _type: 'insight'
+                title: string | null
+                slug: string | null
+              }
+            | {
+                _type: 'page'
+                title: string | null
+                slug: string | null
+              }
+            | null
+          href?: string
+          anchor?: string
+          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          icon?: 'arrow' | 'down' | 'external' | 'none'
+        } | null
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'mediaSection'
+        media?: Figure
+        variant?: 'capture' | 'plain'
+        width?: 'contained' | 'full-bleed'
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'personGridSection'
+        eyebrow?: string
+        heading?: string
+        people: Array<{
+          _key: string
+          _id: string
+          name: string | null
+          title: string | null
+          bio: string | null
+          headshot: {
+            asset?: SanityImageAssetReference
+            media?: unknown
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            _type: 'image'
+          } | null
+        }> | null
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'quoteSection'
+        eyebrow?: string
+        quote?: string
+        attribution?: string
+        decoration?: 'molecule' | 'none' | 'orbs'
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'railPanelsSection'
+        heading?: string
+        intro?: string
+        layout?: 'cards' | 'grid' | 'rail' | 'rows' | 'track'
+        rail?: 'label' | 'number'
+        panels: Array<{
+          railLabel?: string
+          heading?: string
+          logo?: Logo
+          body?: string
+          note?: string
+          button: {
+            _type: 'button'
+            label?: string
+            target:
+              | {
+                  _type: 'caseStudy'
+                  title: string | null
+                  slug: string | null
+                }
+              | {
+                  _type: 'insight'
+                  title: string | null
+                  slug: string | null
+                }
+              | {
+                  _type: 'page'
+                  title: string | null
+                  slug: string | null
+                }
+              | null
+            href?: string
+            anchor?: string
+            contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+            icon?: 'arrow' | 'down' | 'external' | 'none'
+          } | null
+          media?: Figure
+          mark?: Mark
+          details?: Array<{
+            label?: string
+            items?: Array<string>
+            _type: 'detail'
+            _key: string
+          }>
+          _type: 'panel'
+          _key: string
+        }> | null
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'roleListSection'
+        eyebrow?: string
+        heading?: string
+        roles: Array<{
+          heading?: string
+          eyebrow?: string
+          button: {
+            _type: 'button'
+            label?: string
+            target:
+              | {
+                  _type: 'caseStudy'
+                  title: string | null
+                  slug: string | null
+                }
+              | {
+                  _type: 'insight'
+                  title: string | null
+                  slug: string | null
+                }
+              | {
+                  _type: 'page'
+                  title: string | null
+                  slug: string | null
+                }
+              | null
+            href?: string
+            anchor?: string
+            contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+            icon?: 'arrow' | 'down' | 'external' | 'none'
+          } | null
+          mark?: Mark
+          _type: 'role'
+          _key: string
+        }> | null
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'screenGridSection'
+        screens?: Array<{
+          media?: Figure
+          tone?: 'bone' | 'brand' | 'ink'
+          span?: 'standard' | 'wide'
+          _type: 'screen'
+          _key: string
+        }>
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+  > | null
+  sectionsBelow: Array<
+    | {
+        _key: string
+        _type: 'caseShowcaseSection'
+        heading?: string
+        button: {
+          _type: 'button'
+          label?: string
+          target:
+            | {
+                _type: 'caseStudy'
+                title: string | null
+                slug: string | null
+              }
+            | {
+                _type: 'insight'
+                title: string | null
+                slug: string | null
+              }
+            | {
+                _type: 'page'
+                title: string | null
+                slug: string | null
+              }
+            | null
+          href?: string
+          anchor?: string
+          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          icon?: 'arrow' | 'down' | 'external' | 'none'
+        } | null
+        caseStudies: Array<{
+          _id: string
+          _type: 'caseStudy'
+          title: string | null
+          slug: string | null
+          narrativeHeadline: string | null
+          headlineStat:
+            | ({
+                _key: string
+              } & Stat)
+            | null
+          heroMedia: Figure | null
+          client: {
+            name: string | null
+            logo: {
+              asset?: SanityImageAssetReference
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              _type: 'image'
+            } | null
+          } | null
+          industries: Array<{
+            title: string | null
+          }> | null
+          industryDetail: string | null
+        }> | null
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'ctaSection'
+        heading?: string
+        body?: string
+        button: {
+          _type: 'button'
+          label?: string
+          target:
+            | {
+                _type: 'caseStudy'
+                title: string | null
+                slug: string | null
+              }
+            | {
+                _type: 'insight'
+                title: string | null
+                slug: string | null
+              }
+            | {
+                _type: 'page'
+                title: string | null
+                slug: string | null
+              }
+            | null
+          href?: string
+          anchor?: string
+          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          icon?: 'arrow' | 'down' | 'external' | 'none'
+        } | null
+        decoration?: 'molecule' | 'none' | 'orbs'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'faqSection'
+        heading?: string
+        subheading?: string
+        questions?: Array<{
+          heading?: string
+          body?: string
+          _type: 'question'
+          _key: string
+        }>
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'featureGridSection'
+        heading?: string
+        layout?: 'grid' | 'orbital' | 'rows' | 'stack'
+        features?: Array<{
+          heading?: string
+          body?: string
+          mark?: Mark
+          icon?:
+            | 'arrow-circle-right'
+            | 'chart-line-up'
+            | 'crosshair'
+            | 'file-magnifying-glass'
+            | 'gear'
+            | 'handshake'
+            | 'hard-drives'
+            | 'lightbulb-filament'
+            | 'line-segments'
+            | 'link'
+            | 'map-trifold'
+            | 'none'
+            | 'path'
+            | 'share-network'
+            | 'sparkle'
+            | 'sun-horizon'
+            | 'swap'
+            | 'user-gear'
+            | 'users'
+          _type: 'feature'
+          _key: string
+        }>
+        decoration?: 'molecule' | 'none'
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'formSection'
+        eyebrow?: string
+        heading?: string
+        note?: string
+        reasons?: Array<string>
+        consentLabel?: string
+        button: {
+          _type: 'button'
+          label?: string
+          target:
+            | {
+                _type: 'caseStudy'
+                title: string | null
+                slug: string | null
+              }
+            | {
+                _type: 'insight'
+                title: string | null
+                slug: string | null
+              }
+            | {
+                _type: 'page'
+                title: string | null
+                slug: string | null
+              }
+            | null
+          href?: string
+          anchor?: string
+          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          icon?: 'arrow' | 'down' | 'external' | 'none'
+        } | null
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'heroSection'
+        variant?: 'band' | 'orbital'
+        eyebrow?: string
+        logo?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
+        headlineLines?: Array<string>
+        subheading?: string
+        details?: Array<{
+          label?: string
+          items?: Array<string>
+          _type: 'detail'
+          _key: string
+        }>
+        button: {
+          _type: 'button'
+          label?: string
+          target:
+            | {
+                _type: 'caseStudy'
+                title: string | null
+                slug: string | null
+              }
+            | {
+                _type: 'insight'
+                title: string | null
+                slug: string | null
+              }
+            | {
+                _type: 'page'
+                title: string | null
+                slug: string | null
+              }
+            | null
+          href?: string
+          anchor?: string
+          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          icon?: 'arrow' | 'down' | 'external' | 'none'
+        } | null
+        decoration?: 'none' | 'orbs'
+        surface?: 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'inFlightSection'
+        heading?: string
+        subheading?: string
+        layout?: 'cards' | 'rows'
+        entries: Array<{
+          heading?: string
+          eyebrow?: string
+          media?: Figure
+          date?: string
+          button: {
+            _type: 'button'
+            label?: string
+            target:
+              | {
+                  _type: 'caseStudy'
+                  title: string | null
+                  slug: string | null
+                }
+              | {
+                  _type: 'insight'
+                  title: string | null
+                  slug: string | null
+                }
+              | {
+                  _type: 'page'
+                  title: string | null
+                  slug: string | null
+                }
+              | null
+            href?: string
+            anchor?: string
+            contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+            icon?: 'arrow' | 'down' | 'external' | 'none'
+          } | null
+          mark?: Mark
+          _type: 'entry'
+          _key: string
+        }> | null
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'insightsCarouselSection'
+        heading?: string
+        insights?: Array<
+          {
+            _key: string
+          } & InsightReference
+        >
+        category?: CategoryReference
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+        curated: Array<{
+          _id: string
+          _type: 'insight'
+          title: string | null
+          slug: string | null
+          excerpt: string | null
+          publishedAt: string | null
+          featuredImage: Figure | null
+          author: {
+            name: string | null
+            title: string | null
+            headshot: {
+              asset?: SanityImageAssetReference
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              _type: 'image'
+            } | null
+          } | null
+          categories: Array<{
+            title: string | null
+            slug: string | null
+          }> | null
+          readingMinutes: number | 1
+        }> | null
+        latest: Array<{
+          _id: string
+          _type: 'insight'
+          title: string | null
+          slug: string | null
+          excerpt: string | null
+          publishedAt: string | null
+          featuredImage: Figure | null
+          author: {
+            name: string | null
+            title: string | null
+            headshot: {
+              asset?: SanityImageAssetReference
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              _type: 'image'
+            } | null
+          } | null
+          categories: Array<{
+            title: string | null
+            slug: string | null
+          }> | null
+          readingMinutes: number | 1
+        }>
+      }
+    | {
+        _key: string
+        _type: 'layoutSection'
+        eyebrow?: string
+        heading?: string
+        subheading?: string
+        columns?: 1 | 2 | 3
+        decoration?: 'molecule' | 'none'
+        items: Array<
+          | {
+              _key: string
+              _type: 'button'
+              label?: string
+              target:
+                | {
+                    _type: 'caseStudy'
+                    title: string | null
+                    slug: string | null
+                  }
+                | {
+                    _type: 'insight'
+                    title: string | null
+                    slug: string | null
+                  }
+                | {
+                    _type: 'page'
+                    title: string | null
+                    slug: string | null
+                  }
+                | null
+              href?: string
+              anchor?: string
+              contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+              icon?: 'arrow' | 'down' | 'external' | 'none'
+            }
+          | {
+              _key: string
+              _type: 'buttonGroup'
+              buttons: Array<{
+                _key: string
+                _type: 'button'
+                label?: string
+                target:
+                  | {
+                      _type: 'caseStudy'
+                      title: string | null
+                      slug: string | null
+                    }
+                  | {
+                      _type: 'insight'
+                      title: string | null
+                      slug: string | null
+                    }
+                  | {
+                      _type: 'page'
+                      title: string | null
+                      slug: string | null
+                    }
+                  | null
+                href?: string
+                anchor?: string
+                contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+                icon?: 'arrow' | 'down' | 'external' | 'none'
+              }> | null
+              alignment?: 'center' | 'end' | 'start'
+            }
+          | {
+              _key: string
+              _type: 'embed'
+              url?: string
+              caption?: string
+            }
+          | {
+              _key: string
+              _type: 'figure'
+              image?: {
+                asset?: SanityImageAssetReference
+                media?: unknown
+                hotspot?: SanityImageHotspot
+                crop?: SanityImageCrop
+                _type: 'image'
+              }
+              alt?: string
+              caption?: string
+            }
+          | {
+              _key: string
+              _type: 'mark'
+              kind?: 'disc' | 'orb'
+              state?:
+                | 'breathing'
+                | 'composing'
+                | 'connecting'
+                | 'listening'
+                | 'searching'
+                | 'shaping'
+                | 'solving'
+                | 'weaving'
+                | 'working'
+              size?: 20 | 64
+              speed?: number
+              paused?: boolean
+            }
+          | {
+              _key: string
+              _type: 'mediaCard'
+              media?: Figure
+              heading?: string
+              body?: string
+              button: {
+                _type: 'button'
+                label?: string
+                target:
+                  | {
+                      _type: 'caseStudy'
+                      title: string | null
+                      slug: string | null
+                    }
+                  | {
+                      _type: 'insight'
+                      title: string | null
+                      slug: string | null
+                    }
+                  | {
+                      _type: 'page'
+                      title: string | null
+                      slug: string | null
+                    }
+                  | null
+                href?: string
+                anchor?: string
+                contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+                icon?: 'arrow' | 'down' | 'external' | 'none'
+              } | null
+            }
+          | {
+              _key: string
+              _type: 'richText'
+              body?: BodyText
+            }
+          | {
+              _key: string
+              _type: 'statGroup'
+              stats?: Array<
+                {
+                  _key: string
+                } & Stat
+              >
+            }
+        > | null
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'listingSection'
+        heading?: string
+        pageType?: 'partner' | 'service' | 'standard'
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+        pages: Array<{
+          _id: string
+          _type: 'page'
+          title: string | null
+          slug: string | null
+          card: {
+            shortTitle?: string
+            excerpt?: string
+            icon?: {
+              asset?: SanityImageAssetReference
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              _type: 'image'
+            }
+          } | null
+        }>
+      }
+    | {
+        _key: string
+        _type: 'logoWallSection'
+        eyebrow?: string
+        layout?: 'bar' | 'plates'
+        heading?: string
+        body?: string
+        clients: Array<{
+          _id: string
+          name: string | null
+          logo: {
+            asset?: SanityImageAssetReference
+            media?: unknown
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            _type: 'image'
+          } | null
+        }> | null
+        button: {
+          _type: 'button'
+          label?: string
+          target:
+            | {
+                _type: 'caseStudy'
+                title: string | null
+                slug: string | null
+              }
+            | {
+                _type: 'insight'
+                title: string | null
+                slug: string | null
+              }
+            | {
+                _type: 'page'
+                title: string | null
+                slug: string | null
+              }
+            | null
+          href?: string
+          anchor?: string
+          contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+          icon?: 'arrow' | 'down' | 'external' | 'none'
+        } | null
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'mediaSection'
+        media?: Figure
+        variant?: 'capture' | 'plain'
+        width?: 'contained' | 'full-bleed'
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'personGridSection'
+        eyebrow?: string
+        heading?: string
+        people: Array<{
+          _key: string
+          _id: string
+          name: string | null
+          title: string | null
+          bio: string | null
+          headshot: {
+            asset?: SanityImageAssetReference
+            media?: unknown
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            _type: 'image'
+          } | null
+        }> | null
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'quoteSection'
+        eyebrow?: string
+        quote?: string
+        attribution?: string
+        decoration?: 'molecule' | 'none' | 'orbs'
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'railPanelsSection'
+        heading?: string
+        intro?: string
+        layout?: 'cards' | 'grid' | 'rail' | 'rows' | 'track'
+        rail?: 'label' | 'number'
+        panels: Array<{
+          railLabel?: string
+          heading?: string
+          logo?: Logo
+          body?: string
+          note?: string
+          button: {
+            _type: 'button'
+            label?: string
+            target:
+              | {
+                  _type: 'caseStudy'
+                  title: string | null
+                  slug: string | null
+                }
+              | {
+                  _type: 'insight'
+                  title: string | null
+                  slug: string | null
+                }
+              | {
+                  _type: 'page'
+                  title: string | null
+                  slug: string | null
+                }
+              | null
+            href?: string
+            anchor?: string
+            contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+            icon?: 'arrow' | 'down' | 'external' | 'none'
+          } | null
+          media?: Figure
+          mark?: Mark
+          details?: Array<{
+            label?: string
+            items?: Array<string>
+            _type: 'detail'
+            _key: string
+          }>
+          _type: 'panel'
+          _key: string
+        }> | null
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'roleListSection'
+        eyebrow?: string
+        heading?: string
+        roles: Array<{
+          heading?: string
+          eyebrow?: string
+          button: {
+            _type: 'button'
+            label?: string
+            target:
+              | {
+                  _type: 'caseStudy'
+                  title: string | null
+                  slug: string | null
+                }
+              | {
+                  _type: 'insight'
+                  title: string | null
+                  slug: string | null
+                }
+              | {
+                  _type: 'page'
+                  title: string | null
+                  slug: string | null
+                }
+              | null
+            href?: string
+            anchor?: string
+            contrast?: 'auto' | 'dark' | 'ghost' | 'light'
+            icon?: 'arrow' | 'down' | 'external' | 'none'
+          } | null
+          mark?: Mark
+          _type: 'role'
+          _key: string
+        }> | null
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+    | {
+        _key: string
+        _type: 'screenGridSection'
+        screens?: Array<{
+          media?: Figure
+          tone?: 'bone' | 'brand' | 'ink'
+          span?: 'standard' | 'wide'
+          _type: 'screen'
+          _key: string
+        }>
+        surface?: 'bone' | 'ink' | 'white'
+        backgroundMedia?: BackgroundMedia
+        anchor?: string
+      }
+  > | null
+  seo: Seo | null
+} | null
 
 // Source: src/queries.ts
 // Variable: LATEST_INSIGHTS_QUERY
@@ -3177,6 +4749,7 @@ declare module '@sanity/client' {
     '*[_type == "insight" && defined(slug.current)].slug.current': INSIGHT_SLUGS_QUERY_RESULT
     '{\n  "items": *[_type == "insight" && ($category == null || $category in categories[]->slug.current)] | order(publishedAt desc) [$offset...$end]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  \n  "author": author->{name, title, headshot},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n},\n  "total": count(*[_type == "insight" && ($category == null || $category in categories[]->slug.current)]),\n  "categories": *[_type == "category" && slug.current != "uncategorized" && count(*[_type == "insight" && references(^._id)]) > 0] | order(title asc){title, "slug": slug.current}\n}': INSIGHTS_PAGE_QUERY_RESULT
     '{\n  "items": *[_type == "caseStudy"] | order(coalesce(publishedAt, _createdAt) desc) [$offset...$end]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  narrativeHeadline,\n  "headlineStat": stats[0],\n  heroMedia,\n  "client": client->{name, logo},\n  "industries": industries[]->{title},\n  industryDetail\n},\n  "total": count(*[_type == "caseStudy"])\n}': CASE_STUDIES_PAGE_QUERY_RESULT
+    '*[_type == "collectionIndex" && collection == $collection][0]{\n  _id,\n  _type,\n  title,\n  collection,\n  "sectionsAbove": sectionsAbove[]{\n  ...,\n  _type == "heroSection" => {\n    button{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "logoWallSection" => {\n    "clients": clients[]->{_id, name, logo},\n    button{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "caseShowcaseSection" => {\n    "caseStudies": caseStudies[]->{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  narrativeHeadline,\n  "headlineStat": stats[0],\n  heroMedia,\n  "client": client->{name, logo},\n  "industries": industries[]->{title},\n  industryDetail\n},\n    button{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "railPanelsSection" => {\n    panels[]{..., button{..., "target": target->{_type, title, "slug": slug.current}}}\n  },\n  _type == "insightsCarouselSection" => {\n    "curated": insights[]->{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  \n  "author": author->{name, title, headshot},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n},\n    "latest": *[_type == "insight" && (!defined(^.category) || ^.category._ref in categories[]._ref)] | order(publishedAt desc)[0...8]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  \n  "author": author->{name, title, headshot},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n}\n  },\n  _type == "ctaSection" => {\n    button{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "formSection" => {\n    button{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "personGridSection" => {\n    \n    "people": people[]{_key, ...@->{_id, name, title, bio, headshot}}\n  },\n  _type == "roleListSection" => {\n    roles[]{..., button{..., "target": target->{_type, title, "slug": slug.current}}}\n  },\n  _type == "inFlightSection" => {\n    entries[]{..., button{..., "target": target->{_type, title, "slug": slug.current}}}\n  },\n  _type == "layoutSection" => {\n    items[]{\n      ...,\n      _type == "button" => {"target": target->{_type, title, "slug": slug.current}},\n      _type == "buttonGroup" => {buttons[]{..., "target": target->{_type, title, "slug": slug.current}}},\n      _type == "mediaCard" => {button{..., "target": target->{_type, title, "slug": slug.current}}}\n    }\n  },\n  _type == "listingSection" => {\n    "pages": *[_type == "page" && pageType == ^.pageType && slug.current != "index"] | order(title asc){_id, _type, title, "slug": slug.current, card}\n  }\n},\n  "sectionsBelow": sectionsBelow[]{\n  ...,\n  _type == "heroSection" => {\n    button{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "logoWallSection" => {\n    "clients": clients[]->{_id, name, logo},\n    button{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "caseShowcaseSection" => {\n    "caseStudies": caseStudies[]->{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  narrativeHeadline,\n  "headlineStat": stats[0],\n  heroMedia,\n  "client": client->{name, logo},\n  "industries": industries[]->{title},\n  industryDetail\n},\n    button{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "railPanelsSection" => {\n    panels[]{..., button{..., "target": target->{_type, title, "slug": slug.current}}}\n  },\n  _type == "insightsCarouselSection" => {\n    "curated": insights[]->{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  \n  "author": author->{name, title, headshot},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n},\n    "latest": *[_type == "insight" && (!defined(^.category) || ^.category._ref in categories[]._ref)] | order(publishedAt desc)[0...8]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  \n  "author": author->{name, title, headshot},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n}\n  },\n  _type == "ctaSection" => {\n    button{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "formSection" => {\n    button{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "personGridSection" => {\n    \n    "people": people[]{_key, ...@->{_id, name, title, bio, headshot}}\n  },\n  _type == "roleListSection" => {\n    roles[]{..., button{..., "target": target->{_type, title, "slug": slug.current}}}\n  },\n  _type == "inFlightSection" => {\n    entries[]{..., button{..., "target": target->{_type, title, "slug": slug.current}}}\n  },\n  _type == "layoutSection" => {\n    items[]{\n      ...,\n      _type == "button" => {"target": target->{_type, title, "slug": slug.current}},\n      _type == "buttonGroup" => {buttons[]{..., "target": target->{_type, title, "slug": slug.current}}},\n      _type == "mediaCard" => {button{..., "target": target->{_type, title, "slug": slug.current}}}\n    }\n  },\n  _type == "listingSection" => {\n    "pages": *[_type == "page" && pageType == ^.pageType && slug.current != "index"] | order(title asc){_id, _type, title, "slug": slug.current, card}\n  }\n},\n  seo\n}': COLLECTION_INDEX_QUERY_RESULT
     '*[_type == "insight" && ($categoryId == null || $categoryId in categories[]._ref)] | order(publishedAt desc) [0...$limit]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  \n  "author": author->{name, title, headshot},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n}': LATEST_INSIGHTS_QUERY_RESULT
     '*[_type == "caseStudy" && slug.current == $slug][0]{\n  \n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  narrativeHeadline,\n  "headlineStat": stats[0],\n  heroMedia,\n  "client": client->{name, logo},\n  "industries": industries[]->{title},\n  industryDetail\n,\n  stats,\n  deliverables,\n  \n  "story": story[]{\n  ...,\n  _type == "heroSection" => {\n    button{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "logoWallSection" => {\n    "clients": clients[]->{_id, name, logo},\n    button{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "caseShowcaseSection" => {\n    "caseStudies": caseStudies[]->{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  narrativeHeadline,\n  "headlineStat": stats[0],\n  heroMedia,\n  "client": client->{name, logo},\n  "industries": industries[]->{title},\n  industryDetail\n},\n    button{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "railPanelsSection" => {\n    panels[]{..., button{..., "target": target->{_type, title, "slug": slug.current}}}\n  },\n  _type == "insightsCarouselSection" => {\n    "curated": insights[]->{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  \n  "author": author->{name, title, headshot},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n},\n    "latest": *[_type == "insight" && (!defined(^.category) || ^.category._ref in categories[]._ref)] | order(publishedAt desc)[0...8]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage,\n  \n  "author": author->{name, title, headshot},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n}\n  },\n  _type == "ctaSection" => {\n    button{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "formSection" => {\n    button{..., "target": target->{_type, title, "slug": slug.current}}\n  },\n  _type == "personGridSection" => {\n    \n    "people": people[]{_key, ...@->{_id, name, title, bio, headshot}}\n  },\n  _type == "roleListSection" => {\n    roles[]{..., button{..., "target": target->{_type, title, "slug": slug.current}}}\n  },\n  _type == "inFlightSection" => {\n    entries[]{..., button{..., "target": target->{_type, title, "slug": slug.current}}}\n  },\n  _type == "layoutSection" => {\n    items[]{\n      ...,\n      _type == "button" => {"target": target->{_type, title, "slug": slug.current}},\n      _type == "buttonGroup" => {buttons[]{..., "target": target->{_type, title, "slug": slug.current}}},\n      _type == "mediaCard" => {button{..., "target": target->{_type, title, "slug": slug.current}}}\n    }\n  },\n  _type == "listingSection" => {\n    "pages": *[_type == "page" && pageType == ^.pageType && slug.current != "index"] | order(title asc){_id, _type, title, "slug": slug.current, card}\n  }\n},\n  seo,\n  \n  "next": *[_type == "caseStudy" && _id != ^._id] | order(_createdAt desc) [0]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  narrativeHeadline,\n  "headlineStat": stats[0],\n  heroMedia,\n  "client": client->{name, logo},\n  "industries": industries[]->{title},\n  industryDetail\n}\n}': CASE_STUDY_QUERY_RESULT
     '*[_type == "caseStudy" && defined(slug.current)].slug.current': CASE_STUDY_SLUGS_QUERY_RESULT

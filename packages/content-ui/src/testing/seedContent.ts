@@ -73,6 +73,10 @@ import pageVentures from '../../../../tools/migration/data/seed/page/ventures.js
 import pageVenturesUrvin from '../../../../tools/migration/data/seed/page/ventures-urvin.json'
 import page1682 from '../../../../tools/migration/data/seed/page/1682-conference-ai-innovation.json'
 
+// The chrome around a collection's feed (#347) — the bands the index mockups
+// draw above and below the listing the route owns.
+import collectionIndexInsights from '../../../../tools/migration/data/seed/collectionIndex/insights.json'
+
 // ── Clients the homepage logo wall and the showcase cards dereference ──────
 import clientChop from '../../../../tools/migration/data/seed/client/chop.json'
 import clientIronman from '../../../../tools/migration/data/seed/client/ironman.json'
@@ -309,6 +313,37 @@ export function seededPage(name: SeedPageName): NonNullable<PAGE_QUERY_RESULT> {
     latestInsights: INSIGHTS,
     projectInsight: curatedInsight,
   }) as unknown as NonNullable<PAGE_QUERY_RESULT>
+}
+
+const SEED_COLLECTION_INDEXES = {
+  insights: collectionIndexInsights,
+} as const
+
+export type SeedCollectionIndexName = keyof typeof SEED_COLLECTION_INDEXES
+
+/**
+ * A committed collection-index seed, shaped the way `COLLECTION_INDEX_QUERY`
+ * returns it — both band arrays projected like a page's `sections`.
+ *
+ * This is what lets an index mockup draw the same hero and closer the route
+ * does. Without it a story would show the feed with nothing around it, and the
+ * visual check would be comparing a page against half of itself.
+ */
+export function seededCollectionIndex(name: SeedCollectionIndexName) {
+  const doc = resolveAssetMarkers(SEED_COLLECTION_INDEXES[name], assetIdFor) as SeedDoc
+  const project = (sections: unknown) =>
+    projectSeedPage({
+      page: { ...doc, sections: (sections ?? []) as SeedDoc[] },
+      resolve,
+      latestInsights: INSIGHTS,
+      projectInsight: curatedInsight,
+    }).sections as PageSection[]
+
+  return {
+    _id: doc._id as string,
+    sectionsAbove: project(doc.sectionsAbove),
+    sectionsBelow: project(doc.sectionsBelow),
+  }
 }
 
 /** The sections of a seed page, for a story that renders one block from real content. */

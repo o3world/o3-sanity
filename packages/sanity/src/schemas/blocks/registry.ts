@@ -215,6 +215,14 @@ function blockArrays(sections: readonly SectionBlockName[]) {
      * The base tier is one list for both brands, so this entry is the same in
      * every roster.
      */
+    /**
+     * The two arrays flanking a collection index's feed (#347). Both take the
+     * whole roster: the feed is not a block, so there is no block whose
+     * presence on these pages is incoherent, and a curated subset would be a
+     * second roster to keep in step.
+     */
+    'collectionIndex.sectionsAbove': sections,
+    'collectionIndex.sectionsBelow': sections,
     'layoutSection.items': BASE_BLOCKS,
   } as const satisfies Readonly<Record<string, readonly string[]>>
 }
