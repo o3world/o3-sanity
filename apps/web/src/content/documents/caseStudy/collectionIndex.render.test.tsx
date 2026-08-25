@@ -245,3 +245,62 @@ describe('work index authored bands', () => {
     expect(calls.some((call) => call.query === COLLECTION_INDEX_QUERY)).toBe(true)
   })
 })
+
+/**
+ * THE INDEX'S OWN SEO (#349). The same three tiers /insights has, on the route
+ * with no facet — so the canonical assertion here is about pagination alone.
+ */
+describe('work index metadata', () => {
+  const feed = () => aCaseStudiesPage(cards, 2)
+  const chrome = (overrides = {}) =>
+    aCollectionIndex({ _id: 'collectionIndex-caseStudy', collection: 'caseStudy', ...overrides })
+
+  it('lets the document’s seo beat the entry’s static title', async () => {
+    const { metadata } = await renderRoute(route, {
+      data: withIndexChrome(feed(), chrome({ seo: { title: 'The work' } })),
+    })
+
+    expect(metadata.title).toBe('The work')
+  })
+
+  it('falls back to the entry’s static seo where the document overrides nothing', async () => {
+    const { metadata } = await renderRoute(route, {
+      data: withIndexChrome(feed(), chrome()),
+    })
+
+    expect(metadata.title).toBe('Work')
+  })
+
+  it('keeps the canonical on the unpaginated index for a paginated request', async () => {
+    const { metadata } = await renderRoute(route, {
+      data: withIndexChrome(aCaseStudiesPage(cards, 20), chrome()),
+      searchParams: { page: '2' },
+    })
+
+    expect(String(metadata.alternates?.canonical)).toContain('/work')
+    expect(String(metadata.alternates?.canonical)).not.toContain('page=')
+  })
+
+  it('ignores a canonical typed onto the document', async () => {
+    const { metadata } = await renderRoute(route, {
+      data: withIndexChrome(
+        feed(),
+        chrome({ seo: { canonical: 'https://example.com/elsewhere' } }),
+      ),
+    })
+
+    expect(String(metadata.alternates?.canonical)).not.toContain('example.com')
+  })
+
+  /**
+   * The seed's own SEO, carried from the origin site's /work archive page —
+   * so the migrated description is what ships rather than a placeholder.
+   */
+  it('carries the seeded description from the origin site', async () => {
+    const { metadata } = await renderRoute(route, {
+      data: withIndexChrome(feed(), aSeededCollectionIndex('work')),
+    })
+
+    expect(metadata.description).toContain('case studies showcasing unique projects')
+  })
+})

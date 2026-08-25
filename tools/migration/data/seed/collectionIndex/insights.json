@@ -1,5 +1,5 @@
 {
-  "_id": "collectionIndex-insight",
+  "_id": "collectionIndex-seed-insights",
   "_type": "collectionIndex",
   "title": "Insights index",
   "collection": "insight",
@@ -10,7 +10,9 @@
       "variant": "band",
       "surface": "ink",
       "eyebrow": "Insights",
-      "headlineLines": ["Learn about what drives our experiences."],
+      "headlineLines": [
+        "Learn about what drives our experiences."
+      ],
       "subheading": "Looking for some firsthand knowledge from our world? Check out our in-depth thoughts about the industry today, our culture at O3, the future of AI and digital experiences, and other relevant topics.",
       "decoration": "none"
     }
@@ -28,5 +30,17 @@
       },
       "decoration": "molecule"
     }
-  ]
+  ],
+  "seo": {
+    "_type": "seo",
+    "title": "Insights from O3 on Digital Experiences",
+    "description": "Discover the latest insights on digital experiences and culture at O3, influencing today’s industry landscape."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:insights",
+    "extractedAt": "2026-08-25T00:00:00Z",
+    "figmaNode": "2336:4310",
+    "provisional": false
+  }
 }

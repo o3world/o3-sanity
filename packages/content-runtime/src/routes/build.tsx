@@ -359,10 +359,29 @@ export function buildIndexRoute<Q extends string>(entry: IndexEntry<Q>): IndexRo
   const generateMetadata: IndexRouteShim['generateMetadata'] = async () => {
     const read = metadataRead(await currentReadMode())
     const doc = await fetchDocument(read)
-    const seo = (doc as { seo?: SeoOverrides | null } | null)?.seo
-    if (!entry.seo && !seo) return {}
+    const authored = (doc as { seo?: SeoOverrides | null } | null)?.seo
+    if (!entry.seo && !authored) return {}
+
+    /**
+     * Every override an index honours EXCEPT `canonical`.
+     *
+     * A detail page may point its canonical elsewhere — that is what the field
+     * is for, and `buildDocumentMetadata` obeys it. An index may not. This
+     * route canonicalizes every paginated and filtered page back to the bare
+     * index, so one editor-typed URL would redirect the whole collection's
+     * crawl at once, and the value that decides it is the route's `path`
+     * rather than anything in the dataset.
+     *
+     * Dropped rather than gated in the schema: `seo` is one shared object on
+     * every document, and forking it per type to hide one field would cost
+     * more than this line.
+     */
+    const seo = authored ? { ...authored, canonical: null } : authored
+
     return buildDocumentMetadata({
       seo,
+      // An entry that declares a `document` must declare `seo` too — it is
+      // what supplies `path`, and the canonical is built from it.
       doc: entry.seo ?? { title: null, description: null, image: null, path: '' },
       settings: await getSiteSettings(),
     })

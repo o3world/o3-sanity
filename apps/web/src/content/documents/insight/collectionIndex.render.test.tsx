@@ -493,3 +493,96 @@ describe('insights index authored bands', () => {
     expect(html).not.toContain('Let’s get started on your next big thing.')
   })
 })
+
+/**
+ * THE INDEX'S OWN SEO (#349) — the two highest-traffic landing pages stop
+ * being stuck with a developer's first guess.
+ *
+ * Three tiers: the document's `seo` overrides win, the entry's static SEO is
+ * the fallback, Site Settings is the floor. The canonical is in none of them —
+ * it is the ROUTE's, which is what keeps a paginated or filtered URL from
+ * being indexed as a document of its own.
+ */
+describe('insights index metadata', () => {
+  const feed = () => anInsightsPage(manyInsights(3), 3)
+
+  it('lets the document’s seo beat the entry’s static title and description', async () => {
+    const { metadata } = await renderRoute(route, {
+      data: withIndexChrome(
+        feed(),
+        aCollectionIndex({
+          seo: { title: 'Insights from O3', description: 'What the editor wrote.' },
+        } as never),
+      ),
+    })
+
+    expect(metadata.title).toBe('Insights from O3')
+    expect(metadata.description).toBe('What the editor wrote.')
+  })
+
+  it('falls back to the entry’s static seo where the document overrides nothing', async () => {
+    const { metadata } = await renderRoute(route, {
+      data: withIndexChrome(feed(), aCollectionIndex()),
+    })
+
+    expect(metadata.title).toBe('Insights')
+  })
+
+  it('still emits the static seo when there is no document at all', async () => {
+    const { metadata } = await renderRoute(route, { data: withIndexChrome(feed(), null) })
+    expect(metadata.title).toBe('Insights')
+  })
+
+  it('keeps the canonical on the unpaginated index for a paginated request', async () => {
+    const { metadata } = await renderRoute(route, {
+      data: withIndexChrome(feed(), aCollectionIndex()),
+      searchParams: { page: '2' },
+    })
+
+    expect(metadata.alternates?.canonical).toContain('/insights')
+    expect(String(metadata.alternates?.canonical)).not.toContain('page=')
+  })
+
+  it('keeps the canonical on the unfiltered index for a filtered request', async () => {
+    const { metadata } = await renderRoute(route, {
+      data: withIndexChrome(feed(), aCollectionIndex()),
+      searchParams: { category: 'design' },
+    })
+
+    expect(String(metadata.alternates?.canonical)).not.toContain('category=')
+  })
+
+  /**
+   * The one override an index does NOT honour. A collection index's URL is the
+   * route's, and the route canonicalizes every paginated and filtered page
+   * back to it — an editor-typed canonical would break that rule for the whole
+   * collection at once, so the field is ignored here rather than obeyed.
+   */
+  /**
+   * The seed's own SEO, carried from the origin site's /perspectives archive
+   * page with the one word ADR 0017 retired swapped for the one that replaced
+   * it — the collection is Insights now, so the title cannot advertise
+   * Perspectives.
+   */
+  it('carries the seeded title from the origin site, in the current vocabulary', async () => {
+    const { metadata } = await renderRoute(route, {
+      data: withIndexChrome(feed(), aSeededCollectionIndex('insights')),
+    })
+
+    expect(metadata.title).toBe('Insights from O3 on Digital Experiences')
+    expect(metadata.description).toContain('influencing today’s industry landscape')
+    expect(String(metadata.title)).not.toContain('Perspectives')
+  })
+
+  it('ignores a canonical typed onto the document', async () => {
+    const { metadata } = await renderRoute(route, {
+      data: withIndexChrome(
+        feed(),
+        aCollectionIndex({ seo: { canonical: 'https://example.com/elsewhere' } } as never),
+      ),
+    })
+
+    expect(String(metadata.alternates?.canonical)).not.toContain('example.com')
+    expect(String(metadata.alternates?.canonical)).toContain('/insights')
+  })
+})

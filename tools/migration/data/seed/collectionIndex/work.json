@@ -1,5 +1,5 @@
 {
-  "_id": "collectionIndex-caseStudy",
+  "_id": "collectionIndex-seed-work",
   "_type": "collectionIndex",
   "title": "Work index",
   "collection": "caseStudy",
@@ -10,7 +10,9 @@
       "variant": "band",
       "surface": "ink",
       "eyebrow": "Our work",
-      "headlineLines": ["Strategy, Design and Technology working together."],
+      "headlineLines": [
+        "Strategy, Design and Technology working together."
+      ],
       "subheading": "Not the deliverable. Here's what that looks like across the work.",
       "decoration": "none"
     }
@@ -28,5 +30,17 @@
       },
       "decoration": "orbs"
     }
-  ]
+  ],
+  "seo": {
+    "_type": "seo",
+    "title": "Explore O3’s Work and Innovative Digital Solutions",
+    "description": "See the work of O3’s production team come to life in this series of case studies showcasing unique projects for many industries."
+  },
+  "migration": {
+    "locked": false,
+    "sourceId": "seed:work",
+    "extractedAt": "2026-08-25T00:00:00Z",
+    "figmaNode": "1634:1167",
+    "provisional": false
+  }
 }

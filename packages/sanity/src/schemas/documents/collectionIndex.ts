@@ -62,7 +62,23 @@ export const collectionIndex = (arrays: BlockArrays) =>
           defineArrayMember(member),
         ),
       }),
-      defineField({ name: 'seo', type: 'seo' }),
+      /**
+       * The index's own search and social tags — they beat the route's static
+       * fallbacks (#349).
+       *
+       * `canonical` is the one field here that does nothing. The route
+       * canonicalizes every paginated and filtered page back to the bare
+       * index, so a URL typed here would redirect the whole collection's crawl
+       * at once; `buildIndexRoute` drops it. Said in the description rather
+       * than hidden, because `seo` is one shared object on every document and
+       * forking it to gate one field would cost more than the sentence.
+       */
+      defineField({
+        name: 'seo',
+        type: 'seo',
+        description:
+          'Search and social tags for this index. The Canonical URL field does not apply here — the route always points a paginated or filtered page back at the bare index.',
+      }),
       defineField({ name: 'migration', type: 'migration' }),
     ],
     preview: {
