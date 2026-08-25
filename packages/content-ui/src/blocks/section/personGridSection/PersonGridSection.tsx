@@ -51,7 +51,12 @@ export function PersonGridSection({
       <div className="flex flex-col gap-10 lg:gap-12">
         {eyebrow || heading ? (
           <header data-sanity={fieldAttr(loc, 'heading')} className="flex flex-col gap-2">
-            {eyebrow ? <Eyebrow size="lg">{eyebrow}</Eyebrow> : null}
+            {/* Brand red — "LEADERSHIP TEAM" is #EB1000 on About (`1927:6436`). */}
+            {eyebrow ? (
+              <Eyebrow size="lg" tone="brand">
+                {eyebrow}
+              </Eyebrow>
+            ) : null}
             {heading ? <DisplayHeading>{heading}</DisplayHeading> : null}
           </header>
         ) : null}

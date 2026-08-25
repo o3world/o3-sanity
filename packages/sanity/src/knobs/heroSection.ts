@@ -70,15 +70,16 @@ export const heroSectionKnobs = defineBlockKnobs({
      * that turns and repaints nothing is the failure ADR 0020's guard exists
      * to remove.
      *
-     * Two of the three surfaces for the same reason. The `Interior Hero` set
-     * is instanced on ink everywhere but About, which draws "Interior Hero –
-     * White" (`2960:6876`); no instance of it draws bone.
+     * All three surfaces. The `Interior Hero` set is instanced on ink
+     * everywhere but About, which draws "Interior Hero – White"
+     * (`2960:6876`) — and that set's fill is **#F5F4F1**, the warm off-white
+     * rather than `#FFFFFF`, so bone is the option that band reaches for.
      *
      * `emptyMatches` is not set: `variant` defaults to `orbital`, so an unset
      * value is the composition this gate is closed for.
      */
     surfaceKnob({
-      options: ['ink', 'white'],
+      options: ['ink', 'white', 'bone'],
       initialValue: 'ink',
       showWhen: { at: 'variant', mode: 'oneOf', values: ['band'] },
     }),

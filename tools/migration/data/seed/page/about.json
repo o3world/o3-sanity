@@ -12,17 +12,18 @@
       "_type": "heroSection",
       "_key": "hero",
       "variant": "band",
-      "eyebrow": "About O3",
+      "eyebrow": "About us",
       "headlineLines": [
-        "The model is the story."
+        "Consultancy that has spent 20+ years prioritizing quality over scale"
       ],
       "decoration": "orbs",
-      "surface": "white"
+      "surface": "bone"
     },
     {
       "_type": "layoutSection",
       "_key": "why",
       "surface": "bone",
+      "width": "article",
       "columns": 1,
       "eyebrow": "Why O3",
       "subheading": "Built to go end to end — on purpose.",

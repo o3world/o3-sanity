@@ -403,6 +403,7 @@ export type LayoutSection = {
       } & Mark)
   >
   bleed?: 'none' | 'end'
+  width?: 'section' | 'article'
   surface?: 'white' | 'bone' | 'ink'
   backgroundMedia?: BackgroundMedia
   anchor?: string
@@ -665,7 +666,7 @@ export type HeroSection = {
   button?: Button
   decoration?: 'orbs' | 'none'
   alignment?: 'start' | 'center'
-  surface?: 'ink' | 'white'
+  surface?: 'ink' | 'white' | 'bone'
   backgroundMedia?: BackgroundMedia
   anchor?: string
 }
@@ -1849,7 +1850,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         } | null
         decoration?: 'none' | 'orbs'
         alignment?: 'center' | 'start'
-        surface?: 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -2111,6 +2112,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
             }
         > | null
         bleed?: 'end' | 'none'
+        width?: 'article' | 'section'
         surface?: 'bone' | 'ink' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
@@ -2580,7 +2582,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
         } | null
         decoration?: 'none' | 'orbs'
         alignment?: 'center' | 'start'
-        surface?: 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -2842,6 +2844,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
             }
         > | null
         bleed?: 'end' | 'none'
+        width?: 'article' | 'section'
         surface?: 'bone' | 'ink' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
@@ -3391,7 +3394,7 @@ export type CASE_STUDY_QUERY_RESULT = {
         } | null
         decoration?: 'none' | 'orbs'
         alignment?: 'center' | 'start'
-        surface?: 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -3653,6 +3656,7 @@ export type CASE_STUDY_QUERY_RESULT = {
             }
         > | null
         bleed?: 'end' | 'none'
+        width?: 'article' | 'section'
         surface?: 'bone' | 'ink' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
@@ -4228,7 +4232,7 @@ export type PAGE_QUERY_RESULT = {
         } | null
         decoration?: 'none' | 'orbs'
         alignment?: 'center' | 'start'
-        surface?: 'ink' | 'white'
+        surface?: 'bone' | 'ink' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
       }
@@ -4490,6 +4494,7 @@ export type PAGE_QUERY_RESULT = {
             }
         > | null
         bleed?: 'end' | 'none'
+        width?: 'article' | 'section'
         surface?: 'bone' | 'ink' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string

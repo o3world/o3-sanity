@@ -45,6 +45,19 @@ export const layoutSectionKnobs = defineBlockKnobs({
       ],
       initialValue: 'none',
     }),
+    knob({
+      name: 'width',
+      title: 'Width',
+      description:
+        'Section runs the standard 1248px column. Article insets the band to the 822px prose measure, for a header and running copy rather than a layout.',
+      // About's "Why O3" (`2960:6885`) is the only band on a canonical frame
+      // that insets itself — 340px of padding either side of a 1440 frame,
+      // against the 96px gutter every other band on that page keeps. A knob
+      // rather than a second block: the columns, the surface and the header
+      // are all unchanged, and only the measure moves.
+      options: ['section', 'article'],
+      initialValue: 'section',
+    }),
     // The redesigned Solutions frame's proof-point band (`2357:2690`, #93)
     // hangs the molecule behind a layout band the way the partner page's
     // "Why Sanity + O3" hangs it behind a feature grid — same glyph, same

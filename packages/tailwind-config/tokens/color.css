@@ -151,13 +151,14 @@
    * (2225:2920 / 1814:1630). Sits over whatever the hero is showing, so it
    * must stay an alpha. */
   --color-scrim: rgba(3, 3, 3, 0.2);
-  /* rgba(255,255,255,0.55) — the same pill once it floats over a LIGHT band.
-   * NO CANONICAL ANCHOR: the frames draw the bar over the hero and nowhere
-   * else, so a bar that stays pinned down the page has a state Figma never
-   * had to answer. This pair (fill + hairline below) is carried from the
-   * prototype's nav-ink flip, which is where the behaviour comes from. Still
-   * an alpha, for the same reason --color-scrim is. */
-  --color-scrim-light: rgba(255, 255, 255, 0.55);
+  /* rgba(3,3,3,0.10) — the same pill once it floats over a LIGHT band. The
+   * About frame is the anchor: its NavBar instance (`2250:2227`) overrides the
+   * component's own 20% fill to 10% of the same near-black rather than
+   * flipping to a white one, so the light skin is the dark scrim at half
+   * strength. Was rgba(255,255,255,0.55), carried from the prototype's nav-ink
+   * flip while no frame had answered it. Still an alpha, for the same reason
+   * --color-scrim is. */
+  --color-scrim-light: rgba(3, 3, 3, 0.1);
   /* rgba(0,0,0,0.10) — the hairline on the flipped pill; --color-on-ink-line's
    * opposite number, and the same NO CANONICAL ANCHOR note applies. */
   --color-on-light-line: rgba(0, 0, 0, 0.1);

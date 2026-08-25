@@ -111,6 +111,12 @@ export const SECTION_WIDTH_CLASS = {
   section: 'max-w-section',
   /** 1034px — the narrower measure for centred statements (the pull quote). */
   content: 'max-w-content',
+  /**
+   * 822px — the prose measure, for a band that is running copy rather than a
+   * layout. About's "Why O3" is the anchor (`2960:6885`): the frame insets it
+   * to a 760px column where every other band on the page runs the full 1248.
+   */
+  article: 'max-w-article',
   /** No measure — the band's own children decide. */
   full: 'max-w-none',
 } as const

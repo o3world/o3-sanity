@@ -6,12 +6,13 @@ import { SURFACE_CLASS, surfaceAttrs } from './section-shell'
 import { SurfaceProvider } from './surface-context'
 
 /**
- * The two colours the `Interior Hero` set is drawn on — ink on every route but
- * one, white on About (`2960:6876`). Bone is left out because no instance of
- * the set draws it, and an option nothing draws is a control that turns and
- * repaints nothing.
+ * The colours the `Interior Hero` set is drawn on — ink on every route but
+ * About, which instances "Interior Hero – White" (`2960:6876`) on **#F5F4F1**.
+ * That is the warm off-white, not `#FFFFFF`, so the light option here is
+ * `bone`: the frame's fill is a raw hex no Figma variable binds, and bone is
+ * the only light surface the token packages give every brand.
  */
-export type CollectionHeroSurface = 'ink' | 'white'
+export type CollectionHeroSurface = 'ink' | 'white' | 'bone'
 
 export interface CollectionHeroProps {
   /**

@@ -36,8 +36,8 @@ Let’s explore your future in AI and innovation
 Get in touch
 1682 Conference AI innovation: Transforming business
 About
-About O3
-The model is the story.
+About us
+Consultancy that has spent 20+ years prioritizing quality over scale
 Why O3
 What we optimize for.
 Strategy + execution

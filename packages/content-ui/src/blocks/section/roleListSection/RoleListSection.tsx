@@ -44,7 +44,12 @@ export function RoleListSection({ eyebrow, heading, roles, surface, loc }: RoleL
       <div className="flex flex-col gap-10 lg:gap-16">
         {eyebrow || heading ? (
           <header data-sanity={fieldAttr(loc, 'heading')} className="flex flex-col gap-2">
-            {eyebrow ? <Eyebrow size="lg">{eyebrow}</Eyebrow> : null}
+            {/* Brand red — "CAREERS" is #EB1000 on About (`1928:6438`). */}
+            {eyebrow ? (
+              <Eyebrow size="lg" tone="brand">
+                {eyebrow}
+              </Eyebrow>
+            ) : null}
             {heading ? <DisplayHeading className="lg:max-w-121.5">{heading}</DisplayHeading> : null}
           </header>
         ) : null}

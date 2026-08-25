@@ -83,6 +83,7 @@ export function LayoutSection({
   decoration,
   items,
   surface,
+  width,
   baseComponents,
 }: LayoutSectionProps) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -104,7 +105,11 @@ export function LayoutSection({
   const header =
     eyebrow || heading || subheading ? (
       <header className="flex flex-col gap-4">
-        {eyebrow ? <Eyebrow size="lg">{eyebrow}</Eyebrow> : null}
+        {eyebrow ? (
+          <Eyebrow size="lg" tone="brand">
+            {eyebrow}
+          </Eyebrow>
+        ) : null}
         {heading ? <DisplayHeading level={bleeding ? 'lg' : 'xl'}>{heading}</DisplayHeading> : null}
         {subheading ? (
           <p className="text-display-lg font-display text-fg-muted text-balance">{subheading}</p>
@@ -127,9 +132,13 @@ export function LayoutSection({
   }
   const resolved = resolveSurface(surface, 'layoutSection')
   const showMolecule = resolveDecoration(decoration, 'layoutSection') === 'molecule'
+  // The band's measure (`2960:6885`). `stegaClean` for the same reason
+  // `resolveDecoration` does it: a draft-mode string fails a bare `===`.
+  const measure = stegaClean(width) === 'article' ? 'article' : 'section'
   return (
     <SectionShell
       surface={resolved}
+      width={measure}
       top="md"
       bottom="md"
       // Only when decorated, or when a column bleeds — the clip is what keeps a
@@ -155,7 +164,7 @@ export function LayoutSection({
       <div className="flex flex-col gap-12">
         {/*
          * The three-part band header the interior frames use everywhere
-         * (`1924:5344`): a neutral eyebrow, the 48px heading, and a set-back
+         * (`1924:5344`): a brand-red eyebrow, the 48px heading, and a set-back
          * second line at the same size. The subheading is `text-fg-muted`
          * rather than a smaller step — the frame keeps it at 36px and drops
          * the value, which is what makes it read as a continuation of the

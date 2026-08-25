@@ -94,9 +94,10 @@ export function HeroSection({
     // form falls back to the arrangement every other instance draws.
     const centred = stegaClean(alignment) === 'center'
     const detailGroups = details ?? []
-    // Ink or white — the knob's own roster. Anything else a client could write
-    // past the form falls back to the colour the set is instanced on.
-    const band = resolveSurface(surface, 'heroSection') === 'white' ? 'white' : 'ink'
+    // The knob's own roster, all three. Anything else a client could write past
+    // the form falls back to the colour the set is instanced on.
+    const resolvedBand = resolveSurface(surface, 'heroSection')
+    const band = resolvedBand === 'white' || resolvedBand === 'bone' ? resolvedBand : 'ink'
     /*
      * The partner lockup (`2479:2205`): the brand's own mark, a 12px ×, and
      * the partner's mark. Only the partner half is content; the × is the
@@ -183,11 +184,15 @@ export function HeroSection({
              * size is a literal, `lg` anchors to the right edge it overhangs
              * by 117, and it is drawn at both widths.
              *
-             * On WHITE it is the About band's own art (`I2960:6876;2960:6862`)
-             * — 782 wide off the right edge, where the standfirst would
-             * otherwise sit — and the hairline drawing rather than the lit
-             * rim, because the glow belongs to the dark bands (see
-             * `OrbitalSphere`).
+             * On LIGHT it is the About band's own art
+             * (`I2960:6876;2960:6862`) — a 782 × 823 capture box whose 1284px
+             * source traces a sphere of **d ≈ 720, left edge 867, top edge
+             * 98** once scaled into the 1440 frame. So it is anchored to the
+             * band's TOP and overhangs the right edge by 147, the same
+             * top-and-right idiom the ink arm uses rather than the
+             * bottom-anchored percentages this carried before. The hairline
+             * drawing rather than the lit rim, because the glow belongs to the
+             * dark bands (see `OrbitalSphere`).
              */
             <OrbitalSphere
               tone={band === 'ink' ? 'ink' : 'light'}
@@ -199,7 +204,7 @@ export function HeroSection({
               className={
                 band === 'ink'
                   ? 'left-[205px] top-[184px] -z-10 w-[918px] lg:left-auto lg:right-[-117px]'
-                  : '-z-10 hidden lg:bottom-[-30%] lg:right-[-14%] lg:block lg:w-[720px]'
+                  : '-z-10 hidden lg:right-[-147px] lg:top-[98px] lg:block lg:w-[720px]'
               }
             />
           ) : null
