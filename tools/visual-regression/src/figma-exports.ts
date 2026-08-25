@@ -44,7 +44,7 @@ const BASELINE: Record<Brand, string> = {
 
 /**
  * `vr` captures at `deviceScaleFactor: 1` with `scale: 'css'` (`capture.ts`),
- * and the frames a story pairs against are drawn at the capture widths — 390
+ * and the frames a story pairs against are drawn at the capture widths — 402
  * and 1440 — so one design pixel is one capture pixel at scale 1. Anything
  * else would put a resample between the two sides of every comparison.
  */

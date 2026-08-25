@@ -5,7 +5,7 @@
  * the end of the run is allowed to mean.
  *
  * **The capture takes the frame's width, the frame is never resampled.**
- * `vr` shoots at 390 and 1440; the frames export at whatever the designer drew
+ * `vr` shoots at 402 and 1440; the frames export at whatever the designer drew
  * them at — 1440, 402, 776 — so the two sides rarely agree on width. Scaling
  * one to the other resamples every glyph and every edge, and a resample puts a
  * blur floor into the score that has nothing to do with the code: text-dense
@@ -72,11 +72,26 @@ export interface UnkeyedPairing {
   readonly why: string
 }
 
+/**
+ * A pairing whose two sides are not the same subject. The shutter is
+ * full-page, so a story citing a component set is a whole page measured
+ * against a strip — a 24px icon frame against a 320x844 capture scores 99.96%
+ * and means nothing. Listed with its reason, never scored, until a component
+ * story is captured at its own bounds.
+ */
+export interface UnscorablePairing {
+  readonly storyId: string
+  readonly nodeId: string
+  readonly brand: Brand | null
+  readonly why: string
+}
+
 export interface ScoringPlan {
   readonly targets: readonly ScoreTarget[]
   /** In scope, declares no `figmaDesign` node at all. */
   readonly unpaired: readonly StoryEntry[]
   readonly unkeyed: readonly UnkeyedPairing[]
+  readonly unscorable: readonly UnscorablePairing[]
 }
 
 /**
@@ -112,6 +127,23 @@ export function frameViewport(width: number): Viewport {
   }
 }
 
+/** Why a component-set pairing is listed instead of scored. */
+const COMPONENT_AGAINST_PAGE = 'component frame against a full-page capture'
+
+/** Why a mobile story paired to a desktop frame is listed instead of scored. */
+const MOBILE_AGAINST_DESKTOP = 'mobile story against a desktop frame'
+
+/**
+ * A story the repo names as its block's mobile drawing — `--mobile`, or a
+ * `-mobile` suffix on a named variant. The capture takes the frame's width, so
+ * such a story paired to a desktop frame is rendered at 1440 and scores
+ * whatever its desktop sibling scores: a desktop capture wearing a mobile
+ * label. The pairing is the thing at fault, not the code.
+ */
+function isMobileStory(storyId: string): boolean {
+  return /(^|-)mobile$/.test(storyId)
+}
+
 /** How the export map and the reason map are keyed. */
 export function frameKey(brand: Brand | string, nodeId: string): string {
   return `${brand}/${nodeId}`
@@ -145,6 +177,7 @@ export function planFrameScoring(input: {
   const targets: ScoreTarget[] = []
   const unpaired: StoryEntry[] = []
   const unkeyed: UnkeyedPairing[] = []
+  const unscorable: UnscorablePairing[] = []
   const seen = new Set<string>()
 
   for (const story of input.stories) {
@@ -154,6 +187,15 @@ export function planFrameScoring(input: {
       continue
     }
     for (const row of rows) {
+      if (row.match === 'componentSet') {
+        unscorable.push({
+          storyId: story.id,
+          nodeId: row.nodeId,
+          brand: row.designBrand,
+          why: COMPONENT_AGAINST_PAGE,
+        })
+        continue
+      }
       const key = frameKey(row.designBrand ?? '?', row.nodeId)
       const found = row.designBrand ? input.exports.get(key) : undefined
       if (!found) {
@@ -162,6 +204,15 @@ export function planFrameScoring(input: {
           nodeId: row.nodeId,
           brand: row.designBrand,
           why: input.reasons?.get(key) ?? 'no export cached for this node',
+        })
+        continue
+      }
+      if (isMobileStory(story.id) && found.width >= DESKTOP_FROM) {
+        unscorable.push({
+          storyId: story.id,
+          nodeId: row.nodeId,
+          brand: row.designBrand,
+          why: MOBILE_AGAINST_DESKTOP,
         })
         continue
       }
@@ -183,6 +234,9 @@ export function planFrameScoring(input: {
     targets: [...targets].sort((a, b) => order(a).localeCompare(order(b))),
     unpaired: [...unpaired].sort((a, b) => a.id.localeCompare(b.id)),
     unkeyed: [...unkeyed].sort(
+      (a, b) => a.storyId.localeCompare(b.storyId) || a.nodeId.localeCompare(b.nodeId),
+    ),
+    unscorable: [...unscorable].sort(
       (a, b) => a.storyId.localeCompare(b.storyId) || a.nodeId.localeCompare(b.nodeId),
     ),
   }
@@ -275,9 +329,9 @@ function delta(value: number): string {
 }
 
 /**
- * The run's account of itself: every score, then the two lists that are
- * coverage rather than drift. Neither list is capped — see the export report,
- * which makes the same promise for the same reason.
+ * The run's account of itself: every score, then the lists that are coverage
+ * rather than drift. No list is capped — see the export report, which makes
+ * the same promise for the same reason.
  */
 export function formatScoring(plan: ScoringPlan, scores: readonly FrameScore[]): string {
   const sections: string[] = []
@@ -312,6 +366,18 @@ export function formatScoring(plan: ScoringPlan, scores: readonly FrameScore[]):
         table(
           ['story', 'node', 'why'],
           plan.unkeyed.map((row) => [row.storyId, row.nodeId, row.why]),
+        ),
+    )
+  }
+
+  if (plan.unscorable.length > 0) {
+    sections.push(
+      `Unscorable (${plan.unscorable.length})\n` +
+        '  Paired to a component frame, which a full-page capture cannot be\n' +
+        '  measured against — listed, never scored.\n\n' +
+        table(
+          ['story', 'node', 'why'],
+          plan.unscorable.map((row) => [row.storyId, row.nodeId, row.why]),
         ),
     )
   }

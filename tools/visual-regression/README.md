@@ -14,7 +14,7 @@ pnpm vr --help
 ```
 
 A run builds Storybook twice — once for your working tree, once for the baseline commit — screenshots
-the affected stories in headless Chromium at 390px and 1440px, diffs the pixels, and opens an HTML
+the affected stories in headless Chromium at 402px and 1440px, diffs the pixels, and opens an HTML
 report with side-by-side, slider, onion-skin, and diff views.
 
 Nothing leaves the machine and nothing is committed. Everything lives in `.vr/`, which is gitignored.
@@ -64,8 +64,9 @@ that renders a `Stat` is selected, including the ones that never mention it by n
 story imports and nothing is selected. A change to `globals.css` or `.storybook/preview.ts` sits above
 every story, so it selects all of them.
 
-Two viewports, `mobile` (390×844) and `desktop` (1440×900), full page. Override with
-`--viewports mobile:390x844,wide:1920x1080` or just `--viewports 1440`.
+Two viewports, `mobile` (402×844) and `desktop` (1440×900), full page — the widths the design
+file draws at, so an ordinary run and a `--figma` run measure the same layout. Override with
+`--viewports mobile:402x844,wide:1920x1080` or just `--viewports 1440`.
 
 To keep a rerun of the same commit byte-identical, every capture runs with animations and transitions
 collapsed to 1ms, `prefers-reduced-motion`, a fixed device pixel ratio, a wait on
@@ -238,16 +239,22 @@ padded transparent and those pixels count. `height Δ` and `width Δ` carry the 
 separately — and because the shutter is full-page, a `width Δ` on a page frame means the story is
 overflowing sideways past its own viewport.
 
-Two lists follow the scores, both uncapped:
+Three lists follow the scores, all uncapped:
 
 - **unkeyed** — the story names a node, but no export is keyed to it (usually: `figma:sync` does not
   track that node). Listed, not failed.
+- **unscorable** — the pairing's two sides are not the same subject, so a number would only mislead.
+  Two shapes qualify. A story citing a **component set** is a whole page measured against a strip: a
+  24px icon frame against a 320×844 capture scores 99.96% and says nothing, and it stays listed until
+  a component story is captured at its own bounds. A **mobile story citing a desktop frame** is
+  captured at 1440 — the frame's width is what the browser is told — so it scores whatever its
+  desktop sibling scores; two identical rows are the tell, and the pairing is at fault, not the code.
 - **unpaired** — the story names no node at all. Only `--story` runs can produce these; an
   unqualified `--figma` scopes itself to the paired stories.
 
 A pairing is only as good as the node it cites. A page-mockup story against a page frame is the
-comparison this was built for; a full-page story capture against a small component frame scores near
-100% and says nothing, which is what the inventory's page-level and coverage sections are for.
+comparison this was built for; the pairings that are not that are held out as `unscorable` above,
+and the inventory's page-level and coverage sections are where they are chased down.
 
 `frame-score.ts` is the model — index, pairings and exports in, a plan and scores out, tested on
 committed 320px crops in `src/__fixtures__/frame-score/`. The CLI does the build, the captures and

@@ -66,8 +66,10 @@ import {
  *  else whose pixels are its own business. */
 const SKIP_TAG = 'vr:skip'
 
+/** The two widths the design draws at, so an ordinary run and a `--figma` run
+ *  measure the same layout: mobile page frames export at 402, desktop at 1440. */
 const DEFAULT_VIEWPORTS: Viewport[] = [
-  { name: 'mobile', width: 390, height: 844 },
+  { name: 'mobile', width: 402, height: 844 },
   { name: 'desktop', width: 1440, height: 900 },
 ]
 
@@ -93,7 +95,7 @@ Options
   --base <ref>          baseline ref (default: main)
   --all                 ignore the change graph, take every story
   --story <substring>   compare stories matching id or title, repeatable; implies --all scope
-  --viewports <list>    e.g. 390,1440 or mobile:390x844,desktop:1440x900
+  --viewports <list>    e.g. 402,1440 or mobile:402x844,desktop:1440x900
   --threshold <0-1>     per-pixel colour tolerance (default: 0.1)
   --max-diff <0-1>      fraction of pixels that still counts as unchanged (default: 0)
   --settle <ms>         pause after render before the shutter (default: 200)

@@ -139,7 +139,7 @@ function pairing(overrides: Partial<PairingRow> & { storyId: string; nodeId: str
     declaredOn: 'story',
     hosts: ['o3'],
     designBrand: 'o3',
-    match: 'componentSet',
+    match: 'pageFrame',
     trackedName: 'Band',
     route: null,
     ...overrides,
@@ -219,6 +219,58 @@ describe('planFrameScoring', () => {
       ]),
     })
     expect(plan.targets.map((target) => target.viewport.name)).toEqual(['frame-402', 'frame-1440'])
+  })
+
+  it('lists a component-set pairing as unscorable rather than scoring a page against a strip', () => {
+    const plan = planFrameScoring({
+      stories: [story('chrome-sitenav--over-ink')],
+      pairings: [
+        pairing({ storyId: 'chrome-sitenav--over-ink', nodeId: '1:1', match: 'componentSet' }),
+      ],
+      exports,
+    })
+    expect(plan.targets).toEqual([])
+    expect(plan.unscorable).toEqual([
+      {
+        storyId: 'chrome-sitenav--over-ink',
+        nodeId: '1:1',
+        brand: 'o3',
+        why: 'component frame against a full-page capture',
+      },
+    ])
+  })
+
+  it('still scores a page frame the same story set cites', () => {
+    const plan = planFrameScoring({
+      stories: [story('pages-home--desktop'), story('chrome-sitenav--over-ink')],
+      pairings: [
+        pairing({ storyId: 'pages-home--desktop', nodeId: '1:1', match: 'pageFrame' }),
+        pairing({ storyId: 'chrome-sitenav--over-ink', nodeId: '1:1', match: 'componentSet' }),
+      ],
+      exports,
+    })
+    expect(plan.targets.map((target) => target.story.id)).toEqual(['pages-home--desktop'])
+    expect(plan.unscorable.map((row) => row.storyId)).toEqual(['chrome-sitenav--over-ink'])
+  })
+
+  it('lists a mobile story paired to a desktop frame as unscorable', () => {
+    const plan = planFrameScoring({
+      stories: [story('pages-solutions--mobile')],
+      pairings: [pairing({ storyId: 'pages-solutions--mobile', nodeId: '2:2' })],
+      exports: new Map([['o3/2:2', exported('2:2', 1440)]]),
+    })
+    expect(plan.targets).toEqual([])
+    expect(plan.unscorable[0]?.why).toBe('mobile story against a desktop frame')
+  })
+
+  it('scores a mobile story against a frame drawn at a mobile width', () => {
+    const plan = planFrameScoring({
+      stories: [story('pages-live--mobile')],
+      pairings: [pairing({ storyId: 'pages-live--mobile', nodeId: '1:1' })],
+      exports,
+    })
+    expect(plan.targets.map((target) => target.viewport.name)).toEqual(['frame-402'])
+    expect(plan.unscorable).toEqual([])
   })
 
   it('does not score a pairing whose design file nothing in the repo owns', () => {
