@@ -76,6 +76,7 @@ import page1682 from '../../../../tools/migration/data/seed/page/1682-conference
 // The chrome around a collection's feed (#347) — the bands the index mockups
 // draw above and below the listing the route owns.
 import collectionIndexInsights from '../../../../tools/migration/data/seed/collectionIndex/insights.json'
+import collectionIndexWork from '../../../../tools/migration/data/seed/collectionIndex/work.json'
 
 // ── Clients the homepage logo wall and the showcase cards dereference ──────
 import clientChop from '../../../../tools/migration/data/seed/client/chop.json'
@@ -317,6 +318,7 @@ export function seededPage(name: SeedPageName): NonNullable<PAGE_QUERY_RESULT> {
 
 const SEED_COLLECTION_INDEXES = {
   insights: collectionIndexInsights,
+  work: collectionIndexWork,
 } as const
 
 export type SeedCollectionIndexName = keyof typeof SEED_COLLECTION_INDEXES

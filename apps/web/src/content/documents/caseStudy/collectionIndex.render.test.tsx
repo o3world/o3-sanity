@@ -1,15 +1,21 @@
 import { describe, expect, it } from 'vitest'
 
+import { COLLECTION_INDEX_QUERY } from '@o3/sanity/queries'
+
 import { buildIndexRoute } from '@o3/content-runtime/routes'
 import {
   aCaseStudiesPage,
   aCaseStudyCard,
+  aCollectionIndex,
+  aCtaBand,
+  aSeededCollectionIndex,
   declaredSizes,
   preloadedImageTags,
   imageTags,
   renderRoute,
   unprefixedHorizontalScrollUtilities,
   variantsOf,
+  withIndexChrome,
 } from '@/test'
 
 import { caseStudyIndex } from './collectionIndex'
@@ -38,21 +44,27 @@ const cards = [
   aCaseStudyCard({ _id: 'caseStudy-seed-two', title: 'Two', slug: 'two' }),
 ]
 
-const { html } = await renderRoute(route, { data: aCaseStudiesPage(cards, 2) })
+const { html } = await renderRoute(route, {
+  // The SEEDED chrome (#348), so the hero and closer assertions below are
+  // about what the loaded dataset renders rather than about a fixture.
+  data: withIndexChrome(aCaseStudiesPage(cards, 2), aSeededCollectionIndex('work')),
+})
 
 describe('the /work index', () => {
-  it('renders the hero copy the route owns', async () => {
+  it('renders the hero copy, now the document’s', async () => {
     // `2101:861` and `2107:1086` carry the same three strings (#303).
+    // Authored since #348: the seed's `heroSection` in `sectionsAbove`.
     expect(html).toContain('Our work')
     expect(html).toContain('Strategy, Design and Technology working together.')
     expect(html).toContain('Not the deliverable.')
   })
 
   /**
-   * The closer both frames draw (`2975:8738`, `2975:8751`) — route-owned,
-   * because /work has no document to seed one on. Its raster is a capture of
-   * the sphere over a native fade strip, so it is `orbs` rather than a
-   * photograph, and the button leaves the page it closes.
+   * The closer both frames draw (`2975:8738`, `2975:8751`) — the seed's
+   * `ctaSection` since #348, which is what "/work has no document to seed one
+   * on" stopped being true. Its raster is a capture of the sphere over a
+   * native fade strip, so it is `orbs` rather than a photograph, and the
+   * button leaves the page it closes.
    */
   it('closes on the shared CTA band', () => {
     expect(html).toContain('Let’s get started on your next big thing.')
@@ -159,5 +171,77 @@ describe('the /work index', () => {
     const current = paged.html.match(/<a[^>]*aria-current="page"[^>]*>/)?.[0] ?? ''
     expect(current).toContain('href="/work?page=2"')
     expect([...paged.html.matchAll(/aria-current="page"/g)]).toHaveLength(1)
+  })
+})
+
+/**
+ * THE AUTHORED BANDS (#348) — /work's half of what #347 built for /insights.
+ *
+ * The point of doing this second rather than folding it into #347 is the last
+ * assertion in this block: /work has no facet, so it is the index that finds
+ * out whether the route contract was shaped around Insights.
+ */
+describe('work index authored bands', () => {
+  const feed = () => aCaseStudiesPage(cards, 2)
+  const chrome = (overrides = {}) =>
+    aCollectionIndex({ _id: 'collectionIndex-caseStudy', collection: 'caseStudy', ...overrides })
+
+  it('renders a band from sectionsAbove above the first card', async () => {
+    const { html: out } = await renderRoute(route, {
+      data: withIndexChrome(feed(), chrome({ sectionsAbove: [aCtaBand('Above the feed')] })),
+    })
+
+    expect(out.indexOf('Above the feed')).toBeLessThan(out.indexOf('href="/work/one"'))
+  })
+
+  it('renders a band from sectionsBelow after the last card', async () => {
+    const { html: out } = await renderRoute(route, {
+      data: withIndexChrome(feed(), chrome({ sectionsBelow: [aCtaBand('Below the feed')] })),
+    })
+
+    expect(out.indexOf('href="/work/two"')).toBeLessThan(out.indexOf('Below the feed'))
+  })
+
+  it('renders the feed with no chrome document at all', async () => {
+    const { html: out } = await renderRoute(route, { data: withIndexChrome(feed(), null) })
+
+    expect(out).toContain('href="/work/one"')
+    expect(out).toContain('href="/work/two"')
+  })
+
+  it('carries no hardcoded hero or closing copy of its own', async () => {
+    const { html: out } = await renderRoute(route, { data: withIndexChrome(feed(), null) })
+
+    expect(out).not.toContain('Strategy, Design and Technology working together.')
+    expect(out).not.toContain('Let’s get started on your next big thing.')
+  })
+
+  it('reads the chrome document for the caseStudy collection', async () => {
+    const { calls } = await renderRoute(route, {
+      data: withIndexChrome(feed(), chrome()),
+    })
+
+    const read = calls.find((call) => call.query === COLLECTION_INDEX_QUERY)
+    expect(read?.params).toMatchObject({ collection: 'caseStudy' })
+    expect(read?.tags).toContain('sanity:collectionIndex:caseStudy')
+  })
+
+  /**
+   * /work declares no facets. The route builder must still hand the renderer
+   * a `facets` object and a chrome document — a contract that only worked
+   * where a facet existed would be one shaped around /insights.
+   */
+  it('paginates and reads its chrome with no facet declared at all', async () => {
+    const { calls } = await renderRoute(route, {
+      data: withIndexChrome(aCaseStudiesPage(cards, 20), chrome()),
+      searchParams: { page: '2' },
+    })
+
+    const feedRead = calls.find(
+      (call) => call.query !== COLLECTION_INDEX_QUERY && 'offset' in (call.params ?? {}),
+    )
+    // Nine per page, not twelve — the cards are full-width bands.
+    expect(feedRead?.params).toMatchObject({ offset: 9, end: 18 })
+    expect(calls.some((call) => call.query === COLLECTION_INDEX_QUERY)).toBe(true)
   })
 })

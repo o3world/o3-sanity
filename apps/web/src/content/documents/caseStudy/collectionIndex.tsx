@@ -1,18 +1,46 @@
-import { CASE_STUDIES_PAGE_QUERY } from '@o3/sanity/queries'
+import { CASE_STUDIES_PAGE_QUERY, COLLECTION_INDEX_QUERY } from '@o3/sanity/queries'
 import { collectionPrefixes } from '@o3/sanity/brand'
-import type { CASE_STUDIES_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
+import type {
+  CASE_STUDIES_PAGE_QUERY_RESULT,
+  COLLECTION_INDEX_QUERY_RESULT,
+} from '@o3/sanity/types/generated'
 
 import { defineIndexType, type IndexRendererProps } from '@o3/content-runtime/routes'
+
+import { Blocks } from '@/content/blocks/Blocks'
 
 import { CaseStudyIndexView } from './CaseStudyIndexView'
 
 type Props = IndexRendererProps<typeof CASE_STUDIES_PAGE_QUERY>
 
-function CaseStudyIndexRenderer({ pagination, ...rest }: Props) {
+function CaseStudyIndexRenderer({ pagination, document, ...rest }: Props) {
   // Q widens to string at this site (TS#33304); cast back to the typed
-  // query result for the view.
+  // query result for the view. The chrome document arrives as `unknown` for
+  // the same reason and is cast in the same breath.
   const data = rest as unknown as NonNullable<CASE_STUDIES_PAGE_QUERY_RESULT>
-  return <CaseStudyIndexView items={data.items} pagination={pagination} />
+  const chrome = document as COLLECTION_INDEX_QUERY_RESULT
+
+  const bands = (field: 'sectionsAbove' | 'sectionsBelow') => {
+    const blocks = chrome?.[field] ?? []
+    if (!chrome || blocks.length === 0) return null
+    return (
+      <Blocks
+        blocks={blocks}
+        documentId={chrome._id}
+        documentType="collectionIndex"
+        fieldPath={field}
+      />
+    )
+  }
+
+  return (
+    <CaseStudyIndexView
+      items={data.items}
+      pagination={pagination}
+      above={bands('sectionsAbove')}
+      below={bands('sectionsBelow')}
+    />
+  )
 }
 
 /**
@@ -27,6 +55,11 @@ export const caseStudyIndex = defineIndexType({
   itemTypes: ['caseStudy'],
   query: CASE_STUDIES_PAGE_QUERY,
   pageSize: 9,
+  document: {
+    type: 'collectionIndex',
+    query: COLLECTION_INDEX_QUERY,
+    params: { collection: 'caseStudy' },
+  },
   renderer: CaseStudyIndexRenderer,
   seo: {
     title: 'Work',
