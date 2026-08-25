@@ -29,11 +29,38 @@ export const heroSectionKnobs = defineBlockKnobs({
       // it goes on the hover bar rather than only in the menu.
       bar: true,
     }),
+    knob({
+      name: 'alignment',
+      title: 'Alignment',
+      description:
+        'Band composition only. Left puts the copy against the gutter and leaves the right of the band to the globe or a rail; Centred stacks the eyebrow and the headline on the centre line, and nothing else fits beside them.',
+      // Solutions (`1925:6141`) is the centred one — an eyebrow over a 650-wide
+      // headline on the centre line, no standfirst, no rail, no globe. Every
+      // other band instance draws the copy left (`2107:1051`, `2960:6876`).
+      options: [
+        { value: 'start', title: 'Left' },
+        { value: 'center', title: 'Centred' },
+      ],
+      initialValue: 'start',
+      // The orbital opener is centred by its own composition and has no second
+      // arrangement to offer, so the axis belongs to `band` alone.
+      showWhen: { at: 'variant', mode: 'oneOf', values: ['band'] },
+    }),
     // The same knob the quote and CTA bands carry, with the hero's own list.
     // Was declared inline here while `decorationField()` still served the other
     // two; #120 converted them, so the shared meaning moved to the pure side
     // and the factory that generated a field directly is gone.
-    decorationKnob(['orbs', 'none']),
+    //
+    // Gated, because the centred band has nowhere to hang a sphere: the copy
+    // owns the middle and the frame draws no art beside it. Without the gate
+    // this is a control that turns and repaints nothing, which is what ADR
+    // 0020's guard exists to remove. `emptyMatches` because `alignment` is
+    // unset on every document saved before it existed, and on the orbital
+    // opener, which the gate above closes.
+    {
+      ...decorationKnob(['orbs', 'none']),
+      showWhen: { at: 'alignment', mode: 'oneOf', values: ['start'], emptyMatches: true },
+    },
     /*
      * Ink or white, and only on the band composition (#311).
      *

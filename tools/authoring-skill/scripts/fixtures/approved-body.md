@@ -240,7 +240,7 @@ Walk us through how a page gets from a brief to your homepage today. We'll show 
 
 Software engineering that solves today's problems and scales for the future. That means architecting for performance, flexibility, and growth from day one.
 
-We build, optimize, and migrate legacy systems without breaking them. And we maintain the systems we build: our team keeps monitoring and improving the applications we deliver after launch. That continuity matters, especially when you're running a business on the platform we built.
+We build, optimize, and migrate legacy systems without breaking them. We maintain the systems we build while agencies hand off code and move to the next project. Our team continues to monitor and improve the applications we deliver. That continuity matters, especially when you're running a business on the platform we built.
 
 Two engineers at a worktable comparing notes across their laptops, photographed in black and white through the studio's glass wall.
 

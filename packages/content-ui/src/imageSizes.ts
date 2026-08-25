@@ -43,6 +43,14 @@ export const CONTENT_COLUMN = '(min-width: 1440px) 1248px, 90vw'
 export const ARTICLE_COLUMN = '(min-width: 1024px) 822px, 90vw'
 
 /**
+ * The column that runs off the right edge in a bleeding `layoutSection`
+ * (`2360:2861`): the band's gutter and the 395 copy column beside it are what
+ * it does not get, and the viewport's right edge is where it stops. 1440 −
+ * 96 − 395 − 31 = 918, which is 64% of that width.
+ */
+export const LAYOUT_BLEED_COLUMN = '(min-width: 1024px) 64vw, 90vw'
+
+/**
  * A base block's slot in a `layoutSection` column, by the section's column
  * count. The grid is `gap-10` (40px) inside the content column and switches at
  * `md`, not `lg` — below that every count is one column.

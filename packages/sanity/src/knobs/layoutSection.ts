@@ -29,6 +29,22 @@ export const layoutSectionKnobs = defineBlockKnobs({
       options: ['1', '2', '3'],
       initialValue: '1',
     }),
+    knob({
+      name: 'bleed',
+      title: 'Bleed',
+      description:
+        'Whether the last column runs off the right edge of the screen. It crops to the frame’s window, so give it a figure — and the columns beside it narrow to make room.',
+      // The software-engineering page's intro band (`2360:2861`): a 395-wide
+      // copy column and a photo whose box runs 474px past the frame's right
+      // edge, cropped by it. `end` is the column the bleed is on rather than a
+      // yes/no, so a left-bleeding band later is a value here and not a second
+      // knob.
+      options: [
+        { value: 'none', title: 'None' },
+        { value: 'end', title: 'Last column to the edge' },
+      ],
+      initialValue: 'none',
+    }),
     // The redesigned Solutions frame's proof-point band (`2357:2690`, #93)
     // hangs the molecule behind a layout band the way the partner page's
     // "Why Sanity + O3" hangs it behind a feature grid — same glyph, same

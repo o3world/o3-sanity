@@ -68,6 +68,7 @@ type HeroSectionProps = SectionProps<'heroSection'> & {
  */
 export function HeroSection({
   variant,
+  alignment,
   eyebrow,
   headlineLines,
   subheading,
@@ -88,6 +89,10 @@ export function HeroSection({
   // drifting apart — drawn as the `Interior Hero` set (`2107:1051`), which
   // #308 ruled canonical for every route that opens on this band.
   if (stegaClean(variant) === 'band') {
+    // Left everywhere but Solutions (`1925:6141`), which stacks the eyebrow and
+    // the headline on the centre line. Anything a client could write past the
+    // form falls back to the arrangement every other instance draws.
+    const centred = stegaClean(alignment) === 'center'
     const detailGroups = details ?? []
     // Ink or white — the knob's own roster. Anything else a client could write
     // past the form falls back to the colour the set is instanced on.
@@ -152,14 +157,16 @@ export function HeroSection({
         surface={band}
         background={sectionBackground(backgroundMedia, band)}
         /*
-         * The redesigned set, and no `align`. Both of its instances put the
-         * copy against the left gutter with the globe on the right
-         * (`2107:1051`, `2960:6876`) — there is no centred composition in it to
-         * reach for.
+         * The redesigned set. Both of its instances put the copy against the
+         * left gutter with the globe on the right (`2107:1051`, `2960:6876`);
+         * `center` is the arrangement the Solutions frame draws instead
+         * (`1925:6141`) — one column on the centre line, and the right of the
+         * band given back to the band.
          */
+        align={centred ? 'center' : 'start'}
         variant="interior"
         decoration={
-          showOrbs ? (
+          showOrbs && !centred ? (
             /*
              * THE TWO SURFACES HANG DIFFERENT SPHERES, and the geometry is
              * read per surface rather than shared.

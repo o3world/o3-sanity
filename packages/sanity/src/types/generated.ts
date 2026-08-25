@@ -402,6 +402,7 @@ export type LayoutSection = {
         _key: string
       } & Mark)
   >
+  bleed?: 'none' | 'end'
   surface?: 'white' | 'bone' | 'ink'
   backgroundMedia?: BackgroundMedia
   anchor?: string
@@ -663,6 +664,7 @@ export type HeroSection = {
   }>
   button?: Button
   decoration?: 'orbs' | 'none'
+  alignment?: 'start' | 'center'
   surface?: 'ink' | 'white'
   backgroundMedia?: BackgroundMedia
   anchor?: string
@@ -1846,6 +1848,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'none' | 'orbs'
+        alignment?: 'center' | 'start'
         surface?: 'ink' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
@@ -2107,6 +2110,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
               >
             }
         > | null
+        bleed?: 'end' | 'none'
         surface?: 'bone' | 'ink' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
@@ -2575,6 +2579,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'none' | 'orbs'
+        alignment?: 'center' | 'start'
         surface?: 'ink' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
@@ -2836,6 +2841,7 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
               >
             }
         > | null
+        bleed?: 'end' | 'none'
         surface?: 'bone' | 'ink' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
@@ -3384,6 +3390,7 @@ export type CASE_STUDY_QUERY_RESULT = {
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'none' | 'orbs'
+        alignment?: 'center' | 'start'
         surface?: 'ink' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
@@ -3645,6 +3652,7 @@ export type CASE_STUDY_QUERY_RESULT = {
               >
             }
         > | null
+        bleed?: 'end' | 'none'
         surface?: 'bone' | 'ink' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
@@ -4219,6 +4227,7 @@ export type PAGE_QUERY_RESULT = {
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
         decoration?: 'none' | 'orbs'
+        alignment?: 'center' | 'start'
         surface?: 'ink' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
@@ -4480,6 +4489,7 @@ export type PAGE_QUERY_RESULT = {
               >
             }
         > | null
+        bleed?: 'end' | 'none'
         surface?: 'bone' | 'ink' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string

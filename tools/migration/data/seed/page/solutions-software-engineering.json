@@ -25,6 +25,7 @@
       "_key": "overview",
       "surface": "bone",
       "columns": 2,
+      "bleed": "end",
       "decoration": "none",
       "heading": "Overview",
       "items": [
@@ -41,7 +42,7 @@
                 {
                   "_type": "span",
                   "_key": "p0s",
-                  "text": "We build, optimize, and migrate legacy systems without breaking them. And we maintain the systems we build: our team keeps monitoring and improving the applications we deliver after launch. That continuity matters, especially when you're running a business on the platform we built.",
+                  "text": "We build, optimize, and migrate legacy systems without breaking them. We maintain the systems we build while agencies hand off code and move to the next project. Our team continues to monitor and improve the applications we deliver. That continuity matters, especially when you're running a business on the platform we built.",
                   "marks": []
                 }
               ]

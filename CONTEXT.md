@@ -160,7 +160,8 @@ Closed vocabulary. If the field you want isn't here and isn't obviously domain-s
 | `backgroundMedia` | The full-bleed picture a band sits on; injected by `defineSectionBlock`                             | `backgroundImage`, `bgImage`, `backdrop`, `photo`    |
 | `button`          | A single button (type `button`), the form's submit included                                         | `cta`, `link`, `action`, `submitLabel`               |
 | `anchor`          | The name a band is given, and the name a button jumps to; no `#`                                    | `id`, `hash`, `fragment`, `jumpTo`                   |
-| `alignment`       | Where a row sits in the space it was given (`buttonGroup`)                                          | `align`, `justify`, `position`, `float`              |
+| `alignment`       | Where a row or a column sits in the space it was given (`buttonGroup`, `heroSection`)               | `align`, `justify`, `position`, `float`              |
+| `bleed`           | Which edge a band's content runs past, or `none` (`layoutSection`)                                  | `fullWidth`, `overflow`, `edge`                      |
 | `mark`            | The dotted circle beside an item (type `mark`)                                                      | `icon`, `disc`, `orb` — `orb` is one of its `kind`s  |
 | `icon`            | A glyph from a curated set — trailing a button, or beside a feature (`button`, `feature`)           | `glyph`, `symbol`, `arrow`                           |
 | `date`            | When a leaf object's thing happens (the Live MON / DD marker)                                       | `publishedAt` — that's a document's publication time |

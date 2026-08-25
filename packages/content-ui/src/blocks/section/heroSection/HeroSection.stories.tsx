@@ -85,7 +85,11 @@ type Story = StoryObj<typeof meta>
 /** Every knob the hero declares, as a control. Turn one, the block redraws. */
 export const Playground = kit.Playground as Story
 
-/** Composition against decoration — the block's first two knobs, gridded. */
+/**
+ * Composition against alignment — the block's first two knobs, gridded. The
+ * orbital opener collapses to one cell: it is centred by its own composition
+ * and the gate hides the axis.
+ */
 export const Matrix = kit.Matrix as Story
 
 /** A single headline line gets no set-back — the treatment needs two or more. */

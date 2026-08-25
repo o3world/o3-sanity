@@ -12,6 +12,7 @@
       "_type": "heroSection",
       "_key": "hero",
       "variant": "band",
+      "alignment": "center",
       "eyebrow": "Solutions",
       "headlineLines": [
         "We don't sell services. We sell the move, and the team that makes it real."
