@@ -112,14 +112,6 @@
             "label": "Read the thinking",
             "href": "/insights",
             "contrast": "dark"
-          },
-          "mark": {
-            "_type": "mark",
-            "kind": "orb",
-            "state": "searching",
-            "size": 64,
-            "speed": 1,
-            "paused": false
           }
         }
       ]

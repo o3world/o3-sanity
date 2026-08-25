@@ -5,7 +5,6 @@ import { ArrowIcon, DisplayHeading, Eyebrow, SectionShell } from '@o3/ui'
 import type { SectionProps } from '@o3/content-runtime/blocks'
 import { fieldAttr } from '@o3/content-runtime/data-attribute'
 
-import { Mark, markProps } from '../../base/mark/Mark'
 import { SanityImage } from '../../../SanityImage'
 import { CARD_THREE_UP } from '../../../imageSizes'
 import { resolveButtonHref } from '../../../buttonDestination'
@@ -31,7 +30,7 @@ type Entry = NonNullable<InFlightSectionProps['entries']>[number]
  * rows   1710:1800 / 1732:1409   128px 0        appearances · ideas
  *   header  0 96px, gap 32     48px heading | 24px deck in 394
  *   row     48px 0, space-between, 1px rule at rgba(0,0,0,0.55)
- *     lead  55px date column in brand red + a 9px dot, OR a 113px disc
+ *     lead  55px date column in brand red + a 9px dot, on appearances only
  *     text  16px kicker at 45% ink · 36px title
  *     right Icon / Surface, the 58px circular arrow
  * ```
@@ -66,7 +65,6 @@ export function InFlightSection({
 }: InFlightSectionProps) {
   const items = entries ?? []
   const asRows = stegaClean(layout) === 'rows'
-  const onInk = resolveSurface(surface, 'inFlightSection') === 'ink'
 
   if (asRows) {
     return (
@@ -75,7 +73,7 @@ export function InFlightSection({
           <Header heading={heading} subheading={subheading} loc={loc} />
           <ul className="flex flex-col">
             {items.map((entry) => (
-              <EntryRow key={entry._key} entry={entry} onInk={onInk} />
+              <EntryRow key={entry._key} entry={entry} />
             ))}
           </ul>
         </div>
@@ -180,7 +178,7 @@ function EntryCard({ entry }: { entry: Entry }) {
   )
 }
 
-function EntryRow({ entry, onInk }: { entry: Entry; onInk: boolean }) {
+function EntryRow({ entry }: { entry: Entry }) {
   const href = entry.button ? resolveButtonHref(entry.button) : null
   // `aria-label` is the one place a stega'd string is NOT invisible: the
   // encoding rides in the attribute value, so a screen reader announces the
@@ -201,6 +199,9 @@ function EntryRow({ entry, onInk }: { entry: Entry; onInk: boolean }) {
           entry.date ? 'lg:max-w-[1015px]' : 'lg:max-w-[684px]'
         }`}
       >
+        {/* Only the appearances rows carry a lead. The ideas rows draw none:
+            `1732:1416` holds the kicker-and-heading stack (`1899:4281`) and
+            nothing beside it. */}
         {entry.date ? (
           <>
             <DateMarker date={entry.date} />
@@ -211,11 +212,7 @@ function EntryRow({ entry, onInk }: { entry: Entry; onInk: boolean }) {
               className="bg-ink-deep hidden size-[9px] shrink-0 rounded-full lg:block"
             />
           </>
-        ) : (
-          // The 113px slot (`1899:4245`) — the same mark the About careers
-          // band draws at a different diameter, not a second graphic.
-          <Mark {...markProps(entry.mark)} onInk={onInk} className="hidden w-[113px] lg:block" />
-        )}
+        ) : null}
         <div className="flex flex-col justify-center gap-2">
           {entry.eyebrow ? (
             // 16px at 45% ink on the appearances band, 60% on the ideas band.

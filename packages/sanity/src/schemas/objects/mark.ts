@@ -8,7 +8,7 @@ import { defineSharedObject } from './defineSharedObject'
  * The dotted circle a card, a row or a discipline sets beside its copy.
  *
  * **One type for both drawings.** The frames draw a halftone disc
- * (`1925:5922` at 138px, `1899:4245` at 113, `1925:6068` at 70) and the site
+ * (`1925:5922` at 138px, `1925:6068` at 70) and the site
  * now draws an animated orb — `thinking-orbs` (MIT, orbs.jakubantalik.com),
  * nine tuned animations on a 2D canvas. Both answer the same question, so
  * they are one field with a `kind`, not two fields that can disagree. The
