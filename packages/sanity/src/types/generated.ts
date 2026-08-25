@@ -1787,6 +1787,15 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           contrast?: 'auto' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
+        media?: Figure
+        quote?: string
+        attribution?: string
+        details?: Array<{
+          label?: string
+          items?: Array<string>
+          _type: 'detail'
+          _key: string
+        }>
         surface?: 'bone' | 'ink' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
@@ -1877,7 +1886,6 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
             contrast?: 'auto' | 'dark' | 'ghost' | 'light'
             icon?: 'arrow' | 'down' | 'external' | 'none'
           } | null
-          mark?: Mark
           _type: 'entry'
           _key: string
         }> | null
@@ -2508,6 +2516,15 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
           contrast?: 'auto' | 'dark' | 'ghost' | 'light'
           icon?: 'arrow' | 'down' | 'external' | 'none'
         } | null
+        media?: Figure
+        quote?: string
+        attribution?: string
+        details?: Array<{
+          label?: string
+          items?: Array<string>
+          _type: 'detail'
+          _key: string
+        }>
         surface?: 'bone' | 'ink' | 'white'
         backgroundMedia?: BackgroundMedia
         anchor?: string
@@ -2598,7 +2615,6 @@ export type COLLECTION_INDEX_QUERY_RESULT = {
             contrast?: 'auto' | 'dark' | 'ghost' | 'light'
             icon?: 'arrow' | 'down' | 'external' | 'none'
           } | null
-          mark?: Mark
           _type: 'entry'
           _key: string
         }> | null
