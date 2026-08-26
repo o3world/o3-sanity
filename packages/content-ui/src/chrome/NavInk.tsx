@@ -24,8 +24,8 @@ const LIGHT_LUMINANCE = 140
  * as something to see through.
  *
  * Read off the palette rather than picked: every background alpha this design
- * uses is far below it — `--color-scrim` is 0.2 and `--color-scrim-light`, the
- * highest, is 0.55. The only 0.9+ alpha anywhere in color.css is
+ * uses is far below it — `--color-scrim` is 0.2 and `--color-scrim-light` is
+ * 0.1. The only 0.9+ alpha anywhere in color.css is
  * `--color-on-ink` at 0.92, which is a text colour and never a fill. So 0.9
  * separates "a band" from "a veil over a band" with the whole palette to spare,
  * while still accepting the near-opaque values `color-mix` rounding produces.
@@ -35,20 +35,43 @@ const OPAQUE_ALPHA = 0.9
 /**
  * Slack, in px, when asking whether a candidate spans the bar. Sub-pixel
  * layout and a rounded scrollbar gutter routinely leave a full-width band a
- * fraction short of the header's own box; 1px absorbs that without letting
+ * fraction short of the pill's own box; 1px absorbs that without letting
  * anything that is genuinely narrower through.
  */
 const SPAN_TOLERANCE = 1
 
 /**
- * `getComputedStyle` normalises every authored form to `rgb(r, g, b)` or
- * `rgba(r, g, b, a)` and nothing else, so two shapes are all this has to read.
+ * The surfaces this design paints a dark ground with, and the ones it paints
+ * light. A band, a card or a plate that declares `data-surface` has already
+ * answered the only question this file asks, so the declaration is read before
+ * anything is measured — that is what lets the bar cross a full-bleed
+ * photograph correctly, since the picture's darkness lives in pixels no
+ * computed style can report.
+ *
+ * A value in neither set is not guessed at: the walk falls through to the
+ * computed background, which is what every element without a declaration gets.
  */
-function backgroundOf(element: Element) {
+const DARK_SURFACES = new Set(['ink'])
+const LIGHT_SURFACES = new Set(['white', 'paper', 'bone'])
+
+/**
+ * Is this element's ground light — or is it no ground at all (`null`)?
+ *
+ * `getComputedStyle` normalises every authored form to `rgb(r, g, b)` or
+ * `rgba(r, g, b, a)` and nothing else, so two shapes are all the fallback has
+ * to read.
+ */
+function groundOf(element: Element): boolean | null {
+  const declared = element.getAttribute('data-surface')
+  if (declared) {
+    if (DARK_SURFACES.has(declared)) return false
+    if (LIGHT_SURFACES.has(declared)) return true
+  }
   const channels = getComputedStyle(element).backgroundColor.match(/[\d.]+/g)
   if (!channels || channels.length < 3) return null
   const [r, g, b, alpha] = channels.map(Number) as [number, number, number, number | undefined]
-  return { luminance: r * 0.299 + g * 0.587 + b * 0.114, alpha: alpha ?? 1 }
+  if ((alpha ?? 1) < OPAQUE_ALPHA) return null
+  return r * 0.299 + g * 0.587 + b * 0.114 > LIGHT_LUMINANCE
 }
 
 /**
@@ -81,60 +104,64 @@ function backgroundOf(element: Element) {
  * `elementsFromPoint` at the bar's vertical midpoint returns the stack under
  * that point, front to back, ending at `<body>` and `<html>`. Walk it, skip
  * anything inside the header (the bar is fixed, so it is always first, and it
- * would otherwise sample its own scrim), and take the FIRST element whose
- * background is opaque enough to be the surface.
+ * would otherwise sample its own scrim), and take the FIRST element that reads
+ * as a ground at all.
  *
- * That single rule does all the skipping that matters. A translucent overlay
- * fails `OPAQUE_ALPHA` and the walk continues past it to what it is veiling. An
- * element that carries only a background-image — a gradient wash, a photo — has
- * a transparent background-color, so it is skipped too: judging an image cheaply
- * is not possible, and the element behind it can be judged exactly. An element
- * with an image over an opaque fill is judged on the fill, which is the honest
- * answer available and the one the designer chose as its base.
+ * **A ground is a declaration, or failing that a fill.** `data-surface` is
+ * already how this design says what an element's ground is — it is what
+ * re-points the text roles (tokens/color.css), and the rule beside them is
+ * that whatever paints a dark background sets `data-surface="ink"`. Reading it
+ * here costs one attribute lookup and answers the case a fill cannot: a
+ * full-bleed photograph under an ink scrim, whose darkness lives in pixels no
+ * computed style reports. Everything undeclared falls back to
+ * `background-color`, so a band that arrives from a new block type, a document
+ * template or the footer is still classified without registering anything.
+ *
+ * The fallback does the skipping that matters. A translucent overlay fails
+ * `OPAQUE_ALPHA` and the walk continues past it to what it is veiling. An
+ * element carrying only a background-image — a gradient wash, an undeclared
+ * photo — has a transparent background-color, so it is skipped too: judging an
+ * image cheaply is not possible, and the element behind it can be judged
+ * exactly. An element with an image over an opaque fill is judged on the fill,
+ * which is the honest answer available and the one the designer chose as its
+ * base.
  *
  * **A candidate also has to be wide enough to BE the surface.** The hero's
  * white button and the bone insights cards both sit under the sample point on
  * the way past, and both won the walk on colour alone — a 180px button flipping
- * a 900px bar is a false positive that reads as a flicker while scrolling. So
- * a candidate must span the header horizontally, which is the same "bands are
- * full-width" assumption that lets one x answer for the row. Anything narrower
- * is furniture ON the band, not the band, and the walk continues to what the
- * furniture is sitting on — which is the surface the bar is mostly over anyway.
+ * a 900px bar is a false positive that reads as a flicker while scrolling. So a
+ * candidate must span the PILL horizontally. The pill and not the header: the
+ * header is edge-to-edge at every width so the pill can centre inside it, and
+ * measuring against that box asks whether a candidate covers the whole
+ * viewport. A /work case-study card is 1248 of a 1600 window and covers the
+ * 900px pill entirely, which is the only width the question is about; against
+ * the header it failed, and the bar wore dark ink over a near-black card.
+ * Anything narrower than the pill is furniture ON the band, and the walk
+ * continues to what the furniture is sitting on.
  *
- * Falling off the end of the walk means nothing opaque was found all the way
+ * Falling off the end of the walk means nothing read as a ground all the way
  * down to `<html>` — the browser is painting its default canvas, which is
- * white. Light, therefore, and the bar flips. Horizontal position is fixed at
- * the viewport centre: every band in this design is full-width, so one column
- * answers for the row.
+ * white. Light, therefore, and the bar flips. Horizontal position is the pill's
+ * own centre: every band in this design is full-width, so one column answers
+ * for the row.
  *
- * ── KNOWN LIMITATION: PICTURES ─────────────────────────────────────────────
+ * ── KNOWN LIMITATION: UNDECLARED PICTURES ──────────────────────────────────
  *
- * An `<img>` has no background-color, so the walk passes straight through it to
- * whatever contains it. Scrolling a Insights article, the bar crosses the
- * inline photographs still wearing the light skin it took from the white column
- * behind them — verified in the browser, and it is dark ink over a dark picture
- * for the height of each one.
+ * An `<img>` has no background-color, so where nothing around it declares a
+ * surface the walk passes straight through to whatever contains it. Scrolling
+ * an Insights article, the bar crosses the inline photographs still wearing the
+ * light skin it took from the white column behind them.
  *
- * It is left that way on purpose, because the alternative is worse and the
- * middle ground is expensive. Not flipping on article bodies at all — what the
- * old list did, since the body is not a light `<section>` — put white copy on
- * white paper for the entire article, which is unreadable rather than merely
- * unlovely. Reading the actual tone of a picture means sampling pixels: a
- * canvas draw per frame, and a CORS taint on every image served from the CDN.
- * The 55%-white pill lifts its own backdrop enough that the bar stays legible
- * over a dark photo, which is what makes the trade acceptable rather than just
- * cheap. If it needs solving, solve it with data — the block knows it is
- * rendering a full-bleed image — and not with a sampler that guesses harder.
+ * It is left that way on purpose. Reading the actual tone of a picture means
+ * sampling pixels: a canvas draw per frame, and a CORS taint on every image
+ * served from the CDN. The way out is the declaration, not a harder sampler —
+ * an inline figure that wants the bar to know it is dark says so the same way
+ * the case-study card does.
  *
  * **This is cheaper than what it replaced.** One `elementsFromPoint` plus a
  * short walk is a hit-test against boxes the engine has already laid out, where
  * the old sample called `getBoundingClientRect` on every band on the page,
  * every frame. Fewer forced reads, not more.
- *
- * Sampling computed style rather than reading the block's `surface` field is
- * the prototype's decision and worth keeping: it is decoupled from how sections
- * are built, so a band that arrives from a new block type, a document template
- * or the footer is classified correctly without registering anything.
  *
  * The flip is a colour state, not motion — it is not gated on
  * `prefers-reduced-motion`, and the SSR/no-JS output is simply the default dark
@@ -168,20 +195,27 @@ export function watchNavInk(header: HTMLElement): () => void {
   let frame = 0
 
   const isOverLight = () => {
-    const bar = header.getBoundingClientRect()
+    // The PILL, not the header. The header is edge-to-edge at every width so
+    // that the pill can centre inside it, and measuring the span against that
+    // box asks whether a candidate covers the whole viewport — which a
+    // full-bleed case-study card, 1248 of a 1600 window, does not. It covers
+    // the 900px pill completely, which is the only width the question is about.
+    const pill = header.querySelector('nav') ?? header
+    const bar = pill.getBoundingClientRect()
     const midpoint = bar.bottom - bar.height / 2
-    for (const element of document.elementsFromPoint(window.innerWidth / 2, midpoint)) {
+    for (const element of document.elementsFromPoint((bar.left + bar.right) / 2, midpoint)) {
       if (header.contains(element)) continue
-      const background = backgroundOf(element)
-      if (!background || background.alpha < OPAQUE_ALPHA) continue
+      const light = groundOf(element)
+      if (light === null) continue
       // Only measure the handful of elements that got this far, never the
       // whole stack. `<body>` and `<html>` span everything, so the walk
       // always terminates somewhere.
       const box = element.getBoundingClientRect()
       if (box.left > bar.left + SPAN_TOLERANCE || box.right < bar.right - SPAN_TOLERANCE) continue
-      return background.luminance > LIGHT_LUMINANCE
+      return light
     }
-    // Nothing opaque under the bar, `<html>` included: the default canvas.
+    // Nothing that reads as a ground under the bar, `<html>` included: the
+    // browser is painting its default canvas.
     return true
   }
 

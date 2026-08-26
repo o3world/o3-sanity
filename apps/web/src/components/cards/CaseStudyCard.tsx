@@ -59,6 +59,14 @@ export function CaseStudyCard(
   return (
     <Link
       href={hrefForDoc({ _type, slug })}
+      // The photograph and its scrim ARE the card's ground, so the card
+      // declares the surface it paints (tokens/color.css: whatever paints a
+      // dark background sets `data-surface="ink"`). Nothing here names a role
+      // the declaration moves — the copy is literal white and `on-ink-muted`
+      // either way — but the bar overhead reads it: `NavInk` cannot judge a
+      // picture from computed style, and without this it crossed a near-black
+      // card wearing the white band's dark ink.
+      data-surface="ink"
       // 550 tall at both widths — 1246 wide at 1440, 362 at 402
       // (`2975:8429`–`8431`).
       // A FLOOR, not a fixed height: the set's demo

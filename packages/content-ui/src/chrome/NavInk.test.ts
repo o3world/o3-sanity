@@ -25,7 +25,10 @@ import { watchNavInk } from './NavInk'
 const DARK = 'rgb(3, 3, 3)'
 const LIGHT = 'rgb(255, 255, 255)'
 
+/** The header: edge-to-edge, as it is at every width. */
 const BAR = { top: 64, bottom: 144, left: 0, right: 1440, width: 1440, height: 80 }
+/** The pill inside it: 900 centred, which is the box the walk measures against. */
+const PILL = { top: 64, bottom: 144, left: 270, right: 1170, width: 900, height: 80 }
 
 function rect(box: Partial<DOMRect> & { top: number; bottom: number }) {
   return { left: 0, right: 1440, width: 1440, ...box } as DOMRect
@@ -55,6 +58,9 @@ beforeEach(() => {
   header = document.createElement('header')
   header.id = 'site-nav'
   header.getBoundingClientRect = () => rect(BAR)
+  const pill = document.createElement('nav')
+  pill.getBoundingClientRect = () => rect(PILL)
+  header.append(pill)
   document.body.append(header)
 
   // jsdom implements neither, and the component's own triggers are what is
@@ -164,6 +170,44 @@ describe('what counts as the surface', () => {
     button.getBoundingClientRect = () =>
       rect({ top: 80, bottom: 128, left: 630, right: 810, width: 180 })
     stack = [button, band(DARK)]
+    stop = watchNavInk(header)
+    await settle()
+
+    expect(header.dataset.ink).toBeUndefined()
+  })
+
+  it('reads a declared surface on an element that paints no fill at all', async () => {
+    // A /work case-study card: a photograph under a gradient scrim, so every
+    // background-color in the stack is transparent and only the declaration
+    // says the ground is dark.
+    const card = document.createElement('a')
+    card.dataset.surface = 'ink'
+    card.getBoundingClientRect = () => rect({ top: 0, bottom: 550, left: 176, right: 1424 })
+    stack = [card, band(LIGHT)]
+    stop = watchNavInk(header)
+    await settle()
+
+    expect(header.dataset.ink, 'dark ink over a near-black card').toBeUndefined()
+  })
+
+  it('lets a declared light plate win over the dark band it sits on', async () => {
+    const plate = document.createElement('div')
+    plate.dataset.surface = 'bone'
+    plate.getBoundingClientRect = () => rect({ top: 0, bottom: 550 })
+    stack = [plate, band(DARK)]
+    stop = watchNavInk(header)
+    await settle()
+
+    expect(header.dataset.ink).toBe('dark')
+  })
+
+  it('measures the span against the pill, not the edge-to-edge header', async () => {
+    // 1248 of a 1440 window: narrower than the header, wider than the pill,
+    // and the whole of what the bar is actually floating over.
+    const card = document.createElement('div')
+    card.style.backgroundColor = DARK
+    card.getBoundingClientRect = () => rect({ top: 0, bottom: 550, left: 96, right: 1344 })
+    stack = [card, band(LIGHT)]
     stop = watchNavInk(header)
     await settle()
 
