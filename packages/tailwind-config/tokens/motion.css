@@ -92,43 +92,31 @@
 }
 
 /*
- * The orbital sphere's turn — `OrbitalSphere motion="orbit"`.
+ * The orbital sphere's breath — `OrbitalSphere motion="orbit"`.
  *
- * No Figma anchor: the frames carry this sphere as a flattened raster (one of
- * them a video capture, cursor and all), so they draw one instant of it and
- * say nothing about the motion. Sequence and intent come from the prototype,
- * which is the rule for anything Figma only stills.
+ * The official globe export is the anchor (`apps/storybook/prototypes/
+ * 2026-08-globe-export/`), and it supersedes the raster trace this block used
+ * to be read from. Its generator gives coloured arc `i` a period of
+ * `(4.2 + i * 0.7) / speed` seconds and a stagger of `i * 1.1`, and dips the
+ * arc to **45%** of its own opacity at the half — the `--po` custom property
+ * the keyframe reads, which the component sets per group.
  *
- * `prototype/O3 Homepage v2.dc.html`: `.orb-all` turns the whole wireframe
- * once every 60s (`@keyframes orbSpin`, linear, infinite), and the coloured
- * great circles breathe against it on `orbPulse` — the generator gives arc `i`
- * a period of `4.2 + i * 0.7` seconds and a stagger of `i * 1.1`, so the two
- * this component draws are 4.2s at 0s and 4.9s at 1.1s. Two periods that never
- * divide into each other or into the turn, which is what keeps the field from
- * visibly repeating.
+ * Periods and stagger are computed in the component rather than tokenised: they
+ * are a function of the arc's index and the export's `speed`, so a token per
+ * arc would fix what the formula already says. Only the keyframe lives here.
+ *
+ * The whole-sphere turn is no longer a CSS transform — the export rotates the
+ * geometry in the projection itself, so there is no `--animate-orbit` to
+ * declare.
  */
-:root {
-  --duration-orbit: 60s;
-  --duration-orbit-pulse: 4.2s;
-  --duration-orbit-pulse-alt: 4.9s;
-}
-
 @theme {
-  --animate-orbit: orbit var(--duration-orbit) linear infinite;
-  --animate-orbit-pulse: orbit-pulse var(--duration-orbit-pulse) ease-in-out infinite;
-  --animate-orbit-pulse-alt: orbit-pulse var(--duration-orbit-pulse-alt) ease-in-out 1.1s infinite;
-
-  @keyframes orbit {
-    to {
-      transform: rotate(360deg);
+  @keyframes globe-pulse {
+    0%,
+    100% {
+      opacity: var(--po, 1);
     }
-  }
-
-  /* The arc's own opacity is the peak — it is set per-group on the element, so
-   * the keyframe dips from wherever that is rather than asserting a value. */
-  @keyframes orbit-pulse {
     50% {
-      opacity: 0.28;
+      opacity: calc(var(--po, 1) * 0.45);
     }
   }
 }

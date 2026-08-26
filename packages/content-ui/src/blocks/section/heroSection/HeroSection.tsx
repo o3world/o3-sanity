@@ -211,22 +211,13 @@ export function HeroSection({
                  which under the export is a preset rather than a dimmer: the
                  neutral globe on ink, the line drawing on bone. */
               preset={band === 'ink' ? 'background' : 'line'}
-              /*
-               * Both readings, as ratios against their own design width, so the
-               * composition holds between the endpoints instead of only at them
-               * (ADR 0006 — 402 and 1440 are design widths, not thresholds).
-               * These were single pixel values seated to 1440 and serving both
-               * frames, which is why the narrow end read wrong.
-               *
-               *   ink    402: 205/171/918 → 51.00 / 45.77 / 228.36vw
-               *          1440: -117/184/918 → -8.13 / 12.78 / 63.75vw
-               *   bone   402: 171/178/720 → 42.54 / 44.28 / 179.10vw
-               *          1440: -147/98/720 → -10.21 / 6.81 / 50.00vw
-               */
+              /* Both spheres are a literal size at both widths — that is the
+                 reading above, not an oversight: the frames slide the same
+                 capture sideways rather than rescaling it. */
               className={
                 band === 'ink'
-                  ? 'left-[51vw] top-[45.77vw] -z-10 w-[228.36vw] lg:left-auto lg:right-[-8.13vw] lg:top-[12.78vw] lg:w-[63.75vw]'
-                  : 'left-[42.54vw] top-[44.28vw] -z-10 w-[179.1vw] lg:left-auto lg:right-[-10.21vw] lg:top-[6.81vw] lg:w-[50vw]'
+                  ? 'left-[205px] top-[184px] -z-10 w-[918px] lg:left-auto lg:right-[-117px]'
+                  : 'left-[171px] top-[178px] -z-10 w-[720px] lg:left-auto lg:right-[-147px] lg:top-[98px]'
               }
             />
           ) : null

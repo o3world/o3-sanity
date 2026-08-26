@@ -204,6 +204,15 @@ from one, never values; tokens and variant axes come from Figma. Read
 [`apps/storybook/prototypes/README.md`](./apps/storybook/prototypes/README.md) before adding one.
 Prototypes that answered a _logic_ question stay on a throwaway branch instead.
 
+**One capture is the exception, and it is the globe.**
+`apps/storybook/prototypes/2026-08-globe-export/` holds the official globe exports, and they **are**
+the source of record for that component — `OrbitalSphere` takes every value from them. Figma only
+ever carried the globe as a flattened raster (one a blurred crop under a scrim, one a video capture
+with a cursor in it), so there is no frame to outrank the export; a frame showing this globe is a
+screenshot of it. Where the two disagree, the export wins, and a newer export is the only thing that
+supersedes it. Do not "correct" the component's values back toward a frame. This exception is
+specific to that directory — every other capture follows the rule above.
+
 ### Components and shadcn
 
 **shadcn's anatomy, O3's tokens** (ADR 0008). shadcn is already adopted in

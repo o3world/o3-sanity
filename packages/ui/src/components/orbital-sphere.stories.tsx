@@ -123,7 +123,7 @@ export const InteriorHeroInk: Story = {
     <div className="bg-ink relative isolate h-[520px] overflow-hidden">
       <OrbitalSphere
         {...args}
-        className="left-[51vw] top-[45.77vw] -z-10 w-[228.36vw] lg:left-auto lg:right-[-8.13vw] lg:top-[12.78vw] lg:w-[63.75vw]"
+        className="left-[205px] top-[184px] -z-10 w-[918px] lg:left-auto lg:right-[-117px]"
       />
     </div>
   ),
@@ -138,7 +138,7 @@ export const InteriorHeroBone: Story = {
     <div className="bg-bone relative isolate h-[520px] overflow-hidden">
       <OrbitalSphere
         {...args}
-        className="left-[42.54vw] top-[44.28vw] -z-10 w-[179.1vw] lg:left-auto lg:right-[-10.21vw] lg:top-[6.81vw] lg:w-[50vw]"
+        className="left-[171px] top-[178px] -z-10 w-[720px] lg:left-auto lg:right-[-147px] lg:top-[98px]"
       />
     </div>
   ),
@@ -167,11 +167,11 @@ export const PullQuotePair: Story = {
     <div className="bg-bone relative isolate h-[560px] overflow-hidden">
       <OrbitalSphere
         {...args}
-        className="-z-10 hidden lg:left-[-39.1vw] lg:top-[17.92vw] lg:block lg:w-[80.21vw]"
+        className="-z-10 hidden lg:left-[-563px] lg:top-[258px] lg:block lg:w-[1155px]"
       />
       <OrbitalSphere
         {...args}
-        className="-z-10 hidden lg:left-[50.97vw] lg:top-[44.65vw] lg:block lg:w-[90.56vw]"
+        className="-z-10 hidden lg:left-[734px] lg:top-[643px] lg:block lg:w-[1304px]"
       />
     </div>
   ),

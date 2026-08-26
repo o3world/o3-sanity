@@ -7,15 +7,12 @@ import { PrototypeFrame, prototypeParameters } from './frame'
  * grey one that names itself the background globe. Two self-contained pages,
  * no build step, all tuning in a `CONFIG` object at the top of each `globe.js`.
  *
- * **This capture is the exception to the rule the frame's strip states.** A
- * prototype here is normally explicitly not a source of record — intent and
- * sequence come from one, never values. This one *is* the source of record for
- * the globe, because the design file only ever carried it as a flattened
- * raster: one a blurred crop under a scrim standing in for the animation, one a
- * video capture with a mouse cursor visible in the middle of it. There was
- * nothing better to read, which is why `OrbitalSphere` was a hand trace until
- * this arrived. Where the export and a frame disagree about the globe, the
- * export wins — the frame is a screenshot of it.
+ * **This capture is the source of record for the globe** — the one recorded
+ * exception to the rule the strip above states, because the design file only
+ * ever carried this globe as a flattened raster. The exception itself is
+ * written down where the rules live (`AGENTS.md` → Captured prototypes, and
+ * this directory's README), not here; a story docblock is not a place a rule
+ * can be found from.
  *
  * **What the pages carry that the ported component does not.** They ship at
  * `scale: 1` and full opacity so they read as complete assets. The site's own

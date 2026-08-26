@@ -113,12 +113,31 @@ const PALETTES: Record<GlobePreset, Palette> = {
     glow: 1.4,
     electronGlow: 3,
     electronOpacity: 1,
+    /*
+     * Every red here is the brand role or a `color-mix` off it — the export's
+     * own values are O3-red derivatives (`#b03a2e`, `#7e140a`, `#ff5a40`), and
+     * both apps render this package, so a literal would draw O3's brand on an
+     * O3XO hero. `brand-token-seam.test.ts` cannot catch that: it flags roles
+     * only one token package declares, and a raw hex declares nothing.
+     *
+     * The mixes reproduce the export's ramp against `--color-brand`: the dim
+     * arc and the mid bloom sit toward black, the hot inner ring toward white.
+     */
     accent: 'var(--color-brand)',
-    accentDim: '#b03a2e',
+    accentDim: 'color-mix(in srgb, var(--color-brand) 62%, black)',
     wire: '#e9edf5',
-    dotCols: ['var(--color-brand)', '#b03a2e', '#c8c8cc', '#8a8a8e'],
-    glowCols: ['var(--color-brand)', '#7e140a', '#ff5a40'],
-    shade: ['var(--color-brand)', '#7e140a'],
+    dotCols: [
+      'var(--color-brand)',
+      'color-mix(in srgb, var(--color-brand) 62%, black)',
+      '#c8c8cc',
+      '#8a8a8e',
+    ],
+    glowCols: [
+      'var(--color-brand)',
+      'color-mix(in srgb, var(--color-brand) 45%, black)',
+      'color-mix(in srgb, var(--color-brand) 70%, white)',
+    ],
+    shade: ['var(--color-brand)', 'color-mix(in srgb, var(--color-brand) 45%, black)'],
     strokeScale: 1,
     shadeOpacity: 1,
     opacity: 1,
@@ -547,15 +566,24 @@ export function OrbitalSphere({
         {arcs.map((arc, ci) => (
           <g
             key={arc.i}
-            className={
-              /* Only the coloured arcs breathe, and only when the band asked
-                 for motion. The stylesheet's own reduced-motion guard stays —
-                 the loop is gated separately, in the effect. */
+            /*
+             * Only the coloured arcs breathe, and only when the band asked for
+             * motion. Period and stagger come straight off the export's own
+             * formula — `(4.2 + i * 0.7) / speed` seconds, `i * 1.1` in — which
+             * at `speed: 0.3` is 18.7s and 28s for the two arcs this draws.
+             * Two periods that divide neither each other nor the turn, so the
+             * field never visibly repeats.
+             */
+            className={turning && arc.colored ? 'motion-reduce:animate-none' : undefined}
+            style={
               turning && arc.colored
-                ? cn(
-                    arc.i % 8 === 2 ? 'animate-orbit-pulse' : 'animate-orbit-pulse-alt',
-                    'motion-reduce:animate-none',
-                  )
+                ? {
+                    /* The keyframe dips to 45% of this, the way the export's
+                       `--po` does. The arcs carry their own stroke opacity, so
+                       the group's peak is 1. */
+                    ['--po' as string]: 1,
+                    animation: `globe-pulse ${((4.2 + arc.i * 0.7) / GEOMETRY.speed).toFixed(1)}s ease-in-out ${(arc.i * 1.1).toFixed(1)}s infinite`,
+                  }
                 : undefined
             }
           >
