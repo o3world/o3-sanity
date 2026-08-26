@@ -108,13 +108,12 @@ export function CtaSection({
         {showOrbs ? (
           <>
             {/*
-             * The neutral globe: the grey export names itself the background
-             * globe and this band is the case it names. The band drew the red
-             * one run quiet before, which the export has no setting for — a
-             * dimmer was how the traced version approximated a second palette.
+             * Red. Every closing band in the file draws the red globe — none of
+             * them draws the neutral one, whatever the grey export calls
+             * itself.
              */}
             <OrbitalSphere
-              preset="background"
+              preset="hero"
               motion="orbit"
               className="bottom-[4%] left-1/2 w-[150vw] -translate-x-1/2 lg:w-[90vw]"
             />

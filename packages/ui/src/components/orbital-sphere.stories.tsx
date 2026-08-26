@@ -115,9 +115,9 @@ export const HomeOpener: Story = {
   ),
 }
 
-/** The interior hero on ink — the neutral globe, off the band's right shoulder. */
+/** The interior hero on ink — the red globe, off the band's right shoulder. */
 export const InteriorHeroInk: Story = {
-  args: { preset: 'background', motion: 'orbit' },
+  args: { preset: 'hero', motion: 'orbit' },
   globals: { backgrounds: { value: 'ink' } },
   render: (args) => (
     <div className="bg-ink relative isolate h-[520px] overflow-hidden">
@@ -146,7 +146,7 @@ export const InteriorHeroBone: Story = {
 
 /** The closing CTA band — centred so the band shows the sphere's underside. */
 export const CtaBand: Story = {
-  args: { preset: 'background', motion: 'orbit' },
+  args: { preset: 'hero', motion: 'orbit' },
   globals: { backgrounds: { value: 'ink' } },
   render: (args) => (
     <div className="bg-ink-deep relative isolate h-[520px] overflow-hidden">

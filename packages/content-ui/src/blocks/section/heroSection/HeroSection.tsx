@@ -207,10 +207,11 @@ export function HeroSection({
                  sphere is the stand-in rather than the thing. `motion-reduce`
                  stops it. */
               motion="orbit"
-              /* The interior band runs the field quieter than the Home opener,
-                 which under the export is a preset rather than a dimmer: the
-                 neutral globe on ink, the line drawing on bone. */
-              preset={band === 'ink' ? 'background' : 'line'}
+              /* The red globe on ink, the same one the Home opener draws — an
+                 interior hero is not a quieter version of the opener, it is the
+                 same field on a shorter band. The line drawing still belongs to
+                 the light surfaces, where a bloom has nothing to sit on. */
+              preset={band === 'ink' ? 'hero' : 'line'}
               /* Both spheres are a literal size at both widths — that is the
                  reading above, not an oversight: the frames slide the same
                  capture sideways rather than rescaling it. */
