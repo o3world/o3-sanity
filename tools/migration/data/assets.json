@@ -1271,10 +1271,6 @@
     "sha256": "cb5ce404ee2c573b98037e359bd1fec0e8fc9fb3",
     "assetId": "image-cb5ce404ee2c573b98037e359bd1fec0e8fc9fb3-1584x672-png"
   },
-  "file:tools/migration/data/seed/assets/insight-weekend-maps.png": {
-    "sha256": "789c29e1472ea6c3a88676bf7fef7b4a767968fe",
-    "assetId": "image-789c29e1472ea6c3a88676bf7fef7b4a767968fe-1376x768-png"
-  },
   "https://www.o3world.com/wp-content/uploads/2025/02/ongoing-innovation.png": {
     "sha256": "044b8b05fa7b59909f91dbf86d34db14e8da2ef8",
     "assetId": "image-044b8b05fa7b59909f91dbf86d34db14e8da2ef8-901x901-png"
@@ -1654,10 +1650,6 @@
   "file:tools/migration/data/seed/assets/partner-vertex.png": {
     "sha256": "c4e6317ffd073039904d3e1c833aec3a504c8a11",
     "assetId": "image-c4e6317ffd073039904d3e1c833aec3a504c8a11-1200x221-png"
-  },
-  "file:tools/migration/data/seed/assets/insight-sync-hero.svg": {
-    "sha256": "7c92a5bd7f0cf8999686e2e5eea57bef995910ae",
-    "assetId": "image-7c92a5bd7f0cf8999686e2e5eea57bef995910ae-1200x630-svg"
   },
   "https://www.o3world.com/wp-content/uploads/2025/02/Talia.jpg": {
     "sha256": "45d36c497ab00900a200949a731633e6c0fd3710",
