@@ -201,26 +201,51 @@ export function HeroSection({
              * The hairline drawing rather than the lit rim, because the glow
              * belongs to the dark bands (see `OrbitalSphere`).
              */
-            <OrbitalSphere
-              /* It turns here as it does in the Home opener — the captures
+            /*
+             * THE BLOOM IS FADED OUT WHERE THE NAV SITS.
+             *
+             * The sphere is placed correctly — its crest lands at 184, level
+             * with the eyebrow, which is what the frame draws. What collides
+             * with the chrome is the glow: the export's outer ring reaches
+             * about 164 user units past the sphere, ~220px at this band's
+             * scale, so it washes up behind the nav pill and greys the button
+             * inside it.
+             *
+             * Neither obvious fix works alone, and the arithmetic is why.
+             * Moving the globe clear would need +182px on a 581px band, which
+             * recomposes the whole thing. Shrinking the glow to fit the 38px
+             * between the nav's foot and the sphere's crest would mean cutting
+             * it from 164 units to 28 — deleting it, not reducing it.
+             *
+             * So only the colliding part goes. The mask is transparent above
+             * the nav's foot and fully open again by the time the sphere's
+             * crest arrives. That window is 38px wide, so the very top of the
+             * limb is fractionally dimmed; everything below it, and the whole
+             * of the bloom to the sides and underneath, is the export
+             * untouched.
+             */
+            <div className="pointer-events-none absolute inset-0 -z-10 [mask-image:linear-gradient(to_bottom,transparent_0,transparent_146px,#000_190px)]">
+              <OrbitalSphere
+                /* It turns here as it does in the Home opener — the captures
                  these are seated to stand in for the animation, so a still
                  sphere is the stand-in rather than the thing. `motion-reduce`
                  stops it. */
-              motion="orbit"
-              /* The red globe on ink, the same one the Home opener draws — an
+                motion="orbit"
+                /* The red globe on ink, the same one the Home opener draws — an
                  interior hero is not a quieter version of the opener, it is the
                  same field on a shorter band. The line drawing still belongs to
                  the light surfaces, where a bloom has nothing to sit on. */
-              preset={band === 'ink' ? 'hero' : 'line'}
-              /* Both spheres are a literal size at both widths — that is the
+                preset={band === 'ink' ? 'hero' : 'line'}
+                /* Both spheres are a literal size at both widths — that is the
                  reading above, not an oversight: the frames slide the same
                  capture sideways rather than rescaling it. */
-              className={
-                band === 'ink'
-                  ? 'left-[205px] top-[184px] -z-10 w-[918px] lg:left-auto lg:right-[-117px]'
-                  : 'left-[171px] top-[178px] -z-10 w-[720px] lg:left-auto lg:right-[-147px] lg:top-[98px]'
-              }
-            />
+                className={
+                  band === 'ink'
+                    ? 'left-[205px] top-[184px] w-[918px] lg:left-auto lg:right-[-117px]'
+                    : 'left-[171px] top-[178px] w-[720px] lg:left-auto lg:right-[-147px] lg:top-[98px]'
+                }
+              />
+            </div>
           ) : null
         }
       />
