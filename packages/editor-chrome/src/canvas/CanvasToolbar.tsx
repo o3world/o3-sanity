@@ -172,11 +172,26 @@ function CanvasToolbarInner({
     if (!doc) return
     if (snapshot && !stale) return
     let cancelled = false
-    void doc.getSnapshot().then((settled) => {
-      if (cancelled || !settled) return
-      setSnapshot(settled as unknown as Record<string, unknown>)
-      setStale(false)
-    })
+    void doc
+      .getSnapshot()
+      .then((settled) => {
+        if (cancelled) return
+        // `stale` clears whether or not there was anything to settle on. It is
+        // the effect's own re-arm flag and one of its three deps, so a pull
+        // that ends without clearing it leaves nothing that can change again:
+        // the bar draws pre-commit values on every later hover for the rest of
+        // the session.
+        setStale(false)
+        if (settled) setSnapshot(settled as unknown as Record<string, unknown>)
+      })
+      .catch((error: unknown) => {
+        if (cancelled) return
+        setStale(false)
+        // The same treatment writes already get — `commitPatch`'s `onError`.
+        // A document deleted by another editor between hover and settle, or a
+        // dropped comlink, is the editor's to see rather than the console's.
+        reportCanvasFailure('could not read the document', error)
+      })
     return () => {
       cancelled = true
     }

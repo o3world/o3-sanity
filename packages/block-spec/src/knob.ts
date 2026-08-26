@@ -117,6 +117,43 @@ function refuseDuplicatePaths(where: string, knobs: readonly Knob[]): void {
  * its options never appear in `knobs` — which is also why an item knob cannot
  * reach `patchableKnobRoots` and overlay a whole array by accident.
  */
+/**
+ * A dotted knob name expands into a nested object — `media.ratio` becomes
+ * `{media: {ratio: …}}` — and `newBlockContent` lays the placeholder over those
+ * defaults with one shallow spread. So a placeholder that also puts something
+ * under `media` replaces the branch wholesale and `ratio` is gone: a block
+ * inserted from the canvas would come out without the value a form-created one
+ * gets, which is the exact divergence `initialKnobValues` exists to prevent
+ * (#154).
+ *
+ * REFUSED AT DEFINITION TIME, not deep-merged. Deep-merging would leave two
+ * declarations quietly sharing one branch, and neither reader could tell which
+ * of them owned a given leaf. The refusal is the house pattern the rest of this
+ * function already follows: a spec that would produce the divergence does not
+ * load, so nobody has to find it in a document later.
+ *
+ * Only a knob with an `initialValue` is checked. One without contributes
+ * nothing to the defaults, so there is nothing for the placeholder to shadow.
+ */
+function refuseNestedPlaceholderOverlap(
+  label: string,
+  knobs: readonly Knob[],
+  content: Record<string, unknown>,
+): void {
+  for (const k of knobs) {
+    if (k.initialValue === undefined) continue
+    const [root, ...rest] = k.name.split('.')
+    if (rest.length === 0 || root === undefined) continue
+    if (!Object.prototype.hasOwnProperty.call(content, root)) continue
+    throw new Error(
+      `${label}: knob "${k.name}" defaults into "${root}", and the placeholder declares "${root}" ` +
+        `too. The placeholder wins the whole branch, so the knob's default would be dropped from ` +
+        `a canvas insert and kept by a form one. Spell the default into the placeholder's ` +
+        `"${root}" and drop the knob's initialValue, or move the knob out from under it.`,
+    )
+  }
+}
+
 export function defineBlockKnobs({
   type,
   title,
@@ -170,6 +207,23 @@ export function defineBlockKnobs({
           `A placeholder is commit-safe content and may never point at a document — leave the ` +
           `field empty and let the editor pick.`,
       )
+    }
+    refuseNestedPlaceholderOverlap(`defineBlockKnobs("${type}")`, knobs, placeholder)
+    // A MEMBER GETS THE SAME CHECK. An array member is its own knob root
+    // (ADR 0021) and `newBlockContent` merges its defaults into each member
+    // with the same shallow spread, so a dotted item knob is shadowed by a
+    // placeholder member the same way.
+    for (const [field, itemSpec] of Object.entries(items ?? {})) {
+      const members = placeholder[field as keyof typeof placeholder]
+      if (!Array.isArray(members)) continue
+      for (const member of members) {
+        if (typeof member !== 'object' || member === null || Array.isArray(member)) continue
+        refuseNestedPlaceholderOverlap(
+          `defineBlockKnobs("${type}") item "${field}"`,
+          itemSpec.knobs,
+          member as Record<string, unknown>,
+        )
+      }
     }
   }
   for (const k of knobs) {

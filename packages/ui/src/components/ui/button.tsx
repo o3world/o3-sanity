@@ -65,7 +65,16 @@ const buttonVariants = cva(
   // `w-fit` because the set hugs its label at every instance, and this element
   // is now the styled one on both arms — as a grid or flex child its
   // `inline-flex` is blockified to `flex` and it would stretch to the track.
-  'inline-flex w-fit items-center justify-center gap-3 whitespace-nowrap rounded-btn text-button tracking-[0.01em] transition-colors duration-(--duration-hover) ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none aria-disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0',
+  //
+  // `max-w-full` AND NO `whitespace-nowrap`, which is the pair (#181). The set
+  // draws no label long enough to need a second line, so the frame answers
+  // nothing here — but an authored one does: "Attend the 1682 conference on
+  // October 8" is 13px wider than a 390px viewport, and a label that cannot
+  // break took the band and the document sideways with it. `w-fit` still hugs
+  // the label everywhere it fits, so the only button that wraps is one whose
+  // label is wider than the space it was given. The icon stays a flex item
+  // beside the whole label, centred on it.
+  'inline-flex w-fit max-w-full items-center justify-center gap-3 rounded-btn text-button tracking-[0.01em] transition-colors duration-(--duration-hover) ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:pointer-events-none aria-disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0',
   {
     variants: {
       variant: {

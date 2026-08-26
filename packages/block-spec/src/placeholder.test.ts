@@ -100,6 +100,80 @@ describe('defineBlockKnobs, on a placeholder', () => {
     ).toThrow(/declares _type "quoteSection"/)
   })
 
+  it('refuses a dotted knob whose branch the placeholder also declares', () => {
+    // #154: the merge is one shallow spread, so the placeholder's `media`
+    // replaces the defaults' `media` and `ratio` never reaches the document.
+    expect(() =>
+      defineBlockKnobs({
+        type: 'mediaSection',
+        title: 'Media',
+        tier: 'section',
+        knobs: [
+          surface,
+          knob({
+            name: 'media.ratio',
+            title: 'Ratio',
+            options: ['wide', 'square'],
+            initialValue: 'wide',
+          }),
+        ],
+        placeholder: {
+          _type: 'mediaSection',
+          media: { _type: 'figure', caption: 'A caption.' },
+        },
+      }),
+    ).toThrow(/knob "media\.ratio" defaults into "media"/)
+  })
+
+  it('refuses the same overlap one root down, inside an array member', () => {
+    expect(() =>
+      defineBlockKnobs({
+        type: 'screenGridSection',
+        title: 'Screen grid',
+        tier: 'section',
+        knobs: [surface],
+        items: {
+          screens: defineItemKnobs({
+            type: 'screen',
+            title: 'Screen',
+            knobs: [
+              knob({
+                name: 'media.ratio',
+                title: 'Ratio',
+                options: ['wide', 'square'],
+                initialValue: 'wide',
+              }),
+            ],
+          }),
+        },
+        placeholder: {
+          _type: 'screenGridSection',
+          screens: [{ _key: 'a', media: { _type: 'figure' } }],
+        },
+      }),
+    ).toThrow(/item "screens": knob "media\.ratio"/)
+  })
+
+  it('leaves a dotted knob alone when the placeholder declares nothing under it', () => {
+    const spec = defineBlockKnobs({
+      type: 'mediaSection',
+      title: 'Media',
+      tier: 'section',
+      knobs: [
+        surface,
+        knob({
+          name: 'media.ratio',
+          title: 'Ratio',
+          options: ['wide', 'square'],
+          initialValue: 'wide',
+        }),
+      ],
+      placeholder: { _type: 'mediaSection', heading: 'A heading.' },
+    })
+
+    expect(initialKnobValues(spec)).toMatchObject({ media: { ratio: 'wide' } })
+  })
+
   it('keeps an asset reference, which is the seeded-asset case', () => {
     const spec = defineBlockKnobs({
       type: 'mediaSection',

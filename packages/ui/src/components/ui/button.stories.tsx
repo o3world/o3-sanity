@@ -40,6 +40,24 @@ export const Light: Story = {
   globals: { backgrounds: { value: 'ink' } },
 }
 
+/**
+ * A LABEL WIDER THAN THE SPACE IT WAS GIVEN (#181). The set draws none this
+ * long, so nothing here is transcribed — the case is authored: `/1682-conference-ai-innovation`
+ * asks for "Attend the 1682 conference on October 8", which at 390px is wider
+ * than the viewport. It used to take the band and the document sideways with
+ * it; now it wraps inside a 320px column and the icon holds the last position.
+ */
+export const LongLabel: Story = {
+  args: { children: 'Attend the 1682 conference on October 8', icon: <ArrowIcon /> },
+  decorators: [
+    (Story) => (
+      <div className="outline-current/20 w-[320px] outline outline-dashed outline-1">
+        <Story />
+      </div>
+    ),
+  ],
+}
+
 /** `Button / Ghost` (264:260). */
 export const Ghost: Story = {
   args: { variant: 'ghost', children: 'Ghost' },
