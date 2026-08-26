@@ -3,21 +3,21 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { OrbitalSphere } from './orbital-sphere'
 
 /**
- * The wireframe globe, drawn rather than exported — both canonical frames
- * carry it as a flattened raster (one with the headline baked in, one with a
- * mouse cursor in the middle of it), so neither is shippable. See the
- * component's own comment for how the geometry was recovered.
+ * The wireframe atom, ported from the official export rather than traced off a
+ * raster. See the component's own comment for what the export supersedes and
+ * which two readings from the trace survive it.
  *
- * It is `position: absolute` and `aria-hidden` by construction: it is a field
- * a band sits in front of, never a thing on its own. Every story therefore
- * supplies the band — the sizing and the offsets in each `className` are the
- * real call sites' values, so these stories are the record of how each band
- * actually crops the sphere.
+ * It is `position: absolute` and `aria-hidden` by construction: it is a field a
+ * band sits in front of, never a thing on its own. Every placement story
+ * therefore supplies the band, and **carries that call site's real values** —
+ * these stories are the record of how each band crops the sphere, and the only
+ * seam that catches placement drift.
  *
- * The thing to check is the **proportion**, not the numbers: the arcs should
- * run nearly parallel to whatever curve is beneath them. A sphere drawn a
- * sixth too small pulls its arcs up and away, which is the way this has
- * historically drifted.
+ * The thing to check is the **proportion**, not the numbers: the arcs should run
+ * nearly parallel to whatever curve is beneath them. A sphere drawn a sixth too
+ * small pulls its arcs up and away, which is the way this has historically
+ * drifted — the previous hero story drew it a third small for a whole
+ * generation without anything noticing.
  */
 const meta = {
   title: 'UI/OrbitalSphere',
@@ -28,31 +28,125 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-/**
- * The Home hero (`1810:1616`) — 95.5% of the frame width, hung so only the cap
- * shows, and the band closing on a hard edge the way `2089:4316` draws it.
- * `motion="orbit"`, which is what the hero asks for.
- */
-export const HeroCap: Story = {
+/** The drawing itself, still, at each preset — not a composition any band draws,
+ *  but the only way to see the atom rather than a crop of it. */
+export const Presets: Story = {
+  args: {},
+  globals: { backgrounds: { value: 'ink' } },
+  render: () => (
+    <div className="grid grid-cols-3">
+      <div className="bg-ink relative isolate flex h-[360px] items-center justify-center">
+        <OrbitalSphere
+          preset="hero"
+          className="left-1/2 top-1/2 w-[220px] -translate-x-1/2 -translate-y-1/2"
+        />
+      </div>
+      <div className="bg-ink-deep relative isolate flex h-[360px] items-center justify-center">
+        <OrbitalSphere
+          preset="background"
+          className="left-1/2 top-1/2 w-[220px] -translate-x-1/2 -translate-y-1/2"
+        />
+      </div>
+      <div className="bg-bone relative isolate flex h-[360px] items-center justify-center">
+        <OrbitalSphere
+          preset="line"
+          className="left-1/2 top-1/2 w-[220px] -translate-x-1/2 -translate-y-1/2"
+        />
+      </div>
+    </div>
+  ),
+}
+
+/** The same atom turning, with the coloured great circles breathing against it.
+ *  `still` is the default deliberately — a decorative background that turns
+ *  forever is what `prefers-reduced-motion` is about, so a band asks for motion
+ *  rather than opting out of it. */
+export const Turning: Story = {
   args: { motion: 'orbit' },
   globals: { backgrounds: { value: 'ink' } },
   render: (args) => (
-    <div className="bg-ink relative isolate h-[520px] overflow-hidden">
+    <div className="bg-ink relative isolate flex h-[560px] items-center justify-center overflow-hidden">
       <OrbitalSphere
         {...args}
-        className="bottom-[-124vw] left-1/2 w-[165vw] -translate-x-1/2 lg:bottom-[-77.1vw] lg:w-[95.5vw]"
+        className="left-1/2 top-1/2 w-[440px] -translate-x-1/2 -translate-y-1/2"
       />
     </div>
   ),
 }
 
-/**
- * The closing CTA band (`1799:1470`) — the same sphere at the same scale, but
- * centred so the band shows its underside, and run at `soft` so the copy on
- * top of it stays the brightest thing in the band.
- */
+/** Two on one page. The export found its host by a hardcoded global element id,
+ *  so the second one never drew; this is the story that would have caught it. */
+export const TwoOnAPage: Story = {
+  args: { motion: 'orbit' },
+  globals: { backgrounds: { value: 'ink' } },
+  render: (args) => (
+    <div className="bg-ink relative isolate flex h-[420px] items-center justify-around overflow-hidden">
+      <OrbitalSphere
+        {...args}
+        preset="hero"
+        className="left-[8%] top-1/2 w-[280px] -translate-y-1/2"
+      />
+      <OrbitalSphere
+        {...args}
+        preset="background"
+        className="right-[8%] top-1/2 w-[280px] -translate-y-1/2"
+      />
+    </div>
+  ),
+}
+
+/* ---------------------------------------------------------------------------
+ * The real call sites. Values below are copied from the renderers, not invented.
+ * ------------------------------------------------------------------------- */
+
+/** The Home opener. The sphere is 133.75% of the frame width, hung so only its
+ *  cap shows, on a band that closes on a hard edge. The ratio deliberately does
+ *  not carry to 402 — see the component comment. */
+export const HomeOpener: Story = {
+  args: { preset: 'hero', motion: 'orbit' },
+  globals: { backgrounds: { value: 'ink' } },
+  render: (args) => (
+    <div className="bg-ink relative isolate h-[520px] overflow-hidden">
+      <OrbitalSphere
+        {...args}
+        className="bottom-[-124vw] left-1/2 w-[165vw] -translate-x-1/2 lg:bottom-[-111.3vw] lg:w-[133.75vw]"
+      />
+    </div>
+  ),
+}
+
+/** The interior hero on ink — the neutral globe, off the band's right shoulder. */
+export const InteriorHeroInk: Story = {
+  args: { preset: 'background', motion: 'orbit' },
+  globals: { backgrounds: { value: 'ink' } },
+  render: (args) => (
+    <div className="bg-ink relative isolate h-[520px] overflow-hidden">
+      <OrbitalSphere
+        {...args}
+        className="left-[51vw] top-[45.77vw] -z-10 w-[228.36vw] lg:left-auto lg:right-[-8.13vw] lg:top-[12.78vw] lg:w-[63.75vw]"
+      />
+    </div>
+  ),
+}
+
+/** The interior hero on bone — the line drawing, most of it past the right edge
+ *  with the arcs crossing the copy's right shoulder. */
+export const InteriorHeroBone: Story = {
+  args: { preset: 'line', motion: 'orbit' },
+  globals: { backgrounds: { value: 'bone' } },
+  render: (args) => (
+    <div className="bg-bone relative isolate h-[520px] overflow-hidden">
+      <OrbitalSphere
+        {...args}
+        className="left-[42.54vw] top-[44.28vw] -z-10 w-[179.1vw] lg:left-auto lg:right-[-10.21vw] lg:top-[6.81vw] lg:w-[50vw]"
+      />
+    </div>
+  ),
+}
+
+/** The closing CTA band — centred so the band shows the sphere's underside. */
 export const CtaBand: Story = {
-  args: { intensity: 'soft', motion: 'orbit' },
+  args: { preset: 'background', motion: 'orbit' },
   globals: { backgrounds: { value: 'ink' } },
   render: (args) => (
     <div className="bg-ink-deep relative isolate h-[520px] overflow-hidden">
@@ -64,56 +158,20 @@ export const CtaBand: Story = {
   ),
 }
 
-/**
- * `tone="light"` — the pull quote (`1683:2139`) and the About hero draw the
- * same sphere as fine dark line-art with **no bloom**. The glow belongs to the
- * dark bands only, which is the whole distinction this prop exists to hold.
- */
-export const LightTone: Story = {
-  args: { tone: 'light' },
+/** The pull quote's pair, on bone, both `lg:` only — the 402 frame has room for
+ *  neither. This is the band where the `line` preset has to hold up. */
+export const PullQuotePair: Story = {
+  args: { preset: 'line' },
   globals: { backgrounds: { value: 'bone' } },
   render: (args) => (
-    <div className="bg-bone relative isolate h-[520px] overflow-hidden">
+    <div className="bg-bone relative isolate h-[560px] overflow-hidden">
       <OrbitalSphere
         {...args}
-        className="left-1/2 top-1/2 w-[560px] -translate-x-1/2 -translate-y-1/2"
+        className="-z-10 hidden lg:left-[-39.1vw] lg:top-[17.92vw] lg:block lg:w-[80.21vw]"
       />
-    </div>
-  ),
-}
-
-/**
- * The whole sphere, still, at `full` — not a composition any frame draws, but
- * the only way to see the drawing itself: the lit limb, the four great
- * circles, and the node dots on the paths.
- *
- * `still` is the default deliberately. A decorative background that turns
- * forever is exactly what `prefers-reduced-motion` is about, so a band has to
- * ask for `orbit` rather than opt out of it.
- */
-export const WholeSphere: Story = {
-  args: {},
-  globals: { backgrounds: { value: 'ink' } },
-  render: (args) => (
-    <div className="bg-ink relative isolate flex h-[560px] items-center justify-center overflow-hidden">
       <OrbitalSphere
         {...args}
-        className="left-1/2 top-1/2 w-[440px] -translate-x-1/2 -translate-y-1/2"
-      />
-    </div>
-  ),
-}
-
-/** The same drawing turning — one revolution a minute, with the two coloured
- *  great circles breathing against it. */
-export const Turning: Story = {
-  args: { motion: 'orbit' },
-  globals: { backgrounds: { value: 'ink' } },
-  render: (args) => (
-    <div className="bg-ink relative isolate flex h-[560px] items-center justify-center overflow-hidden">
-      <OrbitalSphere
-        {...args}
-        className="left-1/2 top-1/2 w-[440px] -translate-x-1/2 -translate-y-1/2"
+        className="-z-10 hidden lg:left-[50.97vw] lg:top-[44.65vw] lg:block lg:w-[90.56vw]"
       />
     </div>
   ),

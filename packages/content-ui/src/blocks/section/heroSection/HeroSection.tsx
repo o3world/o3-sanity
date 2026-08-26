@@ -207,16 +207,26 @@ export function HeroSection({
                  sphere is the stand-in rather than the thing. `motion-reduce`
                  stops it. */
               motion="orbit"
-              tone={band === 'ink' ? 'ink' : 'light'}
-              /* The interior band runs the field quieter than the Home opener:
-                 the limb peaks around 40 points of red over its neighbours in
-                 the ink exports, against the 120 a full-intensity draw puts
-                 there. */
-              intensity={band === 'ink' ? 'soft' : 'full'}
+              /* The interior band runs the field quieter than the Home opener,
+                 which under the export is a preset rather than a dimmer: the
+                 neutral globe on ink, the line drawing on bone. */
+              preset={band === 'ink' ? 'background' : 'line'}
+              /*
+               * Both readings, as ratios against their own design width, so the
+               * composition holds between the endpoints instead of only at them
+               * (ADR 0006 — 402 and 1440 are design widths, not thresholds).
+               * These were single pixel values seated to 1440 and serving both
+               * frames, which is why the narrow end read wrong.
+               *
+               *   ink    402: 205/171/918 → 51.00 / 45.77 / 228.36vw
+               *          1440: -117/184/918 → -8.13 / 12.78 / 63.75vw
+               *   bone   402: 171/178/720 → 42.54 / 44.28 / 179.10vw
+               *          1440: -147/98/720 → -10.21 / 6.81 / 50.00vw
+               */
               className={
                 band === 'ink'
-                  ? 'left-[205px] top-[184px] -z-10 w-[918px] lg:left-auto lg:right-[-117px]'
-                  : 'left-[171px] top-[178px] -z-10 w-[720px] lg:left-auto lg:right-[-147px] lg:top-[98px]'
+                  ? 'left-[51vw] top-[45.77vw] -z-10 w-[228.36vw] lg:left-auto lg:right-[-8.13vw] lg:top-[12.78vw] lg:w-[63.75vw]'
+                  : 'left-[42.54vw] top-[44.28vw] -z-10 w-[179.1vw] lg:left-auto lg:right-[-10.21vw] lg:top-[6.81vw] lg:w-[50vw]'
               }
             />
           ) : null
@@ -253,6 +263,7 @@ export function HeroSection({
            * to hold roughly the frame's quarter-of-the-band cap.
            */
           <OrbitalSphere
+            preset="hero"
             motion="orbit"
             className="bottom-[-124vw] left-1/2 w-[165vw] -translate-x-1/2 lg:bottom-[-111.3vw] lg:w-[133.75vw]"
           />

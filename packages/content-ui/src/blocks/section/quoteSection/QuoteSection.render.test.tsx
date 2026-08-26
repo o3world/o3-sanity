@@ -32,7 +32,7 @@ describe('the quote band’s molecule decoration', () => {
     expect(html).toContain('w-[776px]')
     expect(html).toContain('opacity-10')
     // OrbitalSphere's own markup — the two are alternatives, never both.
-    expect(html).not.toContain('lg:w-[1155px]')
+    expect(html).not.toContain('lg:w-[80.21vw]')
   })
 
   it('hangs the mark off the band’s bottom-left corner and lets the band clip it', () => {
@@ -132,14 +132,14 @@ describe('the quote band’s eyebrow', () => {
 describe('the quote band’s other decorations', () => {
   it('still draws the two spheres on `orbs`', () => {
     const html = render('orbs')
-    expect(html).toContain('lg:w-[1155px]')
-    expect(html).toContain('lg:w-[1304px]')
+    expect(html).toContain('lg:w-[80.21vw]')
+    expect(html).toContain('lg:w-[90.56vw]')
     expect(html).not.toContain('viewBox="0 0 699 699"')
   })
 
   it('draws neither on `none`', () => {
     const html = render('none')
-    expect(html).not.toContain('lg:w-[1155px]')
+    expect(html).not.toContain('lg:w-[80.21vw]')
     expect(html).not.toContain('viewBox="0 0 699 699"')
     expect(html).toContain('Simply the best.')
   })

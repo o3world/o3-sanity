@@ -40,7 +40,7 @@ const PICTURE = {
 }
 
 /** OrbitalSphere's own viewBox, which nothing else in this band draws. */
-const SPHERE = 'viewBox="0 0 1000 1000"'
+const SPHERE = 'viewBox="260 260 680 680"'
 /** MoleculeMark's. */
 const MOLECULE = 'viewBox="0 0 699 699"'
 const FADE_STRIP = '--gradient-ink-fade'

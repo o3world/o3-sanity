@@ -88,13 +88,21 @@ export function QuoteSection({
              * no bloom — OrbitalSphere's `light` tone. Hidden below `lg`, where
              * the 402 frame has room for neither.
              */}
+            {/*
+             * Ratios against the 1440 frame rather than its pixels, so the pair
+             * holds its composition across the whole range where `lg` is live
+             * instead of only at the design width (ADR 0006).
+             *
+             *   -563/258/1155 → -39.10 / 17.92 / 80.21vw
+             *    734/643/1304 →  50.97 / 44.65 / 90.56vw
+             */}
             <OrbitalSphere
-              tone="light"
-              className="-z-10 hidden lg:left-[-563px] lg:top-[258px] lg:block lg:w-[1155px]"
+              preset="line"
+              className="-z-10 hidden lg:left-[-39.1vw] lg:top-[17.92vw] lg:block lg:w-[80.21vw]"
             />
             <OrbitalSphere
-              tone="light"
-              className="-z-10 hidden lg:left-[734px] lg:top-[643px] lg:block lg:w-[1304px]"
+              preset="line"
+              className="-z-10 hidden lg:left-[50.97vw] lg:top-[44.65vw] lg:block lg:w-[90.56vw]"
             />
           </>
         ) : null}
