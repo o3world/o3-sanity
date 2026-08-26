@@ -185,6 +185,17 @@ const PALETTES: Record<GlobePreset, Palette> = {
   },
 }
 
+/**
+ * Both layers carry the export's tilt and spin, and the preset's opacity. They
+ * are stacked exactly on top of each other, so anything that moves one and not
+ * the other pulls the drawing apart.
+ */
+const LAYER_STYLE = (opacity: number) => ({
+  transform: `rotateX(${GEOMETRY.tilt}deg) rotate(${GEOMETRY.angle}deg)`,
+  transformOrigin: '50% 50%' as const,
+  opacity,
+})
+
 /** The export's projection constants. */
 const C = 600
 const R = 340
@@ -458,9 +469,22 @@ export function OrbitalSphere({
     const t0 = performance.now()
     let raf = 0
 
+    /*
+     * Half rate. The sphere completes one revolution every 233 seconds, so a
+     * frame at 60Hz advances any point by a fraction of a pixel — the extra
+     * thirty frames buy nothing anyone can see and cost a full pass of path
+     * rebuilding and attribute writes. The electrons are the fastest thing here
+     * and they still move well under a pixel per frame at 30.
+     */
+    const MIN_FRAME_MS = 1000 / 30
+    let painted = -Infinity
+
     const frame = (now: number) => {
       raf = requestAnimationFrame(frame)
       if (!visible) return
+      /* A degree of slack, or a display running just under 60Hz drops to 15. */
+      if (now - painted < MIN_FRAME_MS - 2) return
+      painted = now
 
       const t = (now - t0) / 1000
       const cs = Math.cos(t * omega)
@@ -520,23 +544,35 @@ export function OrbitalSphere({
       className={cn('pointer-events-none absolute aspect-square', className)}
       {...rest}
     >
+      {/*
+       * THE MOVING HALF. Nothing but the great circles and their electrons —
+       * hairline strokes, cheap to repaint at whatever rate the loop asks for.
+       *
+       * The split from the static half below is the whole performance story of
+       * this component. The bloom is three Gaussian-blurred rings, and the SVG
+       * scales user units by the call site's width: on the Home hero, which
+       * renders about 2670px across, `blur(60px)` becomes a **236px** blur in
+       * CSS pixels — 472 device pixels at DPR 2 — over a surface that size.
+       * While it shared an `<svg>` with the arcs, every path write invalidated
+       * it and the browser re-rasterised all three rings sixty times a second.
+       * They never change. Now they are a sibling that paints once.
+       */}
       <svg
         /*
          * The export draws on 1200 square with the sphere at r=340 about the
          * centre — a sphere occupying 56.7% of its box, the rest reserved for
          * bloom. Framed here to the sphere itself (600±340) instead, so the box
          * IS the sphere and a call site's `w-[…vw]` means what its derivation
-         * says it means: the sphere as a fraction of the viewport. `overflow:
-         * visible` lets the bloom spill outside, which is what the export's own
-         * stylesheet arranges and why it can be cropped out of the box safely.
+         * says it means: the sphere as a fraction of the viewport.
+         *
+         * `overflow: visible` is load-bearing rather than defensive: the
+         * perspective divide magnifies the near half of each great circle by up
+         * to 1.26, so arcs genuinely reach past the box. That is also why this
+         * layer cannot take `contain: paint` — it would clip them.
          */
         viewBox="260 260 680 680"
         className="absolute inset-0 h-full w-full overflow-visible"
-        style={{
-          transform: `rotateX(${GEOMETRY.tilt}deg) rotate(${GEOMETRY.angle}deg)`,
-          transformOrigin: '50% 50%',
-          opacity: palette.opacity,
-        }}
+        style={LAYER_STYLE(palette.opacity)}
       >
         <defs>
           {blurs.map((sd, n) => (
@@ -548,19 +584,6 @@ export function OrbitalSphere({
               </feMerge>
             </filter>
           ))}
-          <radialGradient id={`globe-${preset}-shade`} cx="38%" cy="32%" r="75%">
-            <stop
-              offset="0%"
-              stopColor={palette.shade[0]}
-              stopOpacity={0.1 * palette.shadeOpacity}
-            />
-            <stop
-              offset="55%"
-              stopColor={palette.shade[1]}
-              stopOpacity={0.05 * palette.shadeOpacity}
-            />
-            <stop offset="100%" stopColor="#000" stopOpacity="0" />
-          </radialGradient>
         </defs>
 
         {arcs.map((arc, ci) => (
@@ -624,9 +647,42 @@ export function OrbitalSphere({
             ))}
           </g>
         ))}
+      </svg>
+
+      {/*
+       * THE STILL HALF — the bloom, the limb and the interior wash. None of it
+       * is a function of time, so it is lifted out of the layer that rewrites
+       * itself every frame and rasterised once.
+       *
+       * Paint order is preserved exactly: in the export these three sit ON TOP
+       * of the arcs, so this sibling comes after the animated one in the DOM
+       * and inherits the same transform. Concentric circles are invariant under
+       * the Z rotation, but `rotateX` squashes them, so the transform has to
+       * match rather than be dropped.
+       */}
+      <svg
+        viewBox="260 260 680 680"
+        className="absolute inset-0 h-full w-full overflow-visible"
+        style={LAYER_STYLE(palette.opacity)}
+      >
+        <defs>
+          <radialGradient id={`globe-${preset}-shade`} cx="38%" cy="32%" r="75%">
+            <stop
+              offset="0%"
+              stopColor={palette.shade[0]}
+              stopOpacity={0.1 * palette.shadeOpacity}
+            />
+            <stop
+              offset="55%"
+              stopColor={palette.shade[1]}
+              stopOpacity={0.05 * palette.shadeOpacity}
+            />
+            <stop offset="100%" stopColor="#000" stopOpacity="0" />
+          </radialGradient>
+        </defs>
 
         {/*
-         * The bloom. Three blurred rings just outside the limb — which is what
+         * The bloom — three blurred rings just outside the limb, which is what
          * makes this a lit rim rather than a filled disc. `glow: 0` emits none
          * of them, which is how the bone bands stay unlit.
          */}
