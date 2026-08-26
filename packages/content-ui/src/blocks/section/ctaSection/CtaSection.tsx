@@ -107,8 +107,13 @@ export function CtaSection({
          */}
         {showOrbs ? (
           <>
+            {/*
+             * Red. Every closing band in the file draws the red globe — none of
+             * them draws the neutral one, whatever the grey export calls
+             * itself.
+             */}
             <OrbitalSphere
-              intensity="soft"
+              preset="hero"
               motion="orbit"
               className="bottom-[4%] left-1/2 w-[150vw] -translate-x-1/2 lg:w-[90vw]"
             />

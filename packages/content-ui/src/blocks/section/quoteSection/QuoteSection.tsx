@@ -85,15 +85,15 @@ export function QuoteSection({
             {/*
              * Two spheres bleeding off opposite edges (`1683:2139` at −563/258,
              * `1683:2655` at 734/643). On bone they are fine dark line-art with
-             * no bloom — OrbitalSphere's `light` tone. Hidden below `lg`, where
+             * no bloom — OrbitalSphere's `line` preset. Hidden below `lg`, where
              * the 402 frame has room for neither.
              */}
             <OrbitalSphere
-              tone="light"
+              preset="line"
               className="-z-10 hidden lg:left-[-563px] lg:top-[258px] lg:block lg:w-[1155px]"
             />
             <OrbitalSphere
-              tone="light"
+              preset="line"
               className="-z-10 hidden lg:left-[734px] lg:top-[643px] lg:block lg:w-[1304px]"
             />
           </>

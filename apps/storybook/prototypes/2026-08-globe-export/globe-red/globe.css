@@ -1,0 +1,41 @@
+/* O3 Globe — Red — standalone stylesheet. */
+:root { --globe-size: 900px; }   /* the globe's box; glow spills outside it */
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: #030303;
+  color: #F4F4F6;
+  font-family: Figtree, system-ui, -apple-system, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* generous padding so the outer bloom is never cropped */
+  padding: 18vmin;
+  overflow: hidden;
+}
+
+/* the exported unit: a square box, uncropped, centered */
+#globe {
+  position: relative;
+  width: var(--globe-size);
+  height: var(--globe-size);
+  max-width: 64vmin;
+  max-height: 64vmin;
+  pointer-events: none;
+}
+#globe .globe-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;      /* keeps the glow rings outside the box visible */
+  transform-origin: 50% 50%;
+}
+
+@keyframes orbPulse {
+  0%, 100% { opacity: var(--po, 1); }
+  50%      { opacity: calc(var(--po, 1) * 0.45); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #globe g { animation: none !important; }
+}

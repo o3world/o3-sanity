@@ -36,8 +36,12 @@ capturable is that it has stopped moving, not that it has been accepted.
   folded into `packages/ui` and Figma. The prototype records _why_; the
   components record _what_. A capture is not retired when its proposal is
   accepted — it becomes the record of how.
-- **Design source of record.** Figma outranks everything in this directory
-  (`AGENTS.md` → Design source of record, map #33). A prototype is where an
+- **Design source of record**, with one recorded exception. Figma outranks
+  everything in this directory (`AGENTS.md` → Design source of record, map #33)
+  — except `2026-08-globe-export/`, which is the source of record for
+  `OrbitalSphere` because the frames only ever held rasters of that globe. That
+  exception is named in `AGENTS.md`; nothing else here gets one by analogy.
+  A prototype is where an
   idea was argued, not where it is specified. Take intent from a prototype;
   take measurements, tokens, and variant axes from Figma. A prototype that
   fills a gap Figma leaves — as the mobile menu does — is still a proposal

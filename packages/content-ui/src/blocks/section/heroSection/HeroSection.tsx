@@ -207,12 +207,14 @@ export function HeroSection({
                  sphere is the stand-in rather than the thing. `motion-reduce`
                  stops it. */
               motion="orbit"
-              tone={band === 'ink' ? 'ink' : 'light'}
-              /* The interior band runs the field quieter than the Home opener:
-                 the limb peaks around 40 points of red over its neighbours in
-                 the ink exports, against the 120 a full-intensity draw puts
-                 there. */
-              intensity={band === 'ink' ? 'soft' : 'full'}
+              /* The red globe on ink, the same one the Home opener draws — an
+                 interior hero is not a quieter version of the opener, it is the
+                 same field on a shorter band. The line drawing still belongs to
+                 the light surfaces, where a bloom has nothing to sit on. */
+              preset={band === 'ink' ? 'hero' : 'line'}
+              /* Both spheres are a literal size at both widths — that is the
+                 reading above, not an oversight: the frames slide the same
+                 capture sideways rather than rescaling it. */
               className={
                 band === 'ink'
                   ? 'left-[205px] top-[184px] -z-10 w-[918px] lg:left-auto lg:right-[-117px]'
@@ -253,6 +255,7 @@ export function HeroSection({
            * to hold roughly the frame's quarter-of-the-band cap.
            */
           <OrbitalSphere
+            preset="hero"
             motion="orbit"
             className="bottom-[-124vw] left-1/2 w-[165vw] -translate-x-1/2 lg:bottom-[-111.3vw] lg:w-[133.75vw]"
           />
