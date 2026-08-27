@@ -22,9 +22,15 @@ export function BackToInsights() {
       // The ring carries no offset, which is what every nav link here does —
       // this one sits on the article's ink hero, where an offset would draw a
       // white gap around it.
-      className="focus-visible:ring-brand duration-(--duration-hover) inline-flex w-fit items-center gap-2 text-[15px] text-white/60 transition-colors ease-out hover:text-white focus-visible:outline-none focus-visible:ring-2"
+      className="focus-visible:ring-brand duration-(--duration-hover) group inline-flex w-fit items-center gap-2 text-[15px] text-white/60 transition-colors ease-out hover:text-white focus-visible:outline-none focus-visible:ring-2"
     >
-      <ArrowIcon className="rotate-180" />
+      {/* The mirror of a card's trailing nudge (`CARD_ARROW_NUDGE`): this arrow
+          points back, so it leans that way. Written out rather than shared,
+          because one call site is composition and not vocabulary. `rotate-180`
+          and the nudge write different properties in Tailwind v4 — `rotate` and
+          `translate` — so the reduced-motion cancel stops the lean without
+          unturning the glyph. */}
+      <ArrowIcon className="duration-(--duration-hover) motion-reduce:group-hover:translate-none motion-reduce:group-focus-visible:translate-none rotate-180 transition-transform ease-out group-hover:-translate-x-1 group-focus-visible:-translate-x-1 motion-reduce:transition-none" />
       All Insights
     </Link>
   )

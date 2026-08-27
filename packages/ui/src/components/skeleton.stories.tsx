@@ -27,10 +27,12 @@ export const CardGrid: Story = {
   render: () => (
     <div className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-3">
       {[0, 1, 2].map((i) => (
-        <div key={i} className="flex flex-col gap-4">
+        <div key={i} className="flex flex-col gap-6">
           <Skeleton className="aspect-square w-full" />
-          <Skeleton className="h-3 w-32" />
-          <Skeleton className="h-6 w-full" />
+          <div className="flex flex-col gap-1.5">
+            <Skeleton className="h-3 w-32" />
+            <Skeleton className="h-6 w-full" />
+          </div>
         </div>
       ))}
     </div>

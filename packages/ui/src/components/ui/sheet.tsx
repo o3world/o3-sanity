@@ -20,13 +20,21 @@ import { CloseIcon } from '../close-icon'
  *
  * - **`lucide-react` is gone.** The close affordance is `CloseIcon`, the
  *   inlined Material Symbols glyph the frames actually use (ADR 0009).
- * - **No `tailwindcss-animate`.** This repo does not install it, so entry is a
- *   plain `data-[state=open]` transition on the house easing and exit is a
- *   keyframe animation from `tokens/motion.css`. The asymmetry is Radix's:
- *   it holds an unmounting panel open for a running animation and not for a
- *   running transition, so a closing transition would never be seen. Only the
- *   right side has exit keyframes, which is the side the sites open.
- *   `motion-reduce` drops the animation, and the panel closes instantly.
+ * - **No `tailwindcss-animate`.** This repo does not install it, so both
+ *   directions are `data-[state]` keyframe animations from `tokens/motion.css`.
+ *   Neither can be a transition: Radix mounts the panel already carrying
+ *   `data-state="open"`, so an entry transition has no starting value to leave,
+ *   and it unmounts a closing panel without waiting for a transition, so an
+ *   exit transition is never seen. Only the **right** side is declared, which
+ *   is the side the sites open (`MobileNavMenu`); the other three take their
+ *   resting translate and no motion until someone gives them a pair.
+ *
+ *   The `motion-reduce` cancels are keyed to the same `data-[state]` as the
+ *   animation they cancel, and that is load-bearing: a bare
+ *   `motion-reduce:animate-none` is one class selector against the animation's
+ *   class-plus-attribute, so it loses on specificity and the gate does not
+ *   bite. With the animation gone Radix sees a computed `animation-name` of
+ *   `none` and unmounts on the spot, so a reduced-motion close is instant.
  *
  * Surfaces are left to the caller: `SheetContent` defaults to the light band,
  * and the nav passes `bg-ink-deep` to match the bar it opens from.
@@ -55,8 +63,9 @@ function SheetOverlay({
     <SheetPrimitive.Overlay
       data-slot="sheet-overlay"
       className={cn(
-        'bg-ink-deep/60 duration-(--duration-hover) fixed inset-0 z-50 opacity-0 transition-opacity ease-out data-[state=open]:opacity-100',
-        'data-[state=closed]:animate-scrim-out motion-reduce:animate-none',
+        'bg-ink-deep/60 fixed inset-0 z-50 opacity-0 data-[state=open]:opacity-100',
+        'data-[state=open]:animate-scrim-in data-[state=closed]:animate-scrim-out',
+        'motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none',
         className,
       )}
       {...props}
@@ -80,9 +89,11 @@ function SheetContent({
       <SheetPrimitive.Content
         data-slot="sheet-content"
         className={cn(
-          'text-fg duration-(--duration-hover) fixed z-50 flex flex-col gap-4 bg-white transition-transform ease-out',
+          'text-fg fixed z-50 flex flex-col gap-4 bg-white',
           side === 'right' &&
-            'data-[state=closed]:animate-sheet-out-right inset-y-0 right-0 h-full w-3/4 translate-x-full data-[state=open]:translate-x-0 motion-reduce:animate-none sm:max-w-sm',
+            'inset-y-0 right-0 h-full w-3/4 translate-x-full data-[state=open]:translate-x-0 sm:max-w-sm',
+          side === 'right' &&
+            'data-[state=open]:animate-sheet-in-right data-[state=closed]:animate-sheet-out-right motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none',
           side === 'left' &&
             'inset-y-0 left-0 h-full w-3/4 -translate-x-full data-[state=open]:translate-x-0 sm:max-w-sm',
           side === 'top' &&
