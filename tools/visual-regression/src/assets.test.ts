@@ -5,6 +5,7 @@ import path from 'node:path'
 import { describe, expect, it } from 'vitest'
 
 import {
+  assetCacheDir,
   cachePath,
   forgetErrorResponses,
   forgetUnreachable,
@@ -18,7 +19,7 @@ import type { BrowserContext, Route } from 'playwright'
 
 const PNG = 'https://cdn.sanity.io/images/p/d/abc-1200x297.png?w=456'
 
-/** A warm `.vr/assets`, written the way a finished run leaves one. */
+/** A warm asset cache, written the way a finished run leaves one. */
 function warmCache(entries: Array<{ url: string; status: number }>): string {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'vr-assets-'))
   for (const { url, status } of entries) {
@@ -30,6 +31,16 @@ function warmCache(entries: Array<{ url: string; status: number }>): string {
 }
 
 const isCached = (dir: string, url: string) => fs.existsSync(`${cachePath(dir, url)}.json`)
+
+describe('assetCacheDir', () => {
+  it('lives outside the checkout, so a reaped worktree does not take it', () => {
+    expect(assetCacheDir({}, '/Users/x')).toBe('/Users/x/.o3-sanity/vr-assets')
+  })
+
+  it('answers to O3_VR_ASSET_DIR', () => {
+    expect(assetCacheDir({ O3_VR_ASSET_DIR: '/tmp/vr' }, '/Users/x')).toBe('/tmp/vr')
+  })
+})
 
 describe('cachePath', () => {
   it('separates two transforms of one asset', () => {

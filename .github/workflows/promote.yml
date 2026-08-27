@@ -63,7 +63,13 @@ jobs:
         run: pnpm schema:check
       - name: Pull Vercel environment
         run: vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
+      # Production is the one build that prerenders every detail page. The
+      # flag says so here rather than leaving it to `vercel build --prod` to
+      # set VERCEL_ENV: this is the deploy visitors land on, and what it
+      # prerenders should not depend on how the CLI names its environment.
       - name: Build
+        env:
+          O3_PRERENDER_ALL: '1'
         run: vercel build --prod --token="$VERCEL_TOKEN"
       - name: Start GitHub deployment
         id: gh-deploy-start

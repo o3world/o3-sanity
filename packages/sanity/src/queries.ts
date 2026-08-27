@@ -211,12 +211,32 @@ export const SITE_SETTINGS_QUERY = defineQuery(`*[_type == "siteSettings"][0]{
  * to the *candidate* document — comparing every insight's categories to
  * its own and matching all 272. Two carets reach back out to the article.
  */
+/** The Keep-reading band's first choice: insights sharing a category with this one. */
+const RELATED_INSIGHTS =
+  /* groq */ `*[_type == "insight" && _id != ^._id && count((categories[]._ref)[@ in ^.^.categories[]._ref]) > 0]` as const
+
 export const INSIGHT_QUERY = defineQuery(`*[_type == "insight" && slug.current == $slug][0]{
   ${INSIGHT_CARD},
   body[]{${BODY_FIELDS}},
   seo,
-  "related": *[_type == "insight" && _id != ^._id && count((categories[]._ref)[@ in ^.^.categories[]._ref]) > 0] | order(publishedAt desc)[0...8]{${INSIGHT_CARD}},
-  "latest": *[_type == "insight" && _id != ^._id] | order(publishedAt desc)[0...8]{${INSIGHT_CARD}}
+  "related": ${RELATED_INSIGHTS} | order(publishedAt desc)[0...8]{${INSIGHT_CARD}},
+  ${
+    /* THE FALLBACK IS FETCHED ONLY WHEN IT IS THE ANSWER. `select` evaluates
+      the arm it matches and nothing else, so an article with related reading
+      pays a `count` over the same filter instead of eight more card
+      projections — half the response of the site's most-requested query, on
+      every request. Today no insight in the dataset has an empty `related`,
+      so `latest` was dead weight on all 107,694 of them in the week to
+      2026-08-26; it stays because a first article under a new category is one
+      publish away, and an empty band is the one thing this key exists to
+      prevent.
+
+      The filter is repeated rather than referenced — GROQ has no way to name
+      the sibling key's result — which is why it is a fragment. The trailing
+      `[]` is the unmatched arm: without it `select` answers null, and the
+      generated type would go on promising an array. */ ''
+  }
+  "latest": select(count(${RELATED_INSIGHTS}) == 0 => *[_type == "insight" && _id != ^._id] | order(publishedAt desc)[0...8]{${INSIGHT_CARD}}, [])
 }`)
 
 export const INSIGHT_SLUGS_QUERY = defineQuery(

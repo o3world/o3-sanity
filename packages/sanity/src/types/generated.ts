@@ -1449,7 +1449,7 @@ export type SITE_SETTINGS_QUERY_RESULT = {
 
 // Source: src/queries.ts
 // Variable: INSIGHT_QUERY
-// Query: *[_type == "insight" && slug.current == $slug][0]{    _id,  _type,  title,  "slug": slug.current,  excerpt,  publishedAt,  featuredImage{..., image{..., asset->{_id, metadata{lqip, isOpaque}}}},    "author": author->{name, title, headshot{..., asset->{_id, metadata{lqip, isOpaque}}}},  "categories": categories[]->{title, "slug": slug.current},    "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)]),  body[]{..., _type == "figure" => {..., image{..., asset->{_id, metadata{lqip, isOpaque}}}}},  seo,  "related": *[_type == "insight" && _id != ^._id && count((categories[]._ref)[@ in ^.^.categories[]._ref]) > 0] | order(publishedAt desc)[0...8]{  _id,  _type,  title,  "slug": slug.current,  excerpt,  publishedAt,  featuredImage{..., image{..., asset->{_id, metadata{lqip, isOpaque}}}},    "author": author->{name, title, headshot{..., asset->{_id, metadata{lqip, isOpaque}}}},  "categories": categories[]->{title, "slug": slug.current},    "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])},  "latest": *[_type == "insight" && _id != ^._id] | order(publishedAt desc)[0...8]{  _id,  _type,  title,  "slug": slug.current,  excerpt,  publishedAt,  featuredImage{..., image{..., asset->{_id, metadata{lqip, isOpaque}}}},    "author": author->{name, title, headshot{..., asset->{_id, metadata{lqip, isOpaque}}}},  "categories": categories[]->{title, "slug": slug.current},    "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])}}
+// Query: *[_type == "insight" && slug.current == $slug][0]{    _id,  _type,  title,  "slug": slug.current,  excerpt,  publishedAt,  featuredImage{..., image{..., asset->{_id, metadata{lqip, isOpaque}}}},    "author": author->{name, title, headshot{..., asset->{_id, metadata{lqip, isOpaque}}}},  "categories": categories[]->{title, "slug": slug.current},    "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)]),  body[]{..., _type == "figure" => {..., image{..., asset->{_id, metadata{lqip, isOpaque}}}}},  seo,  "related": *[_type == "insight" && _id != ^._id && count((categories[]._ref)[@ in ^.^.categories[]._ref]) > 0] | order(publishedAt desc)[0...8]{  _id,  _type,  title,  "slug": slug.current,  excerpt,  publishedAt,  featuredImage{..., image{..., asset->{_id, metadata{lqip, isOpaque}}}},    "author": author->{name, title, headshot{..., asset->{_id, metadata{lqip, isOpaque}}}},  "categories": categories[]->{title, "slug": slug.current},    "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])},    "latest": select(count(*[_type == "insight" && _id != ^._id && count((categories[]._ref)[@ in ^.^.categories[]._ref]) > 0]) == 0 => *[_type == "insight" && _id != ^._id] | order(publishedAt desc)[0...8]{  _id,  _type,  title,  "slug": slug.current,  excerpt,  publishedAt,  featuredImage{..., image{..., asset->{_id, metadata{lqip, isOpaque}}}},    "author": author->{name, title, headshot{..., asset->{_id, metadata{lqip, isOpaque}}}},  "categories": categories[]->{title, "slug": slug.current},    "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])}, [])}
 export type INSIGHT_QUERY_RESULT = {
   _id: string
   _type: 'insight'
@@ -1597,54 +1597,56 @@ export type INSIGHT_QUERY_RESULT = {
     }> | null
     readingMinutes: number | 1
   }>
-  latest: Array<{
-    _id: string
-    _type: 'insight'
-    title: string | null
-    slug: string | null
-    excerpt: string | null
-    publishedAt: string | null
-    featuredImage: {
-      _type: 'figure'
-      image: {
-        asset: {
-          _id: string
-          metadata: {
-            lqip: string | null
-            isOpaque: boolean | null
+  latest:
+    | Array<{
+        _id: string
+        _type: 'insight'
+        title: string | null
+        slug: string | null
+        excerpt: string | null
+        publishedAt: string | null
+        featuredImage: {
+          _type: 'figure'
+          image: {
+            asset: {
+              _id: string
+              metadata: {
+                lqip: string | null
+                isOpaque: boolean | null
+              } | null
+            } | null
+            media?: unknown
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            _type: 'image'
+          } | null
+          alt?: string
+          caption?: string
+        } | null
+        author: {
+          name: string | null
+          title: string | null
+          headshot: {
+            asset: {
+              _id: string
+              metadata: {
+                lqip: string | null
+                isOpaque: boolean | null
+              } | null
+            } | null
+            media?: unknown
+            hotspot?: SanityImageHotspot
+            crop?: SanityImageCrop
+            _type: 'image'
           } | null
         } | null
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-      } | null
-      alt?: string
-      caption?: string
-    } | null
-    author: {
-      name: string | null
-      title: string | null
-      headshot: {
-        asset: {
-          _id: string
-          metadata: {
-            lqip: string | null
-            isOpaque: boolean | null
-          } | null
-        } | null
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-      } | null
-    } | null
-    categories: Array<{
-      title: string | null
-      slug: string | null
-    }> | null
-    readingMinutes: number | 1
-  }>
+        categories: Array<{
+          title: string | null
+          slug: string | null
+        }> | null
+        readingMinutes: number | 1
+      }>
+    | Array<never>
 } | null
 
 // Source: src/queries.ts
@@ -7073,7 +7075,7 @@ import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
     '*[_type == "siteSettings"][0]{\n  title,\n  utilityNavItems[]{..., "target": target->{_type, title, "slug": slug.current}},\n  navItems[]{\n    ...,\n    _type == "button" => {"target": target->{_type, title, "slug": slug.current}},\n    _type == "navGroup" => {\n      items[]{..., button{..., "target": target->{_type, title, "slug": slug.current}}},\n      button{..., "target": target->{_type, title, "slug": slug.current}}\n    }\n  },\n  primaryButton{..., "target": target->{_type, title, "slug": slug.current}},\n  footerTagline,\n  footerGroups[]{..., links[]{..., "target": target->{_type, title, "slug": slug.current}}},\n  socialsLabel,\n  socialLinks,\n  legalLinks[]{..., "target": target->{_type, title, "slug": slug.current}},\n  legalName,\n  copyrightNote,\n  defaultSeo\n}': SITE_SETTINGS_QUERY_RESULT
-    '*[_type == "insight" && slug.current == $slug][0]{\n  \n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage{..., image{..., asset->{_id, metadata{lqip, isOpaque}}}},\n  \n  "author": author->{name, title, headshot{..., asset->{_id, metadata{lqip, isOpaque}}}},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n,\n  body[]{..., _type == "figure" => {..., image{..., asset->{_id, metadata{lqip, isOpaque}}}}},\n  seo,\n  "related": *[_type == "insight" && _id != ^._id && count((categories[]._ref)[@ in ^.^.categories[]._ref]) > 0] | order(publishedAt desc)[0...8]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage{..., image{..., asset->{_id, metadata{lqip, isOpaque}}}},\n  \n  "author": author->{name, title, headshot{..., asset->{_id, metadata{lqip, isOpaque}}}},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n},\n  "latest": *[_type == "insight" && _id != ^._id] | order(publishedAt desc)[0...8]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage{..., image{..., asset->{_id, metadata{lqip, isOpaque}}}},\n  \n  "author": author->{name, title, headshot{..., asset->{_id, metadata{lqip, isOpaque}}}},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n}\n}': INSIGHT_QUERY_RESULT
+    '*[_type == "insight" && slug.current == $slug][0]{\n  \n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage{..., image{..., asset->{_id, metadata{lqip, isOpaque}}}},\n  \n  "author": author->{name, title, headshot{..., asset->{_id, metadata{lqip, isOpaque}}}},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n,\n  body[]{..., _type == "figure" => {..., image{..., asset->{_id, metadata{lqip, isOpaque}}}}},\n  seo,\n  "related": *[_type == "insight" && _id != ^._id && count((categories[]._ref)[@ in ^.^.categories[]._ref]) > 0] | order(publishedAt desc)[0...8]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage{..., image{..., asset->{_id, metadata{lqip, isOpaque}}}},\n  \n  "author": author->{name, title, headshot{..., asset->{_id, metadata{lqip, isOpaque}}}},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n},\n  \n  "latest": select(count(*[_type == "insight" && _id != ^._id && count((categories[]._ref)[@ in ^.^.categories[]._ref]) > 0]) == 0 => *[_type == "insight" && _id != ^._id] | order(publishedAt desc)[0...8]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage{..., image{..., asset->{_id, metadata{lqip, isOpaque}}}},\n  \n  "author": author->{name, title, headshot{..., asset->{_id, metadata{lqip, isOpaque}}}},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n}, [])\n}': INSIGHT_QUERY_RESULT
     '*[_type == "insight" && defined(slug.current)].slug.current': INSIGHT_SLUGS_QUERY_RESULT
     '{\n  "items": *[_type == "insight" && ($category == null || $category in categories[]->slug.current)] | order(publishedAt desc) [$offset...$end]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  featuredImage{..., image{..., asset->{_id, metadata{lqip, isOpaque}}}},\n  \n  "author": author->{name, title, headshot{..., asset->{_id, metadata{lqip, isOpaque}}}},\n  "categories": categories[]->{title, "slug": slug.current},\n  \n  "readingMinutes": math::max([1, round(length(pt::text(body)) / 5 / 200)])\n},\n  "total": count(*[_type == "insight" && ($category == null || $category in categories[]->slug.current)]),\n  "categories": *[_type == "category" && slug.current != "uncategorized" && count(*[_type == "insight" && references(^._id)]) > 0] | order(title asc){title, "slug": slug.current}\n}': INSIGHTS_PAGE_QUERY_RESULT
     '{\n  "items": *[_type == "caseStudy"] | order(coalesce(publishedAt, _createdAt) desc) [$offset...$end]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  narrativeHeadline,\n  "headlineStat": stats[0],\n  heroMedia{..., image{..., asset->{_id, metadata{lqip, isOpaque}}}},\n  "client": client->{name, logo},\n  "industries": industries[]->{title},\n  industryDetail\n},\n  "total": count(*[_type == "caseStudy"])\n}': CASE_STUDIES_PAGE_QUERY_RESULT
