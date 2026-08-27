@@ -32,10 +32,11 @@ jobs:
 
       - name: Export the production dataset
         env:
-          # Export reads everything, including drafts, so it needs a token
-          # even though the dataset is public. The deploy token has the wider
-          # grant; if this 401s, mint a token with read access and update it.
-          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_DEPLOY_TOKEN }}
+          # A Viewer robot token minted for this workflow (2026-08-27, label
+          # "nightly-dataset-backup"). Export reads everything including
+          # drafts, so it needs a token even though the dataset is public;
+          # the deploy token lacks the datasets/read grant.
+          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_BACKUP_TOKEN }}
         run: |
           pnpm --filter @o3/migration exec sanity dataset export production production.tar.gz --overwrite
           ls -lh production.tar.gz
