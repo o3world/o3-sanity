@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { SectionBackground, type Surface, type Tint } from '@o3/ui'
 import { stegaClean } from '@sanity/client/stega'
-import type { BackgroundMedia } from '@o3/sanity/types/generated'
+import type { SectionProps } from '@o3/content-runtime/blocks'
 
 import { SanityImage } from '../SanityImage'
 
@@ -29,8 +29,15 @@ import { SanityImage } from '../SanityImage'
  * band is a wide strip, so a tall picture loses a lot of itself — and `width`
  * is the full-bleed request `MediaSection` already makes of a 1440 band.
  */
+/**
+ * The band background **as the query hands it over**, not as the schema stores
+ * it: the projection expands the picture's asset for its LQIP, so the schema
+ * type is a narrower shape than any renderer actually receives.
+ */
+type BandBackground = SectionProps<'heroSection'>['backgroundMedia']
+
 export function sectionBackground(
-  media: BackgroundMedia | null | undefined,
+  media: BandBackground | null | undefined,
   surface: Surface,
 ): ReactNode | null {
   if (!media?.image) return null

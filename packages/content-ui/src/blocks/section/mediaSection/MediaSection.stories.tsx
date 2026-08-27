@@ -96,5 +96,5 @@ export const ContainedOnInk: Story = {
  * render nothing rather than an empty box holding the band's padding open.
  */
 export const NoMedia: Story = {
-  args: { ...seededSectionArgs('ventures-urvin', 'mediaSection'), media: undefined },
+  args: { ...seededSectionArgs('ventures-urvin', 'mediaSection'), media: null },
 }

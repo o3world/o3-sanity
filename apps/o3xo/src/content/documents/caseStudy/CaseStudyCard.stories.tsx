@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 
-import type { Figure } from '@o3/sanity/types/generated'
 import { aCaseStudyCard } from '@o3/render-kit/fixtures'
 
 import { CaseStudyCard } from './CaseStudyCard'
@@ -29,14 +28,14 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const photograph: Figure = {
-  _type: 'figure',
+const photograph = {
+  _type: 'figure' as const,
   alt: 'Construction team reviewing architectural blueprints',
   image: {
-    _type: 'image',
+    _type: 'image' as const,
     asset: {
-      _type: 'reference',
-      _ref: 'image-c7356fe3c2fad2e379631ef4d6ff484f7b82193c-2500x1448-png',
+      _id: 'image-c7356fe3c2fad2e379631ef4d6ff484f7b82193c-2500x1448-png',
+      metadata: null,
     },
   },
 }

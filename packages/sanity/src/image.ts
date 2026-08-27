@@ -142,3 +142,30 @@ export function imageHotspot(source: unknown): { x: number; y: number } | null {
   if (!hotspot || typeof hotspot.x !== 'number' || typeof hotspot.y !== 'number') return null
   return { x: hotspot.x, y: hotspot.y }
 }
+
+/** The asset metadata a projection can carry alongside the reference. */
+interface AssetMetadataLike {
+  metadata?: { lqip?: unknown; isOpaque?: unknown } | null
+}
+
+/**
+ * The asset's Low Quality Image Placeholder — a ~20px JPEG as a `data:` URI,
+ * ready to paint as a background under the real image while it loads.
+ *
+ * Only present when the projection asked for it: a bare `...` spread carries
+ * the reference and nothing else, so a field that was never expanded with
+ * `asset->{…, metadata{lqip, isOpaque}}` returns `null` here. That is the
+ * mechanism scoping the blur-up to photographic fields — see the fragments in
+ * `queries.ts`.
+ *
+ * A non-opaque asset also returns `null`. Sanity renders every LQIP onto a
+ * flat ground, so behind artwork with transparency it paints as a coloured
+ * plate the full asset never covers.
+ */
+export function imageLqip(source: unknown): string | null {
+  const asset = asRecord(source)?.asset
+  if (!asset || typeof asset !== 'object') return null
+  const { metadata } = asset as AssetMetadataLike
+  if (!metadata || metadata.isOpaque === false) return null
+  return typeof metadata.lqip === 'string' && metadata.lqip ? metadata.lqip : null
+}

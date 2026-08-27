@@ -67,7 +67,7 @@ export const WithoutConsent: Story = {
 export const FormOnly: Story = {
   args: {
     ...seededSectionArgs('contact', 'formSection'),
-    media: undefined,
+    media: null,
     quote: undefined,
     attribution: undefined,
     details: undefined,

@@ -1,6 +1,32 @@
 import { defineQuery } from 'groq'
 
 /**
+ * THE BLUR-UP EXPANSION. A bare `...` spread carries an image field's asset as
+ * a reference and nothing else, so the LQIP — the ~20px data URI every Sanity
+ * asset already stores — never reaches the renderer. These fragments join the
+ * asset document for it; `SanityImage` paints whatever arrives as the `<img>`'s
+ * own background and the full image covers it on decode.
+ *
+ * **Applied to photographic fields only, and that is the scoping mechanism.**
+ * A logo is knocked out or sits transparent over a surface, and an LQIP is
+ * rendered onto a flat ground — behind one it reads as a coloured plate. So
+ * `client.logo`, the partner-hero `logo`, the rail-panel `logo` and the service
+ * card's `icon` stay unexpanded and get no background at all. `isOpaque` is the
+ * second guard, for a photographic field holding artwork with alpha anyway.
+ *
+ * `_id` rather than a full asset spread: it is the one field the URL builder
+ * needs (it reads `_ref` or `_id`), and the rest of an asset document — palette,
+ * EXIF, dimensions — is weight on every card payload for nothing.
+ */
+const PHOTO_FIELDS = /* groq */ `..., asset->{_id, metadata{lqip, isOpaque}}` as const
+
+/** The same, for the objects that wrap a photo in a field called `image` — `figure` and `backgroundMedia`. */
+const PHOTO_OBJECT_FIELDS = /* groq */ `..., image{${PHOTO_FIELDS}}` as const
+
+/** Portable text carries `figure` members inline; they are photos like any other. */
+const BODY_FIELDS = /* groq */ `..., _type == "figure" => {${PHOTO_OBJECT_FIELDS}}` as const
+
+/**
  * Shared card projections — single source for showcase blocks, listings, and
  * route pages. Exported so the web app's card registry can reference the same
  * fragments (`CARD_PROJECTIONS`) instead of duplicating them.
@@ -16,14 +42,14 @@ export const INSIGHT_CARD = /* groq */ `
   "slug": slug.current,
   excerpt,
   publishedAt,
-  featuredImage,
+  featuredImage{${PHOTO_OBJECT_FIELDS}},
   ${
     /* `headshot` is here for the DETAIL byline (`1710:2946`), not the card —
       the card draws no author at all. It rides on the shared fragment because
       splitting the author projection in two would leave two places to keep in
       step for one image reference. */ ''
   }
-  "author": author->{name, title, headshot},
+  "author": author->{name, title, headshot{${PHOTO_FIELDS}}},
   "categories": categories[]->{title, "slug": slug.current},
   ${
     /* READING TIME IS COMPUTED AT RENDER, NOT STORED (#45). Derived here in
@@ -46,7 +72,7 @@ export const CASE_STUDY_CARD = /* groq */ `
   "slug": slug.current,
   narrativeHeadline,
   "headlineStat": stats[0],
-  heroMedia,
+  heroMedia{${PHOTO_OBJECT_FIELDS}},
   "client": client->{name, logo},
   "industries": industries[]->{title},
   industryDetail
@@ -71,6 +97,11 @@ const BUTTON_TARGET = /* groq */ `"target": target->{_type, title, "slug": slug.
  */
 const SECTION_FIELDS = /* groq */ `
   ...,
+  ${
+    /* Unconditional because every section block carries the field
+      (`backgroundMediaField()`), so there is no arm to hang it off. */ ''
+  }
+  backgroundMedia{${PHOTO_OBJECT_FIELDS}},
   _type == "heroSection" => {
     button{..., ${BUTTON_TARGET}}
   },
@@ -83,7 +114,13 @@ const SECTION_FIELDS = /* groq */ `
     button{..., ${BUTTON_TARGET}}
   },
   _type == "railPanelsSection" => {
-    panels[]{..., button{..., ${BUTTON_TARGET}}}
+    panels[]{..., media{${PHOTO_OBJECT_FIELDS}}, button{..., ${BUTTON_TARGET}}}
+  },
+  _type == "mediaSection" => {
+    media{${PHOTO_OBJECT_FIELDS}}
+  },
+  _type == "screenGridSection" => {
+    screens[]{..., media{${PHOTO_OBJECT_FIELDS}}}
   },
   _type == "insightsCarouselSection" => {
     "curated": insights[]->{${INSIGHT_CARD}},
@@ -93,6 +130,7 @@ const SECTION_FIELDS = /* groq */ `
     button{..., ${BUTTON_TARGET}}
   },
   _type == "formSection" => {
+    media{${PHOTO_OBJECT_FIELDS}},
     button{..., ${BUTTON_TARGET}}
   },
   _type == "personGridSection" => {
@@ -104,21 +142,31 @@ const SECTION_FIELDS = /* groq */ `
         thing an editor reorders or removes here is the slot, not the
         `person` document behind it. */ ''
     }
-    "people": people[]{_key, ...@->{_id, name, title, bio, headshot}}
+    "people": people[]{_key, ...@->{_id, name, title, bio, headshot{${PHOTO_FIELDS}}}}
   },
   _type == "roleListSection" => {
     roles[]{..., button{..., ${BUTTON_TARGET}}}
   },
   _type == "inFlightSection" => {
-    entries[]{..., button{..., ${BUTTON_TARGET}}}
+    entries[]{..., media{${PHOTO_OBJECT_FIELDS}}, button{..., ${BUTTON_TARGET}}}
   },
   _type == "layoutSection" => {
     items[]{
       ...,
       _type == "button" => {${BUTTON_TARGET}},
       _type == "buttonGroup" => {buttons[]{..., ${BUTTON_TARGET}}},
-      _type == "mediaCard" => {button{..., ${BUTTON_TARGET}}}
+      _type == "figure" => {${PHOTO_OBJECT_FIELDS}},
+      _type == "richText" => {body[]{${BODY_FIELDS}}},
+      _type == "mediaCard" => {media{${PHOTO_OBJECT_FIELDS}}, button{..., ${BUTTON_TARGET}}}
     }
+  },
+  ${
+    /* A `chapter` is a story member, not a section block, and it otherwise
+      falls straight through the opening `...` — including the figures inside
+      its portable-text body. */ ''
+  }
+  _type == "chapter" => {
+    body[]{${BODY_FIELDS}}
   },
   _type == "listingSection" => {
     "pages": *[_type == "page" && pageType == ^.pageType && slug.current != "index"] | order(title asc){_id, _type, title, "slug": slug.current, card}
@@ -165,7 +213,7 @@ export const SITE_SETTINGS_QUERY = defineQuery(`*[_type == "siteSettings"][0]{
  */
 export const INSIGHT_QUERY = defineQuery(`*[_type == "insight" && slug.current == $slug][0]{
   ${INSIGHT_CARD},
-  body,
+  body[]{${BODY_FIELDS}},
   seo,
   "related": *[_type == "insight" && _id != ^._id && count((categories[]._ref)[@ in ^.^.categories[]._ref]) > 0] | order(publishedAt desc)[0...8]{${INSIGHT_CARD}},
   "latest": *[_type == "insight" && _id != ^._id] | order(publishedAt desc)[0...8]{${INSIGHT_CARD}}

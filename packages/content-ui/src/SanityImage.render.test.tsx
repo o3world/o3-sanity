@@ -140,6 +140,64 @@ describe('SanityImage', () => {
     })
   })
 
+  /**
+   * The blur-up: the placeholder is the `<img>`'s own background, so the full
+   * image covers it on decode with no state to choreograph.
+   */
+  describe('the LQIP a projection expanded the asset for', () => {
+    const LQIP = 'data:image/jpeg;base64,/9j/placeholder'
+    const withMetadata = (metadata: unknown, extra: Record<string, unknown> = {}) => ({
+      _type: 'image' as const,
+      asset: { _id: PORTRAIT, metadata },
+      ...extra,
+    })
+
+    it('paints it behind the image, sized to the box the image will fill', () => {
+      const html = renderToStaticMarkup(
+        <SanityImage source={withMetadata({ lqip: LQIP, isOpaque: true })} alt="" ratio="16/9" />,
+      )
+      expect(html).toContain(`background-image:url(${LQIP})`)
+      expect(html).toContain('background-size:cover')
+      expect(html).toContain('background-repeat:no-repeat')
+    })
+
+    it('follows the hotspot the image is positioned by, so the two line up', () => {
+      const html = renderToStaticMarkup(
+        <SanityImage
+          source={withMetadata({ lqip: LQIP, isOpaque: true }, { hotspot: { x: 0.25, y: 0.75 } })}
+          alt=""
+          ratio="fill"
+        />,
+      )
+      expect(html).toContain('background-position:25% 75%')
+      expect(html).toContain('object-position:25% 75%')
+    })
+
+    it('fits rather than covers when the image is letterboxed', () => {
+      const html = renderToStaticMarkup(
+        <SanityImage
+          source={withMetadata({ lqip: LQIP, isOpaque: true })}
+          alt=""
+          ratio="4/3"
+          fit="contain"
+        />,
+      )
+      expect(html).toContain('background-size:contain')
+    })
+
+    it('draws none behind artwork with transparency — an LQIP is a flat plate', () => {
+      const html = renderToStaticMarkup(
+        <SanityImage source={withMetadata({ lqip: LQIP, isOpaque: false })} alt="" ratio="1/1" />,
+      )
+      expect(html).not.toContain('background-image')
+    })
+
+    it('draws none for a field the projection left as a bare reference', () => {
+      const html = renderToStaticMarkup(<SanityImage source={anImage()} alt="" ratio="1/1" />)
+      expect(html).not.toContain('background-image')
+    })
+  })
+
   it('renders nothing for an empty or unset image field', () => {
     expect(renderToStaticMarkup(<SanityImage source={null} alt="" />)).toBe('')
     expect(renderToStaticMarkup(<SanityImage source={undefined} alt="" />)).toBe('')
