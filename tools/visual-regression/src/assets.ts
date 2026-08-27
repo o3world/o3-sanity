@@ -10,10 +10,10 @@
  * a photograph that had loaded on one side and not the other.
  *
  * So no capture reaches the network twice. The first run fetches each remote
- * asset once and writes it to `.vr/assets`; every run after that — and, more to
- * the point, the baseline capture and the current capture of the *same* run —
- * replays the same bytes off disk. Cache hits are instant, which also removes
- * the arrival race the settle timeout was being tuned around.
+ * asset once and writes it to the cache directory; every run after that — and,
+ * more to the point, the baseline capture and the current capture of the *same*
+ * run — replays the same bytes off disk. Cache hits are instant, which also
+ * removes the arrival race the settle timeout was being tuned around.
  *
  * Two kinds of remote request, handled differently:
  *
@@ -29,11 +29,37 @@
  */
 import { createHash } from 'node:crypto'
 import fs from 'node:fs'
+import os from 'node:os'
 import path from 'node:path'
 
 import type { BrowserContext, Route } from 'playwright'
 
 import { freezeSvg } from './freeze'
+
+/**
+ * Where the replayed bytes live — outside the checkout, deliberately.
+ *
+ * The cache used to sit in `.vr/assets`, which is per-worktree: one ticket,
+ * one worktree is the rule here, so every claimed ticket started a cold cache
+ * and refetched the whole suite. That was 18,581 image requests and 425MB off
+ * cdn.sanity.io in the week to 2026-08-26 — 77% of the project's image
+ * bandwidth, all of it screenshots.
+ *
+ * Sharing is safe because a Sanity asset URL is content-addressed: the hash in
+ * the path names the bytes, and the transform is in the query string, which
+ * `cachePath` hashes in. Two worktrees asking for the same URL want the same
+ * answer, whatever branch they are on.
+ *
+ * It sits beside the dataset backups (`~/.o3-sanity/`) for the same reason
+ * those do: a worktree gets reaped and anything expensive inside it dies with
+ * it. `O3_VR_ASSET_DIR` moves it, and deleting the directory costs one warm-up.
+ */
+export function assetCacheDir(
+  env: Record<string, string | undefined> = process.env,
+  home: string = os.homedir(),
+): string {
+  return env.O3_VR_ASSET_DIR ?? path.join(home, '.o3-sanity', 'vr-assets')
+}
 
 /** Resource types worth keeping the real bytes of. */
 const REPLAYED = new Set(['image', 'font'])
@@ -204,7 +230,7 @@ function forget(dir: string, doomed: (meta: CachedMeta) => boolean): void {
  *
  * Run at the start of every run, because a cached 403 outlives its cause: the
  * URL gets fixed, the asset gets reuploaded, and the cache goes on serving the
- * refusal until someone thinks to empty `.vr/assets` by hand (#236). Re-asking
+ * refusal until someone thinks to empty the asset cache by hand (#236). Re-asking
  * is cheap — the server answered last time, so it costs one round-trip — and
  * within a run the answer is still written to disk on first ask and replayed
  * from there, so a 5xx that clears halfway through cannot hand the current

@@ -27,6 +27,29 @@ Route entries (`defineDetailType(...)`), the block registry, and the two
 renderers that read it stay in the app. That is what lets one app add a block
 type without forcing a renderer into the other.
 
+## Only the production build prerenders the whole collection
+
+`publishedSlugs` — what every `generateStaticParams` reads — caps itself at
+three slugs unless the build is the production one (`VERCEL_ENV=production`, or
+`O3_PRERENDER_ALL=1`, which `promote.yml` sets so the deploy visitors land on
+does not depend on how the CLI names its environment).
+
+Every build of every branch used to prerender all of them. The insight detail
+query was 57% of the project's Sanity requests in the week to 2026-08-26 —
+107,694 of 189,171, against 288 articles nobody had changed — and the weekend
+in the middle of that week drew 2,408 requests, which is the proof that almost
+none of it was traffic.
+
+A page that is not prerendered is not a page that is missing. `dynamicParams`
+is on, so it renders on first request and is cached from then on, invalidated
+by the same webhook tag as its prerendered twin; `build:assert` calls this
+"unknown slugs still cache" and fails the build if it stops being true. The
+visitor who lands on a cold one pays a query. The build used to pay 288.
+
+The cap is never a zero: an empty `generateStaticParams` is
+`EmptyGenerateStaticParamsError` under Cache Components, so a collection with
+documents in it always prerenders at least one.
+
 ## Stega belongs to draft mode, and nothing here turns it on
 
 Stega is the invisible payload Presentation reads out of a rendered string to

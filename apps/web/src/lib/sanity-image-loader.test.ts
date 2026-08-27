@@ -95,4 +95,37 @@ describe('sanityImageLoader', () => {
     const foreign = 'https://images.example.com/photo.jpg?w=100'
     expect(sanityImageLoader({ src: foreign, width: 640 })).toBe(foreign)
   })
+
+  it('never asks for more width than the source has', () => {
+    // `deviceSizes` runs to 3840, so a 1240px asset gets asked for at 2400.
+    // `fit=max` cannot upscale, so that URL is a second cache object holding
+    // the same bytes — and on one asset it answered 404 outright.
+    const small =
+      'https://cdn.sanity.io/images/p/production/abc-1240x600.png?auto=format&fit=max&w=1240'
+    expect(query(sanityImageLoader({ src: small, width: 2400 })).w).toBe('1240')
+    expect(query(sanityImageLoader({ src: small, width: 3840 })).w).toBe('1240')
+  })
+
+  it('clamps to the crop rectangle, which is what a cropped transform has to work with', () => {
+    const cropped =
+      'https://cdn.sanity.io/images/p/production/abc-2400x1350.jpg?rect=0,0,800,450&auto=format&fit=crop&w=800&h=450'
+    expect(query(sanityImageLoader({ src: cropped, width: 2048 }))).toMatchObject({
+      w: '800',
+      h: '450',
+    })
+  })
+
+  it('clamps the height with the width, so a ratio crop keeps its shape', () => {
+    const cropped =
+      'https://cdn.sanity.io/images/p/production/abc-1600x900.jpg?auto=format&fit=crop&w=1600&h=900'
+    expect(query(sanityImageLoader({ src: cropped, width: 3840 }))).toMatchObject({
+      w: '1600',
+      h: '900',
+    })
+  })
+
+  it('takes the width on trust when the path names no dimensions', () => {
+    const unnamed = 'https://cdn.sanity.io/images/p/production/abc.jpg?auto=format&fit=max'
+    expect(query(sanityImageLoader({ src: unnamed, width: 3840 })).w).toBe('3840')
+  })
 })
