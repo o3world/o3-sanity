@@ -45,6 +45,43 @@ export const HeroHeadline: Story = {
   ),
 }
 
+/**
+ * The two curves on the same lines, one above the other. This is where
+ * `ease-spring` is settled: motion has no Figma anchor, so the case for a
+ * third curve is what you can see next to the one it replaces.
+ *
+ * `mask` leaves the start line at speed and arrives. `spring` starts from
+ * rest, gathers, and settles on a long tail — at the hero's stagger the lines
+ * are far enough apart to be read one at a time, and the difference is the
+ * difference between a swipe and a lift.
+ */
+export const SpringAgainstMask: Story = {
+  args: { lines: [] },
+  globals: { backgrounds: { value: 'ink' } },
+  render: () => {
+    const lines = [
+      <span key="a" className="text-on-ink">
+        You see the problem in front of you.
+      </span>,
+      <span key="b" className="text-white/50">
+        We’re working on the one behind it.
+      </span>,
+    ]
+    return (
+      <div className="bg-ink px-gutter flex flex-col gap-16 py-24 text-white">
+        {(['mask', 'spring'] as const).map((easing) => (
+          <div key={easing} className="max-w-content mx-auto w-full">
+            <p className="text-fg-muted mb-4 font-mono text-xs uppercase">{easing}</p>
+            <p className="text-display-lg font-display text-balance">
+              <MaskedLines lines={lines} stagger={220} easing={easing} />
+            </p>
+          </div>
+        ))}
+      </div>
+    )
+  },
+}
+
 /** A single line still gets its mask — the stagger simply has nothing to space. */
 export const SingleLine: Story = {
   args: { lines: ['One line only'] },

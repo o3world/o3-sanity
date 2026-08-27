@@ -34,6 +34,34 @@
    * reason to trust the third. `packages/ui` stories carry motion from here
    * on, so a curve is settled by the story that uses it, not by a frame. */
   --ease-soft: cubic-bezier(0.33, 0, 0.15, 1);
+  /* spring — the hero headline's editorial stagger. A cubic-bezier cannot
+   * draw this shape: the three curves above all leave the start line at
+   * speed, and a spring leaves it at rest, accelerates, then settles on a long
+   * tail. That difference is the whole character of a line rising from behind
+   * its mask, so it is sampled rather than approximated.
+   *
+   * Thirteen evenly spaced samples of a mass-spring at stiffness 65, damping
+   * 15, mass 1 (ζ ≈ 0.93 — under-damped, but not enough to overshoot),
+   * normalised over its first 0.7s. `linear()` spaces the stops itself.
+   *
+   * NO FIGMA ANCHOR, AND THERE CANNOT BE ONE, for the reason `soft` carries:
+   * Figma draws stills. It is settled in `masked-lines.stories.tsx`, where it
+   * runs beside `mask` on the same lines. Class-accessible via ease-spring. */
+  --ease-spring: linear(
+    0,
+    0.084,
+    0.252,
+    0.432,
+    0.591,
+    0.718,
+    0.813,
+    0.881,
+    0.928,
+    0.959,
+    0.979,
+    0.992,
+    1
+  );
 }
 
 /*
