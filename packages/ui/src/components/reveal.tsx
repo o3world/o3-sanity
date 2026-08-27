@@ -23,11 +23,23 @@ export interface RevealProps extends HTMLAttributes<HTMLDivElement> {
 export function Reveal({ delay = 0, className, style, children, ...rest }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null)
   const [shown, setShown] = useState(false)
+  const [instant, setInstant] = useState(false)
 
   useEffect(() => {
     const el = ref.current
     if (!el) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setShown(true)
+      return
+    }
+    // An element taller than the viewport is never seen entering as a whole,
+    // and animating one costs more than it shows: while it fades, the page's
+    // ground reads through its half-opaque paint (a dark flash under a white
+    // band on the ink page), the rise leaves that ground as a seam above it,
+    // and the in-flight translate makes it a containing block under any
+    // sticky machinery it holds. Shown at once, untransitioned.
+    if (el.offsetHeight > window.innerHeight) {
+      setInstant(true)
       setShown(true)
       return
     }
@@ -60,7 +72,9 @@ export function Reveal({ delay = 0, className, style, children, ...rest }: Revea
         // `translate`, not `transform`: Tailwind v4 compiles `translate-y-*`
         // to the independent `translate` property, which a transition naming
         // `transform` does not reach (see `../motion.ts`).
-        'duration-(--duration-reveal) transition-[opacity,translate] ease-out',
+        instant
+          ? 'transition-none'
+          : 'duration-(--duration-reveal) transition-[opacity,translate] ease-out',
         'motion-reduce:transition-none',
         // `translate-none` rather than `translate-y-0`: a settled reveal must
         // leave no translation behind, because any value but `none` makes the
