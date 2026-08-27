@@ -8,8 +8,9 @@ import type { DispatchedBlockWrapperProps } from '@o3/content-runtime/blocks'
  * land on the same element they always did.
  *
  * **The hero is the one exclusion.** It plays its own entrance (`MaskedLines`
- * over `Reveal`) and its h1 is the LCP element, so its server HTML has to be
- * painted rather than waiting on hydration to stop being transparent.
+ * over `Entrance`, both CSS animations) and its h1 is the LCP element, so its
+ * server HTML has to be painted rather than waiting on hydration to stop being
+ * transparent.
  *
  * Every other band is transparent in the server HTML until the observer runs,
  * which is the tradeoff `Reveal` already made in the hero. What makes it safe

@@ -185,6 +185,49 @@
 }
 
 /*
+ * The opener's two entrances — `MaskedLines` and `Entrance`.
+ *
+ * KEYFRAMES, NOT TRANSITIONS, AND THE REASON IS FIRST PAINT. A transition
+ * needs a state flip, the flip needs an effect, and the effect needs
+ * hydration — so a transition-driven opener holds the band empty until the
+ * bundle lands. An animation declared on the server HTML starts when the
+ * element first paints, which is where an entrance belongs: the headline is
+ * the LCP element, and it cannot wait on JavaScript to become visible.
+ *
+ * `both` is what makes the delay safe — the element holds the `from` state
+ * through its stagger instead of flashing in place and jumping back.
+ *
+ * `line-lift` rides `translate` alone: the mask around it is `overflow-hidden`,
+ * so a line out of its mask is a line not yet drawn. `fade-up` carries opacity
+ * as well, matching what `Reveal` does on the scroll side.
+ */
+@theme {
+  --animate-line-lift: line-lift var(--duration-mask) var(--ease-mask) both;
+  --animate-line-lift-spring: line-lift var(--duration-mask) var(--ease-spring) both;
+  --animate-fade-up: fade-up var(--duration-reveal) var(--ease-out) both;
+
+  @keyframes line-lift {
+    from {
+      translate: 0 110%;
+    }
+    to {
+      translate: 0 0;
+    }
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      translate: 0 24px;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+}
+
+/*
  * The orbital sphere's breath — `OrbitalSphere motion="orbit"`.
  *
  * The official globe export is the anchor (`apps/storybook/prototypes/

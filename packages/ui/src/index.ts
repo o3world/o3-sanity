@@ -78,6 +78,10 @@ export type { DisplayHeadingProps } from './components/display-heading'
 export { MaskedLines } from './components/masked-lines'
 export type { MaskedLinesProps } from './components/masked-lines'
 
+// Entrance — the load-triggered fade-up (Reveal is the scroll-triggered one)
+export { Entrance } from './components/entrance'
+export type { EntranceProps } from './components/entrance'
+
 // Eyebrow
 export { Eyebrow, eyebrowVariants } from './components/eyebrow'
 export type { EyebrowProps } from './components/eyebrow'

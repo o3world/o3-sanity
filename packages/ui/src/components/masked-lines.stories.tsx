@@ -4,10 +4,12 @@ import { MaskedLines } from './masked-lines'
 
 /**
  * The headline reveal: each line slides up from behind its own overflow mask
- * on mount, 950ms on `ease-mask`, staggered 170ms.
+ * as it paints, 950ms on `ease-mask`, staggered 170ms.
  *
- * **Reload the story to see it.** It is a mount-triggered transition, not a
- * loop — the same reason the hero plays it once per page load.
+ * **Reload the story to see it.** It is a one-shot CSS animation, not a loop —
+ * the same reason the hero plays it once per page load. Being an animation
+ * rather than a mount-triggered transition is what lets it start at first
+ * paint, which the hero needs: its headline is the LCP element.
  *
  * `motion-reduce` renders every line in place with no transition at all, which
  * is why there is no "disable the animation" prop: the preference is the

@@ -1,6 +1,4 @@
-'use client'
-
-import { useEffect, useState, type ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 import { cn } from '../lib/utils'
 
@@ -20,19 +18,25 @@ export interface MaskedLinesProps {
   easing?: 'mask' | 'spring'
 }
 
-const EASING_CLASS = {
-  mask: 'ease-mask',
-  spring: 'ease-spring',
+const ANIMATION_CLASS = {
+  mask: 'animate-line-lift',
+  spring: 'animate-line-lift-spring',
 } as const
 
 /**
  * The hero headline's line-mask reveal: each line slides up from behind an
- * overflow mask on mount (`.o3-mask` / `.o3-line`, 0.95s). Implemented as a
- * mount-triggered transition rather than keyframes so the timing tokens stay
- * in the class list, and so `motion-reduce:` can show the text immediately.
+ * overflow mask (`.o3-mask` / `.o3-line`, 0.95s), staggered.
+ *
+ * **The entrance is a CSS animation, and this component renders on the
+ * server.** The headline is the page's LCP element, so its reveal has to start
+ * when the band first paints rather than when React hydrates — an animation
+ * declared in the server HTML does; a mount-triggered transition cannot, and
+ * held the opener empty for the whole hydration window. Timing tokens stay in
+ * the class list either way, and `motion-reduce:` still shows the text
+ * immediately.
  *
  * The text is in the server HTML and only its position is animated, so a
- * headline is readable whether or not the class flip ever happens.
+ * headline is readable whether or not JavaScript ever runs.
  */
 export function MaskedLines({
   lines,
@@ -40,14 +44,6 @@ export function MaskedLines({
   stagger = 170,
   easing = 'mask',
 }: MaskedLinesProps) {
-  const [revealed, setRevealed] = useState(false)
-
-  useEffect(() => {
-    // One frame later so the initial translate paints before transitioning.
-    const raf = requestAnimationFrame(() => setRevealed(true))
-    return () => cancelAnimationFrame(raf)
-  }, [])
-
   return (
     <>
       {lines.map((line, i) => (
@@ -55,16 +51,15 @@ export function MaskedLines({
         <span key={i} className="block overflow-hidden pb-[0.04em]">
           <span
             className={cn(
-              EASING_CLASS[easing],
-              // `translate`, not `transform`, in all three: Tailwind v4
-              // compiles `translate-y-*` to the independent `translate`
-              // property, which is what has to be transitioned, hinted, and
+              ANIMATION_CLASS[easing],
+              // `translate`, not `transform`: Tailwind v4 compiles
+              // `translate-y-*` to the independent `translate` property, which
+              // is what the keyframe writes and what has to be hinted and
               // cancelled (see `../motion.ts`).
-              'duration-(--duration-mask) block transition-[translate] [will-change:translate]',
-              'motion-reduce:translate-none motion-reduce:transition-none',
-              revealed ? 'translate-y-0' : 'translate-y-[110%]',
+              'block [will-change:translate]',
+              'motion-reduce:animate-none',
             )}
-            style={{ transitionDelay: `${baseDelay + i * stagger}ms` }}
+            style={{ animationDelay: `${baseDelay + i * stagger}ms` }}
           >
             {line}
           </span>
