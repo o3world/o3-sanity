@@ -65,7 +65,9 @@ export function PanelPlate({
       data-sanity={dataSanity}
       className="flex flex-col gap-[33px] lg:flex-row lg:items-center"
     >
-      <div className="flex flex-col gap-12 lg:w-[500px] lg:shrink-0">
+      {/* 500 is a ceiling, not a floor: the plate is the rigid half of the
+          row, so between 1024 and 1440 the copy column is what gives. */}
+      <div className="flex min-w-0 flex-col gap-12 lg:w-[500px]">
         <div className="flex flex-col gap-3">
           {/* The platform panels lead with a wordmark and the rest with a
               heading. They occupy the same slot, which is why `logo` wins

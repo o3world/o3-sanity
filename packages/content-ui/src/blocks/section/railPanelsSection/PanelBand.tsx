@@ -51,9 +51,18 @@ export function PanelBand({ railItems, panelIds, mode, children }: PanelBandProp
         const visible = entries
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
-        if (!visible) return
-        const index = nodes.indexOf(visible.target as HTMLElement)
-        if (index >= 0) setActive(index)
+        if (visible) {
+          const index = nodes.indexOf(visible.target as HTMLElement)
+          if (index >= 0) setActive(index)
+          return
+        }
+        // Nothing at the middle: the reader has left the band. Settle to the
+        // end they left past, so a jump back to the top of the page does not
+        // leave the rail marking the last stop of a visit that is over.
+        const middle = window.innerHeight / 2
+        if (nodes[0]!.getBoundingClientRect().top > middle) setActive(0)
+        else if (nodes[nodes.length - 1]!.getBoundingClientRect().bottom < middle)
+          setActive(nodes.length - 1)
       },
       { rootMargin: '-45% 0px -45% 0px', threshold: [0, 0.5, 1] },
     )
@@ -62,12 +71,19 @@ export function PanelBand({ railItems, panelIds, mode, children }: PanelBandProp
   }, [panelIds])
 
   return (
-    <div className="flex w-full flex-col gap-16 lg:flex-row lg:gap-[238px]">
+    // The frame's 238 between rail and panels is the RESOLVED gap at 1440 —
+    // 1248 − 82 − 928 — not a declared one: `justify-between` reproduces it
+    // exactly at the full content column and compresses it first as the
+    // column narrows, so the 1024–1440 range shrinks whitespace before it
+    // clips a panel.
+    <div className="flex w-full flex-col gap-16 lg:flex-row lg:justify-between lg:gap-16">
       <PanelRail mode={mode} items={railItems} active={active ?? 0} />
 
       <div
         className={cn(
-          'flex min-w-0 flex-1 flex-col',
+          // 928 is the panel row's own sum (500 + 33 + 395); past it the
+          // leftover is the rail gap's to keep.
+          'flex min-w-0 flex-1 flex-col lg:max-w-[928px]',
           // 128 between panels at both widths (`2747:4501`, `2975:8203`).
           // The number rail keeps the 24 its own 402 rows sit at.
           mode === 'number' ? 'gap-6 lg:gap-32' : 'gap-32',
