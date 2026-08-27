@@ -84,12 +84,15 @@ type RailPanelsSectionProps = SectionProps<'railPanelsSection'> & {
  * ```
  * 128px 96px 128px, 128 between header and body
  *   header  full column      64px heading in 571  |  24px standfirst in 385
- *   body    row, gap 238     rail 82px            |  panels, 128 apart
+ *   body    row, justified   rail 82px            |  panels, 128 apart
  *     panel row, gap 33      copy 500             |  plate 395 × 396
  * ```
  *
  * 82 + 238 + 500 + 33 + 395 = 1248 — the whole band is the standard content
- * column. If it ever stops adding up, that sum is where to start.
+ * column, and the 238 is the space `justify-between` leaves at exactly that
+ * measure. Below 1440 the content column is narrower than the sum, so the
+ * gap compresses first and then the copy column gives (`PanelBand`,
+ * `PanelPlate`); only the rail and the plate hold their width.
  *
  * What the rail counts off is the `rail` field, not a second block type. Panel
  * numbering derives from array order (CONTEXT.md), so `01` is a position
@@ -158,10 +161,15 @@ export function RailPanelsSection({
   const isGrid = chosenLayout === 'grid'
   const isTrack = chosenLayout === 'track'
   const mode = stegaClean(rail) === 'number' ? 'number' : 'label'
-  // Panel `_key`s are unique within the document, so they identify a panel
-  // across both halves of the band without the section needing its own id
-  // (SectionProps strips `_key` from the section itself).
-  const panelId = (key: string | undefined, index: number) => `rail-panel-${key ?? index}`
+  // Panel ids are namespaced by the section's own `_key`, read out of `loc`
+  // (SectionProps strips `_key` from the section itself). Panel keys alone are
+  // NOT unique on a page: duplicating a rail band in the Studio copies its
+  // panels' keys verbatim, and with two bands minting the same DOM ids every
+  // `getElementById` — both rails' observers and every anchor link — resolves
+  // to the first band and cross-wires the second.
+  const sectionKey = loc?.path.match(/_key=="([A-Za-z0-9_-]+)"/)?.[1]
+  const panelId = (key: string | undefined, index: number) =>
+    `rail-panel-${sectionKey ? `${sectionKey}-` : ''}${key ?? index}`
 
   const isRail = !isCards && !isRows && !isGrid && !isTrack
   const shape = isCards ? 'wide' : isTrack ? 'split' : isRail ? 'spread' : 'measured'
@@ -197,19 +205,19 @@ export function RailPanelsSection({
         // cascade rather than racing a `py-*` shorthand against it.
         className="max-lg:pb-12 max-lg:pt-12"
       >
-        <div className="flex flex-col gap-[18px]">
-          {header}
-          <PanelTrack
-            label={stegaClean(heading) ?? undefined}
-            items={items.map((panel, index) => ({
-              key: panel._key ?? String(index),
-              heading: panel.heading ?? panel.railLabel,
-              body: panel.body,
-              note: panel.note,
-              dataSanity: itemAttr(loc, 'panels', panel._key),
-            }))}
-          />
-        </div>
+        <PanelTrack
+          // The header rides inside the track's pinned stage, so it holds
+          // still with the columns while the walk runs.
+          header={header}
+          label={stegaClean(heading) ?? undefined}
+          items={items.map((panel, index) => ({
+            key: panel._key ?? String(index),
+            heading: panel.heading ?? panel.railLabel,
+            body: panel.body,
+            note: panel.note,
+            dataSanity: itemAttr(loc, 'panels', panel._key),
+          }))}
+        />
       </SectionShell>
     )
   }

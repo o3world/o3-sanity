@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 
 import { cn } from '@o3/ui/lib/utils'
 
@@ -19,6 +19,13 @@ export interface PanelTrackProps {
   items: readonly PanelTrackItem[]
   /** The band's heading, so the scroll region announces as something. */
   label?: string
+  /**
+   * The band's server-rendered header row. It lives inside this component so
+   * the pinned stage can hold it still with the columns — a header that
+   * scrolled away while the track walked would leave the band headless for
+   * most of its own sequence.
+   */
+  header?: ReactNode
 }
 
 /**
@@ -38,15 +45,11 @@ const ENTRANCE_DELAY = 120
 const ENTRANCE_STAGGER = 100
 
 /**
- * The vertical transit the horizontal travel is mapped onto, as fractions of
- * the viewport height: the track sits at its first column until its top has
- * risen to 60% of the way down, and reaches its last as its foot passes 15%
- * from the top. Entry is well above the fold's edge because the band's
- * heading enters first: an entry near the bottom has the track already
- * part-walked before the reader has reached it.
+ * The most the pinned stage stands from the viewport top — the nav clearance
+ * every sticky element on the page uses (`top-40`). A stage taller than the
+ * viewport leaves under it centres instead, so its foot stays reachable.
  */
-const DRIVE_ENTRY = 0.6
-const DRIVE_EXIT = 0.15
+const PIN_CLEARANCE = 160
 
 /**
  * `layout: track` — Home's "How we work" (`2846:5480`, `2975:8355` at 402).
@@ -101,11 +104,20 @@ const DRIVE_EXIT = 0.15
  *
  * ## The advance
  *
- * Scrolling the page down through the band walks the track sideways: the
- * band's transit across the viewport, `DRIVE_ENTRY` to `DRIVE_EXIT`, maps onto
- * the track's own travel, written straight to `scrollLeft` from a
- * rAF-throttled passive listener. The rule above reads `scrollLeft`, so it
- * keeps reporting the truth without knowing who moved the track.
+ * The prototype's pin-wrap (`data-pinwrap` on the retired homepage): the
+ * outer wrapper is given the stage's height plus the track's travel, the
+ * stage — header, rule and columns together — goes `sticky` inside it, and
+ * page scroll through the wrapper writes straight to `scrollLeft`, one
+ * horizontal pixel per vertical one. The band therefore holds still and
+ * fully visible while the walk runs, and the last column arrives while the
+ * reader can still see it — a viewport-transit mapping instead finishes the
+ * walk only as the band leaves, which cuts the final column off at the top
+ * on every page where the band sits low. The rule above reads `scrollLeft`,
+ * so it keeps reporting the truth without knowing who moved the track.
+ *
+ * The geometry is inline style set from a resize-observed layout pass, and
+ * the server HTML carries none of it: no JavaScript means no extra height,
+ * no pin, and the plain snap-scroller underneath.
  *
  * **Snap is off wherever the drive can run at all, and it is a whole-visit
  * decision rather than a per-frame one.** A programmatic `scrollLeft` against
@@ -118,9 +130,10 @@ const DRIVE_EXIT = 0.15
  *
  * **A hand on the track ends the drive**, on pointer, touch, key, focus or a
  * wheel with sideways intent — a reader who has taken hold of the columns is
- * not to be argued with. The drive re-arms when the band has left the viewport
- * entirely, so the next visit advances again and the visit that was taken over
- * stays taken over.
+ * not to be argued with. The pin's geometry stays where it is (collapsing the
+ * wrapper under a reader mid-band would jump the page); only the writes stop.
+ * The drive re-arms when the band has left the viewport entirely, so the next
+ * visit advances again and the visit that was taken over stays taken over.
  *
  * **Not on a coarse pointer, and not under reduced motion.** On touch the
  * track is the page's own swipe surface and a drive would be pulling against
@@ -159,7 +172,9 @@ const DRIVE_EXIT = 0.15
  * carrying a rule nobody sees. Nothing else changes — the mobile frame draws
  * the same four parts at the same steps, with the heading one size down.
  */
-export function PanelTrack({ items, label }: PanelTrackProps) {
+export function PanelTrack({ items, label, header }: PanelTrackProps) {
+  const wrapRef = useRef<HTMLDivElement>(null)
+  const stageRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLOListElement>(null)
   const ruleRef = useRef<HTMLSpanElement>(null)
   const [entered, setEntered] = useState(false)
@@ -213,8 +228,10 @@ export function PanelTrack({ items, label }: PanelTrackProps) {
   }, [])
 
   useEffect(() => {
+    const wrap = wrapRef.current
+    const stage = stageRef.current
     const track = trackRef.current
-    if (!track) return
+    if (!wrap || !stage || !track) return
 
     const still = window.matchMedia('(prefers-reduced-motion: reduce)')
     const finger = window.matchMedia('(pointer: coarse)')
@@ -222,19 +239,45 @@ export function PanelTrack({ items, label }: PanelTrackProps) {
 
     let frame = 0
     let live = false
+    let pinned = false
+
+    const travel = () => track.scrollWidth - track.clientWidth
+
+    const unpin = () => {
+      pinned = false
+      stage.style.removeProperty('position')
+      stage.style.removeProperty('top')
+      wrap.style.removeProperty('height')
+    }
+
+    // The pin-wrap geometry: the wrapper holds the page open for the stage's
+    // height plus the track's travel, and the stage rides sticky inside it.
+    const layout = () => {
+      if (!pinned) return
+      const max = travel()
+      // A track that already fits has nothing to walk — a wide-open window —
+      // and a pin without travel is a dead stop on the way down the page.
+      if (max <= 0) {
+        unpin()
+        return
+      }
+      const stageHeight = stage.offsetHeight
+      const top = Math.max(0, Math.min(PIN_CLEARANCE, (window.innerHeight - stageHeight) / 2))
+      stage.style.position = 'sticky'
+      stage.style.top = `${top}px`
+      wrap.style.height = `${stageHeight + max}px`
+    }
 
     const paint = () => {
       frame = 0
-      if (!live) return
-      const max = track.scrollWidth - track.clientWidth
+      if (!live || !pinned) return
+      const max = travel()
       if (max <= 0) return
-      const rect = track.getBoundingClientRect()
-      const entry = window.innerHeight * DRIVE_ENTRY
-      // The track's own height is part of the span, so a tall band is walked
-      // over its whole passage rather than finishing before its foot appears.
-      const span = window.innerHeight * (DRIVE_ENTRY - DRIVE_EXIT) + rect.height
-      const progress = Math.min(1, Math.max(0, (entry - rect.top) / span))
-      const target = progress * max
+      // One horizontal pixel per vertical one: how far the wrapper's top has
+      // risen past the stage's pin line is exactly how far the track has
+      // walked.
+      const pinTop = Number.parseFloat(stage.style.top) || 0
+      const target = Math.min(max, Math.max(0, pinTop - wrap.getBoundingClientRect().top))
       // Sub-pixel writes are a scroll event each and move nothing.
       if (Math.abs(track.scrollLeft - target) > 0.5) track.scrollLeft = target
     }
@@ -243,8 +286,15 @@ export function PanelTrack({ items, label }: PanelTrackProps) {
       if (live && !frame) frame = requestAnimationFrame(paint)
     }
 
+    const relayout = () => {
+      layout()
+      schedule()
+    }
+
     const take = () => {
       setSteerable(true)
+      pinned = true
+      layout()
       if (live) return
       live = true
       paint()
@@ -269,6 +319,7 @@ export function PanelTrack({ items, label }: PanelTrackProps) {
         return
       }
       yieldTrack()
+      unpin()
       setSteerable(false)
     }
 
@@ -280,12 +331,17 @@ export function PanelTrack({ items, label }: PanelTrackProps) {
       },
       { threshold: 0 },
     )
-    io.observe(track)
+    io.observe(wrap)
 
     if (allowed()) take()
 
+    // The travel and the stage's height both move with the measure; without
+    // this a resize leaves the wrapper holding the wrong amount of page open.
+    const resizer = new ResizeObserver(relayout)
+    resizer.observe(track)
+
     window.addEventListener('scroll', schedule, { passive: true })
-    window.addEventListener('resize', schedule)
+    window.addEventListener('resize', relayout)
     track.addEventListener('pointerdown', yieldTrack)
     track.addEventListener('touchstart', yieldTrack, { passive: true })
     track.addEventListener('keydown', yieldTrack)
@@ -297,8 +353,9 @@ export function PanelTrack({ items, label }: PanelTrackProps) {
     return () => {
       if (frame) cancelAnimationFrame(frame)
       io.disconnect()
+      resizer.disconnect()
       window.removeEventListener('scroll', schedule)
-      window.removeEventListener('resize', schedule)
+      window.removeEventListener('resize', relayout)
       track.removeEventListener('pointerdown', yieldTrack)
       track.removeEventListener('touchstart', yieldTrack)
       track.removeEventListener('keydown', yieldTrack)
@@ -306,95 +363,112 @@ export function PanelTrack({ items, label }: PanelTrackProps) {
       track.removeEventListener('wheel', yieldToSideways)
       still.removeEventListener('change', onPreference)
       finger.removeEventListener('change', onPreference)
+      unpin()
     }
   }, [])
 
   const columns = Math.max(items.length, 1)
 
   return (
-    <div className="flex w-full flex-col">
-      {/* Decorative: the `<ol>` under it already carries the count and the
-          order, and a scroll position is not something to announce twice. */}
-      <div aria-hidden="true" className="bg-line relative h-px w-full overflow-hidden">
-        <span
-          ref={ruleRef}
-          // No transition: the segment follows the finger, and easing it would
-          // leave it trailing the columns it reports on.
-          className="bg-fg absolute inset-y-0 left-0 block"
-          style={{
-            width: `${100 / columns}%`,
-            // Its own width per column travelled, so a track at rest puts the
-            // segment under the first column — what the frame draws — and a
-            // track scrolled to the end puts it under the last.
-            transform: `translateX(calc(var(--track-progress, 0) * ${(columns - 1) * 100}%))`,
-          }}
-        />
-      </div>
+    // The pin-wrap: height and the stage's sticky position arrive as inline
+    // style from the drive effect, so the server HTML — and any reader the
+    // drive excuses itself for — is this exact markup with no pin at all.
+    <div ref={wrapRef} className="w-full">
+      <div ref={stageRef} className="flex w-full flex-col gap-[18px]">
+        {header}
 
-      <ol
-        ref={trackRef}
-        onScroll={sync}
-        // Focusable because it scrolls and holds nothing focusable of its own:
-        // a keyboard reader that cannot reach the container cannot reach the
-        // last column at all. `jsx-a11y/no-noninteractive-tabindex` reasons
-        // from element semantics and this reasons from what a keyboard can
-        // actually get to — the same tension `InFlightSection` resolved the
-        // same way. `aria-label` is what stops it announcing as an unnamed
-        // stop on the way past.
-        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- keyboard-scrollable region with no focusable content; see above
-        tabIndex={0}
-        aria-label={label ?? UNNAMED}
-        className={cn(
-          'focus-visible:ring-brand flex gap-6 overflow-x-auto pt-16 [scrollbar-width:none] focus-visible:outline-none focus-visible:ring-2 lg:gap-[138px] [&::-webkit-scrollbar]:hidden',
-          // The server HTML is the snapping track, which is what a reader with
-          // no JavaScript — and the visual-regression harness, which browses
-          // with reduced motion — gets.
-          steerable ? 'snap-none' : 'snap-x snap-mandatory',
-        )}
-      >
-        {items.map((panel, index) => (
-          <li
-            key={panel.key}
-            data-sanity={panel.dataSanity}
-            // What each app's `noscript` rule targets: with no JavaScript the
-            // effect above never runs, so the stylesheet is the only thing
-            // that can show the column.
-            data-reveal=""
-            style={{ transitionDelay: `${ENTRANCE_DELAY + index * ENTRANCE_STAGGER}ms` }}
+        <div className="flex w-full flex-col">
+          {/* Decorative: the `<ol>` under it already carries the count and the
+          order, and a scroll position is not something to announce twice. */}
+          <div aria-hidden="true" className="bg-line relative h-px w-full overflow-hidden">
+            <span
+              ref={ruleRef}
+              // No transition: the segment follows the finger, and easing it would
+              // leave it trailing the columns it reports on.
+              className="bg-fg absolute inset-y-0 left-0 block"
+              style={{
+                width: `${100 / columns}%`,
+                // Its own width per column travelled, so a track at rest puts the
+                // segment under the first column — what the frame draws — and a
+                // track scrolled to the end puts it under the last.
+                transform: `translateX(calc(var(--track-progress, 0) * ${(columns - 1) * 100}%))`,
+              }}
+            />
+          </div>
+
+          <ol
+            ref={trackRef}
+            onScroll={sync}
+            // Focusable because it scrolls and holds nothing focusable of its own:
+            // a keyboard reader that cannot reach the container cannot reach the
+            // last column at all. `jsx-a11y/no-noninteractive-tabindex` reasons
+            // from element semantics and this reasons from what a keyboard can
+            // actually get to — the same tension `InFlightSection` resolved the
+            // same way. `aria-label` is what stops it announcing as an unnamed
+            // stop on the way past.
+            // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- keyboard-scrollable region with no focusable content; see above
+            tabIndex={0}
+            aria-label={label ?? UNNAMED}
             className={cn(
-              'border-line flex w-full shrink-0 snap-start flex-col pb-8 lg:w-[531px] lg:border-r lg:pr-16',
-              // `translate`, not `transform`: Tailwind v4 compiles
-              // `translate-y-*` to the independent property (`@o3/ui`'s
-              // `motion.ts`).
-              'duration-(--duration-reveal) ease-spring transition-[opacity,translate]',
-              'motion-reduce:transition-none',
-              // `translate-none` rather than `translate-y-0`, so a settled
-              // column leaves no containing block behind it.
-              entered ? 'translate-none opacity-100' : 'translate-y-6 opacity-0',
+              'focus-visible:ring-brand flex gap-6 overflow-x-auto pt-16 [scrollbar-width:none] focus-visible:outline-none focus-visible:ring-2 lg:gap-[138px] [&::-webkit-scrollbar]:hidden',
+              // The server HTML is the snapping track, which is what a reader with
+              // no JavaScript — and the visual-regression harness, which browses
+              // with reduced motion — gets.
+              steerable ? 'snap-none' : 'snap-x snap-mandatory',
             )}
           >
-            <span aria-hidden="true" className="text-fg-subtle pb-1.5 text-[15px] leading-[18px]">
-              {`.${String(index + 1).padStart(2, '0')}`}
-            </span>
+            {items.map((panel, index) => (
+              <li
+                key={panel.key}
+                data-sanity={panel.dataSanity}
+                // What each app's `noscript` rule targets: with no JavaScript the
+                // effect above never runs, so the stylesheet is the only thing
+                // that can show the column.
+                data-reveal=""
+                style={{ transitionDelay: `${ENTRANCE_DELAY + index * ENTRANCE_STAGGER}ms` }}
+                className={cn(
+                  'border-line flex w-full shrink-0 snap-start flex-col pb-8 lg:w-[531px] lg:border-r lg:pr-16',
+                  // `translate`, not `transform`: Tailwind v4 compiles
+                  // `translate-y-*` to the independent property (`@o3/ui`'s
+                  // `motion.ts`).
+                  'duration-(--duration-reveal) ease-spring transition-[opacity,translate]',
+                  'motion-reduce:transition-none',
+                  // `translate-none` rather than `translate-y-0`, so a settled
+                  // column leaves no containing block behind it.
+                  entered ? 'translate-none opacity-100' : 'translate-y-6 opacity-0',
+                )}
+              >
+                <span
+                  aria-hidden="true"
+                  className="text-fg-subtle pb-1.5 text-[15px] leading-[18px]"
+                >
+                  {`.${String(index + 1).padStart(2, '0')}`}
+                </span>
 
-            {panel.heading ? (
-              // 48/58 at 402 and 64/76 at 1440 — the step the rail header
-              // sets too, so it is shared rather than written twice.
-              <h3 className={cn('font-display text-balance', STATEMENT_STEP)}>{panel.heading}</h3>
-            ) : null}
+                {panel.heading ? (
+                  // 48/58 at 402 and 64/76 at 1440 — the step the rail header
+                  // sets too, so it is shared rather than written twice.
+                  <h3 className={cn('font-display text-balance', STATEMENT_STEP)}>
+                    {panel.heading}
+                  </h3>
+                ) : null}
 
-            {/* 24/34 on BOTH frames, so the solved clamp is flat — the one
+                {/* 24/34 on BOTH frames, so the solved clamp is flat — the one
                 step on this band that does not interpolate. */}
-            {panel.body ? <p className="pt-6 text-[24px] leading-[34px]">{panel.body}</p> : null}
+                {panel.body ? (
+                  <p className="pt-6 text-[24px] leading-[34px]">{panel.body}</p>
+                ) : null}
 
-            {panel.note ? (
-              <p className="text-fg-muted pt-6 text-[15px] leading-[22.5px] lg:max-w-[390px]">
-                {panel.note}
-              </p>
-            ) : null}
-          </li>
-        ))}
-      </ol>
+                {panel.note ? (
+                  <p className="text-fg-muted pt-6 text-[15px] leading-[22.5px] lg:max-w-[390px]">
+                    {panel.note}
+                  </p>
+                ) : null}
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
     </div>
   )
 }
