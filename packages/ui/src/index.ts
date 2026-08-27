@@ -2,6 +2,16 @@
 // prototype/O3 Homepage v2.dc.html. See components.json for shadcn config.
 export { cn } from './lib/utils'
 
+// Motion recipes — the shared hover/focus class strings (see motion.ts)
+export {
+  CARD_ARROW_NUDGE,
+  CARD_LINK_FOCUS,
+  CARD_MEDIA_ZOOM,
+  CARD_TITLE_FADE,
+  HOVER_FADE_TRANSITION,
+  HOVER_TRANSITION,
+} from './motion'
+
 // ArrowIcon — the O3 arrow glyph Button and the case-study chips draw
 export { ArrowIcon } from './components/arrow-icon'
 export type { ArrowIconProps } from './components/arrow-icon'

@@ -26,9 +26,12 @@ const cardVariants = cva(
       // what settles them.
       interactive: {
         true: [
-          'transition-[transform,box-shadow] duration-(--duration-hover) ease-out',
+          // Tailwind v4 compiles `-translate-y-1` to the `translate` property,
+          // not `transform`, so both the transition list and the reduced-motion
+          // cancel have to name `translate`.
+          'transition-[translate,box-shadow] duration-(--duration-hover) ease-out',
           'hover:-translate-y-1 hover:shadow-[0_12px_28px_-18px_rgb(0_0_0/0.35)]',
-          'motion-reduce:transition-none motion-reduce:hover:transform-none',
+          'motion-reduce:transition-none motion-reduce:hover:translate-none',
         ].join(' '),
       },
     },

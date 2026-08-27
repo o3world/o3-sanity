@@ -101,7 +101,7 @@ export function CaseStudyCard(
           // only dimming. A tenth of saturation back is the compensation, not
           // a grade: it is sized to the scrim, and the image under no scrim at
           // all (`NextCaseBand`) deliberately doesn't carry it.
-          className="duration-(--duration-reveal) saturate-110 h-full w-full transition-transform ease-out group-hover:scale-[1.03]"
+          className="duration-(--duration-reveal) saturate-110 motion-reduce:group-hover:scale-none h-full w-full transition-transform ease-out group-hover:scale-[1.03] motion-reduce:transition-none"
         />
       </div>
       {/*

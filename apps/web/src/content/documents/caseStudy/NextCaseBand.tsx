@@ -82,7 +82,7 @@ export function NextCaseBand({ next }: { next: NextCase }) {
             ratio="fill"
             width={1600}
             sizes={CONTENT_COLUMN}
-            className="duration-(--duration-reveal) transition-transform ease-out group-hover:scale-[1.03]"
+            className="duration-(--duration-reveal) motion-reduce:group-hover:scale-none transition-transform ease-out group-hover:scale-[1.03] motion-reduce:transition-none"
           />
         </Link>
 

@@ -83,7 +83,7 @@ export function InsightCard({
           width={800}
           sizes={CARD_THREE_UP}
           priority={priority}
-          className="duration-(--duration-reveal) h-full w-full transition-transform ease-out group-hover:scale-[1.03]"
+          className="duration-(--duration-reveal) motion-reduce:group-hover:scale-none h-full w-full transition-transform ease-out group-hover:scale-[1.03] motion-reduce:transition-none"
         />
         {/* The veil weights the bottom of the tile, where the frame's pattern
             lozenge sits. It stays even with no image, so an unillustrated

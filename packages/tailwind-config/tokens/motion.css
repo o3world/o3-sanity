@@ -50,6 +50,9 @@
    * them is the point: fill, hairline and copy have to land together as the
    * bar crosses the seam between two bands, or the flip reads as a stutter. */
   --duration-ink: 350ms;
+  /* .95s — the hero headline's line-mask reveal (`MaskedLines`), the one
+   * transition that rides `--ease-mask`. */
+  --duration-mask: 950ms;
   /* .7s — the standard data-reveal opacity/transform transition. */
   --duration-reveal: 700ms;
   /* .85s — the slower reveals: hero sub/CTA fade-up, the intro overlay's

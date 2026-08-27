@@ -36,7 +36,7 @@ export function MaskedLines({ lines, baseDelay = 0, stagger = 170 }: MaskedLines
         <span key={i} className="block overflow-hidden pb-[0.04em]">
           <span
             className={cn(
-              'ease-mask block transition-transform duration-[950ms] will-change-transform',
+              'ease-mask duration-(--duration-mask) block transition-transform will-change-transform',
               'motion-reduce:transform-none motion-reduce:transition-none',
               revealed ? 'translate-y-0' : 'translate-y-[110%]',
             )}
