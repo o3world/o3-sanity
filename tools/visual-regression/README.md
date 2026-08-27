@@ -90,7 +90,7 @@ used to be a property of the morning's bandwidth, and the homepage lost its part
 in three that way (#226).
 
 So a capture reaches the network once per asset, ever. The first run writes each image and font to
-`.vr/assets`; every run after that — and, more to the point, the baseline capture and the current
+`~/.o3-sanity/vr-assets`; every run after that — and, more to the point, the baseline capture and the current
 capture of the _same_ run — replays those bytes off disk. Anything that would _execute_ is stubbed
 empty instead of cached: a player document renders a different frame, a different consent state and a
 different thumbnail every time it runs, so caching its HTML would not make it deterministic. The
@@ -347,7 +347,6 @@ an earlier run timed out on, and — under `--figma` — empties the frame expor
 
 ```
 .vr/
-  assets/                  remote images and fonts, fetched once and replayed
   base/                    detached worktree at the baseline commit
   figma/png-x1/<brand>/    frame exports, keyed by node id and sync baseline hash
   <brand>/
@@ -363,10 +362,19 @@ an earlier run timed out on, and — under `--figma` — empties the frame expor
 ```
 
 Everything that renders is under the brand, so running one host does not overwrite the other's
-report or serve it the other's build. `assets/` and `base/` are brand-independent by nature: the
-baseline checkout is one commit whichever host renders it, and a photograph off `cdn.sanity.io` is
-the same bytes under either set of tokens — which is also what keeps the second brand's first run
-from re-fetching 256 images.
+report or serve it the other's build. `base/` is brand-independent by nature: the baseline checkout
+is one commit whichever host renders it.
 
 Delete the whole directory to start clean; the next run rebuilds it. `git worktree prune` afterwards
 if you removed it while `.vr/base` existed.
+
+### The asset cache is not in `.vr/`
+
+Replayed bytes live in `~/.o3-sanity/vr-assets`, beside the dataset backups, and `O3_VR_ASSET_DIR`
+moves them. One ticket, one worktree is the rule here, so a cache inside the checkout is a cache that
+starts cold on every ticket and dies with the worktree: that was 18,581 image requests and 425MB off
+`cdn.sanity.io` in the week to 2026-08-26, 77% of the project's image bandwidth, all of it
+screenshots. Sharing one directory across every worktree is safe because a Sanity asset URL is
+content-addressed — the hash in the path names the bytes, the transform is in the query string, and
+the cache hashes the whole URL. It is also what keeps the second brand's first run, and a fresh
+worktree's, from re-fetching 256 images.

@@ -1,5 +1,7 @@
 import { sanityFetch } from '#live'
 
+import { capToBudget, prerenderBudget } from './prerenderBudget'
+
 /**
  * The published slugs a `generateStaticParams` prerenders from (#266).
  *
@@ -13,11 +15,15 @@ import { sanityFetch } from '#live'
  * `EmptyGenerateStaticParamsError`, so swallowing the failure buys a build
  * error one step removed from its cause. Letting the fetch throw puts the
  * message — which names the missing token — where the failure is.
+ *
+ * The read itself is one query however many slugs come back; what the budget
+ * decides is how many *detail* queries the build then makes.
  */
 export async function publishedSlugs(query: string): Promise<string[]> {
   'use cache'
   const { data } = await sanityFetch({ query, perspective: 'published', stega: false })
-  return ((data ?? []) as Array<string | null>).filter(
+  const slugs = ((data ?? []) as Array<string | null>).filter(
     (slug): slug is string => typeof slug === 'string' && slug !== '',
   )
+  return capToBudget(slugs, prerenderBudget())
 }

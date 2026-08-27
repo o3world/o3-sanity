@@ -20,7 +20,7 @@ import {
   storiesFor,
   type Affected,
 } from './affected'
-import { forgetErrorResponses, forgetUnreachable, type AssetCache } from './assets'
+import { assetCacheDir, forgetErrorResponses, forgetUnreachable, type AssetCache } from './assets'
 import { captureAll, captureKey, type Shot, type Viewport } from './capture'
 import { compare, type Comparison } from './compare'
 import {
@@ -258,7 +258,7 @@ async function scoreAgainstFigma(options: {
 
   const shotsDir = path.join(cache, 'shots', 'figma')
   fs.rmSync(shotsDir, { recursive: true, force: true })
-  const assetDir = path.join(root, '.vr', 'assets')
+  const assetDir = assetCacheDir()
   forgetErrorResponses(assetDir)
   const assetCache: AssetCache = { unreachable: new Set(), fetched: 0 }
 
@@ -564,8 +564,9 @@ async function main(): Promise<void> {
   if (values.refresh) fs.rmSync(shotsDir, { recursive: true, force: true })
 
   // Both sides replay their remote assets out of one cache, which is what makes
-  // "the photograph loaded on one side only" impossible (#226).
-  const assetDir = path.join(root, '.vr', 'assets')
+  // "the photograph loaded on one side only" impossible (#226). The cache is
+  // shared across every worktree on the machine — see `assetCacheDir`.
+  const assetDir = assetCacheDir()
   // A refusal the server gave us is re-asked every run: it costs one
   // round-trip, and a URL fixed since yesterday should not need a flag to be
   // noticed. A timeout costs a minute of attempts to rediscover, so it waits
