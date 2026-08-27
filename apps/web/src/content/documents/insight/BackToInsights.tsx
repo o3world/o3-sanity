@@ -19,7 +19,10 @@ export function BackToInsights() {
   return (
     <Link
       href={collectionPrefixes().insight}
-      className="duration-(--duration-hover) inline-flex w-fit items-center gap-2 text-[15px] text-white/60 transition-colors ease-out hover:text-white"
+      // The ring carries no offset, which is what every nav link here does —
+      // this one sits on the article's ink hero, where an offset would draw a
+      // white gap around it.
+      className="focus-visible:ring-brand duration-(--duration-hover) inline-flex w-fit items-center gap-2 text-[15px] text-white/60 transition-colors ease-out hover:text-white focus-visible:outline-none focus-visible:ring-2"
     >
       <ArrowIcon className="rotate-180" />
       All Insights

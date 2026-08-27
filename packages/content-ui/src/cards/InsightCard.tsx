@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import { CARD_LINK_FOCUS, CARD_MEDIA_ZOOM, CARD_TITLE_FADE, cn } from '@o3/ui'
 import { brandConfig } from '@o3/sanity/brand'
 
 import { hrefForDoc } from '@o3/content-runtime/urls'
@@ -74,7 +75,18 @@ export function InsightCard({
     .join(' · ')
 
   return (
-    <Link href={hrefForDoc({ _type, slug })} className="group flex h-full flex-col gap-6">
+    <Link
+      href={hrefForDoc({ _type, slug })}
+      // The offset is transparent because the band under this card is
+      // authored: `insightsCarouselSection` resolves its own surface, so the
+      // gap has to show whatever the band paints rather than a white notch on
+      // ink.
+      className={cn(
+        'group flex h-full flex-col gap-6',
+        CARD_LINK_FOCUS,
+        'focus-visible:ring-offset-transparent',
+      )}
+    >
       <div className="rounded-card bg-bone relative isolate aspect-square overflow-hidden">
         <SanityImage
           source={featuredImage?.image}
@@ -83,7 +95,7 @@ export function InsightCard({
           width={800}
           sizes={CARD_THREE_UP}
           priority={priority}
-          className="duration-(--duration-reveal) motion-reduce:group-hover:scale-none h-full w-full transition-transform ease-out group-hover:scale-[1.03] motion-reduce:transition-none"
+          className={cn('h-full w-full', CARD_MEDIA_ZOOM)}
         />
         {/* The veil weights the bottom of the tile, where the frame's pattern
             lozenge sits. It stays even with no image, so an unillustrated
@@ -93,9 +105,7 @@ export function InsightCard({
 
       <div className="flex flex-col gap-1.5">
         {meta ? <p className="text-meta text-fg-muted uppercase">{meta}</p> : null}
-        <h3 className="text-fg duration-(--duration-hover) text-display-sm transition-opacity ease-out group-hover:opacity-70">
-          {title}
-        </h3>
+        <h3 className={cn('text-fg text-display-sm', CARD_TITLE_FADE)}>{title}</h3>
       </div>
     </Link>
   )

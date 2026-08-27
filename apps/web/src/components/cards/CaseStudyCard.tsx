@@ -1,6 +1,14 @@
 import Link from 'next/link'
 
-import { ArrowIcon, buttonVariants, Eyebrow } from '@o3/ui'
+import {
+  ArrowIcon,
+  buttonVariants,
+  cn,
+  CARD_ARROW_NUDGE,
+  CARD_LINK_FOCUS,
+  CARD_MEDIA_ZOOM,
+  Eyebrow,
+} from '@o3/ui'
 import { hrefForDoc } from '@o3/content-runtime/urls'
 import { LogoKnockout, SanityImage } from '@o3/content-ui'
 import type { CaseStudyCardData } from '@o3/content-ui/cards'
@@ -84,7 +92,15 @@ export function CaseStudyCard(
       // Padding is 64 uniform in the set and only the sides step down at 402,
       // where the 362-wide instances (`2975:8429`–`8431`) override to 24 and
       // leave 64 top and bottom.
-      className="rounded-case-card group relative isolate flex min-h-[550px] flex-col justify-between gap-6 overflow-hidden px-6 py-16 text-white lg:px-16"
+      //
+      // The focus ring hugs the card's own radius with no offset: the
+      // photograph runs to the edge, so a gap between ring and card would read
+      // as a border the card doesn't have.
+      className={cn(
+        'rounded-case-card group relative isolate flex min-h-[550px] flex-col justify-between gap-6 overflow-hidden px-6 py-16 text-white lg:px-16',
+        CARD_LINK_FOCUS,
+        'focus-visible:ring-offset-0',
+      )}
     >
       <div className="absolute inset-0 -z-20">
         <SanityImage
@@ -101,7 +117,7 @@ export function CaseStudyCard(
           // only dimming. A tenth of saturation back is the compensation, not
           // a grade: it is sized to the scrim, and the image under no scrim at
           // all (`NextCaseBand`) deliberately doesn't carry it.
-          className="duration-(--duration-reveal) saturate-110 motion-reduce:group-hover:scale-none h-full w-full transition-transform ease-out group-hover:scale-[1.03] motion-reduce:transition-none"
+          className={cn('saturate-110 h-full w-full', CARD_MEDIA_ZOOM)}
         />
       </div>
       {/*
@@ -189,9 +205,20 @@ export function CaseStudyCard(
           </p>
         ) : null}
 
-        <span className={buttonVariants({ variant: 'light', size: 'base' })}>
+        {/*
+         * The CTA is not a control, so it has no hover of its own to fire —
+         * it borrows the set's own hover fill from the card instead, which is
+         * what keeps it from sitting dead while the picture behind it moves.
+         */}
+        <span
+          className={cn(
+            buttonVariants({ variant: 'light', size: 'base' }),
+            'group-hover:bg-brand group-hover:text-white',
+            'group-focus-visible:bg-brand group-focus-visible:text-white',
+          )}
+        >
           View the work
-          <ArrowIcon />
+          <ArrowIcon className={CARD_ARROW_NUDGE} />
         </span>
       </div>
     </Link>
