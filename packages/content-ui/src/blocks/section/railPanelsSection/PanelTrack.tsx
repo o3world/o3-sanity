@@ -40,11 +40,12 @@ const ENTRANCE_STAGGER = 100
 /**
  * The vertical transit the horizontal travel is mapped onto, as fractions of
  * the viewport height: the track sits at its first column until its top has
- * risen to 85% of the way down, and reaches its last as its foot passes 15%
- * from the top. The band's heading is above the track, so by the time the
- * advance starts the reader is already looking at the first column.
+ * risen to 60% of the way down, and reaches its last as its foot passes 15%
+ * from the top. Entry is well above the fold's edge because the band's
+ * heading enters first: an entry near the bottom has the track already
+ * part-walked before the reader has reached it.
  */
-const DRIVE_ENTRY = 0.85
+const DRIVE_ENTRY = 0.6
 const DRIVE_EXIT = 0.15
 
 /**
