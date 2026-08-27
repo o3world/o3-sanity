@@ -21,9 +21,8 @@ export interface PanelTrackProps {
   label?: string
   /**
    * The band's server-rendered header row. It lives inside this component so
-   * the pinned stage can hold it still with the columns — a header that
-   * scrolled away while the track walked would leave the band headless for
-   * most of its own sequence.
+   * the drive's transit window is measured over the whole band — header,
+   * rule and columns — rather than the columns alone.
    */
   header?: ReactNode
 }
@@ -45,36 +44,33 @@ const ENTRANCE_DELAY = 120
 const ENTRANCE_STAGGER = 100
 
 /**
- * The most the pinned stage stands from the viewport top when foot-anchoring
- * cannot apply (a stage nearly as tall as the viewport) — the nav clearance
- * every sticky element on the page uses (`top-40`).
+ * Where the walk ends: the band's top at the nav clearance every sticky
+ * element on the page uses (`top-40`). Past this the column heads would
+ * start leaving, so the last framing has to be settled by here.
  */
-const PIN_CLEARANCE = 160
+const WALK_CLEARANCE = 160
 
 /**
- * The margin under the pinned stage's foot. The wrapper's unconsumed height
- * is a run of blank section paint below the stage, so the stage anchors by
- * its foot near the viewport bottom to keep that run below the fold — a
- * top-pinned stage showed it as a couple hundred pixels of dead white until
- * the walk finished.
+ * Where the walk begins: this much room under the band's foot once it has
+ * fully entered — the reader is looking at the whole band, at rest in its
+ * first framing, before anything moves.
  */
-const PIN_FOOT = 48
+const WALK_FOOT_GAP = 48
 
 /**
- * Horizontal pixels the track walks per vertical pixel of page scroll. Above
- * one, because the pin's cost is its length — the wrapper holds the page
- * open for `travel / DRIVE_RATE` — but only just: pushed to 1.6 the whole
- * walk fit in half a viewport of scroll and read as a toggle between its two
- * end framings, with no state in which the middle column was the current
- * one. The hold this leaves is what the foot anchor (`PIN_FOOT`) makes
- * affordable, by keeping the next band immediately behind it.
+ * The least page scroll the walk may be mapped onto. A tall band in a short
+ * viewport squeezes the fully-visible stretch toward nothing, and a walk
+ * compressed into a few pixels of scroll is a flip; below this the window
+ * opens upward from `WALK_CLEARANCE` instead, trading a little head-room
+ * for a walk that still reads as motion.
  */
-const DRIVE_RATE = 1.2
+const WALK_MIN_SPAN = 160
 
 /**
- * How much of the remaining distance the track closes per frame. The wheel
- * hands the drive discrete steps; this is what turns them into a glide, and
- * softer is calmer — each step spreads across more frames.
+ * How much of the remaining distance the track closes per frame. The walk's
+ * window is a fraction of the travel it drives, so the raw mapping is fast
+ * and the wheel hands it discrete steps besides; the chase is what turns
+ * both into a glide.
  */
 const DRIVE_EASE = 0.12
 
@@ -131,26 +127,17 @@ const DRIVE_EASE = 0.12
  *
  * ## The advance
  *
- * The prototype's pin-wrap (`data-pinwrap` on the retired homepage): the
- * outer wrapper is given the stage's height plus the scroll the walk costs,
- * the stage — header, rule and columns together — goes `sticky` inside it,
- * and page scroll through the wrapper drives `scrollLeft`, `DRIVE_RATE`
- * horizontal pixels per vertical one with the track easing toward its
- * target (`DRIVE_EASE`). The band therefore holds still and fully visible
- * while the walk runs, and the last column arrives while the reader can
- * still see it — a viewport-transit mapping instead finishes the walk only
- * as the band leaves, which cuts the final column off at the top on every
- * page where the band sits low. The rule above reads `scrollLeft`, so it
- * keeps reporting the truth without knowing who moved the track.
- *
- * The stage anchors by its foot near the viewport bottom (`PIN_FOOT`): the
- * wrapper's unconsumed height is blank section paint below the stage, and a
- * foot anchor keeps it below the fold, so the next band enters the moment
- * the walk ends instead of after a run of dead white.
- *
- * The geometry is inline style set from a resize-observed layout pass, and
- * the server HTML carries none of it: no JavaScript means no extra height,
- * no pin, and the plain snap-scroller underneath.
+ * On a fine pointer the track walks as the band transits the viewport: the
+ * walk maps onto the stretch of page scroll in which the whole band is on
+ * screen — from fully entered (`WALK_FOOT_GAP` under its foot) to
+ * `WALK_CLEARANCE` from the top — with the track CHASING the mapped target
+ * (`DRIVE_EASE`) rather than mirroring it, so the step lands as a glide.
+ * Nothing pins and nothing is held open: the section keeps exactly the
+ * height it has, the page never stops moving, and the bands around this one
+ * are undisturbed. On desktop two columns fit the view, so the walk IS one
+ * step — the [1 2] framing hands over to [2 3] — and both framings are on
+ * screen in full before and after it. The rule above reads `scrollLeft`, so
+ * it keeps reporting the truth without knowing who moved the track.
  *
  * **Snap is off wherever the drive can run at all, and it is a whole-visit
  * decision rather than a per-frame one.** A programmatic `scrollLeft` against
@@ -163,10 +150,9 @@ const DRIVE_EASE = 0.12
  *
  * **A hand on the track ends the drive**, on pointer, touch, key, focus or a
  * wheel with sideways intent — a reader who has taken hold of the columns is
- * not to be argued with. The pin's geometry stays where it is (collapsing the
- * wrapper under a reader mid-band would jump the page); only the writes stop.
- * The drive re-arms when the band has left the viewport entirely, so the next
- * visit advances again and the visit that was taken over stays taken over.
+ * not to be argued with. The drive re-arms when the band has left the
+ * viewport entirely, so the next visit advances again and the visit that was
+ * taken over stays taken over.
  *
  * **Not on a coarse pointer, and not under reduced motion.** On touch the
  * track is the page's own swipe surface and a drive would be pulling against
@@ -206,7 +192,6 @@ const DRIVE_EASE = 0.12
  * the same four parts at the same steps, with the heading one size down.
  */
 export function PanelTrack({ items, label, header }: PanelTrackProps) {
-  const wrapRef = useRef<HTMLDivElement>(null)
   const stageRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLOListElement>(null)
   const ruleRef = useRef<HTMLSpanElement>(null)
@@ -261,10 +246,9 @@ export function PanelTrack({ items, label, header }: PanelTrackProps) {
   }, [])
 
   useEffect(() => {
-    const wrap = wrapRef.current
     const stage = stageRef.current
     const track = trackRef.current
-    if (!wrap || !stage || !track) return
+    if (!stage || !track) return
 
     const still = window.matchMedia('(prefers-reduced-motion: reduce)')
     const finger = window.matchMedia('(pointer: coarse)')
@@ -272,54 +256,24 @@ export function PanelTrack({ items, label, header }: PanelTrackProps) {
 
     let frame = 0
     let live = false
-    let pinned = false
 
     const travel = () => track.scrollWidth - track.clientWidth
 
-    const unpin = () => {
-      pinned = false
-      stage.style.removeProperty('position')
-      stage.style.removeProperty('top')
-      wrap.style.removeProperty('height')
-    }
-
-    // The pin-wrap geometry: the wrapper holds the page open for the stage's
-    // height plus the scroll the walk costs, and the stage rides sticky
-    // inside it.
-    const layout = () => {
-      if (!pinned) return
-      const max = travel()
-      // A track that already fits has nothing to walk — a wide-open window —
-      // and a pin without travel is a dead stop on the way down the page.
-      if (max <= 0) {
-        unpin()
-        return
-      }
-      const stageHeight = stage.offsetHeight
-      // Foot-anchored (see PIN_FOOT); the centred-under-the-nav placement is
-      // the floor it falls back to when the stage nearly fills the viewport.
-      const top = Math.max(
-        Math.min(PIN_CLEARANCE, (window.innerHeight - stageHeight) / 2),
-        window.innerHeight - stageHeight - PIN_FOOT,
-      )
-      stage.style.position = 'sticky'
-      stage.style.top = `${top}px`
-      wrap.style.height = `${stageHeight + max / DRIVE_RATE}px`
-    }
-
     const paint = () => {
       frame = 0
-      if (!live || !pinned) return
+      if (!live) return
       const max = travel()
       if (max <= 0) return
-      // How far the wrapper's top has risen past the stage's pin line, at
-      // DRIVE_RATE horizontal pixels per vertical one.
-      const pinTop = Number.parseFloat(stage.style.top) || 0
-      const target = Math.min(
-        max,
-        Math.max(0, (pinTop - wrap.getBoundingClientRect().top) * DRIVE_RATE),
+      const rect = stage.getBoundingClientRect()
+      // The walk's window: the stretch of transit in which the whole band is
+      // on screen. Squeezed under WALK_MIN_SPAN (a tall band in a short
+      // viewport), it opens upward from the clearance instead.
+      const start = Math.max(
+        window.innerHeight - rect.height - WALK_FOOT_GAP,
+        WALK_CLEARANCE + WALK_MIN_SPAN,
       )
-      const delta = target - track.scrollLeft
+      const progress = Math.min(1, Math.max(0, (start - rect.top) / (start - WALK_CLEARANCE)))
+      const delta = progress * max - track.scrollLeft
       // Settled — sub-pixel writes are a scroll event each and move nothing.
       if (Math.abs(delta) <= 0.5) return
       // The track CHASES the target instead of jumping to it: a wheel arrives
@@ -334,15 +288,8 @@ export function PanelTrack({ items, label, header }: PanelTrackProps) {
       if (live && !frame) frame = requestAnimationFrame(paint)
     }
 
-    const relayout = () => {
-      layout()
-      schedule()
-    }
-
     const take = () => {
       setSteerable(true)
-      pinned = true
-      layout()
       if (live) return
       live = true
       paint()
@@ -367,7 +314,6 @@ export function PanelTrack({ items, label, header }: PanelTrackProps) {
         return
       }
       yieldTrack()
-      unpin()
       setSteerable(false)
     }
 
@@ -379,17 +325,16 @@ export function PanelTrack({ items, label, header }: PanelTrackProps) {
       },
       { threshold: 0 },
     )
-    io.observe(wrap)
+    io.observe(stage)
 
     if (allowed()) take()
 
-    // The travel and the stage's height both move with the measure; without
-    // this a resize leaves the wrapper holding the wrong amount of page open.
-    const resizer = new ResizeObserver(relayout)
+    // The travel moves with the measure; a resize re-aims the chase.
+    const resizer = new ResizeObserver(schedule)
     resizer.observe(track)
 
     window.addEventListener('scroll', schedule, { passive: true })
-    window.addEventListener('resize', relayout)
+    window.addEventListener('resize', schedule)
     track.addEventListener('pointerdown', yieldTrack)
     track.addEventListener('touchstart', yieldTrack, { passive: true })
     track.addEventListener('keydown', yieldTrack)
@@ -403,7 +348,7 @@ export function PanelTrack({ items, label, header }: PanelTrackProps) {
       io.disconnect()
       resizer.disconnect()
       window.removeEventListener('scroll', schedule)
-      window.removeEventListener('resize', relayout)
+      window.removeEventListener('resize', schedule)
       track.removeEventListener('pointerdown', yieldTrack)
       track.removeEventListener('touchstart', yieldTrack)
       track.removeEventListener('keydown', yieldTrack)
@@ -411,18 +356,14 @@ export function PanelTrack({ items, label, header }: PanelTrackProps) {
       track.removeEventListener('wheel', yieldToSideways)
       still.removeEventListener('change', onPreference)
       finger.removeEventListener('change', onPreference)
-      unpin()
     }
   }, [])
 
   const columns = Math.max(items.length, 1)
 
   return (
-    // The pin-wrap: height and the stage's sticky position arrive as inline
-    // style from the drive effect, so the server HTML — and any reader the
-    // drive excuses itself for — is this exact markup with no pin at all.
-    <div ref={wrapRef} className="w-full">
-      <div ref={stageRef} className="flex w-full flex-col gap-[18px]">
+    <div ref={stageRef} className="w-full">
+      <div className="flex w-full flex-col gap-[18px]">
         {header}
 
         <div className="flex w-full flex-col">
