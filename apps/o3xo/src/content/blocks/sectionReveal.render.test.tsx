@@ -29,11 +29,12 @@ const hero = {
 }
 
 describe('O3XO’s bands', () => {
-  it('ship transparent, ready for the observer to show them', () => {
+  it('ship painted, with the entrance left to the client', () => {
     const html = page([band])
 
     expect(html).toContain('data-reveal')
-    expect(html).toContain('translate-y-6')
+    expect(html).not.toContain('translate-y-6')
+    expect(html).not.toContain('opacity-0')
   })
 
   it('leave the hero painted by the server', () => {

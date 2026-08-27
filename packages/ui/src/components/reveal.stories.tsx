@@ -16,8 +16,9 @@ type Story = StoryObj<typeof meta>
 
 /**
  * Scroll down: each block fades up 24px on the house curve as it enters the
- * viewport. Blocks already visible on mount show immediately, and
- * prefers-reduced-motion renders everything in place.
+ * viewport. Blocks already visible on mount keep their server paint and never
+ * animate, and prefers-reduced-motion renders everything in place — which is
+ * why every demo here starts its blocks below the fold.
  */
 export const ScrollDemo: Story = {
   render: () => (
@@ -49,10 +50,15 @@ export const ScrollDemo: Story = {
   ),
 }
 
-/** Staggered tiles in one viewport — the logo-wall entrance pattern. */
+/** Staggered tiles entering together — the logo-wall entrance pattern. */
 export const Staggered: Story = {
   render: () => (
     <div className="bg-bone px-6 py-16">
+      <div className="flex min-h-screen items-start">
+        <DisplayHeading level="lg" as="p">
+          Scroll to the tiles ↓
+        </DisplayHeading>
+      </div>
       <div className="max-w-content mx-auto grid grid-cols-3 gap-6">
         {[0, 1, 2, 3, 4, 5].map((i) => (
           <Reveal key={i} delay={i * 80}>
@@ -79,6 +85,11 @@ export const Staggered: Story = {
 export const StaggeredBand: Story = {
   render: () => (
     <SectionShell surface="white">
+      <div className="flex min-h-screen items-start">
+        <DisplayHeading level="lg" as="p">
+          Scroll to the band ↓
+        </DisplayHeading>
+      </div>
       <div className="flex flex-col gap-10">
         {/* h3 so the h4 CardTitles below do not skip a level — the stories
             layer axe-scans every story and heading-order is enforced. */}

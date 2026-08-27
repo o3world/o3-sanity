@@ -13,12 +13,11 @@ export interface EntranceProps extends HTMLAttributes<HTMLDivElement> {
  * starts it.
  *
  * **`Reveal` is the scroll one, this is the load one, and a band above the
- * fold needs this.** `Reveal` waits on an IntersectionObserver, so its content
- * is transparent until the bundle lands; that is the right trade below the
- * fold, where nobody is looking yet, and the wrong one in the opener, whose
- * copy is what the page is judged on at first paint. A CSS animation in the
- * server HTML needs no JavaScript at all, so there is nothing to wait for and
- * no `noscript` rule to write.
+ * fold that wants an entrance needs this.** `Reveal` leaves first-viewport
+ * content exactly as the server painted it — its animation belongs to bands
+ * the reader scrolls to. A CSS animation in the server HTML starts at first
+ * paint with no JavaScript at all, which is the only way an opener can move
+ * without first standing still.
  */
 export function Entrance({ delay = 0, className, style, children, ...rest }: EntranceProps) {
   return (

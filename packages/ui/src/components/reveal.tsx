@@ -9,51 +9,42 @@ export interface RevealProps extends HTMLAttributes<HTMLDivElement> {
   delay?: number
 }
 
+type Phase = 'static' | 'armed' | 'entered'
+
 /**
- * The prototype's `[data-reveal]` treatment: start faded 24px down, fade up
- * over 700ms on the house curve when the element scrolls into view
- * (IntersectionObserver, -40px bottom margin). Elements already in the
- * viewport on mount show immediately, and prefers-reduced-motion skips the
- * animation entirely.
+ * The prototype's `[data-reveal]` treatment, inverted so the server HTML is
+ * complete: content ships visible, and the entrance is a client enhancement
+ * applied only to elements the reader has not seen yet. After hydration, an
+ * element still below the viewport is hidden (24px down, faded) and fades up
+ * over 700ms on the house curve when it scrolls into view
+ * (IntersectionObserver, -40px bottom margin).
  *
- * The element carries `data-reveal`, which is what each app's root layout
- * targets from a `noscript` rule: with no JavaScript the effect never runs, so
- * the stylesheet has to be the thing that shows the content.
+ * Everything else keeps the server's paint, untransitioned: an element in or
+ * above the first viewport — the reader is already looking at it, and blanking
+ * it until hydration is the load flash this inversion removes; an element
+ * taller than the viewport — while it fades, the page's ground reads through
+ * its half-opaque paint, the rise leaves that ground as a seam above it, and
+ * the in-flight translate makes it a containing block under any sticky
+ * machinery it holds; and everything under prefers-reduced-motion. With no
+ * JavaScript the effect never runs and the page is simply the server's, so no
+ * `noscript` rule is needed.
  */
 export function Reveal({ delay = 0, className, style, children, ...rest }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null)
-  const [shown, setShown] = useState(false)
-  const [instant, setInstant] = useState(false)
+  const [phase, setPhase] = useState<Phase>('static')
 
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setShown(true)
-      return
-    }
-    // An element taller than the viewport is never seen entering as a whole,
-    // and animating one costs more than it shows: while it fades, the page's
-    // ground reads through its half-opaque paint (a dark flash under a white
-    // band on the ink page), the rise leaves that ground as a seam above it,
-    // and the in-flight translate makes it a containing block under any
-    // sticky machinery it holds. Shown at once, untransitioned.
-    if (el.offsetHeight > window.innerHeight) {
-      setInstant(true)
-      setShown(true)
-      return
-    }
-    // Prototype behavior: anything already at/above the viewport shows
-    // immediately instead of waiting to re-enter.
-    if (el.getBoundingClientRect().top < window.innerHeight) {
-      setShown(true)
-      return
-    }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (el.offsetHeight > window.innerHeight) return
+    if (el.getBoundingClientRect().top < window.innerHeight) return
+    setPhase('armed')
     const io = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            setShown(true)
+            setPhase('entered')
             io.disconnect()
           }
         }
@@ -69,18 +60,18 @@ export function Reveal({ delay = 0, className, style, children, ...rest }: Revea
       ref={ref}
       data-reveal=""
       className={cn(
+        // Arming hides with no transition: it happens off-screen, and a fade
+        // there would still be mid-flight if the reader arrived early.
+        phase === 'armed' && 'translate-y-6 opacity-0 transition-none',
         // `translate`, not `transform`: Tailwind v4 compiles `translate-y-*`
         // to the independent `translate` property, which a transition naming
-        // `transform` does not reach (see `../motion.ts`).
-        instant
-          ? 'transition-none'
-          : 'duration-(--duration-reveal) transition-[opacity,translate] ease-out',
-        'motion-reduce:transition-none',
-        // `translate-none` rather than `translate-y-0`: a settled reveal must
-        // leave no translation behind, because any value but `none` makes the
-        // element a containing block for the fixed and sticky descendants a
-        // band may hold.
-        shown ? 'translate-none opacity-100' : 'translate-y-6 opacity-0',
+        // `transform` does not reach (see `../motion.ts`). `translate-none`
+        // rather than `translate-y-0`: a settled reveal must leave no
+        // translation behind, because any value but `none` makes the element
+        // a containing block for the fixed and sticky descendants a band may
+        // hold.
+        phase === 'entered' &&
+          'duration-(--duration-reveal) translate-none opacity-100 transition-[opacity,translate] ease-out motion-reduce:transition-none',
         className,
       )}
       style={delay ? { transitionDelay: `${delay}ms`, ...style } : style}

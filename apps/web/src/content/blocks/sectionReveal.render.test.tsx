@@ -10,12 +10,13 @@ import { BlockRenderer } from './BlockRenderer'
  *
  * Every band fades up as it enters the viewport, and the wiring for it is one
  * wrapper the dispatch seam is handed rather than a line in sixteen renderers.
- * What the server can be asked about is the state it ships: which bands start
- * transparent, which do not, and whether the wrapper is still the element the
- * jump link and the band attribution land on.
+ * What the server can be asked about is the state it ships: every band painted
+ * — `Reveal` hides one only after hydration, and only below the viewport, so
+ * the first screen never blanks or shifts while the bundle loads — and the
+ * wrapper still the element the jump link and the band attribution land on.
  *
  * The observer itself is `Reveal`'s and is exercised in its story — a server
- * render never runs the effect, which is exactly why the pre-shown state is
+ * render never runs the effect, which is exactly why the shipped state is
  * what this file pins.
  */
 const page = (blocks: unknown[]) =>
@@ -41,18 +42,12 @@ const tagWithId = (html: string, id: string) =>
   html.match(new RegExp(`<div[^>]*\\bid="${id}"[^>]*>`))?.[0] ?? ''
 
 describe('a section band', () => {
-  it('ships transparent and offset, ready for the observer to show it', () => {
+  it('ships painted, with the entrance left to the client', () => {
     const html = page([band('a')])
 
     expect(html).toContain('data-reveal')
-    expect(html).toContain('translate-y-6')
-    expect(html).toContain('opacity-0')
-  })
-
-  it('transitions the property the utility writes, not `transform`', () => {
-    // Tailwind v4 compiles `translate-y-*` to `translate`; a transition naming
-    // `transform` reaches nothing and the band would jump rather than rise.
-    expect(page([band('a')])).toContain('transition-[opacity,translate]')
+    expect(html).not.toContain('translate-y-6')
+    expect(html).not.toContain('opacity-0')
   })
 
   it('keeps the jump target and the entrance on one element', () => {
