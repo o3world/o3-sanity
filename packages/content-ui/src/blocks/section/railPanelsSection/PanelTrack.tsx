@@ -45,26 +45,38 @@ const ENTRANCE_DELAY = 120
 const ENTRANCE_STAGGER = 100
 
 /**
- * The most the pinned stage stands from the viewport top — the nav clearance
- * every sticky element on the page uses (`top-40`). A stage taller than the
- * viewport leaves under it centres instead, so its foot stays reachable.
+ * The most the pinned stage stands from the viewport top when foot-anchoring
+ * cannot apply (a stage nearly as tall as the viewport) — the nav clearance
+ * every sticky element on the page uses (`top-40`).
  */
 const PIN_CLEARANCE = 160
 
 /**
- * Horizontal pixels the track walks per vertical pixel of page scroll. Above
- * one, because the pin's cost IS its length: the wrapper holds the page open
- * for `travel / DRIVE_RATE`, and at 1:1 that was most of a viewport in which
- * scrolling produced no vertical motion at all — the "screen locks on it"
- * feel, with the next band held out of sight the whole time.
+ * The margin under the pinned stage's foot. The wrapper's unconsumed height
+ * is a run of blank section paint below the stage, so the stage anchors by
+ * its foot near the viewport bottom to keep that run below the fold — a
+ * top-pinned stage showed it as a couple hundred pixels of dead white until
+ * the walk finished.
  */
-const DRIVE_RATE = 1.6
+const PIN_FOOT = 48
+
+/**
+ * Horizontal pixels the track walks per vertical pixel of page scroll. Above
+ * one, because the pin's cost is its length — the wrapper holds the page
+ * open for `travel / DRIVE_RATE` — but only just: pushed to 1.6 the whole
+ * walk fit in half a viewport of scroll and read as a toggle between its two
+ * end framings, with no state in which the middle column was the current
+ * one. The hold this leaves is what the foot anchor (`PIN_FOOT`) makes
+ * affordable, by keeping the next band immediately behind it.
+ */
+const DRIVE_RATE = 1.2
 
 /**
  * How much of the remaining distance the track closes per frame. The wheel
- * hands the drive discrete steps; this is what turns them into a glide.
+ * hands the drive discrete steps; this is what turns them into a glide, and
+ * softer is calmer — each step spreads across more frames.
  */
-const DRIVE_EASE = 0.16
+const DRIVE_EASE = 0.12
 
 /**
  * `layout: track` — Home's "How we work" (`2846:5480`, `2975:8355` at 402).
@@ -130,6 +142,11 @@ const DRIVE_EASE = 0.16
  * as the band leaves, which cuts the final column off at the top on every
  * page where the band sits low. The rule above reads `scrollLeft`, so it
  * keeps reporting the truth without knowing who moved the track.
+ *
+ * The stage anchors by its foot near the viewport bottom (`PIN_FOOT`): the
+ * wrapper's unconsumed height is blank section paint below the stage, and a
+ * foot anchor keeps it below the fold, so the next band enters the moment
+ * the walk ends instead of after a run of dead white.
  *
  * The geometry is inline style set from a resize-observed layout pass, and
  * the server HTML carries none of it: no JavaScript means no extra height,
@@ -279,7 +296,12 @@ export function PanelTrack({ items, label, header }: PanelTrackProps) {
         return
       }
       const stageHeight = stage.offsetHeight
-      const top = Math.max(0, Math.min(PIN_CLEARANCE, (window.innerHeight - stageHeight) / 2))
+      // Foot-anchored (see PIN_FOOT); the centred-under-the-nav placement is
+      // the floor it falls back to when the stage nearly fills the viewport.
+      const top = Math.max(
+        Math.min(PIN_CLEARANCE, (window.innerHeight - stageHeight) / 2),
+        window.innerHeight - stageHeight - PIN_FOOT,
+      )
       stage.style.position = 'sticky'
       stage.style.top = `${top}px`
       wrap.style.height = `${stageHeight + max / DRIVE_RATE}px`
