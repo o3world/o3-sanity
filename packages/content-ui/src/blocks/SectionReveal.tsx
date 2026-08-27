@@ -7,7 +7,7 @@ import type { DispatchedBlockWrapperProps } from '@o3/content-runtime/blocks'
  * seam's own `<div>` stood, so the band attribution and the jump-link `id`
  * land on the same element they always did.
  *
- * **The hero is the one exclusion.** It plays its own entrance (`MaskedLines`
+ * **The hero is the one exclusion.** It plays its own entrance (`StaggeredLines`
  * over `Entrance`, both CSS animations) and its h1 is the LCP element, so its
  * server HTML has to be painted rather than waiting on hydration to stop being
  * transparent.

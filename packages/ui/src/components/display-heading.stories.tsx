@@ -40,8 +40,8 @@ export const Levels: Story = {
   ),
 }
 
-/** The hero headline's masked-line reveal — remount the story to replay. */
-export const MaskedReveal: Story = {
+/** The hero headline's line stagger — remount the story to replay. */
+export const StaggeredReveal: Story = {
   globals: { backgrounds: { value: 'ink' } },
   parameters: { controls: { disable: true } },
   render: () => (

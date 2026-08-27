@@ -2,7 +2,7 @@ import type { HTMLAttributes, ReactNode } from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn } from '../lib/utils'
-import { MaskedLines } from './masked-lines'
+import { StaggeredLines } from './staggered-lines'
 
 const displayHeadingVariants = cva(
   // Each text-display-* / text-hero token bundles size, 1.05–1.3 line-height,
@@ -33,12 +33,12 @@ export interface DisplayHeadingProps
   /** Semantic element — the visual size is `level`'s job. */
   as?: HeadingTag
   /**
-   * Masked-line reveal variant: pass one node per line and each slides up
-   * from behind an overflow mask on mount (the hero headline treatment).
-   * Mutually exclusive with `children`.
+   * Staggered-line variant: pass one node per line and each fades up in turn
+   * as the heading paints (the hero headline treatment). Mutually exclusive
+   * with `children`.
    */
   lines?: readonly ReactNode[]
-  /** ms before the first masked line reveals (only with `lines`). */
+  /** ms before the first line arrives (only with `lines`). */
   revealDelay?: number
 }
 
@@ -57,7 +57,7 @@ export function DisplayHeading({
 }: DisplayHeadingProps) {
   return (
     <Tag className={cn(displayHeadingVariants({ level }), className)} {...rest}>
-      {lines ? <MaskedLines lines={lines} baseDelay={revealDelay} /> : children}
+      {lines ? <StaggeredLines lines={lines} baseDelay={revealDelay} /> : children}
     </Tag>
   )
 }

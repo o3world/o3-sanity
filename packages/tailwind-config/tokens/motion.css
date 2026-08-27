@@ -1,9 +1,9 @@
 /*
  * Motion — easing curves, durations, and the one keyframed loop.
  *
- * The prototype has exactly two load-bearing curves: a soft ease-out used for
- * nearly every hover and scroll-reveal, and a sharper "mask" curve for the
- * hero line-mask reveal. Durations cluster at ~.22s (hovers) and .7-.85s
+ * The house curve is a soft ease-out, used for nearly every hover and
+ * scroll-reveal; a sampled spring carries the entrances that have to leave the
+ * start line at rest. Durations cluster at ~.22s (hovers) and .7-.85s
  * (reveals), with two outliers the chrome and the logo wall own: the nav's
  * .35s ink flip and the client row's 26s lap.
  *
@@ -19,9 +19,6 @@
    * (0,0,0.2,1) — the prototype itself reads `var(--ease-out, …)` with this
    * value as the fallback. Class-accessible via ease-out. */
   --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
-  /* mask — cubic-bezier(0.16,0.9,0.2,1): the hero headline line-mask reveal
-   * (`.o3-line` / @keyframes o3mask). Class-accessible via ease-mask. */
-  --ease-mask: cubic-bezier(0.16, 0.9, 0.2, 1);
   /* soft — cubic-bezier(0.33,0,0.15,1): a symmetric ease-in-out, the third
    * curve offered alongside `out` and `mask` when a transition should settle
    * rather than arrive. Class-accessible via ease-soft.
@@ -35,18 +32,19 @@
    * on, so a curve is settled by the story that uses it, not by a frame. */
   --ease-soft: cubic-bezier(0.33, 0, 0.15, 1);
   /* spring — the hero headline's editorial stagger. A cubic-bezier cannot
-   * draw this shape: the three curves above all leave the start line at
-   * speed, and a spring leaves it at rest, accelerates, then settles on a long
-   * tail. That difference is the whole character of a line rising from behind
-   * its mask, so it is sampled rather than approximated.
+   * draw this shape: the two curves above both leave the start line at speed,
+   * and a spring leaves it at rest, accelerates, then settles on a long tail.
+   * That difference is the whole character of a line easing into place, so it
+   * is sampled rather than approximated.
    *
    * Thirteen evenly spaced samples of a mass-spring at stiffness 65, damping
    * 15, mass 1 (ζ ≈ 0.93 — under-damped, but not enough to overshoot),
    * normalised over its first 0.7s. `linear()` spaces the stops itself.
    *
    * NO FIGMA ANCHOR, AND THERE CANNOT BE ONE, for the reason `soft` carries:
-   * Figma draws stills. It is settled in `masked-lines.stories.tsx`, where it
-   * runs beside `mask` on the same lines. Class-accessible via ease-spring. */
+   * Figma draws stills. It is settled in `staggered-lines.stories.tsx`, where
+   * it runs beside the house `out` on the same lines. Class-accessible via
+   * ease-spring. */
   --ease-spring: linear(
     0,
     0.084,
@@ -78,9 +76,6 @@
    * them is the point: fill, hairline and copy have to land together as the
    * bar crosses the seam between two bands, or the flip reads as a stutter. */
   --duration-ink: 350ms;
-  /* .95s — the hero headline's line-mask reveal (`MaskedLines`), the one
-   * transition that rides `--ease-mask`. */
-  --duration-mask: 950ms;
   /* .7s — the standard data-reveal opacity/transform transition. */
   --duration-reveal: 700ms;
   /* .85s — the slower reveals: hero sub/CTA fade-up, the intro overlay's
@@ -185,7 +180,7 @@
 }
 
 /*
- * The opener's two entrances — `MaskedLines` and `Entrance`.
+ * The opener's two entrances — `StaggeredLines` and `Entrance`.
  *
  * KEYFRAMES, NOT TRANSITIONS, AND THE REASON IS FIRST PAINT. A transition
  * needs a state flip, the flip needs an effect, and the effect needs
@@ -197,21 +192,46 @@
  * `both` is what makes the delay safe — the element holds the `from` state
  * through its stagger instead of flashing in place and jumping back.
  *
- * `line-lift` rides `translate` alone: the mask around it is `overflow-hidden`,
- * so a line out of its mask is a line not yet drawn. `fade-up` carries opacity
- * as well, matching what `Reveal` does on the scroll side.
+ * `line-rise` is a headline line coming into focus: it fades, travels 0.4em —
+ * a fraction of its own size, so the move scales with the type step rather
+ * than with the viewport — and melts a 4px blur off as it goes. There is no
+ * clip anywhere in it; the line is drawn in full the whole way up.
+ *
+ * **The blur is a second animation, and its fill mode is what makes it one.**
+ * Any `filter` value other than `none` — `blur(0)` included — makes the
+ * element a containing block and holds it on its own compositing layer, and a
+ * forward fill would keep that value for the life of the page. `backwards`
+ * fills the delay and nothing after it, so the moment the line lands the
+ * property drops back to the element's own `filter: none` and the layer goes
+ * with it. The two share one delay because the shorthand's single
+ * `animation-delay` applies to both.
+ *
+ * `fade-up` carries opacity and a flat 24px rise, matching what `Reveal` does
+ * on the scroll side.
  */
 @theme {
-  --animate-line-lift: line-lift var(--duration-mask) var(--ease-mask) both;
-  --animate-line-lift-spring: line-lift var(--duration-mask) var(--ease-spring) both;
+  --animate-line-rise:
+    line-rise var(--duration-reveal) var(--ease-spring) both,
+    line-focus var(--duration-reveal) var(--ease-spring) backwards;
   --animate-fade-up: fade-up var(--duration-reveal) var(--ease-out) both;
 
-  @keyframes line-lift {
+  @keyframes line-rise {
     from {
-      translate: 0 110%;
+      opacity: 0;
+      translate: 0 0.4em;
     }
     to {
+      opacity: 1;
       translate: 0 0;
+    }
+  }
+
+  @keyframes line-focus {
+    from {
+      filter: blur(4px);
+    }
+    to {
+      filter: blur(0);
     }
   }
 

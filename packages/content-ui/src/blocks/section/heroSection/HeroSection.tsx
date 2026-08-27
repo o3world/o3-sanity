@@ -6,7 +6,7 @@ import {
   CollectionHero,
   Entrance,
   Eyebrow,
-  MaskedLines,
+  StaggeredLines,
   OrbitalSphere,
   SurfaceProvider,
   surfaceAttrs,
@@ -267,7 +267,7 @@ export function HeroSection({
    * anchor and cannot have one: the frames draw the band, not its entrance.
    *
    * Every delay below is measured from the band's first paint, not from
-   * hydration: `MaskedLines` and `Entrance` are CSS animations in the server
+   * hydration: `StaggeredLines` and `Entrance` are CSS animations in the server
    * HTML for exactly that reason. A sequence this long has to start at paint,
    * or the whole of it lands after the bundle does and the opener sits empty.
    */
@@ -325,9 +325,8 @@ export function HeroSection({
            * nothing added (`2089:4313` → `2089:4318`).
            */}
           <h1 className="text-hero font-display space-y-4 text-balance lg:space-y-0">
-            <MaskedLines
+            <StaggeredLines
               stagger={lineStagger}
-              easing="spring"
               lines={lines.map((line, index) => (
                 // The frame steps the value between lines rather than fading the
                 // block: within a line it is flat, and the step is hard. Both

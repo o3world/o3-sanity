@@ -72,11 +72,11 @@ export {
 } from './components/ui/card'
 export type { CardProps } from './components/ui/card'
 
-// DisplayHeading (+ the masked-line reveal it composes)
+// DisplayHeading (+ the line stagger it composes)
 export { DisplayHeading, displayHeadingVariants } from './components/display-heading'
 export type { DisplayHeadingProps } from './components/display-heading'
-export { MaskedLines } from './components/masked-lines'
-export type { MaskedLinesProps } from './components/masked-lines'
+export { StaggeredLines } from './components/staggered-lines'
+export type { StaggeredLinesProps } from './components/staggered-lines'
 
 // Entrance — the load-triggered fade-up (Reveal is the scroll-triggered one)
 export { Entrance } from './components/entrance'
