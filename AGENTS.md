@@ -245,12 +245,15 @@ pnpm --filter @o3/migration load     # data/{converted,translated,seed}/ → San
 pnpm --filter @o3/migration verify   # is the dataset what data/ says it is?
 ```
 
-The dataset is called `production`, but the site is **very early alpha with no
-real users**. ADR 0003 already says the dataset is disposable and the committed
-JSON under `tools/migration/data/` is the source of truth; `load` recreates
-every unlocked pipeline-owned document from it, and a `migration.locked`
-document is never touched in any mode. Treat this as safe until someone says
-the site has traffic.
+**That is true of `development` and no longer of `production`** (2026-08-27):
+editors author in `production` now, so there ADR 0003 inverts — what an editor
+wrote outranks the committed JSON, and `load` refuses the dataset without
+`--allow-production`. Before passing the flag, `pnpm dataset:drift` names the
+documents an editor changed (lock them with `-- --lock`, or port the edits into
+`data/`) and `pnpm dataset:backup` writes a tarball. `pnpm dataset:sync` pulls
+production's content into `development` without deleting anything. A
+`migration.locked` document is never touched in any mode, whichever dataset.
+See `docs/agents/ops.md` → "Production holds user content now".
 
 **Run it after touching anything under `data/`, then look at the result in a
 browser.** Skipping it once (#42's build-out) left a whole homepage

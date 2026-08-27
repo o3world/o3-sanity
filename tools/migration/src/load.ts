@@ -11,6 +11,10 @@
  *   pnpm --filter @o3/migration load
  *   pnpm --filter @o3/migration load -- --brand o3xo
  *
+ * A load into `production` is refused unless `--allow-production` is passed
+ * (`lib/prodGate.ts`): editors author in that dataset now, and a load reverts
+ * their unlocked edits. Run `pnpm dataset:drift` first to see what it would cost.
+ *
  * Which corpus and which dataset both follow that one flag: `lib/paths.ts`
  * resolves the tree from it and `sanity.cli.ts` resolves the project from it,
  * so a run cannot read one brand's JSON into the other brand's project.
@@ -24,6 +28,7 @@ import { getCliClient } from 'sanity/cli'
 import { ROUTABLE_TYPES } from '@o3/sanity/constants'
 
 import { brandArg } from './lib/brandArg'
+import { productionGate } from './lib/prodGate'
 import { plan } from './core/plan'
 import { readCorpus } from './core/read'
 import {
@@ -265,6 +270,12 @@ async function main() {
     `brand ${brandArg()} · corpus ${basename(dirname(CONVERTED_DIR))}/ · ` +
       `target ${client.config().projectId}/${client.config().dataset}\n`,
   )
+  const refusal = productionGate(client.config().dataset, process.argv)
+  if (refusal) {
+    console.error(refusal)
+    process.exitCode = 1
+    return
+  }
   if (all.length === 0) {
     console.log('nothing to load')
     return

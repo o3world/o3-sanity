@@ -1,0 +1,49 @@
+name: Nightly dataset backup
+
+# Editors author in the `production` dataset and this Sanity plan has no
+# backups — restore-from-backup is an Enterprise feature that must be enabled
+# before the loss (docs/agents/ops.md). So every night this exports the whole
+# dataset (documents + assets) and keeps the tarball as a workflow artifact
+# for 90 days. `pnpm dataset:backup` is the same export run from a laptop;
+# this one exists so protection does not depend on anyone remembering.
+#
+# Restore, into whichever dataset needs it:
+#   cd tools/migration && pnpm exec sanity dataset import <tarball> --dataset <name> --replace
+#
+# Unlike nightly-schema-drift there is no issue-filing arm: a failed export is
+# this workflow unable to do its own job, so the red run IS the notification.
+
+on:
+  schedule:
+    - cron: '30 4 * * *' # 04:30 UTC daily, ahead of the schema-drift check
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  backup:
+    name: export production
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+
+      - name: Export the production dataset
+        env:
+          # Export reads everything, including drafts, so it needs a token
+          # even though the dataset is public. The deploy token has the wider
+          # grant; if this 401s, mint a token with read access and update it.
+          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_DEPLOY_TOKEN }}
+        run: |
+          pnpm --filter @o3/migration exec sanity dataset export production production.tar.gz --overwrite
+          ls -lh production.tar.gz
+
+      - name: Keep the tarball for 90 days
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-${{ github.run_id }}
+          path: production.tar.gz
+          retention-days: 90
+          if-no-files-found: error

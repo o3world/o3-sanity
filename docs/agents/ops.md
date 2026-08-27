@@ -44,6 +44,39 @@ Two more facts worth holding:
 - **`production` is already public** and always has been. "The dataset is
   private" has never been true of the live one.
 
+## Production holds user content now (2026-08-27)
+
+Editors author in `production`. The build-out rule — committed JSON is the
+source of truth and the dataset is disposable (ADR 0003) — now stops at
+`development`; in `production`, what an editor wrote outranks what the corpus
+says. Four mechanisms hold that line:
+
+```bash
+pnpm dataset:backup     # export production → ~/.o3-sanity/backups/production-<stamp>.tar.gz
+pnpm dataset:sync       # that backup, then import into development with --replace
+pnpm dataset:drift      # which pipeline-owned documents an editor changed (exit 1 on drift)
+```
+
+- **`load` refuses `production`.** Without `--allow-production` it prints a
+  refusal and exits — a load deletes and recreates every unlocked
+  pipeline-owned document and clears any draft shadowing one, which now means
+  destroying editors' work. Run `dataset:drift` and `dataset:backup` before
+  passing the flag, and expect the drifted documents to be locked, not
+  overwritten.
+- **`dataset:sync` never deletes.** `--replace` overwrites a document that
+  exists in both datasets with production's copy and leaves
+  development-only documents (briefs, experiments) alone. It creates and drops
+  no dataset, so the never-create-never-delete rule above is untouched.
+- **A nightly backup exists** (`nightly-dataset-backup.yml`): full export of
+  `production`, kept as a workflow artifact for 90 days. It is the only backup
+  this plan has — restore is `sanity dataset import <tarball> <dataset>
+--replace` from `tools/migration`.
+- **A drifted document gets locked, not reloaded.**
+  `pnpm --filter @o3/migration drift -- --lock` stamps `migration.locked` on
+  every drifted document, and `load` skips a locked document in any mode
+  (ADR 0003). To hand one back to the pipeline: port the edit into
+  `tools/migration/data/`, then unset the lock.
+
 ## Rebuilding a dataset from scratch
 
 The pipeline owns its documents and the committed JSON under
@@ -81,6 +114,10 @@ dataset looks exactly like one that worked.
 pnpm frontier                 # READY / BLOCKED / CLAIMED across every open map
 pnpm frontier 63              # one map
 pnpm wt new <n>               # claim a ticket, branch it, worktree it, install
+
+pnpm dataset:backup           # export production to a local tarball
+pnpm dataset:sync             # production → development (backup first, no deletes)
+pnpm dataset:drift            # what an editor changed that the next load would revert
 
 pnpm dev:web                  # the o3 site
 pnpm dev:o3xo                 # the o3xo site (its own port pool, its own project)
