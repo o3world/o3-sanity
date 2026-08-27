@@ -52,6 +52,21 @@ const ENTRANCE_STAGGER = 100
 const PIN_CLEARANCE = 160
 
 /**
+ * Horizontal pixels the track walks per vertical pixel of page scroll. Above
+ * one, because the pin's cost IS its length: the wrapper holds the page open
+ * for `travel / DRIVE_RATE`, and at 1:1 that was most of a viewport in which
+ * scrolling produced no vertical motion at all — the "screen locks on it"
+ * feel, with the next band held out of sight the whole time.
+ */
+const DRIVE_RATE = 1.6
+
+/**
+ * How much of the remaining distance the track closes per frame. The wheel
+ * hands the drive discrete steps; this is what turns them into a glide.
+ */
+const DRIVE_EASE = 0.16
+
+/**
  * `layout: track` — Home's "How we work" (`2846:5480`, `2975:8355` at 402).
  *
  * The colours below are the frame's; the code names the token role nearest
@@ -105,15 +120,16 @@ const PIN_CLEARANCE = 160
  * ## The advance
  *
  * The prototype's pin-wrap (`data-pinwrap` on the retired homepage): the
- * outer wrapper is given the stage's height plus the track's travel, the
- * stage — header, rule and columns together — goes `sticky` inside it, and
- * page scroll through the wrapper writes straight to `scrollLeft`, one
- * horizontal pixel per vertical one. The band therefore holds still and
- * fully visible while the walk runs, and the last column arrives while the
- * reader can still see it — a viewport-transit mapping instead finishes the
- * walk only as the band leaves, which cuts the final column off at the top
- * on every page where the band sits low. The rule above reads `scrollLeft`,
- * so it keeps reporting the truth without knowing who moved the track.
+ * outer wrapper is given the stage's height plus the scroll the walk costs,
+ * the stage — header, rule and columns together — goes `sticky` inside it,
+ * and page scroll through the wrapper drives `scrollLeft`, `DRIVE_RATE`
+ * horizontal pixels per vertical one with the track easing toward its
+ * target (`DRIVE_EASE`). The band therefore holds still and fully visible
+ * while the walk runs, and the last column arrives while the reader can
+ * still see it — a viewport-transit mapping instead finishes the walk only
+ * as the band leaves, which cuts the final column off at the top on every
+ * page where the band sits low. The rule above reads `scrollLeft`, so it
+ * keeps reporting the truth without knowing who moved the track.
  *
  * The geometry is inline style set from a resize-observed layout pass, and
  * the server HTML carries none of it: no JavaScript means no extra height,
@@ -251,7 +267,8 @@ export function PanelTrack({ items, label, header }: PanelTrackProps) {
     }
 
     // The pin-wrap geometry: the wrapper holds the page open for the stage's
-    // height plus the track's travel, and the stage rides sticky inside it.
+    // height plus the scroll the walk costs, and the stage rides sticky
+    // inside it.
     const layout = () => {
       if (!pinned) return
       const max = travel()
@@ -265,7 +282,7 @@ export function PanelTrack({ items, label, header }: PanelTrackProps) {
       const top = Math.max(0, Math.min(PIN_CLEARANCE, (window.innerHeight - stageHeight) / 2))
       stage.style.position = 'sticky'
       stage.style.top = `${top}px`
-      wrap.style.height = `${stageHeight + max}px`
+      wrap.style.height = `${stageHeight + max / DRIVE_RATE}px`
     }
 
     const paint = () => {
@@ -273,13 +290,22 @@ export function PanelTrack({ items, label, header }: PanelTrackProps) {
       if (!live || !pinned) return
       const max = travel()
       if (max <= 0) return
-      // One horizontal pixel per vertical one: how far the wrapper's top has
-      // risen past the stage's pin line is exactly how far the track has
-      // walked.
+      // How far the wrapper's top has risen past the stage's pin line, at
+      // DRIVE_RATE horizontal pixels per vertical one.
       const pinTop = Number.parseFloat(stage.style.top) || 0
-      const target = Math.min(max, Math.max(0, pinTop - wrap.getBoundingClientRect().top))
-      // Sub-pixel writes are a scroll event each and move nothing.
-      if (Math.abs(track.scrollLeft - target) > 0.5) track.scrollLeft = target
+      const target = Math.min(
+        max,
+        Math.max(0, (pinTop - wrap.getBoundingClientRect().top) * DRIVE_RATE),
+      )
+      const delta = target - track.scrollLeft
+      // Settled — sub-pixel writes are a scroll event each and move nothing.
+      if (Math.abs(delta) <= 0.5) return
+      // The track CHASES the target instead of jumping to it: a wheel arrives
+      // as discrete steps, and written straight through they read as jerks.
+      // The exponential chase turns each step into a glide, and the loop
+      // keeps itself alive until the track has caught up.
+      track.scrollLeft += delta * DRIVE_EASE
+      frame = requestAnimationFrame(paint)
     }
 
     const schedule = () => {
