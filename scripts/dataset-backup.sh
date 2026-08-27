@@ -21,6 +21,10 @@ OUT="$BACKUP_DIR/production-$(date +%Y%m%d-%H%M%S).tar.gz"
 cd "$ROOT/tools/migration"
 pnpm exec sanity dataset export production "$OUT" --overwrite
 
+# Only the last three days are kept — the nightly workflow covers history,
+# and these run 300+ MB each.
+find "$BACKUP_DIR" -name 'production-*.tar.gz' -mtime +3 -delete
+
 echo ""
 echo "backup written: $OUT"
 ls -lh "$BACKUP_DIR" | tail -5

@@ -4,7 +4,7 @@ name: Nightly dataset backup
 # backups — restore-from-backup is an Enterprise feature that must be enabled
 # before the loss (docs/agents/ops.md). So every night this exports the whole
 # dataset (documents + assets) and keeps the tarball as a workflow artifact
-# for 90 days. `pnpm dataset:backup` is the same export run from a laptop;
+# for three days. `pnpm dataset:backup` is the same export run from a laptop;
 # this one exists so protection does not depend on anyone remembering.
 #
 # Restore, into whichever dataset needs it:
@@ -38,13 +38,14 @@ jobs:
           # the deploy token lacks the datasets/read grant.
           SANITY_AUTH_TOKEN: ${{ secrets.SANITY_BACKUP_TOKEN }}
         run: |
+          # The filtered exec runs in tools/migration, so that is where the file lands.
           pnpm --filter @o3/migration exec sanity dataset export production production.tar.gz --overwrite
-          ls -lh production.tar.gz
+          ls -lh tools/migration/production.tar.gz
 
-      - name: Keep the tarball for 90 days
+      - name: Keep the tarball for three days
         uses: actions/upload-artifact@v4
         with:
           name: production-${{ github.run_id }}
-          path: production.tar.gz
-          retention-days: 90
+          path: tools/migration/production.tar.gz
+          retention-days: 3
           if-no-files-found: error

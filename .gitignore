@@ -63,3 +63,6 @@ tools/authoring-skill/evals/results/
 .design-sync/push-*.txt
 .ds-sync/
 ds-bundle/
+
+# Sanity request-log exports and other unshared local data.
+/private/

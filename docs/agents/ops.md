@@ -52,7 +52,7 @@ source of truth and the dataset is disposable (ADR 0003) — now stops at
 says. Four mechanisms hold that line:
 
 ```bash
-pnpm dataset:backup     # export production → ~/.o3-sanity/backups/production-<stamp>.tar.gz
+pnpm dataset:backup     # export production → ~/.o3-sanity/backups/ (last three days kept)
 pnpm dataset:sync       # that backup, then import into development with --replace
 pnpm dataset:drift      # which pipeline-owned documents an editor changed (exit 1 on drift)
 ```
@@ -68,7 +68,7 @@ pnpm dataset:drift      # which pipeline-owned documents an editor changed (exit
   development-only documents (briefs, experiments) alone. It creates and drops
   no dataset, so the never-create-never-delete rule above is untouched.
 - **A nightly backup exists** (`nightly-dataset-backup.yml`): full export of
-  `production`, kept as a workflow artifact for 90 days. It is the only backup
+  `production`, kept as a workflow artifact for three days. It is the only backup
   this plan has — restore is `sanity dataset import <tarball> <dataset>
 --replace` from `tools/migration`.
 - **A drifted document gets locked, not reloaded.**
