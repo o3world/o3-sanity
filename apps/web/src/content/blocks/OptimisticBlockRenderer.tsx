@@ -6,6 +6,7 @@ import type { SanityBlock } from '@o3/sanity/types'
 
 import { dataAttr, rootFieldLoc } from '@o3/content-runtime/data-attribute'
 import { renderDispatchedBlocks } from '@o3/content-runtime/blocks'
+import { SectionReveal } from '@o3/content-ui'
 
 import { BLOCK_COMPONENTS } from './clientComponents'
 import { reconcileOptimisticOrder } from './optimisticOrder'
@@ -94,6 +95,7 @@ export function OptimisticBlockRenderer({
         documentId,
         documentType,
         fieldPath,
+        BlockWrapper: SectionReveal,
       })}
     </div>
   )

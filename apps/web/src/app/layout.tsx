@@ -39,6 +39,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
      * frame it needs and the anchors keep their glide.
      */
     <html lang="en" data-scroll-behavior="smooth" className={figtree.variable}>
+      <head>
+        {/*
+         * A scroll-entrance is transparent until its observer fires, and the
+         * observer is JavaScript. Without this the page is a column of blank
+         * bands to anyone who has it off, so the stylesheet shows them and
+         * nothing animates.
+         */}
+        <noscript>
+          <style>{`[data-reveal]{opacity:1!important;translate:none!important}`}</style>
+        </noscript>
+      </head>
       <body className="text-fg bg-white font-sans antialiased">{children}</body>
     </html>
   )

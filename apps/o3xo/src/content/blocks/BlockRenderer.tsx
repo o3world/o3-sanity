@@ -1,6 +1,7 @@
 import type { SanityBlock } from '@o3/sanity/types'
 
 import { renderDispatchedBlocks } from '@o3/content-runtime/blocks'
+import { SectionReveal } from '@o3/content-ui'
 import { BLOCK_REGISTRY, type DispatchedBlockType } from './registry'
 
 interface BlockRendererProps {
@@ -43,6 +44,7 @@ export function BlockRenderer({ blocks, documentId, documentType, fieldPath }: B
         documentId,
         documentType,
         fieldPath,
+        BlockWrapper: SectionReveal,
       })}
     </>
   )

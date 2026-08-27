@@ -15,6 +15,10 @@ export interface RevealProps extends HTMLAttributes<HTMLDivElement> {
  * (IntersectionObserver, -40px bottom margin). Elements already in the
  * viewport on mount show immediately, and prefers-reduced-motion skips the
  * animation entirely.
+ *
+ * The element carries `data-reveal`, which is what each app's root layout
+ * targets from a `noscript` rule: with no JavaScript the effect never runs, so
+ * the stylesheet has to be the thing that shows the content.
  */
 export function Reveal({ delay = 0, className, style, children, ...rest }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null)
@@ -51,10 +55,18 @@ export function Reveal({ delay = 0, className, style, children, ...rest }: Revea
   return (
     <div
       ref={ref}
+      data-reveal=""
       className={cn(
-        'duration-(--duration-reveal) transition-[opacity,transform] ease-out',
+        // `translate`, not `transform`: Tailwind v4 compiles `translate-y-*`
+        // to the independent `translate` property, which a transition naming
+        // `transform` does not reach (see `../motion.ts`).
+        'duration-(--duration-reveal) transition-[opacity,translate] ease-out',
         'motion-reduce:transition-none',
-        shown ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0',
+        // `translate-none` rather than `translate-y-0`: a settled reveal must
+        // leave no translation behind, because any value but `none` makes the
+        // element a containing block for the fixed and sticky descendants a
+        // band may hold.
+        shown ? 'translate-none opacity-100' : 'translate-y-6 opacity-0',
         className,
       )}
       style={delay ? { transitionDelay: `${delay}ms`, ...style } : style}
