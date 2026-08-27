@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { figmaDesign } from '@o3/story-kit'
+import { Reveal } from '@o3/ui'
 
 import { seedImage, seededSectionArgs } from '../../../testing/seedContent'
 
@@ -59,6 +60,34 @@ export const RailByNumber: Story = {
 export const Track: Story = {
   args: seededSectionArgs('index', 'railPanelsSection', 1),
   parameters: { design: figmaDesign('2846:5480') },
+}
+
+/**
+ * The track's entrance, under the band's own — scroll down to it.
+ *
+ * The page wraps every band in `SectionReveal`, so this story does too: what
+ * has to be judged is the composed motion, not the columns on their own. The
+ * band rises 24px on `ease-out`; the columns rise 24px inside it on
+ * `ease-spring`, 120ms in and 100ms apart, and a spring leaves the start line
+ * at rest — so through the band's rise they travel with it and only lift as it
+ * settles. Two rises on the same curve would read as the same motion twice.
+ *
+ * Columns past the horizontal fold play on the same timer as the ones in
+ * sight; scrolling the row sideways afterwards finds them already settled.
+ */
+export const TrackEntrance: Story = {
+  args: seededSectionArgs('index', 'railPanelsSection', 1),
+  parameters: { design: figmaDesign('2846:5480') },
+  render: (args) => (
+    <>
+      <div className="bg-bone flex h-screen items-center justify-center">
+        <p className="text-fg-muted">Scroll down ↓</p>
+      </div>
+      <Reveal>
+        <RailPanelsSection {...args} />
+      </Reveal>
+    </>
+  ),
 }
 
 /** The track at 402 (`2975:8355`) — one column per view, no hairline in sight. */

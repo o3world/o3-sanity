@@ -28,6 +28,16 @@ export interface PanelTrackProps {
 const UNNAMED = 'Panels'
 
 /**
+ * ms before the first column lifts. The band's own `SectionReveal` is already
+ * a third of the way up by then, so the columns read as filling the band in
+ * rather than as a second copy of its rise.
+ */
+const ENTRANCE_DELAY = 120
+
+/** ms between one column's lift and the next — the left-to-right rhythm. */
+const ENTRANCE_STAGGER = 100
+
+/**
  * `layout: track` — Home's "How we work" (`2846:5480`, `2975:8355` at 402).
  *
  * The colours below are the frame's; the code names the token role nearest
@@ -72,6 +82,28 @@ const UNNAMED = 'Panels'
  * state it actually keeps, which is a 0–1 fraction here and a pair of
  * at-the-end booleans there. A third track is what would make it a seam.
  *
+ * ## The entrance
+ *
+ * The columns arrive rather than sit there: opacity and a 24px rise, once, on
+ * `--ease-spring` at `--duration-reveal`, each column `ENTRANCE_STAGGER` after
+ * the one to its left. It is `Reveal`'s mechanic written onto the `<li>`
+ * itself — both of that component's load-bearing branches included — because a
+ * wrapper element between the `<ol>` and its items would cost the list its
+ * semantics and the row its snap points.
+ *
+ * **Spring rather than the house `ease-out`, because of what it composes
+ * with.** `SectionReveal` already rises the whole band 24px on `ease-out`, and
+ * a second `ease-out` rise inside it is the same motion played twice. A spring
+ * leaves the start line at rest, so through the band's own rise the columns
+ * travel with it, and they lift only once it has nearly settled.
+ *
+ * **One reading for the whole track, not one per column.** The observer
+ * watches the `<ol>`; every column then plays on its own delay whether or not
+ * it is inside the horizontal fold. The alternative — a column entering as it
+ * is scrolled to sideways — would put motion under the finger that is doing
+ * the scrolling, and the rule above the track is already the thing that
+ * answers where you are in the set.
+ *
  * ## At 402
  *
  * The same track, one column per view. The frame's column is 424 wide against
@@ -83,6 +115,7 @@ const UNNAMED = 'Panels'
 export function PanelTrack({ items, label }: PanelTrackProps) {
   const trackRef = useRef<HTMLOListElement>(null)
   const [scrolled, setScrolled] = useState(0)
+  const [entered, setEntered] = useState(false)
 
   const sync = useCallback(() => {
     const track = trackRef.current
@@ -101,6 +134,34 @@ export function PanelTrack({ items, label }: PanelTrackProps) {
     observer.observe(track)
     return () => observer.disconnect()
   }, [sync])
+
+  useEffect(() => {
+    const track = trackRef.current
+    if (!track) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setEntered(true)
+      return
+    }
+    // `Reveal`'s fast path: a track already at or above the viewport plays now
+    // rather than waiting to re-enter, which it never would.
+    if (track.getBoundingClientRect().top < window.innerHeight) {
+      setEntered(true)
+      return
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setEntered(true)
+            io.disconnect()
+          }
+        }
+      },
+      { threshold: 0, rootMargin: '0px 0px -40px 0px' },
+    )
+    io.observe(track)
+    return () => io.disconnect()
+  }, [])
 
   const columns = Math.max(items.length, 1)
 
@@ -142,7 +203,22 @@ export function PanelTrack({ items, label }: PanelTrackProps) {
           <li
             key={panel.key}
             data-sanity={panel.dataSanity}
-            className="border-line flex w-full shrink-0 snap-start flex-col pb-8 lg:w-[531px] lg:border-r lg:pr-16"
+            // What each app's `noscript` rule targets: with no JavaScript the
+            // effect above never runs, so the stylesheet is the only thing
+            // that can show the column.
+            data-reveal=""
+            style={{ transitionDelay: `${ENTRANCE_DELAY + index * ENTRANCE_STAGGER}ms` }}
+            className={cn(
+              'border-line flex w-full shrink-0 snap-start flex-col pb-8 lg:w-[531px] lg:border-r lg:pr-16',
+              // `translate`, not `transform`: Tailwind v4 compiles
+              // `translate-y-*` to the independent property (`@o3/ui`'s
+              // `motion.ts`).
+              'duration-(--duration-reveal) ease-spring transition-[opacity,translate]',
+              'motion-reduce:transition-none',
+              // `translate-none` rather than `translate-y-0`, so a settled
+              // column leaves no containing block behind it.
+              entered ? 'translate-none opacity-100' : 'translate-y-6 opacity-0',
+            )}
           >
             <span aria-hidden="true" className="text-fg-subtle pb-1.5 text-[15px] leading-[18px]">
               {`.${String(index + 1).padStart(2, '0')}`}
