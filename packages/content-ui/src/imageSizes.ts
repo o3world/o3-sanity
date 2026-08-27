@@ -69,9 +69,10 @@ export const LAYOUT_COLUMN: Record<1 | 2 | 3, string> = {
 
 /**
  * A card in a three-up row — the insight card and the in-flight card, in both
- * of their containers. The carousel and in-flight tracks pin the card at
- * `lg:w-[394px]` from `lg` up while the `/insights` grid lets it flex from 276
- * to 395, so 395px is the width one value has to cover for both. Below `lg`
- * every one of those containers is one card wide: the content column.
+ * of their containers. The carousel pins the card at 394px from `sm` up and
+ * both cards cap their square tile at 395px there too, while the `/insights`
+ * grid lets the card flex from 276 to 395 at `lg`, so 395px is the width one
+ * value has to cover from `sm`. Below that every container is one card wide:
+ * the content column.
  */
-export const CARD_THREE_UP = '(min-width: 1024px) 395px, 90vw'
+export const CARD_THREE_UP = '(min-width: 640px) 395px, 90vw'
