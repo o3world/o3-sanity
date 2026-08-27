@@ -9,6 +9,7 @@ import { defineIndexType, type IndexRendererProps } from '@o3/content-runtime/ro
 
 import { Blocks } from '@/content/blocks/Blocks'
 
+import { CaseStudyIndexSkeleton } from './CaseStudyIndexSkeleton'
 import { CaseStudyIndexView } from './CaseStudyIndexView'
 
 type Props = IndexRendererProps<typeof CASE_STUDIES_PAGE_QUERY>
@@ -61,6 +62,7 @@ export const caseStudyIndex = defineIndexType({
     params: { collection: 'caseStudy' },
   },
   renderer: CaseStudyIndexRenderer,
+  fallback: <CaseStudyIndexSkeleton />,
   seo: {
     title: 'Work',
     description:

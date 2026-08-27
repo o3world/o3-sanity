@@ -95,6 +95,46 @@
 }
 
 /*
+ * The sheet's exit — `packages/ui/src/components/ui/sheet.tsx`.
+ *
+ * Keyframes rather than transitions because Radix holds an unmounting panel
+ * open for a running *animation* and not for a running transition. Entry is
+ * still a transition; only the way out needs to be declared here.
+ *
+ * Both animate the property the entry classes write — `translate` for the
+ * panel (Tailwind v4 compiles `translate-x-full` to the independent
+ * `translate`, not to `transform`) and `opacity` for the scrim — and both
+ * spell their `from` explicitly: by the time `data-state` reads `closed` the
+ * open-state class is already gone, so an implicit `from` would read the
+ * closed value and animate nothing.
+ *
+ * Right is the only side declared, because the mobile menu is the only panel
+ * the sites open (`MobileNavMenu`). Another side needs its own pair.
+ */
+@theme {
+  --animate-sheet-out-right: sheet-out-right var(--duration-hover) var(--ease-out);
+  --animate-scrim-out: scrim-out var(--duration-hover) var(--ease-out);
+
+  @keyframes sheet-out-right {
+    from {
+      translate: 0;
+    }
+    to {
+      translate: 100%;
+    }
+  }
+
+  @keyframes scrim-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+}
+
+/*
  * The orbital sphere's breath — `OrbitalSphere motion="orbit"`.
  *
  * The official globe export is the anchor (`apps/storybook/prototypes/

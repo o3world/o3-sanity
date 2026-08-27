@@ -20,11 +20,13 @@ import { CloseIcon } from '../close-icon'
  *
  * - **`lucide-react` is gone.** The close affordance is `CloseIcon`, the
  *   inlined Material Symbols glyph the frames actually use (ADR 0009).
- * - **Entry transitions only.** shadcn assumes `tailwindcss-animate`, which
- *   this repo does not install; these are plain `data-[state]` transitions on
- *   the house easing instead. Radix unmounts on close without waiting for a
- *   *transition* (it waits for animations), so the exit is immediate. If a
- *   frame ever specifies an exit, it needs a keyframe rather than this.
+ * - **No `tailwindcss-animate`.** This repo does not install it, so entry is a
+ *   plain `data-[state=open]` transition on the house easing and exit is a
+ *   keyframe animation from `tokens/motion.css`. The asymmetry is Radix's:
+ *   it holds an unmounting panel open for a running animation and not for a
+ *   running transition, so a closing transition would never be seen. Only the
+ *   right side has exit keyframes, which is the side the sites open.
+ *   `motion-reduce` drops the animation, and the panel closes instantly.
  *
  * Surfaces are left to the caller: `SheetContent` defaults to the light band,
  * and the nav passes `bg-ink-deep` to match the bar it opens from.
@@ -54,6 +56,7 @@ function SheetOverlay({
       data-slot="sheet-overlay"
       className={cn(
         'bg-ink-deep/60 duration-(--duration-hover) fixed inset-0 z-50 opacity-0 transition-opacity ease-out data-[state=open]:opacity-100',
+        'data-[state=closed]:animate-scrim-out motion-reduce:animate-none',
         className,
       )}
       {...props}
@@ -79,7 +82,7 @@ function SheetContent({
         className={cn(
           'text-fg duration-(--duration-hover) fixed z-50 flex flex-col gap-4 bg-white transition-transform ease-out',
           side === 'right' &&
-            'inset-y-0 right-0 h-full w-3/4 translate-x-full data-[state=open]:translate-x-0 sm:max-w-sm',
+            'data-[state=closed]:animate-sheet-out-right inset-y-0 right-0 h-full w-3/4 translate-x-full data-[state=open]:translate-x-0 motion-reduce:animate-none sm:max-w-sm',
           side === 'left' &&
             'inset-y-0 left-0 h-full w-3/4 -translate-x-full data-[state=open]:translate-x-0 sm:max-w-sm',
           side === 'top' &&

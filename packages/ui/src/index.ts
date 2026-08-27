@@ -94,6 +94,10 @@ export type { HalftoneDiscProps } from './components/halftone-disc'
 export { LogoTile } from './components/logo-tile'
 export type { LogoTileProps } from './components/logo-tile'
 
+// Skeleton — the block a streamed route holds while its data is in flight
+export { Skeleton } from './components/skeleton'
+export type { SkeletonProps } from './components/skeleton'
+
 // MoleculeMark — the mark behind the 2026-08 quote band (2250:1498 / 2250:1525)
 export { MoleculeMark } from './components/molecule-mark'
 export type { MoleculeMarkProps } from './components/molecule-mark'

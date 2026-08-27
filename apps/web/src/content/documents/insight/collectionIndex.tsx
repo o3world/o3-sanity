@@ -9,6 +9,7 @@ import { defineIndexType, type IndexRendererProps } from '@o3/content-runtime/ro
 
 import { Blocks } from '@/content/blocks/Blocks'
 
+import { InsightIndexSkeleton } from './InsightIndexSkeleton'
 import { InsightIndexView } from './InsightIndexView'
 
 type Props = IndexRendererProps<typeof INSIGHTS_PAGE_QUERY>
@@ -72,6 +73,7 @@ export const insightIndex = defineIndexType({
     params: { collection: 'insight' },
   },
   renderer: InsightIndexRenderer,
+  fallback: <InsightIndexSkeleton />,
   seo: {
     title: 'Insights',
     description: 'Notes from inside the work — what we tried, and what broke.',

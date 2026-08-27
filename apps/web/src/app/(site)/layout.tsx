@@ -38,15 +38,14 @@ export default async function SiteLayout({
       {/* The chrome draws no mark of its own (#228); these are this app's. */}
       <SiteNav settings={settings} brandMark={NAV_MARK} />
       {/* `bg-ink` is the DOCUMENT'S GROUND, not a band. Every band paints over
-          it, so the only time it is seen is where one has not arrived yet: the
-          index routes stream their feed into a Suspense boundary with a `null`
-          fallback (#280), and until it lands `<main>` is an empty viewport.
-          Over the body's white that was a white flash on every click through to
+          it, so the only time it is seen is beside a skeleton: the index routes
+          stream their feed into a Suspense boundary whose fallback holds the
+          shape of the grid but not the whole viewport's height. Over the body's
+          white the uncovered part was a white flash on every click through to
           /work or /insights — and a second flicker behind it, since `NavInk`
           samples that white, flips the bar to its light skin, and flips back
           when the ink hero paints. Ink is the colour both index heroes arrive
-          in, so the hole now matches what fills it. The height the hole should
-          hold is still #280's. */}
+          in, so what shows around the skeleton matches what fills it. */}
       <main className="bg-ink min-h-screen">{children}</main>
       <SiteFooter settings={settings} brandMark={FOOTER_MARK} year={year} />
       {/* Draft sessions only: SanityLive is the delivery path for draft
