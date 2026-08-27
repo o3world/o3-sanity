@@ -38,6 +38,16 @@ const ENTRANCE_DELAY = 120
 const ENTRANCE_STAGGER = 100
 
 /**
+ * The vertical transit the horizontal travel is mapped onto, as fractions of
+ * the viewport height: the track sits at its first column until its top has
+ * risen to 85% of the way down, and reaches its last as its foot passes 15%
+ * from the top. The band's heading is above the track, so by the time the
+ * advance starts the reader is already looking at the first column.
+ */
+const DRIVE_ENTRY = 0.85
+const DRIVE_EXIT = 0.15
+
+/**
  * `layout: track` — Home's "How we work" (`2846:5480`, `2975:8355` at 402).
  *
  * The colours below are the frame's; the code names the token role nearest
@@ -79,8 +89,44 @@ const ENTRANCE_STAGGER = 100
  * resynced on scroll and resize — is `CarouselTrack`'s, three lines of it,
  * arrived at independently. It stays copied rather than extracted: a shared
  * hook would be the two lines both write and neither would stop writing the
- * state it actually keeps, which is a 0–1 fraction here and a pair of
- * at-the-end booleans there. A third track is what would make it a seam.
+ * state it actually keeps, which is a custom property on the rule here and a
+ * pair of at-the-end booleans there. A third track is what would make it a
+ * seam.
+ *
+ * The fraction lands on the rule as `--track-progress` rather than in React
+ * state, `ReadingProgress`'s idiom: the page's own scroll drives this track
+ * (below), so a `setState` here would be a render of the band on every frame
+ * of a scroll past it.
+ *
+ * ## The advance
+ *
+ * Scrolling the page down through the band walks the track sideways: the
+ * band's transit across the viewport, `DRIVE_ENTRY` to `DRIVE_EXIT`, maps onto
+ * the track's own travel, written straight to `scrollLeft` from a
+ * rAF-throttled passive listener. The rule above reads `scrollLeft`, so it
+ * keeps reporting the truth without knowing who moved the track.
+ *
+ * **Snap is off wherever the drive can run at all, and it is a whole-visit
+ * decision rather than a per-frame one.** A programmatic `scrollLeft` against
+ * `snap-mandatory` is two things deciding where the track sits, and the
+ * browser wins between frames. Turning snapping back on the instant a hand
+ * lands would be worse than that: the track is between columns when the drive
+ * lets go, so the browser snaps it to the nearest one and the columns jump out
+ * from under the finger that just touched them — up to a third of a column at
+ * the desktop measure. Off it stays.
+ *
+ * **A hand on the track ends the drive**, on pointer, touch, key, focus or a
+ * wheel with sideways intent — a reader who has taken hold of the columns is
+ * not to be argued with. The drive re-arms when the band has left the viewport
+ * entirely, so the next visit advances again and the visit that was taken over
+ * stays taken over.
+ *
+ * **Not on a coarse pointer, and not under reduced motion.** On touch the
+ * track is the page's own swipe surface and a drive would be pulling against
+ * the thumb doing the swiping; under reduced motion it is geometry moving
+ * that nobody asked to move. Both are read from `matchMedia` and both listen
+ * for the preference changing. Neither case gives up its snapping: where the
+ * drive never runs, the track is exactly the one the frame draws.
  *
  * ## The entrance
  *
@@ -114,14 +160,16 @@ const ENTRANCE_STAGGER = 100
  */
 export function PanelTrack({ items, label }: PanelTrackProps) {
   const trackRef = useRef<HTMLOListElement>(null)
-  const [scrolled, setScrolled] = useState(0)
+  const ruleRef = useRef<HTMLSpanElement>(null)
   const [entered, setEntered] = useState(false)
+  const [steerable, setSteerable] = useState(false)
 
   const sync = useCallback(() => {
     const track = trackRef.current
-    if (!track) return
+    const rule = ruleRef.current
+    if (!track || !rule) return
     const max = track.scrollWidth - track.clientWidth
-    setScrolled(max > 0 ? track.scrollLeft / max : 0)
+    rule.style.setProperty('--track-progress', String(max > 0 ? track.scrollLeft / max : 0))
   }, [])
 
   useEffect(() => {
@@ -163,6 +211,103 @@ export function PanelTrack({ items, label }: PanelTrackProps) {
     return () => io.disconnect()
   }, [])
 
+  useEffect(() => {
+    const track = trackRef.current
+    if (!track) return
+
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const finger = window.matchMedia('(pointer: coarse)')
+    const allowed = () => !still.matches && !finger.matches
+
+    let frame = 0
+    let live = false
+
+    const paint = () => {
+      frame = 0
+      if (!live) return
+      const max = track.scrollWidth - track.clientWidth
+      if (max <= 0) return
+      const rect = track.getBoundingClientRect()
+      const entry = window.innerHeight * DRIVE_ENTRY
+      // The track's own height is part of the span, so a tall band is walked
+      // over its whole passage rather than finishing before its foot appears.
+      const span = window.innerHeight * (DRIVE_ENTRY - DRIVE_EXIT) + rect.height
+      const progress = Math.min(1, Math.max(0, (entry - rect.top) / span))
+      const target = progress * max
+      // Sub-pixel writes are a scroll event each and move nothing.
+      if (Math.abs(track.scrollLeft - target) > 0.5) track.scrollLeft = target
+    }
+
+    const schedule = () => {
+      if (live && !frame) frame = requestAnimationFrame(paint)
+    }
+
+    const take = () => {
+      setSteerable(true)
+      if (live) return
+      live = true
+      paint()
+    }
+
+    const yieldTrack = () => {
+      if (!live) return
+      live = false
+      if (frame) {
+        cancelAnimationFrame(frame)
+        frame = 0
+      }
+    }
+
+    const yieldToSideways = (event: WheelEvent) => {
+      if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) yieldTrack()
+    }
+
+    const onPreference = () => {
+      if (allowed()) {
+        take()
+        return
+      }
+      yieldTrack()
+      setSteerable(false)
+    }
+
+    // Out of sight is where the drive gets its second chance: a reader who
+    // took the track over keeps it for as long as the band is on screen.
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) if (!entry.isIntersecting && allowed()) take()
+      },
+      { threshold: 0 },
+    )
+    io.observe(track)
+
+    if (allowed()) take()
+
+    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('resize', schedule)
+    track.addEventListener('pointerdown', yieldTrack)
+    track.addEventListener('touchstart', yieldTrack, { passive: true })
+    track.addEventListener('keydown', yieldTrack)
+    track.addEventListener('focusin', yieldTrack)
+    track.addEventListener('wheel', yieldToSideways, { passive: true })
+    still.addEventListener('change', onPreference)
+    finger.addEventListener('change', onPreference)
+
+    return () => {
+      if (frame) cancelAnimationFrame(frame)
+      io.disconnect()
+      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('resize', schedule)
+      track.removeEventListener('pointerdown', yieldTrack)
+      track.removeEventListener('touchstart', yieldTrack)
+      track.removeEventListener('keydown', yieldTrack)
+      track.removeEventListener('focusin', yieldTrack)
+      track.removeEventListener('wheel', yieldToSideways)
+      still.removeEventListener('change', onPreference)
+      finger.removeEventListener('change', onPreference)
+    }
+  }, [])
+
   const columns = Math.max(items.length, 1)
 
   return (
@@ -171,6 +316,7 @@ export function PanelTrack({ items, label }: PanelTrackProps) {
           order, and a scroll position is not something to announce twice. */}
       <div aria-hidden="true" className="bg-line relative h-px w-full overflow-hidden">
         <span
+          ref={ruleRef}
           // No transition: the segment follows the finger, and easing it would
           // leave it trailing the columns it reports on.
           className="bg-fg absolute inset-y-0 left-0 block"
@@ -179,7 +325,7 @@ export function PanelTrack({ items, label }: PanelTrackProps) {
             // Its own width per column travelled, so a track at rest puts the
             // segment under the first column — what the frame draws — and a
             // track scrolled to the end puts it under the last.
-            transform: `translateX(${scrolled * (columns - 1) * 100}%)`,
+            transform: `translateX(calc(var(--track-progress, 0) * ${(columns - 1) * 100}%))`,
           }}
         />
       </div>
@@ -197,7 +343,13 @@ export function PanelTrack({ items, label }: PanelTrackProps) {
         // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- keyboard-scrollable region with no focusable content; see above
         tabIndex={0}
         aria-label={label ?? UNNAMED}
-        className="focus-visible:ring-brand flex snap-x snap-mandatory gap-6 overflow-x-auto pt-16 [scrollbar-width:none] focus-visible:outline-none focus-visible:ring-2 lg:gap-[138px] [&::-webkit-scrollbar]:hidden"
+        className={cn(
+          'focus-visible:ring-brand flex gap-6 overflow-x-auto pt-16 [scrollbar-width:none] focus-visible:outline-none focus-visible:ring-2 lg:gap-[138px] [&::-webkit-scrollbar]:hidden',
+          // The server HTML is the snapping track, which is what a reader with
+          // no JavaScript — and the visual-regression harness, which browses
+          // with reduced motion — gets.
+          steerable ? 'snap-none' : 'snap-x snap-mandatory',
+        )}
       >
         {items.map((panel, index) => (
           <li
