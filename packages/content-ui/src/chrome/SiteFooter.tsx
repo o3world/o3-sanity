@@ -143,7 +143,10 @@ export function SiteFooter({ settings, brandMark, year }: SiteFooterProps) {
             <ul className="flex flex-wrap gap-6">
               {legalLinks.map((link) => (
                 <li key={link._key}>
-                  <Link href={resolveButtonHref(link)} className="hover:text-white">
+                  <Link
+                    href={resolveButtonHref(link)}
+                    className="duration-(--duration-hover) transition-colors ease-out hover:text-white"
+                  >
                     {link.label}
                   </Link>
                 </li>

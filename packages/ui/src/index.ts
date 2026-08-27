@@ -2,6 +2,16 @@
 // prototype/O3 Homepage v2.dc.html. See components.json for shadcn config.
 export { cn } from './lib/utils'
 
+// Motion recipes — the shared hover/focus class strings (see motion.ts)
+export {
+  CARD_ARROW_NUDGE,
+  CARD_LINK_FOCUS,
+  CARD_MEDIA_ZOOM,
+  CARD_TITLE_FADE,
+  HOVER_FADE_TRANSITION,
+  HOVER_TRANSITION,
+} from './motion'
+
 // ArrowIcon — the O3 arrow glyph Button and the case-study chips draw
 export { ArrowIcon } from './components/arrow-icon'
 export type { ArrowIconProps } from './components/arrow-icon'
@@ -83,6 +93,10 @@ export type { HalftoneDiscProps } from './components/halftone-disc'
 // LogoTile
 export { LogoTile } from './components/logo-tile'
 export type { LogoTileProps } from './components/logo-tile'
+
+// Skeleton — the block a streamed route holds while its data is in flight
+export { Skeleton } from './components/skeleton'
+export type { SkeletonProps } from './components/skeleton'
 
 // MoleculeMark — the mark behind the 2026-08 quote band (2250:1498 / 2250:1525)
 export { MoleculeMark } from './components/molecule-mark'

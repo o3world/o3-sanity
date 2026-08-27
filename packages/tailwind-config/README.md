@@ -222,6 +222,7 @@ future decision is one edit here rather than a 25-call-site sweep.
 | `--ease-out`             | `cubic-bezier(0.2, 0.7, 0.2, 1)`  | The house curve: hovers + scroll reveals. Deliberately overrides Tailwind's built-in `ease-out` |
 | `--ease-mask`            | `cubic-bezier(0.16, 0.9, 0.2, 1)` | Hero headline line-mask reveal                                                                  |
 | `--duration-hover`       | `220ms`                           | Hover transitions                                                                               |
+| `--duration-mask`        | `950ms`                           | Hero headline line-mask reveal — the one duration that rides `--ease-mask`                      |
 | `--duration-reveal`      | `700ms`                           | Standard scroll-reveal                                                                          |
 | `--duration-reveal-slow` | `850ms`                           | Hero fade-ups, intro overlay slide                                                              |
 

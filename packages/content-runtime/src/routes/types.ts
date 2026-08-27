@@ -220,6 +220,16 @@ export interface IndexEntry<Q extends string = string> {
   readonly document?: IndexDocument
   readonly renderer: (props: IndexRendererProps<Q>) => ReactNode
   /**
+   * What the Suspense boundary draws while the feed is in flight. Nothing,
+   * where an entry declares none.
+   *
+   * A NODE THE PRODUCT SUPPLIES, not a component this package draws: a
+   * fallback is a picture of one route's own grid on one brand's surfaces, and
+   * this package is engine — it holds the boundary and knows nothing about
+   * what fills it (`tools/engine-seam/data/roster.json`).
+   */
+  readonly fallback?: ReactNode
+  /**
    * The entry's own fallback tier — static, because the feed has no document
    * to derive from. A `document`'s `seo` overrides beat it, and Site Settings
    * is the floor beneath both (#26). It goes through the

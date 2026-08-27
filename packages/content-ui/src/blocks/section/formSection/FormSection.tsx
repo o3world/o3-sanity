@@ -169,7 +169,10 @@ function ContactLine({ value }: { value: string }) {
   const trimmed = value.trim()
   if (EMAIL.test(trimmed)) {
     return (
-      <a href={`mailto:${trimmed}`} className="hover:text-brand transition-colors">
+      <a
+        href={`mailto:${trimmed}`}
+        className="hover:text-brand duration-(--duration-hover) transition-colors ease-out"
+      >
         {value}
       </a>
     )
@@ -178,7 +181,7 @@ function ContactLine({ value }: { value: string }) {
     return (
       <a
         href={`tel:${trimmed.replace(/[^\d+]/g, '')}`}
-        className="hover:text-brand transition-colors"
+        className="hover:text-brand duration-(--duration-hover) transition-colors ease-out"
       >
         {value}
       </a>

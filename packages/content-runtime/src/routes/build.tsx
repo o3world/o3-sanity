@@ -435,9 +435,10 @@ export function buildIndexRoute<Q extends string>(entry: IndexEntry<Q>): IndexRo
   }
 
   const Page: IndexRouteShim['Page'] = ({ searchParams }) => (
-    // No fallback to draw: the layout's `<main>` already holds the page's
-    // height open, and the feed arrives on the same response.
-    <Suspense fallback={null}>
+    // The entry's own picture of its grid, or nothing where it declares none —
+    // in which case the hole is whatever the layout's `<main>` paints until the
+    // feed arrives on the same response.
+    <Suspense fallback={entry.fallback ?? null}>
       <Feed searchParams={searchParams} />
     </Suspense>
   )

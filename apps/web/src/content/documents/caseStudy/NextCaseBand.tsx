@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { ArrowIcon, Eyebrow } from '@o3/ui'
+import { ArrowIcon, cn, CARD_LINK_FOCUS, CARD_MEDIA_ZOOM, Eyebrow } from '@o3/ui'
 import type { CASE_STUDY_QUERY_RESULT } from '@o3/sanity/types/generated'
 import { hrefForDoc } from '@o3/content-runtime/urls'
 
@@ -74,7 +74,14 @@ export function NextCaseBand({ next }: { next: NextCase }) {
         <Link
           href={href}
           aria-label={[label, next.title].filter(Boolean).join(': ')}
-          className="group relative block aspect-square overflow-hidden lg:hidden"
+          // No offset on the ring: the photograph is the whole tap target, so a
+          // gap between ring and picture would read as a border it doesn't
+          // have.
+          className={cn(
+            'group relative block aspect-square overflow-hidden lg:hidden',
+            CARD_LINK_FOCUS,
+            'focus-visible:ring-offset-0',
+          )}
         >
           <SanityImage
             source={next.heroMedia?.image}
@@ -82,7 +89,7 @@ export function NextCaseBand({ next }: { next: NextCase }) {
             ratio="fill"
             width={1600}
             sizes={CONTENT_COLUMN}
-            className="duration-(--duration-reveal) transition-transform ease-out group-hover:scale-[1.03]"
+            className={CARD_MEDIA_ZOOM}
           />
         </Link>
 

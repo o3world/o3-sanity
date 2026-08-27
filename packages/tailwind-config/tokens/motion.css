@@ -50,6 +50,9 @@
    * them is the point: fill, hairline and copy have to land together as the
    * bar crosses the seam between two bands, or the flip reads as a stutter. */
   --duration-ink: 350ms;
+  /* .95s — the hero headline's line-mask reveal (`MaskedLines`), the one
+   * transition that rides `--ease-mask`. */
+  --duration-mask: 950ms;
   /* .7s — the standard data-reveal opacity/transform transition. */
   --duration-reveal: 700ms;
   /* .85s — the slower reveals: hero sub/CTA fade-up, the intro overlay's
@@ -87,6 +90,68 @@
   @keyframes marquee {
     to {
       transform: translateX(var(--marquee-shift, 0));
+    }
+  }
+}
+
+/*
+ * The sheet's two moves — `packages/ui/src/components/ui/sheet.tsx`.
+ *
+ * KEYFRAMES BOTH WAYS, and neither direction can be a transition. Radix mounts
+ * the panel already carrying `data-state="open"`, so an entry transition has no
+ * starting value to leave and never runs; and it unmounts a closing panel
+ * without waiting for a transition, so an exit transition is never seen. An
+ * animation is the one form that survives both ends.
+ *
+ * Each animates the property the state classes write — `translate` for the
+ * panel (Tailwind v4 compiles `translate-x-full` to the independent
+ * `translate`, not to `transform`) and `opacity` for the scrim — and each
+ * spells both ends explicitly: by the time `data-state` flips, the class for
+ * the state being left is already gone, so an implicit `from` would read the
+ * value being arrived at and animate nothing.
+ *
+ * Right is the only side declared, because the mobile menu is the only panel
+ * the sites open (`MobileNavMenu`). Another side needs its own pair.
+ */
+@theme {
+  --animate-sheet-in-right: sheet-in-right var(--duration-hover) var(--ease-out);
+  --animate-sheet-out-right: sheet-out-right var(--duration-hover) var(--ease-out);
+  --animate-scrim-in: scrim-in var(--duration-hover) var(--ease-out);
+  --animate-scrim-out: scrim-out var(--duration-hover) var(--ease-out);
+
+  @keyframes sheet-in-right {
+    from {
+      translate: 100%;
+    }
+    to {
+      translate: 0;
+    }
+  }
+
+  @keyframes sheet-out-right {
+    from {
+      translate: 0;
+    }
+    to {
+      translate: 100%;
+    }
+  }
+
+  @keyframes scrim-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes scrim-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
     }
   }
 }

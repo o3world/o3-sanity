@@ -1,6 +1,13 @@
 import Link from 'next/link'
 
-import { SurfaceProvider, surfaceAttrs } from '@o3/ui'
+import {
+  CARD_ARROW_NUDGE,
+  CARD_LINK_FOCUS,
+  CARD_TITLE_FADE,
+  SurfaceProvider,
+  cn,
+  surfaceAttrs,
+} from '@o3/ui'
 import { hrefForDoc } from '@o3/content-runtime/urls'
 import type { SectionProps } from '@o3/content-runtime/blocks'
 
@@ -24,7 +31,14 @@ export function PageCard({ _type, title, slug, card }: PageCardData) {
       <Link
         href={hrefForDoc({ _type, slug })}
         {...surfaceAttrs('white')}
-        className="rounded-card border-line flex h-full flex-col gap-4 border bg-white p-8"
+        // The offset is transparent because a `listingSection` on ink puts this
+        // white card on a dark band, and the gap has to show the band rather
+        // than a white notch on it.
+        className={cn(
+          'rounded-card border-line group flex h-full flex-col gap-4 border bg-white p-8',
+          CARD_LINK_FOCUS,
+          'focus-visible:ring-offset-transparent',
+        )}
       >
         {card?.icon ? (
           <SanityImage
@@ -36,9 +50,16 @@ export function PageCard({ _type, title, slug, card }: PageCardData) {
             sizes="40px"
           />
         ) : null}
-        <h3 className="text-fg text-lg font-medium">{card?.shortTitle ?? title}</h3>
+        <h3 className={cn('text-fg text-lg font-medium', CARD_TITLE_FADE)}>
+          {card?.shortTitle ?? title}
+        </h3>
         {card?.excerpt ? <p className="text-fg-muted text-sm">{card.excerpt}</p> : null}
-        <span className="text-brand mt-auto text-sm font-medium">Learn more →</span>
+        <span className="text-brand mt-auto text-sm font-medium">
+          Learn more{' '}
+          {/* The glyph is the card's trailing arrow, so it takes the nudge; it
+              needs a box of its own to be translated in. */}
+          <span className={cn('inline-block', CARD_ARROW_NUDGE)}>→</span>
+        </span>
       </Link>
     </SurfaceProvider>
   )
