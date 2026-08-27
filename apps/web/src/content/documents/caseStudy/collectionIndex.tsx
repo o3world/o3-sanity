@@ -14,34 +14,33 @@ import { CaseStudyIndexView } from './CaseStudyIndexView'
 
 type Props = IndexRendererProps<typeof CASE_STUDIES_PAGE_QUERY>
 
-function CaseStudyIndexRenderer({ pagination, document, ...rest }: Props) {
-  // Q widens to string at this site (TS#33304); cast back to the typed
-  // query result for the view. The chrome document arrives as `unknown` for
-  // the same reason and is cast in the same breath.
-  const data = rest as unknown as NonNullable<CASE_STUDIES_PAGE_QUERY_RESULT>
+/**
+ * One slot's worth of authored bands — the same shape as `InsightIndexChrome`
+ * and outside the feed's boundary for the same reason: the hero prerenders
+ * into the shell instead of arriving with the feed at a different height
+ * than its stand-in.
+ */
+function CaseStudyIndexChrome({ document, slot }: { document: unknown; slot: 'above' | 'below' }) {
   const chrome = document as COLLECTION_INDEX_QUERY_RESULT
-
-  const bands = (field: 'sectionsAbove' | 'sectionsBelow') => {
-    const blocks = chrome?.[field] ?? []
-    if (!chrome || blocks.length === 0) return null
-    return (
-      <Blocks
-        blocks={blocks}
-        documentId={chrome._id}
-        documentType="collectionIndex"
-        fieldPath={field}
-      />
-    )
-  }
-
+  const field = slot === 'above' ? 'sectionsAbove' : 'sectionsBelow'
+  const blocks = chrome?.[field] ?? []
+  if (!chrome || blocks.length === 0) return null
   return (
-    <CaseStudyIndexView
-      items={data.items}
-      pagination={pagination}
-      above={bands('sectionsAbove')}
-      below={bands('sectionsBelow')}
+    <Blocks
+      blocks={blocks}
+      documentId={chrome._id}
+      documentType="collectionIndex"
+      fieldPath={field}
     />
   )
+}
+
+function CaseStudyIndexRenderer({ pagination, ...rest }: Props) {
+  // Q widens to string at this site (TS#33304); cast back to the typed
+  // query result for the view.
+  const data = rest as unknown as NonNullable<CASE_STUDIES_PAGE_QUERY_RESULT>
+
+  return <CaseStudyIndexView items={data.items} pagination={pagination} />
 }
 
 /**
@@ -61,6 +60,7 @@ export const caseStudyIndex = defineIndexType({
     query: COLLECTION_INDEX_QUERY,
     params: { collection: 'caseStudy' },
   },
+  chrome: CaseStudyIndexChrome,
   renderer: CaseStudyIndexRenderer,
   fallback: <CaseStudyIndexSkeleton />,
   seo: {

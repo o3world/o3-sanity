@@ -218,6 +218,16 @@ export interface IndexEntry<Q extends string = string> {
    * every index before #347.
    */
   readonly document?: IndexDocument
+  /**
+   * The authored bands around the feed, rendered OUTSIDE the Suspense
+   * boundary from the `document` alone — nothing here may depend on
+   * `searchParams`. This is what lets the hero above the feed prerender into
+   * the static shell: chrome the renderer drew arrived with the feed, one
+   * query later, and the guessed-height fallback standing in for it shifted
+   * the whole page when the real hero landed. `document` is `null` where the
+   * entry declares none or the dataset holds none.
+   */
+  readonly chrome?: (props: { document: unknown; slot: 'above' | 'below' }) => ReactNode
   readonly renderer: (props: IndexRendererProps<Q>) => ReactNode
   /**
    * What the Suspense boundary draws while the feed is in flight. Nothing,
