@@ -22,6 +22,12 @@ import { CARD_COMPONENTS } from './clientComponents'
  *
  * The block offers no `surface` (see the component) — the band is ink on every
  * page it appears on, so there is no white story here.
+ *
+ * The cards stack on scroll from the desktop breakpoint up, so this is the
+ * story to scroll rather than glance at: each card should pin clear of the
+ * chrome and fade as the next covers it. At rest — which is all a screenshot
+ * ever sees — every card is fully opaque and the band is the flat stack the
+ * frame draws.
  */
 const meta = {
   title: 'Content/Blocks/Section/CaseShowcaseSection',
