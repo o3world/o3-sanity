@@ -34,11 +34,20 @@ export interface BlockLocProps {
   loc?: SanityLoc
 }
 
-/** The props a section block component receives (its data minus dispatch keys). */
+/**
+ * The props a section block component receives (its data minus dispatch keys).
+ *
+ * `backgroundMedia` is re-optionalised. Every band carries the field and the
+ * projection expands it for its LQIP, which is what makes typegen emit it as a
+ * present-but-nullable key; the field itself is optional content and a caller
+ * with no picture — a story, a render test — should not have to write `null`
+ * sixteen times to say so.
+ */
 export type SectionProps<K extends PageSection['_type']> = Omit<
   SectionBlockData<K>,
-  '_key' | '_type'
+  '_key' | '_type' | 'backgroundMedia'
 > &
+  Partial<Pick<SectionBlockData<K>, 'backgroundMedia'>> &
   BlockLocProps
 
 /** The props a base block component receives. */

@@ -420,10 +420,16 @@ export function seededSectionArgs<K extends PageSection['_type']>(
  * An image object pointing at a committed asset, for a hand-built story —
  * either marker form the manifest keys (a repo path under
  * `tools/migration/data/`, or the WordPress URL a converted asset came from).
+ *
+ * The asset is written **as the projection delivers it**, dereferenced: an
+ * `_id` the URL builder reads and the metadata the blur-up comes from. The
+ * manifest records ids, not metadata, so a story carries none and draws no
+ * placeholder — which is what a story wants anyway, since a blurred plate
+ * under a loaded image is noise in a visual diff.
  */
 export function seedImage(source: string) {
   return {
     _type: 'image' as const,
-    asset: { _type: 'reference' as const, _ref: assetIdFor(source) },
+    asset: { _id: assetIdFor(source), metadata: null },
   }
 }

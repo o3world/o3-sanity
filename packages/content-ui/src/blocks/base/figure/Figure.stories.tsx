@@ -65,5 +65,5 @@ export const Portrait: Story = {
  * nothing at all rather than a caption floating under empty space.
  */
 export const NoImage: Story = {
-  args: { image: undefined, alt: 'Nothing to show', caption: 'This caption should not appear.' },
+  args: { image: null, alt: 'Nothing to show', caption: 'This caption should not appear.' },
 }

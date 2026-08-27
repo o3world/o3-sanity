@@ -76,7 +76,7 @@ export const NoButton: Story = {
 /** An upload that never landed — the copy still has to read. */
 export const NoImage: Story = {
   args: {
-    media: { _type: 'figure', alt: 'Nothing to show' },
+    media: { _type: 'figure', image: null, alt: 'Nothing to show' },
     heading: 'Ventures',
     body: 'Our investment arm, backing early-stage AI and digital product companies whose values and ambitions match ours.',
     button: { _type: 'button', label: 'See the portfolio', href: '/ventures', target: null },

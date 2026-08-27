@@ -24,7 +24,10 @@ const band = (background: ReturnType<typeof sectionBackground>) =>
 describe('a band that carries no picture', () => {
   it.each([
     ['nothing at all', undefined],
-    ['an empty object an editor opened and left', { _type: 'backgroundMedia' as const }],
+    [
+      'an empty object an editor opened and left',
+      { _type: 'backgroundMedia' as const, image: null },
+    ],
   ])('is nothing to render, given %s', (_case, media) => {
     expect(sectionBackground(media, 'ink')).toBeNull()
   })
@@ -39,7 +42,7 @@ describe('a band that carries one', () => {
     _type: 'backgroundMedia' as const,
     image: {
       _type: 'image' as const,
-      asset: { _type: 'reference' as const, _ref: 'image-abc123-1200x630-png' },
+      asset: { _id: 'image-abc123-1200x630-png', metadata: null },
     },
   }
 

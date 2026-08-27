@@ -60,8 +60,8 @@ function aBuffaloCase() {
       image: {
         _type: 'image',
         asset: {
-          _type: 'reference',
-          _ref: 'image-5d901a6029df2e121bbe878301a3f1e043b0c6f4-394x250-webp',
+          _id: 'image-5d901a6029df2e121bbe878301a3f1e043b0c6f4-394x250-webp',
+          metadata: null,
         },
       },
     },

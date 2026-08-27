@@ -84,7 +84,7 @@ export const CardWithoutMedia: Story = {
   args: {
     ...seededSectionArgs('live', 'inFlightSection', 0),
     entries: (seededSectionArgs('live', 'inFlightSection', 0).entries ?? []).map((entry, i) =>
-      i === 1 ? { ...entry, media: undefined } : entry,
+      i === 1 ? { ...entry, media: null } : entry,
     ),
   },
   parameters: { design: figmaDesign('1751:1994') },

@@ -2,6 +2,7 @@
  * over next/image + the low-level image helpers; every other content
  * component renders Sanity images through it (see the boundary rule in the
  * root eslint config). */
+import type { CSSProperties } from 'react'
 import Image from 'next/image'
 import { stegaClean } from '@sanity/client/stega'
 
@@ -9,6 +10,7 @@ import { cn } from '@o3/ui/lib/utils'
 import {
   imageDimensions,
   imageHotspot,
+  imageLqip,
   isRenderableImage,
   isVectorImage,
   rawImageUrl,
@@ -88,6 +90,31 @@ export interface SanityImageProps {
 
 /** Shape for an image whose asset id doesn't carry dimensions (never, in practice). */
 const FALLBACK_ASPECT = 3 / 2
+
+/**
+ * The blur-up: the asset's LQIP painted as the `<img>`'s **own** background,
+ * so the full image covers it the moment it decodes — no client component, no
+ * `onLoad`, no fade to choreograph, and nothing left behind if it never loads.
+ *
+ * Sized and positioned to match the `object-fit` and `object-position` the
+ * same element carries, so the placeholder occupies exactly the box the image
+ * will. Returns `undefined` for a source whose projection carried no LQIP,
+ * which is every logo field (see `imageLqip`).
+ */
+function lqipBackground(
+  source: unknown,
+  cover: boolean,
+  position?: string,
+): CSSProperties | undefined {
+  const lqip = imageLqip(source)
+  if (!lqip) return undefined
+  return {
+    backgroundImage: `url(${lqip})`,
+    backgroundSize: cover ? 'cover' : 'contain',
+    backgroundPosition: position ?? 'center',
+    backgroundRepeat: 'no-repeat',
+  }
+}
 
 function ratioValue(ratio: ImageRatio): number {
   const [width, height] = ratio.split('/')
@@ -185,6 +212,7 @@ export function SanityImage({
         sizes={sizes}
         priority={priority}
         className={className}
+        style={lqipBackground(image, true)}
       />
     )
   }
@@ -197,6 +225,7 @@ export function SanityImage({
   if (cropped && ratio !== 'fill')
     url = url.height(Math.round(width / ratioValue(ratio))).fit('crop')
   const hotspot = cropped && ratio === 'fill' ? imageHotspot(image) : null
+  const objectPosition = hotspot ? `${hotspot.x * 100}% ${hotspot.y * 100}%` : undefined
 
   return (
     <div
@@ -213,7 +242,10 @@ export function SanityImage({
         sizes={sizes ?? '100vw'}
         priority={priority}
         className={cropped ? 'object-cover' : 'object-contain'}
-        style={hotspot ? { objectPosition: `${hotspot.x * 100}% ${hotspot.y * 100}%` } : undefined}
+        style={{
+          ...lqipBackground(image, cropped, objectPosition),
+          objectPosition,
+        }}
       />
     </div>
   )
