@@ -300,6 +300,16 @@
           "why": "Scroll-driven contrast flip keyed on a DOM id."
         },
         {
+          "path": "src/chrome/navInkSample.ts",
+          "verdict": "engine",
+          "why": "Luminance and object-fit arithmetic behind the flip; no DOM, no brand."
+        },
+        {
+          "path": "src/chrome/navInkImage.ts",
+          "verdict": "engine",
+          "why": "Decodes a data: URI to pixels and caches it; knows nothing of what it is a picture of."
+        },
+        {
           "path": "src/chrome/index.ts",
           "verdict": "product-brand",
           "why": "O3's alone: o3xo mounts app-local chrome (#243); stays while a brand uses it (ADR 0028)."
