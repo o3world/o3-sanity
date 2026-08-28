@@ -2,7 +2,7 @@ import { ArticleByline, Eyebrow, ReadingProgress, SectionShell } from '@o3/ui'
 import type { INSIGHT_QUERY_RESULT } from '@o3/sanity/types/generated'
 
 import { CarouselTrack, SanityImage } from '@o3/content-ui'
-import { ARTICLE_COLUMN, FULL_BLEED } from '@o3/content-ui/image-sizes'
+import { FULL_BLEED } from '@o3/content-ui/image-sizes'
 import { PortableTextBody } from '@o3/content-ui/portable-text'
 import { getCard } from '@o3/content-ui/cards'
 import { formatMonthYear } from '@o3/content-ui/format-date'
@@ -193,32 +193,8 @@ export function InsightView({
       {/* `1710:2835` pads 128 and `2262:3818` pads 64 — the detail page's own
           step, which compresses where band-md does not. */}
       <div className="px-gutter py-band-detail bg-white">
-        {/* `1894:3908` — the body sits in an 822px column, centred. The
-            featured image shares that measure: it has no band in either frame
-            (see the note above), so putting it anywhere wider would be
-            inventing a composition rather than reading one, and the archive's
-            lead images are square as often as they are landscape. */}
+        {/* `1894:3908` — the body sits in an 822px column, centred. */}
         <div className="max-w-article mx-auto">
-          {featuredImage?.image ? (
-            <figure className="mb-16">
-              <SanityImage
-                source={featuredImage.image}
-                alt={featuredImage.alt ?? ''}
-                width={1644}
-                className="rounded-card w-full"
-                sizes={ARTICLE_COLUMN}
-                // Not `priority`: since #90 the same asset fills the hero,
-                // which is the LCP element and holds the preload. Two
-                // priority images of one picture only fight each other.
-              />
-              {featuredImage.caption ? (
-                <figcaption className="text-fg-subtle mt-3 text-sm">
-                  {featuredImage.caption}
-                </figcaption>
-              ) : null}
-            </figure>
-          ) : null}
-
           {/* The band above already sets the 822px article measure (1710:2836);
               max-w-none keeps the body from being narrowed a second time. */}
           <PortableTextBody value={body} className="max-w-none" />
