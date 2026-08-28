@@ -302,12 +302,7 @@
         {
           "path": "src/chrome/navInkSample.ts",
           "verdict": "engine",
-          "why": "Luminance and object-fit arithmetic behind the flip; no DOM, no brand."
-        },
-        {
-          "path": "src/chrome/navInkImage.ts",
-          "verdict": "engine",
-          "why": "Decodes a data: URI to pixels and caches it; knows nothing of what it is a picture of."
+          "why": "Luminance and contain-box arithmetic behind the flip; no DOM, no brand."
         },
         {
           "path": "src/chrome/index.ts",

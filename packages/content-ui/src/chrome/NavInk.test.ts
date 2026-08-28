@@ -68,6 +68,26 @@ function plate({
 /** A full-width opaque band, of the kind the walk stops on. */
 const band = (color: string) => plate({ color })
 
+/**
+ * A photograph, drawn the way `SanityImage` draws one: the asset's LQIP as the
+ * element's own background, `cover` unless the caller is testing a fitted box.
+ * The bytes are never read — being a picture is the whole of what is asked.
+ */
+function picture({
+  left = 0,
+  right = 1440,
+  size = 'cover',
+}: { left?: number; right?: number; size?: 'cover' | 'contain' } = {}) {
+  const element = document.createElement('img')
+  element.style.backgroundImage = 'url("data:image/jpeg;base64,/9j/4AAQSkZJRg==")'
+  element.style.backgroundSize = size
+  element.style.backgroundPosition = '50% 50%'
+  element.getBoundingClientRect = () => rect({ top: 0, bottom: 2000, left, right })
+  document.body.append(element)
+  painted.push(element)
+  return element
+}
+
 /** One frame of the browser's, plus the microtask an observer wakes on. */
 const settle = () => new Promise((resolve) => setTimeout(resolve, 32))
 
@@ -217,6 +237,64 @@ describe('what counts as the surface', () => {
     await settle()
 
     expect(header.dataset.ink).toBe('dark')
+  })
+})
+
+describe('a picture is a dark ground, whatever its pixels average', () => {
+  /**
+   * The two skins fail asymmetrically: white copy on a 20% black scrim
+   * survives almost any ground, and `#232323` on a 10% one needs the ground
+   * pale AND even. A photograph is the second thing's enemy even when it is
+   * bright — the article picture that produced #372 averaged 205 of 255 under
+   * the bar and still ran 81 to 251 inside the bar's own height.
+   */
+  it('keeps white copy over a picture sitting on a white band', async () => {
+    picture()
+    band(LIGHT)
+    stop = watchNavInk(header)
+    await settle()
+
+    expect(header.dataset.ink).toBeUndefined()
+  })
+
+  it('reads the band beside a picture too narrow to be the ground', async () => {
+    picture({ left: 630, right: 810 })
+    band(LIGHT)
+    stop = watchNavInk(header)
+    await settle()
+
+    // One column of nine over the picture, eight over bone.
+    expect(header.dataset.ink).toBe('dark')
+  })
+
+  /**
+   * `contain` fits the whole picture inside its box and leaves bars either
+   * side. A strip of bar is not a strip of picture, so the walk carries on to
+   * what is behind — here, the light band the box is sitting on.
+   */
+  it('walks past the letterbox of a contained picture', async () => {
+    const fitted = picture({ size: 'contain' })
+    // A wide box holding a square picture: 620px of bar either side, so every
+    // column but the middle three lands beside it.
+    Object.defineProperty(fitted, 'naturalWidth', { value: 20 })
+    Object.defineProperty(fitted, 'naturalHeight', { value: 20 })
+    fitted.getBoundingClientRect = () => rect({ top: 0, bottom: 200, left: 0, right: 1440 })
+    band(LIGHT)
+    stop = watchNavInk(header)
+    await settle()
+
+    expect(header.dataset.ink).toBe('dark')
+  })
+
+  it('treats a picture whose shape it cannot know yet as a picture', async () => {
+    // Before the image decodes there is no `naturalWidth` to locate the
+    // letterbox with, and picture is the half of that guess that stays legible.
+    picture({ size: 'contain' })
+    band(LIGHT)
+    stop = watchNavInk(header)
+    await settle()
+
+    expect(header.dataset.ink).toBeUndefined()
   })
 })
 

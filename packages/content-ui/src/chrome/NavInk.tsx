@@ -2,14 +2,7 @@
 
 import { useEffect } from 'react'
 
-import { dataBackground, forgetListener, lqipPixels } from './navInkImage'
-import {
-  averageLuminance,
-  LIGHT_LUMINANCE,
-  luminance,
-  sampledRegion,
-  type Box,
-} from './navInkSample'
+import { coversSample, LIGHT_LUMINANCE, luminance, type Box } from './navInkSample'
 
 /**
  * The id `SiteNav` puts on its `<header>` and hands back here. The controller
@@ -44,6 +37,22 @@ const OPAQUE_ALPHA = 0.9
 const COLUMNS = 9
 
 /**
+ * The `data:` URI a background-image is, or `null` for anything else — a
+ * gradient wash, a CDN url, `none`.
+ *
+ * It is how a picture is recognised. `SanityImage` paints every photograph's
+ * LQIP as the `<img>`'s own background, sized and positioned to match the
+ * `object-fit` it carries, so a `data:` background on an element means that
+ * element is showing a photograph. A logo carries none — the projections that
+ * ask for `metadata{lqip, isOpaque}` are the photographic fields — which is
+ * exactly right: a logo on a band is not a ground, and the band behind it is.
+ */
+function pictureUri(backgroundImage: string): string | null {
+  const match = /^url\("?(data:image\/[^")]+)"?\)/.exec(backgroundImage)
+  return match?.[1] ?? null
+}
+
+/**
  * The surfaces this design paints a dark ground with, and the ones it paints
  * light. A band, a card or a plate that declares `data-surface` has already
  * answered the only question this file asks, so the declaration is read before
@@ -69,12 +78,7 @@ const LIGHT_SURFACES = new Set(['white', 'paper', 'bone'])
  *    dark background sets `data-surface="ink"`. One attribute lookup, and it
  *    is the only thing that can speak for a photograph under a gradient scrim,
  *    where every colour in the stack is transparent.
- * 2. **The picture.** `SanityImage` paints each photograph's LQIP as the
- *    `<img>`'s own background, sized and positioned to match the `object-fit`
- *    it carries — so the placeholder is a 20px stand-in for exactly what that
- *    element shows, already in the document, and a `data:` URI that taints no
- *    canvas. Read it and the bar knows the tone of the strip of picture it is
- *    actually over, rather than the tone of the band behind it.
+ * 2. **The picture, which is never a light ground.** See below.
  * 3. **The fill.** `getComputedStyle` normalises every authored form to
  *    `rgb(r, g, b)` or `rgba(r, g, b, a)` and nothing else, so two shapes are
  *    all this has to read.
@@ -85,11 +89,26 @@ const LIGHT_SURFACES = new Set(['white', 'paper', 'bone'])
  * background-color, so it is skipped too, and the element behind it is judged
  * exactly.
  *
- * `undefined` is the fourth answer and a temporary one: a picture whose LQIP
- * has not finished decoding. That column stays unread for a frame or two
- * rather than being answered by the band behind the picture.
+ * ── A PICTURE IS A DARK GROUND, WHATEVER ITS PIXELS AVERAGE ────────────────
+ *
+ * The bar has two skins and they fail asymmetrically. White copy on
+ * `--color-scrim` (20% black) survives almost any ground, because the scrim
+ * darkens whatever is behind it. `#232323` on `--color-scrim-light` (10%)
+ * needs the ground to be pale AND even. A photograph is the second thing's
+ * enemy even when it is bright: measured on one article's picture, the strip
+ * under the bar averaged 205 of 255 and still ran from 81 to 251 inside the
+ * bar's own height, and the dark skin over it was unreadable (#372).
+ *
+ * So a picture is answered rather than sampled, and the answer is the skin
+ * that survives it. That is also what the frames draw — the bar is glass over
+ * hero imagery, and the dark skin is what it wears over `white`, `bone` and
+ * `paper`, which are flat bands.
+ *
+ * `contain` is the one case that needs arithmetic: it leaves bars beside the
+ * picture, and a strip of bar is not a strip of picture. The walk continues
+ * there, to whatever the element paints behind its own background image.
  */
-function groundOf(element: Element, sample: Box, onReady: () => void): boolean | null | undefined {
+function groundOf(element: Element, sample: Box): boolean | null {
   const declared = element.getAttribute('data-surface')
   if (declared) {
     if (DARK_SURFACES.has(declared)) return false
@@ -97,21 +116,19 @@ function groundOf(element: Element, sample: Box, onReady: () => void): boolean |
   }
 
   const style = getComputedStyle(element)
-  const uri = dataBackground(style.backgroundImage)
-  if (uri) {
-    const pixels = lqipPixels(uri, onReady)
-    if (pixels === undefined) return undefined
-    if (pixels) {
-      const [x, y] = style.backgroundPosition.split(' ')
-      const region = sampledRegion(
-        sample,
-        element.getBoundingClientRect(),
-        pixels,
-        style.backgroundSize !== 'contain',
-        { x: x ?? '50%', y: y ?? x ?? '50%' },
-      )
-      const mean = region && averageLuminance(pixels, region)
-      if (mean !== null && mean !== undefined) return mean > LIGHT_LUMINANCE
+  if (pictureUri(style.backgroundImage)) {
+    // `cover` fills the box, so the strip is on the picture wherever it falls.
+    if (style.backgroundSize !== 'contain') return false
+    const [x, y] = style.backgroundPosition.split(' ')
+    const natural = intrinsicSize(element)
+    if (
+      !natural ||
+      coversSample(sample, element.getBoundingClientRect(), natural, {
+        x: x ?? '50%',
+        y: y ?? x ?? '50%',
+      })
+    ) {
+      return false
     }
   }
 
@@ -120,6 +137,21 @@ function groundOf(element: Element, sample: Box, onReady: () => void): boolean |
   const [r, g, b, alpha] = channels.map(Number) as [number, number, number, number | undefined]
   if ((alpha ?? 1) < OPAQUE_ALPHA) return null
   return luminance(r, g, b) > LIGHT_LUMINANCE
+}
+
+/**
+ * The picture's own proportions, off the element showing it.
+ *
+ * `naturalWidth`/`naturalHeight` are the decoded image's, and the LQIP behind
+ * it is a scaled copy of the same picture — so either one answers the shape
+ * question, and the element already has it. `null` before the image has
+ * decoded, which is a `contain` box whose letterbox cannot be located yet;
+ * the caller treats that as picture, which is the safe half.
+ */
+function intrinsicSize(element: Element): { width: number; height: number } | null {
+  const image = element as HTMLImageElement
+  if (!image.naturalWidth || !image.naturalHeight) return null
+  return { width: image.naturalWidth, height: image.naturalHeight }
 }
 
 /**
@@ -154,15 +186,13 @@ function groundOf(element: Element, sample: Box, onReady: () => void): boolean |
  * the pictures get a vote. A single white button on a dark hero gets its vote
  * too, and loses eight to one.
  *
- * ── KNOWN LIMITATION: PICTURES WITH NO LQIP ────────────────────────────────
+ * ── PICTURES WITH NO LQIP ──────────────────────────────────────────────────
  *
  * The projections that ask for `metadata{lqip, isOpaque}` are the photographic
  * fields; a logo field carries no LQIP, and neither does an asset with
- * transparency (Sanity renders every LQIP onto a flat ground, which would
- * report a plate the real asset never paints). Those elements have no ground
- * of their own, so the walk passes through to whatever contains them — which is
- * the right answer for a logo on a band, and a guess for anything else. The way
- * out is the declaration, not a harder sampler.
+ * transparency. Those elements are not recognised as pictures, so the walk
+ * passes through to whatever contains them — the right answer for a logo on a
+ * band, and a guess for anything else. The way out is `data-surface`.
  *
  * The flip is a colour state, not motion — it is not gated on
  * `prefers-reduced-motion`, and the SSR/no-JS output is simply the default dark
@@ -188,8 +218,6 @@ function groundOf(element: Element, sample: Box, onReady: () => void): boolean |
  *   neither a scroll nor a resize. `MutationObserver` sees the swap.
  * - **A restore from the back/forward cache.** The page comes back with its
  *   effects never re-run, so `pageshow` is the only signal there is.
- * - **An LQIP finishing its decode.** The first frame over a picture cannot
- *   read it yet; the decode says when it can.
  *
  * Everything funnels through `schedule`, so however many of them fire at once
  * the bar is still sampled at most once per frame.
@@ -197,8 +225,6 @@ function groundOf(element: Element, sample: Box, onReady: () => void): boolean |
 export function watchNavInk(header: HTMLElement): () => void {
   let frame = 0
 
-  // Declared before `isOverLight` needs it, and passed down to `groundOf` so a
-  // decode that lands after the sample can ask for another one.
   const schedule = () => {
     if (frame) return
     frame = requestAnimationFrame(sample)
@@ -218,24 +244,20 @@ export function watchNavInk(header: HTMLElement): () => void {
     for (let column = 0; column < COLUMNS; column++) {
       const left = bar.left + slice * column
       const strip: Box = { left, right: left + slice, top: bar.top, bottom: bar.bottom }
-      let ground: boolean | null | undefined = true
+      let ground = true
       for (const element of document.elementsFromPoint(left + slice / 2, midpoint)) {
         if (header.contains(element)) continue
-        ground = groundOf(element, strip, schedule)
-        if (ground !== null) break
+        const answer = groundOf(element, strip)
         // A veil, a gradient, an element with no ground of its own: keep
         // walking to what it is over.
-        ground = true
+        if (answer === null) continue
+        ground = answer
+        break
       }
-      // Still decoding: this column has no answer yet, so it casts no vote.
-      if (ground === undefined) continue
       read++
       if (ground) light++
     }
 
-    // No column could be read at all — every one of them is over a picture
-    // still decoding. Hold the skin the server rendered rather than flip twice.
-    if (read === 0) return false
     return light * 2 > read
   }
 
@@ -267,7 +289,6 @@ export function watchNavInk(header: HTMLElement): () => void {
     window.removeEventListener('pageshow', schedule)
     reflow.disconnect()
     swap.disconnect()
-    forgetListener(schedule)
   }
 }
 
