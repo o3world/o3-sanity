@@ -56,7 +56,7 @@ type InsightViewProps = NonNullable<INSIGHT_QUERY_RESULT>
  *
  * "Keep reading" renders through the same `SectionShell` the Home Blog band
  * uses, so heading, controls and row all sit in the standard 1248px column and
- * the track's own `overflow-x-auto` clips scrolled cards at the gutter line.
+ * the carousel viewport clips scrolled cards at the gutter line.
  * It used to build a bare `<section>` with no gutter, which put the heading on
  * the viewport edge and ran the row off both sides — one carousel rendering
  * two different ways. `CarouselTrack` records why the 1440 frame's bleed past

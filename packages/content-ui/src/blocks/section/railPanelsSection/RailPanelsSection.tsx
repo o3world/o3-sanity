@@ -134,7 +134,7 @@ type RailPanelsSectionProps = SectionProps<'railPanelsSection'> & {
  * ## `layout: track` — Home's "How we work" (`2846:5480`), #309
  *
  * What the numbered rail became. The three engagements are no longer a
- * vertical stack beside a sticky rail; they are a horizontal snap-scroller of
+ * vertical stack beside a sticky rail; they are a horizontal carousel of
  * hairline-separated columns, with the rail's job — where am I in the set —
  * done by an ink third of the rule above them. See `PanelTrack`.
  */
@@ -206,8 +206,8 @@ export function RailPanelsSection({
         className="max-lg:pb-12 max-lg:pt-12"
       >
         <PanelTrack
-          // The header rides inside the track's pinned stage, so it holds
-          // still with the columns while the walk runs.
+          // The header renders inside the track so the rule it hangs from
+          // keeps its 18px seat under the header row.
           header={header}
           label={stegaClean(heading) ?? undefined}
           items={items.map((panel, index) => ({

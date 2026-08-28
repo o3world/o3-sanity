@@ -59,6 +59,17 @@ export type { CaseChapterDetail, CaseChapterProps } from './components/case-chap
 export { CarouselControl } from './components/carousel-control'
 export type { CarouselControlProps } from './components/carousel-control'
 
+// Carousel — shadcn's Embla carousel, arrows swapped for CarouselControl
+export {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+  useCarousel,
+} from './components/ui/carousel'
+export type { CarouselApi } from './components/ui/carousel'
+
 // Card
 export {
   Card,

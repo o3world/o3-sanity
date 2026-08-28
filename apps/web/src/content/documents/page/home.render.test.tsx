@@ -191,34 +191,35 @@ describe('the seeded homepage', () => {
  */
 describe('the homepage at 402 (ADR 0006)', () => {
   it('scrolls sideways only where a 402 frame draws a track', () => {
-    // Two bands do, and both are read rather than inherited: the insights
-    // carousel since the 2026-08-13 amendment (#90), and the how-we-work
-    // track, whose 402 frame (`2975:8355`) draws one column with the rest off
-    // canvas. The assertion is exact, not empty: a band that starts sizing
-    // itself `w-max` or `w-screen`, or an `overflow-scroll` region, still
-    // fails — which is the 402 regression this was written for.
-    expect(unprefixedHorizontalScrollUtilities(html)).toEqual(['overflow-x-auto', 'snap-x'])
+    // Two bands move sideways — the insights carousel (#90) and the
+    // how-we-work track (`2975:8355`) — and both are Embla carousels now:
+    // an `overflow-hidden` viewport, not a scroll region. So the honest
+    // reading of ADR 0006's rule is that NO unprefixed scroll utility may
+    // appear at all; a band that starts sizing itself `w-max` or `w-screen`,
+    // or an `overflow-scroll` region, still fails — which is the 402
+    // regression this was written for.
+    expect(unprefixedHorizontalScrollUtilities(html)).toEqual([])
+
+    // And the two carousels are really there — the guard above would also
+    // pass on a page that lost them.
+    expect(html.match(/aria-roledescription="carousel"/g) ?? []).toHaveLength(2)
   })
 
   it('gives the how-we-work track one column per view until lg', () => {
     // Matched on the band's OWN class attribute, not on the document: the
     // utilities probe above de-duplicates, so the carousel would answer for
     // this band and the assertion would pass with the track gone.
-    const column = html.match(/<li[^>]*class="([^"]*lg:w-\[42\.548%\][^"]*)"/)?.[1] ?? ''
+    const column = html.match(/<div[^>]*class="([^"]*lg:basis-\[42\.548%\][^"]*)"/)?.[1] ?? ''
     expect(column, 'no track column was rendered').not.toBe('')
     // The frame's 531 over its 1248 content column (`2846:5480`), held as a
     // fraction so every lg viewport keeps the framing; the full content
     // column at 402 — where the frame's own column overruns the gutter by its
     // right padding alone.
-    expect(column).toContain('w-full')
+    expect(column).toContain('basis-full')
     // The hairline between columns is the one part that is `lg:` only: at 402
     // it falls outside the gutter, so it is drawn nowhere rather than at the
     // wrong place.
     expect(variantsOf(html, 'border-r')).toEqual(['lg:border-r'])
-
-    const track = html.match(/<ol[^>]*class="([^"]*snap-mandatory[^"]*)"/)?.[1] ?? ''
-    expect(track, 'the track is not a scroll region').toContain('overflow-x-auto')
-    expect(track).toContain('snap-x')
   })
 
   /**
@@ -237,12 +238,10 @@ describe('the homepage at 402 (ADR 0006)', () => {
 
   it('gives the insights carousel one card per view until sm', () => {
     // `2204:1145` draws the controls at 402, so the track has to move there;
-    // what stays `sm:` is the card measure — full column below, the frame's
-    // 394.67px card from `sm` up so the tablet range is not one viewport-wide
-    // square per view (`2134:1186`).
-    expect(html).toContain('sm:w-[394px]')
-    expect(variantsOf(html, 'overflow-x-auto')).toEqual(['overflow-x-auto'])
-    expect(variantsOf(html, 'snap-x')).toEqual(['snap-x'])
+    // what stays `sm:` is the card measure — full column below (the slide's
+    // own `basis-full` default), the frame's 394.67px card from `sm` up so
+    // the tablet range is not one viewport-wide square per view (`2134:1186`).
+    expect(html).toContain('sm:basis-[394px]')
   })
 
   it('clips the partner strip at every width and crawls it instead of wrapping', () => {

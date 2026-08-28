@@ -90,42 +90,6 @@ export const TrackEntrance: Story = {
   ),
 }
 
-/**
- * The track's advance — scroll the page slowly and the columns walk sideways.
- *
- * The spacer above and below is what makes it visible: the band's transit
- * across the viewport is the whole travel, so the story needs room on both
- * sides of it to be scrolled through. The rule under the columns is reading
- * `scrollLeft` and knows nothing about who moved it, so it tracks the advance
- * for free.
- *
- * Grab the columns — pointer, a sideways wheel, tab into the row and use the
- * arrow keys — and the page stops steering them for as long as the band is on
- * screen, snapping back on as it hands over. Scroll the band clear of the
- * viewport and back and it takes the wheel again.
- *
- * Neither this nor the entrance runs on a coarse pointer or under reduced
- * motion, and Storybook cannot fake either media query — check them in the
- * browser's emulation panel.
- */
-export const TrackAdvance: Story = {
-  args: seededSectionArgs('index', 'railPanelsSection', 1),
-  parameters: { design: figmaDesign('2846:5480') },
-  render: (args) => (
-    <>
-      <div className="bg-bone flex h-screen items-center justify-center">
-        <p className="text-fg-muted">Scroll down ↓</p>
-      </div>
-      <Reveal>
-        <RailPanelsSection {...args} />
-      </Reveal>
-      <div className="bg-bone flex h-screen items-center justify-center">
-        <p className="text-fg-muted">↑ Scroll back up</p>
-      </div>
-    </>
-  ),
-}
-
 /** The track at 402 (`2975:8355`) — one column per view, no hairline in sight. */
 export const TrackMobile: Story = {
   args: seededSectionArgs('index', 'railPanelsSection', 1),
