@@ -1,4 +1,8 @@
-import { COLLECTION_INDEX_QUERY, INSIGHTS_PAGE_QUERY } from '@o3/sanity/queries'
+import {
+  COLLECTION_INDEX_QUERY,
+  INSIGHT_CATEGORY_SLUGS_QUERY,
+  INSIGHTS_PAGE_QUERY,
+} from '@o3/sanity/queries'
 import { collectionPrefixes } from '@o3/sanity/brand'
 import type {
   COLLECTION_INDEX_QUERY_RESULT,
@@ -59,7 +63,7 @@ function InsightIndexRenderer({ pagination, facets, ...rest }: Props) {
  * The paginated, filterable /insights index (12/page).
  *
  * **The page is two halves.** The feed — chips, grid, pager — is the route's,
- * because `?page=` is one parameter per document and a paginated listing
+ * because a page is one path per document and a paginated listing
  * cannot be a block someone drops twice. Everything around it is the
  * `collectionIndex` document this entry fetches beside the feed (#347), so the
  * hero and the closer are an editor's rather than this file's.
@@ -71,6 +75,8 @@ export const insightIndex = defineIndexType({
   query: INSIGHTS_PAGE_QUERY,
   pageSize: 12,
   facets: ['category'],
+  // The slugs `/insights/category/[category]` prerenders (#370).
+  facetValues: { category: INSIGHT_CATEGORY_SLUGS_QUERY },
   document: {
     type: 'collectionIndex',
     query: COLLECTION_INDEX_QUERY,
@@ -83,8 +89,8 @@ export const insightIndex = defineIndexType({
     title: 'Insights',
     description: 'Notes from inside the work — what we tried, and what broke.',
     // Paginated and filtered pages canonicalize to the unpaginated index:
-    // `?page=2` and `?category=design` are the same collection, not further
-    // documents.
+    // `/insights/page/2` and `/insights/category/design` are the same
+    // collection, not further documents.
     path: collectionPrefixes().insight,
   },
   // The Insights index frame #61 commissioned — hero `2336:4477`, filter bar

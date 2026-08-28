@@ -37,6 +37,7 @@
     "./queries": "./src/queries.ts",
     "./schemas": "./src/schemas/index.ts",
     "./schemas/registry": "./src/schemas/blocks/registry.ts",
+    "./schemas/reserved-slugs": "./src/schemas/documents/reservedSlugs.ts",
     "./types": "./src/types.ts",
     "./types/generated": "./src/types/generated.ts"
   }

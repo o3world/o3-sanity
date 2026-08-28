@@ -29,10 +29,10 @@ function manyCases(count: number) {
   )
 }
 
-function render(data: unknown, searchParams?: Record<string, string>) {
+function render(data: unknown, params?: Record<string, string>) {
   return renderRoute(route, {
     data: withSettings(data, siteSettings({ title: 'O3XO' })),
-    searchParams,
+    params,
   })
 }
 
@@ -104,9 +104,9 @@ describe('the case-study index route', () => {
   it('keeps the prefix on both ends of the pager', async () => {
     const { html } = await render(aCaseStudiesPage(manyCases(9), 30), { page: '2' })
 
-    // Page 1 is the unpaginated index, so Previous drops the parameter.
+    // Page 1 is the unpaginated index, so Previous drops the segment.
     expect(html).toContain('href="/case-studies"')
-    expect(html).toContain('href="/case-studies?page=3"')
+    expect(html).toContain('href="/case-studies/page/3"')
   })
 
   /**
@@ -152,7 +152,7 @@ describe('the case-study index route', () => {
     const { html } = await render(aCaseStudiesPage(manyCases(9), 30), { page: '2' })
 
     const current = html.match(/<a[^>]*aria-current="page"[^>]*>/)?.[0] ?? ''
-    expect(current).toContain('href="/case-studies?page=2"')
+    expect(current).toContain('href="/case-studies/page/2"')
     expect([...html.matchAll(/aria-current="page"/g)]).toHaveLength(1)
   })
 })

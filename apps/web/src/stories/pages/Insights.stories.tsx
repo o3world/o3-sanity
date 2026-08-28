@@ -47,7 +47,7 @@ export const Desktop: Story = {
 }
 
 /**
- * The filtered index — `/insights?category=technology`, the state a chip
+ * The filtered index — `/insights/category/technology`, the state a chip
  * navigates to. Its chip is the only black one and the grid holds only what
  * that category has, which is the whole of what the control promises.
  */

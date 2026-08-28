@@ -7,7 +7,7 @@ import { blockArrayMembers, type BlockArrays } from '../blocks/registry'
  * below a feed the route itself owns.
  *
  * A collection index is the one page shape whose middle cannot be authored.
- * `?page=` is one parameter per document, so two paginated listings on a page
+ * A page is one path per document, so two paginated listings on a page
  * have no coherent answer to what page 3 means; the feed — chips, grid and
  * pager — therefore stays with the route, and this document holds everything
  * around it. `sectionsAbove` and `sectionsBelow` are named against that feed.

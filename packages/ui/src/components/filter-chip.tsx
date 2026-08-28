@@ -32,7 +32,7 @@ import { cn } from '../lib/utils'
  *
  * ```tsx
  * <FilterChip asChild selected={active}>
- *   <Link href="/insights?category=design">Design</Link>
+ *   <Link href="/insights/category/design">Design</Link>
  * </FilterChip>
  * ```
  */

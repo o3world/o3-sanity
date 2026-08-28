@@ -11,6 +11,7 @@ import {
   classTokens,
   declaredSizes,
   preloadedImageTags,
+  expectNotFound,
   renderRoute,
   unprefixedHorizontalScrollUtilities,
   aSeededCollectionIndex,
@@ -24,11 +25,12 @@ import { insightIndex } from './collectionIndex'
 /**
  * The paginated, filterable /insights index.
  *
- * Two things on this route are real logic rather than layout: an out-of-range
- * `?page=` must clamp rather than 404 or render an empty grid, and
- * `?category=` must reach the query as a GROQ param and come back to the view
- * as the chip that looks selected. Both are pinned here, along with the
- * composition the canonical frame (`2336:4310`, #61) settles.
+ * Two things on this route are real logic rather than layout: the page and
+ * the category are PATH segments (#370), so a page past the end is a 404
+ * rather than a clamp, and a category segment must reach the query as a GROQ
+ * param and come back to the view as the chip that looks selected. Both are
+ * pinned here, along with the composition the canonical frame (`2336:4310`,
+ * #61) settles.
  */
 const route = buildIndexRoute(insightIndex)
 
@@ -73,30 +75,37 @@ describe('insights collection index route', () => {
   it('slices the feed by the requested page', async () => {
     const { calls } = await renderRoute(route, {
       data: anInsightsPage(manyInsights(12), 40),
-      searchParams: { page: '2' },
+      params: { page: '2' },
     })
     expect(feedCalls(calls)[0]?.params).toMatchObject({ offset: 12, end: 24 })
   })
 
-  it('clamps a page past the end back to the last real page', async () => {
-    const { calls } = await renderRoute(route, {
+  /**
+   * A path is a claim that a page exists, so `/insights/page/99` is wrong.
+   * Answering it with the last page would give that page a second address.
+   */
+  it('404s a page past the end rather than clamping to the last one', async () => {
+    const calls = await expectNotFound(route, {
       data: anInsightsPage(manyInsights(12), 20),
-      searchParams: { page: '99' },
+      params: { page: '99' },
     })
 
-    // 20 items at 12/page = 2 pages; the clamp refetches page 2.
-    expect(feedCalls(calls)).toHaveLength(2)
-    expect(feedCalls(calls)[1]?.params).toMatchObject({ offset: 12, end: 24 })
+    // 20 items at 12/page = 2 pages. One read, and no refetch behind it.
+    expect(feedCalls(calls)).toHaveLength(1)
   })
 
-  it('treats junk page params as page 1 without a second fetch', async () => {
-    const { calls } = await renderRoute(route, {
+  it('404s a page segment that is not a page at all', async () => {
+    await expectNotFound(route, {
       data: anInsightsPage(manyInsights(3), 3),
-      searchParams: { page: 'not-a-number' },
+      params: { page: 'not-a-number' },
     })
+  })
 
-    expect(feedCalls(calls)).toHaveLength(1)
-    expect(feedCalls(calls)[0]?.params).toMatchObject({ offset: 0, end: 12 })
+  it('404s `page/1`, which is the bare index under a second URL', async () => {
+    await expectNotFound(route, {
+      data: anInsightsPage(manyInsights(3), 3),
+      params: { page: '1' },
+    })
   })
 
   it('uses the entry’s static metadata', async () => {
@@ -184,7 +193,7 @@ describe('insights index category filter', () => {
   it('hands the requested category to the query as a GROQ param', async () => {
     const { calls } = await renderRoute(route, {
       data: anInsightsPage(manyInsights(3), 3, CATEGORIES),
-      searchParams: { category: 'design' },
+      params: { category: 'design' },
     })
     expect(feedCalls(calls)[0]?.params).toMatchObject({ category: 'design' })
   })
@@ -195,8 +204,8 @@ describe('insights index category filter', () => {
     })
 
     expect(html).toContain('href="/insights"')
-    expect(html).toContain('href="/insights?category=artificial-intelligence-ai"')
-    expect(html).toContain('href="/insights?category=design"')
+    expect(html).toContain('href="/insights/category/artificial-intelligence-ai"')
+    expect(html).toContain('href="/insights/category/design"')
     expect(html).toContain('>All<')
     expect(html).toContain('>Design<')
   })
@@ -204,11 +213,11 @@ describe('insights index category filter', () => {
   it('marks the active chip — and only it — as current', async () => {
     const { html } = await renderRoute(route, {
       data: anInsightsPage(manyInsights(3), 3, CATEGORIES),
-      searchParams: { category: 'design' },
+      params: { category: 'design' },
     })
     expect(html.match(/aria-current="page"/g)).toHaveLength(1)
     // The selected chip is Theme=Black (`2337:4542`): ink fill, white label.
-    expect(html).toMatch(/aria-current="page"[^>]*href="\/insights\?category=design"/)
+    expect(html).toMatch(/aria-current="page"[^>]*href="\/insights\/category\/design"/)
   })
 
   it('marks All as current when nothing is filtered', async () => {
@@ -221,40 +230,49 @@ describe('insights index category filter', () => {
   it('keeps the filter on every pager link', async () => {
     const { html } = await renderRoute(route, {
       data: anInsightsPage(manyInsights(12), 40, CATEGORIES),
-      searchParams: { category: 'design', page: '2' },
+      params: { category: 'design', page: '2' },
     })
 
-    expect(html).toContain('href="/insights?category=design"')
-    expect(html).toContain('href="/insights?category=design&amp;page=3"')
+    expect(html).toContain('href="/insights/category/design"')
+    expect(html).toContain('href="/insights/category/design/page/3"')
   })
 
   /** A chip is a fresh cut of the collection; page 4 of the old one is not in it. */
   it('drops the page when a chip is followed', async () => {
     const { html } = await renderRoute(route, {
       data: anInsightsPage(manyInsights(12), 40, CATEGORIES),
-      searchParams: { category: 'design', page: '2' },
+      params: { category: 'design', page: '2' },
     })
-    expect(html).toContain('href="/insights?category=artificial-intelligence-ai"')
-    expect(html).not.toContain('category=artificial-intelligence-ai&amp;page=')
+    expect(html).toContain('href="/insights/category/artificial-intelligence-ai"')
+    expect(html).not.toContain('/category/artificial-intelligence-ai/page/')
   })
 
-  it('clamps a filtered page against the filtered total, not the collection', async () => {
-    const { calls } = await renderRoute(route, {
+  it('counts a filtered page against the filtered total, not the collection', async () => {
+    const calls = await expectNotFound(route, {
       data: anInsightsPage(manyInsights(2), 2, CATEGORIES),
-      searchParams: { category: 'design', page: '9' },
+      params: { category: 'design', page: '9' },
     })
 
-    // Two matches is one page, so the clamp refetches page 1 — with the
-    // filter still on it.
-    expect(feedCalls(calls)).toHaveLength(2)
-    expect(feedCalls(calls)[1]?.params).toMatchObject({ offset: 0, end: 12, category: 'design' })
+    // Two matches is one page, so page 9 of this cut does not exist — and the
+    // read that established that carried the filter.
+    expect(feedCalls(calls)[0]?.params).toMatchObject({ category: 'design' })
   })
 
-  it('says so rather than drawing an empty grid', async () => {
-    const { html } = await renderRoute(route, {
+  /**
+   * The chips only offer categories that have articles, so a cut with nothing
+   * in it is a category the collection does not have. Serving 200s there hands
+   * a crawler an unbounded space of URLs — the thing paths were moved into the
+   * route key to stop.
+   */
+  it('404s a category the collection has nothing under', async () => {
+    await expectNotFound(route, {
       data: anInsightsPage([], 0, CATEGORIES),
-      searchParams: { category: 'nothing-here' },
+      params: { category: 'nothing-here' },
     })
+  })
+
+  it('still draws the empty state for a collection with no articles at all', async () => {
+    const { html } = await renderRoute(route, { data: anInsightsPage([], 0, CATEGORIES) })
     expect(html).toContain('No insights under that filter')
   })
 
@@ -278,7 +296,7 @@ const page = await renderRoute(route, {
     anInsightsPage(manyInsights(12), 40, CATEGORIES),
     aSeededCollectionIndex('insights'),
   ),
-  searchParams: { page: '2' },
+  params: { page: '2' },
 })
 
 describe('insights index composition', () => {
@@ -375,15 +393,15 @@ describe('insights index pager', () => {
   it('offers every page of the collection by number, not just the two neighbours', () => {
     // `page` above is this exact state: page 2 of 4 (#241).
     expect(page.html).toContain('href="/insights"')
-    expect(page.html).toContain('href="/insights?page=2"')
-    expect(page.html).toContain('href="/insights?page=3"')
-    expect(page.html).toContain('href="/insights?page=4"')
+    expect(page.html).toContain('href="/insights/page/2"')
+    expect(page.html).toContain('href="/insights/page/3"')
+    expect(page.html).toContain('href="/insights/page/4"')
 
     // Scoped to the pager: the selected filter chip carries `aria-current`
     // too, and it is a different "current" — the cut on screen, not the page.
     const pager = page.html.slice(page.html.indexOf('aria-label="Pagination"'))
     const current = pager.match(/<a[^>]*aria-current="page"[^>]*>/)?.[0] ?? ''
-    expect(current).toContain('href="/insights?page=2"')
+    expect(current).toContain('href="/insights/page/2"')
   })
 
   it('drops Previous on the first page and Next on the last', async () => {
@@ -393,7 +411,7 @@ describe('insights index pager', () => {
 
     const last = await renderRoute(route, {
       data: anInsightsPage(manyInsights(4), 40),
-      searchParams: { page: '4' },
+      params: { page: '4' },
     })
     expect(last.html).toContain('Previous')
     expect(last.html).not.toContain('>Next')
@@ -413,7 +431,7 @@ describe('insights index pager', () => {
 /**
  * THE AUTHORED BANDS (#347) — the half of this page an editor owns.
  *
- * The feed stays the route's: `?page=` is one parameter per document, so a
+ * The feed stays the route's: a page is one path per document, so a
  * paginated listing cannot be a block someone drops twice. Everything around
  * it is a `collectionIndex` document, and these assertions are about where its
  * bands land and what happens when it is not there.
@@ -538,18 +556,20 @@ describe('insights index metadata', () => {
 
   it('keeps the canonical on the unpaginated index for a paginated request', async () => {
     const { metadata } = await renderRoute(route, {
-      data: withIndexChrome(feed(), aCollectionIndex()),
-      searchParams: { page: '2' },
+      // A collection long enough for the page to exist: this test is about
+      // the tag on a page that does, not about the 404 above.
+      data: withIndexChrome(anInsightsPage(manyInsights(12), 40), aCollectionIndex()),
+      params: { page: '2' },
     })
 
     expect(metadata.alternates?.canonical).toContain('/insights')
-    expect(String(metadata.alternates?.canonical)).not.toContain('page=')
+    expect(String(metadata.alternates?.canonical)).not.toContain('/page/')
   })
 
   it('keeps the canonical on the unfiltered index for a filtered request', async () => {
     const { metadata } = await renderRoute(route, {
       data: withIndexChrome(feed(), aCollectionIndex()),
-      searchParams: { category: 'design' },
+      params: { category: 'design' },
     })
 
     expect(String(metadata.alternates?.canonical)).not.toContain('category=')

@@ -1,6 +1,7 @@
 import type { NextConfig } from 'next'
 import { sanity } from 'next-sanity/live/cache-life'
 
+import { indexRedirects } from './src/lib/indexRedirects'
 import { GENERATED_REDIRECTS } from './src/lib/redirects.generated'
 
 const nextConfig: NextConfig = {
@@ -26,7 +27,11 @@ const nextConfig: NextConfig = {
     loaderFile: './src/lib/sanity-image-loader.ts',
   },
   /**
-   * The WordPress redirect map, resolved to terminals (#24).
+   * Two maps, in one list.
+   *
+   * The collection indexes' retired query-string URLs come first — they are
+   * exact, and none of them can collide with a WordPress path. Then the
+   * WordPress redirect map, resolved to terminals (#24).
    *
    * Generated, never written by hand: `pnpm --filter @o3/migration redirects`
    * reads both plugins' committed export and rewrites
@@ -37,11 +42,14 @@ const nextConfig: NextConfig = {
    * tell search engines to keep the old URL indexed.
    */
   async redirects() {
-    return GENERATED_REDIRECTS.map(({ source, destination }) => ({
-      source,
-      destination,
-      permanent: true,
-    }))
+    return [
+      ...indexRedirects(),
+      ...GENERATED_REDIRECTS.map(({ source, destination }) => ({
+        source,
+        destination,
+        permanent: true,
+      })),
+    ]
   },
 }
 

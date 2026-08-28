@@ -249,7 +249,7 @@ export const INSIGHT_SLUGS_QUERY = defineQuery(
  * `$category` is null on the unfiltered index, which the `== null` arm short-
  * circuits — the same shape `LATEST_INSIGHTS_QUERY` uses for its optional
  * category. Matching on the **slug** rather than the reference id is what lets
- * the filter live in the URL (`/insights?category=design`) instead of leaking
+ * the filter live in the URL (`/insights/category/design`) instead of leaking
  * a document id into it.
  *
  * `total` repeats the filter deliberately: the pager counts the filtered feed,
@@ -276,6 +276,20 @@ export const INSIGHTS_PAGE_QUERY = defineQuery(`{
   "total": count(*[_type == "insight" && ($category == null || $category in categories[]->slug.current)]),
   "categories": *[_type == "category" && slug.current != "uncategorized" && count(*[_type == "insight" && references(^._id)]) > 0] | order(title asc){title, "slug": slug.current}
 }`)
+
+/**
+ * The category slugs `/insights` has a filtered path for (#370).
+ *
+ * The same set the filter bar draws — every category with an article, minus
+ * WordPress's `uncategorized` sentinel — reduced to the slugs, because what
+ * reads it is `generateStaticParams` and a path is all it builds. The two
+ * conditions are repeated rather than shared: a fragment would have to be
+ * interpolated into both, and the `defineQuery` a build enumerates is the one
+ * that has to be readable on its own.
+ */
+export const INSIGHT_CATEGORY_SLUGS_QUERY = defineQuery(
+  `*[_type == "category" && slug.current != "uncategorized" && count(*[_type == "insight" && references(^._id)]) > 0].slug.current`,
+)
 
 /**
  * The /work index (#43). Ordered newest first on `publishedAt`, falling back

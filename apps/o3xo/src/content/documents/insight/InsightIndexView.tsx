@@ -4,6 +4,7 @@ import { CollectionHero, FilterChip } from '@o3/ui'
 import { brandConfig } from '@o3/sanity/brand'
 import type { INSIGHTS_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 import type { Pagination } from '@o3/content-runtime/routes'
+import { indexHref } from '@o3/content-runtime/routes/index-paths'
 
 import { InsightCard } from '@o3/content-ui/cards'
 import { Pager } from '@o3/content-ui'
@@ -22,20 +23,17 @@ interface InsightIndexViewProps {
 }
 
 /**
- * `/insights` and `/insights?category=design&page=2` — one builder, so a chip
- * and a pager link can never disagree about how this route spells its state.
- * A chip resets the page (a new filter has no page 4 in common with the old
- * one); the pager keeps the filter. The prefix is brand config's.
+ * `/insights` and `/insights/category/design/page/2` — one builder over the
+ * route's own scheme (#370), so a chip, a pager link and the route cannot
+ * disagree about how this index spells its state. A chip resets the page (a
+ * new filter has no page 4 in common with the old one); the pager keeps the
+ * filter. The prefix is brand config's.
  */
 function insightsHref({
   category,
-  page,
+  page = 1,
 }: { category?: string | null; page?: number } = {}): string {
-  const params = new URLSearchParams()
-  if (category) params.set('category', category)
-  if (page && page > 1) params.set('page', String(page))
-  const query = params.toString()
-  return query ? `${prefix}?${query}` : prefix
+  return indexHref(prefix, { facets: { category: category ?? null }, page })
 }
 
 /**

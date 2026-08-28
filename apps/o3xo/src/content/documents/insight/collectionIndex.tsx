@@ -1,4 +1,4 @@
-import { INSIGHTS_PAGE_QUERY } from '@o3/sanity/queries'
+import { INSIGHT_CATEGORY_SLUGS_QUERY, INSIGHTS_PAGE_QUERY } from '@o3/sanity/queries'
 import { brandConfig } from '@o3/sanity/brand'
 import type { INSIGHTS_PAGE_QUERY_RESULT } from '@o3/sanity/types/generated'
 
@@ -34,6 +34,8 @@ export const insightIndex = defineIndexType({
   query: INSIGHTS_PAGE_QUERY,
   pageSize: 12,
   facets: ['category'],
+  // The slugs `/insights/category/[category]` prerenders (#370).
+  facetValues: { category: INSIGHT_CATEGORY_SLUGS_QUERY },
   renderer: InsightIndexRenderer,
   seo: {
     title: brandConfig().collections.insight.title,
@@ -41,8 +43,8 @@ export const insightIndex = defineIndexType({
     description:
       'Explore practical perspectives on AI strategy, industry-specific use cases, adoption challenges, and achieving measurable ROI from AI investments.',
     // Paginated and filtered pages canonicalize to the unpaginated index:
-    // `?page=2` and `?category=design` are the same collection, not further
-    // documents.
+    // `/insights/page/2` and `/insights/category/design` are the same
+    // collection, not further documents.
     path: brandConfig().collections.insight.prefix,
   },
   // O3's canonical Insights frame, borrowed deliberately (ADR 0028 addendum) —

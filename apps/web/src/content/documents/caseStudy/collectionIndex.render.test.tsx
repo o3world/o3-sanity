@@ -165,11 +165,11 @@ describe('the /work index', () => {
     // one of the four numbers rather than a sentence beside two arrows.
     const paged = await renderRoute(route, {
       data: aCaseStudiesPage(cards, 30),
-      searchParams: { page: '2' },
+      params: { page: '2' },
     })
 
     const current = paged.html.match(/<a[^>]*aria-current="page"[^>]*>/)?.[0] ?? ''
-    expect(current).toContain('href="/work?page=2"')
+    expect(current).toContain('href="/work/page/2"')
     expect([...paged.html.matchAll(/aria-current="page"/g)]).toHaveLength(1)
   })
 })
@@ -234,7 +234,7 @@ describe('work index authored bands', () => {
   it('paginates and reads its chrome with no facet declared at all', async () => {
     const { calls } = await renderRoute(route, {
       data: withIndexChrome(aCaseStudiesPage(cards, 20), chrome()),
-      searchParams: { page: '2' },
+      params: { page: '2' },
     })
 
     const feedRead = calls.find(
@@ -274,11 +274,11 @@ describe('work index metadata', () => {
   it('keeps the canonical on the unpaginated index for a paginated request', async () => {
     const { metadata } = await renderRoute(route, {
       data: withIndexChrome(aCaseStudiesPage(cards, 20), chrome()),
-      searchParams: { page: '2' },
+      params: { page: '2' },
     })
 
     expect(String(metadata.alternates?.canonical)).toContain('/work')
-    expect(String(metadata.alternates?.canonical)).not.toContain('page=')
+    expect(String(metadata.alternates?.canonical)).not.toContain('/page/')
   })
 
   it('ignores a canonical typed onto the document', async () => {

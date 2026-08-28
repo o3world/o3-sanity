@@ -2,6 +2,8 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 import { briefsField } from '../blocks/fields'
 import { blockArrayMembers, type BlockArrays } from '../blocks/registry'
 
+import { isReservedCollectionSlug, RESERVED_SLUG_MESSAGE } from './reservedSlugs'
+
 /**
  * A case study, built from one roster's block arrays.
  *
@@ -24,7 +26,12 @@ export const caseStudy = (arrays: BlockArrays) =>
         name: 'slug',
         type: 'slug',
         options: { source: 'title' },
-        validation: (rule) => rule.required(),
+        validation: (rule) =>
+          rule
+            .required()
+            .custom((slug) =>
+              isReservedCollectionSlug(slug?.current) ? RESERVED_SLUG_MESSAGE : true,
+            ),
       }),
       defineField({
         name: 'client',

@@ -2,6 +2,7 @@ import type { NextConfig } from 'next'
 import { sanity } from 'next-sanity/live/cache-life'
 
 import { BRAND } from './brand'
+import { indexRedirects } from './src/lib/indexRedirects'
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -29,6 +30,14 @@ const nextConfig: NextConfig = {
    */
   env: {
     NEXT_PUBLIC_BRAND: BRAND,
+  },
+  /**
+   * The collection indexes' retired query-string URLs (#370). The brand is
+   * passed explicitly: this file is what sets `NEXT_PUBLIC_BRAND`, so nothing
+   * it imports can read it yet.
+   */
+  async redirects() {
+    return indexRedirects(BRAND)
   },
 }
 
