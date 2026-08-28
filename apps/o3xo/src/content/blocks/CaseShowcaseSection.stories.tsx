@@ -24,6 +24,9 @@ import { CARD_COMPONENTS } from './clientComponents'
  * (`4407:7758`) is #F9FAFB with three cards ACROSS, so this story is where the
  * two designs are furthest apart — a demotion candidate the component map has
  * not yet classified (#324).
+ *
+ * The band's scroll stacking is shared, so this brand's white plates pin and
+ * dim exactly as O3's photographs do. At rest every card is fully opaque.
  */
 const meta = {
   title: 'Content/Blocks/Section/CaseShowcaseSection',

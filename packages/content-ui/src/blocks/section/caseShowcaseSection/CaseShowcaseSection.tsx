@@ -4,6 +4,8 @@ import type { SectionProps } from '@o3/content-runtime/blocks'
 import { ButtonLink } from '../../../ButtonLink'
 import { getCard, type CardSlot } from '../../../cards/card-registry'
 
+import { CaseCardStack } from './CaseCardStack'
+
 /**
  * The card slot, REQUIRED here: `caseStudy` is app-first
  * (`APP_FIRST_RENDERERS`), so each app hands the band its own card and there
@@ -31,6 +33,11 @@ type CaseShowcaseSectionProps = SectionProps<'caseShowcaseSection'> & CardSlot<'
  *
  * The heading row is `space-between` aligned to **flex-end**, so the headline
  * in its 571px measure and the Size=Large button share a baseline.
+ *
+ * From the desktop breakpoint up the cards stack rather than scroll past: each
+ * pins under the chrome and the next slides over it, dimming what it covers
+ * (`CaseCardStack`). Figma draws a still and cannot say this; the sequence
+ * comes from the retired design prototype.
  */
 export function CaseShowcaseSection({
   heading,
@@ -58,16 +65,33 @@ export function CaseShowcaseSection({
             {button ? <ButtonLink button={button} size="large" /> : null}
           </div>
 
-          {/*
-           * Gap 24 at 402 (`1889:3620`), 48 at 1440 (`1683:2661`). ADR 0006
-           * lists this band precisely because it is *not* a composition
-           * divergence — both frames stack the cards, and only the gap moves.
-           */}
-          <div className="flex flex-col gap-6 lg:gap-12">
+          <CaseCardStack>
             {items.map((caseStudy) => (
-              <Card key={caseStudy._id} {...caseStudy} />
+              /*
+               * The wrapper is what stacks, not the card: `caseStudy` is
+               * app-first, so the band knows nothing about what it was handed
+               * and cannot pin it directly.
+               *
+               * `top-40` is the clearance the sticky rail in `PanelBand`
+               * already uses — the nav floats at `top-[64px]` and stands about
+               * 60 tall, so a card pins clear of it rather than under it.
+               *
+               * The wrapper paints the band's own black because a card is only
+               * a stack if it is opaque: O3's card is a photograph with no
+               * ground of its own behind it, and a missing image would leave
+               * the card beneath showing through the card on top.
+               *
+               * `lg:` only. The cards run past 550px tall and a phone viewport
+               * is barely twice that, so pinning them would leave a reader
+               * scrolling a card that never leaves. Below the breakpoint the
+               * band is the flat stack it has always been, and the dim reads
+               * the computed `position` and turns itself off.
+               */
+              <div key={caseStudy._id} className="bg-black lg:sticky lg:top-40">
+                <Card {...caseStudy} />
+              </div>
             ))}
-          </div>
+          </CaseCardStack>
         </div>
       </section>
     </SurfaceProvider>

@@ -233,11 +233,12 @@ describe('the homepage at 402 (ADR 0006)', () => {
     expect(html).toContain('border-brand')
   })
 
-  it('gives the insights carousel one card per view until lg', () => {
+  it('gives the insights carousel one card per view until sm', () => {
     // `2204:1145` draws the controls at 402, so the track has to move there;
-    // what stays `lg:` is the card measure — full column below, the frame's
-    // 394.67px card at 1440 (`2134:1186`).
-    expect(html).toContain('lg:w-[394px]')
+    // what stays `sm:` is the card measure — full column below, the frame's
+    // 394.67px card from `sm` up so the tablet range is not one viewport-wide
+    // square per view (`2134:1186`).
+    expect(html).toContain('sm:w-[394px]')
     expect(variantsOf(html, 'overflow-x-auto')).toEqual(['overflow-x-auto'])
     expect(variantsOf(html, 'snap-x')).toEqual(['snap-x'])
   })

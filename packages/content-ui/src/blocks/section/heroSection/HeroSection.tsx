@@ -4,10 +4,10 @@ import { stegaClean } from '@sanity/client/stega'
 import {
   CloseIcon,
   CollectionHero,
+  Entrance,
   Eyebrow,
-  MaskedLines,
+  StaggeredLines,
   OrbitalSphere,
-  Reveal,
   SurfaceProvider,
   surfaceAttrs,
 } from '@o3/ui'
@@ -252,6 +252,28 @@ export function HeroSection({
     )
   }
 
+  /*
+   * THE OPENER'S RHYTHM — one sequence, three parts, all of it derived from
+   * one step so the copy cannot desynchronise it.
+   *
+   * The headline's lines are a step apart. The rest of the column waits two
+   * steps after the last line has started, which is the gap that makes the
+   * headline read as a unit rather than as the first two of four things; then
+   * the standfirst and the button follow each other closely, on the house
+   * curve rather than the headline's spring, because they arrive rather than
+   * unfold.
+   *
+   * Read off motion.dev's editorial-stagger reference, which has no Figma
+   * anchor and cannot have one: the frames draw the band, not its entrance.
+   *
+   * Every delay below is measured from the band's first paint, not from
+   * hydration: `StaggeredLines` and `Entrance` are CSS animations in the server
+   * HTML for exactly that reason. A sequence this long has to start at paint,
+   * or the whole of it lands after the bundle does and the opener sits empty.
+   */
+  const lineStagger = 220
+  const columnDelay = (lines.length - 1) * lineStagger + lineStagger * 2
+
   return (
     // The orbital band always paints ink — the sphere and the white copy over
     // it are drawn on that colour, which is why the block offers no `surface`
@@ -303,7 +325,8 @@ export function HeroSection({
            * nothing added (`2089:4313` → `2089:4318`).
            */}
           <h1 className="text-hero font-display space-y-4 text-balance lg:space-y-0">
-            <MaskedLines
+            <StaggeredLines
+              stagger={lineStagger}
               lines={lines.map((line, index) => (
                 // The frame steps the value between lines rather than fading the
                 // block: within a line it is flat, and the step is hard. Both
@@ -326,21 +349,21 @@ export function HeroSection({
             // (`2975:8418`), where 24/34 holds rather than stepping down. The
             // 50% belongs to the headline's closing line alone — the standfirst
             // carries no alpha at either width.
-            <Reveal delay={120} className="mt-10">
+            <Entrance delay={columnDelay} className="mt-10">
               {/* 24/34 on both frames — flat, so `text-lead`'s 20px floor
                * would undersize it at 402. */}
               <p className="mx-auto max-w-[724px] text-balance text-[24px] leading-[34px] text-white">
                 {subheading}
               </p>
-            </Reveal>
+            </Entrance>
           ) : null}
 
           {button ? (
             // 33 below the standfirst at 1440, 39 at 402 (`1814:1622`'s
             // column gap, which is the same 39 above the standfirst).
-            <Reveal delay={220} className="mt-10 lg:mt-8">
+            <Entrance delay={columnDelay + 120} className="mt-10 lg:mt-8">
               <ButtonLink button={button} />
-            </Reveal>
+            </Entrance>
           ) : null}
         </div>
       </section>

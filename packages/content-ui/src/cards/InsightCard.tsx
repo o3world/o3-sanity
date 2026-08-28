@@ -87,7 +87,10 @@ export function InsightCard({
         'focus-visible:ring-offset-transparent',
       )}
     >
-      <div className="rounded-card bg-bone relative isolate aspect-square overflow-hidden">
+      {/* Capped at the three-up card's width from `sm` up, so a card laid out
+          in a one-column container keeps a card-sized tile instead of a
+          viewport-wide square. */}
+      <div className="rounded-card bg-bone relative isolate aspect-square overflow-hidden sm:max-w-[395px]">
         <SanityImage
           source={featuredImage?.image}
           alt={featuredImage?.alt ?? ''}

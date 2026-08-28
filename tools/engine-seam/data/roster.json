@@ -240,7 +240,7 @@
           "why": "cn is generic. FONT_SIZE_UTILITIES exists for a mechanism reason (tailwind-merge cannot see v4 CSS scales) but its sixteen values are this project's type scale — a fused constant inside an engine module."
         },
         {
-          "path": "src/components/masked-lines.tsx",
+          "path": "src/components/staggered-lines.tsx",
           "verdict": "engine",
           "why": "Pure stagger and reveal animation, no token names."
         },

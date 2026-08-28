@@ -1,4 +1,4 @@
-import type { ComponentType, ReactNode } from 'react'
+import type { ComponentType, HTMLAttributes, ReactNode } from 'react'
 
 import type { SanityBlock } from '@o3/sanity/types'
 
@@ -31,6 +31,20 @@ import { ANCHOR_OFFSET_CLASS, sectionAnchors } from './anchors'
  * levels below it — its header, its keyed items — off a path it did not have to
  * build.
  */
+/**
+ * The per-block wrapper an app supplies. It stands where the plain `<div>`
+ * stands — carrying the same `data-sanity`, `id` and `className` — and is told
+ * which block it is around, so an app can treat one type differently (the hero
+ * owns its own entrance, and its h1 is the LCP element).
+ *
+ * A component arriving as a parameter is how a brand-free module renders
+ * something it may not import.
+ */
+export interface DispatchedBlockWrapperProps extends HTMLAttributes<HTMLDivElement> {
+  blockType: string
+  children: ReactNode
+}
+
 export function renderDispatchedBlocks(opts: {
   blocks: readonly SanityBlock[]
   /**
@@ -45,8 +59,18 @@ export function renderDispatchedBlocks(opts: {
   documentType?: string
   /** The document array field hosting the blocks (`sections` | `story`). */
   fieldPath?: string
+  /** Stands in for the per-block `<div>`. Plain `<div>` when absent. */
+  BlockWrapper?: ComponentType<DispatchedBlockWrapperProps>
 }): ReactNode[] {
-  const { blocks, lookup, Placeholder, documentId, documentType, fieldPath = 'sections' } = opts
+  const {
+    blocks,
+    lookup,
+    Placeholder,
+    documentId,
+    documentType,
+    fieldPath = 'sections',
+    BlockWrapper,
+  } = opts
   // The seam owns the anchor for the same reason it owns band attribution:
   // five blocks build their own `<section>` rather than use the
   // shell, so a jump target routed through the shell would work on eleven
@@ -73,13 +97,16 @@ export function renderDispatchedBlocks(opts: {
     // (CONTEXT.md → Naming), so the collision is a rule rather than a hope.
     const rendered = <Component {...props} loc={loc} />
     const anchor = anchors.get(block._key)
-    const anchorProps = anchor ? { id: anchor, className: ANCHOR_OFFSET_CLASS } : undefined
-    return loc ? (
-      <div key={block._key} data-sanity={dataAttr(loc)} {...anchorProps}>
+    const wrapperProps = {
+      ...(loc ? { 'data-sanity': dataAttr(loc) } : {}),
+      ...(anchor ? { id: anchor, className: ANCHOR_OFFSET_CLASS } : {}),
+    }
+    return BlockWrapper ? (
+      <BlockWrapper key={block._key} blockType={block._type} {...wrapperProps}>
         {rendered}
-      </div>
+      </BlockWrapper>
     ) : (
-      <div key={block._key} {...anchorProps}>
+      <div key={block._key} {...wrapperProps}>
         {rendered}
       </div>
     )

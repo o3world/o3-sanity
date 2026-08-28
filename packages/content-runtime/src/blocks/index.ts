@@ -11,7 +11,7 @@ export {
   type BlockRenderBinding,
   type ClientBlockRenderBinding,
 } from './defineBlockRender'
-export { renderDispatchedBlocks } from './dispatchBlocks'
+export { renderDispatchedBlocks, type DispatchedBlockWrapperProps } from './dispatchBlocks'
 export type {
   BaseBlockData,
   BaseProps,

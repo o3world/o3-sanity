@@ -14,30 +14,36 @@ import { InsightIndexView } from './InsightIndexView'
 
 type Props = IndexRendererProps<typeof INSIGHTS_PAGE_QUERY>
 
-function InsightIndexRenderer({ pagination, facets, document, ...rest }: Props) {
-  // Q widens to string at this site (TS#33304); cast back to the typed
-  // query result for the view. The chrome document arrives as `unknown` for
-  // the same reason and is cast in the same breath.
-  const data = rest as unknown as NonNullable<INSIGHTS_PAGE_QUERY_RESULT>
+/**
+ * One slot's worth of authored bands, or nothing where the array is empty —
+ * which is also what a dataset with no chrome document renders. `Blocks`
+ * resolves draft mode itself, so the Presentation path comes with it.
+ *
+ * An entry `chrome`, not part of the renderer: these bands depend on the
+ * document alone, so the route draws them outside the feed's Suspense
+ * boundary and they prerender into the shell — the hero is real from the
+ * first byte rather than a stand-in the arriving feed replaces at a
+ * different height.
+ */
+function InsightIndexChrome({ document, slot }: { document: unknown; slot: 'above' | 'below' }) {
   const chrome = document as COLLECTION_INDEX_QUERY_RESULT
+  const field = slot === 'above' ? 'sectionsAbove' : 'sectionsBelow'
+  const blocks = chrome?.[field] ?? []
+  if (!chrome || blocks.length === 0) return null
+  return (
+    <Blocks
+      blocks={blocks}
+      documentId={chrome._id}
+      documentType="collectionIndex"
+      fieldPath={field}
+    />
+  )
+}
 
-  /**
-   * One slot's worth of authored bands, or nothing where the array is empty —
-   * which is also what a dataset with no chrome document renders. `Blocks`
-   * resolves draft mode itself, so the Presentation path comes with it.
-   */
-  const bands = (field: 'sectionsAbove' | 'sectionsBelow') => {
-    const blocks = chrome?.[field] ?? []
-    if (!chrome || blocks.length === 0) return null
-    return (
-      <Blocks
-        blocks={blocks}
-        documentId={chrome._id}
-        documentType="collectionIndex"
-        fieldPath={field}
-      />
-    )
-  }
+function InsightIndexRenderer({ pagination, facets, ...rest }: Props) {
+  // Q widens to string at this site (TS#33304); cast back to the typed
+  // query result for the view.
+  const data = rest as unknown as NonNullable<INSIGHTS_PAGE_QUERY_RESULT>
 
   return (
     <InsightIndexView
@@ -45,8 +51,6 @@ function InsightIndexRenderer({ pagination, facets, document, ...rest }: Props) 
       categories={data.categories}
       category={facets.category ?? null}
       pagination={pagination}
-      above={bands('sectionsAbove')}
-      below={bands('sectionsBelow')}
     />
   )
 }
@@ -72,6 +76,7 @@ export const insightIndex = defineIndexType({
     query: COLLECTION_INDEX_QUERY,
     params: { collection: 'insight' },
   },
+  chrome: InsightIndexChrome,
   renderer: InsightIndexRenderer,
   fallback: <InsightIndexSkeleton />,
   seo: {

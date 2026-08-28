@@ -9,8 +9,8 @@ import { Skeleton } from '@o3/ui'
  * case-study card is one plate and not a figure over a caption — everything it
  * says is printed on the photograph — so each stand-in is a single block at the
  * card's own 550 minimum and its own 32px corner, the design's one real curve.
- * The ink block above it is the authored hero's space, in the ground colour the
- * layout paints.
+ * The authored hero above is the entry's `chrome`, in the shell already, so
+ * nothing stands in for it (see `InsightIndexSkeleton`).
  *
  * Approximate on purpose. It is seen for the length of one query, so what it
  * has to get right is the shape of the page, not its measurements.
@@ -18,7 +18,6 @@ import { Skeleton } from '@o3/ui'
 export function CaseStudyIndexSkeleton() {
   return (
     <>
-      <div className="bg-ink min-h-[24rem]" />
       <div className="px-gutter py-band-sm lg:py-band-md bg-white">
         <div className="max-w-section mx-auto flex flex-col gap-12">
           {[0, 1].map((card) => (

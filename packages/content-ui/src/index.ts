@@ -67,4 +67,5 @@ export { SanityImage, type ImageBox, type ImageRatio, type SanityImageProps } fr
 export { DECORATED_BAND_CLASS, resolveDecoration, type Decoration } from './blocks/decoration'
 export { MoleculeDecoration, type MoleculeDecorationProps } from './blocks/MoleculeDecoration'
 export { sectionBackground } from './blocks/sectionBackground'
+export { SectionReveal } from './blocks/SectionReveal'
 export { resolveSurface } from './blocks/surface'

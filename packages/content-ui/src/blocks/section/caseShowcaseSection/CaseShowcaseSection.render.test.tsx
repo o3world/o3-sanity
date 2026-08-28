@@ -48,4 +48,13 @@ describe('the case showcase band', () => {
   it('keeps the card stack at gap 24 / 48 (ADR 0006)', () => {
     expect(html).toContain('gap-6 lg:gap-12')
   })
+
+  it('pins each card under the chrome from the desktop breakpoint up, on an opaque wrapper', () => {
+    expect(html).toContain('bg-black lg:sticky lg:top-40')
+  })
+
+  it('leaves the cards in normal flow below it — nothing pins at 402', () => {
+    expect(html).not.toContain('"sticky')
+    expect(html).not.toContain(' sticky ')
+  })
 })

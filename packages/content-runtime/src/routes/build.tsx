@@ -434,13 +434,32 @@ export function buildIndexRoute<Q extends string>(entry: IndexEntry<Q>): IndexRo
     })
   }
 
+  /**
+   * The authored bands around the feed, rendered outside the boundary. Reads
+   * only prerender-safe things — `draftMode()` through `currentReadMode`, and
+   * the cached document — so on a published request this is part of the
+   * static shell: the hero is real from the first byte instead of a
+   * guessed-height stand-in that shifts the page when the feed lands. The
+   * feed's own document read agrees on every argument, so the two are one
+   * cache entry.
+   */
+  const Chrome = async ({ slot }: { slot: 'above' | 'below' }) => {
+    if (!entry.chrome) return null
+    const document = await fetchDocument(await currentReadMode())
+    return <>{entry.chrome({ document, slot })}</>
+  }
+
   const Page: IndexRouteShim['Page'] = ({ searchParams }) => (
-    // The entry's own picture of its grid, or nothing where it declares none —
-    // in which case the hole is whatever the layout's `<main>` paints until the
-    // feed arrives on the same response.
-    <Suspense fallback={entry.fallback ?? null}>
-      <Feed searchParams={searchParams} />
-    </Suspense>
+    <>
+      <Chrome slot="above" />
+      {/* The entry's own picture of its feed, or nothing where it declares
+          none — in which case the hole is whatever the layout's `<main>`
+          paints until the feed arrives on the same response. */}
+      <Suspense fallback={entry.fallback ?? null}>
+        <Feed searchParams={searchParams} />
+      </Suspense>
+      <Chrome slot="below" />
+    </>
   )
 
   return { generateMetadata, Page }

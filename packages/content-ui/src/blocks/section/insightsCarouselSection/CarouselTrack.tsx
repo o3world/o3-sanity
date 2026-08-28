@@ -33,8 +33,8 @@ export interface CarouselTrackProps {
  * See the amendment on ADR 0006.
  *
  * So the composition is one thing at both widths — a native scroll container
- * with snap points, one card per view below `lg` (the frame's 370px card is
- * its container's full width) and the frame's 394.67px card at `lg`. Native
+ * with snap points, one card per view below `sm` (the frame's 370px card is
+ * its container's full width) and the frame's 394.67px card from `sm` up. Native
  * rather than a transform-driven track because it keeps keyboard, trackpad
  * and touch scrolling working, and the controls just call `scrollBy`. Each
  * step is one card plus the 32px gap the frame gives at **both** widths.
@@ -123,7 +123,10 @@ export function CarouselTrack({ heading, headingAttr, cards }: CarouselTrackProp
         className="flex snap-x snap-mandatory gap-8 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {cards.map((card, index) => (
-          <li key={index} className="w-full shrink-0 snap-start lg:w-[394px]">
+          // The frame's 394px card from `sm` up — a full-width square card in
+          // the tablet range towers over its copy; only below `sm` is the
+          // column narrow enough for one to stay card-sized.
+          <li key={index} className="w-full shrink-0 snap-start sm:w-[394px]">
             {card}
           </li>
         ))}

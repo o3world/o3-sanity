@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 
 import { cn } from '@o3/ui/lib/utils'
 
@@ -19,6 +19,12 @@ export interface PanelTrackProps {
   items: readonly PanelTrackItem[]
   /** The band's heading, so the scroll region announces as something. */
   label?: string
+  /**
+   * The band's server-rendered header row. It lives inside this component so
+   * the drive's transit window is measured over the whole band — header,
+   * rule and columns — rather than the columns alone.
+   */
+  header?: ReactNode
 }
 
 /**
@@ -26,6 +32,47 @@ export interface PanelTrackProps {
  * shape, and a focusable stop with no name is worse than a generic one.
  */
 const UNNAMED = 'Panels'
+
+/**
+ * ms before the first column lifts. The band's own `SectionReveal` is already
+ * a third of the way up by then, so the columns read as filling the band in
+ * rather than as a second copy of its rise.
+ */
+const ENTRANCE_DELAY = 120
+
+/** ms between one column's lift and the next — the left-to-right rhythm. */
+const ENTRANCE_STAGGER = 100
+
+/**
+ * Where the walk ends: the band's top at the nav clearance every sticky
+ * element on the page uses (`top-40`). Past this the column heads would
+ * start leaving, so the last framing has to be settled by here.
+ */
+const WALK_CLEARANCE = 160
+
+/**
+ * Where the walk begins: this much room under the band's foot once it has
+ * fully entered — the reader is looking at the whole band, at rest in its
+ * first framing, before anything moves.
+ */
+const WALK_FOOT_GAP = 48
+
+/**
+ * The least page scroll the walk may be mapped onto. A tall band in a short
+ * viewport squeezes the fully-visible stretch toward nothing, and a walk
+ * compressed into a few pixels of scroll is a flip; below this the window
+ * opens upward from `WALK_CLEARANCE` instead, trading a little head-room
+ * for a walk that still reads as motion.
+ */
+const WALK_MIN_SPAN = 160
+
+/**
+ * How much of the remaining distance the track closes per frame. The walk's
+ * window is a fraction of the travel it drives, so the raw mapping is fast
+ * and the wheel hands it discrete steps besides; the chase is what turns
+ * both into a glide.
+ */
+const DRIVE_EASE = 0.12
 
 /**
  * `layout: track` — Home's "How we work" (`2846:5480`, `2975:8355` at 402).
@@ -69,8 +116,72 @@ const UNNAMED = 'Panels'
  * resynced on scroll and resize — is `CarouselTrack`'s, three lines of it,
  * arrived at independently. It stays copied rather than extracted: a shared
  * hook would be the two lines both write and neither would stop writing the
- * state it actually keeps, which is a 0–1 fraction here and a pair of
- * at-the-end booleans there. A third track is what would make it a seam.
+ * state it actually keeps, which is a custom property on the rule here and a
+ * pair of at-the-end booleans there. A third track is what would make it a
+ * seam.
+ *
+ * The fraction lands on the rule as `--track-progress` rather than in React
+ * state, `ReadingProgress`'s idiom: the page's own scroll drives this track
+ * (below), so a `setState` here would be a render of the band on every frame
+ * of a scroll past it.
+ *
+ * ## The advance
+ *
+ * On a fine pointer the track walks as the band transits the viewport: the
+ * walk maps onto the stretch of page scroll in which the whole band is on
+ * screen — from fully entered (`WALK_FOOT_GAP` under its foot) to
+ * `WALK_CLEARANCE` from the top — with the track CHASING the mapped target
+ * (`DRIVE_EASE`) rather than mirroring it, so the step lands as a glide.
+ * Nothing pins and nothing is held open: the section keeps exactly the
+ * height it has, the page never stops moving, and the bands around this one
+ * are undisturbed. On desktop two columns fit the view, so the walk IS one
+ * step — the [1 2] framing hands over to [2 3] — and both framings are on
+ * screen in full before and after it. The rule above reads `scrollLeft`, so
+ * it keeps reporting the truth without knowing who moved the track.
+ *
+ * **Snap is off wherever the drive can run at all, and it is a whole-visit
+ * decision rather than a per-frame one.** A programmatic `scrollLeft` against
+ * `snap-mandatory` is two things deciding where the track sits, and the
+ * browser wins between frames. Turning snapping back on the instant a hand
+ * lands would be worse than that: the track is between columns when the drive
+ * lets go, so the browser snaps it to the nearest one and the columns jump out
+ * from under the finger that just touched them — up to a third of a column at
+ * the desktop measure. Off it stays.
+ *
+ * **A hand on the track ends the drive**, on pointer, touch, key, focus or a
+ * wheel with sideways intent — a reader who has taken hold of the columns is
+ * not to be argued with. The drive re-arms when the band has left the
+ * viewport entirely, so the next visit advances again and the visit that was
+ * taken over stays taken over.
+ *
+ * **Not on a coarse pointer, and not under reduced motion.** On touch the
+ * track is the page's own swipe surface and a drive would be pulling against
+ * the thumb doing the swiping; under reduced motion it is geometry moving
+ * that nobody asked to move. Both are read from `matchMedia` and both listen
+ * for the preference changing. Neither case gives up its snapping: where the
+ * drive never runs, the track is exactly the one the frame draws.
+ *
+ * ## The entrance
+ *
+ * The columns arrive rather than sit there: opacity and a 24px rise, once, on
+ * `--ease-spring` at `--duration-reveal`, each column `ENTRANCE_STAGGER` after
+ * the one to its left. It is `Reveal`'s mechanic written onto the `<li>`
+ * itself — both of that component's load-bearing branches included — because a
+ * wrapper element between the `<ol>` and its items would cost the list its
+ * semantics and the row its snap points.
+ *
+ * **Spring rather than the house `ease-out`, because of what it composes
+ * with.** `SectionReveal` already rises the whole band 24px on `ease-out`, and
+ * a second `ease-out` rise inside it is the same motion played twice. A spring
+ * leaves the start line at rest, so through the band's own rise the columns
+ * travel with it, and they lift only once it has nearly settled.
+ *
+ * **One reading for the whole track, not one per column.** The observer
+ * watches the `<ol>`; every column then plays on its own delay whether or not
+ * it is inside the horizontal fold. The alternative — a column entering as it
+ * is scrolled to sideways — would put motion under the finger that is doing
+ * the scrolling, and the rule above the track is already the thing that
+ * answers where you are in the set.
  *
  * ## At 402
  *
@@ -80,15 +191,19 @@ const UNNAMED = 'Panels'
  * carrying a rule nobody sees. Nothing else changes — the mobile frame draws
  * the same four parts at the same steps, with the heading one size down.
  */
-export function PanelTrack({ items, label }: PanelTrackProps) {
+export function PanelTrack({ items, label, header }: PanelTrackProps) {
+  const stageRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLOListElement>(null)
-  const [scrolled, setScrolled] = useState(0)
+  const ruleRef = useRef<HTMLSpanElement>(null)
+  const [entered, setEntered] = useState(false)
+  const [steerable, setSteerable] = useState(false)
 
   const sync = useCallback(() => {
     const track = trackRef.current
-    if (!track) return
+    const rule = ruleRef.current
+    if (!track || !rule) return
     const max = track.scrollWidth - track.clientWidth
-    setScrolled(max > 0 ? track.scrollLeft / max : 0)
+    rule.style.setProperty('--track-progress', String(max > 0 ? track.scrollLeft / max : 0))
   }, [])
 
   useEffect(() => {
@@ -102,70 +217,247 @@ export function PanelTrack({ items, label }: PanelTrackProps) {
     return () => observer.disconnect()
   }, [sync])
 
+  useEffect(() => {
+    const track = trackRef.current
+    if (!track) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setEntered(true)
+      return
+    }
+    // `Reveal`'s fast path: a track already at or above the viewport plays now
+    // rather than waiting to re-enter, which it never would.
+    if (track.getBoundingClientRect().top < window.innerHeight) {
+      setEntered(true)
+      return
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setEntered(true)
+            io.disconnect()
+          }
+        }
+      },
+      { threshold: 0, rootMargin: '0px 0px -40px 0px' },
+    )
+    io.observe(track)
+    return () => io.disconnect()
+  }, [])
+
+  useEffect(() => {
+    const stage = stageRef.current
+    const track = trackRef.current
+    if (!stage || !track) return
+
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const finger = window.matchMedia('(pointer: coarse)')
+    const allowed = () => !still.matches && !finger.matches
+
+    let frame = 0
+    let live = false
+
+    const travel = () => track.scrollWidth - track.clientWidth
+
+    const paint = () => {
+      frame = 0
+      if (!live) return
+      const max = travel()
+      if (max <= 0) return
+      const rect = stage.getBoundingClientRect()
+      // The walk's window: the stretch of transit in which the whole band is
+      // on screen. Squeezed under WALK_MIN_SPAN (a tall band in a short
+      // viewport), it opens upward from the clearance instead.
+      const start = Math.max(
+        window.innerHeight - rect.height - WALK_FOOT_GAP,
+        WALK_CLEARANCE + WALK_MIN_SPAN,
+      )
+      const progress = Math.min(1, Math.max(0, (start - rect.top) / (start - WALK_CLEARANCE)))
+      const delta = progress * max - track.scrollLeft
+      // Settled — sub-pixel writes are a scroll event each and move nothing.
+      if (Math.abs(delta) <= 0.5) return
+      // The track CHASES the target instead of jumping to it: a wheel arrives
+      // as discrete steps, and written straight through they read as jerks.
+      // The exponential chase turns each step into a glide, and the loop
+      // keeps itself alive until the track has caught up.
+      track.scrollLeft += delta * DRIVE_EASE
+      frame = requestAnimationFrame(paint)
+    }
+
+    const schedule = () => {
+      if (live && !frame) frame = requestAnimationFrame(paint)
+    }
+
+    const take = () => {
+      setSteerable(true)
+      if (live) return
+      live = true
+      paint()
+    }
+
+    const yieldTrack = () => {
+      if (!live) return
+      live = false
+      if (frame) {
+        cancelAnimationFrame(frame)
+        frame = 0
+      }
+    }
+
+    const yieldToSideways = (event: WheelEvent) => {
+      if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) yieldTrack()
+    }
+
+    const onPreference = () => {
+      if (allowed()) {
+        take()
+        return
+      }
+      yieldTrack()
+      setSteerable(false)
+    }
+
+    // Out of sight is where the drive gets its second chance: a reader who
+    // took the track over keeps it for as long as the band is on screen.
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) if (!entry.isIntersecting && allowed()) take()
+      },
+      { threshold: 0 },
+    )
+    io.observe(stage)
+
+    if (allowed()) take()
+
+    // The travel moves with the measure; a resize re-aims the chase.
+    const resizer = new ResizeObserver(schedule)
+    resizer.observe(track)
+
+    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('resize', schedule)
+    track.addEventListener('pointerdown', yieldTrack)
+    track.addEventListener('touchstart', yieldTrack, { passive: true })
+    track.addEventListener('keydown', yieldTrack)
+    track.addEventListener('focusin', yieldTrack)
+    track.addEventListener('wheel', yieldToSideways, { passive: true })
+    still.addEventListener('change', onPreference)
+    finger.addEventListener('change', onPreference)
+
+    return () => {
+      if (frame) cancelAnimationFrame(frame)
+      io.disconnect()
+      resizer.disconnect()
+      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('resize', schedule)
+      track.removeEventListener('pointerdown', yieldTrack)
+      track.removeEventListener('touchstart', yieldTrack)
+      track.removeEventListener('keydown', yieldTrack)
+      track.removeEventListener('focusin', yieldTrack)
+      track.removeEventListener('wheel', yieldToSideways)
+      still.removeEventListener('change', onPreference)
+      finger.removeEventListener('change', onPreference)
+    }
+  }, [])
+
   const columns = Math.max(items.length, 1)
 
   return (
-    <div className="flex w-full flex-col">
-      {/* Decorative: the `<ol>` under it already carries the count and the
+    <div ref={stageRef} className="w-full">
+      <div className="flex w-full flex-col gap-[18px]">
+        {header}
+
+        <div className="flex w-full flex-col">
+          {/* Decorative: the `<ol>` under it already carries the count and the
           order, and a scroll position is not something to announce twice. */}
-      <div aria-hidden="true" className="bg-line relative h-px w-full overflow-hidden">
-        <span
-          // No transition: the segment follows the finger, and easing it would
-          // leave it trailing the columns it reports on.
-          className="bg-fg absolute inset-y-0 left-0 block"
-          style={{
-            width: `${100 / columns}%`,
-            // Its own width per column travelled, so a track at rest puts the
-            // segment under the first column — what the frame draws — and a
-            // track scrolled to the end puts it under the last.
-            transform: `translateX(${scrolled * (columns - 1) * 100}%)`,
-          }}
-        />
-      </div>
+          <div aria-hidden="true" className="bg-line relative h-px w-full overflow-hidden">
+            <span
+              ref={ruleRef}
+              // No transition: the segment follows the finger, and easing it would
+              // leave it trailing the columns it reports on.
+              className="bg-fg absolute inset-y-0 left-0 block"
+              style={{
+                width: `${100 / columns}%`,
+                // Its own width per column travelled, so a track at rest puts the
+                // segment under the first column — what the frame draws — and a
+                // track scrolled to the end puts it under the last.
+                transform: `translateX(calc(var(--track-progress, 0) * ${(columns - 1) * 100}%))`,
+              }}
+            />
+          </div>
 
-      <ol
-        ref={trackRef}
-        onScroll={sync}
-        // Focusable because it scrolls and holds nothing focusable of its own:
-        // a keyboard reader that cannot reach the container cannot reach the
-        // last column at all. `jsx-a11y/no-noninteractive-tabindex` reasons
-        // from element semantics and this reasons from what a keyboard can
-        // actually get to — the same tension `InFlightSection` resolved the
-        // same way. `aria-label` is what stops it announcing as an unnamed
-        // stop on the way past.
-        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- keyboard-scrollable region with no focusable content; see above
-        tabIndex={0}
-        aria-label={label ?? UNNAMED}
-        className="focus-visible:ring-brand flex snap-x snap-mandatory gap-6 overflow-x-auto pt-16 [scrollbar-width:none] focus-visible:outline-none focus-visible:ring-2 lg:gap-[138px] [&::-webkit-scrollbar]:hidden"
-      >
-        {items.map((panel, index) => (
-          <li
-            key={panel.key}
-            data-sanity={panel.dataSanity}
-            className="border-line flex w-full shrink-0 snap-start flex-col pb-8 lg:w-[531px] lg:border-r lg:pr-16"
+          <ol
+            ref={trackRef}
+            onScroll={sync}
+            // Focusable because it scrolls and holds nothing focusable of its own:
+            // a keyboard reader that cannot reach the container cannot reach the
+            // last column at all. `jsx-a11y/no-noninteractive-tabindex` reasons
+            // from element semantics and this reasons from what a keyboard can
+            // actually get to — the same tension `InFlightSection` resolved the
+            // same way. `aria-label` is what stops it announcing as an unnamed
+            // stop on the way past.
+            // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- keyboard-scrollable region with no focusable content; see above
+            tabIndex={0}
+            aria-label={label ?? UNNAMED}
+            className={cn(
+              'focus-visible:ring-brand flex gap-6 overflow-x-auto pt-16 [scrollbar-width:none] focus-visible:outline-none focus-visible:ring-2 lg:gap-[138px] [&::-webkit-scrollbar]:hidden',
+              // The server HTML is the snapping track, which is what a reader with
+              // no JavaScript — and the visual-regression harness, which browses
+              // with reduced motion — gets.
+              steerable ? 'snap-none' : 'snap-x snap-mandatory',
+            )}
           >
-            <span aria-hidden="true" className="text-fg-subtle pb-1.5 text-[15px] leading-[18px]">
-              {`.${String(index + 1).padStart(2, '0')}`}
-            </span>
+            {items.map((panel, index) => (
+              <li
+                key={panel.key}
+                data-sanity={panel.dataSanity}
+                // What each app's `noscript` rule targets: with no JavaScript the
+                // effect above never runs, so the stylesheet is the only thing
+                // that can show the column.
+                data-reveal=""
+                style={{ transitionDelay: `${ENTRANCE_DELAY + index * ENTRANCE_STAGGER}ms` }}
+                className={cn(
+                  'border-line flex w-full shrink-0 snap-start flex-col pb-8 lg:w-[531px] lg:border-r lg:pr-16',
+                  // `translate`, not `transform`: Tailwind v4 compiles
+                  // `translate-y-*` to the independent property (`@o3/ui`'s
+                  // `motion.ts`).
+                  'duration-(--duration-reveal) ease-spring transition-[opacity,translate]',
+                  'motion-reduce:transition-none',
+                  // `translate-none` rather than `translate-y-0`, so a settled
+                  // column leaves no containing block behind it.
+                  entered ? 'translate-none opacity-100' : 'translate-y-6 opacity-0',
+                )}
+              >
+                <span
+                  aria-hidden="true"
+                  className="text-fg-subtle pb-1.5 text-[15px] leading-[18px]"
+                >
+                  {`.${String(index + 1).padStart(2, '0')}`}
+                </span>
 
-            {panel.heading ? (
-              // 48/58 at 402 and 64/76 at 1440 — the step the rail header
-              // sets too, so it is shared rather than written twice.
-              <h3 className={cn('font-display text-balance', STATEMENT_STEP)}>{panel.heading}</h3>
-            ) : null}
+                {panel.heading ? (
+                  // 48/58 at 402 and 64/76 at 1440 — the step the rail header
+                  // sets too, so it is shared rather than written twice.
+                  <h3 className={cn('font-display text-balance', STATEMENT_STEP)}>
+                    {panel.heading}
+                  </h3>
+                ) : null}
 
-            {/* 24/34 on BOTH frames, so the solved clamp is flat — the one
+                {/* 24/34 on BOTH frames, so the solved clamp is flat — the one
                 step on this band that does not interpolate. */}
-            {panel.body ? <p className="pt-6 text-[24px] leading-[34px]">{panel.body}</p> : null}
+                {panel.body ? (
+                  <p className="pt-6 text-[24px] leading-[34px]">{panel.body}</p>
+                ) : null}
 
-            {panel.note ? (
-              <p className="text-fg-muted pt-6 text-[15px] leading-[22.5px] lg:max-w-[390px]">
-                {panel.note}
-              </p>
-            ) : null}
-          </li>
-        ))}
-      </ol>
+                {panel.note ? (
+                  <p className="text-fg-muted pt-6 text-[15px] leading-[22.5px] lg:max-w-[390px]">
+                    {panel.note}
+                  </p>
+                ) : null}
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
     </div>
   )
 }

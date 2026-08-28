@@ -158,7 +158,9 @@ function Header({
 function EntryCard({ entry }: { entry: Entry }) {
   return (
     <div className="flex h-full flex-col gap-6">
-      <div className="bg-bone relative isolate aspect-square overflow-hidden">
+      {/* Same `sm` cap as `InsightCard`'s tile: the stacked band below `lg`
+          would otherwise draw each square at the full column width. */}
+      <div className="bg-bone relative isolate aspect-square overflow-hidden sm:max-w-[395px]">
         <SanityImage
           source={entry.media?.image}
           alt={entry.media?.alt ?? ''}

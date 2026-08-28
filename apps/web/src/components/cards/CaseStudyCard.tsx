@@ -35,7 +35,7 @@ function caseEyebrow(card: Pick<CaseStudyCardData, 'industries' | 'industryDetai
  *   background      the hero image, cover
  *   scrim           --gradient-card-scrim — 90deg, 0.8 ink → 0 by 84%
  *   top             the client logo in a 180 × 80 holder, knocked out WHITE
- *   bottom  gap 24  eyebrow 18/24 bold in --color-brand-deep, over a
+ *   bottom  gap 24  eyebrow 18/24 bold in the brand red, over a
  *                   narrative at 24/34 regular, in a 559px measure — the
  *                   content row is 559 text beside 559 of deadspace
  *                   stat 48px beside its label at 65% white, 24px apart
@@ -180,12 +180,13 @@ export function CaseStudyCard(
          */}
         <div className="flex flex-col gap-3 [text-shadow:0_1px_12px_rgba(3,3,3,0.5)]">
           {/*
-           * The red is a class, not a `tone`: `--color-brand-deep` is O3's
-           * token alone and `Eyebrow` is shared with O3XO, so a tone naming
-           * it would fail the brand-token seam.
+           * `brand`, not the set's deeper red: `--color-brand-deep` lands
+           * around 3.5:1 over the scrim's ink, under the 4.5:1 this 17px bold
+           * line needs, and the brand tone is already the eyebrow treatment
+           * every other ink surface draws.
            */}
           {eyebrow ? (
-            <Eyebrow size="lg" className="text-brand-deep">
+            <Eyebrow size="lg" tone="brand">
               {eyebrow}
             </Eyebrow>
           ) : null}

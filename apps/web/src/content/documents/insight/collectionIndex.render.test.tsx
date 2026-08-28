@@ -130,7 +130,7 @@ describe('insights collection index route', () => {
     expect(preloaded).toHaveLength(1)
     expect(preloaded[0]).toContain('alt="Picture 0"')
     // …and every card declares the three-up slot rather than the viewport.
-    expect(declaredSizes(html)).toEqual(Array(3).fill('(min-width: 1024px) 395px, 90vw'))
+    expect(declaredSizes(html)).toEqual(Array(3).fill('(min-width: 640px) 395px, 90vw'))
   })
 
   it('links each card at its own detail URL', async () => {

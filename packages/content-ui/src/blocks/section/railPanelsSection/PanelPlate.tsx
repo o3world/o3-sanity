@@ -65,7 +65,9 @@ export function PanelPlate({
       data-sanity={dataSanity}
       className="flex flex-col gap-[33px] lg:flex-row lg:items-center"
     >
-      <div className="flex flex-col gap-12 lg:w-[500px] lg:shrink-0">
+      {/* 500 is a ceiling, not a floor: the plate is the rigid half of the
+          row, so between 1024 and 1440 the copy column is what gives. */}
+      <div className="flex min-w-0 flex-col gap-12 lg:w-[500px]">
         <div className="flex flex-col gap-3">
           {/* The platform panels lead with a wordmark and the rest with a
               heading. They occupy the same slot, which is why `logo` wins
@@ -110,10 +112,14 @@ export function PanelPlate({
           // Square at both widths. The 402 frame draws its three plates at
           // three heights (286, 396, 280) against one 396 copy column, so the
           // shape to hold is the one the 1440 frame states.
+          //
+          // Capped at the desktop plate's 395 from `sm` up: only below that is
+          // the stacked column narrow enough for a full-width square to stay
+          // plate-sized rather than filling most of a tablet viewport.
           ratio="1/1"
           width={790}
-          sizes="(min-width: 1024px) 395px, 100vw"
-          className="w-full lg:h-[396px] lg:w-[395px] lg:shrink-0"
+          sizes="(min-width: 640px) 395px, 90vw"
+          className="w-full sm:max-w-[395px] lg:h-[396px] lg:w-[395px] lg:shrink-0"
         />
       ) : (
         <div className="bg-bone hidden lg:block lg:h-[396px] lg:w-[395px] lg:shrink-0" />

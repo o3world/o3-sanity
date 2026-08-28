@@ -4,11 +4,11 @@ import { Skeleton } from '@o3/ui'
  * What `/insights` draws while its feed is in flight — the route's Suspense
  * fallback (`insightIndex.fallback`).
  *
- * It stands in for the two things `InsightIndexView` draws below the authored
- * hero: the chip row and the first row of the card grid, on the same bone band
- * at the same columns. The ink block above it is the hero's space, and the
- * colour is the layout's ground — the hero arrives ink, so that part of the
- * page does not change when it lands.
+ * It stands in for exactly what `InsightIndexView` draws: the chip row and
+ * the first row of the card grid, on the same bone band at the same columns.
+ * The authored hero above is the entry's `chrome`, outside the boundary and
+ * in the shell already, so nothing stands in for it — a guessed-height block
+ * here is what used to shift the whole page when the real hero landed.
  *
  * Approximate on purpose. It is seen for the length of one query, so what it
  * has to get right is the shape of the page, not its measurements.
@@ -16,7 +16,6 @@ import { Skeleton } from '@o3/ui'
 export function InsightIndexSkeleton() {
   return (
     <>
-      <div className="bg-ink min-h-[24rem]" />
       <div className="px-gutter py-band-md bg-bone">
         <div className="max-w-section mx-auto flex flex-col gap-12">
           {/* `rounded-btn`, not a pill: `FilterChip` is a 5px-cornered plate. */}
